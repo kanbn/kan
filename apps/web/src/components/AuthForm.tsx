@@ -1,14 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaGoogle, FaGithub, FaDiscord } from "react-icons/fa";
+import { FaDiscord, FaGithub, FaGoogle } from "react-icons/fa";
 import { z } from "zod";
 
 import { authClient } from "@kan/auth/client";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
-import { useQuery } from "@tanstack/react-query";
 
 interface FormValues {
   email: string;
@@ -21,8 +21,9 @@ interface AuthProps {
 const EmailSchema = z.object({ email: z.string().email() });
 
 export function Auth({ setIsMagicLinkSent }: AuthProps) {
-  const [isLoginWithProviderPending, setIsLoginWithProviderPending] =
-    useState<null | string>(null);
+  const [isLoginWithProviderPending, setIsLoginWithProviderPending] = useState<
+    null | string
+  >(null);
   const [isLoginWithEmailPending, setIsLoginWithEmailPending] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
 
@@ -37,7 +38,7 @@ export function Auth({ setIsMagicLinkSent }: AuthProps) {
   const { data: socialProviders } = useQuery({
     queryKey: ["social_providers"],
     queryFn: () => authClient.getSocialProviders(),
-  })
+  });
 
   const handleLoginWithEmail = async (email: string) => {
     setIsLoginWithEmailPending(true);
@@ -58,7 +59,27 @@ export function Auth({ setIsMagicLinkSent }: AuthProps) {
     }
   };
 
-  const handleLoginWithProvider = async (provider: "github" | "apple" | "discord" | "facebook" | "google" | "microsoft" | "spotify" | "twitch" | "twitter" | "dropbox" | "linkedin" | "gitlab" | "tiktok" | "reddit" | "roblox" | "vk" | "kick" | "zoom") => {
+  const handleLoginWithProvider = async (
+    provider:
+      | "github"
+      | "apple"
+      | "discord"
+      | "facebook"
+      | "google"
+      | "microsoft"
+      | "spotify"
+      | "twitch"
+      | "twitter"
+      | "dropbox"
+      | "linkedin"
+      | "gitlab"
+      | "tiktok"
+      | "reddit"
+      | "roblox"
+      | "vk"
+      | "kick"
+      | "zoom",
+  ) => {
     setIsLoginWithProviderPending(provider);
     setLoginError(null);
     const { error } = await authClient.signIn.social({
@@ -69,7 +90,9 @@ export function Auth({ setIsMagicLinkSent }: AuthProps) {
     setIsLoginWithProviderPending(null);
 
     if (error) {
-      setLoginError(`Failed to login with ${provider.at(0)?.toUpperCase() + provider.slice(1)}. Please try again.`);
+      setLoginError(
+        `Failed to login with ${provider.at(0)?.toUpperCase() + provider.slice(1)}. Please try again.`,
+      );
     }
   };
 
@@ -120,7 +143,9 @@ export function Auth({ setIsMagicLinkSent }: AuthProps) {
         {socialProviders?.length !== 0 && (
           <div className="mb-[1.5rem] flex w-full items-center gap-4">
             <div className="h-[1px] w-full bg-light-600 dark:bg-dark-600" />
-            <span className="text-sm text-light-900 dark:text-dark-900">or</span>
+            <span className="text-sm text-light-900 dark:text-dark-900">
+              or
+            </span>
             <div className="h-[1px] w-full bg-light-600 dark:bg-dark-600" />
           </div>
         )}
