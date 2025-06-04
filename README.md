@@ -60,7 +60,13 @@ pnpm install
 ```
 
 3. Copy `.env.example` to `.env` and configure your environment variables
-4. Start the development server
+4. Migrate database
+
+```bash
+pnpm db:migrate
+```
+
+5. Start the development server
 
 ```bash
 pnpm dev
