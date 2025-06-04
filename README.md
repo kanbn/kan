@@ -88,6 +88,10 @@ pnpm dev
 | `BETTER_AUTH_TRUSTED_ORIGINS`    | Allowed callback origins      | For Google login | `http://localhost:3000,http://localhost:3001` |
 | `GOOGLE_CLIENT_ID`               | Google OAuth client ID        | For Google login | `xxx.apps.googleusercontent.com`              |
 | `GOOGLE_CLIENT_SECRET`           | Google OAuth client secret    | For Google login | `xxx`                                         |
+| `DISCORD_CLIENT_ID`              | Discord OAuth client ID       | For Discord login | `xxx`                                         |
+| `DISCORD_CLIENT_SECRET`          | Discord OAuth client secret   | For Discord login | `xxx`                                         |
+| `GITHUB_CLIENT_ID`               | GitHub OAuth client ID        | For GitHub login | `xxx`                                         |
+| `GITHUB_CLIENT_SECRET`           | GitHub OAuth client secret    | For GitHub login | `xxx`                                         |
 | `S3_REGION`                      | S3 storage region             | For file uploads | `WEUR`                                        |
 | `S3_ENDPOINT`                    | S3 endpoint URL               | For file uploads | `https://xxx.r2.cloudflarestorage.com`        |
 | `S3_ACCESS_KEY_ID`               | S3 access key                 | For file uploads | `xxx`                                         |
