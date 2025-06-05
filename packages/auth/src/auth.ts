@@ -74,23 +74,18 @@ export const configuredProviders = socialProviderList.reduce<
   return acc;
 }, {});
 
-export const socialProvidersPlugin = () => {
-  return {
-    id: "social-providers-plugin",
-    endpoints: {
-      getSocialProviders: createAuthEndpoint(
-        "/social-providers",
-        {
-          method: "GET",
-        },
-        async (ctx) => {
-          const providers = ctx.context.socialProviders.map(p => p.name.toLowerCase());
-          return ctx.json(providers);
-        },
-      ),
-    },
-  };
-};
+export const socialProvidersPlugin = () => ({
+  id: "social-providers-plugin",
+  endpoints: {
+    getSocialProviders: createAuthEndpoint(
+      "/social-providers",
+      {
+        method: "GET",
+      },
+      async (ctx) => ctx.json(ctx.context.socialProviders.map(p => p.name.toLowerCase())),
+    ),
+  },
+});
 
 export const initAuth = (db: dbClient) => {
   return betterAuth({
