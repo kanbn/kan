@@ -3,28 +3,49 @@
   "ui": "tui",
   "tasks": {
     "topo": {
-      "dependsOn": ["^topo"]
+      "dependsOn": [
+        "^topo"
+      ]
     },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".cache/tsbuildinfo.json", "dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".cache/tsbuildinfo.json",
+        "dist/**"
+      ]
     },
     "dev": {
-      "dependsOn": ["^dev"],
+      "dependsOn": [
+        "^dev"
+      ],
       "cache": false,
       "persistent": false
     },
     "format": {
-      "outputs": [".cache/.prettiercache"],
+      "outputs": [
+        ".cache/.prettiercache"
+      ],
       "outputLogs": "new-only"
     },
     "lint": {
-      "dependsOn": ["^topo", "^build"],
-      "outputs": [".cache/.eslintcache"]
+      "dependsOn": [
+        "^topo",
+        "^build"
+      ],
+      "outputs": [
+        ".cache/.eslintcache"
+      ]
     },
     "typecheck": {
-      "dependsOn": ["^topo", "^build"],
-      "outputs": [".cache/tsbuildinfo.json"]
+      "dependsOn": [
+        "^topo",
+        "^build"
+      ],
+      "outputs": [
+        ".cache/tsbuildinfo.json"
+      ]
     },
     "clean": {
       "cache": false
@@ -49,6 +70,10 @@
     "POSTGRES_URL",
     "GOOGLE_CLIENT_ID",
     "GOOGLE_CLIENT_SECRET",
+    "DISCORD_CLIENT_ID",
+    "DISCORD_CLIENT_SECRET",
+    "GITHUB_CLIENT_ID",
+    "GITHUB_CLIENT_SECRET",
     "EMAIL_FROM",
     "SMTP_HOST",
     "SMTP_PORT",
