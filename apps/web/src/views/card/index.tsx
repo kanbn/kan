@@ -148,12 +148,13 @@ export default function CardPage() {
         <div className="flex h-full w-full flex-col overflow-hidden">
           <div className="h-full max-h-[calc(100vh-4rem)] overflow-y-auto p-8">
             <div className="mb-8 flex w-full items-center justify-between">
-              {isLoading ? (
+              {!card && isLoading && (
                 <div className="flex space-x-2">
                   <div className="h-[2.3rem] w-[150px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
                   <div className="h-[2.3rem] w-[300px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
                 </div>
-              ) : card ? (
+              )}
+              {card && (
                 <>
                   <Link
                     className="whitespace-nowrap font-bold leading-[2.3rem] tracking-tight text-light-900 dark:text-dark-900 sm:text-[1.2rem]"
@@ -183,7 +184,12 @@ export default function CardPage() {
                     <Dropdown />
                   </div>
                 </>
-              ) : <p className="block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">Card not found</p>}
+              )}
+              {!card && !isLoading && (
+                <p className="block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
+                  Card not found
+                </p>
+              )}
             </div>
             {card && (
               <>

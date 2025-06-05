@@ -240,11 +240,12 @@ export default function BoardPage() {
       <div className="relative flex h-full flex-col">
         <PatternedBackground />
         <div className="z-10 flex w-full justify-between p-8">
-          {isLoading ? (
+          {isLoading && !boardData && (
             <div className="flex space-x-2">
               <div className="h-[2.3rem] w-[150px] animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-100" />
             </div>
-          ) : boardData ? (
+          )}
+          {boardData && (
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="focus-visible:outline-none"
@@ -257,7 +258,10 @@ export default function BoardPage() {
                 className="block border-0 bg-transparent p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000 sm:text-[1.2rem]"
               />
             </form>
-          ) : <p className="block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">Board not found</p>}
+          )}
+          {!boardData && !isLoading && (
+            <p className="block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">Board not found</p>
+          )}
 
           <div className="flex items-center space-x-2">
             <VisibilityButton
@@ -373,8 +377,8 @@ export default function BoardPage() {
                                           className={`mb-2 flex !cursor-pointer flex-col ${card.publicId.startsWith(
                                             "PLACEHOLDER",
                                           )
-                                              ? "pointer-events-none"
-                                              : ""
+                                            ? "pointer-events-none"
+                                            : ""
                                             }`}
                                           ref={provided.innerRef}
                                           {...provided.draggableProps}
