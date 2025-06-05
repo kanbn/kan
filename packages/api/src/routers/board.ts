@@ -380,7 +380,10 @@ export const boardRouter = createTRPCRouter({
       )
       .query(async ({ ctx, input }) => {
         const slug = input.boardSlug.toLowerCase();
-        const existingBoard = await boardSlugRepo.getBoardSlug(ctx.db, slug);
+        const existingBoard = await boardRepo.getBySlug(ctx.db, slug, {
+          members: [],
+          labels: [],
+        });
         return {
           isReserved: !!existingBoard
         };
