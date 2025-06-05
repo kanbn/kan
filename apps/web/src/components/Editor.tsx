@@ -20,7 +20,7 @@ export default function Editor({
       imagePlugin(),
     ]}
     {...props}
-    contentEditableClassName='prose text-black dark:text-white'
+    contentEditableClassName='prose dark:prose-invert'
     ref={editorRef}
   />;
 }

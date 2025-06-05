@@ -19,6 +19,7 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
+import Editor from "~/components/Editor";
 
 type NewCardFormInput = NewCardInput & {
   isCreateAnotherEnabled: boolean;
@@ -251,17 +252,10 @@ export function NewCardForm({
           />
         </div>
         <div className="mt-2">
-          <Input
-            placeholder="Add description..."
-            onChange={(e) => setValue("description", e.target.value)}
-            value={watch("description")}
-            contentEditable
-            onKeyDown={async (e) => {
-              if (e.key === "Enter" && e.shiftKey) {
-                e.preventDefault();
-                await handleSubmit(onSubmit)();
-              }
-            }}
+          <Editor
+            markdown={watch("description")}
+            onChange={(value) => setValue("description", value)}
+            onBlur={() => handleSubmit(onSubmit)()}
           />
         </div>
         <div className="mt-2 flex space-x-1">
