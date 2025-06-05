@@ -371,6 +371,7 @@ export const boardRouter = createTRPCRouter({
             .min(3)
             .max(24)
             .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
+          workspaceSlug: z.string(),
         }),
       )
       .output(
@@ -380,12 +381,9 @@ export const boardRouter = createTRPCRouter({
       )
       .query(async ({ ctx, input }) => {
         const slug = input.boardSlug.toLowerCase();
-        const existingBoard = await boardRepo.getBySlug(ctx.db, slug, {
-          members: [],
-          labels: [],
-        });
+        const existingBoard = await boardRepo.getWorkspaceAndBoardIdByBoardSlug(ctx.db, slug);
         return {
-          isReserved: !!existingBoard
+          isReserved: existingBoard ? existingBoard.workspaceSlug === input.workspaceSlug : false,
         };
       }),
 });

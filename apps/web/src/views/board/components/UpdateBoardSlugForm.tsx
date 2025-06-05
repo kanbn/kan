@@ -61,7 +61,7 @@ export function UpdateBoardSlugForm({
   });
 
   const slug = watch("slug");
-  
+
   const [debouncedSlug] = useDebounce(slug, 500);
 
   const updateBoardSlug = api.board.update.useMutation({
@@ -82,6 +82,7 @@ export function UpdateBoardSlugForm({
     api.board.checkSlugAvailability.useQuery(
       {
         boardSlug: debouncedSlug,
+        workspaceSlug,
       },
       {
         enabled:
