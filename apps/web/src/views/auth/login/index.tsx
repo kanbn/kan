@@ -1,15 +1,14 @@
 import Link from "next/link";
 import { useState } from "react";
 
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Auth } from "~/components/AuthForm";
 import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
-
-// import { api } from "~/utils/api";
+import { authClient } from "@kan/auth/client";
 
 export default function LoginPage() {
-  // const router = useRouter();
+  const router = useRouter();
   const [isMagicLinkSent, setIsMagicLinkSent] = useState<boolean>(false);
   const [magicLinkRecipient, setMagicLinkRecipient] = useState<string>("");
 
@@ -18,15 +17,9 @@ export default function LoginPage() {
     setMagicLinkRecipient(recipient);
   };
 
-  // const authCookieExists = document.cookie
-  //   .split("; ")
-  //   .some((cookie) => cookie.includes("auth-token"));
+  const { data } = authClient.useSession();
 
-  // const { data } = api.user.getUser.useQuery(undefined, {
-  //   enabled: authCookieExists ? true : false,
-  // });
-
-  // if (data?.id) router.push("/boards");
+  if (data?.user.id) router.push("/boards");
 
   return (
     <>
