@@ -244,7 +244,7 @@ export default function BoardPage() {
             <div className="flex space-x-2">
               <div className="h-[2.3rem] w-[150px] animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-100" />
             </div>
-          ) : (
+          ) : boardData ? (
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="focus-visible:outline-none"
@@ -257,21 +257,21 @@ export default function BoardPage() {
                 className="block border-0 bg-transparent p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000 sm:text-[1.2rem]"
               />
             </form>
-          )}
+          ) : <p className="block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">Board not found</p>}
 
           <div className="flex items-center space-x-2">
             <VisibilityButton
               visibility={boardData?.visibility ?? "private"}
               boardPublicId={boardId ?? ""}
               queryParams={queryParams}
-              isLoading={isLoading}
+              isLoading={!boardData}
               isAdmin={workspace.role === "admin"}
             />
             <Filters
               labels={boardData?.labels ?? []}
               members={boardData?.workspace.members ?? []}
               position="left"
-              isLoading={isLoading}
+              isLoading={!boardData}
             />
             <Button
               iconLeft={
@@ -283,11 +283,11 @@ export default function BoardPage() {
               onClick={() => {
                 if (boardId) openNewListForm(boardId);
               }}
-              disabled={isLoading}
+              disabled={!boardData}
             >
               New list
             </Button>
-            <BoardDropdown isLoading={isLoading} />
+            <BoardDropdown isLoading={!boardData} />
           </div>
         </div>
 
@@ -298,7 +298,7 @@ export default function BoardPage() {
               <div className="0 mr-5 h-[275px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
               <div className="0 mr-5 h-[375px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
             </div>
-          ) : (
+          ) : boardData ? (
             <>
               {boardData?.lists.length === 0 ? (
                 <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
@@ -370,13 +370,12 @@ export default function BoardPage() {
                                           }}
                                           key={card.publicId}
                                           href={`/cards/${card.publicId}`}
-                                          className={`mb-2 flex !cursor-pointer flex-col ${
-                                            card.publicId.startsWith(
-                                              "PLACEHOLDER",
-                                            )
+                                          className={`mb-2 flex !cursor-pointer flex-col ${card.publicId.startsWith(
+                                            "PLACEHOLDER",
+                                          )
                                               ? "pointer-events-none"
                                               : ""
-                                          }`}
+                                            }`}
                                           ref={provided.innerRef}
                                           {...provided.draggableProps}
                                           {...provided.dragHandleProps}
@@ -404,7 +403,7 @@ export default function BoardPage() {
                 </DragDropContext>
               )}
             </>
-          )}
+          ) : null}
         </div>
         <Modal modalSize={modalContentType === "NEW_CARD" ? "md" : "sm"}>
           {modalContentType === "DELETE_BOARD" && (
