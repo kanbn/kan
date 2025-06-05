@@ -33,6 +33,9 @@ export const initAuth = (db: dbClient) => {
       },
     },
     user: {
+      deleteUser: {
+        enabled: true,
+      },
       additionalFields: {
         stripeCustomerId: {
           type: "string",

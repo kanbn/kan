@@ -38,11 +38,11 @@ export const workspaces = pgTable("workspace", {
   plan: workspacePlanEnum("plan").notNull().default("free"),
   createdBy: uuid("createdBy")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "cascade" }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
   deletedAt: timestamp("deletedAt"),
-  deletedBy: uuid("deletedBy").references(() => users.id),
+  deletedBy: uuid("deletedBy").references(() => users.id, { onDelete: "cascade" }),
 }).enableRLS();
 
 export const workspaceRelations = relations(workspaces, ({ one, many }) => ({
@@ -55,7 +55,7 @@ export const workspaceMembers = pgTable("workspace_members", {
   id: bigserial("id", { mode: "number" }).primaryKey(),
   publicId: varchar("publicId", { length: 12 }).notNull().unique(),
   email: varchar("email", { length: 255 }).notNull(),
-  userId: uuid("userId").references(() => users.id),
+  userId: uuid("userId").references(() => users.id, { onDelete: "cascade" }),
   workspaceId: bigint("workspaceId", { mode: "number" })
     .notNull()
     .references(() => workspaces.id, { onDelete: "cascade" }),
@@ -63,7 +63,7 @@ export const workspaceMembers = pgTable("workspace_members", {
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
   deletedAt: timestamp("deletedAt"),
-  deletedBy: uuid("deletedBy").references(() => users.id),
+  deletedBy: uuid("deletedBy").references(() => users.id, { onDelete: "cascade" }),
   role: memberRoleEnum("role").notNull(),
   status: memberStatusEnum("status").default("invited").notNull(),
 }).enableRLS();
