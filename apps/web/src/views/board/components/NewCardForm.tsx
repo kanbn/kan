@@ -110,16 +110,29 @@ export function NewCardForm({
 
       return { previousState: currentState };
     },
-    onError: (_error, _newList, context) => {
+    onError: (error, _newList, context) => {
       utils.board.byId.setData(queryParams, context?.previousState);
       showPopup({
         header: "Unable to create card",
-        message: "Please try again later, or contact customer support.",
+        message: error.data?.zodError?.fieldErrors.title?.[0] ?
+          `${error.data?.zodError?.fieldErrors.title?.[0].replace("String", "Title")}` :
+          "Please try again later, or contact customer support.",
         icon: "error",
       });
     },
-    onSettled: async () => {
+    onSuccess: async () => {
+      const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
+      if (!isCreateAnotherEnabled) closeModal();
       await utils.board.byId.invalidate(queryParams);
+      reset({
+        title: "",
+        description: "",
+        listPublicId: watch("listPublicId"),
+        labelPublicIds: [],
+        memberPublicIds: [],
+        isCreateAnotherEnabled,
+        position,
+      });
     },
   });
 
@@ -164,18 +177,6 @@ export function NewCardForm({
     })) ?? [];
 
   const onSubmit = (data: NewCardInput) => {
-    const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
-    if (!isCreateAnotherEnabled) closeModal();
-    reset({
-      title: "",
-      description: "",
-      listPublicId: watch("listPublicId"),
-      labelPublicIds: [],
-      memberPublicIds: [],
-      isCreateAnotherEnabled,
-      position,
-    });
-
     createCard.mutate({
       title: data.title,
       description: data.description,
