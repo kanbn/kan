@@ -63,6 +63,7 @@ export function NewCardForm({
   const memberPublicIds = watch("memberPublicIds") || [];
   const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
   const position = watch("position");
+  const title = watch("title");
 
   const { data: boardData } = api.board.byId.useQuery(queryParams, {
     enabled: !!boardPublicId,
@@ -388,7 +389,7 @@ export function NewCardForm({
         />
 
         <div>
-          <Button type="submit">Create card</Button>
+          <Button type="submit" disabled={title.length === 0 || createCard.isPending}>Create card</Button>
         </div>
       </div>
     </form>
