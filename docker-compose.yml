@@ -15,7 +15,6 @@ services:
     command: ["pnpm", "start"]
     environment:
       - EMAIL_FROM=${EMAIL_FROM}
-      - EMAIL_URL=${EMAIL_URL}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - BETTER_AUTH_URL=${BETTER_AUTH_URL}
       - BETTER_AUTH_TRUSTED_ORIGINS=${BETTER_AUTH_TRUSTED_ORIGINS}
