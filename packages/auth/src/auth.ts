@@ -90,8 +90,6 @@ export const initAuth = (db: dbClient) => {
                   },
                 });
 
-                console.log(user.image);
-
                 const allowedFileExtensions = ["jpg", "jpeg", "png", "webp"];
 
                 const fileExtension = user.image.split('.').pop()?.split('?')[0] || 'jpg';
