@@ -151,6 +151,7 @@ export const boardRouter = createTRPCRouter({
       z.object({
         name: z.string().min(1),
         workspacePublicId: z.string().min(12),
+        template: z.string().optional(),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof boardRepo.create>>>())
@@ -198,6 +199,17 @@ export const boardRouter = createTRPCRouter({
           message: `Failed to create board`,
           code: "INTERNAL_SERVER_ERROR",
         });
+      
+      if (input.template) {
+        const lists = input.template.split(", ");
+        for (const list of lists) {
+          await listRepo.create(ctx.db, {
+            name: list,
+            boardId: result.id,
+            createdBy: userId,
+          });
+        }
+      }
 
       return result;
     }),

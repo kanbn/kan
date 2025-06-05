@@ -3,25 +3,33 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
 
-import type { NewBoardInput } from "@kan/api/types";
-
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import TemplateBoards, { Template } from "./TemplateBoards";
+
+type NewBoardInputWithTemplate = {
+  name: string;
+  workspacePublicId: string;
+  template: Template | null;
+};
 
 export function NewBoardForm() {
   const utils = api.useUtils();
   const { closeModal } = useModal();
   const { workspace } = useWorkspace();
 
-  const { register, handleSubmit } = useForm<NewBoardInput>({
+  const { register, handleSubmit, watch, setValue } = useForm<NewBoardInputWithTemplate>({
     defaultValues: {
       name: "",
       workspacePublicId: workspace.publicId || "",
+      template: null,
     },
   });
+
+  const currentTemplate = watch("template");
 
   const refetchBoards = () => utils.board.all.refetch();
 
@@ -32,8 +40,12 @@ export function NewBoardForm() {
     },
   });
 
-  const onSubmit = (data: NewBoardInput) => {
-    createBoard.mutate(data);
+  const onSubmit = (data: NewBoardInputWithTemplate) => {
+    createBoard.mutate({
+      name: data.name,
+      workspacePublicId: data.workspacePublicId,
+      template: data.template?.description,
+    });
   };
 
   useEffect(() => {
@@ -70,7 +82,10 @@ export function NewBoardForm() {
           }}
         />
       </div>
-
+      <TemplateBoards
+        currentBoard={currentTemplate}
+        setCurrentBoard={(t) => setValue("template", t)}
+      />
       <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
         <div>
           <Button type="submit" isLoading={createBoard.isPending}>
