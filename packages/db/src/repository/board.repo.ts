@@ -477,27 +477,3 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
 
   return result;
 };
-
-export const getWorkspaceAndBoardIdByBoardSlug = async (
-  db: dbClient,
-  boardSlug: string,
-) => {
-  const result = await db.query.boards.findFirst({
-    columns: {
-      id: true,
-    },
-    with: {
-      workspace: {
-        columns: {
-          slug: true,
-        }
-      }
-    },
-    where: eq(boards.slug, boardSlug),
-  });
-
-  return {
-    id: result?.id,
-    workspaceSlug: result?.workspace.slug,
-  };
-};

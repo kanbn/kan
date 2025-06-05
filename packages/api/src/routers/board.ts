@@ -357,7 +357,7 @@ export const boardRouter = createTRPCRouter({
         openapi: {
           summary: "Check if a board slug is available",
           method: "GET",
-          path: "/boards/check-slug-availability",
+          path: "/boards/{boardPublicId}/check-slug-availability",
           description: "Checks if a board slug is available",
           tags: ["Boards"],
           protect: true,
@@ -365,12 +365,12 @@ export const boardRouter = createTRPCRouter({
       })
       .input(
         z.object({
+          boardPublicId: z.string().min(12),
           boardSlug: z
             .string()
             .min(3)
             .max(24)
             .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
-          workspaceSlug: z.string(),
         }),
       )
       .output(
@@ -380,9 +380,18 @@ export const boardRouter = createTRPCRouter({
       )
       .query(async ({ ctx, input }) => {
         const slug = input.boardSlug.toLowerCase();
-        const existingBoard = await boardRepo.getWorkspaceAndBoardIdByBoardSlug(ctx.db, slug);
+        const workspace = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(ctx.db, input.boardPublicId);
+        if (!workspace)
+          throw new TRPCError({
+            message: `Board with public ID ${input.boardPublicId} not found`,
+            code: "NOT_FOUND",
+          });
+        const isSlugUnique = await boardRepo.isSlugUnique(ctx.db, {
+          slug,
+          workspaceId: workspace.workspaceId,
+        })
         return {
-          isReserved: existingBoard ? existingBoard.workspaceSlug === input.workspaceSlug : false,
+          isReserved: !isSlugUnique,
         };
       }),
 });

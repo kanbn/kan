@@ -82,7 +82,7 @@ export function UpdateBoardSlugForm({
     api.board.checkSlugAvailability.useQuery(
       {
         boardSlug: debouncedSlug,
-        workspaceSlug,
+        boardPublicId,
       },
       {
         enabled:
