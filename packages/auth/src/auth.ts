@@ -77,8 +77,7 @@ export const initAuth = (db: dbClient) => {
     databaseHooks: {
       user: {
         create: {
-          async after(user, context) {
-            const newUser = { ...user };
+          async after(user, _context) {
             if (user.image && !user.image.includes(process.env.NEXT_PUBLIC_STORAGE_DOMAIN!)) {
               try {
                 const client = new S3Client({
@@ -93,7 +92,7 @@ export const initAuth = (db: dbClient) => {
                 const allowedFileExtensions = ["jpg", "jpeg", "png", "webp"];
 
                 const fileExtension = user.image.split('.').pop()?.split('?')[0] || 'jpg';
-                const key = `${user.id}.${!allowedFileExtensions.includes(fileExtension) ? 'jpg' : fileExtension}`;
+                const key = `${user.id}/avatar.${!allowedFileExtensions.includes(fileExtension) ? 'jpg' : fileExtension}`;
 
                 const imageBuffer = await downloadImage(user.image);
   
