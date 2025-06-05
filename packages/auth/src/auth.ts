@@ -4,6 +4,7 @@ import { createAuthMiddleware } from "better-auth/api";
 import { apiKey } from "better-auth/plugins";
 import { magicLink } from "better-auth/plugins/magic-link";
 import { env } from "next-runtime-env";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 import type { dbClient } from "@kan/db/client";
 import * as memberRepo from "@kan/db/repository/member.repo";
@@ -11,6 +12,14 @@ import * as userRepo from "@kan/db/repository/user.repo";
 import * as schema from "@kan/db/schema";
 import { sendEmail } from "@kan/email";
 import { createStripeClient } from "@kan/stripe";
+
+async function downloadImage(url: string): Promise<Buffer> {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to download image: ${response.statusText}`);
+  }
+  return Buffer.from(await response.arrayBuffer());
+}
 
 export const initAuth = (db: dbClient) => {
   return betterAuth({
@@ -65,6 +74,49 @@ export const initAuth = (db: dbClient) => {
         },
       }),
     ],
+    databaseHooks: {
+      user: {
+        create: {
+          async before(user, context) {
+            const newUser = { ...user };
+            if (user.image && !user.image.includes(process.env.NEXT_PUBLIC_STORAGE_DOMAIN!)) {
+              try {
+                const client = new S3Client({
+                  region: env("S3_REGION") ?? "",
+                  endpoint: env("S3_ENDPOINT") ?? "",
+                  credentials: {
+                    accessKeyId: env("S3_ACCESS_KEY_ID") ?? "",
+                    secretAccessKey: env("S3_SECRET_ACCESS_KEY") ?? "",
+                  },
+                });
+
+                console.log(user.image);
+
+                const allowedFileExtensions = ["jpg", "jpeg", "png", "webp"];
+
+                const fileExtension = user.image.split('.').pop()?.split('?')[0] || 'jpg';
+                const key = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${!allowedFileExtensions.includes(fileExtension) ? 'jpg' : fileExtension}`;
+
+                const imageBuffer = await downloadImage(user.image);
+  
+                await client.send(new PutObjectCommand({
+                  Bucket: env("NEXT_PUBLIC_AVATAR_BUCKET_NAME") ?? "",
+                  Key: key,
+                  Body: imageBuffer,
+                  ContentType: `image/${!allowedFileExtensions.includes(fileExtension) ? 'jpeg' : fileExtension}`,
+                  ACL: 'public-read',
+                }));
+  
+                newUser.image = key;
+              } catch (error) {
+                console.error(error);
+              }
+            }
+            return { data: newUser };
+          }
+        }
+      }
+    },
     hooks: {
       after: createAuthMiddleware(async (ctx) => {
         if (ctx.path.startsWith("/get-session")) {
