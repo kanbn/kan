@@ -77,7 +77,7 @@ export const initAuth = (db: dbClient) => {
     databaseHooks: {
       user: {
         create: {
-          async before(user, context) {
+          async after(user, context) {
             const newUser = { ...user };
             if (user.image && !user.image.includes(process.env.NEXT_PUBLIC_STORAGE_DOMAIN!)) {
               try {
@@ -93,7 +93,7 @@ export const initAuth = (db: dbClient) => {
                 const allowedFileExtensions = ["jpg", "jpeg", "png", "webp"];
 
                 const fileExtension = user.image.split('.').pop()?.split('?')[0] || 'jpg';
-                const key = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${!allowedFileExtensions.includes(fileExtension) ? 'jpg' : fileExtension}`;
+                const key = `${user.id}.${!allowedFileExtensions.includes(fileExtension) ? 'jpg' : fileExtension}`;
 
                 const imageBuffer = await downloadImage(user.image);
   
@@ -104,13 +104,13 @@ export const initAuth = (db: dbClient) => {
                   ContentType: `image/${!allowedFileExtensions.includes(fileExtension) ? 'jpeg' : fileExtension}`,
                   ACL: 'public-read',
                 }));
-  
-                newUser.image = key;
+                await userRepo.update(db, user.id, {
+                  image: key,
+                });
               } catch (error) {
                 console.error(error);
               }
             }
-            return { data: newUser };
           }
         }
       }
