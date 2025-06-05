@@ -92,37 +92,6 @@ pnpm dev
 | `DISCORD_CLIENT_SECRET`          | Discord OAuth client secret   | For Discord login | `xxx`                                         |
 | `GITHUB_CLIENT_ID`               | GitHub OAuth client ID        | For GitHub login | `xxx`                                         |
 | `GITHUB_CLIENT_SECRET`           | GitHub OAuth client secret    | For GitHub login | `xxx`                                         |
-| `GITLAB_CLIENT_ID`               | GitLab OAuth client ID        | For GitLab login | `xxx`                                         |
-| `GITLAB_CLIENT_SECRET`           | GitLab OAuth client secret    | For GitLab login | `xxx`                                         |
-| `GITLAB_ISSUER`                  | GitLab OAuth issuer           | For GitLab login | `xxx`                                         |
-| `MICROSOFT_CLIENT_ID`            | Microsoft OAuth client ID     | For Microsoft login | `xxx`                                         |
-| `MICROSOFT_CLIENT_SECRET`        | Microsoft OAuth client secret | For Microsoft login | `xxx`                                         |
-| `TWITTER_CLIENT_ID`              | Twitter OAuth client ID       | For Twitter login | `xxx`                                         |
-| `TWITTER_CLIENT_SECRET`          | Twitter OAuth client secret   | For Twitter login | `xxx`                                         |
-| `KICK_CLIENT_ID`                 | Kick OAuth client ID          | For Kick login    | `xxx`                                         |
-| `KICK_CLIENT_SECRET`             | Kick OAuth client secret      | For Kick login    | `xxx`                                         |
-| `ZOOM_CLIENT_ID`                 | Zoom OAuth client ID          | For Zoom login    | `xxx`                                         |
-| `ZOOM_CLIENT_SECRET`             | Zoom OAuth client secret      | For Zoom login    | `xxx`                                         |
-| `DROPBOX_CLIENT_ID`              | Dropbox OAuth client ID       | For Dropbox login | `xxx`                                         |
-| `DROPBOX_CLIENT_SECRET`          | Dropbox OAuth client secret   | For Dropbox login | `xxx`                                         |
-| `VK_CLIENT_ID`                   | VK OAuth client ID            | For VK login      | `xxx`                                         |
-| `VK_CLIENT_SECRET`               | VK OAuth client secret        | For VK login      | `xxx`                                         |
-| `LINKEDIN_CLIENT_ID`             | LinkedIn OAuth client ID      | For LinkedIn login | `xxx`                                         |
-| `LINKEDIN_CLIENT_SECRET`         | LinkedIn OAuth client secret  | For LinkedIn login | `xxx`                                         |
-| `REDDIT_CLIENT_ID`               | Reddit OAuth client ID        | For Reddit login  | `xxx`                                         |
-| `REDDIT_CLIENT_SECRET`           | Reddit OAuth client secret    | For Reddit login  | `xxx`                                         |
-| `ROBLOX_CLIENT_ID`               | Roblox OAuth client ID        | For Roblox login  | `xxx`                                         |
-| `ROBLOX_CLIENT_SECRET`           | Roblox OAuth client secret    | For Roblox login  | `xxx`                                         |
-| `SPOTIFY_CLIENT_ID`              | Spotify OAuth client ID       | For Spotify login | `xxx`                                         |
-| `SPOTIFY_CLIENT_SECRET`          | Spotify OAuth client secret   | For Spotify login | `xxx`                                         |
-| `TIKTOK_CLIENT_ID`               | TikTok OAuth client ID        | For TikTok login  | `xxx`                                         |
-| `TIKTOK_CLIENT_SECRET`           | TikTok OAuth client secret    | For TikTok login  | `xxx`                                         |
-| `TIKTOK_CLIENT_KEY`              | TikTok OAuth client key       | For TikTok login  | `xxx`                                         |
-| `TWITCH_CLIENT_ID`               | Twitch OAuth client ID        | For Twitch login  | `xxx`                                         |
-| `TWITCH_CLIENT_SECRET`           | Twitch OAuth client secret    | For Twitch login  | `xxx`                                         |
-| `APPLE_CLIENT_ID`                | Apple OAuth client ID         | For Apple login   | `xxx`                                         |
-| `APPLE_CLIENT_SECRET`            | Apple OAuth client secret     | For Apple login   | `xxx`                                         |
-| `APPLE_APP_BUNDLE_IDENTIFIER`    | Apple OAuth app bundle identifier | For Apple login | `xxx`                                         |
 | `S3_REGION`                      | S3 storage region             | For file uploads | `WEUR`                                        |
 | `S3_ENDPOINT`                    | S3 endpoint URL               | For file uploads | `https://xxx.r2.cloudflarestorage.com`        |
 | `S3_ACCESS_KEY_ID`               | S3 access key                 | For file uploads | `xxx`                                         |
