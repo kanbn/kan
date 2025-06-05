@@ -2,7 +2,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaDiscord, FaGithub, FaGoogle } from "react-icons/fa";
+import { FaDiscord, FaGithub, FaGoogle, FaApple, FaMicrosoft, FaFacebook, FaSpotify, FaTwitch, FaTwitter, FaDropbox, FaLinkedin, FaGitlab, FaTiktok, FaReddit, FaVk } from "react-icons/fa";
+import { SiRoblox, SiZoom } from "react-icons/si";
+import { TbBrandKick } from "react-icons/tb";
 import { z } from "zod";
 import type { SocialProvider } from "better-auth/social-providers";
 
@@ -20,6 +22,99 @@ interface AuthProps {
 }
 
 const EmailSchema = z.object({ email: z.string().email() });
+
+const availableSocialProviders = {
+  google: {
+    id: "google",
+    name: "Google",
+    icon: FaGoogle,
+  },
+  github: {
+    id: "github",
+    name: "GitHub",
+    icon: FaGithub,
+  },
+  discord: {
+    id: "discord",
+    name: "Discord",
+    icon: FaDiscord,
+  },
+  apple: {
+    id: "apple",
+    name: "Apple",
+    icon: FaApple,
+  },
+  microsoft: {
+    id: "microsoft",
+    name: "Microsoft",
+    icon: FaMicrosoft,
+  },
+  facebook: {
+    id: "facebook",
+    name: "Facebook",
+    icon: FaFacebook,
+  },
+  spotify: {
+    id: "spotify",
+    name: "Spotify",
+    icon: FaSpotify,
+  },
+  twitch: {
+    id: "twitch",
+    name: "Twitch",
+    icon: FaTwitch,
+  },
+  twitter: {
+    id: "twitter",
+    name: "Twitter",
+    icon: FaTwitter,
+  },
+  dropbox: {
+    id: "dropbox",
+    name: "Dropbox",
+    icon: FaDropbox,
+  },
+  linkedin: {
+    id: "linkedin",
+    name: "LinkedIn",
+    icon: FaLinkedin,
+  },
+  gitlab: {
+    id: "gitlab",
+    name: "GitLab",
+    icon: FaGitlab,
+  },
+  tiktok: {
+    id: "tiktok",
+    name: "TikTok",
+    icon: FaTiktok,
+  },
+  reddit: {
+    id: "reddit",
+    name: "Reddit",
+    icon: FaReddit,
+  },
+  roblox: {
+    id: "roblox",
+    name: "Roblox",
+    icon: SiRoblox,
+  },
+  vk: {
+    id: "vk",
+    name: "VK",
+    icon: FaVk,
+  },
+  kick: {
+    id: "kick",
+    name: "Kick",
+    icon: TbBrandKick,
+  },
+  zoom: {
+    id: "zoom",
+    name: "Zoom",
+    icon: SiZoom,
+  },
+}
 
 export function Auth({ setIsMagicLinkSent }: AuthProps) {
   const [isLoginWithProviderPending, setIsLoginWithProviderPending] = useState<
@@ -86,39 +181,21 @@ export function Auth({ setIsMagicLinkSent }: AuthProps) {
     <div className="space-y-6">
       {socialProviders?.length !== 0 && (
         <div className="space-y-2">
-          {socialProviders?.includes("google") && (
+          {Object.entries(availableSocialProviders).map(([key, provider]) => {
+            if (!socialProviders?.includes(key)) {
+              return null;
+            }
+            return (
             <Button
-              onClick={() => handleLoginWithProvider("google")}
-              isLoading={isLoginWithProviderPending === "google"}
-              iconLeft={<FaGoogle />}
+              onClick={() => handleLoginWithProvider(key as SocialProvider)}
+              isLoading={isLoginWithProviderPending === key}
+              iconLeft={<provider.icon />}
               fullWidth
               size="lg"
             >
-              Continue with Google
+              Continue with {provider.name}
             </Button>
-          )}
-          {socialProviders?.includes("github") && (
-            <Button
-              onClick={() => handleLoginWithProvider("github")}
-              isLoading={isLoginWithProviderPending === "github"}
-              iconLeft={<FaGithub />}
-              fullWidth
-              size="lg"
-            >
-              Continue with GitHub
-            </Button>
-          )}
-          {socialProviders?.includes("discord") && (
-            <Button
-              onClick={() => handleLoginWithProvider("discord")}
-              isLoading={isLoginWithProviderPending === "discord"}
-              iconLeft={<FaDiscord />}
-              fullWidth
-              size="lg"
-            >
-              Continue with Discord
-            </Button>
-          )}
+          )})}
         </div>
       )}
       <form onSubmit={handleSubmit(onSubmit)}>
