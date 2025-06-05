@@ -8,10 +8,12 @@ import {
   HiOutlineUserMinus,
   HiOutlineUserPlus,
 } from "react-icons/hi2";
+import Cookies from "js-cookie";
 
 import type { GetCardByIdOutput } from "@kan/api/types";
 
 import Avatar from "~/components/Avatar";
+import { api } from "~/utils/api";
 import Comment from "./Comment";
 
 type ActivityType =
@@ -147,6 +149,13 @@ const ActivityList = ({
   isLoading: boolean;
   isAdmin?: boolean;
 }) => {
+  const token =
+    typeof window !== "undefined" ? Cookies.get("kan.session_token") : null;
+
+  const { data: user } = api.user.getUser.useQuery(undefined, {
+    enabled: !!token,
+  });
+
   return (
     <div className="flex flex-col space-y-4 pt-4">
       {activities.map((activity, index) => {
@@ -156,7 +165,7 @@ const ActivityList = ({
           fromList: activity.fromList?.name ?? null,
           toList: activity.toList?.name ?? null,
           memberName: activity.member?.user?.name ?? null,
-          isSelf: activity.member?.user?.id === activity.user?.id,
+          isSelf: activity.member?.user?.id === user?.id,
           label: activity.label?.name ?? null,
         });
 
@@ -172,7 +181,7 @@ const ActivityList = ({
               createdAt={activity.createdAt}
               comment={activity.comment?.comment}
               isEdited={!!activity.comment?.updatedAt}
-              isAuthor={activity.comment?.createdBy === activity.user?.id}
+              isAuthor={activity.comment?.createdBy === user?.id}
               isAdmin={isAdmin ?? false}
             />
           );
