@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { env } from "next-runtime-env";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { HiCheck, HiMiniStar, HiXMark } from "react-icons/hi2";
+import { HiCheck, HiXMark } from "react-icons/hi2";
 import { z } from "zod";
 
 import Button from "~/components/Button";
