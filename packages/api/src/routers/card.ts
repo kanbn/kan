@@ -578,14 +578,6 @@ export const cardRouter = createTRPCRouter({
       >(),
     )
     .query(async ({ ctx, input }) => {
-      const userId = ctx.user?.id;
-
-      if (!userId)
-        throw new TRPCError({
-          message: `User not authenticated`,
-          code: "UNAUTHORIZED",
-        });
-
       const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
         ctx.db,
         input.cardPublicId,
@@ -597,7 +589,17 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, card.workspaceId);
+      if (card.workspaceVisibility === "private") {
+        const userId = ctx.user?.id;
+
+        if (!userId)
+          throw new TRPCError({
+            message: `User not authenticated`,
+            code: "UNAUTHORIZED",
+          });
+
+        await assertUserInWorkspace(ctx.db, userId, card.workspaceId);
+      }
 
       const result = await cardRepo.getWithListAndMembersByPublicId(
         ctx.db,

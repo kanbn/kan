@@ -239,6 +239,7 @@ export const getBySlug = async (
       workspace: {
         columns: {
           publicId: true,
+          name: true,
           slug: true,
         },
       },

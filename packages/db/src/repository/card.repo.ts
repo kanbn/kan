@@ -731,6 +731,7 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
           board: {
             columns: {
               workspaceId: true,
+              visibility: true,
             },
           },
         },
@@ -742,6 +743,7 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
     ? {
         id: result.id,
         workspaceId: result.list.board.workspaceId,
+        workspaceVisibility: result.list.board.visibility,
       }
     : null;
 };
