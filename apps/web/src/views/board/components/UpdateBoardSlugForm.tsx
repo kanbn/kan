@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { env } from "next-runtime-env";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
@@ -107,7 +108,7 @@ export function UpdateBoardSlugForm({
           id="board-slug"
           {...register("slug")}
           errorMessage={errors.slug?.message}
-          prefix={`kan.bn/${workspaceSlug}/`}
+          prefix={`${env("NEXT_PUBLIC_BASE_URL")}/${workspaceSlug}/`}
           onKeyDown={async (e) => {
             if (e.key === "Enter") {
               e.preventDefault();
