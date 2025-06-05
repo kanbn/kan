@@ -18,7 +18,7 @@ export function DeleteWorkspaceConfirmation() {
   const utils = api.useUtils();
 
   const deleteWorkspaceMutation = api.workspace.delete.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
       closeModal();
       showPopup({
         header: "Workspace deleted",
@@ -26,7 +26,7 @@ export function DeleteWorkspaceConfirmation() {
         icon: "success",
       });
 
-      utils.workspace.all.invalidate();
+      await utils.workspace.all.refetch();
       
       const filteredWorkspaces = availableWorkspaces.filter(
         (ws) => ws.publicId !== workspace.publicId,
