@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaDiscord, FaGithub, FaGoogle } from "react-icons/fa";
 import { z } from "zod";
+import type { SocialProvider } from "better-auth/social-providers";
 
 import { authClient } from "@kan/auth/client";
 
@@ -22,7 +23,7 @@ const EmailSchema = z.object({ email: z.string().email() });
 
 export function Auth({ setIsMagicLinkSent }: AuthProps) {
   const [isLoginWithProviderPending, setIsLoginWithProviderPending] = useState<
-    null | string
+    null | SocialProvider
   >(null);
   const [isLoginWithEmailPending, setIsLoginWithEmailPending] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
@@ -60,26 +61,7 @@ export function Auth({ setIsMagicLinkSent }: AuthProps) {
   };
 
   const handleLoginWithProvider = async (
-    provider:
-      | "github"
-      | "apple"
-      | "discord"
-      | "facebook"
-      | "google"
-      | "microsoft"
-      | "spotify"
-      | "twitch"
-      | "twitter"
-      | "dropbox"
-      | "linkedin"
-      | "gitlab"
-      | "tiktok"
-      | "reddit"
-      | "roblox"
-      | "vk"
-      | "kick"
-      | "zoom",
-  ) => {
+    provider: SocialProvider) => {
     setIsLoginWithProviderPending(provider);
     setLoginError(null);
     const { error } = await authClient.signIn.social({

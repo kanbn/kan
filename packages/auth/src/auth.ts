@@ -11,27 +11,9 @@ import * as userRepo from "@kan/db/repository/user.repo";
 import * as schema from "@kan/db/schema";
 import { sendEmail } from "@kan/email";
 import { createStripeClient } from "@kan/stripe";
+import { socialProviderList } from "better-auth/social-providers";
 
-const providers = [
-  "apple",
-  "discord",
-  "dropbox",
-  "facebook",
-  "github",
-  "gitlab",
-  "google",
-  "linkedin",
-  "microsoft",
-  "reddit",
-  "roblox",
-  "spotify",
-  "tiktok",
-  "twitch",
-  "vk",
-  "x",
-];
-
-export const configuredProviders = providers.reduce<
+export const configuredProviders = socialProviderList.reduce<
   Record<
     string,
     {
