@@ -84,7 +84,8 @@ export const socialProvidersPlugin = () => {
           method: "GET",
         },
         async (ctx) => {
-          return ctx.json(Object.keys(configuredProviders));
+          const providers = ctx.context.socialProviders.map(p => p.name.toLowerCase());
+          return ctx.json(providers);
         },
       ),
     },
