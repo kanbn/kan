@@ -27,7 +27,6 @@ export const env = createEnv({
     S3_ENDPOINT: z.string().optional(),
     EMAIL_FROM: z.string(),
     EMAIL_URL: z.string(),
-    EMAIL_TOKEN: z.string(),
   },
 
   /**
