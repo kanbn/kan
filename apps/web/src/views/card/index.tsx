@@ -24,6 +24,10 @@ import LabelSelector from "./components/LabelSelector";
 import ListSelector from "./components/ListSelector";
 import MemberSelector from "./components/MemberSelector";
 import NewCommentForm from "./components/NewCommentForm";
+import Editor from "~/components/Editor";
+import { MDXEditorMethods } from "@mdxeditor/editor";
+import { useEffect, useRef } from "react";
+import '@mdxeditor/editor/style.css';
 
 interface FormValues {
   cardId: string;
@@ -37,6 +41,7 @@ export default function CardPage() {
   const { modalContentType, entityId } = useModal();
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
+  const editorRef = useRef<MDXEditorMethods>(null);
 
   const cardId = Array.isArray(router.query.cardId)
     ? router.query.cardId[0]
@@ -45,6 +50,12 @@ export default function CardPage() {
   const { data: card, isLoading } = api.card.byId.useQuery({
     cardPublicId: cardId ?? "",
   });
+
+  useEffect(() => {
+    if (card?.description) {
+      editorRef.current?.setMarkdown(card.description);
+    }
+  }, [card]);
 
   const refetchCard = async () => {
     if (cardId) await utils.card.byId.refetch({ cardPublicId: cardId });
@@ -191,13 +202,12 @@ export default function CardPage() {
                 className="w-full space-y-6"
               >
                 <div className="mt-2">
-                  <ContentEditable
+                  <Editor
+                    editorRef={editorRef}
                     placeholder="Add description..."
-                    html={watch("description")}
-                    disabled={false}
-                    onChange={(e) => setValue("description", e.target.value)}
-                    onBlur={handleSubmit(onSubmit)}
-                    className="block w-full border-0 bg-transparent py-1.5 text-light-900 focus-visible:outline-none dark:text-dark-1000 sm:text-sm sm:leading-6"
+                    markdown={watch("description")}
+                    onChange={(e) => setValue("description", e)}
+                    onBlur={() => handleSubmit(onSubmit)()}
                   />
                 </div>
               </form>

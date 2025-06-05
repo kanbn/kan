@@ -22,7 +22,9 @@
     "@kan/auth": "workspace:*",
     "@kan/db": "workspace:^",
     "@kan/shared": "workspace:^",
+    "@mdxeditor/editor": "^3.35.0",
     "@t3-oss/env-nextjs": "^0.11.1",
+    "@tailwindcss/typography": "^0.5.16",
     "@tanstack/react-query": "catalog:",
     "@trpc/client": "catalog:",
     "@trpc/next": "^11.0.0-rc.660",
@@ -45,6 +47,7 @@
     "react-hook-form": "^7.51.1",
     "react-icons": "^4.12.0",
     "react-lottie-player": "^1.5.5",
+    "react-markdown": "^10.1.0",
     "superjson": "2.2.1",
     "tailwind-merge": "^2.5.2",
     "zod": "catalog:"

@@ -5,6 +5,7 @@ import baseConfig from "@kan/tailwind-config/web";
 
 export default {
   content: [...baseConfig.content],
+  plugins: [require("@tailwindcss/typography")],
   presets: [baseConfig],
   theme: {
     extend: {
