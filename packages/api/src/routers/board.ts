@@ -2,6 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import * as boardRepo from "@kan/db/repository/board.repo";
+import * as boardSlugRepo from "@kan/db/repository/boardSlug.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
@@ -352,4 +353,36 @@ export const boardRouter = createTRPCRouter({
 
       return { success: true };
     }),
+    checkSlugAvailability: publicProcedure
+      .meta({
+        openapi: {
+          summary: "Check if a board slug is available",
+          method: "GET",
+          path: "/boards/check-slug-availability",
+          description: "Checks if a board slug is available",
+          tags: ["Boards"],
+          protect: true,
+        },
+      })
+      .input(
+        z.object({
+          boardSlug: z
+            .string()
+            .min(3)
+            .max(24)
+            .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
+        }),
+      )
+      .output(
+        z.object({
+          isReserved: z.boolean(),
+        }),
+      )
+      .query(async ({ ctx, input }) => {
+        const slug = input.boardSlug.toLowerCase();
+        const existingBoard = await boardSlugRepo.getBoardSlug(ctx.db, slug);
+        return {
+          isReserved: !!existingBoard
+        };
+      }),
 });

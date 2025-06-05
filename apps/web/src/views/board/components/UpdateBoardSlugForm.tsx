@@ -2,11 +2,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { env } from "next-runtime-env";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { HiXMark } from "react-icons/hi2";
+import { HiCheck, HiMiniStar, HiXMark } from "react-icons/hi2";
 import { z } from "zod";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
+import { useDebounce } from "~/hooks/useDebounce";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
@@ -50,6 +51,7 @@ export function UpdateBoardSlugForm({
     register,
     handleSubmit,
     formState: { isDirty, errors },
+    watch,
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     values: {
@@ -57,6 +59,10 @@ export function UpdateBoardSlugForm({
     },
     mode: "onChange",
   });
+
+  const slug = watch("slug");
+  
+  const [debouncedSlug] = useDebounce(slug, 500);
 
   const updateBoardSlug = api.board.update.useMutation({
     onError: () => {
@@ -72,6 +78,19 @@ export function UpdateBoardSlugForm({
     },
   });
 
+  const checkBoardSlugAvailability =
+    api.board.checkSlugAvailability.useQuery(
+      {
+        boardSlug: debouncedSlug,
+      },
+      {
+        enabled:
+          !!debouncedSlug && debouncedSlug !== boardSlug && !errors.slug,
+      },
+    );
+
+  const isBoardSlugAvailable = checkBoardSlugAvailability.data;
+
   useEffect(() => {
     const nameElement: HTMLElement | null =
       document.querySelector<HTMLElement>("#board-slug");
@@ -79,6 +98,9 @@ export function UpdateBoardSlugForm({
   }, []);
 
   const onSubmit = (data: FormValues) => {
+    if (!isBoardSlugAvailable) return;
+    if (isBoardSlugAvailable?.isReserved) return;
+
     updateBoardSlug.mutate({
       slug: data.slug,
       boardPublicId,
@@ -107,7 +129,9 @@ export function UpdateBoardSlugForm({
         <Input
           id="board-slug"
           {...register("slug")}
-          errorMessage={errors.slug?.message}
+          errorMessage={errors.slug?.message || (isBoardSlugAvailable?.isReserved
+            ? "This board URL has already been taken"
+            : undefined)}
           prefix={`${env("NEXT_PUBLIC_BASE_URL")}/${workspaceSlug}/`}
           onKeyDown={async (e) => {
             if (e.key === "Enter") {
@@ -115,6 +139,13 @@ export function UpdateBoardSlugForm({
               await handleSubmit(onSubmit)();
             }
           }}
+          iconRight={
+            !!errors.slug?.message || isBoardSlugAvailable?.isReserved ? (
+              <HiXMark className="h-4 w-4 text-red-500" />
+            ) : (
+              <HiCheck className="h-4 w-4 dark:text-dark-1000" />
+            )
+          }
         />
       </div>
       <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
@@ -125,7 +156,8 @@ export function UpdateBoardSlugForm({
             disabled={
               !isDirty ||
               updateBoardSlug.isPending ||
-              errors.slug?.message !== undefined
+              errors.slug?.message !== undefined ||
+              isBoardSlugAvailable?.isReserved
             }
           >
             Update
