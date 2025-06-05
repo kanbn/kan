@@ -88,12 +88,16 @@ pnpm dev
 | `BETTER_AUTH_TRUSTED_ORIGINS`    | Allowed callback origins      | For Google login | `http://localhost:3000,http://localhost:3001` |
 | `GOOGLE_CLIENT_ID`               | Google OAuth client ID        | For Google login | `xxx.apps.googleusercontent.com`              |
 | `GOOGLE_CLIENT_SECRET`           | Google OAuth client secret    | For Google login | `xxx`                                         |
+| `DISCORD_CLIENT_ID`              | Discord OAuth client ID       | For Discord login | `xxx`                                         |
+| `DISCORD_CLIENT_SECRET`          | Discord OAuth client secret   | For Discord login | `xxx`                                         |
+| `GITHUB_CLIENT_ID`               | GitHub OAuth client ID        | For GitHub login | `xxx`                                         |
+| `GITHUB_CLIENT_SECRET`           | GitHub OAuth client secret    | For GitHub login | `xxx`                                         |
 | `S3_REGION`                      | S3 storage region             | For file uploads | `WEUR`                                        |
 | `S3_ENDPOINT`                    | S3 endpoint URL               | For file uploads | `https://xxx.r2.cloudflarestorage.com`        |
 | `S3_ACCESS_KEY_ID`               | S3 access key                 | For file uploads | `xxx`                                         |
 | `S3_SECRET_ACCESS_KEY`           | S3 secret key                 | For file uploads | `xxx`                                         |
 | `NEXT_PUBLIC_STORAGE_URL`        | Storage service URL           | For file uploads | `https://storage.kanbn.com`                   |
-| `NEXT_PUBLIC_STORAGE_DOMAIN`     | Storage domain name           | For file uploads | `storage.kanbn.com`                           |
+| `NEXT_PUBLIC_STORAGE_DOMAIN`     | Storage domain name           | For file uploads | `kanbn.com`                                   |
 | `NEXT_PUBLIC_AVATAR_BUCKET_NAME` | S3 bucket name for avatars    | For file uploads | `avatars`                                     |
 
 See `.env.example` for a complete list of supported environment variables.
@@ -101,6 +105,12 @@ See `.env.example` for a complete list of supported environment variables.
 ## Contributing 🤝
 
 We welcome contributions! Please read our [contribution guidelines](CONTRIBUTING.md) before submitting a pull request.
+
+## Contributors 👥
+
+<a href="https://github.com/kanbn/kan/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=kanbn/kan" />
+</a>
 
 ## License 📝
 

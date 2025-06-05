@@ -26,6 +26,13 @@
     {
       "idx": 3,
       "version": "7",
+      "when": 1749118315675,
+      "tag": "20250605101155_AddCascadeDeleteToCardRelations",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
       "when": 1749118413702,
       "tag": "20250605101333_AddCascaseDeleteToWorkspaceUserId",
       "breakpoints": true

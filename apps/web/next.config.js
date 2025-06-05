@@ -26,7 +26,16 @@ const config = {
   typescript: { ignoreBuildErrors: true },
 
   images: {
-    domains: [env("NEXT_PUBLIC_STORAGE_DOMAIN") ?? ""],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: `*.${env("NEXT_PUBLIC_STORAGE_DOMAIN")}`,
+      },
+      {
+        protocol: "https",
+        hostname: "*.googleusercontent.com",
+      },
+    ],
   },
   experimental: {
     instrumentationHook: true,

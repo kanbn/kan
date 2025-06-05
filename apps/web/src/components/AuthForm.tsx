@@ -1,8 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaGoogle } from "react-icons/fa";
+import { FaDiscord, FaGithub, FaGoogle } from "react-icons/fa";
 import { z } from "zod";
+import type { SocialProvider } from "better-auth/social-providers";
 
 import { authClient } from "@kan/auth/client";
 
@@ -20,8 +22,9 @@ interface AuthProps {
 const EmailSchema = z.object({ email: z.string().email() });
 
 export function Auth({ setIsMagicLinkSent }: AuthProps) {
-  const [isLoginWithGooglePending, setIsLoginWithGooglePending] =
-    useState(false);
+  const [isLoginWithProviderPending, setIsLoginWithProviderPending] = useState<
+    null | SocialProvider
+  >(null);
   const [isLoginWithEmailPending, setIsLoginWithEmailPending] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
 
@@ -31,6 +34,11 @@ export function Auth({ setIsMagicLinkSent }: AuthProps) {
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(EmailSchema),
+  });
+
+  const { data: socialProviders } = useQuery({
+    queryKey: ["social_providers"],
+    queryFn: () => authClient.getSocialProviders(),
   });
 
   const handleLoginWithEmail = async (email: string) => {
@@ -52,18 +60,21 @@ export function Auth({ setIsMagicLinkSent }: AuthProps) {
     }
   };
 
-  const handleLoginWithGoogle = async () => {
-    setIsLoginWithGooglePending(true);
+  const handleLoginWithProvider = async (
+    provider: SocialProvider) => {
+    setIsLoginWithProviderPending(provider);
     setLoginError(null);
     const { error } = await authClient.signIn.social({
-      provider: "google",
+      provider,
       callbackURL: "/boards",
     });
 
-    setIsLoginWithGooglePending(false);
+    setIsLoginWithProviderPending(null);
 
     if (error) {
-      setLoginError("Failed to login with Google. Please try again.");
+      setLoginError(
+        `Failed to login with ${provider.at(0)?.toUpperCase() + provider.slice(1)}. Please try again.`,
+      );
     }
   };
 
@@ -73,23 +84,53 @@ export function Auth({ setIsMagicLinkSent }: AuthProps) {
 
   return (
     <div className="space-y-6">
-      <div>
-        <Button
-          onClick={handleLoginWithGoogle}
-          isLoading={isLoginWithGooglePending}
-          iconLeft={<FaGoogle />}
-          fullWidth
-          size="lg"
-        >
-          Continue with Google
-        </Button>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-[1.5rem] flex w-full items-center gap-4">
-          <div className="h-[1px] w-full bg-light-600 dark:bg-dark-600" />
-          <span className="text-sm text-light-900 dark:text-dark-900">or</span>
-          <div className="h-[1px] w-full bg-light-600 dark:bg-dark-600" />
+      {socialProviders?.length !== 0 && (
+        <div className="space-y-2">
+          {socialProviders?.includes("google") && (
+            <Button
+              onClick={() => handleLoginWithProvider("google")}
+              isLoading={isLoginWithProviderPending === "google"}
+              iconLeft={<FaGoogle />}
+              fullWidth
+              size="lg"
+            >
+              Continue with Google
+            </Button>
+          )}
+          {socialProviders?.includes("github") && (
+            <Button
+              onClick={() => handleLoginWithProvider("github")}
+              isLoading={isLoginWithProviderPending === "github"}
+              iconLeft={<FaGithub />}
+              fullWidth
+              size="lg"
+            >
+              Continue with GitHub
+            </Button>
+          )}
+          {socialProviders?.includes("discord") && (
+            <Button
+              onClick={() => handleLoginWithProvider("discord")}
+              isLoading={isLoginWithProviderPending === "discord"}
+              iconLeft={<FaDiscord />}
+              fullWidth
+              size="lg"
+            >
+              Continue with Discord
+            </Button>
+          )}
         </div>
+      )}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {socialProviders?.length !== 0 && (
+          <div className="mb-[1.5rem] flex w-full items-center gap-4">
+            <div className="h-[1px] w-full bg-light-600 dark:bg-dark-600" />
+            <span className="text-sm text-light-900 dark:text-dark-900">
+              or
+            </span>
+            <div className="h-[1px] w-full bg-light-600 dark:bg-dark-600" />
+          </div>
+        )}
         <Input
           {...register("email", { required: true })}
           placeholder="Enter your email address"

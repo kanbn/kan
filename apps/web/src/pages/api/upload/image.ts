@@ -1,9 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { env } from "next-runtime-env";
+import { env as nextRuntimeEnv } from "next-runtime-env";
+
 import { createNextApiContext } from "@kan/api/trpc";
 
+import { env } from "~/env";
 
 const allowedContentTypes = ["image/jpeg", "image/png"];
 
@@ -54,7 +56,7 @@ export default async function handler(
       // @ts-ignore
       client,
       new PutObjectCommand({
-        Bucket: env("NEXT_PUBLIC_AVATAR_BUCKET_NAME") ?? "",
+        Bucket: nextRuntimeEnv("NEXT_PUBLIC_AVATAR_BUCKET_NAME") ?? "",
         Key: filename,
       }),
     );
