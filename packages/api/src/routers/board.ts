@@ -365,12 +365,12 @@ export const boardRouter = createTRPCRouter({
       })
       .input(
         z.object({
-          boardPublicId: z.string().min(12),
           boardSlug: z
             .string()
             .min(3)
             .max(24)
             .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
+          boardPublicId: z.string().min(12),
         }),
       )
       .output(
@@ -379,19 +379,13 @@ export const boardRouter = createTRPCRouter({
         }),
       )
       .query(async ({ ctx, input }) => {
-        const slug = input.boardSlug.toLowerCase();
-        const workspace = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(ctx.db, input.boardPublicId);
-        if (!workspace)
-          throw new TRPCError({
-            message: `Board with public ID ${input.boardPublicId} not found`,
-            code: "NOT_FOUND",
-          });
-        const isSlugUnique = await boardRepo.isSlugUnique(ctx.db, {
-          slug,
-          workspaceId: workspace.workspaceId,
-        })
+        const isBoardSlugAvailable = await boardRepo.isBoardSlugAvailable(
+          ctx.db,
+          input.boardSlug,
+          input.boardPublicId,
+        );
         return {
-          isReserved: !isSlugUnique,
+          isReserved: !isBoardSlugAvailable,
         };
       }),
 });
