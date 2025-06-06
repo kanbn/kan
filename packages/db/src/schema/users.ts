@@ -26,6 +26,8 @@ export const users = pgTable("user", {
   createdAt: timestamp("createdAt").notNull().defaultNow(),
   updatedAt: timestamp("updatedAt").notNull().defaultNow(),
   stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
+  trelloToken: varchar("trelloToken", { length: 255 }),
+  trelloConnected: boolean("trelloConnected").notNull().default(false),
 }).enableRLS();
 
 export const usersRelations = relations(users, ({ many }) => ({

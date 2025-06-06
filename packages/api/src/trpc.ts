@@ -18,6 +18,7 @@ export interface User {
   updatedAt: Date;
   image?: string | null | undefined;
   stripeCustomerId?: string | null | undefined;
+  trelloConnected?: boolean | null | undefined;
 }
 
 interface CreateContextOptions {

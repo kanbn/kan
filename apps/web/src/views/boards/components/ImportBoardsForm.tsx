@@ -10,16 +10,10 @@ import {
 } from "react-icons/hi2";
 
 import Button from "~/components/Button";
-import Input from "~/components/Input";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
-
-interface TrelloFormValues {
-  apiKey: string;
-  token: string;
-}
 
 const sources = [{ source: "Trello" }];
 
@@ -103,27 +97,22 @@ const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
 
 const ImportTrello: React.FC = () => {
   const utils = api.useUtils();
-  const [apiKey, setApiKey] = useState("");
-  const [token, setToken] = useState("");
   const { closeModal } = useModal();
   const { workspace } = useWorkspace();
   const { showPopup } = usePopup();
 
   const refetchBoards = () => utils.board.all.refetch();
 
-  const boards = api.import.trello.getBoards.useQuery(
-    { apiKey, token },
-    {
-      enabled: apiKey && token ? true : false,
-    },
-  );
+  const { data: boards } = api.trello.getBoards.useQuery();
 
-  const handleSetAuthDetails = (apiKey: string, token: string) => {
-    setApiKey(apiKey);
-    setToken(token);
-  };
+  const { register: registerBoards, handleSubmit: handleSubmitBoards } =
+    useForm({
+      defaultValues: Object.fromEntries(
+        boards?.map((board) => [board.id, true]) ?? [],
+      ),
+    });
 
-  const importBoards = api.import.trello.importBoards.useMutation({
+  const importBoards = api.trello.importBoards.useMutation({
     onSuccess: async () => {
       showPopup({
         header: "Import complete",
@@ -146,40 +135,20 @@ const ImportTrello: React.FC = () => {
     },
   });
 
-  const { register, handleSubmit } = useForm<TrelloFormValues>({
-    defaultValues: {
-      apiKey: "",
-      token: "",
-    },
-  });
-
-  const onSubmit = (values: TrelloFormValues) => {
-    handleSetAuthDetails(values.apiKey, values.token);
-  };
-
-  const { register: registerBoards, handleSubmit: handleSubmitBoards } =
-    useForm({
-      defaultValues: Object.fromEntries(
-        boards.data?.map((board) => [board.id, true]) ?? [],
-      ),
-    });
-
   const onSubmitBoards = (values: Record<string, boolean>) => {
     const boardIds = Object.keys(values).filter((key) => values[key] === true);
 
     importBoards.mutate({
       boardIds,
-      apiKey,
-      token,
       workspacePublicId: workspace.publicId,
     });
   };
 
-  if (boards.data?.length)
+  if (boards?.length)
     return (
       <form onSubmit={handleSubmitBoards(onSubmitBoards)}>
         <div className="h-[105px] overflow-scroll px-5">
-          {boards.data.map((board) => (
+          {boards.map((board) => (
             <div key={board.id}>
               <label
                 className="flex cursor-pointer items-center rounded-[5px] p-2 hover:bg-light-100 dark:hover:bg-dark-300"
@@ -210,23 +179,7 @@ const ImportTrello: React.FC = () => {
     );
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="text-neutral-900 dark:text-dark-1000"
-    >
-      <div className="space-y-4 px-5">
-        <Input id="apiKey" placeholder="API key" {...register("apiKey")} />
-        <Input id="token" placeholder="Token" {...register("token")} />
-      </div>
-
-      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
-        <div>
-          <Button type="submit" isLoading={boards.isLoading}>
-            Fetch boards
-          </Button>
-        </div>
-      </div>
-    </form>
+    <div>Trello account not connected ...</div>
   );
 };
 

@@ -1,5 +1,5 @@
 import { BetterAuthClientPlugin } from "better-auth";
-import { apiKeyClient, magicLinkClient } from "better-auth/client/plugins";
+import { apiKeyClient, inferAdditionalFields, magicLinkClient } from "better-auth/client/plugins";
 import { BetterFetchOption, createAuthClient } from "better-auth/react";
 
 import { socialProvidersPlugin } from "./auth";
@@ -21,5 +21,11 @@ const socialProvidersPluginClient = {
 } satisfies BetterAuthClientPlugin;
 
 export const authClient = createAuthClient({
-  plugins: [magicLinkClient(), apiKeyClient(), socialProvidersPluginClient],
+  plugins: [magicLinkClient(), apiKeyClient(), socialProvidersPluginClient, inferAdditionalFields({
+    user: {
+      trelloConnected: {
+        type: "boolean",
+      }
+    }
+  })],
 });
