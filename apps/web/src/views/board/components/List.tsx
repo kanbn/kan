@@ -80,20 +80,20 @@ export default function List({
           {...provided.dragHandleProps}
           className="dark-text-dark-1000 mr-5 h-fit min-w-[18rem] max-w-[18rem] rounded-md border border-light-400 bg-light-300 py-2 pl-2 pr-1 text-neutral-900 dark:border-dark-300 dark:bg-dark-100"
         >
-          <div className="flex justify-between">
+          <div className="mb-4 flex justify-between">
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="focus-visible:outline-none"
+              className="w-2/3 focus-visible:outline-none"
             >
               <input
                 id="name"
                 type="text"
                 {...register("name")}
                 onBlur={handleSubmit(onSubmit)}
-                className="mb-4 block border-0 bg-transparent px-4 pt-1 text-sm font-medium text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000"
+                className="border-0 bg-transparent px-4 pt-1 text-sm font-medium text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000"
               />
             </form>
-            <div>
+            <div className="flex items-center">
               <button
                 className="mx-1 inline-flex h-fit items-center rounded-md p-1 px-1 text-sm font-semibold text-dark-50 hover:bg-light-400 dark:hover:bg-dark-200"
                 onClick={() => openNewCardForm(list.publicId)}
