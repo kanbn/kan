@@ -63,6 +63,7 @@ export function NewCardForm({
   const memberPublicIds = watch("memberPublicIds") || [];
   const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
   const position = watch("position");
+  const title = watch("title");
 
   const { data: boardData } = api.board.byId.useQuery(queryParams, {
     enabled: !!boardPublicId,
@@ -110,16 +111,29 @@ export function NewCardForm({
 
       return { previousState: currentState };
     },
-    onError: (_error, _newList, context) => {
+    onError: (error, _newList, context) => {
       utils.board.byId.setData(queryParams, context?.previousState);
       showPopup({
         header: "Unable to create card",
-        message: "Please try again later, or contact customer support.",
+        message: error.data?.zodError?.fieldErrors.title?.[0] ?
+          `${error.data?.zodError?.fieldErrors.title?.[0].replace("String", "Title")}` :
+          "Please try again later, or contact customer support.",
         icon: "error",
       });
     },
-    onSettled: async () => {
+    onSuccess: async () => {
+      const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
+      if (!isCreateAnotherEnabled) closeModal();
       await utils.board.byId.invalidate(queryParams);
+      reset({
+        title: "",
+        description: "",
+        listPublicId: watch("listPublicId"),
+        labelPublicIds: [],
+        memberPublicIds: [],
+        isCreateAnotherEnabled,
+        position,
+      });
     },
   });
 
@@ -164,18 +178,6 @@ export function NewCardForm({
     })) ?? [];
 
   const onSubmit = (data: NewCardInput) => {
-    const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
-    if (!isCreateAnotherEnabled) closeModal();
-    reset({
-      title: "",
-      description: "",
-      listPublicId: watch("listPublicId"),
-      labelPublicIds: [],
-      memberPublicIds: [],
-      isCreateAnotherEnabled,
-      position,
-    });
-
     createCard.mutate({
       title: data.title,
       description: data.description,
@@ -387,7 +389,7 @@ export function NewCardForm({
         />
 
         <div>
-          <Button type="submit">Create card</Button>
+          <Button type="submit" disabled={title.length === 0 || createCard.isPending}>Create card</Button>
         </div>
       </div>
     </form>

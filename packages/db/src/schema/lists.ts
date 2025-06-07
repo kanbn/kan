@@ -21,11 +21,11 @@ export const lists = pgTable("list", {
   index: integer("index").notNull(),
   createdBy: uuid("createdBy")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "no action" }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
   deletedAt: timestamp("deletedAt"),
-  deletedBy: uuid("deletedBy").references(() => users.id),
+  deletedBy: uuid("deletedBy").references(() => users.id, { onDelete: "no action" }),
   boardId: bigint("boardId", { mode: "number" })
     .notNull()
     .references(() => boards.id, { onDelete: "cascade" }),

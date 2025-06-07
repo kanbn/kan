@@ -35,11 +35,11 @@ export const boards = pgTable(
     slug: varchar("slug", { length: 255 }).notNull(),
     createdBy: uuid("createdBy")
       .notNull()
-      .references(() => users.id),
+      .references(() => users.id, { onDelete: "no action" }),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
     updatedAt: timestamp("updatedAt"),
     deletedAt: timestamp("deletedAt"),
-    deletedBy: uuid("deletedBy").references(() => users.id),
+    deletedBy: uuid("deletedBy").references(() => users.id, { onDelete: "no action" }),
     importId: bigint("importId", { mode: "number" }).references(
       () => imports.id,
     ),

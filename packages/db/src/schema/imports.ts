@@ -28,7 +28,7 @@ export const imports = pgTable("import", {
   status: importStatusEnum("status").notNull(),
   createdBy: uuid("createdBy")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "no action" }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 }).enableRLS();
 

@@ -1,22 +1,15 @@
-import Cookies from "js-cookie";
-
 import PatternedBackground from "~/components/PatternedBackground";
 import { useTheme } from "~/providers/theme";
-import { api } from "~/utils/api";
 import Footer from "./Footer";
 import Header from "./Header";
+import { authClient } from "@kan/auth/client";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const theme = useTheme();
 
-  const token =
-    typeof window !== "undefined" ? Cookies.get("kan.session_token") : null;
+  const { data: session } = authClient.useSession();
 
-  const { data } = api.user.getUser.useQuery(undefined, {
-    enabled: !!token,
-  });
-
-  const isLoggedIn = !!data;
+  const isLoggedIn = !!session?.user;
 
   const isDarkMode = theme.activeTheme === "dark";
 

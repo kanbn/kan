@@ -8,11 +8,11 @@ import {
   HiOutlineUserMinus,
   HiOutlineUserPlus,
 } from "react-icons/hi2";
-
 import type { GetCardByIdOutput } from "@kan/api/types";
 
 import Avatar from "~/components/Avatar";
 import Comment from "./Comment";
+import { authClient } from "@kan/auth/client";
 
 type ActivityType =
   NonNullable<GetCardByIdOutput>["activities"][number]["type"];
@@ -147,6 +147,8 @@ const ActivityList = ({
   isLoading: boolean;
   isAdmin?: boolean;
 }) => {
+  const { data } = authClient.useSession();
+
   return (
     <div className="flex flex-col space-y-4 pt-4">
       {activities.map((activity, index) => {
@@ -156,7 +158,7 @@ const ActivityList = ({
           fromList: activity.fromList?.name ?? null,
           toList: activity.toList?.name ?? null,
           memberName: activity.member?.user?.name ?? null,
-          isSelf: activity.member?.user?.id === activity.user?.id,
+          isSelf: activity.member?.user?.id === data?.user?.id,
           label: activity.label?.name ?? null,
         });
 
@@ -172,7 +174,7 @@ const ActivityList = ({
               createdAt={activity.createdAt}
               comment={activity.comment?.comment}
               isEdited={!!activity.comment?.updatedAt}
-              isAuthor={activity.comment?.createdBy === activity.user?.id}
+              isAuthor={activity.comment?.createdBy === data?.user?.id}
               isAdmin={isAdmin ?? false}
             />
           );

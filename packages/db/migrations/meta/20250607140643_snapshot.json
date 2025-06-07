@@ -1,6 +1,6 @@
 {
-  "id": "5bace566-8863-405b-9954-be303b4852b4",
-  "prevId": "f4d25221-a1d9-405d-9289-09e9ce6e7a26",
+  "id": "46051220-f67a-45d4-a72f-b80d723e13c8",
+  "prevId": "1a07a776-0481-49f9-9098-02d530b37cf5",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -733,7 +733,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "card_activity_toListId_list_id_fk": {
@@ -746,7 +746,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "card_activity_labelId_label_id_fk": {
@@ -759,7 +759,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "card_activity_workspaceMemberId_workspace_members_id_fk": {
@@ -798,7 +798,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -845,7 +845,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "_card_workspace_members_workspaceMemberId_workspace_members_id_fk": {
@@ -1052,7 +1052,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "_card_labels_labelId_label_id_fk": {
@@ -1825,7 +1825,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "no action",
           "onUpdate": "no action"
         },
         "workspace_members_workspaceId_workspace_id_fk": {
@@ -1851,7 +1851,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
@@ -1955,7 +1955,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "no action",
           "onUpdate": "no action"
         },
         "workspace_deletedBy_user_id_fk": {
@@ -1968,7 +1968,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "no action",
           "onUpdate": "no action"
         }
       },

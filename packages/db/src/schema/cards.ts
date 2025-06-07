@@ -46,11 +46,11 @@ export const cards = pgTable("card", {
   index: integer("index").notNull(),
   createdBy: uuid("createdBy")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "no action" }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
   deletedAt: timestamp("deletedAt"),
-  deletedBy: uuid("deletedBy").references(() => users.id),
+  deletedBy: uuid("deletedBy").references(() => users.id, { onDelete: "no action" }),
   listId: bigint("listId", { mode: "number" })
     .notNull()
     .references(() => lists.id, { onDelete: "cascade" }),
@@ -90,23 +90,23 @@ export const cardActivities = pgTable("card_activity", {
   fromIndex: integer("fromIndex"),
   toIndex: integer("toIndex"),
   fromListId: bigint("fromListId", { mode: "number" }).references(
-    () => lists.id,
+    () => lists.id, { onDelete: "cascade" },
   ),
-  toListId: bigint("toListId", { mode: "number" }).references(() => lists.id),
-  labelId: bigint("labelId", { mode: "number" }).references(() => labels.id),
+  toListId: bigint("toListId", { mode: "number" }).references(() => lists.id, { onDelete: "cascade" }),
+  labelId: bigint("labelId", { mode: "number" }).references(() => labels.id, { onDelete: "cascade" }),
   workspaceMemberId: bigint("workspaceMemberId", {
     mode: "number",
-  }).references(() => workspaceMembers.id),
+  }).references(() => workspaceMembers.id, { onDelete: "no action" }),
   fromTitle: varchar("fromTitle", { length: 255 }),
   toTitle: varchar("toTitle", { length: 255 }),
   fromDescription: text("fromDescription"),
   toDescription: text("toDescription"),
   createdBy: uuid("createdBy")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "no action" }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   commentId: bigint("commentId", { mode: "number" }).references(
-    () => comments.id,
+    () => comments.id, { onDelete: "cascade" },
   ),
   fromComment: text("fromComment"),
   toComment: text("toComment"),
@@ -152,7 +152,7 @@ export const cardsToLabels = pgTable(
   {
     cardId: bigint("cardId", { mode: "number" })
       .notNull()
-      .references(() => cards.id),
+      .references(() => cards.id, { onDelete: "cascade" }),
     labelId: bigint("labelId", { mode: "number" })
       .notNull()
       .references(() => labels.id, { onDelete: "cascade" }),
@@ -176,7 +176,7 @@ export const cardToWorkspaceMembers = pgTable(
   {
     cardId: bigint("cardId", { mode: "number" })
       .notNull()
-      .references(() => cards.id),
+      .references(() => cards.id, { onDelete: "cascade" }),
     workspaceMemberId: bigint("workspaceMemberId", { mode: "number" })
       .notNull()
       .references(() => workspaceMembers.id, { onDelete: "cascade" }),
@@ -207,11 +207,11 @@ export const comments = pgTable("card_comments", {
     .references(() => cards.id, { onDelete: "cascade" }),
   createdBy: uuid("createdBy")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "no action" }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
   deletedAt: timestamp("deletedAt"),
-  deletedBy: uuid("deletedBy").references(() => users.id),
+  deletedBy: uuid("deletedBy").references(() => users.id, { onDelete: "no action" }),
 }).enableRLS();
 
 export const commentsRelations = relations(comments, ({ one }) => ({
