@@ -1,5 +1,7 @@
+import { authClient } from "@kan/auth/client";
 import { useRouter } from "next/router";
 import { HiXMark } from "react-icons/hi2";
+import Editor from "~/components/Editor";
 
 import { useModal } from "~/providers/modal";
 import { api } from "~/utils/api";
@@ -16,6 +18,7 @@ export function CardModal({
 }) {
   const router = useRouter();
   const { closeModal, isOpen } = useModal();
+  const { data: session } = authClient.useSession();
 
   const { data, isLoading } = api.card.byId.useQuery(
     {
@@ -90,9 +93,7 @@ export function CardModal({
           {data?.description && (
             <div className="mb-10 flex w-full max-w-2xl justify-between">
               <div className="mt-2">
-                <p className="block w-full border-0 bg-transparent py-1.5 text-light-900 focus-visible:outline-none dark:text-dark-1000 sm:text-sm sm:leading-6">
-                  {data.description}
-                </p>
+                <Editor markdown={data.description} readOnly />
               </div>
             </div>
           )}
