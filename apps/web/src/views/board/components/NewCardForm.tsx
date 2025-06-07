@@ -255,7 +255,7 @@ export function NewCardForm({
         </div>
         <div className="mt-2">
           <Editor
-            markdown={watch("description")}
+            content=""
             onChange={(value) => setValue("description", value)}
             onBlur={() => handleSubmit(onSubmit)()}
           />

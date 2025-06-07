@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import ContentEditable from "react-contenteditable";
 import { useForm } from "react-hook-form";
 import { IoChevronForwardSharp } from "react-icons/io5";
 
@@ -25,9 +24,6 @@ import ListSelector from "./components/ListSelector";
 import MemberSelector from "./components/MemberSelector";
 import NewCommentForm from "./components/NewCommentForm";
 import Editor from "~/components/Editor";
-import { MDXEditorMethods } from "@mdxeditor/editor";
-import { useEffect, useRef } from "react";
-import '@mdxeditor/editor/style.css';
 
 interface FormValues {
   cardId: string;
@@ -41,7 +37,6 @@ export default function CardPage() {
   const { modalContentType, entityId } = useModal();
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
-  const editorRef = useRef<MDXEditorMethods>(null);
 
   const cardId = Array.isArray(router.query.cardId)
     ? router.query.cardId[0]
@@ -50,12 +45,6 @@ export default function CardPage() {
   const { data: card, isLoading } = api.card.byId.useQuery({
     cardPublicId: cardId ?? "",
   });
-
-  useEffect(() => {
-    if (card?.description) {
-      editorRef.current?.setMarkdown(card.description);
-    }
-  }, [card]);
 
   const refetchCard = async () => {
     if (cardId) await utils.card.byId.refetch({ cardPublicId: cardId });
@@ -148,6 +137,8 @@ export default function CardPage() {
     });
   };
 
+  const description = watch("description");
+
   if (!cardId) return <></>;
 
   return (
@@ -211,12 +202,10 @@ export default function CardPage() {
                   >
                     <div className="mt-2">
                       <Editor
-                    editorRef={editorRef}
-                        placeholder="Add description..."
-                        markdown={watch("description")}
-                            onChange={(e) => setValue("description", e)}
+                        content={card.description}
+                        onChange={(e) => setValue("description", e)}
                         onBlur={() => handleSubmit(onSubmit)()}
-                          />
+                      />
                     </div>
                   </form>
                 </div>
