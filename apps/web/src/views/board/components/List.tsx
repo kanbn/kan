@@ -1,17 +1,16 @@
-import { type ReactNode } from "react";
-import {
-  HiOutlinePlusSmall,
-  HiEllipsisHorizontal,
-  HiOutlineTrash,
-  HiOutlineSquaresPlus,
-} from "react-icons/hi2";
+import type { ReactNode } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
-
-import { api } from "~/utils/api";
-import { useModal } from "~/providers/modal";
+import {
+  HiEllipsisHorizontal,
+  HiOutlinePlusSmall,
+  HiOutlineSquaresPlus,
+  HiOutlineTrash,
+} from "react-icons/hi2";
 
 import Dropdown from "~/components/Dropdown";
+import { useModal } from "~/providers/modal";
+import { api } from "~/utils/api";
 
 interface ListProps {
   children: ReactNode;
@@ -80,17 +79,17 @@ export default function List({
           {...provided.dragHandleProps}
           className="dark-text-dark-1000 mr-5 h-fit min-w-[18rem] max-w-[18rem] rounded-md border border-light-400 bg-light-300 py-2 pl-2 pr-1 text-neutral-900 dark:border-dark-300 dark:bg-dark-100"
         >
-          <div className="mb-4 flex justify-between">
+          <div className="mb-2 flex justify-between">
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="w-2/3 focus-visible:outline-none"
+              className="w-full focus-visible:outline-none"
             >
               <input
                 id="name"
                 type="text"
                 {...register("name")}
                 onBlur={handleSubmit(onSubmit)}
-                className="border-0 bg-transparent px-4 pt-1 text-sm font-medium text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000"
+                className="w-full border-0 bg-transparent px-4 pt-1 text-sm font-medium text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000"
               />
             </form>
             <div className="flex items-center">
