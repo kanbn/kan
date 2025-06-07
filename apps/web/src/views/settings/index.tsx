@@ -16,6 +16,8 @@ import UpdateDisplayNameForm from "./components/UpdateDisplayNameForm";
 import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescriptionForm";
 import UpdateWorkspaceNameForm from "./components/UpdateWorkspaceNameForm";
 import UpdateWorkspaceUrlForm from "./components/UpdateWorkspaceUrlForm";
+import { DeleteAccountConfirmation } from "./components/DeleteAccountConfirmation";
+import { FaBuilding, FaUser } from "react-icons/fa";
 
 export default function SettingsPage() {
   const { modalContentType, openModal } = useModal();
@@ -127,20 +129,49 @@ export default function SettingsPage() {
               />
             </div>
 
-            <div className="border-t border-light-300 dark:border-dark-300">
-              <h2 className="mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-                Delete workspace
-              </h2>
-              <p className="mb-8 mt-2 text-sm text-neutral-500 dark:text-dark-900">
-                Once you delete your workspace, there is no going back. Please
-                be certain.
-              </p>
-              <Button
-                variant="primary"
-                onClick={() => openModal("DELETE_WORKSPACE")}
-              >
-                Delete workspace
-              </Button>
+            <div className="rounded-lg flex flex-col space-y-8 border border-red-300 bg-red-50 p-6 dark:border-red-900 dark:bg-red-900/20">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <FaBuilding size="20" className="text-red-600 dark:text-red-400" />
+                </div>
+                <div className="ml-3">
+                  <h2 className="text-[14px] font-medium text-red-800 dark:text-red-200">
+                    Delete workspace
+                  </h2>
+                  <p className="mt-2 text-sm text-red-700 dark:text-red-300">
+                    Once you delete your workspace, there is no going back. This action cannot be undone.
+                  </p>
+                  <div className="mt-4">
+                    <Button
+                      variant="danger"
+                      onClick={() => openModal("DELETE_WORKSPACE")}
+                    >
+                      Delete workspace
+                    </Button>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <FaUser size="20" className="text-red-600 dark:text-red-400" />
+                </div>
+                <div className="ml-3">
+                  <h2 className="text-[14px] font-medium text-red-800 dark:text-red-200">
+                    Delete account
+                  </h2>
+                  <p className="mt-2 text-sm text-red-700 dark:text-red-300">
+                    Once you delete your account, there is no going back. This action cannot be undone.
+                  </p>
+                  <div className="mt-4">
+                    <Button
+                      variant="danger"
+                      onClick={() => openModal("DELETE_ACCOUNT")}
+                    >
+                      Delete account
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -151,6 +182,9 @@ export default function SettingsPage() {
             )}
             {modalContentType === "UPDATE_WORKSPACE_URL" && (
               <CustomURLConfirmation workspacePublicId={workspace.publicId} />
+            )}
+            {modalContentType === "DELETE_ACCOUNT" && (
+              <DeleteAccountConfirmation />
             )}
           </Modal>
         </div>

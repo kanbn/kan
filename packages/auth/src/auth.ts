@@ -112,6 +112,9 @@ export const initAuth = (db: dbClient) => {
     }),
     socialProviders: configuredProviders,
     user: {
+      deleteUser: {
+        enabled: true,
+      },
       additionalFields: {
         stripeCustomerId: {
           type: "string",

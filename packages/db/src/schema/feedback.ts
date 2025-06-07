@@ -15,7 +15,7 @@ export const feedback = pgTable("feedback", {
   feedback: text("feedback").notNull(),
   createdBy: uuid("createdBy")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "no action" }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
   url: text("url").notNull(),

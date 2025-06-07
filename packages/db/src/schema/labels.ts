@@ -20,7 +20,7 @@ export const labels = pgTable("label", {
   colourCode: varchar("colourCode", { length: 12 }),
   createdBy: uuid("createdBy")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "no action" }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
   boardId: bigint("boardId", { mode: "number" })
@@ -28,7 +28,7 @@ export const labels = pgTable("label", {
     .references(() => boards.id, { onDelete: "cascade" }),
   importId: bigint("importId", { mode: "number" }).references(() => imports.id),
   deletedAt: timestamp("deletedAt"),
-  deletedBy: uuid("deletedBy").references(() => users.id),
+  deletedBy: uuid("deletedBy").references(() => users.id, { onDelete: "no action" }),
 }).enableRLS();
 
 export const labelsRelations = relations(labels, ({ one, many }) => ({
