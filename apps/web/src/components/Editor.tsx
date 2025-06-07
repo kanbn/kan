@@ -1,10 +1,25 @@
-'use client'
-
-import { useEditor, EditorContent, Editor as TiptapEditor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import { Button, ButtonProps } from '@headlessui/react'
-import { HiOutlineBold, HiOutlineItalic, HiOutlineStrikethrough, HiOutlineCodeBracket, HiOutlineCodeBracketSquare, HiH1, HiH2, HiH3, HiOutlineNumberedList, HiOutlineListBullet, HiOutlineArrowUturnLeft, HiOutlineArrowUturnRight, HiOutlineChatBubbleLeftEllipsis } from 'react-icons/hi2'
-import { twMerge } from 'tailwind-merge'
+import type { ButtonProps } from "@headlessui/react";
+import type { Editor as TiptapEditor } from "@tiptap/react";
+import { Button } from "@headlessui/react";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import { useRef } from "react";
+import {
+  HiH1,
+  HiH2,
+  HiH3,
+  HiOutlineArrowUturnLeft,
+  HiOutlineArrowUturnRight,
+  HiOutlineBold,
+  HiOutlineChatBubbleLeftEllipsis,
+  HiOutlineCodeBracket,
+  HiOutlineCodeBracketSquare,
+  HiOutlineItalic,
+  HiOutlineListBullet,
+  HiOutlineNumberedList,
+  HiOutlineStrikethrough,
+} from "react-icons/hi2";
+import { twMerge } from "tailwind-merge";
 
 export default function Editor({
   content,
@@ -12,36 +27,53 @@ export default function Editor({
   onBlur,
   readOnly = false,
 }: {
-  content: string | null
-  onChange: (value: string) => void
-  onBlur: () => void,
-  readOnly?: boolean
-} ) {
-  const editor = useEditor({
-    extensions: [StarterKit],
-    content,
-    onUpdate: ({ editor }) => onChange(editor.getHTML()),
-    onBlur: () => onBlur(),
-    editable: !readOnly,
-    editorProps: {
-      attributes: {
-        class: 'prose prose-invert prose-sm max-w-none focus:outline-none',
+  content: string | null;
+  onChange: (value: string) => void;
+  onBlur: () => void;
+  readOnly?: boolean;
+}) {
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const editor = useEditor(
+    {
+      extensions: [StarterKit],
+      content,
+      onUpdate: ({ editor }) => onChange(editor.getHTML()),
+      onBlur: ({ event }) => {
+        // Only trigger onBlur if the click was outside both the editor and menu
+        if (!menuRef.current?.contains(event.relatedTarget as Node)) {
+          onBlur();
+        }
       },
+      editable: !readOnly,
+      editorProps: {
+        attributes: {
+          class: "prose prose-invert prose-sm max-w-none focus:outline-none",
+        },
+      },
+      injectCSS: false,
     },
-    injectCSS: false,
-  }, [content]);
+    [content],
+  );
 
   return (
     <>
-      {!readOnly && (
-        <EditorMenu editor={editor} />
-      )}
-      <EditorContent editor={editor} className="prose prose-invert prose-sm sm:prose lg:prose-lg xl:prose-2xl max-w-none" />
+      {!readOnly && <EditorMenu editor={editor} menuRef={menuRef} />}
+      <EditorContent
+        editor={editor}
+        className="prose prose-invert prose-sm sm:prose lg:prose-lg xl:prose-2xl max-w-none"
+      />
     </>
   );
 }
 
-function EditorMenu({ editor }: { editor: TiptapEditor | null }) {
+function EditorMenu({
+  editor,
+  menuRef,
+}: {
+  editor: TiptapEditor | null;
+  menuRef: React.RefObject<HTMLDivElement>;
+}) {
   const MenuItems = [
     {
       name: "undo",
@@ -131,11 +163,14 @@ function EditorMenu({ editor }: { editor: TiptapEditor | null }) {
       onClick: () => editor?.chain().focus().toggleBlockquote().run(),
       disabled: !editor?.can().toggleBlockquote(),
       active: editor?.isActive("blockquote"),
-    }
+    },
   ];
 
   return (
-    <div className="flex items-center gap-2 border-b-[1px] border-light-600 dark:border-dark-600">
+    <div
+      ref={menuRef}
+      className="flex items-center gap-2 border-b-[1px] border-light-600 dark:border-dark-600"
+    >
       {MenuItems.map((item) => (
         <EditorMenuButton
           key={item.name}
@@ -153,7 +188,13 @@ function EditorMenu({ editor }: { editor: TiptapEditor | null }) {
 function EditorMenuButton(props: ButtonProps & { active?: boolean }) {
   const { active, ...rest } = props;
   return (
-    <Button className={twMerge("p-1 rounded-md bg-light-50 dark:bg-dark-50 hover:bg-light-100 dark:hover:bg-dark-400 text-light-900 dark:text-dark-900 flex items-center", active && "bg-light-100 dark:bg-dark-400")} {...rest} />
+    <Button
+      tabIndex={-1}
+      className={twMerge(
+        "flex items-center rounded-md bg-light-50 p-1 text-light-900 hover:bg-light-100 dark:bg-dark-50 dark:text-dark-900 dark:hover:bg-dark-400",
+        active && "bg-light-100 dark:bg-dark-400",
+      )}
+      {...rest}
+    />
   );
 }
-
