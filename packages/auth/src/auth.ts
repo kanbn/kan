@@ -4,6 +4,7 @@ import { createAuthEndpoint, createAuthMiddleware } from "better-auth/api";
 import { apiKey } from "better-auth/plugins";
 import { magicLink } from "better-auth/plugins/magic-link";
 import { env } from "next-runtime-env";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 import type { dbClient } from "@kan/db/client";
 import * as memberRepo from "@kan/db/repository/member.repo";
@@ -87,6 +88,14 @@ export const socialProvidersPlugin = () => ({
   },
 });
 
+async function downloadImage(url: string): Promise<Buffer> {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to download image: ${response.statusText}`);
+  }
+  return Buffer.from(await response.arrayBuffer());
+}
+
 export const initAuth = (db: dbClient) => {
   return betterAuth({
     secret: process.env.BETTER_AUTH_SECRET!,
@@ -136,6 +145,46 @@ export const initAuth = (db: dbClient) => {
         },
       }),
     ],
+    databaseHooks: {
+      user: {
+        create: {
+          async after(user, _context) {
+            if (user.image && !user.image.includes(process.env.NEXT_PUBLIC_STORAGE_DOMAIN!)) {
+              try {
+                const client = new S3Client({
+                  region: env("S3_REGION") ?? "",
+                  endpoint: env("S3_ENDPOINT") ?? "",
+                  credentials: {
+                    accessKeyId: env("S3_ACCESS_KEY_ID") ?? "",
+                    secretAccessKey: env("S3_SECRET_ACCESS_KEY") ?? "",
+                  },
+                });
+
+                const allowedFileExtensions = ["jpg", "jpeg", "png", "webp"];
+
+                const fileExtension = user.image.split('.').pop()?.split('?')[0] || 'jpg';
+                const key = `${user.id}/avatar.${!allowedFileExtensions.includes(fileExtension) ? 'jpg' : fileExtension}`;
+
+                const imageBuffer = await downloadImage(user.image);
+  
+                await client.send(new PutObjectCommand({
+                  Bucket: env("NEXT_PUBLIC_AVATAR_BUCKET_NAME") ?? "",
+                  Key: key,
+                  Body: imageBuffer,
+                  ContentType: `image/${!allowedFileExtensions.includes(fileExtension) ? 'jpeg' : fileExtension}`,
+                  ACL: 'public-read',
+                }));
+                await userRepo.update(db, user.id, {
+                  image: key,
+                });
+              } catch (error) {
+                console.error(error);
+              }
+            }
+          }
+        }
+      }
+    },
     hooks: {
       after: createAuthMiddleware(async (ctx) => {
         if (ctx.path.startsWith("/get-session")) {

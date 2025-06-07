@@ -352,4 +352,40 @@ export const boardRouter = createTRPCRouter({
 
       return { success: true };
     }),
+    checkSlugAvailability: publicProcedure
+      .meta({
+        openapi: {
+          summary: "Check if a board slug is available",
+          method: "GET",
+          path: "/boards/{boardPublicId}/check-slug-availability",
+          description: "Checks if a board slug is available",
+          tags: ["Boards"],
+          protect: true,
+        },
+      })
+      .input(
+        z.object({
+          boardSlug: z
+            .string()
+            .min(3)
+            .max(24)
+            .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
+          boardPublicId: z.string().min(12),
+        }),
+      )
+      .output(
+        z.object({
+          isReserved: z.boolean(),
+        }),
+      )
+      .query(async ({ ctx, input }) => {
+        const isBoardSlugAvailable = await boardRepo.isBoardSlugAvailable(
+          ctx.db,
+          input.boardSlug,
+          input.boardPublicId,
+        );
+        return {
+          isReserved: !isBoardSlugAvailable,
+        };
+      }),
 });
