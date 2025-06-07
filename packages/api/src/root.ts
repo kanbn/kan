@@ -7,6 +7,7 @@ import { listRouter } from "./routers/list";
 import { memberRouter } from "./routers/member";
 import { userRouter } from "./routers/user";
 import { workspaceRouter } from "./routers/workspace";
+import { trelloRouter } from "./routers/trello";
 import { createTRPCRouter } from "./trpc";
 
 export const appRouter = createTRPCRouter({
@@ -19,6 +20,7 @@ export const appRouter = createTRPCRouter({
   import: importRouter,
   user: userRouter,
   workspace: workspaceRouter,
+  trello: trelloRouter,
 });
 
 export type AppRouter = typeof appRouter;

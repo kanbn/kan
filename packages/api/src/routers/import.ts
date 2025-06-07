@@ -16,7 +16,7 @@ import { assertUserInWorkspace } from "../utils/auth";
 
 const TRELLO_API_URL = "https://api.trello.com/1";
 
-interface TrelloBoard {
+export interface TrelloBoard {
   id: string;
   name: string;
   labels: TrelloLabel[];

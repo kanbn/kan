@@ -119,6 +119,19 @@ export const initAuth = (db: dbClient) => {
           defaultValue: null,
           input: false,
         },
+        trelloToken: {
+          type: "string",
+          required: false,
+          defaultValue: null,
+          input: false,
+          returned: false,
+        },
+        trelloConnected: {
+          type: "boolean",
+          required: false,
+          defaultValue: false,
+          input: false,
+        }
       },
     },
     plugins: [

@@ -18,6 +18,8 @@ export const env = createEnv({
     BETTER_AUTH_URL: z.string(),
     BETTER_AUTH_TRUSTED_ORIGINS: z.string(),
     POSTGRES_URL: z.string().url(),
+    TRELLO_APP_API_KEY: z.string().optional(),
+    TRELLO_APP_SECRET: z.string().optional(),
     STRIPE_SECRET_KEY: z.string().optional(),
     GOOGLE_CLIENT_ID: z.string().optional(),
     GOOGLE_CLIENT_SECRET: z.string().optional(),

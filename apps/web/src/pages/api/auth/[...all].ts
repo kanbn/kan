@@ -5,6 +5,6 @@ import { createDrizzleClient } from "@kan/db/client";
 
 export const config = { api: { bodyParser: false } };
 
-const auth = initAuth(createDrizzleClient());
+export const auth = initAuth(createDrizzleClient());
 
 export default toNodeHandler(auth.handler);

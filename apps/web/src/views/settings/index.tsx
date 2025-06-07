@@ -16,13 +16,56 @@ import UpdateDisplayNameForm from "./components/UpdateDisplayNameForm";
 import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescriptionForm";
 import UpdateWorkspaceNameForm from "./components/UpdateWorkspaceNameForm";
 import UpdateWorkspaceUrlForm from "./components/UpdateWorkspaceUrlForm";
+import { authClient } from "@kan/auth/client";
+import { usePopup } from "~/providers/popup";
+import { useEffect } from "react";
 
 export default function SettingsPage() {
   const { modalContentType, openModal } = useModal();
   const { workspace } = useWorkspace();
   const utils = api.useUtils();
+  const { showPopup } = usePopup();
 
   const { data } = api.user.getUser.useQuery();
+
+  const { data: session, refetch: refetchSession } = authClient.useSession();
+  const { data: trelloUrl } = api.trello.getAuthorizationUrl.useQuery(
+    undefined,
+    {
+      enabled: session?.user.trelloConnected === false,
+      refetchOnWindowFocus: true,
+    },
+  );
+
+  useEffect(() => {
+    const handleFocus = () => {
+      refetchSession();
+    };
+    window.addEventListener("focus", handleFocus);
+    return () => {
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, [refetchSession]);
+
+  const { mutateAsync: disconnectTrello } = api.trello.disconnect.useMutation({
+    onSuccess: () => {
+      refetchUser();
+      refetchSession();
+      utils.trello.getAuthorizationUrl.refetch();
+      showPopup({
+        header: "Trello disconnected",
+        message: "Your Trello account has been disconnected.",
+        icon: "success",
+      });
+    },
+    onError: () => {
+      showPopup({
+        header: "Error disconnecting Trello",
+        message: "An error occurred while disconnecting your Trello account.",
+        icon: "error",
+      });
+    },
+  });
 
   const refetchUser = () => utils.user.getUser.refetch();
 
@@ -113,6 +156,39 @@ export default function SettingsPage() {
                 </Button>
               </div>
             )}
+
+            <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+                Trello
+              </h2>
+              {!session?.user.trelloConnected && trelloUrl ? (<>
+                <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+                  Connect your Trello account to import boards.
+                </p>
+                <Button
+                  variant="primary"
+                  iconRight={<HiMiniArrowTopRightOnSquare />}
+                  onClick={() => window.open(trelloUrl.url, "trello_auth", "height=800,width=600")}
+                >
+                  Connect Trello
+                </Button>
+              </>
+              ) : (
+                <>
+                  <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+                    You are already connected to Trello.
+                  </p>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      disconnectTrello();
+                    }}
+                  >
+                    Disconnect Trello
+                  </Button>
+                </>
+              )}
+            </div>
 
             <div className="mb-8 border-t border-light-300 dark:border-dark-300">
               <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
