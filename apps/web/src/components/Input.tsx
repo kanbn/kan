@@ -67,6 +67,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             className={twMerge(
               "block w-full rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-sm ring-1 ring-inset ring-light-600 placeholder:text-dark-800 focus:ring-2 focus:ring-inset focus:ring-light-700 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:leading-6",
               prefix && "rounded-l-none",
+              type === "password" && "pr-8",
               className && className,
             )}
             onKeyDown={onKeyDown}
