@@ -1,32 +1,31 @@
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { env } from "next-runtime-env";
 import { useState } from "react";
 
-// import { useRouter } from "next/navigation";
+import { authClient } from "@kan/auth/client";
+
 import { Auth } from "~/components/AuthForm";
 import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
 
-// import { api } from "~/utils/api";
-
 export default function SignupPage() {
-  // const router = useRouter();
+  const router = useRouter();
   const [isMagicLinkSent, setIsMagicLinkSent] = useState<boolean>(false);
   const [magicLinkRecipient, setMagicLinkRecipient] = useState<string>("");
+  const isSignUpDisabled =
+    env("NEXT_PUBLIC_DISABLE_SIGN_UP")?.toLowerCase() === "true";
 
   const handleMagicLinkSent = (value: boolean, recipient: string) => {
     setIsMagicLinkSent(value);
     setMagicLinkRecipient(recipient);
   };
 
-  // const authCookieExists = document.cookie
-  //   .split("; ")
-  //   .some((cookie) => cookie.includes("auth-token"));
+  const { data } = authClient.useSession();
 
-  // const { data } = api.user.getUser.useQuery(undefined, {
-  //   enabled: authCookieExists ? true : false,
-  // });
+  if (data?.user.id) router.push("/boards");
 
-  // if (data?.id) router.push("/boards");
+  if (isSignUpDisabled) router.push("/login");
 
   return (
     <>
@@ -51,7 +50,7 @@ export default function SignupPage() {
             ) : (
               <div className="w-full rounded-lg border border-light-500 bg-light-300 px-4 py-10 dark:border-dark-400 dark:bg-dark-200 sm:max-w-md lg:px-10">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                  <Auth setIsMagicLinkSent={handleMagicLinkSent} />
+                  <Auth setIsMagicLinkSent={handleMagicLinkSent} isSignUp />
                 </div>
               </div>
             )}

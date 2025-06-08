@@ -15,8 +15,12 @@ export const env = createEnv({
    */
   server: {
     BETTER_AUTH_SECRET: z.string(),
-    BETTER_AUTH_URL: z.string(),
-    BETTER_AUTH_TRUSTED_ORIGINS: z.string(),
+    BETTER_AUTH_URL: z.string().url(),
+    BETTER_AUTH_TRUSTED_ORIGINS: z
+      .string()
+      .refine((s) =>
+        s.split(",").every((l) => z.string().url().safeParse(l).success),
+      ),
     POSTGRES_URL: z.string().url(),
     STRIPE_SECRET_KEY: z.string().optional(),
     GOOGLE_CLIENT_ID: z.string().optional(),
@@ -60,7 +64,7 @@ export const env = createEnv({
     S3_SECRET_ACCESS_KEY: z.string().optional(),
     S3_REGION: z.string().optional(),
     S3_ENDPOINT: z.string().optional(),
-    EMAIL_FROM: z.string(),
+    EMAIL_FROM: z.string().optional(),
   },
 
   /**
@@ -70,10 +74,18 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_KAN_ENV: z.string().optional(),
     NEXT_PUBLIC_UMAMI_ID: z.string().optional(),
-    NEXT_PUBLIC_BASE_URL: z.string(),
-    NEXT_PUBLIC_STORAGE_URL: z.string().optional(),
+    NEXT_PUBLIC_BASE_URL: z.string().url(),
+    NEXT_PUBLIC_STORAGE_URL: z.string().url().optional(),
     NEXT_PUBLIC_AVATAR_BUCKET_NAME: z.string().optional(),
     NEXT_PUBLIC_STORAGE_DOMAIN: z.string().optional(),
+    NEXT_PUBLIC_ALLOW_CREDENTIALS: z
+      .string()
+      .refine((s) => s.toLowerCase() === "true" || s.toLowerCase() === "false")
+      .optional(),
+    NEXT_PUBLIC_DISABLE_SIGN_UP: z
+      .string()
+      .refine((s) => s.toLowerCase() === "true" || s.toLowerCase() === "false")
+      .optional(),
   },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
@@ -86,6 +98,8 @@ export const env = createEnv({
     NEXT_PUBLIC_STORAGE_URL: process.env.NEXT_PUBLIC_STORAGE_URL,
     NEXT_PUBLIC_AVATAR_BUCKET_NAME: process.env.NEXT_PUBLIC_AVATAR_BUCKET_NAME,
     NEXT_PUBLIC_STORAGE_DOMAIN: process.env.NEXT_PUBLIC_STORAGE_DOMAIN,
+    NEXT_PUBLIC_ALLOW_CREDENTIALS: process.env.NEXT_PUBLIC_ALLOW_CREDENTIALS,
+    NEXT_PUBLIC_DISABLE_SIGN_UP: process.env.NEXT_PUBLIC_DISABLE_SIGN_UP,
   },
   skipValidation:
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",

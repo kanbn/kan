@@ -75,7 +75,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {type === "password" && (
             <button
               type="button"
-              className="absolute right-3 top-1/2 -translate-y-1/2 bg-light-50 pl-1 text-xs text-light-900 dark:bg-dark-200 dark:text-dark-900"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-light-900 dark:text-dark-900"
               tabIndex={-1}
               onClick={() => setShowPassword((v) => !v)}
             >

@@ -1,27 +1,52 @@
+import type { SocialProvider } from "better-auth/social-providers";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
+import { env } from "next-runtime-env";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaDiscord, FaGithub, FaGoogle, FaApple, FaMicrosoft, FaFacebook, FaSpotify, FaTwitch, FaTwitter, FaDropbox, FaLinkedin, FaGitlab, FaTiktok, FaReddit, FaVk } from "react-icons/fa";
+import {
+  FaApple,
+  FaDiscord,
+  FaDropbox,
+  FaFacebook,
+  FaGithub,
+  FaGitlab,
+  FaGoogle,
+  FaLinkedin,
+  FaMicrosoft,
+  FaReddit,
+  FaSpotify,
+  FaTiktok,
+  FaTwitch,
+  FaTwitter,
+  FaVk,
+} from "react-icons/fa";
 import { SiRoblox, SiZoom } from "react-icons/si";
 import { TbBrandKick } from "react-icons/tb";
 import { z } from "zod";
-import type { SocialProvider } from "better-auth/social-providers";
 
 import { authClient } from "@kan/auth/client";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
+import { usePopup } from "~/providers/popup";
 
 interface FormValues {
+  name?: string;
   email: string;
+  password?: string;
 }
 
 interface AuthProps {
   setIsMagicLinkSent: (value: boolean, recipient: string) => void;
+  isSignUp?: boolean;
 }
 
-const EmailSchema = z.object({ email: z.string().email() });
+const EmailSchema = z.object({
+  name: z.string().optional(),
+  email: z.string().email(),
+  password: z.string().optional(),
+});
 
 const availableSocialProviders = {
   google: {
@@ -114,19 +139,22 @@ const availableSocialProviders = {
     name: "Zoom",
     icon: SiZoom,
   },
-}
+};
 
-export function Auth({ setIsMagicLinkSent }: AuthProps) {
-  const [isLoginWithProviderPending, setIsLoginWithProviderPending] = useState<
-    null | SocialProvider
-  >(null);
+export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
+  const [isLoginWithProviderPending, setIsLoginWithProviderPending] =
+    useState<null | SocialProvider>(null);
+  const isCredentialsEnabled =
+    env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
   const [isLoginWithEmailPending, setIsLoginWithEmailPending] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
+  const { showPopup } = usePopup();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<FormValues>({
     resolver: zodResolver(EmailSchema),
   });
@@ -136,27 +164,67 @@ export function Auth({ setIsMagicLinkSent }: AuthProps) {
     queryFn: () => authClient.getSocialProviders(),
   });
 
-  const handleLoginWithEmail = async (email: string) => {
+  const handleLoginWithEmail = async (
+    email: string,
+    password?: string,
+    name?: string,
+  ) => {
     setIsLoginWithEmailPending(true);
     setLoginError(null);
-    const { error } = await authClient.signIn.magicLink({
-      email,
-      callbackURL: "/boards",
-    });
+    if (password) {
+      if (isSignUp && name) {
+        await authClient.signUp.email(
+          {
+            name,
+            email,
+            password,
+            callbackURL: "/boards",
+          },
+          {
+            onSuccess: () =>
+              showPopup({
+                header: "Success",
+                message: "You have been signed up successfully.",
+                icon: "success",
+              }),
+            onError: ({ error }) => setLoginError(error.message),
+          },
+        );
+      } else {
+        await authClient.signIn.email(
+          {
+            email,
+            password,
+            callbackURL: "/boards",
+          },
+          {
+            onSuccess: () =>
+              showPopup({
+                header: "Success",
+                message: "You have been logged in successfully.",
+                icon: "success",
+              }),
+            onError: ({ error }) => setLoginError(error.message),
+          },
+        );
+      }
+    } else {
+      await authClient.signIn.magicLink(
+        {
+          email,
+          callbackURL: "/boards",
+        },
+        {
+          onSuccess: () => setIsMagicLinkSent(true, email),
+          onError: ({ error }) => setLoginError(error.message),
+        },
+      );
+    }
 
     setIsLoginWithEmailPending(false);
-
-    if (error) {
-      setLoginError(
-        "Something went wrong, please try again later or contact customer support.",
-      );
-    } else {
-      setIsMagicLinkSent(true, email);
-    }
   };
 
-  const handleLoginWithProvider = async (
-    provider: SocialProvider) => {
+  const handleLoginWithProvider = async (provider: SocialProvider) => {
     setIsLoginWithProviderPending(provider);
     setLoginError(null);
     const { error } = await authClient.signIn.social({
@@ -174,8 +242,10 @@ export function Auth({ setIsMagicLinkSent }: AuthProps) {
   };
 
   const onSubmit = async (values: FormValues) => {
-    await handleLoginWithEmail(values.email);
+    await handleLoginWithEmail(values.email, values.password);
   };
+
+  const password = watch("password");
 
   return (
     <div className="space-y-6">
@@ -186,16 +256,17 @@ export function Auth({ setIsMagicLinkSent }: AuthProps) {
               return null;
             }
             return (
-            <Button
-              onClick={() => handleLoginWithProvider(key as SocialProvider)}
-              isLoading={isLoginWithProviderPending === key}
-              iconLeft={<provider.icon />}
-              fullWidth
-              size="lg"
-            >
-              Continue with {provider.name}
-            </Button>
-          )})}
+              <Button
+                onClick={() => handleLoginWithProvider(key as SocialProvider)}
+                isLoading={isLoginWithProviderPending === key}
+                iconLeft={<provider.icon />}
+                fullWidth
+                size="lg"
+              >
+                Continue with {provider.name}
+              </Button>
+            );
+          })}
         </div>
       )}
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -208,26 +279,60 @@ export function Auth({ setIsMagicLinkSent }: AuthProps) {
             <div className="h-[1px] w-full bg-light-600 dark:bg-dark-600" />
           </div>
         )}
-        <Input
-          {...register("email", { required: true })}
-          placeholder="Enter your email address"
-        />
-        {errors.email && (
-          <p className="mt-2 text-xs text-red-400">
-            Please enter a valid email address
-          </p>
-        )}
-        {loginError && (
-          <p className="mt-2 text-xs text-red-400">{loginError}</p>
-        )}
-        <div className="mt-[1.5rem]">
+        <div className="space-y-2">
+          {isSignUp && isCredentialsEnabled && (
+            <div>
+              <Input
+                {...register("name", { required: true })}
+                placeholder="Enter your name"
+              />
+              {errors.name && (
+                <p className="mt-2 text-xs text-red-400">
+                  Please enter a valid name
+                </p>
+              )}
+            </div>
+          )}
+          <div>
+            <Input
+              {...register("email", { required: true })}
+              placeholder="Enter your email address"
+            />
+            {errors.email && (
+              <p className="mt-2 text-xs text-red-400">
+                Please enter a valid email address
+              </p>
+            )}
+          </div>
+          {isCredentialsEnabled && (
+            <div>
+              <Input
+                type="password"
+                {...register("password", { required: true })}
+                placeholder="Enter your password"
+              />
+              {errors.password && (
+                <p className="mt-2 text-xs text-red-400">
+                  Please enter a valid password
+                </p>
+              )}
+            </div>
+          )}
+          {loginError && (
+            <p className="mt-2 text-xs text-red-400">{loginError}</p>
+          )}
+        </div>
+        <div className="mt-[1.5rem] flex items-center gap-4">
           <Button
             isLoading={isLoginWithEmailPending}
             fullWidth
             size="lg"
             variant="secondary"
           >
-            Continue with email
+            {isSignUp ? "Sign up with " : "Continue with "}
+            {!isCredentialsEnabled || (password && password.length !== 0)
+              ? "email"
+              : "magic link"}
           </Button>
         </div>
       </form>

@@ -160,7 +160,13 @@ export const initAuth = (db: dbClient) => {
     databaseHooks: {
       user: {
         create: {
-          async after(user, _context) {
+          before() {
+            if (env("NEXT_PUBLIC_DISABLE_SIGN_UP")?.toLowerCase() === "true") {
+              return Promise.resolve(false);
+            }
+            return Promise.resolve(true);
+          },
+          async after(user) {
             if (
               user.image &&
               !user.image.includes(process.env.NEXT_PUBLIC_STORAGE_DOMAIN!)
