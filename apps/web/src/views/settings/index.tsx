@@ -1,8 +1,16 @@
 import { useRouter } from "next/router";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
 import { useEffect, useRef, useState } from "react";
-import { HiBolt, HiMiniArrowTopRightOnSquare } from "react-icons/hi2";
+import {
+  HiBolt,
+  HiMiniArrowTopRightOnSquare,
+  HiOutlineBanknotes,
+  HiOutlineCodeBracketSquare,
+  HiOutlineRectangleGroup,
+  HiOutlineUser,
+} from "react-icons/hi2";
 
 import type { Subscription } from "@kan/shared/utils";
 import { hasActiveSubscription } from "@kan/shared/utils";
@@ -151,73 +159,26 @@ export default function SettingsPage() {
     }
   };
 
-  return (
-    <>
-      <div className="flex h-full w-full flex-col overflow-hidden">
-        <div
-          ref={scrollContainerRef}
-          className="h-full max-h-[calc(100vdh-3rem)] overflow-y-auto md:max-h-[calc(100vdh-4rem)]"
-        >
-          <PageHead title={t`Settings | ${workspace.name ?? "Workspace"}`} />
-          <div className="m-auto max-w-[1100px] px-5 py-6 md:px-28 md:py-12">
-            <div className="mb-8 flex w-full justify-between">
-              <h1 className="font-bold tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
-                {t`Settings`}
-              </h1>
-            </div>
+  const settingsTabs = [
+    {
+      key: "account",
+      icon: <HiOutlineUser />,
+      label: "Account",
+      condition: true,
+      content: () => (
+        <>
+          <PageHead title="Settings | Account" />
 
-            <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-                {t`Profile picture`}
-              </h2>
-              <Avatar userId={data?.id} userImage={data?.image} />
+          <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+            <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+              Profile picture
+            </h2>
+            <Avatar userId={data?.id} userImage={data?.image} />
 
-              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-                {t`Display name`}
-              </h2>
-              <UpdateDisplayNameForm displayName={data?.name ?? ""} />
-            </div>
-
-            <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-                {t`Workspace name`}
-              </h2>
-              <UpdateWorkspaceNameForm
-                workspacePublicId={workspace.publicId}
-                workspaceName={workspace.name}
-              />
-
-              <div ref={workspaceUrlSectionRef}>
-                <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-                  {t`Workspace URL`}
-                </h2>
-                <UpdateWorkspaceUrlForm
-                  workspacePublicId={workspace.publicId}
-                  workspaceUrl={workspace.slug ?? ""}
-                  workspacePlan={workspace.plan ?? "free"}
-                />
-              </div>
-
-              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-                {t`Workspace description`}
-              </h2>
-              <UpdateWorkspaceDescriptionForm
-                workspacePublicId={workspace.publicId}
-                workspaceDescription={workspace.description ?? ""}
-              />
-
-              {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
-                !hasActiveSubscription(subscriptions, "pro") && (
-                  <div className="mt-8">
-                    <Button
-                      onClick={() => openModal("UPGRADE_TO_PRO")}
-                      iconRight={<HiBolt />}
-                    >
-                      {t`Upgrade to Pro`}
-                    </Button>
-                  </div>
-                )}
-            </div>
+            <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+              Display name
+            </h2>
+            <UpdateDisplayNameForm displayName={data?.name ?? ""} />
 
             <div className="mb-8 border-t border-light-300 dark:border-dark-300">
               <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
@@ -228,84 +189,58 @@ export default function SettingsPage() {
               </p>
               <LanguageSelector />
             </div>
+          </div>
+        </>
+      ),
+    },
+    {
+      key: "workspace",
+      icon: <HiOutlineRectangleGroup />,
+      label: "Workspace",
+      condition: true,
+      content: () => (
+        <>
+          <PageHead title={`Settings | ${workspace.name ?? "Workspace"}`} />
 
-            {env("NEXT_PUBLIC_KAN_ENV") === "cloud" && (
-              <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-                <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-                  {t`Billing`}
-                </h2>
-                <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-                  {t`View and manage your billing and subscription.`}
-                </p>
-                <Button
-                  variant="primary"
-                  iconRight={<HiMiniArrowTopRightOnSquare />}
-                  onClick={handleOpenBillingPortal}
-                >
-                  {t`Billing portal`}
-                </Button>
-              </div>
-            )}
+          <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+            <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+              {t`Workspace name`}
+            </h2>
+            <UpdateWorkspaceNameForm
+              workspacePublicId={workspace.publicId}
+              workspaceName={workspace.name}
+            />
 
-            <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-                Trello
-              </h2>
-              {!integrations?.some(
-                (integration) => integration.provider === "trello",
-              ) && trelloUrl ? (
-                <>
-                  <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-                    {t`Connect your Trello account to import boards.`}
-                  </p>
+            <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+              {t`Workspace URL`}
+            </h2>
+            <UpdateWorkspaceUrlForm
+              workspacePublicId={workspace.publicId}
+              workspaceUrl={workspace.slug ?? ""}
+              workspacePlan={workspace.plan ?? "free"}
+            />
+
+            <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+              {t`Workspace description`}
+            </h2>
+            <UpdateWorkspaceDescriptionForm
+              workspacePublicId={workspace.publicId}
+              workspaceDescription={workspace.description ?? ""}
+            />
+
+            {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
+              !hasActiveSubscription(subscriptions, "pro") && (
+                <div className="mt-8">
                   <Button
-                    variant="primary"
-                    iconRight={<HiMiniArrowTopRightOnSquare />}
-                    onClick={() =>
-                      window.open(
-                        trelloUrl.url,
-                        "trello_auth",
-                        "height=800,width=600",
-                      )
-                    }
+                    onClick={() => openModal("UPGRADE_TO_PRO")}
+                    iconRight={<HiBolt />}
                   >
-                    {t`Connect Trello`}
+                    {t`Upgrade to Pro`}
                   </Button>
-                </>
-              ) : (
-                integrations?.some(
-                  (integration) => integration.provider === "trello",
-                ) && (
-                  <>
-                    <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-                      {t`Your Trello account is connected.`}
-                    </p>
-                    <Button
-                      variant="secondary"
-                      onClick={() => disconnectTrello({ provider: "trello" })}
-                    >
-                      {t`Disconnect Trello`}
-                    </Button>
-                  </>
-                )
+                </div>
               )}
-            </div>
-
-            <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-                {t`API keys`}
-              </h2>
-              <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-                {t`View and manage your API keys.`}
-              </p>
-              <CreateAPIKeyForm
-                apiKey={data?.apiKey}
-                refetchUser={refetchUser}
-              />
-            </div>
-
-            <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+            <div className="border-t border-light-300 dark:border-dark-300">
+              <h2 className="mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
                 {t`Delete workspace`}
               </h2>
               <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
@@ -358,55 +293,198 @@ export default function SettingsPage() {
               </div>
             </div>
           </div>
+        </>
+      ),
+    },
+    {
+      key: "billing",
+      label: "Billing",
+      icon: <HiOutlineBanknotes />,
+      condition: env("NEXT_PUBLIC_KAN_ENV") === "cloud",
+      content: () => (
+        <>
+          <PageHead title="Settings | Billing" />
 
-          <>
-            <Modal
-              modalSize="md"
-              isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
+          <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+            <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+              Billing
+            </h2>
+            <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+              View and manage your billing and subscription.
+            </p>
+            <Button
+              variant="primary"
+              iconRight={<HiMiniArrowTopRightOnSquare />}
+              onClick={handleOpenBillingPortal}
             >
-              <FeedbackModal />
-            </Modal>
+              Billing portal
+            </Button>
+          </div>
+        </>
+      ),
+    },
+    {
+      key: "api",
+      icon: <HiOutlineCodeBracketSquare />,
+      label: "API",
+      condition: true,
+      content: () => (
+        <>
+          <PageHead title="Settings | API" />
 
-            <Modal
-              modalSize="sm"
-              isVisible={isOpen && modalContentType === "NEW_WORKSPACE"}
-            >
-              <NewWorkspaceForm />
-            </Modal>
+          <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+            <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+              API keys
+            </h2>
+            <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+              View and manage your API keys.
+            </p>
+            <CreateAPIKeyForm apiKey={data?.apiKey} refetchUser={refetchUser} />
+          </div>
+        </>
+      ),
+    },
+    {
+      key: "integrations",
+      icon: <HiOutlineCodeBracketSquare />,
+      label: "Integrations",
+      condition: true,
+      content: () => (
+        <>
+          <PageHead title="Settings | Integrations" />
 
-            <Modal
-              modalSize="sm"
-              isVisible={isOpen && modalContentType === "DELETE_WORKSPACE"}
-            >
-              <DeleteWorkspaceConfirmation />
-            </Modal>
+          <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+            <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+              Trello
+            </h2>
+            {!integrations?.some(
+              (integration) => integration.provider === "trello",
+            ) && trelloUrl ? (
+              <>
+                <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+                  {t`Connect your Trello account to import boards.`}
+                </p>
+                <Button
+                  variant="primary"
+                  iconRight={<HiMiniArrowTopRightOnSquare />}
+                  onClick={() =>
+                    window.open(
+                      trelloUrl.url,
+                      "trello_auth",
+                      "height=800,width=600",
+                    )
+                  }
+                >
+                  {t`Connect Trello`}
+                </Button>
+              </>
+            ) : (
+              integrations?.some(
+                (integration) => integration.provider === "trello",
+              ) && (
+                <>
+                  <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+                    {t`Your Trello account is connected.`}
+                  </p>
+                  <Button
+                    variant="secondary"
+                    onClick={() => disconnectTrello({ provider: "trello" })}
+                  >
+                    {t`Disconnect Trello`}
+                  </Button>
+                </>
+              )
+            )}
+          </div>
+        </>
+      ),
+    },
+  ];
 
-            <Modal
-              modalSize="sm"
-              isVisible={isOpen && modalContentType === "UPGRADE_TO_PRO"}
-            >
-              <UpgradeToProConfirmation
-                userId={data?.id ?? ""}
-                workspacePublicId={workspace.publicId}
-              />
-            </Modal>
+  return (
+    <>
+      <div className="flex h-full w-full flex-col overflow-hidden">
+        <div
+          ref={scrollContainerRef}
+          className="h-full max-h-[calc(100vdh-3rem)] overflow-y-auto md:max-h-[calc(100vdh-4rem)]"
+        >
+          <PageHead title={t`Settings | ${workspace.name ?? "Workspace"}`} />
+          <div className="m-auto max-w-[1100px] px-5 py-6 md:px-28 md:py-12">
+            <div className="mb-8 flex w-full justify-between">
+              <h1 className="font-bold tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
+                {t`Settings`}
+              </h1>
+            </div>
 
-            <Modal
-              modalSize="sm"
-              isVisible={isOpen && modalContentType === "DELETE_ACCOUNT"}
-            >
-              <DeleteAccountConfirmation />
-            </Modal>
-
-            <Modal
-              modalSize="sm"
-              isVisible={isOpen && modalContentType === "CHANGE_PASSWORD"}
-            >
-              <ChangePasswordFormConfirmation />
-            </Modal>
-          </>
+            <TabGroup>
+              <TabList className="flex items-center">
+                {settingsTabs.map(
+                  (tab) =>
+                    tab.condition && (
+                      <Tab
+                        key={tab.key}
+                        className="focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white flex items-center gap-2 px-4 py-2 text-neutral-900 first:rounded-tl-md last:rounded-tr-md data-[headlessui-state=selected]:bg-black/10 hover:bg-black/5 dark:text-dark-1000 dark:data-[headlessui-state=selected]:bg-dark-400 dark:hover:bg-dark-200"
+                      >
+                        {tab.label}
+                      </Tab>
+                    ),
+                )}
+              </TabList>
+              <TabPanels>
+                {settingsTabs.map(
+                  (tab) =>
+                    tab.condition && (
+                      <TabPanel key={tab.key}>
+                        <tab.content />
+                      </TabPanel>
+                    ),
+                )}
+              </TabPanels>
+            </TabGroup>
+          </div>
         </div>
       </div>
+      <>
+        <Modal
+          modalSize="md"
+          isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
+        >
+          <FeedbackModal />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "NEW_WORKSPACE"}
+        >
+          <NewWorkspaceForm />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "DELETE_WORKSPACE"}
+        >
+          <DeleteWorkspaceConfirmation />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "UPGRADE_TO_PRO"}
+        >
+          <UpgradeToProConfirmation
+            userId={data?.id ?? ""}
+            workspacePublicId={workspace.publicId}
+          />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "DELETE_ACCOUNT"}
+        >
+          <DeleteAccountConfirmation />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "CHANGE_PASSWORD"}
+        >
+          <ChangePasswordFormConfirmation />
+        </Modal>
+      </>
     </>
   );
 }
