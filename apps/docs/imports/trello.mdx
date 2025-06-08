@@ -3,31 +3,25 @@ title: Trello
 description: "Import your Trello boards to Kan."
 ---
 
-## Getting your Trello API key and token
+## Authorizing Kan.bn for Trello
 
-Before you can import your Trello boards, you need to get your Trello API key and token. Follow these steps (only takes a couple of minutes):
+Before you can import your Trello boards, you need to authorize Kan.bn for Trello. Follow these steps (only takes a couple of minutes):
 
-1. **Sign in to your Trello account**  
-   Go to [https://trello.com](https://trello.com) and log in with your Trello account.
+1. **Authorize Kan.bn for Trello**
+   Go to [https://kan.bn/settings](https://kan.bn/settings) and click **Connect Trello**.
 
-2. **Create a new integration**  
-   Visit [https://trello.com/power-ups/admin](https://trello.com/power-ups/admin). Click **Create new** and fill in the following details:
+2. **Log in to your Trello account**
+   You will be redirected to Trello to log in to your Trello account.
 
-   - **Name**: Choose a name for your integration (e.g. "Kan Import")
-   - **Workspace**: Select the workspace containing the boards you want to import
-   - **Email**: Enter your email address
-   - **Support email**: Enter your email address
-   - **Author**: Add your name
+3. **Authorize Kan.bn for Trello**
+   Approve the permissions and you will be redirected back to Kan.bn.
 
-3. **Get a Trello API Key**  
-   Now click **Generate a new API key** to create an API key.
-
-4. **Generate a Trello Token**  
-   On the same page (to the right of the API key), click the link to **generate a Token**. Approve the permissions and copy your token (make sure to save it somewhere secure like a password manager).
+4. **Verify the connection**
+   You should see a **Disconnect Trello** button.
 
 ## Importing your Trello boards
 
-Once you have your API key and token, importing your Trello boards is easy. Follow these steps:
+Once you have authorized Kan.bn for Trello, importing your Trello boards is easy. Follow these steps:
 
 1. **Create a new import in Kan**  
    Navigate to **[https://kan.bn/boards](https://kan.dev/boards)** and click **Import**.
@@ -35,8 +29,5 @@ Once you have your API key and token, importing your Trello boards is easy. Foll
 2. **Select Trello as the Import Source**  
    Choose **Trello** from the list of import options and click **Select source**.
 
-3. **Enter Your Trello API Key and Token**  
-   Paste your API key and token into the provided fields and click **Fetch boards** (don't worry, we don't store your key or token).
-
-4. **Start the Import**  
+3. **Start the Import**  
    Select the board you want to import and click **Import boards**. Once the import is complete, you'll see your boards in Kan.
