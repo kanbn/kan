@@ -45,3 +45,15 @@ export const getProvidersForUser = async (db: dbClient, userId: string) => {
 
   return integration;
 };
+
+export const deleteProviderForUser = async (
+  db: dbClient,
+  userId: string,
+  provider: string,
+) => {
+  await db
+    .delete(integrations)
+    .where(
+      and(eq(integrations.userId, userId), eq(integrations.provider, provider)),
+    );
+};

@@ -1,393 +1,396 @@
-
-import { z } from "zod";
-import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { TRPCError } from "@trpc/server";
-import { TrelloBoard } from "./import";
 import { env } from "next-runtime-env";
-import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import * as importRepo from "@kan/db/repository/import.repo";
+import { z } from "zod";
+
 import * as boardRepo from "@kan/db/repository/board.repo";
-import * as labelRepo from "@kan/db/repository/label.repo";
-import * as listRepo from "@kan/db/repository/list.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
+import * as importRepo from "@kan/db/repository/import.repo";
+import * as integrationsRepo from "@kan/db/repository/integration.repo";
+import * as labelRepo from "@kan/db/repository/label.repo";
+import * as listRepo from "@kan/db/repository/list.repo";
+import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { colours } from "@kan/shared/constants";
 import { generateUID } from "@kan/shared/utils";
+
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
-import { eq } from "drizzle-orm";
-import { users } from "@kan/db/schema";
+import { TrelloBoard } from "./import";
 
 const TRELLO_API_URL = "https://api.trello.com/1";
 
 export const trelloRouter = createTRPCRouter({
-    disconnect: protectedProcedure
+  disconnect: protectedProcedure
     .meta({
-        openapi: {
-            summary: "Disconnect Trello",
-            method: "POST",
-            path: "/trello/disconnect",
-            description: "Disconnects Trello",
-            tags: ["Trello"],
-            protect: true,
-        },
+      openapi: {
+        summary: "Disconnect Trello",
+        method: "POST",
+        path: "/trello/disconnect",
+        description: "Disconnects Trello",
+        tags: ["Trello"],
+        protect: true,
+      },
     })
     .mutation(async ({ ctx }) => {
-        const user = ctx.user;
+      const user = ctx.user;
 
-        if (!user || !user.trelloConnected)
-            throw new TRPCError({
-                message: "User not authenticated",
-                code: "UNAUTHORIZED",
-            });
+      if (!user)
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
 
-        await ctx.db.update(users)
-        .set({
-            trelloToken: null,
-            trelloConnected: false,
-        })
-        .where(eq(users.id, user.id));
+      const integration = await integrationsRepo.getProviderForUser(
+        ctx.db,
+        user.id,
+        "trello",
+      );
 
-        return {};
+      if (!integration)
+        throw new TRPCError({
+          message: "Trello integration not found",
+          code: "UNAUTHORIZED",
+        });
+
+      await integrationsRepo.deleteProviderForUser(ctx.db, user.id, "trello");
+
+      return {};
     }),
-    getAuthorizationUrl: protectedProcedure
+  getAuthorizationUrl: protectedProcedure
     .meta({
-        openapi: {
-            summary: "Get authorization URL for Trello",
-            method: "GET",
-            path: "/trello/authorize",
-            description: "Retrieves the authorization URL for Trello",
-            tags: ["Trello"],
-            protect: true,
-        },
+      openapi: {
+        summary: "Get authorization URL for Trello",
+        method: "GET",
+        path: "/trello/authorize",
+        description: "Retrieves the authorization URL for Trello",
+        tags: ["Trello"],
+        protect: true,
+      },
     })
     .output(z.object({ url: z.string() }))
-    .query(({ ctx }) => {
-        const apiKey = process.env.TRELLO_APP_API_KEY;
+    .query(async ({ ctx }) => {
+      const apiKey = process.env.TRELLO_APP_API_KEY;
 
-        if (!apiKey)
-            throw new TRPCError({
-                message: "Trello API key not found",
-                code: "INTERNAL_SERVER_ERROR",
-            });
-        
-        const user = ctx.user;
+      if (!apiKey)
+        throw new TRPCError({
+          message: "Trello API key not found",
+          code: "INTERNAL_SERVER_ERROR",
+        });
 
-        if (!user)
-            throw new TRPCError({
-                message: "User not authenticated",
-                code: "UNAUTHORIZED",
-            });
-        
-        if (user.trelloConnected)
-            throw new TRPCError({
-                message: "User already has a Trello token",
-                code: "BAD_REQUEST",
-            });
+      const user = ctx.user;
 
-        const url = `${TRELLO_API_URL}/authorize?key=${apiKey}&expiration=never&response_type=token&scope=read&return_url=${env("NEXT_PUBLIC_BASE_URL")}/settings/trello/authorize&callback_method=fragment`;
+      if (!user)
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
 
-        return { url };
+      const integration = await integrationsRepo.getProviderForUser(
+        ctx.db,
+        user.id,
+        "trello",
+      );
+
+      if (integration)
+        throw new TRPCError({
+          message: "Trello integration already exists",
+          code: "BAD_REQUEST",
+        });
+
+      const url = `${TRELLO_API_URL}/authorize?key=${apiKey}&expiration=never&response_type=token&scope=read&return_url=${env("NEXT_PUBLIC_BASE_URL")}/settings/trello/authorize&callback_method=fragment`;
+
+      return { url };
     }),
-    getBoards: protectedProcedure
+  getBoards: protectedProcedure
     .meta({
-        openapi: {
-            summary: "Get boards from Trello",
-            method: "GET",
-            path: "/trello/boards",
-            description: "Retrieves all boards from Trello",
-            tags: ["Trello"],
-            protect: true,
-        },
+      openapi: {
+        summary: "Get boards from Trello",
+        method: "GET",
+        path: "/trello/boards",
+        description: "Retrieves all boards from Trello",
+        tags: ["Trello"],
+        protect: true,
+      },
     })
     .output(z.array(z.object({ id: z.string(), name: z.string() })))
     .query(async ({ ctx }) => {
-        const apiKey = process.env.TRELLO_APP_API_KEY;
+      const apiKey = process.env.TRELLO_APP_API_KEY;
 
-        if (!apiKey)
-            throw new TRPCError({
-                message: "Trello API key not found",
-                code: "INTERNAL_SERVER_ERROR",
-            });
-        
-        const user = ctx.user;
-
-        if (!user)
-            throw new TRPCError({
-                message: "User not authenticated",
-                code: "UNAUTHORIZED",
-            });
-
-        const userWithToken = await ctx.db.query.users.findFirst({
-            where: (users, { eq }) => eq(users.id, user.id),
-            columns: {
-                trelloToken: true,
-            }
+      if (!apiKey)
+        throw new TRPCError({
+          message: "Trello API key not found",
+          code: "INTERNAL_SERVER_ERROR",
         });
 
-        const token = userWithToken?.trelloToken;
+      const user = ctx.user;
 
-        if (!token)
-            throw new TRPCError({
-                message: "Trello token not found",
-                code: "UNAUTHORIZED",
-            });
+      if (!user)
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
 
-        const response = await fetch(
-            `${TRELLO_API_URL}/members/me/boards?key=${apiKey}&token=${token}`,
-        );
+      const integration = await integrationsRepo.getProviderForUser(
+        ctx.db,
+        user.id,
+        "trello",
+      );
 
-        const data = (await response.json()) as TrelloBoard[];
+      const token = integration?.accessToken;
 
-        return data.map((board) => ({
-            id: board.id,
-            name: board.name,
-        }));
+      if (!token)
+        throw new TRPCError({
+          message: "Trello token not found",
+          code: "UNAUTHORIZED",
+        });
+
+      const response = await fetch(
+        `${TRELLO_API_URL}/members/me/boards?key=${apiKey}&token=${token}`,
+      );
+
+      const data = (await response.json()) as TrelloBoard[];
+
+      return data.map((board) => ({
+        id: board.id,
+        name: board.name,
+      }));
     }),
-    importBoards: protectedProcedure
+  importBoards: protectedProcedure
     .meta({
-        openapi: {
-            summary: "Import boards from Trello",
-            method: "POST",
-            path: "/trello/import",
-            description: "Imports boards from Trello",
-            tags: ["Trello"],
-            protect: true,
-        },
+      openapi: {
+        summary: "Import boards from Trello",
+        method: "POST",
+        path: "/trello/import",
+        description: "Imports boards from Trello",
+        tags: ["Trello"],
+        protect: true,
+      },
     })
     .input(
-        z.object({
-            boardIds: z.array(z.string()),
-            workspacePublicId: z.string().min(12),
-        }),
+      z.object({
+        boardIds: z.array(z.string()),
+        workspacePublicId: z.string().min(12),
+      }),
     )
     .output(z.object({ boardsCreated: z.number() }))
     .mutation(async ({ ctx, input }) => {
-        const userId = ctx.user?.id;
+      const userId = ctx.user?.id;
 
-        const apiKey = process.env.TRELLO_APP_API_KEY;
+      const apiKey = process.env.TRELLO_APP_API_KEY;
 
-        if (!apiKey)
-            throw new TRPCError({
-                message: "Trello API key not found",
-                code: "INTERNAL_SERVER_ERROR",
-            });
-
-        if (!userId)
-            throw new TRPCError({
-                message: `User not authenticated`,
-                code: "UNAUTHORIZED",
-            });
-
-        const userWithToken = await ctx.db.query.users.findFirst({
-            where: (users, { eq }) => eq(users.id, userId),
-            columns: {
-                trelloToken: true,
-            }
+      if (!apiKey)
+        throw new TRPCError({
+          message: "Trello API key not found",
+          code: "INTERNAL_SERVER_ERROR",
         });
 
-        if (!userWithToken)
-            throw new TRPCError({
-                message: `User with ID ${userId} not found`,
-                code: "NOT_FOUND",
-            });
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
 
-        const token = userWithToken?.trelloToken;
+      const integration = await integrationsRepo.getProviderForUser(
+        ctx.db,
+        userId,
+        "trello",
+      );
 
-        if (!token)
-            throw new TRPCError({
-                message: "Trello token not found",
-                code: "UNAUTHORIZED",
-            });
+      if (!integration)
+        throw new TRPCError({
+          message: "Trello token not found",
+          code: "UNAUTHORIZED",
+        });
 
-        const workspace = await workspaceRepo.getByPublicId(
-            ctx.db,
-            input.workspacePublicId,
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace)
+        throw new TRPCError({
+          message: `Workspace with public ID ${input.workspacePublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+
+      const newImport = await importRepo.create(ctx.db, {
+        source: "trello",
+        createdBy: userId,
+      });
+
+      const newImportId = newImport?.id;
+
+      let boardsCreated = 0;
+
+      for (const boardId of input.boardIds) {
+        const response = await fetch(
+          `${TRELLO_API_URL}/boards/${boardId}?key=${apiKey}&token=${integration.accessToken}&lists=open&cards=open&labels=all`,
         );
+        const data = (await response.json()) as TrelloBoard;
 
-        if (!workspace)
-            throw new TRPCError({
-            message: `Workspace with public ID ${input.workspacePublicId} not found`,
-            code: "NOT_FOUND",
-            });
+        const formattedData = {
+          name: data.name,
+          labels: data.labels
+            .map((label) => ({
+              sourceId: label.id,
+              name: label.name,
+            }))
+            .filter((_label) => !!_label.name),
+          lists: data.lists.map((list) => ({
+            name: list.name,
+            cards: data.cards
+              .filter((card) => card.idList === list.id)
+              .map((_card) => ({
+                sourceId: _card.id,
+                name: _card.name,
+                description: _card.desc,
+                labels: _card.labels.map((label) => ({
+                  sourceId: label.id,
+                  name: label.name,
+                })),
+              })),
+          })),
+        };
 
-        await assertUserInWorkspace(ctx.db, userId, workspace.id);
+        const boardPublicId = generateUID();
 
-        const newImport = await importRepo.create(ctx.db, {
-            source: "trello",
-            createdBy: userId,
+        const newBoard = await boardRepo.create(ctx.db, {
+          publicId: boardPublicId,
+          name: formattedData.name,
+          slug: boardPublicId,
+          createdBy: userId,
+          importId: newImportId,
+          workspaceId: workspace.id,
         });
 
-        const newImportId = newImport?.id;
+        const newBoardId = newBoard?.id;
 
-        let boardsCreated = 0;
+        if (!newBoardId)
+          throw new TRPCError({
+            message: "Failed to create new board",
+            code: "INTERNAL_SERVER_ERROR",
+          });
 
-        for (const boardId of input.boardIds) {
-            const response = await fetch(
-            `${TRELLO_API_URL}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&labels=all`,
-            );
-            const data = (await response.json()) as TrelloBoard;
+        let createdLabels: { id: number; sourceId: string }[] = [];
+        let createdCards: { id: number; sourceId: string }[] = [];
 
-            const formattedData = {
-            name: data.name,
-            labels: data.labels
-                .map((label) => ({
-                sourceId: label.id,
-                name: label.name,
-                }))
-                .filter((_label) => !!_label.name),
-            lists: data.lists.map((list) => ({
-                name: list.name,
-                cards: data.cards
-                .filter((card) => card.idList === list.id)
-                .map((_card) => ({
-                    sourceId: _card.id,
-                    name: _card.name,
-                    description: _card.desc,
-                    labels: _card.labels.map((label) => ({
-                    sourceId: label.id,
-                    name: label.name,
-                    })),
-                })),
-            })),
-            };
-
-            const boardPublicId = generateUID();
-
-            const newBoard = await boardRepo.create(ctx.db, {
-            publicId: boardPublicId,
-            name: formattedData.name,
-            slug: boardPublicId,
+        if (formattedData.labels.length) {
+          const labelsInsert = formattedData.labels.map((label, index) => ({
+            publicId: generateUID(),
+            name: label.name,
+            colourCode: colours[index % colours.length]?.code ?? "#0d9488",
             createdBy: userId,
+            boardId: newBoardId,
             importId: newImportId,
-            workspaceId: workspace.id,
-            });
+          }));
 
-            const newBoardId = newBoard?.id;
+          const newLabels = await labelRepo.bulkCreate(ctx.db, labelsInsert);
 
-            if (!newBoardId)
-            throw new TRPCError({
-                message: "Failed to create new board",
-                code: "INTERNAL_SERVER_ERROR",
-            });
+          if (newLabels.length)
+            createdLabels = newLabels
+              .map((label, index) => ({
+                id: label.id,
+                sourceId: formattedData.labels[index]?.sourceId ?? "",
+              }))
+              .filter((label) => !!label.sourceId);
+        }
 
-            let createdLabels: { id: number; sourceId: string }[] = [];
-            let createdCards: { id: number; sourceId: string }[] = [];
+        for (const list of formattedData.lists) {
+          const newList = await listRepo.create(ctx.db, {
+            name: list.name,
+            createdBy: userId,
+            boardId: newBoardId,
+            importId: newImportId,
+          });
 
-            if (formattedData.labels.length) {
-            const labelsInsert = formattedData.labels.map((label, index) => ({
-                publicId: generateUID(),
-                name: label.name,
-                colourCode: colours[index % colours.length]?.code ?? "#0d9488",
-                createdBy: userId,
-                boardId: newBoardId,
-                importId: newImportId,
+          const newListId = newList.id;
+
+          if (list.cards.length && newListId) {
+            const cardsInsert = list.cards.map((card, index) => ({
+              publicId: generateUID(),
+              title: card.name,
+              description: card.description,
+              createdBy: userId,
+              listId: newListId,
+              index,
+              importId: newImportId,
             }));
 
-            const newLabels = await labelRepo.bulkCreate(ctx.db, labelsInsert);
+            const newCards = await cardRepo.bulkCreate(ctx.db, cardsInsert);
 
-            if (newLabels.length)
-                createdLabels = newLabels
-                .map((label, index) => ({
-                    id: label.id,
-                    sourceId: formattedData.labels[index]?.sourceId ?? "",
+            if (!newCards.length)
+              throw new TRPCError({
+                message: "Failed to create new cards",
+                code: "INTERNAL_SERVER_ERROR",
+              });
+
+            createdCards = createdCards.concat(
+              newCards
+                .map((card, index) => ({
+                  id: card.id,
+                  sourceId: list.cards[index]?.sourceId ?? "",
                 }))
-                .filter((label) => !!label.sourceId);
+                .filter((card) => !!card.sourceId),
+            );
+
+            const activities = newCards.map((card) => ({
+              type: "card.created" as const,
+              cardId: card.id,
+              createdBy: userId,
+            }));
+
+            if (newCards.length > 0) {
+              await cardActivityRepo.bulkCreate(ctx.db, activities);
             }
 
-            for (const list of formattedData.lists) {
-            const newList = await listRepo.create(ctx.db, {
-                name: list.name,
-                createdBy: userId,
-                boardId: newBoardId,
-                importId: newImportId,
-            });
+            if (createdLabels.length && createdCards.length) {
+              const cardLabelRelations: {
+                cardId: number;
+                labelId: number;
+              }[] = [];
 
-            const newListId = newList.id;
-
-            if (list.cards.length && newListId) {
-                const cardsInsert = list.cards.map((card, index) => ({
-                publicId: generateUID(),
-                title: card.name,
-                description: card.description,
-                createdBy: userId,
-                listId: newListId,
-                index,
-                importId: newImportId,
-                }));
-
-                const newCards = await cardRepo.bulkCreate(ctx.db, cardsInsert);
-
-                if (!newCards.length)
-                throw new TRPCError({
-                    message: "Failed to create new cards",
-                    code: "INTERNAL_SERVER_ERROR",
-                });
-
-                createdCards = createdCards.concat(
-                newCards
-                    .map((card, index) => ({
-                    id: card.id,
-                    sourceId: list.cards[index]?.sourceId ?? "",
-                    }))
-                    .filter((card) => !!card.sourceId),
+              for (const card of list.cards) {
+                const _card = createdCards.find(
+                  (c) => c.sourceId === card.sourceId,
                 );
 
-                const activities = newCards.map((card) => ({
-                type: "card.created" as const,
-                cardId: card.id,
-                createdBy: userId,
-                }));
+                for (const label of card.labels) {
+                  const _label = createdLabels.find(
+                    (l) => l.sourceId === label.sourceId,
+                  );
 
-                if (newCards.length > 0) {
-                await cardActivityRepo.bulkCreate(ctx.db, activities);
+                  if (_card && _label) {
+                    cardLabelRelations.push({
+                      cardId: _card.id,
+                      labelId: _label.id,
+                    });
+                  }
                 }
+              }
 
-                if (createdLabels.length && createdCards.length) {
-                const cardLabelRelations: {
-                    cardId: number;
-                    labelId: number;
-                }[] = [];
-
-                for (const card of list.cards) {
-                    const _card = createdCards.find(
-                    (c) => c.sourceId === card.sourceId,
-                    );
-
-                    for (const label of card.labels) {
-                    const _label = createdLabels.find(
-                        (l) => l.sourceId === label.sourceId,
-                    );
-
-                    if (_card && _label) {
-                        cardLabelRelations.push({
-                        cardId: _card.id,
-                        labelId: _label.id,
-                        });
-                    }
-                    }
-                }
-
-                if (cardLabelRelations.length) {
-                    await cardRepo.bulkCreateCardLabelRelationship(
-                    ctx.db,
-                    cardLabelRelations,
-                    );
-                }
-                }
+              if (cardLabelRelations.length) {
+                await cardRepo.bulkCreateCardLabelRelationship(
+                  ctx.db,
+                  cardLabelRelations,
+                );
+              }
             }
-            }
-
-            boardsCreated++;
+          }
         }
 
-        if (boardsCreated > 0 && newImportId) {
-            await importRepo.update(
-            ctx.db,
-            { status: "success" },
-            { importId: newImport.id },
-            );
-        }
+        boardsCreated++;
+      }
 
-        return { boardsCreated };
+      if (boardsCreated > 0 && newImportId) {
+        await importRepo.update(
+          ctx.db,
+          { status: "success" },
+          { importId: newImport.id },
+        );
+      }
+
+      return { boardsCreated };
     }),
 });

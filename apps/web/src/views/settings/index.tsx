@@ -16,7 +16,6 @@ import UpdateDisplayNameForm from "./components/UpdateDisplayNameForm";
 import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescriptionForm";
 import UpdateWorkspaceNameForm from "./components/UpdateWorkspaceNameForm";
 import UpdateWorkspaceUrlForm from "./components/UpdateWorkspaceUrlForm";
-import { authClient } from "@kan/auth/client";
 import { usePopup } from "~/providers/popup";
 import { useEffect } from "react";
 
@@ -28,30 +27,30 @@ export default function SettingsPage() {
 
   const { data } = api.user.getUser.useQuery();
 
-  const { data: session, refetch: refetchSession } = authClient.useSession();
-  const { data: trelloUrl } = api.trello.getAuthorizationUrl.useQuery(
+  const { data: integrations, refetch: refetchIntegrations } = api.integration.providers.useQuery();
+  const { data: trelloUrl, refetch: refetchTrelloUrl } = api.trello.getAuthorizationUrl.useQuery(
     undefined,
     {
-      enabled: session?.user.trelloConnected === false,
+      enabled: integrations?.some((integration) => integration.provider === "trello") === false,
       refetchOnWindowFocus: true,
     },
   );
 
   useEffect(() => {
     const handleFocus = () => {
-      refetchSession();
+      refetchIntegrations();
     };
     window.addEventListener("focus", handleFocus);
     return () => {
       window.removeEventListener("focus", handleFocus);
     };
-  }, [refetchSession]);
+  }, [refetchIntegrations]);
 
   const { mutateAsync: disconnectTrello } = api.trello.disconnect.useMutation({
     onSuccess: () => {
       refetchUser();
-      refetchSession();
-      utils.trello.getAuthorizationUrl.refetch();
+      refetchIntegrations();
+      refetchTrelloUrl();
       showPopup({
         header: "Trello disconnected",
         message: "Your Trello account has been disconnected.",
@@ -161,7 +160,7 @@ export default function SettingsPage() {
               <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
                 Trello
               </h2>
-              {!session?.user.trelloConnected && trelloUrl ? (<>
+              {!integrations?.some((integration) => integration.provider === "trello") && trelloUrl ? (<>
                 <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
                   Connect your Trello account to import boards.
                 </p>
