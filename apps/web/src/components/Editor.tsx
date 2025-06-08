@@ -1,3 +1,9 @@
+import type { Editor as TiptapEditor } from "@tiptap/react";
+import type {
+  SuggestionKeyDownProps,
+  SuggestionOptions,
+} from "@tiptap/suggestion";
+import type { Instance as TippyInstance } from "tippy.js";
 import { Button } from "@headlessui/react";
 import Placeholder from "@tiptap/extension-placeholder";
 import {
@@ -5,15 +11,11 @@ import {
   EditorContent,
   Extension,
   ReactRenderer,
-  Editor as TiptapEditor,
   useEditor,
 } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Suggestion, {
-  SuggestionKeyDownProps,
-  SuggestionOptions,
-} from "@tiptap/suggestion";
-import { useRef } from "react";
+import Suggestion from "@tiptap/suggestion";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import {
   HiH1,
   HiH2,
@@ -28,7 +30,7 @@ import {
   HiOutlineStrikethrough,
 } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
-import tippy, { Instance as TippyInstance } from "tippy.js";
+import tippy from "tippy.js";
 
 declare module "@tiptap/core" {
   interface Commands<ReturnType> {
@@ -64,28 +66,65 @@ export interface RenderSuggestionsProps {
   command: (item: SlashCommandItem) => void;
 }
 
-const CommandsList = ({
-  items,
-  command,
-}: {
-  items: SlashCommandItem[];
-  command: (item: SlashCommandItem) => void;
-}) => {
+const CommandsList = forwardRef<
+  { onKeyDown: (props: SuggestionKeyDownProps) => boolean },
+  {
+    items: SlashCommandItem[];
+    command: (item: SlashCommandItem) => void;
+  }
+>(({ items, command }, ref) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  useImperativeHandle(ref, () => ({
+    onKeyDown: ({ event }: SuggestionKeyDownProps) => {
+      if (event.key === "ArrowUp") {
+        setSelectedIndex((selectedIndex + items.length - 1) % items.length);
+        return true;
+      }
+
+      if (event.key === "ArrowDown") {
+        setSelectedIndex((selectedIndex + 1) % items.length);
+        return true;
+      }
+
+      if (event.key === "Enter") {
+        const item = items[selectedIndex];
+        if (item) {
+          command(item);
+        }
+        return true;
+      }
+
+      return false;
+    },
+  }));
+
   return (
-    <div className="flex flex-col rounded-md bg-light-50 dark:bg-dark-50">
-      {items.map((item) => (
-        <Button key={item.title} onClick={() => command(item)}>
-          <div className="group flex items-center rounded-[5px] p-2 text-dark-900 hover:bg-light-200 dark:text-dark-1000 dark:hover:bg-dark-300">
-            {item.icon}
-            <label htmlFor={item.title} className="ml-3 text-[12px]">
+    <div className="w-56 rounded-md border-[1px] border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-500 dark:bg-dark-200">
+      <div className="max-h-[350px] overflow-y-auto p-1">
+        {items.map((item, index) => (
+          <button
+            key={item.title}
+            onClick={() => command(item)}
+            className={twMerge(
+              "group flex w-full items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300",
+              index === selectedIndex && "bg-light-200 dark:bg-dark-300",
+            )}
+          >
+            <span className="text-dark-700 dark:text-dark-800">
+              {item.icon}
+            </span>
+            <span className="ml-3 text-[12px] font-medium text-dark-900 dark:text-dark-1000">
               {item.title}
-            </label>
-          </div>
-        </Button>
-      ))}
+            </span>
+          </button>
+        ))}
+      </div>
     </div>
   );
-};
+});
+
+CommandsList.displayName = "CommandsList";
 
 const RenderSuggestions = () => {
   let reactRenderer: ReactRenderer;
@@ -125,7 +164,13 @@ const RenderSuggestions = () => {
         return true;
       }
 
-      return (reactRenderer.ref as any)?.onKeyDown(props);
+      return (
+        (
+          reactRenderer.ref as {
+            onKeyDown?: (props: SuggestionKeyDownProps) => boolean;
+          }
+        ).onKeyDown?.(props) ?? false
+      );
     },
     onExit() {
       popup[0]?.destroy();
@@ -164,7 +209,7 @@ const SlashCommands = Extension.create<SlashCommandsOptions>({
               if (props.event.key === "Escape") {
                 return true;
               }
-              return component.onKeyDown?.(props) ?? false;
+              return component.onKeyDown(props) ?? false;
             },
             onExit: () => {
               component.onExit();
@@ -250,7 +295,9 @@ export default function Editor({
       extensions: [
         StarterKit,
         Placeholder.configure({
-          placeholder: readOnly ? "" : "Type '/' to open commands ...",
+          placeholder: readOnly
+            ? ""
+            : "Add a description... (type '/' to open commands)",
         }),
         SlashCommands.configure({
           commandItems: CommandItems,
@@ -301,7 +348,7 @@ export default function Editor({
       {!readOnly && editor && <EditorBubbleMenu editor={editor} />}
       <EditorContent
         editor={editor}
-        className="prose dark:prose-invert prose-sm sm:prose lg:prose-lg xl:prose-2xl max-w-none [&_p]:text-black [&_p]:dark:text-white"
+        className="prose dark:prose-invert prose-sm max-w-none [&_p]:text-black [&_p]:dark:text-white"
       />
     </div>
   );
@@ -347,11 +394,18 @@ function EditorBubbleMenu({ editor }: { editor: TiptapEditor | null }) {
           <Button
             key={item.title}
             className={twMerge(
-              "text-light-900 dark:text-dark-900",
+              "rounded p-1 text-light-900 focus:ring-2 focus:ring-light-600 dark:text-dark-900 dark:focus:ring-dark-600",
               item.active && "bg-light-100 dark:bg-dark-400",
             )}
             title={`${item.title} [${item.keys.join(" + ").replace("meta", isMac ? "⌘" : "ctrl")}]`}
             onClick={item.onClick}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                item.onClick();
+              }
+            }}
           >
             {item.icon}
           </Button>
