@@ -32,6 +32,10 @@ const config = {
         hostname: `*.${env("NEXT_PUBLIC_STORAGE_DOMAIN")}`,
       },
       {
+        protocol: "http",
+        hostname: "localhost",
+      },
+      {
         protocol: "https",
         hostname: "*.googleusercontent.com",
       },
