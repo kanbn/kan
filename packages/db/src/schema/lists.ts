@@ -36,18 +36,22 @@ export const listsRelations = relations(lists, ({ one, many }) => ({
   createdBy: one(users, {
     fields: [lists.createdBy],
     references: [users.id],
+    relationName: "listsCreatedByUser",
   }),
   board: one(boards, {
     fields: [lists.boardId],
     references: [boards.id],
+    relationName: "listsBoard",
   }),
   cards: many(cards),
   deletedBy: one(users, {
     fields: [lists.deletedBy],
     references: [users.id],
+    relationName: "listsDeletedByUser",
   }),
   import: one(imports, {
     fields: [lists.importId],
     references: [imports.id],
+    relationName: "listsImport",
   }),
 }));

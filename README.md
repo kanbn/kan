@@ -108,15 +108,15 @@ pnpm dev
 | Variable                         | Description                   | Required           | Example                                       |
 | -------------------------------- | ----------------------------- | ------------------ | --------------------------------------------- |
 | `POSTGRES_URL`                   | PostgreSQL connection URL     | Yes                | `postgres://user:pass@localhost:5432/db`      |
-| `EMAIL_FROM`                     | Sender email address          | Yes                | `"Kan <hello@mail.kan.bn>"`                   |
-| `SMTP_HOST`                      | SMTP server hostname          | Yes                | `smtp.resend.com`                             |
-| `SMTP_PORT`                      | SMTP server port              | Yes                | `465`                                         |
-| `SMTP_USER`                      | SMTP username/email           | Yes                | `resend`                                      |
-| `SMTP_PASSWORD`                  | SMTP password/token           | Yes                | `re_xxxx`                                     |
+| `EMAIL_FROM`                     | Sender email address          | For Email          | `"Kan <hello@mail.kan.bn>"`                   |
+| `SMTP_HOST`                      | SMTP server hostname          | For Email          | `smtp.resend.com`                             |
+| `SMTP_PORT`                      | SMTP server port              | For Email          | `465`                                         |
+| `SMTP_USER`                      | SMTP username/email           | For Email          | `resend`                                      |
+| `SMTP_PASSWORD`                  | SMTP password/token           | For Email          | `re_xxxx`                                     |
 | `NEXT_PUBLIC_BASE_URL`           | Base URL of your installation | Yes                | `http://localhost:3000`                       |
 | `BETTER_AUTH_SECRET`             | Auth encryption secret        | Yes                | Random 32+ char string                        |
 | `BETTER_AUTH_URL`                | Auth callback URL             | Yes                | Same as `NEXT_PUBLIC_BASE_URL`                |
-| `BETTER_AUTH_TRUSTED_ORIGINS`    | Allowed callback origins      | For Google login   | `http://localhost:3000,http://localhost:3001` |
+| `BETTER_AUTH_TRUSTED_ORIGINS`    | Allowed callback origins      | Yes                | `http://localhost:3000,http://localhost:3001` |
 | `GOOGLE_CLIENT_ID`               | Google OAuth client ID        | For Google login   | `xxx.apps.googleusercontent.com`              |
 | `GOOGLE_CLIENT_SECRET`           | Google OAuth client secret    | For Google login   | `xxx`                                         |
 | `DISCORD_CLIENT_ID`              | Discord OAuth client ID       | For Discord login  | `xxx`                                         |

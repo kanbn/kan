@@ -81,5 +81,6 @@ export const apiKeyRelations = relations(apikey, ({ one }) => ({
   user: one(users, {
     fields: [apikey.userId],
     references: [users.id],
+    relationName: "apiKeyUser",
   }),
 }));

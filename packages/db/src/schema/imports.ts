@@ -36,6 +36,7 @@ export const importsRelations = relations(imports, ({ one, many }) => ({
   createdBy: one(users, {
     fields: [imports.createdBy],
     references: [users.id],
+    relationName: "importsCreatedByUser",
   }),
   boards: many(boards),
   cards: many(cards),
