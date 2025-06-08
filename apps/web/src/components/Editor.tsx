@@ -1,15 +1,13 @@
-import type { ButtonProps } from "@headlessui/react";
 import type { Editor as TiptapEditor } from "@tiptap/react";
 import { Button } from "@headlessui/react";
-import { EditorContent, useEditor } from "@tiptap/react";
+import Placeholder from "@tiptap/extension-placeholder";
+import { BubbleMenu, EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useRef } from "react";
 import {
   HiH1,
   HiH2,
   HiH3,
-  HiOutlineArrowUturnLeft,
-  HiOutlineArrowUturnRight,
   HiOutlineBold,
   HiOutlineChatBubbleLeftEllipsis,
   HiOutlineCodeBracket,
@@ -32,16 +30,21 @@ export default function Editor({
   onBlur: () => void;
   readOnly?: boolean;
 }) {
-  const menuRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const editor = useEditor(
     {
-      extensions: [StarterKit],
+      extensions: [
+        StarterKit,
+        Placeholder.configure({
+          placeholder: readOnly ? "" : "Type something...",
+        }),
+      ],
       content,
       onUpdate: ({ editor }) => onChange(editor.getHTML()),
       onBlur: ({ event }) => {
         // Only trigger onBlur if the click was outside both the editor and menu
-        if (!menuRef.current?.contains(event.relatedTarget as Node)) {
+        if (!containerRef.current?.contains(event.relatedTarget as Node)) {
           onBlur();
         }
       },
@@ -57,71 +60,18 @@ export default function Editor({
   );
 
   return (
-    <>
-      {!readOnly && <EditorMenu editor={editor} menuRef={menuRef} />}
+    <div ref={containerRef}>
+      {!readOnly && editor && <EditorBubbleMenu editor={editor} />}
       <EditorContent
         editor={editor}
         className="prose prose-invert prose-sm sm:prose lg:prose-lg xl:prose-2xl max-w-none"
       />
-    </>
+    </div>
   );
 }
 
-function EditorMenu({
-  editor,
-  menuRef,
-}: {
-  editor: TiptapEditor | null;
-  menuRef: React.RefObject<HTMLDivElement>;
-}) {
-  const MenuItems = [
-    {
-      name: "undo",
-      icon: HiOutlineArrowUturnLeft,
-      onClick: () => editor?.chain().focus().undo().run(),
-      disabled: !editor?.can().undo(),
-    },
-    {
-      name: "redo",
-      icon: HiOutlineArrowUturnRight,
-      onClick: () => editor?.chain().focus().redo().run(),
-      disabled: !editor?.can().redo(),
-    },
-    {
-      name: "bold",
-      icon: HiOutlineBold,
-      onClick: () => editor?.chain().focus().toggleBold().run(),
-      disabled: !editor?.can().toggleBold(),
-      active: editor?.isActive("bold"),
-    },
-    {
-      name: "italic",
-      icon: HiOutlineItalic,
-      onClick: () => editor?.chain().focus().toggleItalic().run(),
-      disabled: !editor?.can().toggleItalic(),
-      active: editor?.isActive("italic"),
-    },
-    {
-      name: "strikethrough",
-      icon: HiOutlineStrikethrough,
-      onClick: () => editor?.chain().focus().toggleStrike().run(),
-      disabled: !editor?.can().toggleStrike(),
-      active: editor?.isActive("strike"),
-    },
-    {
-      name: "code",
-      icon: HiOutlineCodeBracket,
-      onClick: () => editor?.chain().focus().toggleCode().run(),
-      disabled: !editor?.can().toggleCode(),
-      active: editor?.isActive("code"),
-    },
-    {
-      name: "code-block",
-      icon: HiOutlineCodeBracketSquare,
-      onClick: () => editor?.chain().focus().toggleCodeBlock().run(),
-      disabled: !editor?.can().toggleCodeBlock(),
-      active: editor?.isActive("codeBlock"),
-    },
+function EditorSlashMenu({ editor }: { editor: TiptapEditor | null }) {
+  const slashMenuItems = [
     {
       name: "h1",
       icon: HiH1,
@@ -164,37 +114,68 @@ function EditorMenu({
       disabled: !editor?.can().toggleBlockquote(),
       active: editor?.isActive("blockquote"),
     },
+    {
+      name: "code-block",
+      icon: HiOutlineCodeBracketSquare,
+      onClick: () => editor?.chain().focus().toggleCodeBlock().run(),
+      disabled: !editor?.can().toggleCodeBlock(),
+      active: editor?.isActive("codeBlock"),
+    },
   ];
-
-  return (
-    <div
-      ref={menuRef}
-      className="flex items-center gap-2 border-b-[1px] border-light-600 dark:border-dark-600"
-    >
-      {MenuItems.map((item) => (
-        <EditorMenuButton
-          key={item.name}
-          onClick={item.onClick}
-          disabled={item.disabled}
-          active={item.active}
-        >
-          <item.icon />
-        </EditorMenuButton>
-      ))}
-    </div>
-  );
+  // TODO: Implement Suggestion API & Look/Feel
+  return <div></div>;
 }
 
-function EditorMenuButton(props: ButtonProps & { active?: boolean }) {
-  const { active, ...rest } = props;
+function EditorBubbleMenu({ editor }: { editor: TiptapEditor | null }) {
+  const isMac = navigator.platform.includes("Mac");
+
+  const bubbleMenuItems = [
+    {
+      title: "Bold",
+      icon: <HiOutlineBold />,
+      keys: ["meta", "b"],
+      onClick: () => editor?.chain().focus().toggleBold().run(),
+      active: editor?.isActive("bold"),
+    },
+    {
+      title: "Italic",
+      icon: <HiOutlineItalic />,
+      keys: ["meta", "i"],
+      onClick: () => editor?.chain().focus().toggleItalic().run(),
+      active: editor?.isActive("italic"),
+    },
+    {
+      title: "Strikethrough",
+      icon: <HiOutlineStrikethrough />,
+      keys: ["meta", "shift", "s"],
+      onClick: () => editor?.chain().focus().toggleStrike().run(),
+      active: editor?.isActive("strike"),
+    },
+    {
+      title: "Code",
+      icon: <HiOutlineCodeBracket />,
+      keys: ["meta", "e"],
+      onClick: () => editor?.chain().focus().toggleCode().run(),
+      active: editor?.isActive("code"),
+    },
+  ];
   return (
-    <Button
-      tabIndex={-1}
-      className={twMerge(
-        "flex items-center rounded-md bg-light-50 p-1 text-light-900 hover:bg-light-100 dark:bg-dark-50 dark:text-dark-900 dark:hover:bg-dark-400",
-        active && "bg-light-100 dark:bg-dark-400",
-      )}
-      {...rest}
-    />
+    <BubbleMenu editor={editor}>
+      <div className="flex items-center gap-2 rounded-md border border-light-600 bg-light-50 p-1 dark:border-dark-600 dark:bg-dark-50">
+        {bubbleMenuItems.map((item) => (
+          <Button
+            key={item.title}
+            className={twMerge(
+              "text-light-900 dark:text-dark-900",
+              item.active && "bg-light-100 dark:bg-dark-400",
+            )}
+            title={`${item.title} [${item.keys.join(" + ").replace("meta", isMac ? "⌘" : "ctrl")}]`}
+            onClick={item.onClick}
+          >
+            {item.icon}
+          </Button>
+        ))}
+      </div>
+    </BubbleMenu>
   );
 }
