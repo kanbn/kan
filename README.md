@@ -45,6 +45,37 @@ See our [roadmap](https://kan.bn/kan/roadmap) for upcoming features.
 - [Drizzle ORM](https://orm.drizzle.team/?ref=kan.bn)
 - [React Email](https://react.email/?ref=kan.bn)
 
+## Self Hosting 🐳
+
+### PostgreSQL Database Setup
+
+Kan requires a PostgreSQL database. You can run one using the official PostgreSQL Docker image:
+
+```bash
+# Run PostgreSQL in a container using the official postgres image
+docker run -d \
+  --name kan-db \
+  -e POSTGRES_DB=kan \
+  -e POSTGRES_USER=kan_user \
+  -e POSTGRES_PASSWORD=your_secure_password \
+  -p 5432:5432 \
+  -v kan_postgres_data:/var/lib/postgresql/data \
+  postgres:15
+
+# Your POSTGRES_URL should be:
+# postgres://kan_user:your_secure_password@your_host:5432/kan
+```
+
+### Kan Application Deployment
+
+Deploy Kan with Docker using our pre-built image:
+
+```bash
+docker pull ghcr.io/kanbn/kan:latest && docker run -it -p 3000:3000 --env-file .env ghcr.io/kanbn/kan:latest
+```
+
+Make sure to create a `.env` file with the required environment variables (see the Environment Variables section below).
+
 ## Local Development 🧑‍💻
 
 1. Clone the repository (or fork)
@@ -74,31 +105,31 @@ pnpm dev
 
 ## Environment Variables 🔐
 
-| Variable                         | Description                   | Required         | Example                                       |
-| -------------------------------- | ----------------------------- | ---------------- | --------------------------------------------- |
-| `POSTGRES_URL`                   | PostgreSQL connection URL     | Yes              | `postgres://user:pass@localhost:5432/db`      |
-| `EMAIL_FROM`                     | Sender email address          | Yes              | `"Kan <hello@mail.kan.bn>"`                   |
-| `SMTP_HOST`                      | SMTP server hostname          | Yes              | `smtp.resend.com`                             |
-| `SMTP_PORT`                      | SMTP server port              | Yes              | `465`                                         |
-| `SMTP_USER`                      | SMTP username/email           | Yes              | `resend`                                      |
-| `SMTP_PASSWORD`                  | SMTP password/token           | Yes              | `re_xxxx`                                     |
-| `NEXT_PUBLIC_BASE_URL`           | Base URL of your installation | Yes              | `http://localhost:3000`                       |
-| `BETTER_AUTH_SECRET`             | Auth encryption secret        | Yes              | Random 32+ char string                        |
-| `BETTER_AUTH_URL`                | Auth callback URL             | Yes              | Same as `NEXT_PUBLIC_BASE_URL`                |
-| `BETTER_AUTH_TRUSTED_ORIGINS`    | Allowed callback origins      | For Google login | `http://localhost:3000,http://localhost:3001` |
-| `GOOGLE_CLIENT_ID`               | Google OAuth client ID        | For Google login | `xxx.apps.googleusercontent.com`              |
-| `GOOGLE_CLIENT_SECRET`           | Google OAuth client secret    | For Google login | `xxx`                                         |
+| Variable                         | Description                   | Required          | Example                                       |
+| -------------------------------- | ----------------------------- | ----------------- | --------------------------------------------- |
+| `POSTGRES_URL`                   | PostgreSQL connection URL     | Yes               | `postgres://user:pass@localhost:5432/db`      |
+| `EMAIL_FROM`                     | Sender email address          | Yes               | `"Kan <hello@mail.kan.bn>"`                   |
+| `SMTP_HOST`                      | SMTP server hostname          | Yes               | `smtp.resend.com`                             |
+| `SMTP_PORT`                      | SMTP server port              | Yes               | `465`                                         |
+| `SMTP_USER`                      | SMTP username/email           | Yes               | `resend`                                      |
+| `SMTP_PASSWORD`                  | SMTP password/token           | Yes               | `re_xxxx`                                     |
+| `NEXT_PUBLIC_BASE_URL`           | Base URL of your installation | Yes               | `http://localhost:3000`                       |
+| `BETTER_AUTH_SECRET`             | Auth encryption secret        | Yes               | Random 32+ char string                        |
+| `BETTER_AUTH_URL`                | Auth callback URL             | Yes               | Same as `NEXT_PUBLIC_BASE_URL`                |
+| `BETTER_AUTH_TRUSTED_ORIGINS`    | Allowed callback origins      | Yes               | `http://localhost:3000,http://localhost:3001` |
+| `GOOGLE_CLIENT_ID`               | Google OAuth client ID        | For Google login  | `xxx.apps.googleusercontent.com`              |
+| `GOOGLE_CLIENT_SECRET`           | Google OAuth client secret    | For Google login  | `xxx`                                         |
 | `DISCORD_CLIENT_ID`              | Discord OAuth client ID       | For Discord login | `xxx`                                         |
 | `DISCORD_CLIENT_SECRET`          | Discord OAuth client secret   | For Discord login | `xxx`                                         |
-| `GITHUB_CLIENT_ID`               | GitHub OAuth client ID        | For GitHub login | `xxx`                                         |
-| `GITHUB_CLIENT_SECRET`           | GitHub OAuth client secret    | For GitHub login | `xxx`                                         |
-| `S3_REGION`                      | S3 storage region             | For file uploads | `WEUR`                                        |
-| `S3_ENDPOINT`                    | S3 endpoint URL               | For file uploads | `https://xxx.r2.cloudflarestorage.com`        |
-| `S3_ACCESS_KEY_ID`               | S3 access key                 | For file uploads | `xxx`                                         |
-| `S3_SECRET_ACCESS_KEY`           | S3 secret key                 | For file uploads | `xxx`                                         |
-| `NEXT_PUBLIC_STORAGE_URL`        | Storage service URL           | For file uploads | `https://storage.kanbn.com`                   |
-| `NEXT_PUBLIC_STORAGE_DOMAIN`     | Storage domain name           | For file uploads | `kanbn.com`                                   |
-| `NEXT_PUBLIC_AVATAR_BUCKET_NAME` | S3 bucket name for avatars    | For file uploads | `avatars`                                     |
+| `GITHUB_CLIENT_ID`               | GitHub OAuth client ID        | For GitHub login  | `xxx`                                         |
+| `GITHUB_CLIENT_SECRET`           | GitHub OAuth client secret    | For GitHub login  | `xxx`                                         |
+| `S3_REGION`                      | S3 storage region             | For file uploads  | `WEUR`                                        |
+| `S3_ENDPOINT`                    | S3 endpoint URL               | For file uploads  | `https://xxx.r2.cloudflarestorage.com`        |
+| `S3_ACCESS_KEY_ID`               | S3 access key                 | For file uploads  | `xxx`                                         |
+| `S3_SECRET_ACCESS_KEY`           | S3 secret key                 | For file uploads  | `xxx`                                         |
+| `NEXT_PUBLIC_STORAGE_URL`        | Storage service URL           | For file uploads  | `https://storage.kanbn.com`                   |
+| `NEXT_PUBLIC_STORAGE_DOMAIN`     | Storage domain name           | For file uploads  | `kanbn.com`                                   |
+| `NEXT_PUBLIC_AVATAR_BUCKET_NAME` | S3 bucket name for avatars    | For file uploads  | `avatars`                                     |
 
 See `.env.example` for a complete list of supported environment variables.
 

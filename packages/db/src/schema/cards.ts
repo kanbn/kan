@@ -63,20 +63,24 @@ export const cardsRelations = relations(cards, ({ one, many }) => ({
   createdBy: one(users, {
     fields: [cards.createdBy],
     references: [users.id],
+    relationName: "cardsCreatedByUser",
   }),
   list: one(lists, {
     fields: [cards.listId],
     references: [lists.id],
+    relationName: "cardsList",
   }),
   deletedBy: one(users, {
     fields: [cards.deletedBy],
     references: [users.id],
+    relationName: "cardsDeletedByUser",
   }),
   labels: many(cardsToLabels),
   members: many(cardToWorkspaceMembers),
   import: one(imports, {
     fields: [cards.importId],
     references: [imports.id],
+    relationName: "cardsImport",
   }),
   comments: many(comments),
   activities: many(cardActivities),
@@ -124,34 +128,42 @@ export const cardActivitiesRelations = relations(cardActivities, ({ one }) => ({
   card: one(cards, {
     fields: [cardActivities.cardId],
     references: [cards.id],
+    relationName: "cardActivitiesCard",
   }),
   fromList: one(lists, {
     fields: [cardActivities.fromListId],
     references: [lists.id],
+    relationName: "cardActivitiesFromList",
   }),
   toList: one(lists, {
     fields: [cardActivities.toListId],
     references: [lists.id],
+    relationName: "cardActivitiesToList",
   }),
   label: one(labels, {
     fields: [cardActivities.labelId],
     references: [labels.id],
+    relationName: "cardActivitiesLabel",
   }),
   workspaceMember: one(workspaceMembers, {
     fields: [cardActivities.workspaceMemberId],
     references: [workspaceMembers.id],
+    relationName: "cardActivitiesWorkspaceMember",
   }),
   user: one(users, {
     fields: [cardActivities.createdBy],
     references: [users.id],
+    relationName: "cardActivitiesUser",
   }),
   member: one(workspaceMembers, {
     fields: [cardActivities.workspaceMemberId],
     references: [workspaceMembers.id],
+    relationName: "cardActivitiesMember",
   }),
   comment: one(comments, {
     fields: [cardActivities.commentId],
     references: [comments.id],
+    relationName: "cardActivitiesComment",
   }),
 }));
 
@@ -172,10 +184,12 @@ export const cardToLabelsRelations = relations(cardsToLabels, ({ one }) => ({
   card: one(cards, {
     fields: [cardsToLabels.cardId],
     references: [cards.id],
+    relationName: "cardToLabelsCard",
   }),
   label: one(labels, {
     fields: [cardsToLabels.labelId],
     references: [labels.id],
+    relationName: "cardToLabelsLabel",
   }),
 }));
 
@@ -198,10 +212,12 @@ export const cardToWorkspaceMembersRelations = relations(
     card: one(cards, {
       fields: [cardToWorkspaceMembers.cardId],
       references: [cards.id],
+      relationName: "cardToWorkspaceMembersCard",
     }),
     member: one(workspaceMembers, {
       fields: [cardToWorkspaceMembers.workspaceMemberId],
       references: [workspaceMembers.id],
+      relationName: "cardToWorkspaceMembersMember",
     }),
   }),
 );
@@ -228,13 +244,16 @@ export const commentsRelations = relations(comments, ({ one }) => ({
   card: one(cards, {
     fields: [comments.cardId],
     references: [cards.id],
+    relationName: "commentsCard",
   }),
   createdBy: one(users, {
     fields: [comments.createdBy],
     references: [users.id],
+    relationName: "commentsCreatedByUser",
   }),
   deletedBy: one(users, {
     fields: [comments.deletedBy],
     references: [users.id],
+    relationName: "commentsDeletedByUser",
   }),
 }));

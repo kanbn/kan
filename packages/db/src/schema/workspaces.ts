@@ -48,7 +48,16 @@ export const workspaces = pgTable("workspace", {
 }).enableRLS();
 
 export const workspaceRelations = relations(workspaces, ({ one, many }) => ({
-  user: one(users, { fields: [workspaces.createdBy], references: [users.id] }),
+  user: one(users, {
+    fields: [workspaces.createdBy],
+    references: [users.id],
+    relationName: "workspaceCreatedByUser",
+  }),
+  deletedBy: one(users, {
+    fields: [workspaces.deletedBy],
+    references: [users.id],
+    relationName: "workspaceDeletedByUser",
+  }),
   members: many(workspaceMembers),
   boards: many(boards),
 }));
@@ -78,10 +87,12 @@ export const workspaceMembersRelations = relations(
     user: one(users, {
       fields: [workspaceMembers.userId],
       references: [users.id],
+      relationName: "workspaceMembersUser",
     }),
     workspace: one(workspaces, {
       fields: [workspaceMembers.workspaceId],
       references: [workspaces.id],
+      relationName: "workspaceMembersWorkspace",
     }),
   }),
 );

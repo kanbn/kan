@@ -26,5 +26,6 @@ export const feedbackRelations = relations(feedback, ({ one }) => ({
   createdBy: one(users, {
     fields: [feedback.createdBy],
     references: [users.id],
+    relationName: "feedbackCreatedByUser",
   }),
 }));

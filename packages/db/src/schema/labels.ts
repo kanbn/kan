@@ -37,10 +37,12 @@ export const labelsRelations = relations(labels, ({ one, many }) => ({
   createdBy: one(users, {
     fields: [labels.createdBy],
     references: [users.id],
+    relationName: "labelsCreatedByUser",
   }),
   deletedBy: one(users, {
     fields: [labels.deletedBy],
     references: [users.id],
+    relationName: "labelsDeletedByUser",
   }),
   board: one(boards, {
     fields: [labels.boardId],
@@ -50,5 +52,6 @@ export const labelsRelations = relations(labels, ({ one, many }) => ({
   import: one(imports, {
     fields: [labels.importId],
     references: [imports.id],
+    relationName: "labelsImport",
   }),
 }));
