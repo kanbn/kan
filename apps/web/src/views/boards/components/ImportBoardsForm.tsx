@@ -15,18 +15,32 @@ import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
-const sources = [{ source: "Trello" }];
+const integrationProviders: Record<string, { name: string; icon: JSX.Element }> = {
+  trello: {
+    name: "Trello",
+    icon: <FaTrello />,
+  },
+}
 
 const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
+  const { data: integrations } = api.integration.providers.useQuery();
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      source: "Trello",
+      source: integrations?.[0]?.provider ?? "",
     },
   });
 
   const onSubmit = () => {
     handleNextStep();
   };
+
+  if (!integrations?.length) {
+    return (
+      <div className="flex h-full w-full items-center px-5 pb-5">
+        <p className="text-sm text-neutral-500 dark:text-dark-900">No import sources found</p>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -41,9 +55,9 @@ const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
                   <div className="relative">
                     <Listbox.Button className="focus-ring-light-700 block w-full rounded-md border-0 bg-dark-300 bg-white/5 px-4 py-1.5 text-neutral-900 shadow-sm ring-1 ring-inset ring-light-600 focus:ring-2 focus:ring-inset dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:text-sm sm:leading-6">
                       <span className="flex items-center">
-                        <FaTrello />
+                        {integrationProviders[field.value]?.icon}
                         <span className="ml-2 block truncate">
-                          {field.value}
+                          {integrationProviders[field.value]?.name}
                         </span>
                       </span>
                       <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -62,16 +76,16 @@ const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
                       leaveTo="opacity-0"
                     >
                       <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-1 text-base text-neutral-900 shadow-lg ring-1 ring-light-600 ring-opacity-5 focus:outline-none dark:bg-dark-300 dark:text-dark-1000 sm:text-sm">
-                        {sources.map(({ source }, index) => (
+                        {integrations?.map((integration, index) => (
                           <Listbox.Option
                             key={`source_${index}`}
                             className="relative cursor-default select-none px-1"
-                            value={source}
+                            value={integration.provider}
                           >
                             <div className="flex items-center rounded-[5px] p-1 hover:bg-light-200 dark:hover:bg-dark-400">
-                              <FaTrello className="ml-1" />
+                              {integrationProviders[integration.provider]?.icon}
                               <span className="ml-2 block truncate font-normal">
-                                {source}
+                                {integrationProviders[integration.provider]?.name}
                               </span>
                             </div>
                           </Listbox.Option>
