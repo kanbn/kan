@@ -242,7 +242,7 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
   };
 
   const onSubmit = async (values: FormValues) => {
-    await handleLoginWithEmail(values.email, values.password);
+    await handleLoginWithEmail(values.email, values.password, values.name);
   };
 
   const password = watch("password");
