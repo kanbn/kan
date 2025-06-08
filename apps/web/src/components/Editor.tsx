@@ -250,7 +250,7 @@ export default function Editor({
       extensions: [
         StarterKit,
         Placeholder.configure({
-          placeholder: readOnly ? "" : "Type something...",
+          placeholder: readOnly ? "" : "Type '/' to open commands ...",
         }),
         SlashCommands.configure({
           commandItems: CommandItems,
@@ -290,7 +290,7 @@ export default function Editor({
   return (
     <div ref={containerRef}>
       <style jsx global>{`
-        .tiptap p.is-editor-empty:first-child::before {
+        .tiptap p.is-empty::before {
           color: #adb5bd;
           content: attr(data-placeholder);
           float: left;
