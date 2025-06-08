@@ -29,6 +29,7 @@
     "@tiptap/pm": "^2.14.0",
     "@tiptap/react": "^2.14.0",
     "@tiptap/starter-kit": "^2.14.0",
+    "@tiptap/suggestion": "^2.14.0",
     "@trpc/client": "catalog:",
     "@trpc/next": "^11.0.0-rc.660",
     "@trpc/react-query": "catalog:",
@@ -53,6 +54,7 @@
     "react-markdown": "^10.1.0",
     "superjson": "2.2.1",
     "tailwind-merge": "^2.5.2",
+    "tippy.js": "^6.3.7",
     "zod": "catalog:"
   },
   "devDependencies": {
