@@ -13,9 +13,9 @@ import { users } from "./users";
 export const feedback = pgTable("feedback", {
   id: bigserial("id", { mode: "number" }).primaryKey(),
   feedback: text("feedback").notNull(),
-  createdBy: uuid("createdBy")
-    .notNull()
-    .references(() => users.id, { onDelete: "no action" }),
+  createdBy: uuid("createdBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
   url: text("url").notNull(),

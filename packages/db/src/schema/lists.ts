@@ -19,13 +19,15 @@ export const lists = pgTable("list", {
   publicId: varchar("publicId", { length: 12 }).notNull().unique(),
   name: varchar("name", { length: 255 }).notNull(),
   index: integer("index").notNull(),
-  createdBy: uuid("createdBy")
-    .notNull()
-    .references(() => users.id, { onDelete: "no action" }),
+  createdBy: uuid("createdBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
   deletedAt: timestamp("deletedAt"),
-  deletedBy: uuid("deletedBy").references(() => users.id, { onDelete: "no action" }),
+  deletedBy: uuid("deletedBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
   boardId: bigint("boardId", { mode: "number" })
     .notNull()
     .references(() => boards.id, { onDelete: "cascade" }),

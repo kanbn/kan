@@ -33,13 +33,15 @@ export const boards = pgTable(
     name: varchar("name", { length: 255 }).notNull(),
     description: text("description"),
     slug: varchar("slug", { length: 255 }).notNull(),
-    createdBy: uuid("createdBy")
-      .notNull()
-      .references(() => users.id, { onDelete: "no action" }),
+    createdBy: uuid("createdBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
     updatedAt: timestamp("updatedAt"),
     deletedAt: timestamp("deletedAt"),
-    deletedBy: uuid("deletedBy").references(() => users.id, { onDelete: "no action" }),
+    deletedBy: uuid("deletedBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
     importId: bigint("importId", { mode: "number" }).references(
       () => imports.id,
     ),

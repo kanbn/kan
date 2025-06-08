@@ -26,9 +26,9 @@ export const imports = pgTable("import", {
   publicId: varchar("publicId", { length: 12 }).notNull().unique(),
   source: importSourceEnum("source").notNull(),
   status: importStatusEnum("status").notNull(),
-  createdBy: uuid("createdBy")
-    .notNull()
-    .references(() => users.id, { onDelete: "no action" }),
+  createdBy: uuid("createdBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 }).enableRLS();
 

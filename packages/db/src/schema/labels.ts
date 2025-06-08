@@ -18,9 +18,9 @@ export const labels = pgTable("label", {
   publicId: varchar("publicId", { length: 12 }).notNull().unique(),
   name: varchar("name", { length: 255 }).notNull(),
   colourCode: varchar("colourCode", { length: 12 }),
-  createdBy: uuid("createdBy")
-    .notNull()
-    .references(() => users.id, { onDelete: "no action" }),
+  createdBy: uuid("createdBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
   boardId: bigint("boardId", { mode: "number" })
@@ -28,7 +28,9 @@ export const labels = pgTable("label", {
     .references(() => boards.id, { onDelete: "cascade" }),
   importId: bigint("importId", { mode: "number" }).references(() => imports.id),
   deletedAt: timestamp("deletedAt"),
-  deletedBy: uuid("deletedBy").references(() => users.id, { onDelete: "no action" }),
+  deletedBy: uuid("deletedBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
 }).enableRLS();
 
 export const labelsRelations = relations(labels, ({ one, many }) => ({
