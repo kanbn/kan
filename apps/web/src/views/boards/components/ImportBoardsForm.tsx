@@ -4,9 +4,8 @@ import { Fragment, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaTrello } from "react-icons/fa";
 import {
-  HiChevronUpDown,
-  HiOutlineQuestionMarkCircle,
-  HiXMark,
+  HiChevronUpDown, HiOutlineQuestionMarkCircle,
+  HiXMark
 } from "react-icons/hi2";
 
 import Button from "~/components/Button";
@@ -26,7 +25,7 @@ const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
   const { data: integrations } = api.integration.providers.useQuery();
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      source: integrations?.[0]?.provider ?? "",
+      source: integrations?.[0]?.provider ?? "trello",
     },
   });
 
@@ -117,9 +116,9 @@ const ImportTrello: React.FC = () => {
 
   const refetchBoards = () => utils.board.all.refetch();
 
-  const { data: boards } = api.trello.getBoards.useQuery();
+  const { data: boards, isLoading: boardsLoading } = api.trello.getBoards.useQuery();
 
-  const { register: registerBoards, handleSubmit: handleSubmitBoards } =
+  const { register: registerBoards, handleSubmit: handleSubmitBoards, setValue, watch } =
     useForm({
       defaultValues: Object.fromEntries(
         boards?.map((board) => [board.id, true]) ?? [],
@@ -149,6 +148,11 @@ const ImportTrello: React.FC = () => {
     },
   });
 
+  const boardWatchers = boards?.map(board => ({
+    id: board.id,
+    value: watch(board.id),
+  }));
+
   const onSubmitBoards = (values: Record<string, boolean>) => {
     const boardIds = Object.keys(values).filter((key) => values[key] === true);
 
@@ -157,6 +161,15 @@ const ImportTrello: React.FC = () => {
       workspacePublicId: workspace.publicId,
     });
   };
+
+  if (boardsLoading)
+    return (
+      <div className="flex flex-col h-full w-full items-center gap-4 px-5 pb-5">
+        <div className="h-[50px] w-full animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-300" />
+        <div className="h-[50px] w-full animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-300" />
+        <div className="h-[50px] w-full animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-300" />
+      </div>
+    );
 
   if (boards?.length)
     return (
@@ -182,6 +195,31 @@ const ImportTrello: React.FC = () => {
           ))}
         </div>
 
+        <div className="flex items-center gap-4 px-5 text-xs">
+          <Button
+            type="button"
+            onClick={() => {
+              for (const board of boards) {
+                setValue(board.id, false);
+              }
+            }}
+            disabled={importBoards.isPending || boardsLoading || boards.every((board) => boardWatchers?.find(w => w.id === board.id)?.value === false)}
+          >
+            Unselect all
+          </Button>
+          <Button
+            type="button"
+            onClick={() => {
+              for (const board of boards) {
+                setValue(board.id, true);
+              }
+            }}
+            disabled={importBoards.isPending || boardsLoading || boards.every((board) => boardWatchers?.find(w => w.id === board.id)?.value === true)}
+          >
+            Select all
+          </Button>
+        </div>
+
         <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
           <div>
             <Button type="submit" isLoading={importBoards.isPending}>
@@ -193,7 +231,9 @@ const ImportTrello: React.FC = () => {
     );
 
   return (
-    <div>Trello account not connected ...</div>
+    <div className="flex h-full w-full items-center px-5 pb-5">
+      <p className="text-sm text-neutral-500 dark:text-dark-900">Trello account not connected ...</p>
+    </div>
   );
 };
 
