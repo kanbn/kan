@@ -29,6 +29,13 @@
       "when": 1749118315675,
       "tag": "20250605101155_AddCascadeDeleteToCardRelations",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1749377372062,
+      "tag": "20250608100932_AddIntegrationsTable",
+      "breakpoints": true
     }
   ]
 }
