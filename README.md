@@ -45,6 +45,37 @@ See our [roadmap](https://kan.bn/kan/roadmap) for upcoming features.
 - [Drizzle ORM](https://orm.drizzle.team/?ref=kan.bn)
 - [React Email](https://react.email/?ref=kan.bn)
 
+## Self Hosting 🐳
+
+### PostgreSQL Database Setup
+
+Kan requires a PostgreSQL database. You can run one using the official PostgreSQL Docker image:
+
+```bash
+# Run PostgreSQL in a container using the official postgres image
+docker run -d \
+  --name kan-db \
+  -e POSTGRES_DB=kan \
+  -e POSTGRES_USER=kan_user \
+  -e POSTGRES_PASSWORD=your_secure_password \
+  -p 5432:5432 \
+  -v kan_postgres_data:/var/lib/postgresql/data \
+  postgres:15
+
+# Your POSTGRES_URL should be:
+# postgres://kan_user:your_secure_password@your_host:5432/kan
+```
+
+### Kan Application Deployment
+
+Deploy Kan with Docker using our pre-built image:
+
+```bash
+docker pull ghcr.io/kanbn/kan:latest && docker run -it -p 3000:3000 --env-file .env ghcr.io/kanbn/kan:latest
+```
+
+Make sure to create a `.env` file with the required environment variables (see the Environment Variables section below).
+
 ## Local Development 🧑‍💻
 
 1. Clone the repository (or fork)

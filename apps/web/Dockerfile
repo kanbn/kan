@@ -31,7 +31,7 @@ COPY . .
  
 # Generate a partial monorepo with a pruned lockfile for a target workspace.
 # Assuming "@acme/nextjs" is the name entered in the project's package.json: { name: "@acme/nextjs" }
-RUN turbo prune --scope=${PROJECT} --docker
+RUN turbo prune --scope=${PROJECT} --scope=@kan/db --docker
  
 # 3. Build the project
 FROM base AS builder
@@ -75,5 +75,6 @@ ARG PORT=3000
 ENV PORT=${PORT}
 EXPOSE ${PORT}
 
-CMD ["pnpm", "start"]
+# Run migration on start for now (until we have a better way to handle this)
+CMD ["sh", "-c", "cd /app && pnpm db:migrate && cd /app/apps/web && pnpm start"]
 
