@@ -7,4 +7,5 @@ export * from "./imports";
 export * from "./labels";
 export * from "./lists";
 export * from "./users";
+export * from "./integrations";
 export * from "./workspaces";

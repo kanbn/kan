@@ -13,6 +13,7 @@ import { cards } from "./cards";
 import { imports } from "./imports";
 import { lists } from "./lists";
 import { workspaceMembers, workspaces } from "./workspaces";
+import { integrations } from "./integrations";
 
 export const users = pgTable("user", {
   id: uuid("id")
@@ -26,8 +27,6 @@ export const users = pgTable("user", {
   createdAt: timestamp("createdAt").notNull().defaultNow(),
   updatedAt: timestamp("updatedAt").notNull().defaultNow(),
   stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
-  trelloToken: varchar("trelloToken", { length: 255 }),
-  trelloConnected: boolean("trelloConnected").notNull().default(false),
 }).enableRLS();
 
 export const usersRelations = relations(users, ({ many }) => ({
@@ -37,6 +36,7 @@ export const usersRelations = relations(users, ({ many }) => ({
   lists: many(lists),
   workspaces: many(workspaces),
   apiKeys: many(apikey),
+  integrations: many(integrations),
 }));
 
 export const usersToWorkspacesRelations = relations(

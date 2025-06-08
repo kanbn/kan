@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { createNextApiContext } from "@kan/api/trpc";
-import { users } from "@kan/db/schema";
-import { eq } from "drizzle-orm";
+import { integrations } from "@kan/db/schema";
+import { addYears } from "date-fns";
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,7 +20,7 @@ export default async function handler(
   const apiKey = process.env.TRELLO_APP_API_KEY;
 
   if (!apiKey)
-    return res.status(500).json({ message: "Trello API key not found" });
+    return res.status(500).json({ message: "Trello API key not set in Environment Variables" });
 
   const token = req.body.token;
 
@@ -29,7 +29,19 @@ export default async function handler(
 
   try {
     const { db } = await createNextApiContext(req);
-    await db.update(users).set({ trelloToken: token, trelloConnected: true }).where(eq(users.id, user.id));
+
+    await db.insert(integrations).values({
+      provider: "trello",
+      userId: user.id,
+      accessToken: token,
+      expiresAt: addYears(new Date(), 1),
+    }).onConflictDoUpdate({
+      set: {
+        accessToken: token,
+        expiresAt: addYears(new Date(), 1),
+      },
+      target: [integrations.userId, integrations.provider],
+    });
 
     return res.status(200).json({ message: "Trello authentication successful" });
   } catch (err) {
