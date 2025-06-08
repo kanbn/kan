@@ -276,12 +276,12 @@ export default function Editor({
           onBlur();
         }
       },
-      editable: !readOnly,
       editorProps: {
         attributes: {
-          class: "prose prose-invert prose-sm max-w-none focus:outline-none",
+          class: "outline-none focus:outline-none focus-visible:ring-0",
         },
       },
+      editable: !readOnly,
       injectCSS: false,
     },
     [content],
@@ -289,10 +289,19 @@ export default function Editor({
 
   return (
     <div ref={containerRef}>
+      <style jsx global>{`
+        .tiptap p.is-editor-empty:first-child::before {
+          color: #adb5bd;
+          content: attr(data-placeholder);
+          float: left;
+          height: 0;
+          pointer-events: none;
+        }
+      `}</style>
       {!readOnly && editor && <EditorBubbleMenu editor={editor} />}
       <EditorContent
         editor={editor}
-        className="prose prose-invert prose-sm sm:prose lg:prose-lg xl:prose-2xl max-w-none"
+        className="prose dark:prose-invert prose-sm sm:prose lg:prose-lg xl:prose-2xl max-w-none [&_p]:text-black [&_p]:dark:text-white"
       />
     </div>
   );
