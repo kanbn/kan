@@ -27,11 +27,11 @@ export default function SettingsPage() {
 
   const { data } = api.user.getUser.useQuery();
 
-  const { data: integrations, refetch: refetchIntegrations } = api.integration.providers.useQuery();
+  const { data: integrations, refetch: refetchIntegrations, isLoading: integrationsLoading } = api.integration.providers.useQuery();
   const { data: trelloUrl, refetch: refetchTrelloUrl } = api.trello.getAuthorizationUrl.useQuery(
     undefined,
     {
-      enabled: integrations?.some((integration) => integration.provider === "trello") === false,
+      enabled: !integrationsLoading && !integrations?.some((integration) => integration.provider === "trello"),
       refetchOnWindowFocus: true,
     },
   );
