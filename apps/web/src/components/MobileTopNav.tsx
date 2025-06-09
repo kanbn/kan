@@ -18,6 +18,7 @@ import { useClickOutside } from "~/hooks/useClickOutside";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
+import { getAvatarUrl } from "~/utils/helpers";
 import Avatar from "./Avatar";
 import Button from "./Button";
 import ThemeMobileButton from "./ThemeMobileButton";
@@ -76,7 +77,11 @@ export default function MobileTopNav() {
         >
           {session?.user?.image ? (
             <Avatar
-              imageUrl={session.user.image}
+              imageUrl={
+                session?.user?.image
+                  ? getAvatarUrl(session.user.image)
+                  : undefined
+              }
               email={session.user.email}
               name={session.user.name ?? ""}
               size="sm"

@@ -196,7 +196,24 @@ export default function CardPage() {
             </div>
             {card && (
               <>
-                <div className="mb-10 flex w-full max-w-2xl justify-between">
+                <div className="mb-10 flex w-full max-w-2xl flex-col justify-between">
+                  <div className="block flex flex-col md:hidden">
+                    <ListSelector
+                      cardPublicId={cardId}
+                      lists={formattedLists}
+                      isLoading={!card}
+                    />
+                    <LabelSelector
+                      cardPublicId={cardId}
+                      labels={formattedLabels}
+                      isLoading={!card}
+                    />
+                    <MemberSelector
+                      cardPublicId={cardId}
+                      members={formattedMembers}
+                      isLoading={!card}
+                    />
+                  </div>
                   <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="w-full space-y-6"
@@ -230,7 +247,7 @@ export default function CardPage() {
             )}
           </div>
         </div>
-        <div className="w-[475px] border-l-[1px] border-light-600 bg-light-200 p-8 text-light-900 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-900">
+        <div className="hidden w-[475px] border-l-[1px] border-light-600 bg-light-200 p-8 text-light-900 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-900 md:block">
           <div className="mb-4 flex w-full">
             <p className="my-2 w-[100px] text-sm">{t`List`}</p>
             <ListSelector
