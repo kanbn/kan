@@ -69,7 +69,7 @@ export default function MobileTopNav() {
           </Link>
         </div>
         <button
-          className="flex items-center gap-2 rounded-2xl border border-light-600 px-2 py-1 dark:border-dark-400"
+          className="flex items-center gap-2 rounded-2xl border border-light-600 px-2 py-1 text-neutral-900 dark:border-dark-400 dark:text-dark-1000"
           onClick={() =>
             setOpen(open === "workspaceNav" ? null : "workspaceNav")
           }
@@ -84,9 +84,7 @@ export default function MobileTopNav() {
           ) : (
             <HiOutlineEllipsisHorizontal size={20} />
           )}
-          <span className="ml-2 text-sm font-bold text-neutral-900 dark:text-dark-1000">
-            {workspace.name}
-          </span>
+          <span className="ml-2 text-sm font-bold">{workspace.name}</span>
           <HiOutlineChevronDown size={15} />
         </button>
         <Button

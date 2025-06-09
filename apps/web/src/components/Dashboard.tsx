@@ -39,7 +39,7 @@ export default function Dashboard(props: { children: React.ReactNode }) {
         </div>
       </div>
 
-      <div className="block h-[100dvh] w-full md:hidden">
+      <div className="block h-[100dvh] w-full bg-light-100 dark:bg-dark-50 md:hidden">
         <MobileNavProvider>
           <MobileTopNav />
         </MobileNavProvider>
