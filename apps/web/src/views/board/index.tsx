@@ -240,7 +240,7 @@ export default function BoardPage() {
       />
       <div className="relative flex h-full flex-col">
         <PatternedBackground />
-        <div className="z-10 flex w-full justify-between p-8">
+        <div className="z-10 flex w-full flex-col justify-between p-8 md:flex-row">
           {isLoading && !boardData && (
             <div className="flex space-x-2">
               <div className="h-[2.3rem] w-[150px] animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-100" />
