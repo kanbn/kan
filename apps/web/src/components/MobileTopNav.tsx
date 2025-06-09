@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 import {
   HiOutlineArrowRightEndOnRectangle,
   HiOutlineBars3,
@@ -14,6 +14,7 @@ import { twMerge } from "tailwind-merge";
 
 import { authClient } from "@kan/auth/client";
 
+import { useClickOutside } from "~/hooks/useClickOutside";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
@@ -53,8 +54,12 @@ export default function MobileTopNav() {
   const { workspace, availableWorkspaces, switchWorkspace } = useWorkspace();
   const router = useRouter();
 
+  const navRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(navRef, () => setOpen(null));
+
   return (
-    <div className="relative flex">
+    <div className="relative flex" ref={navRef}>
       <div className="flex h-12 w-full items-center justify-between border-b border-light-600 bg-light-100 px-5 py-2 align-middle dark:border-dark-400 dark:bg-dark-50">
         <div className="flex items-center">
           <Link href="/">
@@ -144,7 +149,7 @@ export default function MobileTopNav() {
                   setOpen(null);
                 }}
                 className={twMerge(
-                  "flex items-center gap-2 border border-light-600 px-5 py-2 text-sm font-semibold dark:border-dark-400",
+                  "flex items-center gap-2 px-5 py-2 text-sm font-semibold",
                   ws.publicId === workspace.publicId &&
                     "bg-light-500 dark:bg-dark-100",
                 )}
