@@ -1,5 +1,6 @@
 import { HiArrowDownTray, HiOutlinePlusSmall } from "react-icons/hi2";
 
+import Button from "~/components/Button";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
@@ -18,38 +19,32 @@ export default function BoardsPage() {
   return (
     <>
       <PageHead title={`Boards | ${workspace.name ?? "Workspace"}`} />
-      <div className="h-full p-8">
+      <div className="m-auto h-full max-w-[1600px] px-5 py-8 md:px-28 md:py-12">
         <div className="mb-8 flex w-full justify-between">
           <h1 className="font-bold tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
             Boards
           </h1>
-          <div className="flex">
-            <button
+          <div className="flex gap-2">
+            <Button
               type="button"
-              className="bg-dark-3000 mr-2 flex items-center gap-x-1.5 rounded-md border-[1px] border-light-600 px-3 py-2 text-sm text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 dark:border-dark-600 dark:text-dark-1000"
+              variant="secondary"
               onClick={() => openModal("IMPORT_BOARDS")}
+              iconLeft={
+                <HiArrowDownTray aria-hidden="true" className="h-4 w-4" />
+              }
             >
-              <div className="flex h-5 w-5 items-center">
-                <HiArrowDownTray
-                  className="-mr-0.5 h-4 w-4"
-                  aria-hidden="true"
-                />
-              </div>
               Import
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
-              className="flex items-center gap-x-1.5 rounded-md bg-light-1000 px-3 py-2 text-sm font-semibold text-light-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 dark:bg-dark-1000 dark:text-dark-50"
+              variant="primary"
               onClick={() => openModal("NEW_BOARD")}
+              iconLeft={
+                <HiOutlinePlusSmall aria-hidden="true" className="h-4 w-4" />
+              }
             >
-              <div className="h-5 w-5 items-center">
-                <HiOutlinePlusSmall
-                  className="-mr-0.5 h-5 w-5"
-                  aria-hidden="true"
-                />
-              </div>
               New
-            </button>
+            </Button>
           </div>
         </div>
 

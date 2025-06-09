@@ -1,6 +1,7 @@
 import "~/styles/globals.css";
 
 import type { AppType } from "next/app";
+import { Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { env } from "next-runtime-env";
 
@@ -18,6 +19,13 @@ export const metadata = {
   title: "Kan",
   description: "The open source Trello alternative",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 const MyApp: AppType = ({ Component, pageProps }) => {

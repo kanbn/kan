@@ -1,6 +1,8 @@
 import { HiEllipsisHorizontal, HiOutlinePlusSmall } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
+import { authClient } from "@kan/auth/client";
+
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import Dropdown from "~/components/Dropdown";
@@ -25,6 +27,7 @@ export default function MembersPage() {
 
   const TableRow = ({
     memberPublicId,
+    memberId,
     memberName,
     memberEmail,
     memberImage,
@@ -34,6 +37,7 @@ export default function MembersPage() {
     showSkeleton,
   }: {
     memberPublicId?: string;
+    memberId?: string | null | undefined;
     memberName?: string | null | undefined;
     memberEmail?: string | null | undefined;
     memberImage?: string | null | undefined;
@@ -42,6 +46,7 @@ export default function MembersPage() {
     isLastRow?: boolean;
     showSkeleton?: boolean;
   }) => {
+    const { data: session } = authClient.useSession();
     return (
       <tr className="rounded-b-lg">
         <td className={twMerge("w-[65%]", isLastRow ? "rounded-bl-lg" : "")}>
@@ -113,24 +118,26 @@ export default function MembersPage() {
                 (workspace.role !== "admin" || showSkeleton) && "hidden",
               )}
             >
-              <Dropdown
-                items={[
-                  {
-                    label: "Remove member",
-                    action: () =>
-                      openModal(
-                        "REMOVE_MEMBER",
-                        memberPublicId,
-                        memberEmail ?? "",
-                      ),
-                  },
-                ]}
-              >
-                <HiEllipsisHorizontal
-                  size={25}
-                  className="text-light-900 dark:text-dark-900"
-                />
-              </Dropdown>
+              {session?.user.id !== memberId && (
+                <Dropdown
+                  items={[
+                    {
+                      label: "Remove member",
+                      action: () =>
+                        openModal(
+                          "REMOVE_MEMBER",
+                          memberPublicId,
+                          memberEmail ?? "",
+                        ),
+                    },
+                  ]}
+                >
+                  <HiEllipsisHorizontal
+                    size={25}
+                    className="text-light-900 dark:text-dark-900"
+                  />
+                </Dropdown>
+              )}
             </div>
           </div>
         </td>
@@ -141,7 +148,7 @@ export default function MembersPage() {
   return (
     <>
       <PageHead title={`Members | ${workspace.name ?? "Workspace"}`} />
-      <div className="m-auto max-w-[1600px] px-28 py-12">
+      <div className="m-auto h-full max-w-[1600px] px-5 py-8 md:px-28 md:py-12">
         <div className="mb-8 flex w-full justify-between">
           <h1 className="font-bold tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
             Members
@@ -184,6 +191,7 @@ export default function MembersPage() {
                         <TableRow
                           key={member.publicId}
                           memberPublicId={member.publicId}
+                          memberId={member.user?.id}
                           memberName={member.user?.name}
                           memberEmail={member.user?.email ?? member.email}
                           memberImage={member.user?.image}

@@ -239,7 +239,7 @@ export default function BoardPage() {
       />
       <div className="relative flex h-full flex-col">
         <PatternedBackground />
-        <div className="z-10 flex w-full justify-between p-8">
+        <div className="z-10 flex w-full flex-col justify-between p-8 md:flex-row">
           {isLoading && !boardData && (
             <div className="flex space-x-2">
               <div className="h-[2.3rem] w-[150px] animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-100" />
@@ -260,7 +260,9 @@ export default function BoardPage() {
             </form>
           )}
           {!boardData && !isLoading && (
-            <p className="block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">Board not found</p>
+            <p className="block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
+              Board not found
+            </p>
           )}
 
           <div className="flex items-center space-x-2">
@@ -374,12 +376,13 @@ export default function BoardPage() {
                                           }}
                                           key={card.publicId}
                                           href={`/cards/${card.publicId}`}
-                                          className={`mb-2 flex !cursor-pointer flex-col ${card.publicId.startsWith(
-                                            "PLACEHOLDER",
-                                          )
-                                            ? "pointer-events-none"
-                                            : ""
-                                            }`}
+                                          className={`mb-2 flex !cursor-pointer flex-col ${
+                                            card.publicId.startsWith(
+                                              "PLACEHOLDER",
+                                            )
+                                              ? "pointer-events-none"
+                                              : ""
+                                          }`}
                                           ref={provided.innerRef}
                                           {...provided.draggableProps}
                                           {...provided.dragHandleProps}
