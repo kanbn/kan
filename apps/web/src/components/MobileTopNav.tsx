@@ -144,7 +144,7 @@ export default function MobileTopNav() {
                   setOpen(null);
                 }}
                 className={twMerge(
-                  "flex items-center gap-2 border border-light-600 px-5 py-2 dark:border-dark-400",
+                  "flex items-center gap-2 border border-light-600 px-5 py-2 text-sm font-semibold dark:border-dark-400",
                   ws.publicId === workspace.publicId &&
                     "bg-light-500 dark:bg-dark-100",
                 )}
