@@ -33,7 +33,7 @@ export default function MobileBottomNav() {
   ];
 
   return (
-    <div className="absolute bottom-0 z-50 grid w-full grid-cols-3 border-t border-light-600 dark:border-dark-400">
+    <div className="sticky bottom-0 z-50 grid w-full grid-cols-3 border-t border-light-600 bg-light-50 dark:border-dark-400 dark:bg-dark-50">
       {navigation.map((item) => (
         <Link
           key={item.name}
