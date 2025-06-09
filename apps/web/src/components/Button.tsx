@@ -40,6 +40,7 @@ const Button = ({
     variant === "ghost" &&
       "bg-none text-light-1000 shadow-none hover:bg-light-300 dark:text-dark-1000 dark:hover:bg-dark-200",
     props.disabled && "opacity-60",
+    props.className,
   );
 
   const content = (
@@ -78,9 +79,9 @@ const Button = ({
 
   return (
     <button
-      className={classes}
       disabled={isLoading ?? props.disabled}
       {...props}
+      className={classes}
     >
       {content}
     </button>
