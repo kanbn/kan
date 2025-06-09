@@ -15,12 +15,12 @@ export const env = createEnv({
    */
   server: {
     BETTER_AUTH_SECRET: z.string(),
-    BETTER_AUTH_URL: z.string().url(),
     BETTER_AUTH_TRUSTED_ORIGINS: z
       .string()
       .refine((s) =>
         s.split(",").every((l) => z.string().url().safeParse(l).success),
-      ),
+      )
+      .optional(),
     POSTGRES_URL: z.string().url(),
     STRIPE_SECRET_KEY: z.string().optional(),
     GOOGLE_CLIENT_ID: z.string().optional(),

@@ -104,7 +104,6 @@
     "S3_ENDPOINT",
     "PORT",
     "BETTER_AUTH_SECRET",
-    "BETTER_AUTH_URL",
     "BETTER_AUTH_TRUSTED_ORIGINS"
   ],
   "globalPassThroughEnv": [

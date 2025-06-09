@@ -115,8 +115,7 @@ pnpm dev
 | `SMTP_PASSWORD`                  | SMTP password/token           | For Email          | `re_xxxx`                                     |
 | `NEXT_PUBLIC_BASE_URL`           | Base URL of your installation | Yes                | `http://localhost:3000`                       |
 | `BETTER_AUTH_SECRET`             | Auth encryption secret        | Yes                | Random 32+ char string                        |
-| `BETTER_AUTH_URL`                | Auth callback URL             | Yes                | Same as `NEXT_PUBLIC_BASE_URL`                |
-| `BETTER_AUTH_TRUSTED_ORIGINS`    | Allowed callback origins      | Yes                | `http://localhost:3000,http://localhost:3001` |
+| `BETTER_AUTH_TRUSTED_ORIGINS`    | Allowed callback origins      | No                 | `http://localhost:3000,http://localhost:3001` |
 | `GOOGLE_CLIENT_ID`               | Google OAuth client ID        | For Google login   | `xxx.apps.googleusercontent.com`              |
 | `GOOGLE_CLIENT_SECRET`           | Google OAuth client secret    | For Google login   | `xxx`                                         |
 | `DISCORD_CLIENT_ID`              | Discord OAuth client ID       | For Discord login  | `xxx`                                         |
