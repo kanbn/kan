@@ -285,7 +285,7 @@ export default function Editor({
 }: {
   content: string | null;
   onChange: (value: string) => void;
-  onBlur: () => void;
+  onBlur?: () => void;
   readOnly?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -297,7 +297,7 @@ export default function Editor({
         Placeholder.configure({
           placeholder: readOnly
             ? ""
-            : "Add a description... (type '/' to open commands)",
+            : "Add description... (type '/' to open commands)",
         }),
         SlashCommands.configure({
           commandItems: CommandItems,
@@ -320,7 +320,7 @@ export default function Editor({
           return;
         // Only trigger onBlur if the click was outside both the editor and menu
         if (!containerRef.current?.contains(event.relatedTarget as Node)) {
-          onBlur();
+          onBlur?.();
         }
       },
       editorProps: {
@@ -344,11 +344,14 @@ export default function Editor({
           height: 0;
           pointer-events: none;
         }
+        .tiptap p {
+          margin: 0 0 1rem 0 !important;
+        }
       `}</style>
       {!readOnly && editor && <EditorBubbleMenu editor={editor} />}
       <EditorContent
         editor={editor}
-        className="prose dark:prose-invert prose-sm max-w-none [&_p]:text-black [&_p]:dark:text-white"
+        className="prose dark:prose-invert prose-sm max-w-none overflow-y-auto [&_blockquote]:!text-xs [&_h1]:!text-lg [&_h2]:!text-base [&_h3]:!text-sm [&_ol]:!text-xs [&_p.is-empty::before]:text-dark-800 [&_p.is-empty::before]:dark:text-dark-800 [&_p]:!text-sm [&_p]:text-black [&_p]:dark:text-white [&_ul]:!text-xs"
       />
     </div>
   );
