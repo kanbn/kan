@@ -1,11 +1,14 @@
 import Link from "next/link";
 
-import { api } from "~/utils/api";
+import { authClient } from "@kan/auth/client";
+
 import FeedbackButton from "./FeedbackButton";
+import MobileBottomNav from "./MobileBottomNav";
+import MobileTopNav, { MobileNavProvider } from "./MobileTopNav";
 import SideNavigation from "./SideNavigation";
 
 export default function Dashboard(props: { children: React.ReactNode }) {
-  const { data, isLoading } = api.user.getUser.useQuery();
+  const { data: session, isPending: sessionLoading } = authClient.useSession();
 
   return (
     <>
@@ -15,7 +18,7 @@ export default function Dashboard(props: { children: React.ReactNode }) {
           overflow: hidden;
         }
       `}</style>
-      <div className="flex h-screen min-w-[800px] flex-col items-center bg-light-100 dark:bg-dark-50">
+      <div className="hidden h-screen min-w-[800px] flex-col items-center bg-light-100 dark:bg-dark-50 md:flex">
         <div className="m-auto flex h-16 min-h-16 w-full justify-between border-b border-light-600 px-5 py-2 align-middle dark:border-dark-400">
           <div className="my-auto flex w-full items-center justify-between">
             <Link href="/">
@@ -27,13 +30,21 @@ export default function Dashboard(props: { children: React.ReactNode }) {
           </div>
         </div>
 
-        <div className="flex h-full w-full">
+        <div className="hidden h-full w-full md:flex">
           <SideNavigation
-            user={{ email: data?.email, image: data?.image }}
-            isLoading={isLoading}
+            user={{ email: session?.user?.email, image: session?.user?.image }}
+            isLoading={sessionLoading}
           />
           <div className="w-full overflow-hidden">{props.children}</div>
         </div>
+      </div>
+
+      <div className="block h-[100dvh] w-full md:hidden">
+        <MobileNavProvider>
+          <MobileTopNav />
+        </MobileNavProvider>
+        {props.children}
+        <MobileBottomNav />
       </div>
     </>
   );

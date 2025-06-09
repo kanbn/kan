@@ -19,10 +19,12 @@ export function NewWorkspaceForm() {
   const { showPopup } = usePopup();
   const { switchWorkspace } = useWorkspace();
   const { register, handleSubmit } = useForm<FormValues>();
+  const utils = api.useUtils();
 
   const createWorkspace = api.workspace.create.useMutation({
     onSuccess: (values) => {
       if (values.publicId && values.name) {
+        utils.workspace.all.invalidate();
         switchWorkspace({
           publicId: values.publicId,
           name: values.name,
