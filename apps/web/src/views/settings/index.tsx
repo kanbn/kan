@@ -1,4 +1,5 @@
 import { env } from "next-runtime-env";
+import { useEffect } from "react";
 import { HiMiniArrowTopRightOnSquare } from "react-icons/hi2";
 
 import Button from "~/components/Button";
@@ -6,6 +7,7 @@ import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import { useModal } from "~/providers/modal";
+import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import Avatar from "./components/Avatar";
@@ -16,8 +18,6 @@ import UpdateDisplayNameForm from "./components/UpdateDisplayNameForm";
 import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescriptionForm";
 import UpdateWorkspaceNameForm from "./components/UpdateWorkspaceNameForm";
 import UpdateWorkspaceUrlForm from "./components/UpdateWorkspaceUrlForm";
-import { usePopup } from "~/providers/popup";
-import { useEffect } from "react";
 
 export default function SettingsPage() {
   const { modalContentType, openModal } = useModal();
@@ -27,14 +27,19 @@ export default function SettingsPage() {
 
   const { data } = api.user.getUser.useQuery();
 
-  const { data: integrations, refetch: refetchIntegrations, isLoading: integrationsLoading } = api.integration.providers.useQuery();
-  const { data: trelloUrl, refetch: refetchTrelloUrl } = api.trello.getAuthorizationUrl.useQuery(
-    undefined,
-    {
-      enabled: !integrationsLoading && !integrations?.some((integration) => integration.provider === "trello"),
+  const {
+    data: integrations,
+    refetch: refetchIntegrations,
+    isLoading: integrationsLoading,
+  } = api.integration.providers.useQuery();
+
+  const { data: trelloUrl, refetch: refetchTrelloUrl } =
+    api.trello.getAuthorizationUrl.useQuery(undefined, {
+      enabled:
+        !integrationsLoading &&
+        !integrations?.some((integration) => integration.provider === "trello"),
       refetchOnWindowFocus: true,
-    },
-  );
+    });
 
   useEffect(() => {
     const handleFocus = () => {
@@ -160,18 +165,27 @@ export default function SettingsPage() {
               <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
                 Trello
               </h2>
-              {!integrations?.some((integration) => integration.provider === "trello") && trelloUrl ? (<>
-                <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-                  Connect your Trello account to import boards.
-                </p>
-                <Button
-                  variant="primary"
-                  iconRight={<HiMiniArrowTopRightOnSquare />}
-                  onClick={() => window.open(trelloUrl.url, "trello_auth", "height=800,width=600")}
-                >
-                  Connect Trello
-                </Button>
-              </>
+              {!integrations?.some(
+                (integration) => integration.provider === "trello",
+              ) && trelloUrl ? (
+                <>
+                  <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+                    Connect your Trello account to import boards.
+                  </p>
+                  <Button
+                    variant="primary"
+                    iconRight={<HiMiniArrowTopRightOnSquare />}
+                    onClick={() =>
+                      window.open(
+                        trelloUrl.url,
+                        "trello_auth",
+                        "height=800,width=600",
+                      )
+                    }
+                  >
+                    Connect Trello
+                  </Button>
+                </>
               ) : (
                 <>
                   <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
