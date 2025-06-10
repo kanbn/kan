@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { permanentRedirect, useRouter } from "next/navigation";
-import { env } from "next-runtime-env";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { authClient } from "@kan/auth/client";
@@ -8,13 +7,12 @@ import { authClient } from "@kan/auth/client";
 import { Auth } from "~/components/AuthForm";
 import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
+import { env } from "next-runtime-env";
 
 export default function SignupPage() {
   const router = useRouter();
   const [isMagicLinkSent, setIsMagicLinkSent] = useState<boolean>(false);
   const [magicLinkRecipient, setMagicLinkRecipient] = useState<string>("");
-  const isSignUpDisabled =
-    env("NEXT_PUBLIC_DISABLE_SIGN_UP")?.toLowerCase() === "true";
 
   const handleMagicLinkSent = (value: boolean, recipient: string) => {
     setIsMagicLinkSent(value);
@@ -25,7 +23,14 @@ export default function SignupPage() {
 
   if (data?.user.id) router.push("/boards");
 
-  if (isSignUpDisabled) permanentRedirect("/login");
+  if (env("NEXT_PUBLIC_DISABLE_SIGN_UP")?.toLowerCase() === "true") {
+    return (
+      <div className="flex flex-col bg-light-100 dark:bg-dark-50 h-screen items-center justify-center">
+        <p className="mb-2 text-light-1000 dark:text-dark-1000 font-semibold text-sm">Sign up is disabled</p>
+        <Link href="/login" className="text-light-1000 dark:text-dark-1000 font-semibold text-sm rounded-md border border-light-900 dark:border-dark-900 px-4 py-2">Login</Link>
+      </div>
+    )
+  }
 
   return (
     <>
