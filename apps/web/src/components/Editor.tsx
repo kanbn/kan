@@ -284,7 +284,7 @@ export default function Editor({
   readOnly = false,
 }: {
   content: string | null;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
   onBlur?: () => void;
   readOnly?: boolean;
 }) {
@@ -310,7 +310,7 @@ export default function Editor({
         }),
       ],
       content,
-      onUpdate: ({ editor }) => onChange(editor.getHTML()),
+      onUpdate: ({ editor }) => onChange?.(editor.getHTML()),
       onBlur: ({ event }) => {
         if (
           document
