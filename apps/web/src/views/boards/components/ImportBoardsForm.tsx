@@ -36,8 +36,8 @@ const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
     },
   });
 
-  const { data: trelloUrl } = api.trello.getAuthorizationUrl.useQuery(
-    undefined,
+  const { data: trelloUrl } = api.integration.getAuthorizationUrl.useQuery(
+    { provider: "trello" },
     {
       enabled: !integrations?.some(
         (integration) => integration.provider === "trello",
