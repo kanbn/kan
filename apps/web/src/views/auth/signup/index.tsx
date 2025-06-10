@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { permanentRedirect, useRouter } from "next/navigation";
 import { env } from "next-runtime-env";
 import { useState } from "react";
 
@@ -25,7 +25,7 @@ export default function SignupPage() {
 
   if (data?.user.id) router.push("/boards");
 
-  if (isSignUpDisabled) router.push("/login");
+  if (isSignUpDisabled) permanentRedirect("/login");
 
   return (
     <>
