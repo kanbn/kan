@@ -74,7 +74,7 @@ export const trelloRouter = createTRPCRouter({
         name: board.name,
       }));
     }),
-  importBoards: protectedProcedure
+    importBoards: protectedProcedure
     .meta({
       openapi: {
         summary: "Import boards from Trello",
@@ -144,3 +144,172 @@ export const trelloRouter = createTRPCRouter({
       let boardsCreated = 0;
 
       for (const boardId of input.boardIds) {
+        const response = await fetch(
+          `${TRELLO_API_URL}/boards/${boardId}?key=${apiKey}&token=${integration.accessToken}&lists=open&cards=open&labels=all`,
+        );
+        const data = (await response.json()) as TrelloBoard;
+
+        const formattedData = {
+          name: data.name,
+          labels: data.labels
+            .map((label) => ({
+              sourceId: label.id,
+              name: label.name,
+            }))
+            .filter((_label) => !!_label.name),
+          lists: data.lists.map((list) => ({
+            name: list.name,
+            cards: data.cards
+              .filter((card) => card.idList === list.id)
+              .map((_card) => ({
+                sourceId: _card.id,
+                name: _card.name,
+                description: _card.desc,
+                labels: _card.labels.map((label) => ({
+                  sourceId: label.id,
+                  name: label.name,
+                })),
+              })),
+          })),
+        };
+
+        const boardPublicId = generateUID();
+
+        const newBoard = await boardRepo.create(ctx.db, {
+          publicId: boardPublicId,
+          name: formattedData.name,
+          slug: boardPublicId,
+          createdBy: userId,
+          importId: newImportId,
+          workspaceId: workspace.id,
+        });
+
+        const newBoardId = newBoard?.id;
+
+        if (!newBoardId)
+          throw new TRPCError({
+            message: "Failed to create new board",
+            code: "INTERNAL_SERVER_ERROR",
+          });
+
+        let createdLabels: { id: number; sourceId: string }[] = [];
+        let createdCards: { id: number; sourceId: string }[] = [];
+
+        if (formattedData.labels.length) {
+          const labelsInsert = formattedData.labels.map((label, index) => ({
+            publicId: generateUID(),
+            name: label.name,
+            colourCode: colours[index % colours.length]?.code ?? "#0d9488",
+            createdBy: userId,
+            boardId: newBoardId,
+            importId: newImportId,
+          }));
+
+          const newLabels = await labelRepo.bulkCreate(ctx.db, labelsInsert);
+
+          if (newLabels.length)
+            createdLabels = newLabels
+              .map((label, index) => ({
+                id: label.id,
+                sourceId: formattedData.labels[index]?.sourceId ?? "",
+              }))
+              .filter((label) => !!label.sourceId);
+        }
+
+        for (const list of formattedData.lists) {
+          const newList = await listRepo.create(ctx.db, {
+            name: list.name,
+            createdBy: userId,
+            boardId: newBoardId,
+            importId: newImportId,
+          });
+
+          const newListId = newList.id;
+
+          if (list.cards.length && newListId) {
+            const cardsInsert = list.cards.map((card, index) => ({
+              publicId: generateUID(),
+              title: card.name,
+              description: card.description,
+              createdBy: userId,
+              listId: newListId,
+              index,
+              importId: newImportId,
+            }));
+
+            const newCards = await cardRepo.bulkCreate(ctx.db, cardsInsert);
+
+            if (!newCards.length)
+              throw new TRPCError({
+                message: "Failed to create new cards",
+                code: "INTERNAL_SERVER_ERROR",
+              });
+
+            createdCards = createdCards.concat(
+              newCards
+                .map((card, index) => ({
+                  id: card.id,
+                  sourceId: list.cards[index]?.sourceId ?? "",
+                }))
+                .filter((card) => !!card.sourceId),
+            );
+
+            const activities = newCards.map((card) => ({
+              type: "card.created" as const,
+              cardId: card.id,
+              createdBy: userId,
+            }));
+
+            if (newCards.length > 0) {
+              await cardActivityRepo.bulkCreate(ctx.db, activities);
+            }
+
+            if (createdLabels.length && createdCards.length) {
+              const cardLabelRelations: {
+                cardId: number;
+                labelId: number;
+              }[] = [];
+
+              for (const card of list.cards) {
+                const _card = createdCards.find(
+                  (c) => c.sourceId === card.sourceId,
+                );
+
+                for (const label of card.labels) {
+                  const _label = createdLabels.find(
+                    (l) => l.sourceId === label.sourceId,
+                  );
+
+                  if (_card && _label) {
+                    cardLabelRelations.push({
+                      cardId: _card.id,
+                      labelId: _label.id,
+                    });
+                  }
+                }
+              }
+
+              if (cardLabelRelations.length) {
+                await cardRepo.bulkCreateCardLabelRelationship(
+                  ctx.db,
+                  cardLabelRelations,
+                );
+              }
+            }
+          }
+        }
+
+        boardsCreated++;
+      }
+
+      if (boardsCreated > 0 && newImportId) {
+        await importRepo.update(
+          ctx.db,
+          { status: "success" },
+          { importId: newImport.id },
+        );
+      }
+
+      return { boardsCreated };
+    }),
+});
