@@ -170,7 +170,7 @@ const ImportTrello: React.FC = () => {
   const refetchBoards = () => utils.board.all.refetch();
 
   const { data: boards, isLoading: boardsLoading } =
-    api.trello.getBoards.useQuery();
+    api.import.trello.getBoards.useQuery();
 
   const {
     register: registerBoards,
@@ -183,7 +183,7 @@ const ImportTrello: React.FC = () => {
     ),
   });
 
-  const importBoards = api.trello.importBoards.useMutation({
+  const importBoards = api.import.trello.importBoards.useMutation({
     onSuccess: async () => {
       showPopup({
         header: "Import complete",

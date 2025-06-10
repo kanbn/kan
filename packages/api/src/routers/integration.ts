@@ -6,11 +6,11 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { env } from "next-runtime-env";
 
-const urls = {
+export const urls = {
   trello: "https://api.trello.com/1/authorize"
 }
 
-const apiKeys = {
+export const apiKeys = {
   trello: process.env.TRELLO_APP_API_KEY,
 }
 
