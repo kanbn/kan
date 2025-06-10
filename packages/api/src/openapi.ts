@@ -9,5 +9,5 @@ export const openApiDocument = generateOpenApiDocument(appRouter, {
   version: "1.0.0",
   baseUrl: `${env("NEXT_PUBLIC_BASE_URL")}/api/v1`,
   docsUrl: "docs.kan.bn",
-  tags: ["Auth", "Users", "Boards", "Lists", "Cards", "Labels", "Imports"],
+  tags: ["Auth", "Users", "Boards", "Lists", "Cards", "Labels", "Imports", "Integrations"],
 });
