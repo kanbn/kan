@@ -34,7 +34,7 @@ export default function SettingsPage() {
   } = api.integration.providers.useQuery();
 
   const { data: trelloUrl, refetch: refetchTrelloUrl } =
-    api.trello.getAuthorizationUrl.useQuery(undefined, {
+    api.integration.getAuthorizationUrl.useQuery({ provider: "trello" }, {
       enabled:
         !integrationsLoading &&
         !integrations?.some((integration) => integration.provider === "trello"),
@@ -51,7 +51,7 @@ export default function SettingsPage() {
     };
   }, [refetchIntegrations]);
 
-  const { mutateAsync: disconnectTrello } = api.trello.disconnect.useMutation({
+  const { mutateAsync: disconnectTrello } = api.integration.disconnect.useMutation({
     onSuccess: () => {
       refetchUser();
       refetchIntegrations();
@@ -194,7 +194,7 @@ export default function SettingsPage() {
                   <Button
                     variant="primary"
                     onClick={() => {
-                      disconnectTrello();
+                      disconnectTrello({ provider: "trello" });
                     }}
                   >
                     Disconnect Trello
