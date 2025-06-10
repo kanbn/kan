@@ -25,9 +25,9 @@ export const trelloRouter = createTRPCRouter({
       openapi: {
         summary: "Get boards from Trello",
         method: "GET",
-        path: "/trello/boards",
+        path: "/integrations/trello/boards",
         description: "Retrieves all boards from Trello",
-        tags: ["Trello"],
+        tags: ["Integrations"],
         protect: true,
       },
     })
@@ -79,9 +79,9 @@ export const trelloRouter = createTRPCRouter({
       openapi: {
         summary: "Import boards from Trello",
         method: "POST",
-        path: "/trello/import",
+        path: "/imports/trello/boards",
         description: "Imports boards from Trello",
-        tags: ["Trello"],
+        tags: ["Imports"],
         protect: true,
       },
     })
