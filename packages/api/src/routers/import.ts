@@ -87,16 +87,9 @@ export const importRouter = createTRPCRouter({
             code: "UNAUTHORIZED",
           });
 
-        console.log(
-          "Trying to fetch boards...",
-          `${urls.trello}/members/me/boards?key=${apiKey}&token=${token}`,
-        );
-
         const response = await fetch(
           `${urls.trello}/members/me/boards?key=${apiKey}&token=${token}`,
         );
-
-        console.log(response.status);
 
         const data = (await response.json()) as TrelloBoard[];
 
