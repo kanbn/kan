@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import ContentEditable from "react-contenteditable";
 import { useForm } from "react-hook-form";
 import { IoChevronForwardSharp } from "react-icons/io5";
 
@@ -24,6 +23,7 @@ import LabelSelector from "./components/LabelSelector";
 import ListSelector from "./components/ListSelector";
 import MemberSelector from "./components/MemberSelector";
 import NewCommentForm from "./components/NewCommentForm";
+import Editor from "~/components/Editor";
 
 interface FormValues {
   cardId: string;
@@ -137,6 +137,8 @@ export default function CardPage() {
     });
   };
 
+  const description = watch("description");
+
   if (!cardId) return <></>;
 
   return (
@@ -199,13 +201,10 @@ export default function CardPage() {
                     className="w-full space-y-6"
                   >
                     <div className="mt-2">
-                      <ContentEditable
-                        placeholder="Add description..."
-                        html={watch("description")}
-                        disabled={false}
-                        onChange={(e) => setValue("description", e.target.value)}
-                        onBlur={handleSubmit(onSubmit)}
-                        className="block w-full border-0 bg-transparent py-1.5 text-light-900 focus-visible:outline-none dark:text-dark-1000 sm:text-sm sm:leading-6"
+                      <Editor
+                        content={card.description}
+                        onChange={(e) => setValue("description", e)}
+                        onBlur={() => handleSubmit(onSubmit)()}
                       />
                     </div>
                   </form>

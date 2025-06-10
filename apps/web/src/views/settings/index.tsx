@@ -13,6 +13,7 @@ import { api } from "~/utils/api";
 import Avatar from "./components/Avatar";
 import CreateAPIKeyForm from "./components/CreateAPIKeyForm";
 import { CustomURLConfirmation } from "./components/CustomURLConfirmation";
+import { DeleteAccountConfirmation } from "./components/DeleteAccountConfirmation";
 import { DeleteWorkspaceConfirmation } from "./components/DeleteWorkspaceConfirmation";
 import UpdateDisplayNameForm from "./components/UpdateDisplayNameForm";
 import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescriptionForm";
@@ -216,20 +217,40 @@ export default function SettingsPage() {
               />
             </div>
 
-            <div className="border-t border-light-300 dark:border-dark-300">
-              <h2 className="mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+            <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
                 Delete workspace
               </h2>
-              <p className="mb-8 mt-2 text-sm text-neutral-500 dark:text-dark-900">
-                Once you delete your workspace, there is no going back. Please
-                be certain.
+              <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+                Once you delete your workspace, there is no going back. This
+                action cannot be undone.
               </p>
-              <Button
-                variant="primary"
-                onClick={() => openModal("DELETE_WORKSPACE")}
-              >
-                Delete workspace
-              </Button>
+              <div className="mt-4">
+                <Button
+                  variant="secondary"
+                  onClick={() => openModal("DELETE_WORKSPACE")}
+                >
+                  Delete workspace
+                </Button>
+              </div>
+            </div>
+
+            <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+                Delete account
+              </h2>
+              <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+                Once you delete your account, there is no going back. This
+                action cannot be undone.
+              </p>
+              <div className="mt-4">
+                <Button
+                  variant="secondary"
+                  onClick={() => openModal("DELETE_ACCOUNT")}
+                >
+                  Delete account
+                </Button>
+              </div>
             </div>
           </div>
 
@@ -240,6 +261,9 @@ export default function SettingsPage() {
             )}
             {modalContentType === "UPDATE_WORKSPACE_URL" && (
               <CustomURLConfirmation workspacePublicId={workspace.publicId} />
+            )}
+            {modalContentType === "DELETE_ACCOUNT" && (
+              <DeleteAccountConfirmation />
             )}
           </Modal>
         </div>

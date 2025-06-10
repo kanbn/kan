@@ -1,14 +1,17 @@
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { env } from "next-runtime-env";
 import { useState } from "react";
 
-import { useRouter } from "next/navigation";
+import { authClient } from "@kan/auth/client";
+
 import { Auth } from "~/components/AuthForm";
 import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
-import { authClient } from "@kan/auth/client";
 
 export default function LoginPage() {
   const router = useRouter();
+  const isSignUpDisabled = env("NEXT_PUBLIC_DISABLE_SIGN_UP") === "true";
   const [isMagicLinkSent, setIsMagicLinkSent] = useState<boolean>(false);
   const [magicLinkRecipient, setMagicLinkRecipient] = useState<string>("");
 
@@ -48,12 +51,14 @@ export default function LoginPage() {
                 </div>
               </div>
             )}
-            <p className="mt-4 text-sm text-light-1000 dark:text-dark-1000">
-              Don't have an account?{" "}
-              <span className="underline">
-                <Link href="/signup">Sign up</Link>
-              </span>
-            </p>
+            {!isSignUpDisabled && (
+              <p className="mt-4 text-sm text-light-1000 dark:text-dark-1000">
+                Don't have an account?{" "}
+                <span className="underline">
+                  <Link href="/signup">Sign up</Link>
+                </span>
+              </p>
+            )}
           </div>
           <PatternedBackground />
         </div>

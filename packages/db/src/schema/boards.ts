@@ -33,13 +33,15 @@ export const boards = pgTable(
     name: varchar("name", { length: 255 }).notNull(),
     description: text("description"),
     slug: varchar("slug", { length: 255 }).notNull(),
-    createdBy: uuid("createdBy")
-      .notNull()
-      .references(() => users.id),
+    createdBy: uuid("createdBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
     updatedAt: timestamp("updatedAt"),
     deletedAt: timestamp("deletedAt"),
-    deletedBy: uuid("deletedBy").references(() => users.id),
+    deletedBy: uuid("deletedBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
     importId: bigint("importId", { mode: "number" }).references(
       () => imports.id,
     ),
@@ -60,19 +62,23 @@ export const boardsRelations = relations(boards, ({ one, many }) => ({
   createdBy: one(users, {
     fields: [boards.createdBy],
     references: [users.id],
+    relationName: "boardCreatedByUser",
   }),
   lists: many(lists),
   labels: many(labels),
   deletedBy: one(users, {
     fields: [boards.deletedBy],
     references: [users.id],
+    relationName: "boardDeletedByUser",
   }),
   import: one(imports, {
     fields: [boards.importId],
     references: [imports.id],
+    relationName: "boardImport",
   }),
   workspace: one(workspaces, {
     fields: [boards.workspaceId],
     references: [workspaces.id],
+    relationName: "boardWorkspace",
   }),
 }));

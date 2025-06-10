@@ -33,6 +33,13 @@
     {
       "idx": 4,
       "version": "7",
+      "when": 1749405288761,
+      "tag": "20250608175448_AddOnDeleteActionToUserDeletion",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
       "when": 1749377372062,
       "tag": "20250608100932_AddIntegrationsTable",
       "breakpoints": true

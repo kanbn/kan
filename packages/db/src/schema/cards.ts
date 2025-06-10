@@ -44,13 +44,15 @@ export const cards = pgTable("card", {
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
   index: integer("index").notNull(),
-  createdBy: uuid("createdBy")
-    .notNull()
-    .references(() => users.id),
+  createdBy: uuid("createdBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
   deletedAt: timestamp("deletedAt"),
-  deletedBy: uuid("deletedBy").references(() => users.id),
+  deletedBy: uuid("deletedBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
   listId: bigint("listId", { mode: "number" })
     .notNull()
     .references(() => lists.id, { onDelete: "cascade" }),
@@ -61,20 +63,24 @@ export const cardsRelations = relations(cards, ({ one, many }) => ({
   createdBy: one(users, {
     fields: [cards.createdBy],
     references: [users.id],
+    relationName: "cardsCreatedByUser",
   }),
   list: one(lists, {
     fields: [cards.listId],
     references: [lists.id],
+    relationName: "cardsList",
   }),
   deletedBy: one(users, {
     fields: [cards.deletedBy],
     references: [users.id],
+    relationName: "cardsDeletedByUser",
   }),
   labels: many(cardsToLabels),
   members: many(cardToWorkspaceMembers),
   import: one(imports, {
     fields: [cards.importId],
     references: [imports.id],
+    relationName: "cardsImport",
   }),
   comments: many(comments),
   activities: many(cardActivities),
@@ -90,23 +96,29 @@ export const cardActivities = pgTable("card_activity", {
   fromIndex: integer("fromIndex"),
   toIndex: integer("toIndex"),
   fromListId: bigint("fromListId", { mode: "number" }).references(
-    () => lists.id, { onDelete: "cascade" },
+    () => lists.id,
+    { onDelete: "cascade" },
   ),
-  toListId: bigint("toListId", { mode: "number" }).references(() => lists.id, { onDelete: "cascade" }),
-  labelId: bigint("labelId", { mode: "number" }).references(() => labels.id, { onDelete: "cascade" }),
+  toListId: bigint("toListId", { mode: "number" }).references(() => lists.id, {
+    onDelete: "cascade",
+  }),
+  labelId: bigint("labelId", { mode: "number" }).references(() => labels.id, {
+    onDelete: "cascade",
+  }),
   workspaceMemberId: bigint("workspaceMemberId", {
     mode: "number",
-  }).references(() => workspaceMembers.id, { onDelete: "cascade" }),
+  }).references(() => workspaceMembers.id, { onDelete: "set null" }),
   fromTitle: varchar("fromTitle", { length: 255 }),
   toTitle: varchar("toTitle", { length: 255 }),
   fromDescription: text("fromDescription"),
   toDescription: text("toDescription"),
-  createdBy: uuid("createdBy")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
+  createdBy: uuid("createdBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   commentId: bigint("commentId", { mode: "number" }).references(
-    () => comments.id, { onDelete: "cascade" },
+    () => comments.id,
+    { onDelete: "cascade" },
   ),
   fromComment: text("fromComment"),
   toComment: text("toComment"),
@@ -116,34 +128,42 @@ export const cardActivitiesRelations = relations(cardActivities, ({ one }) => ({
   card: one(cards, {
     fields: [cardActivities.cardId],
     references: [cards.id],
+    relationName: "cardActivitiesCard",
   }),
   fromList: one(lists, {
     fields: [cardActivities.fromListId],
     references: [lists.id],
+    relationName: "cardActivitiesFromList",
   }),
   toList: one(lists, {
     fields: [cardActivities.toListId],
     references: [lists.id],
+    relationName: "cardActivitiesToList",
   }),
   label: one(labels, {
     fields: [cardActivities.labelId],
     references: [labels.id],
+    relationName: "cardActivitiesLabel",
   }),
   workspaceMember: one(workspaceMembers, {
     fields: [cardActivities.workspaceMemberId],
     references: [workspaceMembers.id],
+    relationName: "cardActivitiesWorkspaceMember",
   }),
   user: one(users, {
     fields: [cardActivities.createdBy],
     references: [users.id],
+    relationName: "cardActivitiesUser",
   }),
   member: one(workspaceMembers, {
     fields: [cardActivities.workspaceMemberId],
     references: [workspaceMembers.id],
+    relationName: "cardActivitiesMember",
   }),
   comment: one(comments, {
     fields: [cardActivities.commentId],
     references: [comments.id],
+    relationName: "cardActivitiesComment",
   }),
 }));
 
@@ -164,10 +184,12 @@ export const cardToLabelsRelations = relations(cardsToLabels, ({ one }) => ({
   card: one(cards, {
     fields: [cardsToLabels.cardId],
     references: [cards.id],
+    relationName: "cardToLabelsCard",
   }),
   label: one(labels, {
     fields: [cardsToLabels.labelId],
     references: [labels.id],
+    relationName: "cardToLabelsLabel",
   }),
 }));
 
@@ -190,10 +212,12 @@ export const cardToWorkspaceMembersRelations = relations(
     card: one(cards, {
       fields: [cardToWorkspaceMembers.cardId],
       references: [cards.id],
+      relationName: "cardToWorkspaceMembersCard",
     }),
     member: one(workspaceMembers, {
       fields: [cardToWorkspaceMembers.workspaceMemberId],
       references: [workspaceMembers.id],
+      relationName: "cardToWorkspaceMembersMember",
     }),
   }),
 );
@@ -205,26 +229,31 @@ export const comments = pgTable("card_comments", {
   cardId: bigint("cardId", { mode: "number" })
     .notNull()
     .references(() => cards.id, { onDelete: "cascade" }),
-  createdBy: uuid("createdBy")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
+  createdBy: uuid("createdBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
   deletedAt: timestamp("deletedAt"),
-  deletedBy: uuid("deletedBy").references(() => users.id, { onDelete: "cascade" }),
+  deletedBy: uuid("deletedBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
 }).enableRLS();
 
 export const commentsRelations = relations(comments, ({ one }) => ({
   card: one(cards, {
     fields: [comments.cardId],
     references: [cards.id],
+    relationName: "commentsCard",
   }),
   createdBy: one(users, {
     fields: [comments.createdBy],
     references: [users.id],
+    relationName: "commentsCreatedByUser",
   }),
   deletedBy: one(users, {
     fields: [comments.deletedBy],
     references: [users.id],
+    relationName: "commentsDeletedByUser",
   }),
 }));

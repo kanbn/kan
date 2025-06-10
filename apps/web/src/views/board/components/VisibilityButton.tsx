@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 
 import Button from "~/components/Button";
+import CheckboxDropdown from "~/components/CheckboxDropdown";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
@@ -20,6 +21,7 @@ const VisibilityButton = ({
 }: {
   visibility: "public" | "private";
   boardPublicId: string;
+  boardSlug: string;
   queryParams: QueryParams;
   isLoading: boolean;
   isAdmin: boolean;
@@ -38,7 +40,11 @@ const VisibilityButton = ({
 
   const updateBoardVisibility = api.board.update.useMutation({
     onSuccess: () => {
-      setStateVisibility(isPublic ? "private" : "public");
+      showPopup({
+        header: "Board visibility updated",
+        message: `The visibility of your board has been set to ${isPublic ? "public" : "private"}.`,
+        icon: "success",
+      });
     },
     onError: () => {
       showPopup({
@@ -52,23 +58,39 @@ const VisibilityButton = ({
     },
   });
 
-  const handleUpdateBoardVisibility = () => {
-    updateBoardVisibility.mutate({
-      visibility: isPublic ? "private" : "public",
-      boardPublicId,
-    });
-  };
-
   return (
-    <Button
-      variant="secondary"
-      onClick={handleUpdateBoardVisibility}
-      iconLeft={isPublic ? <HiOutlineEye /> : <HiOutlineEyeSlash />}
-      isLoading={updateBoardVisibility.isPending}
-      disabled={isLoading || !isAdmin}
-    >
-      {isPublic ? "Public" : "Private"}
-    </Button>
+    <div className="relative">
+      <CheckboxDropdown
+        items={[
+          {
+            key: "public",
+            value: "Public",
+            selected: isPublic,
+          },
+          {
+            key: "private",
+            value: "Private",
+            selected: !isPublic,
+          },
+        ]}
+        handleSelect={(_g, i) => {
+          setStateVisibility(isPublic ? "private" : "public");
+          updateBoardVisibility.mutate({
+            visibility: i.key as "public" | "private",
+            boardPublicId,
+          });
+        }}
+        menuSpacing="md"
+      >
+        <Button
+          variant="secondary"
+          iconLeft={isPublic ? <HiOutlineEye /> : <HiOutlineEyeSlash />}
+          disabled={isLoading || !isAdmin}
+        >
+          Visibility
+        </Button>
+      </CheckboxDropdown>
+    </div>
   );
 };
 

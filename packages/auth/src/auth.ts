@@ -100,10 +100,13 @@ async function downloadImage(url: string): Promise<Buffer> {
 export const initAuth = (db: dbClient) => {
   return betterAuth({
     secret: process.env.BETTER_AUTH_SECRET!,
-    baseURL: process.env.BETTER_AUTH_BASE_URL!,
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL!,
     trustedOrigins: process.env.BETTER_AUTH_TRUSTED_ORIGINS
-      ? process.env.BETTER_AUTH_TRUSTED_ORIGINS.split(",")
-      : [],
+      ? [
+          process.env.NEXT_PUBLIC_BASE_URL!,
+          ...process.env.BETTER_AUTH_TRUSTED_ORIGINS.split(","),
+        ]
+      : [process.env.NEXT_PUBLIC_BASE_URL!],
     database: drizzleAdapter(db, {
       provider: "pg",
       schema: {
@@ -111,8 +114,22 @@ export const initAuth = (db: dbClient) => {
         user: schema.users,
       },
     }),
+    emailAndPassword: {
+      enabled: env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true",
+      disableSignUp:
+        env("NEXT_PUBLIC_DISABLE_SIGN_UP")?.toLowerCase() === "true",
+      sendResetPassword: async (data) => {
+        await sendEmail(data.user.email, "Reset Password", "RESET_PASSWORD", {
+          resetPasswordUrl: data.url,
+          resetPasswordToken: data.token,
+        });
+      },
+    },
     socialProviders: configuredProviders,
     user: {
+      deleteUser: {
+        enabled: true,
+      },
       additionalFields: {
         stripeCustomerId: {
           type: "string",
@@ -149,7 +166,13 @@ export const initAuth = (db: dbClient) => {
     databaseHooks: {
       user: {
         create: {
-          async after(user, _context) {
+          before() {
+            if (env("NEXT_PUBLIC_DISABLE_SIGN_UP")?.toLowerCase() === "true") {
+              return Promise.resolve(false);
+            }
+            return Promise.resolve(true);
+          },
+          async after(user) {
             if (
               user.image &&
               !user.image.includes(process.env.NEXT_PUBLIC_STORAGE_DOMAIN!)

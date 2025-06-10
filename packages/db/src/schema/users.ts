@@ -30,11 +30,31 @@ export const users = pgTable("user", {
 }).enableRLS();
 
 export const usersRelations = relations(users, ({ many }) => ({
-  boards: many(boards),
-  cards: many(cards),
+  deletedBoards: many(boards, {
+    relationName: "boardDeletedByUser",
+  }),
+  boards: many(boards, {
+    relationName: "boardCreatedByUser",
+  }),
+  deletedCards: many(cards, {
+    relationName: "cardsDeletedByUser",
+  }),
+  cards: many(cards, {
+    relationName: "cardsCreatedByUser",
+  }),
   imports: many(imports),
-  lists: many(lists),
-  workspaces: many(workspaces),
+  deletedLists: many(lists, {
+    relationName: "listsDeletedByUser",
+  }),
+  lists: many(lists, {
+    relationName: "listsCreatedByUser",
+  }),
+  deletedWorkspaces: many(workspaces, {
+    relationName: "workspaceDeletedByUser",
+  }),
+  workspaces: many(workspaces, {
+    relationName: "workspaceCreatedByUser",
+  }),
   apiKeys: many(apikey),
   integrations: many(integrations),
 }));
@@ -45,18 +65,22 @@ export const usersToWorkspacesRelations = relations(
     addedBy: one(users, {
       fields: [workspaceMembers.createdBy],
       references: [users.id],
+      relationName: "usersToWorkspacesAddedByUser",
     }),
     deletedBy: one(users, {
       fields: [workspaceMembers.deletedBy],
       references: [users.id],
+      relationName: "usersToWorkspacesDeletedByUser",
     }),
     user: one(users, {
       fields: [workspaceMembers.userId],
       references: [users.id],
+      relationName: "usersToWorkspacesUser",
     }),
     workspace: one(workspaces, {
       fields: [workspaceMembers.workspaceId],
       references: [workspaces.id],
+      relationName: "usersToWorkspacesWorkspace",
     }),
   }),
 );

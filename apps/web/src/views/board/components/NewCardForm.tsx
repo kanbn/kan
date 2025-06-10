@@ -12,6 +12,7 @@ import { generateUID } from "@kan/shared/utils";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
+import Editor from "~/components/Editor";
 import Input from "~/components/Input";
 import LabelIcon from "~/components/LabelIcon";
 import Toggle from "~/components/Toggle";
@@ -115,9 +116,9 @@ export function NewCardForm({
       utils.board.byId.setData(queryParams, context?.previousState);
       showPopup({
         header: "Unable to create card",
-        message: error.data?.zodError?.fieldErrors.title?.[0] ?
-          `${error.data?.zodError?.fieldErrors.title?.[0].replace("String", "Title")}` :
-          "Please try again later, or contact customer support.",
+        message: error.data?.zodError?.fieldErrors.title?.[0]
+          ? `${error.data.zodError.fieldErrors.title[0].replace("String", "Title")}`
+          : "Please try again later, or contact customer support.",
         icon: "error",
       });
     },
@@ -253,18 +254,12 @@ export function NewCardForm({
           />
         </div>
         <div className="mt-2">
-          <Input
-            placeholder="Add description..."
-            onChange={(e) => setValue("description", e.target.value)}
-            value={watch("description")}
-            contentEditable
-            onKeyDown={async (e) => {
-              if (e.key === "Enter" && e.shiftKey) {
-                e.preventDefault();
-                await handleSubmit(onSubmit)();
-              }
-            }}
-          />
+          <div className="block max-h-48 min-h-24 w-full overflow-y-auto rounded-md border-0 bg-dark-300 bg-white/5 px-3 py-2 text-sm shadow-sm ring-1 ring-inset ring-light-600 focus-within:ring-2 focus-within:ring-inset focus-within:ring-light-700 dark:ring-dark-700 dark:focus-within:ring-dark-700 sm:leading-6">
+            <Editor
+              content=""
+              onChange={(value) => setValue("description", value)}
+            />
+          </div>
         </div>
         <div className="mt-2 flex space-x-1">
           <div className="w-fit">
@@ -389,7 +384,12 @@ export function NewCardForm({
         />
 
         <div>
-          <Button type="submit" disabled={title.length === 0 || createCard.isPending}>Create card</Button>
+          <Button
+            type="submit"
+            disabled={title.length === 0 || createCard.isPending}
+          >
+            Create card
+          </Button>
         </div>
       </div>
     </form>
