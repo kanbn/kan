@@ -88,7 +88,7 @@ networks:
   kan-network:
 
 volumes:
-  postgres_data:
+  kan_postgres_data:
 ```
 
 2. Start the containers in detached mode:
