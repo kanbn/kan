@@ -1,33 +1,37 @@
 import { t } from "@lingui/core/macro";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
 
+import type { Template } from "./TemplateBoards";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
+import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
-import TemplateBoards, { Template } from "./TemplateBoards";
+import TemplateBoards, { templates } from "./TemplateBoards";
 
-type NewBoardInputWithTemplate = {
+interface NewBoardInputWithTemplate {
   name: string;
   workspacePublicId: string;
   template: Template | null;
-};
+}
 
 export function NewBoardForm() {
   const utils = api.useUtils();
   const { closeModal } = useModal();
   const { workspace } = useWorkspace();
+  const [showTemplates, setShowTemplates] = useState(false);
 
-  const { register, handleSubmit, watch, setValue } = useForm<NewBoardInputWithTemplate>({
-    defaultValues: {
-      name: "",
-      workspacePublicId: workspace.publicId || "",
-      template: null,
-    },
-  });
+  const { register, handleSubmit, watch, setValue } =
+    useForm<NewBoardInputWithTemplate>({
+      defaultValues: {
+        name: "",
+        workspacePublicId: workspace.publicId || "",
+        template: null,
+      },
+    });
 
   const currentTemplate = watch("template");
 
@@ -44,7 +48,8 @@ export function NewBoardForm() {
     createBoard.mutate({
       name: data.name,
       workspacePublicId: data.workspacePublicId,
-      template: data.template?.description,
+      lists: data.template?.lists ?? [],
+      labels: data.template?.labels ?? [],
     });
   };
 
@@ -85,8 +90,19 @@ export function NewBoardForm() {
       <TemplateBoards
         currentBoard={currentTemplate}
         setCurrentBoard={(t) => setValue("template", t)}
+        showTemplates={showTemplates}
       />
       <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+        <Toggle
+          label={t`Use template`}
+          isChecked={showTemplates}
+          onChange={() => {
+            setShowTemplates(!showTemplates);
+            if (!showTemplates && !currentTemplate) {
+              setValue("template", templates[0] ?? null);
+            }
+          }}
+        />
         <div>
           <Button type="submit" isLoading={createBoard.isPending}>
             {t`Create board`}

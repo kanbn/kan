@@ -124,6 +124,14 @@ msgstr "API-sleutels"
 msgid "API Reference"
 msgstr "API-referentie"
 
+#: src/views/boards/components/TemplateBoards.tsx:62
+msgid "Applicants"
+msgstr "Sollicitanten"
+
+#: src/views/boards/components/TemplateBoards.tsx:33
+msgid "Approval"
+msgstr "Goedkeuring"
+
 #: src/views/members/components/DeleteMemberConfirmation.tsx:47
 msgid "Are you sure want to remove {entityLabel}?"
 msgstr "Weet je zeker dat je {entityLabel} wilt verwijderen?"
@@ -149,13 +157,30 @@ msgstr "Weet je zeker dat je je account wilt verwijderen?"
 msgid "assigned <0>{memberName}</0> to the card"
 msgstr "heeft <0>{memberName}</0> aan de kaart toegewezen"
 
+#: src/views/boards/components/TemplateBoards.tsx:46
+msgid "Awaiting Customer"
+msgstr "Wachten op klant"
+
+#: src/views/boards/components/TemplateBoards.tsx:22
+msgid "Backlog"
+msgstr "Backlog"
+
+#: src/views/boards/components/TemplateBoards.tsx:15
+msgid "Basic Kanban"
+msgstr "Basis kanban"
+
 #: src/views/settings/index.tsx:168
+#: src/views/boards/components/TemplateBoards.tsx:55
 msgid "Billing"
 msgstr "Facturering"
 
 #: src/views/settings/index.tsx:178
 msgid "Billing portal"
 msgstr "Factureringsportaal"
+
+#: src/views/boards/components/TemplateBoards.tsx:37
+msgid "Blog Post"
+msgstr "Blogbericht"
 
 #: src/views/board/index.tsx:239
 msgid "Board"
@@ -199,6 +224,18 @@ msgstr "Borden"
 msgid "Boards | {0}"
 msgstr "Borden | {0}"
 
+#: src/views/boards/components/TemplateBoards.tsx:29
+msgid "Brainstorming"
+msgstr "Brainstormen"
+
+#: src/views/boards/components/TemplateBoards.tsx:23
+msgid "Bug"
+msgstr "Bug"
+
+#: src/views/boards/components/TemplateBoards.tsx:51
+msgid "Bug Report"
+msgstr "Bugrapport"
+
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
 #: src/views/settings/components/CustomURLConfirmation.tsx:50
@@ -235,6 +272,10 @@ msgstr "Filters wissen"
 msgid "Click on the link we've sent to {magicLinkRecipient} to sign in."
 msgstr "Klik op de link die we naar {magicLinkRecipient} hebben gestuurd om in te loggen."
 
+#: src/views/boards/components/TemplateBoards.tsx:22
+msgid "Code Review"
+msgstr "Code review"
+
 #: src/views/home/components/Features.tsx:84
 msgid "Collaborate seamlessly with your team."
 msgstr "Werk naadloos samen met je team."
@@ -250,6 +291,10 @@ msgstr "Opmerkingen"
 #: src/views/home/components/Footer.tsx:94
 msgid "Company"
 msgstr "Bedrijf"
+
+#: src/views/boards/components/TemplateBoards.tsx:81
+msgid "Complete"
+msgstr "Voltooid"
 
 #: src/views/home/components/Pricing.tsx:70
 msgid "Complete control and ownership:"
@@ -280,6 +325,10 @@ msgstr "Contact"
 msgid "Contact us"
 msgstr "Neem contact op"
 
+#: src/views/boards/components/TemplateBoards.tsx:27
+msgid "Content Creation"
+msgstr "Content creatie"
+
 #: src/components/AuthForm.tsx:334
 msgid "Continue with "
 msgstr "Doorgaan met "
@@ -299,7 +348,7 @@ msgstr "Bepaal wie je borden kan bekijken en bewerken."
 msgid "Create another"
 msgstr "Maak nog een"
 
-#: src/views/boards/components/NewBoardForm.tsx:77
+#: src/views/boards/components/NewBoardForm.tsx:108
 msgid "Create board"
 msgstr "Maak bord"
 
@@ -341,6 +390,10 @@ msgstr "Werkruimte maken"
 msgid "created the card"
 msgstr "heeft de kaart aangemaakt"
 
+#: src/views/boards/components/TemplateBoards.tsx:23
+msgid "Critical"
+msgstr "Kritiek"
+
 #: src/views/home/components/Pricing.tsx:74
 msgid "Custom domain"
 msgstr "Aangepast domein"
@@ -348,6 +401,10 @@ msgstr "Aangepast domein"
 #: src/views/settings/components/CustomURLConfirmation.tsx:45
 msgid "Custom URLs are a premium feature. You'll be directed to upgrade your account."
 msgstr "Aangepaste URL's zijn een premium functie. Je wordt doorgestuurd om je account te upgraden."
+
+#: src/views/boards/components/TemplateBoards.tsx:41
+msgid "Customer Support"
+msgstr "Klantenservice"
 
 #: src/components/UserMenu.tsx:112
 msgid "Dark"
@@ -387,6 +444,10 @@ msgstr "Lijst verwijderen"
 msgid "Delete workspace"
 msgstr "Werkruimte verwijderen"
 
+#: src/views/boards/components/TemplateBoards.tsx:32
+msgid "Design"
+msgstr "Ontwerp"
+
 #: src/views/settings/index.tsx:220
 msgid "Disconnect Trello"
 msgstr "Trello ontkoppelen"
@@ -424,12 +485,20 @@ msgid "Docs"
 msgstr "Docs"
 
 #: src/views/home/components/Footer.tsx:77
+#: src/views/boards/components/TemplateBoards.tsx:23
 msgid "Documentation"
 msgstr "Documentatie"
 
 #: src/views/auth/login/index.tsx:61
 msgid "Don't have an account? <0><1>Sign up</1></0>"
 msgstr "Heb je geen account? <0><1>Registreer je</1></0>"
+
+#: src/views/boards/components/TemplateBoards.tsx:16
+#: src/views/boards/components/TemplateBoards.tsx:22
+#: src/views/boards/components/TemplateBoards.tsx:35
+#: src/views/boards/components/TemplateBoards.tsx:48
+msgid "Done"
+msgstr "Klaar"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:115
 #: src/views/board/components/BoardDropdown.tsx:15
@@ -444,6 +513,10 @@ msgstr "Reactie bewerken"
 msgid "Edit label"
 msgstr "Label bewerken"
 
+#: src/views/boards/components/TemplateBoards.tsx:31
+msgid "Editing"
+msgstr "Bewerken"
+
 #: src/components/AuthForm.tsx:336
 msgid "email"
 msgstr "e-mail"
@@ -451,6 +524,10 @@ msgstr "e-mail"
 #: src/views/members/components/InviteMemberForm.tsx:64
 msgid "Email"
 msgstr "E-mail"
+
+#: src/views/boards/components/TemplateBoards.tsx:23
+msgid "Enhancement"
+msgstr "Verbetering"
 
 #: src/components/AuthForm.tsx:301
 msgid "Enter your email address"
@@ -509,6 +586,10 @@ msgstr "Alles in het gratis abonnement, plus:"
 msgid "Everything you need, free forever. Unlimited boards, unlimited lists, unlimited cards. Upgrade any time."
 msgstr "Alles wat je nodig hebt, voor altijd gratis. Onbeperkte borden, onbeperkte lijsten, onbeperkte kaarten. Upgrade wanneer je maar wilt."
 
+#: src/views/boards/components/TemplateBoards.tsx:78
+msgid "Execution"
+msgstr "Uitvoering"
+
 #. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
 #: src/components/AuthForm.tsx:241
 msgid "Failed to login with {0}. Please try again."
@@ -518,6 +599,14 @@ msgstr "Inloggen met {0} is mislukt. Probeer het opnieuw."
 #: src/views/home/components/Faqs.tsx:143
 msgid "FAQs"
 msgstr "Veelgestelde vragen"
+
+#: src/views/boards/components/TemplateBoards.tsx:23
+msgid "Feature"
+msgstr "Functie"
+
+#: src/views/boards/components/TemplateBoards.tsx:52
+msgid "Feature Request"
+msgstr "Functieverzoek"
 
 #: src/views/home/components/Header.tsx:14
 #: src/views/home/components/Footer.tsx:49
@@ -553,6 +642,14 @@ msgstr "Gratis"
 #: src/views/home/components/Pricing.tsx:34
 msgid "Free, forever"
 msgstr "Altijd gratis"
+
+#: src/views/boards/components/TemplateBoards.tsx:69
+msgid "Full-time"
+msgstr "Fulltime"
+
+#: src/views/boards/components/TemplateBoards.tsx:83
+msgid "Fun"
+msgstr "Leuk"
 
 #: src/views/home/components/Header.tsx:102
 #: src/views/home/components/Header.tsx:141
@@ -599,6 +696,14 @@ msgstr "GitHub"
 msgid "Go to app"
 msgstr "Naar de app"
 
+#: src/views/boards/components/TemplateBoards.tsx:17
+msgid "High Priority"
+msgstr "Hoge prioriteit"
+
+#: src/views/boards/components/TemplateBoards.tsx:67
+msgid "Hired"
+msgstr "Aangenomen"
+
 #: src/views/home/components/Pricing.tsx:69
 msgid "Host Kan on your own infrastructure. Ideal for organisations that need complete control over their data."
 msgstr "Host Kan op je eigen infrastructuur. Ideaal voor organisaties die volledige controle over hun gegevens nodig hebben."
@@ -631,6 +736,10 @@ msgstr "Ik bevestig dat alle gegevens van mijn account permanent worden verwijde
 msgid "I acknowledge that all of the workspace data will be permanently deleted and want to proceed."
 msgstr "Ik bevestig dat alle gegevens van de werkruimte permanent worden verwijderd en wil doorgaan."
 
+#: src/views/boards/components/TemplateBoards.tsx:75
+msgid "Ideas"
+msgstr "Ideeën"
+
 #: src/components/FeedbackButton.tsx:98
 msgid "Ideas to improve this page..."
 msgstr "Ideeën om deze pagina te verbeteren..."
@@ -651,6 +760,10 @@ msgstr "Import mislukt"
 msgid "Import your Trello boards and hit the ground running."
 msgstr "Importeer je Trello-borden en ga direct aan de slag."
 
+#: src/views/boards/components/TemplateBoards.tsx:83
+msgid "Important"
+msgstr "Belangrijk"
+
 #: src/views/home/components/Footer.tsx:27
 msgid "Importing from Trello"
 msgstr "Importeren vanuit Trello"
@@ -658,6 +771,12 @@ msgstr "Importeren vanuit Trello"
 #: src/views/home/components/Faqs.tsx:49
 msgid "Importing your Trello boards into Kan is easy. You can follow our step-by-step guide <0>here</0>."
 msgstr "Het importeren van je Trello-borden naar Kan is eenvoudig. Je kunt onze stap-voor-stap handleiding <0>hier</0> volgen."
+
+#: src/views/boards/components/TemplateBoards.tsx:16
+#: src/views/boards/components/TemplateBoards.tsx:22
+#: src/views/boards/components/TemplateBoards.tsx:45
+msgid "In Progress"
+msgstr "In behandeling"
 
 #: src/views/home/components/Pricing.tsx:28
 msgid "Individuals"
@@ -667,6 +786,10 @@ msgstr "Individuen"
 msgid "Integrations"
 msgstr "Integraties"
 
+#: src/views/boards/components/TemplateBoards.tsx:64
+msgid "Interviewing"
+msgstr "Interviewen"
+
 #: src/views/members/index.tsx:156
 msgid "Invite"
 msgstr "Uitnodigen"
@@ -675,6 +798,10 @@ msgstr "Uitnodigen"
 #: src/views/card/components/MemberSelector.tsx:112
 msgid "Invite member"
 msgstr "Lid uitnodigen"
+
+#: src/views/boards/components/TemplateBoards.tsx:69
+msgid "Junior"
+msgstr "Junior"
 
 #: src/views/home/components/Pricing.tsx:51
 msgid "Kanban is better with a team. Perfect for small and growing teams looking to collaborate."
@@ -702,6 +829,10 @@ msgstr "Labels & filters"
 #: src/views/settings/index.tsx:157
 msgid "Language"
 msgstr "Taal"
+
+#: src/views/boards/components/TemplateBoards.tsx:83
+msgid "Learning"
+msgstr "Leren"
 
 #: src/views/home/components/Footer.tsx:130
 msgid "Legal"
@@ -735,9 +866,21 @@ msgstr "Login | kan.bn"
 msgid "Logout"
 msgstr "Uitloggen"
 
+#: src/views/boards/components/TemplateBoards.tsx:83
+msgid "Long-term"
+msgstr "Lange termijn"
+
+#: src/views/boards/components/TemplateBoards.tsx:17
+msgid "Low Priority"
+msgstr "Lage prioriteit"
+
 #: src/components/AuthForm.tsx:337
 msgid "magic link"
 msgstr "magische link"
+
+#: src/views/boards/components/TemplateBoards.tsx:17
+msgid "Medium Priority"
+msgstr "Gemiddelde prioriteit"
 
 #: src/views/members/index.tsx:148
 #: src/views/card/index.tsx:251
@@ -764,7 +907,7 @@ msgstr "heeft de kaart verplaatst van <0>{fromList}</0> naar<1>{toList}</1>"
 msgid "moved the card to another list"
 msgstr "heeft de kaart naar een andere lijst verplaatst"
 
-#: src/views/boards/components/NewBoardForm.tsx:63
+#: src/views/boards/components/NewBoardForm.tsx:80
 #: src/components/LabelForm.tsx:134
 msgid "Name"
 msgstr "Naam"
@@ -777,7 +920,7 @@ msgstr "Hulp nodig?"
 msgid "New"
 msgstr "Nieuw"
 
-#: src/views/boards/components/NewBoardForm.tsx:49
+#: src/views/boards/components/NewBoardForm.tsx:66
 msgid "New board"
 msgstr "Nieuw bord"
 
@@ -798,9 +941,21 @@ msgstr "Nieuw label"
 msgid "New list"
 msgstr "Nieuwe lijst"
 
+#: src/views/boards/components/TemplateBoards.tsx:43
+msgid "New Ticket"
+msgstr "Nieuw ticket"
+
 #: src/components/NewWorkspaceForm.tsx:62
 msgid "New workspace"
 msgstr "Nieuwe werkruimte"
+
+#: src/views/boards/components/TemplateBoards.tsx:37
+msgid "Newsletter"
+msgstr "Nieuwsbrief"
+
+#: src/views/boards/components/TemplateBoards.tsx:80
+msgid "Next Steps"
+msgstr "Volgende stappen"
 
 #: src/views/boards/components/BoardsList.tsx:35
 msgid "No boards"
@@ -817,6 +972,14 @@ msgstr "Geen creditcard vereist"
 #: src/views/board/index.tsx:316
 msgid "No lists"
 msgstr "Geen lijsten"
+
+#: src/views/boards/components/TemplateBoards.tsx:65
+msgid "Offer"
+msgstr "Aanbod"
+
+#: src/views/boards/components/TemplateBoards.tsx:66
+msgid "Onboarding"
+msgstr "Inwerktraject"
 
 #: src/views/settings/index.tsx:263
 msgid "Once you delete your account, there is no going back. This action cannot be undone."
@@ -838,6 +1001,10 @@ msgstr "Organiseer en vind kaarten snel met krachtige filtertools."
 msgid "Own your data"
 msgstr "Bezit je eigen data"
 
+#: src/views/boards/components/TemplateBoards.tsx:69
+msgid "Part-time"
+msgstr "Deeltijd"
+
 #: src/views/home/components/Pricing.tsx:101
 msgid "Payment frequency"
 msgstr "Betalingsfrequentie"
@@ -850,6 +1017,14 @@ msgstr "In behandeling"
 #: src/views/home/components/Pricing.tsx:20
 msgid "per user/month"
 msgstr "per gebruiker/maand"
+
+#: src/views/boards/components/TemplateBoards.tsx:73
+msgid "Personal Project"
+msgstr "Persoonlijk project"
+
+#: src/views/boards/components/TemplateBoards.tsx:77
+msgid "Planning"
+msgstr "Planning"
 
 #: src/components/AuthForm.tsx:305
 msgid "Please enter a valid email address"
@@ -926,9 +1101,29 @@ msgstr "Profielfoto"
 msgid "Public"
 msgstr "Openbaar"
 
+#: src/views/boards/components/TemplateBoards.tsx:34
+msgid "Publishing"
+msgstr "Publiceren"
+
+#: src/views/boards/components/TemplateBoards.tsx:53
+msgid "Question"
+msgstr "Vraag"
+
 #: src/views/home/components/Faqs.tsx:147
 msgid "Questions?"
 msgstr "Vragen?"
+
+#: src/views/boards/components/TemplateBoards.tsx:83
+msgid "Quick Win"
+msgstr "Snelle winst"
+
+#: src/views/boards/components/TemplateBoards.tsx:60
+msgid "Recruitment"
+msgstr "Werving"
+
+#: src/views/boards/components/TemplateBoards.tsx:69
+msgid "Remote"
+msgstr "Op afstand"
 
 #: src/views/members/components/DeleteMemberConfirmation.tsx:58
 msgid "Remove"
@@ -950,9 +1145,21 @@ msgstr "heeft een lid van de kaart verwijderd"
 msgid "removed label <0>{label}</0>"
 msgstr "heeft label <0>{label}</0> verwijderd"
 
+#: src/views/boards/components/TemplateBoards.tsx:76
+msgid "Research"
+msgstr "Onderzoek"
+
+#: src/views/boards/components/TemplateBoards.tsx:47
+msgid "Resolution"
+msgstr "Oplossing"
+
 #: src/views/home/components/Footer.tsx:113
 msgid "Resources"
 msgstr "Bronnen"
+
+#: src/views/boards/components/TemplateBoards.tsx:79
+msgid "Review"
+msgstr "Beoordeling"
 
 #: src/views/settings/components/CreateAPIKeyForm.tsx:49
 msgid "Revoke"
@@ -979,6 +1186,10 @@ msgstr "Opslaan"
 msgid "Save time with reusable board templates."
 msgstr "Bespaar tijd met herbruikbare bordsjablonen."
 
+#: src/views/boards/components/TemplateBoards.tsx:63
+msgid "Screening"
+msgstr "Screening"
+
 #: src/views/boards/components/ImportBoardsForm.tsx:274
 msgid "Select all"
 msgstr "Alles selecteren"
@@ -1002,6 +1213,10 @@ msgstr "heeft de kaart aan zichzelf toegewezen"
 #: src/components/FeedbackButton.tsx:137
 msgid "Send"
 msgstr "Versturen"
+
+#: src/views/boards/components/TemplateBoards.tsx:69
+msgid "Senior"
+msgstr "Senior"
 
 #: src/views/settings/index.tsx:112
 #: src/components/SideNavigation.tsx:49
@@ -1042,6 +1257,14 @@ msgstr "Eenvoudige prijzen"
 #: src/views/home/components/Features.tsx:132
 msgid "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done."
 msgstr "Eenvoudig, visueel taakbeheer dat gewoon werkt. Sleep kaarten, werk samen met je team en krijg meer gedaan."
+
+#: src/views/boards/components/TemplateBoards.tsx:37
+msgid "Social Media"
+msgstr "Social media"
+
+#: src/views/boards/components/TemplateBoards.tsx:21
+msgid "Software Development"
+msgstr "Softwareontwikkeling"
 
 #: src/views/home/index.tsx:37
 msgid "Star on Github"
@@ -1118,6 +1341,11 @@ msgstr "Dit zal resulteren in het permanent verwijderen van alle gegevens die aa
 msgid "This workspace username has already been taken"
 msgstr "Deze werkruimtegebruikersnaam is al in gebruik"
 
+#: src/views/boards/components/TemplateBoards.tsx:16
+#: src/views/boards/components/TemplateBoards.tsx:22
+msgid "To Do"
+msgstr "Te doen"
+
 #: src/views/home/components/Header.tsx:73
 msgid "Toggle menu"
 msgstr "Menu in-/uitschakelen"
@@ -1133,6 +1361,10 @@ msgstr "Trello ontkoppeld"
 #: src/views/home/components/Features.tsx:88
 msgid "Trello imports"
 msgstr "Trello-imports"
+
+#: src/views/boards/components/TemplateBoards.tsx:44
+msgid "Triaging"
+msgstr "Triage"
 
 #: src/views/card/components/NewCommentForm.tsx:30
 msgid "Unable to add comment"
@@ -1256,6 +1488,11 @@ msgstr "titel bijgewerkt naar <0>{toTitle}</0>"
 msgid "Upgrade"
 msgstr "Upgraden"
 
+#: src/views/boards/components/TemplateBoards.tsx:37
+#: src/views/boards/components/TemplateBoards.tsx:54
+msgid "Urgent"
+msgstr "Urgent"
+
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
 msgid "URL can only contain letters, numbers, and hyphens"
 msgstr "URL kan alleen letters, cijfers en koppeltekens bevatten"
@@ -1268,9 +1505,17 @@ msgstr "URL mag niet langer zijn dan 24 tekens"
 msgid "URL must be at least 3 characters long"
 msgstr "URL moet minimaal 3 tekens lang zijn"
 
+#: src/views/boards/components/NewBoardForm.tsx:97
+msgid "Use template"
+msgstr "Sjabloon gebruiken"
+
 #: src/views/members/index.tsx:172
 msgid "User"
 msgstr "Gebruiker"
+
+#: src/views/boards/components/TemplateBoards.tsx:37
+msgid "Video"
+msgstr "Video"
 
 #: src/views/settings/index.tsx:232
 msgid "View and manage your API keys."
@@ -1373,6 +1618,10 @@ msgstr "Werkruimte-slug bijgewerkt"
 #: src/views/settings/index.tsx:138
 msgid "Workspace URL"
 msgstr "Werkruimte URL"
+
+#: src/views/boards/components/TemplateBoards.tsx:30
+msgid "Writing"
+msgstr "Schrijven"
 
 #: src/views/home/components/Pricing.tsx:19
 msgid "Yearly"

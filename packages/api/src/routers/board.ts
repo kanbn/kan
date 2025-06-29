@@ -4,8 +4,10 @@ import { z } from "zod";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as activityRepo from "@kan/db/repository/cardActivity.repo";
+import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { colours } from "@kan/shared/constants";
 import { generateSlug, generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
@@ -151,7 +153,8 @@ export const boardRouter = createTRPCRouter({
       z.object({
         name: z.string().min(1),
         workspacePublicId: z.string().min(12),
-        template: z.string().optional(),
+        lists: z.array(z.string().min(1)),
+        labels: z.array(z.string().min(1)),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof boardRepo.create>>>())
@@ -199,16 +202,29 @@ export const boardRouter = createTRPCRouter({
           message: `Failed to create board`,
           code: "INTERNAL_SERVER_ERROR",
         });
-      
-      if (input.template) {
-        const lists = input.template.split(", ");
-        for (const list of lists) {
-          await listRepo.create(ctx.db, {
-            name: list,
-            boardId: result.id,
-            createdBy: userId,
-          });
-        }
+
+      if (input.lists.length) {
+        const listInputs = input.lists.map((list, index) => ({
+          publicId: generateUID(),
+          name: list,
+          boardId: result.id,
+          createdBy: userId,
+          index,
+        }));
+
+        await listRepo.bulkCreate(ctx.db, listInputs);
+      }
+
+      if (input.labels.length) {
+        const labelInputs = input.labels.map((label, index) => ({
+          publicId: generateUID(),
+          name: label,
+          boardId: result.id,
+          createdBy: userId,
+          colourCode: colours[index % colours.length]?.code ?? "#0d9488",
+        }));
+
+        await labelRepo.bulkCreate(ctx.db, labelInputs);
       }
 
       return result;
@@ -364,40 +380,40 @@ export const boardRouter = createTRPCRouter({
 
       return { success: true };
     }),
-    checkSlugAvailability: publicProcedure
-      .meta({
-        openapi: {
-          summary: "Check if a board slug is available",
-          method: "GET",
-          path: "/boards/{boardPublicId}/check-slug-availability",
-          description: "Checks if a board slug is available",
-          tags: ["Boards"],
-          protect: true,
-        },
-      })
-      .input(
-        z.object({
-          boardSlug: z
-            .string()
-            .min(3)
-            .max(24)
-            .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
-          boardPublicId: z.string().min(12),
-        }),
-      )
-      .output(
-        z.object({
-          isReserved: z.boolean(),
-        }),
-      )
-      .query(async ({ ctx, input }) => {
-        const isBoardSlugAvailable = await boardRepo.isBoardSlugAvailable(
-          ctx.db,
-          input.boardSlug,
-          input.boardPublicId,
-        );
-        return {
-          isReserved: !isBoardSlugAvailable,
-        };
+  checkSlugAvailability: publicProcedure
+    .meta({
+      openapi: {
+        summary: "Check if a board slug is available",
+        method: "GET",
+        path: "/boards/{boardPublicId}/check-slug-availability",
+        description: "Checks if a board slug is available",
+        tags: ["Boards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        boardSlug: z
+          .string()
+          .min(3)
+          .max(24)
+          .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
+        boardPublicId: z.string().min(12),
       }),
+    )
+    .output(
+      z.object({
+        isReserved: z.boolean(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const isBoardSlugAvailable = await boardRepo.isBoardSlugAvailable(
+        ctx.db,
+        input.boardSlug,
+        input.boardPublicId,
+      );
+      return {
+        isReserved: !isBoardSlugAvailable,
+      };
+    }),
 });

@@ -68,6 +68,20 @@ export const create = async (
   });
 };
 
+export const bulkCreate = async (
+  db: dbClient,
+  listInput: {
+    publicId: string;
+    name: string;
+    createdBy: string;
+    boardId: number;
+    index: number;
+    importId?: number;
+  }[],
+) => {
+  return db.insert(lists).values(listInput).returning();
+};
+
 export const getByPublicId = async (db: dbClient, listPublicId: string) => {
   return db.query.lists.findFirst({
     columns: {

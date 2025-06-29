@@ -1,58 +1,134 @@
+import { t } from "@lingui/core/macro";
+import { useEffect, useRef, useState } from "react";
 import { HiCheckCircle } from "react-icons/hi2";
 
-export type Template = {
+export interface Template {
   id: string;
   name: string;
-  description: string;
-  icon: string;
-};
+  lists: string[];
+  labels: string[];
+}
 
-const templates: Template[] = [
+export const templates: Template[] = [
   {
-    id: 'basic',
-    name: 'Basic Kanban',
-    description: 'To Do, In Progress, Done',
-    icon: '📋',
+    id: "basic",
+    name: t`Basic Kanban`,
+    lists: [t`To Do`, t`In Progress`, t`Done`],
+    labels: [t`High Priority`, t`Medium Priority`, t`Low Priority`],
   },
   {
-    id: 'software-dev',
-    name: 'Software Development',
-    description: 'Backlog, To Do, In Progress, Code Review, Done',
-    icon: '💻',
+    id: "software-dev",
+    name: t`Software Development`,
+    lists: [t`Backlog`, t`To Do`, t`In Progress`, t`Code Review`, t`Done`],
+    labels: [t`Bug`, t`Feature`, t`Enhancement`, t`Critical`, t`Documentation`],
   },
   {
-    id: 'content-creation',
-    name: 'Content Creation',
-    description: 'Brainstorming, Writing, Editing, Design, Approval, Publishing, Done',
-    icon: '✍️',
+    id: "content-creation",
+    name: t`Content Creation`,
+    lists: [
+      t`Brainstorming`,
+      t`Writing`,
+      t`Editing`,
+      t`Design`,
+      t`Approval`,
+      t`Publishing`,
+      t`Done`,
+    ],
+    labels: [t`Blog Post`, t`Social Media`, t`Video`, t`Newsletter`, t`Urgent`],
   },
   {
-    id: 'customer-support',
-    name: 'Customer Support',
-    description: 'New Ticket, Triaging, In Progress, Awaiting Customer, Resolution, Done',
-    icon: '📞',
+    id: "customer-support",
+    name: t`Customer Support`,
+    lists: [
+      t`New Ticket`,
+      t`Triaging`,
+      t`In Progress`,
+      t`Awaiting Customer`,
+      t`Resolution`,
+      t`Done`,
+    ],
+    labels: [
+      t`Bug Report`,
+      t`Feature Request`,
+      t`Question`,
+      t`Urgent`,
+      t`Billing`,
+    ],
   },
   {
-    id: 'recruitment',
-    name: 'Recruitment',
-    description: 'Applicants, Screening, Interviewing, Offer, Onboarding, Hired',
-    icon: '👥',
+    id: "recruitment",
+    name: t`Recruitment`,
+    lists: [
+      t`Applicants`,
+      t`Screening`,
+      t`Interviewing`,
+      t`Offer`,
+      t`Onboarding`,
+      t`Hired`,
+    ],
+    labels: [t`Remote`, t`Full-time`, t`Part-time`, t`Senior`, t`Junior`],
   },
   {
-    id: 'personal-project',
-    name: 'Personal Project',
-    description: 'Ideas, Research, Planning, Execution, Review, Next Steps, Complete',
-    icon: '💡',
+    id: "personal-project",
+    name: t`Personal Project`,
+    lists: [
+      t`Ideas`,
+      t`Research`,
+      t`Planning`,
+      t`Execution`,
+      t`Review`,
+      t`Next Steps`,
+      t`Complete`,
+    ],
+    labels: [t`Important`, t`Quick Win`, t`Long-term`, t`Learning`, t`Fun`],
   },
 ];
 
 export default function TemplateBoards({
   currentBoard,
   setCurrentBoard,
+  showTemplates,
 }: {
   currentBoard: Template | null;
   setCurrentBoard: (board: Template | null) => void;
+  showTemplates: boolean;
 }) {
+  const [showFade, setShowFade] = useState(false);
+  const [showTopFade, setShowTopFade] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+    const isAtBottom = scrollTop + clientHeight >= scrollHeight - 5;
+    const isAtTop = scrollTop <= 5;
+
+    setShowFade(!isAtBottom);
+    setShowTopFade(!isAtTop);
+  };
+
+  useEffect(() => {
+    const scrollElement = scrollRef.current;
+    if (!scrollElement) return;
+
+    handleScroll();
+
+    scrollElement.addEventListener("scroll", handleScroll);
+    return () => scrollElement.removeEventListener("scroll", handleScroll);
+  }, [showTemplates]);
+
+  useEffect(() => {
+    if (showTemplates && currentBoard && scrollRef.current) {
+      const selectedElement = scrollRef.current.querySelector(
+        `[data-template-id="${currentBoard.id}"]`,
+      );
+      if (selectedElement) {
+        selectedElement.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  }, [showTemplates, currentBoard]);
+
   const handleBoardSelect = (boardId: string) => {
     if (currentBoard?.id === boardId) {
       setCurrentBoard(null);
@@ -63,37 +139,50 @@ export default function TemplateBoards({
     }
   };
 
+  if (!showTemplates) {
+    return null;
+  }
+
   return (
     <div className="px-5 pt-4">
-      <h3 className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-3">Pick a template</h3>
-      <div className="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-2 -mr-2 scroll-container">
-        {templates.map((template) => (
-          <div
-            key={template.id}
-            onClick={() => handleBoardSelect(template.id)}
-            className={`relative flex cursor-pointer rounded-lg border p-3 transition-all hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 scroll-container ${currentBoard?.id === template.id
-              ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500/20 dark:border-blue-500 dark:bg-blue-900/20'
-              : 'border-gray-200 dark:border-gray-700'
+      <div className="relative">
+        <div
+          ref={scrollRef}
+          className="scroll-container -mr-2 flex max-h-[200px] flex-col gap-3 overflow-y-auto pr-2 pt-0.5"
+        >
+          {templates.map((template) => (
+            <label
+              key={template.id}
+              data-template-id={template.id}
+              onClick={() => handleBoardSelect(template.id)}
+              className={`scroll-container relative flex cursor-pointer rounded-lg border p-3 transition-all hover:bg-light-100 dark:hover:bg-dark-200 ${
+                currentBoard?.id === template.id
+                  ? "border-light-700 bg-light-100 ring-1 ring-inset ring-light-700 dark:border-dark-700 dark:bg-dark-200 dark:ring-dark-700"
+                  : "border-light-600 dark:border-dark-600"
               }`}
-          >
-            <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-xl dark:bg-blue-900/30">
-              {template.icon}
-            </div>
-            <div className="flex-1">
-              <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100">
-                {template.name}
-              </h4>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                {template.description}
-              </p>
-            </div>
-            {currentBoard?.id === template.id && (
-              <div className="absolute right-3 top-3 text-blue-500">
-                <HiCheckCircle className="h-5 w-5" />
+            >
+              <div className="flex-1">
+                <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                  {template.name}
+                </h4>
+                <p className="text-xs text-light-950 dark:text-dark-900">
+                  {template.lists.join(", ")}
+                </p>
               </div>
-            )}
-          </div>
-        ))}
+              {currentBoard?.id === template.id && (
+                <div className="absolute right-3 top-3 text-light-1000 dark:text-dark-1000">
+                  <HiCheckCircle className="h-5 w-5" />
+                </div>
+              )}
+            </label>
+          ))}
+        </div>
+        {showTopFade && (
+          <div className="pointer-events-none absolute left-0 right-0 top-0 h-6 bg-gradient-to-b from-white/80 to-transparent dark:from-dark-100/80" />
+        )}
+        {showFade && (
+          <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white/80 to-transparent dark:from-dark-100/80" />
+        )}
       </div>
     </div>
   );
