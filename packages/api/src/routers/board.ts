@@ -151,7 +151,7 @@ export const boardRouter = createTRPCRouter({
     })
     .input(
       z.object({
-        name: z.string().min(1),
+        name: z.string().min(1).max(100),
         workspacePublicId: z.string().min(12),
         lists: z.array(z.string().min(1)),
         labels: z.array(z.string().min(1)),

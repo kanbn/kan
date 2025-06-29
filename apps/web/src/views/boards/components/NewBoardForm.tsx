@@ -1,7 +1,9 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
+import { z } from "zod";
 
 import type { Template } from "./TemplateBoards";
 import Button from "~/components/Button";
@@ -10,7 +12,16 @@ import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
-import TemplateBoards, { templates } from "./TemplateBoards";
+import TemplateBoards, { getTemplates } from "./TemplateBoards";
+
+const schema = z.object({
+  name: z
+    .string()
+    .min(1, { message: t`Board name is required` })
+    .max(100, { message: t`Board name cannot exceed 100 characters` }),
+  workspacePublicId: z.string(),
+  template: z.custom<Template | null>(),
+});
 
 interface NewBoardInputWithTemplate {
   name: string;
@@ -24,14 +35,22 @@ export function NewBoardForm() {
   const { workspace } = useWorkspace();
   const [showTemplates, setShowTemplates] = useState(false);
 
-  const { register, handleSubmit, watch, setValue } =
-    useForm<NewBoardInputWithTemplate>({
-      defaultValues: {
-        name: "",
-        workspacePublicId: workspace.publicId || "",
-        template: null,
-      },
-    });
+  const templates = getTemplates();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<NewBoardInputWithTemplate>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      name: "",
+      workspacePublicId: workspace.publicId || "",
+      template: null,
+    },
+  });
 
   const currentTemplate = watch("template");
 
@@ -79,6 +98,7 @@ export function NewBoardForm() {
           id="name"
           placeholder={t`Name`}
           {...register("name", { required: true })}
+          errorMessage={errors.name?.message}
           onKeyDown={async (e) => {
             if (e.key === "Enter") {
               e.preventDefault();

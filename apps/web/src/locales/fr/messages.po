@@ -186,6 +186,14 @@ msgstr "Article de blog"
 msgid "Board"
 msgstr "Tableau"
 
+#: src/views/boards/components/NewBoardForm.tsx:21
+msgid "Board name cannot exceed 100 characters"
+msgstr "Le nom du tableau ne peut pas dépasser 100 caractères"
+
+#: src/views/boards/components/NewBoardForm.tsx:20
+msgid "Board name is required"
+msgstr "Le nom du tableau est requis"
+
 #: src/views/board/index.tsx:265
 msgid "Board not found"
 msgstr "Tableau introuvable"
@@ -348,7 +356,7 @@ msgstr "Contrôlez qui peut voir et modifier vos tableaux."
 msgid "Create another"
 msgstr "Créer un autre"
 
-#: src/views/boards/components/NewBoardForm.tsx:108
+#: src/views/boards/components/NewBoardForm.tsx:128
 msgid "Create board"
 msgstr "Créer un tableau"
 
@@ -635,7 +643,6 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Pour une durabilité à long terme, nous reconnaissons que tous les bons projets open source ont besoin d'une source de revenus. La nôtre provient de l'offre cloud payante pour les espaces de travail avec plusieurs utilisateurs (gratuite pendant la bêta) et pour les slugs d'espace de travail personnalisés. Il n'y a aucune obligation de l'utiliser, et vous pouvez auto-héberger le logiciel sur votre propre infrastructure gratuitement."
 
 #: src/views/home/components/Pricing.tsx:32
-#: src/views/home/components/Pricing.tsx:32
 msgid "Free"
 msgstr "Gratuit"
 
@@ -907,7 +914,7 @@ msgstr "a déplacé la carte de <0>{fromList}</0> vers<1>{toList}</1>"
 msgid "moved the card to another list"
 msgstr "a déplacé la carte vers une autre liste"
 
-#: src/views/boards/components/NewBoardForm.tsx:80
+#: src/views/boards/components/NewBoardForm.tsx:99
 #: src/components/LabelForm.tsx:134
 msgid "Name"
 msgstr "Nom"
@@ -920,7 +927,7 @@ msgstr "Besoin d'aide ?"
 msgid "New"
 msgstr "Nouveau"
 
-#: src/views/boards/components/NewBoardForm.tsx:66
+#: src/views/boards/components/NewBoardForm.tsx:85
 msgid "New board"
 msgstr "Nouveau tableau"
 
@@ -1505,7 +1512,7 @@ msgstr "L'URL ne peut pas dépasser 24 caractères"
 msgid "URL must be at least 3 characters long"
 msgstr "L'URL doit comporter au moins 3 caractères"
 
-#: src/views/boards/components/NewBoardForm.tsx:97
+#: src/views/boards/components/NewBoardForm.tsx:117
 msgid "Use template"
 msgstr "Utiliser le modèle"
 

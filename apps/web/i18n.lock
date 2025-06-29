@@ -42,6 +42,8 @@ checksums:
     Billing%20portal/singular: dc3afa14ffe19f5920992a0c9d49d525
     Blog%20Post/singular: 38e027f212be445dc530e427fc642a20
     Board/singular: 101ff39aab674c033c15ab978d0d8bac
+    Board%20name%20cannot%20exceed%20100%20characters/singular: 985c0177744ec56d8dac84f66ec284ca
+    Board%20name%20is%20required/singular: dbd0c6cc945ab19e702fc27f970a023b
     Board%20not%20found/singular: 5af9844595fa8aed5985066620435515
     Board%20URL%20can%20only%20contain%20letters%2C%20numbers%2C%20and%20hyphens/singular: ba018946ffdf85e55d701a9c27595b4d
     Board%20URL%20cannot%20exceed%2060%20characters/singular: 8fd3417559a56aa42d297b14d480c382

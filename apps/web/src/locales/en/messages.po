@@ -202,6 +202,18 @@ msgstr "Blog Post"
 msgid "Board"
 msgstr "Board"
 
+#: src/views/boards/components/NewBoardForm.tsx:21
+msgid "Board name cannot exceed 100 characters"
+msgstr "Board name cannot exceed 100 characters"
+
+#: src/views/boards/components/NewBoardForm.tsx:21
+#~ msgid "Board name cannot exceed 50 characters"
+#~ msgstr "Board name cannot exceed 50 characters"
+
+#: src/views/boards/components/NewBoardForm.tsx:20
+msgid "Board name is required"
+msgstr "Board name is required"
+
 #: src/views/board/index.tsx:265
 msgid "Board not found"
 msgstr "Board not found"
@@ -376,7 +388,7 @@ msgstr "Create another"
 #~ msgid "Create API keys to access the Kan API."
 #~ msgstr "Create API keys to access the Kan API."
 
-#: src/views/boards/components/NewBoardForm.tsx:108
+#: src/views/boards/components/NewBoardForm.tsx:128
 msgid "Create board"
 msgstr "Create board"
 
@@ -939,7 +951,7 @@ msgstr "moved the card from <0>{fromList}</0> to<1>{toList}</1>"
 msgid "moved the card to another list"
 msgstr "moved the card to another list"
 
-#: src/views/boards/components/NewBoardForm.tsx:80
+#: src/views/boards/components/NewBoardForm.tsx:99
 #: src/components/LabelForm.tsx:134
 msgid "Name"
 msgstr "Name"
@@ -952,7 +964,7 @@ msgstr "Need help?"
 msgid "New"
 msgstr "New"
 
-#: src/views/boards/components/NewBoardForm.tsx:66
+#: src/views/boards/components/NewBoardForm.tsx:85
 msgid "New board"
 msgstr "New board"
 
@@ -1545,7 +1557,7 @@ msgstr "URL cannot exceed 24 characters"
 msgid "URL must be at least 3 characters long"
 msgstr "URL must be at least 3 characters long"
 
-#: src/views/boards/components/NewBoardForm.tsx:97
+#: src/views/boards/components/NewBoardForm.tsx:117
 msgid "Use template"
 msgstr "Use template"
 

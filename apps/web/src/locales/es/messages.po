@@ -186,6 +186,14 @@ msgstr "Entrada de blog"
 msgid "Board"
 msgstr "Tablero"
 
+#: src/views/boards/components/NewBoardForm.tsx:21
+msgid "Board name cannot exceed 100 characters"
+msgstr "El nombre del tablero no puede exceder los 100 caracteres"
+
+#: src/views/boards/components/NewBoardForm.tsx:20
+msgid "Board name is required"
+msgstr "El nombre del tablero es obligatorio"
+
 #: src/views/board/index.tsx:265
 msgid "Board not found"
 msgstr "Tablero no encontrado"
@@ -348,7 +356,7 @@ msgstr "Controla quién puede ver y editar tus tableros."
 msgid "Create another"
 msgstr "Crear otro"
 
-#: src/views/boards/components/NewBoardForm.tsx:108
+#: src/views/boards/components/NewBoardForm.tsx:128
 msgid "Create board"
 msgstr "Crear tablero"
 
@@ -635,7 +643,6 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Para la sostenibilidad a largo plazo, reconocemos que todos los buenos proyectos de código abierto necesitan una fuente de ingresos. La nuestra proviene de la oferta de pago en la nube para espacios de trabajo con múltiples usuarios (gratuita durante la beta) y para slugs personalizados de espacios de trabajo. No hay obligación de usarla, y puedes autoalojar el software en tu propia infraestructura sin costo alguno."
 
 #: src/views/home/components/Pricing.tsx:32
-#: src/views/home/components/Pricing.tsx:32
 msgid "Free"
 msgstr "Gratis"
 
@@ -907,7 +914,7 @@ msgstr "movió la tarjeta de <0>{fromList}</0> a<1>{toList}</1>"
 msgid "moved the card to another list"
 msgstr "movió la tarjeta a otra lista"
 
-#: src/views/boards/components/NewBoardForm.tsx:80
+#: src/views/boards/components/NewBoardForm.tsx:99
 #: src/components/LabelForm.tsx:134
 msgid "Name"
 msgstr "Nombre"
@@ -920,7 +927,7 @@ msgstr "¿Necesitas ayuda?"
 msgid "New"
 msgstr "Nuevo"
 
-#: src/views/boards/components/NewBoardForm.tsx:66
+#: src/views/boards/components/NewBoardForm.tsx:85
 msgid "New board"
 msgstr "Nuevo tablero"
 
@@ -1505,7 +1512,7 @@ msgstr "La URL no puede exceder los 24 caracteres"
 msgid "URL must be at least 3 characters long"
 msgstr "La URL debe tener al menos 3 caracteres"
 
-#: src/views/boards/components/NewBoardForm.tsx:97
+#: src/views/boards/components/NewBoardForm.tsx:117
 msgid "Use template"
 msgstr "Usar plantilla"
 

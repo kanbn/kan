@@ -9,7 +9,7 @@ export interface Template {
   labels: string[];
 }
 
-export const templates: Template[] = [
+export const getTemplates = (): Template[] => [
   {
     id: "basic",
     name: t`Basic Kanban`,
@@ -96,6 +96,8 @@ export default function TemplateBoards({
   const [showFade, setShowFade] = useState(false);
   const [showTopFade, setShowTopFade] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const templates = getTemplates();
 
   const handleScroll = () => {
     if (!scrollRef.current) return;
