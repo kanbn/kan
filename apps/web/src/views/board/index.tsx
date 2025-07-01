@@ -240,7 +240,7 @@ export default function BoardPage() {
       />
       <div className="relative flex h-full flex-col">
         <PatternedBackground />
-        <div className="z-10 flex w-full flex-col justify-between p-8 md:flex-row">
+        <div className="z-10 flex w-full flex-col justify-between p-6 md:flex-row md:p-8">
           {isLoading && !boardData && (
             <div className="flex space-x-2">
               <div className="h-[2.3rem] w-[150px] animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-100" />
@@ -249,7 +249,7 @@ export default function BoardPage() {
           {boardData && (
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="focus-visible:outline-none"
+              className="order-2 focus-visible:outline-none md:order-1"
             >
               <input
                 id="name"
@@ -261,12 +261,12 @@ export default function BoardPage() {
             </form>
           )}
           {!boardData && !isLoading && (
-            <p className="block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
+            <p className="order-2 block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem] md:order-1">
               {t`Board not found`}
             </p>
           )}
 
-          <div className="flex items-center space-x-2">
+          <div className="order-1 mb-4 flex items-center justify-end space-x-2 md:order-2 md:mb-0">
             <VisibilityButton
               visibility={boardData?.visibility ?? "private"}
               boardPublicId={boardId ?? ""}

@@ -54,7 +54,7 @@ export default function SideNavigation({
 
   return (
     <>
-      <nav className="flex w-72 flex-col justify-between border-r border-light-600 px-3 pb-3 pt-5 dark:border-dark-400">
+      <nav className="flex h-full w-64 flex-col justify-between border-r border-light-600 bg-light-50 px-3 pb-3 pt-5 dark:border-dark-400 dark:bg-dark-50">
         <div>
           <WorkspaceMenu />
           <ul role="list" className="space-y-1">

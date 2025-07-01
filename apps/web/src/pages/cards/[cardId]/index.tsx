@@ -1,12 +1,12 @@
-import { WorkspaceProvider } from "~/providers/workspace";
 import Dashboard from "~/components/Dashboard";
 import Popup from "~/components/Popup";
-import CardView from "~/views/card";
+import { WorkspaceProvider } from "~/providers/workspace";
+import CardView, { CardRightPanel } from "~/views/card";
 
 export default function CardPage() {
   return (
     <WorkspaceProvider>
-      <Dashboard>
+      <Dashboard hasRightPanel rightPanel={<CardRightPanel />}>
         <CardView />
       </Dashboard>
       <Popup />

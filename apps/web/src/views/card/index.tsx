@@ -32,29 +32,18 @@ interface FormValues {
   description: string;
 }
 
-export default function CardPage() {
+export function CardRightPanel() {
   const router = useRouter();
-  const utils = api.useUtils();
-  const { modalContentType, entityId } = useModal();
-  const { showPopup } = usePopup();
-  const { workspace } = useWorkspace();
-
   const cardId = Array.isArray(router.query.cardId)
     ? router.query.cardId[0]
     : router.query.cardId;
 
-  const { data: card, isLoading } = api.card.byId.useQuery({
+  const { data: card } = api.card.byId.useQuery({
     cardPublicId: cardId ?? "",
   });
 
-  const refetchCard = async () => {
-    if (cardId) await utils.card.byId.refetch({ cardPublicId: cardId });
-  };
-
   const board = card?.list.board;
-  const boardId = board?.publicId;
   const labels = board?.labels;
-  const activities = card?.activities;
   const workspaceMembers = board?.workspace.members;
   const selectedLabels = card?.labels;
   const selectedMembers = card?.members;
@@ -109,6 +98,59 @@ export default function CardPage() {
       };
     }) ?? [];
 
+  return (
+    <div className="h-full w-[360px] border-l-[1px] border-light-600 bg-light-200 p-8 text-light-900 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-900">
+      <div className="mb-4 flex w-full flex-row">
+        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
+        <ListSelector
+          cardPublicId={cardId ?? ""}
+          lists={formattedLists}
+          isLoading={!card}
+        />
+      </div>
+      <div className="mb-4 flex w-full flex-row">
+        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Labels`}</p>
+        <LabelSelector
+          cardPublicId={cardId ?? ""}
+          labels={formattedLabels}
+          isLoading={!card}
+        />
+      </div>
+      <div className="flex w-full flex-row">
+        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Members`}</p>
+        <MemberSelector
+          cardPublicId={cardId ?? ""}
+          members={formattedMembers}
+          isLoading={!card}
+        />
+      </div>
+    </div>
+  );
+}
+
+export default function CardPage() {
+  const router = useRouter();
+  const utils = api.useUtils();
+  const { modalContentType, entityId } = useModal();
+  const { showPopup } = usePopup();
+  const { workspace } = useWorkspace();
+
+  const cardId = Array.isArray(router.query.cardId)
+    ? router.query.cardId[0]
+    : router.query.cardId;
+
+  const { data: card, isLoading } = api.card.byId.useQuery({
+    cardPublicId: cardId ?? "",
+  });
+
+  const refetchCard = async () => {
+    if (cardId) await utils.card.byId.refetch({ cardPublicId: cardId });
+  };
+
+  const board = card?.list.board;
+  const boardId = board?.publicId;
+  const activities = card?.activities;
+
   const updateCard = api.card.update.useMutation({
     onError: () => {
       showPopup({
@@ -149,7 +191,7 @@ export default function CardPage() {
       />
       <div className="flex h-full flex-1 flex-row">
         <div className="flex h-full w-full flex-col overflow-hidden">
-          <div className="h-full max-h-[calc(100vh-4rem)] overflow-y-auto p-8">
+          <div className="h-full max-h-[calc(100vh-4rem)] overflow-y-auto p-6 md:p-8">
             <div className="mb-8 flex w-full items-center justify-between">
               {!card && isLoading && (
                 <div className="flex space-x-2">
@@ -197,23 +239,6 @@ export default function CardPage() {
             {card && (
               <>
                 <div className="mb-10 flex w-full max-w-2xl flex-col justify-between">
-                  <div className="block flex flex-col md:hidden">
-                    <ListSelector
-                      cardPublicId={cardId}
-                      lists={formattedLists}
-                      isLoading={!card}
-                    />
-                    <LabelSelector
-                      cardPublicId={cardId}
-                      labels={formattedLabels}
-                      isLoading={!card}
-                    />
-                    <MemberSelector
-                      cardPublicId={cardId}
-                      members={formattedMembers}
-                      isLoading={!card}
-                    />
-                  </div>
                   <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="w-full space-y-6"
@@ -245,32 +270,6 @@ export default function CardPage() {
                 </div>
               </>
             )}
-          </div>
-        </div>
-        <div className="hidden w-[475px] border-l-[1px] border-light-600 bg-light-200 p-8 text-light-900 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-900 md:block">
-          <div className="mb-4 flex w-full">
-            <p className="my-2 w-[100px] text-sm">{t`List`}</p>
-            <ListSelector
-              cardPublicId={cardId}
-              lists={formattedLists}
-              isLoading={!card}
-            />
-          </div>
-          <div className="mb-4 flex w-full">
-            <p className="my-2 w-[100px] text-sm">{t`Labels`}</p>
-            <LabelSelector
-              cardPublicId={cardId}
-              labels={formattedLabels}
-              isLoading={!card}
-            />
-          </div>
-          <div className="flex w-full">
-            <p className="my-2 w-[100px] text-sm">{t`Members`}</p>
-            <MemberSelector
-              cardPublicId={cardId}
-              members={formattedMembers}
-              isLoading={!card}
-            />
           </div>
         </div>
 
