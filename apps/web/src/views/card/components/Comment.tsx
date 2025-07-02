@@ -145,7 +145,7 @@ const Comment = ({
             html={watch("comment")}
             disabled={false}
             onChange={(e) => setValue("comment", e.target.value)}
-            className="block w-full max-w-[800px] border-0 bg-transparent py-1.5 text-light-900 focus-visible:outline-none dark:text-dark-1000 sm:text-sm sm:leading-6"
+            className="block w-full max-w-[800px] border-0 bg-transparent py-1.5 text-sm text-light-900 focus-visible:outline-none dark:text-dark-1000 sm:text-sm sm:leading-6"
           />
           <div className="flex justify-end space-x-2">
             <Button

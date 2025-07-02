@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-[contenteditable=true]:empty:before {
+[contenteditable="true"]:empty:before {
   content: attr(placeholder);
   display: block;
   color: #707070;
+  font-size: 0.8rem;
 }
 
 .gradient-border::before {
@@ -18,7 +19,7 @@
     transparent 110deg,
     transparent 360deg
   );
-  content: '';
+  content: "";
   position: absolute;
   inset: -50%;
   width: 200%;

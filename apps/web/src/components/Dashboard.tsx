@@ -27,6 +27,20 @@ export default function Dashboard({
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
   const [isRightPanelOpen, setIsRightPanelOpen] = useState(false);
 
+  const toggleSideNav = () => {
+    setIsSideNavOpen(!isSideNavOpen);
+    if (!isSideNavOpen) {
+      setIsRightPanelOpen(false);
+    }
+  };
+
+  const toggleRightPanel = () => {
+    setIsRightPanelOpen(!isRightPanelOpen);
+    if (!isRightPanelOpen) {
+      setIsSideNavOpen(false);
+    }
+  };
+
   return (
     <>
       <style jsx global>{`
@@ -39,7 +53,7 @@ export default function Dashboard({
         <div className="m-auto flex h-12 min-h-12 w-full justify-between border-b border-light-600 px-5 py-2 align-middle dark:border-dark-400 md:h-16 md:min-h-16">
           <div className="my-auto flex w-full items-center justify-between">
             <button
-              onClick={() => setIsSideNavOpen(!isSideNavOpen)}
+              onClick={toggleSideNav}
               className="text-neutral-900 dark:text-dark-1000 md:hidden"
             >
               {isSideNavOpen ? (
@@ -64,7 +78,7 @@ export default function Dashboard({
             <div className="flex items-center gap-2">
               {hasRightPanel && (
                 <button
-                  onClick={() => setIsRightPanelOpen(!isRightPanelOpen)}
+                  onClick={toggleRightPanel}
                   className="text-neutral-900 dark:text-dark-1000 md:hidden"
                 >
                   {isRightPanelOpen ? (
@@ -107,7 +121,7 @@ export default function Dashboard({
                   isRightPanelOpen ? "translate-x-0" : "translate-x-full"
                 }`}
               >
-                <div className="h-full overflow-y-auto">{rightPanel}</div>
+                <div className="h-full">{rightPanel}</div>
               </div>
             )}
 

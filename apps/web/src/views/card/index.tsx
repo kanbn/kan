@@ -180,8 +180,6 @@ export default function CardPage() {
     });
   };
 
-  const description = watch("description");
-
   if (!cardId) return <></>;
 
   return (

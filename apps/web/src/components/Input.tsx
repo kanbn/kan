@@ -55,7 +55,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className="flex w-full flex-col gap-1">
         <div className="relative flex">
           {prefix && (
-            <div className="flex shrink-0 items-center rounded-l-md border border-r-0 border-light-600 px-3 text-base dark:border-dark-700 dark:text-dark-1000 sm:text-sm/6">
+            <div className="flex shrink-0 items-center rounded-l-md border border-r-0 border-light-600 px-3 text-sm dark:border-dark-700 dark:text-dark-1000 sm:text-sm/6">
               {prefix}
             </div>
           )}
