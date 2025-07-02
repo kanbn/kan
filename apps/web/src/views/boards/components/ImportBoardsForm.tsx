@@ -81,7 +81,7 @@ const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
                     <Listbox.Button className="focus-ring-light-700 block w-full rounded-md border-0 bg-dark-300 bg-white/5 px-4 py-1.5 text-neutral-900 shadow-sm ring-1 ring-inset ring-light-600 focus:ring-2 focus:ring-inset dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:text-sm sm:leading-6">
                       <span className="flex items-center">
                         {integrationProviders[field.value]?.icon}
-                        <span className="ml-2 block truncate">
+                        <span className="ml-2 block truncate text-sm">
                           {integrationProviders[field.value]?.name}
                         </span>
                       </span>
@@ -113,7 +113,7 @@ const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
                                   integrationProviders[integration.provider]
                                     ?.icon
                                 }
-                                <span className="ml-2 block truncate font-normal">
+                                <span className="ml-2 block truncate text-sm font-normal">
                                   {
                                     integrationProviders[integration.provider]
                                       ?.name
@@ -125,12 +125,12 @@ const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
                         ) : (
                           <Listbox.Option
                             key="trello_placeholder"
-                            className="relative cursor-default select-none px-1"
+                            className="font-sm relative cursor-default select-none px-1"
                             value="trello"
                           >
-                            <div className="flex items-center rounded-[5px] p-1 hover:bg-light-200 dark:hover:bg-dark-400">
+                            <div className="flex items-center rounded-[5px] p-1 text-sm hover:bg-light-200 dark:hover:bg-dark-400">
                               {integrationProviders.trello?.icon}
-                              <span className="ml-2 block truncate font-normal">
+                              <span className="ml-2 block truncate text-sm">
                                 {integrationProviders.trello?.name}
                               </span>
                             </div>
