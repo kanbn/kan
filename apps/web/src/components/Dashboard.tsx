@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   TbLayoutSidebarLeftCollapse,
   TbLayoutSidebarLeftExpand,
@@ -9,6 +9,7 @@ import {
 
 import { authClient } from "@kan/auth/client";
 
+import { useClickOutside } from "~/hooks/useClickOutside";
 import FeedbackButton from "./FeedbackButton";
 import SideNavigation from "./SideNavigation";
 
@@ -27,6 +28,11 @@ export default function Dashboard({
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
   const [isRightPanelOpen, setIsRightPanelOpen] = useState(false);
 
+  const sideNavRef = useRef<HTMLDivElement>(null);
+  const rightPanelRef = useRef<HTMLDivElement>(null);
+  const sideNavButtonRef = useRef<HTMLButtonElement>(null);
+  const rightPanelButtonRef = useRef<HTMLButtonElement>(null);
+
   const toggleSideNav = () => {
     setIsSideNavOpen(!isSideNavOpen);
     if (!isSideNavOpen) {
@@ -41,6 +47,24 @@ export default function Dashboard({
     }
   };
 
+  useClickOutside(sideNavRef, (event) => {
+    if (sideNavButtonRef.current?.contains(event.target as Node)) {
+      return;
+    }
+    if (isSideNavOpen) {
+      setIsSideNavOpen(false);
+    }
+  });
+
+  useClickOutside(rightPanelRef, (event) => {
+    if (rightPanelButtonRef.current?.contains(event.target as Node)) {
+      return;
+    }
+    if (isRightPanelOpen) {
+      setIsRightPanelOpen(false);
+    }
+  });
+
   return (
     <>
       <style jsx global>{`
@@ -53,6 +77,7 @@ export default function Dashboard({
         <div className="m-auto flex h-12 min-h-12 w-full justify-between border-b border-light-600 px-5 py-2 align-middle dark:border-dark-400 md:h-16 md:min-h-16">
           <div className="my-auto flex w-full items-center justify-between">
             <button
+              ref={sideNavButtonRef}
               onClick={toggleSideNav}
               className="text-neutral-900 dark:text-dark-1000 md:hidden"
             >
@@ -78,6 +103,7 @@ export default function Dashboard({
             <div className="flex items-center gap-2">
               {hasRightPanel && (
                 <button
+                  ref={rightPanelButtonRef}
                   onClick={toggleRightPanel}
                   className="text-neutral-900 dark:text-dark-1000 md:hidden"
                 >
@@ -103,6 +129,7 @@ export default function Dashboard({
 
         <div className="flex h-full w-full">
           <div
+            ref={sideNavRef}
             className={`fixed left-0 z-50 h-[calc(100vh-3rem)] transform transition-transform duration-300 ease-in-out md:relative md:h-[calc(100vh-4rem)] md:translate-x-0 ${isSideNavOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"} `}
           >
             <SideNavigation
@@ -117,11 +144,12 @@ export default function Dashboard({
             {/* Mobile Right Panel */}
             {hasRightPanel && rightPanel && (
               <div
+                ref={rightPanelRef}
                 className={`fixed right-0 top-12 z-50 h-[calc(100vh-3rem)] w-80 transform bg-light-200 transition-transform duration-300 ease-in-out dark:bg-dark-100 md:hidden ${
                   isRightPanelOpen ? "translate-x-0" : "translate-x-full"
                 }`}
               >
-                <div className="h-full">{rightPanel}</div>
+                <div className="h-full overflow-y-auto">{rightPanel}</div>
               </div>
             )}
 
