@@ -46,6 +46,7 @@ export default async function handler(
     const client = new S3Client({
       region: env.S3_REGION ?? "",
       endpoint: env.S3_ENDPOINT ?? "",
+      forcePathStyle: env.S3_FORCE_PATH_STYLE === "true",
       credentials: {
         accessKeyId: env.S3_ACCESS_KEY_ID ?? "",
         secretAccessKey: env.S3_SECRET_ACCESS_KEY ?? "",
@@ -58,6 +59,7 @@ export default async function handler(
       new PutObjectCommand({
         Bucket: nextRuntimeEnv("NEXT_PUBLIC_AVATAR_BUCKET_NAME") ?? "",
         Key: filename,
+        ACL: "public-read",
       }),
     );
 

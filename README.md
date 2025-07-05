@@ -162,6 +162,7 @@ pnpm dev
 | `S3_ENDPOINT`                    | S3 endpoint URL                                          | For file uploads   | `https://xxx.r2.cloudflarestorage.com`        |
 | `S3_ACCESS_KEY_ID`               | S3 access key                                            | For file uploads   | `xxx`                                         |
 | `S3_SECRET_ACCESS_KEY`           | S3 secret key                                            | For file uploads   | `xxx`                                         |
+| `S3_FORCE_PATH_STYLE`            | Use path-style URLs for S3                               | For file uploads   | `true`                                        |
 | `NEXT_PUBLIC_STORAGE_URL`        | Storage service URL                                      | For file uploads   | `https://storage.kanbn.com`                   |
 | `NEXT_PUBLIC_STORAGE_DOMAIN`     | Storage domain name                                      | For file uploads   | `kanbn.com`                                   |
 | `NEXT_PUBLIC_AVATAR_BUCKET_NAME` | S3 bucket name for avatars                               | For file uploads   | `avatars`                                     |
