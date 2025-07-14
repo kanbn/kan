@@ -259,6 +259,7 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
             }
             return (
               <Button
+                key={key}
                 onClick={() => handleLoginWithProvider(key as SocialProvider)}
                 isLoading={isLoginWithProviderPending === key}
                 iconLeft={<provider.icon />}

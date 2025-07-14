@@ -84,7 +84,7 @@ export const socialProvidersPlugin = () => ({
         method: "GET",
       },
       async (ctx) =>
-        ctx.json(ctx.context.socialProviders.map((p) => p.name.toLowerCase())),
+        ctx.json(ctx.context.socialProviders.map((p) => p.id.toLowerCase())),
     ),
   },
 });
