@@ -86,8 +86,10 @@ export default function CheckboxDropdown({
             </label>
             {handleEdit && (
               <button
+                type="button"
                 className="invisible ml-auto group-hover:visible"
                 onClick={(event) => {
+                  event.preventDefault();
                   event.stopPropagation();
                   handleEdit(item.key);
                 }}
@@ -100,8 +102,12 @@ export default function CheckboxDropdown({
       ))}
       {handleCreate && (
         <button
+          type="button"
           className="flex w-full items-center rounded-[5px] p-2 px-2 text-[12px] text-dark-900 hover:bg-light-200 dark:hover:bg-dark-300"
-          onClick={() => handleCreate()}
+          onClick={(e) => {
+            e.preventDefault();
+            handleCreate();
+          }}
         >
           <HiMiniPlus size={20} className="pr-1.5" />
           {createNewItemLabel}

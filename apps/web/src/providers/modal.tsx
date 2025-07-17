@@ -17,27 +17,39 @@ interface Props {
   children: React.ReactNode;
 }
 
+interface ModalState {
+  contentType: string;
+  entityId?: string;
+  entityLabel?: string;
+}
+
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export const ModalProvider: React.FC<Props> = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [entityId, setEntityId] = useState("");
-  const [entityLabel, setEntityLabel] = useState("");
-  const [modalContentType, setModalContentType] = useState("");
+  const [modalStack, setModalStack] = useState<ModalState[]>([]);
+
+  const isOpen = modalStack.length > 0;
+  const currentModal = modalStack[modalStack.length - 1];
+  const modalContentType = currentModal?.contentType || "";
+  const entityId = currentModal?.entityId || "";
+  const entityLabel = currentModal?.entityLabel || "";
 
   const openModal = (
     contentType: string,
     entityId?: string,
     entityLabel?: string,
   ) => {
-    setIsOpen(true);
-    setModalContentType(contentType);
-    if (entityId) setEntityId(entityId);
-    if (entityLabel) setEntityLabel(entityLabel);
+    const newModal: ModalState = { contentType, entityId, entityLabel };
+    setModalStack(prev => [...prev, newModal]);
   };
 
   const closeModal = () => {
-    setIsOpen(false);
+    setModalStack(prev => {
+      if (prev.length <= 1) {
+        return [];
+      }
+      return prev.slice(0, -1);
+    });
   };
 
   return (
