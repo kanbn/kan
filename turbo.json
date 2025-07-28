@@ -109,7 +109,9 @@
     "S3_FORCE_PATH_STYLE",
     "PORT",
     "BETTER_AUTH_SECRET",
-    "BETTER_AUTH_TRUSTED_ORIGINS"
+    "BETTER_AUTH_TRUSTED_ORIGINS",
+    "PLUNK_API_KEY",
+    "PLUNK_API_URL"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",

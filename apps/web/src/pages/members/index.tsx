@@ -1,15 +1,17 @@
-import { WorkspaceProvider } from "~/providers/workspace";
-import Dashboard from "~/components/Dashboard";
+import type { NextPageWithLayout } from "~/pages/_app";
+import { getDashboardLayout } from "~/components/Dashboard";
 import Popup from "~/components/Popup";
 import MembersView from "~/views/members";
 
-export default function MembersPage() {
+const MembersPage: NextPageWithLayout = () => {
   return (
-    <WorkspaceProvider>
-      <Dashboard>
-        <MembersView />
-      </Dashboard>
+    <>
+      <MembersView />
       <Popup />
-    </WorkspaceProvider>
+    </>
   );
-}
+};
+
+MembersPage.getLayout = (page) => getDashboardLayout(page);
+
+export default MembersPage;

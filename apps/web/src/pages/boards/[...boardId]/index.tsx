@@ -1,15 +1,17 @@
-import { WorkspaceProvider } from "~/providers/workspace";
-import Dashboard from "~/components/Dashboard";
+import type { NextPageWithLayout } from "~/pages/_app";
+import { getDashboardLayout } from "~/components/Dashboard";
 import Popup from "~/components/Popup";
 import BoardView from "~/views/board";
 
-export default function BoardPage() {
+const BoardPage: NextPageWithLayout = () => {
   return (
-    <WorkspaceProvider>
-      <Dashboard>
-        <BoardView />
-      </Dashboard>
+    <>
+      <BoardView />
       <Popup />
-    </WorkspaceProvider>
+    </>
   );
-}
+};
+
+BoardPage.getLayout = (page) => getDashboardLayout(page);
+
+export default BoardPage;

@@ -276,6 +276,21 @@ export const boardRouter = createTRPCRouter({
 
       await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
 
+      if (input.slug) {
+        const isBoardSlugAvailable = await boardRepo.isBoardSlugAvailable(
+          ctx.db,
+          input.slug,
+          board.workspaceId,
+        );
+
+        if (!isBoardSlugAvailable) {
+          throw new TRPCError({
+            message: `Board slug ${input.slug} is not available`,
+            code: "BAD_REQUEST",
+          });
+        }
+      }
+
       const result = await boardRepo.update(ctx.db, {
         name: input.name,
         slug: input.slug,
@@ -407,11 +422,23 @@ export const boardRouter = createTRPCRouter({
       }),
     )
     .query(async ({ ctx, input }) => {
+      const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
+        ctx.db,
+        input.boardPublicId,
+      );
+
+      if (!board)
+        throw new TRPCError({
+          message: `Board with public ID ${input.boardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
       const isBoardSlugAvailable = await boardRepo.isBoardSlugAvailable(
         ctx.db,
         input.boardSlug,
-        input.boardPublicId,
+        board.workspaceId,
       );
+
       return {
         isReserved: !isBoardSlugAvailable,
       };

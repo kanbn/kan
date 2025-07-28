@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { HiMiniArrowTopRightOnSquare } from "react-icons/hi2";
 
 import Button from "~/components/Button";
+import FeedbackModal from "~/components/FeedbackModal";
 import { LanguageSelector } from "~/components/LanguageSelector";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
@@ -131,7 +132,7 @@ export default function SettingsPage() {
           className="h-full max-h-[calc(100vdh-3rem)] overflow-y-auto md:max-h-[calc(100vdh-4rem)]"
         >
           <PageHead title={t`Settings | ${workspace.name ?? "Workspace"}`} />
-          <div className="m-auto max-w-[1600px] px-5 py-6 md:px-28 md:py-12">
+          <div className="m-auto max-w-[1100px] px-5 py-6 md:px-28 md:py-12">
             <div className="mb-8 flex w-full justify-between">
               <h1 className="font-bold tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
                 {t`Settings`}
@@ -300,7 +301,8 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <Modal>
+          <Modal modalSize={modalContentType === "NEW_FEEDBACK" ? "md" : "sm"}>
+            {modalContentType === "NEW_FEEDBACK" && <FeedbackModal />}
             {modalContentType === "NEW_WORKSPACE" && <NewWorkspaceForm />}
             {modalContentType === "DELETE_WORKSPACE" && (
               <DeleteWorkspaceConfirmation />

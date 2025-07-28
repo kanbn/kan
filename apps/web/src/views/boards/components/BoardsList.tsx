@@ -19,7 +19,7 @@ export function BoardsList() {
 
   if (isLoading)
     return (
-      <div className="xxl:grid-cols-7 grid w-full grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid h-fit w-full grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-7">
         <div className="mr-5 flex h-[150px] w-full animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
         <div className="mr-5 flex h-[150px] w-full animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
         <div className="mr-5 flex h-[150px] w-full animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
@@ -45,12 +45,12 @@ export function BoardsList() {
     );
 
   return (
-    <div className="grid h-fit w-full grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7">
+    <div className="grid h-fit w-full grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-7">
       {data?.map((board) => (
         <Link key={board.publicId} href={`boards/${board.publicId}`}>
           <div className="align-center relative mr-5 flex h-[150px] w-full items-center justify-center rounded-md border border-dashed border-light-400 bg-light-50 shadow-sm hover:bg-light-200 dark:border-dark-600 dark:bg-dark-50 dark:hover:bg-dark-100">
             <PatternedBackground />
-            <p className="text-md px-4 font-bold text-neutral-900 dark:text-dark-1000">
+            <p className="px-4 text-[14px] font-bold text-neutral-700 dark:text-dark-1000">
               {board.name}
             </p>
           </div>

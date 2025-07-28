@@ -1,6 +1,7 @@
 import { render } from "@react-email/render";
 import nodemailer from "nodemailer";
 
+import { cloudMailerClient } from "./cloudMailerClient";
 import JoinWorkspaceTemplate from "./templates/join-workspace";
 import MagicLinkTemplate from "./templates/magic-link";
 import ResetPasswordTemplate from "./templates/reset-password";
@@ -43,6 +44,15 @@ export const sendEmail = async (
       subject,
       html,
     };
+
+    if (cloudMailerClient) {
+      const response = await cloudMailerClient.emails.send({
+        ...options,
+        body: html,
+      });
+
+      return response;
+    }
 
     const response = await transporter.sendMail(options);
 

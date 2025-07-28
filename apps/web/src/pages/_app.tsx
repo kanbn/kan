@@ -1,8 +1,9 @@
 import "~/styles/globals.css";
 import "~/utils/i18n";
 
-import type { Viewport } from "next";
-import type { AppType } from "next/app";
+import type { NextPage, Viewport } from "next";
+import type { AppProps, AppType } from "next/app";
+import type { ReactElement, ReactNode } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import { env } from "next-runtime-env";
@@ -34,7 +35,15 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-const MyApp: AppType = ({ Component, pageProps }) => {
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
   const posthogKey = env("NEXT_PUBLIC_POSTHOG_KEY");
 
   useEffect(() => {
@@ -49,6 +58,8 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       });
     }
   }, [posthogKey]);
+
+  const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
     <>
@@ -75,10 +86,10 @@ const MyApp: AppType = ({ Component, pageProps }) => {
               <PopupProvider>
                 {posthogKey ? (
                   <PostHogProvider client={posthog}>
-                    <Component {...pageProps} />
+                    {getLayout(<Component {...pageProps} />)}
                   </PostHogProvider>
                 ) : (
-                  <Component {...pageProps} />
+                  getLayout(<Component {...pageProps} />)
                 )}
               </PopupProvider>
             </ModalProvider>

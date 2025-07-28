@@ -361,7 +361,6 @@ export default function Editor({
     <div ref={containerRef}>
       <style jsx global>{`
         .tiptap p.is-empty::before {
-          color: #adb5bd;
           content: attr(data-placeholder);
           float: left;
           height: 0;
@@ -374,7 +373,7 @@ export default function Editor({
       {!readOnly && editor && <EditorBubbleMenu editor={editor} />}
       <EditorContent
         editor={editor}
-        className="prose dark:prose-invert prose-sm max-w-none overflow-y-auto [&_blockquote]:!text-xs [&_h1]:!text-lg [&_h2]:!text-base [&_h3]:!text-sm [&_ol]:!text-xs [&_p.is-empty::before]:text-dark-800 [&_p.is-empty::before]:dark:text-dark-800 [&_p]:!text-sm [&_p]:text-black [&_p]:dark:text-white [&_ul]:!text-xs"
+        className="prose dark:prose-invert prose-sm max-w-none overflow-y-auto [&_blockquote]:!text-xs [&_h1]:!text-lg [&_h2]:!text-base [&_h3]:!text-sm [&_ol]:!text-xs [&_p.is-empty::before]:text-light-900 [&_p.is-empty::before]:dark:text-dark-800 [&_p]:!text-sm [&_p]:text-black [&_p]:dark:text-white [&_ul]:!text-xs"
       />
     </div>
   );

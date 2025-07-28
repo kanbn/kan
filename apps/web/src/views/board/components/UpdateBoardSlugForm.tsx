@@ -167,7 +167,8 @@ export function UpdateBoardSlugForm({
               !isDirty ||
               updateBoardSlug.isPending ||
               errors.slug?.message !== undefined ||
-              isBoardSlugAvailable?.isReserved
+              isBoardSlugAvailable?.isReserved ||
+              checkBoardSlugAvailability.isLoading
             }
           >
             {t`Update`}

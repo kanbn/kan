@@ -11,7 +11,7 @@ import type { dbClient } from "@kan/db/client";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import * as schema from "@kan/db/schema";
-import { sendEmail } from "@kan/email";
+import { cloudMailerClient, sendEmail } from "@kan/email";
 import { createStripeClient } from "@kan/stripe";
 
 export const configuredProviders = socialProviderList.reduce<
@@ -166,13 +166,34 @@ export const initAuth = (db: dbClient) => {
     databaseHooks: {
       user: {
         create: {
-          before() {
+          async before(user) {
             if (env("NEXT_PUBLIC_DISABLE_SIGN_UP")?.toLowerCase() === "true") {
-              return Promise.resolve(false);
+              const pendingInvitation = await memberRepo.getByEmailAndStatus(
+                db,
+                user.email,
+                "invited",
+              );
+
+              if (!pendingInvitation) {
+                return Promise.resolve(false);
+              }
+
+              return Promise.resolve(true);
             }
             return Promise.resolve(true);
           },
           async after(user) {
+            if (cloudMailerClient) {
+              await cloudMailerClient.events.track({
+                event: "user-signup",
+                email: user.email,
+                data: {
+                  name: user.name,
+                  userId: user.id,
+                },
+              });
+            }
+
             if (
               user.image &&
               !user.image.includes(process.env.NEXT_PUBLIC_STORAGE_DOMAIN!)

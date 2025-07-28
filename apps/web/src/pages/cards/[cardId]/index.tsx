@@ -1,15 +1,18 @@
-import Dashboard from "~/components/Dashboard";
+import type { NextPageWithLayout } from "~/pages/_app";
+import { getDashboardLayout } from "~/components/Dashboard";
 import Popup from "~/components/Popup";
-import { WorkspaceProvider } from "~/providers/workspace";
 import CardView, { CardRightPanel } from "~/views/card";
 
-export default function CardPage() {
+const CardPage: NextPageWithLayout = () => {
   return (
-    <WorkspaceProvider>
-      <Dashboard hasRightPanel rightPanel={<CardRightPanel />}>
-        <CardView />
-      </Dashboard>
+    <>
+      <CardView />
       <Popup />
-    </WorkspaceProvider>
+    </>
   );
-}
+};
+
+CardPage.getLayout = (page) =>
+  getDashboardLayout(page, <CardRightPanel />, true);
+
+export default CardPage;

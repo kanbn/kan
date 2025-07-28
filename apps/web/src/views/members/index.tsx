@@ -7,6 +7,7 @@ import { authClient } from "@kan/auth/client";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import Dropdown from "~/components/Dropdown";
+import FeedbackModal from "~/components/FeedbackModal";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
@@ -96,7 +97,7 @@ export default function MembersPage() {
         </td>
         <td
           className={twMerge(
-            "w-auto min-w-[120px] sm:w-[35%] sm:min-w-[150px]",
+            "w-auto min-w-[120px] overflow-visible sm:w-[35%] sm:min-w-[150px]",
             isLastRow && "rounded-br-lg",
           )}
         >
@@ -120,7 +121,7 @@ export default function MembersPage() {
             </div>
             <div
               className={twMerge(
-                "relative",
+                "relative z-50",
                 (workspace.role !== "admin" || showSkeleton) && "hidden",
               )}
             >
@@ -154,7 +155,7 @@ export default function MembersPage() {
   return (
     <>
       <PageHead title={t`Members | ${workspace.name ?? "Workspace"}`} />
-      <div className="m-auto h-full max-w-[1600px] p-6 px-5 md:px-28 md:py-12">
+      <div className="m-auto h-full max-w-[1100px] p-6 px-5 md:px-28 md:py-12">
         <div className="mb-8 flex w-full justify-between">
           <h1 className="font-bold tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
             {t`Members`}
@@ -171,10 +172,10 @@ export default function MembersPage() {
         </div>
 
         <div className="mt-8 flow-root">
-          <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full px-4 py-2 align-middle sm:px-6 lg:px-8">
+          <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full overflow-x-auto px-4 py-2 pb-16 align-middle sm:px-6 lg:px-8">
               <div className="h-full shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-                <table className="min-w-full divide-y divide-light-600 dark:divide-dark-600">
+                <table className="min-w-full divide-y divide-light-600 overflow-visible dark:divide-dark-600">
                   <thead className="rounded-t-lg bg-light-300 dark:bg-dark-200">
                     <tr>
                       <th
@@ -191,7 +192,7 @@ export default function MembersPage() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-light-600 bg-light-50 dark:divide-dark-600 dark:bg-dark-100">
+                  <tbody className="divide-y divide-light-600 overflow-visible bg-light-50 dark:divide-dark-600 dark:bg-dark-100">
                     {!isLoading &&
                       data?.members.map((member, index) => (
                         <TableRow
@@ -221,7 +222,8 @@ export default function MembersPage() {
           </div>
         </div>
 
-        <Modal>
+        <Modal modalSize={modalContentType === "NEW_FEEDBACK" ? "md" : "sm"}>
+          {modalContentType === "NEW_FEEDBACK" && <FeedbackModal />}
           {modalContentType === "NEW_WORKSPACE" && <NewWorkspaceForm />}
           {modalContentType === "INVITE_MEMBER" && <InviteMemberForm />}
           {modalContentType === "REMOVE_MEMBER" && <DeleteMemberConfirmation />}

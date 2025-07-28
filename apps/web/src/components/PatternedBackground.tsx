@@ -3,8 +3,8 @@ const PatternedBackground = () => (
     <svg className="h-full w-full">
       <pattern
         id="pattern"
-        x="0.034759358288862785"
-        y="3.335370511841166"
+        x="10"
+        y="10"
         width="14.423223834988539"
         height="14.423223834988539"
         patternUnits="userSpaceOnUse"

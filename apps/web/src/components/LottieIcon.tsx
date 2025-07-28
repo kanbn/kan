@@ -2,11 +2,11 @@ import dynamic from "next/dynamic";
 
 const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
 
-type IconProps = {
+interface IconProps {
   isPlaying: boolean;
   index: number;
   json: object;
-};
+}
 
 const Icon: React.FC<IconProps> = ({ isPlaying, index, json }) => {
   return (
@@ -15,7 +15,7 @@ const Icon: React.FC<IconProps> = ({ isPlaying, index, json }) => {
       animationData={json}
       play={isPlaying}
       loop={false}
-      style={{ width: 20, height: 20, fill: "white" }}
+      style={{ width: 18, height: 18, fill: "white" }}
       rendererSettings={{ preserveAspectRatio: "xMidYMid slice" }}
     />
   );

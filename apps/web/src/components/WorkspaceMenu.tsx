@@ -2,11 +2,16 @@ import { Menu, Transition } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { Fragment } from "react";
 import { HiCheck } from "react-icons/hi2";
+import { twMerge } from "tailwind-merge";
 
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 
-export default function WorkspaceMenu() {
+export default function WorkspaceMenu({
+  isCollapsed = false,
+}: {
+  isCollapsed?: boolean;
+}) {
   const { workspace, isLoading, availableWorkspaces, switchWorkspace } =
     useWorkspace();
   const { openModal } = useModal();
@@ -15,22 +20,43 @@ export default function WorkspaceMenu() {
     <Menu as="div" className="relative inline-block w-full pb-3 text-left">
       <div>
         {isLoading ? (
-          <div className="mb-1 flex p-1.5">
-            <div className="h-6 w-6 animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-200" />
-            <div className="ml-2 h-6 w-[150px] animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-200" />
+          <div className={twMerge("mb-1", isCollapsed && "md:flex md:p-1.5")}>
+            <div className="h-6 w-6 animate-pulse rounded-md bg-light-200 dark:bg-dark-200" />
+            <div
+              className={twMerge(
+                "ml-2 h-6 w-[150px] animate-pulse rounded-md bg-light-200 dark:bg-dark-200",
+                isCollapsed && "hidden md:block",
+              )}
+            />
           </div>
         ) : (
-          <Menu.Button className="mb-1 flex w-full items-center rounded-[5px] p-1.5 hover:bg-light-200 dark:hover:bg-dark-200">
-            <span className="inline-flex h-6 w-6 items-center justify-center rounded-[5px] bg-indigo-700">
+          <Menu.Button
+            className={twMerge(
+              "mb-1 flex h-[34px] w-full items-center rounded-md p-1.5 hover:bg-light-200 dark:hover:bg-dark-200",
+              isCollapsed && "md:mb-1.5 md:h-9 md:p-1",
+            )}
+            title={isCollapsed ? workspace.name : undefined}
+          >
+            <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-indigo-700">
               <span className="text-xs font-bold leading-none text-white">
                 {workspace.name.charAt(0).toUpperCase()}
               </span>
             </span>
-            <span className="ml-2 text-sm font-bold text-neutral-900 dark:text-dark-1000">
+            <span
+              className={twMerge(
+                "ml-2 text-sm font-bold text-neutral-900 dark:text-dark-1000",
+                isCollapsed && "md:hidden",
+              )}
+            >
               {workspace.name}
             </span>
             {workspace.plan === "pro" && (
-              <span className="ml-2 inline-flex items-center rounded-md bg-indigo-100 px-2 py-1 text-[10px] font-medium text-indigo-700">
+              <span
+                className={twMerge(
+                  "ml-2 inline-flex items-center rounded-md bg-indigo-100 px-2 py-1 text-[10px] font-medium text-indigo-700",
+                  isCollapsed && "md:hidden",
+                )}
+              >
                 Pro
               </span>
             )}
@@ -47,7 +73,12 @@ export default function WorkspaceMenu() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute left-0 z-10 w-full origin-top-left rounded-md border border-light-600 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-600 dark:bg-dark-300">
+        <Menu.Items
+          className={twMerge(
+            "absolute left-0 z-10 origin-top-left rounded-md border border-light-600 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-600 dark:bg-dark-300",
+            isCollapsed ? "w-48" : "w-full",
+          )}
+        >
           <div className="p-1">
             {availableWorkspaces.map((availableWorkspace) => (
               <div key={availableWorkspace.publicId} className="flex">

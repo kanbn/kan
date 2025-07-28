@@ -2,6 +2,7 @@ import { t } from "@lingui/core/macro";
 import { HiArrowDownTray, HiOutlinePlusSmall } from "react-icons/hi2";
 
 import Button from "~/components/Button";
+import FeedbackModal from "~/components/FeedbackModal";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
@@ -20,8 +21,8 @@ export default function BoardsPage() {
   return (
     <>
       <PageHead title={t`Boards | ${workspace.name ?? "Workspace"}`} />
-      <div className="m-auto h-full max-w-[1600px] px-5 py-6 md:px-8 md:py-8">
-        <div className="mb-8 flex w-full items-center justify-between">
+      <div className="m-auto h-full max-w-[1100px] p-6 px-5 md:px-28 md:py-12">
+        <div className="relative z-10 mb-8 flex w-full items-center justify-between">
           <h1 className="font-bold tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
             {t`Boards`}
           </h1>
@@ -49,7 +50,8 @@ export default function BoardsPage() {
           </div>
         </div>
 
-        <Modal>
+        <Modal modalSize={modalContentType === "NEW_FEEDBACK" ? "md" : "sm"}>
+          {modalContentType === "NEW_FEEDBACK" && <FeedbackModal />}
           {modalContentType === "NEW_BOARD" && <NewBoardForm />}
           {modalContentType === "IMPORT_BOARDS" && <ImportBoardsForm />}
           {modalContentType === "NEW_WORKSPACE" && <NewWorkspaceForm />}

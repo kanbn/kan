@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, exists, inArray, isNull, or, sql } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, isNull, or } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { BoardVisibilityStatus } from "@kan/db/schema";
@@ -481,30 +481,18 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
 export const isBoardSlugAvailable = async (
   db: dbClient,
   boardSlug: string,
-  boardPublicId: string,
+  workspaceId: number,
 ) => {
-  const result = await db
-    .select({ id: boards.id })
-    .from(boards)
-    .where(
-      and(
-        eq(boards.publicId, boardPublicId),
-        exists(
-          db
-            .select({ id: boards.id })
-            .from(boards)
-            .where(
-              and(
-                eq(boards.slug, boardSlug),
-                eq(boards.workspaceId, sql`${boards.workspaceId}`), // Reference outer query's workspaceId
-                isNull(boards.deletedAt),
-              ),
-            )
-            .limit(1),
-        ),
-      ),
-    )
-    .limit(1);
+  const result = await db.query.boards.findFirst({
+    columns: {
+      id: true,
+    },
+    where: and(
+      eq(boards.slug, boardSlug),
+      eq(boards.workspaceId, workspaceId),
+      isNull(boards.deletedAt),
+    ),
+  });
 
-  return result.length === 0;
+  return result === undefined;
 };
