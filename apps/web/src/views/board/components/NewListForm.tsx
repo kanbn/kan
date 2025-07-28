@@ -145,7 +145,12 @@ export function NewListForm({
         />
 
         <div>
-          <Button type="submit">{t`Create list`}</Button>
+          <Button
+            type="submit"
+            disabled={createList.isPending || !watch("name")}
+          >
+            {t`Create list`}
+          </Button>
         </div>
       </div>
     </form>

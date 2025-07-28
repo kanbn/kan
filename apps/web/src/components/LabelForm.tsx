@@ -229,6 +229,9 @@ export function LabelForm({
           <Button
             type="submit"
             isLoading={updateLabel.isPending || createLabel.isPending}
+            disabled={
+              !watch("name")
+            }
           >
             {isEdit ? t`Update label` : t`Create label`}
           </Button>
