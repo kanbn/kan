@@ -7,14 +7,18 @@ interface Props {
   children: React.ReactNode;
   modalSize?: "sm" | "md" | "lg";
   positionFromTop?: "sm" | "md" | "lg";
+  isVisible?: boolean;
 }
 
 const Modal: React.FC<Props> = ({
   children,
   modalSize = "sm",
   positionFromTop = "md",
+  isVisible,
 }) => {
   const { isOpen, closeModal } = useModal();
+
+  const shouldShow = isVisible !== undefined ? isVisible : isOpen;
 
   const modalSizeMap = {
     sm: "max-w-[400px]",
@@ -29,7 +33,7 @@ const Modal: React.FC<Props> = ({
   };
 
   return (
-    <Transition.Root show={isOpen} as={Fragment}>
+    <Transition.Root show={shouldShow} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
         <Transition.Child
           as={Fragment}

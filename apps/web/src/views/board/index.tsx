@@ -44,7 +44,7 @@ export default function BoardPage() {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
-  const { openModal, modalContentType, entityId } = useModal();
+  const { openModal, modalContentType, entityId, isOpen } = useModal();
   const [selectedPublicListId, setSelectedPublicListId] =
     useState<PublicListId>("");
   const [isInitialLoading, setIsInitialLoading] = useState(true);
@@ -234,99 +234,93 @@ export default function BoardPage() {
     }
   };
 
-  const modalConfig = {
-    DELETE_BOARD: {
-      size: "sm" as const,
-      keepMounted: false,
-      component: <DeleteBoardConfirmation boardPublicId={boardId ?? ""} />
-    },
-    DELETE_LIST: {
-      size: "sm" as const,
-      keepMounted: false,
-      component: <DeleteListConfirmation
-        listPublicId={selectedPublicListId}
-        queryParams={queryParams}
-      />
-    },
-    NEW_CARD: {
-      size: "md" as const,
-      keepMounted: true,
-      component: <NewCardForm
-        boardPublicId={boardId ?? ""}
-        listPublicId={selectedPublicListId}
-        queryParams={queryParams}
-      />
-    },
-    NEW_LIST: {
-      size: "sm" as const,
-      keepMounted: false,
-      component: <NewListForm
-        boardPublicId={boardId ?? ""}
-        queryParams={queryParams}
-      />
-    },
-    NEW_WORKSPACE: {
-      size: "sm" as const,
-      keepMounted: false,
-      component: <NewWorkspaceForm />
-    },
-    NEW_LABEL: {
-      size: "sm" as const,
-      keepMounted: true,
-      component: <LabelForm boardPublicId={boardId ?? ""} refetch={refetchBoard} />
-    },
-    EDIT_LABEL: {
-      size: "sm" as const,
-      keepMounted: true,
-      component: <LabelForm
-        boardPublicId={boardId ?? ""}
-        refetch={refetchBoard}
-        isEdit
-      />
-    },
-    DELETE_LABEL: {
-      size: "sm" as const,
-      keepMounted: false,
-      component: <DeleteLabelConfirmation
-        refetch={refetchBoard}
-        labelPublicId={entityId}
-      />
-    },
-    UPDATE_BOARD_SLUG: {
-      size: "sm" as const,
-      keepMounted: false,
-      component: <UpdateBoardSlugForm
-        boardPublicId={boardId ?? ""}
-        workspaceSlug={workspace.slug ?? ""}
-        boardSlug={boardData?.slug ?? ""}
-        queryParams={queryParams}
-      />
-    }
-  };
-
-  const currentModalConfig = modalContentType ? modalConfig[modalContentType as keyof typeof modalConfig] : null;
-
   const renderModalContent = () => {
     return (
       <>
-        {Object.entries(modalConfig).map(([modalType, config]) => {
-          if (!config.keepMounted) return null;
-          
-          return (
-            <div
-              key={modalType}
-              style={{
-                display: modalType === modalContentType ? 'block' : 'none'
-              }}
-            >
-              {config.component}
-            </div>
-          );
-        })}
-        
-        {currentModalConfig && !currentModalConfig.keepMounted && (
-          <div>{currentModalConfig.component}</div>
-        )}
+        <Modal 
+          modalSize="sm" 
+          isVisible={isOpen && modalContentType === "DELETE_BOARD"}
+        >
+          <DeleteBoardConfirmation boardPublicId={boardId ?? ""} />
+        </Modal>
+
+        <Modal 
+          modalSize="sm" 
+          isVisible={isOpen && modalContentType === "DELETE_LIST"}
+        >
+          <DeleteListConfirmation
+            listPublicId={selectedPublicListId}
+            queryParams={queryParams}
+          />
+        </Modal>
+
+        <Modal 
+          modalSize="md" 
+          isVisible={isOpen && modalContentType === "NEW_CARD"}
+        >
+          <NewCardForm
+            boardPublicId={boardId ?? ""}
+            listPublicId={selectedPublicListId}
+            queryParams={queryParams}
+          />
+        </Modal>
+
+        <Modal 
+          modalSize="sm" 
+          isVisible={isOpen && modalContentType === "NEW_LIST"}
+        >
+          <NewListForm
+            boardPublicId={boardId ?? ""}
+            queryParams={queryParams}
+          />
+        </Modal>
+
+        <Modal 
+          modalSize="sm" 
+          isVisible={isOpen && modalContentType === "NEW_WORKSPACE"}
+        >
+          <NewWorkspaceForm />
+        </Modal>
+
+        <Modal 
+          modalSize="sm" 
+          isVisible={isOpen && modalContentType === "NEW_LABEL"}
+        >
+          <LabelForm boardPublicId={boardId ?? ""} refetch={refetchBoard} />
+        </Modal>
+
+        <Modal 
+          modalSize="sm" 
+          isVisible={isOpen && modalContentType === "EDIT_LABEL"}
+        >
+          <LabelForm
+            boardPublicId={boardId ?? ""}
+            refetch={refetchBoard}
+            isEdit
+          />
+        </Modal>
+
+        <Modal 
+          modalSize="sm" 
+          isVisible={isOpen && modalContentType === "DELETE_LABEL"}
+        >
+          <DeleteLabelConfirmation
+            refetch={refetchBoard}
+            labelPublicId={entityId}
+          />
+        </Modal>
+
+        <Modal 
+          modalSize="sm" 
+          isVisible={isOpen && modalContentType === "UPDATE_BOARD_SLUG"}
+        >
+          <UpdateBoardSlugForm
+            boardPublicId={boardId ?? ""}
+            workspaceSlug={workspace.slug ?? ""}
+            boardSlug={boardData?.slug ?? ""}
+            queryParams={queryParams}
+          />
+        </Modal>
       </>
     );
   };
@@ -518,9 +512,7 @@ export default function BoardPage() {
             </>
           ) : null}
         </div>
-        <Modal modalSize={currentModalConfig?.size ?? "sm"}>
-          {renderModalContent()}
-        </Modal>
+        {renderModalContent()}
       </div>
     </>
   );

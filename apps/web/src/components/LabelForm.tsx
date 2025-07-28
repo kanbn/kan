@@ -63,12 +63,16 @@ export function LabelForm({
       );
       try {
         refetch();
-        if (!isCreateAnotherEnabled) closeModal();
-        reset({
-          name: "",
-          colour: colours[(currentColourIndex + 1) % colours.length],
-          isCreateAnotherEnabled,
-        });
+        if (!isCreateAnotherEnabled) {
+          closeModal();
+        } else {
+          const newFormState = {
+            name: "",
+            colour: colours[(currentColourIndex + 1) % colours.length],
+            isCreateAnotherEnabled,
+          };
+          reset(newFormState);
+        }
       } catch (e) {
         console.log(e);
       }
@@ -79,10 +83,6 @@ export function LabelForm({
     onSuccess: () => {
       refetch();
       closeModal();
-      reset({
-        name: "",
-        colour: colours[0],
-      });
     },
   });
 

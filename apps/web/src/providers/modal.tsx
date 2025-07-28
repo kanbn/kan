@@ -1,5 +1,15 @@
 import { createContext, useContext, useState } from "react";
 
+interface ModalState {
+  contentType: string;
+  entityId?: string;
+  entityLabel?: string;
+}
+
+interface Props {
+  children: React.ReactNode;
+}
+
 type ModalContextType = {
   isOpen: boolean;
   openModal: (
@@ -11,22 +21,18 @@ type ModalContextType = {
   modalContentType: string;
   entityId: string;
   entityLabel: string;
+  modalStates: Record<string, any>;
+  setModalState: (modalType: string, state: any) => void;
+  getModalState: (modalType: string) => any;
+  clearModalState: (modalType: string) => void;
+  clearAllModalStates: () => void;
 };
-
-interface Props {
-  children: React.ReactNode;
-}
-
-interface ModalState {
-  contentType: string;
-  entityId?: string;
-  entityLabel?: string;
-}
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export const ModalProvider: React.FC<Props> = ({ children }) => {
   const [modalStack, setModalStack] = useState<ModalState[]>([]);
+  const [modalStates, setModalStates] = useState<Record<string, any>>({});
 
   const isOpen = modalStack.length > 0;
   const currentModal = modalStack[modalStack.length - 1];
@@ -52,6 +58,29 @@ export const ModalProvider: React.FC<Props> = ({ children }) => {
     });
   };
 
+  const setModalState = (modalType: string, state: any) => {
+    setModalStates(prev => ({
+      ...prev,
+      [modalType]: state
+    }));
+  };
+
+  const getModalState = (modalType: string) => {
+    return modalStates[modalType];
+  };
+
+  const clearModalState = (modalType: string) => {
+    setModalStates(prev => {
+      const newStates = { ...prev };
+      delete newStates[modalType];
+      return newStates;
+    });
+  };
+
+  const clearAllModalStates = () => {
+    setModalStates({});
+  };
+
   return (
     <ModalContext.Provider
       value={{
@@ -61,6 +90,11 @@ export const ModalProvider: React.FC<Props> = ({ children }) => {
         modalContentType,
         entityId,
         entityLabel,
+        modalStates,
+        setModalState,
+        getModalState,
+        clearModalState,
+        clearAllModalStates,
       }}
     >
       {children}

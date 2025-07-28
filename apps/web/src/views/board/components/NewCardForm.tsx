@@ -18,6 +18,7 @@ import Editor from "~/components/Editor";
 import Input from "~/components/Input";
 import LabelIcon from "~/components/LabelIcon";
 import Toggle from "~/components/Toggle";
+import { useModalFormState } from "~/hooks/useModalFormState";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
@@ -49,17 +50,24 @@ export function NewCardForm({
 
   const utils = api.useUtils();
 
+  // persists the form values
+  const { formState, saveFormState } = useModalFormState<NewCardFormInput>({
+    modalType: "NEW_CARD",
+    initialValues: {
+      title: "",
+      description: "",
+      listPublicId,
+      labelPublicIds: [],
+      memberPublicIds: [],
+      isCreateAnotherEnabled: false,
+      position: "start",
+    },
+    resetOnClose: true,
+  });
+
   const { register, handleSubmit, reset, setValue, watch } =
     useForm<NewCardFormInput>({
-      defaultValues: {
-        title: "",
-        description: "",
-        listPublicId,
-        labelPublicIds: [],
-        memberPublicIds: [],
-        isCreateAnotherEnabled: false,
-        position: "start",
-      },
+      values: formState,
     });
 
   const labelPublicIds = watch("labelPublicIds") || [];
@@ -67,6 +75,15 @@ export function NewCardForm({
   const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
   const position = watch("position");
   const title = watch("title");
+  const description = watch("description");
+
+  // saving form state whenever form values change
+  useEffect(() => {
+    const subscription = watch((data) => {
+      saveFormState(data as NewCardFormInput);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch, saveFormState]);
 
   const { data: boardData } = api.board.byId.useQuery(queryParams, {
     enabled: !!boardPublicId,
@@ -131,17 +148,24 @@ export function NewCardForm({
     },
     onSuccess: async () => {
       const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
-      if (!isCreateAnotherEnabled) closeModal();
+      if (!isCreateAnotherEnabled) {
+        // close modal (state will auto-clear due to resetOnClose: true)
+        closeModal();
+      } else {
+        // reset form for creating another card
+        const newFormState = {
+          title: "",
+          description: "",
+          listPublicId: watch("listPublicId"),
+          labelPublicIds: [],
+          memberPublicIds: [],
+          isCreateAnotherEnabled,
+          position,
+        };
+        reset(newFormState);
+        saveFormState(newFormState);
+      }
       await utils.board.byId.invalidate(queryParams);
-      reset({
-        title: "",
-        description: "",
-        listPublicId: watch("listPublicId"),
-        labelPublicIds: [],
-        memberPublicIds: [],
-        isCreateAnotherEnabled,
-        position,
-      });
     },
   });
 
@@ -264,8 +288,11 @@ export function NewCardForm({
         <div className="mt-2">
           <div className="block max-h-48 min-h-24 w-full overflow-y-auto rounded-md border-0 bg-dark-300 bg-white/5 px-3 py-2 text-sm shadow-sm ring-1 ring-inset ring-light-600 focus-within:ring-2 focus-within:ring-inset focus-within:ring-light-700 dark:ring-dark-700 dark:focus-within:ring-dark-700 sm:leading-6">
             <Editor
-              content=""
-              onChange={(value) => setValue("description", value)}
+              content={description}
+              onChange={(value) => {
+                setValue("description", value);
+                saveFormState({ ...formState, description: value });
+              }}
             />
           </div>
         </div>

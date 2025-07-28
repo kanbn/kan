@@ -15,6 +15,7 @@ import {
   ReactRenderer,
   useEditor,
 } from "@tiptap/react";
+import { useEffect } from "react";
 import StarterKit from "@tiptap/starter-kit";
 import Suggestion from "@tiptap/suggestion";
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
@@ -343,8 +344,18 @@ export default function Editor({
       editable: !readOnly,
       injectCSS: false,
     },
-    [content],
+    [], // creating the editor only once
   );
+
+  // this will sync external content changes without re-creating the editor instance
+  useEffect(() => {
+    if (!editor) return;
+    const currentHTML = editor.getHTML();
+    const safeContent = content ?? "";
+    if (safeContent !== currentHTML) {
+      editor.commands.setContent(safeContent, false);
+    }
+  }, [content, editor]);
 
   return (
     <div ref={containerRef}>
