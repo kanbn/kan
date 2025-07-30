@@ -46,7 +46,7 @@ export function NewCardForm({
   queryParams,
 }: NewCardFormProps) {
   const { showPopup } = usePopup();
-  const { closeModal, openModal } = useModal();
+  const { closeModal, openModal, modalStates, clearModalState } = useModal();
 
   const utils = api.useUtils();
 
@@ -85,10 +85,39 @@ export function NewCardForm({
     return () => subscription.unsubscribe();
   }, [watch, saveFormState]);
 
+  
   const { data: boardData } = api.board.byId.useQuery(queryParams, {
     enabled: !!boardPublicId,
   });
 
+  // this adds the new created label to selected labels
+  useEffect(() => {
+    const newLabelId = modalStates["NEW_LABEL_CREATED"];
+    if (newLabelId !== undefined && !labelPublicIds.includes(newLabelId)) {
+      setValue("labelPublicIds", [...labelPublicIds, newLabelId]);
+    }
+  }, [modalStates, labelPublicIds]);
+
+  // this removes the deleted label from selected labels if it is selected
+  useEffect(() => {
+    if (boardData?.labels) {
+      const availableLabelIds = boardData.labels.map(label => label.publicId);
+      const newLabelId = modalStates["NEW_LABEL_CREATED"];
+    
+      if (newLabelId && availableLabelIds.includes(newLabelId)) {
+        clearModalState("NEW_LABEL_CREATED");
+      }
+      
+      const validLabelIds = labelPublicIds.filter(id => 
+        availableLabelIds.includes(id) || id === newLabelId
+      );
+      
+      if (validLabelIds.length !== labelPublicIds.length) {
+        setValue("labelPublicIds", validLabelIds);
+      }
+    }
+  }, [boardData?.labels, labelPublicIds, modalStates["NEW_LABEL_CREATED"]]);
+  
   const createCard = api.card.create.useMutation({
     onMutate: async (args) => {
       await utils.board.byId.cancel();

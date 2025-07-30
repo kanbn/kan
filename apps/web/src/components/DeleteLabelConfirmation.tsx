@@ -10,11 +10,14 @@ export function DeleteLabelConfirmation({
   labelPublicId: string;
   refetch: () => void;
 }) {
-  const { closeModal } = useModal();
+  const { closeModal, closeModals } = useModal();
   const { showPopup } = usePopup();
 
   const deleteLabelMutation = api.label.delete.useMutation({
-    onSuccess: () => refetch(),
+    onSuccess: () => {
+      refetch();
+      closeModals(2);
+    },
     onError: () =>
       showPopup({
         header: "Error deleting label",
@@ -24,7 +27,6 @@ export function DeleteLabelConfirmation({
   });
 
   const handleDeleteLabel = () => {
-    closeModal();
     deleteLabelMutation.mutate({
       labelPublicId,
     });

@@ -32,7 +32,7 @@ export function LabelForm({
   refetch: () => void;
   isEdit?: boolean;
 }) {
-  const { closeModal, entityId, openModal } = useModal();
+  const { closeModal, entityId, openModal, setModalState } = useModal();
 
   const label = api.label.byPublicId.useQuery(
     {
@@ -57,12 +57,13 @@ export function LabelForm({
   const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
 
   const createLabel = api.label.create.useMutation({
-    onSuccess: () => {
+    onSuccess: (newLabel) => {
       const currentColourIndex = colours.findIndex(
         (c) => c.code === watch("colour").code,
       );
       try {
         refetch();
+        setModalState("NEW_LABEL_CREATED", newLabel.publicId);
         if (!isCreateAnotherEnabled) {
           closeModal();
         } else {
@@ -220,6 +221,7 @@ export function LabelForm({
         <div className="space-x-2">
           {isEdit && (
             <Button
+              type="button"
               variant="secondary"
               onClick={() => openModal("DELETE_LABEL", entityId)}
             >

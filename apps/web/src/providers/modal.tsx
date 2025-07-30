@@ -18,6 +18,8 @@ type ModalContextType = {
     entityLabel?: string,
   ) => void;
   closeModal: () => void;
+  closeModals: (count: number) => void;
+  clearAllModals: () => void;
   modalContentType: string;
   entityId: string;
   entityLabel: string;
@@ -58,6 +60,17 @@ export const ModalProvider: React.FC<Props> = ({ children }) => {
     });
   };
 
+  const closeModals = (count: number) => {
+    setModalStack(prev => {
+      const newLength = Math.max(0, prev.length - count);
+      return prev.slice(0, newLength);
+    });
+  };
+
+  const clearAllModals = () => {
+    setModalStack([]);
+  };
+
   const setModalState = (modalType: string, state: any) => {
     setModalStates(prev => ({
       ...prev,
@@ -87,6 +100,8 @@ export const ModalProvider: React.FC<Props> = ({ children }) => {
         isOpen,
         openModal,
         closeModal,
+        closeModals,
+        clearAllModals,
         modalContentType,
         entityId,
         entityLabel,
