@@ -39,6 +39,7 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
+    "@electric-sql/pglite": "^0.3.7",
     "@kan/shared": "workspace:^",
     "drizzle-orm": "^0.42.0",
     "drizzle-zod": "^0.5.1",

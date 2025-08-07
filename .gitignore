@@ -50,3 +50,6 @@ docker-compose.override.yml
 # runtime env
 __ENV.js
 i18n.cache
+
+# pgdata
+/apps/web/pgdata

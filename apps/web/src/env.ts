@@ -24,7 +24,7 @@ export const env = createEnv({
           s.split(",").every((l) => z.string().url().safeParse(l).success),
       )
       .optional(),
-    POSTGRES_URL: z.string().url(),
+    POSTGRES_URL: z.string().url().optional().or(z.literal('')),
     TRELLO_APP_API_KEY: z.string().optional(),
     TRELLO_APP_SECRET: z.string().optional(),
     STRIPE_SECRET_KEY: z.string().optional(),
