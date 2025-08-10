@@ -81,5 +81,4 @@ ARG PORT=3000
 ENV PORT=${PORT}
 EXPOSE ${PORT}
 
-CMD ["sh", "-c", "cd /app && pnpm db:migrate && cd /app/apps/web && pnpm start"]
-
+CMD ["sh", "-c", "if [ -n \"$POSTGRES_URL\" ]; then cd /app && pnpm db:migrate && cd /app/apps/web; fi && pnpm start"]
