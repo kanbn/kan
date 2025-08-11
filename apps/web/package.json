@@ -33,6 +33,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/react-query": "catalog:",
     "@tiptap/extension-link": "^2.22.2",
+    "@tiptap/extension-mention": "^3.0.9",
     "@tiptap/extension-placeholder": "^2.14.0",
     "@tiptap/pm": "^2.14.0",
     "@tiptap/react": "^2.14.0",
