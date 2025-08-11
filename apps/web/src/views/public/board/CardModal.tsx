@@ -119,7 +119,11 @@ export function CardModal({
               {data?.description && (
                 <div className="mb-10 flex w-full max-w-2xl justify-between">
                   <div className="mt-2">
-                    <Editor content={data.description} readOnly />
+                    <Editor
+                      content={data.description}
+                      readOnly
+                      workspaceMembers={data?.members ?? []}
+                    />
                   </div>
                 </div>
               )}

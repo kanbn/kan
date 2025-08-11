@@ -34,6 +34,7 @@ import {
 } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 import tippy from "tippy.js";
+import Mention from "@tiptap/extension-mention";
 
 declare module "@tiptap/core" {
   interface Commands<ReturnType> {
@@ -68,6 +69,15 @@ export interface RenderSuggestionsProps {
   items: SlashCommandItem[];
   command: (item: SlashCommandItem) => void;
 }
+
+export type WorkspaceMember = {
+  publicId: string;
+  user: {
+    id: string;
+    name: string | null;
+  } | null;
+  email: string;
+};
 
 const CommandsList = forwardRef<
   { onKeyDown: (props: SuggestionKeyDownProps) => boolean },
@@ -167,6 +177,117 @@ const RenderSuggestions = () => {
         return true;
       }
 
+      return (
+        (
+          reactRenderer.ref as {
+            onKeyDown?: (props: SuggestionKeyDownProps) => boolean;
+          }
+        ).onKeyDown?.(props) ?? false
+      );
+    },
+    onExit() {
+      popup[0]?.destroy();
+      reactRenderer.destroy();
+    },
+  };
+};
+
+type MentionItem = { id: string; label: string };
+
+const MentionList = forwardRef<
+  { onKeyDown: (props: SuggestionKeyDownProps) => boolean },
+  {
+    items: MentionItem[];
+    command: (item: MentionItem) => void;
+  }
+>(({ items, command }, ref) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  useImperativeHandle(ref, () => ({
+    onKeyDown: ({ event }: SuggestionKeyDownProps) => {
+      if (event.key === "ArrowUp") {
+        setSelectedIndex((selectedIndex + items.length - 1) % items.length);
+        return true;
+      }
+
+      if (event.key === "ArrowDown") {
+        setSelectedIndex((selectedIndex + 1) % items.length);
+        return true;
+      }
+
+      if (event.key === "Enter") {
+        const item = items[selectedIndex];
+        if (item) {
+          command(item);
+        }
+        return true;
+      }
+
+      return false;
+    },
+  }));
+
+  return (
+    <div className="w-56 rounded-md border-[1px] border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-500 dark:bg-dark-200">
+      <div className="max-h-[350px] overflow-y-auto p-1 scrollbar-thin scrollbar-thumb-light-200 dark:scrollbar-thumb-dark-300">
+        {items.length > 0 ? items.map((item, index) => (
+          <button
+            key={item.id}
+            onClick={() => command(item)}
+            className={twMerge(
+              "group flex w-full items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300",
+              index === selectedIndex && "bg-light-200 dark:bg-dark-300",
+            )}
+          >
+            <span className="ml-1 text-[12px] font-medium text-dark-900 dark:text-dark-1000">
+              {item.label}
+            </span>
+          </button>
+        )) : (
+          <div className="flex items-center justify-start p-2">
+            <span className="text-dark-900 text-[12px] dark:text-dark-1000">No results</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+});
+
+MentionList.displayName = "MentionList";
+
+const renderMentionSuggestions = () => {
+  let reactRenderer: ReactRenderer;
+  let popup: TippyInstance[];
+
+  return {
+    onStart: (props: any) => {
+      reactRenderer = new ReactRenderer(MentionList, {
+        props,
+        editor: props.editor,
+      });
+
+      if (!props.clientRect) return;
+
+      popup = tippy("body", {
+        getReferenceClientRect: props.clientRect,
+        appendTo: () => document.body,
+        content: reactRenderer.element,
+        showOnCreate: true,
+        interactive: true,
+        trigger: "manual",
+        placement: "bottom-start",
+      });
+    },
+    onUpdate(props: any) {
+      reactRenderer.updateProps(props);
+      if (!props.clientRect) return;
+      popup[0]?.setProps({ getReferenceClientRect: props.clientRect });
+    },
+    onKeyDown(props: SuggestionKeyDownProps) {
+      if (props.event.key === "Escape") {
+        popup[0]?.hide();
+        return true;
+      }
       return (
         (
           reactRenderer.ref as {
@@ -285,11 +406,13 @@ export default function Editor({
   onChange,
   onBlur,
   readOnly = false,
+  workspaceMembers,
 }: {
   content: string | null;
   onChange?: (value: string) => void;
   onBlur?: () => void;
   readOnly?: boolean;
+  workspaceMembers: WorkspaceMember[];
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -300,7 +423,7 @@ export default function Editor({
         Placeholder.configure({
           placeholder: readOnly
             ? ""
-            : t`Add description... (type '/' to open commands)`,
+            : t`Add description... (type '/' to open commands or '@' to mention)`,
         }),
         Link.configure({
           openOnClick: true,
@@ -320,6 +443,37 @@ export default function Editor({
             startOfLine: true,
             char: "/",
           },
+        }),
+        Mention.configure({
+          HTMLAttributes: {
+            class: 'mention',
+          },
+          suggestion: {
+            char: "@",
+            items: ({ query }: { query: string }) => {
+              const all: MentionItem[] = workspaceMembers.map((member: WorkspaceMember) => ({
+                id: member.publicId,
+                label: member?.user?.name ?? member.email,
+              }));
+              const q = query.toLowerCase();
+              return all.filter((u) => u.label.toLowerCase().includes(q));
+            },
+            command: ({ editor, range, props }: any) => {
+               const mentionHTML = `<span data-type="mention" data-id="${props.id}" data-label="${props.label}">@${props.label}</span>&nbsp;`;
+               
+               editor
+               .chain()
+               .focus()
+               .deleteRange(range)
+               .insertContent(mentionHTML)
+               .focus()
+               .run();
+              },
+              render: renderMentionSuggestions,
+            },
+            renderText({ options, node }) {
+              return `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`;
+            },
         }),
       ],
       content,
@@ -368,6 +522,14 @@ export default function Editor({
         }
         .tiptap p {
           margin: 0 0 1rem 0 !important;
+        }
+        .tiptap .mention {
+          background-color: rgba(59, 130, 246, 0.1);
+          border-radius: 0.25rem;
+          padding: 0.125rem 0.25rem;
+          color: rgb(59, 130, 246);
+          text-decoration: none;
+          font-weight: 500;
         }
       `}</style>
       {!readOnly && editor && <EditorBubbleMenu editor={editor} />}

@@ -247,6 +247,7 @@ export default function CardPage() {
                         content={card.description}
                         onChange={(e) => setValue("description", e)}
                         onBlur={() => handleSubmit(onSubmit)()}
+                        workspaceMembers={board?.workspace?.members ?? []}
                       />
                     </div>
                   </form>
