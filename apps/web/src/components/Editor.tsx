@@ -35,6 +35,8 @@ import {
 import { twMerge } from "tailwind-merge";
 import tippy from "tippy.js";
 import Mention from "@tiptap/extension-mention";
+import Avatar from "./Avatar";
+import { getAvatarUrl } from "~/utils/helpers";
 
 declare module "@tiptap/core" {
   interface Commands<ReturnType> {
@@ -75,6 +77,7 @@ export type WorkspaceMember = {
   user: {
     id: string;
     name: string | null;
+    image: string | null;
   } | null;
   email: string;
 };
@@ -192,7 +195,7 @@ const RenderSuggestions = () => {
   };
 };
 
-type MentionItem = { id: string; label: string };
+type MentionItem = { id: string; label: string; image: string | null };
 
 const MentionList = forwardRef<
   { onKeyDown: (props: SuggestionKeyDownProps) => boolean },
@@ -239,7 +242,15 @@ const MentionList = forwardRef<
               index === selectedIndex && "bg-light-200 dark:bg-dark-300",
             )}
           >
-            <span className="ml-1 text-[12px] font-medium text-dark-900 dark:text-dark-1000">
+            <Avatar
+              size="xs"
+              name={item.label}
+              imageUrl={
+                item.image ? getAvatarUrl(item.image) : undefined
+              }
+              email={item.label}
+            />
+            <span className="ml-3 text-[12px] font-medium text-dark-900 dark:text-dark-1000">
               {item.label}
             </span>
           </button>
@@ -454,6 +465,7 @@ export default function Editor({
               const all: MentionItem[] = workspaceMembers.map((member: WorkspaceMember) => ({
                 id: member.publicId,
                 label: member?.user?.name ?? member.email,
+                image: member?.user?.image ?? null,
               }));
               const q = query.toLowerCase();
               return all.filter((u) => u.label.toLowerCase().includes(q));

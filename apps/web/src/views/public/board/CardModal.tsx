@@ -122,7 +122,7 @@ export function CardModal({
                     <Editor
                       content={data.description}
                       readOnly
-                      workspaceMembers={data?.members ?? []}
+                      workspaceMembers={data?.list.board.workspace.members ?? []}
                     />
                   </div>
                 </div>

@@ -300,6 +300,7 @@ export function NewCardForm({
                   user: member.user ? {
                     id: member.publicId,
                     name: member.user.name,
+                    image: member.user.image ?? null,
                   } : null,
                 })) ?? []
               }
