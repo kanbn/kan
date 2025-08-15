@@ -2,7 +2,7 @@ import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { createAuthEndpoint, createAuthMiddleware } from "better-auth/api";
-import { apiKey } from "better-auth/plugins";
+import { apiKey, genericOAuth } from "better-auth/plugins";
 import { magicLink } from "better-auth/plugins/magic-link";
 import { socialProviderList } from "better-auth/social-providers";
 import { env } from "next-runtime-env";
@@ -83,8 +83,20 @@ export const socialProvidersPlugin = () => ({
       {
         method: "GET",
       },
-      async (ctx) =>
-        ctx.json(ctx.context.socialProviders.map((p) => p.id.toLowerCase())),
+      async (ctx) => {
+        const providers = ctx.context.socialProviders.map((p) =>
+          p.id.toLowerCase(),
+        );
+        // Add OIDC provider if configured
+        if (
+          process.env.OIDC_CLIENT_ID &&
+          process.env.OIDC_CLIENT_SECRET &&
+          process.env.OIDC_DISCOVERY_URL
+        ) {
+          providers.push("oidc");
+        }
+        return ctx.json(providers);
+      },
     ),
   },
 });
@@ -162,6 +174,25 @@ export const initAuth = (db: dbClient) => {
           }
         },
       }),
+      // Generic OIDC provider
+      ...(process.env.OIDC_CLIENT_ID &&
+      process.env.OIDC_CLIENT_SECRET &&
+      process.env.OIDC_DISCOVERY_URL
+        ? [
+            genericOAuth({
+              config: [
+                {
+                  providerId: "oidc",
+                  clientId: process.env.OIDC_CLIENT_ID,
+                  clientSecret: process.env.OIDC_CLIENT_SECRET,
+                  discoveryUrl: process.env.OIDC_DISCOVERY_URL,
+                  scopes: ["openid", "email", "profile"],
+                  pkce: true,
+                },
+              ],
+            }),
+          ]
+        : []),
     ],
     databaseHooks: {
       user: {

@@ -51,6 +51,10 @@ export const env = createEnv({
     VK_CLIENT_SECRET: z.string().optional(),
     LINKEDIN_CLIENT_ID: z.string().optional(),
     LINKEDIN_CLIENT_SECRET: z.string().optional(),
+    // Generic OIDC Provider
+    OIDC_CLIENT_ID: z.string().optional(),
+    OIDC_CLIENT_SECRET: z.string().optional(),
+    OIDC_DISCOVERY_URL: z.string().optional(),
     REDDIT_CLIENT_ID: z.string().optional(),
     REDDIT_CLIENT_SECRET: z.string().optional(),
     ROBLOX_CLIENT_ID: z.string().optional(),

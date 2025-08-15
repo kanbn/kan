@@ -31,12 +31,12 @@ const config = {
 
   images: {
     remotePatterns: [
-      
       {
         protocol: "https",
-        hostname: process.env.S3_FORCE_PATH_STYLE === "true"
-          ? `${env("NEXT_PUBLIC_STORAGE_DOMAIN")}`
-          : `*.${env("NEXT_PUBLIC_STORAGE_DOMAIN")}`,
+        hostname:
+          process.env.S3_FORCE_PATH_STYLE === "true"
+            ? `${env("NEXT_PUBLIC_STORAGE_DOMAIN")}`
+            : `*.${env("NEXT_PUBLIC_STORAGE_DOMAIN")}`,
       },
       {
         protocol: "http",
@@ -45,6 +45,10 @@ const config = {
       {
         protocol: "https",
         hostname: "*.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**",
       },
     ],
   },
