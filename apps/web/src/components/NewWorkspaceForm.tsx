@@ -24,9 +24,7 @@ export function NewWorkspaceForm() {
   const createWorkspace = api.workspace.create.useMutation({
     onSuccess: (values) => {
       if (values.publicId && values.name) {
-        console.log("before switchWorkspace");
         utils.workspace.all.invalidate();
-        console.log("after invalidate");
         switchWorkspace({
           publicId: values.publicId,
           name: values.name,
@@ -35,9 +33,7 @@ export function NewWorkspaceForm() {
           plan: values.plan,
           role: "admin",
         });
-        console.log("after switchWorkspace");
         closeModal();
-        console.log("after closeModal");
       }
     },
     onError: () => {
