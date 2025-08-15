@@ -15,6 +15,7 @@ import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import Avatar from "./components/Avatar";
+import { ChangePasswordFormConfirmation } from "./components/ChangePasswordConfirmation";
 import CreateAPIKeyForm from "./components/CreateAPIKeyForm";
 import { CustomURLConfirmation } from "./components/CustomURLConfirmation";
 import { DeleteAccountConfirmation } from "./components/DeleteAccountConfirmation";
@@ -32,7 +33,8 @@ export default function SettingsPage() {
   const router = useRouter();
   const workspaceUrlSectionRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-
+  const isCredentialsEnabled =
+    env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
   const { data } = api.user.getUser.useQuery();
 
   const {
@@ -283,6 +285,25 @@ export default function SettingsPage() {
               </div>
             </div>
 
+            {isCredentialsEnabled && (
+              <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+                <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+                  {t`Change Password`}
+                </h2>
+                <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+                  {t`You are about to change your password.`}
+                </p>
+                <div className="mt-4">
+                  <Button
+                    variant="secondary"
+                    onClick={() => openModal("CHANGE_PASSWORD")}
+                  >
+                    {t`Change Password`}
+                  </Button>
+                </div>
+              </div>
+            )}
+
             <div className="mb-8 border-t border-light-300 dark:border-dark-300">
               <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
                 {t`Delete account`}
@@ -312,6 +333,9 @@ export default function SettingsPage() {
             )}
             {modalContentType === "DELETE_ACCOUNT" && (
               <DeleteAccountConfirmation />
+            )}
+            {modalContentType === "CHANGE_PASSWORD" && (
+              <ChangePasswordFormConfirmation />
             )}
           </Modal>
         </div>
