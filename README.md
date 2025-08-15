@@ -159,7 +159,6 @@ pnpm dev
 | `OIDC_CLIENT_ID`                          | Generic OIDC client ID                                   | For OIDC login           | `xxx`                                                       |
 | `OIDC_CLIENT_SECRET`                      | Generic OIDC client secret                               | For OIDC login           | `xxx`                                                       |
 | `OIDC_DISCOVERY_URL`                      | OIDC discovery URL                                       | For OIDC login           | `https://auth.example.com/.well-known/openid-configuration` |
-| `NEXT_PUBLIC_OIDC_PROVIDER_NAME`          | OIDC provider display name (optional)                    | For OIDC login           | `My Company SSO`                                            |
 | `TRELLO_APP_API_KEY`                      | Trello app API key                                       | For Trello import        | `xxx`                                                       |
 | `TRELLO_APP_API_SECRET`                   | Trello app API secret                                    | For Trello import        | `xxx`                                                       |
 | `S3_REGION`                               | S3 storage region                                        | For file uploads         | `WEUR`                                                      |

@@ -112,7 +112,6 @@ export const env = createEnv({
         (s) => !s || s.toLowerCase() === "true" || s.toLowerCase() === "false",
       )
       .optional(),
-    NEXT_PUBLIC_OIDC_PROVIDER_NAME: z.string().optional(),
   },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
@@ -133,7 +132,6 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_USE_STANDALONE_OUTPUT,
     NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY:
       process.env.NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY,
-    NEXT_PUBLIC_OIDC_PROVIDER_NAME: process.env.NEXT_PUBLIC_OIDC_PROVIDER_NAME,
   },
   skipValidation:
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",
