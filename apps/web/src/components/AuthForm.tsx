@@ -14,9 +14,9 @@ import {
   FaGithub,
   FaGitlab,
   FaGoogle,
-  FaKey,
   FaLinkedin,
   FaMicrosoft,
+  FaOpenid,
   FaReddit,
   FaSpotify,
   FaTiktok,
@@ -146,8 +146,8 @@ const availableSocialProviders = {
   },
   oidc: {
     id: "oidc",
-    name: "OIDC", // Will be overridden dynamically
-    icon: FaKey,
+    name: "OIDC",
+    icon: FaOpenid,
   },
 };
 
@@ -157,19 +157,14 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
   const [isCredentialsEnabled, setIsCredentialsEnabled] = useState(false);
   const [isLoginWithEmailPending, setIsLoginWithEmailPending] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
-  const [oidcProviderName, setOidcProviderName] = useState<string>("OIDC");
   const { showPopup } = usePopup();
+  const oidcProviderName = "OIDC";
 
   // Safely get environment variables on client side to avoid hydration mismatch
   useEffect(() => {
     const credentialsAllowed =
       env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
     setIsCredentialsEnabled(credentialsAllowed);
-
-    const providerName = env("NEXT_PUBLIC_OIDC_PROVIDER_NAME");
-    if (providerName) {
-      setOidcProviderName(providerName);
-    }
   }, []);
 
   const {
