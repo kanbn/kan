@@ -51,6 +51,10 @@ export const env = createEnv({
     VK_CLIENT_SECRET: z.string().optional(),
     LINKEDIN_CLIENT_ID: z.string().optional(),
     LINKEDIN_CLIENT_SECRET: z.string().optional(),
+    // Generic OIDC Provider
+    OIDC_CLIENT_ID: z.string().optional(),
+    OIDC_CLIENT_SECRET: z.string().optional(),
+    OIDC_DISCOVERY_URL: z.string().optional(),
     REDDIT_CLIENT_ID: z.string().optional(),
     REDDIT_CLIENT_SECRET: z.string().optional(),
     ROBLOX_CLIENT_ID: z.string().optional(),
@@ -108,6 +112,7 @@ export const env = createEnv({
         (s) => !s || s.toLowerCase() === "true" || s.toLowerCase() === "false",
       )
       .optional(),
+    NEXT_PUBLIC_OIDC_PROVIDER_NAME: z.string().optional(),
   },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
@@ -128,6 +133,7 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_USE_STANDALONE_OUTPUT,
     NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY:
       process.env.NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY,
+    NEXT_PUBLIC_OIDC_PROVIDER_NAME: process.env.NEXT_PUBLIC_OIDC_PROVIDER_NAME,
   },
   skipValidation:
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",

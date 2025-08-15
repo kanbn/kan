@@ -4,7 +4,7 @@ import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "next-runtime-env";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   FaApple,
@@ -14,6 +14,7 @@ import {
   FaGithub,
   FaGitlab,
   FaGoogle,
+  FaKey,
   FaLinkedin,
   FaMicrosoft,
   FaReddit,
@@ -32,6 +33,8 @@ import { authClient } from "@kan/auth/client";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { usePopup } from "~/providers/popup";
+
+type AuthProvider = SocialProvider | "oidc";
 
 interface FormValues {
   name?: string;
@@ -141,16 +144,33 @@ const availableSocialProviders = {
     name: "Zoom",
     icon: SiZoom,
   },
+  oidc: {
+    id: "oidc",
+    name: "OIDC", // Will be overridden dynamically
+    icon: FaKey,
+  },
 };
 
 export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
   const [isLoginWithProviderPending, setIsLoginWithProviderPending] =
-    useState<null | SocialProvider>(null);
-  const isCredentialsEnabled =
-    env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
+    useState<null | AuthProvider>(null);
+  const [isCredentialsEnabled, setIsCredentialsEnabled] = useState(false);
   const [isLoginWithEmailPending, setIsLoginWithEmailPending] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
+  const [oidcProviderName, setOidcProviderName] = useState<string>("OIDC");
   const { showPopup } = usePopup();
+
+  // Safely get environment variables on client side to avoid hydration mismatch
+  useEffect(() => {
+    const credentialsAllowed =
+      env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
+    setIsCredentialsEnabled(credentialsAllowed);
+
+    const providerName = env("NEXT_PUBLIC_OIDC_PROVIDER_NAME");
+    if (providerName) {
+      setOidcProviderName(providerName);
+    }
+  }, []);
 
   const {
     register,
@@ -226,13 +246,26 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
     setIsLoginWithEmailPending(false);
   };
 
-  const handleLoginWithProvider = async (provider: SocialProvider) => {
+  const handleLoginWithProvider = async (provider: AuthProvider) => {
     setIsLoginWithProviderPending(provider);
     setLoginError(null);
-    const { error } = await authClient.signIn.social({
-      provider,
-      callbackURL: "/boards",
-    });
+
+    let error;
+    if (provider === "oidc") {
+      // Use oauth2 signin for OIDC provider
+      const result = await authClient.signIn.oauth2({
+        providerId: "oidc",
+        callbackURL: "/boards",
+      });
+      error = result.error;
+    } else {
+      // Use social signin for traditional social providers
+      const result = await authClient.signIn.social({
+        provider,
+        callbackURL: "/boards",
+      });
+      error = result.error;
+    }
 
     setIsLoginWithProviderPending(null);
 
@@ -260,13 +293,16 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
             return (
               <Button
                 key={key}
-                onClick={() => handleLoginWithProvider(key as SocialProvider)}
+                onClick={() => handleLoginWithProvider(key as AuthProvider)}
                 isLoading={isLoginWithProviderPending === key}
                 iconLeft={<provider.icon />}
                 fullWidth
                 size="lg"
               >
-                <Trans>Continue with {provider.name}</Trans>
+                <Trans>
+                  Continue with{" "}
+                  {key === "oidc" ? oidcProviderName : provider.name}
+                </Trans>
               </Button>
             );
           })}
