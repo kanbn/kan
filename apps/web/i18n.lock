@@ -31,6 +31,7 @@ checksums:
     All%20systems%20operational/singular: ee943a4046b09e6334cceeea9fda2bfc
     Already%20have%20an%20account%3F%20%3C0%3E%3C1%3ESign%20in%3C%2F1%3E%3C%2F0%3E/singular: 2959fd276248208b65cb27ed46b20135
     An%20error%20occurred%20while%20disconnecting%20your%20Trello%20account./singular: 0aa3973b860c1faf8d9123aebf567e40
+    An%20unexpected%20error%20occurred.%20Please%20try%20again%20later./singular: 1b5749b0cca6a62d75a577bee6804074
     API%20keys/singular: 07f3620a30e08136f0b072c9af8d1eef
     API%20Reference/singular: 7dcc877064bfdf889ec55dbc9e06a242
     Applicants/singular: 4babd8331a1441e91087f855f43e57f8
@@ -67,6 +68,7 @@ checksums:
     Cancel/singular: 2e2a849c2223911717de8caa2c71bade
     Card%20not%20found/singular: 91509e2f92b0b3b11330b6983139fdbf
     Card%20title/singular: 7c34f59f4005e6cb3a6ff546ea0b96e3
+    Change%20Password/singular: a552fc5c4189ebc3e2e6018edda7d18f
     Change%20the%20language%20of%20the%20app./singular: fb20db145e28ed44aba89c146ded7bfc
     Check%20your%20inbox/singular: e9a430fcd298def74212238df0f680d6
     Checklist%20name/singular: 5eb5de823f7ca5a4d97bb41e6a3f675a
@@ -82,6 +84,7 @@ checksums:
     completed%20a%20checklist%20item/singular: 757b04c6c80cc927e1c597c0ad4fda33
     completed%20checklist%20item%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: 71ec18acf051fc909a48a07ca3578673
     Confirm%20URL%20change/singular: e14b4ce081d1ef6194b37e1814e97b39
+    Confirm%20your%20new%20password/singular: a0d2935d7b63f8dd19d7c0de47524416
     Connect%20Trello/singular: 4440a0b9e387ef7136e3958e7a089213
     Connect%20your%20favorite%20tools%20to%20streamline%20your%20workflow./singular: 033c5dcdb059ccb634aef7fe63f2f45d
     Connect%20your%20Trello%20account%20to%20import%20boards./singular: 84a510a7485f43e43f2191bd161171d7
@@ -104,6 +107,7 @@ checksums:
     Create%20workspace/singular: 2e6718e79964ea5ce22d76c2189c77ca
     created%20the%20card/singular: 605475f5aaeb4dbccbf7c4eb9107b43d
     Critical/singular: eb327cd411b50aee954f8d1d215d003a
+    Current%20password%20is%20required/singular: 72536bca9598680027f2be8ce80ac280
     Custom%20domain/singular: b09e7a9c187b7163b4a6cfc78042fe42
     Custom%20URLs%20are%20a%20premium%20feature.%20You'll%20be%20directed%20to%20upgrade%20your%20account./singular: b52e4f6122cf739c9551d29beb89b25e
     Customer%20Support/singular: 50e3c77e22e41061ca85ea2f02625a2e
@@ -140,9 +144,13 @@ checksums:
     email/singular: f31eb214738e037d58e26149797739df
     Email/singular: e7f34943a0c2fb849db1839ff6ef5cb5
     Enhancement/singular: 785fe23c0eef0a5b60b5b2a88151de31
+    Enter%20your%20current%20password/singular: bfceabde4c0b6f2cb439015b76549651
+    Enter%20your%20current%20password%20and%20choose%20a%20new%20secure%20password./singular: 9bb88155b18e98ea799c0e939d16af64
     Enter%20your%20email%20address/singular: 9bc008365ebe3e404e241c8ca876f56e
     Enter%20your%20name/singular: cd95fbdd0533f2c2e8edf9d9bd9aa8df
+    Enter%20your%20new%20password/singular: c67251e3002b68bc20a7cf5de23e43ac
     Enter%20your%20password/singular: ea4fdd034522dead21bae0c0abb52eae
+    Error%20Changing%20Password/singular: ebecb5c1b72ba4b063117241f5ba4f2d
     Error%20deleting%20account/singular: d42965a9bc9e5ec4ed57890268924643
     Error%20deleting%20label/singular: 94387e3a45ec768ae7715701ae00136e
     Error%20deleting%20workspace/singular: 0aec9bd8170bc84f5ea5c9a47c52ed26
@@ -244,6 +252,8 @@ checksums:
     New%20import/singular: e8fddfe15dd170277df919e5d37efd47
     New%20label/singular: 890040da52a88c16c249a4ac78980f81
     New%20list/singular: 146c2e642b11056a0b07ed65733e4178
+    New%20password%20is%20required/singular: f88427a4cca058631199a4384cb5622e
+    New%20password%20must%20be%20different%20from%20current%20password/singular: db33013fcc6c40995cf8a37deb3d5667
     New%20Ticket/singular: 665ff16ec736cba20e8a1b3beb3baa09
     New%20workspace/singular: 8eecf05b4ce29aa880adfed2e11476af
     Newsletter/singular: dcfb9666301924431ac8ae88e5b6f9d7
@@ -260,11 +270,15 @@ checksums:
     Organize%20and%20find%20cards%20quickly%20with%20powerful%20filtering%20tools./singular: 1b9898c4b21e9dff413b4f76dc59db56
     Own%20your%20data/singular: cc2178dac4bdf6b07f030cfc2a7510e6
     Part-time/singular: 213d63da450f35dabb3ab0e35e29feed
+    Password%20Changed/singular: 1fcebe9ddb46f722a57f195efddc695d
+    Password%20must%20be%20at%20least%208%20characters/singular: 4c30501d085eaccea47af34212bb26a7
+    Passwords%20do%20not%20match/singular: 37ca1f4e0afc9a0b8e9617f767103c92
     Payment%20frequency/singular: 63ded0e4ffb462ca8bd33d38e4691d86
     Pending/singular: 030a6f3395d5d4efddd3cc67d6009039
     per%20user%2Fmonth/singular: 72af182c1ba6df6732640f4d8a78d360
     Personal%20Project/singular: d7820b1bf4efecc61ed89234567aaa9c
     Planning/singular: 353f58c75248275fe091740607501610
+    Please%20confirm%20your%20new%20password/singular: 43d0307b9307238cc6c199cfa66caff2
     Please%20enter%20a%20valid%20email%20address/singular: 8de4bc8832b11b380bc4cbcedc16e48b
     Please%20enter%20a%20valid%20name/singular: f2d741f1b5cae722e35cb5206786f932
     Please%20enter%20a%20valid%20password/singular: 4b32c17e19b79bcbf0bb092c06ba310f
@@ -329,6 +343,7 @@ checksums:
     Templates/singular: 8ed62f56c81fa96c0f3182acb331bf63
     Terms%20of%20service/singular: 0b8a8b23aff021a6cde79613fdb39c28
     Thank%20you%20for%20your%20feedback!/singular: 07edd8c50685a52c0969d711df26d768
+    The%20current%20password%20you%20entered%20is%20incorrect./singular: 67a76bf346ab4b48563269e9d941a64a
     The%20main%20difference%20between%20Kan%20and%20Trello%20is%20that%20Kan%20is%20open%20source%2C%20allowing%20anyone%20to%20view%2C%20modify%2C%20and%20contribute%20to%20our%20code.%20Our%20cloud%20offering%20also%20offers%20no%20restrictions%20on%20features%20for%20individual%20use%2C%20whereas%20Trello%20locks%20basic%20features%20such%20as%20the%20number%20of%20boards%20you%20can%20create%20behind%20a%20paywall./singular: db6e22cc955c5fbe547feedeb48f8719
     The%20open%20source%20%3C0%2F%3E%20alternative%20to%20Trello/singular: 692cb2e8a8e610953c996826beed45a2
     The%20visibility%20of%20your%20board%20has%20been%20set%20to%20%7B0%7D./singular: 970e17a115f7374e60e0a8ded425db8f
@@ -420,6 +435,7 @@ checksums:
     Writing/singular: 4f5f3ee3320c252921f80c42653c5d49
     Yearly/singular: 87f43e016c19cb25860f456549a2f431
     Yes%2C%20we%20offer%20an%20forever%20free%20plan%20for%20individual%20use.%20No%20restrictions%2C%20no%20paywalls%2C%20no%20limits./singular: 963cee303d0ff13c1719f4575e774fe3
+    You%20are%20about%20to%20change%20your%20password./singular: df4783d593505766d78c5bc08d3d48ac
     You%20can%20get%20a%20custom%20workspace%20URL%2C%20like%20%3C0%3Ekan.bn%2Fkan%3C%2F0%3E%2C%20by%20going%20into%20your%20%3C1%3Eworkspace%20settings%3C%2F1%3E%20and%20purchasing%20a%20pro%20workspace%20subscription.%20All%20subscriptions%20help%20fund%20the%20development%20of%20the%20project!/singular: 41dd145ef56f539e12dc064a9807c660
     You%20can%20invite%20team%20members%20by%20clicking%20the%20%22Invite%22%20button%20in%20the%20top%20right%20corner%20of%20the%20%3C0%3Emembers%20page%3C%2F0%3E%20and%20entering%20their%20email%20address.%20They%20will%20receive%20an%20email%20with%20a%20link%20to%20join%20the%20workspace./singular: 47e125eb9b4c11cab5a2f4b3ab08e883
     You%20can%20self-host%20by%20following%20the%20instructions%20in%20our%20%3C0%3Erepo%3C%2F0%3E./singular: a6152a41b2d8f64d5a657e5b8bc808a9
@@ -428,6 +444,7 @@ checksums:
     Your%20account%20has%20been%20deleted./singular: 8c8d944e07388c5877effdb2c2803dcf
     Your%20boards%20have%20been%20imported./singular: 403972e7a25afc2415762c1c2b1ec868
     Your%20display%20name%20has%20been%20updated./singular: 15e5fff36c554c16ec5214427fae1bf4
+    Your%20password%20has%20been%20changed./singular: 8f730f68d52b7efa727aa0784282ebcb
     Your%20profile%20image%20has%20been%20updated./singular: 099e1780348cd7bf617721344371a430
     Your%20Trello%20account%20has%20been%20disconnected./singular: 126aeeb73f7e4cad338056e4c933f39b
     Your%20Trello%20account%20is%20connected./singular: 0499d193001fce2fbec445ae034ce512

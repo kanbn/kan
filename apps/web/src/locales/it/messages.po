@@ -23,7 +23,7 @@ msgstr ", o consulta i nostri"
 
 #. placeholder {0}: card?.title ?? "Card"
 #. placeholder {1}: board?.name ?? "Board"
-#: src/views/card/index.tsx:214
+#: src/views/card/index.tsx:213
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
@@ -139,11 +139,15 @@ msgstr "Tutti i sistemi operativi"
 msgid "Already have an account? <0><1>Sign in</1></0>"
 msgstr "Hai già un account? <0><1>Accedi</1></0>"
 
-#: src/views/settings/index.tsx:100
+#: src/views/settings/index.tsx:102
 msgid "An error occurred while disconnecting your Trello account."
 msgstr "Si è verificato un errore durante la disconnessione del tuo account Trello."
 
-#: src/views/settings/index.tsx:257
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:90
+msgid "An unexpected error occurred. Please try again later."
+msgstr "Si è verificato un errore imprevisto. Riprova più tardi."
+
+#: src/views/settings/index.tsx:259
 msgid "API keys"
 msgstr "Chiavi API"
 
@@ -205,12 +209,12 @@ msgstr "Backlog"
 msgid "Basic Kanban"
 msgstr "Kanban base"
 
-#: src/views/settings/index.tsx:196
+#: src/views/settings/index.tsx:198
 #: src/views/boards/components/TemplateBoards.tsx:55
 msgid "Billing"
 msgstr "Fatturazione"
 
-#: src/views/settings/index.tsx:206
+#: src/views/settings/index.tsx:208
 msgid "Billing portal"
 msgstr "Portale di fatturazione"
 
@@ -284,6 +288,7 @@ msgstr "Segnalazione bug"
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
 #: src/views/settings/components/CustomURLConfirmation.tsx:50
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:168
 #: src/views/members/components/DeleteMemberConfirmation.tsx:55
 #: src/views/card/components/DeleteCommentConfirmation.tsx:76
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:63
@@ -301,7 +306,14 @@ msgstr "Carta non trovata"
 msgid "Card title"
 msgstr "Titolo della carta"
 
-#: src/views/settings/index.tsx:188
+#: src/views/settings/index.tsx:291
+#: src/views/settings/index.tsx:301
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:109
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:178
+msgid "Change Password"
+msgstr "Cambia password"
+
+#: src/views/settings/index.tsx:190
 msgid "Change the language of the app."
 msgstr "Cambia la lingua dell'app."
 
@@ -364,7 +376,11 @@ msgstr "ha completato l'elemento <0>{0}</0> della checklist"
 msgid "Confirm URL change"
 msgstr "Conferma modifica URL"
 
-#: src/views/settings/index.tsx:233
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:150
+msgid "Confirm your new password"
+msgstr "Conferma la tua nuova password"
+
+#: src/views/settings/index.tsx:235
 #: src/views/boards/components/ImportBoardsForm.tsx:157
 msgid "Connect Trello"
 msgstr "Connetti Trello"
@@ -373,7 +389,7 @@ msgstr "Connetti Trello"
 msgid "Connect your favorite tools to streamline your workflow."
 msgstr "Connetti i tuoi strumenti preferiti per semplificare il tuo flusso di lavoro."
 
-#: src/views/settings/index.tsx:220
+#: src/views/settings/index.tsx:222
 msgid "Connect your Trello account to import boards."
 msgstr "Connetti il tuo account Trello per importare le bacheche."
 
@@ -458,6 +474,10 @@ msgstr "ha creato la carta"
 msgid "Critical"
 msgstr "Critico"
 
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:19
+msgid "Current password is required"
+msgstr "La password attuale è obbligatoria"
+
 #: src/views/home/components/Pricing.tsx:74
 msgid "Custom domain"
 msgstr "Dominio personalizzato"
@@ -482,8 +502,8 @@ msgstr "Scuro"
 msgid "Delete"
 msgstr "Elimina"
 
-#: src/views/settings/index.tsx:288
-#: src/views/settings/index.tsx:298
+#: src/views/settings/index.tsx:309
+#: src/views/settings/index.tsx:319
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:96
 msgid "Delete account"
 msgstr "Elimina account"
@@ -504,8 +524,8 @@ msgstr "Elimina commento"
 msgid "Delete list"
 msgstr "Elimina lista"
 
-#: src/views/settings/index.tsx:270
-#: src/views/settings/index.tsx:281
+#: src/views/settings/index.tsx:272
+#: src/views/settings/index.tsx:283
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:106
 msgid "Delete workspace"
 msgstr "Elimina spazio di lavoro"
@@ -532,7 +552,7 @@ msgstr "ha eliminato l'elemento <0>{0}</0> della checklist"
 msgid "Design"
 msgstr "Design"
 
-#: src/views/settings/index.tsx:248
+#: src/views/settings/index.tsx:250
 msgid "Disconnect Trello"
 msgstr "Disconnetti Trello"
 
@@ -540,7 +560,7 @@ msgstr "Disconnetti Trello"
 msgid "Discuss and collaborate on cards."
 msgstr "Discuti e collabora sulle schede."
 
-#: src/views/settings/index.tsx:149
+#: src/views/settings/index.tsx:151
 msgid "Display name"
 msgstr "Nome visualizzato"
 
@@ -618,6 +638,14 @@ msgstr "Email"
 msgid "Enhancement"
 msgstr "Miglioramento"
 
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:122
+msgid "Enter your current password"
+msgstr "Inserisci la tua password attuale"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:111
+msgid "Enter your current password and choose a new secure password."
+msgstr "Inserisci la tua password attuale e scegli una nuova password sicura."
+
 #: src/components/AuthForm.tsx:302
 msgid "Enter your email address"
 msgstr "Inserisci il tuo indirizzo email"
@@ -626,9 +654,17 @@ msgstr "Inserisci il tuo indirizzo email"
 msgid "Enter your name"
 msgstr "Inserisci il tuo nome"
 
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:136
+msgid "Enter your new password"
+msgstr "Inserisci la tua nuova password"
+
 #: src/components/AuthForm.tsx:315
 msgid "Enter your password"
 msgstr "Inserisci la tua password"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:89
+msgid "Error Changing Password"
+msgstr "Errore durante il cambio della password"
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:39
 msgid "Error deleting account"
@@ -642,7 +678,7 @@ msgstr "Errore durante l'eliminazione dell'etichetta"
 msgid "Error deleting workspace"
 msgstr "Errore durante l'eliminazione dell'area di lavoro"
 
-#: src/views/settings/index.tsx:99
+#: src/views/settings/index.tsx:101
 msgid "Error disconnecting Trello"
 msgstr "Errore durante la disconnessione da Trello"
 
@@ -922,7 +958,7 @@ msgstr "Kanban reinventato"
 msgid "Keep in mind that this action is irreversible."
 msgstr "Tieni presente che questa azione è irreversibile."
 
-#: src/views/card/index.tsx:118
+#: src/views/card/index.tsx:117
 #: src/views/board/components/NewCardForm.tsx:398
 #: src/views/board/components/Filters.tsx:101
 msgid "Labels"
@@ -932,7 +968,7 @@ msgstr "Etichette"
 msgid "Labels & Filters"
 msgstr "Etichette & Filtri"
 
-#: src/views/settings/index.tsx:185
+#: src/views/settings/index.tsx:187
 msgid "Language"
 msgstr "Lingua"
 
@@ -956,7 +992,7 @@ msgstr "Chiaro"
 msgid "Link copied"
 msgstr "Link copiato"
 
-#: src/views/card/index.tsx:110
+#: src/views/card/index.tsx:109
 msgid "List"
 msgstr "Lista"
 
@@ -998,7 +1034,7 @@ msgid "Medium Priority"
 msgstr "Media priorità"
 
 #: src/views/members/index.tsx:161
-#: src/views/card/index.tsx:126
+#: src/views/card/index.tsx:125
 #: src/views/board/components/NewCardForm.tsx:357
 #: src/views/board/components/Filters.tsx:93
 #: src/components/SideNavigation.tsx:73
@@ -1062,6 +1098,14 @@ msgstr "Nuova etichetta"
 msgid "New list"
 msgstr "Nuova lista"
 
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:23
+msgid "New password is required"
+msgstr "La nuova password è obbligatoria"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:31
+msgid "New password must be different from current password"
+msgstr "La nuova password deve essere diversa dalla password attuale"
+
 #: src/views/boards/components/TemplateBoards.tsx:43
 msgid "New Ticket"
 msgstr "Nuovo ticket"
@@ -1102,11 +1146,11 @@ msgstr "Offerta"
 msgid "Onboarding"
 msgstr "Inserimento"
 
-#: src/views/settings/index.tsx:291
+#: src/views/settings/index.tsx:312
 msgid "Once you delete your account, there is no going back. This action cannot be undone."
 msgstr "Una volta eliminato il tuo account, non si può tornare indietro. Questa azione non può essere annullata."
 
-#: src/views/settings/index.tsx:273
+#: src/views/settings/index.tsx:275
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Una volta eliminata l'area di lavoro, non si può tornare indietro. Questa azione non può essere annullata."
 
@@ -1125,6 +1169,18 @@ msgstr "Possiedi i tuoi dati"
 #: src/views/boards/components/TemplateBoards.tsx:69
 msgid "Part-time"
 msgstr "Part-time"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:69
+msgid "Password Changed"
+msgstr "Password modificata"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:22
+msgid "Password must be at least 8 characters"
+msgstr "La password deve contenere almeno 8 caratteri"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:27
+msgid "Passwords do not match"
+msgstr "Le password non corrispondono"
 
 #: src/views/home/components/Pricing.tsx:101
 msgid "Payment frequency"
@@ -1146,6 +1202,10 @@ msgstr "Progetto personale"
 #: src/views/boards/components/TemplateBoards.tsx:77
 msgid "Planning"
 msgstr "Pianificazione"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:24
+msgid "Please confirm your new password"
+msgstr "Conferma la tua nuova password"
 
 #: src/components/AuthForm.tsx:306
 msgid "Please enter a valid email address"
@@ -1173,7 +1233,7 @@ msgstr "Seleziona un file da caricare."
 #: src/views/settings/components/Avatar.tsx:98
 #: src/views/members/components/InviteMemberForm.tsx:64
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
-#: src/views/card/index.tsx:173
+#: src/views/card/index.tsx:172
 #: src/views/card/components/NewCommentForm.tsx:31
 #: src/views/card/components/NewChecklistItemForm.tsx:89
 #: src/views/card/components/NewChecklistForm.tsx:70
@@ -1222,7 +1282,7 @@ msgstr "Privato"
 msgid "Profile image updated"
 msgstr "Immagine del profilo aggiornata"
 
-#: src/views/settings/index.tsx:144
+#: src/views/settings/index.tsx:146
 msgid "Profile picture"
 msgstr "Immagine del profilo"
 
@@ -1362,13 +1422,13 @@ msgstr "Invia feedback"
 msgid "Senior"
 msgstr "Senior"
 
-#: src/views/settings/index.tsx:138
+#: src/views/settings/index.tsx:140
 #: src/components/SideNavigation.tsx:78
 msgid "Settings"
 msgstr "Impostazioni"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/settings/index.tsx:134
+#: src/views/settings/index.tsx:136
 msgid "Settings | {0}"
 msgstr "Impostazioni | {0}"
 
@@ -1447,6 +1507,10 @@ msgstr "Termini di servizio"
 msgid "Thank you for your feedback!"
 msgstr "Grazie per il tuo feedback!"
 
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:84
+msgid "The current password you entered is incorrect."
+msgstr "La password attuale inserita non è corretta."
+
 #: src/views/home/components/Faqs.tsx:33
 msgid "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
 msgstr "La principale differenza tra Kan e Trello è che Kan è open source, permettendo a chiunque di visualizzare, modificare e contribuire al nostro codice. La nostra offerta cloud non impone inoltre alcuna restrizione sulle funzionalità per uso individuale, mentre Trello blocca funzionalità di base come il numero di bacheche che puoi creare dietro un paywall."
@@ -1508,7 +1572,7 @@ msgstr "Attiva/disattiva menu"
 msgid "Track all card changes with detailed activity history."
 msgstr "Tieni traccia di tutte le modifiche alle schede con una cronologia dettagliata delle attività."
 
-#: src/views/settings/index.tsx:92
+#: src/views/settings/index.tsx:94
 msgid "Trello disconnected"
 msgstr "Trello disconnesso"
 
@@ -1576,7 +1640,7 @@ msgstr "Impossibile aggiornare l'URL della bacheca"
 msgid "Unable to update board visibility"
 msgstr "Impossibile aggiornare la visibilità della bacheca"
 
-#: src/views/card/index.tsx:172
+#: src/views/card/index.tsx:171
 #: src/views/board/index.tsx:189
 msgid "Unable to update card"
 msgstr "Impossibile aggiornare la scheda"
@@ -1705,11 +1769,11 @@ msgstr "L'utente è già membro di questo spazio di lavoro"
 msgid "Video"
 msgstr "Video"
 
-#: src/views/settings/index.tsx:260
+#: src/views/settings/index.tsx:262
 msgid "View and manage your API keys."
 msgstr "Visualizza e gestisci le tue chiavi API."
 
-#: src/views/settings/index.tsx:199
+#: src/views/settings/index.tsx:201
 msgid "View and manage your billing and subscription."
 msgstr "Visualizza e gestisci la tua fatturazione e abbonamento."
 
@@ -1769,7 +1833,7 @@ msgstr "Spazio di lavoro"
 msgid "Workspace deleted"
 msgstr "Spazio di lavoro eliminato"
 
-#: src/views/settings/index.tsx:175
+#: src/views/settings/index.tsx:177
 msgid "Workspace description"
 msgstr "Descrizione dello spazio di lavoro"
 
@@ -1790,7 +1854,7 @@ msgstr "Descrizione dell'area di lavoro aggiornata"
 msgid "Workspace members"
 msgstr "Membri del workspace"
 
-#: src/views/settings/index.tsx:156
+#: src/views/settings/index.tsx:158
 #: src/components/NewWorkspaceForm.tsx:80
 msgid "Workspace name"
 msgstr "Nome dello spazio di lavoro"
@@ -1811,7 +1875,7 @@ msgstr "Nome dello spazio di lavoro aggiornato"
 msgid "Workspace slug updated"
 msgstr "Slug dell'area di lavoro aggiornato"
 
-#: src/views/settings/index.tsx:165
+#: src/views/settings/index.tsx:167
 msgid "Workspace URL"
 msgstr "URL dello spazio di lavoro"
 
@@ -1826,6 +1890,10 @@ msgstr "Annuale"
 #: src/views/home/components/Faqs.tsx:86
 msgid "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits."
 msgstr "Sì, offriamo un piano gratuito per sempre per uso individuale. Nessuna restrizione, nessun paywall, nessun limite."
+
+#: src/views/settings/index.tsx:294
+msgid "You are about to change your password."
+msgstr "Stai per cambiare la tua password."
 
 #: src/views/home/components/Faqs.tsx:67
 msgid "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!"
@@ -1859,15 +1927,19 @@ msgstr "Le tue bacheche sono state importate."
 msgid "Your display name has been updated."
 msgstr "Il tuo nome visualizzato è stato aggiornato."
 
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:70
+msgid "Your password has been changed."
+msgstr "La tua password è stata modificata."
+
 #: src/views/settings/components/Avatar.tsx:27
 msgid "Your profile image has been updated."
 msgstr "La tua immagine del profilo è stata aggiornata."
 
-#: src/views/settings/index.tsx:93
+#: src/views/settings/index.tsx:95
 msgid "Your Trello account has been disconnected."
 msgstr "Il tuo account Trello è stato disconnesso."
 
-#: src/views/settings/index.tsx:242
+#: src/views/settings/index.tsx:244
 msgid "Your Trello account is connected."
 msgstr "Il tuo account Trello è connesso."
 
