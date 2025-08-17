@@ -18,7 +18,7 @@ import settingsIconLight from "~/assets/settings-light.json";
 import ReactiveButton from "~/components/ReactiveButton";
 import UserMenu from "~/components/UserMenu";
 import WorkspaceMenu from "~/components/WorkspaceMenu";
-import { useTheme } from "~/providers/theme";
+import { useTheme } from "next-themes";
 
 interface SideNavigationProps {
   user: UserType;
@@ -59,9 +59,9 @@ export default function SideNavigation({
 
   const { pathname } = router;
 
-  const { activeTheme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
 
-  const isDarkMode = activeTheme === "dark";
+  const isDarkMode = resolvedTheme === "dark";
 
   const navigation = [
     {

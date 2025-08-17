@@ -10,7 +10,7 @@ import { authClient } from "@kan/auth/client";
 
 import { useClickOutside } from "~/hooks/useClickOutside";
 import { useModal } from "~/providers/modal";
-import { useTheme } from "~/providers/theme";
+import { useTheme } from "next-themes";
 import { WorkspaceProvider } from "~/providers/workspace";
 import FeedbackModal from "./FeedbackModal";
 import Modal from "./modal";
@@ -41,7 +41,7 @@ export default function Dashboard({
   rightPanel,
   hasRightPanel = false,
 }: DashboardProps) {
-  const theme = useTheme();
+  const { theme } = useTheme();
   const { modalContentType } = useModal();
 
   const { data: session, isPending: sessionLoading } = authClient.useSession();
@@ -90,7 +90,7 @@ export default function Dashboard({
     }
   });
 
-  const isDarkMode = theme.activeTheme === "dark";
+  const isDarkMode = theme === "dark";
 
   return (
     <>

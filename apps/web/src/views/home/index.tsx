@@ -6,7 +6,7 @@ import { IoLogoGithub, IoLogoHackernews } from "react-icons/io";
 
 import Button from "~/components/Button";
 import { PageHead } from "~/components/PageHead";
-import { useTheme } from "~/providers/theme";
+import { useTheme } from "next-themes";
 import Cta from "./components/Cta";
 import FAQs from "./components/Faqs";
 import Features from "./components/Features";
@@ -14,9 +14,11 @@ import Layout from "./components/Layout";
 import Pricing from "./components/Pricing";
 
 export default function HomeView() {
-  const theme = useTheme();
+  const { theme, systemTheme } = useTheme();
 
-  const isDarkMode = theme.activeTheme === "dark";
+  const resolvedTheme = theme === "system" ? systemTheme : theme;
+  const effectiveTheme = (resolvedTheme === "dark" ? "dark" : "light") as "light" | "dark";
+  const isDarkMode = effectiveTheme === "dark";
   return (
     <Layout>
       <PageHead title="Kan.bn | The open source alternative to Trello" />
@@ -100,7 +102,7 @@ export default function HomeView() {
         </div>
         <div className="relative pt-10">
           <div id="features" className="absolute -top-20" />
-          <Features theme={theme.activeTheme} />
+          <Features theme={effectiveTheme} />
         </div>
         <div className="relative pt-10">
           <div id="pricing" className="absolute -top-20" />
@@ -111,7 +113,7 @@ export default function HomeView() {
           <FAQs />
         </div>
         <div className="relative">
-          <Cta theme={theme.activeTheme} />
+          <Cta theme={effectiveTheme} />
         </div>
       </div>
     </Layout>

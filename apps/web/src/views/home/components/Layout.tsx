@@ -1,17 +1,17 @@
 import PatternedBackground from "~/components/PatternedBackground";
-import { useTheme } from "~/providers/theme";
+import { useTheme } from "next-themes";
 import Footer from "./Footer";
 import Header from "./Header";
 import { authClient } from "@kan/auth/client";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const theme = useTheme();
+  const { theme } = useTheme();
 
   const { data: session } = authClient.useSession();
 
   const isLoggedIn = !!session?.user;
 
-  const isDarkMode = theme.activeTheme === "dark";
+  const isDarkMode = theme === "dark";
 
   return (
     <>

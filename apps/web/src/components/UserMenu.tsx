@@ -10,7 +10,7 @@ import { authClient } from "@kan/auth/client";
 
 import { useIsMobile } from "~/hooks/useMediaQuery";
 import { useModal } from "~/providers/modal";
-import { useTheme } from "~/providers/theme";
+import { useTheme } from "next-themes";
 import { getAvatarUrl } from "~/utils/helpers";
 
 interface UserMenuProps {
@@ -29,7 +29,7 @@ export default function UserMenu({
   onCloseSideNav,
 }: UserMenuProps) {
   const router = useRouter();
-  const { themePreference, switchTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const { openModal } = useModal();
   const isMobile = useIsMobile();
 
@@ -127,12 +127,12 @@ export default function UserMenu({
               </div>
               <Menu.Item>
                 <button
-                  onClick={() => switchTheme("system")}
+                  onClick={() => setTheme("system")}
                   className="flex w-full items-center rounded-[5px] px-3 py-2 text-left text-xs hover:bg-light-200 dark:hover:bg-dark-400"
                 >
                   <span
                     className={twMerge(
-                      themePreference === "system" ? "visible" : "invisible",
+                      theme === "system" ? "visible" : "invisible",
                       "mr-4 h-[6px] w-[6px] rounded-full bg-light-900 dark:bg-dark-900",
                     )}
                   />
@@ -141,12 +141,12 @@ export default function UserMenu({
               </Menu.Item>
               <Menu.Item>
                 <button
-                  onClick={() => switchTheme("dark")}
+                  onClick={() => setTheme("dark")}
                   className="flex w-full items-center rounded-[5px] px-3 py-2 text-left text-xs hover:bg-light-200 dark:hover:bg-dark-400"
                 >
                   <span
                     className={twMerge(
-                      themePreference === "dark" ? "visible" : "invisible",
+                      theme === "dark" ? "visible" : "invisible",
                       "mr-4 h-[6px] w-[6px] rounded-full bg-light-900 dark:bg-dark-900",
                     )}
                   />
@@ -155,12 +155,12 @@ export default function UserMenu({
               </Menu.Item>
               <Menu.Item>
                 <button
-                  onClick={() => switchTheme("light")}
+                  onClick={() => setTheme("light")}
                   className="flex w-full items-center rounded-[5px] px-3 py-2 text-left text-xs hover:bg-light-200 dark:hover:bg-dark-400"
                 >
                   <span
                     className={twMerge(
-                      themePreference === "light" ? "visible" : "invisible",
+                      theme === "light" ? "visible" : "invisible",
                       "mr-4 h-[6px] w-[6px] rounded-full bg-light-900 dark:bg-dark-900",
                     )}
                   />

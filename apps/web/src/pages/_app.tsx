@@ -14,7 +14,7 @@ import { useEffect } from "react";
 import { LinguiProviderWrapper } from "~/providers/lingui";
 import { ModalProvider } from "~/providers/modal";
 import { PopupProvider } from "~/providers/popup";
-import { ThemeProvider } from "~/providers/theme";
+import { ThemeProvider } from "next-themes";
 import { api } from "~/utils/api";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -81,9 +81,9 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
       <script src="/__ENV.js" />
       <main className="font-sans">
         <LinguiProviderWrapper>
-          <ThemeProvider>
-            <ModalProvider>
-              <PopupProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <ModalProvider>
+                <PopupProvider>
                 {posthogKey ? (
                   <PostHogProvider client={posthog}>
                     {getLayout(<Component {...pageProps} />)}
@@ -91,8 +91,8 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
                 ) : (
                   getLayout(<Component {...pageProps} />)
                 )}
-              </PopupProvider>
-            </ModalProvider>
+                </PopupProvider>
+              </ModalProvider>
           </ThemeProvider>
         </LinguiProviderWrapper>
       </main>
