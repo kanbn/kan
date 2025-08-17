@@ -40,7 +40,7 @@ export default function PublicBoardView() {
       members: formatToArray(router.query.members),
       labels: formatToArray(router.query.labels),
     },
-    { enabled: !!boardSlug, placeholderData: keepPreviousData },
+    { enabled: router.isReady && !!boardSlug, placeholderData: keepPreviousData },
   );
 
   const CopyBoardLink = () => {
@@ -102,7 +102,7 @@ export default function PublicBoardView() {
         <div className="relative h-full overflow-hidden rounded-md border pb-8 dark:border-dark-200">
           <PatternedBackground />
           <div className="z-10 flex w-full justify-between p-8">
-            {isLoading ? (
+            {isLoading || !router.isReady ? (
               <div className="flex space-x-2">
                 <div className="h-[2.3rem] w-[150px] animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-100" />
               </div>
@@ -129,13 +129,13 @@ export default function PublicBoardView() {
           </div>
 
           <div className="scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] relative h-full flex-1 overflow-y-hidden overflow-x-scroll overscroll-contain scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300">
-            {isLoading ? (
+            {isLoading || !router.isReady ? (
               <div className="ml-[2rem] flex">
                 <div className="0 mr-5 h-[500px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
                 <div className="0 mr-5 h-[275px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
                 <div className="0 mr-5 h-[375px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
               </div>
-            ) : !data ? (
+            ) : !data && !isLoading && router.isReady && !!boardSlug ? (
               <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
                 <div className="flex flex-col items-center">
                   <HiOutlineLockClosed className="h-10 w-10 text-light-800 dark:text-dark-800" />
