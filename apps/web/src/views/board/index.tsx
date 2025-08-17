@@ -375,7 +375,7 @@ export default function BoardPage() {
             />
             <Filters
               labels={boardData?.labels ?? []}
-              members={boardData?.workspace.members ?? []}
+              members={boardData?.workspace.members?.filter(member => member.user !== null) ?? []}
               position="left"
               isLoading={!boardData}
             />
