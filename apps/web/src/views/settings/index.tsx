@@ -26,7 +26,7 @@ import UpdateWorkspaceNameForm from "./components/UpdateWorkspaceNameForm";
 import UpdateWorkspaceUrlForm from "./components/UpdateWorkspaceUrlForm";
 
 export default function SettingsPage() {
-  const { modalContentType, openModal } = useModal();
+  const { modalContentType, openModal, isOpen } = useModal();
   const { workspace } = useWorkspace();
   const utils = api.useUtils();
   const { showPopup } = usePopup();
@@ -322,22 +322,49 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <Modal modalSize={modalContentType === "NEW_FEEDBACK" ? "md" : "sm"}>
-            {modalContentType === "NEW_FEEDBACK" && <FeedbackModal />}
-            {modalContentType === "NEW_WORKSPACE" && <NewWorkspaceForm />}
-            {modalContentType === "DELETE_WORKSPACE" && (
+          <>
+            <Modal
+              modalSize="md"
+              isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
+            >
+              <FeedbackModal />
+            </Modal>
+
+            <Modal
+              modalSize="sm"
+              isVisible={isOpen && modalContentType === "NEW_WORKSPACE"}
+            >
+              <NewWorkspaceForm />
+            </Modal>
+
+            <Modal
+              modalSize="sm"
+              isVisible={isOpen && modalContentType === "DELETE_WORKSPACE"}
+            >
               <DeleteWorkspaceConfirmation />
-            )}
-            {modalContentType === "UPDATE_WORKSPACE_URL" && (
+            </Modal>
+
+            <Modal
+              modalSize="sm"
+              isVisible={isOpen && modalContentType === "UPDATE_WORKSPACE_URL"}
+            >
               <CustomURLConfirmation workspacePublicId={workspace.publicId} />
-            )}
-            {modalContentType === "DELETE_ACCOUNT" && (
+            </Modal>
+
+            <Modal
+              modalSize="sm"
+              isVisible={isOpen && modalContentType === "DELETE_ACCOUNT"}
+            >
               <DeleteAccountConfirmation />
-            )}
-            {modalContentType === "CHANGE_PASSWORD" && (
+            </Modal>
+
+            <Modal
+              modalSize="sm"
+              isVisible={isOpen && modalContentType === "CHANGE_PASSWORD"}
+            >
               <ChangePasswordFormConfirmation />
-            )}
-          </Modal>
+            </Modal>
+          </>
         </div>
       </div>
     </>

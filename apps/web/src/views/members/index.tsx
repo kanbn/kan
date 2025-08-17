@@ -19,7 +19,7 @@ import { DeleteMemberConfirmation } from "./components/DeleteMemberConfirmation"
 import { InviteMemberForm } from "./components/InviteMemberForm";
 
 export default function MembersPage() {
-  const { modalContentType, openModal } = useModal();
+  const { modalContentType, openModal, isOpen } = useModal();
   const { workspace } = useWorkspace();
 
   const { data, isLoading } = api.workspace.byId.useQuery(
@@ -222,12 +222,35 @@ export default function MembersPage() {
           </div>
         </div>
 
-        <Modal modalSize={modalContentType === "NEW_FEEDBACK" ? "md" : "sm"}>
-          {modalContentType === "NEW_FEEDBACK" && <FeedbackModal />}
-          {modalContentType === "NEW_WORKSPACE" && <NewWorkspaceForm />}
-          {modalContentType === "INVITE_MEMBER" && <InviteMemberForm />}
-          {modalContentType === "REMOVE_MEMBER" && <DeleteMemberConfirmation />}
-        </Modal>
+        <>
+          <Modal
+            modalSize="md"
+            isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
+          >
+            <FeedbackModal />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "NEW_WORKSPACE"}
+          >
+            <NewWorkspaceForm />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "INVITE_MEMBER"}
+          >
+            <InviteMemberForm />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "REMOVE_MEMBER"}
+          >
+            <DeleteMemberConfirmation />
+          </Modal>
+        </>
       </div>
     </>
   );

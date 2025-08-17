@@ -142,6 +142,7 @@ export default function CardPage() {
     openModal,
     getModalState,
     clearModalState,
+    isOpen,
   } = useModal();
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
@@ -305,47 +306,86 @@ export default function CardPage() {
           </div>
         </div>
 
-        <Modal modalSize={modalContentType === "NEW_FEEDBACK" ? "md" : "sm"}>
-          {modalContentType === "NEW_FEEDBACK" && <FeedbackModal />}
-          {modalContentType === "NEW_LABEL" && (
+        <>
+          <Modal
+            modalSize="md"
+            isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
+          >
+            <FeedbackModal />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "NEW_LABEL"}
+          >
             <LabelForm boardPublicId={boardId ?? ""} refetch={refetchCard} />
-          )}
-          {modalContentType === "EDIT_LABEL" && (
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "EDIT_LABEL"}
+          >
             <LabelForm
               boardPublicId={boardId ?? ""}
               refetch={refetchCard}
               isEdit
             />
-          )}
-          {modalContentType === "DELETE_LABEL" && (
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "DELETE_LABEL"}
+          >
             <DeleteLabelConfirmation
               refetch={refetchCard}
               labelPublicId={entityId}
             />
-          )}
-          {modalContentType === "DELETE_CARD" && (
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "DELETE_CARD"}
+          >
             <DeleteCardConfirmation
               boardPublicId={boardId ?? ""}
               cardPublicId={cardId}
             />
-          )}
-          {modalContentType === "DELETE_COMMENT" && (
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "DELETE_COMMENT"}
+          >
             <DeleteCommentConfirmation
               cardPublicId={cardId}
               commentPublicId={entityId}
             />
-          )}
-          {modalContentType === "NEW_WORKSPACE" && <NewWorkspaceForm />}
-          {modalContentType === "ADD_CHECKLIST" && (
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "NEW_WORKSPACE"}
+          >
+            <NewWorkspaceForm />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "ADD_CHECKLIST"}
+          >
             <NewChecklistForm cardPublicId={cardId} />
-          )}
-          {modalContentType === "DELETE_CHECKLIST" && (
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "DELETE_CHECKLIST"}
+          >
             <DeleteChecklistConfirmation
               cardPublicId={cardId}
               checklistPublicId={entityId}
             />
-          )}
-        </Modal>
+          </Modal>
+        </>
       </div>
     </>
   );

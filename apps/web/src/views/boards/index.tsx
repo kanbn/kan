@@ -13,7 +13,7 @@ import { ImportBoardsForm } from "./components/ImportBoardsForm";
 import { NewBoardForm } from "./components/NewBoardForm";
 
 export default function BoardsPage() {
-  const { openModal, modalContentType } = useModal();
+  const { openModal, modalContentType, isOpen } = useModal();
   const { workspace, hasLoaded } = useWorkspace();
 
   if (hasLoaded && !workspace.publicId) openModal("NEW_WORKSPACE");
@@ -50,12 +50,35 @@ export default function BoardsPage() {
           </div>
         </div>
 
-        <Modal modalSize={modalContentType === "NEW_FEEDBACK" ? "md" : "sm"}>
-          {modalContentType === "NEW_FEEDBACK" && <FeedbackModal />}
-          {modalContentType === "NEW_BOARD" && <NewBoardForm />}
-          {modalContentType === "IMPORT_BOARDS" && <ImportBoardsForm />}
-          {modalContentType === "NEW_WORKSPACE" && <NewWorkspaceForm />}
-        </Modal>
+        <>
+          <Modal
+            modalSize="md"
+            isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
+          >
+            <FeedbackModal />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "NEW_BOARD"}
+          >
+            <NewBoardForm />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "IMPORT_BOARDS"}
+          >
+            <ImportBoardsForm />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "NEW_WORKSPACE"}
+          >
+            <NewWorkspaceForm />
+          </Modal>
+        </>
 
         <div className="flex h-full flex-row">
           <BoardsList />
