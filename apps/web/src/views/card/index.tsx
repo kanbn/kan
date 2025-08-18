@@ -16,11 +16,14 @@ import { PageHead } from "~/components/PageHead";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
+import { UI_CONSTANTS } from "~/lib/constants/customFields";
+import { combineFieldDefinitionsWithValues } from "~/lib/utils/customFieldUtils";
 import { api } from "~/utils/api";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmation";
 import ActivityList from "./components/ActivityList";
 import Checklists from "./components/Checklists";
+import CustomFieldEditor from "./components/CustomFieldEditor";
 import { DeleteCardConfirmation } from "./components/DeleteCardConfirmation";
 import { DeleteChecklistConfirmation } from "./components/DeleteChecklistConfirmation";
 import { DeleteCommentConfirmation } from "./components/DeleteCommentConfirmation";
@@ -35,6 +38,65 @@ interface FormValues {
   cardId: string;
   title: string;
   description: string;
+}
+
+function CardCustomFields({ cardId }: { cardId: string | undefined }) {
+  const { data: card } = api.card.byId.useQuery({
+    cardPublicId: cardId ?? "",
+  });
+
+  const board = card?.list.board;
+  const boardPublicId = board?.publicId;
+  const workspaceMembers = board?.workspace.members;
+
+  const { data: fieldDefinitions } =
+    api.customField.getFieldDefinitionsByBoard.useQuery(
+      { boardPublicId: boardPublicId ?? "" },
+      {
+        enabled: !!boardPublicId,
+      },
+    );
+
+  const { data: customFieldValues, refetch: refetchCustomFields } =
+    api.customField.getFieldValuesByCard.useQuery(
+      { cardPublicId: cardId ?? "" },
+      {
+        enabled: !!cardId,
+      },
+    );
+
+  if (!cardId || !fieldDefinitions || fieldDefinitions.length === 0) {
+    return null; // Don't render anything if no custom fields
+  }
+
+  // Combine field definitions with existing values
+  const combinedFieldValues = combineFieldDefinitionsWithValues(
+    fieldDefinitions,
+    customFieldValues ?? []
+  );
+
+  return (
+    <>
+      {combinedFieldValues.map((fieldValue) => (
+        <div
+          key={fieldValue.fieldDefinition.publicId}
+          className={UI_CONSTANTS.FIELD_CONTAINER}
+        >
+          <p className={UI_CONSTANTS.FIELD_LABEL}>
+            {fieldValue.fieldDefinition.name}
+          </p>
+          <div className="flex-1">
+            <CustomFieldEditor
+              cardPublicId={cardId}
+              fieldValue={fieldValue}
+              workspaceMembers={workspaceMembers ?? []}
+              onUpdate={refetchCustomFields}
+            />
+          </div>
+        </div>
+      ))}
+    </>
+  );
 }
 
 export function CardRightPanel() {
@@ -121,7 +183,7 @@ export function CardRightPanel() {
           isLoading={!card}
         />
       </div>
-      <div className="flex w-full flex-row">
+      <div className="mb-4 flex w-full flex-row">
         <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Members`}</p>
         <MemberSelector
           cardPublicId={cardId ?? ""}
@@ -129,6 +191,9 @@ export function CardRightPanel() {
           isLoading={!card}
         />
       </div>
+
+      {/* Custom Fields */}
+      <CardCustomFields cardId={cardId} />
     </div>
   );
 }
@@ -136,14 +201,8 @@ export function CardRightPanel() {
 export default function CardPage() {
   const router = useRouter();
   const utils = api.useUtils();
-  const {
-    modalContentType,
-    entityId,
-    openModal,
-    getModalState,
-    clearModalState,
-    isOpen,
-  } = useModal();
+  const { modalContentType, entityId, getModalState, clearModalState, isOpen } =
+    useModal();
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
   const [activeChecklistForm, setActiveChecklistForm] = useState<string | null>(
@@ -179,7 +238,7 @@ export default function CardPage() {
     },
   });
 
-  const { register, handleSubmit, setValue, watch } = useForm<FormValues>({
+  const { register, handleSubmit, setValue } = useForm<FormValues>({
     values: {
       cardId: cardId ?? "",
       title: card?.title ?? "",
@@ -198,7 +257,9 @@ export default function CardPage() {
   // Open the new item form after creating a new checklist
   useEffect(() => {
     if (!card) return;
-    const state = getModalState("ADD_CHECKLIST");
+    const state = getModalState("ADD_CHECKLIST") as {
+      createdChecklistId?: string;
+    } | null;
     const createdId: string | undefined = state?.createdChecklistId;
     if (createdId) {
       setActiveChecklistForm(createdId);
@@ -214,7 +275,7 @@ export default function CardPage() {
         title={t`${card?.title ?? "Card"} | ${board?.name ?? "Board"}`}
       />
       <div className="flex h-full flex-1 flex-row overflow-hidden">
-        <div className="scrollbar-thumb-rounded-[4px] scrollbar-track-rounded-[4px] w-full flex-1 overflow-y-auto scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 hover:scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 dark:hover:scrollbar-thumb-dark-300">
+        <div className="scrollbar-thumb-rounded-[4px] scrollbar-track-rounded-[4px] flex-1 overflow-y-auto scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 hover:scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 dark:hover:scrollbar-thumb-dark-300">
           <div className="p-auto mx-auto flex h-full w-full max-w-[800px] flex-col">
             <div className="p-6 md:p-8">
               <div className="mb-8 flex w-full items-center justify-between md:mt-6">
@@ -278,6 +339,7 @@ export default function CardPage() {
                       </div>
                     </form>
                   </div>
+
                   <Checklists
                     checklists={card.checklists}
                     cardPublicId={cardId}
@@ -305,88 +367,88 @@ export default function CardPage() {
             </div>
           </div>
         </div>
-
-        <>
-          <Modal
-            modalSize="md"
-            isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
-          >
-            <FeedbackModal />
-          </Modal>
-
-          <Modal
-            modalSize="sm"
-            isVisible={isOpen && modalContentType === "NEW_LABEL"}
-          >
-            <LabelForm boardPublicId={boardId ?? ""} refetch={refetchCard} />
-          </Modal>
-
-          <Modal
-            modalSize="sm"
-            isVisible={isOpen && modalContentType === "EDIT_LABEL"}
-          >
-            <LabelForm
-              boardPublicId={boardId ?? ""}
-              refetch={refetchCard}
-              isEdit
-            />
-          </Modal>
-
-          <Modal
-            modalSize="sm"
-            isVisible={isOpen && modalContentType === "DELETE_LABEL"}
-          >
-            <DeleteLabelConfirmation
-              refetch={refetchCard}
-              labelPublicId={entityId}
-            />
-          </Modal>
-
-          <Modal
-            modalSize="sm"
-            isVisible={isOpen && modalContentType === "DELETE_CARD"}
-          >
-            <DeleteCardConfirmation
-              boardPublicId={boardId ?? ""}
-              cardPublicId={cardId}
-            />
-          </Modal>
-
-          <Modal
-            modalSize="sm"
-            isVisible={isOpen && modalContentType === "DELETE_COMMENT"}
-          >
-            <DeleteCommentConfirmation
-              cardPublicId={cardId}
-              commentPublicId={entityId}
-            />
-          </Modal>
-
-          <Modal
-            modalSize="sm"
-            isVisible={isOpen && modalContentType === "NEW_WORKSPACE"}
-          >
-            <NewWorkspaceForm />
-          </Modal>
-
-          <Modal
-            modalSize="sm"
-            isVisible={isOpen && modalContentType === "ADD_CHECKLIST"}
-          >
-            <NewChecklistForm cardPublicId={cardId} />
-          </Modal>
-
-          <Modal
-            modalSize="sm"
-            isVisible={isOpen && modalContentType === "DELETE_CHECKLIST"}
-          >
-            <DeleteChecklistConfirmation
-              cardPublicId={cardId}
-              checklistPublicId={entityId}
-            />
-          </Modal>
-        </>
       </div>
+
+      <>
+        <Modal
+          modalSize="md"
+          isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
+        >
+          <FeedbackModal />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "NEW_LABEL"}
+        >
+          <LabelForm boardPublicId={boardId ?? ""} refetch={refetchCard} />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "EDIT_LABEL"}
+        >
+          <LabelForm
+            boardPublicId={boardId ?? ""}
+            refetch={refetchCard}
+            isEdit
+          />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "DELETE_LABEL"}
+        >
+          <DeleteLabelConfirmation
+            refetch={refetchCard}
+            labelPublicId={entityId}
+          />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "DELETE_CARD"}
+        >
+          <DeleteCardConfirmation
+            boardPublicId={boardId ?? ""}
+            cardPublicId={cardId}
+          />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "DELETE_COMMENT"}
+        >
+          <DeleteCommentConfirmation
+            cardPublicId={cardId}
+            commentPublicId={entityId}
+          />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "NEW_WORKSPACE"}
+        >
+          <NewWorkspaceForm />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "ADD_CHECKLIST"}
+        >
+          <NewChecklistForm cardPublicId={cardId} />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "DELETE_CHECKLIST"}
+        >
+          <DeleteChecklistConfirmation
+            cardPublicId={cardId}
+            checklistPublicId={entityId}
+          />
+        </Modal>
+      </>
     </>
   );
 }

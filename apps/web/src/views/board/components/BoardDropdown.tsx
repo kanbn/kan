@@ -1,5 +1,10 @@
 import { t } from "@lingui/core/macro";
-import { HiEllipsisHorizontal, HiLink, HiOutlineTrash } from "react-icons/hi2";
+import {
+  HiCog,
+  HiEllipsisHorizontal,
+  HiLink,
+  HiOutlineTrash,
+} from "react-icons/hi2";
 
 import Dropdown from "~/components/Dropdown";
 import { useModal } from "~/providers/modal";
@@ -11,6 +16,11 @@ export default function BoardDropdown({ isLoading }: { isLoading: boolean }) {
     <Dropdown
       disabled={isLoading}
       items={[
+        {
+          label: t`Custom Fields`,
+          action: () => openModal("CUSTOM_FIELDS"),
+          icon: <HiCog className="h-[16px] w-[16px] text-dark-900" />,
+        },
         {
           label: t`Edit board URL`,
           action: () => openModal("UPDATE_BOARD_SLUG"),

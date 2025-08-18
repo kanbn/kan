@@ -26,6 +26,7 @@ import { api } from "~/utils/api";
 import { formatToArray } from "~/utils/helpers";
 import BoardDropdown from "./components/BoardDropdown";
 import Card from "./components/Card";
+import CustomFieldManager from "./components/CustomFieldManager";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
@@ -208,7 +209,6 @@ export default function BoardPage() {
   };
 
   const onDragEnd = ({
-    source,
     destination,
     draggableId,
     type,
@@ -321,6 +321,13 @@ export default function BoardPage() {
             queryParams={queryParams}
           />
         </Modal>
+
+        <Modal
+          modalSize="lg"
+          isVisible={isOpen && modalContentType === "CUSTOM_FIELDS"}
+        >
+          <CustomFieldManager boardPublicId={boardId ?? ""} />
+        </Modal>
       </>
     );
   };
@@ -328,7 +335,7 @@ export default function BoardPage() {
   return (
     <>
       <PageHead
-        title={`${boardData?.name ?? t`Board`} | ${workspace.name ?? t`Workspace`}`}
+        title={`${boardData?.name ?? t`Board`} | ${workspace.name || t`Workspace`}`}
       />
       <div className="relative flex h-full flex-col">
         <PatternedBackground />
@@ -375,7 +382,11 @@ export default function BoardPage() {
             />
             <Filters
               labels={boardData?.labels ?? []}
-              members={boardData?.workspace.members?.filter(member => member.user !== null) ?? []}
+              members={
+                boardData?.workspace.members.filter(
+                  (member) => member.user !== null,
+                ) ?? []
+              }
               position="left"
               isLoading={!boardData}
             />
@@ -491,7 +502,7 @@ export default function BoardPage() {
                                             title={card.title}
                                             labels={card.labels}
                                             members={card.members}
-                                            checklists={card.checklists ?? []}
+                                            checklists={card.checklists}
                                           />
                                         </Link>
                                       )}
