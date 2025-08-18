@@ -55,51 +55,59 @@ export default function CheckboxDropdown({
 
   const renderMenuItems = (items: Item[], groupKey: string | null) => (
     <>
-      {items.map((item) => (
-        <Menu.Item key={item.key}>
-          <div
-            className="group flex items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300"
-            onClick={(e) => {
-              e.preventDefault();
-              handleSelect(groupKey, { key: item.key, value: item.value });
-            }}
-          >
-            <input
-              id={item.key}
-              name={item.key}
-              type="checkbox"
-              className="h-[14px] w-[14px] rounded bg-transparent"
-              onClick={(event) => event.stopPropagation()}
-              onChange={() =>
-                handleSelect(groupKey, { key: item.key, value: item.value })
-              }
-              checked={item.selected}
-            />
-            {item.leftIcon && (
-              <span className="ml-3 flex items-center">{item.leftIcon}</span>
-            )}
-            <label
-              htmlFor={item.key}
-              className="ml-3 text-[12px] text-dark-900"
+      {items.length > 0 ? (
+        items.map((item) => (
+          <Menu.Item key={item.key}>
+            <div
+              className="group flex items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300"
+              onClick={(e) => {
+                e.preventDefault();
+                handleSelect(groupKey, { key: item.key, value: item.value });
+              }}
             >
-              {item.value}
-            </label>
-            {handleEdit && (
-              <button
-                type="button"
-                className="invisible ml-auto group-hover:visible"
-                onClick={(event) => {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  handleEdit(item.key);
-                }}
+              <input
+                id={item.key}
+                name={item.key}
+                type="checkbox"
+                className="h-[14px] w-[14px] rounded bg-transparent"
+                onClick={(event) => event.stopPropagation()}
+                onChange={() =>
+                  handleSelect(groupKey, { key: item.key, value: item.value })
+                }
+                checked={item.selected}
+              />
+              {item.leftIcon && (
+                <span className="ml-3 flex items-center">{item.leftIcon}</span>
+              )}
+              <label
+                htmlFor={item.key}
+                className="ml-3 text-[12px] text-dark-900"
               >
-                <HiEllipsisHorizontal size={20} className="text-dark-900" />
-              </button>
-            )}
+                {item.value}
+              </label>
+              {handleEdit && (
+                <button
+                  type="button"
+                  className="invisible ml-auto group-hover:visible"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    handleEdit(item.key);
+                  }}
+                >
+                  <HiEllipsisHorizontal size={20} className="text-dark-900" />
+                </button>
+              )}
+            </div>
+          </Menu.Item>
+        ))
+      ) : (
+        !handleCreate && (
+          <div className="flex items-center p-2 text-[12px] text-dark-900">
+            No items
           </div>
-        </Menu.Item>
-      ))}
+        )
+      )}
       {handleCreate && (
         <button
           type="button"
