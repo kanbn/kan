@@ -13,6 +13,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { checklists } from "./checklists";
+import { customFieldValues } from "./customFields";
 import { imports } from "./imports";
 import { labels } from "./labels";
 import { lists } from "./lists";
@@ -95,6 +96,7 @@ export const cardsRelations = relations(cards, ({ one, many }) => ({
   comments: many(comments),
   activities: many(cardActivities),
   checklists: many(checklists),
+  customFieldValues: many(customFieldValues),
 }));
 
 export const cardActivities = pgTable("card_activity", {

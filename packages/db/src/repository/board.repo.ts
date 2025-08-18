@@ -36,6 +36,25 @@ export const getIdByPublicId = async (db: dbClient, boardPublicId: string) => {
   return board;
 };
 
+export const getById = async (db: dbClient, boardId: number) => {
+  const board = await db.query.boards.findFirst({
+    where: and(eq(boards.id, boardId), isNull(boards.deletedAt)),
+  });
+
+  return board;
+};
+
+export const getSimpleByPublicId = async (
+  db: dbClient,
+  boardPublicId: string,
+) => {
+  const board = await db.query.boards.findFirst({
+    where: and(eq(boards.publicId, boardPublicId), isNull(boards.deletedAt)),
+  });
+
+  return board;
+};
+
 export const getByPublicId = async (
   db: dbClient,
   boardPublicId: string,

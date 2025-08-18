@@ -358,6 +358,7 @@ export const getWithListAndMembersByPublicId = async (
                 with: {
                   members: {
                     columns: {
+                      id: true,
                       publicId: true,
                       email: true,
                     },
