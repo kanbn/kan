@@ -69,17 +69,20 @@ export function CardModal({
                 onClick={async (e) => {
                   e.preventDefault();
                   closeModal();
-                  try {
-                    await router.replace(
-                      `/${workspaceSlug}/${boardSlug}`,
-                      undefined,
-                      {
-                        shallow: true,
-                      },
-                    );
-                  } catch (error) {
-                    console.error(error);
-                  }
+
+                  setTimeout(async () => {
+                    try {
+                      await router.replace(
+                        `/${workspaceSlug}/${boardSlug}`,
+                        undefined,
+                        {
+                          shallow: true,
+                        },
+                      );
+                    } catch (error) {
+                      console.error(error);
+                    }
+                  }, 200);
                 }}
               >
                 <HiXMark
