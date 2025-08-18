@@ -17,8 +17,7 @@ export default function HomeView() {
   const { theme, systemTheme } = useTheme();
 
   const resolvedTheme = theme === "system" ? systemTheme : theme;
-  const effectiveTheme = (resolvedTheme === "dark" ? "dark" : "light") as "light" | "dark";
-  const isDarkMode = effectiveTheme === "dark";
+  const isDarkMode = resolvedTheme === "dark";
   return (
     <Layout>
       <PageHead title="Kan.bn | The open source alternative to Trello" />
@@ -102,7 +101,7 @@ export default function HomeView() {
         </div>
         <div className="relative pt-10">
           <div id="features" className="absolute -top-20" />
-          <Features theme={effectiveTheme} />
+          <Features theme={resolvedTheme === "dark" ? "dark" : "light"} />
         </div>
         <div className="relative pt-10">
           <div id="pricing" className="absolute -top-20" />
@@ -113,7 +112,7 @@ export default function HomeView() {
           <FAQs />
         </div>
         <div className="relative">
-          <Cta theme={effectiveTheme} />
+          <Cta theme={resolvedTheme ?? "light"} />
         </div>
       </div>
     </Layout>
