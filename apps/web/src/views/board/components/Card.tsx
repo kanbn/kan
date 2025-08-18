@@ -6,18 +6,18 @@ import { getAvatarUrl } from "~/utils/helpers";
 
 const Card = ({
   title,
-  labels,
-  members,
-  checklists,
+  labels = [],
+  members = [],
+  checklists = [],
 }: {
   title: string;
-  labels: { name: string; colourCode: string | null }[];
-  members: {
+  labels?: { name: string; colourCode: string | null }[];
+  members?: {
     publicId: string;
     email: string;
     user: { name: string | null; email: string; image: string | null } | null;
   }[];
-  checklists: {
+  checklists?: {
     publicId: string;
     name: string;
     items: {
@@ -45,8 +45,9 @@ const Card = ({
       {labels.length || members.length || checklists.length > 0 ? (
         <div className="mt-2 flex flex-col justify-end">
           <div className="space-x-0.5">
-            {labels.map((label) => (
+            {labels.map((label, index) => (
               <Badge
+                key={`${label.name}-${index}`}
                 value={label.name}
                 iconLeft={<LabelIcon colourCode={label.colourCode} />}
               />
@@ -67,13 +68,14 @@ const Card = ({
             )}
             {members.length > 0 && (
               <div className="isolate flex justify-end -space-x-1 overflow-hidden">
-                {members.map(({ user, email }) => {
+                {members.map(({ user, email, publicId }) => {
                   const avatarUrl = user?.image
                     ? getAvatarUrl(user.image)
                     : undefined;
 
                   return (
                     <Avatar
+                      key={publicId}
                       name={user?.name ?? ""}
                       email={user?.email ?? email}
                       imageUrl={avatarUrl}

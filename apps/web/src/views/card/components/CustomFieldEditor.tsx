@@ -6,7 +6,12 @@ import { IoClose, IoSave } from "react-icons/io5";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
-import { FIELD_PLACEHOLDERS, INPUT_PLACEHOLDERS, UI_CONSTANTS, FIELD_VALIDATION } from "~/lib/constants/customFields";
+import {
+  FIELD_PLACEHOLDERS,
+  FIELD_VALIDATION,
+  INPUT_PLACEHOLDERS,
+  UI_CONSTANTS,
+} from "~/lib/constants/customFields";
 import { api } from "~/utils/api";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import UserFieldSelector from "./UserFieldSelector";
@@ -79,10 +84,13 @@ export default function CustomFieldEditor({
 
   const handleSaveValue = async (value: string | boolean | number | null) => {
     if (value === null || value === "") {
-      await deleteFieldValueMutation.mutateAsync({
-        cardPublicId,
-        fieldDefinitionPublicId: fieldValue.fieldDefinition.publicId,
-      });
+      // Only try to delete if this is not a mock value (mock values have id: -1)
+      if (fieldValue.id !== -1) {
+        await deleteFieldValueMutation.mutateAsync({
+          cardPublicId,
+          fieldDefinitionPublicId: fieldValue.fieldDefinition.publicId,
+        });
+      }
     } else {
       await setFieldValueMutation.mutateAsync({
         cardPublicId,
@@ -134,7 +142,11 @@ export default function CustomFieldEditor({
           ? new Date(fieldValue.dateValue).toLocaleDateString()
           : FIELD_PLACEHOLDERS.date();
       case "checkbox":
-        return fieldValue.checkboxValue ? t`Yes` : FIELD_PLACEHOLDERS.checkbox();
+        return fieldValue.checkboxValue === null
+          ? FIELD_PLACEHOLDERS.checkbox()
+          : fieldValue.checkboxValue
+            ? t`Yes`
+            : t`No`;
       case "emoji":
         return fieldValue.emojiValue ?? FIELD_PLACEHOLDERS.emoji();
       case "user":
@@ -208,13 +220,15 @@ function FieldValueEditor({
   onSave,
   onCancel,
 }: FieldValueEditorProps) {
-  const { register, handleSubmit, setValue } = useForm({
+  const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: {
-      value: currentValue ?? "",
+      value: currentValue ?? (fieldDefinition.type === "user" ? null : ""),
     },
   });
 
-  const onSubmit = (data: { value: string | boolean | number }) => {
+  const watchedValue = watch("value");
+
+  const onSubmit = (data: { value: string | boolean | number | null }) => {
     onSave(data.value);
   };
 
@@ -222,7 +236,11 @@ function FieldValueEditor({
     switch (fieldDefinition.type) {
       case "text":
         return (
-          <Input {...register("value")} placeholder={INPUT_PLACEHOLDERS.text()} autoFocus />
+          <Input
+            {...register("value")}
+            placeholder={INPUT_PLACEHOLDERS.text()}
+            autoFocus
+          />
         );
 
       case "link":
@@ -266,10 +284,10 @@ function FieldValueEditor({
           <UserFieldSelector
             members={members}
             selectedUserId={
-              typeof currentValue === "number" ? currentValue : null
+              typeof watchedValue === "number" ? watchedValue : null
             }
             onSelect={(userId) => {
-              setValue("value", userId ?? "");
+              setValue("value", userId);
             }}
             placeholder={INPUT_PLACEHOLDERS.user()}
           />
