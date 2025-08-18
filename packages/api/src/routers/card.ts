@@ -4,6 +4,7 @@ import { z } from "zod";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardCommentRepo from "@kan/db/repository/cardComment.repo";
+import * as customFieldRepo from "@kan/db/repository/customField.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
@@ -31,6 +32,15 @@ export const cardRouter = createTRPCRouter({
         labelPublicIds: z.array(z.string().min(12)),
         memberPublicIds: z.array(z.string().min(12)),
         position: z.enum(["start", "end"]),
+        customFieldValues: z
+          .array(
+            z.object({
+              fieldDefinitionPublicId: z.string().min(12),
+              value: z.union([z.string(), z.boolean(), z.number(), z.null()]),
+            }),
+          )
+          .optional()
+          .default([]),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof cardRepo.create>>>())
@@ -153,6 +163,59 @@ export const cardRouter = createTRPCRouter({
         }));
 
         await cardActivityRepo.bulkCreate(ctx.db, cardActivitesInsert);
+      }
+
+      // Save custom field values if provided
+      if (input.customFieldValues.length) {
+        for (const fieldValue of input.customFieldValues) {
+          // Skip empty values
+          if (fieldValue.value === null || fieldValue.value === "") {
+            continue;
+          }
+
+          // Get field definition to determine the field type
+          const fieldDefinition =
+            await customFieldRepo.getFieldDefinitionByPublicId(
+              ctx.db,
+              fieldValue.fieldDefinitionPublicId,
+            );
+
+          if (!fieldDefinition) {
+            throw new TRPCError({
+              message: `Field definition with public ID ${fieldValue.fieldDefinitionPublicId} not found`,
+              code: "NOT_FOUND",
+            });
+          }
+
+          // For user fields, convert member publicId to member ID
+          let processedValue = fieldValue.value;
+          if (
+            fieldDefinition.type === "user" &&
+            typeof fieldValue.value === "string"
+          ) {
+            const member = await workspaceRepo.getMemberByPublicId(
+              ctx.db,
+              fieldValue.value,
+            );
+            if (member) {
+              processedValue = member.id;
+            } else {
+              throw new TRPCError({
+                message: `Member with public ID ${fieldValue.value} not found`,
+                code: "NOT_FOUND",
+              });
+            }
+          }
+
+          // Save the custom field value
+          await customFieldRepo.setFieldValue(ctx.db, {
+            cardId: newCardId,
+            fieldDefinitionId: fieldDefinition.id,
+            value: processedValue,
+            fieldType: fieldDefinition.type,
+            createdBy: userId,
+          });
+        }
       }
 
       return newCard;

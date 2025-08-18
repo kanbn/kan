@@ -13,11 +13,11 @@ import LabelIcon from "~/components/LabelIcon";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
+import { UI_CONSTANTS } from "~/lib/constants/customFields";
+import { combineFieldDefinitionsWithValues } from "~/lib/utils/customFieldUtils";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { UI_CONSTANTS } from "~/lib/constants/customFields";
-import { combineFieldDefinitionsWithValues } from "~/lib/utils/customFieldUtils";
 import { api } from "~/utils/api";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmation";
@@ -41,9 +41,14 @@ interface FormValues {
 }
 
 function CardCustomFields({ cardId }: { cardId: string | undefined }) {
-  const { data: card } = api.card.byId.useQuery({
-    cardPublicId: cardId ?? "",
-  });
+  const { data: card } = api.card.byId.useQuery(
+    {
+      cardPublicId: cardId ?? "",
+    },
+    {
+      enabled: !!cardId && cardId.length >= 12, // Only run query if cardId is valid
+    },
+  );
 
   const board = card?.list.board;
   const boardPublicId = board?.publicId;
@@ -53,7 +58,7 @@ function CardCustomFields({ cardId }: { cardId: string | undefined }) {
     api.customField.getFieldDefinitionsByBoard.useQuery(
       { boardPublicId: boardPublicId ?? "" },
       {
-        enabled: !!boardPublicId,
+        enabled: !!boardPublicId && boardPublicId.length >= 12,
       },
     );
 
@@ -61,7 +66,9 @@ function CardCustomFields({ cardId }: { cardId: string | undefined }) {
     api.customField.getFieldValuesByCard.useQuery(
       { cardPublicId: cardId ?? "" },
       {
-        enabled: !!cardId,
+        enabled:
+          !!cardId && cardId.length >= 12 && !cardId.startsWith("PLACEHOLDER"),
+        retry: false, // Don't retry for placeholder cards
       },
     );
 
@@ -69,10 +76,15 @@ function CardCustomFields({ cardId }: { cardId: string | undefined }) {
     return null; // Don't render anything if no custom fields
   }
 
+  // For new/placeholder cards, don't use any existing values to avoid stale data
+  const validCustomFieldValues = cardId.startsWith("PLACEHOLDER")
+    ? []
+    : (customFieldValues ?? []);
+
   // Combine field definitions with existing values
   const combinedFieldValues = combineFieldDefinitionsWithValues(
     fieldDefinitions,
-    customFieldValues ?? []
+    validCustomFieldValues,
   );
 
   return (
@@ -105,9 +117,14 @@ export function CardRightPanel() {
     ? router.query.cardId[0]
     : router.query.cardId;
 
-  const { data: card } = api.card.byId.useQuery({
-    cardPublicId: cardId ?? "",
-  });
+  const { data: card } = api.card.byId.useQuery(
+    {
+      cardPublicId: cardId ?? "",
+    },
+    {
+      enabled: !!cardId && cardId.length >= 12,
+    },
+  );
 
   const board = card?.list.board;
   const labels = board?.labels;
@@ -213,12 +230,18 @@ export default function CardPage() {
     ? router.query.cardId[0]
     : router.query.cardId;
 
-  const { data: card, isLoading } = api.card.byId.useQuery({
-    cardPublicId: cardId ?? "",
-  });
+  const { data: card, isLoading } = api.card.byId.useQuery(
+    {
+      cardPublicId: cardId ?? "",
+    },
+    {
+      enabled: !!cardId && cardId.length >= 12,
+    },
+  );
 
   const refetchCard = async () => {
-    if (cardId) await utils.card.byId.refetch({ cardPublicId: cardId });
+    if (cardId && cardId.length >= 12)
+      await utils.card.byId.refetch({ cardPublicId: cardId });
   };
 
   const board = card?.list.board;
