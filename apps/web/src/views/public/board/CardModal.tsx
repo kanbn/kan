@@ -82,7 +82,7 @@ export function CardModal({
                     } catch (error) {
                       console.error(error);
                     }
-                  }, 200);
+                  }, 400);
                 }}
               >
                 <HiXMark
