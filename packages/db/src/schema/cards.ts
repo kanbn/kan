@@ -42,6 +42,10 @@ export const activityTypes = [
   "card.updated.checklist.item.completed",
   "card.updated.checklist.item.uncompleted",
   "card.updated.checklist.item.deleted",
+  // Custom field activities
+  "card.updated.customfield.added",
+  "card.updated.customfield.updated",
+  "card.updated.customfield.removed",
   "card.archived",
 ] as const;
 

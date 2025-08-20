@@ -1,19 +1,18 @@
 import { t } from "@lingui/core/macro";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { IoClose, IoSave } from "react-icons/io5";
 
 import Avatar from "~/components/Avatar";
-import Button from "~/components/Button";
 import Input from "~/components/Input";
+import { useDebounce } from "~/hooks/useDebounce";
 import {
   FIELD_PLACEHOLDERS,
-  FIELD_VALIDATION,
   INPUT_PLACEHOLDERS,
   UI_CONSTANTS,
 } from "~/lib/constants/customFields";
 import { api } from "~/utils/api";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
+import { EmojiPicker } from "./EmojiPicker";
 import UserFieldSelector from "./UserFieldSelector";
 
 export interface CustomFieldValue {
@@ -66,10 +65,40 @@ export default function CustomFieldEditor({
   onUpdate,
 }: CustomFieldEditorProps) {
   const [isEditing, setIsEditing] = useState(false);
+  const editingContainerRef = useRef<HTMLDivElement>(null);
+
+  // Handle click outside to exit editing mode
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isEditing &&
+        editingContainerRef.current &&
+        !editingContainerRef.current.contains(event.target as Node)
+      ) {
+        setIsEditing(false);
+      }
+    };
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (isEditing && event.key === "Escape") {
+        setIsEditing(false);
+      }
+    };
+
+    if (isEditing) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isEditing]);
+
   const setFieldValueMutation = api.customField.setFieldValue.useMutation({
     onSuccess: () => {
       onUpdate();
-      setIsEditing(false);
     },
   });
 
@@ -77,26 +106,31 @@ export default function CustomFieldEditor({
     {
       onSuccess: () => {
         onUpdate();
-        setIsEditing(false);
       },
     },
   );
 
   const handleSaveValue = async (value: string | boolean | number | null) => {
-    if (value === null || value === "") {
-      // Only try to delete if this is not a mock value (mock values have id: -1)
-      if (fieldValue.id !== -1) {
-        await deleteFieldValueMutation.mutateAsync({
+    try {
+      if (value === null || value === "") {
+        // Only try to delete if this is not a mock value (mock values have id: -1)
+        if (fieldValue.id !== -1) {
+          await deleteFieldValueMutation.mutateAsync({
+            cardPublicId,
+            fieldDefinitionPublicId: fieldValue.fieldDefinition.publicId,
+          });
+        }
+      } else {
+        await setFieldValueMutation.mutateAsync({
           cardPublicId,
           fieldDefinitionPublicId: fieldValue.fieldDefinition.publicId,
+          value,
         });
       }
-    } else {
-      await setFieldValueMutation.mutateAsync({
-        cardPublicId,
-        fieldDefinitionPublicId: fieldValue.fieldDefinition.publicId,
-        value,
-      });
+      // Don't auto-exit editing mode - let user control when to exit
+    } catch (error) {
+      // Keep editing mode if save fails
+      console.error("Failed to save field value:", error);
     }
   };
 
@@ -175,13 +209,14 @@ export default function CustomFieldEditor({
 
   if (isEditing) {
     return (
-      <FieldValueEditor
-        fieldDefinition={fieldValue.fieldDefinition}
-        currentValue={getCurrentValue() ?? null}
-        members={workspaceMembers}
-        onSave={handleSaveValue}
-        onCancel={() => setIsEditing(false)}
-      />
+      <div ref={editingContainerRef}>
+        <FieldValueEditor
+          fieldDefinition={fieldValue.fieldDefinition}
+          currentValue={getCurrentValue() ?? null}
+          members={workspaceMembers}
+          onSave={handleSaveValue}
+        />
+      </div>
     );
   }
 
@@ -210,7 +245,6 @@ interface FieldValueEditorProps {
     } | null;
   }[];
   onSave: (value: string | boolean | number | null) => void;
-  onCancel: () => void;
 }
 
 function FieldValueEditor({
@@ -218,19 +252,46 @@ function FieldValueEditor({
   currentValue,
   members,
   onSave,
-  onCancel,
 }: FieldValueEditorProps) {
-  const { register, handleSubmit, setValue, watch } = useForm({
+  const { register, setValue, watch } = useForm({
     defaultValues: {
       value: currentValue ?? (fieldDefinition.type === "user" ? null : ""),
     },
   });
 
   const watchedValue = watch("value");
+  const [debouncedValue] = useDebounce(watchedValue, 500);
+  const [isMounted, setIsMounted] = useState(false);
+  const lastSavedValue = useRef(currentValue);
+  const onSaveRef = useRef(onSave);
 
-  const onSubmit = (data: { value: string | boolean | number | null }) => {
-    onSave(data.value);
-  };
+  // Keep onSave reference up to date
+  useEffect(() => {
+    onSaveRef.current = onSave;
+  }, [onSave]);
+
+  // Mark as mounted after hydration
+  useEffect(() => {
+    setIsMounted(true);
+    lastSavedValue.current = currentValue;
+  }, [currentValue]);
+
+  // Auto-save when debounced value changes and differs from current value
+  useEffect(() => {
+    // Skip during SSR and initial hydration
+    if (!isMounted) {
+      return;
+    }
+
+    // Only save if the value actually changed and is different from last saved value
+    if (
+      debouncedValue !== currentValue &&
+      debouncedValue !== lastSavedValue.current
+    ) {
+      lastSavedValue.current = debouncedValue;
+      onSaveRef.current(debouncedValue);
+    }
+  }, [debouncedValue, currentValue, isMounted]);
 
   const renderInputField = () => {
     switch (fieldDefinition.type) {
@@ -258,24 +319,22 @@ function FieldValueEditor({
 
       case "checkbox":
         return (
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center justify-between rounded-[5px] border-[1px] border-light-50 px-3 py-2 dark:border-dark-50">
             <input
               {...register("value")}
               type="checkbox"
-              className="h-4 w-4"
+              className="h-4 w-4 rounded border-light-300 bg-light-50 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-dark-300 dark:bg-dark-50 dark:focus:ring-blue-600"
               defaultChecked={Boolean(currentValue)}
             />
-            <span className="text-sm">{fieldDefinition.name}</span>
           </div>
         );
 
       case "emoji":
         return (
-          <Input
-            {...register("value")}
+          <EmojiPicker
+            value={(watchedValue as string) || ""}
+            onChange={(emoji) => setValue("value", emoji)}
             placeholder={INPUT_PLACEHOLDERS.emoji}
-            maxLength={FIELD_VALIDATION.emoji.maxLength}
-            autoFocus
           />
         );
 
@@ -298,19 +357,5 @@ function FieldValueEditor({
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-      {renderInputField()}
-      <div className="flex space-x-2">
-        <Button type="submit" size="sm" variant="primary">
-          <IoSave className="h-4 w-4" />
-          {t`Save`}
-        </Button>
-        <Button type="button" size="sm" variant="secondary" onClick={onCancel}>
-          <IoClose className="h-4 w-4" />
-          {t`Cancel`}
-        </Button>
-      </div>
-    </form>
-  );
+  return <div className="space-y-3">{renderInputField()}</div>;
 }

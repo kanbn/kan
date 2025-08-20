@@ -41,12 +41,26 @@ interface FormValues {
 }
 
 function CardCustomFields({ cardId }: { cardId: string | undefined }) {
+  const [isClient, setIsClient] = useState(false);
+  const utils = api.useUtils();
+
+  // Prevent hydration mismatches by only rendering on client
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const refetchCard = async () => {
+    if (cardId && cardId.length >= 12) {
+      await utils.card.byId.refetch({ cardPublicId: cardId });
+    }
+  };
+
   const { data: card } = api.card.byId.useQuery(
     {
       cardPublicId: cardId ?? "",
     },
     {
-      enabled: !!cardId && cardId.length >= 12, // Only run query if cardId is valid
+      enabled: !!cardId && cardId.length >= 12 && isClient, // Only run query if cardId is valid and on client
     },
   );
 
@@ -58,7 +72,7 @@ function CardCustomFields({ cardId }: { cardId: string | undefined }) {
     api.customField.getFieldDefinitionsByBoard.useQuery(
       { boardPublicId: boardPublicId ?? "" },
       {
-        enabled: !!boardPublicId && boardPublicId.length >= 12,
+        enabled: !!boardPublicId && boardPublicId.length >= 12 && isClient,
       },
     );
 
@@ -67,13 +81,21 @@ function CardCustomFields({ cardId }: { cardId: string | undefined }) {
       { cardPublicId: cardId ?? "" },
       {
         enabled:
-          !!cardId && cardId.length >= 12 && !cardId.startsWith("PLACEHOLDER"),
+          !!cardId &&
+          cardId.length >= 12 &&
+          !cardId.startsWith("PLACEHOLDER") &&
+          isClient,
         retry: false, // Don't retry for placeholder cards
       },
     );
 
-  if (!cardId || !fieldDefinitions || fieldDefinitions.length === 0) {
-    return null; // Don't render anything if no custom fields
+  if (
+    !isClient ||
+    !cardId ||
+    !fieldDefinitions ||
+    fieldDefinitions.length === 0
+  ) {
+    return null; // Don't render anything if no custom fields or still hydrating
   }
 
   // For new/placeholder cards, don't use any existing values to avoid stale data
@@ -102,7 +124,10 @@ function CardCustomFields({ cardId }: { cardId: string | undefined }) {
               cardPublicId={cardId}
               fieldValue={fieldValue}
               workspaceMembers={workspaceMembers ?? []}
-              onUpdate={refetchCustomFields}
+              onUpdate={() => {
+                void refetchCustomFields();
+                void refetchCard();
+              }}
             />
           </div>
         </div>
