@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
+import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as customFieldRepo from "@kan/db/repository/customField.repo";
 import { fieldTypes } from "@kan/db/schema";
 
@@ -316,11 +317,33 @@ export const customFieldRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
+      // Check if this is a new value or an update to track activity type
+      const existingValue = await customFieldRepo.getFieldValuesByCardId(
+        ctx.db,
+        card.id,
+      );
+      const hasExistingValue = existingValue.some(
+        (v) => v.fieldDefinitionId === fieldDefinition.id,
+      );
+
       const fieldValue = await customFieldRepo.setFieldValue(ctx.db, {
         cardId: card.id,
         fieldDefinitionId: fieldDefinition.id,
         value: input.value,
         fieldType: fieldDefinition.type,
+        createdBy: userId,
+      });
+
+      // Create activity record
+      const activityType = hasExistingValue
+        ? "card.updated.customfield.updated"
+        : "card.updated.customfield.added";
+
+      await cardActivityRepo.create(ctx.db, {
+        type: activityType,
+        cardId: card.id,
+        fromTitle: hasExistingValue ? fieldDefinition.name : undefined,
+        toTitle: fieldDefinition.name,
         createdBy: userId,
       });
 
@@ -432,6 +455,14 @@ export const customFieldRouter = createTRPCRouter({
         cardId: card.id,
         fieldDefinitionId: fieldDefinition.id,
         deletedBy: userId,
+      });
+
+      // Create activity record for field value removal
+      await cardActivityRepo.create(ctx.db, {
+        type: "card.updated.customfield.removed",
+        cardId: card.id,
+        fromTitle: fieldDefinition.name,
+        createdBy: userId,
       });
 
       return { success: true };

@@ -74,6 +74,9 @@ const getActivityText = ({
     "card.updated.checklist.item.completed": t`completed a checklist item`,
     "card.updated.checklist.item.uncompleted": t`marked a checklist item as incomplete`,
     "card.updated.checklist.item.deleted": t`deleted a checklist item`,
+    "card.updated.customfield.added": t`added a custom field`,
+    "card.updated.customfield.updated": t`updated a custom field`,
+    "card.updated.customfield.removed": t`removed a custom field`,
   } as const;
 
   if (!(type in ACTIVITY_TYPE_MAP)) return null;
