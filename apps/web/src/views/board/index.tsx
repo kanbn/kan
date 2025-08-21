@@ -389,7 +389,7 @@ export default function BoardPage() {
               onClick={() => {
                 if (boardId) openNewListForm(boardId);
               }}
-              disabled={!boardData}
+              disabled={!boardData || workspace.role != "admin"}
             >
               {t`New list`}
             </Button>

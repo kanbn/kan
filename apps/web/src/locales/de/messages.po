@@ -23,7 +23,7 @@ msgstr ", oder besuche unsere"
 
 #. placeholder {0}: card?.title ?? "Card"
 #. placeholder {1}: board?.name ?? "Board"
-#: src/views/card/index.tsx:213
+#: src/views/card/index.tsx:214
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
@@ -49,7 +49,7 @@ msgid "Account deleted"
 msgstr "Konto gelöscht"
 
 #: src/views/public/board/CardModal.tsx:140
-#: src/views/card/index.tsx:288
+#: src/views/card/index.tsx:289
 msgid "Activity"
 msgstr "Aktivität"
 
@@ -234,7 +234,7 @@ msgstr "Der Name des Boards darf 100 Zeichen nicht überschreiten"
 msgid "Board name is required"
 msgstr "Boardname ist erforderlich"
 
-#: src/views/public/board/index.tsx:143
+#: src/views/public/board/index.tsx:148
 #: src/views/board/index.tsx:357
 msgid "Board not found"
 msgstr "Board nicht gefunden"
@@ -247,7 +247,7 @@ msgstr "Board-URL darf nur Buchstaben, Zahlen und Bindestriche enthalten"
 msgid "Board URL cannot exceed 60 characters"
 msgstr "Board-URL darf 60 Zeichen nicht überschreiten"
 
-#: src/views/public/board/index.tsx:59
+#: src/views/public/board/index.tsx:64
 msgid "Board URL copied to clipboard"
 msgstr "Board-URL in die Zwischenablage kopiert"
 
@@ -298,7 +298,7 @@ msgstr "Fehlerbericht"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/views/card/index.tsx:259
+#: src/views/card/index.tsx:260
 msgid "Card not found"
 msgstr "Karte nicht gefunden"
 
@@ -405,12 +405,12 @@ msgstr "Kontaktiere uns"
 msgid "Content Creation"
 msgstr "Content-Erstellung"
 
-#: src/components/AuthForm.tsx:335
+#: src/components/AuthForm.tsx:366
 msgid "Continue with "
 msgstr "Fortfahren mit "
 
-#. placeholder {0}: provider.name
-#: src/components/AuthForm.tsx:269
+#. placeholder {0}: key === "oidc" ? oidcProviderName : provider.name
+#: src/components/AuthForm.tsx:297
 msgid "Continue with {0}"
 msgstr "Fortfahren mit {0}"
 
@@ -462,7 +462,7 @@ msgid "Create new list"
 msgstr "Neue Liste erstellen"
 
 #: src/components/WorkspaceMenu.tsx:116
-#: src/components/NewWorkspaceForm.tsx:93
+#: src/components/NewWorkspaceForm.tsx:94
 msgid "Create workspace"
 msgstr "Arbeitsbereich erstellen"
 
@@ -590,7 +590,6 @@ msgstr "Dokumente"
 
 #: src/views/home/components/Footer.tsx:77
 #: src/views/boards/components/TemplateBoards.tsx:23
-#: src/components/UserMenu.tsx:191
 msgid "Documentation"
 msgstr "Dokumentation"
 
@@ -626,7 +625,7 @@ msgstr "Workspace-URL bearbeiten"
 msgid "Editing"
 msgstr "Bearbeitung"
 
-#: src/components/AuthForm.tsx:337
+#: src/components/AuthForm.tsx:368
 msgid "email"
 msgstr "E-Mail"
 
@@ -646,11 +645,11 @@ msgstr "Geben Sie Ihr aktuelles Passwort ein"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Geben Sie Ihr aktuelles Passwort ein und wählen Sie ein neues sicheres Passwort."
 
-#: src/components/AuthForm.tsx:302
+#: src/components/AuthForm.tsx:333
 msgid "Enter your email address"
 msgstr "Gib deine E-Mail-Adresse ein"
 
-#: src/components/AuthForm.tsx:290
+#: src/components/AuthForm.tsx:321
 msgid "Enter your name"
 msgstr "Gib deinen Namen ein"
 
@@ -658,7 +657,7 @@ msgstr "Gib deinen Namen ein"
 msgid "Enter your new password"
 msgstr "Geben Sie Ihr neues Passwort ein"
 
-#: src/components/AuthForm.tsx:315
+#: src/components/AuthForm.tsx:346
 msgid "Enter your password"
 msgstr "Gib dein Passwort ein"
 
@@ -725,7 +724,7 @@ msgid "Execution"
 msgstr "Ausführung"
 
 #. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
-#: src/components/AuthForm.tsx:241
+#: src/components/AuthForm.tsx:269
 msgid "Failed to login with {0}. Please try again."
 msgstr "Anmeldung mit {0} fehlgeschlagen. Bitte versuche es erneut."
 
@@ -748,7 +747,6 @@ msgstr "Feature-Anfrage"
 msgid "Features"
 msgstr "Features"
 
-#: src/components/UserMenu.tsx:199
 #: src/components/FeedbackModal.tsx:59
 msgid "Feedback"
 msgstr "Feedback"
@@ -769,6 +767,7 @@ msgstr "Finden Sie Antworten auf häufige Fragen zum Projekt. Nicht gefunden, wo
 msgid "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users (free during the beta) and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge."
 msgstr "Für langfristige Nachhaltigkeit erkennen wir an, dass alle guten Open-Source-Projekte eine Einnahmequelle benötigen. Unsere stammt aus dem kostenpflichtigen Cloud-Angebot für Workspaces mit mehreren Benutzern (kostenlos während der Beta-Phase) und für benutzerdefinierte Workspace-Slugs. Es besteht keine Verpflichtung, dieses Angebot zu nutzen, und Sie können die Software kostenlos auf Ihrer eigenen Infrastruktur selbst hosten."
 
+#: src/views/home/components/Pricing.tsx:32
 #: src/views/home/components/Pricing.tsx:32
 msgid "Free"
 msgstr "Kostenlos"
@@ -988,7 +987,7 @@ msgstr "Lizenz"
 msgid "Light"
 msgstr "Hell"
 
-#: src/views/public/board/index.tsx:57
+#: src/views/public/board/index.tsx:62
 msgid "Link copied"
 msgstr "Link kopiert"
 
@@ -1016,7 +1015,7 @@ msgstr "Langfristig"
 msgid "Low Priority"
 msgstr "Niedrige Priorität"
 
-#: src/components/AuthForm.tsx:338
+#: src/components/AuthForm.tsx:369
 msgid "magic link"
 msgstr "Magic Link"
 
@@ -1110,7 +1109,7 @@ msgstr "Neues Passwort muss sich vom aktuellen Passwort unterscheiden"
 msgid "New Ticket"
 msgstr "Neues Ticket"
 
-#: src/components/NewWorkspaceForm.tsx:64
+#: src/components/NewWorkspaceForm.tsx:65
 msgid "New workspace"
 msgstr "Neuer Workspace"
 
@@ -1154,7 +1153,7 @@ msgstr "Sobald Sie Ihr Konto löschen, gibt es kein Zurück mehr. Diese Aktion k
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Sobald Sie Ihren Arbeitsbereich löschen, gibt es kein Zurück mehr. Diese Aktion kann nicht rückgängig gemacht werden."
 
-#: src/components/AuthForm.tsx:280
+#: src/components/AuthForm.tsx:311
 msgid "or"
 msgstr "oder"
 
@@ -1207,15 +1206,15 @@ msgstr "Planung"
 msgid "Please confirm your new password"
 msgstr "Bitte bestätigen Sie Ihr neues Passwort"
 
-#: src/components/AuthForm.tsx:306
+#: src/components/AuthForm.tsx:337
 msgid "Please enter a valid email address"
 msgstr "Bitte gib eine gültige E-Mail-Adresse ein"
 
-#: src/components/AuthForm.tsx:294
+#: src/components/AuthForm.tsx:325
 msgid "Please enter a valid name"
 msgstr "Bitte gib einen gültigen Namen ein"
 
-#: src/components/AuthForm.tsx:319
+#: src/components/AuthForm.tsx:350
 msgid "Please enter a valid password"
 msgstr "Bitte gib ein gültiges Passwort ein"
 
@@ -1233,7 +1232,7 @@ msgstr "Bitte wähle eine Datei zum Hochladen aus."
 #: src/views/settings/components/Avatar.tsx:98
 #: src/views/members/components/InviteMemberForm.tsx:64
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
-#: src/views/card/index.tsx:172
+#: src/views/card/index.tsx:173
 #: src/views/card/components/NewCommentForm.tsx:31
 #: src/views/card/components/NewChecklistItemForm.tsx:89
 #: src/views/card/components/NewChecklistForm.tsx:70
@@ -1254,7 +1253,7 @@ msgstr "Bitte wähle eine Datei zum Hochladen aus."
 #: src/views/board/components/UpdateBoardSlugForm.tsx:72
 #: src/views/board/components/NewListForm.tsx:78
 #: src/views/board/components/NewCardForm.tsx:174
-#: src/components/NewWorkspaceForm.tsx:41
+#: src/components/NewWorkspaceForm.tsx:42
 #: src/components/FeedbackModal.tsx:41
 #: src/components/DeleteLabelConfirmation.tsx:26
 msgid "Please try again later, or contact customer support."
@@ -1450,7 +1449,7 @@ msgstr "Registrierung deaktiviert"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "Die Registrierung ist derzeit deaktiviert. Bitte versuche es später erneut."
 
-#: src/components/AuthForm.tsx:335
+#: src/components/AuthForm.tsx:366
 msgid "Sign up with "
 msgstr "Registrieren mit "
 
@@ -1474,8 +1473,8 @@ msgstr "Softwareentwicklung"
 msgid "Star on Github"
 msgstr "Stern auf Github"
 
-#: src/components/AuthForm.tsx:188
-#: src/components/AuthForm.tsx:205
+#: src/components/AuthForm.tsx:203
+#: src/components/AuthForm.tsx:220
 msgid "Success"
 msgstr "Erfolg"
 
@@ -1539,7 +1538,7 @@ msgstr "Sie werden keinen Zugriff mehr auf diesen Workspace haben."
 msgid "This action can't be undone."
 msgstr "Diese Aktion kann nicht rückgängig gemacht werden."
 
-#: src/views/public/board/index.tsx:146
+#: src/views/public/board/index.tsx:151
 msgid "This board is private or does not exist"
 msgstr "Dieses Board ist privat oder existiert nicht"
 
@@ -1604,7 +1603,7 @@ msgstr "Checkliste kann nicht erstellt werden"
 msgid "Unable to create list"
 msgstr "Liste konnte nicht erstellt werden"
 
-#: src/components/NewWorkspaceForm.tsx:40
+#: src/components/NewWorkspaceForm.tsx:41
 msgid "Unable to create workspace"
 msgstr "Workspace konnte nicht erstellt werden"
 
@@ -1640,7 +1639,7 @@ msgstr "Board-URL kann nicht aktualisiert werden"
 msgid "Unable to update board visibility"
 msgstr "Board-Sichtbarkeit konnte nicht aktualisiert werden"
 
-#: src/views/card/index.tsx:171
+#: src/views/card/index.tsx:172
 #: src/views/board/index.tsx:189
 msgid "Unable to update card"
 msgstr "Karte konnte nicht aktualisiert werden"
@@ -1781,7 +1780,7 @@ msgstr "Verwalte deine Abrechnung und dein Abonnement."
 msgid "View docs"
 msgstr "Dokumentation ansehen"
 
-#: src/views/public/board/index.tsx:120
+#: src/views/public/board/index.tsx:125
 msgid "View only"
 msgstr "Nur ansehen"
 
@@ -1789,7 +1788,7 @@ msgstr "Nur ansehen"
 msgid "View our roadmap."
 msgstr "Sieh dir unsere roadmap an."
 
-#: src/views/public/board/index.tsx:149
+#: src/views/public/board/index.tsx:154
 msgid "View workspace"
 msgstr "Workspace anzeigen"
 
@@ -1855,7 +1854,7 @@ msgid "Workspace members"
 msgstr "Workspace-mitglieder"
 
 #: src/views/settings/index.tsx:158
-#: src/components/NewWorkspaceForm.tsx:80
+#: src/components/NewWorkspaceForm.tsx:81
 msgid "Workspace name"
 msgstr "Name des Workspaces"
 
@@ -1907,11 +1906,11 @@ msgstr "Du kannst teammitglieder einladen, indem du auf die schaltfläche \"Einl
 msgid "You can self-host by following the instructions in our <0>repo</0>."
 msgstr "Sie können selbst hosten, indem sie den anweisungen in unserem <0>repo</0> folgen."
 
-#: src/components/AuthForm.tsx:206
+#: src/components/AuthForm.tsx:221
 msgid "You have been logged in successfully."
 msgstr "Sie haben sich erfolgreich angemeldet."
 
-#: src/components/AuthForm.tsx:189
+#: src/components/AuthForm.tsx:204
 msgid "You have been signed up successfully."
 msgstr "Sie haben sich erfolgreich registriert."
 

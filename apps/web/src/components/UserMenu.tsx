@@ -180,7 +180,7 @@ export default function UserMenu({
                   {t`Support`}
                 </Link>
               </Menu.Item>
-              <Menu.Item>
+              {/* <Menu.Item>
                 <Link
                   href="https://docs.kan.bn"
                   target="_blank"
@@ -190,15 +190,15 @@ export default function UserMenu({
                 >
                   {t`Documentation`}
                 </Link>
-              </Menu.Item>
-              <Menu.Item>
+              </Menu.Item> */}
+              {/* <Menu.Item>
                 <button
                   onClick={() => handleModalOpen("NEW_FEEDBACK")}
                   className="flex w-full items-center rounded-[5px] px-3 py-2 text-left text-xs hover:bg-light-200 dark:hover:bg-dark-400"
                 >
                   {t`Feedback`}
                 </button>
-              </Menu.Item>
+              </Menu.Item> */}
             </div>
             <div className="light-border-600 border-t-[1px] p-1 dark:border-dark-600">
               <Menu.Item>

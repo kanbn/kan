@@ -1,15 +1,13 @@
 services:
   web:
-    image: ghcr.io/kanbn/kan:latest
     container_name: ${CONTAINER_NAME:-kan-web}
     ports:
       - "${WEB_PORT:-3000}:3000"
     networks:
       - kan-network
-      - dokploy-network
     build:
       context: .
-      dockerfile: ./apps/web/Dockerfile.new
+      dockerfile: ./apps/web/Dockerfile
     env_file:
       - .env
     environment:
@@ -111,8 +109,6 @@ services:
 
 networks:
   kan-network:
-  dokploy-network:
-    external: true
 
 volumes:
   kan_postgres_data:
