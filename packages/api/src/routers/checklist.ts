@@ -16,6 +16,11 @@ const checklistSchema = z.object({
 const checklistItemSchema = z.object({
   publicId: z.string().length(12),
   title: z.string().min(1).max(500),
+  itemValue: z.string().nullable().optional(),
+  itemIdentity: z.string().nullable().optional(),
+  quantity: z.number().nullable().optional(),
+  wash: z.boolean(),
+  iron: z.boolean(),
   completed: z.boolean(),
 });
 
@@ -215,6 +220,11 @@ export const checklistRouter = createTRPCRouter({
       z.object({
         checklistPublicId: z.string().length(12),
         title: z.string().min(1).max(500),
+        itemValue: z.number(),
+        itemIdentity: z.string(),
+        quantity: z.number(),
+        wash: z.boolean(),
+        iron: z.boolean(),
       }),
     )
     .output(checklistItemSchema)
@@ -246,6 +256,11 @@ export const checklistRouter = createTRPCRouter({
 
       const newChecklistItem = await checklistRepo.createItem(ctx.db, {
         title: input.title,
+        itemValue: input.itemValue,
+        itemIdentity: input.itemIdentity,
+        quantity: input.quantity ?? undefined,
+        wash: input.wash,
+        iron: input.iron,
         createdBy: userId,
         checklistId: checklist.id,
       });
@@ -280,6 +295,11 @@ export const checklistRouter = createTRPCRouter({
       z.object({
         checklistItemPublicId: z.string().length(12),
         title: z.string().min(1).max(500).optional(),
+        itemValue: z.number().nullable().optional(),
+        itemIdentity: z.string().nullable().optional(),
+        quantity: z.number().nullable().optional(),
+        wash: z.boolean().optional(),
+        iron: z.boolean().optional(),
         completed: z.boolean().optional(),
       }),
     )
@@ -316,6 +336,9 @@ export const checklistRouter = createTRPCRouter({
         id: item.id,
         title: input.title,
         completed: input.completed,
+        iron: input.iron,
+        wash: input.wash,
+        quantity: input.quantity ?? undefined,
       });
 
       if (!updated)

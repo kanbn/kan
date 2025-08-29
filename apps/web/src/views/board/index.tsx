@@ -431,6 +431,7 @@ export default function BoardPage() {
                     droppableId="all-lists"
                     direction="horizontal"
                     type="LIST"
+                    isDropDisabled={workspace.role != "admin"}
                   >
                     {(provided) => (
                       <div

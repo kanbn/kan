@@ -249,3 +249,23 @@ export const isUserInWorkspace = async (
 
   return result?.id !== undefined;
 };
+
+export const getUserRoleInWorkspace = async (
+  db: dbClient,
+  userId: string,
+  workspaceId: number,
+): Promise<"admin" | "member" | "guest"> => {
+  const member = await db.query.workspaceMembers.findFirst({
+    columns: {
+      role: true,
+    },
+    where: and(
+      eq(workspaceMembers.userId, userId),
+      eq(workspaceMembers.workspaceId, workspaceId),
+      eq(workspaceMembers.status, "active"),
+      isNull(workspaceMembers.deletedAt),
+    ),
+  });
+
+  return member?.role || "guest";
+};

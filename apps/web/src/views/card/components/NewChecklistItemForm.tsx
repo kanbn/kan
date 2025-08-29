@@ -10,6 +10,11 @@ import { api } from "~/utils/api";
 
 interface FormValues {
   title: string;
+  itemValue: number;
+  itemIdentity: string;
+  quantity: number;
+  wash: boolean;
+  iron: boolean;
 }
 
 interface NewChecklistItemFormProps {
@@ -116,6 +121,11 @@ const NewChecklistItemForm = ({
     addChecklistItemMutation.mutate({
       checklistPublicId,
       title: plain,
+      itemValue: 0,
+      itemIdentity: "",
+      quantity: 1,
+      wash: false,
+      iron: false,
     });
   };
 

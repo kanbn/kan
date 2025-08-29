@@ -7,7 +7,7 @@ import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertUserInWorkspace } from "../utils/auth";
+import { assertUserInWorkspace, assertUserAdminInWorkspace } from "../utils/auth";
 
 export const listRouter = createTRPCRouter({
   create: protectedProcedure
@@ -30,6 +30,7 @@ export const listRouter = createTRPCRouter({
     .output(z.custom<Awaited<ReturnType<typeof listRepo.create>>>())
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
+      
 
       if (!userId)
         throw new TRPCError({
@@ -48,7 +49,8 @@ export const listRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+     await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+     await assertUserAdminInWorkspace(ctx.db, userId, board.workspaceId);
 
       const result = await listRepo.create(ctx.db, {
         name: input.name,
@@ -102,6 +104,8 @@ export const listRouter = createTRPCRouter({
         });
 
       await assertUserInWorkspace(ctx.db, userId, list.workspaceId);
+      
+      await assertUserAdminInWorkspace(ctx.db, userId, list.workspaceId);
 
       const deletedAt = new Date();
 
@@ -184,6 +188,8 @@ export const listRouter = createTRPCRouter({
         });
 
       await assertUserInWorkspace(ctx.db, userId, list.workspaceId);
+      
+      await assertUserAdminInWorkspace(ctx.db, userId, list.workspaceId);
 
       let result: { name: string; publicId: string } | undefined;
 

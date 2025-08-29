@@ -11,7 +11,7 @@ import { colours } from "@kan/shared/constants";
 import { generateSlug, generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { assertUserInWorkspace } from "../utils/auth";
+import { assertUserInWorkspace, assertUserAdminInWorkspace } from "../utils/auth";
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
@@ -201,6 +201,8 @@ export const boardRouter = createTRPCRouter({
         });
 
       await assertUserInWorkspace(ctx.db, userId, workspace.id);
+      
+      await assertUserAdminInWorkspace(ctx.db, userId, workspace.id);
 
       let slug = generateSlug(input.name);
 
@@ -297,6 +299,7 @@ export const boardRouter = createTRPCRouter({
         });
 
       await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+      await assertUserAdminInWorkspace(ctx.db, userId, board.workspaceId);
 
       if (input.slug) {
         const isBoardSlugAvailable = await boardRepo.isBoardSlugAvailable(
@@ -366,6 +369,7 @@ export const boardRouter = createTRPCRouter({
         });
 
       await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+      await assertUserAdminInWorkspace(ctx.db, userId, board.workspaceId);
 
       const listIds = board.lists.map((list) => list.id);
 

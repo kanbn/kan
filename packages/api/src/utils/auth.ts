@@ -22,3 +22,21 @@ export async function assertUserInWorkspace(
       code: "FORBIDDEN",
     });
 }
+
+export async function assertUserAdminInWorkspace(
+  db: dbClient,
+  userId: string,
+  workspaceId: number,
+) {
+  const role = await workspaceRepo.getUserRoleInWorkspace(
+    db,
+    userId,
+    workspaceId,
+  );
+
+  if (role != "admin")
+    throw new TRPCError({
+      message: `You do not have Admin access to this workspace`,
+      code: "FORBIDDEN",
+    });
+}

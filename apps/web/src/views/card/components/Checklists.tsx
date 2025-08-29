@@ -10,6 +10,11 @@ interface ChecklistItem {
   publicId: string;
   title: string;
   completed: boolean;
+  iron: boolean;
+  wash: boolean;
+  itemValue: number;
+  itemIdentity: string;
+  quantity: number;
 }
 
 interface Checklist {
@@ -115,6 +120,11 @@ export default function Checklists({
                     item={{
                       publicId: item.publicId,
                       title: item.title,
+                      quantity: item.quantity,
+                      iron: item.iron,
+                      wash: item.wash,
+                      itemIdentity: item.itemIdentity,
+                      itemValue: item.itemValue,
                       completed: item.completed,
                     }}
                     cardPublicId={cardPublicId}

@@ -3,6 +3,7 @@ import { and, desc, eq, isNull } from "drizzle-orm";
 import type { dbClient } from "@kan/db/client";
 import { checklistItems, checklists } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
+import { IntegerConfig } from "drizzle-orm/sqlite-core";
 
 export const create = async (
   db: dbClient,
@@ -45,6 +46,11 @@ export const createItem = async (
   checklistItemInput: {
     checklistId: number;
     title: string;
+    itemValue: number;
+    itemIdentity: string;
+    quantity: number;
+    wash: boolean;
+    iron: boolean;
     createdBy: string;
   },
 ) => {
@@ -62,6 +68,11 @@ export const createItem = async (
       .values({
         publicId: generateUID(),
         title: checklistItemInput.title,
+        itemValue: checklistItemInput.itemValue.toString(),
+        itemIdentity: checklistItemInput.itemIdentity,
+        quantity: checklistItemInput.quantity,
+        wash: checklistItemInput.wash,
+        iron: checklistItemInput.iron,
         createdBy: checklistItemInput.createdBy,
         checklistId: checklistItemInput.checklistId,
         index: lastItem ? lastItem.index + 1 : 0,
@@ -71,6 +82,11 @@ export const createItem = async (
         id: checklistItems.id,
         publicId: checklistItems.publicId,
         title: checklistItems.title,
+        itemValue: checklistItems.itemValue,
+        itemIdentity: checklistItems.itemIdentity,
+        quantity: checklistItems.quantity,
+        wash: checklistItems.wash,
+        iron: checklistItems.iron,
         completed: checklistItems.completed,
       });
 
@@ -140,13 +156,22 @@ export const getChecklistItemByPublicIdWithChecklist = async (
 
 export const updateItemById = async (
   db: dbClient,
-  args: { id: number; title?: string; completed?: boolean },
+  args: { id: number; 
+    title?: string; 
+    completed?: boolean;
+    quantity?: number;
+    iron?: boolean;
+    wash?: boolean;
+    },
 ) => {
   const [result] = await db
     .update(checklistItems)
     .set({
       ...(args.title !== undefined ? { title: args.title } : {}),
       ...(args.completed !== undefined ? { completed: args.completed } : {}),
+      ...(args.iron !== undefined ? { iron: args.iron } : {}),
+      ...(args.wash !== undefined ? { wash: args.wash } : {}),
+      ...(args.quantity !== undefined ? { quantity: args.quantity } : {}),
       updatedAt: new Date(),
     })
     .where(eq(checklistItems.id, args.id))
@@ -154,6 +179,9 @@ export const updateItemById = async (
       publicId: checklistItems.publicId,
       title: checklistItems.title,
       completed: checklistItems.completed,
+      iron: checklistItems.iron,
+      wash: checklistItems.wash,
+      quantity: checklistItems.quantity,
     });
 
   return result;

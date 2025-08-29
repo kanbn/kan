@@ -64,6 +64,13 @@
       "when": 1755094668761,
       "tag": "20250813141748_AddChecklistActivityTypes",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1756413673412,
+      "tag": "20250828204113_AddChecklistColumns",
+      "breakpoints": true
     }
   ]
 }

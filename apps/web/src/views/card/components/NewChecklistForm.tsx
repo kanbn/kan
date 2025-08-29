@@ -45,6 +45,11 @@ export function NewChecklistForm({ cardPublicId }: { cardPublicId: string }) {
           items: [] as {
             publicId: string;
             title: string;
+            itemValue: number;
+            itemIdentity: string;
+            quantity: number;
+            wash: boolean;
+            iron: boolean;
             completed: boolean;
             index: number;
           }[],

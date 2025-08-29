@@ -11,6 +11,11 @@ interface ChecklistItemRowProps {
   item: {
     publicId: string;
     title: string;
+    itemValue: number;
+    itemIdentity: string;
+    quantity: number;
+    wash: boolean;
+    iron: boolean;
     completed: boolean;
   };
   cardPublicId: string;
@@ -27,6 +32,10 @@ export default function ChecklistItemRow({
 
   const [title, setTitle] = useState("");
   const [completed, setCompleted] = useState(false);
+  const [iron, setIron] = useState(item.iron);
+  const [wash, setWash] = useState(item.wash);
+  const [itemValue, setItemValue] = useState(item.itemValue);
+  const [quantity, setQuantity] = useState(item.quantity);
 
   const updateItem = api.checklist.updateItem.useMutation({
     onMutate: async (vars) => {
@@ -37,15 +46,7 @@ export default function ChecklistItemRow({
         const updatedChecklists = old.checklists.map((cl) => ({
           ...cl,
           items: cl.items.map((ci) =>
-            ci.publicId === item.publicId
-              ? {
-                  ...ci,
-                  ...(vars.title !== undefined ? { title: vars.title } : {}),
-                  ...(vars.completed !== undefined
-                    ? { completed: vars.completed }
-                    : {}),
-                }
-              : ci,
+            ci.publicId === item.publicId ? { ...ci, ...vars } : ci,
           ),
         }));
         return { ...old, checklists: updatedChecklists } as typeof old;
@@ -94,11 +95,13 @@ export default function ChecklistItemRow({
     },
   });
 
-  // Only resync from props when switching items to avoid clobbering edits
   useEffect(() => {
     setTitle(item.title);
     setCompleted(item.completed);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setIron(item.iron);
+    setWash(item.wash);
+    setItemValue(item.itemValue);
+    setQuantity(item.quantity);
   }, [item.publicId]);
 
   const sanitizeHtmlToPlainText = (html: string): string =>
@@ -115,6 +118,22 @@ export default function ChecklistItemRow({
     updateItem.mutate({
       checklistItemPublicId: item.publicId,
       completed: !completed,
+    });
+  };
+  const handleToggleIron = () => {
+    if (viewOnly) return;
+    setIron((prev) => !prev);
+    updateItem.mutate({
+      checklistItemPublicId: item.publicId,
+      iron: !iron,
+    });
+  };
+  const handleToggleWash = () => {
+    if (viewOnly) return;
+    setWash((prev) => !prev);
+    updateItem.mutate({
+      checklistItemPublicId: item.publicId,
+      wash: !wash,
     });
   };
 
@@ -137,61 +156,144 @@ export default function ChecklistItemRow({
     deleteItem.mutate({ checklistItemPublicId: item.publicId });
   };
 
-  return (
-    <div className="group relative flex items-start gap-3 rounded-md py-2 pl-4 hover:bg-light-100 dark:hover:bg-dark-100">
-      <label
-        className={`relative mt-[2px] inline-flex h-[16px] w-[16px] flex-shrink-0 items-center justify-center`}
-      >
-        <input
-          type="checkbox"
-          checked={completed}
-          onChange={(e) => {
-            if (viewOnly) {
-              e.preventDefault();
-              return;
-            }
-            handleToggleCompleted();
-          }}
-          className={twMerge(
-            "h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent outline-none ring-0 checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none dark:border-dark-500 dark:hover:border-dark-500",
-            viewOnly ? "cursor-default" : "cursor-pointer",
-          )}
-        />
-      </label>
-      <div className="flex-1 pr-7">
-        <ContentEditable
-          html={title}
-          disabled={viewOnly}
-          onChange={(e) => setTitle(e.target.value)}
-          // @ts-expect-error - valid event
-          onBlur={(e: Event) => commitTitle(e.target.innerHTML as string)}
-          className={twMerge(
-            "m-0 min-h-[20px] w-full p-0 text-sm leading-[20px] text-light-950 outline-none focus-visible:outline-none dark:text-dark-950",
-            viewOnly && "cursor-default",
-          )}
-          placeholder={t`Add details...`}
-          onKeyDown={(e) => {
-            if (viewOnly) return;
-            if (e.key === "Enter") {
-              e.preventDefault();
-              commitTitle(title);
-            }
-            if (e.key === "Escape") {
-              e.preventDefault();
-              setTitle(item.title);
-            }
-          }}
-        />
-      </div>
-      {!viewOnly && (
-        <button
-          type="button"
-          onClick={handleDelete}
-          className="absolute right-1 top-1/2 hidden -translate-y-1/2 rounded-md p-1 text-light-900 group-hover:block hover:bg-light-200 dark:text-dark-700 dark:hover:bg-dark-200"
-        >
-          <HiXMark size={16} />
-        </button>
+return (
+  <div
+    className={twMerge(
+      "group relative flex items-center gap-3 rounded-md px-3 py-2",
+      "hover:bg-light-100 dark:hover:bg-dark-100"
+    )}
+  >
+    {/* Completed Checkbox */}
+    <input
+      type="checkbox"
+      checked={completed}
+      onChange={handleToggleCompleted}
+      disabled={viewOnly}
+      className={twMerge(
+        "h-4 w-4 rounded-md border bg-transparent",
+        "border-light-500 dark:border-dark-500",
+        viewOnly ? "cursor-default" : "cursor-pointer"
       )}
+    />
+
+    {/* Title */}
+    <div className="flex-1 pr-7">
+      <ContentEditable
+        html={title}
+        disabled={viewOnly}
+        onChange={(e) => setTitle(e.target.value)}
+        // @ts-expect-error - valid event
+        onBlur={(e: Event) => commitTitle(e.target.innerHTML as string)}
+        className={twMerge(
+          "m-0 min-h-[20px] w-full p-0 text-sm leading-[20px] outline-none",
+          "text-light-950 dark:text-dark-50",
+          viewOnly && "cursor-default"
+        )}
+        placeholder={t`Add details...`}
+        onKeyDown={(e) => {
+          if (viewOnly) return;
+          if (e.key === "Enter") {
+            e.preventDefault();
+            commitTitle(title);
+          }
+          if (e.key === "Escape") {
+            e.preventDefault();
+            setTitle(item.title);
+          }
+        }}
+      />
     </div>
-  );
+
+    {/* Iron */}
+    <label className="flex items-center gap-1 text-xs text-light-900 dark:text-dark-200">
+      <input
+        type="checkbox"
+        checked={iron}
+        disabled={viewOnly}
+        onChange={handleToggleIron}
+        className={twMerge(
+          "h-4 w-4 rounded-md border bg-transparent",
+          "border-light-500 dark:border-dark-500",
+          viewOnly ? "cursor-default" : "cursor-pointer"
+        )}
+      />
+      Iron
+    </label>
+
+    {/* Wash */}
+    <label className="flex items-center gap-1 text-xs text-light-900 dark:text-dark-200">
+      <input
+        type="checkbox"
+        checked={wash}
+        disabled={viewOnly}
+        onChange={handleToggleWash}
+        className={twMerge(
+          "h-4 w-4 rounded-md border bg-transparent",
+          "border-light-500 dark:border-dark-500",
+          viewOnly ? "cursor-default" : "cursor-pointer"
+        )}
+      />
+      Wash
+    </label>
+
+    {/* Item Value */}
+    <input
+      type="number"
+      value={itemValue}
+      disabled={viewOnly}
+      onChange={(e) => {
+        const val = Number(e.target.value);
+        setItemValue(val);
+        updateItem.mutate({
+          checklistItemPublicId: item.publicId,
+          itemValue: val,
+        });
+      }}
+      className={twMerge(
+        "w-20 rounded-md border px-2 py-1 text-sm",
+        "border-light-300 bg-white text-light-950",
+        "dark:border-dark-400 dark:bg-dark-800 dark:text-dark-50",
+        viewOnly ? "cursor-default" : "cursor-text"
+      )}
+    />
+
+    {/* Quantity */}
+    <input
+      type="number"
+      value={quantity}
+      disabled={viewOnly}
+      onChange={(e) => {
+        const val = parseInt(e.target.value, 10) || 0;
+        setQuantity(val);
+        updateItem.mutate({
+          checklistItemPublicId: item.publicId,
+          quantity: val,
+        });
+      }}
+      className={twMerge(
+        "w-16 rounded-md border px-2 py-1 text-sm",
+        "border-light-300 bg-white text-light-950",
+        "dark:border-dark-400 dark:bg-dark-800 dark:text-dark-50",
+        viewOnly ? "cursor-default" : "cursor-text"
+      )}
+    />
+
+    {/* Delete button */}
+    {!viewOnly && (
+      <button
+        type="button"
+        onClick={handleDelete}
+        className={twMerge(
+          "absolute right-2 rounded-md p-1",
+          "text-light-700 hover:bg-light-200 hover:text-light-900",
+          "dark:text-dark-400 dark:hover:bg-dark-600 dark:hover:text-dark-50",
+          "hidden group-hover:block"
+        )}
+      >
+        <HiXMark size={16} />
+      </button>
+    )}
+  </div>
+);
+
 }
