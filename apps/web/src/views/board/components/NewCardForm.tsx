@@ -156,7 +156,7 @@ export function NewCardForm({
               _filteredLabels: labelPublicIds.map((id) => ({ publicId: id })),
               _filteredMembers: memberPublicIds.map((id) => ({ publicId: id })),
               index: position === "start" ? 0 : list.cards.length,
-              checklists: [], // Add this line to satisfy required property
+              checklists: [], //maybe we can already insert them?
             };
 
             const updatedCards =
@@ -247,7 +247,7 @@ export function NewCardForm({
       ),
     })) ?? [];
 
-  const onSubmit = (data: NewCardInput) => {
+  const onSubmit = (data: NewCardFormInput) => {
     createCard.mutate({
       title: data.title,
       description: data.description,
@@ -255,10 +255,10 @@ export function NewCardForm({
       labelPublicIds: data.labelPublicIds,
       memberPublicIds: data.memberPublicIds,
       position: data.position,
-      hospedeName: (data as any).hospedeName,
-      hospedeDocumento: (data as any).hospedeDocumento,
-      hospedeTelefone: (data as any).hospedeTelefone,
-      tipoEntrega: (data as any).tipoEntrega,
+      hospedeName: data.hospedeName,
+      hospedeDocumento: data.hospedeDocumento,
+      hospedeTelefone: data.hospedeTelefone,
+      tipoEntrega: data.tipoEntrega,
     });
   };
 

@@ -69,6 +69,10 @@ export const cardRouter = createTRPCRouter({
       const newCard = await cardRepo.create(ctx.db, {
         title: input.title,
         description: input.description,
+        hospedeName: input.hospedeName,
+        hospedeDocumento: input.hospedeDocumento,
+        hospedeTelefone: input.hospedeTelefone,
+        tipoEntrega: input.tipoEntrega,
         createdBy: userId,
         listId: list.id,
         position: input.position,

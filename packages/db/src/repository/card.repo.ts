@@ -19,6 +19,10 @@ export const create = async (
   cardInput: {
     title: string;
     description: string;
+    hospedeName: string;
+    hospedeDocumento: string;
+    hospedeTelefone: string;
+    tipoEntrega: "normal" | "express";
     createdBy: string;
     listId: number;
     position: "start" | "end";
@@ -67,6 +71,10 @@ export const create = async (
         publicId: generateUID(),
         title: cardInput.title,
         description: cardInput.description,
+        hospedeName: cardInput.hospedeName,
+        hospedeDocumento: cardInput.hospedeDocumento,
+        hospedeTelefone: cardInput.hospedeTelefone,
+        tipoEntrega: cardInput.tipoEntrega,
         createdBy: cardInput.createdBy,
         listId: cardInput.listId,
         index: index,
@@ -213,6 +221,10 @@ export const bulkCreate = async (
     publicId: string;
     title: string;
     description: string;
+    hospedeName: string;
+    hospedeDocumento: string;
+    hospedeTelefone: string;
+    tipoEntrega: "normal" | "express";
     createdBy: string;
     listId: number;
     index: number;
