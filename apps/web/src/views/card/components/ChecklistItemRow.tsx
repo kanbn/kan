@@ -25,7 +25,7 @@ interface ChecklistItemRowProps {
 export default function ChecklistItemRow({
   item,
   cardPublicId,
-  viewOnly = false,
+  viewOnly,
 }: ChecklistItemRowProps) {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
@@ -113,7 +113,7 @@ export default function ChecklistItemRow({
       .trim();
 
   const handleToggleCompleted = () => {
-    if (viewOnly) return;
+    //if (viewOnly) return;
     setCompleted((prev) => !prev);
     updateItem.mutate({
       checklistItemPublicId: item.publicId,
@@ -168,11 +168,11 @@ return (
       type="checkbox"
       checked={completed}
       onChange={handleToggleCompleted}
-      disabled={viewOnly}
+      disabled={false}
       className={twMerge(
         "h-4 w-4 rounded-md border bg-transparent",
         "border-light-500 dark:border-dark-500",
-        viewOnly ? "cursor-default" : "cursor-pointer"
+        "cursor-pointer"
       )}
     />
 
@@ -205,7 +205,7 @@ return (
     </div>
 
     {/* Iron */}
-    <label className="flex items-center gap-1 text-xs text-light-900 dark:text-dark-200">
+    <label className="flex items-center gap-1 text-xs text-light-900 dark:text-gray-200">
       <input
         type="checkbox"
         checked={iron}
@@ -217,11 +217,11 @@ return (
           viewOnly ? "cursor-default" : "cursor-pointer"
         )}
       />
-      Iron
+      Ferro
     </label>
 
     {/* Wash */}
-    <label className="flex items-center gap-1 text-xs text-light-900 dark:text-dark-200">
+    <label className="flex items-center gap-1 text-xs text-light-900 dark:text-gray-200">
       <input
         type="checkbox"
         checked={wash}
@@ -233,31 +233,38 @@ return (
           viewOnly ? "cursor-default" : "cursor-pointer"
         )}
       />
-      Wash
+      Lavagem
     </label>
 
     {/* Item Value */}
-    <input
-      type="number"
-      value={itemValue}
-      disabled={viewOnly}
-      onChange={(e) => {
-        const val = Number(e.target.value);
-        setItemValue(val);
-        updateItem.mutate({
-          checklistItemPublicId: item.publicId,
-          itemValue: val,
-        });
-      }}
-      className={twMerge(
-        "w-20 rounded-md border px-2 py-1 text-sm",
-        "border-light-300 bg-white text-light-950",
-        "dark:border-dark-400 dark:bg-dark-800 dark:text-dark-50",
-        viewOnly ? "cursor-default" : "cursor-text"
-      )}
-    />
+    <label className="flex items-center gap-1 text-xs text-light-900  dark:text-gray-200">
+  R$
+  <input
+    type="number"
+    step="0.01"         
+    value={itemValue}
+    disabled={viewOnly}  
+    onChange={(e) => {
+      const val = parseFloat(e.target.value) || 0; 
+      setItemValue(val);
+      updateItem.mutate({
+        checklistItemPublicId: item.publicId,
+        itemValue: val,
+      });
+    }}
+    className={twMerge(
+      "w-20 rounded-md border px-2 py-1 text-sm",
+      "border-light-300 bg-white text-light-950",
+      "dark:text-gray-100 dark:bg-gray-700 dark:hover:text-white",
+      viewOnly ? "cursor-not-allowed" : "cursor-text" 
+    )}
+  />
+</label>
+
 
     {/* Quantity */}
+    <label className="flex items-center gap-1 text-xs text-light-900  dark:text-gray-200">
+    Qnt.
     <input
       type="number"
       value={quantity}
@@ -273,10 +280,11 @@ return (
       className={twMerge(
         "w-16 rounded-md border px-2 py-1 text-sm",
         "border-light-300 bg-white text-light-950",
-        "dark:border-dark-400 dark:bg-dark-800 dark:text-dark-50",
+        "dark:text-gray-100 dark:bg-gray-700 dark:hover:text-white",
         viewOnly ? "cursor-default" : "cursor-text"
       )}
     />
+    </label>
 
     {/* Delete button */}
     {!viewOnly && (
@@ -284,10 +292,9 @@ return (
         type="button"
         onClick={handleDelete}
         className={twMerge(
-          "absolute right-2 rounded-md p-1",
+          "right-2 rounded-md p-1",
           "text-light-700 hover:bg-light-200 hover:text-light-900",
-          "dark:text-dark-400 dark:hover:bg-dark-600 dark:hover:text-dark-50",
-          "hidden group-hover:block"
+        "dark:border-dark-400 dark:bg-dark-800 dark:text-dark-50"
         )}
       >
         <HiXMark size={16} />

@@ -36,7 +36,7 @@ export default function Checklists({
   cardPublicId,
   activeChecklistForm,
   setActiveChecklistForm,
-  viewOnly = false,
+  viewOnly,
 }: ChecklistsProps) {
   const { openModal } = useModal();
 
