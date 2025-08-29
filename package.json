@@ -11,6 +11,7 @@
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo run clean",
     "db:migrate": "cd packages/db && pnpm migrate",
+    "db:generate": "cd packages/db && pnpm generate",
     "db:push": "turbo -F @kan/db push",
     "db:studio": "turbo -F @kan/db studio",
     "dev": "turbo watch dev --continue",
