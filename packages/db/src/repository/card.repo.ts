@@ -22,6 +22,7 @@ export const create = async (
     hospedeName: string;
     hospedeDocumento: string;
     hospedeTelefone: string;
+    hospedeApartamento: string;
     tipoEntrega: "normal" | "express";
     createdBy: string;
     listId: number;
@@ -74,6 +75,7 @@ export const create = async (
         hospedeName: cardInput.hospedeName,
         hospedeDocumento: cardInput.hospedeDocumento,
         hospedeTelefone: cardInput.hospedeTelefone,
+        hospedeApartamento: cardInput.hospedeApartamento,
         tipoEntrega: cardInput.tipoEntrega,
         createdBy: cardInput.createdBy,
         listId: cardInput.listId,
@@ -224,6 +226,7 @@ export const bulkCreate = async (
     hospedeName: string;
     hospedeDocumento: string;
     hospedeTelefone: string;
+    hospedeApartamento: string;
     tipoEntrega: "normal" | "express";
     createdBy: string;
     listId: number;
@@ -301,6 +304,11 @@ export const getWithListAndMembersByPublicId = async (
       publicId: true,
       title: true,
       description: true,
+      hospedeName: true,
+      hospedeDocumento: true,
+      hospedeTelefone: true,
+      hospedeApartamento: true,
+      tipoEntrega: true,
     },
     with: {
       labels: {

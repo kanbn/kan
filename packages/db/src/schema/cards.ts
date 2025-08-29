@@ -57,6 +57,7 @@ export const cards = pgTable("card", {
   hospedeName: varchar("hospedeName", { length: 100 }).notNull(),
   hospedeDocumento: varchar("hospedeDocumento", { length: 30 }).notNull(),
   hospedeTelefone: varchar("hospedeTelefone", { length: 20 }).notNull(),
+  hospedeApartamento: varchar("hospedeApartamento", { length: 8 }).notNull(),
   tipoEntrega: entregaTypeEnum("tipoEntrega").notNull(),
   index: integer("index").notNull(),
   createdBy: uuid("createdBy").references(() => users.id, {

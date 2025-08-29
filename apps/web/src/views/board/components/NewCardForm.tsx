@@ -65,6 +65,7 @@ export function NewCardForm({
       hospedeDocumento: "",
       hospedeTelefone: "",
       tipoEntrega: "normal",
+      hospedeApartamento: "",
     },
     resetOnClose: true,
   });
@@ -258,6 +259,7 @@ export function NewCardForm({
       hospedeName: data.hospedeName,
       hospedeDocumento: data.hospedeDocumento,
       hospedeTelefone: data.hospedeTelefone,
+      hospedeApartamento: data.hospedeApartamento,
       tipoEntrega: data.tipoEntrega,
     });
   };
@@ -345,6 +347,13 @@ export function NewCardForm({
             id="hospedeTelefone"
             placeholder={t`Telefone do hóspede`}
             {...register("hospedeTelefone")}
+          />
+        </div>
+        <div className="mt-2">
+          <Input
+            id="hospedeApartamento"
+            placeholder={t`Apartamento`}
+            {...register("hospedeApartamento")}
           />
         </div>
         <div className="mt-2">
