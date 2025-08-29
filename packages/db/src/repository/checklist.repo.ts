@@ -68,7 +68,7 @@ export const createItem = async (
       .values({
         publicId: generateUID(),
         title: checklistItemInput.title,
-        itemValue: checklistItemInput.itemValue.toString(),
+        itemValue: checklistItemInput.itemValue.toPrecision(4),
         itemIdentity: checklistItemInput.itemIdentity,
         quantity: checklistItemInput.quantity,
         wash: checklistItemInput.wash,

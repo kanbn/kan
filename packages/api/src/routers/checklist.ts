@@ -16,7 +16,7 @@ const checklistSchema = z.object({
 const checklistItemSchema = z.object({
   publicId: z.string().length(12),
   title: z.string().min(1).max(500),
-  itemValue: z.string().nullable().optional(),
+  itemValue: z.number().nullable().optional(),
   itemIdentity: z.string().nullable().optional(),
   quantity: z.number().nullable().optional(),
   wash: z.boolean(),
@@ -258,7 +258,7 @@ export const checklistRouter = createTRPCRouter({
         title: input.title,
         itemValue: input.itemValue,
         itemIdentity: input.itemIdentity,
-        quantity: input.quantity ?? undefined,
+        quantity: input.quantity,
         wash: input.wash,
         iron: input.iron,
         createdBy: userId,
@@ -333,13 +333,13 @@ export const checklistRouter = createTRPCRouter({
       const previousTitle = item.title;
 
       const updated = await checklistRepo.updateItemById(ctx.db, {
-        id: item.id,
-        title: input.title,
-        completed: input.completed,
-        iron: input.iron,
-        wash: input.wash,
-        quantity: input.quantity ?? undefined,
-      });
+      id: item.id,
+      title: input.title,
+      completed: input.completed,
+      iron: input.iron,
+      wash: input.wash,
+      quantity: input.quantity || undefined,
+    });
 
       if (!updated)
         throw new TRPCError({
