@@ -47,12 +47,17 @@ export const activityTypes = [
 export type ActivityType = (typeof activityTypes)[number];
 
 export const activityTypeEnum = pgEnum("card_activity_type", activityTypes);
+export const entregaTypeEnum = pgEnum("tipoEntrega", ["normal", "express"]);
 
 export const cards = pgTable("card", {
   id: bigserial("id", { mode: "number" }).primaryKey(),
   publicId: varchar("publicId", { length: 12 }).notNull().unique(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
+  hospedeName: varchar("hospedeName", { length: 100 }).notNull(),
+  hospedeDocumento: varchar("hospedeDocumento", { length: 30 }).notNull(),
+  hospedeTelefone: varchar("hospedeTelefone", { length: 20 }).notNull(),
+  tipoEntrega: entregaTypeEnum("tipoEntrega").notNull(),
   index: integer("index").notNull(),
   createdBy: uuid("createdBy").references(() => users.id, {
     onDelete: "set null",

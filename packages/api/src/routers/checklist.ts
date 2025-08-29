@@ -333,13 +333,13 @@ export const checklistRouter = createTRPCRouter({
       const previousTitle = item.title;
 
       const updated = await checklistRepo.updateItemById(ctx.db, {
-      id: item.id,
-      title: input.title,
-      completed: input.completed,
-      iron: input.iron,
-      wash: input.wash,
-      quantity: input.quantity || undefined,
-    });
+        id: item.id,
+        title: input.title,
+        completed: input.completed,
+        iron: input.iron,
+        wash: input.wash,
+        quantity: input.quantity || undefined,
+      });
 
       if (!updated)
         throw new TRPCError({
