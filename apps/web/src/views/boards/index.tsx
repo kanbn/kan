@@ -1,5 +1,6 @@
 import { t } from "@lingui/core/macro";
 import { HiArrowDownTray, HiOutlinePlusSmall } from "react-icons/hi2";
+import { MdDelete } from "react-icons/md";
 
 import Button from "~/components/Button";
 import FeedbackModal from "~/components/FeedbackModal";
@@ -8,6 +9,7 @@ import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
+import { DeleteWorkspaceConfirmation } from "../settings/components/DeleteWorkspaceConfirmation";
 import { BoardsList } from "./components/BoardsList";
 import { ImportBoardsForm } from "./components/ImportBoardsForm";
 import { NewBoardForm } from "./components/NewBoardForm";
@@ -47,6 +49,14 @@ export default function BoardsPage() {
             >
               {t`New`}
             </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => openModal("DELETE_WORKSPACE")}
+              aria-label="Delete Workspace"
+            >
+              <MdDelete size={28} color="white" />
+            </Button>
           </div>
         </div>
 
@@ -63,6 +73,12 @@ export default function BoardsPage() {
             isVisible={isOpen && modalContentType === "NEW_BOARD"}
           >
             <NewBoardForm />
+          </Modal>
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "DELETE_WORKSPACE"}
+          >
+            <DeleteWorkspaceConfirmation />
           </Modal>
 
           <Modal
