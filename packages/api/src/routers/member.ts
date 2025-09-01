@@ -100,6 +100,19 @@ export const memberRouter = createTRPCRouter({
         });
       }
 
+      if (process.env.NEXT_PUBLIC_KAN_ENV === "cloud") {
+        const subscriptions = await ctx.auth.api.listActiveSubscriptions({
+          userId,
+        });
+
+        // get the active subscription
+        const activeSubscription = subscriptions.find(
+          (sub) => sub.status === "active" || sub.status === "trialing",
+        );
+
+        // @todo: update the subscription with the new seat
+      }
+
       return invite;
     }),
   delete: protectedProcedure

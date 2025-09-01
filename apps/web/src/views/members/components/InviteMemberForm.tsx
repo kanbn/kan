@@ -42,7 +42,7 @@ export function InviteMemberForm() {
 
   const refetchBoards = () => utils.board.all.refetch();
 
-  const createBoard = api.member.invite.useMutation({
+  const inviteMember = api.member.invite.useMutation({
     onSuccess: async () => {
       closeModal();
       await utils.workspace.byId.refetch();
@@ -68,8 +68,24 @@ export function InviteMemberForm() {
     },
   });
 
-  const onSubmit = (data: InviteMemberInput) => {
-    createBoard.mutate(data);
+  const onSubmit = async (_data: InviteMemberInput) => {
+    const { data, error } = await authClient.subscription.upgrade({
+      plan: "team",
+      // subscriptionId: "sub_123",
+      metadata: { userId: "123" },
+      seats: 1,
+      successUrl: "/members",
+      cancelUrl: "/members",
+      returnUrl: "/members",
+      disableRedirect: true,
+    });
+
+    if (data?.url) {
+      window.location.href = data.url;
+    }
+
+    // console.log(data, error);
+    // inviteMember.mutate(data);
   };
 
   useEffect(() => {
@@ -117,7 +133,7 @@ export function InviteMemberForm() {
         <div>
           <Button
             type="submit"
-            isLoading={createBoard.isPending}
+            isLoading={inviteMember.isPending}
             className="inline-flex w-full justify-center rounded-md bg-light-1000 px-3 py-2 text-sm font-semibold text-light-50 shadow-sm focus-visible:outline-none dark:bg-dark-1000 dark:text-dark-50"
           >
             {t`Invite member`}

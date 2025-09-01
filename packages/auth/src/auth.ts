@@ -1,4 +1,5 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { stripe } from "@better-auth/stripe";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { createAuthEndpoint, createAuthMiddleware } from "better-auth/api";
@@ -153,6 +154,32 @@ export const initAuth = (db: dbClient) => {
     },
     plugins: [
       socialProvidersPlugin(),
+      ...(process.env.NEXT_PUBLIC_KAN_ENV === "cloud"
+        ? [
+            stripe({
+              stripeClient: createStripeClient(),
+              stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET!,
+              createCustomerOnSignUp: true,
+              subscription: {
+                enabled: true,
+                plans: [
+                  {
+                    name: "team",
+                    priceId: process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID!,
+                    annualDiscountPriceId:
+                      process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID!,
+                  },
+                  {
+                    name: "pro",
+                    priceId: process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID!,
+                    annualDiscountPriceId:
+                      process.env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID!,
+                  },
+                ],
+              },
+            }),
+          ]
+        : []),
       // @todo: hasing is disabled due to a bug in the api key plugin
       apiKey({ disableKeyHashing: true }),
       magicLink({
