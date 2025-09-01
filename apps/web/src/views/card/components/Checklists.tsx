@@ -5,6 +5,7 @@ import { useModal } from "~/providers/modal";
 import ChecklistItemRow from "./ChecklistItemRow";
 import ChecklistNameInput from "./ChecklistNameInput";
 import NewChecklistItemForm from "./NewChecklistItemForm";
+import AddChecklistItemsLink from "./AddChecklistItemsLink";
 
 interface ChecklistItem {
   publicId: string;
@@ -78,22 +79,23 @@ export default function Checklists({
                       </span>
                     </div>
                     <div>
-                      <button
+                      {/* <button
                         className="rounded-md p-1 text-light-900 hover:bg-light-100 dark:text-dark-700 dark:hover:bg-dark-100"
                         onClick={() =>
                           openModal("DELETE_CHECKLIST", checklist.publicId)
                         }
                       >
                         <HiXMark size={16} />
-                      </button>
-                      <button
+                      </button> */}
+                       <AddChecklistItemsLink cardPublicId={cardPublicId} />
+                      {/* <button
                         onClick={() =>
                           setActiveChecklistForm?.(checklist.publicId)
                         }
                         className="rounded-md p-1 text-light-900 hover:bg-light-100 dark:text-dark-700 dark:hover:bg-dark-100"
                       >
                         <HiPlus size={16} />
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 )}
