@@ -9,275 +9,275 @@ msgstr ""
 
 #: src/views/card/components/Comment.tsx:123
 msgid " (edited)"
-msgstr ""
+msgstr " (editado)"
 
 #: src/components/FeedbackModal.tsx:102
 msgid ", or see our"
-msgstr ""
+msgstr ", ou veja nosso"
 
 #. placeholder {0}: card?.title ?? "Card"
 #. placeholder {1}: board?.name ?? "Board"
 #: src/views/card/index.tsx:214
 msgid "{0} | {1}"
-msgstr ""
+msgstr "{0} | {1}"
 
 #. placeholder {0}: labelPublicIds.length
 #: src/views/board/components/NewCardForm.tsx:432
 msgid "{0} labels"
-msgstr ""
+msgstr "{0} etiquetas"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:299
 msgid "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
-msgstr ""
+msgstr "{boardCount, plural, one {Importar quadro (1)} other {Importar quadros ({boardCount})}}"
 
 #: src/views/home/components/Pricing.tsx:36
 msgid "1 user"
-msgstr ""
+msgstr "1 usuário"
 
 #: src/views/home/index.tsx:71
 msgid "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
-msgstr ""
+msgstr "Um aplicativo kanban poderoso e flexível que ajuda você a organizar o trabalho, acompanhar o progresso e entregar resultados — tudo em um só lugar."
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:27
 msgid "Account deleted"
-msgstr ""
+msgstr "Conta deletada"
 
 #: src/views/public/board/CardModal.tsx:140
 #: src/views/card/index.tsx:289
 msgid "Activity"
-msgstr ""
+msgstr "Atividade"
 
 #: src/views/home/components/Features.tsx:103
 msgid "Activity logs"
-msgstr ""
+msgstr "Registros de atividade"
 
 #: src/views/board/components/List.tsx:110
 msgid "Add a card"
-msgstr ""
+msgstr "Adicionar um cartão"
 
 #: src/views/card/components/NewCommentForm.tsx:57
 #: src/views/card/components/Comment.tsx:146
 msgid "Add a comment..."
-msgstr ""
+msgstr "Adicionar um comentário..."
 
 #: src/views/card/components/NewChecklistItemForm.tsx:140
 msgid "Add an item..."
-msgstr ""
+msgstr "Adicionar um item..."
 
 #: src/views/card/components/Dropdown.tsx:18
 msgid "Add checklist"
-msgstr ""
+msgstr "Adicionar checklist"
 
 #: src/components/Editor.tsx:442
 msgid "Add description... (type '/' to open commands or '@' to mention)"
-msgstr ""
+msgstr "Adicionar descrição... (digite '/' para abrir comandos ou '@' para mencionar)"
 
 #: src/views/card/components/ChecklistItemRow.tsx:172
 msgid "Add details..."
-msgstr ""
+msgstr "Adicionar detalhes..."
 
 #: src/views/card/components/LabelSelector.tsx:110
 #: src/views/card/components/LabelSelector.tsx:118
 msgid "Add label"
-msgstr ""
+msgstr "Adicionar etiqueta"
 
 #: src/views/members/components/InviteMemberForm.tsx:85
 #: src/views/card/components/MemberSelector.tsx:130
 msgid "Add member"
-msgstr ""
+msgstr "Adicionar membro"
 
 #: src/views/card/components/ActivityList.tsx:69
 msgid "added a checklist"
-msgstr ""
+msgstr "adicionou um checklist"
 
 #: src/views/card/components/ActivityList.tsx:72
 msgid "added a checklist item"
-msgstr ""
+msgstr "adicionou um item do checklist"
 
 #: src/views/card/components/ActivityList.tsx:65
 msgid "added a label to the card"
-msgstr ""
+msgstr "adicionou uma etiqueta ao cartão"
 
 #: src/views/card/components/ActivityList.tsx:67
 msgid "added a member to the card"
-msgstr ""
+msgstr "adicionou um membro ao cartão"
 
 #. placeholder {0}: truncate(toTitle)
 #: src/views/card/components/ActivityList.tsx:146
 msgid "added checklist <0>{0}</0>"
-msgstr ""
+msgstr "adicionou checklist <0>{0}</0>"
 
 #. placeholder {0}: truncate(toTitle)
 #: src/views/card/components/ActivityList.tsx:170
 msgid "added checklist item <0>{0}</0>"
-msgstr ""
+msgstr "adicionou item do checklist <0>{0}</0>"
 
 #. placeholder {0}: truncate(label)
 #: src/views/card/components/ActivityList.tsx:130
 msgid "added label <0>{0}</0>"
-msgstr ""
+msgstr "adicionou etiqueta <0>{0}</0>"
 
 #: src/views/home/components/Pricing.tsx:55
 msgid "Admin roles"
-msgstr ""
+msgstr "Funções de administrador"
 
 #: src/views/home/components/Pricing.tsx:97
 msgid "All seats are free during the beta until Sept 1st!"
-msgstr ""
+msgstr "Todos os assentos são gratuitos durante a fase beta até 1º de setembro!"
 
 #: src/views/home/components/Footer.tsx:18
 msgid "All systems operational"
-msgstr ""
+msgstr "Todos os sistemas operacionais"
 
 #: src/views/auth/signup/index.tsx:86
 msgid "Already have an account? <0><1>Sign in</1></0>"
-msgstr ""
+msgstr "Já possui uma conta? <0><1>Entrar</1></0>"
 
 #: src/views/settings/index.tsx:102
 msgid "An error occurred while disconnecting your Trello account."
-msgstr ""
+msgstr "Ocorreu um erro ao desconectar sua conta do Trello."
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:90
 msgid "An unexpected error occurred. Please try again later."
-msgstr ""
+msgstr "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde."
 
 #: src/views/settings/index.tsx:259
 msgid "API keys"
-msgstr ""
+msgstr "Chaves de API"
 
 #: src/views/home/components/Footer.tsx:31
 msgid "API Reference"
-msgstr ""
+msgstr "Referência da API"
 
 #: src/views/boards/components/TemplateBoards.tsx:62
 msgid "Applicants"
-msgstr ""
+msgstr "Candidatos"
 
 #: src/views/boards/components/TemplateBoards.tsx:33
 msgid "Approval"
-msgstr ""
+msgstr "Aprovação"
 
 #: src/views/members/components/DeleteMemberConfirmation.tsx:47
 msgid "Are you sure want to remove {entityLabel}?"
-msgstr ""
+msgstr "Tem certeza de que deseja remover {entityLabel}?"
 
 #. placeholder {0}: workspace.name
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:62
 msgid "Are you sure you want to delete the workspace {0}?"
-msgstr ""
+msgstr "Tem certeza de que deseja excluir o workspace {0}?"
 
 #: src/views/card/components/DeleteCardConfirmation.tsx:75
 msgid "Are you sure you want to delete this card?"
-msgstr ""
+msgstr "Tem certeza de que deseja excluir este cartão?"
 
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:55
 msgid "Are you sure you want to delete this checklist?"
-msgstr ""
+msgstr "Tem certeza de que deseja excluir este checklist?"
 
 #: src/views/card/components/DeleteCommentConfirmation.tsx:65
 msgid "Are you sure you want to delete this comment?"
-msgstr ""
+msgstr "Tem certeza de que deseja excluir este comentário?"
 
 #: src/components/DeleteLabelConfirmation.tsx:41
 msgid "Are you sure you want to delete this label?"
-msgstr ""
+msgstr "Tem certeza de que deseja excluir esta etiqueta?"
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:54
 msgid "Are you sure you want to delete your account?"
-msgstr ""
+msgstr "Tem certeza de que deseja excluir sua conta?"
 
 #. placeholder {0}: truncate(memberName)
 #: src/views/card/components/ActivityList.tsx:110
 msgid "assigned <0>{0}</0> to the card"
-msgstr ""
+msgstr "atribuído <0>{0}</0> ao cartão"
 
 #: src/views/boards/components/TemplateBoards.tsx:46
 msgid "Awaiting Customer"
-msgstr ""
+msgstr "Aguardando Cliente"
 
 #: src/views/boards/components/TemplateBoards.tsx:22
 msgid "Backlog"
-msgstr ""
+msgstr "Backlog"
 
 #: src/views/boards/components/TemplateBoards.tsx:15
 msgid "Basic Kanban"
-msgstr ""
+msgstr "Kanban Básico"
 
 #: src/views/settings/index.tsx:198
 #: src/views/boards/components/TemplateBoards.tsx:55
 msgid "Billing"
-msgstr ""
+msgstr "Faturamento"
 
 #: src/views/settings/index.tsx:208
 msgid "Billing portal"
-msgstr ""
+msgstr "Portal de Faturamento"
 
 #: src/views/boards/components/TemplateBoards.tsx:37
 msgid "Blog Post"
-msgstr ""
+msgstr "Postagem de Blog"
 
 #: src/views/board/index.tsx:331
 msgid "Board"
-msgstr ""
+msgstr "Quadro"
 
 #: src/views/boards/components/NewBoardForm.tsx:21
 msgid "Board name cannot exceed 100 characters"
-msgstr ""
+msgstr "O nome do quadro não pode exceder 100 caracteres"
 
 #: src/views/boards/components/NewBoardForm.tsx:20
 msgid "Board name is required"
-msgstr ""
+msgstr "O nome do quadro é obrigatório"
 
 #: src/views/public/board/index.tsx:148
 #: src/views/board/index.tsx:357
 msgid "Board not found"
-msgstr ""
+msgstr "Quadro não encontrado"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:45
 msgid "Board URL can only contain letters, numbers, and hyphens"
-msgstr ""
+msgstr "A URL do quadro só pode conter letras, números e hífens"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:43
 msgid "Board URL cannot exceed 60 characters"
-msgstr ""
+msgstr "A URL do quadro não pode exceder 60 caracteres"
 
 #: src/views/public/board/index.tsx:64
 msgid "Board URL copied to clipboard"
-msgstr ""
+msgstr "URL do quadro copiada para a área de transferência"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:41
 msgid "Board URL must be at least 3 characters long"
-msgstr ""
+msgstr "A URL do quadro deve ter pelo menos 3 caracteres"
 
 #: src/views/home/components/Features.tsx:78
 msgid "Board visibility"
-msgstr ""
+msgstr "Visibilidade do quadro"
 
 #: src/views/board/components/VisibilityButton.tsx:45
 msgid "Board visibility updated"
-msgstr ""
+msgstr "Visibilidade do quadro atualizada"
 
 #: src/views/boards/index.tsx:27
 #: src/components/SideNavigation.tsx:68
 msgid "Boards"
-msgstr ""
+msgstr "Quadros"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
 #: src/views/boards/index.tsx:23
 msgid "Boards | {0}"
-msgstr ""
+msgstr "Quadros | {0}"
 
 #: src/views/boards/components/TemplateBoards.tsx:29
 msgid "Brainstorming"
-msgstr ""
+msgstr "Brainstorming"
 
 #: src/views/boards/components/TemplateBoards.tsx:23
 msgid "Bug"
-msgstr ""
+msgstr "Bug"
 
 #: src/views/boards/components/TemplateBoards.tsx:51
 msgid "Bug Report"
-msgstr ""
+msgstr "Relatório de Bug"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
@@ -290,175 +290,175 @@ msgstr ""
 #: src/views/card/components/Comment.tsx:158
 #: src/components/DeleteLabelConfirmation.tsx:49
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: src/views/card/index.tsx:260
 msgid "Card not found"
-msgstr ""
+msgstr "Cartão não encontrado"
 
 #: src/views/board/components/NewCardForm.tsx:307
 msgid "Card title"
-msgstr ""
+msgstr "Título do cartão"
 
 #: src/views/settings/index.tsx:291
 #: src/views/settings/index.tsx:301
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:109
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:178
 msgid "Change Password"
-msgstr ""
+msgstr "Alterar Senha"
 
 #: src/views/settings/index.tsx:190
 msgid "Change the language of the app."
-msgstr ""
+msgstr "Alterar o idioma do aplicativo."
 
 #: src/views/auth/signup/index.tsx:67
 #: src/views/auth/login/index.tsx:41
 msgid "Check your inbox"
-msgstr ""
+msgstr "Verifique sua caixa de entrada"
 
 #: src/views/card/components/NewChecklistForm.tsx:118
 msgid "Checklist name"
-msgstr ""
+msgstr "Nome do checklist"
 
 #: src/views/board/components/Filters.tsx:155
 msgid "Clear filters"
-msgstr ""
+msgstr "Limpar filtros"
 
 #: src/views/auth/signup/index.tsx:72
 #: src/views/auth/login/index.tsx:46
 msgid "Click on the link we've sent to {magicLinkRecipient} to sign in."
-msgstr ""
+msgstr "Clique no link que enviamos para {magicLinkRecipient} para entrar."
 
 #: src/views/boards/components/TemplateBoards.tsx:22
 msgid "Code Review"
-msgstr ""
+msgstr "Revisão de Código"
 
 #: src/views/home/components/Features.tsx:84
 msgid "Collaborate seamlessly with your team."
-msgstr ""
+msgstr "Colabore de forma integrada com sua equipe."
 
 #: src/views/home/components/Features.tsx:66
 msgid "Coming soon"
-msgstr ""
+msgstr "Em breve"
 
 #: src/views/home/components/Features.tsx:98
 msgid "Comments"
-msgstr ""
+msgstr "Comentários"
 
 #: src/views/home/components/Footer.tsx:94
 msgid "Company"
-msgstr ""
+msgstr "Empresa"
 
 #: src/views/boards/components/TemplateBoards.tsx:81
 msgid "Complete"
-msgstr ""
+msgstr "Concluído"
 
 #: src/views/home/components/Pricing.tsx:70
 msgid "Complete control and ownership:"
-msgstr ""
+msgstr "Controle e propriedade total:"
 
 #: src/views/card/components/ActivityList.tsx:74
 msgid "completed a checklist item"
-msgstr ""
+msgstr "concluiu um item do checklist"
 
 #. placeholder {0}: truncate(toTitle)
 #: src/views/card/components/ActivityList.tsx:187
 msgid "completed checklist item <0>{0}</0>"
-msgstr ""
+msgstr "concluiu item do checklist <0>{0}</0>"
 
 #: src/views/settings/components/CustomURLConfirmation.tsx:42
 msgid "Confirm URL change"
-msgstr ""
+msgstr "Confirmar alteração da URL"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:150
 msgid "Confirm your new password"
-msgstr ""
+msgstr "Confirme sua nova senha"
 
 #: src/views/settings/index.tsx:235
 #: src/views/boards/components/ImportBoardsForm.tsx:157
 msgid "Connect Trello"
-msgstr ""
+msgstr "Conectar Trello"
 
 #: src/views/home/components/Features.tsx:115
 msgid "Connect your favorite tools to streamline your workflow."
-msgstr ""
+msgstr "Conecte suas ferramentas favoritas para otimizar seu fluxo de trabalho."
 
 #: src/views/settings/index.tsx:222
 msgid "Connect your Trello account to import boards."
-msgstr ""
+msgstr "Conecte sua conta Trello para importar quadros."
 
 #: src/views/home/components/Footer.tsx:38
 msgid "Contact"
-msgstr ""
+msgstr "Contato"
 
 #: src/components/FeedbackModal.tsx:100
 msgid "Contact us"
-msgstr ""
+msgstr "Fale conosco"
 
 #: src/views/boards/components/TemplateBoards.tsx:27
 msgid "Content Creation"
-msgstr ""
+msgstr "Criação de Conteúdo"
 
 #: src/components/AuthForm.tsx:366
 msgid "Continue with "
-msgstr ""
+msgstr "Continuar com "
 
 #. placeholder {0}: key === "oidc" ? oidcProviderName : provider.name
 #: src/components/AuthForm.tsx:297
 msgid "Continue with {0}"
-msgstr ""
+msgstr "Continuar com {0}"
 
 #: src/views/home/components/Features.tsx:79
 msgid "Control who can view and edit your boards."
-msgstr ""
+msgstr "Controle quem pode visualizar e editar seus quadros."
 
 #: src/views/board/components/NewListForm.tsx:140
 #: src/views/board/components/NewCardForm.tsx:458
 #: src/components/LabelForm.tsx:213
 msgid "Create another"
-msgstr ""
+msgstr "Criar outro"
 
 #: src/views/boards/components/NewBoardForm.tsx:128
 msgid "Create board"
-msgstr ""
+msgstr "Criar quadro"
 
 #: src/views/board/components/NewCardForm.tsx:468
 msgid "Create card"
-msgstr ""
+msgstr "Criar cartão"
 
 #: src/views/card/components/NewChecklistForm.tsx:134
 msgid "Create checklist"
-msgstr ""
+msgstr "Criar checklist"
 
 #: src/components/LabelForm.tsx:238
 msgid "Create label"
-msgstr ""
+msgstr "Criar etiqueta"
 
 #: src/views/board/components/NewListForm.tsx:152
 msgid "Create list"
-msgstr ""
+msgstr "Criar lista"
 
 #: src/views/boards/components/BoardsList.tsx:42
 msgid "Create new board"
-msgstr ""
+msgstr "Criar novo quadro"
 
 #: src/views/settings/components/CreateAPIKeyForm.tsx:54
 msgid "Create new key"
-msgstr ""
+msgstr "Criar nova chave"
 
 #: src/views/card/components/LabelSelector.tsx:98
 #: src/views/board/components/NewCardForm.tsx:394
 msgid "Create new label"
-msgstr ""
+msgstr "Criar nova etiqueta"
 
 #: src/views/board/index.tsx:425
 msgid "Create new list"
-msgstr ""
+msgstr "Criar nova lista"
 
 #: src/components/WorkspaceMenu.tsx:116
 #: src/components/NewWorkspaceForm.tsx:94
 msgid "Create workspace"
-msgstr ""
+msgstr "Criar workspace"
 
 #: src/views/card/components/ActivityList.tsx:61
 msgid "created the card"
