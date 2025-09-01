@@ -124,9 +124,4 @@ const enforceUserIsAuthed = t.middleware(async ({ ctx, next }) => {
   });
 });
 
-export const protectedProcedure = t.procedure.use(enforceUserIsAuthed).meta({
-  openapi: {
-    method: "GET",
-    path: "/protected",
-  },
-});
+export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
