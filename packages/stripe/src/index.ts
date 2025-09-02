@@ -64,7 +64,7 @@ export const updateSubscriptionSeats = async (
           quantity: newQuantity,
         },
       ],
-      proration_behavior: "always_invoice", // Accumulate charges for next billing cycle
+      proration_behavior: "always_invoice", // Invoice immediately
     },
   );
 
