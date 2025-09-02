@@ -92,11 +92,6 @@ const Pricing = () => {
           {t`Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team.`}
         </p>
 
-        {/* Beta free pricing pill */}
-        <div className="mt-4 flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800 dark:bg-green-700 dark:text-green-100">
-          {t`All seats are free during the beta until Sept 1st!`}
-        </div>
-
         <div className="mt-16 flex justify-center">
           <fieldset aria-label={t`Payment frequency`}>
             <RadioGroup
