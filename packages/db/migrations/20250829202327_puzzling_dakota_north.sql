@@ -1,0 +1,1 @@
+ALTER TABLE "card" ADD COLUMN "hospedeApartamento" varchar(8) NOT NULL;

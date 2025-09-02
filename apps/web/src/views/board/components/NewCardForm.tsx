@@ -61,6 +61,11 @@ export function NewCardForm({
       memberPublicIds: [],
       isCreateAnotherEnabled: false,
       position: "start",
+      hospedeName: "",
+      hospedeDocumento: "",
+      hospedeTelefone: "",
+      tipoEntrega: "normal",
+      hospedeApartamento: "",
     },
     resetOnClose: true,
   });
@@ -76,6 +81,10 @@ export function NewCardForm({
   const position = watch("position");
   const title = watch("title");
   const description = watch("description");
+  const hospedeName = watch("hospedeName");
+  const hospedeDocumento = watch("hospedeDocumento");
+  const hospedeTelefone = watch("hospedeTelefone");
+  const tipoEntrega = watch("tipoEntrega");
 
   // saving form state whenever form values change
   useEffect(() => {
@@ -85,7 +94,6 @@ export function NewCardForm({
     return () => subscription.unsubscribe();
   }, [watch, saveFormState]);
 
-  
   const { data: boardData } = api.board.byId.useQuery(queryParams, {
     enabled: !!boardPublicId,
   });
@@ -101,23 +109,23 @@ export function NewCardForm({
   // this removes the deleted label from selected labels if it is selected
   useEffect(() => {
     if (boardData?.labels) {
-      const availableLabelIds = boardData.labels.map(label => label.publicId);
+      const availableLabelIds = boardData.labels.map((label) => label.publicId);
       const newLabelId = modalStates["NEW_LABEL_CREATED"];
-    
+
       if (newLabelId && availableLabelIds.includes(newLabelId)) {
         clearModalState("NEW_LABEL_CREATED");
       }
-      
-      const validLabelIds = labelPublicIds.filter(id => 
-        availableLabelIds.includes(id) || id === newLabelId
+
+      const validLabelIds = labelPublicIds.filter(
+        (id) => availableLabelIds.includes(id) || id === newLabelId,
       );
-      
+
       if (validLabelIds.length !== labelPublicIds.length) {
         setValue("labelPublicIds", validLabelIds);
       }
     }
   }, [boardData?.labels, labelPublicIds, modalStates["NEW_LABEL_CREATED"]]);
-  
+
   const createCard = api.card.create.useMutation({
     onMutate: async (args) => {
       await utils.board.byId.cancel();
@@ -149,6 +157,7 @@ export function NewCardForm({
               _filteredLabels: labelPublicIds.map((id) => ({ publicId: id })),
               _filteredMembers: memberPublicIds.map((id) => ({ publicId: id })),
               index: position === "start" ? 0 : list.cards.length,
+              checklists: [], //maybe we can already insert them?
             };
 
             const updatedCards =
@@ -239,7 +248,7 @@ export function NewCardForm({
       ),
     })) ?? [];
 
-  const onSubmit = (data: NewCardInput) => {
+  const onSubmit = (data: NewCardFormInput) => {
     createCard.mutate({
       title: data.title,
       description: data.description,
@@ -247,6 +256,11 @@ export function NewCardForm({
       labelPublicIds: data.labelPublicIds,
       memberPublicIds: data.memberPublicIds,
       position: data.position,
+      hospedeName: data.hospedeName,
+      hospedeDocumento: data.hospedeDocumento,
+      hospedeTelefone: data.hospedeTelefone,
+      hospedeApartamento: data.hospedeApartamento,
+      tipoEntrega: data.tipoEntrega,
     });
   };
 
@@ -315,6 +329,47 @@ export function NewCardForm({
           />
         </div>
         <div className="mt-2">
+          <Input
+            id="hospedeName"
+            placeholder={t`Nome do hóspede`}
+            {...register("hospedeName")}
+          />
+        </div>
+        <div className="mt-2">
+          <Input
+            id="hospedeDocumento"
+            placeholder={t`Documento do hóspede`}
+            {...register("hospedeDocumento")}
+          />
+        </div>
+        <div className="mt-2">
+          <Input
+            id="hospedeTelefone"
+            placeholder={t`Telefone do hóspede`}
+            {...register("hospedeTelefone")}
+          />
+        </div>
+        <div className="mt-2">
+          <Input
+            id="hospedeApartamento"
+            placeholder={t`Apartamento`}
+            {...register("hospedeApartamento")}
+          />
+        </div>
+        <div className="mt-2">
+          <label className="mb-1 block text-xs font-medium text-neutral-900 dark:text-dark-1000">
+            {t`Tipo de entrega`}
+          </label>
+          <select
+            id="tipoEntrega"
+            {...register("tipoEntrega")}
+            className="w-full rounded-md border border-light-600 bg-light-200 px-2 py-1 text-xs text-light-800 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000"
+          >
+            <option value="normal">{t`Normal`}</option>
+            <option value="express">{t`Express`}</option>
+          </select>
+        </div>
+        <div className="mt-2">
           <div className="block max-h-48 min-h-24 w-full overflow-y-auto rounded-md border-0 bg-dark-300 bg-white/5 px-3 py-2 text-sm shadow-sm ring-1 ring-inset ring-light-600 focus-within:ring-2 focus-within:ring-inset focus-within:ring-light-700 dark:ring-dark-700 dark:focus-within:ring-dark-700 sm:leading-6">
             <Editor
               content={description}
@@ -323,15 +378,19 @@ export function NewCardForm({
                 saveFormState({ ...formState, description: value });
               }}
               workspaceMembers={
-                boardData?.workspace.members?.map((member): WorkspaceMember => ({
-                  publicId: member.publicId,
-                  email: member.email,
-                  user: member.user ? {
-                    id: member.publicId,
-                    name: member.user.name,
-                    image: member.user.image ?? null,
-                  } : null,
-                })) ?? []
+                boardData?.workspace.members?.map(
+                  (member): WorkspaceMember => ({
+                    publicId: member.publicId,
+                    email: member.email,
+                    user: member.user
+                      ? {
+                          id: member.publicId,
+                          name: member.user.name,
+                          image: member.user.image ?? null,
+                        }
+                      : null,
+                  }),
+                ) ?? []
               }
             />
           </div>
@@ -463,7 +522,13 @@ export function NewCardForm({
         <div>
           <Button
             type="submit"
-            disabled={title.length === 0 || createCard.isPending}
+            disabled={
+              title.length === 0 ||
+              createCard.isPending ||
+              hospedeName.length === 0 ||
+              hospedeDocumento.length === 0 ||
+              hospedeTelefone.length === 0
+            }
           >
             {t`Create card`}
           </Button>

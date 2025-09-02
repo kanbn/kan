@@ -179,19 +179,27 @@ export default function CardPage() {
     },
   });
 
-  const { register, handleSubmit, setValue, watch } = useForm<FormValues>({
+  const { register, handleSubmit, setValue, watch } = useForm<any>({
     values: {
       cardId: cardId ?? "",
       title: card?.title ?? "",
       description: card?.description ?? "",
+      hospedeName: card?.hospedeName ?? "",
+      hospedeDocumento: card?.hospedeDocumento ?? "",
+      hospedeTelefone: card?.hospedeTelefone ?? "",
+      tipoEntrega: card?.tipoEntrega ?? "normal",
     },
   });
 
-  const onSubmit = (values: FormValues) => {
+  const onSubmit = (values: any) => {
     updateCard.mutate({
       cardPublicId: values.cardId,
       title: values.title,
       description: values.description,
+      hospedeName: values.hospedeName,
+      hospedeDocumento: values.hospedeDocumento,
+      hospedeTelefone: values.hospedeTelefone,
+      tipoEntrega: values.tipoEntrega,
     });
   };
 
@@ -250,6 +258,7 @@ export default function CardPage() {
                         />
                       </div>
                     </form>
+
                     <div className="flex">
                       <Dropdown />
                     </div>
@@ -275,11 +284,66 @@ export default function CardPage() {
                           onBlur={() => handleSubmit(onSubmit)()}
                           workspaceMembers={board?.workspace.members ?? []}
                         />
+                        {/* Laundry details section (read-only) */}
+                        <div className="mb-4 mt-4 rounded-lg bg-neutral-100 p-4 shadow-sm dark:bg-neutral-800">
+                          <h3 className="mb-3 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
+                            {t`Detalhes do hóspede`}
+                          </h3>
+
+                          {/* Using a grid for clean alignment */}
+                          <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
+                            {/* Row 1: Nome */}
+                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{t`Nome:`}</span>
+                            <span className="text-neutral-900 dark:text-neutral-100">
+                              {card?.hospedeName || (
+                                <span className="italic text-neutral-500 dark:text-neutral-500">{t`Não informado`}</span>
+                              )}
+                            </span>
+                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{t`Apartamento:`}</span>
+                            <span className="text-neutral-900 dark:text-neutral-100">
+                              {card?.hospedeApartamento || (
+                                <span className="italic text-neutral-500 dark:text-neutral-500">{t`Não informado`}</span>
+                              )}
+                            </span>
+                            {/* Row 2: Documento */}
+                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{t`Documento:`}</span>
+                            <span className="text-neutral-900 dark:text-neutral-100">
+                              {card?.hospedeDocumento || (
+                                <span className="italic text-neutral-500 dark:text-neutral-500">{t`Não informado`}</span>
+                              )}
+                            </span>
+
+                            {/* Row 3: Telefone */}
+                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{t`Telefone:`}</span>
+                            <span className="text-neutral-900 dark:text-neutral-100">
+                              {card?.hospedeTelefone || (
+                                <span className="italic text-neutral-500 dark:text-neutral-500">{t`Não informado`}</span>
+                              )}
+                            </span>
+
+                            {/* Row 4: Tipo de entrega */}
+                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{t`Tipo de entrega:`}</span>
+                            <span className="text-neutral-900 dark:text-neutral-100">
+                              {card?.tipoEntrega === "express"
+                                ? t`Express`
+                                : t`Normal`}
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </form>
                   </div>
                   <Checklists
-                    checklists={card.checklists}
+                    checklists={card.checklists.map((checklist) => ({
+                      ...checklist,
+                      items: checklist.items.map((item) => ({
+                        ...item,
+                        itemValue:
+                          typeof item.itemValue === "string"
+                            ? Number(item.itemValue) || 0
+                            : (item.itemValue ?? 0),
+                      })),
+                    }))}
                     cardPublicId={cardId}
                     activeChecklistForm={activeChecklistForm}
                     setActiveChecklistForm={setActiveChecklistForm}
