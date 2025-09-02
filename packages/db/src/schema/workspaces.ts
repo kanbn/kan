@@ -11,6 +11,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { boards } from "./boards";
+import { subscription } from "./subscriptions";
 import { users } from "./users";
 
 export const memberRoles = ["admin", "member", "guest"] as const;
@@ -60,6 +61,7 @@ export const workspaceRelations = relations(workspaces, ({ one, many }) => ({
   }),
   members: many(workspaceMembers),
   boards: many(boards),
+  subscriptions: many(subscription),
 }));
 
 export const workspaceMembers = pgTable("workspace_members", {

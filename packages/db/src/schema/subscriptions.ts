@@ -5,18 +5,17 @@ import {
   integer,
   pgTable,
   timestamp,
-  uuid,
   varchar,
 } from "drizzle-orm/pg-core";
 
-import { users } from "./users";
+import { workspaces } from "./workspaces";
 
 export const subscription = pgTable("subscription", {
   id: bigserial("id", { mode: "number" }).primaryKey(),
   plan: varchar("plan", { length: 255 }).notNull(),
-  referenceId: uuid("referenceId").references(() => users.id, {
-    onDelete: "set null",
-  }),
+  referenceId: varchar("referenceId", { length: 12 })
+    .notNull()
+    .references(() => workspaces.publicId),
   stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
   stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 255 }),
   status: varchar("status", { length: 255 }).notNull(),
@@ -31,8 +30,8 @@ export const subscription = pgTable("subscription", {
 }).enableRLS();
 
 export const subscriptionsRelations = relations(subscription, ({ one }) => ({
-  user: one(users, {
+  workspace: one(workspaces, {
     fields: [subscription.referenceId],
-    references: [users.id],
+    references: [workspaces.publicId],
   }),
 }));

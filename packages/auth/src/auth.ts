@@ -11,6 +11,7 @@ import { env } from "next-runtime-env";
 import type { dbClient } from "@kan/db/client";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
+import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import * as schema from "@kan/db/schema";
 import { cloudMailerClient, sendEmail } from "@kan/email";
 import { createStripeClient } from "@kan/stripe";
@@ -176,6 +177,25 @@ export const initAuth = (db: dbClient) => {
                       process.env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID!,
                   },
                 ],
+                authorizeReference: async (data) => {
+                  const workspace = await workspaceRepo.getByPublicId(
+                    db,
+                    data.referenceId,
+                  );
+
+                  if (!workspace) {
+                    return Promise.resolve(false);
+                  }
+
+                  const isUserInWorkspace =
+                    await workspaceRepo.isUserInWorkspace(
+                      db,
+                      data.user.id,
+                      workspace.id,
+                    );
+
+                  return isUserInWorkspace;
+                },
               },
             }),
           ]

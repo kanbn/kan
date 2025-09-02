@@ -11,6 +11,7 @@ import FeedbackModal from "~/components/FeedbackModal";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
+import { env } from "~/env";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
@@ -25,6 +26,14 @@ export default function MembersPage() {
   const { data, isLoading } = api.workspace.byId.useQuery(
     { workspacePublicId: workspace.publicId },
     // { enabled: workspace?.publicId ? true : false },
+  );
+
+  const subscription = data?.subscriptions;
+
+  const activeTeamSubscription = subscription?.find(
+    (sub: any) =>
+      sub.status === "active" ||
+      (sub.status === "trialing" && sub.plan === "team"),
   );
 
   const TableRow = ({
@@ -160,7 +169,21 @@ export default function MembersPage() {
           <h1 className="font-bold tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
             {t`Members`}
           </h1>
-          <div className="flex">
+          <div className="flex items-center gap-3">
+            {env.NEXT_PUBLIC_KAN_ENV === "cloud" && (
+              <div
+                className={twMerge(
+                  "flex items-center rounded-full border px-3 py-1 text-center text-xs",
+                  activeTeamSubscription
+                    ? "border-emerald-300 bg-emerald-50 text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
+                    : "border-light-300 bg-light-50 text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900",
+                )}
+              >
+                <span className="font-medium">
+                  {activeTeamSubscription ? t`Team Plan` : t`Free Plan`}
+                </span>
+              </div>
+            )}
             <Button
               onClick={() => openModal("INVITE_MEMBER")}
               iconLeft={<HiOutlinePlusSmall className="h-4 w-4" />}
@@ -241,7 +264,9 @@ export default function MembersPage() {
             modalSize="sm"
             isVisible={isOpen && modalContentType === "INVITE_MEMBER"}
           >
-            <InviteMemberForm />
+            <InviteMemberForm
+              activeTeamSubscription={activeTeamSubscription as any}
+            />
           </Modal>
 
           <Modal

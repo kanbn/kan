@@ -1,11 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
+import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
 import { z } from "zod";
 
 import type { InviteMemberInput } from "@kan/api/types";
+import { authClient } from "@kan/auth/client";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
@@ -15,7 +17,20 @@ import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
-export function InviteMemberForm() {
+export function InviteMemberForm({
+  activeTeamSubscription,
+}: {
+  activeTeamSubscription:
+    | {
+        id: string;
+        plan: string;
+        status: string;
+        seats: number;
+        periodStart: Date;
+        periodEnd: Date;
+      }
+    | undefined;
+}) {
   const utils = api.useUtils();
   const [isCreateAnotherEnabled, setIsCreateAnotherEnabled] = useState(false);
   const { closeModal } = useModal();
@@ -68,24 +83,53 @@ export function InviteMemberForm() {
     },
   });
 
-  const onSubmit = async (_data: InviteMemberInput) => {
-    const { data, error } = await authClient.subscription.upgrade({
-      plan: "team",
-      // subscriptionId: "sub_123",
-      metadata: { userId: "123" },
-      seats: 1,
-      successUrl: "/members",
-      cancelUrl: "/members",
-      returnUrl: "/members",
-      disableRedirect: true,
-    });
+  let isYearly = false;
+  let price = t`$10/month`;
+  let billingType = t`monthly billing`;
 
-    if (data?.url) {
-      window.location.href = data.url;
+  if (
+    activeTeamSubscription?.periodStart &&
+    activeTeamSubscription?.periodEnd
+  ) {
+    const periodStartDate = new Date(activeTeamSubscription.periodStart);
+    const periodEndDate = new Date(activeTeamSubscription.periodEnd);
+    const diffInDays = Math.round(
+      (periodEndDate.getTime() - periodStartDate.getTime()) /
+        (1000 * 60 * 60 * 24),
+    );
+
+    isYearly = diffInDays > 31;
+    price = isYearly ? t`$8/month` : t`$10/month`;
+    billingType = isYearly ? t`billed annually` : t`billed monthly`;
+  }
+
+  const onSubmit = async (member: InviteMemberInput) => {
+    if (env("NEXT_PUBLIC_KAN_ENV") === "cloud" && !activeTeamSubscription?.id) {
+      const { data, error } = await authClient.subscription.upgrade({
+        plan: "team",
+        referenceId: workspace.publicId,
+        metadata: { userId: "123" }, // @todo: add the user id
+        seats: 1,
+        successUrl: "/members",
+        cancelUrl: "/members",
+        returnUrl: "/members",
+        disableRedirect: true,
+      });
+
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+
+      if (error) {
+        showPopup({
+          header: t`Error upgrading subscription`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      }
+    } else {
+      inviteMember.mutate(member);
     }
-
-    // console.log(data, error);
-    // inviteMember.mutate(data);
   };
 
   useEffect(() => {
@@ -122,6 +166,30 @@ export function InviteMemberForm() {
           }}
           errorMessage={errors.email?.message}
         />
+
+        {env("NEXT_PUBLIC_KAN_ENV") === "cloud" && (
+          <div className="mt-3 rounded-md bg-light-100 p-3 text-xs text-light-900 dark:bg-dark-200 dark:text-dark-900">
+            {activeTeamSubscription?.id ? (
+              <div>
+                <span className="font-medium text-emerald-500 dark:text-emerald-400">
+                  {t`Team Plan`}
+                </span>
+                <p className="mt-1">
+                  {t`Adding a new member will cost an additional ${price} (${billingType}) per seat.`}
+                </p>
+              </div>
+            ) : (
+              <div>
+                <span className="font-medium text-light-950 dark:text-dark-950">
+                  {t`Free Plan`}
+                </span>
+                <p className="mt-1">
+                  {t`Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace.`}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">

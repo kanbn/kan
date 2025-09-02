@@ -1,5 +1,5 @@
 {
-  "id": "35e9d75a-9dad-4f25-8471-a94132fa12e1",
+  "id": "d16ab16a-b4af-4d34-abb9-e663f4e63307",
   "prevId": "5d713202-07aa-46e3-abc2-83d0eb6d0858",
   "version": "7",
   "dialect": "postgresql",
@@ -2339,9 +2339,9 @@
         },
         "referenceId": {
           "name": "referenceId",
-          "type": "uuid",
+          "type": "varchar(12)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "stripeCustomerId": {
           "name": "stripeCustomerId",
@@ -2414,17 +2414,17 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "subscription_referenceId_user_id_fk": {
-          "name": "subscription_referenceId_user_id_fk",
+        "subscription_referenceId_workspace_publicId_fk": {
+          "name": "subscription_referenceId_workspace_publicId_fk",
           "tableFrom": "subscription",
-          "tableTo": "user",
+          "tableTo": "workspace",
           "columnsFrom": [
             "referenceId"
           ],
           "columnsTo": [
-            "id"
+            "publicId"
           ],
-          "onDelete": "set null",
+          "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
