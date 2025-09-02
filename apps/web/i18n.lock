@@ -6,6 +6,8 @@ checksums:
     "%7B0%7D%20%7C%20%7B1%7D/singular": 4628f9c6ec13c2dc2984a6ab80e19f8b
     "%7B0%7D%20labels/singular": 785f92bedf786ff3e285adfc07c69d18
     "%7BboardCount%2C%20plural%2C%20one%20%7BImport%20board%20(1)%7D%20other%20%7BImport%20boards%20(%7BboardCount%7D)%7D%7D/singular": 72358c550bd1a99fcb6e8952f0f947ef
+    "%2410%2Fmonth/singular": cab5e752ed83096e34fca780d90e1fb9
+    "%248%2Fmonth/singular": 4667034934bb2bc3d569c70b94205b51
     1%20user/singular: 3b547431ab12f0fba84307e6a81109d8
     A%20powerful%2C%20flexible%20kanban%20app%20that%20helps%20you%20organise%20work%2C%20track%20progress%2C%20and%20deliver%20results%E2%80%94all%20in%20one%20place./singular: d405b83b0d631cb72f4347c10bcbb643
     Account%20deleted/singular: a25da96a1579c4491be0a95669ef18a4
@@ -26,8 +28,8 @@ checksums:
     added%20checklist%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: fb6a852c50c1629f47c6f155fc93fdee
     added%20checklist%20item%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: bdd202da20b1fffbec21792c5453f90c
     added%20label%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: b32be052b3d57de0c9120fa7f9fc86ee
+    Adding%20a%20new%20member%20will%20cost%20an%20additional%20%7Bprice%7D%20(%7BbillingType%7D)%20per%20seat./singular: 12e88573028306110fbc15ef1e714892
     Admin%20roles/singular: 32a5d78073b9bb9a246773afba8831df
-    All%20seats%20are%20free%20during%20the%20beta%20until%20Sept%201st!/singular: 015cec3899cf99e37c3cf231d432e31d
     All%20systems%20operational/singular: ee943a4046b09e6334cceeea9fda2bfc
     Already%20have%20an%20account%3F%20%3C0%3E%3C1%3ESign%20in%3C%2F1%3E%3C%2F0%3E/singular: 2959fd276248208b65cb27ed46b20135
     An%20error%20occurred%20while%20disconnecting%20your%20Trello%20account./singular: 0aa3973b860c1faf8d9123aebf567e40
@@ -47,6 +49,8 @@ checksums:
     Awaiting%20Customer/singular: 122c108794f321c10e05a08f09b11457
     Backlog/singular: 35919fd5b10ad212839a75e72829fe4e
     Basic%20Kanban/singular: e46ebc406749486f3907436970d4d6c7
+    billed%20annually/singular: c782a8085ffee456bfc56c34ccc5e71c
+    billed%20monthly/singular: 793f2728acf06e9f06d6cdc26dfcf0cd
     Billing/singular: b01dbdd049ebbd4a349fa64d6ce65a3b
     Billing%20portal/singular: dc3afa14ffe19f5920992a0c9d49d525
     Blog%20Post/singular: 38e027f212be445dc530e427fc642a20
@@ -161,6 +165,7 @@ checksums:
     Error%20updating%20workspace%20description/singular: 7a9fd7c69b90ab848ee1f1d4a4995381
     Error%20updating%20workspace%20name/singular: 46025f42a7d5eff689e9cb8bed14a1e4
     Error%20updating%20workspace%20URL/singular: 9da6c012e1b512d8c7fbd812626c4675
+    Error%20upgrading%20subscription/singular: 57cc47581c7faaffb3b1721b6352b576
     Error%20uploading%20profile%20image/singular: 0ba02753a797a74c6ea7b622c9f69c71
     Everything%20in%20the%20free%20plan%2C%20plus%3A/singular: 62b44c4973b92b806c69a4b15e0256dc
     Everything%20you%20need%2C%20free%20forever.%20Unlimited%20boards%2C%20unlimited%20lists%2C%20unlimited%20cards.%20Upgrade%20any%20time./singular: fa21632ab1468edf10acda2fe7b71323
@@ -176,6 +181,7 @@ checksums:
     Find%20answers%20to%20common%20questions%20about%20the%20project.%20Can't%20find%20what%20you're%20looking%20for%3F%20Feel%20free%20to%20%3C0%3Econtact%20us%3C%2F0%3E./singular: 4d99230dad703bf2d71ba670c2f79d3d
     For%20long-term%20sustainability%2C%20we%20recognise%20all%20good%20open%20source%20projects%20need%20a%20source%20of%20revenue.%20Ours%20comes%20from%20the%20paid%20cloud%20offering%20for%20workspaces%20with%20multiple%20users%20(free%20during%20the%20beta)%20and%20for%20custom%20workspace%20slugs.%20There's%20no%20obligation%20to%20use%20it%2C%20and%20you%20can%20self-host%20the%20software%20on%20your%20own%20infrastructure%20free%20of%20charge./singular: 4eedacd4311ff69bf0fd87083c90a268
     Free/singular: 0326365539c004f6088656f692602078
+    Free%20Plan/singular: c995acccc1e3cba379786892a5b4d4e5
     Free%2C%20forever/singular: ae4f2f81e88a50b5f250ef8e8e77e74b
     Full-time/singular: fe6e201f6676ae354111435cf6c76910
     Fun/singular: 395bdc48e943762b6cde649f4a96771d
@@ -216,6 +222,7 @@ checksums:
     Invite/singular: 181884cea804cbde665f160811ee7ad0
     Invite%20another/singular: acb543563dab7edbcf46060a53ade3a3
     Invite%20member/singular: ade922db1be6b26bc979565ce5de2bc7
+    Inviting%20members%20requires%20a%20Team%20Plan.%20You'll%20be%20redirected%20to%20upgrade%20your%20workspace./singular: 03eeed2d715e770259f722ba48a61ab3
     Junior/singular: ed1bd2c59a824fdcdd56fc8a0660fe9f
     Kanban%20is%20better%20with%20a%20team.%20Perfect%20for%20small%20and%20growing%20teams%20looking%20to%20collaborate./singular: a77bee43046b260797c8936ad23e9223
     Kanban%20reimagined/singular: 613ccfdd9f54c66cbf68cfa313498766
@@ -241,6 +248,7 @@ checksums:
     Members/singular: 0932e80cba1e3e0a7f52bb67ff31da32
     Members%20%7C%20%7B0%7D/singular: a29e3e9f1076acd178c417d047584e88
     Monthly/singular: 818f1192e32bb855597f930d3e78806e
+    monthly%20billing/singular: e228107df80015377112d41f4f155cb3
     moved%20the%20card%20from%20%3C0%3E%7B0%7D%3C%2F0%3E%20to%3C1%3E%7B1%7D%3C%2F1%3E/singular: 11edf0427766c26db541d46379dc3c16
     moved%20the%20card%20to%20another%20list/singular: 2e8c41bfafb42fa299ce56e4300205ff
     Name/singular: 9368b5a047572b6051f334af5aa76819
@@ -339,6 +347,7 @@ checksums:
     Support/singular: 55aab5fd0f31a9cb055a2edeeedfaf63
     Support%20the%20development%20of%20the%20project/singular: c63bab228ab2b1be4370c668a99cd278
     System/singular: 803281c327a02a2feba182f4a2b38311
+    Team%20Plan/singular: 3f0ae9c914f16ceb9a0d7db868f4aa20
     Teams/singular: b63448c05270497973ac4407047dae02
     Templates/singular: 8ed62f56c81fa96c0f3182acb331bf63
     Terms%20of%20service/singular: 0b8a8b23aff021a6cde79613fdb39c28
@@ -397,6 +406,7 @@ checksums:
     updated%20the%20title/singular: 98cf8f12923ec1a58e767e3a40863b21
     updated%20the%20title%20to%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: aca196d729401d8adc5c8ca9d558840e
     Upgrade/singular: 63c3b52882e0d779859307d672c178c2
+    Upgrade%20to%20Team%20Plan/singular: 40e2ef151266937f8bbe63b3d361f645
     Urgent/singular: e79afcd4398e52e10e7e8243a7eecabe
     URL%20can%20only%20contain%20letters%2C%20numbers%2C%20and%20hyphens/singular: 875d37d2d920f98ef60a314eda8a5d9a
     URL%20cannot%20exceed%2024%20characters/singular: 395c25732b84ac1f5b63ee310da08e93

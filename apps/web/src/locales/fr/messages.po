@@ -23,7 +23,7 @@ msgstr ", ou consultez notre"
 
 #. placeholder {0}: card?.title ?? "Card"
 #. placeholder {1}: board?.name ?? "Board"
-#: src/views/card/index.tsx:213
+#: src/views/card/index.tsx:214
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
@@ -36,11 +36,20 @@ msgstr "{0} étiquettes"
 msgid "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
 msgstr "{boardCount, plural, one {Importer le tableau (1)} other {Importer les tableaux ({boardCount})}}"
 
+#: src/views/members/components/InviteMemberForm.tsx:91
+#: src/views/members/components/InviteMemberForm.tsx:106
+msgid "$10/month"
+msgstr "10 $/mois"
+
+#: src/views/members/components/InviteMemberForm.tsx:106
+msgid "$8/month"
+msgstr "8 $/mois"
+
 #: src/views/home/components/Pricing.tsx:36
 msgid "1 user"
 msgstr "1 utilisateur"
 
-#: src/views/home/index.tsx:71
+#: src/views/home/index.tsx:72
 msgid "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
 msgstr "Une application kanban puissante et flexible qui vous aide à organiser le travail, suivre les progrès et livrer des résultats—le tout en un seul endroit."
 
@@ -48,8 +57,8 @@ msgstr "Une application kanban puissante et flexible qui vous aide à organiser 
 msgid "Account deleted"
 msgstr "Compte supprimé"
 
-#: src/views/public/board/CardModal.tsx:140
-#: src/views/card/index.tsx:288
+#: src/views/card/index.tsx:289
+#: src/views/public/board/CardModal.tsx:143
 msgid "Activity"
 msgstr "Activité"
 
@@ -61,8 +70,8 @@ msgstr "Journaux d'activité"
 msgid "Add a card"
 msgstr "Ajouter une carte"
 
-#: src/views/card/components/NewCommentForm.tsx:57
 #: src/views/card/components/Comment.tsx:146
+#: src/views/card/components/NewCommentForm.tsx:57
 msgid "Add a comment..."
 msgstr "Ajouter un commentaire..."
 
@@ -87,8 +96,8 @@ msgstr "Ajouter des détails..."
 msgid "Add label"
 msgstr "Ajouter une étiquette"
 
-#: src/views/members/components/InviteMemberForm.tsx:85
 #: src/views/card/components/MemberSelector.tsx:130
+#: src/views/members/components/InviteMemberForm.tsx:149
 msgid "Add member"
 msgstr "Ajouter un membre"
 
@@ -123,13 +132,13 @@ msgstr "a ajouté l'élément <0>{0}</0> à la checklist"
 msgid "added label <0>{0}</0>"
 msgstr "a ajouté l'étiquette <0>{0}</0>"
 
+#: src/views/members/components/InviteMemberForm.tsx:186
+msgid "Adding a new member will cost an additional {price} ({billingType}) per seat."
+msgstr "L'ajout d'un nouveau membre coûtera {price} supplémentaires ({billingType}) par siège."
+
 #: src/views/home/components/Pricing.tsx:55
 msgid "Admin roles"
 msgstr "Rôles d'administrateur"
-
-#: src/views/home/components/Pricing.tsx:97
-msgid "All seats are free during the beta until Sept 1st!"
-msgstr "Tous les sièges sont gratuits pendant la bêta jusqu'au 1er sept. !"
 
 #: src/views/home/components/Footer.tsx:18
 msgid "All systems operational"
@@ -209,8 +218,16 @@ msgstr "Backlog"
 msgid "Basic Kanban"
 msgstr "Kanban basique"
 
-#: src/views/settings/index.tsx:198
+#: src/views/members/components/InviteMemberForm.tsx:107
+msgid "billed annually"
+msgstr "facturation annuelle"
+
+#: src/views/members/components/InviteMemberForm.tsx:107
+msgid "billed monthly"
+msgstr "facturation mensuelle"
+
 #: src/views/boards/components/TemplateBoards.tsx:55
+#: src/views/settings/index.tsx:198
 msgid "Billing"
 msgstr "Facturation"
 
@@ -234,8 +251,8 @@ msgstr "Le nom du tableau ne peut pas dépasser 100 caractères"
 msgid "Board name is required"
 msgstr "Le nom du tableau est requis"
 
-#: src/views/public/board/index.tsx:143
 #: src/views/board/index.tsx:357
+#: src/views/public/board/index.tsx:148
 msgid "Board not found"
 msgstr "Tableau introuvable"
 
@@ -247,7 +264,7 @@ msgstr "L'URL du tableau ne peut contenir que des lettres, des chiffres et des t
 msgid "Board URL cannot exceed 60 characters"
 msgstr "L'URL du tableau ne peut pas dépasser 60 caractères"
 
-#: src/views/public/board/index.tsx:59
+#: src/views/public/board/index.tsx:64
 msgid "Board URL copied to clipboard"
 msgstr "URL du tableau copiée dans le presse-papiers"
 
@@ -263,8 +280,8 @@ msgstr "Visibilité du tableau"
 msgid "Board visibility updated"
 msgstr "Visibilité du tableau mise à jour"
 
-#: src/views/boards/index.tsx:27
 #: src/components/SideNavigation.tsx:68
+#: src/views/boards/index.tsx:27
 msgid "Boards"
 msgstr "Tableaux"
 
@@ -285,20 +302,20 @@ msgstr "Bug"
 msgid "Bug Report"
 msgstr "Rapport de bug"
 
-#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
-#: src/views/settings/components/DeleteAccountConfirmation.tsx:88
-#: src/views/settings/components/CustomURLConfirmation.tsx:50
-#: src/views/settings/components/ChangePasswordConfirmation.tsx:168
-#: src/views/members/components/DeleteMemberConfirmation.tsx:55
-#: src/views/card/components/DeleteCommentConfirmation.tsx:76
-#: src/views/card/components/DeleteChecklistConfirmation.tsx:63
-#: src/views/card/components/DeleteCardConfirmation.tsx:86
-#: src/views/card/components/Comment.tsx:158
 #: src/components/DeleteLabelConfirmation.tsx:49
+#: src/views/card/components/Comment.tsx:158
+#: src/views/card/components/DeleteCardConfirmation.tsx:86
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:63
+#: src/views/card/components/DeleteCommentConfirmation.tsx:76
+#: src/views/members/components/DeleteMemberConfirmation.tsx:55
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:168
+#: src/views/settings/components/CustomURLConfirmation.tsx:50
+#: src/views/settings/components/DeleteAccountConfirmation.tsx:88
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
 msgid "Cancel"
 msgstr "Annuler"
 
-#: src/views/card/index.tsx:259
+#: src/views/card/index.tsx:260
 msgid "Card not found"
 msgstr "Carte introuvable"
 
@@ -306,10 +323,10 @@ msgstr "Carte introuvable"
 msgid "Card title"
 msgstr "Titre de la carte"
 
-#: src/views/settings/index.tsx:291
-#: src/views/settings/index.tsx:301
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:109
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:178
+#: src/views/settings/index.tsx:291
+#: src/views/settings/index.tsx:301
 msgid "Change Password"
 msgstr "Modifier le mot de passe"
 
@@ -317,8 +334,8 @@ msgstr "Modifier le mot de passe"
 msgid "Change the language of the app."
 msgstr "Changer la langue de l'application."
 
-#: src/views/auth/signup/index.tsx:67
 #: src/views/auth/login/index.tsx:41
+#: src/views/auth/signup/index.tsx:67
 msgid "Check your inbox"
 msgstr "Vérifiez votre boîte de réception"
 
@@ -330,8 +347,8 @@ msgstr "Nom de la checklist"
 msgid "Clear filters"
 msgstr "Effacer les filtres"
 
-#: src/views/auth/signup/index.tsx:72
 #: src/views/auth/login/index.tsx:46
+#: src/views/auth/signup/index.tsx:72
 msgid "Click on the link we've sent to {magicLinkRecipient} to sign in."
 msgstr "Cliquez sur le lien que nous avons envoyé à {magicLinkRecipient} pour vous connecter."
 
@@ -380,8 +397,8 @@ msgstr "Confirmer le changement d'URL"
 msgid "Confirm your new password"
 msgstr "Confirmez votre nouveau mot de passe"
 
-#: src/views/settings/index.tsx:235
 #: src/views/boards/components/ImportBoardsForm.tsx:157
+#: src/views/settings/index.tsx:235
 msgid "Connect Trello"
 msgstr "Connecter Trello"
 
@@ -405,12 +422,12 @@ msgstr "Contactez-nous"
 msgid "Content Creation"
 msgstr "Création de contenu"
 
-#: src/components/AuthForm.tsx:335
+#: src/components/AuthForm.tsx:366
 msgid "Continue with "
 msgstr "Continuer avec "
 
-#. placeholder {0}: provider.name
-#: src/components/AuthForm.tsx:269
+#. placeholder {0}: key === "oidc" ? oidcProviderName : provider.name
+#: src/components/AuthForm.tsx:297
 msgid "Continue with {0}"
 msgstr "Continuer avec {0}"
 
@@ -418,9 +435,9 @@ msgstr "Continuer avec {0}"
 msgid "Control who can view and edit your boards."
 msgstr "Contrôlez qui peut voir et modifier vos tableaux."
 
-#: src/views/board/components/NewListForm.tsx:140
-#: src/views/board/components/NewCardForm.tsx:458
 #: src/components/LabelForm.tsx:213
+#: src/views/board/components/NewCardForm.tsx:458
+#: src/views/board/components/NewListForm.tsx:140
 msgid "Create another"
 msgstr "Créer un autre"
 
@@ -452,8 +469,8 @@ msgstr "Créer un nouveau tableau"
 msgid "Create new key"
 msgstr "Créer une nouvelle clé"
 
-#: src/views/card/components/LabelSelector.tsx:98
 #: src/views/board/components/NewCardForm.tsx:394
+#: src/views/card/components/LabelSelector.tsx:98
 msgid "Create new label"
 msgstr "Créer une nouvelle étiquette"
 
@@ -461,8 +478,8 @@ msgstr "Créer une nouvelle étiquette"
 msgid "Create new list"
 msgstr "Créer une nouvelle liste"
 
+#: src/components/NewWorkspaceForm.tsx:94
 #: src/components/WorkspaceMenu.tsx:116
-#: src/components/NewWorkspaceForm.tsx:93
 msgid "Create workspace"
 msgstr "Créer un espace de travail"
 
@@ -494,17 +511,17 @@ msgstr "Support client"
 msgid "Dark"
 msgstr "Sombre"
 
-#: src/views/card/components/DeleteCommentConfirmation.tsx:82
-#: src/views/card/components/DeleteChecklistConfirmation.tsx:66
-#: src/views/card/components/DeleteCardConfirmation.tsx:92
-#: src/components/LabelForm.tsx:228
 #: src/components/DeleteLabelConfirmation.tsx:51
+#: src/components/LabelForm.tsx:228
+#: src/views/card/components/DeleteCardConfirmation.tsx:92
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:66
+#: src/views/card/components/DeleteCommentConfirmation.tsx:82
 msgid "Delete"
 msgstr "Supprimer"
 
+#: src/views/settings/components/DeleteAccountConfirmation.tsx:96
 #: src/views/settings/index.tsx:309
 #: src/views/settings/index.tsx:319
-#: src/views/settings/components/DeleteAccountConfirmation.tsx:96
 msgid "Delete account"
 msgstr "Supprimer le compte"
 
@@ -524,9 +541,9 @@ msgstr "Supprimer le commentaire"
 msgid "Delete list"
 msgstr "Supprimer la liste"
 
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:106
 #: src/views/settings/index.tsx:272
 #: src/views/settings/index.tsx:283
-#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:106
 msgid "Delete workspace"
 msgstr "Supprimer l'espace de travail"
 
@@ -588,9 +605,9 @@ msgstr "documentation"
 msgid "Docs"
 msgstr "Documentation"
 
-#: src/views/home/components/Footer.tsx:77
-#: src/views/boards/components/TemplateBoards.tsx:23
 #: src/components/UserMenu.tsx:191
+#: src/views/boards/components/TemplateBoards.tsx:23
+#: src/views/home/components/Footer.tsx:77
 msgid "Documentation"
 msgstr "Documentation"
 
@@ -605,8 +622,8 @@ msgstr "Vous n'avez pas de compte ? <0><1>Inscrivez-vous</1></0>"
 msgid "Done"
 msgstr "Fait"
 
-#: src/views/board/components/UpdateBoardSlugForm.tsx:115
 #: src/views/board/components/BoardDropdown.tsx:15
+#: src/views/board/components/UpdateBoardSlugForm.tsx:115
 msgid "Edit board URL"
 msgstr "Modifier l'URL du tableau"
 
@@ -626,11 +643,11 @@ msgstr "Modifier l'URL de l'espace de travail"
 msgid "Editing"
 msgstr "Édition"
 
-#: src/components/AuthForm.tsx:337
+#: src/components/AuthForm.tsx:368
 msgid "email"
 msgstr "e-mail"
 
-#: src/views/members/components/InviteMemberForm.tsx:99
+#: src/views/members/components/InviteMemberForm.tsx:163
 msgid "Email"
 msgstr "E-mail"
 
@@ -646,11 +663,11 @@ msgstr "Saisissez votre mot de passe actuel"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Saisissez votre mot de passe actuel et choisissez un nouveau mot de passe sécurisé."
 
-#: src/components/AuthForm.tsx:302
+#: src/components/AuthForm.tsx:333
 msgid "Enter your email address"
 msgstr "Saisissez votre adresse e-mail"
 
-#: src/components/AuthForm.tsx:290
+#: src/components/AuthForm.tsx:321
 msgid "Enter your name"
 msgstr "Saisissez votre nom"
 
@@ -658,7 +675,7 @@ msgstr "Saisissez votre nom"
 msgid "Enter your new password"
 msgstr "Saisissez votre nouveau mot de passe"
 
-#: src/components/AuthForm.tsx:315
+#: src/components/AuthForm.tsx:346
 msgid "Enter your password"
 msgstr "Saisissez votre mot de passe"
 
@@ -682,8 +699,8 @@ msgstr "Erreur lors de la suppression de l'espace de travail"
 msgid "Error disconnecting Trello"
 msgstr "Erreur lors de la déconnexion de Trello"
 
-#: src/views/members/components/InviteMemberForm.tsx:57
-#: src/views/members/components/InviteMemberForm.tsx:63
+#: src/views/members/components/InviteMemberForm.tsx:76
+#: src/views/members/components/InviteMemberForm.tsx:82
 msgid "Error inviting member"
 msgstr "Erreur lors de l'invitation du membre"
 
@@ -707,6 +724,10 @@ msgstr "Erreur lors de la mise à jour du nom de l'espace de travail"
 msgid "Error updating workspace URL"
 msgstr "Erreur lors de la mise à jour de l'URL de l'espace de travail"
 
+#: src/views/members/components/InviteMemberForm.tsx:132
+msgid "Error upgrading subscription"
+msgstr "Erreur lors de la mise à niveau de l'abonnement"
+
 #: src/views/settings/components/Avatar.tsx:56
 #: src/views/settings/components/Avatar.tsx:97
 msgid "Error uploading profile image"
@@ -725,12 +746,12 @@ msgid "Execution"
 msgstr "Exécution"
 
 #. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
-#: src/components/AuthForm.tsx:241
+#: src/components/AuthForm.tsx:269
 msgid "Failed to login with {0}. Please try again."
 msgstr "Échec de connexion avec {0}. Veuillez réessayer."
 
-#: src/views/home/components/Footer.tsx:51
 #: src/views/home/components/Faqs.tsx:143
+#: src/views/home/components/Footer.tsx:51
 msgid "FAQs"
 msgstr "FAQ"
 
@@ -742,14 +763,14 @@ msgstr "Fonctionnalité"
 msgid "Feature Request"
 msgstr "Demande de fonctionnalité"
 
-#: src/views/home/components/Header.tsx:14
-#: src/views/home/components/Footer.tsx:49
 #: src/views/home/components/Features.tsx:125
+#: src/views/home/components/Footer.tsx:49
+#: src/views/home/components/Header.tsx:14
 msgid "Features"
 msgstr "Fonctionnalités"
 
-#: src/components/UserMenu.tsx:199
 #: src/components/FeedbackModal.tsx:59
+#: src/components/UserMenu.tsx:199
 msgid "Feedback"
 msgstr "Commentaires"
 
@@ -773,6 +794,11 @@ msgstr "Pour une durabilité à long terme, nous reconnaissons que tous les bons
 msgid "Free"
 msgstr "Gratuit"
 
+#: src/views/members/components/InviteMemberForm.tsx:192
+#: src/views/members/index.tsx:184
+msgid "Free Plan"
+msgstr "Forfait gratuit"
+
 #: src/views/home/components/Pricing.tsx:34
 msgid "Free, forever"
 msgstr "Gratuit, pour toujours"
@@ -785,10 +811,10 @@ msgstr "Temps plein"
 msgid "Fun"
 msgstr "Amusant"
 
+#: src/views/auth/signup/index.tsx:67
+#: src/views/home/components/Cta.tsx:61
 #: src/views/home/components/Header.tsx:102
 #: src/views/home/components/Header.tsx:141
-#: src/views/home/components/Cta.tsx:61
-#: src/views/auth/signup/index.tsx:67
 msgid "Get started"
 msgstr "Commencer"
 
@@ -813,7 +839,7 @@ msgstr "Commencez gratuitement aujourd'hui"
 msgid "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team."
 msgstr "Commencez gratuitement, sans limites d'utilisation. Pour la collaboration, passez à un forfait adapté à la taille de votre équipe."
 
-#: src/views/home/index.tsx:75
+#: src/views/home/index.tsx:76
 msgid "Get started on Cloud"
 msgstr "Commencer sur le Cloud"
 
@@ -924,22 +950,26 @@ msgstr "Intégrations"
 msgid "Interviewing"
 msgstr "Entretien"
 
-#: src/views/members/components/InviteMemberForm.tsx:26
+#: src/views/members/components/InviteMemberForm.tsx:45
 msgid "Invalid email address"
 msgstr "Adresse e-mail invalide"
 
-#: src/views/members/index.tsx:169
+#: src/views/members/index.tsx:193
 msgid "Invite"
 msgstr "Inviter"
 
-#: src/views/members/components/InviteMemberForm.tsx:113
+#: src/views/members/components/InviteMemberForm.tsx:207
 msgid "Invite another"
 msgstr "Inviter un autre"
 
-#: src/views/members/components/InviteMemberForm.tsx:123
 #: src/views/card/components/MemberSelector.tsx:112
+#: src/views/members/components/InviteMemberForm.tsx:231
 msgid "Invite member"
 msgstr "Inviter un membre"
+
+#: src/views/members/components/InviteMemberForm.tsx:195
+msgid "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace."
+msgstr "L'invitation de membres nécessite un forfait d'équipe. Vous serez redirigé pour mettre à niveau votre espace de travail."
 
 #: src/views/boards/components/TemplateBoards.tsx:69
 msgid "Junior"
@@ -953,14 +983,14 @@ msgstr "Kanban est meilleur en équipe. Parfait pour les petites équipes et cel
 msgid "Kanban reimagined"
 msgstr "Kanban réinventé"
 
-#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:67
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:57
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:67
 msgid "Keep in mind that this action is irreversible."
 msgstr "Gardez à l'esprit que cette action est irréversible."
 
-#: src/views/card/index.tsx:117
-#: src/views/board/components/NewCardForm.tsx:398
 #: src/views/board/components/Filters.tsx:101
+#: src/views/board/components/NewCardForm.tsx:398
+#: src/views/card/index.tsx:117
 msgid "Labels"
 msgstr "Étiquettes"
 
@@ -988,7 +1018,7 @@ msgstr "Licence"
 msgid "Light"
 msgstr "Clair"
 
-#: src/views/public/board/index.tsx:57
+#: src/views/public/board/index.tsx:62
 msgid "Link copied"
 msgstr "Lien copié"
 
@@ -1016,7 +1046,7 @@ msgstr "Long terme"
 msgid "Low Priority"
 msgstr "Priorité basse"
 
-#: src/components/AuthForm.tsx:338
+#: src/components/AuthForm.tsx:369
 msgid "magic link"
 msgstr "lien magique"
 
@@ -1033,22 +1063,26 @@ msgstr "a marqué l'élément <0>{0}</0> de la checklist comme incomplet"
 msgid "Medium Priority"
 msgstr "Priorité moyenne"
 
-#: src/views/members/index.tsx:161
-#: src/views/card/index.tsx:125
-#: src/views/board/components/NewCardForm.tsx:357
-#: src/views/board/components/Filters.tsx:93
 #: src/components/SideNavigation.tsx:73
+#: src/views/board/components/Filters.tsx:93
+#: src/views/board/components/NewCardForm.tsx:357
+#: src/views/card/index.tsx:125
+#: src/views/members/index.tsx:171
 msgid "Members"
 msgstr "Membres"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/members/index.tsx:157
+#: src/views/members/index.tsx:167
 msgid "Members | {0}"
 msgstr "Membres | {0}"
 
 #: src/views/home/components/Pricing.tsx:14
 msgid "Monthly"
 msgstr "Mensuel"
+
+#: src/views/members/components/InviteMemberForm.tsx:92
+msgid "monthly billing"
+msgstr "facturation mensuelle"
 
 #. placeholder {0}: truncate(fromList)
 #. placeholder {1}: truncate(toList)
@@ -1060,8 +1094,8 @@ msgstr "a déplacé la carte de <0>{0}</0> vers <1>{1}</1>"
 msgid "moved the card to another list"
 msgstr "a déplacé la carte vers une autre liste"
 
-#: src/views/boards/components/NewBoardForm.tsx:99
 #: src/components/LabelForm.tsx:135
+#: src/views/boards/components/NewBoardForm.tsx:99
 msgid "Name"
 msgstr "Nom"
 
@@ -1093,8 +1127,8 @@ msgstr "Nouvel import"
 msgid "New label"
 msgstr "Nouvelle étiquette"
 
-#: src/views/board/index.tsx:394
 #: src/views/board/components/NewListForm.tsx:112
+#: src/views/board/index.tsx:394
 msgid "New list"
 msgstr "Nouvelle liste"
 
@@ -1110,7 +1144,7 @@ msgstr "Le nouveau mot de passe doit être différent du mot de passe actuel"
 msgid "New Ticket"
 msgstr "Nouveau ticket"
 
-#: src/components/NewWorkspaceForm.tsx:64
+#: src/components/NewWorkspaceForm.tsx:65
 msgid "New workspace"
 msgstr "Nouvel espace de travail"
 
@@ -1130,7 +1164,7 @@ msgstr "Aucun tableau"
 msgid "No boards found"
 msgstr "Aucun tableau trouvé"
 
-#: src/views/home/index.tsx:85
+#: src/views/home/index.tsx:86
 msgid "No credit card required"
 msgstr "Aucune carte de crédit requise"
 
@@ -1154,7 +1188,7 @@ msgstr "Une fois que vous supprimez votre compte, il n'y a pas de retour possibl
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Une fois que vous supprimez votre espace de travail, il n'y a pas de retour possible. Cette action ne peut pas être annulée."
 
-#: src/components/AuthForm.tsx:280
+#: src/components/AuthForm.tsx:311
 msgid "or"
 msgstr "ou"
 
@@ -1182,11 +1216,11 @@ msgstr "Le mot de passe doit comporter au moins 8 caractères"
 msgid "Passwords do not match"
 msgstr "Les mots de passe ne correspondent pas"
 
-#: src/views/home/components/Pricing.tsx:101
+#: src/views/home/components/Pricing.tsx:96
 msgid "Payment frequency"
 msgstr "Fréquence de paiement"
 
-#: src/views/members/index.tsx:118
+#: src/views/members/index.tsx:128
 msgid "Pending"
 msgstr "En attente"
 
@@ -1207,15 +1241,15 @@ msgstr "Planification"
 msgid "Please confirm your new password"
 msgstr "Veuillez confirmer votre nouveau mot de passe"
 
-#: src/components/AuthForm.tsx:306
+#: src/components/AuthForm.tsx:337
 msgid "Please enter a valid email address"
 msgstr "Veuillez saisir une adresse e-mail valide"
 
-#: src/components/AuthForm.tsx:294
+#: src/components/AuthForm.tsx:325
 msgid "Please enter a valid name"
 msgstr "Veuillez saisir un nom valide"
 
-#: src/components/AuthForm.tsx:319
+#: src/components/AuthForm.tsx:350
 msgid "Please enter a valid password"
 msgstr "Veuillez saisir un mot de passe valide"
 
@@ -1223,46 +1257,47 @@ msgstr "Veuillez saisir un mot de passe valide"
 msgid "Please select a file to upload."
 msgstr "Veuillez sélectionner un fichier à télécharger."
 
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:74
-#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:57
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:62
-#: src/views/settings/components/UpdateDisplayNameForm.tsx:55
-#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:46
-#: src/views/settings/components/DeleteAccountConfirmation.tsx:40
-#: src/views/settings/components/Avatar.tsx:40
-#: src/views/settings/components/Avatar.tsx:98
-#: src/views/members/components/InviteMemberForm.tsx:64
-#: src/views/members/components/DeleteMemberConfirmation.tsx:28
-#: src/views/card/index.tsx:172
-#: src/views/card/components/NewCommentForm.tsx:31
-#: src/views/card/components/NewChecklistItemForm.tsx:89
-#: src/views/card/components/NewChecklistForm.tsx:70
-#: src/views/card/components/MemberSelector.tsx:80
-#: src/views/card/components/ListSelector.tsx:53
-#: src/views/card/components/LabelSelector.tsx:73
-#: src/views/card/components/DeleteCommentConfirmation.tsx:45
-#: src/views/card/components/DeleteChecklistConfirmation.tsx:37
-#: src/views/card/components/DeleteCardConfirmation.tsx:52
-#: src/views/card/components/Comment.tsx:64
-#: src/views/card/components/ChecklistNameInput.tsx:46
-#: src/views/card/components/ChecklistItemRow.tsx:60
-#: src/views/card/components/ChecklistItemRow.tsx:88
-#: src/views/boards/components/ImportBoardsForm.tsx:205
+#: src/components/DeleteLabelConfirmation.tsx:26
+#: src/components/FeedbackModal.tsx:41
+#: src/components/NewWorkspaceForm.tsx:42
+#: src/views/board/components/NewCardForm.tsx:174
+#: src/views/board/components/NewListForm.tsx:78
+#: src/views/board/components/UpdateBoardSlugForm.tsx:72
+#: src/views/board/components/VisibilityButton.tsx:53
 #: src/views/board/index.tsx:134
 #: src/views/board/index.tsx:190
-#: src/views/board/components/VisibilityButton.tsx:53
-#: src/views/board/components/UpdateBoardSlugForm.tsx:72
-#: src/views/board/components/NewListForm.tsx:78
-#: src/views/board/components/NewCardForm.tsx:174
-#: src/components/NewWorkspaceForm.tsx:41
-#: src/components/FeedbackModal.tsx:41
-#: src/components/DeleteLabelConfirmation.tsx:26
+#: src/views/boards/components/ImportBoardsForm.tsx:205
+#: src/views/card/components/ChecklistItemRow.tsx:60
+#: src/views/card/components/ChecklistItemRow.tsx:88
+#: src/views/card/components/ChecklistNameInput.tsx:46
+#: src/views/card/components/Comment.tsx:64
+#: src/views/card/components/DeleteCardConfirmation.tsx:52
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:37
+#: src/views/card/components/DeleteCommentConfirmation.tsx:45
+#: src/views/card/components/LabelSelector.tsx:73
+#: src/views/card/components/ListSelector.tsx:53
+#: src/views/card/components/MemberSelector.tsx:80
+#: src/views/card/components/NewChecklistForm.tsx:70
+#: src/views/card/components/NewChecklistItemForm.tsx:89
+#: src/views/card/components/NewCommentForm.tsx:31
+#: src/views/card/index.tsx:173
+#: src/views/members/components/DeleteMemberConfirmation.tsx:28
+#: src/views/members/components/InviteMemberForm.tsx:83
+#: src/views/members/components/InviteMemberForm.tsx:133
+#: src/views/settings/components/Avatar.tsx:40
+#: src/views/settings/components/Avatar.tsx:98
+#: src/views/settings/components/DeleteAccountConfirmation.tsx:40
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:46
+#: src/views/settings/components/UpdateDisplayNameForm.tsx:55
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:62
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:57
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:74
 msgid "Please try again later, or contact customer support."
 msgstr "Veuillez réessayer plus tard ou contacter le service client."
 
-#: src/views/home/components/Pricing.tsx:85
-#: src/views/home/components/Header.tsx:15
 #: src/views/home/components/Footer.tsx:50
+#: src/views/home/components/Header.tsx:15
+#: src/views/home/components/Pricing.tsx:85
 msgid "Pricing"
 msgstr "Tarifs"
 
@@ -1318,7 +1353,7 @@ msgstr "À distance"
 msgid "Remove"
 msgstr "Supprimer"
 
-#: src/views/members/index.tsx:132
+#: src/views/members/index.tsx:142
 msgid "Remove member"
 msgstr "Supprimer le membre"
 
@@ -1369,12 +1404,12 @@ msgstr "Révision"
 msgid "Revoke"
 msgstr "Révoquer"
 
-#: src/views/home/components/Header.tsx:13
 #: src/views/home/components/Footer.tsx:36
+#: src/views/home/components/Header.tsx:13
 msgid "Roadmap"
 msgstr "Feuille de route"
 
-#: src/views/members/index.tsx:191
+#: src/views/members/index.tsx:215
 msgid "Role"
 msgstr "Rôle"
 
@@ -1406,7 +1441,7 @@ msgstr "Sélectionner la source"
 msgid "Self Host"
 msgstr "Auto-hébergement"
 
-#: src/views/home/index.tsx:81
+#: src/views/home/index.tsx:82
 msgid "Self host with Github"
 msgstr "Auto-hébergement avec Github"
 
@@ -1422,8 +1457,8 @@ msgstr "Envoyer des commentaires"
 msgid "Senior"
 msgstr "Senior"
 
-#: src/views/settings/index.tsx:140
 #: src/components/SideNavigation.tsx:78
+#: src/views/settings/index.tsx:140
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -1450,7 +1485,7 @@ msgstr "Inscription désactivée"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "L'inscription est actuellement désactivée. Veuillez réessayer plus tard."
 
-#: src/components/AuthForm.tsx:335
+#: src/components/AuthForm.tsx:366
 msgid "Sign up with "
 msgstr "S'inscrire avec "
 
@@ -1470,12 +1505,12 @@ msgstr "Réseaux sociaux"
 msgid "Software Development"
 msgstr "Développement logiciel"
 
-#: src/views/home/index.tsx:37
+#: src/views/home/index.tsx:38
 msgid "Star on Github"
 msgstr "Étoile sur Github"
 
-#: src/components/AuthForm.tsx:188
-#: src/components/AuthForm.tsx:205
+#: src/components/AuthForm.tsx:203
+#: src/components/AuthForm.tsx:220
 msgid "Success"
 msgstr "Succès"
 
@@ -1490,6 +1525,11 @@ msgstr "Soutenir le développement du projet"
 #: src/components/UserMenu.tsx:139
 msgid "System"
 msgstr "Système"
+
+#: src/views/members/components/InviteMemberForm.tsx:183
+#: src/views/members/index.tsx:184
+msgid "Team Plan"
+msgstr "Forfait d'équipe"
 
 #: src/views/home/components/Pricing.tsx:46
 msgid "Teams"
@@ -1515,7 +1555,7 @@ msgstr "Le mot de passe actuel que vous avez saisi est incorrect."
 msgid "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
 msgstr "La principale différence entre Kan et Trello est que Kan est open source, permettant à chacun de consulter, modifier et contribuer à notre code. Notre offre cloud ne comporte également aucune restriction sur les fonctionnalités pour un usage individuel, alors que Trello verrouille des fonctionnalités de base comme le nombre de tableaux que vous pouvez créer derrière un paywall."
 
-#: src/views/home/index.tsx:65
+#: src/views/home/index.tsx:66
 msgid "The open source <0/> alternative to Trello"
 msgstr "L'alternative open source <0/> à Trello"
 
@@ -1532,14 +1572,14 @@ msgstr "Thème"
 msgid "They won't be able to access this workspace."
 msgstr "Ils ne pourront plus accéder à cet espace de travail."
 
-#: src/views/card/components/DeleteCommentConfirmation.tsx:68
-#: src/views/card/components/DeleteChecklistConfirmation.tsx:58
-#: src/views/card/components/DeleteCardConfirmation.tsx:78
 #: src/components/DeleteLabelConfirmation.tsx:44
+#: src/views/card/components/DeleteCardConfirmation.tsx:78
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:58
+#: src/views/card/components/DeleteCommentConfirmation.tsx:68
 msgid "This action can't be undone."
 msgstr "Cette action ne peut pas être annulée."
 
-#: src/views/public/board/index.tsx:146
+#: src/views/public/board/index.tsx:151
 msgid "This board is private or does not exist"
 msgstr "Ce tableau est privé ou n'existe pas"
 
@@ -1604,7 +1644,7 @@ msgstr "Impossible de créer la liste de contrôle"
 msgid "Unable to create list"
 msgstr "Impossible de créer une liste"
 
-#: src/components/NewWorkspaceForm.tsx:40
+#: src/components/NewWorkspaceForm.tsx:41
 msgid "Unable to create workspace"
 msgstr "Impossible de créer l'espace de travail"
 
@@ -1640,8 +1680,8 @@ msgstr "Impossible de mettre à jour l'URL du tableau"
 msgid "Unable to update board visibility"
 msgstr "Impossible de mettre à jour la visibilité du tableau"
 
-#: src/views/card/index.tsx:171
 #: src/views/board/index.tsx:189
+#: src/views/card/index.tsx:172
 msgid "Unable to update card"
 msgstr "Impossible de mettre à jour la carte"
 
@@ -1661,8 +1701,8 @@ msgstr "Impossible de mettre à jour le commentaire"
 msgid "Unable to update labels"
 msgstr "Impossible de mettre à jour les étiquettes"
 
-#: src/views/card/components/ListSelector.tsx:52
 #: src/views/board/index.tsx:133
+#: src/views/card/components/ListSelector.tsx:52
 msgid "Unable to update list"
 msgstr "Impossible de mettre à jour la liste"
 
@@ -1703,11 +1743,11 @@ msgstr "Commentaires illimités"
 msgid "Unlimited lists"
 msgstr "Listes illimitées"
 
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:154
-#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:82
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:90
-#: src/views/settings/components/UpdateDisplayNameForm.tsx:79
 #: src/views/board/components/UpdateBoardSlugForm.tsx:174
+#: src/views/settings/components/UpdateDisplayNameForm.tsx:79
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:90
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:82
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:154
 msgid "Update"
 msgstr "Mettre à jour"
 
@@ -1736,6 +1776,10 @@ msgstr "a mis à jour le titre en <0>{0}</0>"
 msgid "Upgrade"
 msgstr "Mettre à niveau"
 
+#: src/views/members/components/InviteMemberForm.tsx:222
+msgid "Upgrade to Team Plan"
+msgstr "Passer au forfait d'équipe"
+
 #: src/views/boards/components/TemplateBoards.tsx:37
 #: src/views/boards/components/TemplateBoards.tsx:54
 msgid "Urgent"
@@ -1757,11 +1801,11 @@ msgstr "L'URL doit comporter au moins 3 caractères"
 msgid "Use template"
 msgstr "Utiliser le modèle"
 
-#: src/views/members/index.tsx:185
+#: src/views/members/index.tsx:209
 msgid "User"
 msgstr "Utilisateur"
 
-#: src/views/members/components/InviteMemberForm.tsx:58
+#: src/views/members/components/InviteMemberForm.tsx:77
 msgid "User is already a member of this workspace"
 msgstr "L'utilisateur est déjà membre de cet espace de travail"
 
@@ -1781,7 +1825,7 @@ msgstr "Consultez et gérez votre facturation et votre abonnement."
 msgid "View docs"
 msgstr "Voir la documentation"
 
-#: src/views/public/board/index.tsx:120
+#: src/views/public/board/index.tsx:125
 msgid "View only"
 msgstr "Affichage uniquement"
 
@@ -1789,7 +1833,7 @@ msgstr "Affichage uniquement"
 msgid "View our roadmap."
 msgstr "Consultez notre feuille de route."
 
-#: src/views/public/board/index.tsx:149
+#: src/views/public/board/index.tsx:154
 msgid "View workspace"
 msgstr "Voir l'espace de travail"
 
@@ -1849,13 +1893,13 @@ msgstr "La description de l'espace de travail doit comporter au moins 3 caractè
 msgid "Workspace description updated"
 msgstr "Description de l'espace de travail mise à jour"
 
-#: src/views/home/components/Pricing.tsx:54
 #: src/views/home/components/Features.tsx:83
+#: src/views/home/components/Pricing.tsx:54
 msgid "Workspace members"
 msgstr "Membres de l'espace de travail"
 
+#: src/components/NewWorkspaceForm.tsx:81
 #: src/views/settings/index.tsx:158
-#: src/components/NewWorkspaceForm.tsx:80
 msgid "Workspace name"
 msgstr "Nom de l'espace de travail"
 
@@ -1907,11 +1951,11 @@ msgstr "Vous pouvez inviter des membres de l'équipe en cliquant sur le bouton \
 msgid "You can self-host by following the instructions in our <0>repo</0>."
 msgstr "Vous pouvez auto-héberger en suivant les instructions dans notre <0>dépôt</0>."
 
-#: src/components/AuthForm.tsx:206
+#: src/components/AuthForm.tsx:221
 msgid "You have been logged in successfully."
 msgstr "Vous vous êtes connecté avec succès."
 
-#: src/components/AuthForm.tsx:189
+#: src/components/AuthForm.tsx:204
 msgid "You have been signed up successfully."
 msgstr "Vous vous êtes inscrit avec succès."
 
