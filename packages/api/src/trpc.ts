@@ -28,16 +28,14 @@ const createAuthWithHeaders = (
     api: {
       getSession: () => auth.api.getSession({ headers }),
       signInMagicLink: (input: { email: string; callbackURL: string }) =>
-        // @ts-expect-error - types need fixing
         auth.api.signInMagicLink({
           headers,
           body: { email: input.email, callbackURL: input.callbackURL },
         }),
-      listActiveSubscriptions: (input: { userId: string }) =>
-        // @ts-expect-error - types need fixing
+      listActiveSubscriptions: (input: { workspacePublicId: string }) =>
         auth.api.listActiveSubscriptions({
           headers,
-          query: { referenceId: input.userId },
+          query: { referenceId: input.workspacePublicId },
         }),
     },
   };
