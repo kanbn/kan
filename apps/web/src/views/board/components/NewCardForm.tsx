@@ -177,10 +177,10 @@ export function NewCardForm({
     onError: (error, _newList, context) => {
       utils.board.byId.setData(queryParams, context?.previousState);
       showPopup({
-        header: t`Unable to create card`,
+        header: `Unable to create card`,
         message: error.data?.zodError?.fieldErrors.title?.[0]
           ? `${error.data.zodError.fieldErrors.title[0].replace("String", "Title")}`
-          : t`Please try again later, or contact customer support.`,
+          : `Please try again later, or contact customer support.`,
         icon: "error",
       });
     },
@@ -301,7 +301,7 @@ export function NewCardForm({
       <div className="px-5 pt-5">
         <div className="flex w-full items-center justify-between pb-5">
           <h2 className="text-sm font-bold text-neutral-900 dark:text-dark-1000">
-            {t`New card`}
+            {`New card`}
           </h2>
           <button
             type="button"
@@ -318,7 +318,7 @@ export function NewCardForm({
         <div>
           <Input
             id="title"
-            placeholder={t`Card title`}
+            placeholder={`Card title`}
             {...register("title")}
             onKeyDown={async (e) => {
               if (e.key === "Enter") {
@@ -331,42 +331,42 @@ export function NewCardForm({
         <div className="mt-2">
           <Input
             id="hospedeName"
-            placeholder={t`Nome do hóspede`}
+            placeholder={`Nome do hóspede`}
             {...register("hospedeName")}
           />
         </div>
         <div className="mt-2">
           <Input
             id="hospedeDocumento"
-            placeholder={t`Documento do hóspede`}
+            placeholder={`Documento do hóspede`}
             {...register("hospedeDocumento")}
           />
         </div>
         <div className="mt-2">
           <Input
             id="hospedeTelefone"
-            placeholder={t`Telefone do hóspede`}
+            placeholder={`Telefone do hóspede`}
             {...register("hospedeTelefone")}
           />
         </div>
         <div className="mt-2">
           <Input
             id="hospedeApartamento"
-            placeholder={t`Apartamento`}
+            placeholder={`Apartamento`}
             {...register("hospedeApartamento")}
           />
         </div>
         <div className="mt-2">
           <label className="mb-1 block text-xs font-medium text-neutral-900 dark:text-dark-1000">
-            {t`Tipo de entrega`}
+            {`Tipo de entrega`}
           </label>
           <select
             id="tipoEntrega"
             {...register("tipoEntrega")}
             className="w-full rounded-md border border-light-600 bg-light-200 px-2 py-1 text-xs text-light-800 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000"
           >
-            <option value="normal">{t`Normal`}</option>
-            <option value="express">{t`Express`}</option>
+            <option value="normal">{`Normal`}</option>
+            <option value="express">{`Express`}</option>
           </select>
         </div>
         <div className="mt-2">
@@ -413,7 +413,7 @@ export function NewCardForm({
             >
               <div className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500">
                 {!memberPublicIds.length ? (
-                  t`Members`
+                  `Members`
                 ) : (
                   <div className="flex -space-x-1 overflow-hidden">
                     {memberPublicIds.map((memberPublicId) => {
@@ -450,11 +450,11 @@ export function NewCardForm({
                 openModal("EDIT_LABEL", labelPublicId)
               }
               handleCreate={() => openModal("NEW_LABEL")}
-              createNewItemLabel={t`Create new label`}
+              createNewItemLabel={`Create new label`}
             >
               <div className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500">
                 {!labelPublicIds.length ? (
-                  t`Labels`
+                  `Labels`
                 ) : (
                   <>
                     <div
@@ -514,7 +514,7 @@ export function NewCardForm({
 
       <div className="mt-5 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
         <Toggle
-          label={t`Create another`}
+          label={`Create another`}
           isChecked={isCreateAnotherEnabled}
           onChange={handleToggleCreateAnother}
         />
@@ -530,7 +530,7 @@ export function NewCardForm({
               hospedeTelefone.length === 0
             }
           >
-            {t`Create card`}
+            {`Create card`}
           </Button>
         </div>
       </div>

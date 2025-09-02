@@ -293,40 +293,40 @@ export default function CardPage() {
                           {/* Using a grid for clean alignment */}
                           <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
                             {/* Row 1: Nome */}
-                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{t`Nome:`}</span>
+                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{`Nome:`}</span>
                             <span className="text-neutral-900 dark:text-neutral-100">
                               {card?.hospedeName || (
-                                <span className="italic text-neutral-500 dark:text-neutral-500">{t`Não informado`}</span>
+                                <span className="italic text-neutral-500 dark:text-neutral-500">{`Não informado`}</span>
                               )}
                             </span>
-                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{t`Apartamento:`}</span>
+                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{`Apartamento:`}</span>
                             <span className="text-neutral-900 dark:text-neutral-100">
                               {card?.hospedeApartamento || (
-                                <span className="italic text-neutral-500 dark:text-neutral-500">{t`Não informado`}</span>
+                                <span className="italic text-neutral-500 dark:text-neutral-500">{`Não informado`}</span>
                               )}
                             </span>
                             {/* Row 2: Documento */}
-                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{t`Documento:`}</span>
+                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{`Documento:`}</span>
                             <span className="text-neutral-900 dark:text-neutral-100">
                               {card?.hospedeDocumento || (
-                                <span className="italic text-neutral-500 dark:text-neutral-500">{t`Não informado`}</span>
+                                <span className="italic text-neutral-500 dark:text-neutral-500">{`Não informado`}</span>
                               )}
                             </span>
 
                             {/* Row 3: Telefone */}
-                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{t`Telefone:`}</span>
+                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{`Telefone:`}</span>
                             <span className="text-neutral-900 dark:text-neutral-100">
                               {card?.hospedeTelefone || (
-                                <span className="italic text-neutral-500 dark:text-neutral-500">{t`Não informado`}</span>
+                                <span className="italic text-neutral-500 dark:text-neutral-500">{`Não informado`}</span>
                               )}
                             </span>
 
                             {/* Row 4: Tipo de entrega */}
-                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{t`Tipo de entrega:`}</span>
+                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{`Tipo de entrega:`}</span>
                             <span className="text-neutral-900 dark:text-neutral-100">
                               {card?.tipoEntrega === "express"
-                                ? t`Express`
-                                : t`Normal`}
+                                ? `Express`
+                                : `Normal`}
                             </span>
                           </div>
                         </div>
