@@ -18,18 +18,22 @@ import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
 export function InviteMemberForm({
+  numberOfMembers,
   activeTeamSubscription,
+  userId,
 }: {
+  numberOfMembers: number;
   activeTeamSubscription:
     | {
-        id: string;
+        id: number | null;
         plan: string;
         status: string;
-        seats: number;
-        periodStart: Date;
-        periodEnd: Date;
+        seats: number | null;
+        periodStart: Date | null;
+        periodEnd: Date | null;
       }
     | undefined;
+  userId: string | undefined;
 }) {
   const utils = api.useUtils();
   const [isCreateAnotherEnabled, setIsCreateAnotherEnabled] = useState(false);
@@ -103,32 +107,32 @@ export function InviteMemberForm({
     billingType = isYearly ? t`billed annually` : t`billed monthly`;
   }
 
-  const onSubmit = async (member: InviteMemberInput) => {
-    if (env("NEXT_PUBLIC_KAN_ENV") === "cloud" && !activeTeamSubscription?.id) {
-      const { data, error } = await authClient.subscription.upgrade({
-        plan: "team",
-        referenceId: workspace.publicId,
-        metadata: { userId: "123" }, // @todo: add the user id
-        seats: 1,
-        successUrl: "/members",
-        cancelUrl: "/members",
-        returnUrl: "/members",
-        disableRedirect: true,
+  const onSubmit = (member: InviteMemberInput) => {
+    inviteMember.mutate(member);
+  };
+
+  const handleUpgrade = async () => {
+    const { data, error } = await authClient.subscription.upgrade({
+      plan: "team",
+      referenceId: workspace.publicId,
+      metadata: { userId },
+      seats: numberOfMembers,
+      successUrl: "/members",
+      cancelUrl: "/members",
+      returnUrl: "/members",
+      disableRedirect: true,
+    });
+
+    if (data?.url) {
+      window.location.href = data.url;
+    }
+
+    if (error) {
+      showPopup({
+        header: t`Error upgrading subscription`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
       });
-
-      if (data?.url) {
-        window.location.href = data.url;
-      }
-
-      if (error) {
-        showPopup({
-          header: t`Error upgrading subscription`,
-          message: t`Please try again later, or contact customer support.`,
-          icon: "error",
-        });
-      }
-    } else {
-      inviteMember.mutate(member);
     }
   };
 
@@ -157,6 +161,10 @@ export function InviteMemberForm({
         <Input
           id="email"
           placeholder={t`Email`}
+          disabled={
+            env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
+            !activeTeamSubscription?.id
+          }
           {...register("email", { required: true })}
           onKeyDown={async (e) => {
             if (e.key === "Enter") {
@@ -193,19 +201,36 @@ export function InviteMemberForm({
       </div>
 
       <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
-        <Toggle
-          label={t`Invite another`}
-          isChecked={isCreateAnotherEnabled}
-          onChange={() => setIsCreateAnotherEnabled(!isCreateAnotherEnabled)}
-        />
+        {activeTeamSubscription?.id &&
+          env("NEXT_PUBLIC_KAN_ENV") === "cloud" && (
+            <Toggle
+              label={t`Invite another`}
+              isChecked={isCreateAnotherEnabled}
+              onChange={() =>
+                setIsCreateAnotherEnabled(!isCreateAnotherEnabled)
+              }
+            />
+          )}
         <div>
-          <Button
-            type="submit"
-            isLoading={inviteMember.isPending}
-            className="inline-flex w-full justify-center rounded-md bg-light-1000 px-3 py-2 text-sm font-semibold text-light-50 shadow-sm focus-visible:outline-none dark:bg-dark-1000 dark:text-dark-50"
-          >
-            {t`Invite member`}
-          </Button>
+          {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
+          !activeTeamSubscription?.id ? (
+            <Button
+              type="button"
+              onClick={handleUpgrade}
+              className="inline-flex w-full justify-center rounded-md bg-light-1000 px-3 py-2 text-sm font-semibold text-light-50 shadow-sm focus-visible:outline-none dark:bg-dark-1000 dark:text-dark-50"
+            >
+              {t`Upgrade to Team Plan`}
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              disabled={inviteMember.isPending}
+              isLoading={inviteMember.isPending}
+              className="inline-flex w-full justify-center rounded-md bg-light-1000 px-3 py-2 text-sm font-semibold text-light-50 shadow-sm focus-visible:outline-none dark:bg-dark-1000 dark:text-dark-50"
+            >
+              {t`Invite member`}
+            </Button>
+          )}
         </div>
       </div>
     </form>

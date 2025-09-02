@@ -28,6 +28,8 @@ export default function MembersPage() {
     // { enabled: workspace?.publicId ? true : false },
   );
 
+  const { data: session } = authClient.useSession();
+
   const subscription = data?.subscriptions;
 
   const activeTeamSubscription = subscription?.find(
@@ -57,7 +59,6 @@ export default function MembersPage() {
     isLastRow?: boolean;
     showSkeleton?: boolean;
   }) => {
-    const { data: session } = authClient.useSession();
     return (
       <tr className="rounded-b-lg">
         <td
@@ -265,7 +266,9 @@ export default function MembersPage() {
             isVisible={isOpen && modalContentType === "INVITE_MEMBER"}
           >
             <InviteMemberForm
-              activeTeamSubscription={activeTeamSubscription as any}
+              userId={session?.user.id}
+              numberOfMembers={data?.members.length ?? 1}
+              activeTeamSubscription={activeTeamSubscription}
             />
           </Modal>
 
