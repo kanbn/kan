@@ -103,7 +103,12 @@ const Pricing = () => {
                 <Radio
                   key={option.value}
                   value={option}
-                  className="cursor-pointer rounded-full px-2.5 py-1 text-xs text-light-900 data-[checked]:bg-dark-50 data-[checked]:text-white dark:data-[checked]:bg-light-50 dark:data-[checked]:text-dark-50 lg:text-sm"
+                  className={twMerge(
+                    "cursor-pointer rounded-full px-2.5 py-1 text-xs transition-colors lg:text-sm",
+                    frequency?.value === option.value
+                      ? "bg-dark-50 text-white dark:bg-light-50 dark:text-dark-50"
+                      : "text-light-900 hover:bg-light-100 dark:hover:bg-dark-100",
+                  )}
                 >
                   {option.label}
                 </Radio>
