@@ -81,6 +81,7 @@ export const cardRouter = createTRPCRouter({
       });
 
       const newCardId = newCard.id;
+      const newCardPublicId = newCard.publicId;
 
       if (!newCardId)
         throw new TRPCError({
