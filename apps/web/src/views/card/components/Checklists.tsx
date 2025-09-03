@@ -2,10 +2,10 @@ import { HiPlus, HiXMark } from "react-icons/hi2";
 
 import CircularProgress from "~/components/CircularProgress";
 import { useModal } from "~/providers/modal";
+import AddChecklistItemsLink from "./AddChecklistItemsLink";
 import ChecklistItemRow from "./ChecklistItemRow";
 import ChecklistNameInput from "./ChecklistNameInput";
 import NewChecklistItemForm from "./NewChecklistItemForm";
-import AddChecklistItemsLink from "./AddChecklistItemsLink";
 
 interface ChecklistItem {
   publicId: string;
@@ -87,7 +87,7 @@ export default function Checklists({
                       >
                         <HiXMark size={16} />
                       </button> */}
-                       <AddChecklistItemsLink cardPublicId={cardPublicId} />
+                      <AddChecklistItemsLink cardPublicId={cardPublicId} />
                       {/* <button
                         onClick={() =>
                           setActiveChecklistForm?.(checklist.publicId)
@@ -121,7 +121,9 @@ export default function Checklists({
                     key={item.publicId}
                     item={{
                       publicId: item.publicId,
-                      title: item.title,
+                      title:
+                        item.title.charAt(0).toUpperCase() +
+                        item.title.slice(1),
                       quantity: item.quantity,
                       iron: item.iron,
                       wash: item.wash,

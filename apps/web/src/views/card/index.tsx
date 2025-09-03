@@ -266,7 +266,7 @@ export default function CardPage() {
                 )}
                 {!card && !isLoading && (
                   <p className="block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
-                    {t`Card not found`}
+                    {`Card not found`}
                   </p>
                 )}
               </div>
@@ -287,7 +287,7 @@ export default function CardPage() {
                         {/* Laundry details section (read-only) */}
                         <div className="mb-4 mt-4 rounded-lg bg-neutral-100 p-4 shadow-sm dark:bg-neutral-800">
                           <h3 className="mb-3 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
-                            {t`Detalhes do hóspede`}
+                            {`Detalhes do hóspede`}
                           </h3>
 
                           {/* Using a grid for clean alignment */}
