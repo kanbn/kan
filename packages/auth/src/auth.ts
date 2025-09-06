@@ -328,13 +328,13 @@ export const initAuth = (db: dbClient) => {
           ctx.path === "/magic-link/verify" &&
           (ctx.query?.callbackURL as string | undefined)?.includes(
             "type=invite",
-          ) &&
-          ctx.query?.memberPublicId
+          )
         ) {
           const userId = ctx.context.newSession?.session.userId;
-          const memberPublicId = ctx.query.memberPublicId as string;
+          const callbackURL = ctx.query?.callbackURL as string | undefined;
+          const memberPublicId = callbackURL?.split("memberPublicId=")[1];
 
-          if (userId) {
+          if (userId && memberPublicId) {
             const member = await memberRepo.getByPublicId(db, memberPublicId);
 
             if (member?.id) {
