@@ -71,6 +71,13 @@
       "when": 1756803246096,
       "tag": "20250902085406_AddSubscriptions",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1757271312974,
+      "tag": "20250907185512_AddUnlimitedSeatsToSubscription",
+      "breakpoints": true
     }
   ]
 }

@@ -23,6 +23,7 @@ export const subscription = pgTable("subscription", {
   periodEnd: timestamp("periodEnd"),
   cancelAtPeriodEnd: boolean("cancelAtPeriodEnd"),
   seats: integer("seats"),
+  unlimitedSeats: boolean("unlimitedSeats").default(false).notNull(),
   trialStart: timestamp("trialStart"),
   trialEnd: timestamp("trialEnd"),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
