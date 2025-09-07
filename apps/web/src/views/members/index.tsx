@@ -3,9 +3,10 @@ import { env } from "next-runtime-env";
 import { HiEllipsisHorizontal, HiOutlinePlusSmall } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
+import type { Subscription } from "@kan/shared/utils";
 import { authClient } from "@kan/auth/client";
+import { getSubscriptionByPlan, hasUnlimitedSeats } from "@kan/shared/utils";
 
-import type { Subscription } from "~/utils/subscriptions";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import Dropdown from "~/components/Dropdown";
@@ -17,10 +18,6 @@ import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { getAvatarUrl } from "~/utils/helpers";
-import {
-  getSubscriptionByPlan,
-  hasUnlimitedSeats,
-} from "~/utils/subscriptions";
 import { DeleteMemberConfirmation } from "./components/DeleteMemberConfirmation";
 import { InviteMemberForm } from "./components/InviteMemberForm";
 

@@ -7,9 +7,10 @@ import { HiXMark } from "react-icons/hi2";
 import { z } from "zod";
 
 import type { InviteMemberInput } from "@kan/api/types";
+import type { Subscription } from "@kan/shared/utils";
 import { authClient } from "@kan/auth/client";
+import { getSubscriptionByPlan } from "@kan/shared/utils";
 
-import type { Subscription } from "~/utils/subscriptions";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import Toggle from "~/components/Toggle";
@@ -17,7 +18,6 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
-import { getSubscriptionByPlan } from "~/utils/subscriptions";
 
 export function InviteMemberForm({
   numberOfMembers,

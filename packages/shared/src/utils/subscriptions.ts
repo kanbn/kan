@@ -1,5 +1,3 @@
-import { env } from "next-runtime-env";
-
 export type SubscriptionStatus =
   | "active"
   | "trialing"
@@ -44,14 +42,6 @@ export const hasActiveSubscription = (
   plan: SubscriptionPlan,
 ) => {
   return getSubscriptionByPlan(subscriptions, plan) !== undefined;
-};
-
-export const canInviteMembers = (subscriptions: Subscription[] | undefined) => {
-  if (env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
-    return hasActiveSubscription(subscriptions, "team");
-  }
-
-  return true;
 };
 
 export const hasUnlimitedSeats = (
