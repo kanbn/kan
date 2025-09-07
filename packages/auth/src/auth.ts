@@ -10,6 +10,7 @@ import { env } from "next-runtime-env";
 
 import type { dbClient } from "@kan/db/client";
 import * as memberRepo from "@kan/db/repository/member.repo";
+import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import * as schema from "@kan/db/schema";
@@ -202,6 +203,24 @@ export const initAuth = (db: dbClient) => {
                       allow_promotion_codes: true,
                     },
                   };
+                },
+                onSubscriptionComplete: async ({
+                  subscription,
+                  stripeSubscription,
+                }) => {
+                  // Set unlimited seats to true for pro plans
+                  if (subscription.plan === "pro") {
+                    await subscriptionRepo.updateByStripeSubscriptionId(
+                      db,
+                      stripeSubscription.id,
+                      {
+                        unlimitedSeats: true,
+                      },
+                    );
+                    console.log(
+                      `Pro subscription ${stripeSubscription.id} activated with unlimited seats`,
+                    );
+                  }
                 },
               },
             }),

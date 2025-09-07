@@ -127,6 +127,7 @@ export const getByPublicIdWithMembers = (
           plan: true,
           status: true,
           seats: true,
+          unlimitedSeats: true,
           periodStart: true,
           periodEnd: true,
         },
