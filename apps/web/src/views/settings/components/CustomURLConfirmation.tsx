@@ -1,37 +1,42 @@
 import { t } from "@lingui/core/macro";
 
+import { authClient } from "@kan/auth/client";
+
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
+import { usePopup } from "~/providers/popup";
 
 export function CustomURLConfirmation({
+  userId,
   workspacePublicId,
 }: {
+  userId: string;
   workspacePublicId: string;
 }) {
   const { closeModal, entityId } = useModal();
+  const { showPopup } = usePopup();
 
   const handleUpgrade = async () => {
-    try {
-      const response = await fetch("/api/stripe/create_checkout_session", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          slug: entityId,
-          workspacePublicId: workspacePublicId,
-          cancelUrl: "/settings",
-          successUrl: "/settings",
-        }),
+    const { data, error } = await authClient.subscription.upgrade({
+      plan: "pro",
+      referenceId: workspacePublicId,
+      metadata: { userId, workspacePublicId, workspaceSlug: entityId },
+      successUrl: "/settings",
+      cancelUrl: "/settings",
+      returnUrl: "/settings",
+      disableRedirect: true,
+    });
+
+    if (data?.url) {
+      window.location.href = data.url;
+    }
+
+    if (error) {
+      showPopup({
+        header: t`Error upgrading subscription`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
       });
-
-      const { url } = (await response.json()) as { url: string };
-
-      if (url) {
-        window.location.href = url;
-      }
-    } catch (error) {
-      console.error("Error creating checkout session:", error);
     }
   };
 
