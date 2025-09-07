@@ -14,6 +14,11 @@ export interface Subscription {
   unlimitedSeats: boolean;
   periodStart: Date | null;
   periodEnd: Date | null;
+  referenceId: string;
+  stripeSubscriptionId: string | null;
+  stripeCustomerId: string | null;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export const getActiveSubscriptions = (

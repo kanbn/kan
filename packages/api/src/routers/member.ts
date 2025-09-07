@@ -2,8 +2,10 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import * as memberRepo from "@kan/db/repository/member.repo";
+import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { getSubscriptionByPlan, hasUnlimitedSeats } from "@kan/shared/utils";
 import { updateSubscriptionSeats } from "@kan/stripe";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
@@ -62,29 +64,34 @@ export const memberRouter = createTRPCRouter({
       }
 
       if (process.env.NEXT_PUBLIC_KAN_ENV === "cloud") {
-        const subscriptions = await ctx.auth.api.listActiveSubscriptions({
-          workspacePublicId: workspace.publicId,
-        });
-
-        // get the active subscription
-        const activeSubscription = subscriptions.find(
-          (sub) =>
-            sub.status === "active" ||
-            (sub.status === "trialing" && sub.plan === "team"),
+        const subscriptions = await subscriptionRepo.getByReferenceId(
+          ctx.db,
+          workspace.publicId,
         );
 
-        if (!activeSubscription) {
+        // get the active subscriptions
+        const activeTeamSubscription = getSubscriptionByPlan(
+          subscriptions,
+          "team",
+        );
+        const activeProSubscription = getSubscriptionByPlan(
+          subscriptions,
+          "pro",
+        );
+        const unlimitedSeats = hasUnlimitedSeats(subscriptions);
+
+        if (!activeTeamSubscription && !activeProSubscription) {
           throw new TRPCError({
             message: `Workspace with public ID ${workspace.publicId} does not have an active subscription`,
             code: "NOT_FOUND",
           });
         }
 
-        // Update the Stripe subscription to add a seat with immediate proration
-        if (activeSubscription.stripeSubscriptionId) {
+        // Update the Stripe subscription
+        if (activeTeamSubscription?.stripeSubscriptionId && !unlimitedSeats) {
           try {
             await updateSubscriptionSeats(
-              activeSubscription.stripeSubscriptionId,
+              activeTeamSubscription.stripeSubscriptionId,
               1,
             );
           } catch (error) {
@@ -204,22 +211,23 @@ export const memberRouter = createTRPCRouter({
 
       // Handle subscription seat decrement for cloud environment
       if (process.env.NEXT_PUBLIC_KAN_ENV === "cloud") {
-        const subscriptions = await ctx.auth.api.listActiveSubscriptions({
-          workspacePublicId: workspace.publicId,
-        });
-
-        // get the active subscription
-        const activeSubscription = subscriptions.find(
-          (sub) =>
-            sub.status === "active" ||
-            (sub.status === "trialing" && sub.plan === "team"),
+        const subscriptions = await subscriptionRepo.getByReferenceId(
+          ctx.db,
+          workspace.publicId,
         );
 
+        // get the active subscriptions
+        const activeTeamSubscription = getSubscriptionByPlan(
+          subscriptions,
+          "team",
+        );
+        const unlimitedSeats = hasUnlimitedSeats(subscriptions);
+
         // Only decrease seats if there's an active subscription and stripeSubscriptionId
-        if (activeSubscription?.stripeSubscriptionId) {
+        if (activeTeamSubscription?.stripeSubscriptionId && !unlimitedSeats) {
           try {
             await updateSubscriptionSeats(
-              activeSubscription.stripeSubscriptionId,
+              activeTeamSubscription.stripeSubscriptionId,
               -1,
             );
           } catch (error) {
