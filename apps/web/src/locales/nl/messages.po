@@ -148,7 +148,7 @@ msgstr "Alle systemen operationeel"
 msgid "Already have an account? <0><1>Sign in</1></0>"
 msgstr "Heb je al een account? <0><1>Log in</1></0>"
 
-#: src/views/settings/index.tsx:102
+#: src/views/settings/index.tsx:113
 msgid "An error occurred while disconnecting your Trello account."
 msgstr "Er is een fout opgetreden bij het verbreken van de verbinding met je Trello-account."
 
@@ -156,7 +156,7 @@ msgstr "Er is een fout opgetreden bij het verbreken van de verbinding met je Tre
 msgid "An unexpected error occurred. Please try again later."
 msgstr "Er is een onverwachte fout opgetreden. Probeer het later opnieuw."
 
-#: src/views/settings/index.tsx:259
+#: src/views/settings/index.tsx:282
 msgid "API keys"
 msgstr "API-sleutels"
 
@@ -227,11 +227,11 @@ msgid "billed monthly"
 msgstr "maandelijks gefactureerd"
 
 #: src/views/boards/components/TemplateBoards.tsx:55
-#: src/views/settings/index.tsx:198
+#: src/views/settings/index.tsx:221
 msgid "Billing"
 msgstr "Facturering"
 
-#: src/views/settings/index.tsx:208
+#: src/views/settings/index.tsx:231
 msgid "Billing portal"
 msgstr "Factureringsportaal"
 
@@ -242,6 +242,10 @@ msgstr "Blogbericht"
 #: src/views/board/index.tsx:331
 msgid "Board"
 msgstr "Bord"
+
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:80
+msgid "Board analytics (coming soon)"
+msgstr "Bordanalyses (binnenkort beschikbaar)"
 
 #: src/views/boards/components/NewBoardForm.tsx:21
 msgid "Board name cannot exceed 100 characters"
@@ -309,9 +313,9 @@ msgstr "Bugrapport"
 #: src/views/card/components/DeleteCommentConfirmation.tsx:76
 #: src/views/members/components/DeleteMemberConfirmation.tsx:55
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:168
-#: src/views/settings/components/CustomURLConfirmation.tsx:55
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:94
 msgid "Cancel"
 msgstr "Annuleren"
 
@@ -325,12 +329,12 @@ msgstr "Kaarttitel"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:109
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:178
-#: src/views/settings/index.tsx:291
-#: src/views/settings/index.tsx:301
+#: src/views/settings/index.tsx:314
+#: src/views/settings/index.tsx:324
 msgid "Change Password"
 msgstr "Wachtwoord wijzigen"
 
-#: src/views/settings/index.tsx:190
+#: src/views/settings/index.tsx:213
 msgid "Change the language of the app."
 msgstr "Wijzig de taal van de app."
 
@@ -389,16 +393,12 @@ msgstr "heeft een checklistitem voltooid"
 msgid "completed checklist item <0>{0}</0>"
 msgstr "heeft checklistitem <0>{0}</0> voltooid"
 
-#: src/views/settings/components/CustomURLConfirmation.tsx:47
-msgid "Confirm URL change"
-msgstr "URL-wijziging bevestigen"
-
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:150
 msgid "Confirm your new password"
 msgstr "Bevestig je nieuwe wachtwoord"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:157
-#: src/views/settings/index.tsx:235
+#: src/views/settings/index.tsx:258
 msgid "Connect Trello"
 msgstr "Verbind Trello"
 
@@ -406,7 +406,7 @@ msgstr "Verbind Trello"
 msgid "Connect your favorite tools to streamline your workflow."
 msgstr "Verbind je favoriete tools om je werkstroom te stroomlijnen."
 
-#: src/views/settings/index.tsx:222
+#: src/views/settings/index.tsx:245
 msgid "Connect your Trello account to import boards."
 msgstr "Verbind je Trello-account om borden te importeren."
 
@@ -499,9 +499,9 @@ msgstr "Huidig wachtwoord is vereist"
 msgid "Custom domain"
 msgstr "Aangepast domein"
 
-#: src/views/settings/components/CustomURLConfirmation.tsx:50
-msgid "Custom URLs are a premium feature. You'll be directed to upgrade your account."
-msgstr "Aangepaste URL's zijn een premium functie. Je wordt doorgestuurd om je account te upgraden."
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:74
+msgid "Custom workspace URL"
+msgstr "Aangepaste werkruimte-URL"
 
 #: src/views/boards/components/TemplateBoards.tsx:41
 msgid "Customer Support"
@@ -520,8 +520,8 @@ msgid "Delete"
 msgstr "Verwijderen"
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:96
-#: src/views/settings/index.tsx:309
-#: src/views/settings/index.tsx:319
+#: src/views/settings/index.tsx:332
+#: src/views/settings/index.tsx:342
 msgid "Delete account"
 msgstr "Account verwijderen"
 
@@ -542,8 +542,8 @@ msgid "Delete list"
 msgstr "Lijst verwijderen"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:106
-#: src/views/settings/index.tsx:272
-#: src/views/settings/index.tsx:283
+#: src/views/settings/index.tsx:295
+#: src/views/settings/index.tsx:306
 msgid "Delete workspace"
 msgstr "Werkruimte verwijderen"
 
@@ -569,7 +569,7 @@ msgstr "heeft checklistitem <0>{0}</0> verwijderd"
 msgid "Design"
 msgstr "Ontwerp"
 
-#: src/views/settings/index.tsx:250
+#: src/views/settings/index.tsx:273
 msgid "Disconnect Trello"
 msgstr "Trello ontkoppelen"
 
@@ -577,7 +577,7 @@ msgstr "Trello ontkoppelen"
 msgid "Discuss and collaborate on cards."
 msgstr "Bespreek en werk samen aan kaarten."
 
-#: src/views/settings/index.tsx:151
+#: src/views/settings/index.tsx:162
 msgid "Display name"
 msgstr "Weergavenaam"
 
@@ -695,7 +695,7 @@ msgstr "Fout bij het verwijderen van label"
 msgid "Error deleting workspace"
 msgstr "Fout bij verwijderen werkruimte"
 
-#: src/views/settings/index.tsx:101
+#: src/views/settings/index.tsx:112
 msgid "Error disconnecting Trello"
 msgstr "Fout bij ontkoppelen van Trello"
 
@@ -725,7 +725,7 @@ msgid "Error updating workspace URL"
 msgstr "Fout bij het bijwerken van werkruimte-URL"
 
 #: src/views/members/components/InviteMemberForm.tsx:130
-#: src/views/settings/components/CustomURLConfirmation.tsx:36
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:41
 msgid "Error upgrading subscription"
 msgstr "Fout bij het upgraden van abonnement"
 
@@ -999,9 +999,13 @@ msgstr "Labels"
 msgid "Labels & Filters"
 msgstr "Labels & filters"
 
-#: src/views/settings/index.tsx:187
+#: src/views/settings/index.tsx:210
 msgid "Language"
 msgstr "Taal"
+
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:67
+msgid "Launch offer"
+msgstr "Introductieaanbieding"
 
 #: src/views/boards/components/TemplateBoards.tsx:83
 msgid "Learning"
@@ -1181,11 +1185,11 @@ msgstr "Aanbod"
 msgid "Onboarding"
 msgstr "Inwerktraject"
 
-#: src/views/settings/index.tsx:312
+#: src/views/settings/index.tsx:335
 msgid "Once you delete your account, there is no going back. This action cannot be undone."
 msgstr "Zodra je je account verwijdert, is er geen weg terug. Deze actie kan niet ongedaan worden gemaakt."
 
-#: src/views/settings/index.tsx:275
+#: src/views/settings/index.tsx:298
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Zodra je je werkruimte verwijdert, is er geen weg terug. Deze actie kan niet ongedaan worden gemaakt."
 
@@ -1287,13 +1291,13 @@ msgstr "Selecteer een bestand om te uploaden."
 #: src/views/members/components/InviteMemberForm.tsx:131
 #: src/views/settings/components/Avatar.tsx:40
 #: src/views/settings/components/Avatar.tsx:98
-#: src/views/settings/components/CustomURLConfirmation.tsx:37
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:40
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:46
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:55
 #: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:62
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:57
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:74
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:42
 msgid "Please try again later, or contact customer support."
 msgstr "Probeer het later opnieuw of neem contact op met de klantenservice."
 
@@ -1304,6 +1308,7 @@ msgid "Pricing"
 msgstr "Prijzen"
 
 #: src/views/home/components/Pricing.tsx:56
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:86
 msgid "Priority email support"
 msgstr "Prioriteit e-mailondersteuning"
 
@@ -1327,7 +1332,7 @@ msgstr "Pro Plan ∞"
 msgid "Profile image updated"
 msgstr "Profielafbeelding bijgewerkt"
 
-#: src/views/settings/index.tsx:146
+#: src/views/settings/index.tsx:157
 msgid "Profile picture"
 msgstr "Profielfoto"
 
@@ -1468,12 +1473,12 @@ msgid "Senior"
 msgstr "Senior"
 
 #: src/components/SideNavigation.tsx:78
-#: src/views/settings/index.tsx:140
+#: src/views/settings/index.tsx:151
 msgid "Settings"
 msgstr "Instellingen"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/settings/index.tsx:136
+#: src/views/settings/index.tsx:147
 msgid "Settings | {0}"
 msgstr "Instellingen | {0}"
 
@@ -1523,6 +1528,10 @@ msgstr "Star op Github"
 #: src/components/AuthForm.tsx:220
 msgid "Success"
 msgstr "Geslaagd"
+
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:55
+msgid "Supercharge your workspace for just $29/month. Here's what you'll get:"
+msgstr "Geef je werkruimte een boost voor slechts $29/maand. Dit krijg je:"
 
 #: src/components/UserMenu.tsx:180
 msgid "Support"
@@ -1622,7 +1631,7 @@ msgstr "Menu in-/uitschakelen"
 msgid "Track all card changes with detailed activity history."
 msgstr "Volg alle kaartwijzigingen met gedetailleerde activiteitengeschiedenis."
 
-#: src/views/settings/index.tsx:94
+#: src/views/settings/index.tsx:105
 msgid "Trello disconnected"
 msgstr "Trello ontkoppeld"
 
@@ -1753,6 +1762,10 @@ msgstr "Onbeperkt aantal opmerkingen"
 msgid "Unlimited lists"
 msgstr "Onbeperkt aantal lijsten"
 
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:64
+msgid "Unlimited members"
+msgstr "Onbeperkt aantal leden"
+
 #: src/views/board/components/UpdateBoardSlugForm.tsx:174
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:79
 #: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:90
@@ -1782,9 +1795,14 @@ msgstr "titel bijgewerkt"
 msgid "updated the title to <0>{0}</0>"
 msgstr "titel bijgewerkt naar <0>{0}</0>"
 
-#: src/views/settings/components/CustomURLConfirmation.tsx:57
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:99
 msgid "Upgrade"
 msgstr "Upgraden"
+
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:52
+#: src/views/settings/index.tsx:202
+msgid "Upgrade to Pro"
+msgstr "Upgraden naar Pro"
 
 #: src/views/members/components/InviteMemberForm.tsx:224
 msgid "Upgrade to Team Plan"
@@ -1823,11 +1841,11 @@ msgstr "Gebruiker is al lid van deze werkruimte"
 msgid "Video"
 msgstr "Video"
 
-#: src/views/settings/index.tsx:262
+#: src/views/settings/index.tsx:285
 msgid "View and manage your API keys."
 msgstr "Bekijk en beheer je API-sleutels."
 
-#: src/views/settings/index.tsx:201
+#: src/views/settings/index.tsx:224
 msgid "View and manage your billing and subscription."
 msgstr "Bekijk en beheer je facturering en abonnement."
 
@@ -1887,7 +1905,7 @@ msgstr "Werkruimte"
 msgid "Workspace deleted"
 msgstr "Werkruimte verwijderd"
 
-#: src/views/settings/index.tsx:177
+#: src/views/settings/index.tsx:188
 msgid "Workspace description"
 msgstr "Werkruimte beschrijving"
 
@@ -1909,7 +1927,7 @@ msgid "Workspace members"
 msgstr "Werkruimteleden"
 
 #: src/components/NewWorkspaceForm.tsx:81
-#: src/views/settings/index.tsx:158
+#: src/views/settings/index.tsx:169
 msgid "Workspace name"
 msgstr "Naam werkruimte"
 
@@ -1929,7 +1947,7 @@ msgstr "Werkruimtenaam bijgewerkt"
 msgid "Workspace slug updated"
 msgstr "Werkruimte-slug bijgewerkt"
 
-#: src/views/settings/index.tsx:167
+#: src/views/settings/index.tsx:178
 msgid "Workspace URL"
 msgstr "Werkruimte URL"
 
@@ -1945,7 +1963,7 @@ msgstr "Jaarlijks"
 msgid "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits."
 msgstr "Ja, we bieden een voor altijd gratis plan voor individueel gebruik. Geen beperkingen, geen betaalmuren, geen limieten."
 
-#: src/views/settings/index.tsx:294
+#: src/views/settings/index.tsx:317
 msgid "You are about to change your password."
 msgstr "Je staat op het punt je wachtwoord te wijzigen."
 
@@ -1993,11 +2011,11 @@ msgstr "Je wachtwoord is gewijzigd."
 msgid "Your profile image has been updated."
 msgstr "Je profielafbeelding is bijgewerkt."
 
-#: src/views/settings/index.tsx:95
+#: src/views/settings/index.tsx:106
 msgid "Your Trello account has been disconnected."
 msgstr "Je Trello-account is ontkoppeld."
 
-#: src/views/settings/index.tsx:244
+#: src/views/settings/index.tsx:267
 msgid "Your Trello account is connected."
 msgstr "Je Trello-account is verbonden."
 

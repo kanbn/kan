@@ -55,6 +55,7 @@ checksums:
     Billing%20portal/singular: dc3afa14ffe19f5920992a0c9d49d525
     Blog%20Post/singular: 38e027f212be445dc530e427fc642a20
     Board/singular: 101ff39aab674c033c15ab978d0d8bac
+    Board%20analytics%20(coming%20soon)/singular: 3f648e6fe3849ee2ac5cdf410ac9ea06
     Board%20name%20cannot%20exceed%20100%20characters/singular: 985c0177744ec56d8dac84f66ec284ca
     Board%20name%20is%20required/singular: dbd0c6cc945ab19e702fc27f970a023b
     Board%20not%20found/singular: 5af9844595fa8aed5985066620435515
@@ -87,7 +88,6 @@ checksums:
     Complete%20control%20and%20ownership%3A/singular: 0d8b682ba873272217425ccfc96aa9cd
     completed%20a%20checklist%20item/singular: 757b04c6c80cc927e1c597c0ad4fda33
     completed%20checklist%20item%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: 71ec18acf051fc909a48a07ca3578673
-    Confirm%20URL%20change/singular: e14b4ce081d1ef6194b37e1814e97b39
     Confirm%20your%20new%20password/singular: a0d2935d7b63f8dd19d7c0de47524416
     Connect%20Trello/singular: 4440a0b9e387ef7136e3958e7a089213
     Connect%20your%20favorite%20tools%20to%20streamline%20your%20workflow./singular: 033c5dcdb059ccb634aef7fe63f2f45d
@@ -113,7 +113,7 @@ checksums:
     Critical/singular: eb327cd411b50aee954f8d1d215d003a
     Current%20password%20is%20required/singular: 72536bca9598680027f2be8ce80ac280
     Custom%20domain/singular: b09e7a9c187b7163b4a6cfc78042fe42
-    Custom%20URLs%20are%20a%20premium%20feature.%20You'll%20be%20directed%20to%20upgrade%20your%20account./singular: b52e4f6122cf739c9551d29beb89b25e
+    Custom%20workspace%20URL/singular: 7ba841d0946eb04fa3d17d74365be37b
     Customer%20Support/singular: 50e3c77e22e41061ca85ea2f02625a2e
     Dark/singular: 73e6e208ba628b26e90fcf6dce15e1b2
     Delete/singular: 8bcf303dd10a645b5baacb02b47d72c9
@@ -230,6 +230,7 @@ checksums:
     Labels/singular: 6f15627a90002323eac018274b6922d6
     Labels%20%26%20Filters/singular: 8f0bdd6084516f8241cb613178114390
     Language/singular: 277fd1a41cc237a437cd1d5e4a80463b
+    Launch%20offer/singular: 624592ba2ecf647a3fe60d493c1ee71a
     Learning/singular: 90e91da3f870f065f2da9aa9adf53514
     Legal/singular: 00d3f08da61a21887009819cf93fb414
     License/singular: ac2bcac75151e2fcd9eb768cea275a77
@@ -346,6 +347,7 @@ checksums:
     Software%20Development/singular: 67659097ef6bcb194839858b2c4f3a3c
     Star%20on%20Github/singular: e5cb0428f1ac6485688f120d78742875
     Success/singular: c43827becada6750f7a25890905f38b9
+    Supercharge%20your%20workspace%20for%20just%20%2429%2Fmonth.%20Here's%20what%20you'll%20get%3A/singular: 21af8119141afcce5f12da489f34db6a
     Support/singular: 55aab5fd0f31a9cb055a2edeeedfaf63
     Support%20the%20development%20of%20the%20project/singular: c63bab228ab2b1be4370c668a99cd278
     System/singular: 803281c327a02a2feba182f4a2b38311
@@ -401,6 +403,7 @@ checksums:
     Unlimited%20cards/singular: f44c1050c4d6aa39c8cdf5f4a7d12577
     Unlimited%20comments/singular: 31dbcf487c49a9997142e96bb3ab0040
     Unlimited%20lists/singular: 5c418701b27b9acbc5dd199719007362
+    Unlimited%20members/singular: f2949ca2dc18b0063af92e60779abb65
     Update/singular: 079fc039262fd31b10532929685c2d1b
     Update%20label/singular: 97880b503dfe956941c5f23025a1c102
     updated%20a%20checklist%20item/singular: 198e1d1d503f4b69b752dd84d0cc0e9d
@@ -408,6 +411,7 @@ checksums:
     updated%20the%20title/singular: 98cf8f12923ec1a58e767e3a40863b21
     updated%20the%20title%20to%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: aca196d729401d8adc5c8ca9d558840e
     Upgrade/singular: 63c3b52882e0d779859307d672c178c2
+    Upgrade%20to%20Pro/singular: 972773025e763ddf53273df6d37a729a
     Upgrade%20to%20Team%20Plan/singular: 40e2ef151266937f8bbe63b3d361f645
     Urgent/singular: e79afcd4398e52e10e7e8243a7eecabe
     URL%20can%20only%20contain%20letters%2C%20numbers%2C%20and%20hyphens/singular: 875d37d2d920f98ef60a314eda8a5d9a
