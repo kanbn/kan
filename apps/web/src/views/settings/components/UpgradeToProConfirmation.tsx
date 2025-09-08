@@ -1,14 +1,11 @@
 import { t } from "@lingui/core/macro";
 import { HiBolt, HiCheckBadge } from "react-icons/hi2";
 
-import { authClient } from "@kan/auth/client";
-
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 
 export function UpgradeToProConfirmation({
-  userId,
   workspacePublicId,
 }: {
   userId: string;
@@ -18,25 +15,28 @@ export function UpgradeToProConfirmation({
   const { showPopup } = usePopup();
 
   const handleUpgrade = async () => {
-    const { data, error } = await authClient.subscription.upgrade({
-      plan: "pro",
-      referenceId: workspacePublicId,
-      metadata: {
-        userId,
-        workspacePublicId,
-        ...(entityId && { workspaceSlug: entityId }),
-      },
-      successUrl: "/settings",
-      cancelUrl: "/settings",
-      returnUrl: "/settings",
-      disableRedirect: true,
-    });
+    try {
+      const response = await fetch("/api/stripe/create_checkout_session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...(entityId && { workspaceSlug: entityId }),
+          workspacePublicId: workspacePublicId,
+          cancelUrl: "/settings",
+          successUrl: "/settings",
+        }),
+      });
 
-    if (data?.url) {
-      window.location.href = data.url;
-    }
+      const { url } = (await response.json()) as { url: string };
 
-    if (error) {
+      if (url) {
+        window.location.href = url;
+      }
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+
       showPopup({
         header: t`Error upgrading subscription`,
         message: t`Please try again later, or contact customer support.`,

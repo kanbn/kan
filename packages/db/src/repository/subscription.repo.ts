@@ -75,3 +75,17 @@ export const getByReferenceId = async (db: dbClient, referenceId: string) => {
     where: eq(subscription.referenceId, referenceId),
   });
 };
+
+export const create = async (
+  db: dbClient,
+  data: {
+    plan: string;
+    referenceId: string;
+    userId: string;
+    stripeCustomerId: string;
+    status: string;
+  },
+) => {
+  const [result] = await db.insert(subscription).values(data).returning();
+  return result;
+};

@@ -3,6 +3,7 @@ import { env } from "next-runtime-env";
 import { z } from "zod";
 
 import { createNextApiContext } from "@kan/api/trpc";
+import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createStripeClient } from "@kan/stripe";
 
@@ -40,17 +41,22 @@ export default async function handler(
     const body = req.body as CheckoutSessionRequest;
     const { successUrl, cancelUrl, slug, workspacePublicId } = body;
 
-    if (!successUrl || !cancelUrl || !slug || !workspacePublicId) {
+    if (!successUrl || !cancelUrl || !workspacePublicId) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    const slugResult = workspaceSlugSchema.safeParse(slug);
+    if (slug) {
+      const slugResult = workspaceSlugSchema.safeParse(slug);
 
-    if (!slugResult.success) {
-      return new Response(JSON.stringify({ error: "Invalid workspace slug" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      if (!slugResult.success) {
+        return new Response(
+          JSON.stringify({ error: "Invalid workspace slug" }),
+          {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
     }
 
     const workspace = await workspaceRepo.getAllByUserId(db, user.id);
@@ -66,6 +72,20 @@ export default async function handler(
       });
     }
 
+    const subscription = await subscriptionRepo.create(db, {
+      plan: "pro",
+      referenceId: workspacePublicId,
+      userId: user.id,
+      stripeCustomerId: user.stripeCustomerId ?? "",
+      status: "incomplete",
+    });
+
+    const subscriptionId = subscription?.id;
+
+    if (!subscriptionId) {
+      return res.status(500).json({ error: "Error creating subscription" });
+    }
+
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       line_items: [
@@ -76,10 +96,13 @@ export default async function handler(
       ],
       success_url: `${env("NEXT_PUBLIC_BASE_URL")}${successUrl}`,
       cancel_url: `${env("NEXT_PUBLIC_BASE_URL")}${cancelUrl}`,
+      client_reference_id: workspacePublicId,
       customer: user.stripeCustomerId ?? undefined,
       metadata: {
-        workspaceSlug: slug,
+        ...(slug && { workspaceSlug: slug }),
         workspacePublicId,
+        userId: user.id,
+        subscriptionId,
       },
     });
 
