@@ -2,7 +2,10 @@ import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
 import { useEffect, useRef } from "react";
-import { HiMiniArrowTopRightOnSquare } from "react-icons/hi2";
+import { HiBolt, HiMiniArrowTopRightOnSquare } from "react-icons/hi2";
+
+import type { Subscription } from "@kan/shared/utils";
+import { hasActiveSubscription } from "@kan/shared/utils";
 
 import Button from "~/components/Button";
 import FeedbackModal from "~/components/FeedbackModal";
@@ -17,13 +20,13 @@ import { api } from "~/utils/api";
 import Avatar from "./components/Avatar";
 import { ChangePasswordFormConfirmation } from "./components/ChangePasswordConfirmation";
 import CreateAPIKeyForm from "./components/CreateAPIKeyForm";
-import { CustomURLConfirmation } from "./components/CustomURLConfirmation";
 import { DeleteAccountConfirmation } from "./components/DeleteAccountConfirmation";
 import { DeleteWorkspaceConfirmation } from "./components/DeleteWorkspaceConfirmation";
 import UpdateDisplayNameForm from "./components/UpdateDisplayNameForm";
 import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescriptionForm";
 import UpdateWorkspaceNameForm from "./components/UpdateWorkspaceNameForm";
 import UpdateWorkspaceUrlForm from "./components/UpdateWorkspaceUrlForm";
+import { UpgradeToProConfirmation } from "./components/UpgradeToProConfirmation";
 
 export default function SettingsPage() {
   const { modalContentType, openModal, isOpen } = useModal();
@@ -36,6 +39,14 @@ export default function SettingsPage() {
   const isCredentialsEnabled =
     env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
   const { data } = api.user.getUser.useQuery();
+
+  const { data: workspaceData } = api.workspace.byId.useQuery({
+    workspacePublicId: workspace.publicId,
+  });
+
+  const subscriptions = workspaceData?.subscriptions as
+    | Subscription[]
+    | undefined;
 
   const {
     data: integrations,
@@ -180,6 +191,18 @@ export default function SettingsPage() {
                 workspacePublicId={workspace.publicId}
                 workspaceDescription={workspace.description ?? ""}
               />
+
+              {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
+                !hasActiveSubscription(subscriptions, "pro") && (
+                  <div className="mt-8">
+                    <Button
+                      onClick={() => openModal("UPGRADE_TO_PRO")}
+                      iconRight={<HiBolt />}
+                    >
+                      {t`Upgrade to Pro`}
+                    </Button>
+                  </div>
+                )}
             </div>
 
             <div className="mb-8 border-t border-light-300 dark:border-dark-300">
@@ -346,9 +369,12 @@ export default function SettingsPage() {
 
             <Modal
               modalSize="sm"
-              isVisible={isOpen && modalContentType === "UPDATE_WORKSPACE_URL"}
+              isVisible={isOpen && modalContentType === "UPGRADE_TO_PRO"}
             >
-              <CustomURLConfirmation workspacePublicId={workspace.publicId} />
+              <UpgradeToProConfirmation
+                userId={data?.id ?? ""}
+                workspacePublicId={workspace.publicId}
+              />
             </Modal>
 
             <Modal
