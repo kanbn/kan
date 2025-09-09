@@ -95,6 +95,17 @@ export default function SettingsPage() {
     }
   }, [router.query.edit]);
 
+  // Open upgrade modal if upgrade=pro is in URL params
+  useEffect(() => {
+    if (
+      router.query.upgrade === "pro" &&
+      env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
+      !hasActiveSubscription(subscriptions, "pro")
+    ) {
+      openModal("UPGRADE_TO_PRO");
+    }
+  }, [router.query.upgrade, subscriptions, openModal]);
+
   const { mutateAsync: disconnectTrello } =
     api.integration.disconnect.useMutation({
       onSuccess: () => {
