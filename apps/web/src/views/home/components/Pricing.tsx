@@ -92,7 +92,12 @@ const Pricing = () => {
           {t`Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team.`}
         </p>
 
-        <div className="mt-16 flex justify-center">
+        <div className="mt-12 flex flex-col items-center justify-center">
+          <div className="mb-4 flex items-center gap-2 rounded-full border bg-white px-4 py-1.5 text-center text-xs font-bold text-gray-800 dark:border-dark-300 dark:bg-white dark:text-gray-800 lg:text-sm">
+            <p>
+              {t`Launch offer: unlimited seats for just $29/month with Pro`}
+            </p>
+          </div>
           <fieldset aria-label={t`Payment frequency`}>
             <RadioGroup
               value={frequency}
@@ -165,7 +170,7 @@ const Pricing = () => {
                   !tier.showPrice && "opacity-0",
                 )}
               >
-                {tier.price[frequency?.value || "monthly"]}
+                {tier.price[frequency?.value ?? "monthly"]}
               </span>
               {tier.showPriceSuffix && (
                 <span className="text-sm/6 font-semibold text-light-50 dark:text-dark-900">

@@ -172,7 +172,7 @@ msgstr "All systems operational"
 msgid "Already have an account? <0><1>Sign in</1></0>"
 msgstr "Already have an account? <0><1>Sign in</1></0>"
 
-#: src/views/settings/index.tsx:113
+#: src/views/settings/index.tsx:124
 msgid "An error occurred while disconnecting your Trello account."
 msgstr "An error occurred while disconnecting your Trello account."
 
@@ -180,7 +180,7 @@ msgstr "An error occurred while disconnecting your Trello account."
 msgid "An unexpected error occurred. Please try again later."
 msgstr "An unexpected error occurred. Please try again later."
 
-#: src/views/settings/index.tsx:282
+#: src/views/settings/index.tsx:293
 msgid "API keys"
 msgstr "API keys"
 
@@ -263,11 +263,11 @@ msgid "billed monthly"
 msgstr "billed monthly"
 
 #: src/views/boards/components/TemplateBoards.tsx:55
-#: src/views/settings/index.tsx:221
+#: src/views/settings/index.tsx:232
 msgid "Billing"
 msgstr "Billing"
 
-#: src/views/settings/index.tsx:231
+#: src/views/settings/index.tsx:242
 msgid "Billing portal"
 msgstr "Billing portal"
 
@@ -373,12 +373,12 @@ msgstr "Card title"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:109
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:178
-#: src/views/settings/index.tsx:314
-#: src/views/settings/index.tsx:324
+#: src/views/settings/index.tsx:325
+#: src/views/settings/index.tsx:335
 msgid "Change Password"
 msgstr "Change Password"
 
-#: src/views/settings/index.tsx:213
+#: src/views/settings/index.tsx:224
 msgid "Change the language of the app."
 msgstr "Change the language of the app."
 
@@ -446,7 +446,7 @@ msgid "Confirm your new password"
 msgstr "Confirm your new password"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:157
-#: src/views/settings/index.tsx:258
+#: src/views/settings/index.tsx:269
 msgid "Connect Trello"
 msgstr "Connect Trello"
 
@@ -454,7 +454,7 @@ msgstr "Connect Trello"
 msgid "Connect your favorite tools to streamline your workflow."
 msgstr "Connect your favorite tools to streamline your workflow."
 
-#: src/views/settings/index.tsx:245
+#: src/views/settings/index.tsx:256
 msgid "Connect your Trello account to import boards."
 msgstr "Connect your Trello account to import boards."
 
@@ -580,8 +580,8 @@ msgid "Delete"
 msgstr "Delete"
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:96
-#: src/views/settings/index.tsx:332
-#: src/views/settings/index.tsx:342
+#: src/views/settings/index.tsx:343
+#: src/views/settings/index.tsx:353
 msgid "Delete account"
 msgstr "Delete account"
 
@@ -602,8 +602,8 @@ msgid "Delete list"
 msgstr "Delete list"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:106
-#: src/views/settings/index.tsx:295
 #: src/views/settings/index.tsx:306
+#: src/views/settings/index.tsx:317
 msgid "Delete workspace"
 msgstr "Delete workspace"
 
@@ -629,7 +629,7 @@ msgstr "deleted checklist item <0>{0}</0>"
 msgid "Design"
 msgstr "Design"
 
-#: src/views/settings/index.tsx:273
+#: src/views/settings/index.tsx:284
 msgid "Disconnect Trello"
 msgstr "Disconnect Trello"
 
@@ -637,7 +637,7 @@ msgstr "Disconnect Trello"
 msgid "Discuss and collaborate on cards."
 msgstr "Discuss and collaborate on cards."
 
-#: src/views/settings/index.tsx:162
+#: src/views/settings/index.tsx:173
 msgid "Display name"
 msgstr "Display name"
 
@@ -755,7 +755,7 @@ msgstr "Error deleting label"
 msgid "Error deleting workspace"
 msgstr "Error deleting workspace"
 
-#: src/views/settings/index.tsx:112
+#: src/views/settings/index.tsx:123
 msgid "Error disconnecting Trello"
 msgstr "Error disconnecting Trello"
 
@@ -1064,13 +1064,17 @@ msgstr "Labels"
 msgid "Labels & Filters"
 msgstr "Labels & Filters"
 
-#: src/views/settings/index.tsx:210
+#: src/views/settings/index.tsx:221
 msgid "Language"
 msgstr "Language"
 
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:67
 msgid "Launch offer"
 msgstr "Launch offer"
+
+#: src/views/home/components/Pricing.tsx:98
+msgid "Launch offer: unlimited seats for just $29/month with Pro"
+msgstr "Launch offer: unlimited seats for just $29/month with Pro"
 
 #: src/views/boards/components/TemplateBoards.tsx:83
 msgid "Learning"
@@ -1258,11 +1262,11 @@ msgstr "Offer"
 msgid "Onboarding"
 msgstr "Onboarding"
 
-#: src/views/settings/index.tsx:335
+#: src/views/settings/index.tsx:346
 msgid "Once you delete your account, there is no going back. This action cannot be undone."
 msgstr "Once you delete your account, there is no going back. This action cannot be undone."
 
-#: src/views/settings/index.tsx:298
+#: src/views/settings/index.tsx:309
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Once you delete your workspace, there is no going back. This action cannot be undone."
 
@@ -1294,7 +1298,7 @@ msgstr "Password must be at least 8 characters"
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
-#: src/views/home/components/Pricing.tsx:96
+#: src/views/home/components/Pricing.tsx:101
 msgid "Payment frequency"
 msgstr "Payment frequency"
 
@@ -1405,7 +1409,7 @@ msgstr "Pro Plan ∞"
 msgid "Profile image updated"
 msgstr "Profile image updated"
 
-#: src/views/settings/index.tsx:157
+#: src/views/settings/index.tsx:168
 msgid "Profile picture"
 msgstr "Profile picture"
 
@@ -1554,12 +1558,12 @@ msgid "Senior"
 msgstr "Senior"
 
 #: src/components/SideNavigation.tsx:78
-#: src/views/settings/index.tsx:151
+#: src/views/settings/index.tsx:162
 msgid "Settings"
 msgstr "Settings"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/settings/index.tsx:147
+#: src/views/settings/index.tsx:158
 msgid "Settings | {0}"
 msgstr "Settings | {0}"
 
@@ -1716,7 +1720,7 @@ msgstr "Toggle menu"
 msgid "Track all card changes with detailed activity history."
 msgstr "Track all card changes with detailed activity history."
 
-#: src/views/settings/index.tsx:105
+#: src/views/settings/index.tsx:116
 msgid "Trello disconnected"
 msgstr "Trello disconnected"
 
@@ -1893,7 +1897,7 @@ msgid "Upgrade"
 msgstr "Upgrade"
 
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:52
-#: src/views/settings/index.tsx:202
+#: src/views/settings/index.tsx:213
 msgid "Upgrade to Pro"
 msgstr "Upgrade to Pro"
 
@@ -1934,11 +1938,11 @@ msgstr "User is already a member of this workspace"
 msgid "Video"
 msgstr "Video"
 
-#: src/views/settings/index.tsx:285
+#: src/views/settings/index.tsx:296
 msgid "View and manage your API keys."
 msgstr "View and manage your API keys."
 
-#: src/views/settings/index.tsx:224
+#: src/views/settings/index.tsx:235
 msgid "View and manage your billing and subscription."
 msgstr "View and manage your billing and subscription."
 
@@ -2002,7 +2006,7 @@ msgstr "Workspace"
 msgid "Workspace deleted"
 msgstr "Workspace deleted"
 
-#: src/views/settings/index.tsx:188
+#: src/views/settings/index.tsx:199
 msgid "Workspace description"
 msgstr "Workspace description"
 
@@ -2024,7 +2028,7 @@ msgid "Workspace members"
 msgstr "Workspace members"
 
 #: src/components/NewWorkspaceForm.tsx:81
-#: src/views/settings/index.tsx:169
+#: src/views/settings/index.tsx:180
 msgid "Workspace name"
 msgstr "Workspace name"
 
@@ -2044,7 +2048,7 @@ msgstr "Workspace name updated"
 msgid "Workspace slug updated"
 msgstr "Workspace slug updated"
 
-#: src/views/settings/index.tsx:178
+#: src/views/settings/index.tsx:189
 msgid "Workspace URL"
 msgstr "Workspace URL"
 
@@ -2060,7 +2064,7 @@ msgstr "Yearly"
 msgid "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits."
 msgstr "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits."
 
-#: src/views/settings/index.tsx:317
+#: src/views/settings/index.tsx:328
 msgid "You are about to change your password."
 msgstr "You are about to change your password."
 
@@ -2108,11 +2112,11 @@ msgstr "Your password has been changed."
 msgid "Your profile image has been updated."
 msgstr "Your profile image has been updated."
 
-#: src/views/settings/index.tsx:106
+#: src/views/settings/index.tsx:117
 msgid "Your Trello account has been disconnected."
 msgstr "Your Trello account has been disconnected."
 
-#: src/views/settings/index.tsx:267
+#: src/views/settings/index.tsx:278
 msgid "Your Trello account is connected."
 msgstr "Your Trello account is connected."
 
