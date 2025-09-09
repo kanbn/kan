@@ -20,12 +20,12 @@ export default function WorkspaceMenu({
     <Menu as="div" className="relative inline-block w-full pb-3 text-left">
       <div>
         {isLoading ? (
-          <div className={twMerge("mb-1", isCollapsed && "md:flex md:p-1.5")}>
+          <div className={twMerge("mb-1 flex", isCollapsed && "md:p-1.5")}>
             <div className="h-6 w-6 animate-pulse rounded-md bg-light-200 dark:bg-dark-200" />
             <div
               className={twMerge(
                 "ml-2 h-6 w-[150px] animate-pulse rounded-md bg-light-200 dark:bg-dark-200",
-                isCollapsed && "hidden md:block",
+                isCollapsed && "md:hidden",
               )}
             />
           </div>
