@@ -22,7 +22,7 @@ export function UpgradeToProConfirmation({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          ...(entityId && { workspaceSlug: entityId }),
+          ...(entityId && { slug: entityId }),
           workspacePublicId: workspacePublicId,
           cancelUrl: "/settings",
           successUrl: "/settings",
