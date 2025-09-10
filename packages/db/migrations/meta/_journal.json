@@ -78,6 +78,27 @@
       "when": 1757271312974,
       "tag": "20250907185512_AddUnlimitedSeatsToSubscription",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1757533858687,
+      "tag": "20250910195058_RemoveNotNullConstraintFromReferenceIdOnSubsriptions",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1757534656098,
+      "tag": "20250910200416_AddWorkspaceSlugChecks",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1757535838766,
+      "tag": "20250910202358_AddCascadeSetNullToReferenceIdOnSubsriptions",
+      "breakpoints": true
     }
   ]
 }
