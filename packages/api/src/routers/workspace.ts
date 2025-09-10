@@ -334,6 +334,14 @@ export const workspaceRouter = createTRPCRouter({
       }),
     )
     .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
       const slug = input.workspaceSlug.toLowerCase();
       // check slug is not reserved
       const workspaceSlug = await workspaceSlugRepo.getWorkspaceSlug(
@@ -344,6 +352,19 @@ export const workspaceRouter = createTRPCRouter({
       // check slug is not taken already
       const isWorkspaceSlugAvailable =
         await workspaceRepo.isWorkspaceSlugAvailable(ctx.db, slug);
+
+      const isAvailable =
+        isWorkspaceSlugAvailable && workspaceSlug?.type !== "reserved";
+      const isReserved = workspaceSlug?.type === "reserved";
+
+      if (env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
+        await workspaceSlugRepo.createWorkspaceSlugCheck(ctx.db, {
+          slug,
+          userId,
+          available: isAvailable,
+          reserved: isReserved,
+        });
+      }
 
       return {
         isAvailable:
