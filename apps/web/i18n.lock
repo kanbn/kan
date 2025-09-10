@@ -108,11 +108,13 @@ checksums:
     Create%20new%20key/singular: 236bdf75e42b42ec7fb25639bdc035af
     Create%20new%20label/singular: 6be30980847b577847baa01bb5f29711
     Create%20new%20list/singular: ce61ca8be7b3f6c26c32b684a42a2c26
+    Create%20Pro%20workspace/singular: 334d9574a930c41f623e54f3b770a676
     Create%20workspace/singular: 2e6718e79964ea5ce22d76c2189c77ca
     created%20the%20card/singular: 605475f5aaeb4dbccbf7c4eb9107b43d
     Critical/singular: eb327cd411b50aee954f8d1d215d003a
     Current%20password%20is%20required/singular: 72536bca9598680027f2be8ce80ac280
     Custom%20domain/singular: b09e7a9c187b7163b4a6cfc78042fe42
+    Custom%20URLs%20require%20Pro%20plan%20(%2429%2Fmonth)/singular: aa89f78139a29b5c0fe55ae886504220
     Custom%20workspace%20URL/singular: 7ba841d0946eb04fa3d17d74365be37b
     Customer%20Support/singular: 50e3c77e22e41061ca85ea2f02625a2e
     Dark/singular: 73e6e208ba628b26e90fcf6dce15e1b2
@@ -166,6 +168,7 @@ checksums:
     Error%20updating%20workspace%20name/singular: 46025f42a7d5eff689e9cb8bed14a1e4
     Error%20updating%20workspace%20URL/singular: 9da6c012e1b512d8c7fbd812626c4675
     Error%20upgrading%20subscription/singular: 57cc47581c7faaffb3b1721b6352b576
+    Error%20upgrading%20to%20Pro/singular: 934c6867d9bdbe6099b2c0f5a3107f78
     Error%20uploading%20profile%20image/singular: 0ba02753a797a74c6ea7b622c9f69c71
     Everything%20in%20the%20free%20plan%2C%20plus%3A/singular: 62b44c4973b92b806c69a4b15e0256dc
     Everything%20you%20need%2C%20free%20forever.%20Unlimited%20boards%2C%20unlimited%20lists%2C%20unlimited%20cards.%20Upgrade%20any%20time./singular: fa21632ab1468edf10acda2fe7b71323
@@ -253,6 +256,7 @@ checksums:
     monthly%20billing/singular: e228107df80015377112d41f4f155cb3
     moved%20the%20card%20from%20%3C0%3E%7B0%7D%3C%2F0%3E%20to%3C1%3E%7B1%7D%3C%2F1%3E/singular: 11edf0427766c26db541d46379dc3c16
     moved%20the%20card%20to%20another%20list/singular: 2e8c41bfafb42fa299ce56e4300205ff
+    my-workspace-name/singular: 399577242038fb7295afde603f22b4ad
     Name/singular: 9368b5a047572b6051f334af5aa76819
     Need%20help%3F/singular: 04e7322f2d3ffb2d73ff2f64b71637c8
     New/singular: 126d036fae5fb6b629728ecb97e6195b
@@ -368,6 +372,8 @@ checksums:
     This%20board%20URL%20has%20already%20been%20taken/singular: 1d8b40332a031b5b77a3658e48dd51ca
     This%20will%20result%20in%20the%20permanent%20deletion%20of%20all%20data%20associated%20with%20this%20workspace./singular: a31141558af793635c1ddd2fa0a33499
     This%20will%20result%20in%20the%20permanent%20deletion%20of%20all%20data%20associated%20with%20your%20account./singular: b49224632bd6c3b7f5e462912aeb1081
+    This%20workspace%20URL%20has%20already%20been%20taken/singular: b455329e2a71da677acab91d3a00bad6
+    This%20workspace%20URL%20is%20reserved/singular: 7e47c892b93d4334c1606010c06e875e
     This%20workspace%20username%20has%20already%20been%20taken/singular: b7eadb89c615874f416d9658d0428c4c
     To%20Do/singular: d60813ea824f373462471e092d136eed
     Toggle%20menu/singular: 29dea3e0b6238874f8c7a27619df8e36
@@ -437,6 +443,7 @@ checksums:
     When%20Trello%20launched%20in%202011%2C%20it%20blew%20everyone%20away%20with%20its%20carefully%20designed%20simplicity%2C%20but%20over%20time%20(and%20atlassification)%20it%20lost%20its%20magic%20and%20grew%20into%20something%20closer%20to%20%22Jira%20Lite%22.%20This%20project%20is%20our%20attempt%20to%20recapture%20the%20original%20magic%20of%20Trello's%20simplicity%2C%20in%20open%20source./singular: 60a55e9bd16c3d1beff1a6c7633c5911
     Why%20make%20an%20open%20source%20Trello%3F/singular: 090833338ba8c64ef7a75e0f2615b34b
     Workspace/singular: b63ef0e99ee6f7fef6cbe4971ca6cf0f
+    Workspace%20created%20successfully.%20You%20can%20upgrade%20later%20in%20settings./singular: 8bbaba9f82ff076a08185ada1ee7eb94
     Workspace%20deleted/singular: bc5c267ce3f04de94ff1379cf2ca48a3
     Workspace%20description/singular: 7159d620b7ef5c5afef734989a5be08b
     Workspace%20description%20cannot%20exceed%20280%20characters/singular: d0e83b9a0304d7c36cf8c85d98783ce2
@@ -445,6 +452,7 @@ checksums:
     Workspace%20members/singular: 1857292f9567c556c781a23bd7e10544
     Workspace%20name/singular: 855614bbf862fd6a9f6a3e76943f92d4
     Workspace%20name%20cannot%20exceed%2024%20characters/singular: c8b8f79fb83abf8329cc34c1f51fcfc9
+    Workspace%20name%20is%20required/singular: b8c5162dd08c4d941bc57f9d0cbee451
     Workspace%20name%20must%20be%20at%20least%203%20characters%20long/singular: e448ea97418d44b18b4c21c22b8ba779
     Workspace%20name%20updated/singular: 3206ea410ee1ea4182b27ac0d89f92a1
     Workspace%20slug%20updated/singular: 527b92711d38cb35b40741df43aef047

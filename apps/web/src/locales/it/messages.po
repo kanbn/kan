@@ -243,6 +243,7 @@ msgstr "Post del blog"
 msgid "Board"
 msgstr "Bacheca"
 
+#: src/components/NewWorkspaceForm.tsx:310
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:80
 msgid "Board analytics (coming soon)"
 msgstr "Analisi della bacheca (prossimamente)"
@@ -478,7 +479,11 @@ msgstr "Crea nuova etichetta"
 msgid "Create new list"
 msgstr "Crea nuova lista"
 
-#: src/components/NewWorkspaceForm.tsx:94
+#: src/components/NewWorkspaceForm.tsx:337
+msgid "Create Pro workspace"
+msgstr "Crea spazio di lavoro Pro"
+
+#: src/components/NewWorkspaceForm.tsx:337
 #: src/components/WorkspaceMenu.tsx:116
 msgid "Create workspace"
 msgstr "Crea spazio di lavoro"
@@ -499,6 +504,11 @@ msgstr "La password attuale è obbligatoria"
 msgid "Custom domain"
 msgstr "Dominio personalizzato"
 
+#: src/components/NewWorkspaceForm.tsx:280
+msgid "Custom URLs require Pro plan ($29/month)"
+msgstr "Gli URL personalizzati richiedono il piano Pro ($29/mese)"
+
+#: src/components/NewWorkspaceForm.tsx:304
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:74
 msgid "Custom workspace URL"
 msgstr "URL personalizzato dell'area di lavoro"
@@ -728,6 +738,10 @@ msgstr "Errore durante l'aggiornamento dell'URL dell'area di lavoro"
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:41
 msgid "Error upgrading subscription"
 msgstr "Errore nell'aggiornamento dell'abbonamento"
+
+#: src/components/NewWorkspaceForm.tsx:138
+msgid "Error upgrading to Pro"
+msgstr "Errore durante l'aggiornamento a Pro"
 
 #: src/views/settings/components/Avatar.tsx:56
 #: src/views/settings/components/Avatar.tsx:97
@@ -1003,6 +1017,7 @@ msgstr "Etichette & Filtri"
 msgid "Language"
 msgstr "Lingua"
 
+#: src/components/NewWorkspaceForm.tsx:297
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:67
 msgid "Launch offer"
 msgstr "Offerta di lancio"
@@ -1103,6 +1118,10 @@ msgstr "ha spostato la scheda da <0>{0}</0> a<1>{1}</1>"
 msgid "moved the card to another list"
 msgstr "ha spostato la scheda in un'altra lista"
 
+#: src/components/NewWorkspaceForm.tsx:238
+msgid "my-workspace-name"
+msgstr "my-workspace-name"
+
 #: src/components/LabelForm.tsx:135
 #: src/views/boards/components/NewBoardForm.tsx:99
 msgid "Name"
@@ -1153,7 +1172,7 @@ msgstr "La nuova password deve essere diversa dalla password attuale"
 msgid "New Ticket"
 msgstr "Nuovo ticket"
 
-#: src/components/NewWorkspaceForm.tsx:65
+#: src/components/NewWorkspaceForm.tsx:208
 msgid "New workspace"
 msgstr "Nuovo spazio di lavoro"
 
@@ -1268,7 +1287,7 @@ msgstr "Seleziona un file da caricare."
 
 #: src/components/DeleteLabelConfirmation.tsx:26
 #: src/components/FeedbackModal.tsx:41
-#: src/components/NewWorkspaceForm.tsx:42
+#: src/components/NewWorkspaceForm.tsx:151
 #: src/views/board/components/NewCardForm.tsx:174
 #: src/views/board/components/NewListForm.tsx:78
 #: src/views/board/components/UpdateBoardSlugForm.tsx:72
@@ -1618,6 +1637,14 @@ msgstr "Questo comporterà l'eliminazione permanente di tutti i dati associati a
 msgid "This will result in the permanent deletion of all data associated with your account."
 msgstr "Questo comporterà l'eliminazione permanente di tutti i dati associati al tuo account."
 
+#: src/components/NewWorkspaceForm.tsx:249
+msgid "This workspace URL has already been taken"
+msgstr "Questo URL dello spazio di lavoro è già stato utilizzato"
+
+#: src/components/NewWorkspaceForm.tsx:251
+msgid "This workspace URL is reserved"
+msgstr "Questo URL dello spazio di lavoro è riservato"
+
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:123
 msgid "This workspace username has already been taken"
 msgstr "Questo nome utente dell'area di lavoro è già stato utilizzato"
@@ -1667,7 +1694,7 @@ msgstr "Impossibile creare la checklist"
 msgid "Unable to create list"
 msgstr "Impossibile creare la lista"
 
-#: src/components/NewWorkspaceForm.tsx:41
+#: src/components/NewWorkspaceForm.tsx:150
 msgid "Unable to create workspace"
 msgstr "Impossibile creare lo spazio di lavoro"
 
@@ -1766,6 +1793,7 @@ msgstr "Commenti illimitati"
 msgid "Unlimited lists"
 msgstr "Liste illimitate"
 
+#: src/components/NewWorkspaceForm.tsx:294
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:64
 msgid "Unlimited members"
 msgstr "Membri illimitati"
@@ -1817,14 +1845,17 @@ msgstr "Passa al Piano Team"
 msgid "Urgent"
 msgstr "Urgente"
 
+#: src/components/NewWorkspaceForm.tsx:34
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
 msgid "URL can only contain letters, numbers, and hyphens"
 msgstr "L'URL può contenere solo lettere, numeri e trattini"
 
+#: src/components/NewWorkspaceForm.tsx:32
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:34
 msgid "URL cannot exceed 24 characters"
 msgstr "L'URL non può superare i 24 caratteri"
 
+#: src/components/NewWorkspaceForm.tsx:30
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:32
 msgid "URL must be at least 3 characters long"
 msgstr "L'URL deve contenere almeno 3 caratteri"
@@ -1905,6 +1936,10 @@ msgstr "Perché creare un Trello open source?"
 msgid "Workspace"
 msgstr "Spazio di lavoro"
 
+#: src/components/NewWorkspaceForm.tsx:139
+msgid "Workspace created successfully. You can upgrade later in settings."
+msgstr "Spazio di lavoro creato con successo. Puoi effettuare l'aggiornamento più tardi nelle impostazioni."
+
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:26
 msgid "Workspace deleted"
 msgstr "Spazio di lavoro eliminato"
@@ -1930,7 +1965,7 @@ msgstr "Descrizione dell'area di lavoro aggiornata"
 msgid "Workspace members"
 msgstr "Membri del workspace"
 
-#: src/components/NewWorkspaceForm.tsx:81
+#: src/components/NewWorkspaceForm.tsx:224
 #: src/views/settings/index.tsx:180
 msgid "Workspace name"
 msgstr "Nome dello spazio di lavoro"
@@ -1938,6 +1973,10 @@ msgstr "Nome dello spazio di lavoro"
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:15
 msgid "Workspace name cannot exceed 24 characters"
 msgstr "Il nome dello spazio di lavoro non può superare i 24 caratteri"
+
+#: src/components/NewWorkspaceForm.tsx:26
+msgid "Workspace name is required"
+msgstr "Il nome dello spazio di lavoro è obbligatorio"
 
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:14
 msgid "Workspace name must be at least 3 characters long"
