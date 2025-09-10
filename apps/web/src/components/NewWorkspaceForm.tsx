@@ -1,30 +1,98 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
-import { useEffect } from "react";
+import { env } from "next-runtime-env";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { HiXMark } from "react-icons/hi2";
+import {
+  HiBolt,
+  HiCheck,
+  HiCheckBadge,
+  HiInformationCircle,
+  HiXMark,
+} from "react-icons/hi2";
+import { twMerge } from "tailwind-merge";
+import { z } from "zod";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
+import { useDebounce } from "~/hooks/useDebounce";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import LoadingSpinner from "./LoadingSpinner";
 
-interface FormValues {
-  name: string;
-}
+const schema = z.object({
+  name: z.string().min(1, { message: t`Workspace name is required` }),
+  slug: z
+    .string()
+    .min(3, {
+      message: t`URL must be at least 3 characters long`,
+    })
+    .max(24, { message: t`URL cannot exceed 24 characters` })
+    .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/, {
+      message: t`URL can only contain letters, numbers, and hyphens`,
+    })
+    .optional()
+    .or(z.literal("")),
+});
+
+type FormValues = z.infer<typeof schema>;
 
 export function NewWorkspaceForm() {
   const { closeModal } = useModal();
   const { showPopup } = usePopup();
   const { switchWorkspace } = useWorkspace();
-  const { register, handleSubmit } = useForm<FormValues>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    trigger,
+    clearErrors,
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      name: "",
+      slug: "",
+    },
+    mode: "onSubmit",
+  });
   const utils = api.useUtils();
 
+  const isCloudEnv = env("NEXT_PUBLIC_KAN_ENV") === "cloud";
+
+  const slug = watch("slug");
+  const [debouncedSlug] = useDebounce(slug, 500);
+  const isTyping = slug !== debouncedSlug;
+
+  // Validate slug only after debounce
+  useEffect(() => {
+    if (isTyping) {
+      // Clear errors while typing
+      clearErrors("slug");
+    } else if (debouncedSlug) {
+      // Validate after debounce
+      void trigger("slug");
+    }
+  }, [isTyping, debouncedSlug, trigger, clearErrors]);
+
+  const checkWorkspaceSlugAvailability =
+    api.workspace.checkSlugAvailability.useQuery(
+      {
+        workspaceSlug: debouncedSlug ?? "",
+      },
+      {
+        enabled: !!debouncedSlug && debouncedSlug.length >= 3 && !errors.slug,
+      },
+    );
+
+  const isWorkspaceSlugAvailable = checkWorkspaceSlugAvailability.data;
+
   const createWorkspace = api.workspace.create.useMutation({
-    onSuccess: (values) => {
+    onSuccess: async (values, variables) => {
       if (values.publicId && values.name) {
-        utils.workspace.all.invalidate();
+        void utils.workspace.all.invalidate();
         switchWorkspace({
           publicId: values.publicId,
           name: values.name,
@@ -33,6 +101,47 @@ export function NewWorkspaceForm() {
           plan: values.plan,
           role: "admin",
         });
+
+        // If in cloud and user provided a valid slug, create checkout session for pro
+        if (
+          env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
+          slug &&
+          isWorkspaceSlugAvailable?.isAvailable
+        ) {
+          try {
+            const response = await fetch(
+              "/api/stripe/create_checkout_session",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  slug,
+                  workspacePublicId: values.publicId,
+                  cancelUrl: "/boards",
+                  successUrl: "/boards",
+                }),
+              },
+            );
+
+            const data = await response.json();
+            const url = (data as { url: string }).url;
+
+            if (url) {
+              window.location.href = url;
+              return; // Don't close modal if redirecting to checkout
+            }
+          } catch (error) {
+            console.error("Error creating checkout session:", error);
+            showPopup({
+              header: t`Error upgrading to Pro`,
+              message: t`Workspace created successfully. You can upgrade later in settings.`,
+              icon: "warning",
+            });
+          }
+        }
+
         closeModal();
       }
     },
@@ -51,11 +160,45 @@ export function NewWorkspaceForm() {
     if (nameElement) nameElement.focus();
   }, []);
 
+  const [shouldShowBenefits, setShouldShowBenefits] = useState(false);
+
+  const isValidSlug = slug && slug.length >= 3 && !errors.slug;
+
+  useEffect(() => {
+    if (!checkWorkspaceSlugAvailability.isPending && isValidSlug) {
+      setShouldShowBenefits(isWorkspaceSlugAvailable?.isAvailable === true);
+    }
+  }, [
+    isValidSlug,
+    isWorkspaceSlugAvailable?.isAvailable,
+    checkWorkspaceSlugAvailability.isPending,
+  ]);
+
+  // Reset benefits when slug becomes invalid
+  useEffect(() => {
+    if (!isValidSlug) {
+      setShouldShowBenefits(false);
+    }
+  }, [isValidSlug]);
+
+  const showProBenefits = shouldShowBenefits;
+
   const onSubmit = (values: FormValues) => {
+    // Don't submit if slug is provided but not available
+    if (values.slug && isWorkspaceSlugAvailable?.isAvailable === false) {
+      return;
+    }
+
     createWorkspace.mutate({
       name: values.name,
+      slug: !isCloudEnv && values.slug ? values.slug : undefined,
     });
   };
+
+  const isSlugAvailable =
+    isValidSlug &&
+    isWorkspaceSlugAvailable?.isAvailable &&
+    !isWorkspaceSlugAvailable?.isReserved;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -80,6 +223,7 @@ export function NewWorkspaceForm() {
           id="workspace-name"
           placeholder={t`Workspace name`}
           {...register("name")}
+          errorMessage={errors.name?.message}
           onKeyDown={async (e) => {
             if (e.key === "Enter") {
               e.preventDefault();
@@ -87,11 +231,110 @@ export function NewWorkspaceForm() {
             }
           }}
         />
+
+        <div className="mt-4">
+          <Input
+            id="workspace-slug"
+            placeholder={t`my-workspace-name`}
+            {...register("slug")}
+            className={`${
+              isSlugAvailable
+                ? "focus:ring-green-500 dark:focus:ring-green-500"
+                : ""
+            }`}
+            errorMessage={
+              errors.slug?.message ??
+              (isWorkspaceSlugAvailable?.isAvailable === false &&
+              isWorkspaceSlugAvailable?.isReserved === false
+                ? t`This workspace URL has already been taken`
+                : isWorkspaceSlugAvailable?.isReserved
+                  ? t`This workspace URL is reserved`
+                  : undefined)
+            }
+            prefix={
+              env("NEXT_PUBLIC_KAN_ENV") === "cloud"
+                ? "kan.bn/"
+                : `${env("NEXT_PUBLIC_BASE_URL")}/`
+            }
+            iconRight={
+              slug && slug.length >= 3 && !errors.slug ? (
+                isWorkspaceSlugAvailable?.isAvailable ? (
+                  <HiCheck className="h-4 w-4 text-green-500" />
+                ) : checkWorkspaceSlugAvailability.isPending || isTyping ? (
+                  <LoadingSpinner />
+                ) : null
+              ) : null
+            }
+            onKeyDown={async (e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                await handleSubmit(onSubmit)();
+              }
+            }}
+          />
+
+          {showProBenefits && (
+            <div className="mt-2 flex items-center gap-1">
+              <HiInformationCircle className="h-4 w-4 text-dark-900" />
+              <p className="text-xs text-gray-500 dark:text-dark-900">
+                {t`Custom URLs require Pro plan ($29/month)`}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {showProBenefits && (
+          <div className="mt-6">
+            <div className="rounded-md bg-light-100 p-3 text-xs text-light-900 dark:bg-dark-200 dark:text-dark-900">
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3">
+                  <HiCheckBadge className="h-[18px] w-[18px] flex-shrink-0 text-light-1000 dark:text-dark-950" />
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs text-neutral-900 dark:text-dark-1000">
+                      {t`Unlimited members`}
+                    </span>
+                    <span className="inline-flex items-center rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium text-emerald-600 ring-1 ring-inset ring-emerald-500/20 dark:text-emerald-400 sm:text-[10px]">
+                      {t`Launch offer`}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <HiCheckBadge className="h-[18px] w-[18px] flex-shrink-0 text-light-1000 dark:text-dark-950" />
+                  <span className="text-xs text-neutral-900 dark:text-dark-1000">
+                    {t`Custom workspace URL`}
+                  </span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <HiCheckBadge className="h-[18px] w-[18px] flex-shrink-0 text-light-1000 dark:text-dark-950" />
+                  <span className="text-xs text-neutral-900 dark:text-dark-1000">
+                    {t`Board analytics (coming soon)`}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
-        <div>
-          <Button type="submit" isLoading={createWorkspace.isPending}>
-            {t`Create workspace`}
+      <div
+        className={twMerge(
+          "mt-6 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600",
+          !showProBenefits && "mt-12",
+        )}
+      >
+        <div className="flex gap-2">
+          <Button
+            type="submit"
+            isLoading={createWorkspace.isPending}
+            iconLeft={showProBenefits ? <HiBolt /> : undefined}
+            disabled={
+              createWorkspace.isPending ||
+              (!!isValidSlug &&
+                (checkWorkspaceSlugAvailability.isPending ||
+                  isWorkspaceSlugAvailable?.isAvailable === false ||
+                  isTyping))
+            }
+          >
+            {showProBenefits ? t`Create Pro workspace` : t`Create workspace`}
           </Button>
         </div>
       </div>

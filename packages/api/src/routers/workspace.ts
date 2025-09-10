@@ -140,6 +140,12 @@ export const workspaceRouter = createTRPCRouter({
     .input(
       z.object({
         name: z.string().min(1),
+        slug: z
+          .string()
+          .min(3)
+          .max(24)
+          .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
+          .optional(),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof workspaceRepo.create>>>())
@@ -153,12 +159,43 @@ export const workspaceRouter = createTRPCRouter({
           code: "UNAUTHORIZED",
         });
 
+      // Check if slug is provided in cloud environment
+      if (input.slug && env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
+        throw new TRPCError({
+          message: "Custom URLs are only available for Pro workspaces",
+          code: "BAD_REQUEST",
+        });
+      }
+
       const workspacePublicId = generateUID();
+      const workspaceSlug = input.slug ?? workspacePublicId;
+
+      if (input.slug) {
+        const reservedOrPremiumWorkspaceSlug =
+          await workspaceSlugRepo.getWorkspaceSlug(ctx.db, input.slug);
+
+        const isWorkspaceSlugAvailable =
+          await workspaceRepo.isWorkspaceSlugAvailable(ctx.db, input.slug);
+
+        if (reservedOrPremiumWorkspaceSlug) {
+          throw new TRPCError({
+            message: `Workspace slug '${input.slug}' is reserved or premium`,
+            code: "BAD_REQUEST",
+          });
+        }
+
+        if (!isWorkspaceSlugAvailable) {
+          throw new TRPCError({
+            message: `Workspace slug '${input.slug}' is already taken`,
+            code: "BAD_REQUEST",
+          });
+        }
+      }
 
       const result = await workspaceRepo.create(ctx.db, {
         publicId: workspacePublicId,
         name: input.name,
-        slug: workspacePublicId,
+        slug: workspaceSlug,
         createdBy: userId,
         createdByEmail: userEmail,
       });
