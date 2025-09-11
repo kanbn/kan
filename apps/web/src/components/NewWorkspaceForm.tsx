@@ -42,7 +42,7 @@ type FormValues = z.infer<typeof schema>;
 export function NewWorkspaceForm() {
   const { closeModal } = useModal();
   const { showPopup } = usePopup();
-  const { switchWorkspace } = useWorkspace();
+  const { switchWorkspace, availableWorkspaces } = useWorkspace();
   const {
     register,
     handleSubmit,
@@ -59,6 +59,8 @@ export function NewWorkspaceForm() {
     mode: "onSubmit",
   });
   const utils = api.useUtils();
+
+  const hasAvailableWorkspaces = availableWorkspaces.length > 0;
 
   const isCloudEnv = env("NEXT_PUBLIC_KAN_ENV") === "cloud";
 
@@ -209,7 +211,10 @@ export function NewWorkspaceForm() {
           </h2>
           <button
             type="button"
-            className="rounded p-1 hover:bg-light-200 focus:outline-none dark:hover:bg-dark-300"
+            className={twMerge(
+              "rounded p-1 hover:bg-light-200 focus:outline-none dark:hover:bg-dark-300",
+              !hasAvailableWorkspaces && "invisible",
+            )}
             onClick={(e) => {
               e.preventDefault();
               closeModal();
@@ -306,9 +311,14 @@ export function NewWorkspaceForm() {
                 </div>
                 <div className="flex items-center space-x-3">
                   <HiCheckBadge className="h-[18px] w-[18px] flex-shrink-0 text-light-1000 dark:text-dark-950" />
-                  <span className="text-xs text-neutral-900 dark:text-dark-1000">
-                    {t`Board analytics (coming soon)`}
-                  </span>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs text-neutral-900 dark:text-dark-1000">
+                      {t`Board analytics`}
+                    </span>
+                    <span className="inline-flex items-center rounded-full bg-gray-500/10 px-2 py-0.5 text-[10px] font-medium text-gray-600 ring-1 ring-inset ring-gray-500/20 dark:text-gray-400 sm:text-[10px]">
+                      {t`Coming soon`}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

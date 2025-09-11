@@ -14,7 +14,7 @@ export interface Subscription {
   unlimitedSeats: boolean;
   periodStart: Date | null;
   periodEnd: Date | null;
-  referenceId: string;
+  referenceId: string | null;
   stripeSubscriptionId: string | null;
   stripeCustomerId: string | null;
   createdAt: Date;
