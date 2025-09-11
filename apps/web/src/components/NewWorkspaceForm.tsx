@@ -169,12 +169,16 @@ export function NewWorkspaceForm() {
   const isValidSlug = slug && slug.length >= 3 && !errors.slug;
 
   useEffect(() => {
-    if (!checkWorkspaceSlugAvailability.isPending && isValidSlug) {
+    if (
+      isCloudEnv &&
+      !checkWorkspaceSlugAvailability.isPending &&
+      isValidSlug
+    ) {
       const isAvailable = isWorkspaceSlugAvailable?.isAvailable === true;
       setShouldShowBenefits(isAvailable);
 
-      // Automatically enable Pro toggle when slug is available (only in cloud env)
-      if (isAvailable && isCloudEnv) {
+      // Automatically enable Pro toggle when slug is available
+      if (isAvailable) {
         setIsProToggleEnabled(true);
         setLastAvailableSlug(slug);
       }
