@@ -15,6 +15,7 @@ import { z } from "zod";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
+import Toggle from "~/components/Toggle";
 import { useDebounce } from "~/hooks/useDebounce";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -50,6 +51,7 @@ export function NewWorkspaceForm() {
     watch,
     trigger,
     clearErrors,
+    setValue,
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -67,6 +69,10 @@ export function NewWorkspaceForm() {
   const slug = watch("slug");
   const [debouncedSlug] = useDebounce(slug, 500);
   const isTyping = slug !== debouncedSlug;
+
+  // Pro toggle state management
+  const [isProToggleEnabled, setIsProToggleEnabled] = useState(false);
+  const [lastAvailableSlug, setLastAvailableSlug] = useState<string>("");
 
   // Validate slug only after debounce
   useEffect(() => {
@@ -104,12 +110,8 @@ export function NewWorkspaceForm() {
           role: "admin",
         });
 
-        // If in cloud and user provided a valid slug, create checkout session for pro
-        if (
-          env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
-          slug &&
-          isWorkspaceSlugAvailable?.isAvailable
-        ) {
+        // If in cloud and Pro toggle is enabled, create checkout session for pro
+        if (env("NEXT_PUBLIC_KAN_ENV") === "cloud" && isProToggleEnabled) {
           try {
             const response = await fetch(
               "/api/stripe/create_checkout_session",
@@ -119,9 +121,9 @@ export function NewWorkspaceForm() {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  slug,
+                  slug: slug || undefined,
                   workspacePublicId: values.publicId,
-                  cancelUrl: "/boards",
+                  cancelUrl: "/settings?upgrade=pro",
                   successUrl: "/boards",
                 }),
               },
@@ -168,12 +170,21 @@ export function NewWorkspaceForm() {
 
   useEffect(() => {
     if (!checkWorkspaceSlugAvailability.isPending && isValidSlug) {
-      setShouldShowBenefits(isWorkspaceSlugAvailable?.isAvailable === true);
+      const isAvailable = isWorkspaceSlugAvailable?.isAvailable === true;
+      setShouldShowBenefits(isAvailable);
+
+      // Automatically enable Pro toggle when slug is available (only in cloud env)
+      if (isAvailable && isCloudEnv) {
+        setIsProToggleEnabled(true);
+        setLastAvailableSlug(slug);
+      }
     }
   }, [
     isValidSlug,
     isWorkspaceSlugAvailable?.isAvailable,
     checkWorkspaceSlugAvailability.isPending,
+    slug,
+    isCloudEnv,
   ]);
 
   // Reset benefits when slug becomes invalid
@@ -183,7 +194,22 @@ export function NewWorkspaceForm() {
     }
   }, [isValidSlug]);
 
-  const showProBenefits = shouldShowBenefits;
+  // Handle Pro toggle changes
+  const handleProToggleChange = () => {
+    if (isProToggleEnabled) {
+      // Turning off: clear the slug and disable Pro
+      setValue("slug", "");
+      setIsProToggleEnabled(false);
+    } else {
+      // Turning on: restore the last available slug if we have one
+      if (lastAvailableSlug) {
+        setValue("slug", lastAvailableSlug);
+      }
+      setIsProToggleEnabled(true);
+    }
+  };
+
+  const showProBenefits = isProToggleEnabled;
 
   const onSubmit = (values: FormValues) => {
     // Don't submit if slug is provided but not available
@@ -278,11 +304,11 @@ export function NewWorkspaceForm() {
             }}
           />
 
-          {showProBenefits && (
+          {slug && slug.length >= 3 && shouldShowBenefits && (
             <div className="mt-2 flex items-center gap-1">
               <HiInformationCircle className="h-4 w-4 text-dark-900" />
               <p className="text-xs text-gray-500 dark:text-dark-900">
-                {t`Custom URLs require Pro plan ($29/month)`}
+                {t`Custom URLs require upgrading to a Pro plan`}
               </p>
             </div>
           )}
@@ -331,20 +357,27 @@ export function NewWorkspaceForm() {
           !showProBenefits && "mt-12",
         )}
       >
-        <div className="flex gap-2">
+        {/* Pro Toggle - only show in cloud environment */}
+        {isCloudEnv && (
+          <Toggle
+            isChecked={isProToggleEnabled}
+            onChange={handleProToggleChange}
+            label={t`Upgrade to Pro ($29/month)`}
+          />
+        )}
+        <div>
           <Button
             type="submit"
             isLoading={createWorkspace.isPending}
-            iconLeft={showProBenefits ? <HiBolt /> : undefined}
             disabled={
               createWorkspace.isPending ||
-              (!!isValidSlug &&
+              (!!slug &&
                 (checkWorkspaceSlugAvailability.isPending ||
                   isWorkspaceSlugAvailable?.isAvailable === false ||
                   isTyping))
             }
           >
-            {showProBenefits ? t`Create Pro workspace` : t`Create workspace`}
+            {t`Create workspace`}
           </Button>
         </div>
       </div>

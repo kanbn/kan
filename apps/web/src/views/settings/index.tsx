@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HiBolt, HiMiniArrowTopRightOnSquare } from "react-icons/hi2";
 
 import type { Subscription } from "@kan/shared/utils";
@@ -36,6 +36,7 @@ export default function SettingsPage() {
   const router = useRouter();
   const workspaceUrlSectionRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [hasOpenedUpgradeModal, setHasOpenedUpgradeModal] = useState(false);
   const isCredentialsEnabled =
     env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
   const { data } = api.user.getUser.useQuery();
@@ -100,11 +101,13 @@ export default function SettingsPage() {
     if (
       router.query.upgrade === "pro" &&
       env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
-      !hasActiveSubscription(subscriptions, "pro")
+      !hasActiveSubscription(subscriptions, "pro") &&
+      !hasOpenedUpgradeModal
     ) {
       openModal("UPGRADE_TO_PRO");
+      setHasOpenedUpgradeModal(true);
     }
-  }, [router.query.upgrade, subscriptions, openModal]);
+  }, [router.query.upgrade, subscriptions, openModal, hasOpenedUpgradeModal]);
 
   const { mutateAsync: disconnectTrello } =
     api.integration.disconnect.useMutation({

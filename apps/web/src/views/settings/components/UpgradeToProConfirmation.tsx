@@ -95,7 +95,12 @@ export function UpgradeToProConfirmation({
         </div>
       </div>
       <div className="mt-5 flex justify-end space-x-2 sm:mt-6">
-        <Button onClick={() => closeModal()} variant="secondary">
+        <Button
+          onClick={() => {
+            closeModal();
+          }}
+          variant="secondary"
+        >
           {t`Cancel`}
         </Button>
         <Button
