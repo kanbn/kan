@@ -184,7 +184,7 @@ export default function MembersPage() {
                 {!proSubscription && (
                   <Link
                     href="/settings?upgrade=pro"
-                    className="flex items-center rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-center text-xs text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
+                    className="hidden items-center rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-center text-xs text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-400 lg:flex"
                   >
                     <HiBolt />
                     <span className="ml-1 font-medium">
