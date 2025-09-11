@@ -1,4 +1,3 @@
-import { Menu } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { HiMiniPlus } from "react-icons/hi2";
 
@@ -101,22 +100,19 @@ export default function LabelSelector({
           {selectedLabels.length ? (
             <div className="flex flex-wrap gap-x-0.5">
               {selectedLabels.map((label) => (
-                <Menu.Button key={label.key}>
-                  <Badge value={label.value} iconLeft={label.leftIcon} />
-                </Menu.Button>
-              ))}
-              <Menu.Button>
                 <Badge
-                  value={t`Add label`}
-                  iconLeft={<HiMiniPlus size={14} />}
+                  key={label.key}
+                  value={label.value}
+                  iconLeft={label.leftIcon}
                 />
-              </Menu.Button>
+              ))}
+              <Badge value={t`Add label`} iconLeft={<HiMiniPlus size={14} />} />
             </div>
           ) : (
-            <Menu.Button className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 pl-2 text-left text-sm text-neutral-900 hover:border-light-300 hover:bg-light-200 dark:border-dark-50 dark:text-dark-1000 dark:hover:border-dark-200 dark:hover:bg-dark-100">
+            <div className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 pl-2 text-left text-sm text-neutral-900 hover:border-light-300 hover:bg-light-200 dark:border-dark-50 dark:text-dark-1000 dark:hover:border-dark-200 dark:hover:bg-dark-100">
               <HiMiniPlus size={22} className="pr-2" />
               {t`Add label`}
-            </Menu.Button>
+            </div>
           )}
         </CheckboxDropdown>
       )}
