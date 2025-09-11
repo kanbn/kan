@@ -1,6 +1,11 @@
+import Link from "next/link";
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
-import { HiEllipsisHorizontal, HiOutlinePlusSmall } from "react-icons/hi2";
+import {
+  HiBolt,
+  HiEllipsisHorizontal,
+  HiOutlinePlusSmall,
+} from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
 import type { Subscription } from "@kan/shared/utils";
@@ -168,30 +173,45 @@ export default function MembersPage() {
       <PageHead title={t`Members | ${workspace.name ?? "Workspace"}`} />
       <div className="m-auto h-full max-w-[1100px] p-6 px-5 md:px-28 md:py-12">
         <div className="mb-8 flex w-full justify-between">
-          <h1 className="font-bold tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
-            {t`Members`}
-          </h1>
+          <div className="flex items-center gap-3">
+            <h1 className="font-bold tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
+              {t`Members`}
+            </h1>
+          </div>
           <div className="flex items-center gap-3">
             {env("NEXT_PUBLIC_KAN_ENV") === "cloud" && (
-              <div
-                className={twMerge(
-                  "flex items-center rounded-full border px-3 py-1 text-center text-xs",
-                  teamSubscription || proSubscription
-                    ? "border-emerald-300 bg-emerald-50 text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
-                    : "border-light-300 bg-light-50 text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900",
+              <>
+                {!proSubscription && (
+                  <Link
+                    href="/settings?upgrade=pro"
+                    className="flex items-center rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-center text-xs text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
+                  >
+                    <HiBolt />
+                    <span className="ml-1 font-medium">
+                      {t`Launch offer: Get unlimited members with Pro`}
+                    </span>
+                  </Link>
                 )}
-              >
-                <span className="font-medium">
-                  {proSubscription
-                    ? t`Pro Plan`
-                    : teamSubscription
-                      ? t`Team Plan`
-                      : t`Free Plan`}
-                  {proSubscription && unlimitedSeats && (
-                    <span className="ml-1 text-xs">∞</span>
+                <div
+                  className={twMerge(
+                    "flex items-center rounded-full border px-3 py-1 text-center text-xs",
+                    teamSubscription || proSubscription
+                      ? "border-emerald-300 bg-emerald-50 text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
+                      : "border-light-300 bg-light-50 text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900",
                   )}
-                </span>
-              </div>
+                >
+                  <span className="font-medium">
+                    {proSubscription
+                      ? t`Pro Plan`
+                      : teamSubscription
+                        ? t`Team Plan`
+                        : t`Free Plan`}
+                    {proSubscription && unlimitedSeats && (
+                      <span className="ml-1 text-xs">∞</span>
+                    )}
+                  </span>
+                </div>
+              </>
             )}
             <Button
               onClick={() => openModal("INVITE_MEMBER")}

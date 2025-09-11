@@ -55,7 +55,7 @@ checksums:
     Billing%20portal/singular: dc3afa14ffe19f5920992a0c9d49d525
     Blog%20Post/singular: 38e027f212be445dc530e427fc642a20
     Board/singular: 101ff39aab674c033c15ab978d0d8bac
-    Board%20analytics%20(coming%20soon)/singular: 3f648e6fe3849ee2ac5cdf410ac9ea06
+    Board%20analytics/singular: 336a8c70a91adc49c15266167ee84cc0
     Board%20name%20cannot%20exceed%20100%20characters/singular: 985c0177744ec56d8dac84f66ec284ca
     Board%20name%20is%20required/singular: dbd0c6cc945ab19e702fc27f970a023b
     Board%20not%20found/singular: 5af9844595fa8aed5985066620435515
@@ -108,13 +108,12 @@ checksums:
     Create%20new%20key/singular: 236bdf75e42b42ec7fb25639bdc035af
     Create%20new%20label/singular: 6be30980847b577847baa01bb5f29711
     Create%20new%20list/singular: ce61ca8be7b3f6c26c32b684a42a2c26
-    Create%20Pro%20workspace/singular: 334d9574a930c41f623e54f3b770a676
     Create%20workspace/singular: 2e6718e79964ea5ce22d76c2189c77ca
     created%20the%20card/singular: 605475f5aaeb4dbccbf7c4eb9107b43d
     Critical/singular: eb327cd411b50aee954f8d1d215d003a
     Current%20password%20is%20required/singular: 72536bca9598680027f2be8ce80ac280
     Custom%20domain/singular: b09e7a9c187b7163b4a6cfc78042fe42
-    Custom%20URLs%20require%20Pro%20plan%20(%2429%2Fmonth)/singular: aa89f78139a29b5c0fe55ae886504220
+    Custom%20URLs%20require%20upgrading%20to%20a%20Pro%20plan/singular: f7275e3b473b8f7b39dab6b37eb26fea
     Custom%20workspace%20URL/singular: 7ba841d0946eb04fa3d17d74365be37b
     Customer%20Support/singular: 50e3c77e22e41061ca85ea2f02625a2e
     Dark/singular: 73e6e208ba628b26e90fcf6dce15e1b2
@@ -234,6 +233,7 @@ checksums:
     Labels%20%26%20Filters/singular: 8f0bdd6084516f8241cb613178114390
     Language/singular: 277fd1a41cc237a437cd1d5e4a80463b
     Launch%20offer/singular: 624592ba2ecf647a3fe60d493c1ee71a
+    Launch%20offer%3A%20Get%20unlimited%20members%20with%20Pro/singular: 8c1be80f5b2fcc112922282afbe30287
     Launch%20offer%3A%20unlimited%20seats%20for%20just%20%2429%2Fmonth%20with%20Pro/singular: 235d1cda21811c296afdc0dcc438cc24
     Learning/singular: 90e91da3f870f065f2da9aa9adf53514
     Legal/singular: 00d3f08da61a21887009819cf93fb414
@@ -419,6 +419,7 @@ checksums:
     updated%20the%20title%20to%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: aca196d729401d8adc5c8ca9d558840e
     Upgrade/singular: 63c3b52882e0d779859307d672c178c2
     Upgrade%20to%20Pro/singular: 972773025e763ddf53273df6d37a729a
+    Upgrade%20to%20Pro%20(%2429%2Fmonth)/singular: 9a91ea70f5eb55aac96640bf0fd7feff
     Upgrade%20to%20Team%20Plan/singular: 40e2ef151266937f8bbe63b3d361f645
     Urgent/singular: e79afcd4398e52e10e7e8243a7eecabe
     URL%20can%20only%20contain%20letters%2C%20numbers%2C%20and%20hyphens/singular: 875d37d2d920f98ef60a314eda8a5d9a

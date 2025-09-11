@@ -148,7 +148,7 @@ msgstr "Tous les systèmes opérationnels"
 msgid "Already have an account? <0><1>Sign in</1></0>"
 msgstr "Vous avez déjà un compte ? <0><1>Connectez-vous</1></0>"
 
-#: src/views/settings/index.tsx:124
+#: src/views/settings/index.tsx:127
 msgid "An error occurred while disconnecting your Trello account."
 msgstr "Une erreur s'est produite lors de la déconnexion de votre compte Trello."
 
@@ -156,7 +156,7 @@ msgstr "Une erreur s'est produite lors de la déconnexion de votre compte Trello
 msgid "An unexpected error occurred. Please try again later."
 msgstr "Une erreur inattendue s'est produite. Veuillez réessayer plus tard."
 
-#: src/views/settings/index.tsx:293
+#: src/views/settings/index.tsx:296
 msgid "API keys"
 msgstr "Clés API"
 
@@ -227,11 +227,11 @@ msgid "billed monthly"
 msgstr "facturation mensuelle"
 
 #: src/views/boards/components/TemplateBoards.tsx:55
-#: src/views/settings/index.tsx:232
+#: src/views/settings/index.tsx:235
 msgid "Billing"
 msgstr "Facturation"
 
-#: src/views/settings/index.tsx:242
+#: src/views/settings/index.tsx:245
 msgid "Billing portal"
 msgstr "Portail de facturation"
 
@@ -243,10 +243,10 @@ msgstr "Article de blog"
 msgid "Board"
 msgstr "Tableau"
 
-#: src/components/NewWorkspaceForm.tsx:310
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:80
-msgid "Board analytics (coming soon)"
-msgstr "Analyses de tableau (bientôt disponible)"
+#: src/components/NewWorkspaceForm.tsx:346
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:81
+msgid "Board analytics"
+msgstr "Analyses du tableau"
 
 #: src/views/boards/components/NewBoardForm.tsx:21
 msgid "Board name cannot exceed 100 characters"
@@ -316,7 +316,7 @@ msgstr "Rapport de bug"
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:168
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:94
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:104
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -330,12 +330,12 @@ msgstr "Titre de la carte"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:109
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:178
-#: src/views/settings/index.tsx:325
-#: src/views/settings/index.tsx:335
+#: src/views/settings/index.tsx:328
+#: src/views/settings/index.tsx:338
 msgid "Change Password"
 msgstr "Modifier le mot de passe"
 
-#: src/views/settings/index.tsx:224
+#: src/views/settings/index.tsx:227
 msgid "Change the language of the app."
 msgstr "Changer la langue de l'application."
 
@@ -365,7 +365,9 @@ msgstr "Revue de code"
 msgid "Collaborate seamlessly with your team."
 msgstr "Collaborez en toute fluidité avec votre équipe."
 
+#: src/components/NewWorkspaceForm.tsx:349
 #: src/views/home/components/Features.tsx:66
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:84
 msgid "Coming soon"
 msgstr "Bientôt disponible"
 
@@ -399,7 +401,7 @@ msgid "Confirm your new password"
 msgstr "Confirmez votre nouveau mot de passe"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:157
-#: src/views/settings/index.tsx:269
+#: src/views/settings/index.tsx:272
 msgid "Connect Trello"
 msgstr "Connecter Trello"
 
@@ -407,7 +409,7 @@ msgstr "Connecter Trello"
 msgid "Connect your favorite tools to streamline your workflow."
 msgstr "Connectez vos outils favoris pour simplifier votre flux de travail."
 
-#: src/views/settings/index.tsx:256
+#: src/views/settings/index.tsx:259
 msgid "Connect your Trello account to import boards."
 msgstr "Connectez votre compte Trello pour importer des tableaux."
 
@@ -479,11 +481,7 @@ msgstr "Créer une nouvelle étiquette"
 msgid "Create new list"
 msgstr "Créer une nouvelle liste"
 
-#: src/components/NewWorkspaceForm.tsx:337
-msgid "Create Pro workspace"
-msgstr "Créer un espace de travail Pro"
-
-#: src/components/NewWorkspaceForm.tsx:337
+#: src/components/NewWorkspaceForm.tsx:384
 #: src/components/WorkspaceMenu.tsx:116
 msgid "Create workspace"
 msgstr "Créer un espace de travail"
@@ -504,11 +502,11 @@ msgstr "Le mot de passe actuel est requis"
 msgid "Custom domain"
 msgstr "Domaine personnalisé"
 
-#: src/components/NewWorkspaceForm.tsx:280
-msgid "Custom URLs require Pro plan ($29/month)"
-msgstr "Les URL personnalisées nécessitent un forfait Pro (29 $/mois)"
+#: src/components/NewWorkspaceForm.tsx:315
+msgid "Custom URLs require upgrading to a Pro plan"
+msgstr "Les URL personnalisées nécessitent une mise à niveau vers un forfait Pro"
 
-#: src/components/NewWorkspaceForm.tsx:304
+#: src/components/NewWorkspaceForm.tsx:339
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:74
 msgid "Custom workspace URL"
 msgstr "URL d'espace de travail personnalisée"
@@ -530,8 +528,8 @@ msgid "Delete"
 msgstr "Supprimer"
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:96
-#: src/views/settings/index.tsx:343
-#: src/views/settings/index.tsx:353
+#: src/views/settings/index.tsx:346
+#: src/views/settings/index.tsx:356
 msgid "Delete account"
 msgstr "Supprimer le compte"
 
@@ -552,8 +550,8 @@ msgid "Delete list"
 msgstr "Supprimer la liste"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:106
-#: src/views/settings/index.tsx:306
-#: src/views/settings/index.tsx:317
+#: src/views/settings/index.tsx:309
+#: src/views/settings/index.tsx:320
 msgid "Delete workspace"
 msgstr "Supprimer l'espace de travail"
 
@@ -579,7 +577,7 @@ msgstr "a supprimé l'élément <0>{0}</0> de la checklist"
 msgid "Design"
 msgstr "Design"
 
-#: src/views/settings/index.tsx:284
+#: src/views/settings/index.tsx:287
 msgid "Disconnect Trello"
 msgstr "Déconnecter Trello"
 
@@ -587,7 +585,7 @@ msgstr "Déconnecter Trello"
 msgid "Discuss and collaborate on cards."
 msgstr "Discutez et collaborez sur les cartes."
 
-#: src/views/settings/index.tsx:173
+#: src/views/settings/index.tsx:176
 msgid "Display name"
 msgstr "Nom d'affichage"
 
@@ -705,7 +703,7 @@ msgstr "Erreur lors de la suppression de l'étiquette"
 msgid "Error deleting workspace"
 msgstr "Erreur lors de la suppression de l'espace de travail"
 
-#: src/views/settings/index.tsx:123
+#: src/views/settings/index.tsx:126
 msgid "Error disconnecting Trello"
 msgstr "Erreur lors de la déconnexion de Trello"
 
@@ -739,7 +737,7 @@ msgstr "Erreur lors de la mise à jour de l'URL de l'espace de travail"
 msgid "Error upgrading subscription"
 msgstr "Erreur lors de la mise à niveau de l'abonnement"
 
-#: src/components/NewWorkspaceForm.tsx:138
+#: src/components/NewWorkspaceForm.tsx:142
 msgid "Error upgrading to Pro"
 msgstr "Erreur lors de la mise à niveau vers Pro"
 
@@ -810,7 +808,7 @@ msgid "Free"
 msgstr "Gratuit"
 
 #: src/views/members/components/InviteMemberForm.tsx:193
-#: src/views/members/index.tsx:189
+#: src/views/members/index.tsx:208
 msgid "Free Plan"
 msgstr "Forfait gratuit"
 
@@ -969,7 +967,7 @@ msgstr "Entretien"
 msgid "Invalid email address"
 msgstr "Adresse e-mail invalide"
 
-#: src/views/members/index.tsx:201
+#: src/views/members/index.tsx:221
 msgid "Invite"
 msgstr "Inviter"
 
@@ -1013,16 +1011,20 @@ msgstr "Étiquettes"
 msgid "Labels & Filters"
 msgstr "Étiquettes & filtres"
 
-#: src/views/settings/index.tsx:221
+#: src/views/settings/index.tsx:224
 msgid "Language"
 msgstr "Langue"
 
-#: src/components/NewWorkspaceForm.tsx:297
+#: src/components/NewWorkspaceForm.tsx:332
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:67
 msgid "Launch offer"
 msgstr "Offre de lancement"
 
-#: src/views/home/components/Pricing.tsx:98
+#: src/views/members/index.tsx:191
+msgid "Launch offer: Get unlimited members with Pro"
+msgstr "Offre de lancement : obtenez des membres illimités avec Pro"
+
+#: src/views/home/components/Pricing.tsx:99
 msgid "Launch offer: unlimited seats for just $29/month with Pro"
 msgstr "Offre de lancement : sièges illimités pour seulement 29 $/mois avec Pro"
 
@@ -1091,12 +1093,12 @@ msgstr "Priorité moyenne"
 #: src/views/board/components/Filters.tsx:93
 #: src/views/board/components/NewCardForm.tsx:357
 #: src/views/card/index.tsx:125
-#: src/views/members/index.tsx:172
+#: src/views/members/index.tsx:178
 msgid "Members"
 msgstr "Membres"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/members/index.tsx:168
+#: src/views/members/index.tsx:173
 msgid "Members | {0}"
 msgstr "Membres | {0}"
 
@@ -1118,7 +1120,7 @@ msgstr "a déplacé la carte de <0>{0}</0> vers <1>{1}</1>"
 msgid "moved the card to another list"
 msgstr "a déplacé la carte vers une autre liste"
 
-#: src/components/NewWorkspaceForm.tsx:238
+#: src/components/NewWorkspaceForm.tsx:273
 msgid "my-workspace-name"
 msgstr "my-workspace-name"
 
@@ -1172,7 +1174,7 @@ msgstr "Le nouveau mot de passe doit être différent du mot de passe actuel"
 msgid "New Ticket"
 msgstr "Nouveau ticket"
 
-#: src/components/NewWorkspaceForm.tsx:208
+#: src/components/NewWorkspaceForm.tsx:240
 msgid "New workspace"
 msgstr "Nouvel espace de travail"
 
@@ -1208,11 +1210,11 @@ msgstr "Offre"
 msgid "Onboarding"
 msgstr "Intégration"
 
-#: src/views/settings/index.tsx:346
+#: src/views/settings/index.tsx:349
 msgid "Once you delete your account, there is no going back. This action cannot be undone."
 msgstr "Une fois que vous supprimez votre compte, il n'y a pas de retour possible. Cette action ne peut pas être annulée."
 
-#: src/views/settings/index.tsx:309
+#: src/views/settings/index.tsx:312
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Une fois que vous supprimez votre espace de travail, il n'y a pas de retour possible. Cette action ne peut pas être annulée."
 
@@ -1244,11 +1246,11 @@ msgstr "Le mot de passe doit comporter au moins 8 caractères"
 msgid "Passwords do not match"
 msgstr "Les mots de passe ne correspondent pas"
 
-#: src/views/home/components/Pricing.tsx:101
+#: src/views/home/components/Pricing.tsx:102
 msgid "Payment frequency"
 msgstr "Fréquence de paiement"
 
-#: src/views/members/index.tsx:129
+#: src/views/members/index.tsx:134
 msgid "Pending"
 msgstr "En attente"
 
@@ -1287,7 +1289,7 @@ msgstr "Veuillez sélectionner un fichier à télécharger."
 
 #: src/components/DeleteLabelConfirmation.tsx:26
 #: src/components/FeedbackModal.tsx:41
-#: src/components/NewWorkspaceForm.tsx:151
+#: src/components/NewWorkspaceForm.tsx:155
 #: src/views/board/components/NewCardForm.tsx:174
 #: src/views/board/components/NewListForm.tsx:78
 #: src/views/board/components/UpdateBoardSlugForm.tsx:72
@@ -1331,7 +1333,7 @@ msgid "Pricing"
 msgstr "Tarifs"
 
 #: src/views/home/components/Pricing.tsx:56
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:86
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:91
 msgid "Priority email support"
 msgstr "Support par e-mail prioritaire"
 
@@ -1343,7 +1345,7 @@ msgstr "Politique de confidentialité"
 msgid "Private"
 msgstr "Privé"
 
-#: src/views/members/index.tsx:186
+#: src/views/members/index.tsx:205
 msgid "Pro Plan"
 msgstr "Plan Pro"
 
@@ -1355,7 +1357,7 @@ msgstr "Plan Pro ∞"
 msgid "Profile image updated"
 msgstr "Image de profil mise à jour"
 
-#: src/views/settings/index.tsx:168
+#: src/views/settings/index.tsx:171
 msgid "Profile picture"
 msgstr "Photo de profil"
 
@@ -1391,7 +1393,7 @@ msgstr "À distance"
 msgid "Remove"
 msgstr "Supprimer"
 
-#: src/views/members/index.tsx:143
+#: src/views/members/index.tsx:148
 msgid "Remove member"
 msgstr "Supprimer le membre"
 
@@ -1447,7 +1449,7 @@ msgstr "Révoquer"
 msgid "Roadmap"
 msgstr "Feuille de route"
 
-#: src/views/members/index.tsx:223
+#: src/views/members/index.tsx:243
 msgid "Role"
 msgstr "Rôle"
 
@@ -1496,12 +1498,12 @@ msgid "Senior"
 msgstr "Senior"
 
 #: src/components/SideNavigation.tsx:78
-#: src/views/settings/index.tsx:162
+#: src/views/settings/index.tsx:165
 msgid "Settings"
 msgstr "Paramètres"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/settings/index.tsx:158
+#: src/views/settings/index.tsx:161
 msgid "Settings | {0}"
 msgstr "Paramètres | {0}"
 
@@ -1569,7 +1571,7 @@ msgid "System"
 msgstr "Système"
 
 #: src/views/members/components/InviteMemberForm.tsx:182
-#: src/views/members/index.tsx:188
+#: src/views/members/index.tsx:207
 msgid "Team Plan"
 msgstr "Forfait d'équipe"
 
@@ -1637,11 +1639,11 @@ msgstr "Cela entraînera la suppression définitive de toutes les données assoc
 msgid "This will result in the permanent deletion of all data associated with your account."
 msgstr "Cela entraînera la suppression définitive de toutes les données associées à votre compte."
 
-#: src/components/NewWorkspaceForm.tsx:249
+#: src/components/NewWorkspaceForm.tsx:284
 msgid "This workspace URL has already been taken"
 msgstr "Cette URL d'espace de travail est déjà prise"
 
-#: src/components/NewWorkspaceForm.tsx:251
+#: src/components/NewWorkspaceForm.tsx:286
 msgid "This workspace URL is reserved"
 msgstr "Cette URL d'espace de travail est réservée"
 
@@ -1662,7 +1664,7 @@ msgstr "Basculer le menu"
 msgid "Track all card changes with detailed activity history."
 msgstr "Suivez tous les changements de cartes avec un historique d'activité détaillé."
 
-#: src/views/settings/index.tsx:116
+#: src/views/settings/index.tsx:119
 msgid "Trello disconnected"
 msgstr "Trello déconnecté"
 
@@ -1694,7 +1696,7 @@ msgstr "Impossible de créer la liste de contrôle"
 msgid "Unable to create list"
 msgstr "Impossible de créer une liste"
 
-#: src/components/NewWorkspaceForm.tsx:150
+#: src/components/NewWorkspaceForm.tsx:154
 msgid "Unable to create workspace"
 msgstr "Impossible de créer l'espace de travail"
 
@@ -1793,7 +1795,7 @@ msgstr "Commentaires illimités"
 msgid "Unlimited lists"
 msgstr "Listes illimitées"
 
-#: src/components/NewWorkspaceForm.tsx:294
+#: src/components/NewWorkspaceForm.tsx:329
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:64
 msgid "Unlimited members"
 msgstr "Membres illimités"
@@ -1827,14 +1829,18 @@ msgstr "a mis à jour le titre"
 msgid "updated the title to <0>{0}</0>"
 msgstr "a mis à jour le titre en <0>{0}</0>"
 
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:99
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:109
 msgid "Upgrade"
 msgstr "Mettre à niveau"
 
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:52
-#: src/views/settings/index.tsx:213
+#: src/views/settings/index.tsx:216
 msgid "Upgrade to Pro"
 msgstr "Passer à Pro"
+
+#: src/components/NewWorkspaceForm.tsx:369
+msgid "Upgrade to Pro ($29/month)"
+msgstr "Passer à Pro (29 $/mois)"
 
 #: src/views/members/components/InviteMemberForm.tsx:224
 msgid "Upgrade to Team Plan"
@@ -1845,17 +1851,17 @@ msgstr "Passer au forfait d'équipe"
 msgid "Urgent"
 msgstr "Urgent"
 
-#: src/components/NewWorkspaceForm.tsx:34
+#: src/components/NewWorkspaceForm.tsx:35
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
 msgid "URL can only contain letters, numbers, and hyphens"
 msgstr "L'URL ne peut contenir que des lettres, des chiffres et des traits d'union"
 
-#: src/components/NewWorkspaceForm.tsx:32
+#: src/components/NewWorkspaceForm.tsx:33
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:34
 msgid "URL cannot exceed 24 characters"
 msgstr "L'URL ne peut pas dépasser 24 caractères"
 
-#: src/components/NewWorkspaceForm.tsx:30
+#: src/components/NewWorkspaceForm.tsx:31
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:32
 msgid "URL must be at least 3 characters long"
 msgstr "L'URL doit comporter au moins 3 caractères"
@@ -1864,7 +1870,7 @@ msgstr "L'URL doit comporter au moins 3 caractères"
 msgid "Use template"
 msgstr "Utiliser le modèle"
 
-#: src/views/members/index.tsx:217
+#: src/views/members/index.tsx:237
 msgid "User"
 msgstr "Utilisateur"
 
@@ -1876,11 +1882,11 @@ msgstr "L'utilisateur est déjà membre de cet espace de travail"
 msgid "Video"
 msgstr "Vidéo"
 
-#: src/views/settings/index.tsx:296
+#: src/views/settings/index.tsx:299
 msgid "View and manage your API keys."
 msgstr "Consultez et gérez vos clés API."
 
-#: src/views/settings/index.tsx:235
+#: src/views/settings/index.tsx:238
 msgid "View and manage your billing and subscription."
 msgstr "Consultez et gérez votre facturation et votre abonnement."
 
@@ -1936,7 +1942,7 @@ msgstr "Pourquoi créer un Trello open source ?"
 msgid "Workspace"
 msgstr "Espace de travail"
 
-#: src/components/NewWorkspaceForm.tsx:139
+#: src/components/NewWorkspaceForm.tsx:143
 msgid "Workspace created successfully. You can upgrade later in settings."
 msgstr "Espace de travail créé avec succès. Vous pourrez effectuer la mise à niveau ultérieurement dans les paramètres."
 
@@ -1944,7 +1950,7 @@ msgstr "Espace de travail créé avec succès. Vous pourrez effectuer la mise à
 msgid "Workspace deleted"
 msgstr "Espace de travail supprimé"
 
-#: src/views/settings/index.tsx:199
+#: src/views/settings/index.tsx:202
 msgid "Workspace description"
 msgstr "Description de l'espace de travail"
 
@@ -1965,8 +1971,8 @@ msgstr "Description de l'espace de travail mise à jour"
 msgid "Workspace members"
 msgstr "Membres de l'espace de travail"
 
-#: src/components/NewWorkspaceForm.tsx:224
-#: src/views/settings/index.tsx:180
+#: src/components/NewWorkspaceForm.tsx:259
+#: src/views/settings/index.tsx:183
 msgid "Workspace name"
 msgstr "Nom de l'espace de travail"
 
@@ -1974,7 +1980,7 @@ msgstr "Nom de l'espace de travail"
 msgid "Workspace name cannot exceed 24 characters"
 msgstr "Le nom de l'espace de travail ne peut pas dépasser 24 caractères"
 
-#: src/components/NewWorkspaceForm.tsx:26
+#: src/components/NewWorkspaceForm.tsx:27
 msgid "Workspace name is required"
 msgstr "Le nom de l'espace de travail est requis"
 
@@ -1990,7 +1996,7 @@ msgstr "Nom de l'espace de travail mis à jour"
 msgid "Workspace slug updated"
 msgstr "Slug de l'espace de travail mis à jour"
 
-#: src/views/settings/index.tsx:189
+#: src/views/settings/index.tsx:192
 msgid "Workspace URL"
 msgstr "URL de l'espace de travail"
 
@@ -2006,7 +2012,7 @@ msgstr "Annuel"
 msgid "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits."
 msgstr "Oui, nous proposons un plan gratuit à vie pour un usage individuel. Aucune restriction, aucun paywall, aucune limite."
 
-#: src/views/settings/index.tsx:328
+#: src/views/settings/index.tsx:331
 msgid "You are about to change your password."
 msgstr "Vous êtes sur le point de modifier votre mot de passe."
 
@@ -2054,11 +2060,11 @@ msgstr "Votre mot de passe a été modifié."
 msgid "Your profile image has been updated."
 msgstr "Votre image de profil a été mise à jour."
 
-#: src/views/settings/index.tsx:117
+#: src/views/settings/index.tsx:120
 msgid "Your Trello account has been disconnected."
 msgstr "Votre compte Trello a été déconnecté."
 
-#: src/views/settings/index.tsx:278
+#: src/views/settings/index.tsx:281
 msgid "Your Trello account is connected."
 msgstr "Votre compte Trello est connecté."
 
