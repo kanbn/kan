@@ -44,7 +44,7 @@ export default function WorkspaceMenu({
             </span>
             <span
               className={twMerge(
-                "ml-2 text-sm font-bold text-neutral-900 dark:text-dark-1000",
+                "ml-2 truncate text-sm font-bold text-neutral-900 dark:text-dark-1000",
                 isCollapsed && "md:hidden",
               )}
             >
@@ -87,17 +87,17 @@ export default function WorkspaceMenu({
                     onClick={() => switchWorkspace(availableWorkspace)}
                     className="flex w-full items-center justify-between rounded-[5px] px-3 py-2 text-left text-sm text-neutral-900 hover:bg-light-200 dark:text-dark-1000 dark:hover:bg-dark-400"
                   >
-                    <div>
-                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-[5px] bg-indigo-700">
+                    <div className="flex min-w-0 flex-1 items-center">
+                      <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-[5px] bg-indigo-700">
                         <span className="text-xs font-medium leading-none text-white">
                           {availableWorkspace.name.charAt(0).toUpperCase()}
                         </span>
                       </span>
-                      <span className="ml-2 text-xs font-medium">
+                      <span className="ml-2 truncate text-xs font-medium">
                         {availableWorkspace.name}
                       </span>
                     </div>
-                    {workspace.name === availableWorkspace.name && (
+                    {workspace.publicId === availableWorkspace.publicId && (
                       <span>
                         <HiCheck className="h-4 w-4" aria-hidden="true" />
                       </span>
