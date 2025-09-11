@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { useState } from "react";
-import { HiCheckCircle } from "react-icons/hi2";
+import { HiBolt, HiCheckCircle } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
 type Frequency = "monthly" | "annually";
@@ -94,6 +94,7 @@ const Pricing = () => {
 
         <div className="mt-12 flex flex-col items-center justify-center">
           <div className="mb-4 flex items-center gap-2 rounded-full border bg-white px-4 py-1.5 text-center text-xs font-bold text-gray-800 dark:border-dark-300 dark:bg-white dark:text-gray-800 lg:text-sm">
+            <HiBolt />
             <p>
               {t`Launch offer: unlimited seats for just $29/month with Pro`}
             </p>
