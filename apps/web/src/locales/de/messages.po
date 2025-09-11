@@ -1120,10 +1120,6 @@ msgstr "hat die Karte von <0>{0}</0> nach <1>{1}</1> verschoben"
 msgid "moved the card to another list"
 msgstr "hat die Karte in eine andere Liste verschoben"
 
-#: src/components/NewWorkspaceForm.tsx:273
-msgid "my-workspace-name"
-msgstr "my-workspace-name"
-
 #: src/components/LabelForm.tsx:135
 #: src/views/boards/components/NewBoardForm.tsx:99
 msgid "Name"
@@ -1999,6 +1995,10 @@ msgstr "Workspace-Slug aktualisiert"
 #: src/views/settings/index.tsx:192
 msgid "Workspace URL"
 msgstr "Workspace-URL"
+
+#: src/components/NewWorkspaceForm.tsx:273
+msgid "workspace-url"
+msgstr "workspace-url"
 
 #: src/views/boards/components/TemplateBoards.tsx:30
 msgid "Writing"

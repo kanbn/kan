@@ -1120,10 +1120,6 @@ msgstr "movió la tarjeta de <0>{0}</0> a<1>{1}</1>"
 msgid "moved the card to another list"
 msgstr "movió la tarjeta a otra lista"
 
-#: src/components/NewWorkspaceForm.tsx:273
-msgid "my-workspace-name"
-msgstr "my-workspace-name"
-
 #: src/components/LabelForm.tsx:135
 #: src/views/boards/components/NewBoardForm.tsx:99
 msgid "Name"
@@ -1999,6 +1995,10 @@ msgstr "Slug del espacio de trabajo actualizado"
 #: src/views/settings/index.tsx:192
 msgid "Workspace URL"
 msgstr "URL del espacio de trabajo"
+
+#: src/components/NewWorkspaceForm.tsx:273
+msgid "workspace-url"
+msgstr "workspace-url"
 
 #: src/views/boards/components/TemplateBoards.tsx:30
 msgid "Writing"

@@ -270,7 +270,7 @@ export function NewWorkspaceForm() {
         <div className="mt-4">
           <Input
             id="workspace-slug"
-            placeholder={t`my-workspace-name`}
+            placeholder={t`workspace-url`}
             {...register("slug")}
             className={`${
               isSlugAvailable
