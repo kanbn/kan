@@ -1,4 +1,7 @@
 CREATE TYPE "public"."custom_field_type" AS ENUM('text', 'link', 'date', 'checkbox', 'emoji', 'user');--> statement-breakpoint
+ALTER TYPE "public"."card_activity_type" ADD VALUE 'card.updated.customfield.added' BEFORE 'card.archived';--> statement-breakpoint
+ALTER TYPE "public"."card_activity_type" ADD VALUE 'card.updated.customfield.updated' BEFORE 'card.archived';--> statement-breakpoint
+ALTER TYPE "public"."card_activity_type" ADD VALUE 'card.updated.customfield.removed' BEFORE 'card.archived';--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "custom_field_definition" (
 	"id" bigserial PRIMARY KEY NOT NULL,
 	"publicId" varchar(12) NOT NULL,
