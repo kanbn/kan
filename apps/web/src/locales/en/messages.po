@@ -23,12 +23,12 @@ msgstr ", or see our"
 
 #. placeholder {0}: card?.title ?? "Card"
 #. placeholder {1}: board?.name ?? "Board"
-#: src/views/card/index.tsx:214
+#: src/views/card/index.tsx:323
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
 #. placeholder {0}: labelPublicIds.length
-#: src/views/board/components/NewCardForm.tsx:432
+#: src/views/board/components/NewCardForm.tsx:543
 msgid "{0} labels"
 msgstr "{0} labels"
 
@@ -69,7 +69,7 @@ msgstr "A powerful, flexible kanban app that helps you organise work, track prog
 msgid "Account deleted"
 msgstr "Account deleted"
 
-#: src/views/card/index.tsx:289
+#: src/views/card/index.tsx:399
 #: src/views/public/board/CardModal.tsx:143
 msgid "Activity"
 msgstr "Activity"
@@ -107,15 +107,32 @@ msgstr "Add description... (type '/' to open commands or '@' to mention)"
 msgid "Add details..."
 msgstr "Add details..."
 
-#: src/views/card/components/LabelSelector.tsx:110
-#: src/views/card/components/LabelSelector.tsx:118
+#: src/lib/constants/customFields.ts:22
+msgid "Add emoji..."
+msgstr "Add emoji..."
+
+#: src/views/board/components/CustomFieldManager.tsx:113
+msgid "Add Field"
+msgstr "Add Field"
+
+#: src/views/card/components/LabelSelector.tsx:109
+#: src/views/card/components/LabelSelector.tsx:114
 msgid "Add label"
 msgstr "Add label"
+
+#: src/lib/constants/customFields.ts:19
+msgid "Add link..."
+msgstr "Add link..."
 
 #: src/views/card/components/MemberSelector.tsx:130
 #: src/views/members/components/InviteMemberForm.tsx:147
 msgid "Add member"
 msgstr "Add member"
+
+#: src/lib/constants/customFields.ts:18
+#: src/lib/constants/customFields.ts:24
+msgid "Add value..."
+msgstr "Add value..."
 
 #: src/views/card/components/ActivityList.tsx:69
 msgid "added a checklist"
@@ -124,6 +141,10 @@ msgstr "added a checklist"
 #: src/views/card/components/ActivityList.tsx:72
 msgid "added a checklist item"
 msgstr "added a checklist item"
+
+#: src/views/card/components/ActivityList.tsx:77
+msgid "added a custom field"
+msgstr "added a custom field"
 
 #: src/views/card/components/ActivityList.tsx:65
 msgid "added a label to the card"
@@ -134,17 +155,17 @@ msgid "added a member to the card"
 msgstr "added a member to the card"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:146
+#: src/views/card/components/ActivityList.tsx:149
 msgid "added checklist <0>{0}</0>"
 msgstr "added checklist <0>{0}</0>"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:170
+#: src/views/card/components/ActivityList.tsx:173
 msgid "added checklist item <0>{0}</0>"
 msgstr "added checklist item <0>{0}</0>"
 
 #. placeholder {0}: truncate(label)
-#: src/views/card/components/ActivityList.tsx:130
+#: src/views/card/components/ActivityList.tsx:133
 msgid "added label <0>{0}</0>"
 msgstr "added label <0>{0}</0>"
 
@@ -221,6 +242,10 @@ msgstr "Are you sure you want to delete this checklist?"
 msgid "Are you sure you want to delete this comment?"
 msgstr "Are you sure you want to delete this comment?"
 
+#: src/views/board/components/CustomFieldManager.tsx:87
+msgid "Are you sure you want to delete this custom field? This action cannot be undone."
+msgstr "Are you sure you want to delete this custom field? This action cannot be undone."
+
 #: src/components/DeleteLabelConfirmation.tsx:41
 msgid "Are you sure you want to delete this label?"
 msgstr "Are you sure you want to delete this label?"
@@ -230,7 +255,7 @@ msgid "Are you sure you want to delete your account?"
 msgstr "Are you sure you want to delete your account?"
 
 #. placeholder {0}: truncate(memberName)
-#: src/views/card/components/ActivityList.tsx:110
+#: src/views/card/components/ActivityList.tsx:113
 msgid "assigned <0>{0}</0> to the card"
 msgstr "assigned <0>{0}</0> to the card"
 
@@ -275,7 +300,7 @@ msgstr "Billing portal"
 msgid "Blog Post"
 msgstr "Blog Post"
 
-#: src/views/board/index.tsx:331
+#: src/views/board/index.tsx:338
 msgid "Board"
 msgstr "Board"
 
@@ -301,7 +326,7 @@ msgstr "Board name cannot exceed 100 characters"
 msgid "Board name is required"
 msgstr "Board name is required"
 
-#: src/views/board/index.tsx:357
+#: src/views/board/index.tsx:364
 #: src/views/public/board/index.tsx:148
 msgid "Board not found"
 msgstr "Board not found"
@@ -331,12 +356,12 @@ msgid "Board visibility updated"
 msgstr "Board visibility updated"
 
 #: src/components/SideNavigation.tsx:68
-#: src/views/boards/index.tsx:27
+#: src/views/boards/index.tsx:32
 msgid "Boards"
 msgstr "Boards"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/boards/index.tsx:23
+#: src/views/boards/index.tsx:28
 msgid "Boards | {0}"
 msgstr "Boards | {0}"
 
@@ -357,6 +382,8 @@ msgid "Bug Report"
 msgstr "Bug Report"
 
 #: src/components/DeleteLabelConfirmation.tsx:49
+#: src/views/board/components/CustomFieldManager.tsx:240
+#: src/views/board/components/CustomFieldManager.tsx:378
 #: src/views/card/components/Comment.tsx:158
 #: src/views/card/components/DeleteCardConfirmation.tsx:86
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:63
@@ -369,11 +396,11 @@ msgstr "Bug Report"
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/views/card/index.tsx:260
+#: src/views/card/index.tsx:369
 msgid "Card not found"
 msgstr "Card not found"
 
-#: src/views/board/components/NewCardForm.tsx:307
+#: src/views/board/components/NewCardForm.tsx:375
 msgid "Card title"
 msgstr "Card title"
 
@@ -392,6 +419,10 @@ msgstr "Change the language of the app."
 #: src/views/auth/signup/index.tsx:67
 msgid "Check your inbox"
 msgstr "Check your inbox"
+
+#: src/lib/constants/customFields.ts:8
+msgid "Checkbox"
+msgstr "Checkbox"
 
 #: src/views/card/components/NewChecklistForm.tsx:118
 msgid "Checklist name"
@@ -441,7 +472,7 @@ msgid "completed a checklist item"
 msgstr "completed a checklist item"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:187
+#: src/views/card/components/ActivityList.tsx:190
 msgid "completed checklist item <0>{0}</0>"
 msgstr "completed checklist item <0>{0}</0>"
 
@@ -492,7 +523,7 @@ msgid "Control who can view and edit your boards."
 msgstr "Control who can view and edit your boards."
 
 #: src/components/LabelForm.tsx:213
-#: src/views/board/components/NewCardForm.tsx:458
+#: src/views/board/components/NewCardForm.tsx:569
 #: src/views/board/components/NewListForm.tsx:140
 msgid "Create another"
 msgstr "Create another"
@@ -509,13 +540,21 @@ msgstr "Create another"
 msgid "Create board"
 msgstr "Create board"
 
-#: src/views/board/components/NewCardForm.tsx:468
+#: src/views/board/components/NewCardForm.tsx:579
 msgid "Create card"
 msgstr "Create card"
 
 #: src/views/card/components/NewChecklistForm.tsx:134
 msgid "Create checklist"
 msgstr "Create checklist"
+
+#: src/views/board/components/CustomFieldManager.tsx:319
+msgid "Create Custom Field"
+msgstr "Create Custom Field"
+
+#: src/views/board/components/CustomFieldManager.tsx:381
+msgid "Create Field"
+msgstr "Create Field"
 
 #: src/components/LabelForm.tsx:238
 msgid "Create label"
@@ -533,12 +572,12 @@ msgstr "Create new board"
 msgid "Create new key"
 msgstr "Create new key"
 
-#: src/views/board/components/NewCardForm.tsx:394
-#: src/views/card/components/LabelSelector.tsx:98
+#: src/views/board/components/NewCardForm.tsx:505
+#: src/views/card/components/LabelSelector.tsx:97
 msgid "Create new label"
 msgstr "Create new label"
 
-#: src/views/board/index.tsx:425
+#: src/views/board/index.tsx:436
 msgid "Create new list"
 msgstr "Create new list"
 
@@ -567,13 +606,14 @@ msgstr "Current password is required"
 msgid "Custom domain"
 msgstr "Custom domain"
 
-#: src/views/settings/components/CustomURLConfirmation.tsx:50
+#: src/views/board/components/BoardDropdown.tsx:20
+#: src/views/board/components/CustomFieldManager.tsx:105
+msgid "Custom Fields"
+msgstr "Custom Fields"
+
+#: src/views/settings/components/CustomURLConfirmation.tsx:45
 #~ msgid "Custom URLs are a premium feature. You'll be directed to upgrade your account."
 #~ msgstr "Custom URLs are a premium feature. You'll be directed to upgrade your account."
-
-#: src/components/NewWorkspaceForm.tsx:280
-#~ msgid "Custom URLs require Pro plan ($29/month)"
-#~ msgstr "Custom URLs require Pro plan ($29/month)"
 
 #: src/components/NewWorkspaceForm.tsx:315
 msgid "Custom URLs require upgrading to a Pro plan"
@@ -592,6 +632,10 @@ msgstr "Customer Support"
 msgid "Dark"
 msgstr "Dark"
 
+#: src/lib/constants/customFields.ts:7
+msgid "Date"
+msgstr "Date"
+
 #: src/components/DeleteLabelConfirmation.tsx:51
 #: src/components/LabelForm.tsx:228
 #: src/views/card/components/DeleteCardConfirmation.tsx:92
@@ -606,7 +650,7 @@ msgstr "Delete"
 msgid "Delete account"
 msgstr "Delete account"
 
-#: src/views/board/components/BoardDropdown.tsx:20
+#: src/views/board/components/BoardDropdown.tsx:30
 msgid "Delete board"
 msgstr "Delete board"
 
@@ -637,14 +681,19 @@ msgid "deleted a checklist item"
 msgstr "deleted a checklist item"
 
 #. placeholder {0}: truncate(fromTitle)
-#: src/views/card/components/ActivityList.tsx:162
+#: src/views/card/components/ActivityList.tsx:165
 msgid "deleted checklist <0>{0}</0>"
 msgstr "deleted checklist <0>{0}</0>"
 
 #. placeholder {0}: truncate(fromTitle)
-#: src/views/card/components/ActivityList.tsx:205
+#: src/views/card/components/ActivityList.tsx:208
 msgid "deleted checklist item <0>{0}</0>"
 msgstr "deleted checklist item <0>{0}</0>"
+
+#: src/views/board/components/CustomFieldManager.tsx:206
+#: src/views/board/components/CustomFieldManager.tsx:355
+msgid "Description"
+msgstr "Description"
 
 #: src/views/boards/components/TemplateBoards.tsx:32
 msgid "Design"
@@ -703,7 +752,7 @@ msgstr "Don't have an account? <0><1>Sign up</1></0>"
 msgid "Done"
 msgstr "Done"
 
-#: src/views/board/components/BoardDropdown.tsx:15
+#: src/views/board/components/BoardDropdown.tsx:25
 #: src/views/board/components/UpdateBoardSlugForm.tsx:115
 msgid "Edit board URL"
 msgstr "Edit board URL"
@@ -732,9 +781,26 @@ msgstr "email"
 msgid "Email"
 msgstr "Email"
 
+#: src/lib/constants/customFields.ts:9
+msgid "Emoji"
+msgstr "Emoji"
+
 #: src/views/boards/components/TemplateBoards.tsx:23
 msgid "Enhancement"
 msgstr "Enhancement"
+
+#: src/views/board/components/CustomFieldManager.tsx:332
+msgid "Enter field name"
+msgstr "Enter field name"
+
+#: src/lib/constants/customFields.ts:29
+#: src/views/board/components/NewCardForm.tsx:621
+msgid "Enter text"
+msgstr "Enter text"
+
+#: src/lib/constants/customFields.ts:30
+msgid "Enter URL"
+msgstr "Enter URL"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:122
 msgid "Enter your current password"
@@ -836,6 +902,10 @@ msgstr "Execution"
 msgid "Failed to login with {0}. Please try again."
 msgstr "Failed to login with {0}. Please try again."
 
+#: src/views/board/components/NewCardForm.tsx:654
+msgid "False"
+msgstr "False"
+
 #: src/views/home/components/Faqs.tsx:143
 #: src/views/home/components/Footer.tsx:51
 msgid "FAQs"
@@ -863,6 +933,15 @@ msgstr "Feedback"
 #: src/components/FeedbackModal.tsx:33
 msgid "Feedback sent"
 msgstr "Feedback sent"
+
+#: src/views/board/components/CustomFieldManager.tsx:199
+#: src/views/board/components/CustomFieldManager.tsx:324
+msgid "Field Name"
+msgstr "Field Name"
+
+#: src/views/board/components/CustomFieldManager.tsx:339
+msgid "Field Type"
+msgstr "Field Type"
 
 #: src/views/board/components/Filters.tsx:149
 msgid "Filter"
@@ -914,7 +993,7 @@ msgstr "Get Started"
 msgid "Get started by creating a new board"
 msgstr "Get started by creating a new board"
 
-#: src/views/board/index.tsx:417
+#: src/views/board/index.tsx:428
 msgid "Get started by creating a new list"
 msgstr "Get started by creating a new list"
 
@@ -975,6 +1054,10 @@ msgstr "How do I self-host?"
 msgid "How is the project funded?"
 msgstr "How is the project funded?"
 
+#: src/views/board/components/NewCardForm.tsx:632
+msgid "https://example.com"
+msgstr "https://example.com"
+
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:82
 msgid "I acknowledge that all of my account data will be permanently deleted and want to proceed."
 msgstr "I acknowledge that all of my account data will be permanently deleted and want to proceed."
@@ -995,7 +1078,7 @@ msgstr "Ideas to improve this page..."
 #~ msgid "Ideas, Research, Planning, Execution, Review, Next Steps, Complete"
 #~ msgstr "Ideas, Research, Planning, Execution, Review, Next Steps, Complete"
 
-#: src/views/boards/index.tsx:38
+#: src/views/boards/index.tsx:43
 msgid "Import"
 msgstr "Import"
 
@@ -1053,7 +1136,7 @@ msgstr "Invite"
 msgid "Invite another"
 msgstr "Invite another"
 
-#: src/views/card/components/MemberSelector.tsx:112
+#: src/views/card/components/MemberSelector.tsx:111
 #: src/views/members/components/InviteMemberForm.tsx:233
 msgid "Invite member"
 msgstr "Invite member"
@@ -1080,8 +1163,8 @@ msgid "Keep in mind that this action is irreversible."
 msgstr "Keep in mind that this action is irreversible."
 
 #: src/views/board/components/Filters.tsx:101
-#: src/views/board/components/NewCardForm.tsx:398
-#: src/views/card/index.tsx:117
+#: src/views/board/components/NewCardForm.tsx:509
+#: src/views/card/index.tsx:221
 msgid "Labels"
 msgstr "Labels"
 
@@ -1122,17 +1205,25 @@ msgstr "License"
 msgid "Light"
 msgstr "Light"
 
+#: src/lib/constants/customFields.ts:6
+msgid "Link"
+msgstr "Link"
+
 #: src/views/public/board/index.tsx:62
 msgid "Link copied"
 msgstr "Link copied"
 
-#: src/views/card/index.tsx:109
+#: src/views/card/index.tsx:213
 msgid "List"
 msgstr "List"
 
 #: src/views/board/components/NewListForm.tsx:128
 msgid "List name"
 msgstr "List name"
+
+#: src/views/board/components/CustomFieldManager.tsx:95
+msgid "Loading custom fields..."
+msgstr "Loading custom fields..."
 
 #: src/views/auth/login/index.tsx:31
 msgid "Login | kan.bn"
@@ -1159,7 +1250,7 @@ msgid "marked a checklist item as incomplete"
 msgstr "marked a checklist item as incomplete"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:196
+#: src/views/card/components/ActivityList.tsx:199
 msgid "marked checklist item <0>{0}</0> as incomplete"
 msgstr "marked checklist item <0>{0}</0> as incomplete"
 
@@ -1169,8 +1260,8 @@ msgstr "Medium Priority"
 
 #: src/components/SideNavigation.tsx:73
 #: src/views/board/components/Filters.tsx:93
-#: src/views/board/components/NewCardForm.tsx:357
-#: src/views/card/index.tsx:125
+#: src/views/board/components/NewCardForm.tsx:468
+#: src/views/card/index.tsx:229
 #: src/views/members/index.tsx:178
 msgid "Members"
 msgstr "Members"
@@ -1190,7 +1281,7 @@ msgstr "monthly billing"
 
 #. placeholder {0}: truncate(fromList)
 #. placeholder {1}: truncate(toList)
-#: src/views/card/components/ActivityList.tsx:98
+#: src/views/card/components/ActivityList.tsx:101
 msgid "moved the card from <0>{0}</0> to<1>{1}</1>"
 msgstr "moved the card from <0>{0}</0> to<1>{1}</1>"
 
@@ -1215,7 +1306,7 @@ msgstr "Name"
 msgid "Need help?"
 msgstr "Need help?"
 
-#: src/views/boards/index.tsx:48
+#: src/views/boards/index.tsx:53
 msgid "New"
 msgstr "New"
 
@@ -1223,7 +1314,7 @@ msgstr "New"
 msgid "New board"
 msgstr "New board"
 
-#: src/views/board/components/NewCardForm.tsx:290
+#: src/views/board/components/NewCardForm.tsx:358
 msgid "New card"
 msgstr "New card"
 
@@ -1240,7 +1331,7 @@ msgid "New label"
 msgstr "New label"
 
 #: src/views/board/components/NewListForm.tsx:112
-#: src/views/board/index.tsx:394
+#: src/views/board/index.tsx:405
 msgid "New list"
 msgstr "New list"
 
@@ -1272,6 +1363,11 @@ msgstr "Newsletter"
 msgid "Next Steps"
 msgstr "Next Steps"
 
+#: src/lib/constants/customFields.ts:21
+#: src/views/card/components/CustomFieldEditor.tsx:183
+msgid "No"
+msgstr "No"
+
 #: src/views/boards/components/BoardsList.tsx:35
 msgid "No boards"
 msgstr "No boards"
@@ -1284,9 +1380,17 @@ msgstr "No boards found"
 msgid "No credit card required"
 msgstr "No credit card required"
 
-#: src/views/board/index.tsx:414
+#: src/views/board/components/CustomFieldManager.tsx:130
+msgid "No custom fields created yet. Add your first custom field to get started."
+msgstr "No custom fields created yet. Add your first custom field to get started."
+
+#: src/views/board/index.tsx:425
 msgid "No lists"
 msgstr "No lists"
+
+#: src/views/card/components/UserFieldSelector.tsx:82
+msgid "No selection"
+msgstr "No selection"
 
 #: src/views/boards/components/TemplateBoards.tsx:65
 msgid "Offer"
@@ -1303,6 +1407,11 @@ msgstr "Once you delete your account, there is no going back. This action cannot
 #: src/views/settings/index.tsx:312
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Once you delete your workspace, there is no going back. This action cannot be undone."
+
+#: src/views/board/components/CustomFieldManager.tsx:210
+#: src/views/board/components/CustomFieldManager.tsx:361
+msgid "Optional description"
+msgstr "Optional description"
 
 #: src/components/AuthForm.tsx:311
 msgid "or"
@@ -1376,12 +1485,12 @@ msgstr "Please select a file to upload."
 #: src/components/DeleteLabelConfirmation.tsx:26
 #: src/components/FeedbackModal.tsx:41
 #: src/components/NewWorkspaceForm.tsx:155
-#: src/views/board/components/NewCardForm.tsx:174
+#: src/views/board/components/NewCardForm.tsx:210
 #: src/views/board/components/NewListForm.tsx:78
 #: src/views/board/components/UpdateBoardSlugForm.tsx:72
 #: src/views/board/components/VisibilityButton.tsx:53
-#: src/views/board/index.tsx:134
-#: src/views/board/index.tsx:190
+#: src/views/board/index.tsx:135
+#: src/views/board/index.tsx:191
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/ChecklistItemRow.tsx:60
 #: src/views/card/components/ChecklistItemRow.tsx:88
@@ -1390,13 +1499,13 @@ msgstr "Please select a file to upload."
 #: src/views/card/components/DeleteCardConfirmation.tsx:52
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:37
 #: src/views/card/components/DeleteCommentConfirmation.tsx:45
-#: src/views/card/components/LabelSelector.tsx:73
-#: src/views/card/components/ListSelector.tsx:53
-#: src/views/card/components/MemberSelector.tsx:80
+#: src/views/card/components/LabelSelector.tsx:72
+#: src/views/card/components/ListSelector.tsx:52
+#: src/views/card/components/MemberSelector.tsx:79
 #: src/views/card/components/NewChecklistForm.tsx:70
 #: src/views/card/components/NewChecklistItemForm.tsx:89
 #: src/views/card/components/NewCommentForm.tsx:31
-#: src/views/card/index.tsx:173
+#: src/views/card/index.tsx:280
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:78
 #: src/views/members/components/InviteMemberForm.tsx:131
@@ -1483,6 +1592,10 @@ msgstr "Remove"
 msgid "Remove member"
 msgstr "Remove member"
 
+#: src/views/card/components/ActivityList.tsx:79
+msgid "removed a custom field"
+msgstr "removed a custom field"
+
 #: src/views/card/components/ActivityList.tsx:66
 msgid "removed a label from the card"
 msgstr "removed a label from the card"
@@ -1492,7 +1605,7 @@ msgid "removed a member from the card"
 msgstr "removed a member from the card"
 
 #. placeholder {0}: truncate(label)
-#: src/views/card/components/ActivityList.tsx:138
+#: src/views/card/components/ActivityList.tsx:141
 msgid "removed label <0>{0}</0>"
 msgstr "removed label <0>{0}</0>"
 
@@ -1505,14 +1618,27 @@ msgid "renamed a checklist"
 msgstr "renamed a checklist"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:154
+#: src/views/card/components/ActivityList.tsx:157
 msgid "renamed checklist <0>{0}</0>"
 msgstr "renamed checklist <0>{0}</0>"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:178
+#: src/views/card/components/ActivityList.tsx:181
 msgid "renamed checklist item to <0>{0}</0>"
 msgstr "renamed checklist item to <0>{0}</0>"
+
+#: src/views/board/components/CustomFieldManager.tsx:261
+msgid "Required"
+msgstr "Required"
+
+#: src/views/board/components/CustomFieldManager.tsx:221
+#: src/views/board/components/CustomFieldManager.tsx:372
+msgid "Required field"
+msgstr "Required field"
+
+#: src/views/board/components/NewCardForm.tsx:416
+msgid "Required Fields"
+msgstr "Required Fields"
 
 #: src/views/boards/components/TemplateBoards.tsx:76
 msgid "Research"
@@ -1547,6 +1673,7 @@ msgstr "Role"
 msgid "Run on your own infrastructure"
 msgstr "Run on your own infrastructure"
 
+#: src/views/board/components/CustomFieldManager.tsx:228
 #: src/views/card/components/Comment.tsx:165
 msgid "Save"
 msgstr "Save"
@@ -1563,9 +1690,30 @@ msgstr "Screening"
 msgid "Select all"
 msgstr "Select all"
 
+#: src/views/board/components/NewCardForm.tsx:645
+msgid "Select date"
+msgstr "Select date"
+
+#: src/lib/constants/customFields.ts:20
+msgid "Select date..."
+msgstr "Select date..."
+
+#: src/lib/constants/customFields.ts:34
+#: src/views/card/components/UserFieldSelector.tsx:31
+msgid "Select member"
+msgstr "Select member"
+
+#: src/lib/constants/customFields.ts:23
+msgid "Select member..."
+msgstr "Select member..."
+
 #: src/views/boards/components/ImportBoardsForm.tsx:157
 msgid "Select source"
 msgstr "Select source"
+
+#: src/views/board/components/NewCardForm.tsx:702
+msgid "Select team member"
+msgstr "Select team member"
 
 #: src/views/home/components/Pricing.tsx:64
 msgid "Self Host"
@@ -1575,7 +1723,7 @@ msgstr "Self Host"
 msgid "Self host with Github"
 msgstr "Self host with Github"
 
-#: src/views/card/components/ActivityList.tsx:107
+#: src/views/card/components/ActivityList.tsx:110
 msgid "self-assigned the card"
 msgstr "self-assigned the card"
 
@@ -1681,6 +1829,10 @@ msgstr "Templates"
 msgid "Terms of service"
 msgstr "Terms of service"
 
+#: src/lib/constants/customFields.ts:5
+msgid "Text"
+msgstr "Text"
+
 #: src/components/FeedbackModal.tsx:34
 msgid "Thank you for your feedback!"
 msgstr "Thank you for your feedback!"
@@ -1774,6 +1926,10 @@ msgstr "Trello imports"
 msgid "Triaging"
 msgstr "Triaging"
 
+#: src/views/board/components/NewCardForm.tsx:654
+msgid "True"
+msgstr "True"
+
 #: src/views/card/components/NewChecklistItemForm.tsx:88
 msgid "Unable to add checklist item"
 msgstr "Unable to add checklist item"
@@ -1782,7 +1938,7 @@ msgstr "Unable to add checklist item"
 msgid "Unable to add comment"
 msgstr "Unable to add comment"
 
-#: src/views/board/components/NewCardForm.tsx:171
+#: src/views/board/components/NewCardForm.tsx:207
 msgid "Unable to create card"
 msgstr "Unable to create card"
 
@@ -1830,8 +1986,8 @@ msgstr "Unable to update board URL"
 msgid "Unable to update board visibility"
 msgstr "Unable to update board visibility"
 
-#: src/views/board/index.tsx:189
-#: src/views/card/index.tsx:172
+#: src/views/board/index.tsx:190
+#: src/views/card/index.tsx:279
 msgid "Unable to update card"
 msgstr "Unable to update card"
 
@@ -1847,21 +2003,21 @@ msgstr "Unable to update checklist item"
 msgid "Unable to update comment"
 msgstr "Unable to update comment"
 
-#: src/views/card/components/LabelSelector.tsx:72
+#: src/views/card/components/LabelSelector.tsx:71
 msgid "Unable to update labels"
 msgstr "Unable to update labels"
 
-#: src/views/board/index.tsx:133
-#: src/views/card/components/ListSelector.tsx:52
+#: src/views/board/index.tsx:134
+#: src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Unable to update list"
 
-#: src/views/card/components/MemberSelector.tsx:79
+#: src/views/card/components/MemberSelector.tsx:78
 msgid "Unable to update members"
 msgstr "Unable to update members"
 
 #. placeholder {0}: truncate(memberName)
-#: src/views/card/components/ActivityList.tsx:121
+#: src/views/card/components/ActivityList.tsx:124
 msgid "unassigned <0>{0}</0> from the card"
 msgstr "unassigned <0>{0}</0> from the card"
 
@@ -1869,7 +2025,7 @@ msgstr "unassigned <0>{0}</0> from the card"
 #~ msgid "unassigned <0>{memberName}</0> from the card"
 #~ msgstr "unassigned <0>{memberName}</0> from the card"
 
-#: src/views/card/components/ActivityList.tsx:118
+#: src/views/card/components/ActivityList.tsx:121
 msgid "unassigned themselves from the card"
 msgstr "unassigned themselves from the card"
 
@@ -1918,6 +2074,10 @@ msgstr "Update label"
 msgid "updated a checklist item"
 msgstr "updated a checklist item"
 
+#: src/views/card/components/ActivityList.tsx:78
+msgid "updated a custom field"
+msgstr "updated a custom field"
+
 #: src/views/card/components/ActivityList.tsx:63
 msgid "updated the description"
 msgstr "updated the description"
@@ -1927,7 +2087,7 @@ msgid "updated the title"
 msgstr "updated the title"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:90
+#: src/views/card/components/ActivityList.tsx:93
 msgid "updated the title to <0>{0}</0>"
 msgstr "updated the title to <0>{0}</0>"
 
@@ -1976,6 +2136,7 @@ msgstr "URL must be at least 3 characters long"
 msgid "Use template"
 msgstr "Use template"
 
+#: src/lib/constants/customFields.ts:10
 #: src/views/members/index.tsx:237
 msgid "User"
 msgstr "User"
@@ -2048,7 +2209,7 @@ msgstr "When Trello launched in 2011, it blew everyone away with its carefully d
 msgid "Why make an open source Trello?"
 msgstr "Why make an open source Trello?"
 
-#: src/views/board/index.tsx:331
+#: src/views/board/index.tsx:338
 msgid "Workspace"
 msgstr "Workspace"
 
@@ -2121,6 +2282,10 @@ msgstr "Writing"
 #: src/views/home/components/Pricing.tsx:19
 msgid "Yearly"
 msgstr "Yearly"
+
+#: src/views/card/components/CustomFieldEditor.tsx:182
+msgid "Yes"
+msgstr "Yes"
 
 #: src/views/home/components/Faqs.tsx:86
 msgid "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits."

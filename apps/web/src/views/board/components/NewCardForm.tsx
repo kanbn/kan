@@ -11,10 +11,11 @@ import {
 import type { NewCardInput } from "@kan/api/types";
 import { generateUID } from "@kan/shared/utils";
 
+import type { WorkspaceMember } from "~/components/Editor";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
-import Editor, { WorkspaceMember } from "~/components/Editor";
+import Editor from "~/components/Editor";
 import Input from "~/components/Input";
 import LabelIcon from "~/components/LabelIcon";
 import Toggle from "~/components/Toggle";
@@ -23,9 +24,16 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
+import UserFieldSelector from "~/views/card/components/UserFieldSelector";
+
+interface CustomFieldFormValue {
+  fieldDefinitionPublicId: string;
+  value: string | boolean | number | null;
+}
 
 type NewCardFormInput = NewCardInput & {
   isCreateAnotherEnabled: boolean;
+  customFieldValues: CustomFieldFormValue[];
 };
 
 interface QueryParams {
@@ -61,6 +69,7 @@ export function NewCardForm({
       memberPublicIds: [],
       isCreateAnotherEnabled: false,
       position: "start",
+      customFieldValues: [],
     },
     resetOnClose: true,
   });
@@ -76,6 +85,7 @@ export function NewCardForm({
   const position = watch("position");
   const title = watch("title");
   const description = watch("description");
+  const customFieldValues = watch("customFieldValues") || [];
 
   // saving form state whenever form values change
   useEffect(() => {
@@ -85,14 +95,19 @@ export function NewCardForm({
     return () => subscription.unsubscribe();
   }, [watch, saveFormState]);
 
-  
   const { data: boardData } = api.board.byId.useQuery(queryParams, {
     enabled: !!boardPublicId,
   });
 
+  const { data: customFieldDefinitions } =
+    api.customField.getFieldDefinitionsByBoard.useQuery(
+      { boardPublicId },
+      { enabled: !!boardPublicId },
+    );
+
   // this adds the new created label to selected labels
   useEffect(() => {
-    const newLabelId = modalStates["NEW_LABEL_CREATED"];
+    const newLabelId = modalStates.NEW_LABEL_CREATED;
     if (newLabelId !== undefined && !labelPublicIds.includes(newLabelId)) {
       setValue("labelPublicIds", [...labelPublicIds, newLabelId]);
     }
@@ -101,23 +116,43 @@ export function NewCardForm({
   // this removes the deleted label from selected labels if it is selected
   useEffect(() => {
     if (boardData?.labels) {
-      const availableLabelIds = boardData.labels.map(label => label.publicId);
-      const newLabelId = modalStates["NEW_LABEL_CREATED"];
-    
+      const availableLabelIds = boardData.labels.map((label) => label.publicId);
+      const newLabelId = modalStates.NEW_LABEL_CREATED;
+
       if (newLabelId && availableLabelIds.includes(newLabelId)) {
         clearModalState("NEW_LABEL_CREATED");
       }
-      
-      const validLabelIds = labelPublicIds.filter(id => 
-        availableLabelIds.includes(id) || id === newLabelId
+
+      const validLabelIds = labelPublicIds.filter(
+        (id) => availableLabelIds.includes(id) || id === newLabelId,
       );
-      
+
       if (validLabelIds.length !== labelPublicIds.length) {
         setValue("labelPublicIds", validLabelIds);
       }
     }
-  }, [boardData?.labels, labelPublicIds, modalStates["NEW_LABEL_CREATED"]]);
-  
+  }, [boardData?.labels, labelPublicIds, modalStates.NEW_LABEL_CREATED]);
+
+  // Initialize custom field values when definitions are loaded
+  useEffect(() => {
+    if (
+      customFieldDefinitions &&
+      customFieldDefinitions.length > 0 &&
+      customFieldValues.length === 0
+    ) {
+      const initialCustomFieldValues = customFieldDefinitions
+        .filter((field) => field.isRequired) // Only show required fields initially
+        .map((field) => ({
+          fieldDefinitionPublicId: field.publicId,
+          value: field.type === "checkbox" ? false : null,
+        }));
+
+      if (initialCustomFieldValues.length > 0) {
+        setValue("customFieldValues", initialCustomFieldValues);
+      }
+    }
+  }, [customFieldDefinitions, customFieldValues.length, setValue]);
+
   const createCard = api.card.create.useMutation({
     onMutate: async (args) => {
       await utils.board.byId.cancel();
@@ -146,6 +181,7 @@ export function NewCardForm({
                     ...member,
                     deletedAt: null,
                   })) ?? [],
+              checklists: [], // Add empty checklists array for new cards
               _filteredLabels: labelPublicIds.map((id) => ({ publicId: id })),
               _filteredMembers: memberPublicIds.map((id) => ({ publicId: id })),
               index: position === "start" ? 0 : list.cards.length,
@@ -190,6 +226,13 @@ export function NewCardForm({
           memberPublicIds: [],
           isCreateAnotherEnabled,
           position,
+          customFieldValues:
+            customFieldDefinitions
+              ?.filter((field) => field.isRequired)
+              .map((field) => ({
+                fieldDefinitionPublicId: field.publicId,
+                value: field.type === "checkbox" ? false : null,
+              })) || [],
         };
         reset(newFormState);
         saveFormState(newFormState);
@@ -239,7 +282,7 @@ export function NewCardForm({
       ),
     })) ?? [];
 
-  const onSubmit = (data: NewCardInput) => {
+  const onSubmit = (data: NewCardFormInput) => {
     createCard.mutate({
       title: data.title,
       description: data.description,
@@ -247,6 +290,7 @@ export function NewCardForm({
       labelPublicIds: data.labelPublicIds,
       memberPublicIds: data.memberPublicIds,
       position: data.position,
+      customFieldValues: data.customFieldValues || [],
     });
   };
 
@@ -281,6 +325,30 @@ export function NewCardForm({
   };
 
   const selectedList = formattedLists.find((item) => item.selected);
+
+  const handleUpdateCustomFieldValue = (
+    fieldDefinitionPublicId: string,
+    value: string | boolean | number | null,
+  ) => {
+    const updatedValues = customFieldValues.map((fieldValue) =>
+      fieldValue.fieldDefinitionPublicId === fieldDefinitionPublicId
+        ? { ...fieldValue, value }
+        : fieldValue,
+    );
+    setValue("customFieldValues", updatedValues);
+  };
+
+  const getCustomFieldValue = (fieldDefinitionPublicId: string) => {
+    return (
+      customFieldValues.find(
+        (fv) => fv.fieldDefinitionPublicId === fieldDefinitionPublicId,
+      )?.value || null
+    );
+  };
+
+  // Filter required custom fields
+  const requiredCustomFields =
+    customFieldDefinitions?.filter((field) => field.isRequired) || [];
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -323,19 +391,62 @@ export function NewCardForm({
                 saveFormState({ ...formState, description: value });
               }}
               workspaceMembers={
-                boardData?.workspace.members?.map((member): WorkspaceMember => ({
-                  publicId: member.publicId,
-                  email: member.email,
-                  user: member.user ? {
-                    id: member.publicId,
-                    name: member.user.name,
-                    image: member.user.image ?? null,
-                  } : null,
-                })) ?? []
+                boardData?.workspace.members.map(
+                  (member): WorkspaceMember => ({
+                    publicId: member.publicId,
+                    email: member.email,
+                    user: member.user
+                      ? {
+                          id: member.publicId,
+                          name: member.user.name,
+                          image: member.user.image ?? null,
+                        }
+                      : null,
+                  }),
+                ) ?? []
               }
             />
           </div>
         </div>
+
+        {/* Required Custom Fields */}
+        {requiredCustomFields.length > 0 && (
+          <div className="mt-4 space-y-3">
+            <h3 className="text-sm font-medium text-neutral-900 dark:text-dark-1000">
+              {t`Required Fields`}
+            </h3>
+            {requiredCustomFields.map((field) => (
+              <div key={field.publicId} className="space-y-1">
+                <label className="block text-sm font-medium text-light-900 dark:text-dark-900">
+                  {field.name}
+                  <span className="ml-1 text-red-500">*</span>
+                </label>
+                <CustomFieldInput
+                  field={field}
+                  value={getCustomFieldValue(field.publicId)}
+                  onChange={(value) =>
+                    handleUpdateCustomFieldValue(field.publicId, value)
+                  }
+                  workspaceMembers={
+                    boardData?.workspace.members.map((member) => ({
+                      publicId: member.publicId,
+                      email: member.email,
+                      user: member.user
+                        ? {
+                            id: member.publicId, // Use member publicId as the user id
+                            name: member.user.name,
+                            email: member.user.email,
+                            image: member.user.image,
+                          }
+                        : null,
+                    })) ?? []
+                  }
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
         <div className="mt-2 flex space-x-1">
           <div className="w-fit">
             <CheckboxDropdown
@@ -471,4 +582,132 @@ export function NewCardForm({
       </div>
     </form>
   );
+}
+
+interface CustomFieldInputProps {
+  field: {
+    publicId: string;
+    name: string;
+    type: "text" | "link" | "date" | "checkbox" | "emoji" | "user";
+    isRequired: boolean;
+  };
+  value: string | boolean | number | null;
+  onChange: (value: string | boolean | number | null) => void;
+  workspaceMembers: {
+    publicId: string;
+    email: string;
+    user: {
+      id: string;
+      name: string | null;
+      email: string;
+      image: string | null;
+    } | null;
+  }[];
+}
+
+function CustomFieldInput({
+  field,
+  value,
+  onChange,
+  workspaceMembers,
+}: CustomFieldInputProps) {
+  const renderInput = () => {
+    switch (field.type) {
+      case "text":
+        return (
+          <Input
+            value={(value as string) || ""}
+            onChange={(e) => onChange(e.target.value || null)}
+            placeholder={t`Enter text`}
+            className="w-full"
+          />
+        );
+
+      case "link":
+        return (
+          <Input
+            type="url"
+            value={(value as string) || ""}
+            onChange={(e) => onChange(e.target.value || null)}
+            placeholder={t`https://example.com`}
+            className="w-full"
+          />
+        );
+
+      case "date":
+        return (
+          <div className="relative">
+            <Input
+              type="date"
+              value={(value as string) || ""}
+              onChange={(e) => onChange(e.target.value || null)}
+              className="w-full"
+              placeholder={t`Select date`}
+            />
+          </div>
+        );
+
+      case "checkbox":
+        return (
+          <div className="flex items-center justify-between rounded-[5px] border-[1px] border-light-50 px-3 py-2 dark:border-dark-50">
+            <span className="text-sm text-neutral-900 dark:text-dark-1000">
+              {value ? t`True` : t`False`}
+            </span>
+            <Toggle
+              isChecked={Boolean(value)}
+              onChange={() => onChange(!value)}
+              label=""
+            />
+          </div>
+        );
+
+      case "emoji":
+        return (
+          <Input
+            value={(value as string) || ""}
+            onChange={(e) => onChange(e.target.value || null)}
+            placeholder="😀 Add emoji"
+            maxLength={10}
+            className="w-full"
+          />
+        );
+
+      case "user": {
+        // Convert workspace members to the format expected by UserFieldSelector
+        const members = workspaceMembers.map((member, index) => ({
+          id: index + 1, // Use array index + 1 as numeric ID
+          publicId: member.publicId,
+          email: member.email,
+          user: member.user,
+        }));
+
+        const selectedMemberId = value as string | null;
+        const selectedMemberNumericId = selectedMemberId
+          ? (members.find((m) => m.publicId === selectedMemberId)?.id ?? null)
+          : null;
+
+        return (
+          <UserFieldSelector
+            members={members}
+            selectedUserId={selectedMemberNumericId}
+            onSelect={(userId) => {
+              if (userId === null) {
+                onChange(null);
+              } else {
+                // Convert back to publicId
+                const selectedMember = members.find((m) => m.id === userId);
+                onChange(selectedMember?.publicId ?? null);
+              }
+            }}
+            placeholder={t`Select team member`}
+          />
+        );
+      }
+
+      default:
+        return null;
+    }
+  };
+
+  return <div className="w-full">{renderInput()}</div>;
 }

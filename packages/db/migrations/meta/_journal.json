@@ -99,6 +99,13 @@
       "when": 1757535838766,
       "tag": "20250910202358_AddCascadeSetNullToReferenceIdOnSubsriptions",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1757712435530,
+      "tag": "20250912212715_AddCustomFieldTables",
+      "breakpoints": true
     }
   ]
 }
