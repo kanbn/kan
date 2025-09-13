@@ -428,6 +428,34 @@ export default function SettingsPage() {
     },
   ];
 
+  const availableTabs = settingsTabs.filter((tab) => tab.condition);
+
+  useEffect(() => {
+    const tabParam = router.query.tab as string;
+    if (tabParam) {
+      const tabIndex = availableTabs.findIndex((tab) => tab.key === tabParam);
+      if (tabIndex !== -1) {
+        setSelectedTabIndex(tabIndex);
+      }
+    }
+  }, [router.query.tab, availableTabs]);
+
+  // Update URL when tab changes
+  const handleTabChange = (index: number) => {
+    const tabKey = availableTabs[index]?.key;
+    if (tabKey) {
+      void router.push(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, tab: tabKey },
+        },
+        undefined,
+        { shallow: true },
+      );
+    }
+    setSelectedTabIndex(index);
+  };
+
   return (
     <>
       <div className="flex h-full w-full flex-col overflow-hidden">
@@ -445,14 +473,11 @@ export default function SettingsPage() {
 
             <TabGroup
               selectedIndex={selectedTabIndex}
-              onChange={setSelectedTabIndex}
+              onChange={handleTabChange}
             >
               <div className="sm:hidden">
                 {/* Mobile dropdown */}
-                <Listbox
-                  value={selectedTabIndex}
-                  onChange={setSelectedTabIndex}
-                >
+                <Listbox value={selectedTabIndex} onChange={handleTabChange}>
                   <div className="relative">
                     <ListboxButton className="w-full appearance-none rounded-md bg-white py-2 pl-3 pr-8 text-left text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-gray-900 dark:text-gray-100 dark:outline-white/10 dark:focus:outline-indigo-500">
                       {settingsTabs.filter((tab) => tab.condition)[
