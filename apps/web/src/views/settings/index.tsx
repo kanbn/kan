@@ -1,10 +1,21 @@
 import { useRouter } from "next/router";
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions,
+  Tab,
+  TabGroup,
+  TabList,
+  TabPanel,
+  TabPanels,
+} from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
 import { useEffect, useRef, useState } from "react";
 import {
   HiBolt,
+  HiChevronDown,
   HiMiniArrowTopRightOnSquare,
   HiOutlineBanknotes,
   HiOutlineCodeBracketSquare,
@@ -27,9 +38,9 @@ import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import Avatar from "./components/Avatar";
 import { ChangePasswordFormConfirmation } from "./components/ChangePasswordConfirmation";
-import CreateAPIKeyForm from "./components/CreateAPIKeyForm";
 import { DeleteAccountConfirmation } from "./components/DeleteAccountConfirmation";
 import { DeleteWorkspaceConfirmation } from "./components/DeleteWorkspaceConfirmation";
+import NewApiKeyForm from "./components/NewApiKeyForm";
 import UpdateDisplayNameForm from "./components/UpdateDisplayNameForm";
 import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescriptionForm";
 import UpdateWorkspaceNameForm from "./components/UpdateWorkspaceNameForm";
@@ -45,6 +56,7 @@ export default function SettingsPage() {
   const workspaceUrlSectionRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [hasOpenedUpgradeModal, setHasOpenedUpgradeModal] = useState(false);
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const isCredentialsEnabled =
     env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
   const { data } = api.user.getUser.useQuery();
@@ -163,7 +175,7 @@ export default function SettingsPage() {
     {
       key: "account",
       icon: <HiOutlineUser />,
-      label: "Account",
+      label: t`Account`,
       condition: true,
       content: () => (
         <>
@@ -171,14 +183,16 @@ export default function SettingsPage() {
 
           <div className="mb-8 border-t border-light-300 dark:border-dark-300">
             <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-              Profile picture
+              {t`Profile picture`}
             </h2>
             <Avatar userId={data?.id} userImage={data?.image} />
 
-            <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-              Display name
-            </h2>
-            <UpdateDisplayNameForm displayName={data?.name ?? ""} />
+            <div className="mb-4">
+              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+                {t`Display name`}
+              </h2>
+              <UpdateDisplayNameForm displayName={data?.name ?? ""} />
+            </div>
 
             <div className="mb-8 border-t border-light-300 dark:border-dark-300">
               <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
@@ -189,6 +203,23 @@ export default function SettingsPage() {
               </p>
               <LanguageSelector />
             </div>
+
+            <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+                {t`Delete account`}
+              </h2>
+              <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+                {t`Once you delete your account, there is no going back. This action cannot be undone.`}
+              </p>
+              <div className="mt-4">
+                <Button
+                  variant="secondary"
+                  onClick={() => openModal("DELETE_ACCOUNT")}
+                >
+                  {t`Delete account`}
+                </Button>
+              </div>
+            </div>
           </div>
         </>
       ),
@@ -196,7 +227,7 @@ export default function SettingsPage() {
     {
       key: "workspace",
       icon: <HiOutlineRectangleGroup />,
-      label: "Workspace",
+      label: t`Workspace`,
       condition: true,
       content: () => (
         <>
@@ -230,7 +261,7 @@ export default function SettingsPage() {
 
             {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
               !hasActiveSubscription(subscriptions, "pro") && (
-                <div className="mt-8">
+                <div className="my-8">
                   <Button
                     onClick={() => openModal("UPGRADE_TO_PRO")}
                     iconRight={<HiBolt />}
@@ -239,8 +270,9 @@ export default function SettingsPage() {
                   </Button>
                 </div>
               )}
+
             <div className="border-t border-light-300 dark:border-dark-300">
-              <h2 className="mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
                 {t`Delete workspace`}
               </h2>
               <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
@@ -275,30 +307,13 @@ export default function SettingsPage() {
                 </div>
               </div>
             )}
-
-            <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-              <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-                {t`Delete account`}
-              </h2>
-              <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-                {t`Once you delete your account, there is no going back. This action cannot be undone.`}
-              </p>
-              <div className="mt-4">
-                <Button
-                  variant="secondary"
-                  onClick={() => openModal("DELETE_ACCOUNT")}
-                >
-                  {t`Delete account`}
-                </Button>
-              </div>
-            </div>
           </div>
         </>
       ),
     },
     {
       key: "billing",
-      label: "Billing",
+      label: t`Billing`,
       icon: <HiOutlineBanknotes />,
       condition: env("NEXT_PUBLIC_KAN_ENV") === "cloud",
       content: () => (
@@ -307,17 +322,17 @@ export default function SettingsPage() {
 
           <div className="mb-8 border-t border-light-300 dark:border-dark-300">
             <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-              Billing
+              {t`Billing`}
             </h2>
             <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-              View and manage your billing and subscription.
+              {t`View and manage your billing and subscription.`}
             </p>
             <Button
               variant="primary"
               iconRight={<HiMiniArrowTopRightOnSquare />}
               onClick={handleOpenBillingPortal}
             >
-              Billing portal
+              {t`Billing portal`}
             </Button>
           </div>
         </>
@@ -326,7 +341,7 @@ export default function SettingsPage() {
     {
       key: "api",
       icon: <HiOutlineCodeBracketSquare />,
-      label: "API",
+      label: t`API`,
       condition: true,
       content: () => (
         <>
@@ -334,12 +349,12 @@ export default function SettingsPage() {
 
           <div className="mb-8 border-t border-light-300 dark:border-dark-300">
             <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-              API keys
+              {t`API keys`}
             </h2>
             <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-              View and manage your API keys.
+              {t`View and manage your API keys.`}
             </p>
-            <CreateAPIKeyForm apiKey={data?.apiKey} refetchUser={refetchUser} />
+            <NewApiKeyForm />
           </div>
         </>
       ),
@@ -347,7 +362,7 @@ export default function SettingsPage() {
     {
       key: "integrations",
       icon: <HiOutlineCodeBracketSquare />,
-      label: "Integrations",
+      label: t`Integrations`,
       condition: true,
       content: () => (
         <>
@@ -355,7 +370,7 @@ export default function SettingsPage() {
 
           <div className="mb-8 border-t border-light-300 dark:border-dark-300">
             <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
-              Trello
+              {t`Trello`}
             </h2>
             {!integrations?.some(
               (integration) => integration.provider === "trello",
@@ -416,20 +431,66 @@ export default function SettingsPage() {
               </h1>
             </div>
 
-            <TabGroup>
-              <TabList className="flex items-center">
-                {settingsTabs.map(
-                  (tab) =>
-                    tab.condition && (
-                      <Tab
-                        key={tab.key}
-                        className="focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white flex items-center gap-2 px-4 py-2 text-neutral-900 first:rounded-tl-md last:rounded-tr-md data-[headlessui-state=selected]:bg-black/10 hover:bg-black/5 dark:text-dark-1000 dark:data-[headlessui-state=selected]:bg-dark-400 dark:hover:bg-dark-200"
-                      >
-                        {tab.label}
-                      </Tab>
-                    ),
-                )}
-              </TabList>
+            <TabGroup
+              selectedIndex={selectedTabIndex}
+              onChange={setSelectedTabIndex}
+            >
+              <div className="sm:hidden">
+                {/* Mobile dropdown */}
+                <Listbox
+                  value={selectedTabIndex}
+                  onChange={setSelectedTabIndex}
+                >
+                  <div className="relative">
+                    <ListboxButton className="w-full appearance-none rounded-md bg-white py-2 pl-3 pr-8 text-left text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-gray-900 dark:text-gray-100 dark:outline-white/10 dark:focus:outline-indigo-500">
+                      {settingsTabs.filter((tab) => tab.condition)[
+                        selectedTabIndex
+                      ]?.label || "Select a tab"}
+                      <HiChevronDown
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-y-0 right-0 flex size-5 items-center pr-2 text-gray-500 dark:text-gray-400"
+                      />
+                    </ListboxButton>
+                    <ListboxOptions className="absolute z-10 mt-1 w-full rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800 dark:ring-white/20">
+                      {settingsTabs.map(
+                        (tab) =>
+                          tab.condition && (
+                            <ListboxOption
+                              key={tab.key}
+                              value={settingsTabs
+                                .filter((t) => t.condition)
+                                .indexOf(tab)}
+                              className="relative cursor-pointer select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white dark:text-gray-100 dark:data-[focus]:bg-indigo-500"
+                            >
+                              {tab.label}
+                            </ListboxOption>
+                          ),
+                      )}
+                    </ListboxOptions>
+                  </div>
+                </Listbox>
+              </div>
+              <div className="hidden sm:block">
+                <div className="border-b border-gray-200 dark:border-white/10">
+                  <TabList
+                    as="nav"
+                    aria-label="Tabs"
+                    className="-mb-px flex space-x-8"
+                  >
+                    {settingsTabs.map(
+                      (tab) =>
+                        tab.condition && (
+                          <Tab
+                            key={tab.key}
+                            className="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-light-900 data-[selected]:border-light-1000 data-[selected]:text-light-1000 hover:border-light-950 hover:text-light-950 data-[selected]:hover:border-light-1000 data-[selected]:hover:text-light-1000 focus:outline-none dark:text-dark-900 dark:data-[selected]:border-dark-1000 dark:data-[selected]:text-dark-1000 dark:hover:border-white/20 dark:hover:text-dark-950 dark:data-[selected]:hover:border-dark-1000 dark:data-[selected]:hover:text-dark-1000"
+                          >
+                            {tab.label}
+                          </Tab>
+                        ),
+                    )}
+                  </TabList>
+                </div>
+              </div>
               <TabPanels>
                 {settingsTabs.map(
                   (tab) =>
