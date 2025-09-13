@@ -36,11 +36,13 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import ApiKeyList from "./components/ApiKeyList";
 import Avatar from "./components/Avatar";
 import { ChangePasswordFormConfirmation } from "./components/ChangePasswordConfirmation";
 import { DeleteAccountConfirmation } from "./components/DeleteAccountConfirmation";
 import { DeleteWorkspaceConfirmation } from "./components/DeleteWorkspaceConfirmation";
-import NewApiKeyForm from "./components/NewApiKeyForm";
+import NewApiKeyModal from "./components/NewApiKeyModal";
+import { RevokeApiKeyConfirmation } from "./components/RevokeApiKeyConfirmation";
 import UpdateDisplayNameForm from "./components/UpdateDisplayNameForm";
 import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescriptionForm";
 import UpdateWorkspaceNameForm from "./components/UpdateWorkspaceNameForm";
@@ -354,7 +356,17 @@ export default function SettingsPage() {
             <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
               {t`View and manage your API keys.`}
             </p>
-            <NewApiKeyForm />
+
+            <div className="mb-4 flex items-center justify-between">
+              <Button
+                variant="primary"
+                onClick={() => openModal("NEW_API_KEY")}
+              >
+                {t`Create new key`}
+              </Button>
+            </div>
+
+            <ApiKeyList />
           </div>
         </>
       ),
@@ -544,6 +556,18 @@ export default function SettingsPage() {
           isVisible={isOpen && modalContentType === "CHANGE_PASSWORD"}
         >
           <ChangePasswordFormConfirmation />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "NEW_API_KEY"}
+        >
+          <NewApiKeyModal />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "REVOKE_API_KEY"}
+        >
+          <RevokeApiKeyConfirmation />
         </Modal>
       </>
     </>

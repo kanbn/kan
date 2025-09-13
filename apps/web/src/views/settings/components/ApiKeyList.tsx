@@ -19,25 +19,39 @@ export default function ApiKeyList() {
     keyId,
     keyName,
     keyStart,
+    createdAt,
+    lastRequest,
     isLastRow,
     showSkeleton,
   }: {
     keyId?: string;
     keyName?: string | null | undefined;
     keyStart?: string | null | undefined;
+    createdAt?: Date | null;
+    lastRequest?: Date | null;
     isLastRow?: boolean | undefined;
     showSkeleton?: boolean | undefined;
   }) => {
+    const formatDate = (date?: Date | string | null) => {
+      if (!date) return "Never";
+      const dateObj = date instanceof Date ? date : new Date(date);
+      return dateObj.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+    };
+
     return (
       <tr className="rounded-b-lg">
-        <td className={twMerge("w-[65%]", isLastRow ? "rounded-bl-lg" : "")}>
+        <td className={twMerge("w-[30%]", isLastRow ? "rounded-bl-lg" : "")}>
           <div className="flex items-center p-4">
             <div className="ml-2 min-w-0 flex-1">
               <div>
                 <div className="flex items-center">
                   <p
                     className={twMerge(
-                      "mr-2 text-sm font-medium text-neutral-900 dark:text-dark-1000",
+                      "mr-2 text-sm font-medium text-light-900 dark:text-dark-900",
                       showSkeleton &&
                         "md mb-2 h-3 w-[125px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
                     )}
@@ -49,24 +63,48 @@ export default function ApiKeyList() {
             </div>
           </div>
         </td>
+        <td className="w-[20%] px-3 py-4">
+          <p
+            className={twMerge(
+              "text-sm text-light-900 dark:text-dark-900",
+              showSkeleton &&
+                "h-3 w-[80px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+            )}
+          >
+            {formatDate(createdAt)}
+          </p>
+        </td>
+        <td className="w-[20%] px-3 py-4">
+          <p
+            className={twMerge(
+              "text-sm text-light-900 dark:text-dark-900",
+              showSkeleton &&
+                "h-3 w-[80px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+            )}
+          >
+            {formatDate(lastRequest)}
+          </p>
+        </td>
+        <td className="w-[25%] px-3 py-4">
+          <div>
+            <span
+              className={twMerge(
+                "inline-flex items-center rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[11px] font-medium text-emerald-400 ring-1 ring-inset ring-emerald-500/20",
+                showSkeleton &&
+                  "h-5 w-[50px] animate-pulse bg-light-200 ring-0 dark:bg-dark-200",
+              )}
+            >
+              {keyStart}...
+            </span>
+          </div>
+        </td>
         <td
           className={twMerge(
-            "w-[35%] min-w-[150px]",
+            "w-[5%] min-w-[50px]",
             isLastRow && "rounded-br-lg",
           )}
         >
-          <div className="flex w-full items-center justify-between px-3">
-            <div>
-              <span
-                className={twMerge(
-                  "inline-flex items-center rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[11px] font-medium text-emerald-400 ring-1 ring-inset ring-emerald-500/20",
-                  showSkeleton &&
-                    "h-5 w-[50px] animate-pulse bg-light-200 ring-0 dark:bg-dark-200",
-                )}
-              >
-                {keyStart}...
-              </span>
-            </div>
+          <div className="flex w-full items-center justify-center px-3">
             <div className={twMerge("relative")}>
               <Dropdown
                 items={[
@@ -98,15 +136,33 @@ export default function ApiKeyList() {
                 <tr>
                   <th
                     scope="col"
-                    className="w-[65%] rounded-tl-lg py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-light-900 dark:text-dark-900 sm:pl-6"
+                    className="w-[30%] rounded-tl-lg py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-light-900 dark:text-dark-900 sm:pl-6"
                   >
                     Name
                   </th>
                   <th
                     scope="col"
-                    className="w-[35%] rounded-tr-lg px-3 py-3.5 text-left text-sm font-semibold text-light-900 dark:text-dark-900"
+                    className="w-[20%] px-3 py-3.5 text-left text-sm font-semibold text-light-900 dark:text-dark-900"
+                  >
+                    Created
+                  </th>
+                  <th
+                    scope="col"
+                    className="w-[20%] px-3 py-3.5 text-left text-sm font-semibold text-light-900 dark:text-dark-900"
+                  >
+                    Last Used
+                  </th>
+                  <th
+                    scope="col"
+                    className="w-[25%] px-3 py-3.5 text-left text-sm font-semibold text-light-900 dark:text-dark-900"
                   >
                     Key
+                  </th>
+                  <th
+                    scope="col"
+                    className="w-[5%] rounded-tr-lg px-3 py-3.5 text-center text-sm font-semibold text-light-900 dark:text-dark-900"
+                  >
+                    {/* Actions column */}
                   </th>
                 </tr>
               </thead>
@@ -118,6 +174,8 @@ export default function ApiKeyList() {
                       keyId={apiKey.id}
                       keyName={apiKey.name}
                       keyStart={apiKey.start}
+                      createdAt={apiKey.createdAt}
+                      lastRequest={apiKey.lastRequest}
                       isLastRow={index === data.data.length - 1}
                     />
                   ))}
