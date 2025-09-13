@@ -69,16 +69,18 @@ const UpdateDisplayNameForm = ({ displayName }: { displayName: string }) => {
       <div className="mb-4 flex w-full max-w-[325px] items-center gap-2">
         <Input {...register("name")} errorMessage={errors.name?.message} />
       </div>
-      <div>
-        <Button
-          onClick={handleSubmit(onSubmit)}
-          variant="primary"
-          disabled={!isDirty || updateDisplayName.isPending}
-          isLoading={updateDisplayName.isPending}
-        >
-          {t`Update`}
-        </Button>
-      </div>
+      {isDirty && (
+        <div>
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            variant="primary"
+            disabled={updateDisplayName.isPending}
+            isLoading={updateDisplayName.isPending}
+          >
+            {t`Update`}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
