@@ -138,22 +138,23 @@ const UpdateWorkspaceUrlForm = ({
           }
         />
       </div>
-      <div>
-        <Button
-          onClick={handleSubmit(onSubmit)}
-          variant="primary"
-          disabled={
-            !isDirty ||
-            updateWorkspaceSlug.isPending ||
-            checkWorkspaceSlugAvailability.isPending ||
-            isWorkspaceSlugAvailable?.isAvailable === false ||
-            isTyping
-          }
-          isLoading={updateWorkspaceSlug.isPending}
-        >
-          {t`Update`}
-        </Button>
-      </div>
+      {isDirty && (
+        <div>
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            variant="primary"
+            disabled={
+              updateWorkspaceSlug.isPending ||
+              checkWorkspaceSlugAvailability.isPending ||
+              isWorkspaceSlugAvailable?.isAvailable === false ||
+              isTyping
+            }
+            isLoading={updateWorkspaceSlug.isPending}
+          >
+            {t`Update`}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

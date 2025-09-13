@@ -80,16 +80,18 @@ const UpdateWorkspaceDescriptionForm = ({
           errorMessage={errors.description?.message}
         />
       </div>
-      <div>
-        <Button
-          onClick={handleSubmit(onSubmit)}
-          variant="primary"
-          disabled={!isDirty || updateWorkspaceDescription.isPending}
-          isLoading={updateWorkspaceDescription.isPending}
-        >
-          {t`Update`}
-        </Button>
-      </div>
+      {isDirty && (
+        <div>
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            variant="primary"
+            disabled={updateWorkspaceDescription.isPending}
+            isLoading={updateWorkspaceDescription.isPending}
+          >
+            {t`Update`}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
