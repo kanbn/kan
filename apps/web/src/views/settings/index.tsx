@@ -461,17 +461,17 @@ export default function SettingsPage() {
               <div className="sm:hidden">
                 {/* Mobile dropdown */}
                 <Listbox value={selectedTabIndex} onChange={handleTabChange}>
-                  <div className="relative">
-                    <ListboxButton className="w-full appearance-none rounded-md bg-white py-2 pl-3 pr-8 text-left text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 dark:bg-gray-900 dark:text-gray-100 dark:outline-white/10">
+                  <div className="relative mb-4">
+                    <ListboxButton className="w-full appearance-none rounded-lg border-0 bg-light-50 py-2 pl-3 pr-10 text-left text-sm text-light-1000 shadow-sm ring-1 ring-inset ring-light-300 focus:ring-2 focus:ring-inset focus:ring-light-400 dark:bg-dark-50 dark:text-dark-1000 dark:ring-dark-300 dark:focus:ring-dark-500">
                       {settingsTabs.filter((tab) => tab.condition)[
                         selectedTabIndex
                       ]?.label || "Select a tab"}
                       <HiChevronDown
                         aria-hidden="true"
-                        className="pointer-events-none absolute inset-y-0 right-0 flex size-5 items-center pr-2 text-gray-500 dark:text-gray-400"
+                        className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-light-900 dark:text-dark-900"
                       />
                     </ListboxButton>
-                    <ListboxOptions className="absolute z-10 mt-1 w-full rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800 dark:ring-white/20">
+                    <ListboxOptions className="absolute z-10 mt-1 w-full rounded-lg bg-light-50 py-1 text-sm shadow-lg ring-1 ring-inset ring-light-300 dark:bg-dark-50 dark:ring-dark-300">
                       {settingsTabs.map(
                         (tab) =>
                           tab.condition && (
@@ -480,7 +480,7 @@ export default function SettingsPage() {
                               value={settingsTabs
                                 .filter((t) => t.condition)
                                 .indexOf(tab)}
-                              className="relative cursor-pointer select-none py-2 pl-3 pr-9 text-gray-900 dark:text-gray-100"
+                              className="relative cursor-pointer select-none py-2 pl-3 pr-9 text-light-1000 dark:text-dark-1000"
                             >
                               {tab.label}
                             </ListboxOption>
