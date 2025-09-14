@@ -100,24 +100,6 @@ export default function SettingsPage() {
     };
   }, [refetchIntegrations]);
 
-  useEffect(() => {
-    if (
-      router.query.edit === "workspace_url" &&
-      workspaceUrlSectionRef.current &&
-      scrollContainerRef.current
-    ) {
-      const element = workspaceUrlSectionRef.current;
-      const container = scrollContainerRef.current;
-
-      container.scrollTop = element.offsetTop - 40;
-
-      const input = element.querySelector('input[type="text"]');
-      if (input instanceof HTMLInputElement) {
-        input.focus();
-      }
-    }
-  }, [router.query.edit]);
-
   // Open upgrade modal if upgrade=pro is in URL params
   useEffect(() => {
     if (
@@ -201,7 +183,7 @@ export default function SettingsPage() {
                 {t`Language`}
               </h2>
               <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-                {t`Change the language of the app.`}
+                {t`Change your language preferences.`}
               </p>
               <LanguageSelector />
             </div>
@@ -474,12 +456,13 @@ export default function SettingsPage() {
             <TabGroup
               selectedIndex={selectedTabIndex}
               onChange={handleTabChange}
+              className="focus:outline-none"
             >
               <div className="sm:hidden">
                 {/* Mobile dropdown */}
                 <Listbox value={selectedTabIndex} onChange={handleTabChange}>
                   <div className="relative">
-                    <ListboxButton className="w-full appearance-none rounded-md bg-white py-2 pl-3 pr-8 text-left text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-gray-900 dark:text-gray-100 dark:outline-white/10 dark:focus:outline-indigo-500">
+                    <ListboxButton className="w-full appearance-none rounded-md bg-white py-2 pl-3 pr-8 text-left text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 dark:bg-gray-900 dark:text-gray-100 dark:outline-white/10">
                       {settingsTabs.filter((tab) => tab.condition)[
                         selectedTabIndex
                       ]?.label || "Select a tab"}
@@ -488,7 +471,7 @@ export default function SettingsPage() {
                         className="pointer-events-none absolute inset-y-0 right-0 flex size-5 items-center pr-2 text-gray-500 dark:text-gray-400"
                       />
                     </ListboxButton>
-                    <ListboxOptions className="absolute z-10 mt-1 w-full rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800 dark:ring-white/20">
+                    <ListboxOptions className="absolute z-10 mt-1 w-full rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800 dark:ring-white/20">
                       {settingsTabs.map(
                         (tab) =>
                           tab.condition && (
@@ -497,7 +480,7 @@ export default function SettingsPage() {
                               value={settingsTabs
                                 .filter((t) => t.condition)
                                 .indexOf(tab)}
-                              className="relative cursor-pointer select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white dark:text-gray-100 dark:data-[focus]:bg-indigo-500"
+                              className="relative cursor-pointer select-none py-2 pl-3 pr-9 text-gray-900 dark:text-gray-100"
                             >
                               {tab.label}
                             </ListboxOption>
@@ -512,7 +495,7 @@ export default function SettingsPage() {
                   <TabList
                     as="nav"
                     aria-label="Tabs"
-                    className="-mb-px flex space-x-8"
+                    className="-mb-px flex space-x-8 focus:outline-none"
                   >
                     {settingsTabs.map(
                       (tab) =>
@@ -528,11 +511,11 @@ export default function SettingsPage() {
                   </TabList>
                 </div>
               </div>
-              <TabPanels>
+              <TabPanels className="focus:outline-none">
                 {settingsTabs.map(
                   (tab) =>
                     tab.condition && (
-                      <TabPanel key={tab.key}>
+                      <TabPanel key={tab.key} className="focus:outline-none">
                         <tab.content />
                       </TabPanel>
                     ),
