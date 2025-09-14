@@ -1,0 +1,128 @@
+import { t } from "@lingui/core/macro";
+import { env } from "next-runtime-env";
+import { HiBolt } from "react-icons/hi2";
+
+import type { Subscription } from "@kan/shared/utils";
+import { hasActiveSubscription } from "@kan/shared/utils";
+
+import Button from "~/components/Button";
+import FeedbackModal from "~/components/FeedbackModal";
+import Modal from "~/components/modal";
+import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
+import { PageHead } from "~/components/PageHead";
+import { useModal } from "~/providers/modal";
+import { useWorkspace } from "~/providers/workspace";
+import { api } from "~/utils/api";
+import { DeleteWorkspaceConfirmation } from "./components/DeleteWorkspaceConfirmation";
+import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescriptionForm";
+import UpdateWorkspaceNameForm from "./components/UpdateWorkspaceNameForm";
+import UpdateWorkspaceUrlForm from "./components/UpdateWorkspaceUrlForm";
+import { UpgradeToProConfirmation } from "./components/UpgradeToProConfirmation";
+
+export default function WorkspaceSettings() {
+  const { modalContentType, openModal, isOpen } = useModal();
+  const { workspace } = useWorkspace();
+  const { data } = api.user.getUser.useQuery();
+
+  const { data: workspaceData } = api.workspace.byId.useQuery({
+    workspacePublicId: workspace.publicId,
+  });
+
+  const subscriptions = workspaceData?.subscriptions as
+    | Subscription[]
+    | undefined;
+
+  return (
+    <>
+      <PageHead title={`Settings | ${workspace.name ?? "Workspace"}`} />
+
+      <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+        <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+          {t`Workspace name`}
+        </h2>
+        <UpdateWorkspaceNameForm
+          workspacePublicId={workspace.publicId}
+          workspaceName={workspace.name}
+        />
+
+        <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+          {t`Workspace URL`}
+        </h2>
+        <UpdateWorkspaceUrlForm
+          workspacePublicId={workspace.publicId}
+          workspaceUrl={workspace.slug ?? ""}
+          workspacePlan={workspace.plan ?? "free"}
+        />
+
+        <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+          {t`Workspace description`}
+        </h2>
+        <UpdateWorkspaceDescriptionForm
+          workspacePublicId={workspace.publicId}
+          workspaceDescription={workspace.description ?? ""}
+        />
+
+        {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
+          !hasActiveSubscription(subscriptions, "pro") && (
+            <div className="my-8">
+              <Button
+                onClick={() => openModal("UPGRADE_TO_PRO")}
+                iconRight={<HiBolt />}
+              >
+                {t`Upgrade to Pro`}
+              </Button>
+            </div>
+          )}
+
+        <div className="border-t border-light-300 dark:border-dark-300">
+          <h2 className="mb-4 mt-8 text-[14px] text-neutral-900 dark:text-dark-1000">
+            {t`Delete workspace`}
+          </h2>
+          <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+            {t`Once you delete your workspace, there is no going back. This action cannot be undone.`}
+          </p>
+          <div className="mt-4">
+            <Button
+              variant="secondary"
+              onClick={() => openModal("DELETE_WORKSPACE")}
+              disabled={workspace.role !== "admin"}
+            >
+              {t`Delete workspace`}
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Workspace-specific modals */}
+      <Modal
+        modalSize="sm"
+        isVisible={isOpen && modalContentType === "DELETE_WORKSPACE"}
+      >
+        <DeleteWorkspaceConfirmation />
+      </Modal>
+      <Modal
+        modalSize="sm"
+        isVisible={isOpen && modalContentType === "UPGRADE_TO_PRO"}
+      >
+        <UpgradeToProConfirmation
+          userId={data?.id ?? ""}
+          workspacePublicId={workspace.publicId}
+        />
+      </Modal>
+
+      {/* Global modals */}
+      <Modal
+        modalSize="md"
+        isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
+      >
+        <FeedbackModal />
+      </Modal>
+      <Modal
+        modalSize="sm"
+        isVisible={isOpen && modalContentType === "NEW_WORKSPACE"}
+      >
+        <NewWorkspaceForm />
+      </Modal>
+    </>
+  );
+}

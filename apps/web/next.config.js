@@ -52,6 +52,15 @@ const config = {
     // instrumentationHook: true,
     swcPlugins: [["@lingui/swc-plugin", {}]],
   },
+
+  async rewrites() {
+    return [
+      {
+        source: "/settings",
+        destination: "/settings/account",
+      },
+    ];
+  },
 };
 
 // Only allow external images when OIDC is configured (for OIDC provider avatars)
