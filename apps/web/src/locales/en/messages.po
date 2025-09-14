@@ -65,6 +65,10 @@ msgstr "1 user"
 msgid "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
 msgstr "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
 
+#: src/components/SettingsLayout.tsx:33
+msgid "Account"
+msgstr "Account"
+
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:27
 msgid "Account deleted"
 msgstr "Account deleted"
@@ -107,8 +111,8 @@ msgstr "Add description... (type '/' to open commands or '@' to mention)"
 msgid "Add details..."
 msgstr "Add details..."
 
-#: src/views/card/components/LabelSelector.tsx:110
-#: src/views/card/components/LabelSelector.tsx:118
+#: src/views/card/components/LabelSelector.tsx:109
+#: src/views/card/components/LabelSelector.tsx:114
 msgid "Add label"
 msgstr "Add label"
 
@@ -172,7 +176,7 @@ msgstr "All systems operational"
 msgid "Already have an account? <0><1>Sign in</1></0>"
 msgstr "Already have an account? <0><1>Sign in</1></0>"
 
-#: src/views/settings/index.tsx:127
+#: src/views/settings/IntegrationsSettings.tsx:61
 msgid "An error occurred while disconnecting your Trello account."
 msgstr "An error occurred while disconnecting your Trello account."
 
@@ -180,7 +184,27 @@ msgstr "An error occurred while disconnecting your Trello account."
 msgid "An unexpected error occurred. Please try again later."
 msgstr "An unexpected error occurred. Please try again later."
 
-#: src/views/settings/index.tsx:296
+#: src/components/SettingsLayout.tsx:51
+msgid "API"
+msgstr "API"
+
+#: src/views/settings/components/NewApiKeyModal.tsx:91
+msgid "API key created"
+msgstr "API key created"
+
+#: src/views/settings/components/NewApiKeyModal.tsx:161
+msgid "API key name"
+msgstr "API key name"
+
+#: src/views/settings/components/NewApiKeyModal.tsx:25
+msgid "API key name cannot exceed 30 characters"
+msgstr "API key name cannot exceed 30 characters"
+
+#: src/views/settings/components/NewApiKeyModal.tsx:24
+msgid "API key name is required"
+msgstr "API key name is required"
+
+#: src/views/settings/ApiSettings.tsx:22
 msgid "API keys"
 msgstr "API keys"
 
@@ -262,12 +286,13 @@ msgstr "billed annually"
 msgid "billed monthly"
 msgstr "billed monthly"
 
+#: src/components/SettingsLayout.tsx:44
 #: src/views/boards/components/TemplateBoards.tsx:55
-#: src/views/settings/index.tsx:235
+#: src/views/settings/BillingSettings.tsx:39
 msgid "Billing"
 msgstr "Billing"
 
-#: src/views/settings/index.tsx:245
+#: src/views/settings/BillingSettings.tsx:49
 msgid "Billing portal"
 msgstr "Billing portal"
 
@@ -331,12 +356,12 @@ msgid "Board visibility updated"
 msgstr "Board visibility updated"
 
 #: src/components/SideNavigation.tsx:68
-#: src/views/boards/index.tsx:27
+#: src/views/boards/index.tsx:32
 msgid "Boards"
 msgstr "Boards"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/boards/index.tsx:23
+#: src/views/boards/index.tsx:28
 msgid "Boards | {0}"
 msgstr "Boards | {0}"
 
@@ -377,16 +402,20 @@ msgstr "Card not found"
 msgid "Card title"
 msgstr "Card title"
 
+#: src/views/settings/AccountSettings.tsx:70
+#: src/views/settings/AccountSettings.tsx:80
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:109
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:178
-#: src/views/settings/index.tsx:328
-#: src/views/settings/index.tsx:338
 msgid "Change Password"
 msgstr "Change Password"
 
 #: src/views/settings/index.tsx:227
-msgid "Change the language of the app."
-msgstr "Change the language of the app."
+#~ msgid "Change the language of the app."
+#~ msgstr "Change the language of the app."
+
+#: src/views/settings/AccountSettings.tsx:45
+msgid "Change your language preferences."
+msgstr "Change your language preferences."
 
 #: src/views/auth/login/index.tsx:41
 #: src/views/auth/signup/index.tsx:67
@@ -405,6 +434,10 @@ msgstr "Clear filters"
 #: src/views/auth/signup/index.tsx:72
 msgid "Click on the link we've sent to {magicLinkRecipient} to sign in."
 msgstr "Click on the link we've sent to {magicLinkRecipient} to sign in."
+
+#: src/views/settings/components/NewApiKeyModal.tsx:136
+msgid "Close"
+msgstr "Close"
 
 #: src/views/boards/components/TemplateBoards.tsx:22
 msgid "Code Review"
@@ -454,7 +487,7 @@ msgid "Confirm your new password"
 msgstr "Confirm your new password"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:157
-#: src/views/settings/index.tsx:272
+#: src/views/settings/IntegrationsSettings.tsx:93
 msgid "Connect Trello"
 msgstr "Connect Trello"
 
@@ -462,7 +495,7 @@ msgstr "Connect Trello"
 msgid "Connect your favorite tools to streamline your workflow."
 msgstr "Connect your favorite tools to streamline your workflow."
 
-#: src/views/settings/index.tsx:259
+#: src/views/settings/IntegrationsSettings.tsx:80
 msgid "Connect your Trello account to import boards."
 msgstr "Connect your Trello account to import boards."
 
@@ -497,9 +530,9 @@ msgstr "Control who can view and edit your boards."
 msgid "Create another"
 msgstr "Create another"
 
-#: src/views/settings/index.tsx:238
-#~ msgid "Create API key"
-#~ msgstr "Create API key"
+#: src/views/settings/components/NewApiKeyModal.tsx:175
+msgid "Create API key"
+msgstr "Create API key"
 
 #: src/views/settings/index.tsx:232
 #~ msgid "Create API keys to access the Kan API."
@@ -529,12 +562,12 @@ msgstr "Create list"
 msgid "Create new board"
 msgstr "Create new board"
 
-#: src/views/settings/components/CreateAPIKeyForm.tsx:54
+#: src/views/settings/ApiSettings.tsx:30
 msgid "Create new key"
 msgstr "Create new key"
 
 #: src/views/board/components/NewCardForm.tsx:394
-#: src/views/card/components/LabelSelector.tsx:98
+#: src/views/card/components/LabelSelector.tsx:97
 msgid "Create new label"
 msgstr "Create new label"
 
@@ -600,9 +633,9 @@ msgstr "Dark"
 msgid "Delete"
 msgstr "Delete"
 
+#: src/views/settings/AccountSettings.tsx:52
+#: src/views/settings/AccountSettings.tsx:62
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:96
-#: src/views/settings/index.tsx:346
-#: src/views/settings/index.tsx:356
 msgid "Delete account"
 msgstr "Delete account"
 
@@ -623,8 +656,8 @@ msgid "Delete list"
 msgstr "Delete list"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:106
-#: src/views/settings/index.tsx:309
-#: src/views/settings/index.tsx:320
+#: src/views/settings/WorkspaceSettings.tsx:96
+#: src/views/settings/WorkspaceSettings.tsx:107
 msgid "Delete workspace"
 msgstr "Delete workspace"
 
@@ -650,7 +683,7 @@ msgstr "deleted checklist item <0>{0}</0>"
 msgid "Design"
 msgstr "Design"
 
-#: src/views/settings/index.tsx:287
+#: src/views/settings/IntegrationsSettings.tsx:108
 msgid "Disconnect Trello"
 msgstr "Disconnect Trello"
 
@@ -658,7 +691,7 @@ msgstr "Disconnect Trello"
 msgid "Discuss and collaborate on cards."
 msgstr "Discuss and collaborate on cards."
 
-#: src/views/settings/index.tsx:176
+#: src/views/settings/AccountSettings.tsx:35
 msgid "Display name"
 msgstr "Display name"
 
@@ -776,7 +809,7 @@ msgstr "Error deleting label"
 msgid "Error deleting workspace"
 msgstr "Error deleting workspace"
 
-#: src/views/settings/index.tsx:126
+#: src/views/settings/IntegrationsSettings.tsx:60
 msgid "Error disconnecting Trello"
 msgstr "Error disconnecting Trello"
 
@@ -995,7 +1028,7 @@ msgstr "Ideas to improve this page..."
 #~ msgid "Ideas, Research, Planning, Execution, Review, Next Steps, Complete"
 #~ msgstr "Ideas, Research, Planning, Execution, Review, Next Steps, Complete"
 
-#: src/views/boards/index.tsx:38
+#: src/views/boards/index.tsx:43
 msgid "Import"
 msgstr "Import"
 
@@ -1033,6 +1066,7 @@ msgstr "In Progress"
 msgid "Individuals"
 msgstr "Individuals"
 
+#: src/components/SettingsLayout.tsx:57
 #: src/views/home/components/Features.tsx:114
 msgid "Integrations"
 msgstr "Integrations"
@@ -1053,7 +1087,7 @@ msgstr "Invite"
 msgid "Invite another"
 msgstr "Invite another"
 
-#: src/views/card/components/MemberSelector.tsx:112
+#: src/views/card/components/MemberSelector.tsx:111
 #: src/views/members/components/InviteMemberForm.tsx:233
 msgid "Invite member"
 msgstr "Invite member"
@@ -1089,7 +1123,7 @@ msgstr "Labels"
 msgid "Labels & Filters"
 msgstr "Labels & Filters"
 
-#: src/views/settings/index.tsx:224
+#: src/views/settings/AccountSettings.tsx:42
 msgid "Language"
 msgstr "Language"
 
@@ -1215,9 +1249,13 @@ msgstr "Name"
 msgid "Need help?"
 msgstr "Need help?"
 
-#: src/views/boards/index.tsx:48
+#: src/views/boards/index.tsx:53
 msgid "New"
 msgstr "New"
+
+#: src/views/settings/components/NewApiKeyModal.tsx:147
+msgid "New API key"
+msgstr "New API key"
 
 #: src/views/boards/components/NewBoardForm.tsx:85
 msgid "New board"
@@ -1296,11 +1334,11 @@ msgstr "Offer"
 msgid "Onboarding"
 msgstr "Onboarding"
 
-#: src/views/settings/index.tsx:349
+#: src/views/settings/AccountSettings.tsx:55
 msgid "Once you delete your account, there is no going back. This action cannot be undone."
 msgstr "Once you delete your account, there is no going back. This action cannot be undone."
 
-#: src/views/settings/index.tsx:312
+#: src/views/settings/WorkspaceSettings.tsx:99
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Once you delete your workspace, there is no going back. This action cannot be undone."
 
@@ -1390,9 +1428,9 @@ msgstr "Please select a file to upload."
 #: src/views/card/components/DeleteCardConfirmation.tsx:52
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:37
 #: src/views/card/components/DeleteCommentConfirmation.tsx:45
-#: src/views/card/components/LabelSelector.tsx:73
-#: src/views/card/components/ListSelector.tsx:53
-#: src/views/card/components/MemberSelector.tsx:80
+#: src/views/card/components/LabelSelector.tsx:72
+#: src/views/card/components/ListSelector.tsx:52
+#: src/views/card/components/MemberSelector.tsx:79
 #: src/views/card/components/NewChecklistForm.tsx:70
 #: src/views/card/components/NewChecklistItemForm.tsx:89
 #: src/views/card/components/NewCommentForm.tsx:31
@@ -1443,7 +1481,7 @@ msgstr "Pro Plan ∞"
 msgid "Profile image updated"
 msgstr "Profile image updated"
 
-#: src/views/settings/index.tsx:171
+#: src/views/settings/AccountSettings.tsx:29
 msgid "Profile picture"
 msgstr "Profile picture"
 
@@ -1531,8 +1569,8 @@ msgid "Review"
 msgstr "Review"
 
 #: src/views/settings/components/CreateAPIKeyForm.tsx:49
-msgid "Revoke"
-msgstr "Revoke"
+#~ msgid "Revoke"
+#~ msgstr "Revoke"
 
 #: src/views/home/components/Footer.tsx:36
 #: src/views/home/components/Header.tsx:13
@@ -1591,15 +1629,14 @@ msgstr "Send feedback"
 msgid "Senior"
 msgstr "Senior"
 
+#: src/components/SettingsLayout.tsx:82
 #: src/components/SideNavigation.tsx:78
-#: src/views/settings/index.tsx:165
 msgid "Settings"
 msgstr "Settings"
 
-#. placeholder {0}: workspace.name ?? "Workspace"
 #: src/views/settings/index.tsx:161
-msgid "Settings | {0}"
-msgstr "Settings | {0}"
+#~ msgid "Settings | {0}"
+#~ msgstr "Settings | {0}"
 
 #: src/views/home/components/Header.tsx:100
 #: src/views/home/components/Header.tsx:138
@@ -1717,6 +1754,10 @@ msgstr "They won't be able to access this workspace."
 msgid "This action can't be undone."
 msgstr "This action can't be undone."
 
+#: src/views/settings/components/NewApiKeyModal.tsx:129
+msgid "This API key will only be shown once. Please save it in a secure location."
+msgstr "This API key will only be shown once. Please save it in a secure location."
+
 #: src/views/public/board/index.tsx:151
 msgid "This board is private or does not exist"
 msgstr "This board is private or does not exist"
@@ -1762,7 +1803,11 @@ msgstr "Toggle menu"
 msgid "Track all card changes with detailed activity history."
 msgstr "Track all card changes with detailed activity history."
 
-#: src/views/settings/index.tsx:119
+#: src/views/settings/IntegrationsSettings.tsx:73
+msgid "Trello"
+msgstr "Trello"
+
+#: src/views/settings/IntegrationsSettings.tsx:53
 msgid "Trello disconnected"
 msgstr "Trello disconnected"
 
@@ -1847,16 +1892,16 @@ msgstr "Unable to update checklist item"
 msgid "Unable to update comment"
 msgstr "Unable to update comment"
 
-#: src/views/card/components/LabelSelector.tsx:72
+#: src/views/card/components/LabelSelector.tsx:71
 msgid "Unable to update labels"
 msgstr "Unable to update labels"
 
 #: src/views/board/index.tsx:133
-#: src/views/card/components/ListSelector.tsx:52
+#: src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Unable to update list"
 
-#: src/views/card/components/MemberSelector.tsx:79
+#: src/views/card/components/MemberSelector.tsx:78
 msgid "Unable to update members"
 msgstr "Unable to update members"
 
@@ -1903,9 +1948,9 @@ msgid "Unlimited members"
 msgstr "Unlimited members"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:174
-#: src/views/settings/components/UpdateDisplayNameForm.tsx:79
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:90
-#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:82
+#: src/views/settings/components/UpdateDisplayNameForm.tsx:80
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:91
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:83
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:154
 msgid "Update"
 msgstr "Update"
@@ -1940,7 +1985,7 @@ msgid "Upgrade"
 msgstr "Upgrade"
 
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:52
-#: src/views/settings/index.tsx:216
+#: src/views/settings/WorkspaceSettings.tsx:89
 msgid "Upgrade to Pro"
 msgstr "Upgrade to Pro"
 
@@ -1988,11 +2033,11 @@ msgstr "User is already a member of this workspace"
 msgid "Video"
 msgstr "Video"
 
-#: src/views/settings/index.tsx:299
+#: src/views/settings/ApiSettings.tsx:25
 msgid "View and manage your API keys."
 msgstr "View and manage your API keys."
 
-#: src/views/settings/index.tsx:238
+#: src/views/settings/BillingSettings.tsx:42
 msgid "View and manage your billing and subscription."
 msgstr "View and manage your billing and subscription."
 
@@ -2048,6 +2093,7 @@ msgstr "When Trello launched in 2011, it blew everyone away with its carefully d
 msgid "Why make an open source Trello?"
 msgstr "Why make an open source Trello?"
 
+#: src/components/SettingsLayout.tsx:39
 #: src/views/board/index.tsx:331
 msgid "Workspace"
 msgstr "Workspace"
@@ -2060,7 +2106,7 @@ msgstr "Workspace created successfully. You can upgrade later in settings."
 msgid "Workspace deleted"
 msgstr "Workspace deleted"
 
-#: src/views/settings/index.tsx:202
+#: src/views/settings/WorkspaceSettings.tsx:75
 msgid "Workspace description"
 msgstr "Workspace description"
 
@@ -2082,7 +2128,7 @@ msgid "Workspace members"
 msgstr "Workspace members"
 
 #: src/components/NewWorkspaceForm.tsx:259
-#: src/views/settings/index.tsx:183
+#: src/views/settings/WorkspaceSettings.tsx:58
 msgid "Workspace name"
 msgstr "Workspace name"
 
@@ -2106,7 +2152,7 @@ msgstr "Workspace name updated"
 msgid "Workspace slug updated"
 msgstr "Workspace slug updated"
 
-#: src/views/settings/index.tsx:192
+#: src/views/settings/WorkspaceSettings.tsx:66
 msgid "Workspace URL"
 msgstr "Workspace URL"
 
@@ -2126,7 +2172,7 @@ msgstr "Yearly"
 msgid "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits."
 msgstr "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits."
 
-#: src/views/settings/index.tsx:331
+#: src/views/settings/AccountSettings.tsx:73
 msgid "You are about to change your password."
 msgstr "You are about to change your password."
 
@@ -2174,11 +2220,11 @@ msgstr "Your password has been changed."
 msgid "Your profile image has been updated."
 msgstr "Your profile image has been updated."
 
-#: src/views/settings/index.tsx:120
+#: src/views/settings/IntegrationsSettings.tsx:54
 msgid "Your Trello account has been disconnected."
 msgstr "Your Trello account has been disconnected."
 
-#: src/views/settings/index.tsx:281
+#: src/views/settings/IntegrationsSettings.tsx:102
 msgid "Your Trello account is connected."
 msgstr "Your Trello account is connected."
 

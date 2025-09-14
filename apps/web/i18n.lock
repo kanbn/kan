@@ -10,6 +10,7 @@ checksums:
     "%248%2Fmonth/singular": 4667034934bb2bc3d569c70b94205b51
     1%20user/singular: 3b547431ab12f0fba84307e6a81109d8
     A%20powerful%2C%20flexible%20kanban%20app%20that%20helps%20you%20organise%20work%2C%20track%20progress%2C%20and%20deliver%20results%E2%80%94all%20in%20one%20place./singular: d405b83b0d631cb72f4347c10bcbb643
+    Account/singular: 01215c12fb1cdb93bd0c84c1382bef56
     Account%20deleted/singular: a25da96a1579c4491be0a95669ef18a4
     Activity/singular: 1948763de8e531483a798b68195e297e
     Activity%20logs/singular: 8b1f0bb96a905646ecfad1cfdfa42168
@@ -34,6 +35,11 @@ checksums:
     Already%20have%20an%20account%3F%20%3C0%3E%3C1%3ESign%20in%3C%2F1%3E%3C%2F0%3E/singular: 2959fd276248208b65cb27ed46b20135
     An%20error%20occurred%20while%20disconnecting%20your%20Trello%20account./singular: 0aa3973b860c1faf8d9123aebf567e40
     An%20unexpected%20error%20occurred.%20Please%20try%20again%20later./singular: 1b5749b0cca6a62d75a577bee6804074
+    API/singular: 01d9819514e27056dcc69463194b63d2
+    API%20key%20created/singular: 8dbb2b60a719b0d120e774d6666c8c45
+    API%20key%20name/singular: 2d8aeb08b2cce3b750a584bbc5ce6d1d
+    API%20key%20name%20cannot%20exceed%2030%20characters/singular: 3ea1c7d68e1074a75128017b097b727a
+    API%20key%20name%20is%20required/singular: 870970743b14cb56e7fb7b410af0e933
     API%20keys/singular: 07f3620a30e08136f0b072c9af8d1eef
     API%20Reference/singular: 7dcc877064bfdf889ec55dbc9e06a242
     Applicants/singular: 4babd8331a1441e91087f855f43e57f8
@@ -74,11 +80,12 @@ checksums:
     Card%20not%20found/singular: 91509e2f92b0b3b11330b6983139fdbf
     Card%20title/singular: 7c34f59f4005e6cb3a6ff546ea0b96e3
     Change%20Password/singular: a552fc5c4189ebc3e2e6018edda7d18f
-    Change%20the%20language%20of%20the%20app./singular: fb20db145e28ed44aba89c146ded7bfc
+    Change%20your%20language%20preferences./singular: 293d49fc3c75e9c425b64bd7126e6b46
     Check%20your%20inbox/singular: e9a430fcd298def74212238df0f680d6
     Checklist%20name/singular: 5eb5de823f7ca5a4d97bb41e6a3f675a
     Clear%20filters/singular: 8f40ab5af527e4b190da94e7b6221379
     Click%20on%20the%20link%20we've%20sent%20to%20%7BmagicLinkRecipient%7D%20to%20sign%20in./singular: 210b6ff8727f976182ec3f29ea3c7667
+    Close/singular: 2c2e22f8424a1031de89063bd0022e16
     Code%20Review/singular: a2da6c2339301e7c3ddf068c4ff9f7e8
     Collaborate%20seamlessly%20with%20your%20team./singular: c5f10e431aaf8b51519bc009a4a4080c
     Coming%20soon/singular: ee2b0671e00972773210c5be5a9ccb89
@@ -99,6 +106,7 @@ checksums:
     Continue%20with%20%7B0%7D/singular: 2eaf6e1da91e208f7c5fb6bf862fe8a6
     Control%20who%20can%20view%20and%20edit%20your%20boards./singular: 2a7e0bec29bac26280de707e2fe8bce5
     Create%20another/singular: 2de8a82a416eb78c0462aa36278edc9a
+    Create%20API%20key/singular: 70ed8431c6ed5f7fdef122cc34f75b41
     Create%20board/singular: 155b62818bfab0e34f0089e1b34a32f3
     Create%20card/singular: 32792935dd5837a9433909b04021c22b
     Create%20checklist/singular: 5cbca15a7004558c4e6d381f83a34da2
@@ -259,6 +267,7 @@ checksums:
     Name/singular: 9368b5a047572b6051f334af5aa76819
     Need%20help%3F/singular: 04e7322f2d3ffb2d73ff2f64b71637c8
     New/singular: 126d036fae5fb6b629728ecb97e6195b
+    New%20API%20key/singular: db3088aedba6e4a99b46451c5b3d36ed
     New%20board/singular: 63f4e979e29a7fc2f5c09ff91fa75966
     New%20card/singular: a33f6219a756127f91c2523cfe845a19
     New%20checklist/singular: 58252b71e9693ae0f4d2d0b72108a569
@@ -324,7 +333,6 @@ checksums:
     Resolution/singular: 6d8bd9e1bd7dae5ae38c93061d32990e
     Resources/singular: ec7fb05ed963bb6781a35782b3475502
     Review/singular: 299f75db25382980b2895622d7712927
-    Revoke/singular: be57685a85b6dfeaeb6eab4e9560b520
     Roadmap/singular: c60f4a1acf30e566861bf130f13b9ae7
     Role/singular: 53743bbb6ca938f5b893552e839d067f
     Run%20on%20your%20own%20infrastructure/singular: eba804911562b8dbf9d69c3e27f1d708
@@ -339,7 +347,6 @@ checksums:
     Send%20feedback/singular: 9631cc08d49da04475b30a0d320ce97c
     Senior/singular: 3fff865dc00435f82896fc302ea45630
     Settings/singular: 8df6777277469c1fd88cc18dde2f1cc3
-    Settings%20%7C%20%7B0%7D/singular: b8fc73080bc9c8f4f1403b2a69bd1ac5
     Sign%20in/singular: cb8757c7450e17de1e226e82fb0fa4a2
     Sign%20up%20%7C%20kan.bn/singular: f3de2a110c90358e6eac07d0b2f663a6
     Sign%20up%20disabled/singular: 9581b1f75b404ac0ecb7e603e0d4189c
@@ -367,6 +374,7 @@ checksums:
     Theme/singular: 21fe00b7a518089576fb83c08631107a
     They%20won't%20be%20able%20to%20access%20this%20workspace./singular: 93b740350fe3430319fbca85349e41d9
     This%20action%20can't%20be%20undone./singular: cb222ff89715d8c971e8c25d121e1dbd
+    This%20API%20key%20will%20only%20be%20shown%20once.%20Please%20save%20it%20in%20a%20secure%20location./singular: 7df18d2978d317375f780822f8321c4d
     This%20board%20is%20private%20or%20does%20not%20exist/singular: a217ff3f04463b4df8c86adb6f83c6bc
     This%20board%20URL%20has%20already%20been%20taken/singular: 1d8b40332a031b5b77a3658e48dd51ca
     This%20will%20result%20in%20the%20permanent%20deletion%20of%20all%20data%20associated%20with%20this%20workspace./singular: a31141558af793635c1ddd2fa0a33499
@@ -377,6 +385,7 @@ checksums:
     To%20Do/singular: d60813ea824f373462471e092d136eed
     Toggle%20menu/singular: 29dea3e0b6238874f8c7a27619df8e36
     Track%20all%20card%20changes%20with%20detailed%20activity%20history./singular: 0d3bac559c71ec4b8734f9f212320de5
+    Trello/singular: b5131f6488b5a439d58db3e22d6de45b
     Trello%20disconnected/singular: 54b24a3e6c9a7eedd8c8d1060ab1175d
     Trello%20imports/singular: 6827eca403faa8f89891d17827e72af9
     Triaging/singular: 1d40799fcae53a8a27688fdae2a48dee
