@@ -1,5 +1,7 @@
+import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
+import { useEffect, useState } from "react";
 import { HiBolt } from "react-icons/hi2";
 
 import type { Subscription } from "@kan/shared/utils";
@@ -22,7 +24,9 @@ import { UpgradeToProConfirmation } from "./components/UpgradeToProConfirmation"
 export default function WorkspaceSettings() {
   const { modalContentType, openModal, isOpen } = useModal();
   const { workspace } = useWorkspace();
+  const router = useRouter();
   const { data } = api.user.getUser.useQuery();
+  const [hasOpenedUpgradeModal, setHasOpenedUpgradeModal] = useState(false);
 
   const { data: workspaceData } = api.workspace.byId.useQuery({
     workspacePublicId: workspace.publicId,
@@ -31,6 +35,19 @@ export default function WorkspaceSettings() {
   const subscriptions = workspaceData?.subscriptions as
     | Subscription[]
     | undefined;
+
+  // Open upgrade modal if upgrade=pro is in URL params
+  useEffect(() => {
+    if (
+      router.query.upgrade === "pro" &&
+      env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
+      !hasActiveSubscription(subscriptions, "pro") &&
+      !hasOpenedUpgradeModal
+    ) {
+      openModal("UPGRADE_TO_PRO");
+      setHasOpenedUpgradeModal(true);
+    }
+  }, [router.query.upgrade, subscriptions, openModal, hasOpenedUpgradeModal]);
 
   return (
     <>

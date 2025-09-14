@@ -123,7 +123,7 @@ export function NewWorkspaceForm() {
                 body: JSON.stringify({
                   slug: slug || undefined,
                   workspacePublicId: values.publicId,
-                  cancelUrl: "/settings?upgrade=pro",
+                  cancelUrl: "/settings/workspace?upgrade=pro",
                   successUrl: "/boards",
                 }),
               },
