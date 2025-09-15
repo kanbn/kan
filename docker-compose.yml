@@ -6,6 +6,7 @@ services:
     networks:
       - kan-network
     build:
+      name: cr.costao.com.br/kanban:v0.0.0
       context: .
       dockerfile: ./apps/web/Dockerfile
     env_file:
