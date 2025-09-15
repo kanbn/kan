@@ -8,7 +8,6 @@ import * as schema from "./schema";
 import { PGlite } from "@electric-sql/pglite";
 import { migrate } from "drizzle-orm/pglite/migrator";
 import { seed } from "./seed";
-import { pgEnum } from "drizzle-orm/pg-core";
 
 export type dbClient = NodePgDatabase<typeof schema> & {
   $client: Pool;

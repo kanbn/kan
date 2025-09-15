@@ -1,23 +1,19 @@
 
-import crypto from "crypto";
 import { createDrizzleClient } from "./client"; 
+import { sql } from "drizzle-orm";
 import {  boards, labels, lists, users, workspaceMembers, workspaces } from "./schema";
 import { create as createMember } from "./repository/member.repo";
 import { bulkCreate } from "./repository/list.repo";
 
-function hashPassword(password: string) {
-  const salt = crypto.randomBytes(16).toString("hex");
-
-  const hash = crypto
-    .createHmac("sha512", salt)
-    .update(password)
-    .digest("hex");
-
-  return `${salt}:${hash}`;
-}
-
 export async function seed(db: ReturnType<typeof createDrizzleClient>) {
   try {
+    const result = await db.select({ count: sql<number>`COUNT(*)` }).from(users);
+    const count = result?.[0]?.count ?? 0;
+
+    if (count > 0) {
+      return;
+    }
+
     await seedWorkspaces(db);
     const userId = await seedUsers(db);
     await seedBoards(db);
@@ -28,7 +24,7 @@ export async function seed(db: ReturnType<typeof createDrizzleClient>) {
     console.log("Seed completed!");
   } catch (err) {
     console.error("Error seeding DB:", err);
-    throw err;  
+    throw err;
   }
 }
 
@@ -48,13 +44,13 @@ export async function seedUsers(db: ReturnType<typeof createDrizzleClient>){
       .returning();
 
     if (createdUser?.id) {
-      const password = "Mudar@123";
-      const hashedPassword = hashPassword(password);
-
+     
+      const hashedPassword = "adffb744126f515fc9ef7971bdf10793:fcb17179884dee01ffbe58f8ac8a42d8f73795d5003a2ba8de5c4e73be9c790dad14e2b7f3ff5e09a39e7b88deea7ae25066455dac0f919d7cbeb1e7a356f411";
+      // Mudar@123
       await db.execute(
         `INSERT INTO public.account
-          ("accountId", "providerId", "userId", "password")
-        VALUES (${createdUser.id}, "credential", ${createdUser.id},${hashedPassword})
+          ("accountId", "providerId", "userId", "password", "createdAt","updatedAt")
+        VALUES ('${createdUser.id}', 'credential', '${createdUser.id}','${hashedPassword}', NOW(), NOW())
         ON CONFLICT DO NOTHING`
       );
 

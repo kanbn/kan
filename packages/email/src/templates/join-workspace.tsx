@@ -43,7 +43,7 @@ export const JoinWorkspaceTemplate = ({
         <Heading
           style={{ fontSize: "24px", fontWeight: "bold", color: "#232323" }}
         >
-          Acesse sua conta Kan
+          Acesse sua conta
         </Heading>
         <Text
           style={{

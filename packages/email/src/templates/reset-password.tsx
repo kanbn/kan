@@ -19,7 +19,7 @@ export const ResetPasswordTemplate = ({
 }) => (
   <Html>
     <Head />
-    <Preview>Redefina sua senha Kan</Preview>
+    <Preview>Redefina sua senha</Preview>
     <Body style={{ backgroundColor: "white" }}>
       <Container
         style={{
@@ -44,7 +44,7 @@ export const ResetPasswordTemplate = ({
         <Heading
           style={{ fontSize: "24px", fontWeight: "bold", color: "#232323" }}
         >
-          Redefina sua senha Kan
+          Redefina sua senha
         </Heading>
         <Text
           style={{

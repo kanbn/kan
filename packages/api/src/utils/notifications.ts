@@ -1,9 +1,7 @@
-import * as http from 'http';
-const token = process.env.MSG_ACCESS_TOKEN;
+import https from "https";
 
-if (!token) {
-  throw new Error('MSG_ACCESS_TOKEN is not defined in .env');
-}
+const token = process.env.MSG_ACCESS_TOKEN;
+if (!token) throw new Error("MSG_ACCESS_TOKEN is not defined in .env");
 
 interface SmsPayload {
   to: string;
@@ -15,25 +13,22 @@ export function sendSms(payload: SmsPayload): Promise<string> {
   return new Promise((resolve, reject) => {
     const postData = JSON.stringify(payload);
 
-    const options: http.RequestOptions = {
-      hostname: 'localhost',
-      port: 3000,
+    const options: https.RequestOptions = {
+      hostname: "msg.costao.com.br",
+      port: 443,
       path: `/sms?access_token=${token}`,
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(postData)
-      }
+        "Content-Type": "application/json",
+        "Content-Length": Buffer.byteLength(postData),
+      },
+      rejectUnauthorized: false, 
     };
 
-    const req = http.request(options, (res) => {
-      let data = '';
-
-      res.on('data', chunk => {
-        data += chunk;
-      });
-
-      res.on('end', () => {
+    const req = https.request(options, (res) => {
+      let data = "";
+      res.on("data", (chunk) => (data += chunk));
+      res.on("end", () => {
         if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
           resolve(data);
         } else {
@@ -42,8 +37,7 @@ export function sendSms(payload: SmsPayload): Promise<string> {
       });
     });
 
-    req.on('error', reject);
-
+    req.on("error", reject);
     req.write(postData);
     req.end();
   });
