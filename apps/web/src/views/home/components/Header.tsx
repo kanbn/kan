@@ -9,12 +9,12 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = [
-    { label: t`Roadmap`, href: "/kan/roadmap", openInNewTab: true },
-    { label: t`Features`, href: "#features" },
-    { label: t`Pricing`, href: "#pricing" },
-    { label: t`Docs`, href: "https://docs.kan.bn", openInNewTab: true },
-  ];
+  // const menuItems = [
+  //   { label: t`Roadmap`, href: "/kan/roadmap", openInNewTab: true },
+  //   { label: t`Features`, href: "#features" },
+  //   { label: t`Pricing`, href: "#pricing" },
+  //   { label: t`Docs`, href: "https://docs.Costao Lavanderia", openInNewTab: true },
+  // ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,13 +48,13 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
             <div className="my-auto flex items-center justify-between">
               <Link href="/">
                 <h1 className="w-[200px] text-lg font-bold tracking-tight text-neutral-900 dark:text-dark-1000">
-                  kan.bn
+                  Costao Lavanderia
                 </h1>
               </Link>
             </div>
             {/* Desktop Menu */}
             <div className="hidden justify-center gap-10 dark:text-dark-1000 lg:flex">
-              {menuItems.map((item) => (
+              {/* {menuItems.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
@@ -64,7 +64,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
                 >
                   {item.label}
                 </Link>
-              ))}
+              ))} */}
             </div>
             {/* Hamburger Menu Button */}
             <button
@@ -116,7 +116,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
       >
         <div className="absolute inset-0 bg-white dark:bg-dark-100">
           <div className="flex h-full flex-col items-center justify-center space-y-8">
-            {menuItems.map((item) => (
+            {/* {menuItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
@@ -126,7 +126,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
               >
                 {item.label}
               </Link>
-            ))}
+            ))} */}
             <div className="mt-8 flex flex-col gap-4">
               {isLoggedIn ? (
                 <Button href="/boards" onClick={toggleMenu}>
@@ -137,9 +137,9 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
                   <Button href="/login" variant="ghost" onClick={toggleMenu}>
                     {t`Sign in`}
                   </Button>
-                  <Button href="/signup" onClick={toggleMenu}>
+                  {/* <Button href="/signup" onClick={toggleMenu}>
                     {t`Get started`}
-                  </Button>
+                  </Button> */}
                 </>
               )}
             </div>

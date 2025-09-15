@@ -204,6 +204,10 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
       title: true,
       description: true,
       listId: true,
+      hospedeApartamento: true,
+      hospedeName: true,
+      hospedeTelefone: true,
+      tipoEntrega: true,
     },
     where: eq(cards.publicId, cardPublicId),
   });

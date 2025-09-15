@@ -409,6 +409,9 @@ importers:
       prettier:
         specifier: 'catalog:'
         version: 3.4.2
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@types/node@20.17.9)(typescript@5.7.2)
       typescript:
         specifier: 'catalog:'
         version: 5.7.2

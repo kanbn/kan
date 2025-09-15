@@ -12,6 +12,7 @@
     "clean:workspaces": "turbo run clean",
     "db:migrate": "cd packages/db && pnpm migrate",
     "db:generate": "cd packages/db && pnpm generate",
+    "db:seed": "cd packages/db && pnpm seed",
     "db:push": "turbo -F @kan/db push",
     "db:studio": "turbo -F @kan/db studio",
     "dev": "turbo watch dev --continue",

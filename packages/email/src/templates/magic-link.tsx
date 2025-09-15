@@ -8,7 +8,6 @@ import { Html } from "@react-email/html";
 import { Link } from "@react-email/link";
 import { Preview } from "@react-email/preview";
 import { Text } from "@react-email/text";
-import { env } from "next-runtime-env";
 import * as React from "react";
 
 export const MagicLinkTemplate = ({
@@ -18,7 +17,7 @@ export const MagicLinkTemplate = ({
 }) => (
   <Html>
     <Head />
-    <Preview>Log in with this magic link</Preview>
+    <Preview>Acesse sua conta com este link mágico</Preview>
     <Body style={{ backgroundColor: "white" }}>
       <Container
         style={{
@@ -38,12 +37,12 @@ export const MagicLinkTemplate = ({
             color: "#232323",
           }}
         >
-          kan.bn
+          Costao Lavanderia
         </Heading>
         <Heading
           style={{ fontSize: "24px", fontWeight: "bold", color: "#232323" }}
         >
-          Login to your Kan account
+          Acesse sua conta Costao
         </Heading>
         <Text
           style={{
@@ -52,7 +51,7 @@ export const MagicLinkTemplate = ({
             color: "#232323",
           }}
         >
-          Click the button below to instantly login to your account.
+          Clique no botão abaixo para acessar sua conta imediatamente.
         </Text>
         <Button
           target="_blank"
@@ -71,7 +70,7 @@ export const MagicLinkTemplate = ({
             color: "white",
           }}
         >
-          Login to your account
+          Entrar na sua conta
         </Button>
         <Text
           style={{
@@ -80,7 +79,7 @@ export const MagicLinkTemplate = ({
             color: "#7e7e7e",
           }}
         >
-          If you didn&apos;t try to login, you can safely ignore this email.
+          Se você não tentou acessar, pode ignorar este e-mail com segurança.
         </Text>
         <Hr
           style={{
@@ -89,16 +88,6 @@ export const MagicLinkTemplate = ({
             borderWidth: "1px",
           }}
         />
-        <Text style={{ color: "#7e7e7e" }}>
-          <Link
-            href={env("NEXT_PUBLIC_BASE_URL")}
-            target="_blank"
-            style={{ color: "#7e7e7e", textDecoration: "underline" }}
-          >
-            Kan
-          </Link>
-          , the open source Trello alternative.
-        </Text>
       </Container>
     </Body>
   </Html>

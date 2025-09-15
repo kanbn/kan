@@ -7,6 +7,8 @@ import { Pool } from "pg";
 import * as schema from "./schema";
 import { PGlite } from "@electric-sql/pglite";
 import { migrate } from "drizzle-orm/pglite/migrator";
+import { seed } from "./seed";
+import { pgEnum } from "drizzle-orm/pg-core";
 
 export type dbClient = NodePgDatabase<typeof schema> & {
   $client: Pool;
@@ -30,5 +32,11 @@ export const createDrizzleClient = (): dbClient => {
     connectionString,
   });
 
-  return drizzlePg(pool, { schema }) as dbClient;
+  var newDbPg =  drizzlePg(pool, { schema }) as dbClient;
+
+  seed(newDbPg).catch((err) => {
+    console.error("Error during seeding:", err)
+  });
+
+  return newDbPg;
 };

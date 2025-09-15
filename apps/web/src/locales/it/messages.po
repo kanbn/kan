@@ -1000,8 +1000,8 @@ msgid "List name"
 msgstr "Nome lista"
 
 #: src/views/auth/login/index.tsx:31
-msgid "Login | kan.bn"
-msgstr "Login | kan.bn"
+msgid "Login | Costao Lavanderia"
+msgstr "Login | Costao Lavanderia"
 
 #: src/components/UserMenu.tsx:209
 msgid "Logout"
@@ -1438,8 +1438,8 @@ msgstr "Accedi"
 
 #: src/views/auth/signup/index.tsx:32
 #: src/views/auth/signup/index.tsx:57
-msgid "Sign up | kan.bn"
-msgstr "Registrati | kan.bn"
+msgid "Sign up | Costao Lavanderia"
+msgstr "Registrati | Costao Lavanderia"
 
 #: src/views/auth/signup/index.tsx:42
 msgid "Sign up disabled"
@@ -1895,8 +1895,8 @@ msgid "You are about to change your password."
 msgstr "Stai per cambiare la tua password."
 
 #: src/views/home/components/Faqs.tsx:67
-msgid "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!"
-msgstr "Puoi ottenere un URL personalizzato per il tuo workspace, come <0>kan.bn/kan</0>, accedendo alle tue <1>impostazioni del workspace</1> e acquistando un abbonamento pro. Tutti gli abbonamenti contribuiscono a finanziare lo sviluppo del progetto!"
+msgid "You can get a custom workspace URL, like <0>Costao Lavanderia/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!"
+msgstr "Puoi ottenere un URL personalizzato per il tuo workspace, come <0>Costao Lavanderia/kan</0>, accedendo alle tue <1>impostazioni del workspace</1> e acquistando un abbonamento pro. Tutti gli abbonamenti contribuiscono a finanziare lo sviluppo del progetto!"
 
 #: src/views/home/components/Faqs.tsx:111
 msgid "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace."

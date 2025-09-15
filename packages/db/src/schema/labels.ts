@@ -17,7 +17,7 @@ export const labels = pgTable("label", {
   id: bigserial("id", { mode: "number" }).primaryKey(),
   publicId: varchar("publicId", { length: 12 }).notNull().unique(),
   name: varchar("name", { length: 255 }).notNull(),
-  colourCode: varchar("colourCode", { length: 12 }),
+  colourCode: varchar("colourCode", { length: 12 }).notNull(),
   createdBy: uuid("createdBy").references(() => users.id, {
     onDelete: "set null",
   }),

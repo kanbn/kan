@@ -204,19 +204,19 @@ export default function PublicBoardView() {
               className="text-lg font-bold tracking-tight text-neutral-900 dark:text-dark-1000"
               href="/"
             >
-              kan.bn
+              Costao Lavanderia
             </Link>
           )}
 
           {!IS_CLOUD && !HIDE_POWERED_BY && (
             <a
-              href="https://kan.bn"
+              href="https://adm.lavanderia.costao.com.br"
               target="_blank"
               rel="noreferrer noopener"
               className="absolute right-[1rem] inline-flex items-center gap-[0.175rem] rounded-full border border-light-300 bg-light-50 px-3 py-1 text-[11px] font-medium text-light-950 shadow-sm transition-colors hover:bg-light-100 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900 dark:hover:bg-dark-100"
             >
               <span>{`Powered by`}</span>
-              <span className="font-semibold">kan.bn</span>
+              <span className="font-semibold">Costao Lavanderia</span>
             </a>
           )}
         </div>

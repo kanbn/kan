@@ -10,6 +10,7 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
+import { sendSms } from "../utils/notifications";
 
 export const cardRouter = createTRPCRouter({
   create: protectedProcedure
@@ -770,6 +771,22 @@ export const cardRouter = createTRPCRouter({
       if (activities.length > 0) {
         await cardActivityRepo.bulkCreate(ctx.db, activities);
       }
+
+      if (input.listPublicId === 'ifwvvnkr4811') {
+        try {
+          console.log("Sending SMS...");
+          console.log(existingCard.hospedeTelefone);
+          const response = await sendSms({
+            to: "+5548988274224",
+            from: "+12344075241",
+            body: "Costao do Santinho: Hello from scalable SMS function!"
+          });
+          console.log("SMS Sent:", response);
+        } catch (err) {
+          console.error("Failed to send SMS:", err);
+        }
+      }
+
 
       return result;
     }),
