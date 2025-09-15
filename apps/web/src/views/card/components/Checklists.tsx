@@ -2,6 +2,7 @@ import { HiPlus, HiXMark } from "react-icons/hi2";
 
 import CircularProgress from "~/components/CircularProgress";
 import { useModal } from "~/providers/modal";
+import AddChecklistItemsLink from "./AddChecklistItemsLink";
 import ChecklistItemRow from "./ChecklistItemRow";
 import ChecklistNameInput from "./ChecklistNameInput";
 import NewChecklistItemForm from "./NewChecklistItemForm";
@@ -36,7 +37,7 @@ export default function Checklists({
   cardPublicId,
   activeChecklistForm,
   setActiveChecklistForm,
-  viewOnly = false,
+  viewOnly,
 }: ChecklistsProps) {
   const { openModal } = useModal();
 
@@ -78,22 +79,23 @@ export default function Checklists({
                       </span>
                     </div>
                     <div>
-                      <button
+                      {/* <button
                         className="rounded-md p-1 text-light-900 hover:bg-light-100 dark:text-dark-700 dark:hover:bg-dark-100"
                         onClick={() =>
                           openModal("DELETE_CHECKLIST", checklist.publicId)
                         }
                       >
                         <HiXMark size={16} />
-                      </button>
-                      <button
+                      </button> */}
+                      <AddChecklistItemsLink cardPublicId={cardPublicId} />
+                      {/* <button
                         onClick={() =>
                           setActiveChecklistForm?.(checklist.publicId)
                         }
                         className="rounded-md p-1 text-light-900 hover:bg-light-100 dark:text-dark-700 dark:hover:bg-dark-100"
                       >
                         <HiPlus size={16} />
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 )}
@@ -119,7 +121,9 @@ export default function Checklists({
                     key={item.publicId}
                     item={{
                       publicId: item.publicId,
-                      title: item.title,
+                      title:
+                        item.title.charAt(0).toUpperCase() +
+                        item.title.slice(1),
                       quantity: item.quantity,
                       iron: item.iron,
                       wash: item.wash,

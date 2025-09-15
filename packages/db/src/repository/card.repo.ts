@@ -19,6 +19,11 @@ export const create = async (
   cardInput: {
     title: string;
     description: string;
+    hospedeName: string;
+    hospedeDocumento: string;
+    hospedeTelefone: string;
+    hospedeApartamento: string;
+    tipoEntrega: "normal" | "express";
     createdBy: string;
     listId: number;
     position: "start" | "end";
@@ -67,11 +72,20 @@ export const create = async (
         publicId: generateUID(),
         title: cardInput.title,
         description: cardInput.description,
+        hospedeName: cardInput.hospedeName,
+        hospedeDocumento: cardInput.hospedeDocumento,
+        hospedeTelefone: cardInput.hospedeTelefone,
+        hospedeApartamento: cardInput.hospedeApartamento,
+        tipoEntrega: cardInput.tipoEntrega,
         createdBy: cardInput.createdBy,
         listId: cardInput.listId,
         index: index,
       })
-      .returning({ id: cards.id, listId: cards.listId });
+      .returning({
+        id: cards.id,
+        listId: cards.listId,
+        publicId: cards.publicId,
+      });
 
     if (!result[0]) throw new Error("Unable to create card");
 
@@ -190,6 +204,10 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
       title: true,
       description: true,
       listId: true,
+      hospedeApartamento: true,
+      hospedeName: true,
+      hospedeTelefone: true,
+      tipoEntrega: true,
     },
     where: eq(cards.publicId, cardPublicId),
   });
@@ -213,6 +231,11 @@ export const bulkCreate = async (
     publicId: string;
     title: string;
     description: string;
+    hospedeName: string;
+    hospedeDocumento: string;
+    hospedeTelefone: string;
+    hospedeApartamento: string;
+    tipoEntrega: "normal" | "express";
     createdBy: string;
     listId: number;
     index: number;
@@ -289,6 +312,11 @@ export const getWithListAndMembersByPublicId = async (
       publicId: true,
       title: true,
       description: true,
+      hospedeName: true,
+      hospedeDocumento: true,
+      hospedeTelefone: true,
+      hospedeApartamento: true,
+      tipoEntrega: true,
     },
     with: {
       labels: {

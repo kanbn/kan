@@ -1,3 +1,5 @@
+docker build -t cr.costao.com.br/kanban:v0.0.0 -f apps/web/Dockerfile .
+
 ![github-background](https://github.com/user-attachments/assets/f728f52e-bf67-4357-9ba2-c24c437488e3)
 
 <div align="center">

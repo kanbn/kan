@@ -28,17 +28,17 @@ export default function LoginPage() {
 
   return (
     <>
-      <PageHead title={t`Login | kan.bn`} />
+      <PageHead title={t`Login | Costao Lavanderia`} />
       <main className="h-screen bg-light-100 pt-20 dark:bg-dark-50 sm:pt-0">
         <div className="justify-top flex h-full flex-col items-center px-4 sm:justify-center">
           <div className="z-10 flex w-full flex-col items-center">
             <Link href="/">
               <h1 className="mb-6 text-lg font-bold tracking-tight text-light-1000 dark:text-dark-1000">
-                kan.bn
+                Costao Lavanderia
               </h1>
             </Link>
             <p className="mb-10 text-3xl font-bold tracking-tight text-light-1000 dark:text-dark-1000">
-              {isMagicLinkSent ? t`Check your inbox` : t`Welcome back`}
+              {isMagicLinkSent ? `Verifique seu email` : `Bem-vindo de volta!`}
             </p>
             {isMagicLinkSent ? (
               <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -56,7 +56,7 @@ export default function LoginPage() {
                 </div>
               </div>
             )}
-            {!isSignUpDisabled && (
+            {/* {!isSignUpDisabled && (
               <p className="mt-4 text-sm text-light-1000 dark:text-dark-1000">
                 <Trans>
                   Don't have an account?{" "}
@@ -65,7 +65,7 @@ export default function LoginPage() {
                   </span>
                 </Trans>
               </p>
-            )}
+            )} */}
           </div>
           <PatternedBackground />
         </div>

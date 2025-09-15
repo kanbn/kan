@@ -56,7 +56,7 @@ export const checklistItems = pgTable("card_checklist_item", {
   id: bigserial("id", { mode: "number" }).primaryKey(),
   publicId: varchar("publicId", { length: 12 }).notNull().unique(),
   title: varchar("title", { length: 500 }).notNull(),
-  itemValue: numeric("itemValue", { precision: 14, scale: 4 }),
+  itemValue: numeric("itemValue", {mode: "number" , precision: 14, scale: 4 }),
   itemIdentity: varchar("itemIdentity", { length: 255}),
   quantity: integer("quantity"),
   wash: boolean("wash").notNull().default(false),

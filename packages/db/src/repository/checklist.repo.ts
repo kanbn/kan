@@ -64,31 +64,31 @@ export const createItem = async (
     });
 
     const [result] = await tx
-      .insert(checklistItems)
-      .values({
-        publicId: generateUID(),
-        title: checklistItemInput.title,
-        itemValue: checklistItemInput.itemValue.toPrecision(4),
-        itemIdentity: checklistItemInput.itemIdentity,
-        quantity: checklistItemInput.quantity,
-        wash: checklistItemInput.wash,
-        iron: checklistItemInput.iron,
-        createdBy: checklistItemInput.createdBy,
-        checklistId: checklistItemInput.checklistId,
-        index: lastItem ? lastItem.index + 1 : 0,
-        completed: false,
-      })
-      .returning({
-        id: checklistItems.id,
-        publicId: checklistItems.publicId,
-        title: checklistItems.title,
-        itemValue: checklistItems.itemValue,
-        itemIdentity: checklistItems.itemIdentity,
-        quantity: checklistItems.quantity,
-        wash: checklistItems.wash,
-        iron: checklistItems.iron,
-        completed: checklistItems.completed,
-      });
+  .insert(checklistItems)
+  .values({
+    publicId: generateUID(),                     
+    title: checklistItemInput.title,
+    itemValue: Number(checklistItemInput.itemValue.toPrecision(4)), 
+    itemIdentity: checklistItemInput.itemIdentity,
+    quantity: checklistItemInput.quantity,
+    wash: checklistItemInput.wash,
+    iron: checklistItemInput.iron,
+    createdBy: checklistItemInput.createdBy,
+    checklistId: checklistItemInput.checklistId,
+    index: lastItem ? Number(lastItem.index) + 1 : 0, 
+    completed: false,
+  })
+  .returning({
+    id: checklistItems.id,
+    publicId: checklistItems.publicId,
+    title: checklistItems.title,
+    itemValue: checklistItems.itemValue,
+    itemIdentity: checklistItems.itemIdentity,
+    quantity: checklistItems.quantity,
+    wash: checklistItems.wash,
+    iron: checklistItems.iron,
+    completed: checklistItems.completed,
+  });
 
     return result;
   });

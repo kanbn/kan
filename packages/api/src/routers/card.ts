@@ -10,6 +10,7 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
+import { sendSms } from "../utils/notifications";
 
 export const cardRouter = createTRPCRouter({
   create: protectedProcedure
@@ -27,6 +28,11 @@ export const cardRouter = createTRPCRouter({
       z.object({
         title: z.string().min(1),
         description: z.string().max(10000),
+        hospedeName: z.string().min(1).max(100),
+        hospedeDocumento: z.string().min(11).max(30),
+        hospedeTelefone: z.string().min(10).max(20),
+        hospedeApartamento: z.string().min(1).max(8),
+        tipoEntrega: z.enum(["normal", "express"]),
         listPublicId: z.string().min(12),
         labelPublicIds: z.array(z.string().min(12)),
         memberPublicIds: z.array(z.string().min(12)),
@@ -65,12 +71,18 @@ export const cardRouter = createTRPCRouter({
       const newCard = await cardRepo.create(ctx.db, {
         title: input.title,
         description: input.description,
+        hospedeName: input.hospedeName,
+        hospedeDocumento: input.hospedeDocumento,
+        hospedeTelefone: input.hospedeTelefone,
+        tipoEntrega: input.tipoEntrega,
+        hospedeApartamento: input.hospedeApartamento,
         createdBy: userId,
         listId: list.id,
         position: input.position,
       });
 
       const newCardId = newCard.id;
+      const newCardPublicId = newCard.publicId;
 
       if (!newCardId)
         throw new TRPCError({
@@ -630,6 +642,10 @@ export const cardRouter = createTRPCRouter({
         cardPublicId: z.string().min(12),
         title: z.string().min(1).optional(),
         description: z.string().optional(),
+        hospedeName: z.string().min(1).optional(),
+        hospedeDocumento: z.string().min(1).optional(),
+        hospedeTelefone: z.string().min(1).optional(),
+        tipoEntrega: z.enum(["normal", "express"]).optional(),
         index: z.number().optional(),
         listPublicId: z.string().min(12).optional(),
       }),
@@ -756,6 +772,32 @@ export const cardRouter = createTRPCRouter({
         await cardActivityRepo.bulkCreate(ctx.db, activities);
       }
 
+      if (input.listPublicId === 'ifwvvnkr4811') {
+        try {
+          const firstName =
+           existingCard.hospedeName?.split(" ")[0] ?? existingCard.hospedeName ?? "";
+
+          const message = getMessageByPhone(existingCard.hospedeTelefone, {
+            name: firstName,
+            order: existingCard.publicId,
+          });
+
+          console.log("Sending SMS...");
+
+          const response = await sendSms({
+            to: existingCard.hospedeTelefone,
+            from: "+12344075241",
+            body: message
+          });
+
+          console.log("SMS Sent:", response);
+
+        } catch (err) {
+          console.error("Failed to send SMS:", err);
+        }
+      }
+
+
       return result;
     }),
   delete: protectedProcedure
@@ -814,3 +856,54 @@ export const cardRouter = createTRPCRouter({
       return { success: true };
     }),
 });
+
+function getLanguageByDDI(phoneNumber:string) {
+  for (const ddi in ddiLanguageMap) {
+    if (phoneNumber.startsWith(ddi)) {
+      return ddiLanguageMap[ddi];
+    }
+  }
+  return "pt"; 
+}
+
+function getMessageByPhone(phoneNumber: string, variables: Record<string, string>) {
+  const lang = getLanguageByDDI(phoneNumber);
+  const template = messages[lang ?? "pt"];
+  
+  return template.replace(/\{(\w+)\}/g, (_, key) => variables[key] ?? `{${key}}`);
+}
+
+const messages: Record<"pt" | "es" | "en", string> = {
+  pt: "Costao do Santinho: Olá {name}, seu pedido L-{order} da lavanderia foi entregue. Dúvidas? Ramal 1772.",
+  es: "Costao do Santinho: Hola {name}, su pedido L-{order} de lavandería ha sido entregado. ¿Dudas? Anexo 1772.",
+  en: "Costao do Santinho: Hello {name}, your laundry order L-{order} is delivered. Questions? Ext. 1772."
+};
+
+const ddiLanguageMap: Record<string, "pt" | "es" | "en"> ={
+
+  "+54": "es", // Argentina
+  "+52": "es", // Mexico
+  "+56": "es", // Chile
+  "+57": "es", // Colombia
+  "+58": "es", // Venezuela
+  "+591": "es", // Bolivia
+  "+593": "es", // Ecuador
+  "+595": "es", // Paraguay
+  "+598": "es", // Uruguay
+  "+507": "es", // Panama
+  "+505": "es", // Nicaragua
+  "+502": "es", // Guatemala
+  "+503": "es", // El Salvador
+  "+504": "es", // Honduras
+  "+51": "es",  // Peru
+  "+34": "es",  // Spain
+
+  "+1": "en",    // US, Canada, Caribbean
+  "+44": "en",   // UK
+  "+61": "en",   // Australia
+  "+64": "en",   // New Zealand
+  "+353": "en",  // Ireland
+  "+27": "en",   // South Africa
+  "+65": "en",   // Singapore
+  "+91": "en",   // India
+};

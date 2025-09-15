@@ -6,7 +6,7 @@ import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertUserInWorkspace } from "../utils/auth";
+import { assertUserInWorkspace, assertUserAdminInWorkspace } from "../utils/auth";
 
 const checklistSchema = z.object({
   publicId: z.string().length(12),
@@ -16,7 +16,11 @@ const checklistSchema = z.object({
 const checklistItemSchema = z.object({
   publicId: z.string().length(12),
   title: z.string().min(1).max(500),
-  itemValue: z.number().nullable().optional(),
+  itemValue: z
+  .union([z.string(), z.number()])
+  .nullable()
+  .optional()
+  .transform((val) => (val === null || val === undefined ? null : Number(val))),
   itemIdentity: z.string().nullable().optional(),
   quantity: z.number().nullable().optional(),
   wash: z.boolean(),
@@ -278,7 +282,7 @@ export const checklistRouter = createTRPCRouter({
         createdBy: userId,
       });
 
-      return newChecklistItem;
+      return checklistItemSchema.parse(newChecklistItem);
     }),
   updateItem: protectedProcedure
     .meta({
@@ -329,17 +333,23 @@ export const checklistRouter = createTRPCRouter({
         userId,
         item.checklist.card.list.board.workspace.id,
       );
+      
+      await assertUserAdminInWorkspace(
+        ctx.db,
+        userId,
+        item.checklist.card.list.board.workspace.id,
+      );
 
       const previousTitle = item.title;
 
       const updated = await checklistRepo.updateItemById(ctx.db, {
-      id: item.id,
-      title: input.title,
-      completed: input.completed,
-      iron: input.iron,
-      wash: input.wash,
-      quantity: input.quantity || undefined,
-    });
+        id: item.id,
+        title: input.title,
+        completed: input.completed,
+        iron: input.iron,
+        wash: input.wash,
+        quantity: input.quantity || undefined,
+      });
 
       if (!updated)
         throw new TRPCError({

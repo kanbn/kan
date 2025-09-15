@@ -38,6 +38,11 @@ interface TrelloCard {
   id: string;
   name: string;
   desc: string;
+  hospedeName: string;
+  hospedeDocumento: string;
+  hospedeTelefone: string;
+  hospedeApartamento: string;
+  tipoEntrega: "normal" | "express";
   idList: string;
   labels: TrelloLabel[];
 }
@@ -190,6 +195,11 @@ export const importRouter = createTRPCRouter({
                   sourceId: _card.id,
                   name: _card.name,
                   description: _card.desc,
+                  hospedeName: _card.hospedeName,
+                  hospedeDocumento: _card.hospedeDocumento,
+                  hospedeTelefone: _card.hospedeTelefone,
+                  hospedeApartamento: _card.hospedeApartamento,
+                  tipoEntrega: _card.tipoEntrega,
                   labels: _card.labels.map((label) => ({
                     sourceId: label.id,
                     name: label.name,
@@ -256,6 +266,11 @@ export const importRouter = createTRPCRouter({
                 publicId: generateUID(),
                 title: card.name,
                 description: card.description,
+                hospedeName: card.hospedeName,
+                hospedeDocumento: card.hospedeDocumento,
+                hospedeTelefone: card.hospedeTelefone,
+                hospedeApartamento: card.hospedeApartamento,
+                tipoEntrega: card.tipoEntrega,
                 createdBy: userId,
                 listId: newListId,
                 index,

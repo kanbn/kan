@@ -18,7 +18,7 @@ export const JoinWorkspaceTemplate = ({
 }) => (
   <Html>
     <Head />
-    <Preview>Log in with this magic link</Preview>
+    <Preview>Acesse sua conta com este link mágico</Preview>
     <Body style={{ backgroundColor: "white" }}>
       <Container
         style={{
@@ -38,12 +38,12 @@ export const JoinWorkspaceTemplate = ({
             color: "#232323",
           }}
         >
-          kan.bn
+          Costao Lavanderia
         </Heading>
         <Heading
           style={{ fontSize: "24px", fontWeight: "bold", color: "#232323" }}
         >
-          Login to your Kan account
+          Acesse sua conta
         </Heading>
         <Text
           style={{
@@ -52,7 +52,7 @@ export const JoinWorkspaceTemplate = ({
             color: "#232323",
           }}
         >
-          Click the button below to instantly login to your account.
+          Clique no botão abaixo para entrar imediatamente na sua conta.
         </Text>
         <Button
           target="_blank"
@@ -71,7 +71,7 @@ export const JoinWorkspaceTemplate = ({
             color: "white",
           }}
         >
-          Login to your account
+          Entrar na sua conta
         </Button>
         <Text
           style={{
@@ -80,7 +80,7 @@ export const JoinWorkspaceTemplate = ({
             color: "#7e7e7e",
           }}
         >
-          If you didn&apos;t try to login, you can safely ignore this email.
+          Se você não tentou acessar, pode ignorar este e-mail com segurança.
         </Text>
         <Hr
           style={{
@@ -89,16 +89,6 @@ export const JoinWorkspaceTemplate = ({
             borderWidth: "1px",
           }}
         />
-        <Text style={{ color: "#7e7e7e" }}>
-          <Link
-            href={env("NEXT_PUBLIC_BASE_URL")}
-            target="_blank"
-            style={{ color: "#7e7e7e", textDecoration: "underline" }}
-          >
-            Kan
-          </Link>
-          , the open source Trello alternative.
-        </Text>
       </Container>
     </Body>
   </Html>
