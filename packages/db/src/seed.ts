@@ -22,7 +22,9 @@ export async function seed(db: ReturnType<typeof createDrizzleClient>) {
     const userId = await seedUsers(db);
     await seedBoards(db);
     await seedLabels(db);
-    await seedLists(db, userId, 1);
+    if (userId) {
+      await seedLists(db, userId, 1);
+    }
     console.log("Seed completed!");
   } catch (err) {
     console.error("Error seeding DB:", err);
