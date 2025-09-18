@@ -19,7 +19,12 @@ export const memberRoles = ["admin", "member", "guest"] as const;
 export type MemberRole = (typeof memberRoles)[number];
 export const memberRoleEnum = pgEnum("role", memberRoles);
 
-export const memberStatuses = ["invited", "active", "removed"] as const;
+export const memberStatuses = [
+  "invited",
+  "active",
+  "removed",
+  "paused",
+] as const;
 export type MemberStatus = (typeof memberStatuses)[number];
 export const memberStatusEnum = pgEnum("member_status", memberStatuses);
 
