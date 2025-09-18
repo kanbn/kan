@@ -220,6 +220,19 @@ export const initAuth = (db: dbClient) => {
                     console.log(
                       `Pro subscription ${stripeSubscription.id} activated with unlimited seats`,
                     );
+
+                    const workspace = await workspaceRepo.getByPublicId(
+                      db,
+                      subscription.referenceId,
+                    );
+
+                    if (workspace?.id) {
+                      await memberRepo.unpauseAllMembers(db, workspace.id);
+
+                      console.log(
+                        `Unpausing all members for workspace ${workspace.id}`,
+                      );
+                    }
                   }
                 },
               },
