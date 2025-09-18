@@ -1,0 +1,2143 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-09-18 20:24+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: ru\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/views/card/components/Comment.tsx:123
+msgid " (edited)"
+msgstr " (отредактировано)"
+
+#: src/components/FeedbackModal.tsx:102
+msgid ", or see our"
+msgstr ", или посмотрите наши"
+
+#. placeholder {0}: card?.title ?? "Card"
+#. placeholder {1}: board?.name ?? "Board"
+#: src/views/card/index.tsx:214
+msgid "{0} | {1}"
+msgstr "{0} | {1}"
+
+#. placeholder {0}: labelPublicIds.length
+#: src/views/board/components/NewCardForm.tsx:432
+msgid "{0} labels"
+msgstr "{0} метки"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:299
+msgid "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
+msgstr "{boardCount, plural, one {Импортировать доску (1)} other {Импортировать доски ({boardCount})}}"
+
+#: src/views/members/components/InviteMemberForm.tsx:92
+#: src/views/members/components/InviteMemberForm.tsx:104
+msgid "$10/month"
+msgstr "$10/месяц"
+
+#: src/views/members/components/InviteMemberForm.tsx:104
+msgid "$8/month"
+msgstr "$8/месяц"
+
+#: src/views/home/components/Pricing.tsx:36
+msgid "1 user"
+msgstr "1 пользователь"
+
+#: src/views/home/index.tsx:72
+msgid "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
+msgstr "Мощное и гибкое приложение для канбана, которое помогает организовать работу, отслеживать прогресс и достигать результатов — всё в одном месте."
+
+#: src/components/SettingsLayout.tsx:33
+msgid "Account"
+msgstr "Аккаунт"
+
+#: src/views/settings/components/DeleteAccountConfirmation.tsx:27
+msgid "Account deleted"
+msgstr "Аккаунт удалён"
+
+#: src/views/card/index.tsx:289
+#: src/views/public/board/CardModal.tsx:143
+msgid "Activity"
+msgstr "Активность"
+
+#: src/views/home/components/Features.tsx:103
+msgid "Activity logs"
+msgstr "Журналы активности"
+
+#: src/views/board/components/List.tsx:110
+msgid "Add a card"
+msgstr "Добавить карточку"
+
+#: src/views/card/components/Comment.tsx:146
+#: src/views/card/components/NewCommentForm.tsx:57
+msgid "Add a comment..."
+msgstr "Добавить комментарий..."
+
+#: src/views/card/components/NewChecklistItemForm.tsx:140
+msgid "Add an item..."
+msgstr "Добавить элемент..."
+
+#: src/views/card/components/Dropdown.tsx:18
+msgid "Add checklist"
+msgstr "Добавить чек-лист"
+
+#: src/components/Editor.tsx:442
+msgid "Add description... (type '/' to open commands or '@' to mention)"
+msgstr "Добавить описание... (введите '/' для открытия команд или '@' для упоминания)"
+
+#: src/views/card/components/ChecklistItemRow.tsx:172
+msgid "Add details..."
+msgstr "Добавить детали..."
+
+#: src/views/card/components/LabelSelector.tsx:109
+#: src/views/card/components/LabelSelector.tsx:114
+msgid "Add label"
+msgstr "Добавить метку"
+
+#: src/views/card/components/MemberSelector.tsx:130
+#: src/views/members/components/InviteMemberForm.tsx:147
+msgid "Add member"
+msgstr "Добавить участника"
+
+#: src/views/card/components/ActivityList.tsx:69
+msgid "added a checklist"
+msgstr "добавил(а) чек-лист"
+
+#: src/views/card/components/ActivityList.tsx:72
+msgid "added a checklist item"
+msgstr "добавил(а) элемент чек-листа"
+
+#: src/views/card/components/ActivityList.tsx:65
+msgid "added a label to the card"
+msgstr "добавил(а) метку к карточке"
+
+#: src/views/card/components/ActivityList.tsx:67
+msgid "added a member to the card"
+msgstr "добавил(а) участника к карточке"
+
+#. placeholder {0}: truncate(toTitle)
+#: src/views/card/components/ActivityList.tsx:146
+msgid "added checklist <0>{0}</0>"
+msgstr "добавлен контрольный список <0>{0}</0>"
+
+#. placeholder {0}: truncate(toTitle)
+#: src/views/card/components/ActivityList.tsx:170
+msgid "added checklist item <0>{0}</0>"
+msgstr "добавлен элемент контрольного списка <0>{0}</0>"
+
+#. placeholder {0}: truncate(label)
+#: src/views/card/components/ActivityList.tsx:130
+msgid "added label <0>{0}</0>"
+msgstr "добавлена метка <0>{0}</0>"
+
+#: src/views/members/components/InviteMemberForm.tsx:187
+msgid "Adding a new member will cost an additional {price} ({billingType}) per seat."
+msgstr "Добавление нового участника будет стоить дополнительно {price} ({billingType}) за место."
+
+#: src/views/home/components/Pricing.tsx:55
+msgid "Admin roles"
+msgstr "Роли администратора"
+
+#: src/views/home/components/Footer.tsx:18
+msgid "All systems operational"
+msgstr "Все системы работают нормально"
+
+#: src/views/auth/signup/index.tsx:86
+msgid "Already have an account? <0><1>Sign in</1></0>"
+msgstr "Уже есть аккаунт? <0><1>Войти</1></0>"
+
+#: src/views/settings/IntegrationsSettings.tsx:61
+msgid "An error occurred while disconnecting your Trello account."
+msgstr "Произошла ошибка при отключении вашего аккаунта Trello."
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:90
+msgid "An unexpected error occurred. Please try again later."
+msgstr "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже."
+
+#: src/components/SettingsLayout.tsx:51
+msgid "API"
+msgstr "API"
+
+#: src/views/settings/components/NewApiKeyModal.tsx:91
+msgid "API key created"
+msgstr "Ключ API создан"
+
+#: src/views/settings/components/NewApiKeyModal.tsx:161
+msgid "API key name"
+msgstr "Имя ключа API"
+
+#: src/views/settings/components/NewApiKeyModal.tsx:25
+msgid "API key name cannot exceed 30 characters"
+msgstr "Имя ключа API не может превышать 30 символов"
+
+#: src/views/settings/components/NewApiKeyModal.tsx:24
+msgid "API key name is required"
+msgstr "Имя ключа API обязательно"
+
+#: src/views/settings/ApiSettings.tsx:22
+msgid "API keys"
+msgstr "Ключи API"
+
+#: src/views/home/components/Footer.tsx:31
+msgid "API Reference"
+msgstr "Справочник API"
+
+#: src/views/boards/components/TemplateBoards.tsx:62
+msgid "Applicants"
+msgstr "Кандидаты"
+
+#: src/views/boards/components/TemplateBoards.tsx:33
+msgid "Approval"
+msgstr "Одобрение"
+
+#: src/views/members/components/DeleteMemberConfirmation.tsx:47
+msgid "Are you sure want to remove {entityLabel}?"
+msgstr "Вы уверены, что хотите удалить {entityLabel}?"
+
+#. placeholder {0}: workspace.name
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:62
+msgid "Are you sure you want to delete the workspace {0}?"
+msgstr "Вы уверены, что хотите удалить рабочее пространство {0}?"
+
+#: src/views/card/components/DeleteCardConfirmation.tsx:75
+msgid "Are you sure you want to delete this card?"
+msgstr "Вы уверены, что хотите удалить эту карточку?"
+
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:55
+msgid "Are you sure you want to delete this checklist?"
+msgstr "Вы уверены, что хотите удалить этот контрольный список?"
+
+#: src/views/card/components/DeleteCommentConfirmation.tsx:65
+msgid "Are you sure you want to delete this comment?"
+msgstr "Вы уверены, что хотите удалить этот комментарий?"
+
+#: src/components/DeleteLabelConfirmation.tsx:41
+msgid "Are you sure you want to delete this label?"
+msgstr "Вы уверены, что хотите удалить эту метку?"
+
+#: src/views/settings/components/DeleteAccountConfirmation.tsx:54
+msgid "Are you sure you want to delete your account?"
+msgstr "Вы уверены, что хотите удалить свой аккаунт?"
+
+#. placeholder {0}: truncate(memberName)
+#: src/views/card/components/ActivityList.tsx:110
+msgid "assigned <0>{0}</0> to the card"
+msgstr "назначено <0>{0}</0> к карточке"
+
+#: src/views/boards/components/TemplateBoards.tsx:46
+msgid "Awaiting Customer"
+msgstr "Ожидание клиента"
+
+#: src/views/boards/components/TemplateBoards.tsx:22
+msgid "Backlog"
+msgstr "Бэклог"
+
+#: src/views/boards/components/TemplateBoards.tsx:15
+msgid "Basic Kanban"
+msgstr "Базовый Канбан"
+
+#: src/views/members/components/InviteMemberForm.tsx:105
+msgid "billed annually"
+msgstr "выставляется счет ежегодно"
+
+#: src/views/members/components/InviteMemberForm.tsx:105
+msgid "billed monthly"
+msgstr "выставляется счет ежемесячно"
+
+#: src/components/SettingsLayout.tsx:44
+#: src/views/boards/components/TemplateBoards.tsx:55
+#: src/views/settings/BillingSettings.tsx:39
+msgid "Billing"
+msgstr "Выставление счетов"
+
+#: src/views/settings/BillingSettings.tsx:49
+msgid "Billing portal"
+msgstr "Портал выставления счетов"
+
+#: src/views/boards/components/TemplateBoards.tsx:37
+msgid "Blog Post"
+msgstr "Пост в блоге"
+
+#: src/views/board/index.tsx:331
+msgid "Board"
+msgstr "Доска"
+
+#: src/components/NewWorkspaceForm.tsx:346
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:81
+msgid "Board analytics"
+msgstr "Аналитика доски"
+
+#: src/views/boards/components/NewBoardForm.tsx:21
+msgid "Board name cannot exceed 100 characters"
+msgstr "Название доски не может превышать 100 символов"
+
+#: src/views/boards/components/NewBoardForm.tsx:20
+msgid "Board name is required"
+msgstr "Название доски обязательно"
+
+#: src/views/board/index.tsx:357
+#: src/views/public/board/index.tsx:148
+msgid "Board not found"
+msgstr "Доска не найдена"
+
+#: src/views/board/components/UpdateBoardSlugForm.tsx:45
+msgid "Board URL can only contain letters, numbers, and hyphens"
+msgstr "URL доски может содержать только буквы, цифры и дефисы"
+
+#: src/views/board/components/UpdateBoardSlugForm.tsx:43
+msgid "Board URL cannot exceed 60 characters"
+msgstr "URL доски не может превышать 60 символов"
+
+#: src/views/public/board/index.tsx:64
+msgid "Board URL copied to clipboard"
+msgstr "URL доски скопирован в буфер обмена"
+
+#: src/views/board/components/UpdateBoardSlugForm.tsx:41
+msgid "Board URL must be at least 3 characters long"
+msgstr "URL доски должен содержать не менее 3 символов"
+
+#: src/views/home/components/Features.tsx:78
+msgid "Board visibility"
+msgstr "Видимость доски"
+
+#: src/views/board/components/VisibilityButton.tsx:45
+msgid "Board visibility updated"
+msgstr "Видимость доски обновлена"
+
+#: src/components/SideNavigation.tsx:68
+#: src/views/boards/index.tsx:32
+msgid "Boards"
+msgstr "Доски"
+
+#. placeholder {0}: workspace.name ?? "Workspace"
+#: src/views/boards/index.tsx:28
+msgid "Boards | {0}"
+msgstr "Доски | {0}"
+
+#: src/views/boards/components/TemplateBoards.tsx:29
+msgid "Brainstorming"
+msgstr "Мозговой штурм"
+
+#: src/views/boards/components/TemplateBoards.tsx:23
+msgid "Bug"
+msgstr "Ошибка"
+
+#: src/views/boards/components/TemplateBoards.tsx:51
+msgid "Bug Report"
+msgstr "Отчет об ошибке"
+
+#: src/components/DeleteLabelConfirmation.tsx:49
+#: src/views/card/components/Comment.tsx:158
+#: src/views/card/components/DeleteCardConfirmation.tsx:86
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:63
+#: src/views/card/components/DeleteCommentConfirmation.tsx:76
+#: src/views/members/components/DeleteMemberConfirmation.tsx:55
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:168
+#: src/views/settings/components/DeleteAccountConfirmation.tsx:88
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:104
+msgid "Cancel"
+msgstr "Отмена"
+
+#: src/views/card/index.tsx:260
+msgid "Card not found"
+msgstr "Карточка не найдена"
+
+#: src/views/board/components/NewCardForm.tsx:307
+msgid "Card title"
+msgstr "Название карточки"
+
+#: src/views/settings/AccountSettings.tsx:70
+#: src/views/settings/AccountSettings.tsx:80
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:109
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:178
+msgid "Change Password"
+msgstr "Изменить пароль"
+
+#: src/views/settings/AccountSettings.tsx:45
+msgid "Change your language preferences."
+msgstr "Измените настройки языка."
+
+#: src/views/auth/login/index.tsx:41
+#: src/views/auth/signup/index.tsx:67
+msgid "Check your inbox"
+msgstr "Проверьте ваш почтовый ящик"
+
+#: src/views/card/components/NewChecklistForm.tsx:118
+msgid "Checklist name"
+msgstr "Название контрольного списка"
+
+#: src/views/board/components/Filters.tsx:155
+msgid "Clear filters"
+msgstr "Очистить фильтры"
+
+#: src/views/auth/login/index.tsx:46
+#: src/views/auth/signup/index.tsx:72
+msgid "Click on the link we've sent to {magicLinkRecipient} to sign in."
+msgstr "Нажмите на ссылку, которую мы отправили на {magicLinkRecipient}, чтобы войти."
+
+#: src/views/settings/components/NewApiKeyModal.tsx:136
+msgid "Close"
+msgstr "Закрыть"
+
+#: src/views/boards/components/TemplateBoards.tsx:22
+msgid "Code Review"
+msgstr "Код-ревью"
+
+#: src/views/home/components/Features.tsx:84
+msgid "Collaborate seamlessly with your team."
+msgstr "Сотрудничайте с вашей командой без препятствий."
+
+#: src/components/NewWorkspaceForm.tsx:349
+#: src/views/home/components/Features.tsx:66
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:84
+msgid "Coming soon"
+msgstr "Скоро будет"
+
+#: src/views/home/components/Features.tsx:98
+msgid "Comments"
+msgstr "Комментарии"
+
+#: src/views/home/components/Footer.tsx:94
+msgid "Company"
+msgstr "Компания"
+
+#: src/views/boards/components/TemplateBoards.tsx:81
+msgid "Complete"
+msgstr "Завершить"
+
+#: src/views/home/components/Pricing.tsx:70
+msgid "Complete control and ownership:"
+msgstr "Полный контроль и владение:"
+
+#: src/views/card/components/ActivityList.tsx:74
+msgid "completed a checklist item"
+msgstr "завершил элемент контрольного списка"
+
+#. placeholder {0}: truncate(toTitle)
+#: src/views/card/components/ActivityList.tsx:187
+msgid "completed checklist item <0>{0}</0>"
+msgstr "завершил элемент контрольного списка <0>{0}</0>"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:150
+msgid "Confirm your new password"
+msgstr "Подтвердите ваш новый пароль"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:157
+#: src/views/settings/IntegrationsSettings.tsx:93
+msgid "Connect Trello"
+msgstr "Подключить Trello"
+
+#: src/views/home/components/Features.tsx:115
+msgid "Connect your favorite tools to streamline your workflow."
+msgstr "Подключите ваши любимые инструменты, чтобы оптимизировать рабочий процесс."
+
+#: src/views/settings/IntegrationsSettings.tsx:80
+msgid "Connect your Trello account to import boards."
+msgstr "Подключите ваш аккаунт Trello, чтобы импортировать доски."
+
+#: src/views/home/components/Footer.tsx:38
+msgid "Contact"
+msgstr "Контакт"
+
+#: src/components/FeedbackModal.tsx:100
+msgid "Contact us"
+msgstr "Свяжитесь с нами"
+
+#: src/views/boards/components/TemplateBoards.tsx:27
+msgid "Content Creation"
+msgstr "Создание контента"
+
+#: src/components/AuthForm.tsx:366
+msgid "Continue with "
+msgstr "Продолжить с "
+
+#. placeholder {0}: key === "oidc" ? oidcProviderName : provider.name
+#: src/components/AuthForm.tsx:297
+msgid "Continue with {0}"
+msgstr "Продолжить с {0}"
+
+#: src/views/home/components/Features.tsx:79
+msgid "Control who can view and edit your boards."
+msgstr "Управляйте тем, кто может просматривать и редактировать ваши доски."
+
+#: src/components/LabelForm.tsx:213
+#: src/views/board/components/NewCardForm.tsx:458
+#: src/views/board/components/NewListForm.tsx:140
+msgid "Create another"
+msgstr "Создать ещё одну"
+
+#: src/views/settings/components/NewApiKeyModal.tsx:175
+msgid "Create API key"
+msgstr "Создать API-ключ"
+
+#: src/views/boards/components/NewBoardForm.tsx:128
+msgid "Create board"
+msgstr "Создать доску"
+
+#: src/views/board/components/NewCardForm.tsx:468
+msgid "Create card"
+msgstr "Создать карточку"
+
+#: src/views/card/components/NewChecklistForm.tsx:134
+msgid "Create checklist"
+msgstr "Создать чек-лист"
+
+#: src/components/LabelForm.tsx:238
+msgid "Create label"
+msgstr "Создать метку"
+
+#: src/views/board/components/NewListForm.tsx:152
+msgid "Create list"
+msgstr "Создать список"
+
+#: src/views/boards/components/BoardsList.tsx:42
+msgid "Create new board"
+msgstr "Создать новую доску"
+
+#: src/views/settings/ApiSettings.tsx:30
+msgid "Create new key"
+msgstr "Создать новый ключ"
+
+#: src/views/board/components/NewCardForm.tsx:394
+#: src/views/card/components/LabelSelector.tsx:97
+msgid "Create new label"
+msgstr "Создать новую метку"
+
+#: src/views/board/index.tsx:425
+msgid "Create new list"
+msgstr "Создать новый список"
+
+#: src/components/NewWorkspaceForm.tsx:384
+#: src/components/WorkspaceMenu.tsx:116
+msgid "Create workspace"
+msgstr "Создать рабочее пространство"
+
+#: src/views/card/components/ActivityList.tsx:61
+msgid "created the card"
+msgstr "создал(а) карточку"
+
+#: src/views/boards/components/TemplateBoards.tsx:23
+msgid "Critical"
+msgstr "Критический"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:19
+msgid "Current password is required"
+msgstr "Требуется текущий пароль"
+
+#: src/views/home/components/Pricing.tsx:74
+msgid "Custom domain"
+msgstr "Пользовательский домен"
+
+#: src/components/NewWorkspaceForm.tsx:315
+msgid "Custom URLs require upgrading to a Pro plan"
+msgstr "Для пользовательских URL требуется обновление до Pro-плана"
+
+#: src/components/NewWorkspaceForm.tsx:339
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:74
+msgid "Custom workspace URL"
+msgstr "Пользовательский URL рабочего пространства"
+
+#: src/views/boards/components/TemplateBoards.tsx:41
+msgid "Customer Support"
+msgstr "Служба поддержки"
+
+#: src/components/UserMenu.tsx:153
+msgid "Dark"
+msgstr "Тёмный"
+
+#: src/components/DeleteLabelConfirmation.tsx:51
+#: src/components/LabelForm.tsx:228
+#: src/views/card/components/DeleteCardConfirmation.tsx:92
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:66
+#: src/views/card/components/DeleteCommentConfirmation.tsx:82
+msgid "Delete"
+msgstr "Удалить"
+
+#: src/views/settings/AccountSettings.tsx:52
+#: src/views/settings/AccountSettings.tsx:62
+#: src/views/settings/components/DeleteAccountConfirmation.tsx:96
+msgid "Delete account"
+msgstr "Удалить аккаунт"
+
+#: src/views/board/components/BoardDropdown.tsx:20
+msgid "Delete board"
+msgstr "Удалить доску"
+
+#: src/views/card/components/Dropdown.tsx:25
+msgid "Delete card"
+msgstr "Удалить карточку"
+
+#: src/views/card/components/Comment.tsx:91
+msgid "Delete comment"
+msgstr "Удалить комментарий"
+
+#: src/views/board/components/List.tsx:117
+msgid "Delete list"
+msgstr "Удалить список"
+
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:106
+#: src/views/settings/WorkspaceSettings.tsx:96
+#: src/views/settings/WorkspaceSettings.tsx:107
+msgid "Delete workspace"
+msgstr "Удалить рабочее пространство"
+
+#: src/views/card/components/ActivityList.tsx:71
+msgid "deleted a checklist"
+msgstr "удалил контрольный список"
+
+#: src/views/card/components/ActivityList.tsx:76
+msgid "deleted a checklist item"
+msgstr "удалил элемент контрольного списка"
+
+#. placeholder {0}: truncate(fromTitle)
+#: src/views/card/components/ActivityList.tsx:162
+msgid "deleted checklist <0>{0}</0>"
+msgstr "удалил контрольный список <0>{0}</0>"
+
+#. placeholder {0}: truncate(fromTitle)
+#: src/views/card/components/ActivityList.tsx:205
+msgid "deleted checklist item <0>{0}</0>"
+msgstr "удалил элемент контрольного списка <0>{0}</0>"
+
+#: src/views/boards/components/TemplateBoards.tsx:32
+msgid "Design"
+msgstr "Дизайн"
+
+#: src/views/settings/IntegrationsSettings.tsx:108
+msgid "Disconnect Trello"
+msgstr "Отключить Trello"
+
+#: src/views/home/components/Features.tsx:99
+msgid "Discuss and collaborate on cards."
+msgstr "Обсуждайте и сотрудничайте по карточкам."
+
+#: src/views/settings/AccountSettings.tsx:35
+msgid "Display name"
+msgstr "Отображаемое имя"
+
+#: src/views/settings/components/UpdateDisplayNameForm.tsx:22
+msgid "Display name cannot exceed 280 characters"
+msgstr "Отображаемое имя не может превышать 280 символов"
+
+#: src/views/settings/components/UpdateDisplayNameForm.tsx:19
+msgid "Display name must be at least 3 characters long"
+msgstr "Отображаемое имя должно содержать не менее 3 символов"
+
+#: src/views/settings/components/UpdateDisplayNameForm.tsx:41
+msgid "Display name updated"
+msgstr "Отображаемое имя обновлено"
+
+#: src/views/home/components/Faqs.tsx:83
+msgid "Do you offer a free plan?"
+msgstr "Вы предлагаете бесплатный план?"
+
+#: src/components/FeedbackModal.tsx:109
+msgid "docs"
+msgstr "документы"
+
+#: src/views/home/components/Header.tsx:16
+msgid "Docs"
+msgstr "Документы"
+
+#: src/components/UserMenu.tsx:191
+#: src/views/boards/components/TemplateBoards.tsx:23
+#: src/views/home/components/Footer.tsx:77
+msgid "Documentation"
+msgstr "Документация"
+
+#: src/views/auth/login/index.tsx:61
+msgid "Don't have an account? <0><1>Sign up</1></0>"
+msgstr "Нет аккаунта? <0><1>Зарегистрируйтесь</1></0>"
+
+#: src/views/boards/components/TemplateBoards.tsx:16
+#: src/views/boards/components/TemplateBoards.tsx:22
+#: src/views/boards/components/TemplateBoards.tsx:35
+#: src/views/boards/components/TemplateBoards.tsx:48
+msgid "Done"
+msgstr "Готово"
+
+#: src/views/board/components/BoardDropdown.tsx:15
+#: src/views/board/components/UpdateBoardSlugForm.tsx:115
+msgid "Edit board URL"
+msgstr "Изменить URL доски"
+
+#: src/views/card/components/Comment.tsx:82
+msgid "Edit comment"
+msgstr "Редактировать комментарий"
+
+#: src/components/LabelForm.tsx:119
+msgid "Edit label"
+msgstr "Редактировать метку"
+
+#: src/views/board/components/UpdateBoardSlugForm.tsx:161
+msgid "Edit workspace URL"
+msgstr "Редактировать URL рабочей области"
+
+#: src/views/boards/components/TemplateBoards.tsx:31
+msgid "Editing"
+msgstr "Редактирование"
+
+#: src/components/AuthForm.tsx:368
+msgid "email"
+msgstr "email"
+
+#: src/views/members/components/InviteMemberForm.tsx:161
+msgid "Email"
+msgstr "Email"
+
+#: src/views/boards/components/TemplateBoards.tsx:23
+msgid "Enhancement"
+msgstr "Улучшение"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:122
+msgid "Enter your current password"
+msgstr "Введите ваш текущий пароль"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:111
+msgid "Enter your current password and choose a new secure password."
+msgstr "Введите ваш текущий пароль и выберите новый безопасный пароль."
+
+#: src/components/AuthForm.tsx:333
+msgid "Enter your email address"
+msgstr "Введите ваш адрес электронной почты"
+
+#: src/components/AuthForm.tsx:321
+msgid "Enter your name"
+msgstr "Введите ваше имя"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:136
+msgid "Enter your new password"
+msgstr "Введите ваш новый пароль"
+
+#: src/components/AuthForm.tsx:346
+msgid "Enter your password"
+msgstr "Введите ваш пароль"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:89
+msgid "Error Changing Password"
+msgstr "Ошибка при изменении пароля"
+
+#: src/views/settings/components/DeleteAccountConfirmation.tsx:39
+msgid "Error deleting account"
+msgstr "Ошибка при удалении аккаунта"
+
+#: src/components/DeleteLabelConfirmation.tsx:25
+msgid "Error deleting label"
+msgstr "Ошибка при удалении метки"
+
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:45
+msgid "Error deleting workspace"
+msgstr "Ошибка при удалении рабочей области"
+
+#: src/views/settings/IntegrationsSettings.tsx:60
+msgid "Error disconnecting Trello"
+msgstr "Ошибка при отключении Trello"
+
+#: src/views/members/components/InviteMemberForm.tsx:71
+#: src/views/members/components/InviteMemberForm.tsx:77
+msgid "Error inviting member"
+msgstr "Ошибка при приглашении участника"
+
+#: src/views/settings/components/UpdateDisplayNameForm.tsx:54
+msgid "Error updating display name"
+msgstr "Ошибка при обновлении отображаемого имени"
+
+#: src/views/settings/components/Avatar.tsx:39
+msgid "Error updating profile image"
+msgstr "Ошибка при обновлении изображения профиля"
+
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:61
+msgid "Error updating workspace description"
+msgstr "Ошибка при обновлении описания рабочей области"
+
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:56
+msgid "Error updating workspace name"
+msgstr "Ошибка при обновлении имени рабочей области"
+
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:73
+msgid "Error updating workspace URL"
+msgstr "Ошибка при обновлении URL рабочей области"
+
+#: src/views/members/components/InviteMemberForm.tsx:130
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:41
+msgid "Error upgrading subscription"
+msgstr "Ошибка при обновлении подписки"
+
+#: src/components/NewWorkspaceForm.tsx:142
+msgid "Error upgrading to Pro"
+msgstr "Ошибка при обновлении до Pro"
+
+#: src/views/settings/components/Avatar.tsx:56
+#: src/views/settings/components/Avatar.tsx:97
+msgid "Error uploading profile image"
+msgstr "Ошибка загрузки изображения профиля"
+
+#: src/views/home/components/Pricing.tsx:52
+msgid "Everything in the free plan, plus:"
+msgstr "Все в бесплатном плане, плюс:"
+
+#: src/views/home/components/Pricing.tsx:33
+msgid "Everything you need, free forever. Unlimited boards, unlimited lists, unlimited cards. Upgrade any time."
+msgstr "Все, что вам нужно, бесплатно навсегда. Неограниченное количество досок, списков и карточек. Обновляйтесь в любое время."
+
+#: src/views/boards/components/TemplateBoards.tsx:78
+msgid "Execution"
+msgstr "Выполнение"
+
+#. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
+#: src/components/AuthForm.tsx:269
+msgid "Failed to login with {0}. Please try again."
+msgstr "Не удалось войти с {0}. Пожалуйста, попробуйте снова."
+
+#: src/views/home/components/Faqs.tsx:143
+#: src/views/home/components/Footer.tsx:51
+msgid "FAQs"
+msgstr "Часто задаваемые вопросы"
+
+#: src/views/boards/components/TemplateBoards.tsx:23
+msgid "Feature"
+msgstr "Функция"
+
+#: src/views/boards/components/TemplateBoards.tsx:52
+msgid "Feature Request"
+msgstr "Запрос функции"
+
+#: src/views/home/components/Features.tsx:125
+#: src/views/home/components/Footer.tsx:49
+#: src/views/home/components/Header.tsx:14
+msgid "Features"
+msgstr "Функции"
+
+#: src/components/FeedbackModal.tsx:59
+#: src/components/UserMenu.tsx:199
+msgid "Feedback"
+msgstr "Обратная связь"
+
+#: src/components/FeedbackModal.tsx:33
+msgid "Feedback sent"
+msgstr "Обратная связь отправлена"
+
+#: src/views/board/components/Filters.tsx:149
+msgid "Filter"
+msgstr "Фильтр"
+
+#: src/views/home/components/Faqs.tsx:150
+msgid "Find answers to common questions about the project. Can't find what you're looking for? Feel free to <0>contact us</0>."
+msgstr "Найдите ответы на часто задаваемые вопросы о проекте. Не нашли, что искали? Не стесняйтесь <0>связаться с нами</0>."
+
+#: src/views/home/components/Faqs.tsx:41
+msgid "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users (free during the beta) and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge."
+msgstr "Для долгосрочной устойчивости мы признаем, что всем хорошим проектам с открытым исходным кодом нужен источник дохода. Наш доход поступает от платного облачного предложения для рабочих пространств с несколькими пользователями (бесплатно в период бета-тестирования) и для пользовательских адресов рабочих пространств. Нет обязательства использовать это, и вы можете самостоятельно разместить программное обеспечение на своей инфраструктуре бесплатно."
+
+#: src/views/home/components/Pricing.tsx:32
+msgid "Free"
+msgstr "Бесплатно"
+
+#: src/views/members/components/InviteMemberForm.tsx:193
+#: src/views/members/index.tsx:208
+msgid "Free Plan"
+msgstr "Бесплатный план"
+
+#: src/views/home/components/Pricing.tsx:34
+msgid "Free, forever"
+msgstr "Бесплатно, навсегда"
+
+#: src/views/boards/components/TemplateBoards.tsx:69
+msgid "Full-time"
+msgstr "Полный рабочий день"
+
+#: src/views/boards/components/TemplateBoards.tsx:83
+msgid "Fun"
+msgstr "Веселье"
+
+#: src/views/auth/signup/index.tsx:67
+#: src/views/home/components/Cta.tsx:61
+#: src/views/home/components/Header.tsx:102
+#: src/views/home/components/Header.tsx:141
+msgid "Get started"
+msgstr "Начать"
+
+#: src/views/home/components/Pricing.tsx:31
+#: src/views/home/components/Pricing.tsx:49
+msgid "Get Started"
+msgstr "Начать"
+
+#: src/views/boards/components/BoardsList.tsx:38
+msgid "Get started by creating a new board"
+msgstr "Начните с создания новой доски"
+
+#: src/views/board/index.tsx:417
+msgid "Get started by creating a new list"
+msgstr "Начните с создания нового списка"
+
+#: src/views/home/components/Cta.tsx:54
+msgid "Get started for free today"
+msgstr "Начните бесплатно уже сегодня"
+
+#: src/views/home/components/Pricing.tsx:92
+msgid "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team."
+msgstr "Начните бесплатно, без ограничений на использование. Для совместной работы обновитесь до плана, который подходит для размера вашей команды."
+
+#: src/views/home/index.tsx:76
+msgid "Get started on Cloud"
+msgstr "Начните работу в облаке"
+
+#: src/views/home/components/Footer.tsx:25
+msgid "Getting started"
+msgstr "Начало работы"
+
+#: src/views/home/components/Footer.tsx:37
+msgid "GitHub"
+msgstr "GitHub"
+
+#: src/views/home/components/Header.tsx:96
+#: src/views/home/components/Header.tsx:133
+msgid "Go to app"
+msgstr "Перейти в приложение"
+
+#: src/views/boards/components/TemplateBoards.tsx:17
+msgid "High Priority"
+msgstr "Высокий приоритет"
+
+#: src/views/boards/components/TemplateBoards.tsx:67
+msgid "Hired"
+msgstr "Нанят"
+
+#: src/views/home/components/Pricing.tsx:69
+msgid "Host Kan on your own infrastructure. Ideal for organisations that need complete control over their data."
+msgstr "Разместите Kan на своей инфраструктуре. Идеально подходит для организаций, которым нужен полный контроль над своими данными."
+
+#: src/views/home/components/Faqs.tsx:64
+msgid "How do I get a custom URL?"
+msgstr "Как получить собственный URL?"
+
+#: src/views/home/components/Faqs.tsx:46
+msgid "How do I import my Trello boards?"
+msgstr "Как импортировать мои доски Trello?"
+
+#: src/views/home/components/Faqs.tsx:108
+msgid "How do I invite team members?"
+msgstr "Как пригласить участников команды?"
+
+#: src/views/home/components/Faqs.tsx:124
+msgid "How do I self-host?"
+msgstr "Как разместить самостоятельно?"
+
+#: src/views/home/components/Faqs.tsx:38
+msgid "How is the project funded?"
+msgstr "Как финансируется проект?"
+
+#: src/views/settings/components/DeleteAccountConfirmation.tsx:82
+msgid "I acknowledge that all of my account data will be permanently deleted and want to proceed."
+msgstr "Я подтверждаю, что все данные моего аккаунта будут безвозвратно удалены, и хочу продолжить."
+
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:92
+msgid "I acknowledge that all of the workspace data will be permanently deleted and want to proceed."
+msgstr "Я подтверждаю, что все данные рабочего пространства будут безвозвратно удалены, и хочу продолжить."
+
+#: src/views/boards/components/TemplateBoards.tsx:75
+msgid "Ideas"
+msgstr "Идеи"
+
+#: src/components/FeedbackModal.tsx:75
+msgid "Ideas to improve this page..."
+msgstr "Идеи для улучшения этой страницы..."
+
+#: src/views/boards/index.tsx:43
+msgid "Import"
+msgstr "Импорт"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:191
+msgid "Import complete"
+msgstr "Импорт завершён"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:204
+msgid "Import failed"
+msgstr "Импорт не удался"
+
+#: src/views/home/components/Features.tsx:89
+msgid "Import your Trello boards and hit the ground running."
+msgstr "Импортируйте свои доски Trello и начните работать без промедления."
+
+#: src/views/boards/components/TemplateBoards.tsx:83
+msgid "Important"
+msgstr "Важно"
+
+#: src/views/home/components/Footer.tsx:27
+msgid "Importing from Trello"
+msgstr "Импорт из Trello"
+
+#: src/views/home/components/Faqs.tsx:49
+msgid "Importing your Trello boards into Kan is easy. You can follow our step-by-step guide <0>here</0>."
+msgstr "Импортировать ваши доски Trello в Kan легко. Вы можете следовать нашему пошаговому руководству <0>здесь</0>."
+
+#: src/views/boards/components/TemplateBoards.tsx:16
+#: src/views/boards/components/TemplateBoards.tsx:22
+#: src/views/boards/components/TemplateBoards.tsx:45
+msgid "In Progress"
+msgstr "В процессе"
+
+#: src/views/home/components/Pricing.tsx:28
+msgid "Individuals"
+msgstr "Физические лица"
+
+#: src/components/SettingsLayout.tsx:57
+#: src/views/home/components/Features.tsx:114
+msgid "Integrations"
+msgstr "Интеграции"
+
+#: src/views/boards/components/TemplateBoards.tsx:64
+msgid "Interviewing"
+msgstr "Собеседование"
+
+#: src/views/members/components/InviteMemberForm.tsx:40
+msgid "Invalid email address"
+msgstr "Недействительный адрес электронной почты"
+
+#: src/views/members/index.tsx:221
+msgid "Invite"
+msgstr "Пригласить"
+
+#: src/views/members/components/InviteMemberForm.tsx:208
+msgid "Invite another"
+msgstr "Пригласить ещё одного"
+
+#: src/views/card/components/MemberSelector.tsx:111
+#: src/views/members/components/InviteMemberForm.tsx:233
+msgid "Invite member"
+msgstr "Пригласить участника"
+
+#: src/views/members/components/InviteMemberForm.tsx:196
+msgid "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace."
+msgstr "Для приглашения участников необходим командный план. Вы будете перенаправлены для обновления вашего рабочего пространства."
+
+#: src/views/boards/components/TemplateBoards.tsx:69
+msgid "Junior"
+msgstr "Младший"
+
+#: src/views/home/components/Pricing.tsx:51
+msgid "Kanban is better with a team. Perfect for small and growing teams looking to collaborate."
+msgstr "Канбан лучше работает в команде. Идеально подходит для небольших и растущих команд, стремящихся к сотрудничеству."
+
+#: src/views/home/components/Features.tsx:129
+msgid "Kanban reimagined"
+msgstr "Канбан переосмыслен"
+
+#: src/views/settings/components/DeleteAccountConfirmation.tsx:57
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:67
+msgid "Keep in mind that this action is irreversible."
+msgstr "Имейте в виду, что это действие необратимо."
+
+#: src/views/board/components/Filters.tsx:101
+#: src/views/board/components/NewCardForm.tsx:398
+#: src/views/card/index.tsx:117
+msgid "Labels"
+msgstr "Метки"
+
+#: src/views/home/components/Features.tsx:93
+msgid "Labels & Filters"
+msgstr "Метки и фильтры"
+
+#: src/views/settings/AccountSettings.tsx:42
+msgid "Language"
+msgstr "Язык"
+
+#: src/components/NewWorkspaceForm.tsx:332
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:67
+msgid "Launch offer"
+msgstr "Стартовое предложение"
+
+#: src/views/members/index.tsx:191
+msgid "Launch offer: Get unlimited members with Pro"
+msgstr "Стартовое предложение: получите неограниченное количество участников с Pro"
+
+#: src/views/home/components/Pricing.tsx:99
+msgid "Launch offer: unlimited seats for just $29/month with Pro"
+msgstr "Стартовое предложение: неограниченное количество мест всего за $29/месяц с Pro"
+
+#: src/views/boards/components/TemplateBoards.tsx:83
+msgid "Learning"
+msgstr "Обучение"
+
+#: src/views/home/components/Footer.tsx:130
+msgid "Legal"
+msgstr "Юридическое"
+
+#: src/views/home/components/Footer.tsx:44
+msgid "License"
+msgstr "Лицензия"
+
+#: src/components/UserMenu.tsx:167
+msgid "Light"
+msgstr "Светлый"
+
+#: src/views/public/board/index.tsx:62
+msgid "Link copied"
+msgstr "Ссылка скопирована"
+
+#: src/views/card/index.tsx:109
+msgid "List"
+msgstr "Список"
+
+#: src/views/board/components/NewListForm.tsx:128
+msgid "List name"
+msgstr "Название списка"
+
+#: src/views/auth/login/index.tsx:31
+msgid "Login | kan.bn"
+msgstr "Вход | kan.bn"
+
+#: src/components/UserMenu.tsx:209
+msgid "Logout"
+msgstr "Выход"
+
+#: src/views/boards/components/TemplateBoards.tsx:83
+msgid "Long-term"
+msgstr "Долгосрочный"
+
+#: src/views/boards/components/TemplateBoards.tsx:17
+msgid "Low Priority"
+msgstr "Низкий приоритет"
+
+#: src/components/AuthForm.tsx:369
+msgid "magic link"
+msgstr "магическая ссылка"
+
+#: src/views/card/components/ActivityList.tsx:75
+msgid "marked a checklist item as incomplete"
+msgstr "отметил элемент контрольного списка как незавершённый"
+
+#. placeholder {0}: truncate(toTitle)
+#: src/views/card/components/ActivityList.tsx:196
+msgid "marked checklist item <0>{0}</0> as incomplete"
+msgstr "отметил элемент контрольного списка <0>{0}</0> как незавершённый"
+
+#: src/views/boards/components/TemplateBoards.tsx:17
+msgid "Medium Priority"
+msgstr "Средний приоритет"
+
+#: src/components/SideNavigation.tsx:73
+#: src/views/board/components/Filters.tsx:93
+#: src/views/board/components/NewCardForm.tsx:357
+#: src/views/card/index.tsx:125
+#: src/views/members/index.tsx:178
+msgid "Members"
+msgstr "Участники"
+
+#. placeholder {0}: workspace.name ?? "Workspace"
+#: src/views/members/index.tsx:173
+msgid "Members | {0}"
+msgstr "Участники | {0}"
+
+#: src/views/home/components/Pricing.tsx:14
+msgid "Monthly"
+msgstr "Ежемесячно"
+
+#: src/views/members/components/InviteMemberForm.tsx:93
+msgid "monthly billing"
+msgstr "ежемесячная оплата"
+
+#. placeholder {0}: truncate(fromList)
+#. placeholder {1}: truncate(toList)
+#: src/views/card/components/ActivityList.tsx:98
+msgid "moved the card from <0>{0}</0> to<1>{1}</1>"
+msgstr "переместил карточку из <0>{0}</0> в <1>{1}</1>"
+
+#: src/views/card/components/ActivityList.tsx:64
+msgid "moved the card to another list"
+msgstr "переместил карточку в другой список"
+
+#: src/components/LabelForm.tsx:135
+#: src/views/boards/components/NewBoardForm.tsx:99
+msgid "Name"
+msgstr "Имя"
+
+#: src/components/FeedbackModal.tsx:95
+msgid "Need help?"
+msgstr "Нужна помощь?"
+
+#: src/views/boards/index.tsx:53
+msgid "New"
+msgstr "Новый"
+
+#: src/views/settings/components/NewApiKeyModal.tsx:147
+msgid "New API key"
+msgstr "Новый API-ключ"
+
+#: src/views/boards/components/NewBoardForm.tsx:85
+msgid "New board"
+msgstr "Новая доска"
+
+#: src/views/board/components/NewCardForm.tsx:290
+msgid "New card"
+msgstr "Новая карточка"
+
+#: src/views/card/components/NewChecklistForm.tsx:102
+msgid "New checklist"
+msgstr "Новый контрольный список"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:322
+msgid "New import"
+msgstr "Новый импорт"
+
+#: src/components/LabelForm.tsx:119
+msgid "New label"
+msgstr "Новая метка"
+
+#: src/views/board/components/NewListForm.tsx:112
+#: src/views/board/index.tsx:394
+msgid "New list"
+msgstr "Новый список"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:23
+msgid "New password is required"
+msgstr "Требуется новый пароль"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:31
+msgid "New password must be different from current password"
+msgstr "Новый пароль должен отличаться от текущего"
+
+#: src/views/boards/components/TemplateBoards.tsx:43
+msgid "New Ticket"
+msgstr "Новый тикет"
+
+#: src/components/NewWorkspaceForm.tsx:240
+msgid "New workspace"
+msgstr "Новое рабочее пространство"
+
+#: src/views/boards/components/TemplateBoards.tsx:37
+msgid "Newsletter"
+msgstr "Новостная рассылка"
+
+#: src/views/boards/components/TemplateBoards.tsx:80
+msgid "Next Steps"
+msgstr "Следующие шаги"
+
+#: src/views/boards/components/BoardsList.tsx:35
+msgid "No boards"
+msgstr "Нет досок"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:242
+msgid "No boards found"
+msgstr "Доски не найдены"
+
+#: src/views/home/index.tsx:86
+msgid "No credit card required"
+msgstr "Кредитная карта не требуется"
+
+#: src/views/board/index.tsx:414
+msgid "No lists"
+msgstr "Нет списков"
+
+#: src/views/boards/components/TemplateBoards.tsx:65
+msgid "Offer"
+msgstr "Предложение"
+
+#: src/views/boards/components/TemplateBoards.tsx:66
+msgid "Onboarding"
+msgstr "Введение"
+
+#: src/views/settings/AccountSettings.tsx:55
+msgid "Once you delete your account, there is no going back. This action cannot be undone."
+msgstr "После удаления аккаунта возврат будет невозможен. Это действие необратимо."
+
+#: src/views/settings/WorkspaceSettings.tsx:99
+msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
+msgstr "После удаления рабочего пространства возврат будет невозможен. Это действие необратимо."
+
+#: src/components/AuthForm.tsx:311
+msgid "or"
+msgstr "или"
+
+#: src/views/home/components/Features.tsx:94
+msgid "Organize and find cards quickly with powerful filtering tools."
+msgstr "Организуйте и находите карточки быстро с помощью мощных инструментов фильтрации."
+
+#: src/views/home/components/Pricing.tsx:73
+msgid "Own your data"
+msgstr "Владейте своими данными"
+
+#: src/views/boards/components/TemplateBoards.tsx:69
+msgid "Part-time"
+msgstr "Частичная занятость"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:69
+msgid "Password Changed"
+msgstr "Пароль изменён"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:22
+msgid "Password must be at least 8 characters"
+msgstr "Пароль должен содержать не менее 8 символов"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:27
+msgid "Passwords do not match"
+msgstr "Пароли не совпадают"
+
+#: src/views/home/components/Pricing.tsx:102
+msgid "Payment frequency"
+msgstr "Частота платежей"
+
+#: src/views/members/index.tsx:134
+msgid "Pending"
+msgstr "В ожидании"
+
+#: src/views/home/components/Pricing.tsx:15
+#: src/views/home/components/Pricing.tsx:20
+msgid "per user/month"
+msgstr "на пользователя/месяц"
+
+#: src/views/boards/components/TemplateBoards.tsx:73
+msgid "Personal Project"
+msgstr "Личный проект"
+
+#: src/views/boards/components/TemplateBoards.tsx:77
+msgid "Planning"
+msgstr "Планирование"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:24
+msgid "Please confirm your new password"
+msgstr "Пожалуйста, подтвердите новый пароль"
+
+#: src/components/AuthForm.tsx:337
+msgid "Please enter a valid email address"
+msgstr "Пожалуйста, введите действительный адрес электронной почты"
+
+#: src/components/AuthForm.tsx:325
+msgid "Please enter a valid name"
+msgstr "Пожалуйста, введите действительное имя"
+
+#: src/components/AuthForm.tsx:350
+msgid "Please enter a valid password"
+msgstr "Пожалуйста, введите действительный пароль"
+
+#: src/views/settings/components/Avatar.tsx:57
+msgid "Please select a file to upload."
+msgstr "Пожалуйста, выберите файл для загрузки."
+
+#: src/components/DeleteLabelConfirmation.tsx:26
+#: src/components/FeedbackModal.tsx:41
+#: src/components/NewWorkspaceForm.tsx:155
+#: src/views/board/components/NewCardForm.tsx:174
+#: src/views/board/components/NewListForm.tsx:78
+#: src/views/board/components/UpdateBoardSlugForm.tsx:72
+#: src/views/board/components/VisibilityButton.tsx:53
+#: src/views/board/index.tsx:134
+#: src/views/board/index.tsx:190
+#: src/views/boards/components/ImportBoardsForm.tsx:205
+#: src/views/card/components/ChecklistItemRow.tsx:60
+#: src/views/card/components/ChecklistItemRow.tsx:88
+#: src/views/card/components/ChecklistNameInput.tsx:46
+#: src/views/card/components/Comment.tsx:64
+#: src/views/card/components/DeleteCardConfirmation.tsx:52
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:37
+#: src/views/card/components/DeleteCommentConfirmation.tsx:45
+#: src/views/card/components/LabelSelector.tsx:72
+#: src/views/card/components/ListSelector.tsx:52
+#: src/views/card/components/MemberSelector.tsx:79
+#: src/views/card/components/NewChecklistForm.tsx:70
+#: src/views/card/components/NewChecklistItemForm.tsx:89
+#: src/views/card/components/NewCommentForm.tsx:31
+#: src/views/card/index.tsx:173
+#: src/views/members/components/DeleteMemberConfirmation.tsx:28
+#: src/views/members/components/InviteMemberForm.tsx:78
+#: src/views/members/components/InviteMemberForm.tsx:131
+#: src/views/settings/components/Avatar.tsx:40
+#: src/views/settings/components/Avatar.tsx:98
+#: src/views/settings/components/DeleteAccountConfirmation.tsx:40
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:46
+#: src/views/settings/components/UpdateDisplayNameForm.tsx:55
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:62
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:57
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:74
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:42
+msgid "Please try again later, or contact customer support."
+msgstr "Пожалуйста, попробуйте позже или свяжитесь со службой поддержки."
+
+#: src/views/home/components/Footer.tsx:50
+#: src/views/home/components/Header.tsx:15
+#: src/views/home/components/Pricing.tsx:85
+msgid "Pricing"
+msgstr "Цены"
+
+#: src/views/home/components/Pricing.tsx:56
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:91
+msgid "Priority email support"
+msgstr "Приоритетная поддержка по электронной почте"
+
+#: src/views/home/components/Footer.tsx:42
+msgid "Privacy policy"
+msgstr "Политика конфиденциальности"
+
+#: src/views/board/components/VisibilityButton.tsx:73
+msgid "Private"
+msgstr "Личное"
+
+#: src/views/members/index.tsx:205
+msgid "Pro Plan"
+msgstr "Профессиональный план"
+
+#: src/views/members/components/InviteMemberForm.tsx:182
+msgid "Pro Plan ∞"
+msgstr "Профессиональный план ∞"
+
+#: src/views/settings/components/Avatar.tsx:26
+msgid "Profile image updated"
+msgstr "Изображение профиля обновлено"
+
+#: src/views/settings/AccountSettings.tsx:29
+msgid "Profile picture"
+msgstr "Фотография профиля"
+
+#: src/views/board/components/VisibilityButton.tsx:68
+msgid "Public"
+msgstr "Публичное"
+
+#: src/views/boards/components/TemplateBoards.tsx:34
+msgid "Publishing"
+msgstr "Публикация"
+
+#: src/views/boards/components/TemplateBoards.tsx:53
+msgid "Question"
+msgstr "Вопрос"
+
+#: src/views/home/components/Faqs.tsx:147
+msgid "Questions?"
+msgstr "Вопросы?"
+
+#: src/views/boards/components/TemplateBoards.tsx:83
+msgid "Quick Win"
+msgstr "Быстрая победа"
+
+#: src/views/boards/components/TemplateBoards.tsx:60
+msgid "Recruitment"
+msgstr "Набор персонала"
+
+#: src/views/boards/components/TemplateBoards.tsx:69
+msgid "Remote"
+msgstr "Удалённый"
+
+#: src/views/members/components/DeleteMemberConfirmation.tsx:58
+msgid "Remove"
+msgstr "Удалить"
+
+#: src/views/members/index.tsx:148
+msgid "Remove member"
+msgstr "Удалить участника"
+
+#: src/views/card/components/ActivityList.tsx:66
+msgid "removed a label from the card"
+msgstr "удалил метку с карточки"
+
+#: src/views/card/components/ActivityList.tsx:68
+msgid "removed a member from the card"
+msgstr "удалил участника из карточки"
+
+#. placeholder {0}: truncate(label)
+#: src/views/card/components/ActivityList.tsx:138
+msgid "removed label <0>{0}</0>"
+msgstr "удалил метку <0>{0}</0>"
+
+#: src/views/card/components/ActivityList.tsx:70
+msgid "renamed a checklist"
+msgstr "переименовал контрольный список"
+
+#. placeholder {0}: truncate(toTitle)
+#: src/views/card/components/ActivityList.tsx:154
+msgid "renamed checklist <0>{0}</0>"
+msgstr "переименовал контрольный список <0>{0}</0>"
+
+#. placeholder {0}: truncate(toTitle)
+#: src/views/card/components/ActivityList.tsx:178
+msgid "renamed checklist item to <0>{0}</0>"
+msgstr "переименовал элемент контрольного списка в <0>{0}</0>"
+
+#: src/views/boards/components/TemplateBoards.tsx:76
+msgid "Research"
+msgstr "Исследование"
+
+#: src/views/boards/components/TemplateBoards.tsx:47
+msgid "Resolution"
+msgstr "Решение"
+
+#: src/views/home/components/Footer.tsx:113
+msgid "Resources"
+msgstr "Ресурсы"
+
+#: src/views/boards/components/TemplateBoards.tsx:79
+msgid "Review"
+msgstr "Обзор"
+
+#: src/views/home/components/Footer.tsx:36
+#: src/views/home/components/Header.tsx:13
+msgid "Roadmap"
+msgstr "Дорожная карта"
+
+#: src/views/members/index.tsx:243
+msgid "Role"
+msgstr "Роль"
+
+#: src/views/home/components/Pricing.tsx:72
+msgid "Run on your own infrastructure"
+msgstr "Запустите на своей инфраструктуре"
+
+#: src/views/card/components/Comment.tsx:165
+msgid "Save"
+msgstr "Сохранить"
+
+#: src/views/home/components/Features.tsx:109
+msgid "Save time with reusable board templates."
+msgstr "Экономьте время с помощью шаблонов досок для повторного использования."
+
+#: src/views/boards/components/TemplateBoards.tsx:63
+msgid "Screening"
+msgstr "Отбор"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:274
+msgid "Select all"
+msgstr "Выбрать все"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:157
+msgid "Select source"
+msgstr "Выбрать источник"
+
+#: src/views/home/components/Pricing.tsx:64
+msgid "Self Host"
+msgstr "Самостоятельный хостинг"
+
+#: src/views/home/index.tsx:82
+msgid "Self host with Github"
+msgstr "Самостоятельный хостинг с Github"
+
+#: src/views/card/components/ActivityList.tsx:107
+msgid "self-assigned the card"
+msgstr "самостоятельно назначил карточку"
+
+#: src/components/FeedbackModal.tsx:116
+msgid "Send feedback"
+msgstr "Отправить отзыв"
+
+#: src/views/boards/components/TemplateBoards.tsx:69
+msgid "Senior"
+msgstr "Старший"
+
+#: src/components/SettingsLayout.tsx:82
+#: src/components/SideNavigation.tsx:78
+msgid "Settings"
+msgstr "Настройки"
+
+#: src/views/settings/AccountSettings.tsx:25
+msgid "Settings | Account"
+msgstr "Настройки | Аккаунт"
+
+#: src/views/settings/ApiSettings.tsx:18
+msgid "Settings | API"
+msgstr "Настройки | API"
+
+#: src/views/settings/BillingSettings.tsx:35
+msgid "Settings | Billing"
+msgstr "Настройки | Оплата"
+
+#: src/views/settings/IntegrationsSettings.tsx:69
+msgid "Settings | Integrations"
+msgstr "Настройки | Интеграции"
+
+#: src/views/settings/WorkspaceSettings.tsx:54
+msgid "Settings | Workspace"
+msgstr "Настройки | Рабочая область"
+
+#: src/views/home/components/Header.tsx:100
+#: src/views/home/components/Header.tsx:138
+msgid "Sign in"
+msgstr "Войти"
+
+#: src/views/auth/signup/index.tsx:32
+#: src/views/auth/signup/index.tsx:57
+msgid "Sign up | kan.bn"
+msgstr "Регистрация | kan.bn"
+
+#: src/views/auth/signup/index.tsx:42
+msgid "Sign up disabled"
+msgstr "Регистрация отключена"
+
+#: src/views/auth/signup/index.tsx:45
+msgid "Sign up is currently disabled. Please try again later."
+msgstr "Регистрация в настоящее время отключена. Пожалуйста, попробуйте позже."
+
+#: src/components/AuthForm.tsx:366
+msgid "Sign up with "
+msgstr "Зарегистрироваться с "
+
+#: src/views/home/components/Pricing.tsx:89
+msgid "Simple pricing"
+msgstr "Простое ценообразование"
+
+#: src/views/home/components/Features.tsx:132
+msgid "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done."
+msgstr "Простое и наглядное управление задачами, которое просто работает. Перетаскивайте карточки, сотрудничайте с командой и достигайте большего."
+
+#: src/views/boards/components/TemplateBoards.tsx:37
+msgid "Social Media"
+msgstr "Социальные сети"
+
+#: src/views/boards/components/TemplateBoards.tsx:21
+msgid "Software Development"
+msgstr "Разработка программного обеспечения"
+
+#: src/views/home/index.tsx:38
+msgid "Star on Github"
+msgstr "Поставить звезду на Github"
+
+#: src/components/AuthForm.tsx:203
+#: src/components/AuthForm.tsx:220
+msgid "Success"
+msgstr "Успех"
+
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:55
+msgid "Supercharge your workspace for just $29/month. Here's what you'll get:"
+msgstr "Улучшите свою рабочую область всего за $29/месяц. Вот что вы получите:"
+
+#: src/components/UserMenu.tsx:180
+msgid "Support"
+msgstr "Поддержка"
+
+#: src/views/home/components/Pricing.tsx:57
+msgid "Support the development of the project"
+msgstr "Поддержите развитие проекта"
+
+#: src/components/UserMenu.tsx:139
+msgid "System"
+msgstr "Система"
+
+#: src/views/members/components/InviteMemberForm.tsx:182
+#: src/views/members/index.tsx:207
+msgid "Team Plan"
+msgstr "Командный план"
+
+#: src/views/home/components/Pricing.tsx:46
+msgid "Teams"
+msgstr "Команды"
+
+#: src/views/home/components/Features.tsx:108
+msgid "Templates"
+msgstr "Шаблоны"
+
+#: src/views/home/components/Footer.tsx:41
+msgid "Terms of service"
+msgstr "Условия обслуживания"
+
+#: src/components/FeedbackModal.tsx:34
+msgid "Thank you for your feedback!"
+msgstr "Спасибо за ваш отзыв!"
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:84
+msgid "The current password you entered is incorrect."
+msgstr "Введённый вами текущий пароль неверен."
+
+#: src/views/home/components/Faqs.tsx:33
+msgid "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
+msgstr "Основное отличие Kan от Trello заключается в том, что Kan является проектом с открытым исходным кодом, позволяющим любому просматривать, изменять и вносить вклад в наш код. Наше облачное предложение также не имеет ограничений на функции для индивидуального использования, тогда как Trello блокирует базовые функции, такие как количество досок, которые вы можете создать, за платным доступом."
+
+#: src/views/home/index.tsx:66
+msgid "The open source <0/> alternative to Trello"
+msgstr "Альтернатива Trello с открытым исходным кодом <0/>"
+
+#. placeholder {0}: isPublic ? "public" : "private"
+#: src/views/board/components/VisibilityButton.tsx:46
+msgid "The visibility of your board has been set to {0}."
+msgstr "Видимость вашей доски установлена на {0}."
+
+#: src/components/UserMenu.tsx:126
+msgid "Theme"
+msgstr "Тема"
+
+#: src/views/members/components/DeleteMemberConfirmation.tsx:50
+msgid "They won't be able to access this workspace."
+msgstr "Они не смогут получить доступ к этому рабочему пространству."
+
+#: src/components/DeleteLabelConfirmation.tsx:44
+#: src/views/card/components/DeleteCardConfirmation.tsx:78
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:58
+#: src/views/card/components/DeleteCommentConfirmation.tsx:68
+msgid "This action can't be undone."
+msgstr "Это действие нельзя будет отменить."
+
+#: src/views/settings/components/NewApiKeyModal.tsx:129
+msgid "This API key will only be shown once. Please save it in a secure location."
+msgstr "Этот API-ключ будет показан только один раз. Пожалуйста, сохраните его в безопасном месте."
+
+#: src/views/public/board/index.tsx:151
+msgid "This board is private or does not exist"
+msgstr "Эта доска является приватной или не существует."
+
+#: src/views/board/components/UpdateBoardSlugForm.tsx:135
+msgid "This board URL has already been taken"
+msgstr "Этот URL доски уже занят."
+
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:70
+msgid "This will result in the permanent deletion of all data associated with this workspace."
+msgstr "Это приведет к безвозвратному удалению всех данных, связанных с этим рабочим пространством."
+
+#: src/views/settings/components/DeleteAccountConfirmation.tsx:60
+msgid "This will result in the permanent deletion of all data associated with your account."
+msgstr "Это приведет к безвозвратному удалению всех данных, связанных с вашей учетной записью."
+
+#: src/components/NewWorkspaceForm.tsx:284
+msgid "This workspace URL has already been taken"
+msgstr "Этот URL рабочего пространства уже занят."
+
+#: src/components/NewWorkspaceForm.tsx:286
+msgid "This workspace URL is reserved"
+msgstr "Этот URL рабочего пространства зарезервирован."
+
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:123
+msgid "This workspace username has already been taken"
+msgstr "Это имя пользователя рабочего пространства уже занято."
+
+#: src/views/boards/components/TemplateBoards.tsx:16
+#: src/views/boards/components/TemplateBoards.tsx:22
+msgid "To Do"
+msgstr "Сделать"
+
+#: src/views/home/components/Header.tsx:73
+msgid "Toggle menu"
+msgstr "Переключить меню"
+
+#: src/views/home/components/Features.tsx:104
+msgid "Track all card changes with detailed activity history."
+msgstr "Отслеживайте все изменения карточек с подробной историей действий."
+
+#: src/views/settings/IntegrationsSettings.tsx:73
+msgid "Trello"
+msgstr "Trello"
+
+#: src/views/settings/IntegrationsSettings.tsx:53
+msgid "Trello disconnected"
+msgstr "Trello отключен"
+
+#: src/views/home/components/Features.tsx:88
+msgid "Trello imports"
+msgstr "Импорт Trello"
+
+#: src/views/boards/components/TemplateBoards.tsx:44
+msgid "Triaging"
+msgstr "Сортировка"
+
+#: src/views/card/components/NewChecklistItemForm.tsx:88
+msgid "Unable to add checklist item"
+msgstr "Не удалось добавить элемент контрольного списка."
+
+#: src/views/card/components/NewCommentForm.tsx:30
+msgid "Unable to add comment"
+msgstr "Не удалось добавить комментарий."
+
+#: src/views/board/components/NewCardForm.tsx:171
+msgid "Unable to create card"
+msgstr "Не удалось создать карточку."
+
+#: src/views/card/components/NewChecklistForm.tsx:69
+msgid "Unable to create checklist"
+msgstr "Не удалось создать контрольный список."
+
+#: src/views/board/components/NewListForm.tsx:77
+msgid "Unable to create list"
+msgstr "Не удалось создать список."
+
+#: src/components/NewWorkspaceForm.tsx:154
+msgid "Unable to create workspace"
+msgstr "Не удалось создать рабочее пространство."
+
+#: src/views/card/components/DeleteCardConfirmation.tsx:51
+msgid "Unable to delete card"
+msgstr "Не удалось удалить карточку."
+
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:36
+msgid "Unable to delete checklist"
+msgstr "Не удалось удалить контрольный список"
+
+#: src/views/card/components/ChecklistItemRow.tsx:87
+msgid "Unable to delete checklist item"
+msgstr "Не удалось удалить элемент контрольного списка"
+
+#: src/views/card/components/DeleteCommentConfirmation.tsx:44
+msgid "Unable to delete comment"
+msgstr "Не удалось удалить комментарий"
+
+#: src/views/members/components/DeleteMemberConfirmation.tsx:27
+msgid "Unable to remove member"
+msgstr "Не удалось удалить участника"
+
+#: src/components/FeedbackModal.tsx:40
+msgid "Unable to send feedback"
+msgstr "Не удалось отправить отзыв"
+
+#: src/views/board/components/UpdateBoardSlugForm.tsx:71
+msgid "Unable to update board URL"
+msgstr "Не удалось обновить URL доски"
+
+#: src/views/board/components/VisibilityButton.tsx:52
+msgid "Unable to update board visibility"
+msgstr "Не удалось обновить видимость доски"
+
+#: src/views/board/index.tsx:189
+#: src/views/card/index.tsx:172
+msgid "Unable to update card"
+msgstr "Не удалось обновить карточку"
+
+#: src/views/card/components/ChecklistNameInput.tsx:45
+msgid "Unable to update checklist"
+msgstr "Не удалось обновить контрольный список"
+
+#: src/views/card/components/ChecklistItemRow.tsx:59
+msgid "Unable to update checklist item"
+msgstr "Не удалось обновить элемент контрольного списка"
+
+#: src/views/card/components/Comment.tsx:63
+msgid "Unable to update comment"
+msgstr "Не удалось обновить комментарий"
+
+#: src/views/card/components/LabelSelector.tsx:71
+msgid "Unable to update labels"
+msgstr "Не удалось обновить метки"
+
+#: src/views/board/index.tsx:133
+#: src/views/card/components/ListSelector.tsx:51
+msgid "Unable to update list"
+msgstr "Не удалось обновить список"
+
+#: src/views/card/components/MemberSelector.tsx:78
+msgid "Unable to update members"
+msgstr "Не удалось обновить участников"
+
+#. placeholder {0}: truncate(memberName)
+#: src/views/card/components/ActivityList.tsx:121
+msgid "unassigned <0>{0}</0> from the card"
+msgstr "удалил(а) <0>{0}</0> из карточки"
+
+#: src/views/card/components/ActivityList.tsx:118
+msgid "unassigned themselves from the card"
+msgstr "удалил(а) себя из карточки"
+
+#: src/views/home/components/Pricing.tsx:41
+msgid "Unlimited activity log"
+msgstr "Неограниченный журнал активности"
+
+#: src/views/home/components/Pricing.tsx:37
+msgid "Unlimited boards"
+msgstr "Неограниченное количество досок"
+
+#: src/views/home/components/Cta.tsx:57
+msgid "Unlimited boards, unlimited lists, unlimited cards. No credit card required."
+msgstr "Неограниченное количество досок, списков и карточек. Кредитная карта не требуется."
+
+#: src/views/home/components/Pricing.tsx:39
+msgid "Unlimited cards"
+msgstr "Неограниченное количество карточек"
+
+#: src/views/home/components/Pricing.tsx:40
+msgid "Unlimited comments"
+msgstr "Неограниченное количество комментариев"
+
+#: src/views/home/components/Pricing.tsx:38
+msgid "Unlimited lists"
+msgstr "Неограниченное количество списков"
+
+#: src/components/NewWorkspaceForm.tsx:329
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:64
+msgid "Unlimited members"
+msgstr "Неограниченное количество участников"
+
+#: src/views/board/components/UpdateBoardSlugForm.tsx:174
+#: src/views/settings/components/UpdateDisplayNameForm.tsx:80
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:91
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:83
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:154
+msgid "Update"
+msgstr "Обновить"
+
+#: src/components/LabelForm.tsx:238
+msgid "Update label"
+msgstr "Обновить метку"
+
+#: src/views/card/components/ActivityList.tsx:73
+msgid "updated a checklist item"
+msgstr "обновлен элемент контрольного списка"
+
+#: src/views/card/components/ActivityList.tsx:63
+msgid "updated the description"
+msgstr "обновлено описание"
+
+#: src/views/card/components/ActivityList.tsx:62
+msgid "updated the title"
+msgstr "обновлен заголовок"
+
+#. placeholder {0}: truncate(toTitle)
+#: src/views/card/components/ActivityList.tsx:90
+msgid "updated the title to <0>{0}</0>"
+msgstr "обновлен заголовок на <0>{0}</0>"
+
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:109
+msgid "Upgrade"
+msgstr "Обновить"
+
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:52
+#: src/views/settings/WorkspaceSettings.tsx:89
+msgid "Upgrade to Pro"
+msgstr "Обновить до Pro"
+
+#: src/components/NewWorkspaceForm.tsx:369
+msgid "Upgrade to Pro ($29/month)"
+msgstr "Обновить до Pro ($29/месяц)"
+
+#: src/views/members/components/InviteMemberForm.tsx:224
+msgid "Upgrade to Team Plan"
+msgstr "Обновить до командного плана"
+
+#: src/views/boards/components/TemplateBoards.tsx:37
+#: src/views/boards/components/TemplateBoards.tsx:54
+msgid "Urgent"
+msgstr "Срочно"
+
+#: src/components/NewWorkspaceForm.tsx:35
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
+msgid "URL can only contain letters, numbers, and hyphens"
+msgstr "URL может содержать только буквы, цифры и дефисы"
+
+#: src/components/NewWorkspaceForm.tsx:33
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:34
+msgid "URL cannot exceed 24 characters"
+msgstr "URL не может превышать 24 символа"
+
+#: src/components/NewWorkspaceForm.tsx:31
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:32
+msgid "URL must be at least 3 characters long"
+msgstr "URL должен содержать не менее 3 символов"
+
+#: src/views/boards/components/NewBoardForm.tsx:117
+msgid "Use template"
+msgstr "Использовать шаблон"
+
+#: src/views/members/index.tsx:237
+msgid "User"
+msgstr "Пользователь"
+
+#: src/views/members/components/InviteMemberForm.tsx:72
+msgid "User is already a member of this workspace"
+msgstr "Пользователь уже является участником этого рабочего пространства"
+
+#: src/views/boards/components/TemplateBoards.tsx:37
+msgid "Video"
+msgstr "Видео"
+
+#: src/views/settings/ApiSettings.tsx:25
+msgid "View and manage your API keys."
+msgstr "Просмотр и управление вашими API-ключами."
+
+#: src/views/settings/BillingSettings.tsx:42
+msgid "View and manage your billing and subscription."
+msgstr "Просмотр и управление вашими счетами и подпиской."
+
+#: src/views/home/components/Pricing.tsx:67
+msgid "View docs"
+msgstr "Просмотреть документацию"
+
+#: src/views/public/board/index.tsx:125
+msgid "View only"
+msgstr "Только просмотр"
+
+#: src/views/home/components/Features.tsx:147
+msgid "View our roadmap."
+msgstr "Просмотреть нашу дорожную карту."
+
+#: src/views/public/board/index.tsx:154
+msgid "View workspace"
+msgstr "Просмотреть рабочее пространство"
+
+#: src/views/board/components/VisibilityButton.tsx:91
+msgid "Visibility"
+msgstr "Видимость"
+
+#: src/views/home/components/Faqs.tsx:94
+msgid "We are using the <0>AGPL-3.0 license</0>."
+msgstr "Мы используем лицензию <0>AGPL-3.0</0>."
+
+#: src/views/home/components/Features.tsx:145
+msgid "We're just getting started. "
+msgstr "Мы только начинаем. "
+
+#: src/views/auth/login/index.tsx:41
+msgid "Welcome back"
+msgstr "С возвращением"
+
+#: src/views/home/components/Faqs.tsx:91
+msgid "What license are you using?"
+msgstr "Какую лицензию вы используете?"
+
+#: src/views/home/components/Faqs.tsx:30
+msgid "What's the difference between Kan and Trello?"
+msgstr "В чем разница между Kan и Trello?"
+
+#: src/views/home/components/Faqs.tsx:25
+msgid "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over time (and atlassification) it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello's simplicity, in open source."
+msgstr "Когда Trello запустился в 2011 году, он поразил всех своей тщательно продуманной простотой, но со временем (и под влиянием атлассификации) потерял свою магию и превратился во что-то ближе к \"Jira Lite\". Этот проект — наша попытка вернуть оригинальную магию простоты Trello в формате open source."
+
+#: src/views/home/components/Faqs.tsx:22
+msgid "Why make an open source Trello?"
+msgstr "Зачем создавать Trello с открытым исходным кодом?"
+
+#: src/components/SettingsLayout.tsx:39
+#: src/views/board/index.tsx:331
+msgid "Workspace"
+msgstr "Рабочее пространство"
+
+#: src/components/NewWorkspaceForm.tsx:143
+msgid "Workspace created successfully. You can upgrade later in settings."
+msgstr "Рабочее пространство успешно создано. Вы можете обновить его позже в настройках."
+
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:26
+msgid "Workspace deleted"
+msgstr "Рабочее пространство удалено"
+
+#: src/views/settings/WorkspaceSettings.tsx:75
+msgid "Workspace description"
+msgstr "Описание рабочего пространства"
+
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:28
+msgid "Workspace description cannot exceed 280 characters"
+msgstr "Описание рабочего пространства не может превышать 280 символов"
+
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:25
+msgid "Workspace description must be at least 3 characters long"
+msgstr "Описание рабочего пространства должно содержать не менее 3 символов"
+
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:48
+msgid "Workspace description updated"
+msgstr "Описание рабочего пространства обновлено"
+
+#: src/views/home/components/Features.tsx:83
+#: src/views/home/components/Pricing.tsx:54
+msgid "Workspace members"
+msgstr "Участники рабочего пространства"
+
+#: src/components/NewWorkspaceForm.tsx:259
+#: src/views/settings/WorkspaceSettings.tsx:58
+msgid "Workspace name"
+msgstr "Название рабочего пространства"
+
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:15
+msgid "Workspace name cannot exceed 24 characters"
+msgstr "Название рабочего пространства не может превышать 24 символа"
+
+#: src/components/NewWorkspaceForm.tsx:27
+msgid "Workspace name is required"
+msgstr "Название рабочего пространства обязательно"
+
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:14
+msgid "Workspace name must be at least 3 characters long"
+msgstr "Название рабочего пространства должно содержать не менее 3 символов"
+
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:43
+msgid "Workspace name updated"
+msgstr "Название рабочего пространства обновлено"
+
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:60
+msgid "Workspace slug updated"
+msgstr "Slug рабочего пространства обновлен"
+
+#: src/views/settings/WorkspaceSettings.tsx:66
+msgid "Workspace URL"
+msgstr "URL рабочего пространства"
+
+#: src/components/NewWorkspaceForm.tsx:273
+msgid "workspace-url"
+msgstr "workspace-url"
+
+#: src/views/boards/components/TemplateBoards.tsx:30
+msgid "Writing"
+msgstr "Письмо"
+
+#: src/views/home/components/Pricing.tsx:19
+msgid "Yearly"
+msgstr "Ежегодно"
+
+#: src/views/home/components/Faqs.tsx:86
+msgid "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits."
+msgstr "Да, мы предлагаем навсегда бесплатный план для индивидуального использования. Никаких ограничений, платных стен или лимитов."
+
+#: src/views/settings/AccountSettings.tsx:73
+msgid "You are about to change your password."
+msgstr "Вы собираетесь изменить свой пароль."
+
+#: src/views/home/components/Faqs.tsx:67
+msgid "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!"
+msgstr "Вы можете получить собственный URL-адрес рабочего пространства, например <0>kan.bn/kan</0>, перейдя в <1>настройки рабочего пространства</1> и оформив подписку на профессиональное рабочее пространство. Все подписки помогают финансировать разработку проекта!"
+
+#: src/views/home/components/Faqs.tsx:111
+msgid "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace."
+msgstr "Вы можете пригласить участников команды, нажав кнопку \"Пригласить\" в правом верхнем углу <0>страницы участников</0> и введя их адрес электронной почты. Они получат письмо с ссылкой для присоединения к рабочему пространству."
+
+#: src/views/home/components/Faqs.tsx:127
+msgid "You can self-host by following the instructions in our <0>repo</0>."
+msgstr "Вы можете развернуть собственный хостинг, следуя инструкциям в нашем <0>репозитории</0>."
+
+#: src/components/AuthForm.tsx:221
+msgid "You have been logged in successfully."
+msgstr "Вы успешно вошли в систему."
+
+#: src/components/AuthForm.tsx:204
+msgid "You have been signed up successfully."
+msgstr "Вы успешно зарегистрировались."
+
+#: src/views/members/components/InviteMemberForm.tsx:186
+msgid "You have unlimited seats with your Pro Plan. There is no additional charge for new members!"
+msgstr "В вашем профессиональном плане неограниченное количество мест. За новых участников дополнительная плата не взимается!"
+
+#: src/views/settings/components/DeleteAccountConfirmation.tsx:28
+msgid "Your account has been deleted."
+msgstr "Ваш аккаунт был удалён."
+
+#: src/views/boards/components/ImportBoardsForm.tsx:192
+msgid "Your boards have been imported."
+msgstr "Ваши доски были импортированы."
+
+#: src/views/settings/components/UpdateDisplayNameForm.tsx:42
+msgid "Your display name has been updated."
+msgstr "Ваше отображаемое имя было обновлено."
+
+#: src/views/settings/components/ChangePasswordConfirmation.tsx:70
+msgid "Your password has been changed."
+msgstr "Ваш пароль был изменён."
+
+#: src/views/settings/components/Avatar.tsx:27
+msgid "Your profile image has been updated."
+msgstr "Ваше изображение профиля было обновлено."
+
+#: src/views/settings/IntegrationsSettings.tsx:54
+msgid "Your Trello account has been disconnected."
+msgstr "Ваш аккаунт Trello был отключён."
+
+#: src/views/settings/IntegrationsSettings.tsx:102
+msgid "Your Trello account is connected."
+msgstr "Ваш аккаунт Trello подключён."
+
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:49
+msgid "Your workspace description has been updated."
+msgstr "Описание вашего рабочего пространства было обновлено."
+
+#: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:27
+msgid "Your workspace has been deleted."
+msgstr "Ваше рабочее пространство было удалено."
+
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:44
+msgid "Your workspace name has been updated."
+msgstr "Название вашего рабочего пространства было обновлено."
+
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:61
+msgid "Your workspace slug has been updated."
+msgstr "Slug вашего рабочего пространства был обновлён."
