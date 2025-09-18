@@ -1370,6 +1370,10 @@ msgstr "Password must be at least 8 characters"
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
+#: src/views/members/index.tsx:134
+msgid "Paused"
+msgstr "Paused"
+
 #: src/views/home/components/Pricing.tsx:102
 msgid "Payment frequency"
 msgstr "Payment frequency"

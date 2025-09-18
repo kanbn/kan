@@ -1280,6 +1280,10 @@ msgstr "Le mot de passe doit comporter au moins 8 caractères"
 msgid "Passwords do not match"
 msgstr "Les mots de passe ne correspondent pas"
 
+#: src/views/members/index.tsx:134
+msgid "Paused"
+msgstr "En pause"
+
 #: src/views/home/components/Pricing.tsx:102
 msgid "Payment frequency"
 msgstr "Fréquence de paiement"
