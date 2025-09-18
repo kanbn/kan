@@ -129,9 +129,9 @@ export default function MembersPage() {
                 {memberRole &&
                   memberRole.charAt(0).toUpperCase() + memberRole.slice(1)}
               </span>
-              {memberStatus === "invited" && (
+              {(memberStatus === "invited" || memberStatus === "paused") && (
                 <span className="mt-1 inline-flex items-center rounded-md bg-gray-500/10 px-1.5 py-0.5 text-[10px] font-medium text-gray-400 ring-1 ring-inset ring-gray-500/20 sm:ml-2 sm:mt-0 sm:text-[11px]">
-                  {t`Pending`}
+                  {memberStatus === "invited" ? t`Pending` : t`Paused`}
                 </span>
               )}
             </div>
