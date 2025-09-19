@@ -1,5 +1,6 @@
 import "~/styles/globals.css";
 import "~/utils/i18n";
+import "react-image-crop/dist/ReactCrop.css";
 
 import type { NextPage, Viewport } from "next";
 import type { AppProps, AppType } from "next/app";
