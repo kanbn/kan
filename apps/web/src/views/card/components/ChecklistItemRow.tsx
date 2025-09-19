@@ -182,35 +182,37 @@ export default function ChecklistItemRow({
       </label>
 
       {/* Title */}
-      <div className="flex-1 border-b border-light-200 pb-2 dark:border-dark-700 sm:border-none sm:pb-0">
-        <label className="mb-1 block text-xs font-medium text-neutral-900 dark:text-gray-200">
-          Item
-        </label>
-        <ContentEditable
-          html={title}
-          disabled={viewOnly}
-          onChange={(e) => setTitle(e.target.value)}
-          // @ts-expect-error - valid event
-          onBlur={(e: Event) => commitTitle(e.target.innerHTML as string)}
-          className={twMerge(
-            "text-md m-0 min-h-[20px] w-full p-0 leading-[20px] outline-none",
-            "text-neutral-950",
-            "dark:text-gray-100 dark:hover:text-white",
-            viewOnly && "cursor-default",
-          )}
-          placeholder={t`Add details...`}
-          onKeyDown={(e) => {
-            if (viewOnly) return;
-            if (e.key === "Enter") {
-              e.preventDefault();
-              commitTitle(title);
-            }
-            if (e.key === "Escape") {
-              e.preventDefault();
-              setTitle(item.title);
-            }
-          }}
-        />
+      <div className="flex flex-row items-center justify-center border-b border-light-200 pb-2 dark:border-dark-700 sm:border-none sm:pb-0">
+        <div className="flex flex-col">
+          <label className="block text-xs font-medium text-neutral-400 dark:text-gray-200">
+            Item
+          </label>
+          <ContentEditable
+            html={title}
+            disabled={viewOnly}
+            onChange={(e) => setTitle(e.target.value)}
+            // @ts-expect-error - valid event
+            onBlur={(e: Event) => commitTitle(e.target.innerHTML as string)}
+            className={twMerge(
+              "text-md m-0 w-full p-0 leading-[20px] outline-none md:text-sm",
+              "text-neutral-950",
+              "dark:text-gray-100 dark:hover:text-white",
+              viewOnly && "cursor-default",
+            )}
+            placeholder={t`Add details...`}
+            onKeyDown={(e) => {
+              if (viewOnly) return;
+              if (e.key === "Enter") {
+                e.preventDefault();
+                commitTitle(title);
+              }
+              if (e.key === "Escape") {
+                e.preventDefault();
+                setTitle(item.title);
+              }
+            }}
+          />
+        </div>
       </div>
 
       {/* Controls row */}
