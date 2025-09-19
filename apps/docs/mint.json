@@ -49,7 +49,10 @@
       "pages": [
         {
           "group": "Self-Hosting",
-          "pages": ["guides/self-hosting/s3"]
+          "pages": [
+            "guides/self-hosting/introduction",
+            "guides/self-hosting/s3"
+          ]
         }
       ]
     },
