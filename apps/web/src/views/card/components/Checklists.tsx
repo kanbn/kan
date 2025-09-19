@@ -131,7 +131,7 @@ export default function Checklists({
                       completed: item.completed,
                     }}
                     cardPublicId={cardPublicId}
-                    viewOnly={true}
+                    viewOnly={viewOnly}
                   />
                 ))}
               </div>
