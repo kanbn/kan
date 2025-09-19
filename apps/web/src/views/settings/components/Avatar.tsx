@@ -28,6 +28,7 @@ interface LocalPixelCrop {
   width: number;
   height: number;
 }
+
 interface ReactCropProps {
   crop: PercentCrop | undefined;
   onChange: (crop: LocalPixelCrop, percentCrop: PercentCrop) => void;
@@ -36,6 +37,7 @@ interface ReactCropProps {
   circularCrop?: boolean;
   children: React.ReactNode;
 }
+
 const AnyReactCrop = ReactCrop as unknown as React.FC<ReactCropProps>;
 
 export default function Avatar({
@@ -53,13 +55,6 @@ export default function Avatar({
   const [selectedPreviewUrl, setSelectedPreviewUrl] = useState<string | null>(
     null,
   );
-  interface PercentCrop {
-    unit: "%";
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-  }
   const [crop, setCrop] = useState<PercentCrop>();
   const imgRef = useRef<HTMLImageElement | null>(null);
 
