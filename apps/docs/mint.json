@@ -45,6 +45,15 @@
       "pages": ["introduction"]
     },
     {
+      "group": "Guides",
+      "pages": [
+        {
+          "group": "Self-Hosting",
+          "pages": ["guides/self-hosting/s3"]
+        }
+      ]
+    },
+    {
       "group": "Import",
       "pages": ["imports/trello"]
     },
