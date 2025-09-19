@@ -156,145 +156,157 @@ export default function ChecklistItemRow({
     deleteItem.mutate({ checklistItemPublicId: item.publicId });
   };
 
-return (
-  <div
-    className={twMerge(
-      // Mobile: stack vertically; Desktop: row
-      "group relative flex flex-col gap-3 rounded-md px-3 py-2 sm:flex-row sm:items-center",
-      "hover:bg-light-100 dark:hover:bg-dark-100"
-    )}
-  >
-    {/* Completed Checkbox */}
-    <input
-      type="checkbox"
-      checked={completed}
-      onChange={handleToggleCompleted}
-      disabled={false}
+  return (
+    <div
       className={twMerge(
-        "h-4 w-4 rounded-md border bg-transparent",
-        "border-light-500 dark:border-dark-500",
-        "cursor-pointer"
+        // Mobile: stack vertically; Desktop: row
+        "group relative flex flex-col gap-3 rounded-md px-3 py-2 sm:flex-row sm:items-center",
+        "hover:bg-light-100 dark:hover:bg-dark-100",
       )}
-    />
-
-    {/* Title */}
-    <div className="flex-1 sm:pr-7">
-      <ContentEditable
-        html={title}
-        disabled={viewOnly}
-        onChange={(e) => setTitle(e.target.value)}
-        // @ts-expect-error - valid event
-        onBlur={(e: Event) => commitTitle(e.target.innerHTML as string)}
+    >
+      {/* Completed Checkbox */}
+      <input
+        type="checkbox"
+        checked={completed}
+        onChange={handleToggleCompleted}
+        disabled={false}
         className={twMerge(
-          "m-0 min-h-[20px] w-full p-0 text-sm leading-[20px] outline-none",
-          "text-light-950",
-          "dark:text-gray-100 dark:hover:text-white",
-          viewOnly && "cursor-default"
+          "h-4 w-4 rounded-md border bg-transparent",
+          "border-light-500 dark:border-dark-500",
+          "cursor-pointer",
         )}
-        placeholder={t`Add details...`}
-        onKeyDown={(e) => {
-          if (viewOnly) return;
-          if (e.key === "Enter") {
-            e.preventDefault();
-            commitTitle(title);
-          }
-          if (e.key === "Escape") {
-            e.preventDefault();
-            setTitle(item.title);
-          }
-        }}
       />
-    </div>
 
-    {/* Controls row (stack on mobile, inline on desktop) */}
-    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-      {/* Iron */}
-      <label className="flex items-center gap-1 text-xs text-light-900 dark:text-gray-200">
-        <input
-          type="checkbox"
-          checked={iron}
+      {/* Title */}
+      <div className="flex-1 sm:pr-7">
+        <ContentEditable
+          html={title}
           disabled={viewOnly}
-          onChange={handleToggleIron}
+          onChange={(e) => setTitle(e.target.value)}
+          // @ts-expect-error - valid event
+          onBlur={(e: Event) => commitTitle(e.target.innerHTML as string)}
           className={twMerge(
-            "h-4 w-4 rounded-md border bg-transparent",
-            "border-light-500 dark:border-dark-500",
-            viewOnly ? "cursor-default" : "cursor-pointer"
+            "m-0 min-h-[20px] w-full p-0 text-sm leading-[20px] outline-none",
+            "text-light-950",
+            "dark:text-gray-100 dark:hover:text-white",
+            viewOnly && "cursor-default",
           )}
-        />
-        Ferro
-      </label>
-
-      {/* Wash */}
-      <label className="flex items-center gap-1 text-xs text-light-900 dark:text-gray-200">
-        <input
-          type="checkbox"
-          checked={wash}
-          disabled={viewOnly}
-          onChange={handleToggleWash}
-          className={twMerge(
-            "h-4 w-4 rounded-md border bg-transparent",
-            "border-light-500 dark:border-dark-500",
-            viewOnly ? "cursor-default" : "cursor-pointer"
-          )}
-        />
-        Lavagem
-      </label>
-
-      {/* Quantity */}
-      <label className="flex items-center gap-1 text-xs text-light-900 dark:text-gray-200">
-        Qnt.
-        <input
-          type="number"
-          value={quantity}
-          disabled={viewOnly}
-          onChange={(e) => {
-            const val = parseInt(e.target.value, 10) || 0;
-            setQuantity(val);
-            updateItem.mutate({
-              checklistItemPublicId: item.publicId,
-              quantity: val,
-            });
+          placeholder={t`Add details...`}
+          onKeyDown={(e) => {
+            if (viewOnly) return;
+            if (e.key === "Enter") {
+              e.preventDefault();
+              commitTitle(title);
+            }
+            if (e.key === "Escape") {
+              e.preventDefault();
+              setTitle(item.title);
+            }
           }}
-          className={twMerge(
-            "h-16 w-20 rounded-md border px-2 py-1 text-sm h-8",
-            "border-light-300 bg-white text-light-950",
-            "dark:text-gray-100 dark:bg-gray-700 dark:hover:text-white",
-            viewOnly ? "cursor-default" : "cursor-text"
-          )}
         />
-      </label>
+      </div>
 
-      {/* Item Value */}
-      <label className="flex items-center gap-1 text-xs text-light-900 dark:text-gray-200">
-        R$
-        <p
+      {/* Controls row (stack on mobile, inline on desktop) */}
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+        {/* Iron */}
+        <label className="flex items-center gap-1 text-xs text-light-900 dark:text-gray-200">
+          <input
+            type="checkbox"
+            checked={iron}
+            disabled={viewOnly}
+            onChange={handleToggleIron}
+            className={twMerge(
+              "h-4 w-4 rounded-md border bg-transparent",
+              "border-light-500 dark:border-dark-500",
+              viewOnly ? "cursor-default" : "cursor-pointer",
+            )}
+          />
+          Ferro
+        </label>
+
+        {/* Wash */}
+        <label className="flex items-center gap-1 text-xs text-light-900 dark:text-gray-200">
+          <input
+            type="checkbox"
+            checked={wash}
+            disabled={viewOnly}
+            onChange={handleToggleWash}
+            className={twMerge(
+              "h-4 w-4 rounded-md border bg-transparent",
+              "border-light-500 dark:border-dark-500",
+              viewOnly ? "cursor-default" : "cursor-pointer",
+            )}
+          />
+          Lavagem
+        </label>
+
+        {/* Quantity */}
+        <label className="flex items-center gap-1 text-xs text-light-900 dark:text-gray-200">
+          Qnt.
+          <input
+            type="number"
+            value={quantity}
+            disabled={viewOnly}
+            onChange={(e) => {
+              const val = parseInt(e.target.value, 10) || 0;
+              setQuantity(val);
+              updateItem.mutate({
+                checklistItemPublicId: item.publicId,
+                quantity: val,
+              });
+            }}
+            className={twMerge(
+              "h-16 h-8 w-20 rounded-md border px-2 py-1 text-sm",
+              "border-light-300 bg-white text-light-950",
+              "dark:bg-gray-700 dark:text-gray-100 dark:hover:text-white",
+              viewOnly ? "cursor-default" : "cursor-text",
+            )}
+          />
+        </label>
+
+        {/* Item Value */}
+        <label className="flex items-center gap-1 text-xs text-light-900 dark:text-gray-200">
+          R$
+          <p
+            className={twMerge(
+              "flex h-8 w-20 items-center rounded-md px-2 py-1 text-sm",
+              "bg-white text-light-950",
+              "dark:bg-gray-700 dark:text-gray-100 dark:hover:text-white",
+            )}
+          >
+            {itemValue}
+          </p>
+        </label>
+      </div>
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+        <label className="flex items-center gap-1 text-xs text-light-900 dark:text-gray-200">
+          Total
+        </label>
+        <div
           className={twMerge(
-            "h-8 w-20 rounded-md px-2 py-1 text-sm flex items-center",
+            "flex h-8 w-20 items-center rounded-md px-2 py-1 text-sm",
             "bg-white text-light-950",
-            "dark:text-gray-100 dark:bg-gray-700 dark:hover:text-white"
+            "dark:bg-gray-700 dark:text-gray-100 dark:hover:text-white",
           )}
         >
-          {itemValue}
-        </p>
-      </label>
+          {(itemValue * quantity).toFixed(2)}
+        </div>
+      </div>
+
+      {/* Delete button */}
+      {!viewOnly && (
+        <button
+          type="button"
+          onClick={handleDelete}
+          className={twMerge(
+            "absolute right-2 top-2 rounded-md p-1 sm:static sm:ml-auto",
+            "text-light-700 hover:bg-light-200 hover:text-light-900",
+            "dark:border-dark-400 dark:bg-dark-800 dark:text-dark-50",
+          )}
+        >
+          <HiXMark size={16} />
+        </button>
+      )}
     </div>
-
-    {/* Delete button */}
-    {!viewOnly && (
-      <button
-        type="button"
-        onClick={handleDelete}
-        className={twMerge(
-          "absolute top-2 right-2 rounded-md p-1 sm:static sm:ml-auto",
-          "text-light-700 hover:bg-light-200 hover:text-light-900",
-          "dark:border-dark-400 dark:bg-dark-800 dark:text-dark-50"
-        )}
-      >
-        <HiXMark size={16} />
-      </button>
-    )}
-  </div>
-);
-
-
+  );
 }
