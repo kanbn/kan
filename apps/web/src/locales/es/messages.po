@@ -140,6 +140,10 @@ msgstr "añadió la etiqueta <0>{0}</0>"
 msgid "Adding a new member will cost an additional {price} ({billingType}) per seat."
 msgstr "Añadir un nuevo miembro costará {price} adicionales ({billingType}) por asiento."
 
+#: src/views/settings/components/Avatar.tsx:278
+msgid "Adjust the square crop to fit your avatar."
+msgstr "Ajusta el recorte cuadrado para que se adapte a tu avatar."
+
 #: src/views/home/components/Pricing.tsx:55
 msgid "Admin roles"
 msgstr "Roles de administrador"
@@ -338,6 +342,7 @@ msgstr "Informe de error"
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:63
 #: src/views/card/components/DeleteCommentConfirmation.tsx:76
 #: src/views/members/components/DeleteMemberConfirmation.tsx:55
+#: src/views/settings/components/Avatar.tsx:309
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:168
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
@@ -526,6 +531,10 @@ msgstr "creó la tarjeta"
 #: src/views/boards/components/TemplateBoards.tsx:23
 msgid "Critical"
 msgstr "Crítico"
+
+#: src/views/settings/components/Avatar.tsx:275
+msgid "Crop your avatar"
+msgstr "Recorta tu avatar"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:19
 msgid "Current password is required"
@@ -749,7 +758,7 @@ msgstr "Error al invitar al miembro"
 msgid "Error updating display name"
 msgstr "Error al actualizar el nombre visible"
 
-#: src/views/settings/components/Avatar.tsx:39
+#: src/views/settings/components/Avatar.tsx:80
 msgid "Error updating profile image"
 msgstr "Error al actualizar la imagen de perfil"
 
@@ -774,8 +783,8 @@ msgstr "Error al actualizar la suscripción"
 msgid "Error upgrading to Pro"
 msgstr "Error al actualizar a Pro"
 
-#: src/views/settings/components/Avatar.tsx:56
-#: src/views/settings/components/Avatar.tsx:97
+#: src/views/settings/components/Avatar.tsx:94
+#: src/views/settings/components/Avatar.tsx:221
 msgid "Error uploading profile image"
 msgstr "Error al subir la imagen de perfil"
 
@@ -1321,7 +1330,7 @@ msgstr "Por favor, introduce un nombre válido"
 msgid "Please enter a valid password"
 msgstr "Por favor, introduce una contraseña válida"
 
-#: src/views/settings/components/Avatar.tsx:57
+#: src/views/settings/components/Avatar.tsx:95
 msgid "Please select a file to upload."
 msgstr "Por favor selecciona un archivo para subir."
 
@@ -1352,8 +1361,8 @@ msgstr "Por favor selecciona un archivo para subir."
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:78
 #: src/views/members/components/InviteMemberForm.tsx:131
-#: src/views/settings/components/Avatar.tsx:40
-#: src/views/settings/components/Avatar.tsx:98
+#: src/views/settings/components/Avatar.tsx:81
+#: src/views/settings/components/Avatar.tsx:222
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:40
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:46
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:55
@@ -1391,7 +1400,7 @@ msgstr "Plan Pro"
 msgid "Pro Plan ∞"
 msgstr "Plan Pro ∞"
 
-#: src/views/settings/components/Avatar.tsx:26
+#: src/views/settings/components/Avatar.tsx:67
 msgid "Profile image updated"
 msgstr "Imagen de perfil actualizada"
 
@@ -1492,6 +1501,7 @@ msgid "Run on your own infrastructure"
 msgstr "Ejecuta en tu propia infraestructura"
 
 #: src/views/card/components/Comment.tsx:165
+#: src/views/settings/components/Avatar.tsx:312
 msgid "Save"
 msgstr "Guardar"
 
@@ -2118,7 +2128,7 @@ msgstr "Tu nombre de visualización ha sido actualizado."
 msgid "Your password has been changed."
 msgstr "Tu contraseña ha sido cambiada."
 
-#: src/views/settings/components/Avatar.tsx:27
+#: src/views/settings/components/Avatar.tsx:68
 msgid "Your profile image has been updated."
 msgstr "Tu imagen de perfil ha sido actualizada."
 

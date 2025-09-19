@@ -140,6 +140,10 @@ msgstr "heeft label <0>{0}</0> toegevoegd"
 msgid "Adding a new member will cost an additional {price} ({billingType}) per seat."
 msgstr "Het toevoegen van een nieuw lid kost een extra {price} ({billingType}) per plaats."
 
+#: src/views/settings/components/Avatar.tsx:278
+msgid "Adjust the square crop to fit your avatar."
+msgstr "Pas de vierkante uitsnede aan zodat je avatar goed past."
+
 #: src/views/home/components/Pricing.tsx:55
 msgid "Admin roles"
 msgstr "Beheerdersrollen"
@@ -338,6 +342,7 @@ msgstr "Bugrapport"
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:63
 #: src/views/card/components/DeleteCommentConfirmation.tsx:76
 #: src/views/members/components/DeleteMemberConfirmation.tsx:55
+#: src/views/settings/components/Avatar.tsx:309
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:168
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
@@ -526,6 +531,10 @@ msgstr "heeft de kaart aangemaakt"
 #: src/views/boards/components/TemplateBoards.tsx:23
 msgid "Critical"
 msgstr "Kritiek"
+
+#: src/views/settings/components/Avatar.tsx:275
+msgid "Crop your avatar"
+msgstr "Snijd je avatar bij"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:19
 msgid "Current password is required"
@@ -749,7 +758,7 @@ msgstr "Fout bij het uitnodigen van lid"
 msgid "Error updating display name"
 msgstr "Fout bij bijwerken weergavenaam"
 
-#: src/views/settings/components/Avatar.tsx:39
+#: src/views/settings/components/Avatar.tsx:80
 msgid "Error updating profile image"
 msgstr "Fout bij het bijwerken van profielafbeelding"
 
@@ -774,8 +783,8 @@ msgstr "Fout bij het upgraden van abonnement"
 msgid "Error upgrading to Pro"
 msgstr "Fout bij upgraden naar Pro"
 
-#: src/views/settings/components/Avatar.tsx:56
-#: src/views/settings/components/Avatar.tsx:97
+#: src/views/settings/components/Avatar.tsx:94
+#: src/views/settings/components/Avatar.tsx:221
 msgid "Error uploading profile image"
 msgstr "Fout bij het uploaden van profielafbeelding"
 
@@ -1321,7 +1330,7 @@ msgstr "Voer een geldige naam in"
 msgid "Please enter a valid password"
 msgstr "Voer een geldig wachtwoord in"
 
-#: src/views/settings/components/Avatar.tsx:57
+#: src/views/settings/components/Avatar.tsx:95
 msgid "Please select a file to upload."
 msgstr "Selecteer een bestand om te uploaden."
 
@@ -1352,8 +1361,8 @@ msgstr "Selecteer een bestand om te uploaden."
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:78
 #: src/views/members/components/InviteMemberForm.tsx:131
-#: src/views/settings/components/Avatar.tsx:40
-#: src/views/settings/components/Avatar.tsx:98
+#: src/views/settings/components/Avatar.tsx:81
+#: src/views/settings/components/Avatar.tsx:222
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:40
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:46
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:55
@@ -1391,7 +1400,7 @@ msgstr "Pro Plan"
 msgid "Pro Plan ∞"
 msgstr "Pro Plan ∞"
 
-#: src/views/settings/components/Avatar.tsx:26
+#: src/views/settings/components/Avatar.tsx:67
 msgid "Profile image updated"
 msgstr "Profielafbeelding bijgewerkt"
 
@@ -1492,6 +1501,7 @@ msgid "Run on your own infrastructure"
 msgstr "Draai op je eigen infrastructuur"
 
 #: src/views/card/components/Comment.tsx:165
+#: src/views/settings/components/Avatar.tsx:312
 msgid "Save"
 msgstr "Opslaan"
 
@@ -2118,7 +2128,7 @@ msgstr "Je weergavenaam is bijgewerkt."
 msgid "Your password has been changed."
 msgstr "Je wachtwoord is gewijzigd."
 
-#: src/views/settings/components/Avatar.tsx:27
+#: src/views/settings/components/Avatar.tsx:68
 msgid "Your profile image has been updated."
 msgstr "Je profielafbeelding is bijgewerkt."
 

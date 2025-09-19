@@ -160,6 +160,10 @@ msgstr "added label <0>{0}</0>"
 msgid "Adding a new member will cost an additional {price} ({billingType}) per seat."
 msgstr "Adding a new member will cost an additional {price} ({billingType}) per seat."
 
+#: src/views/settings/components/Avatar.tsx:278
+msgid "Adjust the square crop to fit your avatar."
+msgstr "Adjust the square crop to fit your avatar."
+
 #: src/views/home/components/Pricing.tsx:55
 msgid "Admin roles"
 msgstr "Admin roles"
@@ -387,6 +391,7 @@ msgstr "Bug Report"
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:63
 #: src/views/card/components/DeleteCommentConfirmation.tsx:76
 #: src/views/members/components/DeleteMemberConfirmation.tsx:55
+#: src/views/settings/components/Avatar.tsx:309
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:168
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
@@ -591,6 +596,10 @@ msgstr "created the card"
 #: src/views/boards/components/TemplateBoards.tsx:23
 msgid "Critical"
 msgstr "Critical"
+
+#: src/views/settings/components/Avatar.tsx:275
+msgid "Crop your avatar"
+msgstr "Crop your avatar"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:19
 msgid "Current password is required"
@@ -822,7 +831,7 @@ msgstr "Error inviting member"
 msgid "Error updating display name"
 msgstr "Error updating display name"
 
-#: src/views/settings/components/Avatar.tsx:39
+#: src/views/settings/components/Avatar.tsx:80
 msgid "Error updating profile image"
 msgstr "Error updating profile image"
 
@@ -847,8 +856,8 @@ msgstr "Error upgrading subscription"
 msgid "Error upgrading to Pro"
 msgstr "Error upgrading to Pro"
 
-#: src/views/settings/components/Avatar.tsx:56
-#: src/views/settings/components/Avatar.tsx:97
+#: src/views/settings/components/Avatar.tsx:94
+#: src/views/settings/components/Avatar.tsx:221
 msgid "Error uploading profile image"
 msgstr "Error uploading profile image"
 
@@ -1411,7 +1420,7 @@ msgstr "Please enter a valid name"
 msgid "Please enter a valid password"
 msgstr "Please enter a valid password"
 
-#: src/views/settings/components/Avatar.tsx:57
+#: src/views/settings/components/Avatar.tsx:95
 msgid "Please select a file to upload."
 msgstr "Please select a file to upload."
 
@@ -1442,8 +1451,8 @@ msgstr "Please select a file to upload."
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:78
 #: src/views/members/components/InviteMemberForm.tsx:131
-#: src/views/settings/components/Avatar.tsx:40
-#: src/views/settings/components/Avatar.tsx:98
+#: src/views/settings/components/Avatar.tsx:81
+#: src/views/settings/components/Avatar.tsx:222
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:40
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:46
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:55
@@ -1481,7 +1490,7 @@ msgstr "Pro Plan"
 msgid "Pro Plan ∞"
 msgstr "Pro Plan ∞"
 
-#: src/views/settings/components/Avatar.tsx:26
+#: src/views/settings/components/Avatar.tsx:67
 msgid "Profile image updated"
 msgstr "Profile image updated"
 
@@ -1590,6 +1599,7 @@ msgid "Run on your own infrastructure"
 msgstr "Run on your own infrastructure"
 
 #: src/views/card/components/Comment.tsx:165
+#: src/views/settings/components/Avatar.tsx:312
 msgid "Save"
 msgstr "Save"
 
@@ -2240,7 +2250,7 @@ msgstr "Your display name has been updated."
 msgid "Your password has been changed."
 msgstr "Your password has been changed."
 
-#: src/views/settings/components/Avatar.tsx:27
+#: src/views/settings/components/Avatar.tsx:68
 msgid "Your profile image has been updated."
 msgstr "Your profile image has been updated."
 

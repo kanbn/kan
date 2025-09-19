@@ -140,6 +140,10 @@ msgstr "ha aggiunto l'etichetta <0>{0}</0>"
 msgid "Adding a new member will cost an additional {price} ({billingType}) per seat."
 msgstr "L'aggiunta di un nuovo membro costerà un supplemento di {price} ({billingType}) per posto."
 
+#: src/views/settings/components/Avatar.tsx:278
+msgid "Adjust the square crop to fit your avatar."
+msgstr "Regola il ritaglio quadrato per adattarlo al tuo avatar."
+
 #: src/views/home/components/Pricing.tsx:55
 msgid "Admin roles"
 msgstr "Ruoli amministratore"
@@ -338,6 +342,7 @@ msgstr "Segnalazione bug"
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:63
 #: src/views/card/components/DeleteCommentConfirmation.tsx:76
 #: src/views/members/components/DeleteMemberConfirmation.tsx:55
+#: src/views/settings/components/Avatar.tsx:309
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:168
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
@@ -526,6 +531,10 @@ msgstr "ha creato la carta"
 #: src/views/boards/components/TemplateBoards.tsx:23
 msgid "Critical"
 msgstr "Critico"
+
+#: src/views/settings/components/Avatar.tsx:275
+msgid "Crop your avatar"
+msgstr "Ritaglia il tuo avatar"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:19
 msgid "Current password is required"
@@ -749,7 +758,7 @@ msgstr "Errore durante l'invito del membro"
 msgid "Error updating display name"
 msgstr "Errore durante l'aggiornamento del nome visualizzato"
 
-#: src/views/settings/components/Avatar.tsx:39
+#: src/views/settings/components/Avatar.tsx:80
 msgid "Error updating profile image"
 msgstr "Errore durante l'aggiornamento dell'immagine del profilo"
 
@@ -774,8 +783,8 @@ msgstr "Errore nell'aggiornamento dell'abbonamento"
 msgid "Error upgrading to Pro"
 msgstr "Errore durante l'aggiornamento a Pro"
 
-#: src/views/settings/components/Avatar.tsx:56
-#: src/views/settings/components/Avatar.tsx:97
+#: src/views/settings/components/Avatar.tsx:94
+#: src/views/settings/components/Avatar.tsx:221
 msgid "Error uploading profile image"
 msgstr "Errore durante il caricamento dell'immagine del profilo"
 
@@ -1321,7 +1330,7 @@ msgstr "Inserisci un nome valido"
 msgid "Please enter a valid password"
 msgstr "Inserisci una password valida"
 
-#: src/views/settings/components/Avatar.tsx:57
+#: src/views/settings/components/Avatar.tsx:95
 msgid "Please select a file to upload."
 msgstr "Seleziona un file da caricare."
 
@@ -1352,8 +1361,8 @@ msgstr "Seleziona un file da caricare."
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:78
 #: src/views/members/components/InviteMemberForm.tsx:131
-#: src/views/settings/components/Avatar.tsx:40
-#: src/views/settings/components/Avatar.tsx:98
+#: src/views/settings/components/Avatar.tsx:81
+#: src/views/settings/components/Avatar.tsx:222
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:40
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:46
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:55
@@ -1391,7 +1400,7 @@ msgstr "Piano Pro"
 msgid "Pro Plan ∞"
 msgstr "Piano Pro ∞"
 
-#: src/views/settings/components/Avatar.tsx:26
+#: src/views/settings/components/Avatar.tsx:67
 msgid "Profile image updated"
 msgstr "Immagine del profilo aggiornata"
 
@@ -1492,6 +1501,7 @@ msgid "Run on your own infrastructure"
 msgstr "Esegui sulla tua infrastruttura"
 
 #: src/views/card/components/Comment.tsx:165
+#: src/views/settings/components/Avatar.tsx:312
 msgid "Save"
 msgstr "Salva"
 
@@ -2118,7 +2128,7 @@ msgstr "Il tuo nome visualizzato è stato aggiornato."
 msgid "Your password has been changed."
 msgstr "La tua password è stata modificata."
 
-#: src/views/settings/components/Avatar.tsx:27
+#: src/views/settings/components/Avatar.tsx:68
 msgid "Your profile image has been updated."
 msgstr "La tua immagine del profilo è stata aggiornata."
 
