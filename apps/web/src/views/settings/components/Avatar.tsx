@@ -4,6 +4,8 @@ import { env } from "next-runtime-env";
 import { useCallback, useRef, useState } from "react";
 import ReactCrop from "react-image-crop";
 
+import "react-image-crop/dist/ReactCrop.css";
+
 import { generateUID } from "@kan/shared/utils";
 
 import Button from "~/components/Button";
