@@ -95,9 +95,32 @@ export const create = async (
       .having(gt(countExpr, 1));
 
     if (duplicateIndices.length > 0) {
-      throw new Error(
-        `Duplicate indices found after creating card ${result[0].id}`,
-      );
+      // Compact indices for this list to sequential values (0..n-1) preserving order
+      await tx.execute(sql`
+        WITH ordered AS (
+          SELECT id, ROW_NUMBER() OVER (ORDER BY "index", id) - 1 AS new_index
+          FROM "card"
+          WHERE "listId" = ${result[0].listId} AND "deletedAt" IS NULL
+        )
+        UPDATE "card" c
+        SET "index" = o.new_index
+        FROM ordered o
+        WHERE c.id = o.id;
+      `);
+
+      // Last resort: verify fix; rollback if duplicates persist
+      const postFixDupes = await tx
+        .select({ index: cards.index, count: countExpr })
+        .from(cards)
+        .where(and(eq(cards.listId, result[0].listId), isNull(cards.deletedAt)))
+        .groupBy(cards.listId, cards.index)
+        .having(gt(countExpr, 1));
+
+      if (postFixDupes.length > 0) {
+        throw new Error(
+          `Invariant violation: duplicate card indices remain after compaction in list ${result[0].listId}`,
+        );
+      }
     }
 
     return result[0];
@@ -219,11 +242,95 @@ export const bulkCreate = async (
     importId?: number;
   }[],
 ) => {
-  const result = await db.insert(cards).values(cardInput).returning({
-    id: cards.id,
-  });
+  if (cardInput.length === 0) return [];
 
-  return result;
+  return db.transaction(async (tx) => {
+    // Group incoming cards by list to compute safe, sequential indices per list
+    const byList = new Map<number, typeof cardInput>();
+    for (const item of cardInput) {
+      const arr = byList.get(item.listId) ?? [];
+      arr.push(item);
+      byList.set(item.listId, arr);
+    }
+
+    const allValuesToInsert: {
+      publicId: string;
+      title: string;
+      description: string;
+      createdBy: string;
+      listId: number;
+      index: number;
+      importId?: number;
+    }[] = [];
+
+    // For each list, append incoming cards after current max index, preserving incoming order
+    for (const [listId, items] of byList.entries()) {
+      const last = await tx.query.cards.findFirst({
+        columns: { index: true },
+        where: and(eq(cards.listId, listId), isNull(cards.deletedAt)),
+        orderBy: [desc(cards.index)],
+      });
+
+      let nextIndex = last ? last.index + 1 : 0;
+      const sorted = [...items].sort((a, b) => a.index - b.index);
+      for (const it of sorted) {
+        allValuesToInsert.push({
+          publicId: it.publicId,
+          title: it.title,
+          description: it.description,
+          createdBy: it.createdBy,
+          listId: it.listId,
+          index: nextIndex++,
+          importId: it.importId,
+        });
+      }
+    }
+
+    const inserted = await tx
+      .insert(cards)
+      .values(allValuesToInsert)
+      .returning({ id: cards.id });
+
+    // Post-insert: compact per list if duplicates exist; then verify
+    const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
+    for (const listId of byList.keys()) {
+      const duplicateIndices = await tx
+        .select({ index: cards.index, count: countExpr })
+        .from(cards)
+        .where(and(eq(cards.listId, listId), isNull(cards.deletedAt)))
+        .groupBy(cards.listId, cards.index)
+        .having(gt(countExpr, 1));
+
+      if (duplicateIndices.length > 0) {
+        await tx.execute(sql`
+          WITH ordered AS (
+            SELECT id, ROW_NUMBER() OVER (ORDER BY "index", id) - 1 AS new_index
+            FROM "card"
+            WHERE "listId" = ${listId} AND "deletedAt" IS NULL
+          )
+          UPDATE "card" c
+          SET "index" = o.new_index
+          FROM ordered o
+          WHERE c.id = o.id;
+        `);
+
+        const postFixDupes = await tx
+          .select({ index: cards.index, count: countExpr })
+          .from(cards)
+          .where(and(eq(cards.listId, listId), isNull(cards.deletedAt)))
+          .groupBy(cards.listId, cards.index)
+          .having(gt(countExpr, 1));
+
+        if (postFixDupes.length > 0) {
+          throw new Error(
+            `Invariant violation: duplicate card indices remain after compaction in list ${listId}`,
+          );
+        }
+      }
+    }
+
+    return inserted;
+  });
 };
 
 export const createCardLabelRelationship = async (
@@ -606,9 +713,53 @@ export const reorder = async (
       .having(gt(countExpr, 1));
 
     if (duplicateIndices.length > 0) {
-      throw new Error(
-        `Duplicate indices found after reordering card ${card.id}`,
+      // Auto-heal by compacting indices for the affected list(s)
+      const affectedListIds = [currentList.id, newList?.id].filter(
+        (id): id is number => id !== undefined,
       );
+
+      if (affectedListIds.length === 1) {
+        await tx.execute(sql`
+          WITH ordered AS (
+            SELECT id, ROW_NUMBER() OVER (ORDER BY "index", id) - 1 AS new_index
+            FROM "card"
+            WHERE "listId" = ${affectedListIds[0]} AND "deletedAt" IS NULL
+          )
+          UPDATE "card" c
+          SET "index" = o.new_index
+          FROM ordered o
+          WHERE c.id = o.id;
+        `);
+      } else if (affectedListIds.length === 2) {
+        await tx.execute(sql`
+          WITH ordered AS (
+            SELECT id,
+                   ROW_NUMBER() OVER (PARTITION BY "listId" ORDER BY "index", id) - 1 AS new_index
+            FROM "card"
+            WHERE "listId" IN (${sql.join(affectedListIds, sql`,`)}) AND "deletedAt" IS NULL
+          )
+          UPDATE "card" c
+          SET "index" = o.new_index
+          FROM ordered o
+          WHERE c.id = o.id;
+        `);
+      }
+
+      // Verify fix and rollback if necessary
+      const postFixDupes = await tx
+        .select({ index: cards.index, count: countExpr })
+        .from(cards)
+        .where(
+          and(inArray(cards.listId, affectedListIds), isNull(cards.deletedAt)),
+        )
+        .groupBy(cards.listId, cards.index)
+        .having(gt(countExpr, 1));
+
+      if (postFixDupes.length > 0) {
+        throw new Error(
+          `Invariant violation: duplicate card indices remain after compaction for card ${card.id}`,
+        );
+      }
     }
 
     const updatedCard = await tx.query.cards.findFirst({
