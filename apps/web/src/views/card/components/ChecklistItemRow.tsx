@@ -26,7 +26,6 @@ export default function ChecklistItemRow({
   const { showPopup } = usePopup();
 
   const [title, setTitle] = useState("");
-  const [completed, setCompleted] = useState(false);
 
   const updateItem = api.checklist.updateItem.useMutation({
     onMutate: async (vars) => {
@@ -97,9 +96,8 @@ export default function ChecklistItemRow({
   // Only resync from props when switching items to avoid clobbering edits
   useEffect(() => {
     setTitle(item.title);
-    setCompleted(item.completed);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [item.publicId]);
+    // keep checkbox controlled by props; no local completed state
+  }, [item.publicId, item.title]);
 
   const sanitizeHtmlToPlainText = (html: string): string =>
     html
@@ -111,10 +109,9 @@ export default function ChecklistItemRow({
 
   const handleToggleCompleted = () => {
     if (viewOnly) return;
-    setCompleted((prev) => !prev);
     updateItem.mutate({
       checklistItemPublicId: item.publicId,
-      completed: !completed,
+      completed: !item.completed,
     });
   };
 
@@ -144,7 +141,7 @@ export default function ChecklistItemRow({
       >
         <input
           type="checkbox"
-          checked={completed}
+          checked={item.completed}
           onChange={(e) => {
             if (viewOnly) {
               e.preventDefault();

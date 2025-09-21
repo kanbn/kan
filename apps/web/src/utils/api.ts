@@ -1,7 +1,12 @@
 import type { TRPCLink } from "@trpc/client";
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { QueryClient } from "@tanstack/react-query";
-import { httpBatchLink, loggerLink } from "@trpc/client";
+import {
+  httpBatchLink,
+  httpSubscriptionLink,
+  loggerLink,
+  splitLink,
+} from "@trpc/client";
 import { createTRPCNext } from "@trpc/next";
 import { observable } from "@trpc/server/observable";
 import superjson from "superjson";
@@ -56,14 +61,28 @@ export const api = createTRPCNext<AppRouter>({
             (opts.direction === "down" && opts.result instanceof Error),
         }),
         authLink,
-        httpBatchLink({
-          url: `${getBaseUrl()}/api/trpc`,
-          transformer: superjson,
+        splitLink({
+          condition(op) {
+            return op.type === "subscription";
+          },
+          true: httpSubscriptionLink({
+            url: `${getBaseUrl()}/api/trpc`,
+            transformer: superjson,
+            // Important: include cookies so protected subscriptions authenticate
+            eventSourceOptions: {
+              withCredentials: true,
+            },
+          }),
+          false: httpBatchLink({
+            url: `${getBaseUrl()}/api/trpc`,
+            transformer: superjson,
+          }),
         }),
       ],
       queryClient: queryClient,
     };
   },
+  transformer: superjson,
   ssr: false,
 });
 

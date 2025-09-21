@@ -1,4 +1,5 @@
-import { TRPCError } from "@trpc/server";
+import { on } from "events";
+import { tracked, TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import * as boardRepo from "@kan/db/repository/board.repo";
@@ -10,10 +11,55 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { colours } from "@kan/shared/constants";
 import { generateSlug, generateUID } from "@kan/shared/utils";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { boardTopic, eventBus } from "../events";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+  subscriptionProcedure,
+} from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
 
 export const boardRouter = createTRPCRouter({
+  events: protectedProcedure
+    .meta({
+      openapi: {
+        enabled: false,
+        method: "GET",
+        path: "/boards/{boardPublicId}/events",
+      },
+    })
+    .input(
+      z.object({
+        boardPublicId: z.string().min(12),
+        lastEventId: z.string().nullish().optional(),
+      }),
+    )
+    .subscription(async function* ({ ctx, input, signal }) {
+      const userId = ctx.user?.id;
+      if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+      const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
+        ctx.db,
+        input.boardPublicId,
+      );
+      if (!board)
+        throw new TRPCError({
+          message: `Board with public ID ${input.boardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+
+      // Listen for new events for this board
+      for await (const [data] of on(eventBus, boardTopic(board.id), {
+        signal,
+      })) {
+        // We don't have persisted event IDs; use Date.now() as monotonic-ish id
+        const id = Date.now().toString();
+        yield tracked(id, data as unknown);
+      }
+    }),
   all: protectedProcedure
     .meta({
       openapi: {

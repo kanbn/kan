@@ -71,7 +71,11 @@ export const create = async (
         listId: cardInput.listId,
         index: index,
       })
-      .returning({ id: cards.id, listId: cards.listId });
+      .returning({
+        id: cards.id,
+        listId: cards.listId,
+        publicId: cards.publicId,
+      });
 
     if (!result[0]) throw new Error("Unable to create card");
 
@@ -193,6 +197,42 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
     },
     where: eq(cards.publicId, cardPublicId),
   });
+};
+
+// Convenience: resolve boardId from cardId
+export const getBoardIdByCardId = async (db: dbClient, id: number) => {
+  const result = await db.query.cards.findFirst({
+    columns: { id: true },
+    with: {
+      list: {
+        columns: { boardId: true },
+      },
+    },
+    where: eq(cards.id, id),
+  });
+  return result?.list.boardId ?? null;
+};
+
+// Resolve board publicId from a card publicId, regardless of card.deletedAt
+export const getBoardPublicIdByCardPublicId = async (
+  db: dbClient,
+  cardPublicId: string,
+) => {
+  const result = await db.query.cards.findFirst({
+    columns: { id: true },
+    with: {
+      list: {
+        columns: {},
+        with: {
+          board: {
+            columns: { publicId: true },
+          },
+        },
+      },
+    },
+    where: eq(cards.publicId, cardPublicId),
+  });
+  return result?.list.board.publicId ?? null;
 };
 
 export const getCardLabelRelationship = async (
