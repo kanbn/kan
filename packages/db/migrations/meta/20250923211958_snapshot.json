@@ -1,5 +1,5 @@
 {
-  "id": "1191cdae-d6ae-4120-959f-533391f11bdd",
+  "id": "50c69532-017e-43df-8969-7c811cbc1fda",
   "prevId": "114f5db6-01fd-41b6-8125-e23f84424560",
   "version": "7",
   "dialect": "postgresql",
@@ -2534,6 +2534,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "publicId": {
+          "name": "publicId",
+          "type": "varchar(12)",
+          "primaryKey": false,
+          "notNull": true
+        },
         "workspaceId": {
           "name": "workspaceId",
           "type": "bigint",
@@ -2566,6 +2572,24 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
+        },
+        "createdBy": {
+          "name": "createdBy",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updatedBy": {
+          "name": "updatedBy",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -2582,10 +2606,43 @@
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
+        },
+        "workspace_invite_links_createdBy_user_id_fk": {
+          "name": "workspace_invite_links_createdBy_user_id_fk",
+          "tableFrom": "workspace_invite_links",
+          "tableTo": "user",
+          "columnsFrom": [
+            "createdBy"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "workspace_invite_links_updatedBy_user_id_fk": {
+          "name": "workspace_invite_links_updatedBy_user_id_fk",
+          "tableFrom": "workspace_invite_links",
+          "tableTo": "user",
+          "columnsFrom": [
+            "updatedBy"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
+        "workspace_invite_links_publicId_unique": {
+          "name": "workspace_invite_links_publicId_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "publicId"
+          ]
+        },
         "workspace_invite_links_code_unique": {
           "name": "workspace_invite_links_code_unique",
           "nullsNotDistinct": false,
