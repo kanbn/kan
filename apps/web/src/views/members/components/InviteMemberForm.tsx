@@ -3,7 +3,12 @@ import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { HiXMark } from "react-icons/hi2";
+import {
+  HiInformationCircle,
+  HiMiniCheck,
+  HiOutlineDocumentDuplicate,
+  HiXMark,
+} from "react-icons/hi2";
 import { z } from "zod";
 
 import type { InviteMemberInput } from "@kan/api/types";
@@ -31,7 +36,11 @@ export function InviteMemberForm({
   userId: string | undefined;
 }) {
   const utils = api.useUtils();
-  const [isCreateAnotherEnabled, setIsCreateAnotherEnabled] = useState(false);
+  const [isShareInviteLinkEnabled, setIsShareInviteLinkEnabled] =
+    useState(false);
+  const [inviteLink, setInviteLink] = useState<string>("");
+  const [isLoadingInviteLink, setIsLoadingInviteLink] = useState(false);
+  const [copied, setCopied] = useState(false);
   const { closeModal } = useModal();
   const { workspace } = useWorkspace();
   const { showPopup } = usePopup();
@@ -56,6 +65,21 @@ export function InviteMemberForm({
 
   const refetchBoards = () => utils.board.all.refetch();
 
+  // Fetch active invite link on component mount
+  const { data: activeInviteLink, refetch: refetchInviteLink } =
+    api.member.getActiveInviteLink.useQuery(
+      { workspacePublicId: workspace.publicId || "" },
+      { enabled: !!workspace.publicId },
+    );
+
+  // Set initial state based on active invite link
+  useEffect(() => {
+    if (activeInviteLink) {
+      setIsShareInviteLinkEnabled(activeInviteLink.isActive);
+      setInviteLink(activeInviteLink.inviteLink || "");
+    }
+  }, [activeInviteLink]);
+
   const inviteMember = api.member.invite.useMutation({
     onSuccess: async () => {
       closeModal();
@@ -64,7 +88,7 @@ export function InviteMemberForm({
     },
     onError: (error) => {
       reset();
-      if (!isCreateAnotherEnabled) closeModal();
+      if (!isShareInviteLinkEnabled) closeModal();
 
       if (error.data?.code === "CONFLICT") {
         showPopup({
@@ -79,6 +103,36 @@ export function InviteMemberForm({
           icon: "error",
         });
       }
+    },
+  });
+
+  const createInviteLink = api.member.createInviteLink.useMutation({
+    onSuccess: (data) => {
+      setInviteLink(data.inviteLink);
+      setIsLoadingInviteLink(false);
+    },
+    onError: () => {
+      setIsLoadingInviteLink(false);
+      showPopup({
+        header: t`Error creating invite link`,
+        message: t`Please try again later.`,
+        icon: "error",
+      });
+    },
+  });
+
+  const deactivateInviteLink = api.member.deactivateInviteLink.useMutation({
+    onSuccess: () => {
+      setInviteLink("");
+      setIsLoadingInviteLink(false);
+    },
+    onError: () => {
+      setIsLoadingInviteLink(false);
+      showPopup({
+        header: t`Error deactivating invite link`,
+        message: t`Please try again later.`,
+        icon: "error",
+      });
     },
   });
 
@@ -107,6 +161,43 @@ export function InviteMemberForm({
 
   const onSubmit = (member: InviteMemberInput) => {
     inviteMember.mutate(member);
+  };
+
+  const handleInviteLinkToggle = async () => {
+    setIsLoadingInviteLink(true);
+
+    if (isShareInviteLinkEnabled && workspace.publicId) {
+      // Deactivate invite link
+      await deactivateInviteLink.mutateAsync({
+        workspacePublicId: workspace.publicId,
+      });
+      setIsShareInviteLinkEnabled(false);
+    } else {
+      // Create new invite link
+      await createInviteLink.mutateAsync({
+        workspacePublicId: workspace.publicId,
+      });
+      setIsShareInviteLinkEnabled(true);
+    }
+  };
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(inviteLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+      showPopup({
+        header: t`Invite link copied`,
+        message: t`Invite link copied to clipboard`,
+        icon: "success",
+      });
+    } catch (error) {
+      showPopup({
+        header: t`Error`,
+        message: t`Failed to copy invite link`,
+        icon: "error",
+      });
+    }
   };
 
   const handleUpgrade = async () => {
@@ -173,6 +264,34 @@ export function InviteMemberForm({
           }}
           errorMessage={errors.email?.message}
         />
+        {isShareInviteLinkEnabled && inviteLink && (
+          <div className="my-4">
+            <div className="relative">
+              <Input
+                value={inviteLink}
+                className="pr-10 text-sm text-light-900 dark:text-dark-900"
+                readOnly
+              />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-light-900 hover:text-light-950 dark:text-dark-900 dark:hover:text-dark-950"
+                onClick={copyToClipboard}
+              >
+                {copied ? (
+                  <HiMiniCheck className="h-5 w-5 text-green-600" />
+                ) : (
+                  <HiOutlineDocumentDuplicate className="h-5 w-5" />
+                )}
+              </button>
+            </div>
+            <div className="mt-2 flex items-start gap-1">
+              <HiInformationCircle className="mt-0.5 h-4 w-4 text-dark-900" />
+              <p className="text-xs text-gray-500 dark:text-dark-900">
+                {t`Anyone with this link can join your workspace`}
+              </p>
+            </div>
+          </div>
+        )}
 
         {env("NEXT_PUBLIC_KAN_ENV") === "cloud" && (
           <div className="mt-3 rounded-md bg-light-100 p-3 text-xs text-light-900 dark:bg-dark-200 dark:text-dark-900">
@@ -205,11 +324,9 @@ export function InviteMemberForm({
         {(hasTeamSubscription || hasProSubscription) &&
           env("NEXT_PUBLIC_KAN_ENV") === "cloud" && (
             <Toggle
-              label={t`Invite another`}
-              isChecked={isCreateAnotherEnabled}
-              onChange={() =>
-                setIsCreateAnotherEnabled(!isCreateAnotherEnabled)
-              }
+              label={t`Share invite link`}
+              isChecked={isShareInviteLinkEnabled}
+              onChange={handleInviteLinkToggle}
             />
           )}
         <div>
@@ -226,7 +343,7 @@ export function InviteMemberForm({
           ) : (
             <Button
               type="submit"
-              disabled={inviteMember.isPending}
+              disabled={inviteMember.isPending || isShareInviteLinkEnabled}
               isLoading={inviteMember.isPending}
               className="inline-flex w-full justify-center rounded-md bg-light-1000 px-3 py-2 text-sm font-semibold text-light-50 shadow-sm focus-visible:outline-none dark:bg-dark-1000 dark:text-dark-50"
             >

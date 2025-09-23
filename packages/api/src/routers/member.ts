@@ -1,14 +1,19 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
+import * as inviteLinkRepo from "@kan/db/repository/inviteLink.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import { getSubscriptionByPlan, hasUnlimitedSeats } from "@kan/shared/utils";
+import {
+  generateUID,
+  getSubscriptionByPlan,
+  hasUnlimitedSeats,
+} from "@kan/shared/utils";
 import { updateSubscriptionSeats } from "@kan/stripe";
 
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
 
 export const memberRouter = createTRPCRouter({
@@ -240,5 +245,339 @@ export const memberRouter = createTRPCRouter({
       }
 
       return { success: true };
+    }),
+  getActiveInviteLink: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Get active invite link for workspace",
+        method: "GET",
+        path: "/workspaces/{workspacePublicId}/invite",
+        description: "Gets the active invite link for a workspace",
+        tags: ["Invites"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+      }),
+    )
+    .output(
+      z.object({
+        id: z.number().optional(),
+        inviteCode: z.string().optional(),
+        inviteLink: z.string().optional(),
+        isActive: z.boolean(),
+        expiresAt: z.date().optional(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace)
+        throw new TRPCError({
+          message: `Workspace not found`,
+          code: "NOT_FOUND",
+        });
+
+      // Check if user is in workspace
+      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+
+      // Get active invite link for this workspace
+      const activeInviteLink = await inviteLinkRepo.getActiveForWorkspace(
+        ctx.db,
+        workspace.id,
+      );
+
+      if (
+        activeInviteLink &&
+        (!activeInviteLink.expiresAt || new Date() < activeInviteLink.expiresAt)
+      ) {
+        return {
+          id: activeInviteLink.id,
+          inviteCode: activeInviteLink.code,
+          inviteLink: `${process.env.NEXT_PUBLIC_BASE_URL}/invite/${activeInviteLink.code}`,
+          isActive: true,
+          expiresAt: activeInviteLink.expiresAt ?? undefined,
+        };
+      }
+
+      return { isActive: false };
+    }),
+  createInviteLink: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Create invite link for workspace",
+        method: "POST",
+        path: "/workspaces/{workspacePublicId}/invites",
+        description: "Create invite link for a workspace",
+        tags: ["Invites"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+      }),
+    )
+    .output(
+      z.object({
+        publicId: z.string().min(12),
+        inviteCode: z.string(),
+        inviteLink: z.string(),
+        expiresAt: z.date().nullable(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace)
+        throw new TRPCError({
+          message: `Workspace not found`,
+          code: "NOT_FOUND",
+        });
+
+      // Check if user is in workspace
+      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+
+      // Deactivate any existing active invite links
+      await inviteLinkRepo.deactivateAllActiveForWorkspace(ctx.db, {
+        workspaceId: workspace.id,
+        updatedBy: userId,
+      });
+
+      // Generate new invite code
+      const inviteCode = generateUID();
+      const expiresAt = new Date();
+      expiresAt.setDate(expiresAt.getDate() + 7);
+
+      // Create new invite link
+      const inviteLink = await inviteLinkRepo.createInviteLink(ctx.db, {
+        workspaceId: workspace.id,
+        code: inviteCode,
+        expiresAt,
+        createdBy: userId,
+      });
+
+      if (!inviteLink) {
+        throw new TRPCError({
+          message: `Failed to create invite link`,
+          code: "INTERNAL_SERVER_ERROR",
+        });
+      }
+
+      return {
+        publicId: inviteLink.publicId,
+        inviteCode: inviteLink.code,
+        inviteLink: `${process.env.NEXT_PUBLIC_BASE_URL}/invite/${inviteLink.code}`,
+        expiresAt: inviteLink.expiresAt,
+      };
+    }),
+  deactivateInviteLink: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Deactivate invite link for workspace",
+        method: "DELETE",
+        path: "/workspaces/{workspacePublicId}/invites",
+        description: "Deactivates the invite link for a workspace",
+        tags: ["Invites"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+      }),
+    )
+    .output(
+      z.object({
+        success: z.boolean(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace)
+        throw new TRPCError({
+          message: `Workspace not found`,
+          code: "NOT_FOUND",
+        });
+
+      // Check if user is in workspace
+      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+
+      // Deactivate all active invite links
+      await inviteLinkRepo.deactivateAllActiveForWorkspace(ctx.db, {
+        workspaceId: workspace.id,
+        updatedBy: userId,
+      });
+
+      return { success: true };
+    }),
+  getInviteByCode: publicProcedure
+    .meta({
+      openapi: {
+        summary: "Get invite information by code",
+        method: "GET",
+        path: "/workspaces/{workspacePublicId}/invites/{inviteCode}",
+        description: "Get invite information by invite code",
+        tags: ["Invites"],
+        protect: false,
+      },
+    })
+    .input(
+      z.object({
+        inviteCode: z.string().min(12),
+      }),
+    )
+    .output(
+      z
+        .object({
+          publicId: z.string().min(12),
+          status: z.string(),
+          expiresAt: z.date().nullable(),
+        })
+        .optional(),
+    )
+    .query(async ({ ctx, input }) => {
+      const invite = await inviteLinkRepo.getByCode(ctx.db, input.inviteCode);
+
+      if (
+        !invite ||
+        invite.status !== "active" ||
+        (invite.expiresAt && new Date() > invite.expiresAt)
+      ) {
+        throw new TRPCError({
+          message: `Invalid or expired invite link`,
+          code: "BAD_REQUEST",
+        });
+      }
+
+      return {
+        publicId: invite.publicId,
+        status: invite.status,
+        expiresAt: invite.expiresAt ?? null,
+      };
+    }),
+  acceptInviteLink: publicProcedure
+    .meta({
+      openapi: {
+        summary: "Accept an invite link",
+        method: "POST",
+        path: "/workspaces/{workspacePublicId}/invites/accept",
+        description: "Accepts an invitation via invite link",
+        tags: ["Invites"],
+        protect: false,
+      },
+    })
+    .input(
+      z.object({
+        inviteCode: z.string().min(12),
+      }),
+    )
+    .output(
+      z.object({
+        success: z.boolean(),
+        workspacePublicId: z.string().optional(),
+        workspaceSlug: z.string().optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const invite = await inviteLinkRepo.getByCode(ctx.db, input.inviteCode);
+
+      if (
+        !invite ||
+        invite.status !== "active" ||
+        (invite.expiresAt && new Date() > invite.expiresAt)
+      )
+        throw new TRPCError({
+          message: `Invalid or expired invite link`,
+          code: "BAD_REQUEST",
+        });
+
+      const workspace = await workspaceRepo.getById(ctx.db, invite.workspaceId);
+
+      if (!workspace)
+        throw new TRPCError({
+          message: `Workspace not found`,
+          code: "NOT_FOUND",
+        });
+
+      const isMember = await workspaceRepo.isUserInWorkspace(
+        ctx.db,
+        userId,
+        invite.workspaceId,
+      );
+
+      if (isMember) {
+        throw new TRPCError({
+          message: `User is already a member of this workspace`,
+          code: "CONFLICT",
+        });
+      }
+
+      const user = await userRepo.getById(ctx.db, userId);
+
+      if (!user)
+        throw new TRPCError({
+          message: `User not found`,
+          code: "NOT_FOUND",
+        });
+
+      await memberRepo.create(ctx.db, {
+        workspaceId: invite.workspaceId,
+        email: user.email,
+        userId: user.id,
+        createdBy: user.id,
+        role: "member",
+        status: "active",
+      });
+
+      return {
+        success: true,
+        workspacePublicId: workspace.publicId,
+        workspaceSlug: workspace.slug,
+      };
     }),
 });
