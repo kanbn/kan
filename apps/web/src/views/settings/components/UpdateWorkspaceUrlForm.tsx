@@ -98,7 +98,7 @@ const UpdateWorkspaceUrlForm = ({
     if (!isWorkspaceSlugAvailable?.isAvailable) return;
 
     if (workspacePlan !== "pro" && env("NEXT_PUBLIC_KAN_ENV") === "cloud")
-      return openModal("UPDATE_WORKSPACE_URL", data.slug);
+      return openModal("UPGRADE_TO_PRO", data.slug);
 
     updateWorkspaceSlug.mutate({
       workspacePublicId,
@@ -138,22 +138,23 @@ const UpdateWorkspaceUrlForm = ({
           }
         />
       </div>
-      <div>
-        <Button
-          onClick={handleSubmit(onSubmit)}
-          variant="primary"
-          disabled={
-            !isDirty ||
-            updateWorkspaceSlug.isPending ||
-            checkWorkspaceSlugAvailability.isPending ||
-            isWorkspaceSlugAvailable?.isAvailable === false ||
-            isTyping
-          }
-          isLoading={updateWorkspaceSlug.isPending}
-        >
-          {t`Update`}
-        </Button>
-      </div>
+      {isDirty && (
+        <div>
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            variant="primary"
+            disabled={
+              updateWorkspaceSlug.isPending ||
+              checkWorkspaceSlugAvailability.isPending ||
+              isWorkspaceSlugAvailable?.isAvailable === false ||
+              isTyping
+            }
+            isLoading={updateWorkspaceSlug.isPending}
+          >
+            {t`Update`}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

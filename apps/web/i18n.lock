@@ -6,8 +6,11 @@ checksums:
     "%7B0%7D%20%7C%20%7B1%7D/singular": 4628f9c6ec13c2dc2984a6ab80e19f8b
     "%7B0%7D%20labels/singular": 785f92bedf786ff3e285adfc07c69d18
     "%7BboardCount%2C%20plural%2C%20one%20%7BImport%20board%20(1)%7D%20other%20%7BImport%20boards%20(%7BboardCount%7D)%7D%7D/singular": 72358c550bd1a99fcb6e8952f0f947ef
+    "%2410%2Fmonth/singular": cab5e752ed83096e34fca780d90e1fb9
+    "%248%2Fmonth/singular": 4667034934bb2bc3d569c70b94205b51
     1%20user/singular: 3b547431ab12f0fba84307e6a81109d8
     A%20powerful%2C%20flexible%20kanban%20app%20that%20helps%20you%20organise%20work%2C%20track%20progress%2C%20and%20deliver%20results%E2%80%94all%20in%20one%20place./singular: d405b83b0d631cb72f4347c10bcbb643
+    Account/singular: 01215c12fb1cdb93bd0c84c1382bef56
     Account%20deleted/singular: a25da96a1579c4491be0a95669ef18a4
     Activity/singular: 1948763de8e531483a798b68195e297e
     Activity%20logs/singular: 8b1f0bb96a905646ecfad1cfdfa42168
@@ -26,12 +29,18 @@ checksums:
     added%20checklist%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: fb6a852c50c1629f47c6f155fc93fdee
     added%20checklist%20item%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: bdd202da20b1fffbec21792c5453f90c
     added%20label%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: b32be052b3d57de0c9120fa7f9fc86ee
+    Adding%20a%20new%20member%20will%20cost%20an%20additional%20%7Bprice%7D%20(%7BbillingType%7D)%20per%20seat./singular: 12e88573028306110fbc15ef1e714892
+    Adjust%20the%20square%20crop%20to%20fit%20your%20avatar./singular: a4df26bbce6f14c6962fac1324db00a8
     Admin%20roles/singular: 32a5d78073b9bb9a246773afba8831df
-    All%20seats%20are%20free%20during%20the%20beta%20until%20Sept%201st!/singular: 015cec3899cf99e37c3cf231d432e31d
     All%20systems%20operational/singular: ee943a4046b09e6334cceeea9fda2bfc
     Already%20have%20an%20account%3F%20%3C0%3E%3C1%3ESign%20in%3C%2F1%3E%3C%2F0%3E/singular: 2959fd276248208b65cb27ed46b20135
     An%20error%20occurred%20while%20disconnecting%20your%20Trello%20account./singular: 0aa3973b860c1faf8d9123aebf567e40
     An%20unexpected%20error%20occurred.%20Please%20try%20again%20later./singular: 1b5749b0cca6a62d75a577bee6804074
+    API/singular: 01d9819514e27056dcc69463194b63d2
+    API%20key%20created/singular: 8dbb2b60a719b0d120e774d6666c8c45
+    API%20key%20name/singular: 2d8aeb08b2cce3b750a584bbc5ce6d1d
+    API%20key%20name%20cannot%20exceed%2030%20characters/singular: 3ea1c7d68e1074a75128017b097b727a
+    API%20key%20name%20is%20required/singular: 870970743b14cb56e7fb7b410af0e933
     API%20keys/singular: 07f3620a30e08136f0b072c9af8d1eef
     API%20Reference/singular: 7dcc877064bfdf889ec55dbc9e06a242
     Applicants/singular: 4babd8331a1441e91087f855f43e57f8
@@ -47,10 +56,13 @@ checksums:
     Awaiting%20Customer/singular: 122c108794f321c10e05a08f09b11457
     Backlog/singular: 35919fd5b10ad212839a75e72829fe4e
     Basic%20Kanban/singular: e46ebc406749486f3907436970d4d6c7
+    billed%20annually/singular: c782a8085ffee456bfc56c34ccc5e71c
+    billed%20monthly/singular: 793f2728acf06e9f06d6cdc26dfcf0cd
     Billing/singular: b01dbdd049ebbd4a349fa64d6ce65a3b
     Billing%20portal/singular: dc3afa14ffe19f5920992a0c9d49d525
     Blog%20Post/singular: 38e027f212be445dc530e427fc642a20
     Board/singular: 101ff39aab674c033c15ab978d0d8bac
+    Board%20analytics/singular: 336a8c70a91adc49c15266167ee84cc0
     Board%20name%20cannot%20exceed%20100%20characters/singular: 985c0177744ec56d8dac84f66ec284ca
     Board%20name%20is%20required/singular: dbd0c6cc945ab19e702fc27f970a023b
     Board%20not%20found/singular: 5af9844595fa8aed5985066620435515
@@ -69,11 +81,12 @@ checksums:
     Card%20not%20found/singular: 91509e2f92b0b3b11330b6983139fdbf
     Card%20title/singular: 7c34f59f4005e6cb3a6ff546ea0b96e3
     Change%20Password/singular: a552fc5c4189ebc3e2e6018edda7d18f
-    Change%20the%20language%20of%20the%20app./singular: fb20db145e28ed44aba89c146ded7bfc
+    Change%20your%20language%20preferences./singular: 293d49fc3c75e9c425b64bd7126e6b46
     Check%20your%20inbox/singular: e9a430fcd298def74212238df0f680d6
     Checklist%20name/singular: 5eb5de823f7ca5a4d97bb41e6a3f675a
     Clear%20filters/singular: 8f40ab5af527e4b190da94e7b6221379
     Click%20on%20the%20link%20we've%20sent%20to%20%7BmagicLinkRecipient%7D%20to%20sign%20in./singular: 210b6ff8727f976182ec3f29ea3c7667
+    Close/singular: 2c2e22f8424a1031de89063bd0022e16
     Code%20Review/singular: a2da6c2339301e7c3ddf068c4ff9f7e8
     Collaborate%20seamlessly%20with%20your%20team./singular: c5f10e431aaf8b51519bc009a4a4080c
     Coming%20soon/singular: ee2b0671e00972773210c5be5a9ccb89
@@ -83,7 +96,6 @@ checksums:
     Complete%20control%20and%20ownership%3A/singular: 0d8b682ba873272217425ccfc96aa9cd
     completed%20a%20checklist%20item/singular: 757b04c6c80cc927e1c597c0ad4fda33
     completed%20checklist%20item%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: 71ec18acf051fc909a48a07ca3578673
-    Confirm%20URL%20change/singular: e14b4ce081d1ef6194b37e1814e97b39
     Confirm%20your%20new%20password/singular: a0d2935d7b63f8dd19d7c0de47524416
     Connect%20Trello/singular: 4440a0b9e387ef7136e3958e7a089213
     Connect%20your%20favorite%20tools%20to%20streamline%20your%20workflow./singular: 033c5dcdb059ccb634aef7fe63f2f45d
@@ -95,6 +107,7 @@ checksums:
     Continue%20with%20%7B0%7D/singular: 2eaf6e1da91e208f7c5fb6bf862fe8a6
     Control%20who%20can%20view%20and%20edit%20your%20boards./singular: 2a7e0bec29bac26280de707e2fe8bce5
     Create%20another/singular: 2de8a82a416eb78c0462aa36278edc9a
+    Create%20API%20key/singular: 70ed8431c6ed5f7fdef122cc34f75b41
     Create%20board/singular: 155b62818bfab0e34f0089e1b34a32f3
     Create%20card/singular: 32792935dd5837a9433909b04021c22b
     Create%20checklist/singular: 5cbca15a7004558c4e6d381f83a34da2
@@ -107,9 +120,11 @@ checksums:
     Create%20workspace/singular: 2e6718e79964ea5ce22d76c2189c77ca
     created%20the%20card/singular: 605475f5aaeb4dbccbf7c4eb9107b43d
     Critical/singular: eb327cd411b50aee954f8d1d215d003a
+    Crop%20your%20avatar/singular: eb25e2d5972ec36a0b40481c8136ab15
     Current%20password%20is%20required/singular: 72536bca9598680027f2be8ce80ac280
     Custom%20domain/singular: b09e7a9c187b7163b4a6cfc78042fe42
-    Custom%20URLs%20are%20a%20premium%20feature.%20You'll%20be%20directed%20to%20upgrade%20your%20account./singular: b52e4f6122cf739c9551d29beb89b25e
+    Custom%20URLs%20require%20upgrading%20to%20a%20Pro%20plan/singular: f7275e3b473b8f7b39dab6b37eb26fea
+    Custom%20workspace%20URL/singular: 7ba841d0946eb04fa3d17d74365be37b
     Customer%20Support/singular: 50e3c77e22e41061ca85ea2f02625a2e
     Dark/singular: 73e6e208ba628b26e90fcf6dce15e1b2
     Delete/singular: 8bcf303dd10a645b5baacb02b47d72c9
@@ -161,6 +176,8 @@ checksums:
     Error%20updating%20workspace%20description/singular: 7a9fd7c69b90ab848ee1f1d4a4995381
     Error%20updating%20workspace%20name/singular: 46025f42a7d5eff689e9cb8bed14a1e4
     Error%20updating%20workspace%20URL/singular: 9da6c012e1b512d8c7fbd812626c4675
+    Error%20upgrading%20subscription/singular: 57cc47581c7faaffb3b1721b6352b576
+    Error%20upgrading%20to%20Pro/singular: 934c6867d9bdbe6099b2c0f5a3107f78
     Error%20uploading%20profile%20image/singular: 0ba02753a797a74c6ea7b622c9f69c71
     Everything%20in%20the%20free%20plan%2C%20plus%3A/singular: 62b44c4973b92b806c69a4b15e0256dc
     Everything%20you%20need%2C%20free%20forever.%20Unlimited%20boards%2C%20unlimited%20lists%2C%20unlimited%20cards.%20Upgrade%20any%20time./singular: fa21632ab1468edf10acda2fe7b71323
@@ -176,6 +193,7 @@ checksums:
     Find%20answers%20to%20common%20questions%20about%20the%20project.%20Can't%20find%20what%20you're%20looking%20for%3F%20Feel%20free%20to%20%3C0%3Econtact%20us%3C%2F0%3E./singular: 4d99230dad703bf2d71ba670c2f79d3d
     For%20long-term%20sustainability%2C%20we%20recognise%20all%20good%20open%20source%20projects%20need%20a%20source%20of%20revenue.%20Ours%20comes%20from%20the%20paid%20cloud%20offering%20for%20workspaces%20with%20multiple%20users%20(free%20during%20the%20beta)%20and%20for%20custom%20workspace%20slugs.%20There's%20no%20obligation%20to%20use%20it%2C%20and%20you%20can%20self-host%20the%20software%20on%20your%20own%20infrastructure%20free%20of%20charge./singular: 4eedacd4311ff69bf0fd87083c90a268
     Free/singular: 0326365539c004f6088656f692602078
+    Free%20Plan/singular: c995acccc1e3cba379786892a5b4d4e5
     Free%2C%20forever/singular: ae4f2f81e88a50b5f250ef8e8e77e74b
     Full-time/singular: fe6e201f6676ae354111435cf6c76910
     Fun/singular: 395bdc48e943762b6cde649f4a96771d
@@ -216,6 +234,7 @@ checksums:
     Invite/singular: 181884cea804cbde665f160811ee7ad0
     Invite%20another/singular: acb543563dab7edbcf46060a53ade3a3
     Invite%20member/singular: ade922db1be6b26bc979565ce5de2bc7
+    Inviting%20members%20requires%20a%20Team%20Plan.%20You'll%20be%20redirected%20to%20upgrade%20your%20workspace./singular: 03eeed2d715e770259f722ba48a61ab3
     Junior/singular: ed1bd2c59a824fdcdd56fc8a0660fe9f
     Kanban%20is%20better%20with%20a%20team.%20Perfect%20for%20small%20and%20growing%20teams%20looking%20to%20collaborate./singular: a77bee43046b260797c8936ad23e9223
     Kanban%20reimagined/singular: 613ccfdd9f54c66cbf68cfa313498766
@@ -223,6 +242,9 @@ checksums:
     Labels/singular: 6f15627a90002323eac018274b6922d6
     Labels%20%26%20Filters/singular: 8f0bdd6084516f8241cb613178114390
     Language/singular: 277fd1a41cc237a437cd1d5e4a80463b
+    Launch%20offer/singular: 624592ba2ecf647a3fe60d493c1ee71a
+    Launch%20offer%3A%20Get%20unlimited%20members%20with%20Pro/singular: 8c1be80f5b2fcc112922282afbe30287
+    Launch%20offer%3A%20unlimited%20seats%20for%20just%20%2429%2Fmonth%20with%20Pro/singular: 235d1cda21811c296afdc0dcc438cc24
     Learning/singular: 90e91da3f870f065f2da9aa9adf53514
     Legal/singular: 00d3f08da61a21887009819cf93fb414
     License/singular: ac2bcac75151e2fcd9eb768cea275a77
@@ -241,11 +263,13 @@ checksums:
     Members/singular: 0932e80cba1e3e0a7f52bb67ff31da32
     Members%20%7C%20%7B0%7D/singular: a29e3e9f1076acd178c417d047584e88
     Monthly/singular: 818f1192e32bb855597f930d3e78806e
+    monthly%20billing/singular: e228107df80015377112d41f4f155cb3
     moved%20the%20card%20from%20%3C0%3E%7B0%7D%3C%2F0%3E%20to%3C1%3E%7B1%7D%3C%2F1%3E/singular: 11edf0427766c26db541d46379dc3c16
     moved%20the%20card%20to%20another%20list/singular: 2e8c41bfafb42fa299ce56e4300205ff
     Name/singular: 9368b5a047572b6051f334af5aa76819
     Need%20help%3F/singular: 04e7322f2d3ffb2d73ff2f64b71637c8
     New/singular: 126d036fae5fb6b629728ecb97e6195b
+    New%20API%20key/singular: db3088aedba6e4a99b46451c5b3d36ed
     New%20board/singular: 63f4e979e29a7fc2f5c09ff91fa75966
     New%20card/singular: a33f6219a756127f91c2523cfe845a19
     New%20checklist/singular: 58252b71e9693ae0f4d2d0b72108a569
@@ -273,6 +297,7 @@ checksums:
     Password%20Changed/singular: 1fcebe9ddb46f722a57f195efddc695d
     Password%20must%20be%20at%20least%208%20characters/singular: 4c30501d085eaccea47af34212bb26a7
     Passwords%20do%20not%20match/singular: 37ca1f4e0afc9a0b8e9617f767103c92
+    Paused/singular: edb1f7b7219e1c9b7aa67159090d6991
     Payment%20frequency/singular: 63ded0e4ffb462ca8bd33d38e4691d86
     Pending/singular: 030a6f3395d5d4efddd3cc67d6009039
     per%20user%2Fmonth/singular: 72af182c1ba6df6732640f4d8a78d360
@@ -288,6 +313,8 @@ checksums:
     Priority%20email%20support/singular: 678538c912a770b1e1416ecdb8e299b1
     Privacy%20policy/singular: 462c6a536b52873e4498785c66dd48c8
     Private/singular: d740d0660e68c61db1853489356030ae
+    Pro%20Plan/singular: 76a09fd843b496610f8cf1dced417b62
+    Pro%20Plan%20%E2%88%9E/singular: a898be9e4610706b9b8146a209e8ba16
     Profile%20image%20updated/singular: 1ba6609b50bc217a36ab659563e78dae
     Profile%20picture/singular: d9b5e595877ffe2557486a987dd28274
     Public/singular: c834f11dab0881632aded3f01d4f8fa9
@@ -309,7 +336,6 @@ checksums:
     Resolution/singular: 6d8bd9e1bd7dae5ae38c93061d32990e
     Resources/singular: ec7fb05ed963bb6781a35782b3475502
     Review/singular: 299f75db25382980b2895622d7712927
-    Revoke/singular: be57685a85b6dfeaeb6eab4e9560b520
     Roadmap/singular: c60f4a1acf30e566861bf130f13b9ae7
     Role/singular: 53743bbb6ca938f5b893552e839d067f
     Run%20on%20your%20own%20infrastructure/singular: eba804911562b8dbf9d69c3e27f1d708
@@ -324,7 +350,11 @@ checksums:
     Send%20feedback/singular: 9631cc08d49da04475b30a0d320ce97c
     Senior/singular: 3fff865dc00435f82896fc302ea45630
     Settings/singular: 8df6777277469c1fd88cc18dde2f1cc3
-    Settings%20%7C%20%7B0%7D/singular: b8fc73080bc9c8f4f1403b2a69bd1ac5
+    Settings%20%7C%20Account/singular: 050e18406849ec057edac877c297c3e1
+    Settings%20%7C%20API/singular: 85101e4b802a09ad9e3f01ff116f0894
+    Settings%20%7C%20Billing/singular: e44cba741d5414035a0b499c5766c203
+    Settings%20%7C%20Integrations/singular: d04992e28016452f6d3d7dcc0b592415
+    Settings%20%7C%20Workspace/singular: 5d0bacf7ff696da940f232df45edfd39
     Sign%20in/singular: cb8757c7450e17de1e226e82fb0fa4a2
     Sign%20up%20%7C%20kan.bn/singular: f3de2a110c90358e6eac07d0b2f663a6
     Sign%20up%20disabled/singular: 9581b1f75b404ac0ecb7e603e0d4189c
@@ -336,9 +366,11 @@ checksums:
     Software%20Development/singular: 67659097ef6bcb194839858b2c4f3a3c
     Star%20on%20Github/singular: e5cb0428f1ac6485688f120d78742875
     Success/singular: c43827becada6750f7a25890905f38b9
+    Supercharge%20your%20workspace%20for%20just%20%2429%2Fmonth.%20Here's%20what%20you'll%20get%3A/singular: 21af8119141afcce5f12da489f34db6a
     Support/singular: 55aab5fd0f31a9cb055a2edeeedfaf63
     Support%20the%20development%20of%20the%20project/singular: c63bab228ab2b1be4370c668a99cd278
     System/singular: 803281c327a02a2feba182f4a2b38311
+    Team%20Plan/singular: 3f0ae9c914f16ceb9a0d7db868f4aa20
     Teams/singular: b63448c05270497973ac4407047dae02
     Templates/singular: 8ed62f56c81fa96c0f3182acb331bf63
     Terms%20of%20service/singular: 0b8a8b23aff021a6cde79613fdb39c28
@@ -350,14 +382,18 @@ checksums:
     Theme/singular: 21fe00b7a518089576fb83c08631107a
     They%20won't%20be%20able%20to%20access%20this%20workspace./singular: 93b740350fe3430319fbca85349e41d9
     This%20action%20can't%20be%20undone./singular: cb222ff89715d8c971e8c25d121e1dbd
+    This%20API%20key%20will%20only%20be%20shown%20once.%20Please%20save%20it%20in%20a%20secure%20location./singular: 7df18d2978d317375f780822f8321c4d
     This%20board%20is%20private%20or%20does%20not%20exist/singular: a217ff3f04463b4df8c86adb6f83c6bc
     This%20board%20URL%20has%20already%20been%20taken/singular: 1d8b40332a031b5b77a3658e48dd51ca
     This%20will%20result%20in%20the%20permanent%20deletion%20of%20all%20data%20associated%20with%20this%20workspace./singular: a31141558af793635c1ddd2fa0a33499
     This%20will%20result%20in%20the%20permanent%20deletion%20of%20all%20data%20associated%20with%20your%20account./singular: b49224632bd6c3b7f5e462912aeb1081
+    This%20workspace%20URL%20has%20already%20been%20taken/singular: b455329e2a71da677acab91d3a00bad6
+    This%20workspace%20URL%20is%20reserved/singular: 7e47c892b93d4334c1606010c06e875e
     This%20workspace%20username%20has%20already%20been%20taken/singular: b7eadb89c615874f416d9658d0428c4c
     To%20Do/singular: d60813ea824f373462471e092d136eed
     Toggle%20menu/singular: 29dea3e0b6238874f8c7a27619df8e36
     Track%20all%20card%20changes%20with%20detailed%20activity%20history./singular: 0d3bac559c71ec4b8734f9f212320de5
+    Trello/singular: b5131f6488b5a439d58db3e22d6de45b
     Trello%20disconnected/singular: 54b24a3e6c9a7eedd8c8d1060ab1175d
     Trello%20imports/singular: 6827eca403faa8f89891d17827e72af9
     Triaging/singular: 1d40799fcae53a8a27688fdae2a48dee
@@ -390,6 +426,7 @@ checksums:
     Unlimited%20cards/singular: f44c1050c4d6aa39c8cdf5f4a7d12577
     Unlimited%20comments/singular: 31dbcf487c49a9997142e96bb3ab0040
     Unlimited%20lists/singular: 5c418701b27b9acbc5dd199719007362
+    Unlimited%20members/singular: f2949ca2dc18b0063af92e60779abb65
     Update/singular: 079fc039262fd31b10532929685c2d1b
     Update%20label/singular: 97880b503dfe956941c5f23025a1c102
     updated%20a%20checklist%20item/singular: 198e1d1d503f4b69b752dd84d0cc0e9d
@@ -397,6 +434,9 @@ checksums:
     updated%20the%20title/singular: 98cf8f12923ec1a58e767e3a40863b21
     updated%20the%20title%20to%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: aca196d729401d8adc5c8ca9d558840e
     Upgrade/singular: 63c3b52882e0d779859307d672c178c2
+    Upgrade%20to%20Pro/singular: 972773025e763ddf53273df6d37a729a
+    Upgrade%20to%20Pro%20(%2429%2Fmonth)/singular: 9a91ea70f5eb55aac96640bf0fd7feff
+    Upgrade%20to%20Team%20Plan/singular: 40e2ef151266937f8bbe63b3d361f645
     Urgent/singular: e79afcd4398e52e10e7e8243a7eecabe
     URL%20can%20only%20contain%20letters%2C%20numbers%2C%20and%20hyphens/singular: 875d37d2d920f98ef60a314eda8a5d9a
     URL%20cannot%20exceed%2024%20characters/singular: 395c25732b84ac1f5b63ee310da08e93
@@ -420,6 +460,7 @@ checksums:
     When%20Trello%20launched%20in%202011%2C%20it%20blew%20everyone%20away%20with%20its%20carefully%20designed%20simplicity%2C%20but%20over%20time%20(and%20atlassification)%20it%20lost%20its%20magic%20and%20grew%20into%20something%20closer%20to%20%22Jira%20Lite%22.%20This%20project%20is%20our%20attempt%20to%20recapture%20the%20original%20magic%20of%20Trello's%20simplicity%2C%20in%20open%20source./singular: 60a55e9bd16c3d1beff1a6c7633c5911
     Why%20make%20an%20open%20source%20Trello%3F/singular: 090833338ba8c64ef7a75e0f2615b34b
     Workspace/singular: b63ef0e99ee6f7fef6cbe4971ca6cf0f
+    Workspace%20created%20successfully.%20You%20can%20upgrade%20later%20in%20settings./singular: 8bbaba9f82ff076a08185ada1ee7eb94
     Workspace%20deleted/singular: bc5c267ce3f04de94ff1379cf2ca48a3
     Workspace%20description/singular: 7159d620b7ef5c5afef734989a5be08b
     Workspace%20description%20cannot%20exceed%20280%20characters/singular: d0e83b9a0304d7c36cf8c85d98783ce2
@@ -428,10 +469,12 @@ checksums:
     Workspace%20members/singular: 1857292f9567c556c781a23bd7e10544
     Workspace%20name/singular: 855614bbf862fd6a9f6a3e76943f92d4
     Workspace%20name%20cannot%20exceed%2024%20characters/singular: c8b8f79fb83abf8329cc34c1f51fcfc9
+    Workspace%20name%20is%20required/singular: b8c5162dd08c4d941bc57f9d0cbee451
     Workspace%20name%20must%20be%20at%20least%203%20characters%20long/singular: e448ea97418d44b18b4c21c22b8ba779
     Workspace%20name%20updated/singular: 3206ea410ee1ea4182b27ac0d89f92a1
     Workspace%20slug%20updated/singular: 527b92711d38cb35b40741df43aef047
     Workspace%20URL/singular: f4397a838da0f3a44cbd3ebe408ed6c3
+    workspace-url/singular: 2d034732ec536f3a2667f956fa50d394
     Writing/singular: 4f5f3ee3320c252921f80c42653c5d49
     Yearly/singular: 87f43e016c19cb25860f456549a2f431
     Yes%2C%20we%20offer%20an%20forever%20free%20plan%20for%20individual%20use.%20No%20restrictions%2C%20no%20paywalls%2C%20no%20limits./singular: 963cee303d0ff13c1719f4575e774fe3
@@ -441,6 +484,7 @@ checksums:
     You%20can%20self-host%20by%20following%20the%20instructions%20in%20our%20%3C0%3Erepo%3C%2F0%3E./singular: a6152a41b2d8f64d5a657e5b8bc808a9
     You%20have%20been%20logged%20in%20successfully./singular: ef8fad1dce13ae4112f17c5258655fea
     You%20have%20been%20signed%20up%20successfully./singular: f614a6e3b45f5ffb9a3b0fb420fef84b
+    You%20have%20unlimited%20seats%20with%20your%20Pro%20Plan.%20There%20is%20no%20additional%20charge%20for%20new%20members!/singular: e3dc59a5ba7211cd3d8516b3a79d85ca
     Your%20account%20has%20been%20deleted./singular: 8c8d944e07388c5877effdb2c2803dcf
     Your%20boards%20have%20been%20imported./singular: 403972e7a25afc2415762c1c2b1ec868
     Your%20display%20name%20has%20been%20updated./singular: 15e5fff36c554c16ec5214427fae1bf4

@@ -95,3 +95,15 @@ export const softDelete = async (
 
   return result;
 };
+
+export const unpauseAllMembers = async (db: dbClient, workspaceId: number) => {
+  await db
+    .update(workspaceMembers)
+    .set({ status: "active" })
+    .where(
+      and(
+        eq(workspaceMembers.workspaceId, workspaceId),
+        eq(workspaceMembers.status, "paused"),
+      ),
+    );
+};

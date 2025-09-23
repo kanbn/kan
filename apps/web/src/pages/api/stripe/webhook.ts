@@ -36,7 +36,7 @@ export default async function handler(
     const event = stripe.webhooks.constructEvent(
       rawBody,
       sig,
-      process.env.STRIPE_WEBHOOK_SECRET!,
+      process.env.STRIPE_WEBHOOK_SECRET_LEGACY!,
     );
 
     const { db } = await createNextApiContext(req);
@@ -47,9 +47,9 @@ export default async function handler(
 
         const metaData = checkoutSession.metadata;
 
-        if (metaData?.workspacePublicId && metaData.workspaceSlug) {
+        if (metaData?.workspacePublicId) {
           await workspaceRepo.update(db, metaData.workspacePublicId, {
-            slug: metaData.workspaceSlug,
+            ...(metaData.workspaceSlug && { slug: metaData.workspaceSlug }),
             plan: "pro",
           });
         }

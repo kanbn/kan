@@ -47,11 +47,15 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
   const [hasLoaded, setHasLoaded] = useState(false);
 
   const { data, isLoading } = api.workspace.all.useQuery();
+  const utils = api.useUtils();
 
   const switchWorkspace = (_workspace: Workspace) => {
     localStorage.setItem("workspacePublicId", _workspace.publicId);
 
     setWorkspace(_workspace);
+
+    // Refetch workspace data to ensure availableWorkspaces is up to date
+    void utils.workspace.all.refetch();
 
     router.push(`/boards`);
   };
@@ -66,21 +70,15 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
       localStorage.getItem("workspacePublicId");
 
     if (data.length) {
-      const workspaces = data
-        .map(({ workspace, role }) => {
-          if (!workspace) return;
-
-          return {
-            role,
-            publicId: workspace.publicId,
-            name: workspace.name,
-            slug: workspace.slug,
-            description: workspace.description,
-            plan: workspace.plan,
-            hasLoaded: true,
-          };
-        })
-        .filter((workspace) => workspace !== null) as Workspace[];
+      const workspaces = data.map(({ workspace, role }) => ({
+        role,
+        publicId: workspace.publicId,
+        name: workspace.name,
+        slug: workspace.slug,
+        description: workspace.description,
+        plan: workspace.plan,
+        hasLoaded: true,
+      })) as Workspace[];
 
       if (workspaces.length) setAvailableWorkspaces(workspaces);
     }
@@ -116,7 +114,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         role: primaryWorkspaceRole,
       });
     }
-  }, [data]);
+  }, [data, isLoading]);
 
   return (
     <WorkspaceContext.Provider

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 
 interface ModalState {
   contentType: string;
@@ -42,57 +42,59 @@ export const ModalProvider: React.FC<Props> = ({ children }) => {
   const entityId = currentModal?.entityId || "";
   const entityLabel = currentModal?.entityLabel || "";
 
-  const openModal = (
-    contentType: string,
-    entityId?: string,
-    entityLabel?: string,
-  ) => {
-    const newModal: ModalState = { contentType, entityId, entityLabel };
-    setModalStack((prev) => [...prev, newModal]);
-  };
+  const openModal = useCallback(
+    (contentType: string, entityId?: string, entityLabel?: string) => {
+      const newModal: ModalState = { contentType, entityId, entityLabel };
+      setModalStack((prev) => [...prev, newModal]);
+    },
+    [],
+  );
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setModalStack((prev) => {
       if (prev.length <= 1) {
         return [];
       }
       return prev.slice(0, -1);
     });
-  };
+  }, []);
 
-  const closeModals = (count: number) => {
-    setModalStack(prev => {
+  const closeModals = useCallback((count: number) => {
+    setModalStack((prev) => {
       const newLength = Math.max(0, prev.length - count);
       return prev.slice(0, newLength);
     });
-  };
+  }, []);
 
-  const clearAllModals = () => {
+  const clearAllModals = useCallback(() => {
     setModalStack([]);
-  };
+  }, []);
 
-  const setModalState = (modalType: string, state: any) => {
+  const setModalState = useCallback((modalType: string, state: any) => {
     setModalStates((prev) => ({
       ...prev,
       [modalType]: state,
     }));
-  };
+  }, []);
 
-  const getModalState = (modalType: string) => {
-    return modalStates[modalType];
-  };
+  const getModalState = useCallback(
+    (modalType: string) => {
+      return modalStates[modalType];
+    },
+    [modalStates],
+  );
 
-  const clearModalState = (modalType: string) => {
+  const clearModalState = useCallback((modalType: string) => {
     setModalStates((prev) => {
       const newStates = { ...prev };
       delete newStates[modalType];
       return newStates;
     });
-  };
+  }, []);
 
-  const clearAllModalStates = () => {
+  const clearAllModalStates = useCallback(() => {
     setModalStates({});
-  };
+  }, []);
 
   return (
     <ModalContext.Provider

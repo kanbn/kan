@@ -1,4 +1,5 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { stripe } from "@better-auth/stripe";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { createAuthEndpoint, createAuthMiddleware } from "better-auth/api";
@@ -9,7 +10,9 @@ import { env } from "next-runtime-env";
 
 import type { dbClient } from "@kan/db/client";
 import * as memberRepo from "@kan/db/repository/member.repo";
+import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
+import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import * as schema from "@kan/db/schema";
 import { cloudMailerClient, sendEmail } from "@kan/email";
 import { createStripeClient } from "@kan/stripe";
@@ -112,13 +115,13 @@ async function downloadImage(url: string): Promise<Buffer> {
 export const initAuth = (db: dbClient) => {
   return betterAuth({
     secret: process.env.BETTER_AUTH_SECRET!,
-    baseURL: process.env.NEXT_PUBLIC_BASE_URL!,
+    baseURL: env("NEXT_PUBLIC_BASE_URL"),
     trustedOrigins: process.env.BETTER_AUTH_TRUSTED_ORIGINS
       ? [
-          process.env.NEXT_PUBLIC_BASE_URL!,
+          env("NEXT_PUBLIC_BASE_URL") ?? "",
           ...process.env.BETTER_AUTH_TRUSTED_ORIGINS.split(","),
         ]
-      : [process.env.NEXT_PUBLIC_BASE_URL!],
+      : [env("NEXT_PUBLIC_BASE_URL") ?? ""],
     database: drizzleAdapter(db, {
       provider: "pg",
       schema: {
@@ -153,6 +156,89 @@ export const initAuth = (db: dbClient) => {
     },
     plugins: [
       socialProvidersPlugin(),
+      ...(process.env.NEXT_PUBLIC_KAN_ENV === "cloud"
+        ? [
+            stripe({
+              stripeClient: createStripeClient(),
+              stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET!,
+              createCustomerOnSignUp: true,
+              subscription: {
+                enabled: true,
+                plans: [
+                  {
+                    name: "team",
+                    priceId: process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID!,
+                    annualDiscountPriceId:
+                      process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID!,
+                  },
+                  {
+                    name: "pro",
+                    priceId: process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID!,
+                    annualDiscountPriceId:
+                      process.env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID!,
+                  },
+                ],
+                authorizeReference: async (data) => {
+                  const workspace = await workspaceRepo.getByPublicId(
+                    db,
+                    data.referenceId,
+                  );
+
+                  if (!workspace) {
+                    return Promise.resolve(false);
+                  }
+
+                  const isUserInWorkspace =
+                    await workspaceRepo.isUserInWorkspace(
+                      db,
+                      data.user.id,
+                      workspace.id,
+                    );
+
+                  return isUserInWorkspace;
+                },
+                getCheckoutSessionParams: () => {
+                  return {
+                    params: {
+                      allow_promotion_codes: true,
+                    },
+                  };
+                },
+                onSubscriptionComplete: async ({
+                  subscription,
+                  stripeSubscription,
+                }) => {
+                  // Set unlimited seats to true for pro plans
+                  if (subscription.plan === "pro") {
+                    await subscriptionRepo.updateByStripeSubscriptionId(
+                      db,
+                      stripeSubscription.id,
+                      {
+                        unlimitedSeats: true,
+                      },
+                    );
+                    console.log(
+                      `Pro subscription ${stripeSubscription.id} activated with unlimited seats`,
+                    );
+
+                    const workspace = await workspaceRepo.getByPublicId(
+                      db,
+                      subscription.referenceId,
+                    );
+
+                    if (workspace?.id) {
+                      await memberRepo.unpauseAllMembers(db, workspace.id);
+
+                      console.log(
+                        `Unpausing all members for workspace ${workspace.id}`,
+                      );
+                    }
+                  }
+                },
+              },
+            }),
+          ]
+        : []),
       // @todo: hasing is disabled due to a bug in the api key plugin
       apiKey({ disableKeyHashing: true }),
       magicLink({
@@ -270,37 +356,17 @@ export const initAuth = (db: dbClient) => {
     },
     hooks: {
       after: createAuthMiddleware(async (ctx) => {
-        if (ctx.path.startsWith("/get-session")) {
-          const user = ctx.context.session?.user;
-
-          if (
-            env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
-            user &&
-            !user.stripeCustomerId
-          ) {
-            const stripe = createStripeClient();
-            const stripeCustomer = await stripe.customers.create({
-              email: user.email,
-              metadata: {
-                userId: user.id,
-              },
-            });
-
-            await userRepo.update(db, user.id, {
-              stripeCustomerId: stripeCustomer.id,
-            });
-          }
-        } else if (
+        if (
           ctx.path === "/magic-link/verify" &&
           (ctx.query?.callbackURL as string | undefined)?.includes(
             "type=invite",
-          ) &&
-          ctx.query?.memberPublicId
+          )
         ) {
           const userId = ctx.context.newSession?.session.userId;
-          const memberPublicId = ctx.query.memberPublicId as string;
+          const callbackURL = ctx.query?.callbackURL as string | undefined;
+          const memberPublicId = callbackURL?.split("memberPublicId=")[1];
 
-          if (userId) {
+          if (userId && memberPublicId) {
             const member = await memberRepo.getByPublicId(db, memberPublicId);
 
             if (member?.id) {

@@ -45,14 +45,14 @@ export const sendEmail = async (
       html,
     };
 
-    if (cloudMailerClient) {
-      const response = await cloudMailerClient.emails.send({
-        ...options,
-        body: html,
-      });
+    // if (cloudMailerClient) {
+    //   const response = await cloudMailerClient.emails.send({
+    //     ...options,
+    //     body: html,
+    //   });
 
-      return response;
-    }
+    //   return response;
+    // }
 
     const response = await transporter.sendMail(options);
 

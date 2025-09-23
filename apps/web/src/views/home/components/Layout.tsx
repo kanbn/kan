@@ -1,8 +1,10 @@
-import PatternedBackground from "~/components/PatternedBackground";
 import { useTheme } from "next-themes";
+
+import { authClient } from "@kan/auth/client";
+
+import PatternedBackground from "~/components/PatternedBackground";
 import Footer from "./Footer";
 import Header from "./Header";
-import { authClient } from "@kan/auth/client";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
@@ -18,6 +20,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <style jsx global>{`
         html {
           scroll-behavior: smooth;
+          overflow: auto;
           background-color: ${!isDarkMode ? "hsl(0deg 0% 97.3%)" : "#161616"};
         }
       `}</style>

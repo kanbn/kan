@@ -32,6 +32,11 @@ const createAuthWithHeaders = (
           headers,
           body: { email: input.email, callbackURL: input.callbackURL },
         }),
+      listActiveSubscriptions: (input: { workspacePublicId: string }) =>
+        auth.api.listActiveSubscriptions({
+          headers,
+          query: { referenceId: input.workspacePublicId },
+        }),
     },
   };
 };

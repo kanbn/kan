@@ -1,4 +1,5 @@
 import { t } from "@lingui/core/macro";
+import { useEffect } from "react";
 import { HiArrowDownTray, HiOutlinePlusSmall } from "react-icons/hi2";
 
 import Button from "~/components/Button";
@@ -14,9 +15,13 @@ import { NewBoardForm } from "./components/NewBoardForm";
 
 export default function BoardsPage() {
   const { openModal, modalContentType, isOpen } = useModal();
-  const { workspace, hasLoaded } = useWorkspace();
+  const { availableWorkspaces, workspace, hasLoaded } = useWorkspace();
 
-  if (hasLoaded && !workspace.publicId) openModal("NEW_WORKSPACE");
+  useEffect(() => {
+    if (hasLoaded && availableWorkspaces.length === 0) {
+      openModal("NEW_WORKSPACE");
+    }
+  }, [hasLoaded, availableWorkspaces.length, openModal]);
 
   return (
     <>

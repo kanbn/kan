@@ -1,0 +1,397 @@
+---
+title: "Kan + MinIO (S3)"
+mode: "wide"
+tag: "NEW"
+---
+
+Deploy Kan with PostgreSQL and MinIO (S3-compatible storage) using Docker Compose, with clear steps and production notes.
+
+## What you’ll set up
+
+<CardGroup cols={2}>
+  <Card title="Kan" icon="globe" color="#0284c7" horizontal>
+    Kan web app (Next.js), on port 3000.
+  </Card>
+  <Card title="PostgreSQL 15" icon="database" color="#65a30d" horizontal>
+    PostgreSQL database for Kan.
+  </Card>
+</CardGroup>
+<Card title="MinIO (S3-compatible)" icon="cloud" color="#ca8a04" horizontal>
+  MinIO object storage (console port 9001, S3 API port 9000).
+</Card>
+
+## How it works
+
+- Kan stores data in PostgreSQL.
+- Kan uploads files (e.g., avatars) to MinIO over the S3 API.
+- The browser fetches public files directly from MinIO’s public URL.
+- The Next.js image optimizer in Kan must be explicitly allowed to fetch from your storage host.
+
+Key domain settings:
+
+- <code>NEXT_PUBLIC_BASE_URL</code> → the Kan site
+- <code>NEXT_PUBLIC_STORAGE_URL</code> → the public S3 base URL
+- <code>NEXT_PUBLIC_STORAGE_DOMAIN</code> → the exact S3 hostname (no scheme)
+
+## Prerequisites
+
+- Docker and Docker Compose
+- Open local ports: 3000 (Kan), 5432 (Postgres), 9000/9001 (MinIO)
+- A long random string for <code>BETTER_AUTH_SECRET</code> (32+ chars)
+
+<Note type="warning">
+  For production you’ll want a reverse proxy (Traefik/Nginx/Caddy), valid TLS
+  certificates, and DNS for your domains (e.g., <code>kan.example.com</code>,{" "}
+  <code>s3.example.com</code>).
+</Note>
+
+## Quick start
+
+<Tip type="info">
+  Why <code>localtest.me</code>? It resolves to <code>127.0.0.1</code>{" "}
+  automatically, so you can test domain-based configs locally without editing
+  hosts.
+</Tip>
+
+<Steps>
+  <Step title="Set environment variables">
+    Provide the minimum required configuration (local example):
+
+    ```bash
+    NEXT_PUBLIC_BASE_URL=http://kan.localtest.me:3000
+    BETTER_AUTH_SECRET=<long random string>
+    POSTGRES_URL=postgresql://kan:<password>@postgres:5432/kan_db
+
+    # MinIO/S3
+    S3_ENDPOINT=http://s3.localtest.me:9000
+    S3_ACCESS_KEY_ID=<minio-access-key>
+    S3_SECRET_ACCESS_KEY=<minio-secret-key>
+    S3_REGION=none
+    S3_FORCE_PATH_STYLE=true
+
+    # Public storage access
+    NEXT_PUBLIC_STORAGE_URL=http://s3.localtest.me:9000
+    NEXT_PUBLIC_STORAGE_DOMAIN=s3.localtest.me
+    NEXT_PUBLIC_AVATAR_BUCKET_NAME=kan
+    ```
+
+    <Note type="info">
+      Issue #109 fix: make sure <code>NEXT_PUBLIC_STORAGE_DOMAIN</code> exactly
+      equals the hostname that serves your images (no scheme, no port).
+    </Note>
+
+    Optional (see README for full list): Email (`EMAIL_FROM`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_SECURE`), OAuth/OIDC (`GOOGLE_*`, `GITHUB_*`, `OIDC_*`), auth toggles, Trello import, etc.
+
+  </Step>
+
+  <Step title="Create or review Docker Compose files">
+    You can start from the minimal compose at the repository root (<code>docker-compose.yml</code>) and review the production-oriented settings in <code>cloud/docker-compose.yml</code>.
+
+    Start with the minimal setup (web + postgres + minio) and ensure environment variables are passed to the web service.
+
+    <Accordion title="Docker Compose example">
+
+    ```yaml
+    services:
+      postgres:
+        image: postgres:15
+        container_name: kan-db
+        ports:
+          - "5432:5432"
+        environment:
+          POSTGRES_USER: kan
+          POSTGRES_PASSWORD: changeme
+          POSTGRES_DB: kan_db
+        volumes:
+          - pg_data:/var/lib/postgresql/data
+        restart: unless-stopped
+
+      minio:
+        image: minio/minio:latest
+        container_name: kan-minio
+        command: server /data --console-address ":9001"
+        ports:
+          - "9000:9000" # S3 API
+          - "9001:9001" # Console
+        environment:
+          # Use the same credentials in your .env
+          # as S3_ACCESS_KEY_ID / S3_SECRET_ACCESS_KEY
+          MINIO_ROOT_USER: minio
+          MINIO_ROOT_PASSWORD: minio123456789
+        volumes:
+          - minio_data:/data
+        restart: unless-stopped
+
+      web:
+        image: ghcr.io/kanbn/kan:latest
+        container_name: kan-web
+        depends_on:
+          - postgres
+          - minio
+        ports:
+          - "3000:3000"
+        # Load variables from .env
+        # (see the "Set environment variables" step)
+        env_file:
+          - .env
+        restart: unless-stopped
+
+    volumes:
+      pg_data:
+      minio_data:
+    ```
+
+    <Note type="info">
+      Ensure your <code>.env</code> contains values that match this compose file.
+      For example:
+      <ul>
+        <li>
+          <code>POSTGRES_URL=postgresql://kan:changeme@postgres:5432/kan_db</code>
+        </li>
+        <li>
+          <code>S3_ENDPOINT=http://s3.localtest.me:9000</code>
+        </li>
+        <li>
+          <code>S3_ACCESS_KEY_ID=minio</code> and{" "}
+          <code>S3_SECRET_ACCESS_KEY=minio123456789</code>
+        </li>
+        <li>
+          <code>S3_FORCE_PATH_STYLE=true</code>
+        </li>
+        <li>
+          <code>NEXT_PUBLIC_STORAGE_URL=http://s3.localtest.me:9000</code>
+        </li>
+        <li>
+          <code>NEXT_PUBLIC_STORAGE_DOMAIN=s3.localtest.me</code>
+        </li>
+        <li>
+          <code>NEXT_PUBLIC_AVATAR_BUCKET_NAME=kan</code>
+        </li>
+      </ul>
+    </Note>
+
+    </Accordion>
+
+  </Step>
+
+  <Step title="Start services">
+
+    ```bash
+    docker compose up -d
+    ```
+
+    Then open:
+
+    <ul>
+      <li>
+        Kan: <a href="http://kan.localtest.me:3000">http://kan.localtest.me:3000</a>
+      </li>
+      <li>
+        MinIO Console:{" "}
+        <a href="http://minio.localtest.me:9001">http://minio.localtest.me:9001</a>
+      </li>
+      <li>
+        MinIO S3 API:{" "}
+        <a href="http://s3.localtest.me:9000">http://s3.localtest.me:9000</a>
+      </li>
+    </ul>
+
+  </Step>
+
+  <Step title="Initialize MinIO">
+    1) Log into the MinIO Console (http://minio.localtest.me:9001).
+
+    2. Create a bucket (e.g., <code>kan</code>).
+
+    3. For simple public avatars, apply a read-only policy so GET requests are allowed for objects:
+
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": { "AWS": ["*"] },
+          "Action": ["s3:GetBucketLocation", "s3:ListBucket"],
+          "Resource": ["arn:aws:s3:::kan"]
+        },
+        {
+          "Effect": "Allow",
+          "Principal": { "AWS": ["*"] },
+          "Action": ["s3:GetObject"],
+          "Resource": ["arn:aws:s3:::kan/*"]
+        }
+      ]
+    }
+    ```
+
+    <Note type="warning">
+      Alternatively, keep the bucket private and use presigned URLs. In that case,
+      ensure your server and browser access paths are correctly configured.
+    </Note>
+
+  </Step>
+
+  <Step title="Verify the setup">
+    <ul>
+      <li>Sign in to Kan and upload an avatar (Settings).</li>
+      <li>Confirm the object is created in your MinIO bucket.</li>
+      <li>The avatar should render without errors.</li>
+    </ul>
+
+    If you see a 400 from <code>/\_next/image</code> with “url parameter is not allowed”:
+
+    <ul>
+      <li>
+        <code>NEXT_PUBLIC_STORAGE_DOMAIN</code> must exactly match the S3 hostname
+        that serves images.
+      </li>
+      <li>
+        <code>NEXT_PUBLIC_STORAGE_URL</code> should use the same host (with
+        scheme/port).
+      </li>
+      <li>Ensure you’re using the latest Kan image.</li>
+    </ul>
+
+  </Step>
+</Steps>
+
+## Production setup
+
+<Tabs>
+  <Tab title="Local">
+
+  <ul>
+    <li><code>NEXT_PUBLIC_BASE_URL=http://kan.localtest.me:3000</code></li>
+    <li><code>S3_ENDPOINT=http://s3.localtest.me:9000</code></li>
+    <li><code>NEXT_PUBLIC_STORAGE_URL=http://s3.localtest.me:9000</code></li>
+    <li><code>NEXT_PUBLIC_STORAGE_DOMAIN=s3.localtest.me</code></li>
+    <li>Keep <code>S3_FORCE_PATH_STYLE=true</code> for MinIO.</li>
+  </ul>
+  </Tab>
+  <Tab title="Production">
+
+  <ul>
+    <li><code>NEXT_PUBLIC_BASE_URL=https://kan.example.com</code></li>
+    <li><code>S3_ENDPOINT=https://s3.example.com</code></li>
+    <li><code>NEXT_PUBLIC_STORAGE_URL=https://s3.example.com</code></li>
+    <li><code>NEXT_PUBLIC_STORAGE_DOMAIN=s3.example.com</code></li>
+    <li>Keep <code>S3_FORCE_PATH_STYLE=true</code> for MinIO.</li>
+    <li>Put Kan and MinIO behind HTTPS with a reverse proxy (Traefik/Nginx) and valid TLS.</li>
+  </ul>
+  </Tab>
+</Tabs>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Files upload but don’t display">
+    <ul>
+      <li>If public: confirm GET is allowed on objects (bucket policy).</li>
+      <li>If private: ensure presigned URLs are generated and valid.</li>
+      <li>403 AccessDenied indicates permissions, not CORS. CORS is not required for simple <code>&lt;img&gt;</code> GETs.</li>
+    </ul>
+  </Accordion>
+
+  <Accordion title="Make the bucket public (read-only) with mc" defaultOpen>
+    Use your MinIO root credentials to allow anonymous reads:
+
+    ```bash
+    # Replace with your MINIO_ROOT_PASSWORD
+    MINIO_PASS='<your-minio-password>'
+
+    # Point mc at MinIO via the container network (no ports required)
+    docker run --rm --network container:kan-minio minio/mc \
+      mc alias set local http://127.0.0.1:9000 minio "$MINIO_PASS"
+
+    # Allow public downloads from the bucket
+    docker run --rm --network container:kan-minio minio/mc \
+      mc anonymous set download local/kan
+
+    # Optional: verify anonymous status
+    docker run --rm --network container:kan-minio minio/mc \
+      mc anonymous get local/kan
+    ```
+
+  </Accordion>
+
+  <Accordion title="Alternative: S3 bucket policy (AWS CLI)">
+    If you prefer a bucket policy, apply a public-read policy for objects:
+
+    ```json policy.json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "PublicReadGetObject",
+          "Effect": "Allow",
+          "Principal": "*",
+          "Action": ["s3:GetObject"],
+          "Resource": ["arn:aws:s3:::kan/*"]
+        }
+      ]
+    }
+    ```
+
+    ```bash
+    # Use your MinIO root credentials
+    MINIO_PASS='<your-minio-password>'
+
+    docker run --rm --network container:kan-minio \
+      -e AWS_ACCESS_KEY_ID=minio \
+      -e AWS_SECRET_ACCESS_KEY="$MINIO_PASS" \
+      -e AWS_DEFAULT_REGION=us-east-1 -e AWS_S3_FORCE_PATH_STYLE=true \
+      -v "$PWD:/work" amazon/aws-cli \
+      s3api put-bucket-policy --bucket kan --policy file:///work/policy.json \
+      --endpoint-url http://127.0.0.1:9000
+    ```
+
+  </Accordion>
+
+<Accordion title="Next.js optimizer 400 — url parameter is not allowed">
+  <ul>
+    <li>
+      Exact match on <code>NEXT_PUBLIC_STORAGE_DOMAIN</code> with your storage
+      host.
+    </li>
+    <li>
+      Same host in <code>NEXT_PUBLIC_STORAGE_URL</code>.
+    </li>
+    <li>Update to the latest Kan image.</li>
+  </ul>
+</Accordion>
+
+  <Accordion title="Next/Image: “url parameter is valid but upstream response is invalid”">
+    <ul>
+      <li>This means Next.js accepted the URL, but the upstream returned a non-image (e.g., 403 HTML/XML).</li>
+      <li>Fix: make the bucket/object publicly readable (see above), or use presigned URLs.</li>
+      <li>Sanity test from the web network (replace with your image URL):</li>
+    </ul>
+
+    ```bash
+    IMG_URL="https://s3.example.com/kan/path/to/avatar.jpg"
+
+    # Headers/content-type as seen from the app network
+    docker run --rm --network container:kan-web curlimages/curl:8.9.1 \
+      -I -L --max-redirs 5 "$IMG_URL"
+
+    # Quick status + content-type summary
+    docker run --rm --network container:kan-web curlimages/curl:8.9.1 \
+      -s -o /dev/null -w "HTTP:%{http_code} CT:%{content_type} URL:%{url_effective}\n" -L "$IMG_URL"
+    ```
+
+  </Accordion>
+
+  <Accordion title="Connectivity checks">
+    <ul>
+      <li>The Kan container must reach <code>S3_ENDPOINT</code>.</li>
+      <li>Verify DNS/ports inside the container (e.g., <code>docker exec -it &lt;kan-container&gt; sh</code>).</li>
+    </ul>
+  </Accordion>
+</AccordionGroup>
+
+## References
+
+- [Kan README](https://github.com/kanbn/kan/blob/main/README.md)
+- [Cloud compose reference](https://github.com/kanbn/kan/blob/main/cloud/docker-compose.yml)
+- [Kan #109 Issue](https://github.com/kanbn/kan/issues/109)

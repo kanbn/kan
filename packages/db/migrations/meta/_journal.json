@@ -64,6 +64,48 @@
       "when": 1755094668761,
       "tag": "20250813141748_AddChecklistActivityTypes",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1756803246096,
+      "tag": "20250902085406_AddSubscriptions",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1757271312974,
+      "tag": "20250907185512_AddUnlimitedSeatsToSubscription",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1757533858687,
+      "tag": "20250910195058_RemoveNotNullConstraintFromReferenceIdOnSubsriptions",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1757534656098,
+      "tag": "20250910200416_AddWorkspaceSlugChecks",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1757535838766,
+      "tag": "20250910202358_AddCascadeSetNullToReferenceIdOnSubsriptions",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1758226671081,
+      "tag": "20250918201751_AddPausedMemberStatus",
+      "breakpoints": true
     }
   ]
 }

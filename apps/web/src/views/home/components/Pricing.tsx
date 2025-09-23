@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { useState } from "react";
-import { HiCheckCircle } from "react-icons/hi2";
+import { HiBolt, HiCheckCircle } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
 type Frequency = "monthly" | "annually";
@@ -92,12 +92,13 @@ const Pricing = () => {
           {t`Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team.`}
         </p>
 
-        {/* Beta free pricing pill */}
-        <div className="mt-4 flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800 dark:bg-green-700 dark:text-green-100">
-          {t`All seats are free during the beta until Sept 1st!`}
-        </div>
-
-        <div className="mt-16 flex justify-center">
+        <div className="mt-12 flex flex-col items-center justify-center">
+          <div className="mb-4 flex items-center gap-2 rounded-full border bg-white px-4 py-1.5 text-center text-xs font-bold text-gray-800 dark:border-dark-300 dark:bg-white dark:text-gray-800 lg:text-sm">
+            <HiBolt />
+            <p>
+              {t`Launch offer: unlimited seats for just $29/month with Pro`}
+            </p>
+          </div>
           <fieldset aria-label={t`Payment frequency`}>
             <RadioGroup
               value={frequency}
@@ -108,7 +109,12 @@ const Pricing = () => {
                 <Radio
                   key={option.value}
                   value={option}
-                  className="cursor-pointer rounded-full px-2.5 py-1 text-xs text-light-900 data-[checked]:bg-dark-50 data-[checked]:text-white dark:data-[checked]:bg-light-50 dark:data-[checked]:text-dark-50 lg:text-sm"
+                  className={twMerge(
+                    "cursor-pointer rounded-full px-2.5 py-1 text-xs transition-colors lg:text-sm",
+                    frequency?.value === option.value
+                      ? "bg-dark-50 text-white dark:bg-light-50 dark:text-dark-50"
+                      : "text-light-900 hover:bg-light-100 dark:hover:bg-dark-100",
+                  )}
                 >
                   {option.label}
                 </Radio>
@@ -165,7 +171,7 @@ const Pricing = () => {
                   !tier.showPrice && "opacity-0",
                 )}
               >
-                {tier.price[frequency?.value || "monthly"]}
+                {tier.price[frequency?.value ?? "monthly"]}
               </span>
               {tier.showPriceSuffix && (
                 <span className="text-sm/6 font-semibold text-light-50 dark:text-dark-900">

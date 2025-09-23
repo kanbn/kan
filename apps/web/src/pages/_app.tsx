@@ -7,6 +7,7 @@ import type { ReactElement, ReactNode } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import { env } from "next-runtime-env";
+import { ThemeProvider } from "next-themes";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { useEffect } from "react";
@@ -14,7 +15,6 @@ import { useEffect } from "react";
 import { LinguiProviderWrapper } from "~/providers/lingui";
 import { ModalProvider } from "~/providers/modal";
 import { PopupProvider } from "~/providers/popup";
-import { ThemeProvider } from "next-themes";
 import { api } from "~/utils/api";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -82,8 +82,8 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
       <main className="font-sans">
         <LinguiProviderWrapper>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <ModalProvider>
-                <PopupProvider>
+            <ModalProvider>
+              <PopupProvider>
                 {posthogKey ? (
                   <PostHogProvider client={posthog}>
                     {getLayout(<Component {...pageProps} />)}
@@ -91,8 +91,8 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
                 ) : (
                   getLayout(<Component {...pageProps} />)
                 )}
-                </PopupProvider>
-              </ModalProvider>
+              </PopupProvider>
+            </ModalProvider>
           </ThemeProvider>
         </LinguiProviderWrapper>
       </main>

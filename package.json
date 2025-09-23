@@ -31,5 +31,11 @@
     "turbo": "^2.3.1",
     "typescript": "catalog:"
   },
-  "prettier": "@kan/prettier-config"
+  "prettier": "@kan/prettier-config",
+  "pnpm": {
+    "overrides": {
+      "@types/minimatch": "npm:minimatch@*",
+      "@types/glob": "npm:@types/glob@^8.1.0"
+    }
+  }
 }

@@ -13,7 +13,7 @@ export function LanguageSelector() {
         id="language-select"
         value={locale}
         onChange={(e) => setLocale(e.target.value as any)}
-        className="mt-8 block w-full max-w-[180px] rounded-lg border-0 bg-light-50 pl-10 shadow-sm ring-1 ring-inset ring-light-300 focus:ring-2 focus:ring-inset focus:ring-light-400 dark:bg-dark-50 dark:text-dark-1000 dark:ring-dark-300 dark:focus:ring-dark-500 sm:text-sm"
+        className="mt-8 block w-full max-w-[180px] rounded-lg border-0 bg-light-50 pl-10 text-sm shadow-sm ring-1 ring-inset ring-light-300 focus:ring-2 focus:ring-inset focus:ring-light-400 dark:bg-dark-50 dark:text-dark-1000 dark:ring-dark-300 dark:focus:ring-dark-500"
       >
         {availableLocales.map((loc) => (
           <option key={loc} value={loc}>
