@@ -1,7 +1,7 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { formatDistanceToNow } from "date-fns";
-import { de, enGB, es, fr, it, nl } from "date-fns/locale";
+import { de, enGB, es, fr, it, nl, ptBR } from "date-fns/locale";
 import {
   HiOutlineArrowLeft,
   HiOutlineArrowRight,
@@ -31,6 +31,7 @@ const dateLocaleMap = {
   es: es,
   it: it,
   nl: nl,
+  "pt-br": ptBR,
 } as const;
 
 const truncate = (value: string | null, maxLength = 50) => {

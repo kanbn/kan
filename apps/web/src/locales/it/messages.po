@@ -23,7 +23,7 @@ msgstr ", o consulta i nostri"
 
 #. placeholder {0}: card?.title ?? "Card"
 #. placeholder {1}: board?.name ?? "Board"
-#: src/views/card/index.tsx:213
+#: src/views/card/index.tsx:214
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
@@ -40,7 +40,7 @@ msgstr "{boardCount, plural, one {Importa bacheca (1)} other {Importa bacheche (
 msgid "1 user"
 msgstr "1 utente"
 
-#: src/views/home/index.tsx:71
+#: src/views/home/index.tsx:72
 msgid "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
 msgstr "Un'app kanban potente e flessibile che ti aiuta a organizzare il lavoro, monitorare i progressi e ottenere risultati, tutto in un unico posto."
 
@@ -48,8 +48,8 @@ msgstr "Un'app kanban potente e flessibile che ti aiuta a organizzare il lavoro,
 msgid "Account deleted"
 msgstr "Account eliminato"
 
-#: src/views/public/board/CardModal.tsx:140
-#: src/views/card/index.tsx:288
+#: src/views/public/board/CardModal.tsx:143
+#: src/views/card/index.tsx:289
 msgid "Activity"
 msgstr "Attività"
 
@@ -92,34 +92,34 @@ msgstr "Aggiungi etichetta"
 msgid "Add member"
 msgstr "Aggiungi membro"
 
-#: src/views/card/components/ActivityList.tsx:69
+#: src/views/card/components/ActivityList.tsx:70
 msgid "added a checklist"
 msgstr "ha aggiunto una checklist"
 
-#: src/views/card/components/ActivityList.tsx:72
+#: src/views/card/components/ActivityList.tsx:73
 msgid "added a checklist item"
 msgstr "ha aggiunto un elemento alla checklist"
 
-#: src/views/card/components/ActivityList.tsx:65
+#: src/views/card/components/ActivityList.tsx:66
 msgid "added a label to the card"
 msgstr "ha aggiunto un'etichetta alla carta"
 
-#: src/views/card/components/ActivityList.tsx:67
+#: src/views/card/components/ActivityList.tsx:68
 msgid "added a member to the card"
 msgstr "ha aggiunto un membro alla carta"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:146
+#: src/views/card/components/ActivityList.tsx:147
 msgid "added checklist <0>{0}</0>"
 msgstr "ha aggiunto la checklist <0>{0}</0>"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:170
+#: src/views/card/components/ActivityList.tsx:171
 msgid "added checklist item <0>{0}</0>"
 msgstr "ha aggiunto l'elemento <0>{0}</0> alla checklist"
 
 #. placeholder {0}: truncate(label)
-#: src/views/card/components/ActivityList.tsx:130
+#: src/views/card/components/ActivityList.tsx:131
 msgid "added label <0>{0}</0>"
 msgstr "ha aggiunto l'etichetta <0>{0}</0>"
 
@@ -193,7 +193,7 @@ msgid "Are you sure you want to delete your account?"
 msgstr "Sei sicuro di voler eliminare il tuo account?"
 
 #. placeholder {0}: truncate(memberName)
-#: src/views/card/components/ActivityList.tsx:110
+#: src/views/card/components/ActivityList.tsx:111
 msgid "assigned <0>{0}</0> to the card"
 msgstr "ha assegnato <0>{0}</0> alla scheda"
 
@@ -234,7 +234,7 @@ msgstr "Il nome della bacheca non può superare i 100 caratteri"
 msgid "Board name is required"
 msgstr "Il nome della bacheca è obbligatorio"
 
-#: src/views/public/board/index.tsx:143
+#: src/views/public/board/index.tsx:148
 #: src/views/board/index.tsx:357
 msgid "Board not found"
 msgstr "Bacheca non trovata"
@@ -247,7 +247,7 @@ msgstr "L'URL della bacheca può contenere solo lettere, numeri e trattini"
 msgid "Board URL cannot exceed 60 characters"
 msgstr "L'URL della bacheca non può superare i 60 caratteri"
 
-#: src/views/public/board/index.tsx:59
+#: src/views/public/board/index.tsx:64
 msgid "Board URL copied to clipboard"
 msgstr "URL della bacheca copiato negli appunti"
 
@@ -298,7 +298,7 @@ msgstr "Segnalazione bug"
 msgid "Cancel"
 msgstr "Annulla"
 
-#: src/views/card/index.tsx:259
+#: src/views/card/index.tsx:260
 msgid "Card not found"
 msgstr "Carta non trovata"
 
@@ -363,12 +363,12 @@ msgstr "Completato"
 msgid "Complete control and ownership:"
 msgstr "Controllo e proprietà completi:"
 
-#: src/views/card/components/ActivityList.tsx:74
+#: src/views/card/components/ActivityList.tsx:75
 msgid "completed a checklist item"
 msgstr "ha completato un elemento della checklist"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:187
+#: src/views/card/components/ActivityList.tsx:188
 msgid "completed checklist item <0>{0}</0>"
 msgstr "ha completato l'elemento <0>{0}</0> della checklist"
 
@@ -405,12 +405,12 @@ msgstr "Contattaci"
 msgid "Content Creation"
 msgstr "Creazione contenuti"
 
-#: src/components/AuthForm.tsx:335
+#: src/components/AuthForm.tsx:366
 msgid "Continue with "
 msgstr "Continua con "
 
-#. placeholder {0}: provider.name
-#: src/components/AuthForm.tsx:269
+#. placeholder {0}: key === "oidc" ? oidcProviderName : provider.name
+#: src/components/AuthForm.tsx:297
 msgid "Continue with {0}"
 msgstr "Continua con {0}"
 
@@ -462,11 +462,11 @@ msgid "Create new list"
 msgstr "Crea nuova lista"
 
 #: src/components/WorkspaceMenu.tsx:116
-#: src/components/NewWorkspaceForm.tsx:93
+#: src/components/NewWorkspaceForm.tsx:94
 msgid "Create workspace"
 msgstr "Crea spazio di lavoro"
 
-#: src/views/card/components/ActivityList.tsx:61
+#: src/views/card/components/ActivityList.tsx:62
 msgid "created the card"
 msgstr "ha creato la carta"
 
@@ -530,21 +530,21 @@ msgstr "Elimina lista"
 msgid "Delete workspace"
 msgstr "Elimina spazio di lavoro"
 
-#: src/views/card/components/ActivityList.tsx:71
+#: src/views/card/components/ActivityList.tsx:72
 msgid "deleted a checklist"
 msgstr "ha eliminato una checklist"
 
-#: src/views/card/components/ActivityList.tsx:76
+#: src/views/card/components/ActivityList.tsx:77
 msgid "deleted a checklist item"
 msgstr "ha eliminato un elemento della checklist"
 
 #. placeholder {0}: truncate(fromTitle)
-#: src/views/card/components/ActivityList.tsx:162
+#: src/views/card/components/ActivityList.tsx:163
 msgid "deleted checklist <0>{0}</0>"
 msgstr "ha eliminato la checklist <0>{0}</0>"
 
 #. placeholder {0}: truncate(fromTitle)
-#: src/views/card/components/ActivityList.tsx:205
+#: src/views/card/components/ActivityList.tsx:206
 msgid "deleted checklist item <0>{0}</0>"
 msgstr "ha eliminato l'elemento <0>{0}</0> della checklist"
 
@@ -626,7 +626,7 @@ msgstr "Modifica URL dell'area di lavoro"
 msgid "Editing"
 msgstr "Modifica"
 
-#: src/components/AuthForm.tsx:337
+#: src/components/AuthForm.tsx:368
 msgid "email"
 msgstr "email"
 
@@ -646,11 +646,11 @@ msgstr "Inserisci la tua password attuale"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Inserisci la tua password attuale e scegli una nuova password sicura."
 
-#: src/components/AuthForm.tsx:302
+#: src/components/AuthForm.tsx:333
 msgid "Enter your email address"
 msgstr "Inserisci il tuo indirizzo email"
 
-#: src/components/AuthForm.tsx:290
+#: src/components/AuthForm.tsx:321
 msgid "Enter your name"
 msgstr "Inserisci il tuo nome"
 
@@ -658,7 +658,7 @@ msgstr "Inserisci il tuo nome"
 msgid "Enter your new password"
 msgstr "Inserisci la tua nuova password"
 
-#: src/components/AuthForm.tsx:315
+#: src/components/AuthForm.tsx:346
 msgid "Enter your password"
 msgstr "Inserisci la tua password"
 
@@ -725,7 +725,7 @@ msgid "Execution"
 msgstr "Esecuzione"
 
 #. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
-#: src/components/AuthForm.tsx:241
+#: src/components/AuthForm.tsx:269
 msgid "Failed to login with {0}. Please try again."
 msgstr "Accesso con {0} fallito. Riprova."
 
@@ -770,6 +770,7 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Per la sostenibilità a lungo termine, riconosciamo che tutti i buoni progetti open source necessitano di una fonte di entrate. La nostra proviene dall'offerta cloud a pagamento per workspace con più utenti (gratuita durante la beta) e per slug di workspace personalizzati. Non c'è alcun obbligo di utilizzarla, e puoi ospitare autonomamente il software sulla tua infrastruttura gratuitamente."
 
 #: src/views/home/components/Pricing.tsx:32
+#: src/views/home/components/Pricing.tsx:32
 msgid "Free"
 msgstr "Gratuito"
 
@@ -813,7 +814,7 @@ msgstr "Inizia gratuitamente oggi"
 msgid "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team."
 msgstr "Inizia gratuitamente, senza limiti di utilizzo. Per la collaborazione, passa a un piano adatto alle dimensioni del tuo team."
 
-#: src/views/home/index.tsx:75
+#: src/views/home/index.tsx:76
 msgid "Get started on Cloud"
 msgstr "Inizia su Cloud"
 
@@ -988,7 +989,7 @@ msgstr "Licenza"
 msgid "Light"
 msgstr "Chiaro"
 
-#: src/views/public/board/index.tsx:57
+#: src/views/public/board/index.tsx:62
 msgid "Link copied"
 msgstr "Link copiato"
 
@@ -1016,16 +1017,16 @@ msgstr "A lungo termine"
 msgid "Low Priority"
 msgstr "Bassa priorità"
 
-#: src/components/AuthForm.tsx:338
+#: src/components/AuthForm.tsx:369
 msgid "magic link"
 msgstr "link magico"
 
-#: src/views/card/components/ActivityList.tsx:75
+#: src/views/card/components/ActivityList.tsx:76
 msgid "marked a checklist item as incomplete"
 msgstr "ha segnato un elemento della checklist come incompleto"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:196
+#: src/views/card/components/ActivityList.tsx:197
 msgid "marked checklist item <0>{0}</0> as incomplete"
 msgstr "ha segnato l'elemento <0>{0}</0> della checklist come incompleto"
 
@@ -1052,11 +1053,11 @@ msgstr "Mensile"
 
 #. placeholder {0}: truncate(fromList)
 #. placeholder {1}: truncate(toList)
-#: src/views/card/components/ActivityList.tsx:98
+#: src/views/card/components/ActivityList.tsx:99
 msgid "moved the card from <0>{0}</0> to<1>{1}</1>"
 msgstr "ha spostato la scheda da <0>{0}</0> a<1>{1}</1>"
 
-#: src/views/card/components/ActivityList.tsx:64
+#: src/views/card/components/ActivityList.tsx:65
 msgid "moved the card to another list"
 msgstr "ha spostato la scheda in un'altra lista"
 
@@ -1110,7 +1111,7 @@ msgstr "La nuova password deve essere diversa dalla password attuale"
 msgid "New Ticket"
 msgstr "Nuovo ticket"
 
-#: src/components/NewWorkspaceForm.tsx:64
+#: src/components/NewWorkspaceForm.tsx:65
 msgid "New workspace"
 msgstr "Nuovo spazio di lavoro"
 
@@ -1130,7 +1131,7 @@ msgstr "Nessuna bacheca"
 msgid "No boards found"
 msgstr "Nessuna bacheca trovata"
 
-#: src/views/home/index.tsx:85
+#: src/views/home/index.tsx:86
 msgid "No credit card required"
 msgstr "Nessuna carta di credito richiesta"
 
@@ -1154,7 +1155,7 @@ msgstr "Una volta eliminato il tuo account, non si può tornare indietro. Questa
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Una volta eliminata l'area di lavoro, non si può tornare indietro. Questa azione non può essere annullata."
 
-#: src/components/AuthForm.tsx:280
+#: src/components/AuthForm.tsx:311
 msgid "or"
 msgstr "o"
 
@@ -1207,15 +1208,15 @@ msgstr "Pianificazione"
 msgid "Please confirm your new password"
 msgstr "Conferma la tua nuova password"
 
-#: src/components/AuthForm.tsx:306
+#: src/components/AuthForm.tsx:337
 msgid "Please enter a valid email address"
 msgstr "Inserisci un indirizzo email valido"
 
-#: src/components/AuthForm.tsx:294
+#: src/components/AuthForm.tsx:325
 msgid "Please enter a valid name"
 msgstr "Inserisci un nome valido"
 
-#: src/components/AuthForm.tsx:319
+#: src/components/AuthForm.tsx:350
 msgid "Please enter a valid password"
 msgstr "Inserisci una password valida"
 
@@ -1233,7 +1234,7 @@ msgstr "Seleziona un file da caricare."
 #: src/views/settings/components/Avatar.tsx:98
 #: src/views/members/components/InviteMemberForm.tsx:64
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
-#: src/views/card/index.tsx:172
+#: src/views/card/index.tsx:173
 #: src/views/card/components/NewCommentForm.tsx:31
 #: src/views/card/components/NewChecklistItemForm.tsx:89
 #: src/views/card/components/NewChecklistForm.tsx:70
@@ -1254,7 +1255,7 @@ msgstr "Seleziona un file da caricare."
 #: src/views/board/components/UpdateBoardSlugForm.tsx:72
 #: src/views/board/components/NewListForm.tsx:78
 #: src/views/board/components/NewCardForm.tsx:174
-#: src/components/NewWorkspaceForm.tsx:41
+#: src/components/NewWorkspaceForm.tsx:42
 #: src/components/FeedbackModal.tsx:41
 #: src/components/DeleteLabelConfirmation.tsx:26
 msgid "Please try again later, or contact customer support."
@@ -1322,30 +1323,30 @@ msgstr "Rimuovi"
 msgid "Remove member"
 msgstr "Rimuovi membro"
 
-#: src/views/card/components/ActivityList.tsx:66
+#: src/views/card/components/ActivityList.tsx:67
 msgid "removed a label from the card"
 msgstr "ha rimosso un'etichetta dalla scheda"
 
-#: src/views/card/components/ActivityList.tsx:68
+#: src/views/card/components/ActivityList.tsx:69
 msgid "removed a member from the card"
 msgstr "ha rimosso un membro dalla scheda"
 
 #. placeholder {0}: truncate(label)
-#: src/views/card/components/ActivityList.tsx:138
+#: src/views/card/components/ActivityList.tsx:139
 msgid "removed label <0>{0}</0>"
 msgstr "ha rimosso l'etichetta <0>{0}</0>"
 
-#: src/views/card/components/ActivityList.tsx:70
+#: src/views/card/components/ActivityList.tsx:71
 msgid "renamed a checklist"
 msgstr "ha rinominato una checklist"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:154
+#: src/views/card/components/ActivityList.tsx:155
 msgid "renamed checklist <0>{0}</0>"
 msgstr "ha rinominato la checklist <0>{0}</0>"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:178
+#: src/views/card/components/ActivityList.tsx:179
 msgid "renamed checklist item to <0>{0}</0>"
 msgstr "ha rinominato l'elemento della checklist in <0>{0}</0>"
 
@@ -1406,11 +1407,11 @@ msgstr "Seleziona fonte"
 msgid "Self Host"
 msgstr "Self Host"
 
-#: src/views/home/index.tsx:81
+#: src/views/home/index.tsx:82
 msgid "Self host with Github"
 msgstr "Self host con Github"
 
-#: src/views/card/components/ActivityList.tsx:107
+#: src/views/card/components/ActivityList.tsx:108
 msgid "self-assigned the card"
 msgstr "si è auto-assegnato la scheda"
 
@@ -1450,7 +1451,7 @@ msgstr "Registrazione disabilitata"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "La registrazione è attualmente disabilitata. Riprova più tardi."
 
-#: src/components/AuthForm.tsx:335
+#: src/components/AuthForm.tsx:366
 msgid "Sign up with "
 msgstr "Registrati con "
 
@@ -1470,12 +1471,12 @@ msgstr "Social media"
 msgid "Software Development"
 msgstr "Sviluppo software"
 
-#: src/views/home/index.tsx:37
+#: src/views/home/index.tsx:38
 msgid "Star on Github"
 msgstr "Metti una stella su Github"
 
-#: src/components/AuthForm.tsx:188
-#: src/components/AuthForm.tsx:205
+#: src/components/AuthForm.tsx:203
+#: src/components/AuthForm.tsx:220
 msgid "Success"
 msgstr "Operazione riuscita"
 
@@ -1515,7 +1516,7 @@ msgstr "La password attuale inserita non è corretta."
 msgid "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
 msgstr "La principale differenza tra Kan e Trello è che Kan è open source, permettendo a chiunque di visualizzare, modificare e contribuire al nostro codice. La nostra offerta cloud non impone inoltre alcuna restrizione sulle funzionalità per uso individuale, mentre Trello blocca funzionalità di base come il numero di bacheche che puoi creare dietro un paywall."
 
-#: src/views/home/index.tsx:65
+#: src/views/home/index.tsx:66
 msgid "The open source <0/> alternative to Trello"
 msgstr "L'alternativa open source <0/> a Trello"
 
@@ -1539,7 +1540,7 @@ msgstr "Non potranno accedere a questo spazio di lavoro."
 msgid "This action can't be undone."
 msgstr "Questa azione non può essere annullata."
 
-#: src/views/public/board/index.tsx:146
+#: src/views/public/board/index.tsx:151
 msgid "This board is private or does not exist"
 msgstr "Questa bacheca è privata o non esiste"
 
@@ -1604,7 +1605,7 @@ msgstr "Impossibile creare la checklist"
 msgid "Unable to create list"
 msgstr "Impossibile creare la lista"
 
-#: src/components/NewWorkspaceForm.tsx:40
+#: src/components/NewWorkspaceForm.tsx:41
 msgid "Unable to create workspace"
 msgstr "Impossibile creare lo spazio di lavoro"
 
@@ -1640,7 +1641,7 @@ msgstr "Impossibile aggiornare l'URL della bacheca"
 msgid "Unable to update board visibility"
 msgstr "Impossibile aggiornare la visibilità della bacheca"
 
-#: src/views/card/index.tsx:171
+#: src/views/card/index.tsx:172
 #: src/views/board/index.tsx:189
 msgid "Unable to update card"
 msgstr "Impossibile aggiornare la scheda"
@@ -1671,11 +1672,11 @@ msgid "Unable to update members"
 msgstr "Impossibile aggiornare i membri"
 
 #. placeholder {0}: truncate(memberName)
-#: src/views/card/components/ActivityList.tsx:121
+#: src/views/card/components/ActivityList.tsx:122
 msgid "unassigned <0>{0}</0> from the card"
 msgstr "ha rimosso l'assegnazione di <0>{0}</0> dalla scheda"
 
-#: src/views/card/components/ActivityList.tsx:118
+#: src/views/card/components/ActivityList.tsx:119
 msgid "unassigned themselves from the card"
 msgstr "si è rimosso dall'assegnazione della scheda"
 
@@ -1715,20 +1716,20 @@ msgstr "Aggiorna"
 msgid "Update label"
 msgstr "Aggiorna etichetta"
 
-#: src/views/card/components/ActivityList.tsx:73
+#: src/views/card/components/ActivityList.tsx:74
 msgid "updated a checklist item"
 msgstr "ha aggiornato un elemento della checklist"
 
-#: src/views/card/components/ActivityList.tsx:63
+#: src/views/card/components/ActivityList.tsx:64
 msgid "updated the description"
 msgstr "ha aggiornato la descrizione"
 
-#: src/views/card/components/ActivityList.tsx:62
+#: src/views/card/components/ActivityList.tsx:63
 msgid "updated the title"
 msgstr "ha aggiornato il titolo"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:90
+#: src/views/card/components/ActivityList.tsx:91
 msgid "updated the title to <0>{0}</0>"
 msgstr "ha aggiornato il titolo in <0>{0}</0>"
 
@@ -1781,7 +1782,7 @@ msgstr "Visualizza e gestisci la tua fatturazione e abbonamento."
 msgid "View docs"
 msgstr "Visualizza documenti"
 
-#: src/views/public/board/index.tsx:120
+#: src/views/public/board/index.tsx:125
 msgid "View only"
 msgstr "Solo visualizzazione"
 
@@ -1789,7 +1790,7 @@ msgstr "Solo visualizzazione"
 msgid "View our roadmap."
 msgstr "Visualizza la nostra roadmap."
 
-#: src/views/public/board/index.tsx:149
+#: src/views/public/board/index.tsx:154
 msgid "View workspace"
 msgstr "Visualizza spazio di lavoro"
 
@@ -1855,7 +1856,7 @@ msgid "Workspace members"
 msgstr "Membri del workspace"
 
 #: src/views/settings/index.tsx:158
-#: src/components/NewWorkspaceForm.tsx:80
+#: src/components/NewWorkspaceForm.tsx:81
 msgid "Workspace name"
 msgstr "Nome dello spazio di lavoro"
 
@@ -1907,11 +1908,11 @@ msgstr "Puoi invitare i membri del team cliccando sul pulsante \"Invita\" nell'a
 msgid "You can self-host by following the instructions in our <0>repo</0>."
 msgstr "Puoi effettuare il self-hosting seguendo le istruzioni nel nostro <0>repo</0>."
 
-#: src/components/AuthForm.tsx:206
+#: src/components/AuthForm.tsx:221
 msgid "You have been logged in successfully."
 msgstr "Hai effettuato l'accesso con successo."
 
-#: src/components/AuthForm.tsx:189
+#: src/components/AuthForm.tsx:204
 msgid "You have been signed up successfully."
 msgstr "Ti sei registrato con successo."
 
