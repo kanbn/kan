@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-06-23 23:21+0100\n"
+"POT-Creation-Date: 2025-09-01 18:16-0300\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: fr\n"
+"Language: pt-br\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
@@ -15,11 +15,11 @@ msgstr ""
 
 #: src/views/card/components/Comment.tsx:123
 msgid " (edited)"
-msgstr " (modifié)"
+msgstr " (editado)"
 
 #: src/components/FeedbackModal.tsx:102
 msgid ", or see our"
-msgstr ", ou consultez notre"
+msgstr ", ou veja nossa"
 
 #. placeholder {0}: card?.title ?? "Card"
 #. placeholder {1}: board?.name ?? "Board"
@@ -30,176 +30,176 @@ msgstr "{0} | {1}"
 #. placeholder {0}: labelPublicIds.length
 #: src/views/board/components/NewCardForm.tsx:432
 msgid "{0} labels"
-msgstr "{0} étiquettes"
+msgstr "{0} etiquetas"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:299
 msgid "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
-msgstr "{boardCount, plural, one {Importer le tableau (1)} other {Importer les tableaux ({boardCount})}}"
+msgstr "{boardCount, plural, one {Importar quadro (1)} other {Importar quadros ({boardCount})}}"
 
 #: src/views/home/components/Pricing.tsx:36
 msgid "1 user"
-msgstr "1 utilisateur"
+msgstr "1 usuário"
 
 #: src/views/home/index.tsx:72
 msgid "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
-msgstr "Une application kanban puissante et flexible qui vous aide à organiser le travail, suivre les progrès et livrer des résultats—le tout en un seul endroit."
+msgstr "Um aplicativo kanban poderoso e flexível que ajuda você a organizar trabalho, acompanhar progresso e entregar resultados—tudo em um só lugar."
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:27
 msgid "Account deleted"
-msgstr "Compte supprimé"
+msgstr "Conta excluída"
 
 #: src/views/public/board/CardModal.tsx:143
 #: src/views/card/index.tsx:289
 msgid "Activity"
-msgstr "Activité"
+msgstr "Atividade"
 
 #: src/views/home/components/Features.tsx:103
 msgid "Activity logs"
-msgstr "Journaux d'activité"
+msgstr "Logs de atividade"
 
 #: src/views/board/components/List.tsx:110
 msgid "Add a card"
-msgstr "Ajouter une carte"
+msgstr "Adicionar um cartão"
 
 #: src/views/card/components/NewCommentForm.tsx:57
 #: src/views/card/components/Comment.tsx:146
 msgid "Add a comment..."
-msgstr "Ajouter un commentaire..."
+msgstr "Adicionar um comentário..."
 
 #: src/views/card/components/NewChecklistItemForm.tsx:140
 msgid "Add an item..."
-msgstr "Ajouter un élément..."
+msgstr "Adicionar um item..."
 
 #: src/views/card/components/Dropdown.tsx:18
 msgid "Add checklist"
-msgstr "Ajouter une checklist"
+msgstr "Adicionar checklist"
 
 #: src/components/Editor.tsx:442
 msgid "Add description... (type '/' to open commands or '@' to mention)"
-msgstr "Ajouter une description... (tapez '/' pour ouvrir les commandes ou '@' pour mentionner)"
+msgstr "Adicionar descrição... (digite '/' para abrir comandos ou '@' para mencionar)"
 
 #: src/views/card/components/ChecklistItemRow.tsx:172
 msgid "Add details..."
-msgstr "Ajouter des détails..."
+msgstr "Adicionar detalhes..."
 
 #: src/views/card/components/LabelSelector.tsx:110
 #: src/views/card/components/LabelSelector.tsx:118
 msgid "Add label"
-msgstr "Ajouter une étiquette"
+msgstr "Adicionar etiqueta"
 
 #: src/views/members/components/InviteMemberForm.tsx:85
 #: src/views/card/components/MemberSelector.tsx:130
 msgid "Add member"
-msgstr "Ajouter un membre"
+msgstr "Adicionar membro"
 
 #: src/views/card/components/ActivityList.tsx:70
 msgid "added a checklist"
-msgstr "a ajouté une checklist"
+msgstr "adicionou uma checklist"
 
 #: src/views/card/components/ActivityList.tsx:73
 msgid "added a checklist item"
-msgstr "a ajouté un élément à la checklist"
+msgstr "adicionou um item da checklist"
 
 #: src/views/card/components/ActivityList.tsx:66
 msgid "added a label to the card"
-msgstr "a ajouté une étiquette à la carte"
+msgstr "adicionou uma etiqueta ao cartão"
 
 #: src/views/card/components/ActivityList.tsx:68
 msgid "added a member to the card"
-msgstr "a ajouté un membre à la carte"
+msgstr "adicionou um membro ao cartão"
 
 #. placeholder {0}: truncate(toTitle)
 #: src/views/card/components/ActivityList.tsx:147
 msgid "added checklist <0>{0}</0>"
-msgstr "a ajouté la checklist <0>{0}</0>"
+msgstr "adicionou checklist <0>{0}</0>"
 
 #. placeholder {0}: truncate(toTitle)
 #: src/views/card/components/ActivityList.tsx:171
 msgid "added checklist item <0>{0}</0>"
-msgstr "a ajouté l'élément <0>{0}</0> à la checklist"
+msgstr "adicionou item da checklist <0>{0}</0>"
 
 #. placeholder {0}: truncate(label)
 #: src/views/card/components/ActivityList.tsx:131
 msgid "added label <0>{0}</0>"
-msgstr "a ajouté l'étiquette <0>{0}</0>"
+msgstr "adicionou etiqueta <0>{0}</0>"
 
 #: src/views/home/components/Pricing.tsx:55
 msgid "Admin roles"
-msgstr "Rôles d'administrateur"
+msgstr "Funções de administrador"
 
 #: src/views/home/components/Pricing.tsx:97
 msgid "All seats are free during the beta until Sept 1st!"
-msgstr "Tous les sièges sont gratuits pendant la bêta jusqu'au 1er sept. !"
+msgstr "Todos os assentos são gratuitos durante o beta até 1º de setembro!"
 
 #: src/views/home/components/Footer.tsx:18
 msgid "All systems operational"
-msgstr "Tous les systèmes opérationnels"
+msgstr "Todos os sistemas operacionais"
 
 #: src/views/auth/signup/index.tsx:86
 msgid "Already have an account? <0><1>Sign in</1></0>"
-msgstr "Vous avez déjà un compte ? <0><1>Connectez-vous</1></0>"
+msgstr "Já tem uma conta? <0><1>Entrar</1></0>"
 
 #: src/views/settings/index.tsx:102
 msgid "An error occurred while disconnecting your Trello account."
-msgstr "Une erreur s'est produite lors de la déconnexion de votre compte Trello."
+msgstr "Ocorreu um erro ao desconectar sua conta do Trello."
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:90
 msgid "An unexpected error occurred. Please try again later."
-msgstr "Une erreur inattendue s'est produite. Veuillez réessayer plus tard."
+msgstr "Ocorreu um erro inesperado. Tente novamente mais tarde."
 
 #: src/views/settings/index.tsx:259
 msgid "API keys"
-msgstr "Clés API"
+msgstr "Chaves de API"
 
 #: src/views/home/components/Footer.tsx:31
 msgid "API Reference"
-msgstr "Référence API"
+msgstr "Referência da API"
 
 #: src/views/boards/components/TemplateBoards.tsx:62
 msgid "Applicants"
-msgstr "Candidats"
+msgstr "Candidatos"
 
 #: src/views/boards/components/TemplateBoards.tsx:33
 msgid "Approval"
-msgstr "Approbation"
+msgstr "Aprovação"
 
 #: src/views/members/components/DeleteMemberConfirmation.tsx:47
 msgid "Are you sure want to remove {entityLabel}?"
-msgstr "Êtes-vous sûr de vouloir supprimer {entityLabel} ?"
+msgstr "Tem certeza de que deseja remover {entityLabel}?"
 
 #. placeholder {0}: workspace.name
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:62
 msgid "Are you sure you want to delete the workspace {0}?"
-msgstr "Êtes-vous sûr de vouloir supprimer l'espace de travail {0} ?"
+msgstr "Tem certeza de que deseja excluir o workspace {0}?"
 
 #: src/views/card/components/DeleteCardConfirmation.tsx:75
 msgid "Are you sure you want to delete this card?"
-msgstr "Êtes-vous sûr de vouloir supprimer cette carte ?"
+msgstr "Tem certeza de que deseja excluir este cartão?"
 
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:55
 msgid "Are you sure you want to delete this checklist?"
-msgstr "Êtes-vous sûr de vouloir supprimer cette checklist ?"
+msgstr "Tem certeza de que deseja excluir esta checklist?"
 
 #: src/views/card/components/DeleteCommentConfirmation.tsx:65
 msgid "Are you sure you want to delete this comment?"
-msgstr "Êtes-vous sûr de vouloir supprimer ce commentaire ?"
+msgstr "Tem certeza de que deseja excluir este comentário?"
 
 #: src/components/DeleteLabelConfirmation.tsx:41
 msgid "Are you sure you want to delete this label?"
-msgstr "Êtes-vous sûr de vouloir supprimer cette étiquette ?"
+msgstr "Tem certeza de que deseja excluir esta etiqueta?"
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:54
 msgid "Are you sure you want to delete your account?"
-msgstr "Êtes-vous sûr de vouloir supprimer votre compte ?"
+msgstr "Tem certeza de que deseja excluir sua conta?"
 
 #. placeholder {0}: truncate(memberName)
 #: src/views/card/components/ActivityList.tsx:111
 msgid "assigned <0>{0}</0> to the card"
-msgstr "a assigné <0>{0}</0> à la carte"
+msgstr "atribuiu <0>{0}</0> ao cartão"
 
 #: src/views/boards/components/TemplateBoards.tsx:46
 msgid "Awaiting Customer"
-msgstr "En attente du client"
+msgstr "Aguardando Cliente"
 
 #: src/views/boards/components/TemplateBoards.tsx:22
 msgid "Backlog"
@@ -207,71 +207,71 @@ msgstr "Backlog"
 
 #: src/views/boards/components/TemplateBoards.tsx:15
 msgid "Basic Kanban"
-msgstr "Kanban basique"
+msgstr "Kanban Básico"
 
 #: src/views/settings/index.tsx:198
 #: src/views/boards/components/TemplateBoards.tsx:55
 msgid "Billing"
-msgstr "Facturation"
+msgstr "Cobrança"
 
 #: src/views/settings/index.tsx:208
 msgid "Billing portal"
-msgstr "Portail de facturation"
+msgstr "Portal de cobrança"
 
 #: src/views/boards/components/TemplateBoards.tsx:37
 msgid "Blog Post"
-msgstr "Article de blog"
+msgstr "Post do Blog"
 
 #: src/views/board/index.tsx:331
 msgid "Board"
-msgstr "Tableau"
+msgstr "Quadro"
 
 #: src/views/boards/components/NewBoardForm.tsx:21
 msgid "Board name cannot exceed 100 characters"
-msgstr "Le nom du tableau ne peut pas dépasser 100 caractères"
+msgstr "O nome do quadro não pode exceder 100 caracteres"
 
 #: src/views/boards/components/NewBoardForm.tsx:20
 msgid "Board name is required"
-msgstr "Le nom du tableau est requis"
+msgstr "O nome do quadro é obrigatório"
 
 #: src/views/public/board/index.tsx:148
 #: src/views/board/index.tsx:357
 msgid "Board not found"
-msgstr "Tableau introuvable"
+msgstr "Quadro não encontrado"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:45
 msgid "Board URL can only contain letters, numbers, and hyphens"
-msgstr "L'URL du tableau ne peut contenir que des lettres, des chiffres et des traits d'union"
+msgstr "A URL do quadro pode conter apenas letras, números e hífens"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:43
 msgid "Board URL cannot exceed 60 characters"
-msgstr "L'URL du tableau ne peut pas dépasser 60 caractères"
+msgstr "A URL do quadro não pode exceder 60 caracteres"
 
 #: src/views/public/board/index.tsx:64
 msgid "Board URL copied to clipboard"
-msgstr "URL du tableau copiée dans le presse-papiers"
+msgstr "URL do quadro copiada para a área de transferência"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:41
 msgid "Board URL must be at least 3 characters long"
-msgstr "L'URL du tableau doit comporter au moins 3 caractères"
+msgstr "A URL do quadro deve ter pelo menos 3 caracteres"
 
 #: src/views/home/components/Features.tsx:78
 msgid "Board visibility"
-msgstr "Visibilité du tableau"
+msgstr "Visibilidade do quadro"
 
 #: src/views/board/components/VisibilityButton.tsx:45
 msgid "Board visibility updated"
-msgstr "Visibilité du tableau mise à jour"
+msgstr "Visibilidade do quadro atualizada"
 
 #: src/views/boards/index.tsx:27
 #: src/components/SideNavigation.tsx:68
 msgid "Boards"
-msgstr "Tableaux"
+msgstr "Quadros"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
 #: src/views/boards/index.tsx:23
 msgid "Boards | {0}"
-msgstr "Tableaux | {0}"
+msgstr "Quadros | {0}"
 
 #: src/views/boards/components/TemplateBoards.tsx:29
 msgid "Brainstorming"
@@ -283,7 +283,7 @@ msgstr "Bug"
 
 #: src/views/boards/components/TemplateBoards.tsx:51
 msgid "Bug Report"
-msgstr "Rapport de bug"
+msgstr "Relatório de Bug"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
@@ -296,203 +296,203 @@ msgstr "Rapport de bug"
 #: src/views/card/components/Comment.tsx:158
 #: src/components/DeleteLabelConfirmation.tsx:49
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Cancelar"
 
 #: src/views/card/index.tsx:260
 msgid "Card not found"
-msgstr "Carte introuvable"
+msgstr "Cartão não encontrado"
 
 #: src/views/board/components/NewCardForm.tsx:307
 msgid "Card title"
-msgstr "Titre de la carte"
+msgstr "Título do cartão"
 
 #: src/views/settings/index.tsx:291
 #: src/views/settings/index.tsx:301
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:109
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:178
 msgid "Change Password"
-msgstr "Modifier le mot de passe"
+msgstr "Alterar Senha"
 
 #: src/views/settings/index.tsx:190
 msgid "Change the language of the app."
-msgstr "Changer la langue de l'application."
+msgstr "Alterar o idioma do aplicativo."
 
 #: src/views/auth/signup/index.tsx:67
 #: src/views/auth/login/index.tsx:41
 msgid "Check your inbox"
-msgstr "Vérifiez votre boîte de réception"
+msgstr "Verifique sua caixa de entrada"
 
 #: src/views/card/components/NewChecklistForm.tsx:118
 msgid "Checklist name"
-msgstr "Nom de la checklist"
+msgstr "Nome da checklist"
 
 #: src/views/board/components/Filters.tsx:155
 msgid "Clear filters"
-msgstr "Effacer les filtres"
+msgstr "Limpar filtros"
 
 #: src/views/auth/signup/index.tsx:72
 #: src/views/auth/login/index.tsx:46
 msgid "Click on the link we've sent to {magicLinkRecipient} to sign in."
-msgstr "Cliquez sur le lien que nous avons envoyé à {magicLinkRecipient} pour vous connecter."
+msgstr "Clique no link que enviamos para {magicLinkRecipient} para entrar."
 
 #: src/views/boards/components/TemplateBoards.tsx:22
 msgid "Code Review"
-msgstr "Revue de code"
+msgstr "Revisão de Código"
 
 #: src/views/home/components/Features.tsx:84
 msgid "Collaborate seamlessly with your team."
-msgstr "Collaborez en toute fluidité avec votre équipe."
+msgstr "Colabore perfeitamente com sua equipe."
 
 #: src/views/home/components/Features.tsx:66
 msgid "Coming soon"
-msgstr "Bientôt disponible"
+msgstr "Em breve"
 
 #: src/views/home/components/Features.tsx:98
 msgid "Comments"
-msgstr "Commentaires"
+msgstr "Comentários"
 
 #: src/views/home/components/Footer.tsx:94
 msgid "Company"
-msgstr "Entreprise"
+msgstr "Empresa"
 
 #: src/views/boards/components/TemplateBoards.tsx:81
 msgid "Complete"
-msgstr "Terminé"
+msgstr "Completo"
 
 #: src/views/home/components/Pricing.tsx:70
 msgid "Complete control and ownership:"
-msgstr "Contrôle et propriété complets :"
+msgstr "Controle total e propriedade:"
 
 #: src/views/card/components/ActivityList.tsx:75
 msgid "completed a checklist item"
-msgstr "a terminé un élément de la checklist"
+msgstr "concluiu um item da checklist"
 
 #. placeholder {0}: truncate(toTitle)
 #: src/views/card/components/ActivityList.tsx:188
 msgid "completed checklist item <0>{0}</0>"
-msgstr "a terminé l'élément <0>{0}</0> de la checklist"
+msgstr "concluiu item da checklist <0>{0}</0>"
 
 #: src/views/settings/components/CustomURLConfirmation.tsx:42
 msgid "Confirm URL change"
-msgstr "Confirmer le changement d'URL"
+msgstr "Confirmar alteração de URL"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:150
 msgid "Confirm your new password"
-msgstr "Confirmez votre nouveau mot de passe"
+msgstr "Confirme sua nova senha"
 
 #: src/views/settings/index.tsx:235
 #: src/views/boards/components/ImportBoardsForm.tsx:157
 msgid "Connect Trello"
-msgstr "Connecter Trello"
+msgstr "Conectar Trello"
 
 #: src/views/home/components/Features.tsx:115
 msgid "Connect your favorite tools to streamline your workflow."
-msgstr "Connectez vos outils favoris pour simplifier votre flux de travail."
+msgstr "Conecte suas ferramentas favoritas para otimizar seu fluxo de trabalho."
 
 #: src/views/settings/index.tsx:222
 msgid "Connect your Trello account to import boards."
-msgstr "Connectez votre compte Trello pour importer des tableaux."
+msgstr "Conecte sua conta do Trello para importar quadros."
 
 #: src/views/home/components/Footer.tsx:38
 msgid "Contact"
-msgstr "Contact"
+msgstr "Contato"
 
 #: src/components/FeedbackModal.tsx:100
 msgid "Contact us"
-msgstr "Contactez-nous"
+msgstr "Entre em contato"
 
 #: src/views/boards/components/TemplateBoards.tsx:27
 msgid "Content Creation"
-msgstr "Création de contenu"
+msgstr "Criação de Conteúdo"
 
 #: src/components/AuthForm.tsx:366
 msgid "Continue with "
-msgstr "Continuer avec "
+msgstr "Continuar com "
 
 #. placeholder {0}: key === "oidc" ? oidcProviderName : provider.name
 #: src/components/AuthForm.tsx:297
 msgid "Continue with {0}"
-msgstr "Continuer avec {0}"
+msgstr "Continuar com {0}"
 
 #: src/views/home/components/Features.tsx:79
 msgid "Control who can view and edit your boards."
-msgstr "Contrôlez qui peut voir et modifier vos tableaux."
+msgstr "Controle quem pode visualizar e editar seus quadros."
 
 #: src/views/board/components/NewListForm.tsx:140
 #: src/views/board/components/NewCardForm.tsx:458
 #: src/components/LabelForm.tsx:213
 msgid "Create another"
-msgstr "Créer un autre"
+msgstr "Criar outro"
 
 #: src/views/boards/components/NewBoardForm.tsx:128
 msgid "Create board"
-msgstr "Créer un tableau"
+msgstr "Criar quadro"
 
 #: src/views/board/components/NewCardForm.tsx:468
 msgid "Create card"
-msgstr "Créer une carte"
+msgstr "Criar cartão"
 
 #: src/views/card/components/NewChecklistForm.tsx:134
 msgid "Create checklist"
-msgstr "Créer une checklist"
+msgstr "Criar checklist"
 
 #: src/components/LabelForm.tsx:238
 msgid "Create label"
-msgstr "Créer une étiquette"
+msgstr "Criar etiqueta"
 
 #: src/views/board/components/NewListForm.tsx:152
 msgid "Create list"
-msgstr "Créer une liste"
+msgstr "Criar lista"
 
 #: src/views/boards/components/BoardsList.tsx:42
 msgid "Create new board"
-msgstr "Créer un nouveau tableau"
+msgstr "Criar novo quadro"
 
 #: src/views/settings/components/CreateAPIKeyForm.tsx:54
 msgid "Create new key"
-msgstr "Créer une nouvelle clé"
+msgstr "Criar nova chave"
 
 #: src/views/card/components/LabelSelector.tsx:98
 #: src/views/board/components/NewCardForm.tsx:394
 msgid "Create new label"
-msgstr "Créer une nouvelle étiquette"
+msgstr "Criar nova etiqueta"
 
 #: src/views/board/index.tsx:425
 msgid "Create new list"
-msgstr "Créer une nouvelle liste"
+msgstr "Criar nova lista"
 
 #: src/components/WorkspaceMenu.tsx:116
 #: src/components/NewWorkspaceForm.tsx:94
 msgid "Create workspace"
-msgstr "Créer un espace de travail"
+msgstr "Criar workspace"
 
 #: src/views/card/components/ActivityList.tsx:62
 msgid "created the card"
-msgstr "a créé la carte"
+msgstr "criou o cartão"
 
 #: src/views/boards/components/TemplateBoards.tsx:23
 msgid "Critical"
-msgstr "Critique"
+msgstr "Crítico"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:19
 msgid "Current password is required"
-msgstr "Le mot de passe actuel est requis"
+msgstr "Senha atual é obrigatória"
 
 #: src/views/home/components/Pricing.tsx:74
 msgid "Custom domain"
-msgstr "Domaine personnalisé"
+msgstr "Domínio personalizado"
 
 #: src/views/settings/components/CustomURLConfirmation.tsx:45
 msgid "Custom URLs are a premium feature. You'll be directed to upgrade your account."
-msgstr "Les URL personnalisées sont une fonctionnalité premium. Vous serez dirigé vers la mise à niveau de votre compte."
+msgstr "URLs personalizadas são um recurso premium. Você será direcionado para atualizar sua conta."
 
 #: src/views/boards/components/TemplateBoards.tsx:41
 msgid "Customer Support"
-msgstr "Support client"
+msgstr "Suporte ao Cliente"
 
 #: src/components/UserMenu.tsx:153
 msgid "Dark"
-msgstr "Sombre"
+msgstr "Escuro"
 
 #: src/views/card/components/DeleteCommentConfirmation.tsx:82
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:66
@@ -500,53 +500,53 @@ msgstr "Sombre"
 #: src/components/LabelForm.tsx:228
 #: src/components/DeleteLabelConfirmation.tsx:51
 msgid "Delete"
-msgstr "Supprimer"
+msgstr "Excluir"
 
 #: src/views/settings/index.tsx:309
 #: src/views/settings/index.tsx:319
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:96
 msgid "Delete account"
-msgstr "Supprimer le compte"
+msgstr "Excluir conta"
 
 #: src/views/board/components/BoardDropdown.tsx:20
 msgid "Delete board"
-msgstr "Supprimer le tableau"
+msgstr "Excluir quadro"
 
 #: src/views/card/components/Dropdown.tsx:25
 msgid "Delete card"
-msgstr "Supprimer la carte"
+msgstr "Excluir cartão"
 
 #: src/views/card/components/Comment.tsx:91
 msgid "Delete comment"
-msgstr "Supprimer le commentaire"
+msgstr "Excluir comentário"
 
 #: src/views/board/components/List.tsx:117
 msgid "Delete list"
-msgstr "Supprimer la liste"
+msgstr "Excluir lista"
 
 #: src/views/settings/index.tsx:272
 #: src/views/settings/index.tsx:283
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:106
 msgid "Delete workspace"
-msgstr "Supprimer l'espace de travail"
+msgstr "Excluir workspace"
 
 #: src/views/card/components/ActivityList.tsx:72
 msgid "deleted a checklist"
-msgstr "a supprimé une checklist"
+msgstr "excluiu uma checklist"
 
 #: src/views/card/components/ActivityList.tsx:77
 msgid "deleted a checklist item"
-msgstr "a supprimé un élément de la checklist"
+msgstr "excluiu um item da checklist"
 
 #. placeholder {0}: truncate(fromTitle)
 #: src/views/card/components/ActivityList.tsx:163
 msgid "deleted checklist <0>{0}</0>"
-msgstr "a supprimé la checklist <0>{0}</0>"
+msgstr "excluiu checklist <0>{0}</0>"
 
 #. placeholder {0}: truncate(fromTitle)
 #: src/views/card/components/ActivityList.tsx:206
 msgid "deleted checklist item <0>{0}</0>"
-msgstr "a supprimé l'élément <0>{0}</0> de la checklist"
+msgstr "excluiu item da checklist <0>{0}</0>"
 
 #: src/views/boards/components/TemplateBoards.tsx:32
 msgid "Design"
@@ -554,273 +554,273 @@ msgstr "Design"
 
 #: src/views/settings/index.tsx:250
 msgid "Disconnect Trello"
-msgstr "Déconnecter Trello"
+msgstr "Desconectar Trello"
 
 #: src/views/home/components/Features.tsx:99
 msgid "Discuss and collaborate on cards."
-msgstr "Discutez et collaborez sur les cartes."
+msgstr "Discuta e colabore em cartões."
 
 #: src/views/settings/index.tsx:151
 msgid "Display name"
-msgstr "Nom d'affichage"
+msgstr "Nome de exibição"
 
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:22
 msgid "Display name cannot exceed 280 characters"
-msgstr "Le nom d'affichage ne peut pas dépasser 280 caractères"
+msgstr "O nome de exibição não pode exceder 280 caracteres"
 
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:19
 msgid "Display name must be at least 3 characters long"
-msgstr "Le nom d'affichage doit comporter au moins 3 caractères"
+msgstr "O nome de exibição deve ter pelo menos 3 caracteres"
 
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:41
 msgid "Display name updated"
-msgstr "Nom d'affichage mis à jour"
+msgstr "Nome de exibição atualizado"
 
 #: src/views/home/components/Faqs.tsx:83
 msgid "Do you offer a free plan?"
-msgstr "Proposez-vous un plan gratuit ?"
+msgstr "Vocês oferecem um plano gratuito?"
 
 #: src/components/FeedbackModal.tsx:109
 msgid "docs"
-msgstr "documentation"
+msgstr "docs"
 
 #: src/views/home/components/Header.tsx:16
 msgid "Docs"
-msgstr "Documentation"
+msgstr "Documentação"
 
 #: src/views/home/components/Footer.tsx:77
 #: src/views/boards/components/TemplateBoards.tsx:23
 #: src/components/UserMenu.tsx:191
 msgid "Documentation"
-msgstr "Documentation"
+msgstr "Documentação"
 
 #: src/views/auth/login/index.tsx:61
 msgid "Don't have an account? <0><1>Sign up</1></0>"
-msgstr "Vous n'avez pas de compte ? <0><1>Inscrivez-vous</1></0>"
+msgstr "Não tem uma conta? <0><1>Cadastre-se</1></0>"
 
 #: src/views/boards/components/TemplateBoards.tsx:16
 #: src/views/boards/components/TemplateBoards.tsx:22
 #: src/views/boards/components/TemplateBoards.tsx:35
 #: src/views/boards/components/TemplateBoards.tsx:48
 msgid "Done"
-msgstr "Fait"
+msgstr "Concluído"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:115
 #: src/views/board/components/BoardDropdown.tsx:15
 msgid "Edit board URL"
-msgstr "Modifier l'URL du tableau"
+msgstr "Editar URL do quadro"
 
 #: src/views/card/components/Comment.tsx:82
 msgid "Edit comment"
-msgstr "Modifier le commentaire"
+msgstr "Editar comentário"
 
 #: src/components/LabelForm.tsx:119
 msgid "Edit label"
-msgstr "Modifier l'étiquette"
+msgstr "Editar etiqueta"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:161
 msgid "Edit workspace URL"
-msgstr "Modifier l'URL de l'espace de travail"
+msgstr "Editar URL do workspace"
 
 #: src/views/boards/components/TemplateBoards.tsx:31
 msgid "Editing"
-msgstr "Édition"
+msgstr "Editando"
 
 #: src/components/AuthForm.tsx:368
 msgid "email"
-msgstr "e-mail"
+msgstr "email"
 
 #: src/views/members/components/InviteMemberForm.tsx:99
 msgid "Email"
-msgstr "E-mail"
+msgstr "Email"
 
 #: src/views/boards/components/TemplateBoards.tsx:23
 msgid "Enhancement"
-msgstr "Amélioration"
+msgstr "Melhoria"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:122
 msgid "Enter your current password"
-msgstr "Saisissez votre mot de passe actuel"
+msgstr "Digite sua senha atual"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:111
 msgid "Enter your current password and choose a new secure password."
-msgstr "Saisissez votre mot de passe actuel et choisissez un nouveau mot de passe sécurisé."
+msgstr "Digite sua senha atual e escolha uma nova senha segura."
 
 #: src/components/AuthForm.tsx:333
 msgid "Enter your email address"
-msgstr "Saisissez votre adresse e-mail"
+msgstr "Digite seu endereço de email"
 
 #: src/components/AuthForm.tsx:321
 msgid "Enter your name"
-msgstr "Saisissez votre nom"
+msgstr "Digite seu nome"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:136
 msgid "Enter your new password"
-msgstr "Saisissez votre nouveau mot de passe"
+msgstr "Digite sua nova senha"
 
 #: src/components/AuthForm.tsx:346
 msgid "Enter your password"
-msgstr "Saisissez votre mot de passe"
+msgstr "Digite sua senha"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:89
 msgid "Error Changing Password"
-msgstr "Erreur lors du changement de mot de passe"
+msgstr "Erro ao Alterar Senha"
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:39
 msgid "Error deleting account"
-msgstr "Erreur lors de la suppression du compte"
+msgstr "Erro ao excluir conta"
 
 #: src/components/DeleteLabelConfirmation.tsx:25
 msgid "Error deleting label"
-msgstr "Erreur lors de la suppression de l'étiquette"
+msgstr "Erro ao excluir etiqueta"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:45
 msgid "Error deleting workspace"
-msgstr "Erreur lors de la suppression de l'espace de travail"
+msgstr "Erro ao excluir workspace"
 
 #: src/views/settings/index.tsx:101
 msgid "Error disconnecting Trello"
-msgstr "Erreur lors de la déconnexion de Trello"
+msgstr "Erro ao desconectar Trello"
 
 #: src/views/members/components/InviteMemberForm.tsx:57
 #: src/views/members/components/InviteMemberForm.tsx:63
 msgid "Error inviting member"
-msgstr "Erreur lors de l'invitation du membre"
+msgstr "Erro ao convidar membro"
 
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:54
 msgid "Error updating display name"
-msgstr "Erreur lors de la mise à jour du nom d'affichage"
+msgstr "Erro ao atualizar nome de exibição"
 
 #: src/views/settings/components/Avatar.tsx:39
 msgid "Error updating profile image"
-msgstr "Erreur lors de la mise à jour de l'image de profil"
+msgstr "Erro ao atualizar imagem do perfil"
 
 #: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:61
 msgid "Error updating workspace description"
-msgstr "Erreur lors de la mise à jour de la description de l'espace de travail"
+msgstr "Erro ao atualizar descrição do workspace"
 
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:56
 msgid "Error updating workspace name"
-msgstr "Erreur lors de la mise à jour du nom de l'espace de travail"
+msgstr "Erro ao atualizar nome do workspace"
 
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:73
 msgid "Error updating workspace URL"
-msgstr "Erreur lors de la mise à jour de l'URL de l'espace de travail"
+msgstr "Erro ao atualizar URL do workspace"
 
 #: src/views/settings/components/Avatar.tsx:56
 #: src/views/settings/components/Avatar.tsx:97
 msgid "Error uploading profile image"
-msgstr "Erreur lors du téléchargement de l'image de profil"
+msgstr "Erro ao fazer upload da imagem do perfil"
 
 #: src/views/home/components/Pricing.tsx:52
 msgid "Everything in the free plan, plus:"
-msgstr "Tout ce qui est inclus dans le plan gratuit, plus :"
+msgstr "Tudo no plano gratuito, mais:"
 
 #: src/views/home/components/Pricing.tsx:33
 msgid "Everything you need, free forever. Unlimited boards, unlimited lists, unlimited cards. Upgrade any time."
-msgstr "Tout ce dont vous avez besoin, gratuit pour toujours. Tableaux illimités, listes illimitées, cartes illimitées. Possibilité de mise à niveau à tout moment."
+msgstr "Tudo que você precisa, gratuito para sempre. Quadros ilimitados, listas ilimitadas, cartões ilimitados. Atualize a qualquer momento."
 
 #: src/views/boards/components/TemplateBoards.tsx:78
 msgid "Execution"
-msgstr "Exécution"
+msgstr "Execução"
 
 #. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
 #: src/components/AuthForm.tsx:269
 msgid "Failed to login with {0}. Please try again."
-msgstr "Échec de connexion avec {0}. Veuillez réessayer."
+msgstr "Falha ao fazer login com {0}. Tente novamente."
 
 #: src/views/home/components/Footer.tsx:51
 #: src/views/home/components/Faqs.tsx:143
 msgid "FAQs"
-msgstr "FAQ"
+msgstr "Perguntas Frequentes"
 
 #: src/views/boards/components/TemplateBoards.tsx:23
 msgid "Feature"
-msgstr "Fonctionnalité"
+msgstr "Recurso"
 
 #: src/views/boards/components/TemplateBoards.tsx:52
 msgid "Feature Request"
-msgstr "Demande de fonctionnalité"
+msgstr "Solicitação de Recurso"
 
 #: src/views/home/components/Header.tsx:14
 #: src/views/home/components/Footer.tsx:49
 #: src/views/home/components/Features.tsx:125
 msgid "Features"
-msgstr "Fonctionnalités"
+msgstr "Recursos"
 
 #: src/components/UserMenu.tsx:199
 #: src/components/FeedbackModal.tsx:59
 msgid "Feedback"
-msgstr "Commentaires"
+msgstr "Feedback"
 
 #: src/components/FeedbackModal.tsx:33
 msgid "Feedback sent"
-msgstr "Commentaires envoyés"
+msgstr "Feedback enviado"
 
 #: src/views/board/components/Filters.tsx:149
 msgid "Filter"
-msgstr "Filtrer"
+msgstr "Filtro"
 
 #: src/views/home/components/Faqs.tsx:150
 msgid "Find answers to common questions about the project. Can't find what you're looking for? Feel free to <0>contact us</0>."
-msgstr "Trouvez des réponses aux questions fréquentes sur le projet. Vous ne trouvez pas ce que vous cherchez ? N'hésitez pas à <0>nous contacter</0>."
+msgstr "Encontre respostas para perguntas comuns sobre o projeto. Não consegue encontrar o que está procurando? Sinta-se à vontade para <0>entrar em contato conosco</0>."
 
 #: src/views/home/components/Faqs.tsx:41
 msgid "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users (free during the beta) and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge."
-msgstr "Pour une durabilité à long terme, nous reconnaissons que tous les bons projets open source ont besoin d'une source de revenus. La nôtre provient de l'offre cloud payante pour les espaces de travail avec plusieurs utilisateurs (gratuite pendant la bêta) et pour les slugs d'espace de travail personnalisés. Il n'y a aucune obligation de l'utiliser, et vous pouvez auto-héberger le logiciel sur votre propre infrastructure gratuitement."
+msgstr "Para sustentabilidade a longo prazo, reconhecemos que todos os bons projetos open source precisam de uma fonte de receita. A nossa vem da oferta de nuvem paga para workspaces com múltiplos usuários (gratuito durante o beta) e para slugs de workspace personalizados. Não há obrigação de usá-la, e você pode hospedar o software em sua própria infraestrutura gratuitamente."
 
 #: src/views/home/components/Pricing.tsx:32
 #: src/views/home/components/Pricing.tsx:32
 msgid "Free"
-msgstr "Gratuit"
+msgstr "Gratuito"
 
 #: src/views/home/components/Pricing.tsx:34
 msgid "Free, forever"
-msgstr "Gratuit, pour toujours"
+msgstr "Gratuito, para sempre"
 
 #: src/views/boards/components/TemplateBoards.tsx:69
 msgid "Full-time"
-msgstr "Temps plein"
+msgstr "Tempo integral"
 
 #: src/views/boards/components/TemplateBoards.tsx:83
 msgid "Fun"
-msgstr "Amusant"
+msgstr "Diversão"
 
 #: src/views/home/components/Header.tsx:102
 #: src/views/home/components/Header.tsx:141
 #: src/views/home/components/Cta.tsx:61
 #: src/views/auth/signup/index.tsx:67
 msgid "Get started"
-msgstr "Commencer"
+msgstr "Começar"
 
 #: src/views/home/components/Pricing.tsx:31
 #: src/views/home/components/Pricing.tsx:49
 msgid "Get Started"
-msgstr "Commencer"
+msgstr "Começar"
 
 #: src/views/boards/components/BoardsList.tsx:38
 msgid "Get started by creating a new board"
-msgstr "Commencez par créer un nouveau tableau"
+msgstr "Comece criando um novo quadro"
 
 #: src/views/board/index.tsx:417
 msgid "Get started by creating a new list"
-msgstr "Commencez par créer une nouvelle liste"
+msgstr "Comece criando uma nova lista"
 
 #: src/views/home/components/Cta.tsx:54
 msgid "Get started for free today"
-msgstr "Commencez gratuitement aujourd'hui"
+msgstr "Comece gratuitamente hoje"
 
 #: src/views/home/components/Pricing.tsx:92
 msgid "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team."
-msgstr "Commencez gratuitement, sans limites d'utilisation. Pour la collaboration, passez à un forfait adapté à la taille de votre équipe."
+msgstr "Comece gratuitamente, sem limites de uso. Para colaboração, atualize para um plano que se adapte ao tamanho da sua equipe."
 
 #: src/views/home/index.tsx:76
 msgid "Get started on Cloud"
-msgstr "Commencer sur le Cloud"
+msgstr "Comece na Nuvem"
 
 #: src/views/home/components/Footer.tsx:25
 msgid "Getting started"
-msgstr "Premiers pas"
+msgstr "Começando"
 
 #: src/views/home/components/Footer.tsx:37
 msgid "GitHub"
@@ -829,291 +829,283 @@ msgstr "GitHub"
 #: src/views/home/components/Header.tsx:96
 #: src/views/home/components/Header.tsx:133
 msgid "Go to app"
-msgstr "Accéder à l'application"
+msgstr "Ir para o app"
 
 #: src/views/boards/components/TemplateBoards.tsx:17
 msgid "High Priority"
-msgstr "Haute priorité"
+msgstr "Alta Prioridade"
 
 #: src/views/boards/components/TemplateBoards.tsx:67
 msgid "Hired"
-msgstr "Embauché"
+msgstr "Contratado"
 
 #: src/views/home/components/Pricing.tsx:69
 msgid "Host Kan on your own infrastructure. Ideal for organisations that need complete control over their data."
-msgstr "Hébergez Kan sur votre propre infrastructure. Idéal pour les organisations qui ont besoin d'un contrôle total sur leurs données."
+msgstr "Hospede o Kan em sua própria infraestrutura. Ideal para organizações que precisam de controle total sobre seus dados."
 
 #: src/views/home/components/Faqs.tsx:64
 msgid "How do I get a custom URL?"
-msgstr "Comment obtenir une URL personnalisée ?"
+msgstr "Como consigo uma URL personalizada?"
 
 #: src/views/home/components/Faqs.tsx:46
 msgid "How do I import my Trello boards?"
-msgstr "Comment importer mes tableaux Trello ?"
+msgstr "Como importo meus quadros do Trello?"
 
 #: src/views/home/components/Faqs.tsx:108
 msgid "How do I invite team members?"
-msgstr "Comment inviter des membres de l'équipe ?"
+msgstr "Como convido membros da equipe?"
 
 #: src/views/home/components/Faqs.tsx:124
 msgid "How do I self-host?"
-msgstr "Comment faire pour auto-héberger ?"
+msgstr "Como faço auto-hospedagem?"
 
 #: src/views/home/components/Faqs.tsx:38
 msgid "How is the project funded?"
-msgstr "Comment le projet est-il financé ?"
+msgstr "Como o projeto é financiado?"
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:82
 msgid "I acknowledge that all of my account data will be permanently deleted and want to proceed."
-msgstr "Je reconnais que toutes les données de mon compte seront définitivement supprimées et je souhaite continuer."
+msgstr "Reconheço que todos os dados da minha conta serão permanentemente excluídos e desejo prosseguir."
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:92
 msgid "I acknowledge that all of the workspace data will be permanently deleted and want to proceed."
-msgstr "Je reconnais que toutes les données de l'espace de travail seront définitivement supprimées et je souhaite continuer."
+msgstr "Reconheço que todos os dados do workspace serão permanentemente excluídos e desejo prosseguir."
 
 #: src/views/boards/components/TemplateBoards.tsx:75
 msgid "Ideas"
-msgstr "Idées"
+msgstr "Ideias"
 
 #: src/components/FeedbackModal.tsx:75
 msgid "Ideas to improve this page..."
-msgstr "Idées pour améliorer cette page..."
+msgstr "Ideias para melhorar esta página..."
 
 #: src/views/boards/index.tsx:38
 msgid "Import"
-msgstr "Importer"
+msgstr "Importar"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:191
 msgid "Import complete"
-msgstr "Importation terminée"
+msgstr "Importação concluída"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:204
 msgid "Import failed"
-msgstr "Échec de l'importation"
+msgstr "Importação falhou"
 
 #: src/views/home/components/Features.tsx:89
 msgid "Import your Trello boards and hit the ground running."
-msgstr "Importez vos tableaux Trello et commencez immédiatement."
+msgstr "Importe seus quadros do Trello e comece a trabalhar imediatamente."
 
 #: src/views/boards/components/TemplateBoards.tsx:83
 msgid "Important"
-msgstr "Important"
+msgstr "Importante"
 
 #: src/views/home/components/Footer.tsx:27
 msgid "Importing from Trello"
-msgstr "Importation depuis Trello"
+msgstr "Importando do Trello"
 
 #: src/views/home/components/Faqs.tsx:49
 msgid "Importing your Trello boards into Kan is easy. You can follow our step-by-step guide <0>here</0>."
-msgstr "L'importation de vos tableaux Trello dans Kan est simple. Vous pouvez suivre notre guide étape par étape <0>ici</0>."
+msgstr "Importar seus quadros do Trello para o Kan é fácil. Você pode seguir nosso guia passo a passo <0>aqui</0>."
 
 #: src/views/boards/components/TemplateBoards.tsx:16
 #: src/views/boards/components/TemplateBoards.tsx:22
 #: src/views/boards/components/TemplateBoards.tsx:45
 msgid "In Progress"
-msgstr "En cours"
+msgstr "Em Progresso"
 
 #: src/views/home/components/Pricing.tsx:28
 msgid "Individuals"
-msgstr "Particuliers"
+msgstr "Indivíduos"
 
 #: src/views/home/components/Features.tsx:114
 msgid "Integrations"
-msgstr "Intégrations"
+msgstr "Integrações"
 
 #: src/views/boards/components/TemplateBoards.tsx:64
 msgid "Interviewing"
-msgstr "Entretien"
+msgstr "Entrevistando"
 
 #: src/views/members/components/InviteMemberForm.tsx:26
 msgid "Invalid email address"
-msgstr "Adresse e-mail invalide"
+msgstr "Endereço de email inválido"
 
 #: src/views/members/index.tsx:169
 msgid "Invite"
-msgstr "Inviter"
+msgstr "Convidar"
 
 #: src/views/members/components/InviteMemberForm.tsx:113
 msgid "Invite another"
-msgstr "Inviter un autre"
+msgstr "Convidar outro"
 
 #: src/views/members/components/InviteMemberForm.tsx:123
 #: src/views/card/components/MemberSelector.tsx:112
 msgid "Invite member"
-msgstr "Inviter un membre"
+msgstr "Convidar membro"
 
 #: src/views/boards/components/TemplateBoards.tsx:69
 msgid "Junior"
-msgstr "Junior"
+msgstr "Júnior"
 
 #: src/views/home/components/Pricing.tsx:51
 msgid "Kanban is better with a team. Perfect for small and growing teams looking to collaborate."
-msgstr "Kanban est meilleur en équipe. Parfait pour les petites équipes et celles en croissance qui cherchent à collaborer."
+msgstr "Kanban é melhor com uma equipe. Perfeito para equipes pequenas e em crescimento que buscam colaborar."
 
 #: src/views/home/components/Features.tsx:129
 msgid "Kanban reimagined"
-msgstr "Kanban réinventé"
+msgstr "Kanban reimaginado"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:67
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:57
 msgid "Keep in mind that this action is irreversible."
-msgstr "Gardez à l'esprit que cette action est irréversible."
+msgstr "Tenha em mente que esta ação é irreversível."
 
 #: src/views/card/index.tsx:117
 #: src/views/board/components/NewCardForm.tsx:398
 #: src/views/board/components/Filters.tsx:101
 msgid "Labels"
-msgstr "Étiquettes"
+msgstr "Etiquetas"
 
 #: src/views/home/components/Features.tsx:93
 msgid "Labels & Filters"
-msgstr "Étiquettes & filtres"
+msgstr "Etiquetas e Filtros"
 
 #: src/views/settings/index.tsx:187
 msgid "Language"
-msgstr "Langue"
+msgstr "Idioma"
 
 #: src/views/boards/components/TemplateBoards.tsx:83
 msgid "Learning"
-msgstr "Apprentissage"
+msgstr "Aprendizado"
 
 #: src/views/home/components/Footer.tsx:130
 msgid "Legal"
-msgstr "Mentions légales"
+msgstr "Legal"
 
 #: src/views/home/components/Footer.tsx:44
 msgid "License"
-msgstr "Licence"
+msgstr "Licença"
 
 #: src/components/UserMenu.tsx:167
 msgid "Light"
-msgstr "Clair"
+msgstr "Claro"
 
 #: src/views/public/board/index.tsx:62
 msgid "Link copied"
-msgstr "Lien copié"
+msgstr "Link copiado"
 
 #: src/views/card/index.tsx:109
 msgid "List"
-msgstr "Liste"
+msgstr "Lista"
 
 #: src/views/board/components/NewListForm.tsx:128
 msgid "List name"
-msgstr "Nom de la liste"
+msgstr "Nome da lista"
 
 #: src/views/auth/login/index.tsx:31
 msgid "Login | kan.bn"
-msgstr "Connexion | kan.bn"
+msgstr "Entrar | kan.bn"
 
 #: src/components/UserMenu.tsx:209
 msgid "Logout"
-msgstr "Déconnexion"
+msgstr "Sair"
 
 #: src/views/boards/components/TemplateBoards.tsx:83
 msgid "Long-term"
-msgstr "Long terme"
+msgstr "Longo prazo"
 
 #: src/views/boards/components/TemplateBoards.tsx:17
 msgid "Low Priority"
-msgstr "Priorité basse"
+msgstr "Baixa prioridade"
 
 #: src/components/AuthForm.tsx:369
 msgid "magic link"
-msgstr "lien magique"
+msgstr "link mágico"
 
 #: src/views/card/components/ActivityList.tsx:76
 msgid "marked a checklist item as incomplete"
-msgstr "a marqué un élément de la checklist comme incomplet"
+msgstr "marcou um item da checklist como incompleto"
 
 #. placeholder {0}: truncate(toTitle)
 #: src/views/card/components/ActivityList.tsx:197
 msgid "marked checklist item <0>{0}</0> as incomplete"
-msgstr "a marqué l'élément <0>{0}</0> de la checklist comme incomplet"
+msgstr "marcou o item da checklist <0>{0}</0> como incompleto"
 
 #: src/views/boards/components/TemplateBoards.tsx:17
 msgid "Medium Priority"
-msgstr "Priorité moyenne"
-
-#: src/views/members/index.tsx:161
-#: src/views/card/index.tsx:125
-#: src/views/board/components/NewCardForm.tsx:357
-#: src/views/board/components/Filters.tsx:93
-#: src/components/SideNavigation.tsx:73
-msgid "Members"
-msgstr "Membres"
+msgstr "Prioridade média"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
 #: src/views/members/index.tsx:157
 msgid "Members | {0}"
-msgstr "Membres | {0}"
+msgstr "Membros | {0}"
 
 #: src/views/home/components/Pricing.tsx:14
 msgid "Monthly"
-msgstr "Mensuel"
+msgstr "Mensal"
 
 #. placeholder {0}: truncate(fromList)
 #. placeholder {1}: truncate(toList)
 #: src/views/card/components/ActivityList.tsx:99
 msgid "moved the card from <0>{0}</0> to<1>{1}</1>"
-msgstr "a déplacé la carte de <0>{0}</0> vers <1>{1}</1>"
+msgstr "moveu o cartão de <0>{0}</0> para <1>{1}</1>"
 
 #: src/views/card/components/ActivityList.tsx:65
 msgid "moved the card to another list"
-msgstr "a déplacé la carte vers une autre liste"
+msgstr "moveu o cartão para outra lista"
 
 #: src/views/boards/components/NewBoardForm.tsx:99
 #: src/components/LabelForm.tsx:135
 msgid "Name"
-msgstr "Nom"
+msgstr "Nome"
 
 #: src/components/FeedbackModal.tsx:95
 msgid "Need help?"
-msgstr "Besoin d'aide ?"
+msgstr "Precisa de ajuda?"
 
 #: src/views/boards/index.tsx:48
 msgid "New"
-msgstr "Nouveau"
+msgstr "Novo"
 
 #: src/views/boards/components/NewBoardForm.tsx:85
 msgid "New board"
-msgstr "Nouveau tableau"
+msgstr "Novo quadro"
 
 #: src/views/board/components/NewCardForm.tsx:290
 msgid "New card"
-msgstr "Nouvelle carte"
+msgstr "Novo cartão"
 
 #: src/views/card/components/NewChecklistForm.tsx:102
 msgid "New checklist"
-msgstr "Nouvelle checklist"
+msgstr "Nova checklist"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:322
 msgid "New import"
-msgstr "Nouvel import"
+msgstr "Nova importação"
 
 #: src/components/LabelForm.tsx:119
 msgid "New label"
-msgstr "Nouvelle étiquette"
+msgstr "Nova etiqueta"
 
 #: src/views/board/index.tsx:394
 #: src/views/board/components/NewListForm.tsx:112
 msgid "New list"
-msgstr "Nouvelle liste"
+msgstr "Nova lista"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:23
 msgid "New password is required"
-msgstr "Le nouveau mot de passe est requis"
+msgstr "Nova senha é obrigatória"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:31
 msgid "New password must be different from current password"
-msgstr "Le nouveau mot de passe doit être différent du mot de passe actuel"
+msgstr "A nova senha deve ser diferente da atual"
 
 #: src/views/boards/components/TemplateBoards.tsx:43
 msgid "New Ticket"
-msgstr "Nouveau ticket"
+msgstr "Novo ticket"
 
 #: src/components/NewWorkspaceForm.tsx:65
 msgid "New workspace"
-msgstr "Nouvel espace de travail"
+msgstr "Novo workspace"
 
 #: src/views/boards/components/TemplateBoards.tsx:37
 msgid "Newsletter"
@@ -1121,39 +1113,39 @@ msgstr "Newsletter"
 
 #: src/views/boards/components/TemplateBoards.tsx:80
 msgid "Next Steps"
-msgstr "Prochaines étapes"
+msgstr "Próximos passos"
 
 #: src/views/boards/components/BoardsList.tsx:35
 msgid "No boards"
-msgstr "Aucun tableau"
+msgstr "Nenhum quadro"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:242
 msgid "No boards found"
-msgstr "Aucun tableau trouvé"
+msgstr "Nenhum quadro encontrado"
 
 #: src/views/home/index.tsx:86
 msgid "No credit card required"
-msgstr "Aucune carte de crédit requise"
+msgstr "Não é necessário cartão de crédito"
 
 #: src/views/board/index.tsx:414
 msgid "No lists"
-msgstr "Aucune liste"
+msgstr "Nenhuma lista"
 
 #: src/views/boards/components/TemplateBoards.tsx:65
 msgid "Offer"
-msgstr "Offre"
+msgstr "Oferta"
 
 #: src/views/boards/components/TemplateBoards.tsx:66
 msgid "Onboarding"
-msgstr "Intégration"
+msgstr "Integração"
 
 #: src/views/settings/index.tsx:312
 msgid "Once you delete your account, there is no going back. This action cannot be undone."
-msgstr "Une fois que vous supprimez votre compte, il n'y a pas de retour possible. Cette action ne peut pas être annulée."
+msgstr "Uma vez que você excluir sua conta, não há volta. Esta ação não pode ser desfeita."
 
 #: src/views/settings/index.tsx:275
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
-msgstr "Une fois que vous supprimez votre espace de travail, il n'y a pas de retour possible. Cette action ne peut pas être annulée."
+msgstr "Uma vez que você excluir seu workspace, não há volta. Esta ação não pode ser desfeita."
 
 #: src/components/AuthForm.tsx:311
 msgid "or"
@@ -1161,68 +1153,68 @@ msgstr "ou"
 
 #: src/views/home/components/Features.tsx:94
 msgid "Organize and find cards quickly with powerful filtering tools."
-msgstr "Organisez et trouvez rapidement des cartes avec des outils de filtrage puissants."
+msgstr "Organize e encontre cartões rapidamente com ferramentas de filtragem poderosas."
 
 #: src/views/home/components/Pricing.tsx:73
 msgid "Own your data"
-msgstr "Maîtrisez vos données"
+msgstr "Seus dados são seus"
 
 #: src/views/boards/components/TemplateBoards.tsx:69
 msgid "Part-time"
-msgstr "Temps partiel"
+msgstr "Meio período"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:69
 msgid "Password Changed"
-msgstr "Mot de passe modifié"
+msgstr "Senha alterada"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:22
 msgid "Password must be at least 8 characters"
-msgstr "Le mot de passe doit comporter au moins 8 caractères"
+msgstr "A senha deve ter pelo menos 8 caracteres"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:27
 msgid "Passwords do not match"
-msgstr "Les mots de passe ne correspondent pas"
+msgstr "As senhas não coincidem"
 
 #: src/views/home/components/Pricing.tsx:101
 msgid "Payment frequency"
-msgstr "Fréquence de paiement"
+msgstr "Frequência de pagamento"
 
 #: src/views/members/index.tsx:118
 msgid "Pending"
-msgstr "En attente"
+msgstr "Pendente"
 
 #: src/views/home/components/Pricing.tsx:15
 #: src/views/home/components/Pricing.tsx:20
 msgid "per user/month"
-msgstr "par utilisateur/mois"
+msgstr "por usuário/mês"
 
 #: src/views/boards/components/TemplateBoards.tsx:73
 msgid "Personal Project"
-msgstr "Projet personnel"
+msgstr "Projeto pessoal"
 
 #: src/views/boards/components/TemplateBoards.tsx:77
 msgid "Planning"
-msgstr "Planification"
+msgstr "Planejamento"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:24
 msgid "Please confirm your new password"
-msgstr "Veuillez confirmer votre nouveau mot de passe"
+msgstr "Por favor, confirme sua nova senha"
 
 #: src/components/AuthForm.tsx:337
 msgid "Please enter a valid email address"
-msgstr "Veuillez saisir une adresse e-mail valide"
+msgstr "Por favor, insira um endereço de e-mail válido"
 
 #: src/components/AuthForm.tsx:325
 msgid "Please enter a valid name"
-msgstr "Veuillez saisir un nom valide"
+msgstr "Por favor, insira um nome válido"
 
 #: src/components/AuthForm.tsx:350
 msgid "Please enter a valid password"
-msgstr "Veuillez saisir un mot de passe valide"
+msgstr "Por favor, insira uma senha válida"
 
 #: src/views/settings/components/Avatar.tsx:57
 msgid "Please select a file to upload."
-msgstr "Veuillez sélectionner un fichier à télécharger."
+msgstr "Por favor, selecione um arquivo para enviar."
 
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:74
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:57
@@ -1259,450 +1251,450 @@ msgstr "Veuillez sélectionner un fichier à télécharger."
 #: src/components/FeedbackModal.tsx:41
 #: src/components/DeleteLabelConfirmation.tsx:26
 msgid "Please try again later, or contact customer support."
-msgstr "Veuillez réessayer plus tard ou contacter le service client."
+msgstr "Por favor, tente novamente mais tarde ou contate o suporte ao cliente."
 
 #: src/views/home/components/Pricing.tsx:85
 #: src/views/home/components/Header.tsx:15
 #: src/views/home/components/Footer.tsx:50
 msgid "Pricing"
-msgstr "Tarifs"
+msgstr "Preços"
 
 #: src/views/home/components/Pricing.tsx:56
 msgid "Priority email support"
-msgstr "Support par e-mail prioritaire"
+msgstr "Suporte prioritário por e-mail"
 
 #: src/views/home/components/Footer.tsx:42
 msgid "Privacy policy"
-msgstr "Politique de confidentialité"
+msgstr "Política de privacidade"
 
 #: src/views/board/components/VisibilityButton.tsx:73
 msgid "Private"
-msgstr "Privé"
+msgstr "Privado"
 
 #: src/views/settings/components/Avatar.tsx:26
 msgid "Profile image updated"
-msgstr "Image de profil mise à jour"
+msgstr "Imagem de perfil atualizada"
 
 #: src/views/settings/index.tsx:146
 msgid "Profile picture"
-msgstr "Photo de profil"
+msgstr "Foto de perfil"
 
 #: src/views/board/components/VisibilityButton.tsx:68
 msgid "Public"
-msgstr "Public"
+msgstr "Público"
 
 #: src/views/boards/components/TemplateBoards.tsx:34
 msgid "Publishing"
-msgstr "Publication"
+msgstr "Publicação"
 
 #: src/views/boards/components/TemplateBoards.tsx:53
 msgid "Question"
-msgstr "Question"
+msgstr "Pergunta"
 
 #: src/views/home/components/Faqs.tsx:147
 msgid "Questions?"
-msgstr "Des questions ?"
+msgstr "Dúvidas?"
 
 #: src/views/boards/components/TemplateBoards.tsx:83
 msgid "Quick Win"
-msgstr "Victoire rapide"
+msgstr "Vitória rápida"
 
 #: src/views/boards/components/TemplateBoards.tsx:60
 msgid "Recruitment"
-msgstr "Recrutement"
+msgstr "Recrutamento"
 
 #: src/views/boards/components/TemplateBoards.tsx:69
 msgid "Remote"
-msgstr "À distance"
+msgstr "Remoto"
 
 #: src/views/members/components/DeleteMemberConfirmation.tsx:58
 msgid "Remove"
-msgstr "Supprimer"
+msgstr "Remover"
 
 #: src/views/members/index.tsx:132
 msgid "Remove member"
-msgstr "Supprimer le membre"
+msgstr "Remover membro"
 
 #: src/views/card/components/ActivityList.tsx:67
 msgid "removed a label from the card"
-msgstr "a supprimé une étiquette de la carte"
+msgstr "removeu uma etiqueta do cartão"
 
 #: src/views/card/components/ActivityList.tsx:69
 msgid "removed a member from the card"
-msgstr "a retiré un membre de la carte"
+msgstr "removeu um membro do cartão"
 
 #. placeholder {0}: truncate(label)
 #: src/views/card/components/ActivityList.tsx:139
 msgid "removed label <0>{0}</0>"
-msgstr "a supprimé l'étiquette <0>{0}</0>"
+msgstr "removeu a etiqueta <0>{0}</0>"
 
 #: src/views/card/components/ActivityList.tsx:71
 msgid "renamed a checklist"
-msgstr "a renommé une checklist"
+msgstr "renomeou uma checklist"
 
 #. placeholder {0}: truncate(toTitle)
 #: src/views/card/components/ActivityList.tsx:155
 msgid "renamed checklist <0>{0}</0>"
-msgstr "a renommé la checklist <0>{0}</0>"
+msgstr "renomeou a checklist <0>{0}</0>"
 
 #. placeholder {0}: truncate(toTitle)
 #: src/views/card/components/ActivityList.tsx:179
 msgid "renamed checklist item to <0>{0}</0>"
-msgstr "a renommé l'élément de la liste de contrôle en <0>{0}</0>"
+msgstr "renomeou o item da checklist para <0>{0}</0>"
 
 #: src/views/boards/components/TemplateBoards.tsx:76
 msgid "Research"
-msgstr "Recherche"
+msgstr "Pesquisa"
 
 #: src/views/boards/components/TemplateBoards.tsx:47
 msgid "Resolution"
-msgstr "Résolution"
+msgstr "Resolução"
 
 #: src/views/home/components/Footer.tsx:113
 msgid "Resources"
-msgstr "Ressources"
+msgstr "Recursos"
 
 #: src/views/boards/components/TemplateBoards.tsx:79
 msgid "Review"
-msgstr "Révision"
+msgstr "Revisão"
 
 #: src/views/settings/components/CreateAPIKeyForm.tsx:49
 msgid "Revoke"
-msgstr "Révoquer"
+msgstr "Revogar"
 
 #: src/views/home/components/Header.tsx:13
 #: src/views/home/components/Footer.tsx:36
 msgid "Roadmap"
-msgstr "Feuille de route"
+msgstr "Roteiro"
 
 #: src/views/members/index.tsx:191
 msgid "Role"
-msgstr "Rôle"
+msgstr "Função"
 
 #: src/views/home/components/Pricing.tsx:72
 msgid "Run on your own infrastructure"
-msgstr "Exécutez sur votre propre infrastructure"
+msgstr "Execute na sua própria infraestrutura"
 
 #: src/views/card/components/Comment.tsx:165
 msgid "Save"
-msgstr "Enregistrer"
+msgstr "Salvar"
 
 #: src/views/home/components/Features.tsx:109
 msgid "Save time with reusable board templates."
-msgstr "Gagnez du temps avec des modèles de tableaux réutilisables."
+msgstr "Economize tempo com modelos de quadro reutilizáveis."
 
 #: src/views/boards/components/TemplateBoards.tsx:63
 msgid "Screening"
-msgstr "Présélection"
+msgstr "Triagem"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:274
 msgid "Select all"
-msgstr "Sélectionner tout"
+msgstr "Selecionar tudo"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:157
 msgid "Select source"
-msgstr "Sélectionner la source"
+msgstr "Selecionar origem"
 
 #: src/views/home/components/Pricing.tsx:64
 msgid "Self Host"
-msgstr "Auto-hébergement"
+msgstr "Auto-hospedagem"
 
 #: src/views/home/index.tsx:82
 msgid "Self host with Github"
-msgstr "Auto-hébergement avec Github"
+msgstr "Auto-hospedagem com Github"
 
 #: src/views/card/components/ActivityList.tsx:108
 msgid "self-assigned the card"
-msgstr "s'est auto-assigné la carte"
+msgstr "autodesignou o cartão"
 
 #: src/components/FeedbackModal.tsx:116
 msgid "Send feedback"
-msgstr "Envoyer des commentaires"
+msgstr "Enviar feedback"
 
 #: src/views/boards/components/TemplateBoards.tsx:69
 msgid "Senior"
-msgstr "Senior"
+msgstr "Sênior"
 
 #: src/views/settings/index.tsx:140
 #: src/components/SideNavigation.tsx:78
 msgid "Settings"
-msgstr "Paramètres"
+msgstr "Configurações"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
 #: src/views/settings/index.tsx:136
 msgid "Settings | {0}"
-msgstr "Paramètres | {0}"
+msgstr "Configurações | {0}"
 
 #: src/views/home/components/Header.tsx:100
 #: src/views/home/components/Header.tsx:138
 msgid "Sign in"
-msgstr "Se connecter"
+msgstr "Entrar"
 
 #: src/views/auth/signup/index.tsx:32
 #: src/views/auth/signup/index.tsx:57
 msgid "Sign up | kan.bn"
-msgstr "Inscription | kan.bn"
+msgstr "Cadastrar | kan.bn"
 
 #: src/views/auth/signup/index.tsx:42
 msgid "Sign up disabled"
-msgstr "Inscription désactivée"
+msgstr "Cadastro desativado"
 
 #: src/views/auth/signup/index.tsx:45
 msgid "Sign up is currently disabled. Please try again later."
-msgstr "L'inscription est actuellement désactivée. Veuillez réessayer plus tard."
+msgstr "O cadastro está desativado no momento. Por favor, tente novamente mais tarde."
 
 #: src/components/AuthForm.tsx:366
 msgid "Sign up with "
-msgstr "S'inscrire avec "
+msgstr "Cadastrar com "
 
 #: src/views/home/components/Pricing.tsx:89
 msgid "Simple pricing"
-msgstr "Tarification simple"
+msgstr "Preços simples"
 
 #: src/views/home/components/Features.tsx:132
 msgid "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done."
-msgstr "Gestion de tâches visuelle et simple qui fonctionne parfaitement. Glissez-déposez des cartes, collaborez avec votre équipe et accomplissez davantage."
+msgstr "Gestão de tarefas simples e visual que funciona. Arraste e solte cartões, colabore com sua equipe e produza mais."
 
 #: src/views/boards/components/TemplateBoards.tsx:37
 msgid "Social Media"
-msgstr "Réseaux sociaux"
+msgstr "Mídias sociais"
 
 #: src/views/boards/components/TemplateBoards.tsx:21
 msgid "Software Development"
-msgstr "Développement logiciel"
+msgstr "Desenvolvimento de software"
 
 #: src/views/home/index.tsx:38
 msgid "Star on Github"
-msgstr "Étoile sur Github"
+msgstr "Dê uma estrela no Github"
 
 #: src/components/AuthForm.tsx:203
 #: src/components/AuthForm.tsx:220
 msgid "Success"
-msgstr "Succès"
+msgstr "Sucesso"
 
 #: src/components/UserMenu.tsx:180
 msgid "Support"
-msgstr "Assistance"
+msgstr "Suporte"
 
 #: src/views/home/components/Pricing.tsx:57
 msgid "Support the development of the project"
-msgstr "Soutenir le développement du projet"
+msgstr "Apoie o desenvolvimento do projeto"
 
 #: src/components/UserMenu.tsx:139
 msgid "System"
-msgstr "Système"
+msgstr "Sistema"
 
 #: src/views/home/components/Pricing.tsx:46
 msgid "Teams"
-msgstr "Équipes"
+msgstr "Equipes"
 
 #: src/views/home/components/Features.tsx:108
 msgid "Templates"
-msgstr "Modèles"
+msgstr "Modelos"
 
 #: src/views/home/components/Footer.tsx:41
 msgid "Terms of service"
-msgstr "Conditions d'utilisation"
+msgstr "Termos de serviço"
 
 #: src/components/FeedbackModal.tsx:34
 msgid "Thank you for your feedback!"
-msgstr "Merci pour vos commentaires !"
+msgstr "Obrigado pelo seu feedback!"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:84
 msgid "The current password you entered is incorrect."
-msgstr "Le mot de passe actuel que vous avez saisi est incorrect."
+msgstr "A senha atual que você digitou está incorreta."
 
 #: src/views/home/components/Faqs.tsx:33
 msgid "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
-msgstr "La principale différence entre Kan et Trello est que Kan est open source, permettant à chacun de consulter, modifier et contribuer à notre code. Notre offre cloud ne comporte également aucune restriction sur les fonctionnalités pour un usage individuel, alors que Trello verrouille des fonctionnalités de base comme le nombre de tableaux que vous pouvez créer derrière un paywall."
+msgstr "A principal diferença entre Kan e Trello é que o Kan é open source, permitindo que qualquer pessoa visualize, modifique e contribua com nosso código. Nossa versão em nuvem também não impõe restrições a recursos para uso individual, enquanto o Trello bloqueia recursos básicos, como o número de quadros que você pode criar, atrás de um paywall."
 
 #: src/views/home/index.tsx:66
 msgid "The open source <0/> alternative to Trello"
-msgstr "L'alternative open source <0/> à Trello"
+msgstr "A alternativa open source ao Trello <0/>"
 
 #. placeholder {0}: isPublic ? "public" : "private"
 #: src/views/board/components/VisibilityButton.tsx:46
 msgid "The visibility of your board has been set to {0}."
-msgstr "La visibilité de votre tableau a été définie sur {0}."
+msgstr "A visibilidade do seu quadro foi definida como {0}."
 
 #: src/components/UserMenu.tsx:126
 msgid "Theme"
-msgstr "Thème"
+msgstr "Tema"
 
 #: src/views/members/components/DeleteMemberConfirmation.tsx:50
 msgid "They won't be able to access this workspace."
-msgstr "Ils ne pourront plus accéder à cet espace de travail."
+msgstr "Eles não poderão acessar este workspace."
 
 #: src/views/card/components/DeleteCommentConfirmation.tsx:68
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:58
 #: src/views/card/components/DeleteCardConfirmation.tsx:78
 #: src/components/DeleteLabelConfirmation.tsx:44
 msgid "This action can't be undone."
-msgstr "Cette action ne peut pas être annulée."
+msgstr "Esta ação não pode ser desfeita."
 
 #: src/views/public/board/index.tsx:151
 msgid "This board is private or does not exist"
-msgstr "Ce tableau est privé ou n'existe pas"
+msgstr "Este quadro é privado ou não existe"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:135
 msgid "This board URL has already been taken"
-msgstr "Cette URL de tableau est déjà utilisée"
+msgstr "Este URL de quadro já está em uso"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:70
 msgid "This will result in the permanent deletion of all data associated with this workspace."
-msgstr "Cela entraînera la suppression définitive de toutes les données associées à cet espace de travail."
+msgstr "Isso resultará na exclusão permanente de todos os dados associados a este workspace."
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:60
 msgid "This will result in the permanent deletion of all data associated with your account."
-msgstr "Cela entraînera la suppression définitive de toutes les données associées à votre compte."
+msgstr "Isso resultará na exclusão permanente de todos os dados associados à sua conta."
 
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:123
 msgid "This workspace username has already been taken"
-msgstr "Ce nom d'utilisateur d'espace de travail est déjà pris"
+msgstr "Este nome de usuário do workspace já foi usado"
 
 #: src/views/boards/components/TemplateBoards.tsx:16
 #: src/views/boards/components/TemplateBoards.tsx:22
 msgid "To Do"
-msgstr "À faire"
+msgstr "A Fazer"
 
 #: src/views/home/components/Header.tsx:73
 msgid "Toggle menu"
-msgstr "Basculer le menu"
+msgstr "Alternar menu"
 
 #: src/views/home/components/Features.tsx:104
 msgid "Track all card changes with detailed activity history."
-msgstr "Suivez tous les changements de cartes avec un historique d'activité détaillé."
+msgstr "Acompanhe todas as alterações dos cards com histórico detalhado de atividades."
 
 #: src/views/settings/index.tsx:94
 msgid "Trello disconnected"
-msgstr "Trello déconnecté"
+msgstr "Trello desconectado"
 
 #: src/views/home/components/Features.tsx:88
 msgid "Trello imports"
-msgstr "Importations Trello"
+msgstr "Importações do Trello"
 
 #: src/views/boards/components/TemplateBoards.tsx:44
 msgid "Triaging"
-msgstr "Triage"
+msgstr "Priorizando"
 
 #: src/views/card/components/NewChecklistItemForm.tsx:88
 msgid "Unable to add checklist item"
-msgstr "Impossible d'ajouter l'élément à la liste de contrôle"
+msgstr "Não foi possível adicionar item à checklist"
 
 #: src/views/card/components/NewCommentForm.tsx:30
 msgid "Unable to add comment"
-msgstr "Impossible d'ajouter un commentaire"
+msgstr "Não foi possível adicionar comentário"
 
 #: src/views/board/components/NewCardForm.tsx:171
 msgid "Unable to create card"
-msgstr "Impossible de créer la carte"
+msgstr "Não foi possível criar card"
 
 #: src/views/card/components/NewChecklistForm.tsx:69
 msgid "Unable to create checklist"
-msgstr "Impossible de créer la liste de contrôle"
+msgstr "Não foi possível criar checklist"
 
 #: src/views/board/components/NewListForm.tsx:77
 msgid "Unable to create list"
-msgstr "Impossible de créer une liste"
+msgstr "Não foi possível criar lista"
 
 #: src/components/NewWorkspaceForm.tsx:41
 msgid "Unable to create workspace"
-msgstr "Impossible de créer l'espace de travail"
+msgstr "Não foi possível criar workspace"
 
 #: src/views/card/components/DeleteCardConfirmation.tsx:51
 msgid "Unable to delete card"
-msgstr "Impossible de supprimer la carte"
+msgstr "Não foi possível deletar card"
 
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:36
 msgid "Unable to delete checklist"
-msgstr "Impossible de supprimer la liste de contrôle"
+msgstr "Não foi possível deletar checklist"
 
 #: src/views/card/components/ChecklistItemRow.tsx:87
 msgid "Unable to delete checklist item"
-msgstr "Impossible de supprimer l'élément de la liste de contrôle"
+msgstr "Não foi possível deletar item da checklist"
 
 #: src/views/card/components/DeleteCommentConfirmation.tsx:44
 msgid "Unable to delete comment"
-msgstr "Impossible de supprimer le commentaire"
+msgstr "Não foi possível deletar comentário"
 
 #: src/views/members/components/DeleteMemberConfirmation.tsx:27
 msgid "Unable to remove member"
-msgstr "Impossible de supprimer le membre"
+msgstr "Não foi possível remover membro"
 
 #: src/components/FeedbackModal.tsx:40
 msgid "Unable to send feedback"
-msgstr "Impossible d'envoyer les commentaires"
+msgstr "Não foi possível enviar feedback"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:71
 msgid "Unable to update board URL"
-msgstr "Impossible de mettre à jour l'URL du tableau"
+msgstr "Não foi possível atualizar a URL do quadro"
 
 #: src/views/board/components/VisibilityButton.tsx:52
 msgid "Unable to update board visibility"
-msgstr "Impossible de mettre à jour la visibilité du tableau"
+msgstr "Não foi possível atualizar a visibilidade do quadro"
 
 #: src/views/card/index.tsx:172
 #: src/views/board/index.tsx:189
 msgid "Unable to update card"
-msgstr "Impossible de mettre à jour la carte"
+msgstr "Não foi possível atualizar o card"
 
 #: src/views/card/components/ChecklistNameInput.tsx:45
 msgid "Unable to update checklist"
-msgstr "Impossible de mettre à jour la liste de contrôle"
+msgstr "Não foi possível atualizar a checklist"
 
 #: src/views/card/components/ChecklistItemRow.tsx:59
 msgid "Unable to update checklist item"
-msgstr "Impossible de mettre à jour l'élément de la liste de contrôle"
+msgstr "Não foi possível atualizar o item da checklist"
 
 #: src/views/card/components/Comment.tsx:63
 msgid "Unable to update comment"
-msgstr "Impossible de mettre à jour le commentaire"
+msgstr "Não foi possível atualizar o comentário"
 
 #: src/views/card/components/LabelSelector.tsx:72
 msgid "Unable to update labels"
-msgstr "Impossible de mettre à jour les étiquettes"
+msgstr "Não foi possível atualizar as labels"
 
 #: src/views/card/components/ListSelector.tsx:52
 #: src/views/board/index.tsx:133
 msgid "Unable to update list"
-msgstr "Impossible de mettre à jour la liste"
+msgstr "Não foi possível atualizar a lista"
 
 #: src/views/card/components/MemberSelector.tsx:79
 msgid "Unable to update members"
-msgstr "Impossible de mettre à jour les membres"
+msgstr "Não foi possível atualizar os membros"
 
 #. placeholder {0}: truncate(memberName)
 #: src/views/card/components/ActivityList.tsx:122
 msgid "unassigned <0>{0}</0> from the card"
-msgstr "a désassigné <0>{0}</0> de la carte"
+msgstr "removeu <0>{0}</0> do card"
 
 #: src/views/card/components/ActivityList.tsx:119
 msgid "unassigned themselves from the card"
-msgstr "s'est retiré de la carte"
+msgstr "se removeu do card"
 
 #: src/views/home/components/Pricing.tsx:41
 msgid "Unlimited activity log"
-msgstr "Journal d'activité illimité"
+msgstr "Registro de atividades ilimitado"
 
 #: src/views/home/components/Pricing.tsx:37
 msgid "Unlimited boards"
-msgstr "Tableaux illimités"
+msgstr "Quadros ilimitados"
 
 #: src/views/home/components/Cta.tsx:57
 msgid "Unlimited boards, unlimited lists, unlimited cards. No credit card required."
-msgstr "Tableaux illimités, listes illimitées, cartes illimitées. Aucune carte de crédit requise."
+msgstr "Quadros ilimitados, listas ilimitadas, cards ilimitados. Não é necessário cartão de crédito."
 
 #: src/views/home/components/Pricing.tsx:39
 msgid "Unlimited cards"
-msgstr "Cartes illimitées"
+msgstr "Cards ilimitados"
 
 #: src/views/home/components/Pricing.tsx:40
 msgid "Unlimited comments"
-msgstr "Commentaires illimités"
+msgstr "Comentários ilimitados"
 
 #: src/views/home/components/Pricing.tsx:38
 msgid "Unlimited lists"
-msgstr "Listes illimitées"
+msgstr "Listas ilimitadas"
 
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:154
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:82
@@ -1710,252 +1702,253 @@ msgstr "Listes illimitées"
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:79
 #: src/views/board/components/UpdateBoardSlugForm.tsx:174
 msgid "Update"
-msgstr "Mettre à jour"
+msgstr "Atualizar"
 
 #: src/components/LabelForm.tsx:238
 msgid "Update label"
-msgstr "Mettre à jour l'étiquette"
+msgstr "Atualizar label"
 
 #: src/views/card/components/ActivityList.tsx:74
 msgid "updated a checklist item"
-msgstr "a mis à jour un élément de la liste de contrôle"
+msgstr "atualizou um item da checklist"
 
 #: src/views/card/components/ActivityList.tsx:64
 msgid "updated the description"
-msgstr "a mis à jour la description"
+msgstr "atualizou a descrição"
 
 #: src/views/card/components/ActivityList.tsx:63
 msgid "updated the title"
-msgstr "a mis à jour le titre"
+msgstr "atualizou o título"
 
 #. placeholder {0}: truncate(toTitle)
 #: src/views/card/components/ActivityList.tsx:91
 msgid "updated the title to <0>{0}</0>"
-msgstr "a mis à jour le titre en <0>{0}</0>"
+msgstr "atualizou o título para <0>{0}</0>"
 
 #: src/views/settings/components/CustomURLConfirmation.tsx:52
 msgid "Upgrade"
-msgstr "Mettre à niveau"
+msgstr "Atualizar plano"
 
 #: src/views/boards/components/TemplateBoards.tsx:37
 #: src/views/boards/components/TemplateBoards.tsx:54
 msgid "Urgent"
-msgstr "Urgent"
+msgstr "Urgente"
 
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
 msgid "URL can only contain letters, numbers, and hyphens"
-msgstr "L'URL ne peut contenir que des lettres, des chiffres et des traits d'union"
+msgstr "A URL só pode conter letras, números e hífens"
 
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:34
 msgid "URL cannot exceed 24 characters"
-msgstr "L'URL ne peut pas dépasser 24 caractères"
+msgstr "A URL não pode exceder 24 caracteres"
 
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:32
 msgid "URL must be at least 3 characters long"
-msgstr "L'URL doit comporter au moins 3 caractères"
+msgstr "A URL deve ter pelo menos 3 caracteres"
 
 #: src/views/boards/components/NewBoardForm.tsx:117
 msgid "Use template"
-msgstr "Utiliser le modèle"
+msgstr "Usar modelo"
 
 #: src/views/members/index.tsx:185
 msgid "User"
-msgstr "Utilisateur"
+msgstr "Usuário"
 
 #: src/views/members/components/InviteMemberForm.tsx:58
 msgid "User is already a member of this workspace"
-msgstr "L'utilisateur est déjà membre de cet espace de travail"
+msgstr "O usuário já é membro deste workspace"
 
 #: src/views/boards/components/TemplateBoards.tsx:37
 msgid "Video"
-msgstr "Vidéo"
+msgstr "Vídeo"
 
 #: src/views/settings/index.tsx:262
 msgid "View and manage your API keys."
-msgstr "Consultez et gérez vos clés API."
+msgstr "Visualizar e gerenciar suas chaves de API."
 
 #: src/views/settings/index.tsx:201
 msgid "View and manage your billing and subscription."
-msgstr "Consultez et gérez votre facturation et votre abonnement."
+msgstr "Visualizar e gerenciar seu faturamento e assinatura."
 
 #: src/views/home/components/Pricing.tsx:67
 msgid "View docs"
-msgstr "Voir la documentation"
+msgstr "Visualizar documentação"
 
 #: src/views/public/board/index.tsx:125
 msgid "View only"
-msgstr "Affichage uniquement"
+msgstr "Somente visualização"
 
 #: src/views/home/components/Features.tsx:147
 msgid "View our roadmap."
-msgstr "Consultez notre feuille de route."
+msgstr "Veja nosso roadmap."
 
 #: src/views/public/board/index.tsx:154
 msgid "View workspace"
-msgstr "Voir l'espace de travail"
+msgstr "Ver workspace"
 
 #: src/views/board/components/VisibilityButton.tsx:91
 msgid "Visibility"
-msgstr "Visibilité"
+msgstr "Visibilidade"
 
 #: src/views/home/components/Faqs.tsx:94
 msgid "We are using the <0>AGPL-3.0 license</0>."
-msgstr "Nous utilisons la <0>licence AGPL-3.0</0>."
+msgstr "Estamos usando a licença <0>AGPL-3.0</0>."
 
 #: src/views/home/components/Features.tsx:145
 msgid "We're just getting started. "
-msgstr "Nous ne faisons que commencer. "
+msgstr "Estamos apenas começando. "
 
 #: src/views/auth/login/index.tsx:41
 msgid "Welcome back"
-msgstr "Bienvenue à nouveau"
+msgstr "Bem-vindo de volta"
 
 #: src/views/home/components/Faqs.tsx:91
 msgid "What license are you using?"
-msgstr "Quelle licence utilisez-vous ?"
+msgstr "Qual licença vocês estão usando?"
 
 #: src/views/home/components/Faqs.tsx:30
 msgid "What's the difference between Kan and Trello?"
-msgstr "Quelle est la différence entre Kan et Trello ?"
+msgstr "Qual a diferença entre Kan e Trello?"
 
 #: src/views/home/components/Faqs.tsx:25
 msgid "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over time (and atlassification) it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello's simplicity, in open source."
-msgstr "Quand Trello a été lancé en 2011, il a impressionné tout le monde par sa simplicité soigneusement conçue, mais au fil du temps (et de l'\"atlassification\"), il a perdu sa magie et s'est transformé en quelque chose qui ressemble davantage à \"Jira Lite\". Ce projet est notre tentative de retrouver la magie originelle de la simplicité de Trello, en open source."
+msgstr "Quando o Trello foi lançado em 2011, surpreendeu a todos com sua simplicidade cuidadosamente planejada, mas com o tempo (e a atlassificação) perdeu seu encanto e se tornou algo mais próximo de \"Jira Lite\". Este projeto é nossa tentativa de resgatar a magia original da simplicidade do Trello, em código aberto."
 
 #: src/views/home/components/Faqs.tsx:22
 msgid "Why make an open source Trello?"
-msgstr "Pourquoi créer un Trello open source ?"
+msgstr "Por que criar um Trello open source?"
 
 #: src/views/board/index.tsx:331
 msgid "Workspace"
-msgstr "Espace de travail"
+msgstr "Workspace"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:26
 msgid "Workspace deleted"
-msgstr "Espace de travail supprimé"
+msgstr "Workspace deletado"
 
 #: src/views/settings/index.tsx:177
 msgid "Workspace description"
-msgstr "Description de l'espace de travail"
+msgstr "Descrição do workspace"
 
 #: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:28
 msgid "Workspace description cannot exceed 280 characters"
-msgstr "La description de l'espace de travail ne peut pas dépasser 280 caractères"
+msgstr "A descrição do workspace não pode exceder 280 caracteres"
 
 #: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:25
 msgid "Workspace description must be at least 3 characters long"
-msgstr "La description de l'espace de travail doit comporter au moins 3 caractères"
+msgstr "A descrição do workspace deve ter pelo menos 3 caracteres"
 
 #: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:48
 msgid "Workspace description updated"
-msgstr "Description de l'espace de travail mise à jour"
+msgstr "Descrição do workspace atualizada"
 
 #: src/views/home/components/Pricing.tsx:54
 #: src/views/home/components/Features.tsx:83
 msgid "Workspace members"
-msgstr "Membres de l'espace de travail"
+msgstr "Membros do workspace"
 
 #: src/views/settings/index.tsx:158
 #: src/components/NewWorkspaceForm.tsx:81
 msgid "Workspace name"
-msgstr "Nom de l'espace de travail"
+msgstr "Nome do workspace"
 
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:15
 msgid "Workspace name cannot exceed 24 characters"
-msgstr "Le nom de l'espace de travail ne peut pas dépasser 24 caractères"
+msgstr "O nome do workspace não pode exceder 24 caracteres"
 
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:14
 msgid "Workspace name must be at least 3 characters long"
-msgstr "Le nom de l'espace de travail doit comporter au moins 3 caractères"
+msgstr "O nome do workspace deve ter pelo menos 3 caracteres"
 
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:43
 msgid "Workspace name updated"
-msgstr "Nom de l'espace de travail mis à jour"
+msgstr "Nome do workspace atualizado"
 
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:60
 msgid "Workspace slug updated"
-msgstr "Slug de l'espace de travail mis à jour"
+msgstr "Slug do workspace atualizado"
 
 #: src/views/settings/index.tsx:167
 msgid "Workspace URL"
-msgstr "URL de l'espace de travail"
+msgstr "URL do workspace"
 
 #: src/views/boards/components/TemplateBoards.tsx:30
 msgid "Writing"
-msgstr "Écriture"
+msgstr "Escrevendo"
 
 #: src/views/home/components/Pricing.tsx:19
 msgid "Yearly"
-msgstr "Annuel"
+msgstr "Anual"
 
 #: src/views/home/components/Faqs.tsx:86
 msgid "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits."
-msgstr "Oui, nous proposons un plan gratuit à vie pour un usage individuel. Aucune restriction, aucun paywall, aucune limite."
+msgstr "Sim, oferecemos um plano totalmente gratuito para uso individual. Sem restrições, sem paywalls, sem limites."
 
 #: src/views/settings/index.tsx:294
 msgid "You are about to change your password."
-msgstr "Vous êtes sur le point de modifier votre mot de passe."
+msgstr "Você está prestes a alterar sua senha."
 
 #: src/views/home/components/Faqs.tsx:67
 msgid "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!"
-msgstr "Vous pouvez obtenir une URL d'espace de travail personnalisée, comme <0>kan.bn/kan</0>, en accédant à vos <1>paramètres d'espace de travail</1> et en souscrivant à un abonnement pro. Tous les abonnements contribuent à financer le développement du projet !"
+msgstr "Você pode obter uma URL personalizada para o workspace, como <0>kan.bn/kan</0>, acessando as <1>configurações do workspace</1> e adquirindo uma assinatura Pro. Todas as assinaturas ajudam a financiar o desenvolvimento do projeto!"
 
 #: src/views/home/components/Faqs.tsx:111
 msgid "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace."
-msgstr "Vous pouvez inviter des membres de l'équipe en cliquant sur le bouton \"Inviter\" dans le coin supérieur droit de la <0>page des membres</0> et en saisissant leur adresse e-mail. Ils recevront un e-mail avec un lien pour rejoindre l'espace de travail."
+msgstr "Você pode convidar membros da equipe clicando no botão \"Convidar\" no canto superior direito da <0>página de membros</0> e inserindo o e-mail deles. Eles receberão um e-mail com um link para entrar no workspace."
 
 #: src/views/home/components/Faqs.tsx:127
 msgid "You can self-host by following the instructions in our <0>repo</0>."
-msgstr "Vous pouvez auto-héberger en suivant les instructions dans notre <0>dépôt</0>."
+msgstr "Você pode hospedar localmente seguindo as instruções em nosso <0>repositório</0>."
 
 #: src/components/AuthForm.tsx:221
 msgid "You have been logged in successfully."
-msgstr "Vous vous êtes connecté avec succès."
+msgstr "Você entrou com sucesso."
 
 #: src/components/AuthForm.tsx:204
 msgid "You have been signed up successfully."
-msgstr "Vous vous êtes inscrit avec succès."
+msgstr "Você se cadastrou com sucesso."
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:28
 msgid "Your account has been deleted."
-msgstr "Votre compte a été supprimé."
+msgstr "Sua conta foi deletada."
 
 #: src/views/boards/components/ImportBoardsForm.tsx:192
 msgid "Your boards have been imported."
-msgstr "Vos tableaux ont été importés."
+msgstr "Seus quadros foram importados."
 
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:42
 msgid "Your display name has been updated."
-msgstr "Votre nom d'affichage a été mis à jour."
+msgstr "Seu nome de exibição foi atualizado."
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:70
 msgid "Your password has been changed."
-msgstr "Votre mot de passe a été modifié."
+msgstr "Sua senha foi alterada."
 
 #: src/views/settings/components/Avatar.tsx:27
 msgid "Your profile image has been updated."
-msgstr "Votre image de profil a été mise à jour."
+msgstr "Sua imagem de perfil foi atualizada."
 
 #: src/views/settings/index.tsx:95
 msgid "Your Trello account has been disconnected."
-msgstr "Votre compte Trello a été déconnecté."
+msgstr "Sua conta do Trello foi desconectada."
 
 #: src/views/settings/index.tsx:244
 msgid "Your Trello account is connected."
-msgstr "Votre compte Trello est connecté."
+msgstr "Sua conta do Trello está conectada."
 
 #: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:49
 msgid "Your workspace description has been updated."
-msgstr "La description de votre espace de travail a été mise à jour."
+msgstr "A descrição do seu workspace foi atualizada."
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:27
 msgid "Your workspace has been deleted."
-msgstr "Votre espace de travail a été supprimé."
+msgstr "Seu workspace foi deletado."
 
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:44
 msgid "Your workspace name has been updated."
-msgstr "Le nom de votre espace de travail a été mis à jour."
+msgstr "O nome do seu workspace foi atualizado."
 
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:61
 msgid "Your workspace slug has been updated."
-msgstr "Le slug de votre espace de travail a été mis à jour."
+msgstr "O slug do seu workspace foi atualizado."
+
