@@ -170,10 +170,8 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
   useEffect(() => {
     const credentialsAllowed =
       env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
-
-    const smtpHostRaw = env("SMTP_HOST");
-    const smtpHost = smtpHostRaw?.trim();
-    const emailSendingEnabled = !!smtpHost;
+    const emailSendingEnabled =
+      env("NEXT_PUBLIC_ENABLE_EMAIL")?.toLowerCase() === "true";
     setIsEmailSendingEnabled(emailSendingEnabled);
     setIsCredentialsEnabled(credentialsAllowed);
   }, []);
