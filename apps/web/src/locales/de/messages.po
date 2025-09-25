@@ -463,12 +463,12 @@ msgstr "Kontaktiere uns"
 msgid "Content Creation"
 msgstr "Content-Erstellung"
 
-#: src/components/AuthForm.tsx:370
+#: src/components/AuthForm.tsx:417
 msgid "Continue with "
 msgstr "Fortfahren mit "
 
 #. placeholder {0}: key === "oidc" ? oidcProviderName : provider.name
-#: src/components/AuthForm.tsx:301
+#: src/components/AuthForm.tsx:348
 msgid "Continue with {0}"
 msgstr "Fortfahren mit {0}"
 
@@ -697,7 +697,7 @@ msgstr "Workspace-URL bearbeiten"
 msgid "Editing"
 msgstr "Bearbeitung"
 
-#: src/components/AuthForm.tsx:372
+#: src/components/AuthForm.tsx:418
 msgid "email"
 msgstr "E-Mail"
 
@@ -717,11 +717,11 @@ msgstr "Geben Sie Ihr aktuelles Passwort ein"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Geben Sie Ihr aktuelles Passwort ein und wählen Sie ein neues sicheres Passwort."
 
-#: src/components/AuthForm.tsx:337
+#: src/components/AuthForm.tsx:384
 msgid "Enter your email address"
 msgstr "Gib deine E-Mail-Adresse ein"
 
-#: src/components/AuthForm.tsx:325
+#: src/components/AuthForm.tsx:372
 msgid "Enter your name"
 msgstr "Gib deinen Namen ein"
 
@@ -729,7 +729,7 @@ msgstr "Gib deinen Namen ein"
 msgid "Enter your new password"
 msgstr "Geben Sie Ihr neues Passwort ein"
 
-#: src/components/AuthForm.tsx:350
+#: src/components/AuthForm.tsx:397
 msgid "Enter your password"
 msgstr "Gib dein Passwort ein"
 
@@ -825,7 +825,7 @@ msgid "Failed to copy invite link"
 msgstr "Einladungslink konnte nicht kopiert werden"
 
 #. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
-#: src/components/AuthForm.tsx:273
+#: src/components/AuthForm.tsx:288
 msgid "Failed to login with {0}. Please try again."
 msgstr "Anmeldung mit {0} fehlgeschlagen. Bitte versuche es erneut."
 
@@ -874,7 +874,7 @@ msgid "Free"
 msgstr "Kostenlos"
 
 #: src/views/members/components/InviteMemberForm.tsx:312
-#: src/views/members/index.tsx:208
+#: src/views/members/index.tsx:216
 msgid "Free Plan"
 msgstr "Kostenloser Plan"
 
@@ -1043,7 +1043,7 @@ msgstr "Ungültige E-Mail-Adresse"
 msgid "Invalid invitation"
 msgstr "Ungültige Einladung"
 
-#: src/views/members/index.tsx:221
+#: src/views/members/index.tsx:230
 msgid "Invite"
 msgstr "Einladen"
 
@@ -1109,7 +1109,7 @@ msgstr "Sprache"
 msgid "Launch offer"
 msgstr "Einführungsangebot"
 
-#: src/views/members/index.tsx:191
+#: src/views/members/index.tsx:199
 msgid "Launch offer: Get unlimited members with Pro"
 msgstr "Einführungsangebot: Erhalten Sie unbegrenzte Mitglieder mit Pro"
 
@@ -1161,7 +1161,7 @@ msgstr "Langfristig"
 msgid "Low Priority"
 msgstr "Niedrige Priorität"
 
-#: src/components/AuthForm.tsx:373
+#: src/components/AuthForm.tsx:418
 msgid "magic link"
 msgstr "Magic Link"
 
@@ -1182,12 +1182,12 @@ msgstr "Mittlere Priorität"
 #: src/views/board/components/Filters.tsx:93
 #: src/views/board/components/NewCardForm.tsx:357
 #: src/views/card/index.tsx:125
-#: src/views/members/index.tsx:178
+#: src/views/members/index.tsx:186
 msgid "Members"
 msgstr "Mitglieder"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/members/index.tsx:173
+#: src/views/members/index.tsx:181
 msgid "Members | {0}"
 msgstr "Mitglieder | {0}"
 
@@ -1307,7 +1307,7 @@ msgstr "Sobald Sie Ihr Konto löschen, gibt es kein Zurück mehr. Diese Aktion k
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Sobald Sie Ihren Arbeitsbereich löschen, gibt es kein Zurück mehr. Diese Aktion kann nicht rückgängig gemacht werden."
 
-#: src/components/AuthForm.tsx:315
+#: src/components/AuthForm.tsx:362
 msgid "or"
 msgstr "oder"
 
@@ -1327,6 +1327,14 @@ msgstr "Teilzeit"
 msgid "Password Changed"
 msgstr "Passwort geändert"
 
+#: src/components/AuthForm.tsx:255
+msgid "Password is required to login."
+msgstr "Passwort ist für die Anmeldung erforderlich."
+
+#: src/components/AuthForm.tsx:254
+msgid "Password is required to sign up."
+msgstr "Passwort ist für die Registrierung erforderlich."
+
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:22
 msgid "Password must be at least 8 characters"
 msgstr "Passwort muss mindestens 8 Zeichen lang sein"
@@ -1335,7 +1343,7 @@ msgstr "Passwort muss mindestens 8 Zeichen lang sein"
 msgid "Passwords do not match"
 msgstr "Passwörter stimmen nicht überein"
 
-#: src/views/members/index.tsx:134
+#: src/views/members/index.tsx:142
 msgid "Paused"
 msgstr "Pausiert"
 
@@ -1343,7 +1351,7 @@ msgstr "Pausiert"
 msgid "Payment frequency"
 msgstr "Zahlungshäufigkeit"
 
-#: src/views/members/index.tsx:134
+#: src/views/members/index.tsx:142
 msgid "Pending"
 msgstr "Ausstehend"
 
@@ -1364,15 +1372,15 @@ msgstr "Planung"
 msgid "Please confirm your new password"
 msgstr "Bitte bestätigen Sie Ihr neues Passwort"
 
-#: src/components/AuthForm.tsx:341
+#: src/components/AuthForm.tsx:388
 msgid "Please enter a valid email address"
 msgstr "Bitte gib eine gültige E-Mail-Adresse ein"
 
-#: src/components/AuthForm.tsx:329
+#: src/components/AuthForm.tsx:376
 msgid "Please enter a valid name"
 msgstr "Bitte gib einen gültigen Namen ein"
 
-#: src/components/AuthForm.tsx:354
+#: src/components/AuthForm.tsx:401
 msgid "Please enter a valid password"
 msgstr "Bitte gib ein gültiges Passwort ein"
 
@@ -1443,7 +1451,7 @@ msgstr "Datenschutzrichtlinie"
 msgid "Private"
 msgstr "Privat"
 
-#: src/views/members/index.tsx:205
+#: src/views/members/index.tsx:213
 msgid "Pro Plan"
 msgstr "Pro-Plan"
 
@@ -1491,7 +1499,7 @@ msgstr "Remote"
 msgid "Remove"
 msgstr "Entfernen"
 
-#: src/views/members/index.tsx:148
+#: src/views/members/index.tsx:156
 msgid "Remove member"
 msgstr "Mitglied entfernen"
 
@@ -1543,7 +1551,7 @@ msgstr "Überprüfung"
 msgid "Roadmap"
 msgstr "Roadmap"
 
-#: src/views/members/index.tsx:243
+#: src/views/members/index.tsx:253
 msgid "Role"
 msgstr "Rolle"
 
@@ -1647,7 +1655,7 @@ msgstr "Registrierung deaktiviert"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "Die Registrierung ist derzeit deaktiviert. Bitte versuche es später erneut."
 
-#: src/components/AuthForm.tsx:370
+#: src/components/AuthForm.tsx:417
 msgid "Sign up with "
 msgstr "Registrieren mit "
 
@@ -1671,8 +1679,8 @@ msgstr "Softwareentwicklung"
 msgid "Star on Github"
 msgstr "Stern auf Github"
 
-#: src/components/AuthForm.tsx:207
-#: src/components/AuthForm.tsx:224
+#: src/components/AuthForm.tsx:212
+#: src/components/AuthForm.tsx:229
 msgid "Success"
 msgstr "Erfolg"
 
@@ -1693,7 +1701,7 @@ msgid "System"
 msgstr "System"
 
 #: src/views/members/components/InviteMemberForm.tsx:301
-#: src/views/members/index.tsx:207
+#: src/views/members/index.tsx:215
 msgid "Team Plan"
 msgstr "Team-Plan"
 
@@ -2004,7 +2012,7 @@ msgstr "URL muss mindestens 3 Zeichen lang sein"
 msgid "Use template"
 msgstr "Vorlage verwenden"
 
-#: src/views/members/index.tsx:237
+#: src/views/members/index.tsx:247
 msgid "User"
 msgstr "Benutzer"
 
@@ -2167,11 +2175,11 @@ msgstr "Du kannst teammitglieder einladen, indem du auf die schaltfläche \"Einl
 msgid "You can self-host by following the instructions in our <0>repo</0>."
 msgstr "Sie können selbst hosten, indem sie den anweisungen in unserem <0>repo</0> folgen."
 
-#: src/components/AuthForm.tsx:225
+#: src/components/AuthForm.tsx:230
 msgid "You have been logged in successfully."
 msgstr "Sie haben sich erfolgreich angemeldet."
 
-#: src/components/AuthForm.tsx:208
+#: src/components/AuthForm.tsx:213
 msgid "You have been signed up successfully."
 msgstr "Sie haben sich erfolgreich registriert."
 

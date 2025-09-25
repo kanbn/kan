@@ -520,12 +520,12 @@ msgstr "Contact us"
 msgid "Content Creation"
 msgstr "Content Creation"
 
-#: src/components/AuthForm.tsx:370
+#: src/components/AuthForm.tsx:417
 msgid "Continue with "
 msgstr "Continue with "
 
 #. placeholder {0}: key === "oidc" ? oidcProviderName : provider.name
-#: src/components/AuthForm.tsx:301
+#: src/components/AuthForm.tsx:348
 msgid "Continue with {0}"
 msgstr "Continue with {0}"
 
@@ -770,7 +770,7 @@ msgstr "Edit workspace URL"
 msgid "Editing"
 msgstr "Editing"
 
-#: src/components/AuthForm.tsx:372
+#: src/components/AuthForm.tsx:418
 msgid "email"
 msgstr "email"
 
@@ -790,11 +790,11 @@ msgstr "Enter your current password"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Enter your current password and choose a new secure password."
 
-#: src/components/AuthForm.tsx:337
+#: src/components/AuthForm.tsx:384
 msgid "Enter your email address"
 msgstr "Enter your email address"
 
-#: src/components/AuthForm.tsx:325
+#: src/components/AuthForm.tsx:372
 msgid "Enter your name"
 msgstr "Enter your name"
 
@@ -802,7 +802,7 @@ msgstr "Enter your name"
 msgid "Enter your new password"
 msgstr "Enter your new password"
 
-#: src/components/AuthForm.tsx:350
+#: src/components/AuthForm.tsx:397
 msgid "Enter your password"
 msgstr "Enter your password"
 
@@ -898,7 +898,7 @@ msgid "Failed to copy invite link"
 msgstr "Failed to copy invite link"
 
 #. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
-#: src/components/AuthForm.tsx:273
+#: src/components/AuthForm.tsx:288
 msgid "Failed to login with {0}. Please try again."
 msgstr "Failed to login with {0}. Please try again."
 
@@ -948,7 +948,7 @@ msgid "Free"
 msgstr "Free"
 
 #: src/views/members/components/InviteMemberForm.tsx:312
-#: src/views/members/index.tsx:208
+#: src/views/members/index.tsx:216
 msgid "Free Plan"
 msgstr "Free Plan"
 
@@ -1121,7 +1121,7 @@ msgstr "Invalid email address"
 msgid "Invalid invitation"
 msgstr "Invalid invitation"
 
-#: src/views/members/index.tsx:221
+#: src/views/members/index.tsx:230
 msgid "Invite"
 msgstr "Invite"
 
@@ -1191,7 +1191,7 @@ msgstr "Language"
 msgid "Launch offer"
 msgstr "Launch offer"
 
-#: src/views/members/index.tsx:191
+#: src/views/members/index.tsx:199
 msgid "Launch offer: Get unlimited members with Pro"
 msgstr "Launch offer: Get unlimited members with Pro"
 
@@ -1243,7 +1243,7 @@ msgstr "Long-term"
 msgid "Low Priority"
 msgstr "Low Priority"
 
-#: src/components/AuthForm.tsx:373
+#: src/components/AuthForm.tsx:418
 msgid "magic link"
 msgstr "magic link"
 
@@ -1264,12 +1264,12 @@ msgstr "Medium Priority"
 #: src/views/board/components/Filters.tsx:93
 #: src/views/board/components/NewCardForm.tsx:357
 #: src/views/card/index.tsx:125
-#: src/views/members/index.tsx:178
+#: src/views/members/index.tsx:186
 msgid "Members"
 msgstr "Members"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/members/index.tsx:173
+#: src/views/members/index.tsx:181
 msgid "Members | {0}"
 msgstr "Members | {0}"
 
@@ -1401,7 +1401,7 @@ msgstr "Once you delete your account, there is no going back. This action cannot
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Once you delete your workspace, there is no going back. This action cannot be undone."
 
-#: src/components/AuthForm.tsx:315
+#: src/components/AuthForm.tsx:362
 msgid "or"
 msgstr "or"
 
@@ -1421,6 +1421,14 @@ msgstr "Part-time"
 msgid "Password Changed"
 msgstr "Password Changed"
 
+#: src/components/AuthForm.tsx:255
+msgid "Password is required to login."
+msgstr "Password is required to login."
+
+#: src/components/AuthForm.tsx:254
+msgid "Password is required to sign up."
+msgstr "Password is required to sign up."
+
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:22
 msgid "Password must be at least 8 characters"
 msgstr "Password must be at least 8 characters"
@@ -1429,7 +1437,7 @@ msgstr "Password must be at least 8 characters"
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
-#: src/views/members/index.tsx:134
+#: src/views/members/index.tsx:142
 msgid "Paused"
 msgstr "Paused"
 
@@ -1437,7 +1445,7 @@ msgstr "Paused"
 msgid "Payment frequency"
 msgstr "Payment frequency"
 
-#: src/views/members/index.tsx:134
+#: src/views/members/index.tsx:142
 msgid "Pending"
 msgstr "Pending"
 
@@ -1458,15 +1466,15 @@ msgstr "Planning"
 msgid "Please confirm your new password"
 msgstr "Please confirm your new password"
 
-#: src/components/AuthForm.tsx:341
+#: src/components/AuthForm.tsx:388
 msgid "Please enter a valid email address"
 msgstr "Please enter a valid email address"
 
-#: src/components/AuthForm.tsx:329
+#: src/components/AuthForm.tsx:376
 msgid "Please enter a valid name"
 msgstr "Please enter a valid name"
 
-#: src/components/AuthForm.tsx:354
+#: src/components/AuthForm.tsx:401
 msgid "Please enter a valid password"
 msgstr "Please enter a valid password"
 
@@ -1537,7 +1545,7 @@ msgstr "Privacy policy"
 msgid "Private"
 msgstr "Private"
 
-#: src/views/members/index.tsx:205
+#: src/views/members/index.tsx:213
 msgid "Pro Plan"
 msgstr "Pro Plan"
 
@@ -1585,7 +1593,7 @@ msgstr "Remote"
 msgid "Remove"
 msgstr "Remove"
 
-#: src/views/members/index.tsx:148
+#: src/views/members/index.tsx:156
 msgid "Remove member"
 msgstr "Remove member"
 
@@ -1645,7 +1653,7 @@ msgstr "Review"
 msgid "Roadmap"
 msgstr "Roadmap"
 
-#: src/views/members/index.tsx:243
+#: src/views/members/index.tsx:253
 msgid "Role"
 msgstr "Role"
 
@@ -1757,7 +1765,7 @@ msgstr "Sign up disabled"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "Sign up is currently disabled. Please try again later."
 
-#: src/components/AuthForm.tsx:370
+#: src/components/AuthForm.tsx:417
 msgid "Sign up with "
 msgstr "Sign up with "
 
@@ -1781,8 +1789,8 @@ msgstr "Software Development"
 msgid "Star on Github"
 msgstr "Star on Github"
 
-#: src/components/AuthForm.tsx:207
-#: src/components/AuthForm.tsx:224
+#: src/components/AuthForm.tsx:212
+#: src/components/AuthForm.tsx:229
 msgid "Success"
 msgstr "Success"
 
@@ -1803,7 +1811,7 @@ msgid "System"
 msgstr "System"
 
 #: src/views/members/components/InviteMemberForm.tsx:301
-#: src/views/members/index.tsx:207
+#: src/views/members/index.tsx:215
 msgid "Team Plan"
 msgstr "Team Plan"
 
@@ -2126,7 +2134,7 @@ msgstr "URL must be at least 3 characters long"
 msgid "Use template"
 msgstr "Use template"
 
-#: src/views/members/index.tsx:237
+#: src/views/members/index.tsx:247
 msgid "User"
 msgstr "User"
 
@@ -2293,11 +2301,11 @@ msgstr "You can invite team members by clicking the \"Invite\" button in the top
 msgid "You can self-host by following the instructions in our <0>repo</0>."
 msgstr "You can self-host by following the instructions in our <0>repo</0>."
 
-#: src/components/AuthForm.tsx:225
+#: src/components/AuthForm.tsx:230
 msgid "You have been logged in successfully."
 msgstr "You have been logged in successfully."
 
-#: src/components/AuthForm.tsx:208
+#: src/components/AuthForm.tsx:213
 msgid "You have been signed up successfully."
 msgstr "You have been signed up successfully."
 

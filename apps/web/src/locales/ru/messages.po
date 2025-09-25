@@ -463,12 +463,12 @@ msgstr "Свяжитесь с нами"
 msgid "Content Creation"
 msgstr "Создание контента"
 
-#: src/components/AuthForm.tsx:370
+#: src/components/AuthForm.tsx:417
 msgid "Continue with "
 msgstr "Продолжить с "
 
 #. placeholder {0}: key === "oidc" ? oidcProviderName : provider.name
-#: src/components/AuthForm.tsx:301
+#: src/components/AuthForm.tsx:348
 msgid "Continue with {0}"
 msgstr "Продолжить с {0}"
 
@@ -697,7 +697,7 @@ msgstr "Редактировать URL рабочей области"
 msgid "Editing"
 msgstr "Редактирование"
 
-#: src/components/AuthForm.tsx:372
+#: src/components/AuthForm.tsx:418
 msgid "email"
 msgstr "email"
 
@@ -717,11 +717,11 @@ msgstr "Введите ваш текущий пароль"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Введите ваш текущий пароль и выберите новый безопасный пароль."
 
-#: src/components/AuthForm.tsx:337
+#: src/components/AuthForm.tsx:384
 msgid "Enter your email address"
 msgstr "Введите ваш адрес электронной почты"
 
-#: src/components/AuthForm.tsx:325
+#: src/components/AuthForm.tsx:372
 msgid "Enter your name"
 msgstr "Введите ваше имя"
 
@@ -729,7 +729,7 @@ msgstr "Введите ваше имя"
 msgid "Enter your new password"
 msgstr "Введите ваш новый пароль"
 
-#: src/components/AuthForm.tsx:350
+#: src/components/AuthForm.tsx:397
 msgid "Enter your password"
 msgstr "Введите ваш пароль"
 
@@ -825,7 +825,7 @@ msgid "Failed to copy invite link"
 msgstr "Не удалось скопировать ссылку приглашения"
 
 #. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
-#: src/components/AuthForm.tsx:273
+#: src/components/AuthForm.tsx:288
 msgid "Failed to login with {0}. Please try again."
 msgstr "Не удалось войти с {0}. Пожалуйста, попробуйте снова."
 
@@ -874,7 +874,7 @@ msgid "Free"
 msgstr "Бесплатно"
 
 #: src/views/members/components/InviteMemberForm.tsx:312
-#: src/views/members/index.tsx:208
+#: src/views/members/index.tsx:216
 msgid "Free Plan"
 msgstr "Бесплатный план"
 
@@ -1043,7 +1043,7 @@ msgstr "Недействительный адрес электронной по�
 msgid "Invalid invitation"
 msgstr "Недействительное приглашение"
 
-#: src/views/members/index.tsx:221
+#: src/views/members/index.tsx:230
 msgid "Invite"
 msgstr "Пригласить"
 
@@ -1109,7 +1109,7 @@ msgstr "Язык"
 msgid "Launch offer"
 msgstr "Стартовое предложение"
 
-#: src/views/members/index.tsx:191
+#: src/views/members/index.tsx:199
 msgid "Launch offer: Get unlimited members with Pro"
 msgstr "Стартовое предложение: получите неограниченное количество участников с Pro"
 
@@ -1161,7 +1161,7 @@ msgstr "Долгосрочный"
 msgid "Low Priority"
 msgstr "Низкий приоритет"
 
-#: src/components/AuthForm.tsx:373
+#: src/components/AuthForm.tsx:418
 msgid "magic link"
 msgstr "магическая ссылка"
 
@@ -1182,12 +1182,12 @@ msgstr "Средний приоритет"
 #: src/views/board/components/Filters.tsx:93
 #: src/views/board/components/NewCardForm.tsx:357
 #: src/views/card/index.tsx:125
-#: src/views/members/index.tsx:178
+#: src/views/members/index.tsx:186
 msgid "Members"
 msgstr "Участники"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/members/index.tsx:173
+#: src/views/members/index.tsx:181
 msgid "Members | {0}"
 msgstr "Участники | {0}"
 
@@ -1307,7 +1307,7 @@ msgstr "После удаления аккаунта возврат будет �
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "После удаления рабочего пространства возврат будет невозможен. Это действие необратимо."
 
-#: src/components/AuthForm.tsx:315
+#: src/components/AuthForm.tsx:362
 msgid "or"
 msgstr "или"
 
@@ -1327,6 +1327,14 @@ msgstr "Частичная занятость"
 msgid "Password Changed"
 msgstr "Пароль изменён"
 
+#: src/components/AuthForm.tsx:255
+msgid "Password is required to login."
+msgstr "Пароль необходим для входа."
+
+#: src/components/AuthForm.tsx:254
+msgid "Password is required to sign up."
+msgstr "Пароль необходим для регистрации."
+
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:22
 msgid "Password must be at least 8 characters"
 msgstr "Пароль должен содержать не менее 8 символов"
@@ -1335,7 +1343,7 @@ msgstr "Пароль должен содержать не менее 8 симв�
 msgid "Passwords do not match"
 msgstr "Пароли не совпадают"
 
-#: src/views/members/index.tsx:134
+#: src/views/members/index.tsx:142
 msgid "Paused"
 msgstr "Приостановлено"
 
@@ -1343,7 +1351,7 @@ msgstr "Приостановлено"
 msgid "Payment frequency"
 msgstr "Частота платежей"
 
-#: src/views/members/index.tsx:134
+#: src/views/members/index.tsx:142
 msgid "Pending"
 msgstr "В ожидании"
 
@@ -1364,15 +1372,15 @@ msgstr "Планирование"
 msgid "Please confirm your new password"
 msgstr "Пожалуйста, подтвердите новый пароль"
 
-#: src/components/AuthForm.tsx:341
+#: src/components/AuthForm.tsx:388
 msgid "Please enter a valid email address"
 msgstr "Пожалуйста, введите действительный адрес электронной почты"
 
-#: src/components/AuthForm.tsx:329
+#: src/components/AuthForm.tsx:376
 msgid "Please enter a valid name"
 msgstr "Пожалуйста, введите действительное имя"
 
-#: src/components/AuthForm.tsx:354
+#: src/components/AuthForm.tsx:401
 msgid "Please enter a valid password"
 msgstr "Пожалуйста, введите действительный пароль"
 
@@ -1443,7 +1451,7 @@ msgstr "Политика конфиденциальности"
 msgid "Private"
 msgstr "Личное"
 
-#: src/views/members/index.tsx:205
+#: src/views/members/index.tsx:213
 msgid "Pro Plan"
 msgstr "Профессиональный план"
 
@@ -1491,7 +1499,7 @@ msgstr "Удалённый"
 msgid "Remove"
 msgstr "Удалить"
 
-#: src/views/members/index.tsx:148
+#: src/views/members/index.tsx:156
 msgid "Remove member"
 msgstr "Удалить участника"
 
@@ -1543,7 +1551,7 @@ msgstr "Обзор"
 msgid "Roadmap"
 msgstr "Дорожная карта"
 
-#: src/views/members/index.tsx:243
+#: src/views/members/index.tsx:253
 msgid "Role"
 msgstr "Роль"
 
@@ -1647,7 +1655,7 @@ msgstr "Регистрация отключена"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "Регистрация в настоящее время отключена. Пожалуйста, попробуйте позже."
 
-#: src/components/AuthForm.tsx:370
+#: src/components/AuthForm.tsx:417
 msgid "Sign up with "
 msgstr "Зарегистрироваться с "
 
@@ -1671,8 +1679,8 @@ msgstr "Разработка программного обеспечения"
 msgid "Star on Github"
 msgstr "Поставить звезду на Github"
 
-#: src/components/AuthForm.tsx:207
-#: src/components/AuthForm.tsx:224
+#: src/components/AuthForm.tsx:212
+#: src/components/AuthForm.tsx:229
 msgid "Success"
 msgstr "Успех"
 
@@ -1693,7 +1701,7 @@ msgid "System"
 msgstr "Система"
 
 #: src/views/members/components/InviteMemberForm.tsx:301
-#: src/views/members/index.tsx:207
+#: src/views/members/index.tsx:215
 msgid "Team Plan"
 msgstr "Командный план"
 
@@ -2004,7 +2012,7 @@ msgstr "URL должен содержать не менее 3 символов"
 msgid "Use template"
 msgstr "Использовать шаблон"
 
-#: src/views/members/index.tsx:237
+#: src/views/members/index.tsx:247
 msgid "User"
 msgstr "Пользователь"
 
@@ -2167,11 +2175,11 @@ msgstr "Вы можете пригласить участников команд
 msgid "You can self-host by following the instructions in our <0>repo</0>."
 msgstr "Вы можете развернуть собственный хостинг, следуя инструкциям в нашем <0>репозитории</0>."
 
-#: src/components/AuthForm.tsx:225
+#: src/components/AuthForm.tsx:230
 msgid "You have been logged in successfully."
 msgstr "Вы успешно вошли в систему."
 
-#: src/components/AuthForm.tsx:208
+#: src/components/AuthForm.tsx:213
 msgid "You have been signed up successfully."
 msgstr "Вы успешно зарегистрировались."
 

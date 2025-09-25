@@ -463,12 +463,12 @@ msgstr "Neem contact op"
 msgid "Content Creation"
 msgstr "Content creatie"
 
-#: src/components/AuthForm.tsx:370
+#: src/components/AuthForm.tsx:417
 msgid "Continue with "
 msgstr "Doorgaan met "
 
 #. placeholder {0}: key === "oidc" ? oidcProviderName : provider.name
-#: src/components/AuthForm.tsx:301
+#: src/components/AuthForm.tsx:348
 msgid "Continue with {0}"
 msgstr "Doorgaan met {0}"
 
@@ -697,7 +697,7 @@ msgstr "Werkruimte-URL bewerken"
 msgid "Editing"
 msgstr "Bewerken"
 
-#: src/components/AuthForm.tsx:372
+#: src/components/AuthForm.tsx:418
 msgid "email"
 msgstr "e-mail"
 
@@ -717,11 +717,11 @@ msgstr "Voer je huidige wachtwoord in"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Voer je huidige wachtwoord in en kies een nieuw veilig wachtwoord."
 
-#: src/components/AuthForm.tsx:337
+#: src/components/AuthForm.tsx:384
 msgid "Enter your email address"
 msgstr "Voer je e-mailadres in"
 
-#: src/components/AuthForm.tsx:325
+#: src/components/AuthForm.tsx:372
 msgid "Enter your name"
 msgstr "Voer je naam in"
 
@@ -729,7 +729,7 @@ msgstr "Voer je naam in"
 msgid "Enter your new password"
 msgstr "Voer je nieuwe wachtwoord in"
 
-#: src/components/AuthForm.tsx:350
+#: src/components/AuthForm.tsx:397
 msgid "Enter your password"
 msgstr "Voer je wachtwoord in"
 
@@ -825,7 +825,7 @@ msgid "Failed to copy invite link"
 msgstr "Kopiëren van uitnodigingslink mislukt"
 
 #. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
-#: src/components/AuthForm.tsx:273
+#: src/components/AuthForm.tsx:288
 msgid "Failed to login with {0}. Please try again."
 msgstr "Inloggen met {0} is mislukt. Probeer het opnieuw."
 
@@ -874,7 +874,7 @@ msgid "Free"
 msgstr "Gratis"
 
 #: src/views/members/components/InviteMemberForm.tsx:312
-#: src/views/members/index.tsx:208
+#: src/views/members/index.tsx:216
 msgid "Free Plan"
 msgstr "Gratis plan"
 
@@ -1043,7 +1043,7 @@ msgstr "Ongeldig e-mailadres"
 msgid "Invalid invitation"
 msgstr "Ongeldige uitnodiging"
 
-#: src/views/members/index.tsx:221
+#: src/views/members/index.tsx:230
 msgid "Invite"
 msgstr "Uitnodigen"
 
@@ -1109,7 +1109,7 @@ msgstr "Taal"
 msgid "Launch offer"
 msgstr "Introductieaanbieding"
 
-#: src/views/members/index.tsx:191
+#: src/views/members/index.tsx:199
 msgid "Launch offer: Get unlimited members with Pro"
 msgstr "Lanceringsaanbieding: krijg onbeperkt aantal leden met Pro"
 
@@ -1161,7 +1161,7 @@ msgstr "Lange termijn"
 msgid "Low Priority"
 msgstr "Lage prioriteit"
 
-#: src/components/AuthForm.tsx:373
+#: src/components/AuthForm.tsx:418
 msgid "magic link"
 msgstr "magische link"
 
@@ -1182,12 +1182,12 @@ msgstr "Gemiddelde prioriteit"
 #: src/views/board/components/Filters.tsx:93
 #: src/views/board/components/NewCardForm.tsx:357
 #: src/views/card/index.tsx:125
-#: src/views/members/index.tsx:178
+#: src/views/members/index.tsx:186
 msgid "Members"
 msgstr "Leden"
 
 #. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/members/index.tsx:173
+#: src/views/members/index.tsx:181
 msgid "Members | {0}"
 msgstr "Leden | {0}"
 
@@ -1307,7 +1307,7 @@ msgstr "Zodra je je account verwijdert, is er geen weg terug. Deze actie kan nie
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Zodra je je werkruimte verwijdert, is er geen weg terug. Deze actie kan niet ongedaan worden gemaakt."
 
-#: src/components/AuthForm.tsx:315
+#: src/components/AuthForm.tsx:362
 msgid "or"
 msgstr "of"
 
@@ -1327,6 +1327,14 @@ msgstr "Deeltijd"
 msgid "Password Changed"
 msgstr "Wachtwoord gewijzigd"
 
+#: src/components/AuthForm.tsx:255
+msgid "Password is required to login."
+msgstr "Wachtwoord is vereist om in te loggen."
+
+#: src/components/AuthForm.tsx:254
+msgid "Password is required to sign up."
+msgstr "Wachtwoord is vereist om je aan te melden."
+
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:22
 msgid "Password must be at least 8 characters"
 msgstr "Wachtwoord moet minimaal 8 tekens bevatten"
@@ -1335,7 +1343,7 @@ msgstr "Wachtwoord moet minimaal 8 tekens bevatten"
 msgid "Passwords do not match"
 msgstr "Wachtwoorden komen niet overeen"
 
-#: src/views/members/index.tsx:134
+#: src/views/members/index.tsx:142
 msgid "Paused"
 msgstr "Gepauzeerd"
 
@@ -1343,7 +1351,7 @@ msgstr "Gepauzeerd"
 msgid "Payment frequency"
 msgstr "Betalingsfrequentie"
 
-#: src/views/members/index.tsx:134
+#: src/views/members/index.tsx:142
 msgid "Pending"
 msgstr "In behandeling"
 
@@ -1364,15 +1372,15 @@ msgstr "Planning"
 msgid "Please confirm your new password"
 msgstr "Bevestig je nieuwe wachtwoord"
 
-#: src/components/AuthForm.tsx:341
+#: src/components/AuthForm.tsx:388
 msgid "Please enter a valid email address"
 msgstr "Voer een geldig e-mailadres in"
 
-#: src/components/AuthForm.tsx:329
+#: src/components/AuthForm.tsx:376
 msgid "Please enter a valid name"
 msgstr "Voer een geldige naam in"
 
-#: src/components/AuthForm.tsx:354
+#: src/components/AuthForm.tsx:401
 msgid "Please enter a valid password"
 msgstr "Voer een geldig wachtwoord in"
 
@@ -1443,7 +1451,7 @@ msgstr "Privacybeleid"
 msgid "Private"
 msgstr "Privé"
 
-#: src/views/members/index.tsx:205
+#: src/views/members/index.tsx:213
 msgid "Pro Plan"
 msgstr "Pro Plan"
 
@@ -1491,7 +1499,7 @@ msgstr "Op afstand"
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: src/views/members/index.tsx:148
+#: src/views/members/index.tsx:156
 msgid "Remove member"
 msgstr "Lid verwijderen"
 
@@ -1543,7 +1551,7 @@ msgstr "Beoordeling"
 msgid "Roadmap"
 msgstr "Roadmap"
 
-#: src/views/members/index.tsx:243
+#: src/views/members/index.tsx:253
 msgid "Role"
 msgstr "Rol"
 
@@ -1647,7 +1655,7 @@ msgstr "Registreren uitgeschakeld"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "Registreren is momenteel uitgeschakeld. Probeer het later opnieuw."
 
-#: src/components/AuthForm.tsx:370
+#: src/components/AuthForm.tsx:417
 msgid "Sign up with "
 msgstr "Registreren met "
 
@@ -1671,8 +1679,8 @@ msgstr "Softwareontwikkeling"
 msgid "Star on Github"
 msgstr "Star op Github"
 
-#: src/components/AuthForm.tsx:207
-#: src/components/AuthForm.tsx:224
+#: src/components/AuthForm.tsx:212
+#: src/components/AuthForm.tsx:229
 msgid "Success"
 msgstr "Geslaagd"
 
@@ -1693,7 +1701,7 @@ msgid "System"
 msgstr "Systeem"
 
 #: src/views/members/components/InviteMemberForm.tsx:301
-#: src/views/members/index.tsx:207
+#: src/views/members/index.tsx:215
 msgid "Team Plan"
 msgstr "Teamplan"
 
@@ -2004,7 +2012,7 @@ msgstr "URL moet minimaal 3 tekens lang zijn"
 msgid "Use template"
 msgstr "Sjabloon gebruiken"
 
-#: src/views/members/index.tsx:237
+#: src/views/members/index.tsx:247
 msgid "User"
 msgstr "Gebruiker"
 
@@ -2167,11 +2175,11 @@ msgstr "Je kunt teamleden uitnodigen door op de knop \"Uitnodigen\" in de rechte
 msgid "You can self-host by following the instructions in our <0>repo</0>."
 msgstr "Je kunt zelf hosten door de instructies in onze <0>repo</0> te volgen."
 
-#: src/components/AuthForm.tsx:225
+#: src/components/AuthForm.tsx:230
 msgid "You have been logged in successfully."
 msgstr "Je bent succesvol ingelogd."
 
-#: src/components/AuthForm.tsx:208
+#: src/components/AuthForm.tsx:213
 msgid "You have been signed up successfully."
 msgstr "Je bent succesvol geregistreerd."
 
