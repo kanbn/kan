@@ -19,7 +19,6 @@ services:
       - POSTGRES_URL=${POSTGRES_URL}
 
       # SMTP (optional)
-      - NEXT_PUBLIC_ENABLE_EMAIL=${NEXT_PUBLIC_ENABLE_EMAIL}
       - SMTP_HOST=${SMTP_HOST}
       - SMTP_PORT=${SMTP_PORT}
       - SMTP_USER=${SMTP_USER}

@@ -40,8 +40,9 @@ export default function MembersPage() {
   const { data: session } = authClient.useSession();
 
   useEffect(() => {
-    const emailSendingEnabled =
-      env("NEXT_PUBLIC_ENABLE_EMAIL")?.toLowerCase() === "true";
+    const smtpHostRaw = env("SMTP_HOST");
+    const smtpHost = smtpHostRaw?.trim();
+    const emailSendingEnabled = !!smtpHost;
     setIsEmailSendingEnabled(emailSendingEnabled);
   }, []);
 
