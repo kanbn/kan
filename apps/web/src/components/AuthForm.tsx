@@ -1,4 +1,5 @@
 import type { SocialProvider } from "better-auth/social-providers";
+import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
@@ -160,6 +161,9 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
   const { showPopup } = usePopup();
   const oidcProviderName = "OIDC";
 
+  const redirect = useSearchParams().get("next");
+  const callbackURL = redirect ?? "/boards";
+
   // Safely get environment variables on client side to avoid hydration mismatch
   useEffect(() => {
     const credentialsAllowed =
@@ -195,7 +199,7 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
             name,
             email,
             password,
-            callbackURL: "/boards",
+            callbackURL,
           },
           {
             onSuccess: () =>
@@ -212,7 +216,7 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
           {
             email,
             password,
-            callbackURL: "/boards",
+            callbackURL,
           },
           {
             onSuccess: () =>
@@ -229,7 +233,7 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
       await authClient.signIn.magicLink(
         {
           email,
-          callbackURL: "/boards",
+          callbackURL,
         },
         {
           onSuccess: () => setIsMagicLinkSent(true, email),
@@ -250,14 +254,14 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
       // Use oauth2 signin for OIDC provider
       const result = await authClient.signIn.oauth2({
         providerId: "oidc",
-        callbackURL: "/boards",
+        callbackURL,
       });
       error = result.error;
     } else {
       // Use social signin for traditional social providers
       const result = await authClient.signIn.social({
         provider,
-        callbackURL: "/boards",
+        callbackURL,
       });
       error = result.error;
     }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { env } from "next-runtime-env";
@@ -16,6 +16,8 @@ export default function SignUpPage() {
   const isSignUpDisabled = env("NEXT_PUBLIC_DISABLE_SIGN_UP") === "true";
   const [isMagicLinkSent, setIsMagicLinkSent] = useState<boolean>(false);
   const [magicLinkRecipient, setMagicLinkRecipient] = useState<string>("");
+
+  const redirect = useSearchParams().get("next");
 
   const { data } = authClient.useSession();
 
@@ -86,7 +88,9 @@ export default function SignUpPage() {
               <Trans>
                 Already have an account?{" "}
                 <span className="underline">
-                  <Link href="/login">Sign in</Link>
+                  <Link href={redirect ? `/login?next=${redirect}` : "/login"}>
+                    Sign in
+                  </Link>
                 </span>
               </Trans>
             </p>
