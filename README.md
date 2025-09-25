@@ -141,6 +141,7 @@ pnpm dev
 | Variable                                  | Description                                              | Required                 | Example                                                     |
 | ----------------------------------------- | -------------------------------------------------------- | ------------------------ | ----------------------------------------------------------- |
 | `POSTGRES_URL`                            | PostgreSQL connection URL                                | To use external database | `postgres://user:pass@localhost:5432/db`                    |
+| `NEXT_PUBLIC_ENABLE_EMAIL`                | To enable email sending                                  | For Email                | `true`                                                      |
 | `EMAIL_FROM`                              | Sender email address                                     | For Email                | `"Kan <hello@mail.kan.bn>"`                                 |
 | `SMTP_HOST`                               | SMTP server hostname                                     | For Email                | `smtp.resend.com`                                           |
 | `SMTP_PORT`                               | SMTP server port                                         | For Email                | `465`                                                       |

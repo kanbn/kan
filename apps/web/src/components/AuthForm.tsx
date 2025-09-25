@@ -5,7 +5,7 @@ import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "next-runtime-env";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   FaApple,
@@ -156,10 +156,12 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
   const [isLoginWithProviderPending, setIsLoginWithProviderPending] =
     useState<null | AuthProvider>(null);
   const [isCredentialsEnabled, setIsCredentialsEnabled] = useState(false);
+  const [isEmailSendingEnabled, setIsEmailSendingEnabled] = useState(false);
   const [isLoginWithEmailPending, setIsLoginWithEmailPending] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
   const { showPopup } = usePopup();
   const oidcProviderName = "OIDC";
+  const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const redirect = useSearchParams().get("next");
   const callbackURL = redirect ?? "/boards";
@@ -168,6 +170,9 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
   useEffect(() => {
     const credentialsAllowed =
       env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
+    const emailSendingEnabled =
+      env("NEXT_PUBLIC_ENABLE_EMAIL")?.toLowerCase() === "true";
+    setIsEmailSendingEnabled(emailSendingEnabled);
     setIsCredentialsEnabled(credentialsAllowed);
   }, []);
 
@@ -187,7 +192,7 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
 
   const handleLoginWithEmail = async (
     email: string,
-    password?: string,
+    password?: string | null,
     name?: string,
   ) => {
     setIsLoginWithEmailPending(true);
@@ -230,16 +235,26 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
         );
       }
     } else {
-      await authClient.signIn.magicLink(
-        {
-          email,
-          callbackURL,
-        },
-        {
-          onSuccess: () => setIsMagicLinkSent(true, email),
-          onError: ({ error }) => setLoginError(error.message),
-        },
-      );
+      // Only allow magic link if email sending is enabled and not in sign up mode
+      if (isEmailSendingEnabled && !isSignUp) {
+        await authClient.signIn.magicLink(
+          {
+            email,
+            callbackURL,
+          },
+          {
+            onSuccess: () => setIsMagicLinkSent(true, email),
+            onError: ({ error }) => setLoginError(error.message),
+          },
+        );
+      } else {
+        // Provide a clear error feedback when password omitted but magic link unavailable
+        setLoginError(
+          isSignUp
+            ? t`Password is required to sign up.`
+            : t`Password is required to login.`,
+        );
+      }
     }
 
     setIsLoginWithEmailPending(false);
@@ -276,10 +291,42 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
   };
 
   const onSubmit = async (values: FormValues) => {
-    await handleLoginWithEmail(values.email, values.password, values.name);
+    // Treat empty password string as undefined to trigger magic link path
+    const sanitizedPassword = values.password?.trim()
+      ? values.password
+      : undefined;
+    await handleLoginWithEmail(values.email, sanitizedPassword, values.name);
   };
 
   const password = watch("password");
+
+  // Determine if we should operate in magic link mode for current form state (login only)
+  const isMagicLinkMode = useMemo(() => {
+    // Magic link only viable when email sending enabled AND not sign up.
+    if (!isEmailSendingEnabled || isSignUp) return false;
+    // If credentials disabled we always default to magic link.
+    if (!isCredentialsEnabled) return true;
+    // Credentials enabled: user chooses magic link by leaving password blank.
+    return !password;
+  }, [isEmailSendingEnabled, isSignUp, isCredentialsEnabled, password]);
+
+  // Auto-focus password field when an error indicates it's required
+  useEffect(() => {
+    if (!isCredentialsEnabled) return;
+    // Focus when: sign up and missing password; login error requiring password; validation error on password.
+    const pwdEmpty = (password ?? "").length === 0;
+    let needsPassword = false;
+    if (isSignUp && pwdEmpty) {
+      needsPassword = true;
+    } else if (loginError?.toLowerCase().includes("password")) {
+      needsPassword = true;
+    } else if (errors.password) {
+      needsPassword = true;
+    }
+    if (needsPassword && passwordRef.current) {
+      passwordRef.current.focus();
+    }
+  }, [isSignUp, password, loginError, errors.password, isCredentialsEnabled]);
 
   return (
     <div className="space-y-6">
@@ -351,7 +398,7 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
               />
               {errors.password && (
                 <p className="mt-2 text-xs text-red-400">
-                  {t`Please enter a valid password`}
+                  {errors.password.message ?? t`Please enter a valid password`}
                 </p>
               )}
             </div>
@@ -368,9 +415,7 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
             variant="secondary"
           >
             {isSignUp ? t`Sign up with ` : t`Continue with `}
-            {!isCredentialsEnabled || (password && password.length !== 0)
-              ? t`email`
-              : t`magic link`}
+            {isMagicLinkMode ? t`magic link` : t`email`}
           </Button>
         </div>
       </form>
