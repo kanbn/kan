@@ -437,7 +437,7 @@ export const memberRouter = createTRPCRouter({
         });
 
       // Check if user is in workspace
-      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+      await assertUserInWorkspace(ctx.db, userId, workspace.id, "admin");
 
       // Deactivate all active invite links
       await inviteLinkRepo.deactivateAllActiveForWorkspace(ctx.db, {
@@ -564,6 +564,47 @@ export const memberRouter = createTRPCRouter({
           message: `User not found`,
           code: "NOT_FOUND",
         });
+
+      if (process.env.NEXT_PUBLIC_KAN_ENV === "cloud") {
+        const subscriptions = await subscriptionRepo.getByReferenceId(
+          ctx.db,
+          workspace.publicId,
+        );
+
+        // get the active subscriptions
+        const activeTeamSubscription = getSubscriptionByPlan(
+          subscriptions,
+          "team",
+        );
+        const activeProSubscription = getSubscriptionByPlan(
+          subscriptions,
+          "pro",
+        );
+        const unlimitedSeats = hasUnlimitedSeats(subscriptions);
+
+        if (!activeTeamSubscription && !activeProSubscription) {
+          throw new TRPCError({
+            message: `Workspace with public ID ${workspace.publicId} does not have an active subscription`,
+            code: "NOT_FOUND",
+          });
+        }
+
+        // Update the Stripe subscription
+        if (activeTeamSubscription?.stripeSubscriptionId && !unlimitedSeats) {
+          try {
+            await updateSubscriptionSeats(
+              activeTeamSubscription.stripeSubscriptionId,
+              1,
+            );
+          } catch (error) {
+            console.error("Failed to update Stripe subscription seats:", error);
+            throw new TRPCError({
+              message: `Failed to update subscription for the new member.`,
+              code: "INTERNAL_SERVER_ERROR",
+            });
+          }
+        }
+      }
 
       await memberRepo.create(ctx.db, {
         workspaceId: invite.workspaceId,
