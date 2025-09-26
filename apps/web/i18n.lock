@@ -36,6 +36,7 @@ checksums:
     Already%20have%20an%20account%3F%20%3C0%3E%3C1%3ESign%20in%3C%2F1%3E%3C%2F0%3E/singular: 2959fd276248208b65cb27ed46b20135
     An%20error%20occurred%20while%20disconnecting%20your%20Trello%20account./singular: 0aa3973b860c1faf8d9123aebf567e40
     An%20unexpected%20error%20occurred.%20Please%20try%20again%20later./singular: 1b5749b0cca6a62d75a577bee6804074
+    Anyone%20with%20this%20link%20can%20join%20your%20workspace/singular: 2366ed295eb2c03c425559c24cb31606
     API/singular: 01d9819514e27056dcc69463194b63d2
     API%20key%20created/singular: 8dbb2b60a719b0d120e774d6666c8c45
     API%20key%20name/singular: 2d8aeb08b2cce3b750a584bbc5ce6d1d
@@ -165,7 +166,10 @@ checksums:
     Enter%20your%20name/singular: cd95fbdd0533f2c2e8edf9d9bd9aa8df
     Enter%20your%20new%20password/singular: c67251e3002b68bc20a7cf5de23e43ac
     Enter%20your%20password/singular: ea4fdd034522dead21bae0c0abb52eae
+    Error/singular: 3c95bcb32c2104b99a46f5b3dd015248
     Error%20Changing%20Password/singular: ebecb5c1b72ba4b063117241f5ba4f2d
+    Error%20creating%20invite%20link/singular: cbedc3f3213dfc4fdc8b7503ae1a5cd6
+    Error%20deactivating%20invite%20link/singular: ccf42cd5aa8481692003e87e836de66c
     Error%20deleting%20account/singular: d42965a9bc9e5ec4ed57890268924643
     Error%20deleting%20label/singular: 94387e3a45ec768ae7715701ae00136e
     Error%20deleting%20workspace/singular: 0aec9bd8170bc84f5ea5c9a47c52ed26
@@ -182,6 +186,8 @@ checksums:
     Everything%20in%20the%20free%20plan%2C%20plus%3A/singular: 62b44c4973b92b806c69a4b15e0256dc
     Everything%20you%20need%2C%20free%20forever.%20Unlimited%20boards%2C%20unlimited%20lists%2C%20unlimited%20cards.%20Upgrade%20any%20time./singular: fa21632ab1468edf10acda2fe7b71323
     Execution/singular: cbac4a3c721123cbc6a883560bf29800
+    Failed%20to%20accept%20invitation.%20Please%20try%20again%20later%2C%20or%20contact%20customer%20support./singular: e4505a9df3a81e93a8a8b103c6e3ebc4
+    Failed%20to%20copy%20invite%20link/singular: 635884d5ed8d6ee20b85a003939b4ae7
     Failed%20to%20login%20with%20%7B0%7D.%20Please%20try%20again./singular: 669a4b4247a73f53fb9b8b16e42d166f
     FAQs/singular: dc36d7992372ccd419b39ef51cf5b16c
     Feature/singular: 58f5f3f37862b6312a2f20ec1a1fd0e8
@@ -206,6 +212,7 @@ checksums:
     Get%20started%20on%20Cloud/singular: ed926f526266ad2063283c58e6f4284a
     Getting%20started/singular: 8e5e7bd026b5bec46bbfdce02ab9e0b8
     GitHub/singular: 6e1cf3c00fa6fbe24afcc78ea3b5f3e4
+    Go%20Home/singular: 6251589da1964d55afabdfd64c84c335
     Go%20to%20app/singular: 896d0441384dcd2bfb3b23d61ff1944d
     High%20Priority/singular: 5d231ff8254aabc875f194c4b4f49c97
     Hired/singular: e5a9b1bd409b007141fe3d7890022f9a
@@ -231,10 +238,14 @@ checksums:
     Integrations/singular: 0ccce343287704cd90150c32e2fcad36
     Interviewing/singular: 4ccdcdc784547e925077c3297bddee95
     Invalid%20email%20address/singular: b2d9f25626f2d15c7c63e0281bccc247
+    Invalid%20invitation/singular: 4b936a8811a2295a5f58b41473c608f3
     Invite/singular: 181884cea804cbde665f160811ee7ad0
-    Invite%20another/singular: acb543563dab7edbcf46060a53ade3a3
+    Invite%20link%20copied/singular: 4046f23a78e1cd5166671c3fb8a7ea6e
+    Invite%20link%20copied%20to%20clipboard/singular: 6fc055a0ea0ed1aa58c5e0c502efe17f
     Invite%20member/singular: ade922db1be6b26bc979565ce5de2bc7
     Inviting%20members%20requires%20a%20Team%20Plan.%20You'll%20be%20redirected%20to%20upgrade%20your%20workspace./singular: 03eeed2d715e770259f722ba48a61ab3
+    Join%20workspace/singular: f5d035df672b05abd760bd022309c719
+    Join%20workspace%20%7C%20kan.bn/singular: 97855216a0e00214b2dcf917e93164f2
     Junior/singular: ed1bd2c59a824fdcdd56fc8a0660fe9f
     Kanban%20is%20better%20with%20a%20team.%20Perfect%20for%20small%20and%20growing%20teams%20looking%20to%20collaborate./singular: a77bee43046b260797c8936ad23e9223
     Kanban%20reimagined/singular: 613ccfdd9f54c66cbf68cfa313498766
@@ -309,6 +320,7 @@ checksums:
     Please%20enter%20a%20valid%20password/singular: 4b32c17e19b79bcbf0bb092c06ba310f
     Please%20select%20a%20file%20to%20upload./singular: de315bf594047f8ef9307a7fa9285844
     Please%20try%20again%20later%2C%20or%20contact%20customer%20support./singular: 21ffcf0b00e7cd7b64f7454a95762e1d
+    Please%20try%20again%20later./singular: 325dea6dd0348a27a6818db2c1340c98
     Pricing/singular: ce27f1aeacccc542a174c4b2bce022b0
     Priority%20email%20support/singular: 678538c912a770b1e1416ecdb8e299b1
     Privacy%20policy/singular: 462c6a536b52873e4498785c66dd48c8
@@ -355,7 +367,10 @@ checksums:
     Settings%20%7C%20Billing/singular: e44cba741d5414035a0b499c5766c203
     Settings%20%7C%20Integrations/singular: d04992e28016452f6d3d7dcc0b592415
     Settings%20%7C%20Workspace/singular: 5d0bacf7ff696da940f232df45edfd39
+    Share%20invite%20link/singular: ec5081a1f4e49fd9d782e770438f703b
     Sign%20in/singular: cb8757c7450e17de1e226e82fb0fa4a2
+    Sign%20In/singular: ec7b8f314fe9bc6591006707484ede61
+    Sign%20Up/singular: 0dd2ae69be4618c1f9e615774a4509ca
     Sign%20up%20%7C%20kan.bn/singular: f3de2a110c90358e6eac07d0b2f663a6
     Sign%20up%20disabled/singular: 9581b1f75b404ac0ecb7e603e0d4189c
     Sign%20up%20is%20currently%20disabled.%20Please%20try%20again%20later./singular: c6cb7c455ec053b351a27029158ff166
@@ -385,6 +400,7 @@ checksums:
     This%20API%20key%20will%20only%20be%20shown%20once.%20Please%20save%20it%20in%20a%20secure%20location./singular: 7df18d2978d317375f780822f8321c4d
     This%20board%20is%20private%20or%20does%20not%20exist/singular: a217ff3f04463b4df8c86adb6f83c6bc
     This%20board%20URL%20has%20already%20been%20taken/singular: 1d8b40332a031b5b77a3658e48dd51ca
+    This%20invitation%20link%20is%20invalid%20or%20has%20expired./singular: 11cc7ef8f1512e7e058e1fbbe5644001
     This%20will%20result%20in%20the%20permanent%20deletion%20of%20all%20data%20associated%20with%20this%20workspace./singular: a31141558af793635c1ddd2fa0a33499
     This%20will%20result%20in%20the%20permanent%20deletion%20of%20all%20data%20associated%20with%20your%20account./singular: b49224632bd6c3b7f5e462912aeb1081
     This%20workspace%20URL%20has%20already%20been%20taken/singular: b455329e2a71da677acab91d3a00bad6
@@ -485,6 +501,8 @@ checksums:
     You%20have%20been%20logged%20in%20successfully./singular: ef8fad1dce13ae4112f17c5258655fea
     You%20have%20been%20signed%20up%20successfully./singular: f614a6e3b45f5ffb9a3b0fb420fef84b
     You%20have%20unlimited%20seats%20with%20your%20Pro%20Plan.%20There%20is%20no%20additional%20charge%20for%20new%20members!/singular: e3dc59a5ba7211cd3d8516b3a79d85ca
+    You've%20been%20invited%20to%20join%20a%20workspace%20on%20kan.bn./singular: 257b840726f972f384243a72767f880f
+    You've%20been%20invited%20to%20join%20a%20workspace./singular: 24fc6cdc8740f37a83df85f582f03293
     Your%20account%20has%20been%20deleted./singular: 8c8d944e07388c5877effdb2c2803dcf
     Your%20boards%20have%20been%20imported./singular: 403972e7a25afc2415762c1c2b1ec868
     Your%20display%20name%20has%20been%20updated./singular: 15e5fff36c554c16ec5214427fae1bf4
