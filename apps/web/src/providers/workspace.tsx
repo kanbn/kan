@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 import { api } from "~/utils/api";
@@ -46,6 +46,8 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
   );
   const [hasLoaded, setHasLoaded] = useState(false);
 
+  const workspacePublicId = useSearchParams().get("workspacePublicId");
+
   const { data, isLoading } = api.workspace.all.useQuery();
   const utils = api.useUtils();
 
@@ -67,7 +69,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
     }
 
     const storedWorkspaceId: string | null =
-      localStorage.getItem("workspacePublicId");
+      workspacePublicId ?? localStorage.getItem("workspacePublicId");
 
     if (data.length) {
       const workspaces = data.map(({ workspace, role }) => ({
@@ -99,6 +101,11 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         description: selectedWorkspace.workspace.description,
         role: selectedWorkspace.role,
       });
+
+      if (workspacePublicId) {
+        router.push(`/boards`);
+        localStorage.setItem("workspacePublicId", workspacePublicId);
+      }
     } else {
       const primaryWorkspace = data[0]?.workspace;
       const primaryWorkspaceRole = data[0]?.role;
@@ -114,7 +121,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         role: primaryWorkspaceRole,
       });
     }
-  }, [data, isLoading]);
+  }, [data, isLoading, workspacePublicId, router]);
 
   return (
     <WorkspaceContext.Provider
