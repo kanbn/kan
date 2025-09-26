@@ -360,7 +360,7 @@ export const memberRouter = createTRPCRouter({
         });
 
       // Check if user is in workspace
-      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+      await assertUserInWorkspace(ctx.db, userId, workspace.id, "admin");
 
       // Deactivate any existing active invite links
       await inviteLinkRepo.deactivateAllActiveForWorkspace(ctx.db, {
