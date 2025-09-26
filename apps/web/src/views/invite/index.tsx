@@ -104,7 +104,7 @@ export default function InvitePage() {
               <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-light-1000 dark:text-dark-1000">
                 {t`Invalid invitation`}
               </h2>
-              <p className="mt-4 text-center text-sm text-light-600 dark:text-dark-800">
+              <p className="mt-4 text-center text-sm text-light-900 dark:text-dark-800">
                 {t`This invitation link is invalid or has expired.`}
               </p>
             </div>
@@ -129,7 +129,7 @@ export default function InvitePage() {
               {t`Join workspace`}
             </h2>
             {!error ? (
-              <p className="mt-4 text-center text-sm text-light-600 dark:text-dark-800">
+              <p className="mt-4 text-center text-sm text-light-900 dark:text-dark-800">
                 {isCloudEnv
                   ? t`You've been invited to join a workspace on kan.bn.`
                   : t`You've been invited to join a workspace.`}
