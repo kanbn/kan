@@ -171,7 +171,7 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
     const credentialsAllowed =
       env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
     const emailSendingEnabled =
-      env("NEXT_PUBLIC_ENABLE_EMAIL")?.toLowerCase() === "true";
+      env("NEXT_PUBLIC_DISABLE_EMAIL")?.toLowerCase() !== "true";
     setIsEmailSendingEnabled(emailSendingEnabled);
     setIsCredentialsEnabled(credentialsAllowed);
   }, []);
