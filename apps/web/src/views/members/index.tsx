@@ -28,7 +28,6 @@ import { DeleteMemberConfirmation } from "./components/DeleteMemberConfirmation"
 import { InviteMemberForm } from "./components/InviteMemberForm";
 
 export default function MembersPage() {
-  const [isEmailSendingEnabled, setIsEmailSendingEnabled] = useState(false);
   const { modalContentType, openModal, isOpen } = useModal();
   const { workspace } = useWorkspace();
 
@@ -38,12 +37,6 @@ export default function MembersPage() {
   );
 
   const { data: session } = authClient.useSession();
-
-  useEffect(() => {
-    const emailSendingEnabled =
-      env("NEXT_PUBLIC_ENABLE_EMAIL")?.toLowerCase() === "true";
-    setIsEmailSendingEnabled(emailSendingEnabled);
-  }, []);
 
   const subscriptions = data?.subscriptions as Subscription[] | undefined;
 
@@ -221,15 +214,13 @@ export default function MembersPage() {
                 </div>
               </>
             )}
-            {isEmailSendingEnabled && (
-              <Button
-                onClick={() => openModal("INVITE_MEMBER")}
-                iconLeft={<HiOutlinePlusSmall className="h-4 w-4" />}
-                disabled={workspace.role !== "admin"}
-              >
-                {t`Invite`}
-              </Button>
-            )}
+            <Button
+              onClick={() => openModal("INVITE_MEMBER")}
+              iconLeft={<HiOutlinePlusSmall className="h-4 w-4" />}
+              disabled={workspace.role !== "admin"}
+            >
+              {t`Invite`}
+            </Button>
           </div>
         </div>
 

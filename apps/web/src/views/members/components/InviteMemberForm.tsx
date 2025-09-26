@@ -45,6 +45,8 @@ export function InviteMemberForm({
   const { workspace } = useWorkspace();
   const { showPopup } = usePopup();
 
+  const isEmailEnabled = env("NEXT_PUBLIC_DISABLE_EMAIL") !== "true";
+
   const InviteMemberSchema = z.object({
     email: z.string().email({ message: t`Invalid email address` }),
     workspacePublicId: z.string(),
@@ -247,24 +249,26 @@ export function InviteMemberForm({
             <HiXMark size={18} className="dark:text-dark-9000 text-light-900" />
           </button>
         </div>
-        <Input
-          id="email"
-          placeholder={t`Email`}
-          disabled={
-            env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
-            !hasTeamSubscription &&
-            !hasProSubscription
-          }
-          {...register("email", { required: true })}
-          onKeyDown={async (e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              await handleSubmit(onSubmit)();
+        {isEmailEnabled && (
+          <Input
+            id="email"
+            placeholder={t`Email`}
+            disabled={
+              env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
+              !hasTeamSubscription &&
+              !hasProSubscription
             }
-          }}
-          errorMessage={errors.email?.message}
-        />
-        {isShareInviteLinkEnabled && inviteLink && (
+            {...register("email", { required: true })}
+            onKeyDown={async (e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                await handleSubmit(onSubmit)();
+              }
+            }}
+            errorMessage={errors.email?.message}
+          />
+        )}
+        {(!isEmailEnabled || (isShareInviteLinkEnabled && inviteLink)) && (
           <div className="my-4">
             <div className="relative">
               <Input
@@ -324,7 +328,11 @@ export function InviteMemberForm({
         {(hasTeamSubscription || hasProSubscription) &&
           env("NEXT_PUBLIC_KAN_ENV") === "cloud" && (
             <Toggle
-              label={t`Share invite link`}
+              label={
+                isShareInviteLinkEnabled
+                  ? t`Deactivate invite link`
+                  : t`Create invite link`
+              }
               isChecked={isShareInviteLinkEnabled}
               onChange={handleInviteLinkToggle}
             />
@@ -333,19 +341,14 @@ export function InviteMemberForm({
           {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
           !hasTeamSubscription &&
           !hasProSubscription ? (
-            <Button
-              type="button"
-              onClick={handleUpgrade}
-              className="inline-flex w-full justify-center rounded-md bg-light-1000 px-3 py-2 text-sm font-semibold text-light-50 shadow-sm focus-visible:outline-none dark:bg-dark-1000 dark:text-dark-50"
-            >
+            <Button type="button" onClick={handleUpgrade}>
               {t`Upgrade to Team Plan`}
             </Button>
           ) : (
             <Button
               type="submit"
-              disabled={inviteMember.isPending || isShareInviteLinkEnabled}
+              disabled={inviteMember.isPending || !isEmailEnabled}
               isLoading={inviteMember.isPending}
-              className="inline-flex w-full justify-center rounded-md bg-light-1000 px-3 py-2 text-sm font-semibold text-light-50 shadow-sm focus-visible:outline-none dark:bg-dark-1000 dark:text-dark-50"
             >
               {t`Invite member`}
             </Button>
