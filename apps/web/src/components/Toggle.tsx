@@ -5,10 +5,12 @@ const Toggle = ({
   isChecked,
   onChange,
   label,
+  disabled,
 }: {
   isChecked: boolean;
   onChange: () => void;
   label: string;
+  disabled?: boolean;
 }) => (
   <div className="mr-4 flex items-center justify-end">
     <span className="mr-2 text-xs text-light-900 dark:text-dark-900">
@@ -17,6 +19,7 @@ const Toggle = ({
     <Switch
       checked={isChecked}
       onChange={onChange}
+      disabled={disabled}
       className={twMerge(
         "relative inline-flex h-4 w-6 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-light-800 transition-colors duration-200 ease-in-out focus:outline-none dark:bg-dark-800",
         isChecked && "bg-indigo-600 dark:bg-indigo-600",

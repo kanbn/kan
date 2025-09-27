@@ -39,7 +39,7 @@ export function InviteMemberForm({
   const [isShareInviteLinkEnabled, setIsShareInviteLinkEnabled] =
     useState(false);
   const [inviteLink, setInviteLink] = useState<string>("");
-  const [isLoadingInviteLink, setIsLoadingInviteLink] = useState(false);
+  const [_isLoadingInviteLink, setIsLoadingInviteLink] = useState(false);
   const [copied, setCopied] = useState(false);
   const { closeModal } = useModal();
   const { workspace } = useWorkspace();
@@ -68,7 +68,7 @@ export function InviteMemberForm({
   const refetchBoards = () => utils.board.all.refetch();
 
   // Fetch active invite link on component mount
-  const { data: activeInviteLink, refetch: refetchInviteLink } =
+  const { data: activeInviteLink, refetch: _refetchInviteLink } =
     api.member.getActiveInviteLink.useQuery(
       { workspacePublicId: workspace.publicId || "" },
       { enabled: !!workspace.publicId },
@@ -78,7 +78,7 @@ export function InviteMemberForm({
   useEffect(() => {
     if (activeInviteLink) {
       setIsShareInviteLinkEnabled(activeInviteLink.isActive);
-      setInviteLink(activeInviteLink.inviteLink || "");
+      setInviteLink(activeInviteLink.inviteLink ?? "");
     }
   }, [activeInviteLink]);
 
@@ -113,13 +113,23 @@ export function InviteMemberForm({
       setInviteLink(data.inviteLink);
       setIsLoadingInviteLink(false);
     },
-    onError: () => {
+    onError: (error) => {
       setIsLoadingInviteLink(false);
-      showPopup({
-        header: t`Error creating invite link`,
-        message: t`Please try again later.`,
-        icon: "error",
-      });
+      setIsShareInviteLinkEnabled(false);
+
+      if (error.data?.code === "FORBIDDEN") {
+        showPopup({
+          header: t`Subscription Required`,
+          message: t`Invite links require a Team or Pro subscription. Please upgrade your workspace.`,
+          icon: "error",
+        });
+      } else {
+        showPopup({
+          header: t`Error creating invite link`,
+          message: t`Please try again later.`,
+          icon: "error",
+        });
+      }
     },
   });
 
@@ -148,7 +158,7 @@ export function InviteMemberForm({
   let price = t`$10/month`;
   let billingType = t`monthly billing`;
 
-  if (teamSubscription?.periodStart && teamSubscription?.periodEnd) {
+  if (teamSubscription?.periodStart && teamSubscription.periodEnd) {
     const periodStartDate = new Date(teamSubscription.periodStart);
     const periodEndDate = new Date(teamSubscription.periodEnd);
     const diffInDays = Math.round(
@@ -193,7 +203,7 @@ export function InviteMemberForm({
         message: t`Invite link copied to clipboard`,
         icon: "success",
       });
-    } catch (error) {
+    } catch {
       showPopup({
         header: t`Error`,
         message: t`Failed to copy invite link`,
@@ -325,18 +335,20 @@ export function InviteMemberForm({
       </div>
 
       <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
-        {(hasTeamSubscription || hasProSubscription) &&
-          env("NEXT_PUBLIC_KAN_ENV") === "cloud" && (
-            <Toggle
-              label={
-                isShareInviteLinkEnabled
-                  ? t`Deactivate invite link`
-                  : t`Create invite link`
-              }
-              isChecked={isShareInviteLinkEnabled}
-              onChange={handleInviteLinkToggle}
-            />
-          )}
+        <Toggle
+          label={
+            isShareInviteLinkEnabled
+              ? t`Deactivate invite link`
+              : t`Create invite link`
+          }
+          isChecked={isShareInviteLinkEnabled}
+          disabled={
+            env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
+            !hasTeamSubscription &&
+            !hasProSubscription
+          }
+          onChange={handleInviteLinkToggle}
+        />
         <div>
           {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
           !hasTeamSubscription &&
