@@ -409,4 +409,74 @@ export const workspaceRouter = createTRPCRouter({
         isReserved: workspaceSlug?.type === "reserved",
       };
     }),
+  search: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Search boards and cards in a workspace",
+        method: "GET",
+        path: "/workspaces/{workspacePublicId}/search",
+        description:
+          "Searches for boards and cards by title within a workspace",
+        tags: ["Workspaces"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+        query: z.string().min(1).max(100),
+      }),
+    )
+    .output(
+      z.array(
+        z.discriminatedUnion("type", [
+          z.object({
+            publicId: z.string(),
+            title: z.string(),
+            description: z.string().nullable(),
+            slug: z.string(),
+            type: z.literal("board"),
+          }),
+          z.object({
+            publicId: z.string(),
+            title: z.string(),
+            description: z.string().nullable(),
+            boardPublicId: z.string(),
+            boardName: z.string(),
+            listName: z.string(),
+            type: z.literal("card"),
+          }),
+        ]),
+      ),
+    )
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace)
+        throw new TRPCError({
+          message: `Workspace not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+
+      const result = await workspaceRepo.searchBoardsAndCards(
+        ctx.db,
+        workspace.id,
+        input.query,
+      );
+
+      return result;
+    }),
 });

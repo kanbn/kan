@@ -1,7 +1,13 @@
-import { and, eq, inArray, isNull } from "drizzle-orm";
+import { and, eq, ilike, inArray, isNull } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
-import { boards, workspaceMembers, workspaces } from "@kan/db/schema";
+import {
+  boards,
+  cards,
+  lists,
+  workspaceMembers,
+  workspaces,
+} from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
 export const create = async (
@@ -273,4 +279,60 @@ export const isUserInWorkspace = async (
   });
 
   return result?.id !== undefined;
+};
+
+export const searchBoardsAndCards = async (
+  db: dbClient,
+  workspaceId: number,
+  query: string,
+) => {
+  const searchQuery = `%${query}%`;
+
+  // Search for boards
+  const boardResults = await db
+    .select({
+      publicId: boards.publicId,
+      title: boards.name,
+      description: boards.description,
+      slug: boards.slug,
+    })
+    .from(boards)
+    .where(
+      and(
+        eq(boards.workspaceId, workspaceId),
+        ilike(boards.name, searchQuery),
+        isNull(boards.deletedAt),
+      ),
+    );
+
+  // Search for cards
+  const cardResults = await db
+    .select({
+      publicId: cards.publicId,
+      title: cards.title,
+      description: cards.description,
+      boardPublicId: boards.publicId,
+      boardName: boards.name,
+      listName: lists.name,
+    })
+    .from(cards)
+    .innerJoin(lists, eq(cards.listId, lists.id))
+    .innerJoin(boards, eq(lists.boardId, boards.id))
+    .where(
+      and(
+        eq(boards.workspaceId, workspaceId),
+        ilike(cards.title, searchQuery),
+        isNull(cards.deletedAt),
+        isNull(lists.deletedAt),
+        isNull(boards.deletedAt),
+      ),
+    );
+
+  // Combine results
+  const allResults = [
+    ...boardResults.map((board) => ({ ...board, type: "board" as const })),
+    ...cardResults.map((card) => ({ ...card, type: "card" as const })),
+  ];
+
+  return allResults;
 };
