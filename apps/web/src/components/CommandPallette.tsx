@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   Combobox,
   ComboboxInput,
@@ -43,6 +43,7 @@ export default function CommandPallette({
 }) {
   const [query, setQuery] = useState("");
   const { workspace } = useWorkspace();
+  const router = useRouter();
 
   // Debounce to avoid too many reqs
   const [debouncedQuery] = useDebounce(query, 300);
@@ -99,6 +100,21 @@ export default function CommandPallette({
                   placeholder="Search boards and cards..."
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" && results.length > 0) {
+                      event.preventDefault();
+
+                      // Find the active option or fallback to first option
+                      const targetOption =
+                        document.querySelector(
+                          '[data-headlessui-state*="active"][role="option"]',
+                        ) ?? document.querySelector('[role="option"]');
+
+                      if (targetOption) {
+                        (targetOption as HTMLElement).click();
+                      }
+                    }
+                  }}
                 />
                 <HiMagnifyingGlass
                   className="pointer-events-none col-start-1 row-start-1 ml-4 size-5 self-center text-light-700 dark:text-dark-700"
@@ -113,20 +129,20 @@ export default function CommandPallette({
                     isPlaceholderData ? "opacity-75" : ""
                   }`}
                 >
-                  {results.map((result) => (
-                    <ComboboxOption
-                      key={`${result.type}-${result.publicId}`}
-                      value={result}
-                      className="group"
-                    >
-                      <Link
-                        href={
-                          result.type === "board"
-                            ? `/boards/${result.publicId}`
-                            : `/cards/${result.publicId}`
-                        }
-                        className="block cursor-pointer select-none px-4 py-3 data-[focus]:bg-light-200 hover:bg-light-200 focus:outline-none dark:data-[focus]:bg-dark-200 dark:hover:bg-dark-200"
+                  {results.map((result) => {
+                    const url =
+                      result.type === "board"
+                        ? `/boards/${result.publicId}`
+                        : `/cards/${result.publicId}`;
+
+                    return (
+                      <ComboboxOption
+                        key={`${result.type}-${result.publicId}`}
+                        value={result}
+                        className="cursor-pointer select-none px-4 py-3 data-[focus]:bg-light-200 hover:bg-light-200 focus:outline-none dark:data-[focus]:bg-dark-200 dark:hover:bg-dark-200"
                         onClick={() => {
+                          console.log("clicked", url);
+                          void router.push(url);
                           onClose();
                           setQuery("");
                         }}
@@ -143,9 +159,9 @@ export default function CommandPallette({
                             )}
                           </div>
                         </div>
-                      </Link>
-                    </ComboboxOption>
-                  ))}
+                      </ComboboxOption>
+                    );
+                  })}
                 </ComboboxOptions>
               )}
 
