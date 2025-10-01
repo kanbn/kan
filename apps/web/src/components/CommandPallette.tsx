@@ -45,12 +45,13 @@ export default function CommandPallette({
   const { workspace } = useWorkspace();
 
   // Debounce to avoid too many reqs
-  const [debouncedQuery] = useDebounce(query, 500);
+  const [debouncedQuery] = useDebounce(query, 300);
 
   const {
     data: searchResults,
     isLoading,
     isFetched,
+    isPlaceholderData,
   } = api.workspace.search.useQuery(
     {
       workspacePublicId: workspace.publicId,
@@ -58,10 +59,16 @@ export default function CommandPallette({
     },
     {
       enabled: Boolean(workspace.publicId && debouncedQuery.trim().length > 0),
+      placeholderData: (previousData) => previousData,
     },
   );
 
-  const results = (searchResults ?? []) as SearchResult[];
+  // Clear results when query is empty, otherwise show search results
+  const results =
+    debouncedQuery.trim().length === 0
+      ? []
+      : ((searchResults ?? []) as SearchResult[]);
+
   const hasSearched = Boolean(debouncedQuery.trim().length > 0 && isFetched);
 
   return (
@@ -102,7 +109,9 @@ export default function CommandPallette({
               {results.length > 0 && (
                 <ComboboxOptions
                   static
-                  className="max-h-72 scroll-py-2 overflow-y-auto py-2"
+                  className={`max-h-72 scroll-py-2 overflow-y-auto py-2 ${
+                    isPlaceholderData ? "opacity-75" : ""
+                  }`}
                 >
                   {results.map((result) => (
                     <ComboboxOption
