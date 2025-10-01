@@ -10,7 +10,7 @@ import {
 } from "@headlessui/react";
 import { t } from "@lingui/macro";
 import { useState } from "react";
-import { HiMagnifyingGlass } from "react-icons/hi2";
+import { HiDocumentText, HiFolder, HiMagnifyingGlass } from "react-icons/hi2";
 
 import { useDebounce } from "~/hooks/useDebounce";
 import { useWorkspace } from "~/providers/workspace";
@@ -148,6 +148,13 @@ export default function CommandPallette({
                         }}
                       >
                         <div className="flex items-start gap-3">
+                          <div className="mt-0.5 flex-shrink-0">
+                            {result.type === "board" ? (
+                              <HiFolder className="h-4 w-4 text-light-600 dark:text-dark-600" />
+                            ) : (
+                              <HiDocumentText className="h-4 w-4 text-light-600 dark:text-dark-600" />
+                            )}
+                          </div>
                           <div className="min-w-0 flex-1 text-left">
                             <div className="truncate text-sm font-bold text-light-900 dark:text-dark-900">
                               {result.title}
