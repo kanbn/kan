@@ -1,4 +1,4 @@
-import { and, eq, ilike, inArray, isNull } from "drizzle-orm";
+import { and, desc, eq, ilike, inArray, isNull, or, sql } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import {
@@ -285,6 +285,7 @@ export const searchBoardsAndCards = async (
   db: dbClient,
   workspaceId: number,
   query: string,
+  limit = 20,
 ) => {
   const searchQuery = `%${query}%`;
 
@@ -295,15 +296,27 @@ export const searchBoardsAndCards = async (
       title: boards.name,
       description: boards.description,
       slug: boards.slug,
+      updatedAt: boards.updatedAt,
+      createdAt: boards.createdAt,
     })
     .from(boards)
     .where(
       and(
         eq(boards.workspaceId, workspaceId),
-        ilike(boards.name, searchQuery),
+        // Combine exact and fuzzy matching
+        or(
+          ilike(boards.name, `%${query}%`), // Exact substring match
+          sql`similarity(${boards.name}, ${query}) > 0.2`, // Fuzzy match
+        ),
         isNull(boards.deletedAt),
       ),
-    );
+    )
+    .orderBy(
+      sql`CASE WHEN ${boards.name} ILIKE ${`%${query}%`} THEN 1 ELSE 0 END DESC`,
+      sql`similarity(${boards.name}, ${query}) DESC`,
+      desc(boards.updatedAt),
+    )
+    .limit(Math.ceil(limit * 0.4));
 
   // Search for cards
   const cardResults = await db
@@ -314,6 +327,8 @@ export const searchBoardsAndCards = async (
       boardPublicId: boards.publicId,
       boardName: boards.name,
       listName: lists.name,
+      updatedAt: cards.updatedAt,
+      createdAt: cards.createdAt,
     })
     .from(cards)
     .innerJoin(lists, eq(cards.listId, lists.id))
@@ -321,12 +336,21 @@ export const searchBoardsAndCards = async (
     .where(
       and(
         eq(boards.workspaceId, workspaceId),
-        ilike(cards.title, searchQuery),
+        or(
+          ilike(cards.title, searchQuery),
+          sql`similarity(${cards.title}, ${query}) > 0.2`,
+        ),
         isNull(cards.deletedAt),
         isNull(lists.deletedAt),
         isNull(boards.deletedAt),
       ),
-    );
+    )
+    .orderBy(
+      sql`CASE WHEN ${cards.title} ILIKE ${searchQuery} THEN 1 ELSE 0 END DESC`,
+      sql`similarity(${cards.title}, ${query}) DESC`,
+      desc(cards.updatedAt),
+    )
+    .limit(Math.floor(limit * 0.6));
 
   // Combine results
   const allResults = [
@@ -334,5 +358,6 @@ export const searchBoardsAndCards = async (
     ...cardResults.map((card) => ({ ...card, type: "card" as const })),
   ];
 
-  return allResults;
+  // Ensure we don't exceed the total limit
+  return allResults.slice(0, limit);
 };

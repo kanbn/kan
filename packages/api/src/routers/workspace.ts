@@ -425,6 +425,7 @@ export const workspaceRouter = createTRPCRouter({
       z.object({
         workspacePublicId: z.string().min(12),
         query: z.string().min(1).max(100),
+        limit: z.number().min(1).max(50).optional().default(20),
       }),
     )
     .output(
@@ -435,6 +436,8 @@ export const workspaceRouter = createTRPCRouter({
             title: z.string(),
             description: z.string().nullable(),
             slug: z.string(),
+            updatedAt: z.date().nullable(),
+            createdAt: z.date(),
             type: z.literal("board"),
           }),
           z.object({
@@ -444,6 +447,8 @@ export const workspaceRouter = createTRPCRouter({
             boardPublicId: z.string(),
             boardName: z.string(),
             listName: z.string(),
+            updatedAt: z.date().nullable(),
+            createdAt: z.date(),
             type: z.literal("card"),
           }),
         ]),
@@ -475,6 +480,7 @@ export const workspaceRouter = createTRPCRouter({
         ctx.db,
         workspace.id,
         input.query,
+        input.limit,
       );
 
       return result;

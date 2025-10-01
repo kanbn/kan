@@ -22,6 +22,8 @@ type SearchResult =
       title: string;
       description: string | null;
       slug: string;
+      updatedAt: Date | null;
+      createdAt: Date;
       type: "board";
     }
   | {
@@ -31,6 +33,8 @@ type SearchResult =
       boardPublicId: string;
       boardName: string;
       listName: string;
+      updatedAt: Date | null;
+      createdAt: Date;
       type: "card";
     };
 

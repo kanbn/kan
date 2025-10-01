@@ -113,6 +113,13 @@
       "when": 1758662398166,
       "tag": "20250923211958_AddWorkspaceInviteLinks",
       "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1759356096392,
+      "tag": "20251001220136_AddFuzzySearchSupport",
+      "breakpoints": true
     }
   ]
 }
