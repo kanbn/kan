@@ -100,8 +100,8 @@ export default function CommandPallette({
               <div className="grid grid-cols-1">
                 <ComboboxInput
                   autoFocus
-                  className="col-start-1 row-start-1 h-12 w-full border-0 bg-transparent pl-11 pr-4 text-base text-light-900 placeholder:text-light-700 focus:outline-none focus:ring-0 dark:text-dark-900 dark:placeholder:text-dark-700 sm:text-sm"
-                  placeholder="Search boards and cards..."
+                  className="col-start-1 row-start-1 h-12 w-full border-0 bg-transparent pl-11 pr-4 text-sm text-light-900 placeholder:text-light-700 focus:outline-none focus:ring-0 dark:text-dark-900 dark:placeholder:text-dark-700"
+                  placeholder={t`Search boards and cards...`}
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   onKeyDown={(event) => {
