@@ -74,7 +74,7 @@ export default function CommandPallette({
       ? []
       : ((searchResults ?? []) as SearchResult[]);
 
-  const hasSearched = Boolean(debouncedQuery.trim().length > 0 && isFetched);
+  const hasSearched = Boolean(debouncedQuery.trim().length > 0);
 
   return (
     <Dialog
@@ -176,11 +176,14 @@ export default function CommandPallette({
                 </ComboboxOptions>
               )}
 
-              {hasSearched && !isLoading && results.length === 0 && (
-                <div className="p-4 text-sm text-light-950 dark:text-dark-950">
-                  {t`No results found for "${query}".`}
-                </div>
-              )}
+              {hasSearched &&
+                !isLoading &&
+                searchResults !== undefined &&
+                results.length === 0 && (
+                  <div className="p-4 text-sm text-light-950 dark:text-dark-950">
+                    {t`No results found for "${debouncedQuery}".`}
+                  </div>
+                )}
             </Combobox>
           </DialogPanel>
         </div>
