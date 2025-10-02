@@ -1,6 +1,6 @@
 import { Button, Menu, Transition } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { HiCheck, HiMagnifyingGlass } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
@@ -17,6 +17,18 @@ export default function WorkspaceMenu({
     useWorkspace();
   const { openModal } = useModal();
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === "k") {
+        event.preventDefault();
+        setIsOpen(true);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <>
