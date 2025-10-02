@@ -1,4 +1,5 @@
-import { TRPCError } from "@trpc/server";
+import { on } from "events";
+import { tracked, TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
@@ -8,10 +9,73 @@ import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
+//
+
+import { cardTopic, emitBoardEvent, emitCardEvent, eventBus } from "../events";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
 
 export const cardRouter = createTRPCRouter({
+  boardIdByCardPublicId: publicProcedure
+    .meta({
+      openapi: {
+        summary: "Get board public ID by card public ID",
+        method: "GET",
+        path: "/cards/{cardPublicId}/board",
+        description:
+          "Resolves the board public ID for a given card public ID, including when the card is soft-deleted",
+        tags: ["Cards"],
+      },
+    })
+    .input(z.object({ cardPublicId: z.string().min(12) }))
+    .output(z.object({ boardPublicId: z.string().min(12) }).nullable())
+    .query(async ({ ctx, input }) => {
+      const boardPublicId = await cardRepo.getBoardPublicIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+      return boardPublicId ? { boardPublicId } : null;
+    }),
+  events: protectedProcedure
+    .meta({
+      openapi: {
+        enabled: false,
+        method: "GET",
+        path: "/cards/{cardPublicId}/events",
+      },
+    })
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+        lastEventId: z.string().nullish().optional(),
+      }),
+    )
+    .subscription(async function* ({ ctx, input, signal }) {
+      const userId = ctx.user?.id;
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!card)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertUserInWorkspace(ctx.db, userId, card.workspaceId);
+
+      for await (const [data] of on(eventBus, cardTopic(card.id), { signal })) {
+        const id = Date.now().toString();
+        yield tracked(id, data as unknown);
+      }
+    }),
   create: protectedProcedure
     .meta({
       openapi: {
@@ -77,6 +141,21 @@ export const cardRouter = createTRPCRouter({
           message: `Failed to create card`,
           code: "INTERNAL_SERVER_ERROR",
         });
+
+      // Emit board-level event for card creation
+      const listDetails = await listRepo.getByPublicId(
+        ctx.db,
+        input.listPublicId,
+      );
+      if (listDetails) {
+        const maybePublicId = (newCard as { publicId?: string }).publicId;
+        emitBoardEvent(listDetails.boardId, {
+          scope: "board",
+          type: "card.created",
+          boardId: listDetails.boardId,
+          cardPublicId: maybePublicId ?? "",
+        });
+      }
 
       if (newCardId && input.labelPublicIds.length) {
         const labels = await labelRepo.getAllByPublicIds(
@@ -217,6 +296,18 @@ export const cardRouter = createTRPCRouter({
         createdBy: userId,
       });
 
+      // Emit card-level event
+      {
+        emitCardEvent(card.id, {
+          scope: "card",
+          type: "comment.added",
+          cardId: card.id,
+          cardPublicId: input.cardPublicId,
+          commentPublicId: newComment.publicId,
+          comment: newComment.comment,
+        });
+      }
+
       return newComment;
     }),
   updateComment: protectedProcedure
@@ -297,6 +388,17 @@ export const cardRouter = createTRPCRouter({
         createdBy: userId,
       });
 
+      {
+        emitCardEvent(card.id, {
+          scope: "card",
+          type: "comment.updated",
+          cardId: card.id,
+          cardPublicId: input.cardPublicId,
+          commentPublicId: updatedComment.publicId,
+          comment: updatedComment.comment,
+        });
+      }
+
       return updatedComment;
     }),
   deleteComment: protectedProcedure
@@ -367,6 +469,16 @@ export const cardRouter = createTRPCRouter({
         commentId: existingComment.id,
         createdBy: userId,
       });
+
+      {
+        emitCardEvent(card.id, {
+          scope: "card",
+          type: "comment.deleted",
+          cardId: card.id,
+          cardPublicId: input.cardPublicId,
+          commentPublicId: existingComment.publicId,
+        });
+      }
 
       return deletedComment;
     }),
@@ -442,6 +554,30 @@ export const cardRouter = createTRPCRouter({
           createdBy: userId,
         });
 
+        {
+          emitCardEvent(card.id, {
+            scope: "card",
+            type: "label.removed",
+            cardId: card.id,
+            cardPublicId: input.cardPublicId,
+            labelPublicId: input.labelPublicId,
+          });
+        }
+
+        // Emit board-level card.updated to reflect label change on board UI
+        {
+          const boardId = await cardRepo.getBoardIdByCardId(ctx.db, card.id);
+          if (boardId !== null) {
+            emitBoardEvent(boardId, {
+              scope: "board",
+              type: "card.updated",
+              boardId,
+              cardPublicId: input.cardPublicId,
+              changes: {},
+            });
+          }
+        }
+
         return { newLabel: false };
       }
 
@@ -460,6 +596,30 @@ export const cardRouter = createTRPCRouter({
         labelId: label.id,
         createdBy: userId,
       });
+
+      {
+        emitCardEvent(card.id, {
+          scope: "card",
+          type: "label.added",
+          cardId: card.id,
+          cardPublicId: input.cardPublicId,
+          labelPublicId: input.labelPublicId,
+        });
+      }
+
+      // Emit board-level card.updated to reflect label change on board UI
+      {
+        const boardId = await cardRepo.getBoardIdByCardId(ctx.db, card.id);
+        if (boardId !== null) {
+          emitBoardEvent(boardId, {
+            scope: "board",
+            type: "card.updated",
+            boardId,
+            cardPublicId: input.cardPublicId,
+            changes: {},
+          });
+        }
+      }
 
       return { newLabel: true };
     }),
@@ -540,6 +700,30 @@ export const cardRouter = createTRPCRouter({
           createdBy: userId,
         });
 
+        {
+          emitCardEvent(card.id, {
+            scope: "card",
+            type: "member.removed",
+            cardId: card.id,
+            cardPublicId: input.cardPublicId,
+            workspaceMemberPublicId: input.workspaceMemberPublicId,
+          });
+        }
+
+        // Emit board-level card.updated to reflect member change on board UI
+        {
+          const boardId = await cardRepo.getBoardIdByCardId(ctx.db, card.id);
+          if (boardId !== null) {
+            emitBoardEvent(boardId, {
+              scope: "board",
+              type: "card.updated",
+              boardId,
+              cardPublicId: input.cardPublicId,
+              changes: {},
+            });
+          }
+        }
+
         return { newMember: false };
       }
 
@@ -558,6 +742,30 @@ export const cardRouter = createTRPCRouter({
         workspaceMemberId: member.id,
         createdBy: userId,
       });
+
+      {
+        emitCardEvent(card.id, {
+          scope: "card",
+          type: "member.added",
+          cardId: card.id,
+          cardPublicId: input.cardPublicId,
+          workspaceMemberPublicId: input.workspaceMemberPublicId,
+        });
+      }
+
+      // Emit board-level card.updated to reflect member change on board UI
+      {
+        const boardId = await cardRepo.getBoardIdByCardId(ctx.db, card.id);
+        if (boardId !== null) {
+          emitBoardEvent(boardId, {
+            scope: "board",
+            type: "card.updated",
+            boardId,
+            cardPublicId: input.cardPublicId,
+            changes: {},
+          });
+        }
+      }
 
       return { newMember: true };
     }),
@@ -756,6 +964,42 @@ export const cardRouter = createTRPCRouter({
         await cardActivityRepo.bulkCreate(ctx.db, activities);
       }
 
+      // Emit card and board events for card updates
+      const cardWithList = await cardRepo.getCardWithListByPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+      const listRef = cardWithList ? cardWithList.list : undefined;
+      const boardId = listRef ? listRef.boardId : undefined;
+      // Card-scoped event so open card pages refresh activity instantly
+      emitCardEvent(card.id, {
+        scope: "card",
+        type: "updated",
+        cardId: card.id,
+        cardPublicId: input.cardPublicId,
+        changes: {
+          title: input.title,
+          description: input.description,
+          listPublicId: input.listPublicId,
+          index: input.index,
+        },
+      });
+      if (boardId !== undefined) {
+        emitBoardEvent(boardId, {
+          scope: "board",
+          type: "card.updated",
+          boardId,
+          cardPublicId: input.cardPublicId,
+          listPublicId: input.listPublicId,
+          changes: {
+            title: input.title,
+            description: input.description,
+            listPublicId: input.listPublicId,
+            index: input.index,
+          },
+        });
+      }
+
       return result;
     }),
   delete: protectedProcedure
@@ -797,6 +1041,15 @@ export const cardRouter = createTRPCRouter({
 
       await assertUserInWorkspace(ctx.db, userId, card.workspaceId);
 
+      // Resolve board id BEFORE deleting (since lookups exclude deleted cards)
+      const beforeDeleteCardWithList = await cardRepo.getCardWithListByPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+      const boardIdForEvent = beforeDeleteCardWithList
+        ? beforeDeleteCardWithList.list.boardId
+        : undefined;
+
       const deletedAt = new Date();
 
       await cardRepo.softDelete(ctx.db, {
@@ -810,6 +1063,23 @@ export const cardRouter = createTRPCRouter({
         cardId: card.id,
         createdBy: userId,
       });
+
+      // Emit card-level and board-level delete events (using board id resolved before delete)
+      emitCardEvent(card.id, {
+        scope: "card",
+        type: "deleted",
+        cardId: card.id,
+        cardPublicId: input.cardPublicId,
+      });
+      // Board-level
+      if (boardIdForEvent !== undefined) {
+        emitBoardEvent(boardIdForEvent, {
+          scope: "board",
+          type: "card.deleted",
+          boardId: boardIdForEvent,
+          cardPublicId: input.cardPublicId,
+        });
+      }
 
       return { success: true };
     }),
