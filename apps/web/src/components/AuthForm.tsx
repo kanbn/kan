@@ -153,6 +153,7 @@ const availableSocialProviders = {
 };
 
 export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
+  const [isCloudEnv, setIsCloudEnv] = useState(false);
   const [isLoginWithProviderPending, setIsLoginWithProviderPending] =
     useState<null | AuthProvider>(null);
   const [isCredentialsEnabled, setIsCredentialsEnabled] = useState(false);
@@ -172,6 +173,8 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
       env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
     const emailSendingEnabled =
       env("NEXT_PUBLIC_DISABLE_EMAIL")?.toLowerCase() !== "true";
+    const isCloudEnv = env("NEXT_PUBLIC_KAN_ENV") === "cloud";
+    setIsCloudEnv(isCloudEnv);
     setIsEmailSendingEnabled(emailSendingEnabled);
     setIsCredentialsEnabled(credentialsAllowed);
   }, []);
@@ -236,7 +239,7 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
       }
     } else {
       // Only allow magic link if email sending is enabled and not in sign up mode
-      if (isEmailSendingEnabled && !isSignUp) {
+      if (isCloudEnv || (isEmailSendingEnabled && !isSignUp)) {
         await authClient.signIn.magicLink(
           {
             email,
