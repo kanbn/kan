@@ -120,6 +120,13 @@
       "when": 1759356096392,
       "tag": "20251001220136_AddFuzzySearchSupport",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1759869689304,
+      "tag": "20251007204129_AddBoardTypeAndSourceIdColumns",
+      "breakpoints": true
     }
   ]
 }
