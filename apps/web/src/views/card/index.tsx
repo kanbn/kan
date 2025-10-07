@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { Select } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -186,6 +187,29 @@ export default function CardPage() {
       selected: list.publicId === card?.list.publicId,
     })) ?? [];
 
+  const drivers = [
+    {
+      key: "motorista-1",
+      value: "Motorista 1",
+      selected: false,
+    },
+    {
+      key: "motorista-2",
+      value: "Motorista 2",
+      selected: false,
+    },
+    {
+      key: "motorista-3",
+      value: "Motorista 3",
+      selected: false,
+    },
+    {
+      key: "motorista-4",
+      value: "Motorista 4",
+      selected: false,
+    },
+  ];
+
   const { register, handleSubmit, setValue, watch } = useForm<any>({
     values: {
       cardId: cardId ?? "",
@@ -207,6 +231,8 @@ export default function CardPage() {
       hospedeDocumento: values.hospedeDocumento,
       hospedeTelefone: values.hospedeTelefone,
       tipoEntrega: values.tipoEntrega,
+      motoristaColeta: values.motoristaColeta,
+      motoristaEntrega: values.motoristaEntrega,
     });
   };
 
@@ -292,11 +318,39 @@ export default function CardPage() {
                           workspaceMembers={board?.workspace.members ?? []}
                         />
                         <p className="pb-2">Mudar Status do pedido</p>
-                        <ListSelector
-                          cardPublicId={cardId ?? ""}
-                          lists={formattedLists}
-                          isLoading={!card}
-                        />
+                        <div className="flex flex-row">
+                          <ListSelector
+                            cardPublicId={cardId ?? ""}
+                            lists={formattedLists}
+                            isLoading={!card}
+                          />
+                          <div>
+                            <p>Morotista que coletou</p>
+                            <Select
+                              name="motoristaColeta"
+                              aria-label="Project status"
+                              onChange={}
+                            >
+                              <option value="motorista-1">Motorista 1</option>
+                              <option value="motorista-2">Motorista 2</option>
+                              <option value="motorista-3">Motorista 3</option>
+                              <option value="motorista-4">Motorista 4</option>
+                            </Select>
+                          </div>
+                          <div>
+                            <p>Motorista da entrega final</p>
+                            <Select
+                              name="motoristaEntrega"
+                              aria-label="Project status"
+                              onChange={}
+                            >
+                              <option value="motorista-1">Motorista 1</option>
+                              <option value="motorista-2">Motorista 2</option>
+                              <option value="motorista-3">Motorista 3</option>
+                              <option value="motorista-4">Motorista 4</option>
+                            </Select>
+                          </div>
+                        </div>
                         {/* Laundry details section (read-only) */}
                         <div className="mb-4 mt-4 rounded-lg bg-neutral-100 p-4 shadow-sm dark:bg-neutral-800">
                           <h3 className="mb-3 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
