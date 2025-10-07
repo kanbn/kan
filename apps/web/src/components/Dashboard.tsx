@@ -102,9 +102,9 @@ export default function Dashboard({
           background-color: ${!isDarkMode ? "hsl(0deg 0% 97.3%)" : "#1c1c1c"};
         }
       `}</style>
-      <div className="relative flex h-screen flex-col bg-light-50 dark:bg-dark-50 md:bg-light-100 md:p-3 md:dark:bg-dark-100">
+      <div className="relative flex h-screen flex-col bg-light-50 dark:bg-dark-50 xl:bg-light-100 xl:p-3 xl:dark:bg-dark-100">
         {/* Mobile Header */}
-        <div className="flex h-12 items-center justify-between border-b border-light-300 bg-light-50 px-3 dark:border-dark-300 dark:bg-dark-50 md:hidden">
+        <div className="flex h-12 items-center justify-between border-b border-light-300 bg-light-50 px-3 dark:border-dark-300 dark:bg-dark-50 xl:hidden">
           <button
             ref={sideNavButtonRef}
             onClick={toggleSideNav}
@@ -144,10 +144,10 @@ export default function Dashboard({
           )}
         </div>
 
-        <div className="flex h-[calc(100dvh-4.5rem)] min-h-0 w-full md:h-[calc(100dvh-1.5rem)]">
+        <div className="flex h-[calc(100dvh-4.5rem)] min-h-0 w-full xl:h-[calc(100dvh-1.5rem)]">
           <div
             ref={sideNavRef}
-            className={`fixed top-12 z-40 h-[calc(100dvh-3rem)] w-[calc(100vw-1.5rem)] transform transition-transform duration-300 ease-in-out md:relative md:top-0 md:h-full md:w-auto md:translate-x-0 ${isSideNavOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"} `}
+            className={`fixed top-12 z-40 h-[calc(100dvh-3rem)] w-[calc(100vw-1.5rem)] transform transition-transform duration-300 ease-in-out xl:relative xl:top-0 xl:h-full xl:w-auto xl:translate-x-0 ${isSideNavOpen ? "translate-x-0" : "-translate-x-full xl:translate-x-0"} `}
           >
             <SideNavigation
               user={{ email: session?.user.email, image: session?.user.image }}
@@ -156,7 +156,7 @@ export default function Dashboard({
             />
           </div>
 
-          <div className="relative h-full min-h-0 w-full overflow-hidden md:rounded-lg md:border md:border-light-300 md:bg-light-50 md:dark:border-dark-300 md:dark:bg-dark-50">
+          <div className="relative h-full min-h-0 w-full overflow-hidden xl:rounded-lg xl:border xl:border-light-300 xl:bg-light-50 xl:dark:border-dark-300 xl:dark:bg-dark-50">
             <div className="relative flex h-full min-h-0 w-full overflow-hidden">
               <div className="h-full w-full overflow-y-auto">{children}</div>
 
@@ -164,7 +164,7 @@ export default function Dashboard({
               {hasRightPanel && rightPanel && (
                 <div
                   ref={rightPanelRef}
-                  className={`fixed right-0 top-12 z-40 h-[calc(100dvh-3rem)] w-80 transform border-l border-light-300 bg-light-200 transition-transform duration-300 ease-in-out dark:border-dark-300 dark:bg-dark-100 md:hidden ${
+                  className={`fixed right-0 top-12 z-40 h-[calc(100dvh-3rem)] w-80 transform border-l border-light-300 bg-light-200 transition-transform duration-300 ease-in-out dark:border-dark-300 dark:bg-dark-100 xl:hidden ${
                     isRightPanelOpen ? "translate-x-0" : "translate-x-full"
                   }`}
                 >
@@ -174,7 +174,7 @@ export default function Dashboard({
 
               {/* Desktop Right Panel */}
               {hasRightPanel && rightPanel && (
-                <div className="hidden md:block">{rightPanel}</div>
+                <div className="hidden xl:block">{rightPanel}</div>
               )}
             </div>
           </div>
