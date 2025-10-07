@@ -335,9 +335,13 @@ export default function CardPage() {
                               name="motoristaColeta"
                               aria-label="Project status"
                               onChange={handleMotoristaColetaChange}
-                              value={card.motoristaColeta ?? "motorista-1"}
+                              value={card.motoristaColeta ?? ""}
                               className="w-full rounded-md border border-neutral-400 bg-neutral-50 px-8 py-1 text-sm"
                             >
+                              <option value="" disabled>
+                                {" "}
+                                Selecione seu motorista
+                              </option>
                               <option value="motorista-1">Motorista 1</option>
                               <option value="motorista-2">Motorista 2</option>
                               <option value="motorista-3">Motorista 3</option>
@@ -350,9 +354,13 @@ export default function CardPage() {
                               name="motoristaEntrega"
                               aria-label="Project status"
                               onChange={handleMotoristaEntregaChange}
-                              value={card.motoristaEntrega ?? "motorista-1"}
+                              value={card.motoristaEntrega ?? ""}
                               className="w-full rounded-md border border-neutral-400 bg-neutral-50 px-8 py-1 text-sm"
                             >
+                              <option value="" disabled>
+                                {" "}
+                                Selecione seu motorista
+                              </option>
                               <option value="motorista-1">Motorista 1</option>
                               <option value="motorista-2">Motorista 2</option>
                               <option value="motorista-3">Motorista 3</option>
