@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { keepPreviousData } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DragDropContext, Draggable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
 import { HiOutlinePlusSmall, HiOutlineSquare3Stack3D } from "react-icons/hi2";
@@ -202,6 +202,41 @@ export default function BoardPage() {
     }
   }, [isSuccess, boardData, setValue]);
 
+  const [prevNovoPedidoCount, prevProntoParaColeta] = [
+    useRef<number>(0),
+    useRef<number>(0),
+  ];
+
+  useEffect(() => {
+    if (!boardData) return;
+
+    const novoPedidoList = boardData.lists.find(
+      (list) => list.name.toLowerCase() === "novo pedido",
+    );
+    if (!novoPedidoList) return;
+
+    const readyPickupList = boardData.lists.find(
+      (list) => list.name.toLowerCase() === "pronto para coleta",
+    );
+    if (!readyPickupList) return;
+
+    const currentNewCount = novoPedidoList.cards.length;
+    const currentDriverCount = readyPickupList.cards.length;
+
+    if (currentNewCount > prevNovoPedidoCount.current) {
+      const audio = new Audio("/sounds/new-order.wav");
+      audio.play();
+    }
+
+    if (currentDriverCount > prevProntoParaColeta.current) {
+      const audio = new Audio("/sounds/driver.wav");
+      audio.play();
+    }
+
+    prevNovoPedidoCount.current = currentNewCount;
+    prevProntoParaColeta.current = currentDriverCount;
+  }, [boardData?.lists.map((list) => list.cards.length).join(",")]);
+
   const openNewListForm = (publicBoardId: string) => {
     openModal("NEW_LIST");
     setSelectedPublicListId(publicBoardId);
@@ -375,7 +410,11 @@ export default function BoardPage() {
             />
             <Filters
               labels={boardData?.labels ?? []}
-              members={boardData?.workspace.members?.filter(member => member.user !== null) ?? []}
+              members={
+                boardData?.workspace.members?.filter(
+                  (member) => member.user !== null,
+                ) ?? []
+              }
               position="left"
               isLoading={!boardData}
             />

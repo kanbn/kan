@@ -114,7 +114,6 @@ export default function Checklists({
                   </div>
                 )}
               </div>
-
               <div className="ml-1">
                 {checklist.items.map((item) => (
                   <ChecklistItemRow
@@ -136,7 +135,16 @@ export default function Checklists({
                   />
                 ))}
               </div>
-
+              <div className="flex w-full min-w-full justify-end pr-8 text-sm font-medium text-light-900 dark:text-dark-700">
+                Valor Total:{" "}
+                {checklist.items
+                  .reduce(
+                    (acc, item) =>
+                      acc + (item.itemValue || 0) * (item.quantity || 0),
+                    0,
+                  )
+                  .toFixed(2)}
+              </div>
               {activeChecklistForm === checklist.publicId && !viewOnly && (
                 <div className="ml-1">
                   <NewChecklistItemForm
