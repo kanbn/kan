@@ -330,7 +330,7 @@ export default function CardPage() {
                             />
                           </div>
                           <div>
-                            <p>Morotista que coletou</p>
+                            <p>Motorista que coletou</p>
                             <Select
                               name="motoristaColeta"
                               aria-label="Project status"
