@@ -25,3 +25,17 @@
   width: 200%;
   height: 200%;
 }
+
+@layer utilities {
+  @supports not (overflow-wrap: anywhere) {
+    .break-anywhere {
+      word-break: break-word;
+    }
+  }
+
+  @supports (overflow-wrap: anywhere) {
+    .break-anywhere {
+      overflow-wrap: anywhere;
+    }
+  }
+}

@@ -138,7 +138,7 @@ const Comment = ({
         <ContentEditable
           html={comment ?? ""}
           disabled={true}
-          className="mt-2 text-sm"
+          className="break-anywhere mt-2 text-sm"
         />
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
