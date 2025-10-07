@@ -25,6 +25,10 @@ export const boardVisibilityEnum = pgEnum(
   boardVisibilityStatuses,
 );
 
+export const boardTypes = ["regular", "template"] as const;
+export type BoardType = (typeof boardTypes)[number];
+export const boardTypeEnum = pgEnum("board_type", boardTypes);
+
 export const boards = pgTable(
   "board",
   {
@@ -49,9 +53,13 @@ export const boards = pgTable(
       .notNull()
       .references(() => workspaces.id, { onDelete: "cascade" }),
     visibility: boardVisibilityEnum("visibility").notNull().default("private"),
+    type: boardTypeEnum("type").notNull().default("regular"),
+    sourceBoardId: bigint("sourceBoardId", { mode: "number" }),
   },
   (table) => [
     index("board_visibility_idx").on(table.visibility),
+    index("board_type_idx").on(table.type),
+    index("board_source_idx").on(table.sourceBoardId),
     uniqueIndex("unique_slug_per_workspace")
       .on(table.workspaceId, table.slug)
       .where(sql`${table.deletedAt} IS NULL`),
