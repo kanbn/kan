@@ -59,6 +59,9 @@ export const cards = pgTable("card", {
   hospedeTelefone: varchar("hospedeTelefone", { length: 20 }).notNull(),
   hospedeApartamento: varchar("hospedeApartamento", { length: 8 }).notNull(),
   tipoEntrega: entregaTypeEnum("tipoEntrega").notNull(),
+  motoristaColeta: varchar("motoristaColeta"),
+  motoristaEntrega: varchar("motoristaEntrega"),
+
   index: integer("index").notNull(),
   createdBy: uuid("createdBy").references(() => users.id, {
     onDelete: "set null",

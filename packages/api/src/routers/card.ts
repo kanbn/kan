@@ -652,7 +652,12 @@ export const cardRouter = createTRPCRouter({
         motoristaEntrega: z.string().optional(),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof cardRepo.update>>>())
+    .output(
+      z.custom<
+        | Awaited<ReturnType<typeof cardRepo.update>>
+        | Awaited<ReturnType<typeof cardRepo.reorder>>
+      >(),
+    )
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -713,12 +718,23 @@ export const cardRouter = createTRPCRouter({
           }
         | undefined;
 
-      if (input.title || input.description) {
+      if (
+        input.title ||
+        input.description ||
+        input.motoristaColeta ||
+        input.motoristaEntrega
+      ) {
         result = await cardRepo.update(
           ctx.db,
           {
             ...(input.title && { title: input.title }),
             ...(input.description && { description: input.description }),
+            ...(input.motoristaColeta && {
+              motoristaColeta: input.motoristaColeta,
+            }),
+            ...(input.motoristaEntrega && {
+              motoristaEntrega: input.motoristaEntrega,
+            }),
           },
           { cardPublicId: input.cardPublicId },
         );

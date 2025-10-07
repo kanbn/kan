@@ -187,28 +187,29 @@ export default function CardPage() {
       selected: list.publicId === card?.list.publicId,
     })) ?? [];
 
-  const drivers = [
-    {
-      key: "motorista-1",
-      value: "Motorista 1",
-      selected: false,
-    },
-    {
-      key: "motorista-2",
-      value: "Motorista 2",
-      selected: false,
-    },
-    {
-      key: "motorista-3",
-      value: "Motorista 3",
-      selected: false,
-    },
-    {
-      key: "motorista-4",
-      value: "Motorista 4",
-      selected: false,
-    },
-  ];
+  const handleMotoristaColetaChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const value = e.target.value;
+    setValue("motoristaColeta", value);
+    if (!cardId) return;
+    updateCard.mutate({
+      cardPublicId: cardId,
+      motoristaColeta: value,
+    });
+  };
+
+  const handleMotoristaEntregaChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const value = e.target.value;
+    setValue("motoristaEntrega", value);
+    if (!cardId) return;
+    updateCard.mutate({
+      cardPublicId: cardId,
+      motoristaEntrega: value,
+    });
+  };
 
   const { register, handleSubmit, setValue, watch } = useForm<any>({
     values: {
@@ -219,6 +220,8 @@ export default function CardPage() {
       hospedeDocumento: card?.hospedeDocumento ?? "",
       hospedeTelefone: card?.hospedeTelefone ?? "",
       tipoEntrega: card?.tipoEntrega ?? "normal",
+      motoristaColeta: card?.motoristaColeta ?? "",
+      motoristaEntrega: card?.motoristaEntrega ?? "",
     },
   });
 
@@ -317,19 +320,23 @@ export default function CardPage() {
                           onBlur={() => handleSubmit(onSubmit)()}
                           workspaceMembers={board?.workspace.members ?? []}
                         />
-                        <p className="pb-2">Mudar Status do pedido</p>
-                        <div className="flex flex-row">
-                          <ListSelector
-                            cardPublicId={cardId ?? ""}
-                            lists={formattedLists}
-                            isLoading={!card}
-                          />
+                        <div className="flex flex-col justify-between gap-4 pt-8 text-sm md:flex-row md:items-center">
+                          <div>
+                            <p className="pb-2">Mudar Status do pedido</p>
+                            <ListSelector
+                              cardPublicId={cardId ?? ""}
+                              lists={formattedLists}
+                              isLoading={!card}
+                            />
+                          </div>
                           <div>
                             <p>Morotista que coletou</p>
                             <Select
                               name="motoristaColeta"
                               aria-label="Project status"
-                              onChange={}
+                              onChange={handleMotoristaColetaChange}
+                              value={card.motoristaColeta ?? "motorista-1"}
+                              className="w-full rounded-md border border-neutral-400 bg-neutral-50 px-8 py-1 text-sm"
                             >
                               <option value="motorista-1">Motorista 1</option>
                               <option value="motorista-2">Motorista 2</option>
@@ -342,7 +349,9 @@ export default function CardPage() {
                             <Select
                               name="motoristaEntrega"
                               aria-label="Project status"
-                              onChange={}
+                              onChange={handleMotoristaEntregaChange}
+                              value={card.motoristaEntrega ?? "motorista-1"}
+                              className="w-full rounded-md border border-neutral-400 bg-neutral-50 px-8 py-1 text-sm"
                             >
                               <option value="motorista-1">Motorista 1</option>
                               <option value="motorista-2">Motorista 2</option>
