@@ -14,6 +14,51 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
 
 export const boardRouter = createTRPCRouter({
+  templates: protectedProcedure
+    .meta({
+      openapi: {
+        method: "GET",
+        path: "/workspaces/{workspacePublicId}/templates",
+        summary: "Get templates",
+        description: "Retrieves all templates for a given workspace",
+        tags: ["Boards"],
+        protect: true,
+      },
+    })
+    .input(z.object({ workspacePublicId: z.string().min(12) }))
+    .output(
+      z.custom<
+        Awaited<ReturnType<typeof boardRepo.getTemplatesByWorkspaceId>>
+      >(),
+    )
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace)
+        throw new TRPCError({
+          message: `Workspace with public ID ${input.workspacePublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+
+      const result = boardRepo.getAllByWorkspaceId(ctx.db, workspace.id, {
+        type: "template",
+      });
+
+      return result;
+    }),
   all: protectedProcedure
     .meta({
       openapi: {
@@ -225,7 +270,7 @@ export const boardRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
-      if (input.lists.length) {
+      if (input.lists?.length) {
         const listInputs = input.lists.map((list, index) => ({
           publicId: generateUID(),
           name: list,
@@ -237,7 +282,7 @@ export const boardRouter = createTRPCRouter({
         await listRepo.bulkCreate(ctx.db, listInputs);
       }
 
-      if (input.labels.length) {
+      if (input.labels?.length) {
         const labelInputs = input.labels.map((label, index) => ({
           publicId: generateUID(),
           name: label,

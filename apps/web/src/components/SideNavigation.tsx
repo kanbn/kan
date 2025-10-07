@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
+import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import {
   TbLayoutSidebarLeftCollapse,
@@ -15,10 +16,11 @@ import membersIconDark from "~/assets/members-dark.json";
 import membersIconLight from "~/assets/members-light.json";
 import settingsIconDark from "~/assets/settings-dark.json";
 import settingsIconLight from "~/assets/settings-light.json";
+import templatesIconDark from "~/assets/templates-dark.json";
+import templatesIconLight from "~/assets/templates-light.json";
 import ReactiveButton from "~/components/ReactiveButton";
 import UserMenu from "~/components/UserMenu";
 import WorkspaceMenu from "~/components/WorkspaceMenu";
-import { useTheme } from "next-themes";
 
 interface SideNavigationProps {
   user: UserType;
@@ -68,6 +70,11 @@ export default function SideNavigation({
       name: t`Boards`,
       href: "/boards",
       icon: isDarkMode ? boardsIconDark : boardsIconLight,
+    },
+    {
+      name: t`Templates`,
+      href: "/templates",
+      icon: isDarkMode ? templatesIconDark : templatesIconLight,
     },
     {
       name: t`Members`,
