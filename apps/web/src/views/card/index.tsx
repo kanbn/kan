@@ -166,6 +166,22 @@ export default function CardPage() {
   const board = card?.list.board;
   const boardId = board?.publicId;
   const activities = card?.activities;
+  const labels = board?.labels;
+  const selectedLabels = card?.labels;
+
+  const formattedLabels =
+    labels?.map((label) => {
+      const isSelected = selectedLabels?.some(
+        (selectedLabel) => selectedLabel.publicId === label.publicId,
+      );
+
+      return {
+        key: label.publicId,
+        value: label.name,
+        selected: isSelected ?? false,
+        leftIcon: <LabelIcon colourCode={label.colourCode} />,
+      };
+    }) ?? [];
 
   const updateCard = api.card.update.useMutation({
     onError: () => {
@@ -320,6 +336,15 @@ export default function CardPage() {
                           onBlur={() => handleSubmit(onSubmit)()}
                           workspaceMembers={board?.workspace.members ?? []}
                         />
+                        <div>
+                          <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Labels`}</p>
+                          <LabelSelector
+                            cardPublicId={cardId ?? ""}
+                            labels={formattedLabels}
+                            isLoading={!card}
+                          />
+                        </div>
+
                         <div className="flex flex-col justify-between gap-4 pt-8 text-sm md:flex-row md:items-center">
                           <div>
                             <p className="pb-2">Mudar Status do pedido</p>
@@ -368,6 +393,7 @@ export default function CardPage() {
                             </Select>
                           </div>
                         </div>
+
                         {/* Laundry details section (read-only) */}
                         <div className="mb-4 mt-4 rounded-lg bg-neutral-100 p-4 shadow-sm dark:bg-neutral-800">
                           <h3 className="mb-3 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
@@ -406,12 +432,12 @@ export default function CardPage() {
                             </span>
 
                             {/* Row 4: Tipo de entrega */}
-                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{`Tipo de entrega:`}</span>
-                            <span className="text-neutral-900 dark:text-neutral-100">
+                            {/* <span className="font-medium text-neutral-600 dark:text-neutral-400">{`Tipo de entrega:`}</span> */}
+                            {/* <span className="text-neutral-900 dark:text-neutral-100">
                               {card?.tipoEntrega === "express"
                                 ? `Express`
                                 : `Normal`}
-                            </span>
+                            </span> */}
                           </div>
                         </div>
                       </div>
