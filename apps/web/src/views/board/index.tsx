@@ -7,7 +7,11 @@ import { keepPreviousData } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { DragDropContext, Draggable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
-import { HiOutlinePlusSmall, HiOutlineSquare3Stack3D } from "react-icons/hi2";
+import {
+  HiOutlinePlusSmall,
+  HiOutlineRectangleStack,
+  HiOutlineSquare3Stack3D,
+} from "react-icons/hi2";
 
 import type { UpdateBoardInput } from "@kan/api/types";
 
@@ -374,6 +378,14 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             </p>
           )}
           <div className="order-1 mb-4 flex items-center justify-end space-x-2 md:order-2 md:mb-0">
+            {isTemplate && (
+              <div className="inline-flex cursor-default items-center justify-center whitespace-nowrap rounded-md border-[1px] border-light-300 bg-light-50 px-3 py-2 text-sm font-semibold text-light-950 shadow-sm dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950">
+                <span className="mr-2">
+                  <HiOutlineRectangleStack />
+                </span>
+                {t`Template`}
+              </div>
+            )}
             {!isTemplate && (
               <>
                 <UpdateBoardSlugButton
