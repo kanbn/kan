@@ -1,4 +1,5 @@
 import { useRouter } from "next/navigation";
+import { t } from "@lingui/core/macro";
 
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
@@ -6,8 +7,10 @@ import { api } from "~/utils/api";
 
 export function DeleteBoardConfirmation({
   boardPublicId,
+  isTemplate,
 }: {
   boardPublicId: string;
+  isTemplate: boolean;
 }) {
   const router = useRouter();
   const { closeModal } = useModal();
@@ -15,7 +18,7 @@ export function DeleteBoardConfirmation({
   const deleteBoard = api.board.delete.useMutation({
     onSuccess: () => {
       closeModal();
-      router.push(`/boards`);
+      router.push(isTemplate ? `/templates` : `/boards`);
     },
   });
 
@@ -30,18 +33,18 @@ export function DeleteBoardConfirmation({
     <div className="p-5">
       <div className="flex w-full flex-col justify-between pb-4">
         <h2 className="text-md pb-4 font-medium text-neutral-900 dark:text-dark-1000">
-          Are you sure you want to delete this board?
+          {t`Are you sure you want to delete this ${isTemplate ? "template" : "board"}?`}
         </h2>
         <p className="text-sm font-medium text-light-900 dark:text-dark-900">
-          {"This action can't be undone."}
+          {t`This action can't be undone.`}
         </p>
       </div>
       <div className="mt-5 flex justify-end space-x-2 sm:mt-6">
         <Button onClick={() => closeModal()} variant="secondary">
-          Cancel
+          {t`Cancel`}
         </Button>
         <Button onClick={handleDeleteBoard} isLoading={deleteBoard.isPending}>
-          Delete
+          {t`Delete`}
         </Button>
       </div>
     </div>

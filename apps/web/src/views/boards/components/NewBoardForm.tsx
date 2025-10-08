@@ -12,7 +12,7 @@ import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
-import TemplateBoards, { getTemplates } from "./TemplateBoards";
+import TemplateBoards from "./TemplateBoards";
 
 const schema = z.object({
   name: z
@@ -29,13 +29,15 @@ interface NewBoardInputWithTemplate {
   template: Template | null;
 }
 
-export function NewBoardForm() {
+export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
   const utils = api.useUtils();
   const { closeModal } = useModal();
   const { workspace } = useWorkspace();
   const [showTemplates, setShowTemplates] = useState(false);
-
-  const templates = getTemplates();
+  const { data: templates } = api.board.all.useQuery(
+    { workspacePublicId: workspace.publicId ?? "", type: "template" },
+    { enabled: !!workspace.publicId },
+  );
 
   const {
     register,
@@ -69,6 +71,7 @@ export function NewBoardForm() {
       workspacePublicId: data.workspacePublicId,
       lists: data.template?.lists ?? [],
       labels: data.template?.labels ?? [],
+      type: isTemplate ? "template" : "regular",
     });
   };
 
@@ -82,7 +85,7 @@ export function NewBoardForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="px-5 pt-5">
         <div className="text-neutral-9000 flex w-full items-center justify-between pb-4 dark:text-dark-1000">
-          <h2 className="text-sm font-bold">{t`New board`}</h2>
+          <h2 className="text-sm font-bold">{t`New ${isTemplate ? "template" : "board"}`}</h2>
           <button
             type="button"
             className="hover:bg-li ght-300 rounded p-1 focus:outline-none dark:hover:bg-dark-300"
@@ -113,19 +116,21 @@ export function NewBoardForm() {
         showTemplates={showTemplates}
       />
       <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
-        <Toggle
-          label={t`Use template`}
-          isChecked={showTemplates}
-          onChange={() => {
-            setShowTemplates(!showTemplates);
-            if (!showTemplates && !currentTemplate) {
-              setValue("template", templates[0] ?? null);
-            }
-          }}
-        />
+        {!isTemplate && (
+          <Toggle
+            label={t`Use template`}
+            isChecked={showTemplates}
+            onChange={() => {
+              setShowTemplates(!showTemplates);
+              if (!showTemplates && !currentTemplate) {
+                setValue("template", (templates?.[0] as any) ?? null);
+              }
+            }}
+          />
+        )}
         <div>
           <Button type="submit" isLoading={createBoard.isPending}>
-            {t`Create board`}
+            {t`Create ${isTemplate ? "template" : "board"}`}
           </Button>
         </div>
       </div>

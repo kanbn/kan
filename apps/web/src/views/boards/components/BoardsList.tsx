@@ -8,12 +8,15 @@ import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
-export function BoardsList() {
+export function BoardsList({ isTemplate }: { isTemplate?: boolean }) {
   const { workspace } = useWorkspace();
   const { openModal } = useModal();
 
   const { data, isLoading } = api.board.all.useQuery(
-    { workspacePublicId: workspace.publicId },
+    {
+      workspacePublicId: workspace.publicId,
+      type: isTemplate ? "template" : "regular",
+    },
     { enabled: workspace.publicId ? true : false },
   );
 
@@ -32,14 +35,14 @@ export function BoardsList() {
         <div className="flex flex-col items-center">
           <HiOutlineRectangleStack className="h-10 w-10 text-light-800 dark:text-dark-800" />
           <p className="mb-2 mt-4 text-[14px] font-bold text-light-1000 dark:text-dark-950">
-            {t`No boards`}
+            {t`No ${isTemplate ? "templates" : "boards"}`}
           </p>
           <p className="text-[14px] text-light-900 dark:text-dark-900">
-            {t`Get started by creating a new board`}
+            {t`Get started by creating a new ${isTemplate ? "template" : "board"}`}
           </p>
         </div>
         <Button onClick={() => openModal("NEW_BOARD")}>
-          {t`Create new board`}
+          {t`Create new ${isTemplate ? "template" : "board"}`}
         </Button>
       </div>
     );
@@ -47,7 +50,10 @@ export function BoardsList() {
   return (
     <div className="3xl:grid-cols-4 grid h-fit w-full grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3">
       {data?.map((board) => (
-        <Link key={board.publicId} href={`boards/${board.publicId}`}>
+        <Link
+          key={board.publicId}
+          href={`${isTemplate ? "templates" : "boards"}/${board.publicId}`}
+        >
           <div className="align-center relative mr-5 flex h-[150px] w-full items-center justify-center rounded-md border border-dashed border-light-400 bg-light-50 shadow-sm hover:bg-light-200 dark:border-dark-600 dark:bg-dark-50 dark:hover:bg-dark-100">
             <PatternedBackground />
             <p className="px-4 text-[14px] font-bold text-neutral-700 dark:text-dark-1000">

@@ -1,12 +1,12 @@
 import type { NextPageWithLayout } from "~/pages/_app";
 import { getDashboardLayout } from "~/components/Dashboard";
 import Popup from "~/components/Popup";
-import TemplatesView from "~/views/templates";
+import BoardsView from "~/views/boards";
 
 const TemplatesPage: NextPageWithLayout = () => {
   return (
     <>
-      <TemplatesView />
+      <BoardsView isTemplate />
       <Popup />
     </>
   );

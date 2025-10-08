@@ -38,7 +38,7 @@ import VisibilityButton from "./components/VisibilityButton";
 
 type PublicListId = string;
 
-export default function BoardPage() {
+export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const params = useParams() as { boardId: string[] } | null;
   const router = useRouter();
   const utils = api.useUtils();
@@ -67,10 +67,16 @@ export default function BoardPage() {
     });
   };
 
-  const queryParams = {
+  const queryParams: {
+    boardPublicId: string;
+    members: string[];
+    labels: string[];
+    type: "regular" | "template";
+  } = {
     boardPublicId: boardId ?? "",
     members: formatToArray(router.query.members),
     labels: formatToArray(router.query.labels),
+    type: isTemplate ? "template" : "regular",
   };
 
   const {
@@ -208,7 +214,7 @@ export default function BoardPage() {
   };
 
   const onDragEnd = ({
-    source,
+    source: _source,
     destination,
     draggableId,
     type,
@@ -241,7 +247,10 @@ export default function BoardPage() {
           modalSize="sm"
           isVisible={isOpen && modalContentType === "DELETE_BOARD"}
         >
-          <DeleteBoardConfirmation boardPublicId={boardId ?? ""} />
+          <DeleteBoardConfirmation
+            isTemplate={!!isTemplate}
+            boardPublicId={boardId ?? ""}
+          />
         </Modal>
 
         <Modal
@@ -259,6 +268,7 @@ export default function BoardPage() {
           isVisible={isOpen && modalContentType === "NEW_CARD"}
         >
           <NewCardForm
+            isTemplate={!!isTemplate}
             boardPublicId={boardId ?? ""}
             listPublicId={selectedPublicListId}
             queryParams={queryParams}
@@ -328,7 +338,7 @@ export default function BoardPage() {
   return (
     <>
       <PageHead
-        title={`${boardData?.name ?? t`Board`} | ${workspace.name ?? t`Workspace`}`}
+        title={`${(boardData?.name ?? isTemplate) ? t`Board` : t`Template`} | ${workspace.name}`}
       />
       <div className="relative flex h-full flex-col">
         <PatternedBackground />
@@ -354,31 +364,38 @@ export default function BoardPage() {
           )}
           {!boardData && !isLoading && (
             <p className="order-2 block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem] md:order-1">
-              {t`Board not found`}
+              {t`${isTemplate ? "Template" : "Board"} not found`}
             </p>
           )}
-
           <div className="order-1 mb-4 flex items-center justify-end space-x-2 md:order-2 md:mb-0">
-            <UpdateBoardSlugButton
-              handleOnClick={() => openModal("UPDATE_BOARD_SLUG")}
-              isLoading={isLoading}
-              workspaceSlug={workspace.slug ?? ""}
-              boardSlug={boardData?.slug ?? ""}
-            />
-            <VisibilityButton
-              visibility={boardData?.visibility ?? "private"}
-              boardPublicId={boardId ?? ""}
-              boardSlug={boardData?.slug ?? ""}
-              queryParams={queryParams}
-              isLoading={!boardData}
-              isAdmin={workspace.role === "admin"}
-            />
-            <Filters
-              labels={boardData?.labels ?? []}
-              members={boardData?.workspace.members?.filter(member => member.user !== null) ?? []}
-              position="left"
-              isLoading={!boardData}
-            />
+            {!isTemplate && (
+              <>
+                <UpdateBoardSlugButton
+                  handleOnClick={() => openModal("UPDATE_BOARD_SLUG")}
+                  isLoading={isLoading}
+                  workspaceSlug={workspace.slug ?? ""}
+                  boardSlug={boardData?.slug ?? ""}
+                />
+                <VisibilityButton
+                  visibility={boardData?.visibility ?? "private"}
+                  boardPublicId={boardId ?? ""}
+                  boardSlug={boardData?.slug ?? ""}
+                  queryParams={queryParams}
+                  isLoading={!boardData}
+                  isAdmin={workspace.role === "admin"}
+                />
+                {boardData && (
+                  <Filters
+                    labels={boardData.labels}
+                    members={boardData.workspace.members.filter(
+                      (member) => member.user !== null,
+                    )}
+                    position="left"
+                    isLoading={!boardData}
+                  />
+                )}
+              </>
+            )}
             <Button
               iconLeft={
                 <HiOutlinePlusSmall
@@ -393,7 +410,12 @@ export default function BoardPage() {
             >
               {t`New list`}
             </Button>
-            <BoardDropdown isLoading={!boardData} />
+            <BoardDropdown
+              isTemplate={!!isTemplate}
+              isLoading={!boardData}
+              boardPublicId={boardId ?? ""}
+              workspacePublicId={workspace.publicId}
+            />
           </div>
         </div>
 
@@ -491,7 +513,7 @@ export default function BoardPage() {
                                             title={card.title}
                                             labels={card.labels}
                                             members={card.members}
-                                            checklists={card.checklists ?? []}
+                                            checklists={card.checklists}
                                           />
                                         </Link>
                                       )}

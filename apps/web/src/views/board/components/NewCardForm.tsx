@@ -11,10 +11,11 @@ import {
 import type { NewCardInput } from "@kan/api/types";
 import { generateUID } from "@kan/shared/utils";
 
+import type { WorkspaceMember } from "~/components/Editor";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
-import Editor, { WorkspaceMember } from "~/components/Editor";
+import Editor from "~/components/Editor";
 import Input from "~/components/Input";
 import LabelIcon from "~/components/LabelIcon";
 import Toggle from "~/components/Toggle";
@@ -35,12 +36,14 @@ interface QueryParams {
 }
 
 interface NewCardFormProps {
+  isTemplate: boolean;
   boardPublicId: string;
   listPublicId: string;
   queryParams: QueryParams;
 }
 
 export function NewCardForm({
+  isTemplate,
   boardPublicId,
   listPublicId,
   queryParams,
@@ -85,14 +88,13 @@ export function NewCardForm({
     return () => subscription.unsubscribe();
   }, [watch, saveFormState]);
 
-  
   const { data: boardData } = api.board.byId.useQuery(queryParams, {
     enabled: !!boardPublicId,
   });
 
   // this adds the new created label to selected labels
   useEffect(() => {
-    const newLabelId = modalStates["NEW_LABEL_CREATED"];
+    const newLabelId = modalStates.NEW_LABEL_CREATED;
     if (newLabelId !== undefined && !labelPublicIds.includes(newLabelId)) {
       setValue("labelPublicIds", [...labelPublicIds, newLabelId]);
     }
@@ -101,23 +103,23 @@ export function NewCardForm({
   // this removes the deleted label from selected labels if it is selected
   useEffect(() => {
     if (boardData?.labels) {
-      const availableLabelIds = boardData.labels.map(label => label.publicId);
-      const newLabelId = modalStates["NEW_LABEL_CREATED"];
-    
+      const availableLabelIds = boardData.labels.map((label) => label.publicId);
+      const newLabelId = modalStates.NEW_LABEL_CREATED;
+
       if (newLabelId && availableLabelIds.includes(newLabelId)) {
         clearModalState("NEW_LABEL_CREATED");
       }
-      
-      const validLabelIds = labelPublicIds.filter(id => 
-        availableLabelIds.includes(id) || id === newLabelId
+
+      const validLabelIds = labelPublicIds.filter(
+        (id) => availableLabelIds.includes(id) || id === newLabelId,
       );
-      
+
       if (validLabelIds.length !== labelPublicIds.length) {
         setValue("labelPublicIds", validLabelIds);
       }
     }
-  }, [boardData?.labels, labelPublicIds, modalStates["NEW_LABEL_CREATED"]]);
-  
+  }, [boardData?.labels, labelPublicIds, modalStates.NEW_LABEL_CREATED]);
+
   const createCard = api.card.create.useMutation({
     onMutate: async (args) => {
       await utils.board.byId.cancel();
@@ -323,15 +325,19 @@ export function NewCardForm({
                 saveFormState({ ...formState, description: value });
               }}
               workspaceMembers={
-                boardData?.workspace.members?.map((member): WorkspaceMember => ({
-                  publicId: member.publicId,
-                  email: member.email,
-                  user: member.user ? {
-                    id: member.publicId,
-                    name: member.user.name,
-                    image: member.user.image ?? null,
-                  } : null,
-                })) ?? []
+                boardData?.workspace.members?.map(
+                  (member): WorkspaceMember => ({
+                    publicId: member.publicId,
+                    email: member.email,
+                    user: member.user
+                      ? {
+                          id: member.publicId,
+                          name: member.user.name,
+                          image: member.user.image ?? null,
+                        }
+                      : null,
+                  }),
+                ) ?? []
               }
             />
           </div>
@@ -347,42 +353,46 @@ export function NewCardForm({
               </div>
             </CheckboxDropdown>
           </div>
-          <div className="w-fit">
-            <CheckboxDropdown
-              items={formattedMembers}
-              handleSelect={(_groupKey, item) => handleSelectMembers(item.key)}
-            >
-              <div className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500">
-                {!memberPublicIds.length ? (
-                  t`Members`
-                ) : (
-                  <div className="flex -space-x-1 overflow-hidden">
-                    {memberPublicIds.map((memberPublicId) => {
-                      const member = formattedMembers.find(
-                        (member) => member.key === memberPublicId,
-                      );
+          {!isTemplate && (
+            <div className="w-fit">
+              <CheckboxDropdown
+                items={formattedMembers}
+                handleSelect={(_groupKey, item) =>
+                  handleSelectMembers(item.key)
+                }
+              >
+                <div className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500">
+                  {!memberPublicIds.length ? (
+                    t`Members`
+                  ) : (
+                    <div className="flex -space-x-1 overflow-hidden">
+                      {memberPublicIds.map((memberPublicId) => {
+                        const member = formattedMembers.find(
+                          (member) => member.key === memberPublicId,
+                        );
 
-                      return (
-                        <span
-                          key={member?.key}
-                          className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-gray-400 ring-1 ring-light-200 dark:ring-dark-500"
-                        >
-                          <span className="text-[8px] font-medium leading-none text-white">
-                            {member?.value
-                              .split(" ")
-                              .map((namePart) =>
-                                namePart.charAt(0).toUpperCase(),
-                              )
-                              .join("")}
+                        return (
+                          <span
+                            key={member?.key}
+                            className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-gray-400 ring-1 ring-light-200 dark:ring-dark-500"
+                          >
+                            <span className="text-[8px] font-medium leading-none text-white">
+                              {member?.value
+                                .split(" ")
+                                .map((namePart) =>
+                                  namePart.charAt(0).toUpperCase(),
+                                )
+                                .join("")}
+                            </span>
                           </span>
-                        </span>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            </CheckboxDropdown>
-          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              </CheckboxDropdown>
+            </div>
+          )}
           <div className="w-fit">
             <CheckboxDropdown
               items={formattedLabels}
