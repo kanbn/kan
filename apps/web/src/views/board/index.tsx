@@ -39,7 +39,7 @@ import VisibilityButton from "./components/VisibilityButton";
 type PublicListId = string;
 
 export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
-  const params = useParams() as { boardId: string[] } | null;
+  const params = useParams() as { boardId: string | string[] } | null;
   const router = useRouter();
   const utils = api.useUtils();
   const { showPopup } = usePopup();
@@ -49,7 +49,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     useState<PublicListId>("");
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
-  const boardId = params?.boardId.length ? params.boardId[0] : null;
+  const boardId = params?.boardId
+    ? Array.isArray(params.boardId)
+      ? params.boardId[0]
+      : params.boardId
+    : null;
+
+  console.log("params", params);
 
   const updateBoard = api.board.update.useMutation();
 
@@ -497,7 +503,11 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                               e.preventDefault();
                                           }}
                                           key={card.publicId}
-                                          href={`/cards/${card.publicId}`}
+                                          href={
+                                            isTemplate
+                                              ? `/templates/${boardId}/cards/${card.publicId}`
+                                              : `/cards/${card.publicId}`
+                                          }
                                           className={`mb-2 flex !cursor-pointer flex-col ${
                                             card.publicId.startsWith(
                                               "PLACEHOLDER",

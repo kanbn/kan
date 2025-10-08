@@ -37,7 +37,7 @@ interface FormValues {
   description: string;
 }
 
-export function CardRightPanel() {
+export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   const router = useRouter();
   const cardId = Array.isArray(router.query.cardId)
     ? router.query.cardId[0]
@@ -121,19 +121,21 @@ export function CardRightPanel() {
           isLoading={!card}
         />
       </div>
-      <div className="flex w-full flex-row">
-        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Members`}</p>
-        <MemberSelector
-          cardPublicId={cardId ?? ""}
-          members={formattedMembers}
-          isLoading={!card}
-        />
-      </div>
+      {!isTemplate && (
+        <div className="flex w-full flex-row">
+          <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Members`}</p>
+          <MemberSelector
+            cardPublicId={cardId ?? ""}
+            members={formattedMembers}
+            isLoading={!card}
+          />
+        </div>
+      )}
     </div>
   );
 }
 
-export default function CardPage() {
+export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const router = useRouter();
   const utils = api.useUtils();
   const {
@@ -228,7 +230,7 @@ export default function CardPage() {
                   <>
                     <Link
                       className="whitespace-nowrap font-bold leading-[2.3rem] tracking-tight text-light-900 dark:text-dark-900 sm:text-[1.2rem]"
-                      href={`/boards/${board?.publicId}`}
+                      href={`${isTemplate ? "/templates" : "/boards"}/${board?.publicId}`}
                     >
                       {board?.name}
                     </Link>
@@ -296,9 +298,11 @@ export default function CardPage() {
                         isAdmin={workspace.role === "admin"}
                       />
                     </div>
-                    <div className="mt-6">
-                      <NewCommentForm cardPublicId={cardId} />
-                    </div>
+                    {!isTemplate && (
+                      <div className="mt-6">
+                        <NewCommentForm cardPublicId={cardId} />
+                      </div>
+                    )}
                   </div>
                 </>
               )}
