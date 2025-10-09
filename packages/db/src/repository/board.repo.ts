@@ -25,6 +25,23 @@ export const getAllByWorkspaceId = (
       publicId: true,
       name: true,
     },
+    with: {
+      lists: {
+        columns: {
+          publicId: true,
+          name: true,
+          index: true,
+        },
+        orderBy: [asc(lists.index)],
+      },
+      labels: {
+        columns: {
+          publicId: true,
+          name: true,
+          colourCode: true,
+        },
+      },
+    },
     where: and(
       eq(boards.workspaceId, workspaceId),
       isNull(boards.deletedAt),

@@ -39,6 +39,13 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
     { enabled: !!workspace.publicId },
   );
 
+  const formattedTemplates = templates?.map((template) => ({
+    id: template.publicId,
+    name: template.name,
+    lists: template.lists.map((list) => list.name),
+    labels: template.labels.map((label) => label.name),
+  }));
+
   const {
     register,
     handleSubmit,
@@ -114,6 +121,7 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
         currentBoard={currentTemplate}
         setCurrentBoard={(t) => setValue("template", t)}
         showTemplates={showTemplates}
+        customTemplates={formattedTemplates ?? []}
       />
       <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
         {!isTemplate && (
