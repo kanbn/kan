@@ -187,6 +187,7 @@ export const boardRouter = createTRPCRouter({
         lists: z.array(z.string().min(1)),
         labels: z.array(z.string().min(1)),
         type: z.enum(["regular", "template"]).optional(),
+        sourceBoardPublicId: z.string().min(12).optional(),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof boardRepo.create>>>())
@@ -212,6 +213,65 @@ export const boardRouter = createTRPCRouter({
 
       await assertUserInWorkspace(ctx.db, userId, workspace.id);
 
+      // If sourceBoardPublicId is provided, clone the source board
+      if (input.sourceBoardPublicId) {
+        const sourceBoard = await boardRepo.getByPublicId(
+          ctx.db,
+          input.sourceBoardPublicId,
+          {
+            members: [],
+            labels: [],
+            type: undefined,
+          },
+        );
+
+        if (!sourceBoard)
+          throw new TRPCError({
+            message: `Source board with public ID ${input.sourceBoardPublicId} not found`,
+            code: "NOT_FOUND",
+          });
+
+        // Verify the source board belongs to the same workspace
+        const sourceWorkspace = await workspaceRepo.getByPublicId(
+          ctx.db,
+          sourceBoard.workspace.publicId,
+        );
+
+        if (!sourceWorkspace || sourceWorkspace.id !== workspace.id)
+          throw new TRPCError({
+            message: `Source board does not belong to this workspace`,
+            code: "FORBIDDEN",
+          });
+
+        let slug = generateSlug(input.name);
+
+        const isSlugUnique = await boardRepo.isSlugUnique(ctx.db, {
+          slug,
+          workspaceId: workspace.id,
+        });
+
+        if (!isSlugUnique || input.type === "template")
+          slug = `${slug}-${generateUID()}`;
+
+        const result = await boardRepo.createFromSnapshot(ctx.db, {
+          source: sourceBoard,
+          workspaceId: workspace.id,
+          createdBy: userId,
+          slug,
+          name: input.name,
+          type: input.type ?? "regular",
+        });
+
+        if (!result)
+          throw new TRPCError({
+            message: `Failed to create board from source`,
+            code: "INTERNAL_SERVER_ERROR",
+          });
+
+        return result;
+      }
+
+      // Otherwise, create a new board with provided lists and labels
       let slug = generateSlug(input.name);
 
       const isSlugUnique = await boardRepo.isSlugUnique(ctx.db, {
@@ -219,7 +279,8 @@ export const boardRouter = createTRPCRouter({
         workspaceId: workspace.id,
       });
 
-      if (!isSlugUnique) slug = `${slug}-${generateUID()}`;
+      if (!isSlugUnique || input.type === "template")
+        slug = `${slug}-${generateUID()}`;
 
       const result = await boardRepo.create(ctx.db, {
         publicId: generateUID(),
@@ -236,7 +297,7 @@ export const boardRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
-      if (input.lists?.length) {
+      if (input.lists.length) {
         const listInputs = input.lists.map((list, index) => ({
           publicId: generateUID(),
           name: list,
@@ -248,7 +309,7 @@ export const boardRouter = createTRPCRouter({
         await listRepo.bulkCreate(ctx.db, listInputs);
       }
 
-      if (input.labels?.length) {
+      if (input.labels.length) {
         const labelInputs = input.labels.map((label, index) => ({
           publicId: generateUID(),
           name: label,

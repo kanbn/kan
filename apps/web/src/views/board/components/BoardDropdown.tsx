@@ -23,26 +23,6 @@ export default function BoardDropdown({
   workspacePublicId: string;
 }) {
   const { openModal } = useModal();
-  const { showPopup } = usePopup();
-  const utils = api.useUtils();
-
-  // const makeTemplate = api.template.create.useMutation({
-  //   onSuccess: async () => {
-  //     showPopup({
-  //       header: t`Success`,
-  //       message: t`Template created`,
-  //       icon: "success",
-  //     });
-  //     await utils.template.getAll.invalidate();
-  //   },
-  //   onError: () =>
-  //     showPopup({
-  //       header: t`Error`,
-  //       message: t`Failed to create template`,
-  //       icon: "error",
-  //     }),
-  // });
-
   return (
     <Dropdown
       disabled={isLoading}
@@ -52,12 +32,7 @@ export default function BoardDropdown({
           : [
               {
                 label: t`Make template`,
-                action: () => {
-                  makeTemplate.mutate({
-                    boardPublicId,
-                    workspacePublicId,
-                  });
-                },
+                action: () => openModal("CREATE_TEMPLATE"),
                 icon: (
                   <HiOutlineDocumentDuplicate className="h-[16px] w-[16px] text-dark-900" />
                 ),
