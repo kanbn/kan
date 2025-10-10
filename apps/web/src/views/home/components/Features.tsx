@@ -28,6 +28,7 @@ const FeatureItem = ({
     description: string;
     icon: Record<string, unknown>;
     comingSoon?: boolean;
+    new?: boolean;
   };
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -64,6 +65,12 @@ const FeatureItem = ({
       {feature.comingSoon && (
         <div className="absolute right-4 top-4 rounded-full border border-light-300 px-2 py-1 text-[10px] text-light-1000 dark:border-dark-600 dark:bg-dark-50 dark:text-dark-900">
           {t`Coming soon`}
+        </div>
+      )}
+
+      {feature.new && (
+        <div className="absolute right-4 top-4 rounded-full border border-light-300 px-2 py-1 text-[10px] text-light-1000 dark:border-dark-600 dark:bg-dark-50 dark:text-dark-900">
+          {t`New`}
         </div>
       )}
     </div>
@@ -108,7 +115,7 @@ const Features = ({ theme }: { theme: "light" | "dark" }) => {
       title: t`Templates`,
       description: t`Save time with reusable board templates.`,
       icon: isDark ? templatesIconDark : templatesIconLight,
-      comingSoon: true,
+      new: true,
     },
     {
       title: t`Integrations`,

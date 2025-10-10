@@ -27,7 +27,7 @@
 - 🔍 **Labels & Filters**: Organise and find cards quickly
 - 💬 **Comments**: Discuss and collaborate with your team
 - 📝 **Activity Log**: Track all card changes with detailed activity history
-- 🎨 **Templates (coming soon)** : Save time with reusable board templates
+- 🎨 **Templates** : Save time with reusable custom board templates
 - ⚡️ **Integrations (coming soon)** : Connect your favourite tools
 
 See our [roadmap](https://kan.bn/kan/roadmap) for upcoming features.
