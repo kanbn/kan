@@ -3,8 +3,10 @@ checksums:
   8033ed03a24d7c4898c90a5365297c20:
     "%20(edited)/singular": 666ee7e6d86957a87c23fa12b21b773f
     "%2C%20or%20see%20our/singular": e8a8f2a078fcaea03481710dcaccce5d
+    "%7B0%7D/singular": 18782768c8a0b3c2078747b34fbbcd24
     "%7B0%7D%20%7C%20%7B1%7D/singular": 4628f9c6ec13c2dc2984a6ab80e19f8b
     "%7B0%7D%20labels/singular": 785f92bedf786ff3e285adfc07c69d18
+    "%7B0%7D%20not%20found/singular": a2665fc66f128fee1a80ffec61c9f1a1
     "%7BboardCount%2C%20plural%2C%20one%20%7BImport%20board%20(1)%7D%20other%20%7BImport%20boards%20(%7BboardCount%7D)%7D%7D/singular": 72358c550bd1a99fcb6e8952f0f947ef
     "%2410%2Fmonth/singular": cab5e752ed83096e34fca780d90e1fb9
     "%248%2Fmonth/singular": 4667034934bb2bc3d569c70b94205b51
@@ -48,6 +50,7 @@ checksums:
     Approval/singular: 2f5426445800ecd5a3102aac940d459c
     Are%20you%20sure%20want%20to%20remove%20%7BentityLabel%7D%3F/singular: f9b67026c5ef86ac4d5944380d571961
     Are%20you%20sure%20you%20want%20to%20delete%20the%20workspace%20%7B0%7D%3F/singular: 27ba2854202dd77c51e78c64e5c93946
+    Are%20you%20sure%20you%20want%20to%20delete%20this%20%7B0%7D%3F/singular: e980ce9469e329ddfed14c7da2cb5e52
     Are%20you%20sure%20you%20want%20to%20delete%20this%20card%3F/singular: 131a5a7cccca7be8b32c987d9fa0b0c0
     Are%20you%20sure%20you%20want%20to%20delete%20this%20checklist%3F/singular: 7c0f540603474b1a30462dda087fd2f0
     Are%20you%20sure%20you%20want%20to%20delete%20this%20comment%3F/singular: 55fe6f1b52b71b91b2a079cfda3cc7fe
@@ -74,7 +77,6 @@ checksums:
     Board%20visibility/singular: b4205f3058297833a626156057c24b26
     Board%20visibility%20updated/singular: 8e2f5d622fa9c94481e7c1629a154ecf
     Boards/singular: 8fff51c5872e051beb9b718336665e80
-    Boards%20%7C%20%7B0%7D/singular: 70c349df806f4b2d8bd28136a45496f0
     Brainstorming/singular: 736332f2e4488609e42d2be8547d296e
     Bug/singular: 4509fffdb5931f8905063c80cf802d71
     Bug%20Report/singular: e558d1f100e21230c2f495a8913ac5ec
@@ -107,18 +109,19 @@ checksums:
     Continue%20with%20/singular: 8ed03cf7c5e60a6edf3470a4558ff058
     Continue%20with%20%7B0%7D/singular: 2eaf6e1da91e208f7c5fb6bf862fe8a6
     Control%20who%20can%20view%20and%20edit%20your%20boards./singular: 2a7e0bec29bac26280de707e2fe8bce5
+    Create%20%7B0%7D/singular: d37c29be6ccc0eb6062237f8508c3178
     Create%20another/singular: 2de8a82a416eb78c0462aa36278edc9a
     Create%20API%20key/singular: 70ed8431c6ed5f7fdef122cc34f75b41
-    Create%20board/singular: 155b62818bfab0e34f0089e1b34a32f3
     Create%20card/singular: 32792935dd5837a9433909b04021c22b
     Create%20checklist/singular: 5cbca15a7004558c4e6d381f83a34da2
     Create%20invite%20link/singular: bef23fe786978f7abf78dece49a35a26
     Create%20label/singular: c64e8180fa956f005edc1fd9b8e65abb
     Create%20list/singular: 858c3d514aa95765ec82114393199144
-    Create%20new%20board/singular: cbb87b1f4cc46b336ad9510c9f19407c
+    Create%20new%20%7B0%7D/singular: 163dbd5cf86d512fadd4c3eaf9709a11
     Create%20new%20key/singular: 236bdf75e42b42ec7fb25639bdc035af
     Create%20new%20label/singular: 6be30980847b577847baa01bb5f29711
     Create%20new%20list/singular: ce61ca8be7b3f6c26c32b684a42a2c26
+    Create%20template/singular: 57bfe6b58c42958a90f67d605a69ecdc
     Create%20workspace/singular: 2e6718e79964ea5ce22d76c2189c77ca
     created%20the%20card/singular: 605475f5aaeb4dbccbf7c4eb9107b43d
     Critical/singular: eb327cd411b50aee954f8d1d215d003a
@@ -136,6 +139,7 @@ checksums:
     Delete%20card/singular: 18811ccf76fbb7a2772d648f7c5f0ea7
     Delete%20comment/singular: a3dae0c9ddbc73677aad9812e3dffd69
     Delete%20list/singular: b694f58e4c973d8797a78e746b550b1f
+    Delete%20template/singular: bdf3e8342f581d498b7238cdd4897a4b
     Delete%20workspace/singular: 9017c821209528d9b20d40a488854cdf
     deleted%20a%20checklist/singular: c54f922dc6c238c9141c700cb3180baf
     deleted%20a%20checklist%20item/singular: 2b7a861600102ac5c271dd25c1df261a
@@ -190,6 +194,7 @@ checksums:
     Execution/singular: cbac4a3c721123cbc6a883560bf29800
     Failed%20to%20accept%20invitation.%20Please%20try%20again%20later%2C%20or%20contact%20customer%20support./singular: e4505a9df3a81e93a8a8b103c6e3ebc4
     Failed%20to%20copy%20invite%20link/singular: 635884d5ed8d6ee20b85a003939b4ae7
+    Failed%20to%20create%20board/singular: a746e2afe881c3bf0a8e82a931ca3495
     Failed%20to%20login%20with%20%7B0%7D.%20Please%20try%20again./singular: 669a4b4247a73f53fb9b8b16e42d166f
     FAQs/singular: dc36d7992372ccd419b39ef51cf5b16c
     Feature/singular: 58f5f3f37862b6312a2f20ec1a1fd0e8
@@ -207,7 +212,7 @@ checksums:
     Fun/singular: 395bdc48e943762b6cde649f4a96771d
     Get%20started/singular: 5c783951b0100a168bdd2161ff294833
     Get%20Started/singular: 1d5f030c4ec9c869e647ae060518b948
-    Get%20started%20by%20creating%20a%20new%20board/singular: 8fe63ba47e12bbf950f3eb33d1008993
+    Get%20started%20by%20creating%20a%20new%20%7B0%7D/singular: 4ca5ef637c08104e9dbb5ff9f49f0680
     Get%20started%20by%20creating%20a%20new%20list/singular: bd6bf0806c95788a15ab438e2b09f885
     Get%20started%20for%20free%20today/singular: 41e129eba0f6411337b54a7a08ea1709
     Get%20started%20for%20free%2C%20with%20no%20usage%20limits.%20For%20collaboration%2C%20upgrade%20to%20a%20plan%20that%20fits%20the%20size%20of%20your%20team./singular: ddea69fa5d7b4023724296e1287872b6
@@ -272,6 +277,7 @@ checksums:
     Long-term/singular: 51cb6f0b112250c5a091ca5f0866904b
     Low%20Priority/singular: 509b5cb7c1e8a185e0aa6d38c64c90e8
     magic%20link/singular: db9d17a5bd98bba8aa0d8068c68579f3
+    Make%20template/singular: 7a1c63b75cea690b3fda6c3f203e31ff
     marked%20a%20checklist%20item%20as%20incomplete/singular: 35d0822f65971b97774b962561b02649
     marked%20checklist%20item%20%3C0%3E%7B0%7D%3C%2F0%3E%20as%20incomplete/singular: 4c38799ff25321ea25017bf4cd8e2e4f
     Medium%20Priority/singular: 1f527cd6d1ed602930bcaa303f503b51
@@ -284,8 +290,8 @@ checksums:
     Name/singular: 9368b5a047572b6051f334af5aa76819
     Need%20help%3F/singular: 04e7322f2d3ffb2d73ff2f64b71637c8
     New/singular: 126d036fae5fb6b629728ecb97e6195b
+    New%20%7B0%7D/singular: 67b6a22a65e0956f2091d00e6966652b
     New%20API%20key/singular: db3088aedba6e4a99b46451c5b3d36ed
-    New%20board/singular: 63f4e979e29a7fc2f5c09ff91fa75966
     New%20card/singular: a33f6219a756127f91c2523cfe845a19
     New%20checklist/singular: 58252b71e9693ae0f4d2d0b72108a569
     New%20import/singular: e8fddfe15dd170277df919e5d37efd47
@@ -293,11 +299,12 @@ checksums:
     New%20list/singular: 146c2e642b11056a0b07ed65733e4178
     New%20password%20is%20required/singular: f88427a4cca058631199a4384cb5622e
     New%20password%20must%20be%20different%20from%20current%20password/singular: db33013fcc6c40995cf8a37deb3d5667
+    New%20template/singular: 10dca64383235d1596a010e559b2e35a
     New%20Ticket/singular: 665ff16ec736cba20e8a1b3beb3baa09
     New%20workspace/singular: 8eecf05b4ce29aa880adfed2e11476af
     Newsletter/singular: dcfb9666301924431ac8ae88e5b6f9d7
     Next%20Steps/singular: 12392fe73ae60b6e5a9d851256b8477e
-    No%20boards/singular: e4397619e69b105e4317dda4560ff4a6
+    No%20%7B0%7D/singular: a7a95e1dfdb4396da9e2be0e27f42323
     No%20boards%20found/singular: e044088d2c51b6bdf660fafa86ee1e17
     No%20credit%20card%20required/singular: 2090aa4171dc0b60735069f89b592883
     No%20lists/singular: cedf633d99c77ff4356e089f2d98c0a6
@@ -395,6 +402,11 @@ checksums:
     System/singular: 803281c327a02a2feba182f4a2b38311
     Team%20Plan/singular: 3f0ae9c914f16ceb9a0d7db868f4aa20
     Teams/singular: b63448c05270497973ac4407047dae02
+    Template/singular: 87c2704ff2033e3c76bc97a45ae57d5c
+    Template%20created/singular: 2c7a515a5d8a9afb26de6365cdaa0c92
+    Template%20created%20successfully/singular: 2750600da57c5cd3c3c072810c8c9604
+    Template%20name%20cannot%20exceed%20100%20characters/singular: 14527c9246e558a085ceee2e8d4e6560
+    Template%20name%20is%20required/singular: 34d674d59c414c2051ef5bc0a62e3c00
     Templates/singular: 8ed62f56c81fa96c0f3182acb331bf63
     Terms%20of%20service/singular: 0b8a8b23aff021a6cde79613fdb39c28
     Thank%20you%20for%20your%20feedback!/singular: 07edd8c50685a52c0969d711df26d768
@@ -426,6 +438,7 @@ checksums:
     Unable%20to%20create%20card/singular: 90112ea12ec6fa42097a6e022ae048a4
     Unable%20to%20create%20checklist/singular: 94eed122e42e0951cd08b9ec62f5eeb6
     Unable%20to%20create%20list/singular: 7fbbf8314f8d08a4123c7daef09fed05
+    Unable%20to%20create%20template/singular: 7495f1434c9188849bffd015811d5337
     Unable%20to%20create%20workspace/singular: c1c949477e121d73ed6683eddf9cd874
     Unable%20to%20delete%20card/singular: 50ff06aa1265fe464f776aba33f1bef9
     Unable%20to%20delete%20checklist/singular: d7067e2c009f4919f0cca77df3c228ee
