@@ -215,13 +215,26 @@ export const boardRouter = createTRPCRouter({
 
       // If sourceBoardPublicId is provided, clone the source board
       if (input.sourceBoardPublicId) {
+        // First get the source board info (ID and type)
+        const sourceBoardInfo = await boardRepo.getIdByPublicId(
+          ctx.db,
+          input.sourceBoardPublicId,
+        );
+
+        if (!sourceBoardInfo)
+          throw new TRPCError({
+            message: `Source board with public ID ${input.sourceBoardPublicId} not found`,
+            code: "NOT_FOUND",
+          });
+
+        // Get the full board data with the correct type
         const sourceBoard = await boardRepo.getByPublicId(
           ctx.db,
           input.sourceBoardPublicId,
           {
             members: [],
             labels: [],
-            type: undefined,
+            type: sourceBoardInfo.type,
           },
         );
 
@@ -260,6 +273,7 @@ export const boardRouter = createTRPCRouter({
           slug,
           name: input.name,
           type: input.type ?? "regular",
+          sourceBoardId: sourceBoardInfo.id,
         });
 
         if (!result)

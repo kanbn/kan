@@ -4,6 +4,7 @@ import { HiCheckCircle } from "react-icons/hi2";
 
 export interface Template {
   id: string;
+  sourceBoardPublicId?: string;
   name: string;
   lists: string[];
   labels: string[];

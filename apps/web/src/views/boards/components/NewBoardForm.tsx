@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { useEffect, useState } from "react";
@@ -10,6 +11,7 @@ import Button from "~/components/Button";
 import Input from "~/components/Input";
 import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
+import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import TemplateBoards from "./TemplateBoards";
@@ -32,6 +34,8 @@ interface NewBoardInputWithTemplate {
 export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
   const utils = api.useUtils();
   const { closeModal } = useModal();
+  const router = useRouter();
+  const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
   const [showTemplates, setShowTemplates] = useState(false);
   const { data: templates } = api.board.all.useQuery(
@@ -41,6 +45,7 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
 
   const formattedTemplates = templates?.map((template) => ({
     id: template.publicId,
+    sourceBoardPublicId: template.publicId,
     name: template.name,
     lists: template.lists.map((list) => list.name),
     labels: template.labels.map((label) => label.name),
@@ -66,9 +71,28 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
   const refetchBoards = () => utils.board.all.refetch();
 
   const createBoard = api.board.create.useMutation({
-    onSuccess: async () => {
+    onSuccess: async (board) => {
+      if (!board) {
+        showPopup({
+          header: t`Error`,
+          message: t`Failed to create board`,
+          icon: "error",
+        });
+      } else {
+        router.push(
+          `${isTemplate ? "/templates" : "/boards"}/${board.publicId}`,
+        );
+      }
       closeModal();
+
       await refetchBoards();
+    },
+    onError: () => {
+      showPopup({
+        header: t`Error`,
+        message: t`Failed to create board`,
+        icon: "error",
+      });
     },
   });
 
@@ -76,6 +100,7 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
     createBoard.mutate({
       name: data.name,
       workspacePublicId: data.workspacePublicId,
+      sourceBoardPublicId: data.template?.sourceBoardPublicId ?? undefined,
       lists: data.template?.lists ?? [],
       labels: data.template?.labels ?? [],
       type: isTemplate ? "template" : "regular",

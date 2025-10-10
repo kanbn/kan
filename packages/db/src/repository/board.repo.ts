@@ -4,6 +4,7 @@ import type { dbClient } from "@kan/db/client";
 import type { BoardVisibilityStatus } from "@kan/db/schema";
 import {
   boards,
+  cardActivities,
   cards,
   cardsToLabels,
   cardToWorkspaceMembers,
@@ -54,6 +55,7 @@ export const getIdByPublicId = async (db: dbClient, boardPublicId: string) => {
   const board = await db.query.boards.findFirst({
     columns: {
       id: true,
+      type: true,
     },
     where: eq(boards.publicId, boardPublicId),
   });
@@ -707,6 +709,15 @@ export const createFromSnapshot = async (
 
         if (!createdCard) throw new Error("Failed to create card");
 
+        // Create card.created activity
+        await tx.insert(cardActivities).values({
+          publicId: generateUID(),
+          type: "card.created",
+          cardId: createdCard.id,
+          createdBy: args.createdBy,
+          sourceBoardId: args.sourceBoardId,
+        });
+
         if (card.labels.length) {
           const cardLabels: { cardId: number; labelId: number }[] = [];
           for (const label of card.labels) {
@@ -714,8 +725,20 @@ export const createFromSnapshot = async (
             if (newLabelId)
               cardLabels.push({ cardId: createdCard.id, labelId: newLabelId });
           }
-          if (cardLabels.length)
+          if (cardLabels.length) {
             await tx.insert(cardsToLabels).values(cardLabels);
+
+            // Create card.updated.label.added activities for each label
+            const labelActivities = cardLabels.map((cardLabel) => ({
+              publicId: generateUID(),
+              type: "card.updated.label.added" as const,
+              cardId: cardLabel.cardId,
+              labelId: cardLabel.labelId,
+              createdBy: args.createdBy,
+              sourceBoardId: args.sourceBoardId,
+            }));
+            await tx.insert(cardActivities).values(labelActivities);
+          }
         }
 
         if (card.checklists?.length) {
@@ -736,6 +759,16 @@ export const createFromSnapshot = async (
 
             if (!createdChecklist) continue;
 
+            // Create card.updated.checklist.added activity
+            await tx.insert(cardActivities).values({
+              publicId: generateUID(),
+              type: "card.updated.checklist.added",
+              cardId: createdCard.id,
+              toTitle: checklist.name,
+              createdBy: args.createdBy,
+              sourceBoardId: args.sourceBoardId,
+            });
+
             if (checklist.items.length) {
               const itemValues = [...checklist.items]
                 .sort((a, b) => a.index - b.index)
@@ -748,8 +781,20 @@ export const createFromSnapshot = async (
                   completed: !!checklistItem.completed,
                 }));
 
-              if (itemValues.length)
+              if (itemValues.length) {
                 await tx.insert(checklistItems).values(itemValues);
+
+                // Create card.updated.checklist.item.added activities for each item
+                const itemActivities = itemValues.map((item) => ({
+                  publicId: generateUID(),
+                  type: "card.updated.checklist.item.added" as const,
+                  cardId: createdCard.id,
+                  toTitle: item.title,
+                  createdBy: args.createdBy,
+                  sourceBoardId: args.sourceBoardId,
+                }));
+                await tx.insert(cardActivities).values(itemActivities);
+              }
             }
           }
         }

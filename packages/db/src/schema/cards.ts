@@ -12,6 +12,7 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
+import { boards } from "./boards";
 import { checklists } from "./checklists";
 import { imports } from "./imports";
 import { labels } from "./labels";
@@ -133,6 +134,10 @@ export const cardActivities = pgTable("card_activity", {
   ),
   fromComment: text("fromComment"),
   toComment: text("toComment"),
+  sourceBoardId: bigint("sourceBoardId", { mode: "number" }).references(
+    () => boards.id,
+    { onDelete: "set null" },
+  ),
 }).enableRLS();
 
 export const cardActivitiesRelations = relations(cardActivities, ({ one }) => ({

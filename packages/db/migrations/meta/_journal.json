@@ -127,6 +127,13 @@
       "when": 1759869689304,
       "tag": "20251007204129_AddBoardTypeAndSourceIdColumns",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1760044396109,
+      "tag": "20251009211316_AddBoardSourceIdToCardActivity",
+      "breakpoints": true
     }
   ]
 }

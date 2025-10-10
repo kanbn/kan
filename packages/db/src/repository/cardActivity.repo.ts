@@ -22,6 +22,7 @@ export const create = async (
     commentId?: number;
     fromComment?: string;
     toComment?: string;
+    sourceBoardId?: number;
   },
 ) => {
   const [result] = await db
@@ -44,6 +45,7 @@ export const create = async (
       commentId: activityInput.commentId,
       fromComment: activityInput.fromComment,
       toComment: activityInput.toComment,
+      sourceBoardId: activityInput.sourceBoardId,
     })
     .returning({ id: cardActivities.id });
 
@@ -66,6 +68,7 @@ export const bulkCreate = async (
     fromDescription?: string;
     toDescription?: string;
     createdBy: string;
+    sourceBoardId?: number;
   }[],
 ) => {
   const activitiesWithPublicIds = activityInputs.map((activity) => ({
