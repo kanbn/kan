@@ -21,13 +21,13 @@ export interface Subscription {
   updatedAt: Date;
 }
 
+const ACTIVE_STATUSES = ["active", "trialing", "past_due"];
+
 export const getActiveSubscriptions = (
   subscriptions: Subscription[] | undefined,
 ) => {
   if (!subscriptions) return [];
-  return subscriptions.filter(
-    (sub) => sub.status === "active" || sub.status === "trialing",
-  );
+  return subscriptions.filter((sub) => ACTIVE_STATUSES.includes(sub.status));
 };
 
 export const getSubscriptionByPlan = (
@@ -36,9 +36,7 @@ export const getSubscriptionByPlan = (
 ) => {
   if (!subscriptions) return undefined;
   return subscriptions.find(
-    (sub) =>
-      sub.plan === plan &&
-      (sub.status === "active" || sub.status === "trialing"),
+    (sub) => sub.plan === plan && ACTIVE_STATUSES.includes(sub.status),
   );
 };
 
