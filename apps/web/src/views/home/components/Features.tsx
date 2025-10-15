@@ -135,7 +135,7 @@ const Features = ({ theme }: { theme: "light" | "dark" }) => {
         <p className="mt-2 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-4xl">
           {t`Kanban reimagined`}
         </p>
-        <p className="text-md lg:text-md mt-3 max-w-[500px] text-center text-dark-900">
+        <p className="text-md lg:text-md mt-3 max-w-[500px] text-center text-light-950 dark:text-dark-900">
           {t`Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done.`}
         </p>
         <div className="mx-auto mt-16 w-full max-w-7xl">

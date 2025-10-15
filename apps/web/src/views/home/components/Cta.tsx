@@ -53,7 +53,7 @@ const Cta = ({ theme }: { theme: string }) => {
           <h2 className="text-balance text-4xl font-bold tracking-tight text-light-1000 dark:text-dark-1000 sm:text-4xl">
             {t`Get started for free today`}
           </h2>
-          <p className="text-md/8 mx-auto mt-6 max-w-[375px] text-pretty text-light-900 dark:text-dark-900">
+          <p className="text-md/8 mx-auto mt-6 max-w-[375px] text-pretty text-light-950 dark:text-dark-900">
             {t`Unlimited boards, unlimited lists, unlimited cards. No credit card required.`}
           </p>
           <Link href="/signup">

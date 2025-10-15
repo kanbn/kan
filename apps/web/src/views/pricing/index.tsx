@@ -42,7 +42,7 @@ export default function PricingView() {
             <p className="mt-4 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-5xl">
               {t`Simple pricing`}
             </p>
-            <p className="text:md lg:text-md mt-6 max-w-[500px] text-center text-dark-900">
+            <p className="text:md lg:text-md mt-6 max-w-[500px] text-center text-light-950 dark:text-dark-900">
               {t`Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team.`}
             </p>
           </div>
@@ -61,7 +61,7 @@ export default function PricingView() {
           <p className="mt-4 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-4xl">
             {t`Feature breakdown`}
           </p>
-          <p className="text-md lg:text-md my-4 max-w-[500px] text-center text-dark-900">
+          <p className="text-md lg:text-md my-4 max-w-[500px] text-center text-light-950 dark:text-dark-900">
             {t`Compare our features to see why Kan is the best choice.`}
           </p>
           <div className="mt-2">

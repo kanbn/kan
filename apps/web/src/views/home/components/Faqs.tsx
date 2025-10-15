@@ -146,7 +146,7 @@ const Faqs = () => {
         <p className="mt-2 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-4xl">
           {t`Questions?`}
         </p>
-        <p className="text:md lg:text-md mt-3 max-w-[500px] text-center text-dark-900">
+        <p className="text:md lg:text-md mt-3 max-w-[500px] text-center text-light-950 dark:text-dark-900">
           <Trans>
             Find answers to common questions about the project. Can't find what
             you're looking for? Feel free to{" "}

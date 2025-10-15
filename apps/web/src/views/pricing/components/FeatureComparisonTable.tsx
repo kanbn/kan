@@ -22,9 +22,9 @@ const CellValue = ({ value }: { value: boolean | string }) => {
     );
   }
   return value ? (
-    <HiCheckCircle className="h-5 w-5 text-dark-900 dark:text-dark-1000" />
+    <HiCheckCircle className="h-5 w-5 text-light-950 dark:text-dark-1000" />
   ) : (
-    <HiXCircle className="h-5 w-5 text-light-600 dark:text-dark-600" />
+    <HiXCircle className="h-5 w-5 text-light-700 dark:text-dark-600" />
   );
 };
 
@@ -195,7 +195,7 @@ const FeatureComparisonTable = ({
   return (
     <section aria-labelledby="comparison-heading" className="w-full px-4">
       <div className="mx-auto max-w-6xl py-8 lg:py-10">
-        <div className="grid grid-cols-3 gap-x-8 border-t border-light-300 before:block dark:border-dark-300">
+        <div className="grid grid-cols-3 gap-x-8 border-t border-light-500 before:block dark:border-dark-300">
           {products.map((product) => (
             <div key={product.id} aria-hidden="true" className="-mt-px">
               <div
@@ -252,7 +252,7 @@ const FeatureComparisonTable = ({
                         >
                           {feature.label}
                           {featureIdx !== section.features.length - 1 ? (
-                            <div className="absolute inset-x-8 mt-3 h-px bg-light-300 dark:bg-dark-300" />
+                            <div className="absolute inset-x-8 mt-3 h-px bg-light-500 dark:bg-dark-300" />
                           ) : null}
                         </th>
                         {products.map((p) => (
@@ -281,7 +281,7 @@ const FeatureComparisonTable = ({
                   {products.map((product) => (
                     <div
                       key={product.id}
-                      className={`${product.featured ? "ring-1 ring-dark-200 dark:ring-dark-800" : "ring-0"} rounded-lg`}
+                      className={`${product.featured ? "ring-1 ring-light-500 dark:ring-dark-800" : "ring-0"} rounded-2xl`}
                     />
                   ))}
                 </div>

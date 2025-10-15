@@ -65,7 +65,7 @@ export default function HomeView() {
               </Trans>
             </p>
 
-            <p className="text-md mt-3 max-w-[450px] text-center text-dark-900 lg:max-w-[600px] lg:text-lg">
+            <p className="text-md mt-3 max-w-[450px] text-center text-light-950 dark:text-dark-900 lg:max-w-[600px] lg:text-lg">
               {t`A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.`}
             </p>
 
@@ -79,7 +79,7 @@ export default function HomeView() {
                 {t`Self host with Github`}
               </Button>
             </div>
-            <p className="mt-4 text-center text-sm text-dark-900">
+            <p className="mt-4 text-center text-sm text-light-950 dark:text-dark-900">
               {t`No credit card required`}
             </p>
           </div>
