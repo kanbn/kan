@@ -1,28 +1,26 @@
 import Link from "next/link";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
-import { useState } from "react";
 import { HiBolt, HiCheckCircle } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
-type Frequency = "monthly" | "annually";
+type FrequencyValue = "monthly" | "annually";
 
-const Pricing = () => {
-  const frequencies = [
-    {
-      value: "monthly" as Frequency,
-      label: t`Monthly`,
-      priceSuffix: t`per user/month`,
-    },
-    {
-      value: "annually" as Frequency,
-      label: t`Yearly`,
-      priceSuffix: t`per user/month`,
-    },
-  ];
+interface Frequency {
+  value: FrequencyValue;
+  label: string;
+  priceSuffix: string;
+}
 
-  const [frequency, setFrequency] = useState(frequencies[1]);
-
+const Pricing = ({
+  frequency,
+  frequencies,
+  setFrequency,
+}: {
+  frequency: Frequency | undefined;
+  frequencies: Frequency[];
+  setFrequency: (frequency: Frequency) => void;
+}) => {
   const tiers = [
     {
       name: t`Individuals`,
@@ -35,10 +33,9 @@ const Pricing = () => {
       features: [
         t`1 user`,
         t`Unlimited boards`,
-        t`Unlimited lists`,
         t`Unlimited cards`,
-        t`Unlimited comments`,
-        t`Unlimited activity log`,
+        t`Custom board templates`,
+        t`Checklists`,
       ],
       showPrice: true,
     },
@@ -48,7 +45,7 @@ const Pricing = () => {
       href: "signup",
       buttonText: t`Get Started`,
       price: { monthly: "$10.00", annually: "$8.00" },
-      description: t`Kanban is better with a team. Perfect for small and growing teams looking to collaborate.`,
+      description: t`Kan is better with a team. Perfect for small and growing teams looking to collaborate.`,
       featureHeader: t`Everything in the free plan, plus:`,
       features: [
         t`Workspace members`,

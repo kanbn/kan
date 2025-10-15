@@ -7,7 +7,6 @@ import { IoLogoGithub } from "react-icons/io";
 
 import Button from "~/components/Button";
 import { PageHead } from "~/components/PageHead";
-import Pricing from "../pricing/components/Pricing";
 import Cta from "./components/Cta";
 import FAQs from "./components/Faqs";
 import Features from "./components/Features";
@@ -15,8 +14,6 @@ import Layout from "./components/Layout";
 
 export default function HomeView() {
   const { resolvedTheme } = useTheme();
-
-  const isDarkMode = resolvedTheme === "dark";
 
   return (
     <Layout>
