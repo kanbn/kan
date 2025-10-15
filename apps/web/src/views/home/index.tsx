@@ -2,16 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { IoLogoGithub, IoLogoHackernews } from "react-icons/io";
+import { useTheme } from "next-themes";
+import { IoLogoGithub } from "react-icons/io";
 
 import Button from "~/components/Button";
 import { PageHead } from "~/components/PageHead";
-import { useTheme } from "next-themes";
+import Pricing from "../pricing/components/Pricing";
 import Cta from "./components/Cta";
 import FAQs from "./components/Faqs";
 import Features from "./components/Features";
 import Layout from "./components/Layout";
-import Pricing from "./components/Pricing";
 
 export default function HomeView() {
   const { resolvedTheme } = useTheme();
@@ -110,10 +110,6 @@ export default function HomeView() {
         <div className="relative pt-10">
           <div id="features" className="absolute -top-20" />
           <Features theme={resolvedTheme === "dark" ? "dark" : "light"} />
-        </div>
-        <div className="relative pt-10">
-          <div id="pricing" className="absolute -top-20" />
-          <Pricing />
         </div>
         <div className="relative pt-10">
           <div id="faq" className="absolute -top-20" />

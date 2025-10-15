@@ -81,23 +81,10 @@ const Pricing = () => {
   return (
     <>
       <div className="flex flex-col items-center justify-center px-4 pb-10">
-        <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900 lg:text-sm">
-          <p>{t`Pricing`}</p>
-        </div>
-
-        <p className="mt-2 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-4xl">
-          {t`Simple pricing`}
-        </p>
-        <p className="text:md lg:text-md mt-3 max-w-[500px] text-center text-dark-900">
-          {t`Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team.`}
-        </p>
-
-        <div className="mt-12 flex flex-col items-center justify-center">
-          <div className="mb-4 flex items-center gap-2 rounded-full border bg-white px-4 py-1.5 text-center text-xs font-bold text-gray-800 dark:border-dark-300 dark:bg-white dark:text-gray-800 lg:text-sm">
+        <div className="mt-14 flex flex-col items-center justify-center">
+          <div className="mb-8 flex items-center gap-2 rounded-full border bg-white px-4 py-1.5 text-center text-xs font-bold text-gray-800 dark:border-dark-300 dark:bg-dark-1000 dark:text-gray-800 lg:text-sm">
             <HiBolt />
-            <p>
-              {t`Launch offer: unlimited seats for just $29/month with Pro`}
-            </p>
+            <p>{t`Launch offer: unlimited seats for just $29/month with Pro`}</p>
           </div>
           <fieldset aria-label={t`Payment frequency`}>
             <RadioGroup
@@ -164,7 +151,7 @@ const Pricing = () => {
             <p className="mt-6 flex items-baseline gap-x-1">
               <span
                 className={twMerge(
-                  "text-4xl font-semibold tracking-tight text-light-100",
+                  "text-3xl font-semibold tracking-tight text-light-100",
                   tier.highlighted
                     ? "text-light-50 dark:text-dark-1000"
                     : "text-gray-900 dark:text-dark-1000",

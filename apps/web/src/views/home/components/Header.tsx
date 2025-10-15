@@ -12,7 +12,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const menuItems = [
     { label: t`Roadmap`, href: "/kan/roadmap", openInNewTab: true },
     { label: t`Features`, href: "#features" },
-    { label: t`Pricing`, href: "#pricing" },
+    { label: t`Pricing`, href: "/pricing" },
     { label: t`Docs`, href: "https://docs.kan.bn", openInNewTab: true },
   ];
 
