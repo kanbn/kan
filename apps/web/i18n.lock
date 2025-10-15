@@ -15,6 +15,7 @@ checksums:
     Account/singular: 01215c12fb1cdb93bd0c84c1382bef56
     Account%20deleted/singular: a25da96a1579c4491be0a95669ef18a4
     Activity/singular: 1948763de8e531483a798b68195e297e
+    Activity%20log/singular: 3ec6755040306fdc9ce801bcf6ab28e1
     Activity%20logs/singular: 8b1f0bb96a905646ecfad1cfdfa42168
     Add%20a%20card/singular: 9d80becc4fe65a74e0004e4fd290735d
     Add%20a%20comment.../singular: c28cfccc0cc69a2a2487e37eb9988028
@@ -57,6 +58,7 @@ checksums:
     Are%20you%20sure%20you%20want%20to%20delete%20this%20label%3F/singular: 037fbaf1d04356937e6afb574714f51f
     Are%20you%20sure%20you%20want%20to%20delete%20your%20account%3F/singular: 428b74d781063224c3e63980e1094ec3
     assigned%20%3C0%3E%7B0%7D%3C%2F0%3E%20to%20the%20card/singular: 9df6d89fa83706123dedd8cba2243d04
+    Assignees/singular: 96fc0e28a783d80decfd4716a440ac08
     Awaiting%20Customer/singular: 122c108794f321c10e05a08f09b11457
     Backlog/singular: 35919fd5b10ad212839a75e72829fe4e
     Basic%20Kanban/singular: e46ebc406749486f3907436970d4d6c7
@@ -70,6 +72,7 @@ checksums:
     Board%20name%20cannot%20exceed%20100%20characters/singular: 985c0177744ec56d8dac84f66ec284ca
     Board%20name%20is%20required/singular: dbd0c6cc945ab19e702fc27f970a023b
     Board%20not%20found/singular: 5af9844595fa8aed5985066620435515
+    Board%20sharing%20%26%20invites/singular: c9222fbcfac4e99dcaa859b46c163e55
     Board%20URL%20can%20only%20contain%20letters%2C%20numbers%2C%20and%20hyphens/singular: ba018946ffdf85e55d701a9c27595b4d
     Board%20URL%20cannot%20exceed%2060%20characters/singular: 8fd3417559a56aa42d297b14d480c382
     Board%20URL%20copied%20to%20clipboard/singular: 5ef04fee9c8e5299a2fd1ad223eb95c9
@@ -87,6 +90,7 @@ checksums:
     Change%20your%20language%20preferences./singular: 293d49fc3c75e9c425b64bd7126e6b46
     Check%20your%20inbox/singular: e9a430fcd298def74212238df0f680d6
     Checklist%20name/singular: 5eb5de823f7ca5a4d97bb41e6a3f675a
+    Checklists/singular: 6f79129c8f08ee54d858a2af57d16dd9
     Clear%20filters/singular: 8f40ab5af527e4b190da94e7b6221379
     Click%20on%20the%20link%20we've%20sent%20to%20%7BmagicLinkRecipient%7D%20to%20sign%20in./singular: 210b6ff8727f976182ec3f29ea3c7667
     Close/singular: 2c2e22f8424a1031de89063bd0022e16
@@ -94,7 +98,9 @@ checksums:
     Collaborate%20seamlessly%20with%20your%20team./singular: c5f10e431aaf8b51519bc009a4a4080c
     Coming%20soon/singular: ee2b0671e00972773210c5be5a9ccb89
     Comments/singular: 502237cd1044491c48494aa60967a985
+    Comments%20%26%20mentions/singular: 1f3a822f4f97a9b07db82d24c4204f75
     Company/singular: 9e36d11fa82d1bd4563eef2abc4fcfba
+    Compare%20our%20features%20to%20see%20why%20Kan%20is%20the%20best%20choice./singular: c186ed37ff27cfc2a1ac11e66b2b30f1
     Complete/singular: d3e36d723de0cfdea51c5b4171d30b4d
     Complete%20control%20and%20ownership%3A/singular: 0d8b682ba873272217425ccfc96aa9cd
     completed%20a%20checklist%20item/singular: 757b04c6c80cc927e1c597c0ad4fda33
@@ -109,6 +115,7 @@ checksums:
     Continue%20with%20/singular: 8ed03cf7c5e60a6edf3470a4558ff058
     Continue%20with%20%7B0%7D/singular: 2eaf6e1da91e208f7c5fb6bf862fe8a6
     Control%20who%20can%20view%20and%20edit%20your%20boards./singular: 2a7e0bec29bac26280de707e2fe8bce5
+    Core%20features/singular: da95932e7a1465a5d21aa3b855a46dc2
     Create%20%7B0%7D/singular: d37c29be6ccc0eb6062237f8508c3178
     Create%20another/singular: 2de8a82a416eb78c0462aa36278edc9a
     Create%20API%20key/singular: 70ed8431c6ed5f7fdef122cc34f75b41
@@ -127,8 +134,11 @@ checksums:
     Critical/singular: eb327cd411b50aee954f8d1d215d003a
     Crop%20your%20avatar/singular: eb25e2d5972ec36a0b40481c8136ab15
     Current%20password%20is%20required/singular: 72536bca9598680027f2be8ce80ac280
+    Custom%20board%20templates/singular: c2966b352d76bc53421c01e9c99474bb
     Custom%20domain/singular: b09e7a9c187b7163b4a6cfc78042fe42
+    Custom%20templates/singular: f8caaad67e168f106a298c8e0a66240c
     Custom%20URLs%20require%20upgrading%20to%20a%20Pro%20plan/singular: f7275e3b473b8f7b39dab6b37eb26fea
+    Custom%20workspace%20link/singular: 8a19ae46ccea9c54b65ae183cea70b44
     Custom%20workspace%20URL/singular: 7ba841d0946eb04fa3d17d74365be37b
     Customer%20Support/singular: 50e3c77e22e41061ca85ea2f02625a2e
     Dark/singular: 73e6e208ba628b26e90fcf6dce15e1b2
@@ -197,7 +207,9 @@ checksums:
     Failed%20to%20create%20board/singular: a746e2afe881c3bf0a8e82a931ca3495
     Failed%20to%20login%20with%20%7B0%7D.%20Please%20try%20again./singular: 669a4b4247a73f53fb9b8b16e42d166f
     FAQs/singular: dc36d7992372ccd419b39ef51cf5b16c
+    Fast%20%26%20lightweight/singular: 4f2a80c555a5427b94eef5124aa10775
     Feature/singular: 58f5f3f37862b6312a2f20ec1a1fd0e8
+    Feature%20breakdown/singular: cae23c2a3fbb21735289571f2e1f60db
     Feature%20Request/singular: c9de91b9a7020213381977f7d147064f
     Features/singular: 341ff316a339b106a178f0b8d362951b
     Feedback/singular: 6fac88806e0c269a30777b283988c61c
@@ -236,6 +248,7 @@ checksums:
     Import/singular: 348b8ab981de5b7f1fca6d7302263bbd
     Import%20complete/singular: 7e749df6f068b9cdf1055ea38c9a80af
     Import%20failed/singular: bcec1f271c82ddffc91ebc22021b03cb
+    Import%20from%20Trello/singular: 9cce591a63763174952ffc11ae829f0c
     Import%20your%20Trello%20boards%20and%20hit%20the%20ground%20running./singular: d66d13649f81342f8b3a4f3b54370c20
     Important/singular: 4cf0e8fc8e4e7c5c9b9458059a172a2b
     Importing%20from%20Trello/singular: 1e3a46fb9bd8ce8c7d632f9555b5bd7c
@@ -244,22 +257,27 @@ checksums:
     In%20Progress/singular: 3de9afebcb9d4ce8ac42e14995f79ffd
     Individuals/singular: 83bfc81f20e60556c44ec80c7d0603ec
     Integrations/singular: 0ccce343287704cd90150c32e2fcad36
+    Intelligent%20search/singular: da688e7cfb2775f719a12df6dd606f6e
     Interviewing/singular: 4ccdcdc784547e925077c3297bddee95
     Invalid%20email%20address/singular: b2d9f25626f2d15c7c63e0281bccc247
     Invalid%20invitation/singular: 4b936a8811a2295a5f58b41473c608f3
     Invite/singular: 181884cea804cbde665f160811ee7ad0
     Invite%20link%20copied/singular: 4046f23a78e1cd5166671c3fb8a7ea6e
     Invite%20link%20copied%20to%20clipboard/singular: 6fc055a0ea0ed1aa58c5e0c502efe17f
+    Invite%20links/singular: 36ea61a3193245fa1b57d3392f342aaa
     Invite%20links%20require%20a%20Team%20or%20Pro%20subscription.%20Please%20upgrade%20your%20workspace./singular: 18db646fc55f99789572c8df0539ee69
     Invite%20member/singular: ade922db1be6b26bc979565ce5de2bc7
     Inviting%20members%20requires%20a%20Team%20Plan.%20You'll%20be%20redirected%20to%20upgrade%20your%20workspace./singular: 03eeed2d715e770259f722ba48a61ab3
     Join%20workspace/singular: f5d035df672b05abd760bd022309c719
     Join%20workspace%20%7C%20kan.bn/singular: 97855216a0e00214b2dcf917e93164f2
     Junior/singular: ed1bd2c59a824fdcdd56fc8a0660fe9f
+    Kan/singular: dd1232a5a28bf47e939d3b8a199bc229
+    Kan%20is%20better%20with%20a%20team.%20Perfect%20for%20small%20and%20growing%20teams%20looking%20to%20collaborate./singular: d13f4467d3dc0a0786c3843a9b50785d
     Kanban%20is%20better%20with%20a%20team.%20Perfect%20for%20small%20and%20growing%20teams%20looking%20to%20collaborate./singular: a77bee43046b260797c8936ad23e9223
     Kanban%20reimagined/singular: 613ccfdd9f54c66cbf68cfa313498766
     Keep%20in%20mind%20that%20this%20action%20is%20irreversible./singular: 79702b2ad3be71cb8b87f1122a60c199
     Labels/singular: 6f15627a90002323eac018274b6922d6
+    Labels%20%26%20filters/singular: e1ceda0c6cc32fb04cb9423582ad8fe4
     Labels%20%26%20Filters/singular: 8f0bdd6084516f8241cb613178114390
     Language/singular: 277fd1a41cc237a437cd1d5e4a80463b
     Launch%20offer/singular: 624592ba2ecf647a3fe60d493c1ee71a
@@ -313,9 +331,11 @@ checksums:
     Onboarding/singular: 52b23f9c62ff199d4c09920e7641829e
     Once%20you%20delete%20your%20account%2C%20there%20is%20no%20going%20back.%20This%20action%20cannot%20be%20undone./singular: 9cf7aa6ef30890e5124e266c081bae1c
     Once%20you%20delete%20your%20workspace%2C%20there%20is%20no%20going%20back.%20This%20action%20cannot%20be%20undone./singular: c9ce6a516ed1f361653e8f8db3dd5ffd
+    Open%20source/singular: 81a747dc664de1a3389b495c8f84843b
     or/singular: 7b133c38bec0d5ee23cc6bcf9a8de50b
     Organize%20and%20find%20cards%20quickly%20with%20powerful%20filtering%20tools./singular: 1b9898c4b21e9dff413b4f76dc59db56
     Own%20your%20data/singular: cc2178dac4bdf6b07f030cfc2a7510e6
+    Owned%20by%20Atlassian/singular: ace4ed076a5318ad48c296fa09afed69
     Part-time/singular: 213d63da450f35dabb3ab0e35e29feed
     Password%20Changed/singular: 1fcebe9ddb46f722a57f195efddc695d
     Password%20is%20required%20to%20login./singular: a09c76294ca7b27b38658b34618a7119
@@ -328,6 +348,7 @@ checksums:
     per%20user%2Fmonth/singular: 72af182c1ba6df6732640f4d8a78d360
     Personal%20Project/singular: d7820b1bf4efecc61ed89234567aaa9c
     Planning/singular: 353f58c75248275fe091740607501610
+    Platform/singular: c68862170146325333c7f25af11a3fa2
     Please%20confirm%20your%20new%20password/singular: 43d0307b9307238cc6c199cfa66caff2
     Please%20enter%20a%20valid%20email%20address/singular: 8de4bc8832b11b380bc4cbcedc16e48b
     Please%20enter%20a%20valid%20name/singular: f2d741f1b5cae722e35cb5206786f932
@@ -335,6 +356,7 @@ checksums:
     Please%20select%20a%20file%20to%20upload./singular: de315bf594047f8ef9307a7fa9285844
     Please%20try%20again%20later%2C%20or%20contact%20customer%20support./singular: 21ffcf0b00e7cd7b64f7454a95762e1d
     Please%20try%20again%20later./singular: 325dea6dd0348a27a6818db2c1340c98
+    Price%20per%20user%2Fmonth/singular: ae4b93ad0f9fad454b40f82010372fc2
     Pricing/singular: ce27f1aeacccc542a174c4b2bce022b0
     Priority%20email%20support/singular: 678538c912a770b1e1416ecdb8e299b1
     Privacy%20policy/singular: 462c6a536b52873e4498785c66dd48c8
@@ -361,6 +383,7 @@ checksums:
     Research/singular: 3368e9638d1619babd6df9fad592274f
     Resolution/singular: 6d8bd9e1bd7dae5ae38c93061d32990e
     Resources/singular: ec7fb05ed963bb6781a35782b3475502
+    REST%20API/singular: 54c9f8d98f45f50399b6b93ba70af0d6
     Review/singular: 299f75db25382980b2895622d7712927
     Roadmap/singular: c60f4a1acf30e566861bf130f13b9ae7
     Role/singular: 53743bbb6ca938f5b893552e839d067f
@@ -374,6 +397,7 @@ checksums:
     Self%20Host/singular: 43fbce2027548b712002e489a20a621a
     Self%20host%20with%20Github/singular: 972155419bcc9f8f9bad9f5ad3538774
     self-assigned%20the%20card/singular: 24a8d97bcd747643772ebe883be69698
+    Self-hostable/singular: 3e3597145cc17f03b8b5646b80d59592
     Send%20feedback/singular: 9631cc08d49da04475b30a0d320ce97c
     Senior/singular: 3fff865dc00435f82896fc302ea45630
     Settings/singular: 8df6777277469c1fd88cc18dde2f1cc3
@@ -464,6 +488,7 @@ checksums:
     Unlimited%20comments/singular: 31dbcf487c49a9997142e96bb3ab0040
     Unlimited%20lists/singular: 5c418701b27b9acbc5dd199719007362
     Unlimited%20members/singular: f2949ca2dc18b0063af92e60779abb65
+    Unlimited%20workspaces/singular: b504d01997bf908af1d486d9942fed36
     Update/singular: 079fc039262fd31b10532929685c2d1b
     Update%20label/singular: 97880b503dfe956941c5f23025a1c102
     updated%20a%20checklist%20item/singular: 198e1d1d503f4b69b752dd84d0cc0e9d
@@ -495,6 +520,7 @@ checksums:
     What%20license%20are%20you%20using%3F/singular: 59d00e1bf28edc21b77fec94875f57ca
     What's%20the%20difference%20between%20Kan%20and%20Trello%3F/singular: 7a02f507dd6abbfab1fdae0b172d31b7
     When%20Trello%20launched%20in%202011%2C%20it%20blew%20everyone%20away%20with%20its%20carefully%20designed%20simplicity%2C%20but%20over%20time%20(and%20atlassification)%20it%20lost%20its%20magic%20and%20grew%20into%20something%20closer%20to%20%22Jira%20Lite%22.%20This%20project%20is%20our%20attempt%20to%20recapture%20the%20original%20magic%20of%20Trello's%20simplicity%2C%20in%20open%20source./singular: 60a55e9bd16c3d1beff1a6c7633c5911
+    White%20label/singular: 2570386f73a010b07219e7658aaf9d9b
     Why%20make%20an%20open%20source%20Trello%3F/singular: 090833338ba8c64ef7a75e0f2615b34b
     Workspace/singular: b63ef0e99ee6f7fef6cbe4971ca6cf0f
     Workspace%20created%20successfully.%20You%20can%20upgrade%20later%20in%20settings./singular: 8bbaba9f82ff076a08185ada1ee7eb94

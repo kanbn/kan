@@ -58,11 +58,12 @@ msgstr "$10/Monat"
 msgid "$8/month"
 msgstr "$8/Monat"
 
-#: src/views/home/components/Pricing.tsx:36
+#: src/views/pricing/components/Pricing.tsx:36
+#: src/views/pricing/components/PricingTiers.tsx:34
 msgid "1 user"
 msgstr "1 Benutzer"
 
-#: src/views/home/index.tsx:72
+#: src/views/home/index.tsx:69
 msgid "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
 msgstr "Eine leistungsstarke, flexible Kanban-App, die dir hilft, Arbeit zu organisieren, Fortschritte zu verfolgen und Ergebnisse zu liefern – alles an einem Ort."
 
@@ -78,6 +79,10 @@ msgstr "Konto gelöscht"
 #: src/views/public/board/CardModal.tsx:143
 msgid "Activity"
 msgstr "Aktivität"
+
+#: src/views/pricing/components/FeatureComparisonTable.tsx:66
+msgid "Activity log"
+msgstr "Aktivitätsprotokoll"
 
 #: src/views/home/components/Features.tsx:110
 msgid "Activity logs"
@@ -157,7 +162,8 @@ msgstr "Das Hinzufügen eines neuen Mitglieds kostet zusätzlich {price} ({billi
 msgid "Adjust the square crop to fit your avatar."
 msgstr "Passe den quadratischen Zuschnitt an deinen Avatar an."
 
-#: src/views/home/components/Pricing.tsx:55
+#: src/views/pricing/components/Pricing.tsx:55
+#: src/views/pricing/components/PricingTiers.tsx:52
 msgid "Admin roles"
 msgstr "Administratorrollen"
 
@@ -256,6 +262,10 @@ msgstr "Bist du sicher, dass du dein Konto löschen möchtest?"
 msgid "assigned <0>{0}</0> to the card"
 msgstr "hat <0>{0}</0> der Karte zugewiesen"
 
+#: src/views/pricing/components/FeatureComparisonTable.tsx:127
+msgid "Assignees"
+msgstr "Zugewiesene Personen"
+
 #: src/views/boards/components/TemplateBoards.tsx:47
 msgid "Awaiting Customer"
 msgstr "Warten auf Kunden"
@@ -311,6 +321,10 @@ msgstr "Boardname ist erforderlich"
 msgid "Board not found"
 msgstr "Board nicht gefunden"
 
+#: src/views/pricing/components/FeatureComparisonTable.tsx:133
+msgid "Board sharing & invites"
+msgstr "Board-Freigabe & Einladungen"
+
 #: src/views/board/components/UpdateBoardSlugForm.tsx:45
 msgid "Board URL can only contain letters, numbers, and hyphens"
 msgstr "Board-URL darf nur Buchstaben, Zahlen und Bindestriche enthalten"
@@ -328,6 +342,7 @@ msgid "Board URL must be at least 3 characters long"
 msgstr "Board-URL muss mindestens 3 Zeichen lang sein"
 
 #: src/views/home/components/Features.tsx:85
+#: src/views/pricing/components/FeatureComparisonTable.tsx:86
 msgid "Board visibility"
 msgstr "Board-Sichtbarkeit"
 
@@ -394,6 +409,11 @@ msgstr "Überprüfe deinen Posteingang"
 msgid "Checklist name"
 msgstr "Checklistenname"
 
+#: src/views/pricing/components/FeatureComparisonTable.tsx:77
+#: src/views/pricing/components/PricingTiers.tsx:38
+msgid "Checklists"
+msgstr "Checklisten"
+
 #: src/views/board/components/Filters.tsx:155
 msgid "Clear filters"
 msgstr "Filter löschen"
@@ -425,15 +445,24 @@ msgstr "Demnächst verfügbar"
 msgid "Comments"
 msgstr "Kommentare"
 
+#: src/views/pricing/components/FeatureComparisonTable.tsx:121
+msgid "Comments & mentions"
+msgstr "Kommentare & Erwähnungen"
+
 #: src/views/home/components/Footer.tsx:94
 msgid "Company"
 msgstr "Unternehmen"
+
+#: src/views/pricing/index.tsx:65
+msgid "Compare our features to see why Kan is the best choice."
+msgstr "Vergleichen Sie unsere Funktionen, um zu sehen, warum Kan die beste Wahl ist."
 
 #: src/views/boards/components/TemplateBoards.tsx:82
 msgid "Complete"
 msgstr "Abgeschlossen"
 
-#: src/views/home/components/Pricing.tsx:70
+#: src/views/pricing/components/Pricing.tsx:70
+#: src/views/pricing/components/PricingTiers.tsx:67
 msgid "Complete control and ownership:"
 msgstr "Vollständige Kontrolle und Eigentum:"
 
@@ -487,6 +516,10 @@ msgstr "Fortfahren mit {0}"
 #: src/views/home/components/Features.tsx:86
 msgid "Control who can view and edit your boards."
 msgstr "Kontrolliere, wer deine Boards ansehen und bearbeiten kann."
+
+#: src/views/pricing/components/FeatureComparisonTable.tsx:38
+msgid "Core features"
+msgstr "Kernfunktionen"
 
 #. placeholder {0}: isTemplate ? "template" : "board"
 #: src/views/boards/components/NewBoardForm.tsx:166
@@ -566,13 +599,26 @@ msgstr "Schneide deinen Avatar zu"
 msgid "Current password is required"
 msgstr "Aktuelles Passwort ist erforderlich"
 
-#: src/views/home/components/Pricing.tsx:74
+#: src/views/pricing/components/PricingTiers.tsx:37
+msgid "Custom board templates"
+msgstr "Benutzerdefinierte Board-Vorlagen"
+
+#: src/views/pricing/components/Pricing.tsx:74
+#: src/views/pricing/components/PricingTiers.tsx:71
 msgid "Custom domain"
 msgstr "Benutzerdefinierte Domain"
+
+#: src/views/pricing/components/FeatureComparisonTable.tsx:72
+msgid "Custom templates"
+msgstr "Benutzerdefinierte Vorlagen"
 
 #: src/components/NewWorkspaceForm.tsx:315
 msgid "Custom URLs require upgrading to a Pro plan"
 msgstr "Benutzerdefinierte URLs erfordern ein Upgrade auf einen Pro-Plan"
+
+#: src/views/pricing/components/FeatureComparisonTable.tsx:98
+msgid "Custom workspace link"
+msgstr "Benutzerdefinierter Workspace-Link"
 
 #: src/components/NewWorkspaceForm.tsx:339
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:74
@@ -837,11 +883,13 @@ msgstr "Fehler beim Upgrade auf Pro"
 msgid "Error uploading profile image"
 msgstr "Fehler beim Hochladen des Profilbilds"
 
-#: src/views/home/components/Pricing.tsx:52
+#: src/views/pricing/components/Pricing.tsx:52
+#: src/views/pricing/components/PricingTiers.tsx:49
 msgid "Everything in the free plan, plus:"
 msgstr "Alles im kostenlosen Plan, plus:"
 
-#: src/views/home/components/Pricing.tsx:33
+#: src/views/pricing/components/Pricing.tsx:33
+#: src/views/pricing/components/PricingTiers.tsx:31
 msgid "Everything you need, free forever. Unlimited boards, unlimited lists, unlimited cards. Upgrade any time."
 msgstr "Alles was du brauchst, für immer kostenlos. Unbegrenzte Boards, unbegrenzte Listen, unbegrenzte Karten. Jederzeit upgraden."
 
@@ -872,9 +920,18 @@ msgstr "Anmeldung mit {0} fehlgeschlagen. Bitte versuche es erneut."
 msgid "FAQs"
 msgstr "Häufig gestellte Fragen"
 
+#: src/views/pricing/components/FeatureComparisonTable.tsx:174
+msgid "Fast & lightweight"
+msgstr "Schnell & leichtgewichtig"
+
 #: src/views/boards/components/TemplateBoards.tsx:24
+#: src/views/pricing/components/FeatureComparisonTable.tsx:237
 msgid "Feature"
 msgstr "Feature"
+
+#: src/views/pricing/index.tsx:62
+msgid "Feature breakdown"
+msgstr "Funktionsübersicht"
 
 #: src/views/boards/components/TemplateBoards.tsx:53
 msgid "Feature Request"
@@ -883,6 +940,7 @@ msgstr "Feature-Anfrage"
 #: src/views/home/components/Features.tsx:132
 #: src/views/home/components/Footer.tsx:49
 #: src/views/home/components/Header.tsx:14
+#: src/views/pricing/index.tsx:58
 msgid "Features"
 msgstr "Features"
 
@@ -907,7 +965,10 @@ msgstr "Finden Sie Antworten auf häufige Fragen zum Projekt. Nicht gefunden, wo
 msgid "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users (free during the beta) and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge."
 msgstr "Für langfristige Nachhaltigkeit erkennen wir an, dass alle guten Open-Source-Projekte eine Einnahmequelle benötigen. Unsere stammt aus dem kostenpflichtigen Cloud-Angebot für Workspaces mit mehreren Benutzern (kostenlos während der Beta-Phase) und für benutzerdefinierte Workspace-Slugs. Es besteht keine Verpflichtung, dieses Angebot zu nutzen, und Sie können die Software kostenlos auf Ihrer eigenen Infrastruktur selbst hosten."
 
-#: src/views/home/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
+#: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Kostenlos"
 
@@ -916,7 +977,8 @@ msgstr "Kostenlos"
 msgid "Free Plan"
 msgstr "Kostenloser Plan"
 
-#: src/views/home/components/Pricing.tsx:34
+#: src/views/pricing/components/Pricing.tsx:34
+#: src/views/pricing/components/PricingTiers.tsx:32
 msgid "Free, forever"
 msgstr "Kostenlos, für immer"
 
@@ -932,11 +994,14 @@ msgstr "Spaß"
 #: src/views/home/components/Cta.tsx:61
 #: src/views/home/components/Header.tsx:102
 #: src/views/home/components/Header.tsx:141
+#: src/views/pricing/index.tsx:69
 msgid "Get started"
 msgstr "Loslegen"
 
-#: src/views/home/components/Pricing.tsx:31
-#: src/views/home/components/Pricing.tsx:49
+#: src/views/pricing/components/Pricing.tsx:31
+#: src/views/pricing/components/Pricing.tsx:49
+#: src/views/pricing/components/PricingTiers.tsx:29
+#: src/views/pricing/components/PricingTiers.tsx:46
 msgid "Get Started"
 msgstr "Loslegen"
 
@@ -953,11 +1018,12 @@ msgstr "Beginne mit dem Erstellen einer neuen Liste"
 msgid "Get started for free today"
 msgstr "Starten Sie noch heute kostenlos"
 
-#: src/views/home/components/Pricing.tsx:92
+#: src/views/pricing/components/Pricing.tsx:92
+#: src/views/pricing/index.tsx:46
 msgid "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team."
 msgstr "Starten Sie kostenlos ohne Nutzungsbeschränkungen. Für die Zusammenarbeit wechseln Sie zu einem Plan, der zur Größe Ihres Teams passt."
 
-#: src/views/home/index.tsx:76
+#: src/views/home/index.tsx:73
 msgid "Get started on Cloud"
 msgstr "In der Cloud starten"
 
@@ -987,7 +1053,8 @@ msgstr "Hohe Priorität"
 msgid "Hired"
 msgstr "Eingestellt"
 
-#: src/views/home/components/Pricing.tsx:69
+#: src/views/pricing/components/Pricing.tsx:69
+#: src/views/pricing/components/PricingTiers.tsx:66
 msgid "Host Kan on your own infrastructure. Ideal for organisations that need complete control over their data."
 msgstr "Hosten Sie Kan auf Ihrer eigenen Infrastruktur. Ideal für Organisationen, die vollständige Kontrolle über ihre Daten benötigen."
 
@@ -1039,6 +1106,10 @@ msgstr "Import abgeschlossen"
 msgid "Import failed"
 msgstr "Import fehlgeschlagen"
 
+#: src/views/pricing/components/FeatureComparisonTable.tsx:80
+msgid "Import from Trello"
+msgstr "Import von Trello"
+
 #: src/views/home/components/Features.tsx:96
 msgid "Import your Trello boards and hit the ground running."
 msgstr "Importieren Sie Ihre Trello-Boards und starten Sie sofort durch."
@@ -1065,7 +1136,8 @@ msgstr "in"
 msgid "In Progress"
 msgstr "In Bearbeitung"
 
-#: src/views/home/components/Pricing.tsx:28
+#: src/views/pricing/components/Pricing.tsx:28
+#: src/views/pricing/components/PricingTiers.tsx:26
 msgid "Individuals"
 msgstr "Einzelpersonen"
 
@@ -1073,6 +1145,10 @@ msgstr "Einzelpersonen"
 #: src/views/home/components/Features.tsx:121
 msgid "Integrations"
 msgstr "Integrationen"
+
+#: src/views/pricing/components/FeatureComparisonTable.tsx:92
+msgid "Intelligent search"
+msgstr "Intelligente Suche"
 
 #: src/views/boards/components/TemplateBoards.tsx:65
 msgid "Interviewing"
@@ -1097,6 +1173,10 @@ msgstr "Einladungslink kopiert"
 #: src/views/members/components/InviteMemberForm.tsx:203
 msgid "Invite link copied to clipboard"
 msgstr "Einladungslink in die Zwischenablage kopiert"
+
+#: src/views/pricing/components/FeatureComparisonTable.tsx:139
+msgid "Invite links"
+msgstr "Einladungslinks"
 
 #: src/views/members/components/InviteMemberForm.tsx:123
 msgid "Invite links require a Team or Pro subscription. Please upgrade your workspace."
@@ -1124,7 +1204,15 @@ msgstr "Arbeitsbereich beitreten | kan.bn"
 msgid "Junior"
 msgstr "Junior"
 
-#: src/views/home/components/Pricing.tsx:51
+#: src/views/pricing/components/FeatureComparisonTable.tsx:185
+msgid "Kan"
+msgstr "Kan"
+
+#: src/views/pricing/components/PricingTiers.tsx:48
+msgid "Kan is better with a team. Perfect for small and growing teams looking to collaborate."
+msgstr "Kan ist besser im Team. Perfekt für kleine und wachsende Teams, die zusammenarbeiten möchten."
+
+#: src/views/pricing/components/Pricing.tsx:51
 msgid "Kanban is better with a team. Perfect for small and growing teams looking to collaborate."
 msgstr "Kanban funktioniert besser im Team. Perfekt für kleine und wachsende Teams, die zusammenarbeiten möchten."
 
@@ -1143,6 +1231,10 @@ msgstr "Beachten Sie, dass diese Aktion nicht rückgängig gemacht werden kann."
 msgid "Labels"
 msgstr "Labels"
 
+#: src/views/pricing/components/FeatureComparisonTable.tsx:76
+msgid "Labels & filters"
+msgstr "Labels & Filter"
+
 #: src/views/home/components/Features.tsx:100
 msgid "Labels & Filters"
 msgstr "Labels & Filter"
@@ -1160,7 +1252,8 @@ msgstr "Einführungsangebot"
 msgid "Launch offer: Get unlimited members with Pro"
 msgstr "Einführungsangebot: Erhalten Sie unbegrenzte Mitglieder mit Pro"
 
-#: src/views/home/components/Pricing.tsx:99
+#: src/views/pricing/components/Pricing.tsx:98
+#: src/views/pricing/components/PricingTiers.tsx:84
 msgid "Launch offer: unlimited seats for just $29/month with Pro"
 msgstr "Einführungsangebot: unbegrenzte Plätze für nur $29/Monat mit Pro"
 
@@ -1242,7 +1335,8 @@ msgstr "Mitglieder"
 msgid "Members | {0}"
 msgstr "Mitglieder | {0}"
 
-#: src/views/home/components/Pricing.tsx:14
+#: src/views/pricing/components/Pricing.tsx:14
+#: src/views/pricing/index.tsx:19
 msgid "Monthly"
 msgstr "Monatlich"
 
@@ -1342,7 +1436,7 @@ msgstr "Keine {0}"
 msgid "No boards found"
 msgstr "Keine Boards gefunden"
 
-#: src/views/home/index.tsx:86
+#: src/views/home/index.tsx:83
 msgid "No credit card required"
 msgstr "Keine Kreditkarte erforderlich"
 
@@ -1370,6 +1464,10 @@ msgstr "Sobald Sie Ihr Konto löschen, gibt es kein Zurück mehr. Diese Aktion k
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Sobald Sie Ihren Arbeitsbereich löschen, gibt es kein Zurück mehr. Diese Aktion kann nicht rückgängig gemacht werden."
 
+#: src/views/pricing/components/FeatureComparisonTable.tsx:156
+msgid "Open source"
+msgstr "Open Source"
+
 #: src/components/AuthForm.tsx:365
 msgid "or"
 msgstr "oder"
@@ -1378,9 +1476,14 @@ msgstr "oder"
 msgid "Organize and find cards quickly with powerful filtering tools."
 msgstr "Organisiere und finde Karten schnell mit leistungsstarken Filterwerkzeugen."
 
-#: src/views/home/components/Pricing.tsx:73
+#: src/views/pricing/components/Pricing.tsx:73
+#: src/views/pricing/components/PricingTiers.tsx:70
 msgid "Own your data"
 msgstr "Besitze deine Daten"
+
+#: src/views/pricing/components/FeatureComparisonTable.tsx:104
+msgid "Owned by Atlassian"
+msgstr "Im Besitz von Atlassian"
 
 #: src/views/boards/components/TemplateBoards.tsx:70
 msgid "Part-time"
@@ -1410,7 +1513,8 @@ msgstr "Passwörter stimmen nicht überein"
 msgid "Paused"
 msgstr "Pausiert"
 
-#: src/views/home/components/Pricing.tsx:102
+#: src/views/pricing/components/Pricing.tsx:100
+#: src/views/pricing/components/PricingTiers.tsx:86
 msgid "Payment frequency"
 msgstr "Zahlungshäufigkeit"
 
@@ -1418,8 +1522,10 @@ msgstr "Zahlungshäufigkeit"
 msgid "Pending"
 msgstr "Ausstehend"
 
-#: src/views/home/components/Pricing.tsx:15
-#: src/views/home/components/Pricing.tsx:20
+#: src/views/pricing/components/Pricing.tsx:15
+#: src/views/pricing/components/Pricing.tsx:20
+#: src/views/pricing/index.tsx:20
+#: src/views/pricing/index.tsx:25
 msgid "per user/month"
 msgstr "pro Benutzer/Monat"
 
@@ -1430,6 +1536,10 @@ msgstr "Persönliches Projekt"
 #: src/views/boards/components/TemplateBoards.tsx:78
 msgid "Planning"
 msgstr "Planung"
+
+#: src/views/pricing/components/FeatureComparisonTable.tsx:146
+msgid "Platform"
+msgstr "Plattform"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:24
 msgid "Please confirm your new password"
@@ -1497,13 +1607,20 @@ msgstr "Bitte versuche es später noch einmal oder kontaktiere den Kundensupport
 msgid "Please try again later."
 msgstr "Bitte versuche es später erneut."
 
+#: src/views/pricing/components/FeatureComparisonTable.tsx:115
+msgid "Price per user/month"
+msgstr "Preis pro Benutzer/Monat"
+
 #: src/views/home/components/Footer.tsx:50
 #: src/views/home/components/Header.tsx:15
-#: src/views/home/components/Pricing.tsx:85
+#: src/views/pricing/components/Pricing.tsx:85
+#: src/views/pricing/index.tsx:33
+#: src/views/pricing/index.tsx:39
 msgid "Pricing"
 msgstr "Preise"
 
-#: src/views/home/components/Pricing.tsx:56
+#: src/views/pricing/components/Pricing.tsx:56
+#: src/views/pricing/components/PricingTiers.tsx:53
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:91
 msgid "Priority email support"
 msgstr "Prioritäts-E-Mail-Support"
@@ -1607,6 +1724,10 @@ msgstr "Lösung"
 msgid "Resources"
 msgstr "Ressourcen"
 
+#: src/views/pricing/components/FeatureComparisonTable.tsx:150
+msgid "REST API"
+msgstr "REST API"
+
 #: src/views/boards/components/TemplateBoards.tsx:80
 msgid "Review"
 msgstr "Überprüfung"
@@ -1620,7 +1741,8 @@ msgstr "Roadmap"
 msgid "Role"
 msgstr "Rolle"
 
-#: src/views/home/components/Pricing.tsx:72
+#: src/views/pricing/components/Pricing.tsx:72
+#: src/views/pricing/components/PricingTiers.tsx:69
 msgid "Run on your own infrastructure"
 msgstr "Auf eigener Infrastruktur betreiben"
 
@@ -1649,17 +1771,22 @@ msgstr "Alle auswählen"
 msgid "Select source"
 msgstr "Quelle auswählen"
 
-#: src/views/home/components/Pricing.tsx:64
+#: src/views/pricing/components/Pricing.tsx:64
+#: src/views/pricing/components/PricingTiers.tsx:61
 msgid "Self Host"
 msgstr "Selbst hosten"
 
-#: src/views/home/index.tsx:82
+#: src/views/home/index.tsx:79
 msgid "Self host with Github"
 msgstr "Selbst hosten mit Github"
 
 #: src/views/card/components/ActivityList.tsx:107
 msgid "self-assigned the card"
 msgstr "hat sich selbst die Karte zugewiesen"
+
+#: src/views/pricing/components/FeatureComparisonTable.tsx:162
+msgid "Self-hostable"
+msgstr "Selbst hostbar"
 
 #: src/components/FeedbackModal.tsx:116
 msgid "Send feedback"
@@ -1724,7 +1851,8 @@ msgstr "Die Registrierung ist derzeit deaktiviert. Bitte versuche es später ern
 msgid "Sign up with "
 msgstr "Registrieren mit "
 
-#: src/views/home/components/Pricing.tsx:89
+#: src/views/pricing/components/Pricing.tsx:89
+#: src/views/pricing/index.tsx:43
 msgid "Simple pricing"
 msgstr "Einfache Preisgestaltung"
 
@@ -1740,7 +1868,7 @@ msgstr "Social Media"
 msgid "Software Development"
 msgstr "Softwareentwicklung"
 
-#: src/views/home/index.tsx:38
+#: src/views/home/index.tsx:35
 msgid "Star on Github"
 msgstr "Stern auf Github"
 
@@ -1761,7 +1889,8 @@ msgstr "Optimiere deinen Workspace für nur $29/Monat. Das bekommst du dafür:"
 msgid "Support"
 msgstr "Support"
 
-#: src/views/home/components/Pricing.tsx:57
+#: src/views/pricing/components/Pricing.tsx:57
+#: src/views/pricing/components/PricingTiers.tsx:54
 msgid "Support the development of the project"
 msgstr "Unterstütze die Entwicklung des Projekts"
 
@@ -1774,7 +1903,9 @@ msgstr "System"
 msgid "Team Plan"
 msgstr "Team-Plan"
 
-#: src/views/home/components/Pricing.tsx:46
+#: src/views/pricing/components/FeatureComparisonTable.tsx:111
+#: src/views/pricing/components/Pricing.tsx:46
+#: src/views/pricing/components/PricingTiers.tsx:43
 msgid "Teams"
 msgstr "Teams"
 
@@ -1820,7 +1951,7 @@ msgstr "Das eingegebene aktuelle Passwort ist falsch."
 msgid "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
 msgstr "Der hauptunterschied zwischen Kan und Trello ist, dass Kan open source ist und jedem ermöglicht, unseren code einzusehen, zu ändern und dazu beizutragen. Unser cloud-angebot bietet außerdem keine einschränkungen bei funktionen für die individuelle nutzung, während Trello grundlegende funktionen wie die anzahl der boards, die du erstellen kannst, hinter einer paywall versteckt."
 
-#: src/views/home/index.tsx:66
+#: src/views/home/index.tsx:63
 msgid "The open source <0/> alternative to Trello"
 msgstr "Die open source <0/> alternative zu Trello"
 
@@ -1894,6 +2025,7 @@ msgstr "Menü umschalten"
 msgid "Track all card changes with detailed activity history."
 msgstr "Verfolge alle kartenänderungen mit detaillierter aktivitätshistorie."
 
+#: src/views/pricing/components/FeatureComparisonTable.tsx:190
 #: src/views/settings/IntegrationsSettings.tsx:73
 msgid "Trello"
 msgstr "Trello"
@@ -2010,11 +2142,13 @@ msgstr "hat <0>{0}</0> von der Karte entfernt"
 msgid "unassigned themselves from the card"
 msgstr "hat sich selbst von der Karte entfernt"
 
-#: src/views/home/components/Pricing.tsx:41
+#: src/views/pricing/components/Pricing.tsx:41
 msgid "Unlimited activity log"
 msgstr "Unbegrenztes aktivitätsprotokoll"
 
-#: src/views/home/components/Pricing.tsx:37
+#: src/views/pricing/components/FeatureComparisonTable.tsx:48
+#: src/views/pricing/components/Pricing.tsx:37
+#: src/views/pricing/components/PricingTiers.tsx:35
 msgid "Unlimited boards"
 msgstr "Unbegrenzte boards"
 
@@ -2022,15 +2156,18 @@ msgstr "Unbegrenzte boards"
 msgid "Unlimited boards, unlimited lists, unlimited cards. No credit card required."
 msgstr "Unbegrenzte boards, unbegrenzte listen, unbegrenzte karten. Keine kreditkarte erforderlich."
 
-#: src/views/home/components/Pricing.tsx:39
+#: src/views/pricing/components/FeatureComparisonTable.tsx:60
+#: src/views/pricing/components/Pricing.tsx:39
+#: src/views/pricing/components/PricingTiers.tsx:36
 msgid "Unlimited cards"
 msgstr "Unbegrenzte karten"
 
-#: src/views/home/components/Pricing.tsx:40
+#: src/views/pricing/components/Pricing.tsx:40
 msgid "Unlimited comments"
 msgstr "Unbegrenzte kommentare"
 
-#: src/views/home/components/Pricing.tsx:38
+#: src/views/pricing/components/FeatureComparisonTable.tsx:54
+#: src/views/pricing/components/Pricing.tsx:38
 msgid "Unlimited lists"
 msgstr "Unbegrenzte listen"
 
@@ -2038,6 +2175,10 @@ msgstr "Unbegrenzte listen"
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:64
 msgid "Unlimited members"
 msgstr "Unbegrenzte Mitglieder"
+
+#: src/views/pricing/components/FeatureComparisonTable.tsx:42
+msgid "Unlimited workspaces"
+msgstr "Unbegrenzte Workspaces"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:174
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:80
@@ -2129,7 +2270,8 @@ msgstr "API-Schlüssel anzeigen und verwalten."
 msgid "View and manage your billing and subscription."
 msgstr "Verwalte deine Abrechnung und dein Abonnement."
 
-#: src/views/home/components/Pricing.tsx:67
+#: src/views/pricing/components/Pricing.tsx:67
+#: src/views/pricing/components/PricingTiers.tsx:64
 msgid "View docs"
 msgstr "Dokumentation ansehen"
 
@@ -2173,6 +2315,10 @@ msgstr "Was ist der unterschied zwischen Kan und Trello?"
 msgid "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over time (and atlassification) it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello's simplicity, in open source."
 msgstr "Als Trello 2011 auf den markt kam, beeindruckte es alle mit seiner sorgfältig gestalteten einfachheit, aber mit der zeit (und der atlassifizierung) verlor es seinen zauber und entwickelte sich zu etwas, das eher einem \"Jira Lite\" ähnelt. Dieses projekt ist unser versuch, den ursprünglichen zauber von Trellos einfachheit als open source wiederzubeleben."
 
+#: src/views/pricing/components/FeatureComparisonTable.tsx:168
+msgid "White label"
+msgstr "White Label"
+
 #: src/views/home/components/Faqs.tsx:22
 msgid "Why make an open source Trello?"
 msgstr "Warum ein open source Trello entwickeln?"
@@ -2206,7 +2352,8 @@ msgid "Workspace description updated"
 msgstr "Workspace-Beschreibung aktualisiert"
 
 #: src/views/home/components/Features.tsx:90
-#: src/views/home/components/Pricing.tsx:54
+#: src/views/pricing/components/Pricing.tsx:54
+#: src/views/pricing/components/PricingTiers.tsx:51
 msgid "Workspace members"
 msgstr "Workspace-mitglieder"
 
@@ -2247,7 +2394,8 @@ msgstr "workspace-url"
 msgid "Writing"
 msgstr "Schreiben"
 
-#: src/views/home/components/Pricing.tsx:19
+#: src/views/pricing/components/Pricing.tsx:19
+#: src/views/pricing/index.tsx:24
 msgid "Yearly"
 msgstr "Jährlich"
 
