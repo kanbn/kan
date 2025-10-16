@@ -966,8 +966,6 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Для долгосрочной устойчивости мы признаем, что всем хорошим проектам с открытым исходным кодом нужен источник дохода. Наш доход поступает от платного облачного предложения для рабочих пространств с несколькими пользователями (бесплатно в период бета-тестирования) и для пользовательских адресов рабочих пространств. Нет обязательства использовать это, и вы можете самостоятельно разместить программное обеспечение на своей инфраструктуре бесплатно."
 
 #: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Бесплатно"
