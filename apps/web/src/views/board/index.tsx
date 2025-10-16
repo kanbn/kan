@@ -39,7 +39,7 @@ import VisibilityButton from "./components/VisibilityButton";
 type PublicListId = string;
 
 export default function BoardPage() {
-  const params = useParams() as { boardId: string[] } | null;
+  const params = useParams() as { boardId: string[]; } | null;
   const router = useRouter();
   const utils = api.useUtils();
   const { showPopup } = usePopup();
@@ -202,9 +202,10 @@ export default function BoardPage() {
     }
   }, [isSuccess, boardData, setValue]);
 
-  const [prevNovoPedidoCount, prevProntoParaColeta] = [
+  const [prevNovoPedidoCount, prevProntoParaColeta, isInitialRun] = [
     useRef<number>(0),
     useRef<number>(0),
+    useRef<boolean>(true),
   ];
 
   useEffect(() => {
@@ -223,14 +224,18 @@ export default function BoardPage() {
     const currentNewCount = novoPedidoList.cards.length;
     const currentDriverCount = readyPickupList.cards.length;
 
-    if (currentNewCount > prevNovoPedidoCount.current) {
-      const audio = new Audio("/sounds/new-order.wav");
-      audio.play();
-    }
+    if (isInitialRun.current) {
+      isInitialRun.current = false;
+    } else {
+      if (currentNewCount > prevNovoPedidoCount.current) {
+        const audio = new Audio("/sounds/new-order.wav");
+        audio.play();
+      }
 
-    if (currentDriverCount > prevProntoParaColeta.current) {
-      const audio = new Audio("/sounds/driver.wav");
-      audio.play();
+      if (currentDriverCount > prevProntoParaColeta.current) {
+        const audio = new Audio("/sounds/driver.wav");
+        audio.play();
+      }
     }
 
     prevNovoPedidoCount.current = currentNewCount;
@@ -516,13 +521,12 @@ export default function BoardPage() {
                                           }}
                                           key={card.publicId}
                                           href={`/cards/${card.publicId}`}
-                                          className={`mb-2 flex !cursor-pointer flex-col ${
-                                            card.publicId.startsWith(
-                                              "PLACEHOLDER",
-                                            )
+                                          className={`mb-2 flex !cursor-pointer flex-col ${card.publicId.startsWith(
+                                            "PLACEHOLDER",
+                                          )
                                               ? "pointer-events-none"
                                               : ""
-                                          }`}
+                                            }`}
                                           ref={provided.innerRef}
                                           {...provided.draggableProps}
                                           {...provided.dragHandleProps}
