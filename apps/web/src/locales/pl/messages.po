@@ -1,6 +1,11 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
 "POT-Creation-Date: 2025-10-16 20:29+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,8 +35,7 @@ msgstr "{0}"
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
 #. placeholder {1}: board?.name ?? "Board"
 #. placeholder {1}: workspace.name ?? "Workspace"
-#: src/views/boards/index.tsx:29
-#: src/views/card/index.tsx:216
+#: src/views/boards/index.tsx:29 src/views/card/index.tsx:216
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
@@ -73,10 +77,9 @@ msgstr "Konto"
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:27
 msgid "Account deleted"
-msgstr "Konto usunięte"
+msgstr "Konto zostało usunięte"
 
-#: src/views/card/index.tsx:291
-#: src/views/public/board/CardModal.tsx:143
+#: src/views/card/index.tsx:291 src/views/public/board/CardModal.tsx:143
 msgid "Activity"
 msgstr "Aktywność"
 
@@ -335,7 +338,7 @@ msgstr "Adres URL tablicy nie może przekraczać 60 znaków"
 
 #: src/views/public/board/index.tsx:64
 msgid "Board URL copied to clipboard"
-msgstr "Adres URL tablicy skopiowany do schowka"
+msgstr "Adres URL tablicy został skopiowany do schowka"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:41
 msgid "Board URL must be at least 3 characters long"
@@ -348,7 +351,7 @@ msgstr "Widoczność tablicy"
 
 #: src/views/board/components/VisibilityButton.tsx:45
 msgid "Board visibility updated"
-msgstr "Widoczność tablicy zaktualizowana"
+msgstr "Widoczność tablicy została zaktualizowana"
 
 #: src/components/SideNavigation.tsx:70
 msgid "Boards"
@@ -383,7 +386,7 @@ msgstr "Anuluj"
 
 #: src/views/card/index.tsx:262
 msgid "Card not found"
-msgstr "Karta nie znaleziona"
+msgstr "Nie można było znaleźć karty"
 
 #: src/views/board/components/NewCardForm.tsx:309
 msgid "Card title"
@@ -400,8 +403,7 @@ msgstr "Zmień hasło"
 msgid "Change your language preferences."
 msgstr "Zmień swoje preferencje językowe."
 
-#: src/views/auth/login/index.tsx:43
-#: src/views/auth/signup/index.tsx:69
+#: src/views/auth/login/index.tsx:43 src/views/auth/signup/index.tsx:69
 msgid "Check your inbox"
 msgstr "Sprawdź swoją skrzynkę odbiorczą"
 
@@ -418,8 +420,7 @@ msgstr "Listy kontrolne"
 msgid "Clear filters"
 msgstr "Wyczyść filtry"
 
-#: src/views/auth/login/index.tsx:48
-#: src/views/auth/signup/index.tsx:74
+#: src/views/auth/login/index.tsx:48 src/views/auth/signup/index.tsx:74
 msgid "Click on the link we've sent to {magicLinkRecipient} to sign in."
 msgstr "Kliknij w link, który wysłaliśmy na {magicLinkRecipient}, aby się zalogować."
 
@@ -579,8 +580,7 @@ msgstr "Utwórz nową listę"
 msgid "Create template"
 msgstr "Utwórz szablon"
 
-#: src/components/NewWorkspaceForm.tsx:384
-#: src/components/WorkspaceMenu.tsx:149
+#: src/components/NewWorkspaceForm.tsx:384 src/components/WorkspaceMenu.tsx:149
 msgid "Create workspace"
 msgstr "Utwórz przestrzeń roboczą"
 
@@ -893,7 +893,7 @@ msgstr "Wszystko w darmowym planie, plus:"
 #: src/views/pricing/components/Pricing.tsx:33
 #: src/views/pricing/components/PricingTiers.tsx:31
 msgid "Everything you need, free forever. Unlimited boards, unlimited lists, unlimited cards. Upgrade any time."
-msgstr "Wszystko, czego potrzebujesz, za darmo na zawsze. Nieograniczone tablice, nieograniczone listy, nieograniczone karty. Możesz zaktualizować w dowolnym momencie."
+msgstr "Wszystko, czego potrzebujesz, za darmo na zawsze. Nielimitowane tablice, nieograniczone listy i nieograniczone karty. Możesz ulepszyć w dowolnym momencie."
 
 #: src/views/boards/components/TemplateBoards.tsx:79
 msgid "Execution"
@@ -924,7 +924,7 @@ msgstr "FAQ"
 #: src/views/home/components/Faqs.tsx:143
 #: src/views/home/components/Footer.tsx:51
 msgid "FAQs"
-msgstr "FAQ"
+msgstr "Pytania i Odpowiedzi"
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:168
 msgid "Fast & lightweight"
@@ -951,8 +951,7 @@ msgstr "Prośba o funkcję"
 msgid "Features"
 msgstr "Funkcje"
 
-#: src/components/FeedbackModal.tsx:59
-#: src/components/UserMenu.tsx:199
+#: src/components/FeedbackModal.tsx:59 src/components/UserMenu.tsx:199
 msgid "Feedback"
 msgstr "Opinie"
 
@@ -970,7 +969,7 @@ msgstr "Znajdź odpowiedzi na często zadawane pytania dotyczące projektu. Nie 
 
 #: src/views/home/components/Faqs.tsx:41
 msgid "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users (free during the beta) and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge."
-msgstr "Dla długoterminowej trwałości uznajemy, że wszystkie dobre projekty open source potrzebują źródła dochodu. Nasze pochodzi z płatnej oferty chmurowej dla przestrzeni roboczych z wieloma użytkownikami (bezpłatne podczas wersji beta) oraz dla niestandardowych nazw przestrzeni roboczych. Nie ma obowiązku korzystania z niej, a oprogramowanie można hostować samodzielnie na własnej infrastrukturze bez opłat."
+msgstr "Na rzecz długotrwałego rozwoju i utrzymania projektu uznaliśmy, że wszystkie dobre projekty otwartoźródłowe potrzebują źródła dochodu. Nasze środki pochodzą z płatnej oferty chmurowej dla przestrzeni roboczych z wieloma użytkownikami (bezpłatne podczas wersji beta) oraz dla niestandardowych nazw przestrzeni roboczych. Nie ma obowiązku korzystania z niej, a oprogramowanie można hostować samodzielnie na własnej infrastrukturze bez opłat i bez limitów."
 
 #: src/views/pricing/components/Pricing.tsx:32
 #: src/views/pricing/components/PricingTiers.tsx:30
@@ -1022,8 +1021,7 @@ msgstr "Rozpocznij, tworząc nową listę"
 msgid "Get started for free today"
 msgstr "Rozpocznij za darmo już dziś"
 
-#: src/views/pricing/components/Pricing.tsx:92
-#: src/views/pricing/index.tsx:46
+#: src/views/pricing/components/Pricing.tsx:92 src/views/pricing/index.tsx:46
 msgid "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team."
 msgstr "Rozpocznij za darmo, bez ograniczeń użytkowania. Aby współpracować, przejdź na plan dopasowany do wielkości Twojego zespołu."
 
@@ -1183,7 +1181,7 @@ msgstr "Linki zaproszeń"
 
 #: src/views/members/components/InviteMemberForm.tsx:123
 msgid "Invite links require a Team or Pro subscription. Please upgrade your workspace."
-msgstr "Linki zaproszeń wymagają subskrypcji Team lub Pro. Proszę zaktualizować swoje środowisko pracy."
+msgstr "Linki zaproszeń wymagają subskrypcji Team lub Pro. Proszę ulepszyć swoje środowisko pracy."
 
 #: src/views/card/components/MemberSelector.tsx:111
 #: src/views/members/components/InviteMemberForm.tsx:365
@@ -1192,10 +1190,9 @@ msgstr "Zaproś członka"
 
 #: src/views/members/components/InviteMemberForm.tsx:329
 msgid "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace."
-msgstr "Zapraszanie członków wymaga planu Team. Zostaniesz przekierowany, aby zaktualizować swoje środowisko pracy."
+msgstr "Zapraszanie członków wymaga planu Team. Zostaniesz przekierowany, aby ulepszyć swoje środowisko pracy."
 
-#: src/views/invite/index.tsx:79
-#: src/views/invite/index.tsx:129
+#: src/views/invite/index.tsx:79 src/views/invite/index.tsx:129
 msgid "Join workspace"
 msgstr "Dołącz do środowiska pracy"
 
@@ -1221,7 +1218,7 @@ msgstr "Kanban jest lepszy w zespole. Idealny dla małych i rozwijających się 
 
 #: src/views/home/components/Features.tsx:136
 msgid "Kanban reimagined"
-msgstr "Kanban na nowo"
+msgstr "Kanban wymyślony na nowo"
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:57
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:67
@@ -1229,8 +1226,7 @@ msgid "Keep in mind that this action is irreversible."
 msgstr "Pamiętaj, że ta akcja jest nieodwracalna."
 
 #: src/views/board/components/Filters.tsx:101
-#: src/views/board/components/NewCardForm.tsx:408
-#: src/views/card/index.tsx:117
+#: src/views/board/components/NewCardForm.tsx:408 src/views/card/index.tsx:117
 msgid "Labels"
 msgstr "Etykiety"
 
@@ -1327,8 +1323,7 @@ msgstr "Średni priorytet"
 
 #: src/components/SideNavigation.tsx:80
 #: src/views/board/components/Filters.tsx:93
-#: src/views/board/components/NewCardForm.tsx:366
-#: src/views/card/index.tsx:126
+#: src/views/board/components/NewCardForm.tsx:366 src/views/card/index.tsx:126
 #: src/views/members/index.tsx:179
 msgid "Members"
 msgstr "Członkowie"
@@ -1338,8 +1333,7 @@ msgstr "Członkowie"
 msgid "Members | {0}"
 msgstr "Członkowie | {0}"
 
-#: src/views/pricing/components/Pricing.tsx:14
-#: src/views/pricing/index.tsx:19
+#: src/views/pricing/components/Pricing.tsx:14 src/views/pricing/index.tsx:19
 msgid "Monthly"
 msgstr "Miesięcznie"
 
@@ -1367,8 +1361,7 @@ msgstr "Nazwa"
 msgid "Need help?"
 msgstr "Potrzebujesz pomocy?"
 
-#: src/views/boards/index.tsx:57
-#: src/views/home/components/Features.tsx:73
+#: src/views/boards/index.tsx:57 src/views/home/components/Features.tsx:73
 msgid "New"
 msgstr "Nowy"
 
@@ -1397,8 +1390,7 @@ msgstr "Nowy import"
 msgid "New label"
 msgstr "Nowa etykieta"
 
-#: src/views/board/components/NewListForm.tsx:112
-#: src/views/board/index.tsx:439
+#: src/views/board/components/NewListForm.tsx:112 src/views/board/index.tsx:439
 msgid "New list"
 msgstr "Nowa lista"
 
@@ -1416,7 +1408,7 @@ msgstr "Nowy szablon"
 
 #: src/views/boards/components/TemplateBoards.tsx:44
 msgid "New Ticket"
-msgstr "Nowy bilet"
+msgstr "Nowe zgłoszenie"
 
 #: src/components/NewWorkspaceForm.tsx:240
 msgid "New workspace"
@@ -1469,7 +1461,7 @@ msgstr "Po usunięciu przestrzeni roboczej nie będzie możliwości jej przywró
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:150
 msgid "Open source"
-msgstr "Open source"
+msgstr "Otwartoźródłowe"
 
 #: src/components/AuthForm.tsx:365
 msgid "or"
@@ -1482,7 +1474,7 @@ msgstr "Organizuj i znajduj karty szybko dzięki zaawansowanym narzędziom filtr
 #: src/views/pricing/components/Pricing.tsx:73
 #: src/views/pricing/components/PricingTiers.tsx:70
 msgid "Own your data"
-msgstr "Zarządzaj swoimi danymi"
+msgstr "Ty posiadasz swoje dane"
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:174
 msgid "Owned by Atlassian"
@@ -1526,8 +1518,7 @@ msgid "Pending"
 msgstr "Oczekujące"
 
 #: src/views/pricing/components/Pricing.tsx:15
-#: src/views/pricing/components/Pricing.tsx:20
-#: src/views/pricing/index.tsx:20
+#: src/views/pricing/components/Pricing.tsx:20 src/views/pricing/index.tsx:20
 #: src/views/pricing/index.tsx:25
 msgid "per user/month"
 msgstr "na użytkownika/miesiąc"
@@ -1565,16 +1556,14 @@ msgid "Please select a file to upload."
 msgstr "Proszę wybrać plik do przesłania."
 
 #: src/components/DeleteLabelConfirmation.tsx:26
-#: src/components/FeedbackModal.tsx:41
-#: src/components/NewWorkspaceForm.tsx:155
+#: src/components/FeedbackModal.tsx:41 src/components/NewWorkspaceForm.tsx:155
 #: src/views/board/components/NewCardForm.tsx:176
 #: src/views/board/components/NewListForm.tsx:78
 #: src/views/board/components/NewTemplateForm.tsx:61
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:72
 #: src/views/board/components/VisibilityButton.tsx:53
-#: src/views/board/index.tsx:149
-#: src/views/board/index.tsx:205
+#: src/views/board/index.tsx:149 src/views/board/index.tsx:205
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/ChecklistItemRow.tsx:60
 #: src/views/card/components/ChecklistItemRow.tsx:88
@@ -1588,8 +1577,7 @@ msgstr "Proszę wybrać plik do przesłania."
 #: src/views/card/components/MemberSelector.tsx:79
 #: src/views/card/components/NewChecklistForm.tsx:70
 #: src/views/card/components/NewChecklistItemForm.tsx:89
-#: src/views/card/components/NewCommentForm.tsx:31
-#: src/views/card/index.tsx:175
+#: src/views/card/components/NewCommentForm.tsx:31 src/views/card/index.tsx:175
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:104
 #: src/views/members/components/InviteMemberForm.tsx:234
@@ -1730,7 +1718,7 @@ msgstr "Zasoby"
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:144
 msgid "REST API"
-msgstr "REST API"
+msgstr "API REST'owe"
 
 #: src/views/boards/components/TemplateBoards.tsx:80
 msgid "Review"
@@ -1740,7 +1728,7 @@ msgstr "Przegląd"
 #: src/views/home/components/Header.tsx:13
 #: src/views/home/components/Header.tsx:28
 msgid "Roadmap"
-msgstr "Mapa drogowa"
+msgstr "Plan ulepszeń"
 
 #: src/views/members/index.tsx:244
 msgid "Role"
@@ -1758,7 +1746,7 @@ msgstr "Zapisz"
 
 #: src/views/home/components/Features.tsx:116
 msgid "Save time with reusable board templates."
-msgstr "Oszczędzaj czas dzięki wielokrotnego użytku szablonom tablic."
+msgstr "Oszczędzaj czas przy tworzeniu powtarzalnych tablic dzięki szablonom."
 
 #: src/views/boards/components/TemplateBoards.tsx:64
 msgid "Screening"
@@ -1779,11 +1767,11 @@ msgstr "Wybierz źródło"
 #: src/views/pricing/components/Pricing.tsx:64
 #: src/views/pricing/components/PricingTiers.tsx:61
 msgid "Self Host"
-msgstr "Samodzielne hostowanie"
+msgstr "Hostuj samodzielnie"
 
 #: src/views/home/index.tsx:79
 msgid "Self host with Github"
-msgstr "Samodzielne hostowanie z Github"
+msgstr "Hostuj samodzielnie z Github"
 
 #: src/views/card/components/ActivityList.tsx:107
 msgid "self-assigned the card"
@@ -1801,8 +1789,7 @@ msgstr "Prześlij opinię"
 msgid "Senior"
 msgstr "Starszy"
 
-#: src/components/SettingsLayout.tsx:82
-#: src/components/SideNavigation.tsx:85
+#: src/components/SettingsLayout.tsx:82 src/components/SideNavigation.tsx:85
 msgid "Settings"
 msgstr "Ustawienia"
 
@@ -1838,8 +1825,7 @@ msgstr "Zaloguj się"
 msgid "Sign Up"
 msgstr "Zarejestruj się"
 
-#: src/views/auth/signup/index.tsx:34
-#: src/views/auth/signup/index.tsx:59
+#: src/views/auth/signup/index.tsx:34 src/views/auth/signup/index.tsx:59
 msgid "Sign up | kan.bn"
 msgstr "Zarejestruj się | kan.bn"
 
@@ -1855,8 +1841,7 @@ msgstr "Rejestracja jest obecnie wyłączona. Spróbuj ponownie później."
 msgid "Sign up with "
 msgstr "Zarejestruj się za pomocą "
 
-#: src/views/pricing/components/Pricing.tsx:89
-#: src/views/pricing/index.tsx:43
+#: src/views/pricing/components/Pricing.tsx:89 src/views/pricing/index.tsx:43
 msgid "Simple pricing"
 msgstr "Prosty cennik"
 
@@ -1880,8 +1865,7 @@ msgstr "Oznacz gwiazdką na Githubie"
 msgid "Subscription Required"
 msgstr "Wymagana subskrypcja"
 
-#: src/components/AuthForm.tsx:215
-#: src/components/AuthForm.tsx:232
+#: src/components/AuthForm.tsx:215 src/components/AuthForm.tsx:232
 msgid "Success"
 msgstr "Sukces"
 
@@ -1913,8 +1897,7 @@ msgstr "Plan zespołowy"
 msgid "Teams"
 msgstr "Zespoły"
 
-#: src/views/board/index.tsx:361
-#: src/views/board/index.tsx:396
+#: src/views/board/index.tsx:361 src/views/board/index.tsx:396
 msgid "Template"
 msgstr "Szablon"
 
@@ -1953,11 +1936,11 @@ msgstr "Wprowadzone obecne hasło jest nieprawidłowe."
 
 #: src/views/home/components/Faqs.tsx:33
 msgid "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
-msgstr "Główna różnica między Kan a Trello polega na tym, że Kan jest oprogramowaniem open source, co pozwala każdemu przeglądać, modyfikować i współtworzyć nasz kod. Nasza oferta w chmurze nie nakłada również żadnych ograniczeń na funkcje do użytku indywidualnego, podczas gdy Trello blokuje podstawowe funkcje, takie jak liczba tablic, które można utworzyć, za paywallem."
+msgstr "Główna różnica między Kan a Trello polega na tym, że Kan jest oprogramowaniem otwartoźródłowym, co pozwala każdemu przeglądać, modyfikować i współtworzyć nasz kod. Nasza oferta w chmurze nie nakłada również żadnych ograniczeń na funkcje do użytku indywidualnego, podczas gdy Trello blokuje podstawowe funkcje, takie jak liczba tablic, które można utworzyć, za dodatkowymi kosztami."
 
 #: src/views/home/index.tsx:63
 msgid "The open source <0/> alternative to Trello"
-msgstr "Alternatywa open source <0/> dla Trello"
+msgstr "Otwarta alternatywa <0/> dla Trello"
 
 #. placeholder {0}: isPublic ? "public" : "private"
 #: src/views/board/components/VisibilityButton.tsx:46
@@ -2107,8 +2090,7 @@ msgstr "Nie można zaktualizować adresu URL tablicy"
 msgid "Unable to update board visibility"
 msgstr "Nie można zaktualizować widoczności tablicy"
 
-#: src/views/board/index.tsx:204
-#: src/views/card/index.tsx:174
+#: src/views/board/index.tsx:204 src/views/card/index.tsx:174
 msgid "Unable to update card"
 msgstr "Nie można zaktualizować karty"
 
@@ -2128,8 +2110,7 @@ msgstr "Nie można zaktualizować komentarza"
 msgid "Unable to update labels"
 msgstr "Nie można zaktualizować etykiet"
 
-#: src/views/board/index.tsx:148
-#: src/views/card/components/ListSelector.tsx:51
+#: src/views/board/index.tsx:148 src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Nie można zaktualizować listy"
 
@@ -2220,11 +2201,11 @@ msgstr "Ulepsz"
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:52
 #: src/views/settings/WorkspaceSettings.tsx:89
 msgid "Upgrade to Pro"
-msgstr "Ulepsz do Pro"
+msgstr "Ulepsz do planu Pro"
 
 #: src/components/NewWorkspaceForm.tsx:369
 msgid "Upgrade to Pro ($29/month)"
-msgstr "Ulepsz do Pro (29 USD/miesiąc)"
+msgstr "Ulepsz do planu Pro (29 USD/miesiąc)"
 
 #: src/views/members/components/InviteMemberForm.tsx:357
 msgid "Upgrade to Team Plan"
@@ -2238,17 +2219,17 @@ msgstr "Pilne"
 #: src/components/NewWorkspaceForm.tsx:35
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
 msgid "URL can only contain letters, numbers, and hyphens"
-msgstr "URL może zawierać tylko litery, cyfry i myślniki"
+msgstr "Adres URL może zawierać tylko litery, cyfry i myślniki"
 
 #: src/components/NewWorkspaceForm.tsx:33
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:34
 msgid "URL cannot exceed 24 characters"
-msgstr "URL nie może przekraczać 24 znaków"
+msgstr "Adres URL nie może przekraczać 24 znaków"
 
 #: src/components/NewWorkspaceForm.tsx:31
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:32
 msgid "URL must be at least 3 characters long"
-msgstr "URL musi mieć co najmniej 3 znaki"
+msgstr "Adres URL musi mieć co najmniej 3 znaki"
 
 #: src/views/boards/components/NewBoardForm.tsx:154
 msgid "Use template"
@@ -2285,7 +2266,7 @@ msgstr "Tylko podgląd"
 
 #: src/views/home/components/Features.tsx:154
 msgid "View our roadmap."
-msgstr "Zobacz naszą mapę drogową."
+msgstr "Zobacz nasz plan ulepszeń."
 
 #: src/views/public/board/index.tsx:154
 msgid "View workspace"
@@ -2301,7 +2282,7 @@ msgstr "Używamy licencji <0>AGPL-3.0</0>."
 
 #: src/views/home/components/Features.tsx:152
 msgid "We're just getting started. "
-msgstr "Dopiero zaczynamy."
+msgstr "Dopiero zaczynamy. "
 
 #: src/views/auth/login/index.tsx:43
 msgid "Welcome back"
@@ -2309,7 +2290,7 @@ msgstr "Witamy ponownie"
 
 #: src/views/home/components/Faqs.tsx:91
 msgid "What license are you using?"
-msgstr "Jakiej licencji używasz?"
+msgstr "Jakiej licencji używacie?"
 
 #: src/views/home/components/Faqs.tsx:30
 msgid "What's the difference between Kan and Trello?"
@@ -2317,7 +2298,7 @@ msgstr "Jaka jest różnica między Kan a Trello?"
 
 #: src/views/home/components/Faqs.tsx:25
 msgid "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over time (and atlassification) it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello's simplicity, in open source."
-msgstr "Kiedy Trello zostało uruchomione w 2011 roku, zachwyciło wszystkich swoją starannie zaprojektowaną prostotą, ale z czasem (i atlassyfikacją) straciło swój urok i stało się czymś bliższym \"Jira Lite\". Ten projekt to nasza próba odzyskania oryginalnej magii prostoty Trello w wersji open source."
+msgstr "Kiedy Trello zostało uruchomione w 2011 roku, zachwyciło wszystkich swoją starannie zaprojektowaną prostotą, ale z czasem straciło swój urok i stało się czymś bliższym \"Jira Lite\". Ten projekt to nasza próba odzyskania oryginalnej magii prostoty Trello w wersji otwartoźródłowej ."
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:162
 msgid "White label"
@@ -2325,7 +2306,7 @@ msgstr "Biała etykieta"
 
 #: src/views/home/components/Faqs.tsx:22
 msgid "Why make an open source Trello?"
-msgstr "Dlaczego stworzyć Trello w wersji open source?"
+msgstr "Dlaczego próbujecie stworzyć Trello w wersji otwartoźródłowej?"
 
 #: src/components/SettingsLayout.tsx:39
 msgid "Workspace"
@@ -2398,8 +2379,7 @@ msgstr "workspace-url"
 msgid "Writing"
 msgstr "Pisanie"
 
-#: src/views/pricing/components/Pricing.tsx:19
-#: src/views/pricing/index.tsx:24
+#: src/views/pricing/components/Pricing.tsx:19 src/views/pricing/index.tsx:24
 msgid "Yearly"
 msgstr "Rocznie"
 
@@ -2473,7 +2453,7 @@ msgstr "Twoje konto Trello jest połączone."
 
 #: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:49
 msgid "Your workspace description has been updated."
-msgstr "Opis Twojego przestrzeni roboczej został zaktualizowany."
+msgstr "Opis twojej przestrzeni roboczej został zaktualizowany."
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:27
 msgid "Your workspace has been deleted."
@@ -2481,8 +2461,8 @@ msgstr "Twoja przestrzeń robocza została usunięta."
 
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:44
 msgid "Your workspace name has been updated."
-msgstr "Nazwa Twojej przestrzeni roboczej została zaktualizowana."
+msgstr "Nazwa twojej przestrzeni roboczej została zaktualizowana."
 
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:61
 msgid "Your workspace slug has been updated."
-msgstr "Slug Twojej przestrzeni roboczej został zaktualizowany."
+msgstr "Slug twojej przestrzeni roboczej został zaktualizowany."
