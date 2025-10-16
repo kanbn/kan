@@ -38,9 +38,17 @@ const Card = ({
 
   const progress =
     totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
-
+  console.log(labels[0]?.colourCode);
   return (
-    <div className="flex flex-col rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300">
+    <div
+      className={`flex flex-col rounded-md border-2 bg-neutral-50 px-3 py-2 text-sm text-neutral-900 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300`}
+      style={{
+        borderColor:
+          labels[0]?.name.toLowerCase() === "express"
+            ? labels[0]?.colourCode || "#00bbf0"
+            : "#fafafa",
+      }}
+    >
       <span>{title}</span>
       {labels.length || members.length ? (
         <div className="mt-2 flex flex-col justify-end">

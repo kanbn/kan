@@ -1,5 +1,6 @@
 import { Menu } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
+import { CgArrowDown } from "react-icons/cg";
 
 import CheckboxDropdown from "~/components/CheckboxDropdown";
 import { usePopup } from "~/providers/popup";
@@ -65,7 +66,7 @@ export default function ListSelector({
     <>
       {isLoading ? (
         <div className="flex w-full">
-          <div className="h-full w-[150px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
+          <div className="h-full w-[150px] animate-pulse rounded-[5px] border border-neutral-700 bg-light-300 dark:bg-dark-300" />
         </div>
       ) : (
         <CheckboxDropdown
@@ -79,7 +80,7 @@ export default function ListSelector({
           }}
           asChild
         >
-          <Menu.Button className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 py-1 pl-2 text-left text-sm text-neutral-900 hover:border-light-300 hover:bg-light-200 dark:border-dark-50 dark:text-dark-1000 dark:hover:border-dark-200 dark:hover:bg-dark-100">
+          <Menu.Button className="flex h-full w-full max-w-36 items-start justify-center gap-4 rounded-[5px] border-[1px] border-neutral-400 py-1 pl-2 text-left text-sm text-neutral-900 hover:border-light-300 hover:bg-light-200 dark:border-dark-50 dark:text-dark-1000 dark:hover:border-dark-200 dark:hover:bg-dark-100">
             {selectedList?.value}
           </Menu.Button>
         </CheckboxDropdown>

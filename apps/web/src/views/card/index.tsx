@@ -106,12 +106,12 @@ export function CardRightPanel() {
   return (
     <div className="h-full w-[360px] border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
       <div className="mb-4 flex w-full flex-row">
-        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
+        {/* <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
         <ListSelector
           cardPublicId={cardId ?? ""}
           lists={formattedLists}
           isLoading={!card}
-        />
+        /> */}
       </div>
       <div className="mb-4 flex w-full flex-row">
         <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Labels`}</p>
@@ -178,6 +178,13 @@ export default function CardPage() {
       await utils.card.byId.invalidate({ cardPublicId: cardId });
     },
   });
+
+  const formattedLists =
+    board?.lists.map((list) => ({
+      key: list.publicId,
+      value: list.name,
+      selected: list.publicId === card?.list.publicId,
+    })) ?? [];
 
   const { register, handleSubmit, setValue, watch } = useForm<any>({
     values: {
@@ -283,6 +290,12 @@ export default function CardPage() {
                           onChange={(e) => setValue("description", e)}
                           onBlur={() => handleSubmit(onSubmit)()}
                           workspaceMembers={board?.workspace.members ?? []}
+                        />
+                        <p className="pb-2">Mudar Status do pedido</p>
+                        <ListSelector
+                          cardPublicId={cardId ?? ""}
+                          lists={formattedLists}
+                          isLoading={!card}
                         />
                         {/* Laundry details section (read-only) */}
                         <div className="mb-4 mt-4 rounded-lg bg-neutral-100 p-4 shadow-sm dark:bg-neutral-800">
