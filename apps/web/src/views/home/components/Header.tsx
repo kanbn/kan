@@ -6,55 +6,83 @@ import { twMerge } from "tailwind-merge";
 import Button from "~/components/Button";
 
 const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = [
-    { label: t`Roadmap`, href: "/kan/roadmap", openInNewTab: true },
+  const desktopMenuItems = [
+    {
+      label: t`Roadmap`,
+      href: "/kan/roadmap",
+      openInNewTab: true,
+    },
     { label: t`Features`, href: "/#features" },
     { label: t`Pricing`, href: "/pricing" },
-    { label: t`Docs`, href: "https://docs.kan.bn", openInNewTab: true },
+    {
+      label: t`Docs`,
+      href: "https://docs.kan.bn",
+      openInNewTab: true,
+    },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const mobileMenuItems = [
+    {
+      label: t`Roadmap`,
+      href: "/kan/roadmap",
+      openInNewTab: true,
+      group: "Product",
+    },
+    { label: t`Features`, href: "/#features", group: "Product" },
+    { label: t`Pricing`, href: "/pricing", group: "Product" },
+    {
+      label: t`Documentation`,
+      href: "https://docs.kan.bn",
+      openInNewTab: true,
+      group: "Resources",
+    },
+    { label: t`FAQ`, href: "/#faq", group: "Resources" },
+    { label: t`Contact`, href: "mailto:support@kan.bn", group: "Resources" },
+  ];
+
+  // Group mobile menu items by their group property
+  const groupedMenuItems = mobileMenuItems.reduce(
+    (acc, item) => {
+      (acc[item.group] ??= []).push(item);
+      return acc;
+    },
+    {} as Record<string, typeof mobileMenuItems>,
+  );
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    document.body.style.overflow = !isMenuOpen ? "hidden" : "";
   };
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("overflow-hidden", isMenuOpen);
+    document.body.classList.toggle("overflow-hidden", isMenuOpen);
+    return () => {
+      document.documentElement.classList.remove("overflow-hidden");
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isMenuOpen]);
 
   return (
     <>
       <div
         className={twMerge(
-          "fixed z-50 m-auto flex w-full transition-all duration-500 lg:max-w-[1100px] lg:px-4 lg:pt-4",
+          "fixed z-50 flex w-full transition-all duration-500",
         )}
       >
-        <div
-          className={twMerge(
-            "m-auto flex h-[4rem] min-h-[4rem] w-full px-5 py-2 align-middle transition-all duration-500 lg:rounded-3xl lg:border lg:border-transparent",
-            isScrolled &&
-              "border-b border-light-300 bg-light-50/80 opacity-100 shadow-sm backdrop-blur-[10px] dark:border-dark-300 dark:bg-dark-50/90 lg:rounded-2xl lg:border",
-            !isScrolled && "bg-transparent opacity-90",
-          )}
-        >
-          <div className="flex w-full items-center justify-between lg:px-4">
+        <div className="flex h-[4rem] min-h-[4rem] w-full border-b border-light-300 bg-light-50/80 px-5 py-2 align-middle opacity-100 shadow-sm backdrop-blur-[10px] transition-all duration-500 dark:border-dark-300 dark:bg-dark-50/90">
+          <div className="mx-auto flex w-full max-w-[1100px] items-center justify-between lg:px-4">
             <div className="my-auto flex items-center justify-between">
               <Link href="/">
-                <h1 className="w-[200px] text-lg font-bold tracking-tight text-neutral-900 dark:text-dark-1000">
+                <h1 className="text-lg font-bold tracking-tight text-neutral-900 dark:text-dark-1000 lg:w-[200px]">
                   kan.bn
                 </h1>
               </Link>
             </div>
             {/* Desktop Menu */}
             <div className="hidden justify-center gap-10 dark:text-dark-1000 lg:flex">
-              {menuItems.map((item) => (
+              {desktopMenuItems.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
@@ -66,42 +94,38 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
                 </Link>
               ))}
             </div>
-            {/* Hamburger Menu Button */}
-            <button
-              onClick={toggleMenu}
-              className="z-50 p-2 lg:hidden"
-              aria-label={t`Toggle menu`}
-            >
-              <div
-                className={twMerge(
-                  "my-[5px] h-[2px] w-4 bg-current bg-light-1000 transition-all dark:bg-dark-1000",
-                  isMenuOpen ? "translate-y-[7px] rotate-45" : "",
+            <div className="flex items-center justify-end gap-4 lg:w-[200px]">
+              <div className="justify-end gap-2">
+                {isLoggedIn ? (
+                  <Button href="/boards">{t`Go to app`}</Button>
+                ) : (
+                  <div className="flex items-center justify-end gap-2">
+                    <Button href="/login" variant="ghost">
+                      {t`Sign in`}
+                    </Button>
+                    <Button href="/signup">{t`Get started`}</Button>
+                  </div>
                 )}
-              />
-              <div
-                className={twMerge(
-                  "my-[5px] ml-[4px] h-[2px] w-3 bg-current bg-light-1000 transition-all dark:bg-dark-1000",
-                  isMenuOpen ? "opacity-0" : "",
-                )}
-              />
-              <div
-                className={twMerge(
-                  "my-[5px] h-[2px] w-4 bg-current bg-light-1000 transition-all dark:bg-dark-1000",
-                  isMenuOpen ? "-translate-y-[7px] -rotate-45" : "",
-                )}
-              />
-            </button>
-            <div className="hidden w-[200px] justify-end gap-2 lg:flex">
-              {isLoggedIn ? (
-                <Button href="/boards">{t`Go to app`}</Button>
-              ) : (
-                <>
-                  <Button href="/login" variant="ghost">
-                    {t`Sign in`}
-                  </Button>
-                  <Button href="/signup">{t`Get started`}</Button>
-                </>
-              )}
+              </div>
+              {/* Hamburger Menu Button */}
+              <button
+                onClick={toggleMenu}
+                className="relative z-50 p-2 lg:hidden"
+                aria-label={t`Toggle menu`}
+              >
+                <div
+                  className={twMerge(
+                    "absolute left-1/2 top-1/2 h-[1px] w-4 -translate-x-1/2 -translate-y-[4px] bg-current bg-light-1000 transition-all duration-300 ease-in-out dark:bg-dark-1000",
+                    isMenuOpen ? "translate-y-0 rotate-45" : "",
+                  )}
+                />
+                <div
+                  className={twMerge(
+                    "absolute left-1/2 top-1/2 h-[1px] w-4 -translate-x-1/2 translate-y-[4px] bg-current bg-light-1000 transition-all duration-300 ease-in-out dark:bg-dark-1000",
+                    isMenuOpen ? "translate-y-0 -rotate-45" : "",
+                  )}
+                />
+              </button>
             </div>
           </div>
         </div>
@@ -114,35 +138,27 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
             : "pointer-events-none translate-x-0 opacity-0"
         }`}
       >
-        <div className="absolute inset-0 bg-white dark:bg-dark-100">
-          <div className="flex h-full flex-col items-center justify-center space-y-8">
-            {menuItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                target={item.openInNewTab ? "_blank" : undefined}
-                rel={item.openInNewTab ? "noopener noreferrer" : undefined}
-                className="transform text-xl font-bold text-light-1000 transition-all duration-300 hover:scale-105 dark:text-dark-1000"
-              >
-                {item.label}
-              </Link>
+        <div className="absolute inset-0 bg-light-50/80 bg-white backdrop-blur-[15px] dark:bg-dark-50 dark:bg-dark-50/90">
+          <div className="mt-[6rem] flex h-full flex-col space-y-8 px-5">
+            {Object.entries(groupedMenuItems).map(([group, items]) => (
+              <div key={group} className="flex flex-col space-y-4">
+                <div className="text-sm font-bold text-light-900 dark:text-dark-900">
+                  {group}
+                </div>
+                {items.map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    target={item.openInNewTab ? "_blank" : undefined}
+                    rel={item.openInNewTab ? "noopener noreferrer" : undefined}
+                    className="transform text-lg font-bold text-light-1000 dark:text-dark-1000"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
             ))}
-            <div className="mt-8 flex flex-col gap-4">
-              {isLoggedIn ? (
-                <Button href="/boards" onClick={toggleMenu}>
-                  {t`Go to app`}
-                </Button>
-              ) : (
-                <>
-                  <Button href="/login" variant="ghost" onClick={toggleMenu}>
-                    {t`Sign in`}
-                  </Button>
-                  <Button href="/signup" onClick={toggleMenu}>
-                    {t`Get started`}
-                  </Button>
-                </>
-              )}
-            </div>
           </div>
         </div>
       </div>
