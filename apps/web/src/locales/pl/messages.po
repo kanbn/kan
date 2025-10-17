@@ -6,6 +6,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: pl\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/views/card/components/Comment.tsx:123
 msgid " (edited)"
@@ -256,7 +262,7 @@ msgstr "Czy na pewno chcesz usunąć swoje konto?"
 msgid "assigned <0>{0}</0> to the card"
 msgstr "przypisano <0>{0}</0> do karty"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:127
+#: src/views/pricing/components/FeatureComparisonTable.tsx:121
 msgid "Assignees"
 msgstr "Osoby przypisane"
 
@@ -315,7 +321,7 @@ msgstr "Nazwa tablicy jest wymagana"
 msgid "Board not found"
 msgstr "Tablica nie została znaleziona"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:133
+#: src/views/pricing/components/FeatureComparisonTable.tsx:127
 msgid "Board sharing & invites"
 msgstr "Udostępnianie tablicy i zaproszenia"
 
@@ -439,7 +445,7 @@ msgstr "Już wkrótce"
 msgid "Comments"
 msgstr "Komentarze"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:121
+#: src/views/pricing/components/FeatureComparisonTable.tsx:115
 msgid "Comments & mentions"
 msgstr "Komentarze i wzmianki"
 
@@ -487,6 +493,7 @@ msgid "Connect your Trello account to import boards."
 msgstr "Połącz swoje konto Trello, aby zaimportować tablice."
 
 #: src/views/home/components/Footer.tsx:38
+#: src/views/home/components/Header.tsx:42
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -726,13 +733,14 @@ msgstr "Czy oferujecie darmowy plan?"
 msgid "docs"
 msgstr "dokumentacja"
 
-#: src/views/home/components/Header.tsx:16
+#: src/views/home/components/Header.tsx:20
 msgid "Docs"
 msgstr "Dokumentacja"
 
 #: src/components/UserMenu.tsx:191
 #: src/views/boards/components/TemplateBoards.tsx:24
 #: src/views/home/components/Footer.tsx:77
+#: src/views/home/components/Header.tsx:36
 msgid "Documentation"
 msgstr "Dokumentacja"
 
@@ -909,12 +917,16 @@ msgstr "Nie udało się utworzyć tablicy"
 msgid "Failed to login with {0}. Please try again."
 msgstr "Nie udało się zalogować za pomocą {0}. Spróbuj ponownie."
 
+#: src/views/home/components/Header.tsx:41
+msgid "FAQ"
+msgstr "FAQ"
+
 #: src/views/home/components/Faqs.tsx:143
 #: src/views/home/components/Footer.tsx:51
 msgid "FAQs"
 msgstr "FAQ"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:174
+#: src/views/pricing/components/FeatureComparisonTable.tsx:168
 msgid "Fast & lightweight"
 msgstr "Szybki i lekki"
 
@@ -933,7 +945,8 @@ msgstr "Prośba o funkcję"
 
 #: src/views/home/components/Features.tsx:132
 #: src/views/home/components/Footer.tsx:49
-#: src/views/home/components/Header.tsx:14
+#: src/views/home/components/Header.tsx:17
+#: src/views/home/components/Header.tsx:33
 #: src/views/pricing/index.tsx:58
 msgid "Features"
 msgstr "Funkcje"
@@ -984,8 +997,7 @@ msgstr "Zabawa"
 
 #: src/views/auth/signup/index.tsx:69
 #: src/views/home/components/Cta.tsx:61
-#: src/views/home/components/Header.tsx:102
-#: src/views/home/components/Header.tsx:141
+#: src/views/home/components/Header.tsx:106
 #: src/views/pricing/index.tsx:69
 msgid "Get started"
 msgstr "Rozpocznij"
@@ -1031,8 +1043,7 @@ msgstr "GitHub"
 msgid "Go Home"
 msgstr "Wróć do strony głównej"
 
-#: src/views/home/components/Header.tsx:96
-#: src/views/home/components/Header.tsx:133
+#: src/views/home/components/Header.tsx:100
 #: src/views/invite/index.tsx:144
 msgid "Go to app"
 msgstr "Przejdź do aplikacji"
@@ -1166,7 +1177,7 @@ msgstr "Link zaproszenia skopiowany"
 msgid "Invite link copied to clipboard"
 msgstr "Link zaproszenia skopiowany do schowka"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:139
+#: src/views/pricing/components/FeatureComparisonTable.tsx:133
 msgid "Invite links"
 msgstr "Linki zaproszeń"
 
@@ -1456,7 +1467,7 @@ msgstr "Po usunięciu konta nie będzie możliwości jego przywrócenia. Tej ope
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Po usunięciu przestrzeni roboczej nie będzie możliwości jej przywrócenia. Tej operacji nie można cofnąć."
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:156
+#: src/views/pricing/components/FeatureComparisonTable.tsx:150
 msgid "Open source"
 msgstr "Open source"
 
@@ -1473,7 +1484,7 @@ msgstr "Organizuj i znajduj karty szybko dzięki zaawansowanym narzędziom filtr
 msgid "Own your data"
 msgstr "Zarządzaj swoimi danymi"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:104
+#: src/views/pricing/components/FeatureComparisonTable.tsx:174
 msgid "Owned by Atlassian"
 msgstr "Należy do Atlassian"
 
@@ -1529,7 +1540,7 @@ msgstr "Projekt osobisty"
 msgid "Planning"
 msgstr "Planowanie"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:146
+#: src/views/pricing/components/FeatureComparisonTable.tsx:140
 msgid "Platform"
 msgstr "Platforma"
 
@@ -1599,12 +1610,13 @@ msgstr "Proszę spróbować ponownie później lub skontaktować się z obsług�
 msgid "Please try again later."
 msgstr "Proszę spróbować ponownie później."
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:115
+#: src/views/pricing/components/FeatureComparisonTable.tsx:109
 msgid "Price per user/month"
 msgstr "Cena za użytkownika/miesiąc"
 
 #: src/views/home/components/Footer.tsx:50
-#: src/views/home/components/Header.tsx:15
+#: src/views/home/components/Header.tsx:18
+#: src/views/home/components/Header.tsx:34
 #: src/views/pricing/components/Pricing.tsx:85
 #: src/views/pricing/index.tsx:33
 #: src/views/pricing/index.tsx:39
@@ -1716,7 +1728,7 @@ msgstr "Rezolucja"
 msgid "Resources"
 msgstr "Zasoby"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:150
+#: src/views/pricing/components/FeatureComparisonTable.tsx:144
 msgid "REST API"
 msgstr "REST API"
 
@@ -1726,6 +1738,7 @@ msgstr "Przegląd"
 
 #: src/views/home/components/Footer.tsx:36
 #: src/views/home/components/Header.tsx:13
+#: src/views/home/components/Header.tsx:28
 msgid "Roadmap"
 msgstr "Mapa drogowa"
 
@@ -1776,7 +1789,7 @@ msgstr "Samodzielne hostowanie z Github"
 msgid "self-assigned the card"
 msgstr "przypisał(a) sobie kartę"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:162
+#: src/views/pricing/components/FeatureComparisonTable.tsx:156
 msgid "Self-hostable"
 msgstr "Samodzielnie hostowalne"
 
@@ -1813,8 +1826,7 @@ msgstr "Ustawienia | Integracje"
 msgid "Settings | Workspace"
 msgstr "Ustawienia | Obszar roboczy"
 
-#: src/views/home/components/Header.tsx:100
-#: src/views/home/components/Header.tsx:138
+#: src/views/home/components/Header.tsx:104
 msgid "Sign in"
 msgstr "Zaloguj się"
 
@@ -1895,7 +1907,7 @@ msgstr "System"
 msgid "Team Plan"
 msgstr "Plan zespołowy"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:111
+#: src/views/pricing/components/FeatureComparisonTable.tsx:105
 #: src/views/pricing/components/Pricing.tsx:46
 #: src/views/pricing/components/PricingTiers.tsx:43
 msgid "Teams"
@@ -2009,7 +2021,7 @@ msgstr "Ta nazwa użytkownika obszaru roboczego jest już zajęta"
 msgid "To Do"
 msgstr "Do zrobienia"
 
-#: src/views/home/components/Header.tsx:73
+#: src/views/home/components/Header.tsx:114
 msgid "Toggle menu"
 msgstr "Przełącz menu"
 
@@ -2307,7 +2319,7 @@ msgstr "Jaka jest różnica między Kan a Trello?"
 msgid "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over time (and atlassification) it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello's simplicity, in open source."
 msgstr "Kiedy Trello zostało uruchomione w 2011 roku, zachwyciło wszystkich swoją starannie zaprojektowaną prostotą, ale z czasem (i atlassyfikacją) straciło swój urok i stało się czymś bliższym \"Jira Lite\". Ten projekt to nasza próba odzyskania oryginalnej magii prostoty Trello w wersji open source."
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:168
+#: src/views/pricing/components/FeatureComparisonTable.tsx:162
 msgid "White label"
 msgstr "Biała etykieta"
 

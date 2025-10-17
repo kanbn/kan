@@ -262,7 +262,7 @@ msgstr "Weet je zeker dat je je account wilt verwijderen?"
 msgid "assigned <0>{0}</0> to the card"
 msgstr "heeft <0>{0}</0> aan de kaart toegewezen"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:127
+#: src/views/pricing/components/FeatureComparisonTable.tsx:121
 msgid "Assignees"
 msgstr "Toegewezen personen"
 
@@ -321,7 +321,7 @@ msgstr "Bordnaam is verplicht"
 msgid "Board not found"
 msgstr "Bord niet gevonden"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:133
+#: src/views/pricing/components/FeatureComparisonTable.tsx:127
 msgid "Board sharing & invites"
 msgstr "Bord delen & uitnodigingen"
 
@@ -445,7 +445,7 @@ msgstr "Binnenkort beschikbaar"
 msgid "Comments"
 msgstr "Opmerkingen"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:121
+#: src/views/pricing/components/FeatureComparisonTable.tsx:115
 msgid "Comments & mentions"
 msgstr "Opmerkingen & vermeldingen"
 
@@ -493,6 +493,7 @@ msgid "Connect your Trello account to import boards."
 msgstr "Verbind je Trello-account om borden te importeren."
 
 #: src/views/home/components/Footer.tsx:38
+#: src/views/home/components/Header.tsx:42
 msgid "Contact"
 msgstr "Contact"
 
@@ -732,13 +733,14 @@ msgstr "Bieden jullie een gratis abonnement aan?"
 msgid "docs"
 msgstr "docs"
 
-#: src/views/home/components/Header.tsx:16
+#: src/views/home/components/Header.tsx:20
 msgid "Docs"
 msgstr "Docs"
 
 #: src/components/UserMenu.tsx:191
 #: src/views/boards/components/TemplateBoards.tsx:24
 #: src/views/home/components/Footer.tsx:77
+#: src/views/home/components/Header.tsx:36
 msgid "Documentation"
 msgstr "Documentatie"
 
@@ -915,12 +917,16 @@ msgstr "Bord maken mislukt"
 msgid "Failed to login with {0}. Please try again."
 msgstr "Inloggen met {0} is mislukt. Probeer het opnieuw."
 
+#: src/views/home/components/Header.tsx:41
+msgid "FAQ"
+msgstr "FAQ"
+
 #: src/views/home/components/Faqs.tsx:143
 #: src/views/home/components/Footer.tsx:51
 msgid "FAQs"
 msgstr "Veelgestelde vragen"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:174
+#: src/views/pricing/components/FeatureComparisonTable.tsx:168
 msgid "Fast & lightweight"
 msgstr "Snel & lichtgewicht"
 
@@ -939,7 +945,8 @@ msgstr "Functieverzoek"
 
 #: src/views/home/components/Features.tsx:132
 #: src/views/home/components/Footer.tsx:49
-#: src/views/home/components/Header.tsx:14
+#: src/views/home/components/Header.tsx:17
+#: src/views/home/components/Header.tsx:33
 #: src/views/pricing/index.tsx:58
 msgid "Features"
 msgstr "Functies"
@@ -990,8 +997,7 @@ msgstr "Leuk"
 
 #: src/views/auth/signup/index.tsx:69
 #: src/views/home/components/Cta.tsx:61
-#: src/views/home/components/Header.tsx:102
-#: src/views/home/components/Header.tsx:141
+#: src/views/home/components/Header.tsx:106
 #: src/views/pricing/index.tsx:69
 msgid "Get started"
 msgstr "Aan de slag"
@@ -1037,8 +1043,7 @@ msgstr "GitHub"
 msgid "Go Home"
 msgstr "Naar startpagina"
 
-#: src/views/home/components/Header.tsx:96
-#: src/views/home/components/Header.tsx:133
+#: src/views/home/components/Header.tsx:100
 #: src/views/invite/index.tsx:144
 msgid "Go to app"
 msgstr "Naar de app"
@@ -1172,7 +1177,7 @@ msgstr "Uitnodigingslink gekopieerd"
 msgid "Invite link copied to clipboard"
 msgstr "Uitnodigingslink gekopieerd naar klembord"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:139
+#: src/views/pricing/components/FeatureComparisonTable.tsx:133
 msgid "Invite links"
 msgstr "Uitnodigingslinks"
 
@@ -1462,7 +1467,7 @@ msgstr "Zodra je je account verwijdert, is er geen weg terug. Deze actie kan nie
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Zodra je je werkruimte verwijdert, is er geen weg terug. Deze actie kan niet ongedaan worden gemaakt."
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:156
+#: src/views/pricing/components/FeatureComparisonTable.tsx:150
 msgid "Open source"
 msgstr "Open source"
 
@@ -1479,7 +1484,7 @@ msgstr "Organiseer en vind kaarten snel met krachtige filtertools."
 msgid "Own your data"
 msgstr "Bezit je eigen data"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:104
+#: src/views/pricing/components/FeatureComparisonTable.tsx:174
 msgid "Owned by Atlassian"
 msgstr "Eigendom van Atlassian"
 
@@ -1535,7 +1540,7 @@ msgstr "Persoonlijk project"
 msgid "Planning"
 msgstr "Planning"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:146
+#: src/views/pricing/components/FeatureComparisonTable.tsx:140
 msgid "Platform"
 msgstr "Platform"
 
@@ -1605,12 +1610,13 @@ msgstr "Probeer het later opnieuw of neem contact op met de klantenservice."
 msgid "Please try again later."
 msgstr "Probeer het later opnieuw."
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:115
+#: src/views/pricing/components/FeatureComparisonTable.tsx:109
 msgid "Price per user/month"
 msgstr "Prijs per gebruiker/maand"
 
 #: src/views/home/components/Footer.tsx:50
-#: src/views/home/components/Header.tsx:15
+#: src/views/home/components/Header.tsx:18
+#: src/views/home/components/Header.tsx:34
 #: src/views/pricing/components/Pricing.tsx:85
 #: src/views/pricing/index.tsx:33
 #: src/views/pricing/index.tsx:39
@@ -1722,7 +1728,7 @@ msgstr "Oplossing"
 msgid "Resources"
 msgstr "Bronnen"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:150
+#: src/views/pricing/components/FeatureComparisonTable.tsx:144
 msgid "REST API"
 msgstr "REST API"
 
@@ -1732,6 +1738,7 @@ msgstr "Beoordeling"
 
 #: src/views/home/components/Footer.tsx:36
 #: src/views/home/components/Header.tsx:13
+#: src/views/home/components/Header.tsx:28
 msgid "Roadmap"
 msgstr "Roadmap"
 
@@ -1782,7 +1789,7 @@ msgstr "Zelf hosten met Github"
 msgid "self-assigned the card"
 msgstr "heeft de kaart aan zichzelf toegewezen"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:162
+#: src/views/pricing/components/FeatureComparisonTable.tsx:156
 msgid "Self-hostable"
 msgstr "Zelf te hosten"
 
@@ -1819,8 +1826,7 @@ msgstr "Instellingen | Integraties"
 msgid "Settings | Workspace"
 msgstr "Instellingen | Werkruimte"
 
-#: src/views/home/components/Header.tsx:100
-#: src/views/home/components/Header.tsx:138
+#: src/views/home/components/Header.tsx:104
 msgid "Sign in"
 msgstr "Inloggen"
 
@@ -1901,7 +1907,7 @@ msgstr "Systeem"
 msgid "Team Plan"
 msgstr "Teamplan"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:111
+#: src/views/pricing/components/FeatureComparisonTable.tsx:105
 #: src/views/pricing/components/Pricing.tsx:46
 #: src/views/pricing/components/PricingTiers.tsx:43
 msgid "Teams"
@@ -2015,7 +2021,7 @@ msgstr "Deze werkruimtegebruikersnaam is al in gebruik"
 msgid "To Do"
 msgstr "Te doen"
 
-#: src/views/home/components/Header.tsx:73
+#: src/views/home/components/Header.tsx:114
 msgid "Toggle menu"
 msgstr "Menu in-/uitschakelen"
 
@@ -2313,7 +2319,7 @@ msgstr "Wat is het verschil tussen Kan en Trello?"
 msgid "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over time (and atlassification) it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello's simplicity, in open source."
 msgstr "Toen Trello in 2011 werd gelanceerd, blies het iedereen omver met zijn zorgvuldig ontworpen eenvoud, maar na verloop van tijd (en atlassificatie) verloor het zijn magie en groeide het uit tot iets dat meer leek op \"Jira Lite\". Dit project is onze poging om de oorspronkelijke magie van Trello's eenvoud terug te brengen, in open source."
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:168
+#: src/views/pricing/components/FeatureComparisonTable.tsx:162
 msgid "White label"
 msgstr "White label"
 

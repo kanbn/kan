@@ -294,7 +294,7 @@ msgstr "assigned <0>{0}</0> to the card"
 #~ msgid "assigned <0>{memberName}</0> to the card"
 #~ msgstr "assigned <0>{memberName}</0> to the card"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:127
+#: src/views/pricing/components/FeatureComparisonTable.tsx:121
 msgid "Assignees"
 msgstr "Assignees"
 
@@ -366,7 +366,7 @@ msgstr "Board name is required"
 msgid "Board not found"
 msgstr "Board not found"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:133
+#: src/views/pricing/components/FeatureComparisonTable.tsx:127
 msgid "Board sharing & invites"
 msgstr "Board sharing & invites"
 
@@ -502,7 +502,7 @@ msgstr "Coming soon"
 msgid "Comments"
 msgstr "Comments"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:121
+#: src/views/pricing/components/FeatureComparisonTable.tsx:115
 msgid "Comments & mentions"
 msgstr "Comments & mentions"
 
@@ -554,6 +554,7 @@ msgid "Connect your Trello account to import boards."
 msgstr "Connect your Trello account to import boards."
 
 #: src/views/home/components/Footer.tsx:38
+#: src/views/home/components/Header.tsx:42
 msgid "Contact"
 msgstr "Contact"
 
@@ -817,13 +818,14 @@ msgstr "Do you offer a free plan?"
 msgid "docs"
 msgstr "docs"
 
-#: src/views/home/components/Header.tsx:16
+#: src/views/home/components/Header.tsx:20
 msgid "Docs"
 msgstr "Docs"
 
 #: src/components/UserMenu.tsx:191
 #: src/views/boards/components/TemplateBoards.tsx:24
 #: src/views/home/components/Footer.tsx:77
+#: src/views/home/components/Header.tsx:36
 msgid "Documentation"
 msgstr "Documentation"
 
@@ -1000,12 +1002,16 @@ msgstr "Failed to create board"
 msgid "Failed to login with {0}. Please try again."
 msgstr "Failed to login with {0}. Please try again."
 
+#: src/views/home/components/Header.tsx:41
+msgid "FAQ"
+msgstr "FAQ"
+
 #: src/views/home/components/Faqs.tsx:143
 #: src/views/home/components/Footer.tsx:51
 msgid "FAQs"
 msgstr "FAQs"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:174
+#: src/views/pricing/components/FeatureComparisonTable.tsx:168
 msgid "Fast & lightweight"
 msgstr "Fast & lightweight"
 
@@ -1024,7 +1030,8 @@ msgstr "Feature Request"
 
 #: src/views/home/components/Features.tsx:132
 #: src/views/home/components/Footer.tsx:49
-#: src/views/home/components/Header.tsx:14
+#: src/views/home/components/Header.tsx:17
+#: src/views/home/components/Header.tsx:33
 #: src/views/pricing/index.tsx:58
 msgid "Features"
 msgstr "Features"
@@ -1077,8 +1084,7 @@ msgstr "Fun"
 
 #: src/views/auth/signup/index.tsx:69
 #: src/views/home/components/Cta.tsx:61
-#: src/views/home/components/Header.tsx:102
-#: src/views/home/components/Header.tsx:141
+#: src/views/home/components/Header.tsx:106
 #: src/views/pricing/index.tsx:69
 msgid "Get started"
 msgstr "Get started"
@@ -1128,8 +1134,7 @@ msgstr "GitHub"
 msgid "Go Home"
 msgstr "Go Home"
 
-#: src/views/home/components/Header.tsx:96
-#: src/views/home/components/Header.tsx:133
+#: src/views/home/components/Header.tsx:100
 #: src/views/invite/index.tsx:144
 msgid "Go to app"
 msgstr "Go to app"
@@ -1271,7 +1276,7 @@ msgstr "Invite link copied"
 msgid "Invite link copied to clipboard"
 msgstr "Invite link copied to clipboard"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:139
+#: src/views/pricing/components/FeatureComparisonTable.tsx:133
 msgid "Invite links"
 msgstr "Invite links"
 
@@ -1581,7 +1586,7 @@ msgstr "Once you delete your account, there is no going back. This action cannot
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Once you delete your workspace, there is no going back. This action cannot be undone."
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:156
+#: src/views/pricing/components/FeatureComparisonTable.tsx:150
 msgid "Open source"
 msgstr "Open source"
 
@@ -1598,7 +1603,7 @@ msgstr "Organize and find cards quickly with powerful filtering tools."
 msgid "Own your data"
 msgstr "Own your data"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:104
+#: src/views/pricing/components/FeatureComparisonTable.tsx:174
 msgid "Owned by Atlassian"
 msgstr "Owned by Atlassian"
 
@@ -1654,7 +1659,7 @@ msgstr "Personal Project"
 msgid "Planning"
 msgstr "Planning"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:146
+#: src/views/pricing/components/FeatureComparisonTable.tsx:140
 msgid "Platform"
 msgstr "Platform"
 
@@ -1724,12 +1729,13 @@ msgstr "Please try again later, or contact customer support."
 msgid "Please try again later."
 msgstr "Please try again later."
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:115
+#: src/views/pricing/components/FeatureComparisonTable.tsx:109
 msgid "Price per user/month"
 msgstr "Price per user/month"
 
 #: src/views/home/components/Footer.tsx:50
-#: src/views/home/components/Header.tsx:15
+#: src/views/home/components/Header.tsx:18
+#: src/views/home/components/Header.tsx:34
 #: src/views/pricing/components/Pricing.tsx:85
 #: src/views/pricing/index.tsx:33
 #: src/views/pricing/index.tsx:39
@@ -1845,7 +1851,7 @@ msgstr "Resolution"
 msgid "Resources"
 msgstr "Resources"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:150
+#: src/views/pricing/components/FeatureComparisonTable.tsx:144
 msgid "REST API"
 msgstr "REST API"
 
@@ -1859,6 +1865,7 @@ msgstr "Review"
 
 #: src/views/home/components/Footer.tsx:36
 #: src/views/home/components/Header.tsx:13
+#: src/views/home/components/Header.tsx:28
 msgid "Roadmap"
 msgstr "Roadmap"
 
@@ -1909,7 +1916,7 @@ msgstr "Self host with Github"
 msgid "self-assigned the card"
 msgstr "self-assigned the card"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:162
+#: src/views/pricing/components/FeatureComparisonTable.tsx:156
 msgid "Self-hostable"
 msgstr "Self-hostable"
 
@@ -1958,8 +1965,7 @@ msgstr "Settings | Workspace"
 #~ msgid "Share invite link"
 #~ msgstr "Share invite link"
 
-#: src/views/home/components/Header.tsx:100
-#: src/views/home/components/Header.tsx:138
+#: src/views/home/components/Header.tsx:104
 msgid "Sign in"
 msgstr "Sign in"
 
@@ -2040,7 +2046,7 @@ msgstr "System"
 msgid "Team Plan"
 msgstr "Team Plan"
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:111
+#: src/views/pricing/components/FeatureComparisonTable.tsx:105
 #: src/views/pricing/components/Pricing.tsx:46
 #: src/views/pricing/components/PricingTiers.tsx:43
 msgid "Teams"
@@ -2158,7 +2164,7 @@ msgstr "To Do"
 #~ msgid "To Do, In Progress, Done"
 #~ msgstr "To Do, In Progress, Done"
 
-#: src/views/home/components/Header.tsx:73
+#: src/views/home/components/Header.tsx:114
 msgid "Toggle menu"
 msgstr "Toggle menu"
 
@@ -2468,7 +2474,7 @@ msgstr "When Trello launched in 2011, it blew everyone away with its carefully d
 #~ msgid "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over time (and atlassification) it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello’s simplicity, in open source."
 #~ msgstr "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over time (and atlassification) it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello’s simplicity, in open source."
 
-#: src/views/pricing/components/FeatureComparisonTable.tsx:168
+#: src/views/pricing/components/FeatureComparisonTable.tsx:162
 msgid "White label"
 msgstr "White label"
 
