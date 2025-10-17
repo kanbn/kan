@@ -240,7 +240,14 @@ export const initAuth = (db: dbClient) => {
           ]
         : []),
       // @todo: hasing is disabled due to a bug in the api key plugin
-      apiKey({ disableKeyHashing: true }),
+      apiKey({
+        disableKeyHashing: true,
+        rateLimit: {
+          enabled: true,
+          timeWindow: 1000 * 60, // 1 minute
+          maxRequests: 100, // 100 requests per minute
+        },
+      }),
       magicLink({
         expiresIn: 60 * 60 * 24 * 7, // 7 days
         sendMagicLink: async ({ email, url }) => {
