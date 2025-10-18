@@ -10,6 +10,7 @@ import {
   cardToWorkspaceMembers,
   checklistItems,
   checklists,
+  comments,
   labels,
   lists,
   workspaceMembers,
@@ -214,6 +215,12 @@ export const getByPublicId = async (
                     orderBy: asc(checklistItems.index),
                   },
                 },
+              },
+              comments: {
+                columns: {
+                  publicId: true,
+                },
+                where: isNull(comments.deletedAt),
               },
             },
             where: and(

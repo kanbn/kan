@@ -546,6 +546,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                             labels={card.labels}
                                             members={card.members}
                                             checklists={card.checklists ?? []}
+                                            description={card.description ?? null}
+                                            comments={card.comments ?? []}
                                           />
                                         </Link>
                                       )}
