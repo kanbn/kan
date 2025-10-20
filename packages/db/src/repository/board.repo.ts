@@ -221,6 +221,7 @@ export const getByPublicId = async (
                   publicId: true,
                 },
                 where: isNull(comments.deletedAt),
+                limit: 1,
               },
             },
             where: and(

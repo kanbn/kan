@@ -74,7 +74,6 @@ const Card = ({
               {comments.length > 0 && (
                 <div className="flex items-center gap-1 text-light-700 dark:text-dark-800">
                   <HiChatBubbleLeft className="h-4 w-4" />
-                  <span className="text-xs">{comments.length}</span>
                 </div>
               )}
             </div>
