@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { Select } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -165,6 +166,22 @@ export default function CardPage() {
   const board = card?.list.board;
   const boardId = board?.publicId;
   const activities = card?.activities;
+  const labels = board?.labels;
+  const selectedLabels = card?.labels;
+
+  const formattedLabels =
+    labels?.map((label) => {
+      const isSelected = selectedLabels?.some(
+        (selectedLabel) => selectedLabel.publicId === label.publicId,
+      );
+
+      return {
+        key: label.publicId,
+        value: label.name,
+        selected: isSelected ?? false,
+        leftIcon: <LabelIcon colourCode={label.colourCode} />,
+      };
+    }) ?? [];
 
   const updateCard = api.card.update.useMutation({
     onError: () => {
@@ -186,6 +203,30 @@ export default function CardPage() {
       selected: list.publicId === card?.list.publicId,
     })) ?? [];
 
+  const handleMotoristaColetaChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const value = e.target.value;
+    setValue("motoristaColeta", value);
+    if (!cardId) return;
+    updateCard.mutate({
+      cardPublicId: cardId,
+      motoristaColeta: value,
+    });
+  };
+
+  const handleMotoristaEntregaChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const value = e.target.value;
+    setValue("motoristaEntrega", value);
+    if (!cardId) return;
+    updateCard.mutate({
+      cardPublicId: cardId,
+      motoristaEntrega: value,
+    });
+  };
+
   const { register, handleSubmit, setValue, watch } = useForm<any>({
     values: {
       cardId: cardId ?? "",
@@ -195,6 +236,8 @@ export default function CardPage() {
       hospedeDocumento: card?.hospedeDocumento ?? "",
       hospedeTelefone: card?.hospedeTelefone ?? "",
       tipoEntrega: card?.tipoEntrega ?? "normal",
+      motoristaColeta: card?.motoristaColeta ?? "",
+      motoristaEntrega: card?.motoristaEntrega ?? "",
     },
   });
 
@@ -207,6 +250,8 @@ export default function CardPage() {
       hospedeDocumento: values.hospedeDocumento,
       hospedeTelefone: values.hospedeTelefone,
       tipoEntrega: values.tipoEntrega,
+      motoristaColeta: values.motoristaColeta,
+      motoristaEntrega: values.motoristaEntrega,
     });
   };
 
@@ -291,12 +336,64 @@ export default function CardPage() {
                           onBlur={() => handleSubmit(onSubmit)()}
                           workspaceMembers={board?.workspace.members ?? []}
                         />
-                        <p className="pb-2">Mudar Status do pedido</p>
-                        <ListSelector
-                          cardPublicId={cardId ?? ""}
-                          lists={formattedLists}
-                          isLoading={!card}
-                        />
+                        <div>
+                          <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Labels`}</p>
+                          <LabelSelector
+                            cardPublicId={cardId ?? ""}
+                            labels={formattedLabels}
+                            isLoading={!card}
+                          />
+                        </div>
+
+                        <div className="flex flex-col justify-between gap-4 pt-8 text-sm md:flex-row md:items-center">
+                          <div>
+                            <p className="pb-2">Mudar Status do pedido</p>
+                            <ListSelector
+                              cardPublicId={cardId ?? ""}
+                              lists={formattedLists}
+                              isLoading={!card}
+                            />
+                          </div>
+                          <div>
+                            <p>Motorista que coletou</p>
+                            <Select
+                              name="motoristaColeta"
+                              aria-label="Project status"
+                              onChange={handleMotoristaColetaChange}
+                              value={card.motoristaColeta ?? ""}
+                              className="w-full rounded-md border border-neutral-400 bg-neutral-50 px-8 py-1 text-sm"
+                            >
+                              <option value="" disabled>
+                                {" "}
+                                Selecione seu motorista
+                              </option>
+                              <option value="motorista-1">Motorista 1</option>
+                              <option value="motorista-2">Motorista 2</option>
+                              <option value="motorista-3">Motorista 3</option>
+                              <option value="motorista-4">Motorista 4</option>
+                            </Select>
+                          </div>
+                          <div>
+                            <p>Motorista da entrega final</p>
+                            <Select
+                              name="motoristaEntrega"
+                              aria-label="Project status"
+                              onChange={handleMotoristaEntregaChange}
+                              value={card.motoristaEntrega ?? ""}
+                              className="w-full rounded-md border border-neutral-400 bg-neutral-50 px-8 py-1 text-sm"
+                            >
+                              <option value="" disabled>
+                                {" "}
+                                Selecione seu motorista
+                              </option>
+                              <option value="motorista-1">Motorista 1</option>
+                              <option value="motorista-2">Motorista 2</option>
+                              <option value="motorista-3">Motorista 3</option>
+                              <option value="motorista-4">Motorista 4</option>
+                            </Select>
+                          </div>
+                        </div>
+
                         {/* Laundry details section (read-only) */}
                         <div className="mb-4 mt-4 rounded-lg bg-neutral-100 p-4 shadow-sm dark:bg-neutral-800">
                           <h3 className="mb-3 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
@@ -335,12 +432,12 @@ export default function CardPage() {
                             </span>
 
                             {/* Row 4: Tipo de entrega */}
-                            <span className="font-medium text-neutral-600 dark:text-neutral-400">{`Tipo de entrega:`}</span>
-                            <span className="text-neutral-900 dark:text-neutral-100">
+                            {/* <span className="font-medium text-neutral-600 dark:text-neutral-400">{`Tipo de entrega:`}</span> */}
+                            {/* <span className="text-neutral-900 dark:text-neutral-100">
                               {card?.tipoEntrega === "express"
                                 ? `Express`
                                 : `Normal`}
-                            </span>
+                            </span> */}
                           </div>
                         </div>
                       </div>
