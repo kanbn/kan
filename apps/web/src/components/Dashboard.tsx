@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import { useTheme } from "next-themes";
+import { useEffect, useRef, useState } from "react";
 import {
   TbLayoutSidebarLeftCollapse,
   TbLayoutSidebarLeftExpand,
@@ -10,10 +11,7 @@ import { authClient } from "@kan/auth/client";
 
 import { useClickOutside } from "~/hooks/useClickOutside";
 import { useModal } from "~/providers/modal";
-import { useTheme } from "next-themes";
-import { WorkspaceProvider } from "~/providers/workspace";
-import FeedbackModal from "./FeedbackModal";
-import Modal from "./modal";
+import { useWorkspace, WorkspaceProvider } from "~/providers/workspace";
 import SideNavigation from "./SideNavigation";
 
 interface DashboardProps {
@@ -42,7 +40,8 @@ export default function Dashboard({
   hasRightPanel = false,
 }: DashboardProps) {
   const { theme } = useTheme();
-  const { modalContentType } = useModal();
+  const { openModal } = useModal();
+  const { availableWorkspaces, hasLoaded } = useWorkspace();
 
   const { data: session, isPending: sessionLoading } = authClient.useSession();
 
@@ -89,6 +88,12 @@ export default function Dashboard({
       setIsRightPanelOpen(false);
     }
   });
+
+  useEffect(() => {
+    if (hasLoaded && availableWorkspaces.length === 0) {
+      openModal("NEW_WORKSPACE", undefined, undefined, false);
+    }
+  }, [hasLoaded, availableWorkspaces.length, openModal]);
 
   const isDarkMode = theme === "dark";
 

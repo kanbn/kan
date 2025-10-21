@@ -1,5 +1,4 @@
 import { t } from "@lingui/core/macro";
-import { useEffect } from "react";
 import { HiArrowDownTray, HiOutlinePlusSmall } from "react-icons/hi2";
 
 import Button from "~/components/Button";
@@ -15,18 +14,12 @@ import { NewBoardForm } from "./components/NewBoardForm";
 
 export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
   const { openModal, modalContentType, isOpen } = useModal();
-  const { availableWorkspaces, workspace, hasLoaded } = useWorkspace();
-
-  useEffect(() => {
-    if (hasLoaded && availableWorkspaces.length === 0) {
-      openModal("NEW_WORKSPACE");
-    }
-  }, [hasLoaded, availableWorkspaces.length, openModal]);
+  const { workspace } = useWorkspace();
 
   return (
     <>
       <PageHead
-        title={t`${isTemplate ? "Templates" : "Boards"} | ${workspace.name ?? "Workspace"}`}
+        title={t`${isTemplate ? "Templates" : "Boards"} | ${workspace.name || "Workspace"}`}
       />
       <div className="m-auto h-full max-w-[1100px] p-6 px-5 md:px-28 md:py-12">
         <div className="relative z-10 mb-8 flex w-full items-center justify-between">
