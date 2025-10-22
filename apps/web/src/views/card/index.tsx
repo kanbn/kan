@@ -268,6 +268,7 @@ export default function CardPage() {
 
   if (!cardId) return <></>;
 
+  const isGuest = workspace.role === "guest"
   return (
     <>
       <PageHead
@@ -312,7 +313,11 @@ export default function CardPage() {
                     </form>
 
                     <div className="flex">
-                      <Dropdown />
+                      {
+                        !isGuest && (
+                          <Dropdown />
+                      )
+                      }
                     </div>
                   </>
                 )}
@@ -354,6 +359,9 @@ export default function CardPage() {
                               isLoading={!card}
                             />
                           </div>
+                          {
+                            !isGuest && (
+                              <div>
                           <div>
                             <p>Motorista que coletou</p>
                             <Select
@@ -393,6 +401,11 @@ export default function CardPage() {
                             </Select>
                           </div>
                         </div>
+                              
+
+                            )
+                          }
+                         
 
                         {/* Laundry details section (read-only) */}
                         <div className="mb-4 mt-4 rounded-lg bg-neutral-100 p-4 shadow-sm dark:bg-neutral-800">
@@ -457,7 +470,7 @@ export default function CardPage() {
                     cardPublicId={cardId}
                     activeChecklistForm={activeChecklistForm}
                     setActiveChecklistForm={setActiveChecklistForm}
-                    viewOnly={workspace.role != "admin"}
+                    viewOnly={}
                   />
                   <div className="border-t-[1px] border-light-300 pt-12 dark:border-dark-300">
                     <h2 className="text-md pb-4 font-medium text-light-1000 dark:text-dark-1000">
