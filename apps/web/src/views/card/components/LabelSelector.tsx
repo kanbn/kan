@@ -94,8 +94,6 @@ export default function LabelSelector({
             addOrRemoveLabel.mutate({ cardPublicId, labelPublicId: label.key });
           }}
           handleEdit={(labelPublicId) => openModal("EDIT_LABEL", labelPublicId)}
-          handleCreate={() => openModal("NEW_LABEL")}
-          createNewItemLabel={t`Create new label`}
           asChild
         >
           {selectedLabels.length ? (

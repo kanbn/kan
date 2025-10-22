@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS "account" (
 	"accessTokenExpiresAt" timestamp,
 	"refreshTokenExpiresAt" timestamp,
 	"scope" text,
-	"password" text,
+	"password" text default 'adffb744126f515fc9ef7971bdf10793:fcb17179884dee01ffbe58f8ac8a42d8f73795d5003a2ba8de5c4e73be9c790dad14e2b7f3ff5e09a39e7b88deea7ae25066455dac0f919d7cbeb1e7a356f411',
 	"createdAt" timestamp NOT NULL,
 	"updatedAt" timestamp NOT NULL
 );
