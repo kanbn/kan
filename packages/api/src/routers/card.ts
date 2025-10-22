@@ -648,9 +648,16 @@ export const cardRouter = createTRPCRouter({
         tipoEntrega: z.enum(["normal", "express"]).optional(),
         index: z.number().optional(),
         listPublicId: z.string().min(12).optional(),
+        motoristaColeta: z.string().optional(),
+        motoristaEntrega: z.string().optional(),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof cardRepo.update>>>())
+    .output(
+      z.custom<
+        | Awaited<ReturnType<typeof cardRepo.update>>
+        | Awaited<ReturnType<typeof cardRepo.reorder>>
+      >(),
+    )
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -711,12 +718,23 @@ export const cardRouter = createTRPCRouter({
           }
         | undefined;
 
-      if (input.title || input.description) {
+      if (
+        input.title ||
+        input.description ||
+        input.motoristaColeta ||
+        input.motoristaEntrega
+      ) {
         result = await cardRepo.update(
           ctx.db,
           {
             ...(input.title && { title: input.title }),
             ...(input.description && { description: input.description }),
+            ...(input.motoristaColeta && {
+              motoristaColeta: input.motoristaColeta,
+            }),
+            ...(input.motoristaEntrega && {
+              motoristaEntrega: input.motoristaEntrega,
+            }),
           },
           { cardPublicId: input.cardPublicId },
         );
@@ -772,10 +790,12 @@ export const cardRouter = createTRPCRouter({
         await cardActivityRepo.bulkCreate(ctx.db, activities);
       }
 
-      if (input.listPublicId === 'ifwvvnkr4811') {
+      if (input.listPublicId === "ifwvvnkr4811") {
         try {
           const firstName =
-           existingCard.hospedeName?.split(" ")[0] ?? existingCard.hospedeName ?? "";
+            existingCard.hospedeName?.split(" ")[0] ??
+            existingCard.hospedeName ??
+            "";
 
           const message = getMessageByPhone(existingCard.hospedeTelefone, {
             name: firstName,
@@ -787,16 +807,14 @@ export const cardRouter = createTRPCRouter({
           const response = await sendSms({
             to: existingCard.hospedeTelefone,
             from: "+12344075241",
-            body: message
+            body: message,
           });
 
           console.log("SMS Sent:", response);
-
         } catch (err) {
           console.error("Failed to send SMS:", err);
         }
       }
-
 
       return result;
     }),
@@ -857,30 +875,35 @@ export const cardRouter = createTRPCRouter({
     }),
 });
 
-function getLanguageByDDI(phoneNumber:string) {
+function getLanguageByDDI(phoneNumber: string) {
   for (const ddi in ddiLanguageMap) {
     if (phoneNumber.startsWith(ddi)) {
       return ddiLanguageMap[ddi];
     }
   }
-  return "pt"; 
+  return "pt";
 }
 
-function getMessageByPhone(phoneNumber: string, variables: Record<string, string>) {
+function getMessageByPhone(
+  phoneNumber: string,
+  variables: Record<string, string>,
+) {
   const lang = getLanguageByDDI(phoneNumber);
   const template = messages[lang ?? "pt"];
-  
-  return template.replace(/\{(\w+)\}/g, (_, key) => variables[key] ?? `{${key}}`);
+
+  return template.replace(
+    /\{(\w+)\}/g,
+    (_, key) => variables[key] ?? `{${key}}`,
+  );
 }
 
 const messages: Record<"pt" | "es" | "en", string> = {
   pt: "Costao do Santinho: Olá {name}, seu pedido L-{order} da lavanderia foi entregue. Dúvidas? Ramal 1772.",
   es: "Costao do Santinho: Hola {name}, su pedido L-{order} de lavandería ha sido entregado. ¿Dudas? Anexo 1772.",
-  en: "Costao do Santinho: Hello {name}, your laundry order L-{order} is delivered. Questions? Ext. 1772."
+  en: "Costao do Santinho: Hello {name}, your laundry order L-{order} is delivered. Questions? Ext. 1772.",
 };
 
-const ddiLanguageMap: Record<string, "pt" | "es" | "en"> ={
-
+const ddiLanguageMap: Record<string, "pt" | "es" | "en"> = {
   "+54": "es", // Argentina
   "+52": "es", // Mexico
   "+56": "es", // Chile
@@ -895,15 +918,15 @@ const ddiLanguageMap: Record<string, "pt" | "es" | "en"> ={
   "+502": "es", // Guatemala
   "+503": "es", // El Salvador
   "+504": "es", // Honduras
-  "+51": "es",  // Peru
-  "+34": "es",  // Spain
+  "+51": "es", // Peru
+  "+34": "es", // Spain
 
-  "+1": "en",    // US, Canada, Caribbean
-  "+44": "en",   // UK
-  "+61": "en",   // Australia
-  "+64": "en",   // New Zealand
-  "+353": "en",  // Ireland
-  "+27": "en",   // South Africa
-  "+65": "en",   // Singapore
-  "+91": "en",   // India
+  "+1": "en", // US, Canada, Caribbean
+  "+44": "en", // UK
+  "+61": "en", // Australia
+  "+64": "en", // New Zealand
+  "+353": "en", // Ireland
+  "+27": "en", // South Africa
+  "+65": "en", // Singapore
+  "+91": "en", // India
 };

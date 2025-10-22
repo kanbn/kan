@@ -184,9 +184,6 @@ export default function ChecklistItemRow({
       {/* Title */}
       <div className="flex flex-row items-center justify-center border-b border-light-200 pb-2 dark:border-dark-700 sm:border-none sm:pb-0">
         <div className="flex flex-col">
-          <label className="block text-xs font-medium text-neutral-400 dark:text-gray-200">
-            Item
-          </label>
           <ContentEditable
             html={title}
             disabled={viewOnly}

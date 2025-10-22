@@ -105,12 +105,12 @@ export default function LabelSelector({
                   <Badge value={label.value} iconLeft={label.leftIcon} />
                 </Menu.Button>
               ))}
-              <Menu.Button>
+              {/* <Menu.Button>
                 <Badge
                   value={t`Add label`}
                   iconLeft={<HiMiniPlus size={14} />}
                 />
-              </Menu.Button>
+              </Menu.Button> */}
             </div>
           ) : (
             <Menu.Button className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 pl-2 text-left text-sm text-neutral-900 hover:border-light-300 hover:bg-light-200 dark:border-dark-50 dark:text-dark-1000 dark:hover:border-dark-200 dark:hover:bg-dark-100">

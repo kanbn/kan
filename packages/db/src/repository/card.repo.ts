@@ -153,6 +153,8 @@ export const update = async (
   cardInput: {
     title?: string;
     description?: string;
+    motoristaColeta?: string;
+    motoristaEntrega?: string;
   },
   args: {
     cardPublicId: string;
@@ -163,6 +165,8 @@ export const update = async (
     .set({
       title: cardInput.title,
       description: cardInput.description,
+      motoristaColeta: cardInput.motoristaColeta,
+      motoristaEntrega: cardInput.motoristaEntrega,
     })
     .where(and(eq(cards.publicId, args.cardPublicId), isNull(cards.deletedAt)))
     .returning({
@@ -170,6 +174,8 @@ export const update = async (
       publicId: cards.publicId,
       title: cards.title,
       description: cards.description,
+      motoristaColeta: cards.motoristaColeta,
+      motoristaEntrega: cards.motoristaEntrega,
     });
 
   return result;
@@ -207,6 +213,8 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
       hospedeApartamento: true,
       hospedeName: true,
       hospedeTelefone: true,
+      motoristaColeta: true,
+      motoristaEntrega: true,
       tipoEntrega: true,
     },
     where: eq(cards.publicId, cardPublicId),
@@ -317,6 +325,8 @@ export const getWithListAndMembersByPublicId = async (
       hospedeTelefone: true,
       hospedeApartamento: true,
       tipoEntrega: true,
+      motoristaColeta: true,
+      motoristaEntrega: true,
     },
     with: {
       labels: {
