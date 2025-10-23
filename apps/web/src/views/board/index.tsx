@@ -23,6 +23,7 @@ import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
 import { StrictModeDroppable as Droppable } from "~/components/StrictModeDroppable";
+import { useBoardEvents } from "~/hooks/useRealtime";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
@@ -108,6 +109,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   }, [boardId]);
 
   const isLoading = isInitialLoading || isQueryLoading;
+
+  // Subscribe to board-level SSE events and refresh cache on changes
+  useBoardEvents(boardId);
 
   const updateListMutation = api.list.update.useMutation({
     onMutate: async (args) => {

@@ -40,7 +40,7 @@
     "@kan/email": "workspace:^",
     "@kan/shared": "workspace:^",
     "@kan/stripe": "workspace:^",
-    "@trpc/server": "catalog:",
+    "@trpc/server": "^11.5.1",
     "superjson": "2.2.1",
     "trpc-to-openapi": "^2.3.2",
     "zod": "catalog:"
