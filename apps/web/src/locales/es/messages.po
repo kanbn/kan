@@ -22,7 +22,7 @@ msgid ", or see our"
 msgstr ", o consulta nuestra"
 
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#: src/views/boards/index.tsx:34
+#: src/views/boards/index.tsx:27
 msgid "{0}"
 msgstr "{0}"
 
@@ -30,7 +30,7 @@ msgstr "{0}"
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
 #. placeholder {1}: board?.name ?? "Board"
 #. placeholder {1}: workspace.name ?? "Workspace"
-#: src/views/boards/index.tsx:29
+#: src/views/boards/index.tsx:22
 #: src/views/card/index.tsx:216
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
@@ -317,7 +317,7 @@ msgstr "El nombre del tablero no puede exceder los 100 caracteres"
 msgid "Board name is required"
 msgstr "El nombre del tablero es obligatorio"
 
-#: src/views/public/board/index.tsx:148
+#: src/views/public/board/index.tsx:151
 msgid "Board not found"
 msgstr "Tablero no encontrado"
 
@@ -333,7 +333,7 @@ msgstr "La URL del tablero solo puede contener letras, números y guiones"
 msgid "Board URL cannot exceed 60 characters"
 msgstr "La URL del tablero no puede exceder los 60 caracteres"
 
-#: src/views/public/board/index.tsx:64
+#: src/views/public/board/index.tsx:67
 msgid "Board URL copied to clipboard"
 msgstr "URL del tablero copiada al portapapeles"
 
@@ -1099,7 +1099,7 @@ msgstr "Ideas"
 msgid "Ideas to improve this page..."
 msgstr "Ideas para mejorar esta página..."
 
-#: src/views/boards/index.tsx:46
+#: src/views/boards/index.tsx:39
 msgid "Import"
 msgstr "Importar"
 
@@ -1278,7 +1278,7 @@ msgstr "Licencia"
 msgid "Light"
 msgstr "Claro"
 
-#: src/views/public/board/index.tsx:62
+#: src/views/public/board/index.tsx:65
 msgid "Link copied"
 msgstr "Enlace copiado"
 
@@ -1369,7 +1369,7 @@ msgstr "Nombre"
 msgid "Need help?"
 msgstr "¿Necesitas ayuda?"
 
-#: src/views/boards/index.tsx:57
+#: src/views/boards/index.tsx:50
 #: src/views/home/components/Features.tsx:73
 msgid "New"
 msgstr "Nuevo"
@@ -1986,7 +1986,7 @@ msgstr "Esta acción no se puede deshacer."
 msgid "This API key will only be shown once. Please save it in a secure location."
 msgstr "Esta clave API solo se mostrará una vez. Por favor, guárdala en un lugar seguro."
 
-#: src/views/public/board/index.tsx:151
+#: src/views/public/board/index.tsx:154
 msgid "This board is private or does not exist"
 msgstr "Este tablero es privado o no existe"
 
@@ -2281,7 +2281,7 @@ msgstr "Ver y gestionar tu facturación y suscripción."
 msgid "View docs"
 msgstr "Ver documentación"
 
-#: src/views/public/board/index.tsx:125
+#: src/views/public/board/index.tsx:128
 msgid "View only"
 msgstr "Solo visualización"
 
@@ -2289,7 +2289,7 @@ msgstr "Solo visualización"
 msgid "View our roadmap."
 msgstr "Ver nuestra hoja de ruta."
 
-#: src/views/public/board/index.tsx:154
+#: src/views/public/board/index.tsx:157
 msgid "View workspace"
 msgstr "Ver espacio de trabajo"
 
@@ -2330,6 +2330,7 @@ msgid "Why make an open source Trello?"
 msgstr "¿Por qué crear un Trello de código abierto?"
 
 #: src/components/SettingsLayout.tsx:39
+#: src/views/board/index.tsx:361
 msgid "Workspace"
 msgstr "Espacio de trabajo"
 

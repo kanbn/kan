@@ -22,7 +22,7 @@ msgid ", or see our"
 msgstr ", of bekijk onze"
 
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#: src/views/boards/index.tsx:34
+#: src/views/boards/index.tsx:27
 msgid "{0}"
 msgstr "{0}"
 
@@ -30,7 +30,7 @@ msgstr "{0}"
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
 #. placeholder {1}: board?.name ?? "Board"
 #. placeholder {1}: workspace.name ?? "Workspace"
-#: src/views/boards/index.tsx:29
+#: src/views/boards/index.tsx:22
 #: src/views/card/index.tsx:216
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
@@ -317,7 +317,7 @@ msgstr "Bordnaam mag niet langer zijn dan 100 tekens"
 msgid "Board name is required"
 msgstr "Bordnaam is verplicht"
 
-#: src/views/public/board/index.tsx:148
+#: src/views/public/board/index.tsx:151
 msgid "Board not found"
 msgstr "Bord niet gevonden"
 
@@ -333,7 +333,7 @@ msgstr "Board URL kan alleen letters, cijfers en koppeltekens bevatten"
 msgid "Board URL cannot exceed 60 characters"
 msgstr "Board URL mag niet langer zijn dan 60 tekens"
 
-#: src/views/public/board/index.tsx:64
+#: src/views/public/board/index.tsx:67
 msgid "Board URL copied to clipboard"
 msgstr "Board URL gekopieerd naar klembord"
 
@@ -1099,7 +1099,7 @@ msgstr "Ideeën"
 msgid "Ideas to improve this page..."
 msgstr "Ideeën om deze pagina te verbeteren..."
 
-#: src/views/boards/index.tsx:46
+#: src/views/boards/index.tsx:39
 msgid "Import"
 msgstr "Importeren"
 
@@ -1278,7 +1278,7 @@ msgstr "Licentie"
 msgid "Light"
 msgstr "Licht"
 
-#: src/views/public/board/index.tsx:62
+#: src/views/public/board/index.tsx:65
 msgid "Link copied"
 msgstr "Link gekopieerd"
 
@@ -1369,7 +1369,7 @@ msgstr "Naam"
 msgid "Need help?"
 msgstr "Hulp nodig?"
 
-#: src/views/boards/index.tsx:57
+#: src/views/boards/index.tsx:50
 #: src/views/home/components/Features.tsx:73
 msgid "New"
 msgstr "Nieuw"
@@ -1986,7 +1986,7 @@ msgstr "Deze actie kan niet ongedaan worden gemaakt."
 msgid "This API key will only be shown once. Please save it in a secure location."
 msgstr "Deze API-sleutel wordt slechts één keer getoond. Bewaar deze op een veilige plaats."
 
-#: src/views/public/board/index.tsx:151
+#: src/views/public/board/index.tsx:154
 msgid "This board is private or does not exist"
 msgstr "Dit bord is privé of bestaat niet"
 
@@ -2281,7 +2281,7 @@ msgstr "Bekijk en beheer je facturering en abonnement."
 msgid "View docs"
 msgstr "Bekijk documentatie"
 
-#: src/views/public/board/index.tsx:125
+#: src/views/public/board/index.tsx:128
 msgid "View only"
 msgstr "Alleen bekijken"
 
@@ -2289,7 +2289,7 @@ msgstr "Alleen bekijken"
 msgid "View our roadmap."
 msgstr "Bekijk onze roadmap."
 
-#: src/views/public/board/index.tsx:154
+#: src/views/public/board/index.tsx:157
 msgid "View workspace"
 msgstr "Werkruimte bekijken"
 
@@ -2330,6 +2330,7 @@ msgid "Why make an open source Trello?"
 msgstr "Waarom een open source Trello maken?"
 
 #: src/components/SettingsLayout.tsx:39
+#: src/views/board/index.tsx:361
 msgid "Workspace"
 msgstr "Werkruimte"
 

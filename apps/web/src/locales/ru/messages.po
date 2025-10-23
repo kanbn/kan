@@ -22,7 +22,7 @@ msgid ", or see our"
 msgstr ", или посмотрите наши"
 
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#: src/views/boards/index.tsx:34
+#: src/views/boards/index.tsx:27
 msgid "{0}"
 msgstr "{0}"
 
@@ -30,7 +30,7 @@ msgstr "{0}"
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
 #. placeholder {1}: board?.name ?? "Board"
 #. placeholder {1}: workspace.name ?? "Workspace"
-#: src/views/boards/index.tsx:29
+#: src/views/boards/index.tsx:22
 #: src/views/card/index.tsx:216
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
@@ -317,7 +317,7 @@ msgstr "Название доски не может превышать 100 си�
 msgid "Board name is required"
 msgstr "Название доски обязательно"
 
-#: src/views/public/board/index.tsx:148
+#: src/views/public/board/index.tsx:151
 msgid "Board not found"
 msgstr "Доска не найдена"
 
@@ -333,7 +333,7 @@ msgstr "URL доски может содержать только буквы, ц
 msgid "Board URL cannot exceed 60 characters"
 msgstr "URL доски не может превышать 60 символов"
 
-#: src/views/public/board/index.tsx:64
+#: src/views/public/board/index.tsx:67
 msgid "Board URL copied to clipboard"
 msgstr "URL доски скопирован в буфер обмена"
 
@@ -1099,7 +1099,7 @@ msgstr "Идеи"
 msgid "Ideas to improve this page..."
 msgstr "Идеи для улучшения этой страницы..."
 
-#: src/views/boards/index.tsx:46
+#: src/views/boards/index.tsx:39
 msgid "Import"
 msgstr "Импорт"
 
@@ -1278,7 +1278,7 @@ msgstr "Лицензия"
 msgid "Light"
 msgstr "Светлый"
 
-#: src/views/public/board/index.tsx:62
+#: src/views/public/board/index.tsx:65
 msgid "Link copied"
 msgstr "Ссылка скопирована"
 
@@ -1369,7 +1369,7 @@ msgstr "Имя"
 msgid "Need help?"
 msgstr "Нужна помощь?"
 
-#: src/views/boards/index.tsx:57
+#: src/views/boards/index.tsx:50
 #: src/views/home/components/Features.tsx:73
 msgid "New"
 msgstr "Новый"
@@ -1986,7 +1986,7 @@ msgstr "Это действие нельзя будет отменить."
 msgid "This API key will only be shown once. Please save it in a secure location."
 msgstr "Этот API-ключ будет показан только один раз. Пожалуйста, сохраните его в безопасном месте."
 
-#: src/views/public/board/index.tsx:151
+#: src/views/public/board/index.tsx:154
 msgid "This board is private or does not exist"
 msgstr "Эта доска является приватной или не существует."
 
@@ -2281,7 +2281,7 @@ msgstr "Просмотр и управление вашими счетами и 
 msgid "View docs"
 msgstr "Просмотреть документацию"
 
-#: src/views/public/board/index.tsx:125
+#: src/views/public/board/index.tsx:128
 msgid "View only"
 msgstr "Только просмотр"
 
@@ -2289,7 +2289,7 @@ msgstr "Только просмотр"
 msgid "View our roadmap."
 msgstr "Просмотреть нашу дорожную карту."
 
-#: src/views/public/board/index.tsx:154
+#: src/views/public/board/index.tsx:157
 msgid "View workspace"
 msgstr "Просмотреть рабочее пространство"
 
@@ -2330,6 +2330,7 @@ msgid "Why make an open source Trello?"
 msgstr "Зачем создавать Trello с открытым исходным кодом?"
 
 #: src/components/SettingsLayout.tsx:39
+#: src/views/board/index.tsx:361
 msgid "Workspace"
 msgstr "Рабочее пространство"
 

@@ -22,7 +22,7 @@ msgid ", or see our"
 msgstr ", o consulta i nostri"
 
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#: src/views/boards/index.tsx:34
+#: src/views/boards/index.tsx:27
 msgid "{0}"
 msgstr "{0}"
 
@@ -30,7 +30,7 @@ msgstr "{0}"
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
 #. placeholder {1}: board?.name ?? "Board"
 #. placeholder {1}: workspace.name ?? "Workspace"
-#: src/views/boards/index.tsx:29
+#: src/views/boards/index.tsx:22
 #: src/views/card/index.tsx:216
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
@@ -317,7 +317,7 @@ msgstr "Il nome della bacheca non può superare i 100 caratteri"
 msgid "Board name is required"
 msgstr "Il nome della bacheca è obbligatorio"
 
-#: src/views/public/board/index.tsx:148
+#: src/views/public/board/index.tsx:151
 msgid "Board not found"
 msgstr "Bacheca non trovata"
 
@@ -333,7 +333,7 @@ msgstr "L'URL della bacheca può contenere solo lettere, numeri e trattini"
 msgid "Board URL cannot exceed 60 characters"
 msgstr "L'URL della bacheca non può superare i 60 caratteri"
 
-#: src/views/public/board/index.tsx:64
+#: src/views/public/board/index.tsx:67
 msgid "Board URL copied to clipboard"
 msgstr "URL della bacheca copiato negli appunti"
 
@@ -1099,7 +1099,7 @@ msgstr "Idee"
 msgid "Ideas to improve this page..."
 msgstr "Idee per migliorare questa pagina..."
 
-#: src/views/boards/index.tsx:46
+#: src/views/boards/index.tsx:39
 msgid "Import"
 msgstr "Importa"
 
@@ -1278,7 +1278,7 @@ msgstr "Licenza"
 msgid "Light"
 msgstr "Chiaro"
 
-#: src/views/public/board/index.tsx:62
+#: src/views/public/board/index.tsx:65
 msgid "Link copied"
 msgstr "Link copiato"
 
@@ -1369,7 +1369,7 @@ msgstr "Nome"
 msgid "Need help?"
 msgstr "Hai bisogno di aiuto?"
 
-#: src/views/boards/index.tsx:57
+#: src/views/boards/index.tsx:50
 #: src/views/home/components/Features.tsx:73
 msgid "New"
 msgstr "Nuovo"
@@ -1986,7 +1986,7 @@ msgstr "Questa azione non può essere annullata."
 msgid "This API key will only be shown once. Please save it in a secure location."
 msgstr "Questa chiave API verrà mostrata una sola volta. Salvala in un luogo sicuro."
 
-#: src/views/public/board/index.tsx:151
+#: src/views/public/board/index.tsx:154
 msgid "This board is private or does not exist"
 msgstr "Questa bacheca è privata o non esiste"
 
@@ -2281,7 +2281,7 @@ msgstr "Visualizza e gestisci la tua fatturazione e abbonamento."
 msgid "View docs"
 msgstr "Visualizza documenti"
 
-#: src/views/public/board/index.tsx:125
+#: src/views/public/board/index.tsx:128
 msgid "View only"
 msgstr "Solo visualizzazione"
 
@@ -2289,7 +2289,7 @@ msgstr "Solo visualizzazione"
 msgid "View our roadmap."
 msgstr "Visualizza la nostra roadmap."
 
-#: src/views/public/board/index.tsx:154
+#: src/views/public/board/index.tsx:157
 msgid "View workspace"
 msgstr "Visualizza spazio di lavoro"
 
@@ -2330,6 +2330,7 @@ msgid "Why make an open source Trello?"
 msgstr "Perché creare un Trello open source?"
 
 #: src/components/SettingsLayout.tsx:39
+#: src/views/board/index.tsx:361
 msgid "Workspace"
 msgstr "Spazio di lavoro"
 
