@@ -343,6 +343,13 @@ export const getBySlug = async (
                   },
                 },
               },
+              comments: {
+                columns: {
+                  publicId: true,
+                },
+                where: isNull(comments.deletedAt),
+                limit: 1,
+              },
               checklists: {
                 columns: {
                   publicId: true,

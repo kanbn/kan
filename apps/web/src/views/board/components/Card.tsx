@@ -1,4 +1,5 @@
 import { HiBars3BottomLeft, HiChatBubbleLeft } from "react-icons/hi2";
+
 import Avatar from "~/components/Avatar";
 import Badge from "~/components/Badge";
 import CircularProgress from "~/components/CircularProgress";
@@ -64,7 +65,7 @@ const Card = ({
               />
             ))}
           </div>
-          <div className="flex items-center justify-between gap-1 mt-2">
+          <div className="mt-2 flex items-center justify-between gap-1">
             <div className="flex items-center gap-2">
               {hasDescription && (
                 <div className="flex items-center gap-1 text-light-700 dark:text-dark-800">
@@ -77,35 +78,35 @@ const Card = ({
                 </div>
               )}
             </div>
-            <div className="flex items-center gap-1 justify-end">
-            {checklists.length > 0 && (
-              <div className="flex items-center gap-1 rounded-full border-[1px] border-light-300 px-2 py-1 dark:border-dark-600">
-                <CircularProgress
-                  progress={progress || 2}
-                  size="sm"
-                  className="flex-shrink-0"
-                />
-                <span className="text-[10px] text-light-900 dark:text-dark-950">
-                  {completedItems}/{totalItems}
-                </span>
-              </div>
-            )}
-            {members.length > 0 && (
-              <div className="isolate flex justify-end -space-x-1 overflow-hidden">
-                {members.map(({ user, email }) => {
-                  const avatarUrl = user?.image
-                    ? getAvatarUrl(user.image)
-                    : undefined;
+            <div className="flex items-center justify-end gap-1">
+              {checklists.length > 0 && (
+                <div className="flex items-center gap-1 rounded-full border-[1px] border-light-300 px-2 py-1 dark:border-dark-600">
+                  <CircularProgress
+                    progress={progress || 2}
+                    size="sm"
+                    className="flex-shrink-0"
+                  />
+                  <span className="text-[10px] text-light-900 dark:text-dark-950">
+                    {completedItems}/{totalItems}
+                  </span>
+                </div>
+              )}
+              {members.length > 0 && (
+                <div className="isolate flex justify-end -space-x-1 overflow-hidden">
+                  {members.map(({ user, email }) => {
+                    const avatarUrl = user?.image
+                      ? getAvatarUrl(user.image)
+                      : undefined;
 
-                  return (
-                    <Avatar
-                      name={user?.name ?? ""}
-                      email={user?.email ?? email}
-                      imageUrl={avatarUrl}
-                      size="sm"
-                    />
-                  );
-                })}
+                    return (
+                      <Avatar
+                        name={user?.name ?? ""}
+                        email={user?.email ?? email}
+                        imageUrl={avatarUrl}
+                        size="sm"
+                      />
+                    );
+                  })}
                 </div>
               )}
             </div>

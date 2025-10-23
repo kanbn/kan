@@ -45,7 +45,10 @@ export default function PublicBoardView() {
       members: formatToArray(router.query.members),
       labels: formatToArray(router.query.labels),
     },
-    { enabled: router.isReady && !!boardSlug, placeholderData: keepPreviousData },
+    {
+      enabled: router.isReady && !!boardSlug,
+      placeholderData: keepPreviousData,
+    },
   );
 
   const CopyBoardLink = () => {
@@ -156,7 +159,7 @@ export default function PublicBoardView() {
             ) : (
               <div className="flex">
                 <div className="min-w-[2rem]" />
-                {data.lists.map((list) => (
+                {data?.lists.map((list) => (
                   <div
                     key={list.publicId}
                     className="dark-text-dark-1000 mr-5 h-fit min-w-[18rem] max-w-[18rem] rounded-md border border-light-400 bg-light-300 py-2 pl-2 pr-1 text-neutral-900 dark:border-dark-300 dark:bg-dark-100"
@@ -182,6 +185,8 @@ export default function PublicBoardView() {
                             labels={card.labels}
                             checklists={card.checklists ?? []}
                             members={[]}
+                            description={card.description}
+                            comments={card.comments ?? []}
                           />
                         </Link>
                       ))}
