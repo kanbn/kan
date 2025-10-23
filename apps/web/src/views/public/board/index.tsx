@@ -97,7 +97,7 @@ export default function PublicBoardView() {
   return (
     <>
       <PageHead
-        title={`${data?.name ?? "Board"} | ${data?.workspace.name ?? "Workspace"}`}
+        title={`${data?.name ?? t`Board`} | ${data?.workspace.name ?? t`Workspace`}`}
       />
       <style jsx global>{`
         html {

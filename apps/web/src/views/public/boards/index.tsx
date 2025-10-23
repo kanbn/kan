@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { t } from "@lingui/core/macro";
 
 import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
@@ -62,7 +63,7 @@ export default function PublicBoardsView() {
 
   return (
     <>
-      <PageHead title={`${"Board"} | ${"Workspace"}`} />
+      <PageHead title={`${data?.name ?? t`Workspace`} | kan.bn`} />
       <style jsx global>{`
         html {
           height: 100vh;

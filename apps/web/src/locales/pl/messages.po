@@ -31,10 +31,10 @@ msgstr ", lub zobacz nasze"
 msgid "{0}"
 msgstr "{0}"
 
-#. placeholder {0}: card?.title ?? "Card"
+#. placeholder {0}: card?.title ?? t`Card`
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#. placeholder {1}: board?.name ?? "Board"
-#. placeholder {1}: workspace.name ?? "Workspace"
+#. placeholder {1}: board?.name ?? t`Board`
+#. placeholder {1}: workspace.name ?? t`Workspace`
 #: src/views/boards/index.tsx:22
 #: src/views/card/index.tsx:216
 msgid "{0} | {1}"
@@ -306,6 +306,8 @@ msgid "Blog Post"
 msgstr "Post na blogu"
 
 #: src/views/board/index.tsx:361
+#: src/views/card/index.tsx:216
+#: src/views/public/board/index.tsx:100
 msgid "Board"
 msgstr "Tablica"
 
@@ -385,6 +387,10 @@ msgstr "Zgłoszenie błędu"
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:104
 msgid "Cancel"
 msgstr "Anuluj"
+
+#: src/views/card/index.tsx:216
+msgid "Card"
+msgstr "Karta"
 
 #: src/views/card/index.tsx:262
 msgid "Card not found"
@@ -978,14 +984,12 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Na rzecz długotrwałego rozwoju i utrzymania projektu uznaliśmy, że wszystkie dobre projekty otwartoźródłowe potrzebują źródła dochodu. Nasze środki pochodzą z płatnej oferty chmurowej dla przestrzeni roboczych z wieloma użytkownikami (bezpłatne podczas wersji beta) oraz dla niestandardowych nazw przestrzeni roboczych. Nie ma obowiązku korzystania z niej, a oprogramowanie można hostować samodzielnie na własnej infrastrukturze bez opłat i bez limitów."
 
 #: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Darmowy"
 
 #: src/views/members/components/InviteMemberForm.tsx:326
-#: src/views/members/index.tsx:209
+#: src/views/members/index.tsx:208
 msgid "Free Plan"
 msgstr "Darmowy plan"
 
@@ -1172,7 +1176,7 @@ msgstr "Nieprawidłowy adres e-mail"
 msgid "Invalid invitation"
 msgstr "Nieprawidłowe zaproszenie"
 
-#: src/views/members/index.tsx:222
+#: src/views/members/index.tsx:221
 msgid "Invite"
 msgstr "Zaproś"
 
@@ -1258,7 +1262,7 @@ msgstr "Język"
 msgid "Launch offer"
 msgstr "Oferta startowa"
 
-#: src/views/members/index.tsx:192
+#: src/views/members/index.tsx:191
 msgid "Launch offer: Get unlimited members with Pro"
 msgstr "Oferta startowa: Nieograniczona liczba członków z Pro"
 
@@ -1336,12 +1340,12 @@ msgstr "Średni priorytet"
 #: src/views/board/components/Filters.tsx:93
 #: src/views/board/components/NewCardForm.tsx:366
 #: src/views/card/index.tsx:126
-#: src/views/members/index.tsx:179
+#: src/views/members/index.tsx:178
 msgid "Members"
 msgstr "Członkowie"
 
-#. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/members/index.tsx:174
+#. placeholder {0}: workspace.name ?? t`Workspace`
+#: src/views/members/index.tsx:173
 msgid "Members | {0}"
 msgstr "Członkowie | {0}"
 
@@ -1519,7 +1523,7 @@ msgstr "Hasło musi mieć co najmniej 8 znaków"
 msgid "Passwords do not match"
 msgstr "Hasła nie pasują do siebie"
 
-#: src/views/members/index.tsx:135
+#: src/views/members/index.tsx:134
 msgid "Paused"
 msgstr "Wstrzymane"
 
@@ -1528,7 +1532,7 @@ msgstr "Wstrzymane"
 msgid "Payment frequency"
 msgstr "Częstotliwość płatności"
 
-#: src/views/members/index.tsx:135
+#: src/views/members/index.tsx:134
 msgid "Pending"
 msgstr "Oczekujące"
 
@@ -1644,7 +1648,7 @@ msgstr "Polityka prywatności"
 msgid "Private"
 msgstr "Prywatne"
 
-#: src/views/members/index.tsx:206
+#: src/views/members/index.tsx:205
 msgid "Pro Plan"
 msgstr "Plan Pro"
 
@@ -1692,7 +1696,7 @@ msgstr "Zdalne"
 msgid "Remove"
 msgstr "Usuń"
 
-#: src/views/members/index.tsx:149
+#: src/views/members/index.tsx:148
 msgid "Remove member"
 msgstr "Usuń członka"
 
@@ -1749,7 +1753,7 @@ msgstr "Przegląd"
 msgid "Roadmap"
 msgstr "Plan ulepszeń"
 
-#: src/views/members/index.tsx:244
+#: src/views/members/index.tsx:243
 msgid "Role"
 msgstr "Rola"
 
@@ -1910,7 +1914,7 @@ msgid "System"
 msgstr "System"
 
 #: src/views/members/components/InviteMemberForm.tsx:315
-#: src/views/members/index.tsx:208
+#: src/views/members/index.tsx:207
 msgid "Team Plan"
 msgstr "Plan zespołowy"
 
@@ -2261,7 +2265,7 @@ msgstr "Adres URL musi mieć co najmniej 3 znaki"
 msgid "Use template"
 msgstr "Użyj szablonu"
 
-#: src/views/members/index.tsx:238
+#: src/views/members/index.tsx:237
 msgid "User"
 msgstr "Użytkownik"
 
@@ -2336,6 +2340,10 @@ msgstr "Dlaczego próbujecie stworzyć Trello w wersji otwartoźródłowej?"
 
 #: src/components/SettingsLayout.tsx:39
 #: src/views/board/index.tsx:361
+#: src/views/boards/index.tsx:22
+#: src/views/members/index.tsx:173
+#: src/views/public/board/index.tsx:100
+#: src/views/public/boards/index.tsx:66
 msgid "Workspace"
 msgstr "Obszar roboczy"
 

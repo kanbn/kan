@@ -26,10 +26,10 @@ msgstr ", или посмотрите наши"
 msgid "{0}"
 msgstr "{0}"
 
-#. placeholder {0}: card?.title ?? "Card"
+#. placeholder {0}: card?.title ?? t`Card`
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#. placeholder {1}: board?.name ?? "Board"
-#. placeholder {1}: workspace.name ?? "Workspace"
+#. placeholder {1}: board?.name ?? t`Board`
+#. placeholder {1}: workspace.name ?? t`Workspace`
 #: src/views/boards/index.tsx:22
 #: src/views/card/index.tsx:216
 msgid "{0} | {1}"
@@ -301,6 +301,8 @@ msgid "Blog Post"
 msgstr "Пост в блоге"
 
 #: src/views/board/index.tsx:361
+#: src/views/card/index.tsx:216
+#: src/views/public/board/index.tsx:100
 msgid "Board"
 msgstr "Доска"
 
@@ -380,6 +382,10 @@ msgstr "Отчет об ошибке"
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:104
 msgid "Cancel"
 msgstr "Отмена"
+
+#: src/views/card/index.tsx:216
+msgid "Card"
+msgstr "Карточка"
 
 #: src/views/card/index.tsx:262
 msgid "Card not found"
@@ -973,14 +979,12 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Для долгосрочной устойчивости мы признаем, что всем хорошим проектам с открытым исходным кодом нужен источник дохода. Наш доход поступает от платного облачного предложения для рабочих пространств с несколькими пользователями (бесплатно в период бета-тестирования) и для пользовательских адресов рабочих пространств. Нет обязательства использовать это, и вы можете самостоятельно разместить программное обеспечение на своей инфраструктуре бесплатно."
 
 #: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Бесплатно"
 
 #: src/views/members/components/InviteMemberForm.tsx:326
-#: src/views/members/index.tsx:209
+#: src/views/members/index.tsx:208
 msgid "Free Plan"
 msgstr "Бесплатный план"
 
@@ -1167,7 +1171,7 @@ msgstr "Недействительный адрес электронной по�
 msgid "Invalid invitation"
 msgstr "Недействительное приглашение"
 
-#: src/views/members/index.tsx:222
+#: src/views/members/index.tsx:221
 msgid "Invite"
 msgstr "Пригласить"
 
@@ -1253,7 +1257,7 @@ msgstr "Язык"
 msgid "Launch offer"
 msgstr "Стартовое предложение"
 
-#: src/views/members/index.tsx:192
+#: src/views/members/index.tsx:191
 msgid "Launch offer: Get unlimited members with Pro"
 msgstr "Стартовое предложение: получите неограниченное количество участников с Pro"
 
@@ -1331,12 +1335,12 @@ msgstr "Средний приоритет"
 #: src/views/board/components/Filters.tsx:93
 #: src/views/board/components/NewCardForm.tsx:366
 #: src/views/card/index.tsx:126
-#: src/views/members/index.tsx:179
+#: src/views/members/index.tsx:178
 msgid "Members"
 msgstr "Участники"
 
-#. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/members/index.tsx:174
+#. placeholder {0}: workspace.name ?? t`Workspace`
+#: src/views/members/index.tsx:173
 msgid "Members | {0}"
 msgstr "Участники | {0}"
 
@@ -1514,7 +1518,7 @@ msgstr "Пароль должен содержать не менее 8 симв�
 msgid "Passwords do not match"
 msgstr "Пароли не совпадают"
 
-#: src/views/members/index.tsx:135
+#: src/views/members/index.tsx:134
 msgid "Paused"
 msgstr "Приостановлено"
 
@@ -1523,7 +1527,7 @@ msgstr "Приостановлено"
 msgid "Payment frequency"
 msgstr "Частота платежей"
 
-#: src/views/members/index.tsx:135
+#: src/views/members/index.tsx:134
 msgid "Pending"
 msgstr "В ожидании"
 
@@ -1639,7 +1643,7 @@ msgstr "Политика конфиденциальности"
 msgid "Private"
 msgstr "Личное"
 
-#: src/views/members/index.tsx:206
+#: src/views/members/index.tsx:205
 msgid "Pro Plan"
 msgstr "Профессиональный план"
 
@@ -1687,7 +1691,7 @@ msgstr "Удалённый"
 msgid "Remove"
 msgstr "Удалить"
 
-#: src/views/members/index.tsx:149
+#: src/views/members/index.tsx:148
 msgid "Remove member"
 msgstr "Удалить участника"
 
@@ -1744,7 +1748,7 @@ msgstr "Обзор"
 msgid "Roadmap"
 msgstr "Дорожная карта"
 
-#: src/views/members/index.tsx:244
+#: src/views/members/index.tsx:243
 msgid "Role"
 msgstr "Роль"
 
@@ -1905,7 +1909,7 @@ msgid "System"
 msgstr "Система"
 
 #: src/views/members/components/InviteMemberForm.tsx:315
-#: src/views/members/index.tsx:208
+#: src/views/members/index.tsx:207
 msgid "Team Plan"
 msgstr "Командный план"
 
@@ -2256,7 +2260,7 @@ msgstr "URL должен содержать не менее 3 символов"
 msgid "Use template"
 msgstr "Использовать шаблон"
 
-#: src/views/members/index.tsx:238
+#: src/views/members/index.tsx:237
 msgid "User"
 msgstr "Пользователь"
 
@@ -2331,6 +2335,10 @@ msgstr "Зачем создавать Trello с открытым исходны�
 
 #: src/components/SettingsLayout.tsx:39
 #: src/views/board/index.tsx:361
+#: src/views/boards/index.tsx:22
+#: src/views/members/index.tsx:173
+#: src/views/public/board/index.tsx:100
+#: src/views/public/boards/index.tsx:66
 msgid "Workspace"
 msgstr "Рабочее пространство"
 

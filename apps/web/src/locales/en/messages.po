@@ -26,10 +26,10 @@ msgstr ", or see our"
 msgid "{0}"
 msgstr "{0}"
 
-#. placeholder {0}: card?.title ?? "Card"
+#. placeholder {0}: card?.title ?? t`Card`
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#. placeholder {1}: board?.name ?? "Board"
-#. placeholder {1}: workspace.name ?? "Workspace"
+#. placeholder {1}: board?.name ?? t`Board`
+#. placeholder {1}: workspace.name ?? t`Workspace`
 #: src/views/boards/index.tsx:22
 #: src/views/card/index.tsx:216
 msgid "{0} | {1}"
@@ -337,6 +337,8 @@ msgid "Blog Post"
 msgstr "Blog Post"
 
 #: src/views/board/index.tsx:361
+#: src/views/card/index.tsx:216
+#: src/views/public/board/index.tsx:100
 msgid "Board"
 msgstr "Board"
 
@@ -433,6 +435,10 @@ msgstr "Bug Report"
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:104
 msgid "Cancel"
 msgstr "Cancel"
+
+#: src/views/card/index.tsx:216
+msgid "Card"
+msgstr "Card"
 
 #: src/views/card/index.tsx:262
 msgid "Card not found"
@@ -1065,7 +1071,7 @@ msgid "Free"
 msgstr "Free"
 
 #: src/views/members/components/InviteMemberForm.tsx:326
-#: src/views/members/index.tsx:209
+#: src/views/members/index.tsx:208
 msgid "Free Plan"
 msgstr "Free Plan"
 
@@ -1260,7 +1266,7 @@ msgstr "Invalid email address"
 msgid "Invalid invitation"
 msgstr "Invalid invitation"
 
-#: src/views/members/index.tsx:222
+#: src/views/members/index.tsx:221
 msgid "Invite"
 msgstr "Invite"
 
@@ -1350,7 +1356,7 @@ msgstr "Language"
 msgid "Launch offer"
 msgstr "Launch offer"
 
-#: src/views/members/index.tsx:192
+#: src/views/members/index.tsx:191
 msgid "Launch offer: Get unlimited members with Pro"
 msgstr "Launch offer: Get unlimited members with Pro"
 
@@ -1428,12 +1434,12 @@ msgstr "Medium Priority"
 #: src/views/board/components/Filters.tsx:93
 #: src/views/board/components/NewCardForm.tsx:366
 #: src/views/card/index.tsx:126
-#: src/views/members/index.tsx:179
+#: src/views/members/index.tsx:178
 msgid "Members"
 msgstr "Members"
 
-#. placeholder {0}: workspace.name ?? "Workspace"
-#: src/views/members/index.tsx:174
+#. placeholder {0}: workspace.name ?? t`Workspace`
+#: src/views/members/index.tsx:173
 msgid "Members | {0}"
 msgstr "Members | {0}"
 
@@ -1631,7 +1637,7 @@ msgstr "Password must be at least 8 characters"
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
-#: src/views/members/index.tsx:135
+#: src/views/members/index.tsx:134
 msgid "Paused"
 msgstr "Paused"
 
@@ -1640,7 +1646,7 @@ msgstr "Paused"
 msgid "Payment frequency"
 msgstr "Payment frequency"
 
-#: src/views/members/index.tsx:135
+#: src/views/members/index.tsx:134
 msgid "Pending"
 msgstr "Pending"
 
@@ -1756,7 +1762,7 @@ msgstr "Privacy policy"
 msgid "Private"
 msgstr "Private"
 
-#: src/views/members/index.tsx:206
+#: src/views/members/index.tsx:205
 msgid "Pro Plan"
 msgstr "Pro Plan"
 
@@ -1804,7 +1810,7 @@ msgstr "Remote"
 msgid "Remove"
 msgstr "Remove"
 
-#: src/views/members/index.tsx:149
+#: src/views/members/index.tsx:148
 msgid "Remove member"
 msgstr "Remove member"
 
@@ -1869,7 +1875,7 @@ msgstr "Review"
 msgid "Roadmap"
 msgstr "Roadmap"
 
-#: src/views/members/index.tsx:244
+#: src/views/members/index.tsx:243
 msgid "Role"
 msgstr "Role"
 
@@ -2042,7 +2048,7 @@ msgid "System"
 msgstr "System"
 
 #: src/views/members/components/InviteMemberForm.tsx:315
-#: src/views/members/index.tsx:208
+#: src/views/members/index.tsx:207
 msgid "Team Plan"
 msgstr "Team Plan"
 
@@ -2405,7 +2411,7 @@ msgstr "URL must be at least 3 characters long"
 msgid "Use template"
 msgstr "Use template"
 
-#: src/views/members/index.tsx:238
+#: src/views/members/index.tsx:237
 msgid "User"
 msgstr "User"
 
@@ -2484,6 +2490,10 @@ msgstr "Why make an open source Trello?"
 
 #: src/components/SettingsLayout.tsx:39
 #: src/views/board/index.tsx:361
+#: src/views/boards/index.tsx:22
+#: src/views/members/index.tsx:173
+#: src/views/public/board/index.tsx:100
+#: src/views/public/boards/index.tsx:66
 msgid "Workspace"
 msgstr "Workspace"
 

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
-import { useEffect, useState } from "react";
 import {
   HiBolt,
   HiEllipsisHorizontal,
@@ -171,7 +170,7 @@ export default function MembersPage() {
 
   return (
     <>
-      <PageHead title={t`Members | ${workspace.name ?? "Workspace"}`} />
+      <PageHead title={t`Members | ${workspace.name ?? t`Workspace`}`} />
       <div className="m-auto h-full max-w-[1100px] p-6 px-5 md:px-28 md:py-12">
         <div className="mb-8 flex w-full justify-between">
           <div className="flex items-center gap-3">
