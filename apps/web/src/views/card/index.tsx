@@ -268,6 +268,7 @@ export default function CardPage() {
 
   if (!cardId) return <></>;
 
+  const isGuest = workspace.role === "guest";
   return (
     <>
       <PageHead
@@ -311,9 +312,7 @@ export default function CardPage() {
                       </div>
                     </form>
 
-                    <div className="flex">
-                      <Dropdown />
-                    </div>
+                    <div className="flex">{!isGuest && <Dropdown />}</div>
                   </>
                 )}
                 {!card && !isLoading && (
@@ -354,46 +353,65 @@ export default function CardPage() {
                               isLoading={!card}
                             />
                           </div>
-                          <div>
-                            <p>Motorista que coletou</p>
-                            <Select
-                              name="motoristaColeta"
-                              aria-label="Project status"
-                              onChange={handleMotoristaColetaChange}
-                              value={card.motoristaColeta ?? ""}
-                              className="w-full rounded-md border border-neutral-400 bg-neutral-50 px-8 py-1 text-sm"
-                            >
-                              <option value="" disabled>
-                                {" "}
-                                Selecione seu motorista
-                              </option>
-                              <option value="motorista-1">Motorista 1</option>
-                              <option value="motorista-2">Motorista 2</option>
-                              <option value="motorista-3">Motorista 3</option>
-                              <option value="motorista-4">Motorista 4</option>
-                            </Select>
-                          </div>
-                          <div>
-                            <p>Motorista da entrega final</p>
-                            <Select
-                              name="motoristaEntrega"
-                              aria-label="Project status"
-                              onChange={handleMotoristaEntregaChange}
-                              value={card.motoristaEntrega ?? ""}
-                              className="w-full rounded-md border border-neutral-400 bg-neutral-50 px-8 py-1 text-sm"
-                            >
-                              <option value="" disabled>
-                                {" "}
-                                Selecione seu motorista
-                              </option>
-                              <option value="motorista-1">Motorista 1</option>
-                              <option value="motorista-2">Motorista 2</option>
-                              <option value="motorista-3">Motorista 3</option>
-                              <option value="motorista-4">Motorista 4</option>
-                            </Select>
-                          </div>
+                          {!isGuest && (
+                            <>
+                              <div>
+                                <p>Motorista que coletou</p>
+                                <Select
+                                  name="motoristaColeta"
+                                  aria-label="Project status"
+                                  onChange={handleMotoristaColetaChange}
+                                  value={card.motoristaColeta ?? ""}
+                                  className="w-full rounded-md border border-neutral-400 bg-neutral-50 px-8 py-1 text-sm"
+                                >
+                                  <option value="" disabled>
+                                    {" "}
+                                    Selecione seu motorista
+                                  </option>
+                                  <option value="motorista-1">
+                                    Motorista 1
+                                  </option>
+                                  <option value="motorista-2">
+                                    Motorista 2
+                                  </option>
+                                  <option value="motorista-3">
+                                    Motorista 3
+                                  </option>
+                                  <option value="motorista-4">
+                                    Motorista 4
+                                  </option>
+                                </Select>
+                              </div>
+                              <div>
+                                <p>Motorista da entrega final</p>
+                                <Select
+                                  name="motoristaEntrega"
+                                  aria-label="Project status"
+                                  onChange={handleMotoristaEntregaChange}
+                                  value={card.motoristaEntrega ?? ""}
+                                  className="w-full rounded-md border border-neutral-400 bg-neutral-50 px-8 py-1 text-sm"
+                                >
+                                  <option value="" disabled>
+                                    {" "}
+                                    Selecione seu motorista
+                                  </option>
+                                  <option value="motorista-1">
+                                    Motorista 1
+                                  </option>
+                                  <option value="motorista-2">
+                                    Motorista 2
+                                  </option>
+                                  <option value="motorista-3">
+                                    Motorista 3
+                                  </option>
+                                  <option value="motorista-4">
+                                    Motorista 4
+                                  </option>
+                                </Select>
+                              </div>
+                            </>
+                          )}
                         </div>
-
                         {/* Laundry details section (read-only) */}
                         <div className="mb-4 mt-4 rounded-lg bg-neutral-100 p-4 shadow-sm dark:bg-neutral-800">
                           <h3 className="mb-3 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
@@ -457,12 +475,17 @@ export default function CardPage() {
                     cardPublicId={cardId}
                     activeChecklistForm={activeChecklistForm}
                     setActiveChecklistForm={setActiveChecklistForm}
-                    viewOnly={workspace.role != "admin"}
+                    viewOnly={
+                      workspace.role != "admin" && workspace.role != "member"
+                    }
                   />
                   <div className="border-t-[1px] border-light-300 pt-12 dark:border-dark-300">
                     <h2 className="text-md pb-4 font-medium text-light-1000 dark:text-dark-1000">
                       {t`Activity`}
                     </h2>
+                    <div className="mt-6">
+                      <NewCommentForm cardPublicId={cardId} />
+                    </div>
                     <div>
                       <ActivityList
                         cardPublicId={cardId}
@@ -470,9 +493,6 @@ export default function CardPage() {
                         isLoading={!card}
                         isAdmin={workspace.role === "admin"}
                       />
-                    </div>
-                    <div className="mt-6">
-                      <NewCommentForm cardPublicId={cardId} />
                     </div>
                   </div>
                 </>

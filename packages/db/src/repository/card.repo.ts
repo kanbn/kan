@@ -133,6 +133,18 @@ export const bulkCreateCardLabelRelationships = async (
   return result;
 };
 
+export const bulkDeleteCardLabelRelationships = async (
+  db: dbClient,
+    cardId: number,
+) => {
+  const [result] = await db
+    .delete(cardsToLabels)
+    .where(eq(cardsToLabels.cardId, cardId))
+    .returning();
+
+  return result;
+};
+
 export const bulkCreateCardWorkspaceMemberRelationships = async (
   db: dbClient,
   cardWorkspaceMemberRelationshipInput: {
