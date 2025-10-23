@@ -358,7 +358,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   return (
     <>
       <PageHead
-        title={`${(boardData?.name ?? isTemplate) ? t`Board` : t`Template`} | ${workspace.name}`}
+        title={`${boardData?.name ?? (isTemplate ? t`Board` : t`Template`)} | ${workspace.name ?? "Workspace"}`}
       />
       <div className="relative flex h-full flex-col">
         <PatternedBackground />
@@ -546,7 +546,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                             labels={card.labels}
                                             members={card.members}
                                             checklists={card.checklists ?? []}
-                                            description={card.description ?? null}
+                                            description={
+                                              card.description ?? null
+                                            }
                                             comments={card.comments ?? []}
                                           />
                                         </Link>
