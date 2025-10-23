@@ -463,6 +463,9 @@ export default function CardPage() {
                     <h2 className="text-md pb-4 font-medium text-light-1000 dark:text-dark-1000">
                       {t`Activity`}
                     </h2>
+                    <div className="mt-6">
+                      <NewCommentForm cardPublicId={cardId} />
+                    </div>
                     <div>
                       <ActivityList
                         cardPublicId={cardId}
@@ -470,9 +473,6 @@ export default function CardPage() {
                         isLoading={!card}
                         isAdmin={workspace.role === "admin"}
                       />
-                    </div>
-                    <div className="mt-6">
-                      <NewCommentForm cardPublicId={cardId} />
                     </div>
                   </div>
                 </>

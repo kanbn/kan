@@ -457,6 +457,8 @@ export const cardRouter = createTRPCRouter({
         return { newLabel: false };
       }
 
+      await cardRepo.bulkDeleteCardLabelRelationships(ctx.db, cardLabelIds.cardId);
+
       const newCardLabelRelationship =
         await cardRepo.createCardLabelRelationship(ctx.db, cardLabelIds);
 

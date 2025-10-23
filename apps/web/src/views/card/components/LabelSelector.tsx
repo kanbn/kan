@@ -29,55 +29,49 @@ export default function LabelSelector({
   const { showPopup } = usePopup();
 
   const addOrRemoveLabel = api.card.addOrRemoveLabel.useMutation({
-    onMutate: async (update) => {
-      await utils.card.byId.cancel();
+  onMutate: async (update) => {
+    await utils.card.byId.cancel();
 
-      const previousCard = utils.card.byId.getData({ cardPublicId });
+    const previousCard = utils.card.byId.getData({ cardPublicId });
 
-      utils.card.byId.setData({ cardPublicId }, (oldCard) => {
-        if (!oldCard) return oldCard;
+    utils.card.byId.setData({ cardPublicId }, (oldCard) => {
+      if (!oldCard) return oldCard;
 
-        const hasLabel = oldCard.labels.some(
-          (label) => label.publicId === update.labelPublicId,
-        );
+      const labelToAdd = labels.find(
+        (label) => label.key === update.labelPublicId,
+      );
 
-        const labelToAdd = oldCard.labels.find(
-          (label) => label.publicId === update.labelPublicId,
-        );
+      const updatedLabels = labelToAdd
+        ? [
+            {
+              publicId: labelToAdd.key,
+              name: labelToAdd.value,
+              colourCode: (labelToAdd as any).colourCode ?? "",
+            },
+          ]
+        : [];
 
-        const updatedLabels = hasLabel
-          ? oldCard.labels.filter(
-              (label) => label.publicId !== update.labelPublicId,
-            )
-          : [
-              ...oldCard.labels,
-              {
-                publicId: update.labelPublicId,
-                name: labelToAdd?.name ?? "",
-                colourCode: labelToAdd?.colourCode ?? "",
-              },
-            ];
+      return {
+        ...oldCard,
+        labels: updatedLabels,
+      };
+    });
 
-        return {
-          ...oldCard,
-          labels: updatedLabels,
-        };
-      });
+    return { previousCard };
+  },
+  onError: (_error, _newList, context) => {
+    utils.card.byId.setData({ cardPublicId }, context?.previousCard);
+    showPopup({
+      header: t`Unable to update label`,
+      message: t`Please try again later, or contact customer support.`,
+      icon: "error",
+    });
+  },
+  onSettled: async () => {
+    await utils.card.byId.invalidate({ cardPublicId });
+  },
+});
 
-      return { previousCard };
-    },
-    onError: (_error, _newList, context) => {
-      utils.card.byId.setData({ cardPublicId }, context?.previousCard);
-      showPopup({
-        header: t`Unable to update labels`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await utils.card.byId.invalidate({ cardPublicId });
-    },
-  });
 
   const selectedLabels = labels.filter((label) => label.selected);
 
