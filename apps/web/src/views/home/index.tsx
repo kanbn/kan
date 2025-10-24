@@ -11,6 +11,7 @@ import Cta from "./components/Cta";
 import FAQs from "./components/Faqs";
 import Features from "./components/Features";
 import Layout from "./components/Layout";
+import Logos from "./components/Logos";
 
 export default function HomeView() {
   const { resolvedTheme } = useTheme();
@@ -84,8 +85,8 @@ export default function HomeView() {
             </p>
           </div>
         </div>
-        <div className="px-4">
-          <div className="mb-24 rounded-[16px] border border-light-300 bg-light-50 p-1 shadow-md dark:border-dark-300 dark:bg-dark-100 lg:rounded-[24px] lg:p-2">
+        <div className="px-4 pb-10">
+          <div className="rounded-[16px] border border-light-300 bg-light-50 p-1 shadow-md dark:border-dark-300 dark:bg-dark-100 lg:rounded-[24px] lg:p-2">
             <div className="relative overflow-hidden rounded-[12px] border border-light-300 shadow-sm dark:border-dark-300 lg:rounded-[16px]">
               <Image
                 src={`/hero-light.png`}
@@ -104,6 +105,7 @@ export default function HomeView() {
             </div>
           </div>
         </div>
+        <Logos />
         <div className="relative pt-10">
           <div id="features" className="absolute -top-20" />
           <Features theme={resolvedTheme === "dark" ? "dark" : "light"} />

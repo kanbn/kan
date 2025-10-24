@@ -22,6 +22,7 @@ export default {
         "border-spin": "border-spin 4s linear infinite",
         "fade-down": "fade-down 0.5s ease-out",
         "fade-in": "fade-in 0.5s ease-out",
+        scroll: "scroll 40s linear infinite",
       },
 
       keyframes: {
@@ -45,6 +46,14 @@ export default {
           },
           "100%": {
             opacity: "1",
+          },
+        },
+        scroll: {
+          "0%": {
+            transform: "translateX(0)",
+          },
+          "100%": {
+            transform: "translateX(calc(-50% - 1.5rem))",
           },
         },
       },

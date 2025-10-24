@@ -6,6 +6,7 @@ import Button from "~/components/Button";
 import { PageHead } from "~/components/PageHead";
 import Cta from "../home/components/Cta";
 import Layout from "../home/components/Layout";
+import Logos from "../home/components/Logos";
 import FeatureComparisonTable from "./components/FeatureComparisonTable";
 import PricingTiers from "./components/PricingTiers";
 
@@ -33,7 +34,7 @@ export default function PricingView() {
       <PageHead title={`${t`Pricing`} | kan.bn`} />
 
       <div className="flex h-full w-full flex-col lg:pt-[5rem]">
-        <div className="w-full pb-10 pt-32 lg:py-32">
+        <div className="w-full pb-10 pt-32">
           <div className="flex flex-col items-center justify-center px-4 pb-10">
             <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900 lg:text-sm">
               <p>{t`Pricing`}</p>
@@ -51,6 +52,10 @@ export default function PricingView() {
             frequencies={frequencies}
             setFrequency={setFrequency}
           />
+        </div>
+
+        <div className="pb-20">
+          <Logos />
         </div>
 
         <div className="pb-22 flex flex-col items-center justify-center px-4">

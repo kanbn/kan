@@ -76,6 +76,7 @@
     "@lingui/cli": "^5.3.2",
     "@lingui/loader": "^5.3.2",
     "@lingui/swc-plugin": "^5.5.2",
+    "@svgr/webpack": "^8.1.0",
     "@types/node": "^20.17.7",
     "@types/react": "catalog:react18",
     "@types/react-beautiful-dnd": "^13.1.7",
