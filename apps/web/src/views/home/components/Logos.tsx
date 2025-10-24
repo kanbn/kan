@@ -1,5 +1,5 @@
 import type { FC, SVGProps } from "react";
-import { t } from "@lingui/core/macro";
+import { Trans } from "@lingui/react/macro";
 
 import AirbusLogo from "/public/logos/airbus.svg";
 import BitwardenLogo from "/public/logos/bitwarden.svg";
@@ -70,9 +70,11 @@ export default function Logos() {
     <div className="w-full px-4 py-16">
       <div className="mb-8 text-center">
         <p className="text-sm font-medium text-light-800 dark:text-dark-800">
-          {t`Trusted by fast-moving teams`}
-          <br />
-          {t`around the world`}
+          <Trans>
+            Trusted by fast-moving teams
+            <br />
+            around the world
+          </Trans>
         </p>
       </div>
 

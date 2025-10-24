@@ -68,7 +68,7 @@ msgstr "8 USD/miesiąc"
 msgid "1 user"
 msgstr "1 użytkownik"
 
-#: src/views/home/index.tsx:69
+#: src/views/home/index.tsx:70
 msgid "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
 msgstr "Potężna, elastyczna aplikacja kanban, która pomaga organizować pracę, śledzić postępy i dostarczać wyniki — wszystko w jednym miejscu."
 
@@ -464,7 +464,7 @@ msgstr "Komentarze i wzmianki"
 msgid "Company"
 msgstr "Firma"
 
-#: src/views/pricing/index.tsx:65
+#: src/views/pricing/index.tsx:70
 msgid "Compare our features to see why Kan is the best choice."
 msgstr "Porównaj nasze funkcje, aby zobaczyć, dlaczego Kan jest najlepszym wyborem."
 
@@ -946,7 +946,7 @@ msgstr "Szybki i lekki"
 msgid "Feature"
 msgstr "Funkcja"
 
-#: src/views/pricing/index.tsx:62
+#: src/views/pricing/index.tsx:67
 msgid "Feature breakdown"
 msgstr "Podział funkcji"
 
@@ -958,7 +958,7 @@ msgstr "Prośba o funkcję"
 #: src/views/home/components/Footer.tsx:49
 #: src/views/home/components/Header.tsx:17
 #: src/views/home/components/Header.tsx:33
-#: src/views/pricing/index.tsx:58
+#: src/views/pricing/index.tsx:63
 msgid "Features"
 msgstr "Funkcje"
 
@@ -1009,7 +1009,7 @@ msgstr "Zabawa"
 #: src/views/auth/signup/index.tsx:69
 #: src/views/home/components/Cta.tsx:61
 #: src/views/home/components/Header.tsx:106
-#: src/views/pricing/index.tsx:69
+#: src/views/pricing/index.tsx:74
 msgid "Get started"
 msgstr "Rozpocznij"
 
@@ -1034,11 +1034,11 @@ msgid "Get started for free today"
 msgstr "Rozpocznij za darmo już dziś"
 
 #: src/views/pricing/components/Pricing.tsx:92
-#: src/views/pricing/index.tsx:46
+#: src/views/pricing/index.tsx:47
 msgid "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team."
 msgstr "Rozpocznij za darmo, bez ograniczeń użytkowania. Aby współpracować, przejdź na plan dopasowany do wielkości Twojego zespołu."
 
-#: src/views/home/index.tsx:73
+#: src/views/home/index.tsx:74
 msgid "Get started on Cloud"
 msgstr "Rozpocznij w chmurze"
 
@@ -1350,7 +1350,7 @@ msgid "Members | {0}"
 msgstr "Członkowie | {0}"
 
 #: src/views/pricing/components/Pricing.tsx:14
-#: src/views/pricing/index.tsx:19
+#: src/views/pricing/index.tsx:20
 msgid "Monthly"
 msgstr "Miesięcznie"
 
@@ -1450,7 +1450,7 @@ msgstr "Brak {0}"
 msgid "No boards found"
 msgstr "Nie znaleziono tablic"
 
-#: src/views/home/index.tsx:83
+#: src/views/home/index.tsx:84
 msgid "No credit card required"
 msgstr "Nie wymagana karta kredytowa"
 
@@ -1538,8 +1538,8 @@ msgstr "Oczekujące"
 
 #: src/views/pricing/components/Pricing.tsx:15
 #: src/views/pricing/components/Pricing.tsx:20
-#: src/views/pricing/index.tsx:20
-#: src/views/pricing/index.tsx:25
+#: src/views/pricing/index.tsx:21
+#: src/views/pricing/index.tsx:26
 msgid "per user/month"
 msgstr "na użytkownika/miesiąc"
 
@@ -1629,8 +1629,8 @@ msgstr "Cena za użytkownika/miesiąc"
 #: src/views/home/components/Header.tsx:18
 #: src/views/home/components/Header.tsx:34
 #: src/views/pricing/components/Pricing.tsx:85
-#: src/views/pricing/index.tsx:33
-#: src/views/pricing/index.tsx:39
+#: src/views/pricing/index.tsx:34
+#: src/views/pricing/index.tsx:40
 msgid "Pricing"
 msgstr "Cennik"
 
@@ -1792,7 +1792,7 @@ msgstr "Wybierz źródło"
 msgid "Self Host"
 msgstr "Hostuj samodzielnie"
 
-#: src/views/home/index.tsx:79
+#: src/views/home/index.tsx:80
 msgid "Self host with Github"
 msgstr "Hostuj samodzielnie z Github"
 
@@ -1867,7 +1867,7 @@ msgid "Sign up with "
 msgstr "Zarejestruj się za pomocą "
 
 #: src/views/pricing/components/Pricing.tsx:89
-#: src/views/pricing/index.tsx:43
+#: src/views/pricing/index.tsx:44
 msgid "Simple pricing"
 msgstr "Prosty cennik"
 
@@ -1883,7 +1883,7 @@ msgstr "Media społecznościowe"
 msgid "Software Development"
 msgstr "Rozwój oprogramowania"
 
-#: src/views/home/index.tsx:35
+#: src/views/home/index.tsx:36
 msgid "Star on Github"
 msgstr "Oznacz gwiazdką na Githubie"
 
@@ -1966,7 +1966,7 @@ msgstr "Wprowadzone obecne hasło jest nieprawidłowe."
 msgid "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
 msgstr "Główna różnica między Kan a Trello polega na tym, że Kan jest oprogramowaniem otwartoźródłowym, co pozwala każdemu przeglądać, modyfikować i współtworzyć nasz kod. Nasza oferta w chmurze nie nakłada również żadnych ograniczeń na funkcje do użytku indywidualnego, podczas gdy Trello blokuje podstawowe funkcje, takie jak liczba tablic, które można utworzyć, za dodatkowymi kosztami."
 
-#: src/views/home/index.tsx:63
+#: src/views/home/index.tsx:64
 msgid "The open source <0/> alternative to Trello"
 msgstr "Otwarta alternatywa <0/> dla Trello"
 
@@ -2056,6 +2056,10 @@ msgstr "Importy Trello"
 #: src/views/boards/components/TemplateBoards.tsx:45
 msgid "Triaging"
 msgstr "Sortowanie"
+
+#: src/views/home/components/Logos.tsx:73
+msgid "Trusted by fast-moving teams<0/>around the world"
+msgstr "Zaufany przez dynamiczne zespoły<0/>na całym świecie"
 
 #: src/views/card/components/NewChecklistItemForm.tsx:88
 msgid "Unable to add checklist item"
@@ -2415,7 +2419,7 @@ msgid "Writing"
 msgstr "Pisanie"
 
 #: src/views/pricing/components/Pricing.tsx:19
-#: src/views/pricing/index.tsx:24
+#: src/views/pricing/index.tsx:25
 msgid "Yearly"
 msgstr "Rocznie"
 
