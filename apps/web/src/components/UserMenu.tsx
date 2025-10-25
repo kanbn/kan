@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Menu, Transition } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
+import { useTheme } from "next-themes";
 import { Fragment } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -10,7 +11,6 @@ import { authClient } from "@kan/auth/client";
 
 import { useIsMobile } from "~/hooks/useMediaQuery";
 import { useModal } from "~/providers/modal";
-import { useTheme } from "next-themes";
 import { getAvatarUrl } from "~/utils/helpers";
 
 interface UserMenuProps {

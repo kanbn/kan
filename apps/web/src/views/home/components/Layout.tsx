@@ -7,13 +7,13 @@ import Footer from "./Footer";
 import Header from "./Header";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   const { data: session } = authClient.useSession();
 
   const isLoggedIn = !!session?.user;
 
-  const isDarkMode = theme === "dark";
+  const isDarkMode = resolvedTheme === "dark";
 
   return (
     <>
