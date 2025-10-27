@@ -12,6 +12,7 @@ import FAQs from "./components/Faqs";
 import Features from "./components/Features";
 import Layout from "./components/Layout";
 import Logos from "./components/Logos";
+import Testimonials from "./components/Testimonials";
 
 export default function HomeView() {
   const { resolvedTheme } = useTheme();
@@ -109,6 +110,10 @@ export default function HomeView() {
         <div className="relative pt-10">
           <div id="features" className="absolute -top-20" />
           <Features theme={resolvedTheme === "dark" ? "dark" : "light"} />
+        </div>
+        <div className="relative pt-10">
+          <div id="testimonials" className="absolute -top-20" />
+          <Testimonials />
         </div>
         <div className="relative pt-10">
           <div id="faq" className="absolute -top-20" />
