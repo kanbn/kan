@@ -63,7 +63,7 @@ msgstr "$8/mese"
 msgid "1 user"
 msgstr "1 utente"
 
-#: src/views/home/index.tsx:70
+#: src/views/home/index.tsx:71
 msgid "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
 msgstr "Un'app kanban potente e flessibile che ti aiuta a organizzare il lavoro, monitorare i progressi e ottenere risultati, tutto in un unico posto."
 
@@ -1033,7 +1033,7 @@ msgstr "Inizia gratuitamente oggi"
 msgid "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team."
 msgstr "Inizia gratuitamente, senza limiti di utilizzo. Per la collaborazione, passa a un piano adatto alle dimensioni del tuo team."
 
-#: src/views/home/index.tsx:74
+#: src/views/home/index.tsx:75
 msgid "Get started on Cloud"
 msgstr "Inizia su Cloud"
 
@@ -1306,6 +1306,10 @@ msgstr "Esci"
 msgid "Long-term"
 msgstr "A lungo termine"
 
+#: src/views/home/components/Testimonials.tsx:236
+msgid "Loved by teams worldwide"
+msgstr "Amato dai team di tutto il mondo"
+
 #: src/views/boards/components/TemplateBoards.tsx:18
 msgid "Low Priority"
 msgstr "Bassa priorità"
@@ -1445,7 +1449,7 @@ msgstr "Nessun {0}"
 msgid "No boards found"
 msgstr "Nessuna bacheca trovata"
 
-#: src/views/home/index.tsx:84
+#: src/views/home/index.tsx:85
 msgid "No credit card required"
 msgstr "Nessuna carta di credito richiesta"
 
@@ -1774,6 +1778,10 @@ msgstr "Selezione"
 msgid "Search boards and cards..."
 msgstr "Cerca bacheche e schede..."
 
+#: src/views/home/components/Testimonials.tsx:239
+msgid "See what our users are saying about Kan"
+msgstr "Scopri cosa dicono i nostri utenti su Kan"
+
 #: src/views/boards/components/ImportBoardsForm.tsx:274
 msgid "Select all"
 msgstr "Seleziona tutto"
@@ -1787,7 +1795,7 @@ msgstr "Seleziona fonte"
 msgid "Self Host"
 msgstr "Self Host"
 
-#: src/views/home/index.tsx:80
+#: src/views/home/index.tsx:81
 msgid "Self host with Github"
 msgstr "Self host con Github"
 
@@ -1878,7 +1886,7 @@ msgstr "Social media"
 msgid "Software Development"
 msgstr "Sviluppo software"
 
-#: src/views/home/index.tsx:36
+#: src/views/home/index.tsx:37
 msgid "Star on Github"
 msgstr "Metti una stella su Github"
 
@@ -1949,6 +1957,10 @@ msgstr "Template"
 msgid "Terms of service"
 msgstr "Termini di servizio"
 
+#: src/views/home/components/Testimonials.tsx:232
+msgid "Testimonials"
+msgstr "Testimonianze"
+
 #: src/components/FeedbackModal.tsx:34
 msgid "Thank you for your feedback!"
 msgstr "Grazie per il tuo feedback!"
@@ -1961,7 +1973,7 @@ msgstr "La password attuale inserita non è corretta."
 msgid "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
 msgstr "La principale differenza tra Kan e Trello è che Kan è open source, permettendo a chiunque di visualizzare, modificare e contribuire al nostro codice. La nostra offerta cloud non impone inoltre alcuna restrizione sulle funzionalità per uso individuale, mentre Trello blocca funzionalità di base come il numero di bacheche che puoi creare dietro un paywall."
 
-#: src/views/home/index.tsx:64
+#: src/views/home/index.tsx:65
 msgid "The open source <0/> alternative to Trello"
 msgstr "L'alternativa open source <0/> a Trello"
 
