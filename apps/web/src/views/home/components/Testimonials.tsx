@@ -240,7 +240,7 @@ const Testimonials = () => {
         </p>
 
         <div className="mx-auto mt-16 w-full max-w-7xl">
-          <div className="grid grid-cols-1 gap-4 md:auto-rows-fr md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 [mask-image:linear-gradient(to_bottom,black_90%,transparent_98%)] md:auto-rows-fr md:grid-cols-3">
             {testimonials.map((testimonial, index) => (
               <TestimonialCard
                 key={`testimonial-${index}`}
