@@ -139,7 +139,7 @@ export const workspaceRouter = createTRPCRouter({
     })
     .input(
       z.object({
-        name: z.string().min(1),
+        name: z.string().min(1).max(64),
         slug: z
           .string()
           .min(3)
@@ -222,7 +222,7 @@ export const workspaceRouter = createTRPCRouter({
     .input(
       z.object({
         workspacePublicId: z.string().min(12),
-        name: z.string().min(3).max(24).optional(),
+        name: z.string().min(3).max(64).optional(),
         slug: z
           .string()
           .min(3)

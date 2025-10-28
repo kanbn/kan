@@ -311,7 +311,7 @@ msgstr "Post na blogu"
 msgid "Board"
 msgstr "Tablica"
 
-#: src/components/NewWorkspaceForm.tsx:346
+#: src/components/NewWorkspaceForm.tsx:349
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:81
 msgid "Board analytics"
 msgstr "Analiza tablicy"
@@ -446,7 +446,7 @@ msgstr "Przegląd kodu"
 msgid "Collaborate seamlessly with your team."
 msgstr "Współpracuj płynnie ze swoim zespołem."
 
-#: src/components/NewWorkspaceForm.tsx:349
+#: src/components/NewWorkspaceForm.tsx:352
 #: src/views/home/components/Features.tsx:67
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:84
 msgid "Coming soon"
@@ -590,7 +590,7 @@ msgstr "Utwórz nową listę"
 msgid "Create template"
 msgstr "Utwórz szablon"
 
-#: src/components/NewWorkspaceForm.tsx:384
+#: src/components/NewWorkspaceForm.tsx:387
 #: src/components/WorkspaceMenu.tsx:149
 msgid "Create workspace"
 msgstr "Utwórz przestrzeń roboczą"
@@ -624,7 +624,7 @@ msgstr "Niestandardowa domena"
 msgid "Custom templates"
 msgstr "Niestandardowe szablony"
 
-#: src/components/NewWorkspaceForm.tsx:315
+#: src/components/NewWorkspaceForm.tsx:318
 msgid "Custom URLs require upgrading to a Pro plan"
 msgstr "Niestandardowe adresy URL wymagają przejścia na plan Pro"
 
@@ -632,7 +632,7 @@ msgstr "Niestandardowe adresy URL wymagają przejścia na plan Pro"
 msgid "Custom workspace link"
 msgstr "Niestandardowy link do przestrzeni roboczej"
 
-#: src/components/NewWorkspaceForm.tsx:339
+#: src/components/NewWorkspaceForm.tsx:342
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:74
 msgid "Custom workspace URL"
 msgstr "Niestandardowy adres URL przestrzeni roboczej"
@@ -887,7 +887,7 @@ msgstr "Błąd podczas aktualizacji adresu URL przestrzeni roboczej"
 msgid "Error upgrading subscription"
 msgstr "Błąd podczas aktualizacji subskrypcji"
 
-#: src/components/NewWorkspaceForm.tsx:142
+#: src/components/NewWorkspaceForm.tsx:145
 msgid "Error upgrading to Pro"
 msgstr "Błąd podczas aktualizacji do wersji Pro"
 
@@ -1257,7 +1257,7 @@ msgstr "Etykiety i Filtry"
 msgid "Language"
 msgstr "Język"
 
-#: src/components/NewWorkspaceForm.tsx:332
+#: src/components/NewWorkspaceForm.tsx:335
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:67
 msgid "Launch offer"
 msgstr "Oferta startowa"
@@ -1433,7 +1433,7 @@ msgstr "Nowy szablon"
 msgid "New Ticket"
 msgstr "Nowe zgłoszenie"
 
-#: src/components/NewWorkspaceForm.tsx:240
+#: src/components/NewWorkspaceForm.tsx:243
 msgid "New workspace"
 msgstr "Nowa przestrzeń robocza"
 
@@ -1581,7 +1581,7 @@ msgstr "Proszę wybrać plik do przesłania."
 
 #: src/components/DeleteLabelConfirmation.tsx:26
 #: src/components/FeedbackModal.tsx:41
-#: src/components/NewWorkspaceForm.tsx:155
+#: src/components/NewWorkspaceForm.tsx:158
 #: src/views/board/components/NewCardForm.tsx:176
 #: src/views/board/components/NewListForm.tsx:78
 #: src/views/board/components/NewTemplateForm.tsx:61
@@ -2027,11 +2027,11 @@ msgstr "Spowoduje to trwałe usunięcie wszystkich danych powiązanych z tym obs
 msgid "This will result in the permanent deletion of all data associated with your account."
 msgstr "Spowoduje to trwałe usunięcie wszystkich danych powiązanych z Twoim kontem."
 
-#: src/components/NewWorkspaceForm.tsx:284
+#: src/components/NewWorkspaceForm.tsx:287
 msgid "This workspace URL has already been taken"
 msgstr "Ten adres URL obszaru roboczego jest już zajęty"
 
-#: src/components/NewWorkspaceForm.tsx:286
+#: src/components/NewWorkspaceForm.tsx:289
 msgid "This workspace URL is reserved"
 msgstr "Ten adres URL obszaru roboczego jest zarezerwowany"
 
@@ -2098,7 +2098,7 @@ msgstr "Nie można utworzyć listy"
 msgid "Unable to create template"
 msgstr "Nie można utworzyć szablonu"
 
-#: src/components/NewWorkspaceForm.tsx:154
+#: src/components/NewWorkspaceForm.tsx:157
 msgid "Unable to create workspace"
 msgstr "Nie można utworzyć przestrzeni roboczej"
 
@@ -2202,7 +2202,7 @@ msgstr "Nieograniczona liczba komentarzy"
 msgid "Unlimited lists"
 msgstr "Nieograniczona liczba list"
 
-#: src/components/NewWorkspaceForm.tsx:329
+#: src/components/NewWorkspaceForm.tsx:332
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:64
 msgid "Unlimited members"
 msgstr "Nieograniczona liczba członków"
@@ -2249,7 +2249,7 @@ msgstr "Ulepsz"
 msgid "Upgrade to Pro"
 msgstr "Ulepsz do planu Pro"
 
-#: src/components/NewWorkspaceForm.tsx:369
+#: src/components/NewWorkspaceForm.tsx:372
 msgid "Upgrade to Pro ($29/month)"
 msgstr "Ulepsz do planu Pro (29 USD/miesiąc)"
 
@@ -2262,17 +2262,17 @@ msgstr "Ulepsz do planu zespołowego"
 msgid "Urgent"
 msgstr "Pilne"
 
-#: src/components/NewWorkspaceForm.tsx:35
+#: src/components/NewWorkspaceForm.tsx:38
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
 msgid "URL can only contain letters, numbers, and hyphens"
 msgstr "Adres URL może zawierać tylko litery, cyfry i myślniki"
 
-#: src/components/NewWorkspaceForm.tsx:33
+#: src/components/NewWorkspaceForm.tsx:36
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:34
 msgid "URL cannot exceed 24 characters"
 msgstr "Adres URL nie może przekraczać 24 znaków"
 
-#: src/components/NewWorkspaceForm.tsx:31
+#: src/components/NewWorkspaceForm.tsx:34
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:32
 msgid "URL must be at least 3 characters long"
 msgstr "Adres URL musi mieć co najmniej 3 znaki"
@@ -2363,7 +2363,7 @@ msgstr "Dlaczego próbujecie stworzyć Trello w wersji otwartoźródłowej?"
 msgid "Workspace"
 msgstr "Obszar roboczy"
 
-#: src/components/NewWorkspaceForm.tsx:143
+#: src/components/NewWorkspaceForm.tsx:146
 msgid "Workspace created successfully. You can upgrade later in settings."
 msgstr "Obszar roboczy został pomyślnie utworzony. Możesz go ulepszyć później w ustawieniach."
 
@@ -2393,16 +2393,17 @@ msgstr "Opis przestrzeni roboczej został zaktualizowany"
 msgid "Workspace members"
 msgstr "Członkowie przestrzeni roboczej"
 
-#: src/components/NewWorkspaceForm.tsx:259
+#: src/components/NewWorkspaceForm.tsx:262
 #: src/views/settings/WorkspaceSettings.tsx:58
 msgid "Workspace name"
 msgstr "Nazwa przestrzeni roboczej"
 
+#: src/components/NewWorkspaceForm.tsx:30
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:15
-msgid "Workspace name cannot exceed 24 characters"
-msgstr "Nazwa przestrzeni roboczej nie może przekraczać 24 znaków"
+msgid "Workspace name cannot exceed 64 characters"
+msgstr "Nazwa przestrzeni roboczej nie może przekraczać 64 znaków"
 
-#: src/components/NewWorkspaceForm.tsx:27
+#: src/components/NewWorkspaceForm.tsx:29
 msgid "Workspace name is required"
 msgstr "Nazwa przestrzeni roboczej jest wymagana"
 
@@ -2422,7 +2423,7 @@ msgstr "Slug przestrzeni roboczej został zaktualizowany"
 msgid "Workspace URL"
 msgstr "URL przestrzeni roboczej"
 
-#: src/components/NewWorkspaceForm.tsx:273
+#: src/components/NewWorkspaceForm.tsx:276
 msgid "workspace-url"
 msgstr "workspace-url"
 

@@ -24,7 +24,10 @@ import { api } from "~/utils/api";
 import LoadingSpinner from "./LoadingSpinner";
 
 const schema = z.object({
-  name: z.string().min(1, { message: t`Workspace name is required` }),
+  name: z
+    .string()
+    .min(1, { message: t`Workspace name is required` })
+    .max(64, { message: t`Workspace name cannot exceed 64 characters` }),
   slug: z
     .string()
     .min(3, {

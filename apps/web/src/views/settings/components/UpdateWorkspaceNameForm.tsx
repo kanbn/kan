@@ -12,7 +12,7 @@ const schema = z.object({
   name: z
     .string()
     .min(3, { message: t`Workspace name must be at least 3 characters long` })
-    .max(24, { message: t`Workspace name cannot exceed 24 characters` }),
+    .max(64, { message: t`Workspace name cannot exceed 64 characters` }),
 });
 
 type FormValues = z.infer<typeof schema>;

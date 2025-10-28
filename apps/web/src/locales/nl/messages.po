@@ -306,7 +306,7 @@ msgstr "Blogbericht"
 msgid "Board"
 msgstr "Bord"
 
-#: src/components/NewWorkspaceForm.tsx:346
+#: src/components/NewWorkspaceForm.tsx:349
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:81
 msgid "Board analytics"
 msgstr "Bordanalyses"
@@ -441,7 +441,7 @@ msgstr "Code review"
 msgid "Collaborate seamlessly with your team."
 msgstr "Werk naadloos samen met je team."
 
-#: src/components/NewWorkspaceForm.tsx:349
+#: src/components/NewWorkspaceForm.tsx:352
 #: src/views/home/components/Features.tsx:67
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:84
 msgid "Coming soon"
@@ -585,7 +585,7 @@ msgstr "Maak nieuwe lijst"
 msgid "Create template"
 msgstr "Sjabloon maken"
 
-#: src/components/NewWorkspaceForm.tsx:384
+#: src/components/NewWorkspaceForm.tsx:387
 #: src/components/WorkspaceMenu.tsx:149
 msgid "Create workspace"
 msgstr "Werkruimte maken"
@@ -619,7 +619,7 @@ msgstr "Aangepast domein"
 msgid "Custom templates"
 msgstr "Aangepaste sjablonen"
 
-#: src/components/NewWorkspaceForm.tsx:315
+#: src/components/NewWorkspaceForm.tsx:318
 msgid "Custom URLs require upgrading to a Pro plan"
 msgstr "Aangepaste URL's vereisen een upgrade naar een Pro-abonnement"
 
@@ -627,7 +627,7 @@ msgstr "Aangepaste URL's vereisen een upgrade naar een Pro-abonnement"
 msgid "Custom workspace link"
 msgstr "Aangepaste werkruimtelink"
 
-#: src/components/NewWorkspaceForm.tsx:339
+#: src/components/NewWorkspaceForm.tsx:342
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:74
 msgid "Custom workspace URL"
 msgstr "Aangepaste werkruimte-URL"
@@ -882,7 +882,7 @@ msgstr "Fout bij het bijwerken van werkruimte-URL"
 msgid "Error upgrading subscription"
 msgstr "Fout bij het upgraden van abonnement"
 
-#: src/components/NewWorkspaceForm.tsx:142
+#: src/components/NewWorkspaceForm.tsx:145
 msgid "Error upgrading to Pro"
 msgstr "Fout bij upgraden naar Pro"
 
@@ -1252,7 +1252,7 @@ msgstr "Labels & filters"
 msgid "Language"
 msgstr "Taal"
 
-#: src/components/NewWorkspaceForm.tsx:332
+#: src/components/NewWorkspaceForm.tsx:335
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:67
 msgid "Launch offer"
 msgstr "Introductieaanbieding"
@@ -1428,7 +1428,7 @@ msgstr "Nieuw sjabloon"
 msgid "New Ticket"
 msgstr "Nieuw ticket"
 
-#: src/components/NewWorkspaceForm.tsx:240
+#: src/components/NewWorkspaceForm.tsx:243
 msgid "New workspace"
 msgstr "Nieuwe werkruimte"
 
@@ -1576,7 +1576,7 @@ msgstr "Selecteer een bestand om te uploaden."
 
 #: src/components/DeleteLabelConfirmation.tsx:26
 #: src/components/FeedbackModal.tsx:41
-#: src/components/NewWorkspaceForm.tsx:155
+#: src/components/NewWorkspaceForm.tsx:158
 #: src/views/board/components/NewCardForm.tsx:176
 #: src/views/board/components/NewListForm.tsx:78
 #: src/views/board/components/NewTemplateForm.tsx:61
@@ -2022,11 +2022,11 @@ msgstr "Dit zal resulteren in het permanent verwijderen van alle gegevens die aa
 msgid "This will result in the permanent deletion of all data associated with your account."
 msgstr "Dit zal resulteren in het permanent verwijderen van alle gegevens die aan je account zijn gekoppeld."
 
-#: src/components/NewWorkspaceForm.tsx:284
+#: src/components/NewWorkspaceForm.tsx:287
 msgid "This workspace URL has already been taken"
 msgstr "Deze werkruimte-URL is al in gebruik"
 
-#: src/components/NewWorkspaceForm.tsx:286
+#: src/components/NewWorkspaceForm.tsx:289
 msgid "This workspace URL is reserved"
 msgstr "Deze werkruimte-URL is gereserveerd"
 
@@ -2093,7 +2093,7 @@ msgstr "Kan geen lijst maken"
 msgid "Unable to create template"
 msgstr "Kan sjabloon niet maken"
 
-#: src/components/NewWorkspaceForm.tsx:154
+#: src/components/NewWorkspaceForm.tsx:157
 msgid "Unable to create workspace"
 msgstr "Kan werkruimte niet aanmaken"
 
@@ -2197,7 +2197,7 @@ msgstr "Onbeperkt aantal opmerkingen"
 msgid "Unlimited lists"
 msgstr "Onbeperkt aantal lijsten"
 
-#: src/components/NewWorkspaceForm.tsx:329
+#: src/components/NewWorkspaceForm.tsx:332
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:64
 msgid "Unlimited members"
 msgstr "Onbeperkt aantal leden"
@@ -2244,7 +2244,7 @@ msgstr "Upgraden"
 msgid "Upgrade to Pro"
 msgstr "Upgraden naar Pro"
 
-#: src/components/NewWorkspaceForm.tsx:369
+#: src/components/NewWorkspaceForm.tsx:372
 msgid "Upgrade to Pro ($29/month)"
 msgstr "Upgrade naar Pro ($29/maand)"
 
@@ -2257,17 +2257,17 @@ msgstr "Upgraden naar teamplan"
 msgid "Urgent"
 msgstr "Urgent"
 
-#: src/components/NewWorkspaceForm.tsx:35
+#: src/components/NewWorkspaceForm.tsx:38
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
 msgid "URL can only contain letters, numbers, and hyphens"
 msgstr "URL kan alleen letters, cijfers en koppeltekens bevatten"
 
-#: src/components/NewWorkspaceForm.tsx:33
+#: src/components/NewWorkspaceForm.tsx:36
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:34
 msgid "URL cannot exceed 24 characters"
 msgstr "URL mag niet langer zijn dan 24 tekens"
 
-#: src/components/NewWorkspaceForm.tsx:31
+#: src/components/NewWorkspaceForm.tsx:34
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:32
 msgid "URL must be at least 3 characters long"
 msgstr "URL moet minimaal 3 tekens lang zijn"
@@ -2358,7 +2358,7 @@ msgstr "Waarom een open source Trello maken?"
 msgid "Workspace"
 msgstr "Werkruimte"
 
-#: src/components/NewWorkspaceForm.tsx:143
+#: src/components/NewWorkspaceForm.tsx:146
 msgid "Workspace created successfully. You can upgrade later in settings."
 msgstr "Werkruimte succesvol aangemaakt. Je kunt later upgraden in de instellingen."
 
@@ -2388,16 +2388,17 @@ msgstr "Werkruimtebeschrijving bijgewerkt"
 msgid "Workspace members"
 msgstr "Werkruimteleden"
 
-#: src/components/NewWorkspaceForm.tsx:259
+#: src/components/NewWorkspaceForm.tsx:262
 #: src/views/settings/WorkspaceSettings.tsx:58
 msgid "Workspace name"
 msgstr "Naam werkruimte"
 
+#: src/components/NewWorkspaceForm.tsx:30
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:15
-msgid "Workspace name cannot exceed 24 characters"
-msgstr "Werkruimtenaam mag niet langer zijn dan 24 tekens"
+msgid "Workspace name cannot exceed 64 characters"
+msgstr "Werkruimtenaam mag niet langer zijn dan 64 tekens"
 
-#: src/components/NewWorkspaceForm.tsx:27
+#: src/components/NewWorkspaceForm.tsx:29
 msgid "Workspace name is required"
 msgstr "Naam van werkruimte is verplicht"
 
@@ -2417,7 +2418,7 @@ msgstr "Werkruimte-slug bijgewerkt"
 msgid "Workspace URL"
 msgstr "Werkruimte URL"
 
-#: src/components/NewWorkspaceForm.tsx:273
+#: src/components/NewWorkspaceForm.tsx:276
 msgid "workspace-url"
 msgstr "werkruimte-url"
 

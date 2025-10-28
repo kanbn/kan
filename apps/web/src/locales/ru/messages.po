@@ -306,7 +306,7 @@ msgstr "Пост в блоге"
 msgid "Board"
 msgstr "Доска"
 
-#: src/components/NewWorkspaceForm.tsx:346
+#: src/components/NewWorkspaceForm.tsx:349
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:81
 msgid "Board analytics"
 msgstr "Аналитика доски"
@@ -441,7 +441,7 @@ msgstr "Код-ревью"
 msgid "Collaborate seamlessly with your team."
 msgstr "Сотрудничайте с вашей командой без препятствий."
 
-#: src/components/NewWorkspaceForm.tsx:349
+#: src/components/NewWorkspaceForm.tsx:352
 #: src/views/home/components/Features.tsx:67
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:84
 msgid "Coming soon"
@@ -585,7 +585,7 @@ msgstr "Создать новый список"
 msgid "Create template"
 msgstr "Создать шаблон"
 
-#: src/components/NewWorkspaceForm.tsx:384
+#: src/components/NewWorkspaceForm.tsx:387
 #: src/components/WorkspaceMenu.tsx:149
 msgid "Create workspace"
 msgstr "Создать рабочее пространство"
@@ -619,7 +619,7 @@ msgstr "Пользовательский домен"
 msgid "Custom templates"
 msgstr "Пользовательские шаблоны"
 
-#: src/components/NewWorkspaceForm.tsx:315
+#: src/components/NewWorkspaceForm.tsx:318
 msgid "Custom URLs require upgrading to a Pro plan"
 msgstr "Для пользовательских URL требуется обновление до Pro-плана"
 
@@ -627,7 +627,7 @@ msgstr "Для пользовательских URL требуется обно�
 msgid "Custom workspace link"
 msgstr "Пользовательская ссылка рабочего пространства"
 
-#: src/components/NewWorkspaceForm.tsx:339
+#: src/components/NewWorkspaceForm.tsx:342
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:74
 msgid "Custom workspace URL"
 msgstr "Пользовательский URL рабочего пространства"
@@ -882,7 +882,7 @@ msgstr "Ошибка при обновлении URL рабочей област
 msgid "Error upgrading subscription"
 msgstr "Ошибка при обновлении подписки"
 
-#: src/components/NewWorkspaceForm.tsx:142
+#: src/components/NewWorkspaceForm.tsx:145
 msgid "Error upgrading to Pro"
 msgstr "Ошибка при обновлении до Pro"
 
@@ -1252,7 +1252,7 @@ msgstr "Метки и фильтры"
 msgid "Language"
 msgstr "Язык"
 
-#: src/components/NewWorkspaceForm.tsx:332
+#: src/components/NewWorkspaceForm.tsx:335
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:67
 msgid "Launch offer"
 msgstr "Стартовое предложение"
@@ -1428,7 +1428,7 @@ msgstr "Новый шаблон"
 msgid "New Ticket"
 msgstr "Новый тикет"
 
-#: src/components/NewWorkspaceForm.tsx:240
+#: src/components/NewWorkspaceForm.tsx:243
 msgid "New workspace"
 msgstr "Новое рабочее пространство"
 
@@ -1576,7 +1576,7 @@ msgstr "Пожалуйста, выберите файл для загрузки.
 
 #: src/components/DeleteLabelConfirmation.tsx:26
 #: src/components/FeedbackModal.tsx:41
-#: src/components/NewWorkspaceForm.tsx:155
+#: src/components/NewWorkspaceForm.tsx:158
 #: src/views/board/components/NewCardForm.tsx:176
 #: src/views/board/components/NewListForm.tsx:78
 #: src/views/board/components/NewTemplateForm.tsx:61
@@ -2022,11 +2022,11 @@ msgstr "Это приведет к безвозвратному удалению
 msgid "This will result in the permanent deletion of all data associated with your account."
 msgstr "Это приведет к безвозвратному удалению всех данных, связанных с вашей учетной записью."
 
-#: src/components/NewWorkspaceForm.tsx:284
+#: src/components/NewWorkspaceForm.tsx:287
 msgid "This workspace URL has already been taken"
 msgstr "Этот URL рабочего пространства уже занят."
 
-#: src/components/NewWorkspaceForm.tsx:286
+#: src/components/NewWorkspaceForm.tsx:289
 msgid "This workspace URL is reserved"
 msgstr "Этот URL рабочего пространства зарезервирован."
 
@@ -2093,7 +2093,7 @@ msgstr "Не удалось создать список."
 msgid "Unable to create template"
 msgstr "Не удалось создать шаблон"
 
-#: src/components/NewWorkspaceForm.tsx:154
+#: src/components/NewWorkspaceForm.tsx:157
 msgid "Unable to create workspace"
 msgstr "Не удалось создать рабочее пространство."
 
@@ -2197,7 +2197,7 @@ msgstr "Неограниченное количество комментарие
 msgid "Unlimited lists"
 msgstr "Неограниченное количество списков"
 
-#: src/components/NewWorkspaceForm.tsx:329
+#: src/components/NewWorkspaceForm.tsx:332
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:64
 msgid "Unlimited members"
 msgstr "Неограниченное количество участников"
@@ -2244,7 +2244,7 @@ msgstr "Обновить"
 msgid "Upgrade to Pro"
 msgstr "Обновить до Pro"
 
-#: src/components/NewWorkspaceForm.tsx:369
+#: src/components/NewWorkspaceForm.tsx:372
 msgid "Upgrade to Pro ($29/month)"
 msgstr "Обновить до Pro ($29/месяц)"
 
@@ -2257,17 +2257,17 @@ msgstr "Обновить до командного плана"
 msgid "Urgent"
 msgstr "Срочно"
 
-#: src/components/NewWorkspaceForm.tsx:35
+#: src/components/NewWorkspaceForm.tsx:38
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
 msgid "URL can only contain letters, numbers, and hyphens"
 msgstr "URL может содержать только буквы, цифры и дефисы"
 
-#: src/components/NewWorkspaceForm.tsx:33
+#: src/components/NewWorkspaceForm.tsx:36
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:34
 msgid "URL cannot exceed 24 characters"
 msgstr "URL не может превышать 24 символа"
 
-#: src/components/NewWorkspaceForm.tsx:31
+#: src/components/NewWorkspaceForm.tsx:34
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:32
 msgid "URL must be at least 3 characters long"
 msgstr "URL должен содержать не менее 3 символов"
@@ -2358,7 +2358,7 @@ msgstr "Зачем создавать Trello с открытым исходны�
 msgid "Workspace"
 msgstr "Рабочее пространство"
 
-#: src/components/NewWorkspaceForm.tsx:143
+#: src/components/NewWorkspaceForm.tsx:146
 msgid "Workspace created successfully. You can upgrade later in settings."
 msgstr "Рабочее пространство успешно создано. Вы можете обновить его позже в настройках."
 
@@ -2388,16 +2388,17 @@ msgstr "Описание рабочего пространства обновл�
 msgid "Workspace members"
 msgstr "Участники рабочего пространства"
 
-#: src/components/NewWorkspaceForm.tsx:259
+#: src/components/NewWorkspaceForm.tsx:262
 #: src/views/settings/WorkspaceSettings.tsx:58
 msgid "Workspace name"
 msgstr "Название рабочего пространства"
 
+#: src/components/NewWorkspaceForm.tsx:30
 #: src/views/settings/components/UpdateWorkspaceNameForm.tsx:15
-msgid "Workspace name cannot exceed 24 characters"
-msgstr "Название рабочего пространства не может превышать 24 символа"
+msgid "Workspace name cannot exceed 64 characters"
+msgstr "Название рабочего пространства не может превышать 64 символа"
 
-#: src/components/NewWorkspaceForm.tsx:27
+#: src/components/NewWorkspaceForm.tsx:29
 msgid "Workspace name is required"
 msgstr "Название рабочего пространства обязательно"
 
@@ -2417,7 +2418,7 @@ msgstr "Slug рабочего пространства обновлен"
 msgid "Workspace URL"
 msgstr "URL рабочего пространства"
 
-#: src/components/NewWorkspaceForm.tsx:273
+#: src/components/NewWorkspaceForm.tsx:276
 msgid "workspace-url"
 msgstr "workspace-url"
 

@@ -54,7 +54,7 @@ export default function WorkspaceMenu({
             >
               <Menu.Button
                 className={twMerge(
-                  "mb-1 flex h-[34px] flex-1 items-center rounded-md p-1.5 hover:bg-light-200 dark:hover:bg-dark-200",
+                  "mb-1 flex h-[34px] min-w-0 flex-1 items-center rounded-md p-1.5 hover:bg-light-200 dark:hover:bg-dark-200",
                   isCollapsed &&
                     "md:mb-1.5 md:h-9 md:w-9 md:flex-none md:justify-center md:p-0",
                 )}
@@ -67,7 +67,7 @@ export default function WorkspaceMenu({
                 </span>
                 <span
                   className={twMerge(
-                    "ml-2 truncate text-sm font-bold text-neutral-900 dark:text-dark-1000",
+                    "ml-2 min-w-0 flex-1 truncate text-sm font-bold text-neutral-900 dark:text-dark-1000",
                     isCollapsed && "md:hidden",
                   )}
                 >
