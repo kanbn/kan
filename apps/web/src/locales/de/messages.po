@@ -971,12 +971,12 @@ msgid "Filter"
 msgstr "Filter"
 
 #: src/views/home/components/Faqs.tsx:150
-msgid "Find answers to common questions about the project. Can't find what you're looking for? Feel free to <0>contact us</0>."
-msgstr "Finden Sie Antworten auf häufige Fragen zum Projekt. Nicht gefunden, wonach Sie suchen? Zögern Sie nicht, uns zu <0>kontaktieren</0>."
+msgid "Find answers to common questions about Kan. Can't find what you're looking for? Feel free to <0>contact us</0>."
+msgstr "Finden Sie Antworten auf häufig gestellte Fragen über Kan. Können Sie nicht finden, wonach Sie suchen? Zögern Sie nicht, uns zu <0>kontaktieren</0>."
 
 #: src/views/home/components/Faqs.tsx:41
-msgid "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users (free during the beta) and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge."
-msgstr "Für langfristige Nachhaltigkeit erkennen wir an, dass alle guten Open-Source-Projekte eine Einnahmequelle benötigen. Unsere stammt aus dem kostenpflichtigen Cloud-Angebot für Workspaces mit mehreren Benutzern (kostenlos während der Beta-Phase) und für benutzerdefinierte Workspace-Slugs. Es besteht keine Verpflichtung, dieses Angebot zu nutzen, und Sie können die Software kostenlos auf Ihrer eigenen Infrastruktur selbst hosten."
+msgid "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge."
+msgstr "Für langfristige Nachhaltigkeit erkennen wir an, dass alle guten Open-Source-Projekte eine Einnahmequelle benötigen. Unsere stammt aus dem kostenpflichtigen Cloud-Angebot für Workspaces mit mehreren Benutzern und für benutzerdefinierte Workspace-Slugs. Es besteht keine Verpflichtung, es zu nutzen, und Sie können die Software kostenlos auf Ihrer eigenen Infrastruktur selbst hosten."
 
 #: src/views/pricing/components/Pricing.tsx:32
 #: src/views/pricing/components/PricingTiers.tsx:30
@@ -2338,8 +2338,8 @@ msgid "What's the difference between Kan and Trello?"
 msgstr "Was ist der unterschied zwischen Kan und Trello?"
 
 #: src/views/home/components/Faqs.tsx:25
-msgid "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over time (and atlassification) it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello's simplicity, in open source."
-msgstr "Als Trello 2011 auf den markt kam, beeindruckte es alle mit seiner sorgfältig gestalteten einfachheit, aber mit der zeit (und der atlassifizierung) verlor es seinen zauber und entwickelte sich zu etwas, das eher einem \"Jira Lite\" ähnelt. Dieses projekt ist unser versuch, den ursprünglichen zauber von Trellos einfachheit als open source wiederzubeleben."
+msgid "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over the years it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello's simplicity, in open source."
+msgstr "Als Trello 2011 auf den Markt kam, begeisterte es alle mit seiner sorgfältig gestalteten Einfachheit, aber im Laufe der Jahre verlor es seinen Zauber und entwickelte sich zu etwas, das eher \"Jira Lite\" ähnelte. Dieses Projekt ist unser Versuch, den ursprünglichen Zauber der Einfachheit von Trello als Open Source wiederzugewinnen."
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:162
 msgid "White label"

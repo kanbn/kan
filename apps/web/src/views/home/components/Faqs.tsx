@@ -10,7 +10,7 @@ import { HiMiniMinusSmall, HiMiniPlusSmall } from "react-icons/hi2";
 
 const Text = ({ children }: { children: React.ReactNode }) => {
   return (
-    <p className="text-[15px] leading-[1.7rem] text-light-800 dark:text-dark-700">
+    <p className="text-[14px] leading-[1.7rem] text-light-800 dark:text-dark-800">
       {children}
     </p>
   );
@@ -22,7 +22,7 @@ const Faqs = () => {
       question: t`Why make an open source Trello?`,
       answer: (
         <Text>
-          {t`When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over time (and atlassification) it lost its magic and grew into something closer to "Jira Lite". This project is our attempt to recapture the original magic of Trello's simplicity, in open source.`}
+          {t`When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over the years it lost its magic and grew into something closer to "Jira Lite". This project is our attempt to recapture the original magic of Trello's simplicity, in open source.`}
         </Text>
       ),
     },
@@ -38,7 +38,7 @@ const Faqs = () => {
       question: t`How is the project funded?`,
       answer: (
         <Text>
-          {t`For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users (free during the beta) and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge.`}
+          {t`For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge.`}
         </Text>
       ),
     },
@@ -146,10 +146,10 @@ const Faqs = () => {
         <p className="mt-2 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-4xl">
           {t`Questions?`}
         </p>
-        <p className="text:md lg:text-md mt-3 max-w-[500px] text-center text-light-950 dark:text-dark-900">
+        <p className="text lg:text-md mt-3 max-w-[500px] text-center text-light-950 dark:text-dark-900">
           <Trans>
-            Find answers to common questions about the project. Can't find what
-            you're looking for? Feel free to{" "}
+            Find answers to common questions about Kan. Can't find what you're
+            looking for? Feel free to{" "}
             <Link href="mailto:support@kan.bn" className="underline">
               contact us
             </Link>
@@ -157,22 +157,22 @@ const Faqs = () => {
           </Trans>
         </p>
       </div>
-      <div className="rounded-2xl bg-light-50 ring-1 ring-light-300 dark:bg-dark-50 dark:ring-dark-400">
+      <div className="rounded-2xl bg-light-50 ring-1 ring-light-300 dark:bg-dark-50 dark:ring-dark-200">
         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-16">
           <div className="mx-auto max-w-4xl">
-            <dl className="divide-y divide-light-300 dark:divide-dark-600">
+            <dl className="divide-y divide-light-300 dark:divide-dark-200">
               {faqs.map((faq) => (
                 <Disclosure
                   key={faq.question}
                   as="div"
-                  className="py-6 first:pt-0 last:pb-0"
+                  className="py-5 first:pt-0 last:pb-0"
                 >
                   <dt>
-                    <DisclosureButton className="group flex w-full items-start justify-between text-left text-light-1000 dark:text-dark-1000">
-                      <span className="text-base/7 font-semibold">
+                    <DisclosureButton className="group flex w-full items-center justify-between text-left text-light-1000 dark:text-dark-1000">
+                      <span className="text-[14px] font-semibold">
                         {faq.question}
                       </span>
-                      <span className="ml-6 flex h-7 items-center">
+                      <span className="ml-6 flex h-7 items-center text-light-800 dark:text-dark-800">
                         <HiMiniPlusSmall
                           aria-hidden="true"
                           className="size-6 group-data-[open]:hidden"
