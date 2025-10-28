@@ -99,6 +99,14 @@ const t = initTRPC
   .meta<OpenApiMeta>()
   .create({
     transformer: superjson,
+    // Configure SSE server behavior for subscriptions
+    sse: {
+      ping: { enabled: true, intervalMs: 20000 },
+      client: {
+        // If inactive for this long, prompt clients to reconnect
+        reconnectAfterInactivityMs: 60_000,
+      },
+    },
     errorFormatter({ shape, error }) {
       return {
         ...shape,
@@ -135,3 +143,6 @@ export const protectedProcedure = t.procedure.use(enforceUserIsAuthed).meta({
     path: "/protected",
   },
 });
+
+// Convenience alias with types for subscriptions (still uses same middleware if needed)
+export const subscriptionProcedure = t.procedure;
