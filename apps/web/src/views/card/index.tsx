@@ -329,6 +329,7 @@ export default function CardPage() {
                       className="w-full space-y-6"
                     >
                       <div className="mt-2">
+                        <p className="my-2 mb-2 w-ful text-sm font-medium">Campo de Descrição</p>
                         <Editor
                           content={card.description}
                           onChange={(e) => setValue("description", e)}
@@ -336,7 +337,7 @@ export default function CardPage() {
                           workspaceMembers={board?.workspace.members ?? []}
                         />
                         <div>
-                          <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Labels`}</p>
+                          <p className="my-2 mb-2 pt-2 w-[100px] text-sm font-medium">{t`Labels`}</p>
                           <LabelSelector
                             cardPublicId={cardId ?? ""}
                             labels={formattedLabels}
