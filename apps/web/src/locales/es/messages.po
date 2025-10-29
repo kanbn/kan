@@ -406,6 +406,10 @@ msgstr "Cambiar contraseña"
 msgid "Change your language preferences."
 msgstr "Cambia tus preferencias de idioma."
 
+#: src/views/oss-friends/index.tsx:56
+msgid "Check out some of our favorite open source projects."
+msgstr "Descubre algunos de nuestros proyectos de código abierto favoritos."
+
 #: src/views/auth/login/index.tsx:43
 #: src/views/auth/signup/index.tsx:69
 msgid "Check your inbox"
@@ -455,7 +459,7 @@ msgstr "Comentarios"
 msgid "Comments & mentions"
 msgstr "Comentarios y menciones"
 
-#: src/views/home/components/Footer.tsx:94
+#: src/views/home/components/Footer.tsx:95
 msgid "Company"
 msgstr "Empresa"
 
@@ -745,7 +749,7 @@ msgstr "Documentos"
 
 #: src/components/UserMenu.tsx:191
 #: src/views/boards/components/TemplateBoards.tsx:24
-#: src/views/home/components/Footer.tsx:77
+#: src/views/home/components/Footer.tsx:78
 #: src/views/home/components/Header.tsx:36
 msgid "Documentation"
 msgstr "Documentación"
@@ -928,7 +932,7 @@ msgid "FAQ"
 msgstr "FAQ"
 
 #: src/views/home/components/Faqs.tsx:143
-#: src/views/home/components/Footer.tsx:51
+#: src/views/home/components/Footer.tsx:52
 msgid "FAQs"
 msgstr "Preguntas frecuentes"
 
@@ -950,7 +954,7 @@ msgid "Feature Request"
 msgstr "Solicitud de función"
 
 #: src/views/home/components/Features.tsx:132
-#: src/views/home/components/Footer.tsx:49
+#: src/views/home/components/Footer.tsx:50
 #: src/views/home/components/Header.tsx:17
 #: src/views/home/components/Header.tsx:33
 #: src/views/pricing/index.tsx:63
@@ -1266,15 +1270,19 @@ msgstr "Oferta de lanzamiento: Obtén miembros ilimitados con Pro"
 msgid "Launch offer: unlimited seats for just $29/month with Pro"
 msgstr "Oferta de lanzamiento: asientos ilimitados por solo $29/mes con Pro"
 
+#: src/views/oss-friends/index.tsx:89
+msgid "Learn more"
+msgstr "Saber más"
+
 #: src/views/boards/components/TemplateBoards.tsx:84
 msgid "Learning"
 msgstr "Aprendizaje"
 
-#: src/views/home/components/Footer.tsx:130
+#: src/views/home/components/Footer.tsx:131
 msgid "Legal"
 msgstr "Legal"
 
-#: src/views/home/components/Footer.tsx:44
+#: src/views/home/components/Footer.tsx:45
 msgid "License"
 msgstr "Licencia"
 
@@ -1481,6 +1489,10 @@ msgstr "Una vez que elimines tu espacio de trabajo, no hay vuelta atrás. Esta a
 msgid "Open source"
 msgstr "Código abierto"
 
+#: src/views/oss-friends/index.tsx:53
+msgid "Open Source Friends"
+msgstr "Amigos de código abierto"
+
 #: src/components/AuthForm.tsx:365
 msgid "or"
 msgstr "o"
@@ -1488,6 +1500,11 @@ msgstr "o"
 #: src/views/home/components/Features.tsx:101
 msgid "Organize and find cards quickly with powerful filtering tools."
 msgstr "Organiza y encuentra tarjetas rápidamente con potentes herramientas de filtrado."
+
+#: src/views/home/components/Footer.tsx:39
+#: src/views/oss-friends/index.tsx:47
+msgid "OSS Friends"
+msgstr "Amigos OSS"
 
 #: src/views/pricing/components/Pricing.tsx:73
 #: src/views/pricing/components/PricingTiers.tsx:70
@@ -1624,7 +1641,7 @@ msgstr "Por favor, inténtalo de nuevo más tarde."
 msgid "Price per user/month"
 msgstr "Precio por usuario/mes"
 
-#: src/views/home/components/Footer.tsx:50
+#: src/views/home/components/Footer.tsx:51
 #: src/views/home/components/Header.tsx:18
 #: src/views/home/components/Header.tsx:34
 #: src/views/pricing/components/Pricing.tsx:85
@@ -1639,7 +1656,7 @@ msgstr "Precios"
 msgid "Priority email support"
 msgstr "Soporte prioritario por email"
 
-#: src/views/home/components/Footer.tsx:42
+#: src/views/home/components/Footer.tsx:43
 msgid "Privacy policy"
 msgstr "Política de privacidad"
 
@@ -1734,7 +1751,7 @@ msgstr "Investigación"
 msgid "Resolution"
 msgstr "Resolución"
 
-#: src/views/home/components/Footer.tsx:113
+#: src/views/home/components/Footer.tsx:114
 msgid "Resources"
 msgstr "Recursos"
 
@@ -1953,7 +1970,7 @@ msgstr "El nombre de la plantilla es obligatorio"
 msgid "Templates"
 msgstr "Plantillas"
 
-#: src/views/home/components/Footer.tsx:41
+#: src/views/home/components/Footer.tsx:42
 msgid "Terms of service"
 msgstr "Términos de servicio"
 
