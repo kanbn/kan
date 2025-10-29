@@ -406,7 +406,7 @@ msgstr "Wachtwoord wijzigen"
 msgid "Change your language preferences."
 msgstr "Wijzig je taalvoorkeuren."
 
-#: src/views/oss-friends/index.tsx:56
+#: src/views/oss-friends/index.tsx:61
 msgid "Check out some of our favorite open source projects."
 msgstr "Bekijk enkele van onze favoriete open source projecten."
 
@@ -983,6 +983,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Voor duurzaamheid op lange termijn erkennen we dat alle goede open source projecten een inkomstenbron nodig hebben. De onze komt van de betaalde cloudoplossing voor werkruimtes met meerdere gebruikers en voor aangepaste werkruimte-slugs. Er is geen verplichting om het te gebruiken, en je kunt de software gratis op je eigen infrastructuur hosten."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratis"
@@ -1270,7 +1272,7 @@ msgstr "Lanceringsaanbieding: krijg onbeperkt aantal leden met Pro"
 msgid "Launch offer: unlimited seats for just $29/month with Pro"
 msgstr "Introductieaanbieding: onbeperkt aantal gebruikers voor slechts $29/maand met Pro"
 
-#: src/views/oss-friends/index.tsx:89
+#: src/views/oss-friends/index.tsx:110
 msgid "Learn more"
 msgstr "Meer informatie"
 
@@ -1489,7 +1491,7 @@ msgstr "Zodra je je werkruimte verwijdert, is er geen weg terug. Deze actie kan 
 msgid "Open source"
 msgstr "Open source"
 
-#: src/views/oss-friends/index.tsx:53
+#: src/views/oss-friends/index.tsx:58
 msgid "Open Source Friends"
 msgstr "Open Source Vrienden"
 
@@ -1502,7 +1504,7 @@ msgid "Organize and find cards quickly with powerful filtering tools."
 msgstr "Organiseer en vind kaarten snel met krachtige filtertools."
 
 #: src/views/home/components/Footer.tsx:39
-#: src/views/oss-friends/index.tsx:47
+#: src/views/oss-friends/index.tsx:52
 msgid "OSS Friends"
 msgstr "OSS Vrienden"
 

@@ -406,7 +406,7 @@ msgstr "Modifier le mot de passe"
 msgid "Change your language preferences."
 msgstr "Modifiez vos préférences linguistiques."
 
-#: src/views/oss-friends/index.tsx:56
+#: src/views/oss-friends/index.tsx:61
 msgid "Check out some of our favorite open source projects."
 msgstr "Découvrez certains de nos projets open source préférés."
 
@@ -983,6 +983,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Pour une durabilité à long terme, nous reconnaissons que tous les bons projets open source ont besoin d'une source de revenus. La nôtre provient de l'offre cloud payante pour les espaces de travail avec plusieurs utilisateurs et pour les slugs d'espace de travail personnalisés. Il n'y a aucune obligation de l'utiliser, et vous pouvez auto-héberger le logiciel sur votre propre infrastructure gratuitement."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratuit"
@@ -1270,7 +1272,7 @@ msgstr "Offre de lancement : obtenez des membres illimités avec Pro"
 msgid "Launch offer: unlimited seats for just $29/month with Pro"
 msgstr "Offre de lancement : sièges illimités pour seulement 29 $/mois avec Pro"
 
-#: src/views/oss-friends/index.tsx:89
+#: src/views/oss-friends/index.tsx:110
 msgid "Learn more"
 msgstr "En savoir plus"
 
@@ -1489,7 +1491,7 @@ msgstr "Une fois que vous supprimez votre espace de travail, il n'y a pas de ret
 msgid "Open source"
 msgstr "Open source"
 
-#: src/views/oss-friends/index.tsx:53
+#: src/views/oss-friends/index.tsx:58
 msgid "Open Source Friends"
 msgstr "Amis Open Source"
 
@@ -1502,7 +1504,7 @@ msgid "Organize and find cards quickly with powerful filtering tools."
 msgstr "Organisez et trouvez rapidement des cartes avec des outils de filtrage puissants."
 
 #: src/views/home/components/Footer.tsx:39
-#: src/views/oss-friends/index.tsx:47
+#: src/views/oss-friends/index.tsx:52
 msgid "OSS Friends"
 msgstr "Amis OSS"
 

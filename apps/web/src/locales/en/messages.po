@@ -467,7 +467,7 @@ msgstr "Change Password"
 msgid "Change your language preferences."
 msgstr "Change your language preferences."
 
-#: src/views/oss-friends/index.tsx:56
+#: src/views/oss-friends/index.tsx:61
 msgid "Check out some of our favorite open source projects."
 msgstr "Check out some of our favorite open source projects."
 
@@ -1381,7 +1381,7 @@ msgstr "Launch offer: Get unlimited members with Pro"
 msgid "Launch offer: unlimited seats for just $29/month with Pro"
 msgstr "Launch offer: unlimited seats for just $29/month with Pro"
 
-#: src/views/oss-friends/index.tsx:89
+#: src/views/oss-friends/index.tsx:110
 msgid "Learn more"
 msgstr "Learn more"
 
@@ -1620,7 +1620,7 @@ msgstr "Once you delete your workspace, there is no going back. This action cann
 msgid "Open source"
 msgstr "Open source"
 
-#: src/views/oss-friends/index.tsx:53
+#: src/views/oss-friends/index.tsx:58
 msgid "Open Source Friends"
 msgstr "Open Source Friends"
 
@@ -1633,7 +1633,7 @@ msgid "Organize and find cards quickly with powerful filtering tools."
 msgstr "Organize and find cards quickly with powerful filtering tools."
 
 #: src/views/home/components/Footer.tsx:39
-#: src/views/oss-friends/index.tsx:47
+#: src/views/oss-friends/index.tsx:52
 msgid "OSS Friends"
 msgstr "OSS Friends"
 
