@@ -5,6 +5,7 @@ import { HiXMark } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
 import { usePopup } from "~/providers/popup";
+import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
 interface ChecklistItemRowProps {
@@ -29,6 +30,8 @@ export default function ChecklistItemRow({
 }: ChecklistItemRowProps) {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
+  const { workspace } = useWorkspace();
+  
 
   const [title, setTitle] = useState("");
   const [completed, setCompleted] = useState(false);
@@ -219,7 +222,7 @@ export default function ChecklistItemRow({
           <input
             type="checkbox"
             checked={iron}
-            disabled={viewOnly}
+            disabled={workspace.role != "admin"}
             onChange={handleToggleIron}
             className={twMerge(
               "h-4 w-4 rounded-md border bg-transparent",
@@ -235,7 +238,7 @@ export default function ChecklistItemRow({
           <input
             type="checkbox"
             checked={wash}
-            disabled={viewOnly}
+            disabled={workspace.role != "admin"}
             onChange={handleToggleWash}
             className={twMerge(
               "h-4 w-4 rounded-md border bg-transparent",
