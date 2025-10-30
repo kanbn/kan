@@ -49,13 +49,14 @@ export default function WorkspaceMenu({
             <div
               className={twMerge(
                 "flex items-center justify-start gap-1",
-                isCollapsed && "md:flex-col-reverse md:items-stretch",
+                isCollapsed && "md:flex-col-reverse md:items-center",
               )}
             >
               <Menu.Button
                 className={twMerge(
                   "mb-1 flex h-[34px] min-w-0 flex-1 items-center justify-start rounded-md p-1.5 hover:bg-light-200 dark:hover:bg-dark-200",
-                  isCollapsed && "md:mb-1.5 md:h-9 md:w-9 md:flex-none md:p-0",
+                  isCollapsed &&
+                    "md:mb-1.5 md:h-9 md:w-9 md:flex-none md:justify-center md:p-0",
                 )}
                 title={isCollapsed ? workspace.name : undefined}
               >
