@@ -131,11 +131,11 @@ const Pricing = ({
               >
                 {tier.name}
               </h3>
-              {tier.highlighted && frequency?.value === "annually" ? (
+              {tier.highlighted && (
                 <p className="rounded-full bg-light-50 px-2.5 py-1 text-[12px] font-semibold text-dark-500 dark:bg-dark-1000 dark:text-dark-50">
-                  -20%
+                  {t`14 day free trial`}
                 </p>
-              ) : null}
+              )}
             </div>
             <p
               className={twMerge(
