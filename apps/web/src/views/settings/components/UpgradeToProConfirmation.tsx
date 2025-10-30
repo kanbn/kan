@@ -48,9 +48,11 @@ export function UpgradeToProConfirmation({
   return (
     <div className="p-5">
       <div className="flex w-full flex-col justify-between pb-4">
-        <h2 className="text-md pb-4 font-bold text-neutral-900 dark:text-dark-1000">
-          {t`Upgrade to Pro`}
-        </h2>
+        <div className="pb-4">
+          <h2 className="text-md font-bold text-neutral-900 dark:text-dark-1000">
+            {t`Upgrade to Pro`}
+          </h2>
+        </div>
         <p className="mb-4 text-sm font-medium text-light-900 dark:text-dark-900">
           {t`Supercharge your workspace for just $29/month. Here's what you'll get:`}
         </p>
@@ -106,7 +108,7 @@ export function UpgradeToProConfirmation({
         <Button
           onClick={handleUpgrade}
           iconRight={<HiBolt />}
-        >{t`Upgrade`}</Button>
+        >{t`Start 14 day free trial`}</Button>
       </div>
     </div>
   );

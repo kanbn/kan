@@ -2,13 +2,18 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
+import { env } from "next-runtime-env";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { HiBolt } from "react-icons/hi2";
 import {
   TbLayoutSidebarLeftCollapse,
   TbLayoutSidebarLeftExpand,
 } from "react-icons/tb";
 import { twMerge } from "tailwind-merge";
+
+import type { Subscription } from "@kan/shared/utils";
+import { hasActiveSubscription } from "@kan/shared/utils";
 
 import boardsIconDark from "~/assets/boards-dark.json";
 import boardsIconLight from "~/assets/boards-light.json";
@@ -18,9 +23,13 @@ import settingsIconDark from "~/assets/settings-dark.json";
 import settingsIconLight from "~/assets/settings-light.json";
 import templatesIconDark from "~/assets/templates-dark.json";
 import templatesIconLight from "~/assets/templates-light.json";
+import ButtonComponent from "~/components/Button";
 import ReactiveButton from "~/components/ReactiveButton";
 import UserMenu from "~/components/UserMenu";
 import WorkspaceMenu from "~/components/WorkspaceMenu";
+import { useModal } from "~/providers/modal";
+import { useWorkspace } from "~/providers/workspace";
+import { api } from "~/utils/api";
 
 interface SideNavigationProps {
   user: UserType;
@@ -39,13 +48,23 @@ export default function SideNavigation({
   onCloseSideNav,
 }: SideNavigationProps) {
   const router = useRouter();
+  const { workspace } = useWorkspace();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isInitialised, setIsInitialised] = useState(false);
+  const { openModal } = useModal();
+
+  const { data: workspaceData } = api.workspace.byId.useQuery({
+    workspacePublicId: workspace.publicId,
+  });
+
+  const subscriptions = workspaceData?.subscriptions as
+    | Subscription[]
+    | undefined;
 
   useEffect(() => {
     const savedState = localStorage.getItem("kan_sidebar-collapsed");
     if (savedState !== null) {
-      setIsCollapsed(JSON.parse(savedState));
+      setIsCollapsed(Boolean(JSON.parse(savedState)));
     }
     setIsInitialised(true);
   }, []);
@@ -61,7 +80,9 @@ export default function SideNavigation({
 
   const { pathname } = router;
 
-  const { theme, resolvedTheme } = useTheme();
+  const { resolvedTheme } = useTheme();
+
+  const isCloudEnv = env("NEXT_PUBLIC_KAN_ENV") === "cloud";
 
   const isDarkMode = resolvedTheme === "dark";
 
@@ -148,7 +169,7 @@ export default function SideNavigation({
           </ul>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-2">
           <UserMenu
             email={user.email ?? ""}
             imageUrl={user.image ?? undefined}
@@ -156,6 +177,31 @@ export default function SideNavigation({
             isCollapsed={isCollapsed}
             onCloseSideNav={onCloseSideNav}
           />
+          {isCloudEnv && !hasActiveSubscription(subscriptions, "pro") && (
+            <div className={twMerge(isCollapsed && "flex justify-center")}>
+              {isCollapsed ? (
+                <ButtonComponent
+                  iconLeft={<HiBolt />}
+                  variant="secondary"
+                  href="/settings/workspace?upgrade=pro"
+                  aria-label="Upgrade to Pro"
+                  title="Upgrade to Pro"
+                  iconOnly
+                  onClick={() => openModal("UPGRADE_TO_PRO")}
+                />
+              ) : (
+                <ButtonComponent
+                  iconLeft={<HiBolt />}
+                  fullWidth
+                  variant="secondary"
+                  href="/settings/workspace?upgrade=pro"
+                  onClick={() => openModal("UPGRADE_TO_PRO")}
+                >
+                  {t`Upgrade to Pro`}
+                </ButtonComponent>
+              )}
+            </div>
+          )}
         </div>
       </nav>
     </>

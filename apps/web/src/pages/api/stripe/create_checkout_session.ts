@@ -94,6 +94,9 @@ export default async function handler(
           quantity: 1,
         },
       ],
+      subscription_data: {
+        trial_period_days: 14,
+      },
       success_url: `${env("NEXT_PUBLIC_BASE_URL")}${successUrl}`,
       cancel_url: `${env("NEXT_PUBLIC_BASE_URL")}${cancelUrl}`,
       client_reference_id: workspacePublicId,

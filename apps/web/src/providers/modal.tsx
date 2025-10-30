@@ -59,7 +59,18 @@ export const ModalProvider: React.FC<Props> = ({ children }) => {
         entityLabel,
         closeOnClickOutside,
       };
-      setModalStack((prev) => [...prev, newModal]);
+      setModalStack((prev) => {
+        const last = prev[prev.length - 1];
+        if (
+          last &&
+          last.contentType === newModal.contentType &&
+          last.entityId === newModal.entityId &&
+          last.entityLabel === newModal.entityLabel
+        ) {
+          return prev; // prevent stacking duplicate modal on top
+        }
+        return [...prev, newModal];
+      });
     },
     [],
   );

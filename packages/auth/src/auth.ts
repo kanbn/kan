@@ -170,12 +170,48 @@ export const initAuth = (db: dbClient) => {
                     priceId: process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID!,
                     annualDiscountPriceId:
                       process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID!,
+                    freeTrial: {
+                      days: 14,
+                      onTrialStart: async (subscription) => {
+                        // Called when a trial starts
+                        // @todo: send trial start email
+                        // await sendTrialStartEmail(subscription.referenceId);
+                      },
+                      onTrialEnd: async ({ subscription }, request) => {
+                        // Called when a trial ends
+                        // @todo: send trial end email
+                        // await sendTrialEndEmail(user.email);
+                      },
+                      onTrialExpired: async (subscription) => {
+                        // Called when a trial expires without conversion
+                        // @todo: send trial expired email
+                        // await sendTrialExpiredEmail(subscription.referenceId);
+                      },
+                    },
                   },
                   {
                     name: "pro",
                     priceId: process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID!,
                     annualDiscountPriceId:
                       process.env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID!,
+                    freeTrial: {
+                      days: 14,
+                      onTrialStart: async (subscription) => {
+                        // Called when a trial starts
+                        // @todo: send trial start email
+                        // await sendTrialStartEmail(subscription.referenceId);
+                      },
+                      onTrialEnd: async ({ subscription }, request) => {
+                        // Called when a trial ends
+                        // @todo: send trial end email
+                        // await sendTrialEndEmail(user.email);
+                      },
+                      onTrialExpired: async (subscription) => {
+                        // Called when a trial expires without conversion
+                        // @todo: send trial expired email
+                        // await sendTrialExpiredEmail(subscription.referenceId);
+                      },
+                    },
                   },
                 ],
                 authorizeReference: async (data) => {

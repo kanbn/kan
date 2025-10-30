@@ -176,6 +176,13 @@ export function InviteMemberForm({
   };
 
   const handleInviteLinkToggle = async () => {
+    if (
+      env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
+      !hasTeamSubscription &&
+      !hasProSubscription
+    )
+      return handleUpgrade();
+
     setIsLoadingInviteLink(true);
 
     if (isShareInviteLinkEnabled && workspace.publicId) {
@@ -342,11 +349,6 @@ export function InviteMemberForm({
               : t`Create invite link`
           }
           isChecked={isShareInviteLinkEnabled}
-          disabled={
-            env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
-            !hasTeamSubscription &&
-            !hasProSubscription
-          }
           onChange={handleInviteLinkToggle}
         />
         <div>
@@ -354,7 +356,7 @@ export function InviteMemberForm({
           !hasTeamSubscription &&
           !hasProSubscription ? (
             <Button type="button" onClick={handleUpgrade}>
-              {t`Upgrade to Team Plan`}
+              {t`Start 14 day free trial`}
             </Button>
           ) : (
             <Button

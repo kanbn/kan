@@ -12,6 +12,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
   fullWidth?: boolean;
   openInNewTab?: boolean;
+  iconOnly?: boolean;
 }
 
 const Button = ({
@@ -24,6 +25,7 @@ const Button = ({
   href,
   fullWidth,
   openInNewTab,
+  iconOnly,
   ...props
 }: ButtonProps) => {
   const classes = twMerge(
@@ -32,6 +34,15 @@ const Button = ({
     size === "sm" && "text-xs",
     size === "lg" && "py-[0.65rem]",
     fullWidth && "w-full",
+    iconOnly && "p-0",
+    iconOnly &&
+      (size === "xs"
+        ? "h-6 w-6"
+        : size === "sm"
+          ? "h-8 w-8"
+          : size === "lg"
+            ? "h-10 w-10"
+            : "h-9 w-9"),
     variant === "primary" &&
       "bg-light-1000 dark:bg-dark-1000 dark:text-dark-50",
     variant === "secondary" &&
@@ -47,19 +58,60 @@ const Button = ({
     <span className="relative flex items-center justify-center">
       {isLoading && (
         <span className="absolute">
-          <LoadingSpinner size={size} />
+          <LoadingSpinner size={size === "xs" ? "sm" : size} />
         </span>
       )}
-      <div
-        className={twMerge(
-          "flex items-center",
-          isLoading ? "invisible" : "visible",
-        )}
-      >
-        {iconLeft && <span className="mr-2">{iconLeft}</span>}
-        {children}
-        {iconRight && <span className="ml-1">{iconRight}</span>}
-      </div>
+      {iconOnly ? (
+        <div
+          className={twMerge(
+            "flex items-center",
+            isLoading ? "invisible" : "visible",
+          )}
+        >
+          {iconLeft ?? iconRight}
+        </div>
+      ) : (
+        <div
+          className={twMerge(
+            fullWidth
+              ? "grid w-full grid-cols-[auto_1fr_auto] items-center gap-x-2"
+              : "flex items-center",
+            isLoading ? "invisible" : "visible",
+          )}
+        >
+          {fullWidth && !iconLeft && iconRight && (
+            <span className="col-start-1 opacity-0">{iconRight}</span>
+          )}
+          {iconLeft && (
+            <span
+              className={twMerge(
+                fullWidth ? "col-start-1 justify-self-start" : "mr-2",
+              )}
+            >
+              {iconLeft}
+            </span>
+          )}
+          <span
+            className={twMerge(
+              fullWidth ? "col-start-2 justify-self-center text-center" : "",
+            )}
+          >
+            {children}
+          </span>
+          {iconRight && (
+            <span
+              className={twMerge(
+                fullWidth ? "col-start-3 justify-self-end" : "ml-1",
+              )}
+            >
+              {iconRight}
+            </span>
+          )}
+          {fullWidth && !iconRight && iconLeft && (
+            <span className="col-start-3 opacity-0">{iconLeft}</span>
+          )}
+        </div>
+      )}
     </span>
   );
 
