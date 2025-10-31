@@ -63,6 +63,10 @@ msgstr "$8/mes"
 msgid "1 user"
 msgstr "1 usuario"
 
+#: src/views/pricing/components/PricingTiers.tsx:136
+msgid "14 day free trial"
+msgstr "Prueba gratuita de 14 días"
+
 #: src/views/home/index.tsx:71
 msgid "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
 msgstr "Una aplicación kanban potente y flexible que te ayuda a organizar el trabajo, seguir el progreso y entregar resultados, todo en un solo lugar."
@@ -119,7 +123,7 @@ msgid "Add label"
 msgstr "Añadir etiqueta"
 
 #: src/views/card/components/MemberSelector.tsx:130
-#: src/views/members/components/InviteMemberForm.tsx:250
+#: src/views/members/components/InviteMemberForm.tsx:257
 msgid "Add member"
 msgstr "Añadir miembro"
 
@@ -154,7 +158,7 @@ msgstr "añadió el elemento <0>{0}</0> a la lista de verificación"
 msgid "added label <0>{0}</0>"
 msgstr "añadió la etiqueta <0>{0}</0>"
 
-#: src/views/members/components/InviteMemberForm.tsx:320
+#: src/views/members/components/InviteMemberForm.tsx:327
 msgid "Adding a new member will cost an additional {price} ({billingType}) per seat."
 msgstr "Añadir un nuevo miembro costará {price} adicionales ({billingType}) por asiento."
 
@@ -183,7 +187,7 @@ msgstr "Ocurrió un error al desconectar tu cuenta de Trello."
 msgid "An unexpected error occurred. Please try again later."
 msgstr "Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo más tarde."
 
-#: src/views/members/components/InviteMemberForm.tsx:304
+#: src/views/members/components/InviteMemberForm.tsx:311
 msgid "Anyone with this link can join your workspace"
 msgstr "Cualquier persona con este enlace puede unirse a tu espacio de trabajo"
 
@@ -307,7 +311,7 @@ msgid "Board"
 msgstr "Tablero"
 
 #: src/components/NewWorkspaceForm.tsx:349
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:81
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:83
 msgid "Board analytics"
 msgstr "Análisis del tablero"
 
@@ -352,7 +356,7 @@ msgstr "Visibilidad del tablero"
 msgid "Board visibility updated"
 msgstr "Visibilidad del tablero actualizada"
 
-#: src/components/SideNavigation.tsx:70
+#: src/components/SideNavigation.tsx:91
 msgid "Boards"
 msgstr "Tableros"
 
@@ -379,7 +383,7 @@ msgstr "Informe de error"
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:168
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:104
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:106
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -447,7 +451,7 @@ msgstr "Colabora sin problemas con tu equipo."
 
 #: src/components/NewWorkspaceForm.tsx:352
 #: src/views/home/components/Features.tsx:67
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:84
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:86
 msgid "Coming soon"
 msgstr "Próximamente"
 
@@ -555,7 +559,7 @@ msgstr "Crear tarjeta"
 msgid "Create checklist"
 msgstr "Crear lista de verificación"
 
-#: src/views/members/components/InviteMemberForm.tsx:342
+#: src/views/members/components/InviteMemberForm.tsx:349
 msgid "Create invite link"
 msgstr "Crear enlace de invitación"
 
@@ -590,7 +594,7 @@ msgid "Create template"
 msgstr "Crear plantilla"
 
 #: src/components/NewWorkspaceForm.tsx:387
-#: src/components/WorkspaceMenu.tsx:148
+#: src/components/WorkspaceMenu.tsx:149
 msgid "Create workspace"
 msgstr "Crear espacio de trabajo"
 
@@ -632,7 +636,7 @@ msgid "Custom workspace link"
 msgstr "Enlace de espacio de trabajo personalizado"
 
 #: src/components/NewWorkspaceForm.tsx:342
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:74
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:76
 msgid "Custom workspace URL"
 msgstr "URL personalizada del espacio de trabajo"
 
@@ -644,7 +648,7 @@ msgstr "Atención al cliente"
 msgid "Dark"
 msgstr "Oscuro"
 
-#: src/views/members/components/InviteMemberForm.tsx:341
+#: src/views/members/components/InviteMemberForm.tsx:348
 msgid "Deactivate invite link"
 msgstr "Desactivar enlace de invitación"
 
@@ -684,8 +688,8 @@ msgid "Delete template"
 msgstr "Eliminar plantilla"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:106
-#: src/views/settings/WorkspaceSettings.tsx:96
-#: src/views/settings/WorkspaceSettings.tsx:107
+#: src/views/settings/WorkspaceSettings.tsx:97
+#: src/views/settings/WorkspaceSettings.tsx:108
 msgid "Delete workspace"
 msgstr "Eliminar espacio de trabajo"
 
@@ -790,7 +794,7 @@ msgstr "Editando"
 msgid "email"
 msgstr "correo electrónico"
 
-#: src/views/members/components/InviteMemberForm.tsx:265
+#: src/views/members/components/InviteMemberForm.tsx:272
 msgid "Email"
 msgstr "Correo electrónico"
 
@@ -824,7 +828,7 @@ msgstr "Introduce tu contraseña"
 
 #: src/views/boards/components/NewBoardForm.tsx:77
 #: src/views/boards/components/NewBoardForm.tsx:92
-#: src/views/members/components/InviteMemberForm.tsx:208
+#: src/views/members/components/InviteMemberForm.tsx:215
 msgid "Error"
 msgstr "Error"
 
@@ -881,7 +885,7 @@ msgstr "Error al actualizar el nombre del espacio de trabajo"
 msgid "Error updating workspace URL"
 msgstr "Error al actualizar la URL del espacio de trabajo"
 
-#: src/views/members/components/InviteMemberForm.tsx:233
+#: src/views/members/components/InviteMemberForm.tsx:240
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:41
 msgid "Error upgrading subscription"
 msgstr "Error al actualizar la suscripción"
@@ -913,7 +917,7 @@ msgstr "Ejecución"
 msgid "Failed to accept invitation. Please try again later, or contact customer support."
 msgstr "No se pudo aceptar la invitación. Por favor, inténtalo de nuevo más tarde o contacta con atención al cliente."
 
-#: src/views/members/components/InviteMemberForm.tsx:209
+#: src/views/members/components/InviteMemberForm.tsx:216
 msgid "Failed to copy invite link"
 msgstr "No se pudo copiar el enlace de invitación"
 
@@ -983,13 +987,11 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Para la sostenibilidad a largo plazo, reconocemos que todos los buenos proyectos de código abierto necesitan una fuente de ingresos. La nuestra proviene de la oferta de nube de pago para espacios de trabajo con múltiples usuarios y para slugs de espacio de trabajo personalizados. No hay obligación de usarla, y puedes alojar el software en tu propia infraestructura sin costo alguno."
 
 #: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratis"
 
-#: src/views/members/components/InviteMemberForm.tsx:326
+#: src/views/members/components/InviteMemberForm.tsx:333
 #: src/views/members/index.tsx:208
 msgid "Free Plan"
 msgstr "Plan gratuito"
@@ -1181,11 +1183,11 @@ msgstr "Invitación inválida"
 msgid "Invite"
 msgstr "Invitar"
 
-#: src/views/members/components/InviteMemberForm.tsx:202
+#: src/views/members/components/InviteMemberForm.tsx:209
 msgid "Invite link copied"
 msgstr "Enlace de invitación copiado"
 
-#: src/views/members/components/InviteMemberForm.tsx:203
+#: src/views/members/components/InviteMemberForm.tsx:210
 msgid "Invite link copied to clipboard"
 msgstr "Enlace de invitación copiado al portapapeles"
 
@@ -1198,11 +1200,11 @@ msgid "Invite links require a Team or Pro subscription. Please upgrade your work
 msgstr "Los enlaces de invitación requieren una suscripción de Equipo o Pro. Por favor, actualiza tu espacio de trabajo."
 
 #: src/views/card/components/MemberSelector.tsx:111
-#: src/views/members/components/InviteMemberForm.tsx:365
+#: src/views/members/components/InviteMemberForm.tsx:367
 msgid "Invite member"
 msgstr "Invitar miembro"
 
-#: src/views/members/components/InviteMemberForm.tsx:329
+#: src/views/members/components/InviteMemberForm.tsx:336
 msgid "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace."
 msgstr "Invitar miembros requiere un Plan de Equipo. Serás redirigido para actualizar tu espacio de trabajo."
 
@@ -1259,7 +1261,7 @@ msgid "Language"
 msgstr "Idioma"
 
 #: src/components/NewWorkspaceForm.tsx:335
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:67
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:69
 msgid "Launch offer"
 msgstr "Oferta de lanzamiento"
 
@@ -1345,7 +1347,7 @@ msgstr "marcó el elemento <0>{0}</0> de la lista de verificación como incomple
 msgid "Medium Priority"
 msgstr "Prioridad media"
 
-#: src/components/SideNavigation.tsx:80
+#: src/components/SideNavigation.tsx:101
 #: src/views/board/components/Filters.tsx:93
 #: src/views/board/components/NewCardForm.tsx:366
 #: src/views/card/index.tsx:126
@@ -1483,7 +1485,7 @@ msgstr "Incorporación"
 msgid "Once you delete your account, there is no going back. This action cannot be undone."
 msgstr "Una vez que elimines tu cuenta, no hay vuelta atrás. Esta acción no se puede deshacer."
 
-#: src/views/settings/WorkspaceSettings.tsx:99
+#: src/views/settings/WorkspaceSettings.tsx:100
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Una vez que elimines tu espacio de trabajo, no hay vuelta atrás. Esta acción no se puede deshacer."
 
@@ -1621,7 +1623,7 @@ msgstr "Por favor selecciona un archivo para subir."
 #: src/views/card/index.tsx:175
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:104
-#: src/views/members/components/InviteMemberForm.tsx:234
+#: src/views/members/components/InviteMemberForm.tsx:241
 #: src/views/settings/components/Avatar.tsx:78
 #: src/views/settings/components/Avatar.tsx:219
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:40
@@ -1654,7 +1656,7 @@ msgstr "Precios"
 
 #: src/views/pricing/components/Pricing.tsx:56
 #: src/views/pricing/components/PricingTiers.tsx:53
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:91
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:93
 msgid "Priority email support"
 msgstr "Soporte prioritario por email"
 
@@ -1670,7 +1672,7 @@ msgstr "Privado"
 msgid "Pro Plan"
 msgstr "Plan Pro"
 
-#: src/views/members/components/InviteMemberForm.tsx:315
+#: src/views/members/components/InviteMemberForm.tsx:322
 msgid "Pro Plan ∞"
 msgstr "Plan Pro ∞"
 
@@ -1835,7 +1837,7 @@ msgid "Senior"
 msgstr "Senior"
 
 #: src/components/SettingsLayout.tsx:82
-#: src/components/SideNavigation.tsx:85
+#: src/components/SideNavigation.tsx:106
 msgid "Settings"
 msgstr "Configuración"
 
@@ -1909,6 +1911,11 @@ msgstr "Desarrollo de software"
 msgid "Star on Github"
 msgstr "Estrella en Github"
 
+#: src/views/members/components/InviteMemberForm.tsx:359
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:111
+msgid "Start 14 day free trial"
+msgstr "Iniciar prueba gratuita de 14 días"
+
 #: src/views/members/components/InviteMemberForm.tsx:122
 msgid "Subscription Required"
 msgstr "Suscripción requerida"
@@ -1918,7 +1925,7 @@ msgstr "Suscripción requerida"
 msgid "Success"
 msgstr "Éxito"
 
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:55
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:57
 msgid "Supercharge your workspace for just $29/month. Here's what you'll get:"
 msgstr "Potencia tu espacio de trabajo por solo $29/mes. Esto es lo que obtendrás:"
 
@@ -1935,7 +1942,7 @@ msgstr "Apoya el desarrollo del proyecto"
 msgid "System"
 msgstr "Sistema"
 
-#: src/views/members/components/InviteMemberForm.tsx:315
+#: src/views/members/components/InviteMemberForm.tsx:322
 #: src/views/members/index.tsx:207
 msgid "Team Plan"
 msgstr "Plan de Equipo"
@@ -1967,7 +1974,7 @@ msgstr "El nombre de la plantilla no puede exceder los 100 caracteres"
 msgid "Template name is required"
 msgstr "El nombre de la plantilla es obligatorio"
 
-#: src/components/SideNavigation.tsx:75
+#: src/components/SideNavigation.tsx:96
 #: src/views/home/components/Features.tsx:115
 msgid "Templates"
 msgstr "Plantillas"
@@ -2217,7 +2224,7 @@ msgid "Unlimited lists"
 msgstr "Listas ilimitadas"
 
 #: src/components/NewWorkspaceForm.tsx:332
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:64
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:66
 msgid "Unlimited members"
 msgstr "Miembros ilimitados"
 
@@ -2254,22 +2261,15 @@ msgstr "actualizó el título"
 msgid "updated the title to <0>{0}</0>"
 msgstr "actualizó el título a <0>{0}</0>"
 
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:109
-msgid "Upgrade"
-msgstr "Actualizar"
-
-#: src/views/settings/components/UpgradeToProConfirmation.tsx:52
-#: src/views/settings/WorkspaceSettings.tsx:89
+#: src/components/SideNavigation.tsx:202
+#: src/views/settings/components/UpgradeToProConfirmation.tsx:53
+#: src/views/settings/WorkspaceSettings.tsx:90
 msgid "Upgrade to Pro"
 msgstr "Actualizar a Pro"
 
 #: src/components/NewWorkspaceForm.tsx:372
 msgid "Upgrade to Pro ($29/month)"
 msgstr "Actualizar a Pro ($29/mes)"
-
-#: src/views/members/components/InviteMemberForm.tsx:357
-msgid "Upgrade to Team Plan"
-msgstr "Actualizar al Plan de Equipo"
 
 #: src/views/boards/components/TemplateBoards.tsx:38
 #: src/views/boards/components/TemplateBoards.tsx:55
@@ -2478,7 +2478,7 @@ msgstr "Has iniciado sesión correctamente."
 msgid "You have been signed up successfully."
 msgstr "Te has registrado correctamente."
 
-#: src/views/members/components/InviteMemberForm.tsx:319
+#: src/views/members/components/InviteMemberForm.tsx:326
 msgid "You have unlimited seats with your Pro Plan. There is no additional charge for new members!"
 msgstr "Tienes plazas ilimitadas con tu Plan Pro. ¡No hay cargos adicionales por nuevos miembros!"
 
