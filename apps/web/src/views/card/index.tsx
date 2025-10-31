@@ -105,7 +105,7 @@ export function CardRightPanel() {
     }) ?? [];
 
   return (
-    <div className="h-full w-[360px] border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
+    <div className="h-full hidden w-[360px] border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
       <div className="mb-4 flex w-full flex-row">
         {/* <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
         <ListSelector
@@ -329,6 +329,7 @@ export default function CardPage() {
                       className="w-full space-y-6"
                     >
                       <div className="mt-2">
+                        <p className="my-2 mb-2 w-ful text-sm font-medium">Campo de Descrição</p>
                         <Editor
                           content={card.description}
                           onChange={(e) => setValue("description", e)}
@@ -336,7 +337,7 @@ export default function CardPage() {
                           workspaceMembers={board?.workspace.members ?? []}
                         />
                         <div>
-                          <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Labels`}</p>
+                          <p className="my-2 mb-2 pt-2 w-[100px] text-sm font-medium">{t`Labels`}</p>
                           <LabelSelector
                             cardPublicId={cardId ?? ""}
                             labels={formattedLabels}
