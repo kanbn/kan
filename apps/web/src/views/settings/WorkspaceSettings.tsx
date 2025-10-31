@@ -80,7 +80,8 @@ export default function WorkspaceSettings() {
         />
 
         {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
-          !hasActiveSubscription(subscriptions, "pro") && (
+          !hasActiveSubscription(subscriptions, "pro") &&
+          !hasActiveSubscription(subscriptions, "team") && (
             <div className="my-8">
               <Button
                 onClick={() => openModal("UPGRADE_TO_PRO")}

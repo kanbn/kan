@@ -181,7 +181,7 @@ export default function MembersPage() {
           <div className="flex items-center gap-3">
             {env("NEXT_PUBLIC_KAN_ENV") === "cloud" && (
               <>
-                {!proSubscription && (
+                {!proSubscription && !teamSubscription && (
                   <Link
                     href="/settings/workspace?upgrade=pro"
                     className="hidden items-center rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-center text-xs text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-400 lg:flex"

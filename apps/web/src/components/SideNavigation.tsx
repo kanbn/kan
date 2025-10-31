@@ -177,31 +177,33 @@ export default function SideNavigation({
             isCollapsed={isCollapsed}
             onCloseSideNav={onCloseSideNav}
           />
-          {isCloudEnv && !hasActiveSubscription(subscriptions, "pro") && (
-            <div className={twMerge(isCollapsed && "flex justify-center")}>
-              {isCollapsed ? (
-                <ButtonComponent
-                  iconLeft={<HiBolt />}
-                  variant="secondary"
-                  href="/settings/workspace?upgrade=pro"
-                  aria-label="Upgrade to Pro"
-                  title="Upgrade to Pro"
-                  iconOnly
-                  onClick={() => openModal("UPGRADE_TO_PRO")}
-                />
-              ) : (
-                <ButtonComponent
-                  iconLeft={<HiBolt />}
-                  fullWidth
-                  variant="secondary"
-                  href="/settings/workspace?upgrade=pro"
-                  onClick={() => openModal("UPGRADE_TO_PRO")}
-                >
-                  {t`Upgrade to Pro`}
-                </ButtonComponent>
-              )}
-            </div>
-          )}
+          {isCloudEnv &&
+            !hasActiveSubscription(subscriptions, "pro") &&
+            !hasActiveSubscription(subscriptions, "team") && (
+              <div className={twMerge(isCollapsed && "flex justify-center")}>
+                {isCollapsed ? (
+                  <ButtonComponent
+                    iconLeft={<HiBolt />}
+                    variant="secondary"
+                    href="/settings/workspace?upgrade=pro"
+                    aria-label="Upgrade to Pro"
+                    title="Upgrade to Pro"
+                    iconOnly
+                    onClick={() => openModal("UPGRADE_TO_PRO")}
+                  />
+                ) : (
+                  <ButtonComponent
+                    iconLeft={<HiBolt />}
+                    fullWidth
+                    variant="secondary"
+                    href="/settings/workspace?upgrade=pro"
+                    onClick={() => openModal("UPGRADE_TO_PRO")}
+                  >
+                    {t`Upgrade to Pro`}
+                  </ButtonComponent>
+                )}
+              </div>
+            )}
         </div>
       </nav>
     </>
