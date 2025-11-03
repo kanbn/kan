@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import { t } from "@lingui/core/macro";
 
 import Button from "~/components/Button";
@@ -17,7 +16,6 @@ export function DeleteCardConfirmation({
 }: DeleteCardConfirmationProps) {
   const { closeModal } = useModal();
   const utils = api.useUtils();
-  const router = useRouter();
   const { showPopup } = usePopup();
 
   const queryParams = {
@@ -43,6 +41,10 @@ export function DeleteCardConfirmation({
         return { ...oldBoard, lists: updatedLists };
       });
 
+      // Also clear the card query so the card page's useEffect can redirect immediately
+      await utils.card.byId.cancel({ cardPublicId: args.cardPublicId });
+      utils.card.byId.setData({ cardPublicId: args.cardPublicId }, undefined);
+
       return { previousState: currentState };
     },
     onError: (_error, _newList, context) => {
@@ -53,8 +55,8 @@ export function DeleteCardConfirmation({
         icon: "error",
       });
     },
-    onSuccess: () => {
-      router.push(`/boards/${boardPublicId}`);
+    onSuccess: async () => {
+      // no-op; page-level effects and SSE handle redirects and cache
     },
     onSettled: async () => {
       closeModal();
