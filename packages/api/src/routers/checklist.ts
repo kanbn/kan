@@ -333,12 +333,6 @@ export const checklistRouter = createTRPCRouter({
         userId,
         item.checklist.card.list.board.workspace.id,
       );
-      
-      await assertUserAdminInWorkspace(
-        ctx.db,
-        userId,
-        item.checklist.card.list.board.workspace.id,
-      );
 
       const previousTitle = item.title;
 

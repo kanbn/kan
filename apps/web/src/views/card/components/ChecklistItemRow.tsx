@@ -255,6 +255,7 @@ export default function ChecklistItemRow({
           <input
             type="number"
             value={quantity}
+            min={1}
             disabled={viewOnly}
             onChange={(e) => {
               const val = parseInt(e.target.value, 10) || 0;
