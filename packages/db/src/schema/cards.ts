@@ -42,6 +42,8 @@ export const activityTypes = [
   "card.updated.checklist.item.completed",
   "card.updated.checklist.item.uncompleted",
   "card.updated.checklist.item.deleted",
+  "card.updated.attachment.added",
+  "card.updated.attachment.removed",
   "card.archived",
 ] as const;
 
@@ -96,6 +98,7 @@ export const cardsRelations = relations(cards, ({ one, many }) => ({
   comments: many(comments),
   activities: many(cardActivities),
   checklists: many(checklists),
+  attachments: many(cardAttachments),
 }));
 
 export const cardActivities = pgTable("card_activity", {
@@ -273,3 +276,37 @@ export const commentsRelations = relations(comments, ({ one }) => ({
     relationName: "commentsDeletedByUser",
   }),
 }));
+
+export const cardAttachments = pgTable("card_attachment", {
+  id: bigserial("id", { mode: "number" }).primaryKey(),
+  publicId: varchar("publicId", { length: 12 }).notNull().unique(),
+  cardId: bigint("cardId", { mode: "number" })
+    .notNull()
+    .references(() => cards.id, { onDelete: "cascade" }),
+  filename: varchar("filename", { length: 255 }).notNull(),
+  originalFilename: varchar("originalFilename", { length: 255 }).notNull(),
+  contentType: varchar("contentType", { length: 100 }).notNull(),
+  size: bigint("size", { mode: "number" }).notNull(),
+  s3Key: varchar("s3Key", { length: 500 }).notNull(),
+  createdBy: uuid("createdBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  deletedAt: timestamp("deletedAt"),
+}).enableRLS();
+
+export const cardAttachmentsRelations = relations(
+  cardAttachments,
+  ({ one }) => ({
+    card: one(cards, {
+      fields: [cardAttachments.cardId],
+      references: [cards.id],
+      relationName: "cardAttachmentsCard",
+    }),
+    createdBy: one(users, {
+      fields: [cardAttachments.createdBy],
+      references: [users.id],
+      relationName: "cardAttachmentsCreatedByUser",
+    }),
+  }),
+);
