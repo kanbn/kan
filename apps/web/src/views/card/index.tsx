@@ -20,6 +20,7 @@ import { api } from "~/utils/api";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmation";
 import ActivityList from "./components/ActivityList";
+import { AttachmentUpload } from "./components/AttachmentUpload";
 import Checklists from "./components/Checklists";
 import { DeleteCardConfirmation } from "./components/DeleteCardConfirmation";
 import { DeleteChecklistConfirmation } from "./components/DeleteChecklistConfirmation";
@@ -286,6 +287,11 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                     activeChecklistForm={activeChecklistForm}
                     setActiveChecklistForm={setActiveChecklistForm}
                   />
+                  {!isTemplate && (
+                    <div className="mt-6">
+                      <AttachmentUpload cardPublicId={cardId ?? ""} />
+                    </div>
+                  )}
                   <div className="border-t-[1px] border-light-300 pt-12 dark:border-dark-300">
                     <h2 className="text-md pb-4 font-medium text-light-1000 dark:text-dark-1000">
                       {t`Activity`}
