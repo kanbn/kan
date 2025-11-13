@@ -1,7 +1,17 @@
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
+import { t } from "@lingui/core/macro";
 import { Fragment, useEffect, useState } from "react";
-import { HiChevronLeft, HiChevronRight, HiXMark } from "react-icons/hi2";
+import {
+  HiArrowDownTray,
+  HiChevronLeft,
+  HiChevronRight,
+  HiOutlineTrash,
+  HiXMark,
+} from "react-icons/hi2";
+
+import { usePopup } from "~/providers/popup";
+import { api } from "~/utils/api";
 
 interface Attachment {
   publicId: string;
@@ -13,9 +23,13 @@ interface Attachment {
 
 export function AttachmentThumbnails({
   attachments,
+  cardPublicId,
 }: {
   attachments?: Attachment[];
+  cardPublicId: string;
 }) {
+  const { showPopup } = usePopup();
+  const utils = api.useUtils();
   const imageAttachments =
     attachments?.filter(
       (attachment) =>
@@ -23,6 +37,38 @@ export function AttachmentThumbnails({
     ) ?? [];
 
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const deleteAttachment = api.attachment.delete.useMutation({
+    onMutate: async (args) => {
+      await utils.card.byId.cancel({ cardPublicId });
+      const currentState = utils.card.byId.getData({ cardPublicId });
+
+      utils.card.byId.setData({ cardPublicId }, (oldCard) => {
+        if (!oldCard) return oldCard;
+        const updatedAttachments = oldCard.attachments.filter(
+          (attachment) => attachment.publicId !== args.attachmentPublicId,
+        );
+        return { ...oldCard, attachments: updatedAttachments };
+      });
+
+      return { previousState: currentState };
+    },
+    onError: (_error, _args, context) => {
+      utils.card.byId.setData({ cardPublicId }, context?.previousState);
+      showPopup({
+        header: t`Unable to delete attachment`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
+    },
+    onSuccess: () => {
+      // Close viewer if the deleted image was being viewed
+      setSelectedIndex(null);
+    },
+    onSettled: async () => {
+      await utils.card.byId.invalidate({ cardPublicId });
+    },
+  });
 
   // Keyboard navigation
   useEffect(() => {
@@ -74,6 +120,21 @@ export function AttachmentThumbnails({
     setSelectedIndex(newIndex);
   };
 
+  const handleDownload = (attachment: Attachment) => {
+    if (!attachment.url) {
+      showPopup({
+        header: t`Download failed`,
+        message: t`No download URL available for this attachment.`,
+        icon: "error",
+      });
+      return;
+    }
+
+    // Open the URL directly - the browser will handle the download
+    // if the S3 object has Content-Disposition: attachment header
+    window.open(attachment.url, "_blank", "noopener,noreferrer");
+  };
+
   const selectedAttachment =
     selectedIndex !== null ? imageAttachments[selectedIndex] : null;
 
@@ -97,7 +158,14 @@ export function AttachmentThumbnails({
       </div>
 
       <Transition.Root show={selectedIndex !== null} as={Fragment}>
-        <Dialog as="div" className="relative z-50" onClose={() => {}} static>
+        <Dialog
+          as="div"
+          className="relative z-50"
+          onClose={() => {
+            // Dialog closing is handled by the background overlay click
+          }}
+          static
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -109,12 +177,61 @@ export function AttachmentThumbnails({
           >
             <div
               className="fixed inset-0 bg-light-50 transition-opacity dark:bg-dark-50"
-              onClick={closeViewer}
+              onClick={(e) => {
+                // Only close if clicking directly on the background, not on buttons
+                if (e.target === e.currentTarget) {
+                  closeViewer();
+                }
+              }}
             />
           </Transition.Child>
 
           <div className="fixed inset-0 z-10 overflow-y-auto">
-            <div className="fixed right-4 top-4 z-20 flex gap-2">
+            <div
+              className="fixed left-2 top-2 z-20 flex gap-1"
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {selectedIndex !== null && selectedAttachment && (
+                <>
+                  <button
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      deleteAttachment.mutate({
+                        attachmentPublicId: selectedAttachment.publicId,
+                      });
+                    }}
+                    className="rounded-full bg-light-50 p-1.5 text-light-1000 transition-colors hover:bg-light-100 focus:outline-none dark:bg-dark-50 dark:text-dark-1000 dark:hover:bg-dark-100"
+                    aria-label="Delete image"
+                    disabled={deleteAttachment.isPending}
+                  >
+                    <HiOutlineTrash className="h-4 w-4" />
+                  </button>
+                  <button
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleDownload(selectedAttachment);
+                    }}
+                    className="rounded-full bg-light-50 p-1.5 text-light-1000 transition-colors hover:bg-light-100 focus:outline-none dark:bg-dark-50 dark:text-dark-1000 dark:hover:bg-dark-100"
+                    aria-label="Download image"
+                  >
+                    <HiArrowDownTray className="h-4 w-4" />
+                  </button>
+                </>
+              )}
+            </div>
+
+            <div className="fixed right-2 top-2 z-20 flex gap-1">
               {imageAttachments.length > 1 && selectedIndex !== null && (
                 <button
                   onClick={(e) => {

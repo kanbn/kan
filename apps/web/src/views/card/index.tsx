@@ -293,7 +293,8 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                       {card?.attachments.length > 0 && (
                         <div className="mt-6">
                           <AttachmentThumbnails
-                            attachments={card?.attachments}
+                            attachments={card.attachments}
+                            cardPublicId={cardId ?? ""}
                           />
                         </div>
                       )}
