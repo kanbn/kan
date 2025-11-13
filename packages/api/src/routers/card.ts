@@ -10,6 +10,7 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
+import { generateDownloadUrl } from "../utils/s3";
 
 export const cardRouter = createTRPCRouter({
   create: protectedProcedure
@@ -574,7 +575,20 @@ export const cardRouter = createTRPCRouter({
     .input(z.object({ cardPublicId: z.string().min(12) }))
     .output(
       z.custom<
-        Awaited<ReturnType<typeof cardRepo.getWithListAndMembersByPublicId>>
+        Omit<
+          NonNullable<
+            Awaited<ReturnType<typeof cardRepo.getWithListAndMembersByPublicId>>
+          >,
+          "attachments"
+        > & {
+          attachments: {
+            publicId: string;
+            contentType: string;
+            s3Key: string;
+            originalFilename: string | null;
+            url: string | null;
+          }[];
+        }
       >(),
     )
     .query(async ({ ctx, input }) => {
@@ -612,7 +626,44 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      return result;
+      // Generate URLs for all attachments
+      const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+      if (result.attachments && Array.isArray(result.attachments)) {
+        const attachments = result.attachments as {
+          publicId: string;
+          contentType: string;
+          s3Key: string;
+          originalFilename: string | null;
+        }[];
+
+        const attachmentsWithUrls = await Promise.all(
+          attachments.map(async (attachment) => {
+            const base = {
+              publicId: attachment.publicId,
+              contentType: attachment.contentType,
+              s3Key: attachment.s3Key,
+              originalFilename: attachment.originalFilename,
+            };
+            if (!bucket || !attachment.s3Key) {
+              return { ...base, url: null };
+            }
+            try {
+              const url = await generateDownloadUrl(
+                bucket,
+                attachment.s3Key,
+                3600, // 1 hour expiration
+              );
+              return { ...base, url };
+            } catch {
+              // If URL generation fails, return attachment with url: null
+              return { ...base, url: null };
+            }
+          }),
+        );
+        return { ...result, attachments: attachmentsWithUrls };
+      }
+
+      return { ...result, attachments: [] };
     }),
   update: protectedProcedure
     .meta({
