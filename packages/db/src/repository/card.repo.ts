@@ -409,6 +409,14 @@ export const getWithListAndMembersByPublicId = async (
           },
         },
       },
+      attachments: {
+        columns: {
+          publicId: true,
+          contentType: true,
+          s3Key: true,
+          originalFilename: true,
+        },
+      },
       checklists: {
         columns: {
           publicId: true,
