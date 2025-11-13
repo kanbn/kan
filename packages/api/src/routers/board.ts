@@ -78,6 +78,7 @@ export const boardRouter = createTRPCRouter({
         boardPublicId: z.string().min(12),
         members: z.array(z.string().min(12)).optional(),
         labels: z.array(z.string().min(12)).optional(),
+        lists: z.array(z.string().min(12)).optional(),
         type: z.enum(["regular", "template"]).optional(),
       }),
     )
@@ -110,6 +111,7 @@ export const boardRouter = createTRPCRouter({
         {
           members: input.members ?? [],
           labels: input.labels ?? [],
+          lists: input.lists ?? [],
           type: input.type,
         },
       );
@@ -234,6 +236,7 @@ export const boardRouter = createTRPCRouter({
           {
             members: [],
             labels: [],
+            lists: [],
             type: sourceBoardInfo.type,
           },
         );
