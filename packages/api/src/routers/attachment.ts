@@ -197,7 +197,11 @@ export const attachmentRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
-      const url = await generateDownloadUrl(bucket, attachment.s3Key, 3600);
+      const url = await generateDownloadUrl(
+        bucket,
+        attachment.s3Key,
+        86400, // 24 hours expiration
+      );
 
       return { url, filename: attachment.originalFilename };
     }),

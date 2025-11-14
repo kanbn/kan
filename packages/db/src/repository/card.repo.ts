@@ -3,6 +3,7 @@ import { and, asc, desc, eq, gt, inArray, isNull, sql } from "drizzle-orm";
 import type { dbClient } from "@kan/db/client";
 import {
   cardActivities,
+  cardAttachments,
   cards,
   cardsToLabels,
   cardToWorkspaceMembers,
@@ -415,7 +416,10 @@ export const getWithListAndMembersByPublicId = async (
           contentType: true,
           s3Key: true,
           originalFilename: true,
+          size: true,
         },
+        where: isNull(cardAttachments.deletedAt),
+        orderBy: asc(cardAttachments.createdAt),
       },
       checklists: {
         columns: {
