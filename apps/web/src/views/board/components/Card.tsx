@@ -1,3 +1,4 @@
+import { HiOutlinePaperClip } from "react-icons/hi";
 import { HiBars3BottomLeft, HiChatBubbleLeft } from "react-icons/hi2";
 
 import Avatar from "~/components/Avatar";
@@ -13,6 +14,7 @@ const Card = ({
   checklists,
   description,
   comments,
+  attachments,
 }: {
   title: string;
   labels: { name: string; colourCode: string | null }[];
@@ -33,6 +35,7 @@ const Card = ({
   }[];
   description: string | null;
   comments: { publicId: string }[];
+  attachments?: { publicId: string }[];
 }) => {
   const completedItems = checklists.reduce((acc, checklist) => {
     return acc + checklist.items.filter((item) => item.completed).length;
@@ -47,6 +50,7 @@ const Card = ({
 
   const hasDescription =
     description && description.replace(/<[^>]*>/g, "").trim().length > 0;
+  const hasAttachments = attachments && attachments.length > 0;
 
   return (
     <div className="flex flex-col rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300">
@@ -55,7 +59,8 @@ const Card = ({
       members.length ||
       checklists.length > 0 ||
       hasDescription ||
-      comments.length > 0 ? (
+      comments.length > 0 ||
+      hasAttachments ? (
         <div className="mt-2 flex flex-col justify-end">
           <div className="space-x-0.5">
             {labels.map((label) => (
@@ -75,6 +80,11 @@ const Card = ({
               {comments.length > 0 && (
                 <div className="flex items-center gap-1 text-light-700 dark:text-dark-800">
                   <HiChatBubbleLeft className="h-4 w-4" />
+                </div>
+              )}
+              {hasAttachments && (
+                <div className="flex items-center gap-1 text-light-700 dark:text-dark-800">
+                  <HiOutlinePaperClip className="h-4 w-4" />
                 </div>
               )}
             </div>

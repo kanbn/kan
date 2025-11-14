@@ -6,6 +6,7 @@ import {
   HiArrowDownTray,
   HiChevronLeft,
   HiChevronRight,
+  HiDocumentText,
   HiOutlineTrash,
   HiXMark,
 } from "react-icons/hi2";
@@ -19,6 +20,7 @@ interface Attachment {
   url: string | null;
   originalFilename: string | null;
   s3Key: string;
+  size?: number | null;
 }
 
 export function AttachmentThumbnails({
@@ -34,6 +36,12 @@ export function AttachmentThumbnails({
     attachments?.filter(
       (attachment) =>
         attachment.contentType.startsWith("image/") && attachment.url,
+    ) ?? [];
+
+  const nonImageAttachments =
+    attachments?.filter(
+      (attachment) =>
+        !attachment.contentType.startsWith("image/") && attachment.url,
     ) ?? [];
 
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -94,7 +102,7 @@ export function AttachmentThumbnails({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedIndex, imageAttachments.length]);
 
-  if (imageAttachments.length === 0) {
+  if (imageAttachments.length === 0 && nonImageAttachments.length === 0) {
     return null;
   }
 
@@ -130,9 +138,13 @@ export function AttachmentThumbnails({
       return;
     }
 
-    // Open the URL directly - the browser will handle the download
-    // if the S3 object has Content-Disposition: attachment header
-    window.open(attachment.url, "_blank", "noopener,noreferrer");
+    const downloadUrl = `/api/download/attatchment?url=${encodeURIComponent(attachment.url)}&filename=${encodeURIComponent(attachment.originalFilename ?? "attachment")}`;
+
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
   };
 
   const selectedAttachment =
@@ -150,12 +162,34 @@ export function AttachmentThumbnails({
                 publicId: attachment.publicId,
                 url: attachment.url,
                 originalFilename: attachment.originalFilename ?? "",
+                contentType: attachment.contentType,
               }}
               onClick={() => openViewer(index)}
+              isImage={true}
             />
           );
         })}
       </div>
+
+      {nonImageAttachments.length > 0 && (
+        <div className="mb-3 flex flex-col gap-2">
+          {nonImageAttachments.map((attachment) => {
+            if (!attachment.url) return null;
+            return (
+              <FileListItem
+                key={attachment.publicId}
+                attachment={attachment}
+                onDownload={() => handleDownload(attachment)}
+                onDelete={() => {
+                  deleteAttachment.mutate({
+                    attachmentPublicId: attachment.publicId,
+                  });
+                }}
+              />
+            );
+          })}
+        </div>
+      )}
 
       <Transition.Root show={selectedIndex !== null} as={Fragment}>
         <Dialog
@@ -322,9 +356,16 @@ export function AttachmentThumbnails({
 function AttachmentThumbnail({
   attachment,
   onClick,
+  isImage,
 }: {
-  attachment: { publicId: string; url: string; originalFilename: string };
+  attachment: {
+    publicId: string;
+    url: string;
+    originalFilename: string;
+    contentType: string;
+  };
   onClick: () => void;
+  isImage: boolean;
 }) {
   return (
     <button
@@ -332,13 +373,77 @@ function AttachmentThumbnail({
       className="relative h-16 w-16 overflow-hidden rounded-xl border border-light-300 transition-transform hover:scale-105 dark:border-dark-300"
       aria-label={`View ${attachment.originalFilename}`}
     >
-      <Image
-        src={attachment.url}
-        alt={attachment.originalFilename}
-        fill
-        className="object-cover"
-        sizes="64px"
-      />
+      {isImage ? (
+        <Image
+          src={attachment.url}
+          alt={attachment.originalFilename}
+          fill
+          className="object-cover"
+          sizes="64px"
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center bg-light-100 dark:bg-dark-100">
+          <HiDocumentText className="h-6 w-6 text-light-700 dark:text-dark-700" />
+        </div>
+      )}
     </button>
+  );
+}
+
+function formatFileSize(bytes: number | null | undefined): string {
+  if (!bytes || bytes === 0 || isNaN(bytes)) return "0 B";
+  const k = 1024;
+  const sizes = ["B", "KB", "MB", "GB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return `${(bytes / Math.pow(k, i)).toFixed(1)} ${sizes[i] ?? "B"}`;
+}
+
+function FileListItem({
+  attachment,
+  onDownload,
+  onDelete,
+}: {
+  attachment: Attachment;
+  onDownload: () => void;
+  onDelete: () => void;
+}) {
+  return (
+    <div className="group flex w-full items-center gap-3 rounded-lg border border-light-300 bg-light-50 px-3 py-2 dark:border-dark-200 dark:bg-dark-100">
+      <div className="flex-shrink-0">
+        <HiDocumentText className="h-5 w-5 text-light-700 dark:text-dark-700" />
+      </div>
+      <div className="min-w-0 flex-1 truncate text-sm text-light-1000 dark:text-dark-1000">
+        {attachment.originalFilename ?? "File"}
+      </div>
+      <div className="flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+        <div className="text-xs text-light-500 dark:text-dark-900">
+          {attachment.size != null &&
+            !isNaN(attachment.size) &&
+            `${formatFileSize(attachment.size)}`}
+        </div>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onDownload();
+            }}
+            className="flex-shrink-0 rounded-full bg-light-100 p-1.5 text-light-1000 transition-colors hover:bg-light-200 focus:outline-none dark:bg-dark-100 dark:text-dark-950 dark:hover:bg-dark-300"
+            aria-label={`Download ${attachment.originalFilename}`}
+          >
+            <HiArrowDownTray className="h-4 w-4" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete();
+            }}
+            className="flex-shrink-0 rounded-full bg-light-100 p-1.5 text-light-1000 transition-colors hover:bg-light-200 focus:outline-none dark:bg-dark-100 dark:text-dark-950 dark:hover:bg-dark-300"
+            aria-label={`Delete ${attachment.originalFilename}`}
+          >
+            <HiXMark className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

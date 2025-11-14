@@ -5,6 +5,7 @@ import type { BoardVisibilityStatus } from "@kan/db/schema";
 import {
   boards,
   cardActivities,
+  cardAttachments,
   cards,
   cardsToLabels,
   cardToWorkspaceMembers,
@@ -196,6 +197,13 @@ export const getByPublicId = async (
                   },
                 },
               },
+              attachments: {
+                columns: {
+                  publicId: true,
+                },
+                where: isNull(cardAttachments.deletedAt),
+                orderBy: asc(cardAttachments.createdAt),
+              },
               checklists: {
                 columns: {
                   publicId: true,
@@ -357,6 +365,13 @@ export const getBySlug = async (
                     },
                   },
                 },
+              },
+              attachments: {
+                columns: {
+                  publicId: true,
+                },
+                where: isNull(cardAttachments.deletedAt),
+                orderBy: asc(cardAttachments.createdAt),
               },
               comments: {
                 columns: {

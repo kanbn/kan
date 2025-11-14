@@ -553,6 +553,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                               card.description ?? null
                                             }
                                             comments={card.comments ?? []}
+                                            attachments={card.attachments}
                                           />
                                         </Link>
                                       )}

@@ -586,6 +586,7 @@ export const cardRouter = createTRPCRouter({
             contentType: string;
             s3Key: string;
             originalFilename: string | null;
+            size?: number | null;
             url: string | null;
           }[];
         }
@@ -634,6 +635,7 @@ export const cardRouter = createTRPCRouter({
           contentType: string;
           s3Key: string;
           originalFilename: string | null;
+          size?: number | null;
         }[];
 
         const attachmentsWithUrls = await Promise.all(
@@ -643,6 +645,7 @@ export const cardRouter = createTRPCRouter({
               contentType: attachment.contentType,
               s3Key: attachment.s3Key,
               originalFilename: attachment.originalFilename,
+              size: attachment.size,
             };
             if (!bucket || !attachment.s3Key) {
               return { ...base, url: null };
@@ -651,7 +654,7 @@ export const cardRouter = createTRPCRouter({
               const url = await generateDownloadUrl(
                 bucket,
                 attachment.s3Key,
-                3600, // 1 hour expiration
+                86400, // 24 hours expiration
               );
               return { ...base, url };
             } catch {
