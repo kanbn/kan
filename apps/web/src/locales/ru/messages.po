@@ -511,7 +511,7 @@ msgstr "Свяжитесь с нами"
 msgid "Content Creation"
 msgstr "Создание контента"
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:434
 msgid "Continue with "
 msgstr "Продолжить с "
 
@@ -782,7 +782,7 @@ msgstr "Редактировать URL рабочей области"
 msgid "Editing"
 msgstr "Редактирование"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:435
 msgid "email"
 msgstr "email"
 
@@ -802,11 +802,11 @@ msgstr "Введите ваш текущий пароль"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Введите ваш текущий пароль и выберите новый безопасный пароль."
 
-#: src/components/AuthForm.tsx:387
+#: src/components/AuthForm.tsx:398
 msgid "Enter your email address"
 msgstr "Введите ваш адрес электронной почты"
 
-#: src/components/AuthForm.tsx:375
+#: src/components/AuthForm.tsx:384
 msgid "Enter your name"
 msgstr "Введите ваше имя"
 
@@ -814,7 +814,7 @@ msgstr "Введите ваше имя"
 msgid "Enter your new password"
 msgstr "Введите ваш новый пароль"
 
-#: src/components/AuthForm.tsx:400
+#: src/components/AuthForm.tsx:411
 msgid "Enter your password"
 msgstr "Введите ваш пароль"
 
@@ -979,6 +979,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Для долгосрочной устойчивости мы признаем, что всем хорошим проектам с открытым исходным кодом нужен источник дохода. Наш доход поступает от платного облачного предложения для рабочих пространств с несколькими пользователями (бесплатно в период бета-тестирования) и для пользовательских адресов рабочих пространств. Нет обязательства использовать это, и вы можете самостоятельно разместить программное обеспечение на своей инфраструктуре бесплатно."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Бесплатно"
@@ -1310,7 +1312,7 @@ msgstr "Долгосрочный"
 msgid "Low Priority"
 msgstr "Низкий приоритет"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:435
 msgid "magic link"
 msgstr "магическая ссылка"
 
@@ -1441,6 +1443,10 @@ msgstr "Следующие шаги"
 msgid "No {0}"
 msgstr "Нет {0}"
 
+#: src/components/AuthForm.tsx:365
+msgid "No authentication methods are currently available"
+msgstr ""
+
 #: src/views/boards/components/ImportBoardsForm.tsx:242
 msgid "No boards found"
 msgstr "Доски не найдены"
@@ -1477,7 +1483,7 @@ msgstr "После удаления рабочего пространства в
 msgid "Open source"
 msgstr "С открытым исходным кодом"
 
-#: src/components/AuthForm.tsx:365
+#: src/components/AuthForm.tsx:374
 msgid "or"
 msgstr "или"
 
@@ -1554,15 +1560,15 @@ msgstr "Платформа"
 msgid "Please confirm your new password"
 msgstr "Пожалуйста, подтвердите новый пароль"
 
-#: src/components/AuthForm.tsx:391
+#: src/components/AuthForm.tsx:402
 msgid "Please enter a valid email address"
 msgstr "Пожалуйста, введите действительный адрес электронной почты"
 
-#: src/components/AuthForm.tsx:379
+#: src/components/AuthForm.tsx:388
 msgid "Please enter a valid name"
 msgstr "Пожалуйста, введите действительное имя"
 
-#: src/components/AuthForm.tsx:404
+#: src/components/AuthForm.tsx:416
 msgid "Please enter a valid password"
 msgstr "Пожалуйста, введите действительный пароль"
 
@@ -1857,7 +1863,7 @@ msgstr "Регистрация отключена"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "Регистрация в настоящее время отключена. Пожалуйста, попробуйте позже."
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:434
 msgid "Sign up with "
 msgstr "Зарегистрироваться с "
 

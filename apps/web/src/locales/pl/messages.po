@@ -516,7 +516,7 @@ msgstr "Skontaktuj się z nami"
 msgid "Content Creation"
 msgstr "Tworzenie treści"
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:434
 msgid "Continue with "
 msgstr "Kontynuuj z "
 
@@ -787,7 +787,7 @@ msgstr "Edytuj URL przestrzeni roboczej"
 msgid "Editing"
 msgstr "Edycja"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:435
 msgid "email"
 msgstr "email"
 
@@ -807,11 +807,11 @@ msgstr "Wprowadź swoje obecne hasło"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Wprowadź swoje obecne hasło i wybierz nowe, bezpieczne hasło."
 
-#: src/components/AuthForm.tsx:387
+#: src/components/AuthForm.tsx:398
 msgid "Enter your email address"
 msgstr "Wprowadź swój adres e-mail"
 
-#: src/components/AuthForm.tsx:375
+#: src/components/AuthForm.tsx:384
 msgid "Enter your name"
 msgstr "Wprowadź swoje imię"
 
@@ -819,7 +819,7 @@ msgstr "Wprowadź swoje imię"
 msgid "Enter your new password"
 msgstr "Wprowadź swoje nowe hasło"
 
-#: src/components/AuthForm.tsx:400
+#: src/components/AuthForm.tsx:411
 msgid "Enter your password"
 msgstr "Wprowadź swoje hasło"
 
@@ -984,6 +984,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Na rzecz długotrwałego rozwoju i utrzymania projektu uznaliśmy, że wszystkie dobre projekty otwartoźródłowe potrzebują źródła dochodu. Nasze środki pochodzą z płatnej oferty chmurowej dla przestrzeni roboczych z wieloma użytkownikami (bezpłatne podczas wersji beta) oraz dla niestandardowych nazw przestrzeni roboczych. Nie ma obowiązku korzystania z niej, a oprogramowanie można hostować samodzielnie na własnej infrastrukturze bez opłat i bez limitów."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Darmowy"
@@ -1315,7 +1317,7 @@ msgstr "Długoterminowy"
 msgid "Low Priority"
 msgstr "Niski priorytet"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:435
 msgid "magic link"
 msgstr "magiczny link"
 
@@ -1446,6 +1448,10 @@ msgstr "Następne kroki"
 msgid "No {0}"
 msgstr "Brak {0}"
 
+#: src/components/AuthForm.tsx:365
+msgid "No authentication methods are currently available"
+msgstr ""
+
 #: src/views/boards/components/ImportBoardsForm.tsx:242
 msgid "No boards found"
 msgstr "Nie znaleziono tablic"
@@ -1482,7 +1488,7 @@ msgstr "Po usunięciu przestrzeni roboczej nie będzie możliwości jej przywró
 msgid "Open source"
 msgstr "Otwartoźródłowe"
 
-#: src/components/AuthForm.tsx:365
+#: src/components/AuthForm.tsx:374
 msgid "or"
 msgstr "lub"
 
@@ -1559,15 +1565,15 @@ msgstr "Platforma"
 msgid "Please confirm your new password"
 msgstr "Proszę potwierdzić nowe hasło"
 
-#: src/components/AuthForm.tsx:391
+#: src/components/AuthForm.tsx:402
 msgid "Please enter a valid email address"
 msgstr "Proszę wprowadzić prawidłowy adres e-mail"
 
-#: src/components/AuthForm.tsx:379
+#: src/components/AuthForm.tsx:388
 msgid "Please enter a valid name"
 msgstr "Proszę wprowadzić poprawne imię"
 
-#: src/components/AuthForm.tsx:404
+#: src/components/AuthForm.tsx:416
 msgid "Please enter a valid password"
 msgstr "Proszę wprowadzić poprawne hasło"
 
@@ -1862,7 +1868,7 @@ msgstr "Rejestracja wyłączona"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "Rejestracja jest obecnie wyłączona. Spróbuj ponownie później."
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:434
 msgid "Sign up with "
 msgstr "Zarejestruj się za pomocą "
 

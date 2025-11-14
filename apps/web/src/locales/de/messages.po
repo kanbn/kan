@@ -511,7 +511,7 @@ msgstr "Kontaktiere uns"
 msgid "Content Creation"
 msgstr "Content-Erstellung"
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:434
 msgid "Continue with "
 msgstr "Fortfahren mit "
 
@@ -782,7 +782,7 @@ msgstr "Workspace-URL bearbeiten"
 msgid "Editing"
 msgstr "Bearbeitung"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:435
 msgid "email"
 msgstr "E-Mail"
 
@@ -802,11 +802,11 @@ msgstr "Geben Sie Ihr aktuelles Passwort ein"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Geben Sie Ihr aktuelles Passwort ein und wählen Sie ein neues sicheres Passwort."
 
-#: src/components/AuthForm.tsx:387
+#: src/components/AuthForm.tsx:398
 msgid "Enter your email address"
 msgstr "Gib deine E-Mail-Adresse ein"
 
-#: src/components/AuthForm.tsx:375
+#: src/components/AuthForm.tsx:384
 msgid "Enter your name"
 msgstr "Gib deinen Namen ein"
 
@@ -814,7 +814,7 @@ msgstr "Gib deinen Namen ein"
 msgid "Enter your new password"
 msgstr "Geben Sie Ihr neues Passwort ein"
 
-#: src/components/AuthForm.tsx:400
+#: src/components/AuthForm.tsx:411
 msgid "Enter your password"
 msgstr "Gib dein Passwort ein"
 
@@ -979,6 +979,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Für langfristige Nachhaltigkeit erkennen wir an, dass alle guten Open-Source-Projekte eine Einnahmequelle benötigen. Unsere stammt aus dem kostenpflichtigen Cloud-Angebot für Workspaces mit mehreren Benutzern (kostenlos während der Beta-Phase) und für benutzerdefinierte Workspace-Slugs. Es besteht keine Verpflichtung, dieses Angebot zu nutzen, und Sie können die Software kostenlos auf Ihrer eigenen Infrastruktur selbst hosten."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Kostenlos"
@@ -1310,7 +1312,7 @@ msgstr "Langfristig"
 msgid "Low Priority"
 msgstr "Niedrige Priorität"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:435
 msgid "magic link"
 msgstr "Magic Link"
 
@@ -1441,6 +1443,10 @@ msgstr "Nächste Schritte"
 msgid "No {0}"
 msgstr "Keine {0}"
 
+#: src/components/AuthForm.tsx:365
+msgid "No authentication methods are currently available"
+msgstr ""
+
 #: src/views/boards/components/ImportBoardsForm.tsx:242
 msgid "No boards found"
 msgstr "Keine Boards gefunden"
@@ -1477,7 +1483,7 @@ msgstr "Sobald Sie Ihren Arbeitsbereich löschen, gibt es kein Zurück mehr. Die
 msgid "Open source"
 msgstr "Open Source"
 
-#: src/components/AuthForm.tsx:365
+#: src/components/AuthForm.tsx:374
 msgid "or"
 msgstr "oder"
 
@@ -1554,15 +1560,15 @@ msgstr "Plattform"
 msgid "Please confirm your new password"
 msgstr "Bitte bestätigen Sie Ihr neues Passwort"
 
-#: src/components/AuthForm.tsx:391
+#: src/components/AuthForm.tsx:402
 msgid "Please enter a valid email address"
 msgstr "Bitte gib eine gültige E-Mail-Adresse ein"
 
-#: src/components/AuthForm.tsx:379
+#: src/components/AuthForm.tsx:388
 msgid "Please enter a valid name"
 msgstr "Bitte gib einen gültigen Namen ein"
 
-#: src/components/AuthForm.tsx:404
+#: src/components/AuthForm.tsx:416
 msgid "Please enter a valid password"
 msgstr "Bitte gib ein gültiges Passwort ein"
 
@@ -1857,7 +1863,7 @@ msgstr "Registrierung deaktiviert"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "Die Registrierung ist derzeit deaktiviert. Bitte versuche es später erneut."
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:434
 msgid "Sign up with "
 msgstr "Registrieren mit "
 
