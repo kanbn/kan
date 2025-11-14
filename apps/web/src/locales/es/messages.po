@@ -519,7 +519,7 @@ msgstr "Contáctanos"
 msgid "Content Creation"
 msgstr "Creación de contenido"
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:434
 msgid "Continue with "
 msgstr "Continuar con "
 
@@ -790,7 +790,7 @@ msgstr "Editar URL del espacio de trabajo"
 msgid "Editing"
 msgstr "Editando"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:435
 msgid "email"
 msgstr "correo electrónico"
 
@@ -810,11 +810,11 @@ msgstr "Introduce tu contraseña actual"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Introduce tu contraseña actual y elige una nueva contraseña segura."
 
-#: src/components/AuthForm.tsx:387
+#: src/components/AuthForm.tsx:398
 msgid "Enter your email address"
 msgstr "Introduce tu dirección de correo electrónico"
 
-#: src/components/AuthForm.tsx:375
+#: src/components/AuthForm.tsx:384
 msgid "Enter your name"
 msgstr "Introduce tu nombre"
 
@@ -822,7 +822,7 @@ msgstr "Introduce tu nombre"
 msgid "Enter your new password"
 msgstr "Introduce tu nueva contraseña"
 
-#: src/components/AuthForm.tsx:400
+#: src/components/AuthForm.tsx:411
 msgid "Enter your password"
 msgstr "Introduce tu contraseña"
 
@@ -987,6 +987,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Para la sostenibilidad a largo plazo, reconocemos que todos los buenos proyectos de código abierto necesitan una fuente de ingresos. La nuestra proviene de la oferta de nube de pago para espacios de trabajo con múltiples usuarios y para slugs de espacio de trabajo personalizados. No hay obligación de usarla, y puedes alojar el software en tu propia infraestructura sin costo alguno."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratis"
@@ -1326,7 +1328,7 @@ msgstr "Amado por equipos en todo el mundo"
 msgid "Low Priority"
 msgstr "Prioridad baja"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:435
 msgid "magic link"
 msgstr "enlace mágico"
 
@@ -1457,6 +1459,10 @@ msgstr "Próximos pasos"
 msgid "No {0}"
 msgstr "Sin {0}"
 
+#: src/components/AuthForm.tsx:365
+msgid "No authentication methods are currently available"
+msgstr ""
+
 #: src/views/boards/components/ImportBoardsForm.tsx:242
 msgid "No boards found"
 msgstr "No se encontraron tableros"
@@ -1497,7 +1503,7 @@ msgstr "Código abierto"
 msgid "Open Source Friends"
 msgstr "Amigos de código abierto"
 
-#: src/components/AuthForm.tsx:365
+#: src/components/AuthForm.tsx:374
 msgid "or"
 msgstr "o"
 
@@ -1579,15 +1585,15 @@ msgstr "Plataforma"
 msgid "Please confirm your new password"
 msgstr "Por favor, confirma tu nueva contraseña"
 
-#: src/components/AuthForm.tsx:391
+#: src/components/AuthForm.tsx:402
 msgid "Please enter a valid email address"
 msgstr "Por favor, introduce una dirección de correo electrónico válida"
 
-#: src/components/AuthForm.tsx:379
+#: src/components/AuthForm.tsx:388
 msgid "Please enter a valid name"
 msgstr "Por favor, introduce un nombre válido"
 
-#: src/components/AuthForm.tsx:404
+#: src/components/AuthForm.tsx:416
 msgid "Please enter a valid password"
 msgstr "Por favor, introduce una contraseña válida"
 
@@ -1886,7 +1892,7 @@ msgstr "Registro deshabilitado"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "El registro está actualmente deshabilitado. Por favor, inténtalo de nuevo más tarde."
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:434
 msgid "Sign up with "
 msgstr "Registrarse con "
 

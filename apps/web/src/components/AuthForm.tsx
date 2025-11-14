@@ -358,7 +358,16 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
         </div>
       )}
       <form onSubmit={handleSubmit(onSubmit)}>
-        {socialProviders?.length !== 0 && (
+        {!isCredentialsEnabled && socialProviders?.length === 0 && (
+          <div className="flex w-full items-center gap-4">
+            <div className="h-[1px] w-1/3 bg-light-600 dark:bg-dark-600" />
+            <span className="text-center text-sm text-light-900 dark:text-dark-900">
+              {t`No authentication methods are currently available`}
+            </span>
+            <div className="h-[1px] w-1/3 bg-light-600 dark:bg-dark-600" />
+          </div>
+        )}
+        {!isCredentialsEnabled && socialProviders?.length !== 0 && (
           <div className="mb-[1.5rem] flex w-full items-center gap-4">
             <div className="h-[1px] w-full bg-light-600 dark:bg-dark-600" />
             <span className="text-sm text-light-900 dark:text-dark-900">
@@ -381,46 +390,52 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
               )}
             </div>
           )}
-          <div>
-            <Input
-              {...register("email", { required: true })}
-              placeholder={t`Enter your email address`}
-            />
-            {errors.email && (
-              <p className="mt-2 text-xs text-red-400">
-                {t`Please enter a valid email address`}
-              </p>
-            )}
-          </div>
           {isCredentialsEnabled && (
-            <div>
-              <Input
-                type="password"
-                {...register("password", { required: true })}
-                placeholder={t`Enter your password`}
-              />
-              {errors.password && (
-                <p className="mt-2 text-xs text-red-400">
-                  {errors.password.message ?? t`Please enter a valid password`}
-                </p>
-              )}
-            </div>
+            <>
+              <div>
+                <Input
+                  {...register("email", { required: true })}
+                  placeholder={t`Enter your email address`}
+                />
+                {errors.email && (
+                  <p className="mt-2 text-xs text-red-400">
+                    {t`Please enter a valid email address`}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <Input
+                  type="password"
+                  {...register("password", { required: true })}
+                  placeholder={t`Enter your password`}
+                />
+                {errors.password && (
+                  <p className="mt-2 text-xs text-red-400">
+                    {errors.password.message ??
+                      t`Please enter a valid password`}
+                  </p>
+                )}
+              </div>
+            </>
           )}
           {loginError && (
             <p className="mt-2 text-xs text-red-400">{loginError}</p>
           )}
         </div>
-        <div className="mt-[1.5rem] flex items-center gap-4">
-          <Button
-            isLoading={isLoginWithEmailPending}
-            fullWidth
-            size="lg"
-            variant="secondary"
-          >
-            {isSignUp ? t`Sign up with ` : t`Continue with `}
-            {isMagicLinkMode ? t`magic link` : t`email`}
-          </Button>
-        </div>
+        {isCredentialsEnabled && (
+          <div className="mt-[1.5rem] flex items-center gap-4">
+            <Button
+              isLoading={isLoginWithEmailPending}
+              fullWidth
+              size="lg"
+              variant="secondary"
+            >
+              {isSignUp ? t`Sign up with ` : t`Continue with `}
+              {isMagicLinkMode ? t`magic link` : t`email`}
+            </Button>
+          </div>
+        )}
       </form>
     </div>
   );

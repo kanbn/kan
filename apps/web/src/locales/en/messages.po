@@ -584,7 +584,7 @@ msgstr "Contact us"
 msgid "Content Creation"
 msgstr "Content Creation"
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:434
 msgid "Continue with "
 msgstr "Continue with "
 
@@ -879,7 +879,7 @@ msgstr "Edit workspace URL"
 msgid "Editing"
 msgstr "Editing"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:435
 msgid "email"
 msgstr "email"
 
@@ -899,11 +899,11 @@ msgstr "Enter your current password"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Enter your current password and choose a new secure password."
 
-#: src/components/AuthForm.tsx:387
+#: src/components/AuthForm.tsx:398
 msgid "Enter your email address"
 msgstr "Enter your email address"
 
-#: src/components/AuthForm.tsx:375
+#: src/components/AuthForm.tsx:384
 msgid "Enter your name"
 msgstr "Enter your name"
 
@@ -911,7 +911,7 @@ msgstr "Enter your name"
 msgid "Enter your new password"
 msgstr "Enter your new password"
 
-#: src/components/AuthForm.tsx:400
+#: src/components/AuthForm.tsx:411
 msgid "Enter your password"
 msgstr "Enter your password"
 
@@ -1437,7 +1437,7 @@ msgstr "Loved by teams worldwide"
 msgid "Low Priority"
 msgstr "Low Priority"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:435
 msgid "magic link"
 msgstr "magic link"
 
@@ -1584,6 +1584,10 @@ msgstr "Next Steps"
 msgid "No {0}"
 msgstr "No {0}"
 
+#: src/components/AuthForm.tsx:365
+msgid "No authentication methods are currently available"
+msgstr "No authentication methods are currently available"
+
 #: src/views/boards/components/BoardsList.tsx:35
 #~ msgid "No boards"
 #~ msgstr "No boards"
@@ -1628,7 +1632,7 @@ msgstr "Open source"
 msgid "Open Source Friends"
 msgstr "Open Source Friends"
 
-#: src/components/AuthForm.tsx:365
+#: src/components/AuthForm.tsx:374
 msgid "or"
 msgstr "or"
 
@@ -1710,15 +1714,15 @@ msgstr "Platform"
 msgid "Please confirm your new password"
 msgstr "Please confirm your new password"
 
-#: src/components/AuthForm.tsx:391
+#: src/components/AuthForm.tsx:402
 msgid "Please enter a valid email address"
 msgstr "Please enter a valid email address"
 
-#: src/components/AuthForm.tsx:379
+#: src/components/AuthForm.tsx:388
 msgid "Please enter a valid name"
 msgstr "Please enter a valid name"
 
-#: src/components/AuthForm.tsx:404
+#: src/components/AuthForm.tsx:416
 msgid "Please enter a valid password"
 msgstr "Please enter a valid password"
 
@@ -2037,7 +2041,7 @@ msgstr "Sign up disabled"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "Sign up is currently disabled. Please try again later."
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:434
 msgid "Sign up with "
 msgstr "Sign up with "
 
