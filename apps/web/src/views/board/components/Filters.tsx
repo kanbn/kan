@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import {
   HiMiniXMark,
+  HiOutlineSquare3Stack3D,
   HiOutlineTag,
   HiOutlineUserCircle,
 } from "react-icons/hi2";
@@ -32,15 +33,22 @@ interface Label {
   colourCode: string | null;
 }
 
+interface List {
+  publicId: string;
+  name: string;
+}
+
 const Filters = ({
   position = "right",
   labels,
   members,
+  lists,
   isLoading,
 }: {
   position?: "left" | "right";
   labels: Label[];
   members: Member[];
+  lists: List[];
   isLoading: boolean;
 }) => {
   const router = useRouter();
@@ -52,7 +60,7 @@ const Filters = ({
     try {
       await router.push({
         pathname: router.pathname,
-        query: { ...router.query, members: [], labels: [] },
+        query: { ...router.query, members: [], labels: [], lists: [] },
       });
     } catch (error) {
       console.error(error);
@@ -85,6 +93,12 @@ const Filters = ({
     leftIcon: <LabelIcon colourCode={label.colourCode} />,
   }));
 
+  const formattedLists = lists.map((list) => ({
+    key: list.publicId,
+    value: list.name,
+    selected: !!router.query.lists?.includes(list.publicId),
+  }));
+
   const groups = [
     ...(formattedMembers.length
       ? [
@@ -102,6 +116,16 @@ const Filters = ({
       icon: <HiOutlineTag size={16} />,
       items: formattedLabels,
     },
+    ...(formattedLists.length
+      ? [
+          {
+            key: "lists",
+            label: t`Lists`,
+            icon: <HiOutlineSquare3Stack3D size={16} />,
+            items: formattedLists,
+          },
+        ]
+      : []),
   ];
 
   const handleSelect = async (
@@ -131,6 +155,7 @@ const Filters = ({
   const numOfFilters = [
     ...formatToArray(router.query.members),
     ...formatToArray(router.query.labels),
+    ...formatToArray(router.query.lists),
   ].length;
 
   return (

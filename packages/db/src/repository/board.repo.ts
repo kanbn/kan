@@ -70,6 +70,7 @@ export const getByPublicId = async (
   filters: {
     members: string[];
     labels: string[];
+    lists: string[];
     type: "regular" | "template" | undefined;
   },
 ) => {

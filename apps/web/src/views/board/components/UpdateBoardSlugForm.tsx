@@ -17,6 +17,7 @@ interface QueryParams {
   boardPublicId: string;
   members: string[];
   labels: string[];
+  lists: string[];
 }
 
 export function UpdateBoardSlugForm({
