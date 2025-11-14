@@ -987,8 +987,6 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Para la sostenibilidad a largo plazo, reconocemos que todos los buenos proyectos de código abierto necesitan una fuente de ingresos. La nuestra proviene de la oferta de nube de pago para espacios de trabajo con múltiples usuarios y para slugs de espacio de trabajo personalizados. No hay obligación de usarla, y puedes alojar el software en tu propia infraestructura sin costo alguno."
 
 #: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratis"
@@ -1461,7 +1459,7 @@ msgstr "Sin {0}"
 
 #: src/components/AuthForm.tsx:365
 msgid "No authentication methods are currently available"
-msgstr ""
+msgstr "No hay métodos de autenticación disponibles actualmente"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:242
 msgid "No boards found"
