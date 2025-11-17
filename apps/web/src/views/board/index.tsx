@@ -420,13 +420,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                     members={boardData.workspace.members.filter(
                       (member) => member.user !== null,
                     )}
-                    lists={
-                      (
-                        boardData as typeof boardData & {
-                          allLists: typeof boardData.lists;
-                        }
-                      ).allLists
-                    }
+                    lists={boardData.allLists}
                     position="left"
                     isLoading={!boardData}
                   />

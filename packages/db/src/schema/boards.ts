@@ -73,6 +73,7 @@ export const boardsRelations = relations(boards, ({ one, many }) => ({
     relationName: "boardCreatedByUser",
   }),
   lists: many(lists),
+  allLists: many(lists),
   labels: many(labels),
   deletedBy: one(users, {
     fields: [boards.deletedBy],

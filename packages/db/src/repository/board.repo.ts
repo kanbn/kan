@@ -111,7 +111,6 @@ export const getByPublicId = async (
 
   const board = await db.query.boards.findFirst({
     columns: {
-      id: true,
       publicId: true,
       name: true,
       slug: true,
@@ -241,6 +240,14 @@ export const getByPublicId = async (
         ),
         orderBy: [asc(lists.index)],
       },
+      allLists: {
+        columns: {
+          publicId: true,
+          name: true,
+        },
+        where: isNull(lists.deletedAt),
+        orderBy: [asc(lists.index)],
+      },
     },
     where: and(
       eq(boards.publicId, boardPublicId),
@@ -250,16 +257,6 @@ export const getByPublicId = async (
   });
 
   if (!board) return null;
-
-  // Fetch all lists for the filter dropdown (not filtered)
-  const allLists = await db.query.lists.findMany({
-    columns: {
-      publicId: true,
-      name: true,
-    },
-    where: and(eq(lists.boardId, board.id), isNull(lists.deletedAt)),
-    orderBy: [asc(lists.index)],
-  });
 
   const formattedResult = {
     ...board,
@@ -273,7 +270,6 @@ export const getByPublicId = async (
           .filter((member) => member.deletedAt === null),
       })),
     })),
-    allLists,
   };
 
   return formattedResult;
@@ -313,7 +309,6 @@ export const getBySlug = async (
 
   const board = await db.query.boards.findFirst({
     columns: {
-      id: true,
       publicId: true,
       name: true,
       slug: true,
@@ -407,6 +402,14 @@ export const getBySlug = async (
         ),
         orderBy: [asc(lists.index)],
       },
+      allLists: {
+        columns: {
+          publicId: true,
+          name: true,
+        },
+        where: isNull(lists.deletedAt),
+        orderBy: [asc(lists.index)],
+      },
     },
     where: and(
       eq(boards.slug, boardSlug),
@@ -418,16 +421,6 @@ export const getBySlug = async (
 
   if (!board) return null;
 
-  // Fetch all lists for the filter dropdown (not filtered)
-  const allLists = await db.query.lists.findMany({
-    columns: {
-      publicId: true,
-      name: true,
-    },
-    where: and(eq(lists.boardId, board.id), isNull(lists.deletedAt)),
-    orderBy: [asc(lists.index)],
-  });
-
   const formattedResult = {
     ...board,
     lists: board.lists.map((list) => ({
@@ -437,7 +430,6 @@ export const getBySlug = async (
         labels: card.labels.map((label) => label.label),
       })),
     })),
-    allLists,
   };
 
   return formattedResult;
