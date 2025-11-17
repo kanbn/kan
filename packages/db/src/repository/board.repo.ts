@@ -76,11 +76,7 @@ export const getByPublicId = async (
 ) => {
   let cardIds: string[] = [];
 
-  if (
-    filters.labels.length > 0 ||
-    filters.members.length > 0 ||
-    filters.lists.length > 0
-  ) {
+  if (filters.labels.length > 0 || filters.members.length > 0) {
     const filteredCards = await db
       .select({
         publicId: cards.publicId,
@@ -96,7 +92,6 @@ export const getByPublicId = async (
         workspaceMembers,
         eq(cardToWorkspaceMembers.workspaceMemberId, workspaceMembers.id),
       )
-      .leftJoin(lists, eq(cards.listId, lists.id))
       .where(
         and(
           isNull(cards.deletedAt),
@@ -106,9 +101,6 @@ export const getByPublicId = async (
               : undefined,
             filters.members.length > 0
               ? inArray(workspaceMembers.publicId, filters.members)
-              : undefined,
-            filters.lists.length > 0
-              ? inArray(lists.publicId, filters.lists)
               : undefined,
           ),
         ),
@@ -299,7 +291,7 @@ export const getBySlug = async (
 ) => {
   let cardIds: string[] = [];
 
-  if (filters.labels.length > 0 || filters.lists.length > 0) {
+  if (filters.labels.length) {
     const filteredCards = await db
       .select({
         publicId: cards.publicId,
@@ -307,15 +299,11 @@ export const getBySlug = async (
       .from(cards)
       .leftJoin(cardsToLabels, eq(cards.id, cardsToLabels.cardId))
       .leftJoin(labels, eq(cardsToLabels.labelId, labels.id))
-      .leftJoin(lists, eq(cards.listId, lists.id))
       .where(
         and(
           isNull(cards.deletedAt),
           filters.labels.length > 0
             ? inArray(labels.publicId, filters.labels)
-            : undefined,
-          filters.lists.length > 0
-            ? inArray(lists.publicId, filters.lists)
             : undefined,
         ),
       );
