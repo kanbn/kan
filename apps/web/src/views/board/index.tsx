@@ -420,7 +420,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                     members={boardData.workspace.members.filter(
                       (member) => member.user !== null,
                     )}
-                    lists={boardData.lists}
+                    lists={
+                      (
+                        boardData as typeof boardData & {
+                          allLists: typeof boardData.lists;
+                        }
+                      ).allLists
+                    }
                     position="left"
                     isLoading={!boardData}
                   />
@@ -492,88 +498,78 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                         {...provided.droppableProps}
                       >
                         <div className="min-w-[2rem]" />
-                        {boardData.lists
-                          .filter((list) => {
-                            const selectedLists = formatToArray(
-                              router.query.lists,
-                            );
-                            return (
-                              selectedLists.length === 0 ||
-                              selectedLists.includes(list.publicId)
-                            );
-                          })
-                          .map((list, index) => (
-                            <List
-                              index={index}
-                              key={index}
-                              list={list}
-                              setSelectedPublicListId={(publicListId) =>
-                                setSelectedPublicListId(publicListId)
-                              }
+                        {boardData.lists.map((list, index) => (
+                          <List
+                            index={index}
+                            key={index}
+                            list={list}
+                            setSelectedPublicListId={(publicListId) =>
+                              setSelectedPublicListId(publicListId)
+                            }
+                          >
+                            <Droppable
+                              droppableId={`${list.publicId}`}
+                              type="CARD"
                             >
-                              <Droppable
-                                droppableId={`${list.publicId}`}
-                                type="CARD"
-                              >
-                                {(provided) => (
-                                  <div
-                                    ref={provided.innerRef}
-                                    {...provided.droppableProps}
-                                    className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 h-full max-h-[calc(100vh-225px)] min-h-[2rem] overflow-y-auto pr-1 scrollbar dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600"
-                                  >
-                                    {list.cards.map((card, index) => (
-                                      <Draggable
-                                        key={card.publicId}
-                                        draggableId={card.publicId}
-                                        index={index}
-                                      >
-                                        {(provided) => (
-                                          <Link
-                                            onClick={(e) => {
-                                              if (
-                                                card.publicId.startsWith(
-                                                  "PLACEHOLDER",
-                                                )
-                                              )
-                                                e.preventDefault();
-                                            }}
-                                            key={card.publicId}
-                                            href={
-                                              isTemplate
-                                                ? `/templates/${boardId}/cards/${card.publicId}`
-                                                : `/cards/${card.publicId}`
-                                            }
-                                            className={`mb-2 flex !cursor-pointer flex-col ${
+                              {(provided) => (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.droppableProps}
+                                  className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 h-full max-h-[calc(100vh-225px)] min-h-[2rem] overflow-y-auto pr-1 scrollbar dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600"
+                                >
+                                  {list.cards.map((card, index) => (
+                                    <Draggable
+                                      key={card.publicId}
+                                      draggableId={card.publicId}
+                                      index={index}
+                                    >
+                                      {(provided) => (
+                                        <Link
+                                          onClick={(e) => {
+                                            if (
                                               card.publicId.startsWith(
                                                 "PLACEHOLDER",
                                               )
-                                                ? "pointer-events-none"
-                                                : ""
-                                            }`}
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                          >
-                                            <Card
-                                              title={card.title}
-                                              labels={card.labels}
-                                              members={card.members}
-                                              checklists={card.checklists ?? []}
-                                              description={
-                                                card.description ?? null
-                                              }
-                                              comments={card.comments ?? []}
-                                            />
-                                          </Link>
-                                        )}
-                                      </Draggable>
-                                    ))}
-                                    {provided.placeholder}
-                                  </div>
-                                )}
-                              </Droppable>
-                            </List>
-                          ))}
+                                            )
+                                              e.preventDefault();
+                                          }}
+                                          key={card.publicId}
+                                          href={
+                                            isTemplate
+                                              ? `/templates/${boardId}/cards/${card.publicId}`
+                                              : `/cards/${card.publicId}`
+                                          }
+                                          className={`mb-2 flex !cursor-pointer flex-col ${
+                                            card.publicId.startsWith(
+                                              "PLACEHOLDER",
+                                            )
+                                              ? "pointer-events-none"
+                                              : ""
+                                          }`}
+                                          ref={provided.innerRef}
+                                          {...provided.draggableProps}
+                                          {...provided.dragHandleProps}
+                                        >
+                                          <Card
+                                            title={card.title}
+                                            labels={card.labels}
+                                            members={card.members}
+                                            checklists={card.checklists ?? []}
+                                            description={
+                                              card.description ?? null
+                                            }
+                                            comments={card.comments ?? []}
+                                          />
+                                        </Link>
+                                      )}
+                                    </Draggable>
+                                  ))}
+                                  {provided.placeholder}
+                                </div>
+                              )}
+                            </Droppable>
+                          </List>
+                        ))}
                         <div className="min-w-[0.75rem]" />
                         {provided.placeholder}
                       </div>
