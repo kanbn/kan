@@ -170,6 +170,7 @@ pnpm dev
 | `NEXT_PUBLIC_STORAGE_URL`                 | Storage service URL                                      | For file uploads         | `https://storage.kanbn.com`                                 |
 | `NEXT_PUBLIC_STORAGE_DOMAIN`              | Storage domain name                                      | For file uploads         | `kanbn.com`                                                 |
 | `NEXT_PUBLIC_AVATAR_BUCKET_NAME`          | S3 bucket name for avatars                               | For file uploads         | `avatars`                                                   |
+| `NEXT_PUBLIC_ATTATCHMENTS_BUCKET_NAME`    | S3 bucket name for attatchments                          | For file uploads         | `attatchments`                                              |
 | `NEXT_PUBLIC_ALLOW_CREDENTIALS`           | Allow email & password login                             | For authentication       | `true`                                                      |
 | `NEXT_PUBLIC_DISABLE_SIGN_UP`             | Disable sign up                                          | For authentication       | `false`                                                     |
 | `NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY` | Hide “Powered by kan.bn” on public boards (self-host)    | For white labelling      | `true`                                                      |

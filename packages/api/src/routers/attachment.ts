@@ -9,7 +9,7 @@ import { generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
-import { generateDownloadUrl, generateUploadUrl } from "../utils/s3";
+import { generateUploadUrl } from "../utils/s3";
 
 export const attachmentRouter = createTRPCRouter({
   generateUploadUrl: protectedProcedure
@@ -78,7 +78,6 @@ export const attachmentRouter = createTRPCRouter({
         .replace(/[^a-zA-Z0-9._-]/g, "_")
         .substring(0, 200);
 
-      // Generate S3 key: {workspacePublicId}/{cardPublicId}/{generateUID()}-{sanitizedFilename}
       const s3Key = `${workspace.publicId}/${input.cardPublicId}/${generateUID()}-${sanitizedFilename}`;
 
       const url = await generateUploadUrl(
@@ -152,58 +151,6 @@ export const attachmentRouter = createTRPCRouter({
       });
 
       return attachment;
-    }),
-  getUrl: protectedProcedure
-    .meta({
-      openapi: {
-        summary: "Get presigned URL for attachment download",
-        method: "GET",
-        path: "/attachments/{attachmentPublicId}/url",
-        description: "Generates a presigned URL for downloading an attachment",
-        tags: ["Attachments"],
-        protect: true,
-      },
-    })
-    .input(z.object({ attachmentPublicId: z.string().min(12) }))
-    .output(z.object({ url: z.string(), filename: z.string() }))
-    .query(async ({ ctx, input }) => {
-      const userId = ctx.user?.id;
-
-      if (!userId)
-        throw new TRPCError({
-          message: `User not authenticated`,
-          code: "UNAUTHORIZED",
-        });
-
-      const attachment = await cardAttachmentRepo.getByPublicId(
-        ctx.db,
-        input.attachmentPublicId,
-      );
-
-      if (!attachment || attachment.deletedAt)
-        throw new TRPCError({
-          message: `Attachment with public ID ${input.attachmentPublicId} not found`,
-          code: "NOT_FOUND",
-        });
-
-      const workspaceId = attachment.card.list.board.workspaceId;
-
-      await assertUserInWorkspace(ctx.db, userId, workspaceId);
-
-      const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
-      if (!bucket)
-        throw new TRPCError({
-          message: `Attachments bucket not configured`,
-          code: "INTERNAL_SERVER_ERROR",
-        });
-
-      const url = await generateDownloadUrl(
-        bucket,
-        attachment.s3Key,
-        86400, // 24 hours expiration
-      );
-
-      return { url, filename: attachment.originalFilename };
     }),
   delete: protectedProcedure
     .meta({
