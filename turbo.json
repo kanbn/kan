@@ -3,28 +3,49 @@
   "ui": "tui",
   "tasks": {
     "topo": {
-      "dependsOn": ["^topo"]
+      "dependsOn": [
+        "^topo"
+      ]
     },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".cache/tsbuildinfo.json", "dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".cache/tsbuildinfo.json",
+        "dist/**"
+      ]
     },
     "dev": {
-      "dependsOn": ["^dev"],
+      "dependsOn": [
+        "^dev"
+      ],
       "cache": false,
       "persistent": false
     },
     "format": {
-      "outputs": [".cache/.prettiercache"],
+      "outputs": [
+        ".cache/.prettiercache"
+      ],
       "outputLogs": "new-only"
     },
     "lint": {
-      "dependsOn": ["^topo", "^build"],
-      "outputs": [".cache/.eslintcache"]
+      "dependsOn": [
+        "^topo",
+        "^build"
+      ],
+      "outputs": [
+        ".cache/.eslintcache"
+      ]
     },
     "typecheck": {
-      "dependsOn": ["^topo", "^build"],
-      "outputs": [".cache/tsbuildinfo.json"]
+      "dependsOn": [
+        "^topo",
+        "^build"
+      ],
+      "outputs": [
+        ".cache/tsbuildinfo.json"
+      ]
     },
     "clean": {
       "cache": false
@@ -127,12 +148,17 @@
     "PORT",
     "BETTER_AUTH_SECRET",
     "BETTER_AUTH_TRUSTED_ORIGINS",
+    "PLUNK_API_KEY",
+    "PLUNK_API_URL",
     "NOVU_API_KEY",
     "EMAIL_UNSUBSCRIBE_SECRET",
     "REDIS_URL",
     "LOG_LEVEL",
     "AXIOM_TOKEN",
-    "AXIOM_DATASET"
+    "AXIOM_DATASET",
+    "WEBSOCKET_PORT",
+    "WEBSOCKET_PING_MS",
+    "WEBSOCKET_PONG_TIMEOUT_MS"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",

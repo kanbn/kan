@@ -1,0 +1,34 @@
+{
+  "name": "@kan/websocket",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "pnpm with-env tsx watch src/index.ts",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "start": "pnpm with-env node ./dist/index.js",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "with-env": "dotenv -e ../../.env --"
+  },
+  "dependencies": {
+    "@kan/api": "workspace:*",
+    "@trpc/server": "catalog:",
+    "@types/ws": "^8.18.1",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@kan/eslint-config": "workspace:*",
+    "@kan/prettier-config": "workspace:*",
+    "@kan/tsconfig": "workspace:*",
+    "@types/node": "^20.17.7",
+    "dotenv-cli": "^7.4.4",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "tsx": "^4.19.1",
+    "typescript": "catalog:"
+  },
+  "prettier": "@kan/prettier-config"
+}

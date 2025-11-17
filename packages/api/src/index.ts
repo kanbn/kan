@@ -6,6 +6,7 @@ import {
   createCallerFactory,
   createNextApiContext,
   createTRPCContext,
+  createWSContext,
 } from "./trpc";
 
 const createCaller = createCallerFactory(appRouter);
@@ -13,5 +14,11 @@ const createCaller = createCallerFactory(appRouter);
 type RouterInputs = inferRouterInputs<AppRouter>;
 type RouterOutputs = inferRouterOutputs<AppRouter>;
 
-export { createTRPCContext, appRouter, createCaller, createNextApiContext };
+export {
+  createTRPCContext,
+  createWSContext,
+  appRouter,
+  createCaller,
+  createNextApiContext,
+};
 export type { AppRouter, RouterInputs, RouterOutputs };

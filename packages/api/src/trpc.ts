@@ -1,5 +1,7 @@
 import { randomUUID } from "crypto";
 import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
+import type { CreateWSSContextFnOptions } from "@trpc/server/adapters/ws";
+import type { IncomingHttpHeaders } from "http";
 import type { NextApiRequest } from "next";
 import type { OpenApiMeta } from "trpc-to-openapi";
 import { initTRPC, TRPCError } from "@trpc/server";
@@ -65,6 +67,52 @@ const createAuthWithHeaders = (
         }),
     },
   };
+};
+
+const toHeaders = (headers: IncomingHttpHeaders) => {
+  const normalized = new Headers();
+
+  for (const [key, value] of Object.entries(headers)) {
+    if (!value) {
+      continue;
+    }
+
+    if (Array.isArray(value)) {
+      if (value.length === 0) {
+        continue;
+      }
+
+      normalized.set(key, value.join(", "));
+      continue;
+    }
+
+    normalized.set(key, value);
+  }
+
+  return normalized;
+};
+
+const mergeConnectionParamsIntoHeaders = (
+  headers: Headers,
+  connectionParams: unknown,
+) => {
+  if (!connectionParams || typeof connectionParams !== "object") {
+    return;
+  }
+
+  const entries = connectionParams as Record<string, unknown>;
+
+  for (const [key, rawValue] of Object.entries(entries)) {
+    if (typeof rawValue !== "string" || rawValue.length === 0) {
+      continue;
+    }
+
+    const normalizedKey = key.toLowerCase();
+    if (!headers.has(normalizedKey)) {
+      // Allow non-browser clients to forward auth data (e.g. Authorization, Cookie).
+      headers.set(normalizedKey, rawValue);
+    }
+  }
 };
 
 interface CreateContextOptions {
@@ -140,6 +188,25 @@ export const createRESTContext = async ({ req }: CreateNextContextOptions) => {
     headers,
     transport: "rest",
   });
+};
+
+export const createWSContext = async (opts: CreateWSSContextFnOptions) => {
+  const db = createDrizzleClient();
+  const baseAuth = initAuth(db);
+  const headers = toHeaders(opts.req.headers);
+
+  mergeConnectionParamsIntoHeaders(headers, opts.info.connectionParams);
+
+  const auth = createAuthWithHeaders(baseAuth, headers);
+
+  let session: Awaited<ReturnType<typeof auth.api.getSession>> | undefined;
+  try {
+    session = await auth.api.getSession();
+  } catch (error) {
+    console.error("Error getting session, ", error);
+  }
+
+  return createInnerTRPCContext({ db, user: session?.user, auth });
 };
 
 const t = initTRPC
