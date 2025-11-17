@@ -60,6 +60,7 @@ checksums:
     Are%20you%20sure%20you%20want%20to%20delete%20your%20account%3F/singular: 428b74d781063224c3e63980e1094ec3
     assigned%20%3C0%3E%7B0%7D%3C%2F0%3E%20to%20the%20card/singular: 9df6d89fa83706123dedd8cba2243d04
     Assignees/singular: 96fc0e28a783d80decfd4716a440ac08
+    Attachment%20uploaded/singular: c0233f8c2560f95ac0834f35eb07b9e7
     Awaiting%20Customer/singular: 122c108794f321c10e05a08f09b11457
     Backlog/singular: 35919fd5b10ad212839a75e72829fe4e
     Basic%20Kanban/singular: e46ebc406749486f3907436970d4d6c7
@@ -171,6 +172,7 @@ checksums:
     Documentation/singular: 1563fcb5ddb5037b0709ccd3dd384a92
     Don't%20have%20an%20account%3F%20%3C0%3E%3C1%3ESign%20up%3C%2F1%3E%3C%2F0%3E/singular: 6ae8282ab8b4a01b4ce87b119e13714b
     Done/singular: ffd408fa29d5bc9039ef8ea1b9b699bb
+    Download%20failed/singular: 142b391cca3e05f2af9617092f7358c5
     Edit%20board%20URL/singular: d8276dfc0189f371ec7d80a2047c07aa
     Edit%20comment/singular: 7e4b46525fcb6b47b71798e31c46e374
     Edit%20label/singular: 0309e0be1512b1e0b0ceb87c69a53d03
@@ -209,6 +211,7 @@ checksums:
     Failed%20to%20copy%20invite%20link/singular: 635884d5ed8d6ee20b85a003939b4ae7
     Failed%20to%20create%20board/singular: a746e2afe881c3bf0a8e82a931ca3495
     Failed%20to%20login%20with%20%7B0%7D.%20Please%20try%20again./singular: 669a4b4247a73f53fb9b8b16e42d166f
+    Failed%20to%20upload%20attachment.%20Please%20try%20again./singular: f8a50d1c8491404f73d3cf701e11f297
     FAQ/singular: 47e0ee2eb40b4e7e732e05e2233fc71c
     FAQs/singular: dc36d7992372ccd419b39ef51cf5b16c
     Fast%20%26%20lightweight/singular: 4f2a80c555a5427b94eef5124aa10775
@@ -295,6 +298,7 @@ checksums:
     Link%20copied/singular: 4a4805700b31ec65bcb3ca962bccfd1b
     List/singular: 94f13e7ef909a4de9db7abaa1f9f0b61
     List%20name/singular: e925e2e6ccaf0eb4064a888aaea8d3c2
+    Lists/singular: 9f4a73afc8de321175d71935134ef066
     Login%20%7C%20kan.bn/singular: 42a6c8dcd73e0d46e652646dc86871eb
     Logout/singular: 07948fdf20705e04a7bf68ab197512bf
     Long-term/singular: 51cb6f0b112250c5a091ca5f0866904b
@@ -332,6 +336,7 @@ checksums:
     No%20authentication%20methods%20are%20currently%20available/singular: f718c896810da3612202887f9a4374fa
     No%20boards%20found/singular: e044088d2c51b6bdf660fafa86ee1e17
     No%20credit%20card%20required/singular: 2090aa4171dc0b60735069f89b592883
+    No%20download%20URL%20available%20for%20this%20attachment./singular: e367d39420b2242f9d2fd749c87f446a
     No%20lists/singular: cedf633d99c77ff4356e089f2d98c0a6
     No%20results%20found%20for%20%22%7BdebouncedQuery%7D%22./singular: 5db6294712528cd897b15ae36f4fd834
     Offer/singular: 82b4e0c9a3f5b4bd93590847de7c32a1
@@ -477,6 +482,7 @@ checksums:
     Unable%20to%20create%20list/singular: 7fbbf8314f8d08a4123c7daef09fed05
     Unable%20to%20create%20template/singular: 7495f1434c9188849bffd015811d5337
     Unable%20to%20create%20workspace/singular: c1c949477e121d73ed6683eddf9cd874
+    Unable%20to%20delete%20attachment/singular: 99d0b17b78d44e15f13d876d155f0efc
     Unable%20to%20delete%20card/singular: 50ff06aa1265fe464f776aba33f1bef9
     Unable%20to%20delete%20checklist/singular: d7067e2c009f4919f0cca77df3c228ee
     Unable%20to%20delete%20checklist%20item/singular: a74144593b625e4d8d7ecf734462c60d
@@ -510,6 +516,7 @@ checksums:
     updated%20the%20title%20to%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: aca196d729401d8adc5c8ca9d558840e
     Upgrade%20to%20Pro/singular: 972773025e763ddf53273df6d37a729a
     Upgrade%20to%20Pro%20(%2429%2Fmonth)/singular: 9a91ea70f5eb55aac96640bf0fd7feff
+    Upload%20failed/singular: 5b7b755f05330164dbfb00096c500ee3
     Urgent/singular: e79afcd4398e52e10e7e8243a7eecabe
     URL%20can%20only%20contain%20letters%2C%20numbers%2C%20and%20hyphens/singular: 875d37d2d920f98ef60a314eda8a5d9a
     URL%20cannot%20exceed%2024%20characters/singular: 395c25732b84ac1f5b63ee310da08e93
@@ -564,6 +571,7 @@ checksums:
     Your%20account%20has%20been%20deleted./singular: 8c8d944e07388c5877effdb2c2803dcf
     Your%20boards%20have%20been%20imported./singular: 403972e7a25afc2415762c1c2b1ec868
     Your%20display%20name%20has%20been%20updated./singular: 15e5fff36c554c16ec5214427fae1bf4
+    Your%20file%20has%20been%20uploaded%20successfully./singular: 19d84e934877efc0fef285ff3d6e7849
     Your%20password%20has%20been%20changed./singular: 8f730f68d52b7efa727aa0784282ebcb
     Your%20profile%20image%20has%20been%20updated./singular: 099e1780348cd7bf617721344371a430
     Your%20Trello%20account%20has%20been%20disconnected./singular: 126aeeb73f7e4cad338056e4c933f39b
