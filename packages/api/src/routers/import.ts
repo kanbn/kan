@@ -325,6 +325,20 @@ export const importRouter = createTRPCRouter({
                 await cardActivityRepo.bulkCreate(ctx.db, activities);
               }
 
+              const checklistsToCreate: {
+                cardId: number;
+                name: string;
+                createdBy: string;
+                index: number;
+                sourceId: string;
+                items: {
+                  sourceId: string;
+                  title: string;
+                  completed: boolean;
+                  index: number;
+                }[];
+              }[] = [];
+
               for (const card of list.cards) {
                 const _card = createdCards.find(
                   (c) => c.sourceId === card.sourceId,
@@ -332,34 +346,73 @@ export const importRouter = createTRPCRouter({
 
                 if (!_card || !card.checklists.length) continue;
 
-                for (const checklist of card.checklists) {
-                  const newChecklist = await checklistRepo.create(ctx.db, {
+                for (
+                  let checklistIndex = 0;
+                  checklistIndex < card.checklists.length;
+                  checklistIndex++
+                ) {
+                  const checklist = card.checklists[checklistIndex];
+                  if (!checklist) continue;
+
+                  checklistsToCreate.push({
                     cardId: _card.id,
                     name: checklist.name,
                     createdBy: userId,
+                    index: checklistIndex,
+                    sourceId: checklist.sourceId,
+                    items: checklist.items.map((item) => ({
+                      sourceId: item.sourceId,
+                      title: item.title,
+                      completed: item.completed,
+                      index: item.index,
+                    })),
                   });
+                }
+              }
 
-                  if (!newChecklist || !checklist.items.length) continue;
+              if (checklistsToCreate.length > 0) {
+                const newChecklists = await checklistRepo.bulkCreate(
+                  ctx.db,
+                  checklistsToCreate.map((checklist) => ({
+                    cardId: checklist.cardId,
+                    name: checklist.name,
+                    createdBy: checklist.createdBy,
+                    index: checklist.index,
+                  })),
+                );
+
+                const itemsToCreate: {
+                  checklistId: number;
+                  title: string;
+                  createdBy: string;
+                  index: number;
+                  completed: boolean;
+                }[] = [];
+
+                for (let i = 0; i < checklistsToCreate.length; i++) {
+                  const checklistData = checklistsToCreate[i];
+                  const newChecklist = newChecklists[i];
+
+                  if (!newChecklist || !checklistData?.items.length) continue;
 
                   // NOTE: Sorting here to prevent checklist items being out of order
-                  const sortedItems = [...checklist.items].sort(
+                  const sortedItems = [...checklistData.items].sort(
                     (a, b) => a.index - b.index,
                   );
 
                   for (const item of sortedItems) {
-                    const newItem = await checklistRepo.createItem(ctx.db, {
+                    itemsToCreate.push({
                       checklistId: newChecklist.id,
                       title: item.title,
                       createdBy: userId,
-                    });
-
-                    if (!newItem || !item.completed) continue;
-
-                    await checklistRepo.updateItemById(ctx.db, {
-                      id: newItem.id,
-                      completed: true,
+                      index: item.index,
+                      completed: item.completed,
                     });
                   }
+                }
+
+                if (itemsToCreate.length > 0) {
+                  await checklistRepo.bulkCreateItems(ctx.db, itemsToCreate);
                 }
               }
 
