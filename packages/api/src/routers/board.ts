@@ -144,6 +144,7 @@ export const boardRouter = createTRPCRouter({
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
         members: z.array(z.string().min(12)).optional(),
         labels: z.array(z.string().min(12)).optional(),
+        lists: z.array(z.string().min(12)).optional(),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof boardRepo.getBySlug>>>())
@@ -166,6 +167,7 @@ export const boardRouter = createTRPCRouter({
         {
           members: input.members ?? [],
           labels: input.labels ?? [],
+          lists: input.lists ?? [],
         },
       );
 

@@ -44,6 +44,7 @@ export default function PublicBoardView() {
       workspaceSlug: workspaceSlug ?? "",
       members: formatToArray(router.query.members),
       labels: formatToArray(router.query.labels),
+      lists: formatToArray(router.query.lists),
     },
     {
       enabled: router.isReady && !!boardSlug,
@@ -130,6 +131,7 @@ export default function PublicBoardView() {
                 <Filters
                   labels={data.labels ?? []}
                   members={[]}
+                  lists={data.allLists ?? []}
                   isLoading={isLoading}
                 />
               </div>
