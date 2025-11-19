@@ -303,6 +303,10 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
 
   const password = watch("password");
 
+  const isMagicLinkAvailable = useMemo(() => {
+    return isCloudEnv || (isEmailSendingEnabled && !isSignUp);
+  }, [isCloudEnv, isEmailSendingEnabled, isSignUp]);
+
   // Determine if we should operate in magic link mode for current form state (login only)
   const isMagicLinkMode = useMemo(() => {
     // Magic link only viable when email sending enabled AND not sign up.
@@ -390,7 +394,7 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
               )}
             </div>
           )}
-          {isCredentialsEnabled && (
+          {(isCredentialsEnabled || isMagicLinkAvailable) && (
             <>
               <div>
                 <Input
@@ -404,26 +408,28 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
                 )}
               </div>
 
-              <div>
-                <Input
-                  type="password"
-                  {...register("password", { required: true })}
-                  placeholder={t`Enter your password`}
-                />
-                {errors.password && (
-                  <p className="mt-2 text-xs text-red-400">
-                    {errors.password.message ??
-                      t`Please enter a valid password`}
-                  </p>
-                )}
-              </div>
+              {isCredentialsEnabled && (
+                <div>
+                  <Input
+                    type="password"
+                    {...register("password", { required: true })}
+                    placeholder={t`Enter your password`}
+                  />
+                  {errors.password && (
+                    <p className="mt-2 text-xs text-red-400">
+                      {errors.password.message ??
+                        t`Please enter a valid password`}
+                    </p>
+                  )}
+                </div>
+              )}
             </>
           )}
           {loginError && (
             <p className="mt-2 text-xs text-red-400">{loginError}</p>
           )}
         </div>
-        {isCredentialsEnabled && (
+        {(isCredentialsEnabled || isMagicLinkAvailable) && (
           <div className="mt-[1.5rem] flex items-center gap-4">
             <Button
               isLoading={isLoginWithEmailPending}
