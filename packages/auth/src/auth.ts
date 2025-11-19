@@ -129,6 +129,11 @@ export const initAuth = (db: dbClient) => {
         user: schema.users,
       },
     }),
+    session: {
+      expiresIn: 60 * 60 * 24 * 30, // 30 days
+      updateAge: 60 * 60 * 24 * 2, // Update session expiry every 48 hours if user is active
+      freshAge: 0,
+    },
     emailAndPassword: {
       enabled: env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true",
       disableSignUp:
