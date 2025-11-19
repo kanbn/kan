@@ -26,9 +26,11 @@ interface Attachment {
 export function AttachmentThumbnails({
   attachments,
   cardPublicId,
+  isReadOnly = false,
 }: {
   attachments?: Attachment[];
   cardPublicId: string;
+  isReadOnly?: boolean;
 }) {
   const { showPopup } = usePopup();
   const utils = api.useUtils();
@@ -48,6 +50,8 @@ export function AttachmentThumbnails({
 
   const deleteAttachment = api.attachment.delete.useMutation({
     onMutate: async (args) => {
+      if (isReadOnly) return;
+
       await utils.card.byId.cancel({ cardPublicId });
       const currentState = utils.card.byId.getData({ cardPublicId });
 
@@ -62,6 +66,7 @@ export function AttachmentThumbnails({
       return { previousState: currentState };
     },
     onError: (_error, _args, context) => {
+      if (isReadOnly) return;
       utils.card.byId.setData({ cardPublicId }, context?.previousState);
       showPopup({
         header: t`Unable to delete attachment`,
@@ -70,10 +75,12 @@ export function AttachmentThumbnails({
       });
     },
     onSuccess: () => {
+      if (isReadOnly) return;
       // Close viewer if the deleted image was being viewed
       setSelectedIndex(null);
     },
     onSettled: async () => {
+      if (isReadOnly) return;
       await utils.card.byId.invalidate({ cardPublicId });
     },
   });
@@ -152,7 +159,7 @@ export function AttachmentThumbnails({
 
   return (
     <>
-      <div className="mb-3 flex flex-wrap gap-2">
+      <div className="mb-3 flex flex-wrap gap-2 pt-1">
         {imageAttachments.map((attachment, index) => {
           if (!attachment.url) return null;
           return (
@@ -180,11 +187,15 @@ export function AttachmentThumbnails({
                 key={attachment.publicId}
                 attachment={attachment}
                 onDownload={() => handleDownload(attachment)}
-                onDelete={() => {
-                  deleteAttachment.mutate({
-                    attachmentPublicId: attachment.publicId,
-                  });
-                }}
+                onDelete={
+                  isReadOnly
+                    ? undefined
+                    : () => {
+                        deleteAttachment.mutate({
+                          attachmentPublicId: attachment.publicId,
+                        });
+                      }
+                }
               />
             );
           })}
@@ -221,13 +232,13 @@ export function AttachmentThumbnails({
           </Transition.Child>
 
           <div className="fixed inset-0 z-10 overflow-y-auto">
-            <div
-              className="fixed left-2 top-2 z-20 flex gap-1"
-              onMouseDown={(e) => e.stopPropagation()}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {selectedIndex !== null && selectedAttachment && (
-                <>
+            {selectedIndex !== null && selectedAttachment && (
+              <div
+                className="fixed left-2 top-2 z-20 flex gap-1"
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {!isReadOnly && (
                   <button
                     onMouseDown={(e) => {
                       e.preventDefault();
@@ -246,24 +257,24 @@ export function AttachmentThumbnails({
                   >
                     <HiOutlineTrash className="h-4 w-4" />
                   </button>
-                  <button
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleDownload(selectedAttachment);
-                    }}
-                    className="rounded-full bg-light-50 p-1.5 text-light-1000 transition-colors hover:bg-light-100 focus:outline-none dark:bg-dark-50 dark:text-dark-1000 dark:hover:bg-dark-100"
-                    aria-label="Download image"
-                  >
-                    <HiArrowDownTray className="h-4 w-4" />
-                  </button>
-                </>
-              )}
-            </div>
+                )}
+                <button
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleDownload(selectedAttachment);
+                  }}
+                  className="rounded-full bg-light-50 p-1.5 text-light-1000 transition-colors hover:bg-light-100 focus:outline-none dark:bg-dark-50 dark:text-dark-1000 dark:hover:bg-dark-100"
+                  aria-label="Download image"
+                >
+                  <HiArrowDownTray className="h-4 w-4" />
+                </button>
+              </div>
+            )}
 
             <div className="fixed right-2 top-2 z-20 flex gap-1">
               {imageAttachments.length > 1 && selectedIndex !== null && (
@@ -405,7 +416,7 @@ function FileListItem({
 }: {
   attachment: Attachment;
   onDownload: () => void;
-  onDelete: () => void;
+  onDelete?: () => void;
 }) {
   return (
     <div className="group flex w-full items-center gap-3 rounded-lg border border-light-300 bg-light-50 px-3 py-2 dark:border-dark-200 dark:bg-dark-100">
@@ -432,16 +443,18 @@ function FileListItem({
           >
             <HiArrowDownTray className="h-4 w-4" />
           </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete();
-            }}
-            className="flex-shrink-0 rounded-full bg-light-100 p-1.5 text-light-1000 transition-colors hover:bg-light-200 focus:outline-none dark:bg-dark-100 dark:text-dark-950 dark:hover:bg-dark-300"
-            aria-label={`Delete ${attachment.originalFilename}`}
-          >
-            <HiXMark className="h-4 w-4" />
-          </button>
+          {onDelete && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete();
+              }}
+              className="flex-shrink-0 rounded-full bg-light-100 p-1.5 text-light-1000 transition-colors hover:bg-light-200 focus:outline-none dark:bg-dark-100 dark:text-dark-950 dark:hover:bg-dark-300"
+              aria-label={`Delete ${attachment.originalFilename}`}
+            >
+              <HiXMark className="h-4 w-4" />
+            </button>
+          )}
         </div>
       </div>
     </div>

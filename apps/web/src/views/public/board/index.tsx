@@ -189,6 +189,7 @@ export default function PublicBoardView() {
                             members={[]}
                             description={card.description}
                             comments={card.comments ?? []}
+                            attachments={card.attachments}
                           />
                         </Link>
                       ))}
