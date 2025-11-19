@@ -80,7 +80,7 @@ msgid "Account deleted"
 msgstr "Account verwijderd"
 
 #: src/views/card/index.tsx:308
-#: src/views/public/board/CardModal.tsx:143
+#: src/views/public/board/CardModal.tsx:157
 msgid "Activity"
 msgstr "Activiteit"
 
@@ -773,7 +773,7 @@ msgstr "Heb je geen account? <0><1>Registreer je</1></0>"
 msgid "Done"
 msgstr "Klaar"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:134
+#: src/views/card/components/AttachmentThumbnails.tsx:141
 msgid "Download failed"
 msgstr "Download mislukt"
 
@@ -1000,6 +1000,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Voor duurzaamheid op lange termijn erkennen we dat alle goede open source projecten een inkomstenbron nodig hebben. De onze komt van de betaalde cloudoplossing voor werkruimtes met meerdere gebruikers en voor aangepaste werkruimte-slugs. Er is geen verplichting om het te gebruiken, en je kunt de software gratis op je eigen infrastructuur hosten."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratis"
@@ -1486,7 +1488,7 @@ msgstr "Geen borden gevonden"
 msgid "No credit card required"
 msgstr "Geen creditcard vereist"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:135
+#: src/views/card/components/AttachmentThumbnails.tsx:142
 msgid "No download URL available for this attachment."
 msgstr "Geen download-URL beschikbaar voor deze bijlage."
 
@@ -1632,7 +1634,7 @@ msgstr "Selecteer een bestand om te uploaden."
 #: src/views/board/index.tsx:151
 #: src/views/board/index.tsx:207
 #: src/views/boards/components/ImportBoardsForm.tsx:205
-#: src/views/card/components/AttachmentThumbnails.tsx:68
+#: src/views/card/components/AttachmentThumbnails.tsx:73
 #: src/views/card/components/ChecklistItemRow.tsx:60
 #: src/views/card/components/ChecklistItemRow.tsx:88
 #: src/views/card/components/ChecklistNameInput.tsx:46
@@ -2149,7 +2151,7 @@ msgstr "Kan sjabloon niet maken"
 msgid "Unable to create workspace"
 msgstr "Kan werkruimte niet aanmaken"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:67
+#: src/views/card/components/AttachmentThumbnails.tsx:72
 msgid "Unable to delete attachment"
 msgstr "Kan bijlage niet verwijderen"
 

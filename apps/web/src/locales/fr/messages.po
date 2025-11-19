@@ -80,7 +80,7 @@ msgid "Account deleted"
 msgstr "Compte supprimé"
 
 #: src/views/card/index.tsx:308
-#: src/views/public/board/CardModal.tsx:143
+#: src/views/public/board/CardModal.tsx:157
 msgid "Activity"
 msgstr "Activité"
 
@@ -773,7 +773,7 @@ msgstr "Vous n'avez pas de compte ? <0><1>Inscrivez-vous</1></0>"
 msgid "Done"
 msgstr "Fait"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:134
+#: src/views/card/components/AttachmentThumbnails.tsx:141
 msgid "Download failed"
 msgstr "Échec du téléchargement"
 
@@ -1000,6 +1000,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Pour une durabilité à long terme, nous reconnaissons que tous les bons projets open source ont besoin d'une source de revenus. La nôtre provient de l'offre cloud payante pour les espaces de travail avec plusieurs utilisateurs et pour les slugs d'espace de travail personnalisés. Il n'y a aucune obligation de l'utiliser, et vous pouvez auto-héberger le logiciel sur votre propre infrastructure gratuitement."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratuit"
@@ -1486,7 +1488,7 @@ msgstr "Aucun tableau trouvé"
 msgid "No credit card required"
 msgstr "Aucune carte de crédit requise"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:135
+#: src/views/card/components/AttachmentThumbnails.tsx:142
 msgid "No download URL available for this attachment."
 msgstr "Aucune URL de téléchargement disponible pour cette pièce jointe."
 
@@ -1632,7 +1634,7 @@ msgstr "Veuillez sélectionner un fichier à télécharger."
 #: src/views/board/index.tsx:151
 #: src/views/board/index.tsx:207
 #: src/views/boards/components/ImportBoardsForm.tsx:205
-#: src/views/card/components/AttachmentThumbnails.tsx:68
+#: src/views/card/components/AttachmentThumbnails.tsx:73
 #: src/views/card/components/ChecklistItemRow.tsx:60
 #: src/views/card/components/ChecklistItemRow.tsx:88
 #: src/views/card/components/ChecklistNameInput.tsx:46
@@ -2149,7 +2151,7 @@ msgstr "Impossible de créer le modèle"
 msgid "Unable to create workspace"
 msgstr "Impossible de créer l'espace de travail"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:67
+#: src/views/card/components/AttachmentThumbnails.tsx:72
 msgid "Unable to delete attachment"
 msgstr "Impossible de supprimer la pièce jointe"
 

@@ -92,7 +92,7 @@ msgid "Account deleted"
 msgstr "Account deleted"
 
 #: src/views/card/index.tsx:308
-#: src/views/public/board/CardModal.tsx:143
+#: src/views/public/board/CardModal.tsx:157
 msgid "Activity"
 msgstr "Activity"
 
@@ -862,7 +862,7 @@ msgstr "Don't have an account? <0><1>Sign up</1></0>"
 msgid "Done"
 msgstr "Done"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:134
+#: src/views/card/components/AttachmentThumbnails.tsx:141
 msgid "Download failed"
 msgstr "Download failed"
 
@@ -1617,7 +1617,7 @@ msgstr "No boards found"
 msgid "No credit card required"
 msgstr "No credit card required"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:135
+#: src/views/card/components/AttachmentThumbnails.tsx:142
 msgid "No download URL available for this attachment."
 msgstr "No download URL available for this attachment."
 
@@ -1763,7 +1763,7 @@ msgstr "Please select a file to upload."
 #: src/views/board/index.tsx:151
 #: src/views/board/index.tsx:207
 #: src/views/boards/components/ImportBoardsForm.tsx:205
-#: src/views/card/components/AttachmentThumbnails.tsx:68
+#: src/views/card/components/AttachmentThumbnails.tsx:73
 #: src/views/card/components/ChecklistItemRow.tsx:60
 #: src/views/card/components/ChecklistItemRow.tsx:88
 #: src/views/card/components/ChecklistNameInput.tsx:46
@@ -2308,7 +2308,7 @@ msgstr "Unable to create template"
 msgid "Unable to create workspace"
 msgstr "Unable to create workspace"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:67
+#: src/views/card/components/AttachmentThumbnails.tsx:72
 msgid "Unable to delete attachment"
 msgstr "Unable to delete attachment"
 

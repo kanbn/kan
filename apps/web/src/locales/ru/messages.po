@@ -80,7 +80,7 @@ msgid "Account deleted"
 msgstr "Аккаунт удалён"
 
 #: src/views/card/index.tsx:308
-#: src/views/public/board/CardModal.tsx:143
+#: src/views/public/board/CardModal.tsx:157
 msgid "Activity"
 msgstr "Активность"
 
@@ -773,7 +773,7 @@ msgstr "Нет аккаунта? <0><1>Зарегистрируйтесь</1></0
 msgid "Done"
 msgstr "Готово"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:134
+#: src/views/card/components/AttachmentThumbnails.tsx:141
 msgid "Download failed"
 msgstr "Не удалось загрузить"
 
@@ -1000,6 +1000,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Для долгосрочной устойчивости мы признаем, что всем хорошим проектам с открытым исходным кодом необходим источник дохода. Наш доход поступает от платного облачного предложения для рабочих пространств с несколькими пользователями и для пользовательских идентификаторов рабочих пространств. Нет обязательства использовать его, и вы можете самостоятельно разместить программное обеспечение на своей инфраструктуре бесплатно."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Бесплатно"
@@ -1486,7 +1488,7 @@ msgstr "Доски не найдены"
 msgid "No credit card required"
 msgstr "Кредитная карта не требуется"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:135
+#: src/views/card/components/AttachmentThumbnails.tsx:142
 msgid "No download URL available for this attachment."
 msgstr "URL для загрузки этого вложения недоступен."
 
@@ -1632,7 +1634,7 @@ msgstr "Пожалуйста, выберите файл для загрузки.
 #: src/views/board/index.tsx:151
 #: src/views/board/index.tsx:207
 #: src/views/boards/components/ImportBoardsForm.tsx:205
-#: src/views/card/components/AttachmentThumbnails.tsx:68
+#: src/views/card/components/AttachmentThumbnails.tsx:73
 #: src/views/card/components/ChecklistItemRow.tsx:60
 #: src/views/card/components/ChecklistItemRow.tsx:88
 #: src/views/card/components/ChecklistNameInput.tsx:46
@@ -2149,7 +2151,7 @@ msgstr "Не удалось создать шаблон"
 msgid "Unable to create workspace"
 msgstr "Не удалось создать рабочее пространство."
 
-#: src/views/card/components/AttachmentThumbnails.tsx:67
+#: src/views/card/components/AttachmentThumbnails.tsx:72
 msgid "Unable to delete attachment"
 msgstr "Не удалось удалить вложение"
 
