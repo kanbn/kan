@@ -28,7 +28,7 @@ export default function BoardDropdown() {
         },
       ]}
     >
-      <HiEllipsisHorizontal className="h-6 w-6 text-dark-900" />
+      <HiEllipsisHorizontal className="h-5 w-5 text-dark-900" />
     </Dropdown>
   );
 }

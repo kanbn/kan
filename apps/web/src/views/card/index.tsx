@@ -217,47 +217,66 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
       <PageHead
         title={t`${card?.title ?? t`Card`} | ${board?.name ?? t`Board`}`}
       />
-      <div className="flex h-full flex-1 flex-row overflow-hidden">
+      <div className="flex h-full flex-1 flex-col overflow-hidden">
+        {/* Full-width top strip with board link and dropdown */}
+        <div className="flex w-full items-center justify-between border-b-[1px] border-light-300 bg-light-50 px-8 py-2 dark:border-dark-300 dark:bg-dark-50">
+          {!card && isLoading && (
+            <div className="flex space-x-2">
+              <div className="h-[1.5rem] w-[150px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
+            </div>
+          )}
+          {card && (
+            <>
+              <div className="flex items-center gap-1">
+                <Link
+                  className="whitespace-nowrapleading-[1.5rem] text-sm font-bold text-light-900 dark:text-dark-950"
+                  href={`${isTemplate ? "/templates" : "/boards"}`}
+                >
+                  {workspace.name}
+                </Link>
+                <IoChevronForwardSharp className="h-[10px] w-[10px] text-light-900 dark:text-dark-900" />
+                <Link
+                  className="whitespace-nowrap text-sm font-bold leading-[1.5rem] text-light-900 dark:text-dark-950"
+                  href={`${isTemplate ? "/templates" : "/boards"}/${board?.publicId}`}
+                >
+                  {board?.name}
+                </Link>
+              </div>
+              <div className="flex items-center gap-2">
+                <Dropdown />
+              </div>
+            </>
+          )}
+          {!card && !isLoading && (
+            <p className="block p-0 py-0 font-bold leading-[1.5rem] tracking-tight text-light-900 dark:text-dark-900 sm:text-[1rem]">
+              {t`Card not found`}
+            </p>
+          )}
+        </div>
         <div className="scrollbar-thumb-rounded-[4px] scrollbar-track-rounded-[4px] w-full flex-1 overflow-y-auto scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 hover:scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 dark:hover:scrollbar-thumb-dark-300">
           <div className="p-auto mx-auto flex h-full w-full max-w-[800px] flex-col">
             <div className="p-6 md:p-8">
-              <div className="mb-8 flex w-full items-center justify-between md:mt-6">
+              <div className="mb-8 md:mt-6">
                 {!card && isLoading && (
                   <div className="flex space-x-2">
-                    <div className="h-[2.3rem] w-[150px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
                     <div className="h-[2.3rem] w-[300px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
                   </div>
                 )}
                 {card && (
-                  <>
-                    <Link
-                      className="whitespace-nowrap font-bold leading-[2.3rem] tracking-tight text-light-900 dark:text-dark-900 sm:text-[1.2rem]"
-                      href={`${isTemplate ? "/templates" : "/boards"}/${board?.publicId}`}
-                    >
-                      {board?.name}
-                    </Link>
-                    <IoChevronForwardSharp
-                      size={18}
-                      className="mx-2 text-light-900 dark:text-dark-900"
-                    />
-                    <form
-                      onSubmit={handleSubmit(onSubmit)}
-                      className="w-full space-y-6"
-                    >
-                      <div>
-                        <input
-                          type="text"
-                          id="title"
-                          {...register("title")}
-                          onBlur={handleSubmit(onSubmit)}
-                          className="block w-full border-0 bg-transparent p-0 py-0 font-bold tracking-tight text-neutral-900 focus:ring-0 dark:text-dark-1000 sm:text-[1.2rem]"
-                        />
-                      </div>
-                    </form>
-                    <div className="flex">
-                      <Dropdown />
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="w-full space-y-6"
+                  >
+                    <div>
+                      <input
+                        type="text"
+                        id="title"
+                        {...register("title")}
+                        onBlur={handleSubmit(onSubmit)}
+                        className="block w-full border-0 bg-transparent p-0 py-0 font-bold tracking-tight text-neutral-900 focus:ring-0 dark:text-dark-1000 sm:text-[1.2rem]"
+                      />
                     </div>
-                  </>
+                  </form>
                 )}
                 {!card && !isLoading && (
                   <p className="block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
