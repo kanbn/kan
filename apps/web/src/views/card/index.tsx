@@ -107,7 +107,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
 
   return (
     <div className="h-full w-[360px] border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
-      <div className="mb-4 flex w-full flex-row">
+      <div className="mb-4 flex w-full flex-row pt-[18px]">
         <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
         <ListSelector
           cardPublicId={cardId ?? ""}
@@ -210,6 +210,17 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     }
   }, [card, getModalState, clearModalState]);
 
+  // Auto-resize title textarea
+  useEffect(() => {
+    const titleTextarea = document.getElementById(
+      "title",
+    ) as HTMLTextAreaElement;
+    if (titleTextarea) {
+      titleTextarea.style.height = "auto";
+      titleTextarea.style.height = `${titleTextarea.scrollHeight}px`;
+    }
+  }, [card]);
+
   if (!cardId) return <></>;
 
   return (
@@ -256,7 +267,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
         <div className="scrollbar-thumb-rounded-[4px] scrollbar-track-rounded-[4px] w-full flex-1 overflow-y-auto scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 hover:scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 dark:hover:scrollbar-thumb-dark-300">
           <div className="p-auto mx-auto flex h-full w-full max-w-[800px] flex-col">
             <div className="p-6 md:p-8">
-              <div className="mb-8 md:mt-6">
+              <div className="mb-8 md:mt-4">
                 {!card && isLoading && (
                   <div className="flex space-x-2">
                     <div className="h-[2.3rem] w-[300px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
@@ -268,12 +279,17 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                     className="w-full space-y-6"
                   >
                     <div>
-                      <input
-                        type="text"
+                      <textarea
                         id="title"
                         {...register("title")}
                         onBlur={handleSubmit(onSubmit)}
-                        className="block w-full border-0 bg-transparent p-0 py-0 font-bold tracking-tight text-neutral-900 focus:ring-0 dark:text-dark-1000 sm:text-[1.2rem]"
+                        rows={1}
+                        className="block w-full resize-none overflow-hidden border-0 bg-transparent p-0 py-0 font-bold leading-relaxed text-neutral-900 focus:ring-0 dark:text-dark-1000 sm:text-[1.2rem]"
+                        onInput={(e) => {
+                          const target = e.target as HTMLTextAreaElement;
+                          target.style.height = "auto";
+                          target.style.height = `${target.scrollHeight}px`;
+                        }}
                       />
                     </div>
                   </form>
