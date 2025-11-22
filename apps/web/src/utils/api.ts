@@ -1,12 +1,15 @@
 import type { TRPCLink } from "@trpc/client";
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { QueryClient } from "@tanstack/react-query";
-import { httpBatchLink, loggerLink } from "@trpc/client";
+import { httpBatchLink, loggerLink, splitLink } from "@trpc/client";
+import { createWSClient, wsLink } from "@trpc/client/links/wsLink/wsLink";
 import { createTRPCNext } from "@trpc/next";
 import { observable } from "@trpc/server/observable";
 import superjson from "superjson";
 
 import type { AppRouter } from "@kan/api/root";
+
+import { env } from "~/env";
 
 /**
  * This is the client-side entrypoint for your tRPC API. It is used to create the `api` object which
@@ -39,28 +42,67 @@ const authLink: TRPCLink<AppRouter> = () => {
 
 const getBaseUrl = () => {
   if (typeof window !== "undefined") return ""; // browser should use relative url
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`; // SSR should use vercel url
-  return `http://localhost:${process.env.PORT ?? 3000}`; // dev SSR should use localhost
+  if (env.VERCEL_URL) return `https://${env.VERCEL_URL}`; // SSR should use vercel url
+  const port = env.PORT ? Number(env.PORT) : undefined;
+  return `http://localhost:${port ?? 3000}`; // dev SSR should use localhost
 };
 
 const queryClient = new QueryClient();
 
-// @ts-expect-error
+let wsClient: ReturnType<typeof createWSClient> | null = null;
+let hasRegisteredBeforeUnload = false;
+
+const resolveWsClient = () => {
+  if (typeof window === "undefined") return null;
+  if (!env.NEXT_PUBLIC_WEBSOCKET_URL) return null;
+  if (wsClient) return wsClient;
+
+  wsClient = createWSClient({
+    url: env.NEXT_PUBLIC_WEBSOCKET_URL,
+    retryDelayMs(attemptIndex) {
+      const capped = Math.min(attemptIndex, 8);
+      return Math.pow(2, capped) * 500;
+    },
+  });
+
+  if (!hasRegisteredBeforeUnload) {
+    hasRegisteredBeforeUnload = true;
+    window.addEventListener("beforeunload", () => {
+      if (wsClient) void wsClient.close();
+    });
+  }
+
+  return wsClient;
+};
+
+// @ts-expect-error - upstream createTRPCNext types require server transformer setup
 export const api = createTRPCNext<AppRouter>({
   config() {
+    const httpLink = httpBatchLink({
+      url: `${getBaseUrl()}/api/trpc`,
+      transformer: superjson,
+    });
+
+    const client = resolveWsClient();
+
+    const links = [
+      loggerLink({
+        enabled: (opts) =>
+          env.NODE_ENV === "development" ||
+          (opts.direction === "down" && opts.result instanceof Error),
+      }),
+      authLink,
+      client
+        ? splitLink({
+            condition: (op) => op.type === "subscription",
+            true: wsLink({ client, transformer: superjson }),
+            false: httpLink,
+          })
+        : httpLink,
+    ];
+
     return {
-      links: [
-        loggerLink({
-          enabled: (opts) =>
-            process.env.NODE_ENV === "development" ||
-            (opts.direction === "down" && opts.result instanceof Error),
-        }),
-        authLink,
-        httpBatchLink({
-          url: `${getBaseUrl()}/api/trpc`,
-          transformer: superjson,
-        }),
-      ],
+      links,
       queryClient: queryClient,
     };
   },

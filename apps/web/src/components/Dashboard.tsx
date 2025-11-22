@@ -13,6 +13,7 @@ import { authClient } from "@kan/auth/client";
 
 import { useClickOutside } from "~/hooks/useClickOutside";
 import { useModal } from "~/providers/modal";
+import { EventsProvider } from "~/providers/events";
 import { useWorkspace, WorkspaceProvider } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import SideNavigation from "./SideNavigation";
@@ -30,9 +31,11 @@ export function getDashboardLayout(
 ) {
   return (
     <WorkspaceProvider>
-      <Dashboard rightPanel={rightPanel} hasRightPanel={hasRightPanel}>
-        {page}
-      </Dashboard>
+      <EventsProvider>
+        <Dashboard rightPanel={rightPanel} hasRightPanel={hasRightPanel}>
+          {page}
+        </Dashboard>
+      </EventsProvider>
     </WorkspaceProvider>
   );
 }

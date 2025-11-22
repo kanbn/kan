@@ -2,6 +2,7 @@ import { attachmentRouter } from "./routers/attachment";
 import { boardRouter } from "./routers/board";
 import { cardRouter } from "./routers/card";
 import { checklistRouter } from "./routers/checklist";
+import { eventsRouter } from "./routers/events";
 import { feedbackRouter } from "./routers/feedback";
 import { healthRouter } from "./routers/health";
 import { importRouter } from "./routers/import";
@@ -31,6 +32,7 @@ export const appRouter = createTRPCRouter({
   webhook: webhookRouter,
   workspace: workspaceRouter,
   integration: integrationRouter,
+  events: eventsRouter,
 });
 
 export type AppRouter = typeof appRouter;

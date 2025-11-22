@@ -1,6 +1,6 @@
 import type { DraggableProvided } from "react-beautiful-dnd";
 import { t } from "@lingui/core/macro";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiXMark } from "react-icons/hi2";
 import { RiDraggable } from "react-icons/ri";
 import { twMerge } from "tailwind-merge";
@@ -33,6 +33,7 @@ export default function ChecklistItemRow({
 }: ChecklistItemRowProps) {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
+  const [title, setTitle] = useState(item.title);
   const [completed, setCompleted] = useState(item.completed);
 
   const updateItem = api.checklist.updateItem.useMutation({
@@ -100,6 +101,25 @@ export default function ChecklistItemRow({
       await invalidateCard(utils, cardPublicId);
     },
   });
+
+  // Only resync from props when switching items to avoid clobbering edits
+  useEffect(() => {
+    if (title !== item.title) {
+      setTitle(item.title);
+    }
+    if (completed !== item.completed) {
+      setCompleted(item.completed);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [item.publicId, item.title, item.completed]);
+
+  const sanitizeHtmlToPlainText = (html: string): string =>
+    html
+      .replace(/<br\s*\/?>(\n)?/gi, "\n")
+      .replace(/<div><br\s*\/?><\/div>/gi, "")
+      .replace(/<[^>]*>/g, "")
+      .replace(/&nbsp;/g, " ")
+      .trim();
 
   const handleToggleCompleted = () => {
     if (viewOnly) return;

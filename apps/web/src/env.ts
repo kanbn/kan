@@ -54,6 +54,8 @@ export const env = createEnv({
     LINKEDIN_CLIENT_SECRET: z.string().optional(),
     NOVU_API_KEY: z.string().optional(),
     EMAIL_UNSUBSCRIBE_SECRET: z.string().optional(),
+    VERCEL_URL: z.string().optional(),
+    PORT: z.string().optional(),
     // Generic OIDC Provider
     OIDC_CLIENT_ID: z.string().optional(),
     OIDC_CLIENT_SECRET: z.string().optional(),
@@ -92,6 +94,7 @@ export const env = createEnv({
     NEXT_PUBLIC_POSTHOG_HOST: z.string().optional(),
     NEXT_PUBLIC_USE_STANDALONE_OUTPUT: z.string().optional(),
     NEXT_PUBLIC_BASE_URL: z.string().url().optional(),
+    NEXT_PUBLIC_WEBSOCKET_URL: z.string().url().optional(),
     NEXT_PUBLIC_STORAGE_URL: z.string().url().optional(),
     NEXT_PUBLIC_AVATAR_BUCKET_NAME: z.string().optional(),
     NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME: z.string().optional(),
@@ -150,6 +153,7 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_USE_STANDALONE_OUTPUT,
     NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY:
       process.env.NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY,
+    NEXT_PUBLIC_WEBSOCKET_URL: process.env.NEXT_PUBLIC_WEBSOCKET_URL,
   },
   skipValidation:
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",

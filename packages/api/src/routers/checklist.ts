@@ -6,8 +6,43 @@ import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
 import { stripHtml } from "@kan/shared/utils";
 
+import type { BoardEvent, CardEvent } from "../events";
+import {
+  publishBoardEventToWebsocket,
+  publishCardEventToWebsocket,
+} from "../events";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
+
+const emitBoardEvent = async (
+  workspacePublicId: string | null | undefined,
+  event: BoardEvent,
+) => {
+  if (!workspacePublicId) {
+    return;
+  }
+
+  try {
+    await publishBoardEventToWebsocket(workspacePublicId, event);
+  } catch (error) {
+    console.error("failed to publish board event", error);
+  }
+};
+
+const emitCardEvent = async (
+  workspacePublicId: string | null | undefined,
+  event: CardEvent,
+) => {
+  if (!workspacePublicId) {
+    return;
+  }
+
+  try {
+    await publishCardEventToWebsocket(workspacePublicId, event);
+  } catch (error) {
+    console.error("failed to publish card event", error);
+  }
+};
 
 const checklistSchema = z.object({
   publicId: z.string().length(12),
@@ -79,6 +114,20 @@ export const checklistRouter = createTRPCRouter({
         createdBy: userId,
       });
 
+      await emitBoardEvent(card.workspacePublicId, {
+        scope: "board",
+        type: "checklist.changed",
+        boardId: card.boardId,
+        cardPublicId: input.cardPublicId,
+      });
+
+      await emitCardEvent(card.workspacePublicId, {
+        scope: "card",
+        type: "checklist.changed",
+        cardId: card.id,
+        cardPublicId: input.cardPublicId,
+      });
+
       return newChecklist;
     }),
   update: protectedProcedure
@@ -142,6 +191,20 @@ export const checklistRouter = createTRPCRouter({
         fromTitle: previousName,
         toTitle: updated.name,
         createdBy: userId,
+      });
+
+      await emitBoardEvent(checklist.card.list.board.workspace.publicId, {
+        scope: "board",
+        type: "checklist.changed",
+        boardId: checklist.card.list.board.id,
+        cardPublicId: checklist.card.publicId,
+      });
+
+      await emitCardEvent(checklist.card.list.board.workspace.publicId, {
+        scope: "card",
+        type: "checklist.changed",
+        cardId: checklist.cardId,
+        cardPublicId: checklist.card.publicId,
       });
 
       return updated;
@@ -208,6 +271,20 @@ export const checklistRouter = createTRPCRouter({
         createdBy: userId,
       });
 
+      await emitBoardEvent(checklist.card.list.board.workspace.publicId, {
+        scope: "board",
+        type: "checklist.changed",
+        boardId: checklist.card.list.board.id,
+        cardPublicId: checklist.card.publicId,
+      });
+
+      await emitCardEvent(checklist.card.list.board.workspace.publicId, {
+        scope: "card",
+        type: "checklist.changed",
+        cardId: checklist.cardId,
+        cardPublicId: checklist.card.publicId,
+      });
+
       return { success: true };
     }),
   createItem: protectedProcedure
@@ -271,6 +348,20 @@ export const checklistRouter = createTRPCRouter({
         cardId: checklist.cardId,
         toTitle: newChecklistItem.title,
         createdBy: userId,
+      });
+
+      await emitBoardEvent(checklist.card.list.board.workspace.publicId, {
+        scope: "board",
+        type: "checklist.changed",
+        boardId: checklist.card.list.board.id,
+        cardPublicId: checklist.card.publicId,
+      });
+
+      await emitCardEvent(checklist.card.list.board.workspace.publicId, {
+        scope: "card",
+        type: "checklist.changed",
+        cardId: checklist.cardId,
+        cardPublicId: checklist.card.publicId,
       });
 
       return newChecklistItem;
@@ -370,6 +461,25 @@ export const checklistRouter = createTRPCRouter({
         });
       }
 
+      if (input.completed !== undefined || input.title !== undefined) {
+        await emitBoardEvent(
+          item.checklist.card.list.board.workspace.publicId,
+          {
+            scope: "board",
+            type: "checklist.changed",
+            boardId: item.checklist.card.list.board.id,
+            cardPublicId: item.checklist.card.publicId,
+          },
+        );
+
+        await emitCardEvent(item.checklist.card.list.board.workspace.publicId, {
+          scope: "card",
+          type: "checklist.changed",
+          cardId: item.checklist.cardId,
+          cardPublicId: item.checklist.card.publicId,
+        });
+      }
+
       return updatedItem;
     }),
   deleteItem: protectedProcedure
@@ -426,6 +536,20 @@ export const checklistRouter = createTRPCRouter({
         cardId: item.checklist.cardId,
         fromTitle: item.title,
         createdBy: userId,
+      });
+
+      await emitBoardEvent(item.checklist.card.list.board.workspace.publicId, {
+        scope: "board",
+        type: "checklist.changed",
+        boardId: item.checklist.card.list.board.id,
+        cardPublicId: item.checklist.card.publicId,
+      });
+
+      await emitCardEvent(item.checklist.card.list.board.workspace.publicId, {
+        scope: "card",
+        type: "checklist.changed",
+        cardId: item.checklist.cardId,
+        cardPublicId: item.checklist.card.publicId,
       });
 
       return { success: true };

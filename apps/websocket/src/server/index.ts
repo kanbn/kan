@@ -1,11 +1,23 @@
+import { createServer } from "node:http";
 import { WebSocketServer } from "ws";
 
 import { websocketConfig } from "~/config";
 import { logger } from "~/logger";
 import { createWsHandler } from "./handler";
+import { handleEventIngest } from "./ingest";
 
 export const startWebsocketServer = () => {
-  const wss = new WebSocketServer({ port: websocketConfig.port });
+  const server = createServer(async (req, res) => {
+    if (req.url === websocketConfig.ingest.path) {
+      await handleEventIngest(req, res);
+      return;
+    }
+
+    res.statusCode = 404;
+    res.end();
+  });
+
+  const wss = new WebSocketServer({ server });
   const handler = createWsHandler(wss, websocketConfig.keepAlive);
 
   wss.on("connection", (socket) => {
@@ -23,7 +35,12 @@ export const startWebsocketServer = () => {
       if (error) {
         logger.error("error while closing websocket server", error);
       }
-      logger.info("websocket server closed");
+      server.close((closeError) => {
+        if (closeError) {
+          logger.error("error while closing websocket http server", closeError);
+        }
+        logger.info("websocket server closed");
+      });
     });
   };
 
@@ -31,12 +48,14 @@ export const startWebsocketServer = () => {
     process.once(signal, () => shutdown(signal));
   });
 
-  logger.info(
-    `server listening on ws://localhost:${wss.options.port ?? websocketConfig.port}`,
-  );
+  server.listen(websocketConfig.port, () => {
+    logger.info(
+      `server listening on ws://localhost:${websocketConfig.port} (ingest: ${websocketConfig.ingest.path})`,
+    );
+  });
 
   return {
-    port: wss.options.port ?? websocketConfig.port,
+    port: websocketConfig.port,
     handler,
     wss,
     stop: () => shutdown("SIGTERM"),

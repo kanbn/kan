@@ -93,7 +93,11 @@ export const create = async (
         index: index,
         dueDate: cardInput.dueDate ?? null,
       })
-      .returning({ id: cards.id, listId: cards.listId, publicId: cards.publicId });
+      .returning({
+        id: cards.id,
+        publicId: cards.publicId,
+        listId: cards.listId,
+      });
 
     if (!result[0]) throw new Error("Unable to create card");
 
@@ -945,14 +949,22 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
     where: and(eq(cards.publicId, cardPublicId), isNull(cards.deletedAt)),
     with: {
       list: {
-        columns: { name: true },
+        columns: { name: true, publicId: true },
         with: {
           board: {
             columns: {
+              id: true,
               publicId: true,
               workspaceId: true,
               visibility: true,
               name: true,
+            },
+            with: {
+              workspace: {
+                columns: {
+                  publicId: true,
+                },
+              },
             },
           },
         },
@@ -964,11 +976,14 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
     ? {
         id: result.id,
         createdBy: result.createdBy,
+        boardId: result.list.board.id,
         workspaceId: result.list.board.workspaceId,
         workspaceVisibility: result.list.board.visibility,
         listName: result.list.name,
+        listPublicId: result.list.publicId,
         boardPublicId: result.list.board.publicId,
         boardName: result.list.board.name,
+        workspacePublicId: result.list.board.workspace.publicId,
       }
     : null;
 };

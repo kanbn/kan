@@ -16,6 +16,10 @@
       "types": "./dist/trpc.d.ts",
       "default": "./src/trpc.ts"
     },
+    "./events": {
+      "types": "./dist/events/index.d.ts",
+      "default": "./src/events/index.ts"
+    },
     "./types": {
       "types": "./dist/types.d.ts",
       "default": "./src/types/router.types.ts"

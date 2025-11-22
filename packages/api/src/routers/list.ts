@@ -6,8 +6,25 @@ import * as cardRepo from "@kan/db/repository/card.repo";
 import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 
+import type { BoardEvent } from "../events";
+import { publishBoardEventToWebsocket } from "../events";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
+
+const emitBoardEvent = async (
+  workspacePublicId: string | null | undefined,
+  event: BoardEvent,
+) => {
+  if (!workspacePublicId) {
+    return;
+  }
+
+  try {
+    await publishBoardEventToWebsocket(workspacePublicId, event);
+  } catch (error) {
+    console.error("failed to publish board event", error);
+  }
+};
 
 export const listRouter = createTRPCRouter({
   create: protectedProcedure
@@ -61,6 +78,15 @@ export const listRouter = createTRPCRouter({
           message: `Failed to create list`,
           code: "INTERNAL_SERVER_ERROR",
         });
+
+      await emitBoardEvent(board.workspace?.publicId, {
+        scope: "board",
+        type: "list.created",
+        boardId: board.id,
+        listPublicId: result.publicId,
+        name: result.name,
+        index: result.index,
+      });
 
       return result;
     }),
@@ -143,6 +169,13 @@ export const listRouter = createTRPCRouter({
 
       if (activities.length) await activityRepo.bulkCreate(ctx.db, activities);
 
+      await emitBoardEvent(list.workspacePublicId, {
+        scope: "board",
+        type: "list.deleted",
+        boardId: list.boardId,
+        listPublicId: input.listPublicId,
+      });
+
       return { success: true };
     }),
   update: protectedProcedure
@@ -219,6 +252,17 @@ export const listRouter = createTRPCRouter({
           message: `Failed to update list`,
           code: "INTERNAL_SERVER_ERROR",
         });
+
+      if (input.name !== undefined || input.index !== undefined) {
+        await emitBoardEvent(list.workspacePublicId, {
+          scope: "board",
+          type: "list.updated",
+          boardId: list.boardId,
+          listPublicId: input.listPublicId,
+          name: input.name,
+          index: input.index,
+        });
+      }
 
       return result;
     }),

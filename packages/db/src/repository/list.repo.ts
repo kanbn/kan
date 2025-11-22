@@ -50,6 +50,7 @@ export const create = async (
         publicId: lists.publicId,
         boardId: lists.boardId,
         name: lists.name,
+        index: lists.index,
       });
 
     if (!result)
@@ -422,9 +423,17 @@ export const getWorkspaceAndListIdByListPublicId = async (
     with: {
       board: {
         columns: {
+          id: true,
           publicId: true,
           workspaceId: true,
           name: true,
+        },
+        with: {
+          workspace: {
+            columns: {
+              publicId: true,
+            },
+          },
         },
       },
     },
@@ -436,8 +445,10 @@ export const getWorkspaceAndListIdByListPublicId = async (
         name: result.name,
         createdBy: result.createdBy,
         workspaceId: result.board.workspaceId,
+        boardId: result.board.id,
         boardPublicId: result.board.publicId,
         boardName: result.board.name,
+        workspacePublicId: result.board.workspace.publicId,
       }
     : null;
 };

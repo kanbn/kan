@@ -10,6 +10,7 @@ const parseNumber = (value: string | undefined, fallback: number) => {
 const DEFAULT_PORT = 3010;
 const DEFAULT_PING_MS = 30_000;
 const DEFAULT_PONG_TIMEOUT_MS = 5_000;
+const DEFAULT_INGEST_PATH = "/internal/events";
 
 export const websocketConfig = {
   port: parseNumber(
@@ -23,5 +24,9 @@ export const websocketConfig = {
       process.env.WEBSOCKET_PONG_TIMEOUT_MS,
       DEFAULT_PONG_TIMEOUT_MS,
     ),
+  },
+  ingest: {
+    path: process.env.WEBSOCKET_EVENT_PATH ?? DEFAULT_INGEST_PATH,
+    secret: process.env.WEBSOCKET_EVENT_SECRET ?? "",
   },
 } as const;

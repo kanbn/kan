@@ -9,6 +9,8 @@ import {
   createWSContext,
 } from "./trpc";
 
+export * from "./events";
+
 const createCaller = createCallerFactory(appRouter);
 
 type RouterInputs = inferRouterInputs<AppRouter>;
