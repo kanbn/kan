@@ -440,9 +440,9 @@ importers:
 
   packages/email:
     dependencies:
-      '@plunk/node':
-        specifier: ^3.0.3
-        version: 3.0.3
+      '@novu/api':
+        specifier: ^3.11.0
+        version: 3.11.0
       '@react-email/components':
         specifier: ^0.0.25
         version: 0.0.25(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2683,6 +2683,9 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
+  '@novu/api@3.11.0':
+    resolution: {integrity: sha512-8u0mB5VThL7MhdxoN0UoA4CS9eu2k3Xa6iulauMhCHENuJNxUNuirJWq5t8jDoH4bFTQTfMN0VRkC0qodKR2qA==}
+
   '@octokit/auth-token@3.0.4':
     resolution: {integrity: sha512-TWFX7cZF2LXoCvdmJWY7XVPi74aSY0+FfBZNSXEXFkMpjcqsQwDSYVv5FhRFaI0V1ECnwbz4j59T/G+rXNWaIQ==}
     engines: {node: '>= 14'}
@@ -2761,9 +2764,6 @@ packages:
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
-
-  '@plunk/node@3.0.3':
-    resolution: {integrity: sha512-f3NT418/EdLjebQ4arAwR64cnz7d5H7i1CeKh8+B0cVBrwzHvF+Q+QkhutF+FAp49yuI/BYc71qQH+RFc2fxxQ==}
 
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
@@ -10226,6 +10226,10 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
 
+  '@novu/api@3.11.0':
+    dependencies:
+      zod: 3.25.76
+
   '@octokit/auth-token@3.0.4': {}
 
   '@octokit/core@4.2.4':
@@ -10344,10 +10348,6 @@ snapshots:
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
-
-  '@plunk/node@3.0.3':
-    dependencies:
-      tslib: 2.8.1
 
   '@popperjs/core@2.11.8': {}
 

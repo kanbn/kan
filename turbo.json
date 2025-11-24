@@ -120,8 +120,7 @@
     "PORT",
     "BETTER_AUTH_SECRET",
     "BETTER_AUTH_TRUSTED_ORIGINS",
-    "PLUNK_API_KEY",
-    "PLUNK_API_URL"
+    "NOVU_API_KEY"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",

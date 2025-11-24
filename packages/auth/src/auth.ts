@@ -14,7 +14,7 @@ import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import * as schema from "@kan/db/schema";
-import { cloudMailerClient, sendEmail } from "@kan/email";
+import { notificationClient, sendEmail } from "@kan/email";
 import { createStripeClient } from "@kan/stripe";
 
 export const configuredProviders = socialProviderList.reduce<
@@ -348,17 +348,7 @@ export const initAuth = (db: dbClient) => {
             return Promise.resolve(true);
           },
           async after(user) {
-            if (cloudMailerClient) {
-              await cloudMailerClient.events.track({
-                event: "user-signup",
-                email: user.email,
-                data: {
-                  name: user.name,
-                  userId: user.id,
-                },
-              });
-            }
-
+            let avatarKey = user.image;
             if (
               user.image &&
               !user.image.includes(process.env.NEXT_PUBLIC_STORAGE_DOMAIN!)
@@ -391,11 +381,48 @@ export const initAuth = (db: dbClient) => {
                     ACL: "public-read",
                   }),
                 );
+
+                avatarKey = key;
+
                 await userRepo.update(db, user.id, {
                   image: key,
                 });
               } catch (error) {
                 console.error(error);
+              }
+            }
+
+            if (notificationClient) {
+              try {
+                const [firstName, ...rest] = user.name
+                  .split(" ")
+                  .filter(Boolean);
+                const lastName = rest.length ? rest.join(" ") : undefined;
+                const avatarUrl = avatarKey
+                  ? `${env("NEXT_PUBLIC_STORAGE_URL")}/${env("NEXT_PUBLIC_AVATAR_BUCKET_NAME")}/${avatarKey}`
+                  : undefined;
+
+                await notificationClient.trigger({
+                  to: {
+                    subscriberId: user.id,
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: user.email,
+                    avatar: avatarUrl,
+                    data: {
+                      emailVerified: user.emailVerified,
+                      stripeCustomerId: user.stripeCustomerId,
+                      createdAt: user.createdAt,
+                      updatedAt: user.updatedAt,
+                    },
+                  },
+                  workflowId: "user-signup",
+                });
+              } catch (error) {
+                console.error(
+                  "Error adding user to notification client",
+                  error,
+                );
               }
             }
           },
