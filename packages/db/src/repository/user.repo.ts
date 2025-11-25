@@ -28,6 +28,15 @@ export const getById = async (db: dbClient, userId: string) => {
   });
 };
 
+export const getByStripeCustomerId = async (
+  db: dbClient,
+  stripeCustomerId: string,
+) => {
+  return await db.query.users.findFirst({
+    where: eq(users.stripeCustomerId, stripeCustomerId),
+  });
+};
+
 export const getByEmail = (db: dbClient, email: string) => {
   return db.query.users.findFirst({
     columns: {

@@ -71,4 +71,13 @@ export const updateSubscriptionSeats = async (
   return updatedSubscription;
 };
 
+export const getCancellationDetails = async (
+  stripeSubscriptionId: string,
+): Promise<Stripe.Subscription.CancellationDetails | null> => {
+  const stripe = createStripeClient();
+  const stripeSubscription =
+    await stripe.subscriptions.retrieve(stripeSubscriptionId);
+  return stripeSubscription.cancellation_details ?? null;
+};
+
 export { createStripeClient };

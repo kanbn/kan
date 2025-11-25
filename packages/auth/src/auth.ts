@@ -1,3 +1,5 @@
+import type { Subscription } from "@better-auth/stripe";
+import type Stripe from "stripe";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { stripe } from "@better-auth/stripe";
 import { ChatOrPushProviderEnum } from "@novu/api/models/components";
@@ -179,19 +181,17 @@ export const initAuth = (db: dbClient) => {
                     freeTrial: {
                       days: 14,
                       onTrialStart: async (subscription) => {
-                        // Called when a trial starts
-                        // @todo: send trial start email
-                        // await sendTrialStartEmail(subscription.referenceId);
+                        await triggerWorkflow(db, "trial-start", subscription);
                       },
-                      onTrialEnd: async ({ subscription }, request) => {
-                        // Called when a trial ends
-                        // @todo: send trial end email
-                        // await sendTrialEndEmail(user.email);
+                      onTrialEnd: async ({ subscription }) => {
+                        await triggerWorkflow(db, "trial-end", subscription);
                       },
                       onTrialExpired: async (subscription) => {
-                        // Called when a trial expires without conversion
-                        // @todo: send trial expired email
-                        // await sendTrialExpiredEmail(subscription.referenceId);
+                        await triggerWorkflow(
+                          db,
+                          "trial-expired",
+                          subscription,
+                        );
                       },
                     },
                   },
@@ -203,19 +203,17 @@ export const initAuth = (db: dbClient) => {
                     freeTrial: {
                       days: 14,
                       onTrialStart: async (subscription) => {
-                        // Called when a trial starts
-                        // @todo: send trial start email
-                        // await sendTrialStartEmail(subscription.referenceId);
+                        await triggerWorkflow(db, "trial-start", subscription);
                       },
-                      onTrialEnd: async ({ subscription }, request) => {
-                        // Called when a trial ends
-                        // @todo: send trial end email
-                        // await sendTrialEndEmail(user.email);
+                      onTrialEnd: async ({ subscription }) => {
+                        await triggerWorkflow(db, "trial-end", subscription);
                       },
                       onTrialExpired: async (subscription) => {
-                        // Called when a trial expires without conversion
-                        // @todo: send trial expired email
-                        // await sendTrialExpiredEmail(subscription.referenceId);
+                        await triggerWorkflow(
+                          db,
+                          "trial-expired",
+                          subscription,
+                        );
                       },
                     },
                   },
@@ -474,3 +472,34 @@ export const initAuth = (db: dbClient) => {
     },
   });
 };
+
+async function triggerWorkflow(
+  db: dbClient,
+  workflowId: string,
+  subscription: Subscription,
+  cancellationDetails?: Stripe.Subscription.CancellationDetails | null,
+) {
+  try {
+    if (!subscription.stripeCustomerId || !notificationClient) return;
+
+    const user = await userRepo.getByStripeCustomerId(
+      db,
+      subscription.stripeCustomerId,
+    );
+
+    if (!user || !notificationClient) return;
+
+    await notificationClient.trigger({
+      to: {
+        subscriberId: user.id,
+      },
+      payload: {
+        ...subscription,
+        cancellationDetails,
+      },
+      workflowId,
+    });
+  } catch (error) {
+    console.error("Error triggering workflow", error);
+  }
+}
