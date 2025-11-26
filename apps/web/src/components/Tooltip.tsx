@@ -16,7 +16,7 @@ export function Tooltip({
   children,
   content,
   placement = "bottom",
-  delay = [200, 0],
+  delay = [500, 0],
 }: TooltipProps) {
   const triggerRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<Root | null>(null);
