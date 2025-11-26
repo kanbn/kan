@@ -414,7 +414,7 @@ export function useKeyboardShortcut(shortcut: KeyboardShortcut): {
 
   const keys = <FormattedShortcut shortcut={shortcut} />;
   const tooltipContent = (
-    <div className="flex flex-row items-center gap-2">
+    <div className="flex flex-row items-center gap-2 text-[11px]">
       {shortcut.description} {keys}
     </div>
   );
@@ -435,7 +435,7 @@ function ShortcutListItem({ shortcut }: { shortcut: KeyboardShortcut }) {
 
 function FormattedShortcut({ shortcut }: { shortcut: KeyboardShortcut }) {
   const kbdClassName =
-    "min-w-6 rounded border border-light-400 bg-light-200 px-1.5 py-0.5 font-mono text-xs font-semibold text-center text-neutral-900 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-950";
+    "inline-flex h-5 w-5 items-center justify-center rounded border border-light-400 bg-light-200 px-1.5 py-0.5 font-mono text-[8px] font-semibold text-center text-neutral-900 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-950";
 
   const stringifyModifier = (modifier: ModifierKey): string => {
     const isMac =
@@ -467,14 +467,15 @@ function FormattedShortcut({ shortcut }: { shortcut: KeyboardShortcut }) {
   if (shortcut.type === "SEQUENCE") {
     const parts: ReactNode[] = [];
     shortcut.strokes.forEach((stroke, i) => {
-      if (i > 0) parts.push(" then ");
+      // Removing to keep the shortcut compact, but we can change back if needed
+      // if (i > 0) parts.push(" then ");
       parts.push(...formatStroke(stroke));
     });
-    return <span className="flex items-center gap-1 text-sm">{parts}</span>;
+    return <span className="flex items-center gap-1 text-[11px]">{parts}</span>;
   }
 
   return (
-    <span className="flex items-center gap-1 text-sm">
+    <span className="inline-flex flex-shrink-0 items-center gap-1 text-[11px]">
       {formatStroke(shortcut.stroke)}
     </span>
   );
