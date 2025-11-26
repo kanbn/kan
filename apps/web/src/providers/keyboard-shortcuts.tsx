@@ -5,6 +5,7 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
+import { t } from "@lingui/core/macro";
 import {
   createContext,
   useCallback,
@@ -16,7 +17,6 @@ import {
 } from "react";
 import { HiXMark } from "react-icons/hi2";
 
-import { Tooltip } from "~/components/Tooltip";
 import { env } from "~/env";
 import { useEventListener } from "~/hooks/useEventListener";
 
@@ -49,11 +49,11 @@ const ShortcutGroup = {
 } as const;
 type ShortcutGroup = (typeof ShortcutGroup)[keyof typeof ShortcutGroup];
 
-const ShortcutGroupInfo: Record<ShortcutGroup, { label: string }> = {
-  GENERAL: { label: "General" },
-  NAVIGATION: { label: "Navigation" },
-  ACTIONS: { label: "Actions" },
-};
+const getShortcutGroupInfo = (): Record<ShortcutGroup, { label: string }> => ({
+  GENERAL: { label: t`General` },
+  NAVIGATION: { label: t`Navigation` },
+  ACTIONS: { label: t`Actions` },
+});
 
 interface KeyStroke {
   key: string;
@@ -140,6 +140,8 @@ class ShortcutConflictError extends Error {
 
 interface KeyboardShortcutContextType {
   registerShortcut: (shortcut: KeyboardShortcut) => () => void;
+  openLegend: () => void;
+  openLegendKeys: ReactNode;
 }
 
 const KeyboardShortcutContext = createContext<
@@ -161,9 +163,12 @@ export function KeyboardShortcutProvider({
   const openLegendShortcut: KeyboardShortcut = useMemo(
     () => ({
       type: "PRESS",
-      stroke: { key: "?" },
+      stroke: {
+        key: "/",
+        modifiers: ["META"],
+      },
       action: () => setIsLegendOpen(true),
-      description: "Open keyboard shortcuts",
+      description: t`Open keyboard shortcuts`,
       group: ShortcutGroup.GENERAL,
     }),
     [setIsLegendOpen],
@@ -279,29 +284,20 @@ export function KeyboardShortcutProvider({
     return acc;
   }, {});
 
-  return (
-    <KeyboardShortcutContext.Provider value={{ registerShortcut }}>
-      {children}
+  const openLegend = useCallback(() => {
+    setIsLegendOpen(true);
+  }, []);
 
-      <div className="fixed bottom-12 right-12 z-40">
-        <Tooltip
-          content={
-            <div className="flex flex-row items-center gap-2">
-              {openLegendShortcut.description}
-              <FormattedShortcut shortcut={openLegendShortcut} />
-            </div>
-          }
-          placement="left"
-        >
-          <button
-            onClick={() => setIsLegendOpen(true)}
-            className="flex items-center justify-center rounded-md bg-light-500 px-3 py-1 text-sm text-light-1000 shadow-lg dark:bg-dark-500 dark:text-dark-1000"
-            aria-label="Open keyboard shortcuts"
-          >
-            ?
-          </button>
-        </Tooltip>
-      </div>
+  const openLegendKeys = useMemo(
+    () => <FormattedShortcut shortcut={openLegendShortcut} />,
+    [openLegendShortcut],
+  );
+
+  return (
+    <KeyboardShortcutContext.Provider
+      value={{ registerShortcut, openLegend, openLegendKeys }}
+    >
+      {children}
 
       {/* Shortcut Legend */}
       <Dialog
@@ -320,8 +316,8 @@ export function KeyboardShortcutProvider({
             className="relative w-full max-w-sm transform overflow-hidden rounded-lg border border-light-600 bg-white shadow-3xl-light dark:border-dark-600 dark:bg-dark-100 dark:shadow-3xl-dark"
           >
             <div className="flex items-center justify-between border-b border-light-300 px-6 py-4 dark:border-dark-300">
-              <DialogTitle className="text-lg font-semibold text-neutral-900 dark:text-dark-1000">
-                Keyboard Shortcuts
+              <DialogTitle className="text-[14px] font-semibold text-neutral-900 dark:text-dark-1000">
+                {t`Keyboard Shortcuts`}
               </DialogTitle>
               <button
                 onClick={() => setIsLegendOpen(false)}
@@ -334,17 +330,18 @@ export function KeyboardShortcutProvider({
             <div className="max-h-[60vh] overflow-y-auto p-6">
               {shortcutsArray.length === 0 ? (
                 <p className="text-center text-sm text-neutral-600 dark:text-dark-600">
-                  No keyboard shortcuts registered.
+                  {t`No keyboard shortcuts registered.`}
                 </p>
               ) : (
                 <div className="space-y-6">
                   {Object.values(ShortcutGroup).map((group, idx) => {
                     const shortcuts = groupedShortcuts[group];
                     if (!shortcuts?.length) return null;
+                    const groupInfo = getShortcutGroupInfo();
                     return (
                       <div key={`${group}-${idx}`}>
                         <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-light-1000 dark:text-dark-1000">
-                          {ShortcutGroupInfo[group].label}
+                          {groupInfo[group].label}
                         </h3>
                         <div className="flex flex-col gap-y-2">
                           {shortcuts.map((shortcut) => (
@@ -393,6 +390,18 @@ export function KeyboardShortcutProvider({
  * <span>Press {keys} to search</span>
  * ```
  */
+export function useKeyboardShortcuts(): KeyboardShortcutContextType {
+  const context = useContext(KeyboardShortcutContext);
+
+  if (!context) {
+    throw new Error(
+      "useKeyboardShortcuts must be used within KeyboardShortcutProvider",
+    );
+  }
+
+  return context;
+}
+
 export function useKeyboardShortcut(shortcut: KeyboardShortcut): {
   keys: ReactNode;
   tooltipContent: ReactNode;
@@ -466,9 +475,7 @@ function FormattedShortcut({ shortcut }: { shortcut: KeyboardShortcut }) {
 
   if (shortcut.type === "SEQUENCE") {
     const parts: ReactNode[] = [];
-    shortcut.strokes.forEach((stroke, i) => {
-      // Removing to keep the shortcut compact, but we can change back if needed
-      // if (i > 0) parts.push(" then ");
+    shortcut.strokes.forEach((stroke) => {
       parts.push(...formatStroke(stroke));
     });
     return <span className="flex items-center gap-1 text-[11px]">{parts}</span>;

@@ -10,6 +10,7 @@ import { twMerge } from "tailwind-merge";
 import { authClient } from "@kan/auth/client";
 
 import { useIsMobile } from "~/hooks/useMediaQuery";
+import { useKeyboardShortcuts } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
 import { getAvatarUrl } from "~/utils/helpers";
 
@@ -31,6 +32,7 @@ export default function UserMenu({
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const { openModal } = useModal();
+  const { openLegend } = useKeyboardShortcuts();
   const isMobile = useIsMobile();
 
   const handleLogout = async () => {
@@ -169,6 +171,19 @@ export default function UserMenu({
               </Menu.Item>
             </div>
             <div className="light-border-600 border-t-[1px] p-1 dark:border-dark-600">
+              <Menu.Item>
+                <button
+                  onClick={() => {
+                    if (onCloseSideNav && isMobile) {
+                      onCloseSideNav();
+                    }
+                    openLegend();
+                  }}
+                  className="flex w-full items-center rounded-[5px] px-3 py-2 text-left text-xs hover:bg-light-200 dark:hover:bg-dark-400"
+                >
+                  {t`Shortcuts`}
+                </button>
+              </Menu.Item>
               <Menu.Item>
                 <Link
                   href="mailto:support@kan.bn"
