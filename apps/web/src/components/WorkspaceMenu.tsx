@@ -28,7 +28,7 @@ export default function WorkspaceMenu({
         modifiers: ["META"],
       },
       action: () => setIsOpen(true),
-      description: "Open command palette",
+      description: t`Open command menu`,
       group: "GENERAL",
     });
 

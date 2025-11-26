@@ -61,7 +61,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       type: "PRESS",
       stroke: { key: "C" },
       action: () => boardId && openNewListForm(boardId),
-      description: "Create new list",
+      description: t`Create new list`,
       group: "ACTIONS",
     });
 

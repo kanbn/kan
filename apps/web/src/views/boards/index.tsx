@@ -23,7 +23,7 @@ export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
       type: "PRESS",
       stroke: { key: "C" },
       action: () => openModal("NEW_BOARD"),
-      description: `Create new ${isTemplate ? "template" : "board"}`,
+      description: t`Create new ${isTemplate ? "template" : "board"}`,
       group: "ACTIONS",
     });
 

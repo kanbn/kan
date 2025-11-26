@@ -102,7 +102,7 @@ export default function SideNavigation({
         strokes: [{ key: "G" }, { key: "B" }],
         action: () => router.push("/boards"),
         group: "NAVIGATION",
-        description: "Go to boards",
+        description: t`Go to boards`,
       },
     },
     {
@@ -114,7 +114,7 @@ export default function SideNavigation({
         strokes: [{ key: "G" }, { key: "T" }],
         action: () => router.push("/templates"),
         group: "NAVIGATION",
-        description: "Go to templates",
+        description: t`Go to templates`,
       },
     },
     {
@@ -126,7 +126,7 @@ export default function SideNavigation({
         strokes: [{ key: "G" }, { key: "M" }],
         action: () => router.push("/members"),
         group: "NAVIGATION",
-        description: "Go to members",
+        description: t`Go to members`,
       },
     },
     {
@@ -138,7 +138,7 @@ export default function SideNavigation({
         strokes: [{ key: "G" }, { key: "S" }],
         action: () => router.push("/settings"),
         group: "NAVIGATION",
-        description: "Go to settings",
+        description: t`Go to settings`,
       },
     },
   ];
