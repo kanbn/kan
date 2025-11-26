@@ -6,6 +6,8 @@ import FeedbackModal from "~/components/FeedbackModal";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
+import { Tooltip } from "~/components/Tooltip";
+import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { BoardsList } from "./components/BoardsList";
@@ -15,6 +17,15 @@ import { NewBoardForm } from "./components/NewBoardForm";
 export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
   const { openModal, modalContentType, isOpen } = useModal();
   const { workspace } = useWorkspace();
+
+  const { tooltipContent: createModalShortcutTooltipContent } =
+    useKeyboardShortcut({
+      type: "PRESS",
+      stroke: { key: "C" },
+      action: () => openModal("NEW_BOARD"),
+      description: `Create new ${isTemplate ? "template" : "board"}`,
+      group: "ACTIONS",
+    });
 
   return (
     <>
@@ -39,16 +50,18 @@ export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
                 {t`Import`}
               </Button>
             )}
-            <Button
-              type="button"
-              variant="primary"
-              onClick={() => openModal("NEW_BOARD")}
-              iconLeft={
-                <HiOutlinePlusSmall aria-hidden="true" className="h-4 w-4" />
-              }
-            >
-              {t`New`}
-            </Button>
+            <Tooltip content={createModalShortcutTooltipContent}>
+              <Button
+                type="button"
+                variant="primary"
+                onClick={() => openModal("NEW_BOARD")}
+                iconLeft={
+                  <HiOutlinePlusSmall aria-hidden="true" className="h-4 w-4" />
+                }
+              >
+                {t`New`}
+              </Button>
+            </Tooltip>
           </div>
         </div>
 

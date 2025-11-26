@@ -23,6 +23,8 @@ import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
 import { StrictModeDroppable as Droppable } from "~/components/StrictModeDroppable";
+import { Tooltip } from "~/components/Tooltip";
+import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
@@ -53,6 +55,15 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const [selectedPublicListId, setSelectedPublicListId] =
     useState<PublicListId>("");
   const [isInitialLoading, setIsInitialLoading] = useState(true);
+
+  const { tooltipContent: createListShortcutTooltipContent } =
+    useKeyboardShortcut({
+      type: "PRESS",
+      stroke: { key: "C" },
+      action: () => boardId && openNewListForm(boardId),
+      description: "Create new list",
+      group: "ACTIONS",
+    });
 
   const boardId = params?.boardId
     ? Array.isArray(params.boardId)
@@ -427,20 +438,22 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 )}
               </>
             )}
-            <Button
-              iconLeft={
-                <HiOutlinePlusSmall
-                  className="-mr-0.5 h-5 w-5"
-                  aria-hidden="true"
-                />
-              }
-              onClick={() => {
-                if (boardId) openNewListForm(boardId);
-              }}
-              disabled={!boardData}
-            >
-              {t`New list`}
-            </Button>
+            <Tooltip content={createListShortcutTooltipContent}>
+              <Button
+                iconLeft={
+                  <HiOutlinePlusSmall
+                    className="-mr-0.5 h-5 w-5"
+                    aria-hidden="true"
+                  />
+                }
+                onClick={() => {
+                  if (boardId) openNewListForm(boardId);
+                }}
+                disabled={!boardData}
+              >
+                {t`New list`}
+              </Button>
+            </Tooltip>
             <BoardDropdown
               isTemplate={!!isTemplate}
               isLoading={!boardData}

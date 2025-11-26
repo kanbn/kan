@@ -39,3 +39,17 @@
     }
   }
 }
+
+/* Tippy.js tooltip theme */
+.tippy-box[data-theme~="tooltip"] {
+  @apply rounded-md border border-light-600 bg-white px-2 py-1 text-sm text-neutral-900 shadow-lg dark:border-dark-600 dark:bg-dark-100 dark:text-dark-1000;
+}
+
+.tippy-box[data-theme~="tooltip"] > .tippy-arrow::before {
+  @apply border-t-light-600 dark:border-t-dark-600;
+}
+
+.tippy-box[data-theme~="tooltip"][data-placement^="bottom"]
+  > .tippy-arrow::before {
+  @apply border-b-light-600 dark:border-b-dark-600;
+}

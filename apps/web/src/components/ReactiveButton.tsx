@@ -2,8 +2,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
+import type { KeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import LottieIcon from "~/components/LottieIcon";
 import { useIsMobile } from "~/hooks/useMediaQuery";
+import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 
 const Button: React.FC<{
   href: string;
@@ -12,10 +14,20 @@ const Button: React.FC<{
   json: object;
   isCollapsed?: boolean;
   onCloseSideNav?: () => void;
-}> = ({ href, current, name, json, isCollapsed = false, onCloseSideNav }) => {
+  keyboardShortcut: KeyboardShortcut;
+}> = ({
+  href,
+  current,
+  name,
+  json,
+  isCollapsed = false,
+  keyboardShortcut,
+  onCloseSideNav,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
   const [index, setIndex] = useState(0);
   const isMobile = useIsMobile();
+  const { keys: shortcutKeys } = useKeyboardShortcut(keyboardShortcut);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -34,18 +46,27 @@ const Button: React.FC<{
       onMouseEnter={handleMouseEnter}
       onClick={handleClick}
       className={twMerge(
-        "group flex h-[34px] items-center rounded-md p-1.5 text-sm font-normal leading-6 hover:bg-light-200 hover:text-light-1000 dark:hover:bg-dark-200 dark:hover:text-dark-1000",
+        "group flex h-[34px] items-center justify-between rounded-md p-1.5 text-sm font-normal leading-6 hover:bg-light-200 hover:text-light-1000 dark:hover:bg-dark-200 dark:hover:text-dark-1000",
         current
           ? "bg-light-200 text-light-1000 dark:bg-dark-200 dark:text-dark-1000"
           : "text-neutral-600 dark:bg-dark-100 dark:text-dark-900",
-        isCollapsed
-          ? "justify-start gap-x-3 md:justify-center md:gap-x-0"
-          : "gap-x-3",
       )}
       title={isCollapsed ? name : undefined}
     >
-      <LottieIcon index={index} json={json} isPlaying={isHovered} />
-      <span className={twMerge(isCollapsed && "md:hidden")}>{name}</span>
+      <div
+        className={twMerge(
+          "flex",
+          isCollapsed
+            ? "justify-start gap-x-3 md:justify-center md:gap-x-0"
+            : "gap-x-3",
+        )}
+      >
+        <LottieIcon index={index} json={json} isPlaying={isHovered} />
+        <span className={twMerge(isCollapsed && "md:hidden")}>{name}</span>
+      </div>
+      {!isCollapsed && (
+        <div className="hidden md:group-hover:flex">{shortcutKeys}</div>
+      )}
     </Link>
   );
 };
