@@ -55,7 +55,7 @@ const Button: React.FC<{
     >
       <div
         className={twMerge(
-          "flex",
+          "flex items-center",
           isCollapsed
             ? "justify-start gap-x-3 md:justify-center md:gap-x-0"
             : "gap-x-3",
@@ -65,7 +65,7 @@ const Button: React.FC<{
         <span className={twMerge(isCollapsed && "md:hidden")}>{name}</span>
       </div>
       {!isCollapsed && (
-        <div className="hidden md:group-hover:flex">{shortcutKeys}</div>
+        <div className="hidden md:group-hover:inline-flex">{shortcutKeys}</div>
       )}
     </Link>
   );
