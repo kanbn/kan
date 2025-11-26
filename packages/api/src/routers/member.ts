@@ -476,7 +476,7 @@ export const memberRouter = createTRPCRouter({
       openapi: {
         summary: "Get invite information by code",
         method: "GET",
-        path: "/workspaces/{workspacePublicId}/invites/{inviteCode}",
+        path: "/invites/{inviteCode}",
         description: "Get invite information by invite code",
         tags: ["Invites"],
         protect: false,
@@ -521,7 +521,7 @@ export const memberRouter = createTRPCRouter({
       openapi: {
         summary: "Accept an invite link",
         method: "POST",
-        path: "/workspaces/{workspacePublicId}/invites/accept",
+        path: "/invites/accept",
         description: "Accepts an invitation via invite link",
         tags: ["Invites"],
         protect: false,
