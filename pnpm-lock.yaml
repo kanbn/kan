@@ -115,6 +115,9 @@ importers:
       '@lingui/react':
         specifier: ^5.3.2
         version: 5.4.1(@lingui/babel-plugin-lingui-macro@5.4.1(typescript@5.9.2))(react@18.3.1)
+      '@novu/api':
+        specifier: ^3.11.0
+        version: 3.11.0
       '@t3-oss/env-nextjs':
         specifier: ^0.11.1
         version: 0.11.1(typescript@5.9.2)(zod@3.25.76)
@@ -166,6 +169,9 @@ importers:
       geist:
         specifier: ^1.3.1
         version: 1.4.2(next@15.5.2(@babel/core@7.28.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      jose:
+        specifier: ^6.1.2
+        version: 6.1.2
       next:
         specifier: ^15.3.4
         version: 15.5.2(@babel/core@7.28.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -5553,6 +5559,9 @@ packages:
 
   jose@5.10.0:
     resolution: {integrity: sha512-s+3Al/p9g32Iq+oqXxkW//7jk2Vig6FF1CFqzVXoTUXt2qz89YWbL+OwS17NFYEvxC35n0FKeGO2LGYSxeM2Gg==}
+
+  jose@6.1.2:
+    resolution: {integrity: sha512-MpcPtHLE5EmztuFIqB0vzHAWJPpmN1E6L4oo+kze56LIs3MyXIj9ZHMDxqOvkP38gBR7K1v3jqd4WU2+nrfONQ==}
 
   joycon@3.1.1:
     resolution: {integrity: sha512-34wB/Y7MW7bzjKRjUKTa46I2Z7eV62Rkhva+KkopW7Qvv/OSWBqvkSY7vusOPrNuZcUG3tApvdVgNB8POj3SPw==}
@@ -13648,6 +13657,8 @@ snapshots:
   jmespath@0.16.0: {}
 
   jose@5.10.0: {}
+
+  jose@6.1.2: {}
 
   joycon@3.1.1: {}
 

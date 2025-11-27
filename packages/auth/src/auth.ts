@@ -18,6 +18,7 @@ import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import * as schema from "@kan/db/schema";
 import { notificationClient, sendEmail } from "@kan/email";
+import { createEmailUnsubscribeLink } from "@kan/shared";
 import { createStripeClient } from "@kan/stripe";
 
 export const configuredProviders = socialProviderList.reduce<
@@ -401,6 +402,10 @@ export const initAuth = (db: dbClient) => {
                   ? `${env("NEXT_PUBLIC_STORAGE_URL")}/${env("NEXT_PUBLIC_AVATAR_BUCKET_NAME")}/${avatarKey}`
                   : undefined;
 
+                const unsubscribeUrl = await createEmailUnsubscribeLink(
+                  user.id,
+                );
+
                 await notificationClient.trigger({
                   to: {
                     subscriberId: user.id,
@@ -414,6 +419,9 @@ export const initAuth = (db: dbClient) => {
                       createdAt: user.createdAt,
                       updatedAt: user.updatedAt,
                     },
+                  },
+                  payload: {
+                    emailUnsubscribeUrl: unsubscribeUrl,
                   },
                   workflowId: "user-signup",
                 });
@@ -489,6 +497,8 @@ async function triggerWorkflow(
 
     if (!user || !notificationClient) return;
 
+    const unsubscribeUrl = await createEmailUnsubscribeLink(user.id);
+
     await notificationClient.trigger({
       to: {
         subscriberId: user.id,
@@ -496,6 +506,7 @@ async function triggerWorkflow(
       payload: {
         ...subscription,
         cancellationDetails,
+        emailUnsubscribeUrl: unsubscribeUrl,
       },
       workflowId,
     });

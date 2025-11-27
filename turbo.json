@@ -121,7 +121,8 @@
     "PORT",
     "BETTER_AUTH_SECRET",
     "BETTER_AUTH_TRUSTED_ORIGINS",
-    "NOVU_API_KEY"
+    "NOVU_API_KEY",
+    "EMAIL_UNSUBSCRIBE_SECRET"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",

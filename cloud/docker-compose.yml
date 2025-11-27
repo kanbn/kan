@@ -39,6 +39,7 @@ services:
       # Notifications
       - NOVU_API_KEY=${NOVU_API_KEY}
       - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - EMAIL_UNSUBSCRIBE_SECRET=${EMAIL_UNSUBSCRIBE_SECRET}
 
       # S3 storage
       - S3_ACCESS_KEY_ID=${S3_ACCESS_KEY_ID}
