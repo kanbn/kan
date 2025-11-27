@@ -15,7 +15,6 @@ checksums:
     A%20powerful%2C%20flexible%20kanban%20app%20that%20helps%20you%20organise%20work%2C%20track%20progress%2C%20and%20deliver%20results%E2%80%94all%20in%20one%20place./singular: d405b83b0d631cb72f4347c10bcbb643
     Account/singular: 01215c12fb1cdb93bd0c84c1382bef56
     Account%20deleted/singular: a25da96a1579c4491be0a95669ef18a4
-    Actions/singular: c46571856723b03262fd33f511116298
     Activity/singular: 1948763de8e531483a798b68195e297e
     Activity%20log/singular: 3ec6755040306fdc9ce801bcf6ab28e1
     Activity%20logs/singular: 8b1f0bb96a905646ecfad1cfdfa42168
@@ -110,6 +109,7 @@ checksums:
     Complete%20control%20and%20ownership%3A/singular: 0d8b682ba873272217425ccfc96aa9cd
     completed%20a%20checklist%20item/singular: 757b04c6c80cc927e1c597c0ad4fda33
     completed%20checklist%20item%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: 71ec18acf051fc909a48a07ca3578673
+    Confirm%20your%20email%20preferences%3A/singular: 043c161dd9866231ae2418fdd9f61b9c
     Confirm%20your%20new%20password/singular: a0d2935d7b63f8dd19d7c0de47524416
     Connect%20Trello/singular: 4440a0b9e387ef7136e3958e7a089213
     Connect%20your%20favorite%20tools%20to%20streamline%20your%20workflow./singular: 033c5dcdb059ccb634aef7fe63f2f45d
@@ -168,6 +168,7 @@ checksums:
     Display%20name%20must%20be%20at%20least%203%20characters%20long/singular: 84178b79845a70937af5e26020403052
     Display%20name%20updated/singular: 4e27503ca24ef5f009713951ca9e5b97
     Do%20you%20offer%20a%20free%20plan%3F/singular: 3ef16b0994f0d9ae17067782ca9bed1b
+    Do%20you%20want%20to%20unsubscribe%3F/singular: 8173b82c731ba885939d223eeef2e40b
     docs/singular: 307bff5678ada918da1f1ec3edc76cac
     Docs/singular: 55fea190a0c0fb32acd3dc986cd3cc91
     Documentation/singular: 1563fcb5ddb5037b0709ccd3dd384a92
@@ -230,7 +231,6 @@ checksums:
     Free%2C%20forever/singular: ae4f2f81e88a50b5f250ef8e8e77e74b
     Full-time/singular: fe6e201f6676ae354111435cf6c76910
     Fun/singular: 395bdc48e943762b6cde649f4a96771d
-    General/singular: b891e8f15579fc5d97bcaf3637f5ae59
     Get%20started/singular: 5c783951b0100a168bdd2161ff294833
     Get%20Started/singular: 1d5f030c4ec9c869e647ae060518b948
     Get%20started%20by%20creating%20a%20new%20%7B0%7D/singular: 4ca5ef637c08104e9dbb5ff9f49f0680
@@ -242,10 +242,6 @@ checksums:
     GitHub/singular: 6e1cf3c00fa6fbe24afcc78ea3b5f3e4
     Go%20Home/singular: 6251589da1964d55afabdfd64c84c335
     Go%20to%20app/singular: 896d0441384dcd2bfb3b23d61ff1944d
-    Go%20to%20boards/singular: dc1362de207d67fe84fb0caf60262e73
-    Go%20to%20members/singular: 445f4efbc4b1e7509f4fd79ebfbb1476
-    Go%20to%20settings/singular: 24a7f96880650c9b37099d69f4b7e2a9
-    Go%20to%20templates/singular: e4e58e33d637282d141df466d729bc7c
     High%20Priority/singular: 5d231ff8254aabc875f194c4b4f49c97
     Hired/singular: e5a9b1bd409b007141fe3d7890022f9a
     Host%20Kan%20on%20your%20own%20infrastructure.%20Ideal%20for%20organisations%20that%20need%20complete%20control%20over%20their%20data./singular: 8e7ae0783d60ef4624d3caf9bfc3747f
@@ -289,7 +285,6 @@ checksums:
     Kanban%20is%20better%20with%20a%20team.%20Perfect%20for%20small%20and%20growing%20teams%20looking%20to%20collaborate./singular: a77bee43046b260797c8936ad23e9223
     Kanban%20reimagined/singular: 613ccfdd9f54c66cbf68cfa313498766
     Keep%20in%20mind%20that%20this%20action%20is%20irreversible./singular: 79702b2ad3be71cb8b87f1122a60c199
-    Keyboard%20Shortcuts/singular: ef00d7494b69def6841620bd6554d040
     Labels/singular: 6f15627a90002323eac018274b6922d6
     Labels%20%26%20filters/singular: e1ceda0c6cc32fb04cb9423582ad8fe4
     Labels%20%26%20Filters/singular: 8f0bdd6084516f8241cb613178114390
@@ -323,7 +318,6 @@ checksums:
     moved%20the%20card%20from%20%3C0%3E%7B0%7D%3C%2F0%3E%20to%3C1%3E%7B1%7D%3C%2F1%3E/singular: 11edf0427766c26db541d46379dc3c16
     moved%20the%20card%20to%20another%20list/singular: 2e8c41bfafb42fa299ce56e4300205ff
     Name/singular: 9368b5a047572b6051f334af5aa76819
-    Navigation/singular: 0373afd8238db1c49f4be4fa6cdf5cd3
     Need%20help%3F/singular: 04e7322f2d3ffb2d73ff2f64b71637c8
     New/singular: 126d036fae5fb6b629728ecb97e6195b
     New%20%7B0%7D/singular: 67b6a22a65e0956f2091d00e6966652b
@@ -345,15 +339,12 @@ checksums:
     No%20boards%20found/singular: e044088d2c51b6bdf660fafa86ee1e17
     No%20credit%20card%20required/singular: 2090aa4171dc0b60735069f89b592883
     No%20download%20URL%20available%20for%20this%20attachment./singular: e367d39420b2242f9d2fd749c87f446a
-    No%20keyboard%20shortcuts%20registered./singular: 7f1ed5d777cade7d62303e9e591bbf63
     No%20lists/singular: cedf633d99c77ff4356e089f2d98c0a6
     No%20results%20found%20for%20%22%7BdebouncedQuery%7D%22./singular: 5db6294712528cd897b15ae36f4fd834
     Offer/singular: 82b4e0c9a3f5b4bd93590847de7c32a1
     Onboarding/singular: 52b23f9c62ff199d4c09920e7641829e
     Once%20you%20delete%20your%20account%2C%20there%20is%20no%20going%20back.%20This%20action%20cannot%20be%20undone./singular: 9cf7aa6ef30890e5124e266c081bae1c
     Once%20you%20delete%20your%20workspace%2C%20there%20is%20no%20going%20back.%20This%20action%20cannot%20be%20undone./singular: c9ce6a516ed1f361653e8f8db3dd5ffd
-    Open%20command%20menu/singular: cf00563ea1a994e7c36a761d56664acc
-    Open%20keyboard%20shortcuts/singular: 638ae0999fd03d2c611064274859422e
     Open%20source/singular: 81a747dc664de1a3389b495c8f84843b
     Open%20Source%20Friends/singular: ffe3d75e5d03b8469c9dcb019dceb164
     or/singular: 7b133c38bec0d5ee23cc6bcf9a8de50b
@@ -432,7 +423,6 @@ checksums:
     Settings%20%7C%20Billing/singular: e44cba741d5414035a0b499c5766c203
     Settings%20%7C%20Integrations/singular: d04992e28016452f6d3d7dcc0b592415
     Settings%20%7C%20Workspace/singular: 5d0bacf7ff696da940f232df45edfd39
-    Shortcuts/singular: db3330ed3240c398054f3be23c52851f
     Sign%20in/singular: cb8757c7450e17de1e226e82fb0fa4a2
     Sign%20In/singular: ec7b8f314fe9bc6591006707484ede61
     Sign%20Up/singular: 0dd2ae69be4618c1f9e615774a4509ca
@@ -520,6 +510,7 @@ checksums:
     Unlimited%20lists/singular: 5c418701b27b9acbc5dd199719007362
     Unlimited%20members/singular: f2949ca2dc18b0063af92e60779abb65
     Unlimited%20workspaces/singular: b504d01997bf908af1d486d9942fed36
+    Unsubscribe/singular: d1a0b07295687d1f08d4df1c411072dd
     Update/singular: 079fc039262fd31b10532929685c2d1b
     Update%20label/singular: 97880b503dfe956941c5f23025a1c102
     updated%20a%20checklist%20item/singular: 198e1d1d503f4b69b752dd84d0cc0e9d
@@ -545,6 +536,7 @@ checksums:
     View%20workspace/singular: c9e4b789330b08c18ca8db7044409e5f
     Visibility/singular: 1ff412f8fcde0f460acbf11153649646
     We%20are%20using%20the%20%3C0%3EAGPL-3.0%20license%3C%2F0%3E./singular: 08c5ddd938a2a70f61d684e41e18697a
+    We%20couldn't%20update%20your%20preferences.%20Please%20try%20again./singular: 69d1d2575f2e73b08ac622bde0a45b4d
     We're%20just%20getting%20started.%20/singular: 2dfa121e0ff1914e08068308a81973c0
     Welcome%20back/singular: 4928884739ba559e6e4b960e80fe1452
     What%20license%20are%20you%20using%3F/singular: 59d00e1bf28edc21b77fec94875f57ca
@@ -577,6 +569,7 @@ checksums:
     You%20can%20self-host%20by%20following%20the%20instructions%20in%20our%20%3C0%3Erepo%3C%2F0%3E./singular: a6152a41b2d8f64d5a657e5b8bc808a9
     You%20have%20been%20logged%20in%20successfully./singular: ef8fad1dce13ae4112f17c5258655fea
     You%20have%20been%20signed%20up%20successfully./singular: f614a6e3b45f5ffb9a3b0fb420fef84b
+    You%20have%20been%20unsubscribed!/singular: e0b9985faa4e7f25b71acc77750923a6
     You%20have%20unlimited%20seats%20with%20your%20Pro%20Plan.%20There%20is%20no%20additional%20charge%20for%20new%20members!/singular: e3dc59a5ba7211cd3d8516b3a79d85ca
     You've%20been%20invited%20to%20join%20a%20workspace%20on%20kan.bn./singular: 257b840726f972f384243a72767f880f
     You've%20been%20invited%20to%20join%20a%20workspace./singular: 24fc6cdc8740f37a83df85f582f03293
@@ -588,6 +581,7 @@ checksums:
     Your%20profile%20image%20has%20been%20updated./singular: 099e1780348cd7bf617721344371a430
     Your%20Trello%20account%20has%20been%20disconnected./singular: 126aeeb73f7e4cad338056e4c933f39b
     Your%20Trello%20account%20is%20connected./singular: 0499d193001fce2fbec445ae034ce512
+    Your%20unsubscribe%20link%20is%20missing%20a%20token.%20Please%20open%20the%20latest%20email%20and%20try%20again./singular: 3e4cce96bc1197a1caa2b7fb4d3c7e53
     Your%20workspace%20description%20has%20been%20updated./singular: 98de6f65c567c6654cc0adce3c9d5656
     Your%20workspace%20has%20been%20deleted./singular: e7a3efcfc7dd18cb3e917acb67498292
     Your%20workspace%20name%20has%20been%20updated./singular: a87ea3b0d71e6dc5dd525d77114a9322

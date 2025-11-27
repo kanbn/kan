@@ -22,7 +22,7 @@ msgid ", or see our"
 msgstr ", or see our"
 
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#: src/views/boards/index.tsx:38
+#: src/views/boards/index.tsx:27
 msgid "{0}"
 msgstr "{0}"
 
@@ -30,7 +30,7 @@ msgstr "{0}"
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
-#: src/views/boards/index.tsx:33
+#: src/views/boards/index.tsx:22
 #: src/views/card/index.tsx:229
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
@@ -41,7 +41,7 @@ msgid "{0} labels"
 msgstr "{0} labels"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:400
+#: src/views/board/index.tsx:389
 msgid "{0} not found"
 msgstr "{0} not found"
 
@@ -92,8 +92,8 @@ msgid "Account deleted"
 msgstr "Account deleted"
 
 #: src/providers/keyboard-shortcuts.tsx:55
-msgid "Actions"
-msgstr "Actions"
+#~ msgid "Actions"
+#~ msgstr "Actions"
 
 #: src/views/card/index.tsx:343
 #: src/views/public/board/CardModal.tsx:157
@@ -352,7 +352,7 @@ msgstr "Billing portal"
 msgid "Blog Post"
 msgstr "Blog Post"
 
-#: src/views/board/index.tsx:374
+#: src/views/board/index.tsx:363
 #: src/views/card/index.tsx:229
 #: src/views/public/board/index.tsx:101
 msgid "Board"
@@ -413,7 +413,7 @@ msgstr "Board visibility"
 msgid "Board visibility updated"
 msgstr "Board visibility updated"
 
-#: src/components/SideNavigation.tsx:97
+#: src/components/SideNavigation.tsx:91
 msgid "Boards"
 msgstr "Boards"
 
@@ -563,6 +563,10 @@ msgstr "completed checklist item <0>{0}</0>"
 #~ msgid "Confirm URL change"
 #~ msgstr "Confirm URL change"
 
+#: src/pages/unsubscribe/index.tsx:81
+msgid "Confirm your email preferences:"
+msgstr "Confirm your email preferences:"
+
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:150
 msgid "Confirm your new password"
 msgstr "Confirm your new password"
@@ -655,7 +659,6 @@ msgstr "Create list"
 
 #. placeholder {0}: isTemplate ? "template" : "board"
 #: src/views/boards/components/BoardsList.tsx:45
-#: src/views/boards/index.tsx:26
 msgid "Create new {0}"
 msgstr "Create new {0}"
 
@@ -672,8 +675,7 @@ msgstr "Create new key"
 msgid "Create new label"
 msgstr "Create new label"
 
-#: src/views/board/index.tsx:64
-#: src/views/board/index.tsx:491
+#: src/views/board/index.tsx:478
 msgid "Create new list"
 msgstr "Create new list"
 
@@ -686,7 +688,7 @@ msgid "Create template"
 msgstr "Create template"
 
 #: src/components/NewWorkspaceForm.tsx:387
-#: src/components/WorkspaceMenu.tsx:153
+#: src/components/WorkspaceMenu.tsx:149
 msgid "Create workspace"
 msgstr "Create workspace"
 
@@ -744,7 +746,7 @@ msgstr "Custom workspace URL"
 msgid "Customer Support"
 msgstr "Customer Support"
 
-#: src/components/UserMenu.tsx:155
+#: src/components/UserMenu.tsx:153
 msgid "Dark"
 msgstr "Dark"
 
@@ -843,6 +845,10 @@ msgstr "Display name updated"
 msgid "Do you offer a free plan?"
 msgstr "Do you offer a free plan?"
 
+#: src/pages/unsubscribe/index.tsx:78
+msgid "Do you want to unsubscribe?"
+msgstr "Do you want to unsubscribe?"
+
 #: src/components/FeedbackModal.tsx:109
 msgid "docs"
 msgstr "docs"
@@ -851,7 +857,7 @@ msgstr "docs"
 msgid "Docs"
 msgstr "Docs"
 
-#: src/components/UserMenu.tsx:206
+#: src/components/UserMenu.tsx:191
 #: src/views/boards/components/TemplateBoards.tsx:24
 #: src/views/home/components/Footer.tsx:78
 #: src/views/home/components/Header.tsx:36
@@ -1075,7 +1081,7 @@ msgid "Features"
 msgstr "Features"
 
 #: src/components/FeedbackModal.tsx:59
-#: src/components/UserMenu.tsx:214
+#: src/components/UserMenu.tsx:199
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -1129,8 +1135,8 @@ msgid "Fun"
 msgstr "Fun"
 
 #: src/providers/keyboard-shortcuts.tsx:53
-msgid "General"
-msgstr "General"
+#~ msgid "General"
+#~ msgstr "General"
 
 #: src/views/auth/signup/index.tsx:69
 #: src/views/home/components/Cta.tsx:61
@@ -1155,7 +1161,7 @@ msgstr "Get started by creating a new {0}"
 #~ msgid "Get started by creating a new board"
 #~ msgstr "Get started by creating a new board"
 
-#: src/views/board/index.tsx:483
+#: src/views/board/index.tsx:470
 msgid "Get started by creating a new list"
 msgstr "Get started by creating a new list"
 
@@ -1190,20 +1196,20 @@ msgid "Go to app"
 msgstr "Go to app"
 
 #: src/components/SideNavigation.tsx:105
-msgid "Go to boards"
-msgstr "Go to boards"
+#~ msgid "Go to boards"
+#~ msgstr "Go to boards"
 
 #: src/components/SideNavigation.tsx:129
-msgid "Go to members"
-msgstr "Go to members"
+#~ msgid "Go to members"
+#~ msgstr "Go to members"
 
 #: src/components/SideNavigation.tsx:141
-msgid "Go to settings"
-msgstr "Go to settings"
+#~ msgid "Go to settings"
+#~ msgstr "Go to settings"
 
 #: src/components/SideNavigation.tsx:117
-msgid "Go to templates"
-msgstr "Go to templates"
+#~ msgid "Go to templates"
+#~ msgstr "Go to templates"
 
 #: src/views/boards/components/TemplateBoards.tsx:18
 msgid "High Priority"
@@ -1258,7 +1264,7 @@ msgstr "Ideas to improve this page..."
 #~ msgid "Ideas, Research, Planning, Execution, Review, Next Steps, Complete"
 #~ msgstr "Ideas, Research, Planning, Execution, Review, Next Steps, Complete"
 
-#: src/views/boards/index.tsx:50
+#: src/views/boards/index.tsx:39
 msgid "Import"
 msgstr "Import"
 
@@ -1394,8 +1400,8 @@ msgid "Keep in mind that this action is irreversible."
 msgstr "Keep in mind that this action is irreversible."
 
 #: src/providers/keyboard-shortcuts.tsx:320
-msgid "Keyboard Shortcuts"
-msgstr "Keyboard Shortcuts"
+#~ msgid "Keyboard Shortcuts"
+#~ msgstr "Keyboard Shortcuts"
 
 #: src/views/board/components/Filters.tsx:115
 #: src/views/board/components/NewCardForm.tsx:409
@@ -1445,7 +1451,7 @@ msgstr "Legal"
 msgid "License"
 msgstr "License"
 
-#: src/components/UserMenu.tsx:169
+#: src/components/UserMenu.tsx:167
 msgid "Light"
 msgstr "Light"
 
@@ -1469,7 +1475,7 @@ msgstr "Lists"
 msgid "Login | kan.bn"
 msgstr "Login | kan.bn"
 
-#: src/components/UserMenu.tsx:224
+#: src/components/UserMenu.tsx:209
 msgid "Logout"
 msgstr "Logout"
 
@@ -1506,7 +1512,7 @@ msgstr "marked checklist item <0>{0}</0> as incomplete"
 msgid "Medium Priority"
 msgstr "Medium Priority"
 
-#: src/components/SideNavigation.tsx:121
+#: src/components/SideNavigation.tsx:101
 #: src/views/board/components/Filters.tsx:107
 #: src/views/board/components/NewCardForm.tsx:367
 #: src/views/card/index.tsx:128
@@ -1553,14 +1559,14 @@ msgid "Name"
 msgstr "Name"
 
 #: src/providers/keyboard-shortcuts.tsx:54
-msgid "Navigation"
-msgstr "Navigation"
+#~ msgid "Navigation"
+#~ msgstr "Navigation"
 
 #: src/components/FeedbackModal.tsx:95
 msgid "Need help?"
 msgstr "Need help?"
 
-#: src/views/boards/index.tsx:62
+#: src/views/boards/index.tsx:50
 #: src/views/home/components/Features.tsx:73
 msgid "New"
 msgstr "New"
@@ -1595,7 +1601,7 @@ msgid "New label"
 msgstr "New label"
 
 #: src/views/board/components/NewListForm.tsx:113
-#: src/views/board/index.tsx:454
+#: src/views/board/index.tsx:442
 msgid "New list"
 msgstr "New list"
 
@@ -1657,10 +1663,10 @@ msgid "No download URL available for this attachment."
 msgstr "No download URL available for this attachment."
 
 #: src/providers/keyboard-shortcuts.tsx:333
-msgid "No keyboard shortcuts registered."
-msgstr "No keyboard shortcuts registered."
+#~ msgid "No keyboard shortcuts registered."
+#~ msgstr "No keyboard shortcuts registered."
 
-#: src/views/board/index.tsx:480
+#: src/views/board/index.tsx:467
 msgid "No lists"
 msgstr "No lists"
 
@@ -1685,12 +1691,12 @@ msgid "Once you delete your workspace, there is no going back. This action canno
 msgstr "Once you delete your workspace, there is no going back. This action cannot be undone."
 
 #: src/components/WorkspaceMenu.tsx:31
-msgid "Open command menu"
-msgstr "Open command menu"
+#~ msgid "Open command menu"
+#~ msgstr "Open command menu"
 
 #: src/providers/keyboard-shortcuts.tsx:171
-msgid "Open keyboard shortcuts"
-msgstr "Open keyboard shortcuts"
+#~ msgid "Open keyboard shortcuts"
+#~ msgstr "Open keyboard shortcuts"
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:150
 msgid "Open source"
@@ -1807,8 +1813,8 @@ msgstr "Please select a file to upload."
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:73
 #: src/views/board/components/VisibilityButton.tsx:54
-#: src/views/board/index.tsx:162
-#: src/views/board/index.tsx:218
+#: src/views/board/index.tsx:151
+#: src/views/board/index.tsx:207
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/AttachmentThumbnails.tsx:73
 #: src/views/card/components/ChecklistItemRow.tsx:60
@@ -2053,7 +2059,7 @@ msgid "Senior"
 msgstr "Senior"
 
 #: src/components/SettingsLayout.tsx:82
-#: src/components/SideNavigation.tsx:133
+#: src/components/SideNavigation.tsx:106
 msgid "Settings"
 msgstr "Settings"
 
@@ -2086,8 +2092,8 @@ msgstr "Settings | Workspace"
 #~ msgstr "Share invite link"
 
 #: src/components/UserMenu.tsx:184
-msgid "Shortcuts"
-msgstr "Shortcuts"
+#~ msgid "Shortcuts"
+#~ msgstr "Shortcuts"
 
 #: src/views/home/components/Header.tsx:104
 msgid "Sign in"
@@ -2157,7 +2163,7 @@ msgstr "Success"
 msgid "Supercharge your workspace for just $29/month. Here's what you'll get:"
 msgstr "Supercharge your workspace for just $29/month. Here's what you'll get:"
 
-#: src/components/UserMenu.tsx:195
+#: src/components/UserMenu.tsx:180
 msgid "Support"
 msgstr "Support"
 
@@ -2166,7 +2172,7 @@ msgstr "Support"
 msgid "Support the development of the project"
 msgstr "Support the development of the project"
 
-#: src/components/UserMenu.tsx:141
+#: src/components/UserMenu.tsx:139
 msgid "System"
 msgstr "System"
 
@@ -2181,8 +2187,8 @@ msgstr "Team Plan"
 msgid "Teams"
 msgstr "Teams"
 
-#: src/views/board/index.tsx:374
-#: src/views/board/index.tsx:409
+#: src/views/board/index.tsx:363
+#: src/views/board/index.tsx:398
 msgid "Template"
 msgstr "Template"
 
@@ -2202,7 +2208,7 @@ msgstr "Template name cannot exceed 100 characters"
 msgid "Template name is required"
 msgstr "Template name is required"
 
-#: src/components/SideNavigation.tsx:109
+#: src/components/SideNavigation.tsx:96
 #: src/views/home/components/Features.tsx:115
 msgid "Templates"
 msgstr "Templates"
@@ -2236,7 +2242,7 @@ msgstr "The open source <0/> alternative to Trello"
 msgid "The visibility of your board has been set to {0}."
 msgstr "The visibility of your board has been set to {0}."
 
-#: src/components/UserMenu.tsx:128
+#: src/components/UserMenu.tsx:126
 msgid "Theme"
 msgstr "Theme"
 
@@ -2395,7 +2401,7 @@ msgstr "Unable to update board URL"
 msgid "Unable to update board visibility"
 msgstr "Unable to update board visibility"
 
-#: src/views/board/index.tsx:217
+#: src/views/board/index.tsx:206
 #: src/views/card/index.tsx:176
 msgid "Unable to update card"
 msgstr "Unable to update card"
@@ -2416,7 +2422,7 @@ msgstr "Unable to update comment"
 msgid "Unable to update labels"
 msgstr "Unable to update labels"
 
-#: src/views/board/index.tsx:161
+#: src/views/board/index.tsx:150
 #: src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Unable to update list"
@@ -2476,6 +2482,11 @@ msgstr "Unlimited members"
 msgid "Unlimited workspaces"
 msgstr "Unlimited workspaces"
 
+#: src/pages/unsubscribe/index.tsx:68
+#: src/pages/unsubscribe/index.tsx:93
+msgid "Unsubscribe"
+msgstr "Unsubscribe"
+
 #: src/views/board/components/UpdateBoardSlugForm.tsx:175
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:80
 #: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:91
@@ -2513,7 +2524,7 @@ msgstr "updated the title to <0>{0}</0>"
 #~ msgid "Upgrade"
 #~ msgstr "Upgrade"
 
-#: src/components/SideNavigation.tsx:237
+#: src/components/SideNavigation.tsx:202
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:53
 #: src/views/settings/WorkspaceSettings.tsx:90
 msgid "Upgrade to Pro"
@@ -2601,6 +2612,10 @@ msgstr "Visibility"
 msgid "We are using the <0>AGPL-3.0 license</0>."
 msgstr "We are using the <0>AGPL-3.0 license</0>."
 
+#: src/pages/unsubscribe/index.tsx:63
+msgid "We couldn't update your preferences. Please try again."
+msgstr "We couldn't update your preferences. Please try again."
+
 #: src/views/home/components/Features.tsx:152
 msgid "We're just getting started. "
 msgstr "We're just getting started. "
@@ -2638,8 +2653,8 @@ msgid "Why make an open source Trello?"
 msgstr "Why make an open source Trello?"
 
 #: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:374
-#: src/views/boards/index.tsx:33
+#: src/views/board/index.tsx:363
+#: src/views/boards/index.tsx:22
 #: src/views/members/index.tsx:173
 #: src/views/public/board/index.tsx:101
 #: src/views/public/boards/index.tsx:66
@@ -2751,6 +2766,10 @@ msgstr "You have been logged in successfully."
 msgid "You have been signed up successfully."
 msgstr "You have been signed up successfully."
 
+#: src/pages/unsubscribe/index.tsx:98
+msgid "You have been unsubscribed!"
+msgstr "You have been unsubscribed!"
+
 #: src/views/members/components/InviteMemberForm.tsx:326
 msgid "You have unlimited seats with your Pro Plan. There is no additional charge for new members!"
 msgstr "You have unlimited seats with your Pro Plan. There is no additional charge for new members!"
@@ -2794,6 +2813,10 @@ msgstr "Your Trello account has been disconnected."
 #: src/views/settings/IntegrationsSettings.tsx:102
 msgid "Your Trello account is connected."
 msgstr "Your Trello account is connected."
+
+#: src/pages/unsubscribe/index.tsx:33
+msgid "Your unsubscribe link is missing a token. Please open the latest email and try again."
+msgstr "Your unsubscribe link is missing a token. Please open the latest email and try again."
 
 #: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:49
 msgid "Your workspace description has been updated."

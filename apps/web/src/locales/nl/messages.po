@@ -22,7 +22,7 @@ msgid ", or see our"
 msgstr ", of bekijk onze"
 
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#: src/views/boards/index.tsx:38
+#: src/views/boards/index.tsx:27
 msgid "{0}"
 msgstr "{0}"
 
@@ -30,7 +30,7 @@ msgstr "{0}"
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
-#: src/views/boards/index.tsx:33
+#: src/views/boards/index.tsx:22
 #: src/views/card/index.tsx:229
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
@@ -41,7 +41,7 @@ msgid "{0} labels"
 msgstr "{0} labels"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:400
+#: src/views/board/index.tsx:389
 msgid "{0} not found"
 msgstr "{0} niet gevonden"
 
@@ -78,10 +78,6 @@ msgstr "Account"
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:27
 msgid "Account deleted"
 msgstr "Account verwijderd"
-
-#: src/providers/keyboard-shortcuts.tsx:55
-msgid "Actions"
-msgstr "Acties"
 
 #: src/views/card/index.tsx:343
 #: src/views/public/board/CardModal.tsx:157
@@ -312,7 +308,7 @@ msgstr "Factureringsportaal"
 msgid "Blog Post"
 msgstr "Blogbericht"
 
-#: src/views/board/index.tsx:374
+#: src/views/board/index.tsx:363
 #: src/views/card/index.tsx:229
 #: src/views/public/board/index.tsx:101
 msgid "Board"
@@ -364,7 +360,7 @@ msgstr "Bordzichtbaarheid"
 msgid "Board visibility updated"
 msgstr "Zichtbaarheid van bord bijgewerkt"
 
-#: src/components/SideNavigation.tsx:97
+#: src/components/SideNavigation.tsx:91
 msgid "Boards"
 msgstr "Borden"
 
@@ -498,6 +494,10 @@ msgstr "heeft een checklistitem voltooid"
 msgid "completed checklist item <0>{0}</0>"
 msgstr "heeft checklistitem <0>{0}</0> voltooid"
 
+#: src/pages/unsubscribe/index.tsx:81
+msgid "Confirm your email preferences:"
+msgstr "Bevestig je e-mailvoorkeuren:"
+
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:150
 msgid "Confirm your new password"
 msgstr "Bevestig je nieuwe wachtwoord"
@@ -582,7 +582,6 @@ msgstr "Lijst maken"
 
 #. placeholder {0}: isTemplate ? "template" : "board"
 #: src/views/boards/components/BoardsList.tsx:45
-#: src/views/boards/index.tsx:26
 msgid "Create new {0}"
 msgstr "Nieuwe {0} maken"
 
@@ -595,8 +594,7 @@ msgstr "Nieuwe sleutel aanmaken"
 msgid "Create new label"
 msgstr "Maak nieuw label"
 
-#: src/views/board/index.tsx:64
-#: src/views/board/index.tsx:491
+#: src/views/board/index.tsx:478
 msgid "Create new list"
 msgstr "Maak nieuwe lijst"
 
@@ -605,7 +603,7 @@ msgid "Create template"
 msgstr "Sjabloon maken"
 
 #: src/components/NewWorkspaceForm.tsx:387
-#: src/components/WorkspaceMenu.tsx:153
+#: src/components/WorkspaceMenu.tsx:149
 msgid "Create workspace"
 msgstr "Werkruimte maken"
 
@@ -655,7 +653,7 @@ msgstr "Aangepaste werkruimte-URL"
 msgid "Customer Support"
 msgstr "Klantenservice"
 
-#: src/components/UserMenu.tsx:155
+#: src/components/UserMenu.tsx:153
 msgid "Dark"
 msgstr "Donker"
 
@@ -754,6 +752,10 @@ msgstr "Weergavenaam bijgewerkt"
 msgid "Do you offer a free plan?"
 msgstr "Bieden jullie een gratis abonnement aan?"
 
+#: src/pages/unsubscribe/index.tsx:78
+msgid "Do you want to unsubscribe?"
+msgstr "Wil je je uitschrijven?"
+
 #: src/components/FeedbackModal.tsx:109
 msgid "docs"
 msgstr "docs"
@@ -762,7 +764,7 @@ msgstr "docs"
 msgid "Docs"
 msgstr "Docs"
 
-#: src/components/UserMenu.tsx:206
+#: src/components/UserMenu.tsx:191
 #: src/views/boards/components/TemplateBoards.tsx:24
 #: src/views/home/components/Footer.tsx:78
 #: src/views/home/components/Header.tsx:36
@@ -986,7 +988,7 @@ msgid "Features"
 msgstr "Functies"
 
 #: src/components/FeedbackModal.tsx:59
-#: src/components/UserMenu.tsx:214
+#: src/components/UserMenu.tsx:199
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -1029,10 +1031,6 @@ msgstr "Fulltime"
 msgid "Fun"
 msgstr "Leuk"
 
-#: src/providers/keyboard-shortcuts.tsx:53
-msgid "General"
-msgstr "Algemeen"
-
 #: src/views/auth/signup/index.tsx:69
 #: src/views/home/components/Cta.tsx:61
 #: src/views/home/components/Header.tsx:106
@@ -1052,7 +1050,7 @@ msgstr "Aan de slag"
 msgid "Get started by creating a new {0}"
 msgstr "Begin door een nieuwe {0} te maken"
 
-#: src/views/board/index.tsx:483
+#: src/views/board/index.tsx:470
 msgid "Get started by creating a new list"
 msgstr "Begin door een nieuwe lijst te maken"
 
@@ -1085,22 +1083,6 @@ msgstr "Naar startpagina"
 #: src/views/invite/index.tsx:144
 msgid "Go to app"
 msgstr "Naar de app"
-
-#: src/components/SideNavigation.tsx:105
-msgid "Go to boards"
-msgstr "Ga naar borden"
-
-#: src/components/SideNavigation.tsx:129
-msgid "Go to members"
-msgstr "Ga naar leden"
-
-#: src/components/SideNavigation.tsx:141
-msgid "Go to settings"
-msgstr "Ga naar instellingen"
-
-#: src/components/SideNavigation.tsx:117
-msgid "Go to templates"
-msgstr "Ga naar sjablonen"
 
 #: src/views/boards/components/TemplateBoards.tsx:18
 msgid "High Priority"
@@ -1151,7 +1133,7 @@ msgstr "Ideeën"
 msgid "Ideas to improve this page..."
 msgstr "Ideeën om deze pagina te verbeteren..."
 
-#: src/views/boards/index.tsx:50
+#: src/views/boards/index.tsx:39
 msgid "Import"
 msgstr "Importeren"
 
@@ -1282,10 +1264,6 @@ msgstr "Kanban opnieuw uitgevonden"
 msgid "Keep in mind that this action is irreversible."
 msgstr "Houd er rekening mee dat deze actie onomkeerbaar is."
 
-#: src/providers/keyboard-shortcuts.tsx:320
-msgid "Keyboard Shortcuts"
-msgstr "Sneltoetsen"
-
 #: src/views/board/components/Filters.tsx:115
 #: src/views/board/components/NewCardForm.tsx:409
 #: src/views/card/index.tsx:119
@@ -1334,7 +1312,7 @@ msgstr "Juridisch"
 msgid "License"
 msgstr "Licentie"
 
-#: src/components/UserMenu.tsx:169
+#: src/components/UserMenu.tsx:167
 msgid "Light"
 msgstr "Licht"
 
@@ -1358,7 +1336,7 @@ msgstr "Lijsten"
 msgid "Login | kan.bn"
 msgstr "Login | kan.bn"
 
-#: src/components/UserMenu.tsx:224
+#: src/components/UserMenu.tsx:209
 msgid "Logout"
 msgstr "Uitloggen"
 
@@ -1395,7 +1373,7 @@ msgstr "heeft checklistitem <0>{0}</0> als onvoltooid gemarkeerd"
 msgid "Medium Priority"
 msgstr "Gemiddelde prioriteit"
 
-#: src/components/SideNavigation.tsx:121
+#: src/components/SideNavigation.tsx:101
 #: src/views/board/components/Filters.tsx:107
 #: src/views/board/components/NewCardForm.tsx:367
 #: src/views/card/index.tsx:128
@@ -1433,15 +1411,11 @@ msgstr "heeft de kaart naar een andere lijst verplaatst"
 msgid "Name"
 msgstr "Naam"
 
-#: src/providers/keyboard-shortcuts.tsx:54
-msgid "Navigation"
-msgstr "Navigatie"
-
 #: src/components/FeedbackModal.tsx:95
 msgid "Need help?"
 msgstr "Hulp nodig?"
 
-#: src/views/boards/index.tsx:62
+#: src/views/boards/index.tsx:50
 #: src/views/home/components/Features.tsx:73
 msgid "New"
 msgstr "Nieuw"
@@ -1472,7 +1446,7 @@ msgid "New label"
 msgstr "Nieuw label"
 
 #: src/views/board/components/NewListForm.tsx:113
-#: src/views/board/index.tsx:454
+#: src/views/board/index.tsx:442
 msgid "New list"
 msgstr "Nieuwe lijst"
 
@@ -1525,11 +1499,7 @@ msgstr "Geen creditcard vereist"
 msgid "No download URL available for this attachment."
 msgstr "Geen download-URL beschikbaar voor deze bijlage."
 
-#: src/providers/keyboard-shortcuts.tsx:333
-msgid "No keyboard shortcuts registered."
-msgstr "Geen sneltoetsen geregistreerd."
-
-#: src/views/board/index.tsx:480
+#: src/views/board/index.tsx:467
 msgid "No lists"
 msgstr "Geen lijsten"
 
@@ -1552,14 +1522,6 @@ msgstr "Zodra je je account verwijdert, is er geen weg terug. Deze actie kan nie
 #: src/views/settings/WorkspaceSettings.tsx:100
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Zodra je je werkruimte verwijdert, is er geen weg terug. Deze actie kan niet ongedaan worden gemaakt."
-
-#: src/components/WorkspaceMenu.tsx:31
-msgid "Open command menu"
-msgstr "Open opdrachtmenu"
-
-#: src/providers/keyboard-shortcuts.tsx:171
-msgid "Open keyboard shortcuts"
-msgstr "Open sneltoetsen"
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:150
 msgid "Open source"
@@ -1676,8 +1638,8 @@ msgstr "Selecteer een bestand om te uploaden."
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:73
 #: src/views/board/components/VisibilityButton.tsx:54
-#: src/views/board/index.tsx:162
-#: src/views/board/index.tsx:218
+#: src/views/board/index.tsx:151
+#: src/views/board/index.tsx:207
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/AttachmentThumbnails.tsx:73
 #: src/views/card/components/ChecklistItemRow.tsx:60
@@ -1910,7 +1872,7 @@ msgid "Senior"
 msgstr "Senior"
 
 #: src/components/SettingsLayout.tsx:82
-#: src/components/SideNavigation.tsx:133
+#: src/components/SideNavigation.tsx:106
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -1933,10 +1895,6 @@ msgstr "Instellingen | Integraties"
 #: src/views/settings/WorkspaceSettings.tsx:54
 msgid "Settings | Workspace"
 msgstr "Instellingen | Werkruimte"
-
-#: src/components/UserMenu.tsx:184
-msgid "Shortcuts"
-msgstr "Snelkoppelingen"
 
 #: src/views/home/components/Header.tsx:104
 msgid "Sign in"
@@ -2006,7 +1964,7 @@ msgstr "Geslaagd"
 msgid "Supercharge your workspace for just $29/month. Here's what you'll get:"
 msgstr "Geef je werkruimte een boost voor slechts $29/maand. Dit krijg je:"
 
-#: src/components/UserMenu.tsx:195
+#: src/components/UserMenu.tsx:180
 msgid "Support"
 msgstr "Ondersteuning"
 
@@ -2015,7 +1973,7 @@ msgstr "Ondersteuning"
 msgid "Support the development of the project"
 msgstr "Ondersteun de ontwikkeling van het project"
 
-#: src/components/UserMenu.tsx:141
+#: src/components/UserMenu.tsx:139
 msgid "System"
 msgstr "Systeem"
 
@@ -2030,8 +1988,8 @@ msgstr "Teamplan"
 msgid "Teams"
 msgstr "Teams"
 
-#: src/views/board/index.tsx:374
-#: src/views/board/index.tsx:409
+#: src/views/board/index.tsx:363
+#: src/views/board/index.tsx:398
 msgid "Template"
 msgstr "Sjabloon"
 
@@ -2051,7 +2009,7 @@ msgstr "Sjabloonnaam mag niet langer zijn dan 100 tekens"
 msgid "Template name is required"
 msgstr "Sjabloonnaam is verplicht"
 
-#: src/components/SideNavigation.tsx:109
+#: src/components/SideNavigation.tsx:96
 #: src/views/home/components/Features.tsx:115
 msgid "Templates"
 msgstr "Sjablonen"
@@ -2085,7 +2043,7 @@ msgstr "Het open source <0/> alternatief voor Trello"
 msgid "The visibility of your board has been set to {0}."
 msgstr "De zichtbaarheid van je bord is ingesteld op {0}."
 
-#: src/components/UserMenu.tsx:128
+#: src/components/UserMenu.tsx:126
 msgid "Theme"
 msgstr "Thema"
 
@@ -2236,7 +2194,7 @@ msgstr "Kan board URL niet bijwerken"
 msgid "Unable to update board visibility"
 msgstr "Kan bordzichtbaarheid niet bijwerken"
 
-#: src/views/board/index.tsx:217
+#: src/views/board/index.tsx:206
 #: src/views/card/index.tsx:176
 msgid "Unable to update card"
 msgstr "Kan kaart niet bijwerken"
@@ -2257,7 +2215,7 @@ msgstr "Kan reactie niet bijwerken"
 msgid "Unable to update labels"
 msgstr "Kan labels niet bijwerken"
 
-#: src/views/board/index.tsx:161
+#: src/views/board/index.tsx:150
 #: src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Kan lijst niet bijwerken"
@@ -2313,6 +2271,11 @@ msgstr "Onbeperkt aantal leden"
 msgid "Unlimited workspaces"
 msgstr "Onbeperkte werkruimtes"
 
+#: src/pages/unsubscribe/index.tsx:68
+#: src/pages/unsubscribe/index.tsx:93
+msgid "Unsubscribe"
+msgstr "Uitschrijven"
+
 #: src/views/board/components/UpdateBoardSlugForm.tsx:175
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:80
 #: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:91
@@ -2342,7 +2305,7 @@ msgstr "titel bijgewerkt"
 msgid "updated the title to <0>{0}</0>"
 msgstr "titel bijgewerkt naar <0>{0}</0>"
 
-#: src/components/SideNavigation.tsx:237
+#: src/components/SideNavigation.tsx:202
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:53
 #: src/views/settings/WorkspaceSettings.tsx:90
 msgid "Upgrade to Pro"
@@ -2426,6 +2389,10 @@ msgstr "Zichtbaarheid"
 msgid "We are using the <0>AGPL-3.0 license</0>."
 msgstr "We gebruiken de <0>AGPL-3.0 licentie</0>."
 
+#: src/pages/unsubscribe/index.tsx:63
+msgid "We couldn't update your preferences. Please try again."
+msgstr "We konden je voorkeuren niet bijwerken. Probeer het opnieuw."
+
 #: src/views/home/components/Features.tsx:152
 msgid "We're just getting started. "
 msgstr "We zijn nog maar net begonnen. "
@@ -2455,8 +2422,8 @@ msgid "Why make an open source Trello?"
 msgstr "Waarom een open source Trello maken?"
 
 #: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:374
-#: src/views/boards/index.tsx:33
+#: src/views/board/index.tsx:363
+#: src/views/boards/index.tsx:22
 #: src/views/members/index.tsx:173
 #: src/views/public/board/index.tsx:101
 #: src/views/public/boards/index.tsx:66
@@ -2564,6 +2531,10 @@ msgstr "Je bent succesvol ingelogd."
 msgid "You have been signed up successfully."
 msgstr "Je bent succesvol geregistreerd."
 
+#: src/pages/unsubscribe/index.tsx:98
+msgid "You have been unsubscribed!"
+msgstr "Je bent uitgeschreven!"
+
 #: src/views/members/components/InviteMemberForm.tsx:326
 msgid "You have unlimited seats with your Pro Plan. There is no additional charge for new members!"
 msgstr "Je hebt onbeperkte plaatsen met je Pro Plan. Er zijn geen extra kosten voor nieuwe leden!"
@@ -2607,6 +2578,10 @@ msgstr "Je Trello-account is ontkoppeld."
 #: src/views/settings/IntegrationsSettings.tsx:102
 msgid "Your Trello account is connected."
 msgstr "Je Trello-account is verbonden."
+
+#: src/pages/unsubscribe/index.tsx:33
+msgid "Your unsubscribe link is missing a token. Please open the latest email and try again."
+msgstr "Je uitschrijflink mist een token. Open de meest recente e-mail en probeer het opnieuw."
 
 #: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:49
 msgid "Your workspace description has been updated."
