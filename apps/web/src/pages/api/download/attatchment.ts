@@ -17,12 +17,11 @@ export default async function handler(
   }
 
   try {
-    const downloadUrl = decodeURIComponent(url);
-    const downloadFilename =
-      (typeof filename === "string" ? decodeURIComponent(filename) : null) ??
-      "attachment";
+    const downloadFilename = typeof filename === "string"
+      ? encodeURIComponent(filename)
+      : "attachment";
 
-    const upstream = await fetch(downloadUrl);
+    const upstream = await fetch(url);
 
     if (!upstream.ok) {
       return res.status(upstream.status).json({
@@ -36,7 +35,7 @@ export default async function handler(
     res.setHeader("Content-Type", contentType);
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename="${downloadFilename}"`,
+      `attachment; filename="${downloadFilename}"; filename*=UTF-8''${downloadFilename}`,
     );
 
     const buffer = await upstream.arrayBuffer();
