@@ -34,7 +34,7 @@ See our [roadmap](https://kan.bn/kan/roadmap) for upcoming features.
 
 ## Screenshot 👁️
 
-<img width="1507" alt="hero-dark" src="https://github.com/user-attachments/assets/5f7b6ad3-f31d-4b45-93dc-0132b3f2afd4" />
+<img width="1507" alt="hero-dark" src="https://github.com/user-attachments/assets/8490104a-cd5d-49de-afc2-152fd8a93119" />
 
 ## Made With 🛠️
 
@@ -171,7 +171,7 @@ pnpm dev
 | `NEXT_PUBLIC_STORAGE_URL`                 | Storage service URL                                       | For file uploads         | `https://storage.kanbn.com`                                 |
 | `NEXT_PUBLIC_STORAGE_DOMAIN`              | Storage domain name                                       | For file uploads         | `kanbn.com`                                                 |
 | `NEXT_PUBLIC_AVATAR_BUCKET_NAME`          | S3 bucket name for avatars                                | For file uploads         | `avatars`                                                   |
-| `NEXT_PUBLIC_ATTATCHMENTS_BUCKET_NAME`    | S3 bucket name for attatchments                           | For file uploads         | `attatchments`                                              |
+| `NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME`     | S3 bucket name for attachments                            | For file uploads         | `attachments`                                               |
 | `NEXT_PUBLIC_ALLOW_CREDENTIALS`           | Allow email & password login                              | For authentication       | `true`                                                      |
 | `NEXT_PUBLIC_DISABLE_SIGN_UP`             | Disable sign up                                           | For authentication       | `false`                                                     |
 | `NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY` | Hide “Powered by kan.bn” on public boards (self-host)     | For white labelling      | `true`                                                      |

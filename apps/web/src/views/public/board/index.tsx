@@ -76,7 +76,8 @@ export default function PublicBoardView() {
     );
   };
 
-  const splitPath = router.asPath.split("/");
+  const pathWithoutQuery = router.asPath.split("?")[0];
+  const splitPath = pathWithoutQuery.split("/");
   const cardPublicId = splitPath.length > 3 ? splitPath[3] : null;
 
   useEffect(() => {
@@ -172,27 +173,36 @@ export default function PublicBoardView() {
                       </span>
                     </div>
                     <div className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 h-full max-h-[calc(100vh-265px)] min-h-[2rem] overflow-y-auto pr-1 scrollbar dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600">
-                      {list.cards.map((card) => (
-                        <Link
-                          key={card.publicId}
-                          href={`/${data.workspace.slug}/${data.slug}/${card.publicId}`}
-                          className={`mb-2 flex !cursor-pointer flex-col`}
-                          shallow={true}
-                          onClick={() => {
-                            openModal("CARD");
-                          }}
-                        >
-                          <Card
-                            title={card.title}
-                            labels={card.labels}
-                            checklists={card.checklists ?? []}
-                            members={[]}
-                            description={card.description}
-                            comments={card.comments ?? []}
-                            attachments={card.attachments}
-                          />
-                        </Link>
-                      ))}
+                      {list.cards.map((card) => {
+                        return (
+                          <Link
+                            key={card.publicId}
+                            href={{
+                              pathname: router.pathname,
+                              query: {
+                                ...router.query,
+                                workspaceSlug: data.workspace.slug,
+                                boardSlug: [data.slug, card.publicId],
+                              },
+                            }}
+                            className={`mb-2 flex !cursor-pointer flex-col`}
+                            shallow={true}
+                            onClick={() => {
+                              openModal("CARD");
+                            }}
+                          >
+                            <Card
+                              title={card.title}
+                              labels={card.labels}
+                              checklists={card.checklists ?? []}
+                              members={[]}
+                              description={card.description}
+                              comments={card.comments ?? []}
+                              attachments={card.attachments}
+                            />
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 ))}
