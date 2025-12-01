@@ -43,18 +43,22 @@ export default async function handler(
       return res.status(400).json({ error: "Invalid content type" });
     }
 
+    const credentials =
+      env.S3_ACCESS_KEY_ID && env.S3_SECRET_ACCESS_KEY
+        ? {
+            accessKeyId: env.S3_ACCESS_KEY_ID,
+            secretAccessKey: env.S3_SECRET_ACCESS_KEY,
+          }
+        : undefined;
+
     const client = new S3Client({
       region: env.S3_REGION ?? "",
       endpoint: env.S3_ENDPOINT ?? "",
       forcePathStyle: env.S3_FORCE_PATH_STYLE === "true",
-      credentials: {
-        accessKeyId: env.S3_ACCESS_KEY_ID ?? "",
-        secretAccessKey: env.S3_SECRET_ACCESS_KEY ?? "",
-      },
+      credentials,
     });
 
     const signedUrl = await getSignedUrl(
-      // @ts-ignore
       client,
       new PutObjectCommand({
         Bucket: nextRuntimeEnv("NEXT_PUBLIC_AVATAR_BUCKET_NAME") ?? "",

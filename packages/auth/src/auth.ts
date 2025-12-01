@@ -354,14 +354,19 @@ export const initAuth = (db: dbClient) => {
               !user.image.includes(process.env.NEXT_PUBLIC_STORAGE_DOMAIN!)
             ) {
               try {
+                const credentials =
+                  env("S3_ACCESS_KEY_ID") && env("S3_SECRET_ACCESS_KEY")
+                    ? {
+                        accessKeyId: env("S3_ACCESS_KEY_ID")!,
+                        secretAccessKey: env("S3_SECRET_ACCESS_KEY")!,
+                      }
+                    : undefined;
+
                 const client = new S3Client({
                   region: env("S3_REGION") ?? "",
                   endpoint: env("S3_ENDPOINT") ?? "",
                   forcePathStyle: env("S3_FORCE_PATH_STYLE") === "true",
-                  credentials: {
-                    accessKeyId: env("S3_ACCESS_KEY_ID") ?? "",
-                    secretAccessKey: env("S3_SECRET_ACCESS_KEY") ?? "",
-                  },
+                  credentials,
                 });
 
                 const allowedFileExtensions = ["jpg", "jpeg", "png", "webp"];
