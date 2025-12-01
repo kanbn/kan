@@ -164,6 +164,7 @@ export const getByPublicId = async (
               description: true,
               listId: true,
               index: true,
+              dueDate: true,
             },
             with: {
               labels: {
@@ -353,6 +354,7 @@ export const getBySlug = async (
               description: true,
               listId: true,
               index: true,
+              dueDate: true,
             },
             with: {
               labels: {
