@@ -32,6 +32,9 @@ export const configuredProviders = socialProviderList.reduce<
       requireSelectAccount?: boolean;
       clientKey?: string;
       issuer?: string;
+      // Google-specific optional hints
+      hostedDomain?: string;
+      hd?: string;
     }
   >
 >((acc, provider) => {
@@ -68,6 +71,22 @@ export const configuredProviders = socialProviderList.reduce<
   ) {
     acc[provider].tenantId = "common";
     acc[provider].requireSelectAccount = true;
+  }
+  // Add Google domain hint if allowed domains is configured
+  if (
+    provider === "google" &&
+    Object.keys(acc).includes("google") &&
+    acc[provider]
+  ) {
+    const allowed = process.env.BETTER_AUTH_ALLOWED_DOMAINS
+      ?.split(",")
+      .map((d) => d.trim().toLowerCase())
+      .filter(Boolean);
+    if (allowed && allowed.length > 0) {
+      // Use the first domain as an authorization hint
+      acc[provider].hostedDomain = allowed[0];
+      acc[provider].hd = allowed[0];
+    }
   }
   if (
     provider === "tiktok" &&
@@ -343,7 +362,18 @@ export const initAuth = (db: dbClient) => {
                 return Promise.resolve(false);
               }
 
-              return Promise.resolve(true);
+              // Fall through to any additional checks below
+            }
+            // Enforce allowed domains (OIDC/social) if configured
+            const allowed = process.env.BETTER_AUTH_ALLOWED_DOMAINS
+              ?.split(",")
+              .map((d) => d.trim().toLowerCase())
+              .filter(Boolean);
+            if (allowed && allowed.length > 0) {
+              const domain = user.email.split("@")[1]?.toLowerCase();
+              if (!domain || !allowed.includes(domain)) {
+                return Promise.resolve(false);
+              }
             }
             return Promise.resolve(true);
           },
