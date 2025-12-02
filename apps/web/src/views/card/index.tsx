@@ -27,6 +27,7 @@ import { DeleteCardConfirmation } from "./components/DeleteCardConfirmation";
 import { DeleteChecklistConfirmation } from "./components/DeleteChecklistConfirmation";
 import { DeleteCommentConfirmation } from "./components/DeleteCommentConfirmation";
 import Dropdown from "./components/Dropdown";
+import { DueDateSelector } from "./components/DueDateSelector";
 import LabelSelector from "./components/LabelSelector";
 import ListSelector from "./components/ListSelector";
 import MemberSelector from "./components/MemberSelector";
@@ -124,7 +125,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
         />
       </div>
       {!isTemplate && (
-        <div className="flex w-full flex-row">
+        <div className="mb-4 flex w-full flex-row">
           <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Members`}</p>
           <MemberSelector
             cardPublicId={cardId ?? ""}
@@ -133,6 +134,14 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           />
         </div>
       )}
+      <div className="mb-4 flex w-full flex-row">
+        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Due date`}</p>
+        <DueDateSelector
+          cardPublicId={cardId ?? ""}
+          dueDate={card?.dueDate}
+          isLoading={!card}
+        />
+      </div>
     </div>
   );
 }
