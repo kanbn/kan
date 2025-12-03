@@ -147,6 +147,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     getModalState,
     clearModalState,
     isOpen,
+    modalStates,
   } = useModal();
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
@@ -183,6 +184,21 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     },
   });
 
+  const addOrRemoveLabel = api.card.addOrRemoveLabel.useMutation({
+    onError: () => {
+      showPopup({
+        header: t`Unable to add label`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
+    },
+    onSettled: async () => {
+      if (cardId) {
+        await utils.card.byId.invalidate({ cardPublicId: cardId });
+      }
+    },
+  });
+
   const { register, handleSubmit, setValue, watch } = useForm<FormValues>({
     values: {
       cardId: cardId ?? "",
@@ -198,6 +214,24 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
       description: values.description,
     });
   };
+
+  // this adds the new created label to selected labels
+  useEffect(() => {
+    const newLabelId = modalStates.NEW_LABEL_CREATED;
+    if (newLabelId && cardId) {
+      const isAlreadyAdded = card?.labels.some(
+        (label) => label.publicId === newLabelId,
+      );
+
+      if (!isAlreadyAdded) {
+        addOrRemoveLabel.mutate({
+          cardPublicId: cardId,
+          labelPublicId: newLabelId,
+        });
+      }
+      clearModalState("NEW_LABEL_CREATED");
+    }
+  }, [modalStates.NEW_LABEL_CREATED, card, cardId]);
 
   // Open the new item form after creating a new checklist
   useEffect(() => {
