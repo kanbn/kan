@@ -567,6 +567,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                             }
                                             comments={card.comments ?? []}
                                             attachments={card.attachments}
+                                            dueDate={card.dueDate ?? null}
                                           />
                                         </Link>
                                       )}

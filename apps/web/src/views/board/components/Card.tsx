@@ -1,10 +1,17 @@
+import { format, isBefore, isSameYear, startOfDay } from "date-fns";
 import { HiOutlinePaperClip } from "react-icons/hi";
-import { HiBars3BottomLeft, HiChatBubbleLeft } from "react-icons/hi2";
+import {
+  HiBars3BottomLeft,
+  HiChatBubbleLeft,
+  HiOutlineClock,
+} from "react-icons/hi2";
+import { twMerge } from "tailwind-merge";
 
 import Avatar from "~/components/Avatar";
 import Badge from "~/components/Badge";
 import CircularProgress from "~/components/CircularProgress";
 import LabelIcon from "~/components/LabelIcon";
+import { useLocalisation } from "~/hooks/useLocalisation";
 import { getAvatarUrl } from "~/utils/helpers";
 
 const Card = ({
@@ -15,6 +22,7 @@ const Card = ({
   description,
   comments,
   attachments,
+  dueDate,
 }: {
   title: string;
   labels: { name: string; colourCode: string | null }[];
@@ -36,7 +44,11 @@ const Card = ({
   description: string | null;
   comments: { publicId: string }[];
   attachments?: { publicId: string }[];
+  dueDate?: Date | null;
 }) => {
+  const { dateLocale } = useLocalisation();
+  const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;
+  const isOverdue = dueDate ? isBefore(dueDate, startOfDay(new Date())) : false;
   const completedItems = checklists.reduce((acc, checklist) => {
     return acc + checklist.items.filter((item) => item.completed).length;
   }, 0);
@@ -51,6 +63,7 @@ const Card = ({
   const hasDescription =
     description && description.replace(/<[^>]*>/g, "").trim().length > 0;
   const hasAttachments = attachments && attachments.length > 0;
+  const hasDueDate = !!dueDate;
 
   return (
     <div className="flex flex-col rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300">
@@ -60,6 +73,7 @@ const Card = ({
       checklists.length > 0 ||
       hasDescription ||
       comments.length > 0 ||
+      hasDueDate ||
       hasAttachments ? (
         <div className="mt-2 flex flex-col justify-end">
           <div className="space-x-0.5">
@@ -75,6 +89,23 @@ const Card = ({
               {hasDescription && (
                 <div className="flex items-center gap-1 text-light-700 dark:text-dark-800">
                   <HiBars3BottomLeft className="h-4 w-4" />
+                </div>
+              )}
+              {hasDueDate && dueDate && (
+                <div
+                  className={twMerge(
+                    "flex items-center gap-1",
+                    isOverdue
+                      ? "text-red-600 dark:text-red-400"
+                      : "text-light-700 dark:text-dark-800",
+                  )}
+                >
+                  <HiOutlineClock className="h-4 w-4" />
+                  <span className="text-[11px]">
+                    {format(dueDate, showYear ? "do MMM yyyy" : "do MMM", {
+                      locale: dateLocale,
+                    })}
+                  </span>
                 </div>
               )}
               {comments.length > 0 && (

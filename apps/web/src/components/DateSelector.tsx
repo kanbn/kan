@@ -110,17 +110,18 @@ const DateSelector = ({ selectedDate, onDateSelect }: DateSelectorProps) => {
             className={twMerge(
               "flex aspect-square items-center justify-center rounded-lg focus:z-10",
               day.isSelected
-                ? "bg-dark-1000 text-dark-50 hover:bg-dark-1000 dark:bg-dark-1000 dark:text-dark-50 dark:hover:bg-dark-1000"
+                ? "bg-dark-1000 hover:bg-dark-1000 dark:bg-dark-1000 dark:hover:bg-dark-1000"
                 : "bg-light-100 hover:bg-light-200 dark:bg-dark-100 dark:hover:bg-dark-200",
             )}
           >
             <time
               dateTime={day.date}
               className={twMerge(
-                "mx-auto flex size-7 items-center justify-center rounded-full",
+                "mx-auto flex size-7 items-center justify-center rounded-full text-light-900 dark:text-dark-900",
                 day.isCurrentMonth
                   ? "text-light-900 dark:text-dark-900"
                   : "text-light-700 dark:text-dark-600",
+                day.isSelected && "text-light-1000 dark:text-dark-50",
               )}
             >
               {day.date.split("-").pop()?.replace(/^0/, "")}
