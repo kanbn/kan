@@ -9,7 +9,7 @@ import { generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
-import { generateUploadUrl } from "../utils/s3";
+import { deleteObject, generateUploadUrl } from "../utils/s3";
 
 export const attachmentRouter = createTRPCRouter({
   generateUploadUrl: protectedProcedure
@@ -188,6 +188,18 @@ export const attachmentRouter = createTRPCRouter({
       const workspaceId = attachment.card.list.board.workspaceId;
 
       await assertUserInWorkspace(ctx.db, userId, workspaceId);
+
+      const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+      if (bucket) {
+        try {
+          await deleteObject(bucket, attachment.s3Key);
+        } catch (error) {
+          console.error(
+            `Failed to delete attachment from S3: ${attachment.s3Key}`,
+            error,
+          );
+        }
+      }
 
       await cardAttachmentRepo.softDelete(ctx.db, {
         attachmentId: attachment.id,

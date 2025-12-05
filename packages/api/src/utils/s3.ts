@@ -1,4 +1,5 @@
 import {
+  DeleteObjectCommand,
   GetObjectCommand,
   PutObjectCommand,
   S3Client,
@@ -54,5 +55,15 @@ export async function generateDownloadUrl(
       Key: key,
     }),
     { expiresIn },
+  );
+}
+
+export async function deleteObject(bucket: string, key: string) {
+  const client = createS3Client();
+  await client.send(
+    new DeleteObjectCommand({
+      Bucket: bucket,
+      Key: key,
+    }),
   );
 }
