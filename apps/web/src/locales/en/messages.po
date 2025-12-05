@@ -22,7 +22,7 @@ msgid ", or see our"
 msgstr ", or see our"
 
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#: src/views/boards/index.tsx:27
+#: src/views/boards/index.tsx:38
 msgid "{0}"
 msgstr "{0}"
 
@@ -30,18 +30,18 @@ msgstr "{0}"
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
-#: src/views/boards/index.tsx:22
-#: src/views/card/index.tsx:229
+#: src/views/boards/index.tsx:33
+#: src/views/card/index.tsx:238
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
 #. placeholder {0}: labelPublicIds.length
-#: src/views/board/components/NewCardForm.tsx:443
+#: src/views/board/components/NewCardForm.tsx:452
 msgid "{0} labels"
 msgstr "{0} labels"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:389
+#: src/views/board/index.tsx:412
 msgid "{0} not found"
 msgstr "{0} not found"
 
@@ -92,11 +92,11 @@ msgid "Account deleted"
 msgstr "Account deleted"
 
 #: src/providers/keyboard-shortcuts.tsx:55
-#~ msgid "Actions"
-#~ msgstr "Actions"
+msgid "Actions"
+msgstr "Actions"
 
-#: src/views/card/index.tsx:343
-#: src/views/public/board/CardModal.tsx:157
+#: src/views/card/index.tsx:352
+#: src/views/public/board/CardModal.tsx:158
 msgid "Activity"
 msgstr "Activity"
 
@@ -147,19 +147,19 @@ msgstr "Add label"
 msgid "Add member"
 msgstr "Add member"
 
-#: src/views/card/components/ActivityList.tsx:69
+#: src/views/card/components/ActivityList.tsx:66
 msgid "added a checklist"
 msgstr "added a checklist"
 
-#: src/views/card/components/ActivityList.tsx:72
+#: src/views/card/components/ActivityList.tsx:69
 msgid "added a checklist item"
 msgstr "added a checklist item"
 
-#: src/views/card/components/ActivityList.tsx:65
+#: src/views/card/components/ActivityList.tsx:62
 msgid "added a label to the card"
 msgstr "added a label to the card"
 
-#: src/views/card/components/ActivityList.tsx:67
+#: src/views/card/components/ActivityList.tsx:64
 msgid "added a member to the card"
 msgstr "added a member to the card"
 
@@ -352,9 +352,9 @@ msgstr "Billing portal"
 msgid "Blog Post"
 msgstr "Blog Post"
 
-#: src/views/board/index.tsx:363
-#: src/views/card/index.tsx:229
-#: src/views/public/board/index.tsx:101
+#: src/views/board/index.tsx:386
+#: src/views/card/index.tsx:238
+#: src/views/public/board/index.tsx:113
 msgid "Board"
 msgstr "Board"
 
@@ -380,7 +380,7 @@ msgstr "Board name cannot exceed 100 characters"
 msgid "Board name is required"
 msgstr "Board name is required"
 
-#: src/views/public/board/index.tsx:153
+#: src/views/public/board/index.tsx:165
 msgid "Board not found"
 msgstr "Board not found"
 
@@ -396,7 +396,7 @@ msgstr "Board URL can only contain letters, numbers, and hyphens"
 msgid "Board URL cannot exceed 60 characters"
 msgstr "Board URL cannot exceed 60 characters"
 
-#: src/views/public/board/index.tsx:68
+#: src/views/public/board/index.tsx:79
 msgid "Board URL copied to clipboard"
 msgstr "Board URL copied to clipboard"
 
@@ -413,7 +413,7 @@ msgstr "Board visibility"
 msgid "Board visibility updated"
 msgstr "Board visibility updated"
 
-#: src/components/SideNavigation.tsx:91
+#: src/components/SideNavigation.tsx:97
 msgid "Boards"
 msgstr "Boards"
 
@@ -452,16 +452,16 @@ msgstr "Bug Report"
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/views/card/index.tsx:229
+#: src/views/card/index.tsx:238
 msgid "Card"
 msgstr "Card"
 
-#: src/views/card/index.tsx:263
-#: src/views/card/index.tsx:299
+#: src/views/card/index.tsx:272
+#: src/views/card/index.tsx:308
 msgid "Card not found"
 msgstr "Card not found"
 
-#: src/views/board/components/NewCardForm.tsx:310
+#: src/views/board/components/NewCardForm.tsx:319
 msgid "Card title"
 msgstr "Card title"
 
@@ -479,6 +479,11 @@ msgstr "Change Password"
 #: src/views/settings/AccountSettings.tsx:45
 msgid "Change your language preferences."
 msgstr "Change your language preferences."
+
+#: src/views/card/components/ActivityList.tsx:220
+#: src/views/card/components/ActivityList.tsx:234
+msgid "changed the due date to <0>{formattedDate}</0>"
+msgstr "changed the due date to <0>{formattedDate}</0>"
 
 #: src/views/oss-friends/index.tsx:61
 msgid "Check out some of our favorite open source projects."
@@ -498,7 +503,7 @@ msgstr "Checklist name"
 msgid "Checklists"
 msgstr "Checklists"
 
-#: src/views/board/components/Filters.tsx:180
+#: src/views/board/components/Filters.tsx:227
 msgid "Clear filters"
 msgstr "Clear filters"
 
@@ -550,7 +555,7 @@ msgstr "Complete"
 msgid "Complete control and ownership:"
 msgstr "Complete control and ownership:"
 
-#: src/views/card/components/ActivityList.tsx:74
+#: src/views/card/components/ActivityList.tsx:71
 msgid "completed a checklist item"
 msgstr "completed a checklist item"
 
@@ -620,7 +625,7 @@ msgid "Create {0}"
 msgstr "Create {0}"
 
 #: src/components/LabelForm.tsx:213
-#: src/views/board/components/NewCardForm.tsx:469
+#: src/views/board/components/NewCardForm.tsx:516
 #: src/views/board/components/NewListForm.tsx:141
 msgid "Create another"
 msgstr "Create another"
@@ -637,7 +642,7 @@ msgstr "Create API key"
 #~ msgid "Create board"
 #~ msgstr "Create board"
 
-#: src/views/board/components/NewCardForm.tsx:479
+#: src/views/board/components/NewCardForm.tsx:526
 msgid "Create card"
 msgstr "Create card"
 
@@ -659,6 +664,7 @@ msgstr "Create list"
 
 #. placeholder {0}: isTemplate ? "template" : "board"
 #: src/views/boards/components/BoardsList.tsx:45
+#: src/views/boards/index.tsx:26
 msgid "Create new {0}"
 msgstr "Create new {0}"
 
@@ -670,12 +676,13 @@ msgstr "Create new {0}"
 msgid "Create new key"
 msgstr "Create new key"
 
-#: src/views/board/components/NewCardForm.tsx:405
+#: src/views/board/components/NewCardForm.tsx:414
 #: src/views/card/components/LabelSelector.tsx:97
 msgid "Create new label"
 msgstr "Create new label"
 
-#: src/views/board/index.tsx:478
+#: src/views/board/index.tsx:65
+#: src/views/board/index.tsx:503
 msgid "Create new list"
 msgstr "Create new list"
 
@@ -688,11 +695,11 @@ msgid "Create template"
 msgstr "Create template"
 
 #: src/components/NewWorkspaceForm.tsx:387
-#: src/components/WorkspaceMenu.tsx:149
+#: src/components/WorkspaceMenu.tsx:153
 msgid "Create workspace"
 msgstr "Create workspace"
 
-#: src/views/card/components/ActivityList.tsx:61
+#: src/views/card/components/ActivityList.tsx:58
 msgid "created the card"
 msgstr "created the card"
 
@@ -746,7 +753,7 @@ msgstr "Custom workspace URL"
 msgid "Customer Support"
 msgstr "Customer Support"
 
-#: src/components/UserMenu.tsx:153
+#: src/components/UserMenu.tsx:155
 msgid "Dark"
 msgstr "Dark"
 
@@ -795,11 +802,11 @@ msgstr "Delete template"
 msgid "Delete workspace"
 msgstr "Delete workspace"
 
-#: src/views/card/components/ActivityList.tsx:71
+#: src/views/card/components/ActivityList.tsx:68
 msgid "deleted a checklist"
 msgstr "deleted a checklist"
 
-#: src/views/card/components/ActivityList.tsx:76
+#: src/views/card/components/ActivityList.tsx:73
 msgid "deleted a checklist item"
 msgstr "deleted a checklist item"
 
@@ -857,7 +864,7 @@ msgstr "docs"
 msgid "Docs"
 msgstr "Docs"
 
-#: src/components/UserMenu.tsx:191
+#: src/components/UserMenu.tsx:206
 #: src/views/boards/components/TemplateBoards.tsx:24
 #: src/views/home/components/Footer.tsx:78
 #: src/views/home/components/Header.tsx:36
@@ -878,6 +885,28 @@ msgstr "Done"
 #: src/views/card/components/AttachmentThumbnails.tsx:141
 msgid "Download failed"
 msgstr "Download failed"
+
+#: src/views/board/components/Filters.tsx:171
+#: src/views/board/components/NewCardForm.tsx:469
+#: src/views/card/index.tsx:138
+msgid "Due date"
+msgstr "Due date"
+
+#: src/views/board/components/Filters.tsx:132
+msgid "Due next month"
+msgstr "Due next month"
+
+#: src/views/board/components/Filters.tsx:127
+msgid "Due next week"
+msgstr "Due next week"
+
+#: src/views/board/components/Filters.tsx:117
+msgid "Due today"
+msgstr "Due today"
+
+#: src/views/board/components/Filters.tsx:122
+msgid "Due tomorrow"
+msgstr "Due tomorrow"
 
 #: src/views/board/components/BoardDropdown.tsx:41
 #: src/views/board/components/UpdateBoardSlugForm.tsx:116
@@ -1081,7 +1110,7 @@ msgid "Features"
 msgstr "Features"
 
 #: src/components/FeedbackModal.tsx:59
-#: src/components/UserMenu.tsx:199
+#: src/components/UserMenu.tsx:214
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -1089,7 +1118,7 @@ msgstr "Feedback"
 msgid "Feedback sent"
 msgstr "Feedback sent"
 
-#: src/views/board/components/Filters.tsx:174
+#: src/views/board/components/Filters.tsx:221
 msgid "Filter"
 msgstr "Filter"
 
@@ -1135,8 +1164,8 @@ msgid "Fun"
 msgstr "Fun"
 
 #: src/providers/keyboard-shortcuts.tsx:53
-#~ msgid "General"
-#~ msgstr "General"
+msgid "General"
+msgstr "General"
 
 #: src/views/auth/signup/index.tsx:69
 #: src/views/home/components/Cta.tsx:61
@@ -1161,7 +1190,7 @@ msgstr "Get started by creating a new {0}"
 #~ msgid "Get started by creating a new board"
 #~ msgstr "Get started by creating a new board"
 
-#: src/views/board/index.tsx:470
+#: src/views/board/index.tsx:495
 msgid "Get started by creating a new list"
 msgstr "Get started by creating a new list"
 
@@ -1196,20 +1225,20 @@ msgid "Go to app"
 msgstr "Go to app"
 
 #: src/components/SideNavigation.tsx:105
-#~ msgid "Go to boards"
-#~ msgstr "Go to boards"
+msgid "Go to boards"
+msgstr "Go to boards"
 
 #: src/components/SideNavigation.tsx:129
-#~ msgid "Go to members"
-#~ msgstr "Go to members"
+msgid "Go to members"
+msgstr "Go to members"
 
 #: src/components/SideNavigation.tsx:141
-#~ msgid "Go to settings"
-#~ msgstr "Go to settings"
+msgid "Go to settings"
+msgstr "Go to settings"
 
 #: src/components/SideNavigation.tsx:117
-#~ msgid "Go to templates"
-#~ msgstr "Go to templates"
+msgid "Go to templates"
+msgstr "Go to templates"
 
 #: src/views/boards/components/TemplateBoards.tsx:18
 msgid "High Priority"
@@ -1264,7 +1293,7 @@ msgstr "Ideas to improve this page..."
 #~ msgid "Ideas, Research, Planning, Execution, Review, Next Steps, Complete"
 #~ msgstr "Ideas, Research, Planning, Execution, Review, Next Steps, Complete"
 
-#: src/views/boards/index.tsx:39
+#: src/views/boards/index.tsx:50
 msgid "Import"
 msgstr "Import"
 
@@ -1400,12 +1429,12 @@ msgid "Keep in mind that this action is irreversible."
 msgstr "Keep in mind that this action is irreversible."
 
 #: src/providers/keyboard-shortcuts.tsx:320
-#~ msgid "Keyboard Shortcuts"
-#~ msgstr "Keyboard Shortcuts"
+msgid "Keyboard Shortcuts"
+msgstr "Keyboard Shortcuts"
 
-#: src/views/board/components/Filters.tsx:115
-#: src/views/board/components/NewCardForm.tsx:409
-#: src/views/card/index.tsx:119
+#: src/views/board/components/Filters.tsx:155
+#: src/views/board/components/NewCardForm.tsx:418
+#: src/views/card/index.tsx:120
 msgid "Labels"
 msgstr "Labels"
 
@@ -1451,15 +1480,15 @@ msgstr "Legal"
 msgid "License"
 msgstr "License"
 
-#: src/components/UserMenu.tsx:167
+#: src/components/UserMenu.tsx:169
 msgid "Light"
 msgstr "Light"
 
-#: src/views/public/board/index.tsx:66
+#: src/views/public/board/index.tsx:77
 msgid "Link copied"
 msgstr "Link copied"
 
-#: src/views/card/index.tsx:111
+#: src/views/card/index.tsx:112
 msgid "List"
 msgstr "List"
 
@@ -1467,7 +1496,7 @@ msgstr "List"
 msgid "List name"
 msgstr "List name"
 
-#: src/views/board/components/Filters.tsx:123
+#: src/views/board/components/Filters.tsx:163
 msgid "Lists"
 msgstr "Lists"
 
@@ -1475,7 +1504,7 @@ msgstr "Lists"
 msgid "Login | kan.bn"
 msgstr "Login | kan.bn"
 
-#: src/components/UserMenu.tsx:209
+#: src/components/UserMenu.tsx:224
 msgid "Logout"
 msgstr "Logout"
 
@@ -1499,7 +1528,7 @@ msgstr "magic link"
 msgid "Make template"
 msgstr "Make template"
 
-#: src/views/card/components/ActivityList.tsx:75
+#: src/views/card/components/ActivityList.tsx:72
 msgid "marked a checklist item as incomplete"
 msgstr "marked a checklist item as incomplete"
 
@@ -1512,10 +1541,10 @@ msgstr "marked checklist item <0>{0}</0> as incomplete"
 msgid "Medium Priority"
 msgstr "Medium Priority"
 
-#: src/components/SideNavigation.tsx:101
-#: src/views/board/components/Filters.tsx:107
-#: src/views/board/components/NewCardForm.tsx:367
-#: src/views/card/index.tsx:128
+#: src/components/SideNavigation.tsx:121
+#: src/views/board/components/Filters.tsx:147
+#: src/views/board/components/NewCardForm.tsx:376
+#: src/views/card/index.tsx:129
 #: src/views/members/index.tsx:178
 msgid "Members"
 msgstr "Members"
@@ -1544,7 +1573,7 @@ msgstr "moved the card from <0>{0}</0> to<1>{1}</1>"
 #~ msgid "moved the card from <0>{fromList}</0> to<1>{toList}</1>"
 #~ msgstr "moved the card from <0>{fromList}</0> to<1>{toList}</1>"
 
-#: src/views/card/components/ActivityList.tsx:64
+#: src/views/card/components/ActivityList.tsx:61
 msgid "moved the card to another list"
 msgstr "moved the card to another list"
 
@@ -1559,14 +1588,14 @@ msgid "Name"
 msgstr "Name"
 
 #: src/providers/keyboard-shortcuts.tsx:54
-#~ msgid "Navigation"
-#~ msgstr "Navigation"
+msgid "Navigation"
+msgstr "Navigation"
 
 #: src/components/FeedbackModal.tsx:95
 msgid "Need help?"
 msgstr "Need help?"
 
-#: src/views/boards/index.tsx:50
+#: src/views/boards/index.tsx:62
 #: src/views/home/components/Features.tsx:73
 msgid "New"
 msgstr "New"
@@ -1584,7 +1613,7 @@ msgstr "New API key"
 #~ msgid "New board"
 #~ msgstr "New board"
 
-#: src/views/board/components/NewCardForm.tsx:293
+#: src/views/board/components/NewCardForm.tsx:302
 msgid "New card"
 msgstr "New card"
 
@@ -1601,7 +1630,7 @@ msgid "New label"
 msgstr "New label"
 
 #: src/views/board/components/NewListForm.tsx:113
-#: src/views/board/index.tsx:442
+#: src/views/board/index.tsx:466
 msgid "New list"
 msgstr "New list"
 
@@ -1658,15 +1687,19 @@ msgstr "No boards found"
 msgid "No credit card required"
 msgstr "No credit card required"
 
+#: src/views/board/components/Filters.tsx:137
+msgid "No dates"
+msgstr "No dates"
+
 #: src/views/card/components/AttachmentThumbnails.tsx:142
 msgid "No download URL available for this attachment."
 msgstr "No download URL available for this attachment."
 
 #: src/providers/keyboard-shortcuts.tsx:333
-#~ msgid "No keyboard shortcuts registered."
-#~ msgstr "No keyboard shortcuts registered."
+msgid "No keyboard shortcuts registered."
+msgstr "No keyboard shortcuts registered."
 
-#: src/views/board/index.tsx:467
+#: src/views/board/index.tsx:492
 msgid "No lists"
 msgstr "No lists"
 
@@ -1691,12 +1724,12 @@ msgid "Once you delete your workspace, there is no going back. This action canno
 msgstr "Once you delete your workspace, there is no going back. This action cannot be undone."
 
 #: src/components/WorkspaceMenu.tsx:31
-#~ msgid "Open command menu"
-#~ msgstr "Open command menu"
+msgid "Open command menu"
+msgstr "Open command menu"
 
 #: src/providers/keyboard-shortcuts.tsx:171
-#~ msgid "Open keyboard shortcuts"
-#~ msgstr "Open keyboard shortcuts"
+msgid "Open keyboard shortcuts"
+msgstr "Open keyboard shortcuts"
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:150
 msgid "Open source"
@@ -1718,6 +1751,10 @@ msgstr "Organize and find cards quickly with powerful filtering tools."
 #: src/views/oss-friends/index.tsx:52
 msgid "OSS Friends"
 msgstr "OSS Friends"
+
+#: src/views/board/components/Filters.tsx:112
+msgid "Overdue"
+msgstr "Overdue"
 
 #: src/views/pricing/components/Pricing.tsx:73
 #: src/views/pricing/components/PricingTiers.tsx:70
@@ -1807,14 +1844,14 @@ msgstr "Please select a file to upload."
 #: src/components/DeleteLabelConfirmation.tsx:26
 #: src/components/FeedbackModal.tsx:41
 #: src/components/NewWorkspaceForm.tsx:158
-#: src/views/board/components/NewCardForm.tsx:177
+#: src/views/board/components/NewCardForm.tsx:184
 #: src/views/board/components/NewListForm.tsx:79
 #: src/views/board/components/NewTemplateForm.tsx:61
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:73
 #: src/views/board/components/VisibilityButton.tsx:54
-#: src/views/board/index.tsx:151
-#: src/views/board/index.tsx:207
+#: src/views/board/index.tsx:174
+#: src/views/board/index.tsx:230
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/AttachmentThumbnails.tsx:73
 #: src/views/card/components/ChecklistItemRow.tsx:60
@@ -1824,13 +1861,14 @@ msgstr "Please select a file to upload."
 #: src/views/card/components/DeleteCardConfirmation.tsx:52
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:37
 #: src/views/card/components/DeleteCommentConfirmation.tsx:45
+#: src/views/card/components/DueDateSelector.tsx:59
 #: src/views/card/components/LabelSelector.tsx:72
 #: src/views/card/components/ListSelector.tsx:52
 #: src/views/card/components/MemberSelector.tsx:79
 #: src/views/card/components/NewChecklistForm.tsx:70
 #: src/views/card/components/NewChecklistItemForm.tsx:89
 #: src/views/card/components/NewCommentForm.tsx:31
-#: src/views/card/index.tsx:177
+#: src/views/card/index.tsx:186
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:104
 #: src/views/members/components/InviteMemberForm.tsx:241
@@ -1930,11 +1968,11 @@ msgstr "Remove"
 msgid "Remove member"
 msgstr "Remove member"
 
-#: src/views/card/components/ActivityList.tsx:66
+#: src/views/card/components/ActivityList.tsx:63
 msgid "removed a label from the card"
 msgstr "removed a label from the card"
 
-#: src/views/card/components/ActivityList.tsx:68
+#: src/views/card/components/ActivityList.tsx:65
 msgid "removed a member from the card"
 msgstr "removed a member from the card"
 
@@ -1947,7 +1985,12 @@ msgstr "removed label <0>{0}</0>"
 #~ msgid "removed label <0>{label}</0>"
 #~ msgstr "removed label <0>{label}</0>"
 
-#: src/views/card/components/ActivityList.tsx:70
+#: src/views/card/components/ActivityList.tsx:76
+#: src/views/card/components/ActivityList.tsx:241
+msgid "removed the due date"
+msgstr "removed the due date"
+
+#: src/views/card/components/ActivityList.tsx:67
 msgid "renamed a checklist"
 msgstr "renamed a checklist"
 
@@ -2058,8 +2101,16 @@ msgstr "Send feedback"
 msgid "Senior"
 msgstr "Senior"
 
+#: src/views/card/components/DueDateSelector.tsx:116
+msgid "Set due date"
+msgstr "Set due date"
+
+#: src/views/card/components/ActivityList.tsx:74
+msgid "set the due date"
+msgstr "set the due date"
+
 #: src/components/SettingsLayout.tsx:82
-#: src/components/SideNavigation.tsx:106
+#: src/components/SideNavigation.tsx:133
 msgid "Settings"
 msgstr "Settings"
 
@@ -2092,8 +2143,8 @@ msgstr "Settings | Workspace"
 #~ msgstr "Share invite link"
 
 #: src/components/UserMenu.tsx:184
-#~ msgid "Shortcuts"
-#~ msgstr "Shortcuts"
+msgid "Shortcuts"
+msgstr "Shortcuts"
 
 #: src/views/home/components/Header.tsx:104
 msgid "Sign in"
@@ -2163,7 +2214,7 @@ msgstr "Success"
 msgid "Supercharge your workspace for just $29/month. Here's what you'll get:"
 msgstr "Supercharge your workspace for just $29/month. Here's what you'll get:"
 
-#: src/components/UserMenu.tsx:180
+#: src/components/UserMenu.tsx:195
 msgid "Support"
 msgstr "Support"
 
@@ -2172,7 +2223,7 @@ msgstr "Support"
 msgid "Support the development of the project"
 msgstr "Support the development of the project"
 
-#: src/components/UserMenu.tsx:139
+#: src/components/UserMenu.tsx:141
 msgid "System"
 msgstr "System"
 
@@ -2187,8 +2238,8 @@ msgstr "Team Plan"
 msgid "Teams"
 msgstr "Teams"
 
-#: src/views/board/index.tsx:363
-#: src/views/board/index.tsx:398
+#: src/views/board/index.tsx:386
+#: src/views/board/index.tsx:421
 msgid "Template"
 msgstr "Template"
 
@@ -2208,7 +2259,7 @@ msgstr "Template name cannot exceed 100 characters"
 msgid "Template name is required"
 msgstr "Template name is required"
 
-#: src/components/SideNavigation.tsx:96
+#: src/components/SideNavigation.tsx:109
 #: src/views/home/components/Features.tsx:115
 msgid "Templates"
 msgstr "Templates"
@@ -2242,7 +2293,7 @@ msgstr "The open source <0/> alternative to Trello"
 msgid "The visibility of your board has been set to {0}."
 msgstr "The visibility of your board has been set to {0}."
 
-#: src/components/UserMenu.tsx:126
+#: src/components/UserMenu.tsx:128
 msgid "Theme"
 msgstr "Theme"
 
@@ -2262,7 +2313,7 @@ msgstr "This action can't be undone."
 msgid "This API key will only be shown once. Please save it in a secure location."
 msgstr "This API key will only be shown once. Please save it in a secure location."
 
-#: src/views/public/board/index.tsx:156
+#: src/views/public/board/index.tsx:168
 msgid "This board is private or does not exist"
 msgstr "This board is private or does not exist"
 
@@ -2344,7 +2395,7 @@ msgstr "Unable to add checklist item"
 msgid "Unable to add comment"
 msgstr "Unable to add comment"
 
-#: src/views/board/components/NewCardForm.tsx:174
+#: src/views/board/components/NewCardForm.tsx:181
 msgid "Unable to create card"
 msgstr "Unable to create card"
 
@@ -2401,8 +2452,8 @@ msgstr "Unable to update board URL"
 msgid "Unable to update board visibility"
 msgstr "Unable to update board visibility"
 
-#: src/views/board/index.tsx:206
-#: src/views/card/index.tsx:176
+#: src/views/board/index.tsx:229
+#: src/views/card/index.tsx:185
 msgid "Unable to update card"
 msgstr "Unable to update card"
 
@@ -2418,11 +2469,15 @@ msgstr "Unable to update checklist item"
 msgid "Unable to update comment"
 msgstr "Unable to update comment"
 
+#: src/views/card/components/DueDateSelector.tsx:58
+msgid "Unable to update due date"
+msgstr "Unable to update due date"
+
 #: src/views/card/components/LabelSelector.tsx:71
 msgid "Unable to update labels"
 msgstr "Unable to update labels"
 
-#: src/views/board/index.tsx:150
+#: src/views/board/index.tsx:173
 #: src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Unable to update list"
@@ -2499,15 +2554,19 @@ msgstr "Update"
 msgid "Update label"
 msgstr "Update label"
 
-#: src/views/card/components/ActivityList.tsx:73
+#: src/views/card/components/ActivityList.tsx:70
 msgid "updated a checklist item"
 msgstr "updated a checklist item"
 
-#: src/views/card/components/ActivityList.tsx:63
+#: src/views/card/components/ActivityList.tsx:60
 msgid "updated the description"
 msgstr "updated the description"
 
-#: src/views/card/components/ActivityList.tsx:62
+#: src/views/card/components/ActivityList.tsx:75
+msgid "updated the due date"
+msgstr "updated the due date"
+
+#: src/views/card/components/ActivityList.tsx:59
 msgid "updated the title"
 msgstr "updated the title"
 
@@ -2524,7 +2583,7 @@ msgstr "updated the title to <0>{0}</0>"
 #~ msgid "Upgrade"
 #~ msgstr "Upgrade"
 
-#: src/components/SideNavigation.tsx:202
+#: src/components/SideNavigation.tsx:237
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:53
 #: src/views/settings/WorkspaceSettings.tsx:90
 msgid "Upgrade to Pro"
@@ -2592,7 +2651,7 @@ msgstr "View and manage your billing and subscription."
 msgid "View docs"
 msgstr "View docs"
 
-#: src/views/public/board/index.tsx:129
+#: src/views/public/board/index.tsx:141
 msgid "View only"
 msgstr "View only"
 
@@ -2600,7 +2659,7 @@ msgstr "View only"
 msgid "View our roadmap."
 msgstr "View our roadmap."
 
-#: src/views/public/board/index.tsx:159
+#: src/views/public/board/index.tsx:171
 msgid "View workspace"
 msgstr "View workspace"
 
@@ -2653,10 +2712,10 @@ msgid "Why make an open source Trello?"
 msgstr "Why make an open source Trello?"
 
 #: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:363
-#: src/views/boards/index.tsx:22
+#: src/views/board/index.tsx:386
+#: src/views/boards/index.tsx:33
 #: src/views/members/index.tsx:173
-#: src/views/public/board/index.tsx:101
+#: src/views/public/board/index.tsx:113
 #: src/views/public/boards/index.tsx:66
 msgid "Workspace"
 msgstr "Workspace"

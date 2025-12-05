@@ -22,7 +22,7 @@ msgid ", or see our"
 msgstr ", или посмотрите наши"
 
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#: src/views/boards/index.tsx:27
+#: src/views/boards/index.tsx:38
 msgid "{0}"
 msgstr "{0}"
 
@@ -30,18 +30,18 @@ msgstr "{0}"
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
-#: src/views/boards/index.tsx:22
-#: src/views/card/index.tsx:229
+#: src/views/boards/index.tsx:33
+#: src/views/card/index.tsx:238
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
 #. placeholder {0}: labelPublicIds.length
-#: src/views/board/components/NewCardForm.tsx:443
+#: src/views/board/components/NewCardForm.tsx:452
 msgid "{0} labels"
 msgstr "{0} метки"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:389
+#: src/views/board/index.tsx:412
 msgid "{0} not found"
 msgstr "{0} не найден"
 
@@ -79,8 +79,12 @@ msgstr "Аккаунт"
 msgid "Account deleted"
 msgstr "Аккаунт удалён"
 
-#: src/views/card/index.tsx:343
-#: src/views/public/board/CardModal.tsx:157
+#: src/providers/keyboard-shortcuts.tsx:55
+msgid "Actions"
+msgstr "Действия"
+
+#: src/views/card/index.tsx:352
+#: src/views/public/board/CardModal.tsx:158
 msgid "Activity"
 msgstr "Активность"
 
@@ -127,19 +131,19 @@ msgstr "Добавить метку"
 msgid "Add member"
 msgstr "Добавить участника"
 
-#: src/views/card/components/ActivityList.tsx:69
+#: src/views/card/components/ActivityList.tsx:66
 msgid "added a checklist"
 msgstr "добавил(а) чек-лист"
 
-#: src/views/card/components/ActivityList.tsx:72
+#: src/views/card/components/ActivityList.tsx:69
 msgid "added a checklist item"
 msgstr "добавил(а) элемент чек-листа"
 
-#: src/views/card/components/ActivityList.tsx:65
+#: src/views/card/components/ActivityList.tsx:62
 msgid "added a label to the card"
 msgstr "добавил(а) метку к карточке"
 
-#: src/views/card/components/ActivityList.tsx:67
+#: src/views/card/components/ActivityList.tsx:64
 msgid "added a member to the card"
 msgstr "добавил(а) участника к карточке"
 
@@ -308,9 +312,9 @@ msgstr "Портал выставления счетов"
 msgid "Blog Post"
 msgstr "Пост в блоге"
 
-#: src/views/board/index.tsx:363
-#: src/views/card/index.tsx:229
-#: src/views/public/board/index.tsx:101
+#: src/views/board/index.tsx:386
+#: src/views/card/index.tsx:238
+#: src/views/public/board/index.tsx:113
 msgid "Board"
 msgstr "Доска"
 
@@ -327,7 +331,7 @@ msgstr "Название доски не может превышать 100 си�
 msgid "Board name is required"
 msgstr "Название доски обязательно"
 
-#: src/views/public/board/index.tsx:153
+#: src/views/public/board/index.tsx:165
 msgid "Board not found"
 msgstr "Доска не найдена"
 
@@ -343,7 +347,7 @@ msgstr "URL доски может содержать только буквы, ц
 msgid "Board URL cannot exceed 60 characters"
 msgstr "URL доски не может превышать 60 символов"
 
-#: src/views/public/board/index.tsx:68
+#: src/views/public/board/index.tsx:79
 msgid "Board URL copied to clipboard"
 msgstr "URL доски скопирован в буфер обмена"
 
@@ -360,7 +364,7 @@ msgstr "Видимость доски"
 msgid "Board visibility updated"
 msgstr "Видимость доски обновлена"
 
-#: src/components/SideNavigation.tsx:91
+#: src/components/SideNavigation.tsx:97
 msgid "Boards"
 msgstr "Доски"
 
@@ -391,16 +395,16 @@ msgstr "Отчет об ошибке"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: src/views/card/index.tsx:229
+#: src/views/card/index.tsx:238
 msgid "Card"
 msgstr "Карточка"
 
-#: src/views/card/index.tsx:263
-#: src/views/card/index.tsx:299
+#: src/views/card/index.tsx:272
+#: src/views/card/index.tsx:308
 msgid "Card not found"
 msgstr "Карточка не найдена"
 
-#: src/views/board/components/NewCardForm.tsx:310
+#: src/views/board/components/NewCardForm.tsx:319
 msgid "Card title"
 msgstr "Название карточки"
 
@@ -414,6 +418,11 @@ msgstr "Изменить пароль"
 #: src/views/settings/AccountSettings.tsx:45
 msgid "Change your language preferences."
 msgstr "Измените настройки языка."
+
+#: src/views/card/components/ActivityList.tsx:220
+#: src/views/card/components/ActivityList.tsx:234
+msgid "changed the due date to <0>{formattedDate}</0>"
+msgstr "изменил(а) дату выполнения на <0>{formattedDate}</0>"
 
 #: src/views/oss-friends/index.tsx:61
 msgid "Check out some of our favorite open source projects."
@@ -433,7 +442,7 @@ msgstr "Название контрольного списка"
 msgid "Checklists"
 msgstr "Контрольные списки"
 
-#: src/views/board/components/Filters.tsx:180
+#: src/views/board/components/Filters.tsx:227
 msgid "Clear filters"
 msgstr "Очистить фильтры"
 
@@ -485,7 +494,7 @@ msgstr "Завершить"
 msgid "Complete control and ownership:"
 msgstr "Полный контроль и владение:"
 
-#: src/views/card/components/ActivityList.tsx:74
+#: src/views/card/components/ActivityList.tsx:71
 msgid "completed a checklist item"
 msgstr "завершил элемент контрольного списка"
 
@@ -551,7 +560,7 @@ msgid "Create {0}"
 msgstr "Создать {0}"
 
 #: src/components/LabelForm.tsx:213
-#: src/views/board/components/NewCardForm.tsx:469
+#: src/views/board/components/NewCardForm.tsx:516
 #: src/views/board/components/NewListForm.tsx:141
 msgid "Create another"
 msgstr "Создать ещё одну"
@@ -560,7 +569,7 @@ msgstr "Создать ещё одну"
 msgid "Create API key"
 msgstr "Создать API-ключ"
 
-#: src/views/board/components/NewCardForm.tsx:479
+#: src/views/board/components/NewCardForm.tsx:526
 msgid "Create card"
 msgstr "Создать карточку"
 
@@ -582,6 +591,7 @@ msgstr "Создать список"
 
 #. placeholder {0}: isTemplate ? "template" : "board"
 #: src/views/boards/components/BoardsList.tsx:45
+#: src/views/boards/index.tsx:26
 msgid "Create new {0}"
 msgstr "Создать новый {0}"
 
@@ -589,12 +599,13 @@ msgstr "Создать новый {0}"
 msgid "Create new key"
 msgstr "Создать новый ключ"
 
-#: src/views/board/components/NewCardForm.tsx:405
+#: src/views/board/components/NewCardForm.tsx:414
 #: src/views/card/components/LabelSelector.tsx:97
 msgid "Create new label"
 msgstr "Создать новую метку"
 
-#: src/views/board/index.tsx:478
+#: src/views/board/index.tsx:65
+#: src/views/board/index.tsx:503
 msgid "Create new list"
 msgstr "Создать новый список"
 
@@ -603,11 +614,11 @@ msgid "Create template"
 msgstr "Создать шаблон"
 
 #: src/components/NewWorkspaceForm.tsx:387
-#: src/components/WorkspaceMenu.tsx:149
+#: src/components/WorkspaceMenu.tsx:153
 msgid "Create workspace"
 msgstr "Создать рабочее пространство"
 
-#: src/views/card/components/ActivityList.tsx:61
+#: src/views/card/components/ActivityList.tsx:58
 msgid "created the card"
 msgstr "создал(а) карточку"
 
@@ -653,7 +664,7 @@ msgstr "Пользовательский URL рабочего пространс
 msgid "Customer Support"
 msgstr "Служба поддержки"
 
-#: src/components/UserMenu.tsx:153
+#: src/components/UserMenu.tsx:155
 msgid "Dark"
 msgstr "Тёмный"
 
@@ -702,11 +713,11 @@ msgstr "Удалить шаблон"
 msgid "Delete workspace"
 msgstr "Удалить рабочее пространство"
 
-#: src/views/card/components/ActivityList.tsx:71
+#: src/views/card/components/ActivityList.tsx:68
 msgid "deleted a checklist"
 msgstr "удалил контрольный список"
 
-#: src/views/card/components/ActivityList.tsx:76
+#: src/views/card/components/ActivityList.tsx:73
 msgid "deleted a checklist item"
 msgstr "удалил элемент контрольного списка"
 
@@ -764,7 +775,7 @@ msgstr "документы"
 msgid "Docs"
 msgstr "Документы"
 
-#: src/components/UserMenu.tsx:191
+#: src/components/UserMenu.tsx:206
 #: src/views/boards/components/TemplateBoards.tsx:24
 #: src/views/home/components/Footer.tsx:78
 #: src/views/home/components/Header.tsx:36
@@ -785,6 +796,28 @@ msgstr "Готово"
 #: src/views/card/components/AttachmentThumbnails.tsx:141
 msgid "Download failed"
 msgstr "Не удалось загрузить"
+
+#: src/views/board/components/Filters.tsx:171
+#: src/views/board/components/NewCardForm.tsx:469
+#: src/views/card/index.tsx:138
+msgid "Due date"
+msgstr "Дата выполнения"
+
+#: src/views/board/components/Filters.tsx:132
+msgid "Due next month"
+msgstr "Срок в следующем месяце"
+
+#: src/views/board/components/Filters.tsx:127
+msgid "Due next week"
+msgstr "Срок на следующей неделе"
+
+#: src/views/board/components/Filters.tsx:117
+msgid "Due today"
+msgstr "Срок сегодня"
+
+#: src/views/board/components/Filters.tsx:122
+msgid "Due tomorrow"
+msgstr "Срок завтра"
 
 #: src/views/board/components/BoardDropdown.tsx:41
 #: src/views/board/components/UpdateBoardSlugForm.tsx:116
@@ -988,7 +1021,7 @@ msgid "Features"
 msgstr "Функции"
 
 #: src/components/FeedbackModal.tsx:59
-#: src/components/UserMenu.tsx:199
+#: src/components/UserMenu.tsx:214
 msgid "Feedback"
 msgstr "Обратная связь"
 
@@ -996,7 +1029,7 @@ msgstr "Обратная связь"
 msgid "Feedback sent"
 msgstr "Обратная связь отправлена"
 
-#: src/views/board/components/Filters.tsx:174
+#: src/views/board/components/Filters.tsx:221
 msgid "Filter"
 msgstr "Фильтр"
 
@@ -1031,6 +1064,10 @@ msgstr "Полный рабочий день"
 msgid "Fun"
 msgstr "Веселье"
 
+#: src/providers/keyboard-shortcuts.tsx:53
+msgid "General"
+msgstr "Общее"
+
 #: src/views/auth/signup/index.tsx:69
 #: src/views/home/components/Cta.tsx:61
 #: src/views/home/components/Header.tsx:106
@@ -1050,7 +1087,7 @@ msgstr "Начать"
 msgid "Get started by creating a new {0}"
 msgstr "Начните с создания нового {0}"
 
-#: src/views/board/index.tsx:470
+#: src/views/board/index.tsx:495
 msgid "Get started by creating a new list"
 msgstr "Начните с создания нового списка"
 
@@ -1083,6 +1120,22 @@ msgstr "На главную"
 #: src/views/invite/index.tsx:144
 msgid "Go to app"
 msgstr "Перейти в приложение"
+
+#: src/components/SideNavigation.tsx:105
+msgid "Go to boards"
+msgstr "Перейти к доскам"
+
+#: src/components/SideNavigation.tsx:129
+msgid "Go to members"
+msgstr "Перейти к участникам"
+
+#: src/components/SideNavigation.tsx:141
+msgid "Go to settings"
+msgstr "Перейти к настройкам"
+
+#: src/components/SideNavigation.tsx:117
+msgid "Go to templates"
+msgstr "Перейти к шаблонам"
 
 #: src/views/boards/components/TemplateBoards.tsx:18
 msgid "High Priority"
@@ -1133,7 +1186,7 @@ msgstr "Идеи"
 msgid "Ideas to improve this page..."
 msgstr "Идеи для улучшения этой страницы..."
 
-#: src/views/boards/index.tsx:39
+#: src/views/boards/index.tsx:50
 msgid "Import"
 msgstr "Импорт"
 
@@ -1264,9 +1317,13 @@ msgstr "Канбан переосмыслен"
 msgid "Keep in mind that this action is irreversible."
 msgstr "Имейте в виду, что это действие необратимо."
 
-#: src/views/board/components/Filters.tsx:115
-#: src/views/board/components/NewCardForm.tsx:409
-#: src/views/card/index.tsx:119
+#: src/providers/keyboard-shortcuts.tsx:320
+msgid "Keyboard Shortcuts"
+msgstr "Горячие клавиши"
+
+#: src/views/board/components/Filters.tsx:155
+#: src/views/board/components/NewCardForm.tsx:418
+#: src/views/card/index.tsx:120
 msgid "Labels"
 msgstr "Метки"
 
@@ -1312,15 +1369,15 @@ msgstr "Юридическое"
 msgid "License"
 msgstr "Лицензия"
 
-#: src/components/UserMenu.tsx:167
+#: src/components/UserMenu.tsx:169
 msgid "Light"
 msgstr "Светлый"
 
-#: src/views/public/board/index.tsx:66
+#: src/views/public/board/index.tsx:77
 msgid "Link copied"
 msgstr "Ссылка скопирована"
 
-#: src/views/card/index.tsx:111
+#: src/views/card/index.tsx:112
 msgid "List"
 msgstr "Список"
 
@@ -1328,7 +1385,7 @@ msgstr "Список"
 msgid "List name"
 msgstr "Название списка"
 
-#: src/views/board/components/Filters.tsx:123
+#: src/views/board/components/Filters.tsx:163
 msgid "Lists"
 msgstr "Списки"
 
@@ -1336,7 +1393,7 @@ msgstr "Списки"
 msgid "Login | kan.bn"
 msgstr "Вход | kan.bn"
 
-#: src/components/UserMenu.tsx:209
+#: src/components/UserMenu.tsx:224
 msgid "Logout"
 msgstr "Выход"
 
@@ -1360,7 +1417,7 @@ msgstr "магическая ссылка"
 msgid "Make template"
 msgstr "Создать шаблон"
 
-#: src/views/card/components/ActivityList.tsx:75
+#: src/views/card/components/ActivityList.tsx:72
 msgid "marked a checklist item as incomplete"
 msgstr "отметил элемент контрольного списка как незавершённый"
 
@@ -1373,10 +1430,10 @@ msgstr "отметил элемент контрольного списка <0>{
 msgid "Medium Priority"
 msgstr "Средний приоритет"
 
-#: src/components/SideNavigation.tsx:101
-#: src/views/board/components/Filters.tsx:107
-#: src/views/board/components/NewCardForm.tsx:367
-#: src/views/card/index.tsx:128
+#: src/components/SideNavigation.tsx:121
+#: src/views/board/components/Filters.tsx:147
+#: src/views/board/components/NewCardForm.tsx:376
+#: src/views/card/index.tsx:129
 #: src/views/members/index.tsx:178
 msgid "Members"
 msgstr "Участники"
@@ -1401,7 +1458,7 @@ msgstr "ежемесячная оплата"
 msgid "moved the card from <0>{0}</0> to<1>{1}</1>"
 msgstr "переместил карточку из <0>{0}</0> в <1>{1}</1>"
 
-#: src/views/card/components/ActivityList.tsx:64
+#: src/views/card/components/ActivityList.tsx:61
 msgid "moved the card to another list"
 msgstr "переместил карточку в другой список"
 
@@ -1411,11 +1468,15 @@ msgstr "переместил карточку в другой список"
 msgid "Name"
 msgstr "Имя"
 
+#: src/providers/keyboard-shortcuts.tsx:54
+msgid "Navigation"
+msgstr "Навигация"
+
 #: src/components/FeedbackModal.tsx:95
 msgid "Need help?"
 msgstr "Нужна помощь?"
 
-#: src/views/boards/index.tsx:50
+#: src/views/boards/index.tsx:62
 #: src/views/home/components/Features.tsx:73
 msgid "New"
 msgstr "Новый"
@@ -1429,7 +1490,7 @@ msgstr "Новый {0}"
 msgid "New API key"
 msgstr "Новый API-ключ"
 
-#: src/views/board/components/NewCardForm.tsx:293
+#: src/views/board/components/NewCardForm.tsx:302
 msgid "New card"
 msgstr "Новая карточка"
 
@@ -1446,7 +1507,7 @@ msgid "New label"
 msgstr "Новая метка"
 
 #: src/views/board/components/NewListForm.tsx:113
-#: src/views/board/index.tsx:442
+#: src/views/board/index.tsx:466
 msgid "New list"
 msgstr "Новый список"
 
@@ -1495,11 +1556,19 @@ msgstr "Доски не найдены"
 msgid "No credit card required"
 msgstr "Кредитная карта не требуется"
 
+#: src/views/board/components/Filters.tsx:137
+msgid "No dates"
+msgstr "Нет дат"
+
 #: src/views/card/components/AttachmentThumbnails.tsx:142
 msgid "No download URL available for this attachment."
 msgstr "URL для загрузки этого вложения недоступен."
 
-#: src/views/board/index.tsx:467
+#: src/providers/keyboard-shortcuts.tsx:333
+msgid "No keyboard shortcuts registered."
+msgstr "Горячие клавиши не зарегистрированы."
+
+#: src/views/board/index.tsx:492
 msgid "No lists"
 msgstr "Нет списков"
 
@@ -1523,6 +1592,14 @@ msgstr "После удаления аккаунта возврат будет �
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "После удаления рабочего пространства возврат будет невозможен. Это действие необратимо."
 
+#: src/components/WorkspaceMenu.tsx:31
+msgid "Open command menu"
+msgstr "Открыть меню команд"
+
+#: src/providers/keyboard-shortcuts.tsx:171
+msgid "Open keyboard shortcuts"
+msgstr "Открыть горячие клавиши"
+
 #: src/views/pricing/components/FeatureComparisonTable.tsx:150
 msgid "Open source"
 msgstr "С открытым исходным кодом"
@@ -1543,6 +1620,10 @@ msgstr "Организуйте и находите карточки быстро
 #: src/views/oss-friends/index.tsx:52
 msgid "OSS Friends"
 msgstr "Друзья OSS"
+
+#: src/views/board/components/Filters.tsx:112
+msgid "Overdue"
+msgstr "Просрочено"
 
 #: src/views/pricing/components/Pricing.tsx:73
 #: src/views/pricing/components/PricingTiers.tsx:70
@@ -1632,14 +1713,14 @@ msgstr "Пожалуйста, выберите файл для загрузки.
 #: src/components/DeleteLabelConfirmation.tsx:26
 #: src/components/FeedbackModal.tsx:41
 #: src/components/NewWorkspaceForm.tsx:158
-#: src/views/board/components/NewCardForm.tsx:177
+#: src/views/board/components/NewCardForm.tsx:184
 #: src/views/board/components/NewListForm.tsx:79
 #: src/views/board/components/NewTemplateForm.tsx:61
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:73
 #: src/views/board/components/VisibilityButton.tsx:54
-#: src/views/board/index.tsx:151
-#: src/views/board/index.tsx:207
+#: src/views/board/index.tsx:174
+#: src/views/board/index.tsx:230
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/AttachmentThumbnails.tsx:73
 #: src/views/card/components/ChecklistItemRow.tsx:60
@@ -1649,13 +1730,14 @@ msgstr "Пожалуйста, выберите файл для загрузки.
 #: src/views/card/components/DeleteCardConfirmation.tsx:52
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:37
 #: src/views/card/components/DeleteCommentConfirmation.tsx:45
+#: src/views/card/components/DueDateSelector.tsx:59
 #: src/views/card/components/LabelSelector.tsx:72
 #: src/views/card/components/ListSelector.tsx:52
 #: src/views/card/components/MemberSelector.tsx:79
 #: src/views/card/components/NewChecklistForm.tsx:70
 #: src/views/card/components/NewChecklistItemForm.tsx:89
 #: src/views/card/components/NewCommentForm.tsx:31
-#: src/views/card/index.tsx:177
+#: src/views/card/index.tsx:186
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:104
 #: src/views/members/components/InviteMemberForm.tsx:241
@@ -1755,11 +1837,11 @@ msgstr "Удалить"
 msgid "Remove member"
 msgstr "Удалить участника"
 
-#: src/views/card/components/ActivityList.tsx:66
+#: src/views/card/components/ActivityList.tsx:63
 msgid "removed a label from the card"
 msgstr "удалил метку с карточки"
 
-#: src/views/card/components/ActivityList.tsx:68
+#: src/views/card/components/ActivityList.tsx:65
 msgid "removed a member from the card"
 msgstr "удалил участника из карточки"
 
@@ -1768,7 +1850,12 @@ msgstr "удалил участника из карточки"
 msgid "removed label <0>{0}</0>"
 msgstr "удалил метку <0>{0}</0>"
 
-#: src/views/card/components/ActivityList.tsx:70
+#: src/views/card/components/ActivityList.tsx:76
+#: src/views/card/components/ActivityList.tsx:241
+msgid "removed the due date"
+msgstr "удалил(а) дату выполнения"
+
+#: src/views/card/components/ActivityList.tsx:67
 msgid "renamed a checklist"
 msgstr "переименовал контрольный список"
 
@@ -1871,8 +1958,16 @@ msgstr "Отправить отзыв"
 msgid "Senior"
 msgstr "Старший"
 
+#: src/views/card/components/DueDateSelector.tsx:116
+msgid "Set due date"
+msgstr "Установить дату выполнения"
+
+#: src/views/card/components/ActivityList.tsx:74
+msgid "set the due date"
+msgstr "установил(а) дату выполнения"
+
 #: src/components/SettingsLayout.tsx:82
-#: src/components/SideNavigation.tsx:106
+#: src/components/SideNavigation.tsx:133
 msgid "Settings"
 msgstr "Настройки"
 
@@ -1895,6 +1990,10 @@ msgstr "Настройки | Интеграции"
 #: src/views/settings/WorkspaceSettings.tsx:54
 msgid "Settings | Workspace"
 msgstr "Настройки | Рабочая область"
+
+#: src/components/UserMenu.tsx:184
+msgid "Shortcuts"
+msgstr "Сочетания клавиш"
 
 #: src/views/home/components/Header.tsx:104
 msgid "Sign in"
@@ -1964,7 +2063,7 @@ msgstr "Успех"
 msgid "Supercharge your workspace for just $29/month. Here's what you'll get:"
 msgstr "Улучшите свою рабочую область всего за $29/месяц. Вот что вы получите:"
 
-#: src/components/UserMenu.tsx:180
+#: src/components/UserMenu.tsx:195
 msgid "Support"
 msgstr "Поддержка"
 
@@ -1973,7 +2072,7 @@ msgstr "Поддержка"
 msgid "Support the development of the project"
 msgstr "Поддержите развитие проекта"
 
-#: src/components/UserMenu.tsx:139
+#: src/components/UserMenu.tsx:141
 msgid "System"
 msgstr "Система"
 
@@ -1988,8 +2087,8 @@ msgstr "Командный план"
 msgid "Teams"
 msgstr "Команды"
 
-#: src/views/board/index.tsx:363
-#: src/views/board/index.tsx:398
+#: src/views/board/index.tsx:386
+#: src/views/board/index.tsx:421
 msgid "Template"
 msgstr "Шаблон"
 
@@ -2009,7 +2108,7 @@ msgstr "Имя шаблона не может превышать 100 симво�
 msgid "Template name is required"
 msgstr "Имя шаблона обязательно"
 
-#: src/components/SideNavigation.tsx:96
+#: src/components/SideNavigation.tsx:109
 #: src/views/home/components/Features.tsx:115
 msgid "Templates"
 msgstr "Шаблоны"
@@ -2043,7 +2142,7 @@ msgstr "Альтернатива Trello с открытым исходным к�
 msgid "The visibility of your board has been set to {0}."
 msgstr "Видимость вашей доски установлена на {0}."
 
-#: src/components/UserMenu.tsx:126
+#: src/components/UserMenu.tsx:128
 msgid "Theme"
 msgstr "Тема"
 
@@ -2063,7 +2162,7 @@ msgstr "Это действие нельзя будет отменить."
 msgid "This API key will only be shown once. Please save it in a secure location."
 msgstr "Этот API-ключ будет показан только один раз. Пожалуйста, сохраните его в безопасном месте."
 
-#: src/views/public/board/index.tsx:156
+#: src/views/public/board/index.tsx:168
 msgid "This board is private or does not exist"
 msgstr "Эта доска является приватной или не существует."
 
@@ -2137,7 +2236,7 @@ msgstr "Не удалось добавить элемент контрольно
 msgid "Unable to add comment"
 msgstr "Не удалось добавить комментарий."
 
-#: src/views/board/components/NewCardForm.tsx:174
+#: src/views/board/components/NewCardForm.tsx:181
 msgid "Unable to create card"
 msgstr "Не удалось создать карточку."
 
@@ -2194,8 +2293,8 @@ msgstr "Не удалось обновить URL доски"
 msgid "Unable to update board visibility"
 msgstr "Не удалось обновить видимость доски"
 
-#: src/views/board/index.tsx:206
-#: src/views/card/index.tsx:176
+#: src/views/board/index.tsx:229
+#: src/views/card/index.tsx:185
 msgid "Unable to update card"
 msgstr "Не удалось обновить карточку"
 
@@ -2211,11 +2310,15 @@ msgstr "Не удалось обновить элемент контрольно
 msgid "Unable to update comment"
 msgstr "Не удалось обновить комментарий"
 
+#: src/views/card/components/DueDateSelector.tsx:58
+msgid "Unable to update due date"
+msgstr "Не удалось обновить дату выполнения"
+
 #: src/views/card/components/LabelSelector.tsx:71
 msgid "Unable to update labels"
 msgstr "Не удалось обновить метки"
 
-#: src/views/board/index.tsx:150
+#: src/views/board/index.tsx:173
 #: src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Не удалось обновить список"
@@ -2288,15 +2391,19 @@ msgstr "Обновить"
 msgid "Update label"
 msgstr "Обновить метку"
 
-#: src/views/card/components/ActivityList.tsx:73
+#: src/views/card/components/ActivityList.tsx:70
 msgid "updated a checklist item"
 msgstr "обновлен элемент контрольного списка"
 
-#: src/views/card/components/ActivityList.tsx:63
+#: src/views/card/components/ActivityList.tsx:60
 msgid "updated the description"
 msgstr "обновлено описание"
 
-#: src/views/card/components/ActivityList.tsx:62
+#: src/views/card/components/ActivityList.tsx:75
+msgid "updated the due date"
+msgstr "обновил(а) дату выполнения"
+
+#: src/views/card/components/ActivityList.tsx:59
 msgid "updated the title"
 msgstr "обновлен заголовок"
 
@@ -2305,7 +2412,7 @@ msgstr "обновлен заголовок"
 msgid "updated the title to <0>{0}</0>"
 msgstr "обновлен заголовок на <0>{0}</0>"
 
-#: src/components/SideNavigation.tsx:202
+#: src/components/SideNavigation.tsx:237
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:53
 #: src/views/settings/WorkspaceSettings.tsx:90
 msgid "Upgrade to Pro"
@@ -2369,7 +2476,7 @@ msgstr "Просмотр и управление вашими счетами и 
 msgid "View docs"
 msgstr "Просмотреть документацию"
 
-#: src/views/public/board/index.tsx:129
+#: src/views/public/board/index.tsx:141
 msgid "View only"
 msgstr "Только просмотр"
 
@@ -2377,7 +2484,7 @@ msgstr "Только просмотр"
 msgid "View our roadmap."
 msgstr "Просмотреть нашу дорожную карту."
 
-#: src/views/public/board/index.tsx:159
+#: src/views/public/board/index.tsx:171
 msgid "View workspace"
 msgstr "Просмотреть рабочее пространство"
 
@@ -2422,10 +2529,10 @@ msgid "Why make an open source Trello?"
 msgstr "Зачем создавать Trello с открытым исходным кодом?"
 
 #: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:363
-#: src/views/boards/index.tsx:22
+#: src/views/board/index.tsx:386
+#: src/views/boards/index.tsx:33
 #: src/views/members/index.tsx:173
-#: src/views/public/board/index.tsx:101
+#: src/views/public/board/index.tsx:113
 #: src/views/public/boards/index.tsx:66
 msgid "Workspace"
 msgstr "Рабочее пространство"
