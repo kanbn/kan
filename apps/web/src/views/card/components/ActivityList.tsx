@@ -1,11 +1,12 @@
+import type { Locale as DateFnsLocale } from "date-fns";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { formatDistanceToNow } from "date-fns";
-import { de, enGB, es, fr, it, nl } from "date-fns/locale";
+import { format, formatDistanceToNow, isSameYear } from "date-fns";
 import {
   HiOutlineArrowLeft,
   HiOutlineArrowRight,
   HiOutlineCheckCircle,
+  HiOutlineClock,
   HiOutlinePencil,
   HiOutlinePlus,
   HiOutlineTag,
@@ -24,15 +25,6 @@ import Comment from "./Comment";
 type ActivityType =
   NonNullable<GetCardByIdOutput>["activities"][number]["type"];
 
-const dateLocaleMap = {
-  en: enGB,
-  fr: fr,
-  de: de,
-  es: es,
-  it: it,
-  nl: nl,
-} as const;
-
 const truncate = (value: string | null, maxLength = 50) => {
   if (!value) return value;
   return value.length > maxLength ? `${value.slice(0, maxLength - 1)}…` : value;
@@ -47,6 +39,8 @@ const getActivityText = ({
   isSelf,
   label,
   fromTitle,
+  toDueDate,
+  dateLocale,
 }: {
   type: ActivityType;
   toTitle: string | null;
@@ -56,6 +50,9 @@ const getActivityText = ({
   isSelf: boolean;
   label: string | null;
   fromTitle?: string | null;
+  fromDueDate?: Date | null;
+  toDueDate?: Date | null;
+  dateLocale: DateFnsLocale;
 }) => {
   const ACTIVITY_TYPE_MAP = {
     "card.created": t`created the card`,
@@ -74,6 +71,9 @@ const getActivityText = ({
     "card.updated.checklist.item.completed": t`completed a checklist item`,
     "card.updated.checklist.item.uncompleted": t`marked a checklist item as incomplete`,
     "card.updated.checklist.item.deleted": t`deleted a checklist item`,
+    "card.updated.dueDate.added": t`set the due date`,
+    "card.updated.dueDate.updated": t`updated the due date`,
+    "card.updated.dueDate.removed": t`removed the due date`,
   } as const;
 
   if (!(type in ACTIVITY_TYPE_MAP)) return null;
@@ -209,6 +209,38 @@ const getActivityText = ({
     );
   }
 
+  if (type === "card.updated.dueDate.added" && toDueDate) {
+    const showYear = !isSameYear(toDueDate, new Date());
+    const formattedDate = format(
+      toDueDate,
+      showYear ? "do MMM yyyy" : "do MMM",
+      { locale: dateLocale },
+    );
+    return (
+      <Trans>
+        changed the due date to <TextHighlight>{formattedDate}</TextHighlight>
+      </Trans>
+    );
+  }
+
+  if (type === "card.updated.dueDate.updated" && toDueDate) {
+    const showYear = !isSameYear(toDueDate, new Date());
+    const formattedDate = format(
+      toDueDate,
+      showYear ? "do MMM yyyy" : "do MMM",
+      { locale: dateLocale },
+    );
+    return (
+      <Trans>
+        changed the due date to <TextHighlight>{formattedDate}</TextHighlight>
+      </Trans>
+    );
+  }
+
+  if (type === "card.updated.dueDate.removed") {
+    return <Trans>removed the due date</Trans>;
+  }
+
   return baseText;
 };
 
@@ -229,6 +261,9 @@ const ACTIVITY_ICON_MAP: Partial<Record<ActivityType, React.ReactNode | null>> =
     "card.updated.checklist.item.completed": <HiOutlineCheckCircle />,
     "card.updated.checklist.item.uncompleted": <HiOutlineCheckCircle />,
     "card.updated.checklist.item.deleted": <HiOutlineTrash />,
+    "card.updated.dueDate.added": <HiOutlineClock />,
+    "card.updated.dueDate.updated": <HiOutlineClock />,
+    "card.updated.dueDate.removed": <HiOutlineClock />,
   } as const;
 
 const getActivityIcon = (
@@ -260,9 +295,7 @@ const ActivityList = ({
   isViewOnly?: boolean;
 }) => {
   const { data } = authClient.useSession();
-  const { locale } = useLocalisation();
-
-  const currentDateLocale = dateLocaleMap[locale] || enGB;
+  const { dateLocale } = useLocalisation();
 
   return (
     <div className="flex flex-col space-y-4 pt-4">
@@ -276,6 +309,9 @@ const ActivityList = ({
           isSelf: activity.member?.user?.id === data?.user.id,
           label: activity.label?.name ?? null,
           fromTitle: activity.fromTitle ?? null,
+          fromDueDate: activity.fromDueDate ?? null,
+          toDueDate: activity.toDueDate ?? null,
+          dateLocale: dateLocale,
         });
 
         if (activity.type === "card.updated.comment.added")
@@ -330,7 +366,7 @@ const ActivityList = ({
               <span className="space-x-1 text-light-900 dark:text-dark-800">
                 {formatDistanceToNow(new Date(activity.createdAt), {
                   addSuffix: true,
-                  locale: currentDateLocale,
+                  locale: dateLocale,
                 })}
               </span>
             </p>
