@@ -1,4 +1,15 @@
-import { and, asc, desc, eq, inArray, isNull, or } from "drizzle-orm";
+import {
+  and,
+  asc,
+  desc,
+  eq,
+  gte,
+  inArray,
+  isNotNull,
+  isNull,
+  lt,
+  or,
+} from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { BoardVisibilityStatus } from "@kan/db/schema";
@@ -65,6 +76,39 @@ export const getIdByPublicId = async (db: dbClient, boardPublicId: string) => {
   return board;
 };
 
+interface DueDateFilter {
+  startDate?: Date;
+  endDate?: Date;
+  hasNoDueDate?: boolean;
+}
+
+const buildDueDateWhere = (filters: DueDateFilter[]) => {
+  if (!filters.length) return undefined;
+
+  const clauses = filters
+    .map((filter) => {
+      const conditions: ReturnType<typeof and>[] = [];
+
+      if (filter.hasNoDueDate) {
+        conditions.push(isNull(cards.dueDate));
+      } else {
+        conditions.push(isNotNull(cards.dueDate));
+
+        if (filter.startDate)
+          conditions.push(gte(cards.dueDate, filter.startDate));
+
+        if (filter.endDate) conditions.push(lt(cards.dueDate, filter.endDate));
+      }
+
+      return conditions.length > 0 ? and(...conditions) : undefined;
+    })
+    .filter((clause): clause is NonNullable<typeof clause> => !!clause);
+
+  if (!clauses.length) return undefined;
+
+  return or(...clauses);
+};
+
 export const getByPublicId = async (
   db: dbClient,
   boardPublicId: string,
@@ -72,6 +116,7 @@ export const getByPublicId = async (
     members: string[];
     labels: string[];
     lists: string[];
+    dueDate: DueDateFilter[];
     type: "regular" | "template" | undefined;
   },
 ) => {
@@ -237,6 +282,7 @@ export const getByPublicId = async (
             where: and(
               cardIds.length > 0 ? inArray(cards.publicId, cardIds) : undefined,
               isNull(cards.deletedAt),
+              buildDueDateWhere(filters.dueDate),
             ),
             orderBy: [asc(cards.index)],
           },
@@ -292,6 +338,7 @@ export const getBySlug = async (
     members: string[];
     labels: string[];
     lists: string[];
+    dueDate: DueDateFilter[];
   },
 ) => {
   let cardIds: string[] = [];
@@ -407,6 +454,7 @@ export const getBySlug = async (
             where: and(
               cardIds.length > 0 ? inArray(cards.publicId, cardIds) : undefined,
               isNull(cards.deletedAt),
+              buildDueDateWhere(filters.dueDate),
             ),
             orderBy: [asc(cards.index)],
           },

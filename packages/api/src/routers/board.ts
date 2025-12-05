@@ -13,6 +13,12 @@ import { generateSlug, generateUID } from "@kan/shared/utils";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
 
+const dueDateFilterSchema = z.object({
+  startDate: z.string().datetime().optional(),
+  endDate: z.string().datetime().optional(),
+  hasNoDueDate: z.boolean().optional(),
+});
+
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
     .meta({
@@ -79,6 +85,7 @@ export const boardRouter = createTRPCRouter({
         members: z.array(z.string().min(12)).optional(),
         labels: z.array(z.string().min(12)).optional(),
         lists: z.array(z.string().min(12)).optional(),
+        dueDate: z.array(dueDateFilterSchema).optional(),
         type: z.enum(["regular", "template"]).optional(),
       }),
     )
@@ -112,6 +119,14 @@ export const boardRouter = createTRPCRouter({
           members: input.members ?? [],
           labels: input.labels ?? [],
           lists: input.lists ?? [],
+          dueDate:
+            input.dueDate?.map((filter) => ({
+              startDate: filter.startDate
+                ? new Date(filter.startDate)
+                : undefined,
+              endDate: filter.endDate ? new Date(filter.endDate) : undefined,
+              hasNoDueDate: filter.hasNoDueDate,
+            })) ?? [],
           type: input.type,
         },
       );
@@ -145,6 +160,7 @@ export const boardRouter = createTRPCRouter({
         members: z.array(z.string().min(12)).optional(),
         labels: z.array(z.string().min(12)).optional(),
         lists: z.array(z.string().min(12)).optional(),
+        dueDate: z.array(dueDateFilterSchema).optional(),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof boardRepo.getBySlug>>>())
@@ -168,6 +184,14 @@ export const boardRouter = createTRPCRouter({
           members: input.members ?? [],
           labels: input.labels ?? [],
           lists: input.lists ?? [],
+          dueDate:
+            input.dueDate?.map((filter) => ({
+              startDate: filter.startDate
+                ? new Date(filter.startDate)
+                : undefined,
+              endDate: filter.endDate ? new Date(filter.endDate) : undefined,
+              hasNoDueDate: filter.hasNoDueDate,
+            })) ?? [],
         },
       );
 
@@ -239,6 +263,7 @@ export const boardRouter = createTRPCRouter({
             members: [],
             labels: [],
             lists: [],
+            dueDate: [],
             type: sourceBoardInfo.type,
           },
         );

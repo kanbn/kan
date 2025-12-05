@@ -15,6 +15,7 @@ import ThemeToggle from "~/components/ThemeToggle";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { convertDueDateFiltersToRanges } from "~/utils/dueDateFilters";
 import { formatToArray } from "~/utils/helpers";
 import Card from "~/views/board/components/Card";
 import Filters from "~/views/board/components/Filters";
@@ -38,6 +39,15 @@ export default function PublicBoardView() {
     ? router.query.workspaceSlug[0]
     : router.query.workspaceSlug;
 
+  const dueDateFilters = formatToArray(router.query.dueDate) as (
+    | "overdue"
+    | "today"
+    | "tomorrow"
+    | "next-week"
+    | "next-month"
+    | "no-due-date"
+  )[];
+
   const { data, isLoading } = api.board.bySlug.useQuery(
     {
       boardSlug: boardSlug ?? "",
@@ -45,6 +55,7 @@ export default function PublicBoardView() {
       members: formatToArray(router.query.members),
       labels: formatToArray(router.query.labels),
       lists: formatToArray(router.query.lists),
+      dueDate: convertDueDateFiltersToRanges(dueDateFilters),
     },
     {
       enabled: router.isReady && !!boardSlug,
@@ -77,7 +88,7 @@ export default function PublicBoardView() {
   };
 
   const pathWithoutQuery = router.asPath.split("?")[0];
-  const splitPath = pathWithoutQuery.split("/");
+  const splitPath = pathWithoutQuery?.split("/") ?? [];
   const cardPublicId = splitPath.length > 3 ? splitPath[3] : null;
 
   useEffect(() => {
