@@ -1,6 +1,7 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { useEffect } from "react";
+import { format } from "date-fns";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   HiOutlineBarsArrowDown,
@@ -15,6 +16,7 @@ import type { WorkspaceMember } from "~/components/Editor";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
+import DateSelector from "~/components/DateSelector";
 import Editor from "~/components/Editor";
 import Input from "~/components/Input";
 import LabelIcon from "~/components/LabelIcon";
@@ -27,6 +29,7 @@ import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 
 type NewCardFormInput = NewCardInput & {
   isCreateAnotherEnabled: boolean;
+  dueDate?: Date | null;
 };
 
 interface QueryParams {
@@ -65,6 +68,7 @@ export function NewCardForm({
       memberPublicIds: [],
       isCreateAnotherEnabled: false,
       position: "start",
+      dueDate: null,
     },
     resetOnClose: true,
   });
@@ -80,6 +84,8 @@ export function NewCardForm({
   const position = watch("position");
   const title = watch("title");
   const description = watch("description");
+  const dueDate = watch("dueDate");
+  const [isDateSelectorOpen, setIsDateSelectorOpen] = useState(false);
 
   // saving form state whenever form values change
   useEffect(() => {
@@ -137,6 +143,7 @@ export function NewCardForm({
               title: args.title,
               listId: 2,
               description: "",
+              dueDate: args.dueDate ?? null,
               labels: oldBoard.labels.filter((label) =>
                 args.labelPublicIds.includes(label.publicId),
               ),
@@ -193,6 +200,7 @@ export function NewCardForm({
           memberPublicIds: [],
           isCreateAnotherEnabled,
           position,
+          dueDate: null,
         };
         reset(newFormState);
         saveFormState(newFormState);
@@ -242,7 +250,7 @@ export function NewCardForm({
       ),
     })) ?? [];
 
-  const onSubmit = (data: NewCardInput) => {
+  const onSubmit = (data: NewCardFormInput) => {
     createCard.mutate({
       title: data.title,
       description: data.description,
@@ -250,6 +258,7 @@ export function NewCardForm({
       labelPublicIds: data.labelPublicIds,
       memberPublicIds: data.memberPublicIds,
       position: data.position,
+      dueDate: data.dueDate ?? null,
     });
   };
 
@@ -447,6 +456,44 @@ export function NewCardForm({
                 )}
               </div>
             </CheckboxDropdown>
+          </div>
+          <div className="relative w-fit">
+            <button
+              type="button"
+              onClick={() => setIsDateSelectorOpen(!isDateSelectorOpen)}
+              className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500"
+            >
+              {dueDate ? (
+                <span>{format(dueDate, "MMM d, yyyy")}</span>
+              ) : (
+                <>{t`Due date`}</>
+              )}
+            </button>
+            {isDateSelectorOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-10"
+                  onClick={() => setIsDateSelectorOpen(false)}
+                />
+                <div
+                  className="absolute left-0 top-full z-20 mt-2 rounded-md border border-light-200 bg-light-50 shadow-lg dark:border-dark-200 dark:bg-dark-100"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                  onMouseDown={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  <DateSelector
+                    selectedDate={dueDate ?? undefined}
+                    onDateSelect={(date) => {
+                      setValue("dueDate", date ?? null);
+                      setIsDateSelectorOpen(false);
+                    }}
+                  />
+                </div>
+              </>
+            )}
           </div>
           <button
             onClick={(e) => {
