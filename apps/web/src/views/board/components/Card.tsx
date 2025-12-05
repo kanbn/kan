@@ -97,7 +97,7 @@ const Card = ({
                     "flex items-center gap-1",
                     isOverdue
                       ? "text-red-600 dark:text-red-400"
-                      : "text-light-700 dark:text-dark-800",
+                      : "text-light-800 dark:text-dark-800",
                   )}
                 >
                   <HiOutlineClock className="h-4 w-4" />
