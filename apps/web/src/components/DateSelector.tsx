@@ -75,11 +75,11 @@ const DateSelector = ({ selectedDate, onDateSelect }: DateSelectorProps) => {
 
   return (
     <div className="w-[250px] p-4">
-      <div className="flex items-center text-gray-900 dark:text-white">
+      <div className="flex items-center text-light-1000 dark:text-dark-1000">
         <button
           type="button"
           onClick={handlePreviousMonth}
-          className="flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-white"
+          className="flex flex-none items-center justify-center p-1.5 text-light-700 hover:text-light-900 dark:text-dark-700 dark:hover:text-dark-1000"
         >
           <span className="sr-only">Previous month</span>
           <HiChevronLeft aria-hidden="true" className="h-4 w-4" />
@@ -90,7 +90,7 @@ const DateSelector = ({ selectedDate, onDateSelect }: DateSelectorProps) => {
         <button
           type="button"
           onClick={handleNextMonth}
-          className="flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-white"
+          className="flex flex-none items-center justify-center p-1.5 text-light-700 hover:text-light-900 dark:text-dark-700 dark:hover:text-dark-1000"
         >
           <span className="sr-only">Next month</span>
           <HiChevronRight aria-hidden="true" className="h-4 w-4" />
@@ -110,8 +110,8 @@ const DateSelector = ({ selectedDate, onDateSelect }: DateSelectorProps) => {
             className={twMerge(
               "flex aspect-square items-center justify-center rounded-lg focus:z-10",
               day.isSelected
-                ? "bg-dark-1000 hover:bg-dark-1000 dark:bg-dark-1000 dark:hover:bg-dark-1000"
-                : "bg-light-100 hover:bg-light-200 dark:bg-dark-100 dark:hover:bg-dark-200",
+                ? "bg-light-1000 hover:bg-light-1000 dark:bg-dark-1000 dark:hover:bg-dark-1000"
+                : "bg-transparent hover:bg-light-200 dark:bg-transparent dark:hover:bg-dark-200",
             )}
           >
             <time
@@ -121,7 +121,7 @@ const DateSelector = ({ selectedDate, onDateSelect }: DateSelectorProps) => {
                 day.isCurrentMonth
                   ? "text-light-900 dark:text-dark-900"
                   : "text-light-700 dark:text-dark-600",
-                day.isSelected && "text-light-1000 dark:text-dark-50",
+                day.isSelected && "text-light-50 dark:text-dark-50",
               )}
             >
               {day.date.split("-").pop()?.replace(/^0/, "")}
