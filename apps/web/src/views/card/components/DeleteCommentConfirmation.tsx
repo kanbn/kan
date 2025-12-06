@@ -4,6 +4,7 @@ import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface DeleteCommentConfirmationProps {
   cardPublicId: string;
@@ -47,7 +48,7 @@ export function DeleteCommentConfirmation({
       });
     },
     onSettled: async () => {
-      await utils.card.byId.invalidate(queryParams);
+      await invalidateCard(utils, cardPublicId);
     },
   });
 

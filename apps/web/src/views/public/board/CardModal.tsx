@@ -161,7 +161,6 @@ export function CardModal({
                   {cardPublicId && (
                     <ActivityList
                       cardPublicId={cardPublicId}
-                      activities={data?.activities ?? []}
                       isLoading={isLoading}
                       isViewOnly={true}
                     />

@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, gt, inArray, isNull, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gt, inArray, isNull, lt, sql } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import {
@@ -943,4 +943,103 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
         workspaceVisibility: result.list.board.visibility,
       }
     : null;
+};
+
+export const getPaginatedActivities = async (
+  db: dbClient,
+  cardId: number,
+  options?: {
+    limit?: number;
+    cursor?: Date; // createdAt cursor for pagination
+  },
+) => {
+  const limit = options?.limit ?? 20;
+  const cursor = options?.cursor;
+
+  const activities = await db.query.cardActivities.findMany({
+    columns: {
+      publicId: true,
+      type: true,
+      createdAt: true,
+      fromIndex: true,
+      toIndex: true,
+      fromTitle: true,
+      toTitle: true,
+      fromDescription: true,
+      toDescription: true,
+    },
+    where: and(
+      eq(cardActivities.cardId, cardId),
+      cursor ? gt(cardActivities.createdAt, cursor) : undefined,
+    ),
+    with: {
+      fromList: {
+        columns: {
+          publicId: true,
+          name: true,
+          index: true,
+        },
+      },
+      toList: {
+        columns: {
+          publicId: true,
+          name: true,
+          index: true,
+        },
+      },
+      label: {
+        columns: {
+          publicId: true,
+          name: true,
+        },
+      },
+      member: {
+        columns: {
+          publicId: true,
+        },
+        with: {
+          user: {
+            columns: {
+              id: true,
+              name: true,
+              email: true,
+            },
+          },
+        },
+      },
+      user: {
+        columns: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      },
+      comment: {
+        columns: {
+          publicId: true,
+          comment: true,
+          createdBy: true,
+          updatedAt: true,
+          deletedAt: true,
+        },
+      },
+    },
+    orderBy: asc(cardActivities.createdAt), // required for merging and pagination
+    limit: limit + 1, // fetch one extra to check if there are more
+  });
+
+  const hasMore = activities.length > limit;
+  const items = activities.slice(0, limit);
+  const nextCursor = hasMore ? items[items.length - 1]?.createdAt : undefined;
+
+  // filtering out deleted comments
+  const filteredItems = items.filter(
+    (activity) => !activity.comment?.deletedAt,
+  );
+
+  return {
+    activities: filteredItems,
+    hasMore,
+    nextCursor,
+  };
 };
