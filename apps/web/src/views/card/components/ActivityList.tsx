@@ -2,6 +2,7 @@ import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { formatDistanceToNow } from "date-fns";
 import { de, enGB, es, fr, it, nl } from "date-fns/locale";
+import { useEffect, useRef, useState } from "react";
 import {
   HiOutlineArrowLeft,
   HiOutlineArrowRight,
@@ -19,6 +20,7 @@ import { authClient } from "@kan/auth/client";
 
 import Avatar from "~/components/Avatar";
 import { useLocalisation } from "~/hooks/useLocalisation";
+import { api } from "~/utils/api";
 import Comment from "./Comment";
 
 type ActivityType =
@@ -47,6 +49,8 @@ const getActivityText = ({
   isSelf,
   label,
   fromTitle,
+  mergeCount,
+  mergedLabels,
 }: {
   type: ActivityType;
   toTitle: string | null;
@@ -56,7 +60,37 @@ const getActivityText = ({
   isSelf: boolean;
   label: string | null;
   fromTitle?: string | null;
+  mergeCount?: number;
+  mergedLabels?: string[];
 }) => {
+  const TextHighlight = ({ children }: { children: React.ReactNode }) => (
+    <span className="font-medium text-light-1000 dark:text-dark-1000">
+      {children}
+    </span>
+  );
+
+  if (type === "card.updated.description" && mergeCount && mergeCount > 1) {
+    return t`updated the description ${mergeCount} times`;
+  }
+
+  if (type === "card.updated.label.added" && mergedLabels && mergedLabels.length > 1) {
+    const labelList = mergedLabels.join(", ");
+    return (
+      <Trans>
+        added {mergedLabels.length} labels: <TextHighlight>{labelList}</TextHighlight>
+      </Trans>
+    );
+  }
+
+  if (type === "card.updated.label.removed" && mergedLabels && mergedLabels.length > 1) {
+    const labelList = mergedLabels.join(", ");
+    return (
+      <Trans>
+        removed {mergedLabels.length} labels: <TextHighlight>{labelList}</TextHighlight>
+      </Trans>
+    );
+  }
+
   const ACTIVITY_TYPE_MAP = {
     "card.created": t`created the card`,
     "card.updated.title": t`updated the title`,
@@ -78,12 +112,6 @@ const getActivityText = ({
 
   if (!(type in ACTIVITY_TYPE_MAP)) return null;
   const baseText = ACTIVITY_TYPE_MAP[type as keyof typeof ACTIVITY_TYPE_MAP];
-
-  const TextHighlight = ({ children }: { children: React.ReactNode }) => (
-    <span className="font-medium text-light-1000 dark:text-dark-1000">
-      {children}
-    </span>
-  );
 
   if (type === "card.updated.title" && toTitle) {
     return (
@@ -246,36 +274,147 @@ const getActivityIcon = (
   return ACTIVITY_ICON_MAP[type] ?? null;
 };
 
+const ACTIVITIES_PAGE_SIZE = 20;
+
 const ActivityList = ({
-  activities,
   cardPublicId,
-  isLoading,
+  isLoading: cardIsLoading,
   isAdmin,
   isViewOnly,
 }: {
-  activities: NonNullable<GetCardByIdOutput>["activities"];
   cardPublicId: string;
   isLoading: boolean;
   isAdmin?: boolean;
   isViewOnly?: boolean;
 }) => {
-  const { data } = authClient.useSession();
+  const { data: sessionData } = authClient.useSession();
   const { locale } = useLocalisation();
+  const utils = api.useUtils();
+  const [allActivities, setAllActivities] = useState<
+    NonNullable<GetCardByIdOutput>["activities"]
+  >([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  const currentDateLocale = dateLocaleMap[locale] || enGB;
+  const isFullyExpandedRef = useRef(false);
+  const lastDataUpdatedAtRef = useRef<number | null>(null);
+
+  const { data: firstPageData, isFetching: isFetchingFirst, dataUpdatedAt } =
+    api.card.getActivities.useQuery(
+      {
+        cardPublicId,
+        limit: ACTIVITIES_PAGE_SIZE,
+      },
+      {
+        enabled: !!cardPublicId,
+      },
+    );
+
+  useEffect(() => {
+    if (firstPageData && dataUpdatedAt !== lastDataUpdatedAtRef.current) {
+      lastDataUpdatedAtRef.current = dataUpdatedAt;
+
+      if (isFullyExpandedRef.current && firstPageData.hasMore) {
+        setAllActivities(firstPageData.activities);
+        setHasMore(firstPageData.hasMore);
+
+        const fetchAllRemaining = async () => {
+          let currentActivities = [...firstPageData.activities];
+          let currentHasMore = firstPageData.hasMore;
+
+          while (currentHasMore) {
+            const lastActivity = currentActivities[currentActivities.length - 1];
+            if (!lastActivity) break;
+
+            const nextCursor = new Date(lastActivity.createdAt).toISOString();
+            const nextPage = await utils.card.getActivities.fetch({
+              cardPublicId,
+              limit: ACTIVITIES_PAGE_SIZE,
+              cursor: nextCursor,
+            });
+
+            if (nextPage) {
+              const existingIds = new Set(currentActivities.map((a) => a.publicId));
+              const newActivities = nextPage.activities.filter(
+                (a) => !existingIds.has(a.publicId),
+              );
+              currentActivities = [...currentActivities, ...newActivities];
+              currentHasMore = nextPage.hasMore;
+            } else {
+              break;
+            }
+          }
+
+          setAllActivities(currentActivities);
+          setHasMore(false);
+        };
+
+        fetchAllRemaining();
+      } else {
+        setAllActivities(firstPageData.activities);
+        setHasMore(firstPageData.hasMore);
+
+        if (!firstPageData.hasMore) {
+          isFullyExpandedRef.current = true;
+        }
+      }
+    }
+  }, [firstPageData, dataUpdatedAt, cardPublicId, utils.card.getActivities]);
+
+  const currentDateLocale =
+    (locale in dateLocaleMap
+      ? dateLocaleMap[locale as keyof typeof dateLocaleMap]
+      : null) || enGB;
+
+  const handleLoadMore = async () => {
+    if (isLoadingMore || !hasMore || allActivities.length === 0) return;
+
+    const lastActivity = allActivities[allActivities.length - 1];
+    if (!lastActivity) return;
+
+    setIsLoadingMore(true);
+    try {
+      const nextCursor = new Date(lastActivity.createdAt).toISOString();
+      const nextPage = await utils.card.getActivities.fetch({
+        cardPublicId,
+        limit: ACTIVITIES_PAGE_SIZE,
+        cursor: nextCursor,
+      });
+
+      if (nextPage) {
+        const existingIds = new Set(allActivities.map((a) => a.publicId));
+        const newActivities = nextPage.activities.filter(
+          (a) => !existingIds.has(a.publicId),
+        );
+        setAllActivities((prev) => [...prev, ...newActivities]);
+        setHasMore(nextPage.hasMore);
+
+        if (!nextPage.hasMore) {
+          isFullyExpandedRef.current = true;
+        }
+      }
+    } finally {
+      setIsLoadingMore(false);
+    }
+  };
+
+  const isFetching = isFetchingFirst || isLoadingMore;
+  const isLoading = cardIsLoading || (isFetchingFirst && allActivities.length === 0);
 
   return (
     <div className="flex flex-col space-y-4 pt-4">
-      {activities.map((activity, index) => {
+      {allActivities.map((activity, index) => {
         const activityText = getActivityText({
           type: activity.type,
           toTitle: activity.toTitle,
           fromList: activity.fromList?.name ?? null,
           toList: activity.toList?.name ?? null,
           memberName: activity.member?.user?.name ?? null,
-          isSelf: activity.member?.user?.id === data?.user.id,
+          isSelf: activity.member?.user?.id === sessionData?.user.id,
           label: activity.label?.name ?? null,
           fromTitle: activity.fromTitle ?? null,
+          mergeCount: (activity as any).mergeCount,
+          mergedLabels: (activity as any).mergedLabels,
         });
 
         if (activity.type === "card.updated.comment.added")
@@ -290,7 +429,7 @@ const ActivityList = ({
               createdAt={activity.createdAt.toISOString()}
               comment={activity.comment?.comment}
               isEdited={!!activity.comment?.updatedAt}
-              isAuthor={activity.comment?.createdBy === data?.user.id}
+              isAuthor={activity.comment?.createdBy === sessionData?.user.id}
               isAdmin={isAdmin ?? false}
               isViewOnly={!!isViewOnly}
             />
@@ -315,11 +454,9 @@ const ActivityList = ({
                 )}
                 isLoading={isLoading}
               />
-              {index !== activities.length - 1 &&
-                activities[index + 1]?.type !==
-                  "card.updated.comment.added" && (
-                  <div className="absolute bottom-[-14px] left-1/2 top-[30px] w-0.5 -translate-x-1/2 bg-light-600 dark:bg-dark-600" />
-                )}
+              {index !== allActivities.length - 1 && (
+                <div className="absolute bottom-[-14px] left-1/2 top-[30px] w-0.5 -translate-x-1/2 bg-light-600 dark:bg-dark-600" />
+              )}
             </div>
             <p className="text-sm">
               <span className="font-medium dark:text-dark-1000">{`${activity.user?.name} `}</span>
@@ -337,6 +474,17 @@ const ActivityList = ({
           </div>
         );
       })}
+      {hasMore && (
+        <div className="flex justify-center pt-4">
+          <button
+            onClick={handleLoadMore}
+            disabled={isFetching}
+            className="text-sm font-medium text-light-900 hover:text-light-1000 disabled:opacity-50 dark:text-dark-800 dark:hover:text-dark-1000"
+          >
+            {isFetching ? t`Loading...` : t`Load more activities`}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

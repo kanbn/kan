@@ -6,6 +6,7 @@ import { HiOutlineArrowUp } from "react-icons/hi2";
 import LoadingSpinner from "~/components/LoadingSpinner";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface FormValues {
   comment: string;
@@ -34,10 +35,7 @@ const NewCommentForm = ({ cardPublicId }: { cardPublicId: string }) => {
     },
     onSettled: async () => {
       reset();
-      await utils.card.byId.invalidate(queryParams);
-    },
-    onSuccess: async () => {
-      await utils.card.byId.refetch();
+      await invalidateCard(utils, cardPublicId);
     },
   });
 

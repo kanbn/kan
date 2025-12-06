@@ -4,6 +4,7 @@ import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
 
 export function DeleteChecklistConfirmation({
   cardPublicId,
@@ -40,7 +41,7 @@ export function DeleteChecklistConfirmation({
     },
     onSettled: async () => {
       closeModal();
-      await utils.card.byId.invalidate({ cardPublicId });
+      await invalidateCard(utils, cardPublicId);
     },
   });
 
