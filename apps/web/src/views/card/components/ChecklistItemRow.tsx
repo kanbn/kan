@@ -8,6 +8,7 @@ import { twMerge } from "tailwind-merge";
 
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface ChecklistItemRowProps {
   item: {
@@ -68,7 +69,7 @@ export default function ChecklistItemRow({
       });
     },
     onSettled: async () => {
-      await utils.card.byId.invalidate({ cardPublicId });
+      await invalidateCard(utils, cardPublicId);
     },
   });
 
@@ -96,7 +97,7 @@ export default function ChecklistItemRow({
       });
     },
     onSettled: async () => {
-      await utils.card.byId.invalidate({ cardPublicId });
+      await invalidateCard(utils, cardPublicId);
     },
   });
 
