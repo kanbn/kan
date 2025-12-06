@@ -1,7 +1,8 @@
+import type { DraggableProvided } from "react-beautiful-dnd";
 import { t } from "@lingui/core/macro";
 import { useEffect, useState } from "react";
 import ContentEditable from "react-contenteditable";
-import { HiXMark } from "react-icons/hi2";
+import { HiOutlineBars3, HiXMark } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
 import { usePopup } from "~/providers/popup";
@@ -15,12 +16,16 @@ interface ChecklistItemRowProps {
   };
   cardPublicId: string;
   viewOnly?: boolean;
+  dragHandleProps?: DraggableProvided["dragHandleProps"];
+  isDragging?: boolean;
 }
 
 export default function ChecklistItemRow({
   item,
   cardPublicId,
   viewOnly = false,
+  dragHandleProps,
+  isDragging = false,
 }: ChecklistItemRowProps) {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
@@ -138,7 +143,23 @@ export default function ChecklistItemRow({
   };
 
   return (
-    <div className="group relative flex items-start gap-3 rounded-md py-2 pl-4 hover:bg-light-100 dark:hover:bg-dark-100">
+    <div
+      className={twMerge(
+        "group relative flex items-start gap-3 rounded-md py-2 pl-4 hover:bg-light-100 dark:hover:bg-dark-100",
+        isDragging && "opacity-80",
+      )}
+    >
+      {!viewOnly && (
+        <div
+          {...dragHandleProps}
+          className="mt-[2px] flex h-[20px] w-[20px] flex-shrink-0 cursor-grab items-center justify-center opacity-0 transition-opacity group-hover:opacity-75 hover:opacity-100 active:cursor-grabbing"
+        >
+          <HiOutlineBars3 className="h-4 w-4 text-light-700 dark:text-dark-700" />
+        </div>
+      )}
+
+      {viewOnly && <div className="w-[20px] flex-shrink-0" />}
+
       <label
         className={`relative mt-[2px] inline-flex h-[16px] w-[16px] flex-shrink-0 items-center justify-center`}
       >
