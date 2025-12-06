@@ -1,4 +1,6 @@
+import type { Locale as DateFnsLocale } from "date-fns";
 import { useLingui } from "@lingui/react";
+import { de, enGB, es, fr, it, nl, pl, ru } from "date-fns/locale";
 
 import type { Locale } from "~/locales";
 import { useLinguiContext } from "~/providers/lingui";
@@ -8,6 +10,19 @@ export function useLocalisation() {
   const { i18n } = useLingui();
   const { locale, setLocale, availableLocales } = useLinguiContext();
 
+  const dateLocaleMap: Partial<Record<Locale, DateFnsLocale>> = {
+    en: enGB,
+    fr,
+    de,
+    es,
+    it,
+    nl,
+    ru,
+    pl,
+  };
+
+  const currentDateLocale = dateLocaleMap[locale] ?? enGB;
+
   const handleSetLocale = async (newLocale: Locale) => {
     await activateLocale(newLocale);
     setLocale(newLocale);
@@ -15,9 +30,9 @@ export function useLocalisation() {
 
   return {
     locale,
+    dateLocale: currentDateLocale,
     setLocale: handleSetLocale,
     availableLocales,
-    formatDate: i18n.date,
     formatNumber: i18n.number,
   };
 }

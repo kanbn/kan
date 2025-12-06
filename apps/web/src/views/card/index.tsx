@@ -28,6 +28,7 @@ import { DeleteCardConfirmation } from "./components/DeleteCardConfirmation";
 import { DeleteChecklistConfirmation } from "./components/DeleteChecklistConfirmation";
 import { DeleteCommentConfirmation } from "./components/DeleteCommentConfirmation";
 import Dropdown from "./components/Dropdown";
+import { DueDateSelector } from "./components/DueDateSelector";
 import LabelSelector from "./components/LabelSelector";
 import ListSelector from "./components/ListSelector";
 import MemberSelector from "./components/MemberSelector";
@@ -125,7 +126,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
         />
       </div>
       {!isTemplate && (
-        <div className="flex w-full flex-row">
+        <div className="mb-4 flex w-full flex-row">
           <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Members`}</p>
           <MemberSelector
             cardPublicId={cardId ?? ""}
@@ -134,6 +135,14 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           />
         </div>
       )}
+      <div className="mb-4 flex w-full flex-row">
+        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Due date`}</p>
+        <DueDateSelector
+          cardPublicId={cardId ?? ""}
+          dueDate={card?.dueDate}
+          isLoading={!card}
+        />
+      </div>
     </div>
   );
 }
@@ -148,6 +157,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     getModalState,
     clearModalState,
     isOpen,
+    modalStates,
   } = useModal();
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
@@ -183,6 +193,21 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     },
   });
 
+  const addOrRemoveLabel = api.card.addOrRemoveLabel.useMutation({
+    onError: () => {
+      showPopup({
+        header: t`Unable to add label`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
+    },
+    onSettled: async () => {
+      if (cardId) {
+        await utils.card.byId.invalidate({ cardPublicId: cardId });
+      }
+    },
+  });
+
   const { register, handleSubmit, setValue, watch } = useForm<FormValues>({
     values: {
       cardId: cardId ?? "",
@@ -198,6 +223,24 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
       description: values.description,
     });
   };
+
+  // this adds the new created label to selected labels
+  useEffect(() => {
+    const newLabelId = modalStates.NEW_LABEL_CREATED;
+    if (newLabelId && cardId) {
+      const isAlreadyAdded = card?.labels.some(
+        (label) => label.publicId === newLabelId,
+      );
+
+      if (!isAlreadyAdded) {
+        addOrRemoveLabel.mutate({
+          cardPublicId: cardId,
+          labelPublicId: newLabelId,
+        });
+      }
+      clearModalState("NEW_LABEL_CREATED");
+    }
+  }, [modalStates.NEW_LABEL_CREATED, card, cardId]);
 
   // Open the new item form after creating a new checklist
   useEffect(() => {

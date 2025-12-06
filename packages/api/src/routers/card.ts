@@ -33,6 +33,7 @@ export const cardRouter = createTRPCRouter({
         labelPublicIds: z.array(z.string().min(12)),
         memberPublicIds: z.array(z.string().min(12)),
         position: z.enum(["start", "end"]),
+        dueDate: z.date().nullable().optional(),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof cardRepo.create>>>())
@@ -70,6 +71,7 @@ export const cardRouter = createTRPCRouter({
         createdBy: userId,
         listId: list.id,
         position: input.position,
+        dueDate: input.dueDate ?? null,
       });
 
       const newCardId = newCard.id;
@@ -761,6 +763,7 @@ export const cardRouter = createTRPCRouter({
         description: z.string().optional(),
         index: z.number().optional(),
         listPublicId: z.string().min(12).optional(),
+        dueDate: z.date().nullable().optional(),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof cardRepo.update>>>())
@@ -821,15 +824,19 @@ export const cardRouter = createTRPCRouter({
             title: string;
             description: string | null;
             publicId: string;
+            dueDate: Date | null;
           }
         | undefined;
 
-      if (input.title || input.description) {
+      const previousDueDate = existingCard.dueDate;
+
+      if (input.title || input.description || input.dueDate !== undefined) {
         result = await cardRepo.update(
           ctx.db,
           {
             ...(input.title && { title: input.title }),
             ...(input.description && { description: input.description }),
+            ...(input.dueDate !== undefined && { dueDate: input.dueDate }),
           },
           { cardPublicId: input.cardPublicId },
         );
@@ -868,6 +875,32 @@ export const cardRouter = createTRPCRouter({
           createdBy: userId,
           fromDescription: existingCard.description ?? undefined,
           toDescription: input.description,
+        });
+      }
+
+      if (
+        input.dueDate !== undefined &&
+        previousDueDate?.getTime() !== input.dueDate?.getTime()
+      ) {
+        let activityType:
+          | "card.updated.dueDate.added"
+          | "card.updated.dueDate.updated"
+          | "card.updated.dueDate.removed";
+
+        if (!previousDueDate) {
+          activityType = "card.updated.dueDate.added";
+        } else if (!input.dueDate) {
+          activityType = "card.updated.dueDate.removed";
+        } else {
+          activityType = "card.updated.dueDate.updated";
+        }
+
+        activities.push({
+          type: activityType,
+          cardId: result.id,
+          createdBy: userId,
+          fromDueDate: previousDueDate ?? undefined,
+          toDueDate: input.dueDate ?? undefined,
         });
       }
 

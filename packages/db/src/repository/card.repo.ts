@@ -23,6 +23,7 @@ export const create = async (
     createdBy: string;
     listId: number;
     position: "start" | "end";
+    dueDate?: Date | null;
   },
 ) => {
   return db.transaction(async (tx) => {
@@ -71,6 +72,7 @@ export const create = async (
         createdBy: cardInput.createdBy,
         listId: cardInput.listId,
         index: index,
+        dueDate: cardInput.dueDate ?? null,
       })
       .returning({ id: cards.id, listId: cards.listId });
 
@@ -163,6 +165,7 @@ export const update = async (
   cardInput: {
     title?: string;
     description?: string;
+    dueDate?: Date | null;
   },
   args: {
     cardPublicId: string;
@@ -173,6 +176,8 @@ export const update = async (
     .set({
       title: cardInput.title,
       description: cardInput.description,
+      dueDate: cardInput.dueDate !== undefined ? cardInput.dueDate : undefined,
+      updatedAt: new Date(),
     })
     .where(and(eq(cards.publicId, args.cardPublicId), isNull(cards.deletedAt)))
     .returning({
@@ -180,6 +185,7 @@ export const update = async (
       publicId: cards.publicId,
       title: cards.title,
       description: cards.description,
+      dueDate: cards.dueDate,
     });
 
   return result;
@@ -214,6 +220,7 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
       title: true,
       description: true,
       listId: true,
+      dueDate: true,
     },
     where: eq(cards.publicId, cardPublicId),
   });
@@ -397,6 +404,7 @@ export const getWithListAndMembersByPublicId = async (
       publicId: true,
       title: true,
       description: true,
+      dueDate: true,
     },
     with: {
       labels: {
@@ -531,6 +539,8 @@ export const getWithListAndMembersByPublicId = async (
           toTitle: true,
           fromDescription: true,
           toDescription: true,
+          fromDueDate: true,
+          toDueDate: true,
         },
         with: {
           fromList: {
@@ -780,6 +790,7 @@ export const reorder = async (
         publicId: true,
         title: true,
         description: true,
+        dueDate: true,
       },
       where: eq(cards.id, card.id),
     });

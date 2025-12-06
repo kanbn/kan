@@ -44,6 +44,9 @@ export const activityTypes = [
   "card.updated.checklist.item.deleted",
   "card.updated.attachment.added",
   "card.updated.attachment.removed",
+  "card.updated.dueDate.added",
+  "card.updated.dueDate.updated",
+  "card.updated.dueDate.removed",
   "card.archived",
 ] as const;
 
@@ -70,6 +73,7 @@ export const cards = pgTable("card", {
     .notNull()
     .references(() => lists.id, { onDelete: "cascade" }),
   importId: bigint("importId", { mode: "number" }).references(() => imports.id),
+  dueDate: timestamp("dueDate"),
 }).enableRLS();
 
 export const cardsRelations = relations(cards, ({ one, many }) => ({
@@ -137,6 +141,8 @@ export const cardActivities = pgTable("card_activity", {
   ),
   fromComment: text("fromComment"),
   toComment: text("toComment"),
+  fromDueDate: timestamp("fromDueDate"),
+  toDueDate: timestamp("toDueDate"),
   sourceBoardId: bigint("sourceBoardId", { mode: "number" }).references(
     () => boards.id,
     { onDelete: "set null" },

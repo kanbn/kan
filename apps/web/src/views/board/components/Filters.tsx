@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import {
   HiMiniXMark,
+  HiOutlineClock,
   HiOutlineSquare3Stack3D,
   HiOutlineTag,
   HiOutlineUserCircle,
@@ -60,7 +61,13 @@ const Filters = ({
     try {
       await router.push({
         pathname: router.pathname,
-        query: { ...router.query, members: [], labels: [], lists: [] },
+        query: {
+          ...router.query,
+          members: [],
+          labels: [],
+          lists: [],
+          dueDate: [],
+        },
       });
     } catch (error) {
       console.error(error);
@@ -99,6 +106,39 @@ const Filters = ({
     selected: !!router.query.lists?.includes(list.publicId),
   }));
 
+  const dueDateItems = [
+    {
+      key: "overdue",
+      value: t`Overdue`,
+      selected: !!router.query.dueDate?.includes("overdue"),
+    },
+    {
+      key: "today",
+      value: t`Due today`,
+      selected: !!router.query.dueDate?.includes("today"),
+    },
+    {
+      key: "tomorrow",
+      value: t`Due tomorrow`,
+      selected: !!router.query.dueDate?.includes("tomorrow"),
+    },
+    {
+      key: "next-week",
+      value: t`Due next week`,
+      selected: !!router.query.dueDate?.includes("next-week"),
+    },
+    {
+      key: "next-month",
+      value: t`Due next month`,
+      selected: !!router.query.dueDate?.includes("next-month"),
+    },
+    {
+      key: "no-due-date",
+      value: t`No dates`,
+      selected: !!router.query.dueDate?.includes("no-due-date"),
+    },
+  ];
+
   const groups = [
     ...(formattedMembers.length
       ? [
@@ -126,6 +166,12 @@ const Filters = ({
           },
         ]
       : []),
+    {
+      key: "dueDate",
+      label: t`Due date`,
+      icon: <HiOutlineClock size={16} />,
+      items: dueDateItems,
+    },
   ];
 
   const handleSelect = async (
@@ -156,6 +202,7 @@ const Filters = ({
     ...formatToArray(router.query.members),
     ...formatToArray(router.query.labels),
     ...formatToArray(router.query.lists),
+    ...formatToArray(router.query.dueDate),
   ].length;
 
   return (

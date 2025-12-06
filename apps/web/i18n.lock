@@ -15,6 +15,7 @@ checksums:
     A%20powerful%2C%20flexible%20kanban%20app%20that%20helps%20you%20organise%20work%2C%20track%20progress%2C%20and%20deliver%20results%E2%80%94all%20in%20one%20place./singular: d405b83b0d631cb72f4347c10bcbb643
     Account/singular: 01215c12fb1cdb93bd0c84c1382bef56
     Account%20deleted/singular: a25da96a1579c4491be0a95669ef18a4
+    Actions/singular: c46571856723b03262fd33f511116298
     Activity/singular: 1948763de8e531483a798b68195e297e
     Activity%20log/singular: 3ec6755040306fdc9ce801bcf6ab28e1
     Activity%20logs/singular: 8b1f0bb96a905646ecfad1cfdfa42168
@@ -91,6 +92,7 @@ checksums:
     Card%20title/singular: 7c34f59f4005e6cb3a6ff546ea0b96e3
     Change%20Password/singular: a552fc5c4189ebc3e2e6018edda7d18f
     Change%20your%20language%20preferences./singular: 293d49fc3c75e9c425b64bd7126e6b46
+    changed%20the%20due%20date%20to%20%3C0%3E%7BformattedDate%7D%3C%2F0%3E/singular: 32189aa87452ab18f90f02742bfa9910
     Check%20out%20some%20of%20our%20favorite%20open%20source%20projects./singular: b0d0be4f63c16552b3aa795af29240d1
     Check%20your%20inbox/singular: e9a430fcd298def74212238df0f680d6
     Checklist%20name/singular: 5eb5de823f7ca5a4d97bb41e6a3f675a
@@ -175,6 +177,11 @@ checksums:
     Don't%20have%20an%20account%3F%20%3C0%3E%3C1%3ESign%20up%3C%2F1%3E%3C%2F0%3E/singular: 6ae8282ab8b4a01b4ce87b119e13714b
     Done/singular: ffd408fa29d5bc9039ef8ea1b9b699bb
     Download%20failed/singular: 142b391cca3e05f2af9617092f7358c5
+    Due%20date/singular: b098b52aff38516c5838c2ac4419f958
+    Due%20next%20month/singular: 223ab6f1211e1dfdf39ea68d25fe380b
+    Due%20next%20week/singular: 2f8fac5719df18d25a466ee913dc6487
+    Due%20today/singular: a14cb9dd0003485894d328bb803c80e5
+    Due%20tomorrow/singular: 0b6c8ad7aba0873b7e212d5f1949ca97
     Edit%20board%20URL/singular: d8276dfc0189f371ec7d80a2047c07aa
     Edit%20comment/singular: 7e4b46525fcb6b47b71798e31c46e374
     Edit%20label/singular: 0309e0be1512b1e0b0ceb87c69a53d03
@@ -231,6 +238,7 @@ checksums:
     Free%2C%20forever/singular: ae4f2f81e88a50b5f250ef8e8e77e74b
     Full-time/singular: fe6e201f6676ae354111435cf6c76910
     Fun/singular: 395bdc48e943762b6cde649f4a96771d
+    General/singular: b891e8f15579fc5d97bcaf3637f5ae59
     Get%20started/singular: 5c783951b0100a168bdd2161ff294833
     Get%20Started/singular: 1d5f030c4ec9c869e647ae060518b948
     Get%20started%20by%20creating%20a%20new%20%7B0%7D/singular: 4ca5ef637c08104e9dbb5ff9f49f0680
@@ -242,6 +250,10 @@ checksums:
     GitHub/singular: 6e1cf3c00fa6fbe24afcc78ea3b5f3e4
     Go%20Home/singular: 6251589da1964d55afabdfd64c84c335
     Go%20to%20app/singular: 896d0441384dcd2bfb3b23d61ff1944d
+    Go%20to%20boards/singular: dc1362de207d67fe84fb0caf60262e73
+    Go%20to%20members/singular: 445f4efbc4b1e7509f4fd79ebfbb1476
+    Go%20to%20settings/singular: 24a7f96880650c9b37099d69f4b7e2a9
+    Go%20to%20templates/singular: e4e58e33d637282d141df466d729bc7c
     High%20Priority/singular: 5d231ff8254aabc875f194c4b4f49c97
     Hired/singular: e5a9b1bd409b007141fe3d7890022f9a
     Host%20Kan%20on%20your%20own%20infrastructure.%20Ideal%20for%20organisations%20that%20need%20complete%20control%20over%20their%20data./singular: 8e7ae0783d60ef4624d3caf9bfc3747f
@@ -285,6 +297,7 @@ checksums:
     Kanban%20is%20better%20with%20a%20team.%20Perfect%20for%20small%20and%20growing%20teams%20looking%20to%20collaborate./singular: a77bee43046b260797c8936ad23e9223
     Kanban%20reimagined/singular: 613ccfdd9f54c66cbf68cfa313498766
     Keep%20in%20mind%20that%20this%20action%20is%20irreversible./singular: 79702b2ad3be71cb8b87f1122a60c199
+    Keyboard%20Shortcuts/singular: ef00d7494b69def6841620bd6554d040
     Labels/singular: 6f15627a90002323eac018274b6922d6
     Labels%20%26%20filters/singular: e1ceda0c6cc32fb04cb9423582ad8fe4
     Labels%20%26%20Filters/singular: 8f0bdd6084516f8241cb613178114390
@@ -318,6 +331,7 @@ checksums:
     moved%20the%20card%20from%20%3C0%3E%7B0%7D%3C%2F0%3E%20to%3C1%3E%7B1%7D%3C%2F1%3E/singular: 11edf0427766c26db541d46379dc3c16
     moved%20the%20card%20to%20another%20list/singular: 2e8c41bfafb42fa299ce56e4300205ff
     Name/singular: 9368b5a047572b6051f334af5aa76819
+    Navigation/singular: 0373afd8238db1c49f4be4fa6cdf5cd3
     Need%20help%3F/singular: 04e7322f2d3ffb2d73ff2f64b71637c8
     New/singular: 126d036fae5fb6b629728ecb97e6195b
     New%20%7B0%7D/singular: 67b6a22a65e0956f2091d00e6966652b
@@ -338,18 +352,23 @@ checksums:
     No%20authentication%20methods%20are%20currently%20available/singular: f718c896810da3612202887f9a4374fa
     No%20boards%20found/singular: e044088d2c51b6bdf660fafa86ee1e17
     No%20credit%20card%20required/singular: 2090aa4171dc0b60735069f89b592883
+    No%20dates/singular: bd0ec82b3b1f4a5fa89d362b71f8141d
     No%20download%20URL%20available%20for%20this%20attachment./singular: e367d39420b2242f9d2fd749c87f446a
+    No%20keyboard%20shortcuts%20registered./singular: 7f1ed5d777cade7d62303e9e591bbf63
     No%20lists/singular: cedf633d99c77ff4356e089f2d98c0a6
     No%20results%20found%20for%20%22%7BdebouncedQuery%7D%22./singular: 5db6294712528cd897b15ae36f4fd834
     Offer/singular: 82b4e0c9a3f5b4bd93590847de7c32a1
     Onboarding/singular: 52b23f9c62ff199d4c09920e7641829e
     Once%20you%20delete%20your%20account%2C%20there%20is%20no%20going%20back.%20This%20action%20cannot%20be%20undone./singular: 9cf7aa6ef30890e5124e266c081bae1c
     Once%20you%20delete%20your%20workspace%2C%20there%20is%20no%20going%20back.%20This%20action%20cannot%20be%20undone./singular: c9ce6a516ed1f361653e8f8db3dd5ffd
+    Open%20command%20menu/singular: cf00563ea1a994e7c36a761d56664acc
+    Open%20keyboard%20shortcuts/singular: 638ae0999fd03d2c611064274859422e
     Open%20source/singular: 81a747dc664de1a3389b495c8f84843b
     Open%20Source%20Friends/singular: ffe3d75e5d03b8469c9dcb019dceb164
     or/singular: 7b133c38bec0d5ee23cc6bcf9a8de50b
     Organize%20and%20find%20cards%20quickly%20with%20powerful%20filtering%20tools./singular: 1b9898c4b21e9dff413b4f76dc59db56
     OSS%20Friends/singular: 706e10666dfe26130c17fedb5366a25d
+    Overdue/singular: 24caaa2b5d7a2447ab7664e3771cf98c
     Own%20your%20data/singular: cc2178dac4bdf6b07f030cfc2a7510e6
     Owned%20by%20Atlassian/singular: ace4ed076a5318ad48c296fa09afed69
     Part-time/singular: 213d63da450f35dabb3ab0e35e29feed
@@ -393,6 +412,7 @@ checksums:
     removed%20a%20label%20from%20the%20card/singular: f83ec18850a2a8a3f8242a740a04df06
     removed%20a%20member%20from%20the%20card/singular: 0bd7561bb79358fde3d595c3e60a315a
     removed%20label%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: 7e0936b15831e65754588b8512f62fcb
+    removed%20the%20due%20date/singular: 000c084844718540fcad542dd8caf8b4
     renamed%20a%20checklist/singular: 4d208de1857740e63469007c5b8b491a
     renamed%20checklist%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: e95d119ef65b0af6c0a96bef182be671
     renamed%20checklist%20item%20to%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: 50f55f71f9245890afee434d7adc2140
@@ -417,12 +437,15 @@ checksums:
     Self-hostable/singular: 3e3597145cc17f03b8b5646b80d59592
     Send%20feedback/singular: 9631cc08d49da04475b30a0d320ce97c
     Senior/singular: 3fff865dc00435f82896fc302ea45630
+    Set%20due%20date/singular: 3cb81c4829857556f5d117c9a23f7bcc
+    set%20the%20due%20date/singular: b5d9a1edd988f455041aee9fa7fb3d63
     Settings/singular: 8df6777277469c1fd88cc18dde2f1cc3
     Settings%20%7C%20Account/singular: 050e18406849ec057edac877c297c3e1
     Settings%20%7C%20API/singular: 85101e4b802a09ad9e3f01ff116f0894
     Settings%20%7C%20Billing/singular: e44cba741d5414035a0b499c5766c203
     Settings%20%7C%20Integrations/singular: d04992e28016452f6d3d7dcc0b592415
     Settings%20%7C%20Workspace/singular: 5d0bacf7ff696da940f232df45edfd39
+    Shortcuts/singular: db3330ed3240c398054f3be23c52851f
     Sign%20in/singular: cb8757c7450e17de1e226e82fb0fa4a2
     Sign%20In/singular: ec7b8f314fe9bc6591006707484ede61
     Sign%20Up/singular: 0dd2ae69be4618c1f9e615774a4509ca
@@ -497,6 +520,7 @@ checksums:
     Unable%20to%20update%20checklist/singular: 44c10f49f448909ceca481ed9b4b07e7
     Unable%20to%20update%20checklist%20item/singular: 5c86b3523531c30d58856e3ecde0cb55
     Unable%20to%20update%20comment/singular: 05e798ed6b0f3fee41f3e8832eb699ea
+    Unable%20to%20update%20due%20date/singular: af20d7482cb639a8c8264c681a18abed
     Unable%20to%20update%20labels/singular: dca2bdc3dcf74bc9d95e05156039a291
     Unable%20to%20update%20list/singular: 14aa802f91b9b4c05236c8c75afb33da
     Unable%20to%20update%20members/singular: 9a851a6b0c75ee16d25cf2ff4b67b255
@@ -515,6 +539,7 @@ checksums:
     Update%20label/singular: 97880b503dfe956941c5f23025a1c102
     updated%20a%20checklist%20item/singular: 198e1d1d503f4b69b752dd84d0cc0e9d
     updated%20the%20description/singular: 70fd604b6dc957a75be90ea77572d76d
+    updated%20the%20due%20date/singular: 7636c200d50fed58a4295ed1e9b5c1e0
     updated%20the%20title/singular: 98cf8f12923ec1a58e767e3a40863b21
     updated%20the%20title%20to%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: aca196d729401d8adc5c8ca9d558840e
     Upgrade%20to%20Pro/singular: 972773025e763ddf53273df6d37a729a

@@ -141,6 +141,13 @@
       "when": 1762807463569,
       "tag": "20251110204423_AddCardAttachments",
       "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1764621815672,
+      "tag": "20251201204335_AddCardDueDates",
+      "breakpoints": true
     }
   ]
 }
