@@ -1,5 +1,18 @@
 # Changelog
 
+``` yaml
+Kan Portuguese version. If you adjust anything, remember to run:
+docker build -f apps/web/Dockerfile -t jovaniojunior/kan-ptbr:latest .
+docker push jovaniojunior/kan-ptbr:latest
+
+Until the Portuguese version is available on the official website, I use it for Umbrel on my Docker Hub:
+docker.io/jovaniojunior/kan-ptbr:latest
+https://hub.docker.com/r/jovaniojunior/kan-ptbr/tags
+docker pull jovaniojunior/kan-ptbr:latest
+```
+
+
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
