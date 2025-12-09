@@ -31,7 +31,7 @@ msgstr "{0}"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
 #: src/views/boards/index.tsx:33
-#: src/views/card/index.tsx:238
+#: src/views/card/index.tsx:272
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
@@ -83,7 +83,7 @@ msgstr "Account eliminato"
 msgid "Actions"
 msgstr "Azioni"
 
-#: src/views/card/index.tsx:352
+#: src/views/card/index.tsx:386
 #: src/views/public/board/CardModal.tsx:158
 msgid "Activity"
 msgstr "Attività"
@@ -313,7 +313,7 @@ msgid "Blog Post"
 msgstr "Post del blog"
 
 #: src/views/board/index.tsx:386
-#: src/views/card/index.tsx:238
+#: src/views/card/index.tsx:272
 #: src/views/public/board/index.tsx:113
 msgid "Board"
 msgstr "Bacheca"
@@ -395,12 +395,12 @@ msgstr "Segnalazione bug"
 msgid "Cancel"
 msgstr "Annulla"
 
-#: src/views/card/index.tsx:238
+#: src/views/card/index.tsx:272
 msgid "Card"
 msgstr "Carta"
 
-#: src/views/card/index.tsx:272
-#: src/views/card/index.tsx:308
+#: src/views/card/index.tsx:306
+#: src/views/card/index.tsx:342
 msgid "Card not found"
 msgstr "Carta non trovata"
 
@@ -1042,6 +1042,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Per la sostenibilità a lungo termine, riconosciamo che tutti i buoni progetti open source necessitano di una fonte di entrate. La nostra proviene dall'offerta cloud a pagamento per gli spazi di lavoro con più utenti e per gli slug personalizzati degli spazi di lavoro. Non c'è alcun obbligo di utilizzarla, e puoi ospitare autonomamente il software sulla tua infrastruttura gratuitamente."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratuito"
@@ -1737,7 +1739,8 @@ msgstr "Seleziona un file da caricare."
 #: src/views/card/components/NewChecklistForm.tsx:70
 #: src/views/card/components/NewChecklistItemForm.tsx:89
 #: src/views/card/components/NewCommentForm.tsx:31
-#: src/views/card/index.tsx:186
+#: src/views/card/index.tsx:187
+#: src/views/card/index.tsx:200
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:104
 #: src/views/members/components/InviteMemberForm.tsx:241
@@ -2236,6 +2239,10 @@ msgstr "Impossibile aggiungere l'elemento della checklist"
 msgid "Unable to add comment"
 msgstr "Impossibile aggiungere il commento"
 
+#: src/views/card/index.tsx:199
+msgid "Unable to add label"
+msgstr ""
+
 #: src/views/board/components/NewCardForm.tsx:181
 msgid "Unable to create card"
 msgstr "Impossibile creare la scheda"
@@ -2294,7 +2301,7 @@ msgid "Unable to update board visibility"
 msgstr "Impossibile aggiornare la visibilità della bacheca"
 
 #: src/views/board/index.tsx:229
-#: src/views/card/index.tsx:185
+#: src/views/card/index.tsx:186
 msgid "Unable to update card"
 msgstr "Impossibile aggiornare la scheda"
 

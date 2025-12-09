@@ -31,7 +31,7 @@ msgstr "{0}"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
 #: src/views/boards/index.tsx:33
-#: src/views/card/index.tsx:238
+#: src/views/card/index.tsx:272
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
@@ -95,7 +95,7 @@ msgstr "A conta foi excluída"
 msgid "Actions"
 msgstr "Ações"
 
-#: src/views/card/index.tsx:352
+#: src/views/card/index.tsx:386
 #: src/views/public/board/CardModal.tsx:158
 msgid "Activity"
 msgstr "Atividade"
@@ -353,7 +353,7 @@ msgid "Blog Post"
 msgstr "Post de blog"
 
 #: src/views/board/index.tsx:386
-#: src/views/card/index.tsx:238
+#: src/views/card/index.tsx:272
 #: src/views/public/board/index.tsx:113
 msgid "Board"
 msgstr "Quadro"
@@ -452,12 +452,12 @@ msgstr "Relatório de bug"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/views/card/index.tsx:238
+#: src/views/card/index.tsx:272
 msgid "Card"
 msgstr "Cartão"
 
-#: src/views/card/index.tsx:272
-#: src/views/card/index.tsx:308
+#: src/views/card/index.tsx:306
+#: src/views/card/index.tsx:342
 msgid "Card not found"
 msgstr "Cartão não encontrado"
 
@@ -1868,7 +1868,8 @@ msgstr "Selecione um arquivo para enviar."
 #: src/views/card/components/NewChecklistForm.tsx:70
 #: src/views/card/components/NewChecklistItemForm.tsx:89
 #: src/views/card/components/NewCommentForm.tsx:31
-#: src/views/card/index.tsx:186
+#: src/views/card/index.tsx:187
+#: src/views/card/index.tsx:200
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:104
 #: src/views/members/components/InviteMemberForm.tsx:241
@@ -2395,6 +2396,10 @@ msgstr "Não foi possível adicionar o item da checklist"
 msgid "Unable to add comment"
 msgstr "Não foi possível adicionar comentário"
 
+#: src/views/card/index.tsx:199
+msgid "Unable to add label"
+msgstr ""
+
 #: src/views/board/components/NewCardForm.tsx:181
 msgid "Unable to create card"
 msgstr "Não foi possível criar o cartão"
@@ -2453,7 +2458,7 @@ msgid "Unable to update board visibility"
 msgstr "Não foi possível atualizar a visibilidade do quadro"
 
 #: src/views/board/index.tsx:229
-#: src/views/card/index.tsx:185
+#: src/views/card/index.tsx:186
 msgid "Unable to update card"
 msgstr "Não foi possível atualizar o cartão"
 

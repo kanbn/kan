@@ -31,7 +31,7 @@ msgstr "{0}"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
 #: src/views/boards/index.tsx:33
-#: src/views/card/index.tsx:238
+#: src/views/card/index.tsx:272
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
@@ -83,7 +83,7 @@ msgstr "Compte supprimé"
 msgid "Actions"
 msgstr "Actions"
 
-#: src/views/card/index.tsx:352
+#: src/views/card/index.tsx:386
 #: src/views/public/board/CardModal.tsx:158
 msgid "Activity"
 msgstr "Activité"
@@ -313,7 +313,7 @@ msgid "Blog Post"
 msgstr "Article de blog"
 
 #: src/views/board/index.tsx:386
-#: src/views/card/index.tsx:238
+#: src/views/card/index.tsx:272
 #: src/views/public/board/index.tsx:113
 msgid "Board"
 msgstr "Tableau"
@@ -395,12 +395,12 @@ msgstr "Rapport de bug"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: src/views/card/index.tsx:238
+#: src/views/card/index.tsx:272
 msgid "Card"
 msgstr "Carte"
 
-#: src/views/card/index.tsx:272
-#: src/views/card/index.tsx:308
+#: src/views/card/index.tsx:306
+#: src/views/card/index.tsx:342
 msgid "Card not found"
 msgstr "Carte introuvable"
 
@@ -1042,6 +1042,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Pour une durabilité à long terme, nous reconnaissons que tous les bons projets open source ont besoin d'une source de revenus. La nôtre provient de l'offre cloud payante pour les espaces de travail avec plusieurs utilisateurs et pour les slugs d'espace de travail personnalisés. Il n'y a aucune obligation de l'utiliser, et vous pouvez auto-héberger le logiciel sur votre propre infrastructure gratuitement."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratuit"
@@ -1737,7 +1739,8 @@ msgstr "Veuillez sélectionner un fichier à télécharger."
 #: src/views/card/components/NewChecklistForm.tsx:70
 #: src/views/card/components/NewChecklistItemForm.tsx:89
 #: src/views/card/components/NewCommentForm.tsx:31
-#: src/views/card/index.tsx:186
+#: src/views/card/index.tsx:187
+#: src/views/card/index.tsx:200
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:104
 #: src/views/members/components/InviteMemberForm.tsx:241
@@ -2236,6 +2239,10 @@ msgstr "Impossible d'ajouter l'élément à la liste de contrôle"
 msgid "Unable to add comment"
 msgstr "Impossible d'ajouter un commentaire"
 
+#: src/views/card/index.tsx:199
+msgid "Unable to add label"
+msgstr ""
+
 #: src/views/board/components/NewCardForm.tsx:181
 msgid "Unable to create card"
 msgstr "Impossible de créer la carte"
@@ -2294,7 +2301,7 @@ msgid "Unable to update board visibility"
 msgstr "Impossible de mettre à jour la visibilité du tableau"
 
 #: src/views/board/index.tsx:229
-#: src/views/card/index.tsx:185
+#: src/views/card/index.tsx:186
 msgid "Unable to update card"
 msgstr "Impossible de mettre à jour la carte"
 
