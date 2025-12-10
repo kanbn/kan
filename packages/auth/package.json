@@ -37,7 +37,7 @@
   },
   "prettier": "@kan/prettier-config",
   "dependencies": {
-    "@better-auth/stripe": "^1.3.7",
-    "better-auth": "^1.3.7"
+    "@better-auth/stripe": "^1.4.6",
+    "better-auth": "^1.4.6"
   }
 }
