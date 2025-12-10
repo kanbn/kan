@@ -4,8 +4,9 @@ ARG PROJECT=@kan/web
 
 # 1. Alpine image
 FROM node:${NODE_VERSION}-alpine AS alpine
-RUN apk update
-RUN apk add --no-cache libc6-compat python3 make g++
+RUN apk update && \
+    apk add --no-cache --virtual .build-deps libc6-compat python3 make g++ && \
+    rm -rf /var/cache/apk/* /tmp/* || true
 
 # Setup pnpm and turbo on the alpine base
 FROM alpine AS base
