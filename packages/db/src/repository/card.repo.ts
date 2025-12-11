@@ -9,6 +9,7 @@ import {
   cardToWorkspaceMembers,
   checklistItems,
   checklists,
+  comments,
   labels,
   lists,
   workspaceMembers,
@@ -956,6 +957,11 @@ export const getPaginatedActivities = async (
   const limit = options?.limit ?? 20;
   const cursor = options?.cursor;
 
+  const validCommentIds = db
+    .select({ id: comments.id })
+    .from(comments)
+    .where(isNull(comments.deletedAt));
+
   const activities = await db.query.cardActivities.findMany({
     columns: {
       publicId: true,
@@ -967,10 +973,13 @@ export const getPaginatedActivities = async (
       toTitle: true,
       fromDescription: true,
       toDescription: true,
+      fromDueDate: true,
+      toDueDate: true,
     },
     where: and(
       eq(cardActivities.cardId, cardId),
       cursor ? gt(cardActivities.createdAt, cursor) : undefined,
+      sql`(${cardActivities.commentId} IS NULL OR ${cardActivities.commentId} IN ${validCommentIds})`,
     ),
     with: {
       fromList: {
@@ -1032,13 +1041,8 @@ export const getPaginatedActivities = async (
   const items = activities.slice(0, limit);
   const nextCursor = hasMore ? items[items.length - 1]?.createdAt : undefined;
 
-  // filtering out deleted comments
-  const filteredItems = items.filter(
-    (activity) => !activity.comment?.deletedAt,
-  );
-
   return {
-    activities: filteredItems,
+    activities: items,
     hasMore,
     nextCursor,
   };
