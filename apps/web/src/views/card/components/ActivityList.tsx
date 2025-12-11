@@ -16,7 +16,10 @@ import {
   HiOutlineUserPlus,
 } from "react-icons/hi2";
 
-import type { GetCardByIdOutput } from "@kan/api/types";
+import type {
+  GetCardActivitiesOutput,
+  GetCardByIdOutput,
+} from "@kan/api/types";
 import { authClient } from "@kan/auth/client";
 
 import Avatar from "~/components/Avatar";
@@ -43,7 +46,6 @@ const getActivityText = ({
   fromTitle,
   toDueDate,
   dateLocale,
-  mergeCount,
   mergedLabels,
 }: {
   type: ActivityType;
@@ -57,7 +59,6 @@ const getActivityText = ({
   fromDueDate?: Date | null;
   toDueDate?: Date | null;
   dateLocale: DateFnsLocale;
-  mergeCount?: number;
   mergedLabels?: string[];
 }) => {
   const TextHighlight = ({ children }: { children: React.ReactNode }) => (
@@ -66,24 +67,30 @@ const getActivityText = ({
     </span>
   );
 
-  if (type === "card.updated.description" && mergeCount && mergeCount > 1) {
-    return t`updated the description ${mergeCount} times`;
-  }
-
-  if (type === "card.updated.label.added" && mergedLabels && mergedLabels.length > 1) {
+  if (
+    type === "card.updated.label.added" &&
+    mergedLabels &&
+    mergedLabels.length > 1
+  ) {
     const labelList = mergedLabels.join(", ");
     return (
       <Trans>
-        added {mergedLabels.length} labels: <TextHighlight>{labelList}</TextHighlight>
+        added {mergedLabels.length} labels:{" "}
+        <TextHighlight>{labelList}</TextHighlight>
       </Trans>
     );
   }
 
-  if (type === "card.updated.label.removed" && mergedLabels && mergedLabels.length > 1) {
+  if (
+    type === "card.updated.label.removed" &&
+    mergedLabels &&
+    mergedLabels.length > 1
+  ) {
     const labelList = mergedLabels.join(", ");
     return (
       <Trans>
-        removed {mergedLabels.length} labels: <TextHighlight>{labelList}</TextHighlight>
+        removed {mergedLabels.length} labels:{" "}
+        <TextHighlight>{labelList}</TextHighlight>
       </Trans>
     );
   }
@@ -326,7 +333,7 @@ const ActivityList = ({
   const { data: sessionData } = authClient.useSession();
   const utils = api.useUtils();
   const [allActivities, setAllActivities] = useState<
-    NonNullable<GetCardByIdOutput>["activities"]
+    GetCardActivitiesOutput["activities"]
   >([]);
   const [hasMore, setHasMore] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -334,23 +341,26 @@ const ActivityList = ({
   const isFullyExpandedRef = useRef(false);
   const lastDataUpdatedAtRef = useRef<number | null>(null);
 
-  const { data: firstPageData, isFetching: isFetchingFirst, dataUpdatedAt } =
-    api.card.getActivities.useQuery(
-      {
-        cardPublicId,
-        limit: ACTIVITIES_PAGE_SIZE,
-      },
-      {
-        enabled: !!cardPublicId,
-      },
-    );
+  const {
+    data: firstPageData,
+    isFetching: isFetchingFirst,
+    dataUpdatedAt,
+  } = api.card.getActivities.useQuery(
+    {
+      cardPublicId,
+      limit: ACTIVITIES_PAGE_SIZE,
+    },
+    {
+      enabled: !!cardPublicId,
+    },
+  );
 
   useEffect(() => {
     if (firstPageData && dataUpdatedAt !== lastDataUpdatedAtRef.current) {
       lastDataUpdatedAtRef.current = dataUpdatedAt;
 
       if (isFullyExpandedRef.current && firstPageData.hasMore) {
-        setAllActivities(firstPageData.activities as any);
+        setAllActivities(firstPageData.activities);
         setHasMore(firstPageData.hasMore);
 
         const fetchAllRemaining = async () => {
@@ -358,7 +368,8 @@ const ActivityList = ({
           let currentHasMore = firstPageData.hasMore;
 
           while (currentHasMore) {
-            const lastActivity = currentActivities[currentActivities.length - 1];
+            const lastActivity =
+              currentActivities[currentActivities.length - 1];
             if (!lastActivity) break;
 
             const nextCursor = new Date(lastActivity.createdAt).toISOString();
@@ -369,9 +380,11 @@ const ActivityList = ({
             });
 
             if (nextPage) {
-              const existingIds = new Set(currentActivities.map((a) => a.publicId));
+              const existingIds = new Set(
+                currentActivities.map((a) => a.publicId),
+              );
               const newActivities = nextPage.activities.filter(
-                (a) => !existingIds.has(a.publicId),
+                (a: { publicId: string }) => !existingIds.has(a.publicId),
               );
               currentActivities = [...currentActivities, ...newActivities];
               currentHasMore = nextPage.hasMore;
@@ -380,13 +393,13 @@ const ActivityList = ({
             }
           }
 
-          setAllActivities(currentActivities as any);
+          setAllActivities(currentActivities);
           setHasMore(false);
         };
 
         fetchAllRemaining();
       } else {
-        setAllActivities(firstPageData.activities as any);
+        setAllActivities(firstPageData.activities);
         setHasMore(firstPageData.hasMore);
 
         if (!firstPageData.hasMore) {
@@ -414,9 +427,9 @@ const ActivityList = ({
       if (nextPage) {
         const existingIds = new Set(allActivities.map((a) => a.publicId));
         const newActivities = nextPage.activities.filter(
-          (a) => !existingIds.has(a.publicId),
+          (a: { publicId: string }) => !existingIds.has(a.publicId),
         );
-        setAllActivities((prev) => [...prev, ...newActivities] as any);
+        setAllActivities((prev) => [...prev, ...newActivities]);
         setHasMore(nextPage.hasMore);
 
         if (!nextPage.hasMore) {
@@ -429,7 +442,8 @@ const ActivityList = ({
   };
 
   const isFetching = isFetchingFirst || isLoadingMore;
-  const isLoading = cardIsLoading || (isFetchingFirst && allActivities.length === 0);
+  const isLoading =
+    cardIsLoading || (isFetchingFirst && allActivities.length === 0);
 
   return (
     <div className="flex flex-col space-y-4 pt-4">
@@ -446,7 +460,6 @@ const ActivityList = ({
           fromDueDate: activity.fromDueDate ?? null,
           toDueDate: activity.toDueDate ?? null,
           dateLocale: dateLocale,
-          mergeCount: (activity as any).mergeCount,
           mergedLabels: (activity as any).mergedLabels,
         });
 

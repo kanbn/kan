@@ -1,29 +1,9 @@
-// Activity type from database query result
-type Activity = {
-  publicId: string;
-  type: string;
-  createdAt: Date;
-  fromIndex?: number | null;
-  toIndex?: number | null;
-  fromTitle?: string | null;
-  toTitle?: string | null;
-  fromDescription?: string | null;
-  toDescription?: string | null;
-  fromList?: { publicId: string; name: string; index: number } | null;
-  toList?: { publicId: string; name: string; index: number } | null;
-  label?: { publicId: string; name: string } | null;
-  member?: {
-    publicId: string;
-    user?: { id: string; name: string; email: string } | null;
-  } | null;
-  user?: { id: string; name: string; email: string } | null;
-  comment?: {
-    publicId: string;
-    comment: string;
-    createdBy: string;
-    updatedAt?: Date | null;
-    deletedAt?: Date | null;
-  } | null;
+import type { ActivityType } from "@kan/db/schema";
+import * as cardRepo from "@kan/db/repository/card.repo";
+
+type Activity = NonNullable<
+  Awaited<ReturnType<typeof cardRepo.getPaginatedActivities>>
+>["activities"][number] & {
   // metadata for merged activities
   mergeCount?: number; // number of activities merged into this one
   mergedLabels?: string[]; // list of label names when merging label activities
@@ -32,13 +12,13 @@ type Activity = {
 // types that can be merged with simple count
 const MERGEABLE_COUNT_TYPES = [
   "card.updated.description",
-] as const;
+] as const satisfies readonly ActivityType[];
 
 // types that merge with a list of items
 const MERGEABLE_LIST_TYPES = [
   "card.updated.label.added",
   "card.updated.label.removed",
-] as const;
+] as const satisfies readonly ActivityType[];
 
 const MERGE_TIME_WINDOW_MS = 5 * 60 * 1000; // 5 minutes window for merging activities
 
@@ -55,8 +35,12 @@ export function mergeActivities(activities: Activity[]): Activity[] {
       continue;
     }
 
-    const isCountMergeable = MERGEABLE_COUNT_TYPES.includes(current.type as any);
-    const isListMergeable = MERGEABLE_LIST_TYPES.includes(current.type as any);
+    const isCountMergeable = (
+      MERGEABLE_COUNT_TYPES as readonly ActivityType[]
+    ).includes(current.type);
+    const isListMergeable = (
+      MERGEABLE_LIST_TYPES as readonly ActivityType[]
+    ).includes(current.type);
     const canMerge = (isCountMergeable || isListMergeable) && current.user?.id;
 
     if (!canMerge) {
@@ -126,4 +110,3 @@ export function mergeActivities(activities: Activity[]): Activity[] {
 
   return merged;
 }
-
