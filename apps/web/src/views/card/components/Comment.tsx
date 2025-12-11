@@ -11,6 +11,7 @@ import Dropdown from "~/components/Dropdown";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface FormValues {
   comment: string;
@@ -55,7 +56,7 @@ const Comment = ({
 
   const updateCommentMutation = api.card.updateComment.useMutation({
     onSuccess: async () => {
-      await utils.card.byId.refetch();
+      await invalidateCard(utils, cardPublicId);
       setIsEditing(false);
     },
     onError: () => {
