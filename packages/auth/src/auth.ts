@@ -78,8 +78,7 @@ export const configuredProviders = socialProviderList.reduce<
     Object.keys(acc).includes("google") &&
     acc[provider]
   ) {
-    const allowed = process.env.BETTER_AUTH_ALLOWED_DOMAINS
-      ?.split(",")
+    const allowed = process.env.BETTER_AUTH_ALLOWED_DOMAINS?.split(",")
       .map((d) => d.trim().toLowerCase())
       .filter(Boolean);
     if (allowed && allowed.length > 0) {
@@ -299,9 +298,8 @@ export const initAuth = (db: dbClient) => {
             }),
           ]
         : []),
-      // @todo: hasing is disabled due to a bug in the api key plugin
       apiKey({
-        disableKeyHashing: true,
+        enableSessionForAPIKeys: true,
         rateLimit: {
           enabled: true,
           timeWindow: 1000 * 60, // 1 minute
@@ -365,8 +363,7 @@ export const initAuth = (db: dbClient) => {
               // Fall through to any additional checks below
             }
             // Enforce allowed domains (OIDC/social) if configured
-            const allowed = process.env.BETTER_AUTH_ALLOWED_DOMAINS
-              ?.split(",")
+            const allowed = process.env.BETTER_AUTH_ALLOWED_DOMAINS?.split(",")
               .map((d) => d.trim().toLowerCase())
               .filter(Boolean);
             if (allowed && allowed.length > 0) {

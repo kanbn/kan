@@ -15,7 +15,6 @@ import ThemeToggle from "~/components/ThemeToggle";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
-import { convertDueDateFiltersToRanges } from "~/utils/dueDateFilters";
 import { formatToArray } from "~/utils/helpers";
 import Card from "~/views/board/components/Card";
 import Filters from "~/views/board/components/Filters";
@@ -55,7 +54,9 @@ export default function PublicBoardView() {
       members: formatToArray(router.query.members),
       labels: formatToArray(router.query.labels),
       lists: formatToArray(router.query.lists),
-      dueDate: convertDueDateFiltersToRanges(dueDateFilters),
+      ...(dueDateFilters.length > 0 && {
+        dueDateFilters: dueDateFilters,
+      }),
     },
     {
       enabled: router.isReady && !!boardSlug,

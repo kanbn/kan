@@ -1,6 +1,6 @@
 import { addDays, endOfDay, startOfDay } from "date-fns";
 
-type DueDateFilterKey =
+export type DueDateFilterKey =
   | "overdue"
   | "today"
   | "tomorrow"
@@ -9,8 +9,8 @@ type DueDateFilterKey =
   | "no-due-date";
 
 export interface DueDateFilter {
-  startDate?: string;
-  endDate?: string;
+  startDate?: Date;
+  endDate?: Date;
   hasNoDueDate?: boolean;
 }
 
@@ -21,35 +21,35 @@ export const convertDueDateFiltersToRanges = (
 
   const today = startOfDay(new Date());
   const tomorrow = addDays(today, 1);
-  const nextWeekEnd = addDays(today, 8); // 7 days ahead
-  const nextMonthEnd = addDays(today, 31); // 30 days ahead
+  const nextWeekEnd = addDays(today, 8);
+  const nextMonthEnd = addDays(today, 31);
 
   return filters.map((filter) => {
     switch (filter) {
       case "overdue":
         return {
-          endDate: today.toISOString(),
+          endDate: today,
         };
       case "today":
         return {
-          startDate: today.toISOString(),
-          endDate: endOfDay(today).toISOString(),
+          startDate: today,
+          endDate: endOfDay(today),
         };
       case "tomorrow":
         return {
-          startDate: tomorrow.toISOString(),
-          endDate: endOfDay(tomorrow).toISOString(),
+          startDate: tomorrow,
+          endDate: endOfDay(tomorrow),
         };
       case "next-week": {
         return {
-          startDate: today.toISOString(),
-          endDate: nextWeekEnd.toISOString(),
+          startDate: today,
+          endDate: nextWeekEnd,
         };
       }
       case "next-month": {
         return {
-          startDate: nextWeekEnd.toISOString(),
-          endDate: nextMonthEnd.toISOString(),
+          startDate: nextWeekEnd,
+          endDate: nextMonthEnd,
         };
       }
       case "no-due-date":
