@@ -471,6 +471,9 @@ importers:
 
   packages/shared:
     dependencies:
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
       jose:
         specifier: ^6.1.2
         version: 6.1.2
