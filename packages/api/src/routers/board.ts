@@ -8,16 +8,14 @@ import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { colours } from "@kan/shared/constants";
-import { generateSlug, generateUID } from "@kan/shared/utils";
+import {
+  convertDueDateFiltersToRanges,
+  generateSlug,
+  generateUID,
+} from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
-
-const dueDateFilterSchema = z.object({
-  startDate: z.string().datetime().optional(),
-  endDate: z.string().datetime().optional(),
-  hasNoDueDate: z.boolean().optional(),
-});
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
@@ -85,7 +83,18 @@ export const boardRouter = createTRPCRouter({
         members: z.array(z.string().min(12)).optional(),
         labels: z.array(z.string().min(12)).optional(),
         lists: z.array(z.string().min(12)).optional(),
-        dueDate: z.array(dueDateFilterSchema).optional(),
+        dueDateFilters: z
+          .array(
+            z.enum([
+              "overdue",
+              "today",
+              "tomorrow",
+              "next-week",
+              "next-month",
+              "no-due-date",
+            ]),
+          )
+          .optional(),
         type: z.enum(["regular", "template"]).optional(),
       }),
     )
@@ -112,6 +121,11 @@ export const boardRouter = createTRPCRouter({
 
       await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
 
+      // Convert semantic string filters to date ranges expected by the repo
+      const dueDateFilters = input.dueDateFilters
+        ? convertDueDateFiltersToRanges(input.dueDateFilters)
+        : [];
+
       const result = await boardRepo.getByPublicId(
         ctx.db,
         input.boardPublicId,
@@ -119,14 +133,7 @@ export const boardRouter = createTRPCRouter({
           members: input.members ?? [],
           labels: input.labels ?? [],
           lists: input.lists ?? [],
-          dueDate:
-            input.dueDate?.map((filter) => ({
-              startDate: filter.startDate
-                ? new Date(filter.startDate)
-                : undefined,
-              endDate: filter.endDate ? new Date(filter.endDate) : undefined,
-              hasNoDueDate: filter.hasNoDueDate,
-            })) ?? [],
+          dueDate: dueDateFilters,
           type: input.type,
         },
       );
@@ -160,7 +167,18 @@ export const boardRouter = createTRPCRouter({
         members: z.array(z.string().min(12)).optional(),
         labels: z.array(z.string().min(12)).optional(),
         lists: z.array(z.string().min(12)).optional(),
-        dueDate: z.array(dueDateFilterSchema).optional(),
+        dueDateFilters: z
+          .array(
+            z.enum([
+              "overdue",
+              "today",
+              "tomorrow",
+              "next-week",
+              "next-month",
+              "no-due-date",
+            ]),
+          )
+          .optional(),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof boardRepo.getBySlug>>>())
@@ -176,6 +194,11 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
+      // Convert semantic string filters to date ranges expected by the repo
+      const dueDateFilters = input.dueDateFilters
+        ? convertDueDateFiltersToRanges(input.dueDateFilters)
+        : [];
+
       const result = await boardRepo.getBySlug(
         ctx.db,
         input.boardSlug,
@@ -184,14 +207,7 @@ export const boardRouter = createTRPCRouter({
           members: input.members ?? [],
           labels: input.labels ?? [],
           lists: input.lists ?? [],
-          dueDate:
-            input.dueDate?.map((filter) => ({
-              startDate: filter.startDate
-                ? new Date(filter.startDate)
-                : undefined,
-              endDate: filter.endDate ? new Date(filter.endDate) : undefined,
-              hasNoDueDate: filter.hasNoDueDate,
-            })) ?? [],
+          dueDate: dueDateFilters,
         },
       );
 
@@ -305,12 +321,6 @@ export const boardRouter = createTRPCRouter({
           type: input.type ?? "regular",
           sourceBoardId: sourceBoardInfo.id,
         });
-
-        if (!result)
-          throw new TRPCError({
-            message: `Failed to create board from source`,
-            code: "INTERNAL_SERVER_ERROR",
-          });
 
         return result;
       }

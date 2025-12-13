@@ -29,7 +29,6 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
-import { convertDueDateFiltersToRanges } from "~/utils/dueDateFilters";
 import { formatToArray } from "~/utils/helpers";
 import BoardDropdown from "./components/BoardDropdown";
 import Card from "./components/Card";
@@ -97,20 +96,17 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     | "no-due-date"
   )[];
 
-  const queryParams: {
-    boardPublicId: string;
-    members: string[];
-    labels: string[];
-    lists: string[];
-    dueDate: ReturnType<typeof convertDueDateFiltersToRanges>;
-    type: "regular" | "template";
-  } = {
+  const boardType: "regular" | "template" = isTemplate ? "template" : "regular";
+
+  const queryParams = {
     boardPublicId: boardId ?? "",
     members: formatToArray(router.query.members),
     labels: formatToArray(router.query.labels),
     lists: formatToArray(router.query.lists),
-    dueDate: convertDueDateFiltersToRanges(semanticFilters),
-    type: isTemplate ? "template" : "regular",
+    ...(semanticFilters.length > 0 && {
+      dueDateFilters: semanticFilters,
+    }),
+    type: boardType,
   };
 
   const {
