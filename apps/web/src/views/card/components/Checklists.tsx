@@ -61,7 +61,7 @@ export default function Checklists({
     });
   };
 
-  if (!checklists || checklists.length === 0) return null;
+  if (checklists.length === 0) return null;
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
