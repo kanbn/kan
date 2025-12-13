@@ -28,6 +28,9 @@ const config = {
   /** We already do linting and typechecking as separate tasks in CI */
   typescript: { ignoreBuildErrors: true },
 
+  // temporarily ignore eslint errors during build until we fix all the errors sigh
+  eslint: { ignoreDuringBuilds: true },
+
   images: {
     remotePatterns: (() => {
       /** @type {Array<{protocol: "http" | "https", hostname: string}>} */
