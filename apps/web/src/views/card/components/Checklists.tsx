@@ -40,7 +40,7 @@ export default function Checklists({
   const { openModal } = useModal();
   const utils = api.useUtils();
 
-  const reorderItemMutation = api.checklist.reorderItem.useMutation({
+  const reorderItemMutation = api.checklist.updateItem.useMutation({
     onSettled: async () => {
       await utils.card.byId.invalidate({ cardPublicId });
     },

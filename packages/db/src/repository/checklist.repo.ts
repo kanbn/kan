@@ -4,6 +4,7 @@ import type { dbClient } from "@kan/db/client";
 import { checklistItems, checklists } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
+
 export const create = async (
   db: dbClient,
   checklistInput: {
@@ -356,7 +357,7 @@ export const reorderItem = async (
         index: true,
         checklistId: true,
       },
-      where: eq(checklistItems.id, args.itemId),
+      where: and(eq(checklistItems.id, args.itemId), isNull(checklistItems.deletedAt)),
     });
 
     if (!item) {
@@ -373,7 +374,7 @@ export const reorderItem = async (
           title: true,
           completed: true,
         },
-        where: eq(checklistItems.id, args.itemId),
+        where: and(eq(checklistItems.id, args.itemId), isNull(checklistItems.deletedAt)),
       });
 
       if (!unchanged) {
@@ -390,6 +391,7 @@ export const reorderItem = async (
         WHERE "checklistId" = ${item.checklistId}
         AND index > ${currentIndex}
         AND index <= ${newIndex}
+        AND "deletedAt" IS NULL
         `);
     } else {
       await tx.execute(sql`
@@ -398,6 +400,7 @@ export const reorderItem = async (
         WHERE "checklistId" = ${item.checklistId}
         AND index >= ${newIndex}
         AND index < ${currentIndex}
+        AND "deletedAt" IS NULL
         `);
     }
 
@@ -415,6 +418,7 @@ export const reorderItem = async (
       throw new Error(`Failed to update checklist item with ID ${args.itemId}`);
     }
 
-    return updated;
-  });
-};
+      return updated;
+    });
+  }
+
