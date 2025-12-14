@@ -88,6 +88,7 @@ export default async function handler(
 
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
+      payment_method_collection: "always",
       line_items: [
         {
           price: process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID,
