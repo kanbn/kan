@@ -41,7 +41,7 @@ msgid "{0} labels"
 msgstr "{0} etichette"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:412
+#: src/views/board/index.tsx:408
 msgid "{0} not found"
 msgstr "{0} non trovato"
 
@@ -117,7 +117,7 @@ msgstr "Aggiungi checklist"
 msgid "Add description... (type '/' to open commands or '@' to mention)"
 msgstr "Aggiungi descrizione... (digita '/' per aprire i comandi o '@' per menzionare)"
 
-#: src/views/card/components/ChecklistItemRow.tsx:172
+#: src/views/card/components/ChecklistItemRow.tsx:194
 msgid "Add details..."
 msgstr "Aggiungi dettagli..."
 
@@ -312,9 +312,9 @@ msgstr "Portale di fatturazione"
 msgid "Blog Post"
 msgstr "Post del blog"
 
-#: src/views/board/index.tsx:386
+#: src/views/board/index.tsx:382
 #: src/views/card/index.tsx:272
-#: src/views/public/board/index.tsx:113
+#: src/views/public/board/index.tsx:114
 msgid "Board"
 msgstr "Bacheca"
 
@@ -331,7 +331,7 @@ msgstr "Il nome della bacheca non può superare i 100 caratteri"
 msgid "Board name is required"
 msgstr "Il nome della bacheca è obbligatorio"
 
-#: src/views/public/board/index.tsx:165
+#: src/views/public/board/index.tsx:166
 msgid "Board not found"
 msgstr "Bacheca non trovata"
 
@@ -347,7 +347,7 @@ msgstr "L'URL della bacheca può contenere solo lettere, numeri e trattini"
 msgid "Board URL cannot exceed 60 characters"
 msgstr "L'URL della bacheca non può superare i 60 caratteri"
 
-#: src/views/public/board/index.tsx:79
+#: src/views/public/board/index.tsx:80
 msgid "Board URL copied to clipboard"
 msgstr "URL della bacheca copiato negli appunti"
 
@@ -604,8 +604,8 @@ msgstr "Crea nuova chiave"
 msgid "Create new label"
 msgstr "Crea nuova etichetta"
 
-#: src/views/board/index.tsx:65
-#: src/views/board/index.tsx:503
+#: src/views/board/index.tsx:64
+#: src/views/board/index.tsx:499
 msgid "Create new list"
 msgstr "Crea nuova lista"
 
@@ -1042,8 +1042,6 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Per la sostenibilità a lungo termine, riconosciamo che tutti i buoni progetti open source necessitano di una fonte di entrate. La nostra proviene dall'offerta cloud a pagamento per gli spazi di lavoro con più utenti e per gli slug personalizzati degli spazi di lavoro. Non c'è alcun obbligo di utilizzarla, e puoi ospitare autonomamente il software sulla tua infrastruttura gratuitamente."
 
 #: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratuito"
@@ -1089,7 +1087,7 @@ msgstr "Inizia ora"
 msgid "Get started by creating a new {0}"
 msgstr "Inizia creando un nuovo {0}"
 
-#: src/views/board/index.tsx:495
+#: src/views/board/index.tsx:491
 msgid "Get started by creating a new list"
 msgstr "Inizia creando una nuova lista"
 
@@ -1375,7 +1373,7 @@ msgstr "Licenza"
 msgid "Light"
 msgstr "Chiaro"
 
-#: src/views/public/board/index.tsx:77
+#: src/views/public/board/index.tsx:78
 msgid "Link copied"
 msgstr "Link copiato"
 
@@ -1509,7 +1507,7 @@ msgid "New label"
 msgstr "Nuova etichetta"
 
 #: src/views/board/components/NewListForm.tsx:113
-#: src/views/board/index.tsx:466
+#: src/views/board/index.tsx:462
 msgid "New list"
 msgstr "Nuova lista"
 
@@ -1570,7 +1568,7 @@ msgstr "Nessun URL di download disponibile per questo allegato."
 msgid "No keyboard shortcuts registered."
 msgstr "Nessuna scorciatoia da tastiera registrata."
 
-#: src/views/board/index.tsx:492
+#: src/views/board/index.tsx:488
 msgid "No lists"
 msgstr "Nessuna lista"
 
@@ -1721,13 +1719,14 @@ msgstr "Seleziona un file da caricare."
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:73
 #: src/views/board/components/VisibilityButton.tsx:54
-#: src/views/board/index.tsx:174
-#: src/views/board/index.tsx:230
+#: src/views/board/index.tsx:170
+#: src/views/board/index.tsx:226
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/AttachmentThumbnails.tsx:73
-#: src/views/card/components/ChecklistItemRow.tsx:60
-#: src/views/card/components/ChecklistItemRow.tsx:88
+#: src/views/card/components/ChecklistItemRow.tsx:66
+#: src/views/card/components/ChecklistItemRow.tsx:94
 #: src/views/card/components/ChecklistNameInput.tsx:46
+#: src/views/card/components/Checklists.tsx:81
 #: src/views/card/components/Comment.tsx:64
 #: src/views/card/components/DeleteCardConfirmation.tsx:52
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:37
@@ -2090,8 +2089,8 @@ msgstr "Piano Team"
 msgid "Teams"
 msgstr "Team"
 
-#: src/views/board/index.tsx:386
-#: src/views/board/index.tsx:421
+#: src/views/board/index.tsx:382
+#: src/views/board/index.tsx:417
 msgid "Template"
 msgstr "Template"
 
@@ -2165,7 +2164,7 @@ msgstr "Questa azione non può essere annullata."
 msgid "This API key will only be shown once. Please save it in a secure location."
 msgstr "Questa chiave API verrà mostrata una sola volta. Salvala in un luogo sicuro."
 
-#: src/views/public/board/index.tsx:168
+#: src/views/public/board/index.tsx:169
 msgid "This board is private or does not exist"
 msgstr "Questa bacheca è privata o non esiste"
 
@@ -2227,7 +2226,7 @@ msgstr "Importazioni da Trello"
 msgid "Triaging"
 msgstr "Smistamento"
 
-#: src/views/home/components/Logos.tsx:73
+#: src/views/home/components/Logos.tsx:67
 msgid "Trusted by fast-moving teams<0/>around the world"
 msgstr "Team dinamici di tutto il mondo<0/>si fidano di noi"
 
@@ -2241,7 +2240,7 @@ msgstr "Impossibile aggiungere il commento"
 
 #: src/views/card/index.tsx:199
 msgid "Unable to add label"
-msgstr ""
+msgstr "Impossibile aggiungere etichetta"
 
 #: src/views/board/components/NewCardForm.tsx:181
 msgid "Unable to create card"
@@ -2276,7 +2275,7 @@ msgstr "Impossibile eliminare la scheda"
 msgid "Unable to delete checklist"
 msgstr "Impossibile eliminare la checklist"
 
-#: src/views/card/components/ChecklistItemRow.tsx:87
+#: src/views/card/components/ChecklistItemRow.tsx:93
 msgid "Unable to delete checklist item"
 msgstr "Impossibile eliminare l'elemento della checklist"
 
@@ -2287,6 +2286,10 @@ msgstr "Impossibile eliminare il commento"
 #: src/views/members/components/DeleteMemberConfirmation.tsx:27
 msgid "Unable to remove member"
 msgstr "Impossibile rimuovere il membro"
+
+#: src/views/card/components/Checklists.tsx:80
+msgid "Unable to reorder checklist item"
+msgstr "Impossibile riordinare elemento della checklist"
 
 #: src/components/FeedbackModal.tsx:40
 msgid "Unable to send feedback"
@@ -2300,7 +2303,7 @@ msgstr "Impossibile aggiornare l'URL della bacheca"
 msgid "Unable to update board visibility"
 msgstr "Impossibile aggiornare la visibilità della bacheca"
 
-#: src/views/board/index.tsx:229
+#: src/views/board/index.tsx:225
 #: src/views/card/index.tsx:186
 msgid "Unable to update card"
 msgstr "Impossibile aggiornare la scheda"
@@ -2309,7 +2312,7 @@ msgstr "Impossibile aggiornare la scheda"
 msgid "Unable to update checklist"
 msgstr "Impossibile aggiornare la checklist"
 
-#: src/views/card/components/ChecklistItemRow.tsx:59
+#: src/views/card/components/ChecklistItemRow.tsx:65
 msgid "Unable to update checklist item"
 msgstr "Impossibile aggiornare l'elemento della checklist"
 
@@ -2325,7 +2328,7 @@ msgstr "Impossibile aggiornare la data di scadenza"
 msgid "Unable to update labels"
 msgstr "Impossibile aggiornare le etichette"
 
-#: src/views/board/index.tsx:173
+#: src/views/board/index.tsx:169
 #: src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Impossibile aggiornare la lista"
@@ -2483,7 +2486,7 @@ msgstr "Visualizza e gestisci la tua fatturazione e abbonamento."
 msgid "View docs"
 msgstr "Visualizza documenti"
 
-#: src/views/public/board/index.tsx:141
+#: src/views/public/board/index.tsx:142
 msgid "View only"
 msgstr "Solo visualizzazione"
 
@@ -2491,7 +2494,7 @@ msgstr "Solo visualizzazione"
 msgid "View our roadmap."
 msgstr "Visualizza la nostra roadmap."
 
-#: src/views/public/board/index.tsx:171
+#: src/views/public/board/index.tsx:172
 msgid "View workspace"
 msgstr "Visualizza spazio di lavoro"
 
@@ -2536,10 +2539,10 @@ msgid "Why make an open source Trello?"
 msgstr "Perché creare un Trello open source?"
 
 #: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:386
+#: src/views/board/index.tsx:382
 #: src/views/boards/index.tsx:33
 #: src/views/members/index.tsx:173
-#: src/views/public/board/index.tsx:113
+#: src/views/public/board/index.tsx:114
 #: src/views/public/boards/index.tsx:66
 msgid "Workspace"
 msgstr "Spazio di lavoro"

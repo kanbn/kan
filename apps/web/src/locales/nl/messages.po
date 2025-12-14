@@ -41,7 +41,7 @@ msgid "{0} labels"
 msgstr "{0} labels"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:412
+#: src/views/board/index.tsx:408
 msgid "{0} not found"
 msgstr "{0} niet gevonden"
 
@@ -117,7 +117,7 @@ msgstr "Checklist toevoegen"
 msgid "Add description... (type '/' to open commands or '@' to mention)"
 msgstr "Beschrijving toevoegen... (typ '/' om commando's te openen of '@' om te vermelden)"
 
-#: src/views/card/components/ChecklistItemRow.tsx:172
+#: src/views/card/components/ChecklistItemRow.tsx:194
 msgid "Add details..."
 msgstr "Details toevoegen..."
 
@@ -312,9 +312,9 @@ msgstr "Factureringsportaal"
 msgid "Blog Post"
 msgstr "Blogbericht"
 
-#: src/views/board/index.tsx:386
+#: src/views/board/index.tsx:382
 #: src/views/card/index.tsx:272
-#: src/views/public/board/index.tsx:113
+#: src/views/public/board/index.tsx:114
 msgid "Board"
 msgstr "Bord"
 
@@ -331,7 +331,7 @@ msgstr "Bordnaam mag niet langer zijn dan 100 tekens"
 msgid "Board name is required"
 msgstr "Bordnaam is verplicht"
 
-#: src/views/public/board/index.tsx:165
+#: src/views/public/board/index.tsx:166
 msgid "Board not found"
 msgstr "Bord niet gevonden"
 
@@ -347,7 +347,7 @@ msgstr "Board URL kan alleen letters, cijfers en koppeltekens bevatten"
 msgid "Board URL cannot exceed 60 characters"
 msgstr "Board URL mag niet langer zijn dan 60 tekens"
 
-#: src/views/public/board/index.tsx:79
+#: src/views/public/board/index.tsx:80
 msgid "Board URL copied to clipboard"
 msgstr "Board URL gekopieerd naar klembord"
 
@@ -604,8 +604,8 @@ msgstr "Nieuwe sleutel aanmaken"
 msgid "Create new label"
 msgstr "Maak nieuw label"
 
-#: src/views/board/index.tsx:65
-#: src/views/board/index.tsx:503
+#: src/views/board/index.tsx:64
+#: src/views/board/index.tsx:499
 msgid "Create new list"
 msgstr "Maak nieuwe lijst"
 
@@ -1042,8 +1042,6 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Voor duurzaamheid op lange termijn erkennen we dat alle goede open source projecten een inkomstenbron nodig hebben. De onze komt van de betaalde cloudoplossing voor werkruimtes met meerdere gebruikers en voor aangepaste werkruimte-slugs. Er is geen verplichting om het te gebruiken, en je kunt de software gratis op je eigen infrastructuur hosten."
 
 #: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/Pricing.tsx:32
-#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratis"
@@ -1089,7 +1087,7 @@ msgstr "Aan de slag"
 msgid "Get started by creating a new {0}"
 msgstr "Begin door een nieuwe {0} te maken"
 
-#: src/views/board/index.tsx:495
+#: src/views/board/index.tsx:491
 msgid "Get started by creating a new list"
 msgstr "Begin door een nieuwe lijst te maken"
 
@@ -1375,7 +1373,7 @@ msgstr "Licentie"
 msgid "Light"
 msgstr "Licht"
 
-#: src/views/public/board/index.tsx:77
+#: src/views/public/board/index.tsx:78
 msgid "Link copied"
 msgstr "Link gekopieerd"
 
@@ -1509,7 +1507,7 @@ msgid "New label"
 msgstr "Nieuw label"
 
 #: src/views/board/components/NewListForm.tsx:113
-#: src/views/board/index.tsx:466
+#: src/views/board/index.tsx:462
 msgid "New list"
 msgstr "Nieuwe lijst"
 
@@ -1570,7 +1568,7 @@ msgstr "Geen download-URL beschikbaar voor deze bijlage."
 msgid "No keyboard shortcuts registered."
 msgstr "Geen sneltoetsen geregistreerd."
 
-#: src/views/board/index.tsx:492
+#: src/views/board/index.tsx:488
 msgid "No lists"
 msgstr "Geen lijsten"
 
@@ -1721,13 +1719,14 @@ msgstr "Selecteer een bestand om te uploaden."
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:73
 #: src/views/board/components/VisibilityButton.tsx:54
-#: src/views/board/index.tsx:174
-#: src/views/board/index.tsx:230
+#: src/views/board/index.tsx:170
+#: src/views/board/index.tsx:226
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/AttachmentThumbnails.tsx:73
-#: src/views/card/components/ChecklistItemRow.tsx:60
-#: src/views/card/components/ChecklistItemRow.tsx:88
+#: src/views/card/components/ChecklistItemRow.tsx:66
+#: src/views/card/components/ChecklistItemRow.tsx:94
 #: src/views/card/components/ChecklistNameInput.tsx:46
+#: src/views/card/components/Checklists.tsx:81
 #: src/views/card/components/Comment.tsx:64
 #: src/views/card/components/DeleteCardConfirmation.tsx:52
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:37
@@ -2090,8 +2089,8 @@ msgstr "Teamplan"
 msgid "Teams"
 msgstr "Teams"
 
-#: src/views/board/index.tsx:386
-#: src/views/board/index.tsx:421
+#: src/views/board/index.tsx:382
+#: src/views/board/index.tsx:417
 msgid "Template"
 msgstr "Sjabloon"
 
@@ -2165,7 +2164,7 @@ msgstr "Deze actie kan niet ongedaan worden gemaakt."
 msgid "This API key will only be shown once. Please save it in a secure location."
 msgstr "Deze API-sleutel wordt slechts één keer getoond. Bewaar deze op een veilige plaats."
 
-#: src/views/public/board/index.tsx:168
+#: src/views/public/board/index.tsx:169
 msgid "This board is private or does not exist"
 msgstr "Dit bord is privé of bestaat niet"
 
@@ -2227,7 +2226,7 @@ msgstr "Trello-imports"
 msgid "Triaging"
 msgstr "Triage"
 
-#: src/views/home/components/Logos.tsx:73
+#: src/views/home/components/Logos.tsx:67
 msgid "Trusted by fast-moving teams<0/>around the world"
 msgstr "Vertrouwd door snelbewegende teams<0/>over de hele wereld"
 
@@ -2241,7 +2240,7 @@ msgstr "Kan geen reactie toevoegen"
 
 #: src/views/card/index.tsx:199
 msgid "Unable to add label"
-msgstr ""
+msgstr "Kan label niet toevoegen"
 
 #: src/views/board/components/NewCardForm.tsx:181
 msgid "Unable to create card"
@@ -2276,7 +2275,7 @@ msgstr "Kan kaart niet verwijderen"
 msgid "Unable to delete checklist"
 msgstr "Kan checklist niet verwijderen"
 
-#: src/views/card/components/ChecklistItemRow.tsx:87
+#: src/views/card/components/ChecklistItemRow.tsx:93
 msgid "Unable to delete checklist item"
 msgstr "Kan checklistitem niet verwijderen"
 
@@ -2287,6 +2286,10 @@ msgstr "Kan opmerking niet verwijderen"
 #: src/views/members/components/DeleteMemberConfirmation.tsx:27
 msgid "Unable to remove member"
 msgstr "Kan lid niet verwijderen"
+
+#: src/views/card/components/Checklists.tsx:80
+msgid "Unable to reorder checklist item"
+msgstr "Kan checklistitem niet opnieuw ordenen"
 
 #: src/components/FeedbackModal.tsx:40
 msgid "Unable to send feedback"
@@ -2300,7 +2303,7 @@ msgstr "Kan board URL niet bijwerken"
 msgid "Unable to update board visibility"
 msgstr "Kan bordzichtbaarheid niet bijwerken"
 
-#: src/views/board/index.tsx:229
+#: src/views/board/index.tsx:225
 #: src/views/card/index.tsx:186
 msgid "Unable to update card"
 msgstr "Kan kaart niet bijwerken"
@@ -2309,7 +2312,7 @@ msgstr "Kan kaart niet bijwerken"
 msgid "Unable to update checklist"
 msgstr "Kan checklist niet bijwerken"
 
-#: src/views/card/components/ChecklistItemRow.tsx:59
+#: src/views/card/components/ChecklistItemRow.tsx:65
 msgid "Unable to update checklist item"
 msgstr "Kan checklistitem niet bijwerken"
 
@@ -2325,7 +2328,7 @@ msgstr "Kan vervaldatum niet bijwerken"
 msgid "Unable to update labels"
 msgstr "Kan labels niet bijwerken"
 
-#: src/views/board/index.tsx:173
+#: src/views/board/index.tsx:169
 #: src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Kan lijst niet bijwerken"
@@ -2483,7 +2486,7 @@ msgstr "Bekijk en beheer je facturering en abonnement."
 msgid "View docs"
 msgstr "Bekijk documentatie"
 
-#: src/views/public/board/index.tsx:141
+#: src/views/public/board/index.tsx:142
 msgid "View only"
 msgstr "Alleen bekijken"
 
@@ -2491,7 +2494,7 @@ msgstr "Alleen bekijken"
 msgid "View our roadmap."
 msgstr "Bekijk onze roadmap."
 
-#: src/views/public/board/index.tsx:171
+#: src/views/public/board/index.tsx:172
 msgid "View workspace"
 msgstr "Werkruimte bekijken"
 
@@ -2536,10 +2539,10 @@ msgid "Why make an open source Trello?"
 msgstr "Waarom een open source Trello maken?"
 
 #: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:386
+#: src/views/board/index.tsx:382
 #: src/views/boards/index.tsx:33
 #: src/views/members/index.tsx:173
-#: src/views/public/board/index.tsx:113
+#: src/views/public/board/index.tsx:114
 #: src/views/public/boards/index.tsx:66
 msgid "Workspace"
 msgstr "Werkruimte"
