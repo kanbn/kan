@@ -1,10 +1,12 @@
 import type { DropResult } from "react-beautiful-dnd";
+import { t } from "@lingui/core/macro";
 import { DragDropContext, Draggable } from "react-beautiful-dnd";
 import { HiPlus, HiXMark } from "react-icons/hi2";
 
 import CircularProgress from "~/components/CircularProgress";
 import { StrictModeDroppable as Droppable } from "~/components/StrictModeDroppable";
 import { useModal } from "~/providers/modal";
+import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 import ChecklistItemRow from "./ChecklistItemRow";
 import ChecklistNameInput from "./ChecklistNameInput";
@@ -38,9 +40,48 @@ export default function Checklists({
   viewOnly = false,
 }: ChecklistsProps) {
   const { openModal } = useModal();
+  const { showPopup } = usePopup();
+
   const utils = api.useUtils();
 
   const reorderItemMutation = api.checklist.updateItem.useMutation({
+    onMutate: async (vars) => {
+      await utils.card.byId.cancel({ cardPublicId });
+      const previous = utils.card.byId.getData({ cardPublicId });
+
+      utils.card.byId.setData({ cardPublicId }, (old) => {
+        if (!old) return old;
+
+        const updatedChecklists = old.checklists.map((cl) => {
+          const itemIndex = cl.items.findIndex(
+            (item) => item.publicId === vars.checklistItemPublicId,
+          );
+
+          if (itemIndex === -1 || vars.index === undefined) return cl;
+
+          const newIndex = vars.index;
+          const items = Array.from(cl.items);
+          const [movedItem] = items.splice(itemIndex, 1);
+          if (!movedItem) return cl;
+          items.splice(newIndex, 0, movedItem);
+
+          return { ...cl, items };
+        });
+
+        return { ...old, checklists: updatedChecklists } as typeof old;
+      });
+
+      return { previous };
+    },
+    onError: (_err, _vars, ctx) => {
+      if (ctx?.previous)
+        utils.card.byId.setData({ cardPublicId }, ctx.previous);
+      showPopup({
+        header: t`Unable to reorder checklist item`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
+    },
     onSettled: async () => {
       await utils.card.byId.invalidate({ cardPublicId });
     },
