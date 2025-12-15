@@ -1,8 +1,9 @@
-import { and, desc, eq, isNull } from "drizzle-orm";
+import { and, desc, eq, isNull, sql } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import { checklistItems, checklists } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
+
 
 export const create = async (
   db: dbClient,
@@ -341,3 +342,83 @@ const groupByKey = <T extends Record<string, unknown>>(
   }
   return grouped;
 };
+
+export const reorderItem = async (
+  db: dbClient,
+  args: {
+    itemId: number;
+    newIndex: number;
+  },
+) => {
+  return db.transaction(async (tx) => {
+    const item = await tx.query.checklistItems.findFirst({
+      columns: {
+        id: true,
+        index: true,
+        checklistId: true,
+      },
+      where: and(eq(checklistItems.id, args.itemId), isNull(checklistItems.deletedAt)),
+    });
+
+    if (!item) {
+      throw new Error(`Checklist item not found for ID ${args.itemId}`);
+    }
+
+    const currentIndex = item.index;
+    const newIndex = args.newIndex;
+
+    if (currentIndex === newIndex) {
+      const unchanged = await tx.query.checklistItems.findFirst({
+        columns: {
+          publicId: true,
+          title: true,
+          completed: true,
+        },
+        where: and(eq(checklistItems.id, args.itemId), isNull(checklistItems.deletedAt)),
+      });
+
+      if (!unchanged) {
+        throw new Error(`Checklist item not found for ID ${args.itemId}`);
+      }
+
+      return unchanged;
+    }
+
+    if (currentIndex < newIndex) {
+      await tx.execute(sql`
+        UPDATE card_checklist_item
+        SET index = index - 1
+        WHERE "checklistId" = ${item.checklistId}
+        AND index > ${currentIndex}
+        AND index <= ${newIndex}
+        AND "deletedAt" IS NULL
+        `);
+    } else {
+      await tx.execute(sql`
+        UPDATE card_checklist_item
+        SET index = index + 1
+        WHERE "checklistId" = ${item.checklistId}
+        AND index >= ${newIndex}
+        AND index < ${currentIndex}
+        AND "deletedAt" IS NULL
+        `);
+    }
+
+    const [updated] = await tx
+      .update(checklistItems)
+      .set({ index: newIndex })
+      .where(eq(checklistItems.id, args.itemId))
+      .returning({
+        publicId: checklistItems.publicId,
+        title: checklistItems.title,
+        completed: checklistItems.completed,
+      });
+
+    if (!updated) {
+      throw new Error(`Failed to update checklist item with ID ${args.itemId}`);
+    }
+
+      return updated;
+    });
+  }
+

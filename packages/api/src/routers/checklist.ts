@@ -269,7 +269,7 @@ export const checklistRouter = createTRPCRouter({
     .meta({
       openapi: {
         summary: "Update a checklist item",
-        method: "PUT",
+        method: "PATCH",
         path: "/checklists/items/{checklistItemPublicId}",
         description: "Updates a checklist item (title/completed)",
         tags: ["Cards"],
@@ -281,6 +281,7 @@ export const checklistRouter = createTRPCRouter({
         checklistItemPublicId: z.string().length(12),
         title: z.string().min(1).max(500).optional(),
         completed: z.boolean().optional(),
+        index: z.number().int().min(0).optional(),
       }),
     )
     .output(checklistItemSchema)
@@ -312,17 +313,30 @@ export const checklistRouter = createTRPCRouter({
 
       const previousTitle = item.title;
 
-      const updated = await checklistRepo.updateItemById(ctx.db, {
-        id: item.id,
-        title: input.title,
-        completed: input.completed,
-      });
+        let updatedItem;
 
-      if (!updated)
-        throw new TRPCError({
-          message: `Failed to update checklist item`,
-          code: "INTERNAL_SERVER_ERROR",
-        });
+        if (input.title !== undefined || input.completed !== undefined) {
+          updatedItem = await checklistRepo.updateItemById(ctx.db, {
+            id: item.id,
+            title: input.title,
+            completed: input.completed,
+          });
+        }
+
+        if (input.index !== undefined) {
+          updatedItem = await checklistRepo.reorderItem(ctx.db, {
+            itemId: item.id,
+            newIndex: input.index,
+          });
+        }
+
+        if (!updatedItem) {
+          throw new TRPCError({
+            message: `Failed to update checklist item`,
+            code: "INTERNAL_SERVER_ERROR",
+          });
+        }
+
 
       // Log completion toggle
       if (input.completed !== undefined) {
@@ -331,7 +345,7 @@ export const checklistRouter = createTRPCRouter({
             ? "card.updated.checklist.item.completed"
             : "card.updated.checklist.item.uncompleted",
           cardId: item.checklist.cardId,
-          toTitle: updated.title,
+          toTitle: updatedItem.title,
           createdBy: userId,
         });
       }
@@ -342,12 +356,13 @@ export const checklistRouter = createTRPCRouter({
           type: "card.updated.checklist.item.updated",
           cardId: item.checklist.cardId,
           fromTitle: previousTitle,
-          toTitle: updated.title,
+          toTitle: updatedItem.title,
           createdBy: userId,
         });
       }
 
-      return updated;
+      return updatedItem;
+
     }),
   deleteItem: protectedProcedure
     .meta({
