@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, gt, inArray, isNull, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gt, inArray, isNull, lt, sql } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import {
@@ -9,6 +9,7 @@ import {
   cardToWorkspaceMembers,
   checklistItems,
   checklists,
+  comments,
   labels,
   lists,
   workspaceMembers,

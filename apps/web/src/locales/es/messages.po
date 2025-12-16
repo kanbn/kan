@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/views/card/components/Comment.tsx:123
+#: src/views/card/components/Comment.tsx:124
 msgid " (edited)"
 msgstr " (editado)"
 
@@ -100,12 +100,12 @@ msgstr "Registros de actividad"
 msgid "Add a card"
 msgstr "Añadir una tarjeta"
 
-#: src/views/card/components/Comment.tsx:146
-#: src/views/card/components/NewCommentForm.tsx:57
+#: src/views/card/components/Comment.tsx:147
+#: src/views/card/components/NewCommentForm.tsx:55
 msgid "Add a comment..."
 msgstr "Añadir un comentario..."
 
-#: src/views/card/components/NewChecklistItemForm.tsx:140
+#: src/views/card/components/NewChecklistItemForm.tsx:141
 msgid "Add an item..."
 msgstr "Añadir un elemento..."
 
@@ -117,48 +117,53 @@ msgstr "Añadir lista de verificación"
 msgid "Add description... (type '/' to open commands or '@' to mention)"
 msgstr "Añadir descripción... (escribe '/' para abrir comandos o '@' para mencionar)"
 
-#: src/views/card/components/ChecklistItemRow.tsx:194
+#: src/views/card/components/ChecklistItemRow.tsx:195
 msgid "Add details..."
 msgstr "Añadir detalles..."
 
-#: src/views/card/components/LabelSelector.tsx:109
-#: src/views/card/components/LabelSelector.tsx:114
+#: src/views/card/components/LabelSelector.tsx:110
+#: src/views/card/components/LabelSelector.tsx:115
 msgid "Add label"
 msgstr "Añadir etiqueta"
 
-#: src/views/card/components/MemberSelector.tsx:130
+#: src/views/card/components/MemberSelector.tsx:131
 #: src/views/members/components/InviteMemberForm.tsx:257
 msgid "Add member"
 msgstr "Añadir miembro"
 
-#: src/views/card/components/ActivityList.tsx:66
+#. placeholder {0}: mergedLabels.length
+#: src/views/card/components/ActivityList.tsx:77
+msgid "added {0} labels: <0>{labelList}</0>"
+msgstr "añadió {0} etiquetas: <0>{labelList}</0>"
+
+#: src/views/card/components/ActivityList.tsx:107
 msgid "added a checklist"
 msgstr "añadió una lista de verificación"
 
-#: src/views/card/components/ActivityList.tsx:69
+#: src/views/card/components/ActivityList.tsx:110
 msgid "added a checklist item"
 msgstr "añadió un elemento a la lista de verificación"
 
-#: src/views/card/components/ActivityList.tsx:62
+#: src/views/card/components/ActivityList.tsx:103
 msgid "added a label to the card"
 msgstr "añadió una etiqueta a la tarjeta"
 
-#: src/views/card/components/ActivityList.tsx:64
+#: src/views/card/components/ActivityList.tsx:105
 msgid "added a member to the card"
 msgstr "añadió un miembro a la tarjeta"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:146
+#: src/views/card/components/ActivityList.tsx:181
 msgid "added checklist <0>{0}</0>"
 msgstr "añadió la lista de verificación <0>{0}</0>"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:170
+#: src/views/card/components/ActivityList.tsx:205
 msgid "added checklist item <0>{0}</0>"
 msgstr "añadió el elemento <0>{0}</0> a la lista de verificación"
 
 #. placeholder {0}: truncate(label)
-#: src/views/card/components/ActivityList.tsx:130
+#: src/views/card/components/ActivityList.tsx:165
 msgid "added label <0>{0}</0>"
 msgstr "añadió la etiqueta <0>{0}</0>"
 
@@ -249,11 +254,11 @@ msgstr "¿Estás seguro de que quieres eliminar este {0}?"
 msgid "Are you sure you want to delete this card?"
 msgstr "¿Estás seguro de que quieres eliminar esta tarjeta?"
 
-#: src/views/card/components/DeleteChecklistConfirmation.tsx:55
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:56
 msgid "Are you sure you want to delete this checklist?"
 msgstr "¿Estás seguro de que quieres eliminar esta lista de verificación?"
 
-#: src/views/card/components/DeleteCommentConfirmation.tsx:65
+#: src/views/card/components/DeleteCommentConfirmation.tsx:66
 msgid "Are you sure you want to delete this comment?"
 msgstr "¿Estás seguro de que quieres eliminar este comentario?"
 
@@ -266,7 +271,7 @@ msgid "Are you sure you want to delete your account?"
 msgstr "¿Estás seguro de que quieres eliminar tu cuenta?"
 
 #. placeholder {0}: truncate(memberName)
-#: src/views/card/components/ActivityList.tsx:110
+#: src/views/card/components/ActivityList.tsx:145
 msgid "assigned <0>{0}</0> to the card"
 msgstr "asignó <0>{0}</0> a la tarjeta"
 
@@ -274,7 +279,7 @@ msgstr "asignó <0>{0}</0> a la tarjeta"
 msgid "Assignees"
 msgstr "Asignados"
 
-#: src/views/card/components/AttachmentUpload.tsx:25
+#: src/views/card/components/AttachmentUpload.tsx:26
 msgid "Attachment uploaded"
 msgstr "Archivo adjunto subido"
 
@@ -382,10 +387,10 @@ msgstr "Informe de error"
 
 #: src/components/DeleteLabelConfirmation.tsx:49
 #: src/views/board/components/DeleteBoardConfirmation.tsx:44
-#: src/views/card/components/Comment.tsx:158
+#: src/views/card/components/Comment.tsx:159
 #: src/views/card/components/DeleteCardConfirmation.tsx:86
-#: src/views/card/components/DeleteChecklistConfirmation.tsx:63
-#: src/views/card/components/DeleteCommentConfirmation.tsx:76
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:64
+#: src/views/card/components/DeleteCommentConfirmation.tsx:77
 #: src/views/members/components/DeleteMemberConfirmation.tsx:55
 #: src/views/settings/components/Avatar.tsx:306
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:168
@@ -419,8 +424,8 @@ msgstr "Cambiar contraseña"
 msgid "Change your language preferences."
 msgstr "Cambia tus preferencias de idioma."
 
-#: src/views/card/components/ActivityList.tsx:220
-#: src/views/card/components/ActivityList.tsx:234
+#: src/views/card/components/ActivityList.tsx:255
+#: src/views/card/components/ActivityList.tsx:269
 msgid "changed the due date to <0>{formattedDate}</0>"
 msgstr "cambió la fecha de vencimiento a <0>{formattedDate}</0>"
 
@@ -433,7 +438,7 @@ msgstr "Descubre algunos de nuestros proyectos de código abierto favoritos."
 msgid "Check your inbox"
 msgstr "Revisa tu bandeja de entrada"
 
-#: src/views/card/components/NewChecklistForm.tsx:118
+#: src/views/card/components/NewChecklistForm.tsx:119
 msgid "Checklist name"
 msgstr "Nombre de la lista de verificación"
 
@@ -494,12 +499,12 @@ msgstr "Completado"
 msgid "Complete control and ownership:"
 msgstr "Control y propiedad completos:"
 
-#: src/views/card/components/ActivityList.tsx:71
+#: src/views/card/components/ActivityList.tsx:112
 msgid "completed a checklist item"
 msgstr "completó un elemento de la lista de verificación"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:187
+#: src/views/card/components/ActivityList.tsx:222
 msgid "completed checklist item <0>{0}</0>"
 msgstr "completó el elemento <0>{0}</0> de la lista de verificación"
 
@@ -573,7 +578,7 @@ msgstr "Crear clave API"
 msgid "Create card"
 msgstr "Crear tarjeta"
 
-#: src/views/card/components/NewChecklistForm.tsx:134
+#: src/views/card/components/NewChecklistForm.tsx:135
 msgid "Create checklist"
 msgstr "Crear lista de verificación"
 
@@ -600,7 +605,7 @@ msgid "Create new key"
 msgstr "Crear nueva clave"
 
 #: src/views/board/components/NewCardForm.tsx:414
-#: src/views/card/components/LabelSelector.tsx:97
+#: src/views/card/components/LabelSelector.tsx:98
 msgid "Create new label"
 msgstr "Crear nueva etiqueta"
 
@@ -618,7 +623,7 @@ msgstr "Crear plantilla"
 msgid "Create workspace"
 msgstr "Crear espacio de trabajo"
 
-#: src/views/card/components/ActivityList.tsx:58
+#: src/views/card/components/ActivityList.tsx:99
 msgid "created the card"
 msgstr "creó la tarjeta"
 
@@ -676,8 +681,8 @@ msgstr "Desactivar enlace de invitación"
 #: src/components/LabelForm.tsx:228
 #: src/views/board/components/DeleteBoardConfirmation.tsx:47
 #: src/views/card/components/DeleteCardConfirmation.tsx:92
-#: src/views/card/components/DeleteChecklistConfirmation.tsx:66
-#: src/views/card/components/DeleteCommentConfirmation.tsx:82
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:67
+#: src/views/card/components/DeleteCommentConfirmation.tsx:83
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -695,7 +700,7 @@ msgstr "Eliminar tablero"
 msgid "Delete card"
 msgstr "Eliminar tarjeta"
 
-#: src/views/card/components/Comment.tsx:91
+#: src/views/card/components/Comment.tsx:92
 msgid "Delete comment"
 msgstr "Eliminar comentario"
 
@@ -713,21 +718,21 @@ msgstr "Eliminar plantilla"
 msgid "Delete workspace"
 msgstr "Eliminar espacio de trabajo"
 
-#: src/views/card/components/ActivityList.tsx:68
+#: src/views/card/components/ActivityList.tsx:109
 msgid "deleted a checklist"
 msgstr "eliminó una lista de verificación"
 
-#: src/views/card/components/ActivityList.tsx:73
+#: src/views/card/components/ActivityList.tsx:114
 msgid "deleted a checklist item"
 msgstr "eliminó un elemento de la lista de verificación"
 
 #. placeholder {0}: truncate(fromTitle)
-#: src/views/card/components/ActivityList.tsx:162
+#: src/views/card/components/ActivityList.tsx:197
 msgid "deleted checklist <0>{0}</0>"
 msgstr "eliminó la lista de verificación <0>{0}</0>"
 
 #. placeholder {0}: truncate(fromTitle)
-#: src/views/card/components/ActivityList.tsx:205
+#: src/views/card/components/ActivityList.tsx:240
 msgid "deleted checklist item <0>{0}</0>"
 msgstr "eliminó el elemento <0>{0}</0> de la lista de verificación"
 
@@ -793,13 +798,13 @@ msgstr "¿No tienes una cuenta? <0><1>Regístrate</1></0>"
 msgid "Done"
 msgstr "Terminado"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:141
+#: src/views/card/components/AttachmentThumbnails.tsx:142
 msgid "Download failed"
 msgstr "Error en la descarga"
 
 #: src/views/board/components/Filters.tsx:171
 #: src/views/board/components/NewCardForm.tsx:469
-#: src/views/card/index.tsx:138
+#: src/views/card/index.tsx:139
 msgid "Due date"
 msgstr "Fecha de vencimiento"
 
@@ -824,7 +829,7 @@ msgstr "Vence mañana"
 msgid "Edit board URL"
 msgstr "Editar URL del tablero"
 
-#: src/views/card/components/Comment.tsx:82
+#: src/views/card/components/Comment.tsx:83
 msgid "Edit comment"
 msgstr "Editar comentario"
 
@@ -981,8 +986,8 @@ msgstr "Error al crear el tablero"
 msgid "Failed to login with {0}. Please try again."
 msgstr "Error al iniciar sesión con {0}. Por favor, inténtalo de nuevo."
 
-#: src/views/card/components/AttachmentUpload.tsx:33
-#: src/views/card/components/AttachmentUpload.tsx:79
+#: src/views/card/components/AttachmentUpload.tsx:34
+#: src/views/card/components/AttachmentUpload.tsx:80
 msgid "Failed to upload attachment. Please try again."
 msgstr "Error al subir el archivo adjunto. Por favor, inténtalo de nuevo."
 
@@ -1274,7 +1279,7 @@ msgstr "Enlaces de invitación"
 msgid "Invite links require a Team or Pro subscription. Please upgrade your workspace."
 msgstr "Los enlaces de invitación requieren una suscripción de Equipo o Pro. Por favor, actualiza tu espacio de trabajo."
 
-#: src/views/card/components/MemberSelector.tsx:111
+#: src/views/card/components/MemberSelector.tsx:112
 #: src/views/members/components/InviteMemberForm.tsx:367
 msgid "Invite member"
 msgstr "Invitar miembro"
@@ -1323,7 +1328,7 @@ msgstr "Atajos de teclado"
 
 #: src/views/board/components/Filters.tsx:155
 #: src/views/board/components/NewCardForm.tsx:418
-#: src/views/card/index.tsx:120
+#: src/views/card/index.tsx:121
 msgid "Labels"
 msgstr "Etiquetas"
 
@@ -1377,7 +1382,7 @@ msgstr "Claro"
 msgid "Link copied"
 msgstr "Enlace copiado"
 
-#: src/views/card/index.tsx:112
+#: src/views/card/index.tsx:113
 msgid "List"
 msgstr "Lista"
 
@@ -1388,6 +1393,14 @@ msgstr "Nombre de la lista"
 #: src/views/board/components/Filters.tsx:163
 msgid "Lists"
 msgstr "Listas"
+
+#: src/views/card/components/ActivityList.tsx:530
+msgid "Load more activities"
+msgstr "Cargar más actividades"
+
+#: src/views/card/components/ActivityList.tsx:530
+msgid "Loading..."
+msgstr "Cargando..."
 
 #: src/views/auth/login/index.tsx:33
 msgid "Login | kan.bn"
@@ -1417,12 +1430,12 @@ msgstr "enlace mágico"
 msgid "Make template"
 msgstr "Crear plantilla"
 
-#: src/views/card/components/ActivityList.tsx:72
+#: src/views/card/components/ActivityList.tsx:113
 msgid "marked a checklist item as incomplete"
 msgstr "marcó un elemento de la lista de verificación como incompleto"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:196
+#: src/views/card/components/ActivityList.tsx:231
 msgid "marked checklist item <0>{0}</0> as incomplete"
 msgstr "marcó el elemento <0>{0}</0> de la lista de verificación como incompleto"
 
@@ -1433,7 +1446,7 @@ msgstr "Prioridad media"
 #: src/components/SideNavigation.tsx:121
 #: src/views/board/components/Filters.tsx:147
 #: src/views/board/components/NewCardForm.tsx:376
-#: src/views/card/index.tsx:129
+#: src/views/card/index.tsx:130
 #: src/views/members/index.tsx:178
 msgid "Members"
 msgstr "Miembros"
@@ -1454,11 +1467,11 @@ msgstr "facturación mensual"
 
 #. placeholder {0}: truncate(fromList)
 #. placeholder {1}: truncate(toList)
-#: src/views/card/components/ActivityList.tsx:98
+#: src/views/card/components/ActivityList.tsx:133
 msgid "moved the card from <0>{0}</0> to<1>{1}</1>"
 msgstr "movió la tarjeta de <0>{0}</0> a<1>{1}</1>"
 
-#: src/views/card/components/ActivityList.tsx:61
+#: src/views/card/components/ActivityList.tsx:102
 msgid "moved the card to another list"
 msgstr "movió la tarjeta a otra lista"
 
@@ -1494,7 +1507,7 @@ msgstr "Nueva clave API"
 msgid "New card"
 msgstr "Nueva tarjeta"
 
-#: src/views/card/components/NewChecklistForm.tsx:102
+#: src/views/card/components/NewChecklistForm.tsx:103
 msgid "New checklist"
 msgstr "Nueva lista de verificación"
 
@@ -1560,7 +1573,7 @@ msgstr "No se requiere tarjeta de crédito"
 msgid "No dates"
 msgstr "Sin fechas"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:142
+#: src/views/card/components/AttachmentThumbnails.tsx:143
 msgid "No download URL available for this attachment."
 msgstr "No hay URL de descarga disponible para este archivo adjunto."
 
@@ -1722,22 +1735,22 @@ msgstr "Por favor selecciona un archivo para subir."
 #: src/views/board/index.tsx:170
 #: src/views/board/index.tsx:226
 #: src/views/boards/components/ImportBoardsForm.tsx:205
-#: src/views/card/components/AttachmentThumbnails.tsx:73
-#: src/views/card/components/ChecklistItemRow.tsx:66
-#: src/views/card/components/ChecklistItemRow.tsx:94
-#: src/views/card/components/ChecklistNameInput.tsx:46
+#: src/views/card/components/AttachmentThumbnails.tsx:74
+#: src/views/card/components/ChecklistItemRow.tsx:67
+#: src/views/card/components/ChecklistItemRow.tsx:95
+#: src/views/card/components/ChecklistNameInput.tsx:47
 #: src/views/card/components/Checklists.tsx:81
-#: src/views/card/components/Comment.tsx:64
+#: src/views/card/components/Comment.tsx:65
 #: src/views/card/components/DeleteCardConfirmation.tsx:52
-#: src/views/card/components/DeleteChecklistConfirmation.tsx:37
-#: src/views/card/components/DeleteCommentConfirmation.tsx:45
-#: src/views/card/components/DueDateSelector.tsx:59
-#: src/views/card/components/LabelSelector.tsx:72
-#: src/views/card/components/ListSelector.tsx:52
-#: src/views/card/components/MemberSelector.tsx:79
-#: src/views/card/components/NewChecklistForm.tsx:70
-#: src/views/card/components/NewChecklistItemForm.tsx:89
-#: src/views/card/components/NewCommentForm.tsx:31
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:38
+#: src/views/card/components/DeleteCommentConfirmation.tsx:46
+#: src/views/card/components/DueDateSelector.tsx:60
+#: src/views/card/components/LabelSelector.tsx:73
+#: src/views/card/components/ListSelector.tsx:53
+#: src/views/card/components/MemberSelector.tsx:80
+#: src/views/card/components/NewChecklistForm.tsx:71
+#: src/views/card/components/NewChecklistItemForm.tsx:90
+#: src/views/card/components/NewCommentForm.tsx:32
 #: src/views/card/index.tsx:187
 #: src/views/card/index.tsx:200
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
@@ -1839,35 +1852,40 @@ msgstr "Eliminar"
 msgid "Remove member"
 msgstr "Eliminar miembro"
 
-#: src/views/card/components/ActivityList.tsx:63
+#. placeholder {0}: mergedLabels.length
+#: src/views/card/components/ActivityList.tsx:91
+msgid "removed {0} labels: <0>{labelList}</0>"
+msgstr "eliminó {0} etiquetas: <0>{labelList}</0>"
+
+#: src/views/card/components/ActivityList.tsx:104
 msgid "removed a label from the card"
 msgstr "eliminó una etiqueta de la tarjeta"
 
-#: src/views/card/components/ActivityList.tsx:65
+#: src/views/card/components/ActivityList.tsx:106
 msgid "removed a member from the card"
 msgstr "eliminó un miembro de la tarjeta"
 
 #. placeholder {0}: truncate(label)
-#: src/views/card/components/ActivityList.tsx:138
+#: src/views/card/components/ActivityList.tsx:173
 msgid "removed label <0>{0}</0>"
 msgstr "eliminó la etiqueta <0>{0}</0>"
 
-#: src/views/card/components/ActivityList.tsx:76
-#: src/views/card/components/ActivityList.tsx:241
+#: src/views/card/components/ActivityList.tsx:117
+#: src/views/card/components/ActivityList.tsx:276
 msgid "removed the due date"
 msgstr "eliminó la fecha de vencimiento"
 
-#: src/views/card/components/ActivityList.tsx:67
+#: src/views/card/components/ActivityList.tsx:108
 msgid "renamed a checklist"
 msgstr "renombró una lista de verificación"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:154
+#: src/views/card/components/ActivityList.tsx:189
 msgid "renamed checklist <0>{0}</0>"
 msgstr "renombró la lista de verificación <0>{0}</0>"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:178
+#: src/views/card/components/ActivityList.tsx:213
 msgid "renamed checklist item to <0>{0}</0>"
 msgstr "renombró el elemento de la lista de verificación a <0>{0}</0>"
 
@@ -1906,7 +1924,7 @@ msgstr "Rol"
 msgid "Run on your own infrastructure"
 msgstr "Ejecuta en tu propia infraestructura"
 
-#: src/views/card/components/Comment.tsx:165
+#: src/views/card/components/Comment.tsx:166
 #: src/views/settings/components/Avatar.tsx:309
 msgid "Save"
 msgstr "Guardar"
@@ -1944,7 +1962,7 @@ msgstr "Autoalojamiento"
 msgid "Self host with Github"
 msgstr "Autoalojamiento con Github"
 
-#: src/views/card/components/ActivityList.tsx:107
+#: src/views/card/components/ActivityList.tsx:142
 msgid "self-assigned the card"
 msgstr "se autoasignó la tarjeta"
 
@@ -1960,11 +1978,11 @@ msgstr "Enviar comentarios"
 msgid "Senior"
 msgstr "Senior"
 
-#: src/views/card/components/DueDateSelector.tsx:116
+#: src/views/card/components/DueDateSelector.tsx:117
 msgid "Set due date"
 msgstr "Establecer fecha de vencimiento"
 
-#: src/views/card/components/ActivityList.tsx:74
+#: src/views/card/components/ActivityList.tsx:115
 msgid "set the due date"
 msgstr "estableció la fecha de vencimiento"
 
@@ -2155,8 +2173,8 @@ msgstr "No podrán acceder a este espacio de trabajo."
 #: src/components/DeleteLabelConfirmation.tsx:44
 #: src/views/board/components/DeleteBoardConfirmation.tsx:39
 #: src/views/card/components/DeleteCardConfirmation.tsx:78
-#: src/views/card/components/DeleteChecklistConfirmation.tsx:58
-#: src/views/card/components/DeleteCommentConfirmation.tsx:68
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:59
+#: src/views/card/components/DeleteCommentConfirmation.tsx:69
 msgid "This action can't be undone."
 msgstr "Esta acción no se puede deshacer."
 
@@ -2230,11 +2248,11 @@ msgstr "Clasificación"
 msgid "Trusted by fast-moving teams<0/>around the world"
 msgstr "Equipos ágiles de todo el mundo<0/>confían en nosotros"
 
-#: src/views/card/components/NewChecklistItemForm.tsx:88
+#: src/views/card/components/NewChecklistItemForm.tsx:89
 msgid "Unable to add checklist item"
 msgstr "No se puede añadir el elemento a la lista de verificación"
 
-#: src/views/card/components/NewCommentForm.tsx:30
+#: src/views/card/components/NewCommentForm.tsx:31
 msgid "Unable to add comment"
 msgstr "No se puede añadir el comentario"
 
@@ -2246,7 +2264,7 @@ msgstr "No se puede añadir etiqueta"
 msgid "Unable to create card"
 msgstr "No se puede crear la tarjeta"
 
-#: src/views/card/components/NewChecklistForm.tsx:69
+#: src/views/card/components/NewChecklistForm.tsx:70
 msgid "Unable to create checklist"
 msgstr "No se puede crear la lista de verificación"
 
@@ -2263,7 +2281,7 @@ msgstr "No se puede crear la plantilla"
 msgid "Unable to create workspace"
 msgstr "No se puede crear el espacio de trabajo"
 
-#: src/views/card/components/AttachmentThumbnails.tsx:72
+#: src/views/card/components/AttachmentThumbnails.tsx:73
 msgid "Unable to delete attachment"
 msgstr "No se puede eliminar el archivo adjunto"
 
@@ -2271,15 +2289,15 @@ msgstr "No se puede eliminar el archivo adjunto"
 msgid "Unable to delete card"
 msgstr "No se puede eliminar la tarjeta"
 
-#: src/views/card/components/DeleteChecklistConfirmation.tsx:36
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:37
 msgid "Unable to delete checklist"
 msgstr "No se puede eliminar la lista de verificación"
 
-#: src/views/card/components/ChecklistItemRow.tsx:93
+#: src/views/card/components/ChecklistItemRow.tsx:94
 msgid "Unable to delete checklist item"
 msgstr "No se puede eliminar el elemento de la lista de verificación"
 
-#: src/views/card/components/DeleteCommentConfirmation.tsx:44
+#: src/views/card/components/DeleteCommentConfirmation.tsx:45
 msgid "Unable to delete comment"
 msgstr "No se puede eliminar el comentario"
 
@@ -2308,41 +2326,41 @@ msgstr "No se puede actualizar la visibilidad del tablero"
 msgid "Unable to update card"
 msgstr "No se puede actualizar la tarjeta"
 
-#: src/views/card/components/ChecklistNameInput.tsx:45
+#: src/views/card/components/ChecklistNameInput.tsx:46
 msgid "Unable to update checklist"
 msgstr "No se puede actualizar la lista de verificación"
 
-#: src/views/card/components/ChecklistItemRow.tsx:65
+#: src/views/card/components/ChecklistItemRow.tsx:66
 msgid "Unable to update checklist item"
 msgstr "No se puede actualizar el elemento de la lista de verificación"
 
-#: src/views/card/components/Comment.tsx:63
+#: src/views/card/components/Comment.tsx:64
 msgid "Unable to update comment"
 msgstr "No se puede actualizar el comentario"
 
-#: src/views/card/components/DueDateSelector.tsx:58
+#: src/views/card/components/DueDateSelector.tsx:59
 msgid "Unable to update due date"
 msgstr "No se puede actualizar la fecha de vencimiento"
 
-#: src/views/card/components/LabelSelector.tsx:71
+#: src/views/card/components/LabelSelector.tsx:72
 msgid "Unable to update labels"
 msgstr "No se pueden actualizar las etiquetas"
 
 #: src/views/board/index.tsx:169
-#: src/views/card/components/ListSelector.tsx:51
+#: src/views/card/components/ListSelector.tsx:52
 msgid "Unable to update list"
 msgstr "No se puede actualizar la lista"
 
-#: src/views/card/components/MemberSelector.tsx:78
+#: src/views/card/components/MemberSelector.tsx:79
 msgid "Unable to update members"
 msgstr "No se pueden actualizar los miembros"
 
 #. placeholder {0}: truncate(memberName)
-#: src/views/card/components/ActivityList.tsx:121
+#: src/views/card/components/ActivityList.tsx:156
 msgid "unassigned <0>{0}</0> from the card"
 msgstr "desasignó <0>{0}</0> de la tarjeta"
 
-#: src/views/card/components/ActivityList.tsx:118
+#: src/views/card/components/ActivityList.tsx:153
 msgid "unassigned themselves from the card"
 msgstr "se desasignó de la tarjeta"
 
@@ -2401,24 +2419,24 @@ msgstr "Actualizar"
 msgid "Update label"
 msgstr "Actualizar etiqueta"
 
-#: src/views/card/components/ActivityList.tsx:70
+#: src/views/card/components/ActivityList.tsx:111
 msgid "updated a checklist item"
 msgstr "actualizó un elemento de la lista de verificación"
 
-#: src/views/card/components/ActivityList.tsx:60
+#: src/views/card/components/ActivityList.tsx:101
 msgid "updated the description"
 msgstr "actualizó la descripción"
 
-#: src/views/card/components/ActivityList.tsx:75
+#: src/views/card/components/ActivityList.tsx:116
 msgid "updated the due date"
 msgstr "actualizó la fecha de vencimiento"
 
-#: src/views/card/components/ActivityList.tsx:59
+#: src/views/card/components/ActivityList.tsx:100
 msgid "updated the title"
 msgstr "actualizó el título"
 
 #. placeholder {0}: truncate(toTitle)
-#: src/views/card/components/ActivityList.tsx:90
+#: src/views/card/components/ActivityList.tsx:125
 msgid "updated the title to <0>{0}</0>"
 msgstr "actualizó el título a <0>{0}</0>"
 
@@ -2432,8 +2450,8 @@ msgstr "Actualizar a Pro"
 msgid "Upgrade to Pro ($29/month)"
 msgstr "Actualizar a Pro ($29/mes)"
 
-#: src/views/card/components/AttachmentUpload.tsx:32
-#: src/views/card/components/AttachmentUpload.tsx:78
+#: src/views/card/components/AttachmentUpload.tsx:33
+#: src/views/card/components/AttachmentUpload.tsx:79
 msgid "Upload failed"
 msgstr "Error al subir"
 
@@ -2676,7 +2694,7 @@ msgstr "Tus tableros han sido importados."
 msgid "Your display name has been updated."
 msgstr "Tu nombre de visualización ha sido actualizado."
 
-#: src/views/card/components/AttachmentUpload.tsx:26
+#: src/views/card/components/AttachmentUpload.tsx:27
 msgid "Your file has been uploaded successfully."
 msgstr "Tu archivo se ha subido correctamente."
 

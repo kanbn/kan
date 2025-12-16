@@ -8,6 +8,7 @@ import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
 
 export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
   const { openModal } = useModal();
@@ -20,7 +21,7 @@ export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
   const generateUploadUrl = api.attachment.generateUploadUrl.useMutation();
   const confirmAttachment = api.attachment.confirm.useMutation({
     onSuccess: async () => {
-      await utils.card.byId.invalidate({ cardPublicId });
+      await invalidateCard(utils, cardPublicId);
       showPopup({
         header: t`Attachment uploaded`,
         message: t`Your file has been uploaded successfully.`,

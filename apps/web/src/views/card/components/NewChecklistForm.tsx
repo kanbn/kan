@@ -10,6 +10,7 @@ import Input from "~/components/Input";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface NewChecklistFormInput {
   name: string;
@@ -72,7 +73,7 @@ export function NewChecklistForm({ cardPublicId }: { cardPublicId: string }) {
       });
     },
     onSettled: async (_data, _error, vars) => {
-      await utils.card.byId.invalidate({ cardPublicId: vars.cardPublicId });
+      await invalidateCard(utils, vars.cardPublicId);
     },
   });
 

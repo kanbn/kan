@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
 
 export default function ChecklistNameInput({
   checklistPublicId,
@@ -48,7 +49,7 @@ export default function ChecklistNameInput({
       });
     },
     onSettled: async () => {
-      await utils.card.byId.invalidate({ cardPublicId });
+      await invalidateCard(utils, cardPublicId);
     },
   });
 

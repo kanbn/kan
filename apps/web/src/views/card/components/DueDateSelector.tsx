@@ -6,6 +6,7 @@ import { HiMiniPlus } from "react-icons/hi2";
 import DateSelector from "~/components/DateSelector";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface DueDateSelectorProps {
   cardPublicId: string;
@@ -61,7 +62,7 @@ export function DueDateSelector({
       });
     },
     onSettled: async () => {
-      await utils.card.byId.invalidate({ cardPublicId });
+      await invalidateCard(utils, cardPublicId);
       await utils.board.byId.invalidate();
     },
   });
