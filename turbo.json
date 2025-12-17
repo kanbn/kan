@@ -46,6 +46,7 @@
     }
   },
   "globalEnv": [
+    "KAN_ADMIN_API_KEY",
     "POSTGRES_URL",
     "TRELLO_APP_API_KEY",
     "TRELLO_APP_SECRET",
