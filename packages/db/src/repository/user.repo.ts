@@ -1,8 +1,14 @@
-import { desc, eq } from "drizzle-orm";
+import { count, desc, eq } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
 
 import type { dbClient } from "@kan/db/client";
 import { apikey, users } from "@kan/db/schema";
+
+export const getCount = async (db: dbClient) => {
+  const result = await db.select({ count: count() }).from(users);
+
+  return result[0]?.count ?? 0;
+};
 
 export const getById = async (db: dbClient, userId: string) => {
   return await db.query.users.findFirst({
