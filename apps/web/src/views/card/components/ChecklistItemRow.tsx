@@ -187,7 +187,10 @@ export default function ChecklistItemRow({
           disabled={viewOnly}
           onChange={(e) => setTitle(e.target.value)}
           // @ts-expect-error - valid event
-          onBlur={(e: Event) => commitTitle(e.target.innerHTML as string)}
+          onBlur={(e: Event) => {
+            const innerHTML = (e.target as HTMLElement).innerHTML;
+            commitTitle(innerHTML);
+          }}
           className={twMerge(
             "m-0 min-h-[20px] w-full p-0 text-sm leading-[20px] text-light-950 outline-none focus-visible:outline-none dark:text-dark-950",
             viewOnly && "cursor-default",
@@ -197,7 +200,8 @@ export default function ChecklistItemRow({
             if (viewOnly) return;
             if (e.key === "Enter") {
               e.preventDefault();
-              commitTitle(title);
+              const innerHTML = (e.currentTarget as HTMLElement).innerHTML;
+              commitTitle(innerHTML);
             }
             if (e.key === "Escape") {
               e.preventDefault();
