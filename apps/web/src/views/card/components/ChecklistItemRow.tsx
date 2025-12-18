@@ -17,6 +17,7 @@ interface ChecklistItemRowProps {
     completed: boolean;
   };
   cardPublicId: string;
+  onCreateNewItem?: () => void;
   viewOnly?: boolean;
   dragHandleProps?: DraggableProvided["dragHandleProps"];
   isDragging?: boolean;
@@ -25,6 +26,7 @@ interface ChecklistItemRowProps {
 export default function ChecklistItemRow({
   item,
   cardPublicId,
+  onCreateNewItem,
   viewOnly = false,
   dragHandleProps,
   isDragging = false,
@@ -202,6 +204,7 @@ export default function ChecklistItemRow({
               e.preventDefault();
               const innerHTML = (e.currentTarget as HTMLElement).innerHTML;
               commitTitle(innerHTML);
+              onCreateNewItem?.();
             }
             if (e.key === "Escape") {
               e.preventDefault();
