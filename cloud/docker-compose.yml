@@ -13,6 +13,7 @@ services:
       - .env
     restart: unless-stopped
     environment:
+      - KAN_ADMIN_API_KEY=${KAN_ADMIN_API_KEY}
       - NEXT_PUBLIC_KAN_ENV=${NEXT_PUBLIC_KAN_ENV}
       - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}

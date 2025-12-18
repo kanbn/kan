@@ -1,9 +1,24 @@
-import { and, desc, eq, isNull, sql } from "drizzle-orm";
+import { and, count, desc, eq, isNull, sql } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import { checklistItems, checklists } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
+export const getCount = async (db: dbClient) => {
+  const result = await db
+    .select({ count: count() })
+    .from(checklists)
+    .where(isNull(checklists.deletedAt));
+  return result[0]?.count ?? 0;
+};
+
+export const getCountItems = async (db: dbClient) => {
+  const result = await db
+    .select({ count: count() })
+    .from(checklistItems)
+    .where(isNull(checklistItems.deletedAt));
+  return result[0]?.count ?? 0;
+};
 
 export const create = async (
   db: dbClient,
@@ -357,7 +372,10 @@ export const reorderItem = async (
         index: true,
         checklistId: true,
       },
-      where: and(eq(checklistItems.id, args.itemId), isNull(checklistItems.deletedAt)),
+      where: and(
+        eq(checklistItems.id, args.itemId),
+        isNull(checklistItems.deletedAt),
+      ),
     });
 
     if (!item) {
@@ -374,7 +392,10 @@ export const reorderItem = async (
           title: true,
           completed: true,
         },
-        where: and(eq(checklistItems.id, args.itemId), isNull(checklistItems.deletedAt)),
+        where: and(
+          eq(checklistItems.id, args.itemId),
+          isNull(checklistItems.deletedAt),
+        ),
       });
 
       if (!unchanged) {
@@ -418,7 +439,6 @@ export const reorderItem = async (
       throw new Error(`Failed to update checklist item with ID ${args.itemId}`);
     }
 
-      return updated;
-    });
-  }
-
+    return updated;
+  });
+};

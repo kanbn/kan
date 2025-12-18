@@ -1,9 +1,15 @@
-import { and, asc, eq, gt, inArray, isNull, or } from "drizzle-orm";
+import { and, asc, count, eq, gt, inArray, isNull, or } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { ActivityType } from "@kan/db/schema";
 import { cardActivities, comments } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
+
+export const getCount = async (db: dbClient) => {
+  const result = await db.select({ count: count() }).from(cardActivities);
+
+  return result[0]?.count ?? 0;
+};
 
 export const create = async (
   db: dbClient,
