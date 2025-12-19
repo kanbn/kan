@@ -210,6 +210,9 @@ export default function Checklists({
                                   completed: item.completed,
                                 }}
                                 cardPublicId={cardPublicId}
+                                onCreateNewItem={() =>
+                                  setActiveChecklistForm?.(checklist.publicId)
+                                }
                                 viewOnly={viewOnly}
                                 dragHandleProps={provided.dragHandleProps}
                                 isDragging={snapshot.isDragging}
