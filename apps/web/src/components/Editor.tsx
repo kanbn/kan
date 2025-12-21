@@ -1,4 +1,5 @@
 import type { Editor as TiptapEditor } from "@tiptap/react";
+import type { Range as TiptapRange } from "@tiptap/core";
 import type {
   SuggestionKeyDownProps,
   SuggestionOptions,
@@ -44,6 +45,7 @@ import { Markdown } from "tiptap-markdown";
 
 import { getAvatarUrl } from "~/utils/helpers";
 import Avatar from "./Avatar";
+import { YouTubeNode } from "./YouTubeEmbed/YouTubeNode";
 
 declare module "@tiptap/core" {
   interface Commands<ReturnType> {
@@ -56,7 +58,7 @@ declare module "@tiptap/core" {
 export interface SlashCommandItem {
   title: string;
   icon?: React.ReactNode;
-  command?: (props: { editor: TiptapEditor; range: Range }) => void;
+  command?: (props: { editor: TiptapEditor; range: TiptapRange }) => void;
   disabled?: boolean;
 }
 
@@ -484,10 +486,12 @@ export default function Editor({
                 }),
               );
               const q = query.toLowerCase();
-              return all.filter((u) => u.label.toLowerCase().includes(q));
+              return all.filter((u) => u.label && typeof u.label === "string" && u.label.toLowerCase().includes(q));
             },
-            command: ({ editor, range, props }: any) => {
-              const mentionHTML = `<span data-type="mention" data-id="${props.id}" data-label="${props.label}">@${props.label}</span>&nbsp;`;
+            command: ({ editor, range, props }) => {
+              const id = props.id ?? "";
+              const label = props.label ?? "";
+              const mentionHTML = `<span data-type="mention" data-id="${id}" data-label="${label}">@${label}</span>&nbsp;`;
 
               editor
                 .chain()
@@ -503,6 +507,7 @@ export default function Editor({
             return `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`;
           },
         }),
+        YouTubeNode,
       ],
       content,
       onUpdate: ({ editor }) => onChange?.(editor.getHTML()),
@@ -558,6 +563,9 @@ export default function Editor({
           color: rgb(59, 130, 246);
           text-decoration: none;
           font-weight: 500;
+        }
+        .tiptap [data-youtube] {
+          margin: 1rem 0;
         }
       `}</style>
       {!readOnly && editor && <EditorBubbleMenu editor={editor} />}
