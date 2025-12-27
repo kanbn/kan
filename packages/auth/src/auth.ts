@@ -339,6 +339,37 @@ export const initAuth = (db: dbClient) => {
                   discoveryUrl: process.env.OIDC_DISCOVERY_URL,
                   scopes: ["openid", "email", "profile"],
                   pkce: true,
+                  mapProfileToUser: (profile: {
+                    name?: string;
+                    display_name?: string;
+                    preferred_username?: string;
+                    given_name?: string;
+                    family_name?: string;
+                    email?: string;
+                    email_verified?: boolean;
+                    sub?: string;
+                    picture?: string;
+                    avatar?: string;
+                  }) => {
+                    console.log("OIDC profile:", profile);
+
+                    const name =
+                      profile.name ??
+                      profile.display_name ??
+                      profile.preferred_username ??
+                      (profile.given_name && profile.family_name
+                        ? `${profile.given_name} ${profile.family_name}`.trim()
+                        : (profile.given_name ?? profile.family_name)) ??
+                      profile.sub ??
+                      "";
+
+                    return {
+                      email: profile.email,
+                      name: name,
+                      emailVerified: profile.email_verified ?? false,
+                      image: profile.picture ?? profile.avatar ?? null,
+                    };
+                  },
                 },
               ],
             }),
