@@ -57,7 +57,7 @@ export const activityTypeEnum = pgEnum("card_activity_type", activityTypes);
 export const cards = pgTable("card", {
   id: bigserial("id", { mode: "number" }).primaryKey(),
   publicId: varchar("publicId", { length: 12 }).notNull().unique(),
-  title: varchar("title", { length: 255 }).notNull(),
+  title: text("title").notNull(),
   description: text("description"),
   index: integer("index").notNull(),
   createdBy: uuid("createdBy").references(() => users.id, {
@@ -127,8 +127,8 @@ export const cardActivities = pgTable("card_activity", {
   workspaceMemberId: bigint("workspaceMemberId", {
     mode: "number",
   }).references(() => workspaceMembers.id, { onDelete: "set null" }),
-  fromTitle: varchar("fromTitle", { length: 255 }),
-  toTitle: varchar("toTitle", { length: 255 }),
+  fromTitle: text("fromTitle"),
+  toTitle: text("toTitle"),
   fromDescription: text("fromDescription"),
   toDescription: text("toDescription"),
   createdBy: uuid("createdBy").references(() => users.id, {
