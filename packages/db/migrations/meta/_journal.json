@@ -148,6 +148,13 @@
       "when": 1764621815672,
       "tag": "20251201204335_AddCardDueDates",
       "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1767045713686,
+      "tag": "20251229220153_UpdateCardTitleFromVarcharToText",
+      "breakpoints": true
     }
   ]
 }
