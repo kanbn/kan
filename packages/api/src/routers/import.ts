@@ -52,7 +52,7 @@ interface TrelloCheckItem {
 
 interface TrelloCard {
   id: string;
-  name: string;
+  name: string | null;
   desc: string;
   idList: string;
   labels: TrelloLabel[];
@@ -290,7 +290,7 @@ export const importRouter = createTRPCRouter({
             if (list.cards.length && newListId) {
               const cardsInsert = list.cards.map((card, index) => ({
                 publicId: generateUID(),
-                title: card.name,
+                title: (card.name?.trim() ?? "Untitled Card").slice(0, 2000),
                 description: card.description,
                 createdBy: userId,
                 listId: newListId,
