@@ -31,7 +31,7 @@ msgstr "{0}"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
 #: src/views/boards/index.tsx:33
-#: src/views/card/index.tsx:272
+#: src/views/card/index.tsx:273
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
@@ -41,7 +41,7 @@ msgid "{0} labels"
 msgstr "{0} labels"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:408
+#: src/views/board/index.tsx:416
 msgid "{0} not found"
 msgstr "{0} not found"
 
@@ -95,7 +95,7 @@ msgstr "Account deleted"
 msgid "Actions"
 msgstr "Actions"
 
-#: src/views/card/index.tsx:386
+#: src/views/card/index.tsx:387
 #: src/views/public/board/CardModal.tsx:158
 msgid "Activity"
 msgstr "Activity"
@@ -125,7 +125,7 @@ msgstr "Add an item..."
 msgid "Add checklist"
 msgstr "Add checklist"
 
-#: src/components/Editor.tsx:451
+#: src/components/Editor.tsx:453
 msgid "Add description... (type '/' to open commands or '@' to mention)"
 msgstr "Add description... (type '/' to open commands or '@' to mention)"
 
@@ -357,8 +357,8 @@ msgstr "Billing portal"
 msgid "Blog Post"
 msgstr "Blog Post"
 
-#: src/views/board/index.tsx:382
-#: src/views/card/index.tsx:272
+#: src/views/board/index.tsx:390
+#: src/views/card/index.tsx:273
 #: src/views/public/board/index.tsx:114
 msgid "Board"
 msgstr "Board"
@@ -443,6 +443,7 @@ msgid "Bug Report"
 msgstr "Bug Report"
 
 #: src/components/DeleteLabelConfirmation.tsx:49
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:176
 #: src/views/board/components/DeleteBoardConfirmation.tsx:44
 #: src/views/card/components/Comment.tsx:159
 #: src/views/card/components/DeleteCardConfirmation.tsx:86
@@ -457,12 +458,12 @@ msgstr "Bug Report"
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/views/card/index.tsx:272
+#: src/views/card/index.tsx:273
 msgid "Card"
 msgstr "Card"
 
-#: src/views/card/index.tsx:306
-#: src/views/card/index.tsx:342
+#: src/views/card/index.tsx:307
+#: src/views/card/index.tsx:343
 msgid "Card not found"
 msgstr "Card not found"
 
@@ -620,6 +621,10 @@ msgstr "Continue with {0}"
 msgid "Control who can view and edit your boards."
 msgstr "Control who can view and edit your boards."
 
+#: src/components/YouTubeEmbed/YouTubeDropdown.tsx:47
+msgid "Convert to link"
+msgstr "Convert to link"
+
 #: src/views/pricing/components/FeatureComparisonTable.tsx:38
 msgid "Core features"
 msgstr "Core features"
@@ -686,8 +691,8 @@ msgstr "Create new key"
 msgid "Create new label"
 msgstr "Create new label"
 
-#: src/views/board/index.tsx:64
-#: src/views/board/index.tsx:499
+#: src/views/board/index.tsx:65
+#: src/views/board/index.tsx:507
 msgid "Create new list"
 msgstr "Create new list"
 
@@ -768,6 +773,7 @@ msgstr "Deactivate invite link"
 
 #: src/components/DeleteLabelConfirmation.tsx:51
 #: src/components/LabelForm.tsx:228
+#: src/components/YouTubeEmbed/YouTubeDropdown.tsx:52
 #: src/views/board/components/DeleteBoardConfirmation.tsx:47
 #: src/views/card/components/DeleteCardConfirmation.tsx:92
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:67
@@ -913,6 +919,10 @@ msgstr "Due today"
 msgid "Due tomorrow"
 msgstr "Due tomorrow"
 
+#: src/components/YouTubeEmbed/YouTubeDropdown.tsx:42
+msgid "Edit"
+msgstr "Edit"
+
 #: src/views/board/components/BoardDropdown.tsx:41
 #: src/views/board/components/UpdateBoardSlugForm.tsx:116
 msgid "Edit board URL"
@@ -930,6 +940,10 @@ msgstr "Edit label"
 msgid "Edit workspace URL"
 msgstr "Edit workspace URL"
 
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:108
+msgid "Edit YouTube Video"
+msgstr "Edit YouTube Video"
+
 #: src/views/boards/components/TemplateBoards.tsx:32
 msgid "Editing"
 msgstr "Editing"
@@ -945,6 +959,10 @@ msgstr "Email"
 #: src/views/boards/components/TemplateBoards.tsx:24
 msgid "Enhancement"
 msgstr "Enhancement"
+
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:131
+msgid "Enter a custom title"
+msgstr "Enter a custom title"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:122
 msgid "Enter your current password"
@@ -1069,6 +1087,10 @@ msgstr "Failed to copy invite link"
 #: src/views/boards/components/NewBoardForm.tsx:93
 msgid "Failed to create board"
 msgstr "Failed to create board"
+
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:82
+msgid "Failed to fetch video information"
+msgstr "Failed to fetch video information"
 
 #. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
 #: src/components/AuthForm.tsx:291
@@ -1195,7 +1217,7 @@ msgstr "Get started by creating a new {0}"
 #~ msgid "Get started by creating a new board"
 #~ msgstr "Get started by creating a new board"
 
-#: src/views/board/index.tsx:491
+#: src/views/board/index.tsx:499
 msgid "Get started by creating a new list"
 msgstr "Get started by creating a new list"
 
@@ -1277,6 +1299,10 @@ msgstr "How do I self-host?"
 #: src/views/home/components/Faqs.tsx:38
 msgid "How is the project funded?"
 msgstr "How is the project funded?"
+
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:151
+msgid "https://www.youtube.com/watch?v=..."
+msgstr "https://www.youtube.com/watch?v=..."
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:82
 msgid "I acknowledge that all of my account data will be permanently deleted and want to proceed."
@@ -1643,7 +1669,7 @@ msgid "New label"
 msgstr "New label"
 
 #: src/views/board/components/NewListForm.tsx:113
-#: src/views/board/index.tsx:462
+#: src/views/board/index.tsx:470
 msgid "New list"
 msgstr "New list"
 
@@ -1712,7 +1738,7 @@ msgstr "No download URL available for this attachment."
 msgid "No keyboard shortcuts registered."
 msgstr "No keyboard shortcuts registered."
 
-#: src/views/board/index.tsx:488
+#: src/views/board/index.tsx:496
 msgid "No lists"
 msgstr "No lists"
 
@@ -1850,6 +1876,11 @@ msgstr "Please enter a valid name"
 msgid "Please enter a valid password"
 msgstr "Please enter a valid password"
 
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:58
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:98
+msgid "Please enter a valid YouTube URL"
+msgstr "Please enter a valid YouTube URL"
+
 #: src/views/settings/components/Avatar.tsx:92
 msgid "Please select a file to upload."
 msgstr "Please select a file to upload."
@@ -1863,8 +1894,8 @@ msgstr "Please select a file to upload."
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:73
 #: src/views/board/components/VisibilityButton.tsx:54
-#: src/views/board/index.tsx:170
-#: src/views/board/index.tsx:226
+#: src/views/board/index.tsx:171
+#: src/views/board/index.tsx:227
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/AttachmentThumbnails.tsx:74
 #: src/views/card/components/ChecklistItemRow.tsx:67
@@ -1873,17 +1904,17 @@ msgstr "Please select a file to upload."
 #: src/views/card/components/Checklists.tsx:81
 #: src/views/card/components/Comment.tsx:65
 #: src/views/card/components/DeleteCardConfirmation.tsx:52
-#: src/views/card/components/DeleteChecklistConfirmation.tsx:38
-#: src/views/card/components/DeleteCommentConfirmation.tsx:46
-#: src/views/card/components/DueDateSelector.tsx:60
-#: src/views/card/components/LabelSelector.tsx:73
-#: src/views/card/components/ListSelector.tsx:53
-#: src/views/card/components/MemberSelector.tsx:80
-#: src/views/card/components/NewChecklistForm.tsx:71
-#: src/views/card/components/NewChecklistItemForm.tsx:90
-#: src/views/card/components/NewCommentForm.tsx:32
-#: src/views/card/index.tsx:187
-#: src/views/card/index.tsx:200
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:37
+#: src/views/card/components/DeleteCommentConfirmation.tsx:45
+#: src/views/card/components/DueDateSelector.tsx:59
+#: src/views/card/components/LabelSelector.tsx:72
+#: src/views/card/components/ListSelector.tsx:52
+#: src/views/card/components/MemberSelector.tsx:79
+#: src/views/card/components/NewChecklistForm.tsx:70
+#: src/views/card/components/NewChecklistItemForm.tsx:89
+#: src/views/card/components/NewCommentForm.tsx:31
+#: src/views/card/index.tsx:188
+#: src/views/card/index.tsx:201
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:104
 #: src/views/members/components/InviteMemberForm.tsx:241
@@ -2063,7 +2094,8 @@ msgstr "Role"
 msgid "Run on your own infrastructure"
 msgstr "Run on your own infrastructure"
 
-#: src/views/card/components/Comment.tsx:166
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:183
+#: src/views/card/components/Comment.tsx:165
 #: src/views/settings/components/Avatar.tsx:309
 msgid "Save"
 msgstr "Save"
@@ -2258,8 +2290,8 @@ msgstr "Team Plan"
 msgid "Teams"
 msgstr "Teams"
 
-#: src/views/board/index.tsx:382
-#: src/views/board/index.tsx:417
+#: src/views/board/index.tsx:390
+#: src/views/board/index.tsx:425
 msgid "Template"
 msgstr "Template"
 
@@ -2365,6 +2397,10 @@ msgstr "This workspace URL is reserved"
 msgid "This workspace username has already been taken"
 msgstr "This workspace username has already been taken"
 
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:127
+msgid "Title"
+msgstr "Title"
+
 #: src/views/boards/components/TemplateBoards.tsx:17
 #: src/views/boards/components/TemplateBoards.tsx:23
 msgid "To Do"
@@ -2415,7 +2451,7 @@ msgstr "Unable to add checklist item"
 msgid "Unable to add comment"
 msgstr "Unable to add comment"
 
-#: src/views/card/index.tsx:199
+#: src/views/card/index.tsx:200
 msgid "Unable to add label"
 msgstr "Unable to add label"
 
@@ -2480,8 +2516,8 @@ msgstr "Unable to update board URL"
 msgid "Unable to update board visibility"
 msgstr "Unable to update board visibility"
 
-#: src/views/board/index.tsx:225
-#: src/views/card/index.tsx:186
+#: src/views/board/index.tsx:226
+#: src/views/card/index.tsx:187
 msgid "Unable to update card"
 msgstr "Unable to update card"
 
@@ -2505,8 +2541,8 @@ msgstr "Unable to update due date"
 msgid "Unable to update labels"
 msgstr "Unable to update labels"
 
-#: src/views/board/index.tsx:169
-#: src/views/card/components/ListSelector.tsx:52
+#: src/views/board/index.tsx:170
+#: src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Unable to update list"
 
@@ -2740,7 +2776,7 @@ msgid "Why make an open source Trello?"
 msgstr "Why make an open source Trello?"
 
 #: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:382
+#: src/views/board/index.tsx:390
 #: src/views/boards/index.tsx:33
 #: src/views/members/index.tsx:173
 #: src/views/public/board/index.tsx:114
@@ -2920,3 +2956,7 @@ msgstr "Your workspace name has been updated."
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:61
 msgid "Your workspace slug has been updated."
 msgstr "Your workspace slug has been updated."
+
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:147
+msgid "YouTube URL"
+msgstr "YouTube URL"
