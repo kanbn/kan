@@ -41,17 +41,17 @@ const YouTubeDropdown = ({
         {
           label: t`Edit`,
           action: handleEdit,
-          icon: <HiPencil className="h-5 w-5 text-dark-900" />,
+          icon: <HiPencil className="h-4 w-4 text-dark-900" />,
         },
         {
           label: t`Convert to link`,
           action: onConvertToLink,
-          icon: <HiLink className="h-5 w-5 text-dark-900" />,
+          icon: <HiLink className="h-4 w-4 text-dark-900" />,
         },
         {
           label: t`Delete`,
           action: onDelete,
-          icon: <HiTrash className="h-5 w-5 text-dark-900" />,
+          icon: <HiTrash className="h-4 w-4 text-dark-900" />,
         },
       ]}
     >

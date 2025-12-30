@@ -1,7 +1,8 @@
 import type { NodeViewProps } from "@tiptap/react";
 import { NodeViewWrapper } from "@tiptap/react";
-import YouTubeCard from "./YouTubeCard";
+
 import { extractVideoId } from "./utils";
+import YouTubeCard from "./YouTubeCard";
 
 export default function YouTubeNodeView({
   node,
@@ -79,4 +80,3 @@ export default function YouTubeNodeView({
     </NodeViewWrapper>
   );
 }
-

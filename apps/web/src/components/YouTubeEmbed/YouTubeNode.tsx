@@ -1,8 +1,9 @@
 import { mergeAttributes, Node } from "@tiptap/core";
-import { ReactNodeViewRenderer } from "@tiptap/react";
 import { Plugin, PluginKey } from "@tiptap/pm/state";
-import YouTubeNodeView from "./YouTubeNodeView";
+import { ReactNodeViewRenderer } from "@tiptap/react";
+
 import { extractVideoId, fetchYouTubeMetadata, isYouTubeUrl } from "./utils";
+import YouTubeNodeView from "./YouTubeNodeView";
 
 export interface YouTubeOptions {
   inline: boolean;

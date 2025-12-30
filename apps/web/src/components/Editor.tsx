@@ -1,5 +1,5 @@
-import type { Editor as TiptapEditor } from "@tiptap/react";
 import type { Range as TiptapRange } from "@tiptap/core";
+import type { Editor as TiptapEditor } from "@tiptap/react";
 import type {
   SuggestionKeyDownProps,
   SuggestionOptions,
@@ -488,7 +488,12 @@ export default function Editor({
                 }),
               );
               const q = query.toLowerCase();
-              return all.filter((u) => u.label && typeof u.label === "string" && u.label.toLowerCase().includes(q));
+              return all.filter(
+                (u) =>
+                  u.label &&
+                  typeof u.label === "string" &&
+                  u.label.toLowerCase().includes(q),
+              );
             },
             command: ({ editor, range, props }) => {
               const id = props.id ?? "";
