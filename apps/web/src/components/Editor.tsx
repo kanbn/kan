@@ -433,12 +433,14 @@ export default function Editor({
   onBlur,
   readOnly = false,
   workspaceMembers,
+  enableYouTubeEmbed = true,
 }: {
   content: string | null;
   onChange?: (value: string) => void;
   onBlur?: () => void;
   readOnly?: boolean;
   workspaceMembers: WorkspaceMember[];
+  enableYouTubeEmbed?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -507,7 +509,7 @@ export default function Editor({
             return `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`;
           },
         }),
-        YouTubeNode,
+        ...(enableYouTubeEmbed ? [YouTubeNode] : []),
       ],
       content,
       onUpdate: ({ editor }) => onChange?.(editor.getHTML()),
