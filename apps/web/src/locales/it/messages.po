@@ -31,17 +31,17 @@ msgstr "{0}"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
 #: src/views/boards/index.tsx:33
-#: src/views/card/index.tsx:272
+#: src/views/card/index.tsx:273
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
 #. placeholder {0}: labelPublicIds.length
-#: src/views/board/components/NewCardForm.tsx:452
+#: src/views/board/components/NewCardForm.tsx:453
 msgid "{0} labels"
 msgstr "{0} etichette"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:408
+#: src/views/board/index.tsx:416
 msgid "{0} not found"
 msgstr "{0} non trovato"
 
@@ -83,7 +83,7 @@ msgstr "Account eliminato"
 msgid "Actions"
 msgstr "Azioni"
 
-#: src/views/card/index.tsx:386
+#: src/views/card/index.tsx:387
 #: src/views/public/board/CardModal.tsx:158
 msgid "Activity"
 msgstr "Attività"
@@ -113,11 +113,11 @@ msgstr "Aggiungi un elemento..."
 msgid "Add checklist"
 msgstr "Aggiungi checklist"
 
-#: src/components/Editor.tsx:451
+#: src/components/Editor.tsx:455
 msgid "Add description... (type '/' to open commands or '@' to mention)"
 msgstr "Aggiungi descrizione... (digita '/' per aprire i comandi o '@' per menzionare)"
 
-#: src/views/card/components/ChecklistItemRow.tsx:195
+#: src/views/card/components/ChecklistItemRow.tsx:200
 msgid "Add details..."
 msgstr "Aggiungi dettagli..."
 
@@ -317,8 +317,8 @@ msgstr "Portale di fatturazione"
 msgid "Blog Post"
 msgstr "Post del blog"
 
-#: src/views/board/index.tsx:382
-#: src/views/card/index.tsx:272
+#: src/views/board/index.tsx:390
+#: src/views/card/index.tsx:273
 #: src/views/public/board/index.tsx:114
 msgid "Board"
 msgstr "Bacheca"
@@ -386,6 +386,7 @@ msgid "Bug Report"
 msgstr "Segnalazione bug"
 
 #: src/components/DeleteLabelConfirmation.tsx:49
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:176
 #: src/views/board/components/DeleteBoardConfirmation.tsx:44
 #: src/views/card/components/Comment.tsx:159
 #: src/views/card/components/DeleteCardConfirmation.tsx:86
@@ -400,12 +401,12 @@ msgstr "Segnalazione bug"
 msgid "Cancel"
 msgstr "Annulla"
 
-#: src/views/card/index.tsx:272
+#: src/views/card/index.tsx:273
 msgid "Card"
 msgstr "Carta"
 
-#: src/views/card/index.tsx:306
-#: src/views/card/index.tsx:342
+#: src/views/card/index.tsx:307
+#: src/views/card/index.tsx:343
 msgid "Card not found"
 msgstr "Carta non trovata"
 
@@ -555,6 +556,10 @@ msgstr "Continua con {0}"
 msgid "Control who can view and edit your boards."
 msgstr "Controlla chi può visualizzare e modificare le tue bacheche."
 
+#: src/components/YouTubeEmbed/YouTubeDropdown.tsx:47
+msgid "Convert to link"
+msgstr "Converti in link"
+
 #: src/views/pricing/components/FeatureComparisonTable.tsx:38
 msgid "Core features"
 msgstr "Funzionalità principali"
@@ -565,7 +570,7 @@ msgid "Create {0}"
 msgstr "Crea {0}"
 
 #: src/components/LabelForm.tsx:213
-#: src/views/board/components/NewCardForm.tsx:516
+#: src/views/board/components/NewCardForm.tsx:517
 #: src/views/board/components/NewListForm.tsx:141
 msgid "Create another"
 msgstr "Crea un altro"
@@ -574,7 +579,7 @@ msgstr "Crea un altro"
 msgid "Create API key"
 msgstr "Crea chiave API"
 
-#: src/views/board/components/NewCardForm.tsx:526
+#: src/views/board/components/NewCardForm.tsx:527
 msgid "Create card"
 msgstr "Crea carta"
 
@@ -604,13 +609,13 @@ msgstr "Crea nuovo {0}"
 msgid "Create new key"
 msgstr "Crea nuova chiave"
 
-#: src/views/board/components/NewCardForm.tsx:414
+#: src/views/board/components/NewCardForm.tsx:415
 #: src/views/card/components/LabelSelector.tsx:98
 msgid "Create new label"
 msgstr "Crea nuova etichetta"
 
-#: src/views/board/index.tsx:64
-#: src/views/board/index.tsx:499
+#: src/views/board/index.tsx:65
+#: src/views/board/index.tsx:507
 msgid "Create new list"
 msgstr "Crea nuova lista"
 
@@ -679,6 +684,7 @@ msgstr "Disattiva link di invito"
 
 #: src/components/DeleteLabelConfirmation.tsx:51
 #: src/components/LabelForm.tsx:228
+#: src/components/YouTubeEmbed/YouTubeDropdown.tsx:52
 #: src/views/board/components/DeleteBoardConfirmation.tsx:47
 #: src/views/card/components/DeleteCardConfirmation.tsx:92
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:67
@@ -803,8 +809,8 @@ msgid "Download failed"
 msgstr "Download fallito"
 
 #: src/views/board/components/Filters.tsx:171
-#: src/views/board/components/NewCardForm.tsx:469
-#: src/views/card/index.tsx:139
+#: src/views/board/components/NewCardForm.tsx:470
+#: src/views/card/index.tsx:140
 msgid "Due date"
 msgstr "Data di scadenza"
 
@@ -824,6 +830,10 @@ msgstr "Scade oggi"
 msgid "Due tomorrow"
 msgstr "Scade domani"
 
+#: src/components/YouTubeEmbed/YouTubeDropdown.tsx:42
+msgid "Edit"
+msgstr "Modifica"
+
 #: src/views/board/components/BoardDropdown.tsx:41
 #: src/views/board/components/UpdateBoardSlugForm.tsx:116
 msgid "Edit board URL"
@@ -841,6 +851,10 @@ msgstr "Modifica etichetta"
 msgid "Edit workspace URL"
 msgstr "Modifica URL dell'area di lavoro"
 
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:108
+msgid "Edit YouTube Video"
+msgstr "Modifica video YouTube"
+
 #: src/views/boards/components/TemplateBoards.tsx:32
 msgid "Editing"
 msgstr "Modifica"
@@ -856,6 +870,10 @@ msgstr "Email"
 #: src/views/boards/components/TemplateBoards.tsx:24
 msgid "Enhancement"
 msgstr "Miglioramento"
+
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:131
+msgid "Enter a custom title"
+msgstr "Inserisci un titolo personalizzato"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:122
 msgid "Enter your current password"
@@ -981,6 +999,10 @@ msgstr "Impossibile copiare il link di invito"
 msgid "Failed to create board"
 msgstr "Impossibile creare la bacheca"
 
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:82
+msgid "Failed to fetch video information"
+msgstr "Impossibile recuperare le informazioni del video"
+
 #. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
 #: src/components/AuthForm.tsx:291
 msgid "Failed to login with {0}. Please try again."
@@ -1047,6 +1069,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Per la sostenibilità a lungo termine, riconosciamo che tutti i buoni progetti open source necessitano di una fonte di entrate. La nostra proviene dall'offerta cloud a pagamento per gli spazi di lavoro con più utenti e per gli slug personalizzati degli spazi di lavoro. Non c'è alcun obbligo di utilizzarla, e puoi ospitare autonomamente il software sulla tua infrastruttura gratuitamente."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratuito"
@@ -1092,7 +1116,7 @@ msgstr "Inizia ora"
 msgid "Get started by creating a new {0}"
 msgstr "Inizia creando un nuovo {0}"
 
-#: src/views/board/index.tsx:491
+#: src/views/board/index.tsx:499
 msgid "Get started by creating a new list"
 msgstr "Inizia creando una nuova lista"
 
@@ -1174,6 +1198,10 @@ msgstr "Come posso effettuare il self-hosting?"
 #: src/views/home/components/Faqs.tsx:38
 msgid "How is the project funded?"
 msgstr "Come viene finanziato il progetto?"
+
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:151
+msgid "https://www.youtube.com/watch?v=..."
+msgstr "https://www.youtube.com/watch?v=..."
 
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:82
 msgid "I acknowledge that all of my account data will be permanently deleted and want to proceed."
@@ -1327,8 +1355,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Scorciatoie da tastiera"
 
 #: src/views/board/components/Filters.tsx:155
-#: src/views/board/components/NewCardForm.tsx:418
-#: src/views/card/index.tsx:121
+#: src/views/board/components/NewCardForm.tsx:419
+#: src/views/card/index.tsx:122
 msgid "Labels"
 msgstr "Etichette"
 
@@ -1382,7 +1410,7 @@ msgstr "Chiaro"
 msgid "Link copied"
 msgstr "Link copiato"
 
-#: src/views/card/index.tsx:113
+#: src/views/card/index.tsx:114
 msgid "List"
 msgstr "Lista"
 
@@ -1445,8 +1473,8 @@ msgstr "Media priorità"
 
 #: src/components/SideNavigation.tsx:121
 #: src/views/board/components/Filters.tsx:147
-#: src/views/board/components/NewCardForm.tsx:376
-#: src/views/card/index.tsx:130
+#: src/views/board/components/NewCardForm.tsx:377
+#: src/views/card/index.tsx:131
 #: src/views/members/index.tsx:178
 msgid "Members"
 msgstr "Membri"
@@ -1520,7 +1548,7 @@ msgid "New label"
 msgstr "Nuova etichetta"
 
 #: src/views/board/components/NewListForm.tsx:113
-#: src/views/board/index.tsx:462
+#: src/views/board/index.tsx:470
 msgid "New list"
 msgstr "Nuova lista"
 
@@ -1581,7 +1609,7 @@ msgstr "Nessun URL di download disponibile per questo allegato."
 msgid "No keyboard shortcuts registered."
 msgstr "Nessuna scorciatoia da tastiera registrata."
 
-#: src/views/board/index.tsx:488
+#: src/views/board/index.tsx:496
 msgid "No lists"
 msgstr "Nessuna lista"
 
@@ -1719,6 +1747,11 @@ msgstr "Inserisci un nome valido"
 msgid "Please enter a valid password"
 msgstr "Inserisci una password valida"
 
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:58
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:98
+msgid "Please enter a valid YouTube URL"
+msgstr "Inserisci un URL YouTube valido"
+
 #: src/views/settings/components/Avatar.tsx:92
 msgid "Please select a file to upload."
 msgstr "Seleziona un file da caricare."
@@ -1732,12 +1765,12 @@ msgstr "Seleziona un file da caricare."
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:73
 #: src/views/board/components/VisibilityButton.tsx:54
-#: src/views/board/index.tsx:170
-#: src/views/board/index.tsx:226
+#: src/views/board/index.tsx:171
+#: src/views/board/index.tsx:227
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/AttachmentThumbnails.tsx:74
-#: src/views/card/components/ChecklistItemRow.tsx:67
-#: src/views/card/components/ChecklistItemRow.tsx:95
+#: src/views/card/components/ChecklistItemRow.tsx:69
+#: src/views/card/components/ChecklistItemRow.tsx:97
 #: src/views/card/components/ChecklistNameInput.tsx:47
 #: src/views/card/components/Checklists.tsx:81
 #: src/views/card/components/Comment.tsx:65
@@ -1751,8 +1784,8 @@ msgstr "Seleziona un file da caricare."
 #: src/views/card/components/NewChecklistForm.tsx:71
 #: src/views/card/components/NewChecklistItemForm.tsx:90
 #: src/views/card/components/NewCommentForm.tsx:32
-#: src/views/card/index.tsx:187
-#: src/views/card/index.tsx:200
+#: src/views/card/index.tsx:188
+#: src/views/card/index.tsx:201
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:104
 #: src/views/members/components/InviteMemberForm.tsx:241
@@ -1924,6 +1957,7 @@ msgstr "Ruolo"
 msgid "Run on your own infrastructure"
 msgstr "Esegui sulla tua infrastruttura"
 
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:183
 #: src/views/card/components/Comment.tsx:166
 #: src/views/settings/components/Avatar.tsx:309
 msgid "Save"
@@ -2107,8 +2141,8 @@ msgstr "Piano Team"
 msgid "Teams"
 msgstr "Team"
 
-#: src/views/board/index.tsx:382
-#: src/views/board/index.tsx:417
+#: src/views/board/index.tsx:390
+#: src/views/board/index.tsx:425
 msgid "Template"
 msgstr "Template"
 
@@ -2214,6 +2248,10 @@ msgstr "Questo URL dello spazio di lavoro è riservato"
 msgid "This workspace username has already been taken"
 msgstr "Questo nome utente dell'area di lavoro è già stato utilizzato"
 
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:127
+msgid "Title"
+msgstr "Titolo"
+
 #: src/views/boards/components/TemplateBoards.tsx:17
 #: src/views/boards/components/TemplateBoards.tsx:23
 msgid "To Do"
@@ -2256,9 +2294,9 @@ msgstr "Impossibile aggiungere l'elemento della checklist"
 msgid "Unable to add comment"
 msgstr "Impossibile aggiungere il commento"
 
-#: src/views/card/index.tsx:199
+#: src/views/card/index.tsx:200
 msgid "Unable to add label"
-msgstr "Impossibile aggiungere etichetta"
+msgstr "Impossibile aggiungere l'etichetta"
 
 #: src/views/board/components/NewCardForm.tsx:181
 msgid "Unable to create card"
@@ -2293,7 +2331,7 @@ msgstr "Impossibile eliminare la scheda"
 msgid "Unable to delete checklist"
 msgstr "Impossibile eliminare la checklist"
 
-#: src/views/card/components/ChecklistItemRow.tsx:94
+#: src/views/card/components/ChecklistItemRow.tsx:96
 msgid "Unable to delete checklist item"
 msgstr "Impossibile eliminare l'elemento della checklist"
 
@@ -2321,8 +2359,8 @@ msgstr "Impossibile aggiornare l'URL della bacheca"
 msgid "Unable to update board visibility"
 msgstr "Impossibile aggiornare la visibilità della bacheca"
 
-#: src/views/board/index.tsx:225
-#: src/views/card/index.tsx:186
+#: src/views/board/index.tsx:226
+#: src/views/card/index.tsx:187
 msgid "Unable to update card"
 msgstr "Impossibile aggiornare la scheda"
 
@@ -2330,7 +2368,7 @@ msgstr "Impossibile aggiornare la scheda"
 msgid "Unable to update checklist"
 msgstr "Impossibile aggiornare la checklist"
 
-#: src/views/card/components/ChecklistItemRow.tsx:66
+#: src/views/card/components/ChecklistItemRow.tsx:68
 msgid "Unable to update checklist item"
 msgstr "Impossibile aggiornare l'elemento della checklist"
 
@@ -2346,7 +2384,7 @@ msgstr "Impossibile aggiornare la data di scadenza"
 msgid "Unable to update labels"
 msgstr "Impossibile aggiornare le etichette"
 
-#: src/views/board/index.tsx:169
+#: src/views/board/index.tsx:170
 #: src/views/card/components/ListSelector.tsx:52
 msgid "Unable to update list"
 msgstr "Impossibile aggiornare la lista"
@@ -2557,7 +2595,7 @@ msgid "Why make an open source Trello?"
 msgstr "Perché creare un Trello open source?"
 
 #: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:382
+#: src/views/board/index.tsx:390
 #: src/views/boards/index.tsx:33
 #: src/views/members/index.tsx:173
 #: src/views/public/board/index.tsx:114
@@ -2733,3 +2771,7 @@ msgstr "Il nome del tuo spazio di lavoro è stato aggiornato."
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:61
 msgid "Your workspace slug has been updated."
 msgstr "Lo slug della tua area di lavoro è stato aggiornato."
+
+#: src/components/YouTubeEmbed/EditYouTubeModal.tsx:147
+msgid "YouTube URL"
+msgstr "URL YouTube"

@@ -327,7 +327,7 @@ export function NewCardForm({
           />
         </div>
         <div className="mt-2">
-          <div className="block max-h-48 min-h-24 w-full overflow-y-auto rounded-md border-0 bg-dark-300 bg-white/5 px-3 py-2 text-sm shadow-sm ring-1 ring-inset ring-light-600 focus-within:ring-2 focus-within:ring-inset focus-within:ring-light-700 dark:ring-dark-700 dark:focus-within:ring-dark-700 sm:leading-6">
+          <div className="block max-h-48 w-full overflow-y-auto rounded-md border-0 bg-dark-300 bg-white/5 px-3 py-2 text-sm shadow-sm ring-1 ring-inset ring-light-600 focus-within:ring-2 focus-within:ring-inset focus-within:ring-light-700 dark:ring-dark-700 dark:focus-within:ring-dark-700 sm:leading-6">
             <Editor
               content={description}
               onChange={(value) => {
@@ -335,7 +335,7 @@ export function NewCardForm({
                 saveFormState({ ...formState, description: value });
               }}
               workspaceMembers={
-                boardData?.workspace.members?.map(
+                boardData?.workspace.members.map(
                   (member): WorkspaceMember => ({
                     publicId: member.publicId,
                     email: member.email,
@@ -349,6 +349,7 @@ export function NewCardForm({
                   }),
                 ) ?? []
               }
+              enableYouTubeEmbed={false}
             />
           </div>
         </div>
