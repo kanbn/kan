@@ -36,7 +36,7 @@ msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
 #. placeholder {0}: labelPublicIds.length
-#: src/views/board/components/NewCardForm.tsx:452
+#: src/views/board/components/NewCardForm.tsx:453
 msgid "{0} labels"
 msgstr "{0} etiquetas"
 
@@ -113,11 +113,11 @@ msgstr "Añadir un elemento..."
 msgid "Add checklist"
 msgstr "Añadir lista de verificación"
 
-#: src/components/Editor.tsx:453
+#: src/components/Editor.tsx:455
 msgid "Add description... (type '/' to open commands or '@' to mention)"
 msgstr "Añadir descripción... (escribe '/' para abrir comandos o '@' para mencionar)"
 
-#: src/views/card/components/ChecklistItemRow.tsx:195
+#: src/views/card/components/ChecklistItemRow.tsx:200
 msgid "Add details..."
 msgstr "Añadir detalles..."
 
@@ -570,7 +570,7 @@ msgid "Create {0}"
 msgstr "Crear {0}"
 
 #: src/components/LabelForm.tsx:213
-#: src/views/board/components/NewCardForm.tsx:516
+#: src/views/board/components/NewCardForm.tsx:517
 #: src/views/board/components/NewListForm.tsx:141
 msgid "Create another"
 msgstr "Crear otro"
@@ -579,7 +579,7 @@ msgstr "Crear otro"
 msgid "Create API key"
 msgstr "Crear clave API"
 
-#: src/views/board/components/NewCardForm.tsx:526
+#: src/views/board/components/NewCardForm.tsx:527
 msgid "Create card"
 msgstr "Crear tarjeta"
 
@@ -609,7 +609,7 @@ msgstr "Crear nuevo {0}"
 msgid "Create new key"
 msgstr "Crear nueva clave"
 
-#: src/views/board/components/NewCardForm.tsx:414
+#: src/views/board/components/NewCardForm.tsx:415
 #: src/views/card/components/LabelSelector.tsx:98
 msgid "Create new label"
 msgstr "Crear nueva etiqueta"
@@ -809,8 +809,8 @@ msgid "Download failed"
 msgstr "Error en la descarga"
 
 #: src/views/board/components/Filters.tsx:171
-#: src/views/board/components/NewCardForm.tsx:469
-#: src/views/card/index.tsx:139
+#: src/views/board/components/NewCardForm.tsx:470
+#: src/views/card/index.tsx:140
 msgid "Due date"
 msgstr "Fecha de vencimiento"
 
@@ -1069,6 +1069,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Para la sostenibilidad a largo plazo, reconocemos que todos los buenos proyectos de código abierto necesitan una fuente de ingresos. La nuestra proviene de la oferta de nube de pago para espacios de trabajo con múltiples usuarios y para slugs de espacio de trabajo personalizados. No hay obligación de usarla, y puedes alojar el software en tu propia infraestructura sin costo alguno."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratis"
@@ -1353,8 +1355,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Atajos de teclado"
 
 #: src/views/board/components/Filters.tsx:155
-#: src/views/board/components/NewCardForm.tsx:418
-#: src/views/card/index.tsx:121
+#: src/views/board/components/NewCardForm.tsx:419
+#: src/views/card/index.tsx:122
 msgid "Labels"
 msgstr "Etiquetas"
 
@@ -1408,7 +1410,7 @@ msgstr "Claro"
 msgid "Link copied"
 msgstr "Enlace copiado"
 
-#: src/views/card/index.tsx:113
+#: src/views/card/index.tsx:114
 msgid "List"
 msgstr "Lista"
 
@@ -1471,8 +1473,8 @@ msgstr "Prioridad media"
 
 #: src/components/SideNavigation.tsx:121
 #: src/views/board/components/Filters.tsx:147
-#: src/views/board/components/NewCardForm.tsx:376
-#: src/views/card/index.tsx:130
+#: src/views/board/components/NewCardForm.tsx:377
+#: src/views/card/index.tsx:131
 #: src/views/members/index.tsx:178
 msgid "Members"
 msgstr "Miembros"
@@ -1767,21 +1769,21 @@ msgstr "Por favor selecciona un archivo para subir."
 #: src/views/board/index.tsx:227
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/AttachmentThumbnails.tsx:74
-#: src/views/card/components/ChecklistItemRow.tsx:67
-#: src/views/card/components/ChecklistItemRow.tsx:95
+#: src/views/card/components/ChecklistItemRow.tsx:69
+#: src/views/card/components/ChecklistItemRow.tsx:97
 #: src/views/card/components/ChecklistNameInput.tsx:47
 #: src/views/card/components/Checklists.tsx:81
 #: src/views/card/components/Comment.tsx:65
 #: src/views/card/components/DeleteCardConfirmation.tsx:52
-#: src/views/card/components/DeleteChecklistConfirmation.tsx:37
-#: src/views/card/components/DeleteCommentConfirmation.tsx:45
-#: src/views/card/components/DueDateSelector.tsx:59
-#: src/views/card/components/LabelSelector.tsx:72
-#: src/views/card/components/ListSelector.tsx:52
-#: src/views/card/components/MemberSelector.tsx:79
-#: src/views/card/components/NewChecklistForm.tsx:70
-#: src/views/card/components/NewChecklistItemForm.tsx:89
-#: src/views/card/components/NewCommentForm.tsx:31
+#: src/views/card/components/DeleteChecklistConfirmation.tsx:38
+#: src/views/card/components/DeleteCommentConfirmation.tsx:46
+#: src/views/card/components/DueDateSelector.tsx:60
+#: src/views/card/components/LabelSelector.tsx:73
+#: src/views/card/components/ListSelector.tsx:53
+#: src/views/card/components/MemberSelector.tsx:80
+#: src/views/card/components/NewChecklistForm.tsx:71
+#: src/views/card/components/NewChecklistItemForm.tsx:90
+#: src/views/card/components/NewCommentForm.tsx:32
 #: src/views/card/index.tsx:188
 #: src/views/card/index.tsx:201
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
@@ -1956,7 +1958,7 @@ msgid "Run on your own infrastructure"
 msgstr "Ejecuta en tu propia infraestructura"
 
 #: src/components/YouTubeEmbed/EditYouTubeModal.tsx:183
-#: src/views/card/components/Comment.tsx:165
+#: src/views/card/components/Comment.tsx:166
 #: src/views/settings/components/Avatar.tsx:309
 msgid "Save"
 msgstr "Guardar"
@@ -2329,7 +2331,7 @@ msgstr "No se puede eliminar la tarjeta"
 msgid "Unable to delete checklist"
 msgstr "No se puede eliminar la lista de verificación"
 
-#: src/views/card/components/ChecklistItemRow.tsx:94
+#: src/views/card/components/ChecklistItemRow.tsx:96
 msgid "Unable to delete checklist item"
 msgstr "No se puede eliminar el elemento de la lista de verificación"
 
@@ -2366,7 +2368,7 @@ msgstr "No se puede actualizar la tarjeta"
 msgid "Unable to update checklist"
 msgstr "No se puede actualizar la lista de verificación"
 
-#: src/views/card/components/ChecklistItemRow.tsx:66
+#: src/views/card/components/ChecklistItemRow.tsx:68
 msgid "Unable to update checklist item"
 msgstr "No se puede actualizar el elemento de la lista de verificación"
 
@@ -2383,7 +2385,7 @@ msgid "Unable to update labels"
 msgstr "No se pueden actualizar las etiquetas"
 
 #: src/views/board/index.tsx:170
-#: src/views/card/components/ListSelector.tsx:51
+#: src/views/card/components/ListSelector.tsx:52
 msgid "Unable to update list"
 msgstr "No se puede actualizar la lista"
 
