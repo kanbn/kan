@@ -13,6 +13,7 @@ import LabelIcon from "~/components/LabelIcon";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
+import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
@@ -482,6 +483,13 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
               cardPublicId={cardId}
               checklistPublicId={entityId}
             />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "EDIT_YOUTUBE"}
+          >
+            <EditYouTubeModal />
           </Modal>
         </>
       </div>
