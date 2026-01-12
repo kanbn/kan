@@ -74,6 +74,42 @@ jobs:
             type=semver,pattern={{major}}
             type=raw,value=latest,enable={{is_default_branch}}
 
+      # Extract version from git tag or ref
+      # Uses git describe to get latest tag + commit hash in SemVer format: 1.2.3+abc1234
+      - name: Extract version
+        id: version
+        run: |
+          if [[ "${{ github.ref_type }}" == "tag" ]]; then
+            VERSION="${{ github.ref_name }}"
+            # Remove 'v' prefix if present
+            VERSION="${VERSION#v}"
+          else
+            # Use git describe and simplify: v1.2.3-5-gabc1234 -> 1.2.3+abc1234
+            GIT_DESCRIBE=$(git describe --tags --always --long 2>/dev/null || echo "")
+            if [[ -n "$GIT_DESCRIBE" ]]; then
+              # Match pattern: v1.2.3-5-gabc1234 (tag-commits-gcommit)
+              if [[ "$GIT_DESCRIBE" =~ ^v?([0-9]+\.[0-9]+\.[0-9]+)-[0-9]+-g([a-f0-9]+)$ ]]; then
+                # Format as tag+commit (SemVer build metadata)
+                TAG_VERSION="${BASH_REMATCH[1]}"
+                COMMIT_HASH="${BASH_REMATCH[2]}"
+                VERSION="${TAG_VERSION}+${COMMIT_HASH:0:7}"
+              elif [[ "$GIT_DESCRIBE" =~ ^v?([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+                # Exactly on a tag
+                VERSION="${BASH_REMATCH[1]}"
+              else
+                # Fallback: just commit hash
+                COMMIT_SHA="${{ github.sha }}"
+                VERSION="${COMMIT_SHA:0:7}"
+              fi
+            else
+              # No tags exist, use commit hash
+              COMMIT_SHA="${{ github.sha }}"
+              VERSION="${COMMIT_SHA:0:7}"
+            fi
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
@@ -86,6 +122,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            APP_VERSION=${{ steps.version.outputs.version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

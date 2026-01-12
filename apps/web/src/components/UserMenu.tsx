@@ -9,6 +9,7 @@ import { twMerge } from "tailwind-merge";
 
 import { authClient } from "@kan/auth/client";
 
+import { env } from "~/env";
 import { useIsMobile } from "~/hooks/useMediaQuery";
 import { useKeyboardShortcuts } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
@@ -225,6 +226,25 @@ export default function UserMenu({
                 </button>
               </Menu.Item>
             </div>
+            {env.NEXT_PUBLIC_APP_VERSION && (
+              <div className="light-border-600 border-t-[1px] p-1 dark:border-dark-600">
+                <Menu.Item>
+                  <Link
+                    href={
+                      env.NEXT_PUBLIC_APP_VERSION.includes("+")
+                        ? `https://github.com/kanbn/kan/commit/${env.NEXT_PUBLIC_APP_VERSION.split("+")[1]}`
+                        : `https://github.com/kanbn/kan/releases/tag/v${env.NEXT_PUBLIC_APP_VERSION}`
+                    }
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={handleLinkClick}
+                    className="flex w-full items-center justify-center rounded-[5px] px-3 py-2 text-center text-xs text-light-900 hover:bg-light-200 dark:text-dark-900 dark:hover:bg-dark-400"
+                  >
+                    Version: {env.NEXT_PUBLIC_APP_VERSION}
+                  </Link>
+                </Menu.Item>
+              </div>
+            )}
           </div>
         </Menu.Items>
       </Transition>
