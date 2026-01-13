@@ -37,9 +37,11 @@ RUN turbo prune --scope=${PROJECT} --scope=@kan/db --docker
 # 3. Build the project
 FROM base AS builder
 ARG PROJECT
+ARG APP_VERSION
 
 # Environment to skip .env validation on build
 ENV CI=true
+ENV NEXT_PUBLIC_APP_VERSION=${APP_VERSION}
 
 WORKDIR /app
 
