@@ -9,6 +9,8 @@ services:
     build:
       context: ..
       dockerfile: apps/web/Dockerfile
+      args:
+        APP_VERSION: ${APP_VERSION:-}
     env_file:
       - .env
     restart: unless-stopped

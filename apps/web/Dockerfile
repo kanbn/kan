@@ -19,19 +19,21 @@ RUN pnpm config set store-dir ~/.pnpm-store
 
 # 2. Prune projects
 FROM base AS pruner
-# https://stackoverflow.com/questions/49681984/how-to-get-version-value-of-package-json-inside-of-dockerfile
-# RUN export VERSION=$(npm run version)
-
 ARG PROJECT
 
-# Set working directory
-WORKDIR /app
+RUN apk add --no-cache git
 
-# It might be the path to <ROOT> turborepo
+WORKDIR /app
 COPY . .
- 
-# Generate a partial monorepo with a pruned lockfile for a target workspace.
-# Assuming "@acme/nextjs" is the name entered in the project's package.json: { name: "@acme/nextjs" }
+
+# Generate version from git (fallback if APP_VERSION not provided)
+RUN AUTO_VERSION=$(git describe --tags --always --long 2>/dev/null | \
+    sed -E 's/^v?([0-9]+\.[0-9]+\.[0-9]+)-[0-9]+-g([a-f0-9]{7}).*/\1+\2/' | \
+    sed 's/^v//' || \
+    git rev-parse --short HEAD 2>/dev/null | head -c 7 || \
+    echo "unknown") && \
+    echo "$AUTO_VERSION" > /app/AUTO_VERSION
+
 RUN turbo prune --scope=${PROJECT} --scope=@kan/db --docker
  
 # 3. Build the project
@@ -39,25 +41,22 @@ FROM base AS builder
 ARG PROJECT
 ARG APP_VERSION
 
-# Environment to skip .env validation on build
-ENV CI=true
-ENV NEXT_PUBLIC_APP_VERSION=${APP_VERSION}
-
 WORKDIR /app
 
-# Copy lockfile and package.json's of isolated subworkspace
 COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=pruner /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
 COPY --from=pruner /app/out/json/ .
+COPY --from=pruner /app/AUTO_VERSION /tmp/AUTO_VERSION
 
-# First install the dependencies (as they change less often)
+ENV CI=true
+
 RUN --mount=type=cache,id=pnpm,target=~/.pnpm-store pnpm install --frozen-lockfile
  
-# Copy source code of isolated subworkspace
 COPY --from=pruner /app/out/full/ .
 
-
-RUN pnpm build --filter=${PROJECT}
+# Use provided APP_VERSION or auto-generated from pruner stage
+RUN VERSION="${APP_VERSION:-$(cat /tmp/AUTO_VERSION 2>/dev/null | tr -d '\n\r' || echo 'unknown')}" && \
+    NEXT_PUBLIC_APP_VERSION="$VERSION" pnpm build --filter=${PROJECT}
 
 # # Copy static files to standalone directory
 # RUN mkdir -p apps/web/.next/standalone/.next && \
