@@ -27,7 +27,8 @@ WORKDIR /app
 COPY . .
 
 # Generate version from git (fallback if APP_VERSION not provided)
-RUN AUTO_VERSION=$(git describe --tags --always --long 2>/dev/null | \
+RUN git fetch --tags --unshallow 2>/dev/null || git fetch --tags 2>/dev/null || true && \
+    AUTO_VERSION=$(git describe --tags --always --long 2>/dev/null | \
     sed -E 's/^v?([0-9]+\.[0-9]+\.[0-9]+)-[0-9]+-g([a-f0-9]{7}).*/\1+\2/' | \
     sed 's/^v//' || \
     git rev-parse --short HEAD 2>/dev/null | head -c 7 || \
