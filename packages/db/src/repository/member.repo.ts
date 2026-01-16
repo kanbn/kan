@@ -121,3 +121,15 @@ export const unpauseAllMembers = async (db: dbClient, workspaceId: number) => {
       ),
     );
 };
+
+export const pauseAllMembers = async (db: dbClient, workspaceId: number) => {
+  await db
+    .update(workspaceMembers)
+    .set({ status: "paused" })
+    .where(
+      and(
+        eq(workspaceMembers.workspaceId, workspaceId),
+        eq(workspaceMembers.status, "active"),
+      ),
+    );
+};

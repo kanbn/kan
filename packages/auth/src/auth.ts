@@ -287,12 +287,39 @@ export const initAuth = (db: dbClient) => {
 
                     if (workspace?.id) {
                       await memberRepo.unpauseAllMembers(db, workspace.id);
-
-                      console.log(
-                        `Unpausing all members for workspace ${workspace.id}`,
-                      );
                     }
                   }
+                },
+                onSubscriptionCancel: async ({
+                  subscription,
+                  cancellationDetails,
+                }) => {
+                  await triggerWorkflow(
+                    db,
+                    "subscription-canceled",
+                    subscription,
+                    cancellationDetails,
+                  );
+
+                  // for cancelled subscriptions, we need to pause all members and set their workspace plan to free
+                  const workspace = await workspaceRepo.getByPublicId(
+                    db,
+                    subscription.referenceId,
+                  );
+
+                  if (workspace?.id) {
+                    await memberRepo.pauseAllMembers(db, workspace.id);
+                    await workspaceRepo.update(db, subscription.referenceId, {
+                      plan: "free",
+                    });
+                  }
+                },
+                onSubscriptionUpdate: async ({ subscription }) => {
+                  await triggerWorkflow(
+                    db,
+                    "subscription-updated",
+                    subscription,
+                  );
                 },
               },
             }),
