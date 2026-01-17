@@ -399,6 +399,7 @@ export const boardRouter = createTRPCRouter({
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
           .optional(),
         visibility: z.enum(["public", "private"]).optional(),
+        favorite: z.boolean().optional()
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof boardRepo.update>>>())
@@ -450,6 +451,7 @@ export const boardRouter = createTRPCRouter({
         slug: input.slug,
         boardPublicId: input.boardPublicId,
         visibility: input.visibility,
+        favorite: input.favorite,
       });
 
       if (!result)

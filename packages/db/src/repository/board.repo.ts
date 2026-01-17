@@ -48,6 +48,7 @@ export const getAllByWorkspaceId = (
     columns: {
       publicId: true,
       name: true,
+      favorite: true,
     },
     with: {
       lists: {
@@ -71,6 +72,7 @@ export const getAllByWorkspaceId = (
       isNull(boards.deletedAt),
       opts?.type ? eq(boards.type, opts.type) : undefined,
     ),
+    orderBy: [desc(boards.favorite), asc(boards.name)]
   });
 };
 
@@ -594,6 +596,7 @@ export const update = async (
     name: string | undefined;
     slug: string | undefined;
     visibility: BoardVisibilityStatus | undefined;
+    favorite: boolean | undefined;
     boardPublicId: string;
   },
 ) => {
@@ -603,6 +606,7 @@ export const update = async (
       name: boardInput.name,
       slug: boardInput.slug,
       visibility: boardInput.visibility,
+      favorite: boardInput.favorite,
       updatedAt: new Date(),
     })
     .where(eq(boards.publicId, boardInput.boardPublicId))
