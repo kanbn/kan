@@ -150,6 +150,7 @@ pnpm dev
 | `SMTP_REJECT_UNAUTHORIZED`                | Reject invalid certificates (defaults to true if not set) | For Email                             | `false`                                                     |
 | `NEXT_PUBLIC_DISABLE_EMAIL`               | To disable all email features                             | For Email                             | `true`                                                      |
 | `NEXT_PUBLIC_BASE_URL`                    | Base URL of your installation                             | Yes                                   | `http://localhost:3000`                                     |
+| `NEXT_API_BODY_SIZE_LIMIT`                | Maximum API request body size (defaults to 1mb)           | No                                    | `50mb`                                                      |
 | `BETTER_AUTH_ALLOWED_DOMAINS`             | Comma-separated list of allowed domains for OIDC logins   | For OIDC/Social login                 | `example.com,subsidiary.com`                                |
 | `BETTER_AUTH_SECRET`                      | Auth encryption secret                                    | Yes                                   | Random 32+ char string                                      |
 | `BETTER_AUTH_TRUSTED_ORIGINS`             | Allowed callback origins                                  | No                                    | `http://localhost:3000,http://localhost:3001`               |

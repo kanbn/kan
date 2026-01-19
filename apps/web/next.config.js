@@ -90,6 +90,12 @@ const config = {
     swcPlugins: [["@lingui/swc-plugin", {}]],
   },
 
+  api: {
+    bodyParser: {
+      sizeLimit: env("NEXT_API_BODY_SIZE_LIMIT") || '1mb',
+    },
+  },
+
   async rewrites() {
     return [
       {
