@@ -77,6 +77,31 @@ export const workspaceRouter = createTRPCRouter({
 
       await assertUserInWorkspace(ctx.db, userId, result.id);
 
+      // Check if user is an admin
+      const userMember = result.members.find(
+        (member) => member.user?.id === userId,
+      );
+      const isAdmin = userMember?.role === "admin";
+
+      // If not admin, filter out email addresses
+      if (!isAdmin) {
+        const sanitizedMembers = result.members.map((member) => ({
+          ...member,
+          email: undefined,
+          user: member.user
+            ? {
+                ...member.user,
+                email: undefined,
+              }
+            : member.user,
+        }));
+
+        return {
+          ...result,
+          members: sanitizedMembers,
+        } as unknown as typeof result;
+      }
+
       return result;
     }),
   bySlug: publicProcedure
@@ -335,12 +360,6 @@ export const workspaceRouter = createTRPCRouter({
         ctx.db,
         input.workspacePublicId,
       );
-
-      if (!result)
-        throw new TRPCError({
-          message: `Unable to delete workspace`,
-          code: "INTERNAL_SERVER_ERROR",
-        });
 
       return result;
     }),

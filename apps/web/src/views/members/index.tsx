@@ -98,15 +98,17 @@ export default function MembersPage() {
                     {memberName}
                   </p>
                 </div>
-                <p
-                  className={twMerge(
-                    "truncate text-xs text-dark-900 sm:text-sm",
-                    showSkeleton &&
-                      "h-3 w-[175px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
-                  )}
-                >
-                  {memberEmail}
-                </p>
+                {(workspace.role === "admin" || showSkeleton) && (
+                  <p
+                    className={twMerge(
+                      "truncate text-xs text-dark-900 sm:text-sm",
+                      showSkeleton &&
+                        "h-3 w-[175px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+                    )}
+                  >
+                    {memberEmail}
+                  </p>
+                )}
               </div>
             </div>
           </div>
