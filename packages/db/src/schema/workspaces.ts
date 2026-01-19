@@ -43,7 +43,7 @@ export const workspaces = pgTable("workspace", {
   description: text("description"),
   slug: varchar("slug", { length: 255 }).notNull().unique(),
   plan: workspacePlanEnum("plan").notNull().default("free"),
-  showEmailsToMembers: boolean("showEmailsToMembers").notNull().default(false),
+  showEmailsToMembers: boolean("showEmailsToMembers").notNull().default(true),
   createdBy: uuid("createdBy").references(() => users.id, {
     onDelete: "set null",
   }),
