@@ -39,7 +39,6 @@ interface SideNavigationProps {
 }
 
 interface UserType {
-  email?: string | null | undefined;
   displayName?: string | null | undefined;
   image?: string | null | undefined;
 }
