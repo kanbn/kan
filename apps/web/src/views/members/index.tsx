@@ -54,6 +54,7 @@ export default function MembersPage() {
     memberStatus,
     isLastRow,
     showSkeleton,
+    showPendingIcon,
   }: {
     memberPublicId?: string;
     memberId?: string | null | undefined;
@@ -64,6 +65,7 @@ export default function MembersPage() {
     memberStatus?: string;
     isLastRow?: boolean;
     showSkeleton?: boolean;
+    showPendingIcon?: boolean;
   }) => {
     return (
       <tr className="rounded-b-lg">
@@ -82,6 +84,7 @@ export default function MembersPage() {
                   name={memberName ?? ""}
                   email={memberEmail ?? ""}
                   imageUrl={memberImage ? getAvatarUrl(memberImage) : undefined}
+                  icon={showPendingIcon ? "?" : undefined}
                 />
               )}
             </div>
@@ -93,12 +96,17 @@ export default function MembersPage() {
                       "mr-2 truncate text-xs font-medium text-neutral-900 dark:text-dark-1000 sm:text-sm",
                       showSkeleton &&
                         "md mb-2 h-3 w-[125px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+                      showPendingIcon &&
+                        "italic text-neutral-500 dark:text-dark-900",
                     )}
                   >
                     {memberName}
                   </p>
                 </div>
-                {(workspace.role === "admin" || showSkeleton) && (
+                {((workspace.role === "admin" ||
+                  (data as { showEmailsToMembers?: boolean })
+                    ?.showEmailsToMembers === true) ||
+                  showSkeleton) && (
                   <p
                     className={twMerge(
                       "truncate text-xs text-dark-900 sm:text-sm",
@@ -248,19 +256,35 @@ export default function MembersPage() {
                   </thead>
                   <tbody className="divide-y divide-light-600 overflow-visible bg-light-50 dark:divide-dark-600 dark:bg-dark-100">
                     {!isLoading &&
-                      data?.members.map((member, index) => (
-                        <TableRow
-                          key={member.publicId}
-                          memberPublicId={member.publicId}
-                          memberId={member.user?.id}
-                          memberName={member.user?.name}
-                          memberEmail={member.user?.email ?? member.email}
-                          memberImage={member.user?.image}
-                          memberRole={member.role}
-                          memberStatus={member.status}
-                          isLastRow={index === data.members.length - 1}
-                        />
-                      ))}
+                      data?.members.map((member, index) => {
+                        const isAdmin = workspace.role === "admin";
+                        const showEmailsToMembers =
+                          (data as { showEmailsToMembers?: boolean })
+                            ?.showEmailsToMembers === true;
+                        const canSeeEmails = isAdmin || showEmailsToMembers;
+                        const isPendingInvite = member.status === "invited";
+                        const shouldShowPendingPlaceholder =
+                          isPendingInvite && !canSeeEmails;
+
+                        return (
+                          <TableRow
+                            key={member.publicId}
+                            memberPublicId={member.publicId}
+                            memberId={member.user?.id}
+                            memberName={
+                              shouldShowPendingPlaceholder
+                                ? t`Pending Member...`
+                                : member.user?.name
+                            }
+                            memberEmail={member.user?.email ?? member.email}
+                            memberImage={member.user?.image}
+                            memberRole={member.role}
+                            memberStatus={member.status}
+                            isLastRow={index === data.members.length - 1}
+                            showPendingIcon={shouldShowPendingPlaceholder}
+                          />
+                        );
+                      })}
 
                     {isLoading && (
                       <>

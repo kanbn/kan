@@ -83,8 +83,11 @@ export const workspaceRouter = createTRPCRouter({
       );
       const isAdmin = userMember?.role === "admin";
 
-      // If not admin, filter out email addresses
-      if (!isAdmin) {
+      // Show emails if user is admin OR workspace setting allows it
+      const shouldShowEmails = isAdmin || result.showEmailsToMembers === true;
+
+      // If emails should be hidden, filter them out
+      if (!shouldShowEmails) {
         const sanitizedMembers = result.members.map((member) => ({
           ...member,
           email: undefined,
@@ -255,6 +258,7 @@ export const workspaceRouter = createTRPCRouter({
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
           .optional(),
         description: z.string().min(3).max(280).optional(),
+        showEmailsToMembers: z.boolean().optional(),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof workspaceRepo.update>>>())
@@ -316,6 +320,7 @@ export const workspaceRouter = createTRPCRouter({
           name: input.name,
           slug: input.slug,
           description: input.description,
+          showEmailsToMembers: input.showEmailsToMembers,
         },
       );
 
