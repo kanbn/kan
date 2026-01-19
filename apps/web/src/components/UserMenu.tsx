@@ -17,7 +17,7 @@ import { getAvatarUrl } from "~/utils/helpers";
 
 interface UserMenuProps {
   imageUrl: string | undefined;
-  email: string;
+  displayName: string;
   isLoading: boolean;
   isCollapsed?: boolean;
   onCloseSideNav?: () => void;
@@ -25,7 +25,7 @@ interface UserMenuProps {
 
 export default function UserMenu({
   imageUrl,
-  email,
+  displayName,
   isLoading,
   isCollapsed = false,
   onCloseSideNav,
@@ -75,7 +75,7 @@ export default function UserMenu({
         ) : (
           <Menu.Button
             className="flex w-full items-center rounded-md p-1.5 text-neutral-900 hover:bg-light-200 dark:text-dark-900 dark:hover:bg-dark-200 dark:hover:text-dark-1000"
-            title={isCollapsed ? email : undefined}
+            title={isCollapsed ? displayName : undefined}
           >
             {avatarUrl ? (
               <Image
@@ -102,7 +102,7 @@ export default function UserMenu({
                 isCollapsed && "md:hidden",
               )}
             >
-              {email}
+              {displayName}
             </span>
           </Menu.Button>
         )}

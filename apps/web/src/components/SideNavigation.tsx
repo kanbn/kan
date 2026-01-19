@@ -40,6 +40,7 @@ interface SideNavigationProps {
 
 interface UserType {
   email?: string | null | undefined;
+  displayName?: string | null | undefined;
   image?: string | null | undefined;
 }
 
@@ -206,7 +207,7 @@ export default function SideNavigation({
 
         <div className="space-y-2">
           <UserMenu
-            email={user.email ?? ""}
+            displayName={user.displayName ?? ""}
             imageUrl={user.image ?? undefined}
             isLoading={isLoading}
             isCollapsed={isCollapsed}
