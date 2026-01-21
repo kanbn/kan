@@ -167,6 +167,9 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      framer-motion:
+        specifier: ^12.26.2
+        version: 12.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       geist:
         specifier: ^1.3.1
         version: 1.4.2(next@15.5.9(@babel/core@7.28.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))

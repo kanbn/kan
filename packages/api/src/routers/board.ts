@@ -423,7 +423,9 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+      if (input.favorite !== undefined) {
+        await assertUserInWorkspace(ctx.db, userId, board.workspaceId, "admin");
+      }
 
       if (input.slug) {
         const isBoardSlugAvailable = await boardRepo.isBoardSlugAvailable(

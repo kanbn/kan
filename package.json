@@ -37,8 +37,5 @@
       "@types/minimatch": "npm:minimatch@*",
       "@types/glob": "npm:@types/glob@^8.1.0"
     }
-  },
-  "dependencies": {
-    "framer-motion": "^12.26.2"
   }
 }
