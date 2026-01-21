@@ -173,6 +173,7 @@ export const getByPublicId = async (
       name: true,
       slug: true,
       visibility: true,
+      favorite: true,
     },
     with: {
       workspace: {
@@ -327,6 +328,7 @@ export const getByPublicId = async (
 
   const formattedResult = {
     ...board,
+    favorite: board.favorite,
     lists: board.lists.map((list) => ({
       ...list,
       cards: list.cards.map((card) => ({

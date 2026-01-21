@@ -493,6 +493,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
               isLoading={!boardData}
               boardPublicId={boardId ?? ""}
               workspacePublicId={workspace.publicId}
+              isFavorite={boardData?.favorite}
+              boardName={boardData?.name}
             />
           </div>
         </div>
@@ -594,13 +596,12 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                               ? `/templates/${boardId}/cards/${card.publicId}`
                                               : `/cards/${card.publicId}`
                                           }
-                                          className={`mb-2 flex !cursor-pointer flex-col ${
-                                            card.publicId.startsWith(
-                                              "PLACEHOLDER",
-                                            )
-                                              ? "pointer-events-none"
-                                              : ""
-                                          }`}
+                                          className={`mb-2 flex !cursor-pointer flex-col ${card.publicId.startsWith(
+                                            "PLACEHOLDER",
+                                          )
+                                            ? "pointer-events-none"
+                                            : ""
+                                            }`}
                                           ref={provided.innerRef}
                                           {...provided.draggableProps}
                                           {...provided.dragHandleProps}
