@@ -81,20 +81,8 @@ export function useDragToScroll({
     // Don't start dragging if clicking on interactive elements
     if (isInteractiveElement) return;
 
-    // Check if clicking directly on the container (background)
-    const isContainer = target === container;
-    
-    // Check if clicking on a spacer div (empty space between lists)
-    // Spacer divs are direct children with minimal/no content
-    const isDirectChild = container.contains(target) && target.parentElement === container;
-    const isSpacer = 
-      isDirectChild &&
-      target.textContent?.trim() === "" &&
-      target.children.length === 0 &&
-      !target.closest("[data-rbd-droppable-id]");
-
-    // Allow dragging if clicking on the container background or spacer elements
-    if (isContainer || isSpacer) {
+    // Enable drag-to-scroll for any non-interactive element within the container
+    if (container.contains(target)) {
       e.preventDefault();
       setIsDragging(true);
       startPosRef.current = { x: e.clientX, y: e.clientY };
