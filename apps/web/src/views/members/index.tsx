@@ -104,8 +104,7 @@ export default function MembersPage() {
                   </p>
                 </div>
                 {((workspace.role === "admin" ||
-                  (data as { showEmailsToMembers?: boolean })
-                    ?.showEmailsToMembers === true) ||
+                  data?.showEmailsToMembers === true) ||
                   showSkeleton) && (
                   <p
                     className={twMerge(
@@ -257,31 +256,20 @@ export default function MembersPage() {
                   <tbody className="divide-y divide-light-600 overflow-visible bg-light-50 dark:divide-dark-600 dark:bg-dark-100">
                     {!isLoading &&
                       data?.members.map((member, index) => {
-                        const isAdmin = workspace.role === "admin";
-                        const showEmailsToMembers =
-                          (data as { showEmailsToMembers?: boolean })
-                            ?.showEmailsToMembers === true;
-                        const canSeeEmails = isAdmin || showEmailsToMembers;
                         const isPendingInvite = member.status === "invited";
-                        const shouldShowPendingPlaceholder =
-                          isPendingInvite && !canSeeEmails;
 
                         return (
                           <TableRow
                             key={member.publicId}
                             memberPublicId={member.publicId}
                             memberId={member.user?.id}
-                            memberName={
-                              shouldShowPendingPlaceholder
-                                ? t`Pending Member...`
-                                : member.user?.name
-                            }
+                            memberName={member.user?.name}
                             memberEmail={member.user?.email ?? member.email}
                             memberImage={member.user?.image}
                             memberRole={member.role}
                             memberStatus={member.status}
                             isLastRow={index === data.members.length - 1}
-                            showPendingIcon={shouldShowPendingPlaceholder}
+                            showPendingIcon={isPendingInvite}
                           />
                         );
                       })}

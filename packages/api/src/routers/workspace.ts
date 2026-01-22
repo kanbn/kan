@@ -88,21 +88,36 @@ export const workspaceRouter = createTRPCRouter({
 
       // If emails should be hidden, filter them out
       if (!shouldShowEmails) {
-        const sanitizedMembers = result.members.map((member) => ({
-          ...member,
-          email: undefined,
-          user: member.user
-            ? {
-                ...member.user,
-                email: undefined,
-              }
-            : member.user,
-        }));
+        const sanitizedMembers = result.members.map((member) => {
+          // If user doesn't have a display name, use anonymous identifier
+          const displayName =
+            member.user?.name?.trim() ?? `anonymous_${member.publicId}`;
+
+          const { email: _memberEmail, ...memberWithoutEmail } = member;
+          const sanitizedUser = member.user
+            ? (() => {
+                const { email: _userEmail, ...userWithoutEmail } = member.user;
+                return {
+                  ...userWithoutEmail,
+                  name: displayName,
+                };
+              })()
+            : {
+                id: null,
+                name: displayName,
+                image: null,
+              };
+
+          return {
+            ...memberWithoutEmail,
+            user: sanitizedUser,
+          };
+        });
 
         return {
           ...result,
           members: sanitizedMembers,
-        } as unknown as typeof result;
+        } as Awaited<ReturnType<typeof workspaceRepo.getByPublicIdWithMembers>>;
       }
 
       return result;
@@ -323,6 +338,12 @@ export const workspaceRouter = createTRPCRouter({
           showEmailsToMembers: input.showEmailsToMembers,
         },
       );
+
+      if (!result)
+        throw new TRPCError({
+          message: `Unable to delete workspace`,
+          code: "INTERNAL_SERVER_ERROR",
+        });
 
       return result;
     }),
