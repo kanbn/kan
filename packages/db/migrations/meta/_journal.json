@@ -176,6 +176,20 @@
       "when": 1768687791563,
       "tag": "20260117220951_zippy_nekra",
       "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1769110352482,
+      "tag": "20260122193232_AddUserBoardFavourites",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1769112209285,
+      "tag": "20260122200329_RemoveFavoriteColumn",
+      "breakpoints": true
     }
   ]
 }
