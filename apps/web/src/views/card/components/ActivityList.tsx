@@ -25,6 +25,7 @@ import { authClient } from "@kan/auth/client";
 import Avatar from "~/components/Avatar";
 import { useLocalisation } from "~/hooks/useLocalisation";
 import { api } from "~/utils/api";
+import { getAvatarUrl } from "~/utils/helpers";
 import Comment from "./Comment";
 
 type ActivityType =
@@ -471,6 +472,7 @@ const ActivityList = ({
               cardPublicId={cardPublicId}
               name={activity.user?.name ?? ""}
               email={activity.user?.email ?? ""}
+              image={activity.user?.image ?? null}
               isLoading={isLoading}
               createdAt={activity.createdAt.toISOString()}
               comment={activity.comment?.comment}
@@ -493,6 +495,7 @@ const ActivityList = ({
                 size="sm"
                 name={activity.user?.name ?? ""}
                 email={activity.user?.email ?? ""}
+                imageUrl={getAvatarUrl(activity.user?.image ?? null) || undefined}
                 icon={getActivityIcon(
                   activity.type,
                   activity.fromList?.index,
