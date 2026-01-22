@@ -52,5 +52,13 @@ export const getAvatarUrl = (imageOrKey: string | null) => {
     return imageOrKey;
   }
 
-  return `${env("NEXT_PUBLIC_STORAGE_URL")}/${env("NEXT_PUBLIC_AVATAR_BUCKET_NAME")}/${imageOrKey}`;
+  const bucket = env("NEXT_PUBLIC_AVATAR_BUCKET_NAME");
+  const storageDomain = env("NEXT_PUBLIC_STORAGE_DOMAIN");
+
+  if (storageDomain) {
+    return `https://${bucket}.${storageDomain}/${imageOrKey}`;
+  }
+
+  const storageUrl = env("NEXT_PUBLIC_STORAGE_URL");
+  return `${storageUrl}/${bucket}/${imageOrKey}`;
 };

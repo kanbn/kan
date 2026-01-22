@@ -10,6 +10,8 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "start": "pnpm with-env next start",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "with-env": "dotenv -e ../../.env --",
     "lingui:extract": "lingui extract",
@@ -86,7 +88,8 @@
     "jiti": "^1.21.6",
     "prettier": "catalog:",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "^3.0.0"
   },
   "prettier": "@kan/prettier-config"
 }
