@@ -25,22 +25,29 @@ import {
   comments,
   labels,
   lists,
+  userBoardFavorites,
   workspaceMembers,
 } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
-export const getAllByWorkspaceId = (
+export const getAllByWorkspaceId = async (
   db: dbClient,
   workspaceId: number,
+  userId: string,
   opts?: { type?: "regular" | "template" },
 ) => {
-  return db.query.boards.findMany({
+  const boardsData = await db.query.boards.findMany({
     columns: {
       publicId: true,
       name: true,
-      favorite: true,
     },
     with: {
+      userFavorites: {
+        where: eq(userBoardFavorites.userId, userId),
+        columns: {
+          userId: true,
+        },
+      },
       lists: {
         columns: {
           publicId: true,
@@ -62,8 +69,22 @@ export const getAllByWorkspaceId = (
       isNull(boards.deletedAt),
       opts?.type ? eq(boards.type, opts.type) : undefined,
     ),
-    orderBy: [desc(boards.favorite), asc(boards.name)]
   });
+
+  // Transform and sort: favorites first, then alphabetically
+  return boardsData
+    .map((board) => ({
+      ...board,
+      favorite: board.userFavorites.length > 0,
+      userFavorites: undefined,
+    }))
+    .sort((a, b) => {
+      // Sort favorites first
+      if (a.favorite && !b.favorite) return -1;
+      if (!a.favorite && b.favorite) return 1;
+      // Then alphabetically by name
+      return a.name.localeCompare(b.name);
+    });
 };
 
 export const getIdByPublicId = async (db: dbClient, boardPublicId: string) => {
@@ -114,6 +135,7 @@ const buildDueDateWhere = (filters: DueDateFilter[]) => {
 export const getByPublicId = async (
   db: dbClient,
   boardPublicId: string,
+  userId: string,
   filters: {
     members: string[];
     labels: string[];
@@ -163,9 +185,14 @@ export const getByPublicId = async (
       name: true,
       slug: true,
       visibility: true,
-      favorite: true,
     },
     with: {
+      userFavorites: {
+        where: eq(userBoardFavorites.userId, userId),
+        columns: {
+          userId: true,
+        },
+      },
       workspace: {
         columns: {
           publicId: true,
@@ -318,7 +345,8 @@ export const getByPublicId = async (
 
   const formattedResult = {
     ...board,
-    favorite: board.favorite,
+    favorite: board.userFavorites.length > 0,
+    userFavorites: undefined,
     lists: board.lists.map((list) => ({
       ...list,
       cards: list.cards.map((card) => ({
@@ -587,7 +615,6 @@ export const update = async (
     name: string | undefined;
     slug: string | undefined;
     visibility: BoardVisibilityStatus | undefined;
-    favorite: boolean | undefined;
     boardPublicId: string;
   },
 ) => {
@@ -597,7 +624,6 @@ export const update = async (
       name: boardInput.name,
       slug: boardInput.slug,
       visibility: boardInput.visibility,
-      favorite: boardInput.favorite,
       updatedAt: new Date(),
     })
     .where(eq(boards.publicId, boardInput.boardPublicId))
@@ -917,4 +943,35 @@ export const createFromSnapshot = async (
 
     return newBoard;
   });
+};
+
+export const addUserFavorite = async (
+  db: dbClient,
+  userId: string,
+  boardId: number,
+) => {
+  return db
+    .insert(userBoardFavorites)
+    .values({
+      userId,
+      boardId,
+    })
+    .onConflictDoNothing()
+    .returning();
+};
+
+export const removeUserFavorite = async (
+  db: dbClient,
+  userId: string,
+  boardId: number,
+) => {
+  return db
+    .delete(userBoardFavorites)
+    .where(
+      and(
+        eq(userBoardFavorites.userId, userId),
+        eq(userBoardFavorites.boardId, boardId)
+      )
+    )
+    .returning();
 };
