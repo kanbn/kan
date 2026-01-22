@@ -50,6 +50,11 @@ const config = {
           protocol: "https",
           hostname: "*.googleusercontent.com",
         },
+        {
+          protocol: 'https',
+          hostname: 'cdn.discordapp.com',
+          pathname: '/avatars/**',
+        },
       ];
 
       // Extract root domain from S3_ENDPOINT and add wildcard pattern
