@@ -17,6 +17,7 @@ import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { DeleteWorkspaceConfirmation } from "./components/DeleteWorkspaceConfirmation";
 import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescriptionForm";
+import UpdateWorkspaceEmailVisibilityForm from "./components/UpdateWorkspaceEmailVisibilityForm";
 import UpdateWorkspaceNameForm from "./components/UpdateWorkspaceNameForm";
 import UpdateWorkspaceUrlForm from "./components/UpdateWorkspaceUrlForm";
 import { UpgradeToProConfirmation } from "./components/UpgradeToProConfirmation";
@@ -77,6 +78,14 @@ export default function WorkspaceSettings() {
         <UpdateWorkspaceDescriptionForm
           workspacePublicId={workspace.publicId}
           workspaceDescription={workspace.description ?? ""}
+        />
+
+        <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
+          {t`Email visibility`}
+        </h2>
+        <UpdateWorkspaceEmailVisibilityForm
+          workspacePublicId={workspace.publicId}
+          showEmailsToMembers={workspaceData?.showEmailsToMembers ?? false}
         />
 
         {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&

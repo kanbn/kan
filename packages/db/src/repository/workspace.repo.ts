@@ -82,6 +82,7 @@ export const update = async (
     slug?: string;
     plan?: "free" | "pro" | "enterprise";
     description?: string;
+    showEmailsToMembers?: boolean;
   },
 ) => {
   const [result] = await db
@@ -91,6 +92,7 @@ export const update = async (
       slug: workspaceInput.slug,
       plan: workspaceInput.plan,
       description: workspaceInput.description,
+      showEmailsToMembers: workspaceInput.showEmailsToMembers,
     })
     .where(eq(workspaces.publicId, workspacePublicId))
     .returning({
@@ -100,6 +102,7 @@ export const update = async (
       slug: workspaces.slug,
       description: workspaces.description,
       plan: workspaces.plan,
+      showEmailsToMembers: workspaces.showEmailsToMembers,
     });
 
   return result;
@@ -139,6 +142,7 @@ export const getByPublicIdWithMembers = (
     columns: {
       id: true,
       publicId: true,
+      showEmailsToMembers: true,
     },
     with: {
       members: {
