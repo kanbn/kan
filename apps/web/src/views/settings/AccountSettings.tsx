@@ -37,6 +37,13 @@ export default function AccountSettings() {
           <UpdateDisplayNameForm displayName={data?.name ?? ""} />
         </div>
 
+        <div className="mb-4">
+          <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
+            {t`Email`}
+          </h2>
+          <p className="text-sm text-neutral-700 dark:text-dark-900">{data?.email}</p>
+        </div>
+
         <div className="mb-8 border-t border-light-300 dark:border-dark-300">
           <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
             {t`Language`}

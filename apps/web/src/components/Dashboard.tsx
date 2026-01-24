@@ -155,7 +155,7 @@ export default function Dashboard({
             className={`fixed top-12 z-40 h-[calc(100dvh-3rem)] w-[calc(100vw-1.5rem)] transform transition-transform duration-300 ease-in-out md:relative md:top-0 md:h-full md:w-auto md:translate-x-0 ${isSideNavOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"} `}
           >
             <SideNavigation
-              user={{ email: session?.user.email, image: session?.user.image }}
+              user={{ displayName: session?.user.name, email: session?.user.email, image: session?.user.image }}
               isLoading={sessionLoading}
               onCloseSideNav={closeSideNav}
             />
