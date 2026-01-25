@@ -23,6 +23,10 @@
     "./repository/*": {
       "types": "./dist/repository/*.d.ts",
       "default": "./src/repository/*.ts"
+    },
+    "./redis": {
+      "types": "./dist/redis.d.ts",
+      "default": "./src/redis.ts"
     }
   },
   "license": "GPL-3.0",
@@ -43,6 +47,7 @@
     "@kan/shared": "workspace:^",
     "drizzle-orm": "^0.42.0",
     "drizzle-zod": "^0.5.1",
+    "ioredis": "^5.9.2",
     "pg": "^8.11.3",
     "uuid": "^11.1.0",
     "zod": "catalog:"

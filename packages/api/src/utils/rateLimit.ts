@@ -4,7 +4,7 @@ import {
   RateLimiterMemory,
 } from "rate-limiter-flexible";
 
-import { getRedisClient } from "./redis";
+import { getRedisClient } from "@kan/db/redis";
 
 export interface RateLimitOptions {
   points?: number;
@@ -12,7 +12,6 @@ export interface RateLimitOptions {
   identifier?: (req: NextApiRequest) => string | Promise<string>;
   errorMessage?: string;
 }
-
 
 const defaultIdentifier = (req: NextApiRequest): string => {
   // Try to identify the IP address of the request
@@ -32,14 +31,12 @@ const defaultIdentifier = (req: NextApiRequest): string => {
   return ip;
 };
 
-
 const DEFAULT_OPTIONS = {
   points: 100,
   duration: 60,
   errorMessage: "Too many requests, please try again later.",
   identifier: defaultIdentifier,
 } as const;
-
 
 function createRateLimiter(options: RateLimitOptions = {}) {
   const redis = getRedisClient();
@@ -48,6 +45,7 @@ function createRateLimiter(options: RateLimitOptions = {}) {
 
   // Use Redis if available, otherwise fall back to in-memory storage
   if (redis) {
+    console.log("Using Redis for rate limiting");
     return new RateLimiterRedis({
       storeClient: redis,
       points,
@@ -55,6 +53,7 @@ function createRateLimiter(options: RateLimitOptions = {}) {
     });
   }
 
+  console.log("Using in-memory for rate limiting");
   return new RateLimiterMemory({
     points,
     duration,
@@ -97,3 +96,4 @@ export function withRateLimit(
     }
   };
 }
+

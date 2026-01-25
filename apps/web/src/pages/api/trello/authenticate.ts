@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { createNextApiContext } from "@kan/api/trpc";
 import { integrations } from "@kan/db/schema";
 import { addYears } from "date-fns";
-import { withRateLimit } from "~/utils/rateLimit";
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 export default withRateLimit(
   { points: 100, duration: 60 },

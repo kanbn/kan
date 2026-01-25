@@ -6,7 +6,7 @@ import { env as nextRuntimeEnv } from "next-runtime-env";
 import { createNextApiContext } from "@kan/api/trpc";
 
 import { env } from "~/env";
-import { withRateLimit } from "~/utils/rateLimit";
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 const allowedContentTypes = ["image/jpeg", "image/png"];
 

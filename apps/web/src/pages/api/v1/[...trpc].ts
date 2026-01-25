@@ -6,7 +6,7 @@ import { appRouter } from "@kan/api";
 import { createRESTContext } from "@kan/api/trpc";
 
 import { env } from "~/env";
-import { withRateLimit } from "~/utils/rateLimit";
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 export default withRateLimit(
   { points: 100, duration: 60 },

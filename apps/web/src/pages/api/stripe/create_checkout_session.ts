@@ -6,7 +6,7 @@ import { createNextApiContext } from "@kan/api/trpc";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createStripeClient } from "@kan/stripe";
-import { withRateLimit } from "~/utils/rateLimit";
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 const workspaceSlugSchema = z
   .string()

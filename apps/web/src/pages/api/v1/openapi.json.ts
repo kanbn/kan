@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { openApiDocument } from "@kan/api/openapi";
-import { withRateLimit } from "~/utils/rateLimit";
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 export default withRateLimit(
   { points: 100, duration: 60 },

@@ -2,7 +2,7 @@ import { toNodeHandler } from "better-auth/node";
 
 import { initAuth } from "@kan/auth/server";
 import { createDrizzleClient } from "@kan/db/client";
-import { withRateLimit } from "~/utils/rateLimit";
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 export const config = { api: { bodyParser: false } };
 

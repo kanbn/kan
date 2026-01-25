@@ -4,7 +4,7 @@ import { jwtVerify } from "jose";
 import { z } from "zod";
 
 import { env } from "~/env";
-import { withRateLimit } from "~/utils/rateLimit";
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 const requestSchema = z.object({
   token: z.string().min(1),

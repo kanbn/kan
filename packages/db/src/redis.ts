@@ -1,7 +1,5 @@
 import Redis from "ioredis";
 
-import { env } from "~/env";
-
 let redisClient: Redis | null = null;
 
 export function getRedisClient(): Redis | null {
@@ -9,7 +7,7 @@ export function getRedisClient(): Redis | null {
     return redisClient;
   }
 
-  const redisUrl = env.REDIS_URL;
+  const redisUrl = process.env.REDIS_URL;
 
   if (!redisUrl) {
     return null;
@@ -30,5 +28,4 @@ export async function closeRedisClient(): Promise<void> {
     redisClient = null;
   }
 }
-
 
