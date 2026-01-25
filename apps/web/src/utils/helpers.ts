@@ -53,9 +53,10 @@ export const getAvatarUrl = (imageOrKey: string | null) => {
   }
 
   const bucket = env("NEXT_PUBLIC_AVATAR_BUCKET_NAME");
+  const useVirtualHostedUrls = env("NEXT_PUBLIC_USE_VIRTUAL_HOSTED_URLS");
   const storageDomain = env("NEXT_PUBLIC_STORAGE_DOMAIN");
 
-  if (storageDomain) {
+  if (useVirtualHostedUrls === "true" && storageDomain) {
     return `https://${bucket}.${storageDomain}/${imageOrKey}`;
   }
 
