@@ -4,6 +4,7 @@ import type { Readable } from "node:stream";
 import { createNextApiContext } from "@kan/api/trpc";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createStripeClient } from "@kan/stripe";
+import { withRateLimit } from "~/utils/rateLimit";
 
 async function buffer(readable: Readable) {
   const chunks = [];
@@ -13,10 +14,9 @@ async function buffer(readable: Readable) {
   return Buffer.concat(chunks);
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export default withRateLimit(
+  { points: 100, duration: 60 },
+  async (req: NextApiRequest, res: NextApiResponse) => {
   const stripe = createStripeClient();
 
   if (req.method !== "POST") {
@@ -64,7 +64,8 @@ export default async function handler(
     console.error("Webhook error:", err);
     return res.status(400).json({ message: "Webhook handler failed" });
   }
-}
+  },
+);
 
 export const config = {
   api: {

@@ -3,11 +3,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { createNextApiContext } from "@kan/api/trpc";
 import { integrations } from "@kan/db/schema";
 import { addYears } from "date-fns";
+import { withRateLimit } from "~/utils/rateLimit";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export default withRateLimit(
+  { points: 100, duration: 60 },
+  async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
@@ -48,4 +48,5 @@ export default async function handler(
     console.error("Trello authentication error:", err);
     return res.status(400).json({ message: "Trello authentication failed" });
   }
-}
+  },
+);
