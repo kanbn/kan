@@ -6,6 +6,7 @@ import type { dbClient } from "@kan/db/client";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { generateUID } from "@kan/shared/utils";
 import { sendEmail } from "@kan/email";
 import { createStripeClient } from "@kan/stripe";
 
@@ -132,8 +133,23 @@ export function createPlugins(db: dbClient) {
 
                 if (workspace?.id) {
                   await memberRepo.pauseAllMembers(db, workspace.id);
+                  
+                  // Reset slug to publicId, or generate a UID if publicId is taken
+                  let newSlug = workspace.publicId;
+                  
+                  if (workspace.slug !== workspace.publicId) {
+                    const isPublicIdAvailable = await workspaceRepo.isWorkspaceSlugAvailable(
+                      db,
+                      workspace.publicId,
+                    );
+                    if (!isPublicIdAvailable) {
+                      newSlug = generateUID();
+                    }
+                  }
+                  
                   await workspaceRepo.update(db, subscription.referenceId, {
                     plan: "free",
+                    slug: newSlug,
                   });
                 }
               },
