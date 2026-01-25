@@ -35,6 +35,7 @@ export function Tooltip({
       delay,
       interactive: false,
       theme: "tooltip",
+      touch: false,
     });
 
     return () => {
