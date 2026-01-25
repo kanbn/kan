@@ -3,12 +3,14 @@ import { createNextApiHandler } from "@trpc/server/adapters/next";
 
 import { appRouter } from "@kan/api/root";
 import { createTRPCContext } from "@kan/api/trpc";
+import { env } from "~/env";
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 const nextApiHandler = createNextApiHandler({
   router: appRouter,
   createContext: createTRPCContext,
   onError:
-    process.env.NODE_ENV === "development"
+    env.NODE_ENV === "development"
       ? ({ path, error }) => {
           console.error(
             `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`,
@@ -17,11 +19,16 @@ const nextApiHandler = createNextApiHandler({
       : undefined,
 });
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === "OPTIONS") {
-    res.writeHead(200);
-    return res.end();
-  }
+export default withRateLimit(
+  { points: 100, duration: 60 },
+  async (req: NextApiRequest, res: NextApiResponse) => {
+    if (req.method === "OPTIONS") {
+      res.writeHead(200);
+      res.end();
+      return;
+    }
 
-  return nextApiHandler(req, res);
-}
+    const result = await nextApiHandler(req, res);
+    return result;
+  },
+);

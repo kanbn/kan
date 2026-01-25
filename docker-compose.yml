@@ -18,6 +18,9 @@ services:
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - POSTGRES_URL=${POSTGRES_URL}
 
+      # Redis (optional - for rate limiting)
+      - REDIS_URL=${REDIS_URL}
+
       # Admin API key (optional)
       - KAN_ADMIN_API_KEY=${KAN_ADMIN_API_KEY}
 
