@@ -8,6 +8,7 @@ import { HiEllipsisHorizontal, HiPencil, HiTrash } from "react-icons/hi2";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import Dropdown from "~/components/Dropdown";
+import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
@@ -49,6 +50,7 @@ const Comment = ({
   const utils = api.useUtils();
   const { showPopup } = usePopup();
   const { openModal } = useModal();
+  const { canEditComment, canDeleteComment } = usePermissions();
   const { handleSubmit, setValue, watch } = useForm<FormValues>({
     defaultValues: {
       comment,
@@ -80,7 +82,7 @@ const Comment = ({
   };
 
   const dropdownItems = [
-    ...(isAuthor
+    ...(isAuthor && canEditComment
       ? [
           {
             label: t`Edit comment`,
@@ -89,7 +91,7 @@ const Comment = ({
           },
         ]
       : []),
-    ...(isAuthor || isAdmin
+    ...((isAuthor || isAdmin) && canDeleteComment
       ? [
           {
             label: t`Delete comment`,

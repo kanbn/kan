@@ -14,6 +14,7 @@ import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
+import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
@@ -44,6 +45,7 @@ interface FormValues {
 
 export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   const router = useRouter();
+  const { canEditCard } = usePermissions();
   const cardId = Array.isArray(router.query.cardId)
     ? router.query.cardId[0]
     : router.query.cardId;
@@ -110,40 +112,44 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
 
   return (
     <div className="h-full w-[360px] border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
-      <div className="mb-4 flex w-full flex-row pt-[18px]">
-        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
-        <ListSelector
-          cardPublicId={cardId ?? ""}
-          lists={formattedLists}
-          isLoading={!card}
-        />
-      </div>
-      <div className="mb-4 flex w-full flex-row">
-        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Labels`}</p>
-        <LabelSelector
-          cardPublicId={cardId ?? ""}
-          labels={formattedLabels}
-          isLoading={!card}
-        />
-      </div>
-      {!isTemplate && (
-        <div className="mb-4 flex w-full flex-row">
-          <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Members`}</p>
-          <MemberSelector
-            cardPublicId={cardId ?? ""}
-            members={formattedMembers}
-            isLoading={!card}
-          />
-        </div>
+      {canEditCard && (
+        <>
+          <div className="mb-4 flex w-full flex-row pt-[18px]">
+            <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
+            <ListSelector
+              cardPublicId={cardId ?? ""}
+              lists={formattedLists}
+              isLoading={!card}
+            />
+          </div>
+          <div className="mb-4 flex w-full flex-row">
+            <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Labels`}</p>
+            <LabelSelector
+              cardPublicId={cardId ?? ""}
+              labels={formattedLabels}
+              isLoading={!card}
+            />
+          </div>
+          {!isTemplate && (
+            <div className="mb-4 flex w-full flex-row">
+              <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Members`}</p>
+              <MemberSelector
+                cardPublicId={cardId ?? ""}
+                members={formattedMembers}
+                isLoading={!card}
+              />
+            </div>
+          )}
+          <div className="mb-4 flex w-full flex-row">
+            <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Due date`}</p>
+            <DueDateSelector
+              cardPublicId={cardId ?? ""}
+              dueDate={card?.dueDate}
+              isLoading={!card}
+            />
+          </div>
+        </>
       )}
-      <div className="mb-4 flex w-full flex-row">
-        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Due date`}</p>
-        <DueDateSelector
-          cardPublicId={cardId ?? ""}
-          dueDate={card?.dueDate}
-          isLoading={!card}
-        />
-      </div>
     </div>
   );
 }
@@ -162,6 +168,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   } = useModal();
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
+  const { canEditCard } = usePermissions();
   const [activeChecklistForm, setActiveChecklistForm] = useState<string | null>(
     null,
   );
@@ -326,9 +333,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                       <textarea
                         id="title"
                         {...register("title")}
-                        onBlur={handleSubmit(onSubmit)}
+                        onBlur={canEditCard ? handleSubmit(onSubmit) : undefined}
                         rows={1}
-                        className="block w-full resize-none overflow-hidden border-0 bg-transparent p-0 py-0 font-bold leading-relaxed text-neutral-900 focus:ring-0 dark:text-dark-1000 sm:text-[1.2rem]"
+                        disabled={!canEditCard}
+                        className={`block w-full resize-none overflow-hidden border-0 bg-transparent p-0 py-0 font-bold leading-relaxed text-neutral-900 focus:ring-0 dark:text-dark-1000 sm:text-[1.2rem] ${!canEditCard ? "cursor-default" : ""}`}
                         onInput={(e) => {
                           const target = e.target as HTMLTextAreaElement;
                           target.style.height = "auto";
@@ -354,9 +362,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                       <div className="mt-2">
                         <Editor
                           content={card.description}
-                          onChange={(e) => setValue("description", e)}
-                          onBlur={() => handleSubmit(onSubmit)()}
+                          onChange={canEditCard ? (e) => setValue("description", e) : undefined}
+                          onBlur={canEditCard ? () => handleSubmit(onSubmit)() : undefined}
                           workspaceMembers={board?.workspace.members ?? []}
+                          readOnly={!canEditCard}
                         />
                       </div>
                     </form>
@@ -366,6 +375,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                     cardPublicId={cardId}
                     activeChecklistForm={activeChecklistForm}
                     setActiveChecklistForm={setActiveChecklistForm}
+                    viewOnly={!canEditCard}
                   />
                   {!isTemplate && (
                     <>
@@ -374,12 +384,15 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                           <AttachmentThumbnails
                             attachments={card.attachments}
                             cardPublicId={cardId ?? ""}
+                            isReadOnly={!canEditCard}
                           />
                         </div>
                       )}
-                      <div className="mt-6">
-                        <AttachmentUpload cardPublicId={cardId} />
-                      </div>
+                      {canEditCard && (
+                        <div className="mt-6">
+                          <AttachmentUpload cardPublicId={cardId} />
+                        </div>
+                      )}
                     </>
                   )}
                   <div className="border-t-[1px] border-light-300 pt-12 dark:border-dark-300">

@@ -26,6 +26,7 @@ import { StrictModeDroppable as Droppable } from "~/components/StrictModeDroppab
 import { Tooltip } from "~/components/Tooltip";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
 import { useDragToScroll } from "~/hooks/useDragToScroll";
+import { usePermissions } from "~/hooks/usePermissions";
 import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -63,11 +64,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     direction: "horizontal",
   });
 
+  const { canCreateList } = usePermissions();
+
   const { tooltipContent: createListShortcutTooltipContent } =
     useKeyboardShortcut({
       type: "PRESS",
       stroke: { key: "C" },
-      action: () => boardId && openNewListForm(boardId),
+      action: () => boardId && canCreateList && openNewListForm(boardId),
       description: t`Create new list`,
       group: "ACTIONS",
     });
@@ -460,22 +463,24 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 )}
               </>
             )}
-            <Tooltip content={createListShortcutTooltipContent}>
-              <Button
-                iconLeft={
-                  <HiOutlinePlusSmall
-                    className="-mr-0.5 h-5 w-5"
-                    aria-hidden="true"
-                  />
-                }
-                onClick={() => {
-                  if (boardId) openNewListForm(boardId);
-                }}
-                disabled={!boardData}
-              >
-                {t`New list`}
-              </Button>
-            </Tooltip>
+            {canCreateList && (
+              <Tooltip content={createListShortcutTooltipContent}>
+                <Button
+                  iconLeft={
+                    <HiOutlinePlusSmall
+                      className="-mr-0.5 h-5 w-5"
+                      aria-hidden="true"
+                    />
+                  }
+                  onClick={() => {
+                    if (boardId) openNewListForm(boardId);
+                  }}
+                  disabled={!boardData}
+                >
+                  {t`New list`}
+                </Button>
+              </Tooltip>
+            )}
             <BoardDropdown
               isTemplate={!!isTemplate}
               isLoading={!boardData}
@@ -506,16 +511,20 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                       {t`No lists`}
                     </p>
                     <p className="text-[14px] text-light-900 dark:text-dark-900">
-                      {t`Get started by creating a new list`}
+                      {canCreateList
+                        ? t`Get started by creating a new list`
+                        : t`No lists have been created yet`}
                     </p>
                   </div>
-                  <Button
-                    onClick={() => {
-                      if (boardId) openNewListForm(boardId);
-                    }}
-                  >
-                    {t`Create new list`}
-                  </Button>
+                  {canCreateList && (
+                    <Button
+                      onClick={() => {
+                        if (boardId) openNewListForm(boardId);
+                      }}
+                    >
+                      {t`Create new list`}
+                    </Button>
+                  )}
                 </div>
               ) : (
                 <DragDropContext onDragEnd={onDragEnd}>

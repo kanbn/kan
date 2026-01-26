@@ -66,6 +66,28 @@ export const getMemberPermissionOverrides = async (
 };
 
 /**
+ * Get a single permission override for a member
+ */
+export const getMemberPermissionOverride = async (
+  db: dbClient,
+  workspaceMemberId: number,
+  permission: string,
+) => {
+  const [override] = await db
+    .select()
+    .from(workspaceMemberPermissions)
+    .where(
+      and(
+        eq(workspaceMemberPermissions.workspaceMemberId, workspaceMemberId),
+        eq(workspaceMemberPermissions.permission, permission),
+      ),
+    )
+    .limit(1);
+
+  return override;
+};
+
+/**
  * Get effective permissions for a workspace member
  * Combines role template (from DB) with custom overrides
  */
