@@ -40,7 +40,7 @@ export default function List({
   setSelectedPublicListId,
 }: ListProps) {
   const { openModal } = useModal();
-  const { canCreateCard, canDeleteList } = usePermissions();
+  const { canCreateCard, canEditList, canDeleteList } = usePermissions();
 
   const openNewCardForm = (publicListId: PublicListId) => {
     if (!canCreateCard) return;
@@ -62,6 +62,7 @@ export default function List({
   });
 
   const onSubmit = (values: FormValues) => {
+    if (!canEditList) return;
     updateList.mutate({
       listPublicId: values.listPublicId,
       name: values.name,
@@ -93,6 +94,7 @@ export default function List({
                 type="text"
                 {...register("name")}
                 onBlur={handleSubmit(onSubmit)}
+                readOnly={!canEditList}
                 className="w-full border-0 bg-transparent px-4 pt-1 text-sm font-medium text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000"
               />
             </form>

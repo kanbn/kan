@@ -64,7 +64,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     direction: "horizontal",
   });
 
-  const { canCreateList } = usePermissions();
+  const { canCreateList, canEditList, canEditCard } = usePermissions();
 
   const { tooltipContent: createListShortcutTooltipContent } =
     useKeyboardShortcut({
@@ -263,14 +263,14 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       return;
     }
 
-    if (type === "LIST") {
+    if (type === "LIST" && canEditList) {
       updateListMutation.mutate({
         listPublicId: draggableId,
         index: destination.index,
       });
     }
 
-    if (type === "CARD") {
+    if (type === "CARD" && canEditCard) {
       updateCardMutation.mutate({
         cardPublicId: draggableId,
 
