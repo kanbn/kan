@@ -55,6 +55,12 @@ export const getByPublicId = async (db: dbClient, publicId: string) => {
   });
 };
 
+export const getById = async (db: dbClient, memberId: number) => {
+  return db.query.workspaceMembers.findFirst({
+    where: eq(workspaceMembers.id, memberId),
+  });
+};
+
 export const getByEmailAndStatus = async (
   db: dbClient,
   email: string,
@@ -132,4 +138,29 @@ export const pauseAllMembers = async (db: dbClient, workspaceId: number) => {
         eq(workspaceMembers.status, "active"),
       ),
     );
+};
+
+export const updateRole = async (
+  db: dbClient,
+  args: {
+    memberId: number;
+    role: MemberRole;
+    roleId: number | null;
+  },
+) => {
+  const [result] = await db
+    .update(workspaceMembers)
+    .set({
+      role: args.role,
+      roleId: args.roleId,
+      updatedAt: new Date(),
+    })
+    .where(eq(workspaceMembers.id, args.memberId))
+    .returning({
+      id: workspaceMembers.id,
+      publicId: workspaceMembers.publicId,
+      role: workspaceMembers.role,
+    });
+
+  return result;
 };
