@@ -19,13 +19,15 @@ CREATE TABLE IF NOT EXISTS "workspace_role_permissions" (
 ALTER TABLE "workspace_role_permissions" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "workspace_roles" (
 	"id" bigserial PRIMARY KEY NOT NULL,
+	"publicId" varchar(12) NOT NULL,
 	"workspaceId" bigint NOT NULL,
 	"name" varchar(64) NOT NULL,
 	"description" varchar(255),
 	"hierarchyLevel" integer NOT NULL,
 	"isSystem" boolean DEFAULT false NOT NULL,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
-	"updatedAt" timestamp
+	"updatedAt" timestamp,
+	CONSTRAINT "workspace_roles_publicId_unique" UNIQUE("publicId")
 );
 --> statement-breakpoint
 ALTER TABLE "workspace_roles" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
@@ -56,25 +58,40 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 
+-- Helper function to generate 12-character public IDs
+CREATE OR REPLACE FUNCTION generate_public_id() RETURNS varchar(12) AS $$
+DECLARE
+  chars text := 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  result varchar(12) := '';
+  i integer;
+BEGIN
+  FOR i IN 1..12 LOOP
+    result := result || substr(chars, floor(random() * length(chars) + 1)::integer, 1);
+  END LOOP;
+  RETURN result;
+END;
+$$ LANGUAGE plpgsql;
+--> statement-breakpoint
+
 -- Seed system roles for each existing workspace
-INSERT INTO "workspace_roles" ("workspaceId", "name", "description", "hierarchyLevel", "isSystem", "createdAt")
-SELECT w.id, 'admin', 'Full access to all workspace features', 100, true, NOW()
+INSERT INTO "workspace_roles" ("publicId", "workspaceId", "name", "description", "hierarchyLevel", "isSystem", "createdAt")
+SELECT generate_public_id(), w.id, 'admin', 'Full access to all workspace features', 100, true, NOW()
 FROM "workspace" w
 WHERE NOT EXISTS (
   SELECT 1 FROM "workspace_roles" wr 
   WHERE wr."workspaceId" = w.id AND wr."name" = 'admin'
 );
 --> statement-breakpoint
-INSERT INTO "workspace_roles" ("workspaceId", "name", "description", "hierarchyLevel", "isSystem", "createdAt")
-SELECT w.id, 'member', 'Standard member with create and edit permissions', 50, true, NOW()
+INSERT INTO "workspace_roles" ("publicId", "workspaceId", "name", "description", "hierarchyLevel", "isSystem", "createdAt")
+SELECT generate_public_id(), w.id, 'member', 'Standard member with create and edit permissions', 50, true, NOW()
 FROM "workspace" w
 WHERE NOT EXISTS (
   SELECT 1 FROM "workspace_roles" wr 
   WHERE wr."workspaceId" = w.id AND wr."name" = 'member'
 );
 --> statement-breakpoint
-INSERT INTO "workspace_roles" ("workspaceId", "name", "description", "hierarchyLevel", "isSystem", "createdAt")
-SELECT w.id, 'guest', 'View-only access', 10, true, NOW()
+INSERT INTO "workspace_roles" ("publicId", "workspaceId", "name", "description", "hierarchyLevel", "isSystem", "createdAt")
+SELECT generate_public_id(), w.id, 'guest', 'View-only access', 10, true, NOW()
 FROM "workspace" w
 WHERE NOT EXISTS (
   SELECT 1 FROM "workspace_roles" wr 
@@ -149,3 +166,7 @@ FROM "workspace_roles" wr
 WHERE wm."workspaceId" = wr."workspaceId"
   AND wm."role"::text = wr."name"
   AND wm."roleId" IS NULL;
+--> statement-breakpoint
+
+-- Clean up helper function
+DROP FUNCTION IF EXISTS generate_public_id();
