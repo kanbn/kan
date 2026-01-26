@@ -17,6 +17,7 @@ export const workspaceRoles = pgTable(
   "workspace_roles",
   {
     id: bigserial("id", { mode: "number" }).primaryKey(),
+    publicId: varchar("publicId", { length: 12 }).notNull().unique(),
     workspaceId: bigint("workspaceId", { mode: "number" })
       .notNull()
       .references(() => workspaces.id, { onDelete: "cascade" }),
