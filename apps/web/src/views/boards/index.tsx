@@ -7,6 +7,7 @@ import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import { Tooltip } from "~/components/Tooltip";
+import { usePermissions } from "~/hooks/usePermissions";
 import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
@@ -17,12 +18,13 @@ import { NewBoardForm } from "./components/NewBoardForm";
 export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
   const { openModal, modalContentType, isOpen } = useModal();
   const { workspace } = useWorkspace();
+  const { canCreateBoard } = usePermissions();
 
   const { tooltipContent: createModalShortcutTooltipContent } =
     useKeyboardShortcut({
       type: "PRESS",
       stroke: { key: "C" },
-      action: () => openModal("NEW_BOARD"),
+      action: () => canCreateBoard && openModal("NEW_BOARD"),
       description: t`Create new ${isTemplate ? "template" : "board"}`,
       group: "ACTIONS",
     });
