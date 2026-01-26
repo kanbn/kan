@@ -1,4 +1,22 @@
--- Create workspace_roles table
+CREATE TABLE IF NOT EXISTS "workspace_member_permissions" (
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"workspaceMemberId" bigint NOT NULL,
+	"permission" varchar(64) NOT NULL,
+	"granted" boolean DEFAULT true NOT NULL,
+	"createdAt" timestamp DEFAULT now() NOT NULL,
+	"updatedAt" timestamp
+);
+--> statement-breakpoint
+ALTER TABLE "workspace_member_permissions" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "workspace_role_permissions" (
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"workspaceRoleId" bigint NOT NULL,
+	"permission" varchar(64) NOT NULL,
+	"granted" boolean DEFAULT true NOT NULL,
+	"createdAt" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
+ALTER TABLE "workspace_role_permissions" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "workspace_roles" (
 	"id" bigserial PRIMARY KEY NOT NULL,
 	"workspaceId" bigint NOT NULL,
@@ -10,11 +28,14 @@ CREATE TABLE IF NOT EXISTS "workspace_roles" (
 	"updatedAt" timestamp
 );
 --> statement-breakpoint
-ALTER TABLE "workspace_roles" ENABLE ROW LEVEL SECURITY;
---> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "unique_role_per_workspace" ON "workspace_roles" USING btree ("workspaceId","name");
---> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "workspace_roles_workspace_idx" ON "workspace_roles" USING btree ("workspaceId");
+ALTER TABLE "workspace_roles" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
+ALTER TABLE "workspace_members" ADD COLUMN "roleId" bigint;--> statement-breakpoint
+ALTER TABLE "workspace" ADD COLUMN "showEmailsToMembers" boolean DEFAULT true NOT NULL;--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "workspace_role_permissions" ADD CONSTRAINT "workspace_role_permissions_workspaceRoleId_workspace_roles_id_fk" FOREIGN KEY ("workspaceRoleId") REFERENCES "public"."workspace_roles"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "workspace_roles" ADD CONSTRAINT "workspace_roles_workspaceId_workspace_id_fk" FOREIGN KEY ("workspaceId") REFERENCES "public"."workspace"("id") ON DELETE cascade ON UPDATE no action;
@@ -22,32 +43,12 @@ EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
-
--- Create workspace_role_permissions table
-CREATE TABLE IF NOT EXISTS "workspace_role_permissions" (
-	"id" bigserial PRIMARY KEY NOT NULL,
-	"workspaceRoleId" bigint NOT NULL,
-	"permission" varchar(64) NOT NULL,
-	"granted" boolean DEFAULT true NOT NULL,
-	"createdAt" timestamp DEFAULT now() NOT NULL
-);
---> statement-breakpoint
-ALTER TABLE "workspace_role_permissions" ENABLE ROW LEVEL SECURITY;
---> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "unique_role_permission" ON "workspace_role_permissions" USING btree ("workspaceRoleId","permission");
---> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "role_permissions_role_idx" ON "workspace_role_permissions" USING btree ("workspaceRoleId");
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "workspace_role_permissions" ADD CONSTRAINT "workspace_role_permissions_workspaceRoleId_workspace_roles_id_fk" FOREIGN KEY ("workspaceRoleId") REFERENCES "public"."workspace_roles"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-
--- Add roleId column to workspace_members (nullable for migration)
-ALTER TABLE "workspace_members" ADD COLUMN IF NOT EXISTS "roleId" bigint;
---> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "unique_member_permission" ON "workspace_member_permissions" USING btree ("workspaceMemberId","permission");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "permission_member_idx" ON "workspace_member_permissions" USING btree ("workspaceMemberId");--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "unique_role_permission" ON "workspace_role_permissions" USING btree ("workspaceRoleId","permission");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "role_permissions_role_idx" ON "workspace_role_permissions" USING btree ("workspaceRoleId");--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "unique_role_per_workspace" ON "workspace_roles" USING btree ("workspaceId","name");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "workspace_roles_workspace_idx" ON "workspace_roles" USING btree ("workspaceId");--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "workspace_members" ADD CONSTRAINT "workspace_members_roleId_workspace_roles_id_fk" FOREIGN KEY ("roleId") REFERENCES "public"."workspace_roles"("id") ON DELETE restrict ON UPDATE no action;
 EXCEPTION
@@ -148,4 +149,3 @@ FROM "workspace_roles" wr
 WHERE wm."workspaceId" = wr."workspaceId"
   AND wm."role"::text = wr."name"
   AND wm."roleId" IS NULL;
-

@@ -162,6 +162,13 @@
       "when": 1768858977000,
       "tag": "20260119164257_AddShowEmailsToMembersToWorkspace",
       "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1769433866743,
+      "tag": "20260126132426_AddWorkspaceRoles",
+      "breakpoints": true
     }
   ]
 }
