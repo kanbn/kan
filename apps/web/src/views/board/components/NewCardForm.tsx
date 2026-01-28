@@ -335,7 +335,7 @@ export function NewCardForm({
                 saveFormState({ ...formState, description: value });
               }}
               workspaceMembers={
-                boardData?.workspace.members?.map(
+                boardData?.workspace.members.map(
                   (member): WorkspaceMember => ({
                     publicId: member.publicId,
                     email: member.email,
@@ -349,6 +349,7 @@ export function NewCardForm({
                   }),
                 ) ?? []
               }
+              enableYouTubeEmbed={false}
             />
           </div>
         </div>

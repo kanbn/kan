@@ -77,6 +77,49 @@ export const workspaceRouter = createTRPCRouter({
 
       await assertUserInWorkspace(ctx.db, userId, result.id);
 
+      // Check if user is an admin
+      const userMember = result.members.find(
+        (member) => member.user?.id === userId,
+      );
+      const isAdmin = userMember?.role === "admin";
+
+      // Show emails if user is admin OR workspace setting allows it
+      const shouldShowEmails = isAdmin || result.showEmailsToMembers === true;
+
+      // If emails should be hidden, filter them out
+      if (!shouldShowEmails) {
+        const sanitizedMembers = result.members.map((member) => {
+          // If user doesn't have a display name, use anonymous identifier
+          const displayName =
+            member.user?.name?.trim() ?? `anonymous_${member.publicId}`;
+
+          const { email: _memberEmail, ...memberWithoutEmail } = member;
+          const sanitizedUser = member.user
+            ? (() => {
+                const { email: _userEmail, ...userWithoutEmail } = member.user;
+                return {
+                  ...userWithoutEmail,
+                  name: displayName,
+                };
+              })()
+            : {
+                id: null,
+                name: displayName,
+                image: null,
+              };
+
+          return {
+            ...memberWithoutEmail,
+            user: sanitizedUser,
+          };
+        });
+
+        return {
+          ...result,
+          members: sanitizedMembers,
+        } as Awaited<ReturnType<typeof workspaceRepo.getByPublicIdWithMembers>>;
+      }
+
       return result;
     }),
   bySlug: publicProcedure
@@ -230,6 +273,7 @@ export const workspaceRouter = createTRPCRouter({
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
           .optional(),
         description: z.string().min(3).max(280).optional(),
+        showEmailsToMembers: z.boolean().optional(),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof workspaceRepo.update>>>())
@@ -291,8 +335,15 @@ export const workspaceRouter = createTRPCRouter({
           name: input.name,
           slug: input.slug,
           description: input.description,
+          showEmailsToMembers: input.showEmailsToMembers,
         },
       );
+
+      if (!result)
+        throw new TRPCError({
+          message: `Unable to delete workspace`,
+          code: "INTERNAL_SERVER_ERROR",
+        });
 
       return result;
     }),
@@ -335,12 +386,6 @@ export const workspaceRouter = createTRPCRouter({
         ctx.db,
         input.workspacePublicId,
       );
-
-      if (!result)
-        throw new TRPCError({
-          message: `Unable to delete workspace`,
-          code: "INTERNAL_SERVER_ERROR",
-        });
 
       return result;
     }),

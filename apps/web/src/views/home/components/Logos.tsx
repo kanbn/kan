@@ -2,7 +2,6 @@ import type { FC, SVGProps } from "react";
 import { Trans } from "@lingui/react/macro";
 
 import AirbusLogo from "~/assets/logos/airbus.svg";
-import BitwardenLogo from "~/assets/logos/bitwarden.svg";
 import CouchbaseLogo from "~/assets/logos/couchbase.svg";
 import DeloitteLogo from "~/assets/logos/deloitte.svg";
 import FastCompanyLogo from "~/assets/logos/fast_company.svg";
@@ -31,36 +30,31 @@ export default function Logos() {
     },
     {
       id: 3,
-      component: BitwardenLogo as LogoComponent,
-      alt: "Bitwarden Logo",
-    },
-    {
-      id: 4,
       component: CouchbaseLogo as LogoComponent,
       alt: "Couchbase Logo",
     },
     {
-      id: 5,
+      id: 4,
       component: LegoLogo as LogoComponent,
       alt: "Lego Logo",
     },
     {
-      id: 6,
+      id: 5,
       component: AirbusLogo as LogoComponent,
       alt: "Airbus Logo",
     },
     {
-      id: 7,
+      id: 6,
       component: DeloitteLogo as LogoComponent,
       alt: "Deloitte Logo",
     },
     {
-      id: 8,
+      id: 7,
       component: WakamLogo as LogoComponent,
       alt: "Wakam Logo",
     },
     {
-      id: 9,
+      id: 8,
       component: LinkedinLogo as LogoComponent,
       alt: "Linked In Logo",
     },

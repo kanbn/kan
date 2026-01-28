@@ -13,6 +13,7 @@ import {
 
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface Attachment {
   publicId: string;
@@ -81,7 +82,7 @@ export function AttachmentThumbnails({
     },
     onSettled: async () => {
       if (isReadOnly) return;
-      await utils.card.byId.invalidate({ cardPublicId });
+      await invalidateCard(utils, cardPublicId);
     },
   });
 

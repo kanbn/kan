@@ -9,15 +9,19 @@ services:
     build:
       context: ..
       dockerfile: apps/web/Dockerfile
+      args:
+        APP_VERSION: ${APP_VERSION:-}
     env_file:
       - .env
     restart: unless-stopped
     environment:
+      - KAN_ADMIN_API_KEY=${KAN_ADMIN_API_KEY}
       - NEXT_PUBLIC_KAN_ENV=${NEXT_PUBLIC_KAN_ENV}
       - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - POSTGRES_URL=${POSTGRES_URL}
       - NEXT_PUBLIC_USE_STANDALONE_OUTPUT=${NEXT_PUBLIC_USE_STANDALONE_OUTPUT}
+      - REDIS_URL=${REDIS_URL}
 
       # Stripe
       - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
@@ -52,10 +56,14 @@ services:
       - NEXT_PUBLIC_AVATAR_BUCKET_NAME=${NEXT_PUBLIC_AVATAR_BUCKET_NAME}
       - NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME=${NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME}
       - NEXT_PUBLIC_STORAGE_DOMAIN=${NEXT_PUBLIC_STORAGE_DOMAIN}
+      - NEXT_PUBLIC_USE_VIRTUAL_HOSTED_URLS=${NEXT_PUBLIC_USE_VIRTUAL_HOSTED_URLS}
 
-      # Auth config
+      # Auth config (optional)
       - NEXT_PUBLIC_ALLOW_CREDENTIALS=${NEXT_PUBLIC_ALLOW_CREDENTIALS}
       - NEXT_PUBLIC_DISABLE_SIGN_UP=${NEXT_PUBLIC_DISABLE_SIGN_UP}
+
+      # API configuration (optional)
+      - NEXT_API_BODY_SIZE_LIMIT=${NEXT_API_BODY_SIZE_LIMIT}
 
       # Integration providers
       - TRELLO_APP_API_KEY=${TRELLO_APP_API_KEY}

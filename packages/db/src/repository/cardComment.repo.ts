@@ -1,8 +1,17 @@
-import { eq } from "drizzle-orm";
+import { count, eq, isNull } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import { comments } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
+
+export const getCount = async (db: dbClient) => {
+  const result = await db
+    .select({ count: count() })
+    .from(comments)
+    .where(isNull(comments.deletedAt));
+
+  return result[0]?.count ?? 0;
+};
 
 export const create = async (
   db: dbClient,

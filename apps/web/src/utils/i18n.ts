@@ -22,8 +22,8 @@ const loadMessages = async (locale: Locale) => {
       return (await import("~/locales/ru/messages")).messages;
     case "pl":
       return (await import("~/locales/pl/messages")).messages;
-    case "ptbr":
-      return (await import("~/locales/ptbr/messages")).messages;
+    case "pt-BR":
+      return (await import("~/locales/pt-BR/messages")).messages;
     default:
       return enMessages;
   }

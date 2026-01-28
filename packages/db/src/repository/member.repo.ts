@@ -1,9 +1,23 @@
-import { and, eq, isNull } from "drizzle-orm";
+import { and, count, eq, isNull } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { MemberRole, MemberStatus } from "@kan/db/schema";
 import { workspaceMembers } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
+
+export const getActiveCount = async (db: dbClient) => {
+  const result = await db
+    .select({ count: count() })
+    .from(workspaceMembers)
+    .where(
+      and(
+        isNull(workspaceMembers.deletedAt),
+        eq(workspaceMembers.status, "active"),
+      ),
+    );
+
+  return result[0]?.count ?? 0;
+};
 
 export const create = async (
   db: dbClient,
@@ -104,6 +118,18 @@ export const unpauseAllMembers = async (db: dbClient, workspaceId: number) => {
       and(
         eq(workspaceMembers.workspaceId, workspaceId),
         eq(workspaceMembers.status, "paused"),
+      ),
+    );
+};
+
+export const pauseAllMembers = async (db: dbClient, workspaceId: number) => {
+  await db
+    .update(workspaceMembers)
+    .set({ status: "paused" })
+    .where(
+      and(
+        eq(workspaceMembers.workspaceId, workspaceId),
+        eq(workspaceMembers.status, "active"),
       ),
     );
 };

@@ -9,6 +9,7 @@ import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { mergeActivities } from "../utils/activities";
 import { assertUserInWorkspace } from "../utils/auth";
 import { generateDownloadUrl } from "../utils/s3";
 
@@ -26,7 +27,7 @@ export const cardRouter = createTRPCRouter({
     })
     .input(
       z.object({
-        title: z.string().min(1),
+        title: z.string().min(1).max(2000),
         description: z.string().max(10000),
         listPublicId: z.string().min(12),
         labelPublicIds: z.array(z.string().min(12)),
@@ -670,6 +671,81 @@ export const cardRouter = createTRPCRouter({
 
       return { ...result, attachments: [] };
     }),
+  getActivities: publicProcedure
+    .meta({
+      openapi: {
+        summary: "Get paginated card activities",
+        method: "GET",
+        path: "/cards/{cardPublicId}/activities",
+        description:
+          "Retrieves paginated activities for a card with merged frequent changes",
+        tags: ["Cards"],
+      },
+    })
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+        limit: z.number().min(1).max(100).optional().default(10),
+        cursor: z.string().datetime().optional(), // ISO datetime string
+      }),
+    )
+    .output(
+      z.object({
+        activities: z.array(
+          z.custom<
+            NonNullable<
+              Awaited<
+                ReturnType<typeof cardActivityRepo.getPaginatedActivities>
+              >
+            >["activities"][number]
+          >(),
+        ),
+        hasMore: z.boolean(),
+        nextCursor: z.string().datetime().nullable(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!card)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      if (card.workspaceVisibility === "private") {
+        const userId = ctx.user?.id;
+
+        if (!userId)
+          throw new TRPCError({
+            message: `User not authenticated`,
+            code: "UNAUTHORIZED",
+          });
+
+        await assertUserInWorkspace(ctx.db, userId, card.workspaceId);
+      }
+
+      const cursor = input.cursor ? new Date(input.cursor) : undefined;
+      const result = await cardActivityRepo.getPaginatedActivities(
+        ctx.db,
+        card.id,
+        {
+          limit: input.limit,
+          cursor,
+        },
+      );
+
+      const mergedActivities = mergeActivities(result.activities);
+
+      return {
+        activities: mergedActivities,
+        hasMore: result.hasMore,
+        nextCursor: result.nextCursor?.toISOString() ?? null,
+      };
+    }),
   update: protectedProcedure
     .meta({
       openapi: {
@@ -684,7 +760,7 @@ export const cardRouter = createTRPCRouter({
     .input(
       z.object({
         cardPublicId: z.string().min(12),
-        title: z.string().min(1).optional(),
+        title: z.string().min(1).max(2000).optional(),
         description: z.string().optional(),
         index: z.number().optional(),
         listPublicId: z.string().min(12).optional(),

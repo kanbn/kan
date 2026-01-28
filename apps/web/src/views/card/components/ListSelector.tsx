@@ -3,6 +3,7 @@ import { t } from "@lingui/core/macro";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface ListSelectorProps {
   cardPublicId: string;
@@ -54,7 +55,7 @@ export default function ListSelector({
       });
     },
     onSettled: async () => {
-      await utils.card.byId.invalidate({ cardPublicId });
+      await invalidateCard(utils, cardPublicId);
     },
   });
 

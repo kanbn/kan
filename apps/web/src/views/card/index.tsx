@@ -13,10 +13,12 @@ import LabelIcon from "~/components/LabelIcon";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
+import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmation";
 import ActivityList from "./components/ActivityList";
@@ -178,7 +180,6 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
 
   const board = card?.list.board;
   const boardId = board?.publicId;
-  const activities = card?.activities;
 
   const updateCard = api.card.update.useMutation({
     onError: () => {
@@ -189,7 +190,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
       });
     },
     onSettled: async () => {
-      await utils.card.byId.invalidate({ cardPublicId: cardId });
+      if (cardId) await invalidateCard(utils, cardId);
     },
   });
 
@@ -388,7 +389,6 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                     <div>
                       <ActivityList
                         cardPublicId={cardId}
-                        activities={activities ?? []}
                         isLoading={!card}
                         isAdmin={workspace.role === "admin"}
                       />
@@ -483,6 +483,13 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
               cardPublicId={cardId}
               checklistPublicId={entityId}
             />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "EDIT_YOUTUBE"}
+          >
+            <EditYouTubeModal />
           </Modal>
         </>
       </div>

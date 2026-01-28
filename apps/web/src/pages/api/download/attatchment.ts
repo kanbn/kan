@@ -1,9 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+import { withRateLimit } from "@kan/api/utils/rateLimit";
+
+export default withRateLimit(
+  { points: 100, duration: 60 },
+  async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method not allowed" });
   }
@@ -44,4 +45,5 @@ export default async function handler(
     console.error("Error downloading attachment:", error);
     return res.status(500).json({ message: "Failed to download attachment" });
   }
-}
+  },
+);

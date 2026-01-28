@@ -1,8 +1,17 @@
-import { and, eq, gt } from "drizzle-orm";
+import { and, count, eq } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import { workspaceInviteLinks } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
+
+export const getActiveCount = async (db: dbClient) => {
+  const result = await db
+    .select({ count: count() })
+    .from(workspaceInviteLinks)
+    .where(eq(workspaceInviteLinks.status, "active"));
+
+  return result[0]?.count ?? 0;
+};
 
 export const createInviteLink = async (
   db: dbClient,
