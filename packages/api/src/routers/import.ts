@@ -14,7 +14,7 @@ import { colours } from "@kan/shared/constants";
 import { generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertUserInWorkspace } from "../utils/auth";
+import { assertPermission } from "../utils/permissions";
 import { apiKeys, urls } from "./integration";
 
 export interface TrelloBoard {
@@ -180,8 +180,7 @@ export const importRouter = createTRPCRouter({
             message: `Workspace with public ID ${input.workspacePublicId} not found`,
             code: "NOT_FOUND",
           });
-
-        await assertUserInWorkspace(ctx.db, userId, workspace.id);
+        await assertPermission(ctx.db, userId, workspace.id, "board:create");
 
         const newImport = await importRepo.create(ctx.db, {
           source: "trello",

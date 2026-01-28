@@ -16,7 +16,6 @@ import {
 import { updateSubscriptionSeats } from "@kan/stripe";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { assertUserInWorkspace } from "../utils/auth";
 import {
   assertCanManageMember,
   assertCanManageRole,
@@ -62,7 +61,7 @@ export const memberRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, workspace.id, "admin");
+      await assertPermission(ctx.db, userId, workspace.id, "member:invite");
 
       const isInvitedEmailAlreadyMember = workspace.members.some(
         (member) => member.email === input.email,
@@ -196,7 +195,7 @@ export const memberRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, workspace.id, "admin");
+      await assertPermission(ctx.db, userId, workspace.id, "member:remove");
 
       const member = await memberRepo.getByPublicId(
         ctx.db,
@@ -298,8 +297,8 @@ export const memberRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      // Check if user is in workspace
-      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+      // Check if user can view members
+      await assertPermission(ctx.db, userId, workspace.id, "member:view");
 
       // Get active invite link for this workspace
       const activeInviteLink = await inviteLinkRepo.getActiveForWorkspace(
@@ -366,8 +365,8 @@ export const memberRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      // Check if user is in workspace
-      await assertUserInWorkspace(ctx.db, userId, workspace.id, "admin");
+      // Check if user can edit members (admin-equivalent)
+      await assertPermission(ctx.db, userId, workspace.id, "member:edit");
 
       // Check subscription for cloud environment
       if (process.env.NEXT_PUBLIC_KAN_ENV === "cloud") {
@@ -467,8 +466,8 @@ export const memberRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      // Check if user is in workspace
-      await assertUserInWorkspace(ctx.db, userId, workspace.id, "admin");
+      // Check if user can edit members (admin-equivalent)
+      await assertPermission(ctx.db, userId, workspace.id, "member:edit");
 
       // Deactivate all active invite links
       await inviteLinkRepo.deactivateAllActiveForWorkspace(ctx.db, {
