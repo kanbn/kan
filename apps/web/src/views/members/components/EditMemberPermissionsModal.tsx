@@ -73,8 +73,34 @@ export function EditMemberPermissionsModal() {
     },
   });
 
+  const resetMutation = api.permission.resetMemberPermissions.useMutation({
+    onSuccess: async () => {
+      showPopup({
+        header: t`Permissions reset`,
+        message: t`This member's permissions have been reset to their role defaults.`,
+        icon: "success",
+      });
+
+      await utils.permission.getMemberPermissions.invalidate({
+        workspacePublicId: workspace.publicId,
+        memberPublicId: entityId,
+      });
+    },
+    onError: () => {
+      showPopup({
+        header: t`Unable to reset permissions`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
+    },
+  });
+
   const effectivePermissions = (data?.permissions ?? []) as Permission[];
-  const isBusy = grantMutation.isPending || revokeMutation.isPending;
+  const hasOverrides = (data?.overrides?.length ?? 0) > 0;
+  const isBusy =
+    grantMutation.isPending ||
+    revokeMutation.isPending ||
+    resetMutation.isPending;
 
   const handleToggle = (permission: Permission, nextState: boolean) => {
     if (!workspace.publicId || !entityId) return;
@@ -152,47 +178,69 @@ export function EditMemberPermissionsModal() {
           {t`Loading permissions...`}
         </p>
       ) : (
-        <div className="max-h-80 space-y-3 overflow-y-auto pr-1">
-          {Object.values(permissionCategories).map((category, index) => (
-            <div
-              key={category.label}
-              className={`py-2 ${index > 0 ? "border-t border-light-300 dark:border-dark-300" : ""}`}
-            >
-              <div className="my-2 text-[12px] font-semibold text-light-900 dark:text-dark-950">
-                {category.label}
-              </div>
-              <div className="space-y-1.5">
-                {category.permissions.map((permission) => {
-                  const label =
-                    permissionLabels[permission] ?? (permission as string);
+        <>
+          <div className="max-h-80 space-y-3 overflow-y-auto pr-1">
+            {Object.values(permissionCategories).map((category, index) => (
+              <div
+                key={category.label}
+                className={`py-2 ${
+                  index > 0
+                    ? "border-t border-light-300 dark:border-dark-300"
+                    : ""
+                }`}
+              >
+                <div className="my-2 text-[12px] font-semibold text-light-900 dark:text-dark-950">
+                  {category.label}
+                </div>
+                <div className="space-y-1.5">
+                  {category.permissions.map((permission) => {
+                    const label =
+                      permissionLabels[permission] ?? (permission as string);
 
-                  return (
-                    <div
-                      key={permission}
-                      className="flex items-center justify-between gap-3 py-0.5"
-                    >
-                      <span className="text-xs text-light-900 dark:text-dark-900 mb-">
-                        {label}
-                      </span>
-                      <Toggle
-                        label={label}
-                        showLabel={false}
-                        isChecked={effectivePermissions.includes(permission)}
-                        disabled={isBusy}
-                        onChange={() =>
-                          handleToggle(
-                            permission,
-                            !effectivePermissions.includes(permission),
-                          )
-                        }
-                      />
-                    </div>
-                  );
-                })}
+                    return (
+                      <div
+                        key={permission}
+                        className="flex items-center justify-between gap-3 py-0.5"
+                      >
+                        <span className="text-xs text-light-900 dark:text-dark-900">
+                          {label}
+                        </span>
+                        <Toggle
+                          label={label}
+                          showLabel={false}
+                          isChecked={effectivePermissions.includes(permission)}
+                          disabled={isBusy}
+                          onChange={() =>
+                            handleToggle(
+                              permission,
+                              !effectivePermissions.includes(permission),
+                            )
+                          }
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+          <div className="mt-4 flex justify-end">
+            <button
+              type="button"
+              onClick={() => {
+                if (!workspace.publicId || !entityId || isBusy) return;
+                resetMutation.mutate({
+                  workspacePublicId: workspace.publicId,
+                  memberPublicId: entityId,
+                });
+              }}
+              disabled={isBusy || !hasOverrides}
+              className="rounded-md border border-light-400 px-3 py-1.5 text-xs text-light-900 hover:bg-light-200 disabled:opacity-60 dark:border-dark-400 dark:text-dark-900 dark:hover:bg-dark-200"
+            >
+              {t`Reset to role defaults`}
+            </button>
+          </div>
+        </>
       )}
 
     </div>

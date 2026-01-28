@@ -249,6 +249,18 @@ export const revokePermission = async (
 };
 
 /**
+ * Clear all permission overrides for a workspace member
+ */
+export const clearMemberPermissionOverrides = async (
+  db: dbClient,
+  workspaceMemberId: number,
+) => {
+  await db
+    .delete(workspaceMemberPermissions)
+    .where(eq(workspaceMemberPermissions.workspaceMemberId, workspaceMemberId));
+};
+
+/**
  * Get member with their role by userId and workspaceId
  */
 export const getMemberWithRole = async (
