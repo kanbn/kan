@@ -3,6 +3,7 @@ import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
 import {
   HiBolt,
+  HiChevronDown,
   HiEllipsisHorizontal,
   HiOutlinePlusSmall,
 } from "react-icons/hi2";
@@ -19,7 +20,9 @@ import FeedbackModal from "~/components/FeedbackModal";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
+import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
+import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { getAvatarUrl } from "~/utils/helpers";
@@ -29,6 +32,7 @@ import { InviteMemberForm } from "./components/InviteMemberForm";
 export default function MembersPage() {
   const { modalContentType, openModal, isOpen } = useModal();
   const { workspace } = useWorkspace();
+  const { showPopup } = usePopup();
 
   const { data, isLoading } = api.workspace.byId.useQuery(
     { workspacePublicId: workspace.publicId },
@@ -36,6 +40,31 @@ export default function MembersPage() {
   );
 
   const { data: session } = authClient.useSession();
+
+  const { canEditMember } = usePermissions();
+
+  const utils = api.useUtils();
+
+  const updateRoleMutation = api.member.updateRole.useMutation({
+    onSuccess: async () => {
+      await utils.workspace.byId.invalidate({
+        workspacePublicId: workspace.publicId,
+      });
+
+      showPopup({
+        header: t`Role updated`,
+        message: t`The member's role has been updated.`,
+        icon: "success",
+      });
+    },
+    onError: () => {
+      showPopup({
+        header: t`Unable to update role`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
+    },
+  });
 
   const subscriptions = data?.subscriptions as Subscription[] | undefined;
 
@@ -67,6 +96,16 @@ export default function MembersPage() {
     showSkeleton?: boolean;
     showPendingIcon?: boolean;
   }) => {
+    const handleRoleChange = (newRole: "admin" | "member" | "guest") => {
+      if (!memberPublicId) return;
+
+      updateRoleMutation.mutate({
+        workspacePublicId: workspace.publicId,
+        memberPublicId,
+        role: newRole,
+      });
+    };
+
     return (
       <tr className="rounded-b-lg">
         <td
@@ -127,19 +166,45 @@ export default function MembersPage() {
           )}
         >
           <div className="flex w-full items-center justify-between px-2 sm:px-3">
-            <div className="flex flex-col sm:flex-row sm:items-center">
-              <span
-                className={twMerge(
-                  "inline-flex items-center rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 ring-1 ring-inset ring-emerald-500/20 sm:text-[11px]",
-                  showSkeleton &&
+            <div className="flex items-center gap-2">
+              {showSkeleton ? (
+                <span
+                  className={twMerge(
+                    "inline-flex items-center rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 ring-1 ring-inset ring-emerald-500/20 sm:text-[11px]",
                     "h-5 w-[50px] animate-pulse bg-light-200 ring-0 dark:bg-dark-200",
-                )}
-              >
-                {memberRole &&
-                  memberRole.charAt(0).toUpperCase() + memberRole.slice(1)}
-              </span>
+                  )}
+                />
+              ) : (
+                <div className="relative inline-flex items-center">
+                  <span className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 ring-1 ring-inset ring-emerald-500/20 sm:text-[11px]">
+                    {memberRole &&
+                      memberRole.charAt(0).toUpperCase() +
+                        memberRole.slice(1)}
+                    {canEditMember && session?.user.id !== memberId && (
+                      <HiChevronDown className="h-3 w-3" />
+                    )}
+                  </span>
+
+                  {canEditMember && session?.user.id !== memberId && (
+                    <select
+                      value={memberRole}
+                      onChange={(e) =>
+                        handleRoleChange(
+                          e.target.value as "admin" | "member" | "guest",
+                        )
+                      }
+                      disabled={updateRoleMutation.isPending}
+                      className="absolute inset-0 h-full w-full cursor-pointer appearance-none border-none bg-transparent p-0 text-[10px] leading-none opacity-0 focus:outline-none focus-visible:outline-none sm:text-[11px]"
+                    >
+                      <option value="admin">{t`Admin`}</option>
+                      <option value="member">{t`Member`}</option>
+                      <option value="guest">{t`Guest`}</option>
+                    </select>
+                  )}
+                </div>
+              )}
               {(memberStatus === "invited" || memberStatus === "paused") && (
-                <span className="mt-1 inline-flex items-center rounded-md bg-gray-500/10 px-1.5 py-0.5 text-[10px] font-medium text-gray-400 ring-1 ring-inset ring-gray-500/20 sm:ml-2 sm:mt-0 sm:text-[11px]">
+                <span className="inline-flex items-center rounded-md bg-gray-500/10 px-1.5 py-0.5 text-[10px] font-medium text-gray-400 ring-1 ring-inset ring-gray-500/20 sm:text-[11px]">
                   {memberStatus === "invited" ? t`Pending` : t`Paused`}
                 </span>
               )}
