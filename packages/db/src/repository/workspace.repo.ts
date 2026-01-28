@@ -1,14 +1,4 @@
-import {
-  and,
-  count,
-  desc,
-  eq,
-  ilike,
-  inArray,
-  isNull,
-  or,
-  sql,
-} from "drizzle-orm";
+import { and, asc, count, desc, eq, ilike, inArray, isNull, or, sql } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import {
@@ -200,6 +190,7 @@ export const getBySlugWithBoards = (db: dbClient, workspaceSlug: string) => {
           name: true,
         },
         where: and(isNull(boards.deletedAt), eq(boards.visibility, "public")),
+        orderBy: [asc(boards.name)]
       },
     },
     where: and(
