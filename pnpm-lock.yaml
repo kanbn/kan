@@ -54,10 +54,6 @@ overrides:
 importers:
 
   .:
-    dependencies:
-      framer-motion:
-        specifier: ^12.26.2
-        version: 12.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@kan/prettier-config':
         specifier: workspace:*
