@@ -12,6 +12,7 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
 import { assertUserInWorkspace } from "../utils/auth";
 import { generateDownloadUrl } from "../utils/s3";
+import { createCardWebhookPayload, sendWebhook } from "../utils/webhook";
 
 export const cardRouter = createTRPCRouter({
   create: protectedProcedure
@@ -158,6 +159,26 @@ export const cardRouter = createTRPCRouter({
 
         await cardActivityRepo.bulkCreate(ctx.db, cardActivitesInsert);
       }
+
+      // Fire webhook (non-blocking)
+      void sendWebhook(
+        createCardWebhookPayload(
+          "card.created",
+          {
+            id: String(newCard.id),
+            title: input.title,
+            description: input.description,
+            dueDate: input.dueDate ?? null,
+            listId: String(newCard.listId),
+          },
+          {
+            boardId: String(list.workspaceId),
+            user: ctx.user
+              ? { id: ctx.user.id, name: ctx.user.name }
+              : undefined,
+          },
+        ),
+      );
 
       return newCard;
     }),
@@ -919,6 +940,53 @@ export const cardRouter = createTRPCRouter({
         await cardActivityRepo.bulkCreate(ctx.db, activities);
       }
 
+      // Build changes object for webhook
+      const webhookChanges: Record<string, { from: unknown; to: unknown }> = {};
+      if (input.title && existingCard.title !== input.title) {
+        webhookChanges.title = { from: existingCard.title, to: input.title };
+      }
+      if (input.description && existingCard.description !== input.description) {
+        webhookChanges.description = {
+          from: existingCard.description,
+          to: input.description,
+        };
+      }
+      if (
+        input.dueDate !== undefined &&
+        previousDueDate?.getTime() !== input.dueDate?.getTime()
+      ) {
+        webhookChanges.dueDate = { from: previousDueDate, to: input.dueDate };
+      }
+      if (newListId && existingCard.listId !== newListId) {
+        webhookChanges.listId = { from: existingCard.listId, to: newListId };
+      }
+
+      // Fire webhook (non-blocking)
+      void sendWebhook(
+        createCardWebhookPayload(
+          newListId && existingCard.listId !== newListId
+            ? "card.moved"
+            : "card.updated",
+          {
+            id: String(result.id),
+            title: result.title,
+            description: result.description,
+            dueDate: result.dueDate,
+            listId: String(newListId ?? existingCard.listId),
+          },
+          {
+            boardId: String(card.workspaceId),
+            user: ctx.user
+              ? { id: ctx.user.id, name: ctx.user.name }
+              : undefined,
+            changes:
+              Object.keys(webhookChanges).length > 0
+                ? webhookChanges
+                : undefined,
+          },
+        ),
+      );
+
       return result;
     }),
   delete: protectedProcedure
@@ -960,6 +1028,9 @@ export const cardRouter = createTRPCRouter({
 
       await assertUserInWorkspace(ctx.db, userId, card.workspaceId);
 
+      // Fetch full card data before delete for webhook
+      const fullCard = await cardRepo.getByPublicId(ctx.db, input.cardPublicId);
+
       const deletedAt = new Date();
 
       await cardRepo.softDelete(ctx.db, {
@@ -973,6 +1044,28 @@ export const cardRouter = createTRPCRouter({
         cardId: card.id,
         createdBy: userId,
       });
+
+      // Fire webhook (non-blocking)
+      if (fullCard) {
+        void sendWebhook(
+          createCardWebhookPayload(
+            "card.deleted",
+            {
+              id: String(fullCard.id),
+              title: fullCard.title,
+              description: fullCard.description,
+              dueDate: fullCard.dueDate,
+              listId: String(fullCard.listId),
+            },
+            {
+              boardId: String(card.workspaceId),
+              user: ctx.user
+                ? { id: ctx.user.id, name: ctx.user.name }
+                : undefined,
+            },
+          ),
+        );
+      }
 
       return { success: true };
     }),
