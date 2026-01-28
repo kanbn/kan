@@ -85,7 +85,9 @@ export default function WorkspaceSettings() {
         </h2>
         <UpdateWorkspaceEmailVisibilityForm
           workspacePublicId={workspace.publicId}
-          showEmailsToMembers={workspaceData?.showEmailsToMembers ?? false}
+          showEmailsToMembers={Boolean(
+            workspaceData?.showEmailsToMembers ?? false,
+          )}
         />
 
         {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&

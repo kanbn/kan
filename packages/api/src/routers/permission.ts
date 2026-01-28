@@ -5,9 +5,7 @@ import * as memberRepo from "@kan/db/repository/member.repo";
 import * as permissionRepo from "@kan/db/repository/permission.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import type { Permission } from "@kan/shared";
-import {
-  allPermissions,
-} from "@kan/shared";
+import { allPermissions } from "@kan/shared";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import {
@@ -288,6 +286,378 @@ export const permissionRouter = createTRPCRouter({
       await permissionRepo.revokePermission(
         ctx.db,
         member.id,
+        input.permission as Permission,
+      );
+
+      return { success: true };
+    }),
+  getWorkspaceRoles: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Get workspace roles",
+        method: "GET",
+        path: "/workspaces/{workspacePublicId}/roles",
+        description: "Get all roles for a workspace",
+        tags: ["Permissions"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+      }),
+    )
+    .output(
+      z.object({
+        roles: z.array(
+          z.object({
+            publicId: z.string().min(12),
+            name: z.string(),
+            description: z.string().nullable(),
+            hierarchyLevel: z.number(),
+            isSystem: z.boolean(),
+          }),
+        ),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId) {
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
+      }
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace) {
+        throw new TRPCError({
+          message: "Workspace not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      await assertPermission(ctx.db, userId, workspace.id, "member:view");
+
+      const roles = await permissionRepo.getRolesByWorkspaceId(
+        ctx.db,
+        workspace.id,
+      );
+
+      return {
+        roles: roles.map((role) => ({
+          publicId: role.publicId,
+          name: role.name,
+          description: role.description ?? null,
+          hierarchyLevel: role.hierarchyLevel,
+          isSystem: role.isSystem,
+        })),
+      };
+    }),
+  getWorkspaceRolePermissions: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Get workspace role permissions",
+        method: "GET",
+        path: "/workspaces/{workspacePublicId}/roles/permissions",
+        description:
+          "Get all roles for a workspace with their granted permissions",
+        tags: ["Permissions"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+      }),
+    )
+    .output(
+      z.object({
+        roles: z.array(
+          z.object({
+            publicId: z.string().min(12),
+            name: z.string(),
+            permissions: z.array(z.string()),
+          }),
+        ),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId) {
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
+      }
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace) {
+        throw new TRPCError({
+          message: "Workspace not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      await assertPermission(ctx.db, userId, workspace.id, "member:view");
+
+      const roles = await permissionRepo.getRolesByWorkspaceId(
+        ctx.db,
+        workspace.id,
+      );
+
+      const rolesWithPermissions = await Promise.all(
+        roles.map(async (role) => {
+          const permissionsForRole = await permissionRepo.getPermissionsByRoleId(
+            ctx.db,
+            role.id,
+          );
+
+          return {
+            publicId: role.publicId,
+            name: role.name,
+            permissions: permissionsForRole,
+          };
+        }),
+      );
+
+      return {
+        roles: rolesWithPermissions,
+      };
+    }),
+  getRolePermissions: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Get role permissions",
+        method: "GET",
+        path: "/workspaces/{workspacePublicId}/roles/{rolePublicId}/permissions",
+        description: "Get permissions granted to a specific role in a workspace",
+        tags: ["Permissions"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+        rolePublicId: z.string().min(12),
+      }),
+    )
+    .output(
+      z.object({
+        rolePublicId: z.string(),
+        name: z.string(),
+        permissions: z.array(z.string()),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId) {
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
+      }
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace) {
+        throw new TRPCError({
+          message: "Workspace not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      await assertPermission(ctx.db, userId, workspace.id, "member:view");
+
+      const role = await permissionRepo.getRoleByWorkspaceIdAndPublicId(
+        ctx.db,
+        workspace.id,
+        input.rolePublicId,
+      );
+
+      if (!role) {
+        throw new TRPCError({
+          message: "Role not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      const permissionsForRole = await permissionRepo.getPermissionsByRoleId(
+        ctx.db,
+        role.id,
+      );
+
+      return {
+        rolePublicId: role.publicId,
+        name: role.name,
+        permissions: permissionsForRole,
+      };
+    }),
+  grantRolePermission: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Grant permission to role",
+        method: "POST",
+        path: "/workspaces/{workspacePublicId}/roles/{rolePublicId}/permissions/grant",
+        description: "Grant a specific permission to a role",
+        tags: ["Permissions"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+        rolePublicId: z.string().min(12),
+        permission: z.enum(permissionsList),
+      }),
+    )
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId) {
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
+      }
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace) {
+        throw new TRPCError({
+          message: "Workspace not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      // Require ability to edit members/roles
+      await assertPermission(ctx.db, userId, workspace.id, "member:edit");
+
+      const role = await permissionRepo.getRoleByWorkspaceIdAndPublicId(
+        ctx.db,
+        workspace.id,
+        input.rolePublicId,
+      );
+
+      if (!role) {
+        throw new TRPCError({
+          message: "Role not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      if (role.name === "admin" && role.isSystem) {
+        throw new TRPCError({
+          message: "Admin role permissions cannot be modified",
+          code: "FORBIDDEN",
+        });
+      }
+
+      // Never allow non-admin roles to manage billing or delete workspace
+      if (
+        (input.permission === "workspace:manage" ||
+          input.permission === "workspace:delete") &&
+        role.name !== "admin"
+      ) {
+        throw new TRPCError({
+          message:
+            "Only the admin role can manage billing or delete the workspace",
+          code: "FORBIDDEN",
+        });
+      }
+
+      await permissionRepo.grantRolePermission(
+        ctx.db,
+        role.id,
+        input.permission as Permission,
+      );
+
+      return { success: true };
+    }),
+  revokeRolePermission: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Revoke permission from role",
+        method: "POST",
+        path: "/workspaces/{workspacePublicId}/roles/{rolePublicId}/permissions/revoke",
+        description: "Revoke a specific permission from a role",
+        tags: ["Permissions"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+        rolePublicId: z.string().min(12),
+        permission: z.enum(permissionsList),
+      }),
+    )
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId) {
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
+      }
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace) {
+        throw new TRPCError({
+          message: "Workspace not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      await assertPermission(ctx.db, userId, workspace.id, "member:edit");
+
+      const role = await permissionRepo.getRoleByWorkspaceIdAndPublicId(
+        ctx.db,
+        workspace.id,
+        input.rolePublicId,
+      );
+
+      if (!role) {
+        throw new TRPCError({
+          message: "Role not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      if (role.name === "admin" && role.isSystem) {
+        throw new TRPCError({
+          message: "Admin role permissions cannot be modified",
+          code: "FORBIDDEN",
+        });
+      }
+
+      await permissionRepo.revokeRolePermission(
+        ctx.db,
+        role.id,
         input.permission as Permission,
       );
 

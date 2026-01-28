@@ -53,6 +53,28 @@ export const getRoleByWorkspaceIdAndName = async (
 };
 
 /**
+ * Get role by workspace ID and publicId
+ */
+export const getRoleByWorkspaceIdAndPublicId = async (
+  db: dbClient,
+  workspaceId: number,
+  rolePublicId: string,
+) => {
+  const [role] = await db
+    .select()
+    .from(workspaceRoles)
+    .where(
+      and(
+        eq(workspaceRoles.workspaceId, workspaceId),
+        eq(workspaceRoles.publicId, rolePublicId),
+      ),
+    )
+    .limit(1);
+
+  return role;
+};
+
+/**
  * Get all custom permission overrides for a workspace member
  */
 export const getMemberPermissionOverrides = async (
@@ -352,3 +374,83 @@ export const createRole = async (
 
   return role;
 };
+
+/**
+ * Grant a permission to a role
+ */
+export const grantRolePermission = async (
+  db: dbClient,
+  roleId: number,
+  permission: Permission,
+) => {
+  const [result] = await db
+    .insert(workspaceRolePermissions)
+    .values({
+      workspaceRoleId: roleId,
+      permission,
+      granted: true,
+    })
+    .onConflictDoUpdate({
+      target: [
+        workspaceRolePermissions.workspaceRoleId,
+        workspaceRolePermissions.permission,
+      ],
+      set: {
+        granted: true,
+      },
+    })
+    .returning();
+
+  return result;
+};
+
+/**
+ * Revoke a permission from a role
+ */
+export const revokeRolePermission = async (
+  db: dbClient,
+  roleId: number,
+  permission: Permission,
+) => {
+  const [result] = await db
+    .insert(workspaceRolePermissions)
+    .values({
+      workspaceRoleId: roleId,
+      permission,
+      granted: false,
+    })
+    .onConflictDoUpdate({
+      target: [
+        workspaceRolePermissions.workspaceRoleId,
+        workspaceRolePermissions.permission,
+      ],
+      set: {
+        granted: false,
+      },
+    })
+    .returning();
+
+  return result;
+};
+
+/**
+ * Get all roles for a workspace
+ */
+export const getRolesByWorkspaceId = async (
+  db: dbClient,
+  workspaceId: number,
+) => {
+  return db
+    .select({
+      id: workspaceRoles.id,
+      publicId: workspaceRoles.publicId,
+      name: workspaceRoles.name,
+      description: workspaceRoles.description,
+      hierarchyLevel: workspaceRoles.hierarchyLevel,
+      isSystem: workspaceRoles.isSystem,
+    })
+    .from(workspaceRoles)
+    .where(eq(workspaceRoles.workspaceId, workspaceId));
+};
+
+

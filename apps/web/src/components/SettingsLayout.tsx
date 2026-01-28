@@ -14,8 +14,10 @@ import {
   HiOutlineBanknotes,
   HiOutlineCodeBracketSquare,
   HiOutlineRectangleGroup,
+  HiOutlineShieldCheck,
   HiOutlineUser,
 } from "react-icons/hi2";
+import { useWorkspace } from "~/providers/workspace";
 
 interface SettingsLayoutProps {
   children: React.ReactNode;
@@ -24,7 +26,10 @@ interface SettingsLayoutProps {
 
 export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
   const router = useRouter();
+  const { workspace } = useWorkspace();
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+
+  const isAdmin = workspace.role === "admin";
 
   const settingsTabs = [
     {
@@ -40,10 +45,16 @@ export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
       condition: true,
     },
     {
+      key: "permissions",
+      icon: <HiOutlineShieldCheck />,
+      label: t`Permissions`,
+      condition: isAdmin,
+    },
+    {
       key: "billing",
       label: t`Billing`,
       icon: <HiOutlineBanknotes />,
-      condition: env("NEXT_PUBLIC_KAN_ENV") === "cloud",
+      condition: env("NEXT_PUBLIC_KAN_ENV") === "cloud" && isAdmin,
     },
     {
       key: "api",
