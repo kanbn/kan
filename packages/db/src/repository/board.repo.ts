@@ -31,6 +31,15 @@ import {
 } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
+export const getCount = async (db: dbClient) => {
+  const result = await db
+    .select({ count: count() })
+    .from(boards)
+    .where(isNull(boards.deletedAt));
+
+  return result[0]?.count ?? 0;
+};
+
 export const getAllByWorkspaceId = async (
   db: dbClient,
   workspaceId: number,
