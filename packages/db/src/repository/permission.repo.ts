@@ -1,4 +1,4 @@
-import { and, eq, isNull } from "drizzle-orm";
+import { and, eq, isNull, inArray } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import {
@@ -258,6 +258,32 @@ export const clearMemberPermissionOverrides = async (
   await db
     .delete(workspaceMemberPermissions)
     .where(eq(workspaceMemberPermissions.workspaceMemberId, workspaceMemberId));
+};
+
+/**
+ * Clear all permission overrides for all members in a workspace
+ */
+export const clearAllMemberPermissionOverridesForWorkspace = async (
+  db: dbClient,
+  workspaceId: number,
+) => {
+  const memberIds = await db
+    .select({ id: workspaceMembers.id })
+    .from(workspaceMembers)
+    .where(
+      and(
+        eq(workspaceMembers.workspaceId, workspaceId),
+        isNull(workspaceMembers.deletedAt),
+      ),
+    );
+
+  if (memberIds.length === 0) return;
+
+  const ids = memberIds.map((m) => m.id);
+
+  await db
+    .delete(workspaceMemberPermissions)
+    .where(inArray(workspaceMemberPermissions.workspaceMemberId, ids));
 };
 
 /**

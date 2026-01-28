@@ -352,6 +352,55 @@ export const permissionRouter = createTRPCRouter({
 
       return { success: true };
     }),
+  resetWorkspaceMemberPermissions: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Reset all member permission overrides in a workspace",
+        method: "POST",
+        path: "/workspaces/{workspacePublicId}/members/permissions/reset",
+        description:
+          "Clears all custom permission overrides for all members in a workspace so their effective permissions come only from their roles",
+        tags: ["Permissions"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+      }),
+    )
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId) {
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
+      }
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace) {
+        throw new TRPCError({
+          message: "Workspace not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      await assertPermission(ctx.db, userId, workspace.id, "member:edit");
+
+      await permissionRepo.clearAllMemberPermissionOverridesForWorkspace(
+        ctx.db,
+        workspace.id,
+      );
+
+      return { success: true };
+    }),
   getWorkspaceRoles: protectedProcedure
     .meta({
       openapi: {
