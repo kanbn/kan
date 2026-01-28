@@ -19,7 +19,7 @@ export function useLocalisation() {
     nl,
     ru,
     pl,
-    ptbr: ptBR,
+    "pt-BR": ptBR,
   };
 
   const currentDateLocale = dateLocaleMap[locale] ?? enGB;

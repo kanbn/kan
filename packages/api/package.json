@@ -23,6 +23,10 @@
     "./openapi": {
       "types": "./dist/openapi.d.ts",
       "default": "./src/openapi.ts"
+    },
+    "./utils/rateLimit": {
+      "types": "./dist/utils/rateLimit.d.ts",
+      "default": "./src/utils/rateLimit.ts"
     }
   },
   "license": "GPL-3.0",
@@ -43,6 +47,7 @@
     "@kan/shared": "workspace:^",
     "@kan/stripe": "workspace:^",
     "@trpc/server": "catalog:",
+    "rate-limiter-flexible": "^9.0.1",
     "superjson": "2.2.1",
     "trpc-to-openapi": "^2.3.2",
     "zod": "catalog:"

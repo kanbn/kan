@@ -11,6 +11,8 @@ import Dropdown from "~/components/Dropdown";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
+import { getAvatarUrl } from "~/utils/helpers";
 
 interface FormValues {
   comment: string;
@@ -21,6 +23,7 @@ const Comment = ({
   cardPublicId,
   name,
   email,
+  image,
   isLoading,
   createdAt,
   comment,
@@ -33,6 +36,7 @@ const Comment = ({
   cardPublicId: string;
   name: string;
   email: string;
+  image: string | null;
   isLoading: boolean;
   createdAt: string;
   comment: string | undefined;
@@ -55,7 +59,7 @@ const Comment = ({
 
   const updateCommentMutation = api.card.updateComment.useMutation({
     onSuccess: async () => {
-      await utils.card.byId.refetch();
+      await invalidateCard(utils, cardPublicId);
       setIsEditing(false);
     },
     onError: () => {
@@ -107,6 +111,7 @@ const Comment = ({
             size="sm"
             name={name ?? ""}
             email={email ?? ""}
+            imageUrl={getAvatarUrl(image) || undefined}
             isLoading={isLoading}
           />
 
