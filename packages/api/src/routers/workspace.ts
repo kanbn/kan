@@ -83,7 +83,8 @@ export const workspaceRouter = createTRPCRouter({
       const isAdmin = userMember?.role === "admin";
 
       // Show emails if user is admin OR workspace setting allows it
-      const shouldShowEmails = isAdmin || result.showEmailsToMembers === true;
+      const shouldShowEmails =
+        isAdmin || result.showEmailsToMembers === true;
 
       // If emails should be hidden, filter them out
       if (!shouldShowEmails) {

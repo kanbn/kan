@@ -194,8 +194,13 @@ export const getByPublicIdWithMembers = (
           email: true,
           role: true,
           status: true,
+          createdAt: true,
         },
         where: isNull(workspaceMembers.deletedAt),
+        orderBy: (member, { desc }) => [
+          desc(sql`CASE WHEN ${member.role} = 'admin' THEN 1 ELSE 0 END`),
+          desc(member.createdAt),
+        ],
         with: {
           user: {
             columns: {
