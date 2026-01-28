@@ -28,6 +28,7 @@ import { api } from "~/utils/api";
 import { getAvatarUrl } from "~/utils/helpers";
 import { DeleteMemberConfirmation } from "./components/DeleteMemberConfirmation";
 import { InviteMemberForm } from "./components/InviteMemberForm";
+import { EditMemberPermissionsModal } from "./components/EditMemberPermissionsModal";
 
 export default function MembersPage() {
   const { modalContentType, openModal, isOpen } = useModal();
@@ -219,6 +220,15 @@ export default function MembersPage() {
                 <Dropdown
                   items={[
                     {
+                      label: t`Edit permissions`,
+                      action: () =>
+                        openModal(
+                          "EDIT_MEMBER_PERMISSIONS",
+                          memberPublicId,
+                          memberEmail ?? "",
+                        ),
+                    },
+                    {
                       label: t`Remove member`,
                       action: () =>
                         openModal(
@@ -231,7 +241,7 @@ export default function MembersPage() {
                 >
                   <HiEllipsisHorizontal
                     size={20}
-                    className="text-light-900 dark:text-dark-900 sm:size-[25px]"
+                    className="text-light-900 dark:text-dark-900 sm:size-[20px]"
                   />
                 </Dropdown>
               )}
@@ -385,6 +395,13 @@ export default function MembersPage() {
             isVisible={isOpen && modalContentType === "REMOVE_MEMBER"}
           >
             <DeleteMemberConfirmation />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "EDIT_MEMBER_PERMISSIONS"}
+          >
+            <EditMemberPermissionsModal />
           </Modal>
         </>
       </div>
