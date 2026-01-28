@@ -79,6 +79,9 @@ export const env = createEnv({
     S3_FORCE_PATH_STYLE: z.string().optional(),
     EMAIL_FROM: z.string().optional(),
     REDIS_URL: z.string().url().optional().or(z.literal("")),
+    // Webhook configuration
+    WEBHOOK_URL: z.string().url().optional(),
+    WEBHOOK_SECRET: z.string().optional(),
   },
 
   /**
