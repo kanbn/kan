@@ -168,7 +168,7 @@ export const cardRouter = createTRPCRouter({
           {
             boardId: String(list.workspaceId),
             user: ctx.user
-              ? { id: ctx.user.id, name: ctx.user.name, email: ctx.user.email }
+              ? { id: ctx.user.id, name: ctx.user.name }
               : undefined,
           },
         ),
@@ -1024,7 +1024,7 @@ export const cardRouter = createTRPCRouter({
           {
             boardId: String(card.workspaceId),
             user: ctx.user
-              ? { id: ctx.user.id, name: ctx.user.name, email: ctx.user.email }
+              ? { id: ctx.user.id, name: ctx.user.name }
               : undefined,
             changes:
               Object.keys(webhookChanges).length > 0
@@ -1113,7 +1113,7 @@ export const cardRouter = createTRPCRouter({
             {
               boardId: String(card.workspaceId),
               user: ctx.user
-                ? { id: ctx.user.id, name: ctx.user.name, email: ctx.user.email }
+                ? { id: ctx.user.id, name: ctx.user.name }
                 : undefined,
             },
           ),
