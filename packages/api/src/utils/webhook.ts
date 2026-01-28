@@ -14,7 +14,7 @@ export interface WebhookPayload {
       id: string;
       title: string;
       description?: string | null;
-      dueDate?: Date | null;
+      dueDate?: string | null; // ISO string after JSON serialization
       listId: string;
       boardId: string;
     };
@@ -29,7 +29,6 @@ export interface WebhookPayload {
     user?: {
       id: string;
       name: string | null;
-      email: string;
     };
     changes?: Record<string, { from: unknown; to: unknown }>;
   };
@@ -58,11 +57,16 @@ export async function sendWebhook(payload: WebhookPayload): Promise<void> {
     headers["X-Webhook-Signature"] = generateSignature(body, webhookSecret);
   }
 
+  // Add timeout to prevent hanging on slow endpoints
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
   try {
     const response = await fetch(webhookUrl, {
       method: "POST",
       headers,
       body,
+      signal: controller.signal,
     });
 
     if (!response.ok) {
@@ -71,7 +75,13 @@ export async function sendWebhook(payload: WebhookPayload): Promise<void> {
       );
     }
   } catch (error) {
-    console.error("Webhook delivery error:", error);
+    if (error instanceof Error && error.name === "AbortError") {
+      console.error("Webhook delivery timed out");
+    } else {
+      console.error("Webhook delivery error:", error);
+    }
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 
@@ -91,7 +101,6 @@ export function createCardWebhookPayload(
     user?: {
       id: string;
       name: string | null;
-      email: string;
     };
     changes?: Record<string, { from: unknown; to: unknown }>;
   },
@@ -104,7 +113,7 @@ export function createCardWebhookPayload(
         id: card.id,
         title: card.title,
         description: card.description,
-        dueDate: card.dueDate,
+        dueDate: card.dueDate?.toISOString() ?? null,
         listId: card.listId,
         boardId: context.boardId,
       },
