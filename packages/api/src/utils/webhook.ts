@@ -113,63 +113,21 @@ export async function sendWebhooksForWorkspace(
     webhook.events.includes(payload.event as (typeof webhook.events)[number]),
   );
 
-  // Also check for legacy env var webhook (backwards compatibility)
-  const envWebhookUrl = process.env.WEBHOOK_URL;
-  const envWebhookSecret = process.env.WEBHOOK_SECRET;
-
   // Send to all webhooks in parallel (fire and forget)
-  const promises: Promise<void>[] = [];
-
-  for (const webhook of subscribedWebhooks) {
-    promises.push(
-      sendWebhookToUrl(webhook.url, webhook.secret ?? undefined, payload).then(
-        (result) => {
-          if (!result.success) {
-            console.error(
-              `Webhook delivery failed to ${webhook.url}: ${result.error}`,
-            );
-          }
-        },
-      ),
-    );
-  }
-
-  // Send to legacy env var webhook if configured
-  if (envWebhookUrl) {
-    promises.push(
-      sendWebhookToUrl(envWebhookUrl, envWebhookSecret, payload).then(
-        (result) => {
-          if (!result.success) {
-            console.error(
-              `Legacy webhook delivery failed: ${result.error}`,
-            );
-          }
-        },
-      ),
-    );
-  }
+  const promises = subscribedWebhooks.map((webhook) =>
+    sendWebhookToUrl(webhook.url, webhook.secret ?? undefined, payload).then(
+      (result) => {
+        if (!result.success) {
+          console.error(
+            `Webhook delivery failed to ${webhook.url}: ${result.error}`,
+          );
+        }
+      },
+    ),
+  );
 
   // Wait for all to complete but don't block on failures
   await Promise.allSettled(promises);
-}
-
-/**
- * @deprecated Use sendWebhooksForWorkspace instead for database-configured webhooks
- * Kept for backwards compatibility with env var configuration
- */
-export async function sendWebhook(payload: WebhookPayload): Promise<void> {
-  const webhookUrl = process.env.WEBHOOK_URL;
-  const webhookSecret = process.env.WEBHOOK_SECRET;
-
-  if (!webhookUrl) {
-    return;
-  }
-
-  const result = await sendWebhookToUrl(webhookUrl, webhookSecret, payload);
-
-  if (!result.success) {
-    console.error(`Webhook delivery failed: ${result.error}`);
-  }
 }
 
 export function createCardWebhookPayload(
