@@ -118,44 +118,44 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
 
   return (
     <div className="h-full w-[360px] border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
-      {canEdit && (
-        <>
-          <div className="mb-4 flex w-full flex-row pt-[18px]">
-            <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
-            <ListSelector
-              cardPublicId={cardId ?? ""}
-              lists={formattedLists}
-              isLoading={!card}
-            />
-          </div>
-          <div className="mb-4 flex w-full flex-row">
-            <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Labels`}</p>
-            <LabelSelector
-              cardPublicId={cardId ?? ""}
-              labels={formattedLabels}
-              isLoading={!card}
-            />
-          </div>
-          {!isTemplate && (
-            <div className="mb-4 flex w-full flex-row">
-              <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Members`}</p>
-              <MemberSelector
-                cardPublicId={cardId ?? ""}
-                members={formattedMembers}
-                isLoading={!card}
-              />
-            </div>
-          )}
-          <div className="mb-4 flex w-full flex-row">
-            <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Due date`}</p>
-            <DueDateSelector
-              cardPublicId={cardId ?? ""}
-              dueDate={card?.dueDate}
-              isLoading={!card}
-            />
-          </div>
-        </>
+      <div className="mb-4 flex w-full flex-row pt-[18px]">
+        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
+        <ListSelector
+          cardPublicId={cardId ?? ""}
+          lists={formattedLists}
+          isLoading={!card}
+          disabled={!canEdit}
+        />
+      </div>
+      <div className="mb-4 flex w-full flex-row">
+        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Labels`}</p>
+        <LabelSelector
+          cardPublicId={cardId ?? ""}
+          labels={formattedLabels}
+          isLoading={!card}
+          disabled={!canEdit}
+        />
+      </div>
+      {!isTemplate && (
+        <div className="mb-4 flex w-full flex-row">
+          <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Members`}</p>
+          <MemberSelector
+            cardPublicId={cardId ?? ""}
+            members={formattedMembers}
+            isLoading={!card}
+            disabled={!canEdit}
+          />
+        </div>
       )}
+      <div className="mb-4 flex w-full flex-row">
+        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Due date`}</p>
+        <DueDateSelector
+          cardPublicId={cardId ?? ""}
+          dueDate={card?.dueDate}
+          isLoading={!card}
+          disabled={!canEdit}
+        />
+      </div>
     </div>
   );
 }

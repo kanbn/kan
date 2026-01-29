@@ -9,8 +9,9 @@ const PermissionsSettingsPage: NextPageWithLayout = () => {
     <>
       <SettingsLayout currentTab="permissions">
         <PermissionsSettings />
+        <Popup />
       </SettingsLayout>
-      <Popup />
+      
     </>
   );
 };

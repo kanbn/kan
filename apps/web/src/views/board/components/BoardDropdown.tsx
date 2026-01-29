@@ -24,43 +24,48 @@ export default function BoardDropdown({
   workspacePublicId: string;
 }) {
   const { openModal } = useModal();
-  const { canEditBoard, canDeleteBoard } = usePermissions();
-  return (
-    <Dropdown
-      disabled={isLoading}
-      items={[
-        ...(isTemplate
-          ? []
-          : [
-              ...(canEditBoard
-                ? [
-                    {
-                      label: t`Make template`,
-                      action: () => openModal("CREATE_TEMPLATE"),
-                      icon: (
-                        <HiOutlineDocumentDuplicate className="h-[16px] w-[16px] text-dark-900" />
-                      ),
-                    },
-                    {
-                      label: t`Edit board URL`,
-                      action: () => openModal("UPDATE_BOARD_SLUG"),
-                      icon: <HiLink className="h-[16px] w-[16px] text-dark-900" />,
-                    },
-                  ]
-                : []),
-            ]),
+  const { canEditBoard, canDeleteBoard, canCreateBoard } = usePermissions();
+  
+  const items = [
+    ...(isTemplate
+      ? []
+      : [
+          {
+            label: t`Make template`,
+            action: canCreateBoard ? () => openModal("CREATE_TEMPLATE") : undefined,
+            icon: (
+              <HiOutlineDocumentDuplicate className="h-[16px] w-[16px] text-dark-900" />
+            ),
+            disabled: !canCreateBoard,
+          },
+          ...(canEditBoard
+            ? [
+                {
+                  label: t`Edit board URL`,
+                  action: () => openModal("UPDATE_BOARD_SLUG"),
+                  icon: <HiLink className="h-[16px] w-[16px] text-dark-900" />,
+                },
+              ]
+            : []),
+        ]),
 
-        ...(canDeleteBoard
-          ? [
-              {
-                label: isTemplate ? t`Delete template` : t`Delete board`,
-                action: () => openModal("DELETE_BOARD"),
-                icon: <HiOutlineTrash className="h-[16px] w-[16px] text-dark-900" />,
-              },
-            ]
-          : []),
-      ]}
-    >
+    ...(canDeleteBoard
+      ? [
+          {
+            label: isTemplate ? t`Delete template` : t`Delete board`,
+            action: () => openModal("DELETE_BOARD"),
+            icon: <HiOutlineTrash className="h-[16px] w-[16px] text-dark-900" />,
+          },
+        ]
+      : []),
+  ];
+
+  if (items.length === 0) {
+    return null;
+  }
+
+  return (
+    <Dropdown disabled={isLoading} items={items}>
       <HiEllipsisHorizontal className="h-5 w-5 text-dark-900" />
     </Dropdown>
   );

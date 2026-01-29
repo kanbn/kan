@@ -25,6 +25,8 @@ interface UsePermissionsResult {
   canInviteMember: boolean;
   canEditMember: boolean;
   canRemoveMember: boolean;
+  canViewWorkspace: boolean;
+  canEditWorkspace: boolean;
 }
 
 export function usePermissions(): UsePermissionsResult {
@@ -66,6 +68,8 @@ export function usePermissions(): UsePermissionsResult {
     canInviteMember: hasPermission("member:invite"),
     canEditMember: hasPermission("member:edit"),
     canRemoveMember: hasPermission("member:remove"),
+    canViewWorkspace: hasPermission("workspace:view"),
+    canEditWorkspace: hasPermission("workspace:edit"),
   };
 }
 

@@ -17,12 +17,14 @@ interface LabelSelectorProps {
     leftIcon: React.ReactNode;
   }[];
   isLoading: boolean;
+  disabled?: boolean;
 }
 
 export default function LabelSelector({
   cardPublicId,
   labels,
   isLoading,
+  disabled = false,
 }: LabelSelectorProps) {
   const utils = api.useUtils();
   const { openModal } = useModal();
@@ -93,9 +95,10 @@ export default function LabelSelector({
           handleSelect={(_, label) => {
             addOrRemoveLabel.mutate({ cardPublicId, labelPublicId: label.key });
           }}
-          handleEdit={(labelPublicId) => openModal("EDIT_LABEL", labelPublicId)}
-          handleCreate={() => openModal("NEW_LABEL")}
+          handleEdit={disabled ? undefined : (labelPublicId) => openModal("EDIT_LABEL", labelPublicId)}
+          handleCreate={disabled ? undefined : () => openModal("NEW_LABEL")}
           createNewItemLabel={t`Create new label`}
+          disabled={disabled}
           asChild
         >
           {selectedLabels.length ? (
@@ -110,7 +113,7 @@ export default function LabelSelector({
               <Badge value={t`Add label`} iconLeft={<HiMiniPlus size={14} />} />
             </div>
           ) : (
-            <div className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 pl-2 text-left text-sm text-neutral-900 hover:border-light-300 hover:bg-light-200 dark:border-dark-50 dark:text-dark-1000 dark:hover:border-dark-200 dark:hover:bg-dark-100">
+            <div className={`flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 pl-2 text-left text-sm text-neutral-900 dark:border-dark-50 dark:text-dark-1000 ${disabled ? "cursor-not-allowed opacity-60" : "hover:border-light-300 hover:bg-light-200 dark:hover:border-dark-200 dark:hover:bg-dark-100"}`}>
               <HiMiniPlus size={22} className="pr-2" />
               {t`Add label`}
             </div>

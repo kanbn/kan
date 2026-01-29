@@ -64,7 +64,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     direction: "horizontal",
   });
 
-  const { canCreateList, canEditList, canEditCard } = usePermissions();
+  const { canCreateList, canEditList, canEditCard, canEditBoard } = usePermissions();
 
   const { tooltipContent: createListShortcutTooltipContent } =
     useKeyboardShortcut({
@@ -415,10 +415,12 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 id="name"
                 type="text"
                 {...register("name")}
-                onBlur={handleSubmit(onSubmit)}
-                className="block border-0 bg-transparent p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000 sm:text-[1.2rem]"
+                onBlur={canEditBoard ? handleSubmit(onSubmit) : undefined}
+                readOnly={!canEditBoard}
+                className="block border-0 bg-transparent p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000 sm:text-[1.2rem] disabled:cursor-not-allowed"
               />
             </form>
+
           )}
           {!boardData && !isLoading && (
             <p className="order-2 block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem] md:order-1">
@@ -441,6 +443,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                   isLoading={isLoading}
                   workspaceSlug={workspace.slug ?? ""}
                   boardSlug={boardData?.slug ?? ""}
+                  canEdit={canEditBoard}
                 />
                 <VisibilityButton
                   visibility={boardData?.visibility ?? "private"}
@@ -463,24 +466,28 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 )}
               </>
             )}
-            {canCreateList && (
-              <Tooltip content={createListShortcutTooltipContent}>
-                <Button
-                  iconLeft={
-                    <HiOutlinePlusSmall
-                      className="-mr-0.5 h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  }
-                  onClick={() => {
-                    if (boardId) openNewListForm(boardId);
-                  }}
-                  disabled={!boardData}
-                >
-                  {t`New list`}
-                </Button>
-              </Tooltip>
-            )}
+            <Tooltip
+              content={
+                !canCreateList
+                  ? t`You don't have permission`
+                  : createListShortcutTooltipContent
+              }
+            >
+              <Button
+                iconLeft={
+                  <HiOutlinePlusSmall
+                    className="-mr-0.5 h-5 w-5"
+                    aria-hidden="true"
+                  />
+                }
+                onClick={() => {
+                  if (boardId && canCreateList) openNewListForm(boardId);
+                }}
+                disabled={!boardData || !canCreateList}
+              >
+                {t`New list`}
+              </Button>
+            </Tooltip>
             <BoardDropdown
               isTemplate={!!isTemplate}
               isLoading={!boardData}
@@ -516,15 +523,20 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                         : t`No lists have been created yet`}
                     </p>
                   </div>
-                  {canCreateList && (
+                  <Tooltip
+                    content={
+                      !canCreateList ? t`You don't have permission` : undefined
+                    }
+                  >
                     <Button
                       onClick={() => {
-                        if (boardId) openNewListForm(boardId);
+                        if (boardId && canCreateList) openNewListForm(boardId);
                       }}
+                      disabled={!canCreateList}
                     >
                       {t`Create new list`}
                     </Button>
-                  )}
+                  </Tooltip>
                 </div>
               ) : (
                 <DragDropContext onDragEnd={onDragEnd}>
@@ -564,6 +576,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                       key={card.publicId}
                                       draggableId={card.publicId}
                                       index={index}
+                                      isDragDisabled={!canEditCard}
                                     >
                                       {(provided) => (
                                         <Link

@@ -11,9 +11,11 @@ import { api } from "~/utils/api";
 const UpdateWorkspaceDescriptionForm = ({
   workspacePublicId,
   workspaceDescription,
+  disabled = false,
 }: {
   workspacePublicId: string;
   workspaceDescription: string;
+  disabled?: boolean;
 }) => {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
@@ -78,9 +80,10 @@ const UpdateWorkspaceDescriptionForm = ({
         <Input
           {...register("description")}
           errorMessage={errors.description?.message}
+          disabled={disabled}
         />
       </div>
-      {isDirty && (
+      {isDirty && !disabled && (
         <div>
           <Button
             onClick={handleSubmit(onSubmit)}

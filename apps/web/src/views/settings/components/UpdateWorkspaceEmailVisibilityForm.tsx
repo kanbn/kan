@@ -7,9 +7,11 @@ import { api } from "~/utils/api";
 export default function UpdateWorkspaceEmailVisibilityForm({
   workspacePublicId,
   showEmailsToMembers,
+  disabled = false,
 }: {
   workspacePublicId: string;
   showEmailsToMembers: boolean;
+  disabled?: boolean;
 }) {
   const utils = api.useUtils();
   const [isChecked, setIsChecked] = useState(showEmailsToMembers);
@@ -27,6 +29,7 @@ export default function UpdateWorkspaceEmailVisibilityForm({
   });
 
   const handleToggle = () => {
+    if (disabled) return;
     const newValue = !isChecked;
     setIsChecked(newValue);
     updateWorkspace.mutate({
@@ -46,7 +49,7 @@ export default function UpdateWorkspaceEmailVisibilityForm({
         isChecked={isChecked}
         onChange={handleToggle}
         label=""
-        disabled={updateWorkspace.isPending}
+        disabled={disabled || updateWorkspace.isPending}
       />
     </div>
   );
