@@ -94,6 +94,7 @@ msgid "A powerful, flexible kanban app that helps you organise work, track progr
 msgstr "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
 
 #: src/components/SettingsLayout.tsx:40
+#: src/components/SettingsLayout.tsx:34
 msgid "Account"
 msgstr "Account"
 
@@ -106,6 +107,12 @@ msgid "Actions"
 msgstr "Actions"
 
 #: src/views/card/index.tsx:410
+#: src/views/settings/components/NewWebhookModal.tsx:298
+#: src/views/settings/components/WebhookList.tsx:129
+msgid "Active"
+msgstr "Active"
+
+#: src/views/card/index.tsx:387
 #: src/views/public/board/CardModal.tsx:158
 msgid "Activity"
 msgstr "Activity"
@@ -160,6 +167,9 @@ msgstr "Add member"
 #: src/views/board/components/BoardDropdown.tsx:93
 msgid "Add to favorites"
 msgstr "Add to favorites"
+#: src/views/settings/WebhookSettings.tsx:36
+msgid "Add webhook"
+msgstr "Add webhook"
 
 #. placeholder {0}: mergedLabels.length
 #: src/views/card/components/ActivityList.tsx:89
@@ -255,6 +265,7 @@ msgid "Anyone with this link can join your workspace"
 msgstr "Anyone with this link can join your workspace"
 
 #: src/components/SettingsLayout.tsx:64
+#: src/components/SettingsLayout.tsx:52
 msgid "API"
 msgstr "API"
 
@@ -297,6 +308,10 @@ msgstr "Approval"
 #: src/views/members/components/DeleteMemberConfirmation.tsx:47
 msgid "Are you sure want to remove {entityLabel}?"
 msgstr "Are you sure want to remove {entityLabel}?"
+
+#: src/views/settings/components/DeleteWebhookConfirmation.tsx:60
+msgid "Are you sure you want to delete the webhook \"{webhookName}\"? This action cannot be undone."
+msgstr "Are you sure you want to delete the webhook \"{webhookName}\"? This action cannot be undone."
 
 #. placeholder {0}: workspace.name
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:62
@@ -374,6 +389,7 @@ msgid "billed monthly"
 msgstr "billed monthly"
 
 #: src/components/SettingsLayout.tsx:57
+#: src/components/SettingsLayout.tsx:45
 #: src/views/boards/components/TemplateBoards.tsx:56
 #: src/views/settings/BillingSettings.tsx:39
 msgid "Billing"
@@ -608,6 +624,7 @@ msgstr "Can view workspace"
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:168
 #: src/views/settings/components/ClearCustomPermissionsConfirmation.tsx:40
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
+#: src/views/settings/components/DeleteWebhookConfirmation.tsx:66
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:106
 msgid "Cancel"
@@ -742,6 +759,9 @@ msgstr "completed checklist item <0>{0}</0>"
 #: src/views/settings/PermissionsSettings.tsx:54
 msgid "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role."
 msgstr "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role."
+#: src/views/settings/WebhookSettings.tsx:31
+msgid "Configure webhooks to receive notifications when cards are created, updated, moved, or deleted."
+msgstr "Configure webhooks to receive notifications when cards are created, updated, moved, or deleted."
 
 #: src/views/settings/components/CustomURLConfirmation.tsx:47
 #~ msgid "Confirm URL change"
@@ -877,12 +897,21 @@ msgstr "Create new list"
 msgid "Create template"
 msgstr "Create template"
 
+#: src/views/settings/components/NewWebhookModal.tsx:321
+msgid "Create webhook"
+msgstr "Create webhook"
+
 #: src/components/NewWorkspaceForm.tsx:387
 #: src/components/WorkspaceMenu.tsx:153
 msgid "Create workspace"
 msgstr "Create workspace"
 
 #: src/views/card/components/ActivityList.tsx:111
+#: src/views/settings/components/WebhookList.tsx:244
+msgid "Created"
+msgstr "Created"
+
+#: src/views/card/components/ActivityList.tsx:100
 msgid "created the card"
 msgstr "created the card"
 
@@ -955,6 +984,8 @@ msgstr "Deactivate invite link"
 #: src/views/card/components/DeleteCardConfirmation.tsx:92
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:67
 #: src/views/card/components/DeleteCommentConfirmation.tsx:83
+#: src/views/settings/components/DeleteWebhookConfirmation.tsx:73
+#: src/views/settings/components/WebhookList.tsx:179
 msgid "Delete"
 msgstr "Delete"
 
@@ -983,6 +1014,10 @@ msgstr "Delete list"
 #: src/views/board/components/BoardDropdown.tsx:104
 msgid "Delete template"
 msgstr "Delete template"
+
+#: src/views/settings/components/DeleteWebhookConfirmation.tsx:46
+msgid "Delete webhook"
+msgstr "Delete webhook"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:106
 #: src/views/settings/WorkspaceSettings.tsx:114
@@ -1097,6 +1132,7 @@ msgid "Due tomorrow"
 msgstr "Due tomorrow"
 
 #: src/components/YouTubeEmbed/YouTubeDropdown.tsx:42
+#: src/views/settings/components/WebhookList.tsx:155
 msgid "Edit"
 msgstr "Edit"
 
@@ -1117,6 +1153,9 @@ msgstr "Edit label"
 #: src/views/members/index.tsx:223
 msgid "Edit permissions"
 msgstr "Edit permissions"
+#: src/views/settings/components/NewWebhookModal.tsx:193
+msgid "Edit webhook"
+msgstr "Edit webhook"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:162
 msgid "Edit workspace URL"
@@ -1150,6 +1189,10 @@ msgstr "Enhancement"
 #: src/components/YouTubeEmbed/EditYouTubeModal.tsx:131
 msgid "Enter a custom title"
 msgstr "Enter a custom title"
+
+#: src/views/settings/components/NewWebhookModal.tsx:239
+msgid "Enter new secret to update"
+msgstr "Enter new secret to update"
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:122
 msgid "Enter your current password"
@@ -1248,6 +1291,11 @@ msgstr "Error upgrading to Pro"
 msgid "Error uploading profile image"
 msgstr "Error uploading profile image"
 
+#: src/views/settings/components/NewWebhookModal.tsx:250
+#: src/views/settings/components/WebhookList.tsx:232
+msgid "Events"
+msgstr "Events"
+
 #: src/views/pricing/components/Pricing.tsx:52
 #: src/views/pricing/components/PricingTiers.tsx:49
 msgid "Everything in the free plan, plus:"
@@ -1275,6 +1323,14 @@ msgstr "Failed to copy invite link"
 msgid "Failed to create board"
 msgstr "Failed to create board"
 
+#: src/views/settings/components/NewWebhookModal.tsx:114
+msgid "Failed to create webhook"
+msgstr "Failed to create webhook"
+
+#: src/views/settings/components/DeleteWebhookConfirmation.tsx:28
+msgid "Failed to delete webhook"
+msgstr "Failed to delete webhook"
+
 #: src/components/YouTubeEmbed/EditYouTubeModal.tsx:82
 msgid "Failed to fetch video information"
 msgstr "Failed to fetch video information"
@@ -1283,6 +1339,15 @@ msgstr "Failed to fetch video information"
 #: src/components/AuthForm.tsx:291
 msgid "Failed to login with {0}. Please try again."
 msgstr "Failed to login with {0}. Please try again."
+
+#: src/views/settings/components/NewWebhookModal.tsx:148
+#: src/views/settings/components/WebhookList.tsx:35
+msgid "Failed to test webhook"
+msgstr "Failed to test webhook"
+
+#: src/views/settings/components/NewWebhookModal.tsx:128
+msgid "Failed to update webhook"
+msgstr "Failed to update webhook"
 
 #: src/views/card/components/AttachmentUpload.tsx:34
 #: src/views/card/components/AttachmentUpload.tsx:80
@@ -1466,6 +1531,10 @@ msgstr "High Priority"
 msgid "Hired"
 msgstr "Hired"
 
+#: src/views/settings/components/NewWebhookModal.tsx:239
+msgid "HMAC secret for signature verification"
+msgstr "HMAC secret for signature verification"
+
 #: src/views/pricing/components/Pricing.tsx:69
 #: src/views/pricing/components/PricingTiers.tsx:66
 msgid "Host Kan on your own infrastructure. Ideal for organisations that need complete control over their data."
@@ -1557,12 +1626,17 @@ msgstr "in"
 msgid "In Progress"
 msgstr "In Progress"
 
+#: src/views/settings/components/WebhookList.tsx:129
+msgid "Inactive"
+msgstr "Inactive"
+
 #: src/views/pricing/components/Pricing.tsx:28
 #: src/views/pricing/components/PricingTiers.tsx:26
 msgid "Individuals"
 msgstr "Individuals"
 
 #: src/components/SettingsLayout.tsx:70
+#: src/components/SettingsLayout.tsx:64
 #: src/views/home/components/Features.tsx:121
 msgid "Integrations"
 msgstr "Integrations"
@@ -1817,6 +1891,10 @@ msgstr "moved the card from <0>{0}</0> to<1>{1}</1>"
 msgid "moved the card to another list"
 msgstr "moved the card to another list"
 
+#: src/views/settings/components/NewWebhookModal.tsx:214
+msgid "My webhook"
+msgstr "My webhook"
+
 #: src/components/NewWorkspaceForm.tsx:273
 #~ msgid "my-workspace-name"
 #~ msgstr "my-workspace-name"
@@ -1824,6 +1902,8 @@ msgstr "moved the card to another list"
 #: src/components/LabelForm.tsx:135
 #: src/views/board/components/NewTemplateForm.tsx:118
 #: src/views/boards/components/NewBoardForm.tsx:134
+#: src/views/settings/components/NewWebhookModal.tsx:210
+#: src/views/settings/components/WebhookList.tsx:220
 msgid "Name"
 msgstr "Name"
 
@@ -1894,6 +1974,10 @@ msgstr "New Ticket"
 #~ msgid "New Ticket, Triaging, In Progress, Awaiting Customer, Resolution, Done"
 #~ msgstr "New Ticket, Triaging, In Progress, Awaiting Customer, Resolution, Done"
 
+#: src/views/settings/components/NewWebhookModal.tsx:193
+msgid "New webhook"
+msgstr "New webhook"
+
 #: src/components/NewWorkspaceForm.tsx:243
 msgid "New workspace"
 msgstr "New workspace"
@@ -1954,6 +2038,9 @@ msgstr "No results found for \"{debouncedQuery}\"."
 #: src/views/settings/components/RolePermissions.tsx:110
 msgid "No roles found for this workspace yet."
 msgstr "No roles found for this workspace yet."
+#: src/views/settings/components/WebhookList.tsx:202
+msgid "No webhooks configured. Add a webhook to receive notifications."
+msgstr "No webhooks configured. Add a webhook to receive notifications."
 
 #: src/views/boards/components/TemplateBoards.tsx:66
 msgid "Offer"
@@ -2105,6 +2192,10 @@ msgstr "Please enter a valid name"
 #: src/components/AuthForm.tsx:421
 msgid "Please enter a valid password"
 msgstr "Please enter a valid password"
+
+#: src/views/settings/components/NewWebhookModal.tsx:29
+msgid "Please enter a valid URL"
+msgstr "Please enter a valid URL"
 
 #: src/components/YouTubeEmbed/EditYouTubeModal.tsx:58
 #: src/components/YouTubeEmbed/EditYouTubeModal.tsx:98
@@ -2352,6 +2443,10 @@ msgstr "Run on your own infrastructure"
 msgid "Save"
 msgstr "Save"
 
+#: src/views/settings/components/NewWebhookModal.tsx:321
+msgid "Save changes"
+msgstr "Save changes"
+
 #: src/views/home/components/Features.tsx:116
 msgid "Save time with reusable board templates."
 msgstr "Save time with reusable board templates."
@@ -2364,6 +2459,14 @@ msgstr "Screening"
 msgid "Search boards and cards..."
 msgstr "Search boards and cards..."
 
+#: src/views/settings/components/NewWebhookModal.tsx:234
+msgid "Secret (optional)"
+msgstr "Secret (optional)"
+
+#: src/views/settings/components/NewWebhookModal.tsx:33
+msgid "Secret cannot exceed 512 characters"
+msgstr "Secret cannot exceed 512 characters"
+
 #: src/views/home/components/Testimonials.tsx:239
 msgid "See what our users are saying about Kan"
 msgstr "See what our users are saying about Kan"
@@ -2371,6 +2474,10 @@ msgstr "See what our users are saying about Kan"
 #: src/views/boards/components/ImportBoardsForm.tsx:274
 msgid "Select all"
 msgstr "Select all"
+
+#: src/views/settings/components/NewWebhookModal.tsx:37
+msgid "Select at least one event"
+msgstr "Select at least one event"
 
 #: src/views/boards/components/ImportBoardsForm.tsx:157
 msgid "Select source"
@@ -2401,6 +2508,10 @@ msgstr "Self-hostable"
 msgid "Send feedback"
 msgstr "Send feedback"
 
+#: src/views/settings/components/NewWebhookModal.tsx:315
+msgid "Send test"
+msgstr "Send test"
+
 #: src/views/boards/components/TemplateBoards.tsx:70
 msgid "Senior"
 msgstr "Senior"
@@ -2414,6 +2525,7 @@ msgid "set the due date"
 msgstr "set the due date"
 
 #: src/components/SettingsLayout.tsx:95
+#: src/components/SettingsLayout.tsx:89
 #: src/components/SideNavigation.tsx:134
 msgid "Settings"
 msgstr "Settings"
@@ -2443,6 +2555,11 @@ msgid "Settings | Permissions"
 msgstr "Settings | Permissions"
 
 #: src/views/settings/WorkspaceSettings.tsx:57
+#: src/views/settings/WebhookSettings.tsx:24
+msgid "Settings | Webhooks"
+msgstr "Settings | Webhooks"
+
+#: src/views/settings/WorkspaceSettings.tsx:55
 msgid "Settings | Workspace"
 msgstr "Settings | Workspace"
 
@@ -2508,6 +2625,10 @@ msgstr "Star on Github"
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:111
 msgid "Start 14 day free trial"
 msgstr "Start 14 day free trial"
+
+#: src/views/settings/components/WebhookList.tsx:238
+msgid "Status"
+msgstr "Status"
 
 #: src/views/members/components/InviteMemberForm.tsx:122
 msgid "Subscription Required"
@@ -2575,6 +2696,15 @@ msgstr "Templates"
 #: src/views/home/components/Footer.tsx:42
 msgid "Terms of service"
 msgstr "Terms of service"
+
+#: src/views/settings/components/WebhookList.tsx:168
+msgid "Test"
+msgstr "Test"
+
+#: src/views/settings/components/NewWebhookModal.tsx:137
+#: src/views/settings/components/WebhookList.tsx:25
+msgid "Test webhook sent successfully!"
+msgstr "Test webhook sent successfully!"
 
 #: src/views/home/components/Testimonials.tsx:232
 msgid "Testimonials"
@@ -2965,10 +3095,19 @@ msgstr "Upload failed"
 msgid "Urgent"
 msgstr "Urgent"
 
+#: src/views/settings/components/NewWebhookModal.tsx:222
+#: src/views/settings/components/WebhookList.tsx:226
+msgid "URL"
+msgstr "URL"
+
 #: src/components/NewWorkspaceForm.tsx:38
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:38
 msgid "URL can only contain letters, numbers, and hyphens"
 msgstr "URL can only contain letters, numbers, and hyphens"
+
+#: src/views/settings/components/NewWebhookModal.tsx:30
+msgid "URL cannot exceed 2048 characters"
+msgstr "URL cannot exceed 2048 characters"
 
 #: src/components/NewWorkspaceForm.tsx:36
 #: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
@@ -2985,6 +3124,11 @@ msgid "Use template"
 msgstr "Use template"
 
 #: src/views/members/index.tsx:321
+#: src/views/settings/components/NewWebhookModal.tsx:244
+msgid "Used to sign webhook payloads for verification. Leave blank to keep existing secret."
+msgstr "Used to sign webhook payloads for verification. Leave blank to keep existing secret."
+
+#: src/views/members/index.tsx:246
 msgid "User"
 msgstr "User"
 
@@ -3037,6 +3181,40 @@ msgstr "We couldn't update your preferences. Please try again."
 msgid "We're just getting started. "
 msgstr "We're just getting started. "
 
+#: src/views/settings/components/NewWebhookModal.tsx:109
+msgid "Webhook created successfully"
+msgstr "Webhook created successfully"
+
+#: src/views/settings/components/DeleteWebhookConfirmation.tsx:23
+msgid "Webhook deleted successfully"
+msgstr "Webhook deleted successfully"
+
+#: src/views/settings/components/NewWebhookModal.tsx:25
+msgid "Webhook name cannot exceed 255 characters"
+msgstr "Webhook name cannot exceed 255 characters"
+
+#: src/views/settings/components/NewWebhookModal.tsx:24
+msgid "Webhook name is required"
+msgstr "Webhook name is required"
+
+#: src/views/settings/components/NewWebhookModal.tsx:140
+#: src/views/settings/components/WebhookList.tsx:28
+msgid "Webhook test failed"
+msgstr "Webhook test failed"
+
+#: src/views/settings/components/NewWebhookModal.tsx:123
+msgid "Webhook updated successfully"
+msgstr "Webhook updated successfully"
+
+#: src/views/settings/components/NewWebhookModal.tsx:28
+msgid "Webhook URL is required"
+msgstr "Webhook URL is required"
+
+#: src/components/SettingsLayout.tsx:58
+#: src/views/settings/WebhookSettings.tsx:28
+msgid "Webhooks"
+msgstr "Webhooks"
+
 #: src/views/auth/login/index.tsx:43
 msgid "Welcome back"
 msgstr "Welcome back"
@@ -3073,6 +3251,10 @@ msgstr "Why make an open source Trello?"
 #: src/views/board/index.tsx:399
 #: src/views/boards/index.tsx:35
 #: src/views/members/index.tsx:257
+#: src/components/SettingsLayout.tsx:40
+#: src/views/board/index.tsx:396
+#: src/views/boards/index.tsx:33
+#: src/views/members/index.tsx:182
 #: src/views/public/board/index.tsx:120
 #: src/views/public/boards/index.tsx:65
 msgid "Workspace"
