@@ -9,6 +9,8 @@ import {
   HiOutlineTrash,
 } from "react-icons/hi2";
 
+import { authClient } from "@kan/auth/client";
+
 import Dropdown from "~/components/Dropdown";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
@@ -24,6 +26,7 @@ interface ListProps {
 interface List {
   publicId: string;
   name: string;
+  createdBy?: string | null;
 }
 
 interface FormValues {
@@ -41,6 +44,9 @@ export default function List({
 }: ListProps) {
   const { openModal } = useModal();
   const { canCreateCard, canEditList, canDeleteList } = usePermissions();
+  const { data: session } = authClient.useSession();
+  const isCreator = list.createdBy && session?.user.id === list.createdBy;
+  const canEdit = canEditList || isCreator;
 
   const openNewCardForm = (publicListId: PublicListId) => {
     if (!canCreateCard) return;
@@ -62,7 +68,7 @@ export default function List({
   });
 
   const onSubmit = (values: FormValues) => {
-    if (!canEditList) return;
+    if (!canEdit) return;
     updateList.mutate({
       listPublicId: values.listPublicId,
       name: values.name,
@@ -94,7 +100,7 @@ export default function List({
                 type="text"
                 {...register("name")}
                 onBlur={handleSubmit(onSubmit)}
-                readOnly={!canEditList}
+                readOnly={!canEdit}
                 className="w-full border-0 bg-transparent px-4 pt-1 text-sm font-medium text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000"
               />
             </form>
@@ -124,7 +130,7 @@ export default function List({
                           },
                         ]
                       : []),
-                    ...(canDeleteList
+                    ...(canDeleteList || isCreator
                       ? [
                           {
                             label: t`Delete list`,

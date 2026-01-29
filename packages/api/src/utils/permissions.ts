@@ -182,7 +182,7 @@ export async function assertCanManageRole(
     });
   }
 
-  const managerRole = managerMember.role as Role;
+  const managerRole = managerMember.role;
 
   if (!canManageRole(managerRole, targetRoleName as Role)) {
     throw new TRPCError({
@@ -223,8 +223,8 @@ export async function assertCanManageMember(
     });
   }
 
-  const managerRole = managerMember.role as Role;
-  const targetRole = targetMember.role as Role;
+  const managerRole = managerMember.role;
+  const targetRole = targetMember.role;
 
   if (!canManageRole(managerRole, targetRole)) {
     throw new TRPCError({
@@ -232,4 +232,64 @@ export async function assertCanManageMember(
       code: "FORBIDDEN",
     });
   }
+}
+
+/**
+ * Assert user can delete an entity - either has the delete permission OR is the creator
+ */
+export async function assertCanDelete(
+  db: dbClient,
+  userId: string,
+  workspaceId: number,
+  permission: Permission,
+  createdBy: string | null,
+): Promise<void> {
+  // Check if user has the general delete permission
+  const hasDeletePermission = await hasPermission(db, userId, workspaceId, permission);
+
+  // If user has permission, allow deletion
+  if (hasDeletePermission) {
+    return;
+  }
+
+  // If user doesn't have permission, check if they are the creator
+  if (createdBy && createdBy === userId) {
+    return;
+  }
+
+  // Neither condition met - deny deletion
+  throw new TRPCError({
+    message: `You do not have permission to delete this entity (${permission})`,
+    code: "FORBIDDEN",
+  });
+}
+
+/**
+ * Assert user can edit an entity - either has the edit permission OR is the creator
+ */
+export async function assertCanEdit(
+  db: dbClient,
+  userId: string,
+  workspaceId: number,
+  permission: Permission,
+  createdBy: string | null,
+): Promise<void> {
+  // Check if user has the general edit permission
+  const hasEditPermission = await hasPermission(db, userId, workspaceId, permission);
+
+  // If user has permission, allow editing
+  if (hasEditPermission) {
+    return;
+  }
+
+  // If user doesn't have permission, check if they are the creator
+  if (createdBy && createdBy === userId) {
+    return;
+  }
+
+  // Neither condition met - deny editing
+  throw new TRPCError({
+    message: `You do not have permission to edit this entity (${permission})`,
+    code: "FORBIDDEN",
+  });
 }

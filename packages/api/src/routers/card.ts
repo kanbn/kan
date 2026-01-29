@@ -10,7 +10,7 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
-import { assertPermission } from "../utils/permissions";
+import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 import { generateDownloadUrl } from "../utils/s3";
 
 export const cardRouter = createTRPCRouter({
@@ -256,8 +256,6 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertPermission(ctx.db, userId, card.workspaceId, "comment:edit");
-
       const existingComment = await cardCommentRepo.getByPublicId(
         ctx.db,
         input.commentPublicId,
@@ -269,11 +267,13 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      if (existingComment.createdBy !== userId)
-        throw new TRPCError({
-          message: `You do not have permission to update this comment`,
-          code: "FORBIDDEN",
-        });
+      await assertCanEdit(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "comment:edit",
+        existingComment.createdBy,
+      );
 
       const updatedComment = await cardCommentRepo.update(ctx.db, {
         id: existingComment.id,
@@ -334,8 +334,6 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertPermission(ctx.db, userId, card.workspaceId, "comment:delete");
-
       const existingComment = await cardCommentRepo.getByPublicId(
         ctx.db,
         input.commentPublicId,
@@ -346,6 +344,14 @@ export const cardRouter = createTRPCRouter({
           message: `Comment with public ID ${input.commentPublicId} not found`,
           code: "NOT_FOUND",
         });
+
+      await assertCanDelete(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "comment:delete",
+        existingComment.createdBy,
+      );
 
       const deletedComment = await cardCommentRepo.softDelete(ctx.db, {
         commentId: existingComment.id,
@@ -782,7 +788,13 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertPermission(ctx.db, userId, card.workspaceId, "card:edit");
+      await assertCanEdit(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "card:edit",
+        card.createdBy,
+      );
 
       const existingCard = await cardRepo.getByPublicId(
         ctx.db,
@@ -952,7 +964,13 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertPermission(ctx.db, userId, card.workspaceId, "card:delete");
+      await assertCanDelete(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "card:delete",
+        card.createdBy,
+      );
 
       const deletedAt = new Date();
 

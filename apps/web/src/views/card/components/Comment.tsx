@@ -91,7 +91,7 @@ const Comment = ({
           },
         ]
       : []),
-    ...((isAuthor || isAdmin) && canDeleteComment
+    ...((isAuthor || canDeleteComment)
       ? [
           {
             label: t`Delete comment`,

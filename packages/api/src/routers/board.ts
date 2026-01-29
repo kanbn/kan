@@ -15,7 +15,7 @@ import {
 } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { assertPermission } from "../utils/permissions";
+import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
@@ -422,7 +422,13 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertPermission(ctx.db, userId, board.workspaceId, "board:edit");
+      await assertCanEdit(
+        ctx.db,
+        userId,
+        board.workspaceId,
+        "board:edit",
+        board.createdBy ?? null,
+      );
 
       if (input.slug) {
         const isBoardSlugAvailable = await boardRepo.isBoardSlugAvailable(
@@ -491,7 +497,13 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertPermission(ctx.db, userId, board.workspaceId, "board:delete");
+      await assertCanDelete(
+        ctx.db,
+        userId,
+        board.workspaceId,
+        "board:delete",
+        board.createdBy ?? null,
+      );
 
       const listIds = board.lists.map((list) => list.id);
 
