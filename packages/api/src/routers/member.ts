@@ -117,12 +117,20 @@ export const memberRouter = createTRPCRouter({
 
       const existingUser = await userRepo.getByEmail(ctx.db, input.email);
 
+      // Get the workspace role to set roleId
+      const memberRole = await permissionRepo.getRoleByWorkspaceIdAndName(
+        ctx.db,
+        workspace.id,
+        "member",
+      );
+
       const invite = await memberRepo.create(ctx.db, {
         workspaceId: workspace.id,
         email: input.email,
         userId: existingUser?.id ?? null,
         createdBy: userId,
         role: "member",
+        roleId: memberRole?.id ?? null,
         status: "invited",
       });
 
@@ -636,12 +644,20 @@ export const memberRouter = createTRPCRouter({
         }
       }
 
+      // Get the workspace role to set roleId
+      const memberRole = await permissionRepo.getRoleByWorkspaceIdAndName(
+        ctx.db,
+        invite.workspaceId,
+        "member",
+      );
+
       await memberRepo.create(ctx.db, {
         workspaceId: invite.workspaceId,
         email: user.email,
         userId: user.id,
         createdBy: user.id,
         role: "member",
+        roleId: memberRole?.id ?? null,
         status: "active",
       });
 

@@ -27,6 +27,7 @@ export const create = async (
     workspaceId: number;
     createdBy: string;
     role: MemberRole;
+    roleId?: number | null;
     status: MemberStatus;
   },
 ) => {
@@ -39,6 +40,7 @@ export const create = async (
       workspaceId: memberInput.workspaceId,
       createdBy: memberInput.createdBy,
       role: memberInput.role,
+      roleId: memberInput.roleId ?? null,
       status: memberInput.status,
     })
     .returning({
