@@ -122,7 +122,7 @@ describe("webhook router", () => {
       });
 
       expect(result).toHaveLength(1);
-      expect(result[0].name).toBe("My Webhook");
+      expect(result[0]!.name).toBe("My Webhook");
       expect(mockGetAllByWorkspaceId).toHaveBeenCalledWith(mockDb, mockWorkspace.id);
     });
 
