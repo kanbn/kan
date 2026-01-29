@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import {
   HiChevronDown,
   HiOutlineBanknotes,
+  HiOutlineBolt,
   HiOutlineCodeBracketSquare,
   HiOutlineRectangleGroup,
   HiOutlineShieldCheck,
@@ -62,6 +63,12 @@ export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
       key: "api",
       icon: <HiOutlineCodeBracketSquare />,
       label: t`API`,
+      condition: true,
+    },
+    {
+      key: "webhooks",
+      icon: <HiOutlineBolt />,
+      label: t`Webhooks`,
       condition: true,
     },
     {
