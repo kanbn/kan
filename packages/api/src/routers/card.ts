@@ -12,7 +12,10 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
-import { createCardWebhookPayload, sendWebhook } from "../utils/webhook";
+import {
+  createCardWebhookPayload,
+  sendWebhooksForWorkspace,
+} from "../utils/webhook";
 
 export const cardRouter = createTRPCRouter({
   create: protectedProcedure
@@ -154,8 +157,10 @@ export const cardRouter = createTRPCRouter({
         await cardActivityRepo.bulkCreate(ctx.db, cardActivitesInsert);
       }
 
-      // Fire webhook (non-blocking)
-      void sendWebhook(
+      // Fire webhooks (non-blocking)
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        list.workspaceId,
         createCardWebhookPayload(
           "card.created",
           {
@@ -1008,8 +1013,10 @@ export const cardRouter = createTRPCRouter({
         webhookChanges.listId = { from: existingCard.listId, to: newListId };
       }
 
-      // Fire webhook (non-blocking)
-      void sendWebhook(
+      // Fire webhooks (non-blocking)
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        card.workspaceId,
         createCardWebhookPayload(
           newListId && existingCard.listId !== newListId
             ? "card.moved"
@@ -1098,9 +1105,11 @@ export const cardRouter = createTRPCRouter({
         createdBy: userId,
       });
 
-      // Fire webhook (non-blocking)
+      // Fire webhooks (non-blocking)
       if (fullCard) {
-        void sendWebhook(
+        void sendWebhooksForWorkspace(
+          ctx.db,
+          card.workspaceId,
           createCardWebhookPayload(
             "card.deleted",
             {
