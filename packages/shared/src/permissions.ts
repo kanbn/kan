@@ -152,7 +152,7 @@ export function getRoleLevel(role: Role): number {
 }
 
 export function canManageRole(managerRole: Role, targetRole: Role): boolean {
-  return roleHierarchy[managerRole] > roleHierarchy[targetRole];
+  return roleHierarchy[managerRole] >= roleHierarchy[targetRole];
 }
 
 export function hasPermissionInDefaults(
