@@ -127,7 +127,7 @@ CROSS JOIN (
   VALUES 
     ('workspace:view'),
     ('board:view'), ('board:create'),
-    ('list:view'), ('list:create'), ('list:edit'),
+    ('list:view'), ('list:create'), ('list:edit'), ('list:delete'),
     ('card:view'), ('card:create'), ('card:edit'), ('card:delete'),
     ('comment:view'), ('comment:create'), ('comment:edit'), ('comment:delete'),
     ('member:view')

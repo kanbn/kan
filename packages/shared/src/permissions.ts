@@ -64,6 +64,7 @@ export const defaultRolePermissions: Record<Role, readonly Permission[]> = {
     "list:view",
     "list:create",
     "list:edit",
+    "list:delete",
     "card:view",
     "card:create",
     "card:edit",
