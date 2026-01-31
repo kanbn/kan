@@ -142,6 +142,8 @@ export const getByPublicIdWithMembers = (
     columns: {
       id: true,
       publicId: true,
+      name: true,
+      slug: true,
       showEmailsToMembers: true,
     },
     with: {
