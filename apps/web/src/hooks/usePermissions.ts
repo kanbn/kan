@@ -1,6 +1,7 @@
 import type { Permission } from "@kan/shared";
+import { useContext } from "react";
 
-import { useWorkspace } from "~/providers/workspace";
+import { WorkspaceContext } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
 interface UsePermissionsResult {
@@ -30,7 +31,40 @@ interface UsePermissionsResult {
 }
 
 export function usePermissions(): UsePermissionsResult {
-  const { workspace } = useWorkspace();
+  // Check if WorkspaceProvider is available (for public board views, it may not be)
+  const workspaceContext = useContext(WorkspaceContext);
+  
+  // If WorkspaceProvider is not available, return safe defaults
+  if (!workspaceContext) {
+    const emptyPermissions: UsePermissionsResult = {
+      permissions: [],
+      role: null,
+      isLoading: false,
+      hasPermission: () => false,
+      canViewCard: false,
+      canCreateCard: false,
+      canEditCard: false,
+      canDeleteCard: false,
+      canCreateList: false,
+      canEditList: false,
+      canDeleteList: false,
+      canCreateBoard: false,
+      canEditBoard: false,
+      canDeleteBoard: false,
+      canViewComment: false,
+      canCreateComment: false,
+      canEditComment: false,
+      canDeleteComment: false,
+      canInviteMember: false,
+      canEditMember: false,
+      canRemoveMember: false,
+      canViewWorkspace: false,
+      canEditWorkspace: false,
+    };
+    return emptyPermissions;
+  }
+
+  const { workspace } = workspaceContext;
 
   const { data, isLoading } = api.permission.getMyPermissions.useQuery(
     { workspacePublicId: workspace.publicId },

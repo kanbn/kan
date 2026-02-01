@@ -32,7 +32,7 @@ const initialWorkspace: Workspace = {
 
 const initialAvailableWorkspaces: Workspace[] = [];
 
-const WorkspaceContext = createContext<WorkspaceContextProps | undefined>(
+export const WorkspaceContext = createContext<WorkspaceContextProps | undefined>(
   undefined,
 );
 
