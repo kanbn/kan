@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS "workspace_roles" (
 --> statement-breakpoint
 ALTER TABLE "workspace_roles" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
 ALTER TABLE "workspace_members" ADD COLUMN "roleId" bigint;--> statement-breakpoint
-ALTER TABLE "workspace" ADD COLUMN "showEmailsToMembers" boolean DEFAULT true NOT NULL;--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "workspace_role_permissions" ADD CONSTRAINT "workspace_role_permissions_workspaceRoleId_workspace_roles_id_fk" FOREIGN KEY ("workspaceRoleId") REFERENCES "public"."workspace_roles"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
