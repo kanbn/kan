@@ -1,6 +1,6 @@
 {
-  "id": "c77994f4-8210-4191-9566-26dba27f8b0c",
-  "prevId": "ca1a5009-77ef-44da-b48e-151606d961a7",
+  "id": "3b54938c-c8d2-41c1-b4ba-a377719891bc",
+  "prevId": "4e1ebb8b-bd52-48c5-87d6-8e6e5eb8bbde",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -492,13 +492,6 @@
           "type": "bigint",
           "primaryKey": false,
           "notNull": false
-        },
-        "favorite": {
-          "name": "favorite",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
         }
       },
       "indexes": {
@@ -705,13 +698,13 @@
         },
         "fromTitle": {
           "name": "fromTitle",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "toTitle": {
           "name": "toTitle",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -1091,7 +1084,7 @@
         },
         "title": {
           "name": "title",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -2524,6 +2517,13 @@
           "primaryKey": false,
           "notNull": true,
           "default": "'free'"
+        },
+        "showEmailsToMembers": {
+          "name": "showEmailsToMembers",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
         },
         "createdBy": {
           "name": "createdBy",
