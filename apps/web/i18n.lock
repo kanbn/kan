@@ -37,7 +37,9 @@ checksums:
     added%20label%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: b32be052b3d57de0c9120fa7f9fc86ee
     Adding%20a%20new%20member%20will%20cost%20an%20additional%20%7Bprice%7D%20(%7BbillingType%7D)%20per%20seat./singular: 12e88573028306110fbc15ef1e714892
     Adjust%20the%20square%20crop%20to%20fit%20your%20avatar./singular: a4df26bbce6f14c6962fac1324db00a8
+    Admin/singular: 90eb20f1400db82ab874744e47836dc6
     Admin%20roles/singular: 32a5d78073b9bb9a246773afba8831df
+    All%20member%20permission%20overrides%20have%20been%20reset%20to%20their%20role%20defaults./singular: e5c38724a283373506d53afd22b6d096
     All%20systems%20operational/singular: ee943a4046b09e6334cceeea9fda2bfc
     Allow%20workspace%20members%20to%20see%20each%20other's%20email%20addresses/singular: 0077436d9f37bfd64f3ae076a5a05040
     Already%20have%20an%20account%3F%20%3C0%3E%3C1%3ESign%20in%3C%2F1%3E%3C%2F0%3E/singular: 2959fd276248208b65cb27ed46b20135
@@ -88,6 +90,31 @@ checksums:
     Brainstorming/singular: 736332f2e4488609e42d2be8547d296e
     Bug/singular: 4509fffdb5931f8905063c80cf802d71
     Bug%20Report/singular: e558d1f100e21230c2f495a8913ac5ec
+    Can%20add%20comments/singular: d7d70b75780156312701f4c5eed1b285
+    Can%20create%20boards/singular: 8538236f8caafd4eaa751b4ec45f1699
+    Can%20create%20cards/singular: dd1cce2d52e0fb261676750bfc46da22
+    Can%20create%20lists/singular: 53c3c1343efff494640b1227e4444de2
+    Can%20delete%20boards/singular: 818ff50f9f21d8ed3741a7933d66b794
+    Can%20delete%20cards/singular: c62309a7e52958aa4bdb477c07d1855d
+    Can%20delete%20comments/singular: 99884fcaf89c47aa33c6ddfd9f94ea5f
+    Can%20delete%20lists/singular: 8d6ff6cd43c6b9fcbc9fc7954d19409e
+    Can%20delete%20workspace/singular: 41bd5a6636500b1a6e04184e6f566198
+    Can%20edit%20boards/singular: 8b77fabfd955d5507b1826dc4a5c1108
+    Can%20edit%20cards/singular: 47e6c92c1056fd6e8b517ba456b3f607
+    Can%20edit%20comments/singular: a0caeec2b2b64e9f371f07dabed5733d
+    Can%20edit%20lists/singular: 1ce5feb15139c881b615edab065b3e12
+    Can%20edit%20member%20roles%20and%20permissions/singular: c364e8e8866111a471f4081db0730049
+    Can%20edit%20workspace/singular: 9768f990844e215c06910fed250da23a
+    Can%20invite%20members/singular: e02e562bcb7f46008d9595e485951413
+    can%20manage%20workspace%20settings/singular: 78bfe1746f961f37b1cde85e5a0e9a13
+    Can%20manage%20workspace%20settings/singular: 27eb18d3be5b3d813996b7d5071e0317
+    Can%20remove%20members/singular: 97a452b0fb4b661eaca7e5b3d5b49dcd
+    Can%20view%20boards/singular: 14977bbbb566f72fc74e17d99bad09bb
+    Can%20view%20cards/singular: 5e728083853948c9d618f2276732d5cd
+    Can%20view%20comments/singular: 76dbbc9ae4bff589d391c67c84ac6470
+    Can%20view%20lists/singular: e36331c4a49f376befc9f0aa42492b01
+    Can%20view%20members/singular: 5b75a467257a1db29d466c0d9ccea3df
+    Can%20view%20workspace/singular: 79a12c55fcd04ea69cbb85b906794e9b
     Cancel/singular: 2e2a849c2223911717de8caa2c71bade
     Card/singular: bba0beaced7ea954ceb980f2b022ffee
     Card%20not%20found/singular: 91509e2f92b0b3b11330b6983139fdbf
@@ -99,6 +126,9 @@ checksums:
     Check%20your%20inbox/singular: e9a430fcd298def74212238df0f680d6
     Checklist%20name/singular: 5eb5de823f7ca5a4d97bb41e6a3f675a
     Checklists/singular: 6f79129c8f08ee54d858a2af57d16dd9
+    Clear%20all%20custom%20permissions%3F/singular: 31d0962985c83a29558c98a765bb1b16
+    Clear%20any%20custom%20member%20permissions%20so%20that%20all%20members%20only%20inherit%20permissions%20from%20their%20role%20defaults./singular: e493291818059bfd51f2c87b938616c4
+    Clear%20custom%20permissions/singular: 288ce8688fd09c5a01eda5a6ba4bc98a
     Clear%20filters/singular: 8f40ab5af527e4b190da94e7b6221379
     Click%20on%20the%20link%20we've%20sent%20to%20%7BmagicLinkRecipient%7D%20to%20sign%20in./singular: 210b6ff8727f976182ec3f29ea3c7667
     Close/singular: 2c2e22f8424a1031de89063bd0022e16
@@ -113,6 +143,7 @@ checksums:
     Complete%20control%20and%20ownership%3A/singular: 0d8b682ba873272217425ccfc96aa9cd
     completed%20a%20checklist%20item/singular: 757b04c6c80cc927e1c597c0ad4fda33
     completed%20checklist%20item%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: 71ec18acf051fc909a48a07ca3578673
+    Configure%20which%20actions%20are%20allowed%20for%20each%20workspace%20role.%20These%20permissions%20apply%20to%20all%20members%20with%20that%20role./singular: 0a46a8a30c6c0ebdcd01e72a7d64ec64
     Confirm%20your%20email%20preferences%3A/singular: 043c161dd9866231ae2418fdd9f61b9c
     Confirm%20your%20new%20password/singular: a0d2935d7b63f8dd19d7c0de47524416
     Connect%20Trello/singular: 4440a0b9e387ef7136e3958e7a089213
@@ -146,6 +177,7 @@ checksums:
     Current%20password%20is%20required/singular: 72536bca9598680027f2be8ce80ac280
     Custom%20board%20templates/singular: c2966b352d76bc53421c01e9c99474bb
     Custom%20domain/singular: b09e7a9c187b7163b4a6cfc78042fe42
+    Custom%20permissions/singular: 6f1748601979e2e4548877b292b43a20
     Custom%20templates/singular: f8caaad67e168f106a298c8e0a66240c
     Custom%20URLs%20require%20upgrading%20to%20a%20Pro%20plan/singular: f7275e3b473b8f7b39dab6b37eb26fea
     Custom%20workspace%20link/singular: 8a19ae46ccea9c54b65ae183cea70b44
@@ -189,6 +221,7 @@ checksums:
     Edit%20board%20URL/singular: d8276dfc0189f371ec7d80a2047c07aa
     Edit%20comment/singular: 7e4b46525fcb6b47b71798e31c46e374
     Edit%20label/singular: 0309e0be1512b1e0b0ceb87c69a53d03
+    Edit%20permissions/singular: 244558dd716491b7ed72ba8ab73aa28f
     Edit%20workspace%20URL/singular: bbae5f2f8a442947d33099979bbbe899
     Edit%20YouTube%20Video/singular: 4899d9e990d291eb6e71ee40a8ee314b
     Editing/singular: 3449a7988cd69207b7c6929af1f4abf1
@@ -262,6 +295,7 @@ checksums:
     Go%20to%20members/singular: 445f4efbc4b1e7509f4fd79ebfbb1476
     Go%20to%20settings/singular: 24a7f96880650c9b37099d69f4b7e2a9
     Go%20to%20templates/singular: e4e58e33d637282d141df466d729bc7c
+    Guest/singular: 2aec6d6ebe0d9a1db0a5c8cd5a98b8c3
     High%20Priority/singular: 5d231ff8254aabc875f194c4b4f49c97
     Hired/singular: e5a9b1bd409b007141fe3d7890022f9a
     Host%20Kan%20on%20your%20own%20infrastructure.%20Ideal%20for%20organisations%20that%20need%20complete%20control%20over%20their%20data./singular: 8e7ae0783d60ef4624d3caf9bfc3747f
@@ -323,6 +357,7 @@ checksums:
     List%20name/singular: e925e2e6ccaf0eb4064a888aaea8d3c2
     Lists/singular: 9f4a73afc8de321175d71935134ef066
     Load%20more%20activities/singular: f32d40a739ffaa700051c4c7d70055cf
+    Loading%20permissions.../singular: a5665279d4e439186825057c32d4d976
     Loading.../singular: 82b4ea7ed1439094d7c4be13aaba9a66
     Login%20%7C%20kan.bn/singular: 42a6c8dcd73e0d46e652646dc86871eb
     Logout/singular: 07948fdf20705e04a7bf68ab197512bf
@@ -334,6 +369,7 @@ checksums:
     marked%20a%20checklist%20item%20as%20incomplete/singular: 35d0822f65971b97774b962561b02649
     marked%20checklist%20item%20%3C0%3E%7B0%7D%3C%2F0%3E%20as%20incomplete/singular: 4c38799ff25321ea25017bf4cd8e2e4f
     Medium%20Priority/singular: 1f527cd6d1ed602930bcaa303f503b51
+    Member/singular: 1606dc30b369856b9dba1fe9aec425d2
     Members/singular: 0932e80cba1e3e0a7f52bb67ff31da32
     Members%20%7C%20%7B0%7D/singular: a29e3e9f1076acd178c417d047584e88
     Monthly/singular: 818f1192e32bb855597f930d3e78806e
@@ -366,7 +402,9 @@ checksums:
     No%20download%20URL%20available%20for%20this%20attachment./singular: e367d39420b2242f9d2fd749c87f446a
     No%20keyboard%20shortcuts%20registered./singular: 7f1ed5d777cade7d62303e9e591bbf63
     No%20lists/singular: cedf633d99c77ff4356e089f2d98c0a6
+    No%20lists%20have%20been%20created%20yet/singular: f18ee3d7230cc33b68bd17b429d1d442
     No%20results%20found%20for%20%22%7BdebouncedQuery%7D%22./singular: 5db6294712528cd897b15ae36f4fd834
+    No%20roles%20found%20for%20this%20workspace%20yet./singular: 2eb502333aaf6c58e8ab23d881e2e357
     Offer/singular: 82b4e0c9a3f5b4bd93590847de7c32a1
     Onboarding/singular: 52b23f9c62ff199d4c09920e7641829e
     Once%20you%20delete%20your%20account%2C%20there%20is%20no%20going%20back.%20This%20action%20cannot%20be%20undone./singular: 9cf7aa6ef30890e5124e266c081bae1c
@@ -379,6 +417,7 @@ checksums:
     Organize%20and%20find%20cards%20quickly%20with%20powerful%20filtering%20tools./singular: 1b9898c4b21e9dff413b4f76dc59db56
     OSS%20Friends/singular: 706e10666dfe26130c17fedb5366a25d
     Overdue/singular: 24caaa2b5d7a2447ab7664e3771cf98c
+    Overrides%20cleared/singular: f2e380efbae31a6113cc0cbf0eadf7b0
     Own%20your%20data/singular: cc2178dac4bdf6b07f030cfc2a7510e6
     Owned%20by%20Atlassian/singular: ace4ed076a5318ad48c296fa09afed69
     Part-time/singular: 213d63da450f35dabb3ab0e35e29feed
@@ -391,6 +430,10 @@ checksums:
     Payment%20frequency/singular: 63ded0e4ffb462ca8bd33d38e4691d86
     Pending/singular: 030a6f3395d5d4efddd3cc67d6009039
     per%20user%2Fmonth/singular: 72af182c1ba6df6732640f4d8a78d360
+    Permission/singular: cc2ed7274bd8267f9e0a10b079584d8b
+    Permissions/singular: 2160be68b1d6b6577e64634e9feba2ed
+    Permissions%20reset/singular: dd4776f04aca858deb95887e807570fc
+    Permissions%20updated/singular: 0df44570b783b8b284610da8627d333d
     Personal%20Project/singular: d7820b1bf4efecc61ed89234567aaa9c
     Planning/singular: 353f58c75248275fe091740607501610
     Platform/singular: c68862170146325333c7f25af11a3fa2
@@ -429,12 +472,14 @@ checksums:
     renamed%20checklist%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: e95d119ef65b0af6c0a96bef182be671
     renamed%20checklist%20item%20to%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: 50f55f71f9245890afee434d7adc2140
     Research/singular: 3368e9638d1619babd6df9fad592274f
+    Reset%20to%20role%20defaults/singular: fc9ff8ea0503e50da3e9b3e5d8bb75dd
     Resolution/singular: 6d8bd9e1bd7dae5ae38c93061d32990e
     Resources/singular: ec7fb05ed963bb6781a35782b3475502
     REST%20API/singular: 54c9f8d98f45f50399b6b93ba70af0d6
     Review/singular: 299f75db25382980b2895622d7712927
     Roadmap/singular: c60f4a1acf30e566861bf130f13b9ae7
     Role/singular: 53743bbb6ca938f5b893552e839d067f
+    Role%20updated/singular: 73606ae9c35101f1bb518961f68559d0
     Run%20on%20your%20own%20infrastructure/singular: eba804911562b8dbf9d69c3e27f1d708
     Save/singular: f7a2929f33bc420195e59ac5a8bcd454
     Save%20time%20with%20reusable%20board%20templates./singular: d0f2d7d0fd682ceaf4ca12c6353fd75a
@@ -456,6 +501,7 @@ checksums:
     Settings%20%7C%20API/singular: 85101e4b802a09ad9e3f01ff116f0894
     Settings%20%7C%20Billing/singular: e44cba741d5414035a0b499c5766c203
     Settings%20%7C%20Integrations/singular: d04992e28016452f6d3d7dcc0b592415
+    Settings%20%7C%20Permissions/singular: 8aa60ed978b9f45a705d99dc1ee04f37
     Settings%20%7C%20Workspace/singular: 5d0bacf7ff696da940f232df45edfd39
     Shortcuts/singular: db3330ed3240c398054f3be23c52851f
     Sign%20in/singular: cb8757c7450e17de1e226e82fb0fa4a2
@@ -490,6 +536,8 @@ checksums:
     Thank%20you%20for%20your%20feedback!/singular: 07edd8c50685a52c0969d711df26d768
     The%20current%20password%20you%20entered%20is%20incorrect./singular: 67a76bf346ab4b48563269e9d941a64a
     The%20main%20difference%20between%20Kan%20and%20Trello%20is%20that%20Kan%20is%20open%20source%2C%20allowing%20anyone%20to%20view%2C%20modify%2C%20and%20contribute%20to%20our%20code.%20Our%20cloud%20offering%20also%20offers%20no%20restrictions%20on%20features%20for%20individual%20use%2C%20whereas%20Trello%20locks%20basic%20features%20such%20as%20the%20number%20of%20boards%20you%20can%20create%20behind%20a%20paywall./singular: db6e22cc955c5fbe547feedeb48f8719
+    The%20member's%20permissions%20have%20been%20updated./singular: 6ae91be2c5c0504bf521335094c50fa4
+    The%20member's%20role%20has%20been%20updated./singular: e30c30a2beaac7d046c35f628102f83b
     The%20open%20source%20%3C0%2F%3E%20alternative%20to%20Trello/singular: 692cb2e8a8e610953c996826beed45a2
     The%20visibility%20of%20your%20board%20has%20been%20set%20to%20%7B0%7D./singular: 970e17a115f7374e60e0a8ded425db8f
     Theme/singular: 21fe00b7a518089576fb83c08631107a
@@ -499,6 +547,8 @@ checksums:
     This%20board%20is%20private%20or%20does%20not%20exist/singular: a217ff3f04463b4df8c86adb6f83c6bc
     This%20board%20URL%20has%20already%20been%20taken/singular: 1d8b40332a031b5b77a3658e48dd51ca
     This%20invitation%20link%20is%20invalid%20or%20has%20expired./singular: 11cc7ef8f1512e7e058e1fbbe5644001
+    This%20member's%20permissions%20have%20been%20reset%20to%20their%20role%20defaults./singular: 730f33b8f1fc002c4f393ccd262b6664
+    This%20will%20remove%20all%20custom%20member%20permissions%20in%20this%20workspace.%20Members%20will%20inherit%20permissions%20only%20from%20their%20roles./singular: 1c989752736fa41ecdd68ea890f16a15
     This%20will%20result%20in%20the%20permanent%20deletion%20of%20all%20data%20associated%20with%20this%20workspace./singular: a31141558af793635c1ddd2fa0a33499
     This%20will%20result%20in%20the%20permanent%20deletion%20of%20all%20data%20associated%20with%20your%20account./singular: b49224632bd6c3b7f5e462912aeb1081
     This%20workspace%20URL%20has%20already%20been%20taken/singular: b455329e2a71da677acab91d3a00bad6
@@ -516,6 +566,7 @@ checksums:
     Unable%20to%20add%20checklist%20item/singular: 4c4c3eaaf10b348b39ae97eb5dc455df
     Unable%20to%20add%20comment/singular: 49bb435880817434698f31a6069564d6
     Unable%20to%20add%20label/singular: b09fda6420ea1dc10dbea0b1dc373f29
+    Unable%20to%20clear%20overrides/singular: dfeac280858332082ad34d2623a59863
     Unable%20to%20create%20card/singular: 90112ea12ec6fa42097a6e022ae048a4
     Unable%20to%20create%20checklist/singular: 94eed122e42e0951cd08b9ec62f5eeb6
     Unable%20to%20create%20list/singular: 7fbbf8314f8d08a4123c7daef09fed05
@@ -528,6 +579,7 @@ checksums:
     Unable%20to%20delete%20comment/singular: 550198b2c87f06726a843c79c1026ed9
     Unable%20to%20remove%20member/singular: 39025a0c53818438829603d213baef06
     Unable%20to%20reorder%20checklist%20item/singular: dcc238c72b85daf74ebd46adcd914473
+    Unable%20to%20reset%20permissions/singular: fb09d88ff4eb32afb852d733bafd515b
     Unable%20to%20send%20feedback/singular: 656c93265d7e2bef1245b17d85f85ae5
     Unable%20to%20update%20board%20URL/singular: 080746884059142358b58d9a44ff7d93
     Unable%20to%20update%20board%20visibility/singular: a76a21d561b8943e9276e027a1e3f70d
@@ -539,6 +591,8 @@ checksums:
     Unable%20to%20update%20labels/singular: dca2bdc3dcf74bc9d95e05156039a291
     Unable%20to%20update%20list/singular: 14aa802f91b9b4c05236c8c75afb33da
     Unable%20to%20update%20members/singular: 9a851a6b0c75ee16d25cf2ff4b67b255
+    Unable%20to%20update%20permissions/singular: 134f20c5f2463167509562b284ef1c61
+    Unable%20to%20update%20role/singular: 4f2240aeff6f7275feb33ca3f608e48c
     unassigned%20%3C0%3E%7B0%7D%3C%2F0%3E%20from%20the%20card/singular: b683cc07092348c1e75dba40b1262b85
     unassigned%20themselves%20from%20the%20card/singular: 27c6f293c562af6a44348d7f00036d30
     Unlimited%20activity%20log/singular: 8c993de94cda0deac19ba14ecafce6a5
@@ -597,6 +651,7 @@ checksums:
     Workspace%20name%20is%20required/singular: b8c5162dd08c4d941bc57f9d0cbee451
     Workspace%20name%20must%20be%20at%20least%203%20characters%20long/singular: e448ea97418d44b18b4c21c22b8ba779
     Workspace%20name%20updated/singular: 3206ea410ee1ea4182b27ac0d89f92a1
+    Workspace%20permissions/singular: 72c0202f30e543eb81bf930d85647096
     Workspace%20slug%20updated/singular: 527b92711d38cb35b40741df43aef047
     Workspace%20URL/singular: f4397a838da0f3a44cbd3ebe408ed6c3
     workspace-url/singular: 2d034732ec536f3a2667f956fa50d394
@@ -607,10 +662,12 @@ checksums:
     You%20can%20get%20a%20custom%20workspace%20URL%2C%20like%20%3C0%3Ekan.bn%2Fkan%3C%2F0%3E%2C%20by%20going%20into%20your%20%3C1%3Eworkspace%20settings%3C%2F1%3E%20and%20purchasing%20a%20pro%20workspace%20subscription.%20All%20subscriptions%20help%20fund%20the%20development%20of%20the%20project!/singular: 41dd145ef56f539e12dc064a9807c660
     You%20can%20invite%20team%20members%20by%20clicking%20the%20%22Invite%22%20button%20in%20the%20top%20right%20corner%20of%20the%20%3C0%3Emembers%20page%3C%2F0%3E%20and%20entering%20their%20email%20address.%20They%20will%20receive%20an%20email%20with%20a%20link%20to%20join%20the%20workspace./singular: 47e125eb9b4c11cab5a2f4b3ab08e883
     You%20can%20self-host%20by%20following%20the%20instructions%20in%20our%20%3C0%3Erepo%3C%2F0%3E./singular: a6152a41b2d8f64d5a657e5b8bc808a9
+    You%20don't%20have%20permission/singular: 11d928b1993d95d54a95f85f8ae5016d
     You%20have%20been%20logged%20in%20successfully./singular: ef8fad1dce13ae4112f17c5258655fea
     You%20have%20been%20signed%20up%20successfully./singular: f614a6e3b45f5ffb9a3b0fb420fef84b
     You%20have%20been%20unsubscribed!/singular: e0b9985faa4e7f25b71acc77750923a6
     You%20have%20unlimited%20seats%20with%20your%20Pro%20Plan.%20There%20is%20no%20additional%20charge%20for%20new%20members!/singular: e3dc59a5ba7211cd3d8516b3a79d85ca
+    You%20need%20to%20be%20an%20admin%20to%20manage%20workspace%20permissions./singular: e2e816f2b7a13b1056d79e7f25088664
     You've%20been%20invited%20to%20join%20a%20workspace%20on%20kan.bn./singular: 257b840726f972f384243a72767f880f
     You've%20been%20invited%20to%20join%20a%20workspace./singular: 24fc6cdc8740f37a83df85f582f03293
     Your%20account%20has%20been%20deleted./singular: 8c8d944e07388c5877effdb2c2803dcf

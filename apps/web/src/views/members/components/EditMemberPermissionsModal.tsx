@@ -125,7 +125,7 @@ export function EditMemberPermissionsModal() {
     "workspace:view": t`Can view workspace`,
     "workspace:edit": t`Can edit workspace`,
     "workspace:delete": t`Can delete workspace`,
-    "workspace:manage": t`Can manage workspace settings and billing`,
+    "workspace:manage": t`Can manage workspace settings`,
 
     "board:view": t`Can view boards`,
     "board:create": t`Can create boards`,
