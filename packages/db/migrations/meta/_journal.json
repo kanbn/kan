@@ -169,6 +169,13 @@
       "when": 1769435949476,
       "tag": "20260126135909_AddWorkspaceRoles",
       "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1769983198190,
+      "tag": "20260201215958_AddUserBoardFavouritesTable",
+      "breakpoints": true
     }
   ]
 }

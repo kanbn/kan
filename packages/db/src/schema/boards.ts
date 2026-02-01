@@ -2,9 +2,11 @@ import { relations, sql } from "drizzle-orm";
 import {
   bigint,
   bigserial,
+  boolean,
   index,
   pgEnum,
   pgTable,
+  primaryKey,
   text,
   timestamp,
   uniqueIndex,
@@ -67,6 +69,7 @@ export const boards = pgTable(
 ).enableRLS();
 
 export const boardsRelations = relations(boards, ({ one, many }) => ({
+  userFavorites: many(userBoardFavorites),
   createdBy: one(users, {
     fields: [boards.createdBy],
     references: [users.id],
@@ -91,3 +94,21 @@ export const boardsRelations = relations(boards, ({ one, many }) => ({
     relationName: "boardWorkspace",
   }),
 }));
+
+export const userBoardFavorites = pgTable(
+  "user_board_favorites",
+  {
+    userId: uuid("userId")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    boardId: bigint("boardId", { mode: "number" })
+      .notNull()
+      .references(() => boards.id, { onDelete: "cascade" }),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+  },
+  (table) => ({
+    pk: primaryKey({ columns: [table.userId, table.boardId] }),
+    userIdx: index("user_board_favorite_user_idx").on(table.userId),
+    boardIdx: index("user_board_favorite_board_idx").on(table.boardId),
+  }),
+);

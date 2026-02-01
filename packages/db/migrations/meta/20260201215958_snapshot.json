@@ -1,6 +1,6 @@
 {
-  "id": "c24a8e89-c100-4483-9f0b-391201327ac5",
-  "prevId": "3b54938c-c8d2-41c1-b4ba-a377719891bc",
+  "id": "3d6e154d-19ee-4e43-8b74-954a644f70d2",
+  "prevId": "c24a8e89-c100-4483-9f0b-391201327ac5",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -630,6 +630,104 @@
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": true
+    },
+    "public.user_board_favorites": {
+      "name": "user_board_favorites",
+      "schema": "",
+      "columns": {
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "boardId": {
+          "name": "boardId",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "user_board_favorite_user_idx": {
+          "name": "user_board_favorite_user_idx",
+          "columns": [
+            {
+              "expression": "userId",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "user_board_favorite_board_idx": {
+          "name": "user_board_favorite_board_idx",
+          "columns": [
+            {
+              "expression": "boardId",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "user_board_favorites_userId_user_id_fk": {
+          "name": "user_board_favorites_userId_user_id_fk",
+          "tableFrom": "user_board_favorites",
+          "tableTo": "user",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "user_board_favorites_boardId_board_id_fk": {
+          "name": "user_board_favorites_boardId_board_id_fk",
+          "tableFrom": "user_board_favorites",
+          "tableTo": "board",
+          "columnsFrom": [
+            "boardId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "user_board_favorites_userId_boardId_pk": {
+          "name": "user_board_favorites_userId_boardId_pk",
+          "columns": [
+            "userId",
+            "boardId"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "public.card_activity": {
       "name": "card_activity",

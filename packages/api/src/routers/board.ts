@@ -60,9 +60,12 @@ export const boardRouter = createTRPCRouter({
 
       await assertPermission(ctx.db, userId, workspace.id, "board:view");
 
-      const result = boardRepo.getAllByWorkspaceId(ctx.db, workspace.id, {
-        type: input.type,
-      });
+      const result = boardRepo.getAllByWorkspaceId(
+        ctx.db,
+        workspace.id,
+        userId,
+        { type: input.type }
+      );
 
       return result;
     }),
@@ -129,6 +132,7 @@ export const boardRouter = createTRPCRouter({
       const result = await boardRepo.getByPublicId(
         ctx.db,
         input.boardPublicId,
+        userId,
         {
           members: input.members ?? [],
           labels: input.labels ?? [],
@@ -275,6 +279,7 @@ export const boardRouter = createTRPCRouter({
         const sourceBoard = await boardRepo.getByPublicId(
           ctx.db,
           input.sourceBoardPublicId,
+          userId,
           {
             members: [],
             labels: [],
@@ -399,9 +404,10 @@ export const boardRouter = createTRPCRouter({
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
           .optional(),
         visibility: z.enum(["public", "private"]).optional(),
+        favorite: z.boolean().optional()
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof boardRepo.update>>>())
+    .output(z.object({ success: z.boolean() }).or(z.custom<Awaited<ReturnType<typeof boardRepo.update>>>()))
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -429,6 +435,23 @@ export const boardRouter = createTRPCRouter({
         "board:edit",
         board.createdBy ?? null,
       );
+
+      // Handle favorite toggle separately
+      if (input.favorite !== undefined) {
+        if (input.favorite) {
+          await boardRepo.addUserFavorite(ctx.db, userId, board.id);
+        } else {
+          await boardRepo.removeUserFavorite(ctx.db, userId, board.id);
+        }
+      }
+
+      // Handle other updates (name, slug, visibility)
+      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined;
+
+      if (!hasOtherUpdates) {
+        // Only favorite was updated, return success
+        return { success: true };
+      }
 
       if (input.slug) {
         const isBoardSlugAvailable = await boardRepo.isBoardSlugAvailable(
