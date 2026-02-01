@@ -6,7 +6,7 @@ export default function Dropdown({
   children,
   disabled,
 }: {
-  items: { label: string; action: () => void; icon?: React.ReactNode }[];
+  items: { label: string; action?: () => void; icon?: React.ReactNode; disabled?: boolean }[];
   children: React.ReactNode;
   disabled?: boolean;
 }) {
@@ -33,10 +33,11 @@ export default function Dropdown({
         <Menu.Items className="absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-md border border-light-200 bg-light-50 p-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-400 dark:bg-dark-300">
           <div className="flex flex-col">
             {items.map((item) => (
-              <Menu.Item key={item.label}>
+              <Menu.Item key={item.label} disabled={item.disabled}>
                 <button
                   onClick={item.action}
-                  className="flex w-auto items-center gap-2 rounded-[5px] px-2.5 py-1.5 text-left text-sm text-neutral-900 hover:bg-light-200 dark:text-dark-950 dark:hover:bg-dark-400"
+                  disabled={item.disabled ?? !item.action}
+                  className="flex w-auto items-center gap-2 rounded-[5px] px-2.5 py-1.5 text-left text-sm text-neutral-900 hover:bg-light-200 disabled:cursor-not-allowed disabled:opacity-60 dark:text-dark-950 dark:hover:bg-dark-400"
                 >
                   {item.icon}
                   {item.label}

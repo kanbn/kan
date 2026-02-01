@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/views/card/components/Comment.tsx:128
+#: src/views/card/components/Comment.tsx:130
 msgid " (edited)"
 msgstr " (edited)"
 
@@ -22,7 +22,7 @@ msgid ", or see our"
 msgstr ", or see our"
 
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#: src/views/boards/index.tsx:38
+#: src/views/boards/index.tsx:40
 msgid "{0}"
 msgstr "{0}"
 
@@ -30,8 +30,8 @@ msgstr "{0}"
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
-#: src/views/boards/index.tsx:33
-#: src/views/card/index.tsx:273
+#: src/views/boards/index.tsx:35
+#: src/views/card/index.tsx:290
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
@@ -41,7 +41,7 @@ msgid "{0} labels"
 msgstr "{0} labels"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:422
+#: src/views/board/index.tsx:427
 msgid "{0} not found"
 msgstr "{0} not found"
 
@@ -83,7 +83,7 @@ msgstr "14 day free trial"
 msgid "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
 msgstr "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
 
-#: src/components/SettingsLayout.tsx:33
+#: src/components/SettingsLayout.tsx:40
 msgid "Account"
 msgstr "Account"
 
@@ -95,7 +95,7 @@ msgstr "Account deleted"
 msgid "Actions"
 msgstr "Actions"
 
-#: src/views/card/index.tsx:387
+#: src/views/card/index.tsx:410
 #: src/views/public/board/CardModal.tsx:158
 msgid "Activity"
 msgstr "Activity"
@@ -108,12 +108,12 @@ msgstr "Activity log"
 msgid "Activity logs"
 msgstr "Activity logs"
 
-#: src/views/board/components/List.tsx:110
+#: src/views/board/components/List.tsx:136
 msgid "Add a card"
 msgstr "Add a card"
 
-#: src/views/card/components/Comment.tsx:151
-#: src/views/card/components/NewCommentForm.tsx:55
+#: src/views/card/components/Comment.tsx:153
+#: src/views/card/components/NewCommentForm.tsx:61
 msgid "Add a comment..."
 msgstr "Add a comment..."
 
@@ -121,7 +121,7 @@ msgstr "Add a comment..."
 msgid "Add an item..."
 msgstr "Add an item..."
 
-#: src/views/card/components/Dropdown.tsx:18
+#: src/views/card/components/Dropdown.tsx:28
 msgid "Add checklist"
 msgstr "Add checklist"
 
@@ -137,12 +137,12 @@ msgstr "Add description... (type '/' to open commands or '@' to mention)"
 msgid "Add details..."
 msgstr "Add details..."
 
-#: src/views/card/components/LabelSelector.tsx:110
-#: src/views/card/components/LabelSelector.tsx:115
+#: src/views/card/components/LabelSelector.tsx:113
+#: src/views/card/components/LabelSelector.tsx:118
 msgid "Add label"
 msgstr "Add label"
 
-#: src/views/card/components/MemberSelector.tsx:131
+#: src/views/card/components/MemberSelector.tsx:134
 #: src/views/members/components/InviteMemberForm.tsx:257
 msgid "Add member"
 msgstr "Add member"
@@ -195,10 +195,18 @@ msgstr "Adding a new member will cost an additional {price} ({billingType}) per 
 msgid "Adjust the square crop to fit your avatar."
 msgstr "Adjust the square crop to fit your avatar."
 
+#: src/views/members/index.tsx:200
+msgid "Admin"
+msgstr "Admin"
+
 #: src/views/pricing/components/Pricing.tsx:55
 #: src/views/pricing/components/PricingTiers.tsx:52
 msgid "Admin roles"
 msgstr "Admin roles"
+
+#: src/views/settings/PermissionsSettings.tsx:26
+msgid "All member permission overrides have been reset to their role defaults."
+msgstr "All member permission overrides have been reset to their role defaults."
 
 #: src/views/home/components/Pricing.tsx:97
 #~ msgid "All seats are free during the beta until Sept 1st!"
@@ -208,7 +216,7 @@ msgstr "Admin roles"
 msgid "All systems operational"
 msgstr "All systems operational"
 
-#: src/views/settings/components/UpdateWorkspaceEmailVisibilityForm.tsx:42
+#: src/views/settings/components/UpdateWorkspaceEmailVisibilityForm.tsx:45
 msgid "Allow workspace members to see each other's email addresses"
 msgstr "Allow workspace members to see each other's email addresses"
 
@@ -228,7 +236,7 @@ msgstr "An unexpected error occurred. Please try again later."
 msgid "Anyone with this link can join your workspace"
 msgstr "Anyone with this link can join your workspace"
 
-#: src/components/SettingsLayout.tsx:51
+#: src/components/SettingsLayout.tsx:64
 msgid "API"
 msgstr "API"
 
@@ -347,7 +355,7 @@ msgstr "billed annually"
 msgid "billed monthly"
 msgstr "billed monthly"
 
-#: src/components/SettingsLayout.tsx:44
+#: src/components/SettingsLayout.tsx:57
 #: src/views/boards/components/TemplateBoards.tsx:56
 #: src/views/settings/BillingSettings.tsx:39
 msgid "Billing"
@@ -361,8 +369,8 @@ msgstr "Billing portal"
 msgid "Blog Post"
 msgstr "Blog Post"
 
-#: src/views/board/index.tsx:396
-#: src/views/card/index.tsx:273
+#: src/views/board/index.tsx:399
+#: src/views/card/index.tsx:290
 #: src/views/public/board/index.tsx:120
 msgid "Board"
 msgstr "Board"
@@ -418,7 +426,7 @@ msgstr "Board URL must be at least 3 characters long"
 msgid "Board visibility"
 msgstr "Board visibility"
 
-#: src/views/board/components/VisibilityButton.tsx:46
+#: src/views/board/components/VisibilityButton.tsx:49
 msgid "Board visibility updated"
 msgstr "Board visibility updated"
 
@@ -446,28 +454,153 @@ msgstr "Bug"
 msgid "Bug Report"
 msgstr "Bug Report"
 
+#: src/views/members/components/EditMemberPermissionsModal.tsx:146
+#: src/views/settings/components/RolePermissions.tsx:35
+msgid "Can add comments"
+msgstr "Can add comments"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:131
+#: src/views/settings/components/RolePermissions.tsx:20
+msgid "Can create boards"
+msgstr "Can create boards"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:141
+#: src/views/settings/components/RolePermissions.tsx:30
+msgid "Can create cards"
+msgstr "Can create cards"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:136
+#: src/views/settings/components/RolePermissions.tsx:25
+msgid "Can create lists"
+msgstr "Can create lists"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:133
+#: src/views/settings/components/RolePermissions.tsx:22
+msgid "Can delete boards"
+msgstr "Can delete boards"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:143
+#: src/views/settings/components/RolePermissions.tsx:32
+msgid "Can delete cards"
+msgstr "Can delete cards"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:148
+#: src/views/settings/components/RolePermissions.tsx:37
+msgid "Can delete comments"
+msgstr "Can delete comments"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:138
+#: src/views/settings/components/RolePermissions.tsx:27
+msgid "Can delete lists"
+msgstr "Can delete lists"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:127
+#: src/views/settings/components/RolePermissions.tsx:16
+msgid "Can delete workspace"
+msgstr "Can delete workspace"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:132
+#: src/views/settings/components/RolePermissions.tsx:21
+msgid "Can edit boards"
+msgstr "Can edit boards"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:142
+#: src/views/settings/components/RolePermissions.tsx:31
+msgid "Can edit cards"
+msgstr "Can edit cards"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:147
+#: src/views/settings/components/RolePermissions.tsx:36
+msgid "Can edit comments"
+msgstr "Can edit comments"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:137
+#: src/views/settings/components/RolePermissions.tsx:26
+msgid "Can edit lists"
+msgstr "Can edit lists"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:152
+#: src/views/settings/components/RolePermissions.tsx:41
+msgid "Can edit member roles and permissions"
+msgstr "Can edit member roles and permissions"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:126
+#: src/views/settings/components/RolePermissions.tsx:15
+msgid "Can edit workspace"
+msgstr "Can edit workspace"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:151
+#: src/views/settings/components/RolePermissions.tsx:40
+msgid "Can invite members"
+msgstr "Can invite members"
+
+#: src/views/settings/components/RolePermissions.tsx:17
+#~ msgid "can manage workspace settings"
+#~ msgstr "can manage workspace settings"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:128
+#: src/views/settings/components/RolePermissions.tsx:17
+msgid "Can manage workspace settings"
+msgstr "Can manage workspace settings"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:153
+#: src/views/settings/components/RolePermissions.tsx:42
+msgid "Can remove members"
+msgstr "Can remove members"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:130
+#: src/views/settings/components/RolePermissions.tsx:19
+msgid "Can view boards"
+msgstr "Can view boards"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:140
+#: src/views/settings/components/RolePermissions.tsx:29
+msgid "Can view cards"
+msgstr "Can view cards"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:145
+#: src/views/settings/components/RolePermissions.tsx:34
+msgid "Can view comments"
+msgstr "Can view comments"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:135
+#: src/views/settings/components/RolePermissions.tsx:24
+msgid "Can view lists"
+msgstr "Can view lists"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:150
+#: src/views/settings/components/RolePermissions.tsx:39
+msgid "Can view members"
+msgstr "Can view members"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:125
+#: src/views/settings/components/RolePermissions.tsx:14
+msgid "Can view workspace"
+msgstr "Can view workspace"
+
 #: src/components/DeleteLabelConfirmation.tsx:49
 #: src/components/YouTubeEmbed/EditYouTubeModal.tsx:176
 #: src/views/board/components/DeleteBoardConfirmation.tsx:44
-#: src/views/card/components/Comment.tsx:163
+#: src/views/card/components/Comment.tsx:165
 #: src/views/card/components/DeleteCardConfirmation.tsx:86
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:64
 #: src/views/card/components/DeleteCommentConfirmation.tsx:77
 #: src/views/members/components/DeleteMemberConfirmation.tsx:55
 #: src/views/settings/components/Avatar.tsx:306
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:168
+#: src/views/settings/components/ClearCustomPermissionsConfirmation.tsx:40
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:106
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/views/card/index.tsx:273
+#: src/views/card/index.tsx:290
 msgid "Card"
 msgstr "Card"
 
-#: src/views/card/index.tsx:307
-#: src/views/card/index.tsx:343
+#: src/views/card/index.tsx:324
+#: src/views/card/index.tsx:361
 msgid "Card not found"
 msgstr "Card not found"
 
@@ -513,6 +646,19 @@ msgstr "Checklist name"
 msgid "Checklists"
 msgstr "Checklists"
 
+#: src/views/settings/components/ClearCustomPermissionsConfirmation.tsx:32
+msgid "Clear all custom permissions?"
+msgstr "Clear all custom permissions?"
+
+#: src/views/settings/PermissionsSettings.tsx:65
+msgid "Clear any custom member permissions so that all members only inherit permissions from their role defaults."
+msgstr "Clear any custom member permissions so that all members only inherit permissions from their role defaults."
+
+#: src/views/settings/components/ClearCustomPermissionsConfirmation.tsx:48
+#: src/views/settings/PermissionsSettings.tsx:78
+msgid "Clear custom permissions"
+msgstr "Clear custom permissions"
+
 #: src/views/board/components/Filters.tsx:227
 msgid "Clear filters"
 msgstr "Clear filters"
@@ -522,6 +668,7 @@ msgstr "Clear filters"
 msgid "Click on the link we've sent to {magicLinkRecipient} to sign in."
 msgstr "Click on the link we've sent to {magicLinkRecipient} to sign in."
 
+#: src/views/members/components/EditMemberPermissionsModal.tsx:172
 #: src/views/settings/components/NewApiKeyModal.tsx:136
 msgid "Close"
 msgstr "Close"
@@ -573,6 +720,10 @@ msgstr "completed a checklist item"
 #: src/views/card/components/ActivityList.tsx:223
 msgid "completed checklist item <0>{0}</0>"
 msgstr "completed checklist item <0>{0}</0>"
+
+#: src/views/settings/PermissionsSettings.tsx:54
+msgid "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role."
+msgstr "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role."
 
 #: src/views/settings/components/CustomURLConfirmation.tsx:47
 #~ msgid "Confirm URL change"
@@ -677,8 +828,8 @@ msgid "Create list"
 msgstr "Create list"
 
 #. placeholder {0}: isTemplate ? "template" : "board"
-#: src/views/boards/components/BoardsList.tsx:45
-#: src/views/boards/index.tsx:26
+#: src/views/boards/components/BoardsList.tsx:58
+#: src/views/boards/index.tsx:28
 msgid "Create new {0}"
 msgstr "Create new {0}"
 
@@ -691,12 +842,12 @@ msgid "Create new key"
 msgstr "Create new key"
 
 #: src/views/board/components/NewCardForm.tsx:415
-#: src/views/card/components/LabelSelector.tsx:98
+#: src/views/card/components/LabelSelector.tsx:100
 msgid "Create new label"
 msgstr "Create new label"
 
-#: src/views/board/index.tsx:71
-#: src/views/board/index.tsx:517
+#: src/views/board/index.tsx:74
+#: src/views/board/index.tsx:537
 msgid "Create new list"
 msgstr "Create new list"
 
@@ -737,6 +888,10 @@ msgstr "Custom board templates"
 #: src/views/pricing/components/PricingTiers.tsx:71
 msgid "Custom domain"
 msgstr "Custom domain"
+
+#: src/views/settings/PermissionsSettings.tsx:62
+msgid "Custom permissions"
+msgstr "Custom permissions"
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:72
 msgid "Custom templates"
@@ -791,29 +946,29 @@ msgstr "Delete"
 msgid "Delete account"
 msgstr "Delete account"
 
-#: src/views/board/components/BoardDropdown.tsx:48
+#: src/views/board/components/BoardDropdown.tsx:55
 msgid "Delete board"
 msgstr "Delete board"
 
-#: src/views/card/components/Dropdown.tsx:25
+#: src/views/card/components/Dropdown.tsx:39
 msgid "Delete card"
 msgstr "Delete card"
 
-#: src/views/card/components/Comment.tsx:95
+#: src/views/card/components/Comment.tsx:97
 msgid "Delete comment"
 msgstr "Delete comment"
 
-#: src/views/board/components/List.tsx:117
+#: src/views/board/components/List.tsx:147
 msgid "Delete list"
 msgstr "Delete list"
 
-#: src/views/board/components/BoardDropdown.tsx:48
+#: src/views/board/components/BoardDropdown.tsx:55
 msgid "Delete template"
 msgstr "Delete template"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:106
-#: src/views/settings/WorkspaceSettings.tsx:106
-#: src/views/settings/WorkspaceSettings.tsx:117
+#: src/views/settings/WorkspaceSettings.tsx:114
+#: src/views/settings/WorkspaceSettings.tsx:125
 msgid "Delete workspace"
 msgstr "Delete workspace"
 
@@ -903,7 +1058,7 @@ msgstr "Download failed"
 
 #: src/views/board/components/Filters.tsx:171
 #: src/views/board/components/NewCardForm.tsx:470
-#: src/views/card/index.tsx:140
+#: src/views/card/index.tsx:151
 msgid "Due date"
 msgstr "Due date"
 
@@ -927,18 +1082,23 @@ msgstr "Due tomorrow"
 msgid "Edit"
 msgstr "Edit"
 
-#: src/views/board/components/BoardDropdown.tsx:41
+#: src/views/board/components/BoardDropdown.tsx:44
 #: src/views/board/components/UpdateBoardSlugForm.tsx:116
 msgid "Edit board URL"
 msgstr "Edit board URL"
 
-#: src/views/card/components/Comment.tsx:86
+#: src/views/card/components/Comment.tsx:88
 msgid "Edit comment"
 msgstr "Edit comment"
 
 #: src/components/LabelForm.tsx:119
 msgid "Edit label"
 msgstr "Edit label"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:162
+#: src/views/members/index.tsx:223
+msgid "Edit permissions"
+msgstr "Edit permissions"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:162
 msgid "Edit workspace URL"
@@ -961,7 +1121,7 @@ msgstr "email"
 msgid "Email"
 msgstr "Email"
 
-#: src/views/settings/WorkspaceSettings.tsx:84
+#: src/views/settings/WorkspaceSettings.tsx:89
 msgid "Email visibility"
 msgstr "Email visibility"
 
@@ -1044,15 +1204,15 @@ msgstr "Error updating display name"
 msgid "Error updating profile image"
 msgstr "Error updating profile image"
 
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:61
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:63
 msgid "Error updating workspace description"
 msgstr "Error updating workspace description"
 
-#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:56
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:58
 msgid "Error updating workspace name"
 msgstr "Error updating workspace name"
 
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:73
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:75
 msgid "Error updating workspace URL"
 msgstr "Error updating workspace URL"
 
@@ -1182,7 +1342,7 @@ msgid "Free"
 msgstr "Free"
 
 #: src/views/members/components/InviteMemberForm.tsx:333
-#: src/views/members/index.tsx:217
+#: src/views/members/index.tsx:292
 msgid "Free Plan"
 msgstr "Free Plan"
 
@@ -1218,7 +1378,7 @@ msgid "Get Started"
 msgstr "Get Started"
 
 #. placeholder {0}: isTemplate ? "template" : "board"
-#: src/views/boards/components/BoardsList.tsx:41
+#: src/views/boards/components/BoardsList.tsx:44
 msgid "Get started by creating a new {0}"
 msgstr "Get started by creating a new {0}"
 
@@ -1226,7 +1386,7 @@ msgstr "Get started by creating a new {0}"
 #~ msgid "Get started by creating a new board"
 #~ msgstr "Get started by creating a new board"
 
-#: src/views/board/index.tsx:509
+#: src/views/board/index.tsx:522
 msgid "Get started by creating a new list"
 msgstr "Get started by creating a new list"
 
@@ -1275,6 +1435,10 @@ msgstr "Go to settings"
 #: src/components/SideNavigation.tsx:118
 msgid "Go to templates"
 msgstr "Go to templates"
+
+#: src/views/members/index.tsx:202
+msgid "Guest"
+msgstr "Guest"
 
 #: src/views/boards/components/TemplateBoards.tsx:18
 msgid "High Priority"
@@ -1333,7 +1497,7 @@ msgstr "Ideas to improve this page..."
 #~ msgid "Ideas, Research, Planning, Execution, Review, Next Steps, Complete"
 #~ msgstr "Ideas, Research, Planning, Execution, Review, Next Steps, Complete"
 
-#: src/views/boards/index.tsx:50
+#: src/views/boards/index.tsx:60
 msgid "Import"
 msgstr "Import"
 
@@ -1380,7 +1544,7 @@ msgstr "In Progress"
 msgid "Individuals"
 msgstr "Individuals"
 
-#: src/components/SettingsLayout.tsx:57
+#: src/components/SettingsLayout.tsx:70
 #: src/views/home/components/Features.tsx:121
 msgid "Integrations"
 msgstr "Integrations"
@@ -1401,7 +1565,7 @@ msgstr "Invalid email address"
 msgid "Invalid invitation"
 msgstr "Invalid invitation"
 
-#: src/views/members/index.tsx:230
+#: src/views/members/index.tsx:305
 msgid "Invite"
 msgstr "Invite"
 
@@ -1425,7 +1589,7 @@ msgstr "Invite links"
 msgid "Invite links require a Team or Pro subscription. Please upgrade your workspace."
 msgstr "Invite links require a Team or Pro subscription. Please upgrade your workspace."
 
-#: src/views/card/components/MemberSelector.tsx:112
+#: src/views/card/components/MemberSelector.tsx:114
 #: src/views/members/components/InviteMemberForm.tsx:367
 msgid "Invite member"
 msgstr "Invite member"
@@ -1474,7 +1638,7 @@ msgstr "Keyboard Shortcuts"
 
 #: src/views/board/components/Filters.tsx:155
 #: src/views/board/components/NewCardForm.tsx:419
-#: src/views/card/index.tsx:122
+#: src/views/card/index.tsx:131
 msgid "Labels"
 msgstr "Labels"
 
@@ -1495,7 +1659,7 @@ msgstr "Language"
 msgid "Launch offer"
 msgstr "Launch offer"
 
-#: src/views/members/index.tsx:200
+#: src/views/members/index.tsx:275
 msgid "Launch offer: Get unlimited members with Pro"
 msgstr "Launch offer: Get unlimited members with Pro"
 
@@ -1528,7 +1692,7 @@ msgstr "Light"
 msgid "Link copied"
 msgstr "Link copied"
 
-#: src/views/card/index.tsx:114
+#: src/views/card/index.tsx:122
 msgid "List"
 msgstr "List"
 
@@ -1543,6 +1707,10 @@ msgstr "Lists"
 #: src/views/card/components/ActivityList.tsx:533
 msgid "Load more activities"
 msgstr "Load more activities"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:180
+msgid "Loading permissions..."
+msgstr "Loading permissions..."
 
 #: src/views/card/components/ActivityList.tsx:533
 msgid "Loading..."
@@ -1589,16 +1757,20 @@ msgstr "marked checklist item <0>{0}</0> as incomplete"
 msgid "Medium Priority"
 msgstr "Medium Priority"
 
+#: src/views/members/index.tsx:201
+msgid "Member"
+msgstr "Member"
+
 #: src/components/SideNavigation.tsx:122
 #: src/views/board/components/Filters.tsx:147
 #: src/views/board/components/NewCardForm.tsx:377
-#: src/views/card/index.tsx:131
-#: src/views/members/index.tsx:187
+#: src/views/card/index.tsx:141
+#: src/views/members/index.tsx:262
 msgid "Members"
 msgstr "Members"
 
 #. placeholder {0}: workspace.name ?? t`Workspace`
-#: src/views/members/index.tsx:182
+#: src/views/members/index.tsx:257
 msgid "Members | {0}"
 msgstr "Members | {0}"
 
@@ -1643,7 +1815,7 @@ msgstr "Navigation"
 msgid "Need help?"
 msgstr "Need help?"
 
-#: src/views/boards/index.tsx:62
+#: src/views/boards/index.tsx:82
 #: src/views/home/components/Features.tsx:73
 msgid "New"
 msgstr "New"
@@ -1678,7 +1850,7 @@ msgid "New label"
 msgstr "New label"
 
 #: src/views/board/components/NewListForm.tsx:113
-#: src/views/board/index.tsx:476
+#: src/views/board/index.tsx:488
 msgid "New list"
 msgstr "New list"
 
@@ -1715,7 +1887,7 @@ msgid "Next Steps"
 msgstr "Next Steps"
 
 #. placeholder {0}: isTemplate ? "templates" : "boards"
-#: src/views/boards/components/BoardsList.tsx:38
+#: src/views/boards/components/BoardsList.tsx:41
 msgid "No {0}"
 msgstr "No {0}"
 
@@ -1747,13 +1919,21 @@ msgstr "No download URL available for this attachment."
 msgid "No keyboard shortcuts registered."
 msgstr "No keyboard shortcuts registered."
 
-#: src/views/board/index.tsx:506
+#: src/views/board/index.tsx:518
 msgid "No lists"
 msgstr "No lists"
+
+#: src/views/board/index.tsx:523
+msgid "No lists have been created yet"
+msgstr "No lists have been created yet"
 
 #: src/components/CommandPallette.tsx:184
 msgid "No results found for \"{debouncedQuery}\"."
 msgstr "No results found for \"{debouncedQuery}\"."
+
+#: src/views/settings/components/RolePermissions.tsx:110
+msgid "No roles found for this workspace yet."
+msgstr "No roles found for this workspace yet."
 
 #: src/views/boards/components/TemplateBoards.tsx:66
 msgid "Offer"
@@ -1767,7 +1947,7 @@ msgstr "Onboarding"
 msgid "Once you delete your account, there is no going back. This action cannot be undone."
 msgstr "Once you delete your account, there is no going back. This action cannot be undone."
 
-#: src/views/settings/WorkspaceSettings.tsx:109
+#: src/views/settings/WorkspaceSettings.tsx:117
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Once you delete your workspace, there is no going back. This action cannot be undone."
 
@@ -1804,6 +1984,10 @@ msgstr "OSS Friends"
 msgid "Overdue"
 msgstr "Overdue"
 
+#: src/views/settings/PermissionsSettings.tsx:25
+msgid "Overrides cleared"
+msgstr "Overrides cleared"
+
 #: src/views/pricing/components/Pricing.tsx:73
 #: src/views/pricing/components/PricingTiers.tsx:70
 msgid "Own your data"
@@ -1837,7 +2021,7 @@ msgstr "Password must be at least 8 characters"
 msgid "Passwords do not match"
 msgstr "Passwords do not match"
 
-#: src/views/members/index.tsx:143
+#: src/views/members/index.tsx:209
 msgid "Paused"
 msgstr "Paused"
 
@@ -1846,7 +2030,7 @@ msgstr "Paused"
 msgid "Payment frequency"
 msgstr "Payment frequency"
 
-#: src/views/members/index.tsx:143
+#: src/views/members/index.tsx:209
 msgid "Pending"
 msgstr "Pending"
 
@@ -1856,6 +2040,23 @@ msgstr "Pending"
 #: src/views/pricing/index.tsx:26
 msgid "per user/month"
 msgstr "per user/month"
+
+#: src/views/settings/components/RolePermissions.tsx:119
+msgid "Permission"
+msgstr "Permission"
+
+#: src/components/SettingsLayout.tsx:52
+msgid "Permissions"
+msgstr "Permissions"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:80
+msgid "Permissions reset"
+msgstr "Permissions reset"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:34
+#: src/views/members/components/EditMemberPermissionsModal.tsx:57
+msgid "Permissions updated"
+msgstr "Permissions updated"
 
 #: src/views/boards/components/TemplateBoards.tsx:74
 msgid "Personal Project"
@@ -1902,40 +2103,45 @@ msgstr "Please select a file to upload."
 #: src/views/board/components/NewTemplateForm.tsx:61
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:73
-#: src/views/board/components/VisibilityButton.tsx:54
-#: src/views/board/index.tsx:177
-#: src/views/board/index.tsx:233
+#: src/views/board/components/VisibilityButton.tsx:57
+#: src/views/board/index.tsx:180
+#: src/views/board/index.tsx:236
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/AttachmentThumbnails.tsx:74
 #: src/views/card/components/ChecklistItemRow.tsx:69
 #: src/views/card/components/ChecklistItemRow.tsx:97
 #: src/views/card/components/ChecklistNameInput.tsx:47
 #: src/views/card/components/Checklists.tsx:81
-#: src/views/card/components/Comment.tsx:68
+#: src/views/card/components/Comment.tsx:70
 #: src/views/card/components/DeleteCardConfirmation.tsx:52
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:38
 #: src/views/card/components/DeleteCommentConfirmation.tsx:46
-#: src/views/card/components/DueDateSelector.tsx:60
-#: src/views/card/components/LabelSelector.tsx:73
-#: src/views/card/components/ListSelector.tsx:53
-#: src/views/card/components/MemberSelector.tsx:80
+#: src/views/card/components/DueDateSelector.tsx:62
+#: src/views/card/components/LabelSelector.tsx:75
+#: src/views/card/components/ListSelector.tsx:55
+#: src/views/card/components/MemberSelector.tsx:82
 #: src/views/card/components/NewChecklistForm.tsx:71
 #: src/views/card/components/NewChecklistItemForm.tsx:90
-#: src/views/card/components/NewCommentForm.tsx:32
-#: src/views/card/index.tsx:188
-#: src/views/card/index.tsx:201
+#: src/views/card/components/NewCommentForm.tsx:34
+#: src/views/card/index.tsx:205
+#: src/views/card/index.tsx:218
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
+#: src/views/members/components/EditMemberPermissionsModal.tsx:42
+#: src/views/members/components/EditMemberPermissionsModal.tsx:65
+#: src/views/members/components/EditMemberPermissionsModal.tsx:93
 #: src/views/members/components/InviteMemberForm.tsx:104
 #: src/views/members/components/InviteMemberForm.tsx:241
+#: src/views/members/index.tsx:64
 #: src/views/settings/components/Avatar.tsx:78
 #: src/views/settings/components/Avatar.tsx:219
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:40
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:46
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:55
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:62
-#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:57
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:74
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:64
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:59
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:76
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:42
+#: src/views/settings/PermissionsSettings.tsx:38
 msgid "Please try again later, or contact customer support."
 msgstr "Please try again later, or contact customer support."
 
@@ -1967,11 +2173,11 @@ msgstr "Priority email support"
 msgid "Privacy policy"
 msgstr "Privacy policy"
 
-#: src/views/board/components/VisibilityButton.tsx:74
+#: src/views/board/components/VisibilityButton.tsx:84
 msgid "Private"
 msgstr "Private"
 
-#: src/views/members/index.tsx:214
+#: src/views/members/index.tsx:289
 msgid "Pro Plan"
 msgstr "Pro Plan"
 
@@ -1987,7 +2193,7 @@ msgstr "Profile image updated"
 msgid "Profile picture"
 msgstr "Profile picture"
 
-#: src/views/board/components/VisibilityButton.tsx:69
+#: src/views/board/components/VisibilityButton.tsx:79
 msgid "Public"
 msgstr "Public"
 
@@ -2019,7 +2225,7 @@ msgstr "Remote"
 msgid "Remove"
 msgstr "Remove"
 
-#: src/views/members/index.tsx:157
+#: src/views/members/index.tsx:232
 msgid "Remove member"
 msgstr "Remove member"
 
@@ -2068,6 +2274,10 @@ msgstr "renamed checklist item to <0>{0}</0>"
 msgid "Research"
 msgstr "Research"
 
+#: src/views/members/components/EditMemberPermissionsModal.tsx:245
+msgid "Reset to role defaults"
+msgstr "Reset to role defaults"
+
 #: src/views/boards/components/TemplateBoards.tsx:48
 msgid "Resolution"
 msgstr "Resolution"
@@ -2094,9 +2304,13 @@ msgstr "Review"
 msgid "Roadmap"
 msgstr "Roadmap"
 
-#: src/views/members/index.tsx:252
+#: src/views/members/index.tsx:327
 msgid "Role"
 msgstr "Role"
+
+#: src/views/members/index.tsx:56
+msgid "Role updated"
+msgstr "Role updated"
 
 #: src/views/pricing/components/Pricing.tsx:72
 #: src/views/pricing/components/PricingTiers.tsx:69
@@ -2104,7 +2318,7 @@ msgid "Run on your own infrastructure"
 msgstr "Run on your own infrastructure"
 
 #: src/components/YouTubeEmbed/EditYouTubeModal.tsx:183
-#: src/views/card/components/Comment.tsx:170
+#: src/views/card/components/Comment.tsx:172
 #: src/views/settings/components/Avatar.tsx:309
 msgid "Save"
 msgstr "Save"
@@ -2162,7 +2376,7 @@ msgstr "Send feedback"
 msgid "Senior"
 msgstr "Senior"
 
-#: src/views/card/components/DueDateSelector.tsx:117
+#: src/views/card/components/DueDateSelector.tsx:119
 msgid "Set due date"
 msgstr "Set due date"
 
@@ -2170,7 +2384,7 @@ msgstr "Set due date"
 msgid "set the due date"
 msgstr "set the due date"
 
-#: src/components/SettingsLayout.tsx:82
+#: src/components/SettingsLayout.tsx:95
 #: src/components/SideNavigation.tsx:134
 msgid "Settings"
 msgstr "Settings"
@@ -2195,7 +2409,11 @@ msgstr "Settings | Billing"
 msgid "Settings | Integrations"
 msgstr "Settings | Integrations"
 
-#: src/views/settings/WorkspaceSettings.tsx:55
+#: src/views/settings/PermissionsSettings.tsx:47
+msgid "Settings | Permissions"
+msgstr "Settings | Permissions"
+
+#: src/views/settings/WorkspaceSettings.tsx:57
 msgid "Settings | Workspace"
 msgstr "Settings | Workspace"
 
@@ -2289,7 +2507,7 @@ msgid "System"
 msgstr "System"
 
 #: src/views/members/components/InviteMemberForm.tsx:322
-#: src/views/members/index.tsx:216
+#: src/views/members/index.tsx:291
 msgid "Team Plan"
 msgstr "Team Plan"
 
@@ -2299,8 +2517,8 @@ msgstr "Team Plan"
 msgid "Teams"
 msgstr "Teams"
 
-#: src/views/board/index.tsx:396
-#: src/views/board/index.tsx:431
+#: src/views/board/index.tsx:399
+#: src/views/board/index.tsx:436
 msgid "Template"
 msgstr "Template"
 
@@ -2345,12 +2563,21 @@ msgstr "The current password you entered is incorrect."
 msgid "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
 msgstr "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
 
+#: src/views/members/components/EditMemberPermissionsModal.tsx:35
+#: src/views/members/components/EditMemberPermissionsModal.tsx:58
+msgid "The member's permissions have been updated."
+msgstr "The member's permissions have been updated."
+
+#: src/views/members/index.tsx:57
+msgid "The member's role has been updated."
+msgstr "The member's role has been updated."
+
 #: src/views/home/index.tsx:65
 msgid "The open source <0/> alternative to Trello"
 msgstr "The open source <0/> alternative to Trello"
 
 #. placeholder {0}: isPublic ? "public" : "private"
-#: src/views/board/components/VisibilityButton.tsx:47
+#: src/views/board/components/VisibilityButton.tsx:50
 msgid "The visibility of your board has been set to {0}."
 msgstr "The visibility of your board has been set to {0}."
 
@@ -2386,6 +2613,14 @@ msgstr "This board URL has already been taken"
 msgid "This invitation link is invalid or has expired."
 msgstr "This invitation link is invalid or has expired."
 
+#: src/views/members/components/EditMemberPermissionsModal.tsx:81
+msgid "This member's permissions have been reset to their role defaults."
+msgstr "This member's permissions have been reset to their role defaults."
+
+#: src/views/settings/components/ClearCustomPermissionsConfirmation.tsx:35
+msgid "This will remove all custom member permissions in this workspace. Members will inherit permissions only from their roles."
+msgstr "This will remove all custom member permissions in this workspace. Members will inherit permissions only from their roles."
+
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:70
 msgid "This will result in the permanent deletion of all data associated with this workspace."
 msgstr "This will result in the permanent deletion of all data associated with this workspace."
@@ -2402,7 +2637,7 @@ msgstr "This workspace URL has already been taken"
 msgid "This workspace URL is reserved"
 msgstr "This workspace URL is reserved"
 
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:123
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:125
 msgid "This workspace username has already been taken"
 msgstr "This workspace username has already been taken"
 
@@ -2456,13 +2691,17 @@ msgstr "Trusted by fast-moving teams<0/>around the world"
 msgid "Unable to add checklist item"
 msgstr "Unable to add checklist item"
 
-#: src/views/card/components/NewCommentForm.tsx:31
+#: src/views/card/components/NewCommentForm.tsx:33
 msgid "Unable to add comment"
 msgstr "Unable to add comment"
 
-#: src/views/card/index.tsx:200
+#: src/views/card/index.tsx:217
 msgid "Unable to add label"
 msgstr "Unable to add label"
+
+#: src/views/settings/PermissionsSettings.tsx:37
+msgid "Unable to clear overrides"
+msgstr "Unable to clear overrides"
 
 #: src/views/board/components/NewCardForm.tsx:181
 msgid "Unable to create card"
@@ -2513,6 +2752,10 @@ msgstr "Unable to remove member"
 msgid "Unable to reorder checklist item"
 msgstr "Unable to reorder checklist item"
 
+#: src/views/members/components/EditMemberPermissionsModal.tsx:92
+msgid "Unable to reset permissions"
+msgstr "Unable to reset permissions"
+
 #: src/components/FeedbackModal.tsx:40
 msgid "Unable to send feedback"
 msgstr "Unable to send feedback"
@@ -2521,12 +2764,12 @@ msgstr "Unable to send feedback"
 msgid "Unable to update board URL"
 msgstr "Unable to update board URL"
 
-#: src/views/board/components/VisibilityButton.tsx:53
+#: src/views/board/components/VisibilityButton.tsx:56
 msgid "Unable to update board visibility"
 msgstr "Unable to update board visibility"
 
-#: src/views/board/index.tsx:232
-#: src/views/card/index.tsx:187
+#: src/views/board/index.tsx:235
+#: src/views/card/index.tsx:204
 msgid "Unable to update card"
 msgstr "Unable to update card"
 
@@ -2538,26 +2781,35 @@ msgstr "Unable to update checklist"
 msgid "Unable to update checklist item"
 msgstr "Unable to update checklist item"
 
-#: src/views/card/components/Comment.tsx:67
+#: src/views/card/components/Comment.tsx:69
 msgid "Unable to update comment"
 msgstr "Unable to update comment"
 
-#: src/views/card/components/DueDateSelector.tsx:59
+#: src/views/card/components/DueDateSelector.tsx:61
 msgid "Unable to update due date"
 msgstr "Unable to update due date"
 
-#: src/views/card/components/LabelSelector.tsx:72
+#: src/views/card/components/LabelSelector.tsx:74
 msgid "Unable to update labels"
 msgstr "Unable to update labels"
 
-#: src/views/board/index.tsx:176
-#: src/views/card/components/ListSelector.tsx:52
+#: src/views/board/index.tsx:179
+#: src/views/card/components/ListSelector.tsx:54
 msgid "Unable to update list"
 msgstr "Unable to update list"
 
-#: src/views/card/components/MemberSelector.tsx:79
+#: src/views/card/components/MemberSelector.tsx:81
 msgid "Unable to update members"
 msgstr "Unable to update members"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:41
+#: src/views/members/components/EditMemberPermissionsModal.tsx:64
+msgid "Unable to update permissions"
+msgstr "Unable to update permissions"
+
+#: src/views/members/index.tsx:63
+msgid "Unable to update role"
+msgstr "Unable to update role"
 
 #. placeholder {0}: truncate(memberName)
 #: src/views/card/components/ActivityList.tsx:157
@@ -2617,9 +2869,9 @@ msgstr "Unsubscribe"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:175
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:80
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:91
-#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:83
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:154
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:94
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:89
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:157
 msgid "Update"
 msgstr "Update"
 
@@ -2658,7 +2910,7 @@ msgstr "updated the title to <0>{0}</0>"
 
 #: src/components/SideNavigation.tsx:239
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:53
-#: src/views/settings/WorkspaceSettings.tsx:99
+#: src/views/settings/WorkspaceSettings.tsx:107
 msgid "Upgrade to Pro"
 msgstr "Upgrade to Pro"
 
@@ -2681,17 +2933,17 @@ msgid "Urgent"
 msgstr "Urgent"
 
 #: src/components/NewWorkspaceForm.tsx:38
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:38
 msgid "URL can only contain letters, numbers, and hyphens"
 msgstr "URL can only contain letters, numbers, and hyphens"
 
 #: src/components/NewWorkspaceForm.tsx:36
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:34
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
 msgid "URL cannot exceed 24 characters"
 msgstr "URL cannot exceed 24 characters"
 
 #: src/components/NewWorkspaceForm.tsx:34
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:32
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:34
 msgid "URL must be at least 3 characters long"
 msgstr "URL must be at least 3 characters long"
 
@@ -2699,7 +2951,7 @@ msgstr "URL must be at least 3 characters long"
 msgid "Use template"
 msgstr "Use template"
 
-#: src/views/members/index.tsx:246
+#: src/views/members/index.tsx:321
 msgid "User"
 msgstr "User"
 
@@ -2736,7 +2988,7 @@ msgstr "View our roadmap."
 msgid "View workspace"
 msgstr "View workspace"
 
-#: src/views/board/components/VisibilityButton.tsx:92
+#: src/views/board/components/VisibilityButton.tsx:103
 msgid "Visibility"
 msgstr "Visibility"
 
@@ -2784,10 +3036,10 @@ msgstr "White label"
 msgid "Why make an open source Trello?"
 msgstr "Why make an open source Trello?"
 
-#: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:396
-#: src/views/boards/index.tsx:33
-#: src/views/members/index.tsx:182
+#: src/components/SettingsLayout.tsx:46
+#: src/views/board/index.tsx:399
+#: src/views/boards/index.tsx:35
+#: src/views/members/index.tsx:257
 #: src/views/public/board/index.tsx:120
 #: src/views/public/boards/index.tsx:66
 msgid "Workspace"
@@ -2801,19 +3053,19 @@ msgstr "Workspace created successfully. You can upgrade later in settings."
 msgid "Workspace deleted"
 msgstr "Workspace deleted"
 
-#: src/views/settings/WorkspaceSettings.tsx:76
+#: src/views/settings/WorkspaceSettings.tsx:80
 msgid "Workspace description"
 msgstr "Workspace description"
 
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:28
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:30
 msgid "Workspace description cannot exceed 280 characters"
 msgstr "Workspace description cannot exceed 280 characters"
 
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:25
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:27
 msgid "Workspace description must be at least 3 characters long"
 msgstr "Workspace description must be at least 3 characters long"
 
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:48
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:50
 msgid "Workspace description updated"
 msgstr "Workspace description updated"
 
@@ -2824,7 +3076,7 @@ msgid "Workspace members"
 msgstr "Workspace members"
 
 #: src/components/NewWorkspaceForm.tsx:262
-#: src/views/settings/WorkspaceSettings.tsx:59
+#: src/views/settings/WorkspaceSettings.tsx:61
 msgid "Workspace name"
 msgstr "Workspace name"
 
@@ -2845,15 +3097,19 @@ msgstr "Workspace name is required"
 msgid "Workspace name must be at least 3 characters long"
 msgstr "Workspace name must be at least 3 characters long"
 
-#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:43
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:45
 msgid "Workspace name updated"
 msgstr "Workspace name updated"
 
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:60
+#: src/views/settings/PermissionsSettings.tsx:51
+msgid "Workspace permissions"
+msgstr "Workspace permissions"
+
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:62
 msgid "Workspace slug updated"
 msgstr "Workspace slug updated"
 
-#: src/views/settings/WorkspaceSettings.tsx:67
+#: src/views/settings/WorkspaceSettings.tsx:70
 msgid "Workspace URL"
 msgstr "Workspace URL"
 
@@ -2890,6 +3146,17 @@ msgstr "You can invite team members by clicking the \"Invite\" button in the top
 msgid "You can self-host by following the instructions in our <0>repo</0>."
 msgstr "You can self-host by following the instructions in our <0>repo</0>."
 
+#: src/views/board/components/List.tsx:117
+#: src/views/board/components/UpdateBoardSlugButton.tsx:31
+#: src/views/board/components/VisibilityButton.tsx:72
+#: src/views/board/index.tsx:472
+#: src/views/board/index.tsx:528
+#: src/views/boards/components/BoardsList.tsx:49
+#: src/views/boards/index.tsx:46
+#: src/views/boards/index.tsx:67
+msgid "You don't have permission"
+msgstr "You don't have permission"
+
 #: src/components/AuthForm.tsx:233
 msgid "You have been logged in successfully."
 msgstr "You have been logged in successfully."
@@ -2905,6 +3172,10 @@ msgstr "You have been unsubscribed!"
 #: src/views/members/components/InviteMemberForm.tsx:326
 msgid "You have unlimited seats with your Pro Plan. There is no additional charge for new members!"
 msgstr "You have unlimited seats with your Pro Plan. There is no additional charge for new members!"
+
+#: src/views/settings/PermissionsSettings.tsx:84
+msgid "You need to be an admin to manage workspace permissions."
+msgstr "You need to be an admin to manage workspace permissions."
 
 #: src/views/invite/index.tsx:134
 msgid "You've been invited to join a workspace on kan.bn."
@@ -2950,7 +3221,7 @@ msgstr "Your Trello account is connected."
 msgid "Your unsubscribe link is missing a token. Please open the latest email and try again."
 msgstr "Your unsubscribe link is missing a token. Please open the latest email and try again."
 
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:49
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:51
 msgid "Your workspace description has been updated."
 msgstr "Your workspace description has been updated."
 
@@ -2958,11 +3229,11 @@ msgstr "Your workspace description has been updated."
 msgid "Your workspace has been deleted."
 msgstr "Your workspace has been deleted."
 
-#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:44
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:46
 msgid "Your workspace name has been updated."
 msgstr "Your workspace name has been updated."
 
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:61
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:63
 msgid "Your workspace slug has been updated."
 msgstr "Your workspace slug has been updated."
 

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { HiOutlineArrowUp } from "react-icons/hi2";
 
 import LoadingSpinner from "~/components/LoadingSpinner";
+import { usePermissions } from "~/hooks/usePermissions";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 import { invalidateCard } from "~/utils/cardInvalidation";
@@ -15,6 +16,7 @@ interface FormValues {
 const NewCommentForm = ({ cardPublicId }: { cardPublicId: string }) => {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
+  const { canCreateComment } = usePermissions();
   const { handleSubmit, setValue, watch, reset } = useForm<FormValues>({
     values: {
       comment: "",
@@ -45,6 +47,10 @@ const NewCommentForm = ({ cardPublicId }: { cardPublicId: string }) => {
       comment: data.comment,
     });
   };
+
+  if (!canCreateComment) {
+    return null;
+  }
 
   return (
     <form

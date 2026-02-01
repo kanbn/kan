@@ -4,6 +4,8 @@ import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 
 import Button from "~/components/Button";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
+import { Tooltip } from "~/components/Tooltip";
+import { usePermissions } from "~/hooks/usePermissions";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
@@ -29,6 +31,7 @@ const VisibilityButton = ({
   isAdmin: boolean;
 }) => {
   const { showPopup } = usePopup();
+  const { canEditBoard } = usePermissions();
   const utils = api.useUtils();
   const [stateVisibility, setStateVisibility] = useState<"public" | "private">(
     visibility,
@@ -60,38 +63,47 @@ const VisibilityButton = ({
     },
   });
 
+  const canEdit = canEditBoard || isAdmin;
+
   return (
     <div className="relative">
-      <CheckboxDropdown
-        items={[
-          {
-            key: "public",
-            value: t`Public`,
-            selected: isPublic,
-          },
-          {
-            key: "private",
-            value: t`Private`,
-            selected: !isPublic,
-          },
-        ]}
-        handleSelect={(_g, i) => {
-          setStateVisibility(isPublic ? "private" : "public");
-          updateBoardVisibility.mutate({
-            visibility: i.key as "public" | "private",
-            boardPublicId,
-          });
-        }}
-        menuSpacing="md"
+      <Tooltip
+        content={
+          !canEdit && !isLoading ? t`You don't have permission` : undefined
+        }
       >
-        <Button
-          variant="secondary"
-          iconLeft={isPublic ? <HiOutlineEye /> : <HiOutlineEyeSlash />}
-          disabled={isLoading || !isAdmin}
+        <CheckboxDropdown
+          items={[
+            {
+              key: "public",
+              value: t`Public`,
+              selected: isPublic,
+            },
+            {
+              key: "private",
+              value: t`Private`,
+              selected: !isPublic,
+            },
+          ]}
+          handleSelect={(_g, i) => {
+            if (!canEdit) return;
+            setStateVisibility(isPublic ? "private" : "public");
+            updateBoardVisibility.mutate({
+              visibility: i.key as "public" | "private",
+              boardPublicId,
+            });
+          }}
+          menuSpacing="md"
         >
-          {t`Visibility`}
-        </Button>
-      </CheckboxDropdown>
+          <Button
+            variant="secondary"
+            iconLeft={isPublic ? <HiOutlineEye /> : <HiOutlineEyeSlash />}
+            disabled={isLoading || !canEdit}
+          >
+            {t`Visibility`}
+          </Button>
+        </CheckboxDropdown>
+      </Tooltip>
     </div>
   );
 };

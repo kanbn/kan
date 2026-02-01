@@ -14,6 +14,9 @@ import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
+import { authClient } from "@kan/auth/client";
+
+import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
@@ -44,6 +47,8 @@ interface FormValues {
 
 export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   const router = useRouter();
+  const { canEditCard } = usePermissions();
+  const { data: session } = authClient.useSession();
   const cardId = Array.isArray(router.query.cardId)
     ? router.query.cardId[0]
     : router.query.cardId;
@@ -51,6 +56,9 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   const { data: card } = api.card.byId.useQuery({
     cardPublicId: cardId ?? "",
   });
+
+  const isCreator = card?.createdBy && session?.user.id === card.createdBy;
+  const canEdit = canEditCard || isCreator;
 
   const board = card?.list.board;
   const labels = board?.labels;
@@ -116,6 +124,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           cardPublicId={cardId ?? ""}
           lists={formattedLists}
           isLoading={!card}
+          disabled={!canEdit}
         />
       </div>
       <div className="mb-4 flex w-full flex-row">
@@ -124,6 +133,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           cardPublicId={cardId ?? ""}
           labels={formattedLabels}
           isLoading={!card}
+          disabled={!canEdit}
         />
       </div>
       {!isTemplate && (
@@ -133,6 +143,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
             cardPublicId={cardId ?? ""}
             members={formattedMembers}
             isLoading={!card}
+            disabled={!canEdit}
           />
         </div>
       )}
@@ -142,6 +153,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           cardPublicId={cardId ?? ""}
           dueDate={card?.dueDate}
           isLoading={!card}
+          disabled={!canEdit}
         />
       </div>
     </div>
@@ -162,6 +174,8 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   } = useModal();
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
+  const { canEditCard } = usePermissions();
+  const { data: session } = authClient.useSession();
   const [activeChecklistForm, setActiveChecklistForm] = useState<string | null>(
     null,
   );
@@ -173,6 +187,9 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const { data: card, isLoading } = api.card.byId.useQuery({
     cardPublicId: cardId ?? "",
   });
+
+  const isCreator = card?.createdBy && session?.user.id === card.createdBy;
+  const canEdit = canEditCard || isCreator;
 
   const refetchCard = async () => {
     if (cardId) await utils.card.byId.refetch({ cardPublicId: cardId });
@@ -298,7 +315,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                 </Link>
               </div>
               <div className="flex items-center gap-2">
-                <Dropdown />
+                <Dropdown cardCreatedBy={card?.createdBy} />
               </div>
             </>
           )}
@@ -326,9 +343,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                       <textarea
                         id="title"
                         {...register("title")}
-                        onBlur={handleSubmit(onSubmit)}
+                        onBlur={canEdit ? handleSubmit(onSubmit) : undefined}
                         rows={1}
-                        className="block w-full resize-none overflow-hidden border-0 bg-transparent p-0 py-0 font-bold leading-relaxed text-neutral-900 focus:ring-0 dark:text-dark-1000 sm:text-[1.2rem]"
+                        disabled={!canEdit}
+                        className={`block w-full resize-none overflow-hidden border-0 bg-transparent p-0 py-0 font-bold leading-relaxed text-neutral-900 focus:ring-0 dark:text-dark-1000 sm:text-[1.2rem] ${!canEdit ? "cursor-default" : ""}`}
                         onInput={(e) => {
                           const target = e.target as HTMLTextAreaElement;
                           target.style.height = "auto";
@@ -354,9 +372,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                       <div className="mt-2">
                         <Editor
                           content={card.description}
-                          onChange={(e) => setValue("description", e)}
-                          onBlur={() => handleSubmit(onSubmit)()}
+                          onChange={canEdit ? (e) => setValue("description", e) : undefined}
+                          onBlur={canEdit ? () => handleSubmit(onSubmit)() : undefined}
                           workspaceMembers={board?.workspace.members ?? []}
+                          readOnly={!canEdit}
                         />
                       </div>
                     </form>
@@ -366,6 +385,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                     cardPublicId={cardId}
                     activeChecklistForm={activeChecklistForm}
                     setActiveChecklistForm={setActiveChecklistForm}
+                    viewOnly={!canEdit}
                   />
                   {!isTemplate && (
                     <>
@@ -374,12 +394,15 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                           <AttachmentThumbnails
                             attachments={card.attachments}
                             cardPublicId={cardId ?? ""}
+                            isReadOnly={!canEdit}
                           />
                         </div>
                       )}
-                      <div className="mt-6">
-                        <AttachmentUpload cardPublicId={cardId} />
-                      </div>
+                      {canEdit && (
+                        <div className="mt-6">
+                          <AttachmentUpload cardPublicId={cardId} />
+                        </div>
+                      )}
                     </>
                   )}
                   <div className="border-t-[1px] border-light-300 pt-12 dark:border-dark-300">

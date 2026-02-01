@@ -18,7 +18,33 @@ import {
   workspaceMembers,
   workspaces,
 } from "@kan/db/schema";
-import { generateUID } from "@kan/shared/utils";
+import type { Permission, Role } from "@kan/shared";
+import { generateUID, getDefaultPermissions } from "@kan/shared";
+
+import * as permissionRepo from "./permission.repo";
+
+// System role definitions
+const SYSTEM_ROLES: {
+  name: Role;
+  description: string;
+  hierarchyLevel: number;
+}[] = [
+  {
+    name: "admin",
+    description: "Full access to all workspace features",
+    hierarchyLevel: 100,
+  },
+  {
+    name: "member",
+    description: "Standard member with create and edit permissions",
+    hierarchyLevel: 50,
+  },
+  {
+    name: "guest",
+    description: "View-only access",
+    hierarchyLevel: 10,
+  },
+];
 
 export const getCount = async (db: dbClient) => {
   const result = await db
@@ -57,6 +83,22 @@ export const create = async (
     });
 
   if (workspace) {
+    // Create system roles for the workspace
+    let adminRoleId: number | null = null;
+    for (const roleData of SYSTEM_ROLES) {
+      const role = await permissionRepo.createRole(db, {
+        workspaceId: workspace.id,
+        name: roleData.name,
+        description: roleData.description,
+        hierarchyLevel: roleData.hierarchyLevel,
+        isSystem: true,
+        permissions: [...getDefaultPermissions(roleData.name)] as Permission[],
+      });
+      if (roleData.name === "admin" && role) {
+        adminRoleId = role.id;
+      }
+    }
+
     await db.insert(workspaceMembers).values({
       publicId: generateUID(),
       userId: workspaceInput.createdBy,
@@ -64,6 +106,7 @@ export const create = async (
       workspaceId: workspace.id,
       createdBy: workspaceInput.createdBy,
       role: "admin",
+      roleId: adminRoleId,
       status: "active",
     });
   }
@@ -151,8 +194,13 @@ export const getByPublicIdWithMembers = (
           email: true,
           role: true,
           status: true,
+          createdAt: true,
         },
         where: isNull(workspaceMembers.deletedAt),
+        orderBy: (member, { desc }) => [
+          desc(sql`CASE WHEN ${member.role} = 'admin' THEN 1 ELSE 0 END`),
+          desc(member.createdAt),
+        ],
         with: {
           user: {
             columns: {

@@ -518,6 +518,7 @@ export const getWithListIdsByPublicId = (
     columns: {
       id: true,
       workspaceId: true,
+      createdBy: true,
     },
     with: {
       lists: {
@@ -671,6 +672,7 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
     columns: {
       id: true,
       workspaceId: true,
+      createdBy: true,
     },
     where: eq(boards.publicId, boardPublicId),
   });

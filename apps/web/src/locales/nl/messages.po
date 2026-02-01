@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/views/card/components/Comment.tsx:128
+#: src/views/card/components/Comment.tsx:130
 msgid " (edited)"
 msgstr " (bewerkt)"
 
@@ -22,7 +22,7 @@ msgid ", or see our"
 msgstr ", of bekijk onze"
 
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#: src/views/boards/index.tsx:38
+#: src/views/boards/index.tsx:40
 msgid "{0}"
 msgstr "{0}"
 
@@ -30,8 +30,8 @@ msgstr "{0}"
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
-#: src/views/boards/index.tsx:33
-#: src/views/card/index.tsx:273
+#: src/views/boards/index.tsx:35
+#: src/views/card/index.tsx:290
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
@@ -41,7 +41,7 @@ msgid "{0} labels"
 msgstr "{0} labels"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:422
+#: src/views/board/index.tsx:427
 msgid "{0} not found"
 msgstr "{0} niet gevonden"
 
@@ -71,7 +71,7 @@ msgstr "14 dagen gratis proefperiode"
 msgid "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
 msgstr "Een krachtige, flexibele kanban-app die je helpt werk te organiseren, voortgang bij te houden en resultaten te leveren—allemaal op één plek."
 
-#: src/components/SettingsLayout.tsx:33
+#: src/components/SettingsLayout.tsx:40
 msgid "Account"
 msgstr "Account"
 
@@ -83,7 +83,7 @@ msgstr "Account verwijderd"
 msgid "Actions"
 msgstr "Acties"
 
-#: src/views/card/index.tsx:387
+#: src/views/card/index.tsx:410
 #: src/views/public/board/CardModal.tsx:158
 msgid "Activity"
 msgstr "Activiteit"
@@ -96,12 +96,12 @@ msgstr "Activiteitenlogboek"
 msgid "Activity logs"
 msgstr "Activiteitenlogboeken"
 
-#: src/views/board/components/List.tsx:110
+#: src/views/board/components/List.tsx:136
 msgid "Add a card"
 msgstr "Voeg een kaart toe"
 
-#: src/views/card/components/Comment.tsx:151
-#: src/views/card/components/NewCommentForm.tsx:55
+#: src/views/card/components/Comment.tsx:153
+#: src/views/card/components/NewCommentForm.tsx:61
 msgid "Add a comment..."
 msgstr "Voeg een reactie toe..."
 
@@ -109,7 +109,7 @@ msgstr "Voeg een reactie toe..."
 msgid "Add an item..."
 msgstr "Voeg een item toe..."
 
-#: src/views/card/components/Dropdown.tsx:18
+#: src/views/card/components/Dropdown.tsx:28
 msgid "Add checklist"
 msgstr "Checklist toevoegen"
 
@@ -121,12 +121,12 @@ msgstr "Beschrijving toevoegen... (typ '/' om commando's te openen of '@' om te 
 msgid "Add details..."
 msgstr "Details toevoegen..."
 
-#: src/views/card/components/LabelSelector.tsx:110
-#: src/views/card/components/LabelSelector.tsx:115
+#: src/views/card/components/LabelSelector.tsx:113
+#: src/views/card/components/LabelSelector.tsx:118
 msgid "Add label"
 msgstr "Label toevoegen"
 
-#: src/views/card/components/MemberSelector.tsx:131
+#: src/views/card/components/MemberSelector.tsx:134
 #: src/views/members/components/InviteMemberForm.tsx:257
 msgid "Add member"
 msgstr "Lid toevoegen"
@@ -175,16 +175,24 @@ msgstr "Het toevoegen van een nieuw lid kost een extra {price} ({billingType}) p
 msgid "Adjust the square crop to fit your avatar."
 msgstr "Pas de vierkante uitsnede aan zodat je avatar goed past."
 
+#: src/views/members/index.tsx:200
+msgid "Admin"
+msgstr "Beheerder"
+
 #: src/views/pricing/components/Pricing.tsx:55
 #: src/views/pricing/components/PricingTiers.tsx:52
 msgid "Admin roles"
 msgstr "Beheerdersrollen"
 
+#: src/views/settings/PermissionsSettings.tsx:26
+msgid "All member permission overrides have been reset to their role defaults."
+msgstr "Alle aangepaste rechten van leden zijn teruggezet naar de standaardinstellingen van hun rol."
+
 #: src/views/home/components/Footer.tsx:18
 msgid "All systems operational"
 msgstr "Alle systemen operationeel"
 
-#: src/views/settings/components/UpdateWorkspaceEmailVisibilityForm.tsx:42
+#: src/views/settings/components/UpdateWorkspaceEmailVisibilityForm.tsx:45
 msgid "Allow workspace members to see each other's email addresses"
 msgstr "Sta werkruimteleden toe elkaars e-mailadressen te zien"
 
@@ -204,7 +212,7 @@ msgstr "Er is een onverwachte fout opgetreden. Probeer het later opnieuw."
 msgid "Anyone with this link can join your workspace"
 msgstr "Iedereen met deze link kan deelnemen aan je werkruimte"
 
-#: src/components/SettingsLayout.tsx:51
+#: src/components/SettingsLayout.tsx:64
 msgid "API"
 msgstr "API"
 
@@ -307,7 +315,7 @@ msgstr "jaarlijks gefactureerd"
 msgid "billed monthly"
 msgstr "maandelijks gefactureerd"
 
-#: src/components/SettingsLayout.tsx:44
+#: src/components/SettingsLayout.tsx:57
 #: src/views/boards/components/TemplateBoards.tsx:56
 #: src/views/settings/BillingSettings.tsx:39
 msgid "Billing"
@@ -321,8 +329,8 @@ msgstr "Factureringsportaal"
 msgid "Blog Post"
 msgstr "Blogbericht"
 
-#: src/views/board/index.tsx:396
-#: src/views/card/index.tsx:273
+#: src/views/board/index.tsx:399
+#: src/views/card/index.tsx:290
 #: src/views/public/board/index.tsx:120
 msgid "Board"
 msgstr "Bord"
@@ -369,7 +377,7 @@ msgstr "Board URL moet minimaal 3 tekens lang zijn"
 msgid "Board visibility"
 msgstr "Bordzichtbaarheid"
 
-#: src/views/board/components/VisibilityButton.tsx:46
+#: src/views/board/components/VisibilityButton.tsx:49
 msgid "Board visibility updated"
 msgstr "Zichtbaarheid van bord bijgewerkt"
 
@@ -389,28 +397,153 @@ msgstr "Bug"
 msgid "Bug Report"
 msgstr "Bugrapport"
 
+#: src/views/members/components/EditMemberPermissionsModal.tsx:146
+#: src/views/settings/components/RolePermissions.tsx:35
+msgid "Can add comments"
+msgstr "Kan reacties toevoegen"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:131
+#: src/views/settings/components/RolePermissions.tsx:20
+msgid "Can create boards"
+msgstr "Kan borden aanmaken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:141
+#: src/views/settings/components/RolePermissions.tsx:30
+msgid "Can create cards"
+msgstr "Kan kaarten aanmaken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:136
+#: src/views/settings/components/RolePermissions.tsx:25
+msgid "Can create lists"
+msgstr "Kan lijsten aanmaken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:133
+#: src/views/settings/components/RolePermissions.tsx:22
+msgid "Can delete boards"
+msgstr "Kan borden verwijderen"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:143
+#: src/views/settings/components/RolePermissions.tsx:32
+msgid "Can delete cards"
+msgstr "Kan kaarten verwijderen"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:148
+#: src/views/settings/components/RolePermissions.tsx:37
+msgid "Can delete comments"
+msgstr "Kan reacties verwijderen"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:138
+#: src/views/settings/components/RolePermissions.tsx:27
+msgid "Can delete lists"
+msgstr "Kan lijsten verwijderen"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:127
+#: src/views/settings/components/RolePermissions.tsx:16
+msgid "Can delete workspace"
+msgstr "Kan werkruimte verwijderen"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:132
+#: src/views/settings/components/RolePermissions.tsx:21
+msgid "Can edit boards"
+msgstr "Kan borden bewerken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:142
+#: src/views/settings/components/RolePermissions.tsx:31
+msgid "Can edit cards"
+msgstr "Kan kaarten bewerken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:147
+#: src/views/settings/components/RolePermissions.tsx:36
+msgid "Can edit comments"
+msgstr "Kan reacties bewerken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:137
+#: src/views/settings/components/RolePermissions.tsx:26
+msgid "Can edit lists"
+msgstr "Kan lijsten bewerken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:152
+#: src/views/settings/components/RolePermissions.tsx:41
+msgid "Can edit member roles and permissions"
+msgstr "Kan rollen en rechten van leden bewerken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:126
+#: src/views/settings/components/RolePermissions.tsx:15
+msgid "Can edit workspace"
+msgstr "Kan werkruimte bewerken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:151
+#: src/views/settings/components/RolePermissions.tsx:40
+msgid "Can invite members"
+msgstr "Kan leden uitnodigen"
+
+#: src/views/settings/components/RolePermissions.tsx:17
+#~ msgid "can manage workspace settings"
+#~ msgstr "kan werkruimte-instellingen beheren"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:128
+#: src/views/settings/components/RolePermissions.tsx:17
+msgid "Can manage workspace settings"
+msgstr "Kan werkruimte-instellingen beheren"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:153
+#: src/views/settings/components/RolePermissions.tsx:42
+msgid "Can remove members"
+msgstr "Kan leden verwijderen"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:130
+#: src/views/settings/components/RolePermissions.tsx:19
+msgid "Can view boards"
+msgstr "Kan borden bekijken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:140
+#: src/views/settings/components/RolePermissions.tsx:29
+msgid "Can view cards"
+msgstr "Kan kaarten bekijken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:145
+#: src/views/settings/components/RolePermissions.tsx:34
+msgid "Can view comments"
+msgstr "Kan reacties bekijken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:135
+#: src/views/settings/components/RolePermissions.tsx:24
+msgid "Can view lists"
+msgstr "Kan lijsten bekijken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:150
+#: src/views/settings/components/RolePermissions.tsx:39
+msgid "Can view members"
+msgstr "Kan leden bekijken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:125
+#: src/views/settings/components/RolePermissions.tsx:14
+msgid "Can view workspace"
+msgstr "Kan werkruimte bekijken"
+
 #: src/components/DeleteLabelConfirmation.tsx:49
 #: src/components/YouTubeEmbed/EditYouTubeModal.tsx:176
 #: src/views/board/components/DeleteBoardConfirmation.tsx:44
-#: src/views/card/components/Comment.tsx:163
+#: src/views/card/components/Comment.tsx:165
 #: src/views/card/components/DeleteCardConfirmation.tsx:86
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:64
 #: src/views/card/components/DeleteCommentConfirmation.tsx:77
 #: src/views/members/components/DeleteMemberConfirmation.tsx:55
 #: src/views/settings/components/Avatar.tsx:306
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:168
+#: src/views/settings/components/ClearCustomPermissionsConfirmation.tsx:40
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:88
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:98
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:106
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: src/views/card/index.tsx:273
+#: src/views/card/index.tsx:290
 msgid "Card"
 msgstr "Kaart"
 
-#: src/views/card/index.tsx:307
-#: src/views/card/index.tsx:343
+#: src/views/card/index.tsx:324
+#: src/views/card/index.tsx:361
 msgid "Card not found"
 msgstr "Kaart niet gevonden"
 
@@ -452,6 +585,19 @@ msgstr "Naam checklist"
 msgid "Checklists"
 msgstr "Checklists"
 
+#: src/views/settings/components/ClearCustomPermissionsConfirmation.tsx:32
+msgid "Clear all custom permissions?"
+msgstr "Alle aangepaste rechten wissen?"
+
+#: src/views/settings/PermissionsSettings.tsx:65
+msgid "Clear any custom member permissions so that all members only inherit permissions from their role defaults."
+msgstr "Wis alle aangepaste rechten van leden zodat alle leden alleen rechten overerven van hun standaard rolrechten."
+
+#: src/views/settings/components/ClearCustomPermissionsConfirmation.tsx:48
+#: src/views/settings/PermissionsSettings.tsx:78
+msgid "Clear custom permissions"
+msgstr "Aangepaste rechten wissen"
+
 #: src/views/board/components/Filters.tsx:227
 msgid "Clear filters"
 msgstr "Filters wissen"
@@ -461,6 +607,7 @@ msgstr "Filters wissen"
 msgid "Click on the link we've sent to {magicLinkRecipient} to sign in."
 msgstr "Klik op de link die we naar {magicLinkRecipient} hebben gestuurd om in te loggen."
 
+#: src/views/members/components/EditMemberPermissionsModal.tsx:172
 #: src/views/settings/components/NewApiKeyModal.tsx:136
 msgid "Close"
 msgstr "Sluiten"
@@ -512,6 +659,10 @@ msgstr "heeft een checklistitem voltooid"
 #: src/views/card/components/ActivityList.tsx:223
 msgid "completed checklist item <0>{0}</0>"
 msgstr "heeft checklistitem <0>{0}</0> voltooid"
+
+#: src/views/settings/PermissionsSettings.tsx:54
+msgid "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role."
+msgstr "Configureer welke acties zijn toegestaan voor elke werkruimterol. Deze rechten gelden voor alle leden met die rol."
 
 #: src/pages/unsubscribe/index.tsx:81
 msgid "Confirm your email preferences:"
@@ -604,8 +755,8 @@ msgid "Create list"
 msgstr "Lijst maken"
 
 #. placeholder {0}: isTemplate ? "template" : "board"
-#: src/views/boards/components/BoardsList.tsx:45
-#: src/views/boards/index.tsx:26
+#: src/views/boards/components/BoardsList.tsx:58
+#: src/views/boards/index.tsx:28
 msgid "Create new {0}"
 msgstr "Nieuwe {0} maken"
 
@@ -614,12 +765,12 @@ msgid "Create new key"
 msgstr "Nieuwe sleutel aanmaken"
 
 #: src/views/board/components/NewCardForm.tsx:415
-#: src/views/card/components/LabelSelector.tsx:98
+#: src/views/card/components/LabelSelector.tsx:100
 msgid "Create new label"
 msgstr "Maak nieuw label"
 
-#: src/views/board/index.tsx:71
-#: src/views/board/index.tsx:517
+#: src/views/board/index.tsx:74
+#: src/views/board/index.tsx:537
 msgid "Create new list"
 msgstr "Maak nieuwe lijst"
 
@@ -656,6 +807,10 @@ msgstr "Aangepaste bordsjablonen"
 #: src/views/pricing/components/PricingTiers.tsx:71
 msgid "Custom domain"
 msgstr "Aangepast domein"
+
+#: src/views/settings/PermissionsSettings.tsx:62
+msgid "Custom permissions"
+msgstr "Aangepaste rechten"
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:72
 msgid "Custom templates"
@@ -702,29 +857,29 @@ msgstr "Verwijderen"
 msgid "Delete account"
 msgstr "Account verwijderen"
 
-#: src/views/board/components/BoardDropdown.tsx:48
+#: src/views/board/components/BoardDropdown.tsx:55
 msgid "Delete board"
 msgstr "Board verwijderen"
 
-#: src/views/card/components/Dropdown.tsx:25
+#: src/views/card/components/Dropdown.tsx:39
 msgid "Delete card"
 msgstr "Kaart verwijderen"
 
-#: src/views/card/components/Comment.tsx:95
+#: src/views/card/components/Comment.tsx:97
 msgid "Delete comment"
 msgstr "Reactie verwijderen"
 
-#: src/views/board/components/List.tsx:117
+#: src/views/board/components/List.tsx:147
 msgid "Delete list"
 msgstr "Lijst verwijderen"
 
-#: src/views/board/components/BoardDropdown.tsx:48
+#: src/views/board/components/BoardDropdown.tsx:55
 msgid "Delete template"
 msgstr "Sjabloon verwijderen"
 
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:106
-#: src/views/settings/WorkspaceSettings.tsx:106
-#: src/views/settings/WorkspaceSettings.tsx:117
+#: src/views/settings/WorkspaceSettings.tsx:114
+#: src/views/settings/WorkspaceSettings.tsx:125
 msgid "Delete workspace"
 msgstr "Werkruimte verwijderen"
 
@@ -814,7 +969,7 @@ msgstr "Download mislukt"
 
 #: src/views/board/components/Filters.tsx:171
 #: src/views/board/components/NewCardForm.tsx:470
-#: src/views/card/index.tsx:140
+#: src/views/card/index.tsx:151
 msgid "Due date"
 msgstr "Vervaldatum"
 
@@ -838,18 +993,23 @@ msgstr "Vervalt morgen"
 msgid "Edit"
 msgstr "Bewerken"
 
-#: src/views/board/components/BoardDropdown.tsx:41
+#: src/views/board/components/BoardDropdown.tsx:44
 #: src/views/board/components/UpdateBoardSlugForm.tsx:116
 msgid "Edit board URL"
 msgstr "Board URL bewerken"
 
-#: src/views/card/components/Comment.tsx:86
+#: src/views/card/components/Comment.tsx:88
 msgid "Edit comment"
 msgstr "Reactie bewerken"
 
 #: src/components/LabelForm.tsx:119
 msgid "Edit label"
 msgstr "Label bewerken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:162
+#: src/views/members/index.tsx:223
+msgid "Edit permissions"
+msgstr "Rechten bewerken"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:162
 msgid "Edit workspace URL"
@@ -872,7 +1032,7 @@ msgstr "e-mail"
 msgid "Email"
 msgstr "E-mail"
 
-#: src/views/settings/WorkspaceSettings.tsx:84
+#: src/views/settings/WorkspaceSettings.tsx:89
 msgid "Email visibility"
 msgstr "E-mailzichtbaarheid"
 
@@ -955,15 +1115,15 @@ msgstr "Fout bij bijwerken weergavenaam"
 msgid "Error updating profile image"
 msgstr "Fout bij het bijwerken van profielafbeelding"
 
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:61
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:63
 msgid "Error updating workspace description"
 msgstr "Fout bij het bijwerken van werkruimtebeschrijving"
 
-#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:56
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:58
 msgid "Error updating workspace name"
 msgstr "Fout bij bijwerken naam werkruimte"
 
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:73
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:75
 msgid "Error updating workspace URL"
 msgstr "Fout bij het bijwerken van werkruimte-URL"
 
@@ -1078,12 +1238,14 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Voor duurzaamheid op lange termijn erkennen we dat alle goede open source projecten een inkomstenbron nodig hebben. De onze komt van de betaalde cloudoplossing voor werkruimtes met meerdere gebruikers en voor aangepaste werkruimte-slugs. Er is geen verplichting om het te gebruiken, en je kunt de software gratis op je eigen infrastructuur hosten."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratis"
 
 #: src/views/members/components/InviteMemberForm.tsx:333
-#: src/views/members/index.tsx:217
+#: src/views/members/index.tsx:292
 msgid "Free Plan"
 msgstr "Gratis plan"
 
@@ -1119,11 +1281,11 @@ msgid "Get Started"
 msgstr "Aan de slag"
 
 #. placeholder {0}: isTemplate ? "template" : "board"
-#: src/views/boards/components/BoardsList.tsx:41
+#: src/views/boards/components/BoardsList.tsx:44
 msgid "Get started by creating a new {0}"
 msgstr "Begin door een nieuwe {0} te maken"
 
-#: src/views/board/index.tsx:509
+#: src/views/board/index.tsx:522
 msgid "Get started by creating a new list"
 msgstr "Begin door een nieuwe lijst te maken"
 
@@ -1172,6 +1334,10 @@ msgstr "Ga naar instellingen"
 #: src/components/SideNavigation.tsx:118
 msgid "Go to templates"
 msgstr "Ga naar sjablonen"
+
+#: src/views/members/index.tsx:202
+msgid "Guest"
+msgstr "Gast"
 
 #: src/views/boards/components/TemplateBoards.tsx:18
 msgid "High Priority"
@@ -1226,7 +1392,7 @@ msgstr "Ideeën"
 msgid "Ideas to improve this page..."
 msgstr "Ideeën om deze pagina te verbeteren..."
 
-#: src/views/boards/index.tsx:50
+#: src/views/boards/index.tsx:60
 msgid "Import"
 msgstr "Importeren"
 
@@ -1273,7 +1439,7 @@ msgstr "In behandeling"
 msgid "Individuals"
 msgstr "Individuen"
 
-#: src/components/SettingsLayout.tsx:57
+#: src/components/SettingsLayout.tsx:70
 #: src/views/home/components/Features.tsx:121
 msgid "Integrations"
 msgstr "Integraties"
@@ -1294,7 +1460,7 @@ msgstr "Ongeldig e-mailadres"
 msgid "Invalid invitation"
 msgstr "Ongeldige uitnodiging"
 
-#: src/views/members/index.tsx:230
+#: src/views/members/index.tsx:305
 msgid "Invite"
 msgstr "Uitnodigen"
 
@@ -1314,7 +1480,7 @@ msgstr "Uitnodigingslinks"
 msgid "Invite links require a Team or Pro subscription. Please upgrade your workspace."
 msgstr "Uitnodigingslinks vereisen een Team- of Pro-abonnement. Upgrade je werkruimte."
 
-#: src/views/card/components/MemberSelector.tsx:112
+#: src/views/card/components/MemberSelector.tsx:114
 #: src/views/members/components/InviteMemberForm.tsx:367
 msgid "Invite member"
 msgstr "Lid uitnodigen"
@@ -1363,7 +1529,7 @@ msgstr "Sneltoetsen"
 
 #: src/views/board/components/Filters.tsx:155
 #: src/views/board/components/NewCardForm.tsx:419
-#: src/views/card/index.tsx:122
+#: src/views/card/index.tsx:131
 msgid "Labels"
 msgstr "Labels"
 
@@ -1384,7 +1550,7 @@ msgstr "Taal"
 msgid "Launch offer"
 msgstr "Introductieaanbieding"
 
-#: src/views/members/index.tsx:200
+#: src/views/members/index.tsx:275
 msgid "Launch offer: Get unlimited members with Pro"
 msgstr "Lanceringsaanbieding: krijg onbeperkt aantal leden met Pro"
 
@@ -1417,7 +1583,7 @@ msgstr "Licht"
 msgid "Link copied"
 msgstr "Link gekopieerd"
 
-#: src/views/card/index.tsx:114
+#: src/views/card/index.tsx:122
 msgid "List"
 msgstr "Lijst"
 
@@ -1432,6 +1598,10 @@ msgstr "Lijsten"
 #: src/views/card/components/ActivityList.tsx:533
 msgid "Load more activities"
 msgstr "Meer activiteiten laden"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:180
+msgid "Loading permissions..."
+msgstr "Rechten laden..."
 
 #: src/views/card/components/ActivityList.tsx:533
 msgid "Loading..."
@@ -1478,16 +1648,20 @@ msgstr "heeft checklistitem <0>{0}</0> als onvoltooid gemarkeerd"
 msgid "Medium Priority"
 msgstr "Gemiddelde prioriteit"
 
+#: src/views/members/index.tsx:201
+msgid "Member"
+msgstr "Lid"
+
 #: src/components/SideNavigation.tsx:122
 #: src/views/board/components/Filters.tsx:147
 #: src/views/board/components/NewCardForm.tsx:377
-#: src/views/card/index.tsx:131
-#: src/views/members/index.tsx:187
+#: src/views/card/index.tsx:141
+#: src/views/members/index.tsx:262
 msgid "Members"
 msgstr "Leden"
 
 #. placeholder {0}: workspace.name ?? t`Workspace`
-#: src/views/members/index.tsx:182
+#: src/views/members/index.tsx:257
 msgid "Members | {0}"
 msgstr "Leden | {0}"
 
@@ -1524,7 +1698,7 @@ msgstr "Navigatie"
 msgid "Need help?"
 msgstr "Hulp nodig?"
 
-#: src/views/boards/index.tsx:62
+#: src/views/boards/index.tsx:82
 #: src/views/home/components/Features.tsx:73
 msgid "New"
 msgstr "Nieuw"
@@ -1555,7 +1729,7 @@ msgid "New label"
 msgstr "Nieuw label"
 
 #: src/views/board/components/NewListForm.tsx:113
-#: src/views/board/index.tsx:476
+#: src/views/board/index.tsx:488
 msgid "New list"
 msgstr "Nieuwe lijst"
 
@@ -1588,7 +1762,7 @@ msgid "Next Steps"
 msgstr "Volgende stappen"
 
 #. placeholder {0}: isTemplate ? "templates" : "boards"
-#: src/views/boards/components/BoardsList.tsx:38
+#: src/views/boards/components/BoardsList.tsx:41
 msgid "No {0}"
 msgstr "Geen {0}"
 
@@ -1616,13 +1790,21 @@ msgstr "Geen download-URL beschikbaar voor deze bijlage."
 msgid "No keyboard shortcuts registered."
 msgstr "Geen sneltoetsen geregistreerd."
 
-#: src/views/board/index.tsx:506
+#: src/views/board/index.tsx:518
 msgid "No lists"
 msgstr "Geen lijsten"
+
+#: src/views/board/index.tsx:523
+msgid "No lists have been created yet"
+msgstr "Er zijn nog geen lijsten aangemaakt"
 
 #: src/components/CommandPallette.tsx:184
 msgid "No results found for \"{debouncedQuery}\"."
 msgstr "Geen resultaten gevonden voor \"{debouncedQuery}\"."
+
+#: src/views/settings/components/RolePermissions.tsx:110
+msgid "No roles found for this workspace yet."
+msgstr "Nog geen rollen gevonden voor deze werkruimte."
 
 #: src/views/boards/components/TemplateBoards.tsx:66
 msgid "Offer"
@@ -1636,7 +1818,7 @@ msgstr "Inwerktraject"
 msgid "Once you delete your account, there is no going back. This action cannot be undone."
 msgstr "Zodra je je account verwijdert, is er geen weg terug. Deze actie kan niet ongedaan worden gemaakt."
 
-#: src/views/settings/WorkspaceSettings.tsx:109
+#: src/views/settings/WorkspaceSettings.tsx:117
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Zodra je je werkruimte verwijdert, is er geen weg terug. Deze actie kan niet ongedaan worden gemaakt."
 
@@ -1673,6 +1855,10 @@ msgstr "OSS Vrienden"
 msgid "Overdue"
 msgstr "Achterstallig"
 
+#: src/views/settings/PermissionsSettings.tsx:25
+msgid "Overrides cleared"
+msgstr "Overschrijvingen gewist"
+
 #: src/views/pricing/components/Pricing.tsx:73
 #: src/views/pricing/components/PricingTiers.tsx:70
 msgid "Own your data"
@@ -1706,7 +1892,7 @@ msgstr "Wachtwoord moet minimaal 8 tekens bevatten"
 msgid "Passwords do not match"
 msgstr "Wachtwoorden komen niet overeen"
 
-#: src/views/members/index.tsx:143
+#: src/views/members/index.tsx:209
 msgid "Paused"
 msgstr "Gepauzeerd"
 
@@ -1715,7 +1901,7 @@ msgstr "Gepauzeerd"
 msgid "Payment frequency"
 msgstr "Betalingsfrequentie"
 
-#: src/views/members/index.tsx:143
+#: src/views/members/index.tsx:209
 msgid "Pending"
 msgstr "In behandeling"
 
@@ -1725,6 +1911,23 @@ msgstr "In behandeling"
 #: src/views/pricing/index.tsx:26
 msgid "per user/month"
 msgstr "per gebruiker/maand"
+
+#: src/views/settings/components/RolePermissions.tsx:119
+msgid "Permission"
+msgstr "Recht"
+
+#: src/components/SettingsLayout.tsx:52
+msgid "Permissions"
+msgstr "Rechten"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:80
+msgid "Permissions reset"
+msgstr "Rechten hersteld"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:34
+#: src/views/members/components/EditMemberPermissionsModal.tsx:57
+msgid "Permissions updated"
+msgstr "Rechten bijgewerkt"
 
 #: src/views/boards/components/TemplateBoards.tsx:74
 msgid "Personal Project"
@@ -1771,40 +1974,45 @@ msgstr "Selecteer een bestand om te uploaden."
 #: src/views/board/components/NewTemplateForm.tsx:61
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:73
-#: src/views/board/components/VisibilityButton.tsx:54
-#: src/views/board/index.tsx:177
-#: src/views/board/index.tsx:233
+#: src/views/board/components/VisibilityButton.tsx:57
+#: src/views/board/index.tsx:180
+#: src/views/board/index.tsx:236
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/AttachmentThumbnails.tsx:74
 #: src/views/card/components/ChecklistItemRow.tsx:69
 #: src/views/card/components/ChecklistItemRow.tsx:97
 #: src/views/card/components/ChecklistNameInput.tsx:47
 #: src/views/card/components/Checklists.tsx:81
-#: src/views/card/components/Comment.tsx:68
+#: src/views/card/components/Comment.tsx:70
 #: src/views/card/components/DeleteCardConfirmation.tsx:52
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:38
 #: src/views/card/components/DeleteCommentConfirmation.tsx:46
-#: src/views/card/components/DueDateSelector.tsx:60
-#: src/views/card/components/LabelSelector.tsx:73
-#: src/views/card/components/ListSelector.tsx:53
-#: src/views/card/components/MemberSelector.tsx:80
+#: src/views/card/components/DueDateSelector.tsx:62
+#: src/views/card/components/LabelSelector.tsx:75
+#: src/views/card/components/ListSelector.tsx:55
+#: src/views/card/components/MemberSelector.tsx:82
 #: src/views/card/components/NewChecklistForm.tsx:71
 #: src/views/card/components/NewChecklistItemForm.tsx:90
-#: src/views/card/components/NewCommentForm.tsx:32
-#: src/views/card/index.tsx:188
-#: src/views/card/index.tsx:201
+#: src/views/card/components/NewCommentForm.tsx:34
+#: src/views/card/index.tsx:205
+#: src/views/card/index.tsx:218
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
+#: src/views/members/components/EditMemberPermissionsModal.tsx:42
+#: src/views/members/components/EditMemberPermissionsModal.tsx:65
+#: src/views/members/components/EditMemberPermissionsModal.tsx:93
 #: src/views/members/components/InviteMemberForm.tsx:104
 #: src/views/members/components/InviteMemberForm.tsx:241
+#: src/views/members/index.tsx:64
 #: src/views/settings/components/Avatar.tsx:78
 #: src/views/settings/components/Avatar.tsx:219
 #: src/views/settings/components/DeleteAccountConfirmation.tsx:40
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:46
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:55
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:62
-#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:57
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:74
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:64
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:59
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:76
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:42
+#: src/views/settings/PermissionsSettings.tsx:38
 msgid "Please try again later, or contact customer support."
 msgstr "Probeer het later opnieuw of neem contact op met de klantenservice."
 
@@ -1836,11 +2044,11 @@ msgstr "Prioriteit e-mailondersteuning"
 msgid "Privacy policy"
 msgstr "Privacybeleid"
 
-#: src/views/board/components/VisibilityButton.tsx:74
+#: src/views/board/components/VisibilityButton.tsx:84
 msgid "Private"
 msgstr "Privé"
 
-#: src/views/members/index.tsx:214
+#: src/views/members/index.tsx:289
 msgid "Pro Plan"
 msgstr "Pro Plan"
 
@@ -1856,7 +2064,7 @@ msgstr "Profielafbeelding bijgewerkt"
 msgid "Profile picture"
 msgstr "Profielfoto"
 
-#: src/views/board/components/VisibilityButton.tsx:69
+#: src/views/board/components/VisibilityButton.tsx:79
 msgid "Public"
 msgstr "Openbaar"
 
@@ -1888,7 +2096,7 @@ msgstr "Op afstand"
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: src/views/members/index.tsx:157
+#: src/views/members/index.tsx:232
 msgid "Remove member"
 msgstr "Lid verwijderen"
 
@@ -1933,6 +2141,10 @@ msgstr "checklistitem hernoemd naar <0>{0}</0>"
 msgid "Research"
 msgstr "Onderzoek"
 
+#: src/views/members/components/EditMemberPermissionsModal.tsx:245
+msgid "Reset to role defaults"
+msgstr "Herstellen naar standaard rolrechten"
+
 #: src/views/boards/components/TemplateBoards.tsx:48
 msgid "Resolution"
 msgstr "Oplossing"
@@ -1955,9 +2167,13 @@ msgstr "Beoordeling"
 msgid "Roadmap"
 msgstr "Roadmap"
 
-#: src/views/members/index.tsx:252
+#: src/views/members/index.tsx:327
 msgid "Role"
 msgstr "Rol"
+
+#: src/views/members/index.tsx:56
+msgid "Role updated"
+msgstr "Rol bijgewerkt"
 
 #: src/views/pricing/components/Pricing.tsx:72
 #: src/views/pricing/components/PricingTiers.tsx:69
@@ -1965,7 +2181,7 @@ msgid "Run on your own infrastructure"
 msgstr "Draai op je eigen infrastructuur"
 
 #: src/components/YouTubeEmbed/EditYouTubeModal.tsx:183
-#: src/views/card/components/Comment.tsx:170
+#: src/views/card/components/Comment.tsx:172
 #: src/views/settings/components/Avatar.tsx:309
 msgid "Save"
 msgstr "Opslaan"
@@ -2019,7 +2235,7 @@ msgstr "Feedback versturen"
 msgid "Senior"
 msgstr "Senior"
 
-#: src/views/card/components/DueDateSelector.tsx:117
+#: src/views/card/components/DueDateSelector.tsx:119
 msgid "Set due date"
 msgstr "Vervaldatum instellen"
 
@@ -2027,7 +2243,7 @@ msgstr "Vervaldatum instellen"
 msgid "set the due date"
 msgstr "heeft de vervaldatum ingesteld"
 
-#: src/components/SettingsLayout.tsx:82
+#: src/components/SettingsLayout.tsx:95
 #: src/components/SideNavigation.tsx:134
 msgid "Settings"
 msgstr "Instellingen"
@@ -2048,7 +2264,11 @@ msgstr "Instellingen | Facturering"
 msgid "Settings | Integrations"
 msgstr "Instellingen | Integraties"
 
-#: src/views/settings/WorkspaceSettings.tsx:55
+#: src/views/settings/PermissionsSettings.tsx:47
+msgid "Settings | Permissions"
+msgstr "Instellingen | Rechten"
+
+#: src/views/settings/WorkspaceSettings.tsx:57
 msgid "Settings | Workspace"
 msgstr "Instellingen | Werkruimte"
 
@@ -2138,7 +2358,7 @@ msgid "System"
 msgstr "Systeem"
 
 #: src/views/members/components/InviteMemberForm.tsx:322
-#: src/views/members/index.tsx:216
+#: src/views/members/index.tsx:291
 msgid "Team Plan"
 msgstr "Teamplan"
 
@@ -2148,8 +2368,8 @@ msgstr "Teamplan"
 msgid "Teams"
 msgstr "Teams"
 
-#: src/views/board/index.tsx:396
-#: src/views/board/index.tsx:431
+#: src/views/board/index.tsx:399
+#: src/views/board/index.tsx:436
 msgid "Template"
 msgstr "Sjabloon"
 
@@ -2194,12 +2414,21 @@ msgstr "Het ingevoerde huidige wachtwoord is onjuist."
 msgid "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
 msgstr "Het belangrijkste verschil tussen Kan en Trello is dat Kan open source is, waardoor iedereen onze code kan bekijken, wijzigen en eraan kan bijdragen. Onze cloudoplossing biedt ook geen beperkingen op functies voor individueel gebruik, terwijl Trello basisfuncties zoals het aantal borden dat je kunt maken achter een betaalmuur plaatst."
 
+#: src/views/members/components/EditMemberPermissionsModal.tsx:35
+#: src/views/members/components/EditMemberPermissionsModal.tsx:58
+msgid "The member's permissions have been updated."
+msgstr "De rechten van het lid zijn bijgewerkt."
+
+#: src/views/members/index.tsx:57
+msgid "The member's role has been updated."
+msgstr "De rol van het lid is bijgewerkt."
+
 #: src/views/home/index.tsx:65
 msgid "The open source <0/> alternative to Trello"
 msgstr "Het open source <0/> alternatief voor Trello"
 
 #. placeholder {0}: isPublic ? "public" : "private"
-#: src/views/board/components/VisibilityButton.tsx:47
+#: src/views/board/components/VisibilityButton.tsx:50
 msgid "The visibility of your board has been set to {0}."
 msgstr "De zichtbaarheid van je bord is ingesteld op {0}."
 
@@ -2235,6 +2464,14 @@ msgstr "Deze board URL is al in gebruik"
 msgid "This invitation link is invalid or has expired."
 msgstr "Deze uitnodigingslink is ongeldig of verlopen."
 
+#: src/views/members/components/EditMemberPermissionsModal.tsx:81
+msgid "This member's permissions have been reset to their role defaults."
+msgstr "De rechten van dit lid zijn hersteld naar de standaard rolrechten."
+
+#: src/views/settings/components/ClearCustomPermissionsConfirmation.tsx:35
+msgid "This will remove all custom member permissions in this workspace. Members will inherit permissions only from their roles."
+msgstr "Dit verwijdert alle aangepaste rechten van leden in deze werkruimte. Leden erven alleen rechten over van hun rollen."
+
 #: src/views/settings/components/DeleteWorkspaceConfirmation.tsx:70
 msgid "This will result in the permanent deletion of all data associated with this workspace."
 msgstr "Dit zal resulteren in het permanent verwijderen van alle gegevens die aan deze werkruimte zijn gekoppeld."
@@ -2251,7 +2488,7 @@ msgstr "Deze werkruimte-URL is al in gebruik"
 msgid "This workspace URL is reserved"
 msgstr "Deze werkruimte-URL is gereserveerd"
 
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:123
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:125
 msgid "This workspace username has already been taken"
 msgstr "Deze werkruimtegebruikersnaam is al in gebruik"
 
@@ -2297,13 +2534,17 @@ msgstr "Vertrouwd door snelbewegende teams<0/>over de hele wereld"
 msgid "Unable to add checklist item"
 msgstr "Kan checklistitem niet toevoegen"
 
-#: src/views/card/components/NewCommentForm.tsx:31
+#: src/views/card/components/NewCommentForm.tsx:33
 msgid "Unable to add comment"
 msgstr "Kan geen reactie toevoegen"
 
-#: src/views/card/index.tsx:200
+#: src/views/card/index.tsx:217
 msgid "Unable to add label"
 msgstr "Kan label niet toevoegen"
+
+#: src/views/settings/PermissionsSettings.tsx:37
+msgid "Unable to clear overrides"
+msgstr "Kan overschrijvingen niet wissen"
 
 #: src/views/board/components/NewCardForm.tsx:181
 msgid "Unable to create card"
@@ -2354,6 +2595,10 @@ msgstr "Kan lid niet verwijderen"
 msgid "Unable to reorder checklist item"
 msgstr "Kan checklistitem niet opnieuw ordenen"
 
+#: src/views/members/components/EditMemberPermissionsModal.tsx:92
+msgid "Unable to reset permissions"
+msgstr "Kan machtigingen niet resetten"
+
 #: src/components/FeedbackModal.tsx:40
 msgid "Unable to send feedback"
 msgstr "Feedback kon niet worden verzonden"
@@ -2362,12 +2607,12 @@ msgstr "Feedback kon niet worden verzonden"
 msgid "Unable to update board URL"
 msgstr "Kan board URL niet bijwerken"
 
-#: src/views/board/components/VisibilityButton.tsx:53
+#: src/views/board/components/VisibilityButton.tsx:56
 msgid "Unable to update board visibility"
 msgstr "Kan bordzichtbaarheid niet bijwerken"
 
-#: src/views/board/index.tsx:232
-#: src/views/card/index.tsx:187
+#: src/views/board/index.tsx:235
+#: src/views/card/index.tsx:204
 msgid "Unable to update card"
 msgstr "Kan kaart niet bijwerken"
 
@@ -2379,26 +2624,35 @@ msgstr "Kan checklist niet bijwerken"
 msgid "Unable to update checklist item"
 msgstr "Kan checklistitem niet bijwerken"
 
-#: src/views/card/components/Comment.tsx:67
+#: src/views/card/components/Comment.tsx:69
 msgid "Unable to update comment"
 msgstr "Kan reactie niet bijwerken"
 
-#: src/views/card/components/DueDateSelector.tsx:59
+#: src/views/card/components/DueDateSelector.tsx:61
 msgid "Unable to update due date"
 msgstr "Kan vervaldatum niet bijwerken"
 
-#: src/views/card/components/LabelSelector.tsx:72
+#: src/views/card/components/LabelSelector.tsx:74
 msgid "Unable to update labels"
 msgstr "Kan labels niet bijwerken"
 
-#: src/views/board/index.tsx:176
-#: src/views/card/components/ListSelector.tsx:52
+#: src/views/board/index.tsx:179
+#: src/views/card/components/ListSelector.tsx:54
 msgid "Unable to update list"
 msgstr "Kan lijst niet bijwerken"
 
-#: src/views/card/components/MemberSelector.tsx:79
+#: src/views/card/components/MemberSelector.tsx:81
 msgid "Unable to update members"
 msgstr "Kan leden niet bijwerken"
+
+#: src/views/members/components/EditMemberPermissionsModal.tsx:41
+#: src/views/members/components/EditMemberPermissionsModal.tsx:64
+msgid "Unable to update permissions"
+msgstr "Kan machtigingen niet bijwerken"
+
+#: src/views/members/index.tsx:63
+msgid "Unable to update role"
+msgstr "Kan rol niet bijwerken"
 
 #. placeholder {0}: truncate(memberName)
 #: src/views/card/components/ActivityList.tsx:157
@@ -2454,9 +2708,9 @@ msgstr "Uitschrijven"
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:175
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:80
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:91
-#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:83
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:154
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:94
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:89
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:157
 msgid "Update"
 msgstr "Bijwerken"
 
@@ -2487,7 +2741,7 @@ msgstr "titel bijgewerkt naar <0>{0}</0>"
 
 #: src/components/SideNavigation.tsx:239
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:53
-#: src/views/settings/WorkspaceSettings.tsx:99
+#: src/views/settings/WorkspaceSettings.tsx:107
 msgid "Upgrade to Pro"
 msgstr "Upgraden naar Pro"
 
@@ -2506,17 +2760,17 @@ msgid "Urgent"
 msgstr "Urgent"
 
 #: src/components/NewWorkspaceForm.tsx:38
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:38
 msgid "URL can only contain letters, numbers, and hyphens"
 msgstr "URL kan alleen letters, cijfers en koppeltekens bevatten"
 
 #: src/components/NewWorkspaceForm.tsx:36
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:34
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:36
 msgid "URL cannot exceed 24 characters"
 msgstr "URL mag niet langer zijn dan 24 tekens"
 
 #: src/components/NewWorkspaceForm.tsx:34
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:32
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:34
 msgid "URL must be at least 3 characters long"
 msgstr "URL moet minimaal 3 tekens lang zijn"
 
@@ -2524,7 +2778,7 @@ msgstr "URL moet minimaal 3 tekens lang zijn"
 msgid "Use template"
 msgstr "Sjabloon gebruiken"
 
-#: src/views/members/index.tsx:246
+#: src/views/members/index.tsx:321
 msgid "User"
 msgstr "Gebruiker"
 
@@ -2561,7 +2815,7 @@ msgstr "Bekijk onze roadmap."
 msgid "View workspace"
 msgstr "Werkruimte bekijken"
 
-#: src/views/board/components/VisibilityButton.tsx:92
+#: src/views/board/components/VisibilityButton.tsx:103
 msgid "Visibility"
 msgstr "Zichtbaarheid"
 
@@ -2601,10 +2855,10 @@ msgstr "White label"
 msgid "Why make an open source Trello?"
 msgstr "Waarom een open source Trello maken?"
 
-#: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:396
-#: src/views/boards/index.tsx:33
-#: src/views/members/index.tsx:182
+#: src/components/SettingsLayout.tsx:46
+#: src/views/board/index.tsx:399
+#: src/views/boards/index.tsx:35
+#: src/views/members/index.tsx:257
 #: src/views/public/board/index.tsx:120
 #: src/views/public/boards/index.tsx:66
 msgid "Workspace"
@@ -2618,19 +2872,19 @@ msgstr "Werkruimte succesvol aangemaakt. Je kunt later upgraden in de instelling
 msgid "Workspace deleted"
 msgstr "Werkruimte verwijderd"
 
-#: src/views/settings/WorkspaceSettings.tsx:76
+#: src/views/settings/WorkspaceSettings.tsx:80
 msgid "Workspace description"
 msgstr "Werkruimte beschrijving"
 
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:28
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:30
 msgid "Workspace description cannot exceed 280 characters"
 msgstr "Werkruimtebeschrijving mag niet langer zijn dan 280 tekens"
 
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:25
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:27
 msgid "Workspace description must be at least 3 characters long"
 msgstr "Werkruimtebeschrijving moet minimaal 3 tekens lang zijn"
 
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:48
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:50
 msgid "Workspace description updated"
 msgstr "Werkruimtebeschrijving bijgewerkt"
 
@@ -2641,7 +2895,7 @@ msgid "Workspace members"
 msgstr "Werkruimteleden"
 
 #: src/components/NewWorkspaceForm.tsx:262
-#: src/views/settings/WorkspaceSettings.tsx:59
+#: src/views/settings/WorkspaceSettings.tsx:61
 msgid "Workspace name"
 msgstr "Naam werkruimte"
 
@@ -2658,15 +2912,19 @@ msgstr "Naam van werkruimte is verplicht"
 msgid "Workspace name must be at least 3 characters long"
 msgstr "Werkruimtenaam moet minimaal 3 tekens lang zijn"
 
-#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:43
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:45
 msgid "Workspace name updated"
 msgstr "Werkruimtenaam bijgewerkt"
 
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:60
+#: src/views/settings/PermissionsSettings.tsx:51
+msgid "Workspace permissions"
+msgstr "Werkruimte machtigingen"
+
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:62
 msgid "Workspace slug updated"
 msgstr "Werkruimte-slug bijgewerkt"
 
-#: src/views/settings/WorkspaceSettings.tsx:67
+#: src/views/settings/WorkspaceSettings.tsx:70
 msgid "Workspace URL"
 msgstr "Werkruimte URL"
 
@@ -2703,6 +2961,17 @@ msgstr "Je kunt teamleden uitnodigen door op de knop \"Uitnodigen\" in de rechte
 msgid "You can self-host by following the instructions in our <0>repo</0>."
 msgstr "Je kunt zelf hosten door de instructies in onze <0>repo</0> te volgen."
 
+#: src/views/board/components/List.tsx:117
+#: src/views/board/components/UpdateBoardSlugButton.tsx:31
+#: src/views/board/components/VisibilityButton.tsx:72
+#: src/views/board/index.tsx:472
+#: src/views/board/index.tsx:528
+#: src/views/boards/components/BoardsList.tsx:49
+#: src/views/boards/index.tsx:46
+#: src/views/boards/index.tsx:67
+msgid "You don't have permission"
+msgstr "Je hebt geen toestemming"
+
 #: src/components/AuthForm.tsx:233
 msgid "You have been logged in successfully."
 msgstr "Je bent succesvol ingelogd."
@@ -2718,6 +2987,10 @@ msgstr "Je bent uitgeschreven!"
 #: src/views/members/components/InviteMemberForm.tsx:326
 msgid "You have unlimited seats with your Pro Plan. There is no additional charge for new members!"
 msgstr "Je hebt onbeperkte plaatsen met je Pro Plan. Er zijn geen extra kosten voor nieuwe leden!"
+
+#: src/views/settings/PermissionsSettings.tsx:84
+msgid "You need to be an admin to manage workspace permissions."
+msgstr "Je moet een beheerder zijn om werkruimte machtigingen te beheren."
 
 #: src/views/invite/index.tsx:134
 msgid "You've been invited to join a workspace on kan.bn."
@@ -2763,7 +3036,7 @@ msgstr "Je Trello-account is verbonden."
 msgid "Your unsubscribe link is missing a token. Please open the latest email and try again."
 msgstr "Je uitschrijflink mist een token. Open de meest recente e-mail en probeer het opnieuw."
 
-#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:49
+#: src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx:51
 msgid "Your workspace description has been updated."
 msgstr "Je werkruimtebeschrijving is bijgewerkt."
 
@@ -2771,11 +3044,11 @@ msgstr "Je werkruimtebeschrijving is bijgewerkt."
 msgid "Your workspace has been deleted."
 msgstr "Je werkruimte is verwijderd."
 
-#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:44
+#: src/views/settings/components/UpdateWorkspaceNameForm.tsx:46
 msgid "Your workspace name has been updated."
 msgstr "De naam van je werkruimte is bijgewerkt."
 
-#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:61
+#: src/views/settings/components/UpdateWorkspaceUrlForm.tsx:63
 msgid "Your workspace slug has been updated."
 msgstr "Je werkruimte-slug is bijgewerkt."
 

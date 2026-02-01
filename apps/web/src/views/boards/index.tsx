@@ -7,6 +7,7 @@ import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import { Tooltip } from "~/components/Tooltip";
+import { usePermissions } from "~/hooks/usePermissions";
 import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
@@ -17,12 +18,13 @@ import { NewBoardForm } from "./components/NewBoardForm";
 export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
   const { openModal, modalContentType, isOpen } = useModal();
   const { workspace } = useWorkspace();
+  const { canCreateBoard } = usePermissions();
 
   const { tooltipContent: createModalShortcutTooltipContent } =
     useKeyboardShortcut({
       type: "PRESS",
       stroke: { key: "C" },
-      action: () => openModal("NEW_BOARD"),
+      action: () => canCreateBoard && openModal("NEW_BOARD"),
       description: t`Create new ${isTemplate ? "template" : "board"}`,
       group: "ACTIONS",
     });
@@ -39,22 +41,40 @@ export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
           </h1>
           <div className="flex gap-2">
             {!isTemplate && (
-              <Button
-                type="button"
-                variant="secondary"
-                onClick={() => openModal("IMPORT_BOARDS")}
-                iconLeft={
-                  <HiArrowDownTray aria-hidden="true" className="h-4 w-4" />
+              <Tooltip
+                content={
+                  !canCreateBoard ? t`You don't have permission` : undefined
                 }
               >
-                {t`Import`}
-              </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => {
+                    if (canCreateBoard) openModal("IMPORT_BOARDS");
+                  }}
+                  disabled={!canCreateBoard}
+                  iconLeft={
+                    <HiArrowDownTray aria-hidden="true" className="h-4 w-4" />
+                  }
+                >
+                  {t`Import`}
+                </Button>
+              </Tooltip>
             )}
-            <Tooltip content={createModalShortcutTooltipContent}>
+            <Tooltip
+              content={
+                !canCreateBoard
+                  ? t`You don't have permission`
+                  : createModalShortcutTooltipContent
+              }
+            >
               <Button
                 type="button"
                 variant="primary"
-                onClick={() => openModal("NEW_BOARD")}
+                onClick={() => {
+                  if (canCreateBoard) openModal("NEW_BOARD");
+                }}
+                disabled={!canCreateBoard}
                 iconLeft={
                   <HiOutlinePlusSmall aria-hidden="true" className="h-4 w-4" />
                 }

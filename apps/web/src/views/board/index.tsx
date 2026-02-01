@@ -26,6 +26,7 @@ import { StrictModeDroppable as Droppable } from "~/components/StrictModeDroppab
 import { Tooltip } from "~/components/Tooltip";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
 import { useDragToScroll } from "~/hooks/useDragToScroll";
+import { usePermissions } from "~/hooks/usePermissions";
 import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -63,11 +64,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     direction: "horizontal",
   });
 
+  const { canCreateList, canEditList, canEditCard, canEditBoard } = usePermissions();
+
   const { tooltipContent: createListShortcutTooltipContent } =
     useKeyboardShortcut({
       type: "PRESS",
       stroke: { key: "C" },
-      action: () => boardId && openNewListForm(boardId),
+      action: () => boardId && canCreateList && openNewListForm(boardId),
       description: t`Create new list`,
       group: "ACTIONS",
     });
@@ -260,14 +263,14 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       return;
     }
 
-    if (type === "LIST") {
+    if (type === "LIST" && canEditList) {
       updateListMutation.mutate({
         listPublicId: draggableId,
         index: destination.index,
       });
     }
 
-    if (type === "CARD") {
+    if (type === "CARD" && canEditCard) {
       updateCardMutation.mutate({
         cardPublicId: draggableId,
 
@@ -412,10 +415,12 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 id="name"
                 type="text"
                 {...register("name")}
-                onBlur={handleSubmit(onSubmit)}
-                className="block border-0 bg-transparent p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000 sm:text-[1.2rem]"
+                onBlur={canEditBoard ? handleSubmit(onSubmit) : undefined}
+                readOnly={!canEditBoard}
+                className="block border-0 bg-transparent p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000 sm:text-[1.2rem] disabled:cursor-not-allowed"
               />
             </form>
+
           )}
           {!boardData && !isLoading && (
             <p className="order-2 block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem] md:order-1">
@@ -438,6 +443,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                   isLoading={isLoading}
                   workspaceSlug={workspace.slug ?? ""}
                   boardSlug={boardData?.slug ?? ""}
+                  canEdit={canEditBoard}
                 />
                 <VisibilityButton
                   visibility={boardData?.visibility ?? "private"}
@@ -460,7 +466,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 )}
               </>
             )}
-            <Tooltip content={createListShortcutTooltipContent}>
+            <Tooltip
+              content={
+                !canCreateList
+                  ? t`You don't have permission`
+                  : createListShortcutTooltipContent
+              }
+            >
               <Button
                 iconLeft={
                   <HiOutlinePlusSmall
@@ -469,9 +481,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                   />
                 }
                 onClick={() => {
-                  if (boardId) openNewListForm(boardId);
+                  if (boardId && canCreateList) openNewListForm(boardId);
                 }}
-                disabled={!boardData}
+                disabled={!boardData || !canCreateList}
               >
                 {t`New list`}
               </Button>
@@ -506,16 +518,25 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                       {t`No lists`}
                     </p>
                     <p className="text-[14px] text-light-900 dark:text-dark-900">
-                      {t`Get started by creating a new list`}
+                      {canCreateList
+                        ? t`Get started by creating a new list`
+                        : t`No lists have been created yet`}
                     </p>
                   </div>
-                  <Button
-                    onClick={() => {
-                      if (boardId) openNewListForm(boardId);
-                    }}
+                  <Tooltip
+                    content={
+                      !canCreateList ? t`You don't have permission` : undefined
+                    }
                   >
-                    {t`Create new list`}
-                  </Button>
+                    <Button
+                      onClick={() => {
+                        if (boardId && canCreateList) openNewListForm(boardId);
+                      }}
+                      disabled={!canCreateList}
+                    >
+                      {t`Create new list`}
+                    </Button>
+                  </Tooltip>
                 </div>
               ) : (
                 <DragDropContext onDragEnd={onDragEnd}>
@@ -555,6 +576,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                       key={card.publicId}
                                       draggableId={card.publicId}
                                       index={index}
+                                      isDragDisabled={!canEditCard}
                                     >
                                       {(provided) => (
                                         <Link

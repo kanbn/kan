@@ -4,6 +4,8 @@ import { HiOutlineRectangleStack } from "react-icons/hi2";
 
 import Button from "~/components/Button";
 import PatternedBackground from "~/components/PatternedBackground";
+import { Tooltip } from "~/components/Tooltip";
+import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
@@ -11,6 +13,7 @@ import { api } from "~/utils/api";
 export function BoardsList({ isTemplate }: { isTemplate?: boolean }) {
   const { workspace } = useWorkspace();
   const { openModal } = useModal();
+  const { canCreateBoard } = usePermissions();
 
   const { data, isLoading } = api.board.all.useQuery(
     {
@@ -41,9 +44,20 @@ export function BoardsList({ isTemplate }: { isTemplate?: boolean }) {
             {t`Get started by creating a new ${isTemplate ? "template" : "board"}`}
           </p>
         </div>
-        <Button onClick={() => openModal("NEW_BOARD")}>
-          {t`Create new ${isTemplate ? "template" : "board"}`}
-        </Button>
+        <Tooltip
+          content={
+            !canCreateBoard ? t`You don't have permission` : undefined
+          }
+        >
+          <Button
+            onClick={() => {
+              if (canCreateBoard) openModal("NEW_BOARD");
+            }}
+            disabled={!canCreateBoard}
+          >
+            {t`Create new ${isTemplate ? "template" : "board"}`}
+          </Button>
+        </Tooltip>
       </div>
     );
 

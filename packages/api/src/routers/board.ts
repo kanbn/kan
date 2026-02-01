@@ -15,7 +15,7 @@ import {
 } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { assertUserInWorkspace } from "../utils/auth";
+import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
@@ -58,7 +58,7 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+      await assertPermission(ctx.db, userId, workspace.id, "board:view");
 
       const result = boardRepo.getAllByWorkspaceId(ctx.db, workspace.id, {
         type: input.type,
@@ -119,7 +119,7 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+      await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
 
       // Convert semantic string filters to date ranges expected by the repo
       const dueDateFilters = input.dueDateFilters
@@ -255,7 +255,7 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+      await assertPermission(ctx.db, userId, workspace.id, "board:create");
 
       // If sourceBoardPublicId is provided, clone the source board
       if (input.sourceBoardPublicId) {
@@ -422,7 +422,13 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+      await assertCanEdit(
+        ctx.db,
+        userId,
+        board.workspaceId,
+        "board:edit",
+        board.createdBy ?? null,
+      );
 
       if (input.slug) {
         const isBoardSlugAvailable = await boardRepo.isBoardSlugAvailable(
@@ -491,7 +497,13 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+      await assertCanDelete(
+        ctx.db,
+        userId,
+        board.workspaceId,
+        "board:delete",
+        board.createdBy ?? null,
+      );
 
       const listIds = board.lists.map((list) => list.id);
 

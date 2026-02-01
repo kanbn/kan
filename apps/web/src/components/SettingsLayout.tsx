@@ -14,8 +14,11 @@ import {
   HiOutlineBanknotes,
   HiOutlineCodeBracketSquare,
   HiOutlineRectangleGroup,
+  HiOutlineShieldCheck,
   HiOutlineUser,
 } from "react-icons/hi2";
+import { usePermissions } from "~/hooks/usePermissions";
+import { useWorkspace } from "~/providers/workspace";
 
 interface SettingsLayoutProps {
   children: React.ReactNode;
@@ -24,7 +27,11 @@ interface SettingsLayoutProps {
 
 export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
   const router = useRouter();
+  const { workspace } = useWorkspace();
+  const { canViewWorkspace, canEditWorkspace } = usePermissions();
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+
+  const isAdmin = workspace.role === "admin";
 
   const settingsTabs = [
     {
@@ -37,13 +44,19 @@ export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
       key: "workspace",
       icon: <HiOutlineRectangleGroup />,
       label: t`Workspace`,
-      condition: true,
+      condition: canViewWorkspace,
+    },
+    {
+      key: "permissions",
+      icon: <HiOutlineShieldCheck />,
+      label: t`Permissions`,
+      condition: isAdmin,
     },
     {
       key: "billing",
       label: t`Billing`,
       icon: <HiOutlineBanknotes />,
-      condition: env("NEXT_PUBLIC_KAN_ENV") === "cloud",
+      condition: env("NEXT_PUBLIC_KAN_ENV") === "cloud" && isAdmin,
     },
     {
       key: "api",
@@ -55,7 +68,7 @@ export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
       key: "integrations",
       icon: <HiOutlineCodeBracketSquare />,
       label: t`Integrations`,
-      condition: true,
+      condition: canEditWorkspace,
     },
   ];
 
@@ -97,7 +110,7 @@ export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
               >
                 <div className="relative mb-4">
                   <ListboxButton className="w-full appearance-none rounded-lg border-0 bg-light-50 py-2 pl-3 pr-10 text-left text-sm text-light-1000 shadow-sm ring-1 ring-inset ring-light-300 focus:ring-2 focus:ring-inset focus:ring-light-400 dark:bg-dark-50 dark:text-dark-1000 dark:ring-dark-300 dark:focus:ring-dark-500">
-                    {availableTabs[selectedTabIndex]?.label || "Select a tab"}
+                    {availableTabs[selectedTabIndex]?.label ?? "Select a tab"}
                     <HiChevronDown
                       aria-hidden="true"
                       className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-light-900 dark:text-dark-900"

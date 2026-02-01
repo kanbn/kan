@@ -424,6 +424,7 @@ export const getWithListAndMembersByPublicId = async (
       title: true,
       description: true,
       dueDate: true,
+      createdBy: true,
     },
     with: {
       labels: {
@@ -938,7 +939,7 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
   cardPublicId: string,
 ) => {
   const result = await db.query.cards.findFirst({
-    columns: { id: true },
+    columns: { id: true, createdBy: true },
     where: and(eq(cards.publicId, cardPublicId), isNull(cards.deletedAt)),
     with: {
       list: {
@@ -958,6 +959,7 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
   return result
     ? {
         id: result.id,
+        createdBy: result.createdBy,
         workspaceId: result.list.board.workspaceId,
         workspaceVisibility: result.list.board.visibility,
       }

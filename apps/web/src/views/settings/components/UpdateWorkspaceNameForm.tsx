@@ -20,9 +20,11 @@ type FormValues = z.infer<typeof schema>;
 const UpdateWorkspaceNameForm = ({
   workspacePublicId,
   workspaceName,
+  disabled = false,
 }: {
   workspacePublicId: string;
   workspaceName: string;
+  disabled?: boolean;
 }) => {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
@@ -70,9 +72,13 @@ const UpdateWorkspaceNameForm = ({
   return (
     <div className="flex gap-2">
       <div className="mb-4 flex w-full max-w-[325px] items-center gap-2">
-        <Input {...register("name")} errorMessage={errors.name?.message} />
+        <Input
+          {...register("name")}
+          errorMessage={errors.name?.message}
+          disabled={disabled}
+        />
       </div>
-      {isDirty && (
+      {isDirty && !disabled && (
         <div>
           <Button
             onClick={handleSubmit(onSubmit)}
