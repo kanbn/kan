@@ -93,7 +93,7 @@ export const create = async (
         index: index,
         dueDate: cardInput.dueDate ?? null,
       })
-      .returning({ id: cards.id, listId: cards.listId });
+      .returning({ id: cards.id, listId: cards.listId, publicId: cards.publicId });
 
     if (!result[0]) throw new Error("Unable to create card");
 
