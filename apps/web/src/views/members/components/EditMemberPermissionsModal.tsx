@@ -4,6 +4,7 @@ import { HiXMark } from "react-icons/hi2";
 import type { Permission } from "@kan/shared";
 import { permissionCategories } from "@kan/shared";
 
+import Button from "~/components/Button";
 import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -153,33 +154,33 @@ export function EditMemberPermissionsModal() {
   };
 
   return (
-    <div className="w-full rounded-md bg-light-50 p-6 text-light-1000 dark:bg-dark-100 dark:text-dark-1000">
-      <div className="mb-3 flex items-start justify-between gap-3">
-        <div>
-          <h2 className="mb-1 text-sm font-semibold">
-            {t`Edit permissions`}
-          </h2>
-          <p className="min-h-[16px] text-xs text-light-900 dark:text-dark-900">
-            {entityLabel || "\u00A0"}
-          </p>
+    <div className="w-full rounded-md bg-light-50 text-light-1000 dark:bg-dark-100 dark:text-dark-1000">
+      <div className="px-5 pt-5">
+        <div className="mb-3 flex items-start justify-between gap-3">
+          <div>
+            <h2 className="mb-1 text-sm font-semibold">
+              {t`Edit permissions`}
+            </h2>
+            <p className="min-h-[16px] text-xs text-light-900 dark:text-dark-900">
+              {entityLabel}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={closeModal}
+            className="ml-2 inline-flex h-6 w-6 items-center justify-center rounded-md text-light-900 hover:bg-light-200 focus:outline-none dark:text-dark-900 dark:hover:bg-dark-200"
+            aria-label={t`Close`}
+          >
+            <HiXMark className="h-3.5 w-3.5" />
+          </button>
         </div>
-        <button
-          type="button"
-          onClick={closeModal}
-          className="ml-2 inline-flex h-6 w-6 items-center justify-center rounded-md text-light-900 hover:bg-light-200 focus:outline-none dark:text-dark-900 dark:hover:bg-dark-200"
-          aria-label={t`Close`}
-        >
-          <HiXMark className="h-3.5 w-3.5" />
-        </button>
-      </div>
 
-      {isLoading ? (
-        <p className="text-xs text-light-900 dark:text-dark-900">
-          {t`Loading permissions...`}
-        </p>
-      ) : (
-        <>
-          <div className="max-h-80 space-y-3 overflow-y-auto pr-1">
+        {isLoading ? (
+          <p className="text-xs text-light-900 dark:text-dark-900">
+            {t`Loading permissions...`}
+          </p>
+        ) : (
+          <div className="max-h-80 pb-4 space-y-3 overflow-y-auto pr-1">
             {Object.values(permissionCategories).map((category, index) => (
               <div
                 key={category.label}
@@ -224,25 +225,27 @@ export function EditMemberPermissionsModal() {
               </div>
             ))}
           </div>
-          <div className="mt-4 flex justify-end">
-            <button
-              type="button"
-              onClick={() => {
-                if (!workspace.publicId || !entityId || isBusy) return;
-                resetMutation.mutate({
-                  workspacePublicId: workspace.publicId,
-                  memberPublicId: entityId,
-                });
-              }}
-              disabled={isBusy || !hasOverrides}
-              className="rounded-md border border-light-400 px-3 py-1.5 text-xs text-light-900 hover:bg-light-200 disabled:opacity-60 dark:border-dark-400 dark:text-dark-900 dark:hover:bg-dark-200"
-            >
-              {t`Reset to role defaults`}
-            </button>
-          </div>
-        </>
-      )}
-
+        )}
+      </div>
+      <div className="flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+        <div>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => {
+              if (!workspace.publicId || !entityId || isBusy) return;
+              resetMutation.mutate({
+                workspacePublicId: workspace.publicId,
+                memberPublicId: entityId,
+              });
+            }}
+            disabled={isBusy || !hasOverrides}
+            isLoading={resetMutation.isPending}
+          >
+            {t`Reset to role defaults`}
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

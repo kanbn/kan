@@ -400,6 +400,7 @@ export default function MembersPage() {
           <Modal
             modalSize="sm"
             isVisible={isOpen && modalContentType === "EDIT_MEMBER_PERMISSIONS"}
+            centered
           >
             <EditMemberPermissionsModal />
           </Modal>
