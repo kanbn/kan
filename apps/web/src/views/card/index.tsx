@@ -53,9 +53,10 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
     ? router.query.cardId[0]
     : router.query.cardId;
 
-  const { data: card } = api.card.byId.useQuery({
-    cardPublicId: cardId ?? "",
-  });
+  const { data: card } = api.card.byId.useQuery(
+    { cardPublicId: cardId ?? "" },
+    { enabled: !!cardId && cardId.length >= 12 },
+  );
 
   const isCreator = card?.createdBy && session?.user.id === card.createdBy;
   const canEdit = canEditCard || isCreator;
@@ -184,9 +185,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     ? router.query.cardId[0]
     : router.query.cardId;
 
-  const { data: card, isLoading } = api.card.byId.useQuery({
-    cardPublicId: cardId ?? "",
-  });
+  const { data: card, isLoading } = api.card.byId.useQuery(
+    { cardPublicId: cardId ?? "" },
+    { enabled: !!cardId && cardId.length >= 12 },
+  );
 
   const isCreator = card?.createdBy && session?.user.id === card.createdBy;
   const canEdit = canEditCard || isCreator;
