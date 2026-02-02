@@ -32,7 +32,7 @@ export function CardModal({
       cardPublicId: cardPublicId ?? "",
     },
     {
-      enabled: isOpen && !!cardPublicId,
+      enabled: isOpen && !!cardPublicId && cardPublicId.length >= 12,
     },
   );
 

@@ -31,9 +31,10 @@ export default function WorkspaceSettings() {
   const { data } = api.user.getUser.useQuery();
   const [hasOpenedUpgradeModal, setHasOpenedUpgradeModal] = useState(false);
 
-  const { data: workspaceData } = api.workspace.byId.useQuery({
-    workspacePublicId: workspace.publicId,
-  });
+  const { data: workspaceData } = api.workspace.byId.useQuery(
+    { workspacePublicId: workspace.publicId },
+    { enabled: !!workspace.publicId && workspace.publicId.length >= 12 },
+  );
 
   const subscriptions = workspaceData?.subscriptions as
     | Subscription[]

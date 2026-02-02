@@ -363,7 +363,7 @@ const ActivityList = ({
       limit: ACTIVITIES_PAGE_SIZE,
     },
     {
-      enabled: !!cardPublicId,
+      enabled: !!cardPublicId && cardPublicId.length >= 12,
     },
   );
 

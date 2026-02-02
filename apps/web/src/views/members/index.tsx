@@ -37,7 +37,7 @@ export default function MembersPage() {
 
   const { data, isLoading } = api.workspace.byId.useQuery(
     { workspacePublicId: workspace.publicId },
-    // { enabled: workspace?.publicId ? true : false },
+    { enabled: !!workspace.publicId && workspace.publicId.length >= 12 },
   );
 
   const { data: session } = authClient.useSession();
@@ -48,9 +48,11 @@ export default function MembersPage() {
 
   const updateRoleMutation = api.member.updateRole.useMutation({
     onSuccess: async () => {
-      await utils.workspace.byId.invalidate({
-        workspacePublicId: workspace.publicId,
-      });
+      if (workspace.publicId && workspace.publicId.length >= 12) {
+        await utils.workspace.byId.invalidate({
+          workspacePublicId: workspace.publicId,
+        });
+      }
 
       showPopup({
         header: t`Role updated`,

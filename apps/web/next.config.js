@@ -53,7 +53,6 @@ const config = {
         {
           protocol: 'https',
           hostname: 'cdn.discordapp.com',
-          pathname: '/avatars/**',
         },
       ];
 
@@ -93,12 +92,6 @@ const config = {
   experimental: {
     // instrumentationHook: true,
     swcPlugins: [["@lingui/swc-plugin", {}]],
-  },
-
-  api: {
-    bodyParser: {
-      sizeLimit: env("NEXT_API_BODY_SIZE_LIMIT") || '1mb',
-    },
   },
 
   async rewrites() {

@@ -22,9 +22,11 @@ export default function UpdateWorkspaceEmailVisibilityForm({
 
   const updateWorkspace = api.workspace.update.useMutation({
     onSuccess: () => {
-      void utils.workspace.byId.invalidate({
-        workspacePublicId,
-      });
+      if (workspacePublicId && workspacePublicId.length >= 12) {
+        void utils.workspace.byId.invalidate({
+          workspacePublicId,
+        });
+      }
     },
   });
 
