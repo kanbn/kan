@@ -5,6 +5,8 @@ checksums:
     "%2C%20or%20see%20our/singular": e8a8f2a078fcaea03481710dcaccce5d
     "%7B0%7D/singular": 18782768c8a0b3c2078747b34fbbcd24
     "%7B0%7D%20%7C%20%7B1%7D/singular": 4628f9c6ec13c2dc2984a6ab80e19f8b
+    "%7B0%7D%20has%20been%20added%20to%20your%20favorites./singular": 0f752180183c80703b3f9f39dc97195f
+    "%7B0%7D%20has%20been%20removed%20from%20your%20favorites./singular": 26e4b4997ad8a711d0b3e46337799454
     "%7B0%7D%20labels/singular": 785f92bedf786ff3e285adfc07c69d18
     "%7B0%7D%20not%20found/singular": a2665fc66f128fee1a80ffec61c9f1a1
     "%7BboardCount%2C%20plural%2C%20one%20%7BImport%20board%20(1)%7D%20other%20%7BImport%20boards%20(%7BboardCount%7D)%7D%7D/singular": 72358c550bd1a99fcb6e8952f0f947ef
@@ -27,6 +29,7 @@ checksums:
     Add%20details.../singular: 2f42547fd5d199f173aa7a88c8a9b19a
     Add%20label/singular: 0be732d46df263265935fda342097a08
     Add%20member/singular: 11979625770516ca287e929381778e02
+    Add%20to%20favorites/singular: 532155acb0a46f2b6c37e15afb3ad21e
     added%20%7B0%7D%20labels%3A%20%3C0%3E%7BlabelList%7D%3C%2F0%3E/singular: 42b0488d570626dc887c58ff669c953c
     added%20a%20checklist/singular: 44304f4a5ef3a46378eea243b5d2df79
     added%20a%20checklist%20item/singular: 20bc0330dba5a9ec978e04bec174365a
@@ -35,6 +38,7 @@ checksums:
     added%20checklist%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: fb6a852c50c1629f47c6f155fc93fdee
     added%20checklist%20item%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: bdd202da20b1fffbec21792c5453f90c
     added%20label%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: b32be052b3d57de0c9120fa7f9fc86ee
+    Added%20to%20favorites/singular: 848046ec65d15913112b466c544722eb
     Adding%20a%20new%20member%20will%20cost%20an%20additional%20%7Bprice%7D%20(%7BbillingType%7D)%20per%20seat./singular: 12e88573028306110fbc15ef1e714892
     Adjust%20the%20square%20crop%20to%20fit%20your%20avatar./singular: a4df26bbce6f14c6962fac1324db00a8
     Admin/singular: 90eb20f1400db82ab874744e47836dc6
@@ -106,7 +110,6 @@ checksums:
     Can%20edit%20member%20roles%20and%20permissions/singular: c364e8e8866111a471f4081db0730049
     Can%20edit%20workspace/singular: 9768f990844e215c06910fed250da23a
     Can%20invite%20members/singular: e02e562bcb7f46008d9595e485951413
-    can%20manage%20workspace%20settings/singular: 78bfe1746f961f37b1cde85e5a0e9a13
     Can%20manage%20workspace%20settings/singular: 27eb18d3be5b3d813996b7d5071e0317
     Can%20remove%20members/singular: 97a452b0fb4b661eaca7e5b3d5b49dcd
     Can%20view%20boards/singular: 14977bbbb566f72fc74e17d99bad09bb
@@ -462,10 +465,12 @@ checksums:
     Recruitment/singular: 78084ee4954aa22efe9ad7463d2a0c72
     Remote/singular: dc3e4280dfe5c455b38ba6c8884999cf
     Remove/singular: dba2fe5fe9f83f8078c687f28cba4b52
+    Remove%20from%20favorites/singular: 74d9cc2d2f3c7a7dc42a7e62c8ee06d5
     Remove%20member/singular: 1d77c2ca3768e486fd1fb5df30cb60d9
     removed%20%7B0%7D%20labels%3A%20%3C0%3E%7BlabelList%7D%3C%2F0%3E/singular: 612fcfd4aca6818fc870f81d9687d63f
     removed%20a%20label%20from%20the%20card/singular: f83ec18850a2a8a3f8242a740a04df06
     removed%20a%20member%20from%20the%20card/singular: 0bd7561bb79358fde3d595c3e60a315a
+    Removed%20from%20favorites/singular: 540609ab686ed67b1cfd7649467b8bc1
     removed%20label%20%3C0%3E%7B0%7D%3C%2F0%3E/singular: 7e0936b15831e65754588b8512f62fcb
     removed%20the%20due%20date/singular: 000c084844718540fcad542dd8caf8b4
     renamed%20a%20checklist/singular: 4d208de1857740e63469007c5b8b491a
@@ -581,6 +586,7 @@ checksums:
     Unable%20to%20reorder%20checklist%20item/singular: dcc238c72b85daf74ebd46adcd914473
     Unable%20to%20reset%20permissions/singular: fb09d88ff4eb32afb852d733bafd515b
     Unable%20to%20send%20feedback/singular: 656c93265d7e2bef1245b17d85f85ae5
+    Unable%20to%20update%20board/singular: 62899897d7bffcb1df3af77d460f0881
     Unable%20to%20update%20board%20URL/singular: 080746884059142358b58d9a44ff7d93
     Unable%20to%20update%20board%20visibility/singular: a76a21d561b8943e9276e027a1e3f70d
     Unable%20to%20update%20card/singular: eca6002e57af8ec97324eae64e3b5731
