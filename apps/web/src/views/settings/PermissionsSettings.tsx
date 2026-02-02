@@ -28,9 +28,11 @@ export default function PermissionsSettings() {
         });
 
         // Refresh any relevant workspace data
-        await utils.workspace.byId.invalidate({
-          workspacePublicId: workspace.publicId,
-        });
+        if (workspace.publicId && workspace.publicId.length >= 12) {
+          await utils.workspace.byId.invalidate({
+            workspacePublicId: workspace.publicId,
+          });
+        }
       },
       onError: () => {
         showPopup({
