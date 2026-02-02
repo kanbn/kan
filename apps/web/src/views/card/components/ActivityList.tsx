@@ -36,12 +36,21 @@ const truncate = (value: string | null, maxLength = 50) => {
   return value.length > maxLength ? `${value.slice(0, maxLength - 1)}…` : value;
 };
 
+const getUserDisplayName = (
+  user: { name?: string | null; email?: string | null } | null | undefined,
+): string => {
+  if (user?.name?.trim()) return user.name;
+  if (user?.email) return user.email;
+  return t`Member`;
+};
+
 const getActivityText = ({
   type,
   toTitle,
   fromList,
   toList,
   memberName,
+  memberEmail,
   isSelf,
   label,
   fromTitle,
@@ -54,6 +63,7 @@ const getActivityText = ({
   fromList: string | null;
   toList: string | null;
   memberName: string | null;
+  memberEmail: string | null;
   isSelf: boolean;
   label: string | null;
   fromTitle?: string | null;
@@ -62,6 +72,7 @@ const getActivityText = ({
   dateLocale: DateFnsLocale;
   mergedLabels?: string[];
 }) => {
+  const displayName = memberName ?? memberEmail ?? t`Member`;
   const TextHighlight = ({ children }: { children: React.ReactNode }) => (
     <span className="font-medium text-light-1000 dark:text-dark-1000">
       {children}
@@ -139,23 +150,23 @@ const getActivityText = ({
     );
   }
 
-  if (type === "card.updated.member.added" && memberName) {
+  if (type === "card.updated.member.added" && displayName) {
     if (isSelf) return <Trans>self-assigned the card</Trans>;
 
     return (
       <Trans>
-        assigned <TextHighlight>{truncate(memberName)}</TextHighlight> to the
+        assigned <TextHighlight>{truncate(displayName)}</TextHighlight> to the
         card
       </Trans>
     );
   }
 
-  if (type === "card.updated.member.removed" && memberName) {
+  if (type === "card.updated.member.removed" && displayName) {
     if (isSelf) return <Trans>unassigned themselves from the card</Trans>;
 
     return (
       <Trans>
-        unassigned <TextHighlight>{truncate(memberName)}</TextHighlight> from
+        unassigned <TextHighlight>{truncate(displayName)}</TextHighlight> from
         the card
       </Trans>
     );
@@ -455,6 +466,7 @@ const ActivityList = ({
           fromList: activity.fromList?.name ?? null,
           toList: activity.toList?.name ?? null,
           memberName: activity.member?.user?.name ?? null,
+          memberEmail: activity.member?.user?.email ?? null,
           isSelf: activity.member?.user?.id === sessionData?.user.id,
           label: activity.label?.name ?? null,
           fromTitle: activity.fromTitle ?? null,
@@ -508,7 +520,7 @@ const ActivityList = ({
               )}
             </div>
             <p className="text-sm">
-              <span className="font-medium dark:text-dark-1000">{`${activity.user?.name} `}</span>
+              <span className="font-medium dark:text-dark-1000">{`${getUserDisplayName(activity.user)} `}</span>
               <span className="space-x-1 text-light-900 dark:text-dark-800">
                 {activityText}
               </span>
