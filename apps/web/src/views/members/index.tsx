@@ -212,7 +212,7 @@ export default function MembersPage() {
             </div>
             <div
               className={twMerge(
-                "relative z-50",
+                "relative",
                 (workspace.role !== "admin" || showSkeleton) && "hidden",
               )}
             >
