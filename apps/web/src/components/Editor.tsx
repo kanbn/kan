@@ -523,6 +523,8 @@ export default function Editor({
             oneHalf: false,
             oneQuarter: false,
             threeQuarters: false,
+            superscriptTwo: false,
+            superscriptThree: false,
         }),
         ...(enableYouTubeEmbed ? [YouTubeNode] : []),
       ],
