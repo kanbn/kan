@@ -515,7 +515,15 @@ export default function Editor({
             return `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`;
           },
         }),
-        Typography.configure(),
+        Typography.configure({
+            openDoubleQuote: false,
+            closeDoubleQuote: false,
+            openSingleQuote: false,
+            closeSingleQuote: false,
+            oneHalf: false,
+            oneQuarter: false,
+            threeQuarters: false,
+        }),
         ...(enableYouTubeEmbed ? [YouTubeNode] : []),
       ],
       content,
