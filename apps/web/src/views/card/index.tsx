@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronForwardSharp } from "react-icons/io5";
 
+import { authClient } from "@kan/auth/client";
+
 import Avatar from "~/components/Avatar";
 import Editor from "~/components/Editor";
 import FeedbackModal from "~/components/FeedbackModal";
@@ -14,8 +16,6 @@ import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
-import { authClient } from "@kan/auth/client";
-
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -317,7 +317,12 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                 </Link>
               </div>
               <div className="flex items-center gap-2">
-                <Dropdown cardCreatedBy={card?.createdBy} />
+                <Dropdown
+                  cardPublicId={cardId}
+                  isTemplate={isTemplate}
+                  boardPublicId={boardId}
+                  cardCreatedBy={card?.createdBy}
+                />
               </div>
             </>
           )}
@@ -374,8 +379,14 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                       <div className="mt-2">
                         <Editor
                           content={card.description}
-                          onChange={canEdit ? (e) => setValue("description", e) : undefined}
-                          onBlur={canEdit ? () => handleSubmit(onSubmit)() : undefined}
+                          onChange={
+                            canEdit
+                              ? (e) => setValue("description", e)
+                              : undefined
+                          }
+                          onBlur={
+                            canEdit ? () => handleSubmit(onSubmit)() : undefined
+                          }
                           workspaceMembers={board?.workspace.members ?? []}
                           readOnly={!canEdit}
                         />
