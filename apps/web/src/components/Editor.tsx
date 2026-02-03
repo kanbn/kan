@@ -17,6 +17,7 @@ import {
   ReactRenderer,
   useEditor,
 } from "@tiptap/react";
+import Typography from "@tiptap/extension-typography";
 import StarterKit from "@tiptap/starter-kit";
 import Suggestion from "@tiptap/suggestion";
 import {
@@ -514,6 +515,7 @@ export default function Editor({
             return `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`;
           },
         }),
+        Typography.configure(),
         ...(enableYouTubeEmbed ? [YouTubeNode] : []),
       ],
       content,
