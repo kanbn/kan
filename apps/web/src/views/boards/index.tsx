@@ -22,7 +22,7 @@ import { ImportBoardsForm } from "./components/ImportBoardsForm";
 import { NewBoardForm } from "./components/NewBoardForm";
 
 const boardsTabs = [
-  { key: "boards" as const, label: t`Boards` },
+  { key: "boards" as const, label: t`Active` },
   { key: "archived" as const, label: t`Archived` },
 ];
 
@@ -140,7 +140,10 @@ export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
                 </Listbox>
               </div>
               <div className="hidden sm:block">
-                <div className="border-b border-gray-200 dark:border-white/10">
+                {/* <div className="border-b border-gray-200 dark:border-white/10 mb-5"> 
+                  I prefer without, test before merging to main
+                */}
+                <div>
                   <nav
                     aria-label="Tabs"
                     className="-mb-px flex space-x-8 focus:outline-none"
@@ -150,9 +153,9 @@ export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
                         key={tab.key}
                         type="button"
                         onClick={() => setActiveTab(tab.key)}
-                        className={`whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium transition-colors focus:outline-none ${activeTab === tab.key
-                            ? "border-light-1000 text-light-1000 dark:border-dark-1000 dark:text-dark-1000"
-                            : "border-transparent text-light-900 hover:border-light-950 hover:text-light-950 dark:text-dark-900 dark:hover:border-white/20 dark:hover:text-dark-950"
+                        className={`whitespace-nowrap px-1 py-4 text-sm font-medium transition-colors focus:outline-none ${activeTab === tab.key
+                          ? "border-light-1000 text-light-1000 dark:border-dark-1000 dark:text-dark-1000"
+                          : "border-transparent text-light-900 hover:border-light-950 hover:text-light-950 dark:text-dark-900 dark:hover:border-white/20 dark:hover:text-dark-950"
                           }`}
                       >
                         {tab.label}

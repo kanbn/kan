@@ -8,7 +8,7 @@ import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
-export function BoardsList({ isTemplate }: { isTemplate?: boolean }) {
+export function BoardsList({ isTemplate, archived = false }: { isTemplate?: boolean; archived?: boolean }) {
   const { workspace } = useWorkspace();
   const { openModal } = useModal();
 
@@ -16,6 +16,7 @@ export function BoardsList({ isTemplate }: { isTemplate?: boolean }) {
     {
       workspacePublicId: workspace.publicId,
       type: isTemplate ? "template" : "regular",
+      archived: archived,
     },
     { enabled: workspace.publicId ? true : false },
   );
@@ -35,15 +36,17 @@ export function BoardsList({ isTemplate }: { isTemplate?: boolean }) {
         <div className="flex flex-col items-center">
           <HiOutlineRectangleStack className="h-10 w-10 text-light-800 dark:text-dark-800" />
           <p className="mb-2 mt-4 text-[14px] font-bold text-light-1000 dark:text-dark-950">
-            {t`No ${isTemplate ? "templates" : "boards"}`}
+            {archived ? t`No archived boards` : t`No ${isTemplate ? "templates" : "boards"}`}
           </p>
           <p className="text-[14px] text-light-900 dark:text-dark-900">
-            {t`Get started by creating a new ${isTemplate ? "template" : "board"}`}
+            {archived ? t`Boards you archive will appear here.` : t`Get started by creating a new ${isTemplate ? "template" : "board"}`}
           </p>
         </div>
-        <Button onClick={() => openModal("NEW_BOARD")}>
-          {t`Create new ${isTemplate ? "template" : "board"}`}
-        </Button>
+        {!archived && (
+          <Button onClick={() => openModal("NEW_BOARD")}>
+            {t`Create new ${isTemplate ? "template" : "board"}`}
+          </Button>
+        )}
       </div>
     );
 
