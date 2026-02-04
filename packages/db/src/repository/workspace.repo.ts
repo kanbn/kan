@@ -176,7 +176,9 @@ export const getBySlugWithBoards = (db: dbClient, workspaceSlug: string) => {
           slug: true,
           name: true,
         },
-        where: and(isNull(boards.deletedAt), eq(boards.visibility, "public")),
+        where: and(
+          isNull(boards.deletedAt), eq(boards.visibility, "public"), eq(boards.isArchived, false)
+        ),
       },
     },
     where: and(

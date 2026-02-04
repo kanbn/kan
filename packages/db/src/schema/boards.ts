@@ -10,8 +10,8 @@ import {
   uniqueIndex,
   uuid,
   varchar,
+  boolean,
 } from "drizzle-orm/pg-core";
-
 import { imports } from "./imports";
 import { labels } from "./labels";
 import { lists } from "./lists";
@@ -54,9 +54,11 @@ export const boards = pgTable(
       .references(() => workspaces.id, { onDelete: "cascade" }),
     visibility: boardVisibilityEnum("visibility").notNull().default("private"),
     type: boardTypeEnum("type").notNull().default("regular"),
+    isArchived: boolean("isArchived").notNull().default(false),
     sourceBoardId: bigint("sourceBoardId", { mode: "number" }),
   },
   (table) => [
+    index("board_is_archived_idx").on(table.isArchived),
     index("board_visibility_idx").on(table.visibility),
     index("board_type_idx").on(table.type),
     index("board_source_idx").on(table.sourceBoardId),
