@@ -13,7 +13,6 @@ import { createS3Client } from "@kan/shared/utils";
 import { assertPermission } from "@kan/api/utils/permissions";
 
 const MAX_SIZE_BYTES = 50 * 1024 * 1024; // 50MB
-const allowedContentTypes = ["image/jpeg", "image/png", "image/webp"];
 
 export const config = {
   api: {
@@ -53,10 +52,6 @@ export default withRateLimit(
 
       if (typeof contentType !== "string") {
         return res.status(400).json({ error: "Missing content type" });
-      }
-
-      if (!allowedContentTypes.includes(contentType)) {
-        return res.status(400).json({ error: "Invalid content type" });
       }
 
       if (!Number.isFinite(contentLength) || contentLength <= 0) {
