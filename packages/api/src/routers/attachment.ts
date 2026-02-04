@@ -9,7 +9,7 @@ import { generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
-import { deleteObject, generateUploadUrl } from "../utils/s3";
+import { deleteObject, generateUploadUrl } from "@kan/shared/utils";
 
 export const attachmentRouter = createTRPCRouter({
   generateUploadUrl: protectedProcedure

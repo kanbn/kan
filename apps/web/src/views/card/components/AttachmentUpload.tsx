@@ -7,6 +7,7 @@ import { twMerge } from "tailwind-merge";
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
+import { env } from "next-runtime-env";
 import { api } from "~/utils/api";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
@@ -18,61 +19,32 @@ export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
   const [isDragging, setIsDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const generateUploadUrl = api.attachment.generateUploadUrl.useMutation();
-  const confirmAttachment = api.attachment.confirm.useMutation({
-    onSuccess: async () => {
+  const uploadFile = async (file: File) => {
+    setUploading(true);
+
+    try {
+      const baseUrl = env("NEXT_PUBLIC_BASE_URL") ?? "";
+      const response = await fetch(
+        `${baseUrl}/api/upload/attachment?cardPublicId=${encodeURIComponent(cardPublicId)}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": file.type,
+            "x-original-filename": file.name,
+          },
+          body: file,
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Upload failed");
+      }
+
       await invalidateCard(utils, cardPublicId);
       showPopup({
         header: t`Attachment uploaded`,
         message: t`Your file has been uploaded successfully.`,
         icon: "success",
-      });
-    },
-    onError: () => {
-      showPopup({
-        header: t`Upload failed`,
-        message: t`Failed to upload attachment. Please try again.`,
-        icon: "error",
-      });
-    },
-    onSettled: () => {
-      setUploading(false);
-    },
-  });
-
-  const uploadFile = async (file: File) => {
-    setUploading(true);
-
-    try {
-      // Generate presigned URL
-      const { url, key } = await generateUploadUrl.mutateAsync({
-        cardPublicId,
-        filename: file.name,
-        contentType: file.type,
-        size: file.size,
-      });
-
-      // Upload file to S3
-      const uploadResponse = await fetch(url, {
-        method: "PUT",
-        body: file,
-        headers: {
-          "Content-Type": file.type,
-        },
-      });
-
-      if (!uploadResponse.ok) {
-        throw new Error("Upload failed");
-      }
-
-      // Confirm attachment in database
-      await confirmAttachment.mutateAsync({
-        cardPublicId,
-        s3Key: key,
-        filename: file.name,
-        originalFilename: file.name,
-        contentType: file.type,
-        size: file.size,
       });
     } catch {
       showPopup({

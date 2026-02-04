@@ -11,7 +11,7 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
-import { generateDownloadUrl } from "../utils/s3";
+import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
 
 export const cardRouter = createTRPCRouter({
   create: protectedProcedure
@@ -631,45 +631,54 @@ export const cardRouter = createTRPCRouter({
         });
 
       // Generate URLs for all attachments
-      const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
-      if (result.attachments && Array.isArray(result.attachments)) {
-        const attachments = result.attachments as {
-          publicId: string;
-          contentType: string;
-          s3Key: string;
-          originalFilename: string | null;
-          size?: number | null;
-        }[];
+      const attachmentsWithUrls = await Promise.all(
+        result.attachments.map(async (attachment) => {
+          const url = await generateAttachmentUrl(attachment.s3Key);
+          return {
+            publicId: attachment.publicId,
+            contentType: attachment.contentType,
+            s3Key: attachment.s3Key,
+            originalFilename: attachment.originalFilename,
+            size: attachment.size,
+            url,
+          };
+        }),
+      );
 
-        const attachmentsWithUrls = await Promise.all(
-          attachments.map(async (attachment) => {
-            const base = {
-              publicId: attachment.publicId,
-              contentType: attachment.contentType,
-              s3Key: attachment.s3Key,
-              originalFilename: attachment.originalFilename,
-              size: attachment.size,
-            };
-            if (!bucket || !attachment.s3Key) {
-              return { ...base, url: null };
-            }
-            try {
-              const url = await generateDownloadUrl(
-                bucket,
-                attachment.s3Key,
-                86400, // 24 hours expiration
-              );
-              return { ...base, url };
-            } catch {
-              // If URL generation fails, return attachment with url: null
-              return { ...base, url: null };
-            }
-          }),
-        );
-        return { ...result, attachments: attachmentsWithUrls };
-      }
+      // Generate presigned URLs for workspace member avatars
+      const workspaceWithAvatarUrls = result.list.board.workspace
+        ? {
+            ...result.list.board.workspace,
+            members: await Promise.all(
+              result.list.board.workspace.members.map(async (member) => {
+                if (!member.user?.image) {
+                  return member;
+                }
 
-      return { ...result, attachments: [] };
+                const avatarUrl = await generateAvatarUrl(member.user.image);
+                return {
+                  ...member,
+                  user: {
+                    ...member.user,
+                    image: avatarUrl,
+                  },
+                };
+              }),
+            ),
+          }
+        : result.list.board.workspace;
+
+      return {
+        ...result,
+        attachments: attachmentsWithUrls,
+        list: {
+          ...result.list,
+          board: {
+            ...result.list.board,
+            workspace: workspaceWithAvatarUrls,
+          },
+        },
+      };
     }),
   getActivities: publicProcedure
     .meta({
@@ -738,7 +747,39 @@ export const cardRouter = createTRPCRouter({
         },
       );
 
-      const mergedActivities = mergeActivities(result.activities);
+      // Generate presigned URLs for user avatars in activities
+      const activitiesWithAvatarUrls = await Promise.all(
+        result.activities.map(async (activity) => {
+          const updatedActivity = { ...activity };
+
+          // Generate presigned URL for activity user avatar
+          if (activity.user?.image) {
+            const userAvatarUrl = await generateAvatarUrl(activity.user.image);
+            updatedActivity.user = {
+              ...activity.user,
+              image: userAvatarUrl,
+            };
+          }
+
+          // Generate presigned URL for member user avatar (if exists)
+          if (activity.member?.user?.image) {
+            const memberAvatarUrl = await generateAvatarUrl(
+              activity.member.user.image,
+            );
+            updatedActivity.member = {
+              ...activity.member,
+              user: {
+                ...activity.member.user,
+                image: memberAvatarUrl,
+              },
+            };
+          }
+
+          return updatedActivity;
+        }),
+      );
+
+      const mergedActivities = mergeActivities(activitiesWithAvatarUrls);
 
       return {
         activities: mergedActivities,

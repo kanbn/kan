@@ -4,6 +4,7 @@ import { z } from "zod";
 import * as userRepo from "@kan/db/repository/user.repo";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { generateAvatarUrl } from "@kan/shared/utils";
 
 export const userRouter = createTRPCRouter({
   getUser: protectedProcedure
@@ -55,8 +56,12 @@ export const userRouter = createTRPCRouter({
 
       const apiKey = result.apiKeys[0];
 
+      // Generate presigned URL for avatar
+      const imageUrl = await generateAvatarUrl(result.image);
+
       return {
         ...result,
+        image: imageUrl,
         apiKey: apiKey ?? null,
       };
     }),
@@ -102,6 +107,12 @@ export const userRouter = createTRPCRouter({
         });
       }
 
-      return result;
+      // Generate presigned URL for avatar
+      const imageUrl = await generateAvatarUrl(result.image);
+
+      return {
+        ...result,
+        image: imageUrl,
+      };
     }),
 });

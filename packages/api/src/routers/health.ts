@@ -24,7 +24,7 @@ import {
   createTRPCRouter,
   publicProcedure,
 } from "../trpc";
-import { createS3Client } from "../utils/s3";
+import { createS3Client } from "@kan/shared/utils";
 
 const checkDatabaseConnection = async (db: dbClient) => {
   try {

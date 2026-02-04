@@ -126,7 +126,6 @@ export default function MembersPage() {
                   name={memberName ?? ""}
                   email={memberEmail ?? ""}
                   imageUrl={memberImage ? getAvatarUrl(memberImage) : undefined}
-                  icon={showPendingIcon ? "?" : undefined}
                 />
               )}
             </div>
