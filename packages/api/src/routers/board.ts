@@ -143,6 +143,13 @@ export const boardRouter = createTRPCRouter({
         },
       );
 
+      if (!result) {
+        throw new TRPCError({
+          message: `Board with public ID ${input.boardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+      }
+
       // Generate presigned URLs for workspace member avatars
       const workspaceWithAvatarUrls = result.workspace
         ? {
