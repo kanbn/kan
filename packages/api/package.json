@@ -27,6 +27,14 @@
     "./utils/rateLimit": {
       "types": "./dist/utils/rateLimit.d.ts",
       "default": "./src/utils/rateLimit.ts"
+    },
+    "./utils/s3": {
+      "types": "./dist/utils/s3.d.ts",
+      "default": "./src/utils/s3.ts"
+    },
+    "./utils/permissions": {
+      "types": "./dist/utils/permissions.d.ts",
+      "default": "./src/utils/permissions.ts"
     }
   },
   "license": "GPL-3.0",

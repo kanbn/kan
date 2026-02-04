@@ -1,4 +1,4 @@
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { ChatOrPushProviderEnum } from "@novu/api/models/components";
 import { createAuthMiddleware } from "better-auth/api";
 import { env } from "next-runtime-env";
@@ -8,6 +8,7 @@ import * as memberRepo from "@kan/db/repository/member.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import { notificationClient } from "@kan/email";
 import { createEmailUnsubscribeLink } from "@kan/shared";
+import { createS3Client } from "@kan/api/utils/s3";
 
 import { downloadImage } from "./utils";
 
@@ -61,20 +62,7 @@ export function createDatabaseHooks(db: dbClient) {
             !user.image.includes(storageDomain)
           ) {
             try {
-              const credentials =
-                env("S3_ACCESS_KEY_ID") && env("S3_SECRET_ACCESS_KEY")
-                  ? {
-                      accessKeyId: env("S3_ACCESS_KEY_ID")!,
-                      secretAccessKey: env("S3_SECRET_ACCESS_KEY")!,
-                    }
-                  : undefined;
-
-              const client = new S3Client({
-                region: env("S3_REGION") ?? "",
-                endpoint: env("S3_ENDPOINT") ?? "",
-                forcePathStyle: env("S3_FORCE_PATH_STYLE") === "true",
-                credentials,
-              });
+              const client = createS3Client();
 
               const allowedFileExtensions = ["jpg", "jpeg", "png", "webp"];
 
