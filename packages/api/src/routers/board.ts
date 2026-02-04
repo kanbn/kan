@@ -33,6 +33,7 @@ export const boardRouter = createTRPCRouter({
       z.object({
         workspacePublicId: z.string().min(12),
         type: z.enum(["regular", "template"]).optional(),
+        archived: z.boolean().optional(),
       }),
     )
     .output(
@@ -61,6 +62,7 @@ export const boardRouter = createTRPCRouter({
       await assertUserInWorkspace(ctx.db, userId, workspace.id);
 
       const result = boardRepo.getAllByWorkspaceId(ctx.db, workspace.id, {
+        archived: input.archived ?? false,
         type: input.type,
       });
 
@@ -590,5 +592,119 @@ export const boardRouter = createTRPCRouter({
       return {
         isReserved: !isBoardSlugAvailable,
       };
+    }),
+  archive: protectedProcedure
+    .meta({
+      openapi: {
+        method: "PATCH",
+        path: "/boards/{boardPublicId}/archive",
+        summary: "Archive board",
+        description: "Archives a board by its public ID",
+        tags: ["Boards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        boardPublicId: z.string().min(12),
+      }),
+    )
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
+        ctx.db,
+        input.boardPublicId,
+      );
+
+      if (!board)
+        throw new TRPCError({
+          message: `Board with public ID ${input.boardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+
+      const result = await boardRepo.update(ctx.db, {
+        boardPublicId: input.boardPublicId,
+        name: undefined,
+        slug: undefined,
+        visibility: undefined,
+        isArchived: true,
+      });
+
+      if (!result) {
+        throw new TRPCError({
+          message: "Failed to archive board",
+          code: "INTERNAL_SERVER_ERROR",
+        });
+      }
+
+      return { success: true };
+
+    }),
+  unarchive: protectedProcedure
+    .meta({
+      openapi: {
+        method: "PATCH",
+        path: "/boards/{boardPublicId}/unarchive",
+        summary: "Unarchive board",
+        description: "Unarchive a board by its public ID",
+        tags: ["Boards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        boardPublicId: z.string().min(12),
+      }),
+    )
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
+        ctx.db,
+        input.boardPublicId,
+      );
+
+      if (!board)
+        throw new TRPCError({
+          message: `Board with public ID ${input.boardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+
+      const result = await boardRepo.update(ctx.db, {
+        boardPublicId: input.boardPublicId,
+        name: undefined,
+        slug: undefined,
+        visibility: undefined,
+        isArchived: false,
+      });
+
+      if (!result) {
+        throw new TRPCError({
+          message: "Failed to unarchive board",
+          code: "INTERNAL_SERVER_ERROR",
+        });
+      }
+
+      return { success: true };
+
     }),
 });
