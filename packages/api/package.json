@@ -28,10 +28,6 @@
       "types": "./dist/utils/rateLimit.d.ts",
       "default": "./src/utils/rateLimit.ts"
     },
-    "./utils/s3": {
-      "types": "./dist/utils/s3.d.ts",
-      "default": "./src/utils/s3.ts"
-    },
     "./utils/permissions": {
       "types": "./dist/utils/permissions.d.ts",
       "default": "./src/utils/permissions.ts"
@@ -47,8 +43,6 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.802.0",
-    "@aws-sdk/s3-request-presigner": "^3.812.0",
     "@kan/auth": "workspace:*",
     "@kan/db": "workspace:*",
     "@kan/email": "workspace:^",

@@ -10,6 +10,7 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { colours } from "@kan/shared/constants";
 import {
   convertDueDateFiltersToRanges,
+  generateAvatarUrl,
   generateSlug,
   generateUID,
 } from "@kan/shared/utils";
@@ -142,7 +143,33 @@ export const boardRouter = createTRPCRouter({
         },
       );
 
-      return result;
+      // Generate presigned URLs for workspace member avatars
+      const workspaceWithAvatarUrls = result.workspace
+        ? {
+            ...result.workspace,
+            members: await Promise.all(
+              result.workspace.members.map(async (member) => {
+                if (!member.user?.image) {
+                  return member;
+                }
+
+                const avatarUrl = await generateAvatarUrl(member.user.image);
+                return {
+                  ...member,
+                  user: {
+                    ...member.user,
+                    image: avatarUrl,
+                  },
+                };
+              }),
+            ),
+          }
+        : result.workspace;
+
+      return {
+        ...result,
+        workspace: workspaceWithAvatarUrls,
+      };
     }),
   bySlug: publicProcedure
     .meta({

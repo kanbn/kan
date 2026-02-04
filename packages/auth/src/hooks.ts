@@ -7,8 +7,7 @@ import type { dbClient } from "@kan/db/client";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import { notificationClient } from "@kan/email";
-import { createEmailUnsubscribeLink } from "@kan/shared";
-import { createS3Client } from "@kan/api/utils/s3";
+import { createEmailUnsubscribeLink, createS3Client } from "@kan/shared";
 
 import { downloadImage } from "./utils";
 

@@ -6,7 +6,7 @@ import * as userRepo from "@kan/db/repository/user.repo";
 
 import { env } from "~/env";
 import { withRateLimit } from "@kan/api/utils/rateLimit";
-import { createS3Client } from "@kan/api/utils/s3";
+import { createS3Client } from "@kan/shared/utils";
 
 const MAX_SIZE_BYTES = 2 * 1024 * 1024; // 2MB
 const allowedContentTypes = ["image/jpeg", "image/png", "image/webp"];

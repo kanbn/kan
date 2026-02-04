@@ -8,6 +8,7 @@ import { generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
+import { generateAvatarUrl } from "@kan/shared/utils";
 
 export const workspaceRouter = createTRPCRouter({
   all: protectedProcedure
@@ -86,9 +87,27 @@ export const workspaceRouter = createTRPCRouter({
       const shouldShowEmails =
         isAdmin || result.showEmailsToMembers === true;
 
+      // Generate presigned URLs for member avatars
+      const membersWithAvatarUrls = await Promise.all(
+        result.members.map(async (member) => {
+          if (!member.user?.image) {
+            return member;
+          }
+
+          const avatarUrl = await generateAvatarUrl(member.user.image);
+          return {
+            ...member,
+            user: {
+              ...member.user,
+              image: avatarUrl,
+            },
+          };
+        }),
+      );
+
       // If emails should be hidden, filter them out
       if (!shouldShowEmails) {
-        const sanitizedMembers = result.members.map((member) => {
+        const sanitizedMembers = membersWithAvatarUrls.map((member) => {
           // If user doesn't have a display name, use anonymous identifier
           const displayName =
             member.user?.name?.trim() ?? `anonymous_${member.publicId}`;
@@ -120,7 +139,10 @@ export const workspaceRouter = createTRPCRouter({
         } as Awaited<ReturnType<typeof workspaceRepo.getByPublicIdWithMembers>>;
       }
 
-      return result;
+      return {
+        ...result,
+        members: membersWithAvatarUrls,
+      };
     }),
   bySlug: publicProcedure
     .meta({

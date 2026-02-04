@@ -9,7 +9,7 @@ import { generateUID } from "@kan/shared/utils";
 
 import { env } from "~/env";
 import { withRateLimit } from "@kan/api/utils/rateLimit";
-import { createS3Client } from "@kan/api/utils/s3";
+import { createS3Client } from "@kan/shared/utils";
 import { assertPermission } from "@kan/api/utils/permissions";
 
 const MAX_SIZE_BYTES = 50 * 1024 * 1024; // 50MB

@@ -1,5 +1,3 @@
-import { env } from "next-runtime-env";
-
 export const formatToArray = (
   value: string | string[] | undefined,
 ): string[] => {
@@ -52,14 +50,5 @@ export const getAvatarUrl = (imageOrKey: string | null) => {
     return imageOrKey;
   }
 
-  const bucket = env("NEXT_PUBLIC_AVATAR_BUCKET_NAME");
-  const useVirtualHostedUrls = env("NEXT_PUBLIC_USE_VIRTUAL_HOSTED_URLS");
-  const storageDomain = env("NEXT_PUBLIC_STORAGE_DOMAIN");
-
-  if (useVirtualHostedUrls === "true" && storageDomain) {
-    return `https://${bucket}.${storageDomain}/${imageOrKey}`;
-  }
-
-  const storageUrl = env("NEXT_PUBLIC_STORAGE_URL");
-  return `${storageUrl}/${bucket}/${imageOrKey}`;
+  return "";
 };
