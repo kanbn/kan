@@ -47,7 +47,17 @@ See our [roadmap](https://kan.bn/kan/roadmap) for upcoming features.
 
 ## Self Hosting 🐳
 
-The easiest way to self-host Kan is with Docker Compose. This will set up everything for you including your postgres database.
+### One-click Deployments
+
+The easiest way to deploy Kan is through Railway. We've partnered with Railway to maintain an official template that supports the development of the project.
+
+<a href="https://railway.com/deploy/kan?referralCode=bZPsr2&utm_medium=integration&utm_source=template&utm_campaign=generic">
+  <img src="https://railway.app/button.svg" alt="Deploy on Railway" height="40" />
+</a>
+
+### Docker Compose
+
+Alternatively, you can self-host Kan with Docker Compose. This will set up everything for you including your postgres database.
 
 1. Create a new file called `docker-compose.yml` and paste the following configuration:
 
