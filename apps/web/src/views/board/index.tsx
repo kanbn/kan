@@ -443,6 +443,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                   isLoading={isLoading}
                   workspaceSlug={workspace.slug ?? ""}
                   boardSlug={boardData?.slug ?? ""}
+                  boardPublicId={boardId ?? ""}
+                  visibility={boardData?.visibility ?? "private"}
                   canEdit={canEditBoard}
                 />
                 <VisibilityButton

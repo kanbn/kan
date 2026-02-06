@@ -156,7 +156,7 @@ export function UpdateBoardSlugForm({
         <div className="flex items-center gap-2">
           <Button
             variant="secondary"
-            href="/settings?tab=workspace"
+            href="/settings/workspace"
             onClick={closeModal}
           >
             {t`Edit workspace URL`}
