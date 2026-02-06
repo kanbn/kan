@@ -1,12 +1,13 @@
 import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { useEffect, useRef, useState } from "react";
-import { HiXMark } from "react-icons/hi2";
+import { HiLink, HiXMark } from "react-icons/hi2";
 
 import Badge from "~/components/Badge";
 import Editor from "~/components/Editor";
 import LabelIcon from "~/components/LabelIcon";
 import { useModal } from "~/providers/modal";
+import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 import ActivityList from "~/views/card/components/ActivityList";
 import { AttachmentThumbnails } from "~/views/card/components/AttachmentThumbnails";
@@ -23,9 +24,28 @@ export function CardModal({
 }) {
   const router = useRouter();
   const { closeModal, isOpen } = useModal();
+  const { showPopup } = usePopup();
   const [showFade, setShowFade] = useState(false);
   const [showTopFade, setShowTopFade] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleCopyCardLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      showPopup({
+        header: t`Link copied`,
+        icon: "success",
+        message: t`Card URL copied to clipboard`,
+      });
+    } catch (error) {
+      console.error(error);
+      showPopup({
+        header: t`Unable to copy link`,
+        icon: "error",
+        message: t`Please try again.`,
+      });
+    }
+  };
 
   const { data, isLoading } = api.card.byId.useQuery(
     {
@@ -65,33 +85,44 @@ export function CardModal({
         <div className="h-full p-8">
           <div className="mb-6">
             <div className="flex w-full items-center justify-between">
-              <button
-                className="absolute right-[2rem] top-[2rem] rounded p-1 hover:bg-light-300 focus:outline-none dark:hover:bg-dark-300"
-                onClick={(e) => {
-                  e.preventDefault();
-                  closeModal();
+              <div className="absolute right-[2rem] top-[2rem] flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={handleCopyCardLink}
+                  className="rounded p-1.5 transition-all hover:bg-light-200 focus:outline-none dark:hover:bg-dark-100"
+                  aria-label="Copy card link"
+                >
+                  <HiLink className="h-4 w-4 text-light-900 dark:text-dark-900" />
+                </button>
+                <button
+                  type="button"
+                  className="rounded p-1.5 transition-all hover:bg-light-200 focus:outline-none dark:hover:bg-dark-100"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    closeModal();
 
-                  setTimeout(() => {
-                    void router.replace(
-                      {
-                        pathname: router.pathname,
-                        query: {
-                          ...router.query,
-                          workspaceSlug,
-                          boardSlug: [boardSlug],
+                    setTimeout(() => {
+                      void router.replace(
+                        {
+                          pathname: router.pathname,
+                          query: {
+                            ...router.query,
+                            workspaceSlug: workspaceSlug ?? "",
+                            boardSlug: [boardSlug ?? ""],
+                          },
                         },
-                      },
-                      undefined,
-                      { shallow: true },
-                    );
-                  }, 400);
-                }}
-              >
-                <HiXMark
-                  size={18}
-                  className="dark:text-dark-9000 text-light-900"
-                />
-              </button>
+                        undefined,
+                        { shallow: true },
+                      );
+                    }, 400);
+                  }}
+                >
+                  <HiXMark
+                    size={18}
+                    className="text-light-900 dark:text-dark-900"
+                  />
+                </button>
+              </div>
               {isLoading ? (
                 <div className="flex space-x-2">
                   <div className="h-[2.3rem] w-[300px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
