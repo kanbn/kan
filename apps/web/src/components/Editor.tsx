@@ -17,6 +17,7 @@ import {
   ReactRenderer,
   useEditor,
 } from "@tiptap/react";
+import Typography from "@tiptap/extension-typography";
 import StarterKit from "@tiptap/starter-kit";
 import Suggestion from "@tiptap/suggestion";
 import {
@@ -513,6 +514,17 @@ export default function Editor({
           renderText({ options, node }) {
             return `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`;
           },
+        }),
+        Typography.configure({
+            openDoubleQuote: false,
+            closeDoubleQuote: false,
+            openSingleQuote: false,
+            closeSingleQuote: false,
+            oneHalf: false,
+            oneQuarter: false,
+            threeQuarters: false,
+            superscriptTwo: false,
+            superscriptThree: false,
         }),
         ...(enableYouTubeEmbed ? [YouTubeNode] : []),
       ],
