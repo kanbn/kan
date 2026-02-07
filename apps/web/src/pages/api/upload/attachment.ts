@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { Upload } from "@aws-sdk/lib-storage";
 
 import { createNextApiContext } from "@kan/api/trpc";
 import * as cardRepo from "@kan/db/repository/card.repo";
@@ -90,16 +90,19 @@ export default withRateLimit(
 
       const client = createS3Client();
 
-      // Upload the file to S3
-      await client.send(
-        new PutObjectCommand({
+      const upload = new Upload({
+        client,
+        params: {
           Bucket: bucket,
           Key: s3Key,
           Body: req,
           ContentType: contentType,
           ContentLength: contentLength,
-        }),
-      );
+        },
+        leavePartsOnError: false,
+      });
+
+      await upload.done();
 
       // Create attachment record and log activity
       const attachment = await cardAttachmentRepo.create(db, {
