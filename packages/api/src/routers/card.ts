@@ -10,6 +10,7 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
+import { sendMentionEmails } from "../utils/notifications";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
 
@@ -153,6 +154,17 @@ export const cardRouter = createTRPCRouter({
         await cardActivityRepo.bulkCreate(ctx.db, cardActivitesInsert);
       }
 
+      if (input.description) {
+        sendMentionEmails({
+          db: ctx.db,
+          cardPublicId: newCard.publicId,
+          commentHtml: input.description,
+          commenterUserId: userId,
+        }).catch((error) => {
+          console.error("Failed to send mention emails:", error);
+        });
+      }
+
       return newCard;
     }),
   addComment: protectedProcedure
@@ -213,6 +225,16 @@ export const cardRouter = createTRPCRouter({
         commentId: newComment.id,
         toComment: newComment.comment,
         createdBy: userId,
+      });
+
+      sendMentionEmails({
+        db: ctx.db,
+        cardPublicId: input.cardPublicId,
+        commentHtml: input.comment,
+        commenterUserId: userId,
+        commentId: newComment.id,
+      }).catch((error) => {
+        console.error("Failed to send mention emails:", error);
       });
 
       return newComment;
@@ -293,6 +315,16 @@ export const cardRouter = createTRPCRouter({
         fromComment: existingComment.comment,
         toComment: updatedComment.comment,
         createdBy: userId,
+      });
+
+      sendMentionEmails({
+        db: ctx.db,
+        cardPublicId: input.cardPublicId,
+        commentHtml: input.comment,
+        commenterUserId: userId,
+        commentId: updatedComment.id,
+      }).catch((error) => {
+        console.error("Failed to send mention emails:", error);
       });
 
       return updatedComment;
@@ -923,6 +955,15 @@ export const cardRouter = createTRPCRouter({
           createdBy: userId,
           fromDescription: existingCard.description ?? undefined,
           toDescription: input.description,
+        });
+
+        sendMentionEmails({
+          db: ctx.db,
+          cardPublicId: input.cardPublicId,
+          commentHtml: input.description,
+          commenterUserId: userId,
+        }).catch((error) => {
+          console.error("Failed to send mention emails:", error);
         });
       }
 
