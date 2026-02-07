@@ -145,6 +145,7 @@ export const attachmentRouter = createTRPCRouter({
       await cardActivityRepo.create(ctx.db, {
         type: "card.updated.attachment.added",
         cardId: card.id,
+        toTitle: input.originalFilename,
         createdBy: userId,
       });
 
@@ -206,6 +207,7 @@ export const attachmentRouter = createTRPCRouter({
       await cardActivityRepo.create(ctx.db, {
         type: "card.updated.attachment.removed",
         cardId: attachment.cardId,
+        fromTitle: attachment.originalFilename,
         createdBy: userId,
       });
 
