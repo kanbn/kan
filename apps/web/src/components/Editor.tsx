@@ -481,20 +481,28 @@ export default function Editor({
           suggestion: {
             char: "@",
             items: ({ query }: { query: string }) => {
-              const all: MentionItem[] = workspaceMembers.map(
-                (member: WorkspaceMember) => ({
-                  id: member.publicId,
-                  label: member?.user?.name ?? member.email,
-                  image: member?.user?.image ?? null,
-                }),
+              const withEmail = workspaceMembers.filter((member) => member.email);
+              
+              const mapped = withEmail.map((member: WorkspaceMember) => ({
+                id: member.publicId,
+                label: member?.user?.name?.trim() || member.email || "",
+                image: member?.user?.image ?? null,
+              }));
+              
+              const all: MentionItem[] = mapped.filter(
+                (item) => item.label && item.label.length > 0,
               );
-              const q = query.toLowerCase();
-              return all.filter(
-                (u) =>
-                  u.label &&
-                  typeof u.label === "string" &&
-                  u.label.toLowerCase().includes(q),
+              
+              const q = query.toLowerCase().trim();
+              
+              if (q === "") {
+                return all;
+              }
+              
+              const filtered = all.filter((u) =>
+                u.label.toLowerCase().includes(q),
               );
+              return filtered;
             },
             command: ({ editor, range, props }) => {
               const id = props.id ?? "";
