@@ -13,12 +13,16 @@ import * as React from "react";
 
 export const JoinWorkspaceTemplate = ({
   magicLoginUrl,
+  inviterName,
+  workspaceName,
 }: {
   magicLoginUrl?: string;
+  inviterName?: string;
+  workspaceName?: string;
 }) => (
   <Html>
     <Head />
-    <Preview>Log in with this magic link</Preview>
+    <Preview>Join {workspaceName ?? "workspace"} on kan.bn</Preview>
     <Body style={{ backgroundColor: "white" }}>
       <Container
         style={{
@@ -43,7 +47,11 @@ export const JoinWorkspaceTemplate = ({
         <Heading
           style={{ fontSize: "24px", fontWeight: "bold", color: "#232323" }}
         >
-          Login to your Kan account
+          {inviterName
+            ? `${inviterName} invited you to join ${
+                workspaceName ?? "a workspace"
+              }`
+            : `You've been invited to join ${workspaceName ?? "a workspace"}`}
         </Heading>
         <Text
           style={{
@@ -52,7 +60,7 @@ export const JoinWorkspaceTemplate = ({
             color: "#232323",
           }}
         >
-          Click the button below to instantly login to your account.
+          Click the button below to add this workspace to your account.
         </Text>
         <Button
           target="_blank"
@@ -71,7 +79,7 @@ export const JoinWorkspaceTemplate = ({
             color: "white",
           }}
         >
-          Login to your account
+          Join {workspaceName ?? "workspace"}
         </Button>
         <Text
           style={{
@@ -80,7 +88,7 @@ export const JoinWorkspaceTemplate = ({
             color: "#7e7e7e",
           }}
         >
-          If you didn&apos;t try to login, you can safely ignore this email.
+          If you don&apos;t want to join this workspace, you can safely ignore this email.
         </Text>
         <Hr
           style={{
