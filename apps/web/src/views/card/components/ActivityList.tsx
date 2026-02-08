@@ -35,6 +35,11 @@ type ActivityType =
 type ActivityWithMergedLabels =
   GetCardActivitiesOutput["activities"][number] & {
     mergedLabels?: string[];
+    attachment?: {
+      publicId: string;
+      filename: string;
+      originalFilename: string;
+    } | null;
   };
 
 const truncate = (value: string | null, maxLength = 50) => {
@@ -63,6 +68,7 @@ const getActivityText = ({
   toDueDate,
   dateLocale,
   mergedLabels,
+  attachmentName,
 }: {
   type: ActivityType;
   toTitle: string | null;
@@ -77,6 +83,7 @@ const getActivityText = ({
   toDueDate?: Date | null;
   dateLocale: DateFnsLocale;
   mergedLabels?: string[];
+  attachmentName?: string | null;
 }) => {
   const displayName = memberName ?? memberEmail ?? t`Member`;
   const TextHighlight = ({ children }: { children: React.ReactNode }) => (
@@ -264,19 +271,23 @@ const getActivityText = ({
     );
   }
 
-  if (type === "card.updated.attachment.added" && toTitle) {
+  if (type === "card.updated.attachment.added") {
+    const filename = attachmentName ?? toTitle;
+    if (!filename) return baseText;
     return (
       <Trans>
-        added an attachment <TextHighlight>{truncate(toTitle)}</TextHighlight>
+        added an attachment <TextHighlight>{truncate(filename)}</TextHighlight>
       </Trans>
     );
   }
 
-  if (type === "card.updated.attachment.removed" && fromTitle) {
+  if (type === "card.updated.attachment.removed") {
+    const filename = attachmentName ?? fromTitle;
+    if (!filename) return baseText;
     return (
       <Trans>
         removed an attachment{" "}
-        <TextHighlight>{truncate(fromTitle)}</TextHighlight>
+        <TextHighlight>{truncate(filename)}</TextHighlight>
       </Trans>
     );
   }
@@ -495,6 +506,9 @@ const ActivityList = ({
           toDueDate: activity.toDueDate ?? null,
           dateLocale: dateLocale,
           mergedLabels: (activity as ActivityWithMergedLabels).mergedLabels,
+          attachmentName:
+            (activity as ActivityWithMergedLabels).attachment?.originalFilename ??
+            null,
         });
 
         if (activity.type === "card.updated.comment.added")

@@ -115,9 +115,14 @@ export default withRateLimit(
         createdBy: user.id,
       });
 
+      if (!attachment) {
+        return res.status(500).json({ error: "Failed to create attachment" });
+      }
+
       await cardActivityRepo.create(db, {
         type: "card.updated.attachment.added",
         cardId: card.id,
+        attachmentId: attachment.id,
         toTitle: originalFilenameHeader,
         createdBy: user.id,
       });
