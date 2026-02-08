@@ -172,6 +172,8 @@ export const cardRouter = createTRPCRouter({
           },
           {
             boardId: String(list.workspaceId),
+            boardName: list.boardName,
+            listName: list.name,
             user: ctx.user
               ? { id: ctx.user.id, name: ctx.user.name }
               : undefined,
@@ -1030,6 +1032,8 @@ export const cardRouter = createTRPCRouter({
           },
           {
             boardId: String(card.workspaceId),
+            boardName: card.boardName,
+            listName: card.listName,
             user: ctx.user
               ? { id: ctx.user.id, name: ctx.user.name }
               : undefined,
@@ -1121,6 +1125,8 @@ export const cardRouter = createTRPCRouter({
             },
             {
               boardId: String(card.workspaceId),
+              boardName: card.boardName,
+              listName: card.listName,
               user: ctx.user
                 ? { id: ctx.user.id, name: ctx.user.name }
                 : undefined,
