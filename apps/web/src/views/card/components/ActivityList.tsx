@@ -32,9 +32,10 @@ import Comment from "./Comment";
 type ActivityType =
   NonNullable<GetCardByIdOutput>["activities"][number]["type"];
 
-type ActivityWithMergedLabels = GetCardActivitiesOutput["activities"][number] & {
-  mergedLabels?: string[];
-};
+type ActivityWithMergedLabels =
+  GetCardActivitiesOutput["activities"][number] & {
+    mergedLabels?: string[];
+  };
 
 const truncate = (value: string | null, maxLength = 50) => {
   if (!value) return value;
@@ -266,7 +267,7 @@ const getActivityText = ({
   if (type === "card.updated.attachment.added" && toTitle) {
     return (
       <Trans>
-        added attachment <TextHighlight>{truncate(toTitle)}</TextHighlight>
+        added an attachment <TextHighlight>{truncate(toTitle)}</TextHighlight>
       </Trans>
     );
   }
@@ -274,7 +275,8 @@ const getActivityText = ({
   if (type === "card.updated.attachment.removed" && fromTitle) {
     return (
       <Trans>
-        removed attachment <TextHighlight>{truncate(fromTitle)}</TextHighlight>
+        removed an attachment{" "}
+        <TextHighlight>{truncate(fromTitle)}</TextHighlight>
       </Trans>
     );
   }
