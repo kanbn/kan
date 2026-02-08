@@ -225,10 +225,16 @@ export function createPlugins(db: dbClient) {
             },
           );
         } else {
-          // TOOD: Respect NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY
-          await sendEmail(email, "Sign in to kan.bn", "MAGIC_LINK", {
-            magicLoginUrl: url,
-          });
+          await sendEmail(
+            email,
+            process.env.NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY === "true"
+              ? "Sign in to your account"
+              : "Sign in to Kan",
+            "MAGIC_LINK",
+            {
+              magicLoginUrl: url,
+            },
+          );
         }
       },
     }),
