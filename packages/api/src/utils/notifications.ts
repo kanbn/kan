@@ -77,6 +77,8 @@ export async function sendMentionEmails({
       membersToNotify.map(async (member) => {
         const userId = member.user?.id;
         const email = member.user?.email ?? member.email;
+
+        // Skip pending members (no userId) - they can be mentioned but won't receive emails
         if (!userId || !email) return;
 
         try {

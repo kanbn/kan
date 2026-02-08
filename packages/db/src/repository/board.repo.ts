@@ -212,6 +212,7 @@ export const getByPublicId = async (
             columns: {
               publicId: true,
               email: true,
+              status: true,
             },
             with: {
               user: {

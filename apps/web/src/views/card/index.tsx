@@ -167,7 +167,6 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const {
     modalContentType,
     entityId,
-    openModal,
     getModalState,
     clearModalState,
     isOpen,
@@ -198,6 +197,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   };
 
   const board = card?.list.board;
+  const workspaceMembers = board?.workspace.members;
   const boardId = board?.publicId;
 
   const updateCard = api.card.update.useMutation({
@@ -285,6 +285,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   }, [card]);
 
   if (!cardId) return <></>;
+
 
   return (
     <>
@@ -387,7 +388,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                           onBlur={
                             canEdit ? () => handleSubmit(onSubmit)() : undefined
                           }
-                          workspaceMembers={board?.workspace.members ?? []}
+                          workspaceMembers={workspaceMembers ?? []}
                           readOnly={!canEdit}
                         />
                       </div>
