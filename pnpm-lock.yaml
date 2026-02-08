@@ -299,9 +299,6 @@ importers:
 
   packages/api:
     dependencies:
-      '@aws-sdk/lib-storage':
-        specifier: ^3.802.0
-        version: 3.985.0(@aws-sdk/client-s3@3.879.0)
       '@kan/auth':
         specifier: workspace:*
         version: link:../auth
