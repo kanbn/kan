@@ -147,6 +147,10 @@ export const cardActivities = pgTable("card_activity", {
     () => boards.id,
     { onDelete: "set null" },
   ),
+  attachmentId: bigint("attachmentId", { mode: "number" }).references(
+    () => cardAttachments.id,
+    { onDelete: "cascade" },
+  ),
 }).enableRLS();
 
 export const cardActivitiesRelations = relations(cardActivities, ({ one }) => ({
@@ -189,6 +193,11 @@ export const cardActivitiesRelations = relations(cardActivities, ({ one }) => ({
     fields: [cardActivities.commentId],
     references: [comments.id],
     relationName: "cardActivitiesComment",
+  }),
+  attachment: one(cardAttachments, {
+    fields: [cardActivities.attachmentId],
+    references: [cardAttachments.id],
+    relationName: "cardActivitiesAttachment",
   }),
 }));
 
