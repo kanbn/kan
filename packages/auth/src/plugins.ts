@@ -5,6 +5,7 @@ import { magicLink } from "better-auth/plugins/magic-link";
 import type { dbClient } from "@kan/db/client";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
+import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { generateUID } from "@kan/shared/utils";
 import { sendEmail } from "@kan/email";
@@ -133,10 +134,10 @@ export function createPlugins(db: dbClient) {
 
                 if (workspace?.id) {
                   await memberRepo.pauseAllMembers(db, workspace.id);
-                  
+
                   // Reset slug to publicId, or generate a UID if publicId is taken
                   let newSlug = workspace.publicId;
-                  
+
                   if (workspace.slug !== workspace.publicId) {
                     const isPublicIdAvailable = await workspaceRepo.isWorkspaceSlugAvailable(
                       db,
@@ -146,7 +147,7 @@ export function createPlugins(db: dbClient) {
                       newSlug = generateUID();
                     }
                   }
-                  
+
                   await workspaceRepo.update(db, subscription.referenceId, {
                     plan: "free",
                     slug: newSlug,
@@ -171,19 +172,69 @@ export function createPlugins(db: dbClient) {
     magicLink({
       expiresIn: 60 * 60 * 24 * 7, // 7 days
       sendMagicLink: async ({ email, url }) => {
-        if (url.includes("type=invite")) {
+        const decodedUrl = decodeURIComponent(url);
+        console.log("Sending magic link to:", email, "URL:", url);
+        console.log(
+          "Magic link contains invite:",
+          decodedUrl.includes("type=invite"),
+        );
+        if (decodedUrl.includes("type=invite")) {
+          let inviterName = "";
+          let workspaceName = "";
+
+          try {
+            const urlObj = new URL(url);
+            const callbackUrl = urlObj.searchParams.get("callbackURL");
+            if (callbackUrl) {
+              const callbackParams = new URL(
+                callbackUrl,
+                process.env.NEXT_PUBLIC_BASE_URL,
+              ).searchParams;
+              const memberPublicId = callbackParams.get("memberPublicId");
+
+              if (memberPublicId) {
+                const member = await memberRepo.getByPublicId(
+                  db,
+                  memberPublicId,
+                );
+                if (member) {
+                  const [workspace, inviter] = await Promise.all([
+                    workspaceRepo.getById(db, member.workspaceId),
+                    userRepo.getById(db, member.createdBy),
+                  ]);
+
+                  if (workspace) workspaceName = workspace.name;
+                  if (inviter) inviterName = inviter.name ?? "";
+                }
+              }
+            }
+          } catch (error) {
+            console.error("Failed to fetch invite details:", error);
+          }
+
           await sendEmail(
             email,
-            "Invitation to join workspace",
+            workspaceName
+              ? `Invitation to join the workspace ${workspaceName}`
+              : "Invitation to join workspace",
             "JOIN_WORKSPACE",
+            {
+              magicLoginUrl: url,
+              inviterName,
+              workspaceName,
+            },
+          );
+        } else {
+          await sendEmail(
+            email,
+            process.env.NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY === "true"
+              ? "Sign in to your account"
+              : "Sign in to Kan",
+            "MAGIC_LINK",
             {
               magicLoginUrl: url,
             },
           );
-        } else {
-          await sendEmail(email, "Sign in to kan.bn", "MAGIC_LINK", {
-            magicLoginUrl: url,
-          });
         }
       },
     }),
