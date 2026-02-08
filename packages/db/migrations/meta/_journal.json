@@ -197,6 +197,13 @@
       "when": 1772049587901,
       "tag": "20260225195947_AddIsArchivedToBoard",
       "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1771930355536,
+      "tag": "20260224105235_AddGitHubIntegrationSupport",
+      "breakpoints": true
     }
   ]
 }
