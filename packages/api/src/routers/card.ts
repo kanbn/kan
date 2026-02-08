@@ -12,6 +12,10 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
+import {
+  createCardWebhookPayload,
+  sendWebhooksForWorkspace,
+} from "../utils/webhook";
 
 export const cardRouter = createTRPCRouter({
   create: protectedProcedure
@@ -152,6 +156,30 @@ export const cardRouter = createTRPCRouter({
 
         await cardActivityRepo.bulkCreate(ctx.db, cardActivitesInsert);
       }
+
+      // Fire webhooks (non-blocking)
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        list.workspaceId,
+        createCardWebhookPayload(
+          "card.created",
+          {
+            id: String(newCard.id),
+            title: input.title,
+            description: input.description,
+            dueDate: input.dueDate ?? null,
+            listId: String(newCard.listId),
+          },
+          {
+            boardId: String(list.workspaceId),
+            boardName: list.boardName,
+            listName: list.name,
+            user: ctx.user
+              ? { id: ctx.user.id, name: ctx.user.name }
+              : undefined,
+          },
+        ),
+      );
 
       return newCard;
     }),
@@ -966,6 +994,57 @@ export const cardRouter = createTRPCRouter({
         await cardActivityRepo.bulkCreate(ctx.db, activities);
       }
 
+      // Build changes object for webhook
+      const webhookChanges: Record<string, { from: unknown; to: unknown }> = {};
+      if (input.title && existingCard.title !== input.title) {
+        webhookChanges.title = { from: existingCard.title, to: input.title };
+      }
+      if (input.description && existingCard.description !== input.description) {
+        webhookChanges.description = {
+          from: existingCard.description,
+          to: input.description,
+        };
+      }
+      if (
+        input.dueDate !== undefined &&
+        previousDueDate?.getTime() !== input.dueDate?.getTime()
+      ) {
+        webhookChanges.dueDate = { from: previousDueDate, to: input.dueDate };
+      }
+      if (newListId && existingCard.listId !== newListId) {
+        webhookChanges.listId = { from: existingCard.listId, to: newListId };
+      }
+
+      // Fire webhooks (non-blocking)
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        card.workspaceId,
+        createCardWebhookPayload(
+          newListId && existingCard.listId !== newListId
+            ? "card.moved"
+            : "card.updated",
+          {
+            id: String(result.id),
+            title: result.title,
+            description: result.description,
+            dueDate: result.dueDate,
+            listId: String(newListId ?? existingCard.listId),
+          },
+          {
+            boardId: String(card.workspaceId),
+            boardName: card.boardName,
+            listName: card.listName,
+            user: ctx.user
+              ? { id: ctx.user.id, name: ctx.user.name }
+              : undefined,
+            changes:
+              Object.keys(webhookChanges).length > 0
+                ? webhookChanges
+                : undefined,
+          },
+        ),
+      );
+
       return result;
     }),
   delete: protectedProcedure
@@ -1013,6 +1092,9 @@ export const cardRouter = createTRPCRouter({
         card.createdBy,
       );
 
+      // Fetch full card data before delete for webhook
+      const fullCard = await cardRepo.getByPublicId(ctx.db, input.cardPublicId);
+
       const deletedAt = new Date();
 
       await cardRepo.softDelete(ctx.db, {
@@ -1026,6 +1108,32 @@ export const cardRouter = createTRPCRouter({
         cardId: card.id,
         createdBy: userId,
       });
+
+      // Fire webhooks (non-blocking)
+      if (fullCard) {
+        void sendWebhooksForWorkspace(
+          ctx.db,
+          card.workspaceId,
+          createCardWebhookPayload(
+            "card.deleted",
+            {
+              id: String(fullCard.id),
+              title: fullCard.title,
+              description: fullCard.description,
+              dueDate: fullCard.dueDate,
+              listId: String(fullCard.listId),
+            },
+            {
+              boardId: String(card.workspaceId),
+              boardName: card.boardName,
+              listName: card.listName,
+              user: ctx.user
+                ? { id: ctx.user.id, name: ctx.user.name }
+                : undefined,
+            },
+          ),
+        );
+      }
 
       return { success: true };
     }),
