@@ -45,9 +45,13 @@ msgstr "{0} labels"
 msgid "{0} not found"
 msgstr "{0} niet gevonden"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:299
+#: src/views/boards/components/ImportBoardsForm.tsx:489
 msgid "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
 msgstr "{boardCount, plural, one {Bord importeren (1)} other {Borden importeren ({boardCount})}}"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:341
+msgid "{projectCount, plural, one {Import project (1)} other {Import projects ({projectCount})}}"
+msgstr ""
 
 #: src/views/members/components/InviteMemberForm.tsx:158
 #: src/views/members/components/InviteMemberForm.tsx:170
@@ -192,7 +196,15 @@ msgstr "Sta werkruimteleden toe elkaars e-mailadressen te zien"
 msgid "Already have an account? <0><1>Sign in</1></0>"
 msgstr "Heb je al een account? <0><1>Log in</1></0>"
 
-#: src/views/settings/IntegrationsSettings.tsx:61
+#: src/views/settings/IntegrationsSettings.tsx:107
+msgid "An error occurred while connecting your GitHub account."
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:130
+msgid "An error occurred while disconnecting your GitHub account."
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:87
 msgid "An error occurred while disconnecting your Trello account."
 msgstr "Er is een fout opgetreden bij het verbreken van de verbinding met je Trello-account."
 
@@ -521,8 +533,15 @@ msgstr "Bevestig je e-mailvoorkeuren:"
 msgid "Confirm your new password"
 msgstr "Bevestig je nieuwe wachtwoord"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:157
-#: src/views/settings/IntegrationsSettings.tsx:93
+#: src/views/boards/components/ImportBoardsForm.tsx:195
+msgid "Connect"
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:212
+msgid "Connect GitHub"
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:162
 msgid "Connect Trello"
 msgstr "Verbind Trello"
 
@@ -530,7 +549,11 @@ msgstr "Verbind Trello"
 msgid "Connect your favorite tools to streamline your workflow."
 msgstr "Verbind je favoriete tools om je werkstroom te stroomlijnen."
 
-#: src/views/settings/IntegrationsSettings.tsx:80
+#: src/views/settings/IntegrationsSettings.tsx:191
+msgid "Connect your GitHub account to import projects."
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:149
 msgid "Connect your Trello account to import boards."
 msgstr "Verbind je Trello-account om borden te importeren."
 
@@ -750,7 +773,11 @@ msgstr "heeft checklistitem <0>{0}</0> verwijderd"
 msgid "Design"
 msgstr "Ontwerp"
 
-#: src/views/settings/IntegrationsSettings.tsx:108
+#: src/views/settings/IntegrationsSettings.tsx:223
+msgid "Disconnect GitHub"
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:177
 msgid "Disconnect Trello"
 msgstr "Trello ontkoppelen"
 
@@ -918,6 +945,10 @@ msgstr "Fout"
 msgid "Error Changing Password"
 msgstr "Fout bij wijzigen wachtwoord"
 
+#: src/views/settings/IntegrationsSettings.tsx:106
+msgid "Error connecting GitHub"
+msgstr ""
+
 #: src/views/members/components/InviteMemberForm.tsx:128
 msgid "Error creating invite link"
 msgstr "Fout bij het maken van uitnodigingslink"
@@ -938,7 +969,11 @@ msgstr "Fout bij het verwijderen van label"
 msgid "Error deleting workspace"
 msgstr "Fout bij verwijderen werkruimte"
 
-#: src/views/settings/IntegrationsSettings.tsx:60
+#: src/views/settings/IntegrationsSettings.tsx:129
+msgid "Error disconnecting GitHub"
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:86
 msgid "Error disconnecting Trello"
 msgstr "Fout bij ontkoppelen van Trello"
 
@@ -1078,6 +1113,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Voor duurzaamheid op lange termijn erkennen we dat alle goede open source projecten een inkomstenbron nodig hebben. De onze komt van de betaalde cloudoplossing voor werkruimtes met meerdere gebruikers en voor aangepaste werkruimte-slugs. Er is geen verplichting om het te gebruiken, en je kunt de software gratis op je eigen infrastructuur hosten."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratis"
@@ -1145,8 +1182,17 @@ msgid "Getting started"
 msgstr "Aan de slag"
 
 #: src/views/home/components/Footer.tsx:37
+#: src/views/settings/IntegrationsSettings.tsx:186
 msgid "GitHub"
 msgstr "GitHub"
+
+#: src/views/settings/IntegrationsSettings.tsx:99
+msgid "GitHub connected"
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:122
+msgid "GitHub disconnected"
+msgstr ""
 
 #: src/views/invite/index.tsx:113
 msgid "Go Home"
@@ -1230,11 +1276,13 @@ msgstr "Ideeën om deze pagina te verbeteren..."
 msgid "Import"
 msgstr "Importeren"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:191
+#: src/views/boards/components/ImportBoardsForm.tsx:229
+#: src/views/boards/components/ImportBoardsForm.tsx:381
 msgid "Import complete"
 msgstr "Import voltooid"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:204
+#: src/views/boards/components/ImportBoardsForm.tsx:242
+#: src/views/boards/components/ImportBoardsForm.tsx:394
 msgid "Import failed"
 msgstr "Import mislukt"
 
@@ -1546,7 +1594,7 @@ msgstr "Nieuwe kaart"
 msgid "New checklist"
 msgstr "Nieuwe checklist"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:322
+#: src/views/boards/components/ImportBoardsForm.tsx:513
 msgid "New import"
 msgstr "Nieuwe import"
 
@@ -1596,7 +1644,7 @@ msgstr "Geen {0}"
 msgid "No authentication methods are currently available"
 msgstr "Er zijn momenteel geen authenticatiemethoden beschikbaar"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:242
+#: src/views/boards/components/ImportBoardsForm.tsx:432
 msgid "No boards found"
 msgstr "Geen borden gevonden"
 
@@ -1619,6 +1667,10 @@ msgstr "Geen sneltoetsen geregistreerd."
 #: src/views/board/index.tsx:506
 msgid "No lists"
 msgstr "Geen lijsten"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:283
+msgid "No projects found"
+msgstr ""
 
 #: src/components/CommandPallette.tsx:184
 msgid "No results found for \"{debouncedQuery}\"."
@@ -1774,7 +1826,8 @@ msgstr "Selecteer een bestand om te uploaden."
 #: src/views/board/components/VisibilityButton.tsx:54
 #: src/views/board/index.tsx:177
 #: src/views/board/index.tsx:233
-#: src/views/boards/components/ImportBoardsForm.tsx:205
+#: src/views/boards/components/ImportBoardsForm.tsx:243
+#: src/views/boards/components/ImportBoardsForm.tsx:395
 #: src/views/card/components/AttachmentThumbnails.tsx:74
 #: src/views/card/components/ChecklistItemRow.tsx:69
 #: src/views/card/components/ChecklistItemRow.tsx:97
@@ -1986,11 +2039,12 @@ msgstr "Zoek in borden en kaarten..."
 msgid "See what our users are saying about Kan"
 msgstr "Bekijk wat onze gebruikers over Kan zeggen"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:274
+#: src/views/boards/components/ImportBoardsForm.tsx:315
+#: src/views/boards/components/ImportBoardsForm.tsx:464
 msgid "Select all"
 msgstr "Alles selecteren"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:157
+#: src/views/boards/components/ImportBoardsForm.tsx:195
 msgid "Select source"
 msgstr "Selecteer bron"
 
@@ -2044,7 +2098,7 @@ msgstr "Instellingen | API"
 msgid "Settings | Billing"
 msgstr "Instellingen | Facturering"
 
-#: src/views/settings/IntegrationsSettings.tsx:69
+#: src/views/settings/IntegrationsSettings.tsx:138
 msgid "Settings | Integrations"
 msgstr "Instellingen | Integraties"
 
@@ -2268,16 +2322,20 @@ msgstr "Te doen"
 msgid "Toggle menu"
 msgstr "Menu in-/uitschakelen"
 
+#: src/views/settings/IntegrationsSettings.tsx:19
+msgid "Token is required"
+msgstr ""
+
 #: src/views/home/components/Features.tsx:111
 msgid "Track all card changes with detailed activity history."
 msgstr "Volg alle kaartwijzigingen met gedetailleerde activiteitengeschiedenis."
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:190
-#: src/views/settings/IntegrationsSettings.tsx:73
+#: src/views/settings/IntegrationsSettings.tsx:142
 msgid "Trello"
 msgstr "Trello"
 
-#: src/views/settings/IntegrationsSettings.tsx:53
+#: src/views/settings/IntegrationsSettings.tsx:79
 msgid "Trello disconnected"
 msgstr "Trello ontkoppeld"
 
@@ -2731,7 +2789,7 @@ msgstr "Je bent uitgenodigd om deel te nemen aan een werkruimte."
 msgid "Your account has been deleted."
 msgstr "Je account is verwijderd."
 
-#: src/views/boards/components/ImportBoardsForm.tsx:192
+#: src/views/boards/components/ImportBoardsForm.tsx:382
 msgid "Your boards have been imported."
 msgstr "Je borden zijn geïmporteerd."
 
@@ -2743,6 +2801,18 @@ msgstr "Je weergavenaam is bijgewerkt."
 msgid "Your file has been uploaded successfully."
 msgstr "Je bestand is succesvol geüpload."
 
+#: src/views/settings/IntegrationsSettings.tsx:100
+msgid "Your GitHub account has been connected."
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:123
+msgid "Your GitHub account has been disconnected."
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:220
+msgid "Your GitHub account is connected."
+msgstr ""
+
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:70
 msgid "Your password has been changed."
 msgstr "Je wachtwoord is gewijzigd."
@@ -2751,11 +2821,15 @@ msgstr "Je wachtwoord is gewijzigd."
 msgid "Your profile image has been updated."
 msgstr "Je profielafbeelding is bijgewerkt."
 
-#: src/views/settings/IntegrationsSettings.tsx:54
+#: src/views/boards/components/ImportBoardsForm.tsx:230
+msgid "Your projects have been imported."
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:80
 msgid "Your Trello account has been disconnected."
 msgstr "Je Trello-account is ontkoppeld."
 
-#: src/views/settings/IntegrationsSettings.tsx:102
+#: src/views/settings/IntegrationsSettings.tsx:171
 msgid "Your Trello account is connected."
 msgstr "Je Trello-account is verbonden."
 

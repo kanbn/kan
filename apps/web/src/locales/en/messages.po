@@ -45,9 +45,13 @@ msgstr "{0} labels"
 msgid "{0} not found"
 msgstr "{0} not found"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:299
+#: src/views/boards/components/ImportBoardsForm.tsx:489
 msgid "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
 msgstr "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:341
+msgid "{projectCount, plural, one {Import project (1)} other {Import projects ({projectCount})}}"
+msgstr "{projectCount, plural, one {Import project (1)} other {Import projects ({projectCount})}}"
 
 #: src/views/home/index.tsx:51
 #~ msgid "#1 Hacker News"
@@ -216,7 +220,15 @@ msgstr "Allow workspace members to see each other's email addresses"
 msgid "Already have an account? <0><1>Sign in</1></0>"
 msgstr "Already have an account? <0><1>Sign in</1></0>"
 
-#: src/views/settings/IntegrationsSettings.tsx:61
+#: src/views/settings/IntegrationsSettings.tsx:107
+msgid "An error occurred while connecting your GitHub account."
+msgstr "An error occurred while connecting your GitHub account."
+
+#: src/views/settings/IntegrationsSettings.tsx:130
+msgid "An error occurred while disconnecting your GitHub account."
+msgstr "An error occurred while disconnecting your GitHub account."
+
+#: src/views/settings/IntegrationsSettings.tsx:87
 msgid "An error occurred while disconnecting your Trello account."
 msgstr "An error occurred while disconnecting your Trello account."
 
@@ -586,8 +598,15 @@ msgstr "Confirm your email preferences:"
 msgid "Confirm your new password"
 msgstr "Confirm your new password"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:157
-#: src/views/settings/IntegrationsSettings.tsx:93
+#: src/views/boards/components/ImportBoardsForm.tsx:195
+msgid "Connect"
+msgstr "Connect"
+
+#: src/views/settings/IntegrationsSettings.tsx:212
+msgid "Connect GitHub"
+msgstr "Connect GitHub"
+
+#: src/views/settings/IntegrationsSettings.tsx:162
 msgid "Connect Trello"
 msgstr "Connect Trello"
 
@@ -595,7 +614,11 @@ msgstr "Connect Trello"
 msgid "Connect your favorite tools to streamline your workflow."
 msgstr "Connect your favorite tools to streamline your workflow."
 
-#: src/views/settings/IntegrationsSettings.tsx:80
+#: src/views/settings/IntegrationsSettings.tsx:191
+msgid "Connect your GitHub account to import projects."
+msgstr "Connect your GitHub account to import projects."
+
+#: src/views/settings/IntegrationsSettings.tsx:149
 msgid "Connect your Trello account to import boards."
 msgstr "Connect your Trello account to import boards."
 
@@ -839,7 +862,11 @@ msgstr "deleted checklist item <0>{0}</0>"
 msgid "Design"
 msgstr "Design"
 
-#: src/views/settings/IntegrationsSettings.tsx:108
+#: src/views/settings/IntegrationsSettings.tsx:223
+msgid "Disconnect GitHub"
+msgstr "Disconnect GitHub"
+
+#: src/views/settings/IntegrationsSettings.tsx:177
 msgid "Disconnect Trello"
 msgstr "Disconnect Trello"
 
@@ -1007,6 +1034,10 @@ msgstr "Error"
 msgid "Error Changing Password"
 msgstr "Error Changing Password"
 
+#: src/views/settings/IntegrationsSettings.tsx:106
+msgid "Error connecting GitHub"
+msgstr "Error connecting GitHub"
+
 #: src/views/members/components/InviteMemberForm.tsx:128
 msgid "Error creating invite link"
 msgstr "Error creating invite link"
@@ -1027,7 +1058,11 @@ msgstr "Error deleting label"
 msgid "Error deleting workspace"
 msgstr "Error deleting workspace"
 
-#: src/views/settings/IntegrationsSettings.tsx:60
+#: src/views/settings/IntegrationsSettings.tsx:129
+msgid "Error disconnecting GitHub"
+msgstr "Error disconnecting GitHub"
+
+#: src/views/settings/IntegrationsSettings.tsx:86
 msgid "Error disconnecting Trello"
 msgstr "Error disconnecting Trello"
 
@@ -1248,8 +1283,17 @@ msgid "Getting started"
 msgstr "Getting started"
 
 #: src/views/home/components/Footer.tsx:37
+#: src/views/settings/IntegrationsSettings.tsx:186
 msgid "GitHub"
 msgstr "GitHub"
+
+#: src/views/settings/IntegrationsSettings.tsx:99
+msgid "GitHub connected"
+msgstr "GitHub connected"
+
+#: src/views/settings/IntegrationsSettings.tsx:122
+msgid "GitHub disconnected"
+msgstr "GitHub disconnected"
 
 #: src/views/invite/index.tsx:113
 msgid "Go Home"
@@ -1337,11 +1381,13 @@ msgstr "Ideas to improve this page..."
 msgid "Import"
 msgstr "Import"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:191
+#: src/views/boards/components/ImportBoardsForm.tsx:229
+#: src/views/boards/components/ImportBoardsForm.tsx:381
 msgid "Import complete"
 msgstr "Import complete"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:204
+#: src/views/boards/components/ImportBoardsForm.tsx:242
+#: src/views/boards/components/ImportBoardsForm.tsx:394
 msgid "Import failed"
 msgstr "Import failed"
 
@@ -1669,7 +1715,7 @@ msgstr "New card"
 msgid "New checklist"
 msgstr "New checklist"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:322
+#: src/views/boards/components/ImportBoardsForm.tsx:513
 msgid "New import"
 msgstr "New import"
 
@@ -1727,7 +1773,7 @@ msgstr "No authentication methods are currently available"
 #~ msgid "No boards"
 #~ msgstr "No boards"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:242
+#: src/views/boards/components/ImportBoardsForm.tsx:432
 msgid "No boards found"
 msgstr "No boards found"
 
@@ -1750,6 +1796,10 @@ msgstr "No keyboard shortcuts registered."
 #: src/views/board/index.tsx:506
 msgid "No lists"
 msgstr "No lists"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:283
+msgid "No projects found"
+msgstr "No projects found"
 
 #: src/components/CommandPallette.tsx:184
 msgid "No results found for \"{debouncedQuery}\"."
@@ -1905,7 +1955,8 @@ msgstr "Please select a file to upload."
 #: src/views/board/components/VisibilityButton.tsx:54
 #: src/views/board/index.tsx:177
 #: src/views/board/index.tsx:233
-#: src/views/boards/components/ImportBoardsForm.tsx:205
+#: src/views/boards/components/ImportBoardsForm.tsx:243
+#: src/views/boards/components/ImportBoardsForm.tsx:395
 #: src/views/card/components/AttachmentThumbnails.tsx:74
 #: src/views/card/components/ChecklistItemRow.tsx:69
 #: src/views/card/components/ChecklistItemRow.tsx:97
@@ -2125,11 +2176,12 @@ msgstr "Search boards and cards..."
 msgid "See what our users are saying about Kan"
 msgstr "See what our users are saying about Kan"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:274
+#: src/views/boards/components/ImportBoardsForm.tsx:315
+#: src/views/boards/components/ImportBoardsForm.tsx:464
 msgid "Select all"
 msgstr "Select all"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:157
+#: src/views/boards/components/ImportBoardsForm.tsx:195
 msgid "Select source"
 msgstr "Select source"
 
@@ -2191,7 +2243,7 @@ msgstr "Settings | API"
 msgid "Settings | Billing"
 msgstr "Settings | Billing"
 
-#: src/views/settings/IntegrationsSettings.tsx:69
+#: src/views/settings/IntegrationsSettings.tsx:138
 msgid "Settings | Integrations"
 msgstr "Settings | Integrations"
 
@@ -2423,16 +2475,20 @@ msgstr "To Do"
 msgid "Toggle menu"
 msgstr "Toggle menu"
 
+#: src/views/settings/IntegrationsSettings.tsx:19
+msgid "Token is required"
+msgstr "Token is required"
+
 #: src/views/home/components/Features.tsx:111
 msgid "Track all card changes with detailed activity history."
 msgstr "Track all card changes with detailed activity history."
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:190
-#: src/views/settings/IntegrationsSettings.tsx:73
+#: src/views/settings/IntegrationsSettings.tsx:142
 msgid "Trello"
 msgstr "Trello"
 
-#: src/views/settings/IntegrationsSettings.tsx:53
+#: src/views/settings/IntegrationsSettings.tsx:79
 msgid "Trello disconnected"
 msgstr "Trello disconnected"
 
@@ -2918,7 +2974,7 @@ msgstr "You've been invited to join a workspace."
 msgid "Your account has been deleted."
 msgstr "Your account has been deleted."
 
-#: src/views/boards/components/ImportBoardsForm.tsx:192
+#: src/views/boards/components/ImportBoardsForm.tsx:382
 msgid "Your boards have been imported."
 msgstr "Your boards have been imported."
 
@@ -2930,6 +2986,18 @@ msgstr "Your display name has been updated."
 msgid "Your file has been uploaded successfully."
 msgstr "Your file has been uploaded successfully."
 
+#: src/views/settings/IntegrationsSettings.tsx:100
+msgid "Your GitHub account has been connected."
+msgstr "Your GitHub account has been connected."
+
+#: src/views/settings/IntegrationsSettings.tsx:123
+msgid "Your GitHub account has been disconnected."
+msgstr "Your GitHub account has been disconnected."
+
+#: src/views/settings/IntegrationsSettings.tsx:220
+msgid "Your GitHub account is connected."
+msgstr "Your GitHub account is connected."
+
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:70
 msgid "Your password has been changed."
 msgstr "Your password has been changed."
@@ -2938,11 +3006,15 @@ msgstr "Your password has been changed."
 msgid "Your profile image has been updated."
 msgstr "Your profile image has been updated."
 
-#: src/views/settings/IntegrationsSettings.tsx:54
+#: src/views/boards/components/ImportBoardsForm.tsx:230
+msgid "Your projects have been imported."
+msgstr "Your projects have been imported."
+
+#: src/views/settings/IntegrationsSettings.tsx:80
 msgid "Your Trello account has been disconnected."
 msgstr "Your Trello account has been disconnected."
 
-#: src/views/settings/IntegrationsSettings.tsx:102
+#: src/views/settings/IntegrationsSettings.tsx:171
 msgid "Your Trello account is connected."
 msgstr "Your Trello account is connected."
 

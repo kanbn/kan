@@ -45,9 +45,13 @@ msgstr "{0} etiquetas"
 msgid "{0} not found"
 msgstr "{0} no encontrado"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:299
+#: src/views/boards/components/ImportBoardsForm.tsx:489
 msgid "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
 msgstr "{boardCount, plural, one {Importar tablero (1)} other {Importar tableros ({boardCount})}}"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:341
+msgid "{projectCount, plural, one {Import project (1)} other {Import projects ({projectCount})}}"
+msgstr ""
 
 #: src/views/members/components/InviteMemberForm.tsx:158
 #: src/views/members/components/InviteMemberForm.tsx:170
@@ -192,7 +196,15 @@ msgstr "Permitir que los miembros del espacio de trabajo vean las direcciones de
 msgid "Already have an account? <0><1>Sign in</1></0>"
 msgstr "¿Ya tienes una cuenta? <0><1>Iniciar sesión</1></0>"
 
-#: src/views/settings/IntegrationsSettings.tsx:61
+#: src/views/settings/IntegrationsSettings.tsx:107
+msgid "An error occurred while connecting your GitHub account."
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:130
+msgid "An error occurred while disconnecting your GitHub account."
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:87
 msgid "An error occurred while disconnecting your Trello account."
 msgstr "Ocurrió un error al desconectar tu cuenta de Trello."
 
@@ -521,8 +533,15 @@ msgstr "Confirma tus preferencias de correo electrónico:"
 msgid "Confirm your new password"
 msgstr "Confirma tu nueva contraseña"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:157
-#: src/views/settings/IntegrationsSettings.tsx:93
+#: src/views/boards/components/ImportBoardsForm.tsx:195
+msgid "Connect"
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:212
+msgid "Connect GitHub"
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:162
 msgid "Connect Trello"
 msgstr "Conectar Trello"
 
@@ -530,7 +549,11 @@ msgstr "Conectar Trello"
 msgid "Connect your favorite tools to streamline your workflow."
 msgstr "Conecta tus herramientas favoritas para agilizar tu flujo de trabajo."
 
-#: src/views/settings/IntegrationsSettings.tsx:80
+#: src/views/settings/IntegrationsSettings.tsx:191
+msgid "Connect your GitHub account to import projects."
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:149
 msgid "Connect your Trello account to import boards."
 msgstr "Conecta tu cuenta de Trello para importar tableros."
 
@@ -750,7 +773,11 @@ msgstr "eliminó el elemento <0>{0}</0> de la lista de verificación"
 msgid "Design"
 msgstr "Diseño"
 
-#: src/views/settings/IntegrationsSettings.tsx:108
+#: src/views/settings/IntegrationsSettings.tsx:223
+msgid "Disconnect GitHub"
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:177
 msgid "Disconnect Trello"
 msgstr "Desconectar Trello"
 
@@ -918,6 +945,10 @@ msgstr "Error"
 msgid "Error Changing Password"
 msgstr "Error al cambiar la contraseña"
 
+#: src/views/settings/IntegrationsSettings.tsx:106
+msgid "Error connecting GitHub"
+msgstr ""
+
 #: src/views/members/components/InviteMemberForm.tsx:128
 msgid "Error creating invite link"
 msgstr "Error al crear el enlace de invitación"
@@ -938,7 +969,11 @@ msgstr "Error al eliminar la etiqueta"
 msgid "Error deleting workspace"
 msgstr "Error al eliminar el espacio de trabajo"
 
-#: src/views/settings/IntegrationsSettings.tsx:60
+#: src/views/settings/IntegrationsSettings.tsx:129
+msgid "Error disconnecting GitHub"
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:86
 msgid "Error disconnecting Trello"
 msgstr "Error al desconectar Trello"
 
@@ -1078,6 +1113,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Para la sostenibilidad a largo plazo, reconocemos que todos los buenos proyectos de código abierto necesitan una fuente de ingresos. La nuestra proviene de la oferta de nube de pago para espacios de trabajo con múltiples usuarios y para slugs de espacio de trabajo personalizados. No hay obligación de usarla, y puedes alojar el software en tu propia infraestructura sin costo alguno."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Gratis"
@@ -1145,8 +1182,17 @@ msgid "Getting started"
 msgstr "Primeros pasos"
 
 #: src/views/home/components/Footer.tsx:37
+#: src/views/settings/IntegrationsSettings.tsx:186
 msgid "GitHub"
 msgstr "GitHub"
+
+#: src/views/settings/IntegrationsSettings.tsx:99
+msgid "GitHub connected"
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:122
+msgid "GitHub disconnected"
+msgstr ""
 
 #: src/views/invite/index.tsx:113
 msgid "Go Home"
@@ -1230,11 +1276,13 @@ msgstr "Ideas para mejorar esta página..."
 msgid "Import"
 msgstr "Importar"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:191
+#: src/views/boards/components/ImportBoardsForm.tsx:229
+#: src/views/boards/components/ImportBoardsForm.tsx:381
 msgid "Import complete"
 msgstr "Importación completada"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:204
+#: src/views/boards/components/ImportBoardsForm.tsx:242
+#: src/views/boards/components/ImportBoardsForm.tsx:394
 msgid "Import failed"
 msgstr "Importación fallida"
 
@@ -1546,7 +1594,7 @@ msgstr "Nueva tarjeta"
 msgid "New checklist"
 msgstr "Nueva lista de verificación"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:322
+#: src/views/boards/components/ImportBoardsForm.tsx:513
 msgid "New import"
 msgstr "Nueva importación"
 
@@ -1596,7 +1644,7 @@ msgstr "Sin {0}"
 msgid "No authentication methods are currently available"
 msgstr "No hay métodos de autenticación disponibles actualmente"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:242
+#: src/views/boards/components/ImportBoardsForm.tsx:432
 msgid "No boards found"
 msgstr "No se encontraron tableros"
 
@@ -1619,6 +1667,10 @@ msgstr "No hay atajos de teclado registrados."
 #: src/views/board/index.tsx:506
 msgid "No lists"
 msgstr "Sin listas"
+
+#: src/views/boards/components/ImportBoardsForm.tsx:283
+msgid "No projects found"
+msgstr ""
 
 #: src/components/CommandPallette.tsx:184
 msgid "No results found for \"{debouncedQuery}\"."
@@ -1774,7 +1826,8 @@ msgstr "Por favor selecciona un archivo para subir."
 #: src/views/board/components/VisibilityButton.tsx:54
 #: src/views/board/index.tsx:177
 #: src/views/board/index.tsx:233
-#: src/views/boards/components/ImportBoardsForm.tsx:205
+#: src/views/boards/components/ImportBoardsForm.tsx:243
+#: src/views/boards/components/ImportBoardsForm.tsx:395
 #: src/views/card/components/AttachmentThumbnails.tsx:74
 #: src/views/card/components/ChecklistItemRow.tsx:69
 #: src/views/card/components/ChecklistItemRow.tsx:97
@@ -1986,11 +2039,12 @@ msgstr "Buscar tableros y tarjetas..."
 msgid "See what our users are saying about Kan"
 msgstr "Mira lo que nuestros usuarios están diciendo sobre Kan"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:274
+#: src/views/boards/components/ImportBoardsForm.tsx:315
+#: src/views/boards/components/ImportBoardsForm.tsx:464
 msgid "Select all"
 msgstr "Seleccionar todo"
 
-#: src/views/boards/components/ImportBoardsForm.tsx:157
+#: src/views/boards/components/ImportBoardsForm.tsx:195
 msgid "Select source"
 msgstr "Seleccionar origen"
 
@@ -2044,7 +2098,7 @@ msgstr "Configuración | API"
 msgid "Settings | Billing"
 msgstr "Configuración | Facturación"
 
-#: src/views/settings/IntegrationsSettings.tsx:69
+#: src/views/settings/IntegrationsSettings.tsx:138
 msgid "Settings | Integrations"
 msgstr "Configuración | Integraciones"
 
@@ -2268,16 +2322,20 @@ msgstr "Por hacer"
 msgid "Toggle menu"
 msgstr "Alternar menú"
 
+#: src/views/settings/IntegrationsSettings.tsx:19
+msgid "Token is required"
+msgstr ""
+
 #: src/views/home/components/Features.tsx:111
 msgid "Track all card changes with detailed activity history."
 msgstr "Rastrea todos los cambios en las tarjetas con un historial de actividad detallado."
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:190
-#: src/views/settings/IntegrationsSettings.tsx:73
+#: src/views/settings/IntegrationsSettings.tsx:142
 msgid "Trello"
 msgstr "Trello"
 
-#: src/views/settings/IntegrationsSettings.tsx:53
+#: src/views/settings/IntegrationsSettings.tsx:79
 msgid "Trello disconnected"
 msgstr "Trello desconectado"
 
@@ -2731,7 +2789,7 @@ msgstr "Has sido invitado a unirte a un espacio de trabajo."
 msgid "Your account has been deleted."
 msgstr "Tu cuenta ha sido eliminada."
 
-#: src/views/boards/components/ImportBoardsForm.tsx:192
+#: src/views/boards/components/ImportBoardsForm.tsx:382
 msgid "Your boards have been imported."
 msgstr "Tus tableros han sido importados."
 
@@ -2743,6 +2801,18 @@ msgstr "Tu nombre de visualización ha sido actualizado."
 msgid "Your file has been uploaded successfully."
 msgstr "Tu archivo se ha subido correctamente."
 
+#: src/views/settings/IntegrationsSettings.tsx:100
+msgid "Your GitHub account has been connected."
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:123
+msgid "Your GitHub account has been disconnected."
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:220
+msgid "Your GitHub account is connected."
+msgstr ""
+
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:70
 msgid "Your password has been changed."
 msgstr "Tu contraseña ha sido cambiada."
@@ -2751,11 +2821,15 @@ msgstr "Tu contraseña ha sido cambiada."
 msgid "Your profile image has been updated."
 msgstr "Tu imagen de perfil ha sido actualizada."
 
-#: src/views/settings/IntegrationsSettings.tsx:54
+#: src/views/boards/components/ImportBoardsForm.tsx:230
+msgid "Your projects have been imported."
+msgstr ""
+
+#: src/views/settings/IntegrationsSettings.tsx:80
 msgid "Your Trello account has been disconnected."
 msgstr "Tu cuenta de Trello ha sido desconectada."
 
-#: src/views/settings/IntegrationsSettings.tsx:102
+#: src/views/settings/IntegrationsSettings.tsx:171
 msgid "Your Trello account is connected."
 msgstr "Tu cuenta de Trello está conectada."
 
