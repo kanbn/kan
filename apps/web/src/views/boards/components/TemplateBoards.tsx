@@ -24,6 +24,18 @@ export const getTemplates = (): Template[] => [
     labels: [t`Bug`, t`Feature`, t`Enhancement`, t`Critical`, t`Documentation`],
   },
   {
+    id: "roadmap-basic",
+    name: t`Basic Roadmap`,
+    lists: [t`Requested`, t`Planned`, t`In Progress`, t`Done`],
+    labels: [t`Feature`, t`Enhancement`, t`Critical`, t`Documentation`],
+  },
+  {
+    id: "roadmap-extended",
+    name: t`Extended Roadmap`,
+    lists: [t`Requested`, t`Under Review`, t`Planned`, t`In Progress`, t`Done`, t`Rejected`],
+    labels: [t`Feature`, t`Enhancement`, t`Critical`, t`Documentation`],
+  },
+  {
     id: "content-creation",
     name: t`Content Creation`,
     lists: [
