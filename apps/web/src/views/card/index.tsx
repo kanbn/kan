@@ -200,6 +200,21 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const workspaceMembers = board?.workspace.members;
   const boardId = board?.publicId;
 
+  const editorWorkspaceMembers =
+    workspaceMembers
+      ?.filter((member) => member.email)
+      .map((member) => ({
+        publicId: member.publicId,
+        email: member.email,
+        user: member.user
+          ? {
+              id: member.user.id,
+              name: member.user.name ?? null,
+              image: member.user.image ?? null,
+            }
+          : null,
+      })) ?? [];
+
   const updateCard = api.card.update.useMutation({
     onError: () => {
       showPopup({
@@ -432,7 +447,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                     </div>
                     {!isTemplate && (
                       <div className="mt-6">
-                        <NewCommentForm cardPublicId={cardId} />
+                        <NewCommentForm
+                          cardPublicId={cardId}
+                          workspaceMembers={editorWorkspaceMembers}
+                        />
                       </div>
                     )}
                   </div>
