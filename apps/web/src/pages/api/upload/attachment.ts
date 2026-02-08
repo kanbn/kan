@@ -36,9 +36,7 @@ export default withRateLimit(
 
       const bucket = env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
       if (!bucket) {
-        return res
-          .status(500)
-          .json({ error: "Attachments bucket not configured" });
+        return res.status(500).json({ error: "Attachments bucket not configured" });
       }
 
       const cardPublicId = req.query.cardPublicId;
@@ -57,9 +55,7 @@ export default withRateLimit(
       }
 
       if (!Number.isFinite(contentLength) || contentLength <= 0) {
-        return res
-          .status(400)
-          .json({ error: "Missing or invalid content length" });
+        return res.status(400).json({ error: "Missing or invalid content length" });
       }
 
       if (contentLength > MAX_SIZE_BYTES) {
