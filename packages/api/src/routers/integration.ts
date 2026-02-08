@@ -14,7 +14,40 @@ export const apiKeys = {
   trello: process.env.TRELLO_APP_API_KEY,
 };
 
+import { encrypt } from "../utils/encryption";
+
 export const integrationRouter = createTRPCRouter({
+  saveGitHubToken: protectedProcedure
+    .input(z.object({ token: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const encryptedToken = encrypt(input.token);
+      if (ctx.res) {
+        ctx.res.setHeader(
+          "Set-Cookie",
+          `github_token=${encryptedToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${
+            60 * 60 * 24 * 30
+          }`,
+        );
+      }
+      return { success: true };
+    }),
+
+  disconnectGitHub: protectedProcedure.mutation(async ({ ctx }) => {
+    if (ctx.res) {
+      ctx.res.setHeader(
+        "Set-Cookie",
+        `github_token=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0`,
+      );
+    }
+    return { success: true };
+  }),
+
+  getGitHubStatus: protectedProcedure.query(async ({ ctx }) => {
+    const cookies = ctx.req?.cookies || {};
+    const hasToken = !!cookies["github_token"];
+    return { connected: hasToken };
+  }),
+
   providers: protectedProcedure
     .meta({
       openapi: {

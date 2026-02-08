@@ -58,7 +58,10 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
   };
 };
 
-export const createTRPCContext = async ({ req }: CreateNextContextOptions) => {
+export const createTRPCContext = async ({
+  req,
+  res,
+}: CreateNextContextOptions) => {
   const db = createDrizzleClient();
   const baseAuth = initAuth(db);
   const headers = new Headers(req.headers as Record<string, string>);
@@ -69,7 +72,10 @@ export const createTRPCContext = async ({ req }: CreateNextContextOptions) => {
   return createInnerTRPCContext({ db, user: session?.user, auth, headers });
 };
 
-export const createNextApiContext = async (req: NextApiRequest) => {
+export const createNextApiContext = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+) => {
   const db = createDrizzleClient();
   const baseAuth = initAuth(db);
   const headers = new Headers(req.headers as Record<string, string>);
