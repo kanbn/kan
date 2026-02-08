@@ -11,15 +11,16 @@ import { createPlugins } from "./plugins";
 import { configuredProviders } from "./providers";
 
 export const initAuth = (db: dbClient) => {
+  const baseURL = env("NEXT_PUBLIC_BASE_URL") || env("BETTER_AUTH_URL");
+  const trustedOrigins = env("BETTER_AUTH_TRUSTED_ORIGINS")?.split(",") ?? [];
+
   return betterAuth({
     secret: env("BETTER_AUTH_SECRET"),
-    baseURL: env("NEXT_PUBLIC_BASE_URL"),
-    trustedOrigins: env("BETTER_AUTH_TRUSTED_ORIGINS")
-      ? [
-          env("NEXT_PUBLIC_BASE_URL") ?? "",
-          ...(env("BETTER_AUTH_TRUSTED_ORIGINS")?.split(",") ?? []),
-        ]
-      : [env("NEXT_PUBLIC_BASE_URL") ?? ""],
+    baseURL,
+    trustedOrigins: [
+      ...(baseURL ? [baseURL] : []),
+      ...trustedOrigins,
+    ],
     database: drizzleAdapter(db, {
       provider: "pg",
       schema: {
