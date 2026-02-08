@@ -142,9 +142,18 @@ export const attachmentRouter = createTRPCRouter({
         createdBy: userId,
       });
 
+      if (!attachment) {
+        throw new TRPCError({
+          message: "Failed to create attachment",
+          code: "INTERNAL_SERVER_ERROR",
+        });
+      }
+
       await cardActivityRepo.create(ctx.db, {
         type: "card.updated.attachment.added",
         cardId: card.id,
+        attachmentId: attachment.id,
+        toTitle: input.originalFilename,
         createdBy: userId,
       });
 
@@ -206,6 +215,8 @@ export const attachmentRouter = createTRPCRouter({
       await cardActivityRepo.create(ctx.db, {
         type: "card.updated.attachment.removed",
         cardId: attachment.cardId,
+        attachmentId: attachment.id,
+        fromTitle: attachment.originalFilename,
         createdBy: userId,
       });
 

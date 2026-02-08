@@ -33,6 +33,7 @@ export const create = async (
     fromDueDate?: Date;
     toDueDate?: Date;
     sourceBoardId?: number;
+    attachmentId?: number;
   },
 ) => {
   const [result] = await db
@@ -58,6 +59,7 @@ export const create = async (
       fromDueDate: activityInput.fromDueDate,
       toDueDate: activityInput.toDueDate,
       sourceBoardId: activityInput.sourceBoardId,
+      attachmentId: activityInput.attachmentId,
     })
     .returning({ id: cardActivities.id });
 
@@ -83,6 +85,7 @@ export const bulkCreate = async (
     fromDueDate?: Date;
     toDueDate?: Date;
     sourceBoardId?: number;
+    attachmentId?: number;
   }[],
 ) => {
   const activitiesWithPublicIds = activityInputs.map((activity) => ({
@@ -189,6 +192,13 @@ export const getPaginatedActivities = async (
           createdBy: true,
           updatedAt: true,
           deletedAt: true,
+        },
+      },
+      attachment: {
+        columns: {
+          publicId: true,
+          filename: true,
+          originalFilename: true,
         },
       },
     },
