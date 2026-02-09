@@ -181,6 +181,7 @@ pnpm dev
 | `S3_ACCESS_KEY_ID`                        | S3 access key                                             | For file uploads (optional with IRSA) | `xxx`                                                       |
 | `S3_SECRET_ACCESS_KEY`                    | S3 secret key                                             | For file uploads (optional with IRSA) | `xxx`                                                       |
 | `S3_FORCE_PATH_STYLE`                     | Use path-style URLs for S3                                | For file uploads                      | `true`                                                      |
+| `S3_AVATAR_UPLOAD_LIMIT`                  | Maximum avatar file size in bytes                         | For file uploads                      | `2097152` (2MB)                                             |
 | `NEXT_PUBLIC_STORAGE_URL`                 | Storage service URL                                       | For file uploads                      | `https://storage.kanbn.com`                                 |
 | `NEXT_PUBLIC_STORAGE_DOMAIN`              | Storage domain name                                       | For file uploads                      | `kanbn.com`                                                 |
 | `NEXT_PUBLIC_USE_VIRTUAL_HOSTED_URLS`     | Use virtual-hosted style URLs (bucket.domain.com)         | For file uploads (optional)           | `true`                                                      |
