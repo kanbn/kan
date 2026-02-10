@@ -30,6 +30,7 @@ import { usePermissions } from "~/hooks/usePermissions";
 import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
+import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import type { CardContextMenuAction } from "./components/CardContextMenu";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
@@ -301,6 +302,10 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       openModal("CARD_CONTEXT_DUPLICATE", cardPublicId);
       return;
     }
+    if (action === "delete") {
+      openModal("DELETE_CARD", cardPublicId);
+      return;
+    }
     const modalType =
       action === "members"
         ? "CARD_CONTEXT_MEMBERS"
@@ -480,6 +485,15 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           <CardContextDuplicateModal
             boardPublicId={boardId ?? ""}
             isTemplate={!!isTemplate}
+          />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "DELETE_CARD"}
+        >
+          <DeleteCardConfirmation
+            cardPublicId={entityId}
+            boardPublicId={boardId ?? ""}
           />
         </Modal>
       </>
