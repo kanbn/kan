@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { t } from "@lingui/core/macro";
 import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
@@ -12,12 +13,21 @@ export default function PublicBoardsView() {
     ? router.query.workspaceSlug[0]
     : router.query.workspaceSlug;
 
-  const { data, isLoading } = api.workspace.bySlug.useQuery(
+  const { data, isLoading, error } = api.workspace.bySlug.useQuery(
     {
       workspaceSlug: workspaceSlug ?? "",
     },
     { enabled: !!workspaceSlug },
   );
+
+  // Redirect to 404 if workspace doesn't exist
+  useEffect(() => {
+    if (router.isReady && workspaceSlug && !isLoading) {
+      if (error?.data?.code === "NOT_FOUND" || (!data && !isLoading)) {
+        router.replace("/404");
+      }
+    }
+  }, [router, workspaceSlug, isLoading, error, data]);
 
   const BoardsList = ({
     isLoading,

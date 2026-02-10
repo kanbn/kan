@@ -47,7 +47,7 @@ export function CardModal({
     }
   };
 
-  const { data, isLoading } = api.card.byId.useQuery(
+  const { data, isLoading, error } = api.card.byId.useQuery(
     {
       cardPublicId: cardPublicId ?? "",
     },
@@ -55,6 +55,17 @@ export function CardModal({
       enabled: isOpen && !!cardPublicId && cardPublicId.length >= 12,
     },
   );
+
+  // Redirect to 404 if card doesn't exist
+  useEffect(() => {
+    if (isOpen && cardPublicId && !isLoading) {
+      if (error?.data?.code === "NOT_FOUND" || (!data && !isLoading && error)) {
+        // Close modal first, then redirect
+        closeModal();
+        router.replace("/404");
+      }
+    }
+  }, [isOpen, cardPublicId, isLoading, error, data, closeModal, router]);
 
   const labels = data?.labels ?? [];
 
