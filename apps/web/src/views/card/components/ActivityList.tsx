@@ -23,6 +23,7 @@ import type {
 import { authClient } from "@kan/auth/client";
 
 import Avatar from "~/components/Avatar";
+import type { WorkspaceMember } from "~/components/MentionSuggestion";
 import { useLocalisation } from "~/hooks/useLocalisation";
 import { api } from "~/utils/api";
 import { getAvatarUrl } from "~/utils/helpers";
@@ -335,11 +336,13 @@ const ActivityList = ({
   isLoading: cardIsLoading,
   isAdmin,
   isViewOnly,
+  workspaceMembers = [],
 }: {
   cardPublicId: string;
   isLoading: boolean;
   isAdmin?: boolean;
   isViewOnly?: boolean;
+  workspaceMembers?: WorkspaceMember[];
 }) => {
   const { dateLocale, locale } = useLocalisation();
   const { data: sessionData } = authClient.useSession();
@@ -490,7 +493,6 @@ const ActivityList = ({
               comment={activity.comment?.comment}
               isEdited={!!activity.comment?.updatedAt}
               isAuthor={activity.comment?.createdBy === sessionData?.user.id}
-              isAdmin={isAdmin ?? false}
               isViewOnly={!!isViewOnly}
             />
           );

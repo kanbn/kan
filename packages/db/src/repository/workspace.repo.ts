@@ -436,3 +436,29 @@ export const searchBoardsAndCards = async (
   // Ensure we don't exceed the total limit
   return allResults.slice(0, limit);
 };
+
+export const getMembersWithEmailsByPublicIds = (
+  db: dbClient,
+  memberPublicIds: string[],
+) => {
+  return db.query.workspaceMembers.findMany({
+    columns: {
+      publicId: true,
+      email: true,
+      userId: true,
+    },
+    with: {
+      user: {
+        columns: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      },
+    },
+    where: and(
+      inArray(workspaceMembers.publicId, memberPublicIds),
+      isNull(workspaceMembers.deletedAt),
+    ),
+  });
+};

@@ -44,8 +44,12 @@ import { twMerge } from "tailwind-merge";
 import tippy from "tippy.js";
 import { Markdown } from "tiptap-markdown";
 
-import { getAvatarUrl } from "~/utils/helpers";
-import Avatar from "./Avatar";
+import type { WorkspaceMember } from "./MentionSuggestion";
+import {
+  getMentionSuggestionItems,
+  mentionCommand,
+  renderMentionSuggestions,
+} from "./MentionSuggestion";
 import { YouTubeNode } from "./YouTubeEmbed/YouTubeNode";
 
 declare module "@tiptap/core" {
@@ -82,15 +86,7 @@ export interface RenderSuggestionsProps {
   command: (item: SlashCommandItem) => void;
 }
 
-export interface WorkspaceMember {
-  publicId: string;
-  user: {
-    id: string;
-    name: string | null;
-    image: string | null;
-  } | null;
-  email: string;
-}
+export type { WorkspaceMember } from "./MentionSuggestion";
 
 const CommandsList = forwardRef<
   { onKeyDown: (props: SuggestionKeyDownProps) => boolean },
@@ -205,130 +201,6 @@ const RenderSuggestions = () => {
   };
 };
 
-interface MentionItem {
-  id: string;
-  label: string;
-  image: string | null;
-}
-
-const MentionList = forwardRef<
-  { onKeyDown: (props: SuggestionKeyDownProps) => boolean },
-  {
-    items: MentionItem[];
-    command: (item: MentionItem) => void;
-  }
->(({ items, command }, ref) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  useImperativeHandle(ref, () => ({
-    onKeyDown: ({ event }: SuggestionKeyDownProps) => {
-      if (event.key === "ArrowUp") {
-        setSelectedIndex((selectedIndex + items.length - 1) % items.length);
-        return true;
-      }
-
-      if (event.key === "ArrowDown") {
-        setSelectedIndex((selectedIndex + 1) % items.length);
-        return true;
-      }
-
-      if (event.key === "Enter") {
-        const item = items[selectedIndex];
-        if (item) {
-          command(item);
-        }
-        return true;
-      }
-
-      return false;
-    },
-  }));
-
-  return (
-    <div className="w-56 rounded-md border-[1px] border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-500 dark:bg-dark-200">
-      <div className="max-h-[350px] overflow-y-auto p-1 scrollbar-thin scrollbar-thumb-light-200 dark:scrollbar-thumb-dark-300">
-        {items.length > 0 ? (
-          items.map((item, index) => (
-            <button
-              key={item.id}
-              onClick={() => command(item)}
-              className={twMerge(
-                "group flex w-full items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300",
-                index === selectedIndex && "bg-light-200 dark:bg-dark-300",
-              )}
-            >
-              <Avatar
-                size="xs"
-                name={item.label}
-                imageUrl={item.image ? getAvatarUrl(item.image) : undefined}
-                email={item.label}
-              />
-              <span className="ml-3 text-[12px] font-medium text-dark-900 dark:text-dark-1000">
-                {item.label}
-              </span>
-            </button>
-          ))
-        ) : (
-          <div className="flex items-center justify-start p-2">
-            <span className="text-[12px] text-dark-900 dark:text-dark-1000">
-              No results
-            </span>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-});
-
-MentionList.displayName = "MentionList";
-
-const renderMentionSuggestions = () => {
-  let reactRenderer: ReactRenderer;
-  let popup: TippyInstance[];
-
-  return {
-    onStart: (props: any) => {
-      reactRenderer = new ReactRenderer(MentionList, {
-        props,
-        editor: props.editor,
-      });
-
-      if (!props.clientRect) return;
-
-      popup = tippy("body", {
-        getReferenceClientRect: props.clientRect,
-        appendTo: () => document.body,
-        content: reactRenderer.element,
-        showOnCreate: true,
-        interactive: true,
-        trigger: "manual",
-        placement: "bottom-start",
-      });
-    },
-    onUpdate(props: any) {
-      reactRenderer.updateProps(props);
-      if (!props.clientRect) return;
-      popup[0]?.setProps({ getReferenceClientRect: props.clientRect });
-    },
-    onKeyDown(props: SuggestionKeyDownProps) {
-      if (props.event.key === "Escape") {
-        popup[0]?.hide();
-        return true;
-      }
-      return (
-        (
-          reactRenderer.ref as {
-            onKeyDown?: (props: SuggestionKeyDownProps) => boolean;
-          }
-        ).onKeyDown?.(props) ?? false
-      );
-    },
-    onExit() {
-      popup[0]?.destroy();
-      reactRenderer.destroy();
-    },
-  };
-};
 
 const SlashCommands = Extension.create<SlashCommandsOptions>({
   name: "slash-commands",
@@ -495,43 +367,9 @@ export default function Editor({
           },
           suggestion: {
             char: "@",
-            items: ({ query }: { query: string }) => {
-              const withEmail = workspaceMembers.filter((member) => member.email);
-              
-              const mapped = withEmail.map((member: WorkspaceMember) => ({
-                id: member.publicId,
-                label: member?.user?.name?.trim() || member.email || "",
-                image: member?.user?.image ?? null,
-              }));
-              
-              const all: MentionItem[] = mapped.filter(
-                (item) => item.label && item.label.length > 0,
-              );
-              
-              const q = query.toLowerCase().trim();
-              
-              if (q === "") {
-                return all;
-              }
-              
-              const filtered = all.filter((u) =>
-                u.label.toLowerCase().includes(q),
-              );
-              return filtered;
-            },
-            command: ({ editor, range, props }) => {
-              const id = props.id ?? "";
-              const label = props.label ?? "";
-              const mentionHTML = `<span data-type="mention" data-id="${id}" data-label="${label}">@${label}</span>&nbsp;`;
-
-              editor
-                .chain()
-                .focus()
-                .deleteRange(range)
-                .insertContent(mentionHTML)
-                .focus()
-                .run();
-            },
+            items: ({ query }: { query: string }) =>
+              getMentionSuggestionItems(workspaceMembers, query),
+            command: mentionCommand,
             render: renderMentionSuggestions,
           },
           renderText({ options, node }) {

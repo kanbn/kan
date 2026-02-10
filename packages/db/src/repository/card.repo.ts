@@ -967,3 +967,28 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
       }
     : null;
 };
+
+export const getCardNotificationContext = async (
+  db: dbClient,
+  cardPublicId: string,
+) => {
+  return db.query.cards.findFirst({
+    columns: { publicId: true, title: true },
+    where: and(eq(cards.publicId, cardPublicId), isNull(cards.deletedAt)),
+    with: {
+      list: {
+        columns: {},
+        with: {
+          board: {
+            columns: { publicId: true },
+            with: {
+              workspace: {
+                columns: { name: true, slug: true },
+              },
+            },
+          },
+        },
+      },
+    },
+  });
+};

@@ -1,4 +1,5 @@
 import { TRPCError } from "@trpc/server";
+import { env } from "next-runtime-env";
 import { z } from "zod";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
@@ -8,9 +9,11 @@ import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
+import { sendEmail } from "@kan/email";
+
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
-import { sendMentionEmails } from "../utils/notifications";
+import { sendMentionEmails } from "../utils/mentions";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
 
@@ -160,7 +163,7 @@ export const cardRouter = createTRPCRouter({
           cardPublicId: newCard.publicId,
           commentHtml: input.description,
           commenterUserId: userId,
-        }).catch((error) => {
+        }).catch((error: unknown) => {
           console.error("Failed to send mention emails:", error);
         });
       }
@@ -233,7 +236,7 @@ export const cardRouter = createTRPCRouter({
         commentHtml: input.comment,
         commenterUserId: userId,
         commentId: newComment.id,
-      }).catch((error) => {
+      }).catch((error: unknown) => {
         console.error("Failed to send mention emails:", error);
       });
 
@@ -323,7 +326,7 @@ export const cardRouter = createTRPCRouter({
         commentHtml: input.comment,
         commenterUserId: userId,
         commentId: updatedComment.id,
-      }).catch((error) => {
+      }).catch((error: unknown) => {
         console.error("Failed to send mention emails:", error);
       });
 
@@ -962,7 +965,7 @@ export const cardRouter = createTRPCRouter({
           cardPublicId: input.cardPublicId,
           commentHtml: input.description,
           commenterUserId: userId,
-        }).catch((error) => {
+        }).catch((error: unknown) => {
           console.error("Failed to send mention emails:", error);
         });
       }

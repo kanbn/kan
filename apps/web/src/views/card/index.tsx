@@ -443,6 +443,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                         cardPublicId={cardId}
                         isLoading={!card}
                         isAdmin={workspace.role === "admin"}
+                        workspaceMembers={board?.workspace.members ?? []}
                       />
                     </div>
                     {!isTemplate && (

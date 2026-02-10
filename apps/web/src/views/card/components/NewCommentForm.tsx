@@ -2,9 +2,9 @@ import { t } from "@lingui/core/macro";
 import { useForm } from "react-hook-form";
 import { HiOutlineArrowUp } from "react-icons/hi2";
 
-import Editor from "~/components/Editor";
-import type { WorkspaceMember } from "~/components/Editor";
+import CommentEditor from "~/components/CommentEditor";
 import LoadingSpinner from "~/components/LoadingSpinner";
+import type { WorkspaceMember } from "~/components/MentionSuggestion";
 import { usePermissions } from "~/hooks/usePermissions";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
@@ -31,7 +31,7 @@ const NewCommentForm = ({
   });
 
   const addCommentMutation = api.card.addComment.useMutation({
-    onError: (_error, _newList) => {
+    onError: () => {
       showPopup({
         header: t`Unable to add comment`,
         message: t`Please try again later, or contact customer support.`,
@@ -60,13 +60,12 @@ const NewCommentForm = ({
       onSubmit={handleSubmit(onSubmit)}
       className="flex w-full max-w-[800px] flex-col rounded-xl border border-light-600 bg-light-100 p-4 text-light-900 focus-visible:outline-none dark:border-dark-400 dark:bg-dark-100 dark:text-dark-1000 sm:text-sm sm:leading-6"
     >
-      <Editor
+      <CommentEditor
         content={watch("comment")}
-        onChange={(value) => setValue("comment", value)}
+        onChange={(html) => setValue("comment", html)}
+        onSubmit={() => handleSubmit(onSubmit)()}
+        placeholder={t`Add a comment... (type '@' to mention)`}
         workspaceMembers={workspaceMembers}
-        enableYouTubeEmbed={false}
-        placeholder={t`Add comment... (type '/' to open commands or '@' to mention)`}
-        disableHeadings={true}
       />
       <div className="flex justify-end">
         <button

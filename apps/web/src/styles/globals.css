@@ -53,3 +53,14 @@
   > .tippy-arrow::before {
   @apply border-b-light-600 dark:border-b-dark-600;
 }
+
+/* Mention styles for comments and descriptions */
+.mention,
+[data-type="mention"] {
+  background-color: rgba(59, 130, 246, 0.1);
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.25rem;
+  color: rgb(59, 130, 246);
+  text-decoration: none;
+  font-weight: 500;
+}

@@ -3,16 +3,16 @@ import nodemailer from "nodemailer";
 
 import JoinWorkspaceTemplate from "./templates/join-workspace";
 import MagicLinkTemplate from "./templates/magic-link";
-import MentionTemplate from "./templates/mention";
+import MentionNotificationTemplate from "./templates/mention-notification";
 import ResetPasswordTemplate from "./templates/reset-password";
 
-type Templates = "MAGIC_LINK" | "JOIN_WORKSPACE" | "RESET_PASSWORD" | "MENTION";
+type Templates = "MAGIC_LINK" | "JOIN_WORKSPACE" | "RESET_PASSWORD" | "MENTION_NOTIFICATION";
 
 const emailTemplates: Record<Templates, React.ComponentType<any>> = {
   MAGIC_LINK: MagicLinkTemplate,
   JOIN_WORKSPACE: JoinWorkspaceTemplate,
   RESET_PASSWORD: ResetPasswordTemplate,
-  MENTION: MentionTemplate,
+  MENTION_NOTIFICATION: MentionNotificationTemplate,
 };
 
 const transporter = nodemailer.createTransport({

@@ -6,9 +6,10 @@ import { HiEllipsisHorizontal, HiPencil, HiTrash } from "react-icons/hi2";
 
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
-import Editor from "~/components/Editor";
-import type { WorkspaceMember } from "~/components/Editor";
+import CommentEditor from "~/components/CommentEditor";
 import Dropdown from "~/components/Dropdown";
+import type { WorkspaceMember } from "~/components/MentionSuggestion";
+import Editor from "~/components/Editor";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -176,17 +177,13 @@ const Comment = ({
         </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mt-2">
-            <Editor
-              content={watch("comment")}
-              onChange={(value) => setValue("comment", value)}
-              workspaceMembers={workspaceMembers}
-              enableYouTubeEmbed={false}
-              placeholder={t`Add comment... (type '/' to open commands or '@' to mention)`}
-              disableHeadings={true}
-            />
-          </div>
-          <div className="flex justify-end space-x-2 mt-2">
+          <CommentEditor
+            content={watch("comment")}
+            onChange={(html) => setValue("comment", html)}
+            onSubmit={() => handleSubmit(onSubmit)()}
+            workspaceMembers={workspaceMembers}
+          />
+          <div className="flex justify-end space-x-2">
             <Button
               size="sm"
               variant="ghost"
