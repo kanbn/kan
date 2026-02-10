@@ -20,7 +20,6 @@ export type CardContextMenuAction =
 interface CardContextMenuProps {
   x: number;
   y: number;
-  cardPublicId: string;
   onClose: () => void;
   onAction: (action: CardContextMenuAction) => void;
   canEdit: boolean;

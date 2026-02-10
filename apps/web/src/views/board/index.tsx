@@ -751,7 +751,6 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           <CardContextMenu
             x={contextMenu.x}
             y={contextMenu.y}
-            cardPublicId={contextMenu.cardPublicId}
             onClose={() => setContextMenu(null)}
             onAction={handleCardContextMenuAction}
             canEdit={!!canEditCard}

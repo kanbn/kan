@@ -8,7 +8,6 @@ import MemberSelector from "~/views/card/components/MemberSelector";
 
 export function CardContextMembersModal() {
   const { entityId: cardPublicId, closeModal } = useModal();
-  const utils = api.useUtils();
 
   const { data: card, isLoading } = api.card.byId.useQuery(
     { cardPublicId: cardPublicId ?? "" },
