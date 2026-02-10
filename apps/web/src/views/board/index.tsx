@@ -35,6 +35,7 @@ import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { formatToArray } from "~/utils/helpers";
+import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import BoardDropdown from "./components/BoardDropdown";
 import Card from "./components/Card";
 import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
@@ -324,6 +325,10 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       openModal("CARD_CONTEXT_DUPLICATE", cardPublicId);
       return;
     }
+    if (action === "delete") {
+      openModal("DELETE_CARD", cardPublicId);
+      return;
+    }
     const modalType =
       action === "members"
         ? "CARD_CONTEXT_MEMBERS"
@@ -503,6 +508,15 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           <CardContextDuplicateModal
             boardPublicId={boardId ?? ""}
             isTemplate={!!isTemplate}
+          />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "DELETE_CARD"}
+        >
+          <DeleteCardConfirmation
+            cardPublicId={entityId}
+            boardPublicId={boardId ?? ""}
           />
         </Modal>
       </>

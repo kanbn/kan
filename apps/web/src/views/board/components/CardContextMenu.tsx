@@ -5,6 +5,7 @@ import {
   HiOutlineCalendar,
   HiOutlineDocumentDuplicate,
   HiOutlineTag,
+  HiOutlineTrash,
   HiOutlineUserGroup,
   HiOutlineArrowRightCircle,
 } from "react-icons/hi2";
@@ -15,7 +16,8 @@ export type CardContextMenuAction =
   | "labels"
   | "dueDate"
   | "copyLink"
-  | "duplicate";
+  | "duplicate"
+  | "delete";
 
 interface CardContextMenuProps {
   x: number;
@@ -65,6 +67,12 @@ const MENU_ITEMS: {
     action: "duplicate",
     label: t`Duplicate card`,
     icon: <HiOutlineDocumentDuplicate className="h-4 w-4 shrink-0" />,
+    requiresEdit: true,
+  },
+  {
+    action: "delete",
+    label: t`Delete card`,
+    icon: <HiOutlineTrash className="h-4 w-4 shrink-0" />,
     requiresEdit: true,
   },
 ];
