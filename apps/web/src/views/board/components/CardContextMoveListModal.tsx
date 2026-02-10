@@ -79,7 +79,7 @@ export function CardContextMoveListModal() {
           ))}
         </div>
       ) : (
-        <div className="max-h-[60vh] overflow-y-auto pr-1 scrollbar scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600">
+        <div className="max-h-[60vh] overflow-y-auto pr-1 scrollbar scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600">
           <ul className="space-y-1">
             {lists.map((list) => (
               <li key={list.publicId}>
