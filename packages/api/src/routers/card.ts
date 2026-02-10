@@ -4,6 +4,7 @@ import { z } from "zod";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardCommentRepo from "@kan/db/repository/cardComment.repo";
+import * as checklistRepo from "@kan/db/repository/checklist.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
@@ -1028,5 +1029,177 @@ export const cardRouter = createTRPCRouter({
       });
 
       return { success: true };
+    }),
+  duplicate: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Duplicate a card",
+        method: "POST",
+        path: "/cards/{cardPublicId}/duplicate",
+        description: "Duplicates a card to a target list with optional options",
+        tags: ["Cards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+        listPublicId: z.string().min(12),
+        index: z.number().int().min(0).optional(),
+        title: z.string().min(1).max(2000).optional(),
+        copyLabels: z.boolean(),
+        copyMembers: z.boolean(),
+        copyChecklists: z.boolean(),
+      }),
+    )
+    .output(
+      z.object({
+        publicId: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const sourceCardMeta = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!sourceCardMeta)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertPermission(
+        ctx.db,
+        userId,
+        sourceCardMeta.workspaceId,
+        "card:create",
+      );
+
+      const targetList = await listRepo.getWorkspaceAndListIdByListPublicId(
+        ctx.db,
+        input.listPublicId,
+      );
+
+      if (!targetList)
+        throw new TRPCError({
+          message: `List with public ID ${input.listPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      if (targetList.workspaceId !== sourceCardMeta.workspaceId)
+        throw new TRPCError({
+          message: `Target list must be in the same workspace`,
+          code: "BAD_REQUEST",
+        });
+
+      const sourceCard = await cardRepo.getWithListAndMembersByPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!sourceCard)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      const newCard = await cardRepo.create(ctx.db, {
+        title: input.title ?? sourceCard.title,
+        description: sourceCard.description ?? "",
+        createdBy: userId,
+        listId: targetList.id,
+        position: "end",
+        dueDate: sourceCard.dueDate ?? null,
+      });
+
+      if (input.index !== undefined && input.index >= 0) {
+        await cardRepo.reorder(ctx.db, {
+          cardId: newCard.id,
+          newIndex: input.index,
+          newListId: targetList.id,
+        });
+      }
+
+      if (input.copyLabels && sourceCard.labels?.length) {
+        const labelPublicIds = sourceCard.labels.map((l) => l.publicId);
+        const labels = await labelRepo.getAllByPublicIds(ctx.db, labelPublicIds);
+        if (labels.length) {
+          const labelsInsert = labels.map((label) => ({
+            cardId: newCard.id,
+            labelId: label.id,
+          }));
+          await cardRepo.bulkCreateCardLabelRelationships(ctx.db, labelsInsert);
+          const cardActivitesInsert = labels.map((cardLabel) => ({
+            type: "card.updated.label.added" as const,
+            cardId: newCard.id,
+            labelId: cardLabel.id,
+            createdBy: userId,
+          }));
+          await cardActivityRepo.bulkCreate(ctx.db, cardActivitesInsert);
+        }
+      }
+
+      if (input.copyMembers && sourceCard.members?.length) {
+        const memberPublicIds = sourceCard.members.map((m) => m.publicId);
+        const members = await workspaceRepo.getAllMembersByPublicIds(
+          ctx.db,
+          memberPublicIds,
+        );
+        if (members.length) {
+          const membersInsert = members.map((member) => ({
+            cardId: newCard.id,
+            workspaceMemberId: member.id,
+          }));
+          await cardRepo.bulkCreateCardWorkspaceMemberRelationships(
+            ctx.db,
+            membersInsert,
+          );
+          const cardActivitesInsert = members.map((member) => ({
+            type: "card.updated.member.added" as const,
+            cardId: newCard.id,
+            workspaceMemberId: member.id,
+            createdBy: userId,
+          }));
+          await cardActivityRepo.bulkCreate(ctx.db, cardActivitesInsert);
+        }
+      }
+
+      if (input.copyChecklists && sourceCard.checklists?.length) {
+        for (const checklist of sourceCard.checklists) {
+          const newChecklist = await checklistRepo.create(ctx.db, {
+            cardId: newCard.id,
+            name: checklist.name,
+            createdBy: userId,
+          });
+          if (!newChecklist?.id) continue;
+          if (checklist.items?.length) {
+            for (const item of checklist.items) {
+              await checklistRepo.createItem(ctx.db, {
+                checklistId: newChecklist.id,
+                title: item.title,
+                createdBy: userId,
+                completed: item.completed ?? false,
+              });
+            }
+          }
+          await cardActivityRepo.create(ctx.db, {
+            type: "card.updated.checklist.added",
+            cardId: newCard.id,
+            toTitle: newChecklist.name,
+            createdBy: userId,
+          });
+        }
+      }
+
+      return { publicId: newCard.publicId };
     }),
 });
