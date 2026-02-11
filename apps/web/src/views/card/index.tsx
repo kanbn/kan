@@ -4,6 +4,7 @@ import { t } from "@lingui/core/macro";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronForwardSharp } from "react-icons/io5";
+import { HiXMark } from "react-icons/hi2";
 
 import { authClient } from "@kan/auth/client";
 
@@ -323,6 +324,13 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                   boardPublicId={boardId}
                   cardCreatedBy={card?.createdBy}
                 />
+                <Link
+                  href={`/${isTemplate ? "templates" : "boards"}/${boardId}`}
+                  className="flex h-7 w-7 items-center justify-center rounded-[5px] text-light-900 hover:bg-light-200 dark:text-dark-900 dark:hover:bg-dark-200"
+                  aria-label={t`Close`}
+                >
+                  <HiXMark className="h-5 w-5" />
+                </Link>
               </div>
             </>
           )}

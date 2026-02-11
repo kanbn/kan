@@ -58,13 +58,14 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const [selectedPublicListId, setSelectedPublicListId] =
     useState<PublicListId>("");
   const [isInitialLoading, setIsInitialLoading] = useState(true);
-  
+
   const { ref: scrollRef, onMouseDown } = useDragToScroll({
     enabled: true,
     direction: "horizontal",
   });
 
-  const { canCreateList, canEditList, canEditCard, canEditBoard } = usePermissions();
+  const { canCreateList, canEditList, canEditCard, canEditBoard } =
+    usePermissions();
 
   const { tooltipContent: createListShortcutTooltipContent } =
     useKeyboardShortcut({
@@ -417,10 +418,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 {...register("name")}
                 onBlur={canEditBoard ? handleSubmit(onSubmit) : undefined}
                 readOnly={!canEditBoard}
-                className="block border-0 bg-transparent p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000 sm:text-[1.2rem] disabled:cursor-not-allowed"
+                className="block border-0 bg-transparent p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none disabled:cursor-not-allowed dark:text-dark-1000 sm:text-[1.2rem]"
               />
             </form>
-
           )}
           {!boardData && !isLoading && (
             <p className="order-2 block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem] md:order-1">
@@ -598,12 +598,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                               ? `/templates/${boardId}/cards/${card.publicId}`
                                               : `/cards/${card.publicId}`
                                           }
-                                          className={`mb-2 flex !cursor-pointer flex-col ${card.publicId.startsWith(
-                                            "PLACEHOLDER",
-                                          )
-                                            ? "pointer-events-none"
-                                            : ""
-                                            }`}
+                                          className={`mb-2 flex !cursor-pointer flex-col ${
+                                            card.publicId.startsWith(
+                                              "PLACEHOLDER",
+                                            )
+                                              ? "pointer-events-none"
+                                              : ""
+                                          }`}
                                           ref={provided.innerRef}
                                           {...provided.draggableProps}
                                           {...provided.dragHandleProps}
