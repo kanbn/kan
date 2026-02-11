@@ -1,4 +1,20 @@
 services:
+  migrate:
+    image: ghcr.io/kanbn/kan-migrate:latest
+    container_name: ${CONTAINER_NAME:-kan-migrate}
+    networks:
+      - kan-network
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+      target: migrate
+    environment:
+      - POSTGRES_URL=${POSTGRES_URL}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
   web:
     image: ghcr.io/kanbn/kan:latest
     container_name: ${CONTAINER_NAME:-kan-web}
@@ -6,10 +22,10 @@ services:
       - "${WEB_PORT:-3000}:3000"
     networks:
       - kan-network
-      - dokploy-network
     build:
       context: .
-      dockerfile: ./apps/web/Dockerfile.new
+      dockerfile: ./apps/web/Dockerfile
+      target: web
     env_file:
       - .env
     environment:
@@ -107,7 +123,8 @@ services:
       - APPLE_CLIENT_SECRET=${APPLE_CLIENT_SECRET}
       - APPLE_APP_BUNDLE_IDENTIFIER=${APPLE_APP_BUNDLE_IDENTIFIER}
     depends_on:
-      - postgres
+      migrate:
+        condition: service_completed_successfully
     restart: unless-stopped
 
   postgres:
@@ -121,14 +138,17 @@ services:
       - 5432:5432
     volumes:
       - kan_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kan -d kan_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     restart: unless-stopped
     networks:
       - kan-network
 
 networks:
   kan-network:
-  dokploy-network:
-    external: true
 
 volumes:
   kan_postgres_data:
