@@ -22,7 +22,7 @@ msgid ", or see our"
 msgstr ", ou consultez notre"
 
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#: src/views/boards/index.tsx:38
+#: src/views/boards/index.tsx:51
 msgid "{0}"
 msgstr "{0}"
 
@@ -30,7 +30,7 @@ msgstr "{0}"
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
-#: src/views/boards/index.tsx:33
+#: src/views/boards/index.tsx:46
 #: src/views/card/index.tsx:272
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
@@ -41,7 +41,7 @@ msgid "{0} labels"
 msgstr "{0} étiquettes"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:412
+#: src/views/board/index.tsx:408
 msgid "{0} not found"
 msgstr "{0} introuvable"
 
@@ -82,6 +82,10 @@ msgstr "Compte supprimé"
 #: src/providers/keyboard-shortcuts.tsx:55
 msgid "Actions"
 msgstr "Actions"
+
+#: src/views/boards/index.tsx:25
+msgid "Active"
+msgstr ""
 
 #: src/views/card/index.tsx:386
 #: src/views/public/board/CardModal.tsx:158
@@ -231,6 +235,14 @@ msgstr "Candidats"
 msgid "Approval"
 msgstr "Approbation"
 
+#: src/views/board/components/BoardDropdown.tsx:101
+msgid "Archive board"
+msgstr ""
+
+#: src/views/boards/index.tsx:26
+msgid "Archived"
+msgstr ""
+
 #: src/views/members/components/DeleteMemberConfirmation.tsx:47
 msgid "Are you sure want to remove {entityLabel}?"
 msgstr "Êtes-vous sûr de vouloir supprimer {entityLabel} ?"
@@ -312,9 +324,9 @@ msgstr "Portail de facturation"
 msgid "Blog Post"
 msgstr "Article de blog"
 
-#: src/views/board/index.tsx:386
+#: src/views/board/index.tsx:382
 #: src/views/card/index.tsx:272
-#: src/views/public/board/index.tsx:113
+#: src/views/public/board/index.tsx:114
 msgid "Board"
 msgstr "Tableau"
 
@@ -322,6 +334,10 @@ msgstr "Tableau"
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:83
 msgid "Board analytics"
 msgstr "Analyses du tableau"
+
+#: src/views/board/components/BoardDropdown.tsx:37
+msgid "Board archived"
+msgstr ""
 
 #: src/views/boards/components/NewBoardForm.tsx:23
 msgid "Board name cannot exceed 100 characters"
@@ -331,13 +347,17 @@ msgstr "Le nom du tableau ne peut pas dépasser 100 caractères"
 msgid "Board name is required"
 msgstr "Le nom du tableau est requis"
 
-#: src/views/public/board/index.tsx:165
+#: src/views/public/board/index.tsx:166
 msgid "Board not found"
 msgstr "Tableau introuvable"
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:127
 msgid "Board sharing & invites"
 msgstr "Partage de tableau & invitations"
+
+#: src/views/board/components/BoardDropdown.tsx:56
+msgid "Board unarchived"
+msgstr ""
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:46
 msgid "Board URL can only contain letters, numbers, and hyphens"
@@ -347,7 +367,7 @@ msgstr "L'URL du tableau ne peut contenir que des lettres, des chiffres et des t
 msgid "Board URL cannot exceed 60 characters"
 msgstr "L'URL du tableau ne peut pas dépasser 60 caractères"
 
-#: src/views/public/board/index.tsx:79
+#: src/views/public/board/index.tsx:80
 msgid "Board URL copied to clipboard"
 msgstr "URL du tableau copiée dans le presse-papiers"
 
@@ -367,6 +387,10 @@ msgstr "Visibilité du tableau mise à jour"
 #: src/components/SideNavigation.tsx:97
 msgid "Boards"
 msgstr "Tableaux"
+
+#: src/views/boards/components/BoardsList.tsx:42
+msgid "Boards you archive will appear here."
+msgstr ""
 
 #: src/views/boards/components/TemplateBoards.tsx:30
 msgid "Brainstorming"
@@ -590,8 +614,8 @@ msgid "Create list"
 msgstr "Créer une liste"
 
 #. placeholder {0}: isTemplate ? "template" : "board"
-#: src/views/boards/components/BoardsList.tsx:45
-#: src/views/boards/index.tsx:26
+#: src/views/boards/components/BoardsList.tsx:47
+#: src/views/boards/index.tsx:39
 msgid "Create new {0}"
 msgstr "Créer un nouveau {0}"
 
@@ -604,8 +628,8 @@ msgstr "Créer une nouvelle clé"
 msgid "Create new label"
 msgstr "Créer une nouvelle étiquette"
 
-#: src/views/board/index.tsx:65
-#: src/views/board/index.tsx:503
+#: src/views/board/index.tsx:64
+#: src/views/board/index.tsx:500
 msgid "Create new list"
 msgstr "Créer une nouvelle liste"
 
@@ -687,7 +711,7 @@ msgstr "Supprimer"
 msgid "Delete account"
 msgstr "Supprimer le compte"
 
-#: src/views/board/components/BoardDropdown.tsx:48
+#: src/views/board/components/BoardDropdown.tsx:109
 msgid "Delete board"
 msgstr "Supprimer le tableau"
 
@@ -703,7 +727,7 @@ msgstr "Supprimer le commentaire"
 msgid "Delete list"
 msgstr "Supprimer la liste"
 
-#: src/views/board/components/BoardDropdown.tsx:48
+#: src/views/board/components/BoardDropdown.tsx:109
 msgid "Delete template"
 msgstr "Supprimer le modèle"
 
@@ -819,7 +843,7 @@ msgstr "Échéance aujourd'hui"
 msgid "Due tomorrow"
 msgstr "Échéance demain"
 
-#: src/views/board/components/BoardDropdown.tsx:41
+#: src/views/board/components/BoardDropdown.tsx:96
 #: src/views/board/components/UpdateBoardSlugForm.tsx:116
 msgid "Edit board URL"
 msgstr "Modifier l'URL du tableau"
@@ -1085,11 +1109,11 @@ msgid "Get Started"
 msgstr "Commencer"
 
 #. placeholder {0}: isTemplate ? "template" : "board"
-#: src/views/boards/components/BoardsList.tsx:41
+#: src/views/boards/components/BoardsList.tsx:42
 msgid "Get started by creating a new {0}"
 msgstr "Commencez par créer un nouveau {0}"
 
-#: src/views/board/index.tsx:495
+#: src/views/board/index.tsx:492
 msgid "Get started by creating a new list"
 msgstr "Commencez par créer une nouvelle liste"
 
@@ -1188,7 +1212,7 @@ msgstr "Idées"
 msgid "Ideas to improve this page..."
 msgstr "Idées pour améliorer cette page..."
 
-#: src/views/boards/index.tsx:50
+#: src/views/boards/index.tsx:63
 msgid "Import"
 msgstr "Importer"
 
@@ -1375,7 +1399,7 @@ msgstr "Licence"
 msgid "Light"
 msgstr "Clair"
 
-#: src/views/public/board/index.tsx:77
+#: src/views/public/board/index.tsx:78
 msgid "Link copied"
 msgstr "Lien copié"
 
@@ -1415,7 +1439,7 @@ msgstr "Priorité basse"
 msgid "magic link"
 msgstr "lien magique"
 
-#: src/views/board/components/BoardDropdown.tsx:34
+#: src/views/board/components/BoardDropdown.tsx:89
 msgid "Make template"
 msgstr "Créer un modèle"
 
@@ -1478,7 +1502,7 @@ msgstr "Navigation"
 msgid "Need help?"
 msgstr "Besoin d'aide ?"
 
-#: src/views/boards/index.tsx:62
+#: src/views/boards/index.tsx:75
 #: src/views/home/components/Features.tsx:73
 msgid "New"
 msgstr "Nouveau"
@@ -1509,7 +1533,7 @@ msgid "New label"
 msgstr "Nouvelle étiquette"
 
 #: src/views/board/components/NewListForm.tsx:113
-#: src/views/board/index.tsx:466
+#: src/views/board/index.tsx:462
 msgid "New list"
 msgstr "Nouvelle liste"
 
@@ -1542,9 +1566,13 @@ msgid "Next Steps"
 msgstr "Prochaines étapes"
 
 #. placeholder {0}: isTemplate ? "templates" : "boards"
-#: src/views/boards/components/BoardsList.tsx:38
+#: src/views/boards/components/BoardsList.tsx:39
 msgid "No {0}"
 msgstr "Aucun {0}"
+
+#: src/views/boards/components/BoardsList.tsx:39
+msgid "No archived boards"
+msgstr ""
 
 #: src/components/AuthForm.tsx:369
 msgid "No authentication methods are currently available"
@@ -1570,7 +1598,7 @@ msgstr "Aucune URL de téléchargement disponible pour cette pièce jointe."
 msgid "No keyboard shortcuts registered."
 msgstr "Aucun raccourci clavier enregistré."
 
-#: src/views/board/index.tsx:492
+#: src/views/board/index.tsx:489
 msgid "No lists"
 msgstr "Aucune liste"
 
@@ -1715,14 +1743,16 @@ msgstr "Veuillez sélectionner un fichier à télécharger."
 #: src/components/DeleteLabelConfirmation.tsx:26
 #: src/components/FeedbackModal.tsx:41
 #: src/components/NewWorkspaceForm.tsx:158
+#: src/views/board/components/BoardDropdown.tsx:45
+#: src/views/board/components/BoardDropdown.tsx:64
 #: src/views/board/components/NewCardForm.tsx:184
 #: src/views/board/components/NewListForm.tsx:79
 #: src/views/board/components/NewTemplateForm.tsx:61
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:73
 #: src/views/board/components/VisibilityButton.tsx:54
-#: src/views/board/index.tsx:174
-#: src/views/board/index.tsx:230
+#: src/views/board/index.tsx:170
+#: src/views/board/index.tsx:226
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/AttachmentThumbnails.tsx:73
 #: src/views/card/components/ChecklistItemRow.tsx:60
@@ -2090,8 +2120,8 @@ msgstr "Forfait d'équipe"
 msgid "Teams"
 msgstr "Équipes"
 
-#: src/views/board/index.tsx:386
-#: src/views/board/index.tsx:421
+#: src/views/board/index.tsx:382
+#: src/views/board/index.tsx:417
 msgid "Template"
 msgstr "Modèle"
 
@@ -2127,6 +2157,14 @@ msgstr "Témoignages"
 #: src/components/FeedbackModal.tsx:34
 msgid "Thank you for your feedback!"
 msgstr "Merci pour vos commentaires !"
+
+#: src/views/board/components/BoardDropdown.tsx:38
+msgid "The board has been archived."
+msgstr ""
+
+#: src/views/board/components/BoardDropdown.tsx:57
+msgid "The board has been unarchived."
+msgstr ""
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:84
 msgid "The current password you entered is incorrect."
@@ -2165,7 +2203,7 @@ msgstr "Cette action ne peut pas être annulée."
 msgid "This API key will only be shown once. Please save it in a secure location."
 msgstr "Cette clé API ne sera affichée qu'une seule fois. Veuillez la sauvegarder dans un emplacement sécurisé."
 
-#: src/views/public/board/index.tsx:168
+#: src/views/public/board/index.tsx:169
 msgid "This board is private or does not exist"
 msgstr "Ce tableau est privé ou n'existe pas"
 
@@ -2243,6 +2281,10 @@ msgstr "Impossible d'ajouter un commentaire"
 msgid "Unable to add label"
 msgstr ""
 
+#: src/views/board/components/BoardDropdown.tsx:44
+msgid "Unable to archive board"
+msgstr ""
+
 #: src/views/board/components/NewCardForm.tsx:181
 msgid "Unable to create card"
 msgstr "Impossible de créer la carte"
@@ -2292,6 +2334,10 @@ msgstr "Impossible de supprimer le membre"
 msgid "Unable to send feedback"
 msgstr "Impossible d'envoyer les commentaires"
 
+#: src/views/board/components/BoardDropdown.tsx:63
+msgid "Unable to unarchive board"
+msgstr ""
+
 #: src/views/board/components/UpdateBoardSlugForm.tsx:72
 msgid "Unable to update board URL"
 msgstr "Impossible de mettre à jour l'URL du tableau"
@@ -2300,7 +2346,7 @@ msgstr "Impossible de mettre à jour l'URL du tableau"
 msgid "Unable to update board visibility"
 msgstr "Impossible de mettre à jour la visibilité du tableau"
 
-#: src/views/board/index.tsx:229
+#: src/views/board/index.tsx:225
 #: src/views/card/index.tsx:186
 msgid "Unable to update card"
 msgstr "Impossible de mettre à jour la carte"
@@ -2325,7 +2371,7 @@ msgstr "Impossible de mettre à jour la date d'échéance"
 msgid "Unable to update labels"
 msgstr "Impossible de mettre à jour les étiquettes"
 
-#: src/views/board/index.tsx:173
+#: src/views/board/index.tsx:169
 #: src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Impossible de mettre à jour la liste"
@@ -2333,6 +2379,10 @@ msgstr "Impossible de mettre à jour la liste"
 #: src/views/card/components/MemberSelector.tsx:78
 msgid "Unable to update members"
 msgstr "Impossible de mettre à jour les membres"
+
+#: src/views/board/components/BoardDropdown.tsx:101
+msgid "Unarchive board"
+msgstr ""
 
 #. placeholder {0}: truncate(memberName)
 #: src/views/card/components/ActivityList.tsx:121
@@ -2483,7 +2533,7 @@ msgstr "Consultez et gérez votre facturation et votre abonnement."
 msgid "View docs"
 msgstr "Voir la documentation"
 
-#: src/views/public/board/index.tsx:141
+#: src/views/public/board/index.tsx:142
 msgid "View only"
 msgstr "Affichage uniquement"
 
@@ -2491,7 +2541,7 @@ msgstr "Affichage uniquement"
 msgid "View our roadmap."
 msgstr "Consultez notre feuille de route."
 
-#: src/views/public/board/index.tsx:171
+#: src/views/public/board/index.tsx:172
 msgid "View workspace"
 msgstr "Voir l'espace de travail"
 
@@ -2536,10 +2586,10 @@ msgid "Why make an open source Trello?"
 msgstr "Pourquoi créer un Trello open source ?"
 
 #: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:386
-#: src/views/boards/index.tsx:33
+#: src/views/board/index.tsx:382
+#: src/views/boards/index.tsx:46
 #: src/views/members/index.tsx:173
-#: src/views/public/board/index.tsx:113
+#: src/views/public/board/index.tsx:114
 #: src/views/public/boards/index.tsx:66
 msgid "Workspace"
 msgstr "Espace de travail"

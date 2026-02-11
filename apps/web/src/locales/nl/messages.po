@@ -22,7 +22,7 @@ msgid ", or see our"
 msgstr ", of bekijk onze"
 
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
-#: src/views/boards/index.tsx:38
+#: src/views/boards/index.tsx:51
 msgid "{0}"
 msgstr "{0}"
 
@@ -30,7 +30,7 @@ msgstr "{0}"
 #. placeholder {0}: isTemplate ? "Templates" : "Boards"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
-#: src/views/boards/index.tsx:33
+#: src/views/boards/index.tsx:46
 #: src/views/card/index.tsx:272
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
@@ -41,7 +41,7 @@ msgid "{0} labels"
 msgstr "{0} labels"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:412
+#: src/views/board/index.tsx:408
 msgid "{0} not found"
 msgstr "{0} niet gevonden"
 
@@ -82,6 +82,10 @@ msgstr "Account verwijderd"
 #: src/providers/keyboard-shortcuts.tsx:55
 msgid "Actions"
 msgstr "Acties"
+
+#: src/views/boards/index.tsx:25
+msgid "Active"
+msgstr ""
 
 #: src/views/card/index.tsx:386
 #: src/views/public/board/CardModal.tsx:158
@@ -231,6 +235,14 @@ msgstr "Sollicitanten"
 msgid "Approval"
 msgstr "Goedkeuring"
 
+#: src/views/board/components/BoardDropdown.tsx:101
+msgid "Archive board"
+msgstr ""
+
+#: src/views/boards/index.tsx:26
+msgid "Archived"
+msgstr ""
+
 #: src/views/members/components/DeleteMemberConfirmation.tsx:47
 msgid "Are you sure want to remove {entityLabel}?"
 msgstr "Weet je zeker dat je {entityLabel} wilt verwijderen?"
@@ -312,9 +324,9 @@ msgstr "Factureringsportaal"
 msgid "Blog Post"
 msgstr "Blogbericht"
 
-#: src/views/board/index.tsx:386
+#: src/views/board/index.tsx:382
 #: src/views/card/index.tsx:272
-#: src/views/public/board/index.tsx:113
+#: src/views/public/board/index.tsx:114
 msgid "Board"
 msgstr "Bord"
 
@@ -322,6 +334,10 @@ msgstr "Bord"
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:83
 msgid "Board analytics"
 msgstr "Bordanalyses"
+
+#: src/views/board/components/BoardDropdown.tsx:37
+msgid "Board archived"
+msgstr ""
 
 #: src/views/boards/components/NewBoardForm.tsx:23
 msgid "Board name cannot exceed 100 characters"
@@ -331,13 +347,17 @@ msgstr "Bordnaam mag niet langer zijn dan 100 tekens"
 msgid "Board name is required"
 msgstr "Bordnaam is verplicht"
 
-#: src/views/public/board/index.tsx:165
+#: src/views/public/board/index.tsx:166
 msgid "Board not found"
 msgstr "Bord niet gevonden"
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:127
 msgid "Board sharing & invites"
 msgstr "Bord delen & uitnodigingen"
+
+#: src/views/board/components/BoardDropdown.tsx:56
+msgid "Board unarchived"
+msgstr ""
 
 #: src/views/board/components/UpdateBoardSlugForm.tsx:46
 msgid "Board URL can only contain letters, numbers, and hyphens"
@@ -347,7 +367,7 @@ msgstr "Board URL kan alleen letters, cijfers en koppeltekens bevatten"
 msgid "Board URL cannot exceed 60 characters"
 msgstr "Board URL mag niet langer zijn dan 60 tekens"
 
-#: src/views/public/board/index.tsx:79
+#: src/views/public/board/index.tsx:80
 msgid "Board URL copied to clipboard"
 msgstr "Board URL gekopieerd naar klembord"
 
@@ -367,6 +387,10 @@ msgstr "Zichtbaarheid van bord bijgewerkt"
 #: src/components/SideNavigation.tsx:97
 msgid "Boards"
 msgstr "Borden"
+
+#: src/views/boards/components/BoardsList.tsx:42
+msgid "Boards you archive will appear here."
+msgstr ""
 
 #: src/views/boards/components/TemplateBoards.tsx:30
 msgid "Brainstorming"
@@ -590,8 +614,8 @@ msgid "Create list"
 msgstr "Lijst maken"
 
 #. placeholder {0}: isTemplate ? "template" : "board"
-#: src/views/boards/components/BoardsList.tsx:45
-#: src/views/boards/index.tsx:26
+#: src/views/boards/components/BoardsList.tsx:47
+#: src/views/boards/index.tsx:39
 msgid "Create new {0}"
 msgstr "Nieuwe {0} maken"
 
@@ -604,8 +628,8 @@ msgstr "Nieuwe sleutel aanmaken"
 msgid "Create new label"
 msgstr "Maak nieuw label"
 
-#: src/views/board/index.tsx:65
-#: src/views/board/index.tsx:503
+#: src/views/board/index.tsx:64
+#: src/views/board/index.tsx:500
 msgid "Create new list"
 msgstr "Maak nieuwe lijst"
 
@@ -687,7 +711,7 @@ msgstr "Verwijderen"
 msgid "Delete account"
 msgstr "Account verwijderen"
 
-#: src/views/board/components/BoardDropdown.tsx:48
+#: src/views/board/components/BoardDropdown.tsx:109
 msgid "Delete board"
 msgstr "Board verwijderen"
 
@@ -703,7 +727,7 @@ msgstr "Reactie verwijderen"
 msgid "Delete list"
 msgstr "Lijst verwijderen"
 
-#: src/views/board/components/BoardDropdown.tsx:48
+#: src/views/board/components/BoardDropdown.tsx:109
 msgid "Delete template"
 msgstr "Sjabloon verwijderen"
 
@@ -819,7 +843,7 @@ msgstr "Vervalt vandaag"
 msgid "Due tomorrow"
 msgstr "Vervalt morgen"
 
-#: src/views/board/components/BoardDropdown.tsx:41
+#: src/views/board/components/BoardDropdown.tsx:96
 #: src/views/board/components/UpdateBoardSlugForm.tsx:116
 msgid "Edit board URL"
 msgstr "Board URL bewerken"
@@ -1085,11 +1109,11 @@ msgid "Get Started"
 msgstr "Aan de slag"
 
 #. placeholder {0}: isTemplate ? "template" : "board"
-#: src/views/boards/components/BoardsList.tsx:41
+#: src/views/boards/components/BoardsList.tsx:42
 msgid "Get started by creating a new {0}"
 msgstr "Begin door een nieuwe {0} te maken"
 
-#: src/views/board/index.tsx:495
+#: src/views/board/index.tsx:492
 msgid "Get started by creating a new list"
 msgstr "Begin door een nieuwe lijst te maken"
 
@@ -1188,7 +1212,7 @@ msgstr "Ideeën"
 msgid "Ideas to improve this page..."
 msgstr "Ideeën om deze pagina te verbeteren..."
 
-#: src/views/boards/index.tsx:50
+#: src/views/boards/index.tsx:63
 msgid "Import"
 msgstr "Importeren"
 
@@ -1375,7 +1399,7 @@ msgstr "Licentie"
 msgid "Light"
 msgstr "Licht"
 
-#: src/views/public/board/index.tsx:77
+#: src/views/public/board/index.tsx:78
 msgid "Link copied"
 msgstr "Link gekopieerd"
 
@@ -1415,7 +1439,7 @@ msgstr "Lage prioriteit"
 msgid "magic link"
 msgstr "magische link"
 
-#: src/views/board/components/BoardDropdown.tsx:34
+#: src/views/board/components/BoardDropdown.tsx:89
 msgid "Make template"
 msgstr "Sjabloon maken"
 
@@ -1478,7 +1502,7 @@ msgstr "Navigatie"
 msgid "Need help?"
 msgstr "Hulp nodig?"
 
-#: src/views/boards/index.tsx:62
+#: src/views/boards/index.tsx:75
 #: src/views/home/components/Features.tsx:73
 msgid "New"
 msgstr "Nieuw"
@@ -1509,7 +1533,7 @@ msgid "New label"
 msgstr "Nieuw label"
 
 #: src/views/board/components/NewListForm.tsx:113
-#: src/views/board/index.tsx:466
+#: src/views/board/index.tsx:462
 msgid "New list"
 msgstr "Nieuwe lijst"
 
@@ -1542,9 +1566,13 @@ msgid "Next Steps"
 msgstr "Volgende stappen"
 
 #. placeholder {0}: isTemplate ? "templates" : "boards"
-#: src/views/boards/components/BoardsList.tsx:38
+#: src/views/boards/components/BoardsList.tsx:39
 msgid "No {0}"
 msgstr "Geen {0}"
+
+#: src/views/boards/components/BoardsList.tsx:39
+msgid "No archived boards"
+msgstr ""
 
 #: src/components/AuthForm.tsx:369
 msgid "No authentication methods are currently available"
@@ -1570,7 +1598,7 @@ msgstr "Geen download-URL beschikbaar voor deze bijlage."
 msgid "No keyboard shortcuts registered."
 msgstr "Geen sneltoetsen geregistreerd."
 
-#: src/views/board/index.tsx:492
+#: src/views/board/index.tsx:489
 msgid "No lists"
 msgstr "Geen lijsten"
 
@@ -1715,14 +1743,16 @@ msgstr "Selecteer een bestand om te uploaden."
 #: src/components/DeleteLabelConfirmation.tsx:26
 #: src/components/FeedbackModal.tsx:41
 #: src/components/NewWorkspaceForm.tsx:158
+#: src/views/board/components/BoardDropdown.tsx:45
+#: src/views/board/components/BoardDropdown.tsx:64
 #: src/views/board/components/NewCardForm.tsx:184
 #: src/views/board/components/NewListForm.tsx:79
 #: src/views/board/components/NewTemplateForm.tsx:61
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:73
 #: src/views/board/components/VisibilityButton.tsx:54
-#: src/views/board/index.tsx:174
-#: src/views/board/index.tsx:230
+#: src/views/board/index.tsx:170
+#: src/views/board/index.tsx:226
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/AttachmentThumbnails.tsx:73
 #: src/views/card/components/ChecklistItemRow.tsx:60
@@ -2090,8 +2120,8 @@ msgstr "Teamplan"
 msgid "Teams"
 msgstr "Teams"
 
-#: src/views/board/index.tsx:386
-#: src/views/board/index.tsx:421
+#: src/views/board/index.tsx:382
+#: src/views/board/index.tsx:417
 msgid "Template"
 msgstr "Sjabloon"
 
@@ -2127,6 +2157,14 @@ msgstr "Getuigenissen"
 #: src/components/FeedbackModal.tsx:34
 msgid "Thank you for your feedback!"
 msgstr "Bedankt voor je feedback!"
+
+#: src/views/board/components/BoardDropdown.tsx:38
+msgid "The board has been archived."
+msgstr ""
+
+#: src/views/board/components/BoardDropdown.tsx:57
+msgid "The board has been unarchived."
+msgstr ""
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:84
 msgid "The current password you entered is incorrect."
@@ -2165,7 +2203,7 @@ msgstr "Deze actie kan niet ongedaan worden gemaakt."
 msgid "This API key will only be shown once. Please save it in a secure location."
 msgstr "Deze API-sleutel wordt slechts één keer getoond. Bewaar deze op een veilige plaats."
 
-#: src/views/public/board/index.tsx:168
+#: src/views/public/board/index.tsx:169
 msgid "This board is private or does not exist"
 msgstr "Dit bord is privé of bestaat niet"
 
@@ -2243,6 +2281,10 @@ msgstr "Kan geen reactie toevoegen"
 msgid "Unable to add label"
 msgstr ""
 
+#: src/views/board/components/BoardDropdown.tsx:44
+msgid "Unable to archive board"
+msgstr ""
+
 #: src/views/board/components/NewCardForm.tsx:181
 msgid "Unable to create card"
 msgstr "Kan kaart niet aanmaken"
@@ -2292,6 +2334,10 @@ msgstr "Kan lid niet verwijderen"
 msgid "Unable to send feedback"
 msgstr "Feedback kon niet worden verzonden"
 
+#: src/views/board/components/BoardDropdown.tsx:63
+msgid "Unable to unarchive board"
+msgstr ""
+
 #: src/views/board/components/UpdateBoardSlugForm.tsx:72
 msgid "Unable to update board URL"
 msgstr "Kan board URL niet bijwerken"
@@ -2300,7 +2346,7 @@ msgstr "Kan board URL niet bijwerken"
 msgid "Unable to update board visibility"
 msgstr "Kan bordzichtbaarheid niet bijwerken"
 
-#: src/views/board/index.tsx:229
+#: src/views/board/index.tsx:225
 #: src/views/card/index.tsx:186
 msgid "Unable to update card"
 msgstr "Kan kaart niet bijwerken"
@@ -2325,7 +2371,7 @@ msgstr "Kan vervaldatum niet bijwerken"
 msgid "Unable to update labels"
 msgstr "Kan labels niet bijwerken"
 
-#: src/views/board/index.tsx:173
+#: src/views/board/index.tsx:169
 #: src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Kan lijst niet bijwerken"
@@ -2333,6 +2379,10 @@ msgstr "Kan lijst niet bijwerken"
 #: src/views/card/components/MemberSelector.tsx:78
 msgid "Unable to update members"
 msgstr "Kan leden niet bijwerken"
+
+#: src/views/board/components/BoardDropdown.tsx:101
+msgid "Unarchive board"
+msgstr ""
 
 #. placeholder {0}: truncate(memberName)
 #: src/views/card/components/ActivityList.tsx:121
@@ -2483,7 +2533,7 @@ msgstr "Bekijk en beheer je facturering en abonnement."
 msgid "View docs"
 msgstr "Bekijk documentatie"
 
-#: src/views/public/board/index.tsx:141
+#: src/views/public/board/index.tsx:142
 msgid "View only"
 msgstr "Alleen bekijken"
 
@@ -2491,7 +2541,7 @@ msgstr "Alleen bekijken"
 msgid "View our roadmap."
 msgstr "Bekijk onze roadmap."
 
-#: src/views/public/board/index.tsx:171
+#: src/views/public/board/index.tsx:172
 msgid "View workspace"
 msgstr "Werkruimte bekijken"
 
@@ -2536,10 +2586,10 @@ msgid "Why make an open source Trello?"
 msgstr "Waarom een open source Trello maken?"
 
 #: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:386
-#: src/views/boards/index.tsx:33
+#: src/views/board/index.tsx:382
+#: src/views/boards/index.tsx:46
 #: src/views/members/index.tsx:173
-#: src/views/public/board/index.tsx:113
+#: src/views/public/board/index.tsx:114
 #: src/views/public/boards/index.tsx:66
 msgid "Workspace"
 msgstr "Werkruimte"
