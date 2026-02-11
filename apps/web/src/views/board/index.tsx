@@ -30,11 +30,19 @@ import { usePermissions } from "~/hooks/usePermissions";
 import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
+import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
+import type { CardContextMenuAction } from "./components/CardContextMenu";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { formatToArray } from "~/utils/helpers";
 import BoardDropdown from "./components/BoardDropdown";
 import Card from "./components/Card";
+import { CardContextMenu } from "./components/CardContextMenu";
+import { CardContextDuplicateModal } from "./components/CardContextDuplicateModal";
+import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
+import { CardContextLabelsModal } from "./components/CardContextLabelsModal";
+import { CardContextMembersModal } from "./components/CardContextMembersModal";
+import { CardContextMoveListModal } from "./components/CardContextMoveListModal";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
@@ -54,10 +62,16 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
-  const { openModal, modalContentType, entityId, isOpen } = useModal();
+  const { openModal, modalContentType, entityId, isOpen, setModalState } =
+    useModal();
   const [selectedPublicListId, setSelectedPublicListId] =
     useState<PublicListId>("");
   const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [contextMenu, setContextMenu] = useState<{
+    x: number;
+    y: number;
+    cardPublicId: string;
+  } | null>(null);
   
   const { ref: scrollRef, onMouseDown } = useDragToScroll({
     enabled: true,
@@ -253,6 +267,56 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     setSelectedPublicListId(publicBoardId);
   };
 
+  const handleCardContextMenuAction = (action: CardContextMenuAction) => {
+    const cardPublicId = contextMenu?.cardPublicId;
+    if (!cardPublicId) return;
+    setContextMenu(null);
+    if (action === "copyLink") {
+      const path = isTemplate
+        ? `/templates/${boardId}/cards/${cardPublicId}`
+        : `/cards/${cardPublicId}`;
+      const url = `${typeof window !== "undefined" ? window.location.origin : ""}${path}`;
+      void navigator.clipboard.writeText(url).then(
+        () => {
+          showPopup({
+            header: t`Link copied`,
+            icon: "success",
+            message: t`Card URL copied to clipboard`,
+          });
+        },
+        () => {
+          showPopup({
+            header: t`Unable to copy link`,
+            icon: "error",
+            message: t`Please try again.`,
+          });
+        },
+      );
+      return;
+    }
+    if (action === "duplicate") {
+      setModalState("CARD_CONTEXT_DUPLICATE", {
+        boardPublicId: boardId ?? "",
+        isTemplate: !!isTemplate,
+      });
+      openModal("CARD_CONTEXT_DUPLICATE", cardPublicId);
+      return;
+    }
+    if (action === "delete") {
+      openModal("DELETE_CARD", cardPublicId);
+      return;
+    }
+    const modalType =
+      action === "members"
+        ? "CARD_CONTEXT_MEMBERS"
+        : action === "move"
+          ? "CARD_CONTEXT_MOVE_LIST"
+          : action === "labels"
+            ? "CARD_CONTEXT_LABELS"
+            : "CARD_CONTEXT_DUE_DATE";
+    openModal(modalType, cardPublicId);
+  };
+
   const onDragEnd = ({
     source: _source,
     destination,
@@ -388,6 +452,49 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           isVisible={isOpen && modalContentType === "EDIT_YOUTUBE"}
         >
           <EditYouTubeModal />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "CARD_CONTEXT_MEMBERS"}
+        >
+          <CardContextMembersModal />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "CARD_CONTEXT_MOVE_LIST"}
+        >
+          <CardContextMoveListModal />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "CARD_CONTEXT_LABELS"}
+        >
+          <CardContextLabelsModal />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "CARD_CONTEXT_DUE_DATE"}
+        >
+          <CardContextDueDateModal />
+        </Modal>
+        <Modal
+          modalSize="md"
+          isVisible={isOpen && modalContentType === "CARD_CONTEXT_DUPLICATE"}
+        >
+          <CardContextDuplicateModal
+            boardPublicId={boardId ?? ""}
+            isTemplate={!!isTemplate}
+          />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "DELETE_CARD"}
+        >
+          <DeleteCardConfirmation
+            cardPublicId={entityId}
+            boardPublicId={boardId ?? ""}
+          />
         </Modal>
       </>
     );
@@ -592,6 +699,20 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                             )
                                               e.preventDefault();
                                           }}
+                                          onContextMenu={(e) => {
+                                            if (
+                                              card.publicId.startsWith(
+                                                "PLACEHOLDER",
+                                              )
+                                            )
+                                              return;
+                                            e.preventDefault();
+                                            setContextMenu({
+                                              x: e.clientX,
+                                              y: e.clientY,
+                                              cardPublicId: card.publicId,
+                                            });
+                                          }}
                                           key={card.publicId}
                                           href={
                                             isTemplate
@@ -640,6 +761,15 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             </>
           ) : null}
         </div>
+        {contextMenu && (
+          <CardContextMenu
+            x={contextMenu.x}
+            y={contextMenu.y}
+            onClose={() => setContextMenu(null)}
+            onAction={handleCardContextMenuAction}
+            canEdit={!!canEditCard}
+          />
+        )}
         {renderModalContent()}
       </div>
     </>
