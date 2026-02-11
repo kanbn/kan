@@ -420,6 +420,7 @@ export const getWithListAndMembersByPublicId = async (
 ) => {
   const card = await db.query.cards.findFirst({
     columns: {
+      id: true,
       publicId: true,
       title: true,
       description: true,
@@ -507,6 +508,7 @@ export const getWithListAndMembersByPublicId = async (
                     columns: {
                       publicId: true,
                       email: true,
+                      status: true,
                     },
                     with: {
                       user: {
@@ -964,4 +966,29 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
         workspaceVisibility: result.list.board.visibility,
       }
     : null;
+};
+
+export const getCardNotificationContext = async (
+  db: dbClient,
+  cardPublicId: string,
+) => {
+  return db.query.cards.findFirst({
+    columns: { publicId: true, title: true },
+    where: and(eq(cards.publicId, cardPublicId), isNull(cards.deletedAt)),
+    with: {
+      list: {
+        columns: {},
+        with: {
+          board: {
+            columns: { publicId: true },
+            with: {
+              workspace: {
+                columns: { name: true, slug: true },
+              },
+            },
+          },
+        },
+      },
+    },
+  });
 };

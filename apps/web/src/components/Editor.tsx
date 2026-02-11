@@ -44,8 +44,12 @@ import { twMerge } from "tailwind-merge";
 import tippy from "tippy.js";
 import { Markdown } from "tiptap-markdown";
 
-import { getAvatarUrl } from "~/utils/helpers";
-import Avatar from "./Avatar";
+import type { WorkspaceMember } from "./MentionSuggestion";
+import {
+  getMentionSuggestionItems,
+  mentionCommand,
+  renderMentionSuggestions,
+} from "./MentionSuggestion";
 import { YouTubeNode } from "./YouTubeEmbed/YouTubeNode";
 
 declare module "@tiptap/core" {
@@ -82,15 +86,7 @@ export interface RenderSuggestionsProps {
   command: (item: SlashCommandItem) => void;
 }
 
-export interface WorkspaceMember {
-  publicId: string;
-  user: {
-    id: string;
-    name: string | null;
-    image: string | null;
-  } | null;
-  email: string;
-}
+export type { WorkspaceMember } from "./MentionSuggestion";
 
 const CommandsList = forwardRef<
   { onKeyDown: (props: SuggestionKeyDownProps) => boolean },
@@ -205,130 +201,6 @@ const RenderSuggestions = () => {
   };
 };
 
-interface MentionItem {
-  id: string;
-  label: string;
-  image: string | null;
-}
-
-const MentionList = forwardRef<
-  { onKeyDown: (props: SuggestionKeyDownProps) => boolean },
-  {
-    items: MentionItem[];
-    command: (item: MentionItem) => void;
-  }
->(({ items, command }, ref) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  useImperativeHandle(ref, () => ({
-    onKeyDown: ({ event }: SuggestionKeyDownProps) => {
-      if (event.key === "ArrowUp") {
-        setSelectedIndex((selectedIndex + items.length - 1) % items.length);
-        return true;
-      }
-
-      if (event.key === "ArrowDown") {
-        setSelectedIndex((selectedIndex + 1) % items.length);
-        return true;
-      }
-
-      if (event.key === "Enter") {
-        const item = items[selectedIndex];
-        if (item) {
-          command(item);
-        }
-        return true;
-      }
-
-      return false;
-    },
-  }));
-
-  return (
-    <div className="w-56 rounded-md border-[1px] border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-500 dark:bg-dark-200">
-      <div className="max-h-[350px] overflow-y-auto p-1 scrollbar-thin scrollbar-thumb-light-200 dark:scrollbar-thumb-dark-300">
-        {items.length > 0 ? (
-          items.map((item, index) => (
-            <button
-              key={item.id}
-              onClick={() => command(item)}
-              className={twMerge(
-                "group flex w-full items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300",
-                index === selectedIndex && "bg-light-200 dark:bg-dark-300",
-              )}
-            >
-              <Avatar
-                size="xs"
-                name={item.label}
-                imageUrl={item.image ? getAvatarUrl(item.image) : undefined}
-                email={item.label}
-              />
-              <span className="ml-3 text-[12px] font-medium text-dark-900 dark:text-dark-1000">
-                {item.label}
-              </span>
-            </button>
-          ))
-        ) : (
-          <div className="flex items-center justify-start p-2">
-            <span className="text-[12px] text-dark-900 dark:text-dark-1000">
-              No results
-            </span>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-});
-
-MentionList.displayName = "MentionList";
-
-const renderMentionSuggestions = () => {
-  let reactRenderer: ReactRenderer;
-  let popup: TippyInstance[];
-
-  return {
-    onStart: (props: any) => {
-      reactRenderer = new ReactRenderer(MentionList, {
-        props,
-        editor: props.editor,
-      });
-
-      if (!props.clientRect) return;
-
-      popup = tippy("body", {
-        getReferenceClientRect: props.clientRect,
-        appendTo: () => document.body,
-        content: reactRenderer.element,
-        showOnCreate: true,
-        interactive: true,
-        trigger: "manual",
-        placement: "bottom-start",
-      });
-    },
-    onUpdate(props: any) {
-      reactRenderer.updateProps(props);
-      if (!props.clientRect) return;
-      popup[0]?.setProps({ getReferenceClientRect: props.clientRect });
-    },
-    onKeyDown(props: SuggestionKeyDownProps) {
-      if (props.event.key === "Escape") {
-        popup[0]?.hide();
-        return true;
-      }
-      return (
-        (
-          reactRenderer.ref as {
-            onKeyDown?: (props: SuggestionKeyDownProps) => boolean;
-          }
-        ).onKeyDown?.(props) ?? false
-      );
-    },
-    onExit() {
-      popup[0]?.destroy();
-      reactRenderer.destroy();
-    },
-  };
-};
 
 const SlashCommands = Extension.create<SlashCommandsOptions>({
   name: "slash-commands",
@@ -387,46 +259,54 @@ export interface SlashNodeAttrs {
   label?: string | null;
 }
 
-const CommandItems: SlashCommandItem[] = [
-  {
-    title: "Heading 1",
-    icon: <HiH1 />,
-    command: ({ editor }) =>
-      editor.chain().focus().setHeading({ level: 1 }).run(),
-  },
-  {
-    title: "Heading 2",
-    icon: <HiH2 />,
-    command: ({ editor }) =>
-      editor.chain().focus().setHeading({ level: 2 }).run(),
-  },
-  {
-    title: "Heading 3",
-    icon: <HiH3 />,
-    command: ({ editor }) =>
-      editor.chain().focus().setHeading({ level: 3 }).run(),
-  },
-  {
-    title: "Bullet List",
-    icon: <HiOutlineListBullet />,
-    command: ({ editor }) => editor.chain().focus().toggleBulletList().run(),
-  },
-  {
-    title: "Ordered List",
-    icon: <HiOutlineNumberedList />,
-    command: ({ editor }) => editor.chain().focus().toggleOrderedList().run(),
-  },
-  {
-    title: "Blockquote",
-    icon: <HiOutlineChatBubbleLeftEllipsis />,
-    command: ({ editor }) => editor.chain().focus().toggleBlockquote().run(),
-  },
-  {
-    title: "Code Block",
-    icon: <HiOutlineCodeBracketSquare />,
-    command: ({ editor }) => editor.chain().focus().toggleCodeBlock().run(),
-  },
-];
+const getCommandItems = (disableHeadings: boolean): SlashCommandItem[] => {
+  const headingCommands: SlashCommandItem[] = disableHeadings
+    ? []
+    : [
+        {
+          title: "Heading 1",
+          icon: <HiH1 />,
+          command: ({ editor }) =>
+            editor.chain().focus().setHeading({ level: 1 }).run(),
+        },
+        {
+          title: "Heading 2",
+          icon: <HiH2 />,
+          command: ({ editor }) =>
+            editor.chain().focus().setHeading({ level: 2 }).run(),
+        },
+        {
+          title: "Heading 3",
+          icon: <HiH3 />,
+          command: ({ editor }) =>
+            editor.chain().focus().setHeading({ level: 3 }).run(),
+        },
+      ];
+
+  return [
+    ...headingCommands,
+    {
+      title: "Bullet List",
+      icon: <HiOutlineListBullet />,
+      command: ({ editor }) => editor.chain().focus().toggleBulletList().run(),
+    },
+    {
+      title: "Ordered List",
+      icon: <HiOutlineNumberedList />,
+      command: ({ editor }) => editor.chain().focus().toggleOrderedList().run(),
+    },
+    {
+      title: "Blockquote",
+      icon: <HiOutlineChatBubbleLeftEllipsis />,
+      command: ({ editor }) => editor.chain().focus().toggleBlockquote().run(),
+    },
+    {
+      title: "Code Block",
+      icon: <HiOutlineCodeBracketSquare />,
+      command: ({ editor }) => editor.chain().focus().toggleCodeBlock().run(),
+    },
+  ];
+};
 
 export default function Editor({
   content,
@@ -435,6 +315,8 @@ export default function Editor({
   readOnly = false,
   workspaceMembers,
   enableYouTubeEmbed = true,
+  placeholder,
+  disableHeadings = false,
 }: {
   content: string | null;
   onChange?: (value: string) => void;
@@ -442,18 +324,23 @@ export default function Editor({
   readOnly?: boolean;
   workspaceMembers: WorkspaceMember[];
   enableYouTubeEmbed?: boolean;
+  placeholder?: string;
+  disableHeadings?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const editor = useEditor(
     {
       extensions: [
-        StarterKit,
+        StarterKit.configure({
+          heading: disableHeadings ? false : undefined,
+        }),
         Markdown,
         Placeholder.configure({
           placeholder: readOnly
             ? ""
-            : t`Add description... (type '/' to open commands or '@' to mention)`,
+            : placeholder ??
+              t`Add description... (type '/' to open commands or '@' to mention)`,
         }),
         Link.configure({
           openOnClick: true,
@@ -466,10 +353,10 @@ export default function Editor({
           autolink: true,
         }),
         SlashCommands.configure({
-          commandItems: CommandItems,
+          commandItems: getCommandItems(disableHeadings),
           suggestion: {
             items: ({ query }: { query: string }) =>
-              filterSlashCommandItems(CommandItems, query),
+              filterSlashCommandItems(getCommandItems(disableHeadings), query),
             startOfLine: true,
             char: "/",
           },
@@ -480,35 +367,9 @@ export default function Editor({
           },
           suggestion: {
             char: "@",
-            items: ({ query }: { query: string }) => {
-              const all: MentionItem[] = workspaceMembers.map(
-                (member: WorkspaceMember) => ({
-                  id: member.publicId,
-                  label: member?.user?.name ?? member.email,
-                  image: member?.user?.image ?? null,
-                }),
-              );
-              const q = query.toLowerCase();
-              return all.filter(
-                (u) =>
-                  u.label &&
-                  typeof u.label === "string" &&
-                  u.label.toLowerCase().includes(q),
-              );
-            },
-            command: ({ editor, range, props }) => {
-              const id = props.id ?? "";
-              const label = props.label ?? "";
-              const mentionHTML = `<span data-type="mention" data-id="${id}" data-label="${label}">@${label}</span>&nbsp;`;
-
-              editor
-                .chain()
-                .focus()
-                .deleteRange(range)
-                .insertContent(mentionHTML)
-                .focus()
-                .run();
-            },
+            items: ({ query }: { query: string }) =>
+              getMentionSuggestionItems(workspaceMembers, query),
+            command: mentionCommand,
             render: renderMentionSuggestions,
           },
           renderText({ options, node }) {

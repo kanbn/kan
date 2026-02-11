@@ -1,13 +1,15 @@
 import { t } from "@lingui/core/macro";
 import { formatDistanceToNow } from "date-fns";
 import { useState } from "react";
-import ContentEditable from "react-contenteditable";
 import { useForm } from "react-hook-form";
 import { HiEllipsisHorizontal, HiPencil, HiTrash } from "react-icons/hi2";
 
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
+import CommentEditor from "~/components/CommentEditor";
 import Dropdown from "~/components/Dropdown";
+import type { WorkspaceMember } from "~/components/MentionSuggestion";
+import Editor from "~/components/Editor";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -29,7 +31,6 @@ const Comment = ({
   createdAt,
   comment,
   isAuthor,
-  isAdmin,
   isEdited = false,
   isViewOnly = false,
 }: {
@@ -42,7 +43,6 @@ const Comment = ({
   createdAt: string;
   comment: string | undefined;
   isAuthor: boolean;
-  isAdmin: boolean;
   isEdited: boolean;
   isViewOnly: boolean;
 }) => {
@@ -56,6 +56,30 @@ const Comment = ({
       comment,
     },
   });
+
+  const { data: cardData } = api.card.byId.useQuery(
+    {
+      cardPublicId,
+    },
+    {
+      enabled: !!cardPublicId && cardPublicId.length >= 12,
+    },
+  );
+
+  const workspaceMembers: WorkspaceMember[] =
+    cardData?.list.board.workspace.members
+      .filter((member) => member.email)
+      .map((member) => ({
+        publicId: member.publicId,
+        email: member.email,
+        user: member.user
+          ? {
+              id: member.user.id,
+              name: member.user.name ?? null,
+              image: member.user.image ?? null,
+            }
+          : null,
+      })) ?? [];
 
   if (!publicId) return null;
 
@@ -142,19 +166,22 @@ const Comment = ({
         )}
       </div>
       {!isEditing ? (
-        <ContentEditable
-          html={comment ?? ""}
-          disabled={true}
-          className="break-anywhere mt-2 text-sm"
-        />
+        <div className="mt-2">
+          <Editor
+            content={comment ?? null}
+            readOnly={true}
+            workspaceMembers={workspaceMembers}
+            enableYouTubeEmbed={false}
+            disableHeadings={true}
+          />
+        </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <ContentEditable
-            placeholder={t`Add a comment...`}
-            html={watch("comment")}
-            disabled={false}
-            onChange={(e) => setValue("comment", e.target.value)}
-            className="block w-full max-w-[800px] border-0 bg-transparent py-1.5 text-sm text-light-900 focus-visible:outline-none dark:text-dark-1000 sm:text-sm sm:leading-6"
+          <CommentEditor
+            content={watch("comment")}
+            onChange={(html) => setValue("comment", html)}
+            onSubmit={() => handleSubmit(onSubmit)()}
+            workspaceMembers={workspaceMembers}
           />
           <div className="flex justify-end space-x-2">
             <Button
