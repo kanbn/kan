@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
+import { authClient } from "@kan/auth/client";
 import {
   HiMiniXMark,
   HiOutlineClock,
@@ -39,20 +40,32 @@ interface List {
   name: string;
 }
 
+interface FiltersProps {
+  position?: "left" | "right";
+  labels: Label[];
+  members: Member[];
+  lists: List[];
+  isLoading: boolean;
+}
+
 const Filters = ({
   position = "right",
   labels,
   members,
   lists,
   isLoading,
-}: {
-  position?: "left" | "right";
-  labels: Label[];
-  members: Member[];
-  lists: List[];
-  isLoading: boolean;
-}) => {
+}: FiltersProps) => {
   const router = useRouter();
+  const { data: session } = authClient.useSession();
+  const currentUserMember = members.find(
+    (m) => m.user?.email === session?.user?.email,
+  );
+  const currentUserMemberPublicId = currentUserMember?.publicId;
+  const membersQuery = formatToArray(router.query.members);
+  const isAssignedToMeActive =
+    !!currentUserMemberPublicId &&
+    membersQuery.length === 1 &&
+    membersQuery[0] === currentUserMemberPublicId;
 
   const clearFilters = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -139,6 +152,29 @@ const Filters = ({
     },
   ];
 
+  const topLevelItems =
+    currentUserMemberPublicId
+      ? [
+          {
+            key: "me",
+            value: t`Assigned to me`,
+            selected: isAssignedToMeActive,
+            leftIcon: (
+              <Avatar
+                size="xs"
+                name={currentUserMember.user?.name ?? ""}
+                imageUrl={
+                  currentUserMember.user?.image
+                    ? getAvatarUrl(currentUserMember.user.image)
+                    : undefined
+                }
+                email={currentUserMember.user?.email ?? ""}
+              />
+            ),
+          },
+        ]
+      : undefined;
+
   const groups = [
     ...(formattedMembers.length
       ? [
@@ -178,6 +214,24 @@ const Filters = ({
     groupKey: string | null,
     item: { key: string },
   ) => {
+    if (
+      groupKey === null &&
+      item.key === "me" &&
+      currentUserMemberPublicId
+    ) {
+      try {
+        await router.push({
+          pathname: router.pathname,
+          query: {
+            ...router.query,
+            members: isAssignedToMeActive ? [] : [currentUserMemberPublicId],
+          },
+        });
+      } catch (error) {
+        console.error(error);
+      }
+      return;
+    }
     if (groupKey === null) return;
     const currentQuery = router.query[groupKey] ?? [];
     const formattedCurrentQuery = Array.isArray(currentQuery)
@@ -208,6 +262,7 @@ const Filters = ({
   return (
     <div className="relative">
       <CheckboxDropdown
+        items={topLevelItems}
         groups={groups}
         handleSelect={handleSelect}
         menuSpacing="md"
