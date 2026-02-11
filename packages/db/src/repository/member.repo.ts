@@ -63,6 +63,36 @@ export const getById = async (db: dbClient, memberId: number) => {
   });
 };
 
+export const getByPublicIdsWithUsers = async (
+  db: dbClient,
+  memberPublicIds: string[],
+  workspaceId?: number,
+) => {
+  return db.query.workspaceMembers.findMany({
+    where: (members, { inArray: inArrayFn, eq, and, isNull: isNullFn }) => {
+      const conditions = [inArrayFn(members.publicId, memberPublicIds)];
+      
+      if (workspaceId) {
+        conditions.push(eq(members.workspaceId, workspaceId));
+      }
+      
+      conditions.push(eq(members.status, "active"));
+      conditions.push(isNullFn(members.deletedAt));
+      
+      return and(...conditions);
+    },
+    with: {
+      user: {
+        columns: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      },
+    },
+  });
+};
+
 export const getByEmailAndStatus = async (
   db: dbClient,
   email: string,

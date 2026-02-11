@@ -420,6 +420,7 @@ export const getWithListAndMembersByPublicId = async (
 ) => {
   const card = await db.query.cards.findFirst({
     columns: {
+      id: true,
       publicId: true,
       title: true,
       description: true,
@@ -507,6 +508,7 @@ export const getWithListAndMembersByPublicId = async (
                     columns: {
                       publicId: true,
                       email: true,
+                      status: true,
                     },
                     with: {
                       user: {

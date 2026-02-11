@@ -387,46 +387,54 @@ export interface SlashNodeAttrs {
   label?: string | null;
 }
 
-const CommandItems: SlashCommandItem[] = [
-  {
-    title: "Heading 1",
-    icon: <HiH1 />,
-    command: ({ editor }) =>
-      editor.chain().focus().setHeading({ level: 1 }).run(),
-  },
-  {
-    title: "Heading 2",
-    icon: <HiH2 />,
-    command: ({ editor }) =>
-      editor.chain().focus().setHeading({ level: 2 }).run(),
-  },
-  {
-    title: "Heading 3",
-    icon: <HiH3 />,
-    command: ({ editor }) =>
-      editor.chain().focus().setHeading({ level: 3 }).run(),
-  },
-  {
-    title: "Bullet List",
-    icon: <HiOutlineListBullet />,
-    command: ({ editor }) => editor.chain().focus().toggleBulletList().run(),
-  },
-  {
-    title: "Ordered List",
-    icon: <HiOutlineNumberedList />,
-    command: ({ editor }) => editor.chain().focus().toggleOrderedList().run(),
-  },
-  {
-    title: "Blockquote",
-    icon: <HiOutlineChatBubbleLeftEllipsis />,
-    command: ({ editor }) => editor.chain().focus().toggleBlockquote().run(),
-  },
-  {
-    title: "Code Block",
-    icon: <HiOutlineCodeBracketSquare />,
-    command: ({ editor }) => editor.chain().focus().toggleCodeBlock().run(),
-  },
-];
+const getCommandItems = (disableHeadings: boolean): SlashCommandItem[] => {
+  const headingCommands: SlashCommandItem[] = disableHeadings
+    ? []
+    : [
+        {
+          title: "Heading 1",
+          icon: <HiH1 />,
+          command: ({ editor }) =>
+            editor.chain().focus().setHeading({ level: 1 }).run(),
+        },
+        {
+          title: "Heading 2",
+          icon: <HiH2 />,
+          command: ({ editor }) =>
+            editor.chain().focus().setHeading({ level: 2 }).run(),
+        },
+        {
+          title: "Heading 3",
+          icon: <HiH3 />,
+          command: ({ editor }) =>
+            editor.chain().focus().setHeading({ level: 3 }).run(),
+        },
+      ];
+
+  return [
+    ...headingCommands,
+    {
+      title: "Bullet List",
+      icon: <HiOutlineListBullet />,
+      command: ({ editor }) => editor.chain().focus().toggleBulletList().run(),
+    },
+    {
+      title: "Ordered List",
+      icon: <HiOutlineNumberedList />,
+      command: ({ editor }) => editor.chain().focus().toggleOrderedList().run(),
+    },
+    {
+      title: "Blockquote",
+      icon: <HiOutlineChatBubbleLeftEllipsis />,
+      command: ({ editor }) => editor.chain().focus().toggleBlockquote().run(),
+    },
+    {
+      title: "Code Block",
+      icon: <HiOutlineCodeBracketSquare />,
+      command: ({ editor }) => editor.chain().focus().toggleCodeBlock().run(),
+    },
+  ];
+};
 
 export default function Editor({
   content,
@@ -435,6 +443,8 @@ export default function Editor({
   readOnly = false,
   workspaceMembers,
   enableYouTubeEmbed = true,
+  placeholder,
+  disableHeadings = false,
 }: {
   content: string | null;
   onChange?: (value: string) => void;
@@ -442,18 +452,23 @@ export default function Editor({
   readOnly?: boolean;
   workspaceMembers: WorkspaceMember[];
   enableYouTubeEmbed?: boolean;
+  placeholder?: string;
+  disableHeadings?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const editor = useEditor(
     {
       extensions: [
-        StarterKit,
+        StarterKit.configure({
+          heading: disableHeadings ? false : undefined,
+        }),
         Markdown,
         Placeholder.configure({
           placeholder: readOnly
             ? ""
-            : t`Add description... (type '/' to open commands or '@' to mention)`,
+            : placeholder ??
+              t`Add description... (type '/' to open commands or '@' to mention)`,
         }),
         Link.configure({
           openOnClick: true,
@@ -466,10 +481,10 @@ export default function Editor({
           autolink: true,
         }),
         SlashCommands.configure({
-          commandItems: CommandItems,
+          commandItems: getCommandItems(disableHeadings),
           suggestion: {
             items: ({ query }: { query: string }) =>
-              filterSlashCommandItems(CommandItems, query),
+              filterSlashCommandItems(getCommandItems(disableHeadings), query),
             startOfLine: true,
             char: "/",
           },
@@ -481,20 +496,28 @@ export default function Editor({
           suggestion: {
             char: "@",
             items: ({ query }: { query: string }) => {
-              const all: MentionItem[] = workspaceMembers.map(
-                (member: WorkspaceMember) => ({
-                  id: member.publicId,
-                  label: member?.user?.name ?? member.email,
-                  image: member?.user?.image ?? null,
-                }),
+              const withEmail = workspaceMembers.filter((member) => member.email);
+              
+              const mapped = withEmail.map((member: WorkspaceMember) => ({
+                id: member.publicId,
+                label: member?.user?.name?.trim() || member.email || "",
+                image: member?.user?.image ?? null,
+              }));
+              
+              const all: MentionItem[] = mapped.filter(
+                (item) => item.label && item.label.length > 0,
               );
-              const q = query.toLowerCase();
-              return all.filter(
-                (u) =>
-                  u.label &&
-                  typeof u.label === "string" &&
-                  u.label.toLowerCase().includes(q),
+              
+              const q = query.toLowerCase().trim();
+              
+              if (q === "") {
+                return all;
+              }
+              
+              const filtered = all.filter((u) =>
+                u.label.toLowerCase().includes(q),
               );
+              return filtered;
             },
             command: ({ editor, range, props }) => {
               const id = props.id ?? "";

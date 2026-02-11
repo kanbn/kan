@@ -167,7 +167,6 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const {
     modalContentType,
     entityId,
-    openModal,
     getModalState,
     clearModalState,
     isOpen,
@@ -198,7 +197,23 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   };
 
   const board = card?.list.board;
+  const workspaceMembers = board?.workspace.members;
   const boardId = board?.publicId;
+
+  const editorWorkspaceMembers =
+    workspaceMembers
+      ?.filter((member) => member.email)
+      .map((member) => ({
+        publicId: member.publicId,
+        email: member.email,
+        user: member.user
+          ? {
+              id: member.user.id,
+              name: member.user.name ?? null,
+              image: member.user.image ?? null,
+            }
+          : null,
+      })) ?? [];
 
   const updateCard = api.card.update.useMutation({
     onError: () => {
@@ -285,6 +300,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   }, [card]);
 
   if (!cardId) return <></>;
+
 
   return (
     <>
@@ -387,7 +403,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                           onBlur={
                             canEdit ? () => handleSubmit(onSubmit)() : undefined
                           }
-                          workspaceMembers={board?.workspace.members ?? []}
+                          workspaceMembers={workspaceMembers ?? []}
                           readOnly={!canEdit}
                         />
                       </div>
@@ -431,7 +447,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                     </div>
                     {!isTemplate && (
                       <div className="mt-6">
-                        <NewCommentForm cardPublicId={cardId} />
+                        <NewCommentForm
+                          cardPublicId={cardId}
+                          workspaceMembers={editorWorkspaceMembers}
+                        />
                       </div>
                     )}
                   </div>
