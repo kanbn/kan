@@ -31,6 +31,7 @@ interface CheckboxDropdownProps {
   handleEdit?: (key: string) => void;
   handleCreate?: () => void;
   asChild?: boolean;
+  disabled?: boolean;
 }
 
 export default function CheckboxDropdown({
@@ -44,6 +45,7 @@ export default function CheckboxDropdown({
   handleEdit,
   handleCreate,
   asChild = true,
+  disabled = false,
 }: CheckboxDropdownProps) {
   const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
 
@@ -58,13 +60,13 @@ export default function CheckboxDropdown({
       {items.length > 0 ? (
         items.map((item) => (
           <Menu.Item key={item.key}>
-            <div
-              className="group flex items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300"
-              onClick={(e) => {
-                e.preventDefault();
-                handleSelect(groupKey, { key: item.key, value: item.value });
-              }}
-            >
+              <div
+                className="group flex items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSelect(groupKey, { key: item.key, value: item.value });
+                }}
+              >
               <input
                 id={item.key}
                 name={item.key}
@@ -132,7 +134,8 @@ export default function CheckboxDropdown({
       <>
         <Menu.Button
           as={asChild ? "div" : undefined}
-          className="h-full w-full cursor-pointer focus-visible:outline-none"
+          disabled={disabled}
+          className="h-full w-full cursor-pointer focus-visible:outline-none disabled:cursor-not-allowed"
         >
           {children}
         </Menu.Button>

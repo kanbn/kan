@@ -1,5 +1,3 @@
-import { env } from "next-runtime-env";
-
 export const formatToArray = (
   value: string | string[] | undefined,
 ): string[] => {
@@ -52,5 +50,5 @@ export const getAvatarUrl = (imageOrKey: string | null) => {
     return imageOrKey;
   }
 
-  return `${env("NEXT_PUBLIC_STORAGE_URL")}/${env("NEXT_PUBLIC_AVATAR_BUCKET_NAME")}/${imageOrKey}`;
+  return "";
 };

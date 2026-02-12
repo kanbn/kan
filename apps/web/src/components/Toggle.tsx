@@ -6,16 +6,20 @@ const Toggle = ({
   onChange,
   label,
   disabled,
+  showLabel = true,
 }: {
   isChecked: boolean;
   onChange: () => void;
   label: string;
   disabled?: boolean;
+  showLabel?: boolean;
 }) => (
   <div className="mr-4 flex items-center justify-end">
-    <span className="mr-2 text-xs text-light-900 dark:text-dark-900">
-      {label}
-    </span>
+    {showLabel && (
+      <span className="mr-2 text-xs text-light-900 dark:text-dark-900">
+        {label}
+      </span>
+    )}
     <Switch
       checked={isChecked}
       onChange={onChange}

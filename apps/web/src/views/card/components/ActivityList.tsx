@@ -2,6 +2,7 @@ import type { Locale as DateFnsLocale } from "date-fns";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { format, formatDistanceToNow, isSameYear } from "date-fns";
+import { useEffect, useRef, useState } from "react";
 import {
   HiOutlineArrowLeft,
   HiOutlineArrowRight,
@@ -15,11 +16,16 @@ import {
   HiOutlineUserPlus,
 } from "react-icons/hi2";
 
-import type { GetCardByIdOutput } from "@kan/api/types";
+import type {
+  GetCardActivitiesOutput,
+  GetCardByIdOutput,
+} from "@kan/api/types";
 import { authClient } from "@kan/auth/client";
 
 import Avatar from "~/components/Avatar";
 import { useLocalisation } from "~/hooks/useLocalisation";
+import { api } from "~/utils/api";
+import { getAvatarUrl } from "~/utils/helpers";
 import Comment from "./Comment";
 
 type ActivityType =
@@ -30,30 +36,77 @@ const truncate = (value: string | null, maxLength = 50) => {
   return value.length > maxLength ? `${value.slice(0, maxLength - 1)}…` : value;
 };
 
+const getUserDisplayName = (
+  user: { name?: string | null; email?: string | null } | null | undefined,
+): string => {
+  if (user?.name?.trim()) return user.name;
+  if (user?.email) return user.email;
+  return t`Member`;
+};
+
 const getActivityText = ({
   type,
   toTitle,
   fromList,
   toList,
   memberName,
+  memberEmail,
   isSelf,
   label,
   fromTitle,
   toDueDate,
   dateLocale,
+  mergedLabels,
 }: {
   type: ActivityType;
   toTitle: string | null;
   fromList: string | null;
   toList: string | null;
   memberName: string | null;
+  memberEmail: string | null;
   isSelf: boolean;
   label: string | null;
   fromTitle?: string | null;
   fromDueDate?: Date | null;
   toDueDate?: Date | null;
   dateLocale: DateFnsLocale;
+  mergedLabels?: string[];
 }) => {
+  const displayName = memberName ?? memberEmail ?? t`Member`;
+  const TextHighlight = ({ children }: { children: React.ReactNode }) => (
+    <span className="font-medium text-light-1000 dark:text-dark-1000">
+      {children}
+    </span>
+  );
+
+  if (
+    type === "card.updated.label.added" &&
+    mergedLabels &&
+    mergedLabels.length > 1
+  ) {
+    const labelList = mergedLabels.join(", ");
+    return (
+      <Trans>
+        added {mergedLabels.length} labels:{" "}
+        <TextHighlight>{labelList}</TextHighlight>
+      </Trans>
+    );
+  }
+
+  if (
+    type === "card.updated.label.removed" &&
+    mergedLabels &&
+    mergedLabels.length > 1
+  ) {
+    const labelList = mergedLabels.join(", ");
+    return (
+      <Trans>
+        removed {mergedLabels.length} labels:{" "}
+        <TextHighlight>{labelList}</TextHighlight>
+      </Trans>
+    );
+  }
+
   const ACTIVITY_TYPE_MAP = {
     "card.created": t`created the card`,
     "card.updated.title": t`updated the title`,
@@ -79,12 +132,6 @@ const getActivityText = ({
   if (!(type in ACTIVITY_TYPE_MAP)) return null;
   const baseText = ACTIVITY_TYPE_MAP[type as keyof typeof ACTIVITY_TYPE_MAP];
 
-  const TextHighlight = ({ children }: { children: React.ReactNode }) => (
-    <span className="font-medium text-light-1000 dark:text-dark-1000">
-      {children}
-    </span>
-  );
-
   if (type === "card.updated.title" && toTitle) {
     return (
       <Trans>
@@ -103,23 +150,23 @@ const getActivityText = ({
     );
   }
 
-  if (type === "card.updated.member.added" && memberName) {
+  if (type === "card.updated.member.added" && displayName) {
     if (isSelf) return <Trans>self-assigned the card</Trans>;
 
     return (
       <Trans>
-        assigned <TextHighlight>{truncate(memberName)}</TextHighlight> to the
+        assigned <TextHighlight>{truncate(displayName)}</TextHighlight> to the
         card
       </Trans>
     );
   }
 
-  if (type === "card.updated.member.removed" && memberName) {
+  if (type === "card.updated.member.removed" && displayName) {
     if (isSelf) return <Trans>unassigned themselves from the card</Trans>;
 
     return (
       <Trans>
-        unassigned <TextHighlight>{truncate(memberName)}</TextHighlight> from
+        unassigned <TextHighlight>{truncate(displayName)}</TextHighlight> from
         the card
       </Trans>
     );
@@ -281,37 +328,152 @@ const getActivityIcon = (
   return ACTIVITY_ICON_MAP[type] ?? null;
 };
 
+const ACTIVITIES_PAGE_SIZE = 20;
+
 const ActivityList = ({
-  activities,
   cardPublicId,
-  isLoading,
+  isLoading: cardIsLoading,
   isAdmin,
   isViewOnly,
 }: {
-  activities: NonNullable<GetCardByIdOutput>["activities"];
   cardPublicId: string;
   isLoading: boolean;
   isAdmin?: boolean;
   isViewOnly?: boolean;
 }) => {
-  const { data } = authClient.useSession();
-  const { dateLocale } = useLocalisation();
+  const { dateLocale, locale } = useLocalisation();
+  const { data: sessionData } = authClient.useSession();
+  const utils = api.useUtils();
+  const [allActivities, setAllActivities] = useState<
+    GetCardActivitiesOutput["activities"]
+  >([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+  const isFullyExpandedRef = useRef(false);
+  const lastDataUpdatedAtRef = useRef<number | null>(null);
+
+  const {
+    data: firstPageData,
+    isFetching: isFetchingFirst,
+    dataUpdatedAt,
+  } = api.card.getActivities.useQuery(
+    {
+      cardPublicId,
+      limit: ACTIVITIES_PAGE_SIZE,
+    },
+    {
+      enabled: !!cardPublicId && cardPublicId.length >= 12,
+    },
+  );
+
+  useEffect(() => {
+    if (firstPageData && dataUpdatedAt !== lastDataUpdatedAtRef.current) {
+      lastDataUpdatedAtRef.current = dataUpdatedAt;
+
+      if (isFullyExpandedRef.current && firstPageData.hasMore) {
+        setAllActivities(firstPageData.activities);
+        setHasMore(firstPageData.hasMore);
+
+        const fetchAllRemaining = async () => {
+          let currentActivities = [...firstPageData.activities];
+          let currentHasMore = firstPageData.hasMore;
+
+          while (currentHasMore) {
+            const lastActivity =
+              currentActivities[currentActivities.length - 1];
+            if (!lastActivity) break;
+
+            const nextCursor = new Date(lastActivity.createdAt).toISOString();
+            const nextPage = await utils.card.getActivities.fetch({
+              cardPublicId,
+              limit: ACTIVITIES_PAGE_SIZE,
+              cursor: nextCursor,
+            });
+
+            if (nextPage) {
+              const existingIds = new Set(
+                currentActivities.map((a) => a.publicId),
+              );
+              const newActivities = nextPage.activities.filter(
+                (a: { publicId: string }) => !existingIds.has(a.publicId),
+              );
+              currentActivities = [...currentActivities, ...newActivities];
+              currentHasMore = nextPage.hasMore;
+            } else {
+              break;
+            }
+          }
+
+          setAllActivities(currentActivities);
+          setHasMore(false);
+        };
+
+        fetchAllRemaining();
+      } else {
+        setAllActivities(firstPageData.activities);
+        setHasMore(firstPageData.hasMore);
+
+        if (!firstPageData.hasMore) {
+          isFullyExpandedRef.current = true;
+        }
+      }
+    }
+  }, [firstPageData, dataUpdatedAt, cardPublicId, utils.card.getActivities]);
+
+  const handleLoadMore = async () => {
+    if (isLoadingMore || !hasMore || allActivities.length === 0) return;
+
+    const lastActivity = allActivities[allActivities.length - 1];
+    if (!lastActivity) return;
+
+    setIsLoadingMore(true);
+    try {
+      const nextCursor = new Date(lastActivity.createdAt).toISOString();
+      const nextPage = await utils.card.getActivities.fetch({
+        cardPublicId,
+        limit: ACTIVITIES_PAGE_SIZE,
+        cursor: nextCursor,
+      });
+
+      if (nextPage) {
+        const existingIds = new Set(allActivities.map((a) => a.publicId));
+        const newActivities = nextPage.activities.filter(
+          (a: { publicId: string }) => !existingIds.has(a.publicId),
+        );
+        setAllActivities((prev) => [...prev, ...newActivities]);
+        setHasMore(nextPage.hasMore);
+
+        if (!nextPage.hasMore) {
+          isFullyExpandedRef.current = true;
+        }
+      }
+    } finally {
+      setIsLoadingMore(false);
+    }
+  };
+
+  const isFetching = isFetchingFirst || isLoadingMore;
+  const isLoading =
+    cardIsLoading || (isFetchingFirst && allActivities.length === 0);
 
   return (
     <div className="flex flex-col space-y-4 pt-4">
-      {activities.map((activity, index) => {
+      {allActivities.map((activity, index) => {
         const activityText = getActivityText({
           type: activity.type,
           toTitle: activity.toTitle,
           fromList: activity.fromList?.name ?? null,
           toList: activity.toList?.name ?? null,
           memberName: activity.member?.user?.name ?? null,
-          isSelf: activity.member?.user?.id === data?.user.id,
+          memberEmail: activity.member?.user?.email ?? null,
+          isSelf: activity.member?.user?.id === sessionData?.user.id,
           label: activity.label?.name ?? null,
           fromTitle: activity.fromTitle ?? null,
           fromDueDate: activity.fromDueDate ?? null,
           toDueDate: activity.toDueDate ?? null,
           dateLocale: dateLocale,
+          mergedLabels: (activity as any).mergedLabels,
         });
 
         if (activity.type === "card.updated.comment.added")
@@ -322,11 +484,12 @@ const ActivityList = ({
               cardPublicId={cardPublicId}
               name={activity.user?.name ?? ""}
               email={activity.user?.email ?? ""}
+              image={activity.user?.image ?? null}
               isLoading={isLoading}
               createdAt={activity.createdAt.toISOString()}
               comment={activity.comment?.comment}
               isEdited={!!activity.comment?.updatedAt}
-              isAuthor={activity.comment?.createdBy === data?.user.id}
+              isAuthor={activity.comment?.createdBy === sessionData?.user.id}
               isAdmin={isAdmin ?? false}
               isViewOnly={!!isViewOnly}
             />
@@ -344,6 +507,7 @@ const ActivityList = ({
                 size="sm"
                 name={activity.user?.name ?? ""}
                 email={activity.user?.email ?? ""}
+                imageUrl={getAvatarUrl(activity.user?.image ?? null) || undefined}
                 icon={getActivityIcon(
                   activity.type,
                   activity.fromList?.index,
@@ -351,14 +515,12 @@ const ActivityList = ({
                 )}
                 isLoading={isLoading}
               />
-              {index !== activities.length - 1 &&
-                activities[index + 1]?.type !==
-                  "card.updated.comment.added" && (
-                  <div className="absolute bottom-[-14px] left-1/2 top-[30px] w-0.5 -translate-x-1/2 bg-light-600 dark:bg-dark-600" />
-                )}
+              {index !== allActivities.length - 1 && (
+                <div className="absolute bottom-[-14px] left-1/2 top-[30px] w-0.5 -translate-x-1/2 bg-light-600 dark:bg-dark-600" />
+              )}
             </div>
             <p className="text-sm">
-              <span className="font-medium dark:text-dark-1000">{`${activity.user?.name} `}</span>
+              <span className="font-medium dark:text-dark-1000">{`${getUserDisplayName(activity.user)} `}</span>
               <span className="space-x-1 text-light-900 dark:text-dark-800">
                 {activityText}
               </span>
@@ -373,6 +535,17 @@ const ActivityList = ({
           </div>
         );
       })}
+      {hasMore && (
+        <div className="flex justify-center pt-4">
+          <button
+            onClick={handleLoadMore}
+            disabled={isFetching}
+            className="text-sm font-medium text-light-900 hover:text-light-1000 disabled:opacity-50 dark:text-dark-800 dark:hover:text-dark-1000"
+          >
+            {isFetching ? t`Loading...` : t`Load more activities`}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

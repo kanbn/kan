@@ -14,7 +14,7 @@ import { colours } from "@kan/shared/constants";
 import { generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertUserInWorkspace } from "../utils/auth";
+import { assertPermission } from "../utils/permissions";
 import { apiKeys, urls } from "./integration";
 
 export interface TrelloBoard {
@@ -52,7 +52,7 @@ interface TrelloCheckItem {
 
 interface TrelloCard {
   id: string;
-  name: string;
+  name: string | null;
   desc: string;
   idList: string;
   labels: TrelloLabel[];
@@ -180,8 +180,7 @@ export const importRouter = createTRPCRouter({
             message: `Workspace with public ID ${input.workspacePublicId} not found`,
             code: "NOT_FOUND",
           });
-
-        await assertUserInWorkspace(ctx.db, userId, workspace.id);
+        await assertPermission(ctx.db, userId, workspace.id, "board:create");
 
         const newImport = await importRepo.create(ctx.db, {
           source: "trello",
@@ -290,7 +289,7 @@ export const importRouter = createTRPCRouter({
             if (list.cards.length && newListId) {
               const cardsInsert = list.cards.map((card, index) => ({
                 publicId: generateUID(),
-                title: card.name,
+                title: (card.name?.trim() ?? "Untitled Card").slice(0, 2000),
                 description: card.description,
                 createdBy: userId,
                 listId: newListId,

@@ -7,7 +7,7 @@ import tippy from "tippy.js";
 
 interface TooltipProps {
   children: ReactNode;
-  content: ReactNode;
+  content?: ReactNode;
   placement?: Placement;
   delay?: number | [number, number];
 }
@@ -24,6 +24,8 @@ export function Tooltip({
   useEffect(() => {
     if (!triggerRef.current) return;
 
+    if (!content) return;
+
     const container = document.createElement("div");
     const root = createRoot(container);
     rootRef.current = root;
@@ -35,6 +37,7 @@ export function Tooltip({
       delay,
       interactive: false,
       theme: "tooltip",
+      touch: false,
     });
 
     return () => {

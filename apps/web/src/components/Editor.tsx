@@ -1,3 +1,4 @@
+import type { Range as TiptapRange } from "@tiptap/core";
 import type { Editor as TiptapEditor } from "@tiptap/react";
 import type {
   SuggestionKeyDownProps,
@@ -16,6 +17,7 @@ import {
   ReactRenderer,
   useEditor,
 } from "@tiptap/react";
+import Typography from "@tiptap/extension-typography";
 import StarterKit from "@tiptap/starter-kit";
 import Suggestion from "@tiptap/suggestion";
 import {
@@ -44,6 +46,7 @@ import { Markdown } from "tiptap-markdown";
 
 import { getAvatarUrl } from "~/utils/helpers";
 import Avatar from "./Avatar";
+import { YouTubeNode } from "./YouTubeEmbed/YouTubeNode";
 
 declare module "@tiptap/core" {
   interface Commands<ReturnType> {
@@ -56,7 +59,7 @@ declare module "@tiptap/core" {
 export interface SlashCommandItem {
   title: string;
   icon?: React.ReactNode;
-  command?: (props: { editor: TiptapEditor; range: Range }) => void;
+  command?: (props: { editor: TiptapEditor; range: TiptapRange }) => void;
   disabled?: boolean;
 }
 
@@ -384,46 +387,54 @@ export interface SlashNodeAttrs {
   label?: string | null;
 }
 
-const CommandItems: SlashCommandItem[] = [
-  {
-    title: "Heading 1",
-    icon: <HiH1 />,
-    command: ({ editor }) =>
-      editor.chain().focus().setHeading({ level: 1 }).run(),
-  },
-  {
-    title: "Heading 2",
-    icon: <HiH2 />,
-    command: ({ editor }) =>
-      editor.chain().focus().setHeading({ level: 2 }).run(),
-  },
-  {
-    title: "Heading 3",
-    icon: <HiH3 />,
-    command: ({ editor }) =>
-      editor.chain().focus().setHeading({ level: 3 }).run(),
-  },
-  {
-    title: "Bullet List",
-    icon: <HiOutlineListBullet />,
-    command: ({ editor }) => editor.chain().focus().toggleBulletList().run(),
-  },
-  {
-    title: "Ordered List",
-    icon: <HiOutlineNumberedList />,
-    command: ({ editor }) => editor.chain().focus().toggleOrderedList().run(),
-  },
-  {
-    title: "Blockquote",
-    icon: <HiOutlineChatBubbleLeftEllipsis />,
-    command: ({ editor }) => editor.chain().focus().toggleBlockquote().run(),
-  },
-  {
-    title: "Code Block",
-    icon: <HiOutlineCodeBracketSquare />,
-    command: ({ editor }) => editor.chain().focus().toggleCodeBlock().run(),
-  },
-];
+const getCommandItems = (disableHeadings: boolean): SlashCommandItem[] => {
+  const headingCommands: SlashCommandItem[] = disableHeadings
+    ? []
+    : [
+        {
+          title: "Heading 1",
+          icon: <HiH1 />,
+          command: ({ editor }) =>
+            editor.chain().focus().setHeading({ level: 1 }).run(),
+        },
+        {
+          title: "Heading 2",
+          icon: <HiH2 />,
+          command: ({ editor }) =>
+            editor.chain().focus().setHeading({ level: 2 }).run(),
+        },
+        {
+          title: "Heading 3",
+          icon: <HiH3 />,
+          command: ({ editor }) =>
+            editor.chain().focus().setHeading({ level: 3 }).run(),
+        },
+      ];
+
+  return [
+    ...headingCommands,
+    {
+      title: "Bullet List",
+      icon: <HiOutlineListBullet />,
+      command: ({ editor }) => editor.chain().focus().toggleBulletList().run(),
+    },
+    {
+      title: "Ordered List",
+      icon: <HiOutlineNumberedList />,
+      command: ({ editor }) => editor.chain().focus().toggleOrderedList().run(),
+    },
+    {
+      title: "Blockquote",
+      icon: <HiOutlineChatBubbleLeftEllipsis />,
+      command: ({ editor }) => editor.chain().focus().toggleBlockquote().run(),
+    },
+    {
+      title: "Code Block",
+      icon: <HiOutlineCodeBracketSquare />,
+      command: ({ editor }) => editor.chain().focus().toggleCodeBlock().run(),
+    },
+  ];
+};
 
 export default function Editor({
   content,
@@ -431,24 +442,33 @@ export default function Editor({
   onBlur,
   readOnly = false,
   workspaceMembers,
+  enableYouTubeEmbed = true,
+  placeholder,
+  disableHeadings = false,
 }: {
   content: string | null;
   onChange?: (value: string) => void;
   onBlur?: () => void;
   readOnly?: boolean;
   workspaceMembers: WorkspaceMember[];
+  enableYouTubeEmbed?: boolean;
+  placeholder?: string;
+  disableHeadings?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const editor = useEditor(
     {
       extensions: [
-        StarterKit,
+        StarterKit.configure({
+          heading: disableHeadings ? false : undefined,
+        }),
         Markdown,
         Placeholder.configure({
           placeholder: readOnly
             ? ""
-            : t`Add description... (type '/' to open commands or '@' to mention)`,
+            : placeholder ??
+              t`Add description... (type '/' to open commands or '@' to mention)`,
         }),
         Link.configure({
           openOnClick: true,
@@ -461,10 +481,10 @@ export default function Editor({
           autolink: true,
         }),
         SlashCommands.configure({
-          commandItems: CommandItems,
+          commandItems: getCommandItems(disableHeadings),
           suggestion: {
             items: ({ query }: { query: string }) =>
-              filterSlashCommandItems(CommandItems, query),
+              filterSlashCommandItems(getCommandItems(disableHeadings), query),
             startOfLine: true,
             char: "/",
           },
@@ -476,18 +496,33 @@ export default function Editor({
           suggestion: {
             char: "@",
             items: ({ query }: { query: string }) => {
-              const all: MentionItem[] = workspaceMembers.map(
-                (member: WorkspaceMember) => ({
-                  id: member.publicId,
-                  label: member?.user?.name ?? member.email,
-                  image: member?.user?.image ?? null,
-                }),
+              const withEmail = workspaceMembers.filter((member) => member.email);
+              
+              const mapped = withEmail.map((member: WorkspaceMember) => ({
+                id: member.publicId,
+                label: member?.user?.name?.trim() || member.email || "",
+                image: member?.user?.image ?? null,
+              }));
+              
+              const all: MentionItem[] = mapped.filter(
+                (item) => item.label && item.label.length > 0,
               );
-              const q = query.toLowerCase();
-              return all.filter((u) => u.label.toLowerCase().includes(q));
+              
+              const q = query.toLowerCase().trim();
+              
+              if (q === "") {
+                return all;
+              }
+              
+              const filtered = all.filter((u) =>
+                u.label.toLowerCase().includes(q),
+              );
+              return filtered;
             },
-            command: ({ editor, range, props }: any) => {
-              const mentionHTML = `<span data-type="mention" data-id="${props.id}" data-label="${props.label}">@${props.label}</span>&nbsp;`;
+            command: ({ editor, range, props }) => {
+              const id = props.id ?? "";
+              const label = props.label ?? "";
+              const mentionHTML = `<span data-type="mention" data-id="${id}" data-label="${label}">@${label}</span>&nbsp;`;
 
               editor
                 .chain()
@@ -503,6 +538,18 @@ export default function Editor({
             return `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`;
           },
         }),
+        Typography.configure({
+            openDoubleQuote: false,
+            closeDoubleQuote: false,
+            openSingleQuote: false,
+            closeSingleQuote: false,
+            oneHalf: false,
+            oneQuarter: false,
+            threeQuarters: false,
+            superscriptTwo: false,
+            superscriptThree: false,
+        }),
+        ...(enableYouTubeEmbed ? [YouTubeNode] : []),
       ],
       content,
       onUpdate: ({ editor }) => onChange?.(editor.getHTML()),
@@ -558,6 +605,9 @@ export default function Editor({
           color: rgb(59, 130, 246);
           text-decoration: none;
           font-weight: 500;
+        }
+        .tiptap [data-youtube] {
+          margin: 1rem 0;
         }
       `}</style>
       {!readOnly && editor && <EditorBubbleMenu editor={editor} />}

@@ -1,16 +1,20 @@
 import { t } from "@lingui/core/macro";
 import { formatDistanceToNow } from "date-fns";
 import { useState } from "react";
-import ContentEditable from "react-contenteditable";
 import { useForm } from "react-hook-form";
 import { HiEllipsisHorizontal, HiPencil, HiTrash } from "react-icons/hi2";
 
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
+import Editor from "~/components/Editor";
+import type { WorkspaceMember } from "~/components/Editor";
 import Dropdown from "~/components/Dropdown";
+import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
+import { getAvatarUrl } from "~/utils/helpers";
 
 interface FormValues {
   comment: string;
@@ -21,11 +25,11 @@ const Comment = ({
   cardPublicId,
   name,
   email,
+  image,
   isLoading,
   createdAt,
   comment,
   isAuthor,
-  isAdmin,
   isEdited = false,
   isViewOnly = false,
 }: {
@@ -33,11 +37,11 @@ const Comment = ({
   cardPublicId: string;
   name: string;
   email: string;
+  image: string | null;
   isLoading: boolean;
   createdAt: string;
   comment: string | undefined;
   isAuthor: boolean;
-  isAdmin: boolean;
   isEdited: boolean;
   isViewOnly: boolean;
 }) => {
@@ -45,17 +49,42 @@ const Comment = ({
   const utils = api.useUtils();
   const { showPopup } = usePopup();
   const { openModal } = useModal();
+  const { canEditComment, canDeleteComment } = usePermissions();
   const { handleSubmit, setValue, watch } = useForm<FormValues>({
     defaultValues: {
       comment,
     },
   });
 
+  const { data: cardData } = api.card.byId.useQuery(
+    {
+      cardPublicId,
+    },
+    {
+      enabled: !!cardPublicId && cardPublicId.length >= 12,
+    },
+  );
+
+  const workspaceMembers: WorkspaceMember[] =
+    cardData?.list.board.workspace.members
+      .filter((member) => member.email)
+      .map((member) => ({
+        publicId: member.publicId,
+        email: member.email,
+        user: member.user
+          ? {
+              id: member.user.id,
+              name: member.user.name ?? null,
+              image: member.user.image ?? null,
+            }
+          : null,
+      })) ?? [];
+
   if (!publicId) return null;
 
   const updateCommentMutation = api.card.updateComment.useMutation({
     onSuccess: async () => {
-      await utils.card.byId.refetch();
+      await invalidateCard(utils, cardPublicId);
       setIsEditing(false);
     },
     onError: () => {
@@ -76,7 +105,7 @@ const Comment = ({
   };
 
   const dropdownItems = [
-    ...(isAuthor
+    ...(isAuthor && canEditComment
       ? [
           {
             label: t`Edit comment`,
@@ -85,7 +114,7 @@ const Comment = ({
           },
         ]
       : []),
-    ...(isAuthor || isAdmin
+    ...((isAuthor || canDeleteComment)
       ? [
           {
             label: t`Delete comment`,
@@ -107,6 +136,7 @@ const Comment = ({
             size="sm"
             name={name ?? ""}
             email={email ?? ""}
+            imageUrl={getAvatarUrl(image) || undefined}
             isLoading={isLoading}
           />
 
@@ -135,21 +165,28 @@ const Comment = ({
         )}
       </div>
       {!isEditing ? (
-        <ContentEditable
-          html={comment ?? ""}
-          disabled={true}
-          className="break-anywhere mt-2 text-sm"
-        />
+        <div className="mt-2">
+          <Editor
+            content={comment ?? null}
+            readOnly={true}
+            workspaceMembers={workspaceMembers}
+            enableYouTubeEmbed={false}
+            disableHeadings={true}
+          />
+        </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <ContentEditable
-            placeholder={t`Add a comment...`}
-            html={watch("comment")}
-            disabled={false}
-            onChange={(e) => setValue("comment", e.target.value)}
-            className="block w-full max-w-[800px] border-0 bg-transparent py-1.5 text-sm text-light-900 focus-visible:outline-none dark:text-dark-1000 sm:text-sm sm:leading-6"
-          />
-          <div className="flex justify-end space-x-2">
+          <div className="mt-2">
+            <Editor
+              content={watch("comment")}
+              onChange={(value) => setValue("comment", value)}
+              workspaceMembers={workspaceMembers}
+              enableYouTubeEmbed={false}
+              placeholder={t`Add comment... (type '/' to open commands or '@' to mention)`}
+              disableHeadings={true}
+            />
+          </div>
+          <div className="flex justify-end space-x-2 mt-2">
             <Button
               size="sm"
               variant="ghost"

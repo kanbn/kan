@@ -1,4 +1,14 @@
-import { and, asc, desc, eq, gt, inArray, isNull, sql } from "drizzle-orm";
+import {
+  and,
+  asc,
+  count,
+  desc,
+  eq,
+  gt,
+  inArray,
+  isNull,
+  sql,
+} from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import {
@@ -14,6 +24,15 @@ import {
   workspaceMembers,
 } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
+
+export const getCount = async (db: dbClient) => {
+  const result = await db
+    .select({ count: count() })
+    .from(cards)
+    .where(isNull(cards.deletedAt));
+
+  return result[0]?.count ?? 0;
+};
 
 export const create = async (
   db: dbClient,
@@ -74,7 +93,7 @@ export const create = async (
         index: index,
         dueDate: cardInput.dueDate ?? null,
       })
-      .returning({ id: cards.id, listId: cards.listId });
+      .returning({ id: cards.id, listId: cards.listId, publicId: cards.publicId });
 
     if (!result[0]) throw new Error("Unable to create card");
 
@@ -401,10 +420,12 @@ export const getWithListAndMembersByPublicId = async (
 ) => {
   const card = await db.query.cards.findFirst({
     columns: {
+      id: true,
       publicId: true,
       title: true,
       description: true,
       dueDate: true,
+      createdBy: true,
     },
     with: {
       labels: {
@@ -487,6 +508,7 @@ export const getWithListAndMembersByPublicId = async (
                     columns: {
                       publicId: true,
                       email: true,
+                      status: true,
                     },
                     with: {
                       user: {
@@ -919,7 +941,7 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
   cardPublicId: string,
 ) => {
   const result = await db.query.cards.findFirst({
-    columns: { id: true },
+    columns: { id: true, createdBy: true },
     where: and(eq(cards.publicId, cardPublicId), isNull(cards.deletedAt)),
     with: {
       list: {
@@ -939,6 +961,7 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
   return result
     ? {
         id: result.id,
+        createdBy: result.createdBy,
         workspaceId: result.list.board.workspaceId,
         workspaceVisibility: result.list.board.visibility,
       }

@@ -16,10 +16,12 @@ const UpdateWorkspaceUrlForm = ({
   workspacePublicId,
   workspaceUrl,
   workspacePlan,
+  disabled = false,
 }: {
   workspacePublicId: string;
   workspaceUrl: string;
   workspacePlan: "free" | "pro" | "enterprise";
+  disabled?: boolean;
 }) => {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
@@ -136,9 +138,10 @@ const UpdateWorkspaceUrlForm = ({
               <HiCheck className="h-4 w-4 dark:text-dark-1000" />
             ) : null
           }
+          disabled={disabled}
         />
       </div>
-      {isDirty && (
+      {isDirty && !disabled && (
         <div>
           <Button
             onClick={handleSubmit(onSubmit)}

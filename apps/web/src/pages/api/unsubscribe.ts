@@ -4,6 +4,7 @@ import { jwtVerify } from "jose";
 import { z } from "zod";
 
 import { env } from "~/env";
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 const requestSchema = z.object({
   token: z.string().min(1),
@@ -19,10 +20,9 @@ type ResponseData =
 
 const textEncoder = new TextEncoder();
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<ResponseData>,
-) {
+export default withRateLimit(
+  { points: 100, duration: 60 },
+  async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
   if (process.env.NEXT_PUBLIC_KAN_ENV !== "cloud") {
     return res.status(404).json({
       success: false,
@@ -101,4 +101,5 @@ export default async function handler(
   }
 
   return res.status(200).json({ success: true });
-}
+  },
+);

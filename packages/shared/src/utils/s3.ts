@@ -5,6 +5,7 @@ import {
   S3Client,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { env } from "next-runtime-env";
 
 export function createS3Client() {
   const credentials =
@@ -67,3 +68,60 @@ export async function deleteObject(bucket: string, key: string) {
     }),
   );
 }
+
+/**
+ * Generate presigned URL for an avatar image
+ * Returns the URL as-is if it's already a full URL (external provider)
+ * Returns presigned URL if it's an S3 key
+ * Returns null if image key is missing, bucket is not configured, or URL generation fails
+ */
+export async function generateAvatarUrl(
+  imageKey: string | null | undefined,
+  expiresIn = 86400, // 24 hours
+): Promise<string | null> {
+  if (!imageKey) {
+    return null;
+  }
+
+  if (imageKey.startsWith("http://") || imageKey.startsWith("https://")) {
+    return imageKey;
+  }
+
+  const bucket = env("NEXT_PUBLIC_AVATAR_BUCKET_NAME");
+  if (!bucket) {
+    return null;
+  }
+
+  try {
+    return await generateDownloadUrl(bucket, imageKey, expiresIn);
+  } catch {
+    // If URL generation fails, return null
+    return null;
+  }
+}
+
+/**
+ * Generate presigned URL for an attachment
+ * Returns null if attachment key is missing, bucket is not configured, or URL generation fails
+ */
+export async function generateAttachmentUrl(
+  attachmentKey: string | null | undefined,
+  expiresIn = 86400, // 24 hours
+): Promise<string | null> {
+  if (!attachmentKey) {
+    return null;
+  }
+
+  const bucket = env("NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME");
+  if (!bucket) {
+    return null;
+  }
+
+  try {
+    return await generateDownloadUrl(bucket, attachmentKey, expiresIn);
+  } catch {
+    // If URL generation fails, return null
+    return null;
+  }
+}
+

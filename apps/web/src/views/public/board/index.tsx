@@ -12,6 +12,7 @@ import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
 import Popup from "~/components/Popup";
 import ThemeToggle from "~/components/ThemeToggle";
+import { useDragToScroll } from "~/hooks/useDragToScroll";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
@@ -29,6 +30,11 @@ export default function PublicBoardView() {
   const { showPopup } = usePopup();
   const [isRouteLoaded, setIsRouteLoaded] = useState(false);
   const { openModal } = useModal();
+
+  const { ref: scrollRef, onMouseDown } = useDragToScroll({
+    enabled: true,
+    direction: "horizontal",
+  });
 
   const boardSlug = Array.isArray(router.query.boardSlug)
     ? router.query.boardSlug[0]
@@ -64,29 +70,34 @@ export default function PublicBoardView() {
     },
   );
 
-  const CopyBoardLink = () => {
-    return (
-      <button
-        onClick={async () => {
-          try {
-            await navigator.clipboard.writeText(window.location.href);
-          } catch (error) {
-            console.error(error);
-          }
-
-          showPopup({
-            header: t`Link copied`,
-            icon: "success",
-            message: t`Board URL copied to clipboard`,
-          });
-        }}
-        className="rounded p-1.5 transition-all hover:bg-light-200 dark:hover:bg-dark-100"
-        aria-label={`Copy board URL`}
-      >
-        <HiLink className={`h-4 w-4 text-light-900 dark:text-dark-900`} />
-      </button>
-    );
+  const handleCopyBoardLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      showPopup({
+        header: t`Link copied`,
+        icon: "success",
+        message: t`Board URL copied to clipboard`,
+      });
+    } catch (error) {
+      console.error(error);
+      showPopup({
+        header: t`Unable to copy link`,
+        icon: "error",
+        message: t`Please try again.`,
+      });
+    }
   };
+
+  const CopyBoardLink = () => (
+    <button
+      type="button"
+      onClick={handleCopyBoardLink}
+      className="rounded p-1.5 transition-all hover:bg-light-200 focus:outline-none dark:hover:bg-dark-100"
+      aria-label="Copy board URL"
+    >
+      <HiLink className="h-4 w-4 text-light-900 dark:text-dark-900" />
+    </button>
+  );
 
   const pathWithoutQuery = router.asPath.split("?")[0];
   const splitPath = pathWithoutQuery?.split("/") ?? [];
@@ -151,7 +162,11 @@ export default function PublicBoardView() {
             )}
           </div>
 
-          <div className="scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] relative h-full flex-1 overflow-y-hidden overflow-x-scroll overscroll-contain scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300">
+          <div
+            ref={scrollRef}
+            onMouseDown={onMouseDown}
+            className="scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] relative h-full flex-1 overflow-y-hidden overflow-x-scroll overscroll-contain scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300"
+          >
             {isLoading || !router.isReady ? (
               <div className="ml-[2rem] flex">
                 <div className="0 mr-5 h-[500px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />

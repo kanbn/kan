@@ -7,7 +7,8 @@ import * as workspaceSlugRepo from "@kan/db/repository/workspaceSlug.repo";
 import { generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { assertUserInWorkspace } from "../utils/auth";
+import { assertPermission } from "../utils/permissions";
+import { generateAvatarUrl } from "@kan/shared/utils";
 
 export const workspaceRouter = createTRPCRouter({
   all: protectedProcedure
@@ -74,10 +75,74 @@ export const workspaceRouter = createTRPCRouter({
           message: `Workspace not found`,
           code: "NOT_FOUND",
         });
+      await assertPermission(ctx.db, userId, result.id, "workspace:view");
 
-      await assertUserInWorkspace(ctx.db, userId, result.id);
+      // Check if user is an admin
+      const userMember = result.members.find(
+        (member) => member.user?.id === userId,
+      );
+      const isAdmin = userMember?.role === "admin";
 
-      return result;
+      // Show emails if user is admin OR workspace setting allows it
+      const shouldShowEmails =
+        isAdmin || result.showEmailsToMembers === true;
+
+      // Generate presigned URLs for member avatars
+      const membersWithAvatarUrls = await Promise.all(
+        result.members.map(async (member) => {
+          if (!member.user?.image) {
+            return member;
+          }
+
+          const avatarUrl = await generateAvatarUrl(member.user.image);
+          return {
+            ...member,
+            user: {
+              ...member.user,
+              image: avatarUrl,
+            },
+          };
+        }),
+      );
+
+      // If emails should be hidden, filter them out
+      if (!shouldShowEmails) {
+        const sanitizedMembers = membersWithAvatarUrls.map((member) => {
+          // If user doesn't have a display name, use anonymous identifier
+          const displayName =
+            member.user?.name?.trim() ?? `anonymous_${member.publicId}`;
+
+          const { email: _memberEmail, ...memberWithoutEmail } = member;
+          const sanitizedUser = member.user
+            ? (() => {
+                const { email: _userEmail, ...userWithoutEmail } = member.user;
+                return {
+                  ...userWithoutEmail,
+                  name: displayName,
+                };
+              })()
+            : {
+                id: null,
+                name: displayName,
+                image: null,
+              };
+
+          return {
+            ...memberWithoutEmail,
+            user: sanitizedUser,
+          };
+        });
+
+        return {
+          ...result,
+          members: sanitizedMembers,
+        } as Awaited<ReturnType<typeof workspaceRepo.getByPublicIdWithMembers>>;
+      }
+
+      return {
+        ...result,
+        members: membersWithAvatarUrls,
+      };
     }),
   bySlug: publicProcedure
     .meta({
@@ -121,8 +186,7 @@ export const workspaceRouter = createTRPCRouter({
           message: `Workspace not found`,
           code: "NOT_FOUND",
         });
-
-      await assertUserInWorkspace(ctx.db, userId, result.id);
+      await assertPermission(ctx.db, userId, result.id, "workspace:view");
 
       return result;
     }),
@@ -230,6 +294,7 @@ export const workspaceRouter = createTRPCRouter({
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
           .optional(),
         description: z.string().min(3).max(280).optional(),
+        showEmailsToMembers: z.boolean().optional(),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof workspaceRepo.update>>>())
@@ -252,8 +317,7 @@ export const workspaceRouter = createTRPCRouter({
           message: `Workspace not found`,
           code: "NOT_FOUND",
         });
-
-      await assertUserInWorkspace(ctx.db, userId, workspace.id, "admin");
+      await assertPermission(ctx.db, userId, workspace.id, "workspace:edit");
 
       if (input.slug) {
         const reservedOrPremiumWorkspaceSlug =
@@ -291,8 +355,15 @@ export const workspaceRouter = createTRPCRouter({
           name: input.name,
           slug: input.slug,
           description: input.description,
+          showEmailsToMembers: input.showEmailsToMembers,
         },
       );
+
+      if (!result)
+        throw new TRPCError({
+          message: `Unable to delete workspace`,
+          code: "INTERNAL_SERVER_ERROR",
+        });
 
       return result;
     }),
@@ -328,19 +399,12 @@ export const workspaceRouter = createTRPCRouter({
           message: `Workspace not found`,
           code: "NOT_FOUND",
         });
-
-      await assertUserInWorkspace(ctx.db, userId, workspace.id, "admin");
+      await assertPermission(ctx.db, userId, workspace.id, "workspace:delete");
 
       const result = await workspaceRepo.hardDelete(
         ctx.db,
         input.workspacePublicId,
       );
-
-      if (!result)
-        throw new TRPCError({
-          message: `Unable to delete workspace`,
-          code: "INTERNAL_SERVER_ERROR",
-        });
 
       return result;
     }),
@@ -473,8 +537,7 @@ export const workspaceRouter = createTRPCRouter({
           message: `Workspace not found`,
           code: "NOT_FOUND",
         });
-
-      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+      await assertPermission(ctx.db, userId, workspace.id, "workspace:view");
 
       const result = await workspaceRepo.searchBoardsAndCards(
         ctx.db,

@@ -3,11 +3,11 @@ import { env } from "next-runtime-env";
 
 import { createNextApiContext } from "@kan/api/trpc";
 import { createStripeClient } from "@kan/stripe";
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export default withRateLimit(
+  { points: 100, duration: 60 },
+  async (req: NextApiRequest, res: NextApiResponse) => {
   const stripe = createStripeClient();
 
   if (req.method !== "POST") {
@@ -31,4 +31,5 @@ export default async function handler(
     console.error("Error:", error);
     return res.status(500).json({ error: "Error creating portal session" });
   }
-}
+  },
+);

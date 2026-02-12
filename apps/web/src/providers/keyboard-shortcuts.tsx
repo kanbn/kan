@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import React from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -464,19 +465,37 @@ function FormattedShortcut({ shortcut }: { shortcut: KeyboardShortcut }) {
       ? stroke.modifiers.map(stringifyModifier)
       : [];
 
-    modifierStrings.forEach((mod) => {
-      parts.push(<kbd className={kbdClassName}>{mod}</kbd>);
+    modifierStrings.forEach((mod, index) => {
+      parts.push(
+        <kbd key={`mod-${index}-${mod}`} className={kbdClassName}>
+          {mod}
+        </kbd>,
+      );
     });
 
-    parts.push(<kbd className={kbdClassName}>{stroke.key.toUpperCase()}</kbd>);
+    parts.push(
+      <kbd key={`key-${stroke.key}`} className={kbdClassName}>
+        {stroke.key.toUpperCase()}
+      </kbd>,
+    );
 
     return parts;
   };
 
   if (shortcut.type === "SEQUENCE") {
     const parts: ReactNode[] = [];
-    shortcut.strokes.forEach((stroke) => {
-      parts.push(...formatStroke(stroke));
+    shortcut.strokes.forEach((stroke, strokeIndex) => {
+      const strokeParts = formatStroke(stroke);
+      // Add stroke index to keys to ensure uniqueness across multiple strokes
+      const keyedParts = strokeParts.map((part, partIndex) => {
+        if (React.isValidElement(part)) {
+          return React.cloneElement(part, {
+            key: `stroke-${strokeIndex}-${part.key || partIndex}`,
+          });
+        }
+        return part;
+      });
+      parts.push(...keyedParts);
     });
     return <span className="flex items-center gap-1 text-[11px]">{parts}</span>;
   }

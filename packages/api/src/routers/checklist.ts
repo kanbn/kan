@@ -6,7 +6,7 @@ import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertUserInWorkspace } from "../utils/auth";
+import { assertPermission } from "../utils/permissions";
 
 const checklistSchema = z.object({
   publicId: z.string().length(12),
@@ -57,8 +57,7 @@ export const checklistRouter = createTRPCRouter({
           message: `Card with public ID ${input.cardPublicId} not found`,
           code: "NOT_FOUND",
         });
-
-      await assertUserInWorkspace(ctx.db, userId, card.workspaceId);
+      await assertPermission(ctx.db, userId, card.workspaceId, "card:edit");
 
       const newChecklist = await checklistRepo.create(ctx.db, {
         name: input.name,
@@ -106,11 +105,11 @@ export const checklistRouter = createTRPCRouter({
           message: `Checklist with public ID ${input.checklistPublicId} not found`,
           code: "NOT_FOUND",
         });
-
-      await assertUserInWorkspace(
+      await assertPermission(
         ctx.db,
         userId,
         checklist.card.list.board.workspace.id,
+        "card:edit",
       );
 
       const previousName = checklist.name;
@@ -166,11 +165,11 @@ export const checklistRouter = createTRPCRouter({
           message: `Checklist with public ID ${input.checklistPublicId} not found`,
           code: "NOT_FOUND",
         });
-
-      await assertUserInWorkspace(
+      await assertPermission(
         ctx.db,
         userId,
         checklist.card.list.board.workspace.id,
+        "card:edit",
       );
 
       await checklistRepo.softDeleteAllItemsByChecklistId(ctx.db, {
@@ -237,11 +236,11 @@ export const checklistRouter = createTRPCRouter({
           message: `Checklist with public ID ${input.checklistPublicId} not found`,
           code: "NOT_FOUND",
         });
-
-      await assertUserInWorkspace(
+      await assertPermission(
         ctx.db,
         userId,
         checklist.card.list.board.workspace.id,
+        "card:edit",
       );
 
       const newChecklistItem = await checklistRepo.createItem(ctx.db, {
@@ -269,7 +268,7 @@ export const checklistRouter = createTRPCRouter({
     .meta({
       openapi: {
         summary: "Update a checklist item",
-        method: "PUT",
+        method: "PATCH",
         path: "/checklists/items/{checklistItemPublicId}",
         description: "Updates a checklist item (title/completed)",
         tags: ["Cards"],
@@ -281,6 +280,7 @@ export const checklistRouter = createTRPCRouter({
         checklistItemPublicId: z.string().length(12),
         title: z.string().min(1).max(500).optional(),
         completed: z.boolean().optional(),
+        index: z.number().int().min(0).optional(),
       }),
     )
     .output(checklistItemSchema)
@@ -303,26 +303,39 @@ export const checklistRouter = createTRPCRouter({
           message: `Checklist item with public ID ${input.checklistItemPublicId} not found`,
           code: "NOT_FOUND",
         });
-
-      await assertUserInWorkspace(
+      await assertPermission(
         ctx.db,
         userId,
         item.checklist.card.list.board.workspace.id,
+        "card:edit",
       );
 
       const previousTitle = item.title;
 
-      const updated = await checklistRepo.updateItemById(ctx.db, {
-        id: item.id,
-        title: input.title,
-        completed: input.completed,
-      });
+        let updatedItem;
 
-      if (!updated)
-        throw new TRPCError({
-          message: `Failed to update checklist item`,
-          code: "INTERNAL_SERVER_ERROR",
-        });
+        if (input.title !== undefined || input.completed !== undefined) {
+          updatedItem = await checklistRepo.updateItemById(ctx.db, {
+            id: item.id,
+            title: input.title,
+            completed: input.completed,
+          });
+        }
+
+        if (input.index !== undefined) {
+          updatedItem = await checklistRepo.reorderItem(ctx.db, {
+            itemId: item.id,
+            newIndex: input.index,
+          });
+        }
+
+        if (!updatedItem) {
+          throw new TRPCError({
+            message: `Failed to update checklist item`,
+            code: "INTERNAL_SERVER_ERROR",
+          });
+        }
+
 
       // Log completion toggle
       if (input.completed !== undefined) {
@@ -331,7 +344,7 @@ export const checklistRouter = createTRPCRouter({
             ? "card.updated.checklist.item.completed"
             : "card.updated.checklist.item.uncompleted",
           cardId: item.checklist.cardId,
-          toTitle: updated.title,
+          toTitle: updatedItem.title,
           createdBy: userId,
         });
       }
@@ -342,12 +355,13 @@ export const checklistRouter = createTRPCRouter({
           type: "card.updated.checklist.item.updated",
           cardId: item.checklist.cardId,
           fromTitle: previousTitle,
-          toTitle: updated.title,
+          toTitle: updatedItem.title,
           createdBy: userId,
         });
       }
 
-      return updated;
+      return updatedItem;
+
     }),
   deleteItem: protectedProcedure
     .meta({
@@ -379,11 +393,11 @@ export const checklistRouter = createTRPCRouter({
           message: `Checklist item with public ID ${input.checklistItemPublicId} not found`,
           code: "NOT_FOUND",
         });
-
-      await assertUserInWorkspace(
+      await assertPermission(
         ctx.db,
         userId,
         item.checklist.card.list.board.workspace.id,
+        "card:edit",
       );
 
       const deleted = await checklistRepo.softDeleteItemById(ctx.db, {

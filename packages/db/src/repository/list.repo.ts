@@ -1,8 +1,17 @@
-import { and, desc, eq, gt, isNull, sql } from "drizzle-orm";
+import { and, count, desc, eq, gt, isNull, sql } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import { lists } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
+
+export const getCount = async (db: dbClient) => {
+  const result = await db
+    .select({ count: count() })
+    .from(lists)
+    .where(isNull(lists.deletedAt));
+
+  return result[0]?.count ?? 0;
+};
 
 export const create = async (
   db: dbClient,
@@ -410,7 +419,7 @@ export const getWorkspaceAndListIdByListPublicId = async (
   listPublicId: string,
 ) => {
   const result = await db.query.lists.findFirst({
-    columns: { id: true },
+    columns: { id: true, createdBy: true },
     where: and(eq(lists.publicId, listPublicId), isNull(lists.deletedAt)),
     with: {
       board: {
@@ -422,6 +431,10 @@ export const getWorkspaceAndListIdByListPublicId = async (
   });
 
   return result
-    ? { id: result.id, workspaceId: result.board.workspaceId }
+    ? {
+        id: result.id,
+        createdBy: result.createdBy,
+        workspaceId: result.board.workspaceId,
+      }
     : null;
 };

@@ -6,17 +6,20 @@ import { HiMiniPlus } from "react-icons/hi2";
 import DateSelector from "~/components/DateSelector";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface DueDateSelectorProps {
   cardPublicId: string;
   dueDate: Date | null | undefined;
   isLoading?: boolean;
+  disabled?: boolean;
 }
 
 export function DueDateSelector({
   cardPublicId,
   dueDate,
   isLoading = false,
+  disabled = false,
 }: DueDateSelectorProps) {
   const { showPopup } = usePopup();
   const utils = api.useUtils();
@@ -61,7 +64,7 @@ export function DueDateSelector({
       });
     },
     onSettled: async () => {
-      await utils.card.byId.invalidate({ cardPublicId });
+      await invalidateCard(utils, cardPublicId);
       await utils.board.byId.invalidate();
     },
   });
@@ -104,9 +107,9 @@ export function DueDateSelector({
     <div className="relative flex w-full items-center text-left">
       <button
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        disabled={isLoading}
-        className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 py-1 pl-2 text-left text-xs text-neutral-900 hover:border-light-300 hover:bg-light-200 dark:border-dark-50 dark:text-dark-1000 dark:hover:border-dark-200 dark:hover:bg-dark-100"
+        onClick={() => !disabled && setIsOpen(!isOpen)}
+        disabled={isLoading || disabled}
+        className={`flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 py-1 pl-2 text-left text-xs text-neutral-900 dark:border-dark-50 dark:text-dark-1000 ${disabled ? "cursor-not-allowed opacity-60" : "hover:border-light-300 hover:bg-light-200 dark:hover:border-dark-200 dark:hover:bg-dark-100"}`}
       >
         {dueDate ? (
           <span>{format(dueDate, "MMM d, yyyy")}</span>
@@ -117,7 +120,7 @@ export function DueDateSelector({
           </>
         )}
       </button>
-      {isOpen && (
+      {isOpen && !disabled && (
         <>
           <div className="fixed inset-0 z-10" onClick={handleBackdropClick} />
           <div

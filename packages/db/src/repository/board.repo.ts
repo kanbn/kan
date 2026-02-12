@@ -1,6 +1,7 @@
 import {
   and,
   asc,
+  count,
   desc,
   eq,
   gte,
@@ -25,21 +26,38 @@ import {
   comments,
   labels,
   lists,
+  userBoardFavorites,
   workspaceMembers,
 } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
-export const getAllByWorkspaceId = (
+export const getCount = async (db: dbClient) => {
+  const result = await db
+    .select({ count: count() })
+    .from(boards)
+    .where(isNull(boards.deletedAt));
+
+  return result[0]?.count ?? 0;
+};
+
+export const getAllByWorkspaceId = async (
   db: dbClient,
   workspaceId: number,
+  userId: string,
   opts?: { type?: "regular" | "template"; archived?: boolean },
 ) => {
-  return db.query.boards.findMany({
+  const boardsData = await db.query.boards.findMany({
     columns: {
       publicId: true,
       name: true,
     },
     with: {
+      userFavorites: {
+        where: eq(userBoardFavorites.userId, userId),
+        columns: {
+          userId: true,
+        },
+      },
       lists: {
         columns: {
           publicId: true,
@@ -63,6 +81,21 @@ export const getAllByWorkspaceId = (
       opts?.archived !== undefined ? eq(boards.isArchived, opts.archived) : undefined,
     ),
   });
+
+  // Transform and sort: favorites first, then alphabetically
+  return boardsData
+    .map((board) => ({
+      ...board,
+      favorite: board.userFavorites.length > 0,
+      userFavorites: undefined,
+    }))
+    .sort((a, b) => {
+      // Sort favorites first
+      if (a.favorite && !b.favorite) return -1;
+      if (!a.favorite && b.favorite) return 1;
+      // Then alphabetically by name
+      return a.name.localeCompare(b.name);
+    });
 };
 
 export const getIdByPublicId = async (db: dbClient, boardPublicId: string) => {
@@ -114,6 +147,7 @@ const buildDueDateWhere = (filters: DueDateFilter[]) => {
 export const getByPublicId = async (
   db: dbClient,
   boardPublicId: string,
+  userId: string,
   filters: {
     members: string[];
     labels: string[];
@@ -166,6 +200,12 @@ export const getByPublicId = async (
       isArchived: true,
     },
     with: {
+      userFavorites: {
+        where: eq(userBoardFavorites.userId, userId),
+        columns: {
+          userId: true,
+        },
+      },
       workspace: {
         columns: {
           publicId: true,
@@ -175,6 +215,7 @@ export const getByPublicId = async (
             columns: {
               publicId: true,
               email: true,
+              status: true,
             },
             with: {
               user: {
@@ -318,6 +359,8 @@ export const getByPublicId = async (
 
   const formattedResult = {
     ...board,
+    favorite: board.userFavorites.length > 0,
+    userFavorites: undefined,
     lists: board.lists.map((list) => ({
       ...list,
       cards: list.cards.map((card) => ({
@@ -511,6 +554,7 @@ export const getWithListIdsByPublicId = (
     columns: {
       id: true,
       workspaceId: true,
+      createdBy: true,
     },
     with: {
       lists: {
@@ -666,6 +710,7 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
     columns: {
       id: true,
       workspaceId: true,
+      createdBy: true,
     },
     where: eq(boards.publicId, boardPublicId),
   });
@@ -916,4 +961,35 @@ export const createFromSnapshot = async (
 
     return newBoard;
   });
+};
+
+export const addUserFavorite = async (
+  db: dbClient,
+  userId: string,
+  boardId: number,
+) => {
+  return db
+    .insert(userBoardFavorites)
+    .values({
+      userId,
+      boardId,
+    })
+    .onConflictDoNothing()
+    .returning();
+};
+
+export const removeUserFavorite = async (
+  db: dbClient,
+  userId: string,
+  boardId: number,
+) => {
+  return db
+    .delete(userBoardFavorites)
+    .where(
+      and(
+        eq(userBoardFavorites.userId, userId),
+        eq(userBoardFavorites.boardId, boardId)
+      )
+    )
+    .returning();
 };

@@ -58,28 +58,6 @@ export default function Avatar({
   const [crop, setCrop] = useState<PercentCrop>();
   const imgRef = useRef<HTMLImageElement | null>(null);
 
-  const updateUser = api.user.update.useMutation({
-    onSuccess: async () => {
-      showPopup({
-        header: t`Profile image updated`,
-        message: t`Your profile image has been updated.`,
-        icon: "success",
-      });
-      try {
-        await utils.user.getUser.refetch();
-      } catch (e) {
-        console.error(e);
-        throw e;
-      }
-    },
-    onError: () => {
-      showPopup({
-        header: t`Error updating profile image`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-  });
 
   const avatarUrl = userImage ? getAvatarUrl(userImage) : undefined;
 
@@ -187,29 +165,32 @@ export default function Avatar({
       const originalExt = selectedFile.name.split(".").pop() ?? "jpg";
       const fileName = `${userId}/avatar-${generateUID()}.${originalExt}`;
 
+      const baseUrl = env("NEXT_PUBLIC_BASE_URL") ?? "";
       const response = await fetch(
-        env("NEXT_PUBLIC_BASE_URL") + "/api/upload/image",
+        `${baseUrl}/api/upload/avatar`,
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": blob.type,
+            "x-original-filename": fileName,
           },
-          body: JSON.stringify({ filename: fileName, contentType: blob.type }),
+          body: blob,
         },
       );
 
-      if (!response.ok) throw new Error("Failed to get pre-signed URL");
+      if (!response.ok) {
+        throw new Error("Failed to upload profile image");
+      }
 
-      const { url } = (await response.json()) as { url: string };
-
-      const uploadResponse = await fetch(url, {
-        method: "PUT",
-        body: blob,
+      // User image is updated in the backend, refresh user data
+      await utils.user.getUser.refetch();
+      
+      showPopup({
+        header: t`Profile image updated`,
+        message: t`Your profile image has been updated.`,
+        icon: "success",
       });
-
-      if (!uploadResponse.ok) throw new Error("Failed to upload profile image");
-
-      updateUser.mutate({ image: fileName });
+      
       setCropDialogOpen(false);
       resetCropState();
     } catch (error) {
@@ -227,7 +208,7 @@ export default function Avatar({
     resetCropState,
     selectedFile,
     showPopup,
-    updateUser,
+    utils.user.getUser,
     userId,
   ]);
 

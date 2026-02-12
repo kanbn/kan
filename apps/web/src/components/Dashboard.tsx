@@ -12,6 +12,7 @@ import { authClient } from "@kan/auth/client";
 import { useClickOutside } from "~/hooks/useClickOutside";
 import { useModal } from "~/providers/modal";
 import { useWorkspace, WorkspaceProvider } from "~/providers/workspace";
+import { api } from "~/utils/api";
 import SideNavigation from "./SideNavigation";
 
 interface DashboardProps {
@@ -44,6 +45,12 @@ export default function Dashboard({
   const { availableWorkspaces, hasLoaded } = useWorkspace();
 
   const { data: session, isPending: sessionLoading } = authClient.useSession();
+  const { data: user, isLoading: userLoading } = api.user.getUser.useQuery(
+    undefined,
+    {
+      enabled: !!session?.user,
+    },
+  );
 
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
   const [isRightPanelOpen, setIsRightPanelOpen] = useState(false);
@@ -155,8 +162,12 @@ export default function Dashboard({
             className={`fixed top-12 z-40 h-[calc(100dvh-3rem)] w-[calc(100vw-1.5rem)] transform transition-transform duration-300 ease-in-out md:relative md:top-0 md:h-full md:w-auto md:translate-x-0 ${isSideNavOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"} `}
           >
             <SideNavigation
-              user={{ email: session?.user.email, image: session?.user.image }}
-              isLoading={sessionLoading}
+              user={{
+                displayName: user?.name ?? session?.user.name,
+                email: user?.email ?? session?.user.email ?? "",
+                image: user?.image ?? undefined,
+              }}
+              isLoading={sessionLoading || userLoading}
               onCloseSideNav={closeSideNav}
             />
           </div>

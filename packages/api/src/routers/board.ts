@@ -10,12 +10,14 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { colours } from "@kan/shared/constants";
 import {
   convertDueDateFiltersToRanges,
+  generateAvatarUrl,
   generateSlug,
   generateUID,
 } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { assertUserInWorkspace } from "../utils/auth";
+import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
+import { assertUserInWorkspace } from "~/utils/auth";
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
@@ -59,12 +61,17 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+      await assertPermission(ctx.db, userId, workspace.id, "board:view");
 
-      const result = boardRepo.getAllByWorkspaceId(ctx.db, workspace.id, {
-        archived: input.archived ?? false,
-        type: input.type,
-      });
+      const result = boardRepo.getAllByWorkspaceId(
+        ctx.db,
+        workspace.id,
+        userId,
+        {
+          type: input.type,
+          archived: input.archived ?? false,
+        }
+      );
 
       return result;
     }),
@@ -121,7 +128,7 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+      await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
 
       // Convert semantic string filters to date ranges expected by the repo
       const dueDateFilters = input.dueDateFilters
@@ -131,6 +138,7 @@ export const boardRouter = createTRPCRouter({
       const result = await boardRepo.getByPublicId(
         ctx.db,
         input.boardPublicId,
+        userId,
         {
           members: input.members ?? [],
           labels: input.labels ?? [],
@@ -140,7 +148,40 @@ export const boardRouter = createTRPCRouter({
         },
       );
 
-      return result;
+      if (!result) {
+        throw new TRPCError({
+          message: `Board with public ID ${input.boardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+      }
+
+      // Generate presigned URLs for workspace member avatars
+      const workspaceWithAvatarUrls = result.workspace
+        ? {
+          ...result.workspace,
+          members: await Promise.all(
+            result.workspace.members.map(async (member) => {
+              if (!member.user?.image) {
+                return member;
+              }
+
+              const avatarUrl = await generateAvatarUrl(member.user.image);
+              return {
+                ...member,
+                user: {
+                  ...member.user,
+                  image: avatarUrl,
+                },
+              };
+            }),
+          ),
+        }
+        : result.workspace;
+
+      return {
+        ...result,
+        workspace: workspaceWithAvatarUrls,
+      };
     }),
   bySlug: publicProcedure
     .meta({
@@ -257,7 +298,7 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+      await assertPermission(ctx.db, userId, workspace.id, "board:create");
 
       // If sourceBoardPublicId is provided, clone the source board
       if (input.sourceBoardPublicId) {
@@ -277,6 +318,7 @@ export const boardRouter = createTRPCRouter({
         const sourceBoard = await boardRepo.getByPublicId(
           ctx.db,
           input.sourceBoardPublicId,
+          userId,
           {
             members: [],
             labels: [],
@@ -401,9 +443,10 @@ export const boardRouter = createTRPCRouter({
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
           .optional(),
         visibility: z.enum(["public", "private"]).optional(),
+        favorite: z.boolean().optional()
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof boardRepo.update>>>())
+    .output(z.object({ success: z.boolean() }).or(z.custom<Awaited<ReturnType<typeof boardRepo.update>>>()))
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -424,7 +467,30 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+      await assertCanEdit(
+        ctx.db,
+        userId,
+        board.workspaceId,
+        "board:edit",
+        board.createdBy ?? null,
+      );
+
+      // Handle favorite toggle separately
+      if (input.favorite !== undefined) {
+        if (input.favorite) {
+          await boardRepo.addUserFavorite(ctx.db, userId, board.id);
+        } else {
+          await boardRepo.removeUserFavorite(ctx.db, userId, board.id);
+        }
+      }
+
+      // Handle other updates (name, slug, visibility)
+      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined;
+
+      if (!hasOtherUpdates) {
+        // Only favorite was updated, return success
+        return { success: true };
+      }
 
       if (input.slug) {
         const isBoardSlugAvailable = await boardRepo.isBoardSlugAvailable(
@@ -493,7 +559,13 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
+      await assertCanDelete(
+        ctx.db,
+        userId,
+        board.workspaceId,
+        "board:delete",
+        board.createdBy ?? null,
+      );
 
       const listIds = board.lists.map((list) => list.id);
 

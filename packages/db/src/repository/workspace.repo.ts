@@ -1,4 +1,15 @@
-import { and, desc, eq, ilike, inArray, isNull, or, sql } from "drizzle-orm";
+import {
+  and,
+  count,
+  desc,
+  eq,
+  ilike,
+  inArray,
+  isNull,
+  asc,
+  or,
+  sql,
+} from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import {
@@ -8,7 +19,42 @@ import {
   workspaceMembers,
   workspaces,
 } from "@kan/db/schema";
-import { generateUID } from "@kan/shared/utils";
+import type { Permission, Role } from "@kan/shared";
+import { generateUID, getDefaultPermissions } from "@kan/shared";
+
+import * as permissionRepo from "./permission.repo";
+
+// System role definitions
+const SYSTEM_ROLES: {
+  name: Role;
+  description: string;
+  hierarchyLevel: number;
+}[] = [
+    {
+      name: "admin",
+      description: "Full access to all workspace features",
+      hierarchyLevel: 100,
+    },
+    {
+      name: "member",
+      description: "Standard member with create and edit permissions",
+      hierarchyLevel: 50,
+    },
+    {
+      name: "guest",
+      description: "View-only access",
+      hierarchyLevel: 10,
+    },
+  ];
+
+export const getCount = async (db: dbClient) => {
+  const result = await db
+    .select({ count: count() })
+    .from(workspaces)
+    .where(isNull(workspaces.deletedAt));
+
+  return result[0]?.count ?? 0;
+};
 
 export const create = async (
   db: dbClient,
@@ -38,6 +84,22 @@ export const create = async (
     });
 
   if (workspace) {
+    // Create system roles for the workspace
+    let adminRoleId: number | null = null;
+    for (const roleData of SYSTEM_ROLES) {
+      const role = await permissionRepo.createRole(db, {
+        workspaceId: workspace.id,
+        name: roleData.name,
+        description: roleData.description,
+        hierarchyLevel: roleData.hierarchyLevel,
+        isSystem: true,
+        permissions: [...getDefaultPermissions(roleData.name)] as Permission[],
+      });
+      if (roleData.name === "admin" && role) {
+        adminRoleId = role.id;
+      }
+    }
+
     await db.insert(workspaceMembers).values({
       publicId: generateUID(),
       userId: workspaceInput.createdBy,
@@ -45,6 +107,7 @@ export const create = async (
       workspaceId: workspace.id,
       createdBy: workspaceInput.createdBy,
       role: "admin",
+      roleId: adminRoleId,
       status: "active",
     });
   }
@@ -63,6 +126,7 @@ export const update = async (
     slug?: string;
     plan?: "free" | "pro" | "enterprise";
     description?: string;
+    showEmailsToMembers?: boolean;
   },
 ) => {
   const [result] = await db
@@ -72,6 +136,7 @@ export const update = async (
       slug: workspaceInput.slug,
       plan: workspaceInput.plan,
       description: workspaceInput.description,
+      showEmailsToMembers: workspaceInput.showEmailsToMembers,
     })
     .where(eq(workspaces.publicId, workspacePublicId))
     .returning({
@@ -81,6 +146,7 @@ export const update = async (
       slug: workspaces.slug,
       description: workspaces.description,
       plan: workspaces.plan,
+      showEmailsToMembers: workspaces.showEmailsToMembers,
     });
 
   return result;
@@ -120,6 +186,9 @@ export const getByPublicIdWithMembers = (
     columns: {
       id: true,
       publicId: true,
+      name: true,
+      slug: true,
+      showEmailsToMembers: true,
     },
     with: {
       members: {
@@ -128,8 +197,13 @@ export const getByPublicIdWithMembers = (
           email: true,
           role: true,
           status: true,
+          createdAt: true,
         },
         where: isNull(workspaceMembers.deletedAt),
+        orderBy: (member, { desc }) => [
+          desc(sql`CASE WHEN ${member.role} = 'admin' THEN 1 ELSE 0 END`),
+          desc(member.createdAt),
+        ],
         with: {
           user: {
             columns: {
@@ -176,9 +250,8 @@ export const getBySlugWithBoards = (db: dbClient, workspaceSlug: string) => {
           slug: true,
           name: true,
         },
-        where: and(
-          isNull(boards.deletedAt), eq(boards.visibility, "public"), eq(boards.isArchived, false)
-        ),
+        where: and(isNull(boards.deletedAt), eq(boards.visibility, "public"), eq(boards.isArchived, false)),
+        orderBy: [asc(boards.name)]
       },
     },
     where: and(
