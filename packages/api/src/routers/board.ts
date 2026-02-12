@@ -17,7 +17,7 @@ import {
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
-import { assertUserInWorkspace } from "~/utils/auth";
+import { assertUserInWorkspace } from "../utils/auth";
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
