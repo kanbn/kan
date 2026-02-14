@@ -3,7 +3,6 @@ import {
   bigint,
   bigserial,
   boolean,
-  pgEnum,
   pgTable,
   text,
   timestamp,
@@ -21,7 +20,6 @@ export const webhookEvents = [
   "card.deleted",
 ] as const;
 export type WebhookEvent = (typeof webhookEvents)[number];
-export const webhookEventEnum = pgEnum("webhook_event", webhookEvents);
 
 export const workspaceWebhooks = pgTable("workspace_webhooks", {
   id: bigserial("id", { mode: "number" }).primaryKey(),
