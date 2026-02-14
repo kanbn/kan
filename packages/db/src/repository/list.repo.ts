@@ -424,6 +424,7 @@ export const getWorkspaceAndListIdByListPublicId = async (
     with: {
       board: {
         columns: {
+          publicId: true,
           workspaceId: true,
           name: true,
         },
@@ -437,6 +438,7 @@ export const getWorkspaceAndListIdByListPublicId = async (
         name: result.name,
         createdBy: result.createdBy,
         workspaceId: result.board.workspaceId,
+        boardPublicId: result.board.publicId,
         boardName: result.board.name,
       }
     : null;
