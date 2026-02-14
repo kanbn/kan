@@ -13,13 +13,13 @@ vi.mock("@kan/db/repository/workspace.repo", () => ({
   getByPublicId: vi.fn(),
 }));
 
-vi.mock("../utils/auth", () => ({
-  assertUserInWorkspace: vi.fn(),
+vi.mock("../utils/permissions", () => ({
+  assertPermission: vi.fn(),
 }));
 
 import * as webhookRepo from "@kan/db/repository/webhook.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import { assertUserInWorkspace } from "../utils/auth";
+import { assertPermission } from "../utils/permissions";
 
 const mockGetAllByWorkspaceId = webhookRepo.getAllByWorkspaceId as ReturnType<typeof vi.fn>;
 const mockGetByPublicId = webhookRepo.getByPublicId as ReturnType<typeof vi.fn>;
@@ -27,7 +27,7 @@ const mockCreate = webhookRepo.create as ReturnType<typeof vi.fn>;
 const mockUpdate = webhookRepo.update as ReturnType<typeof vi.fn>;
 const mockHardDelete = webhookRepo.hardDelete as ReturnType<typeof vi.fn>;
 const mockWorkspaceGetByPublicId = workspaceRepo.getByPublicId as ReturnType<typeof vi.fn>;
-const mockAssertUserInWorkspace = assertUserInWorkspace as ReturnType<typeof vi.fn>;
+const mockAssertPermission = assertPermission as ReturnType<typeof vi.fn>;
 
 // We need to import the router after mocks are set up
 // Testing approach: call the internal handler logic through a test wrapper
@@ -50,7 +50,7 @@ describe("webhook router", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    mockAssertUserInWorkspace.mockResolvedValue(undefined);
+    mockAssertPermission.mockResolvedValue(undefined);
   });
 
   describe("authorization", () => {
@@ -83,7 +83,7 @@ describe("webhook router", () => {
       ).rejects.toThrow(TRPCError);
     });
 
-    it("checks admin role via assertUserInWorkspace", async () => {
+    it("checks workspace:manage permission via assertPermission", async () => {
       const { webhookRouter } = await import("./webhook");
 
       mockWorkspaceGetByPublicId.mockResolvedValueOnce(mockWorkspace);
@@ -96,11 +96,11 @@ describe("webhook router", () => {
 
       await webhookRouter.createCaller(ctx).list({ workspacePublicId: "ws-123456789" });
 
-      expect(mockAssertUserInWorkspace).toHaveBeenCalledWith(
+      expect(mockAssertPermission).toHaveBeenCalledWith(
         mockDb,
         mockUser.id,
         mockWorkspace.id,
-        "admin",
+        "workspace:manage",
       );
     });
   });
