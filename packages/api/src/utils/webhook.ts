@@ -42,6 +42,55 @@ function generateSignature(payload: string, secret: string): string {
 }
 
 /**
+ * Validates that a webhook URL is safe to call (SSRF mitigation).
+ * Blocks private/internal IP ranges, localhost, and non-HTTPS URLs.
+ */
+function validateWebhookUrl(url: string): { valid: boolean; error?: string } {
+  let parsed: URL;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return { valid: false, error: "Invalid URL" };
+  }
+
+  if (parsed.protocol !== "https:") {
+    return { valid: false, error: "Only HTTPS URLs are allowed" };
+  }
+
+  const hostname = parsed.hostname.toLowerCase();
+
+  // Block localhost variants
+  if (
+    hostname === "localhost" ||
+    hostname === "127.0.0.1" ||
+    hostname === "::1" ||
+    hostname === "0.0.0.0"
+  ) {
+    return { valid: false, error: "Localhost URLs are not allowed" };
+  }
+
+  // Block cloud metadata endpoints
+  if (hostname === "169.254.169.254" || hostname === "metadata.google.internal") {
+    return { valid: false, error: "Cloud metadata endpoints are not allowed" };
+  }
+
+  // Block private IP ranges (10.x, 172.16-31.x, 192.168.x)
+  const ipv4Match = hostname.match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/);
+  if (ipv4Match) {
+    const [, a, b] = ipv4Match.map(Number);
+    if (
+      a === 10 ||
+      (a === 172 && b! >= 16 && b! <= 31) ||
+      (a === 192 && b === 168)
+    ) {
+      return { valid: false, error: "Private IP addresses are not allowed" };
+    }
+  }
+
+  return { valid: true };
+}
+
+/**
  * Send a webhook payload to a specific URL
  * Returns result for testing purposes
  */
@@ -50,6 +99,11 @@ export async function sendWebhookToUrl(
   secret: string | undefined,
   payload: WebhookPayload,
 ): Promise<{ success: boolean; statusCode?: number; error?: string }> {
+  const urlCheck = validateWebhookUrl(url);
+  if (!urlCheck.valid) {
+    return { success: false, error: urlCheck.error };
+  }
+
   const body = JSON.stringify(payload);
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
