@@ -1,4 +1,3 @@
-CREATE TYPE "public"."webhook_event" AS ENUM('card.created', 'card.updated', 'card.moved', 'card.deleted');--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "workspace_webhooks" (
 	"id" bigserial PRIMARY KEY NOT NULL,
 	"publicId" varchar(12) NOT NULL,
