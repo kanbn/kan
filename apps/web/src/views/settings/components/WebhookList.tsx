@@ -7,6 +7,153 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
+interface TableRowProps {
+  publicId?: string;
+  name?: string;
+  url?: string;
+  events?: string[];
+  active?: boolean;
+  createdAt?: Date | null;
+  isLastRow?: boolean;
+  showSkeleton?: boolean;
+  onEdit?: () => void;
+  onTest?: () => void;
+  onDelete?: () => void;
+}
+
+function formatEvents(events: string[]) {
+  return events
+    .map((e) => e.replace("card.", ""))
+    .join(", ");
+}
+
+function formatDate(date?: Date | null) {
+  if (!date) return "Never";
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function TableRow({
+  publicId,
+  name,
+  url,
+  events,
+  active,
+  createdAt,
+  isLastRow,
+  showSkeleton,
+  onEdit,
+  onTest,
+  onDelete,
+}: TableRowProps) {
+  return (
+    <tr className="rounded-b-lg">
+      <td className={twMerge("w-[25%]", isLastRow ? "rounded-bl-lg" : "")}>
+        <div className="flex items-center p-4">
+          <div className="ml-2 min-w-0 flex-1">
+            <div className="flex items-center">
+              <p
+                className={twMerge(
+                  "mr-2 text-sm font-medium text-light-900 dark:text-dark-900",
+                  showSkeleton &&
+                    "mb-2 h-3 w-[125px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+                )}
+              >
+                {name}
+              </p>
+            </div>
+          </div>
+        </div>
+      </td>
+      <td className="w-[30%] px-3 py-4">
+        <p
+          className={twMerge(
+            "truncate text-sm text-light-900 dark:text-dark-900",
+            showSkeleton &&
+              "h-3 w-[180px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+          )}
+          title={url}
+        >
+          {url}
+        </p>
+      </td>
+      <td className="w-[20%] px-3 py-4">
+        <p
+          className={twMerge(
+            "text-sm text-light-900 dark:text-dark-900",
+            showSkeleton &&
+              "h-3 w-[100px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+          )}
+        >
+          {events && formatEvents(events)}
+        </p>
+      </td>
+      <td className="w-[10%] px-3 py-4">
+        <span
+          className={twMerge(
+            "inline-flex items-center rounded-md px-1.5 py-0.5 text-[11px] font-medium ring-1 ring-inset",
+            active
+              ? "bg-emerald-500/10 text-emerald-400 ring-emerald-500/20"
+              : "bg-gray-500/10 text-gray-400 ring-gray-500/20",
+            showSkeleton &&
+              "h-5 w-[50px] animate-pulse bg-light-200 ring-0 dark:bg-dark-200",
+          )}
+        >
+          {!showSkeleton && (active ? t`Active` : t`Inactive`)}
+        </span>
+      </td>
+      <td className="w-[10%] px-3 py-4">
+        <p
+          className={twMerge(
+            "text-sm text-light-900 dark:text-dark-900",
+            showSkeleton &&
+              "h-3 w-[80px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+          )}
+        >
+          {formatDate(createdAt)}
+        </p>
+      </td>
+      <td
+        className={twMerge(
+          "w-[5%] min-w-[50px]",
+          isLastRow && "rounded-br-lg",
+        )}
+      >
+        {!showSkeleton && (
+          <div className="flex w-full items-center justify-center px-3">
+            <div className="relative z-50">
+              <Dropdown
+                items={[
+                  {
+                    label: t`Edit`,
+                    action: () => onEdit?.(),
+                  },
+                  {
+                    label: t`Test`,
+                    action: () => onTest?.(),
+                  },
+                  {
+                    label: t`Delete`,
+                    action: () => onDelete?.(),
+                  },
+                ]}
+              >
+                <HiEllipsisHorizontal
+                  size={25}
+                  className="text-light-900 dark:text-dark-900"
+                />
+              </Dropdown>
+            </div>
+          </div>
+        )}
+      </td>
+    </tr>
+  );
+}
+
 interface WebhookListProps {
   workspacePublicId: string;
 }
@@ -37,163 +184,6 @@ export default function WebhookList({ workspacePublicId }: WebhookListProps) {
       });
     },
   });
-
-  const formatEvents = (events: string[]) => {
-    return events
-      .map((e) => e.replace("card.", ""))
-      .join(", ");
-  };
-
-  const TableRow = ({
-    publicId,
-    name,
-    url,
-    events,
-    active,
-    createdAt,
-    isLastRow,
-    showSkeleton,
-  }: {
-    publicId?: string;
-    name?: string;
-    url?: string;
-    events?: string[];
-    active?: boolean;
-    createdAt?: Date | null;
-    isLastRow?: boolean;
-    showSkeleton?: boolean;
-  }) => {
-    const formatDate = (date?: Date | string | null) => {
-      if (!date) return "Never";
-      const dateObj = date instanceof Date ? date : new Date(date);
-      return dateObj.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      });
-    };
-
-    return (
-      <tr className="rounded-b-lg">
-        <td className={twMerge("w-[25%]", isLastRow ? "rounded-bl-lg" : "")}>
-          <div className="flex items-center p-4">
-            <div className="ml-2 min-w-0 flex-1">
-              <div className="flex items-center">
-                <p
-                  className={twMerge(
-                    "mr-2 text-sm font-medium text-light-900 dark:text-dark-900",
-                    showSkeleton &&
-                      "mb-2 h-3 w-[125px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
-                  )}
-                >
-                  {name}
-                </p>
-              </div>
-            </div>
-          </div>
-        </td>
-        <td className="w-[30%] px-3 py-4">
-          <p
-            className={twMerge(
-              "truncate text-sm text-light-900 dark:text-dark-900",
-              showSkeleton &&
-                "h-3 w-[180px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
-            )}
-            title={url}
-          >
-            {url}
-          </p>
-        </td>
-        <td className="w-[20%] px-3 py-4">
-          <p
-            className={twMerge(
-              "text-sm text-light-900 dark:text-dark-900",
-              showSkeleton &&
-                "h-3 w-[100px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
-            )}
-          >
-            {events && formatEvents(events)}
-          </p>
-        </td>
-        <td className="w-[10%] px-3 py-4">
-          <span
-            className={twMerge(
-              "inline-flex items-center rounded-md px-1.5 py-0.5 text-[11px] font-medium ring-1 ring-inset",
-              active
-                ? "bg-emerald-500/10 text-emerald-400 ring-emerald-500/20"
-                : "bg-gray-500/10 text-gray-400 ring-gray-500/20",
-              showSkeleton &&
-                "h-5 w-[50px] animate-pulse bg-light-200 ring-0 dark:bg-dark-200",
-            )}
-          >
-            {!showSkeleton && (active ? t`Active` : t`Inactive`)}
-          </span>
-        </td>
-        <td className="w-[10%] px-3 py-4">
-          <p
-            className={twMerge(
-              "text-sm text-light-900 dark:text-dark-900",
-              showSkeleton &&
-                "h-3 w-[80px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
-            )}
-          >
-            {formatDate(createdAt)}
-          </p>
-        </td>
-        <td
-          className={twMerge(
-            "w-[5%] min-w-[50px]",
-            isLastRow && "rounded-br-lg",
-          )}
-        >
-          {!showSkeleton && (
-            <div className="flex w-full items-center justify-center px-3">
-              <div className="relative z-50">
-                <Dropdown
-                  items={[
-                    {
-                      label: t`Edit`,
-                      action: () => {
-                        setModalState("EDIT_WEBHOOK", {
-                          publicId,
-                          name,
-                          url,
-                          events,
-                          active,
-                        });
-                        openModal("EDIT_WEBHOOK", publicId, name ?? "");
-                      },
-                    },
-                    {
-                      label: t`Test`,
-                      action: () => {
-                        if (publicId) {
-                          testWebhookMutation.mutate({
-                            workspacePublicId,
-                            webhookPublicId: publicId,
-                          });
-                        }
-                      },
-                    },
-                    {
-                      label: t`Delete`,
-                      action: () =>
-                        openModal("DELETE_WEBHOOK", publicId, name ?? ""),
-                    },
-                  ]}
-                >
-                  <HiEllipsisHorizontal
-                    size={25}
-                    className="text-light-900 dark:text-dark-900"
-                  />
-                </Dropdown>
-              </div>
-            </div>
-          )}
-        </td>
-      </tr>
-    );
-  };
 
   if (!isLoading && (!webhooks || webhooks.length === 0)) {
     return (
@@ -263,6 +253,25 @@ export default function WebhookList({ workspacePublicId }: WebhookListProps) {
                       active={webhook.active}
                       createdAt={webhook.createdAt}
                       isLastRow={index === webhooks.length - 1}
+                      onEdit={() => {
+                        setModalState("EDIT_WEBHOOK", {
+                          publicId: webhook.publicId,
+                          name: webhook.name,
+                          url: webhook.url,
+                          events: webhook.events,
+                          active: webhook.active,
+                        });
+                        openModal("EDIT_WEBHOOK", webhook.publicId, webhook.name);
+                      }}
+                      onTest={() => {
+                        testWebhookMutation.mutate({
+                          workspacePublicId,
+                          webhookPublicId: webhook.publicId,
+                        });
+                      }}
+                      onDelete={() => {
+                        openModal("DELETE_WEBHOOK", webhook.publicId, webhook.name);
+                      }}
                     />
                   ))}
 

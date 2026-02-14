@@ -5,18 +5,13 @@ import { Controller, useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
 import { z } from "zod";
 
+import { webhookEvents } from "@kan/db/schema";
+
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
-
-const webhookEvents = [
-  "card.created",
-  "card.updated",
-  "card.moved",
-  "card.deleted",
-] as const;
 
 const newWebhookSchema = z.object({
   name: z
