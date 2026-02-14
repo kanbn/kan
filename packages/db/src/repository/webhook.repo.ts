@@ -135,6 +135,11 @@ export const getAllByWorkspaceId = async (
   }));
 };
 
+/**
+ * Returns active webhooks with secrets for server-side delivery (HMAC signing).
+ * DO NOT expose this via tRPC or any client-facing endpoint.
+ * Use getAllByWorkspaceId (which omits secrets) for the admin list endpoint.
+ */
 export const getActiveByWorkspaceId = async (
   db: dbClient,
   workspaceId: number,

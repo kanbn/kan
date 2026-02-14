@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS "workspace_webhooks" (
 );
 --> statement-breakpoint
 ALTER TABLE "workspace_webhooks" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "workspace_webhooks_workspace_idx" ON "workspace_webhooks" USING btree ("workspaceId");--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "workspace_webhooks" ADD CONSTRAINT "workspace_webhooks_workspaceId_workspace_id_fk" FOREIGN KEY ("workspaceId") REFERENCES "public"."workspace"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
