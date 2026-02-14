@@ -170,7 +170,7 @@ export const cardRouter = createTRPCRouter({
       }
 
       // Fire webhooks (non-blocking)
-      void sendWebhooksForWorkspace(
+      sendWebhooksForWorkspace(
         ctx.db,
         list.workspaceId,
         createCardWebhookPayload(
@@ -183,7 +183,7 @@ export const cardRouter = createTRPCRouter({
             listId: String(newCard.listId),
           },
           {
-            boardId: String(list.workspaceId),
+            boardId: list.boardPublicId,
             boardName: list.boardName,
             listName: list.name,
             user: ctx.user
@@ -191,7 +191,9 @@ export const cardRouter = createTRPCRouter({
               : undefined,
           },
         ),
-      );
+      ).catch((error) => {
+        console.error("Webhook delivery failed:", error);
+      });
 
       return newCard;
     }),
@@ -1057,7 +1059,7 @@ export const cardRouter = createTRPCRouter({
       }
 
       // Fire webhooks (non-blocking)
-      void sendWebhooksForWorkspace(
+      sendWebhooksForWorkspace(
         ctx.db,
         card.workspaceId,
         createCardWebhookPayload(
@@ -1072,7 +1074,7 @@ export const cardRouter = createTRPCRouter({
             listId: String(newListId ?? existingCard.listId),
           },
           {
-            boardId: String(card.workspaceId),
+            boardId: card.boardPublicId,
             boardName: card.boardName,
             listName: card.listName,
             user: ctx.user
@@ -1084,7 +1086,9 @@ export const cardRouter = createTRPCRouter({
                 : undefined,
           },
         ),
-      );
+      ).catch((error) => {
+        console.error("Webhook delivery failed:", error);
+      });
 
       return result;
     }),
@@ -1152,7 +1156,7 @@ export const cardRouter = createTRPCRouter({
 
       // Fire webhooks (non-blocking)
       if (fullCard) {
-        void sendWebhooksForWorkspace(
+        sendWebhooksForWorkspace(
           ctx.db,
           card.workspaceId,
           createCardWebhookPayload(
@@ -1165,7 +1169,7 @@ export const cardRouter = createTRPCRouter({
               listId: String(fullCard.listId),
             },
             {
-              boardId: String(card.workspaceId),
+              boardId: card.boardPublicId,
               boardName: card.boardName,
               listName: card.listName,
               user: ctx.user
@@ -1173,7 +1177,9 @@ export const cardRouter = createTRPCRouter({
                 : undefined,
             },
           ),
-        );
+        ).catch((error) => {
+          console.error("Webhook delivery failed:", error);
+        });
       }
 
       return { success: true };
