@@ -6,7 +6,7 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { webhookEvents } from "@kan/db/schema";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertUserInWorkspace } from "../utils/auth";
+import { assertPermission } from "../utils/permissions";
 
 const webhookEventSchema = z.enum(webhookEvents);
 
@@ -56,7 +56,7 @@ export const webhookRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, workspace.id, "admin");
+      await assertPermission(ctx.db, userId, workspace.id, "workspace:manage");
 
       return webhookRepo.getAllByWorkspaceId(ctx.db, workspace.id);
     }),
@@ -111,7 +111,7 @@ export const webhookRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, workspace.id, "admin");
+      await assertPermission(ctx.db, userId, workspace.id, "workspace:manage");
 
       const result = await webhookRepo.create(ctx.db, {
         workspaceId: workspace.id,
@@ -184,7 +184,7 @@ export const webhookRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, workspace.id, "admin");
+      await assertPermission(ctx.db, userId, workspace.id, "workspace:manage");
 
       const webhook = await webhookRepo.getByPublicId(
         ctx.db,
@@ -252,7 +252,7 @@ export const webhookRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, workspace.id, "admin");
+      await assertPermission(ctx.db, userId, workspace.id, "workspace:manage");
 
       const webhook = await webhookRepo.getByPublicId(
         ctx.db,
@@ -314,7 +314,7 @@ export const webhookRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertUserInWorkspace(ctx.db, userId, workspace.id, "admin");
+      await assertPermission(ctx.db, userId, workspace.id, "workspace:manage");
 
       const webhook = await webhookRepo.getByPublicId(
         ctx.db,
