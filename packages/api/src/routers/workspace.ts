@@ -295,6 +295,7 @@ export const workspaceRouter = createTRPCRouter({
           .optional(),
         description: z.string().min(3).max(280).optional(),
         showEmailsToMembers: z.boolean().optional(),
+        weekStartDay: z.number().int().min(0).max(1).optional(),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof workspaceRepo.update>>>())
@@ -356,6 +357,7 @@ export const workspaceRouter = createTRPCRouter({
           slug: input.slug,
           description: input.description,
           showEmailsToMembers: input.showEmailsToMembers,
+          weekStartDay: input.weekStartDay,
         },
       );
 

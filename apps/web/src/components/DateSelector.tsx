@@ -17,9 +17,14 @@ import { twMerge } from "tailwind-merge";
 interface DateSelectorProps {
   selectedDate?: Date | null;
   onDateSelect?: (date: Date | undefined) => void;
+  weekStartsOn?: 0 | 1;
 }
 
-const DateSelector = ({ selectedDate, onDateSelect }: DateSelectorProps) => {
+const DateSelector = ({
+  selectedDate,
+  onDateSelect,
+  weekStartsOn = 1,
+}: DateSelectorProps) => {
   const [currentMonth, setCurrentMonth] = useState(() => {
     return selectedDate ? startOfMonth(selectedDate) : startOfMonth(new Date());
   });
@@ -28,18 +33,18 @@ const DateSelector = ({ selectedDate, onDateSelect }: DateSelectorProps) => {
   const year = format(currentMonth, "yyyy");
 
   const dayHeaders = useMemo(() => {
-    const weekStart = startOfWeek(new Date(), { weekStartsOn: 1 }); // Monday
+    const weekStart = startOfWeek(new Date(), { weekStartsOn });
     return eachDayOfInterval({
       start: weekStart,
       end: new Date(weekStart.getTime() + 6 * 24 * 60 * 60 * 1000),
     }).map((date) => format(date, "EEEEEE")); // Shortest localized day name
-  }, []);
+  }, [weekStartsOn]);
 
   const days = useMemo(() => {
     const monthStart = startOfMonth(currentMonth);
     const monthEnd = endOfMonth(currentMonth);
-    const calendarStart = startOfWeek(monthStart, { weekStartsOn: 1 }); // Monday
-    const calendarEnd = endOfWeek(monthEnd, { weekStartsOn: 1 }); // Monday
+    const calendarStart = startOfWeek(monthStart, { weekStartsOn });
+    const calendarEnd = endOfWeek(monthEnd, { weekStartsOn });
 
     return eachDayOfInterval({ start: calendarStart, end: calendarEnd }).map(
       (date) => {
@@ -53,7 +58,7 @@ const DateSelector = ({ selectedDate, onDateSelect }: DateSelectorProps) => {
         };
       },
     );
-  }, [currentMonth, selectedDate]);
+  }, [currentMonth, selectedDate, weekStartsOn]);
 
   const handlePreviousMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));

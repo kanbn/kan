@@ -24,6 +24,7 @@ import Toggle from "~/components/Toggle";
 import { useModalFormState } from "~/hooks/useModalFormState";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
+import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 
@@ -53,6 +54,7 @@ export function NewCardForm({
   queryParams,
 }: NewCardFormProps) {
   const { showPopup } = usePopup();
+  const { workspace } = useWorkspace();
   const { closeModal, openModal, modalStates, clearModalState } = useModal();
 
   const utils = api.useUtils();
@@ -491,6 +493,7 @@ export function NewCardForm({
                       setValue("dueDate", date ?? null);
                       setIsDateSelectorOpen(false);
                     }}
+                    weekStartsOn={workspace.weekStartDay}
                   />
                 </div>
               </>

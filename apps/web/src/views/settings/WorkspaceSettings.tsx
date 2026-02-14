@@ -21,6 +21,7 @@ import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescript
 import UpdateWorkspaceEmailVisibilityForm from "./components/UpdateWorkspaceEmailVisibilityForm";
 import UpdateWorkspaceNameForm from "./components/UpdateWorkspaceNameForm";
 import UpdateWorkspaceUrlForm from "./components/UpdateWorkspaceUrlForm";
+import UpdateWeekStartDayForm from "./components/UpdateWeekStartDayForm";
 import { UpgradeToProConfirmation } from "./components/UpgradeToProConfirmation";
 
 export default function WorkspaceSettings() {
@@ -83,6 +84,15 @@ export default function WorkspaceSettings() {
         <UpdateWorkspaceDescriptionForm
           workspacePublicId={workspace.publicId}
           workspaceDescription={workspace.description ?? ""}
+          disabled={!canEditWorkspace}
+        />
+
+        <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
+          {t`Week start day`}
+        </h2>
+        <UpdateWeekStartDayForm
+          workspacePublicId={workspace.publicId}
+          weekStartDay={workspaceData?.weekStartDay ?? 1}
           disabled={!canEditWorkspace}
         />
 

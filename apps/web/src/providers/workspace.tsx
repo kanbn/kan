@@ -19,6 +19,7 @@ interface Workspace {
   slug: string | undefined;
   plan: "free" | "pro" | "enterprise" | undefined;
   role: "admin" | "member" | "guest";
+  weekStartDay: 0 | 1;
 }
 
 const initialWorkspace: Workspace = {
@@ -28,6 +29,7 @@ const initialWorkspace: Workspace = {
   slug: "",
   plan: "free",
   role: "member",
+  weekStartDay: 1,
 };
 
 const initialAvailableWorkspaces: Workspace[] = [];
@@ -79,6 +81,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         slug: workspace.slug,
         description: workspace.description,
         plan: workspace.plan,
+        weekStartDay: workspace.weekStartDay,
         hasLoaded: true,
       })) as Workspace[];
 
@@ -100,6 +103,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         plan: selectedWorkspace.workspace.plan,
         description: selectedWorkspace.workspace.description,
         role: selectedWorkspace.role,
+        weekStartDay: selectedWorkspace.workspace.weekStartDay as 0 | 1,
       });
 
       if (workspacePublicId) {
@@ -119,6 +123,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         plan: primaryWorkspace.plan,
         description: primaryWorkspace.description,
         role: primaryWorkspaceRole,
+        weekStartDay: primaryWorkspace.weekStartDay as 0 | 1,
       });
     }
   }, [data, isLoading, workspacePublicId, router]);

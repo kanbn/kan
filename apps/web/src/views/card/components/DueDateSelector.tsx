@@ -5,6 +5,7 @@ import { HiMiniPlus } from "react-icons/hi2";
 
 import DateSelector from "~/components/DateSelector";
 import { usePopup } from "~/providers/popup";
+import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
@@ -22,6 +23,7 @@ export function DueDateSelector({
   disabled = false,
 }: DueDateSelectorProps) {
   const { showPopup } = usePopup();
+  const { workspace } = useWorkspace();
   const utils = api.useUtils();
   const [isOpen, setIsOpen] = useState(false);
   const [pendingDate, setPendingDate] = useState<Date | null | undefined>(
@@ -135,6 +137,7 @@ export function DueDateSelector({
             <DateSelector
               selectedDate={pendingDate ?? undefined}
               onDateSelect={handleDateSelect}
+              weekStartsOn={workspace.weekStartDay}
             />
           </div>
         </>
