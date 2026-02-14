@@ -180,6 +180,55 @@ describe("webhook utilities", () => {
       },
     };
 
+    describe("SSRF protection", () => {
+      it("blocks HTTP URLs", async () => {
+        const result = await sendWebhookToUrl("http://example.com/webhook", undefined, mockPayload);
+        expect(result.success).toBe(false);
+        expect(result.error).toContain("HTTPS");
+        expect(global.fetch).not.toHaveBeenCalled();
+      });
+
+      it("blocks localhost", async () => {
+        const result = await sendWebhookToUrl("https://localhost/webhook", undefined, mockPayload);
+        expect(result.success).toBe(false);
+        expect(result.error).toContain("Localhost");
+        expect(global.fetch).not.toHaveBeenCalled();
+      });
+
+      it("blocks 127.0.0.1", async () => {
+        const result = await sendWebhookToUrl("https://127.0.0.1/webhook", undefined, mockPayload);
+        expect(result.success).toBe(false);
+        expect(global.fetch).not.toHaveBeenCalled();
+      });
+
+      it("blocks cloud metadata endpoint", async () => {
+        const result = await sendWebhookToUrl("https://169.254.169.254/latest/meta-data/", undefined, mockPayload);
+        expect(result.success).toBe(false);
+        expect(result.error).toContain("metadata");
+        expect(global.fetch).not.toHaveBeenCalled();
+      });
+
+      it("blocks private 10.x.x.x IPs", async () => {
+        const result = await sendWebhookToUrl("https://10.0.0.1/webhook", undefined, mockPayload);
+        expect(result.success).toBe(false);
+        expect(result.error).toContain("Private");
+        expect(global.fetch).not.toHaveBeenCalled();
+      });
+
+      it("blocks private 192.168.x.x IPs", async () => {
+        const result = await sendWebhookToUrl("https://192.168.1.1/webhook", undefined, mockPayload);
+        expect(result.success).toBe(false);
+        expect(global.fetch).not.toHaveBeenCalled();
+      });
+
+      it("allows valid HTTPS URLs", async () => {
+        (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({ ok: true, status: 200 });
+        const result = await sendWebhookToUrl("https://example.com/webhook", undefined, mockPayload);
+        expect(result.success).toBe(true);
+        expect(global.fetch).toHaveBeenCalled();
+      });
+    });
+
     it("sends POST request with correct headers", async () => {
       (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
         ok: true,
