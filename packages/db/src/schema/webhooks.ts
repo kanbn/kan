@@ -3,6 +3,7 @@ import {
   bigint,
   bigserial,
   boolean,
+  index,
   pgTable,
   text,
   timestamp,
@@ -37,7 +38,9 @@ export const workspaceWebhooks = pgTable("workspace_webhooks", {
     .references(() => users.id, { onDelete: "cascade" }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
-}).enableRLS();
+}, (table) => [
+  index("workspace_webhooks_workspace_idx").on(table.workspaceId),
+]).enableRLS();
 
 export const workspaceWebhooksRelations = relations(
   workspaceWebhooks,
