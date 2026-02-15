@@ -185,10 +185,19 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     ? router.query.cardId[0]
     : router.query.cardId;
 
-  const { data: card, isLoading } = api.card.byId.useQuery(
+  const { data: card, isLoading, error } = api.card.byId.useQuery(
     { cardPublicId: cardId ?? "" },
     { enabled: !!cardId && cardId.length >= 12 },
   );
+
+  // Redirect to 404 if card doesn't exist
+  useEffect(() => {
+    if (router.isReady && cardId && !isLoading) {
+      if (error?.data?.code === "NOT_FOUND" || (!card && !isLoading)) {
+        router.replace("/404");
+      }
+    }
+  }, [router, cardId, isLoading, error, card]);
 
   const isCreator = card?.createdBy && session?.user.id === card.createdBy;
   const canEdit = canEditCard || isCreator;
