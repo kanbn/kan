@@ -8,6 +8,7 @@ import {
   HiOutlineArrowRight,
   HiOutlineCheckCircle,
   HiOutlineClock,
+  HiOutlinePaperClip,
   HiOutlinePencil,
   HiOutlinePlus,
   HiOutlineTag,
@@ -30,6 +31,16 @@ import Comment from "./Comment";
 
 type ActivityType =
   NonNullable<GetCardByIdOutput>["activities"][number]["type"];
+
+type ActivityWithMergedLabels =
+  GetCardActivitiesOutput["activities"][number] & {
+    mergedLabels?: string[];
+    attachment?: {
+      publicId: string;
+      filename: string;
+      originalFilename: string;
+    } | null;
+  };
 
 const truncate = (value: string | null, maxLength = 50) => {
   if (!value) return value;
@@ -57,6 +68,7 @@ const getActivityText = ({
   toDueDate,
   dateLocale,
   mergedLabels,
+  attachmentName,
 }: {
   type: ActivityType;
   toTitle: string | null;
@@ -71,6 +83,7 @@ const getActivityText = ({
   toDueDate?: Date | null;
   dateLocale: DateFnsLocale;
   mergedLabels?: string[];
+  attachmentName?: string | null;
 }) => {
   const displayName = memberName ?? memberEmail ?? t`Member`;
   const TextHighlight = ({ children }: { children: React.ReactNode }) => (
@@ -124,6 +137,8 @@ const getActivityText = ({
     "card.updated.checklist.item.completed": t`completed a checklist item`,
     "card.updated.checklist.item.uncompleted": t`marked a checklist item as incomplete`,
     "card.updated.checklist.item.deleted": t`deleted a checklist item`,
+    "card.updated.attachment.added": t`added an attachment`,
+    "card.updated.attachment.removed": t`removed an attachment`,
     "card.updated.dueDate.added": t`set the due date`,
     "card.updated.dueDate.updated": t`updated the due date`,
     "card.updated.dueDate.removed": t`removed the due date`,
@@ -256,6 +271,27 @@ const getActivityText = ({
     );
   }
 
+  if (type === "card.updated.attachment.added") {
+    const filename = attachmentName ?? toTitle;
+    if (!filename) return baseText;
+    return (
+      <Trans>
+        added an attachment <TextHighlight>{truncate(filename)}</TextHighlight>
+      </Trans>
+    );
+  }
+
+  if (type === "card.updated.attachment.removed") {
+    const filename = attachmentName ?? fromTitle;
+    if (!filename) return baseText;
+    return (
+      <Trans>
+        removed an attachment{" "}
+        <TextHighlight>{truncate(filename)}</TextHighlight>
+      </Trans>
+    );
+  }
+
   if (type === "card.updated.dueDate.added" && toDueDate) {
     const showYear = !isSameYear(toDueDate, new Date());
     const formattedDate = format(
@@ -308,6 +344,8 @@ const ACTIVITY_ICON_MAP: Partial<Record<ActivityType, React.ReactNode | null>> =
     "card.updated.checklist.item.completed": <HiOutlineCheckCircle />,
     "card.updated.checklist.item.uncompleted": <HiOutlineCheckCircle />,
     "card.updated.checklist.item.deleted": <HiOutlineTrash />,
+    "card.updated.attachment.added": <HiOutlinePaperClip />,
+    "card.updated.attachment.removed": <HiOutlinePaperClip />,
     "card.updated.dueDate.added": <HiOutlineClock />,
     "card.updated.dueDate.updated": <HiOutlineClock />,
     "card.updated.dueDate.removed": <HiOutlineClock />,
@@ -341,7 +379,7 @@ const ActivityList = ({
   isAdmin?: boolean;
   isViewOnly?: boolean;
 }) => {
-  const { dateLocale, locale } = useLocalisation();
+  const { dateLocale } = useLocalisation();
   const { data: sessionData } = authClient.useSession();
   const utils = api.useUtils();
   const [allActivities, setAllActivities] = useState<
@@ -391,25 +429,21 @@ const ActivityList = ({
               cursor: nextCursor,
             });
 
-            if (nextPage) {
-              const existingIds = new Set(
-                currentActivities.map((a) => a.publicId),
-              );
-              const newActivities = nextPage.activities.filter(
-                (a: { publicId: string }) => !existingIds.has(a.publicId),
-              );
-              currentActivities = [...currentActivities, ...newActivities];
-              currentHasMore = nextPage.hasMore;
-            } else {
-              break;
-            }
+            const existingIds = new Set(
+              currentActivities.map((a) => a.publicId),
+            );
+            const newActivities = nextPage.activities.filter(
+              (a: { publicId: string }) => !existingIds.has(a.publicId),
+            );
+            currentActivities = [...currentActivities, ...newActivities];
+            currentHasMore = nextPage.hasMore;
           }
 
           setAllActivities(currentActivities);
           setHasMore(false);
         };
 
-        fetchAllRemaining();
+        void fetchAllRemaining();
       } else {
         setAllActivities(firstPageData.activities);
         setHasMore(firstPageData.hasMore);
@@ -436,17 +470,15 @@ const ActivityList = ({
         cursor: nextCursor,
       });
 
-      if (nextPage) {
-        const existingIds = new Set(allActivities.map((a) => a.publicId));
-        const newActivities = nextPage.activities.filter(
-          (a: { publicId: string }) => !existingIds.has(a.publicId),
-        );
-        setAllActivities((prev) => [...prev, ...newActivities]);
-        setHasMore(nextPage.hasMore);
+      const existingIds = new Set(allActivities.map((a) => a.publicId));
+      const newActivities = nextPage.activities.filter(
+        (a: { publicId: string }) => !existingIds.has(a.publicId),
+      );
+      setAllActivities((prev) => [...prev, ...newActivities]);
+      setHasMore(nextPage.hasMore);
 
-        if (!nextPage.hasMore) {
-          isFullyExpandedRef.current = true;
-        }
+      if (!nextPage.hasMore) {
+        isFullyExpandedRef.current = true;
       }
     } finally {
       setIsLoadingMore(false);
@@ -473,7 +505,10 @@ const ActivityList = ({
           fromDueDate: activity.fromDueDate ?? null,
           toDueDate: activity.toDueDate ?? null,
           dateLocale: dateLocale,
-          mergedLabels: (activity as any).mergedLabels,
+          mergedLabels: (activity as ActivityWithMergedLabels).mergedLabels,
+          attachmentName:
+            (activity as ActivityWithMergedLabels).attachment?.originalFilename ??
+            null,
         });
 
         if (activity.type === "card.updated.comment.added")

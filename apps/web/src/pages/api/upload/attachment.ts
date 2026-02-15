@@ -2,16 +2,16 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Upload } from "@aws-sdk/lib-storage";
 
 import { createNextApiContext } from "@kan/api/trpc";
+import { assertPermission } from "@kan/api/utils/permissions";
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
-import { generateUID } from "@kan/shared/utils";
+import { createS3Client, generateUID } from "@kan/shared/utils";
 
 import { env } from "~/env";
-import { withRateLimit } from "@kan/api/utils/rateLimit";
-import { createS3Client } from "@kan/shared/utils";
-import { assertPermission } from "@kan/api/utils/permissions";
 
+// FIXME: Respect the environment variable: NEXT_API_BODY_SIZE_LIMIT
 const MAX_SIZE_BYTES = 50 * 1024 * 1024; // 50MB
 
 export const config = {
@@ -115,9 +115,15 @@ export default withRateLimit(
         createdBy: user.id,
       });
 
+      if (!attachment) {
+        return res.status(500).json({ error: "Failed to create attachment" });
+      }
+
       await cardActivityRepo.create(db, {
         type: "card.updated.attachment.added",
         cardId: card.id,
+        attachmentId: attachment.id,
+        toTitle: originalFilenameHeader,
         createdBy: user.id,
       });
 
@@ -128,4 +134,3 @@ export default withRateLimit(
     }
   },
 );
-
