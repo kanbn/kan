@@ -12,15 +12,13 @@ import { configuredProviders } from "./providers";
 
 export const initAuth = (db: dbClient) => {
   const baseURL = env("NEXT_PUBLIC_BASE_URL") || env("BETTER_AUTH_URL");
-  const trustedOrigins = env("BETTER_AUTH_TRUSTED_ORIGINS")?.split(",") ?? [];
+  const trustedOrigins =
+    env("BETTER_AUTH_TRUSTED_ORIGINS")?.split(",").filter(Boolean) ?? [];
 
   return betterAuth({
     secret: env("BETTER_AUTH_SECRET"),
     baseURL,
-    trustedOrigins: [
-      ...(baseURL ? [baseURL] : []),
-      ...trustedOrigins,
-    ],
+    trustedOrigins: [...(baseURL ? [baseURL] : []), ...trustedOrigins],
     database: drizzleAdapter(db, {
       provider: "pg",
       schema: {
