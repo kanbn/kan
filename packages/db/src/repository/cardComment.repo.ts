@@ -19,12 +19,14 @@ export const create = async (
     cardId: number;
     comment: string;
     createdBy: string;
+    parentCommentPublicId?: string | null;
   },
 ) => {
   const [result] = await db
     .insert(comments)
     .values({
       publicId: generateUID(),
+      parentCommentPublicId: commentInput.parentCommentPublicId ?? null,
       comment: commentInput.comment,
       createdBy: commentInput.createdBy,
       cardId: commentInput.cardId,
@@ -32,6 +34,7 @@ export const create = async (
     .returning({
       id: comments.id,
       publicId: comments.publicId,
+      parentCommentPublicId: comments.parentCommentPublicId,
       comment: comments.comment,
     });
 
@@ -43,8 +46,11 @@ export const getByPublicId = (db: dbClient, publicId: string) => {
     columns: {
       id: true,
       publicId: true,
+      parentCommentPublicId: true,
       comment: true,
       createdBy: true,
+      cardId: true,
+      deletedAt: true,
     },
     where: eq(comments.publicId, publicId),
   });
