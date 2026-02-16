@@ -51,6 +51,7 @@ export default function UpdateWeekStartDayForm({
         >
           <option value={0}>{t`Sunday`}</option>
           <option value={1}>{t`Monday`}</option>
+          <option value={6}>{t`Saturday`}</option>
         </select>
       </div>
     </div>

@@ -17,7 +17,7 @@ import { twMerge } from "tailwind-merge";
 interface DateSelectorProps {
   selectedDate?: Date | null;
   onDateSelect?: (date: Date | undefined) => void;
-  weekStartsOn?: 0 | 1;
+  weekStartsOn?: 0 | 1 | 6;
 }
 
 const DateSelector = ({
