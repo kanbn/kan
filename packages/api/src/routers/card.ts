@@ -7,12 +7,16 @@ import * as cardCommentRepo from "@kan/db/repository/cardComment.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
 import { sendMentionEmails } from "../utils/notifications";
-import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
-import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
+import {
+  assertCanDelete,
+  assertCanEdit,
+  assertPermission,
+} from "../utils/permissions";
 
 export const cardRouter = createTRPCRouter({
   create: protectedProcedure
@@ -182,6 +186,7 @@ export const cardRouter = createTRPCRouter({
       z.object({
         cardPublicId: z.string().min(12),
         comment: z.string().min(1),
+        parentCommentPublicId: z.string().min(12).optional(),
       }),
     )
     .output(z.custom<Awaited<ReturnType<typeof cardCommentRepo.create>>>())
@@ -205,12 +210,37 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertPermission(ctx.db, userId, card.workspaceId, "comment:create");
+      await assertPermission(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "comment:create",
+      );
+
+      if (input.parentCommentPublicId) {
+        const parentComment = await cardCommentRepo.getByPublicId(
+          ctx.db,
+          input.parentCommentPublicId,
+        );
+
+        if (!parentComment || parentComment.deletedAt)
+          throw new TRPCError({
+            message: `Parent comment with public ID ${input.parentCommentPublicId} not found`,
+            code: "NOT_FOUND",
+          });
+
+        if (parentComment.cardId !== card.id)
+          throw new TRPCError({
+            message: `Parent comment does not belong to the specified card`,
+            code: "BAD_REQUEST",
+          });
+      }
 
       const newComment = await cardCommentRepo.create(ctx.db, {
         comment: input.comment,
         createdBy: userId,
         cardId: card.id,
+        parentCommentPublicId: input.parentCommentPublicId ?? null,
       });
 
       if (!newComment?.id)

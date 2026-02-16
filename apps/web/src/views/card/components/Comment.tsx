@@ -2,13 +2,18 @@ import { t } from "@lingui/core/macro";
 import { formatDistanceToNow } from "date-fns";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { HiEllipsisHorizontal, HiPencil, HiTrash } from "react-icons/hi2";
+import {
+  HiEllipsisHorizontal,
+  HiOutlineArrowUp,
+  HiPencil,
+  HiTrash,
+} from "react-icons/hi2";
 
+import type { WorkspaceMember } from "~/components/Editor";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
-import Editor from "~/components/Editor";
-import type { WorkspaceMember } from "~/components/Editor";
 import Dropdown from "~/components/Dropdown";
+import Editor from "~/components/Editor";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -32,6 +37,8 @@ const Comment = ({
   isAuthor,
   isEdited = false,
   isViewOnly = false,
+  depth = 0,
+  onReply,
 }: {
   publicId: string | undefined;
   cardPublicId: string;
@@ -44,12 +51,15 @@ const Comment = ({
   isAuthor: boolean;
   isEdited: boolean;
   isViewOnly: boolean;
+  depth?: number;
+  onReply?: (args: { publicId: string; name: string }) => void;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const utils = api.useUtils();
   const { showPopup } = usePopup();
   const { openModal } = useModal();
-  const { canEditComment, canDeleteComment } = usePermissions();
+  const { canEditComment, canDeleteComment, canCreateComment } =
+    usePermissions();
   const { handleSubmit, setValue, watch } = useForm<FormValues>({
     defaultValues: {
       comment,
@@ -81,6 +91,19 @@ const Comment = ({
       })) ?? [];
 
   if (!publicId) return null;
+
+  const INDENT_CLASSES = [
+    "",
+    "ml-8",
+    "ml-14",
+    "ml-20",
+    "ml-24",
+    "ml-28",
+    "ml-32",
+  ] as const;
+  const normalizedDepth = Math.max(0, depth ?? 0);
+  const depthClass =
+    INDENT_CLASSES[Math.min(normalizedDepth, INDENT_CLASSES.length - 1)];
 
   const updateCommentMutation = api.card.updateComment.useMutation({
     onSuccess: async () => {
@@ -114,7 +137,7 @@ const Comment = ({
           },
         ]
       : []),
-    ...((isAuthor || canDeleteComment)
+    ...(isAuthor || canDeleteComment
       ? [
           {
             label: t`Delete comment`,
@@ -128,7 +151,7 @@ const Comment = ({
   return (
     <div
       key={publicId}
-      className="group relative flex w-full flex-col rounded-xl border border-light-600 bg-light-200 p-4 text-light-900 focus-visible:outline-none dark:border-dark-400 dark:bg-dark-100 dark:text-dark-1000 sm:text-sm sm:leading-6"
+      className={`group relative flex w-full flex-col rounded-xl border border-light-600 bg-light-200 p-4 text-light-900 focus-visible:outline-none dark:border-dark-400 dark:bg-dark-100 dark:text-dark-1000 sm:text-sm sm:leading-6 ${depthClass}`}
     >
       <div className="flex justify-between">
         <div className="flex items-center space-x-2">
@@ -173,6 +196,23 @@ const Comment = ({
             enableYouTubeEmbed={false}
             disableHeadings={true}
           />
+
+          {canCreateComment && !isViewOnly && onReply && (
+            <div className="mt-2 flex justify-end">
+              <button
+                type="button"
+                onClick={() =>
+                  onReply({
+                    publicId,
+                    name: name?.trim() ? name : email || t`Member`,
+                  })
+                }
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-light-600 bg-light-300 hover:bg-light-400 disabled:opacity-50 dark:border-dark-400 dark:bg-dark-200 dark:hover:bg-dark-400"
+              >
+                <HiOutlineArrowUp />
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -186,7 +226,7 @@ const Comment = ({
               disableHeadings={true}
             />
           </div>
-          <div className="flex justify-end space-x-2 mt-2">
+          <div className="mt-2 flex justify-end space-x-2">
             <Button
               size="sm"
               variant="ghost"

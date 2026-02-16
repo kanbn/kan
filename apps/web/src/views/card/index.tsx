@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { IoChevronForwardSharp } from "react-icons/io5";
 import { HiXMark } from "react-icons/hi2";
+import { IoChevronForwardSharp } from "react-icons/io5";
 
 import { authClient } from "@kan/auth/client";
 
@@ -180,6 +180,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const [activeChecklistForm, setActiveChecklistForm] = useState<string | null>(
     null,
   );
+  const [replyToComment, setReplyToComment] = useState<{
+    publicId: string;
+    name: string;
+  } | null>(null);
 
   const cardId = Array.isArray(router.query.cardId)
     ? router.query.cardId[0]
@@ -301,7 +305,6 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   }, [card]);
 
   if (!cardId) return <></>;
-
 
   return (
     <>
@@ -451,9 +454,13 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                         cardPublicId={cardId}
                         isLoading={!card}
                         isAdmin={workspace.role === "admin"}
+                        onReplyToComment={(args) => setReplyToComment(args)}
+                        replyToComment={replyToComment}
+                        onCancelReply={() => setReplyToComment(null)}
+                        workspaceMembers={editorWorkspaceMembers}
                       />
                     </div>
-                    {!isTemplate && (
+                    {!isTemplate && !replyToComment && (
                       <div className="mt-6">
                         <NewCommentForm
                           cardPublicId={cardId}

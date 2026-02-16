@@ -1,195 +1,202 @@
 {
-  "version": "7",
-  "dialect": "postgresql",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "7",
-      "when": 1746693478656,
-      "tag": "20250508083758_SetupTables",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1747903068807,
-      "tag": "20250522083748_AddEmailToWorkspaceMembers",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1748378293342,
-      "tag": "20250527203813_AddDeletedAtToLabel",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1749118315675,
-      "tag": "20250605101155_AddCascadeDeleteToCardRelations",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1749405288761,
-      "tag": "20250608175448_AddOnDeleteActionToUserDeletion",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1749377372062,
-      "tag": "20250608100932_AddIntegrationsTable",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1749585889984,
-      "tag": "20250610200449_ReaddIntegrationTable",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1754511666265,
-      "tag": "20250806202106_glossy_luminals",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "7",
-      "when": 1755094668761,
-      "tag": "20250813141748_AddChecklistActivityTypes",
-      "breakpoints": true
-    },
-    {
-      "idx": 9,
-      "version": "7",
-      "when": 1756803246096,
-      "tag": "20250902085406_AddSubscriptions",
-      "breakpoints": true
-    },
-    {
-      "idx": 10,
-      "version": "7",
-      "when": 1757271312974,
-      "tag": "20250907185512_AddUnlimitedSeatsToSubscription",
-      "breakpoints": true
-    },
-    {
-      "idx": 11,
-      "version": "7",
-      "when": 1757533858687,
-      "tag": "20250910195058_RemoveNotNullConstraintFromReferenceIdOnSubsriptions",
-      "breakpoints": true
-    },
-    {
-      "idx": 12,
-      "version": "7",
-      "when": 1757534656098,
-      "tag": "20250910200416_AddWorkspaceSlugChecks",
-      "breakpoints": true
-    },
-    {
-      "idx": 13,
-      "version": "7",
-      "when": 1757535838766,
-      "tag": "20250910202358_AddCascadeSetNullToReferenceIdOnSubsriptions",
-      "breakpoints": true
-    },
-    {
-      "idx": 14,
-      "version": "7",
-      "when": 1758226671081,
-      "tag": "20250918201751_AddPausedMemberStatus",
-      "breakpoints": true
-    },
-    {
-      "idx": 15,
-      "version": "7",
-      "when": 1758662398166,
-      "tag": "20250923211958_AddWorkspaceInviteLinks",
-      "breakpoints": true
-    },
-    {
-      "idx": 16,
-      "version": "7",
-      "when": 1759356096392,
-      "tag": "20251001220136_AddFuzzySearchSupport",
-      "breakpoints": true
-    },
-    {
-      "idx": 17,
-      "version": "7",
-      "when": 1759869689304,
-      "tag": "20251007204129_AddBoardTypeAndSourceIdColumns",
-      "breakpoints": true
-    },
-    {
-      "idx": 18,
-      "version": "7",
-      "when": 1760044396109,
-      "tag": "20251009211316_AddBoardSourceIdToCardActivity",
-      "breakpoints": true
-    },
-    {
-      "idx": 19,
-      "version": "7",
-      "when": 1762807463569,
-      "tag": "20251110204423_AddCardAttachments",
-      "breakpoints": true
-    },
-    {
-      "idx": 20,
-      "version": "7",
-      "when": 1764621815672,
-      "tag": "20251201204335_AddCardDueDates",
-      "breakpoints": true
-    },
-    {
-      "idx": 21,
-      "version": "7",
-      "when": 1767045713686,
-      "tag": "20251229220153_UpdateCardTitleFromVarcharToText",
-      "breakpoints": true
-    },
-    {
-      "idx": 22,
-      "version": "7",
-      "when": 1768858977000,
-      "tag": "20260119164257_AddShowEmailsToMembersToWorkspace",
-      "breakpoints": true
-    },
-    {
-      "idx": 23,
-      "version": "7",
-      "when": 1769435949476,
-      "tag": "20260126135909_AddWorkspaceRoles",
-      "breakpoints": true
-    },
-    {
-      "idx": 24,
-      "version": "7",
-      "when": 1769983198190,
-      "tag": "20260201215958_AddUserBoardFavouritesTable",
-      "breakpoints": true
-    },
-    {
-      "idx": 25,
-      "version": "7",
-      "when": 1770500457005,
-      "tag": "20260207214056_AddNotificationsTable",
-      "breakpoints": true
-    },
-    {
-      "idx": 26,
-      "version": "7",
-      "when": 1770521594167,
-      "tag": "20260208033314_AddAttachmentToActivity",
-      "breakpoints": true
-    }
-  ]
+    "version": "7",
+    "dialect": "postgresql",
+    "entries": [
+        {
+            "idx": 0,
+            "version": "7",
+            "when": 1746693478656,
+            "tag": "20250508083758_SetupTables",
+            "breakpoints": true
+        },
+        {
+            "idx": 1,
+            "version": "7",
+            "when": 1747903068807,
+            "tag": "20250522083748_AddEmailToWorkspaceMembers",
+            "breakpoints": true
+        },
+        {
+            "idx": 2,
+            "version": "7",
+            "when": 1748378293342,
+            "tag": "20250527203813_AddDeletedAtToLabel",
+            "breakpoints": true
+        },
+        {
+            "idx": 3,
+            "version": "7",
+            "when": 1749118315675,
+            "tag": "20250605101155_AddCascadeDeleteToCardRelations",
+            "breakpoints": true
+        },
+        {
+            "idx": 4,
+            "version": "7",
+            "when": 1749405288761,
+            "tag": "20250608175448_AddOnDeleteActionToUserDeletion",
+            "breakpoints": true
+        },
+        {
+            "idx": 5,
+            "version": "7",
+            "when": 1749377372062,
+            "tag": "20250608100932_AddIntegrationsTable",
+            "breakpoints": true
+        },
+        {
+            "idx": 6,
+            "version": "7",
+            "when": 1749585889984,
+            "tag": "20250610200449_ReaddIntegrationTable",
+            "breakpoints": true
+        },
+        {
+            "idx": 7,
+            "version": "7",
+            "when": 1754511666265,
+            "tag": "20250806202106_glossy_luminals",
+            "breakpoints": true
+        },
+        {
+            "idx": 8,
+            "version": "7",
+            "when": 1755094668761,
+            "tag": "20250813141748_AddChecklistActivityTypes",
+            "breakpoints": true
+        },
+        {
+            "idx": 9,
+            "version": "7",
+            "when": 1756803246096,
+            "tag": "20250902085406_AddSubscriptions",
+            "breakpoints": true
+        },
+        {
+            "idx": 10,
+            "version": "7",
+            "when": 1757271312974,
+            "tag": "20250907185512_AddUnlimitedSeatsToSubscription",
+            "breakpoints": true
+        },
+        {
+            "idx": 11,
+            "version": "7",
+            "when": 1757533858687,
+            "tag": "20250910195058_RemoveNotNullConstraintFromReferenceIdOnSubsriptions",
+            "breakpoints": true
+        },
+        {
+            "idx": 12,
+            "version": "7",
+            "when": 1757534656098,
+            "tag": "20250910200416_AddWorkspaceSlugChecks",
+            "breakpoints": true
+        },
+        {
+            "idx": 13,
+            "version": "7",
+            "when": 1757535838766,
+            "tag": "20250910202358_AddCascadeSetNullToReferenceIdOnSubsriptions",
+            "breakpoints": true
+        },
+        {
+            "idx": 14,
+            "version": "7",
+            "when": 1758226671081,
+            "tag": "20250918201751_AddPausedMemberStatus",
+            "breakpoints": true
+        },
+        {
+            "idx": 15,
+            "version": "7",
+            "when": 1758662398166,
+            "tag": "20250923211958_AddWorkspaceInviteLinks",
+            "breakpoints": true
+        },
+        {
+            "idx": 16,
+            "version": "7",
+            "when": 1759356096392,
+            "tag": "20251001220136_AddFuzzySearchSupport",
+            "breakpoints": true
+        },
+        {
+            "idx": 17,
+            "version": "7",
+            "when": 1759869689304,
+            "tag": "20251007204129_AddBoardTypeAndSourceIdColumns",
+            "breakpoints": true
+        },
+        {
+            "idx": 18,
+            "version": "7",
+            "when": 1760044396109,
+            "tag": "20251009211316_AddBoardSourceIdToCardActivity",
+            "breakpoints": true
+        },
+        {
+            "idx": 19,
+            "version": "7",
+            "when": 1762807463569,
+            "tag": "20251110204423_AddCardAttachments",
+            "breakpoints": true
+        },
+        {
+            "idx": 20,
+            "version": "7",
+            "when": 1764621815672,
+            "tag": "20251201204335_AddCardDueDates",
+            "breakpoints": true
+        },
+        {
+            "idx": 21,
+            "version": "7",
+            "when": 1767045713686,
+            "tag": "20251229220153_UpdateCardTitleFromVarcharToText",
+            "breakpoints": true
+        },
+        {
+            "idx": 22,
+            "version": "7",
+            "when": 1768858977000,
+            "tag": "20260119164257_AddShowEmailsToMembersToWorkspace",
+            "breakpoints": true
+        },
+        {
+            "idx": 23,
+            "version": "7",
+            "when": 1769435949476,
+            "tag": "20260126135909_AddWorkspaceRoles",
+            "breakpoints": true
+        },
+        {
+            "idx": 24,
+            "version": "7",
+            "when": 1769983198190,
+            "tag": "20260201215958_AddUserBoardFavouritesTable",
+            "breakpoints": true
+        },
+        {
+            "idx": 25,
+            "version": "7",
+            "when": 1770500457005,
+            "tag": "20260207214056_AddNotificationsTable",
+            "breakpoints": true
+        },
+        {
+            "idx": 26,
+            "version": "7",
+            "when": 1770521594167,
+            "tag": "20260208033314_AddAttachmentToActivity",
+            "breakpoints": true
+        },
+        {
+            "idx": 27,
+            "version": "7",
+            "when": 1771200000000,
+            "tag": "20260215120000_AddParentCommentToCardComments",
+            "breakpoints": true
+        }
+    ]
 }
