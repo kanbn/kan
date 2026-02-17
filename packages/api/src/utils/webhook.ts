@@ -2,12 +2,9 @@ import crypto from "crypto";
 
 import type { dbClient } from "@kan/db/client";
 import * as webhookRepo from "@kan/db/repository/webhook.repo";
+import type { WebhookEvent } from "@kan/db/schema";
 
-export type WebhookEventType =
-  | "card.created"
-  | "card.updated"
-  | "card.deleted"
-  | "card.moved";
+export type WebhookEventType = WebhookEvent;
 
 export interface WebhookPayload {
   event: WebhookEventType;
