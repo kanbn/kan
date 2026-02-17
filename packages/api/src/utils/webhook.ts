@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { z } from "zod";
 
 import type { dbClient } from "@kan/db/client";
 import * as webhookRepo from "@kan/db/repository/webhook.repo";
@@ -39,66 +40,92 @@ function generateSignature(payload: string, secret: string): string {
 }
 
 /**
- * Validates that a webhook URL is safe to call (SSRF mitigation).
- * Blocks private/internal IP ranges, localhost, and non-HTTPS URLs.
+ * Zod schema for webhook URLs with SSRF mitigation.
+ * Requires HTTPS and blocks private/internal IP ranges, localhost,
+ * and cloud metadata endpoints.
  */
-function validateWebhookUrl(url: string): { valid: boolean; error?: string } {
-  let parsed: URL;
-  try {
-    parsed = new URL(url);
-  } catch {
-    return { valid: false, error: "Invalid URL" };
-  }
-
-  if (parsed.protocol !== "https:") {
-    return { valid: false, error: "Only HTTPS URLs are allowed" };
-  }
-
-  const hostname = parsed.hostname.toLowerCase();
-
-  // Block localhost variants
-  if (
-    hostname === "localhost" ||
-    hostname === "127.0.0.1" ||
-    hostname === "::1" ||
-    hostname === "0.0.0.0"
-  ) {
-    return { valid: false, error: "Localhost URLs are not allowed" };
-  }
-
-  // Block cloud metadata endpoints
-  if (hostname === "169.254.169.254" || hostname === "metadata.google.internal") {
-    return { valid: false, error: "Cloud metadata endpoints are not allowed" };
-  }
-
-  // Block private IP ranges (10.x, 172.16-31.x, 192.168.x)
-  const ipv4Match = hostname.match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/);
-  if (ipv4Match) {
-    const [, a, b] = ipv4Match.map(Number);
-    if (
-      a === 10 ||
-      (a === 172 && b! >= 16 && b! <= 31) ||
-      (a === 192 && b === 168)
-    ) {
-      return { valid: false, error: "Private IP addresses are not allowed" };
-    }
-  }
-
-  return { valid: true };
-}
+export const webhookUrlSchema = z
+  .string()
+  .url()
+  .max(2048)
+  .refine(
+    (url) => {
+      try {
+        return new URL(url).protocol === "https:";
+      } catch {
+        return false;
+      }
+    },
+    { message: "Only HTTPS URLs are allowed" },
+  )
+  .refine(
+    (url) => {
+      try {
+        const hostname = new URL(url).hostname.toLowerCase();
+        return !(
+          hostname === "localhost" ||
+          hostname === "127.0.0.1" ||
+          hostname === "::1" ||
+          hostname === "0.0.0.0"
+        );
+      } catch {
+        return false;
+      }
+    },
+    { message: "Localhost URLs are not allowed" },
+  )
+  .refine(
+    (url) => {
+      try {
+        const hostname = new URL(url).hostname.toLowerCase();
+        return !(
+          hostname === "169.254.169.254" ||
+          hostname === "metadata.google.internal"
+        );
+      } catch {
+        return false;
+      }
+    },
+    { message: "Cloud metadata endpoints are not allowed" },
+  )
+  .refine(
+    (url) => {
+      try {
+        const hostname = new URL(url).hostname.toLowerCase();
+        const ipv4Match = hostname.match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/);
+        if (ipv4Match) {
+          const [, a, b] = ipv4Match.map(Number);
+          if (
+            a === 10 ||
+            (a === 172 && b! >= 16 && b! <= 31) ||
+            (a === 192 && b === 168)
+          ) {
+            return false;
+          }
+        }
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    { message: "Private IP addresses are not allowed" },
+  );
 
 /**
- * Send a webhook payload to a specific URL
- * Returns result for testing purposes
+ * Send a webhook payload to a specific URL.
+ *
+ * SSRF note: URL validation (HTTPS-only, no private IPs, no cloud metadata)
+ * is enforced both here at delivery time and at webhook creation via
+ * webhookUrlSchema. This function is only reachable by workspace admins.
  */
 export async function sendWebhookToUrl(
   url: string,
   secret: string | undefined,
   payload: WebhookPayload,
 ): Promise<{ success: boolean; statusCode?: number; error?: string }> {
-  const urlCheck = validateWebhookUrl(url);
-  if (!urlCheck.valid) {
-    return { success: false, error: urlCheck.error };
+  const result = webhookUrlSchema.safeParse(url);
+  if (!result.success) {
+    return { success: false, error: result.error.issues[0]?.message };
   }
 
   const body = JSON.stringify(payload);
@@ -149,36 +176,40 @@ export async function sendWebhookToUrl(
 }
 
 /**
- * Send webhook to all active webhooks for a workspace that are subscribed to the event
+ * Send webhook to all active webhooks for a workspace that are subscribed to the event.
+ * Wrapped in try/catch so callers using fire-and-forget don't risk unhandled rejections.
  */
 export async function sendWebhooksForWorkspace(
   db: dbClient,
   workspaceId: number,
   payload: WebhookPayload,
 ): Promise<void> {
-  // Get all active webhooks for this workspace
-  const webhooks = await webhookRepo.getActiveByWorkspaceId(db, workspaceId);
+  try {
+    // Get active webhooks for this workspace, pre-filtered by event at the DB level
+    const webhooks = await webhookRepo.getActiveByWorkspaceId(
+      db,
+      workspaceId,
+      payload.event,
+    );
 
-  // Filter to webhooks that are subscribed to this event
-  const subscribedWebhooks = webhooks.filter((webhook) =>
-    webhook.events.includes(payload.event as (typeof webhook.events)[number]),
-  );
+    // Send to all webhooks in parallel (fire and forget)
+    const promises = webhooks.map((webhook) =>
+      sendWebhookToUrl(webhook.url, webhook.secret ?? undefined, payload).then(
+        (result) => {
+          if (!result.success) {
+            console.error(
+              `Webhook delivery failed to ${webhook.url}: ${result.error}`,
+            );
+          }
+        },
+      ),
+    );
 
-  // Send to all webhooks in parallel (fire and forget)
-  const promises = subscribedWebhooks.map((webhook) =>
-    sendWebhookToUrl(webhook.url, webhook.secret ?? undefined, payload).then(
-      (result) => {
-        if (!result.success) {
-          console.error(
-            `Webhook delivery failed to ${webhook.url}: ${result.error}`,
-          );
-        }
-      },
-    ),
-  );
-
-  // Wait for all to complete but don't block on failures
-  await Promise.allSettled(promises);
+    // Wait for all to complete but don't block on failures
+    await Promise.allSettled(promises);
+  } catch (error) {
+    console.error("Failed to send webhooks for workspace:", error);
+  }
 }
 
 export function createCardWebhookPayload(
