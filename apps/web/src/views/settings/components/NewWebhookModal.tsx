@@ -64,7 +64,7 @@ export function NewWebhookModal({
       name: "",
       url: "",
       secret: "",
-      events: ["card.created", "card.updated", "card.moved", "card.deleted"],
+      events: [...webhookEvents],
       active: true,
     },
   });
@@ -83,7 +83,7 @@ export function NewWebhookModal({
         name: "",
         url: "",
         secret: "",
-        events: ["card.created", "card.updated", "card.moved", "card.deleted"],
+        events: [...webhookEvents],
         active: true,
       });
     }
