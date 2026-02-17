@@ -160,7 +160,7 @@ export const workspaceRouter = createTRPCRouter({
         workspaceSlug: z
           .string()
           .min(3)
-          .max(24)
+          .max(64)
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
       }),
     )
@@ -207,7 +207,7 @@ export const workspaceRouter = createTRPCRouter({
         slug: z
           .string()
           .min(3)
-          .max(24)
+          .max(64)
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
           .optional(),
       }),
@@ -290,7 +290,7 @@ export const workspaceRouter = createTRPCRouter({
         slug: z
           .string()
           .min(3)
-          .max(24)
+          .max(64)
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
           .optional(),
         description: z.string().min(3).max(280).optional(),
@@ -424,7 +424,7 @@ export const workspaceRouter = createTRPCRouter({
         workspaceSlug: z
           .string()
           .min(3)
-          .max(24)
+          .max(64)
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
       }),
     )

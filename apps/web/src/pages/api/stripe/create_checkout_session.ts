@@ -11,7 +11,7 @@ import { withRateLimit } from "@kan/api/utils/rateLimit";
 const workspaceSlugSchema = z
   .string()
   .min(3)
-  .max(24)
+  .max(64)
   .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/);
 
 interface CheckoutSessionRequest {
