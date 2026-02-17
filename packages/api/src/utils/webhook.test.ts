@@ -9,6 +9,7 @@ import {
   sendWebhookToUrl,
   sendWebhooksForWorkspace,
   createCardWebhookPayload,
+  webhookUrlSchema,
   type WebhookPayload,
 } from "./webhook";
 
@@ -403,6 +404,12 @@ describe("webhook utilities", () => {
 
       await sendWebhooksForWorkspace(mockDb, 1, mockPayload);
 
+      // Event filtering now happens at DB level
+      expect(mockGetActiveByWorkspaceId).toHaveBeenCalledWith(
+        mockDb,
+        1,
+        "card.created",
+      );
       expect(global.fetch).toHaveBeenCalledTimes(2);
       expect(global.fetch).toHaveBeenCalledWith(
         "https://example.com/webhook1",
@@ -414,20 +421,17 @@ describe("webhook utilities", () => {
       );
     });
 
-    it("does not send to webhooks not subscribed to the event", async () => {
-      mockGetActiveByWorkspaceId.mockResolvedValueOnce([
-        {
-          id: 1,
-          publicId: "wh-1",
-          url: "https://example.com/webhook1",
-          secret: null,
-          events: ["card.deleted"], // Not subscribed to card.created
-          active: true,
-        },
-      ]);
+    it("does not send when no webhooks match the event (DB-level filtering)", async () => {
+      // DB-level event filter returns empty array when no webhooks match
+      mockGetActiveByWorkspaceId.mockResolvedValueOnce([]);
 
       await sendWebhooksForWorkspace(mockDb, 1, mockPayload);
 
+      expect(mockGetActiveByWorkspaceId).toHaveBeenCalledWith(
+        mockDb,
+        1,
+        "card.created",
+      );
       expect(global.fetch).not.toHaveBeenCalled();
     });
 
@@ -473,6 +477,52 @@ describe("webhook utilities", () => {
       await sendWebhooksForWorkspace(mockDb, 1, mockPayload);
 
       expect(global.fetch).not.toHaveBeenCalled();
+    });
+
+    it("catches and logs DB errors without throwing", async () => {
+      const consoleSpy = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
+      mockGetActiveByWorkspaceId.mockRejectedValueOnce(
+        new Error("DB connection failed"),
+      );
+
+      // Should not throw — the try/catch absorbs the error
+      await expect(
+        sendWebhooksForWorkspace(mockDb, 1, mockPayload),
+      ).resolves.toBeUndefined();
+
+      expect(consoleSpy).toHaveBeenCalledWith(
+        "Failed to send webhooks for workspace:",
+        expect.any(Error),
+      );
+
+      consoleSpy.mockRestore();
+    });
+  });
+
+  describe("webhookUrlSchema", () => {
+    it("accepts valid HTTPS URLs", () => {
+      expect(webhookUrlSchema.safeParse("https://example.com/webhook").success).toBe(true);
+    });
+
+    it("rejects HTTP URLs", () => {
+      const result = webhookUrlSchema.safeParse("http://example.com/webhook");
+      expect(result.success).toBe(false);
+    });
+
+    it("rejects localhost", () => {
+      const result = webhookUrlSchema.safeParse("https://localhost/webhook");
+      expect(result.success).toBe(false);
+    });
+
+    it("rejects private IPs", () => {
+      expect(webhookUrlSchema.safeParse("https://10.0.0.1/webhook").success).toBe(false);
+      expect(webhookUrlSchema.safeParse("https://192.168.1.1/webhook").success).toBe(false);
+    });
+
+    it("rejects cloud metadata endpoints", () => {
+      expect(webhookUrlSchema.safeParse("https://169.254.169.254/latest").success).toBe(false);
     });
   });
 });
