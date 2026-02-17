@@ -6,6 +6,11 @@ import { generateUID } from "@kan/shared/utils";
 
 import type { WebhookEvent } from "../schema/webhooks";
 
+/** Parse JSON-encoded events column into typed array */
+function parseEvents(raw: string): WebhookEvent[] {
+  return JSON.parse(raw) as WebhookEvent[];
+}
+
 export const create = async (
   db: dbClient,
   webhookInput: {
@@ -40,7 +45,7 @@ export const create = async (
   return webhook
     ? {
         ...webhook,
-        events: JSON.parse(webhook.events) as WebhookEvent[],
+        events: parseEvents(webhook.events),
       }
     : null;
 };
@@ -82,7 +87,7 @@ export const update = async (
   return result
     ? {
         ...result,
-        events: JSON.parse(result.events) as WebhookEvent[],
+        events: parseEvents(result.events),
       }
     : null;
 };
@@ -107,7 +112,7 @@ export const getByPublicId = async (db: dbClient, webhookPublicId: string) => {
   return result
     ? {
         ...result,
-        events: JSON.parse(result.events) as WebhookEvent[],
+        events: parseEvents(result.events),
       }
     : null;
 };
@@ -131,7 +136,7 @@ export const getAllByWorkspaceId = async (
 
   return results.map((webhook) => ({
     ...webhook,
-    events: JSON.parse(webhook.events) as WebhookEvent[],
+    events: parseEvents(webhook.events),
   }));
 };
 
@@ -159,7 +164,7 @@ export const getActiveByWorkspaceId = async (
 
   return results.map((webhook) => ({
     ...webhook,
-    events: JSON.parse(webhook.events) as WebhookEvent[],
+    events: parseEvents(webhook.events),
   }));
 };
 
