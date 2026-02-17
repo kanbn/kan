@@ -7,6 +7,7 @@ import { webhookEvents } from "@kan/db/schema";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
+import { webhookUrlSchema } from "../utils/webhook";
 
 const webhookEventSchema = z.enum(webhookEvents);
 
@@ -76,7 +77,7 @@ export const webhookRouter = createTRPCRouter({
       z.object({
         workspacePublicId: z.string().min(12),
         name: z.string().min(1).max(255),
-        url: z.string().url().max(2048),
+        url: webhookUrlSchema,
         secret: z.string().max(512).optional(),
         events: z.array(webhookEventSchema).min(1),
       }),
@@ -147,7 +148,7 @@ export const webhookRouter = createTRPCRouter({
         workspacePublicId: z.string().min(12),
         webhookPublicId: z.string().min(12),
         name: z.string().min(1).max(255).optional(),
-        url: z.string().url().max(2048).optional(),
+        url: webhookUrlSchema.optional(),
         secret: z.string().max(512).optional(),
         events: z.array(webhookEventSchema).min(1).optional(),
         active: z.boolean().optional(),
