@@ -1,25 +1,23 @@
-ARG NODE_VERSION=20
-ARG APP_DIRNAME=web
-ARG PROJECT=@kan/web
+# syntax=docker/dockerfile:1.7
 
-# 1. Alpine image
+ARG NODE_VERSION=20
+ARG DISTROLESS_NODE_IMAGE=gcr.io/distroless/nodejs${NODE_VERSION}-debian12
+
+# ============================================
+# Stage 1: Alpine base with pnpm and turbo
+# ============================================
 FROM node:${NODE_VERSION}-alpine AS alpine
 RUN apk update && \
-    apk add --no-cache --virtual .build-deps libc6-compat python3 make g++ && \
-    rm -rf /var/cache/apk/* /tmp/* || true
+    apk add --no-cache libc6-compat && \
+    rm -rf /var/cache/apk/* /tmp/* || true && \
+    corepack enable && \
+    npm install turbo@2.3.1 --global && \
+    pnpm config set store-dir ~/.pnpm-store
 
-# Setup pnpm and turbo on the alpine base
-FROM alpine AS base
-RUN corepack enable
-# Replace <your-major-version> with the major version installed in your repository. For example:
-# RUN npm install turbo@2.1.3 --global
-RUN npm install turbo@2.3.1 --global
-
-RUN pnpm config set store-dir ~/.pnpm-store
-
-# 2. Prune projects
-FROM base AS pruner
-ARG PROJECT
+# ============================================
+# Stage 2: Prune the monorepo
+# ============================================
+FROM alpine AS pruner
 
 RUN apk add --no-cache git
 
@@ -35,53 +33,89 @@ RUN git fetch --tags --unshallow 2>/dev/null || git fetch --tags 2>/dev/null || 
     echo "unknown") && \
     echo "$AUTO_VERSION" > /app/AUTO_VERSION
 
-RUN turbo prune --scope=${PROJECT} --scope=@kan/db --docker
- 
-# 3. Build the project
-FROM base AS builder
-ARG PROJECT
-ARG APP_VERSION
+RUN turbo prune --scope=@kan/web --scope=@kan/db --docker
 
+# ============================================
+# Stage 3: Install dependencies
+# ============================================
+FROM alpine AS deps
 WORKDIR /app
 
 COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=pruner /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
 COPY --from=pruner /app/out/json/ .
-COPY --from=pruner /app/AUTO_VERSION /tmp/AUTO_VERSION
 
 ENV CI=true
-
 RUN --mount=type=cache,id=pnpm,target=~/.pnpm-store pnpm install --frozen-lockfile
- 
-COPY --from=pruner /app/out/full/ .
 
-# Use provided APP_VERSION or auto-generated from pruner stage
-RUN VERSION="${APP_VERSION:-$(cat /tmp/AUTO_VERSION 2>/dev/null | tr -d '\n\r' || echo 'unknown')}" && \
-    NEXT_PUBLIC_APP_VERSION="$VERSION" pnpm build --filter=${PROJECT}
-
-# # Copy static files to standalone directory
-# RUN mkdir -p apps/web/.next/standalone/.next && \
-# mv apps/web/public apps/web/.next/standalone/ && \
-# mv apps/web/.next/static apps/web/.next/standalone/.next/
-
-# 4. Final image - runner stage to run the application
-FROM base AS runner
-ARG APP_DIRNAME
- 
-# Don't run production as root
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-USER nextjs
+# ============================================
+# Stage 4: Build the web application
+# ============================================
+FROM alpine AS builder
+ARG APP_VERSION
 
 WORKDIR /app
 
+COPY --from=deps /app/ ./
+COPY --from=pruner /app/out/full/ .
+COPY --from=pruner /app/AUTO_VERSION /tmp/AUTO_VERSION
+
+# Force standalone output for production Docker image
+ENV NEXT_PUBLIC_USE_STANDALONE_OUTPUT=true
+ENV CI=true
+
+RUN VERSION="${APP_VERSION:-$(cat /tmp/AUTO_VERSION 2>/dev/null | tr -d '\n\r' || echo 'unknown')}" && \
+    NEXT_PUBLIC_APP_VERSION="$VERSION" pnpm build --filter=@kan/web
+
+# ============================================
+# Stage 5: Migration image (run-once container)
+# ============================================
+FROM node:${NODE_VERSION}-alpine AS migrate
+WORKDIR /db
+
+COPY packages/db/drizzle.config.ts ./drizzle.config.ts
+COPY packages/db/migrations/ ./migrations/
+
+RUN npm init -y && \
+    npm install drizzle-kit drizzle-orm pg --save-exact && \
+    # Strip unnecessary files from node_modules
+    find node_modules -type f \( \
+      -name '*.d.ts' -o \
+      -name '*.d.mts' -o \
+      -name '*.d.cts' -o \
+      -name '*.map' -o \
+      -name '*.md' -o \
+      -name '*.txt' -o \
+      -name 'LICENSE*' -o \
+      -name 'CHANGELOG*' -o \
+      -name 'README*' -o \
+      -name '.eslint*' -o \
+      -name '.prettier*' -o \
+      -name 'tsconfig*.json' \
+    \) -delete && \
+    find node_modules -type d -empty -delete && \
+    rm -rf /root/.npm /tmp/*
+
+CMD ["npx", "drizzle-kit", "migrate"]
+
+# ============================================
+# Stage 6: Production web image (distroless)
+# ============================================
+FROM ${DISTROLESS_NODE_IMAGE} AS web
+WORKDIR /app
+
 ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
 
-COPY --chown=nextjs:nodejs --from=builder /app/ ./
-WORKDIR /app/apps/${APP_DIRNAME}
+# Copy the standalone Next.js server
+COPY --from=builder /app/apps/web/.next/standalone/ ./
+# Copy static assets and public files
+COPY --from=builder /app/apps/web/.next/static/ ./apps/web/.next/static/
+COPY --from=builder /app/apps/web/public/ ./apps/web/public/
 
-ARG PORT=3000
-ENV PORT=${PORT}
-EXPOSE ${PORT}
+# Copy bootstrap script for runtime env var injection
+COPY apps/web/bootstrap.cjs ./bootstrap.cjs
 
-CMD ["sh", "-c", "if [ -n \"$POSTGRES_URL\" ]; then cd /app && pnpm db:migrate && cd /app/apps/web; fi && pnpm start"]
+EXPOSE 3000
+CMD ["bootstrap.cjs"]

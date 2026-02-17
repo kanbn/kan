@@ -16,6 +16,18 @@ const config = {
       : undefined,
   reactStrictMode: true,
 
+  /** Exclude build tools and dev-only packages from the standalone output */
+  outputFileTracingExcludes: {
+    "**/*": [
+      "@esbuild/**",
+      "esbuild/**",
+      "typescript/**",
+      "webpack/**",
+      "uglify-js/**",
+      "terser/**",
+    ],
+  },
+
   /** Enables hot reloading for local packages without a build step */
   transpilePackages: [
     "@kan/api",
@@ -51,8 +63,8 @@ const config = {
           hostname: "*.googleusercontent.com",
         },
         {
-          protocol: 'https',
-          hostname: 'cdn.discordapp.com',
+          protocol: "https",
+          hostname: "cdn.discordapp.com",
         },
       ];
 
