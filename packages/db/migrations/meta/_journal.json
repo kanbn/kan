@@ -190,6 +190,13 @@
       "when": 1770521594167,
       "tag": "20260208033314_AddAttachmentToActivity",
       "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "7",
+      "when": 1771192000000,
+      "tag": "20260129210000_AddWorkspaceWebhooks",
+      "breakpoints": true
     }
   ]
 }
