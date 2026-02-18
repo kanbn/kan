@@ -57,39 +57,69 @@ The easiest way to deploy Kan is through Railway. We've partnered with Railway t
 
 ### Docker Compose
 
-Alternatively, you can self-host Kan with Docker Compose. This will set up everything for you including your postgres database.
+Alternatively, you can self-host Kan with Docker Compose. This will set up everything for you including your postgres database and automatically run migrations.
 
-1. Create a new file called `docker-compose.yml` and paste the following configuration:
+1. Create a `.env` file with your environment variables (see [Environment Variables](#environment-variables-) section below)
+
+2. Use the provided `docker-compose.yml` file or create your own with the following configuration:
 
 ```yaml
 services:
+  migrate:
+    image: ghcr.io/kanbn/kan-migrate:latest
+    container_name: kan-migrate
+    networks:
+      - kan-network
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+      target: migrate
+    environment:
+      - POSTGRES_URL=${POSTGRES_URL}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
   web:
     image: ghcr.io/kanbn/kan:latest
     container_name: kan-web
     ports:
-      - "3000:3000"
+      - "${WEB_PORT:-3000}:3000"
     networks:
       - kan-network
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+      target: web
+    env_file:
+      - .env
     environment:
-      NEXT_PUBLIC_BASE_URL: http://localhost:3000
-      BETTER_AUTH_SECRET: your_auth_secret
-      POSTGRES_URL: postgresql://kan:your_postgres_password@postgres:5432/kan_db
-      NEXT_PUBLIC_ALLOW_CREDENTIALS: true
+      - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+      - POSTGRES_URL=${POSTGRES_URL}
+      - NEXT_PUBLIC_ALLOW_CREDENTIALS=true
     depends_on:
-      - postgres
+      migrate:
+        condition: service_completed_successfully
     restart: unless-stopped
 
   postgres:
     image: postgres:15
     container_name: kan-db
     environment:
-      POSTGRES_DB: kan_db
-      POSTGRES_USER: kan
-      POSTGRES_PASSWORD: your_postgres_password
+      - POSTGRES_DB=kan_db
+      - POSTGRES_USER=kan
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - 5432:5432
     volumes:
       - kan_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kan -d kan_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     restart: unless-stopped
     networks:
       - kan-network
@@ -101,23 +131,23 @@ volumes:
   kan_postgres_data:
 ```
 
-2. Start the containers in detached mode:
+3. Start the containers in detached mode:
 
 ```bash
 docker compose up -d
 ```
 
-3. Access Kan at http://localhost:3000
+The `migrate` service will automatically run database migrations before the web service starts. The application will be available at http://localhost:3000 (or the port specified in `WEB_PORT`).
 
-The application will be running in the background. You can manage the containers using these commands:
+**Managing containers:**
 
 - To stop the containers: `docker compose down`
 - To view logs: `docker compose logs -f`
+- To view logs for a specific service: `docker compose logs -f web` or `docker compose logs -f migrate`
 - To restart the containers: `docker compose restart`
+- To rebuild after code changes: `docker compose up -d --build`
 
-For the complete Docker Compose configuration, see [docker-compose.yml](./docker-compose.yml) in the repository.
-
-> **Note**: The Docker Compose configuration shown above is a minimal example. For a complete setup with all features (email, OAuth, file uploads, etc.), you'll need to create a `.env` file with the required environment variables. See the Environment Variables section below for the full list of available options.
+For the complete Docker Compose configuration with all optional features, see [docker-compose.yml](./docker-compose.yml) in the repository.
 
 ## Local Development 🧑‍💻
 
