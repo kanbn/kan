@@ -1,7 +1,7 @@
 services:
   migrator:
     image: ghcr.io/kanbn/kan-migrate:latest
-    container_name: ${CONTAINER_NAME:-kan-migrate}
+    container_name: ${MIGRATOR_CONTAINER_NAME:-kan-migrate}
     build:
       context: .
       dockerfile: ./apps/web/Dockerfile
