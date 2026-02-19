@@ -19,7 +19,7 @@ jobs:
         uses: lingodotdev/lingo.dev@main
         with:
           api-key: ${{ secrets.LINGODOTDEV_API_KEY }}
-          commit-message: chore: update translations
+          commit-message: "chore: update translations"
           working-directory: apps/web
           parallel: true
       
