@@ -9,13 +9,9 @@ on:
   schedule:
     - cron: "21 21 * * *"
   push:
-    branches: ["main"]
-    # Publish semver tags as releases.
+    # Only trigger on tags (releases), not main branch pushes
+    # Main branch builds are handled by workflow_run after Translate completes
     tags: ["v*.*.*"]
-    # Exclude translation files - those are handled by workflow_run after Translate completes
-    paths-ignore:
-      - 'apps/web/src/locales/**/*.po'
-      - 'apps/web/src/locales/**/*.ts'
   pull_request:
     branches: ["main"]
   workflow_run:
