@@ -12,8 +12,18 @@ on:
     branches: ["main"]
     # Publish semver tags as releases.
     tags: ["v*.*.*"]
+    # Exclude translation files - those are handled by workflow_run after Translate completes
+    paths-ignore:
+      - 'apps/web/src/locales/**/*.po'
+      - 'apps/web/src/locales/**/*.ts'
   pull_request:
     branches: ["main"]
+  workflow_run:
+    workflows: ["Translate"]
+    types: [completed]
+    branches: [main]
+    # Docker builds after Translate completes (success or failure)
+    # This ensures Docker always has the latest translations
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -23,6 +33,9 @@ env:
 
 jobs:
   build:
+    concurrency:
+      group: docker-build-${{ github.ref }}
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     permissions:
       contents: read

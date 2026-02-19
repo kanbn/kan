@@ -22,7 +22,7 @@ jobs:
       
       - name: Extract translations
         working-directory: apps/web
-        run: npx @lingui/cli extract
+        run: npx --yes @lingui/cli extract
       
       - name: Lingo.dev
         uses: lingodotdev/lingo.dev@main
@@ -30,16 +30,20 @@ jobs:
           api-key: ${{ secrets.LINGODOTDEV_API_KEY }}
           commit-message: "chore: update translations"
           working-directory: apps/web
+          commit-author-name: "${{ github.actor }}"
+          commit-author-email: "${{ github.actor }}@users.noreply.github.com"
           parallel: true
       
       - name: Compile translations
         working-directory: apps/web
-        run: npx @lingui/cli compile --typescript
+        run: npx --yes @lingui/cli compile --typescript
       
       - name: Commit compiled translations
         run: |
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
           git config --local user.name "${{ github.actor }}"
-          git add apps/web/src/locales/*/messages.ts
-          git diff --staged --quiet || git commit -m "chore: compile translations"
-          git push
+          if ls apps/web/src/locales/*/messages.ts 1> /dev/null 2>&1; then
+            git add apps/web/src/locales/*/messages.ts
+            git diff --staged --quiet || (git commit -m "chore: compile translations" && git push)
+          fi
+
