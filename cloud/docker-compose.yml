@@ -3,7 +3,7 @@ services:
     image: ghcr.io/kanbn/kan-migrate:latest
     container_name: ${MIGRATOR_CONTAINER_NAME:-kan-migrate}
     build:
-      context: .
+      context: ..
       dockerfile: apps/web/Dockerfile
       target: migrate
     networks:
@@ -22,6 +22,7 @@ services:
     build:
       context: ..
       dockerfile: apps/web/Dockerfile
+      target: web
       args:
         APP_VERSION: ${APP_VERSION:-}
     env_file:
