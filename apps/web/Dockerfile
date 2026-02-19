@@ -69,8 +69,11 @@ RUN VERSION="${APP_VERSION:-$(cat /tmp/AUTO_VERSION 2>/dev/null | tr -d '\n\r' |
 
 # ============================================
 # Stage 5: Migration image (run-once container)
+# Note: Use a Debian-based Node image instead of Alpine here because
+# Alpine under QEMU has caused Illegal instruction (signal 4) crashes
+# during npm installs on arm64 multi-arch builds.
 # ============================================
-FROM node:${NODE_VERSION}-alpine AS migrate
+FROM node:${NODE_VERSION}-bullseye-slim AS migrate
 WORKDIR /db
 
 COPY packages/db/drizzle.config.ts ./drizzle.config.ts
