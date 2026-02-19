@@ -19,6 +19,7 @@ interface UsePermissionsResult {
   canCreateBoard: boolean;
   canEditBoard: boolean;
   canDeleteBoard: boolean;
+  canArchiveBoard: boolean;
   canViewComment: boolean;
   canCreateComment: boolean;
   canEditComment: boolean;
@@ -33,7 +34,7 @@ interface UsePermissionsResult {
 export function usePermissions(): UsePermissionsResult {
   // Check if WorkspaceProvider is available (for public board views, it may not be)
   const workspaceContext = useContext(WorkspaceContext);
-  
+
   // If WorkspaceProvider is not available, return safe defaults
   if (!workspaceContext) {
     const emptyPermissions: UsePermissionsResult = {
@@ -51,6 +52,7 @@ export function usePermissions(): UsePermissionsResult {
       canCreateBoard: false,
       canEditBoard: false,
       canDeleteBoard: false,
+      canArchiveBoard: false,
       canViewComment: false,
       canCreateComment: false,
       canEditComment: false,
@@ -95,6 +97,7 @@ export function usePermissions(): UsePermissionsResult {
     canCreateBoard: hasPermission("board:create"),
     canEditBoard: hasPermission("board:edit"),
     canDeleteBoard: hasPermission("board:delete"),
+    canArchiveBoard: hasPermission("board:edit"),
     canViewComment: hasPermission("comment:view"),
     canCreateComment: hasPermission("comment:create"),
     canEditComment: hasPermission("comment:edit"),

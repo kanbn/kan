@@ -44,7 +44,7 @@ export const getAllByWorkspaceId = async (
   db: dbClient,
   workspaceId: number,
   userId: string,
-  opts?: { type?: "regular" | "template" },
+  opts?: { type?: "regular" | "template"; archived?: boolean },
 ) => {
   const boardsData = await db.query.boards.findMany({
     columns: {
@@ -78,6 +78,7 @@ export const getAllByWorkspaceId = async (
       eq(boards.workspaceId, workspaceId),
       isNull(boards.deletedAt),
       opts?.type ? eq(boards.type, opts.type) : undefined,
+      opts?.archived !== undefined ? eq(boards.isArchived, opts.archived) : undefined,
     ),
   });
 
@@ -102,6 +103,7 @@ export const getIdByPublicId = async (db: dbClient, boardPublicId: string) => {
     columns: {
       id: true,
       type: true,
+      isArchived: true,
     },
     where: eq(boards.publicId, boardPublicId),
   });
@@ -195,6 +197,7 @@ export const getByPublicId = async (
       name: true,
       slug: true,
       visibility: true,
+      isArchived: true,
     },
     with: {
       userFavorites: {
@@ -628,6 +631,7 @@ export const update = async (
     slug: string | undefined;
     visibility: BoardVisibilityStatus | undefined;
     boardPublicId: string;
+    isArchived?: boolean;
   },
 ) => {
   const [result] = await db
@@ -637,6 +641,7 @@ export const update = async (
       slug: boardInput.slug,
       visibility: boardInput.visibility,
       updatedAt: new Date(),
+      ...(boardInput.isArchived !== undefined && { isArchived: boardInput.isArchived })
     })
     .where(eq(boards.publicId, boardInput.boardPublicId))
     .returning({

@@ -7,7 +7,7 @@ import {
   HiOutlineStar,
   HiStar,
 } from "react-icons/hi2";
-
+import { IoArchiveOutline } from "react-icons/io5";
 import Dropdown from "~/components/Dropdown";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
@@ -17,34 +17,30 @@ import { api } from "~/utils/api";
 export default function BoardDropdown({
   isTemplate,
   isLoading,
+  isArchived,
   boardPublicId,
+  workspacePublicId,
   isFavorite,
   boardName,
 }: {
   isTemplate: boolean;
   isLoading: boolean;
   boardPublicId: string;
+  workspacePublicId: string;
+  isArchived?: boolean;
   isFavorite?: boolean;
   boardName?: string;
 }) {
   const { openModal } = useModal();
-  const { canEditBoard, canDeleteBoard, canCreateBoard } = usePermissions();
   const { showPopup } = usePopup();
+  const { canEditBoard, canDeleteBoard, canCreateBoard, canArchiveBoard } =
+    usePermissions();
   const utils = api.useUtils();
 
-  const handleToggleFavorite = () => {
-    updateBoard.mutate({
-      boardPublicId,
-      favorite: !isFavorite,
-    });
-  };
-
   const updateBoard = api.board.update.useMutation({
-    onSuccess: (data, variables) => {
+    onSuccess: (_data, variables) => {
       void utils.board.all.invalidate();
       void utils.board.byId.invalidate();
-
-      // Show popup notification
       if (variables.favorite !== undefined) {
         showPopup({
           header: variables.favorite
@@ -65,27 +61,94 @@ export default function BoardDropdown({
       });
     },
   });
-  
+
+  const archiveBoard = api.board.archive.useMutation({
+    onSuccess: () => {
+      void utils.board.all.invalidate({ workspacePublicId });
+      void utils.board.byId.invalidate({ boardPublicId });
+      showPopup({
+        header: t`Board archived`,
+        message: t`The board has been archived.`,
+        icon: "success",
+      });
+    },
+    onError: () => {
+      showPopup({
+        header: t`Unable to archive board`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
+    },
+  });
+
+  const unarchiveBoard = api.board.unarchive.useMutation({
+    onSuccess: () => {
+      void utils.board.all.invalidate({ workspacePublicId });
+      void utils.board.byId.invalidate({ boardPublicId });
+      showPopup({
+        header: t`Board unarchived`,
+        message: t`The board has been unarchived.`,
+        icon: "success",
+      });
+    },
+    onError: () => {
+      showPopup({
+        header: t`Unable to unarchive board`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
+    },
+  });
+
+  const handleToggleFavorite = () => {
+    updateBoard.mutate({
+      boardPublicId,
+      favorite: !isFavorite,
+    });
+  };
+
+  const handleArchiveOrUnarchive = () => {
+    if (isArchived) {
+      unarchiveBoard.mutate({ boardPublicId });
+    } else {
+      archiveBoard.mutate({ boardPublicId });
+    }
+  };
+
+  const isArchiveActionPending =
+    archiveBoard.isPending || unarchiveBoard.isPending;
+
   const items = [
     ...(isTemplate && canCreateBoard
       ? [
-          {
-            label: t`Make template`,
-            action: () => openModal("CREATE_TEMPLATE"),
-            icon: (
-              <HiOutlineDocumentDuplicate className="h-[16px] w-[16px] text-dark-900" />
-            ),
-          },
-        ]
+        {
+          label: t`Make template`,
+          action: () => openModal("CREATE_TEMPLATE"),
+          icon: (
+            <HiOutlineDocumentDuplicate className="h-[16px] w-[16px] text-dark-900" />
+          ),
+        },
+      ]
       : []),
     ...(!isTemplate && canEditBoard
       ? [
-          {
-            label: t`Edit board URL`,
-            action: () => openModal("UPDATE_BOARD_SLUG"),
-            icon: <HiLink className="h-[16px] w-[16px] text-dark-900" />,
-          },
-        ]
+        {
+          label: t`Edit board URL`,
+          action: () => openModal("UPDATE_BOARD_SLUG"),
+          icon: <HiLink className="h-[16px] w-[16px] text-dark-900" />,
+        },
+      ]
+      : []),
+    ...(!isTemplate && canArchiveBoard
+      ? [
+        {
+          label: isArchived ? t`Unarchive board` : t`Archive board`,
+          action: handleArchiveOrUnarchive,
+          icon: (
+            <IoArchiveOutline className="h-[16px] w-[16px] text-dark-900" />
+          ),
+        },
+      ]
       : []),
     {
       label: isFavorite
@@ -100,22 +163,26 @@ export default function BoardDropdown({
     },
     ...(canDeleteBoard
       ? [
-          {
-            label: isTemplate ? t`Delete template` : t`Delete board`,
-            action: () => openModal("DELETE_BOARD"),
-            icon: <HiOutlineTrash className="h-[16px] w-[16px] text-dark-900" />,
-          },
-        ]
+        {
+          label: isTemplate ? t`Delete template` : t`Delete board`,
+          action: () => openModal("DELETE_BOARD"),
+          icon: (
+            <HiOutlineTrash className="h-[16px] w-[16px] text-dark-900" />
+          ),
+        },
+      ]
       : []),
   ];
-  
 
   if (items.length === 0) {
     return null;
   }
 
   return (
-    <Dropdown disabled={isLoading} items={items}>
+    <Dropdown
+      disabled={isLoading || isArchiveActionPending}
+      items={items}
+    >
       <HiEllipsisHorizontal className="h-5 w-5 text-dark-900" />
     </Dropdown>
   );

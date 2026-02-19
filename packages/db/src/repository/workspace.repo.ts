@@ -30,22 +30,22 @@ const SYSTEM_ROLES: {
   description: string;
   hierarchyLevel: number;
 }[] = [
-  {
-    name: "admin",
-    description: "Full access to all workspace features",
-    hierarchyLevel: 100,
-  },
-  {
-    name: "member",
-    description: "Standard member with create and edit permissions",
-    hierarchyLevel: 50,
-  },
-  {
-    name: "guest",
-    description: "View-only access",
-    hierarchyLevel: 10,
-  },
-];
+    {
+      name: "admin",
+      description: "Full access to all workspace features",
+      hierarchyLevel: 100,
+    },
+    {
+      name: "member",
+      description: "Standard member with create and edit permissions",
+      hierarchyLevel: 50,
+    },
+    {
+      name: "guest",
+      description: "View-only access",
+      hierarchyLevel: 10,
+    },
+  ];
 
 export const getCount = async (db: dbClient) => {
   const result = await db
@@ -250,7 +250,7 @@ export const getBySlugWithBoards = (db: dbClient, workspaceSlug: string) => {
           slug: true,
           name: true,
         },
-        where: and(isNull(boards.deletedAt), eq(boards.visibility, "public")),
+        where: and(isNull(boards.deletedAt), eq(boards.visibility, "public"), eq(boards.isArchived, false)),
         orderBy: [asc(boards.name)]
       },
     },
