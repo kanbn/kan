@@ -1,7 +1,9 @@
-import type { LinguiConfig } from "@lingui/conf";
+import { defineConfig } from "@lingui/cli";
+import { formatter } from "@lingui/format-json";
 
-const config: LinguiConfig = {
-  locales: ["en", "fr", "de", "es", "it", "nl", "ru", "pl","pt-BR"],
+
+export default defineConfig({
+  locales: ["en", "fr", "de", "es", "it", "nl", "ru", "pl", "pt-BR"],
   sourceLocale: "en",
   catalogs: [
     {
@@ -10,6 +12,5 @@ const config: LinguiConfig = {
       exclude: ["**/node_modules/**"],
     },
   ],
-};
-
-export default config;
+  format: formatter({ style: "lingui" }),
+});

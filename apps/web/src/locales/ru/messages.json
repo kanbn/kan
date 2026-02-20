@@ -1,0 +1,6051 @@
+{
+  "X0N0PA": {
+    "message": " (edited)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Comment.tsx", 153]],
+    "translation": " (отредактировано)"
+  },
+  "lGjicL": {
+    "message": ", or see our",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 102]],
+    "translation": ", или смотрите нашу"
+  },
+  "J/hVSQ": {
+    "message": "{0}",
+    "placeholders": {
+      "0": ["isTemplate ? \"Templates\" : \"Boards\""]
+    },
+    "comments": [],
+    "origin": [["src/views/boards/index.tsx", 40]],
+    "translation": "{0}"
+  },
+  "JArWcF": {
+    "message": "{0} | {1}",
+    "placeholders": {
+      "0": [
+        "card?.title ?? t`Card`",
+        "isTemplate ? \"Templates\" : \"Boards\""
+      ],
+      "1": ["board?.name ?? t`Board`", "workspace.name ?? t`Workspace`"]
+    },
+    "comments": [],
+    "origin": [
+      ["src/views/boards/index.tsx", 35],
+      ["src/views/card/index.tsx", 309]
+    ],
+    "translation": "{0} | {1}"
+  },
+  "mU+M00": {
+    "message": "{0} has been added to your favorites.",
+    "placeholders": {
+      "0": ["boardName ?? \"Board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 54]],
+    "translation": "{0} добавлен в избранное."
+  },
+  "bDI6VI": {
+    "message": "{0} has been removed from your favorites.",
+    "placeholders": {
+      "0": ["boardName ?? \"Board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 55]],
+    "translation": "{0} удалён из избранного."
+  },
+  "CJukzS": {
+    "message": "{0} labels",
+    "placeholders": {
+      "0": ["labelPublicIds.length"]
+    },
+    "comments": [],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 453]],
+    "translation": "{0} метки"
+  },
+  "9x4DAL": {
+    "message": "{0} not found",
+    "placeholders": {
+      "0": ["isTemplate ? \"Template\" : \"Board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 427]],
+    "translation": "{0} не найдено"
+  },
+  "0xWkkH": {
+    "message": "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}",
+    "placeholders": {
+      "boardCount": ["boardCount"]
+    },
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 299]],
+    "translation": "{boardCount, plural, one {Импортировать доску (1)} few {Импортировать доски ({boardCount})} many {Импортировать досок ({boardCount})} other {Импортировать доски ({boardCount})}}"
+  },
+  "9lFfqv": {
+    "message": "/month",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 207]],
+    "translation": "/месяц"
+  },
+  "be30i9": {
+    "message": "$0",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/PricingTiers.tsx", 30],
+      ["src/views/pricing/components/PricingTiers.tsx", 30]
+    ],
+    "translation": "$0"
+  },
+  "kuoc68": {
+    "message": "$10/month",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 158],
+      ["src/views/members/components/InviteMemberForm.tsx", 170]
+    ],
+    "translation": "$10/месяц"
+  },
+  "F4KRmY": {
+    "message": "$8/month",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 170]],
+    "translation": "$8/месяц"
+  },
+  "zMlxCA": {
+    "message": "1 user",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 82],
+      ["src/views/pricing/components/Pricing.tsx", 36],
+      ["src/views/pricing/components/PricingTiers.tsx", 35]
+    ],
+    "translation": "1 пользователь"
+  },
+  "o8adVG": {
+    "message": "10mb file uploads",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 90]],
+    "translation": "Загрузка файлов до 10 МБ"
+  },
+  "gkxGkF": {
+    "message": "14 day free trial · Switch plans or cancel anytime",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/PricingTiers.tsx", 66],
+      ["src/views/pricing/components/PricingTiers.tsx", 88],
+      ["src/views/pricing/components/PricingTiers.tsx", 263]
+    ],
+    "translation": "14 дней бесплатно · Сменить тариф или отменить в любой момент"
+  },
+  "/rn4RE": {
+    "message": "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/index.tsx", 71]],
+    "translation": "Мощное и гибкое kanban-приложение, которое помогает организовать работу, отслеживать прогресс и достигать результатов — всё в одном месте."
+  },
+  "AeXO77": {
+    "message": "Account",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/SettingsLayout.tsx", 40]],
+    "translation": "Аккаунт"
+  },
+  "TKFUnX": {
+    "message": "Account deleted",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 27]
+    ],
+    "translation": "Аккаунт удалён"
+  },
+  "g9NChz": {
+    "message": "Account manager",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 283]
+    ],
+    "translation": "Менеджер аккаунта"
+  },
+  "7L01XJ": {
+    "message": "Actions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 56]],
+    "translation": "Действия"
+  },
+  "XJOV1Y": {
+    "message": "Activity",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/index.tsx", 447],
+      ["src/views/public/board/CardModal.tsx", 189]
+    ],
+    "translation": "Активность"
+  },
+  "D0esZz": {
+    "message": "Activity log",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 148]
+    ],
+    "translation": "Журнал активности"
+  },
+  "tMYIu7": {
+    "message": "Activity logs",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 110]],
+    "translation": "Журналы активности"
+  },
+  "B3xxao": {
+    "message": "Add a card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/List.tsx", 136]],
+    "translation": "Добавить карточку"
+  },
+  "qtE5nt": {
+    "message": "Add an item...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 141]],
+    "translation": "Добавить элемент..."
+  },
+  "Gxxi5J": {
+    "message": "Add checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Dropdown.tsx", 65]],
+    "translation": "Добавить чек-лист"
+  },
+  "ngBZOd": {
+    "message": "Add comment... (type '/' to open commands or '@' to mention)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/Comment.tsx", 185],
+      ["src/views/card/components/NewCommentForm.tsx", 68]
+    ],
+    "translation": "Добавить комментарий... (введите '/' для открытия команд или '@' для упоминания)"
+  },
+  "gL/7jw": {
+    "message": "Add description... (type '/' to open commands or '@' to mention)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/Editor.tsx", 471]],
+    "translation": "Добавить описание... (введите '/' для открытия команд или '@' для упоминания)"
+  },
+  "abUZlY": {
+    "message": "Add details...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 200]],
+    "translation": "Добавить детали..."
+  },
+  "lyqwgn": {
+    "message": "Add label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/LabelSelector.tsx", 113],
+      ["src/views/card/components/LabelSelector.tsx", 118]
+    ],
+    "translation": "Добавить метку"
+  },
+  "PCIlOO": {
+    "message": "Add member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/MemberSelector.tsx", 134],
+      ["src/views/members/components/InviteMemberForm.tsx", 257]
+    ],
+    "translation": "Добавить участника"
+  },
+  "pBsoKL": {
+    "message": "Add to favorites",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 93]],
+    "translation": "Добавить в избранное"
+  },
+  "bmXKoX": {
+    "message": "added {0} labels: <0>{labelList}</0>",
+    "placeholders": {
+      "0": ["mergedLabels.length"],
+      "labelList": ["labelList"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 102]],
+    "translation": "добавлено {0} меток: <0>{labelList}</0>"
+  },
+  "h4VV67": {
+    "message": "added a checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 132]],
+    "translation": "добавлен чек-лист"
+  },
+  "O83K21": {
+    "message": "added a checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 135]],
+    "translation": "добавлен элемент чек-листа"
+  },
+  "T21jY/": {
+    "message": "added a label to the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 128]],
+    "translation": "добавлена метка на карточку"
+  },
+  "rs7L54": {
+    "message": "added a member to the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 130]],
+    "translation": "добавлен участник в карточку"
+  },
+  "5y6qY8": {
+    "message": "added an attachment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 140]],
+    "translation": "добавлено вложение"
+  },
+  "CujNX4": {
+    "message": "added an attachment <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(filename)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 278]],
+    "translation": "добавлено вложение <0>{0}</0>"
+  },
+  "wakO3W": {
+    "message": "added checklist <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 208]],
+    "translation": "добавлен чек-лист <0>{0}</0>"
+  },
+  "E0t3jO": {
+    "message": "added checklist item <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 232]],
+    "translation": "добавлен элемент чек-листа <0>{0}</0>"
+  },
+  "b5FKyH": {
+    "message": "added label <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(label)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 192]],
+    "translation": "добавлена метка <0>{0}</0>"
+  },
+  "pL78ec": {
+    "message": "Added to favorites",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 51]],
+    "translation": "Добавлено в избранное"
+  },
+  "14Xi3Z": {
+    "message": "Adding a new member will cost an additional {price} ({billingType}) per seat.",
+    "placeholders": {
+      "price": ["price"],
+      "billingType": ["billingType"]
+    },
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 327]],
+    "translation": "Добавление нового участника будет стоить дополнительно {price} ({billingType}) за место."
+  },
+  "D7/JvJ": {
+    "message": "Adjust the square crop to fit your avatar.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/Avatar.tsx", 256]],
+    "translation": "Отрегулируйте квадратную обрезку для вашего аватара."
+  },
+  "U3pytU": {
+    "message": "Admin",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 201]],
+    "translation": "Админ"
+  },
+  "3pIq39": {
+    "message": "Admin roles",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 264],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 265],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 266],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 267],
+      ["src/views/pricing/components/Pricing.tsx", 55]
+    ],
+    "translation": "Роли администратора"
+  },
+  "Kec+/t": {
+    "message": "Advanced admin controls",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 103]],
+    "translation": "Расширенные настройки администратора"
+  },
+  "/jd3aj": {
+    "message": "Advanced admin roles",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 268]
+    ],
+    "translation": "Расширенные роли администратора"
+  },
+  "YRk79X": {
+    "message": "Advanced security, compliance, and dedicated support for large organizations.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 97]],
+    "translation": "Расширенная безопасность, соответствие требованиям и выделенная поддержка для крупных организаций."
+  },
+  "h2ztFt": {
+    "message": "All Free features +",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 56]],
+    "translation": "Все функции Free +"
+  },
+  "nryrgW": {
+    "message": "All member permission overrides have been reset to their role defaults.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 26]],
+    "translation": "Все индивидуальные разрешения участников были сброшены к значениям по умолчанию для их ролей."
+  },
+  "ZAs2NN": {
+    "message": "All Pro features +",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 101]],
+    "translation": "Все функции Pro +"
+  },
+  "UQbwrz": {
+    "message": "All systems operational",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 18]],
+    "translation": "Все системы работают нормально"
+  },
+  "EII/X8": {
+    "message": "All Teams features +",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 79]],
+    "translation": "Все функции Teams +"
+  },
+  "Z3krJD": {
+    "message": "Allow workspace members to see each other's email addresses",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/UpdateWorkspaceEmailVisibilityForm.tsx",
+        47
+      ]
+    ],
+    "translation": "Разрешить участникам рабочего пространства видеть электронные адреса друг друга"
+  },
+  "WnEwDO": {
+    "message": "Already have an account? <0><1>Sign in</1></0>",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/signup/index.tsx", 88]],
+    "translation": "Уже есть аккаунт? <0><1>Войти</1></0>"
+  },
+  "WmPhYW": {
+    "message": "An error occurred while disconnecting your Trello account.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 61]],
+    "translation": "Произошла ошибка при отключении вашей учетной записи Trello."
+  },
+  "ZXSPJt": {
+    "message": "An unexpected error occurred. Please try again later.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 90]
+    ],
+    "translation": "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже."
+  },
+  "3bqt9U": {
+    "message": "Anyone with this link can join your workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 311]],
+    "translation": "Любой, у кого есть эта ссылка, может присоединиться к вашему рабочему пространству"
+  },
+  "OZtEcz": {
+    "message": "API",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SettingsLayout.tsx", 64],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 237]
+    ],
+    "translation": "API"
+  },
+  "ECJKc4": {
+    "message": "API key created",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 91]],
+    "translation": "Ключ API создан"
+  },
+  "pFKC6A": {
+    "message": "API key name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 161]],
+    "translation": "Имя ключа API"
+  },
+  "nq7q3Z": {
+    "message": "API key name cannot exceed 30 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 25]],
+    "translation": "Имя ключа API не может превышать 30 символов"
+  },
+  "vbskQn": {
+    "message": "API key name is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 24]],
+    "translation": "Требуется имя ключа API"
+  },
+  "5h8ooz": {
+    "message": "API keys",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/ApiSettings.tsx", 22]],
+    "translation": "Ключи API"
+  },
+  "j2+d/o": {
+    "message": "API Reference",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 31]],
+    "translation": "Справочник по API"
+  },
+  "bJZm1W": {
+    "message": "Applicants",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 75]],
+    "translation": "Кандидаты"
+  },
+  "yb/fjw": {
+    "message": "Approval",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 46]],
+    "translation": "Одобрение"
+  },
+  "lo8xBK": {
+    "message": "Are you sure want to remove {entityLabel}?",
+    "placeholders": {
+      "entityLabel": ["entityLabel"]
+    },
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 47]
+    ],
+    "translation": "Вы уверены, что хотите удалить {entityLabel}?"
+  },
+  "BhDZlc": {
+    "message": "Are you sure you want to delete the workspace {0}?",
+    "placeholders": {
+      "0": ["workspace.name"]
+    },
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 62]
+    ],
+    "translation": "Вы уверены, что хотите удалить рабочее пространство {0}?"
+  },
+  "DMeWZD": {
+    "message": "Are you sure you want to delete this {0}?",
+    "placeholders": {
+      "0": ["isTemplate ? \"template\" : \"board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/board/components/DeleteBoardConfirmation.tsx", 36]],
+    "translation": "Вы уверены, что хотите удалить этот объект {0}?"
+  },
+  "ZT4Khw": {
+    "message": "Are you sure you want to delete this card?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 75]],
+    "translation": "Вы уверены, что хотите удалить эту карточку?"
+  },
+  "Fpci8b": {
+    "message": "Are you sure you want to delete this checklist?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 56]
+    ],
+    "translation": "Вы уверены, что хотите удалить этот чек-лист?"
+  },
+  "PRjvDT": {
+    "message": "Are you sure you want to delete this comment?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/DeleteCommentConfirmation.tsx", 66]],
+    "translation": "Вы уверены, что хотите удалить этот комментарий?"
+  },
+  "kECVpo": {
+    "message": "Are you sure you want to delete this label?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/DeleteLabelConfirmation.tsx", 41]],
+    "translation": "Вы уверены, что хотите удалить эту метку?"
+  },
+  "74F7N/": {
+    "message": "Are you sure you want to delete your account?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 54]
+    ],
+    "translation": "Вы уверены, что хотите удалить свой аккаунт?"
+  },
+  "PyYD/v": {
+    "message": "assigned <0>{0}</0> to the card",
+    "placeholders": {
+      "0": ["truncate(displayName)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 172]],
+    "translation": "назначено <0>{0}</0> на карточку"
+  },
+  "JUce1S": {
+    "message": "Assignees",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 199]
+    ],
+    "translation": "Исполнители"
+  },
+  "iVIGZb": {
+    "message": "Attachment uploaded",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 45]],
+    "translation": "Вложение загружено"
+  },
+  "1rWxEw": {
+    "message": "Awaiting Customer",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 59]],
+    "translation": "Ожидание клиента"
+  },
+  "KNKCTb": {
+    "message": "Backlog",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 23]],
+    "translation": "Бэклог"
+  },
+  "Vt50G1": {
+    "message": "Basic Kanban",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 16]],
+    "translation": "Базовый канбан"
+  },
+  "Pat4r8": {
+    "message": "Basic Roadmap",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 28]],
+    "translation": "Базовый роадмап"
+  },
+  "Cd4sTD": {
+    "message": "Best for individuals and solo creators getting started",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 32]],
+    "translation": "Лучше всего подходит для индивидуальных пользователей и соло-креаторов, начинающих работу"
+  },
+  "wsy94z": {
+    "message": "Best for large organizations with advanced needs",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 98]],
+    "translation": "Лучше всего подходит для крупных организаций с расширенными потребностями"
+  },
+  "UoSI+i": {
+    "message": "Best for small and growing teams that need collaboration",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 53]],
+    "translation": "Лучше всего подходит для небольших и развивающихся команд, которым нужна совместная работа"
+  },
+  "qaS+1/": {
+    "message": "Best for teams that want to scale without limits",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 76]],
+    "translation": "Лучше всего подходит для команд, которые хотят масштабироваться без ограничений"
+  },
+  "ARvBT/": {
+    "message": "billed annually",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 171]],
+    "translation": "оплата ежегодно"
+  },
+  "+VoTOr": {
+    "message": "billed monthly",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 171]],
+    "translation": "оплата ежемесячно"
+  },
+  "R+w/Va": {
+    "message": "Billing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SettingsLayout.tsx", 57],
+      ["src/views/boards/components/TemplateBoards.tsx", 68],
+      ["src/views/settings/BillingSettings.tsx", 39]
+    ],
+    "translation": "Выставление счетов"
+  },
+  "9wdpwp": {
+    "message": "Billing portal",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/BillingSettings.tsx", 49]],
+    "translation": "Портал выставления счетов"
+  },
+  "4RoY9J": {
+    "message": "Blog Post",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 50]],
+    "translation": "Блог-пост"
+  },
+  "QD8opX": {
+    "message": "Board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/index.tsx", 400],
+      ["src/views/card/index.tsx", 309],
+      ["src/views/public/board/index.tsx", 125]
+    ],
+    "translation": "Доска"
+  },
+  "YhvWXb": {
+    "message": "Board analytics",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 349],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 83]
+    ],
+    "translation": "Аналитика доски"
+  },
+  "wewm3j": {
+    "message": "Board name cannot exceed 100 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 23]],
+    "translation": "Название доски не может превышать 100 символов"
+  },
+  "R1c3Mq": {
+    "message": "Board name is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 22]],
+    "translation": "Требуется указать название доски"
+  },
+  "jwI32v": {
+    "message": "Board not found",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/public/board/index.tsx", 181]],
+    "translation": "Доска не найдена"
+  },
+  "XNxYxq": {
+    "message": "Board templates",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 116]
+    ],
+    "translation": "Шаблоны досок"
+  },
+  "Xid3K6": {
+    "message": "Board URL can only contain letters, numbers, and hyphens",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 46]],
+    "translation": "URL доски может содержать только буквы, цифры и дефисы"
+  },
+  "gv5kbo": {
+    "message": "Board URL cannot exceed 60 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 44]],
+    "translation": "URL доски не может превышать 60 символов"
+  },
+  "8+BY11": {
+    "message": "Board URL copied to clipboard",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/UpdateBoardSlugButton.tsx", 82],
+      ["src/views/public/board/index.tsx", 79]
+    ],
+    "translation": "URL доски скопирован в буфер обмена"
+  },
+  "TmvrjU": {
+    "message": "Board URL must be at least 3 characters long",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 42]],
+    "translation": "URL доски должен содержать не менее 3 символов"
+  },
+  "qzdST2": {
+    "message": "Board visibility",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Features.tsx", 85],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 132]
+    ],
+    "translation": "Видимость доски"
+  },
+  "PTzsxH": {
+    "message": "Board visibility updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 49]],
+    "translation": "Видимость доски обновлена"
+  },
+  "8TveY+": {
+    "message": "Boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SideNavigation.tsx", 99],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 73]
+    ],
+    "translation": "Доски"
+  },
+  "ZDo4HN": {
+    "message": "Brainstorming",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 42]],
+    "translation": "Мозговой штурм"
+  },
+  "vXemf6": {
+    "message": "Bug",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 24]],
+    "translation": "Баг"
+  },
+  "/asTmx": {
+    "message": "Bug Report",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 64]],
+    "translation": "Отчёт о баге"
+  },
+  "t6FvJH": {
+    "message": "Can add comments",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 146],
+      ["src/views/settings/components/RolePermissions.tsx", 35]
+    ],
+    "translation": "Можно добавлять комментарии"
+  },
+  "N3380t": {
+    "message": "Can create boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 131],
+      ["src/views/settings/components/RolePermissions.tsx", 20]
+    ],
+    "translation": "Можно создавать доски"
+  },
+  "6zeSBB": {
+    "message": "Can create cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 141],
+      ["src/views/settings/components/RolePermissions.tsx", 30]
+    ],
+    "translation": "Можно создавать карточки"
+  },
+  "8Z4pNX": {
+    "message": "Can create lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 136],
+      ["src/views/settings/components/RolePermissions.tsx", 25]
+    ],
+    "translation": "Можно создавать списки"
+  },
+  "pXVFJy": {
+    "message": "Can delete boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 133],
+      ["src/views/settings/components/RolePermissions.tsx", 22]
+    ],
+    "translation": "Можно удалять доски"
+  },
+  "jNuzV/": {
+    "message": "Can delete cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 143],
+      ["src/views/settings/components/RolePermissions.tsx", 32]
+    ],
+    "translation": "Можно удалять карточки"
+  },
+  "STSYcd": {
+    "message": "Can delete comments",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 148],
+      ["src/views/settings/components/RolePermissions.tsx", 37]
+    ],
+    "translation": "Можно удалять комментарии"
+  },
+  "RSGOS1": {
+    "message": "Can delete lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 138],
+      ["src/views/settings/components/RolePermissions.tsx", 27]
+    ],
+    "translation": "Можно удалять списки"
+  },
+  "Cmudpi": {
+    "message": "Can delete workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 127],
+      ["src/views/settings/components/RolePermissions.tsx", 16]
+    ],
+    "translation": "Можно удалить рабочее пространство"
+  },
+  "tHcbLF": {
+    "message": "Can edit boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 132],
+      ["src/views/settings/components/RolePermissions.tsx", 21]
+    ],
+    "translation": "Можно редактировать доски"
+  },
+  "I+AROe": {
+    "message": "Can edit cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 142],
+      ["src/views/settings/components/RolePermissions.tsx", 31]
+    ],
+    "translation": "Можно редактировать карточки"
+  },
+  "TYli1B": {
+    "message": "Can edit comments",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 147],
+      ["src/views/settings/components/RolePermissions.tsx", 36]
+    ],
+    "translation": "Можно редактировать комментарии"
+  },
+  "rtbVvN": {
+    "message": "Can edit lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 137],
+      ["src/views/settings/components/RolePermissions.tsx", 26]
+    ],
+    "translation": "Можно редактировать списки"
+  },
+  "J5pbP6": {
+    "message": "Can edit member roles and permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 152],
+      ["src/views/settings/components/RolePermissions.tsx", 41]
+    ],
+    "translation": "Можно редактировать роли и права участников"
+  },
+  "iLbjv+": {
+    "message": "Can edit workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 126],
+      ["src/views/settings/components/RolePermissions.tsx", 15]
+    ],
+    "translation": "Можно редактировать рабочее пространство"
+  },
+  "ALhEZV": {
+    "message": "Can invite members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 151],
+      ["src/views/settings/components/RolePermissions.tsx", 40]
+    ],
+    "translation": "Может приглашать участников"
+  },
+  "qQXocp": {
+    "message": "Can manage workspace settings",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 128],
+      ["src/views/settings/components/RolePermissions.tsx", 17]
+    ],
+    "translation": "Может управлять настройками рабочего пространства"
+  },
+  "IFgUX6": {
+    "message": "Can remove members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 153],
+      ["src/views/settings/components/RolePermissions.tsx", 42]
+    ],
+    "translation": "Может удалять участников"
+  },
+  "MKAScN": {
+    "message": "Can view boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 130],
+      ["src/views/settings/components/RolePermissions.tsx", 19]
+    ],
+    "translation": "Может просматривать доски"
+  },
+  "zoEbXq": {
+    "message": "Can view cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 140],
+      ["src/views/settings/components/RolePermissions.tsx", 29]
+    ],
+    "translation": "Может просматривать карточки"
+  },
+  "wqkcin": {
+    "message": "Can view comments",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 145],
+      ["src/views/settings/components/RolePermissions.tsx", 34]
+    ],
+    "translation": "Может просматривать комментарии"
+  },
+  "HVIzNO": {
+    "message": "Can view lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 135],
+      ["src/views/settings/components/RolePermissions.tsx", 24]
+    ],
+    "translation": "Может просматривать списки"
+  },
+  "0KjpAr": {
+    "message": "Can view members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 150],
+      ["src/views/settings/components/RolePermissions.tsx", 39]
+    ],
+    "translation": "Может просматривать участников"
+  },
+  "SNfg0e": {
+    "message": "Can view workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 125],
+      ["src/views/settings/components/RolePermissions.tsx", 14]
+    ],
+    "translation": "Может просматривать рабочее пространство"
+  },
+  "dEgA5A": {
+    "message": "Cancel",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/DeleteLabelConfirmation.tsx", 49],
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 176],
+      ["src/views/board/components/DeleteBoardConfirmation.tsx", 44],
+      ["src/views/card/components/Comment.tsx", 195],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 86],
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 64],
+      ["src/views/card/components/DeleteCommentConfirmation.tsx", 77],
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 55],
+      ["src/views/settings/components/Avatar.tsx", 287],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 168],
+      [
+        "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
+        40
+      ],
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 88],
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 98],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 106]
+    ],
+    "translation": "Отмена"
+  },
+  "kryGs+": {
+    "message": "Card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/index.tsx", 309]],
+    "translation": "Карточка"
+  },
+  "fEY2vP": {
+    "message": "Card not found",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/index.tsx", 355],
+      ["src/views/card/index.tsx", 392]
+    ],
+    "translation": "Карточка не найдена"
+  },
+  "ZH7TVS": {
+    "message": "Card title",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 319]],
+    "translation": "Название карточки"
+  },
+  "rQXTmd": {
+    "message": "Card URL copied to clipboard",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/Dropdown.tsx", 44],
+      ["src/views/public/board/CardModal.tsx", 38]
+    ],
+    "translation": "URL карточки скопирован в буфер обмена"
+  },
+  "VhMDMg": {
+    "message": "Change Password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/AccountSettings.tsx", 77],
+      ["src/views/settings/AccountSettings.tsx", 87],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 109],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 178]
+    ],
+    "translation": "Сменить пароль"
+  },
+  "yD3ZSw": {
+    "message": "Change your language preferences.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 52]],
+    "translation": "Измените языковые настройки."
+  },
+  "gZxH/p": {
+    "message": "changed the due date to <0>{formattedDate}</0>",
+    "placeholders": {
+      "formattedDate": ["formattedDate"]
+    },
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/ActivityList.tsx", 303],
+      ["src/views/card/components/ActivityList.tsx", 317]
+    ],
+    "translation": "изменил(а) срок выполнения на <0>{formattedDate}</0>"
+  },
+  "pFGfsR": {
+    "message": "Check out some of our favorite open source projects.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/oss-friends/index.tsx", 61]],
+    "translation": "Ознакомьтесь с нашими любимыми open source проектами."
+  },
+  "5IXWmO": {
+    "message": "Check your inbox",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/auth/login/index.tsx", 43],
+      ["src/views/auth/signup/index.tsx", 69]
+    ],
+    "translation": "Проверьте свой почтовый ящик"
+  },
+  "GnRmu4": {
+    "message": "Checklist name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 119]],
+    "translation": "Название чек-листа"
+  },
+  "EH8IL3": {
+    "message": "Checklists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 108],
+      ["src/views/pricing/components/PricingTiers.tsx", 39]
+    ],
+    "translation": "Чек-листы"
+  },
+  "VHS0aJ": {
+    "message": "Clear all custom permissions?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
+        32
+      ]
+    ],
+    "translation": "Очистить все пользовательские разрешения?"
+  },
+  "xvcYhz": {
+    "message": "Clear any custom member permissions so that all members only inherit permissions from their role defaults.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 67]],
+    "translation": "Очистить все индивидуальные разрешения участников, чтобы все участники наследовали только разрешения по умолчанию для своей роли."
+  },
+  "jL82rC": {
+    "message": "Clear custom permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
+        48
+      ],
+      ["src/views/settings/PermissionsSettings.tsx", 80]
+    ],
+    "translation": "Очистить пользовательские разрешения"
+  },
+  "u8JHrO": {
+    "message": "Clear filters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 227]],
+    "translation": "Сбросить фильтры"
+  },
+  "RRn9jf": {
+    "message": "Click on the link we've sent to {magicLinkRecipient} to sign in.",
+    "placeholders": {
+      "magicLinkRecipient": ["magicLinkRecipient"]
+    },
+    "comments": [],
+    "origin": [
+      ["src/views/auth/login/index.tsx", 48],
+      ["src/views/auth/signup/index.tsx", 74]
+    ],
+    "translation": "Перейдите по ссылке, которую мы отправили на {magicLinkRecipient}, чтобы войти."
+  },
+  "yz7wBu": {
+    "message": "Close",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/index.tsx", 346],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
+      ["src/views/settings/components/NewApiKeyModal.tsx", 136]
+    ],
+    "translation": "Закрыть"
+  },
+  "TcXcmk": {
+    "message": "Code Review",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 23]],
+    "translation": "Code Review"
+  },
+  "EvArWh": {
+    "message": "Collaborate seamlessly with your team.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 91]],
+    "translation": "Бесшовно сотрудничайте с вашей командой."
+  },
+  "dtQIWT": {
+    "message": "Collaboration",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 309]
+    ],
+    "translation": "Сотрудничество"
+  },
+  "AUYALh": {
+    "message": "Coming soon",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 352],
+      ["src/views/home/components/Features.tsx", 67],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 86]
+    ],
+    "translation": "Скоро появится"
+  },
+  "VbyRUy": {
+    "message": "Comments",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Features.tsx", 105],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 156]
+    ],
+    "translation": "Комментарии"
+  },
+  "7i8j3G": {
+    "message": "Company",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 95]],
+    "translation": "Компания"
+  },
+  "bD8I7O": {
+    "message": "Complete",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 94]],
+    "translation": "Завершить"
+  },
+  "cAgBMh": {
+    "message": "Complete control and ownership:",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 70]],
+    "translation": "Полный контроль и владение:"
+  },
+  "Lt+ZP3": {
+    "message": "completed a checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 137]],
+    "translation": "завершил(а) пункт контрольного списка"
+  },
+  "29sSki": {
+    "message": "completed checklist item <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 249]],
+    "translation": "завершён пункт контрольного списка <0>{0}</0>"
+  },
+  "tOZp9v": {
+    "message": "Configurable user roles and permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 82]],
+    "translation": "Настраиваемые роли и права пользователей"
+  },
+  "/f3t6v": {
+    "message": "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 56]],
+    "translation": "Настройте, какие действия разрешены для каждой роли в рабочем пространстве. Эти права применяются ко всем участникам с этой ролью."
+  },
+  "86XI28": {
+    "message": "Confirm your email preferences:",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/unsubscribe/index.tsx", 81]],
+    "translation": "Подтвердите ваши настройки электронной почты:"
+  },
+  "479pdJ": {
+    "message": "Confirm your new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 150]
+    ],
+    "translation": "Подтвердите новый пароль"
+  },
+  "nk7caK": {
+    "message": "Connect Trello",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/ImportBoardsForm.tsx", 157],
+      ["src/views/settings/IntegrationsSettings.tsx", 93]
+    ],
+    "translation": "Подключить Trello"
+  },
+  "sDLCvT": {
+    "message": "Connect your favorite tools to streamline your workflow.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 122]],
+    "translation": "Подключите любимые инструменты, чтобы упростить рабочий процесс."
+  },
+  "5eZwRW": {
+    "message": "Connect your Trello account to import boards.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 80]],
+    "translation": "Подключите ваш аккаунт Trello для импорта досок."
+  },
+  "jfC/xh": {
+    "message": "Contact",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Footer.tsx", 38],
+      ["src/views/home/components/Header.tsx", 42]
+    ],
+    "translation": "Контакты"
+  },
+  "Alp2ti": {
+    "message": "Contact Sales",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 95]],
+    "translation": "Связаться с отделом продаж"
+  },
+  "Bhgd0l": {
+    "message": "Contact us",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/FeedbackModal.tsx", 100],
+      ["src/views/pricing/components/PricingTiers.tsx", 96],
+      ["src/views/pricing/components/PricingTiers.tsx", 96]
+    ],
+    "translation": "Связаться с нами"
+  },
+  "AX4ktp": {
+    "message": "Content Creation",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 40]],
+    "translation": "Создание контента"
+  },
+  "J2Wbjt": {
+    "message": "Continue with ",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 437]],
+    "translation": "Продолжить с "
+  },
+  "gkzAEM": {
+    "message": "Continue with {0}",
+    "placeholders": {
+      "0": ["key === \"oidc\" ? oidcProviderName : provider.name"]
+    },
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 355]],
+    "translation": "Продолжить с {0}"
+  },
+  "va/3u1": {
+    "message": "Control who can view and edit your boards.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 86]],
+    "translation": "Управляйте тем, кто может просматривать и редактировать ваши доски."
+  },
+  "zQPhSa": {
+    "message": "Convert to link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 47]],
+    "translation": "Преобразовать в ссылку"
+  },
+  "5RkSzq": {
+    "message": "Copy board link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugButton.tsx", 87]],
+    "translation": "Скопировать ссылку на доску"
+  },
+  "F0YmUY": {
+    "message": "Copy card link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Dropdown.tsx", 58]],
+    "translation": "Скопировать ссылку на карточку"
+  },
+  "9PaIxv": {
+    "message": "Core features",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 305]
+    ],
+    "translation": "Основные функции"
+  },
+  "b9XOHo": {
+    "message": "Create {0}",
+    "placeholders": {
+      "0": ["isTemplate ? \"template\" : \"board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 166]],
+    "translation": "Создать {0}"
+  },
+  "vgdzLf": {
+    "message": "Create another",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/LabelForm.tsx", 213],
+      ["src/views/board/components/NewCardForm.tsx", 517],
+      ["src/views/board/components/NewListForm.tsx", 141]
+    ],
+    "translation": "Создать ещё одну"
+  },
+  "uXGLuq": {
+    "message": "Create API key",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 175]],
+    "translation": "Создать API-ключ"
+  },
+  "dsLT3m": {
+    "message": "Create card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 527]],
+    "translation": "Создать карточку"
+  },
+  "d33Usy": {
+    "message": "Create checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 135]],
+    "translation": "Создать чек-лист"
+  },
+  "zKY5xi": {
+    "message": "Create invite link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 349]],
+    "translation": "Создать пригласительную ссылку"
+  },
+  "QtACvI": {
+    "message": "Create label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/LabelForm.tsx", 238]],
+    "translation": "Создать метку"
+  },
+  "XTKtey": {
+    "message": "Create list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewListForm.tsx", 153]],
+    "translation": "Создать список"
+  },
+  "VKoDQD": {
+    "message": "Create new {0}",
+    "placeholders": {
+      "0": ["isTemplate ? \"template\" : \"board\""]
+    },
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/BoardsList.tsx", 79],
+      ["src/views/boards/index.tsx", 28]
+    ],
+    "translation": "Создать новый {0}"
+  },
+  "okpxfB": {
+    "message": "Create new key",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/ApiSettings.tsx", 30]],
+    "translation": "Создать новый ключ"
+  },
+  "0+0/3e": {
+    "message": "Create new label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/NewCardForm.tsx", 415],
+      ["src/views/card/components/LabelSelector.tsx", 100]
+    ],
+    "translation": "Создать новую метку"
+  },
+  "aWlSc/": {
+    "message": "Create new list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/index.tsx", 75],
+      ["src/views/board/index.tsx", 541]
+    ],
+    "translation": "Создать новый список"
+  },
+  "A5hiCy": {
+    "message": "Create template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 132]],
+    "translation": "Создать шаблон"
+  },
+  "FdtSNC": {
+    "message": "Create workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 387],
+      ["src/components/WorkspaceMenu.tsx", 153]
+    ],
+    "translation": "Создать рабочее пространство"
+  },
+  "f8lDFq": {
+    "message": "created the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 124]],
+    "translation": "создал(а) карточку"
+  },
+  "J5nbej": {
+    "message": "Critical",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 24],
+      ["src/views/boards/components/TemplateBoards.tsx", 30],
+      ["src/views/boards/components/TemplateBoards.tsx", 36]
+    ],
+    "translation": "Критично"
+  },
+  "pa9o5D": {
+    "message": "Crop your avatar",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/Avatar.tsx", 253]],
+    "translation": "Обрежьте свой аватар"
+  },
+  "D3C4Yx": {
+    "message": "Current password is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 19]
+    ],
+    "translation": "Требуется текущий пароль"
+  },
+  "nqdIhs": {
+    "message": "Custom board templates",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 38]],
+    "translation": "Пользовательские шаблоны досок"
+  },
+  "A42Dqn": {
+    "message": "Custom branding",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 172],
+      ["src/views/pricing/components/PricingTiers.tsx", 83]
+    ],
+    "translation": "Пользовательский брендинг"
+  },
+  "GAD3Dx": {
+    "message": "Custom domain",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 74]],
+    "translation": "Пользовательский домен"
+  },
+  "2M84k3": {
+    "message": "Custom permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 64]],
+    "translation": "Пользовательские разрешения"
+  },
+  "UirJfL": {
+    "message": "Custom SLA",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 105]],
+    "translation": "Пользовательское SLA"
+  },
+  "u2+JIh": {
+    "message": "Custom URLs require upgrading to a Pro plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 318]],
+    "translation": "Для пользовательских URL требуется переход на тариф Pro"
+  },
+  "7RpHg/": {
+    "message": "Custom username",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 100],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 101]
+    ],
+    "translation": "Пользовательское имя"
+  },
+  "j9IZZ0": {
+    "message": "Custom workspace URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 342],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 76]
+    ],
+    "translation": "Пользовательский URL рабочего пространства"
+  },
+  "OwneeH": {
+    "message": "Custom workspace username",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 81]],
+    "translation": "Пользовательское имя рабочего пространства"
+  },
+  "n+xLOH": {
+    "message": "Customer Support",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 54]],
+    "translation": "Служба поддержки клиентов"
+  },
+  "pvnfJD": {
+    "message": "Dark",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/UserMenu.tsx", 158]],
+    "translation": "Тёмная тема"
+  },
+  "cp1rsD": {
+    "message": "Deactivate invite link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 348]],
+    "translation": "Деактивировать ссылку-приглашение"
+  },
+  "bKzM8L": {
+    "message": "Dedicated account manager",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 104]],
+    "translation": "Выделенный менеджер аккаунта"
+  },
+  "P8Cunr": {
+    "message": "Default username",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 98],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 99]
+    ],
+    "translation": "Имя пользователя по умолчанию"
+  },
+  "cnGeoo": {
+    "message": "Delete",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/DeleteLabelConfirmation.tsx", 51],
+      ["src/components/LabelForm.tsx", 228],
+      ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 52],
+      ["src/views/board/components/DeleteBoardConfirmation.tsx", 47],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 92],
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 67],
+      ["src/views/card/components/DeleteCommentConfirmation.tsx", 83]
+    ],
+    "translation": "Удалить"
+  },
+  "ZDGm40": {
+    "message": "Delete account",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/AccountSettings.tsx", 59],
+      ["src/views/settings/AccountSettings.tsx", 69],
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 96]
+    ],
+    "translation": "Удалить аккаунт"
+  },
+  "tmpW+w": {
+    "message": "Delete board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 104]],
+    "translation": "Удалить доску"
+  },
+  "nabda1": {
+    "message": "Delete card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Dropdown.tsx", 76]],
+    "translation": "Удалить карточку"
+  },
+  "njJFtc": {
+    "message": "Delete comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Comment.tsx", 120]],
+    "translation": "Удалить комментарий"
+  },
+  "lYT7pQ": {
+    "message": "Delete list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/List.tsx", 147]],
+    "translation": "Удалить список"
+  },
+  "DFjdv0": {
+    "message": "Delete template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 104]],
+    "translation": "Удалить шаблон"
+  },
+  "kYu0eF": {
+    "message": "Delete workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 106],
+      ["src/views/settings/WorkspaceSettings.tsx", 115],
+      ["src/views/settings/WorkspaceSettings.tsx", 126]
+    ],
+    "translation": "Удалить рабочее пространство"
+  },
+  "mTGd3+": {
+    "message": "deleted a checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 134]],
+    "translation": "удалил(а) чек-лист"
+  },
+  "W5r8Qh": {
+    "message": "deleted a checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 139]],
+    "translation": "удалил(а) элемент чек-листа"
+  },
+  "BMkVQ3": {
+    "message": "deleted checklist <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(fromTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 224]],
+    "translation": "удалил(а) чек-лист <0>{0}</0>"
+  },
+  "CHZ1jC": {
+    "message": "deleted checklist item <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(fromTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 267]],
+    "translation": "удалил(а) элемент чек-листа <0>{0}</0>"
+  },
+  "f8fH8W": {
+    "message": "Design",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 45]],
+    "translation": "Дизайн"
+  },
+  "YBBifR": {
+    "message": "Disconnect Trello",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 108]],
+    "translation": "Отключить Trello"
+  },
+  "1sRmLC": {
+    "message": "Discuss and collaborate on cards.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 106]],
+    "translation": "Обсуждайте и сотрудничайте по карточкам."
+  },
+  "pfa8F0": {
+    "message": "Display name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 35]],
+    "translation": "Отображаемое имя"
+  },
+  "MlyjJu": {
+    "message": "Display name cannot exceed 280 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 22]],
+    "translation": "Отображаемое имя не может превышать 280 символов"
+  },
+  "KFJgmZ": {
+    "message": "Display name must be at least 3 characters long",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 19]],
+    "translation": "Отображаемое имя должно содержать не менее 3 символов"
+  },
+  "x8GeCD": {
+    "message": "Display name updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 41]],
+    "translation": "Отображаемое имя обновлено"
+  },
+  "evj0lK": {
+    "message": "Do you offer a free plan?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 83]],
+    "translation": "У вас есть бесплатный тариф?"
+  },
+  "jDRt4n": {
+    "message": "Do you want to unsubscribe?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/unsubscribe/index.tsx", 78]],
+    "translation": "Вы хотите отписаться?"
+  },
+  "JyXBgS": {
+    "message": "docs",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 109]],
+    "translation": "документация"
+  },
+  "TbjyhA": {
+    "message": "Docs",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Header.tsx", 20]],
+    "translation": "Документация"
+  },
+  "TvY/XA": {
+    "message": "Documentation",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/UserMenu.tsx", 209],
+      ["src/views/boards/components/TemplateBoards.tsx", 24],
+      ["src/views/boards/components/TemplateBoards.tsx", 30],
+      ["src/views/boards/components/TemplateBoards.tsx", 36],
+      ["src/views/home/components/Footer.tsx", 78],
+      ["src/views/home/components/Header.tsx", 36]
+    ],
+    "translation": "Документация"
+  },
+  "vUr5JT": {
+    "message": "Don't have an account? <0><1>Sign up</1></0>",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/login/index.tsx", 63]],
+    "translation": "Нет аккаунта? <0><1>Зарегистрируйтесь</1></0>"
+  },
+  "DPfwMq": {
+    "message": "Done",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 17],
+      ["src/views/boards/components/TemplateBoards.tsx", 23],
+      ["src/views/boards/components/TemplateBoards.tsx", 29],
+      ["src/views/boards/components/TemplateBoards.tsx", 35],
+      ["src/views/boards/components/TemplateBoards.tsx", 48],
+      ["src/views/boards/components/TemplateBoards.tsx", 61]
+    ],
+    "translation": "Готово"
+  },
+  "R3FsF4": {
+    "message": "Download failed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 142]],
+    "translation": "Не удалось загрузить"
+  },
+  "XicmhT": {
+    "message": "Due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/Filters.tsx", 171],
+      ["src/views/board/components/NewCardForm.tsx", 470],
+      ["src/views/card/index.tsx", 153]
+    ],
+    "translation": "Срок выполнения"
+  },
+  "ri1hHe": {
+    "message": "Due next month",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 132]],
+    "translation": "Срок — в следующем месяце"
+  },
+  "iHcdea": {
+    "message": "Due next week",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 127]],
+    "translation": "Срок — на следующей неделе"
+  },
+  "1iShX0": {
+    "message": "Due today",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 117]],
+    "translation": "Срок — сегодня"
+  },
+  "zxKs+y": {
+    "message": "Due tomorrow",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 122]],
+    "translation": "Срок — завтра"
+  },
+  "ePK91l": {
+    "message": "Edit",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 42]],
+    "translation": "Редактировать"
+  },
+  "tIdipJ": {
+    "message": "Edit board URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/BoardDropdown.tsx", 84],
+      ["src/views/board/components/UpdateBoardSlugForm.tsx", 116]
+    ],
+    "translation": "Изменить URL доски"
+  },
+  "rF8SEQ": {
+    "message": "Edit comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Comment.tsx", 111]],
+    "translation": "Редактировать комментарий"
+  },
+  "dgr4Kq": {
+    "message": "Edit label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/LabelForm.tsx", 119]],
+    "translation": "Редактировать метку"
+  },
+  "TCOMOO": {
+    "message": "Edit permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 162],
+      ["src/views/members/index.tsx", 224]
+    ],
+    "translation": "Изменить права доступа"
+  },
+  "klpSmb": {
+    "message": "Edit workspace URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 162]],
+    "translation": "Изменить URL рабочего пространства"
+  },
+  "PRofO0": {
+    "message": "Edit YouTube Video",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 108]],
+    "translation": "Редактировать видео на YouTube"
+  },
+  "gGx5tM": {
+    "message": "Editing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 44]],
+    "translation": "Редактирование"
+  },
+  "b/LfJo": {
+    "message": "email",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 438]],
+    "translation": "email"
+  },
+  "O3oNi5": {
+    "message": "Email",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 272],
+      ["src/views/settings/AccountSettings.tsx", 42]
+    ],
+    "translation": "Email"
+  },
+  "aW3TOw": {
+    "message": "Email notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 191]
+    ],
+    "translation": "Уведомления по email"
+  },
+  "V1KOLq": {
+    "message": "Email notifications for mentions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 60]],
+    "translation": "Уведомления по email о упоминаниях"
+  },
+  "IqjpYe": {
+    "message": "Email visibility",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 90]],
+    "translation": "Видимость email"
+  },
+  "0+ewPp": {
+    "message": "Enhancement",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 24],
+      ["src/views/boards/components/TemplateBoards.tsx", 30],
+      ["src/views/boards/components/TemplateBoards.tsx", 36]
+    ],
+    "translation": "Улучшение"
+  },
+  "V8YWP3": {
+    "message": "Enter a custom title",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 131]],
+    "translation": "Введите собственный заголовок"
+  },
+  "fR9laE": {
+    "message": "Enter your current password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 122]
+    ],
+    "translation": "Введите текущий пароль"
+  },
+  "O0li0W": {
+    "message": "Enter your current password and choose a new secure password.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 111]
+    ],
+    "translation": "Введите текущий пароль и выберите новый надёжный пароль."
+  },
+  "xRPn3U": {
+    "message": "Enter your email address",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 402]],
+    "translation": "Введите адрес электронной почты"
+  },
+  "n9V+ps": {
+    "message": "Enter your name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 390]],
+    "translation": "Введите имя"
+  },
+  "0StR7t": {
+    "message": "Enter your new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 136]
+    ],
+    "translation": "Введите новый пароль"
+  },
+  "NgaR6B": {
+    "message": "Enter your password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 416]],
+    "translation": "Введите пароль"
+  },
+  "GpB8YV": {
+    "message": "Enterprise",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 334],
+      ["src/views/pricing/components/PricingTiers.tsx", 92]
+    ],
+    "translation": "Enterprise"
+  },
+  "SlfejT": {
+    "message": "Error",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/NewBoardForm.tsx", 77],
+      ["src/views/boards/components/NewBoardForm.tsx", 92],
+      ["src/views/members/components/InviteMemberForm.tsx", 215]
+    ],
+    "translation": "Ошибка"
+  },
+  "55xJ/O": {
+    "message": "Error Changing Password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 89]
+    ],
+    "translation": "Ошибка при смене пароля"
+  },
+  "cji2nM": {
+    "message": "Error creating invite link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 128]],
+    "translation": "Ошибка при создании ссылки-приглашения"
+  },
+  "USVCGU": {
+    "message": "Error deactivating invite link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 144]],
+    "translation": "Ошибка при деактивации ссылки-приглашения"
+  },
+  "bqAQaT": {
+    "message": "Error deleting account",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 39]
+    ],
+    "translation": "Ошибка при удалении аккаунта"
+  },
+  "q+lt9D": {
+    "message": "Error deleting label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/DeleteLabelConfirmation.tsx", 25]],
+    "translation": "Ошибка при удалении метки"
+  },
+  "9s9O5h": {
+    "message": "Error deleting workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 45]
+    ],
+    "translation": "Ошибка при удалении рабочего пространства"
+  },
+  "lKAvEd": {
+    "message": "Error disconnecting Trello",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 60]],
+    "translation": "Ошибка при отключении Trello"
+  },
+  "rarRW/": {
+    "message": "Error inviting member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 97],
+      ["src/views/members/components/InviteMemberForm.tsx", 103]
+    ],
+    "translation": "Ошибка при приглашении участника"
+  },
+  "sVBn4K": {
+    "message": "Error updating display name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 54]],
+    "translation": "Ошибка при обновлении отображаемого имени"
+  },
+  "CkVV1t": {
+    "message": "Error updating workspace description",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 63]
+    ],
+    "translation": "Ошибка при обновлении описания рабочего пространства"
+  },
+  "LoUCpj": {
+    "message": "Error updating workspace name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 58]
+    ],
+    "translation": "Ошибка при обновлении названия рабочего пространства"
+  },
+  "x0kMO/": {
+    "message": "Error updating workspace URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 75]
+    ],
+    "translation": "Ошибка при обновлении URL рабочего пространства"
+  },
+  "YaZDYI": {
+    "message": "Error upgrading subscription",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 240],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 41]
+    ],
+    "translation": "Ошибка при обновлении подписки"
+  },
+  "lsgnzd": {
+    "message": "Error upgrading to Pro",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 145]],
+    "translation": "Ошибка при переходе на Pro"
+  },
+  "CYWHT+": {
+    "message": "Error uploading profile image",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/Avatar.tsx", 69],
+      ["src/views/settings/components/Avatar.tsx", 199]
+    ],
+    "translation": "Ошибка при загрузке изображения профиля"
+  },
+  "8iP0S8": {
+    "message": "Everything in the free plan, plus:",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 52]],
+    "translation": "Всё из бесплатного тарифа, а также:"
+  },
+  "ANyn0x": {
+    "message": "Everything you need, free forever. Unlimited boards, unlimited lists, unlimited cards. Upgrade any time.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 33]],
+    "translation": "Всё, что вам нужно, бесплатно навсегда. Неограниченные доски, списки и карточки. Можно перейти на другой тариф в любой момент."
+  },
+  "t+R8+P": {
+    "message": "Execution",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 91]],
+    "translation": "Выполнение"
+  },
+  "GwNIE2": {
+    "message": "Extended Roadmap",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 34]],
+    "translation": "Расширённая дорожная карта"
+  },
+  "HYV6Lq": {
+    "message": "Failed to accept invitation. Please try again later, or contact customer support.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 41]],
+    "translation": "Не удалось принять приглашение. Пожалуйста, попробуйте позже или обратитесь в службу поддержки."
+  },
+  "lXvXNI": {
+    "message": "Failed to copy invite link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 216]],
+    "translation": "Не удалось скопировать ссылку-приглашение"
+  },
+  "53QYh8": {
+    "message": "Failed to create board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/NewBoardForm.tsx", 78],
+      ["src/views/boards/components/NewBoardForm.tsx", 93]
+    ],
+    "translation": "Не удалось создать доску"
+  },
+  "W8oT+L": {
+    "message": "Failed to fetch video information",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 82]],
+    "translation": "Не удалось получить информацию о видео"
+  },
+  "YtUfwW": {
+    "message": "Failed to login with {0}. Please try again.",
+    "placeholders": {
+      "0": ["provider.at(0)?.toUpperCase() + provider.slice(1)"]
+    },
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 291]],
+    "translation": "Не удалось войти через {0}. Пожалуйста, попробуйте ещё раз."
+  },
+  "ZL1A+p": {
+    "message": "Failed to upload attachment. Please try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 52]],
+    "translation": "Не удалось загрузить вложение. Пожалуйста, попробуйте ещё раз."
+  },
+  "/lDBHm": {
+    "message": "FAQ",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Header.tsx", 41]],
+    "translation": "FAQ"
+  },
+  "aJ4pMe": {
+    "message": "FAQs",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Faqs.tsx", 143],
+      ["src/views/home/components/Footer.tsx", 52]
+    ],
+    "translation": "Часто задаваемые вопросы"
+  },
+  "en3oy5": {
+    "message": "Feature",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 24],
+      ["src/views/boards/components/TemplateBoards.tsx", 30],
+      ["src/views/boards/components/TemplateBoards.tsx", 36]
+    ],
+    "translation": "Функция"
+  },
+  "JCdzgZ": {
+    "message": "Feature Request",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 65]],
+    "translation": "Запрос функции"
+  },
+  "PpZkda": {
+    "message": "Features",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Features.tsx", 132],
+      ["src/views/home/components/Footer.tsx", 50],
+      ["src/views/home/components/Header.tsx", 17],
+      ["src/views/home/components/Header.tsx", 33]
+    ],
+    "translation": "Функции"
+  },
+  "YirHq7": {
+    "message": "Feedback",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/FeedbackModal.tsx", 59],
+      ["src/components/UserMenu.tsx", 217]
+    ],
+    "translation": "Обратная связь"
+  },
+  "2roTVj": {
+    "message": "Feedback sent",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 33]],
+    "translation": "Отзыв отправлен"
+  },
+  "F6m23G": {
+    "message": "File uploads",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 89]],
+    "translation": "Загрузка файлов"
+  },
+  "o7J4JM": {
+    "message": "Filter",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 221]],
+    "translation": "Фильтр"
+  },
+  "l31EoQ": {
+    "message": "Find answers to common questions about Kan. Can't find what you're looking for? Feel free to <0>contact us</0>.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 150]],
+    "translation": "Найдите ответы на часто задаваемые вопросы о Kan. Не нашли то, что искали? Не стесняйтесь <0>связаться с нами</0>."
+  },
+  "+3TYXa": {
+    "message": "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 41]],
+    "translation": "Для долгосрочной устойчивости мы понимаем, что всем хорошим open source-проектам необходим источник дохода. Наш — это платное облачное решение для рабочих пространств с несколькими пользователями и для индивидуальных адресов рабочих пространств. Нет обязательства использовать его — вы можете развернуть ПО на своей инфраструктуре бесплатно."
+  },
+  "2POOFK": {
+    "message": "Free",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 331],
+      ["src/views/pricing/components/Pricing.tsx", 32],
+      ["src/views/pricing/components/Pricing.tsx", 32],
+      ["src/views/pricing/components/PricingTiers.tsx", 26]
+    ],
+    "translation": "Бесплатно"
+  },
+  "uP4V6I": {
+    "message": "Free for everyone",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 31]],
+    "translation": "Бесплатно для всех"
+  },
+  "W/nQk1": {
+    "message": "Free Plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 333],
+      ["src/views/members/index.tsx", 293]
+    ],
+    "translation": "Бесплатный тариф"
+  },
+  "gpfJ3v": {
+    "message": "Free, forever",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 34]],
+    "translation": "Бесплатно, навсегда"
+  },
+  "6uBU1F": {
+    "message": "Full API access",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 239],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 240],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 241]
+    ],
+    "translation": "Полный доступ к API"
+  },
+  "KiVc+q": {
+    "message": "Full-time",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "translation": "Полная занятость"
+  },
+  "rmN315": {
+    "message": "Fun",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "translation": "Весело"
+  },
+  "Weq9zb": {
+    "message": "General",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 54]],
+    "translation": "Общее"
+  },
+  "ZDIydz": {
+    "message": "Get started",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/auth/signup/index.tsx", 69],
+      ["src/views/home/components/Cta.tsx", 61],
+      ["src/views/home/components/Header.tsx", 106],
+      ["src/views/pricing/components/PricingTiers.tsx", 29],
+      ["src/views/pricing/components/PricingTiers.tsx", 50],
+      ["src/views/pricing/components/PricingTiers.tsx", 73]
+    ],
+    "translation": "Начать"
+  },
+  "c3b0B0": {
+    "message": "Get Started",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 31],
+      ["src/views/pricing/components/Pricing.tsx", 49]
+    ],
+    "translation": "Начать"
+  },
+  "6FsGbN": {
+    "message": "Get started by creating a new {0}",
+    "placeholders": {
+      "0": ["isTemplate ? \"template\" : \"board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/boards/components/BoardsList.tsx", 65]],
+    "translation": "Начните с создания нового {0}"
+  },
+  "zC8Whw": {
+    "message": "Get started by creating a new list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 526]],
+    "translation": "Начните с создания нового списка"
+  },
+  "oW13KZ": {
+    "message": "Get started for free today",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Cta.tsx", 54]],
+    "translation": "Начните бесплатно уже сегодня"
+  },
+  "+OhFss": {
+    "message": "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 92]],
+    "translation": "Начните бесплатно, без ограничений по использованию. Для совместной работы выберите тариф, подходящий по размеру вашей команды."
+  },
+  "rD6UIt": {
+    "message": "Get started on Cloud",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/index.tsx", 75]],
+    "translation": "Начать в облаке"
+  },
+  "7hktsm": {
+    "message": "Getting started",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 25]],
+    "translation": "Начало работы"
+  },
+  "RkXlPZ": {
+    "message": "GitHub",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 37]],
+    "translation": "GitHub"
+  },
+  "7eMo+U": {
+    "message": "Go Home",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 113]],
+    "translation": "На главную"
+  },
+  "UveK6V": {
+    "message": "Go to app",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Header.tsx", 100],
+      ["src/views/invite/index.tsx", 144]
+    ],
+    "translation": "Перейти в приложение"
+  },
+  "mgXgHu": {
+    "message": "Go to boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/SideNavigation.tsx", 107]],
+    "translation": "Перейти к доскам"
+  },
+  "KAsRdK": {
+    "message": "Go to members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/SideNavigation.tsx", 131]],
+    "translation": "Перейти к участникам"
+  },
+  "1WuwiM": {
+    "message": "Go to settings",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/SideNavigation.tsx", 143]],
+    "translation": "Перейти к настройкам"
+  },
+  "csFbe+": {
+    "message": "Go to templates",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/SideNavigation.tsx", 119]],
+    "translation": "Перейти к шаблонам"
+  },
+  "cdyS7J": {
+    "message": "Google SSO",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 257],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 258],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 259]
+    ],
+    "translation": "Google SSO"
+  },
+  "vkqf1W": {
+    "message": "Google SSO + SAML",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 260]
+    ],
+    "translation": "Google SSO + SAML"
+  },
+  "O1wAlQ": {
+    "message": "Guest",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 203]],
+    "translation": "Гость"
+  },
+  "CB/NpV": {
+    "message": "High Priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 18]],
+    "translation": "Высокий приоритет"
+  },
+  "XXbgHS": {
+    "message": "Hired",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 80]],
+    "translation": "Принят на работу"
+  },
+  "LrcnbT": {
+    "message": "Host Kan on your own infrastructure. Ideal for organisations that need complete control over their data.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 69]],
+    "translation": "Разместите Kan на собственной инфраструктуре. Идеально для организаций, которым нужен полный контроль над своими данными."
+  },
+  "WI4eGo": {
+    "message": "How do I get a custom URL?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 64]],
+    "translation": "Как получить собственный URL?"
+  },
+  "yV7o5I": {
+    "message": "How do I import my Trello boards?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 46]],
+    "translation": "Как импортировать мои доски Trello?"
+  },
+  "nol/Fb": {
+    "message": "How do I invite team members?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 108]],
+    "translation": "Как пригласить участников команды?"
+  },
+  "KuSt9W": {
+    "message": "How do I self-host?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 124]],
+    "translation": "Как развернуть самостоятельно?"
+  },
+  "UeDFpo": {
+    "message": "How is the project funded?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 38]],
+    "translation": "Как финансируется проект?"
+  },
+  "6S8zjx": {
+    "message": "https://www.youtube.com/watch?v=...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 151]],
+    "translation": "https://www.youtube.com/watch?v=..."
+  },
+  "2liqDZ": {
+    "message": "I acknowledge that all of my account data will be permanently deleted and want to proceed.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 82]
+    ],
+    "translation": "Я подтверждаю, что все данные моего аккаунта будут безвозвратно удалены, и хочу продолжить."
+  },
+  "2Py5S/": {
+    "message": "I acknowledge that all of the workspace data will be permanently deleted and want to proceed.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 92]
+    ],
+    "translation": "Я подтверждаю, что все данные рабочего пространства будут безвозвратно удалены, и хочу продолжить."
+  },
+  "iwr7AP": {
+    "message": "Ideas",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 88]],
+    "translation": "Идеи"
+  },
+  "F/vB2g": {
+    "message": "Ideas to improve this page...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 75]],
+    "translation": "Идеи по улучшению этой страницы..."
+  },
+  "l3s5ri": {
+    "message": "Import",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/index.tsx", 60]],
+    "translation": "Импорт"
+  },
+  "2MPcep": {
+    "message": "Import complete",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 191]],
+    "translation": "Импорт завершён"
+  },
+  "BEVzjL": {
+    "message": "Import failed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 204]],
+    "translation": "Ошибка импорта"
+  },
+  "rRM7r0": {
+    "message": "Import your Trello boards and hit the ground running.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 96]],
+    "translation": "Импортируйте свои доски Trello и сразу приступайте к работе."
+  },
+  "c/IAuR": {
+    "message": "Important",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "translation": "Важно"
+  },
+  "xMn+V9": {
+    "message": "Importing from Trello",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 27]],
+    "translation": "Импорт из Trello"
+  },
+  "g2xBxu": {
+    "message": "Importing your Trello boards into Kan is easy. You can follow our step-by-step guide <0>here</0>.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 49]],
+    "translation": "Импортировать ваши доски Trello в Kan очень просто. Следуйте нашему пошаговому руководству <0>здесь</0>."
+  },
+  "02i3WU": {
+    "message": "Imports",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 313]
+    ],
+    "translation": "Импорт"
+  },
+  "JxhWxU": {
+    "message": "in",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/CommandPallette.tsx", 168]],
+    "translation": "в"
+  },
+  "WbTDwg": {
+    "message": "In Progress",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 17],
+      ["src/views/boards/components/TemplateBoards.tsx", 23],
+      ["src/views/boards/components/TemplateBoards.tsx", 29],
+      ["src/views/boards/components/TemplateBoards.tsx", 35],
+      ["src/views/boards/components/TemplateBoards.tsx", 58]
+    ],
+    "translation": "В процессе"
+  },
+  "6mbe4b": {
+    "message": "Individuals",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 28]],
+    "translation": "Индивидуальные участники"
+  },
+  "nbfdhU": {
+    "message": "Integrations",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SettingsLayout.tsx", 70],
+      ["src/views/home/components/Features.tsx", 121]
+    ],
+    "translation": "Интеграции"
+  },
+  "N7aud6": {
+    "message": "Intelligent search",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 140]
+    ],
+    "translation": "Интеллектуальный поиск"
+  },
+  "goklcJ": {
+    "message": "Interviewing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 77]],
+    "translation": "Собеседование"
+  },
+  "XILg0L": {
+    "message": "Invalid email address",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 51]],
+    "translation": "Недействительный адрес электронной почты"
+  },
+  "odFCYX": {
+    "message": "Invalid invitation",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 105]],
+    "translation": "Недействительное приглашение"
+  },
+  "MFKlMB": {
+    "message": "Invite",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 306]],
+    "translation": "Пригласить"
+  },
+  "KLJ4eD": {
+    "message": "Invite link copied",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 209]],
+    "translation": "Ссылка-приглашение скопирована"
+  },
+  "mZGPxt": {
+    "message": "Invite link copied to clipboard",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 210]],
+    "translation": "Ссылка-приглашение скопирована в буфер обмена"
+  },
+  "D9ROdV": {
+    "message": "Invite links",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 207],
+      ["src/views/pricing/components/PricingTiers.tsx", 58]
+    ],
+    "translation": "Ссылки-приглашения"
+  },
+  "25mvI+": {
+    "message": "Invite links require a Team or Pro subscription. Please upgrade your workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 123]],
+    "translation": "Ссылки-приглашения доступны только с подпиской Team или Pro. Пожалуйста, обновите тариф вашего рабочего пространства."
+  },
+  "+djOzj": {
+    "message": "Invite member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/MemberSelector.tsx", 114],
+      ["src/views/members/components/InviteMemberForm.tsx", 367]
+    ],
+    "translation": "Пригласить участника"
+  },
+  "qPP4lD": {
+    "message": "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 336]],
+    "translation": "Приглашение участников доступно только на тарифе Team. Вы будете перенаправлены для обновления рабочего пространства."
+  },
+  "c9AJhn": {
+    "message": "Join workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/invite/index.tsx", 79],
+      ["src/views/invite/index.tsx", 129]
+    ],
+    "translation": "Присоединиться к рабочему пространству"
+  },
+  "A23Y7X": {
+    "message": "Join workspace | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 91]],
+    "translation": "Присоединиться к рабочему пространству | kan.bn"
+  },
+  "wM8xd8": {
+    "message": "Junior",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "translation": "Джуниор"
+  },
+  "aWDhU5": {
+    "message": "Kanban is better with a team. Perfect for small and growing teams looking to collaborate.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 51]],
+    "translation": "Kanban эффективнее в команде. Идеально для небольших и растущих команд, стремящихся к совместной работе."
+  },
+  "Xjj/kS": {
+    "message": "Kanban reimagined",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 136]],
+    "translation": "Kanban по-новому"
+  },
+  "JbXXUW": {
+    "message": "Keep in mind that this action is irreversible.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 57],
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 67]
+    ],
+    "translation": "Обратите внимание: это действие необратимо."
+  },
+  "h7MgpO": {
+    "message": "Keyboard Shortcuts",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 321]],
+    "translation": "Горячие клавиши"
+  },
+  "h8DugX": {
+    "message": "Labels",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/Filters.tsx", 155],
+      ["src/views/board/components/NewCardForm.tsx", 419],
+      ["src/views/card/index.tsx", 133]
+    ],
+    "translation": "Метки"
+  },
+  "AZI/wb": {
+    "message": "Labels & filters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 124]
+    ],
+    "translation": "Метки и фильтры"
+  },
+  "+nvZ6j": {
+    "message": "Labels & Filters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 100]],
+    "translation": "Метки и фильтры"
+  },
+  "vXIe7J": {
+    "message": "Language",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 49]],
+    "translation": "Язык"
+  },
+  "8Is1ih": {
+    "message": "Launch offer",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 335],
+      ["src/views/pricing/components/PricingTiers.tsx", 159],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 69]
+    ],
+    "translation": "Стартовое предложение"
+  },
+  "EEHmPC": {
+    "message": "Launch offer: Get unlimited members with Pro",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 276]],
+    "translation": "Стартовое предложение: неограниченное количество участников с Pro"
+  },
+  "sDuhfK": {
+    "message": "Launch offer: unlimited seats for just $29/month with Pro",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 98]],
+    "translation": "Стартовое предложение: неограниченное количество мест всего за $29 в месяц с Pro"
+  },
+  "zwWKhA": {
+    "message": "Learn more",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/oss-friends/index.tsx", 110]],
+    "translation": "Узнать больше"
+  },
+  "wqxglO": {
+    "message": "Learning",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "translation": "Обучение"
+  },
+  "vifyyw": {
+    "message": "Legal",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 131]],
+    "translation": "Юридическая информация"
+  },
+  "iQmbPb": {
+    "message": "License",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 45]],
+    "translation": "Лицензия"
+  },
+  "1njn7W": {
+    "message": "Light",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/UserMenu.tsx", 172]],
+    "translation": "Светлая тема"
+  },
+  "TCt/8K": {
+    "message": "Limited API access",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 238]
+    ],
+    "translation": "Ограниченный доступ к API"
+  },
+  "edWbV6": {
+    "message": "Link copied",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/UpdateBoardSlugButton.tsx", 80],
+      ["src/views/card/components/Dropdown.tsx", 42],
+      ["src/views/public/board/CardModal.tsx", 36],
+      ["src/views/public/board/index.tsx", 77]
+    ],
+    "translation": "Ссылка скопирована"
+  },
+  "2BBAbc": {
+    "message": "List",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/index.tsx", 124]],
+    "translation": "Список"
+  },
+  "zQX5Dj": {
+    "message": "List name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewListForm.tsx", 129]],
+    "translation": "Название списка"
+  },
+  "h16FyT": {
+    "message": "Lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 163]],
+    "translation": "Списки"
+  },
+  "1rVAfU": {
+    "message": "Load more activities",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 580]],
+    "translation": "Загрузить ещё действия"
+  },
+  "0qyZ4b": {
+    "message": "Loading permissions...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 180]
+    ],
+    "translation": "Загрузка разрешений..."
+  },
+  "Z3FXyt": {
+    "message": "Loading...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 580]],
+    "translation": "Загрузка..."
+  },
+  "N/bcWA": {
+    "message": "Login | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/login/index.tsx", 33]],
+    "translation": "Вход | kan.bn"
+  },
+  "nOhz3x": {
+    "message": "Logout",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/UserMenu.tsx", 227]],
+    "translation": "Выйти"
+  },
+  "vuxdLS": {
+    "message": "Long-term",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "translation": "Долгосрочный"
+  },
+  "RHZu7R": {
+    "message": "Loved by teams worldwide",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Testimonials.tsx", 236]],
+    "translation": "Любим командами по всему миру"
+  },
+  "O9jVbx": {
+    "message": "Low Priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 18]],
+    "translation": "Низкий приоритет"
+  },
+  "JnWJXY": {
+    "message": "magic link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 438]],
+    "translation": "магическая ссылка"
+  },
+  "DbZgsJ": {
+    "message": "Make template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 73]],
+    "translation": "Создать шаблон"
+  },
+  "IDvohQ": {
+    "message": "marked a checklist item as incomplete",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 138]],
+    "translation": "отметил элемент контрольного списка как невыполненный"
+  },
+  "jl3aEJ": {
+    "message": "marked checklist item <0>{0}</0> as incomplete",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 258]],
+    "translation": "отметил элемент контрольного списка <0>{0}</0> как невыполненный"
+  },
+  "W/Elkg": {
+    "message": "Medium Priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 18]],
+    "translation": "Средний приоритет"
+  },
+  "OvoEq7": {
+    "message": "Member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/ActivityList.tsx", 55],
+      ["src/views/card/components/ActivityList.tsx", 88],
+      ["src/views/members/index.tsx", 202]
+    ],
+    "translation": "Участник"
+  },
+  "wlQNTg": {
+    "message": "Members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SideNavigation.tsx", 123],
+      ["src/views/board/components/Filters.tsx", 147],
+      ["src/views/board/components/NewCardForm.tsx", 377],
+      ["src/views/card/index.tsx", 143],
+      ["src/views/members/index.tsx", 263],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 81]
+    ],
+    "translation": "Участники"
+  },
+  "9u5BOr": {
+    "message": "Members | {0}",
+    "placeholders": {
+      "0": ["workspace.name ?? t`Workspace`"]
+    },
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 258]],
+    "translation": "Участники | {0}"
+  },
+  "/bZzdR": {
+    "message": "Mentions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 183]
+    ],
+    "translation": "Упоминания"
+  },
+  "+8Nek/": {
+    "message": "Monthly",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 14],
+      ["src/views/pricing/index.tsx", 20]
+    ],
+    "translation": "Ежемесячно"
+  },
+  "vneRvS": {
+    "message": "monthly billing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 159]],
+    "translation": "ежемесячная оплата"
+  },
+  "BOqTi5": {
+    "message": "moved the card from <0>{0}</0> to<1>{1}</1>",
+    "placeholders": {
+      "0": ["truncate(fromList)"],
+      "1": ["truncate(toList)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 160]],
+    "translation": "переместил(а) карточку из <0>{0}</0> в<1>{1}</1>"
+  },
+  "T7LJic": {
+    "message": "moved the card to another list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 127]],
+    "translation": "переместил(а) карточку в другой список"
+  },
+  "6YtxFj": {
+    "message": "Name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/LabelForm.tsx", 135],
+      ["src/views/board/components/NewTemplateForm.tsx", 118],
+      ["src/views/boards/components/NewBoardForm.tsx", 134]
+    ],
+    "translation": "Имя"
+  },
+  "UxKoFf": {
+    "message": "Navigation",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 55]],
+    "translation": "Навигация"
+  },
+  "HBI6nY": {
+    "message": "Need help?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 95]],
+    "translation": "Нужна помощь?"
+  },
+  "isRobC": {
+    "message": "New",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/index.tsx", 82],
+      ["src/views/home/components/Features.tsx", 73]
+    ],
+    "translation": "Новый"
+  },
+  "6WSYbN": {
+    "message": "New {0}",
+    "placeholders": {
+      "0": ["isTemplate ? \"template\" : \"board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 120]],
+    "translation": "Новый {0}"
+  },
+  "TjREUS": {
+    "message": "New API key",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 147]],
+    "translation": "Новый API-ключ"
+  },
+  "pnrmSP": {
+    "message": "New card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 302]],
+    "translation": "Новая карточка"
+  },
+  "cWcxrL": {
+    "message": "New checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 103]],
+    "translation": "Новый чек-лист"
+  },
+  "WYwN1G": {
+    "message": "New import",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 322]],
+    "translation": "Новый импорт"
+  },
+  "n1GRql": {
+    "message": "New label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/LabelForm.tsx", 119]],
+    "translation": "Новая метка"
+  },
+  "Sb2gYF": {
+    "message": "New list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/NewListForm.tsx", 113],
+      ["src/views/board/index.tsx", 490]
+    ],
+    "translation": "Новый список"
+  },
+  "+MdEsf": {
+    "message": "New password is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 23]
+    ],
+    "translation": "Требуется новый пароль"
+  },
+  "5iplxh": {
+    "message": "New password must be different from current password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 31]
+    ],
+    "translation": "Новый пароль должен отличаться от текущего"
+  },
+  "G1Gw0v": {
+    "message": "New template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 104]],
+    "translation": "Новый шаблон"
+  },
+  "RJA+sg": {
+    "message": "New Ticket",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 56]],
+    "translation": "Новый тикет"
+  },
+  "curoK5": {
+    "message": "New workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 243]],
+    "translation": "Новый рабочий пространство"
+  },
+  "5ACX4z": {
+    "message": "Newsletter",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 50]],
+    "translation": "Рассылка"
+  },
+  "HeFWjW": {
+    "message": "Next Steps",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 93]],
+    "translation": "Дальнейшие шаги"
+  },
+  "/glL9Q": {
+    "message": "No {0}",
+    "placeholders": {
+      "0": ["isTemplate ? \"templates\" : \"boards\""]
+    },
+    "comments": [],
+    "origin": [["src/views/boards/components/BoardsList.tsx", 62]],
+    "translation": "Нет {0}"
+  },
+  "Eg99Sc": {
+    "message": "No authentication methods are currently available",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 369]],
+    "translation": "В данный момент нет доступных методов аутентификации"
+  },
+  "2Bu8xj": {
+    "message": "No boards found",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 242]],
+    "translation": "Доски не найдены"
+  },
+  "OpNhRn": {
+    "message": "No credit card required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/index.tsx", 85]],
+    "translation": "Кредитная карта не требуется"
+  },
+  "MK16u2": {
+    "message": "No dates",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 137]],
+    "translation": "Нет дат"
+  },
+  "sY2lzr": {
+    "message": "No download URL available for this attachment.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 143]],
+    "translation": "Для этого вложения нет доступной ссылки для скачивания."
+  },
+  "TXO5TM": {
+    "message": "No keyboard shortcuts registered.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 334]],
+    "translation": "Горячие клавиши не зарегистрированы."
+  },
+  "hXMFoN": {
+    "message": "No lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 522]],
+    "translation": "Нет списков"
+  },
+  "fvLNDy": {
+    "message": "No lists have been created yet",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 527]],
+    "translation": "Списки ещё не созданы"
+  },
+  "ERpq2P": {
+    "message": "No results found for \"{debouncedQuery}\".",
+    "placeholders": {
+      "debouncedQuery": ["debouncedQuery"]
+    },
+    "comments": [],
+    "origin": [["src/components/CommandPallette.tsx", 184]],
+    "translation": "По запросу «{debouncedQuery}» ничего не найдено."
+  },
+  "Q9pQaX": {
+    "message": "No roles found for this workspace yet.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/RolePermissions.tsx", 110]],
+    "translation": "Для этого рабочего пространства пока не найдено ролей."
+  },
+  "9h7RDh": {
+    "message": "Offer",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 78]],
+    "translation": "Предложение"
+  },
+  "QnzD50": {
+    "message": "On-premise",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 245]
+    ],
+    "translation": "Локально"
+  },
+  "pVctI7": {
+    "message": "On-premise deployment option",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 106]],
+    "translation": "Вариант локального развертывания"
+  },
+  "gukxZ5": {
+    "message": "Onboarding",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 79]],
+    "translation": "Онбординг"
+  },
+  "usVytm": {
+    "message": "Once you delete your account, there is no going back. This action cannot be undone.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 62]],
+    "translation": "После удаления аккаунта возврата не будет. Это действие необратимо."
+  },
+  "dmKdk0": {
+    "message": "Once you delete your workspace, there is no going back. This action cannot be undone.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 118]],
+    "translation": "После удаления рабочего пространства возврата не будет. Это действие необратимо."
+  },
+  "69b7aE": {
+    "message": "Open command menu",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/WorkspaceMenu.tsx", 31]],
+    "translation": "Открыть командное меню"
+  },
+  "cFQEU/": {
+    "message": "Open keyboard shortcuts",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 172]],
+    "translation": "Открыть горячие клавиши"
+  },
+  "v+Wp++": {
+    "message": "Open source",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 229]
+    ],
+    "translation": "Открытый исходный код"
+  },
+  "qfUS/w": {
+    "message": "Open Source Friends",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/oss-friends/index.tsx", 58]],
+    "translation": "Друзья Open Source"
+  },
+  "BzEFor": {
+    "message": "or",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 380]],
+    "translation": "или"
+  },
+  "ZqDqbi": {
+    "message": "Organize and find cards quickly with powerful filtering tools.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 101]],
+    "translation": "Быстро организуйте и находите карточки с помощью мощных инструментов фильтрации."
+  },
+  "Un80BR": {
+    "message": "OSS Friends",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Footer.tsx", 39],
+      ["src/views/oss-friends/index.tsx", 52]
+    ],
+    "translation": "OSS Friends"
+  },
+  "ddrz1m": {
+    "message": "Overdue",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 112]],
+    "translation": "Просрочено"
+  },
+  "P6dJdq": {
+    "message": "Overrides cleared",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 25]],
+    "translation": "Переопределения сброшены"
+  },
+  "SPLN9O": {
+    "message": "Own your data",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 73]],
+    "translation": "Владейте своими данными"
+  },
+  "Uworke": {
+    "message": "Part-time",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "translation": "Частичная занятость"
+  },
+  "IrZaAn": {
+    "message": "Password Changed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 69]
+    ],
+    "translation": "Пароль изменён"
+  },
+  "r6BgwX": {
+    "message": "Password is required to login.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 258]],
+    "translation": "Для входа требуется пароль."
+  },
+  "tTbref": {
+    "message": "Password is required to sign up.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 257]],
+    "translation": "Для регистрации требуется пароль."
+  },
+  "vwGkYB": {
+    "message": "Password must be at least 8 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 22]
+    ],
+    "translation": "Пароль должен содержать не менее 8 символов"
+  },
+  "lpIMne": {
+    "message": "Passwords do not match",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 27]
+    ],
+    "translation": "Пароли не совпадают"
+  },
+  "URAE3q": {
+    "message": "Paused",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 210]],
+    "translation": "Приостановлено"
+  },
+  "UbYdrA": {
+    "message": "Payment frequency",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 100],
+      ["src/views/pricing/components/PricingTiers.tsx", 120]
+    ],
+    "translation": "Частота платежей"
+  },
+  "UbRKMZ": {
+    "message": "Pending",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 210]],
+    "translation": "В ожидании"
+  },
+  "oVBq1w": {
+    "message": "per user/month",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 15],
+      ["src/views/pricing/components/Pricing.tsx", 20],
+      ["src/views/pricing/index.tsx", 21],
+      ["src/views/pricing/index.tsx", 26]
+    ],
+    "translation": "за пользователя/месяц"
+  },
+  "E6wBCJ": {
+    "message": "Per-seat pricing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 83]],
+    "translation": "Цена за место"
+  },
+  "mrhyIB": {
+    "message": "Perfect for small and growing teams looking to collaborate.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 52]],
+    "translation": "Идеально для небольших и развивающихся команд, которые хотят сотрудничать."
+  },
+  "TH3Irz": {
+    "message": "Permission",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/RolePermissions.tsx", 119]],
+    "translation": "Разрешение"
+  },
+  "9cDpsw": {
+    "message": "Permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/SettingsLayout.tsx", 52]],
+    "translation": "Разрешения"
+  },
+  "Jgaz7E": {
+    "message": "Permissions reset",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 80]
+    ],
+    "translation": "Разрешения сброшены"
+  },
+  "DAV3uK": {
+    "message": "Permissions updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 34],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 57]
+    ],
+    "translation": "Разрешения обновлены"
+  },
+  "8RdLDU": {
+    "message": "Personal Project",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 86]],
+    "translation": "Личный проект"
+  },
+  "Iqh0Uv": {
+    "message": "Planned",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 29],
+      ["src/views/boards/components/TemplateBoards.tsx", 35]
+    ],
+    "translation": "Запланировано"
+  },
+  "dUh9QW": {
+    "message": "Planning",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 90]],
+    "translation": "Планирование"
+  },
+  "F3bW6y": {
+    "message": "Platform",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 317]
+    ],
+    "translation": "Платформа"
+  },
+  "58AiWX": {
+    "message": "Please confirm your new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 24]
+    ],
+    "translation": "Пожалуйста, подтвердите новый пароль"
+  },
+  "OtjenF": {
+    "message": "Please enter a valid email address",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 406]],
+    "translation": "Пожалуйста, введите корректный адрес электронной почты"
+  },
+  "CJ3zUq": {
+    "message": "Please enter a valid name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 394]],
+    "translation": "Пожалуйста, введите корректное имя"
+  },
+  "7b2yuC": {
+    "message": "Please enter a valid password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 421]],
+    "translation": "Пожалуйста, введите корректный пароль"
+  },
+  "tmlJN1": {
+    "message": "Please enter a valid YouTube URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 58],
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 98]
+    ],
+    "translation": "Пожалуйста, введите корректную ссылку на YouTube"
+  },
+  "wPZBpR": {
+    "message": "Please select a file to upload.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/Avatar.tsx", 70]],
+    "translation": "Пожалуйста, выберите файл для загрузки."
+  },
+  "tyHiOa": {
+    "message": "Please try again later, or contact customer support.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/DeleteLabelConfirmation.tsx", 26],
+      ["src/components/FeedbackModal.tsx", 41],
+      ["src/components/NewWorkspaceForm.tsx", 158],
+      ["src/views/board/components/BoardDropdown.tsx", 63],
+      ["src/views/board/components/NewCardForm.tsx", 184],
+      ["src/views/board/components/NewListForm.tsx", 79],
+      ["src/views/board/components/NewTemplateForm.tsx", 61],
+      ["src/views/board/components/NewTemplateForm.tsx", 77],
+      ["src/views/board/components/UpdateBoardSlugForm.tsx", 73],
+      ["src/views/board/components/VisibilityButton.tsx", 57],
+      ["src/views/board/index.tsx", 181],
+      ["src/views/board/index.tsx", 237],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 205],
+      ["src/views/card/components/AttachmentThumbnails.tsx", 74],
+      ["src/views/card/components/ChecklistItemRow.tsx", 69],
+      ["src/views/card/components/ChecklistItemRow.tsx", 97],
+      ["src/views/card/components/ChecklistNameInput.tsx", 47],
+      ["src/views/card/components/Checklists.tsx", 81],
+      ["src/views/card/components/Comment.tsx", 93],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 52],
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 38],
+      ["src/views/card/components/DeleteCommentConfirmation.tsx", 46],
+      ["src/views/card/components/DueDateSelector.tsx", 62],
+      ["src/views/card/components/LabelSelector.tsx", 75],
+      ["src/views/card/components/ListSelector.tsx", 55],
+      ["src/views/card/components/MemberSelector.tsx", 82],
+      ["src/views/card/components/NewChecklistForm.tsx", 71],
+      ["src/views/card/components/NewChecklistItemForm.tsx", 90],
+      ["src/views/card/components/NewCommentForm.tsx", 37],
+      ["src/views/card/index.tsx", 223],
+      ["src/views/card/index.tsx", 236],
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 28],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 42],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 65],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 93],
+      ["src/views/members/components/InviteMemberForm.tsx", 104],
+      ["src/views/members/components/InviteMemberForm.tsx", 241],
+      ["src/views/members/index.tsx", 66],
+      ["src/views/settings/components/Avatar.tsx", 200],
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 40],
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 46],
+      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 55],
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 64],
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 59],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 76],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 42],
+      ["src/views/settings/PermissionsSettings.tsx", 40]
+    ],
+    "translation": "Пожалуйста, попробуйте позже или обратитесь в службу поддержки."
+  },
+  "PZCqeW": {
+    "message": "Please try again later.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 129],
+      ["src/views/members/components/InviteMemberForm.tsx", 145]
+    ],
+    "translation": "Пожалуйста, попробуйте позже."
+  },
+  "fuwKpE": {
+    "message": "Please try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/Dropdown.tsx", 51],
+      ["src/views/public/board/CardModal.tsx", 45],
+      ["src/views/public/board/index.tsx", 86]
+    ],
+    "translation": "Пожалуйста, попробуйте ещё раз."
+  },
+  "aHCEmh": {
+    "message": "Pricing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Footer.tsx", 51],
+      ["src/views/home/components/Header.tsx", 18],
+      ["src/views/home/components/Header.tsx", 34],
+      ["src/views/pricing/components/Pricing.tsx", 85],
+      ["src/views/pricing/index.tsx", 34],
+      ["src/views/pricing/index.tsx", 40]
+    ],
+    "translation": "Цены"
+  },
+  "ESClHO": {
+    "message": "Priority email support",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 275],
+      ["src/views/pricing/components/Pricing.tsx", 56],
+      ["src/views/pricing/components/PricingTiers.tsx", 61],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 93]
+    ],
+    "translation": "Приоритетная поддержка по электронной почте"
+  },
+  "ScJ9fj": {
+    "message": "Privacy policy",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 43]],
+    "translation": "Политика конфиденциальности"
+  },
+  "zwBp5t": {
+    "message": "Private",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 84]],
+    "translation": "Приватно"
+  },
+  "3fPjUY": {
+    "message": "Pro",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 333],
+      ["src/views/pricing/components/PricingTiers.tsx", 70]
+    ],
+    "translation": "Pro"
+  },
+  "oyRjD/": {
+    "message": "Pro Plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 290]],
+    "translation": "Тариф Pro"
+  },
+  "Qtzfdk": {
+    "message": "Pro Plan ∞",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 322]],
+    "translation": "Тариф Pro ∞"
+  },
+  "0rPv1T": {
+    "message": "Profile image updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/Avatar.tsx", 189]],
+    "translation": "Изображение профиля обновлено"
+  },
+  "4XF0BB": {
+    "message": "Profile picture",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 29]],
+    "translation": "Фото профиля"
+  },
+  "7d1a0d": {
+    "message": "Public",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 79]],
+    "translation": "Публично"
+  },
+  "ABCjd9": {
+    "message": "Publishing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 47]],
+    "translation": "Публикация"
+  },
+  "bfgr/e": {
+    "message": "Question",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 66]],
+    "translation": "Вопрос"
+  },
+  "1H5u1m": {
+    "message": "Questions?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 147]],
+    "translation": "Вопросы?"
+  },
+  "kfOGMr": {
+    "message": "Quick Win",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "translation": "Быстрая победа"
+  },
+  "6EWT6T": {
+    "message": "Recruitment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 73]],
+    "translation": "Набор персонала"
+  },
+  "ekCRTP": {
+    "message": "Rejected",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 35]],
+    "translation": "Отклонено"
+  },
+  "qlAIQ1": {
+    "message": "Remote",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "translation": "Удалённо"
+  },
+  "t/YqKh": {
+    "message": "Remove",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 58]
+    ],
+    "translation": "Удалить"
+  },
+  "T/pF0Z": {
+    "message": "Remove from favorites",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 92]],
+    "translation": "Удалить из избранного"
+  },
+  "99VIgC": {
+    "message": "Remove member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 233]],
+    "translation": "Удалить участника"
+  },
+  "BZkYSt": {
+    "message": "removed {0} labels: <0>{labelList}</0>",
+    "placeholders": {
+      "0": ["mergedLabels.length"],
+      "labelList": ["labelList"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 116]],
+    "translation": "удалено {0} меток: <0>{labelList}</0>"
+  },
+  "kQwvU8": {
+    "message": "removed a label from the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 129]],
+    "translation": "удалена метка с карточки"
+  },
+  "uck1tz": {
+    "message": "removed a member from the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 131]],
+    "translation": "удалён участник из карточки"
+  },
+  "KEim/+": {
+    "message": "removed an attachment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 141]],
+    "translation": "удалено вложение"
+  },
+  "zwTiVn": {
+    "message": "removed an attachment <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(filename)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 288]],
+    "translation": "удалено вложение <0>{0}</0>"
+  },
+  "Qh7QmR": {
+    "message": "Removed from favorites",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 52]],
+    "translation": "Удалено из избранного"
+  },
+  "YVT40D": {
+    "message": "removed label <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(label)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 200]],
+    "translation": "удалена метка <0>{0}</0>"
+  },
+  "aHRWVI": {
+    "message": "removed the due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/ActivityList.tsx", 144],
+      ["src/views/card/components/ActivityList.tsx", 324]
+    ],
+    "translation": "удалена дата выполнения"
+  },
+  "NypLoL": {
+    "message": "renamed a checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 133]],
+    "translation": "переименован чек-лист"
+  },
+  "3ZjRJY": {
+    "message": "renamed checklist <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 216]],
+    "translation": "переименован чек-лист <0>{0}</0>"
+  },
+  "NH54UR": {
+    "message": "renamed checklist item to <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 240]],
+    "translation": "переименован пункт чек-листа в <0>{0}</0>"
+  },
+  "Yx0Ud8": {
+    "message": "Requested",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 29],
+      ["src/views/boards/components/TemplateBoards.tsx", 35]
+    ],
+    "translation": "Запрошено"
+  },
+  "bdztP2": {
+    "message": "Research",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 89]],
+    "translation": "Исследование"
+  },
+  "e4hPSt": {
+    "message": "Reset to role defaults",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 245]
+    ],
+    "translation": "Сбросить к настройкам роли по умолчанию"
+  },
+  "FmN5me": {
+    "message": "Resolution",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 60]],
+    "translation": "Решение"
+  },
+  "s+MGs7": {
+    "message": "Resources",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 114]],
+    "translation": "Ресурсы"
+  },
+  "5k0NLb": {
+    "message": "Review",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 92]],
+    "translation": "Рецензия"
+  },
+  "/gaSVU": {
+    "message": "Roadmap",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Footer.tsx", 36],
+      ["src/views/home/components/Header.tsx", 13],
+      ["src/views/home/components/Header.tsx", 28]
+    ],
+    "translation": "Дорожная карта"
+  },
+  "GDvlUT": {
+    "message": "Role",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 328]],
+    "translation": "Роль"
+  },
+  "jQ6I8X": {
+    "message": "Role updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 58]],
+    "translation": "Роль обновлена"
+  },
+  "RzxgOE": {
+    "message": "Roles & permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 164]
+    ],
+    "translation": "Роли и разрешения"
+  },
+  "vAR/I8": {
+    "message": "Run on your own infrastructure",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 72]],
+    "translation": "Запустить на собственной инфраструктуре"
+  },
+  "YEOVrT": {
+    "message": "SAML SSO",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 102]],
+    "translation": "SAML SSO"
+  },
+  "tfDRzk": {
+    "message": "Save",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 183],
+      ["src/views/card/components/Comment.tsx", 202],
+      ["src/views/settings/components/Avatar.tsx", 290]
+    ],
+    "translation": "Сохранить"
+  },
+  "MdwUGG": {
+    "message": "Save time with reusable board templates.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 116]],
+    "translation": "Экономьте время с шаблонами досок для повторного использования."
+  },
+  "cOh+MI": {
+    "message": "Screening",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 76]],
+    "translation": "Скрининг"
+  },
+  "SkCNhl": {
+    "message": "Search boards and cards...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/CommandPallette.tsx", 104]],
+    "translation": "Поиск досок и карточек..."
+  },
+  "a3LDKx": {
+    "message": "Security",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 321]
+    ],
+    "translation": "Безопасность"
+  },
+  "K3iLeO": {
+    "message": "See what our users are saying about Kan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Testimonials.tsx", 239]],
+    "translation": "Посмотрите, что наши пользователи говорят о Kan"
+  },
+  "wgNoIs": {
+    "message": "Select all",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 274]],
+    "translation": "Выбрать всё"
+  },
+  "rYUZIe": {
+    "message": "Select source",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 157]],
+    "translation": "Выбрать источник"
+  },
+  "ppaRWv": {
+    "message": "Self Host",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 64]],
+    "translation": "Самостоятельный хостинг"
+  },
+  "l2PIAy": {
+    "message": "Self host with Github",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/index.tsx", 81]],
+    "translation": "Самостоятельный хостинг с Github"
+  },
+  "VXk54Y": {
+    "message": "self-assigned the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 169]],
+    "translation": "самостоятельно назначил(а) карточку"
+  },
+  "RoafuO": {
+    "message": "Send feedback",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 116]],
+    "translation": "Отправить отзыв"
+  },
+  "v3YoMA": {
+    "message": "Senior",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "translation": "Старший"
+  },
+  "8AbRER": {
+    "message": "Set due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/DueDateSelector.tsx", 119]],
+    "translation": "Установить срок"
+  },
+  "Eit43O": {
+    "message": "set the due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 142]],
+    "translation": "установить срок"
+  },
+  "Tz0i8g": {
+    "message": "Settings",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SettingsLayout.tsx", 95],
+      ["src/components/SideNavigation.tsx", 135]
+    ],
+    "translation": "Настройки"
+  },
+  "MWrbWq": {
+    "message": "Settings | Account",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 25]],
+    "translation": "Настройки | Аккаунт"
+  },
+  "iy1wb+": {
+    "message": "Settings | API",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/ApiSettings.tsx", 18]],
+    "translation": "Настройки | API"
+  },
+  "ADEin1": {
+    "message": "Settings | Billing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/BillingSettings.tsx", 35]],
+    "translation": "Настройки | Оплата"
+  },
+  "hYzsXr": {
+    "message": "Settings | Integrations",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 69]],
+    "translation": "Настройки | Интеграции"
+  },
+  "F/FPk/": {
+    "message": "Settings | Permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 49]],
+    "translation": "Настройки | Разрешения"
+  },
+  "Ci/KUX": {
+    "message": "Settings | Workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 58]],
+    "translation": "Настройки | Рабочее пространство"
+  },
+  "CTqTgr": {
+    "message": "Shortcuts",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/UserMenu.tsx", 187]],
+    "translation": "Горячие клавиши"
+  },
+  "5lWFkC": {
+    "message": "Sign in",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Header.tsx", 104]],
+    "translation": "Войти"
+  },
+  "n1ekoW": {
+    "message": "Sign In",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 154]],
+    "translation": "Войти"
+  },
+  "mErq7F": {
+    "message": "Sign Up",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 162]],
+    "translation": "Зарегистрироваться"
+  },
+  "sUZo7y": {
+    "message": "Sign up | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/auth/signup/index.tsx", 34],
+      ["src/views/auth/signup/index.tsx", 59]
+    ],
+    "translation": "Регистрация | kan.bn"
+  },
+  "WRkpB1": {
+    "message": "Sign up disabled",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/signup/index.tsx", 44]],
+    "translation": "Регистрация отключена"
+  },
+  "s6iE/c": {
+    "message": "Sign up is currently disabled. Please try again later.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/signup/index.tsx", 47]],
+    "translation": "Регистрация сейчас недоступна. Пожалуйста, попробуйте позже."
+  },
+  "6FDocz": {
+    "message": "Sign up with ",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 437]],
+    "translation": "Зарегистрироваться через "
+  },
+  "m2nk0i": {
+    "message": "Simple pricing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 89],
+      ["src/views/pricing/index.tsx", 44]
+    ],
+    "translation": "Простые тарифы"
+  },
+  "sBhOFG": {
+    "message": "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 139]],
+    "translation": "Простое и наглядное управление задачами, которое действительно работает. Перетаскивайте карточки, работайте с командой и достигайте большего."
+  },
+  "zEcnBA": {
+    "message": "SLA",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 291]
+    ],
+    "translation": "SLA"
+  },
+  "++rVAm": {
+    "message": "Social Media",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 50]],
+    "translation": "Социальные сети"
+  },
+  "wIb7Ng": {
+    "message": "Software Development",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 22]],
+    "translation": "Разработка ПО"
+  },
+  "vnS6Rf": {
+    "message": "SSO",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 256]
+    ],
+    "translation": "SSO"
+  },
+  "R6pB8R": {
+    "message": "Star on Github",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/index.tsx", 37]],
+    "translation": "Поставьте звезду на Github"
+  },
+  "veIDCY": {
+    "message": "Start 14 day free trial",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 359],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 111]
+    ],
+    "translation": "Начните 14-дневный бесплатный пробный период"
+  },
+  "Y8yzGg": {
+    "message": "Start free. Upgrade as your team grows. No hidden fees, no contracts.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/index.tsx", 47]],
+    "translation": "Начните бесплатно. Переходите на новый тариф по мере роста команды. Без скрытых платежей и контрактов."
+  },
+  "WYDptz": {
+    "message": "Subscription Required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 122]],
+    "translation": "Требуется подписка"
+  },
+  "zzDlyQ": {
+    "message": "Success",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/AuthForm.tsx", 215],
+      ["src/components/AuthForm.tsx", 232]
+    ],
+    "translation": "Успех"
+  },
+  "uZg2+w": {
+    "message": "Supercharge your workspace for just $29/month. Here's what you'll get:",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 57]
+    ],
+    "translation": "Улучшите свой workspace всего за $29 в месяц. Вы получите:"
+  },
+  "XYLcNv": {
+    "message": "Support",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/UserMenu.tsx", 198],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 325]
+    ],
+    "translation": "Поддержка"
+  },
+  "wruKPE": {
+    "message": "Support the development of the project",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 57]],
+    "translation": "Поддержите развитие проекта"
+  },
+  "D+NlUC": {
+    "message": "System",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/UserMenu.tsx", 144]],
+    "translation": "Система"
+  },
+  "bff61F": {
+    "message": "Team Plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 322],
+      ["src/views/members/index.tsx", 292]
+    ],
+    "translation": "Тариф для команды"
+  },
+  "CAL6E9": {
+    "message": "Teams",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 332],
+      ["src/views/pricing/components/Pricing.tsx", 46],
+      ["src/views/pricing/components/PricingTiers.tsx", 47]
+    ],
+    "translation": "Команды"
+  },
+  "/K2CvV": {
+    "message": "Template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/index.tsx", 400],
+      ["src/views/board/index.tsx", 436]
+    ],
+    "translation": "Шаблон"
+  },
+  "JcCDm9": {
+    "message": "Template created",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 67]],
+    "translation": "Шаблон создан"
+  },
+  "QHhZeE": {
+    "message": "Template created successfully",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 68]],
+    "translation": "Шаблон успешно создан"
+  },
+  "notwF1": {
+    "message": "Template name cannot exceed 100 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 19]],
+    "translation": "Имя шаблона не может превышать 100 символов"
+  },
+  "6OTo9n": {
+    "message": "Template name is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 18]],
+    "translation": "Необходимо указать имя шаблона"
+  },
+  "iTylMl": {
+    "message": "Templates",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SideNavigation.tsx", 111],
+      ["src/views/home/components/Features.tsx", 115]
+    ],
+    "translation": "Шаблоны"
+  },
+  "UCLeG0": {
+    "message": "Terms of service",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 42]],
+    "translation": "Условия использования"
+  },
+  "VUZDlr": {
+    "message": "Testimonials",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Testimonials.tsx", 232]],
+    "translation": "Отзывы"
+  },
+  "nhMhRr": {
+    "message": "Thank you for your feedback!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 34]],
+    "translation": "Спасибо за ваш отзыв!"
+  },
+  "jlB2RY": {
+    "message": "The current password you entered is incorrect.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 84]
+    ],
+    "translation": "Введённый вами текущий пароль неверен."
+  },
+  "lkz85l": {
+    "message": "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 33]],
+    "translation": "Главное отличие Kan от Trello в том, что Kan — это open source, и любой может просматривать, изменять и вносить вклад в наш код. В нашем облачном сервисе также нет ограничений по функциям для индивидуального использования, в то время как Trello блокирует базовые возможности, такие как количество досок, за платным доступом."
+  },
+  "6tDFBe": {
+    "message": "The member's permissions have been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 35],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 58]
+    ],
+    "translation": "Права участника были обновлены."
+  },
+  "bfZE+Y": {
+    "message": "The member's role has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 59]],
+    "translation": "Роль участника была обновлена."
+  },
+  "gUX7b+": {
+    "message": "The open source <0/> alternative to Trello",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/index.tsx", 65]],
+    "translation": "Open source <0/> альтернатива Trello"
+  },
+  "fQCrjt": {
+    "message": "The visibility of your board has been set to {0}.",
+    "placeholders": {
+      "0": ["isPublic ? \"public\" : \"private\""]
+    },
+    "comments": [],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 50]],
+    "translation": "Видимость вашей доски установлена на {0}."
+  },
+  "FEr96N": {
+    "message": "Theme",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/UserMenu.tsx", 131]],
+    "translation": "Тема"
+  },
+  "Yf9FAx": {
+    "message": "They won't be able to access this workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 50]
+    ],
+    "translation": "Они не смогут получить доступ к этому рабочему пространству."
+  },
+  "3LDCpD": {
+    "message": "This action can't be undone.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/DeleteLabelConfirmation.tsx", 44],
+      ["src/views/board/components/DeleteBoardConfirmation.tsx", 39],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 78],
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 59],
+      ["src/views/card/components/DeleteCommentConfirmation.tsx", 69]
+    ],
+    "translation": "Это действие нельзя отменить."
+  },
+  "YoyKbT": {
+    "message": "This API key will only be shown once. Please save it in a secure location.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 129]],
+    "translation": "Этот API-ключ будет показан только один раз. Пожалуйста, сохраните его в надёжном месте."
+  },
+  "l4asa1": {
+    "message": "This board is private or does not exist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/public/board/index.tsx", 184]],
+    "translation": "Эта доска приватная или не существует"
+  },
+  "wY+6Ye": {
+    "message": "This board URL has already been taken",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 136]],
+    "translation": "Этот URL доски уже занят"
+  },
+  "mTwGOf": {
+    "message": "This invitation link is invalid or has expired.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 108]],
+    "translation": "Эта ссылка-приглашение недействительна или истекла."
+  },
+  "vlxQFL": {
+    "message": "This member's permissions have been reset to their role defaults.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 81]
+    ],
+    "translation": "Права этого участника были сброшены до значений по умолчанию для его роли."
+  },
+  "OAYToL": {
+    "message": "This will remove all custom member permissions in this workspace. Members will inherit permissions only from their roles.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
+        35
+      ]
+    ],
+    "translation": "Это удалит все индивидуальные права участников в этом рабочем пространстве. Участники будут наследовать права только от своих ролей."
+  },
+  "MeO/vH": {
+    "message": "This will result in the permanent deletion of all data associated with this workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 70]
+    ],
+    "translation": "Это приведёт к безвозвратному удалению всех данных, связанных с этим рабочим пространством."
+  },
+  "mwBdZ2": {
+    "message": "This will result in the permanent deletion of all data associated with your account.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 60]
+    ],
+    "translation": "Это приведёт к безвозвратному удалению всех данных, связанных с вашим аккаунтом."
+  },
+  "duf3Nr": {
+    "message": "This workspace URL has already been taken",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 287]],
+    "translation": "Этот URL рабочего пространства уже занят"
+  },
+  "bJtM0P": {
+    "message": "This workspace URL is reserved",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 289]],
+    "translation": "Этот URL рабочей области зарезервирован"
+  },
+  "kp6L3T": {
+    "message": "This workspace username has already been taken",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 125]
+    ],
+    "translation": "Это имя пользователя рабочей области уже занято"
+  },
+  "MHrjPM": {
+    "message": "Title",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 127]],
+    "translation": "Заголовок"
+  },
+  "Se/UIp": {
+    "message": "To Do",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 17],
+      ["src/views/boards/components/TemplateBoards.tsx", 23]
+    ],
+    "translation": "К выполнению"
+  },
+  "4gAX8s": {
+    "message": "Toggle menu",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Header.tsx", 114]],
+    "translation": "Переключить меню"
+  },
+  "eEQyz+": {
+    "message": "Track all card changes with detailed activity history.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 111]],
+    "translation": "Отслеживайте все изменения карточек с подробной историей активности."
+  },
+  "dtbpdR": {
+    "message": "Trello",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 218],
+      ["src/views/settings/IntegrationsSettings.tsx", 73]
+    ],
+    "translation": "Trello"
+  },
+  "zto8aj": {
+    "message": "Trello disconnected",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 53]],
+    "translation": "Trello отключён"
+  },
+  "kxEs5t": {
+    "message": "Trello imports",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 95]],
+    "translation": "Импорт из Trello"
+  },
+  "HO+uOC": {
+    "message": "Triaging",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 57]],
+    "translation": "Сортировка"
+  },
+  "o+JCfN": {
+    "message": "Trusted by fast-moving teams<0/>around the world",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Logos.tsx", 67]],
+    "translation": "Нам доверяют быстроразвивающиеся команды<0/>по всему миру"
+  },
+  "bZSICm": {
+    "message": "Unable to add checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 89]],
+    "translation": "Не удалось добавить элемент контрольного списка"
+  },
+  "T7DJ2k": {
+    "message": "Unable to add comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewCommentForm.tsx", 36]],
+    "translation": "Не удалось добавить комментарий"
+  },
+  "2Q871c": {
+    "message": "Unable to add label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/index.tsx", 235]],
+    "translation": "Не удалось добавить метку"
+  },
+  "LeM5RY": {
+    "message": "Unable to clear overrides",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 39]],
+    "translation": "Не удалось сбросить переопределения"
+  },
+  "W1ewR0": {
+    "message": "Unable to copy link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/Dropdown.tsx", 49],
+      ["src/views/public/board/CardModal.tsx", 43],
+      ["src/views/public/board/index.tsx", 84]
+    ],
+    "translation": "Не удалось скопировать ссылку"
+  },
+  "zl1b97": {
+    "message": "Unable to create card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 181]],
+    "translation": "Не удалось создать карточку"
+  },
+  "mHhffx": {
+    "message": "Unable to create checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 70]],
+    "translation": "Не удалось создать контрольный список"
+  },
+  "TztLaN": {
+    "message": "Unable to create list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewListForm.tsx", 78]],
+    "translation": "Не удалось создать список"
+  },
+  "YcyP2z": {
+    "message": "Unable to create template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/NewTemplateForm.tsx", 60],
+      ["src/views/board/components/NewTemplateForm.tsx", 76]
+    ],
+    "translation": "Не удалось создать шаблон"
+  },
+  "MxQXhL": {
+    "message": "Unable to create workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 157]],
+    "translation": "Не удалось создать рабочую область"
+  },
+  "WHHLh9": {
+    "message": "Unable to delete attachment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 73]],
+    "translation": "Не удалось удалить вложение"
+  },
+  "Z6r9z1": {
+    "message": "Unable to delete card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 51]],
+    "translation": "Не удалось удалить карточку"
+  },
+  "DahTzR": {
+    "message": "Unable to delete checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 37]
+    ],
+    "translation": "Не удалось удалить контрольный список"
+  },
+  "0jV46i": {
+    "message": "Unable to delete checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 96]],
+    "translation": "Не удалось удалить элемент контрольного списка"
+  },
+  "2QGEbi": {
+    "message": "Unable to delete comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/DeleteCommentConfirmation.tsx", 45]],
+    "translation": "Не удалось удалить комментарий"
+  },
+  "8yFGGF": {
+    "message": "Unable to remove member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 27]
+    ],
+    "translation": "Не удалось удалить участника"
+  },
+  "YKeYae": {
+    "message": "Unable to reorder checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Checklists.tsx", 80]],
+    "translation": "Не удалось изменить порядок элемента контрольного списка"
+  },
+  "vfRdCZ": {
+    "message": "Unable to reset permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 92]
+    ],
+    "translation": "Не удалось сбросить разрешения"
+  },
+  "A8jqN7": {
+    "message": "Unable to send feedback",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 40]],
+    "translation": "Не удалось отправить отзыв"
+  },
+  "T7Mywq": {
+    "message": "Unable to update board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 62]],
+    "translation": "Не удалось обновить доску"
+  },
+  "XpcjLO": {
+    "message": "Unable to update board URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 72]],
+    "translation": "Не удалось обновить URL доски"
+  },
+  "Wy6pcF": {
+    "message": "Unable to update board visibility",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 56]],
+    "translation": "Не удалось обновить видимость доски"
+  },
+  "o9WLwO": {
+    "message": "Unable to update card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/index.tsx", 236],
+      ["src/views/card/index.tsx", 222]
+    ],
+    "translation": "Не удалось обновить карточку"
+  },
+  "DtXlZq": {
+    "message": "Unable to update checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ChecklistNameInput.tsx", 46]],
+    "translation": "Не удалось обновить контрольный список"
+  },
+  "WQPDcG": {
+    "message": "Unable to update checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 68]],
+    "translation": "Не удалось обновить элемент контрольного списка"
+  },
+  "fYVH36": {
+    "message": "Unable to update comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Comment.tsx", 92]],
+    "translation": "Не удалось обновить комментарий"
+  },
+  "C56tim": {
+    "message": "Unable to update due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/DueDateSelector.tsx", 61]],
+    "translation": "Не удалось обновить дату выполнения"
+  },
+  "delOXn": {
+    "message": "Unable to update labels",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/LabelSelector.tsx", 74]],
+    "translation": "Не удалось обновить метки"
+  },
+  "I0gAKM": {
+    "message": "Unable to update list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/index.tsx", 180],
+      ["src/views/card/components/ListSelector.tsx", 54]
+    ],
+    "translation": "Не удалось обновить список"
+  },
+  "5P4rhH": {
+    "message": "Unable to update members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/MemberSelector.tsx", 81]],
+    "translation": "Не удалось обновить участников"
+  },
+  "GYv20o": {
+    "message": "Unable to update permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 41],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 64]
+    ],
+    "translation": "Не удалось обновить разрешения"
+  },
+  "TFv5tM": {
+    "message": "Unable to update role",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 65]],
+    "translation": "Не удалось обновить роль"
+  },
+  "E8zYtd": {
+    "message": "unassigned <0>{0}</0> from the card",
+    "placeholders": {
+      "0": ["truncate(displayName)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 183]],
+    "translation": "<0>{0}</0> был(а) удалён(а) из карточки"
+  },
+  "hAMddS": {
+    "message": "unassigned themselves from the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 180]],
+    "translation": "Пользователь удалил себя из карточки"
+  },
+  "9Xigls": {
+    "message": "Under Review",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 35]],
+    "translation": "На рассмотрении"
+  },
+  "M9p3Vw": {
+    "message": "Unlimited activity log",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 41]],
+    "translation": "Неограниченный журнал активности"
+  },
+  "1wCGT0": {
+    "message": "Unlimited boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 74],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 75],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 76],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 77],
+      ["src/views/pricing/components/Pricing.tsx", 37],
+      ["src/views/pricing/components/PricingTiers.tsx", 36]
+    ],
+    "translation": "Неограниченное количество досок"
+  },
+  "ZU5IYI": {
+    "message": "Unlimited boards, unlimited lists, unlimited cards. No credit card required.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Cta.tsx", 57]],
+    "translation": "Неограниченное количество досок, списков и карточек. Кредитная карта не требуется."
+  },
+  "Zz1qkk": {
+    "message": "Unlimited cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 39],
+      ["src/views/pricing/components/PricingTiers.tsx", 37]
+    ],
+    "translation": "Неограниченное количество карточек"
+  },
+  "fziA2d": {
+    "message": "Unlimited comments",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 40]],
+    "translation": "Неограниченное количество комментариев"
+  },
+  "86FLn5": {
+    "message": "Unlimited file uploads",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 91],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 92],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 93],
+      ["src/views/pricing/components/PricingTiers.tsx", 59]
+    ],
+    "translation": "Неограниченное количество загрузок файлов"
+  },
+  "7Ufoyg": {
+    "message": "Unlimited lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 38]],
+    "translation": "Неограниченное количество списков"
+  },
+  "mx8+1u": {
+    "message": "Unlimited members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 332],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 84],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 85],
+      ["src/views/pricing/components/PricingTiers.tsx", 80],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 66]
+    ],
+    "translation": "Неограниченное количество участников"
+  },
+  "Ws+3X+": {
+    "message": "Unlimited seats and advanced features for growing teams.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 75]],
+    "translation": "Неограниченное количество мест и расширенные функции для развивающихся команд."
+  },
+  "SMaFdc": {
+    "message": "Unsubscribe",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/pages/unsubscribe/index.tsx", 68],
+      ["src/pages/unsubscribe/index.tsx", 93]
+    ],
+    "translation": "Отписаться"
+  },
+  "EkH9pt": {
+    "message": "Update",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/UpdateBoardSlugForm.tsx", 175],
+      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 80],
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 94],
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 89],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 157]
+    ],
+    "translation": "Обновить"
+  },
+  "7EhE4k": {
+    "message": "Update label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/LabelForm.tsx", 238]],
+    "translation": "Обновить метку"
+  },
+  "L5ZPjz": {
+    "message": "updated a checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 136]],
+    "translation": "обновил(а) элемент контрольного списка"
+  },
+  "tGwwnq": {
+    "message": "updated the description",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 126]],
+    "translation": "обновил(а) описание"
+  },
+  "RfgJqw": {
+    "message": "updated the due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 143]],
+    "translation": "обновил(а) срок выполнения"
+  },
+  "V3MPSQ": {
+    "message": "updated the title",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 125]],
+    "translation": "обновил(а) заголовок"
+  },
+  "zERArS": {
+    "message": "updated the title to <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 152]],
+    "translation": "обновил(а) заголовок на <0>{0}</0>"
+  },
+  "IelE1h": {
+    "message": "Upgrade to Pro",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SideNavigation.tsx", 240],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 53],
+      ["src/views/settings/WorkspaceSettings.tsx", 108]
+    ],
+    "translation": "Перейти на Pro"
+  },
+  "cWtfn1": {
+    "message": "Upgrade to Pro ($29/month)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 372]],
+    "translation": "Перейти на Pro (29 $/месяц)"
+  },
+  "b3Thhd": {
+    "message": "Upload failed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 51]],
+    "translation": "Ошибка загрузки"
+  },
+  "BBUDfW": {
+    "message": "Urgent",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 50],
+      ["src/views/boards/components/TemplateBoards.tsx", 67]
+    ],
+    "translation": "Срочно"
+  },
+  "MI5OBT": {
+    "message": "URL can only contain letters, numbers, and hyphens",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 38],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 38]
+    ],
+    "translation": "URL может содержать только буквы, цифры и дефисы"
+  },
+  "i5rE2/": {
+    "message": "URL cannot exceed 64 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 36],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 36]
+    ],
+    "translation": "URL не может превышать 64 символа"
+  },
+  "SWEskc": {
+    "message": "URL must be at least 3 characters long",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 34],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 34]
+    ],
+    "translation": "URL должен содержать не менее 3 символов"
+  },
+  "QNtP5M": {
+    "message": "Use template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 154]],
+    "translation": "Использовать шаблон"
+  },
+  "7PzzBU": {
+    "message": "User",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 322]],
+    "translation": "Пользователь"
+  },
+  "tYN21H": {
+    "message": "User is already a member of this workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 98]],
+    "translation": "Пользователь уже является участником этого рабочего пространства"
+  },
+  "vSJd18": {
+    "message": "Video",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 50]],
+    "translation": "Видео"
+  },
+  "FmfJjN": {
+    "message": "View and manage your API keys.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/ApiSettings.tsx", 25]],
+    "translation": "Просматривайте и управляйте своими API-ключами."
+  },
+  "t2nDzl": {
+    "message": "View and manage your billing and subscription.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/BillingSettings.tsx", 42]],
+    "translation": "Просматривайте и управляйте своими платежами и подпиской."
+  },
+  "aiHZVP": {
+    "message": "View docs",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 67]],
+    "translation": "Посмотреть документацию"
+  },
+  "F8DaWi": {
+    "message": "View only",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/public/board/index.tsx", 153]],
+    "translation": "Только просмотр"
+  },
+  "fSf2ee": {
+    "message": "View our roadmap.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 154]],
+    "translation": "Посмотреть наш роадмап"
+  },
+  "U5dMR6": {
+    "message": "View workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/public/board/index.tsx", 187]],
+    "translation": "Просмотреть рабочее пространство"
+  },
+  "2q/Q7x": {
+    "message": "Visibility",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 103]],
+    "translation": "Видимость"
+  },
+  "BJbLe4": {
+    "message": "We are using the <0>AGPL-3.0 license</0>.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 94]],
+    "translation": "Мы используем <0>лицензию AGPL-3.0</0>."
+  },
+  "+EkBs0": {
+    "message": "We couldn't update your preferences. Please try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/unsubscribe/index.tsx", 63]],
+    "translation": "Не удалось обновить ваши настройки. Пожалуйста, попробуйте ещё раз."
+  },
+  "9y1RcT": {
+    "message": "We're just getting started. ",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 152]],
+    "translation": "Мы только начинаем."
+  },
+  "9eF5oV": {
+    "message": "Welcome back",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/login/index.tsx", 43]],
+    "translation": "С возвращением"
+  },
+  "xEbBrW": {
+    "message": "What license are you using?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 91]],
+    "translation": "Какую лицензию вы используете?"
+  },
+  "H5G+qG": {
+    "message": "What's the difference between Kan and Trello?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 30]],
+    "translation": "В чём разница между Kan и Trello?"
+  },
+  "mVZH9V": {
+    "message": "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over the years it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello's simplicity, in open source.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 25]],
+    "translation": "Когда Trello появился в 2011 году, он поразил всех своей продуманной простотой, но со временем утратил свою магию и стал чем-то вроде \"Jira Lite\". Этот проект — наша попытка вернуть ту самую магию простоты Trello, но в формате open source."
+  },
+  "SFnH1j": {
+    "message": "Why make an open source Trello?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 22]],
+    "translation": "Зачем делать open source Trello?"
+  },
+  "pmUArF": {
+    "message": "Workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SettingsLayout.tsx", 46],
+      ["src/views/board/index.tsx", 400],
+      ["src/views/boards/index.tsx", 35],
+      ["src/views/members/index.tsx", 258],
+      ["src/views/public/board/index.tsx", 125],
+      ["src/views/public/boards/index.tsx", 65]
+    ],
+    "translation": "Рабочее пространство"
+  },
+  "LTGE7Y": {
+    "message": "Workspace created successfully. You can upgrade later in settings.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 146]],
+    "translation": "Рабочее пространство успешно создано. Вы сможете обновить его позже в настройках."
+  },
+  "UlhdTP": {
+    "message": "Workspace deleted",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 26]
+    ],
+    "translation": "Рабочее пространство удалено"
+  },
+  "chyf4J": {
+    "message": "Workspace description",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 81]],
+    "translation": "Описание рабочего пространства"
+  },
+  "Ax/hYa": {
+    "message": "Workspace description cannot exceed 280 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 30]
+    ],
+    "translation": "Описание рабочего пространства не может превышать 280 символов"
+  },
+  "XDRXbZ": {
+    "message": "Workspace description must be at least 3 characters long",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 27]
+    ],
+    "translation": "Описание рабочего пространства должно содержать не менее 3 символов"
+  },
+  "F4PLG4": {
+    "message": "Workspace description updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 50]
+    ],
+    "translation": "Описание рабочего пространства обновлено"
+  },
+  "wtxjAY": {
+    "message": "Workspace members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Features.tsx", 90],
+      ["src/views/pricing/components/Pricing.tsx", 54],
+      ["src/views/pricing/components/PricingTiers.tsx", 57]
+    ],
+    "translation": "Участники рабочего пространства"
+  },
+  "CozWO1": {
+    "message": "Workspace name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 262],
+      ["src/views/settings/WorkspaceSettings.tsx", 62]
+    ],
+    "translation": "Название рабочего пространства"
+  },
+  "ghSJ4U": {
+    "message": "Workspace name cannot exceed 64 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 30],
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 15]
+    ],
+    "translation": "Название рабочего пространства не может превышать 64 символа"
+  },
+  "bcIybO": {
+    "message": "Workspace name is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 29]],
+    "translation": "Требуется указать название рабочего пространства"
+  },
+  "jZBHkN": {
+    "message": "Workspace name must be at least 3 characters long",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 14]
+    ],
+    "translation": "Название рабочего пространства должно содержать не менее 3 символов"
+  },
+  "OIA0ad": {
+    "message": "Workspace name updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 45]
+    ],
+    "translation": "Название рабочего пространства обновлено"
+  },
+  "1hzdxO": {
+    "message": "Workspace permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 53]],
+    "translation": "Права доступа рабочего пространства"
+  },
+  "MN6YzG": {
+    "message": "Workspace slug updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 62]
+    ],
+    "translation": "Слаг рабочего пространства обновлён"
+  },
+  "ASjvm9": {
+    "message": "Workspace URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 71]],
+    "translation": "URL рабочего пространства"
+  },
+  "DSGzV+": {
+    "message": "Workspace username",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 97]],
+    "translation": "Имя пользователя рабочего пространства"
+  },
+  "/8pTF/": {
+    "message": "workspace-url",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 276]],
+    "translation": "workspace-url"
+  },
+  "4kJRen": {
+    "message": "Writing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 43]],
+    "translation": "Письмо"
+  },
+  "zkWmBh": {
+    "message": "Yearly",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 19],
+      ["src/views/pricing/index.tsx", 25]
+    ],
+    "translation": "Ежегодно"
+  },
+  "eZCGbT": {
+    "message": "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 86]],
+    "translation": "Да, мы предлагаем бессрочный бесплатный тариф для индивидуального использования. Без ограничений, без платных функций, без лимитов."
+  },
+  "RtlIYB": {
+    "message": "You are about to change your password.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 80]],
+    "translation": "Вы собираетесь изменить свой пароль."
+  },
+  "aelko+": {
+    "message": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 67]],
+    "translation": "Вы можете получить собственный URL рабочего пространства, например <0>kan.bn/kan</0>, перейдя в <1>настройки рабочего пространства</1> и оформив подписку на pro-версию. Все подписки помогают финансировать развитие проекта!"
+  },
+  "kSxwQL": {
+    "message": "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 111]],
+    "translation": "Вы можете пригласить участников команды, нажав кнопку «Пригласить» в правом верхнем углу <0>страницы участников</0> и введя их адрес электронной почты. Они получат письмо со ссылкой для присоединения к рабочему пространству."
+  },
+  "vAj6xG": {
+    "message": "You can self-host by following the instructions in our <0>repo</0>.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 127]],
+    "translation": "Вы можете развернуть сервис самостоятельно, следуя инструкциям в нашем <0>репозитории</0>."
+  },
+  "h2FKMV": {
+    "message": "You don't have permission",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/List.tsx", 117],
+      ["src/views/board/components/UpdateBoardSlugButton.tsx", 58],
+      ["src/views/board/components/VisibilityButton.tsx", 72],
+      ["src/views/board/index.tsx", 474],
+      ["src/views/board/index.tsx", 532],
+      ["src/views/boards/components/BoardsList.tsx", 70],
+      ["src/views/boards/index.tsx", 46],
+      ["src/views/boards/index.tsx", 67]
+    ],
+    "translation": "У вас нет прав доступа"
+  },
+  "p/hk9N": {
+    "message": "You have been logged in successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 233]],
+    "translation": "Вы успешно вошли в систему."
+  },
+  "mchgzf": {
+    "message": "You have been signed up successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 216]],
+    "translation": "Вы успешно зарегистрировались."
+  },
+  "raHesj": {
+    "message": "You have been unsubscribed!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/unsubscribe/index.tsx", 98]],
+    "translation": "Вы отписались!"
+  },
+  "R275Pz": {
+    "message": "You have unlimited seats with your Pro Plan. There is no additional charge for new members!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 326]],
+    "translation": "В вашем Pro-плане неограниченное количество мест. За новых участников дополнительная плата не взимается!"
+  },
+  "MdN5zD": {
+    "message": "You need to be an admin to manage workspace permissions.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 86]],
+    "translation": "Вам нужно быть администратором, чтобы управлять правами доступа рабочего пространства."
+  },
+  "2SePRT": {
+    "message": "You've been invited to join a workspace on kan.bn.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 134]],
+    "translation": "Вас пригласили присоединиться к рабочему пространству на kan.bn."
+  },
+  "uOqaMC": {
+    "message": "You've been invited to join a workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 135]],
+    "translation": "Вас пригласили присоединиться к рабочему пространству."
+  },
+  "GoDLB9": {
+    "message": "Your account has been deleted.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 28]
+    ],
+    "translation": "Ваш аккаунт был удалён."
+  },
+  "evg7+A": {
+    "message": "Your boards have been imported.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 192]],
+    "translation": "Ваши доски были импортированы."
+  },
+  "LqWW5F": {
+    "message": "Your display name has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 42]],
+    "translation": "Ваше отображаемое имя обновлено."
+  },
+  "tca56/": {
+    "message": "Your file has been uploaded successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 46]],
+    "translation": "Ваш файл был успешно загружен."
+  },
+  "Ozt2vv": {
+    "message": "Your password has been changed.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 70]
+    ],
+    "translation": "Ваш пароль был изменён."
+  },
+  "/tOdd2": {
+    "message": "Your profile image has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/Avatar.tsx", 190]],
+    "translation": "Ваше изображение профиля было обновлено."
+  },
+  "CJWDTP": {
+    "message": "Your Trello account has been disconnected.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 54]],
+    "translation": "Ваш аккаунт Trello был отключён."
+  },
+  "WRsbHO": {
+    "message": "Your Trello account is connected.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 102]],
+    "translation": "Ваш аккаунт Trello подключён."
+  },
+  "25fAUC": {
+    "message": "Your unsubscribe link is missing a token. Please open the latest email and try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/unsubscribe/index.tsx", 33]],
+    "translation": "В вашей ссылке для отписки отсутствует токен. Пожалуйста, откройте последнее письмо и попробуйте снова."
+  },
+  "GnSSGm": {
+    "message": "Your workspace description has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 51]
+    ],
+    "translation": "Описание вашего рабочего пространства было обновлено."
+  },
+  "qkjvgj": {
+    "message": "Your workspace has been deleted.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 27]
+    ],
+    "translation": "Ваше рабочее пространство было удалено."
+  },
+  "2h4PVB": {
+    "message": "Your workspace name has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 46]
+    ],
+    "translation": "Название вашего рабочего пространства было обновлено."
+  },
+  "Hg1qE9": {
+    "message": "Your workspace slug has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 63]
+    ],
+    "translation": "Слаг вашего рабочего пространства был обновлён."
+  },
+  "4DOCMI": {
+    "message": "YouTube URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
+    "translation": "YouTube URL"
+  }
+}
