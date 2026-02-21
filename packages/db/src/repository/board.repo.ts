@@ -4,12 +4,14 @@ import {
   count,
   desc,
   eq,
+  gt,
   gte,
   inArray,
   isNotNull,
   isNull,
   lt,
   or,
+  sql,
 } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
@@ -50,6 +52,7 @@ export const getAllByWorkspaceId = async (
     columns: {
       publicId: true,
       name: true,
+      position: true,
     },
     with: {
       userFavorites: {
@@ -92,8 +95,8 @@ export const getAllByWorkspaceId = async (
       // Sort favorites first
       if (a.favorite && !b.favorite) return -1;
       if (!a.favorite && b.favorite) return 1;
-      // Then alphabetically by name
-      return a.name.localeCompare(b.name);
+      // Then by position
+      return a.position - b.position;
     });
 };
 
@@ -600,25 +603,42 @@ export const create = async (
     sourceBoardId?: number;
   },
 ) => {
-  const [result] = await db
-    .insert(boards)
-    .values({
-      publicId: boardInput.publicId ?? generateUID(),
-      name: boardInput.name,
-      createdBy: boardInput.createdBy,
-      workspaceId: boardInput.workspaceId,
-      importId: boardInput.importId,
-      slug: boardInput.slug,
-      type: boardInput.type ?? "regular",
-      sourceBoardId: boardInput.sourceBoardId,
-    })
-    .returning({
-      id: boards.id,
-      publicId: boards.publicId,
-      name: boards.name,
+  return db.transaction(async (tx) => {
+    const boardType = boardInput.type ?? "regular";
+
+    const lastBoard = await tx.query.boards.findFirst({
+      columns: { position: true },
+      where: and(
+        eq(boards.workspaceId, boardInput.workspaceId),
+        eq(boards.type, boardType),
+        isNull(boards.deletedAt),
+      ),
+      orderBy: [desc(boards.position)],
     });
 
-  return result;
+    const position = lastBoard ? lastBoard.position + 1 : 0;
+
+    const [result] = await tx
+      .insert(boards)
+      .values({
+        publicId: boardInput.publicId ?? generateUID(),
+        name: boardInput.name,
+        createdBy: boardInput.createdBy,
+        workspaceId: boardInput.workspaceId,
+        importId: boardInput.importId,
+        slug: boardInput.slug,
+        type: boardType,
+        sourceBoardId: boardInput.sourceBoardId,
+        position,
+      })
+      .returning({
+        id: boards.id,
+        publicId: boards.publicId,
+        name: boards.name,
+      });
+
+    return result;
+  });
 };
 
 export const update = async (
@@ -655,16 +675,34 @@ export const softDelete = async (
     deletedBy: string;
   },
 ) => {
-  const [result] = await db
-    .update(boards)
-    .set({ deletedAt: args.deletedAt, deletedBy: args.deletedBy })
-    .where(and(eq(boards.id, args.boardId), isNull(boards.deletedAt)))
-    .returning({
-      publicId: boards.publicId,
-      name: boards.name,
-    });
+  return db.transaction(async (tx) => {
+    const [result] = await tx
+      .update(boards)
+      .set({ deletedAt: args.deletedAt, deletedBy: args.deletedBy })
+      .where(and(eq(boards.id, args.boardId), isNull(boards.deletedAt)))
+      .returning({
+        publicId: boards.publicId,
+        name: boards.name,
+        position: boards.position,
+        workspaceId: boards.workspaceId,
+        type: boards.type,
+      });
 
-  return result;
+    if (result) {
+      await tx.execute(sql`
+        UPDATE "board"
+        SET "position" = "position" - 1
+        WHERE "workspaceId" = ${result.workspaceId}
+          AND "type" = ${result.type}
+          AND "position" > ${result.position}
+          AND "deletedAt" IS NULL
+      `);
+    }
+
+    return result
+      ? { publicId: result.publicId, name: result.name }
+      : undefined;
+  });
 };
 
 export const hardDelete = async (db: dbClient, workspaceId: number) => {
@@ -774,6 +812,18 @@ export const createFromSnapshot = async (
   },
 ) => {
   return db.transaction(async (tx) => {
+    const lastBoard = await tx.query.boards.findFirst({
+      columns: { position: true },
+      where: and(
+        eq(boards.workspaceId, args.workspaceId),
+        eq(boards.type, args.type),
+        isNull(boards.deletedAt),
+      ),
+      orderBy: [desc(boards.position)],
+    });
+
+    const position = lastBoard ? lastBoard.position + 1 : 0;
+
     const [newBoard] = await tx
       .insert(boards)
       .values({
@@ -784,6 +834,7 @@ export const createFromSnapshot = async (
         workspaceId: args.workspaceId,
         type: args.type,
         sourceBoardId: args.sourceBoardId,
+        position,
       })
       .returning({
         id: boards.id,
@@ -955,6 +1006,108 @@ export const createFromSnapshot = async (
     }
 
     return newBoard;
+  });
+};
+
+export const reorder = async (
+  db: dbClient,
+  args: {
+    boardPublicId: string;
+    newPosition: number;
+  },
+) => {
+  return db.transaction(async (tx) => {
+    const board = await tx.query.boards.findFirst({
+      columns: {
+        id: true,
+        workspaceId: true,
+        position: true,
+        type: true,
+      },
+      where: eq(boards.publicId, args.boardPublicId),
+    });
+
+    if (!board)
+      throw new Error(
+        `Board not found for public ID ${args.boardPublicId}`,
+      );
+
+    await tx.execute(sql`
+      UPDATE "board"
+      SET "position" =
+        CASE
+          WHEN "position" = ${board.position} AND id = ${board.id} THEN ${args.newPosition}
+          WHEN ${board.position} < ${args.newPosition} AND "position" > ${board.position} AND "position" <= ${args.newPosition} THEN "position" - 1
+          WHEN ${board.position} > ${args.newPosition} AND "position" >= ${args.newPosition} AND "position" < ${board.position} THEN "position" + 1
+          ELSE "position"
+        END
+      WHERE "workspaceId" = ${board.workspaceId}
+        AND "type" = ${board.type}
+        AND "deletedAt" IS NULL
+    `);
+
+    const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
+
+    const duplicatePositions = await tx
+      .select({
+        position: boards.position,
+        count: countExpr,
+      })
+      .from(boards)
+      .where(
+        and(
+          eq(boards.workspaceId, board.workspaceId),
+          eq(boards.type, board.type),
+          isNull(boards.deletedAt),
+        ),
+      )
+      .groupBy(boards.position)
+      .having(gt(countExpr, 1));
+
+    if (duplicatePositions.length > 0) {
+      await tx.execute(sql`
+        WITH ordered AS (
+          SELECT id, ROW_NUMBER() OVER (ORDER BY "position", id) - 1 AS new_position
+          FROM "board"
+          WHERE "workspaceId" = ${board.workspaceId}
+            AND "type" = ${board.type}
+            AND "deletedAt" IS NULL
+        )
+        UPDATE "board" b
+        SET "position" = o.new_position
+        FROM ordered o
+        WHERE b.id = o.id
+      `);
+
+      const postFixDupes = await tx
+        .select({ position: boards.position, count: countExpr })
+        .from(boards)
+        .where(
+          and(
+            eq(boards.workspaceId, board.workspaceId),
+            eq(boards.type, board.type),
+            isNull(boards.deletedAt),
+          ),
+        )
+        .groupBy(boards.position)
+        .having(gt(countExpr, 1));
+
+      if (postFixDupes.length > 0) {
+        throw new Error(
+          `Invariant violation: duplicate positions remain after compaction in workspace ${board.workspaceId}`,
+        );
+      }
+    }
+
+    const updatedBoard = await tx.query.boards.findFirst({
+      columns: {
+        publicId: true,
+        name: true,
+      },
+      where: eq(boards.publicId, args.boardPublicId),
+    });
+
+    return updatedBoard;
   });
 };
 
