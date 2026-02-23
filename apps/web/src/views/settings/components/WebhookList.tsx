@@ -1,8 +1,11 @@
 import { t } from "@lingui/core/macro";
+import type { Locale as DateFnsLocale } from "date-fns";
+import { format } from "date-fns";
 import { HiEllipsisHorizontal } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
 import Dropdown from "~/components/Dropdown";
+import { useLocalisation } from "~/hooks/useLocalisation";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
@@ -14,6 +17,7 @@ interface TableRowProps {
   events?: string[];
   active?: boolean;
   createdAt?: Date | null;
+  dateLocale?: DateFnsLocale;
   isLastRow?: boolean;
   showSkeleton?: boolean;
   onEdit?: () => void;
@@ -27,13 +31,9 @@ function formatEvents(events: string[]) {
     .join(", ");
 }
 
-function formatDate(date?: Date | null) {
+function formatDate(date?: Date | null, locale?: DateFnsLocale) {
   if (!date) return "Never";
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  return format(date, "MMM d, yyyy", { locale });
 }
 
 function TableRow({
@@ -43,6 +43,7 @@ function TableRow({
   events,
   active,
   createdAt,
+  dateLocale,
   isLastRow,
   showSkeleton,
   onEdit,
@@ -113,7 +114,7 @@ function TableRow({
               "h-3 w-[80px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
           )}
         >
-          {formatDate(createdAt)}
+          {formatDate(createdAt, dateLocale)}
         </p>
       </td>
       <td
@@ -161,6 +162,7 @@ interface WebhookListProps {
 export default function WebhookList({ workspacePublicId }: WebhookListProps) {
   const { openModal, setModalState } = useModal();
   const { showPopup } = usePopup();
+  const { dateLocale } = useLocalisation();
 
   const { data: webhooks, isLoading } = api.webhook.list.useQuery({
     workspacePublicId,
@@ -252,6 +254,7 @@ export default function WebhookList({ workspacePublicId }: WebhookListProps) {
                       events={webhook.events}
                       active={webhook.active}
                       createdAt={webhook.createdAt}
+                      dateLocale={dateLocale}
                       isLastRow={index === webhooks.length - 1}
                       onEdit={() => {
                         setModalState("EDIT_WEBHOOK", {
