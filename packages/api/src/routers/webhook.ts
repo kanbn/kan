@@ -7,7 +7,11 @@ import { webhookEvents } from "@kan/db/schema";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
-import { webhookUrlSchema } from "../utils/webhook";
+import {
+  webhookUrlSchema,
+  sendWebhookToUrl,
+  createCardWebhookPayload,
+} from "../utils/webhook";
 
 const webhookEventSchema = z.enum(webhookEvents);
 
@@ -327,11 +331,6 @@ export const webhookRouter = createTRPCRouter({
           message: "Webhook not found",
           code: "NOT_FOUND",
         });
-
-      // Import sendWebhookToUrl dynamically to avoid circular dependencies
-      const { sendWebhookToUrl, createCardWebhookPayload } = await import(
-        "../utils/webhook"
-      );
 
       const testPayload = createCardWebhookPayload("card.created", {
         id: "test-card-id",
