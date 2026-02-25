@@ -17,7 +17,6 @@ import {
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
-import { assertUserInWorkspace } from "../utils/auth";
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
@@ -443,7 +442,8 @@ export const boardRouter = createTRPCRouter({
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
           .optional(),
         visibility: z.enum(["public", "private"]).optional(),
-        favorite: z.boolean().optional()
+        favorite: z.boolean().optional(),
+        isArchived: z.boolean().optional(),
       }),
     )
     .output(z.object({ success: z.boolean() }).or(z.custom<Awaited<ReturnType<typeof boardRepo.update>>>()))
@@ -485,7 +485,7 @@ export const boardRouter = createTRPCRouter({
       }
 
       // Handle other updates (name, slug, visibility)
-      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined;
+      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined || input.isArchived !== undefined;
 
       if (!hasOtherUpdates) {
         // Only favorite was updated, return success
@@ -512,6 +512,7 @@ export const boardRouter = createTRPCRouter({
         slug: input.slug,
         boardPublicId: input.boardPublicId,
         visibility: input.visibility,
+        isArchived: input.isArchived,
       });
 
       if (!result)
@@ -664,119 +665,5 @@ export const boardRouter = createTRPCRouter({
       return {
         isReserved: !isBoardSlugAvailable,
       };
-    }),
-  archive: protectedProcedure
-    .meta({
-      openapi: {
-        method: "PATCH",
-        path: "/boards/{boardPublicId}/archive",
-        summary: "Archive board",
-        description: "Archives a board by its public ID",
-        tags: ["Boards"],
-        protect: true,
-      },
-    })
-    .input(
-      z.object({
-        boardPublicId: z.string().min(12),
-      }),
-    )
-    .output(z.object({ success: z.boolean() }))
-    .mutation(async ({ ctx, input }) => {
-      const userId = ctx.user?.id;
-
-      if (!userId)
-        throw new TRPCError({
-          message: `User not authenticated`,
-          code: "UNAUTHORIZED",
-        });
-
-      const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
-        ctx.db,
-        input.boardPublicId,
-      );
-
-      if (!board)
-        throw new TRPCError({
-          message: `Board with public ID ${input.boardPublicId} not found`,
-          code: "NOT_FOUND",
-        });
-
-      await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
-
-      const result = await boardRepo.update(ctx.db, {
-        boardPublicId: input.boardPublicId,
-        name: undefined,
-        slug: undefined,
-        visibility: undefined,
-        isArchived: true,
-      });
-
-      if (!result) {
-        throw new TRPCError({
-          message: "Failed to archive board",
-          code: "INTERNAL_SERVER_ERROR",
-        });
-      }
-
-      return { success: true };
-
-    }),
-  unarchive: protectedProcedure
-    .meta({
-      openapi: {
-        method: "PATCH",
-        path: "/boards/{boardPublicId}/unarchive",
-        summary: "Unarchive board",
-        description: "Unarchive a board by its public ID",
-        tags: ["Boards"],
-        protect: true,
-      },
-    })
-    .input(
-      z.object({
-        boardPublicId: z.string().min(12),
-      }),
-    )
-    .output(z.object({ success: z.boolean() }))
-    .mutation(async ({ ctx, input }) => {
-      const userId = ctx.user?.id;
-
-      if (!userId)
-        throw new TRPCError({
-          message: `User not authenticated`,
-          code: "UNAUTHORIZED",
-        });
-
-      const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
-        ctx.db,
-        input.boardPublicId,
-      );
-
-      if (!board)
-        throw new TRPCError({
-          message: `Board with public ID ${input.boardPublicId} not found`,
-          code: "NOT_FOUND",
-        });
-
-      await assertUserInWorkspace(ctx.db, userId, board.workspaceId);
-
-      const result = await boardRepo.update(ctx.db, {
-        boardPublicId: input.boardPublicId,
-        name: undefined,
-        slug: undefined,
-        visibility: undefined,
-        isArchived: false,
-      });
-
-      if (!result) {
-        throw new TRPCError({
-          message: "Failed to unarchive board",
-          code: "INTERNAL_SERVER_ERROR",
-        });
-      }
-
-      return { success: true };
-
     }),
 });

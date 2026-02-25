@@ -19,14 +19,12 @@ export default function BoardDropdown({
   isLoading,
   isArchived,
   boardPublicId,
-  workspacePublicId,
   isFavorite,
   boardName,
 }: {
   isTemplate: boolean;
   isLoading: boolean;
   boardPublicId: string;
-  workspacePublicId: string;
   isArchived?: boolean;
   isFavorite?: boolean;
   boardName?: string;
@@ -41,7 +39,15 @@ export default function BoardDropdown({
     onSuccess: (_data, variables) => {
       void utils.board.all.invalidate();
       void utils.board.byId.invalidate();
-      if (variables.favorite !== undefined) {
+      if (variables.isArchived !== undefined) {
+        showPopup({
+          header: variables.isArchived ? t`Board archived` : t`Board unarchived`,
+          message: variables.isArchived
+            ? t`The board has been archived.`
+            : t`The board has been unarchived.`,
+          icon: "success",
+        });
+      } else if (variables.favorite !== undefined) {
         showPopup({
           header: variables.favorite
             ? t`Added to favorites`
@@ -62,44 +68,6 @@ export default function BoardDropdown({
     },
   });
 
-  const archiveBoard = api.board.archive.useMutation({
-    onSuccess: () => {
-      void utils.board.all.invalidate({ workspacePublicId });
-      void utils.board.byId.invalidate({ boardPublicId });
-      showPopup({
-        header: t`Board archived`,
-        message: t`The board has been archived.`,
-        icon: "success",
-      });
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to archive board`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-  });
-
-  const unarchiveBoard = api.board.unarchive.useMutation({
-    onSuccess: () => {
-      void utils.board.all.invalidate({ workspacePublicId });
-      void utils.board.byId.invalidate({ boardPublicId });
-      showPopup({
-        header: t`Board unarchived`,
-        message: t`The board has been unarchived.`,
-        icon: "success",
-      });
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to unarchive board`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-  });
-
   const handleToggleFavorite = () => {
     updateBoard.mutate({
       boardPublicId,
@@ -108,15 +76,13 @@ export default function BoardDropdown({
   };
 
   const handleArchiveOrUnarchive = () => {
-    if (isArchived) {
-      unarchiveBoard.mutate({ boardPublicId });
-    } else {
-      archiveBoard.mutate({ boardPublicId });
-    }
+    updateBoard.mutate({
+      boardPublicId,
+      isArchived: !isArchived,
+    });
   };
 
-  const isArchiveActionPending =
-    archiveBoard.isPending || unarchiveBoard.isPending;
+  const isArchiveActionPending = updateBoard.isPending;
 
   const items = [
     ...(isTemplate && canCreateBoard
