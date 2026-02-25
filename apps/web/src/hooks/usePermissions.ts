@@ -13,6 +13,7 @@ interface UsePermissionsResult {
   canCreateCard: boolean;
   canEditCard: boolean;
   canDeleteCard: boolean;
+  canArchiveCard: boolean;
   canCreateList: boolean;
   canEditList: boolean;
   canDeleteList: boolean;
@@ -45,6 +46,7 @@ export function usePermissions(): UsePermissionsResult {
       canCreateCard: false,
       canEditCard: false,
       canDeleteCard: false,
+      canArchiveCard: false,
       canCreateList: false,
       canEditList: false,
       canDeleteList: false,
@@ -89,6 +91,7 @@ export function usePermissions(): UsePermissionsResult {
     canCreateCard: hasPermission("card:create"),
     canEditCard: hasPermission("card:edit"),
     canDeleteCard: hasPermission("card:delete"),
+    canArchiveCard: hasPermission("card:archive"),
     canCreateList: hasPermission("list:create"),
     canEditList: hasPermission("list:edit"),
     canDeleteList: hasPermission("list:delete"),

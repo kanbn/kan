@@ -3,7 +3,6 @@ import { z } from "zod";
 
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
-import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
@@ -135,13 +134,7 @@ export const listRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
-      const activities = deletedCards.map((card) => ({
-        type: "card.archived" as const,
-        createdBy: userId,
-        cardId: card.id,
-      }));
-
-      if (activities.length) await activityRepo.bulkCreate(ctx.db, activities);
+      // No activity logging needed for soft-deleted cards from list deletion
 
       return { success: true };
     }),

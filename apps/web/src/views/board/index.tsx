@@ -45,6 +45,8 @@ import { NewTemplateForm } from "./components/NewTemplateForm";
 import UpdateBoardSlugButton from "./components/UpdateBoardSlugButton";
 import { UpdateBoardSlugForm } from "./components/UpdateBoardSlugForm";
 import VisibilityButton from "./components/VisibilityButton";
+import ArchivedCardsModal from "./components/ArchivedCardsModal";
+import TrashModal from "./components/TrashModal";
 
 type PublicListId = string;
 
@@ -389,6 +391,20 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           isVisible={isOpen && modalContentType === "EDIT_YOUTUBE"}
         >
           <EditYouTubeModal />
+        </Modal>
+
+        <Modal
+          modalSize="md"
+          isVisible={isOpen && modalContentType === "ARCHIVED_CARDS"}
+        >
+          <ArchivedCardsModal boardPublicId={boardId ?? ""} />
+        </Modal>
+
+        <Modal
+          modalSize="md"
+          isVisible={isOpen && modalContentType === "TRASH"}
+        >
+          <TrashModal boardPublicId={boardId ?? ""} />
         </Modal>
       </>
     );

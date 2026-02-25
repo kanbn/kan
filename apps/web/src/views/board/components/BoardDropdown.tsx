@@ -6,6 +6,7 @@ import {
   HiOutlineTrash,
   HiOutlineStar,
   HiStar,
+  HiOutlineRectangleStack,
 } from "react-icons/hi2";
 
 import Dropdown from "~/components/Dropdown";
@@ -107,6 +108,16 @@ export default function BoardDropdown({
           },
         ]
       : []),
+    {
+      label: t`Archived cards`,
+      action: () => openModal("ARCHIVED_CARDS"),
+      icon: <HiOutlineRectangleStack className="h-[16px] w-[16px] text-dark-900" />,
+    },
+    {
+      label: t`Trash`,
+      action: () => openModal("TRASH"),
+      icon: <HiOutlineTrash className="h-[16px] w-[16px] text-dark-900" />,
+    },
   ];
   
 

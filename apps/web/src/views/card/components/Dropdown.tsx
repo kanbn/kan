@@ -4,6 +4,7 @@ import {
   HiLink,
   HiOutlineCheckCircle,
   HiOutlineTrash,
+  HiOutlineArchiveBoxXMark,
 } from "react-icons/hi2";
 
 import { authClient } from "@kan/auth/client";
@@ -26,7 +27,7 @@ export default function CardDropdown({
 }) {
   const { openModal } = useModal();
   const { showPopup } = usePopup();
-  const { canEditCard, canDeleteCard } = usePermissions();
+  const { canEditCard, canDeleteCard, canArchiveCard } = usePermissions();
   const { data: session } = authClient.useSession();
   const isCreator = cardCreatedBy && session?.user.id === cardCreatedBy;
 
@@ -53,6 +54,10 @@ export default function CardDropdown({
     }
   };
 
+  const handleArchiveCard = () => {
+    openModal("ARCHIVE_CARD");
+  };
+
   const items = [
     {
       label: t`Copy card link`,
@@ -61,25 +66,36 @@ export default function CardDropdown({
     },
     ...(canEditCard
       ? [
-          {
-            label: t`Add checklist`,
-            action: () => openModal("ADD_CHECKLIST"),
-            icon: (
-              <HiOutlineCheckCircle className="h-[16px] w-[16px] text-dark-900" />
-            ),
-          },
-        ]
+        {
+          label: t`Add checklist`,
+          action: () => openModal("ADD_CHECKLIST"),
+          icon: (
+            <HiOutlineCheckCircle className="h-[16px] w-[16px] text-dark-900" />
+          ),
+        },
+      ]
+      : []),
+    ...(canArchiveCard || isCreator
+      ? [
+        {
+          label: t`Archive card`,
+          action: handleArchiveCard,
+          icon: (
+            <HiOutlineArchiveBoxXMark className="h-[16px] w-[16px] text-dark-900" />
+          ),
+        },
+      ]
       : []),
     ...(canDeleteCard || isCreator
       ? [
-          {
-            label: t`Delete card`,
-            action: () => openModal("DELETE_CARD"),
-            icon: (
-              <HiOutlineTrash className="h-[16px] w-[16px] text-dark-900" />
-            ),
-          },
-        ]
+        {
+          label: t`Delete card`,
+          action: () => openModal("DELETE_CARD"),
+          icon: (
+            <HiOutlineTrash className="h-[16px] w-[16px] text-dark-900" />
+          ),
+        },
+      ]
       : []),
   ];
 

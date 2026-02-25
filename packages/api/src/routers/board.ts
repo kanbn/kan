@@ -3,7 +3,6 @@ import { z } from "zod";
 
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
-import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
@@ -622,15 +621,7 @@ export const boardRouter = createTRPCRouter({
           });
         }
 
-        if (deletedCards.length) {
-          const activities = deletedCards.map((card) => ({
-            type: "card.archived" as const,
-            createdBy: userId,
-            cardId: card.id,
-          }));
-
-          await activityRepo.bulkCreate(ctx.db, activities);
-        }
+        // No activity logging needed for soft-deleted cards from board deletion
       }
 
       return { success: true };
@@ -682,5 +673,87 @@ export const boardRouter = createTRPCRouter({
       return {
         isReserved: !isBoardSlugAvailable,
       };
+    }),
+  archivedCards: protectedProcedure
+    .meta({
+      openapi: {
+        method: "GET",
+        path: "/boards/{boardPublicId}/archived",
+        summary: "Get archived cards",
+        description: "Retrieves archived cards for a given board",
+        tags: ["Boards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        boardPublicId: z.string().min(12),
+      }),
+    )
+    .output(z.custom<Awaited<ReturnType<typeof cardRepo.getArchivedByBoardId>>>())
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
+        ctx.db,
+        input.boardPublicId,
+      );
+
+      if (!board)
+        throw new TRPCError({
+          message: `Board with public ID ${input.boardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
+
+      return cardRepo.getArchivedByBoardId(ctx.db, board.id);
+    }),
+  trashedCards: protectedProcedure
+    .meta({
+      openapi: {
+        method: "GET",
+        path: "/boards/{boardPublicId}/trashed",
+        summary: "Get trashed cards",
+        description: "Retrieves trashed cards for a given board",
+        tags: ["Boards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        boardPublicId: z.string().min(12),
+      }),
+    )
+    .output(z.custom<Awaited<ReturnType<typeof cardRepo.getTrashedByBoardId>>>())
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
+        ctx.db,
+        input.boardPublicId,
+      );
+
+      if (!board)
+        throw new TRPCError({
+          message: `Board with public ID ${input.boardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
+
+      return cardRepo.getTrashedByBoardId(ctx.db, board.id);
     }),
 });
