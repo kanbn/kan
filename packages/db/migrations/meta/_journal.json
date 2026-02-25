@@ -183,6 +183,13 @@
       "when": 1770500457005,
       "tag": "20260207214056_AddNotificationsTable",
       "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1772049587901,
+      "tag": "20260225195947_AddIsArchivedToBoard",
+      "breakpoints": true
     }
   ]
 }
