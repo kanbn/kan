@@ -33,8 +33,10 @@ export const initAuth = (db: dbClient) => {
     },
     emailAndPassword: {
       enabled: env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true",
-      disableSignUp:
-        env("NEXT_PUBLIC_DISABLE_SIGN_UP")?.toLowerCase() === "true",
+      // Sign-up restriction is handled by the user.create.before database
+      // hook which checks for pending invitations, allowing invited users
+      // to register even when public sign-up is disabled.
+      disableSignUp: false,
       sendResetPassword: async (data) => {
         await sendEmail(data.user.email, "Reset Password", "RESET_PASSWORD", {
           resetPasswordUrl: data.url,

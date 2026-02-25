@@ -58,7 +58,7 @@ export default function LoginPage() {
                 </div>
               </div>
             )}
-            {!isSignUpDisabled && (
+            {(!isSignUpDisabled || redirect?.startsWith("/invite/")) && (
               <p className="mt-4 text-sm text-light-1000 dark:text-dark-1000">
                 <Trans>
                   Don't have an account?{" "}

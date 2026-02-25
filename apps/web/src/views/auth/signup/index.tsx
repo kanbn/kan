@@ -28,7 +28,9 @@ export default function SignUpPage() {
     setMagicLinkRecipient(recipient);
   };
 
-  if (isSignUpDisabled) {
+  const isInviteFlow = redirect?.startsWith("/invite/");
+
+  if (isSignUpDisabled && !isInviteFlow) {
     return (
       <>
         <PageHead title={t`Sign up | kan.bn`} />
