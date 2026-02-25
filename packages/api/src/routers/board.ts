@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
+import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
@@ -621,7 +622,15 @@ export const boardRouter = createTRPCRouter({
           });
         }
 
-        // No activity logging needed for soft-deleted cards from board deletion
+        if (deletedCards.length) {
+          const activities = deletedCards.map((card) => ({
+            type: "card.archived" as const,
+            createdBy: userId,
+            cardId: card.id,
+          }));
+
+          await activityRepo.bulkCreate(ctx.db, activities);
+        }
       }
 
       return { success: true };
