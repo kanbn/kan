@@ -1073,10 +1073,10 @@ export const cardRouter = createTRPCRouter({
   hardDelete: protectedProcedure
     .meta({
       openapi: {
-        summary: "Permanently delete a card from trash",
+        summary: "Permanently delete a card from deleted cards",
         method: "DELETE",
         path: "/cards/{cardPublicId}/hard",
-        description: "Permanently deletes a card by its public ID from the trash",
+        description: "Permanently deletes a card by its public ID from the deleted cards",
         tags: ["Cards"],
         protect: true,
       },
@@ -1238,7 +1238,7 @@ export const cardRouter = createTRPCRouter({
   restore: protectedProcedure
     .meta({
       openapi: {
-        summary: "Restore a card from trash",
+        summary: "Restore a card from deleted cards",
         method: "POST",
         path: "/cards/{cardPublicId}/restore",
         description: "Restores a soft-deleted card by its public ID",
@@ -1281,7 +1281,7 @@ export const cardRouter = createTRPCRouter({
         card.createdBy,
       );
 
-      await cardRepo.restoreFromTrash(ctx.db, {
+      await cardRepo.restoreFromDeletedCards(ctx.db, {
         cardId: card.id,
         restoredBy: userId,
       });

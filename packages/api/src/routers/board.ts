@@ -715,13 +715,13 @@ export const boardRouter = createTRPCRouter({
 
       return cardRepo.getArchivedByBoardId(ctx.db, board.id);
     }),
-  trashedCards: protectedProcedure
+  deletedCards: protectedProcedure
     .meta({
       openapi: {
         method: "GET",
-        path: "/boards/{boardPublicId}/trashed",
-        summary: "Get trashed cards",
-        description: "Retrieves trashed cards for a given board",
+        path: "/boards/{boardPublicId}/deletedcards",
+        summary: "Get deleted cards",
+        description: "Retrieves deleted cards for a given board",
         tags: ["Boards"],
         protect: true,
       },
@@ -731,7 +731,7 @@ export const boardRouter = createTRPCRouter({
         boardPublicId: z.string().min(12),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof cardRepo.getTrashedByBoardId>>>())
+    .output(z.custom<Awaited<ReturnType<typeof cardRepo.getDeletedCardsByBoardId>>>())
     .query(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -754,6 +754,6 @@ export const boardRouter = createTRPCRouter({
 
       await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
 
-      return cardRepo.getTrashedByBoardId(ctx.db, board.id);
+      return cardRepo.getDeletedCardsByBoardId(ctx.db, board.id);
     }),
 });

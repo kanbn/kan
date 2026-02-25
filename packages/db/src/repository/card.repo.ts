@@ -1048,7 +1048,7 @@ export const unarchive = async (
   });
 };
 
-export const restoreFromTrash = async (
+export const restoreFromDeletedCards = async (
   db: dbClient,
   args: {
     cardId: number;
@@ -1109,7 +1109,7 @@ export const getArchivedByBoardId = async (
     .orderBy(desc(cards.archivedAt));
 };
 
-export const getTrashedByBoardId = async (
+export const getDeletedCardsByBoardId = async (
   db: dbClient,
   boardId: number,
 ) => {

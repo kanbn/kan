@@ -146,7 +146,7 @@ const getActivityText = ({
     "card.updated.dueDate.removed": t`removed the due date`,
     "card.archived": t`archived the card`,
     "card.unarchived": t`unarchived the card`,
-    "card.restored": t`restored the card from trash`,
+    "card.restored": t`restored the card from deleted cards`,
     "card.deleted": t`deleted the card`,
   } as const;
 

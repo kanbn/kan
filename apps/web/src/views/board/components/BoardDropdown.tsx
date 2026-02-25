@@ -1,4 +1,5 @@
 import { t } from "@lingui/core/macro";
+import { useRouter } from "next/router";
 import {
   HiEllipsisHorizontal,
   HiLink,
@@ -28,6 +29,7 @@ export default function BoardDropdown({
   isFavorite?: boolean;
   boardName?: string;
 }) {
+  const router = useRouter();
   const { openModal } = useModal();
   const { canEditBoard, canDeleteBoard, canCreateBoard } = usePermissions();
   const { showPopup } = usePopup();
@@ -110,12 +112,12 @@ export default function BoardDropdown({
       : []),
     {
       label: t`Archived cards`,
-      action: () => openModal("ARCHIVED_CARDS"),
+      action: () => router.push(`/boards/${boardPublicId}/archived`),
       icon: <HiOutlineRectangleStack className="h-[16px] w-[16px] text-dark-900" />,
     },
     {
-      label: t`Trash`,
-      action: () => openModal("TRASH"),
+      label: t`Deleted cards`,
+      action: () => router.push(`/boards/${boardPublicId}/deleted`),
       icon: <HiOutlineTrash className="h-[16px] w-[16px] text-dark-900" />,
     },
   ];
