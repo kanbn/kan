@@ -197,6 +197,13 @@
       "when": 1771192000000,
       "tag": "20260129210000_AddWorkspaceWebhooks",
       "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1771682724696,
+      "tag": "20260221140524_AddBoardPosition",
+      "breakpoints": true
     }
   ]
 }

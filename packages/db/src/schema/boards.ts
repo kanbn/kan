@@ -4,6 +4,7 @@ import {
   bigserial,
   boolean,
   index,
+  integer,
   pgEnum,
   pgTable,
   primaryKey,
@@ -57,6 +58,7 @@ export const boards = pgTable(
     visibility: boardVisibilityEnum("visibility").notNull().default("private"),
     type: boardTypeEnum("type").notNull().default("regular"),
     sourceBoardId: bigint("sourceBoardId", { mode: "number" }),
+    position: integer("position").notNull(),
   },
   (table) => [
     index("board_visibility_idx").on(table.visibility),

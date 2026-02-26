@@ -461,7 +461,8 @@ export const boardRouter = createTRPCRouter({
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
           .optional(),
         visibility: z.enum(["public", "private"]).optional(),
-        favorite: z.boolean().optional()
+        favorite: z.boolean().optional(),
+        position: z.number().int().min(0).optional()
       }),
     )
     .output(z.object({ success: z.boolean() }).or(z.custom<Awaited<ReturnType<typeof boardRepo.update>>>()))
@@ -500,6 +501,14 @@ export const boardRouter = createTRPCRouter({
         } else {
           await boardRepo.removeUserFavorite(ctx.db, userId, board.id);
         }
+      }
+
+      // Handle position reorder separately
+      if (input.position !== undefined) {
+        await boardRepo.reorder(ctx.db, {
+          boardPublicId: input.boardPublicId,
+          newPosition: input.position,
+        });
       }
 
       // Handle other updates (name, slug, visibility)
