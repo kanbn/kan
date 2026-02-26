@@ -177,8 +177,31 @@ export const boardRouter = createTRPCRouter({
         }
         : result.workspace;
 
+      // Generate presigned URLs for card member avatars
+      const listsWithAvatarUrls = await Promise.all(
+        result.lists.map(async (list) => ({
+          ...list,
+          cards: await Promise.all(
+            list.cards.map(async (card) => ({
+              ...card,
+              members: await Promise.all(
+                card.members.map(async (member) => {
+                  if (!member.user?.image) return member;
+                  const avatarUrl = await generateAvatarUrl(member.user.image);
+                  return {
+                    ...member,
+                    user: { ...member.user, image: avatarUrl },
+                  };
+                }),
+              ),
+            })),
+          ),
+        })),
+      );
+
       return {
         ...result,
+        lists: listsWithAvatarUrls,
         workspace: workspaceWithAvatarUrls,
       };
     }),
@@ -199,7 +222,7 @@ export const boardRouter = createTRPCRouter({
         workspaceSlug: z
           .string()
           .min(3)
-          .max(24)
+          .max(64)
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
         boardSlug: z
           .string()

@@ -1,0 +1,6051 @@
+{
+  "X0N0PA": {
+    "message": " (edited)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Comment.tsx", 153]],
+    "translation": " (editado)"
+  },
+  "lGjicL": {
+    "message": ", or see our",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 102]],
+    "translation": ", o consulta nuestro"
+  },
+  "J/hVSQ": {
+    "message": "{0}",
+    "placeholders": {
+      "0": ["isTemplate ? \"Templates\" : \"Boards\""]
+    },
+    "comments": [],
+    "origin": [["src/views/boards/index.tsx", 40]],
+    "translation": "{0}"
+  },
+  "JArWcF": {
+    "message": "{0} | {1}",
+    "placeholders": {
+      "0": [
+        "card?.title ?? t`Card`",
+        "isTemplate ? \"Templates\" : \"Boards\""
+      ],
+      "1": ["board?.name ?? t`Board`", "workspace.name ?? t`Workspace`"]
+    },
+    "comments": [],
+    "origin": [
+      ["src/views/boards/index.tsx", 35],
+      ["src/views/card/index.tsx", 309]
+    ],
+    "translation": "{0} | {1}"
+  },
+  "mU+M00": {
+    "message": "{0} has been added to your favorites.",
+    "placeholders": {
+      "0": ["boardName ?? \"Board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 54]],
+    "translation": "{0} se ha añadido a tus favoritos."
+  },
+  "bDI6VI": {
+    "message": "{0} has been removed from your favorites.",
+    "placeholders": {
+      "0": ["boardName ?? \"Board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 55]],
+    "translation": "{0} se ha eliminado de tus favoritos."
+  },
+  "CJukzS": {
+    "message": "{0} labels",
+    "placeholders": {
+      "0": ["labelPublicIds.length"]
+    },
+    "comments": [],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 453]],
+    "translation": "{0} etiquetas"
+  },
+  "9x4DAL": {
+    "message": "{0} not found",
+    "placeholders": {
+      "0": ["isTemplate ? \"Template\" : \"Board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 427]],
+    "translation": "{0} no encontrado"
+  },
+  "0xWkkH": {
+    "message": "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}",
+    "placeholders": {
+      "boardCount": ["boardCount"]
+    },
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 299]],
+    "translation": "{boardCount, plural, one {Importar tablero (1)} other {Importar tableros ({boardCount})}}"
+  },
+  "9lFfqv": {
+    "message": "/month",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 207]],
+    "translation": "/mes"
+  },
+  "be30i9": {
+    "message": "$0",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/PricingTiers.tsx", 30],
+      ["src/views/pricing/components/PricingTiers.tsx", 30]
+    ],
+    "translation": "$0"
+  },
+  "kuoc68": {
+    "message": "$10/month",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 158],
+      ["src/views/members/components/InviteMemberForm.tsx", 170]
+    ],
+    "translation": "$10/mes"
+  },
+  "F4KRmY": {
+    "message": "$8/month",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 170]],
+    "translation": "$8/mes"
+  },
+  "zMlxCA": {
+    "message": "1 user",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 82],
+      ["src/views/pricing/components/Pricing.tsx", 36],
+      ["src/views/pricing/components/PricingTiers.tsx", 35]
+    ],
+    "translation": "1 usuario"
+  },
+  "o8adVG": {
+    "message": "10mb file uploads",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 90]],
+    "translation": "Subidas de archivos de 10 mb"
+  },
+  "gkxGkF": {
+    "message": "14 day free trial · Switch plans or cancel anytime",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/PricingTiers.tsx", 66],
+      ["src/views/pricing/components/PricingTiers.tsx", 88],
+      ["src/views/pricing/components/PricingTiers.tsx", 263]
+    ],
+    "translation": "Prueba gratuita de 14 días · Cambia de plan o cancela en cualquier momento"
+  },
+  "/rn4RE": {
+    "message": "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/index.tsx", 71]],
+    "translation": "Una aplicación kanban potente y flexible que te ayuda a organizar el trabajo, hacer seguimiento del progreso y obtener resultados, todo en un solo lugar."
+  },
+  "AeXO77": {
+    "message": "Account",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/SettingsLayout.tsx", 40]],
+    "translation": "Cuenta"
+  },
+  "TKFUnX": {
+    "message": "Account deleted",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 27]
+    ],
+    "translation": "Cuenta eliminada"
+  },
+  "g9NChz": {
+    "message": "Account manager",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 283]
+    ],
+    "translation": "Gestor de cuenta"
+  },
+  "7L01XJ": {
+    "message": "Actions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 56]],
+    "translation": "Acciones"
+  },
+  "XJOV1Y": {
+    "message": "Activity",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/index.tsx", 447],
+      ["src/views/public/board/CardModal.tsx", 189]
+    ],
+    "translation": "Actividad"
+  },
+  "D0esZz": {
+    "message": "Activity log",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 148]
+    ],
+    "translation": "Registro de actividad"
+  },
+  "tMYIu7": {
+    "message": "Activity logs",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 110]],
+    "translation": "Registros de actividad"
+  },
+  "B3xxao": {
+    "message": "Add a card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/List.tsx", 136]],
+    "translation": "Añadir una tarjeta"
+  },
+  "qtE5nt": {
+    "message": "Add an item...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 141]],
+    "translation": "Añadir un elemento..."
+  },
+  "Gxxi5J": {
+    "message": "Add checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Dropdown.tsx", 65]],
+    "translation": "Añadir lista de verificación"
+  },
+  "ngBZOd": {
+    "message": "Add comment... (type '/' to open commands or '@' to mention)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/Comment.tsx", 185],
+      ["src/views/card/components/NewCommentForm.tsx", 68]
+    ],
+    "translation": "Añadir comentario... (escribe '/' para abrir comandos o '@' para mencionar)"
+  },
+  "gL/7jw": {
+    "message": "Add description... (type '/' to open commands or '@' to mention)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/Editor.tsx", 471]],
+    "translation": "Añadir descripción... (escribe '/' para abrir comandos o '@' para mencionar)"
+  },
+  "abUZlY": {
+    "message": "Add details...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 200]],
+    "translation": "Añadir detalles..."
+  },
+  "lyqwgn": {
+    "message": "Add label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/LabelSelector.tsx", 113],
+      ["src/views/card/components/LabelSelector.tsx", 118]
+    ],
+    "translation": "Añadir etiqueta"
+  },
+  "PCIlOO": {
+    "message": "Add member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/MemberSelector.tsx", 134],
+      ["src/views/members/components/InviteMemberForm.tsx", 257]
+    ],
+    "translation": "Añadir miembro"
+  },
+  "pBsoKL": {
+    "message": "Add to favorites",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 93]],
+    "translation": "Añadir a favoritos"
+  },
+  "bmXKoX": {
+    "message": "added {0} labels: <0>{labelList}</0>",
+    "placeholders": {
+      "0": ["mergedLabels.length"],
+      "labelList": ["labelList"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 102]],
+    "translation": "añadió {0} etiquetas: <0>{labelList}</0>"
+  },
+  "h4VV67": {
+    "message": "added a checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 132]],
+    "translation": "añadió una lista de verificación"
+  },
+  "O83K21": {
+    "message": "added a checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 135]],
+    "translation": "añadió un elemento de lista de verificación"
+  },
+  "T21jY/": {
+    "message": "added a label to the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 128]],
+    "translation": "añadió una etiqueta a la tarjeta"
+  },
+  "rs7L54": {
+    "message": "added a member to the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 130]],
+    "translation": "añadió un miembro a la tarjeta"
+  },
+  "5y6qY8": {
+    "message": "added an attachment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 140]],
+    "translation": "añadió un archivo adjunto"
+  },
+  "CujNX4": {
+    "message": "added an attachment <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(filename)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 278]],
+    "translation": "añadió un archivo adjunto <0>{0}</0>"
+  },
+  "wakO3W": {
+    "message": "added checklist <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 208]],
+    "translation": "añadió la lista de verificación <0>{0}</0>"
+  },
+  "E0t3jO": {
+    "message": "added checklist item <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 232]],
+    "translation": "añadió el elemento de lista de verificación <0>{0}</0>"
+  },
+  "b5FKyH": {
+    "message": "added label <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(label)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 192]],
+    "translation": "añadió la etiqueta <0>{0}</0>"
+  },
+  "pL78ec": {
+    "message": "Added to favorites",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 51]],
+    "translation": "Añadido a favoritos"
+  },
+  "14Xi3Z": {
+    "message": "Adding a new member will cost an additional {price} ({billingType}) per seat.",
+    "placeholders": {
+      "price": ["price"],
+      "billingType": ["billingType"]
+    },
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 327]],
+    "translation": "Añadir un nuevo miembro costará {price} adicionales ({billingType}) por puesto."
+  },
+  "D7/JvJ": {
+    "message": "Adjust the square crop to fit your avatar.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/Avatar.tsx", 256]],
+    "translation": "Ajusta el recorte cuadrado para que se adapte a tu avatar."
+  },
+  "U3pytU": {
+    "message": "Admin",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 201]],
+    "translation": "Administrador"
+  },
+  "3pIq39": {
+    "message": "Admin roles",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 264],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 265],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 266],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 267],
+      ["src/views/pricing/components/Pricing.tsx", 55]
+    ],
+    "translation": "Roles de administrador"
+  },
+  "Kec+/t": {
+    "message": "Advanced admin controls",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 103]],
+    "translation": "Controles avanzados de administrador"
+  },
+  "/jd3aj": {
+    "message": "Advanced admin roles",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 268]
+    ],
+    "translation": "Roles avanzados de administrador"
+  },
+  "YRk79X": {
+    "message": "Advanced security, compliance, and dedicated support for large organizations.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 97]],
+    "translation": "Seguridad avanzada, cumplimiento normativo y soporte dedicado para grandes organizaciones."
+  },
+  "h2ztFt": {
+    "message": "All Free features +",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 56]],
+    "translation": "Todas las funciones gratuitas +"
+  },
+  "nryrgW": {
+    "message": "All member permission overrides have been reset to their role defaults.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 26]],
+    "translation": "Todas las anulaciones de permisos de miembros se han restablecido a los valores predeterminados de su rol."
+  },
+  "ZAs2NN": {
+    "message": "All Pro features +",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 101]],
+    "translation": "Todas las funciones Pro +"
+  },
+  "UQbwrz": {
+    "message": "All systems operational",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 18]],
+    "translation": "Todos los sistemas operativos"
+  },
+  "EII/X8": {
+    "message": "All Teams features +",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 79]],
+    "translation": "Todas las funciones de Teams +"
+  },
+  "Z3krJD": {
+    "message": "Allow workspace members to see each other's email addresses",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/UpdateWorkspaceEmailVisibilityForm.tsx",
+        47
+      ]
+    ],
+    "translation": "Permitir que los miembros del espacio de trabajo vean las direcciones de correo electrónico de los demás"
+  },
+  "WnEwDO": {
+    "message": "Already have an account? <0><1>Sign in</1></0>",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/signup/index.tsx", 88]],
+    "translation": "¿Ya tienes una cuenta? <0><1>Inicia sesión</1></0>"
+  },
+  "WmPhYW": {
+    "message": "An error occurred while disconnecting your Trello account.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 61]],
+    "translation": "Se produjo un error al desconectar tu cuenta de Trello."
+  },
+  "ZXSPJt": {
+    "message": "An unexpected error occurred. Please try again later.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 90]
+    ],
+    "translation": "Se produjo un error inesperado. Por favor, inténtalo de nuevo más tarde."
+  },
+  "3bqt9U": {
+    "message": "Anyone with this link can join your workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 311]],
+    "translation": "Cualquiera con este enlace puede unirse a tu espacio de trabajo"
+  },
+  "OZtEcz": {
+    "message": "API",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SettingsLayout.tsx", 64],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 237]
+    ],
+    "translation": "API"
+  },
+  "ECJKc4": {
+    "message": "API key created",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 91]],
+    "translation": "Clave de API creada"
+  },
+  "pFKC6A": {
+    "message": "API key name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 161]],
+    "translation": "Nombre de la clave de API"
+  },
+  "nq7q3Z": {
+    "message": "API key name cannot exceed 30 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 25]],
+    "translation": "El nombre de la clave de API no puede superar los 30 caracteres"
+  },
+  "vbskQn": {
+    "message": "API key name is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 24]],
+    "translation": "El nombre de la clave de API es obligatorio"
+  },
+  "5h8ooz": {
+    "message": "API keys",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/ApiSettings.tsx", 22]],
+    "translation": "Claves de API"
+  },
+  "j2+d/o": {
+    "message": "API Reference",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 31]],
+    "translation": "Referencia de API"
+  },
+  "bJZm1W": {
+    "message": "Applicants",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 75]],
+    "translation": "Solicitantes"
+  },
+  "yb/fjw": {
+    "message": "Approval",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 46]],
+    "translation": "Aprobación"
+  },
+  "lo8xBK": {
+    "message": "Are you sure want to remove {entityLabel}?",
+    "placeholders": {
+      "entityLabel": ["entityLabel"]
+    },
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 47]
+    ],
+    "translation": "¿Estás seguro de que quieres eliminar {entityLabel}?"
+  },
+  "BhDZlc": {
+    "message": "Are you sure you want to delete the workspace {0}?",
+    "placeholders": {
+      "0": ["workspace.name"]
+    },
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 62]
+    ],
+    "translation": "¿Estás seguro de que quieres eliminar el espacio de trabajo {0}?"
+  },
+  "DMeWZD": {
+    "message": "Are you sure you want to delete this {0}?",
+    "placeholders": {
+      "0": ["isTemplate ? \"template\" : \"board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/board/components/DeleteBoardConfirmation.tsx", 36]],
+    "translation": "¿Estás seguro de que quieres eliminar este {0}?"
+  },
+  "ZT4Khw": {
+    "message": "Are you sure you want to delete this card?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 75]],
+    "translation": "¿Estás seguro de que quieres eliminar esta tarjeta?"
+  },
+  "Fpci8b": {
+    "message": "Are you sure you want to delete this checklist?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 56]
+    ],
+    "translation": "¿Estás seguro de que quieres eliminar esta lista de verificación?"
+  },
+  "PRjvDT": {
+    "message": "Are you sure you want to delete this comment?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/DeleteCommentConfirmation.tsx", 66]],
+    "translation": "¿Estás seguro de que quieres eliminar este comentario?"
+  },
+  "kECVpo": {
+    "message": "Are you sure you want to delete this label?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/DeleteLabelConfirmation.tsx", 41]],
+    "translation": "¿Estás seguro de que quieres eliminar esta etiqueta?"
+  },
+  "74F7N/": {
+    "message": "Are you sure you want to delete your account?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 54]
+    ],
+    "translation": "¿Estás seguro de que quieres eliminar tu cuenta?"
+  },
+  "PyYD/v": {
+    "message": "assigned <0>{0}</0> to the card",
+    "placeholders": {
+      "0": ["truncate(displayName)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 172]],
+    "translation": "asignó <0>{0}</0> a la tarjeta"
+  },
+  "JUce1S": {
+    "message": "Assignees",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 199]
+    ],
+    "translation": "Asignados"
+  },
+  "iVIGZb": {
+    "message": "Attachment uploaded",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 45]],
+    "translation": "Archivo adjunto subido"
+  },
+  "1rWxEw": {
+    "message": "Awaiting Customer",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 59]],
+    "translation": "Esperando al cliente"
+  },
+  "KNKCTb": {
+    "message": "Backlog",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 23]],
+    "translation": "Pendientes"
+  },
+  "Vt50G1": {
+    "message": "Basic Kanban",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 16]],
+    "translation": "Kanban básico"
+  },
+  "Pat4r8": {
+    "message": "Basic Roadmap",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 28]],
+    "translation": "Hoja de ruta básica"
+  },
+  "Cd4sTD": {
+    "message": "Best for individuals and solo creators getting started",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 32]],
+    "translation": "Ideal para individuos y creadores en solitario que están empezando"
+  },
+  "wsy94z": {
+    "message": "Best for large organizations with advanced needs",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 98]],
+    "translation": "Ideal para grandes organizaciones con necesidades avanzadas"
+  },
+  "UoSI+i": {
+    "message": "Best for small and growing teams that need collaboration",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 53]],
+    "translation": "Ideal para equipos pequeños y en crecimiento que necesitan colaboración"
+  },
+  "qaS+1/": {
+    "message": "Best for teams that want to scale without limits",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 76]],
+    "translation": "Ideal para equipos que quieren escalar sin límites"
+  },
+  "ARvBT/": {
+    "message": "billed annually",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 171]],
+    "translation": "facturado anualmente"
+  },
+  "+VoTOr": {
+    "message": "billed monthly",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 171]],
+    "translation": "facturado mensualmente"
+  },
+  "R+w/Va": {
+    "message": "Billing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SettingsLayout.tsx", 57],
+      ["src/views/boards/components/TemplateBoards.tsx", 68],
+      ["src/views/settings/BillingSettings.tsx", 39]
+    ],
+    "translation": "Facturación"
+  },
+  "9wdpwp": {
+    "message": "Billing portal",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/BillingSettings.tsx", 49]],
+    "translation": "Portal de facturación"
+  },
+  "4RoY9J": {
+    "message": "Blog Post",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 50]],
+    "translation": "Artículo de blog"
+  },
+  "QD8opX": {
+    "message": "Board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/index.tsx", 400],
+      ["src/views/card/index.tsx", 309],
+      ["src/views/public/board/index.tsx", 125]
+    ],
+    "translation": "Tablero"
+  },
+  "YhvWXb": {
+    "message": "Board analytics",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 349],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 83]
+    ],
+    "translation": "Analíticas del tablero"
+  },
+  "wewm3j": {
+    "message": "Board name cannot exceed 100 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 23]],
+    "translation": "El nombre del tablero no puede exceder los 100 caracteres"
+  },
+  "R1c3Mq": {
+    "message": "Board name is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 22]],
+    "translation": "El nombre del tablero es obligatorio"
+  },
+  "jwI32v": {
+    "message": "Board not found",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/public/board/index.tsx", 181]],
+    "translation": "Tablero no encontrado"
+  },
+  "XNxYxq": {
+    "message": "Board templates",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 116]
+    ],
+    "translation": "Plantillas de tablero"
+  },
+  "Xid3K6": {
+    "message": "Board URL can only contain letters, numbers, and hyphens",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 46]],
+    "translation": "La URL del tablero solo puede contener letras, números y guiones"
+  },
+  "gv5kbo": {
+    "message": "Board URL cannot exceed 60 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 44]],
+    "translation": "La URL del tablero no puede exceder 60 caracteres"
+  },
+  "8+BY11": {
+    "message": "Board URL copied to clipboard",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/UpdateBoardSlugButton.tsx", 82],
+      ["src/views/public/board/index.tsx", 79]
+    ],
+    "translation": "URL del tablero copiada al portapapeles"
+  },
+  "TmvrjU": {
+    "message": "Board URL must be at least 3 characters long",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 42]],
+    "translation": "La URL del tablero debe tener al menos 3 caracteres"
+  },
+  "qzdST2": {
+    "message": "Board visibility",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Features.tsx", 85],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 132]
+    ],
+    "translation": "Visibilidad del tablero"
+  },
+  "PTzsxH": {
+    "message": "Board visibility updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 49]],
+    "translation": "Visibilidad del tablero actualizada"
+  },
+  "8TveY+": {
+    "message": "Boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SideNavigation.tsx", 99],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 73]
+    ],
+    "translation": "Tableros"
+  },
+  "ZDo4HN": {
+    "message": "Brainstorming",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 42]],
+    "translation": "Lluvia de ideas"
+  },
+  "vXemf6": {
+    "message": "Bug",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 24]],
+    "translation": "Error"
+  },
+  "/asTmx": {
+    "message": "Bug Report",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 64]],
+    "translation": "Reporte de error"
+  },
+  "t6FvJH": {
+    "message": "Can add comments",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 146],
+      ["src/views/settings/components/RolePermissions.tsx", 35]
+    ],
+    "translation": "Puede añadir comentarios"
+  },
+  "N3380t": {
+    "message": "Can create boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 131],
+      ["src/views/settings/components/RolePermissions.tsx", 20]
+    ],
+    "translation": "Puede crear tableros"
+  },
+  "6zeSBB": {
+    "message": "Can create cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 141],
+      ["src/views/settings/components/RolePermissions.tsx", 30]
+    ],
+    "translation": "Puede crear tarjetas"
+  },
+  "8Z4pNX": {
+    "message": "Can create lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 136],
+      ["src/views/settings/components/RolePermissions.tsx", 25]
+    ],
+    "translation": "Puede crear listas"
+  },
+  "pXVFJy": {
+    "message": "Can delete boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 133],
+      ["src/views/settings/components/RolePermissions.tsx", 22]
+    ],
+    "translation": "Puede eliminar tableros"
+  },
+  "jNuzV/": {
+    "message": "Can delete cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 143],
+      ["src/views/settings/components/RolePermissions.tsx", 32]
+    ],
+    "translation": "Puede eliminar tarjetas"
+  },
+  "STSYcd": {
+    "message": "Can delete comments",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 148],
+      ["src/views/settings/components/RolePermissions.tsx", 37]
+    ],
+    "translation": "Puede eliminar comentarios"
+  },
+  "RSGOS1": {
+    "message": "Can delete lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 138],
+      ["src/views/settings/components/RolePermissions.tsx", 27]
+    ],
+    "translation": "Puede eliminar listas"
+  },
+  "Cmudpi": {
+    "message": "Can delete workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 127],
+      ["src/views/settings/components/RolePermissions.tsx", 16]
+    ],
+    "translation": "Puede eliminar espacio de trabajo"
+  },
+  "tHcbLF": {
+    "message": "Can edit boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 132],
+      ["src/views/settings/components/RolePermissions.tsx", 21]
+    ],
+    "translation": "Puede editar tableros"
+  },
+  "I+AROe": {
+    "message": "Can edit cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 142],
+      ["src/views/settings/components/RolePermissions.tsx", 31]
+    ],
+    "translation": "Puede editar tarjetas"
+  },
+  "TYli1B": {
+    "message": "Can edit comments",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 147],
+      ["src/views/settings/components/RolePermissions.tsx", 36]
+    ],
+    "translation": "Puede editar comentarios"
+  },
+  "rtbVvN": {
+    "message": "Can edit lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 137],
+      ["src/views/settings/components/RolePermissions.tsx", 26]
+    ],
+    "translation": "Puede editar listas"
+  },
+  "J5pbP6": {
+    "message": "Can edit member roles and permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 152],
+      ["src/views/settings/components/RolePermissions.tsx", 41]
+    ],
+    "translation": "Puede editar roles y permisos de miembros"
+  },
+  "iLbjv+": {
+    "message": "Can edit workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 126],
+      ["src/views/settings/components/RolePermissions.tsx", 15]
+    ],
+    "translation": "Puede editar espacio de trabajo"
+  },
+  "ALhEZV": {
+    "message": "Can invite members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 151],
+      ["src/views/settings/components/RolePermissions.tsx", 40]
+    ],
+    "translation": "Puede invitar miembros"
+  },
+  "qQXocp": {
+    "message": "Can manage workspace settings",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 128],
+      ["src/views/settings/components/RolePermissions.tsx", 17]
+    ],
+    "translation": "Puede gestionar la configuración del espacio de trabajo"
+  },
+  "IFgUX6": {
+    "message": "Can remove members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 153],
+      ["src/views/settings/components/RolePermissions.tsx", 42]
+    ],
+    "translation": "Puede eliminar miembros"
+  },
+  "MKAScN": {
+    "message": "Can view boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 130],
+      ["src/views/settings/components/RolePermissions.tsx", 19]
+    ],
+    "translation": "Puede ver tableros"
+  },
+  "zoEbXq": {
+    "message": "Can view cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 140],
+      ["src/views/settings/components/RolePermissions.tsx", 29]
+    ],
+    "translation": "Puede ver tarjetas"
+  },
+  "wqkcin": {
+    "message": "Can view comments",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 145],
+      ["src/views/settings/components/RolePermissions.tsx", 34]
+    ],
+    "translation": "Puede ver comentarios"
+  },
+  "HVIzNO": {
+    "message": "Can view lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 135],
+      ["src/views/settings/components/RolePermissions.tsx", 24]
+    ],
+    "translation": "Puede ver listas"
+  },
+  "0KjpAr": {
+    "message": "Can view members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 150],
+      ["src/views/settings/components/RolePermissions.tsx", 39]
+    ],
+    "translation": "Puede ver miembros"
+  },
+  "SNfg0e": {
+    "message": "Can view workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 125],
+      ["src/views/settings/components/RolePermissions.tsx", 14]
+    ],
+    "translation": "Puede ver el espacio de trabajo"
+  },
+  "dEgA5A": {
+    "message": "Cancel",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/DeleteLabelConfirmation.tsx", 49],
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 176],
+      ["src/views/board/components/DeleteBoardConfirmation.tsx", 44],
+      ["src/views/card/components/Comment.tsx", 195],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 86],
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 64],
+      ["src/views/card/components/DeleteCommentConfirmation.tsx", 77],
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 55],
+      ["src/views/settings/components/Avatar.tsx", 287],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 168],
+      [
+        "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
+        40
+      ],
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 88],
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 98],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 106]
+    ],
+    "translation": "Cancelar"
+  },
+  "kryGs+": {
+    "message": "Card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/index.tsx", 309]],
+    "translation": "Tarjeta"
+  },
+  "fEY2vP": {
+    "message": "Card not found",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/index.tsx", 355],
+      ["src/views/card/index.tsx", 392]
+    ],
+    "translation": "Tarjeta no encontrada"
+  },
+  "ZH7TVS": {
+    "message": "Card title",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 319]],
+    "translation": "Título de la tarjeta"
+  },
+  "rQXTmd": {
+    "message": "Card URL copied to clipboard",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/Dropdown.tsx", 44],
+      ["src/views/public/board/CardModal.tsx", 38]
+    ],
+    "translation": "URL de la tarjeta copiada al portapapeles"
+  },
+  "VhMDMg": {
+    "message": "Change Password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/AccountSettings.tsx", 77],
+      ["src/views/settings/AccountSettings.tsx", 87],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 109],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 178]
+    ],
+    "translation": "Cambiar contraseña"
+  },
+  "yD3ZSw": {
+    "message": "Change your language preferences.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 52]],
+    "translation": "Cambia tus preferencias de idioma."
+  },
+  "gZxH/p": {
+    "message": "changed the due date to <0>{formattedDate}</0>",
+    "placeholders": {
+      "formattedDate": ["formattedDate"]
+    },
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/ActivityList.tsx", 303],
+      ["src/views/card/components/ActivityList.tsx", 317]
+    ],
+    "translation": "cambió la fecha de vencimiento a <0>{formattedDate}</0>"
+  },
+  "pFGfsR": {
+    "message": "Check out some of our favorite open source projects.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/oss-friends/index.tsx", 61]],
+    "translation": "Echa un vistazo a algunos de nuestros proyectos de código abierto favoritos."
+  },
+  "5IXWmO": {
+    "message": "Check your inbox",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/auth/login/index.tsx", 43],
+      ["src/views/auth/signup/index.tsx", 69]
+    ],
+    "translation": "Revisa tu bandeja de entrada"
+  },
+  "GnRmu4": {
+    "message": "Checklist name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 119]],
+    "translation": "Nombre de la lista de verificación"
+  },
+  "EH8IL3": {
+    "message": "Checklists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 108],
+      ["src/views/pricing/components/PricingTiers.tsx", 39]
+    ],
+    "translation": "Listas de verificación"
+  },
+  "VHS0aJ": {
+    "message": "Clear all custom permissions?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
+        32
+      ]
+    ],
+    "translation": "¿Eliminar todos los permisos personalizados?"
+  },
+  "xvcYhz": {
+    "message": "Clear any custom member permissions so that all members only inherit permissions from their role defaults.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 67]],
+    "translation": "Elimina cualquier permiso personalizado de miembros para que todos los miembros solo hereden permisos de sus roles predeterminados."
+  },
+  "jL82rC": {
+    "message": "Clear custom permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
+        48
+      ],
+      ["src/views/settings/PermissionsSettings.tsx", 80]
+    ],
+    "translation": "Eliminar permisos personalizados"
+  },
+  "u8JHrO": {
+    "message": "Clear filters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 227]],
+    "translation": "Limpiar filtros"
+  },
+  "RRn9jf": {
+    "message": "Click on the link we've sent to {magicLinkRecipient} to sign in.",
+    "placeholders": {
+      "magicLinkRecipient": ["magicLinkRecipient"]
+    },
+    "comments": [],
+    "origin": [
+      ["src/views/auth/login/index.tsx", 48],
+      ["src/views/auth/signup/index.tsx", 74]
+    ],
+    "translation": "Haz clic en el enlace que hemos enviado a {magicLinkRecipient} para iniciar sesión."
+  },
+  "yz7wBu": {
+    "message": "Close",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/index.tsx", 346],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
+      ["src/views/settings/components/NewApiKeyModal.tsx", 136]
+    ],
+    "translation": "Cerrar"
+  },
+  "TcXcmk": {
+    "message": "Code Review",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 23]],
+    "translation": "Revisión de código"
+  },
+  "EvArWh": {
+    "message": "Collaborate seamlessly with your team.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 91]],
+    "translation": "Colabora sin problemas con tu equipo."
+  },
+  "dtQIWT": {
+    "message": "Collaboration",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 309]
+    ],
+    "translation": "Colaboración"
+  },
+  "AUYALh": {
+    "message": "Coming soon",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 352],
+      ["src/views/home/components/Features.tsx", 67],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 86]
+    ],
+    "translation": "Próximamente"
+  },
+  "VbyRUy": {
+    "message": "Comments",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Features.tsx", 105],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 156]
+    ],
+    "translation": "Comentarios"
+  },
+  "7i8j3G": {
+    "message": "Company",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 95]],
+    "translation": "Empresa"
+  },
+  "bD8I7O": {
+    "message": "Complete",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 94]],
+    "translation": "Completar"
+  },
+  "cAgBMh": {
+    "message": "Complete control and ownership:",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 70]],
+    "translation": "Control y propiedad completos:"
+  },
+  "Lt+ZP3": {
+    "message": "completed a checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 137]],
+    "translation": "completó un elemento de la lista de verificación"
+  },
+  "29sSki": {
+    "message": "completed checklist item <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 249]],
+    "translation": "completó el elemento de la lista de verificación <0>{0}</0>"
+  },
+  "tOZp9v": {
+    "message": "Configurable user roles and permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 82]],
+    "translation": "Roles de usuario y permisos configurables"
+  },
+  "/f3t6v": {
+    "message": "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 56]],
+    "translation": "Configura qué acciones están permitidas para cada rol del espacio de trabajo. Estos permisos se aplican a todos los miembros con ese rol."
+  },
+  "86XI28": {
+    "message": "Confirm your email preferences:",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/unsubscribe/index.tsx", 81]],
+    "translation": "Confirma tus preferencias de correo electrónico:"
+  },
+  "479pdJ": {
+    "message": "Confirm your new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 150]
+    ],
+    "translation": "Confirma tu nueva contraseña"
+  },
+  "nk7caK": {
+    "message": "Connect Trello",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/ImportBoardsForm.tsx", 157],
+      ["src/views/settings/IntegrationsSettings.tsx", 93]
+    ],
+    "translation": "Conectar Trello"
+  },
+  "sDLCvT": {
+    "message": "Connect your favorite tools to streamline your workflow.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 122]],
+    "translation": "Conecta tus herramientas favoritas para optimizar tu flujo de trabajo."
+  },
+  "5eZwRW": {
+    "message": "Connect your Trello account to import boards.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 80]],
+    "translation": "Conecta tu cuenta de Trello para importar tableros."
+  },
+  "jfC/xh": {
+    "message": "Contact",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Footer.tsx", 38],
+      ["src/views/home/components/Header.tsx", 42]
+    ],
+    "translation": "Contacto"
+  },
+  "Alp2ti": {
+    "message": "Contact Sales",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 95]],
+    "translation": "Contactar con ventas"
+  },
+  "Bhgd0l": {
+    "message": "Contact us",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/FeedbackModal.tsx", 100],
+      ["src/views/pricing/components/PricingTiers.tsx", 96],
+      ["src/views/pricing/components/PricingTiers.tsx", 96]
+    ],
+    "translation": "Contáctanos"
+  },
+  "AX4ktp": {
+    "message": "Content Creation",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 40]],
+    "translation": "Creación de contenido"
+  },
+  "J2Wbjt": {
+    "message": "Continue with ",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 437]],
+    "translation": "Continuar con "
+  },
+  "gkzAEM": {
+    "message": "Continue with {0}",
+    "placeholders": {
+      "0": ["key === \"oidc\" ? oidcProviderName : provider.name"]
+    },
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 355]],
+    "translation": "Continuar con {0}"
+  },
+  "va/3u1": {
+    "message": "Control who can view and edit your boards.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 86]],
+    "translation": "Controla quién puede ver y editar tus tableros."
+  },
+  "zQPhSa": {
+    "message": "Convert to link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 47]],
+    "translation": "Convertir en enlace"
+  },
+  "5RkSzq": {
+    "message": "Copy board link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugButton.tsx", 87]],
+    "translation": "Copiar enlace del tablero"
+  },
+  "F0YmUY": {
+    "message": "Copy card link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Dropdown.tsx", 58]],
+    "translation": "Copiar enlace de la tarjeta"
+  },
+  "9PaIxv": {
+    "message": "Core features",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 305]
+    ],
+    "translation": "Funciones principales"
+  },
+  "b9XOHo": {
+    "message": "Create {0}",
+    "placeholders": {
+      "0": ["isTemplate ? \"template\" : \"board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 166]],
+    "translation": "Crear {0}"
+  },
+  "vgdzLf": {
+    "message": "Create another",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/LabelForm.tsx", 213],
+      ["src/views/board/components/NewCardForm.tsx", 517],
+      ["src/views/board/components/NewListForm.tsx", 141]
+    ],
+    "translation": "Crear otro"
+  },
+  "uXGLuq": {
+    "message": "Create API key",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 175]],
+    "translation": "Crear clave API"
+  },
+  "dsLT3m": {
+    "message": "Create card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 527]],
+    "translation": "Crear tarjeta"
+  },
+  "d33Usy": {
+    "message": "Create checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 135]],
+    "translation": "Crear lista de verificación"
+  },
+  "zKY5xi": {
+    "message": "Create invite link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 349]],
+    "translation": "Crear enlace de invitación"
+  },
+  "QtACvI": {
+    "message": "Create label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/LabelForm.tsx", 238]],
+    "translation": "Crear etiqueta"
+  },
+  "XTKtey": {
+    "message": "Create list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewListForm.tsx", 153]],
+    "translation": "Crear lista"
+  },
+  "VKoDQD": {
+    "message": "Create new {0}",
+    "placeholders": {
+      "0": ["isTemplate ? \"template\" : \"board\""]
+    },
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/BoardsList.tsx", 79],
+      ["src/views/boards/index.tsx", 28]
+    ],
+    "translation": "Crear nuevo {0}"
+  },
+  "okpxfB": {
+    "message": "Create new key",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/ApiSettings.tsx", 30]],
+    "translation": "Crear nueva clave"
+  },
+  "0+0/3e": {
+    "message": "Create new label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/NewCardForm.tsx", 415],
+      ["src/views/card/components/LabelSelector.tsx", 100]
+    ],
+    "translation": "Crear nueva etiqueta"
+  },
+  "aWlSc/": {
+    "message": "Create new list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/index.tsx", 75],
+      ["src/views/board/index.tsx", 541]
+    ],
+    "translation": "Crear nueva lista"
+  },
+  "A5hiCy": {
+    "message": "Create template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 132]],
+    "translation": "Crear plantilla"
+  },
+  "FdtSNC": {
+    "message": "Create workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 387],
+      ["src/components/WorkspaceMenu.tsx", 153]
+    ],
+    "translation": "Crear espacio de trabajo"
+  },
+  "f8lDFq": {
+    "message": "created the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 124]],
+    "translation": "creó la tarjeta"
+  },
+  "J5nbej": {
+    "message": "Critical",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 24],
+      ["src/views/boards/components/TemplateBoards.tsx", 30],
+      ["src/views/boards/components/TemplateBoards.tsx", 36]
+    ],
+    "translation": "Crítico"
+  },
+  "pa9o5D": {
+    "message": "Crop your avatar",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/Avatar.tsx", 253]],
+    "translation": "Recorta tu avatar"
+  },
+  "D3C4Yx": {
+    "message": "Current password is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 19]
+    ],
+    "translation": "Se requiere la contraseña actual"
+  },
+  "nqdIhs": {
+    "message": "Custom board templates",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 38]],
+    "translation": "Plantillas de tablero personalizadas"
+  },
+  "A42Dqn": {
+    "message": "Custom branding",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 172],
+      ["src/views/pricing/components/PricingTiers.tsx", 83]
+    ],
+    "translation": "Marca personalizada"
+  },
+  "GAD3Dx": {
+    "message": "Custom domain",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 74]],
+    "translation": "Dominio personalizado"
+  },
+  "2M84k3": {
+    "message": "Custom permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 64]],
+    "translation": "Permisos personalizados"
+  },
+  "UirJfL": {
+    "message": "Custom SLA",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 105]],
+    "translation": "SLA personalizado"
+  },
+  "u2+JIh": {
+    "message": "Custom URLs require upgrading to a Pro plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 318]],
+    "translation": "Las URLs personalizadas requieren actualizar a un plan Pro"
+  },
+  "7RpHg/": {
+    "message": "Custom username",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 100],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 101]
+    ],
+    "translation": "Nombre de usuario personalizado"
+  },
+  "j9IZZ0": {
+    "message": "Custom workspace URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 342],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 76]
+    ],
+    "translation": "URL del espacio de trabajo personalizada"
+  },
+  "OwneeH": {
+    "message": "Custom workspace username",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 81]],
+    "translation": "Nombre de usuario del espacio de trabajo personalizado"
+  },
+  "n+xLOH": {
+    "message": "Customer Support",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 54]],
+    "translation": "Atención al cliente"
+  },
+  "pvnfJD": {
+    "message": "Dark",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/UserMenu.tsx", 158]],
+    "translation": "Oscuro"
+  },
+  "cp1rsD": {
+    "message": "Deactivate invite link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 348]],
+    "translation": "Desactivar enlace de invitación"
+  },
+  "bKzM8L": {
+    "message": "Dedicated account manager",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 104]],
+    "translation": "Gestor de cuenta dedicado"
+  },
+  "P8Cunr": {
+    "message": "Default username",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 98],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 99]
+    ],
+    "translation": "Nombre de usuario predeterminado"
+  },
+  "cnGeoo": {
+    "message": "Delete",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/DeleteLabelConfirmation.tsx", 51],
+      ["src/components/LabelForm.tsx", 228],
+      ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 52],
+      ["src/views/board/components/DeleteBoardConfirmation.tsx", 47],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 92],
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 67],
+      ["src/views/card/components/DeleteCommentConfirmation.tsx", 83]
+    ],
+    "translation": "Eliminar"
+  },
+  "ZDGm40": {
+    "message": "Delete account",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/AccountSettings.tsx", 59],
+      ["src/views/settings/AccountSettings.tsx", 69],
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 96]
+    ],
+    "translation": "Eliminar cuenta"
+  },
+  "tmpW+w": {
+    "message": "Delete board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 104]],
+    "translation": "Eliminar tablero"
+  },
+  "nabda1": {
+    "message": "Delete card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Dropdown.tsx", 76]],
+    "translation": "Eliminar tarjeta"
+  },
+  "njJFtc": {
+    "message": "Delete comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Comment.tsx", 120]],
+    "translation": "Eliminar comentario"
+  },
+  "lYT7pQ": {
+    "message": "Delete list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/List.tsx", 147]],
+    "translation": "Eliminar lista"
+  },
+  "DFjdv0": {
+    "message": "Delete template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 104]],
+    "translation": "Eliminar plantilla"
+  },
+  "kYu0eF": {
+    "message": "Delete workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 106],
+      ["src/views/settings/WorkspaceSettings.tsx", 115],
+      ["src/views/settings/WorkspaceSettings.tsx", 126]
+    ],
+    "translation": "Eliminar espacio de trabajo"
+  },
+  "mTGd3+": {
+    "message": "deleted a checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 134]],
+    "translation": "eliminó una lista de verificación"
+  },
+  "W5r8Qh": {
+    "message": "deleted a checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 139]],
+    "translation": "eliminó un elemento de la lista de verificación"
+  },
+  "BMkVQ3": {
+    "message": "deleted checklist <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(fromTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 224]],
+    "translation": "eliminó la lista de verificación <0>{0}</0>"
+  },
+  "CHZ1jC": {
+    "message": "deleted checklist item <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(fromTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 267]],
+    "translation": "eliminó el elemento de la lista de verificación <0>{0}</0>"
+  },
+  "f8fH8W": {
+    "message": "Design",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 45]],
+    "translation": "Diseño"
+  },
+  "YBBifR": {
+    "message": "Disconnect Trello",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 108]],
+    "translation": "Desconectar Trello"
+  },
+  "1sRmLC": {
+    "message": "Discuss and collaborate on cards.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 106]],
+    "translation": "Discute y colabora en tarjetas."
+  },
+  "pfa8F0": {
+    "message": "Display name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 35]],
+    "translation": "Nombre para mostrar"
+  },
+  "MlyjJu": {
+    "message": "Display name cannot exceed 280 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 22]],
+    "translation": "El nombre para mostrar no puede exceder 280 caracteres"
+  },
+  "KFJgmZ": {
+    "message": "Display name must be at least 3 characters long",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 19]],
+    "translation": "El nombre para mostrar debe tener al menos 3 caracteres"
+  },
+  "x8GeCD": {
+    "message": "Display name updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 41]],
+    "translation": "Nombre para mostrar actualizado"
+  },
+  "evj0lK": {
+    "message": "Do you offer a free plan?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 83]],
+    "translation": "¿Ofrecéis un plan gratuito?"
+  },
+  "jDRt4n": {
+    "message": "Do you want to unsubscribe?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/unsubscribe/index.tsx", 78]],
+    "translation": "¿Quieres cancelar la suscripción?"
+  },
+  "JyXBgS": {
+    "message": "docs",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 109]],
+    "translation": "docs"
+  },
+  "TbjyhA": {
+    "message": "Docs",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Header.tsx", 20]],
+    "translation": "Docs"
+  },
+  "TvY/XA": {
+    "message": "Documentation",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/UserMenu.tsx", 209],
+      ["src/views/boards/components/TemplateBoards.tsx", 24],
+      ["src/views/boards/components/TemplateBoards.tsx", 30],
+      ["src/views/boards/components/TemplateBoards.tsx", 36],
+      ["src/views/home/components/Footer.tsx", 78],
+      ["src/views/home/components/Header.tsx", 36]
+    ],
+    "translation": "Documentación"
+  },
+  "vUr5JT": {
+    "message": "Don't have an account? <0><1>Sign up</1></0>",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/login/index.tsx", 63]],
+    "translation": "¿No tienes una cuenta? <0><1>Regístrate</1></0>"
+  },
+  "DPfwMq": {
+    "message": "Done",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 17],
+      ["src/views/boards/components/TemplateBoards.tsx", 23],
+      ["src/views/boards/components/TemplateBoards.tsx", 29],
+      ["src/views/boards/components/TemplateBoards.tsx", 35],
+      ["src/views/boards/components/TemplateBoards.tsx", 48],
+      ["src/views/boards/components/TemplateBoards.tsx", 61]
+    ],
+    "translation": "Hecho"
+  },
+  "R3FsF4": {
+    "message": "Download failed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 142]],
+    "translation": "Error en la descarga"
+  },
+  "XicmhT": {
+    "message": "Due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/Filters.tsx", 171],
+      ["src/views/board/components/NewCardForm.tsx", 470],
+      ["src/views/card/index.tsx", 153]
+    ],
+    "translation": "Fecha de vencimiento"
+  },
+  "ri1hHe": {
+    "message": "Due next month",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 132]],
+    "translation": "Vence el próximo mes"
+  },
+  "iHcdea": {
+    "message": "Due next week",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 127]],
+    "translation": "Vence la próxima semana"
+  },
+  "1iShX0": {
+    "message": "Due today",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 117]],
+    "translation": "Vence hoy"
+  },
+  "zxKs+y": {
+    "message": "Due tomorrow",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 122]],
+    "translation": "Vence mañana"
+  },
+  "ePK91l": {
+    "message": "Edit",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 42]],
+    "translation": "Editar"
+  },
+  "tIdipJ": {
+    "message": "Edit board URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/BoardDropdown.tsx", 84],
+      ["src/views/board/components/UpdateBoardSlugForm.tsx", 116]
+    ],
+    "translation": "Editar URL del tablero"
+  },
+  "rF8SEQ": {
+    "message": "Edit comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Comment.tsx", 111]],
+    "translation": "Editar comentario"
+  },
+  "dgr4Kq": {
+    "message": "Edit label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/LabelForm.tsx", 119]],
+    "translation": "Editar etiqueta"
+  },
+  "TCOMOO": {
+    "message": "Edit permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 162],
+      ["src/views/members/index.tsx", 224]
+    ],
+    "translation": "Editar permisos"
+  },
+  "klpSmb": {
+    "message": "Edit workspace URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 162]],
+    "translation": "Editar URL del espacio de trabajo"
+  },
+  "PRofO0": {
+    "message": "Edit YouTube Video",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 108]],
+    "translation": "Editar video de YouTube"
+  },
+  "gGx5tM": {
+    "message": "Editing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 44]],
+    "translation": "Editando"
+  },
+  "b/LfJo": {
+    "message": "email",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 438]],
+    "translation": "email"
+  },
+  "O3oNi5": {
+    "message": "Email",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 272],
+      ["src/views/settings/AccountSettings.tsx", 42]
+    ],
+    "translation": "Email"
+  },
+  "aW3TOw": {
+    "message": "Email notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 191]
+    ],
+    "translation": "Notificaciones por email"
+  },
+  "V1KOLq": {
+    "message": "Email notifications for mentions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 60]],
+    "translation": "Notificaciones por email para menciones"
+  },
+  "IqjpYe": {
+    "message": "Email visibility",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 90]],
+    "translation": "Visibilidad del email"
+  },
+  "0+ewPp": {
+    "message": "Enhancement",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 24],
+      ["src/views/boards/components/TemplateBoards.tsx", 30],
+      ["src/views/boards/components/TemplateBoards.tsx", 36]
+    ],
+    "translation": "Mejora"
+  },
+  "V8YWP3": {
+    "message": "Enter a custom title",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 131]],
+    "translation": "Introduce un título personalizado"
+  },
+  "fR9laE": {
+    "message": "Enter your current password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 122]
+    ],
+    "translation": "Introduce tu contraseña actual"
+  },
+  "O0li0W": {
+    "message": "Enter your current password and choose a new secure password.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 111]
+    ],
+    "translation": "Introduce tu contraseña actual y elige una nueva contraseña segura."
+  },
+  "xRPn3U": {
+    "message": "Enter your email address",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 402]],
+    "translation": "Introduce tu dirección de email"
+  },
+  "n9V+ps": {
+    "message": "Enter your name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 390]],
+    "translation": "Introduce tu nombre"
+  },
+  "0StR7t": {
+    "message": "Enter your new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 136]
+    ],
+    "translation": "Introduce tu nueva contraseña"
+  },
+  "NgaR6B": {
+    "message": "Enter your password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 416]],
+    "translation": "Introduce tu contraseña"
+  },
+  "GpB8YV": {
+    "message": "Enterprise",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 334],
+      ["src/views/pricing/components/PricingTiers.tsx", 92]
+    ],
+    "translation": "Enterprise"
+  },
+  "SlfejT": {
+    "message": "Error",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/NewBoardForm.tsx", 77],
+      ["src/views/boards/components/NewBoardForm.tsx", 92],
+      ["src/views/members/components/InviteMemberForm.tsx", 215]
+    ],
+    "translation": "Error"
+  },
+  "55xJ/O": {
+    "message": "Error Changing Password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 89]
+    ],
+    "translation": "Error al cambiar la contraseña"
+  },
+  "cji2nM": {
+    "message": "Error creating invite link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 128]],
+    "translation": "Error al crear el enlace de invitación"
+  },
+  "USVCGU": {
+    "message": "Error deactivating invite link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 144]],
+    "translation": "Error al desactivar el enlace de invitación"
+  },
+  "bqAQaT": {
+    "message": "Error deleting account",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 39]
+    ],
+    "translation": "Error al eliminar la cuenta"
+  },
+  "q+lt9D": {
+    "message": "Error deleting label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/DeleteLabelConfirmation.tsx", 25]],
+    "translation": "Error al eliminar la etiqueta"
+  },
+  "9s9O5h": {
+    "message": "Error deleting workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 45]
+    ],
+    "translation": "Error al eliminar el espacio de trabajo"
+  },
+  "lKAvEd": {
+    "message": "Error disconnecting Trello",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 60]],
+    "translation": "Error al desconectar Trello"
+  },
+  "rarRW/": {
+    "message": "Error inviting member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 97],
+      ["src/views/members/components/InviteMemberForm.tsx", 103]
+    ],
+    "translation": "Error al invitar al miembro"
+  },
+  "sVBn4K": {
+    "message": "Error updating display name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 54]],
+    "translation": "Error al actualizar el nombre para mostrar"
+  },
+  "CkVV1t": {
+    "message": "Error updating workspace description",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 63]
+    ],
+    "translation": "Error al actualizar la descripción del espacio de trabajo"
+  },
+  "LoUCpj": {
+    "message": "Error updating workspace name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 58]
+    ],
+    "translation": "Error al actualizar el nombre del espacio de trabajo"
+  },
+  "x0kMO/": {
+    "message": "Error updating workspace URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 75]
+    ],
+    "translation": "Error al actualizar la URL del espacio de trabajo"
+  },
+  "YaZDYI": {
+    "message": "Error upgrading subscription",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 240],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 41]
+    ],
+    "translation": "Error al actualizar la suscripción"
+  },
+  "lsgnzd": {
+    "message": "Error upgrading to Pro",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 145]],
+    "translation": "Error al actualizar a Pro"
+  },
+  "CYWHT+": {
+    "message": "Error uploading profile image",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/Avatar.tsx", 69],
+      ["src/views/settings/components/Avatar.tsx", 199]
+    ],
+    "translation": "Error al subir la imagen de perfil"
+  },
+  "8iP0S8": {
+    "message": "Everything in the free plan, plus:",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 52]],
+    "translation": "Todo lo del plan gratuito, más:"
+  },
+  "ANyn0x": {
+    "message": "Everything you need, free forever. Unlimited boards, unlimited lists, unlimited cards. Upgrade any time.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 33]],
+    "translation": "Todo lo que necesitas, gratis para siempre. Tableros ilimitados, listas ilimitadas, tarjetas ilimitadas. Actualiza cuando quieras."
+  },
+  "t+R8+P": {
+    "message": "Execution",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 91]],
+    "translation": "Ejecución"
+  },
+  "GwNIE2": {
+    "message": "Extended Roadmap",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 34]],
+    "translation": "Hoja de ruta extendida"
+  },
+  "HYV6Lq": {
+    "message": "Failed to accept invitation. Please try again later, or contact customer support.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 41]],
+    "translation": "No se pudo aceptar la invitación. Por favor, inténtalo de nuevo más tarde o contacta con atención al cliente."
+  },
+  "lXvXNI": {
+    "message": "Failed to copy invite link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 216]],
+    "translation": "No se pudo copiar el enlace de invitación"
+  },
+  "53QYh8": {
+    "message": "Failed to create board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/NewBoardForm.tsx", 78],
+      ["src/views/boards/components/NewBoardForm.tsx", 93]
+    ],
+    "translation": "No se pudo crear el tablero"
+  },
+  "W8oT+L": {
+    "message": "Failed to fetch video information",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 82]],
+    "translation": "No se pudo obtener la información del vídeo"
+  },
+  "YtUfwW": {
+    "message": "Failed to login with {0}. Please try again.",
+    "placeholders": {
+      "0": ["provider.at(0)?.toUpperCase() + provider.slice(1)"]
+    },
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 291]],
+    "translation": "No se pudo iniciar sesión con {0}. Por favor, inténtalo de nuevo."
+  },
+  "ZL1A+p": {
+    "message": "Failed to upload attachment. Please try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 52]],
+    "translation": "No se pudo subir el archivo adjunto. Por favor, inténtalo de nuevo."
+  },
+  "/lDBHm": {
+    "message": "FAQ",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Header.tsx", 41]],
+    "translation": "Preguntas frecuentes"
+  },
+  "aJ4pMe": {
+    "message": "FAQs",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Faqs.tsx", 143],
+      ["src/views/home/components/Footer.tsx", 52]
+    ],
+    "translation": "Preguntas frecuentes"
+  },
+  "en3oy5": {
+    "message": "Feature",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 24],
+      ["src/views/boards/components/TemplateBoards.tsx", 30],
+      ["src/views/boards/components/TemplateBoards.tsx", 36]
+    ],
+    "translation": "Función"
+  },
+  "JCdzgZ": {
+    "message": "Feature Request",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 65]],
+    "translation": "Solicitud de función"
+  },
+  "PpZkda": {
+    "message": "Features",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Features.tsx", 132],
+      ["src/views/home/components/Footer.tsx", 50],
+      ["src/views/home/components/Header.tsx", 17],
+      ["src/views/home/components/Header.tsx", 33]
+    ],
+    "translation": "Funciones"
+  },
+  "YirHq7": {
+    "message": "Feedback",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/FeedbackModal.tsx", 59],
+      ["src/components/UserMenu.tsx", 217]
+    ],
+    "translation": "Comentarios"
+  },
+  "2roTVj": {
+    "message": "Feedback sent",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 33]],
+    "translation": "Comentarios enviados"
+  },
+  "F6m23G": {
+    "message": "File uploads",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 89]],
+    "translation": "Subida de archivos"
+  },
+  "o7J4JM": {
+    "message": "Filter",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 221]],
+    "translation": "Filtrar"
+  },
+  "l31EoQ": {
+    "message": "Find answers to common questions about Kan. Can't find what you're looking for? Feel free to <0>contact us</0>.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 150]],
+    "translation": "Encuentra respuestas a preguntas frecuentes sobre Kan. ¿No encuentras lo que buscas? No dudes en <0>contactarnos</0>."
+  },
+  "+3TYXa": {
+    "message": "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 41]],
+    "translation": "Para la sostenibilidad a largo plazo, reconocemos que todos los buenos proyectos de código abierto necesitan una fuente de ingresos. La nuestra proviene de la oferta de pago en la nube para espacios de trabajo con múltiples usuarios y para slugs de espacio de trabajo personalizados. No hay obligación de usarla, y puedes alojar el software en tu propia infraestructura de forma gratuita."
+  },
+  "2POOFK": {
+    "message": "Free",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 331],
+      ["src/views/pricing/components/Pricing.tsx", 32],
+      ["src/views/pricing/components/Pricing.tsx", 32],
+      ["src/views/pricing/components/PricingTiers.tsx", 26]
+    ],
+    "translation": "Gratis"
+  },
+  "uP4V6I": {
+    "message": "Free for everyone",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 31]],
+    "translation": "Gratis para todos"
+  },
+  "W/nQk1": {
+    "message": "Free Plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 333],
+      ["src/views/members/index.tsx", 293]
+    ],
+    "translation": "Plan gratuito"
+  },
+  "gpfJ3v": {
+    "message": "Free, forever",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 34]],
+    "translation": "Gratis, para siempre"
+  },
+  "6uBU1F": {
+    "message": "Full API access",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 239],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 240],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 241]
+    ],
+    "translation": "Acceso completo a la API"
+  },
+  "KiVc+q": {
+    "message": "Full-time",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "translation": "Tiempo completo"
+  },
+  "rmN315": {
+    "message": "Fun",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "translation": "Diversión"
+  },
+  "Weq9zb": {
+    "message": "General",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 54]],
+    "translation": "General"
+  },
+  "ZDIydz": {
+    "message": "Get started",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/auth/signup/index.tsx", 69],
+      ["src/views/home/components/Cta.tsx", 61],
+      ["src/views/home/components/Header.tsx", 106],
+      ["src/views/pricing/components/PricingTiers.tsx", 29],
+      ["src/views/pricing/components/PricingTiers.tsx", 50],
+      ["src/views/pricing/components/PricingTiers.tsx", 73]
+    ],
+    "translation": "Comenzar"
+  },
+  "c3b0B0": {
+    "message": "Get Started",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 31],
+      ["src/views/pricing/components/Pricing.tsx", 49]
+    ],
+    "translation": "Comenzar"
+  },
+  "6FsGbN": {
+    "message": "Get started by creating a new {0}",
+    "placeholders": {
+      "0": ["isTemplate ? \"template\" : \"board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/boards/components/BoardsList.tsx", 65]],
+    "translation": "Comienza creando un nuevo {0}"
+  },
+  "zC8Whw": {
+    "message": "Get started by creating a new list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 526]],
+    "translation": "Comienza creando una nueva lista"
+  },
+  "oW13KZ": {
+    "message": "Get started for free today",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Cta.tsx", 54]],
+    "translation": "Comienza gratis hoy"
+  },
+  "+OhFss": {
+    "message": "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 92]],
+    "translation": "Comienza gratis, sin límites de uso. Para colaboración, actualiza a un plan que se ajuste al tamaño de tu equipo."
+  },
+  "rD6UIt": {
+    "message": "Get started on Cloud",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/index.tsx", 75]],
+    "translation": "Comenzar en la nube"
+  },
+  "7hktsm": {
+    "message": "Getting started",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 25]],
+    "translation": "Primeros pasos"
+  },
+  "RkXlPZ": {
+    "message": "GitHub",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 37]],
+    "translation": "GitHub"
+  },
+  "7eMo+U": {
+    "message": "Go Home",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 113]],
+    "translation": "Ir al inicio"
+  },
+  "UveK6V": {
+    "message": "Go to app",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Header.tsx", 100],
+      ["src/views/invite/index.tsx", 144]
+    ],
+    "translation": "Ir a la aplicación"
+  },
+  "mgXgHu": {
+    "message": "Go to boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/SideNavigation.tsx", 107]],
+    "translation": "Ir a tableros"
+  },
+  "KAsRdK": {
+    "message": "Go to members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/SideNavigation.tsx", 131]],
+    "translation": "Ir a miembros"
+  },
+  "1WuwiM": {
+    "message": "Go to settings",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/SideNavigation.tsx", 143]],
+    "translation": "Ir a configuración"
+  },
+  "csFbe+": {
+    "message": "Go to templates",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/SideNavigation.tsx", 119]],
+    "translation": "Ir a plantillas"
+  },
+  "cdyS7J": {
+    "message": "Google SSO",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 257],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 258],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 259]
+    ],
+    "translation": "Google SSO"
+  },
+  "vkqf1W": {
+    "message": "Google SSO + SAML",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 260]
+    ],
+    "translation": "Google SSO + SAML"
+  },
+  "O1wAlQ": {
+    "message": "Guest",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 203]],
+    "translation": "Invitado"
+  },
+  "CB/NpV": {
+    "message": "High Priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 18]],
+    "translation": "Prioridad alta"
+  },
+  "XXbgHS": {
+    "message": "Hired",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 80]],
+    "translation": "Contratado"
+  },
+  "LrcnbT": {
+    "message": "Host Kan on your own infrastructure. Ideal for organisations that need complete control over their data.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 69]],
+    "translation": "Aloja Kan en tu propia infraestructura. Ideal para organizaciones que necesitan control completo sobre sus datos."
+  },
+  "WI4eGo": {
+    "message": "How do I get a custom URL?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 64]],
+    "translation": "¿Cómo obtengo una URL personalizada?"
+  },
+  "yV7o5I": {
+    "message": "How do I import my Trello boards?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 46]],
+    "translation": "¿Cómo importo mis tableros de Trello?"
+  },
+  "nol/Fb": {
+    "message": "How do I invite team members?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 108]],
+    "translation": "¿Cómo invito a miembros del equipo?"
+  },
+  "KuSt9W": {
+    "message": "How do I self-host?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 124]],
+    "translation": "¿Cómo hago el auto-alojamiento?"
+  },
+  "UeDFpo": {
+    "message": "How is the project funded?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 38]],
+    "translation": "¿Cómo se financia el proyecto?"
+  },
+  "6S8zjx": {
+    "message": "https://www.youtube.com/watch?v=...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 151]],
+    "translation": "https://www.youtube.com/watch?v=..."
+  },
+  "2liqDZ": {
+    "message": "I acknowledge that all of my account data will be permanently deleted and want to proceed.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 82]
+    ],
+    "translation": "Reconozco que todos los datos de mi cuenta se eliminarán permanentemente y quiero continuar."
+  },
+  "2Py5S/": {
+    "message": "I acknowledge that all of the workspace data will be permanently deleted and want to proceed.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 92]
+    ],
+    "translation": "Reconozco que todos los datos del espacio de trabajo se eliminarán permanentemente y quiero continuar."
+  },
+  "iwr7AP": {
+    "message": "Ideas",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 88]],
+    "translation": "Ideas"
+  },
+  "F/vB2g": {
+    "message": "Ideas to improve this page...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 75]],
+    "translation": "Ideas para mejorar esta página..."
+  },
+  "l3s5ri": {
+    "message": "Import",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/index.tsx", 60]],
+    "translation": "Importar"
+  },
+  "2MPcep": {
+    "message": "Import complete",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 191]],
+    "translation": "Importación completada"
+  },
+  "BEVzjL": {
+    "message": "Import failed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 204]],
+    "translation": "Importación fallida"
+  },
+  "rRM7r0": {
+    "message": "Import your Trello boards and hit the ground running.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 96]],
+    "translation": "Importa tus tableros de Trello y empieza a trabajar de inmediato."
+  },
+  "c/IAuR": {
+    "message": "Important",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "translation": "Importante"
+  },
+  "xMn+V9": {
+    "message": "Importing from Trello",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 27]],
+    "translation": "Importando desde Trello"
+  },
+  "g2xBxu": {
+    "message": "Importing your Trello boards into Kan is easy. You can follow our step-by-step guide <0>here</0>.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 49]],
+    "translation": "Importar tus tableros de Trello a Kan es fácil. Puedes seguir nuestra guía paso a paso <0>aquí</0>."
+  },
+  "02i3WU": {
+    "message": "Imports",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 313]
+    ],
+    "translation": "Importaciones"
+  },
+  "JxhWxU": {
+    "message": "in",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/CommandPallette.tsx", 168]],
+    "translation": "en"
+  },
+  "WbTDwg": {
+    "message": "In Progress",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 17],
+      ["src/views/boards/components/TemplateBoards.tsx", 23],
+      ["src/views/boards/components/TemplateBoards.tsx", 29],
+      ["src/views/boards/components/TemplateBoards.tsx", 35],
+      ["src/views/boards/components/TemplateBoards.tsx", 58]
+    ],
+    "translation": "En progreso"
+  },
+  "6mbe4b": {
+    "message": "Individuals",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 28]],
+    "translation": "Individuales"
+  },
+  "nbfdhU": {
+    "message": "Integrations",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SettingsLayout.tsx", 70],
+      ["src/views/home/components/Features.tsx", 121]
+    ],
+    "translation": "Integraciones"
+  },
+  "N7aud6": {
+    "message": "Intelligent search",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 140]
+    ],
+    "translation": "Búsqueda inteligente"
+  },
+  "goklcJ": {
+    "message": "Interviewing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 77]],
+    "translation": "Entrevistando"
+  },
+  "XILg0L": {
+    "message": "Invalid email address",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 51]],
+    "translation": "Dirección de correo electrónico no válida"
+  },
+  "odFCYX": {
+    "message": "Invalid invitation",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 105]],
+    "translation": "Invitación no válida"
+  },
+  "MFKlMB": {
+    "message": "Invite",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 306]],
+    "translation": "Invitar"
+  },
+  "KLJ4eD": {
+    "message": "Invite link copied",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 209]],
+    "translation": "Enlace de invitación copiado"
+  },
+  "mZGPxt": {
+    "message": "Invite link copied to clipboard",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 210]],
+    "translation": "Enlace de invitación copiado al portapapeles"
+  },
+  "D9ROdV": {
+    "message": "Invite links",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 207],
+      ["src/views/pricing/components/PricingTiers.tsx", 58]
+    ],
+    "translation": "Enlaces de invitación"
+  },
+  "25mvI+": {
+    "message": "Invite links require a Team or Pro subscription. Please upgrade your workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 123]],
+    "translation": "Los enlaces de invitación requieren una suscripción Team o Pro. Por favor, actualiza tu espacio de trabajo."
+  },
+  "+djOzj": {
+    "message": "Invite member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/MemberSelector.tsx", 114],
+      ["src/views/members/components/InviteMemberForm.tsx", 367]
+    ],
+    "translation": "Invitar miembro"
+  },
+  "qPP4lD": {
+    "message": "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 336]],
+    "translation": "Invitar miembros requiere un plan Team. Serás redirigido para actualizar tu espacio de trabajo."
+  },
+  "c9AJhn": {
+    "message": "Join workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/invite/index.tsx", 79],
+      ["src/views/invite/index.tsx", 129]
+    ],
+    "translation": "Unirse al espacio de trabajo"
+  },
+  "A23Y7X": {
+    "message": "Join workspace | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 91]],
+    "translation": "Unirse al espacio de trabajo | kan.bn"
+  },
+  "wM8xd8": {
+    "message": "Junior",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "translation": "Junior"
+  },
+  "aWDhU5": {
+    "message": "Kanban is better with a team. Perfect for small and growing teams looking to collaborate.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 51]],
+    "translation": "Kanban es mejor en equipo. Perfecto para equipos pequeños y en crecimiento que buscan colaborar."
+  },
+  "Xjj/kS": {
+    "message": "Kanban reimagined",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 136]],
+    "translation": "Kanban reinventado"
+  },
+  "JbXXUW": {
+    "message": "Keep in mind that this action is irreversible.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 57],
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 67]
+    ],
+    "translation": "Ten en cuenta que esta acción es irreversible."
+  },
+  "h7MgpO": {
+    "message": "Keyboard Shortcuts",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 321]],
+    "translation": "Atajos de teclado"
+  },
+  "h8DugX": {
+    "message": "Labels",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/Filters.tsx", 155],
+      ["src/views/board/components/NewCardForm.tsx", 419],
+      ["src/views/card/index.tsx", 133]
+    ],
+    "translation": "Etiquetas"
+  },
+  "AZI/wb": {
+    "message": "Labels & filters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 124]
+    ],
+    "translation": "Etiquetas y filtros"
+  },
+  "+nvZ6j": {
+    "message": "Labels & Filters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 100]],
+    "translation": "Etiquetas y filtros"
+  },
+  "vXIe7J": {
+    "message": "Language",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 49]],
+    "translation": "Idioma"
+  },
+  "8Is1ih": {
+    "message": "Launch offer",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 335],
+      ["src/views/pricing/components/PricingTiers.tsx", 159],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 69]
+    ],
+    "translation": "Oferta de lanzamiento"
+  },
+  "EEHmPC": {
+    "message": "Launch offer: Get unlimited members with Pro",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 276]],
+    "translation": "Oferta de lanzamiento: obtén miembros ilimitados con Pro"
+  },
+  "sDuhfK": {
+    "message": "Launch offer: unlimited seats for just $29/month with Pro",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 98]],
+    "translation": "Oferta de lanzamiento: asientos ilimitados por solo $29/mes con Pro"
+  },
+  "zwWKhA": {
+    "message": "Learn more",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/oss-friends/index.tsx", 110]],
+    "translation": "Más información"
+  },
+  "wqxglO": {
+    "message": "Learning",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "translation": "Aprendizaje"
+  },
+  "vifyyw": {
+    "message": "Legal",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 131]],
+    "translation": "Legal"
+  },
+  "iQmbPb": {
+    "message": "License",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 45]],
+    "translation": "Licencia"
+  },
+  "1njn7W": {
+    "message": "Light",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/UserMenu.tsx", 172]],
+    "translation": "Claro"
+  },
+  "TCt/8K": {
+    "message": "Limited API access",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 238]
+    ],
+    "translation": "Acceso limitado a la API"
+  },
+  "edWbV6": {
+    "message": "Link copied",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/UpdateBoardSlugButton.tsx", 80],
+      ["src/views/card/components/Dropdown.tsx", 42],
+      ["src/views/public/board/CardModal.tsx", 36],
+      ["src/views/public/board/index.tsx", 77]
+    ],
+    "translation": "Enlace copiado"
+  },
+  "2BBAbc": {
+    "message": "List",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/index.tsx", 124]],
+    "translation": "Lista"
+  },
+  "zQX5Dj": {
+    "message": "List name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewListForm.tsx", 129]],
+    "translation": "Nombre de la lista"
+  },
+  "h16FyT": {
+    "message": "Lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 163]],
+    "translation": "Listas"
+  },
+  "1rVAfU": {
+    "message": "Load more activities",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 580]],
+    "translation": "Cargar más actividades"
+  },
+  "0qyZ4b": {
+    "message": "Loading permissions...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 180]
+    ],
+    "translation": "Cargando permisos..."
+  },
+  "Z3FXyt": {
+    "message": "Loading...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 580]],
+    "translation": "Cargando..."
+  },
+  "N/bcWA": {
+    "message": "Login | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/login/index.tsx", 33]],
+    "translation": "Iniciar sesión | kan.bn"
+  },
+  "nOhz3x": {
+    "message": "Logout",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/UserMenu.tsx", 227]],
+    "translation": "Cerrar sesión"
+  },
+  "vuxdLS": {
+    "message": "Long-term",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "translation": "Largo plazo"
+  },
+  "RHZu7R": {
+    "message": "Loved by teams worldwide",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Testimonials.tsx", 236]],
+    "translation": "Amado por equipos en todo el mundo"
+  },
+  "O9jVbx": {
+    "message": "Low Priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 18]],
+    "translation": "Prioridad baja"
+  },
+  "JnWJXY": {
+    "message": "magic link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 438]],
+    "translation": "enlace mágico"
+  },
+  "DbZgsJ": {
+    "message": "Make template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 73]],
+    "translation": "Crear plantilla"
+  },
+  "IDvohQ": {
+    "message": "marked a checklist item as incomplete",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 138]],
+    "translation": "marcó un elemento de la lista de verificación como incompleto"
+  },
+  "jl3aEJ": {
+    "message": "marked checklist item <0>{0}</0> as incomplete",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 258]],
+    "translation": "marcó el elemento de la lista de verificación <0>{0}</0> como incompleto"
+  },
+  "W/Elkg": {
+    "message": "Medium Priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 18]],
+    "translation": "Prioridad media"
+  },
+  "OvoEq7": {
+    "message": "Member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/ActivityList.tsx", 55],
+      ["src/views/card/components/ActivityList.tsx", 88],
+      ["src/views/members/index.tsx", 202]
+    ],
+    "translation": "Miembro"
+  },
+  "wlQNTg": {
+    "message": "Members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SideNavigation.tsx", 123],
+      ["src/views/board/components/Filters.tsx", 147],
+      ["src/views/board/components/NewCardForm.tsx", 377],
+      ["src/views/card/index.tsx", 143],
+      ["src/views/members/index.tsx", 263],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 81]
+    ],
+    "translation": "Miembros"
+  },
+  "9u5BOr": {
+    "message": "Members | {0}",
+    "placeholders": {
+      "0": ["workspace.name ?? t`Workspace`"]
+    },
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 258]],
+    "translation": "Miembros | {0}"
+  },
+  "/bZzdR": {
+    "message": "Mentions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 183]
+    ],
+    "translation": "Menciones"
+  },
+  "+8Nek/": {
+    "message": "Monthly",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 14],
+      ["src/views/pricing/index.tsx", 20]
+    ],
+    "translation": "Mensual"
+  },
+  "vneRvS": {
+    "message": "monthly billing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 159]],
+    "translation": "facturación mensual"
+  },
+  "BOqTi5": {
+    "message": "moved the card from <0>{0}</0> to<1>{1}</1>",
+    "placeholders": {
+      "0": ["truncate(fromList)"],
+      "1": ["truncate(toList)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 160]],
+    "translation": "movió la tarjeta de <0>{0}</0> a <1>{1}</1>"
+  },
+  "T7LJic": {
+    "message": "moved the card to another list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 127]],
+    "translation": "movió la tarjeta a otra lista"
+  },
+  "6YtxFj": {
+    "message": "Name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/LabelForm.tsx", 135],
+      ["src/views/board/components/NewTemplateForm.tsx", 118],
+      ["src/views/boards/components/NewBoardForm.tsx", 134]
+    ],
+    "translation": "Nombre"
+  },
+  "UxKoFf": {
+    "message": "Navigation",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 55]],
+    "translation": "Navegación"
+  },
+  "HBI6nY": {
+    "message": "Need help?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 95]],
+    "translation": "¿Necesitas ayuda?"
+  },
+  "isRobC": {
+    "message": "New",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/index.tsx", 82],
+      ["src/views/home/components/Features.tsx", 73]
+    ],
+    "translation": "Nuevo"
+  },
+  "6WSYbN": {
+    "message": "New {0}",
+    "placeholders": {
+      "0": ["isTemplate ? \"template\" : \"board\""]
+    },
+    "comments": [],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 120]],
+    "translation": "Nuevo {0}"
+  },
+  "TjREUS": {
+    "message": "New API key",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 147]],
+    "translation": "Nueva clave API"
+  },
+  "pnrmSP": {
+    "message": "New card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 302]],
+    "translation": "Nueva tarjeta"
+  },
+  "cWcxrL": {
+    "message": "New checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 103]],
+    "translation": "Nueva lista de verificación"
+  },
+  "WYwN1G": {
+    "message": "New import",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 322]],
+    "translation": "Nueva importación"
+  },
+  "n1GRql": {
+    "message": "New label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/LabelForm.tsx", 119]],
+    "translation": "Nueva etiqueta"
+  },
+  "Sb2gYF": {
+    "message": "New list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/NewListForm.tsx", 113],
+      ["src/views/board/index.tsx", 490]
+    ],
+    "translation": "Nueva lista"
+  },
+  "+MdEsf": {
+    "message": "New password is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 23]
+    ],
+    "translation": "Se requiere una nueva contraseña"
+  },
+  "5iplxh": {
+    "message": "New password must be different from current password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 31]
+    ],
+    "translation": "La nueva contraseña debe ser diferente de la contraseña actual"
+  },
+  "G1Gw0v": {
+    "message": "New template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 104]],
+    "translation": "Nueva plantilla"
+  },
+  "RJA+sg": {
+    "message": "New Ticket",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 56]],
+    "translation": "Nuevo ticket"
+  },
+  "curoK5": {
+    "message": "New workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 243]],
+    "translation": "Nuevo espacio de trabajo"
+  },
+  "5ACX4z": {
+    "message": "Newsletter",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 50]],
+    "translation": "Newsletter"
+  },
+  "HeFWjW": {
+    "message": "Next Steps",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 93]],
+    "translation": "Próximos pasos"
+  },
+  "/glL9Q": {
+    "message": "No {0}",
+    "placeholders": {
+      "0": ["isTemplate ? \"templates\" : \"boards\""]
+    },
+    "comments": [],
+    "origin": [["src/views/boards/components/BoardsList.tsx", 62]],
+    "translation": "No hay {0}"
+  },
+  "Eg99Sc": {
+    "message": "No authentication methods are currently available",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 369]],
+    "translation": "No hay métodos de autenticación disponibles actualmente"
+  },
+  "2Bu8xj": {
+    "message": "No boards found",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 242]],
+    "translation": "No se encontraron tableros"
+  },
+  "OpNhRn": {
+    "message": "No credit card required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/index.tsx", 85]],
+    "translation": "No se requiere tarjeta de crédito"
+  },
+  "MK16u2": {
+    "message": "No dates",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 137]],
+    "translation": "Sin fechas"
+  },
+  "sY2lzr": {
+    "message": "No download URL available for this attachment.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 143]],
+    "translation": "No hay URL de descarga disponible para este adjunto."
+  },
+  "TXO5TM": {
+    "message": "No keyboard shortcuts registered.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 334]],
+    "translation": "No hay atajos de teclado registrados."
+  },
+  "hXMFoN": {
+    "message": "No lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 522]],
+    "translation": "Sin listas"
+  },
+  "fvLNDy": {
+    "message": "No lists have been created yet",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 527]],
+    "translation": "Aún no se han creado listas"
+  },
+  "ERpq2P": {
+    "message": "No results found for \"{debouncedQuery}\".",
+    "placeholders": {
+      "debouncedQuery": ["debouncedQuery"]
+    },
+    "comments": [],
+    "origin": [["src/components/CommandPallette.tsx", 184]],
+    "translation": "No se encontraron resultados para \"{debouncedQuery}\"."
+  },
+  "Q9pQaX": {
+    "message": "No roles found for this workspace yet.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/RolePermissions.tsx", 110]],
+    "translation": "Aún no se encontraron roles para este espacio de trabajo."
+  },
+  "9h7RDh": {
+    "message": "Offer",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 78]],
+    "translation": "Oferta"
+  },
+  "QnzD50": {
+    "message": "On-premise",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 245]
+    ],
+    "translation": "On-premise"
+  },
+  "pVctI7": {
+    "message": "On-premise deployment option",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 106]],
+    "translation": "Opción de despliegue on-premise"
+  },
+  "gukxZ5": {
+    "message": "Onboarding",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 79]],
+    "translation": "Onboarding"
+  },
+  "usVytm": {
+    "message": "Once you delete your account, there is no going back. This action cannot be undone.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 62]],
+    "translation": "Una vez que elimines tu cuenta, no hay vuelta atrás. Esta acción no se puede deshacer."
+  },
+  "dmKdk0": {
+    "message": "Once you delete your workspace, there is no going back. This action cannot be undone.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 118]],
+    "translation": "Una vez que elimines tu espacio de trabajo, no hay vuelta atrás. Esta acción no se puede deshacer."
+  },
+  "69b7aE": {
+    "message": "Open command menu",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/WorkspaceMenu.tsx", 31]],
+    "translation": "Abrir menú de comandos"
+  },
+  "cFQEU/": {
+    "message": "Open keyboard shortcuts",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 172]],
+    "translation": "Abrir atajos de teclado"
+  },
+  "v+Wp++": {
+    "message": "Open source",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 229]
+    ],
+    "translation": "Código abierto"
+  },
+  "qfUS/w": {
+    "message": "Open Source Friends",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/oss-friends/index.tsx", 58]],
+    "translation": "Amigos de código abierto"
+  },
+  "BzEFor": {
+    "message": "or",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 380]],
+    "translation": "o"
+  },
+  "ZqDqbi": {
+    "message": "Organize and find cards quickly with powerful filtering tools.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 101]],
+    "translation": "Organiza y encuentra tarjetas rápidamente con potentes herramientas de filtrado."
+  },
+  "Un80BR": {
+    "message": "OSS Friends",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Footer.tsx", 39],
+      ["src/views/oss-friends/index.tsx", 52]
+    ],
+    "translation": "Amigos OSS"
+  },
+  "ddrz1m": {
+    "message": "Overdue",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 112]],
+    "translation": "Atrasado"
+  },
+  "P6dJdq": {
+    "message": "Overrides cleared",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 25]],
+    "translation": "Anulaciones eliminadas"
+  },
+  "SPLN9O": {
+    "message": "Own your data",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 73]],
+    "translation": "Tus datos te pertenecen"
+  },
+  "Uworke": {
+    "message": "Part-time",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "translation": "Tiempo parcial"
+  },
+  "IrZaAn": {
+    "message": "Password Changed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 69]
+    ],
+    "translation": "Contraseña cambiada"
+  },
+  "r6BgwX": {
+    "message": "Password is required to login.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 258]],
+    "translation": "Se requiere contraseña para iniciar sesión."
+  },
+  "tTbref": {
+    "message": "Password is required to sign up.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 257]],
+    "translation": "Se requiere contraseña para registrarse."
+  },
+  "vwGkYB": {
+    "message": "Password must be at least 8 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 22]
+    ],
+    "translation": "La contraseña debe tener al menos 8 caracteres"
+  },
+  "lpIMne": {
+    "message": "Passwords do not match",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 27]
+    ],
+    "translation": "Las contraseñas no coinciden"
+  },
+  "URAE3q": {
+    "message": "Paused",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 210]],
+    "translation": "Pausado"
+  },
+  "UbYdrA": {
+    "message": "Payment frequency",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 100],
+      ["src/views/pricing/components/PricingTiers.tsx", 120]
+    ],
+    "translation": "Frecuencia de pago"
+  },
+  "UbRKMZ": {
+    "message": "Pending",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 210]],
+    "translation": "Pendiente"
+  },
+  "oVBq1w": {
+    "message": "per user/month",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 15],
+      ["src/views/pricing/components/Pricing.tsx", 20],
+      ["src/views/pricing/index.tsx", 21],
+      ["src/views/pricing/index.tsx", 26]
+    ],
+    "translation": "por usuario/mes"
+  },
+  "E6wBCJ": {
+    "message": "Per-seat pricing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 83]],
+    "translation": "Precio por usuario"
+  },
+  "mrhyIB": {
+    "message": "Perfect for small and growing teams looking to collaborate.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 52]],
+    "translation": "Perfecto para equipos pequeños y en crecimiento que buscan colaborar."
+  },
+  "TH3Irz": {
+    "message": "Permission",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/RolePermissions.tsx", 119]],
+    "translation": "Permiso"
+  },
+  "9cDpsw": {
+    "message": "Permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/SettingsLayout.tsx", 52]],
+    "translation": "Permisos"
+  },
+  "Jgaz7E": {
+    "message": "Permissions reset",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 80]
+    ],
+    "translation": "Permisos restablecidos"
+  },
+  "DAV3uK": {
+    "message": "Permissions updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 34],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 57]
+    ],
+    "translation": "Permisos actualizados"
+  },
+  "8RdLDU": {
+    "message": "Personal Project",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 86]],
+    "translation": "Proyecto personal"
+  },
+  "Iqh0Uv": {
+    "message": "Planned",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 29],
+      ["src/views/boards/components/TemplateBoards.tsx", 35]
+    ],
+    "translation": "Planificado"
+  },
+  "dUh9QW": {
+    "message": "Planning",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 90]],
+    "translation": "Planificación"
+  },
+  "F3bW6y": {
+    "message": "Platform",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 317]
+    ],
+    "translation": "Plataforma"
+  },
+  "58AiWX": {
+    "message": "Please confirm your new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 24]
+    ],
+    "translation": "Por favor, confirma tu nueva contraseña"
+  },
+  "OtjenF": {
+    "message": "Please enter a valid email address",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 406]],
+    "translation": "Por favor, introduce una dirección de correo electrónico válida"
+  },
+  "CJ3zUq": {
+    "message": "Please enter a valid name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 394]],
+    "translation": "Por favor, introduce un nombre válido"
+  },
+  "7b2yuC": {
+    "message": "Please enter a valid password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 421]],
+    "translation": "Por favor, introduce una contraseña válida"
+  },
+  "tmlJN1": {
+    "message": "Please enter a valid YouTube URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 58],
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 98]
+    ],
+    "translation": "Por favor, introduce una URL de YouTube válida"
+  },
+  "wPZBpR": {
+    "message": "Please select a file to upload.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/Avatar.tsx", 70]],
+    "translation": "Por favor, selecciona un archivo para subir."
+  },
+  "tyHiOa": {
+    "message": "Please try again later, or contact customer support.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/DeleteLabelConfirmation.tsx", 26],
+      ["src/components/FeedbackModal.tsx", 41],
+      ["src/components/NewWorkspaceForm.tsx", 158],
+      ["src/views/board/components/BoardDropdown.tsx", 63],
+      ["src/views/board/components/NewCardForm.tsx", 184],
+      ["src/views/board/components/NewListForm.tsx", 79],
+      ["src/views/board/components/NewTemplateForm.tsx", 61],
+      ["src/views/board/components/NewTemplateForm.tsx", 77],
+      ["src/views/board/components/UpdateBoardSlugForm.tsx", 73],
+      ["src/views/board/components/VisibilityButton.tsx", 57],
+      ["src/views/board/index.tsx", 181],
+      ["src/views/board/index.tsx", 237],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 205],
+      ["src/views/card/components/AttachmentThumbnails.tsx", 74],
+      ["src/views/card/components/ChecklistItemRow.tsx", 69],
+      ["src/views/card/components/ChecklistItemRow.tsx", 97],
+      ["src/views/card/components/ChecklistNameInput.tsx", 47],
+      ["src/views/card/components/Checklists.tsx", 81],
+      ["src/views/card/components/Comment.tsx", 93],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 52],
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 38],
+      ["src/views/card/components/DeleteCommentConfirmation.tsx", 46],
+      ["src/views/card/components/DueDateSelector.tsx", 62],
+      ["src/views/card/components/LabelSelector.tsx", 75],
+      ["src/views/card/components/ListSelector.tsx", 55],
+      ["src/views/card/components/MemberSelector.tsx", 82],
+      ["src/views/card/components/NewChecklistForm.tsx", 71],
+      ["src/views/card/components/NewChecklistItemForm.tsx", 90],
+      ["src/views/card/components/NewCommentForm.tsx", 37],
+      ["src/views/card/index.tsx", 223],
+      ["src/views/card/index.tsx", 236],
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 28],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 42],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 65],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 93],
+      ["src/views/members/components/InviteMemberForm.tsx", 104],
+      ["src/views/members/components/InviteMemberForm.tsx", 241],
+      ["src/views/members/index.tsx", 66],
+      ["src/views/settings/components/Avatar.tsx", 200],
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 40],
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 46],
+      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 55],
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 64],
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 59],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 76],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 42],
+      ["src/views/settings/PermissionsSettings.tsx", 40]
+    ],
+    "translation": "Por favor, inténtalo de nuevo más tarde o contacta con atención al cliente."
+  },
+  "PZCqeW": {
+    "message": "Please try again later.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 129],
+      ["src/views/members/components/InviteMemberForm.tsx", 145]
+    ],
+    "translation": "Por favor, inténtalo de nuevo más tarde."
+  },
+  "fuwKpE": {
+    "message": "Please try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/Dropdown.tsx", 51],
+      ["src/views/public/board/CardModal.tsx", 45],
+      ["src/views/public/board/index.tsx", 86]
+    ],
+    "translation": "Por favor, inténtalo de nuevo."
+  },
+  "aHCEmh": {
+    "message": "Pricing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Footer.tsx", 51],
+      ["src/views/home/components/Header.tsx", 18],
+      ["src/views/home/components/Header.tsx", 34],
+      ["src/views/pricing/components/Pricing.tsx", 85],
+      ["src/views/pricing/index.tsx", 34],
+      ["src/views/pricing/index.tsx", 40]
+    ],
+    "translation": "Precios"
+  },
+  "ESClHO": {
+    "message": "Priority email support",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 275],
+      ["src/views/pricing/components/Pricing.tsx", 56],
+      ["src/views/pricing/components/PricingTiers.tsx", 61],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 93]
+    ],
+    "translation": "Soporte prioritario por correo electrónico"
+  },
+  "ScJ9fj": {
+    "message": "Privacy policy",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 43]],
+    "translation": "Política de privacidad"
+  },
+  "zwBp5t": {
+    "message": "Private",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 84]],
+    "translation": "Privado"
+  },
+  "3fPjUY": {
+    "message": "Pro",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 333],
+      ["src/views/pricing/components/PricingTiers.tsx", 70]
+    ],
+    "translation": "Pro"
+  },
+  "oyRjD/": {
+    "message": "Pro Plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 290]],
+    "translation": "Plan Pro"
+  },
+  "Qtzfdk": {
+    "message": "Pro Plan ∞",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 322]],
+    "translation": "Plan Pro ∞"
+  },
+  "0rPv1T": {
+    "message": "Profile image updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/Avatar.tsx", 189]],
+    "translation": "Imagen de perfil actualizada"
+  },
+  "4XF0BB": {
+    "message": "Profile picture",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 29]],
+    "translation": "Foto de perfil"
+  },
+  "7d1a0d": {
+    "message": "Public",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 79]],
+    "translation": "Público"
+  },
+  "ABCjd9": {
+    "message": "Publishing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 47]],
+    "translation": "Publicación"
+  },
+  "bfgr/e": {
+    "message": "Question",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 66]],
+    "translation": "Pregunta"
+  },
+  "1H5u1m": {
+    "message": "Questions?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 147]],
+    "translation": "¿Preguntas?"
+  },
+  "kfOGMr": {
+    "message": "Quick Win",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "translation": "Victoria rápida"
+  },
+  "6EWT6T": {
+    "message": "Recruitment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 73]],
+    "translation": "Reclutamiento"
+  },
+  "ekCRTP": {
+    "message": "Rejected",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 35]],
+    "translation": "Rechazado"
+  },
+  "qlAIQ1": {
+    "message": "Remote",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "translation": "Remoto"
+  },
+  "t/YqKh": {
+    "message": "Remove",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 58]
+    ],
+    "translation": "Eliminar"
+  },
+  "T/pF0Z": {
+    "message": "Remove from favorites",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 92]],
+    "translation": "Eliminar de favoritos"
+  },
+  "99VIgC": {
+    "message": "Remove member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 233]],
+    "translation": "Eliminar miembro"
+  },
+  "BZkYSt": {
+    "message": "removed {0} labels: <0>{labelList}</0>",
+    "placeholders": {
+      "0": ["mergedLabels.length"],
+      "labelList": ["labelList"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 116]],
+    "translation": "eliminó {0} etiquetas: <0>{labelList}</0>"
+  },
+  "kQwvU8": {
+    "message": "removed a label from the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 129]],
+    "translation": "eliminó una etiqueta de la tarjeta"
+  },
+  "uck1tz": {
+    "message": "removed a member from the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 131]],
+    "translation": "eliminó un miembro de la tarjeta"
+  },
+  "KEim/+": {
+    "message": "removed an attachment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 141]],
+    "translation": "eliminó un adjunto"
+  },
+  "zwTiVn": {
+    "message": "removed an attachment <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(filename)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 288]],
+    "translation": "eliminó un adjunto <0>{0}</0>"
+  },
+  "Qh7QmR": {
+    "message": "Removed from favorites",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 52]],
+    "translation": "Eliminado de favoritos"
+  },
+  "YVT40D": {
+    "message": "removed label <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(label)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 200]],
+    "translation": "eliminó la etiqueta <0>{0}</0>"
+  },
+  "aHRWVI": {
+    "message": "removed the due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/ActivityList.tsx", 144],
+      ["src/views/card/components/ActivityList.tsx", 324]
+    ],
+    "translation": "eliminó la fecha de vencimiento"
+  },
+  "NypLoL": {
+    "message": "renamed a checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 133]],
+    "translation": "renombró una lista de verificación"
+  },
+  "3ZjRJY": {
+    "message": "renamed checklist <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 216]],
+    "translation": "renombró la lista de verificación <0>{0}</0>"
+  },
+  "NH54UR": {
+    "message": "renamed checklist item to <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 240]],
+    "translation": "renombró el elemento de la lista de verificación a <0>{0}</0>"
+  },
+  "Yx0Ud8": {
+    "message": "Requested",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 29],
+      ["src/views/boards/components/TemplateBoards.tsx", 35]
+    ],
+    "translation": "Solicitado"
+  },
+  "bdztP2": {
+    "message": "Research",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 89]],
+    "translation": "Investigación"
+  },
+  "e4hPSt": {
+    "message": "Reset to role defaults",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 245]
+    ],
+    "translation": "Restablecer a valores predeterminados del rol"
+  },
+  "FmN5me": {
+    "message": "Resolution",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 60]],
+    "translation": "Resolución"
+  },
+  "s+MGs7": {
+    "message": "Resources",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 114]],
+    "translation": "Recursos"
+  },
+  "5k0NLb": {
+    "message": "Review",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 92]],
+    "translation": "Revisar"
+  },
+  "/gaSVU": {
+    "message": "Roadmap",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Footer.tsx", 36],
+      ["src/views/home/components/Header.tsx", 13],
+      ["src/views/home/components/Header.tsx", 28]
+    ],
+    "translation": "Hoja de ruta"
+  },
+  "GDvlUT": {
+    "message": "Role",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 328]],
+    "translation": "Rol"
+  },
+  "jQ6I8X": {
+    "message": "Role updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 58]],
+    "translation": "Rol actualizado"
+  },
+  "RzxgOE": {
+    "message": "Roles & permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 164]
+    ],
+    "translation": "Roles y permisos"
+  },
+  "vAR/I8": {
+    "message": "Run on your own infrastructure",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 72]],
+    "translation": "Ejecutar en tu propia infraestructura"
+  },
+  "YEOVrT": {
+    "message": "SAML SSO",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 102]],
+    "translation": "SAML SSO"
+  },
+  "tfDRzk": {
+    "message": "Save",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 183],
+      ["src/views/card/components/Comment.tsx", 202],
+      ["src/views/settings/components/Avatar.tsx", 290]
+    ],
+    "translation": "Guardar"
+  },
+  "MdwUGG": {
+    "message": "Save time with reusable board templates.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 116]],
+    "translation": "Ahorra tiempo con plantillas de tableros reutilizables."
+  },
+  "cOh+MI": {
+    "message": "Screening",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 76]],
+    "translation": "Selección"
+  },
+  "SkCNhl": {
+    "message": "Search boards and cards...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/CommandPallette.tsx", 104]],
+    "translation": "Buscar tableros y tarjetas..."
+  },
+  "a3LDKx": {
+    "message": "Security",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 321]
+    ],
+    "translation": "Seguridad"
+  },
+  "K3iLeO": {
+    "message": "See what our users are saying about Kan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Testimonials.tsx", 239]],
+    "translation": "Mira lo que nuestros usuarios dicen sobre Kan"
+  },
+  "wgNoIs": {
+    "message": "Select all",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 274]],
+    "translation": "Seleccionar todo"
+  },
+  "rYUZIe": {
+    "message": "Select source",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 157]],
+    "translation": "Seleccionar origen"
+  },
+  "ppaRWv": {
+    "message": "Self Host",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 64]],
+    "translation": "Autoalojamiento"
+  },
+  "l2PIAy": {
+    "message": "Self host with Github",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/index.tsx", 81]],
+    "translation": "Autoalojar con Github"
+  },
+  "VXk54Y": {
+    "message": "self-assigned the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 169]],
+    "translation": "se autoasignó la tarjeta"
+  },
+  "RoafuO": {
+    "message": "Send feedback",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 116]],
+    "translation": "Enviar comentarios"
+  },
+  "v3YoMA": {
+    "message": "Senior",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "translation": "Senior"
+  },
+  "8AbRER": {
+    "message": "Set due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/DueDateSelector.tsx", 119]],
+    "translation": "Establecer fecha de vencimiento"
+  },
+  "Eit43O": {
+    "message": "set the due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 142]],
+    "translation": "estableció la fecha de vencimiento"
+  },
+  "Tz0i8g": {
+    "message": "Settings",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SettingsLayout.tsx", 95],
+      ["src/components/SideNavigation.tsx", 135]
+    ],
+    "translation": "Configuración"
+  },
+  "MWrbWq": {
+    "message": "Settings | Account",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 25]],
+    "translation": "Configuración | Cuenta"
+  },
+  "iy1wb+": {
+    "message": "Settings | API",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/ApiSettings.tsx", 18]],
+    "translation": "Configuración | API"
+  },
+  "ADEin1": {
+    "message": "Settings | Billing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/BillingSettings.tsx", 35]],
+    "translation": "Configuración | Facturación"
+  },
+  "hYzsXr": {
+    "message": "Settings | Integrations",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 69]],
+    "translation": "Configuración | Integraciones"
+  },
+  "F/FPk/": {
+    "message": "Settings | Permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 49]],
+    "translation": "Configuración | Permisos"
+  },
+  "Ci/KUX": {
+    "message": "Settings | Workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 58]],
+    "translation": "Configuración | Espacio de trabajo"
+  },
+  "CTqTgr": {
+    "message": "Shortcuts",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/UserMenu.tsx", 187]],
+    "translation": "Atajos"
+  },
+  "5lWFkC": {
+    "message": "Sign in",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Header.tsx", 104]],
+    "translation": "Iniciar sesión"
+  },
+  "n1ekoW": {
+    "message": "Sign In",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 154]],
+    "translation": "Iniciar sesión"
+  },
+  "mErq7F": {
+    "message": "Sign Up",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 162]],
+    "translation": "Registrarse"
+  },
+  "sUZo7y": {
+    "message": "Sign up | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/auth/signup/index.tsx", 34],
+      ["src/views/auth/signup/index.tsx", 59]
+    ],
+    "translation": "Registrarse | kan.bn"
+  },
+  "WRkpB1": {
+    "message": "Sign up disabled",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/signup/index.tsx", 44]],
+    "translation": "Registro deshabilitado"
+  },
+  "s6iE/c": {
+    "message": "Sign up is currently disabled. Please try again later.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/signup/index.tsx", 47]],
+    "translation": "El registro está actualmente deshabilitado. Por favor, inténtalo de nuevo más tarde."
+  },
+  "6FDocz": {
+    "message": "Sign up with ",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 437]],
+    "translation": "Registrarse con "
+  },
+  "m2nk0i": {
+    "message": "Simple pricing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 89],
+      ["src/views/pricing/index.tsx", 44]
+    ],
+    "translation": "Precios simples"
+  },
+  "sBhOFG": {
+    "message": "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 139]],
+    "translation": "Gestión de tareas simple y visual que simplemente funciona. Arrastra y suelta tarjetas, colabora con tu equipo y haz más cosas."
+  },
+  "zEcnBA": {
+    "message": "SLA",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 291]
+    ],
+    "translation": "SLA"
+  },
+  "++rVAm": {
+    "message": "Social Media",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 50]],
+    "translation": "Redes sociales"
+  },
+  "wIb7Ng": {
+    "message": "Software Development",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 22]],
+    "translation": "Desarrollo de software"
+  },
+  "vnS6Rf": {
+    "message": "SSO",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 256]
+    ],
+    "translation": "SSO"
+  },
+  "R6pB8R": {
+    "message": "Star on Github",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/index.tsx", 37]],
+    "translation": "Destacar en Github"
+  },
+  "veIDCY": {
+    "message": "Start 14 day free trial",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 359],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 111]
+    ],
+    "translation": "Iniciar prueba gratuita de 14 días"
+  },
+  "Y8yzGg": {
+    "message": "Start free. Upgrade as your team grows. No hidden fees, no contracts.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/index.tsx", 47]],
+    "translation": "Comienza gratis. Actualiza a medida que tu equipo crece. Sin tarifas ocultas, sin contratos."
+  },
+  "WYDptz": {
+    "message": "Subscription Required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 122]],
+    "translation": "Suscripción requerida"
+  },
+  "zzDlyQ": {
+    "message": "Success",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/AuthForm.tsx", 215],
+      ["src/components/AuthForm.tsx", 232]
+    ],
+    "translation": "Éxito"
+  },
+  "uZg2+w": {
+    "message": "Supercharge your workspace for just $29/month. Here's what you'll get:",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 57]
+    ],
+    "translation": "Potencia tu espacio de trabajo por solo $29/mes. Esto es lo que obtendrás:"
+  },
+  "XYLcNv": {
+    "message": "Support",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/UserMenu.tsx", 198],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 325]
+    ],
+    "translation": "Soporte"
+  },
+  "wruKPE": {
+    "message": "Support the development of the project",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 57]],
+    "translation": "Apoya el desarrollo del proyecto"
+  },
+  "D+NlUC": {
+    "message": "System",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/UserMenu.tsx", 144]],
+    "translation": "Sistema"
+  },
+  "bff61F": {
+    "message": "Team Plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/InviteMemberForm.tsx", 322],
+      ["src/views/members/index.tsx", 292]
+    ],
+    "translation": "Plan de equipo"
+  },
+  "CAL6E9": {
+    "message": "Teams",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 332],
+      ["src/views/pricing/components/Pricing.tsx", 46],
+      ["src/views/pricing/components/PricingTiers.tsx", 47]
+    ],
+    "translation": "Equipos"
+  },
+  "/K2CvV": {
+    "message": "Template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/index.tsx", 400],
+      ["src/views/board/index.tsx", 436]
+    ],
+    "translation": "Plantilla"
+  },
+  "JcCDm9": {
+    "message": "Template created",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 67]],
+    "translation": "Plantilla creada"
+  },
+  "QHhZeE": {
+    "message": "Template created successfully",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 68]],
+    "translation": "Plantilla creada correctamente"
+  },
+  "notwF1": {
+    "message": "Template name cannot exceed 100 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 19]],
+    "translation": "El nombre de la plantilla no puede superar los 100 caracteres"
+  },
+  "6OTo9n": {
+    "message": "Template name is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 18]],
+    "translation": "El nombre de la plantilla es obligatorio"
+  },
+  "iTylMl": {
+    "message": "Templates",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SideNavigation.tsx", 111],
+      ["src/views/home/components/Features.tsx", 115]
+    ],
+    "translation": "Plantillas"
+  },
+  "UCLeG0": {
+    "message": "Terms of service",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Footer.tsx", 42]],
+    "translation": "Términos de servicio"
+  },
+  "VUZDlr": {
+    "message": "Testimonials",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Testimonials.tsx", 232]],
+    "translation": "Testimonios"
+  },
+  "nhMhRr": {
+    "message": "Thank you for your feedback!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 34]],
+    "translation": "¡Gracias por tus comentarios!"
+  },
+  "jlB2RY": {
+    "message": "The current password you entered is incorrect.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 84]
+    ],
+    "translation": "La contraseña actual que ingresaste es incorrecta."
+  },
+  "lkz85l": {
+    "message": "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 33]],
+    "translation": "La principal diferencia entre Kan y Trello es que Kan es de código abierto, lo que permite a cualquiera ver, modificar y contribuir a nuestro código. Nuestra oferta en la nube tampoco ofrece restricciones en las funciones para uso individual, mientras que Trello bloquea funciones básicas como el número de tableros que puedes crear detrás de un muro de pago."
+  },
+  "6tDFBe": {
+    "message": "The member's permissions have been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 35],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 58]
+    ],
+    "translation": "Los permisos del miembro se han actualizado."
+  },
+  "bfZE+Y": {
+    "message": "The member's role has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 59]],
+    "translation": "El rol del miembro se ha actualizado."
+  },
+  "gUX7b+": {
+    "message": "The open source <0/> alternative to Trello",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/index.tsx", 65]],
+    "translation": "La alternativa de código abierto <0/> a Trello"
+  },
+  "fQCrjt": {
+    "message": "The visibility of your board has been set to {0}.",
+    "placeholders": {
+      "0": ["isPublic ? \"public\" : \"private\""]
+    },
+    "comments": [],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 50]],
+    "translation": "La visibilidad de tu tablero se ha establecido en {0}."
+  },
+  "FEr96N": {
+    "message": "Theme",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/UserMenu.tsx", 131]],
+    "translation": "Tema"
+  },
+  "Yf9FAx": {
+    "message": "They won't be able to access this workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 50]
+    ],
+    "translation": "No podrán acceder a este espacio de trabajo."
+  },
+  "3LDCpD": {
+    "message": "This action can't be undone.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/DeleteLabelConfirmation.tsx", 44],
+      ["src/views/board/components/DeleteBoardConfirmation.tsx", 39],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 78],
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 59],
+      ["src/views/card/components/DeleteCommentConfirmation.tsx", 69]
+    ],
+    "translation": "Esta acción no se puede deshacer."
+  },
+  "YoyKbT": {
+    "message": "This API key will only be shown once. Please save it in a secure location.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewApiKeyModal.tsx", 129]],
+    "translation": "Esta clave API solo se mostrará una vez. Guárdala en un lugar seguro."
+  },
+  "l4asa1": {
+    "message": "This board is private or does not exist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/public/board/index.tsx", 184]],
+    "translation": "Este tablero es privado o no existe"
+  },
+  "wY+6Ye": {
+    "message": "This board URL has already been taken",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 136]],
+    "translation": "Esta URL de tablero ya está en uso"
+  },
+  "mTwGOf": {
+    "message": "This invitation link is invalid or has expired.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 108]],
+    "translation": "Este enlace de invitación no es válido o ha caducado."
+  },
+  "vlxQFL": {
+    "message": "This member's permissions have been reset to their role defaults.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 81]
+    ],
+    "translation": "Los permisos de este miembro se han restablecido a los valores predeterminados de su rol."
+  },
+  "OAYToL": {
+    "message": "This will remove all custom member permissions in this workspace. Members will inherit permissions only from their roles.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
+        35
+      ]
+    ],
+    "translation": "Esto eliminará todos los permisos personalizados de los miembros en este espacio de trabajo. Los miembros heredarán permisos únicamente de sus roles."
+  },
+  "MeO/vH": {
+    "message": "This will result in the permanent deletion of all data associated with this workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 70]
+    ],
+    "translation": "Esto resultará en la eliminación permanente de todos los datos asociados con este espacio de trabajo."
+  },
+  "mwBdZ2": {
+    "message": "This will result in the permanent deletion of all data associated with your account.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 60]
+    ],
+    "translation": "Esto resultará en la eliminación permanente de todos los datos asociados con tu cuenta."
+  },
+  "duf3Nr": {
+    "message": "This workspace URL has already been taken",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 287]],
+    "translation": "Esta URL de espacio de trabajo ya está en uso"
+  },
+  "bJtM0P": {
+    "message": "This workspace URL is reserved",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 289]],
+    "translation": "Esta URL de espacio de trabajo está reservada"
+  },
+  "kp6L3T": {
+    "message": "This workspace username has already been taken",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 125]
+    ],
+    "translation": "Este nombre de usuario de espacio de trabajo ya está en uso"
+  },
+  "MHrjPM": {
+    "message": "Title",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 127]],
+    "translation": "Título"
+  },
+  "Se/UIp": {
+    "message": "To Do",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 17],
+      ["src/views/boards/components/TemplateBoards.tsx", 23]
+    ],
+    "translation": "Por hacer"
+  },
+  "4gAX8s": {
+    "message": "Toggle menu",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Header.tsx", 114]],
+    "translation": "Alternar menú"
+  },
+  "eEQyz+": {
+    "message": "Track all card changes with detailed activity history.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 111]],
+    "translation": "Rastrea todos los cambios de tarjetas con un historial de actividad detallado."
+  },
+  "dtbpdR": {
+    "message": "Trello",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 218],
+      ["src/views/settings/IntegrationsSettings.tsx", 73]
+    ],
+    "translation": "Trello"
+  },
+  "zto8aj": {
+    "message": "Trello disconnected",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 53]],
+    "translation": "Trello desconectado"
+  },
+  "kxEs5t": {
+    "message": "Trello imports",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 95]],
+    "translation": "Importaciones de Trello"
+  },
+  "HO+uOC": {
+    "message": "Triaging",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 57]],
+    "translation": "Clasificación"
+  },
+  "o+JCfN": {
+    "message": "Trusted by fast-moving teams<0/>around the world",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Logos.tsx", 67]],
+    "translation": "Confiado por equipos ágiles<0/>de todo el mundo"
+  },
+  "bZSICm": {
+    "message": "Unable to add checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 89]],
+    "translation": "No se pudo agregar el elemento de la lista de verificación"
+  },
+  "T7DJ2k": {
+    "message": "Unable to add comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewCommentForm.tsx", 36]],
+    "translation": "No se pudo agregar el comentario"
+  },
+  "2Q871c": {
+    "message": "Unable to add label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/index.tsx", 235]],
+    "translation": "No se pudo agregar la etiqueta"
+  },
+  "LeM5RY": {
+    "message": "Unable to clear overrides",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 39]],
+    "translation": "No se pudieron borrar las anulaciones"
+  },
+  "W1ewR0": {
+    "message": "Unable to copy link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/Dropdown.tsx", 49],
+      ["src/views/public/board/CardModal.tsx", 43],
+      ["src/views/public/board/index.tsx", 84]
+    ],
+    "translation": "No se pudo copiar el enlace"
+  },
+  "zl1b97": {
+    "message": "Unable to create card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 181]],
+    "translation": "No se pudo crear la tarjeta"
+  },
+  "mHhffx": {
+    "message": "Unable to create checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 70]],
+    "translation": "No se pudo crear la lista de verificación"
+  },
+  "TztLaN": {
+    "message": "Unable to create list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewListForm.tsx", 78]],
+    "translation": "No se pudo crear la lista"
+  },
+  "YcyP2z": {
+    "message": "Unable to create template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/NewTemplateForm.tsx", 60],
+      ["src/views/board/components/NewTemplateForm.tsx", 76]
+    ],
+    "translation": "No se pudo crear la plantilla"
+  },
+  "MxQXhL": {
+    "message": "Unable to create workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 157]],
+    "translation": "No se pudo crear el espacio de trabajo"
+  },
+  "WHHLh9": {
+    "message": "Unable to delete attachment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 73]],
+    "translation": "No se pudo eliminar el archivo adjunto"
+  },
+  "Z6r9z1": {
+    "message": "Unable to delete card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 51]],
+    "translation": "No se pudo eliminar la tarjeta"
+  },
+  "DahTzR": {
+    "message": "Unable to delete checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 37]
+    ],
+    "translation": "No se pudo eliminar la lista de verificación"
+  },
+  "0jV46i": {
+    "message": "Unable to delete checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 96]],
+    "translation": "No se pudo eliminar el elemento de la lista de verificación"
+  },
+  "2QGEbi": {
+    "message": "Unable to delete comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/DeleteCommentConfirmation.tsx", 45]],
+    "translation": "No se pudo eliminar el comentario"
+  },
+  "8yFGGF": {
+    "message": "Unable to remove member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 27]
+    ],
+    "translation": "No se pudo eliminar el miembro"
+  },
+  "YKeYae": {
+    "message": "Unable to reorder checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Checklists.tsx", 80]],
+    "translation": "No se pudo reordenar el elemento de la lista de verificación"
+  },
+  "vfRdCZ": {
+    "message": "Unable to reset permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 92]
+    ],
+    "translation": "No se pudieron restablecer los permisos"
+  },
+  "A8jqN7": {
+    "message": "Unable to send feedback",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/FeedbackModal.tsx", 40]],
+    "translation": "No se pudo enviar el comentario"
+  },
+  "T7Mywq": {
+    "message": "Unable to update board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 62]],
+    "translation": "No se pudo actualizar el tablero"
+  },
+  "XpcjLO": {
+    "message": "Unable to update board URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 72]],
+    "translation": "No se pudo actualizar la URL del tablero"
+  },
+  "Wy6pcF": {
+    "message": "Unable to update board visibility",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 56]],
+    "translation": "No se pudo actualizar la visibilidad del tablero"
+  },
+  "o9WLwO": {
+    "message": "Unable to update card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/index.tsx", 236],
+      ["src/views/card/index.tsx", 222]
+    ],
+    "translation": "No se pudo actualizar la tarjeta"
+  },
+  "DtXlZq": {
+    "message": "Unable to update checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ChecklistNameInput.tsx", 46]],
+    "translation": "No se pudo actualizar la lista de verificación"
+  },
+  "WQPDcG": {
+    "message": "Unable to update checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 68]],
+    "translation": "No se pudo actualizar el elemento de la lista de verificación"
+  },
+  "fYVH36": {
+    "message": "Unable to update comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Comment.tsx", 92]],
+    "translation": "No se pudo actualizar el comentario"
+  },
+  "C56tim": {
+    "message": "Unable to update due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/DueDateSelector.tsx", 61]],
+    "translation": "No se pudo actualizar la fecha de vencimiento"
+  },
+  "delOXn": {
+    "message": "Unable to update labels",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/LabelSelector.tsx", 74]],
+    "translation": "No se pudieron actualizar las etiquetas"
+  },
+  "I0gAKM": {
+    "message": "Unable to update list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/index.tsx", 180],
+      ["src/views/card/components/ListSelector.tsx", 54]
+    ],
+    "translation": "No se pudo actualizar la lista"
+  },
+  "5P4rhH": {
+    "message": "Unable to update members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/MemberSelector.tsx", 81]],
+    "translation": "No se pudieron actualizar los miembros"
+  },
+  "GYv20o": {
+    "message": "Unable to update permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 41],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 64]
+    ],
+    "translation": "No se pudieron actualizar los permisos"
+  },
+  "TFv5tM": {
+    "message": "Unable to update role",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 65]],
+    "translation": "No se pudo actualizar el rol"
+  },
+  "E8zYtd": {
+    "message": "unassigned <0>{0}</0> from the card",
+    "placeholders": {
+      "0": ["truncate(displayName)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 183]],
+    "translation": "desasignó a <0>{0}</0> de la tarjeta"
+  },
+  "hAMddS": {
+    "message": "unassigned themselves from the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 180]],
+    "translation": "se desasignó a sí mismo de la tarjeta"
+  },
+  "9Xigls": {
+    "message": "Under Review",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 35]],
+    "translation": "En revisión"
+  },
+  "M9p3Vw": {
+    "message": "Unlimited activity log",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 41]],
+    "translation": "Registro de actividad ilimitado"
+  },
+  "1wCGT0": {
+    "message": "Unlimited boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 74],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 75],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 76],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 77],
+      ["src/views/pricing/components/Pricing.tsx", 37],
+      ["src/views/pricing/components/PricingTiers.tsx", 36]
+    ],
+    "translation": "Tableros ilimitados"
+  },
+  "ZU5IYI": {
+    "message": "Unlimited boards, unlimited lists, unlimited cards. No credit card required.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Cta.tsx", 57]],
+    "translation": "Tableros ilimitados, listas ilimitadas, tarjetas ilimitadas. No se requiere tarjeta de crédito."
+  },
+  "Zz1qkk": {
+    "message": "Unlimited cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 39],
+      ["src/views/pricing/components/PricingTiers.tsx", 37]
+    ],
+    "translation": "Tarjetas ilimitadas"
+  },
+  "fziA2d": {
+    "message": "Unlimited comments",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 40]],
+    "translation": "Comentarios ilimitados"
+  },
+  "86FLn5": {
+    "message": "Unlimited file uploads",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 91],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 92],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 93],
+      ["src/views/pricing/components/PricingTiers.tsx", 59]
+    ],
+    "translation": "Subidas de archivos ilimitadas"
+  },
+  "7Ufoyg": {
+    "message": "Unlimited lists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 38]],
+    "translation": "Listas ilimitadas"
+  },
+  "mx8+1u": {
+    "message": "Unlimited members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 332],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 84],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 85],
+      ["src/views/pricing/components/PricingTiers.tsx", 80],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 66]
+    ],
+    "translation": "Miembros ilimitados"
+  },
+  "Ws+3X+": {
+    "message": "Unlimited seats and advanced features for growing teams.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 75]],
+    "translation": "Plazas ilimitadas y funciones avanzadas para equipos en crecimiento."
+  },
+  "SMaFdc": {
+    "message": "Unsubscribe",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/pages/unsubscribe/index.tsx", 68],
+      ["src/pages/unsubscribe/index.tsx", 93]
+    ],
+    "translation": "Cancelar suscripción"
+  },
+  "EkH9pt": {
+    "message": "Update",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/UpdateBoardSlugForm.tsx", 175],
+      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 80],
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 94],
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 89],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 157]
+    ],
+    "translation": "Actualizar"
+  },
+  "7EhE4k": {
+    "message": "Update label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/LabelForm.tsx", 238]],
+    "translation": "Actualizar etiqueta"
+  },
+  "L5ZPjz": {
+    "message": "updated a checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 136]],
+    "translation": "actualizó un elemento de la lista de verificación"
+  },
+  "tGwwnq": {
+    "message": "updated the description",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 126]],
+    "translation": "actualizó la descripción"
+  },
+  "RfgJqw": {
+    "message": "updated the due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 143]],
+    "translation": "actualizó la fecha de vencimiento"
+  },
+  "V3MPSQ": {
+    "message": "updated the title",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 125]],
+    "translation": "actualizó el título"
+  },
+  "zERArS": {
+    "message": "updated the title to <0>{0}</0>",
+    "placeholders": {
+      "0": ["truncate(toTitle)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 152]],
+    "translation": "actualizó el título a <0>{0}</0>"
+  },
+  "IelE1h": {
+    "message": "Upgrade to Pro",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SideNavigation.tsx", 240],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 53],
+      ["src/views/settings/WorkspaceSettings.tsx", 108]
+    ],
+    "translation": "Actualizar a Pro"
+  },
+  "cWtfn1": {
+    "message": "Upgrade to Pro ($29/month)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 372]],
+    "translation": "Actualizar a Pro ($29/mes)"
+  },
+  "b3Thhd": {
+    "message": "Upload failed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 51]],
+    "translation": "Error al subir"
+  },
+  "BBUDfW": {
+    "message": "Urgent",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/boards/components/TemplateBoards.tsx", 50],
+      ["src/views/boards/components/TemplateBoards.tsx", 67]
+    ],
+    "translation": "Urgente"
+  },
+  "MI5OBT": {
+    "message": "URL can only contain letters, numbers, and hyphens",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 38],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 38]
+    ],
+    "translation": "La URL solo puede contener letras, números y guiones"
+  },
+  "i5rE2/": {
+    "message": "URL cannot exceed 64 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 36],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 36]
+    ],
+    "translation": "La URL no puede superar los 64 caracteres"
+  },
+  "SWEskc": {
+    "message": "URL must be at least 3 characters long",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 34],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 34]
+    ],
+    "translation": "La URL debe tener al menos 3 caracteres"
+  },
+  "QNtP5M": {
+    "message": "Use template",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 154]],
+    "translation": "Usar plantilla"
+  },
+  "7PzzBU": {
+    "message": "User",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 322]],
+    "translation": "Usuario"
+  },
+  "tYN21H": {
+    "message": "User is already a member of this workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 98]],
+    "translation": "El usuario ya es miembro de este espacio de trabajo"
+  },
+  "vSJd18": {
+    "message": "Video",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 50]],
+    "translation": "Vídeo"
+  },
+  "FmfJjN": {
+    "message": "View and manage your API keys.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/ApiSettings.tsx", 25]],
+    "translation": "Ver y gestionar tus claves de API."
+  },
+  "t2nDzl": {
+    "message": "View and manage your billing and subscription.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/BillingSettings.tsx", 42]],
+    "translation": "Ver y gestionar tu facturación y suscripción."
+  },
+  "aiHZVP": {
+    "message": "View docs",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/Pricing.tsx", 67]],
+    "translation": "Ver documentación"
+  },
+  "F8DaWi": {
+    "message": "View only",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/public/board/index.tsx", 153]],
+    "translation": "Solo lectura"
+  },
+  "fSf2ee": {
+    "message": "View our roadmap.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 154]],
+    "translation": "Ver nuestra hoja de ruta."
+  },
+  "U5dMR6": {
+    "message": "View workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/public/board/index.tsx", 187]],
+    "translation": "Ver espacio de trabajo"
+  },
+  "2q/Q7x": {
+    "message": "Visibility",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 103]],
+    "translation": "Visibilidad"
+  },
+  "BJbLe4": {
+    "message": "We are using the <0>AGPL-3.0 license</0>.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 94]],
+    "translation": "Estamos usando la <0>licencia AGPL-3.0</0>."
+  },
+  "+EkBs0": {
+    "message": "We couldn't update your preferences. Please try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/unsubscribe/index.tsx", 63]],
+    "translation": "No pudimos actualizar tus preferencias. Por favor, inténtalo de nuevo."
+  },
+  "9y1RcT": {
+    "message": "We're just getting started. ",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Features.tsx", 152]],
+    "translation": "Apenas estamos empezando."
+  },
+  "9eF5oV": {
+    "message": "Welcome back",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/login/index.tsx", 43]],
+    "translation": "Bienvenido de nuevo"
+  },
+  "xEbBrW": {
+    "message": "What license are you using?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 91]],
+    "translation": "¿Qué licencia estás usando?"
+  },
+  "H5G+qG": {
+    "message": "What's the difference between Kan and Trello?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 30]],
+    "translation": "¿Cuál es la diferencia entre Kan y Trello?"
+  },
+  "mVZH9V": {
+    "message": "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over the years it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello's simplicity, in open source.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 25]],
+    "translation": "Cuando Trello se lanzó en 2011, sorprendió a todos con su simplicidad cuidadosamente diseñada, pero con los años perdió su magia y se convirtió en algo más parecido a \"Jira Lite\". Este proyecto es nuestro intento de recuperar la magia original de la simplicidad de Trello, en código abierto."
+  },
+  "SFnH1j": {
+    "message": "Why make an open source Trello?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 22]],
+    "translation": "¿Por qué hacer un Trello de código abierto?"
+  },
+  "pmUArF": {
+    "message": "Workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SettingsLayout.tsx", 46],
+      ["src/views/board/index.tsx", 400],
+      ["src/views/boards/index.tsx", 35],
+      ["src/views/members/index.tsx", 258],
+      ["src/views/public/board/index.tsx", 125],
+      ["src/views/public/boards/index.tsx", 65]
+    ],
+    "translation": "Espacio de trabajo"
+  },
+  "LTGE7Y": {
+    "message": "Workspace created successfully. You can upgrade later in settings.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 146]],
+    "translation": "Espacio de trabajo creado correctamente. Puedes actualizar más tarde en la configuración."
+  },
+  "UlhdTP": {
+    "message": "Workspace deleted",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 26]
+    ],
+    "translation": "Espacio de trabajo eliminado"
+  },
+  "chyf4J": {
+    "message": "Workspace description",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 81]],
+    "translation": "Descripción del espacio de trabajo"
+  },
+  "Ax/hYa": {
+    "message": "Workspace description cannot exceed 280 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 30]
+    ],
+    "translation": "La descripción del espacio de trabajo no puede superar los 280 caracteres"
+  },
+  "XDRXbZ": {
+    "message": "Workspace description must be at least 3 characters long",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 27]
+    ],
+    "translation": "La descripción del espacio de trabajo debe tener al menos 3 caracteres"
+  },
+  "F4PLG4": {
+    "message": "Workspace description updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 50]
+    ],
+    "translation": "Descripción del espacio de trabajo actualizada"
+  },
+  "wtxjAY": {
+    "message": "Workspace members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/home/components/Features.tsx", 90],
+      ["src/views/pricing/components/Pricing.tsx", 54],
+      ["src/views/pricing/components/PricingTiers.tsx", 57]
+    ],
+    "translation": "Miembros del espacio de trabajo"
+  },
+  "CozWO1": {
+    "message": "Workspace name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 262],
+      ["src/views/settings/WorkspaceSettings.tsx", 62]
+    ],
+    "translation": "Nombre del espacio de trabajo"
+  },
+  "ghSJ4U": {
+    "message": "Workspace name cannot exceed 64 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/NewWorkspaceForm.tsx", 30],
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 15]
+    ],
+    "translation": "El nombre del espacio de trabajo no puede superar los 64 caracteres"
+  },
+  "bcIybO": {
+    "message": "Workspace name is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 29]],
+    "translation": "El nombre del espacio de trabajo es obligatorio"
+  },
+  "jZBHkN": {
+    "message": "Workspace name must be at least 3 characters long",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 14]
+    ],
+    "translation": "El nombre del espacio de trabajo debe tener al menos 3 caracteres"
+  },
+  "OIA0ad": {
+    "message": "Workspace name updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 45]
+    ],
+    "translation": "Nombre del espacio de trabajo actualizado"
+  },
+  "1hzdxO": {
+    "message": "Workspace permissions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 53]],
+    "translation": "Permisos del espacio de trabajo"
+  },
+  "MN6YzG": {
+    "message": "Workspace slug updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 62]
+    ],
+    "translation": "Slug del espacio de trabajo actualizado"
+  },
+  "ASjvm9": {
+    "message": "Workspace URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 71]],
+    "translation": "URL del espacio de trabajo"
+  },
+  "DSGzV+": {
+    "message": "Workspace username",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 97]],
+    "translation": "Nombre de usuario del espacio de trabajo"
+  },
+  "/8pTF/": {
+    "message": "workspace-url",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 276]],
+    "translation": "workspace-url"
+  },
+  "4kJRen": {
+    "message": "Writing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 43]],
+    "translation": "Escribiendo"
+  },
+  "zkWmBh": {
+    "message": "Yearly",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/pricing/components/Pricing.tsx", 19],
+      ["src/views/pricing/index.tsx", 25]
+    ],
+    "translation": "Anual"
+  },
+  "eZCGbT": {
+    "message": "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 86]],
+    "translation": "Sí, ofrecemos un plan gratuito para siempre para uso individual. Sin restricciones, sin muros de pago, sin límites."
+  },
+  "RtlIYB": {
+    "message": "You are about to change your password.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 80]],
+    "translation": "Estás a punto de cambiar tu contraseña."
+  },
+  "aelko+": {
+    "message": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 67]],
+    "translation": "Puedes obtener una URL personalizada para tu espacio de trabajo, como <0>kan.bn/kan</0>, yendo a la <1>configuración de tu espacio de trabajo</1> y comprando una suscripción pro. ¡Todas las suscripciones ayudan a financiar el desarrollo del proyecto!"
+  },
+  "kSxwQL": {
+    "message": "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 111]],
+    "translation": "Puedes invitar a miembros del equipo haciendo clic en el botón \"Invitar\" en la esquina superior derecha de la <0>página de miembros</0> e ingresando su dirección de correo electrónico. Recibirán un correo con un enlace para unirse al espacio de trabajo."
+  },
+  "vAj6xG": {
+    "message": "You can self-host by following the instructions in our <0>repo</0>.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 127]],
+    "translation": "Puedes auto-alojar siguiendo las instrucciones en nuestro <0>repositorio</0>."
+  },
+  "h2FKMV": {
+    "message": "You don't have permission",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/List.tsx", 117],
+      ["src/views/board/components/UpdateBoardSlugButton.tsx", 58],
+      ["src/views/board/components/VisibilityButton.tsx", 72],
+      ["src/views/board/index.tsx", 474],
+      ["src/views/board/index.tsx", 532],
+      ["src/views/boards/components/BoardsList.tsx", 70],
+      ["src/views/boards/index.tsx", 46],
+      ["src/views/boards/index.tsx", 67]
+    ],
+    "translation": "No tienes permiso"
+  },
+  "p/hk9N": {
+    "message": "You have been logged in successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 233]],
+    "translation": "Has iniciado sesión correctamente."
+  },
+  "mchgzf": {
+    "message": "You have been signed up successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 216]],
+    "translation": "Te has registrado correctamente."
+  },
+  "raHesj": {
+    "message": "You have been unsubscribed!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/unsubscribe/index.tsx", 98]],
+    "translation": "¡Te has dado de baja!"
+  },
+  "R275Pz": {
+    "message": "You have unlimited seats with your Pro Plan. There is no additional charge for new members!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 326]],
+    "translation": "Tienes plazas ilimitadas con tu plan Pro. ¡No hay cargo adicional por nuevos miembros!"
+  },
+  "MdN5zD": {
+    "message": "You need to be an admin to manage workspace permissions.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 86]],
+    "translation": "Necesitas ser administrador para gestionar los permisos del espacio de trabajo."
+  },
+  "2SePRT": {
+    "message": "You've been invited to join a workspace on kan.bn.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 134]],
+    "translation": "Has sido invitado a unirte a un espacio de trabajo en kan.bn."
+  },
+  "uOqaMC": {
+    "message": "You've been invited to join a workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/invite/index.tsx", 135]],
+    "translation": "Has sido invitado a unirte a un espacio de trabajo."
+  },
+  "GoDLB9": {
+    "message": "Your account has been deleted.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 28]
+    ],
+    "translation": "Tu cuenta ha sido eliminada."
+  },
+  "evg7+A": {
+    "message": "Your boards have been imported.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 192]],
+    "translation": "Tus tableros han sido importados."
+  },
+  "LqWW5F": {
+    "message": "Your display name has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 42]],
+    "translation": "Tu nombre para mostrar ha sido actualizado."
+  },
+  "tca56/": {
+    "message": "Your file has been uploaded successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 46]],
+    "translation": "Tu archivo se ha subido correctamente."
+  },
+  "Ozt2vv": {
+    "message": "Your password has been changed.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 70]
+    ],
+    "translation": "Tu contraseña ha sido cambiada."
+  },
+  "/tOdd2": {
+    "message": "Your profile image has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/Avatar.tsx", 190]],
+    "translation": "Tu imagen de perfil ha sido actualizada."
+  },
+  "CJWDTP": {
+    "message": "Your Trello account has been disconnected.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 54]],
+    "translation": "Tu cuenta de Trello ha sido desconectada."
+  },
+  "WRsbHO": {
+    "message": "Your Trello account is connected.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 102]],
+    "translation": "Tu cuenta de Trello está conectada."
+  },
+  "25fAUC": {
+    "message": "Your unsubscribe link is missing a token. Please open the latest email and try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/unsubscribe/index.tsx", 33]],
+    "translation": "Tu enlace de cancelación de suscripción no tiene un token. Por favor, abre el último correo electrónico e inténtalo de nuevo."
+  },
+  "GnSSGm": {
+    "message": "Your workspace description has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 51]
+    ],
+    "translation": "La descripción de tu espacio de trabajo ha sido actualizada."
+  },
+  "qkjvgj": {
+    "message": "Your workspace has been deleted.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 27]
+    ],
+    "translation": "Tu espacio de trabajo ha sido eliminado."
+  },
+  "2h4PVB": {
+    "message": "Your workspace name has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 46]
+    ],
+    "translation": "El nombre de tu espacio de trabajo ha sido actualizado."
+  },
+  "Hg1qE9": {
+    "message": "Your workspace slug has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 63]
+    ],
+    "translation": "El slug de tu espacio de trabajo ha sido actualizado."
+  },
+  "4DOCMI": {
+    "message": "YouTube URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
+    "translation": "URL de YouTube"
+  }
+}

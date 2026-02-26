@@ -43,8 +43,8 @@ export default function PricingView() {
             <p className="mt-4 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-5xl">
               {t`Simple pricing`}
             </p>
-            <p className="text:md lg:text-md mt-6 max-w-[500px] text-center text-light-950 dark:text-dark-900">
-              {t`Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team.`}
+            <p className="text:md lg:text-md mt-6 max-w-[300px] text-center text-light-950 dark:text-dark-900">
+              {t`Start free. Upgrade as your team grows. No hidden fees, no contracts.`}
             </p>
           </div>
           <PricingTiers
@@ -59,23 +59,9 @@ export default function PricingView() {
         </div>
 
         <div className="pb-22 flex flex-col items-center justify-center px-4">
-          <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900 lg:text-sm">
-            <p>{t`Features`}</p>
-          </div>
+        
 
-          <p className="mt-4 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-4xl">
-            {t`Feature breakdown`}
-          </p>
-          <p className="text-md lg:text-md my-4 max-w-[500px] text-center text-light-950 dark:text-dark-900">
-            {t`Compare our features to see why Kan is the best choice.`}
-          </p>
-          <div className="mt-2">
-            <Button variant="primary" href="/signup">
-              {t`Get started`}
-            </Button>
-          </div>
-
-          <div className="mt-10 w-full max-w-[900px]">
+          <div className="mt-10 w-full">
             <FeatureComparisonTable
               frequencyValue={frequency?.value ?? "annually"}
             />

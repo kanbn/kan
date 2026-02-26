@@ -210,11 +210,12 @@ export const memberRouter = createTRPCRouter({
         input.memberPublicId,
       );
 
-      if (!member)
+      if (!member || member.workspaceId !== workspace.id) {
         throw new TRPCError({
           message: `Member with public ID ${input.memberPublicId} not found`,
           code: "NOT_FOUND",
         });
+      }
 
       const deletedMember = await memberRepo.softDelete(ctx.db, {
         memberId: member.id,
@@ -720,7 +721,7 @@ export const memberRouter = createTRPCRouter({
         input.memberPublicId,
       );
 
-      if (!member) {
+      if (!member || member.workspaceId !== workspace.id) {
         throw new TRPCError({
           message: "Member not found",
           code: "NOT_FOUND",
