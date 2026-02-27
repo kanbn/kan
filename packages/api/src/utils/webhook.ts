@@ -185,11 +185,13 @@ export async function sendWebhooksForWorkspace(
   payload: WebhookPayload,
 ): Promise<void> {
   try {
-    // Get active webhooks for this workspace, pre-filtered by event at the DB level
-    const webhooks = await webhookRepo.getActiveByWorkspaceId(
+    // Get active webhooks for this workspace and filter by event client-side
+    const allWebhooks = await webhookRepo.getActiveByWorkspaceId(
       db,
       workspaceId,
-      payload.event,
+    );
+    const webhooks = allWebhooks.filter((w) =>
+      w.events.includes(payload.event),
     );
 
     // Send to all webhooks in parallel (fire and forget)
