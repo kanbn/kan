@@ -1,4 +1,17 @@
 services:
+  migrator:
+    image: ghcr.io/kanbn/kan-migrate:latest
+    container_name: ${MIGRATOR_CONTAINER_NAME:-kan-migrate}
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+      target: migrate
+    networks:
+      - dokploy-network
+    environment:
+      - POSTGRES_URL=${POSTGRES_URL}
+    restart: "no"
+
   web:
     image: ghcr.io/kanbn/kan:latest
     container_name: ${CONTAINER_NAME:-kan-web}
@@ -9,6 +22,7 @@ services:
     build:
       context: ..
       dockerfile: apps/web/Dockerfile
+      target: web
       args:
         APP_VERSION: ${APP_VERSION:-}
     env_file:
@@ -79,6 +93,9 @@ services:
       - NEXT_PUBLIC_UMAMI_ID=${NEXT_PUBLIC_UMAMI_ID}
       - NEXT_PUBLIC_POSTHOG_KEY=${NEXT_PUBLIC_POSTHOG_KEY}
       - NEXT_PUBLIC_POSTHOG_HOST=${NEXT_PUBLIC_POSTHOG_HOST}
+    depends_on:
+      migrator:
+        condition: service_completed_successfully
 
 networks:
   dokploy-network:

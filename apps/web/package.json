@@ -79,6 +79,7 @@
     "@kan/tailwind-config": "workspace:*",
     "@kan/tsconfig": "workspace:*",
     "@lingui/cli": "^5.3.2",
+    "@lingui/format-json": "^5.9.1",
     "@lingui/loader": "^5.3.2",
     "@lingui/swc-plugin": "^5.5.2",
     "@svgr/webpack": "^8.1.0",

@@ -34,6 +34,7 @@ export const boardRouter = createTRPCRouter({
       z.object({
         workspacePublicId: z.string().min(12),
         type: z.enum(["regular", "template"]).optional(),
+        archived: z.boolean().optional(),
       }),
     )
     .output(
@@ -65,7 +66,10 @@ export const boardRouter = createTRPCRouter({
         ctx.db,
         workspace.id,
         userId,
-        { type: input.type }
+        {
+          type: input.type,
+          archived: input.archived ?? false,
+        }
       );
 
       return result;
@@ -153,28 +157,51 @@ export const boardRouter = createTRPCRouter({
       // Generate presigned URLs for workspace member avatars
       const workspaceWithAvatarUrls = result.workspace
         ? {
-            ...result.workspace,
-            members: await Promise.all(
-              result.workspace.members.map(async (member) => {
-                if (!member.user?.image) {
-                  return member;
-                }
+          ...result.workspace,
+          members: await Promise.all(
+            result.workspace.members.map(async (member) => {
+              if (!member.user?.image) {
+                return member;
+              }
 
-                const avatarUrl = await generateAvatarUrl(member.user.image);
-                return {
-                  ...member,
-                  user: {
-                    ...member.user,
-                    image: avatarUrl,
-                  },
-                };
-              }),
-            ),
-          }
+              const avatarUrl = await generateAvatarUrl(member.user.image);
+              return {
+                ...member,
+                user: {
+                  ...member.user,
+                  image: avatarUrl,
+                },
+              };
+            }),
+          ),
+        }
         : result.workspace;
+
+      // Generate presigned URLs for card member avatars
+      const listsWithAvatarUrls = await Promise.all(
+        result.lists.map(async (list) => ({
+          ...list,
+          cards: await Promise.all(
+            list.cards.map(async (card) => ({
+              ...card,
+              members: await Promise.all(
+                card.members.map(async (member) => {
+                  if (!member.user?.image) return member;
+                  const avatarUrl = await generateAvatarUrl(member.user.image);
+                  return {
+                    ...member,
+                    user: { ...member.user, image: avatarUrl },
+                  };
+                }),
+              ),
+            })),
+          ),
+        })),
+      );
 
       return {
         ...result,
+        lists: listsWithAvatarUrls,
         workspace: workspaceWithAvatarUrls,
       };
     }),
@@ -195,7 +222,7 @@ export const boardRouter = createTRPCRouter({
         workspaceSlug: z
           .string()
           .min(3)
-          .max(24)
+          .max(64)
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
         boardSlug: z
           .string()
@@ -438,7 +465,8 @@ export const boardRouter = createTRPCRouter({
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
           .optional(),
         visibility: z.enum(["public", "private"]).optional(),
-        favorite: z.boolean().optional()
+        favorite: z.boolean().optional(),
+        isArchived: z.boolean().optional(),
       }),
     )
     .output(z.object({ success: z.boolean() }).or(z.custom<Awaited<ReturnType<typeof boardRepo.update>>>()))
@@ -480,7 +508,7 @@ export const boardRouter = createTRPCRouter({
       }
 
       // Handle other updates (name, slug, visibility)
-      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined;
+      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined || input.isArchived !== undefined;
 
       if (!hasOtherUpdates) {
         // Only favorite was updated, return success
@@ -507,6 +535,7 @@ export const boardRouter = createTRPCRouter({
         slug: input.slug,
         boardPublicId: input.boardPublicId,
         visibility: input.visibility,
+        isArchived: input.isArchived,
       });
 
       if (!result)

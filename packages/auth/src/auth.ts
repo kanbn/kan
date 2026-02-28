@@ -12,15 +12,13 @@ import { configuredProviders } from "./providers";
 
 export const initAuth = (db: dbClient) => {
   const baseURL = env("NEXT_PUBLIC_BASE_URL") || env("BETTER_AUTH_URL");
-  const trustedOrigins = env("BETTER_AUTH_TRUSTED_ORIGINS")?.split(",") ?? [];
+  const trustedOrigins =
+    env("BETTER_AUTH_TRUSTED_ORIGINS")?.split(",").filter(Boolean) ?? [];
 
   return betterAuth({
     secret: env("BETTER_AUTH_SECRET"),
     baseURL,
-    trustedOrigins: [
-      ...(baseURL ? [baseURL] : []),
-      ...trustedOrigins,
-    ],
+    trustedOrigins: [...(baseURL ? [baseURL] : []), ...trustedOrigins],
     database: drizzleAdapter(db, {
       provider: "pg",
       schema: {
@@ -35,8 +33,10 @@ export const initAuth = (db: dbClient) => {
     },
     emailAndPassword: {
       enabled: env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true",
-      disableSignUp:
-        env("NEXT_PUBLIC_DISABLE_SIGN_UP")?.toLowerCase() === "true",
+      // Sign-up restriction is handled by the user.create.before database
+      // hook which checks for pending invitations, allowing invited users
+      // to register even when public sign-up is disabled.
+      disableSignUp: false,
       sendResetPassword: async (data) => {
         await sendEmail(data.user.email, "Reset Password", "RESET_PASSWORD", {
           resetPasswordUrl: data.url,

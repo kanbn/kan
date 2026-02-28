@@ -463,13 +463,6 @@ export default function Editor({
         StarterKit.configure({
           heading: disableHeadings ? false : undefined,
         }),
-        Markdown,
-        Placeholder.configure({
-          placeholder: readOnly
-            ? ""
-            : placeholder ??
-              t`Add description... (type '/' to open commands or '@' to mention)`,
-        }),
         Link.configure({
           openOnClick: true,
           HTMLAttributes: {
@@ -479,6 +472,14 @@ export default function Editor({
           },
           validate: (href) => /^https?:\/\//.test(href),
           autolink: true,
+          linkOnPaste: true,
+        }),
+        Markdown,
+        Placeholder.configure({
+          placeholder: readOnly
+            ? ""
+            : placeholder ??
+              t`Add description... (type '/' to open commands or '@' to mention)`,
         }),
         SlashCommands.configure({
           commandItems: getCommandItems(disableHeadings),

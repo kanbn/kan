@@ -81,6 +81,16 @@ export const checklistRouter = createTRPCRouter({
       return newChecklist;
     }),
   update: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Update a checklist",
+        method: "PUT",
+        path: "/checklists/{checklistPublicId}",
+        description: "Updates a checklist by its public ID",
+        tags: ["Cards"],
+        protect: true,
+      },
+    })
     .input(
       z.object({
         checklistPublicId: z.string().length(12),
