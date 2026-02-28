@@ -70,10 +70,6 @@ services:
     container_name: kan-migrate
     networks:
       - kan-network
-    build:
-      context: .
-      dockerfile: ./apps/web/Dockerfile
-      target: migrate
     environment:
       - POSTGRES_URL=${POSTGRES_URL}
     depends_on:
@@ -88,10 +84,6 @@ services:
       - "${WEB_PORT:-3000}:3000"
     networks:
       - kan-network
-    build:
-      context: .
-      dockerfile: ./apps/web/Dockerfile
-      target: web
     env_file:
       - .env
     environment:
