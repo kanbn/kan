@@ -689,4 +689,86 @@ export const boardRouter = createTRPCRouter({
         isReserved: !isBoardSlugAvailable,
       };
     }),
+  archivedCards: protectedProcedure
+    .meta({
+      openapi: {
+        method: "GET",
+        path: "/boards/{boardPublicId}/archived",
+        summary: "Get archived cards",
+        description: "Retrieves archived cards for a given board",
+        tags: ["Boards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        boardPublicId: z.string().min(12),
+      }),
+    )
+    .output(z.custom<Awaited<ReturnType<typeof cardRepo.getArchivedByBoardId>>>())
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
+        ctx.db,
+        input.boardPublicId,
+      );
+
+      if (!board)
+        throw new TRPCError({
+          message: `Board with public ID ${input.boardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
+
+      return cardRepo.getArchivedByBoardId(ctx.db, board.id);
+    }),
+  deletedCards: protectedProcedure
+    .meta({
+      openapi: {
+        method: "GET",
+        path: "/boards/{boardPublicId}/deletedcards",
+        summary: "Get deleted cards",
+        description: "Retrieves deleted cards for a given board",
+        tags: ["Boards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        boardPublicId: z.string().min(12),
+      }),
+    )
+    .output(z.custom<Awaited<ReturnType<typeof cardRepo.getDeletedCardsByBoardId>>>())
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
+        ctx.db,
+        input.boardPublicId,
+      );
+
+      if (!board)
+        throw new TRPCError({
+          message: `Board with public ID ${input.boardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
+
+      return cardRepo.getDeletedCardsByBoardId(ctx.db, board.id);
+    }),
 });

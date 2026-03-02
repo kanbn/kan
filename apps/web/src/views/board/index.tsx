@@ -383,13 +383,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             sourceBoardName={boardData?.name ?? ""}
           />
         </Modal>
-
         <Modal
           modalSize="sm"
           isVisible={isOpen && modalContentType === "EDIT_YOUTUBE"}
         >
           <EditYouTubeModal />
         </Modal>
+
       </>
     );
   };

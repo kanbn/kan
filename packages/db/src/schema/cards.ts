@@ -48,6 +48,9 @@ export const activityTypes = [
   "card.updated.dueDate.updated",
   "card.updated.dueDate.removed",
   "card.archived",
+  "card.unarchived",
+  "card.restored",
+  "card.deleted",
 ] as const;
 
 export type ActivityType = (typeof activityTypes)[number];
@@ -66,6 +69,7 @@ export const cards = pgTable("card", {
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt"),
   deletedAt: timestamp("deletedAt"),
+  archivedAt: timestamp("archivedAt"),
   deletedBy: uuid("deletedBy").references(() => users.id, {
     onDelete: "set null",
   }),

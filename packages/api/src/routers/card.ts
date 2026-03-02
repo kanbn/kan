@@ -1149,6 +1149,114 @@ export const cardRouter = createTRPCRouter({
       });
 
       await cardActivityRepo.create(ctx.db, {
+        type: "card.deleted",
+        cardId: card.id,
+        createdBy: userId,
+      });
+
+      return { success: true };
+    }),
+  hardDelete: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Permanently delete a card from deleted cards",
+        method: "DELETE",
+        path: "/cards/{cardPublicId}/hard",
+        description: "Permanently deletes a card by its public ID from the deleted cards",
+        tags: ["Cards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+      }),
+    )
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+        { includeDeleted: true },
+      );
+
+      if (!card)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertCanDelete(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "card:delete",
+        card.createdBy,
+      );
+
+      await cardRepo.hardDelete(ctx.db, card.id);
+
+      return { success: true };
+    }),
+  archive: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Archive a card",
+        method: "POST",
+        path: "/cards/{cardPublicId}/archive",
+        description: "Archives a card by its public ID",
+        tags: ["Cards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+      }),
+    )
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!card)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertCanDelete(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "card:archive",
+        card.createdBy,
+      );
+
+      await cardRepo.archive(ctx.db, {
+        cardId: card.id,
+        archivedAt: new Date(),
+      });
+
+      await cardActivityRepo.create(ctx.db, {
         type: "card.archived",
         cardId: card.id,
         createdBy: userId,
@@ -1181,6 +1289,122 @@ export const cardRouter = createTRPCRouter({
           console.error("Webhook delivery failed:", error);
         });
       }
+
+      return { success: true };
+    }),
+  unarchive: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Unarchive a card",
+        method: "POST",
+        path: "/cards/{cardPublicId}/unarchive",
+        description: "Unarchives a card by its public ID",
+        tags: ["Cards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+      }),
+    )
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!card)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertCanDelete(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "card:archive",
+        card.createdBy,
+      );
+
+      await cardRepo.unarchive(ctx.db, {
+        cardId: card.id,
+      });
+
+      await cardActivityRepo.create(ctx.db, {
+        type: "card.unarchived",
+        cardId: card.id,
+        createdBy: userId,
+      });
+
+      return { success: true };
+    }),
+  restore: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Restore a card from deleted cards",
+        method: "POST",
+        path: "/cards/{cardPublicId}/restore",
+        description: "Restores a soft-deleted card by its public ID",
+        tags: ["Cards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+      }),
+    )
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+        { includeDeleted: true },
+      );
+
+      if (!card)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertCanEdit(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "card:edit",
+        card.createdBy,
+      );
+
+      await cardRepo.restoreFromDeletedCards(ctx.db, {
+        cardId: card.id,
+        restoredBy: userId,
+      });
+
+      await cardActivityRepo.create(ctx.db, {
+        type: "card.restored",
+        cardId: card.id,
+        createdBy: userId,
+      });
 
       return { success: true };
     }),

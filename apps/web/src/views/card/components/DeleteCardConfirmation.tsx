@@ -74,9 +74,6 @@ export function DeleteCardConfirmation({
         <h2 className="text-md pb-4 font-medium text-neutral-900 dark:text-dark-1000">
           {t`Are you sure you want to delete this card?`}
         </h2>
-        <p className="text-sm font-medium text-light-900 dark:text-dark-900">
-          {t`This action can't be undone.`}
-        </p>
       </div>
       <div className="mt-5 flex justify-end sm:mt-6">
         <button

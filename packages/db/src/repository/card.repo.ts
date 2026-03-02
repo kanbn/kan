@@ -6,6 +6,7 @@ import {
   eq,
   gt,
   inArray,
+  isNotNull,
   isNull,
   sql,
 } from "drizzle-orm";
@@ -846,7 +847,7 @@ export const softDelete = async (
     await tx.execute(sql`
       UPDATE card
       SET index = index - 1
-      WHERE "listId" = ${result.listId} AND index > ${result.index} AND "deletedAt" IS NULL;
+      WHERE "listId" = ${result.listId} AND index > ${result.index} AND "deletedAt" IS NULL AND "archivedAt" IS NULL;
     `);
 
     const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
@@ -939,10 +940,14 @@ export const hardDeleteAllCardLabelRelationships = async (
 export const getWorkspaceAndCardIdByCardPublicId = async (
   db: dbClient,
   cardPublicId: string,
+  options?: { includeDeleted?: boolean },
 ) => {
   const result = await db.query.cards.findFirst({
     columns: { id: true, createdBy: true },
-    where: and(eq(cards.publicId, cardPublicId), isNull(cards.deletedAt)),
+    where: and(
+      eq(cards.publicId, cardPublicId),
+      options?.includeDeleted ? undefined : isNull(cards.deletedAt),
+    ),
     with: {
       list: {
         columns: { name: true },
@@ -971,4 +976,164 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
         boardName: result.list.board.name,
       }
     : null;
+};
+
+export const archive = async (
+  db: dbClient,
+  args: {
+    cardId: number;
+    archivedAt: Date;
+  },
+) => {
+  return db.transaction(async (tx) => {
+    const [result] = await tx
+      .update(cards)
+      .set({ archivedAt: args.archivedAt })
+      .where(eq(cards.id, args.cardId))
+      .returning({
+        id: cards.id,
+        listId: cards.listId,
+        index: cards.index,
+      });
+
+    if (!result)
+      throw new Error(`Unable to archive card ID ${args.cardId}`);
+
+    // Update indices for cards below it in the list so there are no gaps
+    // if we consider archived cards "removed" from the active list's order.
+    await tx.execute(sql`
+      UPDATE card
+      SET index = index - 1
+      WHERE "listId" = ${result.listId} AND index > ${result.index} AND "deletedAt" IS NULL AND "archivedAt" IS NULL;
+    `);
+
+    return result;
+  });
+};
+
+export const unarchive = async (
+  db: dbClient,
+  args: {
+    cardId: number;
+  },
+) => {
+  return db.transaction(async (tx) => {
+    // Put it back at the end of the list it was in
+    const cardInfo = await tx.query.cards.findFirst({
+      columns: { listId: true },
+      where: eq(cards.id, args.cardId),
+    });
+
+    if (!cardInfo) throw new Error("Card not found");
+
+    const lastCard = await tx.query.cards.findFirst({
+      columns: { index: true },
+      where: and(eq(cards.listId, cardInfo.listId), isNull(cards.deletedAt), isNull(cards.archivedAt)),
+      orderBy: desc(cards.index),
+    });
+
+    const newIndex = lastCard ? lastCard.index + 1 : 0;
+
+    const [result] = await tx
+      .update(cards)
+      .set({ archivedAt: null, index: newIndex })
+      .where(eq(cards.id, args.cardId))
+      .returning({
+        id: cards.id,
+        listId: cards.listId,
+        index: cards.index,
+      });
+
+    return result;
+  });
+};
+
+export const restoreFromDeletedCards = async (
+  db: dbClient,
+  args: {
+    cardId: number;
+    restoredBy: string;
+  },
+) => {
+  return db.transaction(async (tx) => {
+    const cardInfo = await tx.query.cards.findFirst({
+      columns: { listId: true },
+      where: eq(cards.id, args.cardId),
+    });
+
+    if (!cardInfo) throw new Error("Card not found");
+
+    const lastCard = await tx.query.cards.findFirst({
+      columns: { index: true },
+      where: and(eq(cards.listId, cardInfo.listId), isNull(cards.deletedAt), isNull(cards.archivedAt)),
+      orderBy: desc(cards.index),
+    });
+
+    const newIndex = lastCard ? lastCard.index + 1 : 0;
+
+    const [result] = await tx
+      .update(cards)
+      .set({ deletedAt: null, deletedBy: null, index: newIndex })
+      .where(eq(cards.id, args.cardId))
+      .returning({
+        id: cards.id,
+      });
+
+    return result;
+  });
+};
+
+export const getArchivedByBoardId = async (
+  db: dbClient,
+  boardId: number,
+) => {
+  // We need to join with lists to filter by board
+  return db
+    .select({
+      id: cards.id,
+      publicId: cards.publicId,
+      title: cards.title,
+      archivedAt: cards.archivedAt,
+      listName: lists.name,
+    })
+    .from(cards)
+    .innerJoin(lists, eq(cards.listId, lists.id))
+    .where(
+      and(
+        eq(lists.boardId, boardId),
+        isNull(cards.deletedAt),
+        isNotNull(cards.archivedAt),
+        isNull(lists.deletedAt)
+      )
+    )
+    .orderBy(desc(cards.archivedAt));
+};
+
+export const getDeletedCardsByBoardId = async (
+  db: dbClient,
+  boardId: number,
+) => {
+  return db
+    .select({
+      id: cards.id,
+      publicId: cards.publicId,
+      title: cards.title,
+      deletedAt: cards.deletedAt,
+      listName: lists.name,
+    })
+    .from(cards)
+    .innerJoin(lists, eq(cards.listId, lists.id))
+    .where(
+      and(
+        eq(lists.boardId, boardId),
+        isNotNull(cards.deletedAt),
+        isNull(lists.deletedAt)
+      )
+    )
+    .orderBy(desc(cards.deletedAt));
+};
+
+export const hardDelete = async (db: dbClient, cardId: number) => {
+  const [result] = await db.delete(cards).where(eq(cards.id, cardId)).returning({ id: cards.id });
+  return result;
 };

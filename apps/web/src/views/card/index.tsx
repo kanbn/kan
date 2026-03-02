@@ -29,6 +29,7 @@ import ActivityList from "./components/ActivityList";
 import { AttachmentThumbnails } from "./components/AttachmentThumbnails";
 import { AttachmentUpload } from "./components/AttachmentUpload";
 import Checklists from "./components/Checklists";
+import { ArchiveCardConfirmation } from "./components/ArchiveCardConfirmation";
 import { DeleteCardConfirmation } from "./components/DeleteCardConfirmation";
 import { DeleteChecklistConfirmation } from "./components/DeleteChecklistConfirmation";
 import { DeleteCommentConfirmation } from "./components/DeleteCommentConfirmation";
@@ -209,10 +210,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
         email: member.email,
         user: member.user
           ? {
-              id: member.user.id,
-              name: member.user.name ?? null,
-              image: member.user.image ?? null,
-            }
+            id: member.user.id,
+            name: member.user.name ?? null,
+            image: member.user.image ?? null,
+          }
           : null,
       })) ?? [];
 
@@ -501,6 +502,16 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
             <DeleteLabelConfirmation
               refetch={refetchCard}
               labelPublicId={entityId}
+            />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "ARCHIVE_CARD"}
+          >
+            <ArchiveCardConfirmation
+              boardPublicId={boardId ?? ""}
+              cardPublicId={cardId}
             />
           </Modal>
 

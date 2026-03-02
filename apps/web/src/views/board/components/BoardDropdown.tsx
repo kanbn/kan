@@ -1,4 +1,5 @@
 import { t } from "@lingui/core/macro";
+import { useRouter } from "next/router";
 import {
   HiEllipsisHorizontal,
   HiLink,
@@ -6,6 +7,7 @@ import {
   HiOutlineTrash,
   HiOutlineStar,
   HiStar,
+  HiOutlineRectangleStack,
 } from "react-icons/hi2";
 import { IoArchiveOutline } from "react-icons/io5";
 import Dropdown from "~/components/Dropdown";
@@ -29,6 +31,7 @@ export default function BoardDropdown({
   isFavorite?: boolean;
   boardName?: string;
 }) {
+  const router = useRouter();
   const { openModal } = useModal();
   const { showPopup } = usePopup();
   const { canEditBoard, canDeleteBoard, canCreateBoard, canArchiveBoard } =
@@ -138,6 +141,16 @@ export default function BoardDropdown({
         },
       ]
       : []),
+    {
+      label: t`Archived cards`,
+      action: () => router.push(`/boards/${boardPublicId}/archived`),
+      icon: <HiOutlineRectangleStack className="h-[16px] w-[16px] text-dark-900" />,
+    },
+    {
+      label: t`Deleted cards`,
+      action: () => router.push(`/boards/${boardPublicId}/deleted`),
+      icon: <HiOutlineTrash className="h-[16px] w-[16px] text-dark-900" />,
+    },
   ];
 
   if (items.length === 0) {

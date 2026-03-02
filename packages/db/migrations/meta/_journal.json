@@ -204,6 +204,13 @@
       "when": 1771930355536,
       "tag": "20260224105235_AddGitHubIntegrationSupport",
       "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1771931414809,
+      "tag": "20260224111014_AddTrashArchive",
+      "breakpoints": true
     }
   ]
 }
