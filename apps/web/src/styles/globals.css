@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-size: 14px;
+}
+
 [contenteditable="true"]:empty:before {
   content: attr(placeholder);
   display: block;
