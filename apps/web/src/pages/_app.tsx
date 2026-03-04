@@ -12,6 +12,7 @@ import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { useEffect } from "react";
 
+import { FontSizeProvider } from "~/providers/font-size";
 import { KeyboardShortcutProvider } from "~/providers/keyboard-shortcuts";
 import { LinguiProviderWrapper } from "~/providers/lingui";
 import { ModalProvider } from "~/providers/modal";
@@ -83,19 +84,21 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
       <main className="font-sans">
         <KeyboardShortcutProvider>
           <LinguiProviderWrapper>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <ModalProvider>
-                <PopupProvider>
-                  {posthogKey ? (
-                    <PostHogProvider client={posthog}>
-                      {getLayout(<Component {...pageProps} />)}
-                    </PostHogProvider>
-                  ) : (
-                    getLayout(<Component {...pageProps} />)
-                  )}
-                </PopupProvider>
-              </ModalProvider>
-            </ThemeProvider>
+            <FontSizeProvider>
+              <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                <ModalProvider>
+                  <PopupProvider>
+                    {posthogKey ? (
+                      <PostHogProvider client={posthog}>
+                        {getLayout(<Component {...pageProps} />)}
+                      </PostHogProvider>
+                    ) : (
+                      getLayout(<Component {...pageProps} />)
+                    )}
+                  </PopupProvider>
+                </ModalProvider>
+              </ThemeProvider>
+            </FontSizeProvider>
           </LinguiProviderWrapper>
         </KeyboardShortcutProvider>
       </main>

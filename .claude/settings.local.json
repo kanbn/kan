@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh issue:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(grep:*)",
+      "Bash(npx tsc:*)",
+      "Bash(pnpm:*)",
+      "Bash(docker compose:*)",
+      "Bash(curl:*)",
+      "Bash(docker exec:*)"
+    ]
+  }
+}
