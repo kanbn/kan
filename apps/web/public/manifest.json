@@ -1,0 +1,39 @@
+{
+  "background_color": "#000000",
+  "categories": [
+    "business",
+    "productivity",
+    "utilities"
+  ],
+  "description": "The open source Trello alternative.",
+  "display": "standalone",
+  "icons": [
+    {
+      "sizes": "512x512",
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "id": "/",
+  "screenshots": [
+    {
+      "sizes": "1624x1561",
+      "src": "/screenshot-wide.png",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "sizes": "1290x2796",
+      "src": "/screenshot-narrow.png",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "orientation": "portrait-primary",
+  "name": "Kan.bn | The open source alternative to Trello",
+  "scope": "/",
+  "short_name": "Kan.bn",
+  "start_url": "/",
+  "theme_color": "#000000"
+}
