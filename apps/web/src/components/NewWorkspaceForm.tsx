@@ -111,6 +111,7 @@ export function NewWorkspaceForm() {
           slug: values.slug,
           plan: values.plan,
           role: "admin",
+          weekStartDay: 1,
         });
 
         // If in cloud and Pro toggle is enabled, create checkout session for pro
