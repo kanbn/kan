@@ -124,10 +124,20 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     data: boardData,
     isSuccess,
     isLoading: isQueryLoading,
+    error,
   } = api.board.byId.useQuery(queryParams, {
     enabled: !!boardId,
     placeholderData: keepPreviousData,
   });
+
+  // Redirect to 404 if board doesn't exist
+  useEffect(() => {
+    if (router.isReady && boardId && !isQueryLoading) {
+      if (error?.data?.code === "NOT_FOUND" || (!boardData && !isQueryLoading)) {
+        router.replace("/404");
+      }
+    }
+  }, [router, boardId, isQueryLoading, error, boardData]);
 
   const refetchBoard = async () => {
     if (boardId) await utils.board.byId.refetch({ boardPublicId: boardId });
