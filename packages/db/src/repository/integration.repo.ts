@@ -46,6 +46,35 @@ export const getProvidersForUser = async (db: dbClient, userId: string) => {
   return integration;
 };
 
+export const createOrUpdateProvider = async (
+  db: dbClient,
+  data: {
+    userId: string;
+    provider: string;
+    accessToken: string;
+    refreshToken?: string | null;
+    expiresAt: Date;
+  },
+) => {
+  await db
+    .insert(integrations)
+    .values({
+      provider: data.provider,
+      userId: data.userId,
+      accessToken: data.accessToken,
+      refreshToken: data.refreshToken ?? null,
+      expiresAt: data.expiresAt,
+    })
+    .onConflictDoUpdate({
+      target: [integrations.userId, integrations.provider],
+      set: {
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken ?? null,
+        expiresAt: data.expiresAt,
+      },
+    });
+};
+
 export const deleteProviderForUser = async (
   db: dbClient,
   userId: string,

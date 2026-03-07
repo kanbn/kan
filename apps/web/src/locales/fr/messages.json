@@ -34,7 +34,7 @@
     "comments": [],
     "origin": [
       ["src/views/boards/index.tsx", 48],
-      ["src/views/card/index.tsx", 309]
+      ["src/views/card/index.tsx", 308]
     ],
     "translation": "{0} | {1}"
   },
@@ -80,8 +80,17 @@
       "boardCount": ["boardCount"]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 299]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 489]],
     "translation": "{boardCount, plural, one {Importer le tableau (1)} other {Importer les tableaux ({boardCount})}}"
+  },
+  "yndBF+": {
+    "message": "{projectCount, plural, one {Import project (1)} other {Import projects ({projectCount})}}",
+    "placeholders": {
+      "projectCount": ["projectCount"]
+    },
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 341]],
+    "translation": "{projectCount, plural, one {Importer le projet (1)} other {Importer les projets ({projectCount})}}"
   },
   "9lFfqv": {
     "message": "/month",
@@ -197,7 +206,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 447],
+      ["src/views/card/index.tsx", 446],
       ["src/views/public/board/CardModal.tsx", 189]
     ],
     "translation": "Activité"
@@ -492,11 +501,25 @@
     "origin": [["src/views/auth/signup/index.tsx", 90]],
     "translation": "Vous avez déjà un compte ? <0><1>Se connecter</1></0>"
   },
+  "j1+HPc": {
+    "message": "An error occurred while connecting your GitHub account.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 107]],
+    "translation": "Une erreur s'est produite lors de la connexion de votre compte GitHub."
+  },
+  "Dz63YI": {
+    "message": "An error occurred while disconnecting your GitHub account.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 130]],
+    "translation": "Une erreur s'est produite lors de la déconnexion de votre compte GitHub."
+  },
   "WmPhYW": {
     "message": "An error occurred while disconnecting your Trello account.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 61]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 87]],
     "translation": "Une erreur s'est produite lors de la déconnexion de votre compte Trello."
   },
   "ZXSPJt": {
@@ -791,7 +814,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 400],
-      ["src/views/card/index.tsx", 309],
+      ["src/views/card/index.tsx", 308],
       ["src/views/public/board/index.tsx", 125]
     ],
     "translation": "Tableau"
@@ -1205,7 +1228,7 @@
     "message": "Card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/index.tsx", 309]],
+    "origin": [["src/views/card/index.tsx", 308]],
     "translation": "Carte"
   },
   "fEY2vP": {
@@ -1213,8 +1236,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 355],
-      ["src/views/card/index.tsx", 392]
+      ["src/views/card/index.tsx", 354],
+      ["src/views/card/index.tsx", 391]
     ],
     "translation": "Carte introuvable"
   },
@@ -1356,7 +1379,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 346],
+      ["src/views/card/index.tsx", 345],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
     ],
@@ -1473,14 +1496,25 @@
     ],
     "translation": "Confirmez votre nouveau mot de passe"
   },
+  "iSLIjg": {
+    "message": "Connect",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 195]],
+    "translation": "Connecter"
+  },
+  "3jod3l": {
+    "message": "Connect GitHub",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 212]],
+    "translation": "Connecter GitHub"
+  },
   "nk7caK": {
     "message": "Connect Trello",
     "placeholders": {},
     "comments": [],
-    "origin": [
-      ["src/views/boards/components/ImportBoardsForm.tsx", 157],
-      ["src/views/settings/IntegrationsSettings.tsx", 93]
-    ],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 162]],
     "translation": "Connecter Trello"
   },
   "sDLCvT": {
@@ -1490,11 +1524,18 @@
     "origin": [["src/views/home/components/Features.tsx", 122]],
     "translation": "Connectez vos outils préférés pour optimiser votre flux de travail."
   },
+  "MCIXdZ": {
+    "message": "Connect your GitHub account to import projects.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 191]],
+    "translation": "Connectez votre compte GitHub pour importer des projets."
+  },
   "5eZwRW": {
     "message": "Connect your Trello account to import boards.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 80]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 149]],
     "translation": "Connectez votre compte Trello pour importer des tableaux."
   },
   "jfC/xh": {
@@ -1958,11 +1999,18 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 45]],
     "translation": "Design"
   },
+  "Odv3J6": {
+    "message": "Disconnect GitHub",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 223]],
+    "translation": "Déconnecter GitHub"
+  },
   "YBBifR": {
     "message": "Disconnect Trello",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 108]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 177]],
     "translation": "Déconnecter Trello"
   },
   "1sRmLC": {
@@ -2307,6 +2355,13 @@
     ],
     "translation": "Erreur lors du changement de mot de passe"
   },
+  "yhLUU8": {
+    "message": "Error connecting GitHub",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 106]],
+    "translation": "Erreur de connexion à GitHub"
+  },
   "cji2nM": {
     "message": "Error creating invite link",
     "placeholders": {},
@@ -2346,11 +2401,18 @@
     ],
     "translation": "Erreur lors de la suppression de l'espace de travail"
   },
+  "gQ/02p": {
+    "message": "Error disconnecting GitHub",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 129]],
+    "translation": "Erreur de déconnexion de GitHub"
+  },
   "lKAvEd": {
     "message": "Error disconnecting Trello",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 60]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 86]],
     "translation": "Erreur lors de la déconnexion de Trello"
   },
   "rarRW/": {
@@ -2731,8 +2793,25 @@
     "message": "GitHub",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/home/components/Footer.tsx", 37]],
+    "origin": [
+      ["src/views/home/components/Footer.tsx", 37],
+      ["src/views/settings/IntegrationsSettings.tsx", 186]
+    ],
     "translation": "GitHub"
+  },
+  "PVT7q7": {
+    "message": "GitHub connected",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 99]],
+    "translation": "GitHub connecté"
+  },
+  "/bBVaD": {
+    "message": "GitHub disconnected",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 122]],
+    "translation": "GitHub déconnecté"
   },
   "7eMo+U": {
     "message": "Go Home",
@@ -2912,14 +2991,20 @@
     "message": "Import complete",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 191]],
+    "origin": [
+      ["src/views/boards/components/ImportBoardsForm.tsx", 229],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 381]
+    ],
     "translation": "Importation terminée"
   },
   "BEVzjL": {
     "message": "Import failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 204]],
+    "origin": [
+      ["src/views/boards/components/ImportBoardsForm.tsx", 242],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 394]
+    ],
     "translation": "Échec de l'importation"
   },
   "rRM7r0": {
@@ -3513,7 +3598,7 @@
     "message": "New import",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 322]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 513]],
     "translation": "Nouvel import"
   },
   "n1GRql": {
@@ -3613,7 +3698,7 @@
     "message": "No boards found",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 242]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 432]],
     "translation": "Aucun tableau trouvé"
   },
   "OpNhRn": {
@@ -3657,6 +3742,13 @@
     "comments": [],
     "origin": [["src/views/board/index.tsx", 527]],
     "translation": "Aucune liste n'a encore été créée"
+  },
+  "i30J2U": {
+    "message": "No projects found",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 283]],
+    "translation": "Aucun projet trouvé"
   },
   "ERpq2P": {
     "message": "No results found for \"{debouncedQuery}\".",
@@ -4021,7 +4113,8 @@
       ["src/views/board/components/VisibilityButton.tsx", 57],
       ["src/views/board/index.tsx", 181],
       ["src/views/board/index.tsx", 237],
-      ["src/views/boards/components/ImportBoardsForm.tsx", 205],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 243],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 395],
       ["src/views/card/components/AttachmentThumbnails.tsx", 74],
       ["src/views/card/components/ChecklistItemRow.tsx", 69],
       ["src/views/card/components/ChecklistItemRow.tsx", 97],
@@ -4475,14 +4568,17 @@
     "message": "Select all",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 274]],
+    "origin": [
+      ["src/views/boards/components/ImportBoardsForm.tsx", 315],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 464]
+    ],
     "translation": "Tout sélectionner"
   },
   "rYUZIe": {
     "message": "Select source",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 157]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 195]],
     "translation": "Sélectionner la source"
   },
   "ppaRWv": {
@@ -4569,7 +4665,7 @@
     "message": "Settings | Integrations",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 69]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 138]],
     "translation": "Paramètres | Intégrations"
   },
   "F/FPk/": {
@@ -5064,6 +5160,13 @@
     "origin": [["src/views/home/components/Header.tsx", 114]],
     "translation": "Basculer le menu"
   },
+  "L5WQLg": {
+    "message": "Token is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 19]],
+    "translation": "Le jeton est requis"
+  },
   "eEQyz+": {
     "message": "Track all card changes with detailed activity history.",
     "placeholders": {},
@@ -5077,7 +5180,7 @@
     "comments": [],
     "origin": [
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 218],
-      ["src/views/settings/IntegrationsSettings.tsx", 73]
+      ["src/views/settings/IntegrationsSettings.tsx", 142]
     ],
     "translation": "Trello"
   },
@@ -5085,7 +5188,7 @@
     "message": "Trello disconnected",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 53]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 79]],
     "translation": "Trello déconnecté"
   },
   "kxEs5t": {
@@ -6021,7 +6124,7 @@
     "message": "Your boards have been imported.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 192]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 382]],
     "translation": "Vos tableaux ont été importés."
   },
   "LqWW5F": {
@@ -6037,6 +6140,27 @@
     "comments": [],
     "origin": [["src/views/card/components/AttachmentUpload.tsx", 46]],
     "translation": "Votre fichier a été téléchargé avec succès."
+  },
+  "HcT8J4": {
+    "message": "Your GitHub account has been connected.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 100]],
+    "translation": "Votre compte GitHub a été connecté."
+  },
+  "AdxYds": {
+    "message": "Your GitHub account has been disconnected.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 123]],
+    "translation": "Votre compte GitHub a été déconnecté."
+  },
+  "PELbXB": {
+    "message": "Your GitHub account is connected.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 220]],
+    "translation": "Votre compte GitHub est connecté."
   },
   "Ozt2vv": {
     "message": "Your password has been changed.",
@@ -6054,18 +6178,25 @@
     "origin": [["src/views/settings/components/Avatar.tsx", 190]],
     "translation": "Votre image de profil a été mise à jour."
   },
+  "+jbXzb": {
+    "message": "Your projects have been imported.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 230]],
+    "translation": "Vos projets ont été importés."
+  },
   "CJWDTP": {
     "message": "Your Trello account has been disconnected.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 54]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 80]],
     "translation": "Votre compte Trello a été déconnecté."
   },
   "WRsbHO": {
     "message": "Your Trello account is connected.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 102]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 171]],
     "translation": "Votre compte Trello est connecté."
   },
   "25fAUC": {

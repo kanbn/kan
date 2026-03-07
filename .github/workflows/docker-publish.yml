@@ -6,8 +6,6 @@ name: Docker
 # documentation.
 
 on:
-  schedule:
-    - cron: "21 21 * * *"
   push:
     # Only trigger on tags (releases), not main branch pushes
     # Main branch builds are handled by workflow_run after Translate completes
@@ -84,7 +82,8 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest,enable=${{ github.ref_type == 'tag' }}
+            type=raw,value=edge,enable={{is_default_branch}}
 
       - name: Extract Docker metadata (migrate)
         id: meta-migrate
@@ -97,7 +96,8 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest,enable=${{ github.ref_type == 'tag' }}
+            type=raw,value=edge,enable={{is_default_branch}}
 
       # Extract version from git tag or ref
       # Uses git describe to get latest tag + commit hash in SemVer format: 1.2.3+abc1234

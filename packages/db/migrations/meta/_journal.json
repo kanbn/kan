@@ -189,15 +189,29 @@
       "version": "7",
       "when": 1771031547285,
       "tag": "20260214011227_AddWeekStartDay",
-      "when": 1771192000000,
-      "tag": "20260129210000_AddWorkspaceWebhooks",
+      "when": 1770521594167,
+      "tag": "20260208033314_AddAttachmentToActivity",
       "breakpoints": true
     },
     {
       "idx": 27,
       "version": "7",
+      "when": 1771192000000,
+      "tag": "20260129210000_AddWorkspaceWebhooks",
+      "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
       "when": 1772049587901,
       "tag": "20260225195947_AddIsArchivedToBoard",
+      "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1771930355536,
+      "tag": "20260224105235_AddGitHubIntegrationSupport",
       "breakpoints": true
     }
   ]

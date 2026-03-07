@@ -4,7 +4,7 @@ import { t } from "@lingui/core/macro";
 import { Plural, Trans } from "@lingui/react/macro";
 import { Fragment, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { FaTrello } from "react-icons/fa";
+import { FaGithub, FaTrello } from "react-icons/fa";
 import {
   HiChevronUpDown,
   HiMiniArrowTopRightOnSquare,
@@ -27,12 +27,23 @@ const integrationProviders: Record<
     name: "Trello",
     icon: <FaTrello />,
   },
+  github: {
+    name: "GitHub",
+    icon: <FaGithub />,
+  },
 };
 
-const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
+const SelectSource = ({
+  handleNextStep,
+}: {
+  handleNextStep: (provider: string) => void;
+}) => {
   const { data: integrations, refetch: refetchIntegrations } =
     api.integration.providers.useQuery();
-  const { control, handleSubmit } = useForm({
+  const { data: githubStatus, refetch: refetchGithubStatus } =
+    api.integration.getGitHubStatus.useQuery();
+
+  const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       source: integrations?.[0]?.provider ?? "trello",
     },
@@ -47,23 +58,36 @@ const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
     },
   );
 
-  const hasIntegrations = integrations && integrations.length > 0;
+  const availableIntegrations = [
+    ...(integrations ?? []),
+    ...(githubStatus?.connected ? [{ provider: "github" }] : []),
+  ];
+
+  const hasIntegrations = availableIntegrations.length > 0;
 
   useEffect(() => {
     const handleFocus = () => {
-      refetchIntegrations();
+      void refetchIntegrations();
+      void refetchGithubStatus();
     };
     window.addEventListener("focus", handleFocus);
     return () => {
       window.removeEventListener("focus", handleFocus);
     };
-  }, [refetchIntegrations]);
+  }, [refetchIntegrations, refetchGithubStatus]);
 
   const onSubmit = () => {
-    if (!hasIntegrations && trelloUrl) {
-      window.open(trelloUrl.url, "trello_auth", "height=800,width=600");
+    const selected = watch("source");
+    if (
+      selected === "trello" &&
+      !integrations?.some((i) => i.provider === "trello")
+    ) {
+      if (trelloUrl)
+        window.open(trelloUrl.url, "trello_auth", "height=800,width=600");
+    } else if (selected === "github" && !githubStatus?.connected) {
+      window.open("/settings/integrations", "_blank");
     } else {
-      handleNextStep();
+      handleNextStep(selected);
     }
   };
 
@@ -102,7 +126,7 @@ const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
                     >
                       <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-1 text-base text-neutral-900 shadow-lg ring-1 ring-light-600 ring-opacity-5 focus:outline-none dark:bg-dark-300 dark:text-dark-1000 sm:text-sm">
                         {hasIntegrations ? (
-                          integrations.map((integration, index) => (
+                          availableIntegrations.map((integration, index) => (
                             <Listbox.Option
                               key={`source_${index}`}
                               className="relative cursor-default select-none px-1"
@@ -123,18 +147,32 @@ const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
                             </Listbox.Option>
                           ))
                         ) : (
-                          <Listbox.Option
-                            key="trello_placeholder"
-                            className="font-sm relative cursor-default select-none px-1"
-                            value="trello"
-                          >
-                            <div className="flex items-center rounded-[5px] p-1 text-sm hover:bg-light-200 dark:hover:bg-dark-400">
-                              {integrationProviders.trello?.icon}
-                              <span className="ml-2 block truncate text-sm">
-                                {integrationProviders.trello?.name}
-                              </span>
-                            </div>
-                          </Listbox.Option>
+                          <>
+                            <Listbox.Option
+                              key="trello_placeholder"
+                              className="font-sm relative cursor-default select-none px-1"
+                              value="trello"
+                            >
+                              <div className="flex items-center rounded-[5px] p-1 text-sm hover:bg-light-200 dark:hover:bg-dark-400">
+                                {integrationProviders.trello?.icon}
+                                <span className="ml-2 block truncate text-sm">
+                                  {integrationProviders.trello?.name}
+                                </span>
+                              </div>
+                            </Listbox.Option>
+                            <Listbox.Option
+                              key="github_placeholder"
+                              className="font-sm relative cursor-default select-none px-1"
+                              value="github"
+                            >
+                              <div className="flex items-center rounded-[5px] p-1 text-sm hover:bg-light-200 dark:hover:bg-dark-400">
+                                {integrationProviders.github?.icon}
+                                <span className="ml-2 block truncate text-sm">
+                                  {integrationProviders.github?.name}
+                                </span>
+                              </div>
+                            </Listbox.Option>
+                          </>
                         )}
                       </Listbox.Options>
                     </Transition>
@@ -154,7 +192,159 @@ const SelectSource = ({ handleNextStep }: { handleNextStep: () => void }) => {
               !hasIntegrations ? <HiMiniArrowTopRightOnSquare /> : undefined
             }
           >
-            {hasIntegrations ? t`Select source` : t`Connect Trello`}
+            {hasIntegrations ? t`Select source` : t`Connect`}
+          </Button>
+        </div>
+      </div>
+    </form>
+  );
+};
+
+const ImportGithub: React.FC = () => {
+  const utils = api.useUtils();
+  const { closeModal } = useModal();
+  const { workspace } = useWorkspace();
+  const { showPopup } = usePopup();
+  const [isSelectAllEnabled, setIsSelectAllEnabled] = useState(false);
+
+  const refetchBoards = () => utils.board.all.refetch();
+
+  const { data: projects, isLoading: projectsLoading } =
+    api.import.github.getProjects.useQuery();
+
+  const {
+    register: registerProjects,
+    handleSubmit: handleSubmitProjects,
+    setValue,
+    watch,
+  } = useForm({
+    defaultValues: Object.fromEntries(
+      projects?.map((project) => [project.id, true]) ?? [],
+    ),
+  });
+
+  const importProjects = api.import.github.importProjects.useMutation({
+    onSuccess: async () => {
+      showPopup({
+        header: t`Import complete`,
+        message: t`Your projects have been imported.`,
+        icon: "success",
+      });
+      try {
+        await refetchBoards();
+        closeModal();
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    onError: () => {
+      showPopup({
+        header: t`Import failed`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
+    },
+  });
+
+  const projectWatchers = projects?.map((project) => ({
+    id: project.id,
+    value: watch(project.id),
+  }));
+
+  const projectCount =
+    projectWatchers?.filter((w) => w.value === true).length ?? 0;
+
+  const onSubmitProjects = (values: Record<string, boolean>) => {
+    const projectIds = Object.keys(values).filter(
+      (key) => values[key] === true,
+    );
+
+    importProjects.mutate({
+      projectIds,
+      workspacePublicId: workspace.publicId,
+    });
+  };
+
+  const renderContent = () => {
+    if (projectsLoading) {
+      return (
+        <div className="flex h-full w-full flex-col items-center justify-center gap-1">
+          <div className="h-[30px] w-full animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-300" />
+          <div className="h-[30px] w-full animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-300" />
+          <div className="h-[30px] w-full animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-300" />
+        </div>
+      );
+    }
+
+    if (!projects?.length) {
+      return (
+        <div className="flex h-full w-full items-center justify-center">
+          <p className="text-sm text-neutral-500 dark:text-dark-900">
+            {t`No projects found`}
+          </p>
+        </div>
+      );
+    }
+
+    return projects.map((project) => (
+      <div key={project.id}>
+        <label
+          className="flex cursor-pointer items-center rounded-[5px] p-2 hover:bg-light-100 dark:hover:bg-dark-300"
+          htmlFor={project.id}
+        >
+          <input
+            id={project.id}
+            type="checkbox"
+            className="h-[14px] w-[14px] rounded bg-transparent ring-0 focus:outline-none focus:ring-0 focus:ring-offset-0"
+            {...registerProjects(project.id)}
+          />
+          <span className="ml-3 text-sm text-neutral-900 dark:text-dark-1000">
+            {project.name}
+          </span>
+        </label>
+      </div>
+    ));
+  };
+
+  return (
+    <form onSubmit={handleSubmitProjects(onSubmitProjects)}>
+      <div className="h-[105px] overflow-auto px-5">{renderContent()}</div>
+
+      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+        <Toggle
+          label={t`Select all`}
+          isChecked={!!isSelectAllEnabled}
+          onChange={() => {
+            const newState = !isSelectAllEnabled;
+            setIsSelectAllEnabled(newState);
+
+            for (const project of projects ?? []) {
+              setValue(project.id, newState);
+            }
+          }}
+        />
+        <div className="space-x-2">
+          <Button
+            type="submit"
+            isLoading={importProjects.isPending}
+            disabled={
+              importProjects.isPending ||
+              projectsLoading ||
+              !projects?.length ||
+              !projects.some(
+                (project) =>
+                  projectWatchers?.find((w) => w.id === project.id)?.value ===
+                  true,
+              )
+            }
+          >
+            <Trans>
+              <Plural
+                value={projectCount}
+                one={`Import project (1)`}
+                other={`Import projects (${projectCount})`}
+              />
+            </Trans>
           </Button>
         </div>
       </div>
@@ -213,7 +403,7 @@ const ImportTrello: React.FC = () => {
     value: watch(board.id),
   }));
 
-  const boardCount = boardWatchers?.filter((w) => w.value === true).length || 0;
+  const boardCount = boardWatchers?.filter((w) => w.value === true).length ?? 0;
 
   const onSubmitBoards = (values: Record<string, boolean>) => {
     const boardIds = Object.keys(values).filter((key) => values[key] === true);
@@ -267,7 +457,7 @@ const ImportTrello: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmitBoards(onSubmitBoards)}>
-      <div className="h-[105px] overflow-scroll px-5">{renderContent()}</div>
+      <div className="h-[105px] overflow-auto px-5">{renderContent()}</div>
 
       <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
         <Toggle
@@ -277,7 +467,7 @@ const ImportTrello: React.FC = () => {
             const newState = !isSelectAllEnabled;
             setIsSelectAllEnabled(newState);
 
-            for (const board of boards || []) {
+            for (const board of boards ?? []) {
               setValue(board.id, newState);
             }
           }}
@@ -313,6 +503,7 @@ const ImportTrello: React.FC = () => {
 export function ImportBoardsForm() {
   const { closeModal } = useModal();
   const [step, setStep] = useState(1);
+  const [provider, setProvider] = useState<string | null>(null);
 
   return (
     <div>
@@ -339,8 +530,16 @@ export function ImportBoardsForm() {
         </button>
       </div>
 
-      {step === 1 && <SelectSource handleNextStep={() => setStep(step + 1)} />}
-      {step === 2 && <ImportTrello />}
+      {step === 1 && (
+        <SelectSource
+          handleNextStep={(p) => {
+            setProvider(p);
+            setStep(step + 1);
+          }}
+        />
+      )}
+      {step === 2 && provider === "trello" && <ImportTrello />}
+      {step === 2 && provider === "github" && <ImportGithub />}
     </div>
   );
 }
