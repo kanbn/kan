@@ -26,6 +26,7 @@ import { StrictModeDroppable as Droppable } from "~/components/StrictModeDroppab
 import { Tooltip } from "~/components/Tooltip";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
 import { useDragToScroll } from "~/hooks/useDragToScroll";
+import { useScrollRestore } from "~/hooks/useScrollRestore";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
@@ -140,6 +141,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   }, [boardId]);
 
   const isLoading = isInitialLoading || isQueryLoading;
+
+  useScrollRestore(boardId, scrollRef, router, !isLoading && (boardData?.lists.length ?? 0) > 0);
 
   const updateListMutation = api.list.update.useMutation({
     onMutate: async (args) => {
