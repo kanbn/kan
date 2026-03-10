@@ -8,7 +8,7 @@ import { env } from "~/env";
 import { withRateLimit } from "@kan/api/utils/rateLimit";
 import { createS3Client } from "@kan/shared/utils";
 
-const MAX_SIZE_BYTES = 2 * 1024 * 1024; // 2MB
+const MAX_SIZE_BYTES = parseInt(process.env.S3_AVATAR_UPLOAD_LIMIT || '2097152', 10); // Default 2MB
 const allowedContentTypes = ["image/jpeg", "image/png", "image/webp"];
 
 export const config = {

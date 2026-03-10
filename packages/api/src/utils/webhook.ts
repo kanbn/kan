@@ -2,8 +2,8 @@ import crypto from "crypto";
 import { z } from "zod";
 
 import type { dbClient } from "@kan/db/client";
-import * as webhookRepo from "@kan/db/repository/webhook.repo";
 import type { WebhookEvent } from "@kan/db/schema";
+import * as webhookRepo from "@kan/db/repository/webhook.repo";
 
 export type WebhookEventType = WebhookEvent;
 
@@ -92,7 +92,7 @@ export const webhookUrlSchema = z
     (url) => {
       try {
         const hostname = new URL(url).hostname.toLowerCase();
-        const ipv4Match = hostname.match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/);
+        const ipv4Match = /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/.exec(hostname);
         if (ipv4Match) {
           const [, a, b] = ipv4Match.map(Number);
           if (
@@ -194,8 +194,8 @@ export async function sendWebhooksForWorkspace(
       w.events.includes(payload.event),
     );
 
-    // Send to all webhooks in parallel (fire and forget)
-    const promises = webhooks.map((webhook) =>
+    // Send to all subscribed webhooks in parallel (fire and forget)
+    const promises = webhooksForEvent.map((webhook) =>
       sendWebhookToUrl(webhook.url, webhook.secret ?? undefined, payload).then(
         (result) => {
           if (!result.success) {

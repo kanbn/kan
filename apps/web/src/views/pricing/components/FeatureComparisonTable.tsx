@@ -8,10 +8,10 @@ type FrequencyValue = "monthly" | "annually";
 interface PlanFeature {
   key: string;
   label: string;
-  free: string | boolean | { text: string; highlight?: string };
-  teams: string | boolean | { text: string; highlight?: string };
-  pro: string | boolean | { text: string; highlight?: string };
-  enterprise: string | boolean | { text: string; highlight?: string };
+  free: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
+  teams: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
+  pro: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
+  enterprise: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
 }
 
 interface FeatureSection {
@@ -71,34 +71,34 @@ const FeatureComparisonTable = ({
     {
       key: "boards",
       label: t`Boards`,
-      free: { text: t`Unlimited boards`, highlight: "Unlimited" },
-      teams: { text: t`Unlimited boards`, highlight: "Unlimited" },
-      pro: { text: t`Unlimited boards`, highlight: "Unlimited" },
-      enterprise: { text: t`Unlimited boards`, highlight: "Unlimited" },
+      free: { text: t`Unlimited boards`, highlightFirstWord: true },
+      teams: { text: t`Unlimited boards`, highlightFirstWord: true },
+      pro: { text: t`Unlimited boards`, highlightFirstWord: true },
+      enterprise: { text: t`Unlimited boards`, highlightFirstWord: true },
     },
     {
       key: "members",
       label: t`Members`,
-      free: { text: t`1 user`, highlight: "1" },
-      teams: { text: t`Per-seat pricing`, highlight: "Per-seat" },
-      pro: { text: t`Unlimited members`, highlight: "Unlimited" },
-      enterprise: { text: t`Unlimited members`, highlight: "Unlimited" },
+      free: { text: t`1 user`, highlightFirstWord: true },
+      teams: { text: t`Per-seat pricing`, highlightFirstWord: true },
+      pro: { text: t`Unlimited members`, highlightFirstWord: true },
+      enterprise: { text: t`Unlimited members`, highlightFirstWord: true },
     },
     {
       key: "file-uploads",
       label: t`File uploads`,
-      free: { text: t`10mb file uploads`, highlight: "10mb" },
-      teams: { text: t`Unlimited file uploads`, highlight: "Unlimited" },
-      pro: { text: t`Unlimited file uploads`, highlight: "Unlimited" },
-      enterprise: { text: t`Unlimited file uploads`, highlight: "Unlimited" },
+      free: { text: t`10mb file uploads`, highlightFirstWord: true },
+      teams: { text: t`Unlimited file uploads`, highlightFirstWord: true },
+      pro: { text: t`Unlimited file uploads`, highlightFirstWord: true },
+      enterprise: { text: t`Unlimited file uploads`, highlightFirstWord: true },
     },
       {
         key: "workspace-username",
         label: t`Workspace username`,
-        free: { text: t`Default username`, highlight: "Default" },
-        teams: { text: t`Default username`, highlight: "Default" },
-        pro: { text: t`Custom username`, highlight: "Custom" },
-        enterprise: { text: t`Custom username`, highlight: "Custom" },
+        free: { text: t`Default username`, highlightFirstWord: true },
+        teams: { text: t`Default username`, highlightFirstWord: true },
+        pro: { text: t`Custom username`, highlightFirstWord: true },
+        enterprise: { text: t`Custom username`, highlightFirstWord: true },
       },
   ];
 
@@ -236,9 +236,9 @@ const FeatureComparisonTable = ({
       key: "rest-api",
       label: t`API`,
       free: { text: t`Limited API access` },
-      teams: { text: t`Full API access` },
-      pro: { text: t`Full API access` },
-      enterprise: { text: t`Full API access` },
+      teams: { text: t`Full API access`, highlight: true },
+      pro: { text: t`Full API access`, highlight: true },
+      enterprise: { text: t`Full API access`, highlight: true },
     },
     {
       key: "self-hostable",
@@ -254,18 +254,18 @@ const FeatureComparisonTable = ({
     {
       key: "sso",
       label: t`SSO`,
-      free: { text: t`Google SSO` },
-      teams: { text: t`Google SSO` },
-      pro: { text: t`Google SSO` },
-      enterprise: { text: t`Google SSO + SAML` },
+      free: { text: t`Google SSO`, highlight: true },
+      teams: { text: t`Google SSO`, highlight: true },
+      pro: { text: t`Google SSO`, highlight: true },
+      enterprise: { text: t`Google SSO + SAML`, highlight: true },
     },
     {
       key: "admin-roles",
       label: t`Admin roles`,
-      free: { text: t`Admin roles` },
-      teams: { text: t`Admin roles` },
-      pro: { text: t`Admin roles` },
-      enterprise: { text: t`Advanced admin roles` },
+      free: { text: t`Admin roles`, highlight: true },
+      teams: { text: t`Admin roles`, highlight: true },
+      pro: { text: t`Admin roles`, highlight: true },
+      enterprise: { text: t`Advanced admin roles`, highlight: true },
     },
   ];
 
@@ -334,59 +334,37 @@ const FeatureComparisonTable = ({
     { id: "enterprise", name: t`Enterprise`, tierId: "tier-enterprise" },
   ];
 
-  const isHighlightValue = (
-    value: string | boolean | { text: string; highlight?: string },
-  ): value is { text: string; highlight?: string } => {
-    return typeof value === "object" && value !== null && "text" in value;
-  };
-
-  const shouldHighlight = (text: string): boolean => {
-    const lowerText = text.toLowerCase();
-    return ["unlimited", "multiple", "per-seat", "custom", "mentions", "full", "sso", "admin"].some(
-      (keyword) => lowerText.includes(keyword),
-    );
-  };
-
   const CellValue = ({
     value,
     label,
   }: {
-    value: string | boolean | { text: string; highlight?: string };
+    value: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
     label: string;
   }) => {
-    // Handle object with text and highlight
-    if (isHighlightValue(value)) {
-      const { text, highlight } = value;
-      const isUnlimited = shouldHighlight(text);
-      
-      let displayText;
-      if (highlight) {
-        const parts = text.split(new RegExp(`(${highlight})`, "gi"));
-        displayText = (
-          <>
-            {parts.map((part, index) =>
-              part.toLowerCase() === highlight.toLowerCase() ? (
-                <span key={index} className="text-light-1000 dark:text-dark-1000">
-                  {part}
-                </span>
-              ) : (
-                <span key={index} className="text-light-950 dark:text-dark-800">
-                  {part}
-                </span>
-              ),
-            )}
-          </>
+    if (typeof value === "object" && value !== null) {
+      const { text, highlight, highlightFirstWord } = value;
+
+      if (highlightFirstWord) {
+        const spaceIndex = text.indexOf(" ");
+        const firstWord = spaceIndex === -1 ? text : text.slice(0, spaceIndex);
+        const rest = spaceIndex === -1 ? "" : text.slice(spaceIndex);
+        return (
+          <div className="flex items-center gap-2.5">
+            <HiCheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-light-1000 dark:text-dark-1000" />
+            <span className="text-sm font-medium">
+              <span className="text-light-1000 dark:text-dark-1000">{firstWord}</span>
+              <span className="text-light-950 dark:text-dark-800">{rest}</span>
+            </span>
+          </div>
         );
-      } else {
-        displayText = text;
       }
-      
+
       return (
         <div className="flex items-center gap-2.5">
           <HiCheckCircle
             className={twMerge(
               "mt-0.5 h-4 w-4 shrink-0",
-              isUnlimited
+              highlight
                 ? "text-light-1000 dark:text-dark-1000"
                 : "text-light-400 dark:text-dark-600",
             )}
@@ -394,44 +372,18 @@ const FeatureComparisonTable = ({
           <span
             className={twMerge(
               "text-sm font-medium",
-              isUnlimited
+              highlight
                 ? "text-light-1000 dark:text-dark-950"
                 : "text-light-950 dark:text-dark-800",
             )}
           >
-            {displayText}
+            {text}
           </span>
         </div>
       );
     }
-    
-    if (typeof value === "string") {
-      const isUnlimited = shouldHighlight(value);
-      return (
-        <div className="flex items-center gap-2.5">
-          <HiCheckCircle
-            className={twMerge(
-              "mt-0.5 h-4 w-4 shrink-0",
-              isUnlimited
-                ? "text-light-1000 dark:text-dark-1000"
-                : "text-light-400 dark:text-dark-600",
-            )}
-          />
-          <span
-            className={twMerge(
-              "text-sm font-medium",
-              isUnlimited
-                ? "text-light-1000 dark:text-dark-950"
-                : "text-light-950 dark:text-dark-800",
-            )}
-          >
-            {value}
-          </span>
-        </div>
-      );
-    }
+
     if (value) {
-      // Boolean true - show checkmark icon
       return (
         <div className="flex items-center gap-2.5">
           <HiCheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-light-1000 dark:text-dark-1000" />
@@ -441,7 +393,7 @@ const FeatureComparisonTable = ({
         </div>
       );
     }
-    // Boolean false - show cross icon
+
     return (
       <div className="flex items-center gap-2.5">
         <HiXCircle className="mt-0.5 h-4 w-4 shrink-0 text-light-400 dark:text-dark-600" />
@@ -455,7 +407,7 @@ const FeatureComparisonTable = ({
   const getFeatureValue = (
     feature: PlanFeature,
     planId: string,
-  ): string | boolean | { text: string; highlight?: string } => {
+  ): string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean } => {
     switch (planId) {
       case "free":
         return feature.free;

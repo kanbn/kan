@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import {
   pgTable,
   primaryKey,
+  text,
   timestamp,
   uuid,
   varchar,
@@ -16,7 +17,7 @@ export const integrations = pgTable(
     userId: uuid("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    accessToken: varchar("accessToken", { length: 255 }).notNull(),
+    accessToken: text("accessToken").notNull(),
     refreshToken: varchar("refreshToken", { length: 255 }),
     expiresAt: timestamp("expiresAt").notNull(),
     createdAt: timestamp("createdAt")
