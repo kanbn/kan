@@ -3,6 +3,7 @@ import {
   bigint,
   bigserial,
   boolean,
+  integer,
   pgEnum,
   pgTable,
   text,
@@ -45,6 +46,7 @@ export const workspaces = pgTable("workspace", {
   slug: varchar("slug", { length: 255 }).notNull().unique(),
   plan: workspacePlanEnum("plan").notNull().default("free"),
   showEmailsToMembers: boolean("showEmailsToMembers").notNull().default(true),
+  weekStartDay: integer("weekStartDay").notNull().default(1),
   createdBy: uuid("createdBy").references(() => users.id, {
     onDelete: "set null",
   }),

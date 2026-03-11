@@ -33,7 +33,7 @@ const schema = z.object({
     .min(3, {
       message: t`URL must be at least 3 characters long`,
     })
-    .max(24, { message: t`URL cannot exceed 24 characters` })
+    .max(64, { message: t`URL cannot exceed 64 characters` })
     .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/, {
       message: t`URL can only contain letters, numbers, and hyphens`,
     })
@@ -111,6 +111,7 @@ export function NewWorkspaceForm() {
           slug: values.slug,
           plan: values.plan,
           role: "admin",
+          weekStartDay: 1,
         });
 
         // If in cloud and Pro toggle is enabled, create checkout session for pro

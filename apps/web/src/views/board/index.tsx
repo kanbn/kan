@@ -26,6 +26,7 @@ import { StrictModeDroppable as Droppable } from "~/components/StrictModeDroppab
 import { Tooltip } from "~/components/Tooltip";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
 import { useDragToScroll } from "~/hooks/useDragToScroll";
+import { useScrollRestore } from "~/hooks/useScrollRestore";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
@@ -124,10 +125,20 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     data: boardData,
     isSuccess,
     isLoading: isQueryLoading,
+    error,
   } = api.board.byId.useQuery(queryParams, {
     enabled: !!boardId,
     placeholderData: keepPreviousData,
   });
+
+  // Redirect to 404 if board doesn't exist
+  useEffect(() => {
+    if (router.isReady && boardId && !isQueryLoading) {
+      if (error?.data?.code === "NOT_FOUND" || (!boardData && !isQueryLoading)) {
+        router.replace("/404");
+      }
+    }
+  }, [router, boardId, isQueryLoading, error, boardData]);
 
   const refetchBoard = async () => {
     if (boardId) await utils.board.byId.refetch({ boardPublicId: boardId });
@@ -140,6 +151,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   }, [boardId]);
 
   const isLoading = isInitialLoading || isQueryLoading;
+
+  useScrollRestore(boardId, scrollRef, router, !isLoading && (boardData?.lists.length ?? 0) > 0);
 
   const updateListMutation = api.list.update.useMutation({
     onMutate: async (args) => {
@@ -494,7 +507,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
               isTemplate={!!isTemplate}
               isLoading={!boardData}
               boardPublicId={boardId ?? ""}
-              workspacePublicId={workspace.publicId}
+              isArchived={boardData?.isArchived ?? false}
               isFavorite={boardData?.favorite}
               boardName={boardData?.name}
             />
@@ -598,13 +611,12 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                               ? `/templates/${boardId}/cards/${card.publicId}`
                                               : `/cards/${card.publicId}`
                                           }
-                                          className={`mb-2 flex !cursor-pointer flex-col ${
-                                            card.publicId.startsWith(
-                                              "PLACEHOLDER",
-                                            )
-                                              ? "pointer-events-none"
-                                              : ""
-                                          }`}
+                                          className={`mb-2 flex !cursor-pointer flex-col ${card.publicId.startsWith(
+                                            "PLACEHOLDER",
+                                          )
+                                            ? "pointer-events-none"
+                                            : ""
+                                            }`}
                                           ref={provided.innerRef}
                                           {...provided.draggableProps}
                                           {...provided.dragHandleProps}

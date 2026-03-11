@@ -189,10 +189,19 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     ? router.query.cardId[0]
     : router.query.cardId;
 
-  const { data: card, isLoading } = api.card.byId.useQuery(
+  const { data: card, isLoading, error } = api.card.byId.useQuery(
     { cardPublicId: cardId ?? "" },
     { enabled: !!cardId && cardId.length >= 12 },
   );
+
+  // Redirect to 404 if card doesn't exist
+  useEffect(() => {
+    if (router.isReady && cardId && !isLoading) {
+      if (error?.data?.code === "NOT_FOUND" || (!card && !isLoading)) {
+        router.replace("/404");
+      }
+    }
+  }, [router, cardId, isLoading, error, card]);
 
   const isCreator = card?.createdBy && session?.user.id === card.createdBy;
   const canEdit = canEditCard || isCreator;
@@ -348,7 +357,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                   className="flex h-7 w-7 items-center justify-center rounded-[5px] text-light-900 hover:bg-light-200 dark:text-dark-900 dark:hover:bg-dark-200"
                   aria-label={t`Close`}
                 >
-                  <HiXMark className="h-5 w-5" />
+                  <HiXMark className="h-4 w-4" />
                 </Link>
               </div>
             </>

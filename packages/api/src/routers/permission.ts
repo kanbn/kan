@@ -133,7 +133,7 @@ export const permissionRouter = createTRPCRouter({
         input.memberPublicId,
       );
 
-      if (!member) {
+      if (!member || member.workspaceId !== workspace.id) {
         throw new TRPCError({
           message: "Member not found",
           code: "NOT_FOUND",
@@ -209,7 +209,7 @@ export const permissionRouter = createTRPCRouter({
         input.memberPublicId,
       );
 
-      if (!member) {
+      if (!member || member.workspaceId !== workspace.id) {
         throw new TRPCError({
           message: "Member not found",
           code: "NOT_FOUND",
@@ -274,7 +274,7 @@ export const permissionRouter = createTRPCRouter({
         input.memberPublicId,
       );
 
-      if (!member) {
+      if (!member || member.workspaceId !== workspace.id) {
         throw new TRPCError({
           message: "Member not found",
           code: "NOT_FOUND",
@@ -339,7 +339,7 @@ export const permissionRouter = createTRPCRouter({
         input.memberPublicId,
       );
 
-      if (!member) {
+      if (!member || member.workspaceId !== workspace.id) {
         throw new TRPCError({
           message: "Member not found",
           code: "NOT_FOUND",

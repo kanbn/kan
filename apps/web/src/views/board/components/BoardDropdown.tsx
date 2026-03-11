@@ -7,7 +7,7 @@ import {
   HiOutlineStar,
   HiStar,
 } from "react-icons/hi2";
-
+import { IoArchiveOutline } from "react-icons/io5";
 import Dropdown from "~/components/Dropdown";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
@@ -17,6 +17,7 @@ import { api } from "~/utils/api";
 export default function BoardDropdown({
   isTemplate,
   isLoading,
+  isArchived,
   boardPublicId,
   isFavorite,
   boardName,
@@ -24,28 +25,29 @@ export default function BoardDropdown({
   isTemplate: boolean;
   isLoading: boolean;
   boardPublicId: string;
+  isArchived?: boolean;
   isFavorite?: boolean;
   boardName?: string;
 }) {
   const { openModal } = useModal();
-  const { canEditBoard, canDeleteBoard, canCreateBoard } = usePermissions();
   const { showPopup } = usePopup();
+  const { canEditBoard, canDeleteBoard, canCreateBoard, canArchiveBoard } =
+    usePermissions();
   const utils = api.useUtils();
 
-  const handleToggleFavorite = () => {
-    updateBoard.mutate({
-      boardPublicId,
-      favorite: !isFavorite,
-    });
-  };
-
   const updateBoard = api.board.update.useMutation({
-    onSuccess: (data, variables) => {
+    onSuccess: (_data, variables) => {
       void utils.board.all.invalidate();
       void utils.board.byId.invalidate();
-
-      // Show popup notification
-      if (variables.favorite !== undefined) {
+      if (variables.isArchived !== undefined) {
+        showPopup({
+          header: variables.isArchived ? t`Board archived` : t`Board unarchived`,
+          message: variables.isArchived
+            ? t`The board has been archived.`
+            : t`The board has been unarchived.`,
+          icon: "success",
+        });
+      } else if (variables.favorite !== undefined) {
         showPopup({
           header: variables.favorite
             ? t`Added to favorites`
@@ -65,27 +67,54 @@ export default function BoardDropdown({
       });
     },
   });
-  
+
+  const handleToggleFavorite = () => {
+    updateBoard.mutate({
+      boardPublicId,
+      favorite: !isFavorite,
+    });
+  };
+
+  const handleArchiveOrUnarchive = () => {
+    updateBoard.mutate({
+      boardPublicId,
+      isArchived: !isArchived,
+    });
+  };
+
+  const isArchiveActionPending = updateBoard.isPending;
+
   const items = [
     ...(isTemplate && canCreateBoard
       ? [
-          {
-            label: t`Make template`,
-            action: () => openModal("CREATE_TEMPLATE"),
-            icon: (
-              <HiOutlineDocumentDuplicate className="h-[16px] w-[16px] text-dark-900" />
-            ),
-          },
-        ]
+        {
+          label: t`Make template`,
+          action: () => openModal("CREATE_TEMPLATE"),
+          icon: (
+            <HiOutlineDocumentDuplicate className="h-[16px] w-[16px] text-dark-900" />
+          ),
+        },
+      ]
       : []),
     ...(!isTemplate && canEditBoard
       ? [
-          {
-            label: t`Edit board URL`,
-            action: () => openModal("UPDATE_BOARD_SLUG"),
-            icon: <HiLink className="h-[16px] w-[16px] text-dark-900" />,
-          },
-        ]
+        {
+          label: t`Edit board URL`,
+          action: () => openModal("UPDATE_BOARD_SLUG"),
+          icon: <HiLink className="h-[16px] w-[16px] text-dark-900" />,
+        },
+      ]
+      : []),
+    ...(!isTemplate && canArchiveBoard
+      ? [
+        {
+          label: isArchived ? t`Unarchive board` : t`Archive board`,
+          action: handleArchiveOrUnarchive,
+          icon: (
+            <IoArchiveOutline className="h-[16px] w-[16px] text-dark-900" />
+          ),
+        },
+      ]
       : []),
     {
       label: isFavorite
@@ -100,22 +129,26 @@ export default function BoardDropdown({
     },
     ...(canDeleteBoard
       ? [
-          {
-            label: isTemplate ? t`Delete template` : t`Delete board`,
-            action: () => openModal("DELETE_BOARD"),
-            icon: <HiOutlineTrash className="h-[16px] w-[16px] text-dark-900" />,
-          },
-        ]
+        {
+          label: isTemplate ? t`Delete template` : t`Delete board`,
+          action: () => openModal("DELETE_BOARD"),
+          icon: (
+            <HiOutlineTrash className="h-[16px] w-[16px] text-dark-900" />
+          ),
+        },
+      ]
       : []),
   ];
-  
 
   if (items.length === 0) {
     return null;
   }
 
   return (
-    <Dropdown disabled={isLoading} items={items}>
+    <Dropdown
+      disabled={isLoading || isArchiveActionPending}
+      items={items}
+    >
       <HiEllipsisHorizontal className="h-5 w-5 text-dark-900" />
     </Dropdown>
   );
