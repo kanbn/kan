@@ -19,7 +19,7 @@ export function FontSizeSelector() {
         id="font-size-select"
         value={fontSize}
         onChange={(e) => setFontSize(e.target.value as FontSize)}
-        className="mt-8 block w-full max-w-[180px] rounded-lg border-0 bg-light-50 pl-10 text-sm shadow-sm ring-1 ring-inset ring-light-300 focus:ring-2 focus:ring-inset focus:ring-light-400 dark:bg-dark-50 dark:text-dark-1000 dark:ring-dark-300 dark:focus:ring-dark-500"
+        className="block w-full max-w-[180px] rounded-lg border-0 bg-light-50 pl-10 text-sm shadow-sm ring-1 ring-inset ring-light-300 focus:ring-2 focus:ring-inset focus:ring-light-400 dark:bg-dark-50 dark:text-dark-1000 dark:ring-dark-300 dark:focus:ring-dark-500"
       >
         {fontSizeOptions.map((opt) => (
           <option key={opt.value} value={opt.value}>

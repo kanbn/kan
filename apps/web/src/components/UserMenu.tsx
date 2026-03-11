@@ -11,7 +11,6 @@ import { authClient } from "@kan/auth/client";
 
 import { env } from "~/env";
 import { useIsMobile } from "~/hooks/useMediaQuery";
-import { useFontSize, type FontSize } from "~/providers/font-size";
 import { useKeyboardShortcuts } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
 import { getAvatarUrl } from "~/utils/helpers";
@@ -35,7 +34,6 @@ export default function UserMenu({
 }: UserMenuProps) {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
-  const { fontSize, setFontSize } = useFontSize();
   const { openModal } = useModal();
   const { openLegend } = useKeyboardShortcuts();
   const isMobile = useIsMobile();
@@ -174,27 +172,6 @@ export default function UserMenu({
                   {t`Light`}
                 </button>
               </Menu.Item>
-            </div>
-            <div className="light-border-600 border-t-[1px] p-1 dark:border-dark-600">
-              <div className="flex w-full items-center px-3 py-2 text-left text-xs">
-                <span>{t`Font size`}</span>
-              </div>
-              {(["small", "medium", "large"] as FontSize[]).map((size) => (
-                <Menu.Item key={size}>
-                  <button
-                    onClick={() => setFontSize(size)}
-                    className="flex w-full items-center rounded-[5px] px-3 py-2 text-left text-xs hover:bg-light-200 dark:hover:bg-dark-400"
-                  >
-                    <span
-                      className={twMerge(
-                        fontSize === size ? "visible" : "invisible",
-                        "mr-4 h-[6px] w-[6px] rounded-full bg-light-900 dark:bg-dark-900",
-                      )}
-                    />
-                    {size === "small" ? t`Small` : size === "medium" ? t`Medium` : t`Large`}
-                  </button>
-                </Menu.Item>
-              ))}
             </div>
             <div className="light-border-600 border-t-[1px] p-1 dark:border-dark-600">
               <Menu.Item>

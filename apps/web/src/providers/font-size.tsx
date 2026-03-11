@@ -26,7 +26,7 @@ const FontSizeContext = createContext<FontSizeContextProps | undefined>(
 export const FontSizeProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [fontSize, setFontSizeState] = useState<FontSize>("small");
+  const [fontSize, setFontSizeState] = useState<FontSize>("medium");
 
   const setFontSize = (size: FontSize) => {
     document.documentElement.style.fontSize = fontSizeMap[size];
@@ -36,7 +36,7 @@ export const FontSizeProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     const stored = localStorage.getItem("fontSize") as FontSize | null;
-    const size = stored && fontSizeMap[stored] ? stored : "small";
+    const size = stored && fontSizeMap[stored] ? stored : "medium";
     document.documentElement.style.fontSize = fontSizeMap[size];
     setFontSizeState(size);
   }, []);
