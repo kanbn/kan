@@ -34,7 +34,7 @@
     "comments": [],
     "origin": [
       ["src/views/boards/index.tsx", 48],
-      ["src/views/card/index.tsx", 308]
+      ["src/views/card/index.tsx", 317]
     ],
     "translation": "{0} | {1}"
   },
@@ -71,7 +71,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 427]],
+    "origin": [["src/views/board/index.tsx", 440]],
     "translation": "{0} niet gevonden"
   },
   "0xWkkH": {
@@ -155,6 +155,13 @@
     ],
     "translation": "14 dagen gratis proefperiode · Wissel van abonnement of annuleer op elk moment"
   },
+  "4obmDr": {
+    "translation": "404 - Pagina niet gevonden | kan.bn",
+    "message": "404 - Page Not Found | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/404.tsx", 11]]
+  },
   "/rn4RE": {
     "message": "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.",
     "placeholders": {},
@@ -166,7 +173,7 @@
     "message": "Account",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SettingsLayout.tsx", 40]],
+    "origin": [["src/components/SettingsLayout.tsx", 41]],
     "translation": "Account"
   },
   "TKFUnX": {
@@ -198,7 +205,11 @@
     "message": "Active",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/index.tsx", 26]],
+    "origin": [
+      ["src/views/boards/index.tsx", 26],
+      ["src/views/settings/components/NewWebhookModal.tsx", 293],
+      ["src/views/settings/components/WebhookList.tsx", 106]
+    ],
     "translation": "Actief"
   },
   "XJOV1Y": {
@@ -206,8 +217,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 446],
-      ["src/views/public/board/CardModal.tsx", 189]
+      ["src/views/card/index.tsx", 455],
+      ["src/views/public/board/CardModal.tsx", 200]
     ],
     "translation": "Activiteit"
   },
@@ -298,6 +309,13 @@
     "comments": [],
     "origin": [["src/views/board/components/BoardDropdown.tsx", 122]],
     "translation": "Toevoegen aan favorieten"
+  },
+  "cWXW+7": {
+    "message": "Add webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/WebhookSettings.tsx", 36]],
+    "translation": "Webhook toevoegen"
   },
   "bmXKoX": {
     "message": "added {0} labels: <0>{labelList}</0>",
@@ -543,7 +561,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 64],
+      ["src/components/SettingsLayout.tsx", 65],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 237]
     ],
     "translation": "API"
@@ -628,6 +646,17 @@
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 47]
     ],
     "translation": "Weet je zeker dat je {entityLabel} wilt verwijderen?"
+  },
+  "Ypy5pZ": {
+    "message": "Are you sure you want to delete the webhook \"{webhookName}\"? This action cannot be undone.",
+    "placeholders": {
+      "webhookName": ["webhookName"]
+    },
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 60]
+    ],
+    "translation": "Weet je zeker dat je de webhook \"{webhookName}\" wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt."
   },
   "BhDZlc": {
     "message": "Are you sure you want to delete the workspace {0}?",
@@ -788,7 +817,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 57],
+      ["src/components/SettingsLayout.tsx", 58],
       ["src/views/boards/components/TemplateBoards.tsx", 68],
       ["src/views/settings/BillingSettings.tsx", 39]
     ],
@@ -813,8 +842,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 400],
-      ["src/views/card/index.tsx", 308],
+      ["src/views/board/index.tsx", 413],
+      ["src/views/card/index.tsx", 317],
       ["src/views/public/board/index.tsx", 125]
     ],
     "translation": "Bord"
@@ -1219,6 +1248,7 @@
         40
       ],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 88],
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 66],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 98],
       ["src/views/settings/components/UpgradeToProConfirmation.tsx", 106]
     ],
@@ -1228,7 +1258,7 @@
     "message": "Card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/index.tsx", 308]],
+    "origin": [["src/views/card/index.tsx", 317]],
     "translation": "Kaart"
   },
   "fEY2vP": {
@@ -1236,8 +1266,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 354],
-      ["src/views/card/index.tsx", 391]
+      ["src/views/card/index.tsx", 363],
+      ["src/views/card/index.tsx", 400]
     ],
     "translation": "Kaart niet gevonden"
   },
@@ -1379,7 +1409,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 345],
+      ["src/views/card/index.tsx", 354],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
     ],
@@ -1472,6 +1502,13 @@
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 82]],
     "translation": "Configureerbare gebruikersrollen en rechten"
+  },
+  "t0dTPm": {
+    "message": "Configure webhooks to receive notifications when cards are created, updated, moved, or deleted.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/WebhookSettings.tsx", 31]],
+    "translation": "Configureer webhooks om meldingen te ontvangen wanneer kaarten worden aangemaakt, bijgewerkt, verplaatst of verwijderd."
   },
   "/f3t6v": {
     "message": "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role.",
@@ -1722,8 +1759,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 75],
-      ["src/views/board/index.tsx", 541]
+      ["src/views/board/index.tsx", 76],
+      ["src/views/board/index.tsx", 554]
     ],
     "translation": "Maak nieuwe lijst"
   },
@@ -1734,6 +1771,13 @@
     "origin": [["src/views/board/components/NewTemplateForm.tsx", 132]],
     "translation": "Maak sjabloon"
   },
+  "SiPp29": {
+    "message": "Create webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 316]],
+    "translation": "Webhook aanmaken"
+  },
   "FdtSNC": {
     "message": "Create workspace",
     "placeholders": {},
@@ -1743,6 +1787,13 @@
       ["src/components/WorkspaceMenu.tsx", 153]
     ],
     "translation": "Maak werkruimte"
+  },
+  "d+F6q9": {
+    "message": "Created",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 236]],
+    "translation": "Aangemaakt"
   },
   "f8lDFq": {
     "message": "created the card",
@@ -1899,7 +1950,9 @@
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 47],
       ["src/views/card/components/DeleteCardConfirmation.tsx", 92],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 67],
-      ["src/views/card/components/DeleteCommentConfirmation.tsx", 83]
+      ["src/views/card/components/DeleteCommentConfirmation.tsx", 83],
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 73],
+      ["src/views/settings/components/WebhookList.tsx", 140]
     ],
     "translation": "Verwijderen"
   },
@@ -1948,6 +2001,15 @@
     "comments": [],
     "origin": [["src/views/board/components/BoardDropdown.tsx", 133]],
     "translation": "Sjabloon verwijderen"
+  },
+  "snMaH4": {
+    "message": "Delete webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 46]
+    ],
+    "translation": "Webhook verwijderen"
   },
   "kYu0eF": {
     "message": "Delete workspace",
@@ -2161,7 +2223,10 @@
     "message": "Edit",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 42]],
+    "origin": [
+      ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 42],
+      ["src/views/settings/components/WebhookList.tsx", 132]
+    ],
     "translation": "Bewerken"
   },
   "tIdipJ": {
@@ -2197,6 +2262,13 @@
       ["src/views/members/index.tsx", 224]
     ],
     "translation": "Rechten bewerken"
+  },
+  "fW5sSv": {
+    "message": "Edit webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 188]],
+    "translation": "Webhook bewerken"
   },
   "klpSmb": {
     "message": "Edit workspace URL",
@@ -2276,6 +2348,13 @@
     "comments": [],
     "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 131]],
     "translation": "Voer een aangepaste titel in"
+  },
+  "rQRXo8": {
+    "message": "Enter new secret to update",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 234]],
+    "translation": "Voer nieuw geheim in om bij te werken"
   },
   "fR9laE": {
     "message": "Enter your current password",
@@ -2486,6 +2565,16 @@
     ],
     "translation": "Fout bij uploaden van profielafbeelding"
   },
+  "tst44n": {
+    "message": "Events",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/NewWebhookModal.tsx", 245],
+      ["src/views/settings/components/WebhookList.tsx", 224]
+    ],
+    "translation": "Gebeurtenissen"
+  },
   "8iP0S8": {
     "message": "Everything in the free plan, plus:",
     "placeholders": {},
@@ -2538,6 +2627,22 @@
     ],
     "translation": "Bord aanmaken mislukt"
   },
+  "o4sQAg": {
+    "message": "Failed to create webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 109]],
+    "translation": "Webhook aanmaken mislukt"
+  },
+  "9YPBHv": {
+    "message": "Failed to delete webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 28]
+    ],
+    "translation": "Webhook verwijderen mislukt"
+  },
   "W8oT+L": {
     "message": "Failed to fetch video information",
     "placeholders": {},
@@ -2553,6 +2658,23 @@
     "comments": [],
     "origin": [["src/components/AuthForm.tsx", 291]],
     "translation": "Inloggen met {0} mislukt. Probeer het opnieuw."
+  },
+  "5ntVtp": {
+    "message": "Failed to test webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/NewWebhookModal.tsx", 143],
+      ["src/views/settings/components/WebhookList.tsx", 184]
+    ],
+    "translation": "Webhook testen mislukt"
+  },
+  "R41XLH": {
+    "message": "Failed to update webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 123]],
+    "translation": "Webhook bijwerken mislukt"
   },
   "ZL1A+p": {
     "message": "Failed to upload attachment. Please try again.",
@@ -2758,7 +2880,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 526]],
+    "origin": [["src/views/board/index.tsx", 539]],
     "translation": "Ga aan de slag door een nieuwe lijst te maken"
   },
   "oW13KZ": {
@@ -2834,8 +2956,18 @@
     "message": "Go to boards",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SideNavigation.tsx", 107]],
+    "origin": [
+      ["src/components/SideNavigation.tsx", 107],
+      ["src/pages/404.tsx", 44]
+    ],
     "translation": "Ga naar borden"
+  },
+  "XEoGkQ": {
+    "translation": "Ga naar homepage",
+    "message": "Go to homepage",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/404.tsx", 38]]
   },
   "KAsRdK": {
     "message": "Go to members",
@@ -2898,6 +3030,13 @@
     "comments": [],
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 80]],
     "translation": "Aangenomen"
+  },
+  "SRvxId": {
+    "message": "HMAC secret for signature verification",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 234]],
+    "translation": "HMAC-geheim voor handtekeningverificatie"
   },
   "LrcnbT": {
     "message": "Host Kan on your own infrastructure. Ideal for organisations that need complete control over their data.",
@@ -3064,6 +3203,13 @@
     ],
     "translation": "Bezig"
   },
+  "NoNwIX": {
+    "message": "Inactive",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 106]],
+    "translation": "Inactief"
+  },
   "6mbe4b": {
     "message": "Individuals",
     "placeholders": {},
@@ -3076,7 +3222,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 70],
+      ["src/components/SettingsLayout.tsx", 77],
       ["src/views/home/components/Features.tsx", 121]
     ],
     "translation": "Integraties"
@@ -3529,6 +3675,13 @@
     "origin": [["src/views/card/components/ActivityList.tsx", 127]],
     "translation": "heeft de kaart naar een andere lijst verplaatst"
   },
+  "uEGGDs": {
+    "message": "My webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 209]],
+    "translation": "Mijn webhook"
+  },
   "6YtxFj": {
     "message": "Name",
     "placeholders": {},
@@ -3536,7 +3689,9 @@
     "origin": [
       ["src/components/LabelForm.tsx", 135],
       ["src/views/board/components/NewTemplateForm.tsx", 118],
-      ["src/views/boards/components/NewBoardForm.tsx", 134]
+      ["src/views/boards/components/NewBoardForm.tsx", 134],
+      ["src/views/settings/components/NewWebhookModal.tsx", 205],
+      ["src/views/settings/components/WebhookList.tsx", 212]
     ],
     "translation": "Naam"
   },
@@ -3614,7 +3769,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 113],
-      ["src/views/board/index.tsx", 490]
+      ["src/views/board/index.tsx", 503]
     ],
     "translation": "Nieuwe lijst"
   },
@@ -3649,6 +3804,13 @@
     "comments": [],
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 56]],
     "translation": "Nieuw ticket"
+  },
+  "sbNNyi": {
+    "message": "New webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 188]],
+    "translation": "Nieuwe webhook"
   },
   "curoK5": {
     "message": "New workspace",
@@ -3733,14 +3895,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 522]],
+    "origin": [["src/views/board/index.tsx", 535]],
     "translation": "Geen lijsten"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 527]],
+    "origin": [["src/views/board/index.tsx", 540]],
     "translation": "Er zijn nog geen lijsten aangemaakt"
   },
   "i30J2U": {
@@ -3765,6 +3927,13 @@
     "comments": [],
     "origin": [["src/views/settings/components/RolePermissions.tsx", 110]],
     "translation": "Nog geen rollen gevonden voor deze workspace."
+  },
+  "TX0bT7": {
+    "message": "No webhooks configured. Add a webhook to receive notifications.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 194]],
+    "translation": "Geen webhooks geconfigureerd. Voeg een webhook toe om meldingen te ontvangen."
   },
   "9h7RDh": {
     "message": "Offer",
@@ -3885,6 +4054,13 @@
     "origin": [["src/views/pricing/components/Pricing.tsx", 73]],
     "translation": "Beheer je eigen data"
   },
+  "8F1i42": {
+    "translation": "Pagina niet gevonden",
+    "message": "Page not found",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/404.tsx", 24]]
+  },
   "Uworke": {
     "message": "Part-time",
     "placeholders": {},
@@ -3994,7 +4170,7 @@
     "message": "Permissions",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SettingsLayout.tsx", 52]],
+    "origin": [["src/components/SettingsLayout.tsx", 53]],
     "translation": "Toestemmingen"
   },
   "Jgaz7E": {
@@ -4079,6 +4255,13 @@
     "origin": [["src/components/AuthForm.tsx", 421]],
     "translation": "Voer een geldig wachtwoord in"
   },
+  "jEw0Mr": {
+    "message": "Please enter a valid URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 24]],
+    "translation": "Voer een geldige URL in"
+  },
   "tmlJN1": {
     "message": "Please enter a valid YouTube URL",
     "placeholders": {},
@@ -4111,8 +4294,8 @@
       ["src/views/board/components/NewTemplateForm.tsx", 77],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 73],
       ["src/views/board/components/VisibilityButton.tsx", 57],
-      ["src/views/board/index.tsx", 181],
-      ["src/views/board/index.tsx", 237],
+      ["src/views/board/index.tsx", 194],
+      ["src/views/board/index.tsx", 250],
       ["src/views/boards/components/ImportBoardsForm.tsx", 243],
       ["src/views/boards/components/ImportBoardsForm.tsx", 395],
       ["src/views/card/components/AttachmentThumbnails.tsx", 74],
@@ -4131,8 +4314,8 @@
       ["src/views/card/components/NewChecklistForm.tsx", 71],
       ["src/views/card/components/NewChecklistItemForm.tsx", 90],
       ["src/views/card/components/NewCommentForm.tsx", 37],
-      ["src/views/card/index.tsx", 223],
-      ["src/views/card/index.tsx", 236],
+      ["src/views/card/index.tsx", 232],
+      ["src/views/card/index.tsx", 245],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 28],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 42],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 65],
@@ -4527,6 +4710,13 @@
     ],
     "translation": "Opslaan"
   },
+  "y3aU20": {
+    "message": "Save changes",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 316]],
+    "translation": "Wijzigingen opslaan"
+  },
   "MdwUGG": {
     "message": "Save time with reusable board templates.",
     "placeholders": {},
@@ -4547,6 +4737,20 @@
     "comments": [],
     "origin": [["src/components/CommandPallette.tsx", 104]],
     "translation": "Zoek borden en kaarten..."
+  },
+  "e1v+J3": {
+    "message": "Secret (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 229]],
+    "translation": "Geheim (optioneel)"
+  },
+  "OkTY4+": {
+    "message": "Secret cannot exceed 512 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 28]],
+    "translation": "Geheim mag niet meer dan 512 tekens bevatten"
   },
   "a3LDKx": {
     "message": "Security",
@@ -4573,6 +4777,13 @@
       ["src/views/boards/components/ImportBoardsForm.tsx", 464]
     ],
     "translation": "Alles selecteren"
+  },
+  "o4e/70": {
+    "message": "Select at least one event",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 32]],
+    "translation": "Selecteer minimaal één gebeurtenis"
   },
   "rYUZIe": {
     "message": "Select source",
@@ -4609,6 +4820,13 @@
     "origin": [["src/components/FeedbackModal.tsx", 116]],
     "translation": "Feedback versturen"
   },
+  "eus61c": {
+    "message": "Send test",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 310]],
+    "translation": "Test verzenden"
+  },
   "v3YoMA": {
     "message": "Senior",
     "placeholders": {},
@@ -4635,7 +4853,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 95],
+      ["src/components/SettingsLayout.tsx", 102],
       ["src/components/SideNavigation.tsx", 135]
     ],
     "translation": "Instellingen"
@@ -4674,6 +4892,13 @@
     "comments": [],
     "origin": [["src/views/settings/PermissionsSettings.tsx", 49]],
     "translation": "Instellingen | Rechten"
+  },
+  "+h2faV": {
+    "message": "Settings | Webhooks",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/WebhookSettings.tsx", 24]],
+    "translation": "Instellingen | Webhooks"
   },
   "Ci/KUX": {
     "message": "Settings | Workspace",
@@ -4814,6 +5039,13 @@
     "origin": [["src/views/pricing/index.tsx", 47]],
     "translation": "Start gratis. Upgrade naarmate je team groeit. Geen verborgen kosten, geen contracten."
   },
+  "uAQUqI": {
+    "message": "Status",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 230]],
+    "translation": "Status"
+  },
   "WYDptz": {
     "message": "Subscription Required",
     "placeholders": {},
@@ -4890,8 +5122,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 400],
-      ["src/views/board/index.tsx", 436]
+      ["src/views/board/index.tsx", 413],
+      ["src/views/board/index.tsx", 449]
     ],
     "translation": "Sjabloon"
   },
@@ -4939,6 +5171,23 @@
     "comments": [],
     "origin": [["src/views/home/components/Footer.tsx", 42]],
     "translation": "Servicevoorwaarden"
+  },
+  "NnH3pK": {
+    "message": "Test",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 136]],
+    "translation": "Test"
+  },
+  "itgYbC": {
+    "message": "Test webhook sent successfully!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/NewWebhookModal.tsx", 132],
+      ["src/views/settings/components/WebhookList.tsx", 174]
+    ],
+    "translation": "Test webhook succesvol verzonden!"
   },
   "VUZDlr": {
     "message": "Testimonials",
@@ -5007,6 +5256,13 @@
     "comments": [],
     "origin": [["src/views/home/index.tsx", 65]],
     "translation": "Het open source <0/> alternatief voor Trello"
+  },
+  "0xD8Of": {
+    "translation": "De pagina die je zoekt bestaat niet of is verplaatst.",
+    "message": "The page you're looking for doesn't exist or has been moved.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/404.tsx", 29]]
   },
   "fQCrjt": {
     "message": "The visibility of your board has been set to {0}.",
@@ -5230,7 +5486,7 @@
     "message": "Unable to add label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/index.tsx", 235]],
+    "origin": [["src/views/card/index.tsx", 244]],
     "translation": "Kan label niet toevoegen"
   },
   "LeM5RY": {
@@ -5384,8 +5640,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 236],
-      ["src/views/card/index.tsx", 222]
+      ["src/views/board/index.tsx", 249],
+      ["src/views/card/index.tsx", 231]
     ],
     "translation": "Kan kaart niet bijwerken"
   },
@@ -5429,7 +5685,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 180],
+      ["src/views/board/index.tsx", 193],
       ["src/views/card/components/ListSelector.tsx", 54]
     ],
     "translation": "Kan lijst niet bijwerken"
@@ -5674,6 +5930,16 @@
     ],
     "translation": "Urgent"
   },
+  "IagCbF": {
+    "message": "URL",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/NewWebhookModal.tsx", 217],
+      ["src/views/settings/components/WebhookList.tsx", 218]
+    ],
+    "translation": "URL"
+  },
   "MI5OBT": {
     "message": "URL can only contain letters, numbers, and hyphens",
     "placeholders": {},
@@ -5683,6 +5949,13 @@
       ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 38]
     ],
     "translation": "URL mag alleen letters, cijfers en koppeltekens bevatten"
+  },
+  "7aONWr": {
+    "message": "URL cannot exceed 2048 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 25]],
+    "translation": "URL mag niet langer zijn dan 2048 tekens"
   },
   "i5rE2/": {
     "message": "URL cannot exceed 64 characters",
@@ -5710,6 +5983,13 @@
     "comments": [],
     "origin": [["src/views/boards/components/NewBoardForm.tsx", 154]],
     "translation": "Template gebruiken"
+  },
+  "n6EWYz": {
+    "message": "Used to sign webhook payloads for verification. Leave blank to keep existing secret.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 239]],
+    "translation": "Wordt gebruikt om webhook-payloads te ondertekenen voor verificatie. Laat leeg om het bestaande geheim te behouden."
   },
   "7PzzBU": {
     "message": "User",
@@ -5802,6 +6082,70 @@
     "origin": [["src/views/home/components/Features.tsx", 152]],
     "translation": "We zijn net begonnen."
   },
+  "GdWB+V": {
+    "message": "Webhook created successfully",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 104]],
+    "translation": "Webhook succesvol aangemaakt"
+  },
+  "2X4ecw": {
+    "message": "Webhook deleted successfully",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 23]
+    ],
+    "translation": "Webhook succesvol verwijderd"
+  },
+  "jIuWsV": {
+    "message": "Webhook name cannot exceed 255 characters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 20]],
+    "translation": "Webhooknaam mag niet langer zijn dan 255 tekens"
+  },
+  "U2+rn0": {
+    "message": "Webhook name is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 19]],
+    "translation": "Webhooknaam is verplicht"
+  },
+  "8iP9oQ": {
+    "message": "Webhook test failed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/NewWebhookModal.tsx", 135],
+      ["src/views/settings/components/WebhookList.tsx", 177]
+    ],
+    "translation": "Webhook-test mislukt"
+  },
+  "3d54Wj": {
+    "message": "Webhook updated successfully",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 118]],
+    "translation": "Webhook succesvol bijgewerkt"
+  },
+  "Hf1cEZ": {
+    "message": "Webhook URL is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 23]],
+    "translation": "Webhook-URL is verplicht"
+  },
+  "v1kQyJ": {
+    "message": "Webhooks",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/SettingsLayout.tsx", 71],
+      ["src/views/settings/WebhookSettings.tsx", 28]
+    ],
+    "translation": "Webhooks"
+  },
   "9eF5oV": {
     "message": "Welcome back",
     "placeholders": {},
@@ -5842,12 +6186,12 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 46],
-      ["src/views/board/index.tsx", 400],
+      ["src/components/SettingsLayout.tsx", 47],
+      ["src/views/board/index.tsx", 413],
       ["src/views/boards/index.tsx", 48],
       ["src/views/members/index.tsx", 258],
       ["src/views/public/board/index.tsx", 125],
-      ["src/views/public/boards/index.tsx", 65]
+      ["src/views/public/boards/index.tsx", 75]
     ],
     "translation": "Workspace"
   },
@@ -6054,8 +6398,8 @@
       ["src/views/board/components/List.tsx", 117],
       ["src/views/board/components/UpdateBoardSlugButton.tsx", 58],
       ["src/views/board/components/VisibilityButton.tsx", 72],
-      ["src/views/board/index.tsx", 474],
-      ["src/views/board/index.tsx", 532],
+      ["src/views/board/index.tsx", 487],
+      ["src/views/board/index.tsx", 545],
       ["src/views/boards/components/BoardsList.tsx", 71],
       ["src/views/boards/index.tsx", 59],
       ["src/views/boards/index.tsx", 80]

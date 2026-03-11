@@ -404,11 +404,10 @@ describe("webhook utilities", () => {
 
       await sendWebhooksForWorkspace(mockDb, 1, mockPayload);
 
-      // Event filtering now happens at DB level
+      // getActiveByWorkspaceId fetches all active webhooks; event filtering is client-side
       expect(mockGetActiveByWorkspaceId).toHaveBeenCalledWith(
         mockDb,
         1,
-        "card.created",
       );
       expect(global.fetch).toHaveBeenCalledTimes(2);
       expect(global.fetch).toHaveBeenCalledWith(
@@ -421,8 +420,8 @@ describe("webhook utilities", () => {
       );
     });
 
-    it("does not send when no webhooks match the event (DB-level filtering)", async () => {
-      // DB-level event filter returns empty array when no webhooks match
+    it("does not send when no webhooks match the event (client-side filtering)", async () => {
+      // Returns webhooks that don't match the event — client-side filter excludes them
       mockGetActiveByWorkspaceId.mockResolvedValueOnce([]);
 
       await sendWebhooksForWorkspace(mockDb, 1, mockPayload);
@@ -430,7 +429,6 @@ describe("webhook utilities", () => {
       expect(mockGetActiveByWorkspaceId).toHaveBeenCalledWith(
         mockDb,
         1,
-        "card.created",
       );
       expect(global.fetch).not.toHaveBeenCalled();
     });
