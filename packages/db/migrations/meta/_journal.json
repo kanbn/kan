@@ -187,8 +187,6 @@
     {
       "idx": 26,
       "version": "7",
-      "when": 1771031547285,
-      "tag": "20260214011227_AddWeekStartDay",
       "when": 1770521594167,
       "tag": "20260208033314_AddAttachmentToActivity",
       "breakpoints": true
@@ -208,10 +206,17 @@
       "breakpoints": true
     },
     {
-      "idx": 28,
+      "idx": 29,
       "version": "7",
       "when": 1771930355536,
       "tag": "20260224105235_AddGitHubIntegrationSupport",
+      "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1773212242728,
+      "tag": "20260311065722_AddWeekStartDay",
       "breakpoints": true
     }
   ]

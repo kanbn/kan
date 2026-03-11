@@ -1,1 +1,0 @@
-ALTER TABLE "workspace" ADD COLUMN "weekStartDay" integer DEFAULT 1 NOT NULL;

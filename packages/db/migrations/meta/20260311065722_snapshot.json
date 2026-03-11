@@ -1,6 +1,6 @@
 {
-  "id": "ab625add-e142-4db0-a032-9c3df9c5ab50",
-  "prevId": "99b49af4-cc01-43ef-9d34-de8a49a61573",
+  "id": "c8acd64a-f67f-4119-8cf3-d98322744d50",
+  "prevId": "7bd48a47-95eb-46ea-9d19-cd80b44a3283",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -487,6 +487,13 @@
           "notNull": true,
           "default": "'regular'"
         },
+        "isArchived": {
+          "name": "isArchived",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
         "sourceBoardId": {
           "name": "sourceBoardId",
           "type": "bigint",
@@ -495,6 +502,21 @@
         }
       },
       "indexes": {
+        "board_is_archived_idx": {
+          "name": "board_is_archived_idx",
+          "columns": [
+            {
+              "expression": "isArchived",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "board_visibility_idx": {
           "name": "board_visibility_idx",
           "columns": [
@@ -866,6 +888,12 @@
           "type": "bigint",
           "primaryKey": false,
           "notNull": false
+        },
+        "attachmentId": {
+          "name": "attachmentId",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -972,6 +1000,19 @@
             "id"
           ],
           "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "card_activity_attachmentId_card_attachment_id_fk": {
+          "name": "card_activity_attachmentId_card_attachment_id_fk",
+          "tableFrom": "card_activity",
+          "tableTo": "card_attachment",
+          "columnsFrom": [
+            "attachmentId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -2261,7 +2302,7 @@
         },
         "accessToken": {
           "name": "accessToken",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -3559,6 +3600,138 @@
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": true
+    },
+    "public.workspace_webhooks": {
+      "name": "workspace_webhooks",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "publicId": {
+          "name": "publicId",
+          "type": "varchar(12)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "workspaceId": {
+          "name": "workspaceId",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar(2048)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "secret": {
+          "name": "secret",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "events": {
+          "name": "events",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "createdBy": {
+          "name": "createdBy",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "workspace_webhooks_workspace_idx": {
+          "name": "workspace_webhooks_workspace_idx",
+          "columns": [
+            {
+              "expression": "workspaceId",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "workspace_webhooks_workspaceId_workspace_id_fk": {
+          "name": "workspace_webhooks_workspaceId_workspace_id_fk",
+          "tableFrom": "workspace_webhooks",
+          "tableTo": "workspace",
+          "columnsFrom": [
+            "workspaceId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "workspace_webhooks_createdBy_user_id_fk": {
+          "name": "workspace_webhooks_createdBy_user_id_fk",
+          "tableFrom": "workspace_webhooks",
+          "tableTo": "user",
+          "columnsFrom": [
+            "createdBy"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "workspace_webhooks_publicId_unique": {
+          "name": "workspace_webhooks_publicId_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "publicId"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": true
     }
   },
   "enums": {
@@ -3614,7 +3787,8 @@
       "name": "source",
       "schema": "public",
       "values": [
-        "trello"
+        "trello",
+        "github"
       ]
     },
     "public.status": {
