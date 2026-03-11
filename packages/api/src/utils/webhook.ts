@@ -190,7 +190,7 @@ export async function sendWebhooksForWorkspace(
       db,
       workspaceId,
     );
-    const webhooks = allWebhooks.filter((w) =>
+    const webhooksForEvent = allWebhooks.filter((w) =>
       w.events.includes(payload.event),
     );
 
