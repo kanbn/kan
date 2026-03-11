@@ -1,0 +1,1 @@
+ALTER TABLE "card_comments" ADD COLUMN IF NOT EXISTS "parentCommentPublicId" varchar(12);
