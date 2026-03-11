@@ -17,8 +17,6 @@ import {
   assertCanEdit,
   assertPermission,
 } from "../utils/permissions";
-import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
-import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
 import {
   createCardWebhookPayload,
   sendWebhooksForWorkspace,
