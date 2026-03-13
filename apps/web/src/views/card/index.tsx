@@ -180,6 +180,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const [activeChecklistForm, setActiveChecklistForm] = useState<string | null>(
     null,
   );
+  const [replyToComment, setReplyToComment] = useState<{
+    publicId: string;
+    name: string;
+  } | null>(null);
 
   const cardId = Array.isArray(router.query.cardId)
     ? router.query.cardId[0]
@@ -459,9 +463,13 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                         cardPublicId={cardId}
                         isLoading={!card}
                         isAdmin={workspace.role === "admin"}
+                        onReplyToComment={(args) => setReplyToComment(args)}
+                        replyToComment={replyToComment}
+                        onCancelReply={() => setReplyToComment(null)}
+                        workspaceMembers={editorWorkspaceMembers}
                       />
                     </div>
-                    {!isTemplate && (
+                    {!isTemplate && !replyToComment && (
                       <div className="mt-6">
                         <NewCommentForm
                           cardPublicId={cardId}

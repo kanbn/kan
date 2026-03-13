@@ -23,11 +23,13 @@ import type {
 } from "@kan/api/types";
 import { authClient } from "@kan/auth/client";
 
+import type { WorkspaceMember } from "~/components/Editor";
 import Avatar from "~/components/Avatar";
 import { useLocalisation } from "~/hooks/useLocalisation";
 import { api } from "~/utils/api";
 import { getAvatarUrl } from "~/utils/helpers";
 import Comment from "./Comment";
+import NewCommentForm from "./NewCommentForm";
 
 type ActivityType =
   NonNullable<GetCardByIdOutput>["activities"][number]["type"];
@@ -373,11 +375,19 @@ const ActivityList = ({
   isLoading: cardIsLoading,
   isAdmin,
   isViewOnly,
+  onReplyToComment,
+  replyToComment,
+  onCancelReply,
+  workspaceMembers,
 }: {
   cardPublicId: string;
   isLoading: boolean;
   isAdmin?: boolean;
   isViewOnly?: boolean;
+  onReplyToComment?: (args: { publicId: string; name: string }) => void;
+  replyToComment?: { publicId: string; name: string } | null;
+  onCancelReply?: () => void;
+  workspaceMembers?: WorkspaceMember[];
 }) => {
   const { dateLocale } = useLocalisation();
   const { data: sessionData } = authClient.useSession();
@@ -386,6 +396,7 @@ const ActivityList = ({
     GetCardActivitiesOutput["activities"]
   >([]);
   const [hasMore, setHasMore] = useState(true);
+  const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const isFullyExpandedRef = useRef(false);
@@ -412,21 +423,18 @@ const ActivityList = ({
       if (isFullyExpandedRef.current && firstPageData.hasMore) {
         setAllActivities(firstPageData.activities);
         setHasMore(firstPageData.hasMore);
+        setNextCursor(firstPageData.nextCursor);
 
         const fetchAllRemaining = async () => {
           let currentActivities = [...firstPageData.activities];
           let currentHasMore = firstPageData.hasMore;
+          let currentCursor = firstPageData.nextCursor;
 
-          while (currentHasMore) {
-            const lastActivity =
-              currentActivities[currentActivities.length - 1];
-            if (!lastActivity) break;
-
-            const nextCursor = new Date(lastActivity.createdAt).toISOString();
+          while (currentHasMore && currentCursor) {
             const nextPage = await utils.card.getActivities.fetch({
               cardPublicId,
               limit: ACTIVITIES_PAGE_SIZE,
-              cursor: nextCursor,
+              cursor: currentCursor,
             });
 
             const existingIds = new Set(
@@ -437,16 +445,19 @@ const ActivityList = ({
             );
             currentActivities = [...currentActivities, ...newActivities];
             currentHasMore = nextPage.hasMore;
+            currentCursor = nextPage.nextCursor;
           }
 
           setAllActivities(currentActivities);
           setHasMore(false);
+          setNextCursor(null);
         };
 
         void fetchAllRemaining();
       } else {
         setAllActivities(firstPageData.activities);
         setHasMore(firstPageData.hasMore);
+        setNextCursor(firstPageData.nextCursor);
 
         if (!firstPageData.hasMore) {
           isFullyExpandedRef.current = true;
@@ -456,14 +467,10 @@ const ActivityList = ({
   }, [firstPageData, dataUpdatedAt, cardPublicId, utils.card.getActivities]);
 
   const handleLoadMore = async () => {
-    if (isLoadingMore || !hasMore || allActivities.length === 0) return;
-
-    const lastActivity = allActivities[allActivities.length - 1];
-    if (!lastActivity) return;
+    if (isLoadingMore || !hasMore || !nextCursor) return;
 
     setIsLoadingMore(true);
     try {
-      const nextCursor = new Date(lastActivity.createdAt).toISOString();
       const nextPage = await utils.card.getActivities.fetch({
         cardPublicId,
         limit: ACTIVITIES_PAGE_SIZE,
@@ -476,6 +483,7 @@ const ActivityList = ({
       );
       setAllActivities((prev) => [...prev, ...newActivities]);
       setHasMore(nextPage.hasMore);
+      setNextCursor(nextPage.nextCursor);
 
       if (!nextPage.hasMore) {
         isFullyExpandedRef.current = true;
@@ -488,6 +496,136 @@ const ActivityList = ({
   const isFetching = isFetchingFirst || isLoadingMore;
   const isLoading =
     cardIsLoading || (isFetchingFirst && allActivities.length === 0);
+
+  const commentActivityByCommentPublicId = new Map<
+    string,
+    GetCardActivitiesOutput["activities"][number]
+  >();
+  const commentParentByPublicId = new Map<string, string | null>();
+  const commentChildrenByParentPublicId = new Map<string, string[]>();
+
+  const getCreatedAtMs = (createdAt: unknown) => {
+    try {
+      return new Date(createdAt as Date).getTime();
+    } catch {
+      return 0;
+    }
+  };
+
+  for (const activity of allActivities) {
+    if (activity.type !== "card.updated.comment.added") continue;
+    const commentPublicId = activity.comment?.publicId;
+    if (!commentPublicId) continue;
+
+    const parentPublicId = activity.comment?.parentCommentPublicId ?? null;
+    commentActivityByCommentPublicId.set(commentPublicId, activity);
+    commentParentByPublicId.set(commentPublicId, parentPublicId);
+
+    if (parentPublicId) {
+      const children =
+        commentChildrenByParentPublicId.get(parentPublicId) ?? [];
+      children.push(commentPublicId);
+      commentChildrenByParentPublicId.set(parentPublicId, children);
+    }
+  }
+
+  for (const [parentPublicId, childIds] of commentChildrenByParentPublicId) {
+    childIds.sort((a, b) => {
+      const aActivity = commentActivityByCommentPublicId.get(a);
+      const bActivity = commentActivityByCommentPublicId.get(b);
+      return (
+        getCreatedAtMs(aActivity?.createdAt) -
+        getCreatedAtMs(bActivity?.createdAt)
+      );
+    });
+    commentChildrenByParentPublicId.set(parentPublicId, childIds);
+  }
+
+  const INDENT_CLASSES = [
+    "",
+    "ml-8",
+    "ml-14",
+    "ml-20",
+    "ml-24",
+    "ml-28",
+    "ml-32",
+  ] as const;
+  const getDepthClass = (depth: number) => {
+    const normalizedDepth = Math.max(0, depth);
+    return INDENT_CLASSES[Math.min(normalizedDepth, INDENT_CLASSES.length - 1)];
+  };
+
+  const renderCommentThread = (
+    commentPublicId: string,
+    depth: number,
+    ancestry: Set<string>,
+    rendered: Set<string>,
+  ): React.ReactNode => {
+    if (rendered.has(commentPublicId)) return null;
+    if (ancestry.has(commentPublicId)) return null;
+
+    const activity = commentActivityByCommentPublicId.get(commentPublicId);
+    if (!activity || activity.type !== "card.updated.comment.added")
+      return null;
+
+    rendered.add(commentPublicId);
+
+    const nextAncestry = new Set(ancestry);
+    nextAncestry.add(commentPublicId);
+
+    const children = commentChildrenByParentPublicId.get(commentPublicId) ?? [];
+    const showReplyForm =
+      !isViewOnly &&
+      !!workspaceMembers &&
+      !!replyToComment &&
+      replyToComment.publicId === commentPublicId;
+
+    return (
+      <div
+        key={`thread-${commentPublicId}`}
+        className="flex flex-col space-y-2"
+      >
+        <Comment
+          publicId={activity.comment?.publicId}
+          cardPublicId={cardPublicId}
+          name={activity.user?.name ?? ""}
+          email={activity.user?.email ?? ""}
+          image={activity.user?.image ?? null}
+          isLoading={isLoading}
+          createdAt={new Date(activity.createdAt).toISOString()}
+          comment={activity.comment?.comment}
+          isEdited={!!activity.comment?.updatedAt}
+          isAuthor={activity.comment?.createdBy === sessionData?.user.id}
+          isViewOnly={!!isViewOnly}
+          depth={depth}
+          onReply={onReplyToComment}
+        />
+
+        {showReplyForm && (
+          <div
+            key={`reply-form-${commentPublicId}`}
+            className={`${getDepthClass(depth + 1)}`}
+          >
+            <NewCommentForm
+              cardPublicId={cardPublicId}
+              workspaceMembers={workspaceMembers}
+              replyTo={replyToComment}
+              onCancelReply={onCancelReply}
+            />
+          </div>
+        )}
+
+        {children.map((childCommentPublicId) =>
+          renderCommentThread(
+            childCommentPublicId,
+            depth + 1,
+            nextAncestry,
+            rendered,
+          ),
+        )}
+      </div>
+    );
+  };
 
   return (
     <div className="flex flex-col space-y-4 pt-4">
@@ -507,28 +645,26 @@ const ActivityList = ({
           dateLocale: dateLocale,
           mergedLabels: (activity as ActivityWithMergedLabels).mergedLabels,
           attachmentName:
-            (activity as ActivityWithMergedLabels).attachment?.originalFilename ??
-            null,
+            (activity as ActivityWithMergedLabels).attachment
+              ?.originalFilename ?? null,
         });
 
-        if (activity.type === "card.updated.comment.added")
-          return (
-            <Comment
-              key={activity.publicId}
-              publicId={activity.comment?.publicId}
-              cardPublicId={cardPublicId}
-              name={activity.user?.name ?? ""}
-              email={activity.user?.email ?? ""}
-              image={activity.user?.image ?? null}
-              isLoading={isLoading}
-              createdAt={activity.createdAt.toISOString()}
-              comment={activity.comment?.comment}
-              isEdited={!!activity.comment?.updatedAt}
-              isAuthor={activity.comment?.createdBy === sessionData?.user.id}
-              isAdmin={isAdmin ?? false}
-              isViewOnly={!!isViewOnly}
-            />
-          );
+        if (activity.type === "card.updated.comment.added") {
+          const commentPublicId = activity.comment?.publicId;
+          if (!commentPublicId) return null;
+
+          const parentPublicId = commentParentByPublicId.get(commentPublicId);
+          const parentIsLoaded =
+            !!parentPublicId &&
+            commentActivityByCommentPublicId.has(parentPublicId);
+
+          if (parentIsLoaded) {
+            return null;
+          }
+
+          const rendered = new Set<string>();
+          return renderCommentThread(commentPublicId, 0, new Set(), rendered);
+        }
 
         if (!activityText) return null;
 
@@ -542,7 +678,9 @@ const ActivityList = ({
                 size="sm"
                 name={activity.user?.name ?? ""}
                 email={activity.user?.email ?? ""}
-                imageUrl={getAvatarUrl(activity.user?.image ?? null) || undefined}
+                imageUrl={
+                  getAvatarUrl(activity.user?.image ?? null) || undefined
+                }
                 icon={getActivityIcon(
                   activity.type,
                   activity.fromList?.index,
