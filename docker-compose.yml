@@ -37,6 +37,9 @@ services:
       # Redis (optional - for rate limiting)
       - REDIS_URL=${REDIS_URL}
 
+      # Logging (optional - debug, info, warn, error; defaults to debug in dev, info in prod)
+      - LOG_LEVEL=${LOG_LEVEL}
+
       # Admin API key (optional)
       - KAN_ADMIN_API_KEY=${KAN_ADMIN_API_KEY}
 

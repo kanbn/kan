@@ -37,6 +37,9 @@ services:
       - NEXT_PUBLIC_USE_STANDALONE_OUTPUT=${NEXT_PUBLIC_USE_STANDALONE_OUTPUT}
       - REDIS_URL=${REDIS_URL}
 
+      # Logging (optional - debug, info, warn, error; defaults to debug in dev, info in prod)
+      - LOG_LEVEL=${LOG_LEVEL}
+
       # Stripe
       - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
       - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}

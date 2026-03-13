@@ -185,8 +185,16 @@ Use `assertUserInWorkspace` helper for workspace checks.
 
 - Use TRPCError with appropriate codes (UNAUTHORIZED, NOT_FOUND, etc.)
 - Provide user-friendly error messages
-- Log errors appropriately
+- Log errors appropriately using the `@kan/logger` package
 - Show popup notifications for user-facing errors
+
+### Logging
+
+- Import from `@kan/logger`: `import { createLogger } from "@kan/logger"`
+- Create a module-scoped logger: `const logger = createLogger("module-name")`
+- Log level is controlled by `LOG_LEVEL` env var (debug, info, warn, error)
+- Defaults to `debug` in development, `info` in production
+- Never use `console.log` — always use the logger
 
 ## Common Patterns
 
@@ -218,6 +226,16 @@ Use `assertUserInWorkspace` helper for workspace checks.
 4. **API**: Add tRPC router procedures in `packages/api/src/routers/`
 5. **Frontend**: Add UI components in `apps/web/src/`
 6. **i18n**: Add translations for new strings
+
+## Adding a New Environment Variable
+
+Update all of the following:
+
+1. `.env.example` — add the variable with an empty value and a comment explaining it
+2. `turbo.json` — add to `globalEnv` (or `globalPassThroughEnv` for CI/platform vars)
+3. `docker-compose.yml` — add to the `web` service `environment` section
+4. `cloud/docker-compose.yml` — add to the `web` service `environment` section
+5. `README.md` — add a row to the Environment Variables table
 
 ## Database Changes
 

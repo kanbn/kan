@@ -129,7 +129,8 @@
     "BETTER_AUTH_TRUSTED_ORIGINS",
     "NOVU_API_KEY",
     "EMAIL_UNSUBSCRIBE_SECRET",
-    "REDIS_URL"
+    "REDIS_URL",
+    "LOG_LEVEL"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",
