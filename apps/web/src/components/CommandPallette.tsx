@@ -145,7 +145,6 @@ export default function CommandPallette({
                         value={result}
                         className="cursor-pointer select-none px-4 py-3 data-[focus]:bg-light-200 hover:bg-light-200 focus:outline-none dark:data-[focus]:bg-dark-200 dark:hover:bg-dark-200"
                         onClick={() => {
-                          console.log("clicked", url);
                           void router.push(url);
                           onClose();
                           setQuery("");

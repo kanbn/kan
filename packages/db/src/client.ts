@@ -6,7 +6,11 @@ import { drizzle as drizzlePgLite } from "drizzle-orm/pglite";
 import { migrate } from "drizzle-orm/pglite/migrator";
 import { Pool } from "pg";
 
+import { createLogger } from "@kan/logger";
+
 import * as schema from "./schema";
+
+const log = createLogger("db");
 
 export type dbClient = NodePgDatabase<typeof schema> & {
   $client: Pool;
@@ -16,7 +20,7 @@ export const createDrizzleClient = (): dbClient => {
   const connectionString = process.env.POSTGRES_URL;
 
   if (!connectionString) {
-    console.log("POSTGRES_URL environment variable is not set, using PGLite");
+    log.warn("POSTGRES_URL not set, falling back to PGLite");
 
     const client = new PGlite({
       dataDir: "./pgdata",

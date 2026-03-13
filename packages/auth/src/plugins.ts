@@ -8,7 +8,10 @@ import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { sendEmail } from "@kan/email";
+import { createLogger } from "@kan/logger";
 import { generateUID } from "@kan/shared/utils";
+
+const log = createLogger("auth");
 import { createStripeClient } from "@kan/stripe";
 
 import { socialProvidersPlugin } from "./providers";
@@ -101,9 +104,7 @@ export function createPlugins(db: dbClient) {
                       unlimitedSeats: true,
                     },
                   );
-                  console.log(
-                    `Pro subscription ${stripeSubscription.id} activated with unlimited seats`,
-                  );
+                  log.info({ subscriptionId: stripeSubscription.id }, "Pro subscription activated with unlimited seats");
 
                   const workspace = await workspaceRepo.getByPublicId(
                     db,
@@ -175,11 +176,7 @@ export function createPlugins(db: dbClient) {
       sendMagicLink: async ({ email, url }) => {
         try {
           const decodedUrl = decodeURIComponent(url);
-          console.log("Sending magic link to:", email, "URL:", url);
-          console.log(
-            "Magic link contains invite:",
-            decodedUrl.includes("type=invite"),
-          );
+          log.info({ email, isInvite: decodedUrl.includes("type=invite") }, "Sending magic link");
           if (decodedUrl.includes("type=invite")) {
             let inviterName = "";
             let workspaceName = "";
@@ -211,7 +208,7 @@ export function createPlugins(db: dbClient) {
                 }
               }
             } catch (error) {
-              console.error("Failed to fetch invite details:", error);
+              log.error({ err: error }, "Failed to fetch invite details");
             }
 
             await sendEmail(
@@ -239,11 +236,7 @@ export function createPlugins(db: dbClient) {
             );
           }
         } catch (error) {
-          console.error("Error sending magic link:", {
-            email,
-            url,
-            error,
-          });
+          log.error({ err: error, email }, "Error sending magic link");
         }
       },
     }),
@@ -273,7 +266,7 @@ export function createPlugins(db: dbClient) {
                   picture?: string;
                   avatar?: string;
                 }) => {
-                  console.log("OIDC profile:", profile);
+                  log.debug({ profile }, "OIDC profile received");
 
                   const name =
                     profile.name ??

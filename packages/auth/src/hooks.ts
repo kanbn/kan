@@ -7,7 +7,10 @@ import type { dbClient } from "@kan/db/client";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import { notificationClient } from "@kan/email";
+import { createLogger } from "@kan/logger";
 import { createEmailUnsubscribeLink, createS3Client } from "@kan/shared";
+
+const log = createLogger("auth");
 
 import { downloadImage } from "./utils";
 
@@ -103,6 +106,7 @@ export function createDatabaseHooks(db: dbClient) {
 
               const unsubscribeUrl = await createEmailUnsubscribeLink(user.id);
 
+              log.info({ workflowId: "user-signup", userId: user.id, email: user.email }, "Triggering Novu workflow");
               await notificationClient.trigger({
                 to: {
                   subscriberId: user.id,
@@ -122,6 +126,7 @@ export function createDatabaseHooks(db: dbClient) {
                 },
                 workflowId: "user-signup",
               });
+              log.info({ workflowId: "user-signup", userId: user.id }, "Novu workflow triggered");
 
               await notificationClient.subscribers.credentials.update(
                 {
@@ -134,7 +139,7 @@ export function createDatabaseHooks(db: dbClient) {
                 user.id,
               );
             } catch (error) {
-              console.error("Error adding user to notification client", error);
+              log.error({ err: error }, "Error adding user to notification client");
             }
           }
         },

@@ -27,6 +27,7 @@
     "@kan/api": "workspace:*",
     "@kan/auth": "workspace:*",
     "@kan/db": "workspace:^",
+    "@kan/logger": "workspace:^",
     "@kan/shared": "workspace:^",
     "@lingui/babel-preset-react": "^2.9.2",
     "@lingui/conf": "^5.3.2",

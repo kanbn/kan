@@ -4,7 +4,10 @@ import type Stripe from "stripe";
 import type { dbClient } from "@kan/db/client";
 import * as userRepo from "@kan/db/repository/user.repo";
 import { notificationClient } from "@kan/email";
+import { createLogger } from "@kan/logger";
 import { createEmailUnsubscribeLink } from "@kan/shared";
+
+const log = createLogger("auth");
 
 export async function downloadImage(url: string): Promise<Buffer> {
   const response = await fetch(url);
@@ -32,6 +35,7 @@ export async function triggerWorkflow(
 
     const unsubscribeUrl = await createEmailUnsubscribeLink(user.id);
 
+    log.info({ workflowId, userId: user.id }, "Triggering Novu workflow");
     await notificationClient.trigger({
       to: {
         subscriberId: user.id,
@@ -43,7 +47,8 @@ export async function triggerWorkflow(
       },
       workflowId,
     });
+    log.info({ workflowId, userId: user.id }, "Novu workflow triggered");
   } catch (error) {
-    console.error("Error triggering workflow", error);
+    log.error({ err: error, workflowId }, "Error triggering workflow");
   }
 }

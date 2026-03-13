@@ -4,6 +4,9 @@ import { z } from "zod";
 import type { dbClient } from "@kan/db/client";
 import type { WebhookEvent } from "@kan/db/schema";
 import * as webhookRepo from "@kan/db/repository/webhook.repo";
+import { createLogger } from "@kan/logger";
+
+const log = createLogger("webhook");
 
 export type WebhookEventType = WebhookEvent;
 
@@ -199,9 +202,9 @@ export async function sendWebhooksForWorkspace(
       sendWebhookToUrl(webhook.url, webhook.secret ?? undefined, payload).then(
         (result) => {
           if (!result.success) {
-            console.error(
-              `Webhook delivery failed to ${webhook.url}: ${result.error}`,
-            );
+            log.error({ url: webhook.url, event: payload.event, error: result.error, statusCode: result.statusCode }, "Webhook delivery failed");
+          } else {
+            log.info({ url: webhook.url, event: payload.event, statusCode: result.statusCode }, "Webhook delivered");
           }
         },
       ),
@@ -210,7 +213,7 @@ export async function sendWebhooksForWorkspace(
     // Wait for all to complete but don't block on failures
     await Promise.allSettled(promises);
   } catch (error) {
-    console.error("Failed to send webhooks for workspace:", error);
+    log.error({ err: error, workspaceId }, "Failed to send webhooks for workspace");
   }
 }
 

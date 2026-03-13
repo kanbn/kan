@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.3.7",
+    "@kan/logger": "workspace:^",
     "@kan/shared": "workspace:^",
     "drizzle-orm": "^0.42.0",
     "drizzle-zod": "^0.5.1",

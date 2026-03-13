@@ -234,7 +234,7 @@ const ImportGithub: React.FC = () => {
         await refetchBoards();
         closeModal();
       } catch (e) {
-        console.log(e);
+        console.error(e);
       }
     },
     onError: () => {
@@ -386,7 +386,7 @@ const ImportTrello: React.FC = () => {
         await refetchBoards();
         closeModal();
       } catch (e) {
-        console.log(e);
+        console.error(e);
       }
     },
     onError: () => {

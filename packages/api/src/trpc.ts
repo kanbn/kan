@@ -9,6 +9,9 @@ import { ZodError } from "zod";
 import type { dbClient } from "@kan/db/client";
 import { initAuth } from "@kan/auth/server";
 import { createDrizzleClient } from "@kan/db/client";
+import { createLogger } from "@kan/logger";
+
+const log = createLogger("trpc");
 
 export interface User {
   id: string;
@@ -90,7 +93,7 @@ export const createRESTContext = async ({ req }: CreateNextContextOptions) => {
   try {
     session = await auth.api.getSession();
   } catch (error) {
-    console.error("Error getting session, ", error);
+    log.error({ err: error }, "Error getting session");
     throw error;
   }
 
@@ -118,7 +121,23 @@ export const createTRPCRouter = t.router;
 
 export const createCallerFactory = t.createCallerFactory;
 
-export const publicProcedure = t.procedure.meta({
+const loggingMiddleware = t.middleware(async ({ path, type, next, ctx }) => {
+  const start = Date.now();
+  const result = await next();
+  const duration = Date.now() - start;
+
+  const meta = { procedure: path, type, duration, userId: (ctx as { user?: { id: string } }).user?.id };
+
+  if (result.ok) {
+    log.info(meta, "tRPC OK");
+  } else {
+    log.error({ ...meta, err: result.error }, "tRPC error");
+  }
+
+  return result;
+});
+
+export const publicProcedure = t.procedure.use(loggingMiddleware).meta({
   openapi: { method: "GET", path: "/public" },
 });
 
@@ -142,14 +161,18 @@ const enforceUserIsAdmin = t.middleware(async ({ ctx, next }) => {
   });
 });
 
-export const protectedProcedure = t.procedure.use(enforceUserIsAuthed).meta({
-  openapi: {
-    method: "GET",
-    path: "/protected",
-  },
-});
+export const protectedProcedure = t.procedure
+  .use(loggingMiddleware)
+  .use(enforceUserIsAuthed)
+  .meta({
+    openapi: {
+      method: "GET",
+      path: "/protected",
+    },
+  });
 
 export const adminProtectedProcedure = t.procedure
+  .use(loggingMiddleware)
   .use(enforceUserIsAdmin)
   .meta({
     openapi: {

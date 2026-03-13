@@ -75,7 +75,7 @@ export function LabelForm({
           reset(newFormState);
         }
       } catch (e) {
-        console.log(e);
+        console.error(e);
       }
     },
   });
@@ -231,9 +231,7 @@ export function LabelForm({
           <Button
             type="submit"
             isLoading={updateLabel.isPending || createLabel.isPending}
-            disabled={
-              !watch("name")
-            }
+            disabled={!watch("name")}
           >
             {isEdit ? t`Update label` : t`Create label`}
           </Button>

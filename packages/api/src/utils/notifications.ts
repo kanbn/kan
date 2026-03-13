@@ -1,6 +1,9 @@
 import { env } from "next-runtime-env";
 
 import type { dbClient } from "@kan/db/client";
+import { createLogger } from "@kan/logger";
+
+const log = createLogger("notifications");
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as notificationRepo from "@kan/db/repository/notification.repo";
@@ -72,6 +75,7 @@ export async function sendMentionEmails({
     const baseUrl = env("NEXT_PUBLIC_BASE_URL");
     const cardUrl = `${baseUrl}/cards/${cardPublicId}`;
 
+    log.info({ cardPublicId, mentionCount: membersToNotify.length, commenterUserId }, "Sending mention emails");
     // Send emails to all mentioned members (only if notification doesn't exist)
     await Promise.all(
       membersToNotify.map(async (member) => {
@@ -91,6 +95,7 @@ export async function sendMentionEmails({
 
           // If notification already exists, skip sending email
           if (notificationExists) {
+            log.debug({ email, cardPublicId }, "Skipping duplicate mention email");
             return;
           }
 
@@ -114,20 +119,14 @@ export async function sendMentionEmails({
               cardUrl,
             },
           );
+          log.info({ email, cardPublicId }, "Mention email sent");
         } catch (error) {
-          console.error("Failed to send mention email:", {
-            email,
-            cardPublicId,
-            error: error instanceof Error ? error.message : String(error),
-          });
+          log.error({ err: error, email, cardPublicId }, "Failed to send mention email");
         }
       }),
     );
   } catch (error) {
-    console.error("Error sending mention emails:", {
-      cardPublicId,
-      error: error instanceof Error ? error.message : String(error),
-    });
+    log.error({ err: error, cardPublicId }, "Error sending mention emails");
   }
 }
 

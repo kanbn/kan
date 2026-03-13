@@ -5,6 +5,9 @@ import {
 } from "rate-limiter-flexible";
 
 import { getRedisClient } from "@kan/db/redis";
+import { createLogger } from "@kan/logger";
+
+const log = createLogger("rateLimit");
 
 export interface RateLimitOptions {
   points?: number;
@@ -45,7 +48,7 @@ function createRateLimiter(options: RateLimitOptions = {}) {
 
   // Use Redis if available, otherwise fall back to in-memory storage
   if (redis) {
-    console.log("Using Redis for rate limiting");
+    log.debug("Using Redis for rate limiting");
     return new RateLimiterRedis({
       storeClient: redis,
       points,
@@ -53,7 +56,7 @@ function createRateLimiter(options: RateLimitOptions = {}) {
     });
   }
 
-  console.log("Using in-memory for rate limiting");
+  log.debug("Redis unavailable, falling back to in-memory rate limiting");
   return new RateLimiterMemory({
     points,
     duration,

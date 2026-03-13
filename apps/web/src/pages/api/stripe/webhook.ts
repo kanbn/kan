@@ -3,7 +3,10 @@ import type { Readable } from "node:stream";
 
 import { createNextApiContext } from "@kan/api/trpc";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { createLogger } from "@kan/logger";
 import { createStripeClient } from "@kan/stripe";
+
+const log = createLogger("stripe-webhook");
 
 async function buffer(readable: Readable) {
   const chunks = [];
@@ -41,6 +44,8 @@ export default async function handler(
 
     const { db } = await createNextApiContext(req);
 
+    log.info({ eventType: event.type, eventId: event.id }, "Stripe webhook received");
+
     switch (event.type) {
       case "checkout.session.completed": {
         const checkoutSession = event.data.object;
@@ -56,12 +61,12 @@ export default async function handler(
         break;
       }
       default:
-        console.log(`Unhandled event type: ${event.type}`);
+        log.warn({ eventType: event.type }, "Unhandled Stripe event type");
     }
 
     return res.status(200).json({ received: true });
   } catch (err) {
-    console.error("Webhook error:", err);
+    log.error({ err }, "Stripe webhook handler failed");
     return res.status(400).json({ message: "Webhook handler failed" });
   }
 }
