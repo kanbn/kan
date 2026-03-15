@@ -146,6 +146,10 @@ export function NewCardForm({
               listId: 2,
               description: "",
               dueDate: args.dueDate ?? null,
+              cardNumber: null,
+              comments: [],
+              checklists: [],
+              attachments: [],
               labels: oldBoard.labels.filter((label) =>
                 args.labelPublicIds.includes(label.publicId),
               ),
