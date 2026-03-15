@@ -60,6 +60,7 @@ export const cards = pgTable("card", {
   title: text("title").notNull(),
   description: text("description"),
   index: integer("index").notNull(),
+  cardNumber: integer("cardNumber"),
   createdBy: uuid("createdBy").references(() => users.id, {
     onDelete: "set null",
   }),

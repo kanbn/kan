@@ -22,6 +22,7 @@ import {
   labels,
   lists,
   workspaceMembers,
+  workspaces,
 } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
@@ -41,6 +42,7 @@ export const create = async (
     description: string;
     createdBy: string;
     listId: number;
+    workspaceId: number;
     position: "start" | "end";
     dueDate?: Date | null;
   },
@@ -82,6 +84,17 @@ export const create = async (
       `);
     }
 
+    const [counterResult] = await tx
+      .update(workspaces)
+      .set({ cardCounter: sql`${workspaces.cardCounter} + 1` })
+      .where(eq(workspaces.id, cardInput.workspaceId))
+      .returning({ cardCounter: workspaces.cardCounter });
+
+    if (!counterResult)
+      throw new Error(`Workspace ${cardInput.workspaceId} not found`);
+
+    const cardNumber = counterResult.cardCounter;
+
     const result = await tx
       .insert(cards)
       .values({
@@ -91,9 +104,10 @@ export const create = async (
         createdBy: cardInput.createdBy,
         listId: cardInput.listId,
         index: index,
+        cardNumber,
         dueDate: cardInput.dueDate ?? null,
       })
-      .returning({ id: cards.id, listId: cards.listId, publicId: cards.publicId });
+      .returning({ id: cards.id, listId: cards.listId, publicId: cards.publicId, cardNumber: cards.cardNumber });
 
     if (!result[0]) throw new Error("Unable to create card");
 
@@ -426,6 +440,7 @@ export const getWithListAndMembersByPublicId = async (
       description: true,
       dueDate: true,
       createdBy: true,
+      cardNumber: true,
     },
     with: {
       labels: {
@@ -502,6 +517,7 @@ export const getWithListAndMembersByPublicId = async (
               workspace: {
                 columns: {
                   publicId: true,
+                  cardPrefix: true,
                 },
                 with: {
                   members: {

@@ -140,6 +140,11 @@ export function CardModal({
                 </div>
               ) : (
                 <>
+                  {data?.cardNumber != null && data.list.board.workspace.cardPrefix && (
+                    <span className="mb-1 block text-xs font-medium text-light-700 dark:text-dark-800">
+                      {data.list.board.workspace.cardPrefix}-{data.cardNumber}
+                    </span>
+                  )}
                   <h1 className="pr-8 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
                     {data?.title}
                   </h1>

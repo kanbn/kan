@@ -623,6 +623,11 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                         >
                                           <Card
                                             title={card.title}
+                                            ticketNumber={
+                                              card.cardNumber != null
+                                                ? `${boardData.workspace.cardPrefix}-${card.cardNumber}`
+                                                : null
+                                            }
                                             labels={card.labels}
                                             members={card.members}
                                             checklists={card.checklists ?? []}
