@@ -47,6 +47,8 @@ export const workspaces = pgTable("workspace", {
   plan: workspacePlanEnum("plan").notNull().default("free"),
   showEmailsToMembers: boolean("showEmailsToMembers").notNull().default(true),
   weekStartDay: integer("weekStartDay").notNull().default(1),
+  cardPrefix: varchar("cardPrefix", { length: 10 }).notNull().default(""),
+  cardCounter: integer("cardCounter").notNull().default(0),
   createdBy: uuid("createdBy").references(() => users.id, {
     onDelete: "set null",
   }),
