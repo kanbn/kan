@@ -4,6 +4,7 @@ import { z } from "zod";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
+import { stripHtml } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
@@ -223,7 +224,7 @@ export const checklistRouter = createTRPCRouter({
     .input(
       z.object({
         checklistPublicId: z.string().length(12),
-        title: z.string().min(1).max(500),
+        title: z.string().min(1).max(500).transform(stripHtml),
       }),
     )
     .output(checklistItemSchema)
@@ -288,7 +289,7 @@ export const checklistRouter = createTRPCRouter({
     .input(
       z.object({
         checklistItemPublicId: z.string().length(12),
-        title: z.string().min(1).max(500).optional(),
+        title: z.string().min(1).max(500).transform(stripHtml).optional(),
         completed: z.boolean().optional(),
         index: z.number().int().min(0).optional(),
       }),
@@ -322,30 +323,29 @@ export const checklistRouter = createTRPCRouter({
 
       const previousTitle = item.title;
 
-        let updatedItem;
+      let updatedItem;
 
-        if (input.title !== undefined || input.completed !== undefined) {
-          updatedItem = await checklistRepo.updateItemById(ctx.db, {
-            id: item.id,
-            title: input.title,
-            completed: input.completed,
-          });
-        }
+      if (input.title !== undefined || input.completed !== undefined) {
+        updatedItem = await checklistRepo.updateItemById(ctx.db, {
+          id: item.id,
+          title: input.title,
+          completed: input.completed,
+        });
+      }
 
-        if (input.index !== undefined) {
-          updatedItem = await checklistRepo.reorderItem(ctx.db, {
-            itemId: item.id,
-            newIndex: input.index,
-          });
-        }
+      if (input.index !== undefined) {
+        updatedItem = await checklistRepo.reorderItem(ctx.db, {
+          itemId: item.id,
+          newIndex: input.index,
+        });
+      }
 
-        if (!updatedItem) {
-          throw new TRPCError({
-            message: `Failed to update checklist item`,
-            code: "INTERNAL_SERVER_ERROR",
-          });
-        }
-
+      if (!updatedItem) {
+        throw new TRPCError({
+          message: `Failed to update checklist item`,
+          code: "INTERNAL_SERVER_ERROR",
+        });
+      }
 
       // Log completion toggle
       if (input.completed !== undefined) {
@@ -371,7 +371,6 @@ export const checklistRouter = createTRPCRouter({
       }
 
       return updatedItem;
-
     }),
   deleteItem: protectedProcedure
     .meta({

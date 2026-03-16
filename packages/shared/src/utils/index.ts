@@ -5,3 +5,4 @@ export * from "./email";
 export * from "./dueDateFilters";
 export * from "./s3";
 export * from "./mentions";
+export * from "./sanitize";
