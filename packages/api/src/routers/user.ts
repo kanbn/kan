@@ -31,7 +31,6 @@ export const userRouter = createTRPCRouter({
           .object({
             id: z.number(),
             prefix: z.string().nullable(),
-            key: z.string(),
           })
           .nullable(),
       }),
@@ -62,7 +61,7 @@ export const userRouter = createTRPCRouter({
       return {
         ...result,
         image: imageUrl,
-        apiKey: apiKey ?? null,
+        apiKey: apiKey ? { id: apiKey.id, prefix: apiKey.prefix } : null,
       };
     }),
   update: protectedProcedure
