@@ -1,11 +1,11 @@
 import type { DraggableProvided } from "react-beautiful-dnd";
 import { t } from "@lingui/core/macro";
-import { useEffect, useState } from "react";
-import ContentEditable from "react-contenteditable";
+import { useState } from "react";
 import { HiXMark } from "react-icons/hi2";
 import { RiDraggable } from "react-icons/ri";
 import { twMerge } from "tailwind-merge";
 
+import PlainTextEditor from "~/components/PlainTextEditor";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 import { invalidateCard } from "~/utils/cardInvalidation";
@@ -33,9 +33,7 @@ export default function ChecklistItemRow({
 }: ChecklistItemRowProps) {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
-
-  const [title, setTitle] = useState("");
-  const [completed, setCompleted] = useState(false);
+  const [completed, setCompleted] = useState(item.completed);
 
   const updateItem = api.checklist.updateItem.useMutation({
     onMutate: async (vars) => {
@@ -103,21 +101,6 @@ export default function ChecklistItemRow({
     },
   });
 
-  // Only resync from props when switching items to avoid clobbering edits
-  useEffect(() => {
-    setTitle(item.title);
-    setCompleted(item.completed);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [item.publicId]);
-
-  const sanitizeHtmlToPlainText = (html: string): string =>
-    html
-      .replace(/<br\s*\/?>(\n)?/gi, "\n")
-      .replace(/<div><br\s*\/?><\/div>/gi, "")
-      .replace(/<[^>]*>/g, "")
-      .replace(/&nbsp;/g, " ")
-      .trim();
-
   const handleToggleCompleted = () => {
     if (viewOnly) return;
     setCompleted((prev) => !prev);
@@ -127,14 +110,8 @@ export default function ChecklistItemRow({
     });
   };
 
-  const commitTitle = (rawHtml: string) => {
-    if (viewOnly) return;
-    const plain = sanitizeHtmlToPlainText(rawHtml);
-    if (!plain || plain === item.title) {
-      setTitle(item.title);
-      return;
-    }
-    setTitle(plain);
+  const commitTitle = (plain: string) => {
+    if (!plain || plain === item.title) return;
     updateItem.mutate({
       checklistItemPublicId: item.publicId,
       title: plain,
@@ -183,36 +160,26 @@ export default function ChecklistItemRow({
           )}
         />
       </label>
+
       <div className="flex-1 pr-7">
-        <ContentEditable
-          html={title}
-          disabled={viewOnly}
-          onChange={(e) => setTitle(e.target.value)}
-          // @ts-expect-error - valid event
-          onBlur={(e: Event) => {
-            const innerHTML = (e.target as HTMLElement).innerHTML;
-            commitTitle(innerHTML);
+        <PlainTextEditor
+          key={item.publicId}
+          content={item.title}
+          readOnly={viewOnly}
+          placeholder={t`Add details...`}
+          onBlur={commitTitle}
+          onEnter={(plain) => {
+            commitTitle(plain);
+            onCreateNewItem?.();
           }}
+          onEscape={() => undefined}
           className={twMerge(
-            "m-0 min-h-[20px] w-full p-0 text-sm leading-[20px] text-light-950 outline-none focus-visible:outline-none dark:text-dark-950",
+            "m-0 min-h-[20px] w-full p-0 text-sm leading-[20px] text-light-950 dark:text-dark-950",
             viewOnly && "cursor-default",
           )}
-          placeholder={t`Add details...`}
-          onKeyDown={(e) => {
-            if (viewOnly) return;
-            if (e.key === "Enter") {
-              e.preventDefault();
-              const innerHTML = (e.currentTarget as HTMLElement).innerHTML;
-              commitTitle(innerHTML);
-              onCreateNewItem?.();
-            }
-            if (e.key === "Escape") {
-              e.preventDefault();
-              setTitle(item.title);
-            }
-          }}
         />
       </div>
+
       {!viewOnly && (
         <button
           type="button"
