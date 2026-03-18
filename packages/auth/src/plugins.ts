@@ -165,6 +165,13 @@ export function createPlugins(db: dbClient) {
       : []),
     apiKey({
       enableSessionForAPIKeys: true,
+      customAPIKeyGetter: (ctx) => {
+        const authorization = ctx.headers?.get("authorization");
+        if (authorization?.startsWith("Bearer ")) {
+          return authorization.slice(7);
+        }
+        return ctx.headers?.get("x-api-key") ?? undefined;
+      },
       rateLimit: {
         enabled: true,
         timeWindow: 1000 * 60, // 1 minute

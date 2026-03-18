@@ -137,9 +137,7 @@ const loggingMiddleware = t.middleware(async ({ path, type, next, ctx }) => {
   return result;
 });
 
-export const publicProcedure = t.procedure.use(loggingMiddleware).meta({
-  openapi: { method: "GET", path: "/public" },
-});
+export const publicProcedure = t.procedure.use(loggingMiddleware);
 
 const enforceUserIsAuthed = t.middleware(async ({ ctx, next }) => {
   if (!ctx.user) {
@@ -163,13 +161,7 @@ const enforceUserIsAdmin = t.middleware(async ({ ctx, next }) => {
 
 export const protectedProcedure = t.procedure
   .use(loggingMiddleware)
-  .use(enforceUserIsAuthed)
-  .meta({
-    openapi: {
-      method: "GET",
-      path: "/protected",
-    },
-  });
+  .use(enforceUserIsAuthed);
 
 export const adminProtectedProcedure = t.procedure
   .use(loggingMiddleware)

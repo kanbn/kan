@@ -11,10 +11,10 @@ https://kan.bn/api/v1
 
 ## Authentication
 
-Most endpoints require authentication using your API key. You can create one in the [settings page](https://kan.bn/settings) of your account. Include this key in the `x-api-key` header of each request.
+Most endpoints require authentication using your API key. You can create one in the [settings page](https://kan.bn/settings) of your account. Include this key as a Bearer token in the `Authorization` header of each request.
 
 ```
-'x-api-key': kan_123456789
+'Authorization': 'Bearer kan_123456789'
 ```
 
 ## Response codes

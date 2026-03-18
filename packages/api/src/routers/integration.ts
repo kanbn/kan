@@ -19,6 +19,7 @@ import { encryptToken } from "../utils/encryption";
 export const integrationRouter = createTRPCRouter({
   saveGitHubToken: protectedProcedure
     .input(z.object({ token: z.string() }))
+    .output(z.object({ success: z.boolean() }))
     .mutation(async ({ ctx, input }) => {
       const user = ctx.user;
 
@@ -43,7 +44,9 @@ export const integrationRouter = createTRPCRouter({
       return { success: true };
     }),
 
-  disconnectGitHub: protectedProcedure.mutation(async ({ ctx }) => {
+  disconnectGitHub: protectedProcedure
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx }) => {
     const user = ctx.user;
 
     if (!user)
@@ -56,7 +59,9 @@ export const integrationRouter = createTRPCRouter({
     return { success: true };
   }),
 
-  getGitHubStatus: protectedProcedure.query(async ({ ctx }) => {
+  getGitHubStatus: protectedProcedure
+    .output(z.object({ connected: z.boolean() }))
+    .query(async ({ ctx }) => {
     const user = ctx.user;
 
     if (!user)
