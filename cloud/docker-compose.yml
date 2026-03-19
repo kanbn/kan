@@ -39,6 +39,8 @@ services:
 
       # Logging (optional - debug, info, warn, error; defaults to debug in dev, info in prod)
       - LOG_LEVEL=${LOG_LEVEL}
+      - AXIOM_TOKEN=${AXIOM_TOKEN}
+      - AXIOM_DATASET=${AXIOM_DATASET}
 
       # Stripe
       - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}

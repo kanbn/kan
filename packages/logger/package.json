@@ -19,6 +19,7 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
+    "@axiomhq/pino": "^1.4.0",
     "pino": "^9.14.0",
     "pino-pretty": "^13.1.3"
   },

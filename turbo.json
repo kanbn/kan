@@ -130,7 +130,9 @@
     "NOVU_API_KEY",
     "EMAIL_UNSUBSCRIBE_SECRET",
     "REDIS_URL",
-    "LOG_LEVEL"
+    "LOG_LEVEL",
+    "AXIOM_TOKEN",
+    "AXIOM_DATASET"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",

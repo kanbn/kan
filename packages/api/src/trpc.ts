@@ -1,7 +1,9 @@
+import { randomUUID } from "crypto";
 import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
 import type { NextApiRequest } from "next";
 import type { OpenApiMeta } from "trpc-to-openapi";
 import { initTRPC, TRPCError } from "@trpc/server";
+import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 import { env } from "next-runtime-env";
 import superjson from "superjson";
 import { ZodError } from "zod";
@@ -11,7 +13,7 @@ import { initAuth } from "@kan/auth/server";
 import { createDrizzleClient } from "@kan/db/client";
 import { createLogger } from "@kan/logger";
 
-const log = createLogger("trpc");
+const log = createLogger("api");
 
 export interface User {
   id: string;
@@ -50,6 +52,7 @@ interface CreateContextOptions {
   db: dbClient;
   auth: ReturnType<typeof createAuthWithHeaders>;
   headers: Headers;
+  transport?: "trpc" | "rest";
 }
 
 export const createInnerTRPCContext = (opts: CreateContextOptions) => {
@@ -58,6 +61,8 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
     db: opts.db,
     auth: opts.auth,
     headers: opts.headers,
+    transport: opts.transport ?? "trpc",
+    requestId: randomUUID(),
   };
 };
 
@@ -69,7 +74,13 @@ export const createTRPCContext = async ({ req }: CreateNextContextOptions) => {
 
   const session = await auth.api.getSession();
 
-  return createInnerTRPCContext({ db, user: session?.user, auth, headers });
+  return createInnerTRPCContext({
+    db,
+    user: session?.user,
+    auth,
+    headers,
+    transport: "trpc",
+  });
 };
 
 export const createNextApiContext = async (req: NextApiRequest) => {
@@ -80,7 +91,13 @@ export const createNextApiContext = async (req: NextApiRequest) => {
 
   const session = await auth.api.getSession();
 
-  return createInnerTRPCContext({ db, user: session?.user, auth, headers });
+  return createInnerTRPCContext({
+    db,
+    user: session?.user,
+    auth,
+    headers,
+    transport: "trpc",
+  });
 };
 
 export const createRESTContext = async ({ req }: CreateNextContextOptions) => {
@@ -97,7 +114,13 @@ export const createRESTContext = async ({ req }: CreateNextContextOptions) => {
     throw error;
   }
 
-  return createInnerTRPCContext({ db, user: session?.user, auth, headers });
+  return createInnerTRPCContext({
+    db,
+    user: session?.user,
+    auth,
+    headers,
+    transport: "rest",
+  });
 };
 
 const t = initTRPC
@@ -126,12 +149,33 @@ const loggingMiddleware = t.middleware(async ({ path, type, next, ctx }) => {
   const result = await next();
   const duration = Date.now() - start;
 
-  const meta = { procedure: path, type, duration, userId: (ctx as { user?: { id: string } }).user?.id };
+  const { user, transport, requestId } = ctx as {
+    user?: { id: string; email: string };
+    transport?: string;
+    requestId?: string;
+  };
+  const isCloud = process.env.NEXT_PUBLIC_KAN_ENV === "cloud";
+  const meta = {
+    requestId,
+    procedure: path,
+    type,
+    transport,
+    duration,
+    userId: user?.id,
+    ...(isCloud && { email: user?.email }),
+  };
+
+  const label = transport === "rest" ? "REST" : "tRPC";
 
   if (result.ok) {
-    log.info(meta, "tRPC OK");
+    log.info({ ...meta, status: 200 }, `${label} OK`);
   } else {
-    log.error({ ...meta, err: result.error }, "tRPC error");
+    const status = getHTTPStatusCodeFromError(result.error);
+    const errorCode = result.error.code;
+    log.error(
+      { ...meta, status, errorCode, err: result.error },
+      `${label} error`,
+    );
   }
 
   return result;
