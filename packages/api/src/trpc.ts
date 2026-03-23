@@ -163,9 +163,9 @@ export const createTRPCRouter = t.router;
 
 export const createCallerFactory = t.createCallerFactory;
 
-const loggingMiddleware = t.middleware(async ({ path, type, next, ctx }) => {
+const loggingMiddleware = t.middleware(async ({ path, type, next, ctx, getRawInput }) => {
   const start = Date.now();
-  const result = await next();
+  const [result, input] = await Promise.all([next(), getRawInput().catch(() => undefined)]);
   const duration = Date.now() - start;
 
   const { user, transport, requestId } = ctx as {
@@ -182,6 +182,7 @@ const loggingMiddleware = t.middleware(async ({ path, type, next, ctx }) => {
     duration,
     userId: user?.id,
     ...(isCloud && { email: user?.email }),
+    input,
   };
 
   const label = transport === "rest" ? "REST" : "tRPC";
