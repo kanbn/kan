@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@axiomhq/js": "^1.4.0",
+    "@opentelemetry/api": "^1.9.0",
     "pino": "^9.14.0",
     "pino-pretty": "^13.1.3"
   },

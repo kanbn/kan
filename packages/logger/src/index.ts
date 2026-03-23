@@ -1,4 +1,5 @@
 import { Axiom } from "@axiomhq/js";
+import { trace } from "@opentelemetry/api";
 import pino from "pino";
 
 const isDev = process.env.NODE_ENV !== "production";
@@ -9,7 +10,10 @@ const axiomToken = process.env.AXIOM_TOKEN;
 const axiomDataset = process.env.AXIOM_DATASET;
 const useAxiom = isCloud && !!axiomToken && !!axiomDataset;
 
-function createAxiomStream(token: string, dataset: string): pino.DestinationStream {
+function createAxiomStream(
+  token: string,
+  dataset: string,
+): pino.DestinationStream {
   const client = new Axiom({ token });
   return {
     write(msg: string) {
@@ -35,9 +39,25 @@ export const logger = useAxiom
       ...(isDev && {
         transport: {
           target: "pino-pretty",
-          options: { colorize: true, ignore: "pid,hostname", translateTime: "HH:MM:ss" },
+          options: {
+            colorize: true,
+            ignore: "pid,hostname",
+            translateTime: "HH:MM:ss",
+          },
         },
       }),
     });
 
-export const createLogger = (module: string) => logger.child({ module });
+function getTraceContext(): { traceId?: string; spanId?: string } {
+  try {
+    const span = trace.getActiveSpan();
+    if (!span) return {};
+    const ctx = span.spanContext();
+    return { traceId: ctx.traceId, spanId: ctx.spanId };
+  } catch {
+    return {};
+  }
+}
+
+export const createLogger = (module: string) =>
+  logger.child({ module, ...getTraceContext() });

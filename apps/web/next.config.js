@@ -66,10 +66,15 @@ const config = {
       },
     },
   },
-  serverExternalPackages: ["pino"],
+  serverExternalPackages: [
+    "pino",
+    "@opentelemetry/sdk-node",
+    "@opentelemetry/auto-instrumentations-node",
+    "@opentelemetry/exporter-trace-otlp-http",
+  ],
 
   experimental: {
-    // instrumentationHook: true,
+    instrumentationHook: true,
     swcPlugins: [["@lingui/swc-plugin", {}]],
   },
 
