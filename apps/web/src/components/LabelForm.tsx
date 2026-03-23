@@ -39,7 +39,7 @@ export function LabelForm({
       labelPublicId: entityId,
     },
     {
-      enabled: isEdit && entityId.length >= 12,
+      enabled: !!isEdit && entityId.length >= 12,
     },
   );
 
