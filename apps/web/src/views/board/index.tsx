@@ -45,6 +45,7 @@ import { CardContextMembersModal } from "./components/CardContextMembersModal";
 import { CardContextMenu } from "./components/CardContextMenu";
 import { CardContextMoveListModal } from "./components/CardContextMoveListModal";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
+import { MoveBoardForm } from "./components/MoveBoardForm";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
 import List from "./components/List";
@@ -457,6 +458,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             boardSlug={boardData?.slug ?? ""}
             queryParams={queryParams}
           />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "MOVE_BOARD"}
+        >
+          <MoveBoardForm boardPublicId={boardId ?? ""} />
         </Modal>
 
         <Modal
