@@ -123,7 +123,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        448
+        564
       ]
     ],
     "translation": "{0} niet gevonden"
@@ -400,6 +400,18 @@
     ],
     "translation": "Activiteitenlogboeken"
   },
+  "UGCIzB": {
+    "translation": "",
+    "message": "Add / edit label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        50
+      ]
+    ]
+  },
   "B3xxao": {
     "message": "Add a card",
     "placeholders": {},
@@ -483,11 +495,11 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        113
+        114
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        118
+        119
       ]
     ],
     "translation": "Label toevoegen"
@@ -499,7 +511,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        134
+        135
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -1409,7 +1421,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        421
+        537
       ],
       [
         "src/views/card/index.tsx",
@@ -1451,7 +1463,6 @@
     "translation": "Board gearchiveerd"
   },
   "wE3hGS": {
-    "translation": "",
     "message": "Board moved",
     "placeholders": {},
     "comments": [],
@@ -1460,7 +1471,8 @@
         "src/views/board/components/MoveBoardForm.tsx",
         33
       ]
-    ]
+    ],
+    "translation": ""
   },
   "wewm3j": {
     "message": "Board name cannot exceed 100 characters",
@@ -2064,6 +2076,10 @@
         176
       ],
       [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        267
+      ],
+      [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
         44
       ],
@@ -2134,8 +2150,19 @@
     ],
     "translation": "Kaart"
   },
-  "AgE2vR": {
+  "sU2uWc": {
     "translation": "",
+    "message": "Card duplicated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        67
+      ]
+    ]
+  },
+  "AgE2vR": {
     "message": "Card member assignments will be cleared when moving to a different workspace.",
     "placeholders": {},
     "comments": [],
@@ -2144,7 +2171,8 @@
         "src/views/board/components/MoveBoardForm.tsx",
         92
       ]
-    ]
+    ],
+    "translation": ""
   },
   "fEY2vP": {
     "message": "Card not found",
@@ -2179,6 +2207,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/index.tsx",
+        308
+      ],
       [
         "src/views/card/components/Dropdown.tsx",
         44
@@ -2810,6 +2842,54 @@
     ],
     "translation": "Kopieer kaartlink"
   },
+  "0utuU6": {
+    "translation": "",
+    "message": "Copy checklists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        257
+      ]
+    ]
+  },
+  "fDQ7hA": {
+    "translation": "",
+    "message": "Copy labels",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        221
+      ]
+    ]
+  },
+  "1bJKhj": {
+    "translation": "",
+    "message": "Copy link to card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        62
+      ]
+    ]
+  },
+  "uvH2xS": {
+    "translation": "",
+    "message": "Copy members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        239
+      ]
+    ]
+  },
   "9PaIxv": {
     "message": "Core features",
     "placeholders": {},
@@ -2973,7 +3053,7 @@
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        100
+        101
       ]
     ],
     "translation": "Maak nieuw label"
@@ -2985,11 +3065,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        77
+        92
       ],
       [
         "src/views/board/index.tsx",
-        562
+        678
       ]
     ],
     "translation": "Maak nieuwe lijst"
@@ -3368,6 +3448,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/CardContextMenu.tsx",
+        74
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         76
       ]
@@ -3511,7 +3595,6 @@
     "translation": "Ontwerp"
   },
   "Uf+1DF": {
-    "translation": "",
     "message": "Destination workspace",
     "placeholders": {},
     "comments": [],
@@ -3520,7 +3603,8 @@
         "src/views/board/components/MoveBoardForm.tsx",
         76
       ]
-    ]
+    ],
+    "translation": ""
   },
   "Odv3J6": {
     "message": "Disconnect GitHub",
@@ -3704,6 +3788,18 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/CardContextDueDateModal.tsx",
+        36
+      ],
+      [
+        "src/views/board/components/CardContextLabelsModal.tsx",
+        48
+      ],
+      [
+        "src/views/board/components/CardContextMembersModal.tsx",
+        68
+      ],
+      [
         "src/views/boards/components/TemplateBoards.tsx",
         17
       ],
@@ -3809,6 +3905,46 @@
       ]
     ],
     "translation": "Verloopt morgen"
+  },
+  "euc6Ns": {
+    "translation": "",
+    "message": "Duplicate",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        279
+      ]
+    ]
+  },
+  "BTDPLo": {
+    "translation": "",
+    "message": "Duplicate card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        111
+      ],
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        68
+      ]
+    ]
+  },
+  "06EQqT": {
+    "translation": "",
+    "message": "Duplicating…",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        279
+      ]
+    ]
   },
   "ePK91l": {
     "message": "Edit",
@@ -3993,6 +4129,18 @@
       ]
     ],
     "translation": "E-mailzichtbaarheid"
+  },
+  "bFREhu": {
+    "translation": "",
+    "message": "End of list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        200
+      ]
+    ]
   },
   "0+ewPp": {
     "message": "Enhancement",
@@ -4921,7 +5069,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        547
+        663
       ]
     ],
     "translation": "Ga aan de slag door een nieuwe lijst te maken"
@@ -5621,7 +5769,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        114
+        115
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -5739,6 +5887,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/CardContextLabelsModal.tsx",
+        31
+      ],
       [
         "src/views/board/components/Filters.tsx",
         155
@@ -5928,6 +6080,10 @@
         80
       ],
       [
+        "src/views/board/index.tsx",
+        306
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         42
       ],
@@ -5947,6 +6103,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        117
+      ],
       [
         "src/views/card/index.tsx",
         124
@@ -6097,6 +6257,22 @@
       ]
     ],
     "translation": "Sjabloon maken"
+  },
+  "hB02vO": {
+    "translation": "",
+    "message": "Manage members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMembersModal.tsx",
+        51
+      ],
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        38
+      ]
+    ]
   },
   "IDvohQ": {
     "message": "marked a checklist item as incomplete",
@@ -6271,7 +6447,6 @@
     "translation": "maandelijkse facturering"
   },
   "sZ/WDz": {
-    "translation": "",
     "message": "Move board",
     "placeholders": {},
     "comments": [],
@@ -6280,10 +6455,10 @@
         "src/views/board/components/MoveBoardForm.tsx",
         107
       ]
-    ]
+    ],
+    "translation": ""
   },
   "VvCMyU": {
-    "translation": "",
     "message": "Move board to another workspace",
     "placeholders": {},
     "comments": [],
@@ -6292,10 +6467,34 @@
         "src/views/board/components/MoveBoardForm.tsx",
         64
       ]
+    ],
+    "translation": ""
+  },
+  "51UCsN": {
+    "translation": "",
+    "message": "Move to another list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        44
+      ]
+    ]
+  },
+  "J4+OTA": {
+    "translation": "",
+    "message": "Move to list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMoveListModal.tsx",
+        70
+      ]
     ]
   },
   "S3wq2O": {
-    "translation": "",
     "message": "Move to workspace",
     "placeholders": {},
     "comments": [],
@@ -6304,7 +6503,8 @@
         "src/views/board/components/BoardDropdown.tsx",
         123
       ]
-    ]
+    ],
+    "translation": ""
   },
   "BOqTi5": {
     "message": "moved the card from <0>{0}</0> to<1>{1}</1>",
@@ -6504,7 +6704,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        511
+        627
       ]
     ],
     "translation": "Nieuwe lijst"
@@ -6712,7 +6912,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        543
+        659
       ]
     ],
     "translation": "Geen lijsten"
@@ -6724,7 +6924,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        548
+        664
       ]
     ],
     "translation": "Er zijn nog geen lijsten aangemaakt"
@@ -7388,11 +7588,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        195
+        218
       ],
       [
         "src/views/board/index.tsx",
-        251
+        274
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -7563,6 +7763,18 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        76
+      ],
+      [
+        "src/views/board/components/CardContextMoveListModal.tsx",
+        42
+      ],
+      [
+        "src/views/board/index.tsx",
+        315
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         51
       ],
@@ -7576,6 +7788,18 @@
       ]
     ],
     "translation": "Probeer het opnieuw."
+  },
+  "nYNMZZ": {
+    "translation": "",
+    "message": "Position in list (0 = first, leave empty for end)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        193
+      ]
+    ]
   },
   "aHCEmh": {
     "message": "Pricing",
@@ -8296,8 +8520,19 @@
     ],
     "translation": "Bekijk wat onze gebruikers over Kan zeggen"
   },
-  "NM2hyD": {
+  "zYRVNp": {
     "translation": "",
+    "message": "Select a list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        131
+      ]
+    ]
+  },
+  "NM2hyD": {
     "message": "Select a workspace",
     "placeholders": {},
     "comments": [],
@@ -8306,7 +8541,8 @@
         "src/views/board/components/MoveBoardForm.tsx",
         84
       ]
-    ]
+    ],
+    "translation": ""
   },
   "wgNoIs": {
     "message": "Select all",
@@ -8425,6 +8661,14 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/CardContextDueDateModal.tsx",
+        20
+      ],
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        56
+      ],
       [
         "src/views/card/components/DueDateSelector.tsx",
         121
@@ -8919,11 +9163,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        421
+        537
       ],
       [
         "src/views/board/index.tsx",
-        457
+        573
       ]
     ],
     "translation": "Sjabloon"
@@ -9069,7 +9313,6 @@
     "translation": "Het board is gearchiveerd."
   },
   "ZWk38w": {
-    "translation": "",
     "message": "The board has been moved to {0}.",
     "placeholders": {
       "0": [
@@ -9082,7 +9325,8 @@
         "src/views/board/components/MoveBoardForm.tsx",
         34
       ]
-    ]
+    ],
+    "translation": ""
   },
   "C6gv54": {
     "message": "The board has been unarchived.",
@@ -9095,6 +9339,18 @@
       ]
     ],
     "translation": "Het board is gedearchiveerd."
+  },
+  "nKBUeF": {
+    "translation": "",
+    "message": "The card has been duplicated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        69
+      ]
+    ]
   },
   "jlB2RY": {
     "message": "The current password you entered is incorrect.",
@@ -9384,6 +9640,18 @@
     ],
     "translation": "Titel"
   },
+  "wK4OTM": {
+    "translation": "",
+    "message": "Title (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        180
+      ]
+    ]
+  },
   "Se/UIp": {
     "message": "To Do",
     "placeholders": {},
@@ -9554,6 +9822,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/index.tsx",
+        313
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         49
       ],
@@ -9692,8 +9964,19 @@
     ],
     "translation": "Kan opmerking niet verwijderen"
   },
-  "d196/6": {
+  "Oo4E6p": {
     "translation": "",
+    "message": "Unable to duplicate card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        75
+      ]
+    ]
+  },
+  "d196/6": {
     "message": "Unable to move board",
     "placeholders": {},
     "comments": [],
@@ -9701,6 +9984,19 @@
       [
         "src/views/board/components/MoveBoardForm.tsx",
         45
+      ]
+    ],
+    "translation": ""
+  },
+  "K7k9u3": {
+    "translation": "",
+    "message": "Unable to move card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMoveListModal.tsx",
+        41
       ]
     ]
   },
@@ -9795,7 +10091,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        250
+        273
       ],
       [
         "src/views/card/index.tsx",
@@ -9871,7 +10167,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        194
+        217
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -10755,7 +11051,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        421
+        537
       ],
       [
         "src/views/boards/index.tsx",
@@ -11085,7 +11381,6 @@
     "translation": "Je kunt zelf hosten door de instructies in onze <0>repo</0> te volgen."
   },
   "tUL16u": {
-    "translation": "",
     "message": "You don't have any other workspaces to move this board to.",
     "placeholders": {},
     "comments": [],
@@ -11094,7 +11389,8 @@
         "src/views/board/components/MoveBoardForm.tsx",
         68
       ]
-    ]
+    ],
+    "translation": ""
   },
   "h2FKMV": {
     "message": "You don't have permission",
@@ -11115,11 +11411,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        495
+        611
       ],
       [
         "src/views/board/index.tsx",
-        553
+        669
       ],
       [
         "src/views/boards/components/BoardsList.tsx",

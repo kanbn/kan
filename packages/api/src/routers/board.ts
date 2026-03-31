@@ -669,11 +669,19 @@ export const boardRouter = createTRPCRouter({
           code: "UNAUTHORIZED",
         });
 
-      // Get source board
-      const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
-        ctx.db,
-        input.boardPublicId,
-      );
+      // Get source board (single query for all needed fields)
+      const board = await ctx.db.query.boards.findFirst({
+        columns: {
+          id: true,
+          name: true,
+          slug: true,
+          type: true,
+          isArchived: true,
+          workspaceId: true,
+          createdBy: true,
+        },
+        where: (boards, { eq }) => eq(boards.publicId, input.boardPublicId),
+      });
 
       if (!board)
         throw new TRPCError({
@@ -681,19 +689,13 @@ export const boardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      // Check board type and archived status
-      const boardInfo = await boardRepo.getIdByPublicId(
-        ctx.db,
-        input.boardPublicId,
-      );
-
-      if (boardInfo?.type === "template")
+      if (board.type === "template")
         throw new TRPCError({
           message: `Templates cannot be moved between workspaces`,
           code: "BAD_REQUEST",
         });
 
-      if (boardInfo?.isArchived)
+      if (board.isArchived)
         throw new TRPCError({
           message: `Archived boards cannot be moved. Unarchive the board first.`,
           code: "BAD_REQUEST",
@@ -734,13 +736,7 @@ export const boardRouter = createTRPCRouter({
         "board:create",
       );
 
-      // Get board slug and check availability in target workspace
-      const boardDetails = await ctx.db.query.boards.findFirst({
-        columns: { slug: true },
-        where: (boards, { eq }) => eq(boards.publicId, input.boardPublicId),
-      });
-
-      let slug = boardDetails?.slug ?? generateSlug(input.boardPublicId);
+      let slug = board.slug ?? generateSlug(board.name);
 
       const isSlugAvailable = await boardRepo.isBoardSlugAvailable(
         ctx.db,
