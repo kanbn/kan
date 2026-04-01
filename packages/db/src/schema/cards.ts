@@ -259,6 +259,7 @@ export const cardToWorkspaceMembersRelations = relations(
 export const comments = pgTable("card_comments", {
   id: bigserial("id", { mode: "number" }).primaryKey(),
   publicId: varchar("publicId", { length: 12 }).notNull().unique(),
+  parentCommentPublicId: varchar("parentCommentPublicId", { length: 12 }),
   comment: text("comment").notNull(),
   cardId: bigint("cardId", { mode: "number" })
     .notNull()
@@ -279,6 +280,11 @@ export const commentsRelations = relations(comments, ({ one }) => ({
     fields: [comments.cardId],
     references: [cards.id],
     relationName: "commentsCard",
+  }),
+  parentComment: one(comments, {
+    fields: [comments.parentCommentPublicId],
+    references: [comments.publicId],
+    relationName: "commentsParentComment",
   }),
   createdBy: one(users, {
     fields: [comments.createdBy],

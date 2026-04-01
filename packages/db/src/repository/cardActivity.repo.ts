@@ -112,14 +112,31 @@ export const getPaginatedActivities = async (
   const limit = options?.limit ?? 20;
   const cursor = options?.cursor;
 
-  const validComments = await db
-    .select({ id: comments.id })
+  const topLevelComments = await db
+    .select({ id: comments.id, publicId: comments.publicId })
     .from(comments)
-    .where(and(eq(comments.cardId, cardId), isNull(comments.deletedAt)));
+    .where(
+      and(
+        eq(comments.cardId, cardId),
+        isNull(comments.deletedAt),
+        isNull(comments.parentCommentPublicId),
+      ),
+    );
 
-  const validCommentIds = validComments.map((comment) => comment.id);
+  const topLevelCommentIds = topLevelComments.map((comment) => comment.id);
 
-  const activities = await db.query.cardActivities.findMany({
+  const baseWhere = and(
+    eq(cardActivities.cardId, cardId),
+    cursor ? gt(cardActivities.createdAt, cursor) : undefined,
+    topLevelCommentIds.length > 0
+      ? or(
+          isNull(cardActivities.commentId),
+          inArray(cardActivities.commentId, topLevelCommentIds),
+        )
+      : isNull(cardActivities.commentId),
+  );
+
+  const baseActivities = await db.query.cardActivities.findMany({
     columns: {
       publicId: true,
       type: true,
@@ -133,14 +150,7 @@ export const getPaginatedActivities = async (
       fromDueDate: true,
       toDueDate: true,
     },
-    where: and(
-      eq(cardActivities.cardId, cardId),
-      cursor ? gt(cardActivities.createdAt, cursor) : undefined,
-      or(
-        isNull(cardActivities.commentId),
-        inArray(cardActivities.commentId, validCommentIds),
-      ),
-    ),
+    where: baseWhere,
     with: {
       fromList: {
         columns: {
@@ -188,6 +198,7 @@ export const getPaginatedActivities = async (
       comment: {
         columns: {
           publicId: true,
+          parentCommentPublicId: true,
           comment: true,
           createdBy: true,
           updatedAt: true,
@@ -206,12 +217,150 @@ export const getPaginatedActivities = async (
     limit: limit + 1, // fetch one extra to check if there are more
   });
 
-  const hasMore = activities.length > limit;
-  const items = activities.slice(0, limit);
-  const nextCursor = hasMore ? items[items.length - 1]?.createdAt : undefined;
+  const hasMore = baseActivities.length > limit;
+  const baseItems = baseActivities.slice(0, limit);
+  const nextCursor = hasMore
+    ? baseItems[baseItems.length - 1]?.createdAt
+    : undefined;
+
+  const topLevelCommentPublicIdsInPage = baseItems
+    .filter((activity) => activity.type === "card.updated.comment.added")
+    .map((activity) => activity.comment?.publicId)
+    .filter((publicId): publicId is string => !!publicId);
+
+  const replyCommentIds: number[] = [];
+  if (topLevelCommentPublicIdsInPage.length > 0) {
+    let frontier = topLevelCommentPublicIdsInPage;
+    const seen = new Set<string>(frontier);
+    let depth = 0;
+
+    while (frontier.length > 0 && depth < 10) {
+      const children = await db
+        .select({ id: comments.id, publicId: comments.publicId })
+        .from(comments)
+        .where(
+          and(
+            eq(comments.cardId, cardId),
+            isNull(comments.deletedAt),
+            inArray(comments.parentCommentPublicId, frontier),
+          ),
+        );
+
+      const nextFrontier: string[] = [];
+      for (const child of children) {
+        replyCommentIds.push(child.id);
+        if (!seen.has(child.publicId)) {
+          seen.add(child.publicId);
+          nextFrontier.push(child.publicId);
+        }
+      }
+
+      frontier = nextFrontier;
+      depth += 1;
+    }
+  }
+
+  const replyActivities =
+    replyCommentIds.length > 0
+      ? await db.query.cardActivities.findMany({
+          columns: {
+            publicId: true,
+            type: true,
+            createdAt: true,
+            fromIndex: true,
+            toIndex: true,
+            fromTitle: true,
+            toTitle: true,
+            fromDescription: true,
+            toDescription: true,
+            fromDueDate: true,
+            toDueDate: true,
+          },
+          where: and(
+            eq(cardActivities.cardId, cardId),
+            eq(cardActivities.type, "card.updated.comment.added"),
+            inArray(cardActivities.commentId, replyCommentIds),
+          ),
+          with: {
+            fromList: {
+              columns: {
+                publicId: true,
+                name: true,
+                index: true,
+              },
+            },
+            toList: {
+              columns: {
+                publicId: true,
+                name: true,
+                index: true,
+              },
+            },
+            label: {
+              columns: {
+                publicId: true,
+                name: true,
+              },
+            },
+            member: {
+              columns: {
+                publicId: true,
+              },
+              with: {
+                user: {
+                  columns: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    image: true,
+                  },
+                },
+              },
+            },
+            user: {
+              columns: {
+                id: true,
+                name: true,
+                email: true,
+                image: true,
+              },
+            },
+            comment: {
+              columns: {
+                publicId: true,
+                parentCommentPublicId: true,
+                comment: true,
+                createdBy: true,
+                updatedAt: true,
+                deletedAt: true,
+              },
+            },
+            attachment: {
+              columns: {
+                publicId: true,
+                filename: true,
+                originalFilename: true,
+              },
+            },
+          },
+          orderBy: asc(cardActivities.createdAt),
+        })
+      : [];
+
+  const activitiesByPublicId = new Map<string, (typeof baseItems)[number]>();
+  for (const activity of baseItems) {
+    activitiesByPublicId.set(activity.publicId, activity);
+  }
+  for (const activity of replyActivities) {
+    activitiesByPublicId.set(activity.publicId, activity);
+  }
+
+  const mergedItems = Array.from(activitiesByPublicId.values()).sort((a, b) => {
+    return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+  });
 
   return {
-    activities: items,
+    activities: mergedItems,
     hasMore,
     nextCursor,
   };
