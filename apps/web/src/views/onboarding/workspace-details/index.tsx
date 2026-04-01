@@ -277,31 +277,26 @@ export default function WorkspaceNameView() {
               </p>
 
               {/* Boards area */}
-              <div className="mt-3 w-full flex-1 rounded-lg bg-light-200 p-2 dark:bg-dark-300">
-                <div className="space-y-1.5">
-                  <AnimatePresence>
-                    {[...BOARDS.slice(0, visibleCount)].reverse()
-                      .map((board) => (
-                        <motion.div
-                          key={board}
-                          layout
-                          initial={{ opacity: 0, y: -12 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            layout: {
-                              type: "spring",
-                              stiffness: 300,
-                              damping: 30,
-                            },
-                            opacity: { duration: 0.2 },
-                            y: { duration: 0.25, ease: "easeOut" },
-                          }}
-                          className="flex w-full items-center justify-center rounded border border-dashed border-light-400 bg-light-50 px-3 py-10 text-[10px] font-medium text-light-900 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-900"
-                        >
-                          {board}
-                        </motion.div>
-                      ))}
-                  </AnimatePresence>
+              <div className="mt-3 flex w-full flex-1 flex-col rounded-lg bg-light-200 p-2 dark:bg-dark-300">
+                <div className="flex flex-1 flex-col gap-1.5">
+                  {BOARDS.map((board, i) => (
+                    <motion.div
+                      key={board}
+                      initial={{ opacity: 0, y: -12 }}
+                      animate={
+                        i < visibleCount
+                          ? { opacity: 1, y: 0 }
+                          : { opacity: 0, y: -12 }
+                      }
+                      transition={{
+                        opacity: { duration: 0.2 },
+                        y: { duration: 0.25, ease: "easeOut" },
+                      }}
+                      className="flex flex-1 w-full items-center justify-center rounded border border-dashed border-light-400 bg-light-50 px-3 text-[10px] font-medium text-light-900 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-900"
+                    >
+                      {board}
+                    </motion.div>
+                  ))}
                 </div>
               </div>
 
