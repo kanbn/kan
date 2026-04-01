@@ -267,7 +267,7 @@ export default function WorkspaceNameView() {
             </div>
 
             {/* Browser content */}
-            <div className="flex flex-1 flex-col items-center overflow-hidden px-3 py-4">
+            <div className="flex flex-1 flex-col items-center overflow-hidden px-5 py-5">
               {/* Workspace name + description */}
               <p className="text-center text-xs font-bold text-light-1000 dark:text-dark-1000">
                 {name || t`Your workspace`}
