@@ -123,7 +123,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        440
+        556
       ]
     ],
     "translation": "{0} not found"
@@ -400,6 +400,18 @@
     ],
     "translation": "Activity logs"
   },
+  "UGCIzB": {
+    "translation": "Add / edit label",
+    "message": "Add / edit label",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        50
+      ]
+    ]
+  },
   "B3xxao": {
     "message": "Add a card",
     "placeholders": {},
@@ -483,11 +495,11 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        113
+        114
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        118
+        119
       ]
     ],
     "translation": "Add label"
@@ -499,7 +511,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        134
+        135
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -1409,7 +1421,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        413
+        529
       ],
       [
         "src/views/card/index.tsx",
@@ -2052,6 +2064,10 @@
         176
       ],
       [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        267
+      ],
+      [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
         44
       ],
@@ -2118,6 +2134,18 @@
     ],
     "translation": "Card"
   },
+  "sU2uWc": {
+    "translation": "Card duplicated",
+    "message": "Card duplicated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        67
+      ]
+    ]
+  },
   "fEY2vP": {
     "message": "Card not found",
     "placeholders": {},
@@ -2151,6 +2179,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/index.tsx",
+        307
+      ],
       [
         "src/views/card/components/Dropdown.tsx",
         44
@@ -2782,6 +2814,54 @@
     ],
     "translation": "Copy card link"
   },
+  "0utuU6": {
+    "translation": "Copy checklists",
+    "message": "Copy checklists",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        257
+      ]
+    ]
+  },
+  "fDQ7hA": {
+    "translation": "Copy labels",
+    "message": "Copy labels",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        221
+      ]
+    ]
+  },
+  "1bJKhj": {
+    "translation": "Copy link to card",
+    "message": "Copy link to card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        62
+      ]
+    ]
+  },
+  "uvH2xS": {
+    "translation": "Copy members",
+    "message": "Copy members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        239
+      ]
+    ]
+  },
   "9PaIxv": {
     "message": "Core features",
     "placeholders": {},
@@ -2945,7 +3025,7 @@
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        100
+        101
       ]
     ],
     "translation": "Create new label"
@@ -2957,11 +3037,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        76
+        91
       ],
       [
         "src/views/board/index.tsx",
-        554
+        670
       ]
     ],
     "translation": "Create new list"
@@ -3340,6 +3420,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/CardContextMenu.tsx",
+        74
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         76
       ]
@@ -3664,6 +3748,18 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/CardContextDueDateModal.tsx",
+        36
+      ],
+      [
+        "src/views/board/components/CardContextLabelsModal.tsx",
+        48
+      ],
+      [
+        "src/views/board/components/CardContextMembersModal.tsx",
+        68
+      ],
+      [
         "src/views/boards/components/TemplateBoards.tsx",
         17
       ],
@@ -3769,6 +3865,46 @@
       ]
     ],
     "translation": "Due tomorrow"
+  },
+  "euc6Ns": {
+    "translation": "Duplicate",
+    "message": "Duplicate",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        279
+      ]
+    ]
+  },
+  "BTDPLo": {
+    "translation": "Duplicate card",
+    "message": "Duplicate card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        111
+      ],
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        68
+      ]
+    ]
+  },
+  "06EQqT": {
+    "translation": "Duplicating…",
+    "message": "Duplicating…",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        279
+      ]
+    ]
   },
   "ePK91l": {
     "message": "Edit",
@@ -3953,6 +4089,18 @@
       ]
     ],
     "translation": "Email visibility"
+  },
+  "bFREhu": {
+    "translation": "End of list",
+    "message": "End of list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        200
+      ]
+    ]
   },
   "0+ewPp": {
     "message": "Enhancement",
@@ -4881,7 +5029,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        539
+        655
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -5581,7 +5729,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        114
+        115
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -5699,6 +5847,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/CardContextLabelsModal.tsx",
+        31
+      ],
       [
         "src/views/board/components/Filters.tsx",
         155
@@ -5888,6 +6040,10 @@
         80
       ],
       [
+        "src/views/board/index.tsx",
+        305
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         42
       ],
@@ -5907,6 +6063,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        117
+      ],
       [
         "src/views/card/index.tsx",
         124
@@ -6057,6 +6217,22 @@
       ]
     ],
     "translation": "Make template"
+  },
+  "hB02vO": {
+    "translation": "Manage members",
+    "message": "Manage members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMembersModal.tsx",
+        51
+      ],
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        38
+      ]
+    ]
   },
   "IDvohQ": {
     "message": "marked a checklist item as incomplete",
@@ -6229,6 +6405,30 @@
       ]
     ],
     "translation": "monthly billing"
+  },
+  "51UCsN": {
+    "translation": "Move to another list",
+    "message": "Move to another list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        44
+      ]
+    ]
+  },
+  "J4+OTA": {
+    "translation": "Move to list",
+    "message": "Move to list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMoveListModal.tsx",
+        70
+      ]
+    ]
   },
   "BOqTi5": {
     "message": "moved the card from <0>{0}</0> to<1>{1}</1>",
@@ -6428,7 +6628,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        503
+        619
       ]
     ],
     "translation": "New list"
@@ -6636,7 +6836,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        535
+        651
       ]
     ],
     "translation": "No lists"
@@ -6648,7 +6848,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        540
+        656
       ]
     ],
     "translation": "No lists have been created yet"
@@ -7312,11 +7512,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        194
+        217
       ],
       [
         "src/views/board/index.tsx",
-        250
+        273
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -7487,6 +7687,18 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        76
+      ],
+      [
+        "src/views/board/components/CardContextMoveListModal.tsx",
+        42
+      ],
+      [
+        "src/views/board/index.tsx",
+        314
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         51
       ],
@@ -7500,6 +7712,18 @@
       ]
     ],
     "translation": "Please try again."
+  },
+  "nYNMZZ": {
+    "translation": "Position in list (0 = first, leave empty for end)",
+    "message": "Position in list (0 = first, leave empty for end)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        193
+      ]
+    ]
   },
   "aHCEmh": {
     "message": "Pricing",
@@ -8220,6 +8444,18 @@
     ],
     "translation": "See what our users are saying about Kan"
   },
+  "zYRVNp": {
+    "translation": "Select a list",
+    "message": "Select a list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        131
+      ]
+    ]
+  },
   "wgNoIs": {
     "message": "Select all",
     "placeholders": {},
@@ -8337,6 +8573,14 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/CardContextDueDateModal.tsx",
+        20
+      ],
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        56
+      ],
       [
         "src/views/card/components/DueDateSelector.tsx",
         121
@@ -8831,11 +9075,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        413
+        529
       ],
       [
         "src/views/board/index.tsx",
-        449
+        565
       ]
     ],
     "translation": "Template"
@@ -8991,6 +9235,18 @@
       ]
     ],
     "translation": "The board has been unarchived."
+  },
+  "nKBUeF": {
+    "translation": "The card has been duplicated.",
+    "message": "The card has been duplicated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        69
+      ]
+    ]
   },
   "jlB2RY": {
     "message": "The current password you entered is incorrect.",
@@ -9280,6 +9536,18 @@
     ],
     "translation": "Title"
   },
+  "wK4OTM": {
+    "translation": "Title (optional)",
+    "message": "Title (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        180
+      ]
+    ]
+  },
   "Se/UIp": {
     "message": "To Do",
     "placeholders": {},
@@ -9450,6 +9718,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/index.tsx",
+        312
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         49
       ],
@@ -9588,6 +9860,30 @@
     ],
     "translation": "Unable to delete comment"
   },
+  "Oo4E6p": {
+    "translation": "Unable to duplicate card",
+    "message": "Unable to duplicate card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDuplicateModal.tsx",
+        75
+      ]
+    ]
+  },
+  "K7k9u3": {
+    "translation": "Unable to move card",
+    "message": "Unable to move card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMoveListModal.tsx",
+        41
+      ]
+    ]
+  },
   "8yFGGF": {
     "message": "Unable to remove member",
     "placeholders": {},
@@ -9679,7 +9975,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        249
+        272
       ],
       [
         "src/views/card/index.tsx",
@@ -9755,7 +10051,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        193
+        216
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -10639,7 +10935,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        413
+        529
       ],
       [
         "src/views/boards/index.tsx",
@@ -10987,11 +11283,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        487
+        603
       ],
       [
         "src/views/board/index.tsx",
-        545
+        661
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
