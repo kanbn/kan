@@ -1,4 +1,5 @@
 import { useRouter } from "next/navigation";
+import { t } from "@lingui/core/macro";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
@@ -37,47 +38,6 @@ const ORBIT_USERS: Record<
   ],
 };
 
-const FREQUENCIES: { value: Billing; label: string }[] = [
-  { value: "monthly", label: "Monthly" },
-  { value: "annual", label: "Annual" },
-];
-
-const PLANS: {
-  id: PlanId;
-  name: string;
-  monthly: string;
-  annual: string;
-  description: string;
-  trial?: boolean;
-}[] = [
-  {
-    id: "solo",
-    name: "Solo",
-    monthly: "Free",
-    annual: "Free",
-    description:
-      "Good for individuals starting out who just need the essentials.",
-  },
-  {
-    id: "team",
-    name: "Team",
-    monthly: "$12/user/mo",
-    annual: "$10/user/mo",
-    description:
-      "Best for small teams who want to collaborate and move faster together.",
-    trial: true,
-  },
-  {
-    id: "pro",
-    name: "Pro",
-    monthly: "$29/mo",
-    annual: "$23/mo",
-    description:
-      "Unlimited members and a custom workspace username for teams ready to scale.",
-    trial: true,
-  },
-];
-
 export default function SelectPlanView() {
   const router = useRouter();
   const [selected, setSelected] = useState<PlanId>("solo");
@@ -92,7 +52,46 @@ export default function SelectPlanView() {
 
   const hasExistingWorkspace = !!workspaces?.length;
 
-  const handleContinue = () => router.push("/boards");
+  const FREQUENCIES: { value: Billing; label: string }[] = [
+    { value: "monthly", label: t`Monthly` },
+    { value: "annual", label: t`Annual` },
+  ];
+
+  const PLANS: {
+    id: PlanId;
+    name: string;
+    monthly: string;
+    annual: string;
+    description: string;
+    trial?: boolean;
+  }[] = [
+    {
+      id: "solo",
+      name: t`Solo`,
+      monthly: t`Free`,
+      annual: t`Free`,
+      description: t`Good for individuals starting out who just need the essentials.`,
+    },
+    {
+      id: "team",
+      name: t`Team`,
+      monthly: "$12/user/mo",
+      annual: "$10/user/mo",
+      description: t`Best for small teams who want to collaborate and move faster together.`,
+      trial: true,
+    },
+    {
+      id: "pro",
+      name: t`Pro`,
+      monthly: "$29/mo",
+      annual: "$23/mo",
+      description: t`Unlimited members and a custom workspace username for teams ready to scale.`,
+      trial: true,
+    },
+  ];
+
+  const handleContinue = () =>
+    router.push(`/onboarding/workspace?plan=${selected}&billing=${billing}`);
 
   const handleCancel = () => {
     if (window.history.length > 1) {
@@ -105,16 +104,15 @@ export default function SelectPlanView() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-light-100 dark:bg-dark-50">
       <div className="w-full max-w-3xl overflow-hidden rounded-xl border border-light-400 bg-light-200 shadow-xl dark:border-dark-400 dark:bg-dark-100">
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col md:h-[520px] md:flex-row">
           {/* Left panel */}
           <div className="flex flex-col p-8 md:w-[55%]">
             <div className="flex-1">
               <h2 className="text-xl font-bold text-light-1000 dark:text-dark-1000">
-                Choose a plan
+                {t`Choose a plan`}
               </h2>
               <p className="mt-1 text-sm text-light-800 dark:text-dark-800">
-                Pick a plan to get started. All paid plans include a 14-day free
-                trial.
+                {t`Pick a plan to get started. All paid plans include a 14-day free trial.`}
               </p>
 
               {/* Billing toggle */}
@@ -198,10 +196,10 @@ export default function SelectPlanView() {
             <div className="mt-8 flex justify-end gap-2">
               {hasExistingWorkspace && (
                 <Button variant="ghost" onClick={handleCancel}>
-                  Cancel
+                  {t`Cancel`}
                 </Button>
               )}
-              <Button onClick={handleContinue}>Continue</Button>
+              <Button onClick={handleContinue}>{t`Continue`}</Button>
             </div>
           </div>
 
@@ -218,7 +216,7 @@ export default function SelectPlanView() {
                 {userImage ? (
                   <img
                     src={userImage}
-                    alt="Your avatar"
+                    alt={t`Your avatar`}
                     className="h-full w-full object-cover"
                   />
                 ) : (
