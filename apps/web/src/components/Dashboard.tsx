@@ -1,4 +1,6 @@
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
+import { env } from "next-runtime-env";
 import { useEffect, useRef, useState } from "react";
 import {
   TbLayoutSidebarLeftCollapse,
@@ -43,6 +45,7 @@ export default function Dashboard({
   const { resolvedTheme } = useTheme();
   const { openModal } = useModal();
   const { availableWorkspaces, hasLoaded } = useWorkspace();
+  const router = useRouter();
 
   const { data: session, isPending: sessionLoading } = authClient.useSession();
   const { data: user, isLoading: userLoading } = api.user.getUser.useQuery(
@@ -98,9 +101,13 @@ export default function Dashboard({
 
   useEffect(() => {
     if (hasLoaded && availableWorkspaces.length === 0) {
-      openModal("NEW_WORKSPACE", undefined, undefined, false);
+      if (env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
+        router.push("/onboarding/select-plan");
+      } else {
+        openModal("NEW_WORKSPACE", undefined, undefined, false);
+      }
     }
-  }, [hasLoaded, availableWorkspaces.length, openModal]);
+  }, [hasLoaded, availableWorkspaces.length, openModal, router]);
 
   const isDarkMode = resolvedTheme === "dark";
 
