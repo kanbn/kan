@@ -202,6 +202,7 @@ export const workspaceRouter = createTRPCRouter({
     .input(
       z.object({
         name: z.string().min(1).max(64),
+        description: z.string().max(280).optional(),
         slug: z
           .string()
           .min(3)
@@ -260,6 +261,7 @@ export const workspaceRouter = createTRPCRouter({
         slug: workspaceSlug,
         createdBy: userId,
         createdByEmail: userEmail,
+        ...(input.description && { description: input.description }),
       });
 
       if (!result.publicId)
