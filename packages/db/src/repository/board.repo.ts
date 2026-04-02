@@ -718,6 +718,28 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
   return result;
 };
 
+/**
+ * Fetches the board fields needed by the move mutation:
+ * identity, naming, type guards, and workspace ownership.
+ */
+export const getBoardForMove = async (
+  db: dbClient,
+  boardPublicId: string,
+) => {
+  return db.query.boards.findFirst({
+    columns: {
+      id: true,
+      name: true,
+      slug: true,
+      type: true,
+      isArchived: true,
+      workspaceId: true,
+      createdBy: true,
+    },
+    where: eq(boards.publicId, boardPublicId),
+  });
+};
+
 export const isBoardSlugAvailable = async (
   db: dbClient,
   boardSlug: string,

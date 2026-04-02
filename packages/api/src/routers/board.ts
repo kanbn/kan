@@ -669,19 +669,11 @@ export const boardRouter = createTRPCRouter({
           code: "UNAUTHORIZED",
         });
 
-      // Get source board (single query for all needed fields)
-      const board = await ctx.db.query.boards.findFirst({
-        columns: {
-          id: true,
-          name: true,
-          slug: true,
-          type: true,
-          isArchived: true,
-          workspaceId: true,
-          createdBy: true,
-        },
-        where: (boards, { eq }) => eq(boards.publicId, input.boardPublicId),
-      });
+      // Get source board
+      const board = await boardRepo.getBoardForMove(
+        ctx.db,
+        input.boardPublicId,
+      );
 
       if (!board)
         throw new TRPCError({
