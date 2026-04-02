@@ -20,7 +20,7 @@ export function MoveBoardForm({
   const [targetWorkspacePublicId, setTargetWorkspacePublicId] = useState("");
 
   const otherWorkspaces = availableWorkspaces.filter(
-    (ws) => ws.publicId !== workspace.publicId,
+    (ws) => ws.publicId !== workspace.publicId && ws.role !== "guest",
   );
 
   const moveBoard = api.board.move.useMutation({
