@@ -1,7 +1,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { t } from "@lingui/core/macro";
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import {
   HiArrowLeft,
   HiArrowPath,
@@ -13,7 +13,6 @@ import {
 } from "react-icons/hi2";
 
 import { authClient } from "@kan/auth/client";
-import { generateUID } from "@kan/shared/utils";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
@@ -46,8 +45,6 @@ export default function WorkspaceNameView() {
   const [slug, setSlug] = useState("");
   const [description, setDescription] = useState("");
 
-  const generatedUid = useMemo(() => generateUID(), []);
-
   const [debouncedSlug] = useDebounce(slug, 500);
   const isTyping = slug !== debouncedSlug;
 
@@ -73,6 +70,8 @@ export default function WorkspaceNameView() {
   const { data: user } = api.user.getUser.useQuery(undefined, {
     enabled: !!session?.user,
   });
+  const { data: workspaces } = api.workspace.all.useQuery();
+  const hasExistingWorkspace = !!workspaces?.length;
 
   const utils = api.useUtils();
 
@@ -83,34 +82,8 @@ export default function WorkspaceNameView() {
   const createWorkspace = api.workspace.create.useMutation({
     onSuccess: async (workspace) => {
       if (!workspace.publicId) return;
-
       localStorage.setItem("workspacePublicId", workspace.publicId);
-      localStorage.removeItem("onboardingWorkspaceSlug");
       void utils.workspace.all.invalidate();
-
-      if (plan !== "solo") {
-        try {
-          const response = await fetch("/api/stripe/create_checkout_session", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              workspacePublicId: workspace.publicId,
-              cancelUrl: "/boards",
-              successUrl: "/boards",
-              billing,
-            }),
-          });
-          const data = await response.json();
-          const url = (data as { url: string }).url;
-          if (url) {
-            window.location.href = url;
-            return;
-          }
-        } catch {
-          // fall through
-        }
-      }
-
       router.push("/boards");
     },
     onError: () => {
@@ -122,9 +95,52 @@ export default function WorkspaceNameView() {
     },
   });
 
-  const handleContinue = () => {
+  const [isRedirectingToCheckout, setIsRedirectingToCheckout] = useState(false);
+
+  const handleContinue = async () => {
     if (!name.trim()) return;
-    createWorkspace.mutate({ name: name.trim() });
+
+    if (plan === "solo") {
+      createWorkspace.mutate({
+        name: name.trim(),
+        ...(description.trim() && { description: description.trim() }),
+      });
+      return;
+    }
+
+    // team/pro: redirect to Stripe — workspace created on checkout_success
+    setIsRedirectingToCheckout(true);
+    try {
+      const response = await fetch("/api/stripe/create_checkout_session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          workspaceName: name.trim(),
+          ...(description.trim() && {
+            workspaceDescription: description.trim(),
+          }),
+          ...(plan === "pro" && slug ? { workspaceSlug: slug } : {}),
+          cancelUrl: window.location.pathname + window.location.search,
+          successUrl: "/boards",
+          billing,
+          plan,
+        }),
+      });
+      const data = await response.json();
+      const url = (data as { url: string }).url;
+      if (url) {
+        window.location.href = url;
+        return;
+      }
+    } catch {
+      // fall through
+    }
+    setIsRedirectingToCheckout(false);
+    showPopup({
+      header: t`Unable to start checkout`,
+      message: t`Please try again later, or contact customer support.`,
+      icon: "error",
+    });
   };
 
   useEffect(() => {
@@ -144,11 +160,11 @@ export default function WorkspaceNameView() {
   }, []);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-light-100 dark:bg-dark-50">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-light-100 px-4 py-8 dark:bg-dark-50 md:px-6">
       <div className="w-full max-w-3xl overflow-hidden rounded-xl border border-light-400 bg-light-200 shadow-xl dark:border-dark-400 dark:bg-dark-100">
         <div className="flex flex-col md:h-[520px] md:flex-row">
           {/* Left panel */}
-          <div className="flex flex-col p-8 md:w-[55%]">
+          <div className="flex flex-col p-6 md:w-[55%] md:p-8">
             <div className="flex-1">
               <h2 className="text-xl font-bold text-light-1000 dark:text-dark-1000">
                 {t`Set up your workspace`}
@@ -225,7 +241,7 @@ export default function WorkspaceNameView() {
               </div>
             </div>
 
-            <div className="mt-6 flex items-center justify-between">
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
               {plan !== "pro" && (
                 <Toggle
                   isChecked={isProToggle}
@@ -238,15 +254,18 @@ export default function WorkspaceNameView() {
                   {t`Back`}
                 </Button>
                 <Button
-                  onClick={handleContinue}
+                  onClick={() => void handleContinue()}
                   disabled={
                     !name.trim() ||
                     createWorkspace.isPending ||
+                    isRedirectingToCheckout ||
                     (isProToggle &&
                       slug.length >= 3 &&
                       (isTyping || slugAvailability.isPending || !!slugError))
                   }
-                  isLoading={createWorkspace.isPending}
+                  isLoading={
+                    createWorkspace.isPending || isRedirectingToCheckout
+                  }
                 >
                   {t`Continue`}
                 </Button>
@@ -317,6 +336,11 @@ export default function WorkspaceNameView() {
           </div>
         </div>
       </div>
+      {!hasExistingWorkspace && (
+        <Button variant="ghost" onClick={() => authClient.signOut()}>
+          {t`Sign out`}
+        </Button>
+      )}
     </div>
   );
 }

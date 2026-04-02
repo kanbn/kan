@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { t } from "@lingui/core/macro";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -40,8 +40,13 @@ const ORBIT_USERS: Record<
 
 export default function SelectPlanView() {
   const router = useRouter();
-  const [selected, setSelected] = useState<PlanId>("solo");
-  const [billing, setBilling] = useState<Billing>("annual");
+  const searchParams = useSearchParams();
+  const [selected, setSelected] = useState<PlanId>(
+    (searchParams.get("plan") as PlanId | null) ?? "solo",
+  );
+  const [billing, setBilling] = useState<Billing>(
+    (searchParams.get("billing") as Billing | null) ?? "annual",
+  );
   const { data: workspaces } = api.workspace.all.useQuery();
   const { data: session } = authClient.useSession();
   const { data: user } = api.user.getUser.useQuery(undefined, {
@@ -90,6 +95,16 @@ export default function SelectPlanView() {
     },
   ];
 
+  const handleSelectPlan = (plan: PlanId) => {
+    setSelected(plan);
+    router.replace(`/onboarding/select-plan?plan=${plan}&billing=${billing}`);
+  };
+
+  const handleSetBilling = (b: Billing) => {
+    setBilling(b);
+    router.replace(`/onboarding/select-plan?plan=${selected}&billing=${b}`);
+  };
+
   const handleContinue = () =>
     router.push(`/onboarding/workspace?plan=${selected}&billing=${billing}`);
 
@@ -102,11 +117,11 @@ export default function SelectPlanView() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-light-100 dark:bg-dark-50">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-light-100 px-4 py-8 dark:bg-dark-50 md:px-6">
       <div className="w-full max-w-3xl overflow-hidden rounded-xl border border-light-400 bg-light-200 shadow-xl dark:border-dark-400 dark:bg-dark-100">
         <div className="flex flex-col md:h-[520px] md:flex-row">
           {/* Left panel */}
-          <div className="flex flex-col p-8 md:w-[55%]">
+          <div className="flex flex-col p-6 md:w-[55%] md:p-8">
             <div className="flex-1">
               <h2 className="text-xl font-bold text-light-1000 dark:text-dark-1000">
                 {t`Choose a plan`}
@@ -119,7 +134,7 @@ export default function SelectPlanView() {
               <div className="mt-4 flex justify-end">
                 <RadioGroup
                   value={billing}
-                  onChange={setBilling}
+                  onChange={handleSetBilling}
                   className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold ring-1 ring-inset ring-light-600 dark:ring-dark-600"
                 >
                   {FREQUENCIES.map((f) => (
@@ -147,7 +162,7 @@ export default function SelectPlanView() {
                     <button
                       key={plan.id}
                       type="button"
-                      onClick={() => setSelected(plan.id)}
+                      onClick={() => handleSelectPlan(plan.id)}
                       className={`relative w-full rounded-lg border px-4 py-3 text-left transition-colors ${
                         selected === plan.id
                           ? "border-light-700 bg-light-300 dark:border-dark-600 dark:bg-dark-200"
@@ -193,7 +208,7 @@ export default function SelectPlanView() {
               </div>
             </div>
 
-            <div className="mt-8 flex justify-end gap-2">
+            <div className="mt-6 flex justify-end gap-2 md:mt-8">
               {hasExistingWorkspace && (
                 <Button variant="ghost" onClick={handleCancel}>
                   {t`Cancel`}
@@ -269,6 +284,11 @@ export default function SelectPlanView() {
           </div>
         </div>
       </div>
+      {!hasExistingWorkspace && (
+        <Button variant="ghost" onClick={() => authClient.signOut()}>
+          {t`Sign out`}
+        </Button>
+      )}
     </div>
   );
 }
