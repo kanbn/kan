@@ -34,7 +34,7 @@ export const slugTypes = ["reserved", "premium"] as const;
 export type SlugType = (typeof slugTypes)[number];
 export const slugTypeEnum = pgEnum("slug_type", slugTypes);
 
-export const workspacePlans = ["free", "pro", "enterprise"] as const;
+export const workspacePlans = ["free", "team", "pro", "enterprise"] as const;
 export type WorkspacePlan = (typeof workspacePlans)[number];
 export const workspacePlanEnum = pgEnum("workspace_plan", workspacePlans);
 
