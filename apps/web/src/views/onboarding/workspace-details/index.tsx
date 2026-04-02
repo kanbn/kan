@@ -171,7 +171,16 @@ export default function WorkspaceNameView() {
                   <Input
                     placeholder={t`your-workspace`}
                     value={isProToggle ? slug : t`your-workspace`}
-                    onChange={(e) => setSlug(e.target.value)}
+                    onChange={(e) =>
+                      setSlug(
+                        e.target.value
+                          .toLowerCase()
+                          .replace(/[^a-z0-9\s-]/g, "")
+                          .replace(/\s+/g, "-")
+                          .replace(/-+/g, "-")
+                          .slice(0, 60),
+                      )
+                    }
                     disabled={!isProToggle}
                     prefix="kan.bn/"
                     className={
@@ -267,7 +276,7 @@ export default function WorkspaceNameView() {
             </div>
 
             {/* Browser content */}
-            <div className="flex flex-1 flex-col items-center overflow-hidden px-5 py-5">
+            <div className="flex flex-1 flex-col items-center overflow-hidden px-14 py-8">
               {/* Workspace name + description */}
               <p className="text-center text-xs font-bold text-light-1000 dark:text-dark-1000">
                 {name || t`Your workspace`}
@@ -292,7 +301,7 @@ export default function WorkspaceNameView() {
                         opacity: { duration: 0.2 },
                         y: { duration: 0.25, ease: "easeOut" },
                       }}
-                      className="flex flex-1 w-full items-center justify-center rounded border border-dashed border-light-400 bg-light-50 px-3 text-[10px] font-medium text-light-900 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-900"
+                      className="flex w-full flex-1 items-center justify-center rounded border border-dashed border-light-400 bg-light-50 px-3 text-[10px] font-medium text-light-900 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-900"
                     >
                       {board}
                     </motion.div>

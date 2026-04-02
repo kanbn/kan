@@ -75,8 +75,8 @@ export default function SelectPlanView() {
     {
       id: "team",
       name: t`Team`,
-      monthly: "$12/user/mo",
-      annual: "$10/user/mo",
+      monthly: "$10/user/mo",
+      annual: "$8/user/mo",
       description: t`Best for small teams who want to collaborate and move faster together.`,
       trial: true,
     },
