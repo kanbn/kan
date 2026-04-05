@@ -1,12 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
+import { withApiLogging } from "@kan/api/utils/apiLogging";
 import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 import { env } from "~/env";
 
 export default withRateLimit(
   { points: 100, duration: 60 },
-  async (req: NextApiRequest, res: NextApiResponse) => {
+  withApiLogging(async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "GET") {
       return res.status(405).json({ message: "Method not allowed" });
     }
@@ -32,7 +33,9 @@ export default withRateLimit(
       try {
         allowedHost = new URL(s3Endpoint).hostname.toLowerCase();
       } catch {
-        return res.status(500).json({ message: "Storage endpoint misconfigured" });
+        return res
+          .status(500)
+          .json({ message: "Storage endpoint misconfigured" });
       }
 
       if (hostname !== allowedHost && !hostname.endsWith(`.${allowedHost}`)) {
@@ -66,10 +69,7 @@ export default withRateLimit(
       const buffer = await upstream.arrayBuffer();
       return res.send(Buffer.from(buffer));
     } catch (error) {
-      console.error("Error downloading attachment:", error);
-      return res
-        .status(500)
-        .json({ message: "Failed to download attachment" });
+      return res.status(500).json({ message: "Failed to download attachment" });
     }
-  },
+  }),
 );

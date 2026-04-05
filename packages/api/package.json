@@ -28,6 +28,10 @@
       "types": "./dist/utils/rateLimit.d.ts",
       "default": "./src/utils/rateLimit.ts"
     },
+    "./utils/apiLogging": {
+      "types": "./dist/utils/apiLogging.d.ts",
+      "default": "./src/utils/apiLogging.ts"
+    },
     "./utils/permissions": {
       "types": "./dist/utils/permissions.d.ts",
       "default": "./src/utils/permissions.ts"
