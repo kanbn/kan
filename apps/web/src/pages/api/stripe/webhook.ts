@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Readable } from "node:stream";
 
@@ -6,7 +7,7 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
 import { createStripeClient } from "@kan/stripe";
 
-const log = createLogger("stripe-webhook");
+const log = createLogger("api");
 
 async function buffer(readable: Readable) {
   const chunks = [];
@@ -21,6 +22,9 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const stripe = createStripeClient();
+  const start = Date.now();
+  const requestId = randomUUID();
+  const procedure = req.url?.split("?")[0] ?? "/api/stripe/webhook";
 
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
@@ -43,11 +47,6 @@ export default async function handler(
     );
 
     const { db } = await createNextApiContext(req);
-
-    log.info(
-      { eventType: event.type, eventId: event.id },
-      "Stripe webhook received",
-    );
 
     switch (event.type) {
       case "checkout.session.completed": {
@@ -90,9 +89,31 @@ export default async function handler(
         log.warn({ eventType: event.type }, "Unhandled Stripe event type");
     }
 
+    log.info(
+      {
+        requestId,
+        procedure,
+        transport: "rest",
+        duration: Date.now() - start,
+        status: 200,
+        input: { eventType: event.type, eventId: event.id },
+      },
+      "API OK",
+    );
+
     return res.status(200).json({ received: true });
   } catch (err) {
-    log.error({ err }, "Stripe webhook handler failed");
+    log.error(
+      {
+        requestId,
+        procedure,
+        transport: "rest",
+        duration: Date.now() - start,
+        status: 400,
+        err,
+      },
+      "API error",
+    );
     return res.status(400).json({ message: "Webhook handler failed" });
   }
 }
