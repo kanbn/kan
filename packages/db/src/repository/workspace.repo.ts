@@ -124,7 +124,7 @@ export const update = async (
   workspaceInput: {
     name?: string;
     slug?: string;
-    plan?: "free" | "pro" | "enterprise";
+    plan?: "free" | "team" | "pro" | "enterprise";
     description?: string;
     showEmailsToMembers?: boolean;
     weekStartDay?: number;
