@@ -3,10 +3,13 @@ import { env } from "next-runtime-env";
 import { z } from "zod";
 
 import { createNextApiContext } from "@kan/api/trpc";
+import { withApiLogging } from "@kan/api/utils/apiLogging";
+import { assertPermission } from "@kan/api/utils/permissions";
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { generateUID } from "@kan/shared/utils";
 import { createStripeClient } from "@kan/stripe";
-import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 const workspaceSlugSchema = z
   .string()
@@ -17,103 +20,130 @@ const workspaceSlugSchema = z
 interface CheckoutSessionRequest {
   successUrl: string;
   cancelUrl: string;
-  slug: string;
-  workspacePublicId: string;
-  stripeCustomerId: string;
+  billing?: string;
+  workspacePublicId?: string;
+  slug?: string;
+  workspaceName?: string;
+  workspaceDescription?: string;
+  workspaceSlug?: string;
+  plan?: string;
 }
 
 export default withRateLimit(
   { points: 100, duration: 60 },
-  async (req: NextApiRequest, res: NextApiResponse) => {
-  const stripe = createStripeClient();
+  withApiLogging(async (req: NextApiRequest, res: NextApiResponse) => {
+    const stripe = createStripeClient();
 
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
-  try {
-    const { user, db } = await createNextApiContext(req);
-
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
+    if (req.method !== "POST") {
+      return res.status(405).json({ error: "Method not allowed" });
     }
 
-    const body = req.body as CheckoutSessionRequest;
-    const { successUrl, cancelUrl, slug, workspacePublicId } = body;
+    try {
+      const { user, db } = await createNextApiContext(req);
 
-    if (!successUrl || !cancelUrl || !workspacePublicId) {
-      return res.status(400).json({ error: "Missing required fields" });
-    }
-
-    if (slug) {
-      const slugResult = workspaceSlugSchema.safeParse(slug);
-
-      if (!slugResult.success) {
-        return new Response(
-          JSON.stringify({ error: "Invalid workspace slug" }),
-          {
-            status: 400,
-            headers: { "Content-Type": "application/json" },
-          },
-        );
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
       }
-    }
 
-    const workspace = await workspaceRepo.getAllByUserId(db, user.id);
-
-    const isMemberOfWorkspace = workspace.some(
-      ({ workspace }) => workspace.publicId === body.workspacePublicId,
-    );
-
-    if (!isMemberOfWorkspace) {
-      return new Response(JSON.stringify({ error: "Unauthorized" }), {
-        status: 403,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-
-    const subscription = await subscriptionRepo.create(db, {
-      plan: "pro",
-      referenceId: workspacePublicId,
-      userId: user.id,
-      stripeCustomerId: user.stripeCustomerId ?? "",
-      status: "incomplete",
-    });
-
-    const subscriptionId = subscription?.id;
-
-    if (!subscriptionId) {
-      return res.status(500).json({ error: "Error creating subscription" });
-    }
-
-    const session = await stripe.checkout.sessions.create({
-      mode: "subscription",
-      payment_method_collection: "always",
-      line_items: [
-        {
-          price: process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID,
-          quantity: 1,
-        },
-      ],
-      subscription_data: {
-        trial_period_days: 14,
-      },
-      success_url: `${env("NEXT_PUBLIC_BASE_URL")}${successUrl}`,
-      cancel_url: `${env("NEXT_PUBLIC_BASE_URL")}${cancelUrl}`,
-      client_reference_id: workspacePublicId,
-      customer: user.stripeCustomerId ?? undefined,
-      metadata: {
-        ...(slug && { workspaceSlug: slug }),
+      const body = req.body as CheckoutSessionRequest;
+      const {
+        successUrl,
+        cancelUrl,
+        billing,
         workspacePublicId,
-        userId: user.id,
-        subscriptionId,
-      },
-    });
+        slug,
+        workspaceName,
+        workspaceDescription,
+        workspaceSlug,
+      } = body;
 
-    return res.status(200).json({ url: session.url });
-  } catch (error) {
-    console.error("Error:", error);
-    return res.status(500).json({ error: "Error creating checkout session" });
-  }
-  },
+      if (!successUrl || !cancelUrl) {
+        return res.status(400).json({ error: "Missing required fields" });
+      }
+
+      if (!workspacePublicId && !workspaceName) {
+        return res
+          .status(400)
+          .json({ error: "Must provide workspacePublicId or workspaceName" });
+      }
+
+      const resolvedSlug = slug ?? workspaceSlug;
+
+      if (resolvedSlug) {
+        const slugResult = workspaceSlugSchema.safeParse(resolvedSlug);
+        if (!slugResult.success) {
+          return res.status(400).json({ error: "Invalid workspace slug" });
+        }
+      }
+
+      let resolvedWorkspacePublicId = workspacePublicId;
+      let subscriptionId: number | undefined;
+
+      if (workspacePublicId) {
+        // Existing workspace upgrade
+        const workspace = await workspaceRepo.getByPublicId(
+          db,
+          workspacePublicId,
+        );
+
+        if (!workspace) {
+          return res.status(404).json({ error: "Workspace not found" });
+        }
+
+        try {
+          await assertPermission(db, user.id, workspace.id, "workspace:manage");
+        } catch {
+          return res.status(403).json({ error: "Unauthorized" });
+        }
+
+        const subscription = await subscriptionRepo.create(db, {
+          plan: "pro",
+          referenceId: workspacePublicId,
+          userId: user.id,
+          stripeCustomerId: user.stripeCustomerId ?? "",
+          status: "incomplete",
+        });
+
+        subscriptionId = subscription?.id;
+
+        if (!subscriptionId) {
+          return res.status(500).json({ error: "Error creating subscription" });
+        }
+      } else {
+        resolvedWorkspacePublicId = generateUID();
+      }
+
+      const priceId =
+        billing === "annual"
+          ? (process.env.STRIPE_PRO_PLAN_ANNUAL_PRICE_ID ??
+            process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID)
+          : process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID;
+
+      const session = await stripe.checkout.sessions.create({
+        mode: "subscription",
+        payment_method_collection: "always",
+        line_items: [{ price: priceId, quantity: 1 }],
+        subscription_data: { trial_period_days: 14 },
+        success_url: `${env("NEXT_PUBLIC_BASE_URL")}${successUrl}`,
+        cancel_url: `${env("NEXT_PUBLIC_BASE_URL")}${cancelUrl}`,
+        client_reference_id: resolvedWorkspacePublicId,
+        customer: user.stripeCustomerId ?? undefined,
+        metadata: {
+          workspacePublicId: resolvedWorkspacePublicId!,
+          userId: user.id,
+          userEmail: user.email ?? "",
+          ...(resolvedSlug && { workspaceSlug: resolvedSlug }),
+          ...(workspaceName && { workspaceName }),
+          ...(workspaceDescription && { workspaceDescription }),
+          ...(subscriptionId && { subscriptionId: String(subscriptionId) }),
+          plan: body.plan ?? "pro",
+          isNewWorkspace: workspaceName ? "true" : "false",
+        },
+      });
+
+      return res.status(200).json({ url: session.url });
+    } catch (error) {
+      return res.status(500).json({ error: "Error creating checkout session" });
+    }
+  }),
 );

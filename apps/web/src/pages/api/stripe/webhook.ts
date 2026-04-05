@@ -44,20 +44,46 @@ export default async function handler(
 
     const { db } = await createNextApiContext(req);
 
-    log.info({ eventType: event.type, eventId: event.id }, "Stripe webhook received");
+    log.info(
+      { eventType: event.type, eventId: event.id },
+      "Stripe webhook received",
+    );
 
     switch (event.type) {
       case "checkout.session.completed": {
         const checkoutSession = event.data.object;
+        const meta = checkoutSession.metadata;
 
-        const metaData = checkoutSession.metadata;
+        if (!meta?.workspacePublicId) break;
 
-        if (metaData?.workspacePublicId) {
-          await workspaceRepo.update(db, metaData.workspacePublicId, {
-            ...(metaData.workspaceSlug && { slug: metaData.workspaceSlug }),
-            plan: "pro",
+        if (
+          meta.isNewWorkspace === "true" &&
+          meta.workspaceName &&
+          meta.userId &&
+          meta.userEmail
+        ) {
+          const slug = meta.workspaceSlug ?? meta.workspacePublicId;
+
+          await workspaceRepo.create(db, {
+            publicId: meta.workspacePublicId,
+            name: meta.workspaceName,
+            slug,
+            createdBy: meta.userId,
+            createdByEmail: meta.userEmail,
+            ...(meta.workspaceDescription && {
+              description: meta.workspaceDescription,
+            }),
           });
         }
+
+        const plan = meta.plan === "team" ? "team" : "pro";
+        await workspaceRepo.update(db, meta.workspacePublicId, {
+          plan,
+          ...(plan === "pro" &&
+            meta.workspaceSlug &&
+            meta.isNewWorkspace !== "true" && { slug: meta.workspaceSlug }),
+        });
+
         break;
       }
       default:
