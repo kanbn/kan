@@ -181,7 +181,7 @@ export const cardRouter = createTRPCRouter({
             title: input.title,
             description: input.description,
             dueDate: input.dueDate ?? null,
-            listId: String(newCard.listId),
+            listId: list.publicId,
           },
           {
             boardId: list.boardPublicId,
@@ -906,9 +906,18 @@ export const cardRouter = createTRPCRouter({
       );
 
       let newListId: number | undefined;
+      let newList:
+        | {
+            id: number;
+            publicId: string;
+            name: string;
+            boardId: number;
+            index: number;
+          }
+        | undefined;
 
       if (input.listPublicId) {
-        const newList = await listRepo.getByPublicId(
+        newList = await listRepo.getByPublicId(
           ctx.db,
           input.listPublicId,
         );
@@ -1055,8 +1064,19 @@ export const cardRouter = createTRPCRouter({
       ) {
         webhookChanges.dueDate = { from: previousDueDate, to: input.dueDate };
       }
-      if (newListId && existingCard.listId !== newListId) {
-        webhookChanges.listId = { from: existingCard.listId, to: newListId };
+      const movedToNewList = Boolean(newListId && existingCard.listId !== newListId);
+      const currentWebhookListPublicId = movedToNewList
+        ? input.listPublicId!
+        : existingCard.list.publicId;
+      const currentWebhookListName = movedToNewList
+        ? newList?.name ?? card.listName
+        : existingCard.list.name;
+
+      if (movedToNewList) {
+        webhookChanges.listId = {
+          from: existingCard.list.publicId,
+          to: input.listPublicId!,
+        };
       }
 
       // Fire webhooks (non-blocking)
@@ -1064,20 +1084,18 @@ export const cardRouter = createTRPCRouter({
         ctx.db,
         card.workspaceId,
         createCardWebhookPayload(
-          newListId && existingCard.listId !== newListId
-            ? "card.moved"
-            : "card.updated",
+          movedToNewList ? "card.moved" : "card.updated",
           {
             id: String(result.id),
             title: result.title,
             description: result.description,
             dueDate: result.dueDate,
-            listId: String(newListId ?? existingCard.listId),
+            listId: currentWebhookListPublicId,
           },
           {
             boardId: card.boardPublicId,
             boardName: card.boardName,
-            listName: card.listName,
+            listName: currentWebhookListName,
             user: ctx.user
               ? { id: ctx.user.id, name: ctx.user.name }
               : undefined,
@@ -1167,12 +1185,12 @@ export const cardRouter = createTRPCRouter({
               title: fullCard.title,
               description: fullCard.description,
               dueDate: fullCard.dueDate,
-              listId: String(fullCard.listId),
+              listId: fullCard.list.publicId,
             },
             {
               boardId: card.boardPublicId,
               boardName: card.boardName,
-              listName: card.listName,
+              listName: fullCard.list.name,
               user: ctx.user
                 ? { id: ctx.user.id, name: ctx.user.name }
                 : undefined,
