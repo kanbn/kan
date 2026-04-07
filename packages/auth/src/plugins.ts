@@ -183,34 +183,47 @@ export function createPlugins(db: dbClient) {
       sendMagicLink: async ({ email, url }) => {
         try {
           const decodedUrl = decodeURIComponent(url);
-          log.info({ email, isInvite: decodedUrl.includes("type=invite") }, "Sending magic link");
-          if (decodedUrl.includes("type=invite")) {
+          const isInvite = decodedUrl.includes("type=invite");
+          log.info({ email, isInvite }, "Sending magic link");
+          
+          if (isInvite) {
             let inviterName = "";
             let workspaceName = "";
 
             try {
               const urlObj = new URL(url);
               const callbackUrl = urlObj.searchParams.get("callbackURL");
+              log.debug({ callbackUrl }, "Invite callback URL found");
+              
               if (callbackUrl) {
                 const callbackParams = new URL(
                   callbackUrl,
                   process.env.NEXT_PUBLIC_BASE_URL,
                 ).searchParams;
                 const memberPublicId = callbackParams.get("memberPublicId");
+                log.debug({ memberPublicId }, "Extracted memberPublicId from callback");
 
                 if (memberPublicId) {
                   const member = await memberRepo.getByPublicId(
                     db,
                     memberPublicId,
                   );
+                  log.debug({ memberId: member?.id }, "Member lookup result");
+                  
                   if (member) {
                     const [workspace, inviter] = await Promise.all([
                       workspaceRepo.getById(db, member.workspaceId),
                       userRepo.getById(db, member.createdBy),
                     ]);
 
-                    if (workspace) workspaceName = workspace.name;
-                    if (inviter) inviterName = inviter.name ?? "";
+                    if (workspace) {
+                      workspaceName = workspace.name;
+                      log.debug({ workspaceName }, "Workspace found for invite");
+                    }
+                    if (inviter) {
+                      inviterName = inviter.name ?? "";
+                      log.debug({ inviterName }, "Inviter found for invite");
+                    }
                   }
                 }
               }
@@ -218,6 +231,7 @@ export function createPlugins(db: dbClient) {
               log.error({ err: error }, "Failed to fetch invite details");
             }
 
+            log.info({ email, workspaceName, inviterName }, "Dispatching invitation email");
             await sendEmail(
               email,
               workspaceName
@@ -231,6 +245,7 @@ export function createPlugins(db: dbClient) {
               },
             );
           } else {
+            log.info({ email }, "Dispatching standard magic link email");
             await sendEmail(
               email,
               process.env.NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY === "true"
@@ -243,7 +258,7 @@ export function createPlugins(db: dbClient) {
             );
           }
         } catch (error) {
-          log.error({ err: error, email }, "Error sending magic link");
+          log.error({ err: error, email }, "Error in sendMagicLink process");
         }
       },
     }),

@@ -90,6 +90,7 @@ export async function sendMentionEmails({
           const notificationExists = await notificationRepo.exists(db, {
             userId,
             cardId,
+            commentId,
             type: "mention",
           });
 

@@ -58,6 +58,10 @@ export const exists = async (
         conditions.push(eq(notifications.workspaceId, args.workspaceId));
       }
 
+      if (args.commentId) {
+        conditions.push(eq(notifications.commentId, args.commentId));
+      }
+
       return and(...conditions);
     },
   });

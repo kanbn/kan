@@ -41,35 +41,52 @@ const transporter = nodemailer.createTransport({
     }),
 });
 
+transporter.verify(function (error, success) {
+  if (error) {
+    log.error({ err: error, host: process.env.SMTP_HOST, port: process.env.SMTP_PORT }, "SMTP Transporter verification failed");
+  } else {
+    log.info({ host: process.env.SMTP_HOST, port: process.env.SMTP_PORT }, "SMTP Transporter is ready to send emails");
+  }
+});
+
 export const sendEmail = async (
   to: string,
   subject: string,
   template: Templates,
   data: Record<string, string>,
 ) => {
-  log.info({ to, subject, template }, "Sending email");
+  log.info({ to, subject, template }, "Attempting to send email");
   try {
     const EmailTemplate = emailTemplates[template];
 
+    log.debug({ template }, "Rendering email template");
     const html = await render(<EmailTemplate {...data} />, { pretty: true });
 
+    const from = process.env.EMAIL_FROM;
+    if (!from) {
+      log.warn("EMAIL_FROM environment variable is not defined");
+    }
+
     const options = {
-      from: process.env.EMAIL_FROM,
+      from,
       to,
       subject,
       html,
     };
 
+    log.debug({ from, to, subject }, "Calling transporter.sendMail");
     const response = await transporter.sendMail(options);
+    log.debug({ messageId: response.messageId, accepted: response.accepted, rejected: response.rejected }, "Nodemailer response received");
 
     if (!response.accepted.length) {
+      log.error({ response }, "Email was not accepted by SMTP server");
       throw new Error(`Failed to send email: ${response.response}`);
     }
 
-    log.info({ to, subject, template, messageId: response.messageId }, "Email sent");
+    log.info({ to, subject, template, messageId: response.messageId }, "Email sent successfully");
     return response;
   } catch (error) {
-    log.error({ err: error, to, from: process.env.EMAIL_FROM, subject, template }, "Email sending failed");
+    log.error({ err: error, to, from: process.env.EMAIL_FROM, subject, template }, "Email sending process failed");
     throw error;
   }
 };
