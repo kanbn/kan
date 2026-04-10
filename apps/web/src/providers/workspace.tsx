@@ -17,7 +17,7 @@ interface Workspace {
   description: string | null | undefined;
   publicId: string;
   slug: string | undefined;
-  plan: "free" | "pro" | "enterprise" | undefined;
+  plan: "free" | "team" | "pro" | "enterprise" | undefined;
   role: "admin" | "member" | "guest";
   weekStartDay: 0 | 1 | 6;
 }
@@ -27,7 +27,7 @@ const initialWorkspace: Workspace = {
   description: null,
   publicId: "",
   slug: "",
-  plan: "free",
+  plan: "free" as const,
   role: "member",
   weekStartDay: 1,
 };
@@ -50,7 +50,15 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
 
   const workspacePublicId = useSearchParams().get("workspacePublicId");
 
-  const { data, isLoading } = api.workspace.all.useQuery();
+  const [pendingWorkspaceId, setPendingWorkspaceId] = useState<string | null>(
+    workspacePublicId,
+  );
+  const pollAttemptsRef = React.useRef(0);
+  const MAX_POLL_ATTEMPTS = 5;
+
+  const { data, isLoading } = api.workspace.all.useQuery(undefined, {
+    refetchInterval: pendingWorkspaceId ? 2000 : false,
+  });
   const utils = api.useUtils();
 
   const switchWorkspace = (_workspace: Workspace) => {
@@ -94,7 +102,16 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         ({ workspace }) => workspace.publicId === storedWorkspaceId,
       );
 
-      if (!selectedWorkspace?.workspace) return;
+      if (!selectedWorkspace?.workspace) {
+        pollAttemptsRef.current += 1;
+        if (pollAttemptsRef.current >= MAX_POLL_ATTEMPTS) {
+          setPendingWorkspaceId(null);
+        }
+        return;
+      }
+
+      pollAttemptsRef.current = 0;
+      setPendingWorkspaceId(null);
 
       setWorkspace({
         publicId: selectedWorkspace.workspace.publicId,

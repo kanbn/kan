@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import type { Readable } from "node:stream";
 
 import { createNextApiContext } from "@kan/api/trpc";
+import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
 import { createStripeClient } from "@kan/stripe";
@@ -55,33 +56,46 @@ export default async function handler(
 
         if (!meta?.workspacePublicId) break;
 
+        const plan = meta.plan === "team" ? "team" : ("pro" as const);
+
         if (
           meta.isNewWorkspace === "true" &&
           meta.workspaceName &&
           meta.userId &&
           meta.userEmail
         ) {
-          const slug = meta.workspaceSlug ?? meta.workspacePublicId;
+          const existing = await workspaceRepo.getByPublicId(db, meta.workspacePublicId);
 
-          await workspaceRepo.create(db, {
-            publicId: meta.workspacePublicId,
-            name: meta.workspaceName,
-            slug,
-            createdBy: meta.userId,
-            createdByEmail: meta.userEmail,
-            ...(meta.workspaceDescription && {
-              description: meta.workspaceDescription,
-            }),
+          if (!existing) {
+            const slug = meta.workspaceSlug ?? meta.workspacePublicId;
+
+            await workspaceRepo.create(db, {
+              publicId: meta.workspacePublicId,
+              name: meta.workspaceName,
+              slug,
+              plan,
+              createdBy: meta.userId,
+              createdByEmail: meta.userEmail,
+              ...(meta.workspaceDescription && {
+                description: meta.workspaceDescription,
+              }),
+            });
+
+            await subscriptionRepo.create(db, {
+              plan,
+              referenceId: meta.workspacePublicId,
+              userId: meta.userId,
+              stripeCustomerId: checkoutSession.customer as string,
+              status: "active",
+            });
+          }
+        } else {
+          // Existing workspace upgrade — update plan (and slug for pro)
+          await workspaceRepo.update(db, meta.workspacePublicId, {
+            plan,
+            ...(plan === "pro" && meta.workspaceSlug && { slug: meta.workspaceSlug }),
           });
         }
-
-        const plan = meta.plan === "team" ? "team" : "pro";
-        await workspaceRepo.update(db, meta.workspacePublicId, {
-          plan,
-          ...(plan === "pro" &&
-            meta.workspaceSlug &&
-            meta.isNewWorkspace !== "true" && { slug: meta.workspaceSlug }),
-        });
 
         break;
       }

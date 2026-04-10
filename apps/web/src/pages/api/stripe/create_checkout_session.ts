@@ -113,18 +113,23 @@ export default withRateLimit(
         resolvedWorkspacePublicId = generateUID();
       }
 
-      const priceId =
-        billing === "annual"
-          ? (process.env.STRIPE_PRO_PLAN_ANNUAL_PRICE_ID ??
-            process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID)
-          : process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID;
+      const isTeam = body.plan === "team";
+      const annualPriceId = isTeam
+        ? (process.env.STRIPE_TEAM_PLAN_ANNUAL_PRICE_ID ??
+          process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID)
+        : (process.env.STRIPE_PRO_PLAN_ANNUAL_PRICE_ID ??
+          process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID);
+      const monthlyPriceId = isTeam
+        ? process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID
+        : process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID;
+      const priceId = billing === "annual" ? annualPriceId : monthlyPriceId;
 
       const session = await stripe.checkout.sessions.create({
         mode: "subscription",
         payment_method_collection: "always",
         line_items: [{ price: priceId, quantity: 1 }],
         subscription_data: { trial_period_days: 14 },
-        success_url: `${env("NEXT_PUBLIC_BASE_URL")}${successUrl}`,
+        success_url: `${env("NEXT_PUBLIC_BASE_URL")}${successUrl}?workspacePublicId=${resolvedWorkspacePublicId}`,
         cancel_url: `${env("NEXT_PUBLIC_BASE_URL")}${cancelUrl}`,
         client_reference_id: resolvedWorkspacePublicId,
         customer: user.stripeCustomerId ?? undefined,

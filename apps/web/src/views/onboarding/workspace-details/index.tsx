@@ -225,6 +225,17 @@ export default function WorkspaceNameView() {
                   />
                 </div>
 
+                {plan !== "pro" && (
+                  <div className="pb-2">
+                    <Toggle
+                      isChecked={isProToggle}
+                      onChange={() => setIsProToggle((v) => !v)}
+                      label={t`Upgrade to Pro ($29/month)`}
+                      labelPosition="after"
+                    />
+                  </div>
+                )}
+
                 <div>
                   <textarea
                     value={description}
@@ -242,15 +253,15 @@ export default function WorkspaceNameView() {
             </div>
 
             <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-              {plan !== "pro" && (
-                <Toggle
-                  isChecked={isProToggle}
-                  onChange={() => setIsProToggle((v) => !v)}
-                  label={t`Upgrade to Pro ($29/month)`}
-                />
-              )}
               <div className="ml-auto flex gap-2">
-                <Button variant="ghost" onClick={() => router.back()}>
+                <Button
+                  variant="ghost"
+                  onClick={() =>
+                    router.push(
+                      `/onboarding/select-plan?plan=${plan}&billing=${billing}`,
+                    )
+                  }
+                >
                   {t`Back`}
                 </Button>
                 <Button
