@@ -152,7 +152,7 @@ export default function WorkspaceMenu({
                 <button
                   onClick={() =>
                     env("NEXT_PUBLIC_KAN_ENV") === "cloud"
-                      ? router.push("/onboarding/select-plan")
+                      ? router.push(`/onboarding/select-plan?returnUrl=${encodeURIComponent(window.location.pathname)}`)
                       : openModal("NEW_WORKSPACE")
                   }
                   className="flex w-full items-center justify-between rounded-[5px] px-3 py-2 text-left text-xs text-neutral-900 hover:bg-light-200 dark:text-dark-1000 dark:hover:bg-dark-400"

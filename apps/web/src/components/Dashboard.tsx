@@ -102,7 +102,7 @@ export default function Dashboard({
   useEffect(() => {
     if (hasLoaded && availableWorkspaces.length === 0) {
       if (env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
-        router.push("/onboarding/select-plan");
+        router.push(`/onboarding/select-plan?returnUrl=${encodeURIComponent(window.location.pathname)}`);
       } else {
         openModal("NEW_WORKSPACE", undefined, undefined, false);
       }

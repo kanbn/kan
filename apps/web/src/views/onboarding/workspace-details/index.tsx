@@ -38,6 +38,7 @@ export default function WorkspaceNameView() {
   const searchParams = useSearchParams();
   const plan = searchParams.get("plan") ?? "solo";
   const billing = searchParams.get("billing") ?? "annual";
+  const returnUrl = searchParams.get("returnUrl") ?? "/boards";
   const { showPopup } = usePopup();
   const [isProToggle, setIsProToggle] = useState(plan === "pro");
 
@@ -266,8 +267,8 @@ export default function WorkspaceNameView() {
                 <Button
                   variant="ghost"
                   onClick={() =>
-                    router.push(
-                      `/onboarding/select-plan?plan=${plan}&billing=${billing}`,
+                    router.replace(
+                      `/onboarding/select-plan?plan=${plan}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`,
                     )
                   }
                 >

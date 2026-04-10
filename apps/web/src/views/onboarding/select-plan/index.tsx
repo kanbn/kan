@@ -47,6 +47,7 @@ export default function SelectPlanView() {
   const [billing, setBilling] = useState<Billing>(
     (searchParams.get("billing") as Billing | null) ?? "annual",
   );
+  const returnUrl = searchParams.get("returnUrl") ?? "/boards";
   const { data: workspaces } = api.workspace.all.useQuery();
   const { data: session } = authClient.useSession();
   const { data: user } = api.user.getUser.useQuery(undefined, {
@@ -97,24 +98,18 @@ export default function SelectPlanView() {
 
   const handleSelectPlan = (plan: PlanId) => {
     setSelected(plan);
-    router.replace(`/onboarding/select-plan?plan=${plan}&billing=${billing}`);
+    router.replace(`/onboarding/select-plan?plan=${plan}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`);
   };
 
   const handleSetBilling = (b: Billing) => {
     setBilling(b);
-    router.replace(`/onboarding/select-plan?plan=${selected}&billing=${b}`);
+    router.replace(`/onboarding/select-plan?plan=${selected}&billing=${b}&returnUrl=${encodeURIComponent(returnUrl)}`);
   };
 
   const handleContinue = () =>
-    router.push(`/onboarding/workspace?plan=${selected}&billing=${billing}`);
+    router.push(`/onboarding/workspace?plan=${selected}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`);
 
-  const handleCancel = () => {
-    if (window.history.length > 1) {
-      router.back();
-    } else {
-      router.push("/boards");
-    }
-  };
+  const handleCancel = () => router.push(returnUrl);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-light-100 px-4 py-8 dark:bg-dark-50 md:px-6">
