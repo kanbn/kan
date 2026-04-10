@@ -43,7 +43,15 @@ export default function WorkspaceNameView() {
 
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
+  const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
   const [description, setDescription] = useState("");
+
+  const handleNameChange = (value: string) => {
+    setName(value);
+    if (isProToggle && !slugManuallyEdited) {
+      setSlug(slugify(value));
+    }
+  };
 
   const [debouncedSlug] = useDebounce(slug, 500);
   const isTyping = slug !== debouncedSlug;
@@ -178,7 +186,7 @@ export default function WorkspaceNameView() {
                   id="workspace-name-input"
                   placeholder={t`Workspace name`}
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => handleNameChange(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleContinue()}
                   maxLength={64}
                 />
@@ -187,7 +195,8 @@ export default function WorkspaceNameView() {
                   <Input
                     placeholder={t`your-workspace`}
                     value={isProToggle ? slug : t`your-workspace`}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      setSlugManuallyEdited(true);
                       setSlug(
                         e.target.value
                           .toLowerCase()
@@ -195,8 +204,8 @@ export default function WorkspaceNameView() {
                           .replace(/\s+/g, "-")
                           .replace(/-+/g, "-")
                           .slice(0, 60),
-                      )
-                    }
+                      );
+                    }}
                     disabled={!isProToggle}
                     prefix="kan.bn/"
                     className={
