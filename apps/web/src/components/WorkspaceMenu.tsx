@@ -1,5 +1,7 @@
 import { Button, Menu, Transition } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
+import { useRouter } from "next/navigation";
+import { env } from "next-runtime-env";
 import { Fragment, useState } from "react";
 import { HiCheck, HiMagnifyingGlass } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
@@ -18,6 +20,7 @@ export default function WorkspaceMenu({
   const { workspace, isLoading, availableWorkspaces, switchWorkspace } =
     useWorkspace();
   const { openModal } = useModal();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   const { tooltipContent: commandPaletteShortcutTooltipContent } =
@@ -147,7 +150,11 @@ export default function WorkspaceMenu({
             <div className="border-t-[1px] border-light-600 p-1 dark:border-dark-500">
               <Menu.Item>
                 <button
-                  onClick={() => openModal("NEW_WORKSPACE")}
+                  onClick={() =>
+                    env("NEXT_PUBLIC_KAN_ENV") === "cloud"
+                      ? router.push(`/onboarding/select-plan?returnUrl=${encodeURIComponent(window.location.pathname)}`)
+                      : openModal("NEW_WORKSPACE")
+                  }
                   className="flex w-full items-center justify-between rounded-[5px] px-3 py-2 text-left text-xs text-neutral-900 hover:bg-light-200 dark:text-dark-1000 dark:hover:bg-dark-400"
                 >
                   {t`Create workspace`}

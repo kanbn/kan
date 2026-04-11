@@ -127,7 +127,7 @@ export function NewWorkspaceForm() {
                 body: JSON.stringify({
                   slug: slug || undefined,
                   workspacePublicId: values.publicId,
-                  cancelUrl: "/settings/workspace?upgrade=pro",
+                  cancelUrl: window.location.pathname + window.location.search,
                   successUrl: "/boards",
                 }),
               },

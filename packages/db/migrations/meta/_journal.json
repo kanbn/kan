@@ -218,6 +218,13 @@
       "when": 1773212242728,
       "tag": "20260311065722_AddWeekStartDay",
       "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1775170588247,
+      "tag": "20260402225628_AddTeamWorkspacePlan",
+      "breakpoints": true
     }
   ]
 }
