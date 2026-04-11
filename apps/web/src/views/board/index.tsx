@@ -2,6 +2,7 @@ import type { DropResult } from "react-beautiful-dnd";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
+import { env } from "next-runtime-env";
 import { t } from "@lingui/core/macro";
 import { keepPreviousData } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
@@ -725,7 +726,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                             if (
                                               card.publicId.startsWith(
                                                 "PLACEHOLDER",
-                                              )
+                                              ) ||
+                                              env("NEXT_PUBLIC_KAN_ENV") ===
+                                                "cloud"
                                             )
                                               return;
                                             e.preventDefault();
