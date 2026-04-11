@@ -401,7 +401,6 @@
     "translation": "Activity logs"
   },
   "UGCIzB": {
-    "translation": "Add / edit label",
     "message": "Add / edit label",
     "placeholders": {},
     "comments": [],
@@ -410,7 +409,8 @@
         "src/views/board/components/CardContextMenu.tsx",
         50
       ]
-    ]
+    ],
+    "translation": "Add / edit label"
   },
   "B3xxao": {
     "message": "Add a card",
@@ -938,6 +938,18 @@
     ],
     "translation": "An unexpected error occurred. Please try again later."
   },
+  "YkfDoz": {
+    "translation": "Annual",
+    "message": "Annual",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        63
+      ]
+    ]
+  },
   "3bqt9U": {
     "message": "Anyone with this link can join your workspace",
     "placeholders": {},
@@ -1262,6 +1274,18 @@
     ],
     "translation": "Awaiting Customer"
   },
+  "iH8pgl": {
+    "translation": "Back",
+    "message": "Back",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        275
+      ]
+    ]
+  },
   "KNKCTb": {
     "message": "Backlog",
     "placeholders": {},
@@ -1333,6 +1357,18 @@
       ]
     ],
     "translation": "Best for small and growing teams that need collaboration"
+  },
+  "zt/6cS": {
+    "translation": "Best for small teams who want to collaborate and move faster together.",
+    "message": "Best for small teams who want to collaborate and move faster together.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        86
+      ]
+    ]
   },
   "qaS+1/": {
     "message": "Best for teams that want to scale without limits",
@@ -2092,6 +2128,10 @@
         55
       ],
       [
+        "src/views/onboarding/select-plan/index.tsx",
+        209
+      ],
+      [
         "src/views/settings/components/Avatar.tsx",
         287
       ],
@@ -2135,7 +2175,6 @@
     "translation": "Card"
   },
   "sU2uWc": {
-    "translation": "Card duplicated",
     "message": "Card duplicated",
     "placeholders": {},
     "comments": [],
@@ -2144,7 +2183,8 @@
         "src/views/board/components/CardContextDuplicateModal.tsx",
         67
       ]
-    ]
+    ],
+    "translation": "Card duplicated"
   },
   "fEY2vP": {
     "message": "Card not found",
@@ -2317,6 +2357,18 @@
       ]
     ],
     "translation": "Checklists"
+  },
+  "zMquA7": {
+    "translation": "Choose a plan",
+    "message": "Choose a plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        122
+      ]
+    ]
   },
   "VHS0aJ": {
     "message": "Clear all custom permissions?",
@@ -2738,6 +2790,22 @@
     ],
     "translation": "Content Creation"
   },
+  "xGVfLh": {
+    "translation": "Continue",
+    "message": "Continue",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        212
+      ],
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        291
+      ]
+    ]
+  },
   "J2Wbjt": {
     "message": "Continue with ",
     "placeholders": {},
@@ -2815,7 +2883,6 @@
     "translation": "Copy card link"
   },
   "0utuU6": {
-    "translation": "Copy checklists",
     "message": "Copy checklists",
     "placeholders": {},
     "comments": [],
@@ -2824,10 +2891,10 @@
         "src/views/board/components/CardContextDuplicateModal.tsx",
         257
       ]
-    ]
+    ],
+    "translation": "Copy checklists"
   },
   "fDQ7hA": {
-    "translation": "Copy labels",
     "message": "Copy labels",
     "placeholders": {},
     "comments": [],
@@ -2836,10 +2903,10 @@
         "src/views/board/components/CardContextDuplicateModal.tsx",
         221
       ]
-    ]
+    ],
+    "translation": "Copy labels"
   },
   "1bJKhj": {
-    "translation": "Copy link to card",
     "message": "Copy link to card",
     "placeholders": {},
     "comments": [],
@@ -2848,10 +2915,10 @@
         "src/views/board/components/CardContextMenu.tsx",
         62
       ]
-    ]
+    ],
+    "translation": "Copy link to card"
   },
   "uvH2xS": {
-    "translation": "Copy members",
     "message": "Copy members",
     "placeholders": {},
     "comments": [],
@@ -2860,7 +2927,8 @@
         "src/views/board/components/CardContextDuplicateModal.tsx",
         239
       ]
-    ]
+    ],
+    "translation": "Copy members"
   },
   "9PaIxv": {
     "message": "Core features",
@@ -3081,7 +3149,7 @@
       ],
       [
         "src/components/WorkspaceMenu.tsx",
-        153
+        160
       ]
     ],
     "translation": "Create workspace"
@@ -3245,6 +3313,18 @@
       ]
     ],
     "translation": "Custom username"
+  },
+  "ZDPJBc": {
+    "translation": "Custom usernames require upgrading to a Pro plan",
+    "message": "Custom usernames require upgrading to a Pro plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        220
+      ]
+    ]
   },
   "j9IZZ0": {
     "message": "Custom workspace URL",
@@ -3867,7 +3947,6 @@
     "translation": "Due tomorrow"
   },
   "euc6Ns": {
-    "translation": "Duplicate",
     "message": "Duplicate",
     "placeholders": {},
     "comments": [],
@@ -3876,10 +3955,10 @@
         "src/views/board/components/CardContextDuplicateModal.tsx",
         279
       ]
-    ]
+    ],
+    "translation": "Duplicate"
   },
   "BTDPLo": {
-    "translation": "Duplicate card",
     "message": "Duplicate card",
     "placeholders": {},
     "comments": [],
@@ -3892,10 +3971,10 @@
         "src/views/board/components/CardContextMenu.tsx",
         68
       ]
-    ]
+    ],
+    "translation": "Duplicate card"
   },
   "06EQqT": {
-    "translation": "Duplicating…",
     "message": "Duplicating…",
     "placeholders": {},
     "comments": [],
@@ -3904,7 +3983,8 @@
         "src/views/board/components/CardContextDuplicateModal.tsx",
         279
       ]
-    ]
+    ],
+    "translation": "Duplicating…"
   },
   "ePK91l": {
     "message": "Edit",
@@ -4091,7 +4171,6 @@
     "translation": "Email visibility"
   },
   "bFREhu": {
-    "translation": "End of list",
     "message": "End of list",
     "placeholders": {},
     "comments": [],
@@ -4099,6 +4178,19 @@
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
         200
+      ]
+    ],
+    "translation": "End of list"
+  },
+  "SUXBxp": {
+    "translation": "Engineering",
+    "message": "Engineering",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        161
       ]
     ]
   },
@@ -4844,6 +4936,14 @@
     "comments": [],
     "origin": [
       [
+        "src/views/onboarding/select-plan/index.tsx",
+        77
+      ],
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        78
+      ],
+      [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
         331
       ],
@@ -5213,6 +5313,18 @@
       ]
     ],
     "translation": "Go to templates"
+  },
+  "SUvm1Y": {
+    "translation": "Good for individuals starting out who just need the essentials.",
+    "message": "Good for individuals starting out who just need the essentials.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        79
+      ]
+    ]
   },
   "cdyS7J": {
     "message": "Google SSO",
@@ -6219,7 +6331,6 @@
     "translation": "Make template"
   },
   "hB02vO": {
-    "translation": "Manage members",
     "message": "Manage members",
     "placeholders": {},
     "comments": [],
@@ -6232,7 +6343,8 @@
         "src/views/board/components/CardContextMenu.tsx",
         38
       ]
-    ]
+    ],
+    "translation": "Manage members"
   },
   "IDvohQ": {
     "message": "marked a checklist item as incomplete",
@@ -6261,6 +6373,18 @@
       ]
     ],
     "translation": "marked checklist item <0>{0}</0> as incomplete"
+  },
+  "vo2a+a": {
+    "translation": "Marketing",
+    "message": "Marketing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        161
+      ]
+    ]
   },
   "agPptk": {
     "message": "Medium",
@@ -6384,6 +6508,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/onboarding/select-plan/index.tsx",
+        62
+      ],
+      [
         "src/views/pricing/components/Pricing.tsx",
         14
       ],
@@ -6407,7 +6535,6 @@
     "translation": "monthly billing"
   },
   "51UCsN": {
-    "translation": "Move to another list",
     "message": "Move to another list",
     "placeholders": {},
     "comments": [],
@@ -6416,10 +6543,10 @@
         "src/views/board/components/CardContextMenu.tsx",
         44
       ]
-    ]
+    ],
+    "translation": "Move to another list"
   },
   "J4+OTA": {
-    "translation": "Move to list",
     "message": "Move to list",
     "placeholders": {},
     "comments": [],
@@ -6428,7 +6555,8 @@
         "src/views/board/components/CardContextMoveListModal.tsx",
         70
       ]
-    ]
+    ],
+    "translation": "Move to list"
   },
   "BOqTi5": {
     "message": "moved the card from <0>{0}</0> to<1>{1}</1>",
@@ -6984,7 +7112,7 @@
     "origin": [
       [
         "src/components/WorkspaceMenu.tsx",
-        31
+        34
       ]
     ],
     "translation": "Open command menu"
@@ -7337,6 +7465,18 @@
     ],
     "translation": "Personal Project"
   },
+  "Oi+J+N": {
+    "translation": "Pick a plan to get started. All paid plans include a 14-day free trial.",
+    "message": "Pick a plan to get started. All paid plans include a 14-day free trial.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        125
+      ]
+    ]
+  },
   "Iqh0Uv": {
     "message": "Planned",
     "placeholders": {},
@@ -7627,6 +7767,14 @@
         66
       ],
       [
+        "src/views/onboarding/workspace-details/index.tsx",
+        101
+      ],
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        150
+      ],
+      [
         "src/views/settings/components/Avatar.tsx",
         200
       ],
@@ -7714,7 +7862,6 @@
     "translation": "Please try again."
   },
   "nYNMZZ": {
-    "translation": "Position in list (0 = first, leave empty for end)",
     "message": "Position in list (0 = first, leave empty for end)",
     "placeholders": {},
     "comments": [],
@@ -7723,7 +7870,8 @@
         "src/views/board/components/CardContextDuplicateModal.tsx",
         193
       ]
-    ]
+    ],
+    "translation": "Position in list (0 = first, leave empty for end)"
   },
   "aHCEmh": {
     "message": "Pricing",
@@ -7810,6 +7958,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        91
+      ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
         333
@@ -8252,6 +8404,10 @@
       [
         "src/views/home/components/Header.tsx",
         28
+      ],
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        161
       ]
     ],
     "translation": "Roadmap"
@@ -8445,7 +8601,6 @@
     "translation": "See what our users are saying about Kan"
   },
   "zYRVNp": {
-    "translation": "Select a list",
     "message": "Select a list",
     "placeholders": {},
     "comments": [],
@@ -8454,7 +8609,8 @@
         "src/views/board/components/CardContextDuplicateModal.tsx",
         131
       ]
-    ]
+    ],
+    "translation": "Select a list"
   },
   "wgNoIs": {
     "message": "Select all",
@@ -8600,6 +8756,18 @@
     ],
     "translation": "set the due date"
   },
+  "JjEJSy": {
+    "translation": "Set up your workspace",
+    "message": "Set up your workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        179
+      ]
+    ]
+  },
   "Tz0i8g": {
     "message": "Settings",
     "placeholders": {},
@@ -8735,6 +8903,22 @@
       ]
     ],
     "translation": "Sign In"
+  },
+  "fcWrnU": {
+    "translation": "Sign out",
+    "message": "Sign out",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        284
+      ],
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        362
+      ]
+    ]
   },
   "mErq7F": {
     "message": "Sign Up",
@@ -8875,6 +9059,18 @@
       ]
     ],
     "translation": "Software Development"
+  },
+  "6sKjjx": {
+    "translation": "Solo",
+    "message": "Solo",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        76
+      ]
+    ]
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -9031,6 +9227,18 @@
       ]
     ],
     "translation": "System"
+  },
+  "KM6m8p": {
+    "translation": "Team",
+    "message": "Team",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        83
+      ]
+    ]
   },
   "bff61F": {
     "message": "Team Plan",
@@ -9237,7 +9445,6 @@
     "translation": "The board has been unarchived."
   },
   "nKBUeF": {
-    "translation": "The card has been duplicated.",
     "message": "The card has been duplicated.",
     "placeholders": {},
     "comments": [],
@@ -9246,7 +9453,8 @@
         "src/views/board/components/CardContextDuplicateModal.tsx",
         69
       ]
-    ]
+    ],
+    "translation": "The card has been duplicated."
   },
   "jlB2RY": {
     "message": "The current password you entered is incorrect.",
@@ -9452,6 +9660,30 @@
     ],
     "translation": "This member's permissions have been reset to their role defaults."
   },
+  "HQVm6e": {
+    "translation": "This URL has already been taken",
+    "message": "This URL has already been taken",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        73
+      ]
+    ]
+  },
+  "gKmoow": {
+    "translation": "This URL is reserved",
+    "message": "This URL is reserved",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        75
+      ]
+    ]
+  },
   "OAYToL": {
     "message": "This will remove all custom member permissions in this workspace. Members will inherit permissions only from their roles.",
     "placeholders": {},
@@ -9537,7 +9769,6 @@
     "translation": "Title"
   },
   "wK4OTM": {
-    "translation": "Title (optional)",
     "message": "Title (optional)",
     "placeholders": {},
     "comments": [],
@@ -9546,7 +9777,8 @@
         "src/views/board/components/CardContextDuplicateModal.tsx",
         180
       ]
-    ]
+    ],
+    "translation": "Title (optional)"
   },
   "Se/UIp": {
     "message": "To Do",
@@ -9796,6 +10028,10 @@
       [
         "src/components/NewWorkspaceForm.tsx",
         158
+      ],
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        100
       ]
     ],
     "translation": "Unable to create workspace"
@@ -9861,7 +10097,6 @@
     "translation": "Unable to delete comment"
   },
   "Oo4E6p": {
-    "translation": "Unable to duplicate card",
     "message": "Unable to duplicate card",
     "placeholders": {},
     "comments": [],
@@ -9870,10 +10105,10 @@
         "src/views/board/components/CardContextDuplicateModal.tsx",
         75
       ]
-    ]
+    ],
+    "translation": "Unable to duplicate card"
   },
   "K7k9u3": {
-    "translation": "Unable to move card",
     "message": "Unable to move card",
     "placeholders": {},
     "comments": [],
@@ -9882,7 +10117,8 @@
         "src/views/board/components/CardContextMoveListModal.tsx",
         41
       ]
-    ]
+    ],
+    "translation": "Unable to move card"
   },
   "8yFGGF": {
     "message": "Unable to remove member",
@@ -9931,6 +10167,18 @@
       ]
     ],
     "translation": "Unable to send feedback"
+  },
+  "Q60WUZ": {
+    "translation": "Unable to start checkout",
+    "message": "Unable to start checkout",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        149
+      ]
+    ]
   },
   "T7Mywq": {
     "message": "Unable to update board",
@@ -10300,6 +10548,18 @@
     ],
     "translation": "Unlimited members"
   },
+  "8AwlaR": {
+    "translation": "Unlimited members and a custom workspace username for teams ready to scale.",
+    "message": "Unlimited members and a custom workspace username for teams ready to scale.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        94
+      ]
+    ]
+  },
   "Ws+3X+": {
     "message": "Unlimited seats and advanced features for growing teams.",
     "placeholders": {},
@@ -10460,6 +10720,10 @@
       [
         "src/components/NewWorkspaceForm.tsx",
         373
+      ],
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        243
       ]
     ],
     "translation": "Upgrade to Pro ($29/month)"
@@ -10986,6 +11250,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/onboarding/workspace-details/index.tsx",
+        253
+      ],
+      [
         "src/views/settings/WorkspaceSettings.tsx",
         82
       ]
@@ -11056,6 +11324,10 @@
       [
         "src/components/NewWorkspaceForm.tsx",
         263
+      ],
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        188
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
@@ -11227,6 +11499,18 @@
       ]
     ],
     "translation": "You are about to change your password."
+  },
+  "3WXdoZ": {
+    "translation": "You can always change these later in settings.",
+    "message": "You can always change these later in settings.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        182
+      ]
+    ]
   },
   "aelko+": {
     "message": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
@@ -11400,6 +11684,18 @@
     ],
     "translation": "Your account has been deleted."
   },
+  "c4nMcR": {
+    "translation": "Your avatar",
+    "message": "Your avatar",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        229
+      ]
+    ]
+  },
   "evg7+A": {
     "message": "Your boards have been imported.",
     "placeholders": {},
@@ -11544,6 +11840,30 @@
     ],
     "translation": "Your unsubscribe link is missing a token. Please open the latest email and try again."
   },
+  "GRAGsB": {
+    "translation": "Your workspace",
+    "message": "Your workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        322
+      ]
+    ]
+  },
+  "j0o6ml": {
+    "translation": "Your workspace description",
+    "message": "Your workspace description",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        325
+      ]
+    ]
+  },
   "GnSSGm": {
     "message": "Your workspace description has been updated.",
     "placeholders": {},
@@ -11591,6 +11911,22 @@
       ]
     ],
     "translation": "Your workspace slug has been updated."
+  },
+  "OTxjpR": {
+    "translation": "your-workspace",
+    "message": "your-workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        197
+      ],
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        198
+      ]
+    ]
   },
   "4DOCMI": {
     "message": "YouTube URL",
