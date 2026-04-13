@@ -2,9 +2,9 @@ import type { DropResult } from "react-beautiful-dnd";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
-import { env } from "next-runtime-env";
 import { t } from "@lingui/core/macro";
 import { keepPreviousData } from "@tanstack/react-query";
+import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 import { DragDropContext, Draggable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
@@ -37,6 +37,7 @@ import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { formatToArray } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
+import { BoardCalendarView } from "./components/BoardCalendarView";
 import BoardDropdown from "./components/BoardDropdown";
 import Card from "./components/Card";
 import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
@@ -57,6 +58,7 @@ import { UpdateBoardSlugForm } from "./components/UpdateBoardSlugForm";
 import VisibilityButton from "./components/VisibilityButton";
 
 type PublicListId = string;
+type BoardViewMode = "kanban" | "calendar";
 
 export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const params = useParams() as { boardId: string | string[] } | null;
@@ -68,6 +70,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     useModal();
   const [selectedPublicListId, setSelectedPublicListId] =
     useState<PublicListId>("");
+  const [boardViewMode, setBoardViewMode] = useState<BoardViewMode>("kanban");
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   const [contextMenu, setContextMenu] = useState<{
@@ -568,6 +571,30 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             )}
             {!isTemplate && (
               <>
+                <div className="inline-flex rounded-md border border-light-300 bg-light-50 p-1 dark:border-dark-300 dark:bg-dark-100">
+                  <button
+                    type="button"
+                    onClick={() => setBoardViewMode("kanban")}
+                    className={`rounded px-2 py-1 text-xs font-semibold ${
+                      boardViewMode === "kanban"
+                        ? "bg-light-1000 text-light-50 dark:bg-dark-1000 dark:text-dark-50"
+                        : "text-light-900 hover:bg-light-200 dark:text-dark-900 dark:hover:bg-dark-200"
+                    }`}
+                  >
+                    {t`Board`}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setBoardViewMode("calendar")}
+                    className={`rounded px-2 py-1 text-xs font-semibold ${
+                      boardViewMode === "calendar"
+                        ? "bg-light-1000 text-light-50 dark:bg-dark-1000 dark:text-dark-50"
+                        : "text-light-900 hover:bg-light-200 dark:text-dark-900 dark:hover:bg-dark-200"
+                    }`}
+                  >
+                    {t`Calendar`}
+                  </button>
+                </div>
                 <UpdateBoardSlugButton
                   handleOnClick={() => openModal("UPDATE_BOARD_SLUG")}
                   isLoading={isLoading}
@@ -644,7 +671,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             </div>
           ) : boardData ? (
             <>
-              {boardData.lists.length === 0 ? (
+              {boardViewMode === "calendar" ? (
+                <BoardCalendarView
+                  boardPublicId={boardId ?? ""}
+                  isTemplate={!!isTemplate}
+                  lists={boardData.lists}
+                />
+              ) : boardData.lists.length === 0 ? (
                 <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
                   <div className="flex flex-col items-center">
                     <HiOutlineSquare3Stack3D className="h-10 w-10 text-light-800 dark:text-dark-800" />
