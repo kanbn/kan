@@ -1,3 +1,5 @@
+> **Recent change:** Added a calendar view on the task board for tasks with a due date.
+
 ![github-background](https://github.com/user-attachments/assets/f728f52e-bf67-4357-9ba2-c24c437488e3)
 
 <div align="center">
