@@ -5,11 +5,6 @@
   <p>The open-source project management alternative to Trello.</p>
 </div>
 
-## 🍴 Fork Information
-
-- Added Calendar View for Items w/ Due Dates
-- Added Sorting for Cards for Items w/ Due Dates
-
 <p align="center">
   <a href="https://kan.bn/kan/roadmap">Roadmap</a>
   ·
@@ -23,6 +18,12 @@
 <div align="center">
   <a href="https://github.com/kanbn/kan/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-AGPLv3-purple"></a>
 </div>
+
+## Fork Information 🍴
+
+- Added Calendar View for Items w/ Due Dates
+- Added Sorting for Cards for Items w/ Due Dates
+
 
 ## Features 💫
 
