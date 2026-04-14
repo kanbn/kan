@@ -27,6 +27,8 @@
 - 🔍 **Labels & Filters**: Organise and find cards quickly
 - 💬 **Comments**: Discuss and collaborate with your team
 - 📝 **Activity Log**: Track all card changes with detailed activity history
+- 📅 **Board Calendar**: View cards with due dates on a month calendar
+- ↕️ **List Sorting**: Sort cards in each column by due date to surface what’s coming next
 - 🎨 **Templates** : Save time with reusable custom board templates
 - ⚡️ **Integrations (coming soon)** : Connect your favourite tools
 
