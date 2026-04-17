@@ -881,8 +881,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 350],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 83]
+      ["src/components/NewWorkspaceForm.tsx", 314],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 85]
     ],
     "translation": "Analisi della board"
   },
@@ -1280,7 +1280,7 @@
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 88],
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 66],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 98],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 106]
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 108]
     ],
     "translation": "Annulla"
   },
@@ -1497,9 +1497,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 353],
+      ["src/components/NewWorkspaceForm.tsx", 317],
       ["src/views/home/components/Features.tsx", 67],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 86]
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 88]
     ],
     "translation": "Prossimamente"
   },
@@ -1881,7 +1881,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 388],
+      ["src/components/NewWorkspaceForm.tsx", 352],
       ["src/components/WorkspaceMenu.tsx", 160]
     ],
     "translation": "Crea workspace"
@@ -1969,7 +1969,7 @@
     "message": "Custom URLs require upgrading to a Pro plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 319]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 283]],
     "translation": "Gli URL personalizzati richiedono l'upgrade a un piano Pro"
   },
   "7RpHg/": {
@@ -1994,8 +1994,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 343],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 76]
+      ["src/components/NewWorkspaceForm.tsx", 307],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 78]
     ],
     "translation": "URL workspace personalizzato"
   },
@@ -2699,7 +2699,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 240],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 41]
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 43]
     ],
     "translation": "Errore durante l'upgrade dell'abbonamento"
   },
@@ -2708,7 +2708,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/components/NewWorkspaceForm.tsx", 146]],
-    "translation": "Errore durante l'upgrade a Pro"
+    "translation": "Errore durante l'upgrade a Pro",
+    "obsolete": true
   },
   "CYWHT+": {
     "message": "Error uploading profile image",
@@ -3585,9 +3586,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 336],
+      ["src/components/NewWorkspaceForm.tsx", 300],
       ["src/views/pricing/components/PricingTiers.tsx", 159],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 69]
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 71]
     ],
     "translation": "Offerta di lancio"
   },
@@ -4047,7 +4048,7 @@
     "message": "New workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 244]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 208]],
     "translation": "Nuovo workspace"
   },
   "5ACX4z": {
@@ -4524,7 +4525,7 @@
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 26],
       ["src/components/FeedbackModal.tsx", 41],
-      ["src/components/NewWorkspaceForm.tsx", 159],
+      ["src/components/NewWorkspaceForm.tsx", 123],
       ["src/views/board/components/BoardDropdown.tsx", 65],
       ["src/views/board/components/NewCardForm.tsx", 186],
       ["src/views/board/components/NewListForm.tsx", 79],
@@ -4570,7 +4571,7 @@
       ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 64],
       ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 59],
       ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 76],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 42],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 44],
       ["src/views/settings/PermissionsSettings.tsx", 40]
     ],
     "translation": "Riprova più tardi o contatta l'assistenza clienti."
@@ -4630,7 +4631,7 @@
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 275],
       ["src/views/pricing/components/Pricing.tsx", 56],
       ["src/views/pricing/components/PricingTiers.tsx", 61],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 93]
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 95]
     ],
     "translation": "Supporto email prioritario"
   },
@@ -5335,7 +5336,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 359],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 111]
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 113]
     ],
     "translation": "Inizia la prova gratuita di 14 giorni"
   },
@@ -5384,7 +5385,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 57]
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 59]
     ],
     "translation": "Potenzia il tuo workspace per soli $29 al mese. Ecco cosa otterrai:"
   },
@@ -5719,14 +5720,14 @@
     "message": "This workspace URL has already been taken",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 288]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 252]],
     "translation": "Questo URL del workspace è già stato utilizzato"
   },
   "bJtM0P": {
     "message": "This workspace URL is reserved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 290]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 254]],
     "translation": "Questo URL dello workspace è riservato"
   },
   "kp6L3T": {
@@ -5899,7 +5900,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 158],
+      ["src/components/NewWorkspaceForm.tsx", 122],
       ["src/views/onboarding/workspace-details/index.tsx", 100]
     ],
     "translation": "Impossibile creare lo workspace"
@@ -6195,11 +6196,11 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 333],
+      ["src/components/NewWorkspaceForm.tsx", 297],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 84],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 85],
       ["src/views/pricing/components/PricingTiers.tsx", 80],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 66]
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 68]
     ],
     "translation": "Membri illimitati"
   },
@@ -6290,7 +6291,7 @@
     "comments": [],
     "origin": [
       ["src/components/SideNavigation.tsx", 240],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 53],
+      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 55],
       ["src/views/settings/WorkspaceSettings.tsx", 118]
     ],
     "translation": "Passa a Pro"
@@ -6300,7 +6301,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 373],
+      ["src/components/NewWorkspaceForm.tsx", 337],
       ["src/views/onboarding/workspace-details/index.tsx", 243]
     ],
     "translation": "Passa a Pro ($29/mese)"
@@ -6599,7 +6600,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/components/NewWorkspaceForm.tsx", 147]],
-    "translation": "Workspace creato con successo. Potrai effettuare l'upgrade più tardi nelle impostazioni."
+    "translation": "Workspace creato con successo. Potrai effettuare l'upgrade più tardi nelle impostazioni.",
+    "obsolete": true
   },
   "UlhdTP": {
     "message": "Workspace deleted",
@@ -6663,7 +6665,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 263],
+      ["src/components/NewWorkspaceForm.tsx", 227],
       ["src/views/onboarding/workspace-details/index.tsx", 188],
       ["src/views/settings/WorkspaceSettings.tsx", 63]
     ],
@@ -6738,7 +6740,7 @@
     "message": "workspace-url",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 277]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 241]],
     "translation": "workspace-url"
   },
   "4kJRen": {
