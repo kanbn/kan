@@ -114,42 +114,6 @@ export function NewWorkspaceForm() {
           weekStartDay: 1,
         });
 
-        // If in cloud and Pro toggle is enabled, create checkout session for pro
-        if (env("NEXT_PUBLIC_KAN_ENV") === "cloud" && isProToggleEnabled) {
-          try {
-            const response = await fetch(
-              "/api/stripe/create_checkout_session",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  slug: slug || undefined,
-                  workspacePublicId: values.publicId,
-                  cancelUrl: window.location.pathname + window.location.search,
-                  successUrl: "/boards",
-                }),
-              },
-            );
-
-            const data = await response.json();
-            const url = (data as { url: string }).url;
-
-            if (url) {
-              window.location.href = url;
-              return; // Don't close modal if redirecting to checkout
-            }
-          } catch (error) {
-            console.error("Error creating checkout session:", error);
-            showPopup({
-              header: t`Error upgrading to Pro`,
-              message: t`Workspace created successfully. You can upgrade later in settings.`,
-              icon: "warning",
-            });
-          }
-        }
-
         closeModal();
       }
     },
