@@ -75,7 +75,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        56
+        59
       ]
     ],
     "translation": "{0} has been added to your favorites."
@@ -91,7 +91,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        57
+        60
       ]
     ],
     "translation": "{0} has been removed from your favorites."
@@ -527,7 +527,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        122
+        125
       ]
     ],
     "translation": "Add to favorites"
@@ -694,7 +694,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        53
+        56
       ]
     ],
     "translation": "Added to favorites"
@@ -1081,7 +1081,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        111
+        114
       ]
     ],
     "translation": "Archive board"
@@ -1489,7 +1489,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        44
+        46
       ]
     ],
     "translation": "Board archived"
@@ -1549,7 +1549,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        44
+        46
       ]
     ],
     "translation": "Board unarchived"
@@ -3478,7 +3478,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        133
+        136
       ]
     ],
     "translation": "Delete board"
@@ -3530,7 +3530,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        133
+        136
       ]
     ],
     "translation": "Delete template"
@@ -3998,7 +3998,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        102
+        105
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
@@ -6311,7 +6311,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        91
+        94
       ]
     ],
     "translation": "Make template"
@@ -7610,7 +7610,7 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        65
+        68
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -8122,7 +8122,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        121
+        124
       ]
     ],
     "translation": "Remove from favorites"
@@ -8217,7 +8217,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        54
+        57
       ]
     ],
     "translation": "Removed from favorites"
@@ -9413,7 +9413,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        46
+        48
       ]
     ],
     "translation": "The board has been archived."
@@ -9425,7 +9425,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        47
+        49
       ]
     ],
     "translation": "The board has been unarchived."
@@ -10173,7 +10173,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        64
+        67
       ]
     ],
     "translation": "Unable to update board"
@@ -10341,7 +10341,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        111
+        114
       ]
     ],
     "translation": "Unarchive board"
