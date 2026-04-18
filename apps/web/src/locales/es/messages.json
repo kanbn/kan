@@ -767,7 +767,7 @@
     "message": "Back",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 275]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 276]],
     "translation": "Atrás"
   },
   "KNKCTb": {
@@ -881,7 +881,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 314],
       ["src/views/settings/components/UpgradeToProConfirmation.tsx", 85]
     ],
     "translation": "Analíticas del tablero"
@@ -1497,7 +1496,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 317],
       ["src/views/home/components/Features.tsx", 67],
       ["src/views/settings/components/UpgradeToProConfirmation.tsx", 88]
     ],
@@ -1670,7 +1668,7 @@
     "comments": [],
     "origin": [
       ["src/views/onboarding/select-plan/index.tsx", 212],
-      ["src/views/onboarding/workspace-details/index.tsx", 291]
+      ["src/views/onboarding/workspace-details/index.tsx", 292]
     ],
     "translation": "Continuar"
   },
@@ -1881,7 +1879,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 352],
+      ["src/components/NewWorkspaceForm.tsx", 226],
       ["src/components/WorkspaceMenu.tsx", 160]
     ],
     "translation": "Crear espacio de trabajo"
@@ -1970,7 +1968,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/components/NewWorkspaceForm.tsx", 283]],
-    "translation": "Las URLs personalizadas requieren actualizar a un plan Pro"
+    "translation": "Las URLs personalizadas requieren actualizar a un plan Pro",
+    "obsolete": true
   },
   "7RpHg/": {
     "message": "Custom username",
@@ -1986,7 +1985,7 @@
     "message": "Custom usernames require upgrading to a Pro plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 220]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 221]],
     "translation": "Los nombres de usuario personalizados requieren actualizar a un plan Pro"
   },
   "j9IZZ0": {
@@ -1994,7 +1993,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 307],
       ["src/views/settings/components/UpgradeToProConfirmation.tsx", 78]
     ],
     "translation": "URL del espacio de trabajo personalizada"
@@ -2483,7 +2481,7 @@
     "message": "Engineering",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 161]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 162]],
     "translation": "Ingeniería"
   },
   "0+ewPp": {
@@ -3586,7 +3584,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 300],
       ["src/views/pricing/components/PricingTiers.tsx", 159],
       ["src/views/settings/components/UpgradeToProConfirmation.tsx", 71]
     ],
@@ -3789,7 +3786,7 @@
     "message": "Marketing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 161]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 162]],
     "translation": "Marketing"
   },
   "agPptk": {
@@ -4048,7 +4045,7 @@
     "message": "New workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 208]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 145]],
     "translation": "Nuevo espacio de trabajo"
   },
   "5ACX4z": {
@@ -4525,7 +4522,7 @@
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 26],
       ["src/components/FeedbackModal.tsx", 41],
-      ["src/components/NewWorkspaceForm.tsx", 123],
+      ["src/components/NewWorkspaceForm.tsx", 109],
       ["src/views/board/components/BoardDropdown.tsx", 65],
       ["src/views/board/components/NewCardForm.tsx", 186],
       ["src/views/board/components/NewListForm.tsx", 79],
@@ -4562,8 +4559,8 @@
       ["src/views/members/components/InviteMemberForm.tsx", 104],
       ["src/views/members/components/InviteMemberForm.tsx", 241],
       ["src/views/members/index.tsx", 66],
-      ["src/views/onboarding/workspace-details/index.tsx", 101],
-      ["src/views/onboarding/workspace-details/index.tsx", 150],
+      ["src/views/onboarding/workspace-details/index.tsx", 102],
+      ["src/views/onboarding/workspace-details/index.tsx", 151],
       ["src/views/settings/components/Avatar.tsx", 200],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 40],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 46],
@@ -4913,7 +4910,7 @@
       ["src/views/home/components/Footer.tsx", 36],
       ["src/views/home/components/Header.tsx", 13],
       ["src/views/home/components/Header.tsx", 28],
-      ["src/views/onboarding/workspace-details/index.tsx", 161]
+      ["src/views/onboarding/workspace-details/index.tsx", 162]
     ],
     "translation": "Hoja de ruta"
   },
@@ -5129,7 +5126,7 @@
     "message": "Set up your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 179]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 180]],
     "translation": "Configura tu espacio de trabajo"
   },
   "Tz0i8g": {
@@ -5218,7 +5215,7 @@
     "comments": [],
     "origin": [
       ["src/views/onboarding/select-plan/index.tsx", 284],
-      ["src/views/onboarding/workspace-details/index.tsx", 362]
+      ["src/views/onboarding/workspace-details/index.tsx", 363]
     ],
     "translation": "Cerrar sesión"
   },
@@ -5676,14 +5673,14 @@
     "message": "This URL has already been taken",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 73]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 74]],
     "translation": "Esta URL ya está en uso"
   },
   "gKmoow": {
     "message": "This URL is reserved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 75]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 76]],
     "translation": "Esta URL está reservada"
   },
   "OAYToL": {
@@ -5720,14 +5717,14 @@
     "message": "This workspace URL has already been taken",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 252]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 189]],
     "translation": "Esta URL de espacio de trabajo ya está en uso"
   },
   "bJtM0P": {
     "message": "This workspace URL is reserved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 254]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 191]],
     "translation": "Esta URL de espacio de trabajo está reservada"
   },
   "kp6L3T": {
@@ -5900,8 +5897,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 122],
-      ["src/views/onboarding/workspace-details/index.tsx", 100]
+      ["src/components/NewWorkspaceForm.tsx", 108],
+      ["src/views/onboarding/workspace-details/index.tsx", 101]
     ],
     "translation": "No se pudo crear el espacio de trabajo"
   },
@@ -5994,7 +5991,7 @@
     "message": "Unable to start checkout",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 149]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 150]],
     "translation": "No se pudo iniciar el proceso de pago"
   },
   "T7Mywq": {
@@ -6196,7 +6193,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 297],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 84],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 85],
       ["src/views/pricing/components/PricingTiers.tsx", 80],
@@ -6300,10 +6296,7 @@
     "message": "Upgrade to Pro ($29/month)",
     "placeholders": {},
     "comments": [],
-    "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 337],
-      ["src/views/onboarding/workspace-details/index.tsx", 243]
-    ],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 244]],
     "translation": "Actualizar a Pro ($29/mes)"
   },
   "b3Thhd": {
@@ -6338,7 +6331,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 38],
+      ["src/components/NewWorkspaceForm.tsx", 31],
       ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 38]
     ],
     "translation": "La URL solo puede contener letras, números y guiones"
@@ -6355,7 +6348,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 36],
+      ["src/components/NewWorkspaceForm.tsx", 29],
       ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 36]
     ],
     "translation": "La URL no puede superar los 64 caracteres"
@@ -6365,7 +6358,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 34],
+      ["src/components/NewWorkspaceForm.tsx", 27],
       ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 34]
     ],
     "translation": "La URL debe tener al menos 3 caracteres"
@@ -6617,7 +6610,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 253],
+      ["src/views/onboarding/workspace-details/index.tsx", 254],
       ["src/views/settings/WorkspaceSettings.tsx", 82]
     ],
     "translation": "Descripción del espacio de trabajo"
@@ -6665,8 +6658,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 227],
-      ["src/views/onboarding/workspace-details/index.tsx", 188],
+      ["src/components/NewWorkspaceForm.tsx", 164],
+      ["src/views/onboarding/workspace-details/index.tsx", 189],
       ["src/views/settings/WorkspaceSettings.tsx", 63]
     ],
     "translation": "Nombre del espacio de trabajo"
@@ -6676,7 +6669,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 30],
+      ["src/components/NewWorkspaceForm.tsx", 23],
       ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 15]
     ],
     "translation": "El nombre del espacio de trabajo no puede superar los 64 caracteres"
@@ -6685,7 +6678,7 @@
     "message": "Workspace name is required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 29]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 22]],
     "translation": "El nombre del espacio de trabajo es obligatorio"
   },
   "jZBHkN": {
@@ -6740,7 +6733,7 @@
     "message": "workspace-url",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 241]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 178]],
     "translation": "workspace-url"
   },
   "4kJRen": {
@@ -6778,7 +6771,7 @@
     "message": "You can always change these later in settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 182]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 183]],
     "translation": "Siempre puedes cambiar esto más tarde en la configuración."
   },
   "aelko+": {
@@ -6973,14 +6966,14 @@
     "message": "Your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 322]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 323]],
     "translation": "Tu espacio de trabajo"
   },
   "j0o6ml": {
     "message": "Your workspace description",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 325]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 326]],
     "translation": "Descripción de tu espacio de trabajo"
   },
   "GnSSGm": {
@@ -7024,8 +7017,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 197],
-      ["src/views/onboarding/workspace-details/index.tsx", 198]
+      ["src/views/onboarding/workspace-details/index.tsx", 198],
+      ["src/views/onboarding/workspace-details/index.tsx", 199]
     ],
     "translation": "tu-espacio-de-trabajo"
   },

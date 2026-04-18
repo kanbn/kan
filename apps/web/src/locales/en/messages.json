@@ -1281,7 +1281,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        275
+        276
       ]
     ],
     "translation": "Back"
@@ -1475,10 +1475,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      [
-        "src/components/NewWorkspaceForm.tsx",
-        314
-      ],
       [
         "src/views/settings/components/UpgradeToProConfirmation.tsx",
         85
@@ -2504,10 +2500,6 @@
     "comments": [],
     "origin": [
       [
-        "src/components/NewWorkspaceForm.tsx",
-        317
-      ],
-      [
         "src/views/home/components/Features.tsx",
         67
       ],
@@ -2801,7 +2793,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        291
+        292
       ]
     ],
     "translation": "Continue"
@@ -3145,7 +3137,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        352
+        226
       ],
       [
         "src/components/WorkspaceMenu.tsx",
@@ -3296,7 +3288,8 @@
         283
       ]
     ],
-    "translation": "Custom URLs require upgrading to a Pro plan"
+    "translation": "Custom URLs require upgrading to a Pro plan",
+    "obsolete": true
   },
   "7RpHg/": {
     "message": "Custom username",
@@ -3321,7 +3314,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        220
+        221
       ]
     ],
     "translation": "Custom usernames require upgrading to a Pro plan"
@@ -3331,10 +3324,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      [
-        "src/components/NewWorkspaceForm.tsx",
-        307
-      ],
       [
         "src/views/settings/components/UpgradeToProConfirmation.tsx",
         78
@@ -4189,7 +4178,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        161
+        162
       ]
     ],
     "translation": "Engineering"
@@ -6033,10 +6022,6 @@
     "comments": [],
     "origin": [
       [
-        "src/components/NewWorkspaceForm.tsx",
-        300
-      ],
-      [
         "src/views/pricing/components/PricingTiers.tsx",
         159
       ],
@@ -6382,7 +6367,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        161
+        162
       ]
     ],
     "translation": "Marketing"
@@ -6829,7 +6814,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        208
+        145
       ]
     ],
     "translation": "New workspace"
@@ -7621,7 +7606,7 @@
       ],
       [
         "src/components/NewWorkspaceForm.tsx",
-        123
+        109
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
@@ -7769,11 +7754,11 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        101
+        102
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        150
+        151
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -8408,7 +8393,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        161
+        162
       ]
     ],
     "translation": "Roadmap"
@@ -8764,7 +8749,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        179
+        180
       ]
     ],
     "translation": "Set up your workspace"
@@ -8916,7 +8901,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        362
+        363
       ]
     ],
     "translation": "Sign out"
@@ -9668,7 +9653,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        73
+        74
       ]
     ],
     "translation": "This URL has already been taken"
@@ -9680,7 +9665,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        75
+        76
       ]
     ],
     "translation": "This URL is reserved"
@@ -9728,7 +9713,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        252
+        189
       ]
     ],
     "translation": "This workspace URL has already been taken"
@@ -9740,7 +9725,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        254
+        191
       ]
     ],
     "translation": "This workspace URL is reserved"
@@ -10028,11 +10013,11 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        122
+        108
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        100
+        101
       ]
     ],
     "translation": "Unable to create workspace"
@@ -10176,7 +10161,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        149
+        150
       ]
     ],
     "translation": "Unable to start checkout"
@@ -10527,10 +10512,6 @@
     "comments": [],
     "origin": [
       [
-        "src/components/NewWorkspaceForm.tsx",
-        297
-      ],
-      [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
         84
       ],
@@ -10719,12 +10700,8 @@
     "comments": [],
     "origin": [
       [
-        "src/components/NewWorkspaceForm.tsx",
-        337
-      ],
-      [
         "src/views/onboarding/workspace-details/index.tsx",
-        243
+        244
       ]
     ],
     "translation": "Upgrade to Pro ($29/month)"
@@ -10780,7 +10757,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        38
+        31
       ],
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
@@ -10808,7 +10785,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        36
+        29
       ],
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
@@ -10824,7 +10801,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        34
+        27
       ],
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
@@ -11253,7 +11230,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        253
+        254
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
@@ -11325,11 +11302,11 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        227
+        164
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        188
+        189
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
@@ -11345,7 +11322,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        30
+        23
       ],
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
@@ -11361,7 +11338,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        29
+        22
       ]
     ],
     "translation": "Workspace name is required"
@@ -11445,7 +11422,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        241
+        178
       ]
     ],
     "translation": "workspace-url"
@@ -11509,7 +11486,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        182
+        183
       ]
     ],
     "translation": "You can always change these later in settings."
@@ -11849,7 +11826,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        322
+        323
       ]
     ],
     "translation": "Your workspace"
@@ -11861,7 +11838,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        325
+        326
       ]
     ],
     "translation": "Your workspace description"
@@ -11921,11 +11898,11 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        197
+        198
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        198
+        199
       ]
     ],
     "translation": "your-workspace"
