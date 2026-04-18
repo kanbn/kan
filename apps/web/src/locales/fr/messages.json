@@ -62,7 +62,7 @@
       "0": ["labelPublicIds.length"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 455]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 458]],
     "translation": "{0} étiquettes"
   },
   "9x4DAL": {
@@ -1313,7 +1313,7 @@
     "message": "Card title",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 321]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 324]],
     "translation": "Titre de la carte"
   },
   "rQXTmd": {
@@ -1774,7 +1774,7 @@
     "comments": [],
     "origin": [
       ["src/components/LabelForm.tsx", 213],
-      ["src/views/board/components/NewCardForm.tsx", 520],
+      ["src/views/board/components/NewCardForm.tsx", 523],
       ["src/views/board/components/NewListForm.tsx", 141]
     ],
     "translation": "Créer un autre"
@@ -1790,7 +1790,7 @@
     "message": "Create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 530]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 533]],
     "translation": "Créer une carte"
   },
   "d33Usy": {
@@ -1845,7 +1845,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewCardForm.tsx", 417],
+      ["src/views/board/components/NewCardForm.tsx", 420],
       ["src/views/card/components/LabelSelector.tsx", 101]
     ],
     "translation": "Créer une nouvelle étiquette"
@@ -2295,7 +2295,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/Filters.tsx", 171],
-      ["src/views/board/components/NewCardForm.tsx", 472],
+      ["src/views/board/components/NewCardForm.tsx", 475],
       ["src/views/card/index.tsx", 153]
     ],
     "translation": "Date d'échéance"
@@ -3544,7 +3544,7 @@
     "origin": [
       ["src/views/board/components/CardContextLabelsModal.tsx", 31],
       ["src/views/board/components/Filters.tsx", 155],
-      ["src/views/board/components/NewCardForm.tsx", 421],
+      ["src/views/board/components/NewCardForm.tsx", 424],
       ["src/views/card/index.tsx", 133]
     ],
     "translation": "Étiquettes"
@@ -3821,7 +3821,7 @@
     "origin": [
       ["src/components/SideNavigation.tsx", 123],
       ["src/views/board/components/Filters.tsx", 147],
-      ["src/views/board/components/NewCardForm.tsx", 379],
+      ["src/views/board/components/NewCardForm.tsx", 382],
       ["src/views/card/index.tsx", 143],
       ["src/views/members/index.tsx", 263],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 81]
@@ -3968,7 +3968,7 @@
     "message": "New card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 304]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 307]],
     "translation": "Nouvelle carte"
   },
   "cWcxrL": {
@@ -4524,7 +4524,7 @@
       ["src/components/FeedbackModal.tsx", 41],
       ["src/components/NewWorkspaceForm.tsx", 109],
       ["src/views/board/components/BoardDropdown.tsx", 65],
-      ["src/views/board/components/NewCardForm.tsx", 186],
+      ["src/views/board/components/NewCardForm.tsx", 189],
       ["src/views/board/components/NewListForm.tsx", 79],
       ["src/views/board/components/NewTemplateForm.tsx", 61],
       ["src/views/board/components/NewTemplateForm.tsx", 77],
@@ -5865,7 +5865,7 @@
     "message": "Unable to create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 183]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 186]],
     "translation": "Impossible de créer la carte"
   },
   "mHhffx": {
