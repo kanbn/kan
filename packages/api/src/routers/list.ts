@@ -7,6 +7,7 @@ import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { listCreateResponseSchema, listUpdateResponseSchema } from "../schemas";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 
 export const listRouter = createTRPCRouter({
@@ -27,7 +28,7 @@ export const listRouter = createTRPCRouter({
         boardPublicId: z.string().min(12),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof listRepo.create>>>())
+    .output(listCreateResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -163,12 +164,7 @@ export const listRouter = createTRPCRouter({
         index: z.number().optional(),
       }),
     )
-    .output(
-      z.custom<
-        | Awaited<ReturnType<typeof listRepo.update>>
-        | Awaited<ReturnType<typeof listRepo.reorder>>
-      >(),
-    )
+    .output(listUpdateResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 

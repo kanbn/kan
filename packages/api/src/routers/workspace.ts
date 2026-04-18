@@ -7,6 +7,14 @@ import * as workspaceSlugRepo from "@kan/db/repository/workspaceSlug.repo";
 import { generateAvatarUrl, generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import {
+  workspaceListItemSchema,
+  workspaceDetailSchema,
+  workspaceWithBoardsSchema,
+  workspaceCreateResponseSchema,
+  workspaceUpdateResponseSchema,
+  workspaceDeleteResponseSchema,
+} from "../schemas";
 import { assertPermission } from "../utils/permissions";
 
 export const workspaceRouter = createTRPCRouter({
@@ -22,9 +30,7 @@ export const workspaceRouter = createTRPCRouter({
       },
     })
     .input(z.void())
-    .output(
-      z.custom<Awaited<ReturnType<typeof workspaceRepo.getAllByUserId>>>(),
-    )
+    .output(z.array(workspaceListItemSchema))
     .query(async ({ ctx }) => {
       const userId = ctx.user?.id;
 
@@ -50,11 +56,7 @@ export const workspaceRouter = createTRPCRouter({
       },
     })
     .input(z.object({ workspacePublicId: z.string().min(12) }))
-    .output(
-      z.custom<
-        Awaited<ReturnType<typeof workspaceRepo.getByPublicIdWithMembers>>
-      >(),
-    )
+    .output(workspaceDetailSchema)
     .query(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -134,7 +136,7 @@ export const workspaceRouter = createTRPCRouter({
         return {
           ...result,
           members: sanitizedMembers,
-        } as Awaited<ReturnType<typeof workspaceRepo.getByPublicIdWithMembers>>;
+        };
       }
 
       return {
@@ -162,9 +164,7 @@ export const workspaceRouter = createTRPCRouter({
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
       }),
     )
-    .output(
-      z.custom<Awaited<ReturnType<typeof workspaceRepo.getBySlugWithBoards>>>(),
-    )
+    .output(workspaceWithBoardsSchema)
     .query(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -211,7 +211,7 @@ export const workspaceRouter = createTRPCRouter({
           .optional(),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof workspaceRepo.create>>>())
+    .output(workspaceCreateResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
       const userEmail = ctx.user?.email;
@@ -270,7 +270,13 @@ export const workspaceRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
-      return result;
+      return {
+        publicId: result.publicId,
+        name: result.name!,
+        slug: result.slug!,
+        description: result.description ?? null,
+        plan: result.plan!,
+      };
     }),
   update: protectedProcedure
     .meta({
@@ -300,7 +306,7 @@ export const workspaceRouter = createTRPCRouter({
           .optional(),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof workspaceRepo.update>>>())
+    .output(workspaceUpdateResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -383,7 +389,7 @@ export const workspaceRouter = createTRPCRouter({
       },
     })
     .input(z.object({ workspacePublicId: z.string().min(12) }))
-    .output(z.custom<Awaited<ReturnType<typeof workspaceRepo.hardDelete>>>())
+    .output(workspaceDeleteResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -405,12 +411,12 @@ export const workspaceRouter = createTRPCRouter({
         });
       await assertPermission(ctx.db, userId, workspace.id, "workspace:delete");
 
-      const result = await workspaceRepo.hardDelete(
+      await workspaceRepo.hardDelete(
         ctx.db,
         input.workspacePublicId,
       );
 
-      return result;
+      return { success: true };
     }),
   checkSlugAvailability: publicProcedure
     .meta({

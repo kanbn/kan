@@ -8,6 +8,7 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { attachmentConfirmResponseSchema } from "../schemas";
 import { assertPermission } from "../utils/permissions";
 import { deleteObject, generateUploadUrl } from "@kan/shared/utils";
 
@@ -110,7 +111,7 @@ export const attachmentRouter = createTRPCRouter({
         size: z.number().positive(),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof cardAttachmentRepo.create>>>())
+    .output(attachmentConfirmResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 

@@ -16,6 +16,7 @@ import {
 import { updateSubscriptionSeats } from "@kan/stripe";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { memberInviteResponseSchema } from "../schemas";
 import {
   assertCanManageMember,
   assertCanManageRole,
@@ -40,7 +41,7 @@ export const memberRouter = createTRPCRouter({
         workspacePublicId: z.string().min(12),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof memberRepo.create>>>())
+    .output(memberInviteResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
