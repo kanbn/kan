@@ -20,13 +20,13 @@ const workspaceSlugSchema = z
 interface CheckoutSessionRequest {
   successUrl: string;
   cancelUrl: string;
+  plan: "team" | "pro";
   billing?: string;
   workspacePublicId?: string;
   slug?: string;
   workspaceName?: string;
   workspaceDescription?: string;
   workspaceSlug?: string;
-  plan?: string;
 }
 
 export default withRateLimit(
@@ -38,117 +38,114 @@ export default withRateLimit(
       return res.status(405).json({ error: "Method not allowed" });
     }
 
-    try {
-      const { user, db } = await createNextApiContext(req);
+    const { user, db } = await createNextApiContext(req);
 
-      if (!user) {
-        return res.status(404).json({ error: "User not found" });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const body = req.body as CheckoutSessionRequest;
+    const {
+      successUrl,
+      cancelUrl,
+      plan,
+      billing,
+      workspacePublicId,
+      slug,
+      workspaceName,
+      workspaceDescription,
+      workspaceSlug,
+    } = body;
+
+    if (!successUrl || !cancelUrl || !plan) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    if (!workspacePublicId && !workspaceName) {
+      return res
+        .status(400)
+        .json({ error: "Must provide workspacePublicId or workspaceName" });
+    }
+
+    const resolvedSlug = slug ?? workspaceSlug;
+
+    if (resolvedSlug) {
+      const slugResult = workspaceSlugSchema.safeParse(resolvedSlug);
+      if (!slugResult.success) {
+        return res.status(400).json({ error: "Invalid workspace slug" });
       }
+    }
 
-      const body = req.body as CheckoutSessionRequest;
-      const {
-        successUrl,
-        cancelUrl,
-        billing,
+    let resolvedWorkspacePublicId = workspacePublicId;
+    let subscriptionId: number | undefined;
+
+    if (workspacePublicId) {
+      // Existing workspace upgrade
+      const workspace = await workspaceRepo.getByPublicId(
+        db,
         workspacePublicId,
-        slug,
-        workspaceName,
-        workspaceDescription,
-        workspaceSlug,
-      } = body;
+      );
 
-      if (!successUrl || !cancelUrl) {
-        return res.status(400).json({ error: "Missing required fields" });
+      if (!workspace) {
+        return res.status(404).json({ error: "Workspace not found" });
       }
 
-      if (!workspacePublicId && !workspaceName) {
-        return res
-          .status(400)
-          .json({ error: "Must provide workspacePublicId or workspaceName" });
+      try {
+        await assertPermission(db, user.id, workspace.id, "workspace:manage");
+      } catch {
+        return res.status(403).json({ error: "Unauthorized" });
       }
 
-      const resolvedSlug = slug ?? workspaceSlug;
-
-      if (resolvedSlug) {
-        const slugResult = workspaceSlugSchema.safeParse(resolvedSlug);
-        if (!slugResult.success) {
-          return res.status(400).json({ error: "Invalid workspace slug" });
-        }
-      }
-
-      let resolvedWorkspacePublicId = workspacePublicId;
-      let subscriptionId: number | undefined;
-
-      if (workspacePublicId) {
-        // Existing workspace upgrade
-        const workspace = await workspaceRepo.getByPublicId(
-          db,
-          workspacePublicId,
-        );
-
-        if (!workspace) {
-          return res.status(404).json({ error: "Workspace not found" });
-        }
-
-        try {
-          await assertPermission(db, user.id, workspace.id, "workspace:manage");
-        } catch {
-          return res.status(403).json({ error: "Unauthorized" });
-        }
-
-        const subscription = await subscriptionRepo.create(db, {
-          plan: "pro",
-          referenceId: workspacePublicId,
-          userId: user.id,
-          stripeCustomerId: user.stripeCustomerId ?? "",
-          status: "incomplete",
-        });
-
-        subscriptionId = subscription?.id;
-
-        if (!subscriptionId) {
-          return res.status(500).json({ error: "Error creating subscription" });
-        }
-      } else {
-        resolvedWorkspacePublicId = generateUID();
-      }
-
-      const isTeam = body.plan === "team";
-      const annualPriceId = isTeam
-        ? (process.env.STRIPE_TEAM_PLAN_ANNUAL_PRICE_ID ??
-          process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID)
-        : (process.env.STRIPE_PRO_PLAN_ANNUAL_PRICE_ID ??
-          process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID);
-      const monthlyPriceId = isTeam
-        ? process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID
-        : process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID;
-      const priceId = billing === "annual" ? annualPriceId : monthlyPriceId;
-
-      const session = await stripe.checkout.sessions.create({
-        mode: "subscription",
-        payment_method_collection: "always",
-        line_items: [{ price: priceId, quantity: 1 }],
-        subscription_data: { trial_period_days: 14 },
-        success_url: `${env("NEXT_PUBLIC_BASE_URL")}${successUrl}?workspacePublicId=${resolvedWorkspacePublicId}`,
-        cancel_url: `${env("NEXT_PUBLIC_BASE_URL")}${cancelUrl}`,
-        client_reference_id: resolvedWorkspacePublicId,
-        customer: user.stripeCustomerId ?? undefined,
-        metadata: {
-          workspacePublicId: resolvedWorkspacePublicId!,
-          userId: user.id,
-          userEmail: user.email ?? "",
-          ...(resolvedSlug && { workspaceSlug: resolvedSlug }),
-          ...(workspaceName && { workspaceName }),
-          ...(workspaceDescription && { workspaceDescription }),
-          ...(subscriptionId && { subscriptionId: String(subscriptionId) }),
-          plan: body.plan ?? "pro",
-          isNewWorkspace: workspaceName ? "true" : "false",
-        },
+      const subscription = await subscriptionRepo.create(db, {
+        plan: plan,
+        referenceId: workspacePublicId,
+        userId: user.id,
+        stripeCustomerId: user.stripeCustomerId ?? "",
+        status: "incomplete",
       });
 
-      return res.status(200).json({ url: session.url });
-    } catch (error) {
-      return res.status(500).json({ error: "Error creating checkout session" });
+      subscriptionId = subscription?.id;
+
+      if (!subscriptionId) {
+        return res.status(500).json({ error: "Error creating subscription" });
+      }
+    } else {
+      resolvedWorkspacePublicId = generateUID();
     }
+
+    const isTeam = body.plan === "team";
+    const annualPriceId = isTeam
+      ? (process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID ??
+        process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID)
+      : (process.env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID ??
+        process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID);
+    const monthlyPriceId = isTeam
+      ? process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID
+      : process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID;
+    const priceId = billing === "annual" ? annualPriceId : monthlyPriceId;
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "subscription",
+      payment_method_collection: "always",
+      line_items: [{ price: priceId, quantity: 1 }],
+      subscription_data: { trial_period_days: 14 },
+      success_url: `${env("NEXT_PUBLIC_BASE_URL")}${successUrl}?workspacePublicId=${resolvedWorkspacePublicId}`,
+      cancel_url: `${env("NEXT_PUBLIC_BASE_URL")}${cancelUrl}`,
+      client_reference_id: resolvedWorkspacePublicId,
+      customer: user.stripeCustomerId ?? undefined,
+      metadata: {
+        workspacePublicId: resolvedWorkspacePublicId!,
+        userId: user.id,
+        userEmail: user.email ?? "",
+        ...(resolvedSlug && { workspaceSlug: resolvedSlug }),
+        ...(workspaceName && { workspaceName }),
+        ...(workspaceDescription && { workspaceDescription }),
+        ...(subscriptionId && { subscriptionId: String(subscriptionId) }),
+        plan: plan,
+        isNewWorkspace: workspaceName ? "true" : "false",
+      },
+    });
+
+    return res.status(200).json({ url: session.url });
   }),
 );
