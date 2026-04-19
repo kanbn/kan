@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Upload } from "@aws-sdk/lib-storage";
 
 import { createNextApiContext } from "@kan/api/trpc";
+import { withApiLogging } from "@kan/api/utils/apiLogging";
 import { assertPermission } from "@kan/api/utils/permissions";
 import { withRateLimit } from "@kan/api/utils/rateLimit";
 import * as cardRepo from "@kan/db/repository/card.repo";
@@ -22,7 +23,7 @@ export const config = {
 
 export default withRateLimit(
   { points: 100, duration: 60 },
-  async (req: NextApiRequest, res: NextApiResponse) => {
+  withApiLogging(async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "POST") {
       return res.status(405).json({ error: "Method not allowed" });
     }
@@ -36,7 +37,9 @@ export default withRateLimit(
 
       const bucket = env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
       if (!bucket) {
-        return res.status(500).json({ error: "Attachments bucket not configured" });
+        return res
+          .status(500)
+          .json({ error: "Attachments bucket not configured" });
       }
 
       const cardPublicId = req.query.cardPublicId;
@@ -55,7 +58,9 @@ export default withRateLimit(
       }
 
       if (!Number.isFinite(contentLength) || contentLength <= 0) {
-        return res.status(400).json({ error: "Missing or invalid content length" });
+        return res
+          .status(400)
+          .json({ error: "Missing or invalid content length" });
       }
 
       if (contentLength > MAX_SIZE_BYTES) {
@@ -129,8 +134,7 @@ export default withRateLimit(
 
       return res.status(200).json({ attachment });
     } catch (error) {
-      console.error("Attachment upload failed", error);
       return res.status(500).json({ error: "Internal server error" });
     }
-  },
+  }),
 );

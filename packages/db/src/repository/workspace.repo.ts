@@ -64,6 +64,8 @@ export const create = async (
     slug: string;
     createdBy: string;
     createdByEmail: string;
+    description?: string;
+    plan?: "free" | "team" | "pro" | "enterprise";
   },
 ) => {
   const [workspace] = await db
@@ -73,6 +75,8 @@ export const create = async (
       name: workspaceInput.name,
       slug: workspaceInput.slug,
       createdBy: workspaceInput.createdBy,
+      ...(workspaceInput.description && { description: workspaceInput.description }),
+      ...(workspaceInput.plan && { plan: workspaceInput.plan }),
     })
     .returning({
       id: workspaces.id,
@@ -124,7 +128,7 @@ export const update = async (
   workspaceInput: {
     name?: string;
     slug?: string;
-    plan?: "free" | "pro" | "enterprise";
+    plan?: "free" | "team" | "pro" | "enterprise";
     description?: string;
     showEmailsToMembers?: boolean;
     weekStartDay?: number;

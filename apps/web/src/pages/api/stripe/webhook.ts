@@ -1,12 +1,14 @@
+import { randomUUID } from "crypto";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Readable } from "node:stream";
 
 import { createNextApiContext } from "@kan/api/trpc";
+import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
 import { createStripeClient } from "@kan/stripe";
 
-const log = createLogger("stripe-webhook");
+const log = createLogger("api");
 
 async function buffer(readable: Readable) {
   const chunks = [];
@@ -21,6 +23,9 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const stripe = createStripeClient();
+  const start = Date.now();
+  const requestId = randomUUID();
+  const procedure = req.url?.split("?")[0] ?? "/api/stripe/webhook";
 
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
@@ -44,29 +49,85 @@ export default async function handler(
 
     const { db } = await createNextApiContext(req);
 
-    log.info({ eventType: event.type, eventId: event.id }, "Stripe webhook received");
-
     switch (event.type) {
       case "checkout.session.completed": {
         const checkoutSession = event.data.object;
+        const meta = checkoutSession.metadata;
 
-        const metaData = checkoutSession.metadata;
+        if (!meta?.workspacePublicId) break;
 
-        if (metaData?.workspacePublicId) {
-          await workspaceRepo.update(db, metaData.workspacePublicId, {
-            ...(metaData.workspaceSlug && { slug: metaData.workspaceSlug }),
-            plan: "pro",
+        const plan = meta.plan === "team" ? "team" : ("pro" as const);
+
+        if (
+          meta.isNewWorkspace === "true" &&
+          meta.workspaceName &&
+          meta.userId &&
+          meta.userEmail
+        ) {
+          const existing = await workspaceRepo.getByPublicId(db, meta.workspacePublicId);
+
+          if (!existing) {
+            const slug = meta.workspaceSlug ?? meta.workspacePublicId;
+
+            await workspaceRepo.create(db, {
+              publicId: meta.workspacePublicId,
+              name: meta.workspaceName,
+              slug,
+              plan,
+              createdBy: meta.userId,
+              createdByEmail: meta.userEmail,
+              ...(meta.workspaceDescription && {
+                description: meta.workspaceDescription,
+              }),
+            });
+
+            await subscriptionRepo.create(db, {
+              plan,
+              referenceId: meta.workspacePublicId,
+              userId: meta.userId,
+              stripeCustomerId: checkoutSession.customer as string,
+              status: "active",
+            });
+          }
+        } else {
+          // Existing workspace upgrade — update plan (and slug for pro)
+          await workspaceRepo.update(db, meta.workspacePublicId, {
+            plan,
+            ...(plan === "pro" && meta.workspaceSlug && { slug: meta.workspaceSlug }),
           });
         }
+
         break;
       }
       default:
         log.warn({ eventType: event.type }, "Unhandled Stripe event type");
     }
 
+    log.info(
+      {
+        requestId,
+        procedure,
+        transport: "rest",
+        duration: Date.now() - start,
+        status: 200,
+        input: { eventType: event.type, eventId: event.id },
+      },
+      "API OK",
+    );
+
     return res.status(200).json({ received: true });
   } catch (err) {
-    log.error({ err }, "Stripe webhook handler failed");
+    log.error(
+      {
+        requestId,
+        procedure,
+        transport: "rest",
+        duration: Date.now() - start,
+        status: 400,
+        err,
+      },
+      "API error",
+    );
     return res.status(400).json({ message: "Webhook handler failed" });
   }
 }
