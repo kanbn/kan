@@ -92,14 +92,6 @@ export const socialProvidersPlugin = () => ({
         const providers = ctx.context.socialProviders.map((p) =>
           p.id.toLowerCase(),
         );
-        // Add OIDC provider if configured
-        if (
-          process.env.OIDC_CLIENT_ID &&
-          process.env.OIDC_CLIENT_SECRET &&
-          process.env.OIDC_DISCOVERY_URL
-        ) {
-          providers.push("oidc");
-        }
         return ctx.json(providers);
       },
     ),
