@@ -209,10 +209,12 @@ export const getByPublicId = async (db: dbClient, listPublicId: string) => {
   return db.query.lists.findFirst({
     columns: {
       id: true,
+      publicId: true,
+      name: true,
       boardId: true,
       index: true,
     },
-    where: eq(lists.publicId, listPublicId),
+    where: and(eq(lists.publicId, listPublicId), isNull(lists.deletedAt)),
   });
 };
 
@@ -433,6 +435,7 @@ export const getWorkspaceAndListIdByListPublicId = async (
   return result
     ? {
         id: result.id,
+        publicId: listPublicId,
         name: result.name,
         createdBy: result.createdBy,
         workspaceId: result.board.workspaceId,
