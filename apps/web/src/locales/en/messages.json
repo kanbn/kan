@@ -351,7 +351,7 @@
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        293
+        321
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
@@ -1125,7 +1125,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        60
+        69
       ]
     ],
     "translation": "Are you sure you want to delete the webhook \"{webhookName}\"? This action cannot be undone."
@@ -2145,7 +2145,7 @@
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        66
+        75
       ],
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
@@ -3125,7 +3125,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        316
+        344
       ]
     ],
     "translation": "Create webhook"
@@ -3153,7 +3153,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        236
+        238
       ]
     ],
     "translation": "Created"
@@ -3442,7 +3442,7 @@
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        73
+        82
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
@@ -3542,7 +3542,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        46
+        55
       ]
     ],
     "translation": "Delete webhook"
@@ -4054,7 +4054,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        188
+        210
       ]
     ],
     "translation": "Edit webhook"
@@ -4222,7 +4222,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        234
+        258
       ]
     ],
     "translation": "Enter new secret to update"
@@ -4559,11 +4559,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        245
+        271
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        224
+        226
       ]
     ],
     "translation": "Events"
@@ -4663,7 +4663,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        109
+        119
       ]
     ],
     "translation": "Failed to create webhook"
@@ -4675,7 +4675,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        28
+        37
       ]
     ],
     "translation": "Failed to delete webhook"
@@ -4715,11 +4715,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        143
+        164
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        184
+        186
       ]
     ],
     "translation": "Failed to test webhook"
@@ -4731,7 +4731,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        123
+        138
       ]
     ],
     "translation": "Failed to update webhook"
@@ -5391,7 +5391,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        234
+        259
       ]
     ],
     "translation": "HMAC secret for signature verification"
@@ -6203,7 +6203,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        580
+        579
       ]
     ],
     "translation": "Load more activities"
@@ -6227,7 +6227,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        580
+        579
       ]
     ],
     "translation": "Loading..."
@@ -6582,7 +6582,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        209
+        231
       ]
     ],
     "translation": "My webhook"
@@ -6606,11 +6606,11 @@
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        205
+        227
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        212
+        214
       ]
     ],
     "translation": "Name"
@@ -6802,7 +6802,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        188
+        210
       ]
     ],
     "translation": "New webhook"
@@ -7014,7 +7014,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        194
+        196
       ]
     ],
     "translation": "No webhooks configured. Add a webhook to receive notifications."
@@ -8497,7 +8497,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        316
+        344
       ]
     ],
     "translation": "Save changes"
@@ -8545,7 +8545,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        229
+        251
       ]
     ],
     "translation": "Secret (optional)"
@@ -8693,7 +8693,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        310
+        338
       ]
     ],
     "translation": "Send test"
@@ -9117,7 +9117,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        230
+        232
       ]
     ],
     "translation": "Status"
@@ -9366,6 +9366,38 @@
     ],
     "translation": "Test"
   },
+  "InJcdo": {
+    "translation": "Test failed",
+    "message": "Test failed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/NewWebhookModal.tsx",
+        154
+      ],
+      [
+        "src/views/settings/components/WebhookList.tsx",
+        177
+      ]
+    ]
+  },
+  "zDNL2V": {
+    "translation": "Test sent",
+    "message": "Test sent",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/NewWebhookModal.tsx",
+        148
+      ],
+      [
+        "src/views/settings/components/WebhookList.tsx",
+        174
+      ]
+    ]
+  },
   "itgYbC": {
     "message": "Test webhook sent successfully!",
     "placeholders": {},
@@ -9373,7 +9405,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        132
+        149
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
@@ -10006,6 +10038,18 @@
     ],
     "translation": "Unable to create template"
   },
+  "c1vOQR": {
+    "translation": "Unable to create webhook",
+    "message": "Unable to create webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/NewWebhookModal.tsx",
+        118
+      ]
+    ]
+  },
   "MxQXhL": {
     "message": "Unable to create workspace",
     "placeholders": {},
@@ -10081,6 +10125,18 @@
       ]
     ],
     "translation": "Unable to delete comment"
+  },
+  "23nvb2": {
+    "translation": "Unable to delete webhook",
+    "message": "Unable to delete webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DeleteWebhookConfirmation.tsx",
+        36
+      ]
+    ]
   },
   "Oo4E6p": {
     "message": "Unable to duplicate card",
@@ -10165,6 +10221,22 @@
       ]
     ],
     "translation": "Unable to start checkout"
+  },
+  "KNK33q": {
+    "translation": "Unable to test webhook",
+    "message": "Unable to test webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/NewWebhookModal.tsx",
+        163
+      ],
+      [
+        "src/views/settings/components/WebhookList.tsx",
+        185
+      ]
+    ]
   },
   "T7Mywq": {
     "message": "Unable to update board",
@@ -10333,6 +10405,18 @@
       ]
     ],
     "translation": "Unable to update role"
+  },
+  "V1o9Jo": {
+    "translation": "Unable to update webhook",
+    "message": "Unable to update webhook",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/NewWebhookModal.tsx",
+        137
+      ]
+    ]
   },
   "It4/FS": {
     "message": "Unarchive board",
@@ -10741,11 +10825,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        217
+        239
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        218
+        220
       ]
     ],
     "translation": "URL"
@@ -10829,7 +10913,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        239
+        265
       ]
     ],
     "translation": "Used to sign webhook payloads for verification. Leave blank to keep existing secret."
@@ -10990,6 +11074,18 @@
     ],
     "translation": "We're just getting started. "
   },
+  "an6ayw": {
+    "translation": "Webhook created",
+    "message": "Webhook created",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/NewWebhookModal.tsx",
+        110
+      ]
+    ]
+  },
   "GdWB+V": {
     "message": "Webhook created successfully",
     "placeholders": {},
@@ -10997,10 +11093,22 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        104
+        111
       ]
     ],
     "translation": "Webhook created successfully"
+  },
+  "LnaC5y": {
+    "translation": "Webhook deleted",
+    "message": "Webhook deleted",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/DeleteWebhookConfirmation.tsx",
+        28
+      ]
+    ]
   },
   "2X4ecw": {
     "message": "Webhook deleted successfully",
@@ -11009,7 +11117,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        23
+        29
       ]
     ],
     "translation": "Webhook deleted successfully"
@@ -11045,14 +11153,26 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        135
+        155
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        177
+        178
       ]
     ],
     "translation": "Webhook test failed"
+  },
+  "kxZ7LS": {
+    "translation": "Webhook updated",
+    "message": "Webhook updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/NewWebhookModal.tsx",
+        129
+      ]
+    ]
   },
   "3d54Wj": {
     "message": "Webhook updated successfully",
@@ -11061,7 +11181,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        118
+        130
       ]
     ],
     "translation": "Webhook updated successfully"
