@@ -36,6 +36,7 @@ const cardMemberSchema = z.object({
   email: z.string(),
   user: z
     .object({
+      id: z.string().nullable(),
       name: z.string().nullable(),
     })
     .nullable(),
@@ -180,6 +181,7 @@ export const activityItemSchema = z.object({
       publicId: z.string(),
       user: z
         .object({
+          id: z.string().nullable(),
           name: z.string().nullable(),
           email: z.string(),
           image: z.string().nullable(),
@@ -189,6 +191,7 @@ export const activityItemSchema = z.object({
     .nullable(),
   user: z
     .object({
+      id: z.string().nullable(),
       name: z.string().nullable(),
       email: z.string(),
       image: z.string().nullable(),

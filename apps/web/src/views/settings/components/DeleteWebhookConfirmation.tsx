@@ -13,20 +13,29 @@ interface DeleteWebhookConfirmationProps {
 export function DeleteWebhookConfirmation({
   workspacePublicId,
 }: DeleteWebhookConfirmationProps) {
-  const { closeModal, entityId: webhookPublicId, entityLabel: webhookName } = useModal();
+  const {
+    closeModal,
+    entityId: webhookPublicId,
+    entityLabel: webhookName,
+  } = useModal();
   const { showPopup } = usePopup();
   const utils = api.useUtils();
 
   const deleteWebhookMutation = api.webhook.delete.useMutation({
     onSuccess: () => {
       void utils.webhook.list.invalidate({ workspacePublicId });
-      showPopup({ message: t`Webhook deleted successfully`, type: "success" });
+      showPopup({
+        header: t`Webhook deleted`,
+        message: t`Webhook deleted successfully`,
+        icon: "success",
+      });
       closeModal();
     },
     onError: (error) => {
       showPopup({
+        header: t`Unable to delete webhook`,
         message: error.message || t`Failed to delete webhook`,
-        type: "error",
+        icon: "error",
       });
     },
   });
@@ -35,7 +44,7 @@ export function DeleteWebhookConfirmation({
     if (!webhookPublicId) return;
     deleteWebhookMutation.mutate({
       workspacePublicId,
-      webhookPublicId: webhookPublicId as string,
+      webhookPublicId: webhookPublicId,
     });
   };
 

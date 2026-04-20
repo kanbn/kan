@@ -525,7 +525,6 @@ const ActivityList = ({
               comment={activity.comment?.comment}
               isEdited={!!activity.comment?.updatedAt}
               isAuthor={activity.comment?.createdBy === sessionData?.user.id}
-              isAdmin={isAdmin ?? false}
               isViewOnly={!!isViewOnly}
             />
           );

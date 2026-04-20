@@ -20,7 +20,7 @@ const UpdateWorkspaceUrlForm = ({
 }: {
   workspacePublicId: string;
   workspaceUrl: string;
-  workspacePlan: "free" | "pro" | "enterprise";
+  workspacePlan: "free" | "team" | "pro" | "enterprise";
   disabled?: boolean;
 }) => {
   const utils = api.useUtils();
