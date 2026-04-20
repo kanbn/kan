@@ -25,6 +25,7 @@ export const checklistResponseSchema = z.object({
 
 // Shared user sub-object (used inside member/workspace responses)
 export const userSchema = z.object({
+  id: z.string().nullable(),
   name: z.string().nullable(),
   email: z.string(),
   image: z.string().nullable(),

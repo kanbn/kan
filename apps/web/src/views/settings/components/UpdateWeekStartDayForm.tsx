@@ -36,7 +36,7 @@ export default function UpdateWeekStartDayForm({
     setValue(newValue);
     updateWorkspace.mutate({
       workspacePublicId,
-      weekStartDay: newValue,
+      weekStartDay: newValue as 0 | 1 | 6,
     });
   };
 
