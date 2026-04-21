@@ -1,10 +1,13 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { t, Trans } from "@lingui/core/macro";
 import { TbLayoutGrid, TbChecklist, TbProgress, TbCircleCheck } from "react-icons/tb";
 import { endOfDay, startOfDay, addDays } from "date-fns";
+import { DragDropContext, Draggable } from "react-beautiful-dnd";
+import type { DropResult } from "react-beautiful-dnd";
 
 import { PageHead } from "~/components/PageHead";
+import { StrictModeDroppable } from "~/components/StrictModeDroppable";
 import { api } from "~/utils/api";
 import { useWorkspace } from "~/providers/workspace";
 
@@ -28,6 +31,21 @@ type AggregatedCard = {
   boardPublicId: string;
   boardName: string;
   listName: string;
+  listPublicId: string;
+};
+
+type BoardMeta = {
+  firstListPublicId: string;
+  lastListPublicId: string;
+  middleListPublicId: string | null;
+};
+
+type ColumnKey = "todo" | "inProgress" | "done";
+
+type LocalData = {
+  todo: AggregatedCard[];
+  inProgress: AggregatedCard[];
+  done: AggregatedCard[];
 };
 
 function DueDateBadge({ dueDate }: { dueDate: Date | null }) {
@@ -75,22 +93,38 @@ function DueDateBadge({ dueDate }: { dueDate: Date | null }) {
   );
 }
 
-function CardItem({ card }: { card: AggregatedCard }) {
+function CardItem({
+  card,
+  index,
+}: {
+  card: AggregatedCard;
+  index: number;
+}) {
   return (
-    <Link
-      href={`/boards/${card.boardPublicId}`}
-      className="group block rounded-lg border border-light-200 bg-white p-3 shadow-sm transition-all duration-150 hover:border-light-300 hover:shadow-md dark:border-dark-300 dark:bg-dark-100 dark:hover:border-dark-400"
-    >
-      <p className="truncate text-sm font-medium text-light-950 dark:text-dark-950">
-        {card.title}
-      </p>
-      <div className="mt-1.5 flex items-center gap-2">
-        <span className="truncate rounded bg-light-100 px-1.5 py-0.5 text-[11px] font-medium text-light-700 dark:bg-dark-300 dark:text-dark-700">
-          {card.boardName}
-        </span>
-        <DueDateBadge dueDate={card.dueDate} />
-      </div>
-    </Link>
+    <Draggable draggableId={card.publicId} index={index}>
+      {(provided, snapshot) => (
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <Link
+            href={`/boards/${card.boardPublicId}`}
+            className={`group block rounded-lg border border-light-200 bg-white p-3 shadow-sm transition-all duration-150 hover:border-light-300 hover:shadow-md dark:border-dark-300 dark:bg-dark-100 dark:hover:border-dark-400 ${snapshot.isDragging ? "rotate-1 shadow-lg" : ""}`}
+          >
+            <p className="truncate text-sm font-medium text-light-950 dark:text-dark-950">
+              {card.title}
+            </p>
+            <div className="mt-1.5 flex items-center gap-2">
+              <span className="truncate rounded bg-light-100 px-1.5 py-0.5 text-[11px] font-medium text-light-700 dark:bg-dark-300 dark:text-dark-700">
+                {card.boardName}
+              </span>
+              <DueDateBadge dueDate={card.dueDate} />
+            </div>
+          </Link>
+        </div>
+      )}
+    </Draggable>
   );
 }
 
@@ -100,16 +134,18 @@ function Column({
   cards,
   isLoading,
   accentClass,
+  droppableId,
 }: {
   title: React.ReactNode;
   icon: React.ReactNode;
   cards: AggregatedCard[];
   isLoading: boolean;
   accentClass: string;
+  droppableId: ColumnKey;
 }) {
   return (
     <div className="flex flex-col rounded-xl border border-light-200 bg-light-50 dark:border-dark-300 dark:bg-dark-200/50">
-      <div className={`flex items-center gap-2 border-b border-light-200 px-4 py-3 dark:border-dark-300`}>
+      <div className="flex items-center gap-2 border-b border-light-200 px-4 py-3 dark:border-dark-300">
         <span className={accentClass}>{icon}</span>
         <h2 className="text-sm font-semibold text-light-900 dark:text-dark-900">
           {title}
@@ -120,22 +156,33 @@ function Column({
           </span>
         )}
       </div>
-      <div className="flex flex-col gap-2 overflow-y-auto p-3">
-        {isLoading ? (
-          Array.from({ length: 3 }).map((_, i) => (
-            <div
-              key={i}
-              className="h-14 animate-pulse rounded-lg bg-light-200 dark:bg-dark-300"
-            />
-          ))
-        ) : cards.length === 0 ? (
-          <p className="py-6 text-center text-sm text-light-600 dark:text-dark-600">
-            <Trans>No cards</Trans>
-          </p>
-        ) : (
-          cards.map((card) => <CardItem key={card.publicId} card={card} />)
+      <StrictModeDroppable droppableId={droppableId}>
+        {(provided, snapshot) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className={`flex flex-col gap-2 overflow-y-auto p-3 transition-colors ${snapshot.isDraggingOver ? "bg-light-100 dark:bg-dark-300/30" : ""}`}
+          >
+            {isLoading ? (
+              Array.from({ length: 3 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-14 animate-pulse rounded-lg bg-light-200 dark:bg-dark-300"
+                />
+              ))
+            ) : cards.length === 0 && !snapshot.isDraggingOver ? (
+              <p className="py-6 text-center text-sm text-light-600 dark:text-dark-600">
+                <Trans>No cards</Trans>
+              </p>
+            ) : (
+              cards.map((card, i) => (
+                <CardItem key={card.publicId} card={card} index={i} />
+              ))
+            )}
+            {provided.placeholder}
+          </div>
         )}
-      </div>
+      </StrictModeDroppable>
     </div>
   );
 }
@@ -143,6 +190,9 @@ function Column({
 export default function AllBoardsView() {
   const { workspace } = useWorkspace();
   const [activeFilter, setActiveFilter] = useState<FilterOption>(FILTER_OPTIONS[0]!);
+  const [localData, setLocalData] = useState<LocalData>({ todo: [], inProgress: [], done: [] });
+  const [boardMeta, setBoardMeta] = useState<Record<string, BoardMeta>>({});
+  const utils = api.useUtils();
 
   const { data, isLoading } = api.board.allCardsAggregated.useQuery(
     {
@@ -152,9 +202,63 @@ export default function AllBoardsView() {
     { enabled: !!workspace.publicId },
   );
 
-  const todo = data?.todo ?? [];
-  const inProgress = data?.inProgress ?? [];
-  const done = data?.done ?? [];
+  useEffect(() => {
+    if (data) {
+      setLocalData({ todo: data.todo, inProgress: data.inProgress, done: data.done });
+      setBoardMeta(data.boardMeta);
+    }
+  }, [data]);
+
+  const updateCard = api.card.update.useMutation({
+    onError: () => {
+      void utils.board.allCardsAggregated.invalidate();
+    },
+  });
+
+  const onDragEnd = ({ source, destination, draggableId }: DropResult) => {
+    if (!destination) return;
+    if (source.droppableId === destination.droppableId && source.index === destination.index) return;
+
+    const srcCol = source.droppableId as ColumnKey;
+    const dstCol = destination.droppableId as ColumnKey;
+
+    const card = localData[srcCol][source.index];
+    if (!card) return;
+
+    const meta = boardMeta[card.boardPublicId];
+    if (!meta) return;
+
+    let targetListPublicId: string | null = null;
+    if (dstCol === "todo") targetListPublicId = meta.firstListPublicId;
+    else if (dstCol === "done") targetListPublicId = meta.lastListPublicId;
+    else if (dstCol === "inProgress") targetListPublicId = meta.middleListPublicId;
+
+    if (!targetListPublicId) return;
+
+    // Optimistic update
+    setLocalData((prev) => {
+      const srcCards = [...prev[srcCol]];
+      const [moved] = srcCards.splice(source.index, 1);
+      if (!moved) return prev;
+
+      const updatedCard = { ...moved, listPublicId: targetListPublicId! };
+
+      if (srcCol === dstCol) {
+        srcCards.splice(destination.index, 0, updatedCard);
+        return { ...prev, [srcCol]: srcCards };
+      }
+
+      const dstCards = [...prev[dstCol]];
+      dstCards.splice(destination.index, 0, updatedCard);
+      return { ...prev, [srcCol]: srcCards, [dstCol]: dstCards };
+    });
+
+    updateCard.mutate({
+      cardPublicId: draggableId,
+      listPublicId: targetListPublicId,
+      index: destination.index,
+    });
+  };
 
   return (
     <>
@@ -191,29 +295,34 @@ export default function AllBoardsView() {
         </div>
 
         {/* Kanban columns */}
-        <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 md:grid-cols-3">
-          <Column
-            title={<Trans>To Do</Trans>}
-            icon={<TbChecklist size={16} />}
-            cards={todo}
-            isLoading={isLoading}
-            accentClass="text-amber-500 dark:text-amber-400"
-          />
-          <Column
-            title={<Trans>In Progress</Trans>}
-            icon={<TbProgress size={16} />}
-            cards={inProgress}
-            isLoading={isLoading}
-            accentClass="text-blue-500 dark:text-blue-400"
-          />
-          <Column
-            title={<Trans>Done</Trans>}
-            icon={<TbCircleCheck size={16} />}
-            cards={done}
-            isLoading={isLoading}
-            accentClass="text-green-500 dark:text-green-400"
-          />
-        </div>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 md:grid-cols-3">
+            <Column
+              title={<Trans>To Do</Trans>}
+              icon={<TbChecklist size={16} />}
+              cards={localData.todo}
+              isLoading={isLoading}
+              accentClass="text-amber-500 dark:text-amber-400"
+              droppableId="todo"
+            />
+            <Column
+              title={<Trans>In Progress</Trans>}
+              icon={<TbProgress size={16} />}
+              cards={localData.inProgress}
+              isLoading={isLoading}
+              accentClass="text-blue-500 dark:text-blue-400"
+              droppableId="inProgress"
+            />
+            <Column
+              title={<Trans>Done</Trans>}
+              icon={<TbCircleCheck size={16} />}
+              cards={localData.done}
+              isLoading={isLoading}
+              accentClass="text-green-500 dark:text-green-400"
+              droppableId="done"
+            />
+          </div>
+        </DragDropContext>
       </div>
     </>
   );

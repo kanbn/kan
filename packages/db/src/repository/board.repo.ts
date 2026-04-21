@@ -1012,17 +1012,35 @@ export const getAllCardsAggregated = async (
     boardPublicId: string;
     boardName: string;
     listName: string;
+    listPublicId: string;
+  };
+
+  type BoardMeta = {
+    firstListPublicId: string;
+    lastListPublicId: string;
+    middleListPublicId: string | null;
   };
 
   const result: {
     todo: AggregatedCard[];
     inProgress: AggregatedCard[];
     done: AggregatedCard[];
-  } = { todo: [], inProgress: [], done: [] };
+    boardMeta: Record<string, BoardMeta>;
+  } = { todo: [], inProgress: [], done: [], boardMeta: {} };
 
   for (const board of boardsData) {
     const listCount = board.lists.length;
     if (listCount === 0) continue;
+
+    const firstList = board.lists[0]!;
+    const lastList = board.lists[listCount - 1]!;
+    const middleList = listCount > 2 ? board.lists[1]! : null;
+
+    result.boardMeta[board.publicId] = {
+      firstListPublicId: firstList.publicId,
+      lastListPublicId: lastList.publicId,
+      middleListPublicId: middleList?.publicId ?? null,
+    };
 
     board.lists.forEach((list, i) => {
       const category =
@@ -1036,6 +1054,7 @@ export const getAllCardsAggregated = async (
           boardPublicId: board.publicId,
           boardName: board.name,
           listName: list.name,
+          listPublicId: list.publicId,
         });
       }
     });

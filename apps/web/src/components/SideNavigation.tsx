@@ -9,7 +9,6 @@ import { HiBolt } from "react-icons/hi2";
 import {
   TbLayoutSidebarLeftCollapse,
   TbLayoutSidebarLeftExpand,
-  TbLayoutGrid,
 } from "react-icons/tb";
 import { twMerge } from "tailwind-merge";
 
@@ -17,6 +16,8 @@ import type { Subscription } from "@kan/shared/utils";
 import { hasActiveSubscription } from "@kan/shared/utils";
 
 import type { KeyboardShortcut } from "~/providers/keyboard-shortcuts";
+import allBoardsIconDark from "~/assets/all-boards-dark.json";
+import allBoardsIconLight from "~/assets/all-boards-light.json";
 import boardsIconDark from "~/assets/boards-dark.json";
 import boardsIconLight from "~/assets/boards-light.json";
 import membersIconDark from "~/assets/members-dark.json";
@@ -112,7 +113,7 @@ export default function SideNavigation({
     {
       name: t`All Boards`,
       href: "/all-boards",
-      reactIcon: <TbLayoutGrid size={18} />,
+      icon: isDarkMode ? allBoardsIconDark : allBoardsIconLight,
       keyboardShortcut: {
         type: "SEQUENCE",
         strokes: [{ key: "G" }, { key: "A" }],
