@@ -9,6 +9,7 @@ import { HiBolt } from "react-icons/hi2";
 import {
   TbLayoutSidebarLeftCollapse,
   TbLayoutSidebarLeftExpand,
+  TbLayoutGrid,
 } from "react-icons/tb";
 import { twMerge } from "tailwind-merge";
 
@@ -92,7 +93,8 @@ export default function SideNavigation({
   const navigation: {
     name: string;
     href: string;
-    icon: object;
+    icon?: object;
+    reactIcon?: React.ReactNode;
     keyboardShortcut: KeyboardShortcut;
   }[] = [
     {
@@ -105,6 +107,18 @@ export default function SideNavigation({
         action: () => router.push("/boards"),
         group: "NAVIGATION",
         description: t`Go to boards`,
+      },
+    },
+    {
+      name: t`All Boards`,
+      href: "/all-boards",
+      reactIcon: <TbLayoutGrid size={18} />,
+      keyboardShortcut: {
+        type: "SEQUENCE",
+        strokes: [{ key: "G" }, { key: "A" }],
+        action: () => router.push("/all-boards"),
+        group: "NAVIGATION",
+        description: t`Go to all boards`,
       },
     },
     {
@@ -197,6 +211,7 @@ export default function SideNavigation({
                   current={pathname.includes(item.href)}
                   name={item.name}
                   json={item.icon}
+                  reactIcon={item.reactIcon}
                   isCollapsed={isCollapsed}
                   onCloseSideNav={onCloseSideNav}
                   keyboardShortcut={item.keyboardShortcut}
