@@ -287,6 +287,7 @@ export const bulkCreate = async (
     description: string;
     createdBy: string;
     listId: number;
+    workspaceId: number;
     index: number;
     importId?: number;
   }[],
@@ -302,6 +303,34 @@ export const bulkCreate = async (
       byList.set(item.listId, arr);
     }
 
+    // Atomically reserve a contiguous range of cardNumbers per workspace by
+    // bumping cardCounter once per workspace.
+    const countsByWorkspace = new Map<number, number>();
+    for (const item of cardInput) {
+      countsByWorkspace.set(
+        item.workspaceId,
+        (countsByWorkspace.get(item.workspaceId) ?? 0) + 1,
+      );
+    }
+
+    const cardNumberByWorkspaceQueue = new Map<number, number[]>();
+    for (const [workspaceId, count] of countsByWorkspace.entries()) {
+      const [counterResult] = await tx
+        .update(workspaces)
+        .set({ cardCounter: sql`${workspaces.cardCounter} + ${count}` })
+        .where(eq(workspaces.id, workspaceId))
+        .returning({ cardCounter: workspaces.cardCounter });
+
+      if (!counterResult)
+        throw new Error(`Workspace ${workspaceId} not found`);
+
+      const last = counterResult.cardCounter;
+      const start = last - count + 1;
+      const queue: number[] = [];
+      for (let n = start; n <= last; n++) queue.push(n);
+      cardNumberByWorkspaceQueue.set(workspaceId, queue);
+    }
+
     const allValuesToInsert: {
       publicId: string;
       title: string;
@@ -309,6 +338,7 @@ export const bulkCreate = async (
       createdBy: string;
       listId: number;
       index: number;
+      cardNumber: number;
       importId?: number;
     }[] = [];
 
@@ -323,6 +353,12 @@ export const bulkCreate = async (
       let nextIndex = last ? last.index + 1 : 0;
       const sorted = [...items].sort((a, b) => a.index - b.index);
       for (const it of sorted) {
+        const queue = cardNumberByWorkspaceQueue.get(it.workspaceId);
+        const cardNumber = queue?.shift();
+        if (cardNumber === undefined)
+          throw new Error(
+            `Failed to allocate cardNumber for workspace ${it.workspaceId}`,
+          );
         allValuesToInsert.push({
           publicId: it.publicId,
           title: it.title,
@@ -330,6 +366,7 @@ export const bulkCreate = async (
           createdBy: it.createdBy,
           listId: it.listId,
           index: nextIndex++,
+          cardNumber,
           importId: it.importId,
         });
       }

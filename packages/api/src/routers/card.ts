@@ -1273,6 +1273,7 @@ export const cardRouter = createTRPCRouter({
         description: sourceCard.description ?? "",
         createdBy: userId,
         listId: targetList.id,
+        workspaceId: targetList.workspaceId,
         position: "end",
         dueDate: sourceCard.dueDate ?? null,
       });

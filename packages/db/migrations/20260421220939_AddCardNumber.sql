@@ -1,6 +1,8 @@
 ALTER TABLE "card" ADD COLUMN "cardNumber" integer;--> statement-breakpoint
 ALTER TABLE "workspace" ADD COLUMN "cardPrefix" varchar(10) DEFAULT '' NOT NULL;--> statement-breakpoint
 ALTER TABLE "workspace" ADD COLUMN "cardCounter" integer DEFAULT 0 NOT NULL;--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "card_list_number_idx" ON "card" USING btree ("listId","cardNumber");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "workspace_card_prefix_idx" ON "workspace" USING btree ("cardPrefix");--> statement-breakpoint
 
 -- Populate cardPrefix for existing workspaces from their name
 UPDATE "workspace"
@@ -17,7 +19,9 @@ SET "cardPrefix" = (
 )
 WHERE "cardPrefix" = '';--> statement-breakpoint
 
--- Assign sequential cardNumber to existing cards, ordered by createdAt, scoped to workspace
+-- Assign sequential cardNumber to existing cards (including soft-deleted),
+-- ordered by createdAt, scoped to workspace. Deleted cards still receive a
+-- number so future un-archive/restore flows can keep their ticket ID.
 WITH numbered AS (
   SELECT
     c.id,
@@ -25,7 +29,7 @@ WITH numbered AS (
   FROM "card" c
   JOIN "list" l ON c."listId" = l.id
   JOIN "board" b ON l."boardId" = b.id
-  WHERE c."deletedAt" IS NULL AND c."cardNumber" IS NULL
+  WHERE c."cardNumber" IS NULL
 )
 UPDATE "card" c
 SET "cardNumber" = n.rn
@@ -39,5 +43,5 @@ SET "cardCounter" = COALESCE((
   FROM "card" c
   JOIN "list" l ON c."listId" = l.id
   JOIN "board" b ON l."boardId" = b.id
-  WHERE b."workspaceId" = w.id AND c."deletedAt" IS NULL AND c."cardNumber" IS NOT NULL
+  WHERE b."workspaceId" = w.id AND c."cardNumber" IS NOT NULL
 ), 0);
