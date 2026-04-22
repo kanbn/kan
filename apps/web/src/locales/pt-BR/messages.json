@@ -44,7 +44,7 @@
       "0": ["boardName ?? \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 59]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 65]],
     "translation": "{0} foi adicionado aos seus favoritos."
   },
   "bDI6VI": {
@@ -53,7 +53,7 @@
       "0": ["boardName ?? \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 60]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 66]],
     "translation": "{0} foi removido dos seus favoritos."
   },
   "CJukzS": {
@@ -71,7 +71,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 557]],
+    "origin": [["src/views/board/index.tsx", 649]],
     "translation": "{0} não encontrado"
   },
   "0xWkkH": {
@@ -198,7 +198,7 @@
     "message": "Actions",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/providers/keyboard-shortcuts.tsx", 56]],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 55]],
     "translation": "Ações"
   },
   "F6pfE9": {
@@ -249,7 +249,7 @@
     "message": "Add a card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/List.tsx", 136]],
+    "origin": [["src/views/board/components/List.tsx", 142]],
     "translation": "Adicionar um cartão"
   },
   "qtE5nt": {
@@ -314,7 +314,7 @@
     "message": "Add to favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 125]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 129]],
     "translation": "Adicionar aos favoritos"
   },
   "cWXW+7": {
@@ -409,7 +409,7 @@
     "message": "Added to favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 56]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 62]],
     "translation": "Adicionado aos favoritos"
   },
   "14Xi3Z": {
@@ -640,7 +640,7 @@
     "message": "Archive board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 114]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 120]],
     "translation": "Arquivar quadro"
   },
   "TdfEV7": {
@@ -870,7 +870,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 530],
+      ["src/views/board/index.tsx", 622],
       ["src/views/card/index.tsx", 317],
       ["src/views/public/board/index.tsx", 125]
     ],
@@ -889,7 +889,7 @@
     "message": "Board archived",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 46]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 51]],
     "translation": "Quadro arquivado"
   },
   "wewm3j": {
@@ -926,7 +926,7 @@
     "message": "Board unarchived",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 46]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 52]],
     "translation": "Quadro desarquivado"
   },
   "Xid3K6": {
@@ -1321,7 +1321,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 308],
+      ["src/views/board/index.tsx", 400],
       ["src/views/card/components/Dropdown.tsx", 44],
       ["src/views/public/board/CardModal.tsx", 38]
     ],
@@ -1405,6 +1405,13 @@
     "comments": [],
     "origin": [["src/views/onboarding/select-plan/index.tsx", 122]],
     "translation": "Escolha um plano"
+  },
+  "xCJdfg": {
+    "message": "Clear",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/CardContextDueDateModal.tsx", 90]],
+    "translation": ""
   },
   "VHS0aJ": {
     "message": "Clear all custom permissions?",
@@ -1845,6 +1852,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      ["src/views/board/components/CardContextLabelsModal.tsx", 130],
       ["src/views/board/components/NewCardForm.tsx", 420],
       ["src/views/card/components/LabelSelector.tsx", 101]
     ],
@@ -1855,8 +1863,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 92],
-      ["src/views/board/index.tsx", 671]
+      ["src/views/board/index.tsx", 108],
+      ["src/views/board/index.tsx", 763]
     ],
     "translation": "Criar nova lista"
   },
@@ -2074,7 +2082,7 @@
     "message": "Delete board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 136]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 147]],
     "translation": "Excluir quadro"
   },
   "nabda1": {
@@ -2094,18 +2102,25 @@
     "origin": [["src/views/card/components/Comment.tsx", 120]],
     "translation": "Excluir comentário"
   },
+  "i2fOfI": {
+    "message": "Delete hovered card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 133]],
+    "translation": ""
+  },
   "lYT7pQ": {
     "message": "Delete list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/List.tsx", 147]],
+    "origin": [["src/views/board/components/List.tsx", 153]],
     "translation": "Excluir lista"
   },
   "DFjdv0": {
     "message": "Delete template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 136]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 147]],
     "translation": "Excluir modelo"
   },
   "snMaH4": {
@@ -2270,9 +2285,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDueDateModal.tsx", 36],
-      ["src/views/board/components/CardContextLabelsModal.tsx", 48],
-      ["src/views/board/components/CardContextMembersModal.tsx", 68],
+      ["src/views/board/components/CardContextDueDateModal.tsx", 119],
+      ["src/views/board/components/CardContextLabelsModal.tsx", 139],
+      ["src/views/board/components/CardContextMembersModal.tsx", 166],
       ["src/views/boards/components/TemplateBoards.tsx", 17],
       ["src/views/boards/components/TemplateBoards.tsx", 23],
       ["src/views/boards/components/TemplateBoards.tsx", 29],
@@ -2288,6 +2303,15 @@
     "comments": [],
     "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 142]],
     "translation": "Falha no download"
+  },
+  "hSsySs": {
+    "message": "Due {0}",
+    "placeholders": {
+      "0": ["format(dueDate, \"MMM d, yyyy\")"]
+    },
+    "comments": [],
+    "origin": [["src/views/board/components/CardContextDueDateModal.tsx", 97]],
+    "translation": ""
   },
   "XicmhT": {
     "message": "Due date",
@@ -2371,7 +2395,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 105],
+      ["src/views/board/components/BoardDropdown.tsx", 111],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 116]
     ],
     "translation": "Editar URL do quadro"
@@ -2389,6 +2413,20 @@
     "comments": [],
     "origin": [["src/components/LabelForm.tsx", 119]],
     "translation": "Editar etiqueta"
+  },
+  "FJiuoM": {
+    "message": "Edit labels on hovered card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 145]],
+    "translation": ""
+  },
+  "p/gz1T": {
+    "message": "Edit members on hovered card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 157]],
+    "translation": ""
   },
   "TCOMOO": {
     "message": "Edit permissions",
@@ -3003,7 +3041,7 @@
     "message": "General",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/providers/keyboard-shortcuts.tsx", 54]],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 53]],
     "translation": "Geral"
   },
   "ZDIydz": {
@@ -3043,7 +3081,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 656]],
+    "origin": [["src/views/board/index.tsx", 748]],
     "translation": "Comece criando uma nova lista"
   },
   "oW13KZ": {
@@ -3470,6 +3508,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      ["src/views/board/components/CardContextMembersModal.tsx", 157],
       ["src/views/card/components/MemberSelector.tsx", 115],
       ["src/views/members/components/InviteMemberForm.tsx", 367]
     ],
@@ -3530,11 +3569,18 @@
     ],
     "translation": "Tenha em mente que esta ação é irreversível."
   },
+  "77Emn0": {
+    "message": "Keyboard shortcuts",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 138]],
+    "translation": ""
+  },
   "h7MgpO": {
     "message": "Keyboard Shortcuts",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/providers/keyboard-shortcuts.tsx", 321]],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 320]],
     "translation": "Atalhos de teclado"
   },
   "h8DugX": {
@@ -3542,7 +3588,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextLabelsModal.tsx", 31],
+      ["src/views/board/components/CardContextLabelsModal.tsx", 85],
       ["src/views/board/components/Filters.tsx", 155],
       ["src/views/board/components/NewCardForm.tsx", 424],
       ["src/views/card/index.tsx", 133]
@@ -3653,7 +3699,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/UpdateBoardSlugButton.tsx", 80],
-      ["src/views/board/index.tsx", 306],
+      ["src/views/board/index.tsx", 398],
       ["src/views/card/components/Dropdown.tsx", 42],
       ["src/views/public/board/CardModal.tsx", 36],
       ["src/views/public/board/index.tsx", 77]
@@ -3753,7 +3799,7 @@
     "message": "Make template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 94]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 100]],
     "translation": "Criar modelo"
   },
   "hB02vO": {
@@ -3761,7 +3807,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextMembersModal.tsx", 51],
+      ["src/views/board/components/CardContextMembersModal.tsx", 99],
       ["src/views/board/components/CardContextMenu.tsx", 38]
     ],
     "translation": "Gerenciar membros"
@@ -3928,7 +3974,7 @@
     "message": "Navigation",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/providers/keyboard-shortcuts.tsx", 55]],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 54]],
     "translation": "Navegação"
   },
   "HBI6nY": {
@@ -3971,6 +4017,13 @@
     "origin": [["src/views/board/components/NewCardForm.tsx", 307]],
     "translation": "Novo cartão"
   },
+  "zMt2MM": {
+    "message": "New card in hovered list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 121]],
+    "translation": ""
+  },
   "cWcxrL": {
     "message": "New checklist",
     "placeholders": {},
@@ -3998,7 +4051,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 113],
-      ["src/views/board/index.tsx", 620]
+      ["src/views/board/index.tsx", 712]
     ],
     "translation": "Nova lista"
   },
@@ -4113,26 +4166,47 @@
     "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 143]],
     "translation": "Nenhuma URL de download disponível para este anexo."
   },
+  "F1TnlY": {
+    "message": "No due date set.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/CardContextDueDateModal.tsx", 98]],
+    "translation": ""
+  },
   "TXO5TM": {
     "message": "No keyboard shortcuts registered.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/providers/keyboard-shortcuts.tsx", 334]],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 333]],
     "translation": "Nenhum atalho de teclado registrado."
+  },
+  "2lFMw7": {
+    "message": "No labels on this board yet.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/CardContextLabelsModal.tsx", 92]],
+    "translation": ""
   },
   "hXMFoN": {
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 652]],
+    "origin": [["src/views/board/index.tsx", 744]],
     "translation": "Nenhuma lista"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 657]],
+    "origin": [["src/views/board/index.tsx", 749]],
     "translation": "Nenhuma lista foi criada ainda"
+  },
+  "lVHic5": {
+    "message": "No members in this workspace yet.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/CardContextMembersModal.tsx", 106]],
+    "translation": ""
   },
   "i30J2U": {
     "message": "No projects found",
@@ -4215,11 +4289,18 @@
     "origin": [["src/components/WorkspaceMenu.tsx", 34]],
     "translation": "Abrir menu de comandos"
   },
+  "zD5v75": {
+    "message": "Open hovered card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 184]],
+    "translation": ""
+  },
   "cFQEU/": {
     "message": "Open keyboard shortcuts",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/providers/keyboard-shortcuts.tsx", 172]],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 171]],
     "translation": "Abrir atalhos de teclado"
   },
   "v+Wp++": {
@@ -4523,15 +4604,18 @@
       ["src/components/DeleteLabelConfirmation.tsx", 26],
       ["src/components/FeedbackModal.tsx", 41],
       ["src/components/NewWorkspaceForm.tsx", 109],
-      ["src/views/board/components/BoardDropdown.tsx", 68],
+      ["src/views/board/components/BoardDropdown.tsx", 74],
+      ["src/views/board/components/CardContextDueDateModal.tsx", 53],
+      ["src/views/board/components/CardContextLabelsModal.tsx", 70],
+      ["src/views/board/components/CardContextMembersModal.tsx", 79],
       ["src/views/board/components/NewCardForm.tsx", 189],
       ["src/views/board/components/NewListForm.tsx", 79],
       ["src/views/board/components/NewTemplateForm.tsx", 61],
       ["src/views/board/components/NewTemplateForm.tsx", 77],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 73],
       ["src/views/board/components/VisibilityButton.tsx", 57],
-      ["src/views/board/index.tsx", 218],
-      ["src/views/board/index.tsx", 274],
+      ["src/views/board/index.tsx", 310],
+      ["src/views/board/index.tsx", 366],
       ["src/views/boards/components/ImportBoardsForm.tsx", 243],
       ["src/views/boards/components/ImportBoardsForm.tsx", 395],
       ["src/views/card/components/AttachmentThumbnails.tsx", 74],
@@ -4590,7 +4674,7 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 76],
       ["src/views/board/components/CardContextMoveListModal.tsx", 42],
-      ["src/views/board/index.tsx", 315],
+      ["src/views/board/index.tsx", 407],
       ["src/views/card/components/Dropdown.tsx", 51],
       ["src/views/public/board/CardModal.tsx", 45],
       ["src/views/public/board/index.tsx", 86]
@@ -4754,7 +4838,7 @@
     "message": "Remove from favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 124]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 129]],
     "translation": "Remover dos favoritos"
   },
   "99VIgC": {
@@ -4808,7 +4892,7 @@
     "message": "Removed from favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 57]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 63]],
     "translation": "Removido dos favoritos"
   },
   "YVT40D": {
@@ -5109,11 +5193,18 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDueDateModal.tsx", 20],
+      ["src/views/board/components/CardContextDueDateModal.tsx", 81],
       ["src/views/board/components/CardContextMenu.tsx", 56],
       ["src/views/card/components/DueDateSelector.tsx", 121]
     ],
     "translation": "Definir data de vencimento"
+  },
+  "ICQFN4": {
+    "message": "Set due date on hovered card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 169]],
+    "translation": ""
   },
   "Eit43O": {
     "message": "set the due date",
@@ -5443,8 +5534,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 530],
-      ["src/views/board/index.tsx", 566]
+      ["src/views/board/index.tsx", 622],
+      ["src/views/board/index.tsx", 658]
     ],
     "translation": "Modelo"
   },
@@ -5501,24 +5592,24 @@
     "translation": "Testar"
   },
   "InJcdo": {
-    "translation": "Teste falhou",
     "message": "Test failed",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/NewWebhookModal.tsx", 154],
       ["src/views/settings/components/WebhookList.tsx", 177]
-    ]
+    ],
+    "translation": "Teste falhou"
   },
   "zDNL2V": {
-    "translation": "Teste enviado",
     "message": "Test sent",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/NewWebhookModal.tsx", 148],
       ["src/views/settings/components/WebhookList.tsx", 174]
-    ]
+    ],
+    "translation": "Teste enviado"
   },
   "itgYbC": {
     "message": "Test webhook sent successfully!",
@@ -5548,14 +5639,14 @@
     "message": "The board has been archived.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 48]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 54]],
     "translation": "O quadro foi arquivado."
   },
   "C6gv54": {
     "message": "The board has been unarchived.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 49]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 55]],
     "translation": "O quadro foi desarquivado."
   },
   "nKBUeF": {
@@ -5874,7 +5965,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 313],
+      ["src/views/board/index.tsx", 405],
       ["src/views/card/components/Dropdown.tsx", 49],
       ["src/views/public/board/CardModal.tsx", 43],
       ["src/views/public/board/index.tsx", 84]
@@ -5913,11 +6004,11 @@
     "translation": "Não foi possível criar template"
   },
   "c1vOQR": {
-    "translation": "Não foi possível criar o webhook",
     "message": "Unable to create webhook",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 118]]
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 118]],
+    "translation": "Não foi possível criar o webhook"
   },
   "MxQXhL": {
     "message": "Unable to create workspace",
@@ -5967,13 +6058,13 @@
     "translation": "Não foi possível excluir o comentário"
   },
   "23nvb2": {
-    "translation": "Não foi possível excluir o webhook",
     "message": "Unable to delete webhook",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 36]
-    ]
+    ],
+    "translation": "Não foi possível excluir o webhook"
   },
   "Oo4E6p": {
     "message": "Unable to duplicate card",
@@ -6031,20 +6122,20 @@
     "translation": "Não foi possível iniciar o checkout"
   },
   "KNK33q": {
-    "translation": "Não foi possível testar o webhook",
     "message": "Unable to test webhook",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/NewWebhookModal.tsx", 163],
       ["src/views/settings/components/WebhookList.tsx", 185]
-    ]
+    ],
+    "translation": "Não foi possível testar o webhook"
   },
   "T7Mywq": {
     "message": "Unable to update board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 67]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 73]],
     "translation": "Não foi possível atualizar o quadro"
   },
   "XpcjLO": {
@@ -6066,7 +6157,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 273],
+      ["src/views/board/index.tsx", 365],
       ["src/views/card/index.tsx", 231]
     ],
     "translation": "Não foi possível atualizar o cartão"
@@ -6096,14 +6187,20 @@
     "message": "Unable to update due date",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/DueDateSelector.tsx", 63]],
+    "origin": [
+      ["src/views/board/components/CardContextDueDateModal.tsx", 52],
+      ["src/views/card/components/DueDateSelector.tsx", 63]
+    ],
     "translation": "Não foi possível atualizar a data de vencimento"
   },
   "delOXn": {
     "message": "Unable to update labels",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/LabelSelector.tsx", 74]],
+    "origin": [
+      ["src/views/board/components/CardContextLabelsModal.tsx", 69],
+      ["src/views/card/components/LabelSelector.tsx", 74]
+    ],
     "translation": "Não foi possível atualizar as etiquetas"
   },
   "I0gAKM": {
@@ -6111,7 +6208,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 217],
+      ["src/views/board/index.tsx", 309],
       ["src/views/card/components/ListSelector.tsx", 54]
     ],
     "translation": "Não foi possível atualizar a lista"
@@ -6120,7 +6217,10 @@
     "message": "Unable to update members",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/MemberSelector.tsx", 81]],
+    "origin": [
+      ["src/views/board/components/CardContextMembersModal.tsx", 78],
+      ["src/views/card/components/MemberSelector.tsx", 81]
+    ],
     "translation": "Não foi possível atualizar os membros"
   },
   "GYv20o": {
@@ -6141,17 +6241,17 @@
     "translation": "Não foi possível atualizar a função"
   },
   "V1o9Jo": {
-    "translation": "Não foi possível atualizar o webhook",
     "message": "Unable to update webhook",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 137]]
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 137]],
+    "translation": "Não foi possível atualizar o webhook"
   },
   "It4/FS": {
     "message": "Unarchive board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 114]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 120]],
     "translation": "Desarquivar quadro"
   },
   "E8zYtd": {
@@ -6522,11 +6622,11 @@
     "translation": "Estamos apenas começando. "
   },
   "an6ayw": {
-    "translation": "Webhook criado",
     "message": "Webhook created",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 110]]
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 110]],
+    "translation": "Webhook criado"
   },
   "GdWB+V": {
     "message": "Webhook created successfully",
@@ -6536,13 +6636,13 @@
     "translation": "Webhook criado com sucesso"
   },
   "LnaC5y": {
-    "translation": "Webhook excluído",
     "message": "Webhook deleted",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 28]
-    ]
+    ],
+    "translation": "Webhook excluído"
   },
   "2X4ecw": {
     "message": "Webhook deleted successfully",
@@ -6578,11 +6678,11 @@
     "translation": "O teste do webhook falhou"
   },
   "kxZ7LS": {
-    "translation": "Webhook atualizado",
     "message": "Webhook updated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 129]]
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 129]],
+    "translation": "Webhook atualizado"
   },
   "3d54Wj": {
     "message": "Webhook updated successfully",
@@ -6656,7 +6756,7 @@
     "comments": [],
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
-      ["src/views/board/index.tsx", 530],
+      ["src/views/board/index.tsx", 622],
       ["src/views/boards/index.tsx", 48],
       ["src/views/members/index.tsx", 258],
       ["src/views/public/board/index.tsx", 125],
@@ -6876,11 +6976,11 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/List.tsx", 117],
+      ["src/views/board/components/List.tsx", 123],
       ["src/views/board/components/UpdateBoardSlugButton.tsx", 58],
       ["src/views/board/components/VisibilityButton.tsx", 72],
-      ["src/views/board/index.tsx", 604],
-      ["src/views/board/index.tsx", 662],
+      ["src/views/board/index.tsx", 696],
+      ["src/views/board/index.tsx", 754],
       ["src/views/boards/components/BoardsList.tsx", 71],
       ["src/views/boards/index.tsx", 59],
       ["src/views/boards/index.tsx", 80]

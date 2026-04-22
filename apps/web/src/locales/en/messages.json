@@ -75,7 +75,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        59
+        65
       ]
     ],
     "translation": "{0} has been added to your favorites."
@@ -91,7 +91,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        60
+        66
       ]
     ],
     "translation": "{0} has been removed from your favorites."
@@ -123,7 +123,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        557
+        649
       ]
     ],
     "translation": "{0} not found"
@@ -335,7 +335,7 @@
     "origin": [
       [
         "src/providers/keyboard-shortcuts.tsx",
-        56
+        55
       ]
     ],
     "translation": "Actions"
@@ -419,7 +419,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        136
+        142
       ]
     ],
     "translation": "Add a card"
@@ -527,7 +527,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        125
+        129
       ]
     ],
     "translation": "Add to favorites"
@@ -694,7 +694,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        56
+        62
       ]
     ],
     "translation": "Added to favorites"
@@ -1081,7 +1081,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        114
+        120
       ]
     ],
     "translation": "Archive board"
@@ -1457,7 +1457,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        530
+        622
       ],
       [
         "src/views/card/index.tsx",
@@ -1489,7 +1489,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        46
+        51
       ]
     ],
     "translation": "Board archived"
@@ -1549,7 +1549,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        46
+        52
       ]
     ],
     "translation": "Board unarchived"
@@ -2217,7 +2217,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        308
+        400
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2365,6 +2365,18 @@
       ]
     ],
     "translation": "Choose a plan"
+  },
+  "xCJdfg": {
+    "translation": "Clear",
+    "message": "Clear",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDueDateModal.tsx",
+        90
+      ]
+    ]
   },
   "VHS0aJ": {
     "message": "Clear all custom permissions?",
@@ -3080,6 +3092,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/CardContextLabelsModal.tsx",
+        130
+      ],
+      [
         "src/views/board/components/NewCardForm.tsx",
         420
       ],
@@ -3097,11 +3113,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        92
+        108
       ],
       [
         "src/views/board/index.tsx",
-        671
+        763
       ]
     ],
     "translation": "Create new list"
@@ -3478,7 +3494,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        136
+        147
       ]
     ],
     "translation": "Delete board"
@@ -3511,6 +3527,18 @@
     ],
     "translation": "Delete comment"
   },
+  "i2fOfI": {
+    "translation": "Delete hovered card",
+    "message": "Delete hovered card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/index.tsx",
+        133
+      ]
+    ]
+  },
   "lYT7pQ": {
     "message": "Delete list",
     "placeholders": {},
@@ -3518,7 +3546,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        147
+        153
       ]
     ],
     "translation": "Delete list"
@@ -3530,7 +3558,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        136
+        147
       ]
     ],
     "translation": "Delete template"
@@ -3818,15 +3846,15 @@
     "origin": [
       [
         "src/views/board/components/CardContextDueDateModal.tsx",
-        36
+        119
       ],
       [
         "src/views/board/components/CardContextLabelsModal.tsx",
-        48
+        139
       ],
       [
         "src/views/board/components/CardContextMembersModal.tsx",
-        68
+        166
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
@@ -3866,6 +3894,22 @@
       ]
     ],
     "translation": "Download failed"
+  },
+  "hSsySs": {
+    "translation": "Due {0}",
+    "message": "Due {0}",
+    "placeholders": {
+      "0": [
+        "format(dueDate, \"MMM d, yyyy\")"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDueDateModal.tsx",
+        97
+      ]
+    ]
   },
   "XicmhT": {
     "message": "Due date",
@@ -3998,7 +4042,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        105
+        111
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
@@ -4030,6 +4074,30 @@
       ]
     ],
     "translation": "Edit label"
+  },
+  "FJiuoM": {
+    "translation": "Edit labels on hovered card",
+    "message": "Edit labels on hovered card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/index.tsx",
+        145
+      ]
+    ]
+  },
+  "p/gz1T": {
+    "translation": "Edit members on hovered card",
+    "message": "Edit members on hovered card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/index.tsx",
+        157
+      ]
+    ]
   },
   "TCOMOO": {
     "message": "Edit permissions",
@@ -5043,7 +5111,7 @@
     "origin": [
       [
         "src/providers/keyboard-shortcuts.tsx",
-        54
+        53
       ]
     ],
     "translation": "General"
@@ -5119,7 +5187,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        656
+        748
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -5830,6 +5898,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/CardContextMembersModal.tsx",
+        157
+      ],
+      [
         "src/views/card/components/MemberSelector.tsx",
         115
       ],
@@ -5932,6 +6004,18 @@
     ],
     "translation": "Keep in mind that this action is irreversible."
   },
+  "77Emn0": {
+    "translation": "Keyboard shortcuts",
+    "message": "Keyboard shortcuts",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        138
+      ]
+    ]
+  },
   "h7MgpO": {
     "message": "Keyboard Shortcuts",
     "placeholders": {},
@@ -5939,7 +6023,7 @@
     "origin": [
       [
         "src/providers/keyboard-shortcuts.tsx",
-        321
+        320
       ]
     ],
     "translation": "Keyboard Shortcuts"
@@ -5951,7 +6035,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextLabelsModal.tsx",
-        31
+        85
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -6139,7 +6223,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        306
+        398
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -6311,7 +6395,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        94
+        100
       ]
     ],
     "translation": "Make template"
@@ -6323,7 +6407,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMembersModal.tsx",
-        51
+        99
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -6622,7 +6706,7 @@
     "origin": [
       [
         "src/providers/keyboard-shortcuts.tsx",
-        55
+        54
       ]
     ],
     "translation": "Navigation"
@@ -6695,6 +6779,18 @@
     ],
     "translation": "New card"
   },
+  "zMt2MM": {
+    "translation": "New card in hovered list",
+    "message": "New card in hovered list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/index.tsx",
+        121
+      ]
+    ]
+  },
   "cWcxrL": {
     "message": "New checklist",
     "placeholders": {},
@@ -6742,7 +6838,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        620
+        712
       ]
     ],
     "translation": "New list"
@@ -6931,6 +7027,18 @@
     ],
     "translation": "No download URL available for this attachment."
   },
+  "F1TnlY": {
+    "translation": "No due date set.",
+    "message": "No due date set.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextDueDateModal.tsx",
+        98
+      ]
+    ]
+  },
   "TXO5TM": {
     "message": "No keyboard shortcuts registered.",
     "placeholders": {},
@@ -6938,10 +7046,22 @@
     "origin": [
       [
         "src/providers/keyboard-shortcuts.tsx",
-        334
+        333
       ]
     ],
     "translation": "No keyboard shortcuts registered."
+  },
+  "2lFMw7": {
+    "translation": "No labels on this board yet.",
+    "message": "No labels on this board yet.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextLabelsModal.tsx",
+        92
+      ]
+    ]
   },
   "hXMFoN": {
     "message": "No lists",
@@ -6950,7 +7070,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        652
+        744
       ]
     ],
     "translation": "No lists"
@@ -6962,10 +7082,22 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        657
+        749
       ]
     ],
     "translation": "No lists have been created yet"
+  },
+  "lVHic5": {
+    "translation": "No members in this workspace yet.",
+    "message": "No members in this workspace yet.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMembersModal.tsx",
+        106
+      ]
+    ]
   },
   "i30J2U": {
     "message": "No projects found",
@@ -7103,6 +7235,18 @@
     ],
     "translation": "Open command menu"
   },
+  "zD5v75": {
+    "translation": "Open hovered card",
+    "message": "Open hovered card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/index.tsx",
+        184
+      ]
+    ]
+  },
   "cFQEU/": {
     "message": "Open keyboard shortcuts",
     "placeholders": {},
@@ -7110,7 +7254,7 @@
     "origin": [
       [
         "src/providers/keyboard-shortcuts.tsx",
-        172
+        171
       ]
     ],
     "translation": "Open keyboard shortcuts"
@@ -7610,7 +7754,19 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        68
+        74
+      ],
+      [
+        "src/views/board/components/CardContextDueDateModal.tsx",
+        53
+      ],
+      [
+        "src/views/board/components/CardContextLabelsModal.tsx",
+        70
+      ],
+      [
+        "src/views/board/components/CardContextMembersModal.tsx",
+        79
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -7638,11 +7794,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        218
+        310
       ],
       [
         "src/views/board/index.tsx",
-        274
+        366
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -7830,7 +7986,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        315
+        407
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -8122,7 +8278,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        124
+        129
       ]
     ],
     "translation": "Remove from favorites"
@@ -8217,7 +8373,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        57
+        63
       ]
     ],
     "translation": "Removed from favorites"
@@ -8717,7 +8873,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDueDateModal.tsx",
-        20
+        81
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -8729,6 +8885,18 @@
       ]
     ],
     "translation": "Set due date"
+  },
+  "ICQFN4": {
+    "translation": "Set due date on hovered card",
+    "message": "Set due date on hovered card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/index.tsx",
+        169
+      ]
+    ]
   },
   "Eit43O": {
     "message": "set the due date",
@@ -9269,11 +9437,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        530
+        622
       ],
       [
         "src/views/board/index.tsx",
-        566
+        658
       ]
     ],
     "translation": "Template"
@@ -9367,7 +9535,6 @@
     "translation": "Test"
   },
   "InJcdo": {
-    "translation": "Test failed",
     "message": "Test failed",
     "placeholders": {},
     "comments": [],
@@ -9380,10 +9547,10 @@
         "src/views/settings/components/WebhookList.tsx",
         177
       ]
-    ]
+    ],
+    "translation": "Test failed"
   },
   "zDNL2V": {
-    "translation": "Test sent",
     "message": "Test sent",
     "placeholders": {},
     "comments": [],
@@ -9396,7 +9563,8 @@
         "src/views/settings/components/WebhookList.tsx",
         174
       ]
-    ]
+    ],
+    "translation": "Test sent"
   },
   "itgYbC": {
     "message": "Test webhook sent successfully!",
@@ -9445,7 +9613,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        48
+        54
       ]
     ],
     "translation": "The board has been archived."
@@ -9457,7 +9625,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        49
+        55
       ]
     ],
     "translation": "The board has been unarchived."
@@ -9969,7 +10137,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        313
+        405
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -10039,7 +10207,6 @@
     "translation": "Unable to create template"
   },
   "c1vOQR": {
-    "translation": "Unable to create webhook",
     "message": "Unable to create webhook",
     "placeholders": {},
     "comments": [],
@@ -10048,7 +10215,8 @@
         "src/views/settings/components/NewWebhookModal.tsx",
         118
       ]
-    ]
+    ],
+    "translation": "Unable to create webhook"
   },
   "MxQXhL": {
     "message": "Unable to create workspace",
@@ -10127,7 +10295,6 @@
     "translation": "Unable to delete comment"
   },
   "23nvb2": {
-    "translation": "Unable to delete webhook",
     "message": "Unable to delete webhook",
     "placeholders": {},
     "comments": [],
@@ -10136,7 +10303,8 @@
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
         36
       ]
-    ]
+    ],
+    "translation": "Unable to delete webhook"
   },
   "Oo4E6p": {
     "message": "Unable to duplicate card",
@@ -10223,7 +10391,6 @@
     "translation": "Unable to start checkout"
   },
   "KNK33q": {
-    "translation": "Unable to test webhook",
     "message": "Unable to test webhook",
     "placeholders": {},
     "comments": [],
@@ -10236,7 +10403,8 @@
         "src/views/settings/components/WebhookList.tsx",
         185
       ]
-    ]
+    ],
+    "translation": "Unable to test webhook"
   },
   "T7Mywq": {
     "message": "Unable to update board",
@@ -10245,7 +10413,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        67
+        73
       ]
     ],
     "translation": "Unable to update board"
@@ -10281,7 +10449,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        273
+        365
       ],
       [
         "src/views/card/index.tsx",
@@ -10332,6 +10500,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/CardContextDueDateModal.tsx",
+        52
+      ],
+      [
         "src/views/card/components/DueDateSelector.tsx",
         63
       ]
@@ -10343,6 +10515,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/CardContextLabelsModal.tsx",
+        69
+      ],
       [
         "src/views/card/components/LabelSelector.tsx",
         74
@@ -10357,7 +10533,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        217
+        309
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -10371,6 +10547,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/CardContextMembersModal.tsx",
+        78
+      ],
       [
         "src/views/card/components/MemberSelector.tsx",
         81
@@ -10407,7 +10587,6 @@
     "translation": "Unable to update role"
   },
   "V1o9Jo": {
-    "translation": "Unable to update webhook",
     "message": "Unable to update webhook",
     "placeholders": {},
     "comments": [],
@@ -10416,7 +10595,8 @@
         "src/views/settings/components/NewWebhookModal.tsx",
         137
       ]
-    ]
+    ],
+    "translation": "Unable to update webhook"
   },
   "It4/FS": {
     "message": "Unarchive board",
@@ -10425,7 +10605,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        114
+        120
       ]
     ],
     "translation": "Unarchive board"
@@ -11075,7 +11255,6 @@
     "translation": "We're just getting started. "
   },
   "an6ayw": {
-    "translation": "Webhook created",
     "message": "Webhook created",
     "placeholders": {},
     "comments": [],
@@ -11084,7 +11263,8 @@
         "src/views/settings/components/NewWebhookModal.tsx",
         110
       ]
-    ]
+    ],
+    "translation": "Webhook created"
   },
   "GdWB+V": {
     "message": "Webhook created successfully",
@@ -11099,7 +11279,6 @@
     "translation": "Webhook created successfully"
   },
   "LnaC5y": {
-    "translation": "Webhook deleted",
     "message": "Webhook deleted",
     "placeholders": {},
     "comments": [],
@@ -11108,7 +11287,8 @@
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
         28
       ]
-    ]
+    ],
+    "translation": "Webhook deleted"
   },
   "2X4ecw": {
     "message": "Webhook deleted successfully",
@@ -11163,7 +11343,6 @@
     "translation": "Webhook test failed"
   },
   "kxZ7LS": {
-    "translation": "Webhook updated",
     "message": "Webhook updated",
     "placeholders": {},
     "comments": [],
@@ -11172,7 +11351,8 @@
         "src/views/settings/components/NewWebhookModal.tsx",
         129
       ]
-    ]
+    ],
+    "translation": "Webhook updated"
   },
   "3d54Wj": {
     "message": "Webhook updated successfully",
@@ -11297,7 +11477,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        530
+        622
       ],
       [
         "src/views/boards/index.tsx",
@@ -11654,7 +11834,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        117
+        123
       ],
       [
         "src/views/board/components/UpdateBoardSlugButton.tsx",
@@ -11666,11 +11846,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        604
+        696
       ],
       [
         "src/views/board/index.tsx",
-        662
+        754
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
