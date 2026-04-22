@@ -74,6 +74,10 @@ export const cards = pgTable("card", {
     .references(() => lists.id, { onDelete: "cascade" }),
   importId: bigint("importId", { mode: "number" }).references(() => imports.id),
   dueDate: timestamp("dueDate"),
+  parentId: bigint("parentId", { mode: "number" }).references(
+    (): any => cards.id,
+    { onDelete: "set null" },
+  ),
 }).enableRLS();
 
 export const cardsRelations = relations(cards, ({ one, many }) => ({
@@ -91,6 +95,14 @@ export const cardsRelations = relations(cards, ({ one, many }) => ({
     fields: [cards.deletedBy],
     references: [users.id],
     relationName: "cardsDeletedByUser",
+  }),
+  parent: one(cards, {
+    fields: [cards.parentId],
+    references: [cards.id],
+    relationName: "cardParentChild",
+  }),
+  children: many(cards, {
+    relationName: "cardParentChild",
   }),
   labels: many(cardsToLabels),
   members: many(cardToWorkspaceMembers),
