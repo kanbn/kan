@@ -1357,4 +1357,140 @@ export const cardRouter = createTRPCRouter({
 
       return { publicId: newCard.publicId };
     }),
+  setParent: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Set or remove a card's parent (epic)",
+        method: "PUT",
+        path: "/cards/{cardPublicId}/parent",
+        description: "Sets a parent card (epic) for a card, or removes it",
+        tags: ["Cards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+        parentPublicId: z.string().min(12).nullable(),
+      }),
+    )
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!card)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertPermission(ctx.db, userId, card.workspaceId, "card:edit");
+
+      let parentId: number | null = null;
+
+      if (input.parentPublicId) {
+        const parentCard = await cardRepo.getByPublicId(
+          ctx.db,
+          input.parentPublicId,
+        );
+
+        if (!parentCard)
+          throw new TRPCError({
+            message: `Parent card with public ID ${input.parentPublicId} not found`,
+            code: "NOT_FOUND",
+          });
+
+        // Prevent self-reference
+        if (parentCard.id === card.id)
+          throw new TRPCError({
+            message: "A card cannot be its own parent",
+            code: "BAD_REQUEST",
+          });
+
+        parentId = parentCard.id;
+      }
+
+      await cardRepo.setParent(ctx.db, {
+        cardId: card.id,
+        parentId,
+      });
+
+      return { success: true };
+    }),
+  getEpics: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Get epics for a board",
+        method: "GET",
+        path: "/boards/{boardPublicId}/epics",
+        description: "Returns all cards that have children (epics) for a board, with progress",
+        tags: ["Cards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        boardPublicId: z.string().min(12),
+      }),
+    )
+    .output(
+      z.array(
+        z.object({
+          publicId: z.string(),
+          title: z.string(),
+          dueDate: z.date().nullable(),
+          listName: z.string(),
+          totalChildren: z.number(),
+          doneChildren: z.number(),
+        }),
+      ),
+    )
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
+
+      const board = await ctx.db.query.boards.findFirst({
+        columns: { id: true, workspaceId: true },
+        where: (boards, { eq, isNull, and }) =>
+          and(
+            eq(boards.publicId, input.boardPublicId),
+            isNull(boards.deletedAt),
+          ),
+      });
+
+      if (!board)
+        throw new TRPCError({
+          message: `Board with public ID ${input.boardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertPermission(ctx.db, userId, board.workspaceId, "card:view");
+
+      const epics = await cardRepo.getEpicsByBoard(ctx.db, board.id);
+
+      return epics.map((epic: any) => ({
+        publicId: epic.publicId,
+        title: epic.title,
+        dueDate: epic.dueDate ?? null,
+        listName: epic.list_name,
+        totalChildren: Number(epic.total_children),
+        doneChildren: Number(epic.done_children),
+      }));
+    }),
 });

@@ -39,6 +39,7 @@ import { formatToArray } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import BoardDropdown from "./components/BoardDropdown";
 import Card from "./components/Card";
+import EpicsBar from "./components/EpicsBar";
 import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
 import { CardContextDuplicateModal } from "./components/CardContextDuplicateModal";
 import { CardContextLabelsModal } from "./components/CardContextLabelsModal";
@@ -631,6 +632,10 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           </div>
         </div>
 
+        {boardData && boardId && (
+          <EpicsBar boardPublicId={boardId} />
+        )}
+
         <div
           ref={scrollRef}
           onMouseDown={onMouseDown}
@@ -766,6 +771,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                             comments={card.comments ?? []}
                                             attachments={card.attachments}
                                             dueDate={card.dueDate ?? null}
+                                            parent={card.parent ?? null}
                                           />
                                         </Link>
                                       )}

@@ -434,8 +434,32 @@ export const getWithListAndMembersByPublicId = async (
       description: true,
       dueDate: true,
       createdBy: true,
+      parentId: true,
     },
     with: {
+      parent: {
+        columns: {
+          publicId: true,
+          title: true,
+        },
+      },
+      children: {
+        columns: {
+          publicId: true,
+          title: true,
+          index: true,
+        },
+        with: {
+          list: {
+            columns: {
+              publicId: true,
+              name: true,
+            },
+          },
+        },
+        where: isNull(cards.deletedAt),
+        orderBy: asc(cards.index),
+      },
       labels: {
         with: {
           label: {
@@ -980,4 +1004,70 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
         boardName: result.list.board.name,
       }
     : null;
+};
+
+export const setParent = async (
+  db: dbClient,
+  args: { cardId: number; parentId: number | null },
+) => {
+  const [result] = await db
+    .update(cards)
+    .set({ parentId: args.parentId, updatedAt: new Date() })
+    .where(and(eq(cards.id, args.cardId), isNull(cards.deletedAt)))
+    .returning({
+      id: cards.id,
+      publicId: cards.publicId,
+      parentId: cards.parentId,
+    });
+
+  return result;
+};
+
+export const getChildren = async (
+  db: dbClient,
+  parentId: number,
+) => {
+  return db.query.cards.findMany({
+    columns: {
+      id: true,
+      publicId: true,
+      title: true,
+      index: true,
+      dueDate: true,
+    },
+    with: {
+      list: {
+        columns: {
+          publicId: true,
+          name: true,
+        },
+      },
+    },
+    where: and(eq(cards.parentId, parentId), isNull(cards.deletedAt)),
+    orderBy: asc(cards.index),
+  });
+};
+
+export const getEpicsByBoard = async (
+  db: dbClient,
+  boardId: number,
+) => {
+  // Epics = cards that have at least one child, scoped to a board
+  const result = await db.execute(sql`
+    SELECT DISTINCT p."publicId", p.title, p."dueDate", p.id,
+      l.name AS list_name,
+      (SELECT count(*) FROM card c2 WHERE c2."parentId" = p.id AND c2."deletedAt" IS NULL) AS total_children,
+      (SELECT count(*) FROM card c3
+        JOIN list l2 ON c3."listId" = l2.id
+        WHERE c3."parentId" = p.id AND c3."deletedAt" IS NULL
+        AND l2.name ILIKE '%done%') AS done_children
+    FROM card p
+    JOIN list l ON p."listId" = l.id
+    WHERE l."boardId" = ${boardId}
+      AND p."deletedAt" IS NULL
+      AND EXISTS (SELECT 1 FROM card c WHERE c."parentId" = p.id AND c."deletedAt" IS NULL)
+    ORDER BY p.title
+  `);
+
+  return result.rows;
 };
