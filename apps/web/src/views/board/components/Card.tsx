@@ -23,6 +23,7 @@ const Card = ({
   comments,
   attachments,
   dueDate,
+  parent,
 }: {
   title: string;
   labels: { name: string; colourCode: string | null }[];
@@ -45,6 +46,7 @@ const Card = ({
   comments: { publicId: string }[];
   attachments?: { publicId: string }[];
   dueDate?: Date | null;
+  parent?: { publicId: string; title: string } | null;
 }) => {
   const { dateLocale } = useLocalisation();
   const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;
@@ -67,6 +69,11 @@ const Card = ({
 
   return (
     <div className="flex flex-col overflow-hidden rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300">
+      {parent && (
+        <span className="mb-1 truncate text-[10px] font-medium text-blue-600 dark:text-blue-400">
+          {parent.title}
+        </span>
+      )}
       <span className="break-words">{title}</span>
       {labels.length ||
       members.length ||

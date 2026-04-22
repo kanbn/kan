@@ -225,6 +225,13 @@
       "when": 1775170588247,
       "tag": "20260402225628_AddTeamWorkspacePlan",
       "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1776852884243,
+      "tag": "20260422101444_add-parent-id-to-card",
+      "breakpoints": true
     }
   ]
 }

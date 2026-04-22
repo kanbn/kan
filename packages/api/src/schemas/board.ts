@@ -40,6 +40,12 @@ const boardDetailCardSchema = z.object({
   description: z.string().nullable(),
   index: z.number(),
   dueDate: z.date().nullable(),
+  parent: z
+    .object({
+      publicId: z.string(),
+      title: z.string(),
+    })
+    .nullable(),
   labels: z.array(labelSchema),
   members: z.array(boardCardMemberSchema),
   attachments: z.array(z.object({ publicId: z.string() })),

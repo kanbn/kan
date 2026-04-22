@@ -120,6 +120,17 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
 
   return (
     <div className="h-full w-[360px] border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
+      {card?.parent && (
+        <div className="mb-4 flex w-full flex-row pt-[18px]">
+          <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Epic`}</p>
+          <Link
+            href={`/cards/${card.parent.publicId}`}
+            className="my-2 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+          >
+            {card.parent.title}
+          </Link>
+        </div>
+      )}
       <div className="mb-4 flex w-full flex-row pt-[18px]">
         <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
         <ListSelector
@@ -367,6 +378,17 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
         <div className="scrollbar-thumb-rounded-[4px] scrollbar-track-rounded-[4px] w-full flex-1 overflow-y-auto scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 hover:scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 dark:hover:scrollbar-thumb-dark-300">
           <div className="p-auto mx-auto flex h-full w-full max-w-[800px] flex-col">
             <div className="p-6 md:p-8">
+              {card?.parent && (
+                <div className="mb-2 md:mt-4">
+                  <Link
+                    href={`/cards/${card.parent.publicId}`}
+                    className="inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                  >
+                    <IoChevronForwardSharp className="h-2.5 w-2.5 rotate-180" />
+                    {t`Epic`}: {card.parent.title}
+                  </Link>
+                </div>
+              )}
               <div className="mb-8 md:mt-4">
                 {!card && isLoading && (
                   <div className="flex space-x-2">
@@ -432,6 +454,29 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                     setActiveChecklistForm={setActiveChecklistForm}
                     viewOnly={!canEdit}
                   />
+                  {card.children && card.children.length > 0 && (
+                    <div className="mt-6">
+                      <h2 className="text-md pb-3 font-medium text-light-1000 dark:text-dark-1000">
+                        {t`Sub-tasks`}
+                      </h2>
+                      <div className="flex flex-col gap-1">
+                        {card.children.map((child) => (
+                          <Link
+                            key={child.publicId}
+                            href={`/cards/${child.publicId}`}
+                            className="flex items-center justify-between rounded-md border border-light-200 px-3 py-2 text-sm hover:bg-light-100 dark:border-dark-300 dark:hover:bg-dark-200"
+                          >
+                            <span className="text-neutral-900 dark:text-dark-1000">
+                              {child.title}
+                            </span>
+                            <span className="text-xs text-light-700 dark:text-dark-800">
+                              {child.list.name}
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   {!isTemplate && (
                     <>
                       {card?.attachments.length > 0 && (

@@ -48,6 +48,23 @@ export const cardDetailSchema = z.object({
   description: z.string().nullable(),
   dueDate: z.date().nullable(),
   createdBy: z.string().nullable(),
+  parent: z
+    .object({
+      publicId: z.string(),
+      title: z.string(),
+    })
+    .nullable(),
+  children: z.array(
+    z.object({
+      publicId: z.string(),
+      title: z.string(),
+      index: z.number(),
+      list: z.object({
+        publicId: z.string(),
+        name: z.string(),
+      }),
+    }),
+  ),
   labels: z.array(labelSchema),
   attachments: z.array(
     z.object({
