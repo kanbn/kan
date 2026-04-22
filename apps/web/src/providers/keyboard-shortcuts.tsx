@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import React from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -7,7 +6,7 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
-import {
+import React, {
   createContext,
   useCallback,
   useContext,
@@ -443,9 +442,22 @@ function ShortcutListItem({ shortcut }: { shortcut: KeyboardShortcut }) {
   );
 }
 
+const KEY_DISPLAY: Record<string, string> = {
+  backspace: "⌫",
+  delete: "⌦",
+  enter: "⏎",
+  escape: "⎋",
+  tab: "⇥",
+  arrowup: "↑",
+  arrowdown: "↓",
+  arrowleft: "←",
+  arrowright: "→",
+  " ": "␣",
+};
+
 function FormattedShortcut({ shortcut }: { shortcut: KeyboardShortcut }) {
   const kbdClassName =
-    "inline-flex h-5 w-5 items-center justify-center rounded border border-light-400 bg-light-200 px-1.5 py-0.5 font-mono text-[8px] font-semibold text-center text-neutral-900 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-950";
+    "inline-flex h-5 min-w-5 items-center justify-center rounded border border-light-400 bg-light-200 px-1.5 py-0.5 font-mono text-[8px] font-semibold text-center text-neutral-900 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-950";
 
   const stringifyModifier = (modifier: ModifierKey): string => {
     const isMac =
@@ -473,9 +485,12 @@ function FormattedShortcut({ shortcut }: { shortcut: KeyboardShortcut }) {
       );
     });
 
+    const display =
+      KEY_DISPLAY[stroke.key.toLowerCase()] ?? stroke.key.toUpperCase();
+
     parts.push(
       <kbd key={`key-${stroke.key}`} className={kbdClassName}>
-        {stroke.key.toUpperCase()}
+        {display}
       </kbd>,
     );
 

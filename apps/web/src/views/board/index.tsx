@@ -76,22 +76,114 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     cardPublicId: string;
   } | null>(null);
 
+  const [hoveredCardPublicId, setHoveredCardPublicId] = useState<string | null>(
+    null,
+  );
+
+  const [hoveredListPublicId, setHoveredListPublicId] = useState<string | null>(
+    null,
+  );
+
   const { ref: scrollRef, onMouseDown } = useDragToScroll({
     enabled: true,
     direction: "horizontal",
   });
 
-  const { canCreateList, canEditList, canEditCard, canEditBoard } =
-    usePermissions();
+  const {
+    canCreateList,
+    canCreateCard,
+    canEditList,
+    canEditCard,
+    canEditBoard,
+  } = usePermissions();
 
   const { tooltipContent: createListShortcutTooltipContent } =
     useKeyboardShortcut({
       type: "PRESS",
       stroke: { key: "C" },
-      action: () => boardId && canCreateList && openNewListForm(boardId),
+      action: () => {
+        if (isOpen) return;
+        if (boardId && canCreateList) openNewListForm(boardId);
+      },
       description: t`Create new list`,
       group: "ACTIONS",
     });
+
+  useKeyboardShortcut({
+    type: "PRESS",
+    stroke: { key: "N" },
+    action: () => {
+      if (isOpen) return;
+      if (!hoveredListPublicId || !canCreateCard) return;
+      setSelectedPublicListId(hoveredListPublicId);
+      openModal("NEW_CARD");
+    },
+    description: t`New card in hovered list`,
+    group: "ACTIONS",
+  });
+
+  useKeyboardShortcut({
+    type: "PRESS",
+    stroke: { key: "Backspace" },
+    action: () => {
+      if (isOpen) return;
+      if (!hoveredCardPublicId || !canEditCard) return;
+      openModal("DELETE_CARD", hoveredCardPublicId);
+    },
+    description: t`Delete hovered card`,
+    group: "ACTIONS",
+  });
+
+  useKeyboardShortcut({
+    type: "PRESS",
+    stroke: { key: "L" },
+    action: () => {
+      if (isOpen) return;
+      if (!hoveredCardPublicId || !canEditCard) return;
+      openModal("CARD_CONTEXT_LABELS", hoveredCardPublicId);
+    },
+    description: t`Edit labels on hovered card`,
+    group: "ACTIONS",
+  });
+
+  useKeyboardShortcut({
+    type: "PRESS",
+    stroke: { key: "M" },
+    action: () => {
+      if (isOpen) return;
+      if (!hoveredCardPublicId || !canEditCard) return;
+      openModal("CARD_CONTEXT_MEMBERS", hoveredCardPublicId);
+    },
+    description: t`Edit members on hovered card`,
+    group: "ACTIONS",
+  });
+
+  useKeyboardShortcut({
+    type: "PRESS",
+    stroke: { key: "D" },
+    action: () => {
+      if (isOpen) return;
+      if (!hoveredCardPublicId || !canEditCard) return;
+      openModal("CARD_CONTEXT_DUE_DATE", hoveredCardPublicId);
+    },
+    description: t`Set due date on hovered card`,
+    group: "ACTIONS",
+  });
+
+  useKeyboardShortcut({
+    type: "PRESS",
+    stroke: { key: "E" },
+    action: () => {
+      if (isOpen) return;
+      if (!hoveredCardPublicId) return;
+      const path = isTemplate
+        ? `/templates/${boardId}/cards/${hoveredCardPublicId}`
+        : `/cards/${hoveredCardPublicId}`;
+      void router.push(path);
+    },
+    description: t`Open hovered card`,
+    group: "ACTIONS",
+  });
 
   const boardId = params?.boardId
     ? Array.isArray(params.boardId)
@@ -694,6 +786,14 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                             setSelectedPublicListId={(publicListId) =>
                               setSelectedPublicListId(publicListId)
                             }
+                            onHoverStart={(publicListId) =>
+                              setHoveredListPublicId(publicListId)
+                            }
+                            onHoverEnd={(publicListId) =>
+                              setHoveredListPublicId((current) =>
+                                current === publicListId ? null : current,
+                              )
+                            }
                           >
                             <Droppable
                               droppableId={`${list.publicId}`}
@@ -721,6 +821,24 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                               )
                                             )
                                               e.preventDefault();
+                                          }}
+                                          onMouseEnter={() => {
+                                            if (
+                                              card.publicId.startsWith(
+                                                "PLACEHOLDER",
+                                              )
+                                            )
+                                              return;
+                                            setHoveredCardPublicId(
+                                              card.publicId,
+                                            );
+                                          }}
+                                          onMouseLeave={() => {
+                                            setHoveredCardPublicId((current) =>
+                                              current === card.publicId
+                                                ? null
+                                                : current,
+                                            );
                                           }}
                                           onContextMenu={(e) => {
                                             if (

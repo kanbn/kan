@@ -66,7 +66,7 @@ const Card = ({
   const hasDueDate = !!dueDate;
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300">
+    <div className="flex flex-col overflow-hidden rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 transition-colors hover:border-light-600 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:border-dark-600 dark:hover:bg-dark-300">
       <span className="break-words">{title}</span>
       {labels.length ||
       members.length ||
