@@ -19,6 +19,7 @@ type FilterOption = {
 };
 
 const FILTER_OPTIONS: FilterOption[] = [
+  { label: "Overdue", filters: ["overdue"] },
   { label: "Today", filters: ["today"] },
   { label: "This Week", filters: ["today", "tomorrow", "next-week"] },
   { label: "All", filters: [] },
