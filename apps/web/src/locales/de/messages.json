@@ -62,7 +62,7 @@
       "0": ["labelPublicIds.length"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 458]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 462]],
     "translation": "{0} Labels"
   },
   "9x4DAL": {
@@ -217,8 +217,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 455],
-      ["src/views/public/board/CardModal.tsx", 200]
+      ["src/views/card/index.tsx", 468],
+      ["src/views/public/board/CardModal.tsx", 205]
     ],
     "translation": "Aktivität"
   },
@@ -263,7 +263,7 @@
     "message": "Add checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 65]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 96]],
     "translation": "Checkliste hinzufügen"
   },
   "ngBZOd": {
@@ -1304,8 +1304,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 363],
-      ["src/views/card/index.tsx", 400]
+      ["src/views/card/index.tsx", 376],
+      ["src/views/card/index.tsx", 413]
     ],
     "translation": "Karte nicht gefunden"
   },
@@ -1313,7 +1313,7 @@
     "message": "Card title",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 324]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 328]],
     "translation": "Kartentitel"
   },
   "rQXTmd": {
@@ -1322,7 +1322,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 308],
-      ["src/views/card/components/Dropdown.tsx", 44],
+      ["src/views/card/components/Dropdown.tsx", 47],
       ["src/views/public/board/CardModal.tsx", 38]
     ],
     "translation": "Karten-URL in Zwischenablage kopiert"
@@ -1462,7 +1462,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 354],
+      ["src/views/card/index.tsx", 367],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
     ],
@@ -1713,7 +1713,7 @@
     "message": "Copy card link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 58]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 80]],
     "translation": "Karten-Link kopieren"
   },
   "0utuU6": {
@@ -1750,6 +1750,13 @@
     ],
     "translation": "Mitglieder kopieren"
   },
+  "7mrkyO": {
+    "translation": "Ticket-ID kopieren",
+    "message": "Copy ticket ID",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Dropdown.tsx", 87]]
+  },
   "9PaIxv": {
     "message": "Core features",
     "placeholders": {},
@@ -1774,7 +1781,7 @@
     "comments": [],
     "origin": [
       ["src/components/LabelForm.tsx", 213],
-      ["src/views/board/components/NewCardForm.tsx", 523],
+      ["src/views/board/components/NewCardForm.tsx", 527],
       ["src/views/board/components/NewListForm.tsx", 141]
     ],
     "translation": "Weitere erstellen"
@@ -1790,7 +1797,7 @@
     "message": "Create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 533]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 537]],
     "translation": "Karte erstellen"
   },
   "d33Usy": {
@@ -1845,7 +1852,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewCardForm.tsx", 420],
+      ["src/views/board/components/NewCardForm.tsx", 424],
       ["src/views/card/components/LabelSelector.tsx", 101]
     ],
     "translation": "Neues Label erstellen"
@@ -2083,7 +2090,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/CardContextMenu.tsx", 74],
-      ["src/views/card/components/Dropdown.tsx", 76]
+      ["src/views/card/components/Dropdown.tsx", 107]
     ],
     "translation": "Karte löschen"
   },
@@ -2295,7 +2302,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/Filters.tsx", 171],
-      ["src/views/board/components/NewCardForm.tsx", 475],
+      ["src/views/board/components/NewCardForm.tsx", 479],
       ["src/views/card/index.tsx", 153]
     ],
     "translation": "Fälligkeitsdatum"
@@ -3275,6 +3282,13 @@
     ],
     "translation": "Ich bestätige, dass alle Workspace-Daten dauerhaft gelöscht werden und möchte fortfahren."
   },
+  "VOwhhz": {
+    "translation": "ID kopiert",
+    "message": "ID copied",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Dropdown.tsx", 64]]
+  },
   "iwr7AP": {
     "message": "Ideas",
     "placeholders": {},
@@ -3357,7 +3371,7 @@
     "message": "in",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/CommandPallette.tsx", 167]],
+    "origin": [["src/components/CommandPallette.tsx", 177]],
     "translation": "in"
   },
   "WbTDwg": {
@@ -3544,7 +3558,7 @@
     "origin": [
       ["src/views/board/components/CardContextLabelsModal.tsx", 31],
       ["src/views/board/components/Filters.tsx", 155],
-      ["src/views/board/components/NewCardForm.tsx", 424],
+      ["src/views/board/components/NewCardForm.tsx", 428],
       ["src/views/card/index.tsx", 133]
     ],
     "translation": "Labels"
@@ -3654,7 +3668,7 @@
     "origin": [
       ["src/views/board/components/UpdateBoardSlugButton.tsx", 80],
       ["src/views/board/index.tsx", 306],
-      ["src/views/card/components/Dropdown.tsx", 42],
+      ["src/views/card/components/Dropdown.tsx", 45],
       ["src/views/public/board/CardModal.tsx", 36],
       ["src/views/public/board/index.tsx", 77]
     ],
@@ -3821,7 +3835,7 @@
     "origin": [
       ["src/components/SideNavigation.tsx", 123],
       ["src/views/board/components/Filters.tsx", 147],
-      ["src/views/board/components/NewCardForm.tsx", 382],
+      ["src/views/board/components/NewCardForm.tsx", 386],
       ["src/views/card/index.tsx", 143],
       ["src/views/members/index.tsx", 263],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 81]
@@ -3968,7 +3982,7 @@
     "message": "New card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 307]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 311]],
     "translation": "Neue Karte"
   },
   "cWcxrL": {
@@ -4147,7 +4161,7 @@
       "debouncedQuery": ["debouncedQuery"]
     },
     "comments": [],
-    "origin": [["src/components/CommandPallette.tsx", 183]],
+    "origin": [["src/components/CommandPallette.tsx", 193]],
     "translation": "Keine Ergebnisse für \"{debouncedQuery}\" gefunden."
   },
   "Q9pQaX": {
@@ -4524,7 +4538,7 @@
       ["src/components/FeedbackModal.tsx", 41],
       ["src/components/NewWorkspaceForm.tsx", 109],
       ["src/views/board/components/BoardDropdown.tsx", 68],
-      ["src/views/board/components/NewCardForm.tsx", 189],
+      ["src/views/board/components/NewCardForm.tsx", 193],
       ["src/views/board/components/NewListForm.tsx", 79],
       ["src/views/board/components/NewTemplateForm.tsx", 61],
       ["src/views/board/components/NewTemplateForm.tsx", 77],
@@ -4591,7 +4605,8 @@
       ["src/views/board/components/CardContextDuplicateModal.tsx", 76],
       ["src/views/board/components/CardContextMoveListModal.tsx", 42],
       ["src/views/board/index.tsx", 315],
-      ["src/views/card/components/Dropdown.tsx", 51],
+      ["src/views/card/components/Dropdown.tsx", 54],
+      ["src/views/card/components/Dropdown.tsx", 73],
       ["src/views/public/board/CardModal.tsx", 45],
       ["src/views/public/board/index.tsx", 86]
     ],
@@ -4996,7 +5011,7 @@
     "message": "Search boards and cards...",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/CommandPallette.tsx", 104]],
+    "origin": [["src/components/CommandPallette.tsx", 105]],
     "translation": "Boards und Karten durchsuchen..."
   },
   "e1v+J3": {
@@ -5501,24 +5516,24 @@
     "translation": "Test"
   },
   "InJcdo": {
-    "translation": "Test fehlgeschlagen",
     "message": "Test failed",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/NewWebhookModal.tsx", 154],
       ["src/views/settings/components/WebhookList.tsx", 177]
-    ]
+    ],
+    "translation": "Test fehlgeschlagen"
   },
   "zDNL2V": {
-    "translation": "Test gesendet",
     "message": "Test sent",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/NewWebhookModal.tsx", 148],
       ["src/views/settings/components/WebhookList.tsx", 174]
-    ]
+    ],
+    "translation": "Test gesendet"
   },
   "itgYbC": {
     "message": "Test webhook sent successfully!",
@@ -5756,6 +5771,13 @@
     ],
     "translation": "Dieser Workspace-Benutzername ist bereits vergeben"
   },
+  "pEb95p": {
+    "translation": "Ticket-ID in die Zwischenablage kopiert",
+    "message": "Ticket ID copied to clipboard",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Dropdown.tsx", 66]]
+  },
   "MHrjPM": {
     "message": "Title",
     "placeholders": {},
@@ -5869,13 +5891,20 @@
     "origin": [["src/views/settings/PermissionsSettings.tsx", 39]],
     "translation": "Überschreibungen konnten nicht gelöscht werden"
   },
+  "5MPY04": {
+    "translation": "ID konnte nicht kopiert werden",
+    "message": "Unable to copy ID",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Dropdown.tsx", 71]]
+  },
   "W1ewR0": {
     "message": "Unable to copy link",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 313],
-      ["src/views/card/components/Dropdown.tsx", 49],
+      ["src/views/card/components/Dropdown.tsx", 52],
       ["src/views/public/board/CardModal.tsx", 43],
       ["src/views/public/board/index.tsx", 84]
     ],
@@ -5885,7 +5914,7 @@
     "message": "Unable to create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 186]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 190]],
     "translation": "Karte konnte nicht erstellt werden"
   },
   "mHhffx": {
@@ -5913,11 +5942,11 @@
     "translation": "Vorlage konnte nicht erstellt werden"
   },
   "c1vOQR": {
-    "translation": "Webhook konnte nicht erstellt werden",
     "message": "Unable to create webhook",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 118]]
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 118]],
+    "translation": "Webhook konnte nicht erstellt werden"
   },
   "MxQXhL": {
     "message": "Unable to create workspace",
@@ -5967,13 +5996,13 @@
     "translation": "Kommentar konnte nicht gelöscht werden"
   },
   "23nvb2": {
-    "translation": "Webhook konnte nicht gelöscht werden",
     "message": "Unable to delete webhook",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 36]
-    ]
+    ],
+    "translation": "Webhook konnte nicht gelöscht werden"
   },
   "Oo4E6p": {
     "message": "Unable to duplicate card",
@@ -6031,14 +6060,14 @@
     "translation": "Checkout kann nicht gestartet werden"
   },
   "KNK33q": {
-    "translation": "Webhook konnte nicht getestet werden",
     "message": "Unable to test webhook",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/NewWebhookModal.tsx", 163],
       ["src/views/settings/components/WebhookList.tsx", 185]
-    ]
+    ],
+    "translation": "Webhook konnte nicht getestet werden"
   },
   "T7Mywq": {
     "message": "Unable to update board",
@@ -6141,11 +6170,11 @@
     "translation": "Rolle konnte nicht aktualisiert werden"
   },
   "V1o9Jo": {
-    "translation": "Webhook konnte nicht aktualisiert werden",
     "message": "Unable to update webhook",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 137]]
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 137]],
+    "translation": "Webhook konnte nicht aktualisiert werden"
   },
   "It4/FS": {
     "message": "Unarchive board",
@@ -6522,11 +6551,11 @@
     "translation": "Wir fangen gerade erst an. "
   },
   "an6ayw": {
-    "translation": "Webhook erstellt",
     "message": "Webhook created",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 110]]
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 110]],
+    "translation": "Webhook erstellt"
   },
   "GdWB+V": {
     "message": "Webhook created successfully",
@@ -6536,13 +6565,13 @@
     "translation": "Webhook erfolgreich erstellt"
   },
   "LnaC5y": {
-    "translation": "Webhook gelöscht",
     "message": "Webhook deleted",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 28]
-    ]
+    ],
+    "translation": "Webhook gelöscht"
   },
   "2X4ecw": {
     "message": "Webhook deleted successfully",
@@ -6578,11 +6607,11 @@
     "translation": "Webhook-Test fehlgeschlagen"
   },
   "kxZ7LS": {
-    "translation": "Webhook aktualisiert",
     "message": "Webhook updated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 129]]
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 129]],
+    "translation": "Webhook aktualisiert"
   },
   "3d54Wj": {
     "message": "Webhook updated successfully",
