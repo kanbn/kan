@@ -724,6 +724,28 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
   return result;
 };
 
+/**
+ * Fetches the board fields needed by the move mutation:
+ * identity, naming, type guards, and workspace ownership.
+ */
+export const getBoardForMove = async (
+  db: dbClient,
+  boardPublicId: string,
+) => {
+  return db.query.boards.findFirst({
+    columns: {
+      id: true,
+      name: true,
+      slug: true,
+      type: true,
+      isArchived: true,
+      workspaceId: true,
+      createdBy: true,
+    },
+    where: eq(boards.publicId, boardPublicId),
+  });
+};
+
 export const isBoardSlugAvailable = async (
   db: dbClient,
   boardSlug: string,
@@ -966,6 +988,57 @@ export const createFromSnapshot = async (
     }
 
     return newBoard;
+  });
+};
+
+export const moveToWorkspace = async (
+  db: dbClient,
+  boardId: number,
+  targetWorkspaceId: number,
+  newSlug?: string,
+) => {
+  return db.transaction(async (tx) => {
+    // Update the board's workspace (and slug if provided)
+    const [updatedBoard] = await tx
+      .update(boards)
+      .set({
+        workspaceId: targetWorkspaceId,
+        ...(newSlug && { slug: newSlug }),
+        updatedAt: new Date(),
+      })
+      .where(eq(boards.id, boardId))
+      .returning({
+        publicId: boards.publicId,
+        name: boards.name,
+      });
+
+    if (!updatedBoard) throw new Error("Failed to move board");
+
+    // Get all card IDs belonging to this board (via lists)
+    const boardLists = await tx
+      .select({ id: lists.id })
+      .from(lists)
+      .where(and(eq(lists.boardId, boardId), isNull(lists.deletedAt)));
+
+    if (boardLists.length > 0) {
+      const listIds = boardLists.map((l) => l.id);
+
+      const boardCards = await tx
+        .select({ id: cards.id })
+        .from(cards)
+        .where(and(inArray(cards.listId, listIds), isNull(cards.deletedAt)));
+
+      if (boardCards.length > 0) {
+        const cardIds = boardCards.map((c) => c.id);
+
+        // Clear all card member assignments (they reference workspace-scoped members)
+        await tx
+          .delete(cardToWorkspaceMembers)
+          .where(inArray(cardToWorkspaceMembers.cardId, cardIds));
+      }
+    }
+
+    return updatedBoard;
   });
 };
 
