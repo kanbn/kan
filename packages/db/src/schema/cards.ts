@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import {
   bigint,
   bigserial,
+  index,
   integer,
   pgEnum,
   pgTable,
@@ -54,27 +55,36 @@ export type ActivityType = (typeof activityTypes)[number];
 
 export const activityTypeEnum = pgEnum("card_activity_type", activityTypes);
 
-export const cards = pgTable("card", {
-  id: bigserial("id", { mode: "number" }).primaryKey(),
-  publicId: varchar("publicId", { length: 12 }).notNull().unique(),
-  title: text("title").notNull(),
-  description: text("description"),
-  index: integer("index").notNull(),
-  createdBy: uuid("createdBy").references(() => users.id, {
-    onDelete: "set null",
-  }),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt"),
-  deletedAt: timestamp("deletedAt"),
-  deletedBy: uuid("deletedBy").references(() => users.id, {
-    onDelete: "set null",
-  }),
-  listId: bigint("listId", { mode: "number" })
-    .notNull()
-    .references(() => lists.id, { onDelete: "cascade" }),
-  importId: bigint("importId", { mode: "number" }).references(() => imports.id),
-  dueDate: timestamp("dueDate"),
-}).enableRLS();
+export const cards = pgTable(
+  "card",
+  {
+    id: bigserial("id", { mode: "number" }).primaryKey(),
+    publicId: varchar("publicId", { length: 12 }).notNull().unique(),
+    title: text("title").notNull(),
+    description: text("description"),
+    index: integer("index").notNull(),
+    cardNumber: integer("cardNumber"),
+    createdBy: uuid("createdBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt"),
+    deletedAt: timestamp("deletedAt"),
+    deletedBy: uuid("deletedBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
+    listId: bigint("listId", { mode: "number" })
+      .notNull()
+      .references(() => lists.id, { onDelete: "cascade" }),
+    importId: bigint("importId", { mode: "number" }).references(
+      () => imports.id,
+    ),
+    dueDate: timestamp("dueDate"),
+  },
+  (table) => [
+    index("card_list_number_idx").on(table.listId, table.cardNumber),
+  ],
+).enableRLS();
 
 export const cardsRelations = relations(cards, ({ one, many }) => ({
   createdBy: one(users, {

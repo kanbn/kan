@@ -78,6 +78,7 @@ export const cardRouter = createTRPCRouter({
         description: input.description,
         createdBy: userId,
         listId: list.id,
+        workspaceId: list.workspaceId,
         position: input.position,
         dueDate: input.dueDate ?? null,
       });
@@ -1272,6 +1273,7 @@ export const cardRouter = createTRPCRouter({
         description: sourceCard.description ?? "",
         createdBy: userId,
         listId: targetList.id,
+        workspaceId: targetList.workspaceId,
         position: "end",
         dueDate: sourceCard.dueDate ?? null,
       });

@@ -33,6 +33,7 @@ type SearchResult =
       boardPublicId: string;
       boardName: string;
       listName: string;
+      cardNumber: number | null;
       updatedAt: Date | null;
       createdAt: Date;
       type: "card";
@@ -159,8 +160,17 @@ export default function CommandPallette({
                             )}
                           </div>
                           <div className="min-w-0 flex-1 text-left">
-                            <div className="truncate text-sm font-bold text-light-900 dark:text-dark-900">
-                              {result.title}
+                            <div className="flex items-center gap-2">
+                              <div className="truncate text-sm font-bold text-light-900 dark:text-dark-900">
+                                {result.title}
+                              </div>
+                              {result.type === "card" &&
+                                result.cardNumber != null &&
+                                workspace.cardPrefix && (
+                                  <span className="flex-shrink-0 text-xs text-light-600 dark:text-dark-600">
+                                    {workspace.cardPrefix}-{result.cardNumber}
+                                  </span>
+                                )}
                             </div>
                             {result.type === "card" && (
                               <div className="truncate text-xs text-light-700 dark:text-dark-700">
