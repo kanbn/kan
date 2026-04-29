@@ -49,6 +49,7 @@ import { env } from "next-runtime-env";
 
 import { getAvatarUrl } from "~/utils/helpers";
 import Avatar from "./Avatar";
+import { FileAttachmentNode } from "./FileAttachment/FileAttachmentNode";
 import { YouTubeNode } from "./YouTubeEmbed/YouTubeNode";
 
 async function uploadFile(
@@ -587,6 +588,7 @@ export default function Editor({
             superscriptThree: false,
         }),
         Image.configure({ inline: false, allowBase64: false }),
+        FileAttachmentNode,
         ...(enableYouTubeEmbed ? [YouTubeNode] : []),
       ],
       content,
@@ -609,20 +611,26 @@ export default function Editor({
         handlePaste: (view, event) => {
           if (!cardPublicId || readOnly) return false;
           const items = Array.from(event.clipboardData?.items ?? []);
-          const fileItem = items.find((item) =>
-            item.kind === "file",
-          );
+          const fileItem = items.find((item) => item.kind === "file");
           if (!fileItem) return false;
           const file = fileItem.getAsFile();
           if (!file) return false;
           event.preventDefault();
           void uploadFile(file, cardPublicId).then((result) => {
             if (!result) return;
+            const mediaUrl = `/api/media/${result.publicId}`;
             if (file.type.startsWith("image/")) {
               view.dispatch(
                 view.state.tr.replaceSelectionWith(
-                  view.state.schema.nodes.image!.create({
-                    src: `/api/media/${result.publicId}`,
+                  view.state.schema.nodes.image!.create({ src: mediaUrl }),
+                ),
+              );
+            } else {
+              view.dispatch(
+                view.state.tr.replaceSelectionWith(
+                  view.state.schema.nodes.fileAttachment!.create({
+                    href: mediaUrl,
+                    filename: file.name,
                   }),
                 ),
               );
@@ -643,15 +651,25 @@ export default function Editor({
           });
           void uploadFile(file, cardPublicId).then((result) => {
             if (!result) return;
+            const mediaUrl = `/api/media/${result.publicId}`;
+            const insertPos = pos?.pos ?? view.state.tr.doc.content.size;
             if (file.type.startsWith("image/")) {
-              const node = view.state.schema.nodes.image!.create({
-                src: `/api/media/${result.publicId}`,
-              });
-              const tr = view.state.tr.insert(
-                pos?.pos ?? view.state.tr.doc.content.size,
-                node,
+              view.dispatch(
+                view.state.tr.insert(
+                  insertPos,
+                  view.state.schema.nodes.image!.create({ src: mediaUrl }),
+                ),
               );
-              view.dispatch(tr);
+            } else {
+              view.dispatch(
+                view.state.tr.insert(
+                  insertPos,
+                  view.state.schema.nodes.fileAttachment!.create({
+                    href: mediaUrl,
+                    filename: file.name,
+                  }),
+                ),
+              );
             }
             onFileUpload?.();
           });
