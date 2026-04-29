@@ -1,12 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
+import { createNextApiContext } from "@kan/api/trpc";
 import { withApiLogging } from "@kan/api/utils/apiLogging";
+import { assertPermission } from "@kan/api/utils/permissions";
 import { withRateLimit } from "@kan/api/utils/rateLimit";
-import { createDrizzleClient } from "@kan/db/client";
 import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import { generateAttachmentUrl } from "@kan/shared/utils";
-
-const db = createDrizzleClient();
 
 export default withRateLimit(
   { points: 200, duration: 60 },
@@ -24,6 +23,12 @@ export default withRateLimit(
     }
 
     try {
+      const { user, db } = await createNextApiContext(req);
+
+      if (!user) {
+        return res.status(401).json({ error: "Unauthorized" });
+      }
+
       const attachment = await cardAttachmentRepo.getByPublicId(
         db,
         attachmentPublicId,
@@ -31,6 +36,17 @@ export default withRateLimit(
 
       if (!attachment || attachment.deletedAt) {
         return res.status(404).json({ error: "Attachment not found" });
+      }
+
+      const workspaceId = attachment.card?.list?.board?.workspaceId;
+      if (!workspaceId) {
+        return res.status(404).json({ error: "Attachment not found" });
+      }
+
+      try {
+        await assertPermission(db, user.id, workspaceId, "card:view");
+      } catch {
+        return res.status(403).json({ error: "Permission denied" });
       }
 
       const url = await generateAttachmentUrl(attachment.s3Key);
