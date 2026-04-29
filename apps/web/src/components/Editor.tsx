@@ -51,10 +51,10 @@ import { getAvatarUrl } from "~/utils/helpers";
 import Avatar from "./Avatar";
 import { YouTubeNode } from "./YouTubeEmbed/YouTubeNode";
 
-async function uploadImageFile(
+async function uploadFile(
   file: File,
   cardPublicId: string,
-): Promise<string | null> {
+): Promise<{ publicId: string } | null> {
   const baseUrl = env("NEXT_PUBLIC_BASE_URL") ?? "";
   try {
     const response = await fetch(
@@ -74,7 +74,7 @@ async function uploadImageFile(
     };
     const publicId = data.attachment?.publicId;
     if (!publicId) return null;
-    return `/api/media/${publicId}`;
+    return { publicId };
   } catch {
     return null;
   }
@@ -478,6 +478,7 @@ export default function Editor({
   placeholder,
   disableHeadings = false,
   cardPublicId,
+  onFileUpload,
 }: {
   content: string | null;
   onChange?: (value: string) => void;
@@ -488,6 +489,7 @@ export default function Editor({
   placeholder?: string;
   disableHeadings?: boolean;
   cardPublicId?: string;
+  onFileUpload?: () => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -607,40 +609,51 @@ export default function Editor({
         handlePaste: (view, event) => {
           if (!cardPublicId || readOnly) return false;
           const items = Array.from(event.clipboardData?.items ?? []);
-          const imageItem = items.find((item) =>
-            item.type.startsWith("image/"),
+          const fileItem = items.find((item) =>
+            item.kind === "file",
           );
-          if (!imageItem) return false;
-          const file = imageItem.getAsFile();
+          if (!fileItem) return false;
+          const file = fileItem.getAsFile();
           if (!file) return false;
           event.preventDefault();
-          void uploadImageFile(file, cardPublicId).then((src) => {
-            if (src) {
+          void uploadFile(file, cardPublicId).then((result) => {
+            if (!result) return;
+            if (file.type.startsWith("image/")) {
               view.dispatch(
                 view.state.tr.replaceSelectionWith(
-                  view.state.schema.nodes.image!.create({ src }),
+                  view.state.schema.nodes.image!.create({
+                    src: `/api/media/${result.publicId}`,
+                  }),
                 ),
               );
             }
+            onFileUpload?.();
           });
           return true;
         },
         handleDrop: (view, event) => {
           if (!cardPublicId || readOnly) return false;
           const files = Array.from(event.dataTransfer?.files ?? []);
-          const imageFile = files.find((f) => f.type.startsWith("image/"));
-          if (!imageFile) return false;
+          const file = files[0];
+          if (!file) return false;
           event.preventDefault();
           const pos = view.posAtCoords({
             left: event.clientX,
             top: event.clientY,
           });
-          void uploadImageFile(imageFile, cardPublicId).then((src) => {
-            if (src) {
-              const node = view.state.schema.nodes.image!.create({ src });
-              const tr = view.state.tr.insert(pos?.pos ?? view.state.tr.doc.content.size, node);
+          void uploadFile(file, cardPublicId).then((result) => {
+            if (!result) return;
+            if (file.type.startsWith("image/")) {
+              const node = view.state.schema.nodes.image!.create({
+                src: `/api/media/${result.publicId}`,
+              });
+              const tr = view.state.tr.insert(
+                pos?.pos ?? view.state.tr.doc.content.size,
+                node,
+              );
               view.dispatch(tr);
             }
+            onFileUpload?.();
           });
           return true;
         },

@@ -435,6 +435,9 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                           workspaceMembers={workspaceMembers ?? []}
                           readOnly={!canEdit}
                           cardPublicId={cardId}
+                          onFileUpload={() => {
+                            if (cardId) void invalidateCard(utils, cardId);
+                          }}
                         />
                       </div>
                     </form>

@@ -68,6 +68,7 @@ const NewCommentForm = ({
         placeholder={t`Add comment... (type '/' to open commands or '@' to mention)`}
         disableHeadings={true}
         cardPublicId={cardPublicId}
+        onFileUpload={() => void invalidateCard(utils, cardPublicId)}
       />
       <div className="flex justify-end">
         <button
