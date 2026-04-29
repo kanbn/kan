@@ -184,6 +184,7 @@ const Comment = ({
               enableYouTubeEmbed={false}
               placeholder={t`Add comment... (type '/' to open commands or '@' to mention)`}
               disableHeadings={true}
+              cardPublicId={cardPublicId}
             />
           </div>
           <div className="flex justify-end space-x-2 mt-2">

@@ -67,6 +67,7 @@ const NewCommentForm = ({
         enableYouTubeEmbed={false}
         placeholder={t`Add comment... (type '/' to open commands or '@' to mention)`}
         disableHeadings={true}
+        cardPublicId={cardPublicId}
       />
       <div className="flex justify-end">
         <button

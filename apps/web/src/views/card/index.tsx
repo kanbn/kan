@@ -434,6 +434,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                           }
                           workspaceMembers={workspaceMembers ?? []}
                           readOnly={!canEdit}
+                          cardPublicId={cardId}
                         />
                       </div>
                     </form>
