@@ -27,6 +27,8 @@ export const userRouter = createTRPCRouter({
         name: z.string().nullable(),
         image: z.string().nullable(),
         stripeCustomerId: z.string().nullable(),
+        hasPassword: z.boolean(),
+        hasMagicLinkAccount: z.boolean(),
         apiKey: z
           .object({
             id: z.number(),
@@ -61,6 +63,8 @@ export const userRouter = createTRPCRouter({
       return {
         ...result,
         image: imageUrl,
+        hasPassword: result.hasPassword,
+        hasMagicLinkAccount: result.hasMagicLinkAccount,
         apiKey: apiKey ? { id: apiKey.id, prefix: apiKey.prefix } : null,
       };
     }),
