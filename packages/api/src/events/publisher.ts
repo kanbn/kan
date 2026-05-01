@@ -35,11 +35,9 @@ const postEvent = async (payload: WorkspaceEventPayload | NotificationEventPaylo
       method: "POST",
       headers: {
         "content-type": "application/json",
+        ...(eventSecret ? { "x-websocket-secret": eventSecret } : {}),
       },
-      body: JSON.stringify({
-        ...payload,
-        secret: eventSecret ?? undefined,
-      }),
+      body: JSON.stringify(payload),
     });
   } catch (error) {
     log.error({ err: error }, "failed to publish workspace event");
