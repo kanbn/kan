@@ -20,6 +20,12 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
   const hasWorkspacePublicId = workspacePublicId.length === 12;
   const shouldSubscribe = websocketEnabled && hasWorkspacePublicId;
 
+  const invalidateAll = useCallback(() => {
+    void utils.board.byId.invalidate();
+    void utils.board.all.invalidate();
+    void utils.card.byId.invalidate();
+  }, [utils]);
+
   const invalidateBoard = useCallback(() => {
     void utils.board.byId.invalidate();
   }, [utils]);
@@ -98,6 +104,7 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
     {
       enabled: shouldSubscribe,
       onData: handleBoardEvent,
+      onStarted: invalidateAll,
       onError(error) {
         console.error("Board event subscription error", error);
       },
@@ -109,6 +116,7 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
     {
       enabled: shouldSubscribe,
       onData: handleCardEvent,
+      onStarted: invalidateAll,
       onError(error) {
         console.error("Card event subscription error", error);
       },
