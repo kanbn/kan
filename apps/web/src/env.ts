@@ -95,7 +95,7 @@ export const env = createEnv({
     NEXT_PUBLIC_USE_STANDALONE_OUTPUT: z.string().optional(),
     NEXT_PUBLIC_BASE_URL: z.string().url().optional(),
     NEXT_PUBLIC_WEBSOCKET_URL: z.string().url().optional(),
-    NEXT_PUBLIC_STORAGE_URL: z.string().url().optional(),
+    NEXT_PUBLIC_STORAGE_URL: z.string().url().optional().or(z.literal("")),
     NEXT_PUBLIC_AVATAR_BUCKET_NAME: z.string().optional(),
     NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME: z.string().optional(),
     NEXT_PUBLIC_STORAGE_DOMAIN: z.string().optional(),
