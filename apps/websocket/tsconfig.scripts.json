@@ -1,0 +1,16 @@
+{
+  "extends": "@kan/tsconfig/base.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022"],
+    "baseUrl": ".",
+    "noEmit": true,
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+    "types": ["node"]
+  },
+  "include": ["scripts/**/*.ts"]
+}

@@ -6,4 +6,13 @@ export default [
     ignores: ["dist/**"],
   },
   ...baseConfig,
+  {
+    files: ["scripts/**/*.ts"],
+    languageOptions: {
+      parserOptions: {
+        project: "./tsconfig.scripts.json",
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
 ];
