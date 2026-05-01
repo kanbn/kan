@@ -25,6 +25,18 @@ export type BoardEvent =
       type: "checklist.changed";
       boardId: number;
       cardPublicId: string;
+    }
+  | {
+      scope: "board";
+      type: "label.changed";
+      boardId: number;
+      labelPublicId: string;
+    }
+  | {
+      scope: "board";
+      type: "board.updated" | "board.deleted";
+      boardId: number;
+      boardPublicId: string;
     };
 
 export type CardEvent =
@@ -67,6 +79,13 @@ export type CardEvent =
         listPublicId: string | undefined;
         index: number | undefined;
       }>;
+    }
+  | {
+      scope: "card";
+      type: "attachment.changed";
+      cardId: number;
+      cardPublicId: string;
+      attachmentPublicId?: string;
     };
 
 export type WorkspaceEventScope = "board" | "card";
