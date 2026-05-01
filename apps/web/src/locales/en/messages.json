@@ -59,7 +59,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        317
+        364
       ]
     ],
     "translation": "{0} | {1}"
@@ -123,7 +123,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        557
+        561
       ]
     ],
     "translation": "{0} not found"
@@ -143,6 +143,22 @@
       ]
     ],
     "translation": "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
+  },
+  "JBaoDB": {
+    "message": "{overflow} more viewers",
+    "placeholders": {
+      "overflow": [
+        "overflow"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/PresenceAvatars.tsx",
+        70
+      ]
+    ],
+    "translation": "{overflow} more viewers"
   },
   "yndBF+": {
     "message": "{projectCount, plural, one {Import project (1)} other {Import projects ({projectCount})}}",
@@ -280,6 +296,18 @@
     ],
     "translation": "404 - Page Not Found | kan.bn"
   },
+  "Ws1I0u": {
+    "message": "A card was updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        54
+      ]
+    ],
+    "translation": "A card was updated"
+  },
   "/rn4RE": {
     "message": "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.",
     "placeholders": {},
@@ -367,7 +395,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        455
+        502
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -483,7 +511,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        169
+        189
       ]
     ],
     "translation": "Add details..."
@@ -1457,11 +1485,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        530
+        534
       ],
       [
         "src/views/card/index.tsx",
-        317
+        364
       ],
       [
         "src/views/public/board/index.tsx",
@@ -1645,7 +1673,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        99
+        100
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -2169,7 +2197,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        317
+        364
       ]
     ],
     "translation": "Card"
@@ -2193,11 +2221,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        363
+        410
       ],
       [
         "src/views/card/index.tsx",
-        400
+        447
       ]
     ],
     "translation": "Card not found"
@@ -2214,6 +2242,18 @@
     ],
     "translation": "Card title"
   },
+  "4630Pc": {
+    "message": "Card updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        53
+      ]
+    ],
+    "translation": "Card updated"
+  },
   "rQXTmd": {
     "message": "Card URL copied to clipboard",
     "placeholders": {},
@@ -2221,7 +2261,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        308
+        312
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2449,7 +2489,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        354
+        401
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3105,11 +3145,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        92
+        94
       ],
       [
         "src/views/board/index.tsx",
-        671
+        676
       ]
     ],
     "translation": "Create new list"
@@ -3893,7 +3933,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        153
+        155
       ]
     ],
     "translation": "Due date"
@@ -5130,7 +5170,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        656
+        661
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -5258,7 +5298,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        107
+        108
       ],
       [
         "src/pages/404.tsx",
@@ -5286,7 +5326,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        131
+        132
       ]
     ],
     "translation": "Go to members"
@@ -5298,7 +5338,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        143
+        144
       ]
     ],
     "translation": "Go to settings"
@@ -5310,7 +5350,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        119
+        120
       ]
     ],
     "translation": "Go to templates"
@@ -5974,7 +6014,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        133
+        135
       ]
     ],
     "translation": "Labels"
@@ -6154,7 +6194,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        306
+        310
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -6182,7 +6222,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        124
+        126
       ]
     ],
     "translation": "List"
@@ -6347,6 +6387,18 @@
     ],
     "translation": "Manage members"
   },
+  "onllUU": {
+    "message": "Mark all as read",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        155
+      ]
+    ],
+    "translation": "Mark all as read"
+  },
   "IDvohQ": {
     "message": "marked a checklist item as incomplete",
     "placeholders": {},
@@ -6438,7 +6490,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        123
+        124
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -6450,7 +6502,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        143
+        145
       ],
       [
         "src/views/members/index.tsx",
@@ -6722,6 +6774,30 @@
     ],
     "translation": "New checklist"
   },
+  "7Qqqyu": {
+    "message": "New comment on",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        49
+      ]
+    ],
+    "translation": "New comment on"
+  },
+  "K4xHKu": {
+    "message": "New comment on a card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        50
+      ]
+    ],
+    "translation": "New comment on a card"
+  },
   "WYwN1G": {
     "message": "New import",
     "placeholders": {},
@@ -6757,10 +6833,22 @@
       ],
       [
         "src/views/board/index.tsx",
-        620
+        624
       ]
     ],
     "translation": "New list"
+  },
+  "pM1sn/": {
+    "message": "New notification",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        56
+      ]
+    ],
+    "translation": "New notification"
   },
   "+MdEsf": {
     "message": "New password is required",
@@ -6965,7 +7053,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        652
+        657
       ]
     ],
     "translation": "No lists"
@@ -6977,10 +7065,22 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        657
+        662
       ]
     ],
     "translation": "No lists have been created yet"
+  },
+  "HbXReU": {
+    "message": "No notifications yet",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        192
+      ]
+    ],
+    "translation": "No notifications yet"
   },
   "i30J2U": {
     "message": "No projects found",
@@ -7033,6 +7133,26 @@
       ]
     ],
     "translation": "No webhooks configured. Add a webhook to receive notifications."
+  },
+  "iDNBZe": {
+    "message": "Notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        119
+      ],
+      [
+        "src/components/NotificationBell.tsx",
+        131
+      ],
+      [
+        "src/components/NotificationBell.tsx",
+        147
+      ]
+    ],
+    "translation": "Notifications"
   },
   "9h7RDh": {
     "message": "Offer",
@@ -7653,11 +7773,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        218
+        222
       ],
       [
         "src/views/board/index.tsx",
-        274
+        278
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -7673,11 +7793,11 @@
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        67
+        68
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        95
+        96
       ],
       [
         "src/views/card/components/ChecklistNameInput.tsx",
@@ -7733,11 +7853,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        232
+        274
       ],
       [
         "src/views/card/index.tsx",
-        245
+        287
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -7845,7 +7965,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        315
+        319
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -8081,6 +8201,18 @@
       ]
     ],
     "translation": "Quick Win"
+  },
+  "09Tv5j": {
+    "message": "Reconnecting…",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/ConnectionStatus.tsx",
+        30
+      ]
+    ],
+    "translation": "Reconnecting…"
   },
   "6EWT6T": {
     "message": "Recruitment",
@@ -8780,7 +8912,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        135
+        136
       ]
     ],
     "translation": "Settings"
@@ -9284,11 +9416,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        530
+        534
       ],
       [
         "src/views/board/index.tsx",
-        566
+        570
       ]
     ],
     "translation": "Template"
@@ -9348,7 +9480,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        111
+        112
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -9928,7 +10060,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        244
+        286
       ]
     ],
     "translation": "Unable to add label"
@@ -9952,7 +10084,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        313
+        317
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -10080,7 +10212,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        94
+        95
       ]
     ],
     "translation": "Unable to delete checklist item"
@@ -10224,11 +10356,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        273
+        277
       ],
       [
         "src/views/card/index.tsx",
-        231
+        273
       ]
     ],
     "translation": "Unable to update card"
@@ -10252,7 +10384,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        66
+        67
       ]
     ],
     "translation": "Unable to update checklist item"
@@ -10300,7 +10432,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        217
+        221
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -10700,7 +10832,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        240
+        242
       ],
       [
         "src/views/settings/components/UpgradeToProConfirmation.tsx",
@@ -10965,6 +11097,22 @@
     ],
     "translation": "View workspace"
   },
+  "V8YRD4": {
+    "message": "Viewing now: {0}",
+    "placeholders": {
+      "0": [
+        "viewers.map((v) => v.userName).join(\", \")"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/PresenceAvatars.tsx",
+        61
+      ]
+    ],
+    "translation": "Viewing now: {0}"
+  },
   "2q/Q7x": {
     "message": "Visibility",
     "placeholders": {},
@@ -11200,7 +11348,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        530
+        534
       ],
       [
         "src/views/boards/index.tsx",
@@ -11569,11 +11717,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        604
+        608
       ],
       [
         "src/views/board/index.tsx",
-        662
+        667
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -11649,6 +11797,102 @@
       ]
     ],
     "translation": "You need to be an admin to manage workspace permissions."
+  },
+  "Cb5YSG": {
+    "message": "You were added to",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        33
+      ]
+    ],
+    "translation": "You were added to"
+  },
+  "EYpSRU": {
+    "message": "You were added to a workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        34
+      ]
+    ],
+    "translation": "You were added to a workspace"
+  },
+  "j77sVH": {
+    "message": "You were assigned to",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        45
+      ]
+    ],
+    "translation": "You were assigned to"
+  },
+  "4sxGcV": {
+    "message": "You were assigned to a card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        46
+      ]
+    ],
+    "translation": "You were assigned to a card"
+  },
+  "9HDx2Z": {
+    "message": "You were mentioned in",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        29
+      ]
+    ],
+    "translation": "You were mentioned in"
+  },
+  "e6wIqm": {
+    "message": "You were mentioned in a card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        30
+      ]
+    ],
+    "translation": "You were mentioned in a card"
+  },
+  "11dHnN": {
+    "message": "You were removed from",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        37
+      ]
+    ],
+    "translation": "You were removed from"
+  },
+  "YdIn4I": {
+    "message": "You were removed from a workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        38
+      ]
+    ],
+    "translation": "You were removed from a workspace"
   },
   "2SePRT": {
     "message": "You've been invited to join a workspace on kan.bn.",
@@ -11805,6 +12049,30 @@
       ]
     ],
     "translation": "Your projects have been imported."
+  },
+  "0AfkMq": {
+    "message": "Your role changed in",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        41
+      ]
+    ],
+    "translation": "Your role changed in"
+  },
+  "GKeVeM": {
+    "message": "Your role was changed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/NotificationBell.tsx",
+        42
+      ]
+    ],
+    "translation": "Your role was changed"
   },
   "CJWDTP": {
     "message": "Your Trello account has been disconnected.",
