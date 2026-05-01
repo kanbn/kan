@@ -27,6 +27,7 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
     void utils.board.byId.invalidate();
     void utils.board.all.invalidate();
     void utils.card.byId.invalidate();
+    void utils.card.getActivities.invalidate();
   }, [utils]);
 
   const invalidateBoard = useCallback(() => {
@@ -36,6 +37,7 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
   const invalidateCard = useCallback(
     (cardPublicId: string) => {
       void utils.card.byId.invalidate({ cardPublicId });
+      void utils.card.getActivities.invalidate({ cardPublicId });
     },
     [utils],
   );
