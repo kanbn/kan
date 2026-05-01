@@ -9,6 +9,7 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
 import type { BoardEvent } from "../events";
 import { publishBoardEventToWebsocket } from "../events";
+import { createLabelWebhookPayload, sendWebhooksForWorkspace } from "../utils/webhook";
 import { createLogger } from "@kan/logger";
 
 const log = createLogger("api:events");
@@ -141,6 +142,18 @@ export const labelRouter = createTRPCRouter({
         labelPublicId: result.publicId,
       }, userId);
 
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        board.workspaceId,
+        createLabelWebhookPayload(
+          { id: result.publicId, name: result.name, colourCode: result.colourCode },
+          {
+            boardId: input.boardPublicId,
+            user: ctx.user ? { id: ctx.user.id, name: ctx.user.name } : undefined,
+          },
+        ),
+      );
+
       return {
         publicId: result.publicId,
         name: result.name,
@@ -202,6 +215,18 @@ export const labelRouter = createTRPCRouter({
         labelPublicId: input.labelPublicId,
       }, userId);
 
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        label.workspaceId,
+        createLabelWebhookPayload(
+          { id: input.labelPublicId, name: result.name, colourCode: result.colourCode },
+          {
+            boardId: String(label.boardId),
+            user: ctx.user ? { id: ctx.user.id, name: ctx.user.name } : undefined,
+          },
+        ),
+      );
+
       return {
         publicId: result.publicId,
         name: result.name,
@@ -256,6 +281,18 @@ export const labelRouter = createTRPCRouter({
         boardId: label.boardId,
         labelPublicId: input.labelPublicId,
       }, userId);
+
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        label.workspaceId,
+        createLabelWebhookPayload(
+          { id: input.labelPublicId, name: "", colourCode: null },
+          {
+            boardId: String(label.boardId),
+            user: ctx.user ? { id: ctx.user.id, name: ctx.user.name } : undefined,
+          },
+        ),
+      );
 
       return { success: true };
     }),

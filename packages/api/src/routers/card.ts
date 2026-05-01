@@ -21,6 +21,7 @@ import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permi
 import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
 import {
   createCardWebhookPayload,
+  createCommentWebhookPayload,
   sendWebhooksForWorkspace,
 } from "../utils/webhook";
 import { createLogger } from "@kan/logger";
@@ -331,6 +332,25 @@ export const cardRouter = createTRPCRouter({
         commentPublicId: newComment.publicId,
         comment: newComment.comment,
       }, userId);
+
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        card.workspaceId,
+        createCommentWebhookPayload(
+          {
+            id: input.cardPublicId,
+            title: "",
+            listId: card.listPublicId,
+            boardId: card.boardPublicId,
+          },
+          { id: newComment.publicId, text: newComment.comment },
+          {
+            boardName: card.boardName,
+            listName: card.listName,
+            user: ctx.user ? { id: ctx.user.id, name: ctx.user.name } : undefined,
+          },
+        ),
+      );
 
       return newComment;
     }),

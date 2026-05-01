@@ -14,7 +14,7 @@ export interface WebhookPayload {
   event: WebhookEventType;
   timestamp: string;
   data: {
-    card: {
+    card?: {
       id: string;
       title: string;
       description?: string | null;
@@ -29,6 +29,15 @@ export interface WebhookPayload {
     list?: {
       id: string;
       name: string;
+    };
+    label?: {
+      id: string;
+      name: string;
+      colourCode: string | null;
+    };
+    comment?: {
+      id: string;
+      text: string;
     };
     user?: {
       id: string;
@@ -257,6 +266,97 @@ export function createCardWebhookPayload(
         : undefined,
       user: context.user,
       changes: context.changes,
+    },
+  };
+}
+
+export function createBoardWebhookPayload(
+  event: WebhookEventType,
+  board: { id: string; name: string },
+  user?: { id: string; name: string | null },
+): WebhookPayload {
+  return {
+    event,
+    timestamp: new Date().toISOString(),
+    data: { board, user },
+  };
+}
+
+export function createListWebhookPayload(
+  event: WebhookEventType,
+  list: { id: string; name: string },
+  context: {
+    boardId: string;
+    boardName?: string;
+    user?: { id: string; name: string | null };
+  },
+): WebhookPayload {
+  return {
+    event,
+    timestamp: new Date().toISOString(),
+    data: {
+      list,
+      board: context.boardName
+        ? { id: context.boardId, name: context.boardName }
+        : undefined,
+      user: context.user,
+    },
+  };
+}
+
+export function createLabelWebhookPayload(
+  label: { id: string; name: string; colourCode: string | null },
+  context: {
+    boardId: string;
+    boardName?: string;
+    user?: { id: string; name: string | null };
+  },
+): WebhookPayload {
+  return {
+    event: "label.changed",
+    timestamp: new Date().toISOString(),
+    data: {
+      label,
+      board: context.boardName
+        ? { id: context.boardId, name: context.boardName }
+        : undefined,
+      user: context.user,
+    },
+  };
+}
+
+export function createCommentWebhookPayload(
+  card: {
+    id: string;
+    title: string;
+    listId: string;
+    boardId: string;
+  },
+  comment: { id: string; text: string },
+  context: {
+    boardName?: string;
+    listName?: string;
+    user?: { id: string; name: string | null };
+  },
+): WebhookPayload {
+  return {
+    event: "card.comment.added",
+    timestamp: new Date().toISOString(),
+    data: {
+      card: {
+        id: card.id,
+        title: card.title,
+        listId: card.listId,
+        boardId: card.boardId,
+      },
+      comment,
+      board: context.boardName
+        ? { id: card.boardId, name: context.boardName }
+        : undefined,
+      list: context.listName
+        ? { id: card.listId, name: context.listName }
+        : undefined,
+      user: context.user,
     },
   };
 }

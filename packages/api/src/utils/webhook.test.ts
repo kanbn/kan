@@ -68,8 +68,8 @@ describe("webhook utilities", () => {
         },
       );
 
-      expect(payload.data.card.description).toBe("A description");
-      expect(payload.data.card.dueDate).toBe("2024-02-01T10:00:00.000Z");
+      expect(payload.data.card?.description).toBe("A description");
+      expect(payload.data.card?.dueDate).toBe("2024-02-01T10:00:00.000Z");
     });
 
     it("includes board context when provided", () => {

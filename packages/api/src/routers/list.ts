@@ -10,6 +10,7 @@ import type { BoardEvent } from "../events";
 import { publishBoardEventToWebsocket } from "../events";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
+import { createListWebhookPayload, sendWebhooksForWorkspace } from "../utils/webhook";
 import { createLogger } from "@kan/logger";
 
 const log = createLogger("api:events");
@@ -91,6 +92,19 @@ export const listRouter = createTRPCRouter({
         name: result.name,
         index: result.index,
       }, userId);
+
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        board.workspaceId,
+        createListWebhookPayload(
+          "list.created",
+          { id: result.publicId, name: result.name },
+          {
+            boardId: input.boardPublicId,
+            user: ctx.user ? { id: ctx.user.id, name: ctx.user.name } : undefined,
+          },
+        ),
+      );
 
       return result;
     }),
@@ -180,6 +194,20 @@ export const listRouter = createTRPCRouter({
         listPublicId: input.listPublicId,
       }, userId);
 
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        list.workspaceId,
+        createListWebhookPayload(
+          "list.deleted",
+          { id: input.listPublicId, name: list.name },
+          {
+            boardId: list.boardPublicId,
+            boardName: list.boardName,
+            user: ctx.user ? { id: ctx.user.id, name: ctx.user.name } : undefined,
+          },
+        ),
+      );
+
       return { success: true };
     }),
   update: protectedProcedure
@@ -266,6 +294,20 @@ export const listRouter = createTRPCRouter({
           name: input.name,
           index: input.index,
         }, userId);
+
+        void sendWebhooksForWorkspace(
+          ctx.db,
+          list.workspaceId,
+          createListWebhookPayload(
+            "list.updated",
+            { id: input.listPublicId, name: result.name },
+            {
+              boardId: list.boardPublicId,
+              boardName: list.boardName,
+              user: ctx.user ? { id: ctx.user.id, name: ctx.user.name } : undefined,
+            },
+          ),
+        );
       }
 
       return result;

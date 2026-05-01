@@ -17,6 +17,7 @@ import {
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
+import { createBoardWebhookPayload, sendWebhooksForWorkspace } from "../utils/webhook";
 import type { BoardEvent } from "../events";
 import { publishBoardEventToWebsocket } from "../events";
 import { createLogger } from "@kan/logger";
@@ -585,6 +586,16 @@ export const boardRouter = createTRPCRouter({
         boardPublicId: input.boardPublicId,
       }, userId);
 
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        board.workspaceId,
+        createBoardWebhookPayload(
+          "board.updated",
+          { id: input.boardPublicId, name: result.name },
+          ctx.user ? { id: ctx.user.id, name: ctx.user.name } : undefined,
+        ),
+      );
+
       return result;
     }),
   delete: protectedProcedure
@@ -686,6 +697,16 @@ export const boardRouter = createTRPCRouter({
         boardId: board.id,
         boardPublicId: input.boardPublicId,
       }, userId);
+
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        board.workspaceId,
+        createBoardWebhookPayload(
+          "board.deleted",
+          { id: input.boardPublicId, name: input.boardPublicId },
+          ctx.user ? { id: ctx.user.id, name: ctx.user.name } : undefined,
+        ),
+      );
 
       return { success: true };
     }),
