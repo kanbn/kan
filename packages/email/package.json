@@ -34,6 +34,7 @@
     "@kan/prettier-config": "workspace:*",
     "@kan/tsconfig": "workspace:*",
     "@types/nodemailer": "^6.4.17",
+    "@types/react": "catalog:react18",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"

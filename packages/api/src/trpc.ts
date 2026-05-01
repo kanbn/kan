@@ -204,10 +204,10 @@ export const createWSContext = async (opts: CreateWSSContextFnOptions) => {
   try {
     session = await auth.api.getSession();
   } catch (error) {
-    console.error("Error getting session, ", error);
+    log.warn({ err: error }, "Failed to get session for WS context, treating as unauthenticated");
   }
 
-  return createInnerTRPCContext({ db, user: session?.user, auth });
+  return createInnerTRPCContext({ db, user: session?.user, auth, headers });
 };
 
 const t = initTRPC

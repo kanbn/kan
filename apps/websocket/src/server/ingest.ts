@@ -106,11 +106,11 @@ export const handleEventIngest = async (
     return;
   }
 
-  if (
-    !payload.workspacePublicId ||
-    typeof payload.workspacePublicId !== "string"
-  ) {
-    if (!isNotificationEvent(payload)) {
+  if (!isNotificationEvent(payload)) {
+    if (
+      !payload.workspacePublicId ||
+      typeof payload.workspacePublicId !== "string"
+    ) {
       res.statusCode = 400;
       res.end();
       return;

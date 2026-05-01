@@ -314,9 +314,6 @@ importers:
       '@trpc/server':
         specifier: 'catalog:'
         version: 11.5.0(typescript@5.9.2)
-      '@types/ws':
-        specifier: ^8.18.1
-        version: 8.18.1
       ws:
         specifier: ^8.18.0
         version: 8.18.3
@@ -333,9 +330,15 @@ importers:
       '@types/node':
         specifier: ^20.17.7
         version: 20.19.11
+      '@types/ws':
+        specifier: ^8.18.1
+        version: 8.18.1
       dotenv-cli:
         specifier: ^7.4.4
         version: 7.4.4
+      esbuild:
+        specifier: ^0.25.0
+        version: 0.25.12
       eslint:
         specifier: 'catalog:'
         version: 9.34.0(jiti@2.6.1)
@@ -538,6 +541,9 @@ importers:
       '@types/nodemailer':
         specifier: ^6.4.17
         version: 6.4.19
+      '@types/react':
+        specifier: catalog:react18
+        version: 18.3.24
       eslint:
         specifier: 'catalog:'
         version: 9.34.0(jiti@2.6.1)
