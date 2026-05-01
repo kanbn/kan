@@ -147,7 +147,8 @@ services:
       - kan-network
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=${POSTGRES_URL}
+      - POSTGRES_URL=${POSTGRES_URL}
+      - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - WEBSOCKET_PORT=3010
       - WEBSOCKET_HOST=0.0.0.0

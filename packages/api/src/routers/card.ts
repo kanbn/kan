@@ -16,7 +16,7 @@ import {
 } from "../events";
 import { createTRPCRouter, protectedProcedure, publicProcedure, rateLimitedCardProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
-import { sendMentionEmails } from "../utils/notifications";
+import { sendMentionEmails, notifyCardMembers, notifyMemberAssigned } from "../utils/notifications";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
 import {
@@ -205,6 +205,15 @@ export const cardRouter = createTRPCRouter({
         }));
 
         await cardActivityRepo.bulkCreate(ctx.db, cardActivitesInsert);
+
+        // Notify newly assigned members (non-blocking)
+        void notifyCardMembers({
+          db: ctx.db,
+          cardId: newCardId,
+          cardPublicId: newCard.publicId,
+          actorUserId: userId,
+          type: "card.member.assigned",
+        });
       }
 
       if (input.description) {
@@ -332,6 +341,15 @@ export const cardRouter = createTRPCRouter({
         commentPublicId: newComment.publicId,
         comment: newComment.comment,
       }, userId);
+
+      // Notify assigned card members about the new comment (non-blocking)
+      void notifyCardMembers({
+        db: ctx.db,
+        cardId: card.id,
+        cardPublicId: input.cardPublicId,
+        actorUserId: userId,
+        type: "card.comment.added",
+      });
 
       void sendWebhooksForWorkspace(
         ctx.db,
@@ -758,6 +776,17 @@ export const cardRouter = createTRPCRouter({
         cardPublicId: input.cardPublicId,
         workspaceMemberPublicId: input.workspaceMemberPublicId,
       }, userId);
+
+      // Notify the newly assigned member (non-blocking)
+      if (member.userId) {
+        void notifyMemberAssigned({
+          db: ctx.db,
+          cardId: card.id,
+          cardPublicId: input.cardPublicId,
+          assignedUserId: member.userId,
+          actorUserId: userId,
+        });
+      }
 
       return { newMember: true };
     }),

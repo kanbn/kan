@@ -21,6 +21,9 @@ export const notificationTypes = [
   "workspace.member.added",
   "workspace.member.removed",
   "workspace.role.changed",
+  "card.member.assigned",
+  "card.comment.added",
+  "card.updated",
 ] as const;
 
 export type NotificationType = (typeof notificationTypes)[number];

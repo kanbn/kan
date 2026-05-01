@@ -140,3 +140,94 @@ export async function sendMentionEmails({
   }
 }
 
+/**
+ * Sends in-app notifications to all members assigned to a card, excluding the
+ * actor who triggered the event (to avoid self-notifications).
+ */
+export async function notifyCardMembers({
+  db,
+  cardId,
+  cardPublicId,
+  actorUserId,
+  type,
+}: {
+  db: dbClient;
+  cardId: number;
+  cardPublicId: string;
+  actorUserId: string;
+  type: "card.member.assigned" | "card.comment.added" | "card.updated";
+}) {
+  try {
+    const card = await cardRepo.getWithListAndMembersByPublicId(db, cardPublicId);
+    if (!card) return;
+
+    const members = card.members
+      .map((m) => m.user?.id)
+      .filter((id): id is string => !!id && id !== actorUserId);
+
+    if (members.length === 0) return;
+
+    await Promise.all(
+      members.map(async (userId) => {
+        try {
+          const notification = await notificationRepo.create(db, {
+            type,
+            userId,
+            cardId,
+          });
+
+          if (notification) {
+            void publishNotificationEventToWebsocket(userId, {
+              scope: "notification",
+              type: "notification.created",
+              notificationPublicId: notification.publicId,
+            });
+          }
+        } catch (error) {
+          log.error({ err: error, userId, cardPublicId, type }, "Failed to create card member notification");
+        }
+      }),
+    );
+  } catch (error) {
+    log.error({ err: error, cardPublicId }, "Error notifying card members");
+  }
+}
+
+/**
+ * Sends an assignment notification to a specific user for a card.
+ */
+export async function notifyMemberAssigned({
+  db,
+  cardId,
+  cardPublicId,
+  assignedUserId,
+  actorUserId,
+}: {
+  db: dbClient;
+  cardId: number;
+  cardPublicId: string;
+  assignedUserId: string;
+  actorUserId: string;
+}) {
+  // Don't notify users who assigned themselves
+  if (assignedUserId === actorUserId) return;
+
+  try {
+    const notification = await notificationRepo.create(db, {
+      type: "card.member.assigned",
+      userId: assignedUserId,
+      cardId,
+    });
+
+    if (notification) {
+      void publishNotificationEventToWebsocket(assignedUserId, {
+        scope: "notification",
+        type: "notification.created",
+        notificationPublicId: notification.publicId,
+      });
+    }
+  } catch (error) {
+    log.error({ err: error, assignedUserId, cardPublicId }, "Failed to send assignment notification");
+  }
+}
+
