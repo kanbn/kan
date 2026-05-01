@@ -3,7 +3,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { formatDistanceToNow } from "date-fns";
 import { Fragment, useRef, useState } from "react";
-import { HiCheckCircle } from "react-icons/hi2";
+import { HiAtSymbol, HiBell, HiChatBubbleLeft, HiCheckCircle, HiPencil, HiUserGroup, HiUserPlus } from "react-icons/hi2";
 import { useTheme } from "next-themes";
 import { twMerge } from "tailwind-merge";
 
@@ -25,15 +25,55 @@ function getNotificationMessage(
 ): string {
   switch (type) {
     case "mention":
-      return cardTitle ? t`You were mentioned in "${cardTitle}"` : t`You were mentioned in a card`;
+      return cardTitle
+        ? `${t`You were mentioned in`} "${cardTitle}"`
+        : t`You were mentioned in a card`;
     case "workspace.member.added":
-      return workspaceName ? t`You were added to "${workspaceName}"` : t`You were added to a workspace`;
+      return workspaceName
+        ? `${t`You were added to`} "${workspaceName}"`
+        : t`You were added to a workspace`;
     case "workspace.member.removed":
-      return workspaceName ? t`You were removed from "${workspaceName}"` : t`You were removed from a workspace`;
+      return workspaceName
+        ? `${t`You were removed from`} "${workspaceName}"`
+        : t`You were removed from a workspace`;
     case "workspace.role.changed":
-      return workspaceName ? t`Your role changed in "${workspaceName}"` : t`Your role was changed`;
+      return workspaceName
+        ? `${t`Your role changed in`} "${workspaceName}"`
+        : t`Your role was changed`;
+    case "card.member.assigned":
+      return cardTitle
+        ? `${t`You were assigned to`} "${cardTitle}"`
+        : t`You were assigned to a card`;
+    case "card.comment.added":
+      return cardTitle
+        ? `${t`New comment on`} "${cardTitle}"`
+        : t`New comment on a card`;
+    case "card.updated":
+      return cardTitle
+        ? `${t`Card updated`}: "${cardTitle}"`
+        : t`A card was updated`;
     default:
       return t`New notification`;
+  }
+}
+
+function NotificationTypeIcon({ type }: { type: NotificationType }) {
+  const cls = "text-indigo-500 dark:text-indigo-400";
+  switch (type) {
+    case "mention":
+      return <HiAtSymbol size={12} className={cls} />;
+    case "card.comment.added":
+      return <HiChatBubbleLeft size={12} className={cls} />;
+    case "card.member.assigned":
+      return <HiUserPlus size={12} className={cls} />;
+    case "card.updated":
+      return <HiPencil size={12} className={cls} />;
+    case "workspace.member.added":
+    case "workspace.member.removed":
+    case "workspace.role.changed":
+      return <HiUserGroup size={12} className={cls} />;
+    default:
+      return <HiBell size={12} className={cls} />;
   }
 }
 
@@ -80,12 +120,13 @@ export default function NotificationBell({ isCollapsed = false }: NotificationBe
             onMouseEnter={() => { setIsHovered(true); setLottieIndex((i) => i + 1); }}
           >
             <div className="relative flex-shrink-0">
-              <LottieIcon index={lottieIndex} json={isDarkMode ? bellDark : bellLight} isPlaying={isHovered} />
               {unreadCount > 0 && (
-                <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-purple-600 text-[10px] font-bold text-white">
-                  {unreadCount > 9 ? "9+" : unreadCount}
+                <span className="absolute -left-1 -top-1 flex">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-500 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-600" />
                 </span>
               )}
+              <LottieIcon index={lottieIndex} json={isDarkMode ? bellDark : bellLight} isPlaying={isHovered} />
             </div>
             {!isCollapsed && (
               <span className="ml-2.5 flex-1 text-left text-sm font-medium">{t`Notifications`}</span>
@@ -109,7 +150,7 @@ export default function NotificationBell({ isCollapsed = false }: NotificationBe
                 {unreadCount > 0 && (
                   <button
                     onClick={() => markAllRead.mutate()}
-                    className="flex items-center gap-1 text-xs text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300"
+                    className="flex items-center gap-1 text-xs text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300"
                   >
                     <HiCheckCircle size={14} />
                     {t`Mark all as read`}
@@ -140,7 +181,7 @@ function NotificationPanelContent({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="h-5 w-5 animate-spin rounded-full border-2 border-purple-600 border-t-transparent" />
+        <div className="h-5 w-5 animate-spin rounded-full border-2 border-indigo-600 border-t-transparent" />
       </div>
     );
   }
@@ -170,26 +211,30 @@ function NotificationPanelContent({
           <button
             onClick={() => handleNotificationClick(notification)}
             className={twMerge(
-              "flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-light-100 dark:hover:bg-dark-200",
-              !notification.readAt && "bg-purple-50 dark:bg-purple-950/20",
+              "flex w-full items-start gap-3 border-l-2 px-4 py-3 text-left transition-colors hover:bg-light-200 dark:hover:bg-dark-300",
+              !notification.readAt
+                ? "border-l-indigo-600 bg-light-100 dark:bg-dark-200"
+                : "border-l-transparent",
             )}
           >
-            {!notification.readAt && (
-              <span className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-purple-600" />
-            )}
-            {notification.readAt && <span className="mt-1.5 h-2 w-2 flex-shrink-0" />}
+            <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-light-200 dark:bg-dark-300">
+              <NotificationTypeIcon type={notification.type} />
+            </div>
             <div className="min-w-0 flex-1">
-              <p className="text-sm text-neutral-900 dark:text-dark-1000">
+              <p className="text-sm leading-snug text-neutral-900 dark:text-dark-1000">
                 {getNotificationMessage(
                   notification.type,
                   notification.card?.title,
                   notification.workspace?.name,
                 )}
               </p>
-              <p className="mt-0.5 text-xs text-light-700 dark:text-dark-700">
+              <p className="mt-0.5 text-xs text-light-800 dark:text-dark-800">
                 {formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}
               </p>
             </div>
+            {!notification.readAt && (
+              <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-indigo-600" />
+            )}
           </button>
         </li>
       ))}

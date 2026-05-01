@@ -572,6 +572,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             )}
             {!isTemplate && (
               <>
+                <PresenceAvatars viewers={presenceViewers} />
                 <UpdateBoardSlugButton
                   handleOnClick={() => openModal("UPDATE_BOARD_SLUG")}
                   isLoading={isLoading}
@@ -624,7 +625,6 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 {t`New list`}
               </Button>
             </Tooltip>
-            <PresenceAvatars viewers={presenceViewers} />
             <BoardDropdown
               isTemplate={!!isTemplate}
               isLoading={!boardData}
