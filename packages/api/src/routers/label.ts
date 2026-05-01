@@ -13,10 +13,11 @@ import { publishBoardEventToWebsocket } from "../events";
 const emitBoardEvent = async (
   workspacePublicId: string | null | undefined,
   event: BoardEvent,
+  actorUserId?: string,
 ) => {
   if (!workspacePublicId) return;
   try {
-    await publishBoardEventToWebsocket(workspacePublicId, event);
+    await publishBoardEventToWebsocket(workspacePublicId, actorUserId ? { ...event, actorUserId } : event);
   } catch (error) {
     console.error("failed to publish board event", error);
   }
@@ -135,7 +136,7 @@ export const labelRouter = createTRPCRouter({
         type: "label.changed",
         boardId: board.id,
         labelPublicId: result.publicId,
-      });
+      }, userId);
 
       return {
         publicId: result.publicId,
@@ -196,7 +197,7 @@ export const labelRouter = createTRPCRouter({
         type: "label.changed",
         boardId: label.boardId,
         labelPublicId: input.labelPublicId,
-      });
+      }, userId);
 
       return {
         publicId: result.publicId,
@@ -251,7 +252,7 @@ export const labelRouter = createTRPCRouter({
         type: "label.changed",
         boardId: label.boardId,
         labelPublicId: input.labelPublicId,
-      });
+      }, userId);
 
       return { success: true };
     }),

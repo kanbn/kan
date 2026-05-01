@@ -17,13 +17,14 @@ import { assertPermission } from "../utils/permissions";
 const emitBoardEvent = async (
   workspacePublicId: string | null | undefined,
   event: BoardEvent,
+  actorUserId?: string,
 ) => {
   if (!workspacePublicId) {
     return;
   }
 
   try {
-    await publishBoardEventToWebsocket(workspacePublicId, event);
+    await publishBoardEventToWebsocket(workspacePublicId, actorUserId ? { ...event, actorUserId } : event);
   } catch (error) {
     console.error("failed to publish board event", error);
   }
@@ -32,13 +33,14 @@ const emitBoardEvent = async (
 const emitCardEvent = async (
   workspacePublicId: string | null | undefined,
   event: CardEvent,
+  actorUserId?: string,
 ) => {
   if (!workspacePublicId) {
     return;
   }
 
   try {
-    await publishCardEventToWebsocket(workspacePublicId, event);
+    await publishCardEventToWebsocket(workspacePublicId, actorUserId ? { ...event, actorUserId } : event);
   } catch (error) {
     console.error("failed to publish card event", error);
   }
@@ -119,14 +121,14 @@ export const checklistRouter = createTRPCRouter({
         type: "checklist.changed",
         boardId: card.boardId,
         cardPublicId: input.cardPublicId,
-      });
+      }, userId);
 
       await emitCardEvent(card.workspacePublicId, {
         scope: "card",
         type: "checklist.changed",
         cardId: card.id,
         cardPublicId: input.cardPublicId,
-      });
+      }, userId);
 
       return newChecklist;
     }),
@@ -198,14 +200,14 @@ export const checklistRouter = createTRPCRouter({
         type: "checklist.changed",
         boardId: checklist.card.list.board.id,
         cardPublicId: checklist.card.publicId,
-      });
+      }, userId);
 
       await emitCardEvent(checklist.card.list.board.workspace.publicId, {
         scope: "card",
         type: "checklist.changed",
         cardId: checklist.cardId,
         cardPublicId: checklist.card.publicId,
-      });
+      }, userId);
 
       return updated;
     }),
@@ -276,14 +278,14 @@ export const checklistRouter = createTRPCRouter({
         type: "checklist.changed",
         boardId: checklist.card.list.board.id,
         cardPublicId: checklist.card.publicId,
-      });
+      }, userId);
 
       await emitCardEvent(checklist.card.list.board.workspace.publicId, {
         scope: "card",
         type: "checklist.changed",
         cardId: checklist.cardId,
         cardPublicId: checklist.card.publicId,
-      });
+      }, userId);
 
       return { success: true };
     }),
@@ -355,14 +357,14 @@ export const checklistRouter = createTRPCRouter({
         type: "checklist.changed",
         boardId: checklist.card.list.board.id,
         cardPublicId: checklist.card.publicId,
-      });
+      }, userId);
 
       await emitCardEvent(checklist.card.list.board.workspace.publicId, {
         scope: "card",
         type: "checklist.changed",
         cardId: checklist.cardId,
         cardPublicId: checklist.card.publicId,
-      });
+      }, userId);
 
       return newChecklistItem;
     }),
@@ -470,6 +472,7 @@ export const checklistRouter = createTRPCRouter({
             boardId: item.checklist.card.list.board.id,
             cardPublicId: item.checklist.card.publicId,
           },
+          userId,
         );
 
         await emitCardEvent(item.checklist.card.list.board.workspace.publicId, {
@@ -477,7 +480,7 @@ export const checklistRouter = createTRPCRouter({
           type: "checklist.changed",
           cardId: item.checklist.cardId,
           cardPublicId: item.checklist.card.publicId,
-        });
+        }, userId);
       }
 
       return updatedItem;
@@ -543,14 +546,14 @@ export const checklistRouter = createTRPCRouter({
         type: "checklist.changed",
         boardId: item.checklist.card.list.board.id,
         cardPublicId: item.checklist.card.publicId,
-      });
+      }, userId);
 
       await emitCardEvent(item.checklist.card.list.board.workspace.publicId, {
         scope: "card",
         type: "checklist.changed",
         cardId: item.checklist.cardId,
         cardPublicId: item.checklist.card.publicId,
-      });
+      }, userId);
 
       return { success: true };
     }),

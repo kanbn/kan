@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 import type { BoardEvent, CardEvent } from "@kan/api/events";
 
+import { authClient } from "@kan/auth/client";
 import { env } from "~/env";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
@@ -14,6 +15,8 @@ interface EventsProviderProps {
 export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
   const utils = api.useUtils();
   const { workspace } = useWorkspace();
+  const { data: session } = authClient.useSession();
+  const currentUserId = session?.user?.id;
 
   const websocketEnabled = Boolean(env.NEXT_PUBLIC_WEBSOCKET_URL);
   const workspacePublicId = workspace.publicId;
@@ -46,6 +49,7 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
 
   const handleBoardEvent = useCallback(
     (event: BoardEvent) => {
+      if (event.actorUserId && event.actorUserId === currentUserId) return;
       switch (event.type) {
         case "card.created":
         case "card.updated":
@@ -69,11 +73,12 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
           break;
       }
     },
-    [invalidateBoard, invalidateCard, utils],
+    [currentUserId, invalidateBoard, invalidateCard, utils],
   );
 
   const handleCardEvent = useCallback(
     (event: CardEvent) => {
+      if (event.actorUserId && event.actorUserId === currentUserId) return;
       switch (event.type) {
         case "comment.added":
         case "comment.updated":
@@ -96,7 +101,7 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
           break;
       }
     },
-    [clearCardFromCache, invalidateBoard, invalidateCard],
+    [clearCardFromCache, currentUserId, invalidateBoard, invalidateCard],
   );
 
   api.events.board.useSubscription(

@@ -16,10 +16,11 @@ import { publishCardEventToWebsocket } from "../events";
 const emitCardEvent = async (
   workspacePublicId: string | null | undefined,
   event: CardEvent,
+  actorUserId?: string,
 ) => {
   if (!workspacePublicId) return;
   try {
-    await publishCardEventToWebsocket(workspacePublicId, event);
+    await publishCardEventToWebsocket(workspacePublicId, actorUserId ? { ...event, actorUserId } : event);
   } catch (error) {
     console.error("failed to publish card event", error);
   }
@@ -177,7 +178,7 @@ export const attachmentRouter = createTRPCRouter({
         cardId: card.id,
         cardPublicId: input.cardPublicId,
         attachmentPublicId: attachment.publicId,
-      });
+      }, userId);
 
       return attachment;
     }),
@@ -248,7 +249,7 @@ export const attachmentRouter = createTRPCRouter({
         cardId: attachment.card.id,
         cardPublicId: attachment.card.publicId,
         attachmentPublicId: input.attachmentPublicId,
-      });
+      }, userId);
 
       return { success: true };
     }),

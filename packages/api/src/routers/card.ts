@@ -27,13 +27,14 @@ import {
 const emitBoardEvent = async (
   workspacePublicId: string | null | undefined,
   event: BoardEvent,
+  actorUserId?: string,
 ) => {
   if (!workspacePublicId) {
     return;
   }
 
   try {
-    await publishBoardEventToWebsocket(workspacePublicId, event);
+    await publishBoardEventToWebsocket(workspacePublicId, actorUserId ? { ...event, actorUserId } : event);
   } catch (error) {
     console.error("failed to publish board event", error);
   }
@@ -42,13 +43,14 @@ const emitBoardEvent = async (
 const emitCardEvent = async (
   workspacePublicId: string | null | undefined,
   event: CardEvent,
+  actorUserId?: string,
 ) => {
   if (!workspacePublicId) {
     return;
   }
 
   try {
-    await publishCardEventToWebsocket(workspacePublicId, event);
+    await publishCardEventToWebsocket(workspacePublicId, actorUserId ? { ...event, actorUserId } : event);
   } catch (error) {
     console.error("failed to publish card event", error);
   }
@@ -244,7 +246,7 @@ export const cardRouter = createTRPCRouter({
         boardId: list.boardId,
         cardPublicId: newCard.publicId,
         listPublicId: input.listPublicId,
-      });
+      }, userId);
 
       return newCard;
     }),
@@ -325,7 +327,7 @@ export const cardRouter = createTRPCRouter({
         cardPublicId: input.cardPublicId,
         commentPublicId: newComment.publicId,
         comment: newComment.comment,
-      });
+      }, userId);
 
       return newComment;
     }),
@@ -424,7 +426,7 @@ export const cardRouter = createTRPCRouter({
         cardPublicId: input.cardPublicId,
         commentPublicId: existingComment.publicId,
         comment: updatedComment.comment,
-      });
+      }, userId);
 
       return updatedComment;
     }),
@@ -509,7 +511,7 @@ export const cardRouter = createTRPCRouter({
         cardId: card.id,
         cardPublicId: input.cardPublicId,
         commentPublicId: existingComment.publicId,
-      });
+      }, userId);
 
       return deletedComment;
     }),
@@ -591,7 +593,7 @@ export const cardRouter = createTRPCRouter({
           cardId: card.id,
           cardPublicId: input.cardPublicId,
           labelPublicId: input.labelPublicId,
-        });
+        }, userId);
 
         return { newLabel: false };
       }
@@ -618,7 +620,7 @@ export const cardRouter = createTRPCRouter({
         cardId: card.id,
         cardPublicId: input.cardPublicId,
         labelPublicId: input.labelPublicId,
-      });
+      }, userId);
 
       return { newLabel: true };
     }),
@@ -705,7 +707,7 @@ export const cardRouter = createTRPCRouter({
           cardId: card.id,
           cardPublicId: input.cardPublicId,
           workspaceMemberPublicId: input.workspaceMemberPublicId,
-        });
+        }, userId);
 
         return { newMember: false };
       }
@@ -732,7 +734,7 @@ export const cardRouter = createTRPCRouter({
         cardId: card.id,
         cardPublicId: input.cardPublicId,
         workspaceMemberPublicId: input.workspaceMemberPublicId,
-      });
+      }, userId);
 
       return { newMember: true };
     }),
@@ -1236,7 +1238,7 @@ export const cardRouter = createTRPCRouter({
           cardPublicId: input.cardPublicId,
           listPublicId: input.listPublicId ?? card.listPublicId,
           changes: boardChanges,
-        });
+        }, userId);
       }
 
       if (hasCardChanges) {
@@ -1246,7 +1248,7 @@ export const cardRouter = createTRPCRouter({
           cardId: card.id,
           cardPublicId: input.cardPublicId,
           changes: cardChanges,
-        });
+        }, userId);
       }
 
       return result;
@@ -1347,14 +1349,14 @@ export const cardRouter = createTRPCRouter({
         boardId: card.boardId,
         cardPublicId: input.cardPublicId,
         listPublicId: card.listPublicId,
-      });
+      }, userId);
 
       await emitCardEvent(card.workspacePublicId, {
         scope: "card",
         type: "deleted",
         cardId: card.id,
         cardPublicId: input.cardPublicId,
-      });
+      }, userId);
 
       return { success: true };
     }),
@@ -1534,7 +1536,7 @@ export const cardRouter = createTRPCRouter({
         boardId: targetList.boardId,
         cardPublicId: newCard.publicId,
         listPublicId: input.listPublicId,
-      });
+      }, userId);
 
       return { publicId: newCard.publicId };
     }),

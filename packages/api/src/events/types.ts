@@ -1,4 +1,4 @@
-export type BoardEvent =
+export type BoardEvent = (
   | {
       scope: "board";
       type: "card.created" | "card.updated" | "card.deleted";
@@ -37,9 +37,9 @@ export type BoardEvent =
       type: "board.updated" | "board.deleted";
       boardId: number;
       boardPublicId: string;
-    };
+    }) & { actorUserId?: string };
 
-export type CardEvent =
+export type CardEvent = (
   | {
       scope: "card";
       type: "comment.added" | "comment.updated" | "comment.deleted";
@@ -86,7 +86,7 @@ export type CardEvent =
       cardId: number;
       cardPublicId: string;
       attachmentPublicId?: string;
-    };
+    }) & { actorUserId?: string };
 
 export type WorkspaceEventScope = "board" | "card";
 

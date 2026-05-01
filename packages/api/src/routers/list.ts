@@ -14,13 +14,14 @@ import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permi
 const emitBoardEvent = async (
   workspacePublicId: string | null | undefined,
   event: BoardEvent,
+  actorUserId?: string,
 ) => {
   if (!workspacePublicId) {
     return;
   }
 
   try {
-    await publishBoardEventToWebsocket(workspacePublicId, event);
+    await publishBoardEventToWebsocket(workspacePublicId, actorUserId ? { ...event, actorUserId } : event);
   } catch (error) {
     console.error("failed to publish board event", error);
   }
@@ -86,7 +87,7 @@ export const listRouter = createTRPCRouter({
         listPublicId: result.publicId,
         name: result.name,
         index: result.index,
-      });
+      }, userId);
 
       return result;
     }),
@@ -174,7 +175,7 @@ export const listRouter = createTRPCRouter({
         type: "list.deleted",
         boardId: list.boardId,
         listPublicId: input.listPublicId,
-      });
+      }, userId);
 
       return { success: true };
     }),
@@ -261,7 +262,7 @@ export const listRouter = createTRPCRouter({
           listPublicId: input.listPublicId,
           name: input.name,
           index: input.index,
-        });
+        }, userId);
       }
 
       return result;
