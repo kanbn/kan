@@ -2,12 +2,16 @@ import { useRouter } from "next/router";
 import { Popover, Transition } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { formatDistanceToNow } from "date-fns";
-import { Fragment, useRef } from "react";
-import { HiBell, HiCheckCircle } from "react-icons/hi2";
+import { Fragment, useRef, useState } from "react";
+import { HiCheckCircle } from "react-icons/hi2";
+import { useTheme } from "next-themes";
 import { twMerge } from "tailwind-merge";
 
 import type { NotificationType } from "@kan/db/schema";
 
+import bellDark from "~/assets/bell-dark.json";
+import bellLight from "~/assets/bell-light.json";
+import LottieIcon from "~/components/LottieIcon";
 import { api } from "~/utils/api";
 
 interface NotificationBellProps {
@@ -37,6 +41,10 @@ export default function NotificationBell({ isCollapsed = false }: NotificationBe
   const router = useRouter();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const utils = api.useUtils();
+  const [isHovered, setIsHovered] = useState(false);
+  const [lottieIndex, setLottieIndex] = useState(0);
+  const { resolvedTheme } = useTheme();
+  const isDarkMode = resolvedTheme === "dark";
 
   const { data: unreadData } = api.notification.unreadCount.useQuery(undefined, {
     refetchInterval: 60_000,
@@ -69,9 +77,10 @@ export default function NotificationBell({ isCollapsed = false }: NotificationBe
               isCollapsed && "justify-center",
             )}
             title={isCollapsed ? t`Notifications` : undefined}
+            onMouseEnter={() => { setIsHovered(true); setLottieIndex((i) => i + 1); }}
           >
             <div className="relative flex-shrink-0">
-              <HiBell size={18} />
+              <LottieIcon index={lottieIndex} json={isDarkMode ? bellDark : bellLight} isPlaying={isHovered} />
               {unreadCount > 0 && (
                 <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-purple-600 text-[10px] font-bold text-white">
                   {unreadCount > 9 ? "9+" : unreadCount}
