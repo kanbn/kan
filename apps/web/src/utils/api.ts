@@ -47,7 +47,15 @@ const getBaseUrl = () => {
   return `http://localhost:${port ?? 3000}`; // dev SSR should use localhost
 };
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    mutations: {
+      // Queue mutations while offline; React Query auto-replays them when the
+      // network comes back.
+      networkMode: "offlineFirst",
+    },
+  },
+});
 
 let wsClient: ReturnType<typeof createWSClient> | null = null;
 let hasRegisteredBeforeUnload = false;

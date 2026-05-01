@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import type { ReactNode } from "react";
 
 import type { BoardEvent, CardEvent, NotificationEvent } from "@kan/api/events";
@@ -146,6 +146,14 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
     enabled: websocketEnabled && !!currentUserId,
     onData: handleNotificationEvent,
   });
+
+  // When the browser comes back online, invalidate all caches so stale data
+  // is refreshed and any queued mutations that just replayed are visible.
+  useEffect(() => {
+    const handleOnline = () => invalidateAll();
+    window.addEventListener("online", handleOnline);
+    return () => window.removeEventListener("online", handleOnline);
+  }, [invalidateAll]);
 
   return <>{children}</>;
 };
