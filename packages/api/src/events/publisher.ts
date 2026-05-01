@@ -7,13 +7,13 @@ interface WorkspaceEventPayload {
   secret?: string;
 }
 
-const eventEndpoint = process.env.WEBSOCKET_EVENT_URL;
+const eventEndpoint = process.env.WEBSOCKET_INGEST_URL;
 const eventSecret = process.env.WEBSOCKET_EVENT_SECRET;
 
 const postEvent = async (payload: WorkspaceEventPayload) => {
   if (!eventEndpoint) {
     if (process.env.NODE_ENV !== "production") {
-      console.warn("WEBSOCKET_EVENT_URL is not configured; skipping event");
+      console.warn("WEBSOCKET_INGEST_URL is not configured; skipping event");
     }
     return;
   }
