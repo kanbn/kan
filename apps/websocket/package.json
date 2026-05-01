@@ -10,11 +10,13 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "start": "pnpm with-env node ./dist/index.js",
+    "smoke": "pnpm with-env tsx scripts/smoke.ts",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
     "@kan/api": "workspace:*",
+    "@kan/logger": "workspace:*",
     "@trpc/server": "catalog:",
     "@types/ws": "^8.18.1",
     "ws": "^8.18.0"
