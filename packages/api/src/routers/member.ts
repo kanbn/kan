@@ -21,6 +21,21 @@ import {
   assertCanManageRole,
   assertPermission,
 } from "../utils/permissions";
+import type { BoardEvent } from "../events";
+import { publishBoardEventToWebsocket } from "../events";
+
+const emitBoardEvent = async (
+  workspacePublicId: string | null | undefined,
+  event: BoardEvent,
+  actorUserId?: string,
+) => {
+  if (!workspacePublicId) return;
+  try {
+    await publishBoardEventToWebsocket(workspacePublicId, actorUserId ? { ...event, actorUserId } : event);
+  } catch (error) {
+    console.error("failed to publish board event", error);
+  }
+};
 
 export const memberRouter = createTRPCRouter({
   invite: protectedProcedure
@@ -163,6 +178,12 @@ export const memberRouter = createTRPCRouter({
         });
       }
 
+      await emitBoardEvent(input.workspacePublicId, {
+        scope: "board",
+        type: "member.invited",
+        workspaceMemberPublicId: invite.publicId,
+      }, userId);
+
       return invite;
     }),
   delete: protectedProcedure
@@ -228,6 +249,12 @@ export const memberRouter = createTRPCRouter({
           message: `Failed to delete member with public ID ${input.memberPublicId}`,
           code: "INTERNAL_SERVER_ERROR",
         });
+
+      await emitBoardEvent(input.workspacePublicId, {
+        scope: "board",
+        type: "member.removed",
+        workspaceMemberPublicId: input.memberPublicId,
+      }, userId);
 
       // Handle subscription seat decrement for cloud environment
       if (process.env.NEXT_PUBLIC_KAN_ENV === "cloud") {
@@ -743,6 +770,12 @@ export const memberRouter = createTRPCRouter({
         role: input.role,
         roleId: workspaceRole?.id ?? null,
       });
+
+      await emitBoardEvent(input.workspacePublicId, {
+        scope: "board",
+        type: "member.role.changed",
+        workspaceMemberPublicId: input.memberPublicId,
+      }, userId);
 
       return {
         success: true,

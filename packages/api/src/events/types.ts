@@ -43,6 +43,11 @@ export type BoardEvent = (
       type: "board.updated" | "board.deleted";
       boardId: number;
       boardPublicId: string;
+    }
+  | {
+      scope: "board";
+      type: "member.invited" | "member.removed" | "member.role.changed";
+      workspaceMemberPublicId: string;
     }) & { actorUserId?: string };
 
 export type CardEvent = (

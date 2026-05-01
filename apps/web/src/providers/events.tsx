@@ -70,6 +70,11 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
           invalidateBoard();
           void utils.board.all.invalidate();
           break;
+        case "member.invited":
+        case "member.removed":
+        case "member.role.changed":
+          void utils.workspace.byId.invalidate();
+          break;
         default:
           break;
       }
