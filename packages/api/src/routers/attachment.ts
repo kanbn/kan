@@ -10,6 +10,20 @@ import { generateUID } from "@kan/shared/utils";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
 import { deleteObject, generateUploadUrl } from "@kan/shared/utils";
+import type { CardEvent } from "../events";
+import { publishCardEventToWebsocket } from "../events";
+
+const emitCardEvent = async (
+  workspacePublicId: string | null | undefined,
+  event: CardEvent,
+) => {
+  if (!workspacePublicId) return;
+  try {
+    await publishCardEventToWebsocket(workspacePublicId, event);
+  } catch (error) {
+    console.error("failed to publish card event", error);
+  }
+};
 
 export const attachmentRouter = createTRPCRouter({
   generateUploadUrl: protectedProcedure
@@ -157,6 +171,14 @@ export const attachmentRouter = createTRPCRouter({
         createdBy: userId,
       });
 
+      await emitCardEvent(card.workspacePublicId, {
+        scope: "card",
+        type: "attachment.changed",
+        cardId: card.id,
+        cardPublicId: input.cardPublicId,
+        attachmentPublicId: attachment.publicId,
+      });
+
       return attachment;
     }),
   delete: protectedProcedure
@@ -218,6 +240,14 @@ export const attachmentRouter = createTRPCRouter({
         attachmentId: attachment.id,
         fromTitle: attachment.originalFilename,
         createdBy: userId,
+      });
+
+      await emitCardEvent(attachment.card.list.board.workspace.publicId, {
+        scope: "card",
+        type: "attachment.changed",
+        cardId: attachment.card.id,
+        cardPublicId: attachment.card.publicId,
+        attachmentPublicId: input.attachmentPublicId,
       });
 
       return { success: true };

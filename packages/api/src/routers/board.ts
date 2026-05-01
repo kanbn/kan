@@ -17,6 +17,20 @@ import {
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
+import type { BoardEvent } from "../events";
+import { publishBoardEventToWebsocket } from "../events";
+
+const emitBoardEvent = async (
+  workspacePublicId: string | null | undefined,
+  event: BoardEvent,
+) => {
+  if (!workspacePublicId) return;
+  try {
+    await publishBoardEventToWebsocket(workspacePublicId, event);
+  } catch (error) {
+    console.error("failed to publish board event", error);
+  }
+};
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
@@ -544,6 +558,13 @@ export const boardRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
+      await emitBoardEvent(board.workspace.publicId, {
+        scope: "board",
+        type: "board.updated",
+        boardId: board.id,
+        boardPublicId: input.boardPublicId,
+      });
+
       return result;
     }),
   delete: protectedProcedure
@@ -638,6 +659,13 @@ export const boardRouter = createTRPCRouter({
           await activityRepo.bulkCreate(ctx.db, activities);
         }
       }
+
+      await emitBoardEvent(board.workspace.publicId, {
+        scope: "board",
+        type: "board.deleted",
+        boardId: board.id,
+        boardPublicId: input.boardPublicId,
+      });
 
       return { success: true };
     }),

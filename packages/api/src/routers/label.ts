@@ -7,6 +7,20 @@ import * as labelRepo from "@kan/db/repository/label.repo";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
+import type { BoardEvent } from "../events";
+import { publishBoardEventToWebsocket } from "../events";
+
+const emitBoardEvent = async (
+  workspacePublicId: string | null | undefined,
+  event: BoardEvent,
+) => {
+  if (!workspacePublicId) return;
+  try {
+    await publishBoardEventToWebsocket(workspacePublicId, event);
+  } catch (error) {
+    console.error("failed to publish board event", error);
+  }
+};
 
 const labelSchema = z.object({
   publicId: z.string(),
@@ -116,6 +130,13 @@ export const labelRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
+      await emitBoardEvent(board.workspace.publicId, {
+        scope: "board",
+        type: "label.changed",
+        boardId: board.id,
+        labelPublicId: result.publicId,
+      });
+
       return {
         publicId: result.publicId,
         name: result.name,
@@ -170,6 +191,13 @@ export const labelRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
+      await emitBoardEvent(label.workspacePublicId, {
+        scope: "board",
+        type: "label.changed",
+        boardId: label.boardId,
+        labelPublicId: input.labelPublicId,
+      });
+
       return {
         publicId: result.publicId,
         name: result.name,
@@ -216,6 +244,13 @@ export const labelRouter = createTRPCRouter({
         labelId: label.id,
         deletedAt: new Date(),
         deletedBy: userId,
+      });
+
+      await emitBoardEvent(label.workspacePublicId, {
+        scope: "board",
+        type: "label.changed",
+        boardId: label.boardId,
+        labelPublicId: input.labelPublicId,
       });
 
       return { success: true };

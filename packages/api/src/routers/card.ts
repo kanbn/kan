@@ -1528,6 +1528,14 @@ export const cardRouter = createTRPCRouter({
         }
       }
 
+      await emitBoardEvent(targetList.workspacePublicId, {
+        scope: "board",
+        type: "card.created",
+        boardId: targetList.boardId,
+        cardPublicId: newCard.publicId,
+        listPublicId: input.listPublicId,
+      });
+
       return { publicId: newCard.publicId };
     }),
 });
