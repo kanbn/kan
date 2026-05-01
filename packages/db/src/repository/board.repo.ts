@@ -557,6 +557,11 @@ export const getWithListIdsByPublicId = (
       createdBy: true,
     },
     with: {
+      workspace: {
+        columns: {
+          publicId: true,
+        },
+      },
       lists: {
         columns: {
           id: true,

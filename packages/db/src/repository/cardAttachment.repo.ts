@@ -72,6 +72,13 @@ export const getByPublicId = (db: dbClient, publicId: string) => {
                   id: true,
                   workspaceId: true,
                 },
+                with: {
+                  workspace: {
+                    columns: {
+                      publicId: true,
+                    },
+                  },
+                },
               },
             },
           },

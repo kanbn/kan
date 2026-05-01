@@ -142,7 +142,12 @@ export const getWorkspaceAndLabelIdByLabelPublicId = async (
     where: eq(labels.publicId, labelPublicId),
     with: {
       board: {
-        columns: { workspaceId: true },
+        columns: { id: true, workspaceId: true },
+        with: {
+          workspace: {
+            columns: { publicId: true },
+          },
+        },
       },
     },
   });
@@ -151,6 +156,8 @@ export const getWorkspaceAndLabelIdByLabelPublicId = async (
     ? {
         id: result.id,
         workspaceId: result.board.workspaceId,
+        boardId: result.board.id,
+        workspacePublicId: result.board.workspace.publicId,
       }
     : null;
 };
