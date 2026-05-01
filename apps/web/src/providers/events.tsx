@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import type { BoardEvent, CardEvent, NotificationEvent } from "@kan/api/events";
 
 import { authClient } from "@kan/auth/client";
-import { env } from "~/env";
+import { env as runtimeEnv } from "next-runtime-env";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
@@ -18,7 +18,7 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
   const { data: session } = authClient.useSession();
   const currentUserId = session?.user?.id;
 
-  const websocketEnabled = Boolean(env.NEXT_PUBLIC_WEBSOCKET_URL);
+  const websocketEnabled = Boolean(runtimeEnv("NEXT_PUBLIC_WEBSOCKET_URL"));
   const workspacePublicId = workspace.publicId;
   const hasWorkspacePublicId = workspacePublicId.length === 12;
   const shouldSubscribe = websocketEnabled && hasWorkspacePublicId;

@@ -10,6 +10,7 @@ import superjson from "superjson";
 import type { AppRouter } from "@kan/api/root";
 
 import { env } from "~/env";
+import { env as runtimeEnv } from "next-runtime-env";
 
 /**
  * This is the client-side entrypoint for your tRPC API. It is used to create the `api` object which
@@ -62,11 +63,12 @@ let hasRegisteredBeforeUnload = false;
 
 const resolveWsClient = () => {
   if (typeof window === "undefined") return null;
-  if (!env.NEXT_PUBLIC_WEBSOCKET_URL) return null;
+  const wsUrl = runtimeEnv("NEXT_PUBLIC_WEBSOCKET_URL");
+  if (!wsUrl) return null;
   if (wsClient) return wsClient;
 
   wsClient = createWSClient({
-    url: env.NEXT_PUBLIC_WEBSOCKET_URL,
+    url: wsUrl,
     retryDelayMs(attemptIndex) {
       const capped = Math.min(attemptIndex, 8);
       return Math.pow(2, capped) * 500;

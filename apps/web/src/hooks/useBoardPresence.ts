@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 
 import type { PresenceEvent } from "@kan/api/events";
 import { authClient } from "@kan/auth/client";
-import { env } from "~/env";
+import { env as runtimeEnv } from "next-runtime-env";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
@@ -45,7 +45,7 @@ export function useBoardPresence(boardPublicId: string | null): Viewer[] {
   );
 
   const enabled =
-    Boolean(env.NEXT_PUBLIC_WEBSOCKET_URL) &&
+    Boolean(runtimeEnv("NEXT_PUBLIC_WEBSOCKET_URL")) &&
     !!boardPublicId &&
     workspace.publicId.length === 12;
 

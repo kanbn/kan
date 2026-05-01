@@ -25,6 +25,7 @@ import { api } from "~/utils/api";
 import { invalidateCard } from "~/utils/cardInvalidation";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { env } from "~/env";
+import { env as runtimeEnv } from "next-runtime-env";
 import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmation";
 import ActivityList from "./components/ActivityList";
 import { AttachmentThumbnails } from "./components/AttachmentThumbnails";
@@ -220,7 +221,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     }
   }, [card, hasLoadedCard]);
 
-  const websocketEnabled = Boolean(env.NEXT_PUBLIC_WEBSOCKET_URL);
+  const websocketEnabled = Boolean(runtimeEnv("NEXT_PUBLIC_WEBSOCKET_URL"));
   const workspacePublicId = workspace.publicId;
   const shouldSubscribe =
     websocketEnabled && workspacePublicId.length === 12 && Boolean(cardId);
