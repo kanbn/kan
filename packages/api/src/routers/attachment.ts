@@ -12,6 +12,9 @@ import { assertPermission } from "../utils/permissions";
 import { deleteObject, generateUploadUrl } from "@kan/shared/utils";
 import type { CardEvent } from "../events";
 import { publishCardEventToWebsocket } from "../events";
+import { createLogger } from "@kan/logger";
+
+const log = createLogger("api:events");
 
 const emitCardEvent = async (
   workspacePublicId: string | null | undefined,
@@ -22,7 +25,7 @@ const emitCardEvent = async (
   try {
     await publishCardEventToWebsocket(workspacePublicId, actorUserId ? { ...event, actorUserId } : event);
   } catch (error) {
-    console.error("failed to publish card event", error);
+    log.error({ err: error }, "failed to publish card event");
   }
 };
 

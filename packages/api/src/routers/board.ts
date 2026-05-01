@@ -19,6 +19,9 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 import type { BoardEvent } from "../events";
 import { publishBoardEventToWebsocket } from "../events";
+import { createLogger } from "@kan/logger";
+
+const log = createLogger("api:events");
 
 const emitBoardEvent = async (
   workspacePublicId: string | null | undefined,
@@ -29,7 +32,7 @@ const emitBoardEvent = async (
   try {
     await publishBoardEventToWebsocket(workspacePublicId, actorUserId ? { ...event, actorUserId } : event);
   } catch (error) {
-    console.error("failed to publish board event", error);
+    log.error({ err: error }, "failed to publish board event");
   }
 };
 

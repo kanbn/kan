@@ -13,6 +13,9 @@ import {
 } from "../events";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
+import { createLogger } from "@kan/logger";
+
+const log = createLogger("api:events");
 
 const emitBoardEvent = async (
   workspacePublicId: string | null | undefined,
@@ -26,7 +29,7 @@ const emitBoardEvent = async (
   try {
     await publishBoardEventToWebsocket(workspacePublicId, actorUserId ? { ...event, actorUserId } : event);
   } catch (error) {
-    console.error("failed to publish board event", error);
+    log.error({ err: error }, "failed to publish board event");
   }
 };
 
@@ -42,7 +45,7 @@ const emitCardEvent = async (
   try {
     await publishCardEventToWebsocket(workspacePublicId, actorUserId ? { ...event, actorUserId } : event);
   } catch (error) {
-    console.error("failed to publish card event", error);
+    log.error({ err: error }, "failed to publish card event");
   }
 };
 

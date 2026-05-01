@@ -1,4 +1,8 @@
+import { createLogger } from "@kan/logger";
+
 import type { BoardEvent, CardEvent } from "./types";
+
+const log = createLogger("api:publisher");
 
 interface WorkspaceEventPayload {
   workspacePublicId: string;
@@ -13,7 +17,7 @@ const eventSecret = process.env.WEBSOCKET_EVENT_SECRET;
 const postEvent = async (payload: WorkspaceEventPayload) => {
   if (!eventEndpoint) {
     if (process.env.NODE_ENV !== "production") {
-      console.warn("WEBSOCKET_INGEST_URL is not configured; skipping event");
+      log.warn("WEBSOCKET_INGEST_URL is not configured; skipping event");
     }
     return;
   }
@@ -30,7 +34,7 @@ const postEvent = async (payload: WorkspaceEventPayload) => {
       }),
     });
   } catch (error) {
-    console.error("failed to publish workspace event", error);
+    log.error({ err: error }, "failed to publish workspace event");
   }
 };
 
