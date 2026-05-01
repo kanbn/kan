@@ -6,6 +6,10 @@ export {
   subscribeToBoardEvents,
   subscribeToCardEvents,
   subscribeToNotificationEvents,
+  subscribeToPresenceEvents,
+  joinBoard,
+  leaveBoard,
+  getBoardViewers,
 } from "./bus";
 export {
   publishBoardEventToWebsocket,

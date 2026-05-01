@@ -110,3 +110,25 @@ export type NotificationEvent = {
   type: "notification.created";
   notificationPublicId: string;
 };
+
+export type PresenceEvent =
+  | {
+      scope: "presence";
+      type: "presence.joined";
+      boardPublicId: string;
+      userId: string;
+      userName: string;
+      userImage: string | null;
+    }
+  | {
+      scope: "presence";
+      type: "presence.left";
+      boardPublicId: string;
+      userId: string;
+    }
+  | {
+      scope: "presence";
+      type: "presence.state";
+      boardPublicId: string;
+      viewers: { userId: string; userName: string; userImage: string | null }[];
+    };

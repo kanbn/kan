@@ -1,7 +1,7 @@
 import { EventEmitter } from "node:events";
 import IoRedis from "ioredis";
 
-import type { BoardEvent, CardEvent, NotificationEvent, WorkspaceEventScope } from "./types";
+import type { BoardEvent, CardEvent, NotificationEvent, PresenceEvent, WorkspaceEventScope } from "./types";
 import { createLogger } from "@kan/logger";
 
 const log = createLogger("api:events:bus");
@@ -153,3 +153,80 @@ export const subscribeToNotificationEvents = (
   userId: string,
   handler: NotificationHandler,
 ) => subscribe(channelForUser(userId), handler);
+
+// --- Presence tracking ---
+
+type Viewer = { userId: string; userName: string; userImage: string | null };
+
+/** In-memory presence map: boardPublicId → Map<userId, Viewer> */
+const presenceMap = new Map<string, Map<string, Viewer>>();
+
+const channelForPresence = (boardPublicId: string) =>
+  `presence:${boardPublicId}`;
+
+type PresenceHandler = (event: PresenceEvent) => void;
+
+/**
+ * Subscribe to presence events for a board.
+ * Returns an unsubscribe function.
+ */
+export const subscribeToPresenceEvents = (
+  boardPublicId: string,
+  handler: PresenceHandler,
+) => subscribe(channelForPresence(boardPublicId), handler);
+
+/**
+ * Register a viewer as present on a board.
+ * Emits `presence.state` to the joining subscriber only (via returned function),
+ * then broadcasts `presence.joined` to all other board subscribers.
+ */
+export const joinBoard = (
+  boardPublicId: string,
+  viewer: Viewer,
+): (() => void) => {
+  if (!presenceMap.has(boardPublicId)) {
+    presenceMap.set(boardPublicId, new Map());
+  }
+  const viewers = presenceMap.get(boardPublicId)!;
+  viewers.set(viewer.userId, viewer);
+
+  // Broadcast joined event to all board presence subscribers
+  publish(channelForPresence(boardPublicId), {
+    scope: "presence",
+    type: "presence.joined",
+    boardPublicId,
+    userId: viewer.userId,
+    userName: viewer.userName,
+    userImage: viewer.userImage,
+  } satisfies PresenceEvent);
+
+  return () => {
+    leaveBoard(boardPublicId, viewer.userId);
+  };
+};
+
+/**
+ * Remove a viewer from a board and broadcast `presence.left`.
+ */
+export const leaveBoard = (boardPublicId: string, userId: string): void => {
+  const viewers = presenceMap.get(boardPublicId);
+  if (!viewers) return;
+  viewers.delete(userId);
+  if (viewers.size === 0) presenceMap.delete(boardPublicId);
+
+  publish(channelForPresence(boardPublicId), {
+    scope: "presence",
+    type: "presence.left",
+    boardPublicId,
+    userId,
+  } satisfies PresenceEvent);
+};
+
+/**
+ * Return current viewers for a board (snapshot for the joining client).
+ */
+export const getBoardViewers = (boardPublicId: string): Viewer[] => {
+  const viewers = presenceMap.get(boardPublicId);
+  if (!viewers) return [];
+  return Array.from(viewers.values());
+};

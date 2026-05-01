@@ -4,8 +4,15 @@ import { z } from "zod";
 
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
-import type { BoardEvent, CardEvent, NotificationEvent } from "../events";
-import { subscribeToBoardEvents, subscribeToCardEvents, subscribeToNotificationEvents } from "../events";
+import type { BoardEvent, CardEvent, NotificationEvent, PresenceEvent } from "../events";
+import {
+  getBoardViewers,
+  joinBoard,
+  subscribeToBoardEvents,
+  subscribeToCardEvents,
+  subscribeToNotificationEvents,
+  subscribeToPresenceEvents,
+} from "../events";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
 
@@ -101,6 +108,69 @@ export const eventsRouter = createTRPCRouter({
 
         return () => {
           unsubscribe();
+        };
+      });
+    }),
+
+  presence: protectedProcedure
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+        boardPublicId: z.string().min(12),
+      }),
+    )
+    .subscription(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace)
+        throw new TRPCError({
+          message: `Workspace ${input.workspacePublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertUserInWorkspace(ctx.db, userId, workspace.id);
+
+      const viewer = {
+        userId,
+        userName: ctx.user?.name ?? "Unknown",
+        userImage: ctx.user?.image ?? null,
+      };
+
+      return observable<PresenceEvent>((emit) => {
+        // Tell the joining subscriber who is already present
+        const current = getBoardViewers(input.boardPublicId);
+        emit.next({
+          scope: "presence",
+          type: "presence.state",
+          boardPublicId: input.boardPublicId,
+          viewers: current,
+        });
+
+        // Register presence and get cleanup
+        const leave = joinBoard(input.boardPublicId, viewer);
+
+        // Forward subsequent presence changes to this subscriber
+        const unsubscribe = subscribeToPresenceEvents(
+          input.boardPublicId,
+          (event) => {
+            emit.next(event);
+          },
+        );
+
+        return () => {
+          unsubscribe();
+          leave();
         };
       });
     }),

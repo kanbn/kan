@@ -35,9 +35,11 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { useBoardPresence } from "~/hooks/useBoardPresence";
 import { formatToArray } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import BoardDropdown from "./components/BoardDropdown";
+import { PresenceAvatars } from "./components/PresenceAvatars";
 import Card from "./components/Card";
 import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
 import { CardContextDuplicateModal } from "./components/CardContextDuplicateModal";
@@ -98,6 +100,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       ? params.boardId[0]
       : params.boardId
     : null;
+
+  const presenceViewers = useBoardPresence(boardId ?? null);
 
   const updateBoard = api.board.update.useMutation();
 
@@ -620,6 +624,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 {t`New list`}
               </Button>
             </Tooltip>
+            <PresenceAvatars viewers={presenceViewers} />
             <BoardDropdown
               isTemplate={!!isTemplate}
               isLoading={!boardData}
