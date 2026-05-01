@@ -109,6 +109,8 @@ export const api = createTRPCNext<AppRouter>({
   ssr: false,
 });
 
+export const getWsClient = () => wsClient;
+
 /**
  * Inference helper for inputs.
  *

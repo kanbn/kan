@@ -17,6 +17,7 @@ import { EventsProvider } from "~/providers/events";
 import { useWorkspace, WorkspaceProvider } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import SideNavigation from "./SideNavigation";
+import ConnectionStatus from "./ConnectionStatus";
 
 interface DashboardProps {
   children: React.ReactNode;
@@ -125,6 +126,7 @@ export default function Dashboard({
         }
       `}</style>
       <div className="relative flex h-screen flex-col bg-light-50 dark:bg-dark-50 md:bg-light-100 md:p-3 md:dark:bg-dark-100">
+        <ConnectionStatus />
         {/* Mobile Header */}
         <div className="flex h-12 items-center justify-between border-b border-light-300 bg-light-50 px-3 dark:border-dark-300 dark:bg-dark-50 md:hidden">
           <button
