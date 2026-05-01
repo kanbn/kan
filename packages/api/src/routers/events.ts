@@ -4,8 +4,8 @@ import { z } from "zod";
 
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
-import type { BoardEvent, CardEvent } from "../events";
-import { subscribeToBoardEvents, subscribeToCardEvents } from "../events";
+import type { BoardEvent, CardEvent, NotificationEvent } from "../events";
+import { subscribeToBoardEvents, subscribeToCardEvents, subscribeToNotificationEvents } from "../events";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
 
@@ -78,6 +78,26 @@ export const eventsRouter = createTRPCRouter({
             emit.next(event);
           },
         );
+
+        return () => {
+          unsubscribe();
+        };
+      });
+    }),
+  notification: protectedProcedure
+    .subscription(async ({ ctx }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
+
+      return observable<NotificationEvent>((emit) => {
+        const unsubscribe = subscribeToNotificationEvents(userId, (event) => {
+          emit.next(event);
+        });
 
         return () => {
           unsubscribe();

@@ -1,4 +1,4 @@
-import { and, count, eq, isNull } from "drizzle-orm";
+import { and, count, desc, eq, isNull } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { NotificationType } from "@kan/db/schema";
@@ -94,5 +94,54 @@ export const getUnreadCount = async (
     );
 
   return result[0]?.count ?? 0;
+};
+
+export const list = async (
+  db: dbClient,
+  { userId, limit = 20, offset = 0 }: { userId: string; limit?: number; offset?: number },
+) => {
+  return db.query.notifications.findMany({
+    where: (n, { eq, isNull: isNullFn, and: andFn }) =>
+      andFn(eq(n.userId, userId), isNullFn(n.deletedAt)),
+    orderBy: (n) => [desc(n.createdAt)],
+    limit,
+    offset,
+    with: {
+      card: { columns: { publicId: true, title: true } },
+      workspace: { columns: { publicId: true, name: true } },
+    },
+  });
+};
+
+export const markReadByPublicId = async (
+  db: dbClient,
+  { publicId, userId }: { publicId: string; userId: string },
+) => {
+  const [result] = await db
+    .update(notifications)
+    .set({ readAt: new Date() })
+    .where(
+      and(
+        eq(notifications.publicId, publicId),
+        eq(notifications.userId, userId),
+        isNull(notifications.deletedAt),
+      ),
+    )
+    .returning();
+
+  return result;
+};
+
+export const markAllRead = async (db: dbClient, userId: string) => {
+  await db
+    .update(notifications)
+    .set({ readAt: new Date() })
+    .where(
+      and(
+        eq(notifications.userId, userId),
+        isNull(notifications.readAt),
+        isNull(notifications.deletedAt),
+      ),
+    );
 };
 

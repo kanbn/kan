@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import type { ReactNode } from "react";
 
-import type { BoardEvent, CardEvent } from "@kan/api/events";
+import type { BoardEvent, CardEvent, NotificationEvent } from "@kan/api/events";
 
 import { authClient } from "@kan/auth/client";
 import { env } from "~/env";
@@ -110,6 +110,14 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
     [clearCardFromCache, currentUserId, invalidateBoard, invalidateCard],
   );
 
+  const handleNotificationEvent = useCallback(
+    (_event: NotificationEvent) => {
+      void utils.notification.unreadCount.invalidate();
+      void utils.notification.list.invalidate();
+    },
+    [utils],
+  );
+
   api.events.board.useSubscription(
     { workspacePublicId },
     {
@@ -133,6 +141,11 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
       },
     },
   );
+
+  api.events.notification.useSubscription(undefined, {
+    enabled: websocketEnabled && !!currentUserId,
+    onData: handleNotificationEvent,
+  });
 
   return <>{children}</>;
 };

@@ -12,6 +12,8 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { sendEmail } from "@kan/email";
 import { parseMentionsFromHTML } from "@kan/shared/utils";
 
+import { publishNotificationEventToWebsocket } from "../events";
+
 /**
  * Sends mention notification emails to mentioned members
  * Only sends emails for new mentions (checks notification table to avoid duplicates)
@@ -100,12 +102,20 @@ export async function sendMentionEmails({
           }
 
           // Create notification record
-          await notificationRepo.create(db, {
+          const notification = await notificationRepo.create(db, {
             type: "mention",
             userId,
             cardId,
             commentId,
           });
+
+          if (notification) {
+            void publishNotificationEventToWebsocket(userId, {
+              scope: "notification",
+              type: "notification.created",
+              notificationPublicId: notification.publicId,
+            });
+          }
 
           // Send email
           await sendEmail(

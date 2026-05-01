@@ -1,6 +1,6 @@
 import { createLogger } from "@kan/logger";
 
-import type { BoardEvent, CardEvent } from "./types";
+import type { BoardEvent, CardEvent, NotificationEvent } from "./types";
 
 const log = createLogger("api:publisher");
 
@@ -8,13 +8,21 @@ interface WorkspaceEventPayload {
   workspacePublicId: string;
   scope: "board" | "card";
   event: BoardEvent | CardEvent;
+  /** @deprecated Pass the secret via the x-websocket-secret header instead. */
+  secret?: string;
+}
+
+interface NotificationEventPayload {
+  userId: string;
+  scope: "notification";
+  event: NotificationEvent;
   secret?: string;
 }
 
 const eventEndpoint = process.env.WEBSOCKET_INGEST_URL;
 const eventSecret = process.env.WEBSOCKET_EVENT_SECRET;
 
-const postEvent = async (payload: WorkspaceEventPayload) => {
+const postEvent = async (payload: WorkspaceEventPayload | NotificationEventPayload) => {
   if (!eventEndpoint) {
     if (process.env.NODE_ENV !== "production") {
       log.warn("WEBSOCKET_INGEST_URL is not configured; skipping event");
@@ -50,4 +58,11 @@ export const publishCardEventToWebsocket = async (
   event: CardEvent,
 ) => {
   await postEvent({ workspacePublicId, scope: "card", event });
+};
+
+export const publishNotificationEventToWebsocket = async (
+  userId: string,
+  event: NotificationEvent,
+) => {
+  await postEvent({ userId, scope: "notification", event });
 };

@@ -10,6 +10,7 @@ import { integrationRouter } from "./routers/integration";
 import { labelRouter } from "./routers/label";
 import { listRouter } from "./routers/list";
 import { memberRouter } from "./routers/member";
+import { notificationRouter } from "./routers/notification";
 import { permissionRouter } from "./routers/permission";
 import { userRouter } from "./routers/user";
 import { webhookRouter } from "./routers/webhook";
@@ -26,6 +27,7 @@ export const appRouter = createTRPCRouter({
   label: labelRouter,
   list: listRouter,
   member: memberRouter,
+  notification: notificationRouter,
   import: importRouter,
   permission: permissionRouter,
   user: userRouter,

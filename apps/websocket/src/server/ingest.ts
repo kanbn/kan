@@ -1,8 +1,8 @@
 import { timingSafeEqual } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
 
-import type { BoardEvent, CardEvent } from "@kan/api/events";
-import { publishBoardEvent, publishCardEvent } from "@kan/api/events";
+import type { BoardEvent, CardEvent, NotificationEvent } from "@kan/api/events";
+import { publishBoardEvent, publishCardEvent, publishNotificationEvent } from "@kan/api/events";
 import { createLogger } from "@kan/logger";
 
 import { websocketConfig } from "~/config";
@@ -18,6 +18,15 @@ interface WorkspaceEventPayload {
   /** @deprecated Pass the secret via the x-websocket-secret header instead. */
   secret?: string;
 }
+
+interface NotificationEventPayload {
+  userId: string;
+  scope: "notification";
+  event: NotificationEvent;
+  secret?: string;
+}
+
+type EventPayload = WorkspaceEventPayload | NotificationEventPayload;
 
 const readBody = async (req: IncomingMessage): Promise<string> => {
   const chunks: Uint8Array[] = [];
@@ -38,15 +47,21 @@ const readBody = async (req: IncomingMessage): Promise<string> => {
 };
 
 const isBoardEvent = (
-  payload: WorkspaceEventPayload,
+  payload: EventPayload,
 ): payload is WorkspaceEventPayload & { event: BoardEvent } => {
   return payload.scope === "board";
 };
 
 const isCardEvent = (
-  payload: WorkspaceEventPayload,
+  payload: EventPayload,
 ): payload is WorkspaceEventPayload & { event: CardEvent } => {
   return payload.scope === "card";
+};
+
+const isNotificationEvent = (
+  payload: EventPayload,
+): payload is NotificationEventPayload => {
+  return payload.scope === "notification";
 };
 
 const isValidSecret = (provided: string, expected: string): boolean => {
@@ -71,11 +86,11 @@ export const handleEventIngest = async (
     return;
   }
 
-  let payload: WorkspaceEventPayload;
+  let payload: EventPayload;
 
   try {
     const body = await readBody(req);
-    payload = JSON.parse(body) as WorkspaceEventPayload;
+    payload = JSON.parse(body) as EventPayload;
   } catch (error) {
     const isTooLarge =
       error instanceof Error &&
@@ -95,9 +110,19 @@ export const handleEventIngest = async (
     !payload.workspacePublicId ||
     typeof payload.workspacePublicId !== "string"
   ) {
-    res.statusCode = 400;
-    res.end();
-    return;
+    if (!isNotificationEvent(payload)) {
+      res.statusCode = 400;
+      res.end();
+      return;
+    }
+  }
+
+  if (isNotificationEvent(payload)) {
+    if (!payload.userId || typeof payload.userId !== "string") {
+      res.statusCode = 400;
+      res.end();
+      return;
+    }
   }
 
   if (websocketConfig.ingest.secret) {
@@ -126,6 +151,8 @@ export const handleEventIngest = async (
     publishBoardEvent(payload.workspacePublicId, payload.event);
   } else if (isCardEvent(payload)) {
     publishCardEvent(payload.workspacePublicId, payload.event);
+  } else if (isNotificationEvent(payload)) {
+    publishNotificationEvent(payload.userId, payload.event);
   } else {
     res.statusCode = 400;
     res.end();

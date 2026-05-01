@@ -104,3 +104,9 @@ export type WorkspaceEventScope = "board" | "card";
 export type WorkspaceEvent =
   | ({ workspacePublicId: string } & { scope: "board"; event: BoardEvent })
   | ({ workspacePublicId: string } & { scope: "card"; event: CardEvent });
+
+export type NotificationEvent = {
+  scope: "notification";
+  type: "notification.created";
+  notificationPublicId: string;
+};
