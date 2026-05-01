@@ -66,6 +66,7 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
           break;
         case "board.updated":
         case "board.deleted":
+        case "board.created":
           invalidateBoard();
           void utils.board.all.invalidate();
           break;

@@ -403,6 +403,15 @@ export const boardRouter = createTRPCRouter({
           sourceBoardId: sourceBoardInfo.id,
         });
 
+        if (result) {
+          await emitBoardEvent(input.workspacePublicId, {
+            scope: "board",
+            type: "board.created",
+            boardId: result.id,
+            boardPublicId: result.publicId,
+          }, userId);
+        }
+
         return result;
       }
 
@@ -455,6 +464,13 @@ export const boardRouter = createTRPCRouter({
 
         await labelRepo.bulkCreate(ctx.db, labelInputs);
       }
+
+      await emitBoardEvent(input.workspacePublicId, {
+        scope: "board",
+        type: "board.created",
+        boardId: result.id,
+        boardPublicId: result.publicId,
+      }, userId);
 
       return result;
     }),

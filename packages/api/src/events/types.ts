@@ -34,6 +34,12 @@ export type BoardEvent = (
     }
   | {
       scope: "board";
+      type: "board.created";
+      boardId: number;
+      boardPublicId: string;
+    }
+  | {
+      scope: "board";
       type: "board.updated" | "board.deleted";
       boardId: number;
       boardPublicId: string;
