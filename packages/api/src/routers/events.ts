@@ -2,6 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { observable } from "@trpc/server/observable";
 import { z } from "zod";
 
+import * as boardRepo from "@kan/db/repository/board.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
 import type { BoardEvent, CardEvent, NotificationEvent, PresenceEvent } from "../events";
@@ -18,7 +19,12 @@ import { assertUserInWorkspace } from "../utils/auth";
 
 export const eventsRouter = createTRPCRouter({
   board: protectedProcedure
-    .input(z.object({ workspacePublicId: z.string().min(12) }))
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+        boardPublicId: z.string().min(12).optional(),
+      }),
+    )
     .subscription(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -41,10 +47,30 @@ export const eventsRouter = createTRPCRouter({
 
       await assertUserInWorkspace(ctx.db, userId, workspace.id);
 
+      let filteredBoardId: number | undefined;
+      if (input.boardPublicId) {
+        const board = await boardRepo.getIdByPublicId(
+          ctx.db,
+          input.boardPublicId,
+        );
+        if (!board || board.workspaceId !== workspace.id)
+          throw new TRPCError({
+            message: `Board ${input.boardPublicId} not found in workspace`,
+            code: "NOT_FOUND",
+          });
+        filteredBoardId = board.id;
+      }
+
       return observable<BoardEvent>((emit) => {
         const unsubscribe = subscribeToBoardEvents(
           input.workspacePublicId,
           (event) => {
+            if (
+              filteredBoardId !== undefined &&
+              "boardId" in event &&
+              event.boardId !== filteredBoardId
+            )
+              return;
             emit.next(event);
           },
         );
@@ -55,7 +81,12 @@ export const eventsRouter = createTRPCRouter({
       });
     }),
   card: protectedProcedure
-    .input(z.object({ workspacePublicId: z.string().min(12) }))
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+        boardPublicId: z.string().min(12).optional(),
+      }),
+    )
     .subscription(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -78,10 +109,30 @@ export const eventsRouter = createTRPCRouter({
 
       await assertUserInWorkspace(ctx.db, userId, workspace.id);
 
+      let filteredBoardId: number | undefined;
+      if (input.boardPublicId) {
+        const board = await boardRepo.getIdByPublicId(
+          ctx.db,
+          input.boardPublicId,
+        );
+        if (!board || board.workspaceId !== workspace.id)
+          throw new TRPCError({
+            message: `Board ${input.boardPublicId} not found in workspace`,
+            code: "NOT_FOUND",
+          });
+        filteredBoardId = board.id;
+      }
+
       return observable<CardEvent>((emit) => {
         const unsubscribe = subscribeToCardEvents(
           input.workspacePublicId,
           (event) => {
+            if (
+              filteredBoardId !== undefined &&
+              "boardId" in event &&
+              event.boardId !== filteredBoardId
+            )
+              return;
             emit.next(event);
           },
         );

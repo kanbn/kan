@@ -104,6 +104,7 @@ export const getIdByPublicId = async (db: dbClient, boardPublicId: string) => {
       id: true,
       type: true,
       isArchived: true,
+      workspaceId: true,
     },
     where: eq(boards.publicId, boardPublicId),
   });
