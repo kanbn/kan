@@ -21,7 +21,7 @@
         "^dev"
       ],
       "cache": false,
-      "persistent": false
+      "persistent": true
     },
     "format": {
       "outputs": [
@@ -157,10 +157,15 @@
     "AXIOM_TOKEN",
     "AXIOM_DATASET",
     "WEBSOCKET_PORT",
+    "WEBSOCKET_HOST",
     "WEBSOCKET_PING_MS",
     "WEBSOCKET_PONG_TIMEOUT_MS",
     "WEBSOCKET_EVENT_URL",
-    "WEBSOCKET_EVENT_SECRET"
+    "WEBSOCKET_EVENT_PATH",
+    "WEBSOCKET_EVENT_SECRET",
+    "WEBSOCKET_INGEST_URL",
+    "NEXT_PUBLIC_WEBSOCKET_URL",
+    "WS_URL"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",

@@ -126,9 +126,36 @@ services:
       - APPLE_CLIENT_ID=${APPLE_CLIENT_ID}
       - APPLE_CLIENT_SECRET=${APPLE_CLIENT_SECRET}
       - APPLE_APP_BUNDLE_IDENTIFIER=${APPLE_APP_BUNDLE_IDENTIFIER}
+
+      # WebSocket integration
+      - NEXT_PUBLIC_WEBSOCKET_URL=${NEXT_PUBLIC_WEBSOCKET_URL:-ws://localhost:3010}
+      - WEBSOCKET_INGEST_URL=http://websocket:3010/internal/events
+      - WEBSOCKET_EVENT_SECRET=${WEBSOCKET_EVENT_SECRET}
     depends_on:
       migrate:
         condition: service_completed_successfully
+    restart: unless-stopped
+
+  websocket:
+    build:
+      context: .
+      dockerfile: apps/websocket/Dockerfile
+    container_name: kan-websocket
+    ports:
+      - "${WEBSOCKET_PORT:-3010}:3010"
+    networks:
+      - kan-network
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${POSTGRES_URL}
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+      - WEBSOCKET_PORT=3010
+      - WEBSOCKET_HOST=0.0.0.0
+      - WEBSOCKET_EVENT_SECRET=${WEBSOCKET_EVENT_SECRET}
+      - WEBSOCKET_EVENT_PATH=/internal/events
+    depends_on:
+      postgres:
+        condition: service_healthy
     restart: unless-stopped
 
   postgres:
