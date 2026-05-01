@@ -1,0 +1,29 @@
+{
+  "name": "@kan/mcp",
+  "version": "0.1.0",
+  "description": "MCP server for Kan — control workspaces, boards, lists, and cards via AI",
+  "type": "module",
+  "bin": {
+    "kan-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc --noEmit false --declaration false --emitDeclarationOnly false --outDir dist",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.11.0",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@kan/tsconfig": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
