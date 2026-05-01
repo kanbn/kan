@@ -14,7 +14,7 @@ import {
   publishBoardEventToWebsocket,
   publishCardEventToWebsocket,
 } from "../events";
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure, rateLimitedCardProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
 import { sendMentionEmails } from "../utils/notifications";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
@@ -68,7 +68,7 @@ type CardUpdateChangeSet = Partial<{
 }>;
 
 export const cardRouter = createTRPCRouter({
-  create: protectedProcedure
+  create: rateLimitedCardProcedure
     .meta({
       openapi: {
         summary: "Create a card",
@@ -254,7 +254,7 @@ export const cardRouter = createTRPCRouter({
 
       return newCard;
     }),
-  addComment: protectedProcedure
+  addComment: rateLimitedCardProcedure
     .meta({
       openapi: {
         summary: "Add a comment to a card",
@@ -983,7 +983,7 @@ export const cardRouter = createTRPCRouter({
         nextCursor: result.nextCursor?.toISOString() ?? null,
       };
     }),
-  update: protectedProcedure
+  update: rateLimitedCardProcedure
     .meta({
       openapi: {
         summary: "Update a card",

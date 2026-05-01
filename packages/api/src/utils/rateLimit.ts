@@ -100,3 +100,31 @@ export function withRateLimit(
   };
 }
 
+/**
+ * Creates a per-user rate limiter for use in tRPC middlewares.
+ * The returned function throws `{ rateLimited: true }` when the limit is exceeded
+ * and resolves normally otherwise (including on unexpected errors, to avoid false positives).
+ */
+export function createPerUserRateLimiter(
+  options: { points?: number; duration?: number } = {},
+) {
+  const limiter = createRateLimiter(options);
+
+  return async (userId: string, keyPrefix: string): Promise<void> => {
+    const key = `trpc:${keyPrefix}:${userId}`;
+    try {
+      await limiter.consume(key);
+    } catch (error) {
+      if (
+        error &&
+        typeof error === "object" &&
+        ("msBeforeNext" in error || "remainingPoints" in error)
+      ) {
+        throw { rateLimited: true };
+      }
+      // Unexpected errors: don't block the request
+      log.warn({ err: error, key }, "Rate limiter error, allowing request through");
+    }
+  };
+}
+

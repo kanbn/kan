@@ -13,6 +13,7 @@ import type { dbClient } from "@kan/db/client";
 import { initAuth } from "@kan/auth/server";
 import { createDrizzleClient } from "@kan/db/client";
 import { createLogger } from "@kan/logger";
+import { createPerUserRateLimiter } from "./utils/rateLimit";
 
 const log = createLogger("api");
 
@@ -293,6 +294,29 @@ const enforceUserIsAdmin = t.middleware(async ({ ctx, next }) => {
 export const protectedProcedure = t.procedure
   .use(loggingMiddleware)
   .use(enforceUserIsAuthed);
+
+// 60 mutations per 60 seconds per user, applied to high-frequency card mutations
+const _cardMutationRateLimiter = createPerUserRateLimiter({ points: 60, duration: 60 });
+
+const cardRateLimitMiddleware = t.middleware(async ({ ctx, path, next }) => {
+  const userId = ctx.user?.id ?? "anonymous";
+  try {
+    await _cardMutationRateLimiter(userId, path);
+  } catch (err) {
+    if (err && typeof err === "object" && "rateLimited" in err) {
+      throw new TRPCError({
+        code: "TOO_MANY_REQUESTS",
+        message: "Too many requests, please try again later.",
+      });
+    }
+  }
+  return next();
+});
+
+export const rateLimitedCardProcedure = t.procedure
+  .use(loggingMiddleware)
+  .use(enforceUserIsAuthed)
+  .use(cardRateLimitMiddleware);
 
 export const adminProtectedProcedure = t.procedure
   .use(loggingMiddleware)
