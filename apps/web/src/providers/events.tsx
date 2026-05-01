@@ -48,16 +48,22 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
         case "list.created":
         case "list.updated":
         case "list.deleted":
+        case "label.changed":
           invalidateBoard();
           if ("cardPublicId" in event && event.cardPublicId) {
             invalidateCard(event.cardPublicId);
           }
           break;
+        case "board.updated":
+        case "board.deleted":
+          invalidateBoard();
+          void utils.board.all.invalidate();
+          break;
         default:
           break;
       }
     },
-    [invalidateBoard, invalidateCard],
+    [invalidateBoard, invalidateCard, utils],
   );
 
   const handleCardEvent = useCallback(
@@ -71,6 +77,7 @@ export const EventsProvider: React.FC<EventsProviderProps> = ({ children }) => {
         case "member.added":
         case "member.removed":
         case "checklist.changed":
+        case "attachment.changed":
         case "updated":
         case "deleted":
           if (event.type === "deleted") {
