@@ -8,9 +8,9 @@ import { webhookEvents } from "@kan/db/schema";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
 import {
-  webhookUrlSchema,
-  sendWebhookToUrl,
   createCardWebhookPayload,
+  sendWebhookToUrl,
+  webhookUrlSchema,
 } from "../utils/webhook";
 
 const webhookEventSchema = z.enum(webhookEvents);
@@ -332,21 +332,26 @@ export const webhookRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      const testPayload = createCardWebhookPayload("card.created", {
-        id: "test-card-id",
-        title: "Test Card",
-        description: "This is a test webhook payload",
-        dueDate: null,
-        listId: "test-list-id",
-      }, {
-        boardId: "test-board-id",
-        boardName: "Test Board",
-        listName: "Test List",
-        user: {
-          id: userId,
-          name: ctx.user?.name ?? "Test User",
+      const testPayload = createCardWebhookPayload(
+        "card.created",
+        {
+          id: "test-card-id",
+          title: "Test Card",
+          description: "This is a test webhook payload",
+          type: "coding",
+          dueDate: null,
+          listId: "test-list-id",
         },
-      });
+        {
+          boardId: "test-board-id",
+          boardName: "Test Board",
+          listName: "Test List",
+          user: {
+            id: userId,
+            name: ctx.user?.name ?? "Test User",
+          },
+        },
+      );
 
       const result = await sendWebhookToUrl(
         webhook.url,

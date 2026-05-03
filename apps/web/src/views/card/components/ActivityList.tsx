@@ -11,6 +11,7 @@ import {
   HiOutlinePaperClip,
   HiOutlinePencil,
   HiOutlinePlus,
+  HiOutlineRectangleStack,
   HiOutlineTag,
   HiOutlineTrash,
   HiOutlineUserMinus,
@@ -24,6 +25,7 @@ import type {
 import { authClient } from "@kan/auth/client";
 
 import Avatar from "~/components/Avatar";
+import { getCardTypeLabel } from "~/components/CardTypeBadge";
 import { useLocalisation } from "~/hooks/useLocalisation";
 import { api } from "~/utils/api";
 import { getAvatarUrl } from "~/utils/helpers";
@@ -66,6 +68,7 @@ const getActivityText = ({
   label,
   fromTitle,
   toDueDate,
+  toCardType,
   dateLocale,
   mergedLabels,
   attachmentName,
@@ -81,6 +84,7 @@ const getActivityText = ({
   fromTitle?: string | null;
   fromDueDate?: Date | null;
   toDueDate?: Date | null;
+  toCardType?: GetCardActivitiesOutput["activities"][number]["toCardType"];
   dateLocale: DateFnsLocale;
   mergedLabels?: string[];
   attachmentName?: string | null;
@@ -124,6 +128,7 @@ const getActivityText = ({
     "card.created": t`created the card`,
     "card.updated.title": t`updated the title`,
     "card.updated.description": t`updated the description`,
+    "card.updated.type": t`updated the type`,
     "card.updated.list": t`moved the card to another list`,
     "card.updated.label.added": t`added a label to the card`,
     "card.updated.label.removed": t`removed a label from the card`,
@@ -151,6 +156,15 @@ const getActivityText = ({
     return (
       <Trans>
         updated the title to <TextHighlight>{truncate(toTitle)}</TextHighlight>
+      </Trans>
+    );
+  }
+
+  if (type === "card.updated.type" && toCardType) {
+    return (
+      <Trans>
+        changed the type to{" "}
+        <TextHighlight>{getCardTypeLabel(toCardType)}</TextHighlight>
       </Trans>
     );
   }
@@ -332,6 +346,7 @@ const ACTIVITY_ICON_MAP: Partial<Record<ActivityType, React.ReactNode | null>> =
     "card.created": <HiOutlinePlus />,
     "card.updated.title": <HiOutlinePencil />,
     "card.updated.description": <HiOutlinePencil />,
+    "card.updated.type": <HiOutlineRectangleStack />,
     "card.updated.label.added": <HiOutlineTag />,
     "card.updated.label.removed": <HiOutlineTag />,
     "card.updated.member.added": <HiOutlineUserPlus />,
@@ -371,7 +386,7 @@ const ACTIVITIES_PAGE_SIZE = 20;
 const ActivityList = ({
   cardPublicId,
   isLoading: cardIsLoading,
-  isAdmin,
+  isAdmin: _isAdmin,
   isViewOnly,
 }: {
   cardPublicId: string;
@@ -504,11 +519,12 @@ const ActivityList = ({
           fromTitle: activity.fromTitle ?? null,
           fromDueDate: activity.fromDueDate ?? null,
           toDueDate: activity.toDueDate ?? null,
+          toCardType: activity.toCardType ?? null,
           dateLocale: dateLocale,
           mergedLabels: (activity as ActivityWithMergedLabels).mergedLabels,
           attachmentName:
-            (activity as ActivityWithMergedLabels).attachment?.originalFilename ??
-            null,
+            (activity as ActivityWithMergedLabels).attachment
+              ?.originalFilename ?? null,
         });
 
         if (activity.type === "card.updated.comment.added")
@@ -541,7 +557,9 @@ const ActivityList = ({
                 size="sm"
                 name={activity.user?.name ?? ""}
                 email={activity.user?.email ?? ""}
-                imageUrl={getAvatarUrl(activity.user?.image ?? null) || undefined}
+                imageUrl={
+                  getAvatarUrl(activity.user?.image ?? null) || undefined
+                }
                 icon={getActivityIcon(
                   activity.type,
                   activity.fromList?.index,

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { HiLink, HiXMark } from "react-icons/hi2";
 
 import Badge from "~/components/Badge";
+import CardTypeBadge from "~/components/CardTypeBadge";
 import Editor from "~/components/Editor";
 import LabelIcon from "~/components/LabelIcon";
 import { useModal } from "~/providers/modal";
@@ -140,17 +141,23 @@ export function CardModal({
                 </div>
               ) : (
                 <>
-                  {data?.cardNumber != null && data.list.board.workspace.cardPrefix && (
-                    <span className="mb-1 block text-xs font-medium text-light-700 dark:text-dark-800">
-                      {data.list.board.workspace.cardPrefix}-{data.cardNumber}
-                    </span>
-                  )}
+                  {data?.cardNumber != null &&
+                    data.list.board.workspace.cardPrefix && (
+                      <span className="mb-1 block text-xs font-medium text-light-700 dark:text-dark-800">
+                        {data.list.board.workspace.cardPrefix}-{data.cardNumber}
+                      </span>
+                    )}
                   <h1 className="pr-8 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
                     {data?.title}
                   </h1>
                 </>
               )}
             </div>
+            {data?.type && (
+              <div className="mt-2">
+                <CardTypeBadge type={data.type} />
+              </div>
+            )}
             {labels.length > 0 && (
               <div className="mt-2">
                 {labels.map((label) => (

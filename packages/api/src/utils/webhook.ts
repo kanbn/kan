@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import type { dbClient } from "@kan/db/client";
 import type { WebhookEvent } from "@kan/db/schema";
+import type { CardType } from "@kan/shared/constants";
 import * as webhookRepo from "@kan/db/repository/webhook.repo";
 import { createLogger } from "@kan/logger";
 
@@ -18,6 +19,7 @@ export interface WebhookPayload {
       id: string;
       title: string;
       description?: string | null;
+      type?: CardType;
       dueDate?: string | null; // ISO string after JSON serialization
       listId: string;
       boardId: string;
@@ -97,10 +99,11 @@ export const webhookUrlSchema = z
         const hostname = new URL(url).hostname.toLowerCase();
         const ipv4Match = /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/.exec(hostname);
         if (ipv4Match) {
-          const [, a, b] = ipv4Match.map(Number);
+          const a = Number(ipv4Match[1] ?? -1);
+          const b = Number(ipv4Match[2] ?? -1);
           if (
             a === 10 ||
-            (a === 172 && b! >= 16 && b! <= 31) ||
+            (a === 172 && b >= 16 && b <= 31) ||
             (a === 192 && b === 168)
           ) {
             return false;
@@ -202,9 +205,24 @@ export async function sendWebhooksForWorkspace(
       sendWebhookToUrl(webhook.url, webhook.secret ?? undefined, payload).then(
         (result) => {
           if (!result.success) {
-            log.error({ url: webhook.url, event: payload.event, error: result.error, statusCode: result.statusCode }, "Webhook delivery failed");
+            log.error(
+              {
+                url: webhook.url,
+                event: payload.event,
+                error: result.error,
+                statusCode: result.statusCode,
+              },
+              "Webhook delivery failed",
+            );
           } else {
-            log.info({ url: webhook.url, event: payload.event, statusCode: result.statusCode }, "Webhook delivered");
+            log.info(
+              {
+                url: webhook.url,
+                event: payload.event,
+                statusCode: result.statusCode,
+              },
+              "Webhook delivered",
+            );
           }
         },
       ),
@@ -213,7 +231,10 @@ export async function sendWebhooksForWorkspace(
     // Wait for all to complete but don't block on failures
     await Promise.allSettled(promises);
   } catch (error) {
-    log.error({ err: error, workspaceId }, "Failed to send webhooks for workspace");
+    log.error(
+      { err: error, workspaceId },
+      "Failed to send webhooks for workspace",
+    );
   }
 }
 
@@ -223,6 +244,7 @@ export function createCardWebhookPayload(
     id: string;
     title: string;
     description?: string | null;
+    type?: CardType;
     dueDate?: Date | null;
     listId: string;
   },
@@ -245,6 +267,7 @@ export function createCardWebhookPayload(
         id: card.id,
         title: card.title,
         description: card.description,
+        type: card.type,
         dueDate: card.dueDate?.toISOString() ?? null,
         listId: card.listId,
         boardId: context.boardId,

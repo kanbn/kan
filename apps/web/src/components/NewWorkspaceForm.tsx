@@ -98,6 +98,7 @@ export function NewWorkspaceForm() {
           plan: values.plan,
           role: "admin",
           weekStartDay: 1,
+          cardPrefix: values.cardPrefix,
         });
 
         closeModal();

@@ -11,6 +11,7 @@ import {
 } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
+import type { CardType } from "@kan/shared/constants";
 import {
   cardActivities,
   cardAttachments,
@@ -24,6 +25,7 @@ import {
   workspaceMembers,
   workspaces,
 } from "@kan/db/schema";
+import { defaultCardType } from "@kan/shared/constants";
 import { generateUID } from "@kan/shared/utils";
 
 export const getCount = async (db: dbClient) => {
@@ -40,6 +42,7 @@ export const create = async (
   cardInput: {
     title: string;
     description: string;
+    type?: CardType;
     createdBy: string;
     listId: number;
     workspaceId: number;
@@ -101,13 +104,20 @@ export const create = async (
         publicId: generateUID(),
         title: cardInput.title,
         description: cardInput.description,
+        type: cardInput.type ?? defaultCardType,
         createdBy: cardInput.createdBy,
         listId: cardInput.listId,
         index: index,
         cardNumber,
         dueDate: cardInput.dueDate ?? null,
       })
-      .returning({ id: cards.id, listId: cards.listId, publicId: cards.publicId, cardNumber: cards.cardNumber });
+      .returning({
+        id: cards.id,
+        listId: cards.listId,
+        publicId: cards.publicId,
+        type: cards.type,
+        cardNumber: cards.cardNumber,
+      });
 
     if (!result[0]) throw new Error("Unable to create card");
 
@@ -198,6 +208,7 @@ export const update = async (
   cardInput: {
     title?: string;
     description?: string;
+    type?: CardType;
     dueDate?: Date | null;
   },
   args: {
@@ -209,6 +220,7 @@ export const update = async (
     .set({
       title: cardInput.title,
       description: cardInput.description,
+      type: cardInput.type,
       dueDate: cardInput.dueDate !== undefined ? cardInput.dueDate : undefined,
       updatedAt: new Date(),
     })
@@ -218,6 +230,7 @@ export const update = async (
       publicId: cards.publicId,
       title: cards.title,
       description: cards.description,
+      type: cards.type,
       dueDate: cards.dueDate,
     });
 
@@ -252,6 +265,7 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
       publicId: true,
       title: true,
       description: true,
+      type: true,
       listId: true,
       dueDate: true,
     },
@@ -285,6 +299,7 @@ export const bulkCreate = async (
     publicId: string;
     title: string;
     description: string;
+    type?: CardType;
     createdBy: string;
     listId: number;
     workspaceId: number;
@@ -321,8 +336,7 @@ export const bulkCreate = async (
         .where(eq(workspaces.id, workspaceId))
         .returning({ cardCounter: workspaces.cardCounter });
 
-      if (!counterResult)
-        throw new Error(`Workspace ${workspaceId} not found`);
+      if (!counterResult) throw new Error(`Workspace ${workspaceId} not found`);
 
       const last = counterResult.cardCounter;
       const start = last - count + 1;
@@ -335,6 +349,7 @@ export const bulkCreate = async (
       publicId: string;
       title: string;
       description: string;
+      type: CardType;
       createdBy: string;
       listId: number;
       index: number;
@@ -363,6 +378,7 @@ export const bulkCreate = async (
           publicId: it.publicId,
           title: it.title,
           description: it.description,
+          type: it.type ?? defaultCardType,
           createdBy: it.createdBy,
           listId: it.listId,
           index: nextIndex++,
@@ -483,6 +499,7 @@ export const getWithListAndMembersByPublicId = async (
       publicId: true,
       title: true,
       description: true,
+      type: true,
       dueDate: true,
       createdBy: true,
       cardNumber: true,
@@ -622,6 +639,8 @@ export const getWithListAndMembersByPublicId = async (
           toTitle: true,
           fromDescription: true,
           toDescription: true,
+          fromCardType: true,
+          toCardType: true,
           fromDueDate: true,
           toDueDate: true,
         },
@@ -873,6 +892,7 @@ export const reorder = async (
         publicId: true,
         title: true,
         description: true,
+        type: true,
         dueDate: true,
       },
       where: eq(cards.id, card.id),

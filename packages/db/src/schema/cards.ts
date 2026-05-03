@@ -13,6 +13,8 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
+import { cardTypes, defaultCardType } from "@kan/shared/constants";
+
 import { boards } from "./boards";
 import { checklists } from "./checklists";
 import { imports } from "./imports";
@@ -25,6 +27,7 @@ export const activityTypes = [
   "card.created",
   "card.updated.title",
   "card.updated.description",
+  "card.updated.type",
   "card.updated.index",
   "card.updated.list",
   "card.updated.label.added",
@@ -54,6 +57,7 @@ export const activityTypes = [
 export type ActivityType = (typeof activityTypes)[number];
 
 export const activityTypeEnum = pgEnum("card_activity_type", activityTypes);
+export const cardTypeEnum = pgEnum("card_type", cardTypes);
 
 export const cards = pgTable(
   "card",
@@ -62,6 +66,7 @@ export const cards = pgTable(
     publicId: varchar("publicId", { length: 12 }).notNull().unique(),
     title: text("title").notNull(),
     description: text("description"),
+    type: cardTypeEnum("type").default(defaultCardType).notNull(),
     index: integer("index").notNull(),
     cardNumber: integer("cardNumber"),
     createdBy: uuid("createdBy").references(() => users.id, {
@@ -81,9 +86,7 @@ export const cards = pgTable(
     ),
     dueDate: timestamp("dueDate"),
   },
-  (table) => [
-    index("card_list_number_idx").on(table.listId, table.cardNumber),
-  ],
+  (table) => [index("card_list_number_idx").on(table.listId, table.cardNumber)],
 ).enableRLS();
 
 export const cardsRelations = relations(cards, ({ one, many }) => ({
@@ -141,6 +144,8 @@ export const cardActivities = pgTable("card_activity", {
   toTitle: text("toTitle"),
   fromDescription: text("fromDescription"),
   toDescription: text("toDescription"),
+  fromCardType: cardTypeEnum("fromCardType"),
+  toCardType: cardTypeEnum("toCardType"),
   createdBy: uuid("createdBy").references(() => users.id, {
     onDelete: "set null",
   }),

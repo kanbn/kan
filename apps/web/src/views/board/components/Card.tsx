@@ -7,8 +7,11 @@ import {
 } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
+import type { CardType } from "@kan/shared/constants";
+
 import Avatar from "~/components/Avatar";
 import Badge from "~/components/Badge";
+import CardTypeBadge from "~/components/CardTypeBadge";
 import CircularProgress from "~/components/CircularProgress";
 import LabelIcon from "~/components/LabelIcon";
 import { useLocalisation } from "~/hooks/useLocalisation";
@@ -17,6 +20,7 @@ import { getAvatarUrl } from "~/utils/helpers";
 const Card = ({
   title,
   ticketNumber,
+  type,
   labels,
   members,
   checklists,
@@ -27,6 +31,7 @@ const Card = ({
 }: {
   title: string;
   ticketNumber?: string | null;
+  type: CardType;
   labels: { name: string; colourCode: string | null }[];
   members: {
     publicId: string;
@@ -62,21 +67,27 @@ const Card = ({
   const progress =
     totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
 
-  const hasDescription =
-    description && description.replace(/<[^>]*>/g, "").trim().length > 0;
-  const hasAttachments = attachments && attachments.length > 0;
+  const hasDescription = Boolean(
+    description && description.replace(/<[^>]*>/g, "").trim().length > 0,
+  );
+  const hasAttachments = Boolean(attachments?.length);
   const hasDueDate = !!dueDate;
 
   return (
     <div className="flex flex-col overflow-hidden rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300">
-      {ticketNumber && (
-        <span className="mb-1 text-xs text-light-700 dark:text-dark-800">
-          {ticketNumber}
-        </span>
-      )}
+      <div className="mb-1 flex items-center justify-between gap-2">
+        {ticketNumber ? (
+          <span className="min-w-0 truncate text-xs text-light-700 dark:text-dark-800">
+            {ticketNumber}
+          </span>
+        ) : (
+          <span />
+        )}
+        <CardTypeBadge type={type} size="sm" />
+      </div>
       <span className="break-words">{title}</span>
-      {labels.length ||
-      members.length ||
+      {labels.length > 0 ||
+      members.length > 0 ||
       checklists.length > 0 ||
       hasDescription ||
       comments.length > 0 ||
@@ -98,7 +109,7 @@ const Card = ({
                   <HiBars3BottomLeft className="h-4 w-4" />
                 </div>
               )}
-              {hasDueDate && dueDate && (
+              {dueDate ? (
                 <div
                   className={twMerge(
                     "flex items-center gap-1",
@@ -114,7 +125,7 @@ const Card = ({
                     })}
                   </span>
                 </div>
-              )}
+              ) : null}
               {comments.length > 0 && (
                 <div className="flex items-center gap-1 text-light-700 dark:text-dark-800">
                   <HiChatBubbleLeft className="h-4 w-4" />

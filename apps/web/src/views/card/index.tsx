@@ -9,6 +9,7 @@ import { IoChevronForwardSharp } from "react-icons/io5";
 import { authClient } from "@kan/auth/client";
 
 import Avatar from "~/components/Avatar";
+import CardTypeSelector from "~/components/CardTypeSelector";
 import Editor from "~/components/Editor";
 import FeedbackModal from "~/components/FeedbackModal";
 import { LabelForm } from "~/components/LabelForm";
@@ -121,6 +122,15 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   return (
     <div className="h-full w-[360px] border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
       <div className="mb-4 flex w-full flex-row pt-[18px]">
+        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Type`}</p>
+        <CardTypeSelector
+          cardPublicId={cardId ?? ""}
+          type={card?.type}
+          isLoading={!card}
+          disabled={!canEdit}
+        />
+      </div>
+      <div className="mb-4 flex w-full flex-row">
         <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
         <ListSelector
           cardPublicId={cardId ?? ""}
@@ -185,7 +195,11 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     ? router.query.cardId[0]
     : router.query.cardId;
 
-  const { data: card, isLoading, error } = api.card.byId.useQuery(
+  const {
+    data: card,
+    isLoading,
+    error,
+  } = api.card.byId.useQuery(
     { cardPublicId: cardId ?? "" },
     { enabled: !!cardId && cardId.length >= 12 },
   );
@@ -340,14 +354,15 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                 >
                   {board?.name}
                 </Link>
-                {card.cardNumber != null && card.list.board.workspace.cardPrefix && (
-                  <>
-                    <IoChevronForwardSharp className="h-[10px] w-[10px] text-light-900 dark:text-dark-900" />
-                    <span className="whitespace-nowrap text-sm font-bold leading-[1.5rem] text-light-700 dark:text-dark-800">
-                      {card.list.board.workspace.cardPrefix}-{card.cardNumber}
-                    </span>
-                  </>
-                )}
+                {card.cardNumber != null &&
+                  card.list.board.workspace.cardPrefix && (
+                    <>
+                      <IoChevronForwardSharp className="h-[10px] w-[10px] text-light-900 dark:text-dark-900" />
+                      <span className="whitespace-nowrap text-sm font-bold leading-[1.5rem] text-light-700 dark:text-dark-800">
+                        {card.list.board.workspace.cardPrefix}-{card.cardNumber}
+                      </span>
+                    </>
+                  )}
               </div>
               <div className="flex items-center gap-2">
                 <Dropdown
@@ -356,7 +371,8 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                   boardPublicId={boardId}
                   cardCreatedBy={card?.createdBy}
                   ticketNumber={
-                    card.cardNumber != null && card.list.board.workspace.cardPrefix
+                    card.cardNumber != null &&
+                    card.list.board.workspace.cardPrefix
                       ? `${card.list.board.workspace.cardPrefix}-${card.cardNumber}`
                       : null
                   }

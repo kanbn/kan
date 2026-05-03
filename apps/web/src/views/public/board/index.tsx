@@ -6,6 +6,9 @@ import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 import { HiLink, HiOutlineLockClosed } from "react-icons/hi2";
 
+import type { CardType } from "@kan/shared/constants";
+import { cardTypes } from "@kan/shared/constants";
+
 import Button from "~/components/Button";
 import Modal from "~/components/modal";
 import { PageHead } from "~/components/PageHead";
@@ -52,6 +55,9 @@ export default function PublicBoardView() {
     | "next-month"
     | "no-due-date"
   )[];
+  const typeFilters = formatToArray(router.query.types).filter(
+    (type): type is CardType => cardTypes.includes(type as CardType),
+  );
 
   const { data, isLoading } = api.board.bySlug.useQuery(
     {
@@ -60,6 +66,7 @@ export default function PublicBoardView() {
       members: formatToArray(router.query.members),
       labels: formatToArray(router.query.labels),
       lists: formatToArray(router.query.lists),
+      types: typeFilters,
       ...(dueDateFilters.length > 0 && {
         dueDateFilters: dueDateFilters,
       }),
@@ -220,6 +227,13 @@ export default function PublicBoardView() {
                           >
                             <Card
                               title={card.title}
+                              ticketNumber={
+                                card.cardNumber != null &&
+                                data.workspace.cardPrefix
+                                  ? `${data.workspace.cardPrefix}-${card.cardNumber}`
+                                  : null
+                              }
+                              type={card.type}
                               labels={card.labels}
                               checklists={card.checklists ?? []}
                               members={[]}

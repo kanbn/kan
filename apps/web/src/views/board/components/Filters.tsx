@@ -3,14 +3,18 @@ import { t } from "@lingui/core/macro";
 import {
   HiMiniXMark,
   HiOutlineClock,
+  HiOutlineRectangleStack,
   HiOutlineSquare3Stack3D,
   HiOutlineTag,
   HiOutlineUserCircle,
 } from "react-icons/hi2";
 import { IoFilterOutline } from "react-icons/io5";
 
+import { cardTypes } from "@kan/shared/constants";
+
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
+import { CardTypeIcon, getCardTypeLabel } from "~/components/CardTypeBadge";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
 import LabelIcon from "~/components/LabelIcon";
 import {
@@ -67,6 +71,7 @@ const Filters = ({
           labels: [],
           lists: [],
           dueDate: [],
+          types: [],
         },
       });
     } catch (error) {
@@ -104,6 +109,14 @@ const Filters = ({
     key: list.publicId,
     value: list.name,
     selected: !!router.query.lists?.includes(list.publicId),
+  }));
+
+  const selectedTypes = formatToArray(router.query.types);
+  const formattedTypes = cardTypes.map((cardType) => ({
+    key: cardType,
+    value: getCardTypeLabel(cardType),
+    selected: selectedTypes.includes(cardType),
+    leftIcon: <CardTypeIcon type={cardType} />,
   }));
 
   const dueDateItems = [
@@ -167,6 +180,12 @@ const Filters = ({
         ]
       : []),
     {
+      key: "types",
+      label: t`Types`,
+      icon: <HiOutlineRectangleStack size={16} />,
+      items: formattedTypes,
+    },
+    {
       key: "dueDate",
       label: t`Due date`,
       icon: <HiOutlineClock size={16} />,
@@ -202,6 +221,7 @@ const Filters = ({
     ...formatToArray(router.query.members),
     ...formatToArray(router.query.labels),
     ...formatToArray(router.query.lists),
+    ...formatToArray(router.query.types),
     ...formatToArray(router.query.dueDate),
   ].length;
 

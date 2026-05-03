@@ -15,6 +15,8 @@ import {
 } from "react-icons/hi2";
 
 import type { UpdateBoardInput } from "@kan/api/types";
+import type { CardType } from "@kan/shared/constants";
+import { cardTypes } from "@kan/shared/constants";
 
 import type { CardContextMenuAction } from "./components/CardContextMenu";
 import Button from "~/components/Button";
@@ -123,6 +125,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     | "next-month"
     | "no-due-date"
   )[];
+  const typeFilters = formatToArray(router.query.types).filter(
+    (type): type is CardType => cardTypes.includes(type as CardType),
+  );
 
   const boardType: "regular" | "template" = isTemplate ? "template" : "regular";
 
@@ -131,6 +136,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     members: formatToArray(router.query.members),
     labels: formatToArray(router.query.labels),
     lists: formatToArray(router.query.lists),
+    types: typeFilters,
     ...(semanticFilters.length > 0 && {
       dueDateFilters: semanticFilters,
     }),
@@ -762,6 +768,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                                 ? `${boardData.workspace.cardPrefix}-${card.cardNumber}`
                                                 : null
                                             }
+                                            type={card.type}
                                             labels={card.labels}
                                             members={card.members}
                                             checklists={card.checklists ?? []}

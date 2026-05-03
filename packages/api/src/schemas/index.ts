@@ -17,6 +17,7 @@ export {
 
 export {
   labelSchema,
+  cardTypeSchema,
   checklistItemResponseSchema,
   checklistResponseSchema,
   userSchema,

@@ -6,15 +6,15 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import * as workspaceSlugRepo from "@kan/db/repository/workspaceSlug.repo";
 import { generateAvatarUrl, generateUID } from "@kan/shared/utils";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import {
-  workspaceListItemSchema,
-  workspaceDetailSchema,
-  workspaceWithBoardsSchema,
   workspaceCreateResponseSchema,
-  workspaceUpdateResponseSchema,
   workspaceDeleteResponseSchema,
+  workspaceDetailSchema,
+  workspaceListItemSchema,
+  workspaceUpdateResponseSchema,
+  workspaceWithBoardsSchema,
 } from "../schemas";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
 
 export const workspaceRouter = createTRPCRouter({
@@ -264,7 +264,13 @@ export const workspaceRouter = createTRPCRouter({
         ...(input.description && { description: input.description }),
       });
 
-      if (!result.publicId)
+      if (
+        !result.publicId ||
+        !result.name ||
+        !result.slug ||
+        !result.plan ||
+        !result.cardPrefix
+      )
         throw new TRPCError({
           message: `Unable to create workspace`,
           code: "INTERNAL_SERVER_ERROR",
@@ -272,10 +278,11 @@ export const workspaceRouter = createTRPCRouter({
 
       return {
         publicId: result.publicId,
-        name: result.name!,
-        slug: result.slug!,
+        name: result.name,
+        slug: result.slug,
         description: result.description ?? null,
-        plan: result.plan!,
+        plan: result.plan,
+        cardPrefix: result.cardPrefix,
       };
     }),
   update: protectedProcedure
@@ -411,10 +418,7 @@ export const workspaceRouter = createTRPCRouter({
         });
       await assertPermission(ctx.db, userId, workspace.id, "workspace:delete");
 
-      await workspaceRepo.hardDelete(
-        ctx.db,
-        input.workspacePublicId,
-      );
+      await workspaceRepo.hardDelete(ctx.db, input.workspacePublicId);
 
       return { success: true };
     }),

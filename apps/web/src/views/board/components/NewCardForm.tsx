@@ -10,11 +10,14 @@ import {
 } from "react-icons/hi2";
 
 import type { NewCardInput } from "@kan/api/types";
+import type { CardType } from "@kan/shared/constants";
+import { defaultCardType } from "@kan/shared/constants";
 import { generateUID } from "@kan/shared/utils";
 
 import type { WorkspaceMember } from "~/components/Editor";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
+import CardTypeSelector from "~/components/CardTypeSelector";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
 import DateSelector from "~/components/DateSelector";
 import Editor from "~/components/Editor";
@@ -38,6 +41,16 @@ interface QueryParams {
   members: string[];
   labels: string[];
   lists: string[];
+  types: CardType[];
+  dueDateFilters?: (
+    | "overdue"
+    | "today"
+    | "tomorrow"
+    | "next-week"
+    | "next-month"
+    | "no-due-date"
+  )[];
+  type: "regular" | "template";
 }
 
 interface NewCardFormProps {
@@ -70,6 +83,7 @@ export function NewCardForm({
       memberPublicIds: [],
       isCreateAnotherEnabled: false,
       position: "start",
+      type: defaultCardType,
       dueDate: null,
     },
     resetOnClose: true,
@@ -86,6 +100,7 @@ export function NewCardForm({
   const position = watch("position");
   const title = watch("title");
   const description = watch("description");
+  const cardType = watch("type") ?? defaultCardType;
   const dueDate = watch("dueDate");
   const [isDateSelectorOpen, setIsDateSelectorOpen] = useState(false);
 
@@ -143,6 +158,7 @@ export function NewCardForm({
             const newCard = {
               publicId: `PLACEHOLDER_${generateUID()}`,
               title: args.title,
+              type: args.type ?? defaultCardType,
               listId: 2,
               description: "",
               dueDate: args.dueDate ?? null,
@@ -162,9 +178,6 @@ export function NewCardForm({
                     ...member,
                     deletedAt: null,
                   })) ?? [],
-              comments: [],
-              checklists: [],
-              attachments: [],
               _filteredLabels: labelPublicIds.map((id) => ({ publicId: id })),
               _filteredMembers: memberPublicIds.map((id) => ({ publicId: id })),
               index: position === "start" ? 0 : list.cards.length,
@@ -209,6 +222,7 @@ export function NewCardForm({
           memberPublicIds: [],
           isCreateAnotherEnabled,
           position,
+          type: defaultCardType,
           dueDate: null,
         };
         reset(newFormState);
@@ -267,6 +281,7 @@ export function NewCardForm({
       labelPublicIds: data.labelPublicIds,
       memberPublicIds: data.memberPublicIds,
       position: data.position,
+      type: data.type ?? defaultCardType,
       dueDate: data.dueDate ?? null,
     });
   };
@@ -363,6 +378,12 @@ export function NewCardForm({
           </div>
         </div>
         <div className="mt-2 flex space-x-1">
+          <div className="w-fit min-w-[104px]">
+            <CardTypeSelector
+              type={cardType}
+              onChange={(type) => setValue("type", type)}
+            />
+          </div>
           <div className="w-fit">
             <CheckboxDropdown
               items={formattedLists}

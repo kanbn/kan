@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import {
+  cardTypeSchema,
   checklistResponseSchema,
   labelSchema,
   workspaceMemberSchema,
@@ -16,6 +17,7 @@ export const cardUpdateResponseSchema = z.object({
   publicId: z.string(),
   title: z.string(),
   description: z.string().nullable(),
+  type: cardTypeSchema,
   dueDate: z.date().nullable(),
 });
 
@@ -46,8 +48,10 @@ export const cardDetailSchema = z.object({
   publicId: z.string(),
   title: z.string(),
   description: z.string().nullable(),
+  type: cardTypeSchema,
   dueDate: z.date().nullable(),
   createdBy: z.string().nullable(),
+  cardNumber: z.number().nullable(),
   labels: z.array(labelSchema),
   attachments: z.array(
     z.object({
@@ -75,6 +79,7 @@ export const cardDetailSchema = z.object({
       ),
       workspace: z.object({
         publicId: z.string(),
+        cardPrefix: z.string(),
         members: z.array(workspaceMemberSchema),
       }),
     }),
@@ -91,6 +96,8 @@ export const cardDetailSchema = z.object({
       toTitle: z.string().nullable(),
       fromDescription: z.string().nullable(),
       toDescription: z.string().nullable(),
+      fromCardType: cardTypeSchema.nullable(),
+      toCardType: cardTypeSchema.nullable(),
       fromDueDate: z.date().nullable(),
       toDueDate: z.date().nullable(),
       fromList: z
@@ -154,6 +161,8 @@ export const activityItemSchema = z.object({
   toTitle: z.string().nullable(),
   fromDescription: z.string().nullable(),
   toDescription: z.string().nullable(),
+  fromCardType: cardTypeSchema.nullable(),
+  toCardType: cardTypeSchema.nullable(),
   fromDueDate: z.date().nullable(),
   toDueDate: z.date().nullable(),
   fromList: z

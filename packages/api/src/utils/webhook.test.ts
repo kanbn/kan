@@ -1,4 +1,14 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+import * as webhookRepo from "@kan/db/repository/webhook.repo";
+
+import type { WebhookPayload } from "./webhook";
+import {
+  createCardWebhookPayload,
+  sendWebhooksForWorkspace,
+  sendWebhookToUrl,
+  webhookUrlSchema,
+} from "./webhook";
 
 const { mockLogger } = vi.hoisted(() => ({
   mockLogger: {
@@ -15,16 +25,8 @@ vi.mock("@kan/logger", () => ({
   createLogger: vi.fn(() => mockLogger),
 }));
 
-import * as webhookRepo from "@kan/db/repository/webhook.repo";
-import {
-  sendWebhookToUrl,
-  sendWebhooksForWorkspace,
-  createCardWebhookPayload,
-  webhookUrlSchema,
-  type WebhookPayload,
-} from "./webhook";
-
-const mockGetActiveByWorkspaceId = webhookRepo.getActiveByWorkspaceId as ReturnType<typeof vi.fn>;
+const mockGetActiveByWorkspaceId =
+  webhookRepo.getActiveByWorkspaceId as ReturnType<typeof vi.fn>;
 
 describe("webhook utilities", () => {
   beforeEach(() => {
@@ -57,6 +59,7 @@ describe("webhook utilities", () => {
         id: "card-123",
         title: "Test Card",
         description: undefined,
+        type: undefined,
         dueDate: null,
         listId: "list-456",
         boardId: "board-789",
@@ -71,6 +74,7 @@ describe("webhook utilities", () => {
           id: "card-123",
           title: "Test Card",
           description: "A description",
+          type: "bug",
           dueDate,
           listId: "list-456",
         },
@@ -80,6 +84,7 @@ describe("webhook utilities", () => {
       );
 
       expect(payload.data.card.description).toBe("A description");
+      expect(payload.data.card.type).toBe("bug");
       expect(payload.data.card.dueDate).toBe("2024-02-01T10:00:00.000Z");
     });
 
@@ -221,48 +226,79 @@ describe("webhook utilities", () => {
 
     describe("SSRF protection", () => {
       it("blocks HTTP URLs", async () => {
-        const result = await sendWebhookToUrl("http://example.com/webhook", undefined, mockPayload);
+        const result = await sendWebhookToUrl(
+          "http://example.com/webhook",
+          undefined,
+          mockPayload,
+        );
         expect(result.success).toBe(false);
         expect(result.error).toContain("HTTPS");
         expect(global.fetch).not.toHaveBeenCalled();
       });
 
       it("blocks localhost", async () => {
-        const result = await sendWebhookToUrl("https://localhost/webhook", undefined, mockPayload);
+        const result = await sendWebhookToUrl(
+          "https://localhost/webhook",
+          undefined,
+          mockPayload,
+        );
         expect(result.success).toBe(false);
         expect(result.error).toContain("Localhost");
         expect(global.fetch).not.toHaveBeenCalled();
       });
 
       it("blocks 127.0.0.1", async () => {
-        const result = await sendWebhookToUrl("https://127.0.0.1/webhook", undefined, mockPayload);
+        const result = await sendWebhookToUrl(
+          "https://127.0.0.1/webhook",
+          undefined,
+          mockPayload,
+        );
         expect(result.success).toBe(false);
         expect(global.fetch).not.toHaveBeenCalled();
       });
 
       it("blocks cloud metadata endpoint", async () => {
-        const result = await sendWebhookToUrl("https://169.254.169.254/latest/meta-data/", undefined, mockPayload);
+        const result = await sendWebhookToUrl(
+          "https://169.254.169.254/latest/meta-data/",
+          undefined,
+          mockPayload,
+        );
         expect(result.success).toBe(false);
         expect(result.error).toContain("metadata");
         expect(global.fetch).not.toHaveBeenCalled();
       });
 
       it("blocks private 10.x.x.x IPs", async () => {
-        const result = await sendWebhookToUrl("https://10.0.0.1/webhook", undefined, mockPayload);
+        const result = await sendWebhookToUrl(
+          "https://10.0.0.1/webhook",
+          undefined,
+          mockPayload,
+        );
         expect(result.success).toBe(false);
         expect(result.error).toContain("Private");
         expect(global.fetch).not.toHaveBeenCalled();
       });
 
       it("blocks private 192.168.x.x IPs", async () => {
-        const result = await sendWebhookToUrl("https://192.168.1.1/webhook", undefined, mockPayload);
+        const result = await sendWebhookToUrl(
+          "https://192.168.1.1/webhook",
+          undefined,
+          mockPayload,
+        );
         expect(result.success).toBe(false);
         expect(global.fetch).not.toHaveBeenCalled();
       });
 
       it("allows valid HTTPS URLs", async () => {
-        (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({ ok: true, status: 200 });
-        const result = await sendWebhookToUrl("https://example.com/webhook", undefined, mockPayload);
+        (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+          ok: true,
+          status: 200,
+        });
+        const result = await sendWebhookToUrl(
+          "https://example.com/webhook",
+          undefined,
+          mockPayload,
+        );
         expect(result.success).toBe(true);
         expect(global.fetch).toHaveBeenCalled();
       });
@@ -274,7 +310,11 @@ describe("webhook utilities", () => {
         status: 200,
       });
 
-      await sendWebhookToUrl("https://example.com/webhook", undefined, mockPayload);
+      await sendWebhookToUrl(
+        "https://example.com/webhook",
+        undefined,
+        mockPayload,
+      );
 
       expect(global.fetch).toHaveBeenCalledWith(
         "https://example.com/webhook",
@@ -296,7 +336,11 @@ describe("webhook utilities", () => {
         status: 200,
       });
 
-      await sendWebhookToUrl("https://example.com/webhook", "my-secret", mockPayload);
+      await sendWebhookToUrl(
+        "https://example.com/webhook",
+        "my-secret",
+        mockPayload,
+      );
 
       expect(global.fetch).toHaveBeenCalledWith(
         "https://example.com/webhook",
@@ -443,10 +487,7 @@ describe("webhook utilities", () => {
       await sendWebhooksForWorkspace(mockDb, 1, mockPayload);
 
       // getActiveByWorkspaceId fetches all active webhooks; event filtering is client-side
-      expect(mockGetActiveByWorkspaceId).toHaveBeenCalledWith(
-        mockDb,
-        1,
-      );
+      expect(mockGetActiveByWorkspaceId).toHaveBeenCalledWith(mockDb, 1);
       expect(global.fetch).toHaveBeenCalledTimes(2);
       expect(global.fetch).toHaveBeenCalledWith(
         "https://example.com/webhook1",
@@ -464,10 +505,7 @@ describe("webhook utilities", () => {
 
       await sendWebhooksForWorkspace(mockDb, 1, mockPayload);
 
-      expect(mockGetActiveByWorkspaceId).toHaveBeenCalledWith(
-        mockDb,
-        1,
-      );
+      expect(mockGetActiveByWorkspaceId).toHaveBeenCalledWith(mockDb, 1);
       expect(global.fetch).not.toHaveBeenCalled();
     });
 
@@ -539,7 +577,9 @@ describe("webhook utilities", () => {
 
   describe("webhookUrlSchema", () => {
     it("accepts valid HTTPS URLs", () => {
-      expect(webhookUrlSchema.safeParse("https://example.com/webhook").success).toBe(true);
+      expect(
+        webhookUrlSchema.safeParse("https://example.com/webhook").success,
+      ).toBe(true);
     });
 
     it("rejects HTTP URLs", () => {
@@ -553,12 +593,18 @@ describe("webhook utilities", () => {
     });
 
     it("rejects private IPs", () => {
-      expect(webhookUrlSchema.safeParse("https://10.0.0.1/webhook").success).toBe(false);
-      expect(webhookUrlSchema.safeParse("https://192.168.1.1/webhook").success).toBe(false);
+      expect(
+        webhookUrlSchema.safeParse("https://10.0.0.1/webhook").success,
+      ).toBe(false);
+      expect(
+        webhookUrlSchema.safeParse("https://192.168.1.1/webhook").success,
+      ).toBe(false);
     });
 
     it("rejects cloud metadata endpoints", () => {
-      expect(webhookUrlSchema.safeParse("https://169.254.169.254/latest").success).toBe(false);
+      expect(
+        webhookUrlSchema.safeParse("https://169.254.169.254/latest").success,
+      ).toBe(false);
     });
   });
 });

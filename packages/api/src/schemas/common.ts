@@ -1,5 +1,9 @@
 import { z } from "zod";
 
+import { cardTypes } from "@kan/shared/constants";
+
+export const cardTypeSchema = z.enum(cardTypes);
+
 // Shared label schema used across board and card responses
 export const labelSchema = z.object({
   publicId: z.string(),

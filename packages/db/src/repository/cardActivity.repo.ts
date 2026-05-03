@@ -2,6 +2,7 @@ import { and, asc, count, eq, gt, inArray, isNull, or } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { ActivityType } from "@kan/db/schema";
+import type { CardType } from "@kan/shared/constants";
 import { cardActivities, comments } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
@@ -26,6 +27,8 @@ export const create = async (
     toTitle?: string;
     fromDescription?: string;
     toDescription?: string;
+    fromCardType?: CardType;
+    toCardType?: CardType;
     createdBy: string;
     commentId?: number;
     fromComment?: string;
@@ -52,6 +55,8 @@ export const create = async (
       toTitle: activityInput.toTitle,
       fromDescription: activityInput.fromDescription,
       toDescription: activityInput.toDescription,
+      fromCardType: activityInput.fromCardType,
+      toCardType: activityInput.toCardType,
       createdBy: activityInput.createdBy,
       commentId: activityInput.commentId,
       fromComment: activityInput.fromComment,
@@ -81,6 +86,8 @@ export const bulkCreate = async (
     toTitle?: string;
     fromDescription?: string;
     toDescription?: string;
+    fromCardType?: CardType;
+    toCardType?: CardType;
     createdBy: string;
     fromDueDate?: Date;
     toDueDate?: Date;
@@ -130,6 +137,8 @@ export const getPaginatedActivities = async (
       toTitle: true,
       fromDescription: true,
       toDescription: true,
+      fromCardType: true,
+      toCardType: true,
       fromDueDate: true,
       toDueDate: true,
     },
