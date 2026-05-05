@@ -1751,11 +1751,11 @@
     "translation": "Leden kopiëren"
   },
   "7mrkyO": {
-    "translation": "Ticket-ID kopiëren",
     "message": "Copy ticket ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 87]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 87]],
+    "translation": "Ticket-ID kopiëren"
   },
   "9PaIxv": {
     "message": "Core features",
@@ -3283,11 +3283,11 @@
     "translation": "Ik bevestig dat alle werkruimtegegevens permanent worden verwijderd en wil doorgaan."
   },
   "VOwhhz": {
-    "translation": "ID gekopieerd",
     "message": "ID copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 64]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 64]],
+    "translation": "ID gekopieerd"
   },
   "iwr7AP": {
     "message": "Ideas",
@@ -5772,11 +5772,11 @@
     "translation": "Deze workspace-gebruikersnaam is al in gebruik"
   },
   "pEb95p": {
-    "translation": "Ticket-ID gekopieerd naar klembord",
     "message": "Ticket ID copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 66]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 66]],
+    "translation": "Ticket-ID gekopieerd naar klembord"
   },
   "MHrjPM": {
     "message": "Title",
@@ -5892,11 +5892,11 @@
     "translation": "Kan overschrijvingen niet wissen"
   },
   "5MPY04": {
-    "translation": "Kan ID niet kopiëren",
     "message": "Unable to copy ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 71]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 71]],
+    "translation": "Kan ID niet kopiëren"
   },
   "W1ewR0": {
     "message": "Unable to copy link",

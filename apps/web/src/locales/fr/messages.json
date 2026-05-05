@@ -1751,11 +1751,11 @@
     "translation": "Copier les membres"
   },
   "7mrkyO": {
-    "translation": "Copier l'ID du ticket",
     "message": "Copy ticket ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 87]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 87]],
+    "translation": "Copier l'ID du ticket"
   },
   "9PaIxv": {
     "message": "Core features",
@@ -3283,11 +3283,11 @@
     "translation": "Je reconnais que toutes les données de l'espace de travail seront définitivement supprimées et je souhaite continuer."
   },
   "VOwhhz": {
-    "translation": "ID copié",
     "message": "ID copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 64]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 64]],
+    "translation": "ID copié"
   },
   "iwr7AP": {
     "message": "Ideas",
@@ -5772,11 +5772,11 @@
     "translation": "Ce nom d'utilisateur d'espace de travail est déjà pris"
   },
   "pEb95p": {
-    "translation": "ID du ticket copié dans le presse-papiers",
     "message": "Ticket ID copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 66]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 66]],
+    "translation": "ID du ticket copié dans le presse-papiers"
   },
   "MHrjPM": {
     "message": "Title",
@@ -5892,11 +5892,11 @@
     "translation": "Impossible d'effacer les remplacements"
   },
   "5MPY04": {
-    "translation": "Impossible de copier l'ID",
     "message": "Unable to copy ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 71]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 71]],
+    "translation": "Impossible de copier l'ID"
   },
   "W1ewR0": {
     "message": "Unable to copy link",

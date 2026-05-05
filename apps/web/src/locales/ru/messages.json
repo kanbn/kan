@@ -1751,11 +1751,11 @@
     "translation": "Копировать участников"
   },
   "7mrkyO": {
-    "translation": "Скопировать ID задачи",
     "message": "Copy ticket ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 87]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 87]],
+    "translation": "Скопировать ID задачи"
   },
   "9PaIxv": {
     "message": "Core features",
@@ -3283,11 +3283,11 @@
     "translation": "Я подтверждаю, что все данные рабочего пространства будут безвозвратно удалены, и хочу продолжить."
   },
   "VOwhhz": {
-    "translation": "ID скопирован",
     "message": "ID copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 64]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 64]],
+    "translation": "ID скопирован"
   },
   "iwr7AP": {
     "message": "Ideas",
@@ -5772,11 +5772,11 @@
     "translation": "Это имя пользователя рабочей области уже занято"
   },
   "pEb95p": {
-    "translation": "ID задачи скопирован в буфер обмена",
     "message": "Ticket ID copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 66]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 66]],
+    "translation": "ID задачи скопирован в буфер обмена"
   },
   "MHrjPM": {
     "message": "Title",
@@ -5892,11 +5892,11 @@
     "translation": "Не удалось сбросить переопределения"
   },
   "5MPY04": {
-    "translation": "Не удалось скопировать ID",
     "message": "Unable to copy ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 71]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 71]],
+    "translation": "Не удалось скопировать ID"
   },
   "W1ewR0": {
     "message": "Unable to copy link",

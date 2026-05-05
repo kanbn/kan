@@ -1751,11 +1751,11 @@
     "translation": "Copiar miembros"
   },
   "7mrkyO": {
-    "translation": "Copiar ID del ticket",
     "message": "Copy ticket ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 87]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 87]],
+    "translation": "Copiar ID del ticket"
   },
   "9PaIxv": {
     "message": "Core features",
@@ -3283,11 +3283,11 @@
     "translation": "Reconozco que todos los datos del espacio de trabajo se eliminarán permanentemente y quiero continuar."
   },
   "VOwhhz": {
-    "translation": "ID copiado",
     "message": "ID copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 64]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 64]],
+    "translation": "ID copiado"
   },
   "iwr7AP": {
     "message": "Ideas",
@@ -5772,11 +5772,11 @@
     "translation": "Este nombre de usuario de espacio de trabajo ya está en uso"
   },
   "pEb95p": {
-    "translation": "ID del ticket copiado al portapapeles",
     "message": "Ticket ID copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 66]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 66]],
+    "translation": "ID del ticket copiado al portapapeles"
   },
   "MHrjPM": {
     "message": "Title",
@@ -5892,11 +5892,11 @@
     "translation": "No se pudieron borrar las anulaciones"
   },
   "5MPY04": {
-    "translation": "No se pudo copiar el ID",
     "message": "Unable to copy ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 71]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 71]],
+    "translation": "No se pudo copiar el ID"
   },
   "W1ewR0": {
     "message": "Unable to copy link",

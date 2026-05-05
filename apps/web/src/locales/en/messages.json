@@ -2923,7 +2923,6 @@
     "translation": "Copy members"
   },
   "7mrkyO": {
-    "translation": "Copy ticket ID",
     "message": "Copy ticket ID",
     "placeholders": {},
     "comments": [],
@@ -2932,7 +2931,8 @@
         "src/views/card/components/Dropdown.tsx",
         87
       ]
-    ]
+    ],
+    "translation": "Copy ticket ID"
   },
   "9PaIxv": {
     "message": "Core features",
@@ -5517,7 +5517,6 @@
     "translation": "I acknowledge that all of the workspace data will be permanently deleted and want to proceed."
   },
   "VOwhhz": {
-    "translation": "ID copied",
     "message": "ID copied",
     "placeholders": {},
     "comments": [],
@@ -5526,7 +5525,8 @@
         "src/views/card/components/Dropdown.tsx",
         64
       ]
-    ]
+    ],
+    "translation": "ID copied"
   },
   "iwr7AP": {
     "message": "Ideas",
@@ -9803,7 +9803,6 @@
     "translation": "This workspace username has already been taken"
   },
   "pEb95p": {
-    "translation": "Ticket ID copied to clipboard",
     "message": "Ticket ID copied to clipboard",
     "placeholders": {},
     "comments": [],
@@ -9812,7 +9811,8 @@
         "src/views/card/components/Dropdown.tsx",
         66
       ]
-    ]
+    ],
+    "translation": "Ticket ID copied to clipboard"
   },
   "MHrjPM": {
     "message": "Title",
@@ -10003,7 +10003,6 @@
     "translation": "Unable to clear overrides"
   },
   "5MPY04": {
-    "translation": "Unable to copy ID",
     "message": "Unable to copy ID",
     "placeholders": {},
     "comments": [],
@@ -10012,7 +10011,8 @@
         "src/views/card/components/Dropdown.tsx",
         71
       ]
-    ]
+    ],
+    "translation": "Unable to copy ID"
   },
   "W1ewR0": {
     "message": "Unable to copy link",

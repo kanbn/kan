@@ -1751,11 +1751,11 @@
     "translation": "Mitglieder kopieren"
   },
   "7mrkyO": {
-    "translation": "Ticket-ID kopieren",
     "message": "Copy ticket ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 87]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 87]],
+    "translation": "Ticket-ID kopieren"
   },
   "9PaIxv": {
     "message": "Core features",
@@ -3283,11 +3283,11 @@
     "translation": "Ich bestätige, dass alle Workspace-Daten dauerhaft gelöscht werden und möchte fortfahren."
   },
   "VOwhhz": {
-    "translation": "ID kopiert",
     "message": "ID copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 64]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 64]],
+    "translation": "ID kopiert"
   },
   "iwr7AP": {
     "message": "Ideas",
@@ -5772,11 +5772,11 @@
     "translation": "Dieser Workspace-Benutzername ist bereits vergeben"
   },
   "pEb95p": {
-    "translation": "Ticket-ID in die Zwischenablage kopiert",
     "message": "Ticket ID copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 66]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 66]],
+    "translation": "Ticket-ID in die Zwischenablage kopiert"
   },
   "MHrjPM": {
     "message": "Title",
@@ -5892,11 +5892,11 @@
     "translation": "Überschreibungen konnten nicht gelöscht werden"
   },
   "5MPY04": {
-    "translation": "ID konnte nicht kopiert werden",
     "message": "Unable to copy ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 71]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 71]],
+    "translation": "ID konnte nicht kopiert werden"
   },
   "W1ewR0": {
     "message": "Unable to copy link",

@@ -1751,11 +1751,11 @@
     "translation": "Kopiuj członków"
   },
   "7mrkyO": {
-    "translation": "Skopiuj ID zgłoszenia",
     "message": "Copy ticket ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 87]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 87]],
+    "translation": "Skopiuj ID zgłoszenia"
   },
   "9PaIxv": {
     "message": "Core features",
@@ -3283,11 +3283,11 @@
     "translation": "Potwierdzam, że wszystkie dane przestrzeni roboczej zostaną trwale usunięte i chcę kontynuować."
   },
   "VOwhhz": {
-    "translation": "ID skopiowane",
     "message": "ID copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 64]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 64]],
+    "translation": "ID skopiowane"
   },
   "iwr7AP": {
     "message": "Ideas",
@@ -5772,11 +5772,11 @@
     "translation": "Ta nazwa użytkownika workspace jest już zajęta"
   },
   "pEb95p": {
-    "translation": "ID zgłoszenia skopiowane do schowka",
     "message": "Ticket ID copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 66]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 66]],
+    "translation": "ID zgłoszenia skopiowane do schowka"
   },
   "MHrjPM": {
     "message": "Title",
@@ -5892,11 +5892,11 @@
     "translation": "Nie można wyczyścić nadpisań"
   },
   "5MPY04": {
-    "translation": "Nie udało się skopiować ID",
     "message": "Unable to copy ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 71]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 71]],
+    "translation": "Nie udało się skopiować ID"
   },
   "W1ewR0": {
     "message": "Unable to copy link",
