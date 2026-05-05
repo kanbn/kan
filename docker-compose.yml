@@ -1,6 +1,6 @@
 services:
   migrate:
-    image: ghcr.io/kanbn/kan-migrate:latest
+    image: ghcr.io/lordofthecorgis/kan-migrate:latest
     container_name: ${CONTAINER_NAME:-kan-migrate}
     networks:
       - kan-network
@@ -16,7 +16,7 @@ services:
     restart: "no"
 
   web:
-    image: ghcr.io/kanbn/kan:latest
+    image: ghcr.io/lordofthecorgis/kan:latest
     container_name: ${CONTAINER_NAME:-kan-web}
     ports:
       - "${WEB_PORT:-3000}:3000"
