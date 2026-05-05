@@ -16,6 +16,8 @@ import type { Subscription } from "@kan/shared/utils";
 import { hasActiveSubscription } from "@kan/shared/utils";
 
 import type { KeyboardShortcut } from "~/providers/keyboard-shortcuts";
+import allBoardsIconDark from "~/assets/all-boards-dark.json";
+import allBoardsIconLight from "~/assets/all-boards-light.json";
 import boardsIconDark from "~/assets/boards-dark.json";
 import boardsIconLight from "~/assets/boards-light.json";
 import membersIconDark from "~/assets/members-dark.json";
@@ -92,7 +94,8 @@ export default function SideNavigation({
   const navigation: {
     name: string;
     href: string;
-    icon: object;
+    icon?: object;
+    reactIcon?: React.ReactNode;
     keyboardShortcut: KeyboardShortcut;
   }[] = [
     {
@@ -105,6 +108,18 @@ export default function SideNavigation({
         action: () => router.push("/boards"),
         group: "NAVIGATION",
         description: t`Go to boards`,
+      },
+    },
+    {
+      name: t`All Boards`,
+      href: "/all-boards",
+      icon: isDarkMode ? allBoardsIconDark : allBoardsIconLight,
+      keyboardShortcut: {
+        type: "SEQUENCE",
+        strokes: [{ key: "G" }, { key: "A" }],
+        action: () => router.push("/all-boards"),
+        group: "NAVIGATION",
+        description: t`Go to all boards`,
       },
     },
     {
@@ -197,6 +212,7 @@ export default function SideNavigation({
                   current={pathname.includes(item.href)}
                   name={item.name}
                   json={item.icon}
+                  reactIcon={item.reactIcon}
                   isCollapsed={isCollapsed}
                   onCloseSideNav={onCloseSideNav}
                   keyboardShortcut={item.keyboardShortcut}

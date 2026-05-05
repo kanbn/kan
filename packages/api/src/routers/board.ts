@@ -694,4 +694,53 @@ export const boardRouter = createTRPCRouter({
         isReserved: !isBoardSlugAvailable,
       };
     }),
+
+  allCardsAggregated: protectedProcedure
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+        dueDateFilters: z
+          .array(
+            z.enum([
+              "overdue",
+              "today",
+              "tomorrow",
+              "next-week",
+              "next-month",
+              "no-due-date",
+            ]),
+          )
+          .optional(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace)
+        throw new TRPCError({
+          message: `Workspace with public ID ${input.workspacePublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertPermission(ctx.db, userId, workspace.id, "board:view");
+
+      const dueDateFilter = input.dueDateFilters
+        ? convertDueDateFiltersToRanges(input.dueDateFilters)
+        : [];
+
+      return boardRepo.getAllCardsAggregated(ctx.db, workspace.id, {
+        dueDateFilter,
+      });
+    }),
 });
