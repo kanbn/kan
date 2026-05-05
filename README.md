@@ -229,7 +229,7 @@ We welcome contributions! Please read our [contribution guidelines](CONTRIBUTING
 
 ## Sponsors ❤️
 
-<img height="100" alt="image" src="https://github.com/user-attachments/assets/e331c71f-ac86-46a6-bceb-ce276de094b0" />
+[<img height="100" alt="image" src="https://github.com/user-attachments/assets/e331c71f-ac86-46a6-bceb-ce276de094b0" />](https://www.testmuai.com)
 
 Proudly sponsored by [TestMu AI](https://www.testmuai.com) - an AI-native testing cloud platform built for modern engineering teams. Covering everything from autonomous test creation and fast execution to testing AI agents like chatbots and voice assistants. If you're serious about testing, go check them out.
 
