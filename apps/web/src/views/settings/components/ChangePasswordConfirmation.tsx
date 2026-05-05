@@ -66,11 +66,20 @@ export function ChangePasswordFormConfirmation({ hasPassword }: Props) {
     mode: "onChange",
   });
 
+  const setPasswordMutation = api.user.setPassword.useMutation();
+
   const changePasswordMutation = useMutation({
     mutationFn: async (data: FormValues) => {
+      if (!hasPassword) {
+        await setPasswordMutation.mutateAsync({
+          newPassword: data.newPassword,
+        });
+        return;
+      }
+
       const response = await authClient.changePassword({
         newPassword: data.newPassword,
-        currentPassword: data.currentPassword,
+        currentPassword: data.currentPassword ?? "",
         revokeOtherSessions: true,
       });
 

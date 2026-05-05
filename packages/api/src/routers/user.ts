@@ -118,4 +118,42 @@ export const userRouter = createTRPCRouter({
         image: imageUrl,
       };
     }),
+  setPassword: protectedProcedure
+    .input(
+      z.object({
+        newPassword: z
+          .string()
+          .min(8, "Password must be at least 8 characters"),
+      }),
+    )
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const existing = await userRepo.getById(ctx.db, userId);
+
+      if (!existing) {
+        throw new TRPCError({
+          message: `User not found`,
+          code: "NOT_FOUND",
+        });
+      }
+
+      if (existing.hasPassword) {
+        throw new TRPCError({
+          message: `Password already set; use change password instead`,
+          code: "BAD_REQUEST",
+        });
+      }
+
+      await ctx.auth.api.setPassword({ newPassword: input.newPassword });
+
+      return { success: true };
+    }),
 });

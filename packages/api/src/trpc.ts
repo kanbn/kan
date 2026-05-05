@@ -63,6 +63,11 @@ const createAuthWithHeaders = (
           headers,
           query: { referenceId: input.workspacePublicId },
         }),
+      setPassword: (input: { newPassword: string }) =>
+        auth.api.setPassword({
+          headers,
+          body: { newPassword: input.newPassword },
+        }),
     },
   };
 };
