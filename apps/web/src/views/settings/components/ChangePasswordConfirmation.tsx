@@ -2,7 +2,6 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { useMutation } from "@tanstack/react-query";
-import { env } from "next-runtime-env";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -14,27 +13,43 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
-const FormSchema = z
-  .object({
-    currentPassword: z.string().min(1, t`Current password is required`),
+const buildSchema = (hasPassword: boolean) => {
+  const base = z.object({
+    currentPassword: hasPassword
+      ? z.string().min(1, t`Current password is required`)
+      : z.string().optional(),
     newPassword: z
       .string()
       .min(8, t`Password must be at least 8 characters`)
       .min(1, t`New password is required`),
     confirmPassword: z.string().min(1, t`Please confirm your new password`),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: t`Passwords do not match`,
-    path: ["confirmPassword"],
-  })
-  .refine((data) => data.currentPassword !== data.newPassword, {
-    message: t`New password must be different from current password`,
-    path: ["newPassword"],
   });
 
-type FormValues = z.infer<typeof FormSchema>;
+  return base
+    .refine((data) => data.newPassword === data.confirmPassword, {
+      message: t`Passwords do not match`,
+      path: ["confirmPassword"],
+    })
+    .refine(
+      (data) => !hasPassword || data.currentPassword !== data.newPassword,
+      {
+        message: t`New password must be different from current password`,
+        path: ["newPassword"],
+      },
+    );
+};
 
-export function ChangePasswordFormConfirmation() {
+type FormValues = {
+  currentPassword?: string;
+  newPassword: string;
+  confirmPassword: string;
+};
+
+interface Props {
+  hasPassword: boolean;
+}
+
+export function ChangePasswordFormConfirmation({ hasPassword }: Props) {
   const { closeModal } = useModal();
   const { showPopup } = usePopup();
   const router = useRouter();
@@ -47,15 +62,24 @@ export function ChangePasswordFormConfirmation() {
     reset,
     setError,
   } = useForm<FormValues>({
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(buildSchema(hasPassword)),
     mode: "onChange",
   });
 
+  const setPasswordMutation = api.user.setPassword.useMutation();
+
   const changePasswordMutation = useMutation({
     mutationFn: async (data: FormValues) => {
+      if (!hasPassword) {
+        await setPasswordMutation.mutateAsync({
+          newPassword: data.newPassword,
+        });
+        return;
+      }
+
       const response = await authClient.changePassword({
         newPassword: data.newPassword,
-        currentPassword: data.currentPassword,
+        currentPassword: data.currentPassword ?? "",
         revokeOtherSessions: true,
       });
 
@@ -66,10 +90,18 @@ export function ChangePasswordFormConfirmation() {
     onSuccess: async () => {
       closeModal();
       showPopup({
-        header: t`Password Changed`,
-        message: t`Your password has been changed.`,
+        header: hasPassword ? t`Password Changed` : t`Password Set`,
+        message: hasPassword
+          ? t`Your password has been changed.`
+          : t`Your password has been set.`,
         icon: "success",
       });
+
+      // Clear the session prompt flag so future magic link logins
+      // don't re-show the set-password modal (password is now set)
+      if (!hasPassword && typeof window !== "undefined") {
+        sessionStorage.removeItem("set_password_prompted");
+      }
 
       utils.invalidate();
       reset();
@@ -86,7 +118,7 @@ export function ChangePasswordFormConfirmation() {
       } else {
         closeModal();
         showPopup({
-          header: t`Error Changing Password`,
+          header: hasPassword ? t`Error Changing Password` : t`Error Setting Password`,
           message: t`An unexpected error occurred. Please try again later.`,
           icon: "error",
         });
@@ -106,27 +138,33 @@ export function ChangePasswordFormConfirmation() {
   return (
     <div className="p-5">
       <div className="flex w-full flex-col justify-between pb-4">
-        <h2 className="text-md pb-4 font-medium dark:text-white">{t`Change Password`}</h2>
+        <h2 className="text-md pb-4 font-medium dark:text-white">
+          {hasPassword ? t`Change Password` : t`Set Password`}
+        </h2>
         <p className="mb-4 text-sm text-light-900">
-          {t`Enter your current password and choose a new secure password.`}
+          {hasPassword
+            ? t`Enter your current password and choose a new secure password.`
+            : t`You signed in without a password. Set a password to enable password-based login.`}
         </p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-2">
-          <div>
-            <Input
-              id="currentPassword"
-              type="password"
-              {...register("currentPassword")}
-              placeholder={t`Enter your current password`}
-            />
-            {errors.currentPassword && (
-              <p className="mt-2 text-xs text-red-400">
-                {errors.currentPassword.message}
-              </p>
-            )}
-          </div>
+          {hasPassword && (
+            <div>
+              <Input
+                id="currentPassword"
+                type="password"
+                {...register("currentPassword")}
+                placeholder={t`Enter your current password`}
+              />
+              {errors.currentPassword && (
+                <p className="mt-2 text-xs text-red-400">
+                  {errors.currentPassword.message}
+                </p>
+              )}
+            </div>
+          )}
 
           <div>
             <Input
@@ -175,7 +213,7 @@ export function ChangePasswordFormConfirmation() {
             fullWidth
             size="lg"
           >
-            {t`Change Password`}
+            {hasPassword ? t`Change Password` : t`Set Password`}
           </Button>
         </div>
       </form>
