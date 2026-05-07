@@ -19,7 +19,7 @@ services:
     image: ghcr.io/kanbn/kan:latest
     container_name: ${CONTAINER_NAME:-kan-web}
     ports:
-      - "${WEB_PORT:-3000}:3000"
+      - "127.0.0.1:${WEB_PORT:-3050}:3000"
     networks:
       - kan-network
     build:
@@ -138,8 +138,8 @@ services:
       - POSTGRES_DB=kan_db
       - POSTGRES_USER=kan
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    ports:
-      - 5432:5432
+    # ports:
+    #  - 5432:5432
     volumes:
       - kan_postgres_data:/var/lib/postgresql/data
     healthcheck:

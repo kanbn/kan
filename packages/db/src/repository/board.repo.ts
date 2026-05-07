@@ -63,6 +63,7 @@ export const getAllByWorkspaceId = async (
           publicId: true,
           name: true,
           index: true,
+          wipLimit: true,
         },
         orderBy: [asc(lists.index)],
       },
@@ -246,6 +247,7 @@ export const getByPublicId = async (
           name: true,
           boardId: true,
           index: true,
+          wipLimit: true,
         },
         with: {
           cards: {
@@ -443,6 +445,7 @@ export const getBySlug = async (
           name: true,
           boardId: true,
           index: true,
+          wipLimit: true,
         },
         with: {
           cards: {
@@ -753,6 +756,7 @@ export const createFromSnapshot = async (
       lists: {
         name: string;
         index: number;
+        wipLimit: number | null;
         cards: {
           title: string;
           description: string | null;
@@ -845,6 +849,7 @@ export const createFromSnapshot = async (
             createdBy: args.createdBy,
             boardId: newBoard.id,
             index: list.index,
+            wipLimit: list.wipLimit,
           })),
         )
         .returning({ id: lists.id, index: lists.index });

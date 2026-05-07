@@ -232,6 +232,13 @@
       "when": 1776809379931,
       "tag": "20260421220939_AddCardNumber",
       "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "7",
+      "when": 1778136281981,
+      "tag": "20260507064441_AddListWipLimit",
+      "breakpoints": true
     }
   ]
 }
