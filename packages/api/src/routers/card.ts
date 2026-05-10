@@ -187,6 +187,7 @@ export const cardRouter = createTRPCRouter({
           "card.created",
           {
             id: String(newCard.id),
+            cardPublicId: String(newCard.publicId),
             title: input.title,
             description: input.description,
             dueDate: input.dueDate ?? null,
@@ -1070,6 +1071,7 @@ export const cardRouter = createTRPCRouter({
           movedToNewList ? "card.moved" : "card.updated",
           {
             id: String(result.id),
+            cardPublicId: String(newCard.publicId),
             title: result.title,
             description: result.description,
             dueDate: result.dueDate,
