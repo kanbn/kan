@@ -933,7 +933,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        90
+        122
       ]
     ],
     "translation": "An unexpected error occurred. Please try again later."
@@ -2133,7 +2133,7 @@
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        168
+        206
       ],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
@@ -2241,15 +2241,15 @@
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        98
+        100
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        109
+        142
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        178
+        216
       ]
     ],
     "translation": "Change Password"
@@ -2443,6 +2443,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        237
+      ],
       [
         "src/views/card/index.tsx",
         367
@@ -2645,7 +2649,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        150
+        188
       ]
     ],
     "translation": "Confirm your new password"
@@ -4246,7 +4250,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        122
+        159
       ]
     ],
     "translation": "Enter your current password"
@@ -4258,7 +4262,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        111
+        146
       ]
     ],
     "translation": "Enter your current password and choose a new secure password."
@@ -4294,7 +4298,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        136
+        174
       ]
     ],
     "translation": "Enter your new password"
@@ -4354,7 +4358,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        89
+        121
       ]
     ],
     "translation": "Error Changing Password"
@@ -4470,6 +4474,18 @@
       ]
     ],
     "translation": "Error inviting member"
+  },
+  "sZixXc": {
+    "translation": "Error Setting Password",
+    "message": "Error Setting Password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/ChangePasswordConfirmation.tsx",
+        121
+      ]
+    ]
   },
   "sVBn4K": {
     "message": "Error updating display name",
@@ -6778,7 +6794,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        23
+        24
       ]
     ],
     "translation": "New password is required"
@@ -6790,7 +6806,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        31
+        36
       ]
     ],
     "translation": "New password must be different from current password"
@@ -7263,6 +7279,18 @@
     ],
     "translation": "Part-time"
   },
+  "nG7mus": {
+    "translation": "Password already set",
+    "message": "Password already set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        232
+      ]
+    ]
+  },
   "IrZaAn": {
     "message": "Password Changed",
     "placeholders": {},
@@ -7270,7 +7298,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        69
+        93
       ]
     ],
     "translation": "Password Changed"
@@ -7306,10 +7334,22 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        22
+        23
       ]
     ],
     "translation": "Password must be at least 8 characters"
+  },
+  "Xlkxmi": {
+    "translation": "Password Set",
+    "message": "Password Set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/ChangePasswordConfirmation.tsx",
+        93
+      ]
+    ]
   },
   "lpIMne": {
     "message": "Passwords do not match",
@@ -7318,7 +7358,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        27
+        30
       ]
     ],
     "translation": "Passwords do not match"
@@ -7534,7 +7574,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        24
+        25
       ]
     ],
     "translation": "Please confirm your new password"
@@ -8738,6 +8778,18 @@
     ],
     "translation": "Senior"
   },
+  "GXGbXi": {
+    "translation": "Set a password to enable password-based login.",
+    "message": "Set a password to enable password-based login.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        93
+      ]
+    ]
+  },
   "8AbRER": {
     "message": "Set due date",
     "placeholders": {},
@@ -8757,6 +8809,30 @@
       ]
     ],
     "translation": "Set due date"
+  },
+  "2gHjVM": {
+    "translation": "Set Password",
+    "message": "Set Password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        88
+      ],
+      [
+        "src/views/settings/AccountSettings.tsx",
+        100
+      ],
+      [
+        "src/views/settings/components/ChangePasswordConfirmation.tsx",
+        142
+      ],
+      [
+        "src/views/settings/components/ChangePasswordConfirmation.tsx",
+        216
+      ]
+    ]
   },
   "Eit43O": {
     "message": "set the due date",
@@ -9509,7 +9585,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        84
+        116
       ]
     ],
     "translation": "The current password you entered is incorrect."
@@ -11646,7 +11722,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        91
+        92
       ]
     ],
     "translation": "You are about to change your password."
@@ -11799,6 +11875,18 @@
     ],
     "translation": "You need to be an admin to manage workspace permissions."
   },
+  "ZhQoZn": {
+    "translation": "You signed in without a password. Set a password to enable password-based login.",
+    "message": "You signed in without a password. Set a password to enable password-based login.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/ChangePasswordConfirmation.tsx",
+        147
+      ]
+    ]
+  },
   "2SePRT": {
     "message": "You've been invited to join a workspace on kan.bn.",
     "placeholders": {},
@@ -11822,6 +11910,18 @@
       ]
     ],
     "translation": "You've been invited to join a workspace."
+  },
+  "8Zjc7q": {
+    "translation": "Your account already has a password. You can change it from your account settings.",
+    "message": "Your account already has a password. You can change it from your account settings.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        234
+      ]
+    ]
   },
   "GoDLB9": {
     "message": "Your account has been deleted.",
@@ -11926,10 +12026,22 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        70
+        95
       ]
     ],
     "translation": "Your password has been changed."
+  },
+  "EuK5ez": {
+    "translation": "Your password has been set.",
+    "message": "Your password has been set.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/ChangePasswordConfirmation.tsx",
+        96
+      ]
+    ]
   },
   "/tOdd2": {
     "message": "Your profile image has been updated.",

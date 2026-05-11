@@ -552,7 +552,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 90]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 122]
     ],
     "translation": "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже."
   },
@@ -1271,7 +1271,7 @@
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 55],
       ["src/views/onboarding/select-plan/index.tsx", 209],
       ["src/views/settings/components/Avatar.tsx", 287],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 168],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 206],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
         40
@@ -1333,9 +1333,9 @@
     "comments": [],
     "origin": [
       ["src/views/settings/AccountSettings.tsx", 88],
-      ["src/views/settings/AccountSettings.tsx", 98],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 109],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 178]
+      ["src/views/settings/AccountSettings.tsx", 100],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
     ],
     "translation": "Сменить пароль"
   },
@@ -1462,6 +1462,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      ["src/components/Dashboard.tsx", 237],
       ["src/views/card/index.tsx", 367],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
@@ -1581,7 +1582,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 150]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 188]
     ],
     "translation": "Подтвердите новый пароль"
   },
@@ -2521,7 +2522,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 122]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 159]
     ],
     "translation": "Введите текущий пароль"
   },
@@ -2530,7 +2531,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 111]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 146]
     ],
     "translation": "Введите текущий пароль и выберите новый надёжный пароль."
   },
@@ -2553,7 +2554,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 136]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 174]
     ],
     "translation": "Введите новый пароль"
   },
@@ -2590,7 +2591,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 89]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
     ],
     "translation": "Ошибка при смене пароля"
   },
@@ -2663,6 +2664,15 @@
       ["src/views/members/components/InviteMemberForm.tsx", 103]
     ],
     "translation": "Ошибка при приглашении участника"
+  },
+  "sZixXc": {
+    "translation": "Ошибка установки пароля",
+    "message": "Error Setting Password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
+    ]
   },
   "sVBn4K": {
     "message": "Error updating display name",
@@ -4021,7 +4031,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 23]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 24]
     ],
     "translation": "Требуется новый пароль"
   },
@@ -4030,7 +4040,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 31]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 36]
     ],
     "translation": "Новый пароль должен отличаться от текущего"
   },
@@ -4311,12 +4321,19 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
     "translation": "Частичная занятость"
   },
+  "nG7mus": {
+    "translation": "Пароль уже установлен",
+    "message": "Password already set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/Dashboard.tsx", 232]]
+  },
   "IrZaAn": {
     "message": "Password Changed",
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 69]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
     ],
     "translation": "Пароль изменён"
   },
@@ -4339,16 +4356,25 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 22]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 23]
     ],
     "translation": "Пароль должен содержать не менее 8 символов"
+  },
+  "Xlkxmi": {
+    "translation": "Пароль установлен",
+    "message": "Password Set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
+    ]
   },
   "lpIMne": {
     "message": "Passwords do not match",
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 27]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 30]
     ],
     "translation": "Пароли не совпадают"
   },
@@ -4480,7 +4506,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 24]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 25]
     ],
     "translation": "Пожалуйста, подтвердите новый пароль"
   },
@@ -5119,6 +5145,13 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
     "translation": "Старший"
   },
+  "GXGbXi": {
+    "translation": "Установите пароль, чтобы включить вход по паролю.",
+    "message": "Set a password to enable password-based login.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 93]]
+  },
   "8AbRER": {
     "message": "Set due date",
     "placeholders": {},
@@ -5129,6 +5162,18 @@
       ["src/views/card/components/DueDateSelector.tsx", 121]
     ],
     "translation": "Установить срок"
+  },
+  "2gHjVM": {
+    "translation": "Установить пароль",
+    "message": "Set Password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/AccountSettings.tsx", 88],
+      ["src/views/settings/AccountSettings.tsx", 100],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
+    ]
   },
   "Eit43O": {
     "message": "set the due date",
@@ -5587,7 +5632,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 84]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 116]
     ],
     "translation": "Введённый вами текущий пароль неверен."
   },
@@ -6869,7 +6914,7 @@
     "message": "You are about to change your password.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 91]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 92]],
     "translation": "Вы собираетесь изменить свой пароль."
   },
   "3WXdoZ": {
@@ -6951,6 +6996,15 @@
     "origin": [["src/views/settings/PermissionsSettings.tsx", 86]],
     "translation": "Вам нужно быть администратором, чтобы управлять правами доступа рабочего пространства."
   },
+  "ZhQoZn": {
+    "translation": "Вы вошли без пароля. Установите пароль, чтобы включить вход по паролю.",
+    "message": "You signed in without a password. Set a password to enable password-based login.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 147]
+    ]
+  },
   "2SePRT": {
     "message": "You've been invited to join a workspace on kan.bn.",
     "placeholders": {},
@@ -6964,6 +7018,13 @@
     "comments": [],
     "origin": [["src/views/invite/index.tsx", 135]],
     "translation": "Вас пригласили присоединиться к рабочему пространству."
+  },
+  "8Zjc7q": {
+    "translation": "В вашей учетной записи уже есть пароль. Вы можете изменить его в настройках учетной записи.",
+    "message": "Your account already has a password. You can change it from your account settings.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/Dashboard.tsx", 234]]
   },
   "GoDLB9": {
     "message": "Your account has been deleted.",
@@ -7028,9 +7089,18 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 70]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 95]
     ],
     "translation": "Ваш пароль был изменён."
+  },
+  "EuK5ez": {
+    "translation": "Ваш пароль установлен.",
+    "message": "Your password has been set.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 96]
+    ]
   },
   "/tOdd2": {
     "message": "Your profile image has been updated.",

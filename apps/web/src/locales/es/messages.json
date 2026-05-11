@@ -552,7 +552,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 90]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 122]
     ],
     "translation": "Se produjo un error inesperado. Por favor, inténtalo de nuevo más tarde."
   },
@@ -1271,7 +1271,7 @@
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 55],
       ["src/views/onboarding/select-plan/index.tsx", 209],
       ["src/views/settings/components/Avatar.tsx", 287],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 168],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 206],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
         40
@@ -1333,9 +1333,9 @@
     "comments": [],
     "origin": [
       ["src/views/settings/AccountSettings.tsx", 88],
-      ["src/views/settings/AccountSettings.tsx", 98],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 109],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 178]
+      ["src/views/settings/AccountSettings.tsx", 100],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
     ],
     "translation": "Cambiar contraseña"
   },
@@ -1462,6 +1462,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      ["src/components/Dashboard.tsx", 237],
       ["src/views/card/index.tsx", 367],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
@@ -1581,7 +1582,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 150]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 188]
     ],
     "translation": "Confirma tu nueva contraseña"
   },
@@ -2521,7 +2522,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 122]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 159]
     ],
     "translation": "Introduce tu contraseña actual"
   },
@@ -2530,7 +2531,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 111]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 146]
     ],
     "translation": "Introduce tu contraseña actual y elige una nueva contraseña segura."
   },
@@ -2553,7 +2554,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 136]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 174]
     ],
     "translation": "Introduce tu nueva contraseña"
   },
@@ -2590,7 +2591,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 89]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
     ],
     "translation": "Error al cambiar la contraseña"
   },
@@ -2663,6 +2664,15 @@
       ["src/views/members/components/InviteMemberForm.tsx", 103]
     ],
     "translation": "Error al invitar al miembro"
+  },
+  "sZixXc": {
+    "translation": "Error al Establecer la Contraseña",
+    "message": "Error Setting Password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
+    ]
   },
   "sVBn4K": {
     "message": "Error updating display name",
@@ -4021,7 +4031,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 23]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 24]
     ],
     "translation": "Se requiere una nueva contraseña"
   },
@@ -4030,7 +4040,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 31]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 36]
     ],
     "translation": "La nueva contraseña debe ser diferente de la contraseña actual"
   },
@@ -4311,12 +4321,19 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
     "translation": "Tiempo parcial"
   },
+  "nG7mus": {
+    "translation": "Contraseña ya establecida",
+    "message": "Password already set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/Dashboard.tsx", 232]]
+  },
   "IrZaAn": {
     "message": "Password Changed",
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 69]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
     ],
     "translation": "Contraseña cambiada"
   },
@@ -4339,16 +4356,25 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 22]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 23]
     ],
     "translation": "La contraseña debe tener al menos 8 caracteres"
+  },
+  "Xlkxmi": {
+    "translation": "Contraseña Establecida",
+    "message": "Password Set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
+    ]
   },
   "lpIMne": {
     "message": "Passwords do not match",
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 27]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 30]
     ],
     "translation": "Las contraseñas no coinciden"
   },
@@ -4480,7 +4506,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 24]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 25]
     ],
     "translation": "Por favor, confirma tu nueva contraseña"
   },
@@ -5119,6 +5145,13 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
     "translation": "Senior"
   },
+  "GXGbXi": {
+    "translation": "Establece una contraseña para habilitar el inicio de sesión con contraseña.",
+    "message": "Set a password to enable password-based login.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/AccountSettings.tsx", 93]]
+  },
   "8AbRER": {
     "message": "Set due date",
     "placeholders": {},
@@ -5129,6 +5162,18 @@
       ["src/views/card/components/DueDateSelector.tsx", 121]
     ],
     "translation": "Establecer fecha de vencimiento"
+  },
+  "2gHjVM": {
+    "translation": "Establecer Contraseña",
+    "message": "Set Password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/AccountSettings.tsx", 88],
+      ["src/views/settings/AccountSettings.tsx", 100],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
+    ]
   },
   "Eit43O": {
     "message": "set the due date",
@@ -5587,7 +5632,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 84]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 116]
     ],
     "translation": "La contraseña actual que ingresaste es incorrecta."
   },
@@ -6869,7 +6914,7 @@
     "message": "You are about to change your password.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 91]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 92]],
     "translation": "Estás a punto de cambiar tu contraseña."
   },
   "3WXdoZ": {
@@ -6951,6 +6996,15 @@
     "origin": [["src/views/settings/PermissionsSettings.tsx", 86]],
     "translation": "Necesitas ser administrador para gestionar los permisos del espacio de trabajo."
   },
+  "ZhQoZn": {
+    "translation": "Iniciaste sesión sin contraseña. Establece una contraseña para habilitar el inicio de sesión con contraseña.",
+    "message": "You signed in without a password. Set a password to enable password-based login.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 147]
+    ]
+  },
   "2SePRT": {
     "message": "You've been invited to join a workspace on kan.bn.",
     "placeholders": {},
@@ -6964,6 +7018,13 @@
     "comments": [],
     "origin": [["src/views/invite/index.tsx", 135]],
     "translation": "Has sido invitado a unirte a un espacio de trabajo."
+  },
+  "8Zjc7q": {
+    "translation": "Tu cuenta ya tiene una contraseña. Puedes cambiarla desde la configuración de tu cuenta.",
+    "message": "Your account already has a password. You can change it from your account settings.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/Dashboard.tsx", 234]]
   },
   "GoDLB9": {
     "message": "Your account has been deleted.",
@@ -7028,9 +7089,18 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 70]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 95]
     ],
     "translation": "Tu contraseña ha sido cambiada."
+  },
+  "EuK5ez": {
+    "translation": "Tu contraseña ha sido establecida.",
+    "message": "Your password has been set.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 96]
+    ]
   },
   "/tOdd2": {
     "message": "Your profile image has been updated.",
