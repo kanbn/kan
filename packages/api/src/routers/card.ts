@@ -945,7 +945,7 @@ export const cardRouter = createTRPCRouter({
         );
       }
 
-      if (input.index !== undefined) {
+      if (input.index !== undefined || newListId !== undefined) {
         result = await cardRepo.reorder(ctx.db, {
           cardId: existingCard.id,
           newIndex: input.index,
