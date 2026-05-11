@@ -1,6 +1,7 @@
-import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
+import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
+import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 import {
   TbLayoutSidebarLeftCollapse,
@@ -8,7 +9,6 @@ import {
   TbLayoutSidebarRightCollapse,
   TbLayoutSidebarRightExpand,
 } from "react-icons/tb";
-import { t } from "@lingui/core/macro";
 
 import { authClient } from "@kan/auth/client";
 
@@ -16,10 +16,10 @@ import { useClickOutside } from "~/hooks/useClickOutside";
 import { useModal } from "~/providers/modal";
 import { useWorkspace, WorkspaceProvider } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { ChangePasswordFormConfirmation } from "~/views/settings/components/ChangePasswordConfirmation";
 import Button from "./Button";
 import Modal from "./modal";
 import SideNavigation from "./SideNavigation";
-import { ChangePasswordFormConfirmation } from "~/views/settings/components/ChangePasswordConfirmation";
 
 interface DashboardProps {
   children: React.ReactNode;
@@ -106,7 +106,9 @@ export default function Dashboard({
   useEffect(() => {
     if (hasLoaded && availableWorkspaces.length === 0) {
       if (env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
-        router.push(`/onboarding/select-plan?returnUrl=${encodeURIComponent(window.location.pathname)}`);
+        router.push(
+          `/onboarding/select-plan?returnUrl=${encodeURIComponent(window.location.pathname)}`,
+        );
       } else {
         openModal("NEW_WORKSPACE", undefined, undefined, false);
       }
@@ -123,7 +125,6 @@ export default function Dashboard({
       isCredentialsEnabled &&
       user.hasMagicLinkAccount &&
       !user.hasPassword &&
-      typeof window !== "undefined" &&
       !sessionStorage.getItem("set_password_prompted")
     ) {
       sessionStorage.setItem("set_password_prompted", "1");
@@ -226,14 +227,22 @@ export default function Dashboard({
         </div>
       </div>
 
-      <Modal modalSize="sm" isVisible={modalContentType === "SET_PASSWORD_PROMPT"}>
+      <Modal
+        modalSize="sm"
+        isVisible={modalContentType === "SET_PASSWORD_PROMPT"}
+      >
         {user?.hasPassword ? (
           <div className="p-5">
-            <h2 className="text-md pb-4 font-medium dark:text-white">{t`Password already set`}</h2>
+            <h2 className="pb-4 text-base font-medium dark:text-white">{t`Password already set`}</h2>
             <p className="mb-6 text-sm text-light-900">
               {t`Your account already has a password. You can change it from your account settings.`}
             </p>
-            <Button variant="secondary" onClick={closeModal} fullWidth size="lg">
+            <Button
+              variant="secondary"
+              onClick={closeModal}
+              fullWidth
+              size="lg"
+            >
               {t`Close`}
             </Button>
           </div>

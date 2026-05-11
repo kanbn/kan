@@ -2,9 +2,9 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import * as userRepo from "@kan/db/repository/user.repo";
+import { generateAvatarUrl } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { generateAvatarUrl } from "@kan/shared/utils";
 
 export const userRouter = createTRPCRouter({
   getUser: protectedProcedure
@@ -119,6 +119,17 @@ export const userRouter = createTRPCRouter({
       };
     }),
   setPassword: protectedProcedure
+    .meta({
+      openapi: {
+        method: "POST",
+        path: "/users/me/password",
+        summary: "Set password",
+        description:
+          "Sets a password for a user who signed up via magic link and has no password yet",
+        tags: ["Users"],
+        protect: true,
+      },
+    })
     .input(
       z.object({
         newPassword: z
@@ -152,7 +163,14 @@ export const userRouter = createTRPCRouter({
         });
       }
 
-      await ctx.auth.api.setPassword({ newPassword: input.newPassword });
+      try {
+        await ctx.auth.api.setPassword({ newPassword: input.newPassword });
+      } catch {
+        throw new TRPCError({
+          message: "Failed to set password",
+          code: "INTERNAL_SERVER_ERROR",
+        });
+      }
 
       return { success: true };
     }),

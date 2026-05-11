@@ -39,11 +39,11 @@ const buildSchema = (hasPassword: boolean) => {
     );
 };
 
-type FormValues = {
+interface FormValues {
   currentPassword?: string;
   newPassword: string;
   confirmPassword: string;
-};
+}
 
 interface Props {
   hasPassword: boolean;
@@ -97,13 +97,11 @@ export function ChangePasswordFormConfirmation({ hasPassword }: Props) {
         icon: "success",
       });
 
-      // Clear the session prompt flag so future magic link logins
-      // don't re-show the set-password modal (password is now set)
-      if (!hasPassword && typeof window !== "undefined") {
+      if (!hasPassword) {
         sessionStorage.removeItem("set_password_prompted");
       }
 
-      utils.invalidate();
+      utils.user.getUser.invalidate();
       reset();
       router.push("/");
     },
@@ -118,7 +116,9 @@ export function ChangePasswordFormConfirmation({ hasPassword }: Props) {
       } else {
         closeModal();
         showPopup({
-          header: hasPassword ? t`Error Changing Password` : t`Error Setting Password`,
+          header: hasPassword
+            ? t`Error Changing Password`
+            : t`Error Setting Password`,
           message: t`An unexpected error occurred. Please try again later.`,
           icon: "error",
         });
@@ -138,7 +138,7 @@ export function ChangePasswordFormConfirmation({ hasPassword }: Props) {
   return (
     <div className="p-5">
       <div className="flex w-full flex-col justify-between pb-4">
-        <h2 className="text-md pb-4 font-medium dark:text-white">
+        <h2 className="pb-4 text-base font-medium dark:text-white">
           {hasPassword ? t`Change Password` : t`Set Password`}
         </h2>
         <p className="mb-4 text-sm text-light-900">

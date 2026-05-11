@@ -4,6 +4,9 @@ import { v4 as uuidv4 } from "uuid";
 import type { dbClient } from "@kan/db/client";
 import { account, apikey, users } from "@kan/db/schema";
 
+const PROVIDER_CREDENTIAL = "credential";
+const PROVIDER_MAGIC_LINK = "magic-link";
+
 export const getCount = async (db: dbClient) => {
   const result = await db.select({ count: count() }).from(users);
 
@@ -39,7 +42,7 @@ export const getById = async (db: dbClient, userId: string) => {
       .where(
         and(
           eq(account.userId, userId),
-          eq(account.providerId, "credential"),
+          eq(account.providerId, PROVIDER_CREDENTIAL),
           isNotNull(account.password),
         ),
       )
@@ -50,7 +53,7 @@ export const getById = async (db: dbClient, userId: string) => {
       .where(
         and(
           eq(account.userId, userId),
-          eq(account.providerId, "magic-link"),
+          eq(account.providerId, PROVIDER_MAGIC_LINK),
         ),
       )
       .limit(1),
