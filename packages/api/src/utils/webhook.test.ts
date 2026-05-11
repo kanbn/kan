@@ -43,6 +43,7 @@ describe("webhook utilities", () => {
         "card.created",
         {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           listId: "list-456",
         },
@@ -55,12 +56,14 @@ describe("webhook utilities", () => {
       expect(payload.timestamp).toBe("2024-01-15T12:00:00.000Z");
       expect(payload.data.card).toEqual({
         id: "card-123",
+        publicId: "card-pub-123",
         title: "Test Card",
         description: undefined,
         dueDate: null,
         listId: "list-456",
         boardId: "board-789",
       });
+      expect(payload.data.card.publicId).toBe("card-pub-123");
     });
 
     it("includes optional card fields when provided", () => {
@@ -69,6 +72,7 @@ describe("webhook utilities", () => {
         "card.updated",
         {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           description: "A description",
           dueDate,
@@ -88,6 +92,7 @@ describe("webhook utilities", () => {
         "card.created",
         {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           listId: "list-456",
         },
@@ -108,6 +113,7 @@ describe("webhook utilities", () => {
         "card.created",
         {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           listId: "list-456",
         },
@@ -128,6 +134,7 @@ describe("webhook utilities", () => {
         "card.created",
         {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           listId: "list-456",
         },
@@ -151,6 +158,7 @@ describe("webhook utilities", () => {
         "card.updated",
         {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Updated Title",
           listId: "list-456",
         },
@@ -172,6 +180,7 @@ describe("webhook utilities", () => {
         "card.moved",
         {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Moved Card",
           listId: "list-public-done",
         },
@@ -212,6 +221,7 @@ describe("webhook utilities", () => {
       data: {
         card: {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           listId: "list-456",
           boardId: "board-789",
@@ -408,6 +418,7 @@ describe("webhook utilities", () => {
       data: {
         card: {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           listId: "list-456",
           boardId: "board-789",
