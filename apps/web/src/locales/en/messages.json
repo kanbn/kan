@@ -2445,7 +2445,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        237
+        246
       ],
       [
         "src/views/card/index.tsx",
@@ -4358,7 +4358,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        121
+        120
       ]
     ],
     "translation": "Error Changing Password"
@@ -4476,7 +4476,6 @@
     "translation": "Error inviting member"
   },
   "sZixXc": {
-    "translation": "Error Setting Password",
     "message": "Error Setting Password",
     "placeholders": {},
     "comments": [],
@@ -4485,7 +4484,8 @@
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
         121
       ]
-    ]
+    ],
+    "translation": "Error Setting Password"
   },
   "sVBn4K": {
     "message": "Error updating display name",
@@ -7280,16 +7280,16 @@
     "translation": "Part-time"
   },
   "nG7mus": {
-    "translation": "Password already set",
     "message": "Password already set",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        232
+        236
       ]
-    ]
+    ],
+    "translation": "Password already set"
   },
   "IrZaAn": {
     "message": "Password Changed",
@@ -7340,7 +7340,6 @@
     "translation": "Password must be at least 8 characters"
   },
   "Xlkxmi": {
-    "translation": "Password Set",
     "message": "Password Set",
     "placeholders": {},
     "comments": [],
@@ -7349,7 +7348,8 @@
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
         93
       ]
-    ]
+    ],
+    "translation": "Password Set"
   },
   "lpIMne": {
     "message": "Passwords do not match",
@@ -8779,7 +8779,6 @@
     "translation": "Senior"
   },
   "GXGbXi": {
-    "translation": "Set a password to enable password-based login.",
     "message": "Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
@@ -8788,7 +8787,8 @@
         "src/views/settings/AccountSettings.tsx",
         93
       ]
-    ]
+    ],
+    "translation": "Set a password to enable password-based login."
   },
   "8AbRER": {
     "message": "Set due date",
@@ -8811,7 +8811,6 @@
     "translation": "Set due date"
   },
   "2gHjVM": {
-    "translation": "Set Password",
     "message": "Set Password",
     "placeholders": {},
     "comments": [],
@@ -8832,7 +8831,8 @@
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
         216
       ]
-    ]
+    ],
+    "translation": "Set Password"
   },
   "Eit43O": {
     "message": "set the due date",
@@ -9585,7 +9585,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        116
+        114
       ]
     ],
     "translation": "The current password you entered is incorrect."
@@ -11876,7 +11876,6 @@
     "translation": "You need to be an admin to manage workspace permissions."
   },
   "ZhQoZn": {
-    "translation": "You signed in without a password. Set a password to enable password-based login.",
     "message": "You signed in without a password. Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
@@ -11885,7 +11884,8 @@
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
         147
       ]
-    ]
+    ],
+    "translation": "You signed in without a password. Set a password to enable password-based login."
   },
   "2SePRT": {
     "message": "You've been invited to join a workspace on kan.bn.",
@@ -11912,16 +11912,16 @@
     "translation": "You've been invited to join a workspace."
   },
   "8Zjc7q": {
-    "translation": "Your account already has a password. You can change it from your account settings.",
     "message": "Your account already has a password. You can change it from your account settings.",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        234
+        238
       ]
-    ]
+    ],
+    "translation": "Your account already has a password. You can change it from your account settings."
   },
   "GoDLB9": {
     "message": "Your account has been deleted.",
@@ -12032,7 +12032,6 @@
     "translation": "Your password has been changed."
   },
   "EuK5ez": {
-    "translation": "Your password has been set.",
     "message": "Your password has been set.",
     "placeholders": {},
     "comments": [],
@@ -12041,7 +12040,8 @@
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
         96
       ]
-    ]
+    ],
+    "translation": "Your password has been set."
   },
   "/tOdd2": {
     "message": "Your profile image has been updated.",

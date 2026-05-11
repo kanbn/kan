@@ -1462,7 +1462,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/Dashboard.tsx", 237],
+      ["src/components/Dashboard.tsx", 246],
       ["src/views/card/index.tsx", 367],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
@@ -2591,7 +2591,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 120]
     ],
     "translation": "Fout bij wijzigen wachtwoord"
   },
@@ -2666,13 +2666,13 @@
     "translation": "Fout bij uitnodigen lid"
   },
   "sZixXc": {
-    "translation": "Fout bij instellen wachtwoord",
     "message": "Error Setting Password",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
-    ]
+    ],
+    "translation": "Fout bij instellen wachtwoord"
   },
   "sVBn4K": {
     "message": "Error updating display name",
@@ -4322,11 +4322,11 @@
     "translation": "Parttime"
   },
   "nG7mus": {
-    "translation": "Wachtwoord is al ingesteld",
     "message": "Password already set",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 232]]
+    "origin": [["src/components/Dashboard.tsx", 236]],
+    "translation": "Wachtwoord is al ingesteld"
   },
   "IrZaAn": {
     "message": "Password Changed",
@@ -4361,13 +4361,13 @@
     "translation": "Wachtwoord moet minimaal 8 tekens bevatten"
   },
   "Xlkxmi": {
-    "translation": "Wachtwoord ingesteld",
     "message": "Password Set",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
-    ]
+    ],
+    "translation": "Wachtwoord ingesteld"
   },
   "lpIMne": {
     "message": "Passwords do not match",
@@ -5146,11 +5146,11 @@
     "translation": "Senior"
   },
   "GXGbXi": {
-    "translation": "Stel een wachtwoord in om inloggen met wachtwoord mogelijk te maken.",
     "message": "Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 93]]
+    "origin": [["src/views/settings/AccountSettings.tsx", 93]],
+    "translation": "Stel een wachtwoord in om inloggen met wachtwoord mogelijk te maken."
   },
   "8AbRER": {
     "message": "Set due date",
@@ -5164,7 +5164,6 @@
     "translation": "Vervaldatum instellen"
   },
   "2gHjVM": {
-    "translation": "Wachtwoord instellen",
     "message": "Set Password",
     "placeholders": {},
     "comments": [],
@@ -5173,7 +5172,8 @@
       ["src/views/settings/AccountSettings.tsx", 100],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
-    ]
+    ],
+    "translation": "Wachtwoord instellen"
   },
   "Eit43O": {
     "message": "set the due date",
@@ -5632,7 +5632,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 116]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 114]
     ],
     "translation": "Het huidige wachtwoord dat je hebt ingevoerd is onjuist."
   },
@@ -6997,13 +6997,13 @@
     "translation": "Je moet een beheerder zijn om werkruimte-rechten te beheren."
   },
   "ZhQoZn": {
-    "translation": "U bent ingelogd zonder wachtwoord. Stel een wachtwoord in om inloggen met wachtwoord mogelijk te maken.",
     "message": "You signed in without a password. Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 147]
-    ]
+    ],
+    "translation": "U bent ingelogd zonder wachtwoord. Stel een wachtwoord in om inloggen met wachtwoord mogelijk te maken."
   },
   "2SePRT": {
     "message": "You've been invited to join a workspace on kan.bn.",
@@ -7020,11 +7020,11 @@
     "translation": "Je bent uitgenodigd om lid te worden van een werkruimte."
   },
   "8Zjc7q": {
-    "translation": "Uw account heeft al een wachtwoord. U kunt dit wijzigen via uw accountinstellingen.",
     "message": "Your account already has a password. You can change it from your account settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 234]]
+    "origin": [["src/components/Dashboard.tsx", 238]],
+    "translation": "Uw account heeft al een wachtwoord. U kunt dit wijzigen via uw accountinstellingen."
   },
   "GoDLB9": {
     "message": "Your account has been deleted.",
@@ -7094,13 +7094,13 @@
     "translation": "Je wachtwoord is gewijzigd."
   },
   "EuK5ez": {
-    "translation": "Uw wachtwoord is ingesteld.",
     "message": "Your password has been set.",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 96]
-    ]
+    ],
+    "translation": "Uw wachtwoord is ingesteld."
   },
   "/tOdd2": {
     "message": "Your profile image has been updated.",

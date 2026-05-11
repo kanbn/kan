@@ -1462,7 +1462,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/Dashboard.tsx", 237],
+      ["src/components/Dashboard.tsx", 246],
       ["src/views/card/index.tsx", 367],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
@@ -2591,7 +2591,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 120]
     ],
     "translation": "Błąd podczas zmiany hasła"
   },
@@ -2666,13 +2666,13 @@
     "translation": "Błąd podczas zapraszania członka"
   },
   "sZixXc": {
-    "translation": "Błąd podczas ustawiania hasła",
     "message": "Error Setting Password",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
-    ]
+    ],
+    "translation": "Błąd podczas ustawiania hasła"
   },
   "sVBn4K": {
     "message": "Error updating display name",
@@ -4322,11 +4322,11 @@
     "translation": "Niepełny etat"
   },
   "nG7mus": {
-    "translation": "Hasło już ustawione",
     "message": "Password already set",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 232]]
+    "origin": [["src/components/Dashboard.tsx", 236]],
+    "translation": "Hasło już ustawione"
   },
   "IrZaAn": {
     "message": "Password Changed",
@@ -4361,13 +4361,13 @@
     "translation": "Hasło musi mieć co najmniej 8 znaków"
   },
   "Xlkxmi": {
-    "translation": "Hasło ustawione",
     "message": "Password Set",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
-    ]
+    ],
+    "translation": "Hasło ustawione"
   },
   "lpIMne": {
     "message": "Passwords do not match",
@@ -5146,11 +5146,11 @@
     "translation": "Starszy"
   },
   "GXGbXi": {
-    "translation": "Ustaw hasło, aby włączyć logowanie za pomocą hasła.",
     "message": "Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 93]]
+    "origin": [["src/views/settings/AccountSettings.tsx", 93]],
+    "translation": "Ustaw hasło, aby włączyć logowanie za pomocą hasła."
   },
   "8AbRER": {
     "message": "Set due date",
@@ -5164,7 +5164,6 @@
     "translation": "Ustaw termin"
   },
   "2gHjVM": {
-    "translation": "Ustaw hasło",
     "message": "Set Password",
     "placeholders": {},
     "comments": [],
@@ -5173,7 +5172,8 @@
       ["src/views/settings/AccountSettings.tsx", 100],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
-    ]
+    ],
+    "translation": "Ustaw hasło"
   },
   "Eit43O": {
     "message": "set the due date",
@@ -5632,7 +5632,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 116]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 114]
     ],
     "translation": "Wprowadzone obecne hasło jest nieprawidłowe."
   },
@@ -6997,13 +6997,13 @@
     "translation": "Musisz być administratorem, aby zarządzać uprawnieniami przestrzeni roboczej."
   },
   "ZhQoZn": {
-    "translation": "Zalogowałeś się bez hasła. Ustaw hasło, aby włączyć logowanie za pomocą hasła.",
     "message": "You signed in without a password. Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 147]
-    ]
+    ],
+    "translation": "Zalogowałeś się bez hasła. Ustaw hasło, aby włączyć logowanie za pomocą hasła."
   },
   "2SePRT": {
     "message": "You've been invited to join a workspace on kan.bn.",
@@ -7020,11 +7020,11 @@
     "translation": "Otrzymałeś zaproszenie do przestrzeni roboczej."
   },
   "8Zjc7q": {
-    "translation": "Twoje konto ma już ustawione hasło. Możesz je zmienić w ustawieniach konta.",
     "message": "Your account already has a password. You can change it from your account settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 234]]
+    "origin": [["src/components/Dashboard.tsx", 238]],
+    "translation": "Twoje konto ma już ustawione hasło. Możesz je zmienić w ustawieniach konta."
   },
   "GoDLB9": {
     "message": "Your account has been deleted.",
@@ -7094,13 +7094,13 @@
     "translation": "Twoje hasło zostało zmienione."
   },
   "EuK5ez": {
-    "translation": "Twoje hasło zostało ustawione.",
     "message": "Your password has been set.",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 96]
-    ]
+    ],
+    "translation": "Twoje hasło zostało ustawione."
   },
   "/tOdd2": {
     "message": "Your profile image has been updated.",

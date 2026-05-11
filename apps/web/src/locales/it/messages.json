@@ -1462,7 +1462,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/Dashboard.tsx", 237],
+      ["src/components/Dashboard.tsx", 246],
       ["src/views/card/index.tsx", 367],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
@@ -2591,7 +2591,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 120]
     ],
     "translation": "Errore durante la modifica della password"
   },
@@ -2666,13 +2666,13 @@
     "translation": "Errore durante l'invito del membro"
   },
   "sZixXc": {
-    "translation": "Errore nell'impostazione della password",
     "message": "Error Setting Password",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
-    ]
+    ],
+    "translation": "Errore nell'impostazione della password"
   },
   "sVBn4K": {
     "message": "Error updating display name",
@@ -4322,11 +4322,11 @@
     "translation": "Part-time"
   },
   "nG7mus": {
-    "translation": "Password già impostata",
     "message": "Password already set",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 232]]
+    "origin": [["src/components/Dashboard.tsx", 236]],
+    "translation": "Password già impostata"
   },
   "IrZaAn": {
     "message": "Password Changed",
@@ -4361,13 +4361,13 @@
     "translation": "La password deve contenere almeno 8 caratteri"
   },
   "Xlkxmi": {
-    "translation": "Password impostata",
     "message": "Password Set",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
-    ]
+    ],
+    "translation": "Password impostata"
   },
   "lpIMne": {
     "message": "Passwords do not match",
@@ -5146,11 +5146,11 @@
     "translation": "Senior"
   },
   "GXGbXi": {
-    "translation": "Imposta una password per abilitare l'accesso tramite password.",
     "message": "Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 93]]
+    "origin": [["src/views/settings/AccountSettings.tsx", 93]],
+    "translation": "Imposta una password per abilitare l'accesso tramite password."
   },
   "8AbRER": {
     "message": "Set due date",
@@ -5164,7 +5164,6 @@
     "translation": "Imposta scadenza"
   },
   "2gHjVM": {
-    "translation": "Imposta password",
     "message": "Set Password",
     "placeholders": {},
     "comments": [],
@@ -5173,7 +5172,8 @@
       ["src/views/settings/AccountSettings.tsx", 100],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
-    ]
+    ],
+    "translation": "Imposta password"
   },
   "Eit43O": {
     "message": "set the due date",
@@ -5632,7 +5632,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 116]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 114]
     ],
     "translation": "La password attuale inserita non è corretta."
   },
@@ -6997,13 +6997,13 @@
     "translation": "Devi essere un amministratore per gestire i permessi del workspace."
   },
   "ZhQoZn": {
-    "translation": "Hai effettuato l'accesso senza una password. Imposta una password per abilitare l'accesso tramite password.",
     "message": "You signed in without a password. Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 147]
-    ]
+    ],
+    "translation": "Hai effettuato l'accesso senza una password. Imposta una password per abilitare l'accesso tramite password."
   },
   "2SePRT": {
     "message": "You've been invited to join a workspace on kan.bn.",
@@ -7020,11 +7020,11 @@
     "translation": "Sei stato invitato a unirti a un workspace."
   },
   "8Zjc7q": {
-    "translation": "Il tuo account ha già una password. Puoi modificarla dalle impostazioni del tuo account.",
     "message": "Your account already has a password. You can change it from your account settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 234]]
+    "origin": [["src/components/Dashboard.tsx", 238]],
+    "translation": "Il tuo account ha già una password. Puoi modificarla dalle impostazioni del tuo account."
   },
   "GoDLB9": {
     "message": "Your account has been deleted.",
@@ -7094,13 +7094,13 @@
     "translation": "La tua password è stata modificata."
   },
   "EuK5ez": {
-    "translation": "La tua password è stata impostata.",
     "message": "Your password has been set.",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 96]
-    ]
+    ],
+    "translation": "La tua password è stata impostata."
   },
   "/tOdd2": {
     "message": "Your profile image has been updated.",

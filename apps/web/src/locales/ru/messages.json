@@ -1462,7 +1462,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/Dashboard.tsx", 237],
+      ["src/components/Dashboard.tsx", 246],
       ["src/views/card/index.tsx", 367],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
@@ -2591,7 +2591,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 120]
     ],
     "translation": "Ошибка при смене пароля"
   },
@@ -2666,13 +2666,13 @@
     "translation": "Ошибка при приглашении участника"
   },
   "sZixXc": {
-    "translation": "Ошибка установки пароля",
     "message": "Error Setting Password",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
-    ]
+    ],
+    "translation": "Ошибка установки пароля"
   },
   "sVBn4K": {
     "message": "Error updating display name",
@@ -4322,11 +4322,11 @@
     "translation": "Частичная занятость"
   },
   "nG7mus": {
-    "translation": "Пароль уже установлен",
     "message": "Password already set",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 232]]
+    "origin": [["src/components/Dashboard.tsx", 236]],
+    "translation": "Пароль уже установлен"
   },
   "IrZaAn": {
     "message": "Password Changed",
@@ -4361,13 +4361,13 @@
     "translation": "Пароль должен содержать не менее 8 символов"
   },
   "Xlkxmi": {
-    "translation": "Пароль установлен",
     "message": "Password Set",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
-    ]
+    ],
+    "translation": "Пароль установлен"
   },
   "lpIMne": {
     "message": "Passwords do not match",
@@ -5146,11 +5146,11 @@
     "translation": "Старший"
   },
   "GXGbXi": {
-    "translation": "Установите пароль, чтобы включить вход по паролю.",
     "message": "Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 93]]
+    "origin": [["src/views/settings/AccountSettings.tsx", 93]],
+    "translation": "Установите пароль, чтобы включить вход по паролю."
   },
   "8AbRER": {
     "message": "Set due date",
@@ -5164,7 +5164,6 @@
     "translation": "Установить срок"
   },
   "2gHjVM": {
-    "translation": "Установить пароль",
     "message": "Set Password",
     "placeholders": {},
     "comments": [],
@@ -5173,7 +5172,8 @@
       ["src/views/settings/AccountSettings.tsx", 100],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
-    ]
+    ],
+    "translation": "Установить пароль"
   },
   "Eit43O": {
     "message": "set the due date",
@@ -5632,7 +5632,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 116]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 114]
     ],
     "translation": "Введённый вами текущий пароль неверен."
   },
@@ -6997,13 +6997,13 @@
     "translation": "Вам нужно быть администратором, чтобы управлять правами доступа рабочего пространства."
   },
   "ZhQoZn": {
-    "translation": "Вы вошли без пароля. Установите пароль, чтобы включить вход по паролю.",
     "message": "You signed in without a password. Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 147]
-    ]
+    ],
+    "translation": "Вы вошли без пароля. Установите пароль, чтобы включить вход по паролю."
   },
   "2SePRT": {
     "message": "You've been invited to join a workspace on kan.bn.",
@@ -7020,11 +7020,11 @@
     "translation": "Вас пригласили присоединиться к рабочему пространству."
   },
   "8Zjc7q": {
-    "translation": "В вашей учетной записи уже есть пароль. Вы можете изменить его в настройках учетной записи.",
     "message": "Your account already has a password. You can change it from your account settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 234]]
+    "origin": [["src/components/Dashboard.tsx", 238]],
+    "translation": "В вашей учетной записи уже есть пароль. Вы можете изменить его в настройках учетной записи."
   },
   "GoDLB9": {
     "message": "Your account has been deleted.",
@@ -7094,13 +7094,13 @@
     "translation": "Ваш пароль был изменён."
   },
   "EuK5ez": {
-    "translation": "Ваш пароль установлен.",
     "message": "Your password has been set.",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 96]
-    ]
+    ],
+    "translation": "Ваш пароль установлен."
   },
   "/tOdd2": {
     "message": "Your profile image has been updated.",

@@ -1462,7 +1462,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/Dashboard.tsx", 237],
+      ["src/components/Dashboard.tsx", 246],
       ["src/views/card/index.tsx", 367],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
@@ -2591,7 +2591,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 120]
     ],
     "translation": "Erro ao alterar senha"
   },
@@ -2666,13 +2666,13 @@
     "translation": "Erro ao convidar membro"
   },
   "sZixXc": {
-    "translation": "Erro ao Definir Senha",
     "message": "Error Setting Password",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
-    ]
+    ],
+    "translation": "Erro ao Definir Senha"
   },
   "sVBn4K": {
     "message": "Error updating display name",
@@ -4322,11 +4322,11 @@
     "translation": "Meio período"
   },
   "nG7mus": {
-    "translation": "Senha já definida",
     "message": "Password already set",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 232]]
+    "origin": [["src/components/Dashboard.tsx", 236]],
+    "translation": "Senha já definida"
   },
   "IrZaAn": {
     "message": "Password Changed",
@@ -4361,13 +4361,13 @@
     "translation": "A senha deve ter pelo menos 8 caracteres"
   },
   "Xlkxmi": {
-    "translation": "Senha Definida",
     "message": "Password Set",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
-    ]
+    ],
+    "translation": "Senha Definida"
   },
   "lpIMne": {
     "message": "Passwords do not match",
@@ -5146,11 +5146,11 @@
     "translation": "Sênior"
   },
   "GXGbXi": {
-    "translation": "Defina uma senha para habilitar o login por senha.",
     "message": "Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 93]]
+    "origin": [["src/views/settings/AccountSettings.tsx", 93]],
+    "translation": "Defina uma senha para habilitar o login por senha."
   },
   "8AbRER": {
     "message": "Set due date",
@@ -5164,7 +5164,6 @@
     "translation": "Definir data de vencimento"
   },
   "2gHjVM": {
-    "translation": "Definir Senha",
     "message": "Set Password",
     "placeholders": {},
     "comments": [],
@@ -5173,7 +5172,8 @@
       ["src/views/settings/AccountSettings.tsx", 100],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
-    ]
+    ],
+    "translation": "Definir Senha"
   },
   "Eit43O": {
     "message": "set the due date",
@@ -5632,7 +5632,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 116]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 114]
     ],
     "translation": "A senha atual que você digitou está incorreta."
   },
@@ -6997,13 +6997,13 @@
     "translation": "Você precisa ser um administrador para gerenciar as permissões do workspace."
   },
   "ZhQoZn": {
-    "translation": "Você fez login sem uma senha. Defina uma senha para habilitar o login por senha.",
     "message": "You signed in without a password. Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 147]
-    ]
+    ],
+    "translation": "Você fez login sem uma senha. Defina uma senha para habilitar o login por senha."
   },
   "2SePRT": {
     "message": "You've been invited to join a workspace on kan.bn.",
@@ -7020,11 +7020,11 @@
     "translation": "Você foi convidado para entrar em um workspace."
   },
   "8Zjc7q": {
-    "translation": "Sua conta já possui uma senha. Você pode alterá-la nas configurações da sua conta.",
     "message": "Your account already has a password. You can change it from your account settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 234]]
+    "origin": [["src/components/Dashboard.tsx", 238]],
+    "translation": "Sua conta já possui uma senha. Você pode alterá-la nas configurações da sua conta."
   },
   "GoDLB9": {
     "message": "Your account has been deleted.",
@@ -7094,13 +7094,13 @@
     "translation": "Sua senha foi alterada."
   },
   "EuK5ez": {
-    "translation": "Sua senha foi definida.",
     "message": "Your password has been set.",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 96]
-    ]
+    ],
+    "translation": "Sua senha foi definida."
   },
   "/tOdd2": {
     "message": "Your profile image has been updated.",
