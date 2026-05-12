@@ -7,6 +7,7 @@ export const updateById = async (
   db: dbClient,
   subscriptionId: number,
   updates: {
+    plan?: string;
     unlimitedSeats?: boolean;
     status?: string;
     seats?: number | null;
@@ -87,5 +88,49 @@ export const create = async (
   },
 ) => {
   const [result] = await db.insert(subscription).values(data).returning();
+  return result;
+};
+
+export const getByPartnerLicenseKey = async (
+  db: dbClient,
+  partnerLicenseKey: string,
+) => {
+  const result = await db.query.subscription.findFirst({
+    where: eq(subscription.partnerLicenseKey, partnerLicenseKey),
+  });
+  return result;
+};
+
+export const upsertByPartnerLicenseKey = async (
+  db: dbClient,
+  partnerLicenseKey: string,
+  data: {
+    plan: string;
+    status: string;
+    partnerTier: number;
+    seats: number | null;
+    unlimitedSeats: boolean;
+    referenceId?: string;
+  },
+) => {
+  const existing = await getByPartnerLicenseKey(db, partnerLicenseKey);
+
+  if (existing) {
+    const [result] = await db
+      .update(subscription)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(subscription.partnerLicenseKey, partnerLicenseKey))
+      .returning();
+    return result;
+  }
+
+  const [result] = await db
+    .insert(subscription)
+    .values({
+      partnerLicenseKey,
+      ...data,
+      referenceId: data.referenceId ?? null,
+    })
+    .returning();
   return result;
 };
