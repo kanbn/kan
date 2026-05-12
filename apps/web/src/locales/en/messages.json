@@ -340,6 +340,30 @@
     ],
     "translation": "Actions"
   },
+  "JEt3q7": {
+    "translation": "Activate | kan.bn",
+    "message": "Activate | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/pages/partner/activate.tsx",
+        37
+      ]
+    ]
+  },
+  "mkehy7": {
+    "translation": "Activate your account",
+    "message": "Activate your account",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/pages/partner/activate.tsx",
+        47
+      ]
+    ]
+  },
   "F6pfE9": {
     "message": "Active",
     "placeholders": {},
@@ -883,6 +907,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/pages/partner/activate.tsx",
+        77
+      ],
       [
         "src/views/auth/signup/index.tsx",
         90
@@ -2315,6 +2343,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/pages/partner/activate.tsx",
+        47
+      ],
       [
         "src/views/auth/login/index.tsx",
         43
@@ -8994,6 +9026,18 @@
     ],
     "translation": "Sign In"
   },
+  "4dGN6E": {
+    "translation": "Sign in or create an account to activate your license",
+    "message": "Sign in or create an account to activate your license",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/pages/partner/activate.tsx",
+        53
+      ]
+    ]
+  },
   "fcWrnU": {
     "message": "Sign out",
     "placeholders": {},
@@ -9161,6 +9205,18 @@
       ]
     ],
     "translation": "Solo"
+  },
+  "J9+zIR": {
+    "translation": "Something went wrong during activation. Please try again.",
+    "message": "Something went wrong during activation. Please try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/pages/partner/activate.tsx",
+        59
+      ]
+    ]
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -11189,6 +11245,22 @@
       ]
     ],
     "translation": "We couldn't update your preferences. Please try again."
+  },
+  "7sdSkl": {
+    "translation": "We sent a link to {magicLinkRecipient}",
+    "message": "We sent a link to {magicLinkRecipient}",
+    "placeholders": {
+      "magicLinkRecipient": [
+        "magicLinkRecipient"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/pages/partner/activate.tsx",
+        51
+      ]
+    ]
   },
   "9y1RcT": {
     "message": "We're just getting started. ",

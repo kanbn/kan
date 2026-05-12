@@ -201,6 +201,20 @@
     "origin": [["src/providers/keyboard-shortcuts.tsx", 56]],
     "translation": "Aktionen"
   },
+  "JEt3q7": {
+    "translation": "Aktivieren | kan.bn",
+    "message": "Activate | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/partner/activate.tsx", 37]]
+  },
+  "mkehy7": {
+    "translation": "Aktivieren Sie Ihr Konto",
+    "message": "Activate your account",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/partner/activate.tsx", 47]]
+  },
   "F6pfE9": {
     "message": "Active",
     "placeholders": {},
@@ -523,7 +537,10 @@
     "message": "Already have an account? <0><1>Sign in</1></0>",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/auth/signup/index.tsx", 90]],
+    "origin": [
+      ["src/pages/partner/activate.tsx", 77],
+      ["src/views/auth/signup/index.tsx", 90]
+    ],
     "translation": "Haben Sie bereits ein Konto? <0><1>Anmelden</1></0>"
   },
   "j1+HPc": {
@@ -1377,6 +1394,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      ["src/pages/partner/activate.tsx", 47],
       ["src/views/auth/login/index.tsx", 43],
       ["src/views/auth/signup/index.tsx", 71]
     ],
@@ -5269,6 +5287,13 @@
     "origin": [["src/views/invite/index.tsx", 154]],
     "translation": "Anmelden"
   },
+  "4dGN6E": {
+    "translation": "Melden Sie sich an oder erstellen Sie ein Konto, um Ihre Lizenz zu aktivieren",
+    "message": "Sign in or create an account to activate your license",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/partner/activate.tsx", 53]]
+  },
   "fcWrnU": {
     "message": "Sign out",
     "placeholders": {},
@@ -5370,6 +5395,13 @@
     "comments": [],
     "origin": [["src/views/onboarding/select-plan/index.tsx", 76]],
     "translation": "Solo"
+  },
+  "J9+zIR": {
+    "translation": "Während der Aktivierung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+    "message": "Something went wrong during activation. Please try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/pages/partner/activate.tsx", 59]]
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -6587,6 +6619,15 @@
     "comments": [],
     "origin": [["src/pages/unsubscribe/index.tsx", 63]],
     "translation": "Wir konnten Ihre Einstellungen nicht aktualisieren. Bitte versuchen Sie es erneut."
+  },
+  "7sdSkl": {
+    "translation": "Wir haben einen Link an {magicLinkRecipient} gesendet",
+    "message": "We sent a link to {magicLinkRecipient}",
+    "placeholders": {
+      "magicLinkRecipient": ["magicLinkRecipient"]
+    },
+    "comments": [],
+    "origin": [["src/pages/partner/activate.tsx", 51]]
   },
   "9y1RcT": {
     "message": "We're just getting started. ",
