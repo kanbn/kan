@@ -7,7 +7,12 @@ import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { listCreateResponseSchema, listUpdateResponseSchema } from "../schemas";
+import {
+  listCreateResponseSchema,
+  listCreateWipLimitSchema,
+  listUpdateResponseSchema,
+  listUpdateWipLimitSchema,
+} from "../schemas";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 
 export const listRouter = createTRPCRouter({
@@ -26,6 +31,7 @@ export const listRouter = createTRPCRouter({
       z.object({
         name: z.string().min(1),
         boardPublicId: z.string().min(12),
+        wipLimit: listCreateWipLimitSchema.optional(),
       }),
     )
     .output(listCreateResponseSchema)
@@ -55,6 +61,7 @@ export const listRouter = createTRPCRouter({
         name: input.name,
         createdBy: userId,
         boardId: board.id,
+        wipLimit: input.wipLimit,
       });
 
       if (!result)
@@ -162,6 +169,7 @@ export const listRouter = createTRPCRouter({
         listPublicId: z.string().min(12),
         name: z.string().min(1).optional(),
         index: z.number().optional(),
+        wipLimit: listUpdateWipLimitSchema.optional(),
       }),
     )
     .output(listUpdateResponseSchema)
@@ -193,12 +201,12 @@ export const listRouter = createTRPCRouter({
         list.createdBy,
       );
 
-      let result: { name: string; publicId: string } | undefined;
+      let result: { name: string; publicId: string; wipLimit: number | null } | undefined;
 
-      if (input.name) {
+      if (input.name !== undefined || input.wipLimit !== undefined) {
         result = await listRepo.update(
           ctx.db,
-          { name: input.name },
+          { name: input.name, wipLimit: input.wipLimit },
           { listPublicId: input.listPublicId },
         );
       }

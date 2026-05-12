@@ -41,6 +41,7 @@ export function NewListForm({
       defaultValues: {
         name: "",
         boardPublicId: boardPublicId,
+        wipLimit: null,
         isCreateAnotherEnabled: false,
       },
     });
@@ -59,6 +60,7 @@ export function NewListForm({
         const newList = {
           publicId: generateUID(),
           name: args.name,
+          wipLimit: args.wipLimit && args.wipLimit > 0 ? args.wipLimit : null,
           boardId: 1,
           boardPublicId,
           cards: [],
@@ -96,12 +98,14 @@ export function NewListForm({
     if (!isCreateAnotherEnabled) closeModal();
     reset({
       name: "",
+      wipLimit: null,
       isCreateAnotherEnabled,
     });
 
     createList.mutate({
       name: data.name,
       boardPublicId,
+      wipLimit: data.wipLimit,
     });
   };
 
@@ -135,6 +139,28 @@ export function NewListForm({
             }
           }}
         />
+        <div className="mt-4">
+          <label
+            htmlFor="list-wip-limit"
+            className="mb-2 block text-xs font-medium text-light-1000 dark:text-dark-1000"
+          >
+            {t`WIP limit`}
+          </label>
+          <Input
+            id="list-wip-limit"
+            type="number"
+            min={0}
+            inputMode="numeric"
+            placeholder={t`Unlimited`}
+            {...register("wipLimit", {
+              setValueAs: (value) => {
+                if (value === "") return null;
+
+                return Number(value);
+              },
+            })}
+          />
+        </div>
       </div>
       <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
         <Toggle

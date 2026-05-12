@@ -5,6 +5,7 @@ import { keepPreviousData } from "@tanstack/react-query";
 import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 import { HiLink, HiOutlineLockClosed } from "react-icons/hi2";
+import { twMerge } from "tailwind-merge";
 
 import Button from "~/components/Button";
 import Modal from "~/components/modal";
@@ -19,6 +20,10 @@ import { api } from "~/utils/api";
 import { formatToArray } from "~/utils/helpers";
 import Card from "~/views/board/components/Card";
 import Filters from "~/views/board/components/Filters";
+import {
+  getWipState,
+  ListWipSummary,
+} from "~/views/board/components/ListWipSummary";
 import { CardModal } from "./CardModal";
 
 const IS_CLOUD = env("NEXT_PUBLIC_KAN_ENV") === "cloud";
@@ -192,12 +197,25 @@ export default function PublicBoardView() {
                 {data?.lists.map((list) => (
                   <div
                     key={list.publicId}
-                    className="dark-text-dark-1000 mr-5 h-fit min-w-[18rem] max-w-[18rem] rounded-md border border-light-400 bg-light-300 py-2 pl-2 pr-1 text-neutral-900 dark:border-dark-300 dark:bg-dark-100"
+                    className={twMerge(
+                      "dark-text-dark-1000 mr-5 h-fit min-w-[18rem] max-w-[18rem] rounded-md border bg-light-300 py-2 pl-2 pr-1 text-neutral-900 transition-colors duration-200 dark:bg-dark-100",
+                      getWipState(list.cards.length, list.wipLimit) === "normal" &&
+                        "border-light-400 dark:border-dark-300",
+                      getWipState(list.cards.length, list.wipLimit) === "warning" &&
+                        "border-amber-300 bg-amber-50/40 dark:border-amber-500/30 dark:bg-amber-500/5",
+                      getWipState(list.cards.length, list.wipLimit) === "danger" &&
+                        "border-red-300 bg-red-50/40 dark:border-red-500/30 dark:bg-red-500/5",
+                    )}
                   >
-                    <div className="flex justify-between">
-                      <span className="mb-4 block px-4 pt-1 text-sm font-medium text-neutral-900 dark:text-dark-1000">
+                    <div className="mb-2">
+                      <span className="block px-4 pt-1 text-sm font-medium text-neutral-900 dark:text-dark-1000">
                         {list.name}
                       </span>
+                      <ListWipSummary
+                        cardCount={list.cards.length}
+                        wipLimit={list.wipLimit}
+                        className="px-4 pt-1"
+                      />
                     </div>
                     <div className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 h-full max-h-[calc(100vh-265px)] min-h-[2rem] overflow-y-auto pr-1 scrollbar dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600">
                       {list.cards.map((card) => {

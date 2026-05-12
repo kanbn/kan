@@ -20,6 +20,7 @@ export const create = async (
     createdBy: string;
     boardId: number;
     importId?: number;
+    wipLimit?: number | null;
   },
 ) => {
   return db.transaction(async (tx) => {
@@ -44,12 +45,14 @@ export const create = async (
         boardId: listInput.boardId,
         index,
         importId: listInput.importId,
+        wipLimit: listInput.wipLimit,
       })
       .returning({
         id: lists.id,
         publicId: lists.publicId,
         boardId: lists.boardId,
         name: lists.name,
+        wipLimit: lists.wipLimit,
       });
 
     if (!result)
@@ -213,6 +216,7 @@ export const getByPublicId = async (db: dbClient, listPublicId: string) => {
       name: true,
       boardId: true,
       index: true,
+      wipLimit: true,
     },
     where: and(eq(lists.publicId, listPublicId), isNull(lists.deletedAt)),
   });
@@ -242,7 +246,8 @@ export const getWithCardsByPublicId = async (
 export const update = async (
   db: dbClient,
   listInput: {
-    name: string;
+    name?: string;
+    wipLimit?: number | null;
   },
   args: {
     listPublicId: string;
@@ -250,11 +255,15 @@ export const update = async (
 ) => {
   const [result] = await db
     .update(lists)
-    .set({ name: listInput.name })
+    .set({
+      ...(listInput.name !== undefined && { name: listInput.name }),
+      ...(listInput.wipLimit !== undefined && { wipLimit: listInput.wipLimit }),
+    })
     .where(and(eq(lists.publicId, args.listPublicId), isNull(lists.deletedAt)))
     .returning({
       publicId: lists.publicId,
       name: lists.name,
+      wipLimit: lists.wipLimit,
     });
 
   return result;
@@ -337,6 +346,7 @@ export const reorder = async (
       columns: {
         publicId: true,
         name: true,
+        wipLimit: true,
       },
       where: eq(lists.publicId, args.listPublicId),
     });

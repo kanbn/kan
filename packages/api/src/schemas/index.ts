@@ -32,7 +32,12 @@ export {
   workspaceDeleteResponseSchema,
 } from "./workspace";
 
-export { listCreateResponseSchema, listUpdateResponseSchema } from "./list";
+export {
+  listCreateResponseSchema,
+  listCreateWipLimitSchema,
+  listUpdateResponseSchema,
+  listUpdateWipLimitSchema,
+} from "./list";
 
 export { memberInviteResponseSchema } from "./member";
 

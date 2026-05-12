@@ -19,6 +19,7 @@ export const lists = pgTable("list", {
   publicId: varchar("publicId", { length: 12 }).notNull().unique(),
   name: varchar("name", { length: 255 }).notNull(),
   index: integer("index").notNull(),
+  wipLimit: integer("wipLimit"),
   createdBy: uuid("createdBy").references(() => users.id, {
     onDelete: "set null",
   }),
