@@ -171,18 +171,20 @@ export default function WebhookList({ workspacePublicId }: WebhookListProps) {
   const testWebhookMutation = api.webhook.test.useMutation({
     onSuccess: (result) => {
       if (result.success) {
-        showPopup({ message: t`Test webhook sent successfully!`, type: "success" });
+        showPopup({ header: t`Test sent`, message: t`Test webhook sent successfully!`, icon: "success" });
       } else {
         showPopup({
+          header: t`Test failed`,
           message: result.error || t`Webhook test failed`,
-          type: "error",
+          icon: "error",
         });
       }
     },
     onError: (error) => {
       showPopup({
+        header: t`Unable to test webhook`,
         message: error.message || t`Failed to test webhook`,
-        type: "error",
+        icon: "error",
       });
     },
   });

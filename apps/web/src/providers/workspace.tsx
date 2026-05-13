@@ -20,6 +20,7 @@ interface Workspace {
   plan: "free" | "team" | "pro" | "enterprise" | undefined;
   role: "admin" | "member" | "guest";
   weekStartDay: 0 | 1 | 6;
+  cardPrefix: string;
 }
 
 const initialWorkspace: Workspace = {
@@ -30,6 +31,7 @@ const initialWorkspace: Workspace = {
   plan: "free" as const,
   role: "member",
   weekStartDay: 1,
+  cardPrefix: "",
 };
 
 const initialAvailableWorkspaces: Workspace[] = [];
@@ -90,6 +92,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         description: workspace.description,
         plan: workspace.plan,
         weekStartDay: workspace.weekStartDay,
+        cardPrefix: workspace.cardPrefix,
         hasLoaded: true,
       })) as Workspace[];
 
@@ -121,6 +124,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         description: selectedWorkspace.workspace.description,
         role: selectedWorkspace.role,
         weekStartDay: selectedWorkspace.workspace.weekStartDay as 0 | 1 | 6,
+        cardPrefix: selectedWorkspace.workspace.cardPrefix,
       });
 
       if (workspacePublicId) {
@@ -141,6 +145,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         description: primaryWorkspace.description,
         role: primaryWorkspaceRole,
         weekStartDay: primaryWorkspace.weekStartDay as 0 | 1 | 6,
+        cardPrefix: primaryWorkspace.cardPrefix,
       });
     }
   }, [data, isLoading, workspacePublicId, router]);

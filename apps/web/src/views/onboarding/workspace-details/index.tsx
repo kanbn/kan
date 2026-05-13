@@ -41,6 +41,7 @@ export default function WorkspaceNameView() {
   const returnUrl = searchParams.get("returnUrl") ?? "/boards";
   const { showPopup } = usePopup();
   const [isProToggle, setIsProToggle] = useState(plan === "pro");
+  const effectivePlan = isProToggle ? "pro" : plan;
 
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
@@ -109,7 +110,7 @@ export default function WorkspaceNameView() {
   const handleContinue = async () => {
     if (!name.trim()) return;
 
-    if (plan === "solo") {
+    if (effectivePlan === "solo") {
       createWorkspace.mutate({
         name: name.trim(),
         ...(description.trim() && { description: description.trim() }),
@@ -128,11 +129,11 @@ export default function WorkspaceNameView() {
           ...(description.trim() && {
             workspaceDescription: description.trim(),
           }),
-          ...(plan === "pro" && slug ? { workspaceSlug: slug } : {}),
-          cancelUrl: window.location.pathname + window.location.search,
+          ...(effectivePlan === "pro" && slug ? { workspaceSlug: slug } : {}),
+          cancelUrl: `${window.location.pathname}?plan=${effectivePlan}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`,
           successUrl: "/boards",
           billing,
-          plan,
+          plan: effectivePlan,
         }),
       });
       const data = await response.json();
@@ -268,7 +269,7 @@ export default function WorkspaceNameView() {
                   variant="ghost"
                   onClick={() =>
                     router.replace(
-                      `/onboarding/select-plan?plan=${plan}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`,
+                      `/onboarding/select-plan?plan=${effectivePlan}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`,
                     )
                   }
                 >

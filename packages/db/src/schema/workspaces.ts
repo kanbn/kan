@@ -3,6 +3,7 @@ import {
   bigint,
   bigserial,
   boolean,
+  index,
   integer,
   pgEnum,
   pgTable,
@@ -38,25 +39,31 @@ export const workspacePlans = ["free", "team", "pro", "enterprise"] as const;
 export type WorkspacePlan = (typeof workspacePlans)[number];
 export const workspacePlanEnum = pgEnum("workspace_plan", workspacePlans);
 
-export const workspaces = pgTable("workspace", {
-  id: bigserial("id", { mode: "number" }).primaryKey(),
-  publicId: varchar("publicId", { length: 12 }).notNull().unique(),
-  name: varchar("name", { length: 255 }).notNull(),
-  description: text("description"),
-  slug: varchar("slug", { length: 255 }).notNull().unique(),
-  plan: workspacePlanEnum("plan").notNull().default("free"),
-  showEmailsToMembers: boolean("showEmailsToMembers").notNull().default(true),
-  weekStartDay: integer("weekStartDay").notNull().default(1),
-  createdBy: uuid("createdBy").references(() => users.id, {
-    onDelete: "set null",
-  }),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt"),
-  deletedAt: timestamp("deletedAt"),
-  deletedBy: uuid("deletedBy").references(() => users.id, {
-    onDelete: "set null",
-  }),
-}).enableRLS();
+export const workspaces = pgTable(
+  "workspace",
+  {
+    id: bigserial("id", { mode: "number" }).primaryKey(),
+    publicId: varchar("publicId", { length: 12 }).notNull().unique(),
+    name: varchar("name", { length: 255 }).notNull(),
+    description: text("description"),
+    slug: varchar("slug", { length: 255 }).notNull().unique(),
+    plan: workspacePlanEnum("plan").notNull().default("free"),
+    showEmailsToMembers: boolean("showEmailsToMembers").notNull().default(true),
+    weekStartDay: integer("weekStartDay").notNull().default(1),
+    cardPrefix: varchar("cardPrefix", { length: 10 }).notNull().default(""),
+    cardCounter: integer("cardCounter").notNull().default(0),
+    createdBy: uuid("createdBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt"),
+    deletedAt: timestamp("deletedAt"),
+    deletedBy: uuid("deletedBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
+  },
+  (table) => [index("workspace_card_prefix_idx").on(table.cardPrefix)],
+).enableRLS();
 
 export const workspaceRelations = relations(workspaces, ({ one, many }) => ({
   user: one(users, {

@@ -17,11 +17,11 @@ import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { DeleteWorkspaceConfirmation } from "./components/DeleteWorkspaceConfirmation";
+import UpdateWeekStartDayForm from "./components/UpdateWeekStartDayForm";
 import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescriptionForm";
 import UpdateWorkspaceEmailVisibilityForm from "./components/UpdateWorkspaceEmailVisibilityForm";
 import UpdateWorkspaceNameForm from "./components/UpdateWorkspaceNameForm";
 import UpdateWorkspaceUrlForm from "./components/UpdateWorkspaceUrlForm";
-import UpdateWeekStartDayForm from "./components/UpdateWeekStartDayForm";
 import { UpgradeToProConfirmation } from "./components/UpgradeToProConfirmation";
 
 export default function WorkspaceSettings() {

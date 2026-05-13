@@ -10,6 +10,14 @@ import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import {
+  cardCreateResponseSchema,
+  cardUpdateResponseSchema,
+  cardDetailSchema,
+  commentResponseSchema,
+  commentDeleteResponseSchema,
+  activityItemSchema,
+} from "../schemas";
 import { mergeActivities } from "../utils/activities";
 import { sendMentionEmails } from "../utils/notifications";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
@@ -42,7 +50,7 @@ export const cardRouter = createTRPCRouter({
         dueDate: z.date().nullable().optional(),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof cardRepo.create>>>())
+    .output(cardCreateResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -70,6 +78,7 @@ export const cardRouter = createTRPCRouter({
         description: input.description,
         createdBy: userId,
         listId: list.id,
+        workspaceId: list.workspaceId,
         position: input.position,
         dueDate: input.dueDate ?? null,
       });
@@ -178,10 +187,11 @@ export const cardRouter = createTRPCRouter({
           "card.created",
           {
             id: String(newCard.id),
+            publicId: newCard.publicId,
             title: input.title,
             description: input.description,
             dueDate: input.dueDate ?? null,
-            listId: String(newCard.listId),
+            listId: list.publicId,
           },
           {
             boardId: list.boardPublicId,
@@ -215,7 +225,7 @@ export const cardRouter = createTRPCRouter({
         comment: z.string().min(1),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof cardCommentRepo.create>>>())
+    .output(commentResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -288,7 +298,7 @@ export const cardRouter = createTRPCRouter({
         comment: z.string().min(1),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof cardCommentRepo.update>>>())
+    .output(commentResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -376,7 +386,7 @@ export const cardRouter = createTRPCRouter({
         commentPublicId: z.string().min(12),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof cardCommentRepo.softDelete>>>())
+    .output(commentDeleteResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -435,7 +445,7 @@ export const cardRouter = createTRPCRouter({
         createdBy: userId,
       });
 
-      return deletedComment;
+      return { publicId: input.commentPublicId };
     }),
   addOrRemoveLabel: protectedProcedure
     .meta({
@@ -639,25 +649,7 @@ export const cardRouter = createTRPCRouter({
       },
     })
     .input(z.object({ cardPublicId: z.string().min(12) }))
-    .output(
-      z.custom<
-        Omit<
-          NonNullable<
-            Awaited<ReturnType<typeof cardRepo.getWithListAndMembersByPublicId>>
-          >,
-          "attachments"
-        > & {
-          attachments: {
-            publicId: string;
-            contentType: string;
-            s3Key: string;
-            originalFilename: string | null;
-            size?: number | null;
-            url: string | null;
-          }[];
-        }
-      >(),
-    )
+    .output(cardDetailSchema)
     .query(async ({ ctx, input }) => {
       const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
         ctx.db,
@@ -763,15 +755,7 @@ export const cardRouter = createTRPCRouter({
     )
     .output(
       z.object({
-        activities: z.array(
-          z.custom<
-            NonNullable<
-              Awaited<
-                ReturnType<typeof cardActivityRepo.getPaginatedActivities>
-              >
-            >["activities"][number]
-          >(),
-        ),
+        activities: z.array(activityItemSchema),
         hasMore: z.boolean(),
         nextCursor: z.string().datetime().nullable(),
       }),
@@ -871,7 +855,7 @@ export const cardRouter = createTRPCRouter({
         dueDate: z.date().nullable().optional(),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof cardRepo.update>>>())
+    .output(cardUpdateResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -906,9 +890,18 @@ export const cardRouter = createTRPCRouter({
       );
 
       let newListId: number | undefined;
+      let newList:
+        | {
+            id: number;
+            publicId: string;
+            name: string;
+            boardId: number;
+            index: number;
+          }
+        | undefined;
 
       if (input.listPublicId) {
-        const newList = await listRepo.getByPublicId(
+        newList = await listRepo.getByPublicId(
           ctx.db,
           input.listPublicId,
         );
@@ -953,7 +946,7 @@ export const cardRouter = createTRPCRouter({
         );
       }
 
-      if (input.index !== undefined) {
+      if (input.index !== undefined || newListId !== undefined) {
         result = await cardRepo.reorder(ctx.db, {
           cardId: existingCard.id,
           newIndex: input.index,
@@ -1055,8 +1048,19 @@ export const cardRouter = createTRPCRouter({
       ) {
         webhookChanges.dueDate = { from: previousDueDate, to: input.dueDate };
       }
-      if (newListId && existingCard.listId !== newListId) {
-        webhookChanges.listId = { from: existingCard.listId, to: newListId };
+      const movedToNewList = Boolean(newListId && existingCard.listId !== newListId);
+      const currentWebhookListPublicId = movedToNewList
+        ? input.listPublicId!
+        : existingCard.list.publicId;
+      const currentWebhookListName = movedToNewList
+        ? newList?.name ?? card.listName
+        : existingCard.list.name;
+
+      if (movedToNewList) {
+        webhookChanges.listId = {
+          from: existingCard.list.publicId,
+          to: input.listPublicId!,
+        };
       }
 
       // Fire webhooks (non-blocking)
@@ -1064,20 +1068,19 @@ export const cardRouter = createTRPCRouter({
         ctx.db,
         card.workspaceId,
         createCardWebhookPayload(
-          newListId && existingCard.listId !== newListId
-            ? "card.moved"
-            : "card.updated",
+          movedToNewList ? "card.moved" : "card.updated",
           {
             id: String(result.id),
+            publicId: result.publicId,
             title: result.title,
             description: result.description,
             dueDate: result.dueDate,
-            listId: String(newListId ?? existingCard.listId),
+            listId: currentWebhookListPublicId,
           },
           {
             boardId: card.boardPublicId,
             boardName: card.boardName,
-            listName: card.listName,
+            listName: currentWebhookListName,
             user: ctx.user
               ? { id: ctx.user.id, name: ctx.user.name }
               : undefined,
@@ -1164,15 +1167,16 @@ export const cardRouter = createTRPCRouter({
             "card.deleted",
             {
               id: String(fullCard.id),
+              publicId: fullCard.publicId,
               title: fullCard.title,
               description: fullCard.description,
               dueDate: fullCard.dueDate,
-              listId: String(fullCard.listId),
+              listId: fullCard.list.publicId,
             },
             {
               boardId: card.boardPublicId,
               boardName: card.boardName,
-              listName: card.listName,
+              listName: fullCard.list.name,
               user: ctx.user
                 ? { id: ctx.user.id, name: ctx.user.name }
                 : undefined,
@@ -1272,6 +1276,7 @@ export const cardRouter = createTRPCRouter({
         description: sourceCard.description ?? "",
         createdBy: userId,
         listId: targetList.id,
+        workspaceId: targetList.workspaceId,
         position: "end",
         dueDate: sourceCard.dueDate ?? null,
       });

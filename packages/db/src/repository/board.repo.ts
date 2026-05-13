@@ -209,6 +209,7 @@ export const getByPublicId = async (
       workspace: {
         columns: {
           publicId: true,
+          cardPrefix: true,
         },
         with: {
           members: {
@@ -220,6 +221,7 @@ export const getByPublicId = async (
             with: {
               user: {
                 columns: {
+                  id: true,
                   name: true,
                   email: true,
                   image: true,
@@ -254,6 +256,7 @@ export const getByPublicId = async (
               listId: true,
               index: true,
               dueDate: true,
+              cardNumber: true,
             },
             with: {
               labels: {
@@ -278,6 +281,7 @@ export const getByPublicId = async (
                     with: {
                       user: {
                         columns: {
+                          id: true,
                           name: true,
                           email: true,
                           image: true,
@@ -422,6 +426,7 @@ export const getBySlug = async (
           publicId: true,
           name: true,
           slug: true,
+          cardPrefix: true,
         },
       },
       labels: {
@@ -448,6 +453,7 @@ export const getBySlug = async (
               listId: true,
               index: true,
               dueDate: true,
+              cardNumber: true,
             },
             with: {
               labels: {

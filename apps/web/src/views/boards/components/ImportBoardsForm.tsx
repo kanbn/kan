@@ -184,7 +184,7 @@ const SelectSource = ({
         />
       </div>
 
-      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
         <div>
           <Button
             type="submit"
@@ -310,7 +310,7 @@ const ImportGithub: React.FC = () => {
     <form onSubmit={handleSubmitProjects(onSubmitProjects)}>
       <div className="h-[105px] overflow-auto px-5">{renderContent()}</div>
 
-      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
         <Toggle
           label={t`Select all`}
           isChecked={!!isSelectAllEnabled}
@@ -459,7 +459,7 @@ const ImportTrello: React.FC = () => {
     <form onSubmit={handleSubmitBoards(onSubmitBoards)}>
       <div className="h-[105px] overflow-auto px-5">{renderContent()}</div>
 
-      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
         <Toggle
           label={t`Select all`}
           isChecked={!!isSelectAllEnabled}

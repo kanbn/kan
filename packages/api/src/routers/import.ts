@@ -340,6 +340,7 @@ export const importRouter = createTRPCRouter({
                 description: card.description,
                 createdBy: userId,
                 listId: newListId,
+                workspaceId: workspace.id,
                 index,
                 importId: newImportId,
               }));
@@ -888,6 +889,7 @@ export const importRouter = createTRPCRouter({
             description: data.description,
             createdBy: userId,
             listId: data.listId,
+            workspaceId: workspace.id,
             index: index,
             importId: newImportId,
           }));

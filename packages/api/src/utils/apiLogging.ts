@@ -20,8 +20,11 @@ export function withApiLogging(
     const requestId = randomUUID();
     const route = req.url?.split("?")[0] ?? "unknown";
     const input = {
-      ...(req.query && Object.keys(req.query).length > 0 && { query: req.query }),
-      ...(req.body && typeof req.body === "object" && Object.keys(req.body).length > 0 && { body: req.body }),
+      ...(req.query &&
+        Object.keys(req.query).length > 0 && { query: req.query }),
+      ...(req.body &&
+        typeof req.body === "object" &&
+        Object.keys(req.body).length > 0 && { body: req.body }),
     };
 
     let statusCode = 200;
@@ -41,7 +44,16 @@ export function withApiLogging(
       // unauthenticated or auth unavailable
     }
 
-    await handler(req, res);
+    let handlerError: unknown;
+    try {
+      await handler(req, res);
+    } catch (err) {
+      handlerError = err;
+      statusCode = 500;
+      if (!res.headersSent) {
+        res.status(500).json({ error: "Internal server error" });
+      }
+    }
 
     const duration = Date.now() - start;
     const meta = {
@@ -53,6 +65,10 @@ export function withApiLogging(
       ...(isCloud && email && { email }),
       ...(Object.keys(input).length > 0 && { input }),
       status: statusCode,
+      ...(handlerError instanceof Error && {
+        error: handlerError.message,
+        stack: handlerError.stack,
+      }),
     };
 
     if (statusCode < 400) {

@@ -1,6 +1,7 @@
-import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
+import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
+import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 import {
   TbLayoutSidebarLeftCollapse,
@@ -15,6 +16,9 @@ import { useClickOutside } from "~/hooks/useClickOutside";
 import { useModal } from "~/providers/modal";
 import { useWorkspace, WorkspaceProvider } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { ChangePasswordFormConfirmation } from "~/views/settings/components/ChangePasswordConfirmation";
+import Button from "./Button";
+import Modal from "./modal";
 import SideNavigation from "./SideNavigation";
 
 interface DashboardProps {
@@ -43,7 +47,7 @@ export default function Dashboard({
   hasRightPanel = false,
 }: DashboardProps) {
   const { resolvedTheme } = useTheme();
-  const { openModal } = useModal();
+  const { openModal, closeModal, modalContentType } = useModal();
   const { availableWorkspaces, hasLoaded } = useWorkspace();
   const router = useRouter();
 
@@ -102,12 +106,31 @@ export default function Dashboard({
   useEffect(() => {
     if (hasLoaded && availableWorkspaces.length === 0) {
       if (env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
-        router.push(`/onboarding/select-plan?returnUrl=${encodeURIComponent(window.location.pathname)}`);
+        router.push(
+          `/onboarding/select-plan?returnUrl=${encodeURIComponent(window.location.pathname)}`,
+        );
       } else {
         openModal("NEW_WORKSPACE", undefined, undefined, false);
       }
     }
   }, [hasLoaded, availableWorkspaces.length, openModal, router]);
+
+  useEffect(() => {
+    const isCredentialsEnabled =
+      env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
+
+    if (
+      !userLoading &&
+      user &&
+      isCredentialsEnabled &&
+      user.hasMagicLinkAccount &&
+      !user.hasPassword &&
+      !sessionStorage.getItem("set_password_prompted")
+    ) {
+      sessionStorage.setItem("set_password_prompted", "1");
+      openModal("SET_PASSWORD_PROMPT");
+    }
+  }, [user, userLoading, openModal]);
 
   const isDarkMode = resolvedTheme === "dark";
 
@@ -203,6 +226,30 @@ export default function Dashboard({
           </div>
         </div>
       </div>
+
+      <Modal
+        modalSize="sm"
+        isVisible={modalContentType === "SET_PASSWORD_PROMPT"}
+      >
+        {user?.hasPassword ? (
+          <div className="p-5">
+            <h2 className="pb-4 text-base font-medium dark:text-white">{t`Password already set`}</h2>
+            <p className="mb-6 text-sm text-light-900">
+              {t`Your account already has a password. You can change it from your account settings.`}
+            </p>
+            <Button
+              variant="secondary"
+              onClick={closeModal}
+              fullWidth
+              size="lg"
+            >
+              {t`Close`}
+            </Button>
+          </div>
+        ) : (
+          <ChangePasswordFormConfirmation hasPassword={false} />
+        )}
+      </Modal>
     </>
   );
 }

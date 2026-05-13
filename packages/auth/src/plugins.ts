@@ -170,7 +170,7 @@ export function createPlugins(db: dbClient) {
         if (authorization?.startsWith("Bearer ")) {
           return authorization.slice(7);
         }
-        return ctx.headers?.get("x-api-key") ?? undefined;
+        return ctx.headers?.get("x-api-key") ?? null;
       },
       rateLimit: {
         enabled: true,

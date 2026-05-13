@@ -1,6 +1,7 @@
 import { t } from "@lingui/core/macro";
 import {
   HiEllipsisHorizontal,
+  HiHashtag,
   HiLink,
   HiOutlineCheckCircle,
   HiOutlineTrash,
@@ -18,11 +19,13 @@ export default function CardDropdown({
   isTemplate,
   boardPublicId,
   cardCreatedBy,
+  ticketNumber,
 }: {
   cardPublicId: string;
   isTemplate?: boolean;
   boardPublicId?: string;
   cardCreatedBy?: string | null;
+  ticketNumber?: string | null;
 }) {
   const { openModal } = useModal();
   const { showPopup } = usePopup();
@@ -53,12 +56,40 @@ export default function CardDropdown({
     }
   };
 
+  const handleCopyTicketId = async () => {
+    if (!ticketNumber) return;
+    try {
+      await navigator.clipboard.writeText(ticketNumber);
+      showPopup({
+        header: t`ID copied`,
+        icon: "success",
+        message: t`Ticket ID copied to clipboard`,
+      });
+    } catch (error) {
+      console.error(error);
+      showPopup({
+        header: t`Unable to copy ID`,
+        icon: "error",
+        message: t`Please try again.`,
+      });
+    }
+  };
+
   const items = [
     {
       label: t`Copy card link`,
       action: handleCopyCardLink,
       icon: <HiLink className="h-[16px] w-[16px] text-dark-900" />,
     },
+    ...(ticketNumber
+      ? [
+          {
+            label: t`Copy ticket ID`,
+            action: handleCopyTicketId,
+            icon: <HiHashtag className="h-[16px] w-[16px] text-dark-900" />,
+          },
+        ]
+      : []),
     ...(canEditCard
       ? [
           {
