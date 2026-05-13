@@ -134,6 +134,12 @@ export default withRateLimit(
 
       return res.status(200).json({ attachment });
     } catch (error) {
+      console.error("Attachment upload failed", {
+        err: error,
+        cardPublicId: req.query.cardPublicId,
+        contentType: req.headers["content-type"],
+        contentLength: req.headers["content-length"],
+      });
       return res.status(500).json({ error: "Internal server error" });
     }
   }),

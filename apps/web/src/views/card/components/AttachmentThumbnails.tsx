@@ -146,13 +146,19 @@ export function AttachmentThumbnails({
       return;
     }
 
-    const downloadUrl = `/api/download/attatchment?url=${encodeURIComponent(attachment.url)}&filename=${encodeURIComponent(attachment.originalFilename ?? "attachment")}`;
-
+    // The presigned URL already carries Content-Disposition: attachment for
+    // non-image files (see card.ts attachmentsWithUrls), so we download
+    // straight from S3. The download attribute is a hint for same-origin URLs
+    // and ignored cross-origin — S3's response header is what actually forces
+    // the save dialog cross-origin.
     const link = document.createElement("a");
-    link.href = downloadUrl;
+    link.href = attachment.url;
+    link.download = attachment.originalFilename ?? "attachment";
+    link.rel = "noopener";
     link.style.display = "none";
     document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   };
 
   const selectedAttachment =

@@ -685,10 +685,25 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      // Generate URLs for all attachments
+      // Generate URLs for all attachments. Non-image attachments get a
+      // Content-Disposition: attachment baked into the presigned URL so the
+      // browser downloads them directly from S3 with the original filename
+      // (no proxy hop required, which historically broke for PDFs in some
+      // network configurations).
       const attachmentsWithUrls = await Promise.all(
         result.attachments.map(async (attachment) => {
-          const url = await generateAttachmentUrl(attachment.s3Key);
+          const isImage = attachment.contentType.startsWith("image/");
+          const url = await generateAttachmentUrl(
+            attachment.s3Key,
+            undefined,
+            isImage
+              ? undefined
+              : {
+                  originalFilename: attachment.originalFilename,
+                  contentType: attachment.contentType,
+                  forceDownload: true,
+                },
+          );
           return {
             publicId: attachment.publicId,
             contentType: attachment.contentType,

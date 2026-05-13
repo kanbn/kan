@@ -47,6 +47,10 @@ export async function generateDownloadUrl(
   bucket: string,
   key: string,
   expiresIn = 3600,
+  responseOverrides?: {
+    contentDisposition?: string;
+    contentType?: string;
+  },
 ) {
   const client = createS3Client();
   return getSignedUrl(
@@ -54,6 +58,8 @@ export async function generateDownloadUrl(
     new GetObjectCommand({
       Bucket: bucket,
       Key: key,
+      ResponseContentDisposition: responseOverrides?.contentDisposition,
+      ResponseContentType: responseOverrides?.contentType,
     }),
     { expiresIn },
   );
@@ -107,6 +113,11 @@ export async function generateAvatarUrl(
 export async function generateAttachmentUrl(
   attachmentKey: string | null | undefined,
   expiresIn = 86400, // 24 hours
+  options?: {
+    originalFilename?: string | null;
+    contentType?: string | null;
+    forceDownload?: boolean;
+  },
 ): Promise<string | null> {
   if (!attachmentKey) {
     return null;
@@ -117,8 +128,29 @@ export async function generateAttachmentUrl(
     return null;
   }
 
+  const responseOverrides: {
+    contentDisposition?: string;
+    contentType?: string;
+  } = {};
+
+  if (options?.forceDownload && options.originalFilename) {
+    // RFC 5987: ascii fallback + UTF-8 encoded form for non-ascii filenames
+    const safeAscii = options.originalFilename.replace(/[^\x20-\x7E]/g, "_").replace(/"/g, "");
+    const utf8 = encodeURIComponent(options.originalFilename);
+    responseOverrides.contentDisposition = `attachment; filename="${safeAscii}"; filename*=UTF-8''${utf8}`;
+  }
+
+  if (options?.contentType) {
+    responseOverrides.contentType = options.contentType;
+  }
+
   try {
-    return await generateDownloadUrl(bucket, attachmentKey, expiresIn);
+    return await generateDownloadUrl(
+      bucket,
+      attachmentKey,
+      expiresIn,
+      Object.keys(responseOverrides).length > 0 ? responseOverrides : undefined,
+    );
   } catch {
     // If URL generation fails, return null
     return null;
