@@ -721,6 +721,8 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
 /**
  * Fetches the board fields needed by the move mutation:
  * identity, naming, type guards, and workspace ownership.
+ * Soft-deleted boards are excluded — moving a tombstoned board has
+ * no defensible semantics.
  */
 export const getBoardForMove = async (
   db: dbClient,
@@ -736,7 +738,7 @@ export const getBoardForMove = async (
       workspaceId: true,
       createdBy: true,
     },
-    where: eq(boards.publicId, boardPublicId),
+    where: and(eq(boards.publicId, boardPublicId), isNull(boards.deletedAt)),
   });
 };
 
@@ -1008,11 +1010,15 @@ export const moveToWorkspace = async (
 
     if (!updatedBoard) throw new Error("Failed to move board");
 
-    // Get all card IDs belonging to this board (via lists)
+    // Get every card ID ever belonging to this board, including
+    // soft-deleted cards under soft-deleted lists. Member assignments
+    // point at workspace-scoped members that no longer exist after
+    // the move; if we leave assignments on soft-deleted cards, a later
+    // restore would resurrect rogue references to the old workspace.
     const boardLists = await tx
       .select({ id: lists.id })
       .from(lists)
-      .where(and(eq(lists.boardId, boardId), isNull(lists.deletedAt)));
+      .where(eq(lists.boardId, boardId));
 
     if (boardLists.length > 0) {
       const listIds = boardLists.map((l) => l.id);
@@ -1020,7 +1026,7 @@ export const moveToWorkspace = async (
       const boardCards = await tx
         .select({ id: cards.id })
         .from(cards)
-        .where(and(inArray(cards.listId, listIds), isNull(cards.deletedAt)));
+        .where(inArray(cards.listId, listIds));
 
       if (boardCards.length > 0) {
         const cardIds = boardCards.map((c) => c.id);

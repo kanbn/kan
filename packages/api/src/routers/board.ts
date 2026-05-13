@@ -702,13 +702,17 @@ export const boardRouter = createTRPCRouter({
         board.createdBy ?? null,
       );
 
-      // Get target workspace
+      // Get target workspace. workspaceRepo.getByPublicId does not yet
+      // filter soft-deleted workspaces (legacy: same is true for several
+      // peer callers); guard at this call site so we never move a board
+      // into a tombstoned workspace. A wider fix to make the repo treat
+      // deleted-as-not-found is a separate concern.
       const targetWorkspace = await workspaceRepo.getByPublicId(
         ctx.db,
         input.targetWorkspacePublicId,
       );
 
-      if (!targetWorkspace)
+      if (!targetWorkspace || targetWorkspace.deletedAt)
         throw new TRPCError({
           message: `Target workspace not found`,
           code: "NOT_FOUND",

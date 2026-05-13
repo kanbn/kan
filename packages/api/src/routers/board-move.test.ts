@@ -175,6 +175,21 @@ describe("board.move", () => {
     ).rejects.toThrow(TRPCError);
   });
 
+  it("throws NOT_FOUND when target workspace is soft-deleted", async () => {
+    const { boardRouter } = await import("./board");
+    mockGetBoardForMove.mockResolvedValueOnce(mockBoard);
+    mockWorkspaceGetByPublicId.mockResolvedValueOnce({
+      ...mockTargetWorkspace,
+      deletedAt: new Date(),
+    });
+
+    const ctx = { user: mockUser, db: mockDb } as never;
+
+    await expect(
+      boardRouter.createCaller(ctx).move(mockInput),
+    ).rejects.toThrow(TRPCError);
+  });
+
   it("throws BAD_REQUEST when target is the same workspace", async () => {
     const { boardRouter } = await import("./board");
     mockGetBoardForMove.mockResolvedValueOnce(mockBoard);
