@@ -276,6 +276,7 @@ export const workspaceRouter = createTRPCRouter({
         slug: result.slug!,
         description: result.description ?? null,
         plan: result.plan!,
+        cardPrefix: result.cardPrefix!,
       };
     }),
   update: protectedProcedure
