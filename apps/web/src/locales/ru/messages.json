@@ -1905,7 +1905,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 226],
+      ["src/components/NewWorkspaceForm.tsx", 227],
       ["src/components/WorkspaceMenu.tsx", 160]
     ],
     "translation": "Создать рабочее пространство"
@@ -4087,7 +4087,7 @@
     "message": "New workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 145]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 146]],
     "translation": "Новый рабочий пространство"
   },
   "5ACX4z": {
@@ -4580,7 +4580,7 @@
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 26],
       ["src/components/FeedbackModal.tsx", 41],
-      ["src/components/NewWorkspaceForm.tsx", 109],
+      ["src/components/NewWorkspaceForm.tsx", 110],
       ["src/views/board/components/BoardDropdown.tsx", 68],
       ["src/views/board/components/NewCardForm.tsx", 193],
       ["src/views/board/components/NewListForm.tsx", 79],
@@ -5829,14 +5829,14 @@
     "message": "This workspace URL has already been taken",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 189]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 190]],
     "translation": "Этот URL рабочего пространства уже занят"
   },
   "bJtM0P": {
     "message": "This workspace URL is reserved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 191]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 192]],
     "translation": "Этот URL рабочей области зарезервирован"
   },
   "kp6L3T": {
@@ -6030,7 +6030,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 108],
+      ["src/components/NewWorkspaceForm.tsx", 109],
       ["src/views/onboarding/workspace-details/index.tsx", 101]
     ],
     "translation": "Не удалось создать рабочую область"
@@ -6849,7 +6849,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 164],
+      ["src/components/NewWorkspaceForm.tsx", 165],
       ["src/views/onboarding/workspace-details/index.tsx", 189],
       ["src/views/settings/WorkspaceSettings.tsx", 63]
     ],
@@ -6924,7 +6924,7 @@
     "message": "workspace-url",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 178]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 179]],
     "translation": "workspace-url"
   },
   "4kJRen": {
