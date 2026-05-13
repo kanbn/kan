@@ -202,18 +202,18 @@
     "translation": "Действия"
   },
   "JEt3q7": {
-    "translation": "Активация | kan.bn",
     "message": "Activate | kan.bn",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/pages/partner/activate.tsx", 37]]
+    "origin": [["src/pages/partner/activate.tsx", 37]],
+    "translation": "Активация | kan.bn"
   },
   "mkehy7": {
-    "translation": "Активируйте свою учётную запись",
     "message": "Activate your account",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/pages/partner/activate.tsx", 47]]
+    "origin": [["src/pages/partner/activate.tsx", 47]],
+    "translation": "Активируйте свою учётную запись"
   },
   "F6pfE9": {
     "message": "Active",
@@ -5288,11 +5288,11 @@
     "translation": "Войти"
   },
   "4dGN6E": {
-    "translation": "Войдите или создайте учётную запись, чтобы активировать лицензию",
     "message": "Sign in or create an account to activate your license",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/pages/partner/activate.tsx", 53]]
+    "origin": [["src/pages/partner/activate.tsx", 53]],
+    "translation": "Войдите или создайте учётную запись, чтобы активировать лицензию"
   },
   "fcWrnU": {
     "message": "Sign out",
@@ -5397,11 +5397,11 @@
     "translation": "Индивидуальный"
   },
   "J9+zIR": {
-    "translation": "Во время активации произошла ошибка. Пожалуйста, попробуйте ещё раз.",
     "message": "Something went wrong during activation. Please try again.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/pages/partner/activate.tsx", 59]]
+    "origin": [["src/pages/partner/activate.tsx", 59]],
+    "translation": "Во время активации произошла ошибка. Пожалуйста, попробуйте ещё раз."
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -6621,13 +6621,13 @@
     "translation": "Не удалось обновить ваши настройки. Пожалуйста, попробуйте ещё раз."
   },
   "7sdSkl": {
-    "translation": "Мы отправили ссылку на {magicLinkRecipient}",
     "message": "We sent a link to {magicLinkRecipient}",
     "placeholders": {
       "magicLinkRecipient": ["magicLinkRecipient"]
     },
     "comments": [],
-    "origin": [["src/pages/partner/activate.tsx", 51]]
+    "origin": [["src/pages/partner/activate.tsx", 51]],
+    "translation": "Мы отправили ссылку на {magicLinkRecipient}"
   },
   "9y1RcT": {
     "message": "We're just getting started. ",

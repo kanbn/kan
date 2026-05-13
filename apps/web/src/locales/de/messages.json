@@ -202,18 +202,18 @@
     "translation": "Aktionen"
   },
   "JEt3q7": {
-    "translation": "Aktivieren | kan.bn",
     "message": "Activate | kan.bn",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/pages/partner/activate.tsx", 37]]
+    "origin": [["src/pages/partner/activate.tsx", 37]],
+    "translation": "Aktivieren | kan.bn"
   },
   "mkehy7": {
-    "translation": "Aktivieren Sie Ihr Konto",
     "message": "Activate your account",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/pages/partner/activate.tsx", 47]]
+    "origin": [["src/pages/partner/activate.tsx", 47]],
+    "translation": "Aktivieren Sie Ihr Konto"
   },
   "F6pfE9": {
     "message": "Active",
@@ -5288,11 +5288,11 @@
     "translation": "Anmelden"
   },
   "4dGN6E": {
-    "translation": "Melden Sie sich an oder erstellen Sie ein Konto, um Ihre Lizenz zu aktivieren",
     "message": "Sign in or create an account to activate your license",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/pages/partner/activate.tsx", 53]]
+    "origin": [["src/pages/partner/activate.tsx", 53]],
+    "translation": "Melden Sie sich an oder erstellen Sie ein Konto, um Ihre Lizenz zu aktivieren"
   },
   "fcWrnU": {
     "message": "Sign out",
@@ -5397,11 +5397,11 @@
     "translation": "Solo"
   },
   "J9+zIR": {
-    "translation": "Während der Aktivierung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
     "message": "Something went wrong during activation. Please try again.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/pages/partner/activate.tsx", 59]]
+    "origin": [["src/pages/partner/activate.tsx", 59]],
+    "translation": "Während der Aktivierung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -6621,13 +6621,13 @@
     "translation": "Wir konnten Ihre Einstellungen nicht aktualisieren. Bitte versuchen Sie es erneut."
   },
   "7sdSkl": {
-    "translation": "Wir haben einen Link an {magicLinkRecipient} gesendet",
     "message": "We sent a link to {magicLinkRecipient}",
     "placeholders": {
       "magicLinkRecipient": ["magicLinkRecipient"]
     },
     "comments": [],
-    "origin": [["src/pages/partner/activate.tsx", 51]]
+    "origin": [["src/pages/partner/activate.tsx", 51]],
+    "translation": "Wir haben einen Link an {magicLinkRecipient} gesendet"
   },
   "9y1RcT": {
     "message": "We're just getting started. ",
