@@ -341,7 +341,6 @@
     "translation": "Actions"
   },
   "JEt3q7": {
-    "translation": "Activate | kan.bn",
     "message": "Activate | kan.bn",
     "placeholders": {},
     "comments": [],
@@ -350,10 +349,10 @@
         "src/pages/partner/activate.tsx",
         37
       ]
-    ]
+    ],
+    "translation": "Activate | kan.bn"
   },
   "mkehy7": {
-    "translation": "Activate your account",
     "message": "Activate your account",
     "placeholders": {},
     "comments": [],
@@ -362,7 +361,8 @@
         "src/pages/partner/activate.tsx",
         47
       ]
-    ]
+    ],
+    "translation": "Activate your account"
   },
   "F6pfE9": {
     "message": "Active",
@@ -3185,7 +3185,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        226
+        227
       ],
       [
         "src/components/WorkspaceMenu.tsx",
@@ -6886,7 +6886,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        145
+        146
       ]
     ],
     "translation": "New workspace"
@@ -7702,7 +7702,7 @@
       ],
       [
         "src/components/NewWorkspaceForm.tsx",
-        109
+        110
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
@@ -9027,7 +9027,6 @@
     "translation": "Sign In"
   },
   "4dGN6E": {
-    "translation": "Sign in or create an account to activate your license",
     "message": "Sign in or create an account to activate your license",
     "placeholders": {},
     "comments": [],
@@ -9036,7 +9035,8 @@
         "src/pages/partner/activate.tsx",
         53
       ]
-    ]
+    ],
+    "translation": "Sign in or create an account to activate your license"
   },
   "fcWrnU": {
     "message": "Sign out",
@@ -9207,7 +9207,6 @@
     "translation": "Solo"
   },
   "J9+zIR": {
-    "translation": "Something went wrong during activation. Please try again.",
     "message": "Something went wrong during activation. Please try again.",
     "placeholders": {},
     "comments": [],
@@ -9216,7 +9215,8 @@
         "src/pages/partner/activate.tsx",
         59
       ]
-    ]
+    ],
+    "translation": "Something went wrong during activation. Please try again."
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -9905,7 +9905,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        189
+        190
       ]
     ],
     "translation": "This workspace URL has already been taken"
@@ -9917,7 +9917,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        191
+        192
       ]
     ],
     "translation": "This workspace URL is reserved"
@@ -10241,7 +10241,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        108
+        109
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -11247,7 +11247,6 @@
     "translation": "We couldn't update your preferences. Please try again."
   },
   "7sdSkl": {
-    "translation": "We sent a link to {magicLinkRecipient}",
     "message": "We sent a link to {magicLinkRecipient}",
     "placeholders": {
       "magicLinkRecipient": [
@@ -11260,7 +11259,8 @@
         "src/pages/partner/activate.tsx",
         51
       ]
-    ]
+    ],
+    "translation": "We sent a link to {magicLinkRecipient}"
   },
   "9y1RcT": {
     "message": "We're just getting started. ",
@@ -11622,7 +11622,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        164
+        165
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -11742,7 +11742,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        178
+        179
       ]
     ],
     "translation": "workspace-url"

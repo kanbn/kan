@@ -93,6 +93,7 @@ export const create = async (
       slug: workspaces.slug,
       description: workspaces.description,
       plan: workspaces.plan,
+      cardPrefix: workspaces.cardPrefix,
     });
 
   if (workspace) {

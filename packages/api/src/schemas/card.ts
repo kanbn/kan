@@ -46,6 +46,7 @@ export const cardDetailSchema = z.object({
   publicId: z.string(),
   title: z.string(),
   description: z.string().nullable(),
+  cardNumber: z.number().nullable(),
   dueDate: z.date().nullable(),
   createdBy: z.string().nullable(),
   labels: z.array(labelSchema),
@@ -75,6 +76,7 @@ export const cardDetailSchema = z.object({
       ),
       workspace: z.object({
         publicId: z.string(),
+        cardPrefix: z.string(),
         members: z.array(workspaceMemberSchema),
       }),
     }),

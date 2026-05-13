@@ -96,6 +96,7 @@ export function NewWorkspaceForm() {
           description: values.description,
           slug: values.slug,
           plan: values.plan,
+          cardPrefix: values.cardPrefix,
           role: "admin",
           weekStartDay: 1,
         });

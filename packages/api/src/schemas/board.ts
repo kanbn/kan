@@ -39,6 +39,7 @@ const boardDetailCardSchema = z.object({
   title: z.string(),
   description: z.string().nullable(),
   index: z.number(),
+  cardNumber: z.number().nullable(),
   dueDate: z.date().nullable(),
   labels: z.array(labelSchema),
   members: z.array(boardCardMemberSchema),
@@ -57,6 +58,7 @@ export const boardDetailSchema = z.object({
   favorite: z.boolean(),
   workspace: z.object({
     publicId: z.string(),
+    cardPrefix: z.string(),
     members: z.array(workspaceMemberSchema),
   }),
   labels: z.array(labelSchema),

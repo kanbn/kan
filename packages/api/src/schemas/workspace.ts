@@ -12,6 +12,7 @@ export const workspaceListItemSchema = z.object({
     slug: z.string(),
     plan: z.enum(["free", "team", "pro", "enterprise"]),
     weekStartDay: z.number().nullable(),
+    cardPrefix: z.string(),
     deletedAt: z.date().nullable(),
   }),
 });
@@ -74,6 +75,7 @@ export const workspaceCreateResponseSchema = z.object({
   slug: z.string(),
   description: z.string().nullable(),
   plan: z.enum(["free", "team", "pro", "enterprise"]),
+  cardPrefix: z.string(),
 });
 
 // ─── workspace.update ────────────────────────────────────────
