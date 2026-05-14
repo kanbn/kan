@@ -113,23 +113,16 @@ export const upsertByPartnerLicenseKey = async (
     referenceId?: string;
   },
 ) => {
-  const existing = await getByPartnerLicenseKey(db, partnerLicenseKey);
-
-  if (existing) {
-    const [result] = await db
-      .update(subscription)
-      .set({ ...data, updatedAt: new Date() })
-      .where(eq(subscription.partnerLicenseKey, partnerLicenseKey))
-      .returning();
-    return result;
-  }
-
   const [result] = await db
     .insert(subscription)
     .values({
       partnerLicenseKey,
       ...data,
       referenceId: data.referenceId ?? null,
+    })
+    .onConflictDoUpdate({
+      target: subscription.partnerLicenseKey,
+      set: { ...data, updatedAt: new Date() },
     })
     .returning();
   return result;
