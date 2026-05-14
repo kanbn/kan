@@ -29,9 +29,9 @@ function verifySignature(
   if (!secret) return false;
 
   const ts = Number(timestamp);
-  if (isNaN(ts) || Date.now() / 1000 - ts > 300) return false;
+  if (isNaN(ts) || Date.now() - ts > 300_000) return false;
 
-  const payload = `${timestamp}.${rawBody}`;
+  const payload = `${timestamp}${rawBody}`;
   const expected = createHmac("sha256", secret).update(payload).digest("hex");
 
   try {
