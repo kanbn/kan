@@ -19,15 +19,20 @@ export function registerCardTools(server: McpServer): void {
         .array(z.string())
         .optional()
         .describe("Public IDs of workspace members to assign"),
+      position: z
+        .enum(["start", "end"])
+        .optional()
+        .describe("Where to insert the card in the list (default: end)"),
     },
-    async ({ listPublicId, title, description, dueDate, labelPublicIds, memberPublicIds }) => {
+    async ({ listPublicId, title, description, dueDate, labelPublicIds, memberPublicIds, position }) => {
       const data = await kanRequest("POST", "/cards", {
         listPublicId,
         title,
         description,
         dueDate,
-        labelPublicIds,
-        memberPublicIds,
+        labelPublicIds: labelPublicIds ?? [],
+        memberPublicIds: memberPublicIds ?? [],
+        position: position ?? "end",
       });
       return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
     },
