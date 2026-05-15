@@ -46,6 +46,7 @@ interface FormValues {
 interface AuthProps {
   setIsMagicLinkSent: (value: boolean, recipient: string) => void;
   isSignUp?: boolean;
+  callbackURL?: string;
 }
 
 const EmailSchema = z.object({
@@ -152,7 +153,11 @@ const availableSocialProviders = {
   },
 };
 
-export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
+export function Auth({
+  setIsMagicLinkSent,
+  isSignUp,
+  callbackURL: callbackURLProp,
+}: AuthProps) {
   const [isCloudEnv, setIsCloudEnv] = useState(false);
   const [isLoginWithProviderPending, setIsLoginWithProviderPending] =
     useState<null | AuthProvider>(null);
@@ -165,7 +170,7 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const redirect = useSearchParams().get("next");
-  const callbackURL = redirect ?? "/boards";
+  const callbackURL = callbackURLProp ?? redirect ?? "/boards";
 
   // Safely get environment variables on client side to avoid hydration mismatch
   useEffect(() => {

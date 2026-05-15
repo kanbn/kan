@@ -21,6 +21,12 @@ export default function PartnerActivatePage() {
   const [magicLinkRecipient, setMagicLinkRecipient] = useState("");
 
   useEffect(() => {
+    if (licenseKey) {
+      localStorage.setItem("partnerLicenseKey", licenseKey);
+    }
+  }, [licenseKey]);
+
+  useEffect(() => {
     if (!isPending && session?.user && licenseKey) {
       router.push(
         `/api/partner/link?license_key=${encodeURIComponent(licenseKey)}`,
@@ -68,6 +74,11 @@ export default function PartnerActivatePage() {
                       setIsMagicLinkSent(val);
                       setMagicLinkRecipient(recipient);
                     }}
+                    callbackURL={
+                      licenseKey
+                        ? `/api/partner/link?license_key=${encodeURIComponent(licenseKey)}`
+                        : "/boards"
+                    }
                   />
                 </div>
               </div>

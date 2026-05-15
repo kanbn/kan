@@ -146,7 +146,7 @@ export default withRateLimit(
         },
       );
       return res.redirect(
-        `/onboarding?license_key=${encodeURIComponent(license.license_key)}`,
+        `/onboarding/workspace?license_key=${encodeURIComponent(license.license_key)}`,
       );
     }
 

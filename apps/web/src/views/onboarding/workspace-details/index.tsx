@@ -39,7 +39,16 @@ export default function WorkspaceNameView() {
   const plan = searchParams.get("plan") ?? "solo";
   const billing = searchParams.get("billing") ?? "annual";
   const returnUrl = searchParams.get("returnUrl") ?? "/boards";
+  const licenseKeyParam = searchParams.get("license_key");
+  const isLicenseFlow = !!licenseKeyParam;
   const { showPopup } = usePopup();
+
+  useEffect(() => {
+    if (licenseKeyParam) {
+      localStorage.setItem("partnerLicenseKey", licenseKeyParam);
+    }
+  }, [licenseKeyParam]);
+
   const [isProToggle, setIsProToggle] = useState(plan === "pro");
   const effectivePlan = isProToggle ? "pro" : plan;
 
@@ -94,7 +103,15 @@ export default function WorkspaceNameView() {
       if (!workspace.publicId) return;
       localStorage.setItem("workspacePublicId", workspace.publicId);
       void utils.workspace.all.invalidate();
-      router.push("/boards");
+      const storedLicenseKey = localStorage.getItem("partnerLicenseKey");
+      if (storedLicenseKey) {
+        localStorage.removeItem("partnerLicenseKey");
+        router.push(
+          `/api/partner/link?license_key=${encodeURIComponent(storedLicenseKey)}`,
+        );
+      } else {
+        router.push("/boards");
+      }
     },
     onError: () => {
       showPopup({
@@ -110,7 +127,7 @@ export default function WorkspaceNameView() {
   const handleContinue = async () => {
     if (!name.trim()) return;
 
-    if (effectivePlan === "solo") {
+    if (effectivePlan === "solo" || isLicenseFlow) {
       createWorkspace.mutate({
         name: name.trim(),
         ...(description.trim() && { description: description.trim() }),
@@ -193,50 +210,52 @@ export default function WorkspaceNameView() {
                   maxLength={64}
                 />
 
-                <div className="space-y-2">
-                  <Input
-                    placeholder={t`your-workspace`}
-                    value={isProToggle ? slug : t`your-workspace`}
-                    onChange={(e) => {
-                      setSlugManuallyEdited(true);
-                      setSlug(
-                        e.target.value
-                          .toLowerCase()
-                          .replace(/[^a-z0-9\s-]/g, "")
-                          .replace(/\s+/g, "-")
-                          .replace(/-+/g, "-")
-                          .slice(0, 60),
-                      );
-                    }}
-                    disabled={!isProToggle}
-                    prefix="kan.bn/"
-                    className={
-                      !isProToggle ? "cursor-not-allowed opacity-50" : ""
-                    }
-                    errorMessage={slugError}
-                    iconRight={
-                      !isProToggle ? (
-                        <Tooltip
-                          content={
-                            <span className="text-xs">{t`Custom usernames require upgrading to a Pro plan`}</span>
-                          }
-                          placement="top"
-                          delay={0}
-                        >
-                          <HiInformationCircle className="h-4 w-4 leading-[0] text-dark-700 dark:text-dark-700" />
-                        </Tooltip>
-                      ) : isProToggle && slug.length >= 3 ? (
-                        isTyping || slugAvailability.isPending ? (
-                          <LoadingSpinner />
-                        ) : isSlugAvailable ? (
-                          <HiCheck className="h-4 w-4 text-white" />
+                {!isLicenseFlow && (
+                  <div className="space-y-2">
+                    <Input
+                      placeholder={t`your-workspace`}
+                      value={isProToggle ? slug : t`your-workspace`}
+                      onChange={(e) => {
+                        setSlugManuallyEdited(true);
+                        setSlug(
+                          e.target.value
+                            .toLowerCase()
+                            .replace(/[^a-z0-9\s-]/g, "")
+                            .replace(/\s+/g, "-")
+                            .replace(/-+/g, "-")
+                            .slice(0, 60),
+                        );
+                      }}
+                      disabled={!isProToggle}
+                      prefix="kan.bn/"
+                      className={
+                        !isProToggle ? "cursor-not-allowed opacity-50" : ""
+                      }
+                      errorMessage={slugError}
+                      iconRight={
+                        !isProToggle ? (
+                          <Tooltip
+                            content={
+                              <span className="text-xs">{t`Custom usernames require upgrading to a Pro plan`}</span>
+                            }
+                            placement="top"
+                            delay={0}
+                          >
+                            <HiInformationCircle className="h-4 w-4 leading-[0] text-dark-700 dark:text-dark-700" />
+                          </Tooltip>
+                        ) : isProToggle && slug.length >= 3 ? (
+                          isTyping || slugAvailability.isPending ? (
+                            <LoadingSpinner />
+                          ) : isSlugAvailable ? (
+                            <HiCheck className="h-4 w-4 text-white" />
+                          ) : null
                         ) : null
-                      ) : null
-                    }
-                  />
-                </div>
+                      }
+                    />
+                  </div>
+                )}
 
-                {plan !== "pro" && (
+                {!isLicenseFlow && plan !== "pro" && (
                   <div className="pb-2">
                     <Toggle
                       isChecked={isProToggle}
@@ -265,16 +284,18 @@ export default function WorkspaceNameView() {
 
             <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
               <div className="ml-auto flex gap-2">
-                <Button
-                  variant="ghost"
-                  onClick={() =>
-                    router.replace(
-                      `/onboarding/select-plan?plan=${effectivePlan}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`,
-                    )
-                  }
-                >
-                  {t`Back`}
-                </Button>
+                {!isLicenseFlow && (
+                  <Button
+                    variant="ghost"
+                    onClick={() =>
+                      router.replace(
+                        `/onboarding/select-plan?plan=${effectivePlan}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`,
+                      )
+                    }
+                  >
+                    {t`Back`}
+                  </Button>
+                )}
                 <Button
                   onClick={() => void handleContinue()}
                   disabled={
