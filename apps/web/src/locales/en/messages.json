@@ -347,7 +347,7 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        37
+        43
       ]
     ],
     "translation": "Activate | kan.bn"
@@ -359,7 +359,7 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        47
+        53
       ]
     ],
     "translation": "Activate your account"
@@ -909,7 +909,7 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        77
+        88
       ],
       [
         "src/views/auth/signup/index.tsx",
@@ -1309,7 +1309,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        276
+        296
       ]
     ],
     "translation": "Back"
@@ -2345,7 +2345,7 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        47
+        53
       ],
       [
         "src/views/auth/login/index.tsx",
@@ -2477,7 +2477,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        246
+        281
       ],
       [
         "src/views/card/index.tsx",
@@ -2829,7 +2829,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        292
+        313
       ]
     ],
     "translation": "Continue"
@@ -2841,7 +2841,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        437
+        442
       ]
     ],
     "translation": "Continue with "
@@ -2857,7 +2857,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        355
+        360
       ]
     ],
     "translation": "Continue with {0}"
@@ -3362,7 +3362,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        221
+        239
       ]
     ],
     "translation": "Custom usernames require upgrading to a Pro plan"
@@ -4150,7 +4150,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        438
+        443
       ]
     ],
     "translation": "email"
@@ -4226,7 +4226,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        162
+        179
       ]
     ],
     "translation": "Engineering"
@@ -4306,7 +4306,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        402
+        407
       ]
     ],
     "translation": "Enter your email address"
@@ -4318,7 +4318,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        390
+        395
       ]
     ],
     "translation": "Enter your name"
@@ -4342,7 +4342,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        416
+        421
       ]
     ],
     "translation": "Enter your password"
@@ -4763,7 +4763,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        291
+        296
       ]
     ],
     "translation": "Failed to login with {0}. Please try again."
@@ -6176,6 +6176,30 @@
     ],
     "translation": "License"
   },
+  "aDzbuM": {
+    "translation": "License activated",
+    "message": "License activated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        115
+      ]
+    ]
+  },
+  "K3LUJr": {
+    "translation": "License activation failed",
+    "message": "License activation failed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        129
+      ]
+    ]
+  },
   "1njn7W": {
     "message": "Light",
     "placeholders": {},
@@ -6371,7 +6395,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        438
+        443
       ]
     ],
     "translation": "magic link"
@@ -6439,7 +6463,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        162
+        179
       ]
     ],
     "translation": "Marketing"
@@ -6950,7 +6974,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        369
+        374
       ]
     ],
     "translation": "No authentication methods are currently available"
@@ -7014,6 +7038,18 @@
       ]
     ],
     "translation": "No keyboard shortcuts registered."
+  },
+  "HOMO91": {
+    "translation": "No license key was provided. Please try activating again.",
+    "message": "No license key was provided. Please try activating again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        126
+      ]
+    ]
   },
   "hXMFoN": {
     "message": "No lists",
@@ -7218,7 +7254,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        380
+        385
       ]
     ],
     "translation": "or"
@@ -7318,7 +7354,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        236
+        271
       ]
     ],
     "translation": "Password already set"
@@ -7342,7 +7378,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        258
+        263
       ]
     ],
     "translation": "Password is required to login."
@@ -7354,7 +7390,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        257
+        262
       ]
     ],
     "translation": "Password is required to sign up."
@@ -7618,7 +7654,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        406
+        411
       ]
     ],
     "translation": "Please enter a valid email address"
@@ -7630,7 +7666,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        394
+        399
       ]
     ],
     "translation": "Please enter a valid name"
@@ -7642,7 +7678,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        421
+        426
       ]
     ],
     "translation": "Please enter a valid password"
@@ -7850,11 +7886,11 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        102
+        119
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        151
+        168
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -8493,7 +8529,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        162
+        179
       ]
     ],
     "translation": "Roadmap"
@@ -8885,7 +8921,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        180
+        197
       ]
     ],
     "translation": "Set up your workspace"
@@ -9033,7 +9069,7 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        53
+        59
       ]
     ],
     "translation": "Sign in or create an account to activate your license"
@@ -9049,7 +9085,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        363
+        384
       ]
     ],
     "translation": "Sign out"
@@ -9113,7 +9149,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        437
+        442
       ]
     ],
     "translation": "Sign up with "
@@ -9213,10 +9249,22 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        59
+        65
       ]
     ],
     "translation": "Something went wrong during activation. Please try again."
+  },
+  "r+dxEH": {
+    "translation": "Something went wrong during license activation.",
+    "message": "Something went wrong during license activation.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        132
+      ]
+    ]
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -9301,11 +9349,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        215
+        220
       ],
       [
         "src/components/AuthForm.tsx",
-        232
+        237
       ]
     ],
     "translation": "Success"
@@ -9598,6 +9646,18 @@
     ],
     "translation": "Thank you for your feedback!"
   },
+  "ssK7k+": {
+    "translation": "That license key could not be found. Please contact support.",
+    "message": "That license key could not be found. Please contact support.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        124
+      ]
+    ]
+  },
   "NcFrgC": {
     "message": "The board has been archived.",
     "placeholders": {},
@@ -9845,7 +9905,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        74
+        83
       ]
     ],
     "translation": "This URL has already been taken"
@@ -9857,7 +9917,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        76
+        85
       ]
     ],
     "translation": "This URL is reserved"
@@ -10245,7 +10305,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        101
+        118
       ]
     ],
     "translation": "Unable to create workspace"
@@ -10401,7 +10461,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        150
+        167
       ]
     ],
     "translation": "Unable to start checkout"
@@ -10969,7 +11029,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        244
+        263
       ]
     ],
     "translation": "Upgrade to Pro ($29/month)"
@@ -11257,7 +11317,7 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        51
+        57
       ]
     ],
     "translation": "We sent a link to {magicLinkRecipient}"
@@ -11550,7 +11610,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        254
+        273
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
@@ -11626,7 +11686,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        189
+        206
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
@@ -11806,7 +11866,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        183
+        200
       ]
     ],
     "translation": "You can always change these later in settings."
@@ -11894,7 +11954,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        233
+        238
       ]
     ],
     "translation": "You have been logged in successfully."
@@ -11906,7 +11966,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        216
+        221
       ]
     ],
     "translation": "You have been signed up successfully."
@@ -11990,7 +12050,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        238
+        273
       ]
     ],
     "translation": "Your account already has a password. You can change it from your account settings."
@@ -12091,6 +12151,30 @@
     ],
     "translation": "Your GitHub account is connected."
   },
+  "ygpeZ8": {
+    "translation": "Your license has been activated successfully.",
+    "message": "Your license has been activated successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        116
+      ]
+    ]
+  },
+  "+A6Wuq": {
+    "translation": "Your license is not active. Please check your account.",
+    "message": "Your license is not active. Please check your account.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        125
+      ]
+    ]
+  },
   "Ozt2vv": {
     "message": "Your password has been changed.",
     "placeholders": {},
@@ -12182,7 +12266,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        323
+        344
       ]
     ],
     "translation": "Your workspace"
@@ -12194,7 +12278,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        326
+        347
       ]
     ],
     "translation": "Your workspace description"
@@ -12254,11 +12338,11 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        198
+        216
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        199
+        217
       ]
     ],
     "translation": "your-workspace"
