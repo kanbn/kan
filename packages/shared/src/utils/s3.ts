@@ -16,8 +16,14 @@ export function createS3Client() {
         }
       : undefined;
 
+  // The AWS SDK throws "Region is missing" if region is undefined or
+  // empty string at S3Client construction. Default to "us-east-1" so
+  // S3-compatible providers (MinIO, Backblaze B2, R2, Spaces, Wasabi)
+  // that don't care about region work without forcing operators to
+  // set a meaningless value. Real AWS S3 users should still set
+  // S3_REGION explicitly to their bucket's actual region.
   return new S3Client({
-    region: process.env.S3_REGION ?? "",
+    region: process.env.S3_REGION ?? "us-east-1",
     endpoint: process.env.S3_ENDPOINT ?? "",
     forcePathStyle: process.env.S3_FORCE_PATH_STYLE === "true",
     credentials,
