@@ -58,9 +58,12 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
   const pollAttemptsRef = React.useRef(0);
   const MAX_POLL_ATTEMPTS = 5;
 
-  const { data, isLoading } = api.workspace.all.useQuery(undefined, {
-    refetchInterval: pendingWorkspaceId ? 2000 : false,
-  });
+  const { data, isLoading, isFetching } = api.workspace.all.useQuery(
+    undefined,
+    {
+      refetchInterval: pendingWorkspaceId ? 2000 : false,
+    },
+  );
   const utils = api.useUtils();
 
   const switchWorkspace = (_workspace: Workspace) => {
@@ -76,7 +79,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     if (!data?.length) {
-      if (!isLoading) setHasLoaded(true);
+      if (!isLoading && !isFetching) setHasLoaded(true);
       return;
     }
 
@@ -148,7 +151,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         cardPrefix: primaryWorkspace.cardPrefix,
       });
     }
-  }, [data, isLoading, workspacePublicId, router]);
+  }, [data, isLoading, isFetching, workspacePublicId, router]);
 
   return (
     <WorkspaceContext.Provider
