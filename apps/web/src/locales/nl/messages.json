@@ -447,7 +447,7 @@
     "message": "Admin",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 201]],
+    "origin": [["src/views/members/index.tsx", 207]],
     "translation": "Beheerder"
   },
   "3pIq39": {
@@ -2422,7 +2422,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 162],
-      ["src/views/members/index.tsx", 224]
+      ["src/views/members/index.tsx", 230]
     ],
     "translation": "Rechten bewerken"
   },
@@ -2998,7 +2998,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 333],
-      ["src/views/members/index.tsx", 293]
+      ["src/views/members/index.tsx", 297]
     ],
     "translation": "Gratis abonnement"
   },
@@ -3219,7 +3219,7 @@
     "message": "Guest",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 203]],
+    "origin": [["src/views/members/index.tsx", 209]],
     "translation": "Gast"
   },
   "CB/NpV": {
@@ -3473,7 +3473,7 @@
     "message": "Invite",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 306]],
+    "origin": [["src/views/members/index.tsx", 310]],
     "translation": "Uitnodigen"
   },
   "KLJ4eD": {
@@ -3636,7 +3636,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/members/index.tsx", 276]],
-    "translation": "Lanceringaanbieding: onbeperkt leden met Pro"
+    "translation": "Lanceringaanbieding: onbeperkt leden met Pro",
+    "obsolete": true
   },
   "sDuhfK": {
     "message": "Launch offer: unlimited seats for just $29/month with Pro",
@@ -3674,18 +3675,18 @@
     "translation": "Licentie"
   },
   "aDzbuM": {
-    "translation": "Licentie geactiveerd",
     "message": "License activated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 115]]
+    "origin": [["src/components/Dashboard.tsx", 115]],
+    "translation": "Licentie geactiveerd"
   },
   "K3LUJr": {
-    "translation": "Licentieactivering mislukt",
     "message": "License activation failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 129]]
+    "origin": [["src/components/Dashboard.tsx", 129]],
+    "translation": "Licentieactivering mislukt"
   },
   "1njn7W": {
     "message": "Light",
@@ -3866,7 +3867,7 @@
     "origin": [
       ["src/views/card/components/ActivityList.tsx", 55],
       ["src/views/card/components/ActivityList.tsx", 88],
-      ["src/views/members/index.tsx", 202]
+      ["src/views/members/index.tsx", 208]
     ],
     "translation": "Lid"
   },
@@ -3879,7 +3880,7 @@
       ["src/views/board/components/Filters.tsx", 147],
       ["src/views/board/components/NewCardForm.tsx", 386],
       ["src/views/card/index.tsx", 143],
-      ["src/views/members/index.tsx", 263],
+      ["src/views/members/index.tsx", 269],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 81]
     ],
     "translation": "Leden"
@@ -3890,7 +3891,7 @@
       "0": ["workspace.name ?? t`Workspace`"]
     },
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 258]],
+    "origin": [["src/views/members/index.tsx", 264]],
     "translation": "Leden | {0}"
   },
   "/bZzdR": {
@@ -4177,11 +4178,11 @@
     "translation": "Geen sneltoetsen geregistreerd."
   },
   "HOMO91": {
-    "translation": "Er is geen licentiecode opgegeven. Probeer het opnieuw te activeren.",
     "message": "No license key was provided. Please try activating again.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 126]]
+    "origin": [["src/components/Dashboard.tsx", 126]],
+    "translation": "Er is geen licentiecode opgegeven. Probeer het opnieuw te activeren."
   },
   "hXMFoN": {
     "message": "No lists",
@@ -4421,7 +4422,7 @@
     "message": "Paused",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 210]],
+    "origin": [["src/views/members/index.tsx", 216]],
     "translation": "Gepauzeerd"
   },
   "UbYdrA": {
@@ -4438,7 +4439,7 @@
     "message": "Pending",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 210]],
+    "origin": [["src/views/members/index.tsx", 216]],
     "translation": "In behandeling"
   },
   "oVBq1w": {
@@ -4741,7 +4742,7 @@
     "message": "Pro Plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 290]],
+    "origin": [["src/views/members/index.tsx", 294]],
     "translation": "Pro-abonnement"
   },
   "Qtzfdk": {
@@ -4841,7 +4842,7 @@
     "message": "Remove member",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 233]],
+    "origin": [["src/views/members/index.tsx", 239]],
     "translation": "Lid verwijderen"
   },
   "BZkYSt": {
@@ -4998,7 +4999,7 @@
     "message": "Role",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 328]],
+    "origin": [["src/views/members/index.tsx", 332]],
     "translation": "Rol"
   },
   "jQ6I8X": {
@@ -5425,11 +5426,11 @@
     "translation": "Er ging iets mis tijdens de activering. Probeer het opnieuw."
   },
   "r+dxEH": {
-    "translation": "Er is iets misgegaan tijdens de licentieactivering.",
     "message": "Something went wrong during license activation.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 132]]
+    "origin": [["src/components/Dashboard.tsx", 132]],
+    "translation": "Er is iets misgegaan tijdens de licentieactivering."
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -5543,7 +5544,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 322],
-      ["src/views/members/index.tsx", 292]
+      ["src/views/members/index.tsx", 296]
     ],
     "translation": "Teamabonnement"
   },
@@ -5665,11 +5666,11 @@
     "translation": "Bedankt voor je feedback!"
   },
   "ssK7k+": {
-    "translation": "Die licentiecode kon niet worden gevonden. Neem contact op met de ondersteuning.",
     "message": "That license key could not be found. Please contact support.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 124]]
+    "origin": [["src/components/Dashboard.tsx", 124]],
+    "translation": "Die licentiecode kon niet worden gevonden. Neem contact op met de ondersteuning."
   },
   "NcFrgC": {
     "message": "The board has been archived.",
@@ -6475,6 +6476,13 @@
     "origin": [["src/views/card/components/ActivityList.tsx", 152]],
     "translation": "heeft de titel bijgewerkt naar <0>{0}</0>"
   },
+  "kwkhPe": {
+    "translation": "Upgraden",
+    "message": "Upgrade",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 281]]
+  },
   "IelE1h": {
     "message": "Upgrade to Pro",
     "placeholders": {},
@@ -6575,7 +6583,7 @@
     "message": "User",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 322]],
+    "origin": [["src/views/members/index.tsx", 326]],
     "translation": "Gebruiker"
   },
   "tYN21H": {
@@ -6808,7 +6816,7 @@
       ["src/components/SettingsLayout.tsx", 47],
       ["src/views/board/index.tsx", 530],
       ["src/views/boards/index.tsx", 48],
-      ["src/views/members/index.tsx", 258],
+      ["src/views/members/index.tsx", 264],
       ["src/views/public/board/index.tsx", 125],
       ["src/views/public/boards/index.tsx", 75]
     ],
@@ -7161,18 +7169,18 @@
     "translation": "Je GitHub-account is gekoppeld."
   },
   "ygpeZ8": {
-    "translation": "Uw licentie is succesvol geactiveerd.",
     "message": "Your license has been activated successfully.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 116]]
+    "origin": [["src/components/Dashboard.tsx", 116]],
+    "translation": "Uw licentie is succesvol geactiveerd."
   },
   "+A6Wuq": {
-    "translation": "Uw licentie is niet actief. Controleer uw account.",
     "message": "Your license is not active. Please check your account.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 125]]
+    "origin": [["src/components/Dashboard.tsx", 125]],
+    "translation": "Uw licentie is niet actief. Controleer uw account."
   },
   "Ozt2vv": {
     "message": "Your password has been changed.",

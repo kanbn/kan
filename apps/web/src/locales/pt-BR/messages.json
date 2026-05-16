@@ -447,7 +447,7 @@
     "message": "Admin",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 201]],
+    "origin": [["src/views/members/index.tsx", 207]],
     "translation": "Administrador"
   },
   "3pIq39": {
@@ -2422,7 +2422,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 162],
-      ["src/views/members/index.tsx", 224]
+      ["src/views/members/index.tsx", 230]
     ],
     "translation": "Editar permissões"
   },
@@ -2998,7 +2998,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 333],
-      ["src/views/members/index.tsx", 293]
+      ["src/views/members/index.tsx", 297]
     ],
     "translation": "Plano gratuito"
   },
@@ -3219,7 +3219,7 @@
     "message": "Guest",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 203]],
+    "origin": [["src/views/members/index.tsx", 209]],
     "translation": "Convidado"
   },
   "CB/NpV": {
@@ -3473,7 +3473,7 @@
     "message": "Invite",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 306]],
+    "origin": [["src/views/members/index.tsx", 310]],
     "translation": "Convidar"
   },
   "KLJ4eD": {
@@ -3636,7 +3636,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/members/index.tsx", 276]],
-    "translation": "Oferta de lançamento: membros ilimitados com Pro"
+    "translation": "Oferta de lançamento: membros ilimitados com Pro",
+    "obsolete": true
   },
   "sDuhfK": {
     "message": "Launch offer: unlimited seats for just $29/month with Pro",
@@ -3674,18 +3675,18 @@
     "translation": "Licença"
   },
   "aDzbuM": {
-    "translation": "Licença ativada",
     "message": "License activated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 115]]
+    "origin": [["src/components/Dashboard.tsx", 115]],
+    "translation": "Licença ativada"
   },
   "K3LUJr": {
-    "translation": "Falha na ativação da licença",
     "message": "License activation failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 129]]
+    "origin": [["src/components/Dashboard.tsx", 129]],
+    "translation": "Falha na ativação da licença"
   },
   "1njn7W": {
     "message": "Light",
@@ -3866,7 +3867,7 @@
     "origin": [
       ["src/views/card/components/ActivityList.tsx", 55],
       ["src/views/card/components/ActivityList.tsx", 88],
-      ["src/views/members/index.tsx", 202]
+      ["src/views/members/index.tsx", 208]
     ],
     "translation": "Membro"
   },
@@ -3879,7 +3880,7 @@
       ["src/views/board/components/Filters.tsx", 147],
       ["src/views/board/components/NewCardForm.tsx", 386],
       ["src/views/card/index.tsx", 143],
-      ["src/views/members/index.tsx", 263],
+      ["src/views/members/index.tsx", 269],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 81]
     ],
     "translation": "Membros"
@@ -3890,7 +3891,7 @@
       "0": ["workspace.name ?? t`Workspace`"]
     },
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 258]],
+    "origin": [["src/views/members/index.tsx", 264]],
     "translation": "Membros | {0}"
   },
   "/bZzdR": {
@@ -4177,11 +4178,11 @@
     "translation": "Nenhum atalho de teclado registrado."
   },
   "HOMO91": {
-    "translation": "Nenhuma chave de licença foi fornecida. Por favor, tente ativar novamente.",
     "message": "No license key was provided. Please try activating again.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 126]]
+    "origin": [["src/components/Dashboard.tsx", 126]],
+    "translation": "Nenhuma chave de licença foi fornecida. Por favor, tente ativar novamente."
   },
   "hXMFoN": {
     "message": "No lists",
@@ -4421,7 +4422,7 @@
     "message": "Paused",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 210]],
+    "origin": [["src/views/members/index.tsx", 216]],
     "translation": "Pausado"
   },
   "UbYdrA": {
@@ -4438,7 +4439,7 @@
     "message": "Pending",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 210]],
+    "origin": [["src/views/members/index.tsx", 216]],
     "translation": "Pendente"
   },
   "oVBq1w": {
@@ -4741,7 +4742,7 @@
     "message": "Pro Plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 290]],
+    "origin": [["src/views/members/index.tsx", 294]],
     "translation": "Plano Pro"
   },
   "Qtzfdk": {
@@ -4841,7 +4842,7 @@
     "message": "Remove member",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 233]],
+    "origin": [["src/views/members/index.tsx", 239]],
     "translation": "Remover membro"
   },
   "BZkYSt": {
@@ -4998,7 +4999,7 @@
     "message": "Role",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 328]],
+    "origin": [["src/views/members/index.tsx", 332]],
     "translation": "Função"
   },
   "jQ6I8X": {
@@ -5425,11 +5426,11 @@
     "translation": "Algo deu errado durante a ativação. Por favor, tente novamente."
   },
   "r+dxEH": {
-    "translation": "Algo deu errado durante a ativação da licença.",
     "message": "Something went wrong during license activation.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 132]]
+    "origin": [["src/components/Dashboard.tsx", 132]],
+    "translation": "Algo deu errado durante a ativação da licença."
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -5543,7 +5544,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 322],
-      ["src/views/members/index.tsx", 292]
+      ["src/views/members/index.tsx", 296]
     ],
     "translation": "Plano de equipe"
   },
@@ -5665,11 +5666,11 @@
     "translation": "Obrigado pelo seu feedback!"
   },
   "ssK7k+": {
-    "translation": "Essa chave de licença não foi encontrada. Por favor, entre em contato com o suporte.",
     "message": "That license key could not be found. Please contact support.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 124]]
+    "origin": [["src/components/Dashboard.tsx", 124]],
+    "translation": "Essa chave de licença não foi encontrada. Por favor, entre em contato com o suporte."
   },
   "NcFrgC": {
     "message": "The board has been archived.",
@@ -6475,6 +6476,13 @@
     "origin": [["src/views/card/components/ActivityList.tsx", 152]],
     "translation": "atualizou o título para <0>{0}</0>"
   },
+  "kwkhPe": {
+    "translation": "Atualizar",
+    "message": "Upgrade",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 281]]
+  },
   "IelE1h": {
     "message": "Upgrade to Pro",
     "placeholders": {},
@@ -6575,7 +6583,7 @@
     "message": "User",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 322]],
+    "origin": [["src/views/members/index.tsx", 326]],
     "translation": "Usuário"
   },
   "tYN21H": {
@@ -6808,7 +6816,7 @@
       ["src/components/SettingsLayout.tsx", 47],
       ["src/views/board/index.tsx", 530],
       ["src/views/boards/index.tsx", 48],
-      ["src/views/members/index.tsx", 258],
+      ["src/views/members/index.tsx", 264],
       ["src/views/public/board/index.tsx", 125],
       ["src/views/public/boards/index.tsx", 75]
     ],
@@ -7161,18 +7169,18 @@
     "translation": "Sua conta do GitHub está conectada."
   },
   "ygpeZ8": {
-    "translation": "Sua licença foi ativada com sucesso.",
     "message": "Your license has been activated successfully.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 116]]
+    "origin": [["src/components/Dashboard.tsx", 116]],
+    "translation": "Sua licença foi ativada com sucesso."
   },
   "+A6Wuq": {
-    "translation": "Sua licença não está ativa. Por favor, verifique sua conta.",
     "message": "Your license is not active. Please check your account.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 125]]
+    "origin": [["src/components/Dashboard.tsx", 125]],
+    "translation": "Sua licença não está ativa. Por favor, verifique sua conta."
   },
   "Ozt2vv": {
     "message": "Your password has been changed.",

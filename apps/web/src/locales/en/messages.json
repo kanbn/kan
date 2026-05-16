@@ -761,7 +761,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        201
+        207
       ]
     ],
     "translation": "Admin"
@@ -4090,7 +4090,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        224
+        230
       ]
     ],
     "translation": "Edit permissions"
@@ -5035,7 +5035,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        293
+        297
       ]
     ],
     "translation": "Free Plan"
@@ -5415,7 +5415,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        203
+        209
       ]
     ],
     "translation": "Guest"
@@ -5839,7 +5839,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        306
+        310
       ]
     ],
     "translation": "Invite"
@@ -6114,7 +6114,8 @@
         276
       ]
     ],
-    "translation": "Launch offer: Get unlimited members with Pro"
+    "translation": "Launch offer: Get unlimited members with Pro",
+    "obsolete": true
   },
   "sDuhfK": {
     "message": "Launch offer: unlimited seats for just $29/month with Pro",
@@ -6177,7 +6178,6 @@
     "translation": "License"
   },
   "aDzbuM": {
-    "translation": "License activated",
     "message": "License activated",
     "placeholders": {},
     "comments": [],
@@ -6186,10 +6186,10 @@
         "src/components/Dashboard.tsx",
         115
       ]
-    ]
+    ],
+    "translation": "License activated"
   },
   "K3LUJr": {
-    "translation": "License activation failed",
     "message": "License activation failed",
     "placeholders": {},
     "comments": [],
@@ -6198,7 +6198,8 @@
         "src/components/Dashboard.tsx",
         129
       ]
-    ]
+    ],
+    "translation": "License activation failed"
   },
   "1njn7W": {
     "message": "Light",
@@ -6507,7 +6508,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        202
+        208
       ]
     ],
     "translation": "Member"
@@ -6535,7 +6536,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        263
+        269
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -6555,7 +6556,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        258
+        264
       ]
     ],
     "translation": "Members | {0}"
@@ -7040,7 +7041,6 @@
     "translation": "No keyboard shortcuts registered."
   },
   "HOMO91": {
-    "translation": "No license key was provided. Please try activating again.",
     "message": "No license key was provided. Please try activating again.",
     "placeholders": {},
     "comments": [],
@@ -7049,7 +7049,8 @@
         "src/components/Dashboard.tsx",
         126
       ]
-    ]
+    ],
+    "translation": "No license key was provided. Please try activating again."
   },
   "hXMFoN": {
     "message": "No lists",
@@ -7438,7 +7439,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        210
+        216
       ]
     ],
     "translation": "Paused"
@@ -7466,7 +7467,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        210
+        216
       ]
     ],
     "translation": "Pending"
@@ -8102,7 +8103,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        290
+        294
       ]
     ],
     "translation": "Pro Plan"
@@ -8270,7 +8271,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        233
+        239
       ]
     ],
     "translation": "Remove member"
@@ -8541,7 +8542,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        328
+        332
       ]
     ],
     "translation": "Role"
@@ -9255,7 +9256,6 @@
     "translation": "Something went wrong during activation. Please try again."
   },
   "r+dxEH": {
-    "translation": "Something went wrong during license activation.",
     "message": "Something went wrong during license activation.",
     "placeholders": {},
     "comments": [],
@@ -9264,7 +9264,8 @@
         "src/components/Dashboard.tsx",
         132
       ]
-    ]
+    ],
+    "translation": "Something went wrong during license activation."
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -9445,7 +9446,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        292
+        296
       ]
     ],
     "translation": "Team Plan"
@@ -9647,7 +9648,6 @@
     "translation": "Thank you for your feedback!"
   },
   "ssK7k+": {
-    "translation": "That license key could not be found. Please contact support.",
     "message": "That license key could not be found. Please contact support.",
     "placeholders": {},
     "comments": [],
@@ -9656,7 +9656,8 @@
         "src/components/Dashboard.tsx",
         124
       ]
-    ]
+    ],
+    "translation": "That license key could not be found. Please contact support."
   },
   "NcFrgC": {
     "message": "The board has been archived.",
@@ -11002,6 +11003,18 @@
     ],
     "translation": "updated the title to <0>{0}</0>"
   },
+  "kwkhPe": {
+    "translation": "Upgrade",
+    "message": "Upgrade",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        281
+      ]
+    ]
+  },
   "IelE1h": {
     "message": "Upgrade to Pro",
     "placeholders": {},
@@ -11169,7 +11182,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        322
+        326
       ]
     ],
     "translation": "User"
@@ -11565,7 +11578,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        258
+        264
       ],
       [
         "src/views/public/board/index.tsx",
@@ -12152,7 +12165,6 @@
     "translation": "Your GitHub account is connected."
   },
   "ygpeZ8": {
-    "translation": "Your license has been activated successfully.",
     "message": "Your license has been activated successfully.",
     "placeholders": {},
     "comments": [],
@@ -12161,10 +12173,10 @@
         "src/components/Dashboard.tsx",
         116
       ]
-    ]
+    ],
+    "translation": "Your license has been activated successfully."
   },
   "+A6Wuq": {
-    "translation": "Your license is not active. Please check your account.",
     "message": "Your license is not active. Please check your account.",
     "placeholders": {},
     "comments": [],
@@ -12173,7 +12185,8 @@
         "src/components/Dashboard.tsx",
         125
       ]
-    ]
+    ],
+    "translation": "Your license is not active. Please check your account."
   },
   "Ozt2vv": {
     "message": "Your password has been changed.",
