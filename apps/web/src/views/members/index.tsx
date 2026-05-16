@@ -27,8 +27,8 @@ import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { getAvatarUrl } from "~/utils/helpers";
 import { DeleteMemberConfirmation } from "./components/DeleteMemberConfirmation";
-import { InviteMemberForm } from "./components/InviteMemberForm";
 import { EditMemberPermissionsModal } from "./components/EditMemberPermissionsModal";
+import { InviteMemberForm } from "./components/InviteMemberForm";
 
 export default function MembersPage() {
   const { modalContentType, openModal, isOpen } = useModal();
@@ -75,6 +75,13 @@ export default function MembersPage() {
   const proSubscription = getSubscriptionByPlan(subscriptions, "pro");
 
   const unlimitedSeats = hasUnlimitedSeats(subscriptions);
+
+  const isProPlan =
+    !!proSubscription ||
+    workspace.plan === "pro" ||
+    workspace.plan === "enterprise";
+  const isTeamPlan = !!teamSubscription || workspace.plan === "team";
+  const isPaidPlan = isProPlan || isTeamPlan;
 
   const TableRow = ({
     memberPublicId,
@@ -144,8 +151,8 @@ export default function MembersPage() {
                     {memberName}
                   </p>
                 </div>
-                {((workspace.role === "admin" ||
-                  data?.showEmailsToMembers === true) ||
+                {(workspace.role === "admin" ||
+                  data?.showEmailsToMembers === true ||
                   showSkeleton) && (
                   <p
                     className={twMerge(
@@ -180,8 +187,7 @@ export default function MembersPage() {
                 <div className="relative inline-flex items-center">
                   <span className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 ring-1 ring-inset ring-emerald-500/20 sm:text-[11px]">
                     {memberRole &&
-                      memberRole.charAt(0).toUpperCase() +
-                        memberRole.slice(1)}
+                      memberRole.charAt(0).toUpperCase() + memberRole.slice(1)}
                     {canEditMember && session?.user.id !== memberId && (
                       <HiChevronDown className="h-3 w-3" />
                     )}
@@ -266,32 +272,30 @@ export default function MembersPage() {
           <div className="flex items-center gap-3">
             {env("NEXT_PUBLIC_KAN_ENV") === "cloud" && (
               <>
-                {!proSubscription && !teamSubscription && (
+                {!isPaidPlan && (
                   <Link
                     href="/settings/workspace?upgrade=pro"
                     className="hidden items-center rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-center text-xs text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-400 lg:flex"
                   >
                     <HiBolt />
-                    <span className="ml-1 font-medium">
-                      {t`Launch offer: Get unlimited members with Pro`}
-                    </span>
+                    <span className="ml-1 font-medium">{t`Upgrade`}</span>
                   </Link>
                 )}
                 <div
                   className={twMerge(
                     "flex items-center rounded-full border px-3 py-1 text-center text-xs",
-                    teamSubscription || proSubscription
+                    isPaidPlan
                       ? "border-emerald-300 bg-emerald-50 text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
                       : "border-light-300 bg-light-50 text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900",
                   )}
                 >
                   <span className="font-medium">
-                    {proSubscription
+                    {isProPlan
                       ? t`Pro Plan`
-                      : teamSubscription
+                      : isTeamPlan
                         ? t`Team Plan`
                         : t`Free Plan`}
-                    {proSubscription && unlimitedSeats && (
+                    {isProPlan && unlimitedSeats && (
                       <span className="ml-1 text-xs">∞</span>
                     )}
                   </span>

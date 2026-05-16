@@ -87,6 +87,8 @@ export default withApiLogging(
     const { event, license_key, license_status, tier, prev_license_key } =
       payload;
 
+    log.info({ headers: req.headers, payload }, "partner webhook received");
+
     const { db } = await createNextApiContext(req);
 
     switch (event) {
@@ -141,7 +143,7 @@ export default withApiLogging(
           const cfg = tierConfig(tier);
           await subscriptionRepo.upsertByPartnerLicenseKey(db, license_key, {
             plan: cfg.plan,
-            status: license_status,
+            status: "active",
             partnerTier: tier,
             seats: cfg.seats,
             unlimitedSeats: cfg.unlimitedSeats,
@@ -163,7 +165,7 @@ export default withApiLogging(
             const cfg = tierConfig(tier);
             await subscriptionRepo.upsertByPartnerLicenseKey(db, license_key, {
               plan: cfg.plan,
-              status: sub.status,
+              status: "active",
               partnerTier: tier,
               seats: cfg.seats,
               unlimitedSeats: cfg.unlimitedSeats,
