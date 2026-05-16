@@ -6477,11 +6477,11 @@
     "translation": "actualizó el título a <0>{0}</0>"
   },
   "kwkhPe": {
-    "translation": "Actualizar",
     "message": "Upgrade",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 281]]
+    "origin": [["src/views/members/index.tsx", 281]],
+    "translation": "Actualizar"
   },
   "IelE1h": {
     "message": "Upgrade to Pro",

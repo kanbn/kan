@@ -11004,7 +11004,6 @@
     "translation": "updated the title to <0>{0}</0>"
   },
   "kwkhPe": {
-    "translation": "Upgrade",
     "message": "Upgrade",
     "placeholders": {},
     "comments": [],
@@ -11013,7 +11012,8 @@
         "src/views/members/index.tsx",
         281
       ]
-    ]
+    ],
+    "translation": "Upgrade"
   },
   "IelE1h": {
     "message": "Upgrade to Pro",

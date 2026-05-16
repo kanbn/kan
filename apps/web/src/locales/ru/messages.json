@@ -6477,11 +6477,11 @@
     "translation": "обновил(а) заголовок на <0>{0}</0>"
   },
   "kwkhPe": {
-    "translation": "Обновить",
     "message": "Upgrade",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 281]]
+    "origin": [["src/views/members/index.tsx", 281]],
+    "translation": "Обновить"
   },
   "IelE1h": {
     "message": "Upgrade to Pro",
