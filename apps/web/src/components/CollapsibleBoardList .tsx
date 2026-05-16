@@ -70,7 +70,6 @@ const CollapsibleBoardList: React.FC<CollapsibleBoardListProps> = ({
       <Link
         href={href}
         onMouseEnter={handleMouseEnter}
-        onClick={handleClick}
         title={isCollapsed ? name : undefined}
       >
         <DisclosureButton
@@ -109,6 +108,7 @@ const CollapsibleBoardList: React.FC<CollapsibleBoardListProps> = ({
             </div>
           ) : (
             <ul
+              onClick={handleClick}
               className={twMerge(
                 "relative ml-4 max-h-[calc(100vh-480px)] overflow-y-auto",
                 "scrollbar-thin scrollbar-track-light-100 scrollbar-thumb-light-400",
