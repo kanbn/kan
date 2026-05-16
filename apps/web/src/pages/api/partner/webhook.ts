@@ -127,7 +127,16 @@ export default withApiLogging(
             status: "inactive",
           });
           if (sub.referenceId) {
-            await workspaceRepo.update(db, sub.referenceId, { plan: "free" });
+            const allSubs = await subscriptionRepo.getByReferenceId(
+              db,
+              sub.referenceId,
+            );
+            const hasActiveSub = allSubs.some(
+              (s) => s.id !== sub.id && s.status === "active",
+            );
+            if (!hasActiveSub) {
+              await workspaceRepo.update(db, sub.referenceId, { plan: "free" });
+            }
           }
         }
         break;
@@ -135,9 +144,10 @@ export default withApiLogging(
 
       case "upgrade":
       case "downgrade": {
+        const lookupKey = prev_license_key ?? license_key;
         const sub = await subscriptionRepo.getByPartnerLicenseKey(
           db,
-          license_key,
+          lookupKey,
         );
         if (sub) {
           const cfg = tierConfig(tier);
@@ -147,7 +157,13 @@ export default withApiLogging(
             partnerTier: tier,
             seats: cfg.seats,
             unlimitedSeats: cfg.unlimitedSeats,
+            referenceId: sub.referenceId ?? undefined,
           });
+          if (prev_license_key) {
+            await subscriptionRepo.updateById(db, sub.id, {
+              status: "inactive",
+            });
+          }
           if (sub.referenceId) {
             await workspaceRepo.update(db, sub.referenceId, { plan: cfg.plan });
           }
