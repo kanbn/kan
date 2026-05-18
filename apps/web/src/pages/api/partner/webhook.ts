@@ -7,6 +7,7 @@ import { withApiLogging } from "@kan/api/utils/apiLogging";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
+import { getActiveSubscriptions } from "@kan/shared/utils";
 
 import { tierConfig } from "./_utils";
 
@@ -122,17 +123,18 @@ export default withApiLogging(
           license_key,
         );
         if (sub) {
-          await subscriptionRepo.updateById(db, sub.id, {
-            plan: "free",
-            status: "inactive",
-          });
+          const [, allSubs] = await Promise.all([
+            subscriptionRepo.updateById(db, sub.id, {
+              plan: "free",
+              status: "inactive",
+            }),
+            sub.referenceId
+              ? subscriptionRepo.getByReferenceId(db, sub.referenceId)
+              : Promise.resolve([]),
+          ]);
           if (sub.referenceId) {
-            const allSubs = await subscriptionRepo.getByReferenceId(
-              db,
-              sub.referenceId,
-            );
-            const hasActiveSub = allSubs.some(
-              (s) => s.id !== sub.id && s.status === "active",
+            const hasActiveSub = getActiveSubscriptions(allSubs).some(
+              (s) => s.id !== sub.id,
             );
             if (!hasActiveSub) {
               await workspaceRepo.update(db, sub.referenceId, { plan: "free" });

@@ -39,6 +39,7 @@ const workspaceSubscriptionSchema = z.object({
   status: z.string(),
   seats: z.number().nullable(),
   unlimitedSeats: z.boolean().nullable(),
+  partnerTier: z.number().nullable(),
   periodStart: z.date().nullable(),
   periodEnd: z.date().nullable(),
 });

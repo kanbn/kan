@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
+import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 
 import { authClient } from "@kan/auth/client";
@@ -15,6 +16,8 @@ export default function PartnerActivatePage() {
   const searchParams = useSearchParams();
   const licenseKey = searchParams.get("license_key");
   const error = searchParams.get("error");
+
+  const partnerName = env("NEXT_PUBLIC_PARTNER_NAME");
 
   const { data: session, isPending } = authClient.useSession();
   const [isMagicLinkSent, setIsMagicLinkSent] = useState(false);
@@ -55,6 +58,11 @@ export default function PartnerActivatePage() {
             <p className="mb-10 text-sm text-light-800 dark:text-dark-800">
               {isMagicLinkSent ? (
                 <Trans>We sent a link to {magicLinkRecipient}</Trans>
+              ) : partnerName ? (
+                <Trans>
+                  Sign in or create an account to activate your {partnerName}{" "}
+                  license
+                </Trans>
               ) : (
                 t`Sign in or create an account to activate your license`
               )}

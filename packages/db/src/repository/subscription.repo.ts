@@ -14,6 +14,7 @@ export const updateById = async (
     periodStart?: Date | null;
     periodEnd?: Date | null;
     cancelAtPeriodEnd?: boolean | null;
+    stripeSubscriptionId?: string | null;
   },
 ) => {
   const [result] = await db

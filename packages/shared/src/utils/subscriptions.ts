@@ -12,6 +12,7 @@ export interface Subscription {
   status: string;
   seats: number | null;
   unlimitedSeats: boolean;
+  partnerTier: number | null;
   periodStart: Date | null;
   periodEnd: Date | null;
   referenceId: string | null;

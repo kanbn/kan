@@ -64,7 +64,10 @@ export default async function handler(
           meta.userId &&
           meta.userEmail
         ) {
-          const existing = await workspaceRepo.getByPublicId(db, meta.workspacePublicId);
+          const existing = await workspaceRepo.getByPublicId(
+            db,
+            meta.workspacePublicId,
+          );
 
           if (!existing) {
             const slug = meta.workspaceSlug ?? meta.workspacePublicId;
@@ -90,10 +93,10 @@ export default async function handler(
             });
           }
         } else {
-          // Existing workspace upgrade — update plan (and slug for pro)
           await workspaceRepo.update(db, meta.workspacePublicId, {
             plan,
-            ...(plan === "pro" && meta.workspaceSlug && { slug: meta.workspaceSlug }),
+            ...(plan === "pro" &&
+              meta.workspaceSlug && { slug: meta.workspaceSlug }),
           });
         }
 

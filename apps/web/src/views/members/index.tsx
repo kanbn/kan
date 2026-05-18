@@ -83,6 +83,12 @@ export default function MembersPage() {
   const isTeamPlan = !!teamSubscription || workspace.plan === "team";
   const isPaidPlan = isProPlan || isTeamPlan;
 
+  const activeMembers = data?.members.length ?? 0;
+  const totalSeats =
+    teamSubscription?.seats ??
+    proSubscription?.seats ??
+    (isPaidPlan ? null : 1);
+
   const TableRow = ({
     memberPublicId,
     memberId,
@@ -270,11 +276,11 @@ export default function MembersPage() {
             </h1>
           </div>
           <div className="flex items-center gap-3">
-            {env("NEXT_PUBLIC_KAN_ENV") === "cloud" && (
+            {env("NEXT_PUBLIC_KAN_ENV") === "cloud" && !!data && (
               <>
                 {!isPaidPlan && (
                   <Link
-                    href="/settings/workspace?upgrade=pro"
+                    href={`/upgrade/select-plan?plan=pro&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/members")}`}
                     className="hidden items-center rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-center text-xs text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-400 lg:flex"
                   >
                     <HiBolt />
@@ -295,11 +301,17 @@ export default function MembersPage() {
                       : isTeamPlan
                         ? t`Team Plan`
                         : t`Free Plan`}
-                    {isProPlan && unlimitedSeats && (
-                      <span className="ml-1 text-xs">∞</span>
-                    )}
                   </span>
                 </div>
+                {isPaidPlan && (unlimitedSeats || totalSeats !== null) && (
+                  <div className="flex items-center rounded-full border border-light-300 bg-light-50 px-3 py-1 text-center text-xs text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
+                    <span className="font-medium">
+                      {unlimitedSeats
+                        ? t`Unlimited seats`
+                        : `${activeMembers}/${totalSeats} ${t`seats`}`}
+                    </span>
+                  </div>
+                )}
               </>
             )}
             <Button
@@ -388,8 +400,6 @@ export default function MembersPage() {
             isVisible={isOpen && modalContentType === "INVITE_MEMBER"}
           >
             <InviteMemberForm
-              userId={session?.user.id}
-              numberOfMembers={data?.members.length ?? 1}
               subscriptions={subscriptions}
               unlimitedSeats={unlimitedSeats}
             />

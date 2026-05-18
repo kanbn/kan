@@ -1,6 +1,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
-import { t } from "@lingui/core/macro";
 import { Radio, RadioGroup } from "@headlessui/react";
+import { t } from "@lingui/core/macro";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { HiUser } from "react-icons/hi2";
@@ -48,6 +48,7 @@ export default function SelectPlanView() {
     (searchParams.get("billing") as Billing | null) ?? "annual",
   );
   const returnUrl = searchParams.get("returnUrl") ?? "/boards";
+  const workspacePublicId = searchParams.get("workspacePublicId");
   const { data: workspaces } = api.workspace.all.useQuery();
   const { data: session } = authClient.useSession();
   const { data: user } = api.user.getUser.useQuery(undefined, {
@@ -96,18 +97,44 @@ export default function SelectPlanView() {
     },
   ];
 
+  const buildSelectPlanUrl = (plan: PlanId, b: Billing) => {
+    const base = `/onboarding/select-plan?plan=${plan}&billing=${b}&returnUrl=${encodeURIComponent(returnUrl)}`;
+    return workspacePublicId
+      ? `${base}&workspacePublicId=${workspacePublicId}`
+      : base;
+  };
+
   const handleSelectPlan = (plan: PlanId) => {
     setSelected(plan);
-    router.replace(`/onboarding/select-plan?plan=${plan}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`);
+    router.replace(buildSelectPlanUrl(plan, billing));
   };
 
   const handleSetBilling = (b: Billing) => {
     setBilling(b);
-    router.replace(`/onboarding/select-plan?plan=${selected}&billing=${b}&returnUrl=${encodeURIComponent(returnUrl)}`);
+    router.replace(buildSelectPlanUrl(selected, b));
   };
 
-  const handleContinue = () =>
-    router.push(`/onboarding/workspace?plan=${selected}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`);
+  const handleContinue = async () => {
+    if (workspacePublicId && selected !== "solo") {
+      const response = await fetch("/api/stripe/create_checkout_session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          plan: selected,
+          billing,
+          workspacePublicId,
+          successUrl: returnUrl,
+          cancelUrl: returnUrl,
+        }),
+      });
+      const { url } = (await response.json()) as { url: string };
+      if (url) window.location.href = url;
+      return;
+    }
+    router.push(
+      `/onboarding/workspace?plan=${selected}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`,
+    );
+  };
 
   const handleCancel = () => router.push(returnUrl);
 
@@ -209,7 +236,11 @@ export default function SelectPlanView() {
                   {t`Cancel`}
                 </Button>
               )}
-              <Button onClick={handleContinue}>{t`Continue`}</Button>
+              <Button onClick={() => void handleContinue()}>
+                {workspacePublicId && selected !== "solo"
+                  ? t`Upgrade`
+                  : t`Continue`}
+              </Button>
             </div>
           </div>
 

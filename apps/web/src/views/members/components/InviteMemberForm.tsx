@@ -13,7 +13,6 @@ import { z } from "zod";
 
 import type { InviteMemberInput } from "@kan/api/types";
 import type { Subscription } from "@kan/shared/utils";
-import { authClient } from "@kan/auth/client";
 import { getSubscriptionByPlan } from "@kan/shared/utils";
 
 import Button from "~/components/Button";
@@ -25,15 +24,11 @@ import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
 export function InviteMemberForm({
-  numberOfMembers,
   subscriptions,
   unlimitedSeats,
-  userId,
 }: {
-  numberOfMembers: number;
   subscriptions: Subscription[] | undefined;
   unlimitedSeats: boolean;
-  userId: string | undefined;
 }) {
   const utils = api.useUtils();
   const [isShareInviteLinkEnabled, setIsShareInviteLinkEnabled] =
@@ -153,6 +148,9 @@ export function InviteMemberForm({
 
   const hasTeamSubscription = !!teamSubscription;
   const hasProSubscription = !!proSubscription;
+  const isPartnerTier = !!(
+    teamSubscription?.partnerTier ?? proSubscription?.partnerTier
+  );
 
   let isYearly = false;
   let price = t`$10/month`;
@@ -175,13 +173,13 @@ export function InviteMemberForm({
     inviteMember.mutate(member);
   };
 
+  const isFreePlan =
+    env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
+    !hasTeamSubscription &&
+    !hasProSubscription;
+
   const handleInviteLinkToggle = async () => {
-    if (
-      env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
-      !hasTeamSubscription &&
-      !hasProSubscription
-    )
-      return handleUpgrade();
+    if (isFreePlan) return;
 
     setIsLoadingInviteLink(true);
 
@@ -219,31 +217,6 @@ export function InviteMemberForm({
     }
   };
 
-  const handleUpgrade = async () => {
-    const { data, error } = await authClient.subscription.upgrade({
-      plan: "team",
-      referenceId: workspace.publicId,
-      metadata: { userId },
-      seats: numberOfMembers,
-      successUrl: "/members",
-      cancelUrl: "/members",
-      returnUrl: "/members",
-      disableRedirect: true,
-    });
-
-    if (data?.url) {
-      window.location.href = data.url;
-    }
-
-    if (error) {
-      showPopup({
-        header: t`Error upgrading subscription`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    }
-  };
-
   useEffect(() => {
     const emailElement: HTMLElement | null =
       document.querySelector<HTMLElement>("#email");
@@ -270,11 +243,7 @@ export function InviteMemberForm({
           <Input
             id="email"
             placeholder={t`Email`}
-            disabled={
-              env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
-              !hasTeamSubscription &&
-              !hasProSubscription
-            }
+            disabled={isFreePlan}
             {...register("email", { required: true })}
             onKeyDown={async (e) => {
               if (e.key === "Enter") {
@@ -285,78 +254,86 @@ export function InviteMemberForm({
             errorMessage={errors.email?.message}
           />
         )}
-        {(!isEmailEnabled || (isShareInviteLinkEnabled && inviteLink)) && (
-          <div className="my-4">
-            <div className="relative">
-              <Input
-                value={inviteLink}
-                className="pr-10 text-sm text-light-900 dark:text-dark-900"
-                readOnly
-              />
-              <button
-                type="button"
-                className="absolute inset-y-0 right-0 flex items-center pr-3 text-light-900 hover:text-light-950 dark:text-dark-900 dark:hover:text-dark-950"
-                onClick={copyToClipboard}
-              >
-                {copied ? (
-                  <HiMiniCheck className="h-5 w-5 text-green-600" />
-                ) : (
-                  <HiOutlineDocumentDuplicate className="h-5 w-5" />
-                )}
-              </button>
+        {!isFreePlan &&
+          (!isEmailEnabled || (isShareInviteLinkEnabled && inviteLink)) && (
+            <div className="my-4">
+              <div className="relative">
+                <Input
+                  value={inviteLink}
+                  className="pr-10 text-sm text-light-900 dark:text-dark-900"
+                  readOnly
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-light-900 hover:text-light-950 dark:text-dark-900 dark:hover:text-dark-950"
+                  onClick={copyToClipboard}
+                >
+                  {copied ? (
+                    <HiMiniCheck className="h-5 w-5 text-green-600" />
+                  ) : (
+                    <HiOutlineDocumentDuplicate className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
+              <div className="mt-2 flex items-start gap-1">
+                <HiInformationCircle className="mt-0.5 h-4 w-4 text-dark-900" />
+                <p className="text-xs text-gray-500 dark:text-dark-900">
+                  {t`Anyone with this link can join your workspace`}
+                </p>
+              </div>
             </div>
-            <div className="mt-2 flex items-start gap-1">
-              <HiInformationCircle className="mt-0.5 h-4 w-4 text-dark-900" />
-              <p className="text-xs text-gray-500 dark:text-dark-900">
-                {t`Anyone with this link can join your workspace`}
-              </p>
-            </div>
-          </div>
-        )}
+          )}
 
-        {env("NEXT_PUBLIC_KAN_ENV") === "cloud" && (
-          <div className="mt-3 rounded-md bg-light-100 p-3 text-xs text-light-900 dark:bg-dark-200 dark:text-dark-900">
-            {hasTeamSubscription || hasProSubscription ? (
-              <div>
-                <span className="font-medium text-emerald-500 dark:text-emerald-400">
-                  {hasTeamSubscription ? t`Team Plan` : t`Pro Plan ∞`}
-                </span>
-                <p className="mt-1">
-                  {unlimitedSeats
-                    ? t`You have unlimited seats with your Pro Plan. There is no additional charge for new members!`
-                    : t`Adding a new member will cost an additional ${price} (${billingType}) per seat.`}
-                </p>
-              </div>
-            ) : (
-              <div>
-                <span className="font-medium text-light-950 dark:text-dark-950">
-                  {t`Free Plan`}
-                </span>
-                <p className="mt-1">
-                  {t`Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace.`}
-                </p>
-              </div>
-            )}
-          </div>
-        )}
+        {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
+          !isPartnerTier &&
+          !unlimitedSeats && (
+            <div className="mt-3 rounded-md bg-light-100 p-3 text-xs text-light-900 dark:bg-dark-200 dark:text-dark-900">
+              {hasTeamSubscription || hasProSubscription ? (
+                <div>
+                  <span className="font-medium text-emerald-500 dark:text-emerald-400">
+                    {hasTeamSubscription ? t`Team Plan` : t`Pro Plan ∞`}
+                  </span>
+                  {!isPartnerTier && (
+                    <p className="mt-1">
+                      {unlimitedSeats
+                        ? t`You have unlimited seats with your Pro Plan. There is no additional charge for new members!`
+                        : t`Adding a new member will cost an additional ${price} (${billingType}) per seat.`}
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <div>
+                  <span className="font-medium text-light-950 dark:text-dark-950">
+                    {t`Free Plan`}
+                  </span>
+                  <p className="mt-1">
+                    {t`Inviting members requires a Team or Pro plan. You'll be redirected to upgrade your workspace.`}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
       </div>
 
       <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
-        <Toggle
-          label={
-            isShareInviteLinkEnabled
-              ? t`Deactivate invite link`
-              : t`Create invite link`
-          }
-          isChecked={isShareInviteLinkEnabled}
-          onChange={handleInviteLinkToggle}
-        />
+        {!isFreePlan && (
+          <Toggle
+            label={
+              isShareInviteLinkEnabled
+                ? t`Deactivate invite link`
+                : t`Create invite link`
+            }
+            isChecked={isShareInviteLinkEnabled}
+            onChange={handleInviteLinkToggle}
+          />
+        )}
         <div>
-          {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
-          !hasTeamSubscription &&
-          !hasProSubscription ? (
-            <Button type="button" onClick={handleUpgrade}>
-              {t`Start 14 day free trial`}
+          {isFreePlan ? (
+            <Button
+              type="button"
+              href={`/upgrade/select-plan?plan=pro&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/members")}`}
+            >
+              {t`Choose plan`}
             </Button>
           ) : (
             <Button
