@@ -11,14 +11,20 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
+import { activityTypes } from "./cards";
 import { users } from "./users";
 import { workspaces } from "./workspaces";
 
+// Coarse-grained events fired once per card mutation, kept for backward
+// compatibility with existing subscribers. Granular events come from
+// activityTypes (cards.ts) — every distinct card_activity_type produces a
+// webhook of the same name. New types added to activityTypes upstream
+// automatically become available as webhook subscriptions.
+const coarseWebhookEvents = ["card.updated", "card.moved", "card.deleted"] as const;
+
 export const webhookEvents = [
-  "card.created",
-  "card.updated",
-  "card.moved",
-  "card.deleted",
+  ...activityTypes,
+  ...coarseWebhookEvents,
 ] as const;
 export type WebhookEvent = (typeof webhookEvents)[number];
 

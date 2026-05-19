@@ -2,13 +2,13 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
-import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { attachmentConfirmResponseSchema } from "../schemas";
+import { createWithWebhook as createCardActivity } from "../utils/cardActivityHook";
 import { assertPermission } from "../utils/permissions";
 import { deleteObject, generateUploadUrl } from "@kan/shared/utils";
 
@@ -150,7 +150,7 @@ export const attachmentRouter = createTRPCRouter({
         });
       }
 
-      await cardActivityRepo.create(ctx.db, {
+      await createCardActivity(ctx.db, {
         type: "card.updated.attachment.added",
         cardId: card.id,
         attachmentId: attachment.id,
@@ -213,7 +213,7 @@ export const attachmentRouter = createTRPCRouter({
         deletedAt: new Date(),
       });
 
-      await cardActivityRepo.create(ctx.db, {
+      await createCardActivity(ctx.db, {
         type: "card.updated.attachment.removed",
         cardId: attachment.cardId,
         attachmentId: attachment.id,

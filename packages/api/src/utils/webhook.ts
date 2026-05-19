@@ -31,9 +31,44 @@ export interface WebhookPayload {
       id: string;
       name: string;
     };
+    fromList?: {
+      id: string;
+      name: string;
+    };
+    toList?: {
+      id: string;
+      name: string;
+    };
     user?: {
       id: string;
       name: string | null;
+    };
+    // Granular event context — populated based on the activity row that
+    // triggered the webhook. Only the fields relevant to event are set.
+    label?: {
+      id: string;
+      name: string;
+    };
+    member?: {
+      id: string;
+      name: string | null;
+    };
+    comment?: {
+      id: string;
+      body: string | null;
+    };
+    attachment?: {
+      id: string;
+      filename: string;
+    };
+    checklist?: {
+      id: string;
+      name: string;
+    };
+    checklistItem?: {
+      id: string;
+      title: string;
+      completed: boolean;
     };
     changes?: Record<string, { from: unknown; to: unknown }>;
   };
