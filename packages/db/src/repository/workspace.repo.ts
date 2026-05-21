@@ -176,6 +176,7 @@ export const getByPublicId = (db: dbClient, workspacePublicId: string) => {
       name: true,
       plan: true,
       slug: true,
+      createdBy: true,
     },
     where: eq(workspaces.publicId, workspacePublicId),
   });

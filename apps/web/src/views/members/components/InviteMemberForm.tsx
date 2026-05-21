@@ -81,8 +81,6 @@ export function InviteMemberForm({
     }
   }, [activeInviteLink]);
 
-  const isAtSeatLimit = seatLimit !== null && memberCount >= seatLimit;
-
   const inviteMember = api.member.invite.useMutation({
     onSuccess: async () => {
       closeModal();

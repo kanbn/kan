@@ -4,6 +4,7 @@ import type { Readable } from "node:stream";
 
 import { createNextApiContext } from "@kan/api/trpc";
 import { withApiLogging } from "@kan/api/utils/apiLogging";
+import { cancelWorkspaceAccess } from "@kan/api/utils/workspace";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
@@ -126,7 +127,7 @@ export default withApiLogging(
           const [, allSubs] = await Promise.all([
             subscriptionRepo.updateById(db, sub.id, {
               plan: "free",
-              status: "inactive",
+              status: "canceled",
             }),
             sub.referenceId
               ? subscriptionRepo.getByReferenceId(db, sub.referenceId)
@@ -137,7 +138,7 @@ export default withApiLogging(
               (s) => s.id !== sub.id,
             );
             if (!hasActiveSub) {
-              await workspaceRepo.update(db, sub.referenceId, { plan: "free" });
+              await cancelWorkspaceAccess(db, sub.referenceId);
             }
           }
         }

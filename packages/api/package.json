@@ -35,6 +35,10 @@
     "./utils/permissions": {
       "types": "./src/utils/permissions.ts",
       "default": "./src/utils/permissions.ts"
+    },
+    "./utils/workspace": {
+      "types": "./src/utils/workspace.ts",
+      "default": "./src/utils/workspace.ts"
     }
   },
   "license": "GPL-3.0",

@@ -89,6 +89,9 @@ export default function MembersPage() {
 
   const activeMembers = data?.members.length ?? 0;
   const seatLimit = getSeatLimit(subscriptions);
+  const memberCount =
+    data?.members.filter((m) => m.status === "active" || m.status === "invited")
+      .length ?? 0;
   const totalSeats =
     teamSubscription?.seats ??
     proSubscription?.seats ??
@@ -407,7 +410,7 @@ export default function MembersPage() {
             <InviteMemberForm
               subscriptions={subscriptions}
               unlimitedSeats={unlimitedSeats}
-              memberCount={activeMembers}
+              memberCount={memberCount}
               seatLimit={seatLimit}
             />
           </Modal>
