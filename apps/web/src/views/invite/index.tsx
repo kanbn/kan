@@ -36,6 +36,17 @@ export default function InvitePage() {
         return router.push(`/boards`);
       }
 
+      if (
+        error.data?.code === "FORBIDDEN" &&
+        error.message === "SEAT_LIMIT_REACHED"
+      ) {
+        setError(
+          t`This workspace has reached its member limit. The workspace owner will need to upgrade their plan.`,
+        );
+        setIsProcessing(false);
+        return;
+      }
+
       setError(
         error.message ||
           t`Failed to accept invitation. Please try again later, or contact customer support.`,

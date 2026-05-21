@@ -10,13 +10,14 @@ import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import {
   generateUID,
+  getSeatLimit,
   getSubscriptionByPlan,
   hasUnlimitedSeats,
 } from "@kan/shared";
 import { updateSubscriptionSeats } from "@kan/stripe";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { memberInviteResponseSchema } from "../schemas";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import {
   assertCanManageMember,
   assertCanManageRole,
@@ -111,6 +112,20 @@ export const memberRouter = createTRPCRouter({
             throw new TRPCError({
               message: `Failed to update subscription for the new member.`,
               code: "INTERNAL_SERVER_ERROR",
+            });
+          }
+        }
+
+        const seatLimit = getSeatLimit(subscriptions);
+        if (seatLimit !== null) {
+          const memberCount = await memberRepo.getCountByWorkspaceId(
+            ctx.db,
+            workspace.id,
+          );
+          if (memberCount >= seatLimit) {
+            throw new TRPCError({
+              message: `SEAT_LIMIT_REACHED`,
+              code: "FORBIDDEN",
             });
           }
         }
@@ -641,6 +656,20 @@ export const memberRouter = createTRPCRouter({
             throw new TRPCError({
               message: `Failed to update subscription for the new member.`,
               code: "INTERNAL_SERVER_ERROR",
+            });
+          }
+        }
+
+        const seatLimit = getSeatLimit(subscriptions);
+        if (seatLimit !== null) {
+          const memberCount = await memberRepo.getCountByWorkspaceId(
+            ctx.db,
+            workspace.id,
+          );
+          if (memberCount >= seatLimit) {
+            throw new TRPCError({
+              message: `SEAT_LIMIT_REACHED`,
+              code: "FORBIDDEN",
             });
           }
         }

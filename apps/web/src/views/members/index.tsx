@@ -11,7 +11,11 @@ import { twMerge } from "tailwind-merge";
 
 import type { Subscription } from "@kan/shared/utils";
 import { authClient } from "@kan/auth/client";
-import { getSubscriptionByPlan, hasUnlimitedSeats } from "@kan/shared/utils";
+import {
+  getSeatLimit,
+  getSubscriptionByPlan,
+  hasUnlimitedSeats,
+} from "@kan/shared/utils";
 
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
@@ -84,6 +88,7 @@ export default function MembersPage() {
   const isPaidPlan = isProPlan || isTeamPlan;
 
   const activeMembers = data?.members.length ?? 0;
+  const seatLimit = getSeatLimit(subscriptions);
   const totalSeats =
     teamSubscription?.seats ??
     proSubscription?.seats ??
@@ -402,6 +407,8 @@ export default function MembersPage() {
             <InviteMemberForm
               subscriptions={subscriptions}
               unlimitedSeats={unlimitedSeats}
+              memberCount={activeMembers}
+              seatLimit={seatLimit}
             />
           </Modal>
 
