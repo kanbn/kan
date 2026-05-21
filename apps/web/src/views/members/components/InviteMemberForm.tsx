@@ -26,9 +26,13 @@ import { api } from "~/utils/api";
 export function InviteMemberForm({
   subscriptions,
   unlimitedSeats,
+  memberCount,
+  seatLimit,
 }: {
   subscriptions: Subscription[] | undefined;
   unlimitedSeats: boolean;
+  memberCount: number;
+  seatLimit: number | null;
 }) {
   const utils = api.useUtils();
   const [isShareInviteLinkEnabled, setIsShareInviteLinkEnabled] =
@@ -77,6 +81,8 @@ export function InviteMemberForm({
     }
   }, [activeInviteLink]);
 
+  const isAtSeatLimit = seatLimit !== null && memberCount >= seatLimit;
+
   const inviteMember = api.member.invite.useMutation({
     onSuccess: async () => {
       closeModal();
@@ -91,6 +97,15 @@ export function InviteMemberForm({
         showPopup({
           header: t`Error inviting member`,
           message: t`User is already a member of this workspace`,
+          icon: "error",
+        });
+      } else if (
+        error.data?.code === "FORBIDDEN" &&
+        error.message === "SEAT_LIMIT_REACHED"
+      ) {
+        showPopup({
+          header: t`Seat limit reached`,
+          message: t`You've reached your ${seatLimit ?? 0}-seat limit. Please upgrade your plan to add more members.`,
           icon: "error",
         });
       } else {
@@ -284,22 +299,30 @@ export function InviteMemberForm({
             </div>
           )}
 
-        {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
-          !isPartnerTier &&
-          !unlimitedSeats && (
-            <div className="mt-3 rounded-md bg-light-100 p-3 text-xs text-light-900 dark:bg-dark-200 dark:text-dark-900">
-              {hasTeamSubscription || hasProSubscription ? (
+        {env("NEXT_PUBLIC_KAN_ENV") === "cloud" && (
+          <div className="mt-3 rounded-md bg-light-100 p-3 text-xs text-light-900 dark:bg-dark-200 dark:text-dark-900">
+            {isPartnerTier && seatLimit !== null ? (
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="font-medium text-emerald-500 dark:text-emerald-400">
+                    {hasTeamSubscription ? t`Team Plan` : t`Pro Plan`}
+                  </span>
+                  <span className="text-light-900 dark:text-dark-900">
+                    {memberCount} / {seatLimit} {t`seats`}
+                  </span>
+                </div>
+              </div>
+            ) : !unlimitedSeats ? (
+              hasTeamSubscription || hasProSubscription ? (
                 <div>
                   <span className="font-medium text-emerald-500 dark:text-emerald-400">
                     {hasTeamSubscription ? t`Team Plan` : t`Pro Plan ∞`}
                   </span>
-                  {!isPartnerTier && (
-                    <p className="mt-1">
-                      {unlimitedSeats
-                        ? t`You have unlimited seats with your Pro Plan. There is no additional charge for new members!`
-                        : t`Adding a new member will cost an additional ${price} (${billingType}) per seat.`}
-                    </p>
-                  )}
+                  <p className="mt-1">
+                    {unlimitedSeats
+                      ? t`You have unlimited seats with your Pro Plan. There is no additional charge for new members!`
+                      : t`Adding a new member will cost an additional ${price} (${billingType}) per seat.`}
+                  </p>
                 </div>
               ) : (
                 <div>
@@ -310,9 +333,10 @@ export function InviteMemberForm({
                     {t`Inviting members requires a Team or Pro plan. You'll be redirected to upgrade your workspace.`}
                   </p>
                 </div>
-              )}
-            </div>
-          )}
+              )
+            ) : null}
+          </div>
+        )}
       </div>
 
       <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">

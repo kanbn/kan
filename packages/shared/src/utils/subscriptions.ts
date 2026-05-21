@@ -54,3 +54,14 @@ export const hasUnlimitedSeats = (
   const activeSubscriptions = getActiveSubscriptions(subscriptions);
   return activeSubscriptions.some((sub) => sub.unlimitedSeats);
 };
+
+export const getSeatLimit = (
+  subscriptions: Subscription[] | undefined,
+): number | null => {
+  const activeSubscriptions = getActiveSubscriptions(subscriptions);
+  const partnerSub = activeSubscriptions.find(
+    (sub) =>
+      sub.partnerTier !== null && !sub.unlimitedSeats && sub.seats !== null,
+  );
+  return partnerSub?.seats ?? null;
+};

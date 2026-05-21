@@ -1,4 +1,4 @@
-import { and, count, eq, isNull } from "drizzle-orm";
+import { and, count, eq, isNull, or } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { MemberRole, MemberStatus } from "@kan/db/schema";
@@ -13,6 +13,27 @@ export const getActiveCount = async (db: dbClient) => {
       and(
         isNull(workspaceMembers.deletedAt),
         eq(workspaceMembers.status, "active"),
+      ),
+    );
+
+  return result[0]?.count ?? 0;
+};
+
+export const getCountByWorkspaceId = async (
+  db: dbClient,
+  workspaceId: number,
+) => {
+  const result = await db
+    .select({ count: count() })
+    .from(workspaceMembers)
+    .where(
+      and(
+        eq(workspaceMembers.workspaceId, workspaceId),
+        isNull(workspaceMembers.deletedAt),
+        or(
+          eq(workspaceMembers.status, "active"),
+          eq(workspaceMembers.status, "invited"),
+        ),
       ),
     );
 
