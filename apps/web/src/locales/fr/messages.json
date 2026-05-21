@@ -114,8 +114,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 171],
-      ["src/views/members/components/InviteMemberForm.tsx", 183]
+      ["src/views/members/components/InviteMemberForm.tsx", 169],
+      ["src/views/members/components/InviteMemberForm.tsx", 181]
     ],
     "translation": "10 $/mois"
   },
@@ -123,7 +123,7 @@
     "message": "$8/month",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 183]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 181]],
     "translation": "8 $/mois"
   },
   "zMlxCA": {
@@ -320,7 +320,7 @@
     "comments": [],
     "origin": [
       ["src/views/card/components/MemberSelector.tsx", 135],
-      ["src/views/members/components/InviteMemberForm.tsx", 245]
+      ["src/views/members/components/InviteMemberForm.tsx", 243]
     ],
     "translation": "Ajouter un membre"
   },
@@ -433,7 +433,7 @@
       "billingType": ["billingType"]
     },
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 324]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 322]],
     "translation": "L'ajout d'un nouveau membre coûtera {price} supplémentaires ({billingType}) par siège."
   },
   "D7/JvJ": {
@@ -447,7 +447,7 @@
     "message": "Admin",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 218]],
+    "origin": [["src/views/members/index.tsx", 221]],
     "translation": "Administrateur"
   },
   "3pIq39": {
@@ -584,7 +584,7 @@
     "message": "Anyone with this link can join your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 296]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 294]],
     "translation": "Toute personne disposant de ce lien peut rejoindre votre espace de travail"
   },
   "OZtEcz": {
@@ -847,14 +847,14 @@
     "message": "billed annually",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 184]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 182]],
     "translation": "facturé annuellement"
   },
   "+VoTOr": {
     "message": "billed monthly",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 184]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 182]],
     "translation": "facturé mensuellement"
   },
   "R+w/Va": {
@@ -1429,7 +1429,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 360],
+      ["src/views/members/components/InviteMemberForm.tsx", 358],
       ["src/views/settings/BillingSettings.tsx", 80]
     ],
     "translation": "Choisir un forfait"
@@ -1840,7 +1840,7 @@
     "message": "Create invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 348]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 346]],
     "translation": "Créer un lien d'invitation"
   },
   "QtACvI": {
@@ -2058,7 +2058,7 @@
     "message": "Deactivate invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 347]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 345]],
     "translation": "Désactiver le lien d'invitation"
   },
   "bKzM8L": {
@@ -2432,7 +2432,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 162],
-      ["src/views/members/index.tsx", 241]
+      ["src/views/members/index.tsx", 244]
     ],
     "translation": "Modifier les permissions"
   },
@@ -2476,7 +2476,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 260],
+      ["src/views/members/components/InviteMemberForm.tsx", 258],
       ["src/views/settings/AccountSettings.tsx", 43]
     ],
     "translation": "E-mail"
@@ -2610,7 +2610,7 @@
     "origin": [
       ["src/views/boards/components/NewBoardForm.tsx", 77],
       ["src/views/boards/components/NewBoardForm.tsx", 92],
-      ["src/views/members/components/InviteMemberForm.tsx", 228]
+      ["src/views/members/components/InviteMemberForm.tsx", 226]
     ],
     "translation": "Erreur"
   },
@@ -2634,14 +2634,14 @@
     "message": "Error creating invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 138]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 136]],
     "translation": "Erreur lors de la création du lien d'invitation"
   },
   "USVCGU": {
     "message": "Error deactivating invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 154]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 152]],
     "translation": "Erreur lors de la désactivation du lien d'invitation"
   },
   "bqAQaT": {
@@ -2688,8 +2688,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 98],
-      ["src/views/members/components/InviteMemberForm.tsx", 113]
+      ["src/views/members/components/InviteMemberForm.tsx", 96],
+      ["src/views/members/components/InviteMemberForm.tsx", 111]
     ],
     "translation": "Erreur lors de l'invitation du membre"
   },
@@ -2812,7 +2812,7 @@
     "message": "Failed to copy invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 229]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 227]],
     "translation": "Échec de la copie du lien d'invitation"
   },
   "53QYh8": {
@@ -3013,8 +3013,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 330],
-      ["src/views/members/index.tsx", 308]
+      ["src/views/members/components/InviteMemberForm.tsx", 328],
+      ["src/views/members/index.tsx", 311]
     ],
     "translation": "Forfait gratuit"
   },
@@ -3235,7 +3235,7 @@
     "message": "Guest",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 220]],
+    "origin": [["src/views/members/index.tsx", 223]],
     "translation": "Invité"
   },
   "CB/NpV": {
@@ -3489,21 +3489,21 @@
     "message": "Invite",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 327]],
+    "origin": [["src/views/members/index.tsx", 330]],
     "translation": "Inviter"
   },
   "KLJ4eD": {
     "message": "Invite link copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 222]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 220]],
     "translation": "Lien d'invitation copié"
   },
   "mZGPxt": {
     "message": "Invite link copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 223]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 221]],
     "translation": "Lien d'invitation copié dans le presse-papiers"
   },
   "D9ROdV": {
@@ -3520,7 +3520,7 @@
     "message": "Invite links require a Team or Pro subscription. Please upgrade your workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 133]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 131]],
     "translation": "Les liens d'invitation nécessitent un abonnement Team ou Pro. Veuillez mettre à niveau votre espace de travail."
   },
   "+djOzj": {
@@ -3529,7 +3529,7 @@
     "comments": [],
     "origin": [
       ["src/views/card/components/MemberSelector.tsx", 115],
-      ["src/views/members/components/InviteMemberForm.tsx", 368]
+      ["src/views/members/components/InviteMemberForm.tsx", 366]
     ],
     "translation": "Inviter un membre"
   },
@@ -3537,7 +3537,7 @@
     "message": "Inviting members requires a Team or Pro plan. You'll be redirected to upgrade your workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 333]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 331]],
     "translation": "L'invitation de membres nécessite un forfait Team ou Pro. Vous serez redirigé pour mettre à niveau votre espace de travail."
   },
   "qPP4lD": {
@@ -3898,7 +3898,7 @@
     "origin": [
       ["src/views/card/components/ActivityList.tsx", 55],
       ["src/views/card/components/ActivityList.tsx", 88],
-      ["src/views/members/index.tsx", 219]
+      ["src/views/members/index.tsx", 222]
     ],
     "translation": "Membre"
   },
@@ -3918,7 +3918,7 @@
       ["src/views/board/components/Filters.tsx", 147],
       ["src/views/board/components/NewCardForm.tsx", 386],
       ["src/views/card/index.tsx", 143],
-      ["src/views/members/index.tsx", 280],
+      ["src/views/members/index.tsx", 283],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 81]
     ],
     "translation": "Membres"
@@ -3929,7 +3929,7 @@
       "0": ["workspace.name ?? t`Workspace`"]
     },
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 275]],
+    "origin": [["src/views/members/index.tsx", 278]],
     "translation": "Membres | {0}"
   },
   "/bZzdR": {
@@ -3965,7 +3965,7 @@
     "message": "monthly billing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 172]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 170]],
     "translation": "facturation mensuelle"
   },
   "51UCsN": {
@@ -4460,7 +4460,7 @@
     "message": "Paused",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 227]],
+    "origin": [["src/views/members/index.tsx", 230]],
     "translation": "En pause"
   },
   "UbYdrA": {
@@ -4477,7 +4477,7 @@
     "message": "Pending",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 227]],
+    "origin": [["src/views/members/index.tsx", 230]],
     "translation": "En attente"
   },
   "oVBq1w": {
@@ -4681,7 +4681,7 @@
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 42],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 65],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 93],
-      ["src/views/members/components/InviteMemberForm.tsx", 114],
+      ["src/views/members/components/InviteMemberForm.tsx", 112],
       ["src/views/members/index.tsx", 70],
       ["src/views/onboarding/workspace-details/index.tsx", 119],
       ["src/views/onboarding/workspace-details/index.tsx", 168],
@@ -4702,8 +4702,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 139],
-      ["src/views/members/components/InviteMemberForm.tsx", 155]
+      ["src/views/members/components/InviteMemberForm.tsx", 137],
+      ["src/views/members/components/InviteMemberForm.tsx", 153]
     ],
     "translation": "Veuillez réessayer plus tard."
   },
@@ -4787,8 +4787,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 308],
-      ["src/views/members/index.tsx", 305]
+      ["src/views/members/components/InviteMemberForm.tsx", 306],
+      ["src/views/members/index.tsx", 308]
     ],
     "translation": "Forfait Pro"
   },
@@ -4796,7 +4796,7 @@
     "message": "Pro Plan ∞",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 319]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 317]],
     "translation": "Forfait Pro ∞"
   },
   "0rPv1T": {
@@ -4889,7 +4889,7 @@
     "message": "Remove member",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 250]],
+    "origin": [["src/views/members/index.tsx", 253]],
     "translation": "Retirer le membre"
   },
   "BZkYSt": {
@@ -5046,7 +5046,7 @@
     "message": "Role",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 349]],
+    "origin": [["src/views/members/index.tsx", 352]],
     "translation": "Rôle"
   },
   "jQ6I8X": {
@@ -5128,19 +5128,19 @@
     "translation": "Rechercher des tableaux et des cartes..."
   },
   "66Jmqh": {
-    "translation": "Limite de sièges atteinte",
     "message": "Seat limit reached",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 107]]
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 105]],
+    "translation": "Limite de sièges atteinte"
   },
   "MpFIca": {
     "message": "seats",
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 311],
-      ["src/views/members/index.tsx", 316]
+      ["src/views/members/components/InviteMemberForm.tsx", 309],
+      ["src/views/members/index.tsx", 319]
     ],
     "translation": "places"
   },
@@ -5559,7 +5559,7 @@
     "message": "Subscription Required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 132]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 130]],
     "translation": "Abonnement requis"
   },
   "zzDlyQ": {
@@ -5626,9 +5626,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 308],
-      ["src/views/members/components/InviteMemberForm.tsx", 319],
-      ["src/views/members/index.tsx", 307]
+      ["src/views/members/components/InviteMemberForm.tsx", 306],
+      ["src/views/members/components/InviteMemberForm.tsx", 317],
+      ["src/views/members/index.tsx", 310]
     ],
     "translation": "Forfait équipe"
   },
@@ -5946,11 +5946,11 @@
     "translation": "Cela entraînera la suppression définitive de toutes les données associées à votre compte."
   },
   "PV7XRK": {
-    "translation": "Cet espace de travail a atteint sa limite de membres. Le propriétaire de l'espace de travail devra mettre à niveau son forfait.",
     "message": "This workspace has reached its member limit. The workspace owner will need to upgrade their plan.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/invite/index.tsx", 44]]
+    "origin": [["src/views/invite/index.tsx", 44]],
+    "translation": "Cet espace de travail a atteint sa limite de membres. Le propriétaire de l'espace de travail devra mettre à niveau son forfait."
   },
   "duf3Nr": {
     "message": "This workspace URL has already been taken",
@@ -6504,7 +6504,7 @@
     "message": "Unlimited seats",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 315]],
+    "origin": [["src/views/members/index.tsx", 318]],
     "translation": "Places illimitées"
   },
   "Ws+3X+": {
@@ -6586,7 +6586,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/index.tsx", 292],
+      ["src/views/members/index.tsx", 295],
       ["src/views/onboarding/select-plan/index.tsx", 241]
     ],
     "translation": "Mettre à niveau"
@@ -6689,14 +6689,14 @@
     "message": "User",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 343]],
+    "origin": [["src/views/members/index.tsx", 346]],
     "translation": "Utilisateur"
   },
   "tYN21H": {
     "message": "User is already a member of this workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 99]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 97]],
     "translation": "L'utilisateur est déjà membre de cet espace de travail"
   },
   "vSJd18": {
@@ -6922,7 +6922,7 @@
       ["src/components/SettingsLayout.tsx", 47],
       ["src/views/board/index.tsx", 530],
       ["src/views/boards/index.tsx", 48],
-      ["src/views/members/index.tsx", 275],
+      ["src/views/members/index.tsx", 278],
       ["src/views/public/board/index.tsx", 125],
       ["src/views/public/boards/index.tsx", 75]
     ],
@@ -7176,7 +7176,7 @@
     "message": "You have unlimited seats with your Pro Plan. There is no additional charge for new members!",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 323]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 321]],
     "translation": "Vous disposez de places illimitées avec votre forfait pro. Il n'y a aucun frais supplémentaire pour les nouveaux membres !"
   },
   "MdN5zD": {
@@ -7210,13 +7210,13 @@
     "translation": "Vous avez été invité à rejoindre un espace de travail."
   },
   "QriiAI": {
-    "translation": "Vous avez atteint votre limite de {0} sièges. Veuillez mettre à niveau votre forfait pour ajouter davantage de membres.",
     "message": "You've reached your {0}-seat limit. Please upgrade your plan to add more members.",
     "placeholders": {
       "0": ["seatLimit ?? 0"]
     },
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 108]]
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 106]],
+    "translation": "Vous avez atteint votre limite de {0} sièges. Veuillez mettre à niveau votre forfait pour ajouter davantage de membres."
   },
   "8Zjc7q": {
     "message": "Your account already has a password. You can change it from your account settings.",
