@@ -433,7 +433,7 @@
       "billingType": ["billingType"]
     },
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 322]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 320]],
     "translation": "Dodanie nowego członka będzie kosztować dodatkowo {price} ({billingType}) za miejsce."
   },
   "D7/JvJ": {
@@ -1429,7 +1429,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 358],
+      ["src/views/members/components/InviteMemberForm.tsx", 355],
       ["src/views/settings/BillingSettings.tsx", 80]
     ],
     "translation": "Wybierz plan"
@@ -1840,7 +1840,7 @@
     "message": "Create invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 346]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 343]],
     "translation": "Utwórz link zaproszenia"
   },
   "QtACvI": {
@@ -2058,7 +2058,7 @@
     "message": "Deactivate invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 345]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 342]],
     "translation": "Dezaktywuj link zaproszenia"
   },
   "bKzM8L": {
@@ -3013,7 +3013,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 328],
+      ["src/views/members/components/InviteMemberForm.tsx", 326],
       ["src/views/members/index.tsx", 311]
     ],
     "translation": "Plan darmowy"
@@ -3529,7 +3529,7 @@
     "comments": [],
     "origin": [
       ["src/views/card/components/MemberSelector.tsx", 115],
-      ["src/views/members/components/InviteMemberForm.tsx", 366]
+      ["src/views/members/components/InviteMemberForm.tsx", 363]
     ],
     "translation": "Zaproś członka"
   },
@@ -3537,7 +3537,7 @@
     "message": "Inviting members requires a Team or Pro plan. You'll be redirected to upgrade your workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 331]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 329]],
     "translation": "Zapraszanie członków wymaga planu Team lub Pro. Zostaniesz przekierowany do ulepszenia przestrzeni roboczej."
   },
   "qPP4lD": {
@@ -4787,7 +4787,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 306],
+      ["src/views/members/components/InviteMemberForm.tsx", 305],
       ["src/views/members/index.tsx", 308]
     ],
     "translation": "Plan Pro"
@@ -5139,7 +5139,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 309],
+      ["src/views/members/components/InviteMemberForm.tsx", 308],
       ["src/views/members/index.tsx", 319]
     ],
     "translation": "miejsc"
@@ -5626,7 +5626,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 306],
+      ["src/views/members/components/InviteMemberForm.tsx", 305],
       ["src/views/members/components/InviteMemberForm.tsx", 317],
       ["src/views/members/index.tsx", 310]
     ],
@@ -7177,7 +7177,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/members/components/InviteMemberForm.tsx", 321]],
-    "translation": "W ramach planu Pro masz nielimitowaną liczbę miejsc. Nie ma dodatkowych opłat za nowych członków!"
+    "translation": "W ramach planu Pro masz nielimitowaną liczbę miejsc. Nie ma dodatkowych opłat za nowych członków!",
+    "obsolete": true
   },
   "MdN5zD": {
     "message": "You need to be an admin to manage workspace permissions.",

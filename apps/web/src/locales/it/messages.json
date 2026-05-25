@@ -433,7 +433,7 @@
       "billingType": ["billingType"]
     },
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 322]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 320]],
     "translation": "L'aggiunta di un nuovo membro costerà {price} aggiuntivi ({billingType}) per postazione."
   },
   "D7/JvJ": {
@@ -1429,7 +1429,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 358],
+      ["src/views/members/components/InviteMemberForm.tsx", 355],
       ["src/views/settings/BillingSettings.tsx", 80]
     ],
     "translation": "Scegli piano"
@@ -1840,7 +1840,7 @@
     "message": "Create invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 346]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 343]],
     "translation": "Crea link di invito"
   },
   "QtACvI": {
@@ -2058,7 +2058,7 @@
     "message": "Deactivate invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 345]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 342]],
     "translation": "Disattiva link di invito"
   },
   "bKzM8L": {
@@ -3013,7 +3013,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 328],
+      ["src/views/members/components/InviteMemberForm.tsx", 326],
       ["src/views/members/index.tsx", 311]
     ],
     "translation": "Piano gratuito"
@@ -3529,7 +3529,7 @@
     "comments": [],
     "origin": [
       ["src/views/card/components/MemberSelector.tsx", 115],
-      ["src/views/members/components/InviteMemberForm.tsx", 366]
+      ["src/views/members/components/InviteMemberForm.tsx", 363]
     ],
     "translation": "Invita membro"
   },
@@ -3537,7 +3537,7 @@
     "message": "Inviting members requires a Team or Pro plan. You'll be redirected to upgrade your workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 331]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 329]],
     "translation": "L'invito di membri richiede un piano Team o Pro. Verrai reindirizzato per aggiornare il tuo workspace."
   },
   "qPP4lD": {
@@ -4787,7 +4787,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 306],
+      ["src/views/members/components/InviteMemberForm.tsx", 305],
       ["src/views/members/index.tsx", 308]
     ],
     "translation": "Piano Pro"
@@ -5139,7 +5139,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 309],
+      ["src/views/members/components/InviteMemberForm.tsx", 308],
       ["src/views/members/index.tsx", 319]
     ],
     "translation": "posti"
@@ -5626,7 +5626,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 306],
+      ["src/views/members/components/InviteMemberForm.tsx", 305],
       ["src/views/members/components/InviteMemberForm.tsx", 317],
       ["src/views/members/index.tsx", 310]
     ],
@@ -7177,7 +7177,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/members/components/InviteMemberForm.tsx", 321]],
-    "translation": "Hai posti illimitati con il tuo piano pro. Non ci sono costi aggiuntivi per i nuovi membri!"
+    "translation": "Hai posti illimitati con il tuo piano pro. Non ci sono costi aggiuntivi per i nuovi membri!",
+    "obsolete": true
   },
   "MdN5zD": {
     "message": "You need to be an admin to manage workspace permissions.",
