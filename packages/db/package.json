@@ -5,27 +5,27 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./src/index.ts",
       "default": "./src/index.ts"
     },
     "./client": {
-      "types": "./dist/client.d.ts",
+      "types": "./src/client.ts",
       "default": "./src/client.ts"
     },
     "./schema": {
-      "types": "./dist/schema.d.ts",
+      "types": "./src/schema/index.ts",
       "default": "./src/schema/index.ts"
     },
     "./types/*": {
-      "types": "./dist/types/*.d.ts",
+      "types": "./src/types/*",
       "default": "./src/types/*"
     },
     "./repository/*": {
-      "types": "./dist/repository/*.d.ts",
+      "types": "./src/repository/*.ts",
       "default": "./src/repository/*.ts"
     },
     "./redis": {
-      "types": "./dist/redis.d.ts",
+      "types": "./src/redis.ts",
       "default": "./src/redis.ts"
     }
   },

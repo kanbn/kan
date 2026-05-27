@@ -177,6 +177,7 @@ export const getByPublicId = (db: dbClient, workspacePublicId: string) => {
       plan: true,
       slug: true,
       deletedAt: true,
+      createdBy: true,
     },
     where: eq(workspaces.publicId, workspacePublicId),
   });
@@ -240,6 +241,7 @@ export const getByPublicIdWithMembers = (
           status: true,
           seats: true,
           unlimitedSeats: true,
+          partnerTier: true,
           periodStart: true,
           periodEnd: true,
         },

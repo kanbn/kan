@@ -4,9 +4,11 @@ import type { Readable } from "node:stream";
 
 import { createNextApiContext } from "@kan/api/trpc";
 import { withApiLogging } from "@kan/api/utils/apiLogging";
+import { cancelWorkspaceAccess } from "@kan/api/utils/workspace";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
+import { getActiveSubscriptions } from "@kan/shared/utils";
 
 import { tierConfig } from "./_utils";
 
@@ -29,9 +31,9 @@ function verifySignature(
   if (!secret) return false;
 
   const ts = Number(timestamp);
-  if (isNaN(ts) || Date.now() / 1000 - ts > 300) return false;
+  if (isNaN(ts) || Date.now() - ts > 300_000) return false;
 
-  const payload = `${timestamp}.${rawBody}`;
+  const payload = `${timestamp}${rawBody}`;
   const expected = createHmac("sha256", secret).update(payload).digest("hex");
 
   try {
@@ -87,6 +89,8 @@ export default withApiLogging(
     const { event, license_key, license_status, tier, prev_license_key } =
       payload;
 
+    log.info({ headers: req.headers, payload }, "partner webhook received");
+
     const { db } = await createNextApiContext(req);
 
     switch (event) {
@@ -120,12 +124,22 @@ export default withApiLogging(
           license_key,
         );
         if (sub) {
-          await subscriptionRepo.updateById(db, sub.id, {
-            plan: "free",
-            status: "inactive",
-          });
+          const [, allSubs] = await Promise.all([
+            subscriptionRepo.updateById(db, sub.id, {
+              plan: "free",
+              status: "canceled",
+            }),
+            sub.referenceId
+              ? subscriptionRepo.getByReferenceId(db, sub.referenceId)
+              : Promise.resolve([]),
+          ]);
           if (sub.referenceId) {
-            await workspaceRepo.update(db, sub.referenceId, { plan: "free" });
+            const hasActiveSub = getActiveSubscriptions(allSubs).some(
+              (s) => s.id !== sub.id,
+            );
+            if (!hasActiveSub) {
+              await cancelWorkspaceAccess(db, sub.referenceId);
+            }
           }
         }
         break;
@@ -133,19 +147,26 @@ export default withApiLogging(
 
       case "upgrade":
       case "downgrade": {
+        const lookupKey = prev_license_key ?? license_key;
         const sub = await subscriptionRepo.getByPartnerLicenseKey(
           db,
-          license_key,
+          lookupKey,
         );
         if (sub) {
           const cfg = tierConfig(tier);
           await subscriptionRepo.upsertByPartnerLicenseKey(db, license_key, {
             plan: cfg.plan,
-            status: license_status,
+            status: "active",
             partnerTier: tier,
             seats: cfg.seats,
             unlimitedSeats: cfg.unlimitedSeats,
+            referenceId: sub.referenceId ?? undefined,
           });
+          if (prev_license_key) {
+            await subscriptionRepo.updateById(db, sub.id, {
+              status: "inactive",
+            });
+          }
           if (sub.referenceId) {
             await workspaceRepo.update(db, sub.referenceId, { plan: cfg.plan });
           }
@@ -163,7 +184,7 @@ export default withApiLogging(
             const cfg = tierConfig(tier);
             await subscriptionRepo.upsertByPartnerLicenseKey(db, license_key, {
               plan: cfg.plan,
-              status: sub.status,
+              status: "active",
               partnerTier: tier,
               seats: cfg.seats,
               unlimitedSeats: cfg.unlimitedSeats,

@@ -1,4 +1,4 @@
-import { and, count, eq, isNull } from "drizzle-orm";
+import { and, count, eq, isNull, ne, or } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { MemberRole, MemberStatus } from "@kan/db/schema";
@@ -13,6 +13,27 @@ export const getActiveCount = async (db: dbClient) => {
       and(
         isNull(workspaceMembers.deletedAt),
         eq(workspaceMembers.status, "active"),
+      ),
+    );
+
+  return result[0]?.count ?? 0;
+};
+
+export const getCountByWorkspaceId = async (
+  db: dbClient,
+  workspaceId: number,
+) => {
+  const result = await db
+    .select({ count: count() })
+    .from(workspaceMembers)
+    .where(
+      and(
+        eq(workspaceMembers.workspaceId, workspaceId),
+        isNull(workspaceMembers.deletedAt),
+        or(
+          eq(workspaceMembers.status, "active"),
+          eq(workspaceMembers.status, "invited"),
+        ),
       ),
     );
 
@@ -71,14 +92,14 @@ export const getByPublicIdsWithUsers = async (
   return db.query.workspaceMembers.findMany({
     where: (members, { inArray: inArrayFn, eq, and, isNull: isNullFn }) => {
       const conditions = [inArrayFn(members.publicId, memberPublicIds)];
-      
+
       if (workspaceId) {
         conditions.push(eq(members.workspaceId, workspaceId));
       }
-      
+
       conditions.push(eq(members.status, "active"));
       conditions.push(isNullFn(members.deletedAt));
-      
+
       return and(...conditions);
     },
     with: {
@@ -168,6 +189,68 @@ export const pauseAllMembers = async (db: dbClient, workspaceId: number) => {
       and(
         eq(workspaceMembers.workspaceId, workspaceId),
         eq(workspaceMembers.status, "active"),
+      ),
+    );
+};
+
+export const getPreservableMemberId = async (
+  db: dbClient,
+  workspaceId: number,
+  ownerUserId: string | null,
+): Promise<string | null> => {
+  if (ownerUserId) {
+    const owner = await db.query.workspaceMembers.findFirst({
+      columns: { userId: true },
+      where: and(
+        eq(workspaceMembers.workspaceId, workspaceId),
+        eq(workspaceMembers.userId, ownerUserId),
+        eq(workspaceMembers.status, "active"),
+        isNull(workspaceMembers.deletedAt),
+      ),
+    });
+    if (owner?.userId) return owner.userId;
+  }
+
+  const admin = await db.query.workspaceMembers.findFirst({
+    columns: { userId: true },
+    where: and(
+      eq(workspaceMembers.workspaceId, workspaceId),
+      eq(workspaceMembers.role, "admin"),
+      eq(workspaceMembers.status, "active"),
+      isNull(workspaceMembers.deletedAt),
+    ),
+    orderBy: (m, { asc }) => [asc(m.createdAt)],
+  });
+  if (admin?.userId) return admin.userId;
+
+  const anyMember = await db.query.workspaceMembers.findFirst({
+    columns: { userId: true },
+    where: and(
+      eq(workspaceMembers.workspaceId, workspaceId),
+      eq(workspaceMembers.status, "active"),
+      isNull(workspaceMembers.deletedAt),
+    ),
+    orderBy: (m, { asc }) => [asc(m.createdAt)],
+  });
+  return anyMember?.userId ?? null;
+};
+
+export const pauseMembersExcept = async (
+  db: dbClient,
+  workspaceId: number,
+  preserveUserId: string,
+) => {
+  await db
+    .update(workspaceMembers)
+    .set({ status: "paused" })
+    .where(
+      and(
+        eq(workspaceMembers.workspaceId, workspaceId),
+        eq(workspaceMembers.status, "active"),
+        or(
+          isNull(workspaceMembers.userId),
+          ne(workspaceMembers.userId, preserveUserId),
+        ),
       ),
     );
 };

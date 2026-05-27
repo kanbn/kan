@@ -474,7 +474,7 @@ export default function Editor({
           autolink: true,
           linkOnPaste: true,
         }),
-        Markdown,
+        Markdown.configure({ transformPastedText: true }),
         Placeholder.configure({
           placeholder: readOnly
             ? ""

@@ -28,7 +28,6 @@ import ButtonComponent from "~/components/Button";
 import ReactiveButton from "~/components/ReactiveButton";
 import UserMenu from "~/components/UserMenu";
 import WorkspaceMenu from "~/components/WorkspaceMenu";
-import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
@@ -53,7 +52,6 @@ export default function SideNavigation({
   const { workspace } = useWorkspace();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isInitialised, setIsInitialised] = useState(false);
-  const { openModal } = useModal();
 
   const { data: workspaceData } = api.workspace.byId.useQuery(
     { workspacePublicId: workspace.publicId },
@@ -223,21 +221,19 @@ export default function SideNavigation({
                   <ButtonComponent
                     iconLeft={<HiBolt />}
                     variant="secondary"
-                    href="/settings/workspace?upgrade=pro"
-                    aria-label="Upgrade to Pro"
-                    title="Upgrade to Pro"
+                    href={`/upgrade/select-plan?plan=pro&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/settings/billing")}`}
+                    aria-label={t`Start free trial`}
+                    title={t`Start free trial`}
                     iconOnly
-                    onClick={() => openModal("UPGRADE_TO_PRO")}
                   />
                 ) : (
                   <ButtonComponent
                     iconLeft={<HiBolt />}
                     fullWidth
                     variant="secondary"
-                    href="/settings/workspace?upgrade=pro"
-                    onClick={() => openModal("UPGRADE_TO_PRO")}
+                    href={`/upgrade/select-plan?plan=pro&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/settings/billing")}`}
                   >
-                    {t`Upgrade to Pro`}
+                    {t`Start free trial`}
                   </ButtonComponent>
                 )}
               </div>

@@ -5,36 +5,40 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./src/index.ts",
       "default": "./src/index.ts"
     },
     "./root": {
-      "types": "./dist/root.d.ts",
+      "types": "./src/root.ts",
       "default": "./src/root.ts"
     },
     "./trpc": {
-      "types": "./dist/trpc.d.ts",
+      "types": "./src/trpc.ts",
       "default": "./src/trpc.ts"
     },
     "./types": {
-      "types": "./dist/types.d.ts",
+      "types": "./src/types/router.types.ts",
       "default": "./src/types/router.types.ts"
     },
     "./openapi": {
-      "types": "./dist/openapi.d.ts",
+      "types": "./src/openapi.ts",
       "default": "./src/openapi.ts"
     },
     "./utils/rateLimit": {
-      "types": "./dist/utils/rateLimit.d.ts",
+      "types": "./src/utils/rateLimit.ts",
       "default": "./src/utils/rateLimit.ts"
     },
     "./utils/apiLogging": {
-      "types": "./dist/utils/apiLogging.d.ts",
+      "types": "./src/utils/apiLogging.ts",
       "default": "./src/utils/apiLogging.ts"
     },
     "./utils/permissions": {
-      "types": "./dist/utils/permissions.d.ts",
+      "types": "./src/utils/permissions.ts",
       "default": "./src/utils/permissions.ts"
+    },
+    "./utils/workspace": {
+      "types": "./src/utils/workspace.ts",
+      "default": "./src/utils/workspace.ts"
     }
   },
   "license": "GPL-3.0",

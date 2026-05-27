@@ -21,7 +21,7 @@ export default function SignUpPage() {
 
   const { data } = authClient.useSession();
 
-  if (data?.user.id) router.push("/boards");
+  if (data?.user.id) router.push(redirect ?? "/boards");
 
   const handleMagicLinkSent = (value: boolean, recipient: string) => {
     setIsMagicLinkSent(value);

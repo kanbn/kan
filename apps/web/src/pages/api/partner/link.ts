@@ -16,7 +16,7 @@ export default withRateLimit(
     const { license_key } = req.query;
 
     if (!license_key || typeof license_key !== "string") {
-      return res.redirect("/?partner_error=missing_license");
+      return res.redirect("/boards?partner_error=missing_license");
     }
 
     const { db, user } = await createNextApiContext(req);
@@ -30,11 +30,11 @@ export default withRateLimit(
     const sub = await subscriptionRepo.getByPartnerLicenseKey(db, license_key);
 
     if (!sub) {
-      return res.redirect("/?partner_error=invalid_license");
+      return res.redirect("/boards?partner_error=invalid_license");
     }
 
     if (sub.status !== "active") {
-      return res.redirect("/?partner_error=license_inactive");
+      return res.redirect("/boards?partner_error=license_inactive");
     }
 
     const memberships = await workspaceRepo.getAllByUserId(db, user.id);
@@ -42,7 +42,7 @@ export default withRateLimit(
 
     if (!workspace) {
       return res.redirect(
-        `/onboarding?license_key=${encodeURIComponent(license_key)}`,
+        `/onboarding/workspace?license_key=${encodeURIComponent(license_key)}`,
       );
     }
 
@@ -59,6 +59,6 @@ export default withRateLimit(
       plan: sub.plan as "free" | "team" | "pro" | "enterprise",
     });
 
-    return res.redirect("/?partner_activated=1");
+    return res.redirect("/boards?partner_activated=1");
   }),
 );

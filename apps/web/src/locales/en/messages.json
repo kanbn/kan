@@ -195,11 +195,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        158
+        169
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        170
+        181
       ]
     ],
     "translation": "$10/month"
@@ -211,7 +211,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        170
+        181
       ]
     ],
     "translation": "$8/month"
@@ -347,7 +347,7 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        37
+        46
       ]
     ],
     "translation": "Activate | kan.bn"
@@ -359,7 +359,7 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        47
+        56
       ]
     ],
     "translation": "Activate your account"
@@ -395,7 +395,7 @@
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        205
+        209
       ]
     ],
     "translation": "Activity"
@@ -539,7 +539,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        257
+        243
       ]
     ],
     "translation": "Add member"
@@ -737,7 +737,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        327
+        320
       ]
     ],
     "translation": "Adding a new member will cost an additional {price} ({billingType}) per seat."
@@ -761,7 +761,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        201
+        221
       ]
     ],
     "translation": "Admin"
@@ -909,7 +909,7 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        77
+        96
       ],
       [
         "src/views/auth/signup/index.tsx",
@@ -973,7 +973,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        63
+        64
       ]
     ],
     "translation": "Annual"
@@ -985,7 +985,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        311
+        294
       ]
     ],
     "translation": "Anyone with this link can join your workspace"
@@ -1309,7 +1309,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        276
+        296
       ]
     ],
     "translation": "Back"
@@ -1393,7 +1393,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        86
+        87
       ]
     ],
     "translation": "Best for small teams who want to collaborate and move faster together."
@@ -1417,7 +1417,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        171
+        182
       ]
     ],
     "translation": "billed annually"
@@ -1429,7 +1429,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        171
+        182
       ]
     ],
     "translation": "billed monthly"
@@ -1449,7 +1449,7 @@
       ],
       [
         "src/views/settings/BillingSettings.tsx",
-        39
+        88
       ]
     ],
     "translation": "Billing"
@@ -1461,7 +1461,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        49
+        98
       ]
     ],
     "translation": "Billing portal"
@@ -1669,7 +1669,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        99
+        97
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -2153,7 +2153,7 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        209
+        236
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -2345,7 +2345,7 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        47
+        56
       ],
       [
         "src/views/auth/login/index.tsx",
@@ -2393,10 +2393,26 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        122
+        149
       ]
     ],
     "translation": "Choose a plan"
+  },
+  "5EMoSo": {
+    "message": "Choose plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/components/InviteMemberForm.tsx",
+        355
+      ],
+      [
+        "src/views/settings/BillingSettings.tsx",
+        80
+      ]
+    ],
+    "translation": "Choose plan"
   },
   "VHS0aJ": {
     "message": "Clear all custom permissions?",
@@ -2477,7 +2493,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        246
+        281
       ],
       [
         "src/views/card/index.tsx",
@@ -2825,11 +2841,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        212
+        242
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        292
+        313
       ]
     ],
     "translation": "Continue"
@@ -2841,7 +2857,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        437
+        442
       ]
     ],
     "translation": "Continue with "
@@ -2857,7 +2873,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        355
+        360
       ]
     ],
     "translation": "Continue with {0}"
@@ -3061,7 +3077,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        349
+        343
       ]
     ],
     "translation": "Create invite link"
@@ -3362,7 +3378,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        221
+        239
       ]
     ],
     "translation": "Custom usernames require upgrading to a Pro plan"
@@ -3422,7 +3438,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        348
+        342
       ]
     ],
     "translation": "Deactivate invite link"
@@ -3606,11 +3622,11 @@
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        125
+        85
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        136
+        96
       ]
     ],
     "translation": "Delete workspace"
@@ -4090,7 +4106,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        224
+        244
       ]
     ],
     "translation": "Edit permissions"
@@ -4150,7 +4166,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        438
+        443
       ]
     ],
     "translation": "email"
@@ -4162,7 +4178,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        272
+        258
       ],
       [
         "src/views/settings/AccountSettings.tsx",
@@ -4202,7 +4218,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        100
+        73
       ]
     ],
     "translation": "Email visibility"
@@ -4226,7 +4242,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        162
+        179
       ]
     ],
     "translation": "Engineering"
@@ -4306,7 +4322,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        402
+        407
       ]
     ],
     "translation": "Enter your email address"
@@ -4318,7 +4334,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        390
+        395
       ]
     ],
     "translation": "Enter your name"
@@ -4342,7 +4358,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        416
+        421
       ]
     ],
     "translation": "Enter your password"
@@ -4378,7 +4394,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        215
+        226
       ]
     ],
     "translation": "Error"
@@ -4414,7 +4430,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        128
+        136
       ]
     ],
     "translation": "Error creating invite link"
@@ -4426,7 +4442,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        144
+        152
       ]
     ],
     "translation": "Error deactivating invite link"
@@ -4498,11 +4514,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        97
+        96
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        103
+        111
       ]
     ],
     "translation": "Error inviting member"
@@ -4572,10 +4588,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      [
-        "src/views/members/components/InviteMemberForm.tsx",
-        240
-      ],
       [
         "src/views/settings/components/UpgradeToProConfirmation.tsx",
         43
@@ -4683,7 +4695,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        41
+        52
       ]
     ],
     "translation": "Failed to accept invitation. Please try again later, or contact customer support."
@@ -4695,7 +4707,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        216
+        227
       ]
     ],
     "translation": "Failed to copy invite link"
@@ -4763,7 +4775,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        291
+        296
       ]
     ],
     "translation": "Failed to login with {0}. Please try again."
@@ -4987,11 +4999,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        77
+        78
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        78
+        79
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -5012,6 +5024,18 @@
     ],
     "translation": "Free"
   },
+  "8LLt89": {
+    "message": "Free (1 member)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/BillingSettings.tsx",
+        31
+      ]
+    ],
+    "translation": "Free (1 member)"
+  },
   "uP4V6I": {
     "message": "Free for everyone",
     "placeholders": {},
@@ -5031,11 +5055,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        333
+        326
       ],
       [
         "src/views/members/index.tsx",
-        293
+        311
       ]
     ],
     "translation": "Free Plan"
@@ -5279,7 +5303,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        113
+        124
       ]
     ],
     "translation": "Go Home"
@@ -5295,7 +5319,7 @@
       ],
       [
         "src/views/invite/index.tsx",
-        144
+        155
       ]
     ],
     "translation": "Go to app"
@@ -5307,7 +5331,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        107
+        105
       ],
       [
         "src/pages/404.tsx",
@@ -5335,7 +5359,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        131
+        129
       ]
     ],
     "translation": "Go to members"
@@ -5347,7 +5371,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        143
+        141
       ]
     ],
     "translation": "Go to settings"
@@ -5359,7 +5383,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        119
+        117
       ]
     ],
     "translation": "Go to templates"
@@ -5371,7 +5395,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        79
+        80
       ]
     ],
     "translation": "Good for individuals starting out who just need the essentials."
@@ -5415,7 +5439,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        203
+        223
       ]
     ],
     "translation": "Guest"
@@ -5815,7 +5839,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        51
+        50
       ]
     ],
     "translation": "Invalid email address"
@@ -5827,7 +5851,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        105
+        116
       ]
     ],
     "translation": "Invalid invitation"
@@ -5839,7 +5863,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        306
+        330
       ]
     ],
     "translation": "Invite"
@@ -5851,7 +5875,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        209
+        220
       ]
     ],
     "translation": "Invite link copied"
@@ -5863,7 +5887,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        210
+        221
       ]
     ],
     "translation": "Invite link copied to clipboard"
@@ -5891,7 +5915,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        123
+        131
       ]
     ],
     "translation": "Invite links require a Team or Pro subscription. Please upgrade your workspace."
@@ -5907,10 +5931,22 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        367
+        363
       ]
     ],
     "translation": "Invite member"
+  },
+  "M2zwdn": {
+    "message": "Inviting members requires a Team or Pro plan. You'll be redirected to upgrade your workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/components/InviteMemberForm.tsx",
+        329
+      ]
+    ],
+    "translation": "Inviting members requires a Team or Pro plan. You'll be redirected to upgrade your workspace."
   },
   "qPP4lD": {
     "message": "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace.",
@@ -5922,7 +5958,8 @@
         336
       ]
     ],
-    "translation": "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace."
+    "translation": "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace.",
+    "obsolete": true
   },
   "c9AJhn": {
     "message": "Join workspace",
@@ -5931,11 +5968,11 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        79
+        90
       ],
       [
         "src/views/invite/index.tsx",
-        129
+        140
       ]
     ],
     "translation": "Join workspace"
@@ -5947,7 +5984,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        91
+        102
       ]
     ],
     "translation": "Join workspace | kan.bn"
@@ -6114,7 +6151,8 @@
         276
       ]
     ],
-    "translation": "Launch offer: Get unlimited members with Pro"
+    "translation": "Launch offer: Get unlimited members with Pro",
+    "obsolete": true
   },
   "sDuhfK": {
     "message": "Launch offer: unlimited seats for just $29/month with Pro",
@@ -6175,6 +6213,30 @@
       ]
     ],
     "translation": "License"
+  },
+  "aDzbuM": {
+    "message": "License activated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        115
+      ]
+    ],
+    "translation": "License activated"
+  },
+  "K3LUJr": {
+    "message": "License activation failed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        129
+      ]
+    ],
+    "translation": "License activation failed"
   },
   "1njn7W": {
     "message": "Light",
@@ -6371,7 +6433,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        438
+        443
       ]
     ],
     "translation": "magic link"
@@ -6439,7 +6501,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        162
+        179
       ]
     ],
     "translation": "Marketing"
@@ -6468,6 +6530,18 @@
     ],
     "translation": "Medium Priority"
   },
+  "NwiNTb": {
+    "message": "member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/BillingSettings.tsx",
+        40
+      ]
+    ],
+    "translation": "member"
+  },
   "OvoEq7": {
     "message": "Member",
     "placeholders": {},
@@ -6483,10 +6557,22 @@
       ],
       [
         "src/views/members/index.tsx",
-        202
+        222
       ]
     ],
     "translation": "Member"
+  },
+  "GnG6Oy": {
+    "message": "members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/BillingSettings.tsx",
+        40
+      ]
+    ],
+    "translation": "members"
   },
   "wlQNTg": {
     "message": "Members",
@@ -6495,7 +6581,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        123
+        121
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -6511,7 +6597,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        263
+        283
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -6531,7 +6617,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        258
+        278
       ]
     ],
     "translation": "Members | {0}"
@@ -6567,7 +6653,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        62
+        63
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -6587,7 +6673,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        159
+        170
       ]
     ],
     "translation": "monthly billing"
@@ -6950,7 +7036,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        369
+        374
       ]
     ],
     "translation": "No authentication methods are currently available"
@@ -7014,6 +7100,18 @@
       ]
     ],
     "translation": "No keyboard shortcuts registered."
+  },
+  "HOMO91": {
+    "message": "No license key was provided. Please try activating again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        126
+      ]
+    ],
+    "translation": "No license key was provided. Please try activating again."
   },
   "hXMFoN": {
     "message": "No lists",
@@ -7158,7 +7256,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        128
+        88
       ]
     ],
     "translation": "Once you delete your workspace, there is no going back. This action cannot be undone."
@@ -7218,7 +7316,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        380
+        385
       ]
     ],
     "translation": "or"
@@ -7318,7 +7416,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        236
+        271
       ]
     ],
     "translation": "Password already set"
@@ -7342,7 +7440,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        258
+        263
       ]
     ],
     "translation": "Password is required to login."
@@ -7354,7 +7452,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        257
+        262
       ]
     ],
     "translation": "Password is required to sign up."
@@ -7402,7 +7500,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        210
+        230
       ]
     ],
     "translation": "Paused"
@@ -7430,7 +7528,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        210
+        230
       ]
     ],
     "translation": "Pending"
@@ -7554,10 +7652,22 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        125
+        152
       ]
     ],
     "translation": "Pick a plan to get started. All paid plans include a 14-day free trial."
+  },
+  "GdgCoi": {
+    "message": "Plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/BillingSettings.tsx",
+        66
+      ]
+    ],
+    "translation": "Plan"
   },
   "Iqh0Uv": {
     "message": "Planned",
@@ -7618,7 +7728,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        406
+        411
       ]
     ],
     "translation": "Please enter a valid email address"
@@ -7630,7 +7740,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        394
+        399
       ]
     ],
     "translation": "Please enter a valid name"
@@ -7642,7 +7752,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        421
+        426
       ]
     ],
     "translation": "Please enter a valid password"
@@ -7838,23 +7948,19 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        104
-      ],
-      [
-        "src/views/members/components/InviteMemberForm.tsx",
-        241
+        112
       ],
       [
         "src/views/members/index.tsx",
-        66
+        70
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        102
+        119
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        151
+        168
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -7902,11 +8008,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        129
+        137
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        145
+        153
       ]
     ],
     "translation": "Please try again later."
@@ -8046,7 +8152,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        91
+        92
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -8065,8 +8171,12 @@
     "comments": [],
     "origin": [
       [
+        "src/views/members/components/InviteMemberForm.tsx",
+        305
+      ],
+      [
         "src/views/members/index.tsx",
-        290
+        308
       ]
     ],
     "translation": "Pro Plan"
@@ -8078,7 +8188,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        322
+        317
       ]
     ],
     "translation": "Pro Plan ∞"
@@ -8234,7 +8344,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        233
+        253
       ]
     ],
     "translation": "Remove member"
@@ -8493,7 +8603,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        162
+        179
       ]
     ],
     "translation": "Roadmap"
@@ -8505,7 +8615,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        328
+        352
       ]
     ],
     "translation": "Role"
@@ -8517,7 +8627,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        58
+        62
       ]
     ],
     "translation": "Role updated"
@@ -8637,6 +8747,34 @@
       ]
     ],
     "translation": "Search boards and cards..."
+  },
+  "66Jmqh": {
+    "message": "Seat limit reached",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/components/InviteMemberForm.tsx",
+        105
+      ]
+    ],
+    "translation": "Seat limit reached"
+  },
+  "MpFIca": {
+    "message": "seats",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/components/InviteMemberForm.tsx",
+        308
+      ],
+      [
+        "src/views/members/index.tsx",
+        319
+      ]
+    ],
+    "translation": "seats"
   },
   "e1v+J3": {
     "message": "Secret (optional)",
@@ -8885,7 +9023,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        180
+        197
       ]
     ],
     "translation": "Set up your workspace"
@@ -8901,7 +9039,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        135
+        133
       ]
     ],
     "translation": "Settings"
@@ -8937,7 +9075,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        35
+        62
       ]
     ],
     "translation": "Settings | Billing"
@@ -8985,7 +9123,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        59
+        32
       ]
     ],
     "translation": "Settings | Workspace"
@@ -9021,10 +9159,26 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        154
+        165
       ]
     ],
     "translation": "Sign In"
+  },
+  "jbGGzf": {
+    "message": "Sign in or create an account to activate your {partnerName} license",
+    "placeholders": {
+      "partnerName": [
+        "partnerName"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/pages/partner/activate.tsx",
+        62
+      ]
+    ],
+    "translation": "Sign in or create an account to activate your {partnerName} license"
   },
   "4dGN6E": {
     "message": "Sign in or create an account to activate your license",
@@ -9033,7 +9187,7 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        53
+        67
       ]
     ],
     "translation": "Sign in or create an account to activate your license"
@@ -9045,11 +9199,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        284
+        315
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        363
+        384
       ]
     ],
     "translation": "Sign out"
@@ -9061,7 +9215,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        162
+        173
       ]
     ],
     "translation": "Sign Up"
@@ -9113,7 +9267,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        437
+        442
       ]
     ],
     "translation": "Sign up with "
@@ -9201,7 +9355,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        76
+        77
       ]
     ],
     "translation": "Solo"
@@ -9213,10 +9367,22 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        59
+        73
       ]
     ],
     "translation": "Something went wrong during activation. Please try again."
+  },
+  "r+dxEH": {
+    "message": "Something went wrong during license activation.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        132
+      ]
+    ],
+    "translation": "Something went wrong during license activation."
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -9248,15 +9414,31 @@
     "comments": [],
     "origin": [
       [
-        "src/views/members/components/InviteMemberForm.tsx",
-        359
-      ],
-      [
         "src/views/settings/components/UpgradeToProConfirmation.tsx",
         113
       ]
     ],
     "translation": "Start 14 day free trial"
+  },
+  "4+JaWo": {
+    "message": "Start free trial",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/SideNavigation.tsx",
+        225
+      ],
+      [
+        "src/components/SideNavigation.tsx",
+        226
+      ],
+      [
+        "src/components/SideNavigation.tsx",
+        236
+      ]
+    ],
+    "translation": "Start free trial"
   },
   "Y8yzGg": {
     "message": "Start free. Upgrade as your team grows. No hidden fees, no contracts.",
@@ -9289,7 +9471,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        122
+        130
       ]
     ],
     "translation": "Subscription Required"
@@ -9301,11 +9483,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        215
+        220
       ],
       [
         "src/components/AuthForm.tsx",
-        232
+        237
       ]
     ],
     "translation": "Success"
@@ -9381,7 +9563,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        83
+        84
       ]
     ],
     "translation": "Team"
@@ -9393,11 +9575,15 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        322
+        305
+      ],
+      [
+        "src/views/members/components/InviteMemberForm.tsx",
+        317
       ],
       [
         "src/views/members/index.tsx",
-        292
+        310
       ]
     ],
     "translation": "Team Plan"
@@ -9493,7 +9679,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        111
+        109
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -9598,6 +9784,18 @@
     ],
     "translation": "Thank you for your feedback!"
   },
+  "ssK7k+": {
+    "message": "That license key could not be found. Please contact support.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        124
+      ]
+    ],
+    "translation": "That license key could not be found. Please contact support."
+  },
   "NcFrgC": {
     "message": "The board has been archived.",
     "placeholders": {},
@@ -9681,7 +9879,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        59
+        63
       ]
     ],
     "translation": "The member's role has been updated."
@@ -9821,7 +10019,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        108
+        119
       ]
     ],
     "translation": "This invitation link is invalid or has expired."
@@ -9845,7 +10043,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        74
+        83
       ]
     ],
     "translation": "This URL has already been taken"
@@ -9857,7 +10055,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        76
+        85
       ]
     ],
     "translation": "This URL is reserved"
@@ -9897,6 +10095,18 @@
       ]
     ],
     "translation": "This will result in the permanent deletion of all data associated with your account."
+  },
+  "PV7XRK": {
+    "message": "This workspace has reached its member limit. The workspace owner will need to upgrade their plan.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/invite/index.tsx",
+        44
+      ]
+    ],
+    "translation": "This workspace has reached its member limit. The workspace owner will need to upgrade their plan."
   },
   "duf3Nr": {
     "message": "This workspace URL has already been taken",
@@ -10245,7 +10455,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        101
+        118
       ]
     ],
     "translation": "Unable to create workspace"
@@ -10401,7 +10611,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        150
+        167
       ]
     ],
     "translation": "Unable to start checkout"
@@ -10585,7 +10795,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        65
+        69
       ]
     ],
     "translation": "Unable to update role"
@@ -10774,6 +10984,18 @@
     ],
     "translation": "Unlimited lists"
   },
+  "uXKtPH": {
+    "message": "unlimited members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/BillingSettings.tsx",
+        35
+      ]
+    ],
+    "translation": "unlimited members"
+  },
   "mx8+1u": {
     "message": "Unlimited members",
     "placeholders": {},
@@ -10805,10 +11027,22 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        94
+        95
       ]
     ],
     "translation": "Unlimited members and a custom workspace username for teams ready to scale."
+  },
+  "i5yNAO": {
+    "message": "Unlimited seats",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        318
+      ]
+    ],
+    "translation": "Unlimited seats"
   },
   "Ws+3X+": {
     "message": "Unlimited seats and advanced features for growing teams.",
@@ -10942,22 +11176,30 @@
     ],
     "translation": "updated the title to <0>{0}</0>"
   },
+  "kwkhPe": {
+    "message": "Upgrade",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        295
+      ],
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        241
+      ]
+    ],
+    "translation": "Upgrade"
+  },
   "IelE1h": {
     "message": "Upgrade to Pro",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/components/SideNavigation.tsx",
-        240
-      ],
-      [
         "src/views/settings/components/UpgradeToProConfirmation.tsx",
         55
-      ],
-      [
-        "src/views/settings/WorkspaceSettings.tsx",
-        118
       ]
     ],
     "translation": "Upgrade to Pro"
@@ -10969,7 +11211,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        244
+        263
       ]
     ],
     "translation": "Upgrade to Pro ($29/month)"
@@ -11109,7 +11351,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        322
+        346
       ]
     ],
     "translation": "User"
@@ -11121,7 +11363,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        98
+        97
       ]
     ],
     "translation": "User is already a member of this workspace"
@@ -11157,7 +11399,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        42
+        91
       ]
     ],
     "translation": "View and manage your billing and subscription."
@@ -11257,7 +11499,7 @@
     "origin": [
       [
         "src/pages/partner/activate.tsx",
-        51
+        60
       ]
     ],
     "translation": "We sent a link to {magicLinkRecipient}"
@@ -11421,7 +11663,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        91
+        64
       ]
     ],
     "translation": "Week start day"
@@ -11505,7 +11747,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        258
+        278
       ],
       [
         "src/views/public/board/index.tsx",
@@ -11550,11 +11792,11 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        254
+        273
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        82
+        55
       ]
     ],
     "translation": "Workspace description"
@@ -11626,11 +11868,11 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        189
+        206
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        63
+        36
       ]
     ],
     "translation": "Workspace name"
@@ -11718,7 +11960,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        72
+        45
       ]
     ],
     "translation": "Workspace URL"
@@ -11806,7 +12048,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        183
+        200
       ]
     ],
     "translation": "You can always change these later in settings."
@@ -11894,7 +12136,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        233
+        238
       ]
     ],
     "translation": "You have been logged in successfully."
@@ -11906,7 +12148,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        216
+        221
       ]
     ],
     "translation": "You have been signed up successfully."
@@ -11930,10 +12172,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        326
+        321
       ]
     ],
-    "translation": "You have unlimited seats with your Pro Plan. There is no additional charge for new members!"
+    "translation": "You have unlimited seats with your Pro Plan. There is no additional charge for new members!",
+    "obsolete": true
   },
   "MdN5zD": {
     "message": "You need to be an admin to manage workspace permissions.",
@@ -11966,7 +12209,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        134
+        145
       ]
     ],
     "translation": "You've been invited to join a workspace on kan.bn."
@@ -11978,10 +12221,26 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        135
+        146
       ]
     ],
     "translation": "You've been invited to join a workspace."
+  },
+  "QriiAI": {
+    "message": "You've reached your {0}-seat limit. Please upgrade your plan to add more members.",
+    "placeholders": {
+      "0": [
+        "seatLimit ?? 0"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/components/InviteMemberForm.tsx",
+        106
+      ]
+    ],
+    "translation": "You've reached your {0}-seat limit. Please upgrade your plan to add more members."
   },
   "8Zjc7q": {
     "message": "Your account already has a password. You can change it from your account settings.",
@@ -11990,7 +12249,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        238
+        273
       ]
     ],
     "translation": "Your account already has a password. You can change it from your account settings."
@@ -12014,7 +12273,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        229
+        260
       ]
     ],
     "translation": "Your avatar"
@@ -12090,6 +12349,30 @@
       ]
     ],
     "translation": "Your GitHub account is connected."
+  },
+  "ygpeZ8": {
+    "message": "Your license has been activated successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        116
+      ]
+    ],
+    "translation": "Your license has been activated successfully."
+  },
+  "+A6Wuq": {
+    "message": "Your license is not active. Please check your account.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Dashboard.tsx",
+        125
+      ]
+    ],
+    "translation": "Your license is not active. Please check your account."
   },
   "Ozt2vv": {
     "message": "Your password has been changed.",
@@ -12182,7 +12465,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        323
+        344
       ]
     ],
     "translation": "Your workspace"
@@ -12194,7 +12477,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        326
+        347
       ]
     ],
     "translation": "Your workspace description"
@@ -12254,11 +12537,11 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        198
+        216
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        199
+        217
       ]
     ],
     "translation": "your-workspace"

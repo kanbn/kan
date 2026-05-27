@@ -93,7 +93,7 @@ export default withRateLimit(
     const { code } = req.query;
 
     if (!code || typeof code !== "string") {
-      return res.status(400).json({ message: "Missing code parameter" });
+      return res.status(200).json({ message: "OK" });
     }
 
     let license: LicenseDetailResponse;
@@ -146,7 +146,7 @@ export default withRateLimit(
         },
       );
       return res.redirect(
-        `/onboarding?license_key=${encodeURIComponent(license.license_key)}`,
+        `/onboarding/workspace?license_key=${encodeURIComponent(license.license_key)}`,
       );
     }
 

@@ -5,15 +5,15 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./src/index.ts",
       "default": "./src/index.ts"
     },
     "./utils": {
-      "types": "./dist/utils/index.d.ts",
+      "types": "./src/utils/index.ts",
       "default": "./src/utils/index.ts"
     },
     "./constants": {
-      "types": "./dist/constants/index.d.ts",
+      "types": "./src/constants/index.ts",
       "default": "./src/constants/index.ts"
     }
   },
