@@ -43,6 +43,12 @@ function verifySignature(
   }
 }
 
+function hasReferenceId<T extends { referenceId: string | null | undefined }>(
+  s: T,
+): s is T & { referenceId: string } {
+  return !!s.referenceId;
+}
+
 interface WebhookPayload {
   event:
     | "purchase"
@@ -94,107 +100,169 @@ export default withApiLogging(
     const { db } = await createNextApiContext(req);
 
     switch (event) {
-      case "purchase": {
-        const cfg = tierConfig(tier);
-        await subscriptionRepo.upsertByPartnerLicenseKey(db, license_key, {
-          plan: cfg.plan,
-          status: license_status,
-          partnerTier: tier,
-          seats: cfg.seats,
-          unlimitedSeats: cfg.unlimitedSeats,
-        });
-        break;
-      }
-
+      case "purchase":
       case "activate": {
         const cfg = tierConfig(tier);
-        await subscriptionRepo.upsertByPartnerLicenseKey(db, license_key, {
-          plan: cfg.plan,
-          status: "active",
-          partnerTier: tier,
-          seats: cfg.seats,
-          unlimitedSeats: cfg.unlimitedSeats,
-        });
+        const existing = await subscriptionRepo.getAllByPartnerLicenseKey(
+          db,
+          license_key,
+        );
+        const status = event === "activate" ? "active" : license_status;
+
+        if (existing.length === 0) {
+          await subscriptionRepo.createPartnerLicenseSlots(
+            db,
+            license_key,
+            {
+              plan: cfg.plan,
+              status,
+              partnerTier: tier,
+              seats: cfg.seats,
+              unlimitedSeats: cfg.unlimitedSeats,
+            },
+            cfg.workspaceSlots,
+          );
+        } else {
+          await subscriptionRepo.updateAllByPartnerLicenseKey(db, license_key, {
+            plan: cfg.plan,
+            status,
+            partnerTier: tier,
+            seats: cfg.seats,
+            unlimitedSeats: cfg.unlimitedSeats,
+          });
+        }
         break;
       }
 
       case "deactivate": {
-        const sub = await subscriptionRepo.getByPartnerLicenseKey(
+        const allSlots = await subscriptionRepo.getAllByPartnerLicenseKey(
           db,
           license_key,
         );
-        if (sub) {
-          const [, allSubs] = await Promise.all([
-            subscriptionRepo.updateById(db, sub.id, {
-              plan: "free",
-              status: "canceled",
-            }),
-            sub.referenceId
-              ? subscriptionRepo.getByReferenceId(db, sub.referenceId)
-              : Promise.resolve([]),
-          ]);
-          if (sub.referenceId) {
-            const hasActiveSub = getActiveSubscriptions(allSubs).some(
-              (s) => s.id !== sub.id,
+
+        await Promise.all(
+          allSlots.filter(hasReferenceId).map(async (slot) => {
+            const siblingSubs = await subscriptionRepo.getByReferenceId(
+              db,
+              slot.referenceId,
             );
-            if (!hasActiveSub) {
-              await cancelWorkspaceAccess(db, sub.referenceId);
+            const hasOtherActiveSub = getActiveSubscriptions(siblingSubs).some(
+              (s) => s.id !== slot.id,
+            );
+            if (!hasOtherActiveSub) {
+              await cancelWorkspaceAccess(db, slot.referenceId);
             }
-          }
-        }
+          }),
+        );
+
+        await subscriptionRepo.updateAllByPartnerLicenseKey(db, license_key, {
+          plan: "free",
+          status: "canceled",
+          unlimitedSeats: false,
+          seats: null,
+        });
+
         break;
       }
 
       case "upgrade":
       case "downgrade": {
         const lookupKey = prev_license_key ?? license_key;
-        const sub = await subscriptionRepo.getByPartnerLicenseKey(
+        const existing = await subscriptionRepo.getAllByPartnerLicenseKey(
           db,
           lookupKey,
         );
-        if (sub) {
-          const cfg = tierConfig(tier);
-          await subscriptionRepo.upsertByPartnerLicenseKey(db, license_key, {
-            plan: cfg.plan,
-            status: "active",
-            partnerTier: tier,
-            seats: cfg.seats,
-            unlimitedSeats: cfg.unlimitedSeats,
-            referenceId: sub.referenceId ?? undefined,
-          });
-          if (prev_license_key) {
-            await subscriptionRepo.updateById(db, sub.id, {
-              status: "inactive",
-            });
-          }
-          if (sub.referenceId) {
-            await workspaceRepo.update(db, sub.referenceId, { plan: cfg.plan });
-          }
-        }
-        break;
-      }
 
-      case "migrate": {
-        if (prev_license_key) {
-          const sub = await subscriptionRepo.getByPartnerLicenseKey(
+        if (existing.length === 0) break;
+
+        const cfg = tierConfig(tier);
+        const newCount = cfg.workspaceSlots;
+
+        // Prefer keeping linked slots; among linked, keep in insertion order (LIFO removal)
+        const preferKeep = [
+          ...existing.filter((s) => s.referenceId),
+          ...existing.filter((s) => !s.referenceId),
+        ];
+
+        const slotsToKeep = preferKeep.slice(0, newCount);
+        const slotsToRemove = preferKeep.slice(newCount);
+
+        await Promise.all([
+          ...slotsToKeep.map((slot) =>
+            subscriptionRepo.updateById(db, slot.id, {
+              plan: cfg.plan,
+              seats: cfg.seats,
+              unlimitedSeats: cfg.unlimitedSeats,
+              partnerTier: tier,
+              status: "active",
+              ...(prev_license_key ? { partnerLicenseKey: license_key } : {}),
+            }),
+          ),
+          ...slotsToKeep
+            .filter(hasReferenceId)
+            .map((s) =>
+              workspaceRepo.update(db, s.referenceId, { plan: cfg.plan }),
+            ),
+        ]);
+
+        if (newCount > existing.length) {
+          await subscriptionRepo.createPartnerLicenseSlots(
             db,
-            prev_license_key,
-          );
-          if (sub) {
-            const cfg = tierConfig(tier);
-            await subscriptionRepo.upsertByPartnerLicenseKey(db, license_key, {
+            license_key,
+            {
               plan: cfg.plan,
               status: "active",
               partnerTier: tier,
               seats: cfg.seats,
               unlimitedSeats: cfg.unlimitedSeats,
-              referenceId: sub.referenceId ?? undefined,
-            });
-            await subscriptionRepo.updateById(db, sub.id, {
-              status: "inactive",
-            });
-          }
+            },
+            newCount - existing.length,
+          );
         }
+
+        if (slotsToRemove.length > 0) {
+          await Promise.all([
+            ...slotsToRemove
+              .filter(hasReferenceId)
+              .map((s) => cancelWorkspaceAccess(db, s.referenceId)),
+            ...slotsToRemove.map((s) =>
+              subscriptionRepo.updateById(db, s.id, {
+                plan: "free",
+                status: "inactive",
+                unlimitedSeats: false,
+                seats: null,
+              }),
+            ),
+          ]);
+        }
+
+        break;
+      }
+
+      case "migrate": {
+        if (!prev_license_key) break;
+
+        const existing = await subscriptionRepo.getAllByPartnerLicenseKey(
+          db,
+          prev_license_key,
+        );
+        if (existing.length === 0) break;
+
+        const cfg = tierConfig(tier);
+
+        await Promise.all(
+          existing.map((slot) =>
+            subscriptionRepo.updateById(db, slot.id, {
+              partnerLicenseKey: license_key,
+              plan: cfg.plan,
+              status: "active",
+              partnerTier: tier,
+              seats: cfg.seats,
+              unlimitedSeats: cfg.unlimitedSeats,
+            }),
+          ),
+        );
+
         break;
       }
 

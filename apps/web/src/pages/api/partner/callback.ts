@@ -4,7 +4,6 @@ import { createNextApiContext } from "@kan/api/trpc";
 import { withApiLogging } from "@kan/api/utils/apiLogging";
 import { withRateLimit } from "@kan/api/utils/rateLimit";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
-import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
 
 import { tierConfig } from "./_utils";
@@ -110,11 +109,15 @@ export default withRateLimit(
     const { db, user } = await createNextApiContext(req);
 
     const cfg = tierConfig(license.tier);
-    const isActive = license.status === "active";
-    const status = isActive ? "active" : "inactive";
+    const status = license.status === "active" ? "active" : "inactive";
 
-    if (!user) {
-      await subscriptionRepo.upsertByPartnerLicenseKey(
+    // Ensure subscription slots exist — webhook may have already created them
+    const existing = await subscriptionRepo.getAllByPartnerLicenseKey(
+      db,
+      license.license_key,
+    );
+    if (existing.length === 0) {
+      await subscriptionRepo.createPartnerLicenseSlots(
         db,
         license.license_key,
         {
@@ -124,45 +127,18 @@ export default withRateLimit(
           seats: cfg.seats,
           unlimitedSeats: cfg.unlimitedSeats,
         },
+        cfg.workspaceSlots,
       );
+    }
+
+    if (!user) {
       return res.redirect(
         `/partner/activate?license_key=${encodeURIComponent(license.license_key)}`,
       );
     }
 
-    const memberships = await workspaceRepo.getAllByUserId(db, user.id);
-    const workspace = memberships?.[0]?.workspace;
-
-    if (!workspace) {
-      await subscriptionRepo.upsertByPartnerLicenseKey(
-        db,
-        license.license_key,
-        {
-          plan: cfg.plan,
-          status,
-          partnerTier: license.tier,
-          seats: cfg.seats,
-          unlimitedSeats: cfg.unlimitedSeats,
-        },
-      );
-      return res.redirect(
-        `/onboarding/workspace?license_key=${encodeURIComponent(license.license_key)}`,
-      );
-    }
-
-    await subscriptionRepo.upsertByPartnerLicenseKey(db, license.license_key, {
-      plan: cfg.plan,
-      status,
-      partnerTier: license.tier,
-      seats: cfg.seats,
-      unlimitedSeats: cfg.unlimitedSeats,
-      referenceId: workspace.publicId,
-    });
-
-    if (isActive) {
-      await workspaceRepo.update(db, workspace.publicId, { plan: cfg.plan });
-    }
-
-    return res.redirect(`/?partner_activated=1`);
+    return res.redirect(
+      `/api/partner/link?license_key=${encodeURIComponent(license.license_key)}`,
+    );
   }),
 );

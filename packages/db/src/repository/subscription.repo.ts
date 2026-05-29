@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { and, asc, eq, inArray, isNotNull, isNull } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import { subscription } from "@kan/db/schema";
@@ -15,6 +15,9 @@ export const updateById = async (
     periodEnd?: Date | null;
     cancelAtPeriodEnd?: boolean | null;
     stripeSubscriptionId?: string | null;
+    referenceId?: string | null;
+    partnerLicenseKey?: string;
+    partnerTier?: number;
   },
 ) => {
   const [result] = await db
@@ -29,6 +32,7 @@ export const updateById = async (
       plan: subscription.plan,
       status: subscription.status,
       unlimitedSeats: subscription.unlimitedSeats,
+      referenceId: subscription.referenceId,
     });
 
   return result;
@@ -61,6 +65,24 @@ export const updateByStripeSubscriptionId = async (
     });
 
   return result;
+};
+
+export const updateAllByPartnerLicenseKey = async (
+  db: dbClient,
+  partnerLicenseKey: string,
+  updates: {
+    plan?: string;
+    status?: string;
+    partnerTier?: number;
+    seats?: number | null;
+    unlimitedSeats?: boolean;
+  },
+) => {
+  return await db
+    .update(subscription)
+    .set({ ...updates, updatedAt: new Date() })
+    .where(eq(subscription.partnerLicenseKey, partnerLicenseKey))
+    .returning({ id: subscription.id });
 };
 
 export const getByStripeSubscriptionId = async (
@@ -96,13 +118,49 @@ export const getByPartnerLicenseKey = async (
   db: dbClient,
   partnerLicenseKey: string,
 ) => {
-  const result = await db.query.subscription.findFirst({
+  return await db.query.subscription.findFirst({
     where: eq(subscription.partnerLicenseKey, partnerLicenseKey),
   });
-  return result;
 };
 
-export const upsertByPartnerLicenseKey = async (
+export const getAllByPartnerLicenseKey = async (
+  db: dbClient,
+  partnerLicenseKey: string,
+) => {
+  return await db.query.subscription.findMany({
+    where: eq(subscription.partnerLicenseKey, partnerLicenseKey),
+    orderBy: [asc(subscription.id)],
+  });
+};
+
+export const getFirstUnlinkedSlotByLicenseKey = async (
+  db: dbClient,
+  partnerLicenseKey: string,
+) => {
+  return await db.query.subscription.findFirst({
+    where: and(
+      eq(subscription.partnerLicenseKey, partnerLicenseKey),
+      isNull(subscription.referenceId),
+      inArray(subscription.status, ["active", "trialing"]),
+    ),
+    orderBy: [asc(subscription.id)],
+  });
+};
+
+export const getFirstActivePartnerSubByWorkspaceIds = async (
+  db: dbClient,
+  workspacePublicIds: string[],
+) => {
+  return await db.query.subscription.findFirst({
+    where: and(
+      inArray(subscription.referenceId, workspacePublicIds),
+      isNotNull(subscription.partnerLicenseKey),
+      inArray(subscription.status, ["active", "trialing"]),
+    ),
+  });
+};
+
+export const createPartnerLicenseSlots = async (
   db: dbClient,
   partnerLicenseKey: string,
   data: {
@@ -111,20 +169,13 @@ export const upsertByPartnerLicenseKey = async (
     partnerTier: number;
     seats: number | null;
     unlimitedSeats: boolean;
-    referenceId?: string;
   },
+  count: number,
 ) => {
-  const [result] = await db
-    .insert(subscription)
-    .values({
-      partnerLicenseKey,
-      ...data,
-      referenceId: data.referenceId ?? null,
-    })
-    .onConflictDoUpdate({
-      target: subscription.partnerLicenseKey,
-      set: { ...data, updatedAt: new Date() },
-    })
-    .returning();
-  return result;
+  const rows = Array.from({ length: count }, () => ({
+    partnerLicenseKey,
+    ...data,
+    referenceId: null,
+  }));
+  return await db.insert(subscription).values(rows).returning();
 };

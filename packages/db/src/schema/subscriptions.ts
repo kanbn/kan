@@ -5,42 +5,33 @@ import {
   integer,
   pgTable,
   timestamp,
-  uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
 
 import { workspaces } from "./workspaces";
 
-export const subscription = pgTable(
-  "subscription",
-  {
-    id: bigserial("id", { mode: "number" }).primaryKey(),
-    plan: varchar("plan", { length: 255 }).notNull(),
-    referenceId: varchar("referenceId", { length: 12 }).references(
-      () => workspaces.publicId,
-      { onDelete: "set null" },
-    ),
-    stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
-    stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 255 }),
-    status: varchar("status", { length: 255 }).notNull(),
-    periodStart: timestamp("periodStart"),
-    periodEnd: timestamp("periodEnd"),
-    cancelAtPeriodEnd: boolean("cancelAtPeriodEnd"),
-    seats: integer("seats"),
-    unlimitedSeats: boolean("unlimitedSeats").default(false).notNull(),
-    trialStart: timestamp("trialStart"),
-    trialEnd: timestamp("trialEnd"),
-    partnerLicenseKey: varchar("partnerLicenseKey", { length: 255 }),
-    partnerTier: integer("partnerTier"),
-    createdAt: timestamp("createdAt").notNull().defaultNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow(),
-  },
-  (table) => [
-    uniqueIndex("subscription_partner_license_key_idx").on(
-      table.partnerLicenseKey,
-    ),
-  ],
-).enableRLS();
+export const subscription = pgTable("subscription", {
+  id: bigserial("id", { mode: "number" }).primaryKey(),
+  plan: varchar("plan", { length: 255 }).notNull(),
+  referenceId: varchar("referenceId", { length: 12 }).references(
+    () => workspaces.publicId,
+    { onDelete: "set null" },
+  ),
+  stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
+  stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 255 }),
+  status: varchar("status", { length: 255 }).notNull(),
+  periodStart: timestamp("periodStart"),
+  periodEnd: timestamp("periodEnd"),
+  cancelAtPeriodEnd: boolean("cancelAtPeriodEnd"),
+  seats: integer("seats"),
+  unlimitedSeats: boolean("unlimitedSeats").default(false).notNull(),
+  trialStart: timestamp("trialStart"),
+  trialEnd: timestamp("trialEnd"),
+  partnerLicenseKey: varchar("partnerLicenseKey", { length: 255 }),
+  partnerTier: integer("partnerTier"),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+}).enableRLS();
 
 export const subscriptionsRelations = relations(subscription, ({ one }) => ({
   workspace: one(workspaces, {

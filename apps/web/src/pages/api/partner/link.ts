@@ -27,37 +27,71 @@ export default withRateLimit(
       );
     }
 
-    const sub = await subscriptionRepo.getByPartnerLicenseKey(db, license_key);
+    const allSlots = await subscriptionRepo.getAllByPartnerLicenseKey(
+      db,
+      license_key,
+    );
 
-    if (!sub) {
+    if (!allSlots.length) {
       return res.redirect("/boards?partner_error=invalid_license");
     }
 
-    if (sub.status !== "active") {
+    const activeSlots = allSlots.filter((s) =>
+      ["active", "trialing"].includes(s.status),
+    );
+
+    if (!activeSlots.length) {
       return res.redirect("/boards?partner_error=license_inactive");
     }
 
-    const memberships = await workspaceRepo.getAllByUserId(db, user.id);
-    const workspace = memberships?.[0]?.workspace;
+    const unlinkedSlot = activeSlots.find((s) => !s.referenceId);
 
-    if (!workspace) {
+    if (!unlinkedSlot) {
+      return res.redirect("/boards?partner_activated=1");
+    }
+
+    const linkedIds = new Set(
+      activeSlots.filter((s) => s.referenceId).map((s) => s.referenceId!),
+    );
+
+    const memberships = await workspaceRepo.getAllByUserId(db, user.id);
+    const availableWorkspace = memberships
+      .map((m) => m.workspace)
+      .find((w) => w && !w.deletedAt && !linkedIds.has(w.publicId));
+
+    if (!availableWorkspace) {
       return res.redirect(
         `/onboarding/workspace?license_key=${encodeURIComponent(license_key)}`,
       );
     }
 
-    await subscriptionRepo.upsertByPartnerLicenseKey(db, license_key, {
-      plan: sub.plan,
-      status: sub.status,
-      partnerTier: sub.partnerTier ?? 1,
-      seats: sub.seats ?? null,
-      unlimitedSeats: sub.unlimitedSeats,
-      referenceId: workspace.publicId,
+    await subscriptionRepo.updateById(db, unlinkedSlot.id, {
+      referenceId: availableWorkspace.publicId,
     });
 
-    await workspaceRepo.update(db, workspace.publicId, {
-      plan: sub.plan as "free" | "team" | "pro" | "enterprise",
+    await workspaceRepo.update(db, availableWorkspace.publicId, {
+      plan: unlinkedSlot.plan as "free" | "team" | "pro" | "enterprise",
     });
+
+    const remainingUnlinked = activeSlots.filter(
+      (s) => !s.referenceId && s.id !== unlinkedSlot.id,
+    );
+
+    if (remainingUnlinked.length > 0) {
+      const updatedLinkedIds = new Set([
+        ...linkedIds,
+        availableWorkspace.publicId,
+      ]);
+      const hasMoreAvailableWorkspace = memberships
+        .map((m) => m.workspace)
+        .some((w) => w && !w.deletedAt && !updatedLinkedIds.has(w.publicId));
+
+      if (hasMoreAvailableWorkspace) {
+        return res.redirect(
+          `/api/partner/link?license_key=${encodeURIComponent(license_key)}`,
+        );
+      }
+    }
 
     return res.redirect("/boards?partner_activated=1");
   }),

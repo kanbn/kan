@@ -40,7 +40,8 @@ export default function WorkspaceNameView() {
   const billing = searchParams.get("billing") ?? "annual";
   const returnUrl = searchParams.get("returnUrl") ?? "/boards";
   const licenseKeyParam = searchParams.get("license_key");
-  const isLicenseFlow = !!licenseKeyParam;
+  const isLicenseFlow =
+    !!licenseKeyParam || searchParams.get("partner") === "1";
   const { showPopup } = usePopup();
 
   useEffect(() => {
@@ -103,6 +104,7 @@ export default function WorkspaceNameView() {
       if (!workspace.publicId) return;
       localStorage.setItem("workspacePublicId", workspace.publicId);
       void utils.workspace.all.invalidate();
+      void utils.workspace.hasAvailablePartnerSlot.invalidate();
       const storedLicenseKey = localStorage.getItem("partnerLicenseKey");
       if (storedLicenseKey) {
         localStorage.removeItem("partnerLicenseKey");
