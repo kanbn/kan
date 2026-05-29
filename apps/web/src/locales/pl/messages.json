@@ -784,7 +784,7 @@
     "message": "Back",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 296]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 298]],
     "translation": "Wstecz"
   },
   "KNKCTb": {
@@ -1697,7 +1697,7 @@
     "comments": [],
     "origin": [
       ["src/views/onboarding/select-plan/index.tsx", 242],
-      ["src/views/onboarding/workspace-details/index.tsx", 313]
+      ["src/views/onboarding/workspace-details/index.tsx", 315]
     ],
     "translation": "Kontynuuj"
   },
@@ -1916,7 +1916,7 @@
     "comments": [],
     "origin": [
       ["src/components/NewWorkspaceForm.tsx", 227],
-      ["src/components/WorkspaceMenu.tsx", 160]
+      ["src/components/WorkspaceMenu.tsx", 171]
     ],
     "translation": "Utwórz workspace"
   },
@@ -2021,7 +2021,7 @@
     "message": "Custom usernames require upgrading to a Pro plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 239]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 241]],
     "translation": "Niestandardowe nazwy użytkownika wymagają uaktualnienia do planu Pro"
   },
   "j9IZZ0": {
@@ -2517,7 +2517,7 @@
     "message": "Engineering",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 179]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 181]],
     "translation": "Inżynieria"
   },
   "0+ewPp": {
@@ -3867,7 +3867,7 @@
     "message": "Marketing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 179]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 181]],
     "translation": "Marketing"
   },
   "agPptk": {
@@ -4314,7 +4314,7 @@
     "message": "Open command menu",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/WorkspaceMenu.tsx", 34]],
+    "origin": [["src/components/WorkspaceMenu.tsx", 37]],
     "translation": "Otwórz menu poleceń"
   },
   "cFQEU/": {
@@ -4683,8 +4683,8 @@
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 93],
       ["src/views/members/components/InviteMemberForm.tsx", 112],
       ["src/views/members/index.tsx", 70],
-      ["src/views/onboarding/workspace-details/index.tsx", 119],
-      ["src/views/onboarding/workspace-details/index.tsx", 168],
+      ["src/views/onboarding/workspace-details/index.tsx", 121],
+      ["src/views/onboarding/workspace-details/index.tsx", 170],
       ["src/views/settings/components/Avatar.tsx", 200],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 40],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 46],
@@ -5038,7 +5038,7 @@
       ["src/views/home/components/Footer.tsx", 36],
       ["src/views/home/components/Header.tsx", 13],
       ["src/views/home/components/Header.tsx", 28],
-      ["src/views/onboarding/workspace-details/index.tsx", 179]
+      ["src/views/onboarding/workspace-details/index.tsx", 181]
     ],
     "translation": "Mapa drogowa"
   },
@@ -5290,7 +5290,7 @@
     "message": "Set up your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 197]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 199]],
     "translation": "Skonfiguruj swoją przestrzeń roboczą"
   },
   "Tz0i8g": {
@@ -5395,7 +5395,7 @@
     "comments": [],
     "origin": [
       ["src/views/onboarding/select-plan/index.tsx", 315],
-      ["src/views/onboarding/workspace-details/index.tsx", 384]
+      ["src/views/onboarding/workspace-details/index.tsx", 386]
     ],
     "translation": "Wyloguj się"
   },
@@ -5905,14 +5905,14 @@
     "message": "This URL has already been taken",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 83]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 84]],
     "translation": "Ten adres URL jest już zajęty"
   },
   "gKmoow": {
     "message": "This URL is reserved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 85]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 86]],
     "translation": "Ten adres URL jest zarezerwowany"
   },
   "OAYToL": {
@@ -6158,7 +6158,7 @@
     "comments": [],
     "origin": [
       ["src/components/NewWorkspaceForm.tsx", 109],
-      ["src/views/onboarding/workspace-details/index.tsx", 118]
+      ["src/views/onboarding/workspace-details/index.tsx", 120]
     ],
     "translation": "Nie można utworzyć workspace"
   },
@@ -6260,7 +6260,7 @@
     "message": "Unable to start checkout",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 167]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 169]],
     "translation": "Nie można rozpocząć procesu płatności"
   },
   "KNK33q": {
@@ -6604,7 +6604,7 @@
     "message": "Upgrade to Pro ($29/month)",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 263]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 265]],
     "translation": "Ulepsz do Pro (29 $/miesiąc)"
   },
   "b3Thhd": {
@@ -6950,7 +6950,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 273],
+      ["src/views/onboarding/workspace-details/index.tsx", 275],
       ["src/views/settings/WorkspaceSettings.tsx", 55]
     ],
     "translation": "Opis przestrzeni roboczej"
@@ -6999,7 +6999,7 @@
     "comments": [],
     "origin": [
       ["src/components/NewWorkspaceForm.tsx", 165],
-      ["src/views/onboarding/workspace-details/index.tsx", 206],
+      ["src/views/onboarding/workspace-details/index.tsx", 208],
       ["src/views/settings/WorkspaceSettings.tsx", 36]
     ],
     "translation": "Nazwa przestrzeni roboczej"
@@ -7111,7 +7111,7 @@
     "message": "You can always change these later in settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 200]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 202]],
     "translation": "Zawsze możesz to później zmienić w ustawieniach."
   },
   "aelko+": {
@@ -7355,14 +7355,14 @@
     "message": "Your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 344]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 346]],
     "translation": "Twoja przestrzeń robocza"
   },
   "j0o6ml": {
     "message": "Your workspace description",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 347]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 349]],
     "translation": "Opis Twojej przestrzeni roboczej"
   },
   "GnSSGm": {
@@ -7406,8 +7406,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 216],
-      ["src/views/onboarding/workspace-details/index.tsx", 217]
+      ["src/views/onboarding/workspace-details/index.tsx", 218],
+      ["src/views/onboarding/workspace-details/index.tsx", 219]
     ],
     "translation": "twoja-przestrzen"
   },

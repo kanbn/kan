@@ -1309,7 +1309,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        296
+        298
       ]
     ],
     "translation": "Back"
@@ -2845,7 +2845,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        313
+        315
       ]
     ],
     "translation": "Continue"
@@ -3205,7 +3205,7 @@
       ],
       [
         "src/components/WorkspaceMenu.tsx",
-        160
+        171
       ]
     ],
     "translation": "Create workspace"
@@ -3378,7 +3378,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        239
+        241
       ]
     ],
     "translation": "Custom usernames require upgrading to a Pro plan"
@@ -4242,7 +4242,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        179
+        181
       ]
     ],
     "translation": "Engineering"
@@ -6501,7 +6501,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        179
+        181
       ]
     ],
     "translation": "Marketing"
@@ -7268,7 +7268,7 @@
     "origin": [
       [
         "src/components/WorkspaceMenu.tsx",
-        34
+        37
       ]
     ],
     "translation": "Open command menu"
@@ -7956,11 +7956,11 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        119
+        121
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        168
+        170
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -8603,7 +8603,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        179
+        181
       ]
     ],
     "translation": "Roadmap"
@@ -9023,7 +9023,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        197
+        199
       ]
     ],
     "translation": "Set up your workspace"
@@ -9203,7 +9203,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        384
+        386
       ]
     ],
     "translation": "Sign out"
@@ -10043,7 +10043,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        83
+        84
       ]
     ],
     "translation": "This URL has already been taken"
@@ -10055,7 +10055,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        85
+        86
       ]
     ],
     "translation": "This URL is reserved"
@@ -10455,7 +10455,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        118
+        120
       ]
     ],
     "translation": "Unable to create workspace"
@@ -10611,7 +10611,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        167
+        169
       ]
     ],
     "translation": "Unable to start checkout"
@@ -11211,7 +11211,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        263
+        265
       ]
     ],
     "translation": "Upgrade to Pro ($29/month)"
@@ -11792,7 +11792,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        273
+        275
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
@@ -11868,7 +11868,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        206
+        208
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
@@ -12048,7 +12048,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        200
+        202
       ]
     ],
     "translation": "You can always change these later in settings."
@@ -12465,7 +12465,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        344
+        346
       ]
     ],
     "translation": "Your workspace"
@@ -12477,7 +12477,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        347
+        349
       ]
     ],
     "translation": "Your workspace description"
@@ -12537,11 +12537,11 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        216
+        218
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        217
+        219
       ]
     ],
     "translation": "your-workspace"
