@@ -34,7 +34,7 @@
     "comments": [],
     "origin": [
       ["src/views/boards/index.tsx", 48],
-      ["src/views/card/index.tsx", 317]
+      ["src/views/card/index.tsx", 321]
     ],
     "translation": "{0} | {1}"
   },
@@ -231,7 +231,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 468],
+      ["src/views/card/index.tsx", 476],
       ["src/views/public/board/CardModal.tsx", 209]
     ],
     "translation": "Aktivität"
@@ -277,7 +277,7 @@
     "message": "Add checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 96]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 123]],
     "translation": "Checkliste hinzufügen"
   },
   "ngBZOd": {
@@ -888,7 +888,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 530],
-      ["src/views/card/index.tsx", 317],
+      ["src/views/card/index.tsx", 321],
       ["src/views/public/board/index.tsx", 125]
     ],
     "translation": "Board"
@@ -1304,7 +1304,7 @@
     "message": "Card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/index.tsx", 317]],
+    "origin": [["src/views/card/index.tsx", 321]],
     "translation": "Karte"
   },
   "sU2uWc": {
@@ -1312,17 +1312,25 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 67]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 67],
+      ["src/views/card/components/Dropdown.tsx", 46]
     ],
     "translation": "Karte dupliziert"
+  },
+  "9trBXW": {
+    "translation": "Karte erfolgreich dupliziert.",
+    "message": "Card duplicated successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Dropdown.tsx", 48]]
   },
   "fEY2vP": {
     "message": "Card not found",
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 376],
-      ["src/views/card/index.tsx", 413]
+      ["src/views/card/index.tsx", 384],
+      ["src/views/card/index.tsx", 421]
     ],
     "translation": "Karte nicht gefunden"
   },
@@ -1339,7 +1347,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 308],
-      ["src/views/card/components/Dropdown.tsx", 47],
+      ["src/views/card/components/Dropdown.tsx", 74],
       ["src/views/public/board/CardModal.tsx", 38]
     ],
     "translation": "Karten-URL in Zwischenablage kopiert"
@@ -1491,7 +1499,7 @@
     "comments": [],
     "origin": [
       ["src/components/Dashboard.tsx", 281],
-      ["src/views/card/index.tsx", 367],
+      ["src/views/card/index.tsx", 375],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
     ],
@@ -1742,7 +1750,7 @@
     "message": "Copy card link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 80]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 107]],
     "translation": "Karten-Link kopieren"
   },
   "0utuU6": {
@@ -1783,7 +1791,7 @@
     "message": "Copy ticket ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 87]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 114]],
     "translation": "Ticket-ID kopieren"
   },
   "9PaIxv": {
@@ -2119,7 +2127,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/CardContextMenu.tsx", 74],
-      ["src/views/card/components/Dropdown.tsx", 107]
+      ["src/views/card/components/Dropdown.tsx", 152]
     ],
     "translation": "Karte löschen"
   },
@@ -2379,7 +2387,8 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 111],
-      ["src/views/board/components/CardContextMenu.tsx", 68]
+      ["src/views/board/components/CardContextMenu.tsx", 68],
+      ["src/views/card/components/Dropdown.tsx", 130]
     ],
     "translation": "Karte duplizieren"
   },
@@ -3330,7 +3339,7 @@
     "message": "ID copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 64]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 91]],
     "translation": "ID kopiert"
   },
   "iwr7AP": {
@@ -3735,7 +3744,7 @@
     "origin": [
       ["src/views/board/components/UpdateBoardSlugButton.tsx", 80],
       ["src/views/board/index.tsx", 306],
-      ["src/views/card/components/Dropdown.tsx", 45],
+      ["src/views/card/components/Dropdown.tsx", 72],
       ["src/views/public/board/CardModal.tsx", 36],
       ["src/views/public/board/index.tsx", 77]
     ],
@@ -4675,8 +4684,8 @@
       ["src/views/card/components/NewChecklistForm.tsx", 71],
       ["src/views/card/components/NewChecklistItemForm.tsx", 90],
       ["src/views/card/components/NewCommentForm.tsx", 37],
-      ["src/views/card/index.tsx", 232],
-      ["src/views/card/index.tsx", 245],
+      ["src/views/card/index.tsx", 236],
+      ["src/views/card/index.tsx", 249],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 28],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 42],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 65],
@@ -4715,8 +4724,9 @@
       ["src/views/board/components/CardContextDuplicateModal.tsx", 76],
       ["src/views/board/components/CardContextMoveListModal.tsx", 42],
       ["src/views/board/index.tsx", 315],
-      ["src/views/card/components/Dropdown.tsx", 54],
-      ["src/views/card/components/Dropdown.tsx", 73],
+      ["src/views/card/components/Dropdown.tsx", 55],
+      ["src/views/card/components/Dropdown.tsx", 81],
+      ["src/views/card/components/Dropdown.tsx", 100],
       ["src/views/public/board/CardModal.tsx", 45],
       ["src/views/public/board/index.tsx", 86]
     ],
@@ -5979,7 +5989,7 @@
     "message": "Ticket ID copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 66]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 93]],
     "translation": "Ticket-ID in die Zwischenablage kopiert"
   },
   "MHrjPM": {
@@ -6085,7 +6095,7 @@
     "message": "Unable to add label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/index.tsx", 244]],
+    "origin": [["src/views/card/index.tsx", 248]],
     "translation": "Label konnte nicht hinzugefügt werden"
   },
   "LeM5RY": {
@@ -6099,7 +6109,7 @@
     "message": "Unable to copy ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 71]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 98]],
     "translation": "ID konnte nicht kopiert werden"
   },
   "W1ewR0": {
@@ -6108,7 +6118,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 313],
-      ["src/views/card/components/Dropdown.tsx", 52],
+      ["src/views/card/components/Dropdown.tsx", 79],
       ["src/views/public/board/CardModal.tsx", 43],
       ["src/views/public/board/index.tsx", 84]
     ],
@@ -6213,7 +6223,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 75]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 75],
+      ["src/views/card/components/Dropdown.tsx", 53]
     ],
     "translation": "Karte konnte nicht dupliziert werden"
   },
@@ -6300,7 +6311,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 273],
-      ["src/views/card/index.tsx", 231]
+      ["src/views/card/index.tsx", 235]
     ],
     "translation": "Karte konnte nicht aktualisiert werden"
   },

@@ -59,7 +59,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        317
+        321
       ]
     ],
     "translation": "{0} | {1}"
@@ -391,7 +391,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        468
+        476
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -467,7 +467,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        96
+        123
       ]
     ],
     "translation": "Add checklist"
@@ -1489,7 +1489,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        317
+        321
       ],
       [
         "src/views/public/board/index.tsx",
@@ -2193,7 +2193,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        317
+        321
       ]
     ],
     "translation": "Card"
@@ -2206,9 +2206,25 @@
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
         67
+      ],
+      [
+        "src/views/card/components/Dropdown.tsx",
+        46
       ]
     ],
     "translation": "Card duplicated"
+  },
+  "9trBXW": {
+    "translation": "Card duplicated successfully.",
+    "message": "Card duplicated successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/Dropdown.tsx",
+        48
+      ]
+    ]
   },
   "fEY2vP": {
     "message": "Card not found",
@@ -2217,11 +2233,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        376
+        384
       ],
       [
         "src/views/card/index.tsx",
-        413
+        421
       ]
     ],
     "translation": "Card not found"
@@ -2249,7 +2265,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        47
+        74
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -2497,7 +2513,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        367
+        375
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -2921,7 +2937,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        80
+        107
       ]
     ],
     "translation": "Copy card link"
@@ -2981,7 +2997,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        87
+        114
       ]
     ],
     "translation": "Copy ticket ID"
@@ -3558,7 +3574,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        107
+        152
       ]
     ],
     "translation": "Delete card"
@@ -4023,6 +4039,10 @@
       [
         "src/views/board/components/CardContextMenu.tsx",
         68
+      ],
+      [
+        "src/views/card/components/Dropdown.tsx",
+        130
       ]
     ],
     "translation": "Duplicate card"
@@ -5595,7 +5615,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        64
+        91
       ]
     ],
     "translation": "ID copied"
@@ -6277,7 +6297,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        45
+        72
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -7924,11 +7944,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        232
+        236
       ],
       [
         "src/views/card/index.tsx",
-        245
+        249
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -8036,11 +8056,15 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        54
+        55
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        73
+        81
+      ],
+      [
+        "src/views/card/components/Dropdown.tsx",
+        100
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -10151,7 +10175,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        66
+        93
       ]
     ],
     "translation": "Ticket ID copied to clipboard"
@@ -10327,7 +10351,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        244
+        248
       ]
     ],
     "translation": "Unable to add label"
@@ -10351,7 +10375,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        71
+        98
       ]
     ],
     "translation": "Unable to copy ID"
@@ -10367,7 +10391,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        52
+        79
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -10540,6 +10564,10 @@
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
         75
+      ],
+      [
+        "src/views/card/components/Dropdown.tsx",
+        53
       ]
     ],
     "translation": "Unable to duplicate card"
@@ -10679,7 +10707,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        231
+        235
       ]
     ],
     "translation": "Unable to update card"
