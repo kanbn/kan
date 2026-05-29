@@ -1347,7 +1347,7 @@ export const cardRouter = createTRPCRouter({
                 checklistId: newChecklist.id,
                 title: item.title,
                 createdBy: userId,
-                completed: item.completed ?? false,
+                completed: false,
               });
             }
           }
