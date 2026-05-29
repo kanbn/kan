@@ -249,9 +249,18 @@ export default withApiLogging(
         if (existing.length === 0) break;
 
         const cfg = tierConfig(tier);
+        const newCount = cfg.workspaceSlots;
 
-        await Promise.all(
-          existing.map((slot) =>
+        const preferKeep = [
+          ...existing.filter((s) => s.referenceId),
+          ...existing.filter((s) => !s.referenceId),
+        ];
+
+        const slotsToKeep = preferKeep.slice(0, newCount);
+        const slotsToRemove = preferKeep.slice(newCount);
+
+        await Promise.all([
+          ...slotsToKeep.map((slot) =>
             subscriptionRepo.updateById(db, slot.id, {
               partnerLicenseKey: license_key,
               plan: cfg.plan,
@@ -261,7 +270,43 @@ export default withApiLogging(
               unlimitedSeats: cfg.unlimitedSeats,
             }),
           ),
-        );
+          ...slotsToKeep
+            .filter(hasReferenceId)
+            .map((s) =>
+              workspaceRepo.update(db, s.referenceId, { plan: cfg.plan }),
+            ),
+        ]);
+
+        if (newCount > existing.length) {
+          await subscriptionRepo.createPartnerLicenseSlots(
+            db,
+            license_key,
+            {
+              plan: cfg.plan,
+              status: "active",
+              partnerTier: tier,
+              seats: cfg.seats,
+              unlimitedSeats: cfg.unlimitedSeats,
+            },
+            newCount - existing.length,
+          );
+        }
+
+        if (slotsToRemove.length > 0) {
+          await Promise.all([
+            ...slotsToRemove
+              .filter(hasReferenceId)
+              .map((s) => cancelWorkspaceAccess(db, s.referenceId)),
+            ...slotsToRemove.map((s) =>
+              subscriptionRepo.updateById(db, s.id, {
+                plan: "free",
+                status: "inactive",
+                unlimitedSeats: false,
+                seats: null,
+              }),
+            ),
+          ]);
+        }
 
         break;
       }
