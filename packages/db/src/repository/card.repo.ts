@@ -107,7 +107,12 @@ export const create = async (
         cardNumber,
         dueDate: cardInput.dueDate ?? null,
       })
-      .returning({ id: cards.id, listId: cards.listId, publicId: cards.publicId, cardNumber: cards.cardNumber });
+      .returning({
+        id: cards.id,
+        listId: cards.listId,
+        publicId: cards.publicId,
+        cardNumber: cards.cardNumber,
+      });
 
     if (!result[0]) throw new Error("Unable to create card");
 
@@ -321,8 +326,7 @@ export const bulkCreate = async (
         .where(eq(workspaces.id, workspaceId))
         .returning({ cardCounter: workspaces.cardCounter });
 
-      if (!counterResult)
-        throw new Error(`Workspace ${workspaceId} not found`);
+      if (!counterResult) throw new Error(`Workspace ${workspaceId} not found`);
 
       const last = counterResult.cardCounter;
       const start = last - count + 1;
@@ -486,6 +490,7 @@ export const getWithListAndMembersByPublicId = async (
       dueDate: true,
       createdBy: true,
       cardNumber: true,
+      index: true,
     },
     with: {
       labels: {
