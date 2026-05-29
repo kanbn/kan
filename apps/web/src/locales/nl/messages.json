@@ -1318,11 +1318,11 @@
     "translation": "Kaart gedupliceerd"
   },
   "9trBXW": {
-    "translation": "Kaart succesvol gedupliceerd.",
     "message": "Card duplicated successfully.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 48]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 48]],
+    "translation": "Kaart succesvol gedupliceerd."
   },
   "fEY2vP": {
     "message": "Card not found",

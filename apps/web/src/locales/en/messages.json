@@ -2215,7 +2215,6 @@
     "translation": "Card duplicated"
   },
   "9trBXW": {
-    "translation": "Card duplicated successfully.",
     "message": "Card duplicated successfully.",
     "placeholders": {},
     "comments": [],
@@ -2224,7 +2223,8 @@
         "src/views/card/components/Dropdown.tsx",
         48
       ]
-    ]
+    ],
+    "translation": "Card duplicated successfully."
   },
   "fEY2vP": {
     "message": "Card not found",
