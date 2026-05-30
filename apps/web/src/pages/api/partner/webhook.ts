@@ -2,6 +2,7 @@ import { createHmac, timingSafeEqual } from "crypto";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Readable } from "node:stream";
 
+import type { dbClient } from "@kan/db/client";
 import { createNextApiContext } from "@kan/api/trpc";
 import { withApiLogging } from "@kan/api/utils/apiLogging";
 import { cancelWorkspaceAccess } from "@kan/api/utils/workspace";
@@ -10,9 +11,102 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
 import { getActiveSubscriptions } from "@kan/shared/utils";
 
+import type { TierConfig } from "./_utils";
 import { tierConfig } from "./_utils";
 
 const log = createLogger("api");
+
+async function createAndLinkSlots(
+  db: dbClient,
+  licenseKey: string,
+  cfg: TierConfig,
+  tier: number,
+  alreadyLinkedReferenceIds: Set<string>,
+  count: number,
+) {
+  const linkedId = [...alreadyLinkedReferenceIds][0];
+  let autoLinked = 0;
+
+  if (linkedId) {
+    const linkedWorkspace = await workspaceRepo.getByPublicId(db, linkedId);
+
+    if (linkedWorkspace?.createdBy) {
+      const owned = await workspaceRepo.getAllOwnedByUserId(
+        db,
+        linkedWorkspace.createdBy,
+      );
+
+      const candidates = owned.filter(
+        (w) => !alreadyLinkedReferenceIds.has(w.publicId),
+      );
+
+      if (candidates.length > 0) {
+        const existingSubs =
+          await subscriptionRepo.getAllActivePartnerSubsByWorkspaceIds(
+            db,
+            candidates.map((w) => w.publicId),
+          );
+        const alreadySubscribed = new Set(
+          existingSubs
+            .map((s) => s.referenceId)
+            .filter((id): id is string => !!id),
+        );
+
+        const available = candidates
+          .filter((w) => !alreadySubscribed.has(w.publicId))
+          .slice(0, count);
+
+        if (available.length > 0) {
+          const newSlots = await subscriptionRepo.createPartnerLicenseSlots(
+            db,
+            licenseKey,
+            {
+              plan: cfg.plan,
+              status: "active",
+              partnerTier: tier,
+              seats: cfg.seats,
+              unlimitedSeats: cfg.unlimitedSeats,
+            },
+            available.length,
+          );
+
+          await Promise.all(
+            available.map((workspace, i) => {
+              const slot = newSlots[i];
+              if (!slot) return;
+              return Promise.all([
+                subscriptionRepo.updateById(db, slot.id, {
+                  referenceId: workspace.publicId,
+                }),
+                workspaceRepo.update(db, workspace.publicId, {
+                  plan: cfg.plan,
+                }),
+              ]);
+            }),
+          );
+
+          autoLinked = available.length;
+        }
+      }
+    }
+  }
+
+  const remaining = count - autoLinked;
+  if (remaining > 0) {
+    await subscriptionRepo.createPartnerLicenseSlots(
+      db,
+      licenseKey,
+      {
+        plan: cfg.plan,
+        status: "active",
+        partnerTier: tier,
+        seats: cfg.seats,
+        unlimitedSeats: cfg.unlimitedSeats,
+      },
+      remaining,
+    );
+  }
+}
 
 async function buffer(readable: Readable) {
   const chunks: Buffer[] = [];
@@ -206,16 +300,15 @@ export default withApiLogging(
         ]);
 
         if (newCount > existing.length) {
-          await subscriptionRepo.createPartnerLicenseSlots(
+          const linkedIds = new Set(
+            slotsToKeep.filter(hasReferenceId).map((s) => s.referenceId),
+          );
+          await createAndLinkSlots(
             db,
             license_key,
-            {
-              plan: cfg.plan,
-              status: "active",
-              partnerTier: tier,
-              seats: cfg.seats,
-              unlimitedSeats: cfg.unlimitedSeats,
-            },
+            cfg,
+            tier,
+            linkedIds,
             newCount - existing.length,
           );
         }
@@ -278,16 +371,15 @@ export default withApiLogging(
         ]);
 
         if (newCount > existing.length) {
-          await subscriptionRepo.createPartnerLicenseSlots(
+          const linkedIds = new Set(
+            slotsToKeep.filter(hasReferenceId).map((s) => s.referenceId),
+          );
+          await createAndLinkSlots(
             db,
             license_key,
-            {
-              plan: cfg.plan,
-              status: "active",
-              partnerTier: tier,
-              seats: cfg.seats,
-              unlimitedSeats: cfg.unlimitedSeats,
-            },
+            cfg,
+            tier,
+            linkedIds,
             newCount - existing.length,
           );
         }

@@ -147,6 +147,20 @@ export const getFirstUnlinkedSlotByLicenseKey = async (
   });
 };
 
+export const getAllActivePartnerSubsByWorkspaceIds = async (
+  db: dbClient,
+  workspacePublicIds: string[],
+) => {
+  if (workspacePublicIds.length === 0) return [];
+  return await db.query.subscription.findMany({
+    where: and(
+      inArray(subscription.referenceId, workspacePublicIds),
+      isNotNull(subscription.partnerLicenseKey),
+      inArray(subscription.status, ["active", "trialing"]),
+    ),
+  });
+};
+
 export const getFirstActivePartnerSubByWorkspaceIds = async (
   db: dbClient,
   workspacePublicIds: string[],
