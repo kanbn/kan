@@ -724,6 +724,30 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
   return result;
 };
 
+/**
+ * Fetches the board fields needed by the move mutation:
+ * identity, naming, type guards, and workspace ownership.
+ * Soft-deleted boards are excluded — moving a tombstoned board has
+ * no defensible semantics.
+ */
+export const getBoardForMove = async (
+  db: dbClient,
+  boardPublicId: string,
+) => {
+  return db.query.boards.findFirst({
+    columns: {
+      id: true,
+      name: true,
+      slug: true,
+      type: true,
+      isArchived: true,
+      workspaceId: true,
+      createdBy: true,
+    },
+    where: and(eq(boards.publicId, boardPublicId), isNull(boards.deletedAt)),
+  });
+};
+
 export const isBoardSlugAvailable = async (
   db: dbClient,
   boardSlug: string,
@@ -966,6 +990,61 @@ export const createFromSnapshot = async (
     }
 
     return newBoard;
+  });
+};
+
+export const moveToWorkspace = async (
+  db: dbClient,
+  boardId: number,
+  targetWorkspaceId: number,
+  newSlug?: string,
+) => {
+  return db.transaction(async (tx) => {
+    // Update the board's workspace (and slug if provided)
+    const [updatedBoard] = await tx
+      .update(boards)
+      .set({
+        workspaceId: targetWorkspaceId,
+        ...(newSlug && { slug: newSlug }),
+        updatedAt: new Date(),
+      })
+      .where(eq(boards.id, boardId))
+      .returning({
+        publicId: boards.publicId,
+        name: boards.name,
+      });
+
+    if (!updatedBoard) throw new Error("Failed to move board");
+
+    // Get every card ID ever belonging to this board, including
+    // soft-deleted cards under soft-deleted lists. Member assignments
+    // point at workspace-scoped members that no longer exist after
+    // the move; if we leave assignments on soft-deleted cards, a later
+    // restore would resurrect rogue references to the old workspace.
+    const boardLists = await tx
+      .select({ id: lists.id })
+      .from(lists)
+      .where(eq(lists.boardId, boardId));
+
+    if (boardLists.length > 0) {
+      const listIds = boardLists.map((l) => l.id);
+
+      const boardCards = await tx
+        .select({ id: cards.id })
+        .from(cards)
+        .where(inArray(cards.listId, listIds));
+
+      if (boardCards.length > 0) {
+        const cardIds = boardCards.map((c) => c.id);
+
+        // Clear all card member assignments (they reference workspace-scoped members)
+        await tx
+          .delete(cardToWorkspaceMembers)
+          .where(inArray(cardToWorkspaceMembers.cardId, cardIds));
+      }
+    }
+
+    return updatedBoard;
   });
 };
 
