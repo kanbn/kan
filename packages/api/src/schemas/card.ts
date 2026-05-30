@@ -59,6 +59,7 @@ export const cardDetailSchema = z.object({
       originalFilename: z.string().nullable(),
       size: z.number().nullable(),
       url: z.string().nullable(),
+      downloadUrl: z.string().nullable(),
     }),
   ),
   checklists: z.array(checklistResponseSchema),
