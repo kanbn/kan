@@ -969,6 +969,104 @@ export const createFromSnapshot = async (
   });
 };
 
+export const getAllCardsAggregated = async (
+  db: dbClient,
+  workspaceId: number,
+  opts?: { dueDateFilter?: DueDateFilter[] },
+) => {
+  const boardsData = await db.query.boards.findMany({
+    columns: { publicId: true, name: true },
+    with: {
+      lists: {
+        columns: { publicId: true, name: true, index: true },
+        where: isNull(lists.deletedAt),
+        orderBy: [asc(lists.index)],
+        with: {
+          cards: {
+            columns: {
+              publicId: true,
+              title: true,
+              dueDate: true,
+              index: true,
+            },
+            where: and(
+              isNull(cards.deletedAt),
+              opts?.dueDateFilter?.length
+                ? buildDueDateWhere(opts.dueDateFilter)
+                : undefined,
+            ),
+            orderBy: [asc(cards.index)],
+          },
+        },
+      },
+    },
+    where: and(
+      eq(boards.workspaceId, workspaceId),
+      isNull(boards.deletedAt),
+      eq(boards.isArchived, false),
+      eq(boards.type, "regular"),
+    ),
+    orderBy: [asc(boards.name)],
+  });
+
+  type AggregatedCard = {
+    publicId: string;
+    title: string;
+    dueDate: Date | null;
+    boardPublicId: string;
+    boardName: string;
+    listName: string;
+    listPublicId: string;
+  };
+
+  type BoardMeta = {
+    firstListPublicId: string;
+    lastListPublicId: string;
+    middleListPublicId: string | null;
+  };
+
+  const result: {
+    todo: AggregatedCard[];
+    inProgress: AggregatedCard[];
+    done: AggregatedCard[];
+    boardMeta: Record<string, BoardMeta>;
+  } = { todo: [], inProgress: [], done: [], boardMeta: {} };
+
+  for (const board of boardsData) {
+    const listCount = board.lists.length;
+    if (listCount === 0) continue;
+
+    const firstList = board.lists[0]!;
+    const lastList = board.lists[listCount - 1]!;
+    const middleList = listCount > 2 ? board.lists[1]! : null;
+
+    result.boardMeta[board.publicId] = {
+      firstListPublicId: firstList.publicId,
+      lastListPublicId: lastList.publicId,
+      middleListPublicId: middleList?.publicId ?? null,
+    };
+
+    board.lists.forEach((list, i) => {
+      const category =
+        i === 0 ? "todo" : i === listCount - 1 ? "done" : "inProgress";
+
+      for (const card of list.cards) {
+        result[category].push({
+          publicId: card.publicId,
+          title: card.title,
+          dueDate: card.dueDate,
+          boardPublicId: board.publicId,
+          boardName: board.name,
+          listName: list.name,
+          listPublicId: list.publicId,
+        });
+      }
+    });
+  }
+
+  return result;
+};
+
 export const addUserFavorite = async (
   db: dbClient,
   userId: string,

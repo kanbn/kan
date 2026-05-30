@@ -11,7 +11,8 @@ const Button: React.FC<{
   href: string;
   current: boolean;
   name: string;
-  json: object;
+  json?: object;
+  reactIcon?: React.ReactNode;
   isCollapsed?: boolean;
   onCloseSideNav?: () => void;
   keyboardShortcut: KeyboardShortcut;
@@ -20,6 +21,7 @@ const Button: React.FC<{
   current,
   name,
   json,
+  reactIcon,
   isCollapsed = false,
   keyboardShortcut,
   onCloseSideNav,
@@ -62,7 +64,13 @@ const Button: React.FC<{
             : "gap-x-3",
         )}
       >
-        <LottieIcon index={index} json={json} isPlaying={isHovered} />
+        {reactIcon ? (
+          <span className="flex h-[18px] w-[18px] items-center justify-center">
+            {reactIcon}
+          </span>
+        ) : json ? (
+          <LottieIcon index={index} json={json} isPlaying={isHovered} />
+        ) : null}
         <span className={twMerge(isCollapsed && "md:hidden")}>{name}</span>
       </div>
       {!isCollapsed && (
