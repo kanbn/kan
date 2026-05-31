@@ -449,6 +449,20 @@ export const workspaceRouter = createTRPCRouter({
         });
       await assertPermission(ctx.db, userId, workspace.id, "workspace:delete");
 
+      if (env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
+        const subs = await subscriptionRepo.getByReferenceId(
+          ctx.db,
+          input.workspacePublicId,
+        );
+        await Promise.all(
+          subs
+            .filter((s) => !!s.partnerLicenseKey)
+            .map((s) =>
+              subscriptionRepo.updateById(ctx.db, s.id, { referenceId: null }),
+            ),
+        );
+      }
+
       await workspaceRepo.hardDelete(ctx.db, input.workspacePublicId);
 
       return { success: true };
