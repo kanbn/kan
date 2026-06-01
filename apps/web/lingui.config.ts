@@ -3,7 +3,7 @@ import { formatter } from "@lingui/format-json";
 
 
 export default defineConfig({
-  locales: ["en", "fr", "de", "es", "it", "nl", "ru", "pl", "pt-BR"],
+  locales: ["en", "fr", "de", "es", "it", "nl", "ru", "pl", "pt-BR", "tr"],
   sourceLocale: "en",
   catalogs: [
     {
