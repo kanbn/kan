@@ -53,6 +53,7 @@ export const boardDetailSchema = z.object({
   publicId: z.string(),
   name: z.string(),
   slug: z.string(),
+  backgroundColor: z.string().nullable(),
   visibility: z.string(),
   isArchived: z.boolean(),
   favorite: z.boolean(),
@@ -96,6 +97,7 @@ export const boardBySlugSchema = z.object({
   publicId: z.string(),
   name: z.string(),
   slug: z.string(),
+  backgroundColor: z.string().nullable(),
   visibility: z.string(),
   workspace: z.object({
     publicId: z.string(),

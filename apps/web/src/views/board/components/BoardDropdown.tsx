@@ -3,6 +3,7 @@ import { t } from "@lingui/core/macro";
 import {
   HiEllipsisHorizontal,
   HiLink,
+  HiOutlineCog6Tooth,
   HiOutlineDocumentDuplicate,
   HiOutlineTrash,
   HiOutlineStar,
@@ -101,6 +102,11 @@ export default function BoardDropdown({
       : []),
     ...(!isTemplate && canEditBoard
       ? [
+        {
+          label: t`Board settings`,
+          action: () => openModal("BOARD_SETTINGS"),
+          icon: <HiOutlineCog6Tooth className="h-[16px] w-[16px] text-dark-900" />,
+        },
         {
           label: t`Edit board URL`,
           action: () => openModal("UPDATE_BOARD_SLUG"),
