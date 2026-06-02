@@ -60,6 +60,18 @@ import VisibilityButton from "./components/VisibilityButton";
 
 type PublicListId = string;
 
+const isLightHexColor = (color: string | null | undefined) => {
+  if (!color || !/^#[0-9a-fA-F]{6}$/.test(color)) return null;
+
+  const red = parseInt(color.slice(1, 3), 16);
+  const green = parseInt(color.slice(3, 5), 16);
+  const blue = parseInt(color.slice(5, 7), 16);
+
+  const luminance = (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
+
+  return luminance > 0.6;
+};
+
 export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const params = useParams() as { boardId: string | string[] } | null;
   const router = useRouter();
@@ -148,6 +160,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     enabled: !!boardId,
     placeholderData: keepPreviousData,
   });
+
+  const hasLightBoardBackground = isLightHexColor(boardData?.backgroundColor);
+  const emptyStateTitleClassName = boardData?.backgroundColor
+    ? hasLightBoardBackground
+      ? "text-light-1000"
+      : "text-dark-1000"
+    : "text-light-1000 dark:text-dark-950";
 
   // Redirect to 404 if board doesn't exist
   useEffect(() => {
@@ -665,7 +684,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
                   <div className="flex flex-col items-center">
                     <HiOutlineSquare3Stack3D className="h-10 w-10 text-light-800 dark:text-dark-800" />
-                    <p className="mb-2 mt-4 text-[14px] font-bold text-light-1000 dark:text-dark-950">
+                    <p
+                      className={`mb-2 mt-4 text-[14px] font-bold ${emptyStateTitleClassName}`}
+                    >
                       {t`No lists`}
                     </p>
                     <p className="text-[14px] text-light-900 dark:text-dark-900">
