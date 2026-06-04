@@ -110,18 +110,17 @@ export default function Avatar({
     const cropYpx = (crop.y / 100) * image.naturalHeight;
     const cropWpx = (crop.width / 100) * image.naturalWidth;
     const cropHpx = (crop.height / 100) * image.naturalHeight;
-    canvas.width = Math.max(1, Math.floor(cropWpx));
-    canvas.height = Math.max(1, Math.floor(cropHpx));
+
+    // Cap output at 512x512 — avatars display at 64x64, so higher res is wasteful
+    // and causes "File too large" errors on HiDPI screens
+    const maxSize = 512;
+    const scale = Math.min(maxSize / cropWpx, maxSize / cropHpx, 1);
+    canvas.width = Math.max(1, Math.floor(cropWpx * scale));
+    canvas.height = Math.max(1, Math.floor(cropHpx * scale));
     const ctx = canvas.getContext("2d");
     if (!ctx) throw new Error("Canvas not supported");
 
-    // For better quality on HiDPI screens
-    const pixelRatio = window.devicePixelRatio || 1;
-    canvas.width = canvas.width * pixelRatio;
-    canvas.height = canvas.height * pixelRatio;
-    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     ctx.imageSmoothingQuality = "high";
-
     ctx.drawImage(
       image,
       cropXpx,
@@ -130,8 +129,8 @@ export default function Avatar({
       cropHpx,
       0,
       0,
-      canvas.width / pixelRatio,
-      canvas.height / pixelRatio,
+      canvas.width,
+      canvas.height,
     );
 
     const mime = selectedFile?.type ?? "image/jpeg";
@@ -139,6 +138,7 @@ export default function Avatar({
       canvas.toBlob(
         (b) => (b ? resolve(b) : reject(new Error("toBlob failed"))),
         mime,
+        0.85,
       );
     });
     return blob;

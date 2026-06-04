@@ -44,7 +44,12 @@ export function NewWebhookModal({
   workspacePublicId,
   isEdit = false,
 }: NewWebhookModalProps) {
-  const { closeModal, entityId: webhookPublicId, getModalState, clearModalState } = useModal();
+  const {
+    closeModal,
+    entityId: webhookPublicId,
+    getModalState,
+    clearModalState,
+  } = useModal();
   const { showPopup } = usePopup();
   const [isTestingWebhook, setIsTestingWebhook] = useState(false);
 
@@ -101,13 +106,18 @@ export function NewWebhookModal({
   const createWebhookMutation = api.webhook.create.useMutation({
     onSuccess: () => {
       void utils.webhook.list.invalidate({ workspacePublicId });
-      showPopup({ message: t`Webhook created successfully`, type: "success" });
+      showPopup({
+        header: t`Webhook created`,
+        message: t`Webhook created successfully`,
+        icon: "success",
+      });
       closeModal();
     },
     onError: (error) => {
       showPopup({
+        header: t`Unable to create webhook`,
         message: error.message || t`Failed to create webhook`,
-        type: "error",
+        icon: "error",
       });
     },
   });
@@ -115,13 +125,18 @@ export function NewWebhookModal({
   const updateWebhookMutation = api.webhook.update.useMutation({
     onSuccess: () => {
       void utils.webhook.list.invalidate({ workspacePublicId });
-      showPopup({ message: t`Webhook updated successfully`, type: "success" });
+      showPopup({
+        header: t`Webhook updated`,
+        message: t`Webhook updated successfully`,
+        icon: "success",
+      });
       closeModal();
     },
     onError: (error) => {
       showPopup({
+        header: t`Unable to update webhook`,
         message: error.message || t`Failed to update webhook`,
-        type: "error",
+        icon: "error",
       });
     },
   });
@@ -129,19 +144,25 @@ export function NewWebhookModal({
   const testWebhookMutation = api.webhook.test.useMutation({
     onSuccess: (result) => {
       if (result.success) {
-        showPopup({ message: t`Test webhook sent successfully!`, type: "success" });
+        showPopup({
+          header: t`Test sent`,
+          message: t`Test webhook sent successfully!`,
+          icon: "success",
+        });
       } else {
         showPopup({
+          header: t`Test failed`,
           message: result.error || t`Webhook test failed`,
-          type: "error",
+          icon: "error",
         });
       }
       setIsTestingWebhook(false);
     },
     onError: (error) => {
       showPopup({
+        header: t`Unable to test webhook`,
         message: error.message || t`Failed to test webhook`,
-        type: "error",
+        icon: "error",
       });
       setIsTestingWebhook(false);
     },
@@ -151,7 +172,7 @@ export function NewWebhookModal({
     if (isEdit && webhookPublicId) {
       updateWebhookMutation.mutate({
         workspacePublicId,
-        webhookPublicId: webhookPublicId as string,
+        webhookPublicId: webhookPublicId,
         name: data.name,
         url: data.url,
         secret: data.secret || undefined,
@@ -174,11 +195,12 @@ export function NewWebhookModal({
     setIsTestingWebhook(true);
     testWebhookMutation.mutate({
       workspacePublicId,
-      webhookPublicId: webhookPublicId as string,
+      webhookPublicId: webhookPublicId,
     });
   };
 
-  const isPending = createWebhookMutation.isPending || updateWebhookMutation.isPending;
+  const isPending =
+    createWebhookMutation.isPending || updateWebhookMutation.isPending;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -231,7 +253,11 @@ export function NewWebhookModal({
             <Input
               id="secret"
               type="password"
-              placeholder={isEdit ? t`Enter new secret to update` : t`HMAC secret for signature verification`}
+              placeholder={
+                isEdit
+                  ? t`Enter new secret to update`
+                  : t`HMAC secret for signature verification`
+              }
               {...register("secret")}
               errorMessage={errors.secret?.message}
             />
@@ -252,7 +278,7 @@ export function NewWebhookModal({
                   {webhookEvents.map((event) => (
                     <label
                       key={event}
-                      className="flex items-center space-x-2 cursor-pointer"
+                      className="flex cursor-pointer items-center space-x-2"
                     >
                       <input
                         type="checkbox"
@@ -262,11 +288,11 @@ export function NewWebhookModal({
                             field.onChange([...field.value, event]);
                           } else {
                             field.onChange(
-                              field.value.filter((v) => v !== event)
+                              field.value.filter((v) => v !== event),
                             );
                           }
                         }}
-                        className="h-4 w-4 rounded border-light-400 text-primary-600 focus:ring-primary-500 dark:border-dark-400"
+                        className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded border-light-400 dark:border-dark-400"
                       />
                       <span className="text-sm text-light-900 dark:text-dark-900">
                         {event}
@@ -277,17 +303,19 @@ export function NewWebhookModal({
               )}
             />
             {errors.events && (
-              <p className="mt-1 text-xs text-red-500">{errors.events.message}</p>
+              <p className="mt-1 text-xs text-red-500">
+                {errors.events.message}
+              </p>
             )}
           </div>
 
           {isEdit && (
             <div>
-              <label className="flex items-center space-x-2 cursor-pointer">
+              <label className="flex cursor-pointer items-center space-x-2">
                 <input
                   type="checkbox"
                   {...register("active")}
-                  className="h-4 w-4 rounded border-light-400 text-primary-600 focus:ring-primary-500 dark:border-dark-400"
+                  className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded border-light-400 dark:border-dark-400"
                 />
                 <span className="text-sm text-light-900 dark:text-dark-900">
                   {t`Active`}

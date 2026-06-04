@@ -11,6 +11,7 @@ RUN apk update && \
     apk add --no-cache libc6-compat && \
     rm -rf /var/cache/apk/* /tmp/* || true && \
     corepack enable && \
+    corepack prepare pnpm@9.14.2 --activate && \
     npm install turbo@2.3.1 --global && \
     pnpm config set store-dir ~/.pnpm-store
 
@@ -109,13 +110,15 @@ ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
 # Copy the standalone Next.js server
-COPY --from=builder /app/apps/web/.next/standalone/ ./
+COPY --chown=1000:1000 --from=builder /app/apps/web/.next/standalone/ ./
 # Copy static assets and public files
-COPY --from=builder /app/apps/web/.next/static/ ./apps/web/.next/static/
-COPY --from=builder /app/apps/web/public/ ./apps/web/public/
+COPY --chown=1000:1000 --from=builder /app/apps/web/.next/static/ ./apps/web/.next/static/
+COPY --chown=1000:1000 --from=builder /app/apps/web/public/ ./apps/web/public/
 
 # Copy bootstrap script for runtime env var injection
-COPY apps/web/bootstrap.cjs ./bootstrap.cjs
+COPY --chown=1000:1000 apps/web/bootstrap.cjs ./bootstrap.cjs
+
+USER 1000:1000
 
 EXPOSE 3000
 CMD ["bootstrap.cjs"]

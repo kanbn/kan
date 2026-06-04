@@ -334,6 +334,7 @@ export const webhookRouter = createTRPCRouter({
 
       const testPayload = createCardWebhookPayload("card.created", {
         id: "test-card-id",
+        publicId: "test-card-public-id",
         title: "Test Card",
         description: "This is a test webhook payload",
         dueDate: null,

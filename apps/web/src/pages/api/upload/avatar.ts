@@ -2,13 +2,17 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 
 import { createNextApiContext } from "@kan/api/trpc";
-import * as userRepo from "@kan/db/repository/user.repo";
-
-import { env } from "~/env";
+import { withApiLogging } from "@kan/api/utils/apiLogging";
 import { withRateLimit } from "@kan/api/utils/rateLimit";
+import * as userRepo from "@kan/db/repository/user.repo";
 import { createS3Client } from "@kan/shared/utils";
 
-const MAX_SIZE_BYTES = parseInt(process.env.S3_AVATAR_UPLOAD_LIMIT || '2097152', 10); // Default 2MB
+import { env } from "~/env";
+
+const MAX_SIZE_BYTES = parseInt(
+  process.env.S3_AVATAR_UPLOAD_LIMIT || "2097152",
+  10,
+); // Default 2MB
 const allowedContentTypes = ["image/jpeg", "image/png", "image/webp"];
 
 export const config = {
@@ -19,7 +23,7 @@ export const config = {
 
 export default withRateLimit(
   { points: 100, duration: 60 },
-  async (req: NextApiRequest, res: NextApiResponse) => {
+  withApiLogging(async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "POST") {
       return res.status(405).json({ error: "Method not allowed" });
     }
@@ -51,7 +55,9 @@ export default withRateLimit(
       }
 
       if (!Number.isFinite(contentLength) || contentLength <= 0) {
-        return res.status(400).json({ error: "Missing or invalid content length" });
+        return res
+          .status(400)
+          .json({ error: "Missing or invalid content length" });
       }
 
       if (contentLength > MAX_SIZE_BYTES) {
@@ -93,9 +99,7 @@ export default withRateLimit(
         user: updatedUser,
       });
     } catch (error) {
-      console.error("Avatar upload failed", error);
       return res.status(500).json({ error: "Internal server error" });
     }
-  },
+  }),
 );
-

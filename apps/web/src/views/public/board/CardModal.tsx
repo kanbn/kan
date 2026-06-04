@@ -95,8 +95,28 @@ export function CardModal({
       <div className="flex h-full w-full flex-col overflow-hidden">
         <div className="h-full p-8">
           <div className="mb-6">
-            <div className="flex w-full items-center justify-between">
-              <div className="absolute right-[2rem] top-[2rem] flex items-center gap-1">
+            <div className="flex w-full items-start justify-between gap-4">
+              <div className="flex-1">
+                {isLoading ? (
+                  <div className="flex space-x-2">
+                    <div className="h-[2.3rem] w-[300px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
+                  </div>
+                ) : (
+                  <>
+                    {data?.cardNumber != null &&
+                      data.list.board.workspace.cardPrefix && (
+                        <span className="mb-1 block text-xs font-medium text-light-700 dark:text-dark-800">
+                          {data.list.board.workspace.cardPrefix}-
+                          {data.cardNumber}
+                        </span>
+                      )}
+                    <h1 className="font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
+                      {data?.title}
+                    </h1>
+                  </>
+                )}
+              </div>
+              <div className="flex flex-shrink-0 items-center gap-1">
                 <button
                   type="button"
                   onClick={handleCopyCardLink}
@@ -134,17 +154,6 @@ export function CardModal({
                   />
                 </button>
               </div>
-              {isLoading ? (
-                <div className="flex space-x-2">
-                  <div className="h-[2.3rem] w-[300px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
-                </div>
-              ) : (
-                <>
-                  <h1 className="pr-8 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
-                    {data?.title}
-                  </h1>
-                </>
-              )}
             </div>
             {labels.length > 0 && (
               <div className="mt-2">

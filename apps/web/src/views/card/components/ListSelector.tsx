@@ -58,6 +58,7 @@ export default function ListSelector({
     },
     onSettled: async () => {
       await invalidateCard(utils, cardPublicId);
+      await utils.board.byId.invalidate();
     },
   });
 

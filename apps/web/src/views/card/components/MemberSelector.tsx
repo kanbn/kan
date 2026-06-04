@@ -85,6 +85,7 @@ export default function MemberSelector({
     },
     onSettled: async () => {
       await invalidateCard(utils, cardPublicId);
+      await utils.board.byId.invalidate();
     },
   });
 

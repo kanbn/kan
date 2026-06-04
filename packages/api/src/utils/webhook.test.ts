@@ -1,7 +1,18 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
+const { mockLogger } = vi.hoisted(() => ({
+  mockLogger: {
+    error: vi.fn(),
+    info: vi.fn(),
+  },
+}));
+
 vi.mock("@kan/db/repository/webhook.repo", () => ({
   getActiveByWorkspaceId: vi.fn(),
+}));
+
+vi.mock("@kan/logger", () => ({
+  createLogger: vi.fn(() => mockLogger),
 }));
 
 import * as webhookRepo from "@kan/db/repository/webhook.repo";
@@ -32,6 +43,7 @@ describe("webhook utilities", () => {
         "card.created",
         {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           listId: "list-456",
         },
@@ -44,12 +56,14 @@ describe("webhook utilities", () => {
       expect(payload.timestamp).toBe("2024-01-15T12:00:00.000Z");
       expect(payload.data.card).toEqual({
         id: "card-123",
+        publicId: "card-pub-123",
         title: "Test Card",
         description: undefined,
         dueDate: null,
         listId: "list-456",
         boardId: "board-789",
       });
+      expect(payload.data.card.publicId).toBe("card-pub-123");
     });
 
     it("includes optional card fields when provided", () => {
@@ -58,6 +72,7 @@ describe("webhook utilities", () => {
         "card.updated",
         {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           description: "A description",
           dueDate,
@@ -77,6 +92,7 @@ describe("webhook utilities", () => {
         "card.created",
         {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           listId: "list-456",
         },
@@ -97,6 +113,7 @@ describe("webhook utilities", () => {
         "card.created",
         {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           listId: "list-456",
         },
@@ -117,6 +134,7 @@ describe("webhook utilities", () => {
         "card.created",
         {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           listId: "list-456",
         },
@@ -140,6 +158,7 @@ describe("webhook utilities", () => {
         "card.updated",
         {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Updated Title",
           listId: "list-456",
         },
@@ -153,6 +172,34 @@ describe("webhook utilities", () => {
 
       expect(payload.data.changes).toEqual({
         title: { from: "Old Title", to: "Updated Title" },
+      });
+    });
+
+    it("preserves public list IDs in moved payloads", () => {
+      const payload = createCardWebhookPayload(
+        "card.moved",
+        {
+          id: "card-123",
+          publicId: "card-pub-123",
+          title: "Moved Card",
+          listId: "list-public-done",
+        },
+        {
+          boardId: "board-789",
+          listName: "Done",
+          changes: {
+            listId: { from: "list-public-backlog", to: "list-public-done" },
+          },
+        },
+      );
+
+      expect(payload.data.card.listId).toBe("list-public-done");
+      expect(payload.data.list).toEqual({
+        id: "list-public-done",
+        name: "Done",
+      });
+      expect(payload.data.changes).toEqual({
+        listId: { from: "list-public-backlog", to: "list-public-done" },
       });
     });
   });
@@ -174,6 +221,7 @@ describe("webhook utilities", () => {
       data: {
         card: {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           listId: "list-456",
           boardId: "board-789",
@@ -370,6 +418,7 @@ describe("webhook utilities", () => {
       data: {
         card: {
           id: "card-123",
+          publicId: "card-pub-123",
           title: "Test Card",
           listId: "list-456",
           boardId: "board-789",
@@ -434,8 +483,6 @@ describe("webhook utilities", () => {
     });
 
     it("continues sending to other webhooks when one fails", async () => {
-      const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-
       mockGetActiveByWorkspaceId.mockResolvedValueOnce([
         {
           id: 1,
@@ -462,11 +509,15 @@ describe("webhook utilities", () => {
       await sendWebhooksForWorkspace(mockDb, 1, mockPayload);
 
       expect(global.fetch).toHaveBeenCalledTimes(2);
-      expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining("Webhook delivery failed"),
+      expect(mockLogger.error).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: "https://example.com/webhook1",
+          event: "card.created",
+          error: "500 Error",
+          statusCode: 500,
+        }),
+        "Webhook delivery failed",
       );
-
-      consoleSpy.mockRestore();
     });
 
     it("handles empty webhook list", async () => {
@@ -478,9 +529,6 @@ describe("webhook utilities", () => {
     });
 
     it("catches and logs DB errors without throwing", async () => {
-      const consoleSpy = vi
-        .spyOn(console, "error")
-        .mockImplementation(() => {});
       mockGetActiveByWorkspaceId.mockRejectedValueOnce(
         new Error("DB connection failed"),
       );
@@ -490,12 +538,13 @@ describe("webhook utilities", () => {
         sendWebhooksForWorkspace(mockDb, 1, mockPayload),
       ).resolves.toBeUndefined();
 
-      expect(consoleSpy).toHaveBeenCalledWith(
-        "Failed to send webhooks for workspace:",
-        expect.any(Error),
+      expect(mockLogger.error).toHaveBeenCalledWith(
+        expect.objectContaining({
+          err: expect.any(Error),
+          workspaceId: 1,
+        }),
+        "Failed to send webhooks for workspace",
       );
-
-      consoleSpy.mockRestore();
     });
   });
 

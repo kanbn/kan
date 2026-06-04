@@ -1,3 +1,6 @@
+import { useRouter, useSearchParams } from "next/navigation";
+import { t } from "@lingui/core/macro";
+import { env } from "next-runtime-env";
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -11,8 +14,12 @@ import { authClient } from "@kan/auth/client";
 
 import { useClickOutside } from "~/hooks/useClickOutside";
 import { useModal } from "~/providers/modal";
+import { usePopup } from "~/providers/popup";
 import { useWorkspace, WorkspaceProvider } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { ChangePasswordFormConfirmation } from "~/views/settings/components/ChangePasswordConfirmation";
+import Button from "./Button";
+import Modal from "./modal";
 import SideNavigation from "./SideNavigation";
 
 interface DashboardProps {
@@ -41,8 +48,11 @@ export default function Dashboard({
   hasRightPanel = false,
 }: DashboardProps) {
   const { resolvedTheme } = useTheme();
-  const { openModal } = useModal();
+  const { openModal, closeModal, modalContentType } = useModal();
   const { availableWorkspaces, hasLoaded } = useWorkspace();
+  const { showPopup } = usePopup();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const { data: session, isPending: sessionLoading } = authClient.useSession();
   const { data: user, isLoading: userLoading } = api.user.getUser.useQuery(
@@ -97,10 +107,65 @@ export default function Dashboard({
   });
 
   useEffect(() => {
-    if (hasLoaded && availableWorkspaces.length === 0) {
-      openModal("NEW_WORKSPACE", undefined, undefined, false);
+    const partnerActivated = searchParams.get("partner_activated");
+    const partnerError = searchParams.get("partner_error");
+
+    if (partnerActivated) {
+      showPopup({
+        header: t`License activated`,
+        message: t`Your license has been activated successfully.`,
+        icon: "success",
+      });
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete("partner_activated");
+      router.replace(`?${params.toString()}`);
+    } else if (partnerError) {
+      const messages: Record<string, string> = {
+        invalid_license: t`That license key could not be found. Please contact support.`,
+        license_inactive: t`Your license is not active. Please check your account.`,
+        missing_license: t`No license key was provided. Please try activating again.`,
+      };
+      showPopup({
+        header: t`License activation failed`,
+        message:
+          messages[partnerError] ??
+          t`Something went wrong during license activation.`,
+        icon: "error",
+      });
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete("partner_error");
+      router.replace(`?${params.toString()}`);
     }
-  }, [hasLoaded, availableWorkspaces.length, openModal]);
+  }, [searchParams, showPopup, router]);
+
+  useEffect(() => {
+    if (hasLoaded && availableWorkspaces.length === 0) {
+      if (env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
+        router.push(
+          `/onboarding/select-plan?returnUrl=${encodeURIComponent(window.location.pathname)}`,
+        );
+      } else {
+        openModal("NEW_WORKSPACE", undefined, undefined, false);
+      }
+    }
+  }, [hasLoaded, availableWorkspaces.length, openModal, router]);
+
+  useEffect(() => {
+    const isCredentialsEnabled =
+      env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
+
+    if (
+      !userLoading &&
+      user &&
+      isCredentialsEnabled &&
+      user.hasMagicLinkAccount &&
+      !user.hasPassword &&
+      !sessionStorage.getItem("set_password_prompted")
+    ) {
+      sessionStorage.setItem("set_password_prompted", "1");
+      openModal("SET_PASSWORD_PROMPT");
+    }
+  }, [user, userLoading, openModal]);
 
   const isDarkMode = resolvedTheme === "dark";
 
@@ -196,6 +261,30 @@ export default function Dashboard({
           </div>
         </div>
       </div>
+
+      <Modal
+        modalSize="sm"
+        isVisible={modalContentType === "SET_PASSWORD_PROMPT"}
+      >
+        {user?.hasPassword ? (
+          <div className="p-5">
+            <h2 className="pb-4 text-base font-medium dark:text-white">{t`Password already set`}</h2>
+            <p className="mb-6 text-sm text-light-900">
+              {t`Your account already has a password. You can change it from your account settings.`}
+            </p>
+            <Button
+              variant="secondary"
+              onClick={closeModal}
+              fullWidth
+              size="lg"
+            >
+              {t`Close`}
+            </Button>
+          </div>
+        ) : (
+          <ChangePasswordFormConfirmation hasPassword={false} />
+        )}
+      </Modal>
     </>
   );
 }

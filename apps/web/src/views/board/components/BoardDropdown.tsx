@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import {
   HiEllipsisHorizontal,
@@ -29,6 +30,7 @@ export default function BoardDropdown({
   isFavorite?: boolean;
   boardName?: string;
 }) {
+  const router = useRouter();
   const { openModal } = useModal();
   const { showPopup } = usePopup();
   const { canEditBoard, canDeleteBoard, canCreateBoard, canArchiveBoard } =
@@ -47,6 +49,7 @@ export default function BoardDropdown({
             : t`The board has been unarchived.`,
           icon: "success",
         });
+        void router.push(`/boards`);
       } else if (variables.favorite !== undefined) {
         showPopup({
           header: variables.favorite

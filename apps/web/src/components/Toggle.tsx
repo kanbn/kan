@@ -7,15 +7,17 @@ const Toggle = ({
   label,
   disabled,
   showLabel = true,
+  labelPosition = "before",
 }: {
   isChecked: boolean;
   onChange: () => void;
   label: string;
   disabled?: boolean;
   showLabel?: boolean;
+  labelPosition?: "before" | "after";
 }) => (
-  <div className="mr-4 flex items-center justify-end">
-    {showLabel && (
+  <div className="flex items-center">
+    {showLabel && labelPosition === "before" && (
       <span className="mr-2 text-xs text-light-900 dark:text-dark-900">
         {label}
       </span>
@@ -38,6 +40,11 @@ const Toggle = ({
         )}
       />
     </Switch>
+    {showLabel && labelPosition === "after" && (
+      <span className="ml-2 text-xs text-light-900 dark:text-dark-900">
+        {label}
+      </span>
+    )}
   </div>
 );
 

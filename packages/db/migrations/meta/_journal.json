@@ -222,12 +222,40 @@
     {
       "idx": 31,
       "version": "7",
+      "when": 1775170588247,
+      "tag": "20260402225628_AddTeamWorkspacePlan",
+      "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1776809379931,
+      "tag": "20260421220939_AddCardNumber",
+      "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "7",
+      "when": 1778617946519,
+      "tag": "20260512203226_AddPartnerLicenseToSubscription",
+      "breakpoints": true
+    },
+    {
+      "idx": 34,
+      "version": "7",
+      "when": 1780057951781,
+      "tag": "20260529123231_DropPartnerLicenseKeyUniqueConstraint",
+      "breakpoints": true
+    },
+    {
+      "idx": 35,
+      "version": "7",
       "when": 1780578144579,
       "tag": "20260604130224_AddBoardUserTable",
       "breakpoints": true
     },
     {
-      "idx": 32,
+      "idx": 36,
       "version": "7",
       "when": 1780578264458,
       "tag": "20260604130424_DropUserBoardFavorites",

@@ -85,7 +85,7 @@ export interface RenderSuggestionsProps {
 export interface WorkspaceMember {
   publicId: string;
   user: {
-    id: string;
+    id: string | null;
     name: string | null;
     image: string | null;
   } | null;
@@ -474,7 +474,7 @@ export default function Editor({
           autolink: true,
           linkOnPaste: true,
         }),
-        Markdown,
+        Markdown.configure({ transformPastedText: true }),
         Placeholder.configure({
           placeholder: readOnly
             ? ""

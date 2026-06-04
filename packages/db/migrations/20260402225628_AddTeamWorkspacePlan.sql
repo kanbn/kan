@@ -1,0 +1,1 @@
+ALTER TYPE "public"."workspace_plan" ADD VALUE 'team' BEFORE 'pro';

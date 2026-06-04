@@ -88,7 +88,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             </button>
           )}
           {iconRight && type !== "password" && (
-            <div className="absolute right-3 top-1/2 -translate-y-1/2">
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 leading-[0]">
               {iconRight}
             </div>
           )}

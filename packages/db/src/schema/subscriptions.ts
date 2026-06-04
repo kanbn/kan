@@ -27,6 +27,8 @@ export const subscription = pgTable("subscription", {
   unlimitedSeats: boolean("unlimitedSeats").default(false).notNull(),
   trialStart: timestamp("trialStart"),
   trialEnd: timestamp("trialEnd"),
+  partnerLicenseKey: varchar("partnerLicenseKey", { length: 255 }),
+  partnerTier: integer("partnerTier"),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
   updatedAt: timestamp("updatedAt").notNull().defaultNow(),
 }).enableRLS();

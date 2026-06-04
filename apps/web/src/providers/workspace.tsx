@@ -17,9 +17,10 @@ interface Workspace {
   description: string | null | undefined;
   publicId: string;
   slug: string | undefined;
-  plan: "free" | "pro" | "enterprise" | undefined;
+  plan: "free" | "team" | "pro" | "enterprise" | undefined;
   role: "admin" | "member" | "guest";
   weekStartDay: 0 | 1 | 6;
+  cardPrefix: string;
 }
 
 const initialWorkspace: Workspace = {
@@ -27,9 +28,10 @@ const initialWorkspace: Workspace = {
   description: null,
   publicId: "",
   slug: "",
-  plan: "free",
+  plan: "free" as const,
   role: "member",
   weekStartDay: 1,
+  cardPrefix: "",
 };
 
 const initialAvailableWorkspaces: Workspace[] = [];
@@ -50,7 +52,18 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
 
   const workspacePublicId = useSearchParams().get("workspacePublicId");
 
-  const { data, isLoading } = api.workspace.all.useQuery();
+  const [pendingWorkspaceId, setPendingWorkspaceId] = useState<string | null>(
+    workspacePublicId,
+  );
+  const pollAttemptsRef = React.useRef(0);
+  const MAX_POLL_ATTEMPTS = 5;
+
+  const { data, isLoading, isFetching } = api.workspace.all.useQuery(
+    undefined,
+    {
+      refetchInterval: pendingWorkspaceId ? 2000 : false,
+    },
+  );
   const utils = api.useUtils();
 
   const switchWorkspace = (_workspace: Workspace) => {
@@ -66,7 +79,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     if (!data?.length) {
-      if (!isLoading) setHasLoaded(true);
+      if (!isLoading && !isFetching) setHasLoaded(true);
       return;
     }
 
@@ -82,6 +95,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         description: workspace.description,
         plan: workspace.plan,
         weekStartDay: workspace.weekStartDay,
+        cardPrefix: workspace.cardPrefix,
         hasLoaded: true,
       })) as Workspace[];
 
@@ -89,44 +103,72 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
     }
 
     if (storedWorkspaceId !== null) {
-      const newData = data;
-      const selectedWorkspace = newData.find(
+      const selectedWorkspace = data.find(
         ({ workspace }) => workspace.publicId === storedWorkspaceId,
       );
 
-      if (!selectedWorkspace?.workspace) return;
+      if (!selectedWorkspace?.workspace) {
+        if (pendingWorkspaceId) {
+          pollAttemptsRef.current += 1;
+          if (pollAttemptsRef.current >= MAX_POLL_ATTEMPTS) {
+            setPendingWorkspaceId(null);
+            localStorage.removeItem("workspacePublicId");
+          } else {
+            return;
+          }
+        } else {
+          // Clear stale workspacePublicId from localStorage
+          localStorage.removeItem("workspacePublicId");
+        }
+      } else {
+        pollAttemptsRef.current = 0;
+        setPendingWorkspaceId(null);
 
-      setWorkspace({
-        publicId: selectedWorkspace.workspace.publicId,
-        name: selectedWorkspace.workspace.name,
-        slug: selectedWorkspace.workspace.slug,
-        plan: selectedWorkspace.workspace.plan,
-        description: selectedWorkspace.workspace.description,
-        role: selectedWorkspace.role,
-        weekStartDay: selectedWorkspace.workspace.weekStartDay as 0 | 1 | 6,
-      });
+        setWorkspace({
+          publicId: selectedWorkspace.workspace.publicId,
+          name: selectedWorkspace.workspace.name,
+          slug: selectedWorkspace.workspace.slug,
+          plan: selectedWorkspace.workspace.plan,
+          description: selectedWorkspace.workspace.description,
+          role: selectedWorkspace.role as "admin" | "member" | "guest",
+          weekStartDay: selectedWorkspace.workspace.weekStartDay as 0 | 1 | 6,
+          cardPrefix: selectedWorkspace.workspace.cardPrefix,
+        });
 
-      if (workspacePublicId) {
-        router.push(`/boards`);
-        localStorage.setItem("workspacePublicId", workspacePublicId);
+        if (workspacePublicId) {
+          router.push(`/boards`);
+          localStorage.setItem("workspacePublicId", workspacePublicId);
+        }
+
+        setHasLoaded(true);
+        return;
       }
-    } else {
-      const primaryWorkspace = data[0]?.workspace;
-      const primaryWorkspaceRole = data[0]?.role;
-
-      if (!primaryWorkspace || !primaryWorkspaceRole) return;
-      localStorage.setItem("workspacePublicId", primaryWorkspace.publicId);
-      setWorkspace({
-        publicId: primaryWorkspace.publicId,
-        name: primaryWorkspace.name,
-        slug: primaryWorkspace.slug,
-        plan: primaryWorkspace.plan,
-        description: primaryWorkspace.description,
-        role: primaryWorkspaceRole,
-        weekStartDay: primaryWorkspace.weekStartDay as 0 | 1 | 6,
-      });
     }
-  }, [data, isLoading, workspacePublicId, router]);
+
+    const primaryWorkspace = data[0]?.workspace;
+    const primaryWorkspaceRole = data[0]?.role;
+
+    if (!primaryWorkspace || !primaryWorkspaceRole) return;
+    localStorage.setItem("workspacePublicId", primaryWorkspace.publicId);
+    setWorkspace({
+      publicId: primaryWorkspace.publicId,
+      name: primaryWorkspace.name,
+      slug: primaryWorkspace.slug,
+      plan: primaryWorkspace.plan,
+      description: primaryWorkspace.description,
+      role: primaryWorkspaceRole as "admin" | "member" | "guest",
+      weekStartDay: primaryWorkspace.weekStartDay as 0 | 1 | 6,
+      cardPrefix: primaryWorkspace.cardPrefix,
+    });
+    setHasLoaded(true);
+  }, [
+    data,
+    isLoading,
+    isFetching,
+    workspacePublicId,
+    pendingWorkspaceId,
+    router,
+  ]);
 
   return (
     <WorkspaceContext.Provider

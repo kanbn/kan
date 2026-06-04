@@ -10,12 +10,48 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { sendEmail } from "@kan/email";
 import { createLogger } from "@kan/logger";
 import { generateUID } from "@kan/shared/utils";
-
-const log = createLogger("auth");
 import { createStripeClient } from "@kan/stripe";
 
 import { socialProvidersPlugin } from "./providers";
 import { triggerWorkflow } from "./utils";
+
+const log = createLogger("auth");
+
+async function cancelWorkspaceAccess(
+  db: dbClient,
+  workspacePublicId: string,
+): Promise<void> {
+  const workspace = await workspaceRepo.getByPublicId(db, workspacePublicId);
+
+  if (!workspace) return;
+
+  const preserveUserId = await memberRepo.getPreservableMemberId(
+    db,
+    workspace.id,
+    workspace.createdBy ?? null,
+  );
+
+  let newSlug = workspace.publicId;
+  if (workspace.slug !== workspace.publicId) {
+    const isPublicIdAvailable = await workspaceRepo.isWorkspaceSlugAvailable(
+      db,
+      workspace.publicId,
+    );
+    if (!isPublicIdAvailable) {
+      newSlug = generateUID();
+    }
+  }
+
+  await Promise.all([
+    preserveUserId
+      ? memberRepo.pauseMembersExcept(db, workspace.id, preserveUserId)
+      : memberRepo.pauseAllMembers(db, workspace.id),
+    workspaceRepo.update(db, workspacePublicId, {
+      plan: "free",
+      slug: newSlug,
+    }),
+  ]);
+}
 
 export function createPlugins(db: dbClient) {
   return [
@@ -104,7 +140,10 @@ export function createPlugins(db: dbClient) {
                       unlimitedSeats: true,
                     },
                   );
-                  log.info({ subscriptionId: stripeSubscription.id }, "Pro subscription activated with unlimited seats");
+                  log.info(
+                    { subscriptionId: stripeSubscription.id },
+                    "Pro subscription activated with unlimited seats",
+                  );
 
                   const workspace = await workspaceRepo.getByPublicId(
                     db,
@@ -126,35 +165,9 @@ export function createPlugins(db: dbClient) {
                   subscription,
                   cancellationDetails,
                 );
-
-                // for cancelled subscriptions, we need to pause all members and set their workspace plan to free
-                const workspace = await workspaceRepo.getByPublicId(
-                  db,
-                  subscription.referenceId,
-                );
-
-                if (workspace?.id) {
-                  await memberRepo.pauseAllMembers(db, workspace.id);
-
-                  // Reset slug to publicId, or generate a UID if publicId is taken
-                  let newSlug = workspace.publicId;
-
-                  if (workspace.slug !== workspace.publicId) {
-                    const isPublicIdAvailable =
-                      await workspaceRepo.isWorkspaceSlugAvailable(
-                        db,
-                        workspace.publicId,
-                      );
-                    if (!isPublicIdAvailable) {
-                      newSlug = generateUID();
-                    }
-                  }
-
-                  await workspaceRepo.update(db, subscription.referenceId, {
-                    plan: "free",
-                    slug: newSlug,
-                  });
-                }
+              },
+              onSubscriptionDeleted: async ({ subscription }) => {
+                await cancelWorkspaceAccess(db, subscription.referenceId);
               },
               onSubscriptionUpdate: async ({ subscription }) => {
                 await triggerWorkflow(db, "subscription-updated", subscription);
@@ -170,7 +183,7 @@ export function createPlugins(db: dbClient) {
         if (authorization?.startsWith("Bearer ")) {
           return authorization.slice(7);
         }
-        return ctx.headers?.get("x-api-key") ?? undefined;
+        return ctx.headers?.get("x-api-key") ?? null;
       },
       rateLimit: {
         enabled: true,
@@ -183,7 +196,10 @@ export function createPlugins(db: dbClient) {
       sendMagicLink: async ({ email, url }) => {
         try {
           const decodedUrl = decodeURIComponent(url);
-          log.info({ email, isInvite: decodedUrl.includes("type=invite") }, "Sending magic link");
+          log.info(
+            { email, isInvite: decodedUrl.includes("type=invite") },
+            "Sending magic link",
+          );
           if (decodedUrl.includes("type=invite")) {
             let inviterName = "";
             let workspaceName = "";

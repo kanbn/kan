@@ -16,6 +16,13 @@ import {
 } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import {
+  boardListItemSchema,
+  boardDetailSchema,
+  boardBySlugSchema,
+  boardCreateResponseSchema,
+  boardUpdateResponseSchema,
+} from "../schemas";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 
 export const boardRouter = createTRPCRouter({
@@ -37,9 +44,7 @@ export const boardRouter = createTRPCRouter({
         archived: z.boolean().optional(),
       }),
     )
-    .output(
-      z.custom<Awaited<ReturnType<typeof boardRepo.getAllByWorkspaceId>>>(),
-    )
+    .output(z.array(boardListItemSchema))
     .query(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -106,7 +111,7 @@ export const boardRouter = createTRPCRouter({
         type: z.enum(["regular", "template"]).optional(),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof boardRepo.getByPublicId>>>())
+    .output(boardDetailSchema)
     .query(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -246,7 +251,7 @@ export const boardRouter = createTRPCRouter({
           .optional(),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof boardRepo.getBySlug>>>())
+    .output(boardBySlugSchema.nullable())
     .query(async ({ ctx, input }) => {
       const workspace = await workspaceRepo.getBySlugWithBoards(
         ctx.db,
@@ -299,7 +304,7 @@ export const boardRouter = createTRPCRouter({
         sourceBoardPublicId: z.string().min(12).optional(),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof boardRepo.create>>>())
+    .output(boardCreateResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -469,7 +474,7 @@ export const boardRouter = createTRPCRouter({
         isArchived: z.boolean().optional(),
       }),
     )
-    .output(z.object({ success: z.boolean() }).or(z.custom<Awaited<ReturnType<typeof boardRepo.update>>>()))
+    .output(boardUpdateResponseSchema)
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 

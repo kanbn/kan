@@ -24,6 +24,8 @@ export function UpgradeToProConfirmation({
         body: JSON.stringify({
           ...(entityId && { slug: entityId }),
           workspacePublicId: workspacePublicId,
+          plan: "pro",
+          billing: "monthly",
           cancelUrl: "/settings",
           successUrl: "/settings",
         }),

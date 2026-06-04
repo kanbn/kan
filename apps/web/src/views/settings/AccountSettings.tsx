@@ -85,17 +85,19 @@ export default function AccountSettings() {
         {isCredentialsEnabled && (
           <div className="mb-8 border-t border-light-300 dark:border-dark-300">
             <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-              {t`Change Password`}
+              {data?.hasPassword ? t`Change Password` : t`Set Password`}
             </h2>
             <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-              {t`You are about to change your password.`}
+              {data?.hasPassword
+                ? t`You are about to change your password.`
+                : t`Set a password to enable password-based login.`}
             </p>
             <div className="mt-4">
               <Button
                 variant="secondary"
                 onClick={() => openModal("CHANGE_PASSWORD")}
               >
-                {t`Change Password`}
+                {data?.hasPassword ? t`Change Password` : t`Set Password`}
               </Button>
             </div>
           </div>
@@ -113,7 +115,7 @@ export default function AccountSettings() {
         modalSize="sm"
         isVisible={isOpen && modalContentType === "CHANGE_PASSWORD"}
       >
-        <ChangePasswordFormConfirmation />
+        <ChangePasswordFormConfirmation hasPassword={data?.hasPassword ?? false} />
       </Modal>
 
       {/* Global modals */}
