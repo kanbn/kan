@@ -4,12 +4,14 @@ import {
   count,
   desc,
   eq,
+  gt,
   gte,
   inArray,
   isNotNull,
   isNull,
   lt,
   or,
+  sql,
 } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
@@ -26,10 +28,54 @@ import {
   comments,
   labels,
   lists,
-  userBoardFavorites,
+  boardUsers,
   workspaceMembers,
 } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
+
+// Transaction handle type (the client passed to db.transaction callbacks).
+// Used by helpers that must run inside an existing transaction.
+type dbTx = Parameters<Parameters<dbClient["transaction"]>[0]>[0];
+
+/**
+ * Seed a board_user row for every active workspace member for a newly created
+ * board. The new board is appended to the end of each user's non-favourite
+ * group (within the board's type + archive scope).
+ */
+const seedBoardUsersForBoard = async (
+  db: dbTx,
+  args: { boardId: number; workspaceId: number },
+) => {
+  await db.execute(sql`
+    INSERT INTO "board_user" ("userId", "boardId", "position", "isFavourite", "createdAt")
+    SELECT
+      wm."userId",
+      ${args.boardId},
+      COALESCE(
+        (
+          SELECT MAX(bu."position") + 1
+          FROM "board_user" bu
+          JOIN "board" b ON b."id" = bu."boardId"
+          WHERE bu."userId" = wm."userId"
+            AND b."workspaceId" = ${args.workspaceId}
+            AND b."type" = (SELECT "type" FROM "board" WHERE "id" = ${args.boardId})
+            AND b."isArchived" = (SELECT "isArchived" FROM "board" WHERE "id" = ${args.boardId})
+            AND bu."isFavourite" = false
+            AND b."deletedAt" IS NULL
+            AND bu."boardId" != ${args.boardId}
+        ),
+        0
+      ),
+      false,
+      now()
+    FROM "workspace_members" wm
+    WHERE wm."workspaceId" = ${args.workspaceId}
+      AND wm."userId" IS NOT NULL
+      AND wm."deletedAt" IS NULL
+      AND wm."status" = 'active'
+    ON CONFLICT ("userId", "boardId") DO NOTHING
+  `);
+};
 
 export const getCount = async (db: dbClient) => {
   const result = await db
@@ -52,10 +98,11 @@ export const getAllByWorkspaceId = async (
       name: true,
     },
     with: {
-      userFavorites: {
-        where: eq(userBoardFavorites.userId, userId),
+      boardUsers: {
+        where: eq(boardUsers.userId, userId),
         columns: {
-          userId: true,
+          position: true,
+          isFavourite: true,
         },
       },
       lists: {
@@ -82,19 +129,20 @@ export const getAllByWorkspaceId = async (
     ),
   });
 
-  // Transform and sort: favorites first, then alphabetically
+  // Transform and sort: favourites first, then by per-user position
   return boardsData
     .map((board) => ({
       ...board,
-      favorite: board.userFavorites.length > 0,
-      userFavorites: undefined,
+      favorite: board.boardUsers[0]?.isFavourite ?? false,
+      position: board.boardUsers[0]?.position ?? 0,
+      boardUsers: undefined,
     }))
     .sort((a, b) => {
-      // Sort favorites first
+      // Sort favourites first
       if (a.favorite && !b.favorite) return -1;
       if (!a.favorite && b.favorite) return 1;
-      // Then alphabetically by name
-      return a.name.localeCompare(b.name);
+      // Then by per-user position
+      return a.position - b.position;
     });
 };
 
@@ -200,10 +248,10 @@ export const getByPublicId = async (
       isArchived: true,
     },
     with: {
-      userFavorites: {
-        where: eq(userBoardFavorites.userId, userId),
+      boardUsers: {
+        where: eq(boardUsers.userId, userId),
         columns: {
-          userId: true,
+          isFavourite: true,
         },
       },
       workspace: {
@@ -359,8 +407,8 @@ export const getByPublicId = async (
 
   const formattedResult = {
     ...board,
-    favorite: board.userFavorites.length > 0,
-    userFavorites: undefined,
+    favorite: board.boardUsers[0]?.isFavourite ?? false,
+    boardUsers: undefined,
     lists: board.lists.map((list) => ({
       ...list,
       cards: list.cards.map((card) => ({
@@ -603,25 +651,34 @@ export const create = async (
     sourceBoardId?: number;
   },
 ) => {
-  const [result] = await db
-    .insert(boards)
-    .values({
-      publicId: boardInput.publicId ?? generateUID(),
-      name: boardInput.name,
-      createdBy: boardInput.createdBy,
-      workspaceId: boardInput.workspaceId,
-      importId: boardInput.importId,
-      slug: boardInput.slug,
-      type: boardInput.type ?? "regular",
-      sourceBoardId: boardInput.sourceBoardId,
-    })
-    .returning({
-      id: boards.id,
-      publicId: boards.publicId,
-      name: boards.name,
-    });
+  return db.transaction(async (tx) => {
+    const [result] = await tx
+      .insert(boards)
+      .values({
+        publicId: boardInput.publicId ?? generateUID(),
+        name: boardInput.name,
+        createdBy: boardInput.createdBy,
+        workspaceId: boardInput.workspaceId,
+        importId: boardInput.importId,
+        slug: boardInput.slug,
+        type: boardInput.type ?? "regular",
+        sourceBoardId: boardInput.sourceBoardId,
+      })
+      .returning({
+        id: boards.id,
+        publicId: boards.publicId,
+        name: boards.name,
+      });
 
-  return result;
+    if (result) {
+      await seedBoardUsersForBoard(tx, {
+        boardId: result.id,
+        workspaceId: boardInput.workspaceId,
+      });
+    }
+
+    return result;
+  });
 };
 
 export const update = async (
@@ -660,16 +717,51 @@ export const softDelete = async (
     deletedBy: string;
   },
 ) => {
-  const [result] = await db
-    .update(boards)
-    .set({ deletedAt: args.deletedAt, deletedBy: args.deletedBy })
-    .where(and(eq(boards.id, args.boardId), isNull(boards.deletedAt)))
-    .returning({
-      publicId: boards.publicId,
-      name: boards.name,
-    });
+  return db.transaction(async (tx) => {
+    const [result] = await tx
+      .update(boards)
+      .set({ deletedAt: args.deletedAt, deletedBy: args.deletedBy })
+      .where(and(eq(boards.id, args.boardId), isNull(boards.deletedAt)))
+      .returning({
+        publicId: boards.publicId,
+        name: boards.name,
+        workspaceId: boards.workspaceId,
+        type: boards.type,
+        isArchived: boards.isArchived,
+      });
 
-  return result;
+    if (result) {
+      // The board is now soft-deleted (deletedAt IS NOT NULL) so it is excluded
+      // from the compaction below. Renumber the remaining boards' positions
+      // (per user, per favourite group) to keep them contiguous from 0.
+      await tx.execute(sql`
+        WITH ordered AS (
+          SELECT bu."userId", bu."boardId",
+            ROW_NUMBER() OVER (
+              PARTITION BY bu."userId", bu."isFavourite"
+              ORDER BY bu."position"
+            ) - 1 AS new_position
+          FROM "board_user" bu
+          JOIN "board" b ON b."id" = bu."boardId"
+          WHERE b."workspaceId" = ${result.workspaceId}
+            AND b."type" = ${result.type}
+            AND b."isArchived" = ${result.isArchived}
+            AND b."deletedAt" IS NULL
+            AND bu."userId" IN (
+              SELECT "userId" FROM "board_user" WHERE "boardId" = ${args.boardId}
+            )
+        )
+        UPDATE "board_user" bu
+        SET "position" = o.new_position
+        FROM ordered o
+        WHERE bu."userId" = o."userId" AND bu."boardId" = o."boardId"
+      `);
+    }
+
+    return result
+      ? { publicId: result.publicId, name: result.name }
+      : undefined;
+  });
 };
 
 export const hardDelete = async (db: dbClient, workspaceId: number) => {
@@ -711,6 +803,8 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
       id: true,
       workspaceId: true,
       createdBy: true,
+      type: true,
+      isArchived: true,
     },
     where: eq(boards.publicId, boardPublicId),
   });
@@ -797,6 +891,11 @@ export const createFromSnapshot = async (
       });
 
     if (!newBoard) throw new Error("Failed to create board");
+
+    await seedBoardUsersForBoard(tx, {
+      boardId: newBoard.id,
+      workspaceId: args.workspaceId,
+    });
 
     // Labels
     const srcLabels = args.source.labels;
@@ -963,33 +1062,295 @@ export const createFromSnapshot = async (
   });
 };
 
-export const addUserFavorite = async (
+/**
+ * Reorder a board to a new position within the current user's favourite group
+ * (favourites and non-favourites keep separate position sequences, scoped per
+ * user, board type and archive status).
+ */
+export const reorder = async (
   db: dbClient,
-  userId: string,
-  boardId: number,
+  args: {
+    userId: string;
+    boardPublicId: string;
+    newPosition: number;
+  },
 ) => {
-  return db
-    .insert(userBoardFavorites)
-    .values({
-      userId,
-      boardId,
-    })
-    .onConflictDoNothing()
-    .returning();
+  return db.transaction(async (tx) => {
+    const board = await tx.query.boards.findFirst({
+      columns: {
+        id: true,
+        workspaceId: true,
+        type: true,
+        isArchived: true,
+      },
+      where: eq(boards.publicId, args.boardPublicId),
+    });
+
+    if (!board)
+      throw new Error(`Board not found for public ID ${args.boardPublicId}`);
+
+    const boardUser = await tx.query.boardUsers.findFirst({
+      columns: { position: true, isFavourite: true },
+      where: and(
+        eq(boardUsers.userId, args.userId),
+        eq(boardUsers.boardId, board.id),
+      ),
+    });
+
+    if (!boardUser) throw new Error(`board_user record not found`);
+
+    const oldPosition = boardUser.position;
+    const isFavourite = boardUser.isFavourite;
+
+    await tx.execute(sql`
+      WITH scoped AS (
+        SELECT bu."boardId"
+        FROM "board_user" bu
+        JOIN "board" b ON b."id" = bu."boardId"
+        WHERE bu."userId" = ${args.userId}
+          AND b."workspaceId" = ${board.workspaceId}
+          AND b."type" = ${board.type}
+          AND b."isArchived" = ${board.isArchived}
+          AND bu."isFavourite" = ${isFavourite}
+          AND b."deletedAt" IS NULL
+      )
+      UPDATE "board_user" bu
+      SET "position" =
+        CASE
+          WHEN bu."boardId" = ${board.id} THEN ${args.newPosition}
+          WHEN ${oldPosition} < ${args.newPosition}
+            AND bu."position" > ${oldPosition}
+            AND bu."position" <= ${args.newPosition}
+            THEN bu."position" - 1
+          WHEN ${oldPosition} > ${args.newPosition}
+            AND bu."position" >= ${args.newPosition}
+            AND bu."position" < ${oldPosition}
+            THEN bu."position" + 1
+          ELSE bu."position"
+        END
+      WHERE bu."userId" = ${args.userId}
+        AND bu."boardId" IN (SELECT "boardId" FROM scoped)
+    `);
+
+    // Defensive auto-heal: if any duplicate positions slipped in, compact.
+    const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
+    const duplicates = await tx
+      .select({ position: boardUsers.position, count: countExpr })
+      .from(boardUsers)
+      .innerJoin(boards, eq(boardUsers.boardId, boards.id))
+      .where(
+        and(
+          eq(boardUsers.userId, args.userId),
+          eq(boards.workspaceId, board.workspaceId),
+          eq(boards.type, board.type),
+          eq(boards.isArchived, board.isArchived),
+          eq(boardUsers.isFavourite, isFavourite),
+          isNull(boards.deletedAt),
+        ),
+      )
+      .groupBy(boardUsers.position)
+      .having(gt(countExpr, 1));
+
+    if (duplicates.length > 0) {
+      await tx.execute(sql`
+        WITH ordered AS (
+          SELECT bu."userId", bu."boardId",
+            ROW_NUMBER() OVER (ORDER BY bu."position", bu."boardId") - 1 AS new_position
+          FROM "board_user" bu
+          JOIN "board" b ON b."id" = bu."boardId"
+          WHERE bu."userId" = ${args.userId}
+            AND b."workspaceId" = ${board.workspaceId}
+            AND b."type" = ${board.type}
+            AND b."isArchived" = ${board.isArchived}
+            AND bu."isFavourite" = ${isFavourite}
+            AND b."deletedAt" IS NULL
+        )
+        UPDATE "board_user" bu
+        SET "position" = o.new_position
+        FROM ordered o
+        WHERE bu."userId" = o."userId" AND bu."boardId" = o."boardId"
+      `);
+    }
+
+    const updatedBoard = await tx.query.boards.findFirst({
+      columns: { publicId: true, name: true },
+      where: eq(boards.publicId, args.boardPublicId),
+    });
+
+    return updatedBoard;
+  });
 };
 
-export const removeUserFavorite = async (
+/**
+ * Toggle a board's favourite status for a user. The board moves to the end of
+ * the target favourite group and the group it left is compacted.
+ */
+export const setFavourite = async (
   db: dbClient,
-  userId: string,
-  boardId: number,
+  args: {
+    userId: string;
+    boardId: number;
+    isFavourite: boolean;
+    workspaceId: number;
+    boardType: "regular" | "template";
+    isArchived: boolean;
+  },
 ) => {
-  return db
-    .delete(userBoardFavorites)
-    .where(
-      and(
-        eq(userBoardFavorites.userId, userId),
-        eq(userBoardFavorites.boardId, boardId)
+  return db.transaction(async (tx) => {
+    const targetRows = await tx
+      .select({ position: boardUsers.position })
+      .from(boardUsers)
+      .innerJoin(boards, eq(boardUsers.boardId, boards.id))
+      .where(
+        and(
+          eq(boardUsers.userId, args.userId),
+          eq(boards.workspaceId, args.workspaceId),
+          eq(boards.type, args.boardType),
+          eq(boards.isArchived, args.isArchived),
+          eq(boardUsers.isFavourite, args.isFavourite),
+          isNull(boards.deletedAt),
+        ),
+      );
+
+    const maxPosition = targetRows.reduce(
+      (max, row) => Math.max(max, row.position),
+      -1,
+    );
+
+    await tx
+      .insert(boardUsers)
+      .values({
+        userId: args.userId,
+        boardId: args.boardId,
+        position: maxPosition + 1,
+        isFavourite: args.isFavourite,
+      })
+      .onConflictDoUpdate({
+        target: [boardUsers.userId, boardUsers.boardId],
+        set: { isFavourite: args.isFavourite, position: maxPosition + 1 },
+      });
+
+    // Compact the group the board just left.
+    await tx.execute(sql`
+      WITH ordered AS (
+        SELECT bu."userId", bu."boardId",
+          ROW_NUMBER() OVER (ORDER BY bu."position") - 1 AS new_position
+        FROM "board_user" bu
+        JOIN "board" b ON b."id" = bu."boardId"
+        WHERE bu."userId" = ${args.userId}
+          AND b."workspaceId" = ${args.workspaceId}
+          AND b."type" = ${args.boardType}
+          AND b."isArchived" = ${args.isArchived}
+          AND bu."isFavourite" = ${!args.isFavourite}
+          AND b."deletedAt" IS NULL
       )
-    )
-    .returning();
+      UPDATE "board_user" bu
+      SET "position" = o.new_position
+      FROM ordered o
+      WHERE bu."userId" = o."userId" AND bu."boardId" = o."boardId"
+    `);
+
+    return { success: true };
+  });
+};
+
+/**
+ * Seed board_user rows for a user who has just joined a workspace, one per
+ * non-deleted board, with sequential positions per board type + archive status.
+ */
+export const createBoardUsersForMember = async (
+  db: dbClient,
+  args: {
+    userId: string;
+    workspaceId: number;
+  },
+) => {
+  await db.execute(sql`
+    INSERT INTO "board_user" ("userId", "boardId", "position", "isFavourite", "createdAt")
+    SELECT
+      ${args.userId},
+      b."id",
+      (ROW_NUMBER() OVER (
+        PARTITION BY b."type", b."isArchived"
+        ORDER BY b."createdAt", b."id"
+      ) - 1)::integer,
+      false,
+      now()
+    FROM "board" b
+    WHERE b."workspaceId" = ${args.workspaceId}
+      AND b."deletedAt" IS NULL
+    ON CONFLICT ("userId", "boardId") DO NOTHING
+  `);
+};
+
+/**
+ * After a board's archive status flips, move it to the end of the target
+ * archive group (per user, preserving each user's favourite flag) and compact
+ * the archive group it left. The board's isArchived column must already reflect
+ * the new value when this runs.
+ */
+export const reassignPositionsOnArchiveToggle = async (
+  db: dbClient,
+  args: {
+    boardId: number;
+    workspaceId: number;
+    boardType: "regular" | "template";
+    newIsArchived: boolean;
+  },
+) => {
+  return db.transaction(async (tx) => {
+    // 1. Place the toggled board at the end of each user's target group.
+    await tx.execute(sql`
+      UPDATE "board_user" bu
+      SET "position" = sub.new_position
+      FROM (
+        SELECT
+          bu2."userId",
+          COALESCE(
+            (
+              SELECT MAX(bu3."position") + 1
+              FROM "board_user" bu3
+              JOIN "board" b3 ON b3."id" = bu3."boardId"
+              WHERE bu3."userId" = bu2."userId"
+                AND b3."workspaceId" = ${args.workspaceId}
+                AND b3."type" = ${args.boardType}
+                AND b3."isArchived" = ${args.newIsArchived}
+                AND bu3."isFavourite" = bu2."isFavourite"
+                AND b3."deletedAt" IS NULL
+                AND bu3."boardId" != ${args.boardId}
+            ),
+            0
+          ) AS new_position
+        FROM "board_user" bu2
+        WHERE bu2."boardId" = ${args.boardId}
+      ) sub
+      WHERE bu."userId" = sub."userId" AND bu."boardId" = ${args.boardId}
+    `);
+
+    // 2. Compact the archive group the board just left.
+    await tx.execute(sql`
+      WITH ordered AS (
+        SELECT bu."userId", bu."boardId",
+          ROW_NUMBER() OVER (
+            PARTITION BY bu."userId", bu."isFavourite"
+            ORDER BY bu."position"
+          ) - 1 AS new_position
+        FROM "board_user" bu
+        JOIN "board" b ON b."id" = bu."boardId"
+        WHERE b."workspaceId" = ${args.workspaceId}
+          AND b."type" = ${args.boardType}
+          AND b."isArchived" = ${!args.newIsArchived}
+          AND b."deletedAt" IS NULL
+          AND bu."userId" IN (
+            SELECT "userId" FROM "board_user" WHERE "boardId" = ${args.boardId}
+          )
+      )
+      UPDATE "board_user" bu
+      SET "position" = o.new_position
+      FROM ordered o
+      WHERE bu."userId" = o."userId" AND bu."boardId" = o."boardId"
+    `);
+
+    return { success: true };
+  });
 };

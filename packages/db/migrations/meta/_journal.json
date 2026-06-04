@@ -218,6 +218,20 @@
       "when": 1773212242728,
       "tag": "20260311065722_AddWeekStartDay",
       "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1780578144579,
+      "tag": "20260604130224_AddBoardUserTable",
+      "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1780578264458,
+      "tag": "20260604130424_DropUserBoardFavorites",
+      "breakpoints": true
     }
   ]
 }
