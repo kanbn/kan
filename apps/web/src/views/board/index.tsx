@@ -36,7 +36,7 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
-import { formatToArray } from "~/utils/helpers";
+import { formatToArray, isLightHexColor } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import BoardDropdown from "./components/BoardDropdown";
 import Card from "./components/Card";
@@ -59,18 +59,6 @@ import { UpdateBoardSlugForm } from "./components/UpdateBoardSlugForm";
 import VisibilityButton from "./components/VisibilityButton";
 
 type PublicListId = string;
-
-const isLightHexColor = (color: string | null | undefined) => {
-  if (!color || !/^#[0-9a-fA-F]{6}$/.test(color)) return null;
-
-  const red = parseInt(color.slice(1, 3), 16);
-  const green = parseInt(color.slice(3, 5), 16);
-  const blue = parseInt(color.slice(5, 7), 16);
-
-  const luminance = (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
-
-  return luminance > 0.6;
-};
 
 export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const params = useParams() as { boardId: string | string[] } | null;

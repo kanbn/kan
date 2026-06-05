@@ -17,7 +17,7 @@ import { useDragToScroll } from "~/hooks/useDragToScroll";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
-import { formatToArray } from "~/utils/helpers";
+import { formatToArray, isLightHexColor } from "~/utils/helpers";
 import Card from "~/views/board/components/Card";
 import Filters from "~/views/board/components/Filters";
 import { CardModal } from "./CardModal";
@@ -70,6 +70,18 @@ export default function PublicBoardView() {
       placeholderData: keepPreviousData,
     },
   );
+
+  const hasLightBoardBackground = isLightHexColor(data?.backgroundColor);
+  const boardTitleClassName = data?.backgroundColor
+    ? hasLightBoardBackground
+      ? "text-light-1000"
+      : "text-dark-1000"
+    : "text-neutral-900 dark:text-dark-1000";
+  const emptyStateTitleClassName = data?.backgroundColor
+    ? hasLightBoardBackground
+      ? "text-light-1000"
+      : "text-dark-1000"
+    : "text-light-1000 dark:text-dark-950";
 
   const handleCopyBoardLink = async () => {
     try {
@@ -145,7 +157,9 @@ export default function PublicBoardView() {
                 <div className="h-[2.3rem] w-[150px] animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-100" />
               </div>
             ) : (
-              <h1 className="font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000 sm:text-[1.2rem]">
+              <h1
+                className={`font-bold leading-[2.3rem] tracking-tight focus:ring-0 focus-visible:outline-none sm:text-[1.2rem] ${boardTitleClassName}`}
+              >
                 {data?.name}
               </h1>
             )}
@@ -182,7 +196,9 @@ export default function PublicBoardView() {
               <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
                 <div className="flex flex-col items-center">
                   <HiOutlineLockClosed className="h-10 w-10 text-light-800 dark:text-dark-800" />
-                  <p className="mb-2 mt-4 text-[14px] font-bold text-light-1000 dark:text-dark-950">
+                  <p
+                    className={`mb-2 mt-4 text-[14px] font-bold ${emptyStateTitleClassName}`}
+                  >
                     {t`Board not found`}
                   </p>
                   <p className="text-[14px] text-light-900 dark:text-dark-900">

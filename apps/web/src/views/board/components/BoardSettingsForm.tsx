@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { HiXMark } from "react-icons/hi2";
+import { HiXMark, HiCheck } from "react-icons/hi2";
 import { z } from "zod";
 
 import Button from "~/components/Button";
@@ -11,7 +11,9 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
-const INITIAL_BOARD_BACKGROUND_COLOR = "#0d9488";
+import { colours } from "@kan/shared/constants";
+
+const INITIAL_BOARD_BACKGROUND_COLOR = colours.find((colour) => colour.name === "Teal")?.code;
 
 interface QueryParams {
   boardPublicId: string;
@@ -68,10 +70,10 @@ export function BoardSettingsForm({
     },
   });
 
-  const onSubmit = (data: FormValues) => {
+  const setColour = (colourCode: string | null) => {
     updateBoard.mutate({
       boardPublicId,
-      backgroundColor: data.backgroundColor,
+      backgroundColor: colourCode,
     });
   };
 
@@ -83,15 +85,15 @@ export function BoardSettingsForm({
   };
 
   useEffect(() => {
-    const nameElement: HTMLElement | null =
+    const backgroundColorElement: HTMLElement | null =
       document.querySelector<HTMLElement>("#board-background-color");
-    if (nameElement) nameElement.focus();
+    if (backgroundColorElement) backgroundColorElement.focus();
   }, []);
 
-  const selectedColor = watch("backgroundColor");
+  const selectedColour = INITIAL_BOARD_BACKGROUND_COLOR;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form>
       <div className="px-5 pt-5">
         <div className="flex w-full items-center justify-between pb-4">
           <h2 className="text-sm font-bold text-neutral-900 dark:text-dark-1000">
@@ -112,38 +114,41 @@ export function BoardSettingsForm({
         <div className="mb-3 text-sm text-light-900 dark:text-dark-900">
           {t`Background color`}
         </div>
-        <div className="flex items-center gap-3">
-          <Input
-            id="board-background-color"
-            type="color"
-            {...register("backgroundColor")}
-            onChange={(e) => {
-              setValue("backgroundColor", e.target.value, {
-                shouldDirty: true,
-                shouldValidate: true,
-              });
-            }}
-            className="h-10 w-14 cursor-pointer rounded-md border border-light-600 p-1 dark:border-dark-600"
-          />
-          <div
-            className="h-10 flex-1 rounded-md border border-light-400 dark:border-dark-400"
-            style={{ backgroundColor: selectedColor }}
-          />
+        <div className="flex flex-wrap gap-2">
+          {/* None / clear */}
+          <button
+            type="button"
+            aria-label={t`No cover colour`}
+            onClick={() => setColour(null)}
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-light-400 bg-light-50 text-light-900 hover:border-light-600 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-900 dark:hover:border-dark-600"
+          >
+            {selectedColour === null ? (
+              <HiCheck className="h-4 w-4" />
+            ) : (
+              <HiXMark className="h-4 w-4" />
+            )}
+          </button>
+          {colours.map((colour) => {
+            const isSelected = selectedColour === colour.code;
+            return (
+              <button
+                key={colour.code}
+                type="button"
+                aria-label={colour.name}
+                title={colour.name}
+                onClick={() => setColour(colour.code)}
+                style={{ backgroundColor: colour.code }}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-black/10 hover:ring-2 hover:ring-light-600 dark:border-white/10 dark:hover:ring-dark-600"
+              >
+                {isSelected && <HiCheck className="h-4 w-4 text-white" />}
+              </button>
+            );
+          })}
         </div>
-        {errors.backgroundColor?.message && (
-          <p className="mt-2 text-sm text-red-500">{errors.backgroundColor.message}</p>
-        )}
+      
       </div>
       <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
         <div className="flex items-center gap-2">
-          <Button
-            type="button"
-            variant="secondary"
-            isLoading={updateBoard.isPending}
-            onClick={resetBackground}
-          >
-            {t`Reset`}
-          </Button>
           <Button
             type="submit"
             isLoading={updateBoard.isPending}
