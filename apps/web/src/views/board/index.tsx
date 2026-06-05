@@ -41,6 +41,7 @@ import BoardDropdown from "./components/BoardDropdown";
 import Card from "./components/Card";
 import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
 import { CardContextDuplicateModal } from "./components/CardContextDuplicateModal";
+import { CardContextCoverColourModal } from "./components/CardContextCoverColourModal";
 import { CardContextLabelsModal } from "./components/CardContextLabelsModal";
 import { CardContextMembersModal } from "./components/CardContextMembersModal";
 import { CardContextMenu } from "./components/CardContextMenu";
@@ -337,7 +338,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           ? "CARD_CONTEXT_MOVE_LIST"
           : action === "labels"
             ? "CARD_CONTEXT_LABELS"
-            : "CARD_CONTEXT_DUE_DATE";
+            : action === "cover"
+              ? "CARD_CONTEXT_COVER"
+              : "CARD_CONTEXT_DUE_DATE";
     openModal(modalType, cardPublicId);
   };
 
@@ -495,6 +498,12 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           isVisible={isOpen && modalContentType === "CARD_CONTEXT_LABELS"}
         >
           <CardContextLabelsModal />
+        </Modal>
+        <Modal
+          modalSize="sm"
+          isVisible={isOpen && modalContentType === "CARD_CONTEXT_COVER"}
+        >
+          <CardContextCoverColourModal />
         </Modal>
         <Modal
           modalSize="sm"
@@ -761,6 +770,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                               card.cardNumber != null
                                                 ? `${boardData.workspace.cardPrefix}-${card.cardNumber}`
                                                 : null
+                                            }
+                                            coverColourCode={
+                                              card.coverColourCode ?? null
                                             }
                                             labels={card.labels}
                                             members={card.members}
