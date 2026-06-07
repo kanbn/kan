@@ -2,8 +2,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { HiXMark, HiCheck } from "react-icons/hi2";
+import { HiCheck, HiXMark } from "react-icons/hi2";
 import { z } from "zod";
+
+import { colours } from "@kan/shared/constants";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
@@ -11,9 +13,8 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
-import { colours } from "@kan/shared/constants";
-
-const INITIAL_BOARD_BACKGROUND_COLOR = colours.find((colour) => colour.name === "Teal")?.code;
+const INITIAL_BOARD_BACKGROUND_COLOR =
+  colours.find((colour) => colour.name === "Teal")?.code ?? "#000000";
 
 interface QueryParams {
   boardPublicId: string;
@@ -31,6 +32,7 @@ export function BoardSettingsForm({
   backgroundColor: string | null;
   queryParams: QueryParams;
 }) {
+  debugger;
   const { closeModal } = useModal();
   const { showPopup } = usePopup();
   const utils = api.useUtils();
@@ -50,10 +52,17 @@ export function BoardSettingsForm({
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     values: {
-      backgroundColor: backgroundColor ?? INITIAL_BOARD_BACKGROUND_COLOR,
+      backgroundColor: backgroundColor ?? "",
     },
     mode: "onChange",
   });
+
+  const selectedColour = backgroundColor;
+
+  const { data: board, isLoading } = api.board.byId.useQuery(
+    { boardPublicId: boardPublicId ?? "" },
+    { enabled: !!boardPublicId && boardPublicId.length >= 12 },
+  );
 
   const updateBoard = api.board.update.useMutation({
     onError: () => {
@@ -64,7 +73,6 @@ export function BoardSettingsForm({
       });
     },
     onSettled: async () => {
-      closeModal();
       await utils.board.byId.invalidate(queryParams);
       await utils.board.bySlug.invalidate();
     },
@@ -90,11 +98,9 @@ export function BoardSettingsForm({
     if (backgroundColorElement) backgroundColorElement.focus();
   }, []);
 
-  const selectedColour = INITIAL_BOARD_BACKGROUND_COLOR;
-
   return (
     <form>
-      <div className="px-5 pt-5">
+      <div className="p-5">
         <div className="flex w-full items-center justify-between pb-4">
           <h2 className="text-sm font-bold text-neutral-900 dark:text-dark-1000">
             {t`Board settings`}
@@ -144,18 +150,6 @@ export function BoardSettingsForm({
               </button>
             );
           })}
-        </div>
-      
-      </div>
-      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
-        <div className="flex items-center gap-2">
-          <Button
-            type="submit"
-            isLoading={updateBoard.isPending}
-            disabled={!isDirty || updateBoard.isPending}
-          >
-            {t`Save`}
-          </Button>
         </div>
       </div>
     </form>
