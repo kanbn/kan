@@ -11,6 +11,7 @@ export const boardListItemSchema = z.object({
   publicId: z.string(),
   name: z.string(),
   favorite: z.boolean(),
+  backgroundColor: z.string().nullable(),
   lists: z.array(
     z.object({
       publicId: z.string(),

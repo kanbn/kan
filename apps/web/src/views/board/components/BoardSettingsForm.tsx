@@ -32,7 +32,6 @@ export function BoardSettingsForm({
   backgroundColor: string | null;
   queryParams: QueryParams;
 }) {
-  debugger;
   const { closeModal } = useModal();
   const { showPopup } = usePopup();
   const utils = api.useUtils();
