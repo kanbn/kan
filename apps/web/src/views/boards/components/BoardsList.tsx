@@ -127,6 +127,7 @@ export function BoardsList({
               ) : (
                 <PatternedBackground />
               )}
+              <div className="pointer-events-none absolute inset-0 z-[1] rounded-md bg-black/0 transition-colors group-hover:bg-black/10" />
               <button
                 onClick={(e) =>
                   handleToggleFavorite(e, board.publicId, board.favorite)
@@ -146,7 +147,7 @@ export function BoardsList({
                   <HiOutlineStar className="h-5 w-5 text-neutral-700 dark:text-dark-800" />
                 )}
               </button>
-              <p className="px-4 text-[14px] font-bold text-neutral-700 dark:text-dark-1000">
+              <p className="relative z-10 px-4 text-[14px] font-bold text-neutral-700 dark:text-dark-1000">
                 {board.name}
               </p>
             </div>

@@ -1,6 +1,6 @@
 const ColoredBackground = ({ color }: { color: string }) => (
   <div
-    className="absolute inset-0 h-full w-full"
+    className="pointer-events-none absolute inset-0 z-0 h-full w-full transition-opacity group-hover:opacity-90"
     style={{ backgroundColor: color }}
   />
 );
