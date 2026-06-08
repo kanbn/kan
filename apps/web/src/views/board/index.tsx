@@ -18,12 +18,12 @@ import type { UpdateBoardInput } from "@kan/api/types";
 
 import type { CardContextMenuAction } from "./components/CardContextMenu";
 import Button from "~/components/Button";
+import ColoredBackground from "~/components/ColoredBackground";
 import { DeleteLabelConfirmation } from "~/components/DeleteLabelConfirmation";
 import { LabelForm } from "~/components/LabelForm";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
-import ColoredBackground from "~/components/ColoredBackground";
 import PatternedBackground from "~/components/PatternedBackground";
 import { StrictModeDroppable as Droppable } from "~/components/StrictModeDroppable";
 import { Tooltip } from "~/components/Tooltip";
@@ -36,9 +36,10 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
-import { formatToArray, isLightHexColor } from "~/utils/helpers";
+import { formatToArray } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import BoardDropdown from "./components/BoardDropdown";
+import { BoardSettingsForm } from "./components/BoardSettingsForm";
 import Card from "./components/Card";
 import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
 import { CardContextDuplicateModal } from "./components/CardContextDuplicateModal";
@@ -46,7 +47,6 @@ import { CardContextLabelsModal } from "./components/CardContextLabelsModal";
 import { CardContextMembersModal } from "./components/CardContextMembersModal";
 import { CardContextMenu } from "./components/CardContextMenu";
 import { CardContextMoveListModal } from "./components/CardContextMoveListModal";
-import { BoardSettingsForm } from "./components/BoardSettingsForm";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
@@ -148,13 +148,6 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     enabled: !!boardId,
     placeholderData: keepPreviousData,
   });
-
-  const hasLightBoardBackground = isLightHexColor(boardData?.backgroundColor);
-  const emptyStateTitleClassName = boardData?.backgroundColor
-    ? hasLightBoardBackground
-      ? "text-light-1000"
-      : "text-dark-1000"
-    : "text-light-1000 dark:text-dark-950";
 
   // Redirect to 404 if board doesn't exist
   useEffect(() => {
@@ -672,9 +665,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
                   <div className="flex flex-col items-center">
                     <HiOutlineSquare3Stack3D className="h-10 w-10 text-light-800 dark:text-dark-800" />
-                    <p
-                      className={`mb-2 mt-4 text-[14px] font-bold ${emptyStateTitleClassName}`}
-                    >
+                    <p className="mb-2 mt-4 text-[14px] font-bold text-light-1000 dark:text-dark-950">
                       {t`No lists`}
                     </p>
                     <p className="text-[14px] text-light-900 dark:text-dark-900">
