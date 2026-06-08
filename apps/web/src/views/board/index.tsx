@@ -54,8 +54,6 @@ import List from "./components/List";
 import { NewCardForm } from "./components/NewCardForm";
 import { NewListForm } from "./components/NewListForm";
 import { NewTemplateForm } from "./components/NewTemplateForm";
-import UpdateBoardSlugButton from "./components/UpdateBoardSlugButton";
-import { UpdateBoardSlugForm } from "./components/UpdateBoardSlugForm";
 import VisibilityButton from "./components/VisibilityButton";
 
 type PublicListId = string;
@@ -452,23 +450,14 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
 
         <Modal
           modalSize="sm"
-          isVisible={isOpen && modalContentType === "UPDATE_BOARD_SLUG"}
-        >
-          <UpdateBoardSlugForm
-            boardPublicId={boardId ?? ""}
-            workspaceSlug={workspace.slug ?? ""}
-            boardSlug={boardData?.slug ?? ""}
-            queryParams={queryParams}
-          />
-        </Modal>
-
-        <Modal
-          modalSize="sm"
           isVisible={isOpen && modalContentType === "BOARD_SETTINGS"}
         >
           <BoardSettingsForm
             boardPublicId={boardId ?? ""}
             backgroundColor={boardData ? boardData.backgroundColor : null}
+            workspaceSlug={workspace.slug ?? ""}
+            boardSlug={boardData?.slug ?? ""}
+            visibility={boardData?.visibility ?? "private"}
             queryParams={queryParams}
           />
         </Modal>
@@ -585,15 +574,6 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             )}
             {!isTemplate && (
               <>
-                <UpdateBoardSlugButton
-                  handleOnClick={() => openModal("UPDATE_BOARD_SLUG")}
-                  isLoading={isLoading}
-                  workspaceSlug={workspace.slug ?? ""}
-                  boardSlug={boardData?.slug ?? ""}
-                  boardPublicId={boardId ?? ""}
-                  visibility={boardData?.visibility ?? "private"}
-                  canEdit={canEditBoard}
-                />
                 <VisibilityButton
                   visibility={boardData?.visibility ?? "private"}
                   boardPublicId={boardId ?? ""}
