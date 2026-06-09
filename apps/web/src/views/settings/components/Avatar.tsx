@@ -172,7 +172,7 @@ export default function Avatar({
           method: "POST",
           headers: {
             "Content-Type": blob.type,
-            "x-original-filename": fileName,
+            "x-original-filename": encodeURIComponent(fileName),
           },
           body: blob,
         },

@@ -67,8 +67,15 @@ export default withRateLimit(
         return res.status(400).json({ error: "File too large" });
       }
 
-      const originalFilenameHeader =
+      const rawFilenameHeader =
         (req.headers["x-original-filename"] as string | undefined) ?? "file";
+      const originalFilenameHeader = (() => {
+        try {
+          return decodeURIComponent(rawFilenameHeader);
+        } catch {
+          return rawFilenameHeader;
+        }
+      })();
 
       const sanitizedFilename = originalFilenameHeader
         .replace(/[^a-zA-Z0-9._-]/g, "_")
