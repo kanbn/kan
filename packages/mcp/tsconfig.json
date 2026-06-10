@@ -1,0 +1,14 @@
+{
+  "extends": "@kan/tsconfig/base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "noEmit": false,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "declaration": false,
+    "tsBuildInfoFile": ".cache/tsbuildinfo.json"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
