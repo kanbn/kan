@@ -204,6 +204,7 @@ export const update = async (
     title?: string;
     description?: string;
     dueDate?: Date | null;
+    coverColourCode?: string | null;
   },
   args: {
     cardPublicId: string;
@@ -215,6 +216,10 @@ export const update = async (
       title: cardInput.title,
       description: cardInput.description,
       dueDate: cardInput.dueDate !== undefined ? cardInput.dueDate : undefined,
+      coverColourCode:
+        cardInput.coverColourCode !== undefined
+          ? cardInput.coverColourCode
+          : undefined,
       updatedAt: new Date(),
     })
     .where(and(eq(cards.publicId, args.cardPublicId), isNull(cards.deletedAt)))
@@ -488,6 +493,7 @@ export const getWithListAndMembersByPublicId = async (
       title: true,
       description: true,
       dueDate: true,
+      coverColourCode: true,
       createdBy: true,
       cardNumber: true,
       index: true,
