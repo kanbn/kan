@@ -18,6 +18,7 @@ import type { UpdateBoardInput } from "@kan/api/types";
 
 import type { CardContextMenuAction } from "./components/CardContextMenu";
 import Button from "~/components/Button";
+import ColoredBackground from "~/components/ColoredBackground";
 import { DeleteLabelConfirmation } from "~/components/DeleteLabelConfirmation";
 import { LabelForm } from "~/components/LabelForm";
 import Modal from "~/components/modal";
@@ -38,6 +39,7 @@ import { api } from "~/utils/api";
 import { formatToArray } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import BoardDropdown from "./components/BoardDropdown";
+import { BoardSettingsForm } from "./components/BoardSettingsForm";
 import Card from "./components/Card";
 import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
 import { CardContextDuplicateModal } from "./components/CardContextDuplicateModal";
@@ -52,9 +54,6 @@ import List from "./components/List";
 import { NewCardForm } from "./components/NewCardForm";
 import { NewListForm } from "./components/NewListForm";
 import { NewTemplateForm } from "./components/NewTemplateForm";
-import UpdateBoardSlugButton from "./components/UpdateBoardSlugButton";
-import { UpdateBoardSlugForm } from "./components/UpdateBoardSlugForm";
-import VisibilityButton from "./components/VisibilityButton";
 
 type PublicListId = string;
 
@@ -450,12 +449,14 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
 
         <Modal
           modalSize="sm"
-          isVisible={isOpen && modalContentType === "UPDATE_BOARD_SLUG"}
+          isVisible={isOpen && modalContentType === "BOARD_SETTINGS"}
         >
-          <UpdateBoardSlugForm
+          <BoardSettingsForm
             boardPublicId={boardId ?? ""}
+            backgroundColor={boardData ? boardData.backgroundColor : null}
             workspaceSlug={workspace.slug ?? ""}
             boardSlug={boardData?.slug ?? ""}
+            visibility={boardData?.visibility ?? "private"}
             queryParams={queryParams}
           />
         </Modal>
@@ -530,7 +531,11 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
         title={`${boardData?.name ?? (isTemplate ? t`Board` : t`Template`)} | ${workspace.name ?? t`Workspace`}`}
       />
       <div className="relative flex h-full flex-col">
-        <PatternedBackground />
+        {boardData?.backgroundColor ? (
+          <ColoredBackground color={boardData.backgroundColor} />
+        ) : (
+          <PatternedBackground />
+        )}
         <div className="z-10 flex w-full flex-col justify-between p-6 md:flex-row md:p-8">
           {isLoading && !boardData && (
             <div className="flex space-x-2">
@@ -568,23 +573,6 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             )}
             {!isTemplate && (
               <>
-                <UpdateBoardSlugButton
-                  handleOnClick={() => openModal("UPDATE_BOARD_SLUG")}
-                  isLoading={isLoading}
-                  workspaceSlug={workspace.slug ?? ""}
-                  boardSlug={boardData?.slug ?? ""}
-                  boardPublicId={boardId ?? ""}
-                  visibility={boardData?.visibility ?? "private"}
-                  canEdit={canEditBoard}
-                />
-                <VisibilityButton
-                  visibility={boardData?.visibility ?? "private"}
-                  boardPublicId={boardId ?? ""}
-                  boardSlug={boardData?.slug ?? ""}
-                  queryParams={queryParams}
-                  isLoading={!boardData}
-                  isAdmin={workspace.role === "admin"}
-                />
                 {boardData && (
                   <Filters
                     labels={boardData.labels}
