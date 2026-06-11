@@ -9,8 +9,11 @@ import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import { createS3Client, generateUID } from "@kan/shared/utils";
+import { createLogger } from "@kan/logger";
 
 import { env } from "~/env";
+
+const log = createLogger("attachment-upload");
 
 // FIXME: Respect the environment variable: NEXT_API_BODY_SIZE_LIMIT
 const MAX_SIZE_BYTES = 50 * 1024 * 1024; // 50MB
@@ -141,6 +144,15 @@ export default withRateLimit(
 
       return res.status(200).json({ attachment });
     } catch (error) {
+      log.error(
+        {
+          err: error,
+          cardPublicId: req.query.cardPublicId,
+          contentType: req.headers["content-type"],
+          contentLength: req.headers["content-length"],
+        },
+        "Attachment upload failed",
+      );
       return res.status(500).json({ error: "Internal server error" });
     }
   }),
