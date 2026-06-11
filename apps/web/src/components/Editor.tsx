@@ -7,6 +7,7 @@ import type {
 import type { Instance as TippyInstance } from "tippy.js";
 import { Button } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
+import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import Mention from "@tiptap/extension-mention";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -44,9 +45,41 @@ import { twMerge } from "tailwind-merge";
 import tippy from "tippy.js";
 import { Markdown } from "tiptap-markdown";
 
+import { env } from "next-runtime-env";
+
 import { getAvatarUrl } from "~/utils/helpers";
 import Avatar from "./Avatar";
+import { FileAttachmentNode } from "./FileAttachment/FileAttachmentNode";
 import { YouTubeNode } from "./YouTubeEmbed/YouTubeNode";
+
+async function uploadFile(
+  file: File,
+  cardPublicId: string,
+): Promise<{ publicId: string } | null> {
+  const baseUrl = env("NEXT_PUBLIC_BASE_URL") ?? "";
+  try {
+    const response = await fetch(
+      `${baseUrl}/api/upload/attachment?cardPublicId=${encodeURIComponent(cardPublicId)}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": file.type,
+          "x-original-filename": file.name,
+        },
+        body: file,
+      },
+    );
+    if (!response.ok) return null;
+    const data = (await response.json()) as {
+      attachment?: { publicId?: string };
+    };
+    const publicId = data.attachment?.publicId;
+    if (!publicId) return null;
+    return { publicId };
+  } catch {
+    return null;
+  }
+}
 
 declare module "@tiptap/core" {
   interface Commands<ReturnType> {
@@ -445,6 +478,8 @@ export default function Editor({
   enableYouTubeEmbed = true,
   placeholder,
   disableHeadings = false,
+  cardPublicId,
+  onFileUpload,
 }: {
   content: string | null;
   onChange?: (value: string) => void;
@@ -454,6 +489,8 @@ export default function Editor({
   enableYouTubeEmbed?: boolean;
   placeholder?: string;
   disableHeadings?: boolean;
+  cardPublicId?: string;
+  onFileUpload?: () => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -550,6 +587,8 @@ export default function Editor({
             superscriptTwo: false,
             superscriptThree: false,
         }),
+        Image.configure({ inline: false, allowBase64: false }),
+        FileAttachmentNode,
         ...(enableYouTubeEmbed ? [YouTubeNode] : []),
       ],
       content,
@@ -561,7 +600,6 @@ export default function Editor({
             ?.contains(event.relatedTarget as Node)
         )
           return;
-        // Only trigger onBlur if the click was outside both the editor and menu
         if (!containerRef.current?.contains(event.relatedTarget as Node)) {
           onBlur?.();
         }
@@ -569,6 +607,73 @@ export default function Editor({
       editorProps: {
         attributes: {
           class: "outline-none focus:outline-none focus-visible:ring-0",
+        },
+        handlePaste: (view, event) => {
+          if (!cardPublicId || readOnly) return false;
+          const items = Array.from(event.clipboardData?.items ?? []);
+          const fileItem = items.find((item) => item.kind === "file");
+          if (!fileItem) return false;
+          const file = fileItem.getAsFile();
+          if (!file) return false;
+          event.preventDefault();
+          void uploadFile(file, cardPublicId).then((result) => {
+            if (!result) return;
+            const mediaUrl = `/api/media/${result.publicId}`;
+            if (file.type.startsWith("image/")) {
+              view.dispatch(
+                view.state.tr.replaceSelectionWith(
+                  view.state.schema.nodes.image!.create({ src: mediaUrl }),
+                ),
+              );
+            } else {
+              view.dispatch(
+                view.state.tr.replaceSelectionWith(
+                  view.state.schema.nodes.fileAttachment!.create({
+                    href: mediaUrl,
+                    filename: file.name,
+                  }),
+                ),
+              );
+            }
+            onFileUpload?.();
+          });
+          return true;
+        },
+        handleDrop: (view, event) => {
+          if (!cardPublicId || readOnly) return false;
+          const files = Array.from(event.dataTransfer?.files ?? []);
+          const file = files[0];
+          if (!file) return false;
+          event.preventDefault();
+          const pos = view.posAtCoords({
+            left: event.clientX,
+            top: event.clientY,
+          });
+          void uploadFile(file, cardPublicId).then((result) => {
+            if (!result) return;
+            const mediaUrl = `/api/media/${result.publicId}`;
+            const insertPos = pos?.pos ?? view.state.tr.doc.content.size;
+            if (file.type.startsWith("image/")) {
+              view.dispatch(
+                view.state.tr.insert(
+                  insertPos,
+                  view.state.schema.nodes.image!.create({ src: mediaUrl }),
+                ),
+              );
+            } else {
+              view.dispatch(
+                view.state.tr.insert(
+                  insertPos,
+                  view.state.schema.nodes.fileAttachment!.create({
+                    href: mediaUrl,
+                    filename: file.name,
+                  }),
+                ),
+              );
+            }
+            onFileUpload?.();
+          });
+          return true;
         },
       },
       editable: !readOnly,
@@ -609,6 +714,12 @@ export default function Editor({
         }
         .tiptap [data-youtube] {
           margin: 1rem 0;
+        }
+        .tiptap img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 0.5rem;
+          margin: 0.5rem 0;
         }
       `}</style>
       {!readOnly && editor && <EditorBubbleMenu editor={editor} />}
