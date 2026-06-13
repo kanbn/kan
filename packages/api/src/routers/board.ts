@@ -505,11 +505,14 @@ export const boardRouter = createTRPCRouter({
 
       // Handle favorite toggle separately
       if (input.favorite !== undefined) {
-        if (input.favorite) {
-          await boardRepo.addUserFavorite(ctx.db, userId, board.id);
-        } else {
-          await boardRepo.removeUserFavorite(ctx.db, userId, board.id);
-        }
+        await boardRepo.setFavourite(ctx.db, {
+          userId,
+          boardId: board.id,
+          isFavourite: input.favorite,
+          workspaceId: board.workspaceId,
+          boardType: board.type,
+          isArchived: board.isArchived,
+        });
       }
 
       // Handle other updates (name, slug, visibility)
@@ -549,7 +552,70 @@ export const boardRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
+      // If the archive status actually changed, move the board to the end of
+      // the target archive group and compact the group it left (per user).
+      if (
+        input.isArchived !== undefined &&
+        input.isArchived !== board.isArchived
+      ) {
+        await boardRepo.reassignPositionsOnArchiveToggle(ctx.db, {
+          boardId: board.id,
+          workspaceId: board.workspaceId,
+          boardType: board.type,
+          newIsArchived: input.isArchived,
+        });
+      }
+
       return result;
+    }),
+  reorder: protectedProcedure
+    .meta({
+      openapi: {
+        method: "PUT",
+        path: "/boards/{boardPublicId}/reorder",
+        summary: "Reorder board",
+        description:
+          "Reorders a board to a new position within the current user's list",
+        tags: ["Boards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        boardPublicId: z.string().min(12),
+        newPosition: z.number().int().min(0),
+      }),
+    )
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
+        ctx.db,
+        input.boardPublicId,
+      );
+
+      if (!board)
+        throw new TRPCError({
+          message: `Board with public ID ${input.boardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
+
+      await boardRepo.reorder(ctx.db, {
+        userId,
+        boardPublicId: input.boardPublicId,
+        newPosition: input.newPosition,
+      });
+
+      return { success: true };
     }),
   delete: protectedProcedure
     .meta({

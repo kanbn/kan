@@ -8,7 +8,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { apikey } from "./auth";
-import { boards, userBoardFavorites } from "./boards";
+import { boards } from "./boards";
 import { cards } from "./cards";
 import { imports } from "./imports";
 import { lists } from "./lists";
@@ -84,14 +84,3 @@ export const usersToWorkspacesRelations = relations(
     }),
   }),
 );
-
-export const userBoardFavoritesRelations = relations(userBoardFavorites, ({ one }) => ({
-  user: one(users, {
-    fields: [userBoardFavorites.userId],
-    references: [users.id],
-  }),
-  board: one(boards, {
-    fields: [userBoardFavorites.boardId],
-    references: [boards.id],
-  }),
-}));
