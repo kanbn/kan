@@ -457,6 +457,17 @@ export default function Editor({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // useEditor is created once (empty deps below), so keep the latest callbacks
+  // in refs to avoid the editor capturing stale closures on re-render.
+  const onChangeRef = useRef(onChange);
+  const onBlurRef = useRef(onBlur);
+  useEffect(() => {
+    onChangeRef.current = onChange;
+  }, [onChange]);
+  useEffect(() => {
+    onBlurRef.current = onBlur;
+  }, [onBlur]);
+
   const editor = useEditor(
     {
       extensions: [
@@ -553,7 +564,7 @@ export default function Editor({
         ...(enableYouTubeEmbed ? [YouTubeNode] : []),
       ],
       content,
-      onUpdate: ({ editor }) => onChange?.(editor.getHTML()),
+      onUpdate: ({ editor }) => onChangeRef.current?.(editor.getHTML()),
       onBlur: ({ event }) => {
         if (
           document
@@ -563,7 +574,7 @@ export default function Editor({
           return;
         // Only trigger onBlur if the click was outside both the editor and menu
         if (!containerRef.current?.contains(event.relatedTarget as Node)) {
-          onBlur?.();
+          onBlurRef.current?.();
         }
       },
       editorProps: {
@@ -586,6 +597,16 @@ export default function Editor({
       editor.commands.setContent(safeContent, false);
     }
   }, [content, editor]);
+
+  // useEditor captures `readOnly` once at creation time (empty deps above), so
+  // explicitly sync `editable` when the prop changes. Without this the editor
+  // gets stuck read-only when `readOnly` flips from true to false after mount
+  // (e.g. card permissions resolving slower than the card data on first load).
+  useEffect(() => {
+    if (!editor) return;
+    if (editor.isEditable === !readOnly) return;
+    editor.setEditable(!readOnly);
+  }, [editor, readOnly]);
 
   return (
     <div ref={containerRef}>
