@@ -59,12 +59,14 @@
     "rate-limiter-flexible": "^9.0.1",
     "superjson": "2.2.1",
     "trpc-to-openapi": "^2.3.2",
+    "web-push": "^3.6.7",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@banana/eslint-config": "workspace:*",
     "@banana/prettier-config": "workspace:*",
     "@banana/tsconfig": "workspace:*",
+    "@types/web-push": "^3.6.4",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:",

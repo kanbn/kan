@@ -12,6 +12,8 @@ import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { useEffect } from "react";
 
+import { InstallPwaButton } from "~/components/InstallPwaButton";
+import { SwUpdateToast } from "~/components/SwUpdateToast";
 import { FontSizeProvider } from "~/providers/font-size";
 import { KeyboardShortcutProvider } from "~/providers/keyboard-shortcuts";
 import { LinguiProviderWrapper } from "~/providers/lingui";
@@ -61,6 +63,21 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
     }
   }, [posthogKey]);
 
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      "serviceWorker" in navigator &&
+      process.env.NODE_ENV === "production"
+    ) {
+      navigator.serviceWorker
+        .register("/sw.js", {
+          type: "module",
+        })
+        .then((reg) => console.log("Service Worker registered", reg))
+        .catch((err) => console.error("SW register fail", err));
+    }
+  }, []);
+
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
@@ -82,10 +99,16 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
       )}
       <script src="/__ENV.js" />
       <main className="font-sans">
+        <InstallPwaButton />
+        <SwUpdateToast />
         <KeyboardShortcutProvider>
           <LinguiProviderWrapper>
             <FontSizeProvider>
-              <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+              >
                 <ModalProvider>
                   <PopupProvider>
                     {posthogKey ? (

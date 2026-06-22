@@ -28,7 +28,6 @@ const config = {
     ],
   },
 
-
   /** Enables hot reloading for local packages without a build step */
   transpilePackages: [
     "@banana/api",
@@ -66,7 +65,7 @@ const config = {
       },
     },
   },
-  serverExternalPackages: ["pino"],
+  serverExternalPackages: ["pino", "esbuild", "esbuild-wasm"],
 
   experimental: {
     // instrumentationHook: true,

@@ -19,7 +19,12 @@ import {
   activityItemSchema,
 } from "../schemas";
 import { mergeActivities } from "../utils/activities";
-import { sendMentionEmails } from "../utils/notifications";
+import {
+  sendAssignmentPush,
+  sendCardMembersPush,
+  sendMentionEmails,
+  sendUnassignmentPush,
+} from "../utils/notifications";
 import { sendMattermostNotification, getCommenterEmails } from "../utils/mattermost";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 import { generateAttachmentUrl, generateAvatarUrl } from "@banana/shared/utils";
@@ -238,6 +243,14 @@ export const cardRouter = createTRPCRouter({
           "assigned you to",
         ).catch((error) => {
           console.error("Failed to send Mattermost notification:", error);
+        });
+
+        // Also push to any subscribed device of each assigned member.
+        void sendAssignmentPush(ctx.db, {
+          cardPublicId: newCard.publicId,
+          actorUserId: userId,
+          actorName: ctx.user?.name ?? "Someone",
+          workspaceMemberIds: members.map((m) => m.id),
         });
       }
 
@@ -741,6 +754,14 @@ export const cardRouter = createTRPCRouter({
           createdBy: userId,
         });
 
+        // Notify the removed member on their subscribed devices.
+        void sendUnassignmentPush(ctx.db, {
+          cardPublicId: input.cardPublicId,
+          actorUserId: userId,
+          actorName: ctx.user?.name ?? "Someone",
+          workspaceMemberId: member.id,
+        });
+
         return { newMember: false };
       }
 
@@ -771,6 +792,14 @@ export const cardRouter = createTRPCRouter({
         member.email ?? undefined,
       ).catch((error) => {
         console.error("Failed to send Mattermost notification:", error);
+      });
+
+      // Also push to the assigned member's subscribed devices.
+      void sendAssignmentPush(ctx.db, {
+        cardPublicId: input.cardPublicId,
+        actorUserId: userId,
+        actorName: ctx.user?.name ?? "Someone",
+        workspaceMemberIds: [member.id],
       });
 
       return { newMember: true };
@@ -1125,6 +1154,17 @@ export const cardRouter = createTRPCRouter({
           commenterUserId: userId,
         }).catch((error) => {
           console.error("Failed to send mention emails:", error);
+        });
+
+        // Notify the card's current members about the description change.
+        // Independent of @mentions above; removed members are excluded
+        // (hard-deleted) and the actor is skipped.
+        void sendCardMembersPush(ctx.db, {
+          cardId: result.id,
+          cardPublicId: input.cardPublicId,
+          actorUserId: userId,
+          actorName: ctx.user?.name ?? "Someone",
+          action: "updated the description",
         });
       }
 

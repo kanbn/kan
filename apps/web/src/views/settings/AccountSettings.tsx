@@ -8,12 +8,48 @@ import { LanguageSelector } from "~/components/LanguageSelector";
 import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
+import { usePushSubscription } from "~/hooks/usePushSubscription";
 import { useModal } from "~/providers/modal";
 import { api } from "~/utils/api";
 import Avatar from "./components/Avatar";
 import { ChangePasswordFormConfirmation } from "./components/ChangePasswordConfirmation";
 import { DeleteAccountConfirmation } from "./components/DeleteAccountConfirmation";
 import UpdateDisplayNameForm from "./components/UpdateDisplayNameForm";
+
+const NotificationsToggle = () => {
+  if (typeof window === "undefined") return null;
+  const { subscribed, subscribe, unsubscribe } = usePushSubscription();
+  const sendTestPush = api.notification.sendTestPush.useMutation<unknown>();
+  const isOn = subscribed === true;
+
+  if (!("serviceWorker" in navigator)) return null;
+
+  return (
+    <>
+      <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+        {t`Get desktop notifications for mentions, comments, and board updates.`}
+      </p>
+      <div className="mt-4 flex gap-2">
+        <Button
+          variant={isOn ? "secondary" : "primary"}
+          onClick={() => (isOn ? unsubscribe() : subscribe())}
+          isLoading={subscribed === undefined}
+        >
+          {isOn ? t`Disable notifications` : t`Enable notifications`}
+        </Button>
+        {isOn && (
+          <Button
+            variant="secondary"
+            onClick={() => sendTestPush.mutate()}
+            isLoading={sendTestPush.isPending}
+          >
+            {t`Send test notification`}
+          </Button>
+        )}
+      </div>
+    </>
+  );
+};
 
 export default function AccountSettings() {
   const { modalContentType, openModal, isOpen } = useModal();
@@ -42,7 +78,9 @@ export default function AccountSettings() {
           <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
             {t`Email`}
           </h2>
-          <p className="text-sm text-neutral-700 dark:text-dark-900">{data?.email}</p>
+          <p className="text-sm text-neutral-700 dark:text-dark-900">
+            {data?.email}
+          </p>
         </div>
 
         <div className="mb-8 border-t border-light-300 dark:border-dark-300">
@@ -53,6 +91,13 @@ export default function AccountSettings() {
             {t`Change your language preferences.`}
           </p>
           <LanguageSelector />
+        </div>
+
+        <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+          <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
+            {t`Notifications`}
+          </h2>
+          <NotificationsToggle />
         </div>
 
         <div className="mb-8 border-t border-light-300 dark:border-dark-300">
@@ -115,7 +160,9 @@ export default function AccountSettings() {
         modalSize="sm"
         isVisible={isOpen && modalContentType === "CHANGE_PASSWORD"}
       >
-        <ChangePasswordFormConfirmation hasPassword={data?.hasPassword ?? false} />
+        <ChangePasswordFormConfirmation
+          hasPassword={data?.hasPassword ?? false}
+        />
       </Modal>
 
       {/* Global modals */}
