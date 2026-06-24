@@ -55,6 +55,8 @@ export default function AccountSettings() {
   const { modalContentType, openModal, isOpen } = useModal();
   const isCredentialsEnabled =
     env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
+  const pushDisabled =
+    env("NEXT_PUBLIC_DISABLE_PUSH")?.toLowerCase() === "true";
   const { data } = api.user.getUser.useQuery();
 
   return (
@@ -93,12 +95,14 @@ export default function AccountSettings() {
           <LanguageSelector />
         </div>
 
-        <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-          <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-            {t`Notifications`}
-          </h2>
-          <NotificationsToggle />
-        </div>
+        {!pushDisabled && (
+          <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+            <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
+              {t`Notifications`}
+            </h2>
+            <NotificationsToggle />
+          </div>
+        )}
 
         <div className="mb-8 border-t border-light-300 dark:border-dark-300">
           <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">

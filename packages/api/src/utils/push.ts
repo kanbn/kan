@@ -22,6 +22,11 @@ let configState: boolean | null = null;
 const ensureConfigured = (): boolean => {
   if (configState !== null) return configState;
 
+  if (env("NEXT_PUBLIC_DISABLE_PUSH")?.toLowerCase() === "true") {
+    configState = false;
+    return false;
+  }
+
   if (!publicKey || !privateKey) {
     log.warn(
       "VAPID_PUBLIC_KEY / VAPID_PRIVATE_KEY are not set — web push disabled",
