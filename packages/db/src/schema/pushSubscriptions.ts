@@ -11,13 +11,6 @@ import {
 
 import { users } from "./users";
 
-/**
- * Stores browser push subscription endpoints for web notifications.
- * Completely independent of the billing `subscription` table — keyed on
- * `users.id`, only holds the encrypted push info needed by `web-push`.
- * One user may have many rows (one per device/browser); the `endpoint`
- * uniquely identifies a subscription.
- */
 export const pushSubscription = pgTable(
   "push_subscription",
   {

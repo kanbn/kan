@@ -84,19 +84,12 @@ const serwist = new Serwist({
 
 serwist.addEventListeners();
 
-/** Shape of the push payload sent by the server (`sendPushToUser`). */
 interface PushPayload {
   title: string;
   body?: string;
   url?: string;
 }
 
-/**
- * Handles an incoming push event: parses the JSON payload from the server
- * (falling back to plain text or a default title) and shows a desktop/lock
- * notification. `data.url` is carried through so `notificationclick` can deep
- * link to the relevant card.
- */
 swScope.addEventListener("push", (ev) => {
   let payload: PushPayload = { title: "Notification" };
   try {
@@ -113,10 +106,6 @@ swScope.addEventListener("push", (ev) => {
       icon: "/icon-512.png",
       badge: "/icon-512.png",
       data: { url: payload.url ?? "/" },
-      // No fixed tag: a shared tag makes later notifications silently replace
-      // earlier ones instead of showing their own banner. Omitting it lets
-      // every notification alert the user independently.
-      // renotify: true would also re-alert, but leaving tag out is simplest.
     }),
   );
 });
@@ -124,7 +113,6 @@ swScope.addEventListener("push", (ev) => {
 swScope.addEventListener("notificationclick", (ev) => {
   ev.notification.close();
   const data = (ev.notification.data ?? {}) as { url?: string };
-  // Absolute, same-origin URL — Safari rejects relative URLs in openWindow().
   const targetUrl = new URL(data.url ?? "/", swScope.location.origin).href;
 
   ev.waitUntil(
@@ -139,9 +127,6 @@ swScope.addEventListener("notificationclick", (ev) => {
           return client.focus();
         }
       }
-      // …otherwise open a new one. (Safari has a known openWindow bug —
-      // WebKit 259212 — so this is unreliable on Safari, but works on Chrome/
-      // Edge/iOS and is the MDN-recommended pattern.)
       return swScope.clients.openWindow(targetUrl);
     })(),
   );

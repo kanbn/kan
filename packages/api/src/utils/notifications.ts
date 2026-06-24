@@ -1,27 +1,35 @@
-import { and, eq, inArray, isNull, isNotNull } from "drizzle-orm";
+import type { dbClient } from "@banana/db/client";
+import { and, eq, inArray, isNotNull, isNull } from "drizzle-orm";
 import { env } from "next-runtime-env";
 
-import type { dbClient } from "@banana/db/client";
-import {
-  cardToWorkspaceMembers,
-  workspaceMembers,
-} from "@banana/db/schema";
-import { createLogger } from "@banana/logger";
-
-const log = createLogger("notifications");
 import * as cardRepo from "@banana/db/repository/card.repo";
 import * as memberRepo from "@banana/db/repository/member.repo";
 import * as notificationRepo from "@banana/db/repository/notification.repo";
 import * as userRepo from "@banana/db/repository/user.repo";
 import * as workspaceRepo from "@banana/db/repository/workspace.repo";
+import { cardToWorkspaceMembers, workspaceMembers } from "@banana/db/schema";
 import { sendEmail } from "@banana/email";
+import { createLogger } from "@banana/logger";
 import { parseMentionsFromHTML } from "@banana/shared/utils";
+
+import type { PushPayload } from "./push";
 import { sendPushToUser } from "./push";
 
-/**
- * Sends mention notification emails to mentioned members
- * Only sends emails for new mentions (checks notification table to avoid duplicates)
- */
+const log = createLogger("notifications");
+
+function buildCardPushPayload(
+  actorName: string,
+  verb: string,
+  cardTitle: string,
+  cardPublicId: string,
+): PushPayload {
+  return {
+    title: `${actorName} ${verb}`,
+    body: cardTitle,
+    url: `/cards/${cardPublicId}`,
+  };
+}
+
 export async function sendMentionEmails({
   db,
   cardPublicId,
@@ -36,12 +44,13 @@ export async function sendMentionEmails({
   commentId?: number;
 }) {
   try {
-    // Parse mentions from HTML
     const mentionPublicIds = parseMentionsFromHTML(commentHtml);
     if (mentionPublicIds.length === 0) return;
 
-    // Get card with board information
-    const card = await cardRepo.getWithListAndMembersByPublicId(db, cardPublicId);
+    const card = await cardRepo.getWithListAndMembersByPublicId(
+      db,
+      cardPublicId,
+    );
     if (!card?.list.board) return;
 
     const board = card.list.board;
@@ -49,7 +58,6 @@ export async function sendMentionEmails({
     const cardTitle = card.title;
     const cardId = card.id;
 
-    // Get workspace ID from workspace publicId
     const workspace = await workspaceRepo.getByPublicId(
       db,
       board.workspace.publicId,
@@ -64,14 +72,12 @@ export async function sendMentionEmails({
 
     const commenterName = commenter.name?.trim() || commenter.email;
 
-    // Get mentioned members with full details (filtered by workspace)
     const membersWithDetails = await memberRepo.getByPublicIdsWithUsers(
       db,
       mentionPublicIds,
       workspaceId,
     );
 
-    // Filter out the commenter
     const membersToNotify = membersWithDetails.filter(
       (member) => member.user?.id !== commenterUserId,
     );
@@ -81,37 +87,35 @@ export async function sendMentionEmails({
     const baseUrl = env("NEXT_PUBLIC_BASE_URL");
     const cardUrl = `${baseUrl}/cards/${cardPublicId}`;
 
-    // Global email kill-switch. When set (e.g. local dev without SMTP),
-    // mention emails are skipped entirely — but the in-app notification record
-    // and the web push below still fire.
     const emailEnabled =
       env("NEXT_PUBLIC_DISABLE_EMAIL")?.toLowerCase() !== "true";
 
-    log.info({ cardPublicId, mentionCount: membersToNotify.length, commenterUserId }, "Sending mention emails");
-    // Send emails to all mentioned members (only if notification doesn't exist)
+    log.info(
+      { cardPublicId, mentionCount: membersToNotify.length, commenterUserId },
+      "Sending mention emails",
+    );
     await Promise.all(
       membersToNotify.map(async (member) => {
         const userId = member.user?.id;
         const email = member.user?.email ?? member.email;
 
-        // Skip pending members (no userId) - they can be mentioned but won't receive emails
         if (!userId || !email) return;
 
         try {
-          // Check if notification already exists for this mention
           const notificationExists = await notificationRepo.exists(db, {
             userId,
             cardId,
             type: "mention",
           });
 
-          // If notification already exists, skip sending email
           if (notificationExists) {
-            log.debug({ email, cardPublicId }, "Skipping duplicate mention email");
+            log.debug(
+              { email, cardPublicId },
+              "Skipping duplicate mention email",
+            );
             return;
           }
 
-          // Create notification record
           await notificationRepo.create(db, {
             type: "mention",
             userId,
@@ -119,19 +123,17 @@ export async function sendMentionEmails({
             commentId,
           });
 
-          // Send a push notification to any subscribed device. Runs before the
-          // email so a failed email send (e.g. SMTP not configured locally)
-          // can't block the push. No-ops gracefully if the user has none.
-          await sendPushToUser(db, userId, {
-            title: `${commenterName} mentioned you`,
-            body: cardTitle,
-            // Relative path, not an absolute URL: the SW resolves it against the
-            // PWA's own origin (localhost on desktop, the tunnel/domain on
-            // mobile), so the deep-link works on every device.
-            url: `/cards/${cardPublicId}`,
-          });
+          await sendPushToUser(
+            db,
+            userId,
+            buildCardPushPayload(
+              commenterName,
+              "mentioned you",
+              cardTitle,
+              cardPublicId,
+            ),
+          );
 
-          // Send email (skipped when NEXT_PUBLIC_DISABLE_EMAIL is set).
           if (emailEnabled) {
             await sendEmail(
               email,
@@ -146,10 +148,16 @@ export async function sendMentionEmails({
             );
             log.info({ email, cardPublicId }, "Mention email sent");
           } else {
-            log.debug({ cardPublicId }, "Email disabled — mention email skipped");
+            log.debug(
+              { cardPublicId },
+              "Email disabled — mention email skipped",
+            );
           }
         } catch (error) {
-          log.error({ err: error, email, cardPublicId }, "Failed to send mention email");
+          log.error(
+            { err: error, email, cardPublicId },
+            "Failed to send mention email",
+          );
         }
       }),
     );
@@ -158,14 +166,6 @@ export async function sendMentionEmails({
   }
 }
 
-/**
- * Sends a push notification to the members assigned to a card.
- *
- * Resolves workspace member ids → user ids internally, so callers only need the
- * member ids they already have. The actor is excluded (you don't get notified
- * for assigning yourself). `sendPushToUser` no-ops gracefully for users with no
- * subscription. Fetches the card title for the notification body.
- */
 export async function sendAssignmentPush(
   db: dbClient,
   {
@@ -207,11 +207,16 @@ export async function sendAssignmentPush(
 
     await Promise.all(
       userIds.map((userId) =>
-        sendPushToUser(db, userId, {
-          title: `${actorName} assigned you to a card`,
-          body: cardTitle,
-          url: `/cards/${cardPublicId}`,
-        }),
+        sendPushToUser(
+          db,
+          userId,
+          buildCardPushPayload(
+            actorName,
+            "assigned you to a card",
+            cardTitle,
+            cardPublicId,
+          ),
+        ),
       ),
     );
   } catch (error) {
@@ -219,12 +224,6 @@ export async function sendAssignmentPush(
   }
 }
 
-/**
- * Sends a push notification to a member removed from a card.
- * Counterpart to `sendAssignmentPush`. Takes the single workspace member id
- * (the only thing the unassign path has), resolves it to a user, and pushes.
- * Excludes the actor. No-ops gracefully if the user has no subscription.
- */
 export async function sendUnassignmentPush(
   db: dbClient,
   {
@@ -252,26 +251,21 @@ export async function sendUnassignmentPush(
     const userId = member?.userId;
     if (!userId || userId === actorUserId) return;
 
-    await sendPushToUser(db, userId, {
-      title: `${actorName} removed you from a card`,
-      body: cardTitle,
-      url: `/cards/${cardPublicId}`,
-    });
+    await sendPushToUser(
+      db,
+      userId,
+      buildCardPushPayload(
+        actorName,
+        "removed you from a card",
+        cardTitle,
+        cardPublicId,
+      ),
+    );
   } catch (error) {
     log.error({ err: error, cardPublicId }, "Failed to send unassignment push");
   }
 }
 
-/**
- * Pushes a notification to all CURRENT members of a card — i.e. members who are
- * still assigned. Removed members are hard-deleted from the relationship table
- * (so they're naturally excluded) and soft-deleted workspace members are
- * filtered out via `deletedAt IS NULL`. The actor is excluded.
- *
- * Generic across update types: pass an `action` like "updated the description".
- * Independent of @mentions (those go through `sendMentionEmails`), so a member
- * is notified about the description change even when no one is @mentioned.
- */
 export async function sendCardMembersPush(
   db: dbClient,
   {
@@ -317,15 +311,14 @@ export async function sendCardMembersPush(
 
     await Promise.all(
       userIds.map((userId) =>
-        sendPushToUser(db, userId, {
-          title: `${actorName} ${action}`,
-          body: cardTitle,
-          url: `/cards/${cardPublicId}`,
-        }),
+        sendPushToUser(
+          db,
+          userId,
+          buildCardPushPayload(actorName, action, cardTitle, cardPublicId),
+        ),
       ),
     );
   } catch (error) {
     log.error({ err: error, cardPublicId }, "Failed to send card members push");
   }
 }
-
