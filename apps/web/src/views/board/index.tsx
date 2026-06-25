@@ -681,7 +681,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                   >
                     {(provided) => (
                       <div
-                        className="flex"
+                        className="flex w-max"
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                       >
