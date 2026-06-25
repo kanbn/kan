@@ -634,7 +634,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
         <div
           ref={scrollRef}
           onMouseDown={onMouseDown}
-          className={`scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] z-0 flex-1 snap-x snap-mandatory overflow-y-hidden overflow-x-scroll overscroll-contain scroll-pl-[10px] scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 md:snap-none dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300`}
+          className={`scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] z-0 flex-1 snap-x snap-mandatory scroll-pl-[10px] overflow-y-hidden overflow-x-scroll overscroll-contain scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 md:snap-none`}
         >
           {isLoading ? (
             <div className="ml-[2rem] flex">
@@ -685,7 +685,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                       >
-                        <div className="min-w-[10px]" />
+                        <div className="min-w-[10px] md:min-w-[2rem]" />
                         {boardData.lists.map((list, index) => (
                           <List
                             index={index}
@@ -782,7 +782,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                             </Droppable>
                           </List>
                         ))}
-                        <div className="min-w-[0.75rem]" />
+                        <div className="min-w-[calc(100vw-18rem)] md:min-w-[0.75rem]" />
                         {provided.placeholder}
                       </div>
                     )}

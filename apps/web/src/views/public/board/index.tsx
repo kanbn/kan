@@ -165,7 +165,7 @@ export default function PublicBoardView() {
           <div
             ref={scrollRef}
             onMouseDown={onMouseDown}
-            className="scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] relative h-full flex-1 snap-x snap-mandatory overflow-y-hidden overflow-x-scroll overscroll-contain scroll-pl-[10px] scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 md:snap-none dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300"
+            className="scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] relative h-full flex-1 snap-x snap-mandatory scroll-pl-[10px] overflow-y-hidden overflow-x-scroll overscroll-contain scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 md:snap-none"
           >
             {isLoading || !router.isReady ? (
               <div className="ml-[2rem] flex">
@@ -188,11 +188,11 @@ export default function PublicBoardView() {
               </div>
             ) : (
               <div className="flex">
-                <div className="min-w-[10px]" />
+                <div className="min-w-[10px] md:min-w-[2rem]" />
                 {data?.lists.map((list) => (
                   <div
                     key={list.publicId}
-                    className="dark-text-dark-1000 mr-5 h-fit min-w-[18rem] max-w-[18rem] snap-start rounded-md border border-light-400 bg-light-300 py-2 pl-2 pr-1 text-neutral-900 md:snap-none dark:border-dark-300 dark:bg-dark-100"
+                    className="dark-text-dark-1000 mr-5 h-fit min-w-[18rem] max-w-[18rem] snap-start rounded-md border border-light-400 bg-light-300 py-2 pl-2 pr-1 text-neutral-900 dark:border-dark-300 dark:bg-dark-100 md:snap-align-none"
                   >
                     <div className="flex justify-between">
                       <span className="mb-4 block px-4 pt-1 text-sm font-medium text-neutral-900 dark:text-dark-1000">
@@ -234,7 +234,7 @@ export default function PublicBoardView() {
                     </div>
                   </div>
                 ))}
-                <div className="min-w-[0.75rem]" />
+                <div className="min-w-[calc(100vw-18rem)] md:min-w-[0.75rem]" />
               </div>
             )}
           </div>
