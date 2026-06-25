@@ -2,7 +2,7 @@ import type { Locale as DateFnsLocale } from "date-fns";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { format, formatDistanceToNow, isSameYear } from "date-fns";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   HiOutlineArrowLeft,
   HiOutlineArrowRight,
@@ -368,16 +368,23 @@ const getActivityIcon = (
 
 const ACTIVITIES_PAGE_SIZE = 20;
 
+export type ActivityFeedFilter = "all" | "activity" | "comments";
+export type ActivityFeedSortOrder = "desc" | "asc";
+
 const ActivityList = ({
   cardPublicId,
   isLoading: cardIsLoading,
   isAdmin,
   isViewOnly,
+  filter = "all",
+  sortOrder = "desc",
 }: {
   cardPublicId: string;
   isLoading: boolean;
   isAdmin?: boolean;
   isViewOnly?: boolean;
+  filter?: ActivityFeedFilter;
+  sortOrder?: ActivityFeedSortOrder;
 }) => {
   const { dateLocale } = useLocalisation();
   const { data: sessionData } = authClient.useSession();
@@ -489,9 +496,31 @@ const ActivityList = ({
   const isLoading =
     cardIsLoading || (isFetchingFirst && allActivities.length === 0);
 
+  const filteredActivities = useMemo(
+    () =>
+      allActivities.filter((activity) => {
+        if (filter === "all") return true;
+        if (filter === "comments") {
+          return activity.type === "card.updated.comment.added";
+        }
+        return activity.type !== "card.updated.comment.added";
+      }),
+    [allActivities, filter],
+  );
+
+  const sortedActivities = useMemo(() => {
+    const newestFirst = [...filteredActivities].sort((a, b) => {
+      const timeA = new Date(a.createdAt).getTime();
+      const timeB = new Date(b.createdAt).getTime();
+      return timeB - timeA;
+    });
+
+    return sortOrder === "desc" ? newestFirst : [...newestFirst].reverse();
+  }, [filteredActivities, sortOrder]);
+
   return (
     <div className="flex flex-col space-y-4 pt-4">
-      {allActivities.map((activity, index) => {
+      {sortedActivities.map((activity, index) => {
         const activityText = getActivityText({
           type: activity.type,
           toTitle: activity.toTitle,
@@ -549,7 +578,7 @@ const ActivityList = ({
                 )}
                 isLoading={isLoading}
               />
-              {index !== allActivities.length - 1 && (
+              {index !== sortedActivities.length - 1 && (
                 <div className="absolute bottom-[-14px] left-1/2 top-[30px] w-0.5 -translate-x-1/2 bg-light-600 dark:bg-dark-600" />
               )}
             </div>

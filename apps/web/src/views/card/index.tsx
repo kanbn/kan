@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { HiXMark } from "react-icons/hi2";
+import { HiMiniBarsArrowDown, HiMiniBarsArrowUp, HiXMark } from "react-icons/hi2";
 import { IoChevronForwardSharp } from "react-icons/io5";
 
 import { authClient } from "@kan/auth/client";
 
+import type { ActivityFeedFilter } from "./components/ActivityList";
 import Avatar from "~/components/Avatar";
 import Editor from "~/components/Editor";
 import FeedbackModal from "~/components/FeedbackModal";
@@ -45,6 +46,8 @@ interface FormValues {
   title: string;
   description: string;
 }
+
+type ActivityFeedSortOrderLocal = "desc" | "asc";
 
 export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   const router = useRouter();
@@ -180,6 +183,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const [activeChecklistForm, setActiveChecklistForm] = useState<string | null>(
     null,
   );
+  const [activityFeedFilter, setActivityFeedFilter] =
+    useState<ActivityFeedFilter>("all");
+  const [activityFeedSortOrder, setActivityFeedSortOrder] =
+    useState<ActivityFeedSortOrderLocal>("desc");
 
   const cardId = Array.isArray(router.query.cardId)
     ? router.query.cardId[0]
@@ -472,17 +479,92 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                     </>
                   )}
                   <div className="border-t-[1px] border-light-300 pt-12 dark:border-dark-300">
-                    <h2 className="text-md pb-4 font-medium text-light-1000 dark:text-dark-1000">
-                      {t`Activity`}
-                    </h2>
+                    <div className="mb-4 flex items-center justify-between border-b border-light-300 dark:border-dark-300">
+                      <nav
+                        aria-label={t`Activity tabs`}
+                        className="-mb-px flex items-center gap-5"
+                      >
+                        {(
+                          [
+                            { key: "all", label: t`All` },
+                            { key: "activity", label: t`Activity` },
+                            { key: "comments", label: t`Comments` },
+                          ] as const
+                        ).map((tab) => {
+                          const isActive = activityFeedFilter === tab.key;
+                          return (
+                            <button
+                              key={tab.key}
+                              type="button"
+                              role="tab"
+                              aria-selected={isActive}
+                              onClick={() => setActivityFeedFilter(tab.key)}
+                              className={`whitespace-nowrap border-b-2 pb-2 text-sm font-semibold transition-colors focus:outline-none ${
+                                isActive
+                                  ? "border-light-1000 text-light-1000 dark:border-dark-1000 dark:text-dark-1000"
+                                  : "border-transparent text-light-900 hover:border-light-950 hover:text-light-950 dark:text-dark-900 dark:hover:border-white/20 dark:hover:text-dark-950"
+                              }`}
+                            >
+                              {tab.label}
+                            </button>
+                          );
+                        })}
+                      </nav>
+                      <div className="mb-2 inline-flex items-center gap-2">
+                        <span className="text-xs font-medium text-light-900 dark:text-dark-700">
+                          {t`Sort`}
+                        </span>
+                        <div className="inline-flex items-center gap-1 rounded-md border border-light-400 p-0.5 dark:border-dark-300">
+                          {(
+                            [
+                              {
+                                key: "asc",
+                                label: t`Sort oldest to newest`,
+                                icon: HiMiniBarsArrowUp,
+                              },
+                              {
+                                key: "desc",
+                                label: t`Sort newest to oldest`,
+                                icon: HiMiniBarsArrowDown,
+                              },
+                            ] as const
+                          ).map((sortOption) => {
+                            const isActive =
+                              activityFeedSortOrder === sortOption.key;
+                            const Icon = sortOption.icon;
+
+                            return (
+                              <button
+                                key={sortOption.key}
+                                type="button"
+                                aria-label={sortOption.label}
+                                aria-pressed={isActive}
+                                onClick={() =>
+                                  setActivityFeedSortOrder(sortOption.key)
+                                }
+                                className={`rounded p-1.5 transition-colors ${
+                                  isActive
+                                    ? "bg-light-300 text-light-1000 dark:bg-dark-300 dark:text-dark-1000"
+                                    : "text-light-800 hover:bg-light-200 dark:text-dark-700 dark:hover:bg-dark-200"
+                                }`}
+                              >
+                                <Icon className="h-3.5 w-3.5" />
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
                     <div>
                       <ActivityList
                         cardPublicId={cardId}
                         isLoading={!card}
                         isAdmin={workspace.role === "admin"}
+                        filter={activityFeedFilter}
+                        sortOrder={activityFeedSortOrder}
                       />
                     </div>
-                    {!isTemplate && (
+                    {!isTemplate && activityFeedFilter !== "activity" && (
                       <div className="mt-6">
                         <NewCommentForm
                           cardPublicId={cardId}
