@@ -479,7 +479,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                     </>
                   )}
                   <div className="border-t-[1px] border-light-300 pt-12 dark:border-dark-300">
-                    <div className="mb-4 flex items-center justify-between border-b border-light-300 dark:border-dark-300">
+                    <div className="mb-4 flex items-center justify-between">
                       <nav
                         aria-label={t`Activity tabs`}
                         className="-mb-px flex items-center gap-5"
@@ -511,9 +511,6 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                         })}
                       </nav>
                       <div className="mb-2 inline-flex items-center gap-2">
-                        <span className="text-xs font-medium text-light-900 dark:text-dark-700">
-                          {t`Sort`}
-                        </span>
                         <div className="inline-flex items-center gap-1 rounded-md border border-light-400 p-0.5 dark:border-dark-300">
                           {(
                             [
