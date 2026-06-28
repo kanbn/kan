@@ -38,6 +38,7 @@ export const boards = pgTable(
     name: varchar("name", { length: 255 }).notNull(),
     description: text("description"),
     slug: varchar("slug", { length: 255 }).notNull(),
+    backgroundColor: varchar("backgroundColor", { length: 7 }),
     createdBy: uuid("createdBy").references(() => users.id, {
       onDelete: "set null",
     }),

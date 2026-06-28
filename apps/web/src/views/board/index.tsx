@@ -18,6 +18,7 @@ import type { UpdateBoardInput } from "@kan/api/types";
 
 import type { CardContextMenuAction } from "./components/CardContextMenu";
 import Button from "~/components/Button";
+import ColoredBackground from "~/components/ColoredBackground";
 import { DeleteLabelConfirmation } from "~/components/DeleteLabelConfirmation";
 import { LabelForm } from "~/components/LabelForm";
 import Modal from "~/components/modal";
@@ -38,6 +39,7 @@ import { api } from "~/utils/api";
 import { formatToArray } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import BoardDropdown from "./components/BoardDropdown";
+import { BoardSettingsForm } from "./components/BoardSettingsForm";
 import Card from "./components/Card";
 import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
 import { CardContextDuplicateModal } from "./components/CardContextDuplicateModal";
@@ -462,6 +464,17 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
 
         <Modal
           modalSize="sm"
+          isVisible={isOpen && modalContentType === "BOARD_SETTINGS"}
+        >
+          <BoardSettingsForm
+            boardPublicId={boardId ?? ""}
+            backgroundColor={boardData ? boardData.backgroundColor : null}
+            queryParams={queryParams}
+          />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
           isVisible={isOpen && modalContentType === "CREATE_TEMPLATE"}
         >
           <NewTemplateForm
@@ -530,7 +543,11 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
         title={`${boardData?.name ?? (isTemplate ? t`Board` : t`Template`)} | ${workspace.name ?? t`Workspace`}`}
       />
       <div className="relative flex h-full flex-col">
-        <PatternedBackground />
+        {boardData?.backgroundColor ? (
+          <ColoredBackground color={boardData.backgroundColor} />
+        ) : (
+          <PatternedBackground />
+        )}
         <div className="z-10 flex w-full flex-col justify-between p-6 md:flex-row md:p-8">
           {isLoading && !boardData && (
             <div className="flex space-x-2">
