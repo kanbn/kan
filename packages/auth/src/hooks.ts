@@ -4,6 +4,7 @@ import { createAuthMiddleware } from "better-auth/api";
 import { env } from "next-runtime-env";
 
 import type { dbClient } from "@kan/db/client";
+import * as boardRepo from "@kan/db/repository/board.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import { notificationClient } from "@kan/email";
@@ -166,6 +167,12 @@ export function createMiddlewareHooks(db: dbClient) {
             await memberRepo.acceptInvite(db, {
               memberId: member.id,
               userId,
+            });
+
+            // Seed per-user board ordering for every board in the workspace.
+            await boardRepo.createBoardUsersForMember(db, {
+              userId,
+              workspaceId: member.workspaceId,
             });
           }
         }

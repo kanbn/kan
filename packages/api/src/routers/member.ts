@@ -2,6 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { env } from "next-runtime-env";
 import { z } from "zod";
 
+import * as boardRepo from "@kan/db/repository/board.repo";
 import * as inviteLinkRepo from "@kan/db/repository/inviteLink.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as permissionRepo from "@kan/db/repository/permission.repo";
@@ -690,6 +691,12 @@ export const memberRouter = createTRPCRouter({
         role: "member",
         roleId: memberRole?.id ?? null,
         status: "active",
+      });
+
+      // Seed per-user board ordering for every existing board in the workspace.
+      await boardRepo.createBoardUsersForMember(ctx.db, {
+        userId: user.id,
+        workspaceId: invite.workspaceId,
       });
 
       return {

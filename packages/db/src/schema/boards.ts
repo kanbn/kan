@@ -3,6 +3,7 @@ import {
   bigint,
   bigserial,
   index,
+  integer,
   pgEnum,
   pgTable,
   primaryKey,
@@ -70,7 +71,7 @@ export const boards = pgTable(
 ).enableRLS();
 
 export const boardsRelations = relations(boards, ({ one, many }) => ({
-  userFavorites: many(userBoardFavorites),
+  boardUsers: many(boardUsers),
   createdBy: one(users, {
     fields: [boards.createdBy],
     references: [users.id],
@@ -96,8 +97,8 @@ export const boardsRelations = relations(boards, ({ one, many }) => ({
   }),
 }));
 
-export const userBoardFavorites = pgTable(
-  "user_board_favorites",
+export const boardUsers = pgTable(
+  "board_user",
   {
     userId: uuid("userId")
       .notNull()
@@ -105,11 +106,26 @@ export const userBoardFavorites = pgTable(
     boardId: bigint("boardId", { mode: "number" })
       .notNull()
       .references(() => boards.id, { onDelete: "cascade" }),
+    position: integer("position").notNull(),
+    isFavourite: boolean("isFavourite").notNull().default(false),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
   },
-  (table) => ({
-    pk: primaryKey({ columns: [table.userId, table.boardId] }),
-    userIdx: index("user_board_favorite_user_idx").on(table.userId),
-    boardIdx: index("user_board_favorite_board_idx").on(table.boardId),
-  }),
+  (table) => [
+    primaryKey({ columns: [table.userId, table.boardId] }),
+    index("board_user_user_idx").on(table.userId),
+    index("board_user_board_idx").on(table.boardId),
+  ],
 );
+
+export const boardUsersRelations = relations(boardUsers, ({ one }) => ({
+  user: one(users, {
+    fields: [boardUsers.userId],
+    references: [users.id],
+    relationName: "boardUserUser",
+  }),
+  board: one(boards, {
+    fields: [boardUsers.boardId],
+    references: [boards.id],
+    relationName: "boardUserBoard",
+  }),
+}));

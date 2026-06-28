@@ -3,6 +3,10 @@ packages:
   - packages/*
   - tooling/*
 
+# Only install package versions published at least 7 days ago (10080 minutes)
+# to reduce exposure to supply-chain attacks via freshly published releases.
+minimumReleaseAge: 10080
+
 catalog:
   "@tanstack/react-query": ^5.59.15
   "@trpc/client": ^11.4.3
