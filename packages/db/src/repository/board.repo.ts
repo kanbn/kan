@@ -198,6 +198,7 @@ export const getByPublicId = async (
       slug: true,
       visibility: true,
       isArchived: true,
+      customFieldsConfig: true,
     },
     with: {
       userFavorites: {
@@ -257,6 +258,7 @@ export const getByPublicId = async (
               index: true,
               dueDate: true,
               cardNumber: true,
+              customData: true,
             },
             with: {
               labels: {
@@ -638,6 +640,7 @@ export const update = async (
     visibility: BoardVisibilityStatus | undefined;
     boardPublicId: string;
     isArchived?: boolean;
+    customFieldsConfig?: string | null;
   },
 ) => {
   const [result] = await db
@@ -647,7 +650,8 @@ export const update = async (
       slug: boardInput.slug,
       visibility: boardInput.visibility,
       updatedAt: new Date(),
-      ...(boardInput.isArchived !== undefined && { isArchived: boardInput.isArchived })
+      ...(boardInput.isArchived !== undefined && { isArchived: boardInput.isArchived }),
+      ...(boardInput.customFieldsConfig !== undefined && { customFieldsConfig: boardInput.customFieldsConfig }),
     })
     .where(eq(boards.publicId, boardInput.boardPublicId))
     .returning({

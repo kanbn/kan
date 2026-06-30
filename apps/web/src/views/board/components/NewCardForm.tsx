@@ -7,10 +7,18 @@ import {
   HiOutlineBarsArrowDown,
   HiOutlineBarsArrowUp,
   HiXMark,
+  HiChevronDown,
+  HiChevronRight,
 } from "react-icons/hi2";
 
 import type { NewCardInput } from "@kan/api/types";
 import { generateUID } from "@kan/shared/utils";
+import {
+  type CustomFieldsConfig,
+  getMainCustomFields,
+  getCustomSections,
+  getSidebarCustomFields,
+} from "@kan/shared";
 
 import type { WorkspaceMember } from "~/components/Editor";
 import Avatar from "~/components/Avatar";
@@ -27,6 +35,8 @@ import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
+import { FieldRenderer } from "../../card/components/custom-fields/FieldRenderer";
+import { TimeseriesField } from "../../card/components/custom-fields/TimeseriesField";
 
 type NewCardFormInput = NewCardInput & {
   isCreateAnotherEnabled: boolean;
@@ -45,6 +55,7 @@ interface NewCardFormProps {
   boardPublicId: string;
   listPublicId: string;
   queryParams: QueryParams;
+  config: CustomFieldsConfig | null;
 }
 
 export function NewCardForm({
@@ -52,6 +63,7 @@ export function NewCardForm({
   boardPublicId,
   listPublicId,
   queryParams,
+  config,
 }: NewCardFormProps) {
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
@@ -79,6 +91,8 @@ export function NewCardForm({
     useForm<NewCardFormInput>({
       values: formState,
     });
+
+  const customData = watch("customData") || {};
 
   const labelPublicIds = watch("labelPublicIds") || [];
   const memberPublicIds = watch("memberPublicIds") || [];
@@ -147,6 +161,7 @@ export function NewCardForm({
               description: "",
               dueDate: args.dueDate ?? null,
               cardNumber: null,
+              customData: null,
               comments: [],
               checklists: [],
               attachments: [],
@@ -268,6 +283,7 @@ export function NewCardForm({
       memberPublicIds: data.memberPublicIds,
       position: data.position,
       dueDate: data.dueDate ?? null,
+      customData: data.customData ?? null,
     });
   };
 
@@ -520,6 +536,34 @@ export function NewCardForm({
             )}
           </button>
         </div>
+
+        {config && (
+          <div className="mt-4 flex flex-col gap-4">
+            <NewCardCustomFields
+              config={config}
+              customData={customData}
+              onChange={(data) => {
+                setValue("customData", data);
+                saveFormState({ ...formState, customData: data });
+              }}
+              workspaceMembers={
+                boardData?.workspace.members.map(
+                  (member): WorkspaceMember => ({
+                    publicId: member.publicId,
+                    email: member.email,
+                    user: member.user
+                      ? {
+                          id: member.publicId,
+                          name: member.user.name,
+                          image: member.user.image ?? null,
+                        }
+                      : null,
+                  }),
+                ) ?? []
+              }
+            />
+          </div>
+        )}
       </div>
 
       <div className="mt-5 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
@@ -539,5 +583,128 @@ export function NewCardForm({
         </div>
       </div>
     </form>
+  );
+}
+
+// ─── New Card Custom Fields ──────────────────────────────────────────────────
+
+interface NewCardCustomFieldsProps {
+  config: CustomFieldsConfig;
+  customData: Record<string, unknown> | null;
+  onChange: (data: Record<string, unknown>) => void;
+  workspaceMembers: WorkspaceMember[];
+}
+
+function NewCardCustomFields({
+  config,
+  customData,
+  onChange,
+  workspaceMembers,
+}: NewCardCustomFieldsProps) {
+  const mainFields = getMainCustomFields(config);
+  const sections = getCustomSections(config);
+  const sidebarCustom = getSidebarCustomFields(config);
+
+  const handleFieldChange = (
+    sectionKey: string,
+    fieldKey: string,
+    newValue: unknown,
+  ) => {
+    const data = { ...(customData ?? {}) };
+    const section =
+      data[sectionKey] != null &&
+      typeof data[sectionKey] === "object" &&
+      !Array.isArray(data[sectionKey])
+        ? { ...(data[sectionKey] as Record<string, unknown>) }
+        : {};
+    section[fieldKey] = newValue;
+    data[sectionKey] = section;
+    onChange(data);
+  };
+
+  const handleSectionChange = (sectionKey: string, newValue: unknown) => {
+    const data = { ...(customData ?? {}) };
+    data[sectionKey] = newValue;
+    onChange(data);
+  };
+
+  return (
+    <div className="flex flex-col gap-4 border-t border-light-200 pt-4 dark:border-dark-300">
+      {/* Sidebar custom fields */}
+      {sidebarCustom.map(({ key, field }) => (
+        <div key={key} className="flex flex-col">
+          <label className="mb-2 block text-xs font-medium text-[rgb(126,126,126)] dark:text-dark-800">
+            {field.title}
+          </label>
+          <FieldRenderer
+            fieldKey={key}
+            field={field}
+            value={(customData?.sidebar as Record<string, unknown> | undefined)?.[key]}
+            onChange={(v) => handleFieldChange("sidebar", key, v)}
+            workspaceMembers={workspaceMembers}
+            canEdit
+            embedded
+          />
+        </div>
+      ))}
+
+      {/* Main section fields */}
+      {mainFields.map(({ key, field }) => (
+        <div key={key} className="flex flex-col">
+          <label className="mb-2 block text-xs font-medium text-[rgb(126,126,126)] dark:text-dark-800">
+            {field.title}
+          </label>
+          <FieldRenderer
+            fieldKey={key}
+            field={field}
+            value={(customData?.main as Record<string, unknown> | undefined)?.[key]}
+            onChange={(v) => handleFieldChange("main", key, v)}
+            workspaceMembers={workspaceMembers}
+            canEdit
+            embedded
+          />
+        </div>
+      ))}
+
+      {/* Custom top-level sections */}
+      {sections.map(({ key, section }) => (
+        <div key={key} className="flex flex-col border-t border-light-200 pt-3 dark:border-dark-300">
+          <h3 className="mb-2 flex w-full items-center gap-1 text-left text-sm font-semibold text-neutral-800 dark:text-dark-1000">
+            {section.title ?? key}
+          </h3>
+          {section.type === "timeseries" ? (
+            <TimeseriesField
+              sectionKey={key}
+              field={{ title: section.title ?? key, type: "timeseries", fields: section.fields }}
+              value={customData?.[key]}
+              onChange={(v) => handleSectionChange(key, v)}
+              workspaceMembers={workspaceMembers}
+              canEdit
+            />
+          ) : (
+            <div className="flex flex-col gap-3 pt-2">
+              {Object.entries(section.fields ?? {}).map(([fieldKey, field]) => (
+                <div key={fieldKey} className="flex flex-col">
+                  {!field.hideLabel && (
+                    <label className="mb-2 block text-xs font-medium text-[rgb(126,126,126)] dark:text-dark-800">
+                      {field.title}
+                    </label>
+                  )}
+                  <FieldRenderer
+                    fieldKey={fieldKey}
+                    field={field}
+                    value={(customData?.[key] as Record<string, unknown> | undefined)?.[fieldKey]}
+                    onChange={(v) => handleFieldChange(key, fieldKey, v)}
+                    workspaceMembers={workspaceMembers}
+                    canEdit
+                    embedded
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
   );
 }

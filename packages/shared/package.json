@@ -30,6 +30,7 @@
     "@kan/eslint-config": "workspace:*",
     "@kan/prettier-config": "workspace:*",
     "@kan/tsconfig": "workspace:*",
+    "@types/js-yaml": "^4.0.9",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
@@ -40,6 +41,7 @@
     "@aws-sdk/s3-request-presigner": "^3.812.0",
     "date-fns": "^4.1.0",
     "jose": "^6.1.2",
+    "js-yaml": "^4.1.0",
     "nanoid": "^5.0.9",
     "next-runtime-env": "^1.7.2"
   }

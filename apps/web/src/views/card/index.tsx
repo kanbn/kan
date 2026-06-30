@@ -7,6 +7,7 @@ import { HiXMark } from "react-icons/hi2";
 import { IoChevronForwardSharp } from "react-icons/io5";
 
 import { authClient } from "@kan/auth/client";
+import { parseCustomFieldsConfig } from "@kan/shared";
 
 import Avatar from "~/components/Avatar";
 import Editor from "~/components/Editor";
@@ -29,6 +30,7 @@ import ActivityList from "./components/ActivityList";
 import { AttachmentThumbnails } from "./components/AttachmentThumbnails";
 import { AttachmentUpload } from "./components/AttachmentUpload";
 import Checklists from "./components/Checklists";
+import { CustomFields } from "./components/CustomFields";
 import { DeleteCardConfirmation } from "./components/DeleteCardConfirmation";
 import { DeleteChecklistConfirmation } from "./components/DeleteChecklistConfirmation";
 import { DeleteCommentConfirmation } from "./components/DeleteCommentConfirmation";
@@ -67,6 +69,19 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   const workspaceMembers = board?.workspace.members;
   const selectedLabels = card?.labels;
   const selectedMembers = card?.members;
+
+  // Parse custom fields config for built-in label overrides
+  const customFieldsConfig = (() => {
+    if (!board?.customFieldsConfig) return null;
+    try {
+      return parseCustomFieldsConfig(board.customFieldsConfig);
+    } catch {
+      return null;
+    }
+  })();
+
+  const listLabel = customFieldsConfig?.sidebar?.fields?.["list"]?.title ?? t`List`;
+  const dueDateLabel = customFieldsConfig?.sidebar?.fields?.["dueDate"]?.title ?? t`Due date`;
 
   const formattedLabels =
     labels?.map((label) => {
@@ -121,7 +136,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   return (
     <div className="h-full w-[360px] border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
       <div className="mb-4 flex w-full flex-row pt-[18px]">
-        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
+        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{listLabel}</p>
         <ListSelector
           cardPublicId={cardId ?? ""}
           lists={formattedLists}
@@ -150,7 +165,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
         </div>
       )}
       <div className="mb-4 flex w-full flex-row">
-        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Due date`}</p>
+        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{dueDateLabel}</p>
         <DueDateSelector
           cardPublicId={cardId ?? ""}
           dueDate={card?.dueDate}
@@ -158,6 +173,18 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           disabled={!canEdit}
         />
       </div>
+      {customFieldsConfig && cardId && (
+        <div className="mt-2">
+          <CustomFields
+            panel="sidebar"
+            cardPublicId={cardId}
+            config={customFieldsConfig}
+            customData={(card?.customData as Record<string, unknown>) ?? null}
+            workspaceMembers={workspaceMembers ?? []}
+            canEdit={Boolean(canEdit)}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -213,6 +240,15 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const board = card?.list.board;
   const workspaceMembers = board?.workspace.members;
   const boardId = board?.publicId;
+
+  const customFieldsConfigMain = (() => {
+    if (!board?.customFieldsConfig) return null;
+    try {
+      return parseCustomFieldsConfig(board.customFieldsConfig);
+    } catch {
+      return null;
+    }
+  })();
 
   const editorWorkspaceMembers =
     workspaceMembers
@@ -424,6 +460,18 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
               </div>
               {card && (
                 <>
+                  {customFieldsConfigMain && (
+                    <div className="mb-8">
+                      <CustomFields
+                        panel="main"
+                        cardPublicId={cardId}
+                        config={customFieldsConfigMain}
+                        customData={(card?.customData as Record<string, unknown>) ?? null}
+                        workspaceMembers={workspaceMembers ?? []}
+                        canEdit={Boolean(canEdit)}
+                      />
+                    </div>
+                  )}
                   <div className="mb-10 flex w-full max-w-2xl flex-col justify-between">
                     <form
                       onSubmit={handleSubmit(onSubmit)}

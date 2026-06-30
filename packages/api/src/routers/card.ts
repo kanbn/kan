@@ -48,6 +48,7 @@ export const cardRouter = createTRPCRouter({
         memberPublicIds: z.array(z.string().min(12)),
         position: z.enum(["start", "end"]),
         dueDate: z.date().nullable().optional(),
+        customData: z.record(z.string(), z.unknown()).nullable().optional(),
       }),
     )
     .output(cardCreateResponseSchema)
@@ -81,6 +82,7 @@ export const cardRouter = createTRPCRouter({
         workspaceId: list.workspaceId,
         position: input.position,
         dueDate: input.dueDate ?? null,
+        customData: input.customData ?? null,
       });
 
       const newCardId = newCard.id;
@@ -725,6 +727,7 @@ export const cardRouter = createTRPCRouter({
 
       return {
         ...result,
+        customData: result.customData as Record<string, unknown> | null,
         attachments: attachmentsWithUrls,
         list: {
           ...result.list,
@@ -853,6 +856,7 @@ export const cardRouter = createTRPCRouter({
         index: z.number().optional(),
         listPublicId: z.string().min(12).optional(),
         dueDate: z.date().nullable().optional(),
+        customData: z.record(z.string(), z.unknown()).nullable().optional(),
       }),
     )
     .output(cardUpdateResponseSchema)
@@ -934,13 +938,14 @@ export const cardRouter = createTRPCRouter({
 
       const previousDueDate = existingCard.dueDate;
 
-      if (input.title || input.description || input.dueDate !== undefined) {
+      if (input.title || input.description || input.dueDate !== undefined || input.customData !== undefined) {
         result = await cardRepo.update(
           ctx.db,
           {
             ...(input.title && { title: input.title }),
             ...(input.description && { description: input.description }),
             ...(input.dueDate !== undefined && { dueDate: input.dueDate }),
+            ...(input.customData !== undefined && { customData: input.customData }),
           },
           { cardPublicId: input.cardPublicId },
         );
@@ -1279,6 +1284,7 @@ export const cardRouter = createTRPCRouter({
         workspaceId: targetList.workspaceId,
         position: "end",
         dueDate: sourceCard.dueDate ?? null,
+        customData: sourceCard.customData as Record<string, unknown> | null,
       });
 
       if (input.index !== undefined && input.index >= 0) {

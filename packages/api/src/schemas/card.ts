@@ -17,6 +17,7 @@ export const cardUpdateResponseSchema = z.object({
   title: z.string(),
   description: z.string().nullable(),
   dueDate: z.date().nullable(),
+  customData: z.unknown(),
 });
 
 // ─── Comment responses ───────────────────────────────────────
@@ -50,6 +51,7 @@ export const cardDetailSchema = z.object({
   index: z.number(),
   dueDate: z.date().nullable(),
   createdBy: z.string().nullable(),
+  customData: z.record(z.string(), z.unknown()).nullable(),
   labels: z.array(labelSchema),
   attachments: z.array(
     z.object({
@@ -68,6 +70,7 @@ export const cardDetailSchema = z.object({
     board: z.object({
       publicId: z.string(),
       name: z.string(),
+      customFieldsConfig: z.string().nullable(),
       labels: z.array(labelSchema),
       lists: z.array(
         z.object({

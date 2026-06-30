@@ -45,6 +45,7 @@ export const create = async (
     workspaceId: number;
     position: "start" | "end";
     dueDate?: Date | null;
+    customData?: Record<string, unknown> | null;
   },
 ) => {
   return db.transaction(async (tx) => {
@@ -106,6 +107,7 @@ export const create = async (
         index: index,
         cardNumber,
         dueDate: cardInput.dueDate ?? null,
+        customData: cardInput.customData ?? null,
       })
       .returning({
         id: cards.id,
@@ -204,6 +206,7 @@ export const update = async (
     title?: string;
     description?: string;
     dueDate?: Date | null;
+    customData?: Record<string, unknown> | null;
   },
   args: {
     cardPublicId: string;
@@ -215,6 +218,7 @@ export const update = async (
       title: cardInput.title,
       description: cardInput.description,
       dueDate: cardInput.dueDate !== undefined ? cardInput.dueDate : undefined,
+      ...(cardInput.customData !== undefined && { customData: cardInput.customData }),
       updatedAt: new Date(),
     })
     .where(and(eq(cards.publicId, args.cardPublicId), isNull(cards.deletedAt)))
@@ -224,6 +228,7 @@ export const update = async (
       title: cards.title,
       description: cards.description,
       dueDate: cards.dueDate,
+      customData: cards.customData,
     });
 
   return result;
@@ -491,6 +496,7 @@ export const getWithListAndMembersByPublicId = async (
       createdBy: true,
       cardNumber: true,
       index: true,
+      customData: true,
     },
     with: {
       labels: {
@@ -546,6 +552,7 @@ export const getWithListAndMembersByPublicId = async (
             columns: {
               publicId: true,
               name: true,
+              customFieldsConfig: true,
             },
             with: {
               labels: {

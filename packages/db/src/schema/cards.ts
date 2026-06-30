@@ -4,6 +4,7 @@ import {
   bigserial,
   index,
   integer,
+  jsonb,
   pgEnum,
   pgTable,
   primaryKey,
@@ -80,6 +81,7 @@ export const cards = pgTable(
       () => imports.id,
     ),
     dueDate: timestamp("dueDate"),
+    customData: jsonb("customData"),
   },
   (table) => [
     index("card_list_number_idx").on(table.listId, table.cardNumber),
