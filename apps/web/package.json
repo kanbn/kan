@@ -37,6 +37,7 @@
     "@t3-oss/env-nextjs": "^0.11.1",
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/react-query": "catalog:",
+    "@tiptap/extension-image": "^2.14.0",
     "@tiptap/extension-link": "^2.22.2",
     "@tiptap/extension-mention": "^3.0.9",
     "@tiptap/extension-placeholder": "^2.14.0",
