@@ -44,7 +44,7 @@
       "0": ["boardName ?? \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 59]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 60]],
     "translation": "{0} foi adicionado aos seus favoritos."
   },
   "bDI6VI": {
@@ -53,7 +53,7 @@
       "0": ["boardName ?? \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 60]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 61]],
     "translation": "{0} foi removido dos seus favoritos."
   },
   "CJukzS": {
@@ -71,7 +71,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 557]],
+    "origin": [["src/views/board/index.tsx", 565]],
     "translation": "{0} não encontrado"
   },
   "0xWkkH": {
@@ -328,7 +328,7 @@
     "message": "Add to favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 125]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 137]],
     "translation": "Adicionar aos favoritos"
   },
   "cWXW+7": {
@@ -423,7 +423,7 @@
     "message": "Added to favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 56]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 57]],
     "translation": "Adicionado aos favoritos"
   },
   "14Xi3Z": {
@@ -657,7 +657,7 @@
     "message": "Archive board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 114]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 115]],
     "translation": "Arquivar quadro"
   },
   "TdfEV7": {
@@ -887,7 +887,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 530],
+      ["src/views/board/index.tsx", 538],
       ["src/views/card/index.tsx", 321],
       ["src/views/public/board/index.tsx", 125]
     ],
@@ -906,8 +906,15 @@
     "message": "Board archived",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 46]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 47]],
     "translation": "Quadro arquivado"
+  },
+  "wE3hGS": {
+    "translation": "Quadro movido",
+    "message": "Board moved",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 33]]
   },
   "wewm3j": {
     "message": "Board name cannot exceed 100 characters",
@@ -943,7 +950,7 @@
     "message": "Board unarchived",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 46]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 47]],
     "translation": "Quadro desarquivado"
   },
   "Xid3K6": {
@@ -1281,6 +1288,7 @@
       ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 176],
       ["src/views/board/components/CardContextDuplicateModal.tsx", 267],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 44],
+      ["src/views/board/components/MoveBoardForm.tsx", 99],
       ["src/views/card/components/Comment.tsx", 195],
       ["src/views/card/components/DeleteCardConfirmation.tsx", 86],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 64],
@@ -1324,6 +1332,13 @@
     "origin": [["src/views/card/components/Dropdown.tsx", 48]],
     "translation": "Card duplicado com sucesso."
   },
+  "AgE2vR": {
+    "translation": "As atribuições de membros do cartão serão removidas ao mover para um workspace diferente.",
+    "message": "Card member assignments will be cleared when moving to a different workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 92]]
+  },
   "fEY2vP": {
     "message": "Card not found",
     "placeholders": {},
@@ -1346,7 +1361,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 308],
+      ["src/views/board/index.tsx", 309],
       ["src/views/card/components/Dropdown.tsx", 74],
       ["src/views/public/board/CardModal.tsx", 38]
     ],
@@ -1899,8 +1914,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 92],
-      ["src/views/board/index.tsx", 671]
+      ["src/views/board/index.tsx", 93],
+      ["src/views/board/index.tsx", 679]
     ],
     "translation": "Criar nova lista"
   },
@@ -2118,7 +2133,7 @@
     "message": "Delete board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 136]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 148]],
     "translation": "Excluir quadro"
   },
   "nabda1": {
@@ -2149,7 +2164,7 @@
     "message": "Delete template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 136]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 148]],
     "translation": "Excluir modelo"
   },
   "snMaH4": {
@@ -2210,6 +2225,13 @@
     "comments": [],
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 45]],
     "translation": "Design"
+  },
+  "Uf+1DF": {
+    "translation": "Workspace de destino",
+    "message": "Destination workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 76]]
   },
   "Odv3J6": {
     "message": "Disconnect GitHub",
@@ -2416,7 +2438,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 105],
+      ["src/views/board/components/BoardDropdown.tsx", 106],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 116]
     ],
     "translation": "Editar URL do quadro"
@@ -3103,7 +3125,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 656]],
+    "origin": [["src/views/board/index.tsx", 664]],
     "translation": "Comece criando uma nova lista"
   },
   "oW13KZ": {
@@ -3743,7 +3765,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/UpdateBoardSlugButton.tsx", 80],
-      ["src/views/board/index.tsx", 306],
+      ["src/views/board/index.tsx", 307],
       ["src/views/card/components/Dropdown.tsx", 72],
       ["src/views/public/board/CardModal.tsx", 36],
       ["src/views/public/board/index.tsx", 77]
@@ -3843,7 +3865,7 @@
     "message": "Make template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 94]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 95]],
     "translation": "Criar modelo"
   },
   "hB02vO": {
@@ -3977,6 +3999,20 @@
     "origin": [["src/views/members/components/InviteMemberForm.tsx", 170]],
     "translation": "cobrança mensal"
   },
+  "sZ/WDz": {
+    "translation": "Mover quadro",
+    "message": "Move board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 107]]
+  },
+  "VvCMyU": {
+    "translation": "Mover quadro para outro workspace",
+    "message": "Move board to another workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 64]]
+  },
   "51UCsN": {
     "message": "Move to another list",
     "placeholders": {},
@@ -3990,6 +4026,13 @@
     "comments": [],
     "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 70]],
     "translation": "Mover para lista"
+  },
+  "S3wq2O": {
+    "translation": "Mover para workspace",
+    "message": "Move to workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 126]]
   },
   "BOqTi5": {
     "message": "moved the card from <0>{0}</0> to<1>{1}</1>",
@@ -4102,7 +4145,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 113],
-      ["src/views/board/index.tsx", 620]
+      ["src/views/board/index.tsx", 628]
     ],
     "translation": "Nova lista"
   },
@@ -4235,14 +4278,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 652]],
+    "origin": [["src/views/board/index.tsx", 660]],
     "translation": "Nenhuma lista"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 657]],
+    "origin": [["src/views/board/index.tsx", 665]],
     "translation": "Nenhuma lista foi criada ainda"
   },
   "i30J2U": {
@@ -4657,15 +4700,15 @@
       ["src/components/DeleteLabelConfirmation.tsx", 26],
       ["src/components/FeedbackModal.tsx", 41],
       ["src/components/NewWorkspaceForm.tsx", 110],
-      ["src/views/board/components/BoardDropdown.tsx", 68],
+      ["src/views/board/components/BoardDropdown.tsx", 69],
       ["src/views/board/components/NewCardForm.tsx", 193],
       ["src/views/board/components/NewListForm.tsx", 79],
       ["src/views/board/components/NewTemplateForm.tsx", 61],
       ["src/views/board/components/NewTemplateForm.tsx", 77],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 73],
       ["src/views/board/components/VisibilityButton.tsx", 57],
-      ["src/views/board/index.tsx", 218],
-      ["src/views/board/index.tsx", 274],
+      ["src/views/board/index.tsx", 219],
+      ["src/views/board/index.tsx", 275],
       ["src/views/boards/components/ImportBoardsForm.tsx", 243],
       ["src/views/boards/components/ImportBoardsForm.tsx", 395],
       ["src/views/card/components/AttachmentThumbnails.tsx", 74],
@@ -4723,7 +4766,7 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 76],
       ["src/views/board/components/CardContextMoveListModal.tsx", 42],
-      ["src/views/board/index.tsx", 315],
+      ["src/views/board/index.tsx", 316],
       ["src/views/card/components/Dropdown.tsx", 55],
       ["src/views/card/components/Dropdown.tsx", 81],
       ["src/views/card/components/Dropdown.tsx", 100],
@@ -4892,7 +4935,7 @@
     "message": "Remove from favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 124]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 136]],
     "translation": "Remover dos favoritos"
   },
   "99VIgC": {
@@ -4946,7 +4989,7 @@
     "message": "Removed from favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 57]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 58]],
     "translation": "Removido dos favoritos"
   },
   "YVT40D": {
@@ -5192,6 +5235,13 @@
       ["src/views/board/components/CardContextDuplicateModal.tsx", 131]
     ],
     "translation": "Selecione uma lista"
+  },
+  "NM2hyD": {
+    "translation": "Selecione um workspace",
+    "message": "Select a workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 84]]
   },
   "wgNoIs": {
     "message": "Select all",
@@ -5658,8 +5708,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 530],
-      ["src/views/board/index.tsx", 566]
+      ["src/views/board/index.tsx", 538],
+      ["src/views/board/index.tsx", 574]
     ],
     "translation": "Modelo"
   },
@@ -5770,14 +5820,23 @@
     "message": "The board has been archived.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 48]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 49]],
     "translation": "O quadro foi arquivado."
+  },
+  "ZWk38w": {
+    "translation": "O quadro foi movido para {0}.",
+    "message": "The board has been moved to {0}.",
+    "placeholders": {
+      "0": ["targetWorkspace?.name ?? \"the workspace\""]
+    },
+    "comments": [],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 34]]
   },
   "C6gv54": {
     "message": "The board has been unarchived.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 49]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 50]],
     "translation": "O quadro foi desarquivado."
   },
   "nKBUeF": {
@@ -6117,7 +6176,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 313],
+      ["src/views/board/index.tsx", 314],
       ["src/views/card/components/Dropdown.tsx", 79],
       ["src/views/public/board/CardModal.tsx", 43],
       ["src/views/public/board/index.tsx", 84]
@@ -6228,6 +6287,13 @@
     ],
     "translation": "Não foi possível duplicar o cartão"
   },
+  "d196/6": {
+    "translation": "Não foi possível mover o quadro",
+    "message": "Unable to move board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 45]]
+  },
   "K7k9u3": {
     "message": "Unable to move card",
     "placeholders": {},
@@ -6288,7 +6354,7 @@
     "message": "Unable to update board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 67]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 68]],
     "translation": "Não foi possível atualizar o quadro"
   },
   "XpcjLO": {
@@ -6310,7 +6376,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 273],
+      ["src/views/board/index.tsx", 274],
       ["src/views/card/index.tsx", 235]
     ],
     "translation": "Não foi possível atualizar o cartão"
@@ -6355,7 +6421,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 217],
+      ["src/views/board/index.tsx", 218],
       ["src/views/card/components/ListSelector.tsx", 54]
     ],
     "translation": "Não foi possível atualizar a lista"
@@ -6395,7 +6461,7 @@
     "message": "Unarchive board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 114]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 115]],
     "translation": "Desarquivar quadro"
   },
   "E8zYtd": {
@@ -6931,7 +6997,7 @@
     "comments": [],
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
-      ["src/views/board/index.tsx", 530],
+      ["src/views/board/index.tsx", 538],
       ["src/views/boards/index.tsx", 48],
       ["src/views/members/index.tsx", 278],
       ["src/views/public/board/index.tsx", 125],
@@ -7146,6 +7212,13 @@
     "origin": [["src/views/home/components/Faqs.tsx", 127]],
     "translation": "Você pode fazer self-host seguindo as instruções em nosso <0>repositório</0>."
   },
+  "tUL16u": {
+    "translation": "Você não tem outros workspaces para mover este quadro.",
+    "message": "You don't have any other workspaces to move this board to.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 68]]
+  },
   "h2FKMV": {
     "message": "You don't have permission",
     "placeholders": {},
@@ -7154,8 +7227,8 @@
       ["src/views/board/components/List.tsx", 117],
       ["src/views/board/components/UpdateBoardSlugButton.tsx", 58],
       ["src/views/board/components/VisibilityButton.tsx", 72],
-      ["src/views/board/index.tsx", 604],
-      ["src/views/board/index.tsx", 662],
+      ["src/views/board/index.tsx", 612],
+      ["src/views/board/index.tsx", 670],
       ["src/views/boards/components/BoardsList.tsx", 71],
       ["src/views/boards/index.tsx", 59],
       ["src/views/boards/index.tsx", 80]
