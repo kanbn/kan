@@ -88,7 +88,7 @@ export default function BoardDropdown({
   const isArchiveActionPending = updateBoard.isPending;
 
   const items = [
-    ...(isTemplate && canCreateBoard
+    ...(!isTemplate && canCreateBoard
       ? [
         {
           label: t`Make template`,
