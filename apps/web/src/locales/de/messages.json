@@ -910,11 +910,11 @@
     "translation": "Board archiviert"
   },
   "wE3hGS": {
-    "translation": "Board verschoben",
     "message": "Board moved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 33]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 33]],
+    "translation": "Board verschoben"
   },
   "wewm3j": {
     "message": "Board name cannot exceed 100 characters",
@@ -1333,11 +1333,11 @@
     "translation": "Karte erfolgreich dupliziert."
   },
   "AgE2vR": {
-    "translation": "Kartenmitgliederzuweisungen werden beim Verschieben in einen anderen Workspace gelöscht.",
     "message": "Card member assignments will be cleared when moving to a different workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 92]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 92]],
+    "translation": "Kartenmitgliederzuweisungen werden beim Verschieben in einen anderen Workspace gelöscht."
   },
   "fEY2vP": {
     "message": "Card not found",
@@ -2227,11 +2227,11 @@
     "translation": "Design"
   },
   "Uf+1DF": {
-    "translation": "Ziel-Workspace",
     "message": "Destination workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 76]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 76]],
+    "translation": "Ziel-Workspace"
   },
   "Odv3J6": {
     "message": "Disconnect GitHub",
@@ -4000,18 +4000,18 @@
     "translation": "Monatliche Abrechnung"
   },
   "sZ/WDz": {
-    "translation": "Board verschieben",
     "message": "Move board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 107]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 107]],
+    "translation": "Board verschieben"
   },
   "VvCMyU": {
-    "translation": "Board in einen anderen Workspace verschieben",
     "message": "Move board to another workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 64]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 64]],
+    "translation": "Board in einen anderen Workspace verschieben"
   },
   "51UCsN": {
     "message": "Move to another list",
@@ -4028,11 +4028,11 @@
     "translation": "In Liste verschieben"
   },
   "S3wq2O": {
-    "translation": "In Workspace verschieben",
     "message": "Move to workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 126]]
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 126]],
+    "translation": "In Workspace verschieben"
   },
   "BOqTi5": {
     "message": "moved the card from <0>{0}</0> to<1>{1}</1>",
@@ -5237,11 +5237,11 @@
     "translation": "Liste auswählen"
   },
   "NM2hyD": {
-    "translation": "Workspace auswählen",
     "message": "Select a workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 84]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 84]],
+    "translation": "Workspace auswählen"
   },
   "wgNoIs": {
     "message": "Select all",
@@ -5824,13 +5824,13 @@
     "translation": "Das Board wurde archiviert."
   },
   "ZWk38w": {
-    "translation": "Das Board wurde nach {0} verschoben.",
     "message": "The board has been moved to {0}.",
     "placeholders": {
       "0": ["targetWorkspace?.name ?? \"the workspace\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 34]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 34]],
+    "translation": "Das Board wurde nach {0} verschoben."
   },
   "C6gv54": {
     "message": "The board has been unarchived.",
@@ -6288,11 +6288,11 @@
     "translation": "Karte konnte nicht dupliziert werden"
   },
   "d196/6": {
-    "translation": "Board konnte nicht verschoben werden",
     "message": "Unable to move board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 45]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 45]],
+    "translation": "Board konnte nicht verschoben werden"
   },
   "K7k9u3": {
     "message": "Unable to move card",
@@ -7213,11 +7213,11 @@
     "translation": "Sie können selbst hosten, indem Sie den Anweisungen in unserem <0>Repo</0> folgen."
   },
   "tUL16u": {
-    "translation": "Sie haben keine anderen Workspaces, in die Sie dieses Board verschieben können.",
     "message": "You don't have any other workspaces to move this board to.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 68]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 68]],
+    "translation": "Sie haben keine anderen Workspaces, in die Sie dieses Board verschieben können."
   },
   "h2FKMV": {
     "message": "You don't have permission",

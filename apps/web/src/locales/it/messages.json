@@ -910,11 +910,11 @@
     "translation": "Bacheca archiviata"
   },
   "wE3hGS": {
-    "translation": "Bacheca spostata",
     "message": "Board moved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 33]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 33]],
+    "translation": "Bacheca spostata"
   },
   "wewm3j": {
     "message": "Board name cannot exceed 100 characters",
@@ -1333,11 +1333,11 @@
     "translation": "Scheda duplicata con successo."
   },
   "AgE2vR": {
-    "translation": "Le assegnazioni dei membri della scheda verranno cancellate quando si sposta in un'area di lavoro diversa.",
     "message": "Card member assignments will be cleared when moving to a different workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 92]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 92]],
+    "translation": "Le assegnazioni dei membri della scheda verranno cancellate quando si sposta in un'area di lavoro diversa."
   },
   "fEY2vP": {
     "message": "Card not found",
@@ -2227,11 +2227,11 @@
     "translation": "Design"
   },
   "Uf+1DF": {
-    "translation": "Area di lavoro di destinazione",
     "message": "Destination workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 76]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 76]],
+    "translation": "Area di lavoro di destinazione"
   },
   "Odv3J6": {
     "message": "Disconnect GitHub",
@@ -4000,18 +4000,18 @@
     "translation": "fatturazione mensile"
   },
   "sZ/WDz": {
-    "translation": "Sposta bacheca",
     "message": "Move board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 107]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 107]],
+    "translation": "Sposta bacheca"
   },
   "VvCMyU": {
-    "translation": "Sposta la bacheca in un'altra area di lavoro",
     "message": "Move board to another workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 64]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 64]],
+    "translation": "Sposta la bacheca in un'altra area di lavoro"
   },
   "51UCsN": {
     "message": "Move to another list",
@@ -4028,11 +4028,11 @@
     "translation": "Sposta nell'elenco"
   },
   "S3wq2O": {
-    "translation": "Sposta nell'area di lavoro",
     "message": "Move to workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 126]]
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 126]],
+    "translation": "Sposta nell'area di lavoro"
   },
   "BOqTi5": {
     "message": "moved the card from <0>{0}</0> to<1>{1}</1>",
@@ -5237,11 +5237,11 @@
     "translation": "Seleziona un elenco"
   },
   "NM2hyD": {
-    "translation": "Seleziona un'area di lavoro",
     "message": "Select a workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 84]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 84]],
+    "translation": "Seleziona un'area di lavoro"
   },
   "wgNoIs": {
     "message": "Select all",
@@ -5824,13 +5824,13 @@
     "translation": "La bacheca è stata archiviata."
   },
   "ZWk38w": {
-    "translation": "La bacheca è stata spostata in {0}.",
     "message": "The board has been moved to {0}.",
     "placeholders": {
       "0": ["targetWorkspace?.name ?? \"the workspace\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 34]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 34]],
+    "translation": "La bacheca è stata spostata in {0}."
   },
   "C6gv54": {
     "message": "The board has been unarchived.",
@@ -6288,11 +6288,11 @@
     "translation": "Impossibile duplicare la scheda"
   },
   "d196/6": {
-    "translation": "Impossibile spostare la bacheca",
     "message": "Unable to move board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 45]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 45]],
+    "translation": "Impossibile spostare la bacheca"
   },
   "K7k9u3": {
     "message": "Unable to move card",
@@ -7213,11 +7213,11 @@
     "translation": "Puoi effettuare il self-hosting seguendo le istruzioni nel nostro <0>repo</0>."
   },
   "tUL16u": {
-    "translation": "Non hai altre aree di lavoro in cui spostare questa bacheca.",
     "message": "You don't have any other workspaces to move this board to.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 68]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 68]],
+    "translation": "Non hai altre aree di lavoro in cui spostare questa bacheca."
   },
   "h2FKMV": {
     "message": "You don't have permission",

@@ -910,11 +910,11 @@
     "translation": "Tablica zarchiwizowana"
   },
   "wE3hGS": {
-    "translation": "Tablica przeniesiona",
     "message": "Board moved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 33]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 33]],
+    "translation": "Tablica przeniesiona"
   },
   "wewm3j": {
     "message": "Board name cannot exceed 100 characters",
@@ -1333,11 +1333,11 @@
     "translation": "Karta została pomyślnie zduplikowana."
   },
   "AgE2vR": {
-    "translation": "Przypisania członków do kart zostaną usunięte podczas przenoszenia do innego obszaru roboczego.",
     "message": "Card member assignments will be cleared when moving to a different workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 92]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 92]],
+    "translation": "Przypisania członków do kart zostaną usunięte podczas przenoszenia do innego obszaru roboczego."
   },
   "fEY2vP": {
     "message": "Card not found",
@@ -2227,11 +2227,11 @@
     "translation": "Design"
   },
   "Uf+1DF": {
-    "translation": "Docelowy obszar roboczy",
     "message": "Destination workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 76]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 76]],
+    "translation": "Docelowy obszar roboczy"
   },
   "Odv3J6": {
     "message": "Disconnect GitHub",
@@ -4000,18 +4000,18 @@
     "translation": "rozliczenie miesięczne"
   },
   "sZ/WDz": {
-    "translation": "Przenieś tablicę",
     "message": "Move board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 107]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 107]],
+    "translation": "Przenieś tablicę"
   },
   "VvCMyU": {
-    "translation": "Przenieś tablicę do innego obszaru roboczego",
     "message": "Move board to another workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 64]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 64]],
+    "translation": "Przenieś tablicę do innego obszaru roboczego"
   },
   "51UCsN": {
     "message": "Move to another list",
@@ -4028,11 +4028,11 @@
     "translation": "Przenieś do listy"
   },
   "S3wq2O": {
-    "translation": "Przenieś do obszaru roboczego",
     "message": "Move to workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 126]]
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 126]],
+    "translation": "Przenieś do obszaru roboczego"
   },
   "BOqTi5": {
     "message": "moved the card from <0>{0}</0> to<1>{1}</1>",
@@ -5237,11 +5237,11 @@
     "translation": "Wybierz listę"
   },
   "NM2hyD": {
-    "translation": "Wybierz obszar roboczy",
     "message": "Select a workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 84]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 84]],
+    "translation": "Wybierz obszar roboczy"
   },
   "wgNoIs": {
     "message": "Select all",
@@ -5824,13 +5824,13 @@
     "translation": "Tablica została zarchiwizowana."
   },
   "ZWk38w": {
-    "translation": "Tablica została przeniesiona do {0}.",
     "message": "The board has been moved to {0}.",
     "placeholders": {
       "0": ["targetWorkspace?.name ?? \"the workspace\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 34]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 34]],
+    "translation": "Tablica została przeniesiona do {0}."
   },
   "C6gv54": {
     "message": "The board has been unarchived.",
@@ -6288,11 +6288,11 @@
     "translation": "Nie można zduplikować karty"
   },
   "d196/6": {
-    "translation": "Nie można przenieść tablicy",
     "message": "Unable to move board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 45]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 45]],
+    "translation": "Nie można przenieść tablicy"
   },
   "K7k9u3": {
     "message": "Unable to move card",
@@ -7213,11 +7213,11 @@
     "translation": "Możesz samodzielnie hostować, postępując zgodnie z instrukcjami w naszym <0>repozytorium</0>."
   },
   "tUL16u": {
-    "translation": "Nie masz żadnych innych obszarów roboczych, do których można przenieść tę tablicę.",
     "message": "You don't have any other workspaces to move this board to.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 68]]
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 68]],
+    "translation": "Nie masz żadnych innych obszarów roboczych, do których można przenieść tę tablicę."
   },
   "h2FKMV": {
     "message": "You don't have permission",
