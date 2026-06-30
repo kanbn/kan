@@ -49,6 +49,7 @@ import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
 import { MoveBoardForm } from "./components/MoveBoardForm";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
+import { BoardCalendarView } from "./components/BoardCalendarView";
 import List from "./components/List";
 import { NewCardForm } from "./components/NewCardForm";
 import { NewListForm } from "./components/NewListForm";
@@ -58,6 +59,39 @@ import { UpdateBoardSlugForm } from "./components/UpdateBoardSlugForm";
 import VisibilityButton from "./components/VisibilityButton";
 
 type PublicListId = string;
+type BoardViewMode = "kanban" | "calendar";
+type ListSortMode = "manual" | "due-date";
+
+interface SortableCard {
+  dueDate?: Date | null;
+}
+
+function getSortedCards<T extends SortableCard>(
+  cards: T[],
+  sortMode: ListSortMode,
+) {
+  if (sortMode === "manual") {
+    return cards;
+  }
+
+  return [...cards]
+    .map((card, originalIndex) => ({ card, originalIndex }))
+    .sort((left, right) => {
+      const leftDueDate = left.card.dueDate
+        ? new Date(left.card.dueDate).getTime()
+        : Number.POSITIVE_INFINITY;
+      const rightDueDate = right.card.dueDate
+        ? new Date(right.card.dueDate).getTime()
+        : Number.POSITIVE_INFINITY;
+
+      if (leftDueDate !== rightDueDate) {
+        return leftDueDate - rightDueDate;
+      }
+
+      return left.originalIndex - right.originalIndex;
+    })
+    .map(({ card }) => card);
+}
 
 export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const params = useParams() as { boardId: string | string[] } | null;
@@ -69,6 +103,10 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     useModal();
   const [selectedPublicListId, setSelectedPublicListId] =
     useState<PublicListId>("");
+  const [boardViewMode, setBoardViewMode] = useState<BoardViewMode>("kanban");
+  const [listSortModes, setListSortModes] = useState<
+    Record<PublicListId, ListSortMode>
+  >({});
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   const [contextMenu, setContextMenu] = useState<{
@@ -171,6 +209,20 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   }, [boardId]);
 
   const isLoading = isInitialLoading || isQueryLoading;
+
+  const getListSortMode = (publicListId: PublicListId): ListSortMode => {
+    return listSortModes[publicListId] ?? "manual";
+  };
+
+  const setListSortMode = (
+    publicListId: PublicListId,
+    sortMode: ListSortMode,
+  ) => {
+    setListSortModes((prev) => ({
+      ...prev,
+      [publicListId]: sortMode,
+    }));
+  };
 
   useScrollRestore(
     boardId,
@@ -574,6 +626,30 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 {t`Template`}
               </div>
             )}
+            <div className="inline-flex rounded-md border border-light-300 bg-light-50 p-1 dark:border-dark-300 dark:bg-dark-100">
+              <button
+                type="button"
+                onClick={() => setBoardViewMode("kanban")}
+                className={`rounded px-2 py-1 text-xs font-semibold ${
+                  boardViewMode === "kanban"
+                    ? "bg-light-1000 text-light-50 dark:bg-dark-1000 dark:text-dark-50"
+                    : "text-light-900 hover:bg-light-200 dark:text-dark-900 dark:hover:bg-dark-200"
+                }`}
+              >
+                {t`Board`}
+              </button>
+              <button
+                type="button"
+                onClick={() => setBoardViewMode("calendar")}
+                className={`rounded px-2 py-1 text-xs font-semibold ${
+                  boardViewMode === "calendar"
+                    ? "bg-light-1000 text-light-50 dark:bg-dark-1000 dark:text-dark-50"
+                    : "text-light-900 hover:bg-light-200 dark:text-dark-900 dark:hover:bg-dark-200"
+                }`}
+              >
+                {t`Calendar`}
+              </button>
+            </div>
             {!isTemplate && (
               <>
                 <UpdateBoardSlugButton
@@ -652,7 +728,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             </div>
           ) : boardData ? (
             <>
-              {boardData.lists.length === 0 ? (
+              {boardViewMode === "calendar" ? (
+                <BoardCalendarView
+                  boardPublicId={boardId ?? ""}
+                  isTemplate={!!isTemplate}
+                  lists={boardData.lists}
+                />
+              ) : boardData.lists.length === 0 ? (
                 <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
                   <div className="flex flex-col items-center">
                     <HiOutlineSquare3Stack3D className="h-10 w-10 text-light-800 dark:text-dark-800" />
@@ -697,8 +779,12 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                         {boardData.lists.map((list, index) => (
                           <List
                             index={index}
-                            key={index}
+                            key={list.publicId}
                             list={list}
+                            sortMode={getListSortMode(list.publicId)}
+                            onSortModeChange={(sortMode) =>
+                              setListSortMode(list.publicId, sortMode)
+                            }
                             setSelectedPublicListId={(publicListId) =>
                               setSelectedPublicListId(publicListId)
                             }
@@ -713,12 +799,19 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                   {...provided.droppableProps}
                                   className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 h-full max-h-[calc(100vh-225px)] min-h-[2rem] overflow-y-auto pr-1 scrollbar dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600"
                                 >
-                                  {list.cards.map((card, index) => (
+                                  {getSortedCards(
+                                    list.cards,
+                                    getListSortMode(list.publicId),
+                                  ).map((card, index) => (
                                     <Draggable
                                       key={card.publicId}
                                       draggableId={card.publicId}
                                       index={index}
-                                      isDragDisabled={!canEditCard}
+                                      isDragDisabled={
+                                        !canEditCard ||
+                                        getListSortMode(list.publicId) ===
+                                          "due-date"
+                                      }
                                     >
                                       {(provided) => (
                                         <Link

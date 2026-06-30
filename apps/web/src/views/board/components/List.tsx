@@ -4,6 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
 import {
   HiEllipsisHorizontal,
+  HiOutlineClock,
   HiOutlinePlusSmall,
   HiOutlineSquaresPlus,
   HiOutlineTrash,
@@ -21,6 +22,8 @@ interface ListProps {
   children: ReactNode;
   index: number;
   list: List;
+  sortMode: ListSortMode;
+  onSortModeChange: (sortMode: ListSortMode) => void;
   setSelectedPublicListId: (publicListId: PublicListId) => void;
 }
 
@@ -36,11 +39,14 @@ interface FormValues {
 }
 
 type PublicListId = string;
+type ListSortMode = "manual" | "due-date";
 
 export default function List({
   children,
   index,
   list,
+  sortMode,
+  onSortModeChange,
   setSelectedPublicListId,
 }: ListProps) {
   const { openModal } = useModal();
@@ -130,6 +136,17 @@ export default function List({
               </Tooltip>
               {(() => {
                 const dropdownItems = [
+                  {
+                    label:
+                      sortMode === "due-date"
+                        ? t`Show manual order`
+                        : t`Sort by due date`,
+                    action: () =>
+                      onSortModeChange(
+                        sortMode === "due-date" ? "manual" : "due-date",
+                      ),
+                    icon: <HiOutlineClock className="h-[18px] w-[18px] text-dark-900" />,
+                  },
                   ...(canCreateCard
                     ? [
                         {
