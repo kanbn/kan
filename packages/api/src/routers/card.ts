@@ -694,10 +694,26 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      // Generate URLs for all attachments
+      // Each attachment carries two presigned URLs:
+      //   url         — inline view (used by image thumbnails / lightbox)
+      //   downloadUrl — Content-Disposition: attachment baked into the
+      //                 signed URL, so the browser saves the file with its
+      //                 original name when downloaded directly from S3.
+      // Two URLs (not one with a flag) because the same attachment is used
+      // for two semantically distinct actions; collapsing them caused an
+      // image-lightbox download regression that flagged in cage-match.
       const attachmentsWithUrls = await Promise.all(
         result.attachments.map(async (attachment) => {
-          const url = await generateAttachmentUrl(attachment.s3Key);
+          const [url, downloadUrl] = await Promise.all([
+            generateAttachmentUrl(attachment.s3Key, {
+              disposition: "inline",
+            }),
+            generateAttachmentUrl(attachment.s3Key, {
+              disposition: "attachment",
+              originalFilename: attachment.originalFilename,
+              contentType: attachment.contentType,
+            }),
+          ]);
           return {
             publicId: attachment.publicId,
             contentType: attachment.contentType,
@@ -705,6 +721,7 @@ export const cardRouter = createTRPCRouter({
             originalFilename: attachment.originalFilename,
             size: attachment.size,
             url,
+            downloadUrl,
           };
         }),
       );

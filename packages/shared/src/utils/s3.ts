@@ -53,6 +53,10 @@ export async function generateDownloadUrl(
   bucket: string,
   key: string,
   expiresIn = 3600,
+  responseOverrides?: {
+    contentDisposition?: string;
+    contentType?: string;
+  },
 ) {
   const client = createS3Client();
   return getSignedUrl(
@@ -60,6 +64,8 @@ export async function generateDownloadUrl(
     new GetObjectCommand({
       Bucket: bucket,
       Key: key,
+      ResponseContentDisposition: responseOverrides?.contentDisposition,
+      ResponseContentType: responseOverrides?.contentType,
     }),
     { expiresIn },
   );
@@ -112,7 +118,12 @@ export async function generateAvatarUrl(
  */
 export async function generateAttachmentUrl(
   attachmentKey: string | null | undefined,
-  expiresIn = 86400, // 24 hours
+  options: {
+    expiresIn?: number;
+    disposition?: "inline" | "attachment";
+    originalFilename?: string | null;
+    contentType?: string | null;
+  } = {},
 ): Promise<string | null> {
   if (!attachmentKey) {
     return null;
@@ -123,8 +134,38 @@ export async function generateAttachmentUrl(
     return null;
   }
 
+  const expiresIn = options.expiresIn ?? 86400;
+
+  const responseOverrides: {
+    contentDisposition?: string;
+    contentType?: string;
+  } = {};
+
+  if (options.disposition === "attachment" && options.originalFilename) {
+    // RFC 5987: ascii fallback + UTF-8 encoded form for non-ascii filenames.
+    // encodeURIComponent leaves "'" unescaped, but RFC 5987 requires it
+    // (it's the delimiter inside `filename*=UTF-8''<value>`); patch it.
+    const safeAscii = options.originalFilename
+      .replace(/[^\x20-\x7E]/g, "_")
+      .replace(/[\\"]/g, "");
+    const utf8 = encodeURIComponent(options.originalFilename).replace(
+      /'/g,
+      "%27",
+    );
+    responseOverrides.contentDisposition = `attachment; filename="${safeAscii}"; filename*=UTF-8''${utf8}`;
+  }
+
+  if (options.contentType) {
+    responseOverrides.contentType = options.contentType;
+  }
+
   try {
-    return await generateDownloadUrl(bucket, attachmentKey, expiresIn);
+    return await generateDownloadUrl(
+      bucket,
+      attachmentKey,
+      expiresIn,
+      Object.keys(responseOverrides).length > 0 ? responseOverrides : undefined,
+    );
   } catch {
     // If URL generation fails, return null
     return null;
