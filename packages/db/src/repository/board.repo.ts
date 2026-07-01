@@ -257,6 +257,7 @@ export const getByPublicId = async (
               index: true,
               dueDate: true,
               cardNumber: true,
+              coverColourCode: true,
             },
             with: {
               labels: {
@@ -454,6 +455,7 @@ export const getBySlug = async (
               index: true,
               dueDate: true,
               cardNumber: true,
+              coverColourCode: true,
             },
             with: {
               labels: {
