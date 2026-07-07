@@ -2,7 +2,7 @@ import type { Locale as DateFnsLocale } from "date-fns";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { format, formatDistanceToNow, isSameYear } from "date-fns";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   HiOutlineArrowLeft,
   HiOutlineArrowRight,
@@ -398,6 +398,14 @@ const ActivityList = ({
   const isFullyExpandedRef = useRef(false);
   const lastDataUpdatedAtRef = useRef<number | null>(null);
 
+  // Reset accumulated activities when filter or sortOrder changes
+  useEffect(() => {
+    setAllActivities([]);
+    setHasMore(true);
+    isFullyExpandedRef.current = false;
+    lastDataUpdatedAtRef.current = null;
+  }, [filter, sortOrder]);
+
   const {
     data: firstPageData,
     isFetching: isFetchingFirst,
@@ -406,6 +414,8 @@ const ActivityList = ({
     {
       cardPublicId,
       limit: ACTIVITIES_PAGE_SIZE,
+      filter,
+      sortOrder,
     },
     {
       enabled: !!cardPublicId && cardPublicId.length >= 12,
@@ -434,6 +444,8 @@ const ActivityList = ({
               cardPublicId,
               limit: ACTIVITIES_PAGE_SIZE,
               cursor: nextCursor,
+              filter,
+              sortOrder,
             });
 
             const existingIds = new Set(
@@ -460,7 +472,7 @@ const ActivityList = ({
         }
       }
     }
-  }, [firstPageData, dataUpdatedAt, cardPublicId, utils.card.getActivities]);
+  }, [firstPageData, dataUpdatedAt, cardPublicId, filter, sortOrder, utils.card.getActivities]);
 
   const handleLoadMore = async () => {
     if (isLoadingMore || !hasMore || allActivities.length === 0) return;
@@ -475,6 +487,8 @@ const ActivityList = ({
         cardPublicId,
         limit: ACTIVITIES_PAGE_SIZE,
         cursor: nextCursor,
+        filter,
+        sortOrder,
       });
 
       const existingIds = new Set(allActivities.map((a) => a.publicId));
@@ -496,31 +510,9 @@ const ActivityList = ({
   const isLoading =
     cardIsLoading || (isFetchingFirst && allActivities.length === 0);
 
-  const filteredActivities = useMemo(
-    () =>
-      allActivities.filter((activity) => {
-        if (filter === "all") return true;
-        if (filter === "comments") {
-          return activity.type === "card.updated.comment.added";
-        }
-        return activity.type !== "card.updated.comment.added";
-      }),
-    [allActivities, filter],
-  );
-
-  const sortedActivities = useMemo(() => {
-    const newestFirst = [...filteredActivities].sort((a, b) => {
-      const timeA = new Date(a.createdAt).getTime();
-      const timeB = new Date(b.createdAt).getTime();
-      return timeB - timeA;
-    });
-
-    return sortOrder === "desc" ? newestFirst : [...newestFirst].reverse();
-  }, [filteredActivities, sortOrder]);
-
   return (
     <div className="flex flex-col space-y-4 pt-4">
-      {sortedActivities.map((activity, index) => {
+      {allActivities.map((activity, index) => {
         const activityText = getActivityText({
           type: activity.type,
           toTitle: activity.toTitle,
@@ -578,7 +570,7 @@ const ActivityList = ({
                 )}
                 isLoading={isLoading}
               />
-              {index !== sortedActivities.length - 1 && (
+              {index !== allActivities.length - 1 && (
                 <div className="absolute bottom-[-14px] left-1/2 top-[30px] w-0.5 -translate-x-1/2 bg-light-600 dark:bg-dark-600" />
               )}
             </div>
