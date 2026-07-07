@@ -28,6 +28,7 @@ import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmatio
 import ActivityList from "./components/ActivityList";
 import { AttachmentThumbnails } from "./components/AttachmentThumbnails";
 import { AttachmentUpload } from "./components/AttachmentUpload";
+import BlockedBy from "./components/BlockedBy";
 import Checklists from "./components/Checklists";
 import { DeleteCardConfirmation } from "./components/DeleteCardConfirmation";
 import { DeleteChecklistConfirmation } from "./components/DeleteChecklistConfirmation";
@@ -438,6 +439,12 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                       </div>
                     </form>
                   </div>
+                  <BlockedBy
+                    blockers={card.blockedBy}
+                    cardPublicId={cardId}
+                    cardPrefix={card.list.board.workspace.cardPrefix}
+                    viewOnly={!canEdit}
+                  />
                   <Checklists
                     checklists={card.checklists}
                     cardPublicId={cardId}

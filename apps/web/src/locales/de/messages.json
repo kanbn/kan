@@ -59,7 +59,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        317
+        318
       ]
     ],
     "translation": "{0} | {1}"
@@ -417,11 +417,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        468
+        476
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        205
+        206
       ]
     ],
     "translation": "Aktivität"
@@ -451,20 +451,20 @@
     "translation": "Aktivitätsprotokolle"
   },
   "m16xKo": {
-    "translation": "",
     "message": "Add",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/SideQuestsSection.tsx",
-        139
+        141
       ],
       [
         "src/views/home-dashboard/WinsSection.tsx",
-        88
+        90
       ]
-    ]
+    ],
+    "translation": ""
   },
   "UGCIzB": {
     "message": "Add / edit label",
@@ -490,6 +490,30 @@
     ],
     "translation": "Karte hinzufügen"
   },
+  "P06aiF": {
+    "translation": "",
+    "message": "Add a quest...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/SideQuestsSection.tsx",
+        132
+      ]
+    ]
+  },
+  "145/oz": {
+    "translation": "",
+    "message": "Add a win...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/WinsSection.tsx",
+        81
+      ]
+    ]
+  },
   "qtE5nt": {
     "message": "Add an item...",
     "placeholders": {},
@@ -497,10 +521,22 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        141
+        148
       ]
     ],
     "translation": "Element hinzufügen..."
+  },
+  "UlQkn3": {
+    "translation": "",
+    "message": "Add blocker",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/BlockedBy.tsx",
+        138
+      ]
+    ]
   },
   "Gxxi5J": {
     "message": "Add checklist",
@@ -549,7 +585,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        169
+        180
       ]
     ],
     "translation": "Details hinzufügen..."
@@ -624,10 +660,22 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        102
+        103
       ]
     ],
     "translation": "hat {0} Labels hinzugefügt: <0>{labelList}</0>"
+  },
+  "QwTiT4": {
+    "translation": "",
+    "message": "added a blocker",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ActivityList.tsx",
+        146
+      ]
+    ]
   },
   "h4VV67": {
     "message": "added a checklist",
@@ -636,7 +684,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        132
+        133
       ]
     ],
     "translation": "hat eine Checkliste hinzugefügt"
@@ -648,7 +696,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        135
+        136
       ]
     ],
     "translation": "hat ein Checklisten-Element hinzugefügt"
@@ -660,7 +708,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        128
+        129
       ]
     ],
     "translation": "hat ein Label zur Karte hinzugefügt"
@@ -672,7 +720,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        130
+        131
       ]
     ],
     "translation": "hat ein Mitglied zur Karte hinzugefügt"
@@ -684,7 +732,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        140
+        141
       ]
     ],
     "translation": "hat einen Anhang hinzugefügt"
@@ -700,7 +748,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        278
+        281
       ]
     ],
     "translation": "hat einen Anhang hinzugefügt <0>{0}</0>"
@@ -716,7 +764,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        208
+        211
       ]
     ],
     "translation": "hat Checkliste <0>{0}</0> hinzugefügt"
@@ -732,7 +780,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        232
+        235
       ]
     ],
     "translation": "hat Checklisten-Element <0>{0}</0> hinzugefügt"
@@ -748,7 +796,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        192
+        195
       ]
     ],
     "translation": "hat Label <0>{0}</0> hinzugefügt"
@@ -1319,7 +1367,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        172
+        175
       ]
     ],
     "translation": "hat <0>{0}</0> der Karte zugewiesen"
@@ -1524,6 +1572,22 @@
     ],
     "translation": "Abrechnungsportal"
   },
+  "++lIxB": {
+    "translation": "",
+    "message": "Blocked by",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/BlockedBy.tsx",
+        97
+      ],
+      [
+        "src/views/card/components/ChecklistItemBlocker.tsx",
+        126
+      ]
+    ]
+  },
   "4RoY9J": {
     "message": "Blog Post",
     "placeholders": {},
@@ -1547,7 +1611,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        317
+        318
       ],
       [
         "src/views/public/board/index.tsx",
@@ -1727,7 +1791,11 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        111
+        113
+      ],
+      [
+        "src/views/home-dashboard/MyBoardsSection.tsx",
+        28
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -1803,7 +1871,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        123
+        125
       ],
       [
         "src/views/calendar/index.tsx",
@@ -2234,6 +2302,14 @@
         44
       ],
       [
+        "src/views/card/components/BlockedBy.tsx",
+        196
+      ],
+      [
+        "src/views/card/components/ChecklistItemBlocker.tsx",
+        188
+      ],
+      [
         "src/views/card/components/Comment.tsx",
         195
       ],
@@ -2295,7 +2371,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        317
+        318
       ]
     ],
     "translation": "Karte"
@@ -2319,11 +2395,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        376
+        377
       ],
       [
         "src/views/card/index.tsx",
-        413
+        414
       ]
     ],
     "translation": "Karte nicht gefunden"
@@ -2367,11 +2443,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        137
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        149
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2391,7 +2467,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        63
+        112
       ]
     ],
     "translation": "Schriftgröße der Anwendung ändern."
@@ -2403,7 +2479,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        53
+        93
       ]
     ],
     "translation": "Ändern Sie Ihre Spracheinstellungen."
@@ -2419,11 +2495,11 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        303
+        306
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        317
+        320
       ]
     ],
     "translation": "hat das Fälligkeitsdatum auf <0>{formattedDate}</0> geändert"
@@ -2611,7 +2687,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        367
+        368
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -2729,7 +2805,6 @@
     "translation": "Vollständige Kontrolle und Eigentümerschaft:"
   },
   "2PsTzL": {
-    "translation": "",
     "message": "completed",
     "placeholders": {},
     "comments": [],
@@ -2738,7 +2813,8 @@
         "src/views/home-dashboard/DailyQuestsSection.tsx",
         81
       ]
-    ]
+    ],
+    "translation": ""
   },
   "Lt+ZP3": {
     "message": "completed a checklist item",
@@ -2747,7 +2823,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        137
+        138
       ]
     ],
     "translation": "hat einen Checklistenpunkt abgeschlossen"
@@ -2763,7 +2839,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        249
+        252
       ]
     ],
     "translation": "hat Checklistenpunkt <0>{0}</0> abgeschlossen"
@@ -2983,7 +3059,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        453
       ]
     ],
     "translation": "Weiter mit "
@@ -2999,7 +3075,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        361
+        371
       ]
     ],
     "translation": "Weiter mit {0}"
@@ -3358,7 +3434,8 @@
         69
       ]
     ],
-    "translation": ""
+    "translation": "",
+    "obsolete": true
   },
   "f8lDFq": {
     "message": "created the card",
@@ -3367,7 +3444,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        124
+        125
       ]
     ],
     "translation": "hat die Karte erstellt"
@@ -3558,7 +3635,6 @@
     "translation": "Kundensupport"
   },
   "Xu7ysi": {
-    "translation": "",
     "message": "Daily Quests",
     "placeholders": {},
     "comments": [],
@@ -3567,7 +3643,8 @@
         "src/views/home-dashboard/DailyQuestsSection.tsx",
         77
       ]
-    ]
+    ],
+    "translation": ""
   },
   "pvnfJD": {
     "message": "Dark",
@@ -3672,11 +3749,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        70
+        119
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        80
+        129
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -3788,7 +3865,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        134
+        135
       ]
     ],
     "translation": "hat eine Checkliste gelöscht"
@@ -3800,7 +3877,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        139
+        140
       ]
     ],
     "translation": "hat ein Checklisten-Element gelöscht"
@@ -3816,7 +3893,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        224
+        227
       ]
     ],
     "translation": "hat Checkliste <0>{0}</0> gelöscht"
@@ -3832,7 +3909,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        267
+        270
       ]
     ],
     "translation": "hat Checklisten-Element <0>{0}</0> gelöscht"
@@ -3848,6 +3925,18 @@
       ]
     ],
     "translation": "Design"
+  },
+  "osJmEN": {
+    "translation": "",
+    "message": "Disable notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        38
+      ]
+    ]
   },
   "Odv3J6": {
     "message": "Disconnect GitHub",
@@ -3892,7 +3981,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        36
+        74
       ]
     ],
     "translation": "Anzeigename"
@@ -4096,7 +4185,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        153
+        154
       ]
     ],
     "translation": "Fälligkeitsdatum"
@@ -4316,7 +4405,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        444
+        454
       ]
     ],
     "translation": "E-Mail"
@@ -4332,7 +4421,7 @@
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        43
+        81
       ]
     ],
     "translation": "E-Mail"
@@ -4373,6 +4462,18 @@
     ],
     "translation": "E-Mail-Sichtbarkeit"
   },
+  "I92Z+b": {
+    "translation": "",
+    "message": "Enable notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        38
+      ]
+    ]
+  },
   "bFREhu": {
     "message": "End of list",
     "placeholders": {},
@@ -4386,16 +4487,16 @@
     "translation": "Ende der Liste"
   },
   "sJ5WJw": {
-    "translation": "",
     "message": "Energy Check-In",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/EnergyCheckinSection.tsx",
-        60
+        92
       ]
-    ]
+    ],
+    "translation": ""
   },
   "SUXBxp": {
     "message": "Engineering",
@@ -4484,7 +4585,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        408
+        418
       ]
     ],
     "translation": "Geben Sie Ihre E-Mail-Adresse ein"
@@ -4496,7 +4597,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        396
+        406
       ]
     ],
     "translation": "Geben Sie Ihren Namen ein"
@@ -4520,7 +4621,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        422
+        432
       ]
     ],
     "translation": "Geben Sie Ihr Passwort ein"
@@ -4937,7 +5038,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        297
+        307
       ]
     ],
     "translation": "Anmeldung mit {0} fehlgeschlagen. Bitte versuchen Sie es erneut."
@@ -5095,16 +5196,16 @@
     "translation": "Feedback gesendet"
   },
   "vUDIdF": {
-    "translation": "",
     "message": "Feel Good Productivity",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/index.tsx",
-        44
+        41
       ]
-    ]
+    ],
+    "translation": ""
   },
   "F6m23G": {
     "message": "File uploads",
@@ -5143,7 +5244,6 @@
     "translation": "Finden Sie Antworten auf häufig gestellte Fragen zu Kan. Können Sie nicht finden, wonach Sie suchen? <0>Kontaktieren Sie uns</0> gerne."
   },
   "kWEIUh": {
-    "translation": "",
     "message": "Find the Win",
     "placeholders": {},
     "comments": [],
@@ -5152,7 +5252,8 @@
         "src/views/home-dashboard/WinsSection.tsx",
         37
       ]
-    ]
+    ],
+    "translation": ""
   },
   "q3il6U": {
     "message": "Font size",
@@ -5161,7 +5262,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        60
+        109
       ]
     ],
     "translation": "Schriftgröße"
@@ -5317,6 +5418,18 @@
       ]
     ],
     "translation": "Allgemein"
+  },
+  "/6YI6c": {
+    "translation": "",
+    "message": "Get desktop notifications for mentions, comments, and board updates.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        30
+      ]
+    ]
   },
   "ZDIydz": {
     "message": "Get started",
@@ -5517,7 +5630,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        119
+        121
       ],
       [
         "src/pages/404.tsx",
@@ -5533,7 +5646,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        131
+        133
       ]
     ],
     "translation": ""
@@ -5545,7 +5658,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        107
+        109
       ]
     ],
     "translation": ""
@@ -5569,7 +5682,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        155
+        157
       ]
     ],
     "translation": "Zu den Mitgliedern"
@@ -5581,7 +5694,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        167
+        169
       ]
     ],
     "translation": "Zu den Einstellungen"
@@ -5593,7 +5706,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        143
+        145
       ]
     ],
     "translation": "Zu Vorlagen gehen"
@@ -5655,7 +5768,6 @@
     "translation": "Gast"
   },
   "2Ff4j6": {
-    "translation": "",
     "message": "Hide explored",
     "placeholders": {},
     "comments": [],
@@ -5664,7 +5776,8 @@
         "src/views/home-dashboard/SideQuestsSection.tsx",
         71
       ]
-    ]
+    ],
+    "translation": ""
   },
   "CB/NpV": {
     "message": "High Priority",
@@ -5709,11 +5822,11 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        99
+        101
       ],
       [
         "src/views/home-dashboard/index.tsx",
-        40
+        35
       ]
     ],
     "translation": ""
@@ -5725,7 +5838,7 @@
     "origin": [
       [
         "src/views/home-dashboard/index.tsx",
-        37
+        32
       ]
     ],
     "translation": ""
@@ -5743,16 +5856,16 @@
     "translation": "Hosten Sie Kan auf Ihrer eigenen Infrastruktur. Ideal für Organisationen, die vollständige Kontrolle über ihre Daten benötigen."
   },
   "V1j0aV": {
-    "translation": "",
     "message": "How are you feeling? (optional)",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/EnergyCheckinSection.tsx",
-        105
+        168
       ]
-    ]
+    ],
+    "translation": ""
   },
   "WI4eGo": {
     "message": "How do I get a custom URL?",
@@ -6347,7 +6460,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        133
+        134
       ]
     ],
     "translation": "Labels"
@@ -6383,7 +6496,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        50
+        90
       ]
     ],
     "translation": "Sprache"
@@ -6576,7 +6689,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        124
+        125
       ]
     ],
     "translation": "Liste"
@@ -6605,6 +6718,18 @@
     ],
     "translation": "Listen"
   },
+  "yQ2kGp": {
+    "translation": "",
+    "message": "Load more",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/RecentActivitySection.tsx",
+        120
+      ]
+    ]
+  },
   "1rVAfU": {
     "message": "Load more activities",
     "placeholders": {},
@@ -6612,7 +6737,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        579
+        601
       ]
     ],
     "translation": "Weitere Aktivitäten laden"
@@ -6636,7 +6761,11 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        579
+        601
+      ],
+      [
+        "src/views/home-dashboard/RecentActivitySection.tsx",
+        120
       ]
     ],
     "translation": "Wird geladen ..."
@@ -6721,7 +6850,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        444
+        454
       ]
     ],
     "translation": "Magic-Link"
@@ -6761,7 +6890,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        138
+        139
       ]
     ],
     "translation": "hat ein Checklistenelement als unvollständig markiert"
@@ -6777,10 +6906,26 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        258
+        261
       ]
     ],
     "translation": "hat Checklistenelement <0>{0}</0> als unvollständig markiert"
+  },
+  "80PbnH": {
+    "translation": "",
+    "message": "marked this card as blocked by <0>{0}</0>",
+    "placeholders": {
+      "0": [
+        "truncate(toTitle)"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ActivityList.tsx",
+        332
+      ]
+    ]
   },
   "vo2a+a": {
     "message": "Marketing",
@@ -6837,11 +6982,11 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        55
+        56
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        88
+        89
       ],
       [
         "src/views/members/index.tsx",
@@ -6869,7 +7014,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        147
+        149
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -6881,7 +7026,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        143
+        144
       ],
       [
         "src/views/members/index.tsx",
@@ -7004,7 +7149,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        160
+        163
       ]
     ],
     "translation": "hat die Karte von <0>{0}</0> nach <1>{1}</1> verschoben"
@@ -7016,7 +7161,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        127
+        128
       ]
     ],
     "translation": "hat die Karte in eine andere Liste verschoben"
@@ -7031,7 +7176,8 @@
         28
       ]
     ],
-    "translation": ""
+    "translation": "",
+    "obsolete": true
   },
   "oFLZ3C": {
     "message": "My Cards",
@@ -7348,7 +7494,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        375
+        385
       ]
     ],
     "translation": "Derzeit sind keine Authentifizierungsmethoden verfügbar"
@@ -7365,6 +7511,18 @@
     ],
     "translation": "Keine Boards gefunden"
   },
+  "9fS0S/": {
+    "translation": "",
+    "message": "No boards found.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/MyBoardsSection.tsx",
+        42
+      ]
+    ]
+  },
   "PDVw/v": {
     "message": "No boards yet. Create one to get started!",
     "placeholders": {},
@@ -7375,7 +7533,8 @@
         42
       ]
     ],
-    "translation": ""
+    "translation": "",
+    "obsolete": true
   },
   "0/h2j3": {
     "message": "No cards assigned to you yet.",
@@ -7388,6 +7547,22 @@
       ]
     ],
     "translation": ""
+  },
+  "l/Tg71": {
+    "translation": "",
+    "message": "No cards found",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/BlockedBy.tsx",
+        166
+      ],
+      [
+        "src/views/card/components/ChecklistItemBlocker.tsx",
+        157
+      ]
+    ]
   },
   "OpNhRn": {
     "message": "No credit card required",
@@ -7492,7 +7667,7 @@
     "origin": [
       [
         "src/views/home-dashboard/RecentActivitySection.tsx",
-        73
+        81
       ]
     ],
     "translation": ""
@@ -7526,16 +7701,16 @@
     "translation": "Für diesen Workspace wurden noch keine Rollen gefunden."
   },
   "QsLCXD": {
-    "translation": "",
     "message": "No side quests. Follow your curiosity!",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/SideQuestsSection.tsx",
-        145
+        148
       ]
-    ]
+    ],
+    "translation": ""
   },
   "TX0bT7": {
     "message": "No webhooks configured. Add a webhook to receive notifications.",
@@ -7550,14 +7725,26 @@
     "translation": "Keine Webhooks konfiguriert. Fügen Sie einen Webhook hinzu, um Benachrichtigungen zu erhalten."
   },
   "7hw65y": {
-    "translation": "",
     "message": "No wins yet. Find something to celebrate!",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/WinsSection.tsx",
-        95
+        98
+      ]
+    ],
+    "translation": ""
+  },
+  "iDNBZe": {
+    "translation": "",
+    "message": "Notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        101
       ]
     ]
   },
@@ -7616,7 +7803,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        73
+        122
       ]
     ],
     "translation": "Sobald Sie Ihr Konto löschen, gibt es kein Zurück mehr. Diese Aktion kann nicht rückgängig gemacht werden."
@@ -7688,7 +7875,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        386
+        396
       ]
     ],
     "translation": "oder"
@@ -7812,7 +7999,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        264
+        274
       ]
     ],
     "translation": "Passwort ist für die Anmeldung erforderlich."
@@ -7824,7 +8011,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        263
+        273
       ]
     ],
     "translation": "Passwort ist für die Registrierung erforderlich."
@@ -8100,7 +8287,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        412
+        422
       ]
     ],
     "translation": "Bitte geben Sie eine gültige E-Mail-Adresse ein"
@@ -8112,7 +8299,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        400
+        410
       ]
     ],
     "translation": "Bitte geben Sie einen gültigen Namen ein"
@@ -8124,7 +8311,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        427
+        437
       ]
     ],
     "translation": "Bitte geben Sie ein gültiges Passwort ein"
@@ -8235,12 +8422,20 @@
         74
       ],
       [
-        "src/views/card/components/ChecklistItemRow.tsx",
-        67
+        "src/views/card/components/BlockedBy.tsx",
+        43
+      ],
+      [
+        "src/views/card/components/ChecklistItemBlocker.tsx",
+        45
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        95
+        77
+      ],
+      [
+        "src/views/card/components/ChecklistItemRow.tsx",
+        105
       ],
       [
         "src/views/card/components/ChecklistNameInput.tsx",
@@ -8248,7 +8443,7 @@
       ],
       [
         "src/views/card/components/Checklists.tsx",
-        81
+        88
       ],
       [
         "src/views/card/components/Comment.tsx",
@@ -8288,7 +8483,7 @@
       ],
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        90
+        97
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
@@ -8296,11 +8491,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        232
+        233
       ],
       [
         "src/views/card/index.tsx",
-        245
+        246
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -8580,7 +8775,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        30
+        68
       ]
     ],
     "translation": "Profilbild"
@@ -8652,7 +8847,7 @@
     "origin": [
       [
         "src/views/home-dashboard/RecentActivitySection.tsx",
-        59
+        67
       ]
     ],
     "translation": ""
@@ -8705,6 +8900,22 @@
     ],
     "translation": "Entfernen"
   },
+  "nbwmEc": {
+    "translation": "",
+    "message": "Remove blocker",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/BlockedBy.tsx",
+        123
+      ],
+      [
+        "src/views/card/components/ChecklistItemBlocker.tsx",
+        112
+      ]
+    ]
+  },
   "T/pF0Z": {
     "message": "Remove from favorites",
     "placeholders": {},
@@ -8743,10 +8954,22 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        116
+        117
       ]
     ],
     "translation": "hat {0} Labels entfernt: <0>{labelList}</0>"
+  },
+  "9xGLgk": {
+    "translation": "",
+    "message": "removed a blocker",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ActivityList.tsx",
+        147
+      ]
+    ]
   },
   "kQwvU8": {
     "message": "removed a label from the card",
@@ -8755,7 +8978,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        129
+        130
       ]
     ],
     "translation": "hat ein Label von der Karte entfernt"
@@ -8767,7 +8990,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        131
+        132
       ]
     ],
     "translation": "hat ein Mitglied von der Karte entfernt"
@@ -8779,7 +9002,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        141
+        142
       ]
     ],
     "translation": "hat einen Anhang entfernt"
@@ -8795,10 +9018,26 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        288
+        291
       ]
     ],
     "translation": "hat einen Anhang entfernt <0>{0}</0>"
+  },
+  "yIKoH5": {
+    "translation": "",
+    "message": "removed blocker <0>{0}</0>",
+    "placeholders": {
+      "0": [
+        "truncate(fromTitle)"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ActivityList.tsx",
+        341
+      ]
+    ]
   },
   "Qh7QmR": {
     "message": "Removed from favorites",
@@ -8823,7 +9062,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        200
+        203
       ]
     ],
     "translation": "hat Label entfernt <0>{0}</0>"
@@ -8835,11 +9074,11 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        144
+        145
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        324
+        327
       ]
     ],
     "translation": "hat das Fälligkeitsdatum entfernt"
@@ -8851,7 +9090,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        133
+        134
       ]
     ],
     "translation": "hat eine Checkliste umbenannt"
@@ -8867,7 +9106,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        216
+        219
       ]
     ],
     "translation": "hat Checkliste umbenannt <0>{0}</0>"
@@ -8883,7 +9122,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        240
+        243
       ]
     ],
     "translation": "hat Checklistenelement umbenannt in <0>{0}</0>"
@@ -9128,6 +9367,38 @@
     ],
     "translation": "Boards und Karten durchsuchen..."
   },
+  "PB35A6": {
+    "translation": "",
+    "message": "Search for a card…",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/BlockedBy.tsx",
+        154
+      ],
+      [
+        "src/views/card/components/ChecklistItemBlocker.tsx",
+        144
+      ]
+    ]
+  },
+  "SBTElJ": {
+    "translation": "",
+    "message": "Searching…",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/BlockedBy.tsx",
+        161
+      ],
+      [
+        "src/views/card/components/ChecklistItemBlocker.tsx",
+        152
+      ]
+    ]
+  },
   "MpFIca": {
     "message": "seats",
     "placeholders": {},
@@ -9271,7 +9542,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        169
+        172
       ]
     ],
     "translation": "hat sich die Karte selbst zugewiesen"
@@ -9300,6 +9571,18 @@
     ],
     "translation": "Test senden"
   },
+  "brMxq0": {
+    "translation": "",
+    "message": "Send test notification",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        46
+      ]
+    ]
+  },
   "v3YoMA": {
     "message": "Senior",
     "placeholders": {},
@@ -9313,16 +9596,16 @@
     "translation": "Senior"
   },
   "NfZUor": {
-    "translation": "",
     "message": "Set",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/DailyQuestsSection.tsx",
-        168
+        170
       ]
-    ]
+    ],
+    "translation": ""
   },
   "GXGbXi": {
     "message": "Set a password to enable password-based login.",
@@ -9331,10 +9614,22 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        93
+        142
       ]
     ],
     "translation": "Legen Sie ein Passwort fest, um die passwortbasierte Anmeldung zu aktivieren."
+  },
+  "O3wNI6": {
+    "translation": "",
+    "message": "Set an action...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/DailyQuestsSection.tsx",
+        161
+      ]
+    ]
   },
   "8AbRER": {
     "message": "Set due date",
@@ -9363,11 +9658,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        137
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        149
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -9387,7 +9682,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        142
+        143
       ]
     ],
     "translation": "hat das Fälligkeitsdatum festgelegt"
@@ -9415,7 +9710,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        159
+        161
       ]
     ],
     "translation": "Einstellungen"
@@ -9427,7 +9722,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        26
+        64
       ]
     ],
     "translation": "Einstellungen | Konto"
@@ -9517,7 +9812,6 @@
     "translation": "Tastenkombinationen"
   },
   "1pv3tl": {
-    "translation": "",
     "message": "Show explored",
     "placeholders": {},
     "comments": [],
@@ -9526,10 +9820,10 @@
         "src/views/home-dashboard/SideQuestsSection.tsx",
         71
       ]
-    ]
+    ],
+    "translation": ""
   },
   "8RFEAq": {
-    "translation": "",
     "message": "Side Quests",
     "placeholders": {},
     "comments": [],
@@ -9538,7 +9832,8 @@
         "src/views/home-dashboard/SideQuestsSection.tsx",
         64
       ]
-    ]
+    ],
+    "translation": ""
   },
   "5lWFkC": {
     "message": "Sign in",
@@ -9684,7 +9979,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        453
       ]
     ],
     "translation": "Registrieren mit "
@@ -9801,6 +10096,18 @@
     ],
     "translation": "Bei der Lizenzaktivierung ist ein Fehler aufgetreten."
   },
+  "fUXc6L": {
+    "translation": "",
+    "message": "Something worth celebrating today",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/WinsSection.tsx",
+        80
+      ]
+    ]
+  },
   "jOOtqe": {
     "translation": "",
     "message": "Something worth celebrating today...",
@@ -9811,19 +10118,20 @@
         "src/views/home-dashboard/WinsSection.tsx",
         79
       ]
-    ]
+    ],
+    "obsolete": true
   },
   "TV51s2": {
-    "translation": "",
     "message": "Something you're curious about...",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/SideQuestsSection.tsx",
-        130
+        131
       ]
-    ]
+    ],
+    "translation": ""
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -9868,15 +10176,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        251
+        253
       ],
       [
         "src/components/SideNavigation.tsx",
-        252
+        254
       ],
       [
         "src/components/SideNavigation.tsx",
-        262
+        264
       ]
     ],
     "translation": "Kostenlose Testversion starten"
@@ -9924,11 +10232,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        221
+        231
       ],
       [
         "src/components/AuthForm.tsx",
-        238
+        248
       ]
     ],
     "translation": "Erfolg"
@@ -10116,7 +10424,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        135
+        137
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -10728,7 +11036,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        89
+        96
       ]
     ],
     "translation": "Checklistenelement konnte nicht hinzugefügt werden"
@@ -10752,7 +11060,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        244
+        245
       ]
     ],
     "translation": "Label konnte nicht hinzugefügt werden"
@@ -10928,7 +11236,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        94
+        104
       ]
     ],
     "translation": "Checklistenelement konnte nicht gelöscht werden"
@@ -11000,7 +11308,7 @@
     "origin": [
       [
         "src/views/card/components/Checklists.tsx",
-        80
+        87
       ]
     ],
     "translation": "Checklisten-Element konnte nicht neu sortiert werden"
@@ -11057,6 +11365,18 @@
     ],
     "translation": "Webhook konnte nicht getestet werden"
   },
+  "nAwvz3": {
+    "translation": "",
+    "message": "Unable to update blockers",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/BlockedBy.tsx",
+        42
+      ]
+    ]
+  },
   "T7Mywq": {
     "message": "Unable to update board",
     "placeholders": {},
@@ -11104,7 +11424,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        231
+        232
       ]
     ],
     "translation": "Karte konnte nicht aktualisiert werden"
@@ -11127,8 +11447,12 @@
     "comments": [],
     "origin": [
       [
+        "src/views/card/components/ChecklistItemBlocker.tsx",
+        44
+      ],
+      [
         "src/views/card/components/ChecklistItemRow.tsx",
-        66
+        76
       ]
     ],
     "translation": "Checklisten-Element konnte nicht aktualisiert werden"
@@ -11260,7 +11584,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        183
+        186
       ]
     ],
     "translation": "hat <0>{0}</0> von der Karte entfernt"
@@ -11272,7 +11596,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        180
+        183
       ]
     ],
     "translation": "hat sich selbst von der Karte entfernt"
@@ -11551,7 +11875,8 @@
         68
       ]
     ],
-    "translation": ""
+    "translation": "",
+    "obsolete": true
   },
   "L5ZPjz": {
     "message": "updated a checklist item",
@@ -11560,7 +11885,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        136
+        137
       ]
     ],
     "translation": "hat ein Checklisten-Element aktualisiert"
@@ -11572,7 +11897,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        126
+        127
       ]
     ],
     "translation": "hat die Beschreibung aktualisiert"
@@ -11584,7 +11909,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        143
+        144
       ]
     ],
     "translation": "hat das Fälligkeitsdatum aktualisiert"
@@ -11596,7 +11921,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        125
+        126
       ]
     ],
     "translation": "hat den Titel aktualisiert"
@@ -11612,7 +11937,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        152
+        155
       ]
     ],
     "translation": "hat den Titel zu <0>{0}</0> aktualisiert"
@@ -12481,7 +12806,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        92
+        141
       ]
     ],
     "translation": "Sie sind dabei, Ihr Passwort zu ändern."
@@ -12594,7 +12919,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        239
+        249
       ]
     ],
     "translation": "Sie wurden erfolgreich angemeldet."
@@ -12606,7 +12931,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        222
+        232
       ]
     ],
     "translation": "Sie haben sich erfolgreich registriert."

@@ -8,6 +8,7 @@ import {
   HiOutlineArrowRight,
   HiOutlineCheckCircle,
   HiOutlineClock,
+  HiOutlineMinusCircle,
   HiOutlinePaperClip,
   HiOutlinePencil,
   HiOutlinePlus,
@@ -142,6 +143,8 @@ const getActivityText = ({
     "card.updated.dueDate.added": t`set the due date`,
     "card.updated.dueDate.updated": t`updated the due date`,
     "card.updated.dueDate.removed": t`removed the due date`,
+    "card.updated.blocker.added": t`added a blocker`,
+    "card.updated.blocker.removed": t`removed a blocker`,
   } as const;
 
   if (!(type in ACTIVITY_TYPE_MAP)) return null;
@@ -324,6 +327,23 @@ const getActivityText = ({
     return <Trans>removed the due date</Trans>;
   }
 
+  if (type === "card.updated.blocker.added" && toTitle) {
+    return (
+      <Trans>
+        marked this card as blocked by{" "}
+        <TextHighlight>{truncate(toTitle)}</TextHighlight>
+      </Trans>
+    );
+  }
+
+  if (type === "card.updated.blocker.removed" && fromTitle) {
+    return (
+      <Trans>
+        removed blocker <TextHighlight>{truncate(fromTitle)}</TextHighlight>
+      </Trans>
+    );
+  }
+
   return baseText;
 };
 
@@ -349,6 +369,8 @@ const ACTIVITY_ICON_MAP: Partial<Record<ActivityType, React.ReactNode | null>> =
     "card.updated.dueDate.added": <HiOutlineClock />,
     "card.updated.dueDate.updated": <HiOutlineClock />,
     "card.updated.dueDate.removed": <HiOutlineClock />,
+    "card.updated.blocker.added": <HiOutlineMinusCircle />,
+    "card.updated.blocker.removed": <HiOutlineMinusCircle />,
   } as const;
 
 const getActivityIcon = (
