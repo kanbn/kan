@@ -18,6 +18,7 @@ import {
   cardActivities,
   cardAttachments,
   cards,
+  cardBlocking,
   cardsToLabels,
   cardToWorkspaceMembers,
   checklistItems,
@@ -283,6 +284,18 @@ export const getCardLabelRelationship = async (
   });
 };
 
+export const getCardBlockerRelationship = async (
+  db: dbClient,
+  args: { cardId: number; blockerCardId: number },
+) => {
+  return db.query.cardBlocking.findFirst({
+    where: and(
+      eq(cardBlocking.cardId, args.cardId),
+      eq(cardBlocking.blockerCardId, args.blockerCardId),
+    ),
+  });
+};
+
 export const bulkCreate = async (
   db: dbClient,
   cardInput: {
@@ -438,6 +451,21 @@ export const createCardLabelRelationship = async (
   return result;
 };
 
+export const createCardBlockerRelationship = async (
+  db: dbClient,
+  cardBlockerRelationshipInput: { cardId: number; blockerCardId: number },
+) => {
+  const [result] = await db
+    .insert(cardBlocking)
+    .values({
+      cardId: cardBlockerRelationshipInput.cardId,
+      blockerCardId: cardBlockerRelationshipInput.blockerCardId,
+    })
+    .returning();
+
+  return result;
+};
+
 export const bulkCreateCardLabelRelationship = async (
   db: dbClient,
   cardLabelRelationshipInput: { cardId: number; labelId: number }[],
@@ -532,6 +560,17 @@ export const getWithListAndMembersByPublicId = async (
             },
             where: isNull(checklistItems.deletedAt),
             orderBy: asc(checklistItems.index),
+          },
+        },
+      },
+      blockedBy: {
+        with: {
+          blocker: {
+            columns: {
+              publicId: true,
+              title: true,
+              cardNumber: true,
+            },
           },
         },
       },
@@ -694,6 +733,7 @@ export const getWithListAndMembersByPublicId = async (
     ...card,
     labels: card.labels.map((label) => label.label),
     members: card.members.map((member) => member.member),
+    blockedBy: card.blockedBy.map((blocker) => blocker.blocker),
     activities: card.activities.filter(
       (activity) => !activity.comment?.deletedAt,
     ),
@@ -987,6 +1027,49 @@ export const hardDeleteCardLabelRelationship = async (
     .returning();
 
   return result;
+};
+
+export const hardDeleteCardBlockerRelationship = async (
+  db: dbClient,
+  args: { cardId: number; blockerCardId: number },
+) => {
+  const [result] = await db
+    .delete(cardBlocking)
+    .where(
+      and(
+        eq(cardBlocking.cardId, args.cardId),
+        eq(cardBlocking.blockerCardId, args.blockerCardId),
+      ),
+    )
+    .returning();
+
+  return result;
+};
+
+/**
+ * Would adding "cardId is blocked by blockerCardId" create a cycle?
+ * Walks the blockerCardId's own blockers transitively (bounded depth);
+ * true if cardId is reachable (i.e. blockerCardId is already blocked by cardId).
+ */
+export const wouldCreateCycle = async (
+  db: dbClient,
+  args: { cardId: number; blockerCardId: number },
+) => {
+  const result = await db.execute(sql`
+    WITH RECURSIVE chain(depth, blockerId) AS (
+      SELECT 1, "blockerCardId"
+      FROM "_card_blocking"
+      WHERE "cardId" = ${args.blockerCardId}
+      UNION ALL
+      SELECT c.depth + 1, cb."blockerCardId"
+      FROM chain c
+      JOIN "_card_blocking" cb ON cb."cardId" = c.blockerId
+      WHERE c.depth < 16
+    )
+    SELECT 1 AS hit FROM chain WHERE blockerId = ${args.cardId} LIMIT 1
+  `);
+
+  return (result?.rows?.length ?? 0) > 0;
 };
 
 export const hardDeleteAllCardLabelRelationships = async (
