@@ -1,7 +1,11 @@
+import type { dbClient } from "@banana/db/client";
 import { and, count, desc, eq, isNull, sql } from "drizzle-orm";
 
-import type { dbClient } from "@banana/db/client";
-import { checklistItemBlocking, checklistItems, checklists } from "@banana/db/schema";
+import {
+  checklistItemBlocking,
+  checklistItems,
+  checklists,
+} from "@banana/db/schema";
 import { generateUID } from "@banana/shared/utils";
 
 export const getCount = async (db: dbClient) => {
@@ -490,27 +494,51 @@ export const hardDeleteChecklistItemBlockerRelationship = async (
 };
 
 /**
- * Would adding "checklistItemId is blocked by blockerCardId" create a cycle?
- * Walks the blockerCardId's checklist-item blockers transitively (bounded depth);
- * true if any of those blockers resolves to the same checklistItemId
- * (i.e. blockerCardId is already transitively blocked by this checklist item's card).
+ * Would adding a blocker from blockerCardId to the card that owns checklistItemId
+ * create a cycle? Walks blockers at the card level:
+ *
+ *   Card A (owns this checklist item) ← blocked-by ← Card B (blockerCardId)
+ *
+ * To detect a cycle, we walk backward from Card B: find all cards that Card B
+ * directly blocks (i.e. blockerCardId = B), then find the cards that those cards
+ * block, etc. If Card A is reachable, a cycle would exist.
+ *
+ * More precisely: _checklist_item_blocking(checklistItemId=X, blockerCardId=Y)
+ * means "checklist item X is blocked by card Y". So if X is on card A and Y is
+ * card B, then A is blocked by B. To find what B is blocked by, we look for
+ * rows where blockerCardId = that-card, and the checklistItem belongs to B.
+ *
+ * We walk: B → cards that block B → cards that block those → ... → if we hit A → cycle.
  */
 export const wouldCreateChecklistItemCycle = async (
   db: dbClient,
   args: { checklistItemId: number; blockerCardId: number },
 ) => {
   const result = await db.execute(sql`
-    WITH RECURSIVE chain(depth, blockerId) AS (
-      SELECT 1, "blockerCardId"
-      FROM "_checklist_item_blocking"
-      WHERE "checklistItemId" = ${args.blockerCardId}
+    WITH RECURSIVE chain(depth, card_id) AS (
+      -- Seed: what blocks blockerCardId?
+      -- Find rows where blockerCardId = some-card and the checklist item belongs to blockerCardId
+      SELECT 1, cb."blockerCardId"
+      FROM "_checklist_item_blocking" cb
+      JOIN "card_checklist_item" cci ON cci."id" = cb."checklistItemId"
+      JOIN "card_checklist" ccl ON ccl."id" = cci."checklistId"
+      WHERE ccl."cardId" = ${args.blockerCardId}
       UNION ALL
-      SELECT c.depth + 1, cb."blockerCardId"
+      -- Follow: for each blocker card found, what blocks it?
+      SELECT c.depth + 1, cb2."blockerCardId"
       FROM chain c
-      JOIN "_checklist_item_blocking" cb ON cb."checklistItemId" = c.blockerId
+      JOIN "card_checklist" ccl2 ON ccl2."cardId" = c.card_id
+      JOIN "card_checklist_item" cci2 ON cci2."checklistId" = ccl2."id"
+      JOIN "_checklist_item_blocking" cb2 ON cb2."checklistItemId" = cci2."id"
       WHERE c.depth < 16
     )
-    SELECT 1 AS hit FROM chain WHERE blockerId = ${args.checklistItemId} LIMIT 1
+    SELECT 1 AS hit FROM chain
+    WHERE card_id = (
+      SELECT ccl3."cardId" FROM "card_checklist_item" cci3
+      JOIN "card_checklist" ccl3 ON ccl3."id" = cci3."checklistId"
+      WHERE cci3."id" = ${args.checklistItemId}
+    )
+    LIMIT 1
   `);
 
   return (result?.rows?.length ?? 0) > 0;
