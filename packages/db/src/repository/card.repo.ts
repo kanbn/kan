@@ -1,3 +1,4 @@
+import type { dbClient } from "@banana/db/client";
 import {
   and,
   asc,
@@ -13,12 +14,11 @@ import {
   sql,
 } from "drizzle-orm";
 
-import type { dbClient } from "@banana/db/client";
 import {
+  boards,
   cardActivities,
   cardAttachments,
   cards,
-  cardBlocking,
   cardsToLabels,
   cardToWorkspaceMembers,
   checklistItems,
@@ -27,7 +27,6 @@ import {
   lists,
   workspaceMembers,
   workspaces,
-  boards,
 } from "@banana/db/schema";
 import { generateUID } from "@banana/shared/utils";
 
@@ -112,7 +111,12 @@ export const create = async (
         cardNumber,
         dueDate: cardInput.dueDate ?? null,
       })
-      .returning({ id: cards.id, listId: cards.listId, publicId: cards.publicId, cardNumber: cards.cardNumber });
+      .returning({
+        id: cards.id,
+        listId: cards.listId,
+        publicId: cards.publicId,
+        cardNumber: cards.cardNumber,
+      });
 
     if (!result[0]) throw new Error("Unable to create card");
 
@@ -284,18 +288,6 @@ export const getCardLabelRelationship = async (
   });
 };
 
-export const getCardBlockerRelationship = async (
-  db: dbClient,
-  args: { cardId: number; blockerCardId: number },
-) => {
-  return db.query.cardBlocking.findFirst({
-    where: and(
-      eq(cardBlocking.cardId, args.cardId),
-      eq(cardBlocking.blockerCardId, args.blockerCardId),
-    ),
-  });
-};
-
 export const bulkCreate = async (
   db: dbClient,
   cardInput: {
@@ -338,8 +330,7 @@ export const bulkCreate = async (
         .where(eq(workspaces.id, workspaceId))
         .returning({ cardCounter: workspaces.cardCounter });
 
-      if (!counterResult)
-        throw new Error(`Workspace ${workspaceId} not found`);
+      if (!counterResult) throw new Error(`Workspace ${workspaceId} not found`);
 
       const last = counterResult.cardCounter;
       const start = last - count + 1;
@@ -451,21 +442,6 @@ export const createCardLabelRelationship = async (
   return result;
 };
 
-export const createCardBlockerRelationship = async (
-  db: dbClient,
-  cardBlockerRelationshipInput: { cardId: number; blockerCardId: number },
-) => {
-  const [result] = await db
-    .insert(cardBlocking)
-    .values({
-      cardId: cardBlockerRelationshipInput.cardId,
-      blockerCardId: cardBlockerRelationshipInput.blockerCardId,
-    })
-    .returning();
-
-  return result;
-};
-
 export const bulkCreateCardLabelRelationship = async (
   db: dbClient,
   cardLabelRelationshipInput: { cardId: number; labelId: number }[],
@@ -560,16 +536,18 @@ export const getWithListAndMembersByPublicId = async (
             },
             where: isNull(checklistItems.deletedAt),
             orderBy: asc(checklistItems.index),
-          },
-        },
-      },
-      blockedBy: {
-        with: {
-          blocker: {
-            columns: {
-              publicId: true,
-              title: true,
-              cardNumber: true,
+            with: {
+              blockedBy: {
+                with: {
+                  blocker: {
+                    columns: {
+                      publicId: true,
+                      title: true,
+                      cardNumber: true,
+                    },
+                  },
+                },
+              },
             },
           },
         },
@@ -733,10 +711,16 @@ export const getWithListAndMembersByPublicId = async (
     ...card,
     labels: card.labels.map((label) => label.label),
     members: card.members.map((member) => member.member),
-    blockedBy: card.blockedBy.map((blocker) => blocker.blocker),
     activities: card.activities.filter(
       (activity) => !activity.comment?.deletedAt,
     ),
+    checklists: card.checklists.map((checklist) => ({
+      ...checklist,
+      items: checklist.items.map((item) => ({
+        ...item,
+        blockedBy: (item.blockedBy ?? []).map((b) => b.blocker),
+      })),
+    })),
   };
 
   return formattedResult;
@@ -1029,49 +1013,6 @@ export const hardDeleteCardLabelRelationship = async (
   return result;
 };
 
-export const hardDeleteCardBlockerRelationship = async (
-  db: dbClient,
-  args: { cardId: number; blockerCardId: number },
-) => {
-  const [result] = await db
-    .delete(cardBlocking)
-    .where(
-      and(
-        eq(cardBlocking.cardId, args.cardId),
-        eq(cardBlocking.blockerCardId, args.blockerCardId),
-      ),
-    )
-    .returning();
-
-  return result;
-};
-
-/**
- * Would adding "cardId is blocked by blockerCardId" create a cycle?
- * Walks the blockerCardId's own blockers transitively (bounded depth);
- * true if cardId is reachable (i.e. blockerCardId is already blocked by cardId).
- */
-export const wouldCreateCycle = async (
-  db: dbClient,
-  args: { cardId: number; blockerCardId: number },
-) => {
-  const result = await db.execute(sql`
-    WITH RECURSIVE chain(depth, blockerId) AS (
-      SELECT 1, "blockerCardId"
-      FROM "_card_blocking"
-      WHERE "cardId" = ${args.blockerCardId}
-      UNION ALL
-      SELECT c.depth + 1, cb."blockerCardId"
-      FROM chain c
-      JOIN "_card_blocking" cb ON cb."cardId" = c.blockerId
-      WHERE c.depth < 16
-    )
-    SELECT 1 AS hit FROM chain WHERE blockerId = ${args.cardId} LIMIT 1
-  `);
-
-  return (result?.rows?.length ?? 0) > 0;
-};
-
 export const hardDeleteAllCardLabelRelationships = async (
   db: dbClient,
   labelId: number,
@@ -1263,9 +1204,10 @@ export const getAssignedCardsByUserId = async (
 
   const hasMore = rows.length > args.limit;
   const items = rows.slice(0, args.limit);
-  const nextCursor = hasMore && items[items.length - 1]?.updatedAt
-    ? items[items.length - 1]!.updatedAt!
-    : undefined;
+  const nextCursor =
+    hasMore && items[items.length - 1]?.updatedAt
+      ? items[items.length - 1]!.updatedAt!
+      : undefined;
 
   const cardMap = new Map<
     string,

@@ -430,4 +430,123 @@ export const checklistRouter = createTRPCRouter({
 
       return { success: true };
     }),
+  addOrRemoveBlocker: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Add or remove a blocker from a checklist item",
+        method: "PUT",
+        path: "/checklists/items/{checklistItemPublicId}/blockers/{blockerCardPublicId}",
+        description:
+          "Adds or removes a blocker card from a checklist item. The blocker card must be finished before this checklist item can be completed.",
+        tags: ["Cards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        checklistItemPublicId: z.string().min(12),
+        blockerCardPublicId: z.string().min(12),
+      }),
+    )
+    .output(z.object({ newBlocker: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const item =
+        await checklistRepo.getChecklistItemByPublicIdWithChecklist(
+          ctx.db,
+          input.checklistItemPublicId,
+        );
+
+      if (!item)
+        throw new TRPCError({
+          message: `Checklist item with public ID ${input.checklistItemPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertPermission(
+        ctx.db,
+        userId,
+        item.checklist.card.list.board.workspace.id,
+        "card:edit",
+      );
+
+      const blocker = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.blockerCardPublicId,
+      );
+
+      if (!blocker)
+        throw new TRPCError({
+          message: `Blocker card with public ID ${input.blockerCardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      if (blocker.workspaceId !== item.checklist.card.list.board.workspace.id)
+        throw new TRPCError({
+          message: `Blocker must be in the same workspace`,
+          code: "BAD_REQUEST",
+        });
+
+      const relationshipIds = {
+        checklistItemId: item.id,
+        blockerCardId: blocker.id,
+      };
+
+      const existingRelationship =
+        await checklistRepo.getChecklistItemBlockerRelationship(
+          ctx.db,
+          relationshipIds,
+        );
+
+      const blockerCard = await cardRepo.getByPublicId(
+        ctx.db,
+        input.blockerCardPublicId,
+      );
+
+      if (existingRelationship) {
+        await checklistRepo.hardDeleteChecklistItemBlockerRelationship(
+          ctx.db,
+          relationshipIds,
+        );
+
+        await cardActivityRepo.create(ctx.db, {
+          type: "card.updated.checklist.item.blocker.removed" as const,
+          cardId: item.checklist.cardId,
+          fromTitle: blockerCard?.title,
+          createdBy: userId,
+        });
+
+        return { newBlocker: false };
+      }
+
+      // Prevent circular dependencies
+      if (
+        await checklistRepo.wouldCreateChecklistItemCycle(ctx.db, relationshipIds)
+      )
+        throw new TRPCError({
+          message: `Adding this blocker would create a circular dependency`,
+          code: "BAD_REQUEST",
+        });
+
+      await checklistRepo.createChecklistItemBlockerRelationship(
+        ctx.db,
+        relationshipIds,
+      );
+
+      await cardActivityRepo.create(ctx.db, {
+        type: "card.updated.checklist.item.blocker.added" as const,
+        cardId: item.checklist.cardId,
+        toTitle: blockerCard?.title,
+        createdBy: userId,
+      });
+
+      return { newBlocker: true };
+    }),
 });

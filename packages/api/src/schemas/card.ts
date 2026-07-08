@@ -61,13 +61,6 @@ export const cardDetailSchema = z.object({
     }),
   ),
   checklists: z.array(checklistResponseSchema),
-  blockedBy: z.array(
-    z.object({
-      publicId: z.string(),
-      title: z.string(),
-      cardNumber: z.number().nullable(),
-    }),
-  ),
   list: z.object({
     publicId: z.string(),
     name: z.string(),

@@ -260,6 +260,20 @@
       "when": 1783395744130,
       "tag": "20260707034224_spooky_klaw",
       "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1784197001000,
+      "tag": "20260708011641_add_checklist_item_blocking",
+      "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1784197278000,
+      "tag": "20260708012718_drop_card_blocking",
+      "breakpoints": true
     }
   ]
 }

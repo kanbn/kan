@@ -298,7 +298,7 @@ importers:
         version: 3.6.2
       serwist:
         specifier: ^9.5.11
-        version: 9.5.11(browserslist@4.27.0)(typescript@5.9.2)
+        version: 9.5.11(browserslist@4.25.4)(typescript@5.9.2)
       tailwindcss:
         specifier: 'catalog:'
         version: 3.4.17(ts-node@10.9.2(@types/node@20.19.11)(typescript@5.9.2))
@@ -11724,9 +11724,9 @@ snapshots:
       domhandler: 5.0.3
       selderee: 0.11.0
 
-  '@serwist/utils@9.5.11(browserslist@4.27.0)':
+  '@serwist/utils@9.5.11(browserslist@4.25.4)':
     optionalDependencies:
-      browserslist: 4.27.0
+      browserslist: 4.25.4
 
   '@sinclair/typebox@0.27.8': {}
 
@@ -17356,9 +17356,9 @@ snapshots:
     dependencies:
       randombytes: 2.1.0
 
-  serwist@9.5.11(browserslist@4.27.0)(typescript@5.9.2):
+  serwist@9.5.11(browserslist@4.25.4)(typescript@5.9.2):
     dependencies:
-      '@serwist/utils': 9.5.11(browserslist@4.27.0)
+      '@serwist/utils': 9.5.11(browserslist@4.25.4)
       idb: 8.0.3
     optionalDependencies:
       typescript: 5.9.2

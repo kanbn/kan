@@ -197,6 +197,7 @@ export function CardModal({
                 <Checklists
                   checklists={data.checklists}
                   cardPublicId={cardPublicId ?? ""}
+                  cardPrefix={data.list.board.workspace.cardPrefix}
                   viewOnly
                 />
               )}

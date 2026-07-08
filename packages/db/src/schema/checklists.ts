@@ -5,6 +5,7 @@ import {
   boolean,
   integer,
   pgTable,
+  primaryKey,
   timestamp,
   uuid,
   varchar,
@@ -71,7 +72,7 @@ export const checklistItems = pgTable("card_checklist_item", {
   }),
 }).enableRLS();
 
-export const checklistItemsRelations = relations(checklistItems, ({ one }) => ({
+export const checklistItemsRelations = relations(checklistItems, ({ one, many }) => ({
   checklist: one(checklists, {
     fields: [checklistItems.checklistId],
     references: [checklists.id],
@@ -86,5 +87,33 @@ export const checklistItemsRelations = relations(checklistItems, ({ one }) => ({
     fields: [checklistItems.deletedBy],
     references: [users.id],
     relationName: "checklistItemsDeletedByUser",
+  }),
+  blockedBy: many(checklistItemBlocking, { relationName: "checklistItemBlockedBy" }),
+}));
+
+// Junction table: a checklist item can be blocked by one or more cards
+export const checklistItemBlocking = pgTable(
+  "_checklist_item_blocking",
+  {
+    checklistItemId: bigint("checklistItemId", { mode: "number" })
+      .notNull()
+      .references(() => checklistItems.id, { onDelete: "cascade" }),
+    blockerCardId: bigint("blockerCardId", { mode: "number" })
+      .notNull()
+      .references(() => cards.id, { onDelete: "cascade" }),
+  },
+  (t) => [primaryKey({ columns: [t.checklistItemId, t.blockerCardId] })],
+).enableRLS();
+
+export const checklistItemBlockingRelations = relations(checklistItemBlocking, ({ one }) => ({
+  checklistItem: one(checklistItems, {
+    fields: [checklistItemBlocking.checklistItemId],
+    references: [checklistItems.id],
+    relationName: "checklistItemBlockedBy",
+  }),
+  blocker: one(cards, {
+    fields: [checklistItemBlocking.blockerCardId],
+    references: [cards.id],
+    relationName: "checklistItemBlockingBlocker",
   }),
 }));

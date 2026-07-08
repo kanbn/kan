@@ -13,6 +13,13 @@ export const checklistItemResponseSchema = z.object({
   title: z.string(),
   completed: z.boolean(),
   index: z.number(),
+  blockedBy: z.array(
+    z.object({
+      publicId: z.string(),
+      title: z.string(),
+      cardNumber: z.number().nullable(),
+    }),
+  ),
 });
 
 // Shared checklist schema with items
