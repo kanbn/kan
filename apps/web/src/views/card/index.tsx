@@ -7,7 +7,10 @@ import { HiXMark } from "react-icons/hi2";
 import { IoChevronForwardSharp } from "react-icons/io5";
 
 import { authClient } from "@kan/auth/client";
-import { parseCustomFieldsConfig } from "@kan/shared";
+import {
+  parseCustomFieldsConfig,
+  type BuiltinFieldOverride,
+} from "@kan/shared";
 
 import Avatar from "~/components/Avatar";
 import Editor from "~/components/Editor";
@@ -81,7 +84,20 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   })();
 
   const listLabel = customFieldsConfig?.sidebar?.fields?.["list"]?.title ?? t`List`;
-  const dueDateLabel = customFieldsConfig?.sidebar?.fields?.["dueDate"]?.title ?? t`Due date`;
+  const listPlaceholder = (
+    customFieldsConfig?.sidebar?.fields?.["list"] as BuiltinFieldOverride
+  )?.placeholder;
+  const labelsPlaceholder = (
+    customFieldsConfig?.sidebar?.fields?.["labels"] as BuiltinFieldOverride
+  )?.placeholder;
+  const membersPlaceholder = (
+    customFieldsConfig?.sidebar?.fields?.["members"] as BuiltinFieldOverride
+  )?.placeholder;
+  const dueDateLabel =
+    customFieldsConfig?.sidebar?.fields?.["dueDate"]?.title ?? t`Due date`;
+  const dueDatePlaceholder = (
+    customFieldsConfig?.sidebar?.fields?.["dueDate"] as BuiltinFieldOverride
+  )?.placeholder;
 
   const formattedLabels =
     labels?.map((label) => {
@@ -136,41 +152,53 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   return (
     <div className="h-full w-[360px] border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
       <div className="mb-4 flex w-full flex-row pt-[18px]">
-        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{listLabel}</p>
+        <p className="my-2 w-[100px] shrink-0 text-sm font-medium">
+          {listLabel}
+        </p>
         <ListSelector
           cardPublicId={cardId ?? ""}
           lists={formattedLists}
           isLoading={!card}
           disabled={!canEdit}
+          placeholder={listPlaceholder}
         />
       </div>
       <div className="mb-4 flex w-full flex-row">
-        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Labels`}</p>
+        <p className="my-2 w-[100px] shrink-0 text-sm font-medium">
+          {t`Labels`}
+        </p>
         <LabelSelector
           cardPublicId={cardId ?? ""}
           labels={formattedLabels}
           isLoading={!card}
           disabled={!canEdit}
+          placeholder={labelsPlaceholder}
         />
       </div>
       {!isTemplate && (
         <div className="mb-4 flex w-full flex-row">
-          <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Members`}</p>
+          <p className="my-2 w-[100px] shrink-0 text-sm font-medium">
+            {t`Members`}
+          </p>
           <MemberSelector
             cardPublicId={cardId ?? ""}
             members={formattedMembers}
             isLoading={!card}
             disabled={!canEdit}
+            placeholder={membersPlaceholder}
           />
         </div>
       )}
       <div className="mb-4 flex w-full flex-row">
-        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{dueDateLabel}</p>
+        <p className="my-2 w-[100px] shrink-0 text-sm font-medium">
+          {dueDateLabel}
+        </p>
         <DueDateSelector
           cardPublicId={cardId ?? ""}
           dueDate={card?.dueDate}
           isLoading={!card}
           disabled={!canEdit}
+          placeholder={dueDatePlaceholder}
         />
       </div>
       {customFieldsConfig && cardId && (
@@ -178,6 +206,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           <CustomFields
             panel="sidebar"
             cardPublicId={cardId}
+            boardPublicId={board?.publicId ?? ""}
             config={customFieldsConfig}
             customData={(card?.customData as Record<string, unknown>) ?? null}
             workspaceMembers={workspaceMembers ?? []}
@@ -249,6 +278,14 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
       return null;
     }
   })();
+
+  const titlePlaceholder =
+    (customFieldsConfigMain?.main?.fields?.["title"] as BuiltinFieldOverride)
+      ?.placeholder ?? t`Card title`;
+  const descriptionPlaceholder =
+    (
+      customFieldsConfigMain?.main?.fields?.["description"] as BuiltinFieldOverride
+    )?.placeholder ?? t`Add a description...`;
 
   const editorWorkspaceMembers =
     workspaceMembers
@@ -442,6 +479,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                         onBlur={canEdit ? handleSubmit(onSubmit) : undefined}
                         rows={1}
                         disabled={!canEdit}
+                        placeholder={titlePlaceholder}
                         className={`block w-full resize-none overflow-hidden border-0 bg-transparent p-0 py-0 font-bold leading-relaxed text-neutral-900 focus:ring-0 dark:text-dark-1000 sm:text-[1.2rem] ${!canEdit ? "cursor-default" : ""}`}
                         onInput={(e) => {
                           const target = e.target as HTMLTextAreaElement;
@@ -465,6 +503,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                       <CustomFields
                         panel="main"
                         cardPublicId={cardId}
+                        boardPublicId={board?.publicId ?? ""}
                         config={customFieldsConfigMain}
                         customData={(card?.customData as Record<string, unknown>) ?? null}
                         workspaceMembers={workspaceMembers ?? []}
@@ -490,6 +529,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                           }
                           workspaceMembers={workspaceMembers ?? []}
                           readOnly={!canEdit}
+                          placeholder={descriptionPlaceholder}
                         />
                       </div>
                     </form>

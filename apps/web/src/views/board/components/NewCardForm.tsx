@@ -7,8 +7,6 @@ import {
   HiOutlineBarsArrowDown,
   HiOutlineBarsArrowUp,
   HiXMark,
-  HiChevronDown,
-  HiChevronRight,
 } from "react-icons/hi2";
 
 import type { NewCardInput } from "@kan/api/types";
@@ -36,6 +34,7 @@ import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { FieldRenderer } from "../../card/components/custom-fields/FieldRenderer";
+import { FieldHeader } from "../../card/components/custom-fields/FieldHeader";
 import { TimeseriesField } from "../../card/components/custom-fields/TimeseriesField";
 
 type NewCardFormInput = NewCardInput & {
@@ -177,9 +176,6 @@ export function NewCardForm({
                     ...member,
                     deletedAt: null,
                   })) ?? [],
-              comments: [],
-              checklists: [],
-              attachments: [],
               _filteredLabels: labelPublicIds.map((id) => ({ publicId: id })),
               _filteredMembers: memberPublicIds.map((id) => ({ publicId: id })),
               index: position === "start" ? 0 : list.cards.length,
@@ -319,12 +315,22 @@ export function NewCardForm({
 
   const selectedList = formattedLists.find((item) => item.selected);
 
+  const mainFieldsConfig = config?.main?.fields ?? {};
+  const sidebarFieldsConfig = config?.sidebar?.fields ?? {};
+  const newCardTitle = config?.main?.newCardTitle ?? t`New card`;
+  const titleDisplayTitle = mainFieldsConfig.title?.title ?? t`Card title`;
+  const descriptionDisplayTitle = mainFieldsConfig.description?.title ?? t`Description`;
+  const descriptionPlaceholder = mainFieldsConfig.description?.placeholder;
+  const dueDateDisplayTitle = sidebarFieldsConfig.dueDate?.title ?? t`Due date`;
+  const membersDisplayTitle = sidebarFieldsConfig.members?.title ?? t`Members`;
+  const labelsDisplayTitle = sidebarFieldsConfig.labels?.title ?? t`Labels`;
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="px-5 pt-5">
         <div className="flex w-full items-center justify-between pb-5">
           <h2 className="text-sm font-bold text-neutral-900 dark:text-dark-1000">
-            {t`New card`}
+            {newCardTitle}
           </h2>
           <button
             type="button"
@@ -341,7 +347,7 @@ export function NewCardForm({
         <div>
           <Input
             id="title"
-            placeholder={t`Card title`}
+            placeholder={titleDisplayTitle}
             {...register("title")}
             onKeyDown={async (e) => {
               if (e.key === "Enter") {
@@ -351,33 +357,7 @@ export function NewCardForm({
             }}
           />
         </div>
-        <div className="mt-2">
-          <div className="block max-h-48 min-h-24 w-full overflow-y-auto rounded-md border-0 bg-dark-300 bg-white/5 px-3 py-2 text-sm shadow-sm ring-1 ring-inset ring-light-600 focus-within:ring-2 focus-within:ring-inset focus-within:ring-light-700 dark:ring-dark-700 dark:focus-within:ring-dark-700 sm:leading-6">
-            <Editor
-              content={description}
-              onChange={(value) => {
-                setValue("description", value);
-                saveFormState({ ...formState, description: value });
-              }}
-              workspaceMembers={
-                boardData?.workspace.members.map(
-                  (member): WorkspaceMember => ({
-                    publicId: member.publicId,
-                    email: member.email,
-                    user: member.user
-                      ? {
-                          id: member.publicId,
-                          name: member.user.name,
-                          image: member.user.image ?? null,
-                        }
-                      : null,
-                  }),
-                ) ?? []
-              }
-              enableYouTubeEmbed={false}
-            />
-          </div>
-        </div>
+
         <div className="mt-2 flex space-x-1">
           <div className="w-fit">
             <CheckboxDropdown
@@ -399,7 +379,7 @@ export function NewCardForm({
               >
                 <div className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500">
                   {!memberPublicIds.length ? (
-                    t`Members`
+                    membersDisplayTitle
                   ) : (
                     <div className="flex -space-x-1 overflow-hidden">
                       {memberPublicIds.map((memberPublicId) => {
@@ -441,7 +421,7 @@ export function NewCardForm({
             >
               <div className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500">
                 {!labelPublicIds.length ? (
-                  t`Labels`
+                  labelsDisplayTitle
                 ) : (
                   <>
                     <div
@@ -492,7 +472,7 @@ export function NewCardForm({
               {dueDate ? (
                 <span>{format(dueDate, "MMM d, yyyy")}</span>
               ) : (
-                <>{t`Due date`}</>
+                <>{dueDateDisplayTitle}</>
               )}
             </button>
             {isDateSelectorOpen && (
@@ -540,6 +520,8 @@ export function NewCardForm({
         {config && (
           <div className="mt-4 flex flex-col gap-4">
             <NewCardCustomFields
+              isTemplate={isTemplate}
+              boardPublicId={boardPublicId}
               config={config}
               customData={customData}
               onChange={(data) => {
@@ -564,6 +546,38 @@ export function NewCardForm({
             />
           </div>
         )}
+
+        <div className="mt-4">
+          <label className="mb-2 block text-xs font-medium text-[rgb(126,126,126)] dark:text-dark-800">
+            {descriptionDisplayTitle}
+          </label>
+          <div className="block max-h-48 min-h-24 w-full overflow-y-auto rounded-md border-0 bg-dark-300 bg-white/5 px-3 py-2 text-sm shadow-sm ring-1 ring-inset ring-light-600 focus-within:ring-2 focus-within:ring-inset focus-within:ring-light-700 dark:ring-dark-700 dark:focus-within:ring-dark-700 sm:leading-6">
+            <Editor
+              content={description}
+              onChange={(value) => {
+                setValue("description", value);
+                saveFormState({ ...formState, description: value });
+              }}
+              placeholder={descriptionPlaceholder}
+              workspaceMembers={
+                boardData?.workspace.members.map(
+                  (member): WorkspaceMember => ({
+                    publicId: member.publicId,
+                    email: member.email,
+                    user: member.user
+                      ? {
+                          id: member.publicId,
+                          name: member.user.name,
+                          image: member.user.image ?? null,
+                        }
+                      : null,
+                  }),
+                ) ?? []
+              }
+              enableYouTubeEmbed={false}
+            />
+          </div>
+        </div>
       </div>
 
       <div className="mt-5 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
@@ -586,9 +600,116 @@ export function NewCardForm({
   );
 }
 
+// ─── New Card Fields ─────────────────────────────────────────────────────────
+
+interface NewCardFieldProps {
+  fieldKey: string;
+  field: any;
+  value: any;
+  onChange: (v: any) => void;
+  workspaceMembers: WorkspaceMember[];
+  boardPublicId: string;
+  sectionKey?: string;
+}
+
+function NewCardField({
+  fieldKey,
+  field,
+  value,
+  onChange,
+  workspaceMembers,
+  boardPublicId,
+  sectionKey,
+}: NewCardFieldProps) {
+  const isComplex =
+    field.type === "list" ||
+    field.type === "timeseries" ||
+    field.type === "keyvalue" ||
+    field.type === "address";
+
+  const empty =
+    value == null ||
+    (Array.isArray(value) && value.length === 0) ||
+    (typeof value === "object" && Object.keys(value).length === 0);
+
+  const [collapsed, setCollapsed] = useState(!field.alwaysExpanded && empty);
+
+  const [triggerAddCount, setTriggerAddCount] = useState(0);
+
+  const handleAdd = () => {
+    setCollapsed(false);
+    setTriggerAddCount((c) => c + 1);
+  };
+
+  const handleToggle = () => {
+    if (collapsed && empty) {
+      handleAdd();
+    } else {
+      setCollapsed(!collapsed);
+    }
+  };
+
+  if (!isComplex) {
+    return (
+      <div key={fieldKey} className="flex flex-col">
+        {!field.hideLabel && (
+          <label className="mb-2 block text-xs font-medium text-[rgb(126,126,126)] dark:text-dark-800">
+            {field.title}
+          </label>
+        )}
+        <FieldRenderer
+          fieldKey={fieldKey}
+          field={field}
+          value={value}
+          onChange={onChange}
+          workspaceMembers={workspaceMembers}
+          canEdit
+          embedded
+          boardPublicId={boardPublicId}
+          sectionKey={sectionKey}
+        />
+        {field.description && (
+          <p className="mt-1 text-[11px] text-neutral-500 dark:text-dark-700">
+            {field.description}
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div key={fieldKey} className="flex flex-col">
+      <FieldHeader
+        title={field.title}
+        onToggle={handleToggle}
+        onAdd={field.type === "address" && !collapsed ? undefined : handleAdd}
+        collapsed={collapsed}
+      />
+      {!collapsed && (
+        <div className="pl-4">
+          <FieldRenderer
+            fieldKey={fieldKey}
+            field={field}
+            value={value}
+            onChange={onChange}
+            workspaceMembers={workspaceMembers}
+            canEdit
+            embedded
+            boardPublicId={boardPublicId}
+            sectionKey={sectionKey}
+            triggerAddCount={triggerAddCount}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── New Card Custom Fields ──────────────────────────────────────────────────
 
 interface NewCardCustomFieldsProps {
+  isTemplate: boolean;
+  boardPublicId: string;
   config: CustomFieldsConfig;
   customData: Record<string, unknown> | null;
   onChange: (data: Record<string, unknown>) => void;
@@ -596,6 +717,8 @@ interface NewCardCustomFieldsProps {
 }
 
 function NewCardCustomFields({
+  isTemplate,
+  boardPublicId,
   config,
   customData,
   onChange,
@@ -632,79 +755,161 @@ function NewCardCustomFields({
     <div className="flex flex-col gap-4 border-t border-light-200 pt-4 dark:border-dark-300">
       {/* Sidebar custom fields */}
       {sidebarCustom.map(({ key, field }) => (
-        <div key={key} className="flex flex-col">
-          <label className="mb-2 block text-xs font-medium text-[rgb(126,126,126)] dark:text-dark-800">
-            {field.title}
-          </label>
-          <FieldRenderer
-            fieldKey={key}
-            field={field}
-            value={(customData?.sidebar as Record<string, unknown> | undefined)?.[key]}
-            onChange={(v) => handleFieldChange("sidebar", key, v)}
-            workspaceMembers={workspaceMembers}
-            canEdit
-            embedded
-          />
-        </div>
+        <NewCardField
+          key={key}
+          fieldKey={key}
+          field={field}
+          value={
+            (customData?.sidebar as Record<string, unknown> | undefined)?.[key]
+          }
+          onChange={(v) => handleFieldChange("sidebar", key, v)}
+          workspaceMembers={workspaceMembers}
+          boardPublicId={boardPublicId}
+          sectionKey="sidebar"
+        />
       ))}
 
       {/* Main section fields */}
       {mainFields.map(({ key, field }) => (
-        <div key={key} className="flex flex-col">
-          <label className="mb-2 block text-xs font-medium text-[rgb(126,126,126)] dark:text-dark-800">
-            {field.title}
-          </label>
-          <FieldRenderer
-            fieldKey={key}
-            field={field}
-            value={(customData?.main as Record<string, unknown> | undefined)?.[key]}
-            onChange={(v) => handleFieldChange("main", key, v)}
-            workspaceMembers={workspaceMembers}
-            canEdit
-            embedded
-          />
-        </div>
+        <NewCardField
+          key={key}
+          fieldKey={key}
+          field={field}
+          value={
+            (customData?.main as Record<string, unknown> | undefined)?.[key]
+          }
+          onChange={(v) => handleFieldChange("main", key, v)}
+          workspaceMembers={workspaceMembers}
+          boardPublicId={boardPublicId}
+          sectionKey="main"
+        />
       ))}
 
       {/* Custom top-level sections */}
       {sections.map(({ key, section }) => (
-        <div key={key} className="flex flex-col border-t border-light-200 pt-3 dark:border-dark-300">
-          <h3 className="mb-2 flex w-full items-center gap-1 text-left text-sm font-semibold text-neutral-800 dark:text-dark-1000">
-            {section.title ?? key}
-          </h3>
+        <NewCardCustomSection
+          key={key}
+          sectionKey={key}
+          section={section}
+          customData={customData}
+          onFieldChange={handleFieldChange}
+          onSectionChange={handleSectionChange}
+          workspaceMembers={workspaceMembers}
+          boardPublicId={boardPublicId}
+        />
+      ))}
+    </div>
+  );
+}
+
+interface NewCardCustomSectionProps {
+  sectionKey: string;
+  section: any;
+  customData: Record<string, unknown> | null;
+  onFieldChange: (sectionKey: string, fieldKey: string, value: unknown) => void;
+  onSectionChange: (sectionKey: string, value: unknown) => void;
+  workspaceMembers: WorkspaceMember[];
+  boardPublicId: string;
+}
+
+function NewCardCustomSection({
+  sectionKey,
+  section,
+  customData,
+  onFieldChange,
+  onSectionChange,
+  workspaceMembers,
+  boardPublicId,
+}: NewCardCustomSectionProps) {
+  const value = customData?.[sectionKey];
+  const empty =
+    value == null ||
+    (Array.isArray(value) && value.length === 0) ||
+    (typeof value === "object" && Object.keys(value).length === 0);
+
+  const [collapsed, setCollapsed] = useState(!section.alwaysExpanded && empty);
+
+  const [triggerAddCount, setTriggerAddCount] = useState(0);
+
+  const handleAdd = () => {
+    setCollapsed(false);
+    setTriggerAddCount((prev) => prev + 1);
+  };
+
+  const handleToggle = () => {
+    if (
+      collapsed &&
+      empty &&
+      (section.type === "list" || section.type === "timeseries")
+    ) {
+      handleAdd();
+    } else {
+      setCollapsed(!collapsed);
+    }
+  };
+
+  return (
+    <div
+      key={sectionKey}
+      className="flex flex-col border-t border-light-200 pt-3 dark:border-dark-300"
+    >
+      <FieldHeader
+        title={section.title ?? sectionKey}
+        onToggle={handleToggle}
+        onAdd={
+          section.type === "list" || section.type === "timeseries"
+            ? handleAdd
+            : undefined
+        }
+        collapsed={collapsed}
+        isSection={section.type === "section"}
+      />
+
+      {!collapsed && (
+        <>
           {section.type === "timeseries" ? (
-            <TimeseriesField
-              sectionKey={key}
-              field={{ title: section.title ?? key, type: "timeseries", fields: section.fields }}
-              value={customData?.[key]}
-              onChange={(v) => handleSectionChange(key, v)}
-              workspaceMembers={workspaceMembers}
-              canEdit
-            />
+            <div className="pl-4">
+              <TimeseriesField
+                sectionKey={sectionKey}
+                field={{
+                  title: section.title ?? sectionKey,
+                  type: "timeseries",
+                  fields: section.fields,
+                }}
+                value={customData?.[sectionKey]}
+                onChange={(v) => onSectionChange(sectionKey, v)}
+                workspaceMembers={workspaceMembers}
+                canEdit
+                boardPublicId={boardPublicId}
+                triggerAddCount={triggerAddCount}
+              />
+            </div>
           ) : (
-            <div className="flex flex-col gap-3 pt-2">
-              {Object.entries(section.fields ?? {}).map(([fieldKey, field]) => (
-                <div key={fieldKey} className="flex flex-col">
-                  {!field.hideLabel && (
-                    <label className="mb-2 block text-xs font-medium text-[rgb(126,126,126)] dark:text-dark-800">
-                      {field.title}
-                    </label>
-                  )}
-                  <FieldRenderer
+            <div className="flex flex-col gap-3 pl-4 pt-2">
+              {Object.entries(section.fields ?? {}).map(
+                ([fieldKey, field]: [string, any]) => (
+                  <NewCardField
+                    key={fieldKey}
                     fieldKey={fieldKey}
                     field={field}
-                    value={(customData?.[key] as Record<string, unknown> | undefined)?.[fieldKey]}
-                    onChange={(v) => handleFieldChange(key, fieldKey, v)}
+                    value={
+                      (
+                        customData?.[sectionKey] as
+                          | Record<string, unknown>
+                          | undefined
+                      )?.[fieldKey]
+                    }
+                    onChange={(v) => onFieldChange(sectionKey, fieldKey, v)}
                     workspaceMembers={workspaceMembers}
-                    canEdit
-                    embedded
+                    boardPublicId={boardPublicId}
+                    sectionKey={sectionKey}
                   />
-                </div>
-              ))}
+                ),
+              )}
             </div>
           )}
-        </div>
-      ))}
+        </>
+      )}
     </div>
   );
 }

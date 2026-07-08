@@ -14,6 +14,7 @@ interface ListSelectorProps {
   }[];
   isLoading: boolean;
   disabled?: boolean;
+  placeholder?: string;
 }
 
 export default function ListSelector({
@@ -21,6 +22,7 @@ export default function ListSelector({
   lists,
   isLoading,
   disabled = false,
+  placeholder,
 }: ListSelectorProps) {
   const utils = api.useUtils();
 
@@ -84,7 +86,7 @@ export default function ListSelector({
           asChild
         >
           <div className={`flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 py-1 pl-2 text-left text-xs text-neutral-900 dark:border-dark-50 dark:text-dark-1000 ${disabled ? "cursor-not-allowed opacity-60" : "hover:border-light-300 hover:bg-light-200 dark:hover:border-dark-200 dark:hover:bg-dark-100"}`}>
-            {selectedList?.value}
+            {selectedList?.value || placeholder}
           </div>
         </CheckboxDropdown>
       )}

@@ -8,6 +8,7 @@ import { SectionField } from "./SectionField";
 import { SelectField } from "./SelectField";
 import { TextField } from "./TextField";
 import { TimeseriesField } from "./TimeseriesField";
+import { AddressField } from "./AddressField";
 
 interface Props {
   fieldKey: string;
@@ -17,6 +18,10 @@ interface Props {
   workspaceMembers: WorkspaceMember[];
   canEdit?: boolean;
   embedded?: boolean;
+  triggerAddCount?: number;
+  boardPublicId: string;
+  sectionKey?: string;
+  isSidebar?: boolean;
 }
 
 export function FieldRenderer({
@@ -27,6 +32,10 @@ export function FieldRenderer({
   workspaceMembers,
   canEdit = true,
   embedded = false,
+  triggerAddCount = 0,
+  boardPublicId,
+  sectionKey,
+  isSidebar = false,
 }: Props) {
   switch (field.type) {
     case "text":
@@ -41,6 +50,9 @@ export function FieldRenderer({
           onChange={(v) => onChange(v)}
           canEdit={canEdit}
           embedded={embedded}
+          boardPublicId={boardPublicId}
+          sectionKey={sectionKey}
+          isSidebar={isSidebar}
         />
       );
 
@@ -54,6 +66,7 @@ export function FieldRenderer({
           workspaceMembers={workspaceMembers}
           canEdit={canEdit}
           embedded={embedded}
+          isSidebar={isSidebar}
         />
       );
 
@@ -67,6 +80,7 @@ export function FieldRenderer({
           onChange={(v) => onChange(v)}
           canEdit={canEdit}
           embedded={embedded}
+          isSidebar={isSidebar}
         />
       );
 
@@ -79,6 +93,23 @@ export function FieldRenderer({
           onChange={(v) => onChange(v)}
           canEdit={canEdit}
           embedded={embedded}
+          boardPublicId={boardPublicId}
+          sectionKey={sectionKey}
+          isSidebar={isSidebar}
+        />
+      );
+
+    case "address":
+      return (
+        <AddressField
+          fieldKey={fieldKey}
+          field={field}
+          value={value as any}
+          onChange={onChange}
+          canEdit={canEdit}
+          isSidebar={isSidebar}
+          embedded={embedded}
+          triggerAddCount={triggerAddCount}
         />
       );
 
@@ -91,6 +122,8 @@ export function FieldRenderer({
           onChange={onChange}
           workspaceMembers={workspaceMembers}
           canEdit={canEdit}
+          triggerAddCount={triggerAddCount}
+          boardPublicId={boardPublicId}
         />
       );
 
@@ -104,6 +137,8 @@ export function FieldRenderer({
           workspaceMembers={workspaceMembers}
           canEdit={canEdit}
           isList
+          triggerAddCount={triggerAddCount}
+          boardPublicId={boardPublicId}
         />
       );
 
@@ -116,6 +151,8 @@ export function FieldRenderer({
           onChange={onChange}
           workspaceMembers={workspaceMembers}
           canEdit={canEdit}
+          triggerAddCount={triggerAddCount}
+          boardPublicId={boardPublicId}
         />
       );
 
@@ -127,8 +164,7 @@ export function FieldRenderer({
           value={value}
           onChange={onChange}
           workspaceMembers={workspaceMembers}
-          canEdit={canEdit}
-        />
+          canEdit={canEdit}          triggerAddCount={triggerAddCount}        />
       );
 
     default:

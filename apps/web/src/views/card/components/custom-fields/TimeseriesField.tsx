@@ -1,5 +1,5 @@
 import { t } from "@lingui/core/macro";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiPencil, HiPlus, HiXMark, HiCheck } from "react-icons/hi2";
 
 import type { CustomFieldDef } from "@kan/shared";
@@ -19,6 +19,8 @@ interface Props {
   onChange: (value: unknown) => void;
   workspaceMembers: WorkspaceMember[];
   canEdit?: boolean;
+  triggerAddCount?: number;
+  boardPublicId: string;
 }
 
 export function TimeseriesField({
@@ -28,13 +30,17 @@ export function TimeseriesField({
   onChange,
   workspaceMembers,
   canEdit = true,
+  triggerAddCount = 0,
+  boardPublicId,
 }: Props) {
   const entries = Array.isArray(value)
-    ? (value as TimeseriesEntry[]).slice().sort(
-        (a, b) =>
-          new Date(b.timestamp ?? 0).getTime() -
-          new Date(a.timestamp ?? 0).getTime(),
-      )
+    ? (value as TimeseriesEntry[])
+        .slice()
+        .sort(
+          (a, b) =>
+            new Date(b.timestamp ?? 0).getTime() -
+            new Date(a.timestamp ?? 0).getTime(),
+        )
     : [];
 
   // Track original (pre-sort) order so we can splice by original index
@@ -45,6 +51,12 @@ export function TimeseriesField({
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [draftEntry, setDraftEntry] = useState<TimeseriesEntry | null>(null);
   const [isAdding, setIsAdding] = useState(false);
+
+  useEffect(() => {
+    if (triggerAddCount > 0 && canEdit && !isAdding) {
+      handleStartAdd();
+    }
+  }, [triggerAddCount]);
 
   const subFields = field.fields ?? {};
 
@@ -145,9 +157,16 @@ export function TimeseriesField({
               value={entry[subKey]}
               onChange={(v) => onFieldChange(subKey, v)}
               workspaceMembers={workspaceMembers}
-              canEdit
+              canEdit={canEdit}
               embedded
+              boardPublicId={boardPublicId}
+              sectionKey={sectionKey}
             />
+            {subField.description && (
+              <p className="mt-1 text-[11px] text-neutral-500 dark:text-dark-700">
+                {subField.description}
+              </p>
+            )}
           </div>
         ))}
     </div>
@@ -248,16 +267,6 @@ export function TimeseriesField({
             </button>
           </div>
         </div>
-      )}
-
-      {canEdit && !isAdding && (
-        <button
-          type="button"
-          onClick={handleStartAdd}
-          className="flex items-center mt-1 gap-1 text-[11px] text-neutral-600 hover:text-neutral-900 dark:text-dark-800 dark:hover:text-dark-1000"
-        >
-          <HiPlus className="h-3 w-3" /> {t`Add entry`}
-        </button>
       )}
     </div>
   );

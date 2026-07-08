@@ -14,6 +14,7 @@ interface Props {
   onChange: (value: string | null) => void;
   canEdit?: boolean;
   embedded?: boolean;
+  isSidebar?: boolean;
 }
 
 export function DateField({
@@ -23,6 +24,7 @@ export function DateField({
   onChange,
   canEdit = true,
   embedded = false,
+  isSidebar = false,
 }: Props) {
   const { workspace } = useWorkspace();
   const [isOpen, setIsOpen] = useState(false);
@@ -125,7 +127,11 @@ export function DateField({
             ref={inputRef}
             autoFocus={!embedded}
             type="text"
-            className={`w-full rounded bg-transparent px-2 py-1.5 text-sm text-neutral-900 focus:outline-none dark:text-dark-1000 ${embedded ? "" : "-mx-2 w-[calc(100%+1rem)]"}`}
+            className={`w-full rounded bg-transparent text-neutral-900 focus:outline-none dark:text-dark-1000 ${
+              isSidebar ? "py-1 pl-2 text-xs" : "px-2 py-1.5 text-sm"
+            } ${
+              embedded ? "" : isSidebar ? "" : "-mx-2 w-[calc(100%+1rem)]"
+            }`}
             value={typeValue}
             onChange={handleManualInput}
             onBlur={handleInputBlur}
@@ -142,13 +148,15 @@ export function DateField({
               }
             }}
             disabled={!canEdit}
-            className={`flex w-full items-center rounded px-2 py-1.5 text-sm transition-colors ${
+            className={`flex w-full items-center rounded transition-colors ${
+              isSidebar ? "py-1 pl-2 text-xs border border-light-50 dark:border-dark-50" : "px-2 py-1.5 text-sm"
+            } ${
               displayString 
                 ? "text-neutral-900 dark:text-dark-1000" 
                 : "text-neutral-400 dark:text-dark-600 italic"
             } ${
               canEdit 
-                ? `${embedded ? "" : "-mx-2 w-[calc(100%+1rem)] hover:bg-light-100 dark:hover:bg-dark-100"}`
+                ? `${embedded ? "" : isSidebar ? "hover:bg-light-100 dark:hover:bg-dark-100" : "-mx-2 w-[calc(100%+1rem)] hover:bg-light-100 dark:hover:bg-dark-100"}`
                 : "cursor-default"
             }`}
           >
@@ -156,8 +164,14 @@ export function DateField({
               <span>{displayString}</span>
             ) : (
               <span className="flex items-center gap-1">
-                <HiMiniPlus className="h-4 w-4" />
-                {t`Set date`}
+                {field.placeholder ? (
+                  field.placeholder
+                ) : (
+                  <>
+                    <HiMiniPlus className="h-4 w-4" />
+                    {t`Set date`}
+                  </>
+                )}
               </span>
             )}
           </button>

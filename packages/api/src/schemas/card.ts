@@ -124,16 +124,10 @@ export const cardDetailSchema = z.object({
           publicId: z.string(),
           user: z
             .object({
-              name: z.string().nullable(),
+              name: z.string().nullable().optional(),
               email: z.string(),
             })
             .nullable(),
-        })
-        .nullable(),
-      user: z
-        .object({
-          name: z.string().nullable(),
-          email: z.string(),
         })
         .nullable(),
       comment: z
@@ -145,9 +139,26 @@ export const cardDetailSchema = z.object({
           deletedAt: z.date().nullable(),
         })
         .nullable(),
+      user: z
+        .object({
+          name: z.string().nullable(),
+          email: z.string(),
+          id: z.string().nullable().optional(),
+          image: z.string().nullable().optional(),
+        })
+        .nullable(),
     }),
   ),
 });
+
+export const cardCustomFieldValuesRequestSchema = z.object({
+  boardPublicId: z.string().min(12),
+  fieldKey: z.string(),
+  sectionKey: z.string().optional(),
+  limit: z.number().int().min(1).max(100).optional(),
+});
+
+export const cardCustomFieldValuesResponseSchema = z.array(z.string());
 
 // ─── card.getActivities ──────────────────────────────────────
 export const activityItemSchema = z.object({

@@ -14,6 +14,7 @@ interface DueDateSelectorProps {
   dueDate: Date | null | undefined;
   isLoading?: boolean;
   disabled?: boolean;
+  placeholder?: string;
 }
 
 export function DueDateSelector({
@@ -21,6 +22,7 @@ export function DueDateSelector({
   dueDate,
   isLoading = false,
   disabled = false,
+  placeholder,
 }: DueDateSelectorProps) {
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
@@ -118,7 +120,7 @@ export function DueDateSelector({
         ) : (
           <>
             <HiMiniPlus size={22} className="pr-2" />
-            {t`Set due date`}
+            {placeholder || t`Set due date`}
           </>
         )}
       </button>

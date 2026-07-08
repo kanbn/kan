@@ -13,6 +13,7 @@ export const CustomFieldTypeSchema = z.enum([
   "tel",
   "select",
   "section",
+  "address",
   "list",
   "timeseries",
   "keyvalue",
@@ -22,7 +23,7 @@ export type CustomFieldType = z.infer<typeof CustomFieldTypeSchema>;
 
 // ─── Field definition (recursive via z.lazy) ─────────────────────────────────
 
-export type CustomFieldDef = {
+export interface CustomFieldDef {
   title: string;
   type: CustomFieldType;
   showOnBoard?: boolean;
@@ -30,10 +31,14 @@ export type CustomFieldDef = {
   style?: "checkbox" | "radio" | "dropdown" | "autofill";
   alwaysExpanded?: boolean;
   hideLabel?: boolean;
+  placeholder?: string;
+  description?: string;
+  autofillLimit?: number;
+  autofillFromCards?: boolean;
   default?: string | string[];
   options?: Record<string, string>;
   fields?: Record<string, CustomFieldDef>;
-};
+}
 
 export const CustomFieldDefSchema: z.ZodType<CustomFieldDef> = z.lazy(() =>
   z.object({
@@ -44,6 +49,10 @@ export const CustomFieldDefSchema: z.ZodType<CustomFieldDef> = z.lazy(() =>
     style: z.enum(["checkbox", "radio", "dropdown", "autofill"]).optional(),
     alwaysExpanded: z.boolean().optional(),
     hideLabel: z.boolean().optional(),
+    placeholder: z.string().optional(),
+    description: z.string().optional(),
+    autofillLimit: z.number().optional(),
+    autofillFromCards: z.boolean().optional(),
     default: z.union([z.string(), z.array(z.string())]).optional(),
     options: z.record(z.string(), z.string()).optional(),
     fields: z.record(z.string(), CustomFieldDefSchema).optional(),
@@ -55,6 +64,7 @@ export const CustomFieldDefSchema: z.ZodType<CustomFieldDef> = z.lazy(() =>
 export const BuiltinFieldOverrideSchema = z.object({
   title: z.string().optional(),
   showOnBoard: z.boolean().optional(),
+  placeholder: z.string().optional(),
 });
 
 export type BuiltinFieldOverride = z.infer<typeof BuiltinFieldOverrideSchema>;
@@ -69,6 +79,7 @@ const MainFieldSchema = z.union([
 ]);
 
 export const MainSectionSchema = z.object({
+  newCardTitle: z.string().optional(),
   fields: z.record(z.string(), MainFieldSchema).optional(),
 });
 
@@ -98,6 +109,7 @@ export const CustomTopLevelSectionSchema = z.object({
   title: z.string().optional(),
   type: z.enum(["section", "timeseries"]).optional(),
   fields: z.record(z.string(), CustomFieldDefSchema).optional(),
+  alwaysExpanded: z.boolean().optional(),
 });
 
 export type CustomTopLevelSection = z.infer<typeof CustomTopLevelSectionSchema>;
@@ -153,7 +165,7 @@ export function parseCustomFieldsConfig(yaml: string): CustomFieldsConfig {
  */
 export function getCustomSections(
   config: CustomFieldsConfig,
-): Array<{ key: string; section: CustomTopLevelSection }> {
+): { key: string; section: CustomTopLevelSection }[] {
   return Object.entries(config)
     .filter(([key]) => key !== "main" && key !== "sidebar")
     .map(([key, section]) => ({
@@ -169,7 +181,7 @@ const BUILTIN_SIDEBAR_KEYS = new Set(["list", "labels", "members", "dueDate"]);
 
 export function getSidebarCustomFields(
   config: CustomFieldsConfig,
-): Array<{ key: string; field: CustomFieldDef }> {
+): { key: string; field: CustomFieldDef }[] {
   const sidebar = config.sidebar;
   if (!sidebar?.fields) return [];
 
@@ -179,7 +191,7 @@ export function getSidebarCustomFields(
       (entry): entry is [string, CustomFieldDef] =>
         "type" in (entry[1] as object),
     )
-    .map(([key, field]) => ({ key, field: field as CustomFieldDef }));
+    .map(([key, field]) => ({ key, field }));
 }
 
 /**
@@ -189,7 +201,7 @@ const BUILTIN_MAIN_KEYS = new Set(["id", "description", "title", "checklists"]);
 
 export function getMainCustomFields(
   config: CustomFieldsConfig,
-): Array<{ key: string; field: CustomFieldDef }> {
+): { key: string; field: CustomFieldDef }[] {
   const main = config.main;
   if (!main?.fields) return [];
 
@@ -199,7 +211,7 @@ export function getMainCustomFields(
       (entry): entry is [string, CustomFieldDef] =>
         "type" in (entry[1] as object),
     )
-    .map(([key, field]) => ({ key, field: field as CustomFieldDef }));
+    .map(([key, field]) => ({ key, field }));
 }
 
 /**
@@ -207,12 +219,12 @@ export function getMainCustomFields(
  */
 export function getShowOnBoardFields(
   config: CustomFieldsConfig,
-): Array<{ sectionKey: string; fieldKey: string; field: CustomFieldDef }> {
-  const results: Array<{
+): { sectionKey: string; fieldKey: string; field: CustomFieldDef }[] {
+  const results: {
     sectionKey: string;
     fieldKey: string;
     field: CustomFieldDef;
-  }> = [];
+  }[] = [];
 
   function walkFields(
     sectionKey: string,

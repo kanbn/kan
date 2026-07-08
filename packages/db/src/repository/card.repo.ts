@@ -1046,3 +1046,61 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
       }
     : null;
 };
+
+export const getUniqueCustomFieldValues = async (
+  db: dbClient,
+  boardId: number,
+  fieldKey: string,
+  sectionKey?: string,
+  limit = 20,
+): Promise<string[]> => {
+  const result = await db.execute(sql`
+    WITH raw_values AS (
+      SELECT card."customData"
+      FROM card
+      WHERE card."listId" IN (SELECT id FROM list WHERE "boardId" = ${boardId})
+        AND card."deletedAt" IS NULL
+        AND card."customData" IS NOT NULL
+    ),
+    extracted AS (
+      -- Case 1: Object sections
+      SELECT f.value as val
+      FROM raw_values
+      CROSS JOIN LATERAL jsonb_each(raw_values."customData") AS s(key, value)
+      CROSS JOIN LATERAL jsonb_each_text(s.value) AS f(key, value)
+      WHERE jsonb_typeof(s.value) = 'object'
+        AND f.key = ${fieldKey}
+        ${sectionKey ? sql`AND s.key = ${sectionKey}` : sql``}
+      
+      UNION ALL
+      
+      -- Case 2: Array sections (list/timeseries)
+      SELECT f.value as val
+      FROM raw_values
+      CROSS JOIN LATERAL jsonb_each(raw_values."customData") AS s(key, value)
+      CROSS JOIN LATERAL jsonb_array_elements(s.value) AS arr(obj)
+      CROSS JOIN LATERAL jsonb_each_text(arr.obj) AS f(key, value)
+      WHERE jsonb_typeof(s.value) = 'array'
+        AND f.key = ${fieldKey}
+        ${sectionKey ? sql`AND s.key = ${sectionKey}` : sql``}
+
+      UNION ALL
+
+      -- Case 3: Simple array of strings (if sectionKey IS the fieldKey)
+      SELECT arr.val as val
+      FROM raw_values
+      CROSS JOIN LATERAL jsonb_each(raw_values."customData") AS s(key, value)
+      CROSS JOIN LATERAL jsonb_array_elements_text(s.value) AS arr(val)
+      WHERE jsonb_typeof(s.value) = 'array'
+        AND s.key = ${fieldKey}
+        ${sectionKey ? sql`AND s.key = ${sectionKey}` : sql``}
+    )
+    SELECT DISTINCT val
+    FROM extracted
+    WHERE val IS NOT NULL AND val <> ''
+    ORDER BY val
+    LIMIT ${limit}
+  `);
+
+  return result.rows.map((row) => String(row.val));
+};

@@ -1,5 +1,5 @@
 import { t } from "@lingui/core/macro";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiCheck, HiPencil, HiPlus, HiTrash, HiXMark } from "react-icons/hi2";
 
 import type { CustomFieldDef } from "@kan/shared";
@@ -19,6 +19,7 @@ interface Props {
   onChange: (value: unknown) => void;
   workspaceMembers: WorkspaceMember[];
   canEdit?: boolean;
+  triggerAddCount?: number;
 }
 
 export function KeyValueField({
@@ -28,6 +29,7 @@ export function KeyValueField({
   onChange,
   workspaceMembers,
   canEdit = true,
+  triggerAddCount = 0,
 }: Props) {
   const subFields = field.fields ?? {};
   const fieldKeys = Object.keys(subFields);
@@ -35,14 +37,6 @@ export function KeyValueField({
   const valueFieldKey = fieldKeys[1];
   const keyField = keyFieldKey ? subFields[keyFieldKey] : undefined;
   const valueField = valueFieldKey ? subFields[valueFieldKey] : undefined;
-
-  if (!keyField || !valueField) {
-    return (
-      <div className="text-sm italic text-neutral-400">
-        {t`Key-value field must have exactly 2 fields defined`}
-      </div>
-    );
-  }
 
   // Parse value as object map (Record<string, unknown>) to array of key-value pairs
   const pairs: KeyValuePair[] =
@@ -54,6 +48,20 @@ export function KeyValueField({
   const [isAdding, setIsAdding] = useState(false);
   const [draftKey, setDraftKey] = useState("");
   const [draftValue, setDraftValue] = useState<unknown>(null);
+
+  useEffect(() => {
+    if (triggerAddCount > 0 && canEdit && !isAdding) {
+      startAdd();
+    }
+  }, [triggerAddCount]);
+
+  if (!keyField || !valueField) {
+    return (
+      <div className="text-sm italic text-neutral-400">
+        {t`Key-value field must have exactly 2 fields defined`}
+      </div>
+    );
+  }
 
   const startEdit = (index: number) => {
     if (!canEdit) return;
@@ -277,16 +285,6 @@ export function KeyValueField({
             </button>
           </div>
         </div>
-      )}
-
-      {canEdit && !isAdding && (
-        <button
-          type="button"
-          onClick={startAdd}
-          className="flex items-center mt-1 gap-1 self-start text-[11px] text-neutral-600 hover:text-neutral-900 dark:text-dark-800 dark:hover:text-dark-1000"
-        >
-          <HiPlus className="h-3 w-3" /> {t`Add ${field.title || "Entry"}`}
-        </button>
       )}
     </div>
   );

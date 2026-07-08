@@ -3,6 +3,7 @@ import { HiCheck, HiPencil, HiXMark } from "react-icons/hi2";
 import { t } from "@lingui/core/macro";
 
 import type { CustomFieldDef } from "@kan/shared";
+import { api } from "~/utils/api";
 
 interface Props {
   fieldKey: string;
@@ -11,6 +12,9 @@ interface Props {
   onChange: (value: string | string[] | null) => void;
   canEdit?: boolean;
   embedded?: boolean;
+  boardPublicId?: string;
+  sectionKey?: string;
+  isSidebar?: boolean;
 }
 
 export function SelectField({
@@ -20,13 +24,31 @@ export function SelectField({
   onChange,
   canEdit = true,
   embedded = false,
+  boardPublicId,
+  sectionKey,
+  isSidebar = false,
 }: Props) {
   const options = field.options ?? {};
   const isMultiple = field.multiple ?? false;
+  const placeholder = field.placeholder ?? (isMultiple ? t`Select options...` : t`Select option...`);
   const style = field.style ?? "dropdown";
   const alwaysExpanded = field.alwaysExpanded ?? false;
 
   const isCheckboxOrRadio = style === "checkbox" || style === "radio";
+
+  const { data: suggestions } = api.card.getCustomFieldValues.useQuery(
+    {
+      boardPublicId: boardPublicId ?? "",
+      fieldKey,
+      sectionKey,
+      limit: field.autofillLimit ?? 20,
+    },
+    {
+      enabled: Boolean(
+        field.autofillFromCards && boardPublicId && style === "autofill",
+      ),
+    },
+  );
 
   // Apply default when value is null/undefined/empty
   const effectiveValue = (() => {
@@ -101,9 +123,14 @@ export function SelectField({
   const selectedLabels = selectedValues
     .map((v) => options[v] ?? v)
     .filter(Boolean) as string[];
-  const summaryText = selectedLabels.length > 0
-    ? selectedLabels.join(", ")
-    : <span className="italic text-neutral-400 dark:text-dark-600">{t`None`}</span>;
+  const summaryText =
+    selectedLabels.length > 0 ? (
+      selectedLabels.join(", ")
+    ) : (
+      <span className="italic text-neutral-400 dark:text-dark-600">
+        {placeholder}
+      </span>
+    );
 
   // ── Always-expanded or Embedded: inline checkboxes/radio ─────────────────────
   if (isCheckboxOrRadio && (alwaysExpanded || embedded)) {
@@ -159,12 +186,15 @@ export function SelectField({
           value={displayValue}
           onChange={handleImmediateAutofillChange}
           disabled={!canEdit}
-          placeholder={t`Type or select...`}
+          placeholder={placeholder}
           className="w-full rounded border border-light-400 bg-light-50 px-2 py-1.5 text-sm text-neutral-900 focus:border-neutral-400 focus:outline-none disabled:opacity-60 dark:border-dark-700 dark:bg-dark-100 dark:text-dark-1000 dark:focus:border-dark-600"
         />
         <datalist id={`${fieldKey}-datalist`}>
           {Object.entries(options).map(([key, label]) => (
             <option key={key} value={label} />
+          ))}
+          {(suggestions as string[] ?? []).map((val: string) => (
+            <option key={`suggestion-${val}`} value={val} />
           ))}
         </datalist>
       </div>
@@ -191,7 +221,7 @@ export function SelectField({
           }}
           disabled={!canEdit}
         >
-          {!isMultiple && <option value="">— Select —</option>}
+          {!isMultiple && <option value="">{placeholder}</option>}
           {Object.entries(options).map(([key, label]) => (
             <option key={key} value={key}>
               {label}
@@ -206,7 +236,11 @@ export function SelectField({
   if (!isEditing) {
     return (
       <div
-        className={`kan-custom-field kan-field-${fieldKey} group flex items-center justify-between gap-2 px-2 py-1 -mx-2 rounded cursor-pointer hover:bg-light-100 dark:hover:bg-dark-100`}
+        className={`kan-custom-field kan-field-${fieldKey} group flex items-center justify-between gap-2 rounded cursor-pointer ${
+          isSidebar 
+            ? "py-1 pl-2 text-xs border border-light-50 dark:border-dark-50" 
+            : "px-2 py-1 -mx-2 text-sm"
+        } hover:bg-light-100 dark:hover:bg-dark-100`}
         data-field-key={fieldKey}
         onClick={startEditing}
       >
@@ -239,7 +273,7 @@ export function SelectField({
           value={isMultiple ? draft : draft[0] ?? ""}
           onChange={handleDraftSelectChange}
         >
-          {!isMultiple && <option value="">— Select —</option>}
+          {!isMultiple && <option value="">{placeholder}</option>}
           {Object.entries(options).map(([key, label]) => (
             <option key={key} value={key}>
               {label}
@@ -253,12 +287,15 @@ export function SelectField({
             list={`${fieldKey}-datalist`}
             value={options[draft[0] ?? ""] ?? draft[0] ?? ""}
             onChange={handleDraftAutofillChange}
-            placeholder={t`Type or select...`}
+            placeholder={placeholder}
             className="w-full rounded border border-light-400 bg-transparent px-2 py-1.5 text-sm text-neutral-900 focus:border-neutral-400 focus:outline-none dark:border-dark-400 dark:text-dark-1000 dark:focus:border-dark-600"
           />
           <datalist id={`${fieldKey}-datalist`}>
             {Object.entries(options).map(([key, label]) => (
               <option key={key} value={label} />
+            ))}
+            {(suggestions as string[] ?? []).map((val: string) => (
+              <option key={`suggestion-${val}`} value={val} />
             ))}
           </datalist>
         </>

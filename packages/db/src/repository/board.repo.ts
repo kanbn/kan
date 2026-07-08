@@ -111,6 +111,21 @@ export const getIdByPublicId = async (db: dbClient, boardPublicId: string) => {
   return board;
 };
 
+export const getWorkspaceIdAndIdByPublicId = async (
+  db: dbClient,
+  boardPublicId: string,
+) => {
+  const board = await db.query.boards.findFirst({
+    columns: {
+      id: true,
+      workspaceId: true,
+    },
+    where: eq(boards.publicId, boardPublicId),
+  });
+
+  return board;
+};
+
 interface DueDateFilter {
   startDate?: Date;
   endDate?: Date;

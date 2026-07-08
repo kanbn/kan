@@ -1,5 +1,5 @@
 import { t } from "@lingui/core/macro";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HiCheck, HiPencil, HiPlus, HiXMark } from "react-icons/hi2";
 
 import type { CustomFieldDef } from "@kan/shared";
@@ -15,6 +15,8 @@ interface Props {
   workspaceMembers: WorkspaceMember[];
   canEdit?: boolean;
   isList?: boolean;
+  triggerAddCount?: number;
+  boardPublicId: string;
 }
 
 export function SectionField({
@@ -25,6 +27,8 @@ export function SectionField({
   workspaceMembers,
   canEdit = true,
   isList = false,
+  triggerAddCount = 0,
+  boardPublicId,
 }: Props) {
   const subFields = field.fields ?? {};
 
@@ -37,6 +41,8 @@ export function SectionField({
         onChange={onChange}
         workspaceMembers={workspaceMembers}
         canEdit={canEdit}
+        triggerAddCount={triggerAddCount}
+        boardPublicId={boardPublicId}
       />
     );
   }
@@ -71,7 +77,14 @@ export function SectionField({
             workspaceMembers={workspaceMembers}
             canEdit={canEdit}
             embedded
+            boardPublicId={boardPublicId}
+            sectionKey={sectionKey}
           />
+          {subField.description && (
+            <p className="mt-1 text-[11px] text-neutral-500 dark:text-dark-700">
+              {subField.description}
+            </p>
+          )}
         </div>
       ))}
     </div>
@@ -87,6 +100,8 @@ interface MultipleSectionProps {
   onChange: (value: unknown) => void;
   workspaceMembers: WorkspaceMember[];
   canEdit: boolean;
+  triggerAddCount?: number;
+  boardPublicId: string;
 }
 
 function MultipleSection({
@@ -96,12 +111,24 @@ function MultipleSection({
   onChange,
   workspaceMembers,
   canEdit,
+  triggerAddCount = 0,
+  boardPublicId,
 }: MultipleSectionProps) {
-  const records = Array.isArray(value) ? (value as Record<string, unknown>[]) : [];
+  const records = Array.isArray(value)
+    ? (value as Record<string, unknown>[])
+    : [];
 
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const [draftRecord, setDraftRecord] = useState<Record<string, unknown> | null>(null);
+  const [draftRecord, setDraftRecord] = useState<Record<string, unknown> | null>(
+    null,
+  );
   const [isAdding, setIsAdding] = useState(false);
+
+  useEffect(() => {
+    if (triggerAddCount > 0 && canEdit && !isAdding) {
+      handleStartAdd();
+    }
+  }, [triggerAddCount]);
 
   const handleStartEdit = (index: number) => {
     setDraftRecord({ ...records[index] });
@@ -161,9 +188,16 @@ function MultipleSection({
             value={record[subKey]}
             onChange={(v) => onFieldChange(subKey, v)}
             workspaceMembers={workspaceMembers}
-            canEdit
+            canEdit={canEdit}
             embedded
+            boardPublicId={boardPublicId}
+            sectionKey={sectionKey}
           />
+          {subField.description && (
+            <p className="mt-1 text-[11px] text-neutral-500 dark:text-dark-700">
+              {subField.description}
+            </p>
+          )}
         </div>
       ))}
     </div>
@@ -291,16 +325,6 @@ function MultipleSection({
             </button>
           </div>
         </div>
-      )}
-
-      {canEdit && !isAdding && (
-        <button
-          type="button"
-          onClick={handleStartAdd}
-          className="flex items-center mt-1 gap-1 text-[11px] text-neutral-600 hover:text-neutral-900 dark:text-dark-800 dark:hover:text-dark-1000"
-        >
-          <HiPlus className="h-3 w-3" /> {t`Add record`}
-        </button>
       )}
     </div>
   );

@@ -18,6 +18,7 @@ interface LabelSelectorProps {
   }[];
   isLoading: boolean;
   disabled?: boolean;
+  placeholder?: string;
 }
 
 export default function LabelSelector({
@@ -25,6 +26,7 @@ export default function LabelSelector({
   labels,
   isLoading,
   disabled = false,
+  placeholder,
 }: LabelSelectorProps) {
   const utils = api.useUtils();
   const { openModal } = useModal();
@@ -111,12 +113,17 @@ export default function LabelSelector({
                   iconLeft={label.leftIcon}
                 />
               ))}
-              <Badge value={t`Add label`} iconLeft={<HiMiniPlus size={14} />} />
+              <Badge
+                value={placeholder || t`Add label`}
+                iconLeft={<HiMiniPlus size={14} />}
+              />
             </div>
           ) : (
-            <div className={`flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 pl-2 text-left text-sm text-neutral-900 dark:border-dark-50 dark:text-dark-1000 ${disabled ? "cursor-not-allowed opacity-60" : "hover:border-light-300 hover:bg-light-200 dark:hover:border-dark-200 dark:hover:bg-dark-100"}`}>
+            <div
+              className={`flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 pl-2 text-left text-sm text-neutral-900 dark:border-dark-50 dark:text-dark-1000 ${disabled ? "cursor-not-allowed opacity-60" : "hover:border-light-300 hover:bg-light-200 dark:hover:border-dark-200 dark:hover:bg-dark-100"}`}
+            >
               <HiMiniPlus size={22} className="pr-2" />
-              {t`Add label`}
+              {placeholder || t`Add label`}
             </div>
           )}
         </CheckboxDropdown>

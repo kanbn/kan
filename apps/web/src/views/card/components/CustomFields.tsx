@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { HiChevronDown, HiChevronRight } from "react-icons/hi2";
 
 import type { CustomFieldsConfig, CustomTopLevelSection } from "@kan/shared";
 import {
@@ -11,11 +10,13 @@ import type { WorkspaceMember } from "~/components/Editor";
 import { api } from "~/utils/api";
 
 import { FieldRenderer } from "./custom-fields/FieldRenderer";
+import { FieldHeader } from "./custom-fields/FieldHeader";
 import { TimeseriesField } from "./custom-fields/TimeseriesField";
 
 interface Props {
   panel: "main" | "sidebar";
   cardPublicId: string;
+  boardPublicId: string;
   config: CustomFieldsConfig;
   customData: Record<string, unknown> | null;
   workspaceMembers: WorkspaceMember[];
@@ -25,6 +26,7 @@ interface Props {
 export function CustomFields({
   panel,
   cardPublicId,
+  boardPublicId,
   config,
   customData,
   workspaceMembers,
@@ -70,19 +72,21 @@ export function CustomFields({
         {mainFields.length > 0 && (
           <div className="kan-custom-section kan-section-main flex flex-col gap-3 border-t border-light-200 pt-4 dark:border-dark-300">
             {mainFields.map(({ key, field }) => (
-              <div key={key} className="flex flex-col">
-                <label className="mb-2 block text-xs font-medium text-[rgb(126,126,126)] dark:text-dark-800">
-                  {field.title}
-                </label>
-                <FieldRenderer
-                  fieldKey={key}
-                  field={field}
-                  value={(customData?.main as Record<string, unknown> | undefined)?.[key]}
-                  onChange={(v) => handleFieldChange("main", key, v)}
-                  workspaceMembers={workspaceMembers}
-                  canEdit={canEdit}
-                />
-              </div>
+              <CardDetailField
+                key={key}
+                fieldKey={key}
+                field={field}
+                value={
+                  (customData?.main as Record<string, unknown> | undefined)?.[
+                    key
+                  ]
+                }
+                onChange={(v) => handleFieldChange("main", key, v)}
+                workspaceMembers={workspaceMembers}
+                canEdit={canEdit}
+                boardPublicId={boardPublicId}
+                sectionKey="main"
+              />
             ))}
           </div>
         )}
@@ -96,6 +100,7 @@ export function CustomFields({
               customData={customData}
               workspaceMembers={workspaceMembers}
               canEdit={canEdit}
+              boardPublicId={boardPublicId}
               onSectionChange={handleSectionChange}
             />
           ) : (
@@ -106,6 +111,7 @@ export function CustomFields({
               customData={customData}
               workspaceMembers={workspaceMembers}
               canEdit={canEdit}
+              boardPublicId={boardPublicId}
               onFieldChange={handleFieldChange}
             />
           ),
@@ -119,22 +125,146 @@ export function CustomFields({
   if (!sidebarCustom.length) return null;
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col">
       {sidebarCustom.map(({ key, field }) => (
-        <div key={key} className={`kan-custom-section kan-section-sidebar`}>
-          <p className="mb-2 text-xs font-medium text-[rgb(126,126,126)] dark:text-dark-800">
+        <CardDetailField
+          key={key}
+          fieldKey={key}
+          field={field}
+          value={
+            (customData?.sidebar as Record<string, unknown> | undefined)?.[key]
+          }
+          onChange={(v) => handleFieldChange("sidebar", key, v)}
+          workspaceMembers={workspaceMembers}
+          canEdit={canEdit}
+          boardPublicId={boardPublicId}
+          sectionKey="sidebar"
+          isSidebar={true}
+        />
+      ))}
+    </div>
+  );
+}
+
+
+// ─── Card Detail Fields ──────────────────────────────────────────────────────
+
+interface CardDetailFieldProps {
+  fieldKey: string;
+  field: any;
+  value: any;
+  onChange: (v: any) => void;
+  workspaceMembers: WorkspaceMember[];
+  canEdit: boolean;
+  boardPublicId: string;
+  sectionKey?: string;
+  isSidebar?: boolean;
+}
+
+function CardDetailField({
+  fieldKey,
+  field,
+  value,
+  onChange,
+  workspaceMembers,
+  canEdit,
+  boardPublicId,
+  sectionKey,
+  isSidebar = false,
+}: CardDetailFieldProps) {
+  const isComplex =
+    field.type === "list" ||
+    field.type === "timeseries" ||
+    field.type === "keyvalue" ||
+    field.type === "address";
+
+  const empty =
+    value == null ||
+    (Array.isArray(value) && value.length === 0) ||
+    (typeof value === "object" && Object.keys(value).length === 0);
+
+  const [collapsed, setCollapsed] = useState(!field.alwaysExpanded && empty);
+  const [triggerAddCount, setTriggerAddCount] = useState(0);
+
+  const handleAdd = () => {
+    setCollapsed(false);
+    setTriggerAddCount((c) => c + 1);
+  };
+
+  const handleToggle = () => {
+    if (collapsed && empty) {
+      handleAdd();
+    } else {
+      setCollapsed(!collapsed);
+    }
+  };
+
+  if (!isComplex) {
+    return (
+      <div
+        key={fieldKey}
+        className={`flex ${isSidebar ? "flex-row mb-4" : "flex-col"}`}
+      >
+        {!field.hideLabel && (
+          <label
+            className={`${
+              isSidebar
+                ? "my-2 w-[100px] shrink-0 text-sm font-medium"
+                : "mb-2 block text-xs font-medium text-[rgb(126,126,126)] dark:text-dark-800"
+            }`}
+          >
             {field.title}
-          </p>
+          </label>
+        )}
+        <div className="flex-1">
           <FieldRenderer
-            fieldKey={key}
+            fieldKey={fieldKey}
             field={field}
-            value={(customData?.sidebar as Record<string, unknown> | undefined)?.[key]}
-            onChange={(v) => handleFieldChange("sidebar", key, v)}
+            value={value}
+            onChange={onChange}
             workspaceMembers={workspaceMembers}
             canEdit={canEdit}
+            boardPublicId={boardPublicId}
+            sectionKey={sectionKey}
+            isSidebar={isSidebar}
+          />
+          {field.description && (
+            <p className="mt-1 text-[11px] text-neutral-500 dark:text-dark-700">
+              {field.description}
+            </p>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div key={fieldKey} className="flex flex-col">
+      <FieldHeader
+        title={field.title}
+        onToggle={handleToggle}
+        onAdd={
+          canEdit && !(field.type === "address" && !collapsed)
+            ? handleAdd
+            : undefined
+        }
+        collapsed={collapsed}
+      />
+      {!collapsed && (
+        <div className="pl-4">
+          <FieldRenderer
+            fieldKey={fieldKey}
+            field={field}
+            value={value}
+            onChange={onChange}
+            workspaceMembers={workspaceMembers}
+            canEdit={canEdit}
+            boardPublicId={boardPublicId}
+            sectionKey={sectionKey}
+            triggerAddCount={triggerAddCount}
           />
         </div>
-      ))}
+      )}
     </div>
   );
 }
@@ -147,6 +277,7 @@ interface SectionProps {
   customData: Record<string, unknown> | null;
   workspaceMembers: WorkspaceMember[];
   canEdit: boolean;
+  boardPublicId: string;
   onFieldChange: (sectionKey: string, fieldKey: string, value: unknown) => void;
 }
 
@@ -156,9 +287,10 @@ function RegularSection({
   customData,
   workspaceMembers,
   canEdit,
+  boardPublicId,
   onFieldChange,
 }: SectionProps) {
-  const [collapsed, setCollapsed] = useState(false);
+  const fields = section.fields ?? {};
   const sectionData =
     customData?.[sectionKey] != null &&
     typeof customData[sectionKey] === "object" &&
@@ -166,43 +298,62 @@ function RegularSection({
       ? (customData[sectionKey] as Record<string, unknown>)
       : {};
 
-  const fields = section.fields ?? {};
+  const allFieldsEmpty = Object.keys(fields).every((key) => {
+    const val = sectionData[key];
+    return (
+      val == null ||
+      val === "" ||
+      (Array.isArray(val) && val.length === 0) ||
+      (typeof val === "object" && Object.keys(val).length === 0)
+    );
+  });
+
+  const [collapsed, setCollapsed] = useState(
+    !section.alwaysExpanded && allFieldsEmpty,
+  );
+
+  const handleToggle = () => {
+    setCollapsed(!collapsed);
+  };
+
   if (!Object.keys(fields).length) return null;
+
+  const handlePlusClick = () => {
+    setCollapsed(false);
+  };
 
   return (
     <div
       className={`kan-custom-section kan-section-${sectionKey} border-t border-light-200 pt-4 dark:border-dark-300`}
       data-section-key={sectionKey}
     >
-      <button
-        type="button"
-        onClick={() => setCollapsed((c) => !c)}
-        className="mb-2 flex w-full items-center gap-1 text-left text-sm font-semibold text-neutral-800 dark:text-dark-1000"
-      >
-        {collapsed ? (
-          <HiChevronRight className="h-4 w-4 shrink-0 text-neutral-400" />
-        ) : (
-          <HiChevronDown className="h-4 w-4 shrink-0 text-neutral-400" />
-        )}
-        {section.title ?? sectionKey}
-      </button>
+      <FieldHeader
+        title={section.title ?? sectionKey}
+        onToggle={handleToggle}
+        onAdd={
+          canEdit && section.type !== "section" && section.type !== undefined
+            ? handlePlusClick
+            : undefined
+        }
+        collapsed={collapsed}
+        canEdit={canEdit}
+        isSection={section.type === "section" || section.type === undefined}
+      />
 
       {!collapsed && (
         <div className="flex flex-col gap-3 pl-5 pt-2">
           {Object.entries(fields).map(([fieldKey, field]) => (
-            <div key={fieldKey} className="flex flex-col">
-              <label className="mb-2 block text-xs font-medium text-[rgb(126,126,126)] dark:text-dark-800">
-                {field.title}
-              </label>
-              <FieldRenderer
-                fieldKey={fieldKey}
-                field={field}
-                value={sectionData[fieldKey]}
-                onChange={(v) => onFieldChange(sectionKey, fieldKey, v)}
-                workspaceMembers={workspaceMembers}
-                canEdit={canEdit}
-              />
-            </div>
+            <CardDetailField
+              key={fieldKey}
+              fieldKey={fieldKey}
+              field={field}
+              value={sectionData[fieldKey]}
+              onChange={(v) => onFieldChange(sectionKey, fieldKey, v)}
+              workspaceMembers={workspaceMembers}
+              canEdit={canEdit}
+              boardPublicId={boardPublicId}
+              sectionKey={sectionKey}
+            />
           ))}
         </div>
       )}
@@ -216,6 +367,7 @@ interface TimeseriesSectionProps {
   customData: Record<string, unknown> | null;
   workspaceMembers: WorkspaceMember[];
   canEdit: boolean;
+  boardPublicId: string;
   onSectionChange: (sectionKey: string, value: unknown) => void;
 }
 
@@ -225,9 +377,17 @@ function TimeseriesSection({
   customData,
   workspaceMembers,
   canEdit,
+  boardPublicId,
   onSectionChange,
 }: TimeseriesSectionProps) {
-  const [collapsed, setCollapsed] = useState(false);
+  const value = customData?.[sectionKey];
+  const empty =
+    value == null ||
+    (Array.isArray(value) && value.length === 0) ||
+    (typeof value === "object" && Object.keys(value).length === 0);
+
+  const [collapsed, setCollapsed] = useState(!section.alwaysExpanded && empty);
+  const [triggerAddCount, setTriggerAddCount] = useState(0);
 
   // Fake a CustomFieldDef to pass to TimeseriesField
   const pseudoField = {
@@ -236,33 +396,43 @@ function TimeseriesSection({
     fields: section.fields,
   };
 
+  const handleAdd = () => {
+    setCollapsed(false);
+    setTriggerAddCount((c) => c + 1);
+  };
+
+  const handleToggle = () => {
+    if (collapsed && empty) {
+      handleAdd();
+    } else {
+      setCollapsed(!collapsed);
+    }
+  };
+
   return (
     <div
       className={`kan-custom-section kan-section-${sectionKey} border-t border-light-200 pt-4 dark:border-dark-300`}
       data-section-key={sectionKey}
     >
-      <button
-        type="button"
-        onClick={() => setCollapsed((c) => !c)}
-        className="mb-2 flex w-full items-center gap-1 text-left text-sm font-semibold text-neutral-800 dark:text-dark-1000"
-      >
-        {collapsed ? (
-          <HiChevronRight className="h-4 w-4 shrink-0 text-neutral-400" />
-        ) : (
-          <HiChevronDown className="h-4 w-4 shrink-0 text-neutral-400" />
-        )}
-        {section.title ?? sectionKey}
-      </button>
+      <FieldHeader
+        title={section.title ?? sectionKey}
+        onToggle={handleToggle}
+        onAdd={canEdit ? handleAdd : undefined}
+        collapsed={collapsed}
+        canEdit={canEdit}
+      />
 
       {!collapsed && (
         <div className="pl-5 pt-2">
           <TimeseriesField
             sectionKey={sectionKey}
             field={pseudoField}
-            value={customData?.[sectionKey]}
+            value={value}
             onChange={(v) => onSectionChange(sectionKey, v)}
             workspaceMembers={workspaceMembers}
             canEdit={canEdit}
+            triggerAddCount={triggerAddCount}
+            boardPublicId={boardPublicId}
           />
         </div>
       )}

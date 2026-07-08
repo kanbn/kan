@@ -2,6 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
+import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardCommentRepo from "@kan/db/repository/cardComment.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
@@ -17,6 +18,8 @@ import {
   commentResponseSchema,
   commentDeleteResponseSchema,
   activityItemSchema,
+  cardCustomFieldValuesResponseSchema,
+  cardCustomFieldValuesRequestSchema,
 } from "../schemas";
 import { mergeActivities } from "../utils/activities";
 import { sendMentionEmails } from "../utils/notifications";
@@ -639,6 +642,30 @@ export const cardRouter = createTRPCRouter({
       });
 
       return { newMember: true };
+    }),
+  getCustomFieldValues: protectedProcedure
+    .input(cardCustomFieldValuesRequestSchema)
+    .output(cardCustomFieldValuesResponseSchema)
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+      if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+      const board = await boardRepo.getWorkspaceIdAndIdByPublicId(
+        ctx.db,
+        input.boardPublicId,
+      );
+      if (!board)
+        throw new TRPCError({ code: "NOT_FOUND", message: "Board not found" });
+
+      await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
+
+      return cardRepo.getUniqueCustomFieldValues(
+        ctx.db,
+        board.id,
+        input.fieldKey,
+        input.sectionKey,
+        input.limit,
+      );
     }),
   byId: publicProcedure
     .meta({

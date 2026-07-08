@@ -20,6 +20,7 @@ interface MemberSelectorProps {
   }[];
   isLoading: boolean;
   disabled?: boolean;
+  placeholder?: string;
 }
 
 export default function MemberSelector({
@@ -27,6 +28,7 @@ export default function MemberSelector({
   members,
   isLoading,
   disabled = false,
+  placeholder,
 }: MemberSelectorProps) {
   const router = useRouter();
   const utils = api.useUtils();
@@ -132,7 +134,7 @@ export default function MemberSelector({
             ) : (
               <>
                 <HiMiniPlus size={22} className="pr-2" />
-                {t`Add member`}
+                {placeholder || t`Add member`}
               </>
             )}
           </div>
