@@ -80,6 +80,9 @@ export const cards = pgTable(
       () => imports.id,
     ),
     dueDate: timestamp("dueDate"),
+    // Optional palette colour shown as a bar across the top of the card.
+    // Stores a 7-char hex like "#0d9488" (see @kan/shared colours), or null.
+    coverColourCode: varchar("coverColourCode", { length: 7 }),
   },
   (table) => [
     index("card_list_number_idx").on(table.listId, table.cardNumber),

@@ -4,6 +4,7 @@ import {
   HiLink,
   HiOutlineCalendar,
   HiOutlineDocumentDuplicate,
+  HiOutlineSwatch,
   HiOutlineTag,
   HiOutlineTrash,
   HiOutlineUserGroup,
@@ -14,6 +15,7 @@ export type CardContextMenuAction =
   | "members"
   | "move"
   | "labels"
+  | "cover"
   | "dueDate"
   | "copyLink"
   | "duplicate"
@@ -49,6 +51,12 @@ const MENU_ITEMS: {
     action: "labels",
     label: t`Add / edit label`,
     icon: <HiOutlineTag className="h-4 w-4 shrink-0" />,
+    requiresEdit: true,
+  },
+  {
+    action: "cover",
+    label: t`Set cover colour`,
+    icon: <HiOutlineSwatch className="h-4 w-4 shrink-0" />,
     requiresEdit: true,
   },
   {

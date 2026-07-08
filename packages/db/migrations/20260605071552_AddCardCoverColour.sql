@@ -1,0 +1,1 @@
+ALTER TABLE "card" ADD COLUMN "coverColourCode" varchar(7);

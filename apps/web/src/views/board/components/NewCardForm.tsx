@@ -146,6 +146,7 @@ export function NewCardForm({
               listId: 2,
               description: "",
               dueDate: args.dueDate ?? null,
+              coverColourCode: null,
               cardNumber: null,
               comments: [],
               checklists: [],

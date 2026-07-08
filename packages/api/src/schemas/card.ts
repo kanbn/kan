@@ -49,6 +49,7 @@ export const cardDetailSchema = z.object({
   cardNumber: z.number().nullable(),
   index: z.number(),
   dueDate: z.date().nullable(),
+  coverColourCode: z.string().nullable(),
   createdBy: z.string().nullable(),
   labels: z.array(labelSchema),
   attachments: z.array(
