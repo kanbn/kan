@@ -1,7 +1,7 @@
 import { and, count, desc, eq, isNull, sql } from "drizzle-orm";
 
 import type { dbClient } from "@banana/db/client";
-import { checklistItems, checklists } from "@banana/db/schema";
+import { checklistItemBlocking, checklistItems, checklists } from "@banana/db/schema";
 import { generateUID } from "@banana/shared/utils";
 
 export const getCount = async (db: dbClient) => {
@@ -441,4 +441,77 @@ export const reorderItem = async (
 
     return updated;
   });
+};
+
+// ─── Blocker relationships ─────────────────────────────────────
+
+export const getChecklistItemBlockerRelationship = async (
+  db: dbClient,
+  args: { checklistItemId: number; blockerCardId: number },
+) => {
+  return db.query.checklistItemBlocking.findFirst({
+    where: and(
+      eq(checklistItemBlocking.checklistItemId, args.checklistItemId),
+      eq(checklistItemBlocking.blockerCardId, args.blockerCardId),
+    ),
+  });
+};
+
+export const createChecklistItemBlockerRelationship = async (
+  db: dbClient,
+  args: { checklistItemId: number; blockerCardId: number },
+) => {
+  const [result] = await db
+    .insert(checklistItemBlocking)
+    .values({
+      checklistItemId: args.checklistItemId,
+      blockerCardId: args.blockerCardId,
+    })
+    .returning();
+
+  return result;
+};
+
+export const hardDeleteChecklistItemBlockerRelationship = async (
+  db: dbClient,
+  args: { checklistItemId: number; blockerCardId: number },
+) => {
+  const [result] = await db
+    .delete(checklistItemBlocking)
+    .where(
+      and(
+        eq(checklistItemBlocking.checklistItemId, args.checklistItemId),
+        eq(checklistItemBlocking.blockerCardId, args.blockerCardId),
+      ),
+    )
+    .returning();
+
+  return result;
+};
+
+/**
+ * Would adding "checklistItemId is blocked by blockerCardId" create a cycle?
+ * Walks the blockerCardId's checklist-item blockers transitively (bounded depth);
+ * true if any of those blockers resolves to the same checklistItemId
+ * (i.e. blockerCardId is already transitively blocked by this checklist item's card).
+ */
+export const wouldCreateChecklistItemCycle = async (
+  db: dbClient,
+  args: { checklistItemId: number; blockerCardId: number },
+) => {
+  const result = await db.execute(sql`
+    WITH RECURSIVE chain(depth, blockerId) AS (
+      SELECT 1, "blockerCardId"
+      FROM "_checklist_item_blocking"
+      WHERE "checklistItemId" = ${args.blockerCardId}
+      UNION ALL
+      SELECT c.depth + 1, cb."blockerCardId"
+      FROM chain c
+      JOIN "_checklist_item_blocking" cb ON cb."checklistItemId" = c.blockerId
+      WHERE c.depth < 16
+    )
+    SELECT 1 AS hit FROM chain WHERE blockerId = ${args.checklistItemId} LIMIT 1
+  `);
+
+  return (result?.rows?.length ?? 0) > 0;
 };

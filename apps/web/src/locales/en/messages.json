@@ -59,7 +59,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        318
+        321
       ]
     ],
     "translation": "{0} | {1}"
@@ -417,11 +417,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        476
+        475
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        206
+        205
       ]
     ],
     "translation": "Activity"
@@ -491,7 +491,6 @@
     "translation": "Add a card"
   },
   "P06aiF": {
-    "translation": "Add a quest...",
     "message": "Add a quest...",
     "placeholders": {},
     "comments": [],
@@ -500,10 +499,10 @@
         "src/views/home-dashboard/SideQuestsSection.tsx",
         132
       ]
-    ]
+    ],
+    "translation": "Add a quest..."
   },
   "145/oz": {
-    "translation": "Add a win...",
     "message": "Add a win...",
     "placeholders": {},
     "comments": [],
@@ -512,7 +511,8 @@
         "src/views/home-dashboard/WinsSection.tsx",
         81
       ]
-    ]
+    ],
+    "translation": "Add a win..."
   },
   "qtE5nt": {
     "message": "Add an item...",
@@ -521,22 +521,22 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        148
+        141
       ]
     ],
     "translation": "Add an item..."
   },
   "UlQkn3": {
-    "translation": "Add blocker",
     "message": "Add blocker",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/views/card/components/BlockedBy.tsx",
-        138
+        "src/views/card/components/ChecklistItemRow.tsx",
+        345
       ]
-    ]
+    ],
+    "translation": "Add blocker"
   },
   "Gxxi5J": {
     "message": "Add checklist",
@@ -585,7 +585,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        180
+        224
       ]
     ],
     "translation": "Add details..."
@@ -668,6 +668,19 @@
   "QwTiT4": {
     "translation": "added a blocker",
     "message": "added a blocker",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ActivityList.tsx",
+        146
+      ]
+    ],
+    "obsolete": true
+  },
+  "Xjyrmu": {
+    "translation": "added a blocker to a checklist item",
+    "message": "added a blocker to a checklist item",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -1586,7 +1599,8 @@
         "src/views/card/components/ChecklistItemBlocker.tsx",
         126
       ]
-    ]
+    ],
+    "obsolete": true
   },
   "4RoY9J": {
     "message": "Blog Post",
@@ -1611,7 +1625,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        318
+        321
       ],
       [
         "src/views/public/board/index.tsx",
@@ -2302,14 +2316,6 @@
         44
       ],
       [
-        "src/views/card/components/BlockedBy.tsx",
-        196
-      ],
-      [
-        "src/views/card/components/ChecklistItemBlocker.tsx",
-        188
-      ],
-      [
         "src/views/card/components/Comment.tsx",
         195
       ],
@@ -2371,7 +2377,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        318
+        321
       ]
     ],
     "translation": "Card"
@@ -2395,11 +2401,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        377
+        382
       ],
       [
         "src/views/card/index.tsx",
-        414
+        419
       ]
     ],
     "translation": "Card not found"
@@ -2687,7 +2693,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        368
+        373
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3927,7 +3933,6 @@
     "translation": "Design"
   },
   "osJmEN": {
-    "translation": "Disable notifications",
     "message": "Disable notifications",
     "placeholders": {},
     "comments": [],
@@ -3936,7 +3941,8 @@
         "src/views/settings/AccountSettings.tsx",
         38
       ]
-    ]
+    ],
+    "translation": "Disable notifications"
   },
   "Odv3J6": {
     "message": "Disconnect GitHub",
@@ -4185,7 +4191,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        154
+        153
       ]
     ],
     "translation": "Due date"
@@ -4463,7 +4469,6 @@
     "translation": "Email visibility"
   },
   "I92Z+b": {
-    "translation": "Enable notifications",
     "message": "Enable notifications",
     "placeholders": {},
     "comments": [],
@@ -4472,7 +4477,8 @@
         "src/views/settings/AccountSettings.tsx",
         38
       ]
-    ]
+    ],
+    "translation": "Enable notifications"
   },
   "bFREhu": {
     "message": "End of list",
@@ -5420,7 +5426,6 @@
     "translation": "General"
   },
   "/6YI6c": {
-    "translation": "Get desktop notifications for mentions, comments, and board updates.",
     "message": "Get desktop notifications for mentions, comments, and board updates.",
     "placeholders": {},
     "comments": [],
@@ -5429,7 +5434,8 @@
         "src/views/settings/AccountSettings.tsx",
         30
       ]
-    ]
+    ],
+    "translation": "Get desktop notifications for mentions, comments, and board updates."
   },
   "ZDIydz": {
     "message": "Get started",
@@ -6460,7 +6466,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        134
+        133
       ]
     ],
     "translation": "Labels"
@@ -6689,7 +6695,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        125
+        124
       ]
     ],
     "translation": "List"
@@ -6719,7 +6725,6 @@
     "translation": "Lists"
   },
   "yQ2kGp": {
-    "translation": "Load more",
     "message": "Load more",
     "placeholders": {},
     "comments": [],
@@ -6728,7 +6733,8 @@
         "src/views/home-dashboard/RecentActivitySection.tsx",
         120
       ]
-    ]
+    ],
+    "translation": "Load more"
   },
   "1rVAfU": {
     "message": "Load more activities",
@@ -6737,7 +6743,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        601
+        602
       ]
     ],
     "translation": "Load more activities"
@@ -6761,7 +6767,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        601
+        602
       ],
       [
         "src/views/home-dashboard/RecentActivitySection.tsx",
@@ -6883,6 +6889,22 @@
     ],
     "translation": "Manage members"
   },
+  "JtTwCi": {
+    "translation": "marked a checklist item as blocked by <0>{0}</0>",
+    "message": "marked a checklist item as blocked by <0>{0}</0>",
+    "placeholders": {
+      "0": [
+        "truncate(toTitle)"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ActivityList.tsx",
+        332
+      ]
+    ]
+  },
   "IDvohQ": {
     "message": "marked a checklist item as incomplete",
     "placeholders": {},
@@ -6925,7 +6947,8 @@
         "src/views/card/components/ActivityList.tsx",
         332
       ]
-    ]
+    ],
+    "obsolete": true
   },
   "vo2a+a": {
     "message": "Marketing",
@@ -7026,7 +7049,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        144
+        143
       ],
       [
         "src/views/members/index.tsx",
@@ -7512,7 +7535,6 @@
     "translation": "No boards found"
   },
   "9fS0S/": {
-    "translation": "No boards found.",
     "message": "No boards found.",
     "placeholders": {},
     "comments": [],
@@ -7521,7 +7543,8 @@
         "src/views/home-dashboard/MyBoardsSection.tsx",
         42
       ]
-    ]
+    ],
+    "translation": "No boards found."
   },
   "PDVw/v": {
     "message": "No boards yet. Create one to get started!",
@@ -7562,7 +7585,8 @@
         "src/views/card/components/ChecklistItemBlocker.tsx",
         157
       ]
-    ]
+    ],
+    "obsolete": true
   },
   "OpNhRn": {
     "message": "No credit card required",
@@ -7736,8 +7760,19 @@
     ],
     "translation": "No wins yet. Find something to celebrate!"
   },
+  "3Xx0TS": {
+    "translation": "Nothing found.",
+    "message": "Nothing found.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ChecklistItemRow.tsx",
+        316
+      ]
+    ]
+  },
   "iDNBZe": {
-    "translation": "Notifications",
     "message": "Notifications",
     "placeholders": {},
     "comments": [],
@@ -7746,7 +7781,8 @@
         "src/views/settings/AccountSettings.tsx",
         101
       ]
-    ]
+    ],
+    "translation": "Notifications"
   },
   "9h7RDh": {
     "message": "Offer",
@@ -8422,20 +8458,12 @@
         74
       ],
       [
-        "src/views/card/components/BlockedBy.tsx",
-        43
-      ],
-      [
-        "src/views/card/components/ChecklistItemBlocker.tsx",
-        45
+        "src/views/card/components/ChecklistItemRow.tsx",
+        99
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        77
-      ],
-      [
-        "src/views/card/components/ChecklistItemRow.tsx",
-        105
+        127
       ],
       [
         "src/views/card/components/ChecklistNameInput.tsx",
@@ -8483,7 +8511,7 @@
       ],
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        97
+        90
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
@@ -8491,11 +8519,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        233
+        236
       ],
       [
         "src/views/card/index.tsx",
-        246
+        249
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -8914,7 +8942,8 @@
         "src/views/card/components/ChecklistItemBlocker.tsx",
         112
       ]
-    ]
+    ],
+    "obsolete": true
   },
   "T/pF0Z": {
     "message": "Remove from favorites",
@@ -8962,6 +8991,19 @@
   "9xGLgk": {
     "translation": "removed a blocker",
     "message": "removed a blocker",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ActivityList.tsx",
+        147
+      ]
+    ],
+    "obsolete": true
+  },
+  "e9olSH": {
+    "translation": "removed a blocker from a checklist item",
+    "message": "removed a blocker from a checklist item",
     "placeholders": {},
     "comments": [],
     "origin": [
@@ -9026,6 +9068,23 @@
   "yIKoH5": {
     "translation": "removed blocker <0>{0}</0>",
     "message": "removed blocker <0>{0}</0>",
+    "placeholders": {
+      "0": [
+        "truncate(fromTitle)"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ActivityList.tsx",
+        341
+      ]
+    ],
+    "obsolete": true
+  },
+  "HM6TQZ": {
+    "translation": "removed blocker <0>{0}</0> from a checklist item",
+    "message": "removed blocker <0>{0}</0> from a checklist item",
     "placeholders": {
       "0": [
         "truncate(fromTitle)"
@@ -9367,6 +9426,18 @@
     ],
     "translation": "Search boards and cards..."
   },
+  "NE0czk": {
+    "translation": "Search cards...",
+    "message": "Search cards...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ChecklistItemRow.tsx",
+        293
+      ]
+    ]
+  },
   "PB35A6": {
     "translation": "Search for a card…",
     "message": "Search for a card…",
@@ -9381,7 +9452,8 @@
         "src/views/card/components/ChecklistItemBlocker.tsx",
         144
       ]
-    ]
+    ],
+    "obsolete": true
   },
   "SBTElJ": {
     "translation": "Searching…",
@@ -9397,7 +9469,8 @@
         "src/views/card/components/ChecklistItemBlocker.tsx",
         152
       ]
-    ]
+    ],
+    "obsolete": true
   },
   "MpFIca": {
     "message": "seats",
@@ -9572,7 +9645,6 @@
     "translation": "Send test"
   },
   "brMxq0": {
-    "translation": "Send test notification",
     "message": "Send test notification",
     "placeholders": {},
     "comments": [],
@@ -9581,7 +9653,8 @@
         "src/views/settings/AccountSettings.tsx",
         46
       ]
-    ]
+    ],
+    "translation": "Send test notification"
   },
   "v3YoMA": {
     "message": "Senior",
@@ -9620,7 +9693,6 @@
     "translation": "Set a password to enable password-based login."
   },
   "O3wNI6": {
-    "translation": "Set an action...",
     "message": "Set an action...",
     "placeholders": {},
     "comments": [],
@@ -9629,7 +9701,8 @@
         "src/views/home-dashboard/DailyQuestsSection.tsx",
         161
       ]
-    ]
+    ],
+    "translation": "Set an action..."
   },
   "8AbRER": {
     "message": "Set due date",
@@ -10097,7 +10170,6 @@
     "translation": "Something went wrong during license activation."
   },
   "fUXc6L": {
-    "translation": "Something worth celebrating today",
     "message": "Something worth celebrating today",
     "placeholders": {},
     "comments": [],
@@ -10106,7 +10178,8 @@
         "src/views/home-dashboard/WinsSection.tsx",
         80
       ]
-    ]
+    ],
+    "translation": "Something worth celebrating today"
   },
   "jOOtqe": {
     "translation": "Something worth celebrating today...",
@@ -11036,7 +11109,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        96
+        89
       ]
     ],
     "translation": "Unable to add checklist item"
@@ -11060,7 +11133,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        245
+        248
       ]
     ],
     "translation": "Unable to add label"
@@ -11236,7 +11309,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        104
+        126
       ]
     ],
     "translation": "Unable to delete checklist item"
@@ -11375,7 +11448,8 @@
         "src/views/card/components/BlockedBy.tsx",
         42
       ]
-    ]
+    ],
+    "obsolete": true
   },
   "T7Mywq": {
     "message": "Unable to update board",
@@ -11424,7 +11498,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        232
+        235
       ]
     ],
     "translation": "Unable to update card"
@@ -11447,12 +11521,8 @@
     "comments": [],
     "origin": [
       [
-        "src/views/card/components/ChecklistItemBlocker.tsx",
-        44
-      ],
-      [
         "src/views/card/components/ChecklistItemRow.tsx",
-        76
+        98
       ]
     ],
     "translation": "Unable to update checklist item"

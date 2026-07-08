@@ -28,7 +28,6 @@ import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmatio
 import ActivityList from "./components/ActivityList";
 import { AttachmentThumbnails } from "./components/AttachmentThumbnails";
 import { AttachmentUpload } from "./components/AttachmentUpload";
-import BlockedBy from "./components/BlockedBy";
 import Checklists from "./components/Checklists";
 import { DeleteCardConfirmation } from "./components/DeleteCardConfirmation";
 import { DeleteChecklistConfirmation } from "./components/DeleteChecklistConfirmation";
@@ -186,7 +185,11 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     ? router.query.cardId[0]
     : router.query.cardId;
 
-  const { data: card, isLoading, error } = api.card.byId.useQuery(
+  const {
+    data: card,
+    isLoading,
+    error,
+  } = api.card.byId.useQuery(
     { cardPublicId: cardId ?? "" },
     { enabled: !!cardId && cardId.length >= 12 },
   );
@@ -341,14 +344,15 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                 >
                   {board?.name}
                 </Link>
-                {card.cardNumber != null && card.list.board.workspace.cardPrefix && (
-                  <>
-                    <IoChevronForwardSharp className="h-[10px] w-[10px] text-light-900 dark:text-dark-900" />
-                    <span className="whitespace-nowrap text-sm font-bold leading-[1.5rem] text-light-700 dark:text-dark-800">
-                      {card.list.board.workspace.cardPrefix}-{card.cardNumber}
-                    </span>
-                  </>
-                )}
+                {card.cardNumber != null &&
+                  card.list.board.workspace.cardPrefix && (
+                    <>
+                      <IoChevronForwardSharp className="h-[10px] w-[10px] text-light-900 dark:text-dark-900" />
+                      <span className="whitespace-nowrap text-sm font-bold leading-[1.5rem] text-light-700 dark:text-dark-800">
+                        {card.list.board.workspace.cardPrefix}-{card.cardNumber}
+                      </span>
+                    </>
+                  )}
               </div>
               <div className="flex items-center gap-2">
                 <Dropdown
@@ -357,7 +361,8 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                   boardPublicId={boardId}
                   cardCreatedBy={card?.createdBy}
                   ticketNumber={
-                    card.cardNumber != null && card.list.board.workspace.cardPrefix
+                    card.cardNumber != null &&
+                    card.list.board.workspace.cardPrefix
                       ? `${card.list.board.workspace.cardPrefix}-${card.cardNumber}`
                       : null
                   }
@@ -439,15 +444,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                       </div>
                     </form>
                   </div>
-                  <BlockedBy
-                    blockers={card.blockedBy}
-                    cardPublicId={cardId}
-                    cardPrefix={card.list.board.workspace.cardPrefix}
-                    viewOnly={!canEdit}
-                  />
                   <Checklists
                     checklists={card.checklists}
                     cardPublicId={cardId}
+                    cardPrefix={card.list.board.workspace.cardPrefix}
                     activeChecklistForm={activeChecklistForm}
                     setActiveChecklistForm={setActiveChecklistForm}
                     viewOnly={!canEdit}

@@ -16,6 +16,11 @@ interface ChecklistItem {
   publicId: string;
   title: string;
   completed: boolean;
+  blockedBy: {
+    publicId: string;
+    title: string;
+    cardNumber: number | null;
+  }[];
 }
 
 interface Checklist {
@@ -27,6 +32,7 @@ interface Checklist {
 interface ChecklistsProps {
   checklists: Checklist[];
   cardPublicId: string;
+  cardPrefix: string;
   activeChecklistForm?: string | null;
   setActiveChecklistForm?: (id: string | null) => void;
   viewOnly?: boolean;
@@ -35,6 +41,7 @@ interface ChecklistsProps {
 export default function Checklists({
   checklists,
   cardPublicId,
+  cardPrefix,
   activeChecklistForm,
   setActiveChecklistForm,
   viewOnly = false,
@@ -208,8 +215,10 @@ export default function Checklists({
                                   publicId: item.publicId,
                                   title: item.title,
                                   completed: item.completed,
+                                  blockedBy: item.blockedBy,
                                 }}
                                 cardPublicId={cardPublicId}
+                                cardPrefix={cardPrefix}
                                 onCreateNewItem={() =>
                                   setActiveChecklistForm?.(checklist.publicId)
                                 }

@@ -316,6 +316,19 @@ export const getByPublicId = async (
                     },
                     where: isNull(checklistItems.deletedAt),
                     orderBy: asc(checklistItems.index),
+                    with: {
+                      blockedBy: {
+                        with: {
+                          blocker: {
+                            columns: {
+                              publicId: true,
+                              title: true,
+                              cardNumber: true,
+                            },
+                          },
+                        },
+                      },
+                    },
                   },
                 },
               },
@@ -373,6 +386,13 @@ export const getByPublicId = async (
         members: card.members
           .map((member) => member.member)
           .filter((member) => member.deletedAt === null),
+        checklists: card.checklists.map((checklist) => ({
+          ...checklist,
+          items: checklist.items.map((item) => ({
+            ...item,
+            blockedBy: item.blockedBy.map((b) => b.blocker),
+          })),
+        })),
       })),
     })),
   };
@@ -499,6 +519,19 @@ export const getBySlug = async (
                     },
                     where: isNull(checklistItems.deletedAt),
                     orderBy: asc(checklistItems.index),
+                    with: {
+                      blockedBy: {
+                        with: {
+                          blocker: {
+                            columns: {
+                              publicId: true,
+                              title: true,
+                              cardNumber: true,
+                            },
+                          },
+                        },
+                      },
+                    },
                   },
                 },
               },
@@ -545,6 +578,13 @@ export const getBySlug = async (
       cards: list.cards.map((card) => ({
         ...card,
         labels: card.labels.map((label) => label.label),
+        checklists: card.checklists.map((checklist) => ({
+          ...checklist,
+          items: checklist.items.map((item) => ({
+            ...item,
+            blockedBy: item.blockedBy.map((b) => b.blocker),
+          })),
+        })),
       })),
     })),
   };

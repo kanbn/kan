@@ -143,8 +143,8 @@ const getActivityText = ({
     "card.updated.dueDate.added": t`set the due date`,
     "card.updated.dueDate.updated": t`updated the due date`,
     "card.updated.dueDate.removed": t`removed the due date`,
-    "card.updated.blocker.added": t`added a blocker`,
-    "card.updated.blocker.removed": t`removed a blocker`,
+    "card.updated.checklist.item.blocker.added": t`added a blocker to a checklist item`,
+    "card.updated.checklist.item.blocker.removed": t`removed a blocker from a checklist item`,
   } as const;
 
   if (!(type in ACTIVITY_TYPE_MAP)) return null;
@@ -327,19 +327,20 @@ const getActivityText = ({
     return <Trans>removed the due date</Trans>;
   }
 
-  if (type === "card.updated.blocker.added" && toTitle) {
+  if (type === "card.updated.checklist.item.blocker.added" && toTitle) {
     return (
       <Trans>
-        marked this card as blocked by{" "}
+        marked a checklist item as blocked by{" "}
         <TextHighlight>{truncate(toTitle)}</TextHighlight>
       </Trans>
     );
   }
 
-  if (type === "card.updated.blocker.removed" && fromTitle) {
+  if (type === "card.updated.checklist.item.blocker.removed" && fromTitle) {
     return (
       <Trans>
-        removed blocker <TextHighlight>{truncate(fromTitle)}</TextHighlight>
+        removed blocker{" "}
+        <TextHighlight>{truncate(fromTitle)}</TextHighlight> from a checklist item
       </Trans>
     );
   }
@@ -369,8 +370,8 @@ const ACTIVITY_ICON_MAP: Partial<Record<ActivityType, React.ReactNode | null>> =
     "card.updated.dueDate.added": <HiOutlineClock />,
     "card.updated.dueDate.updated": <HiOutlineClock />,
     "card.updated.dueDate.removed": <HiOutlineClock />,
-    "card.updated.blocker.added": <HiOutlineMinusCircle />,
-    "card.updated.blocker.removed": <HiOutlineMinusCircle />,
+    "card.updated.checklist.item.blocker.added": <HiOutlineMinusCircle />,
+    "card.updated.checklist.item.blocker.removed": <HiOutlineMinusCircle />,
   } as const;
 
 const getActivityIcon = (
