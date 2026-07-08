@@ -136,6 +136,13 @@ export default function ChecklistItemRow({
   });
 
   const addOrRemoveBlocker = api.checklist.addOrRemoveBlocker.useMutation({
+    onError: () => {
+      showPopup({
+        header: t`Unable to add blocker`,
+        message: t`Adding this blocker would create a circular dependency.`,
+        icon: "error",
+      });
+    },
     onSettled: async () => {
       await invalidateCard(utils, cardPublicId);
     },
