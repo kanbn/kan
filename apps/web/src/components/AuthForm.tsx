@@ -173,7 +173,8 @@ export function Auth({
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const redirect = useSearchParams().get("next");
-  const defaultPath = env("NEXT_PUBLIC_SINGLE_WORKSPACE") === "true" ? "/home" : "/boards";
+  const defaultPath =
+    env("NEXT_PUBLIC_SINGLE_WORKSPACE") === "true" ? "/home" : "/boards";
   const callbackURL = callbackURLProp ?? redirect ?? defaultPath;
 
   // Safely get environment variables on client side to avoid hydration mismatch
