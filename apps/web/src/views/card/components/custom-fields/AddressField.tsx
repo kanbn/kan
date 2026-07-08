@@ -44,7 +44,7 @@ export function AddressField({
     if (triggerAddCount > 0 && canEdit && !isEditing) {
       setIsEditing(true);
     }
-  }, [triggerAddCount, canEdit, isEditing]);
+  }, [triggerAddCount, canEdit]);
 
   const handleInputChange = (key: keyof AddressValue, val: string) => {
     setDraft((prev) => ({ ...prev, [key]: val }));

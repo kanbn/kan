@@ -245,7 +245,9 @@ function CardDetailField({
         onToggle={handleToggle}
         onAdd={
           canEdit && !(field.type === "address" && !collapsed)
-            ? handleAdd
+            ? field.type === "address"
+              ? handleToggle
+              : handleAdd
             : undefined
         }
         collapsed={collapsed}
