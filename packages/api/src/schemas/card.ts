@@ -17,6 +17,7 @@ export const cardUpdateResponseSchema = z.object({
   title: z.string(),
   description: z.string().nullable(),
   dueDate: z.date().nullable(),
+  isDone: z.boolean(),
 });
 
 // ─── Comment responses ───────────────────────────────────────
@@ -48,6 +49,7 @@ export const cardDetailSchema = z.object({
   description: z.string().nullable(),
   cardNumber: z.number().nullable(),
   dueDate: z.date().nullable(),
+  isDone: z.boolean(),
   createdBy: z.string().nullable(),
   labels: z.array(labelSchema),
   attachments: z.array(
@@ -72,6 +74,7 @@ export const cardDetailSchema = z.object({
         z.object({
           publicId: z.string(),
           name: z.string(),
+          isDoneList: z.boolean(),
         }),
       ),
       workspace: z.object({

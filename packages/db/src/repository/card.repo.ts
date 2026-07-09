@@ -208,6 +208,7 @@ export const update = async (
     title?: string;
     description?: string;
     dueDate?: Date | null;
+    isDone?: boolean;
   },
   args: {
     cardPublicId: string;
@@ -219,6 +220,7 @@ export const update = async (
       title: cardInput.title,
       description: cardInput.description,
       dueDate: cardInput.dueDate !== undefined ? cardInput.dueDate : undefined,
+      ...(cardInput.isDone !== undefined && { isDone: cardInput.isDone }),
       updatedAt: new Date(),
     })
     .where(and(eq(cards.publicId, args.cardPublicId), isNull(cards.deletedAt)))
@@ -228,6 +230,7 @@ export const update = async (
       title: cards.title,
       description: cards.description,
       dueDate: cards.dueDate,
+      isDone: cards.isDone,
     });
 
   return result;
@@ -263,6 +266,7 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
       description: true,
       listId: true,
       dueDate: true,
+      isDone: true,
     },
     with: {
       list: {
@@ -494,6 +498,7 @@ export const getWithListAndMembersByPublicId = async (
       dueDate: true,
       createdBy: true,
       cardNumber: true,
+      isDone: true,
     },
     with: {
       labels: {
@@ -544,6 +549,7 @@ export const getWithListAndMembersByPublicId = async (
                       publicId: true,
                       title: true,
                       cardNumber: true,
+                      isDone: true,
                     },
                   },
                 },
@@ -576,6 +582,7 @@ export const getWithListAndMembersByPublicId = async (
                 columns: {
                   publicId: true,
                   name: true,
+                  isDoneList: true,
                 },
                 where: isNull(lists.deletedAt),
                 orderBy: asc(lists.index),

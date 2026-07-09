@@ -260,6 +260,51 @@ export const update = async (
   return result;
 };
 
+/**
+ * Mark a list as the board's Done list (or unmark it).
+ * Enforces a single Done list per board: when isDoneList is true,
+ * any other list on the same board is unmarked first.
+ */
+export const setDoneList = async (
+  db: dbClient,
+  args: { listPublicId: string; isDoneList: boolean },
+) => {
+  return db.transaction(async (tx) => {
+    const target = await tx.query.lists.findFirst({
+      columns: { id: true, boardId: true },
+      where: and(eq(lists.publicId, args.listPublicId), isNull(lists.deletedAt)),
+    });
+
+    if (!target)
+      throw new Error(`List not found for public ID ${args.listPublicId}`);
+
+    if (args.isDoneList && target.boardId !== null) {
+      // Clear any existing Done list on the same board
+      await tx
+        .update(lists)
+        .set({ isDoneList: false })
+        .where(
+          and(
+            eq(lists.boardId, target.boardId),
+            isNull(lists.deletedAt),
+          ),
+        );
+    }
+
+    const [result] = await tx
+      .update(lists)
+      .set({ isDoneList: args.isDoneList })
+      .where(eq(lists.id, target.id))
+      .returning({
+        publicId: lists.publicId,
+        name: lists.name,
+        isDoneList: lists.isDoneList,
+      });
+
+    return result;
+  });
+};
+
 export const reorder = async (
   db: dbClient,
   args: {

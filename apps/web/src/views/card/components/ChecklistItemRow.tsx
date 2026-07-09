@@ -15,6 +15,7 @@ interface BlockerChip {
   publicId: string;
   title: string;
   cardNumber: number | null;
+  isDone?: boolean;
 }
 
 interface ChecklistItemRowProps {
@@ -66,7 +67,10 @@ export default function ChecklistItemRow({
 
   const blockerCandidates =
     searchResults?.filter(
-      (r) => r.type === "card" && !alreadyBlockedIds.has(r.publicId),
+      (r) =>
+        r.type === "card" &&
+        !r.isDone && // only cards that are not done can be added as blockers
+        !alreadyBlockedIds.has(r.publicId),
     ) ?? [];
 
   const updateItem = api.checklist.updateItem.useMutation({
@@ -261,7 +265,13 @@ export default function ChecklistItemRow({
           {item.blockedBy.map((blocker) => (
             <span
               key={blocker.publicId}
-              className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2 py-0.5 text-xs text-red-700 dark:bg-red-900/30 dark:text-red-300"
+              className={twMerge(
+                "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs",
+                !blocker.isDone &&
+                  "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300",
+                blocker.isDone &&
+                  "bg-gray-100 text-gray-600 line-through opacity-60 dark:bg-gray-800 dark:text-gray-400",
+              )}
             >
               <a
                 href={`/cards/${blocker.publicId}`}

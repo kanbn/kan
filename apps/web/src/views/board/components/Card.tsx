@@ -24,6 +24,7 @@ const Card = ({
   comments,
   attachments,
   dueDate,
+  isDone,
 }: {
   title: string;
   ticketNumber?: string | null;
@@ -47,6 +48,7 @@ const Card = ({
   comments: { publicId: string }[];
   attachments?: { publicId: string }[];
   dueDate?: Date | null;
+  isDone?: boolean;
 }) => {
   const { dateLocale } = useLocalisation();
   const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;
@@ -68,7 +70,13 @@ const Card = ({
   const hasDueDate = !!dueDate;
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300">
+    <div
+      className={twMerge(
+        "flex flex-col overflow-hidden rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300",
+        isDone &&
+          "bg-light-200 text-light-700 line-through dark:bg-dark-400 dark:text-dark-700",
+      )}
+    >
       {ticketNumber && (
         <span className="mb-1 text-xs text-light-700 dark:text-dark-800">
           {ticketNumber}

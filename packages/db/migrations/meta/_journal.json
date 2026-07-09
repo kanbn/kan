@@ -274,6 +274,13 @@
       "when": 1784197278000,
       "tag": "20260708012718_drop_card_blocking",
       "breakpoints": true
+    },
+    {
+      "idx": 39,
+      "version": "7",
+      "when": 1784474001000,
+      "tag": "20260709141321_add_done_status",
+      "breakpoints": true
     }
   ]
 }

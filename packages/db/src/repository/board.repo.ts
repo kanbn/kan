@@ -246,6 +246,7 @@ export const getByPublicId = async (
           name: true,
           boardId: true,
           index: true,
+          isDoneList: true,
         },
         with: {
           cards: {
@@ -257,6 +258,7 @@ export const getByPublicId = async (
               index: true,
               dueDate: true,
               cardNumber: true,
+              isDone: true,
             },
             with: {
               labels: {
@@ -324,6 +326,7 @@ export const getByPublicId = async (
                               publicId: true,
                               title: true,
                               cardNumber: true,
+                              isDone: true,
                             },
                           },
                         },
@@ -463,6 +466,7 @@ export const getBySlug = async (
           name: true,
           boardId: true,
           index: true,
+          isDoneList: true,
         },
         with: {
           cards: {
@@ -474,6 +478,7 @@ export const getBySlug = async (
               index: true,
               dueDate: true,
               cardNumber: true,
+              isDone: true,
             },
             with: {
               labels: {
@@ -527,6 +532,7 @@ export const getBySlug = async (
                               publicId: true,
                               title: true,
                               cardNumber: true,
+                              isDone: true,
                             },
                           },
                         },

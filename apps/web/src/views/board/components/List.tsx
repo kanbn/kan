@@ -3,6 +3,7 @@ import { t } from "@lingui/core/macro";
 import { Draggable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
 import {
+  HiCheckCircle,
   HiEllipsisHorizontal,
   HiOutlinePlusSmall,
   HiOutlineSquaresPlus,
@@ -15,12 +16,14 @@ import Dropdown from "~/components/Dropdown";
 import { Tooltip } from "~/components/Tooltip";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
+import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
 interface ListProps {
   children: ReactNode;
   index: number;
   list: List;
+  boardPublicId: string;
   setSelectedPublicListId: (publicListId: PublicListId) => void;
 }
 
@@ -28,6 +31,7 @@ interface List {
   publicId: string;
   name: string;
   createdBy?: string | null;
+  isDoneList?: boolean;
 }
 
 interface FormValues {
@@ -41,9 +45,12 @@ export default function List({
   children,
   index,
   list,
+  boardPublicId,
   setSelectedPublicListId,
 }: ListProps) {
   const { openModal } = useModal();
+  const utils = api.useUtils();
+  const { showPopup } = usePopup();
   const { canCreateCard, canEditList, canDeleteList } = usePermissions();
   const { data: session } = authClient.useSession();
   const isCreator = list.createdBy && session?.user.id === list.createdBy;
@@ -57,6 +64,39 @@ export default function List({
   };
 
   const updateList = api.list.update.useMutation();
+
+  const setDoneList = api.list.setDoneList.useMutation({
+    onMutate: async (args) => {
+      const queryParams = { boardPublicId };
+      await utils.board.byId.cancel(queryParams);
+      const previousBoard = utils.board.byId.getData(queryParams);
+      utils.board.byId.setData(queryParams, (old) => {
+        if (!old) return old;
+        return {
+          ...old,
+          lists: old.lists.map((l) => ({
+            ...l,
+            // Enforce a single Done list per board optimistically
+            isDoneList:
+              l.publicId === list.publicId ? args.isDoneList : false,
+          })),
+        };
+      });
+      return { previousBoard };
+    },
+    onError: (_err, _vars, ctx) => {
+      if (ctx?.previousBoard)
+        utils.board.byId.setData({ boardPublicId }, ctx.previousBoard);
+      showPopup({
+        header: t`Unable to update list`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
+    },
+    onSettled: async () => {
+      await utils.board.byId.invalidate({ boardPublicId });
+    },
+  });
 
   const { register, handleSubmit } = useForm<FormValues>({
     defaultValues: {
@@ -137,6 +177,23 @@ export default function List({
                           action: () => openNewCardForm(list.publicId),
                           icon: (
                             <HiOutlineSquaresPlus className="h-[18px] w-[18px] text-dark-900" />
+                          ),
+                        },
+                      ]
+                    : []),
+                  ...(canEdit
+                    ? [
+                        {
+                          label: list.isDoneList
+                            ? t`Remove as Done list`
+                            : t`Set as Done list`,
+                          action: () =>
+                            setDoneList.mutate({
+                              listPublicId: list.publicId,
+                              isDoneList: !list.isDoneList,
+                            }),
+                          icon: (
+                            <HiCheckCircle className="h-[18px] w-[18px] text-dark-900" />
                           ),
                         },
                       ]

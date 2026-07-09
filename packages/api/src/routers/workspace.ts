@@ -531,6 +531,7 @@ export const workspaceRouter = createTRPCRouter({
             boardName: z.string(),
             listName: z.string(),
             cardNumber: z.number().nullable(),
+            isDone: z.boolean(),
             updatedAt: z.date().nullable(),
             createdAt: z.date(),
             type: z.literal("card"),

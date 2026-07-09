@@ -218,4 +218,64 @@ export const listRouter = createTRPCRouter({
 
       return result;
     }),
+  setDoneList: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Mark a list as the board's Done list",
+        method: "PUT",
+        path: "/lists/{listPublicId}/done",
+        description:
+          "Marks a list as the board's Done list. Enforces a single Done list per board.",
+        tags: ["Lists"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        listPublicId: z.string().min(12),
+        isDoneList: z.boolean(),
+      }),
+    )
+    .output(listUpdateResponseSchema)
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const list = await listRepo.getWorkspaceAndListIdByListPublicId(
+        ctx.db,
+        input.listPublicId,
+      );
+
+      if (!list)
+        throw new TRPCError({
+          message: `List with public ID ${input.listPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertCanEdit(
+        ctx.db,
+        userId,
+        list.workspaceId,
+        "list:edit",
+        list.createdBy,
+      );
+
+      const result = await listRepo.setDoneList(ctx.db, {
+        listPublicId: input.listPublicId,
+        isDoneList: input.isDoneList,
+      });
+
+      if (!result)
+        throw new TRPCError({
+          message: `Failed to update list`,
+          code: "INTERNAL_SERVER_ERROR",
+        });
+
+      return result;
+    }),
 });

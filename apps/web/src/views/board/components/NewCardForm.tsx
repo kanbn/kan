@@ -1,3 +1,4 @@
+import type { NewCardInput } from "@banana/api/types";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { format } from "date-fns";
@@ -11,7 +12,6 @@ import {
   HiXMark,
 } from "react-icons/hi2";
 
-import type { NewCardInput } from "@banana/api/types";
 import { generateUID } from "@banana/shared/utils";
 
 import type { WorkspaceMember } from "~/components/Editor";
@@ -157,6 +157,7 @@ export function NewCardForm({
               description: "",
               dueDate: args.dueDate ?? null,
               cardNumber: null,
+              isDone: false,
               comments: [],
               checklists: [],
               attachments: [],
@@ -319,7 +320,10 @@ export function NewCardForm({
 
   const addChecklist = () => {
     const id = generateUID();
-    setChecklistDrafts([...checklistDrafts, { id, name: "Checklist", items: [] }]);
+    setChecklistDrafts([
+      ...checklistDrafts,
+      { id, name: "Checklist", items: [] },
+    ]);
   };
 
   const removeChecklist = (id: string) => {
@@ -327,22 +331,30 @@ export function NewCardForm({
   };
 
   const updateChecklistName = (id: string, name: string) => {
-    setChecklistDrafts(checklistDrafts.map((cl) => cl.id === id ? { ...cl, name } : cl));
+    setChecklistDrafts(
+      checklistDrafts.map((cl) => (cl.id === id ? { ...cl, name } : cl)),
+    );
   };
 
   const addChecklistItem = (clId: string) => {
     const text = (newItemTexts[clId] ?? "").trim();
     if (!text) return;
-    setChecklistDrafts(checklistDrafts.map((cl) =>
-      cl.id === clId ? { ...cl, items: [...cl.items, text] } : cl
-    ));
+    setChecklistDrafts(
+      checklistDrafts.map((cl) =>
+        cl.id === clId ? { ...cl, items: [...cl.items, text] } : cl,
+      ),
+    );
     setNewItemTexts({ ...newItemTexts, [clId]: "" });
   };
 
   const removeChecklistItem = (clId: string, index: number) => {
-    setChecklistDrafts(checklistDrafts.map((cl) =>
-      cl.id === clId ? { ...cl, items: cl.items.filter((_, i) => i !== index) } : cl
-    ));
+    setChecklistDrafts(
+      checklistDrafts.map((cl) =>
+        cl.id === clId
+          ? { ...cl, items: cl.items.filter((_, i) => i !== index) }
+          : cl,
+      ),
+    );
   };
 
   const selectedList = formattedLists.find((item) => item.selected);
@@ -568,7 +580,10 @@ export function NewCardForm({
         {checklistDrafts.length > 0 && (
           <div className="mt-3 space-y-3">
             {checklistDrafts.map((cl) => (
-              <div key={cl.id} className="rounded-md border-[1px] border-light-400 bg-light-100 p-3 dark:border-dark-500 dark:bg-dark-300">
+              <div
+                key={cl.id}
+                className="rounded-md border-[1px] border-light-400 bg-light-100 p-3 dark:border-dark-500 dark:bg-dark-300"
+              >
                 <div className="flex items-center gap-2">
                   <HiOutlineCheckCircle className="h-4 w-4 text-light-700 dark:text-dark-800" />
                   <input
@@ -583,7 +598,10 @@ export function NewCardForm({
                     onClick={() => removeChecklist(cl.id)}
                     className="rounded p-0.5 hover:bg-light-300 dark:hover:bg-dark-400"
                   >
-                    <HiXMark size={14} className="text-light-800 dark:text-dark-800" />
+                    <HiXMark
+                      size={14}
+                      className="text-light-800 dark:text-dark-800"
+                    />
                   </button>
                 </div>
                 {cl.items.length > 0 && (
@@ -591,13 +609,18 @@ export function NewCardForm({
                     {cl.items.map((item, i) => (
                       <div key={i} className="flex items-center gap-2 pl-6">
                         <div className="h-3.5 w-3.5 rounded-[3px] border border-light-500 dark:border-dark-600" />
-                        <span className="flex-1 text-xs text-neutral-800 dark:text-dark-900">{item}</span>
+                        <span className="flex-1 text-xs text-neutral-800 dark:text-dark-900">
+                          {item}
+                        </span>
                         <button
                           type="button"
                           onClick={() => removeChecklistItem(cl.id, i)}
                           className="rounded p-0.5 hover:bg-light-300 dark:hover:bg-dark-400"
                         >
-                          <HiXMark size={12} className="text-light-800 dark:text-dark-800" />
+                          <HiXMark
+                            size={12}
+                            className="text-light-800 dark:text-dark-800"
+                          />
                         </button>
                       </div>
                     ))}
@@ -608,7 +631,12 @@ export function NewCardForm({
                   <input
                     type="text"
                     value={newItemTexts[cl.id] ?? ""}
-                    onChange={(e) => setNewItemTexts({ ...newItemTexts, [cl.id]: e.target.value })}
+                    onChange={(e) =>
+                      setNewItemTexts({
+                        ...newItemTexts,
+                        [cl.id]: e.target.value,
+                      })
+                    }
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
                         e.preventDefault();
@@ -623,7 +651,10 @@ export function NewCardForm({
                     onClick={() => addChecklistItem(cl.id)}
                     className="rounded p-0.5 hover:bg-light-300 dark:hover:bg-dark-400"
                   >
-                    <HiPlus size={12} className="text-light-800 dark:text-dark-800" />
+                    <HiPlus
+                      size={12}
+                      className="text-light-800 dark:text-dark-800"
+                    />
                   </button>
                 </div>
               </div>
