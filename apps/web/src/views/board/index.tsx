@@ -691,6 +691,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                             index={index}
                             key={index}
                             list={list}
+                            boardPublicId={boardId ?? ""}
                             setSelectedPublicListId={(publicListId) =>
                               setSelectedPublicListId(publicListId)
                             }
@@ -771,6 +772,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                             comments={card.comments ?? []}
                                             attachments={card.attachments}
                                             dueDate={card.dueDate ?? null}
+                                            isDone={card.isDone ?? false}
                                           />
                                         </Link>
                                       )}

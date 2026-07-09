@@ -1019,6 +1019,7 @@ export const cardRouter = createTRPCRouter({
         index: z.number().optional(),
         listPublicId: z.string().min(12).optional(),
         dueDate: z.date().nullable().optional(),
+        isDone: z.boolean().optional(),
       }),
     )
     .output(cardUpdateResponseSchema)
@@ -1095,29 +1096,71 @@ export const cardRouter = createTRPCRouter({
             description: string | null;
             publicId: string;
             dueDate: Date | null;
+            isDone: boolean;
           }
         | undefined;
 
       const previousDueDate = existingCard.dueDate;
 
-      if (input.title || input.description || input.dueDate !== undefined) {
+      if (
+        input.title ||
+        input.description ||
+        input.dueDate !== undefined ||
+        input.isDone !== undefined
+      ) {
         result = await cardRepo.update(
           ctx.db,
           {
             ...(input.title && { title: input.title }),
             ...(input.description && { description: input.description }),
             ...(input.dueDate !== undefined && { dueDate: input.dueDate }),
+            ...(input.isDone !== undefined && { isDone: input.isDone }),
           },
           { cardPublicId: input.cardPublicId },
         );
       }
 
       if (input.index !== undefined || newListId !== undefined) {
-        result = await cardRepo.reorder(ctx.db, {
+        const reordered = await cardRepo.reorder(ctx.db, {
           cardId: existingCard.id,
           newIndex: input.index,
           newListId: newListId,
         });
+        result = {
+          ...(reordered as {
+            id: number;
+            title: string;
+            description: string | null;
+            publicId: string;
+            dueDate: Date | null;
+          }),
+          isDone: result?.isDone ?? existingCard.isDone ?? false,
+        };
+      }
+
+      // When a card is marked done without an explicit position/list change,
+      // sink it to the bottom of its current list so completed work collects
+      // at the end.
+      if (
+        input.isDone === true &&
+        input.index === undefined &&
+        !input.listPublicId
+      ) {
+        const reordered = await cardRepo.reorder(ctx.db, {
+          cardId: existingCard.id,
+          newListId: existingCard.listId,
+          newIndex: undefined,
+        });
+        result = {
+          ...(reordered as {
+            id: number;
+            title: string;
+            description: string | null;
+            publicId: string;
+            dueDate: Date | null;
+          }),
+          isDone: result?.isDone ?? true,
+        };
       }
 
       if (!result)

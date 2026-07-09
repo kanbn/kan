@@ -1,3 +1,5 @@
+import type { dbClient } from "@banana/db/client";
+import type { Permission, Role } from "@banana/shared";
 import {
   and,
   asc,
@@ -11,8 +13,6 @@ import {
   sql,
 } from "drizzle-orm";
 
-import type { dbClient } from "@banana/db/client";
-import type { Permission, Role } from "@banana/shared";
 import {
   boards,
   cards,
@@ -507,6 +507,7 @@ export const searchBoardsAndCards = async (
       boardName: boards.name,
       listName: lists.name,
       cardNumber: cards.cardNumber,
+      isDone: cards.isDone,
       updatedAt: cards.updatedAt,
       createdAt: cards.createdAt,
     })

@@ -36,6 +36,8 @@ import Dropdown from "./components/Dropdown";
 import { DueDateSelector } from "./components/DueDateSelector";
 import LabelSelector from "./components/LabelSelector";
 import ListSelector from "./components/ListSelector";
+import { MarkDoneConfirmation } from "./components/MarkDoneConfirmation";
+import { MoveToDoneListConfirmation } from "./components/MoveToDoneListConfirmation";
 import MemberSelector from "./components/MemberSelector";
 import { NewChecklistForm } from "./components/NewChecklistForm";
 import NewCommentForm from "./components/NewCommentForm";
@@ -49,6 +51,8 @@ interface FormValues {
 export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   const router = useRouter();
   const { canEditCard } = usePermissions();
+  const { openModal } = useModal();
+  const utils = api.useUtils();
   const { data: session } = authClient.useSession();
   const cardId = Array.isArray(router.query.cardId)
     ? router.query.cardId[0]
@@ -67,6 +71,27 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   const workspaceMembers = board?.workspace.members;
   const selectedLabels = card?.labels;
   const selectedMembers = card?.members;
+
+  const doneList = card?.list.board.lists.find((l) => l.isDoneList);
+
+  const unmarkDone = api.card.update.useMutation({
+    onMutate: async () => {
+      if (!cardId) return;
+      await utils.card.byId.cancel({ cardPublicId: cardId });
+      const previous = utils.card.byId.getData({ cardPublicId: cardId });
+      utils.card.byId.setData({ cardPublicId: cardId }, (old) =>
+        old ? { ...old, isDone: false } : old,
+      );
+      return { previous };
+    },
+    onError: (_err, _vars, ctx) => {
+      if (cardId && ctx?.previous)
+        utils.card.byId.setData({ cardPublicId: cardId }, ctx.previous);
+    },
+    onSettled: async () => {
+      if (cardId) await invalidateCard(utils, cardId);
+    },
+  });
 
   const formattedLabels =
     labels?.map((label) => {
@@ -158,6 +183,47 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           disabled={!canEdit}
         />
       </div>
+      <div className="mb-4 flex w-full flex-row">
+        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Status`}</p>
+        <div className="flex w-full items-center">
+          {card?.isDone ? (
+            <div className="flex w-full items-center justify-between gap-2">
+              <span className="inline-flex items-center gap-1 rounded-[5px] border-[1px] border-green-300 bg-green-50 px-2 py-1 text-xs font-medium text-green-700 dark:border-green-800 dark:bg-green-900/30 dark:text-green-300">
+                {t`Done`}
+              </span>
+              {canEdit && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    cardId &&
+                    unmarkDone.mutate({ cardPublicId: cardId, isDone: false })
+                  }
+                  disabled={unmarkDone.isPending}
+                  className="text-xs text-light-700 hover:text-light-900 dark:text-dark-700 dark:hover:text-dark-900"
+                >
+                  {t`Mark as not done`}
+                </button>
+              )}
+            </div>
+          ) : (
+            <button
+              type="button"
+              disabled={!card || !canEdit}
+              onClick={() =>
+                cardId &&
+                openModal(
+                  "MARK_DONE_CONFIRM",
+                  cardId,
+                  doneList?.publicId,
+                )
+              }
+              className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 px-2 py-1 text-left text-xs text-neutral-900 hover:border-light-300 hover:bg-light-200 disabled:cursor-not-allowed disabled:opacity-60 dark:border-dark-50 dark:text-dark-1000 dark:hover:border-dark-200 dark:hover:bg-dark-100"
+            >
+              {t`Mark as done`}
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -168,6 +234,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const {
     modalContentType,
     entityId,
+    entityLabel,
     getModalState,
     clearModalState,
     isOpen,
@@ -539,6 +606,26 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
             <DeleteCardConfirmation
               boardPublicId={boardId ?? ""}
               cardPublicId={cardId}
+            />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "MARK_DONE_CONFIRM"}
+          >
+            <MarkDoneConfirmation
+              cardPublicId={cardId ?? ""}
+              doneListPublicId={entityLabel || undefined}
+            />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            isVisible={isOpen && modalContentType === "MOVE_TO_DONE_LIST"}
+          >
+            <MoveToDoneListConfirmation
+              cardPublicId={cardId ?? ""}
+              doneListPublicId={entityLabel}
             />
           </Modal>
 

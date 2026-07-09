@@ -61,6 +61,7 @@ export function NewListForm({
           name: args.name,
           boardId: 1,
           boardPublicId,
+          isDoneList: false,
           cards: [],
           index: oldBoard.lists.length,
         };

@@ -18,6 +18,7 @@ export const checklistItemResponseSchema = z.object({
       publicId: z.string(),
       title: z.string(),
       cardNumber: z.number().nullable(),
+      isDone: z.boolean(),
     }),
   ),
 });
