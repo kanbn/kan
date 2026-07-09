@@ -19,6 +19,7 @@ interface Attachment {
   publicId: string;
   contentType: string;
   url: string | null;
+  downloadUrl: string | null;
   originalFilename: string | null;
   s3Key: string;
   size?: number | null;
@@ -137,7 +138,11 @@ export function AttachmentThumbnails({
   };
 
   const handleDownload = (attachment: Attachment) => {
-    if (!attachment.url) {
+    // downloadUrl carries Content-Disposition: attachment baked into the
+    // signed URL — required because the HTML `download` attribute is
+    // ignored cross-origin, so the response header is what actually forces
+    // the save dialog when the browser hits S3 directly.
+    if (!attachment.downloadUrl) {
       showPopup({
         header: t`Download failed`,
         message: t`No download URL available for this attachment.`,
@@ -146,13 +151,14 @@ export function AttachmentThumbnails({
       return;
     }
 
-    const downloadUrl = `/api/download/attatchment?url=${encodeURIComponent(attachment.url)}&filename=${encodeURIComponent(attachment.originalFilename ?? "attachment")}`;
-
     const link = document.createElement("a");
-    link.href = downloadUrl;
+    link.href = attachment.downloadUrl;
+    link.download = attachment.originalFilename ?? "attachment";
+    link.rel = "noopener";
     link.style.display = "none";
     document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   };
 
   const selectedAttachment =
