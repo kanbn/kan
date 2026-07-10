@@ -1,4 +1,4 @@
-import { eq, and, isNull, ne } from "drizzle-orm";
+import { eq, and, isNull, ne, sql } from "drizzle-orm";
 
 import type { dbClient } from "@banana/db/client";
 import * as cardRepo from "@banana/db/repository/card.repo";
@@ -146,6 +146,107 @@ async function getCardMemberEmails(
   }
 
   return result.map((r) => r.email);
+}
+
+/**
+ * Notify members of cards that were blocked by `blockerCardId` when that blocker
+ * card is marked done. Each blocked card's members (excluding the actor) get a
+ * Mattermost DM letting them know the blocker is complete.
+ */
+export async function notifyBlockerCompleted(
+  db: dbClient,
+  {
+    blockerCardId,
+    blockerCardPublicId,
+    blockerTitle,
+    actorUserId,
+    actorName,
+  }: {
+    blockerCardId: number;
+    blockerCardPublicId: string;
+    blockerTitle: string;
+    actorUserId: string;
+    actorName: string;
+  },
+): Promise<void> {
+  const config = getMattermostConfig();
+  if (!config) return;
+
+  try {
+    // Find every card that owns a checklist item blocked by this blocker card.
+    const blockedCardsResult = await db.execute(sql`
+      SELECT DISTINCT c."id", c."publicId", c."title"
+      FROM "_checklist_item_blocking" cb
+      JOIN "card_checklist_item" cci ON cci."id" = cb."checklistItemId"
+      JOIN "card_checklist" ccl ON ccl."id" = cci."checklistId"
+      JOIN "card" c ON c."id" = ccl."cardId"
+      WHERE cb."blockerCardId" = ${blockerCardId}
+        AND c."deletedAt" IS NULL
+    `);
+
+    const blockedCards = (blockedCardsResult.rows ?? []) as {
+      id: number;
+      publicId: string;
+      title: string;
+    }[];
+
+    if (blockedCards.length === 0) return;
+
+    const baseUrl = env("NEXT_PUBLIC_BASE_URL");
+    const blockerUrl = `${baseUrl}/cards/${blockerCardPublicId}`;
+
+    log.info(
+      { blockerCardId, blockedCardCount: blockedCards.length, actorUserId },
+      "Notifying blocked-card members of completed blocker",
+    );
+
+    const targets: { email: string; cardPublicId: string; cardTitle: string }[] =
+      [];
+    for (const card of blockedCards) {
+      const emails = await getCardMemberEmails(db, card.id);
+      for (const email of emails) {
+        if (email) {
+          targets.push({
+            email,
+            cardPublicId: card.publicId,
+            cardTitle: card.title,
+          });
+        }
+      }
+    }
+
+    if (targets.length === 0) return;
+
+    const results = await Promise.allSettled(
+      targets.map(async ({ email, cardPublicId, cardTitle }) => {
+        const mmUserId = await getMattermostUserIdByEmail(config, email);
+        if (!mmUserId) {
+          log.warn(
+            { email: redactEmail(email) },
+            "Mattermost user not found for email",
+          );
+          return;
+        }
+        const cardUrl = `${baseUrl}/cards/${cardPublicId}`;
+        const message = `**${actorName}** marked a blocker as done: [${blockerTitle}](${blockerUrl}).\nYour card [${cardTitle}](${cardUrl}) may now be unblocked.`;
+        const sent = await sendMattermostDM(config, mmUserId, message);
+        log.info({ sent }, "Mattermost blocker-done DM result");
+      }),
+    );
+
+    const failed = results.filter((r) => r.status === "rejected").length;
+    if (failed > 0) {
+      log.warn(
+        { failed, total: targets.length },
+        "Some Mattermost blocker-done DMs failed",
+      );
+    }
+  } catch (error) {
+    log.error(
+      { err: error, blockerCardId },
+      "Failed to send blocker-completed Mattermost notification",
+    );
+  }
 }
 
 export async function getCommenterEmails(

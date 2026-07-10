@@ -25,7 +25,11 @@ import {
   sendMentionEmails,
   sendUnassignmentPush,
 } from "../utils/notifications";
-import { sendMattermostNotification, getCommenterEmails } from "../utils/mattermost";
+import {
+  getCommenterEmails,
+  notifyBlockerCompleted,
+  sendMattermostNotification,
+} from "../utils/mattermost";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 import { generateAttachmentUrl, generateAvatarUrl } from "@banana/shared/utils";
 import {
@@ -1336,6 +1340,20 @@ export const cardRouter = createTRPCRouter({
           mmAction,
         ).catch((error) => {
           console.error("Failed to send Mattermost notification:", error);
+        });
+      }
+
+      // When a card that blocks other cards is marked done, notify the members
+      // of those blocked cards via Mattermost so they know the work is unblocked.
+      if (input.isDone === true && !existingCard.isDone) {
+        notifyBlockerCompleted(ctx.db, {
+          blockerCardId: result.id,
+          blockerCardPublicId: input.cardPublicId,
+          blockerTitle: result.title,
+          actorUserId: userId,
+          actorName: ctx.user?.name ?? "Someone",
+        }).catch((error) => {
+          console.error("Failed to send blocker-done notification:", error);
         });
       }
 
