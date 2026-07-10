@@ -1,10 +1,14 @@
-import { eq, and, isNull, ne, sql } from "drizzle-orm";
-
 import type { dbClient } from "@banana/db/client";
-import * as cardRepo from "@banana/db/repository/card.repo";
-import { cardToWorkspaceMembers, comments, workspaceMembers } from "@banana/db/schema";
-import { createLogger } from "@banana/logger";
+import { and, eq, isNull, ne, sql } from "drizzle-orm";
 import { env } from "next-runtime-env";
+
+import * as cardRepo from "@banana/db/repository/card.repo";
+import {
+  cardToWorkspaceMembers,
+  comments,
+  workspaceMembers,
+} from "@banana/db/schema";
+import { createLogger } from "@banana/logger";
 
 const log = createLogger("mattermost");
 
@@ -69,7 +73,7 @@ async function getMattermostUserIdByEmail(
   );
   if (!response) return null;
 
-  const user = await response.json() as { id: string } | undefined;
+  const user = (await response.json()) as { id: string } | undefined;
   return user?.id ?? null;
 }
 
@@ -84,7 +88,7 @@ async function getDirectMessageChannel(
   });
   if (!response) return null;
 
-  const channel = await response.json() as { id: string } | undefined;
+  const channel = (await response.json()) as { id: string } | undefined;
   return channel?.id ?? null;
 }
 
@@ -92,7 +96,7 @@ async function getBotUserId(config: MattermostConfig): Promise<string | null> {
   const response = await mattermostApi(config, "/users/me");
   if (!response) return null;
 
-  const user = await response.json() as { id: string } | undefined;
+  const user = (await response.json()) as { id: string } | undefined;
   return user?.id ?? null;
 }
 
@@ -104,7 +108,11 @@ async function sendMattermostDM(
   const botUserId = await getBotUserId(config);
   if (!botUserId) return false;
 
-  const channelId = await getDirectMessageChannel(config, botUserId, mattermostUserId);
+  const channelId = await getDirectMessageChannel(
+    config,
+    botUserId,
+    mattermostUserId,
+  );
   if (!channelId) return false;
 
   const response = await mattermostApi(config, "/posts", {
@@ -200,8 +208,11 @@ export async function notifyBlockerCompleted(
       "Notifying blocked-card members of completed blocker",
     );
 
-    const targets: { email: string; cardPublicId: string; cardTitle: string }[] =
-      [];
+    const targets: {
+      email: string;
+      cardPublicId: string;
+      cardTitle: string;
+    }[] = [];
     for (const card of blockedCards) {
       const emails = await getCardMemberEmails(db, card.id);
       for (const email of emails) {
@@ -312,7 +323,10 @@ export async function sendMattermostNotification(
       memberEmails.map(async (email) => {
         const mmUserId = await getMattermostUserIdByEmail(config, email);
         if (!mmUserId) {
-          log.warn({ email: redactEmail(email) }, "Mattermost user not found for email");
+          log.warn(
+            { email: redactEmail(email) },
+            "Mattermost user not found for email",
+          );
           return;
         }
         const sent = await sendMattermostDM(config, mmUserId, message);
@@ -322,7 +336,10 @@ export async function sendMattermostNotification(
 
     const failed = results.filter((r) => r.status === "rejected").length;
     if (failed > 0) {
-      log.warn({ failed, total: memberEmails.length }, "Some Mattermost DMs failed");
+      log.warn(
+        { failed, total: memberEmails.length },
+        "Some Mattermost DMs failed",
+      );
     }
   } catch (error) {
     log.error({ err: error, cardId }, "Failed to send Mattermost notification");
