@@ -9,22 +9,26 @@ import * as checklistRepo from "@kan/db/repository/checklist.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import {
-  cardCreateResponseSchema,
-  cardUpdateResponseSchema,
-  cardDetailSchema,
-  commentResponseSchema,
-  commentDeleteResponseSchema,
   activityItemSchema,
   cardCustomFieldValuesResponseSchema,
   cardCustomFieldValuesRequestSchema,
+  cardCreateResponseSchema,
+  cardDetailSchema,
+  cardUpdateResponseSchema,
+  commentDeleteResponseSchema,
+  commentResponseSchema,
 } from "../schemas";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
 import { sendMentionEmails } from "../utils/notifications";
-import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
-import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
+import {
+  assertCanDelete,
+  assertCanEdit,
+  assertPermission,
+} from "../utils/permissions";
 import {
   createCardWebhookPayload,
   sendWebhooksForWorkspace,
@@ -251,7 +255,12 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertPermission(ctx.db, userId, card.workspaceId, "comment:create");
+      await assertPermission(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "comment:create",
+      );
 
       const newComment = await cardCommentRepo.create(ctx.db, {
         comment: input.comment,
@@ -329,7 +338,7 @@ export const cardRouter = createTRPCRouter({
         input.commentPublicId,
       );
 
-      if (!existingComment)
+      if (!existingComment || existingComment.cardId !== card.id)
         throw new TRPCError({
           message: `Comment with public ID ${input.commentPublicId} not found`,
           code: "NOT_FOUND",
@@ -417,7 +426,7 @@ export const cardRouter = createTRPCRouter({
         input.commentPublicId,
       );
 
-      if (!existingComment)
+      if (!existingComment || existingComment.cardId !== card.id)
         throw new TRPCError({
           message: `Comment with public ID ${input.commentPublicId} not found`,
           code: "NOT_FOUND",
@@ -932,10 +941,7 @@ export const cardRouter = createTRPCRouter({
         | undefined;
 
       if (input.listPublicId) {
-        newList = await listRepo.getByPublicId(
-          ctx.db,
-          input.listPublicId,
-        );
+        newList = await listRepo.getByPublicId(ctx.db, input.listPublicId);
 
         if (!newList)
           throw new TRPCError({
@@ -1080,12 +1086,14 @@ export const cardRouter = createTRPCRouter({
       ) {
         webhookChanges.dueDate = { from: previousDueDate, to: input.dueDate };
       }
-      const movedToNewList = Boolean(newListId && existingCard.listId !== newListId);
+      const movedToNewList = Boolean(
+        newListId && existingCard.listId !== newListId,
+      );
       const currentWebhookListPublicId = movedToNewList
         ? input.listPublicId!
         : existingCard.list.publicId;
       const currentWebhookListName = movedToNewList
-        ? newList?.name ?? card.listName
+        ? (newList?.name ?? card.listName)
         : existingCard.list.name;
 
       if (movedToNewList) {
@@ -1324,7 +1332,10 @@ export const cardRouter = createTRPCRouter({
 
       if (input.copyLabels && sourceCard.labels?.length) {
         const labelPublicIds = sourceCard.labels.map((l) => l.publicId);
-        const labels = await labelRepo.getAllByPublicIds(ctx.db, labelPublicIds);
+        const labels = await labelRepo.getAllByPublicIds(
+          ctx.db,
+          labelPublicIds,
+        );
         if (labels.length) {
           const labelsInsert = labels.map((label) => ({
             cardId: newCard.id,

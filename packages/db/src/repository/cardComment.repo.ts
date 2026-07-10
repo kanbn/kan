@@ -45,6 +45,7 @@ export const getByPublicId = (db: dbClient, publicId: string) => {
       publicId: true,
       comment: true,
       createdBy: true,
+      cardId: true,
     },
     where: eq(comments.publicId, publicId),
   });

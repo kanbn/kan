@@ -47,6 +47,7 @@ import { CardContextMembersModal } from "./components/CardContextMembersModal";
 import { CardContextMenu } from "./components/CardContextMenu";
 import { CardContextMoveListModal } from "./components/CardContextMoveListModal";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
+import { MoveBoardForm } from "./components/MoveBoardForm";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
 import List from "./components/List";
@@ -488,6 +489,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
 
         <Modal
           modalSize="sm"
+          isVisible={isOpen && modalContentType === "MOVE_BOARD"}
+        >
+          <MoveBoardForm boardPublicId={boardId ?? ""} />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
           isVisible={isOpen && modalContentType === "CREATE_TEMPLATE"}
         >
           <NewTemplateForm
@@ -660,7 +668,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
         <div
           ref={scrollRef}
           onMouseDown={onMouseDown}
-          className={`scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] z-0 flex-1 overflow-y-hidden overflow-x-scroll overscroll-contain scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300`}
+          className={`scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] z-0 flex-1 snap-x snap-mandatory scroll-pl-[10px] overflow-y-hidden overflow-x-scroll overscroll-contain scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 md:snap-none`}
         >
           {isLoading ? (
             <div className="ml-[2rem] flex">
@@ -707,11 +715,11 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                   >
                     {(provided) => (
                       <div
-                        className="flex"
+                        className="flex w-max"
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                       >
-                        <div className="min-w-[2rem]" />
+                        <div className="min-w-[10px] md:min-w-[2rem]" />
                         {boardData.lists.map((list, index) => (
                           <List
                             index={index}
@@ -828,7 +836,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                             </Droppable>
                           </List>
                         ))}
-                        <div className="min-w-[0.75rem]" />
+                        <div className="min-w-[calc(100vw-18rem)] md:min-w-[0.75rem]" />
                         {provided.placeholder}
                       </div>
                     )}

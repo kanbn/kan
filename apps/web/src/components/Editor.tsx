@@ -10,6 +10,7 @@ import { t } from "@lingui/core/macro";
 import Link from "@tiptap/extension-link";
 import Mention from "@tiptap/extension-mention";
 import Placeholder from "@tiptap/extension-placeholder";
+import Typography from "@tiptap/extension-typography";
 import {
   BubbleMenu,
   EditorContent,
@@ -17,7 +18,6 @@ import {
   ReactRenderer,
   useEditor,
 } from "@tiptap/react";
-import Typography from "@tiptap/extension-typography";
 import StarterKit from "@tiptap/starter-kit";
 import Suggestion from "@tiptap/suggestion";
 import {
@@ -440,6 +440,7 @@ export default function Editor({
   content,
   onChange,
   onBlur,
+  onSubmit,
   readOnly = false,
   workspaceMembers,
   enableYouTubeEmbed = true,
@@ -449,6 +450,7 @@ export default function Editor({
   content: string | null;
   onChange?: (value: string) => void;
   onBlur?: () => void;
+  onSubmit?: () => void;
   readOnly?: boolean;
   workspaceMembers: WorkspaceMember[];
   enableYouTubeEmbed?: boolean;
@@ -456,6 +458,21 @@ export default function Editor({
   disableHeadings?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // useEditor is created once (empty deps below), so keep the latest callbacks
+  // in refs to avoid the editor capturing stale closures on re-render.
+  const onChangeRef = useRef(onChange);
+  const onBlurRef = useRef(onBlur);
+  const onSubmitRef = useRef(onSubmit);
+  useEffect(() => {
+    onChangeRef.current = onChange;
+  }, [onChange]);
+  useEffect(() => {
+    onBlurRef.current = onBlur;
+  }, [onBlur]);
+  useEffect(() => {
+    onSubmitRef.current = onSubmit;
+  }, [onSubmit]);
 
   const editor = useEditor(
     {
@@ -478,8 +495,8 @@ export default function Editor({
         Placeholder.configure({
           placeholder: readOnly
             ? ""
-            : placeholder ??
-              t`Add description... (type '/' to open commands or '@' to mention)`,
+            : (placeholder ??
+              t`Add description... (type '/' to open commands or '@' to mention)`),
         }),
         SlashCommands.configure({
           commandItems: getCommandItems(disableHeadings),
@@ -497,24 +514,26 @@ export default function Editor({
           suggestion: {
             char: "@",
             items: ({ query }: { query: string }) => {
-              const withEmail = workspaceMembers.filter((member) => member.email);
-              
+              const withEmail = workspaceMembers.filter(
+                (member) => member.email,
+              );
+
               const mapped = withEmail.map((member: WorkspaceMember) => ({
                 id: member.publicId,
                 label: member?.user?.name?.trim() || member.email || "",
                 image: member?.user?.image ?? null,
               }));
-              
+
               const all: MentionItem[] = mapped.filter(
                 (item) => item.label && item.label.length > 0,
               );
-              
+
               const q = query.toLowerCase().trim();
-              
+
               if (q === "") {
                 return all;
               }
-              
+
               const filtered = all.filter((u) =>
                 u.label.toLowerCase().includes(q),
               );
@@ -540,20 +559,20 @@ export default function Editor({
           },
         }),
         Typography.configure({
-            openDoubleQuote: false,
-            closeDoubleQuote: false,
-            openSingleQuote: false,
-            closeSingleQuote: false,
-            oneHalf: false,
-            oneQuarter: false,
-            threeQuarters: false,
-            superscriptTwo: false,
-            superscriptThree: false,
+          openDoubleQuote: false,
+          closeDoubleQuote: false,
+          openSingleQuote: false,
+          closeSingleQuote: false,
+          oneHalf: false,
+          oneQuarter: false,
+          threeQuarters: false,
+          superscriptTwo: false,
+          superscriptThree: false,
         }),
         ...(enableYouTubeEmbed ? [YouTubeNode] : []),
       ],
       content,
-      onUpdate: ({ editor }) => onChange?.(editor.getHTML()),
+      onUpdate: ({ editor }) => onChangeRef.current?.(editor.getHTML()),
       onBlur: ({ event }) => {
         if (
           document
@@ -563,12 +582,19 @@ export default function Editor({
           return;
         // Only trigger onBlur if the click was outside both the editor and menu
         if (!containerRef.current?.contains(event.relatedTarget as Node)) {
-          onBlur?.();
+          onBlurRef.current?.();
         }
       },
       editorProps: {
         attributes: {
           class: "outline-none focus:outline-none focus-visible:ring-0",
+        },
+        handleKeyDown: (_view, event) => {
+          if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
+            onSubmitRef.current?.();
+            return true;
+          }
+          return false;
         },
       },
       editable: !readOnly,
@@ -586,6 +612,16 @@ export default function Editor({
       editor.commands.setContent(safeContent, false);
     }
   }, [content, editor]);
+
+  // useEditor captures `readOnly` once at creation time (empty deps above), so
+  // explicitly sync `editable` when the prop changes. Without this the editor
+  // gets stuck read-only when `readOnly` flips from true to false after mount
+  // (e.g. card permissions resolving slower than the card data on first load).
+  useEffect(() => {
+    if (!editor) return;
+    if (editor.isEditable === !readOnly) return;
+    editor.setEditable(!readOnly);
+  }, [editor, readOnly]);
 
   return (
     <div ref={containerRef}>
