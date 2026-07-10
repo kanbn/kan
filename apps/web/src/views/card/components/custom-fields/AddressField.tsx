@@ -47,7 +47,12 @@ export function AddressField({
   }, [triggerAddCount, canEdit]);
 
   const handleInputChange = (key: keyof AddressValue, val: string) => {
-    setDraft((prev) => ({ ...prev, [key]: val }));
+    const newDraft = { ...draft, [key]: val };
+    setDraft(newDraft);
+    if (embedded) {
+      const isEmpty = Object.values(newDraft).every((v) => !v);
+      onChange(isEmpty ? null : newDraft);
+    }
   };
 
   const handleSave = () => {
