@@ -1,4 +1,5 @@
 import { t } from "@lingui/core/macro";
+import { env } from "next-runtime-env";
 import { useRef, useState } from "react";
 import { HiOutlinePaperClip } from "react-icons/hi";
 import { HiCheckBadge } from "react-icons/hi2";
@@ -7,7 +8,6 @@ import { twMerge } from "tailwind-merge";
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { env } from "next-runtime-env";
 import { api } from "~/utils/api";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
@@ -41,6 +41,7 @@ export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
       }
 
       await invalidateCard(utils, cardPublicId);
+      setUploading(false);
       showPopup({
         header: t`Attachment uploaded`,
         message: t`Your file has been uploaded successfully.`,

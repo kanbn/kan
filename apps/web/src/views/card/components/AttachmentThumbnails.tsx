@@ -173,6 +173,15 @@ export function AttachmentThumbnails({
                 contentType: attachment.contentType,
               }}
               onClick={() => openViewer(index)}
+              onDelete={
+                isReadOnly
+                  ? undefined
+                  : () => {
+                      deleteAttachment.mutate({
+                        attachmentPublicId: attachment.publicId,
+                      });
+                    }
+              }
               isImage={true}
             />
           );
@@ -368,6 +377,7 @@ export function AttachmentThumbnails({
 function AttachmentThumbnail({
   attachment,
   onClick,
+  onDelete,
   isImage,
 }: {
   attachment: {
@@ -377,12 +387,13 @@ function AttachmentThumbnail({
     contentType: string;
   };
   onClick: () => void;
+  onDelete?: () => void;
   isImage: boolean;
 }) {
   return (
     <button
       onClick={onClick}
-      className="relative h-16 w-16 overflow-hidden rounded-xl border border-light-300 transition-transform hover:scale-105 dark:border-dark-300"
+      className="group relative h-16 w-16 overflow-hidden rounded-xl border border-light-300 transition-transform hover:scale-105 dark:border-dark-300"
       aria-label={`View ${attachment.originalFilename}`}
     >
       {isImage ? (
@@ -396,6 +407,19 @@ function AttachmentThumbnail({
       ) : (
         <div className="flex h-full w-full items-center justify-center bg-light-100 dark:bg-dark-100">
           <HiDocumentText className="h-6 w-6 text-light-700 dark:text-dark-700" />
+        </div>
+      )}
+      {onDelete && (
+        <div
+          className="absolute right-0.5 top-0.5 opacity-0 transition-opacity group-hover:opacity-100"
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete();
+          }}
+        >
+          <div className="flex h-5 w-5 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70">
+            <HiXMark className="h-3 w-3" />
+          </div>
         </div>
       )}
     </button>
