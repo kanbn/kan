@@ -42,6 +42,8 @@ const boardDetailCardSchema = z.object({
   cardNumber: z.number().nullable(),
   dueDate: z.date().nullable(),
   isDone: z.boolean(),
+  createdAt: z.date(),
+  updatedAt: z.date().nullable(),
   labels: z.array(labelSchema),
   members: z.array(boardCardMemberSchema),
   attachments: z.array(z.object({ publicId: z.string() })),
