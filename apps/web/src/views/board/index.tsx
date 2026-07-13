@@ -1,3 +1,4 @@
+import type { UpdateBoardInput } from "@banana/api/types";
 import type { DropResult } from "react-beautiful-dnd";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -14,9 +15,8 @@ import {
   HiOutlineSquare3Stack3D,
 } from "react-icons/hi2";
 
-import type { UpdateBoardInput } from "@banana/api/types";
-
 import type { CardContextMenuAction } from "./components/CardContextMenu";
+import type { SortValue } from "./components/Sort";
 import Button from "~/components/Button";
 import { DeleteLabelConfirmation } from "~/components/DeleteLabelConfirmation";
 import { LabelForm } from "~/components/LabelForm";
@@ -52,6 +52,8 @@ import List from "./components/List";
 import { NewCardForm } from "./components/NewCardForm";
 import { NewListForm } from "./components/NewListForm";
 import { NewTemplateForm } from "./components/NewTemplateForm";
+import Sort, { isSortValue } from "./components/Sort";
+import { sortCards } from "./components/sortCards";
 import UpdateBoardSlugButton from "./components/UpdateBoardSlugButton";
 import { UpdateBoardSlugForm } from "./components/UpdateBoardSlugForm";
 import VisibilityButton from "./components/VisibilityButton";
@@ -125,6 +127,14 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   )[];
 
   const boardType: "regular" | "template" = isTemplate ? "template" : "regular";
+
+  // Ephemeral view-sort: when anything other than "manual" is active, cards are
+  // re-ordered client-side for display and dragging is disabled (the manual
+  // index is never overwritten).
+  const activeSort: SortValue = isSortValue(router.query.sort)
+    ? router.query.sort
+    : "manual";
+  const isSorted = activeSort !== "manual";
 
   const queryParams = {
     boardPublicId: boardId ?? "",
@@ -596,6 +606,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                     isLoading={!boardData}
                   />
                 )}
+                {boardData && <Sort isLoading={!boardData} />}
               </>
             )}
             <Tooltip
@@ -706,78 +717,82 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                   {...provided.droppableProps}
                                   className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 h-full max-h-[calc(100vh-225px)] min-h-[2rem] overflow-y-auto pr-1 scrollbar dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600"
                                 >
-                                  {list.cards.map((card, index) => (
-                                    <Draggable
-                                      key={card.publicId}
-                                      draggableId={card.publicId}
-                                      index={index}
-                                      isDragDisabled={!canEditCard}
-                                    >
-                                      {(provided) => (
-                                        <Link
-                                          onClick={(e) => {
-                                            if (
+                                  {sortCards(list.cards, activeSort).map(
+                                    (card, index) => (
+                                      <Draggable
+                                        key={card.publicId}
+                                        draggableId={card.publicId}
+                                        index={index}
+                                        isDragDisabled={
+                                          !canEditCard || isSorted
+                                        }
+                                      >
+                                        {(provided) => (
+                                          <Link
+                                            onClick={(e) => {
+                                              if (
+                                                card.publicId.startsWith(
+                                                  "PLACEHOLDER",
+                                                )
+                                              )
+                                                e.preventDefault();
+                                            }}
+                                            onContextMenu={(e) => {
+                                              if (
+                                                card.publicId.startsWith(
+                                                  "PLACEHOLDER",
+                                                ) ||
+                                                env("NEXT_PUBLIC_KAN_ENV") ===
+                                                  "cloud"
+                                              )
+                                                return;
+                                              e.preventDefault();
+                                              setContextMenu({
+                                                x: e.clientX,
+                                                y: e.clientY,
+                                                cardPublicId: card.publicId,
+                                              });
+                                            }}
+                                            key={card.publicId}
+                                            href={
+                                              isTemplate
+                                                ? `/templates/${boardId}/cards/${card.publicId}`
+                                                : `/cards/${card.publicId}`
+                                            }
+                                            className={`mb-2 flex !cursor-pointer flex-col ${
                                               card.publicId.startsWith(
                                                 "PLACEHOLDER",
                                               )
-                                            )
-                                              e.preventDefault();
-                                          }}
-                                          onContextMenu={(e) => {
-                                            if (
-                                              card.publicId.startsWith(
-                                                "PLACEHOLDER",
-                                              ) ||
-                                              env("NEXT_PUBLIC_KAN_ENV") ===
-                                                "cloud"
-                                            )
-                                              return;
-                                            e.preventDefault();
-                                            setContextMenu({
-                                              x: e.clientX,
-                                              y: e.clientY,
-                                              cardPublicId: card.publicId,
-                                            });
-                                          }}
-                                          key={card.publicId}
-                                          href={
-                                            isTemplate
-                                              ? `/templates/${boardId}/cards/${card.publicId}`
-                                              : `/cards/${card.publicId}`
-                                          }
-                                          className={`mb-2 flex !cursor-pointer flex-col ${
-                                            card.publicId.startsWith(
-                                              "PLACEHOLDER",
-                                            )
-                                              ? "pointer-events-none"
-                                              : ""
-                                          }`}
-                                          ref={provided.innerRef}
-                                          {...provided.draggableProps}
-                                          {...provided.dragHandleProps}
-                                        >
-                                          <Card
-                                            title={card.title}
-                                            ticketNumber={
-                                              card.cardNumber != null
-                                                ? `${boardData.workspace.cardPrefix}-${card.cardNumber}`
-                                                : null
-                                            }
-                                            labels={card.labels}
-                                            members={card.members}
-                                            checklists={card.checklists ?? []}
-                                            description={
-                                              card.description ?? null
-                                            }
-                                            comments={card.comments ?? []}
-                                            attachments={card.attachments}
-                                            dueDate={card.dueDate ?? null}
-                                            isDone={card.isDone ?? false}
-                                          />
-                                        </Link>
-                                      )}
-                                    </Draggable>
-                                  ))}
+                                                ? "pointer-events-none"
+                                                : ""
+                                            }`}
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                          >
+                                            <Card
+                                              title={card.title}
+                                              ticketNumber={
+                                                card.cardNumber != null
+                                                  ? `${boardData.workspace.cardPrefix}-${card.cardNumber}`
+                                                  : null
+                                              }
+                                              labels={card.labels}
+                                              members={card.members}
+                                              checklists={card.checklists ?? []}
+                                              description={
+                                                card.description ?? null
+                                              }
+                                              comments={card.comments ?? []}
+                                              attachments={card.attachments}
+                                              dueDate={card.dueDate ?? null}
+                                              isDone={card.isDone ?? false}
+                                            />
+                                          </Link>
+                                        )}
+                                      </Draggable>
+                                    ),
+                                  )}
                                   {provided.placeholder}
                                 </div>
                               )}
