@@ -1130,6 +1130,15 @@ export const cardRouter = createTRPCRouter({
           newIndex: input.index,
           newListId: newListId,
         });
+        let isDone: boolean;
+        if (result?.isDone != null) {
+          isDone = result.isDone;
+        } else if (existingCard.isDone != null) {
+          isDone = existingCard.isDone;
+        } else {
+          isDone = false;
+        }
+
         result = {
           ...(reordered as {
             id: number;
@@ -1138,7 +1147,7 @@ export const cardRouter = createTRPCRouter({
             publicId: string;
             dueDate: Date | null;
           }),
-          isDone: result?.isDone ?? existingCard.isDone ?? false,
+          isDone,
         };
       }
 

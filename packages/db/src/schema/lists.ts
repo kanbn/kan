@@ -1,4 +1,4 @@
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
   bigint,
   bigserial,
@@ -6,6 +6,7 @@ import {
   integer,
   pgTable,
   timestamp,
+  uniqueIndex,
   uuid,
   varchar,
 } from "drizzle-orm/pg-core";
@@ -34,7 +35,14 @@ export const lists = pgTable("list", {
     .references(() => boards.id, { onDelete: "cascade" }),
   importId: bigint("importId", { mode: "number" }).references(() => imports.id),
   isDoneList: boolean("isDoneList").notNull().default(false),
-}).enableRLS();
+}, (table) => [
+  // Enforce a single Done list per board at the DB level (only among
+  // non-deleted lists). The app also clears rivals before setting, but this
+  // guard is the source of truth.
+  uniqueIndex("unique_done_list_per_board")
+    .on(table.boardId)
+    .where(sql`${table.isDoneList} = true AND ${table.deletedAt} IS NULL`),
+]).enableRLS();
 
 export const listsRelations = relations(lists, ({ one, many }) => ({
   createdBy: one(users, {
