@@ -288,6 +288,13 @@
       "when": 1784582400000,
       "tag": "20260716120000_add_unique_done_list_per_board",
       "breakpoints": true
+    },
+    {
+      "idx": 41,
+      "version": "7",
+      "when": 1784755200000,
+      "tag": "20260717120000_readd_card_blocking",
+      "breakpoints": true
     }
   ]
 }

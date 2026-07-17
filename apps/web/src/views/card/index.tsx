@@ -3,12 +3,13 @@ import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { HiXMark } from "react-icons/hi2";
+import { HiCheck, HiXMark } from "react-icons/hi2";
 import { IoChevronForwardSharp } from "react-icons/io5";
 
 import { authClient } from "@banana/auth/client";
 
 import Avatar from "~/components/Avatar";
+import Button from "~/components/Button";
 import Editor from "~/components/Editor";
 import FeedbackModal from "~/components/FeedbackModal";
 import { LabelForm } from "~/components/LabelForm";
@@ -28,6 +29,8 @@ import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmatio
 import ActivityList from "./components/ActivityList";
 import { AttachmentThumbnails } from "./components/AttachmentThumbnails";
 import { AttachmentUpload } from "./components/AttachmentUpload";
+import BlockingIndicator from "./components/BlockingIndicator";
+import BlockerSelector from "./components/BlockerSelector";
 import Checklists from "./components/Checklists";
 import { DeleteCardConfirmation } from "./components/DeleteCardConfirmation";
 import { DeleteChecklistConfirmation } from "./components/DeleteChecklistConfirmation";
@@ -51,8 +54,6 @@ interface FormValues {
 export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   const router = useRouter();
   const { canEditCard } = usePermissions();
-  const { openModal } = useModal();
-  const utils = api.useUtils();
   const { data: session } = authClient.useSession();
   const cardId = Array.isArray(router.query.cardId)
     ? router.query.cardId[0]
@@ -71,27 +72,6 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   const workspaceMembers = board?.workspace.members;
   const selectedLabels = card?.labels;
   const selectedMembers = card?.members;
-
-  const doneList = card?.list.board.lists.find((l) => l.isDoneList);
-
-  const unmarkDone = api.card.update.useMutation({
-    onMutate: async () => {
-      if (!cardId) return;
-      await utils.card.byId.cancel({ cardPublicId: cardId });
-      const previous = utils.card.byId.getData({ cardPublicId: cardId });
-      utils.card.byId.setData({ cardPublicId: cardId }, (old) =>
-        old ? { ...old, isDone: false } : old,
-      );
-      return { previous };
-    },
-    onError: (_err, _vars, ctx) => {
-      if (cardId && ctx?.previous)
-        utils.card.byId.setData({ cardPublicId: cardId }, ctx.previous);
-    },
-    onSettled: async () => {
-      if (cardId) await invalidateCard(utils, cardId);
-    },
-  });
 
   const formattedLabels =
     labels?.map((label) => {
@@ -174,6 +154,18 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           />
         </div>
       )}
+      {!isTemplate && (
+        <div className="mb-4 flex w-full flex-row">
+          <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Blockers`}</p>
+          <BlockerSelector
+            blockers={card?.blockedBy ?? []}
+            cardPublicId={cardId ?? ""}
+            cardPrefix={card?.list.board.workspace.cardPrefix}
+            isLoading={!card}
+            disabled={!canEdit}
+          />
+        </div>
+      )}
       <div className="mb-4 flex w-full flex-row">
         <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Due date`}</p>
         <DueDateSelector
@@ -182,47 +174,6 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           isLoading={!card}
           disabled={!canEdit}
         />
-      </div>
-      <div className="mb-4 flex w-full flex-row">
-        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Status`}</p>
-        <div className="flex w-full items-center">
-          {card?.isDone ? (
-            <div className="flex w-full items-center justify-between gap-2">
-              <span className="inline-flex items-center gap-1 rounded-[5px] border-[1px] border-green-300 bg-green-50 px-2 py-1 text-xs font-medium text-green-700 dark:border-green-800 dark:bg-green-900/30 dark:text-green-300">
-                {t`Done`}
-              </span>
-              {canEdit && (
-                <button
-                  type="button"
-                  onClick={() =>
-                    cardId &&
-                    unmarkDone.mutate({ cardPublicId: cardId, isDone: false })
-                  }
-                  disabled={unmarkDone.isPending}
-                  className="text-xs text-light-700 hover:text-light-900 dark:text-dark-700 dark:hover:text-dark-900"
-                >
-                  {t`Mark as not done`}
-                </button>
-              )}
-            </div>
-          ) : (
-            <button
-              type="button"
-              disabled={!card || !canEdit}
-              onClick={() =>
-                cardId &&
-                openModal(
-                  "MARK_DONE_CONFIRM",
-                  cardId,
-                  doneList?.publicId,
-                )
-              }
-              className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-50 px-2 py-1 text-left text-xs text-neutral-900 hover:border-light-300 hover:bg-light-200 disabled:cursor-not-allowed disabled:opacity-60 dark:border-dark-50 dark:text-dark-1000 dark:hover:border-dark-200 dark:hover:bg-dark-100"
-            >
-              {t`Mark as done`}
-            </button>
-          )}
-        </div>
       </div>
     </div>
   );
@@ -239,6 +190,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     clearModalState,
     isOpen,
     modalStates,
+    openModal,
   } = useModal();
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
@@ -303,6 +255,27 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
         message: t`Please try again later, or contact customer support.`,
         icon: "error",
       });
+    },
+    onSettled: async () => {
+      if (cardId) await invalidateCard(utils, cardId);
+    },
+  });
+
+  const doneList = card?.list.board.lists.find((l) => l.isDoneList);
+
+  const unmarkDone = api.card.update.useMutation({
+    onMutate: async () => {
+      if (!cardId) return;
+      await utils.card.byId.cancel({ cardPublicId: cardId });
+      const previous = utils.card.byId.getData({ cardPublicId: cardId });
+      utils.card.byId.setData({ cardPublicId: cardId }, (old) =>
+        old ? { ...old, isDone: false } : old,
+      );
+      return { previous };
+    },
+    onError: (_err, _vars, ctx) => {
+      if (cardId && ctx?.previous)
+        utils.card.byId.setData({ cardPublicId: cardId }, ctx.previous);
     },
     onSettled: async () => {
       if (cardId) await invalidateCard(utils, cardId);
@@ -481,6 +454,12 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                     </div>
                   </form>
                 )}
+                {card && (
+                  <BlockingIndicator
+                    blocking={card.blocking}
+                    cardPrefix={card.list.board.workspace.cardPrefix}
+                  />
+                )}
                 {!card && !isLoading && (
                   <p className="block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
                     {t`Card not found`}
@@ -536,6 +515,53 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                         </div>
                       )}
                     </>
+                  )}
+                  {!isTemplate && (
+                    <div className="mt-6">
+                      {card.isDone ? (
+                        <div className="flex items-center gap-3">
+                          <span className="inline-flex items-center gap-1 rounded-[5px] border-[1px] border-green-300 bg-green-50 px-2 py-1 text-xs font-medium text-green-700 dark:border-green-800 dark:bg-green-900/30 dark:text-green-300">
+                            <HiCheck className="h-3.5 w-3.5" />
+                            {t`Done`}
+                          </span>
+                          {canEdit && (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                cardId &&
+                                unmarkDone.mutate({
+                                  cardPublicId: cardId,
+                                  isDone: false,
+                                })
+                              }
+                              disabled={unmarkDone.isPending}
+                              className="text-xs text-light-700 hover:text-light-900 dark:text-dark-700 dark:hover:text-dark-900"
+                            >
+                              {t`Mark as not done`}
+                            </button>
+                          )}
+                        </div>
+                      ) : (
+                        canEdit && (
+                          <Button
+                            variant="secondary"
+                            size="md"
+                            fullWidth
+                            iconLeft={<HiCheck className="h-4 w-4" />}
+                            onClick={() =>
+                              cardId &&
+                              openModal(
+                                "MARK_DONE_CONFIRM",
+                                cardId,
+                                doneList?.publicId,
+                              )
+                            }
+                          >
+                            {t`Mark as done`}
+                          </Button>
+                        )
+                      )}
+                    </div>
                   )}
                   <div className="border-t-[1px] border-light-300 pt-12 dark:border-dark-300">
                     <h2 className="text-md pb-4 font-medium text-light-1000 dark:text-dark-1000">

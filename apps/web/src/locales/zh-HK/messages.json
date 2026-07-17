@@ -59,7 +59,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        321
+        361
       ]
     ],
     "translation": "{0} | {1}"
@@ -107,7 +107,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        506
+        520
       ]
     ],
     "translation": "{0} 個標籤"
@@ -123,7 +123,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        557
+        564
       ]
     ],
     "translation": "搵唔到 {0}"
@@ -391,11 +391,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        475
+        568
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        205
+        206
       ]
     ],
     "translation": "活動"
@@ -459,7 +459,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        136
+        186
       ]
     ],
     "translation": "新增卡片"
@@ -506,8 +506,16 @@
     "comments": [],
     "origin": [
       [
+        "src/views/card/components/BlockerSelector.tsx",
+        145
+      ],
+      [
+        "src/views/card/components/BlockerSelector.tsx",
+        158
+      ],
+      [
         "src/views/card/components/ChecklistItemRow.tsx",
-        345
+        364
       ]
     ],
     "translation": ""
@@ -559,7 +567,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        224
+        237
       ]
     ],
     "translation": "新增詳情..."
@@ -640,20 +648,18 @@
     "translation": "新增咗 {0} 個標籤：<0>{labelList}</0>"
   },
   "QwTiT4": {
-    "translation": "",
     "message": "added a blocker",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        146
+        148
       ]
     ],
-    "obsolete": true
+    "translation": ""
   },
   "Xjyrmu": {
-    "translation": "",
     "message": "added a blocker to a checklist item",
     "placeholders": {},
     "comments": [],
@@ -662,7 +668,8 @@
         "src/views/card/components/ActivityList.tsx",
         146
       ]
-    ]
+    ],
+    "translation": ""
   },
   "h4VV67": {
     "message": "added a checklist",
@@ -735,7 +742,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        281
+        283
       ]
     ],
     "translation": "新增咗附件 <0>{0}</0>"
@@ -751,7 +758,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        211
+        213
       ]
     ],
     "translation": "新增咗檢查清單 <0>{0}</0>"
@@ -767,7 +774,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        235
+        237
       ]
     ],
     "translation": "新增咗檢查清單項目 <0>{0}</0>"
@@ -783,7 +790,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        195
+        197
       ]
     ],
     "translation": "新增咗標籤 <0>{0}</0>"
@@ -818,6 +825,18 @@
       ]
     ],
     "translation": "新增成員將會產生額外 {price}（{billingType}）嘅每位成員費用。"
+  },
+  "mDGyPe": {
+    "message": "Adding this blocker would create a circular dependency.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ChecklistItemRow.tsx",
+        146
+      ]
+    ],
+    "translation": ""
   },
   "D7/JvJ": {
     "message": "Adjust the square crop to fit your avatar.",
@@ -1354,7 +1373,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        175
+        177
       ]
     ],
     "translation": "將 <0>{0}</0> 分配到卡片"
@@ -1378,7 +1397,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        45
+        46
       ]
     ],
     "translation": "附件已上傳"
@@ -1560,21 +1579,41 @@
     "translation": "帳單入口"
   },
   "++lIxB": {
-    "translation": "",
     "message": "Blocked by",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/card/components/BlockedBy.tsx",
-        97
-      ],
-      [
-        "src/views/card/components/ChecklistItemBlocker.tsx",
-        126
+        105
       ]
     ],
+    "translation": "",
     "obsolete": true
+  },
+  "KSYOGG": {
+    "translation": "",
+    "message": "Blockers",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/index.tsx",
+        159
+      ]
+    ]
+  },
+  "2BsWNa": {
+    "message": "Blocking",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/BlockingIndicator.tsx",
+        30
+      ]
+    ],
+    "translation": ""
   },
   "4RoY9J": {
     "message": "Blog Post",
@@ -1595,11 +1634,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        530
+        537
       ],
       [
         "src/views/card/index.tsx",
-        321
+        361
       ],
       [
         "src/views/public/board/index.tsx",
@@ -2290,6 +2329,10 @@
         44
       ],
       [
+        "src/views/card/components/BlockerSelector.tsx",
+        217
+      ],
+      [
         "src/views/card/components/Comment.tsx",
         195
       ],
@@ -2304,6 +2347,10 @@
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
         77
+      ],
+      [
+        "src/views/card/components/MarkDoneConfirmation.tsx",
+        69
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -2351,7 +2398,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        321
+        361
       ]
     ],
     "translation": "卡片"
@@ -2375,11 +2422,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        382
+        422
       ],
       [
         "src/views/card/index.tsx",
-        419
+        465
       ]
     ],
     "translation": "搵唔到卡片"
@@ -2391,7 +2438,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        372
+        386
       ]
     ],
     "translation": "卡片標題"
@@ -2403,7 +2450,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        308
+        315
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2475,11 +2522,11 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        306
+        308
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        320
+        322
       ]
     ],
     "translation": "將到期日更改為 <0>{formattedDate}</0>"
@@ -2523,7 +2570,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        641
+        674
       ]
     ],
     "translation": ""
@@ -2667,7 +2714,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        373
+        413
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -2819,7 +2866,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        252
+        254
       ]
     ],
     "translation": "完成咗檢查清單項目 <0>{0}</0>"
@@ -3039,7 +3086,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        453
+        454
       ]
     ],
     "translation": "繼續使用 "
@@ -3055,7 +3102,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        371
+        372
       ]
     ],
     "translation": "繼續使用 {0}"
@@ -3207,11 +3254,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        648
+        681
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        141
+        142
       ]
     ],
     "translation": "建立另一個"
@@ -3235,7 +3282,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        658
+        691
       ]
     ],
     "translation": "建立卡片"
@@ -3283,7 +3330,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        153
+        154
       ]
     ],
     "translation": "建立列表"
@@ -3327,7 +3374,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        468
+        482
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3343,11 +3390,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        92
+        94
       ],
       [
         "src/views/board/index.tsx",
-        671
+        679
       ]
     ],
     "translation": "建立新列表"
@@ -3399,6 +3446,30 @@
       ]
     ],
     "translation": "已建立"
+  },
+  "hqmh/S": {
+    "message": "Created (newest)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        121
+      ]
+    ],
+    "translation": ""
+  },
+  "KKohDw": {
+    "message": "Created (oldest)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        123
+      ]
+    ],
+    "translation": ""
   },
   "MXSt4t": {
     "message": "Created {0}",
@@ -3776,7 +3847,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        147
+        214
       ]
     ],
     "translation": "刪除列表"
@@ -3860,7 +3931,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        227
+        229
       ]
     ],
     "translation": "刪除咗檢查清單 <0>{0}</0>"
@@ -3876,7 +3947,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        270
+        272
       ]
     ],
     "translation": "刪除咗檢查清單項目 <0>{0}</0>"
@@ -4121,9 +4192,25 @@
       [
         "src/views/boards/components/TemplateBoards.tsx",
         61
+      ],
+      [
+        "src/views/card/index.tsx",
+        525
       ]
     ],
     "translation": "完成"
+  },
+  "qJDNEJ": {
+    "message": "Done list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/List.tsx",
+        146
+      ]
+    ],
+    "translation": ""
   },
   "R3FsF4": {
     "message": "Download failed",
@@ -4148,14 +4235,38 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        523
+        537
       ],
       [
         "src/views/card/index.tsx",
-        153
+        170
       ]
     ],
     "translation": "到期日"
+  },
+  "Qbf23S": {
+    "message": "Due date (latest)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        131
+      ]
+    ],
+    "translation": ""
+  },
+  "zjCzPE": {
+    "message": "Due date (soonest)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        129
+      ]
+    ],
+    "translation": ""
   },
   "ri1hHe": {
     "message": "Due next month",
@@ -4372,7 +4483,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        454
+        455
       ]
     ],
     "translation": "電郵"
@@ -4552,7 +4663,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        418
+        419
       ]
     ],
     "translation": "輸入你嘅電郵地址"
@@ -4564,7 +4675,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        406
+        407
       ]
     ],
     "translation": "輸入你嘅名"
@@ -4588,7 +4699,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        432
+        433
       ]
     ],
     "translation": "輸入你嘅密碼"
@@ -4992,7 +5103,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        307
+        308
       ]
     ],
     "translation": "用 {0} 登入失敗。請再試一次。"
@@ -5032,7 +5143,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        52
+        53
       ]
     ],
     "translation": "上傳附件失敗。請再試一次。"
@@ -5456,7 +5567,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        656
+        664
       ]
     ],
     "translation": "透過建立新列表開始"
@@ -6357,6 +6468,18 @@
     ],
     "translation": "請記住呢個操作係無法復原嘅。"
   },
+  "64rBPS": {
+    "message": "Keep your completed work organized in one place.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MoveToDoneListConfirmation.tsx",
+        52
+      ]
+    ],
+    "translation": ""
+  },
   "h7MgpO": {
     "message": "Keyboard Shortcuts",
     "placeholders": {},
@@ -6384,11 +6507,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        472
+        486
       ],
       [
         "src/views/card/index.tsx",
-        133
+        138
       ]
     ],
     "translation": "標籤"
@@ -6440,6 +6563,30 @@
       ]
     ],
     "translation": "大"
+  },
+  "v9zd8O": {
+    "message": "Last updated (newest)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        117
+      ]
+    ],
+    "translation": ""
+  },
+  "v2g4Rs": {
+    "message": "Last updated (oldest)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        119
+      ]
+    ],
+    "translation": ""
   },
   "8Is1ih": {
     "message": "Launch offer",
@@ -6576,7 +6723,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        306
+        313
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -6604,7 +6751,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        124
+        129
       ]
     ],
     "translation": "列表"
@@ -6616,7 +6763,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        129
+        130
       ]
     ],
     "translation": "列表名稱"
@@ -6652,7 +6799,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        602
+        623
       ]
     ],
     "translation": "載入更多活動"
@@ -6676,7 +6823,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        602
+        623
       ],
       [
         "src/views/home-dashboard/RecentActivitySection.tsx",
@@ -6752,7 +6899,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        454
+        455
       ]
     ],
     "translation": "魔法連結"
@@ -6785,8 +6932,59 @@
     ],
     "translation": "管理成員"
   },
+  "BWTzAb": {
+    "message": "Manual",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        115
+      ]
+    ],
+    "translation": ""
+  },
+  "3Sdni6": {
+    "message": "Mark as done",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MarkDoneConfirmation.tsx",
+        72
+      ],
+      [
+        "src/views/card/index.tsx",
+        560
+      ]
+    ],
+    "translation": ""
+  },
+  "sKd49Y": {
+    "message": "Mark as not done",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/index.tsx",
+        540
+      ]
+    ],
+    "translation": ""
+  },
+  "kqZykd": {
+    "message": "Mark this card as done?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MarkDoneConfirmation.tsx",
+        58
+      ]
+    ],
+    "translation": ""
+  },
   "JtTwCi": {
-    "translation": "",
     "message": "marked a checklist item as blocked by <0>{0}</0>",
     "placeholders": {
       "0": [
@@ -6797,9 +6995,10 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        332
+        334
       ]
-    ]
+    ],
+    "translation": ""
   },
   "IDvohQ": {
     "message": "marked a checklist item as incomplete",
@@ -6824,13 +7023,12 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        261
+        263
       ]
     ],
     "translation": "將檢查清單項目 <0>{0}</0> 標記為未完成"
   },
   "80PbnH": {
-    "translation": "",
     "message": "marked this card as blocked by <0>{0}</0>",
     "placeholders": {
       "0": [
@@ -6841,10 +7039,10 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        332
+        352
       ]
     ],
-    "obsolete": true
+    "translation": ""
   },
   "vo2a+a": {
     "message": "Marketing",
@@ -6941,11 +7139,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        430
+        444
       ],
       [
         "src/views/card/index.tsx",
-        143
+        148
       ],
       [
         "src/views/members/index.tsx",
@@ -7030,6 +7228,18 @@
     ],
     "translation": "按月計費"
   },
+  "jQ0DrF": {
+    "message": "Move this card to the Done list?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MoveToDoneListConfirmation.tsx",
+        49
+      ]
+    ],
+    "translation": ""
+  },
   "51UCsN": {
     "message": "Move to another list",
     "placeholders": {},
@@ -7041,6 +7251,18 @@
       ]
     ],
     "translation": "移到另一個列表"
+  },
+  "CjE8qp": {
+    "message": "Move to Done list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MoveToDoneListConfirmation.tsx",
+        63
+      ]
+    ],
+    "translation": ""
   },
   "J4+OTA": {
     "message": "Move to list",
@@ -7068,7 +7290,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        163
+        165
       ]
     ],
     "translation": "將卡片從 <0>{0}</0> 移到<1>{1}</1>"
@@ -7225,7 +7447,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        355
+        369
       ]
     ],
     "translation": "新增卡片"
@@ -7273,11 +7495,11 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        113
+        114
       ],
       [
         "src/views/board/index.tsx",
-        620
+        628
       ]
     ],
     "translation": "新增列表"
@@ -7413,7 +7635,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        385
+        386
       ]
     ],
     "translation": "目前冇可用嘅驗證方法"
@@ -7468,21 +7690,16 @@
     "translation": ""
   },
   "l/Tg71": {
-    "translation": "",
     "message": "No cards found",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/views/card/components/BlockedBy.tsx",
-        166
-      ],
-      [
-        "src/views/card/components/ChecklistItemBlocker.tsx",
-        157
+        "src/views/card/components/BlockerSelector.tsx",
+        187
       ]
     ],
-    "obsolete": true
+    "translation": ""
   },
   "OpNhRn": {
     "message": "No credit card required",
@@ -7551,7 +7768,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        652
+        660
       ]
     ],
     "translation": "冇列表"
@@ -7563,7 +7780,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        657
+        665
       ]
     ],
     "translation": "尚未建立任何列表"
@@ -7656,17 +7873,29 @@
     ],
     "translation": ""
   },
+  "PBxg/E": {
+    "message": "Not now",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MoveToDoneListConfirmation.tsx",
+        60
+      ]
+    ],
+    "translation": ""
+  },
   "3Xx0TS": {
-    "translation": "",
     "message": "Nothing found.",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        316
+        335
       ]
-    ]
+    ],
+    "translation": ""
   },
   "iDNBZe": {
     "message": "Notifications",
@@ -7807,7 +8036,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        396
+        397
       ]
     ],
     "translation": "或"
@@ -7931,7 +8160,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        274
+        275
       ]
     ],
     "translation": "登入需要密碼。"
@@ -7943,7 +8172,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        273
+        274
       ]
     ],
     "translation": "註冊需要密碼。"
@@ -8219,7 +8448,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        422
+        423
       ]
     ],
     "translation": "請輸入有效嘅電郵地址"
@@ -8231,7 +8460,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        410
+        411
       ]
     ],
     "translation": "請輸入有效嘅名"
@@ -8243,7 +8472,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        437
+        438
       ]
     ],
     "translation": "請輸入有效嘅密碼"
@@ -8310,12 +8539,16 @@
         68
       ],
       [
+        "src/views/board/components/List.tsx",
+        91
+      ],
+      [
         "src/views/board/components/NewCardForm.tsx",
-        203
+        206
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        79
+        80
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
@@ -8335,11 +8568,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        218
+        225
       ],
       [
         "src/views/board/index.tsx",
-        274
+        281
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -8354,12 +8587,16 @@
         74
       ],
       [
-        "src/views/card/components/ChecklistItemRow.tsx",
-        99
+        "src/views/card/components/BlockerSelector.tsx",
+        47
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        127
+        105
+      ],
+      [
+        "src/views/card/components/ChecklistItemRow.tsx",
+        133
       ],
       [
         "src/views/card/components/ChecklistNameInput.tsx",
@@ -8398,8 +8635,16 @@
         55
       ],
       [
+        "src/views/card/components/MarkDoneConfirmation.tsx",
+        36
+      ],
+      [
         "src/views/card/components/MemberSelector.tsx",
         82
+      ],
+      [
+        "src/views/card/components/MoveToDoneListConfirmation.tsx",
+        30
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
@@ -8415,11 +8660,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        236
+        255
       ],
       [
         "src/views/card/index.tsx",
-        249
+        289
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -8523,7 +8768,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        315
+        322
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -8824,22 +9069,29 @@
     ],
     "translation": "移除"
   },
+  "LM/utn": {
+    "message": "Remove as Done list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/List.tsx",
+        198
+      ]
+    ],
+    "translation": ""
+  },
   "nbwmEc": {
-    "translation": "",
     "message": "Remove blocker",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/views/card/components/BlockedBy.tsx",
-        123
-      ],
-      [
-        "src/views/card/components/ChecklistItemBlocker.tsx",
-        112
+        "src/views/card/components/BlockerSelector.tsx",
+        131
       ]
     ],
-    "obsolete": true
+    "translation": ""
   },
   "T/pF0Z": {
     "message": "Remove from favorites",
@@ -8885,20 +9137,18 @@
     "translation": "移除咗 {0} 個標籤：<0>{labelList}</0>"
   },
   "9xGLgk": {
-    "translation": "",
     "message": "removed a blocker",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        147
+        149
       ]
     ],
-    "obsolete": true
+    "translation": ""
   },
   "e9olSH": {
-    "translation": "",
     "message": "removed a blocker from a checklist item",
     "placeholders": {},
     "comments": [],
@@ -8907,7 +9157,8 @@
         "src/views/card/components/ActivityList.tsx",
         147
       ]
-    ]
+    ],
+    "translation": ""
   },
   "kQwvU8": {
     "message": "removed a label from the card",
@@ -8956,13 +9207,12 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        291
+        293
       ]
     ],
     "translation": "移除咗附件 <0>{0}</0>"
   },
   "yIKoH5": {
-    "translation": "",
     "message": "removed blocker <0>{0}</0>",
     "placeholders": {
       "0": [
@@ -8973,13 +9223,12 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        341
+        361
       ]
     ],
-    "obsolete": true
+    "translation": ""
   },
   "HM6TQZ": {
-    "translation": "",
     "message": "removed blocker <0>{0}</0> from a checklist item",
     "placeholders": {
       "0": [
@@ -8990,9 +9239,10 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        341
+        343
       ]
-    ]
+    ],
+    "translation": ""
   },
   "Qh7QmR": {
     "message": "Removed from favorites",
@@ -9017,7 +9267,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        203
+        205
       ]
     ],
     "translation": "移除咗標籤 <0>{0}</0>"
@@ -9033,7 +9283,7 @@
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        327
+        329
       ]
     ],
     "translation": "移除咗到期日"
@@ -9061,7 +9311,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        219
+        221
       ]
     ],
     "translation": "重新命名咗檢查清單 <0>{0}</0>"
@@ -9077,7 +9327,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        243
+        245
       ]
     ],
     "translation": "將檢查清單項目重新命名為 <0>{0}</0>"
@@ -9323,50 +9573,40 @@
     "translation": "搜尋看板同埋卡片..."
   },
   "NE0czk": {
-    "translation": "",
     "message": "Search cards...",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        293
+        312
       ]
-    ]
+    ],
+    "translation": ""
   },
   "PB35A6": {
-    "translation": "",
     "message": "Search for a card…",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/views/card/components/BlockedBy.tsx",
-        154
-      ],
-      [
-        "src/views/card/components/ChecklistItemBlocker.tsx",
-        144
+        "src/views/card/components/BlockerSelector.tsx",
+        175
       ]
     ],
-    "obsolete": true
+    "translation": ""
   },
   "SBTElJ": {
-    "translation": "",
     "message": "Searching…",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/views/card/components/BlockedBy.tsx",
-        161
-      ],
-      [
-        "src/views/card/components/ChecklistItemBlocker.tsx",
-        152
+        "src/views/card/components/BlockerSelector.tsx",
+        182
       ]
     ],
-    "obsolete": true
+    "translation": ""
   },
   "MpFIca": {
     "message": "seats",
@@ -9511,7 +9751,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        172
+        174
       ]
     ],
     "translation": "自行分配咗呢張卡片"
@@ -9596,6 +9836,18 @@
       [
         "src/views/home-dashboard/DailyQuestsSection.tsx",
         161
+      ]
+    ],
+    "translation": ""
+  },
+  "1crxj6": {
+    "message": "Set as Done list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/List.tsx",
+        199
       ]
     ],
     "translation": ""
@@ -9931,7 +10183,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        453
+        454
       ]
     ],
     "translation": "註冊使用 "
@@ -10085,6 +10337,18 @@
     ],
     "translation": ""
   },
+  "f6Hub0": {
+    "message": "Sort",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        74
+      ]
+    ],
+    "translation": ""
+  },
   "vnS6Rf": {
     "message": "SSO",
     "placeholders": {},
@@ -10184,11 +10448,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        231
+        232
       ],
       [
         "src/components/AuthForm.tsx",
-        248
+        249
       ]
     ],
     "translation": "成功"
@@ -10312,11 +10576,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        530
+        537
       ],
       [
         "src/views/board/index.tsx",
-        566
+        573
       ]
     ],
     "translation": "範本"
@@ -10528,6 +10792,18 @@
       ]
     ],
     "translation": "卡片已複製。"
+  },
+  "OFy9v+": {
+    "message": "The card will be shown as completed on the board.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MarkDoneConfirmation.tsx",
+        61
+      ]
+    ],
+    "translation": ""
   },
   "jlB2RY": {
     "message": "The current password you entered is incorrect.",
@@ -10853,6 +11129,18 @@
     ],
     "translation": "標題"
   },
+  "ibVs8L": {
+    "message": "Title (A–Z)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        125
+      ]
+    ],
+    "translation": ""
+  },
   "wK4OTM": {
     "message": "Title (optional)",
     "placeholders": {},
@@ -10864,6 +11152,18 @@
       ]
     ],
     "translation": "標題（選填）"
+  },
+  "LQscLG": {
+    "message": "Title (Z–A)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        127
+      ]
+    ],
+    "translation": ""
   },
   "Se/UIp": {
     "message": "To Do",
@@ -10981,6 +11281,18 @@
     ],
     "translation": "全球快速發展嘅團隊都信賴<0/>"
   },
+  "kSTagp": {
+    "message": "Unable to add blocker",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ChecklistItemRow.tsx",
+        145
+      ]
+    ],
+    "translation": ""
+  },
   "bZSICm": {
     "message": "Unable to add checklist item",
     "placeholders": {},
@@ -11012,7 +11324,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        248
+        288
       ]
     ],
     "translation": "無法新增標籤"
@@ -11048,7 +11360,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        313
+        320
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11072,7 +11384,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        200
+        203
       ]
     ],
     "translation": "無法建立卡片"
@@ -11096,7 +11408,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        78
+        79
       ]
     ],
     "translation": "無法建立列表"
@@ -11188,7 +11500,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        126
+        132
       ]
     ],
     "translation": "無法刪除檢查清單項目"
@@ -11229,6 +11541,18 @@
     ],
     "translation": "無法複製卡片"
   },
+  "tfNVP1": {
+    "message": "Unable to mark card as done",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MarkDoneConfirmation.tsx",
+        35
+      ]
+    ],
+    "translation": ""
+  },
   "K7k9u3": {
     "message": "Unable to move card",
     "placeholders": {},
@@ -11237,6 +11561,10 @@
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
         41
+      ],
+      [
+        "src/views/card/components/MoveToDoneListConfirmation.tsx",
+        29
       ]
     ],
     "translation": "無法移動卡片"
@@ -11318,17 +11646,16 @@
     "translation": "無法測試 Webhook"
   },
   "nAwvz3": {
-    "translation": "",
     "message": "Unable to update blockers",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/views/card/components/BlockedBy.tsx",
-        42
+        "src/views/card/components/BlockerSelector.tsx",
+        46
       ]
     ],
-    "obsolete": true
+    "translation": ""
   },
   "T7Mywq": {
     "message": "Unable to update board",
@@ -11373,11 +11700,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        273
+        280
       ],
       [
         "src/views/card/index.tsx",
-        235
+        254
       ]
     ],
     "translation": "無法更新卡片"
@@ -11401,7 +11728,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        98
+        104
       ]
     ],
     "translation": "無法更新檢查清單項目"
@@ -11448,8 +11775,12 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/List.tsx",
+        90
+      ],
+      [
         "src/views/board/index.tsx",
-        217
+        224
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -11533,7 +11864,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        186
+        188
       ]
     ],
     "translation": "從卡片取消分配 <0>{0}</0>"
@@ -11545,7 +11876,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        183
+        185
       ]
     ],
     "translation": "自行取消分配咗呢張卡片"
@@ -11886,7 +12217,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        155
+        157
       ]
     ],
     "translation": "將標題更新為 <0>{0}</0>"
@@ -11938,7 +12269,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        51
+        52
       ]
     ],
     "translation": "上傳失敗"
@@ -12454,7 +12785,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        530
+        537
       ],
       [
         "src/views/boards/index.tsx",
@@ -12802,7 +13133,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        117
+        167
       ],
       [
         "src/views/board/components/UpdateBoardSlugButton.tsx",
@@ -12814,11 +13145,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        604
+        612
       ],
       [
         "src/views/board/index.tsx",
-        662
+        670
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -12842,7 +13173,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        249
+        250
       ]
     ],
     "translation": "你已成功登入。"
@@ -12854,7 +13185,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        232
+        233
       ]
     ],
     "translation": "你已成功註冊。"
@@ -12998,7 +13329,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        46
+        47
       ]
     ],
     "translation": "你嘅檔案已成功上傳。"

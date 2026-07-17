@@ -34,6 +34,9 @@ export const activityTypes = [
   "card.updated.member.removed",
   "card.updated.checklist.item.blocker.added",
   "card.updated.checklist.item.blocker.removed",
+  // Card-level (card-to-card) blocker activities
+  "card.updated.blocker.added",
+  "card.updated.blocker.removed",
   "card.updated.comment.added",
   "card.updated.comment.updated",
   "card.updated.comment.deleted",
@@ -114,6 +117,10 @@ export const cardsRelations = relations(cards, ({ one, many }) => ({
   activities: many(cardActivities),
   checklists: many(checklists),
   attachments: many(cardAttachments),
+  // Cards that block this card (this card is `cardId` in _card_blocking)
+  blockedBy: many(cardBlocking, { relationName: "cardBlockedBy" }),
+  // Cards that this card blocks (this card is `blockerCardId` in _card_blocking)
+  blocking: many(cardBlocking, { relationName: "cardBlocking" }),
 }));
 
 export const cardActivities = pgTable("card_activity", {
@@ -266,6 +273,34 @@ export const cardToWorkspaceMembersRelations = relations(
     }),
   }),
 );
+
+export const cardBlocking = pgTable(
+  "_card_blocking",
+  {
+    // The card that is blocked (the dependent card)
+    cardId: bigint("cardId", { mode: "number" })
+      .notNull()
+      .references(() => cards.id, { onDelete: "cascade" }),
+    // The card that blocks it (the prerequisite)
+    blockerCardId: bigint("blockerCardId", { mode: "number" })
+      .notNull()
+      .references(() => cards.id, { onDelete: "cascade" }),
+  },
+  (t) => [primaryKey({ columns: [t.cardId, t.blockerCardId] })],
+).enableRLS();
+
+export const cardBlockingRelations = relations(cardBlocking, ({ one }) => ({
+  card: one(cards, {
+    fields: [cardBlocking.cardId],
+    references: [cards.id],
+    relationName: "cardBlockedBy",
+  }),
+  blocker: one(cards, {
+    fields: [cardBlocking.blockerCardId],
+    references: [cards.id],
+    relationName: "cardBlocking",
+  }),
+}));
 
 export const comments = pgTable("card_comments", {
   id: bigserial("id", { mode: "number" }).primaryKey(),

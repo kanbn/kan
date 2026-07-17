@@ -704,6 +704,130 @@ export const cardRouter = createTRPCRouter({
 
       return { newLabel: true };
     }),
+  addOrRemoveBlocker: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Add or remove a blocker from a card",
+        method: "PUT",
+        path: "/cards/{cardPublicId}/blockers/{blockerCardPublicId}",
+        description:
+          "Adds or removes a blocker card from a card. The blocker must be finished before this card can be completed.",
+        tags: ["Cards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+        blockerCardPublicId: z.string().min(12),
+      }),
+    )
+    .output(z.object({ newBlocker: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      if (input.cardPublicId === input.blockerCardPublicId)
+        throw new TRPCError({
+          message: `A card cannot block itself`,
+          code: "BAD_REQUEST",
+        });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!card)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertPermission(ctx.db, userId, card.workspaceId, "card:edit");
+
+      const blocker = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.blockerCardPublicId,
+      );
+
+      if (!blocker)
+        throw new TRPCError({
+          message: `Blocker card with public ID ${input.blockerCardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      if (blocker.workspaceId !== card.workspaceId)
+        throw new TRPCError({
+          message: `Blocker must be in the same workspace`,
+          code: "BAD_REQUEST",
+        });
+
+      const cardBlockerIds = { cardId: card.id, blockerCardId: blocker.id };
+
+      const existingBlocker = await cardRepo.getCardBlockerRelationship(
+        ctx.db,
+        cardBlockerIds,
+      );
+
+      const blockerCard = await cardRepo.getByPublicId(
+        ctx.db,
+        input.blockerCardPublicId,
+      );
+
+      if (existingBlocker) {
+        const deletedCardBlockerRelationship =
+          await cardRepo.hardDeleteCardBlockerRelationship(
+            ctx.db,
+            cardBlockerIds,
+          );
+
+        if (!deletedCardBlockerRelationship)
+          throw new TRPCError({
+            message: `Failed to remove blocker from card`,
+            code: "INTERNAL_SERVER_ERROR",
+          });
+
+        await cardActivityRepo.create(ctx.db, {
+          type: "card.updated.blocker.removed" as const,
+          cardId: card.id,
+          fromTitle: blockerCard?.title,
+          createdBy: userId,
+        });
+
+        return { newBlocker: false };
+      }
+
+      // Prevent circular dependencies
+      if (await cardRepo.wouldCreateCycle(ctx.db, cardBlockerIds))
+        throw new TRPCError({
+          message: `Adding this blocker would create a circular dependency`,
+          code: "BAD_REQUEST",
+        });
+
+      const newCardBlockerRelationship =
+        await cardRepo.createCardBlockerRelationship(ctx.db, cardBlockerIds);
+
+      if (!newCardBlockerRelationship)
+        throw new TRPCError({
+          message: `Failed to add blocker to card`,
+          code: "INTERNAL_SERVER_ERROR",
+        });
+
+      await cardActivityRepo.create(ctx.db, {
+        type: "card.updated.blocker.added" as const,
+        cardId: card.id,
+        toTitle: blockerCard?.title,
+        createdBy: userId,
+      });
+
+      return { newBlocker: true };
+    }),
   addOrRemoveMember: protectedProcedure
     .meta({
       openapi: {

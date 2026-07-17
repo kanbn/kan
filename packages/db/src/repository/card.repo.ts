@@ -18,6 +18,7 @@ import {
   boards,
   cardActivities,
   cardAttachments,
+  cardBlocking,
   cards,
   cardsToLabels,
   cardToWorkspaceMembers,
@@ -485,6 +486,33 @@ export const createCardMemberRelationship = async (
   return { success: !!result };
 };
 
+export const getCardBlockerRelationship = async (
+  db: dbClient,
+  args: { cardId: number; blockerCardId: number },
+) => {
+  return db.query.cardBlocking.findFirst({
+    where: and(
+      eq(cardBlocking.cardId, args.cardId),
+      eq(cardBlocking.blockerCardId, args.blockerCardId),
+    ),
+  });
+};
+
+export const createCardBlockerRelationship = async (
+  db: dbClient,
+  cardBlockerRelationshipInput: { cardId: number; blockerCardId: number },
+) => {
+  const [result] = await db
+    .insert(cardBlocking)
+    .values({
+      cardId: cardBlockerRelationshipInput.cardId,
+      blockerCardId: cardBlockerRelationshipInput.blockerCardId,
+    })
+    .returning();
+
+  return result;
+};
+
 export const getWithListAndMembersByPublicId = async (
   db: dbClient,
   cardPublicId: string,
@@ -554,6 +582,18 @@ export const getWithListAndMembersByPublicId = async (
                   },
                 },
               },
+            },
+          },
+        },
+      },
+      blockedBy: {
+        with: {
+          blocker: {
+            columns: {
+              publicId: true,
+              title: true,
+              cardNumber: true,
+              isDone: true,
             },
           },
         },
@@ -714,6 +754,24 @@ export const getWithListAndMembersByPublicId = async (
 
   if (!card) return null;
 
+  // Cards that THIS card is blocking — the union of direct card-to-card
+  // blocking (_card_blocking) and cards whose checklist items are blocked by
+  // this card (_checklist_item_blocking). Deduped by publicId.
+  const blocking = await db.execute(sql`
+    SELECT DISTINCT c."publicId", c."title", c."cardNumber", c."isDone"
+    FROM "card" c
+    WHERE c."deletedAt" IS NULL AND (
+      c."id" IN (SELECT "cardId" FROM "_card_blocking" WHERE "blockerCardId" = ${card.id})
+      OR c."id" IN (
+        SELECT ccl2."cardId"
+        FROM "_checklist_item_blocking" cb
+        JOIN "card_checklist_item" cci2 ON cci2."id" = cb."checklistItemId"
+        JOIN "card_checklist" ccl2 ON ccl2."id" = cci2."checklistId"
+        WHERE cb."blockerCardId" = ${card.id}
+      )
+    )
+  `);
+
   const formattedResult = {
     ...card,
     labels: card.labels.map((label) => label.label),
@@ -721,6 +779,13 @@ export const getWithListAndMembersByPublicId = async (
     activities: card.activities.filter(
       (activity) => !activity.comment?.deletedAt,
     ),
+    blockedBy: (card.blockedBy ?? []).map((b) => b.blocker),
+    blocking: (blocking?.rows ?? []).map((row) => ({
+      publicId: row.publicId as string,
+      title: row.title as string,
+      cardNumber: row.cardNumber as number | null,
+      isDone: row.isDone as boolean,
+    })),
     checklists: card.checklists.map((checklist) => ({
       ...checklist,
       items: checklist.items.map((item) => ({
@@ -1030,6 +1095,49 @@ export const hardDeleteAllCardLabelRelationships = async (
     .returning();
 
   return result;
+};
+
+export const hardDeleteCardBlockerRelationship = async (
+  db: dbClient,
+  args: { cardId: number; blockerCardId: number },
+) => {
+  const [result] = await db
+    .delete(cardBlocking)
+    .where(
+      and(
+        eq(cardBlocking.cardId, args.cardId),
+        eq(cardBlocking.blockerCardId, args.blockerCardId),
+      ),
+    )
+    .returning();
+
+  return result;
+};
+
+/**
+ * Would adding "cardId is blocked by blockerCardId" create a cycle?
+ * Walks the blockerCardId's own blockers transitively (bounded depth);
+ * true if cardId is reachable (i.e. blockerCardId is already blocked by cardId).
+ */
+export const wouldCreateCycle = async (
+  db: dbClient,
+  args: { cardId: number; blockerCardId: number },
+) => {
+  const result = await db.execute(sql`
+    WITH RECURSIVE chain(depth, blockerId) AS (
+      SELECT 1, "blockerCardId"
+      FROM "_card_blocking"
+      WHERE "cardId" = ${args.blockerCardId}
+      UNION ALL
+      SELECT c.depth + 1, cb."blockerCardId"
+      FROM chain c
+      JOIN "_card_blocking" cb ON cb."cardId" = c.blockerId
+      WHERE c.depth < 16
+    )
+    SELECT 1 AS hit FROM chain WHERE blockerId = ${args.cardId} LIMIT 1
+  `);
+
+  return (result?.rows?.length ?? 0) > 0;
 };
 
 export const getWorkspaceAndCardIdByCardPublicId = async (

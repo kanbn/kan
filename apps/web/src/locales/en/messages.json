@@ -59,7 +59,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        321
+        361
       ]
     ],
     "translation": "{0} | {1}"
@@ -107,7 +107,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        506
+        520
       ]
     ],
     "translation": "{0} labels"
@@ -123,7 +123,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        557
+        564
       ]
     ],
     "translation": "{0} not found"
@@ -417,11 +417,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        475
+        568
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        205
+        206
       ]
     ],
     "translation": "Activity"
@@ -485,7 +485,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        136
+        186
       ]
     ],
     "translation": "Add a card"
@@ -532,8 +532,16 @@
     "comments": [],
     "origin": [
       [
+        "src/views/card/components/BlockerSelector.tsx",
+        145
+      ],
+      [
+        "src/views/card/components/BlockerSelector.tsx",
+        158
+      ],
+      [
         "src/views/card/components/ChecklistItemRow.tsx",
-        345
+        364
       ]
     ],
     "translation": "Add blocker"
@@ -585,7 +593,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        224
+        237
       ]
     ],
     "translation": "Add details..."
@@ -666,20 +674,18 @@
     "translation": "added {0} labels: <0>{labelList}</0>"
   },
   "QwTiT4": {
-    "translation": "added a blocker",
     "message": "added a blocker",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        146
+        148
       ]
     ],
-    "obsolete": true
+    "translation": "added a blocker"
   },
   "Xjyrmu": {
-    "translation": "added a blocker to a checklist item",
     "message": "added a blocker to a checklist item",
     "placeholders": {},
     "comments": [],
@@ -688,7 +694,8 @@
         "src/views/card/components/ActivityList.tsx",
         146
       ]
-    ]
+    ],
+    "translation": "added a blocker to a checklist item"
   },
   "h4VV67": {
     "message": "added a checklist",
@@ -761,7 +768,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        281
+        283
       ]
     ],
     "translation": "added an attachment <0>{0}</0>"
@@ -777,7 +784,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        211
+        213
       ]
     ],
     "translation": "added checklist <0>{0}</0>"
@@ -793,7 +800,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        235
+        237
       ]
     ],
     "translation": "added checklist item <0>{0}</0>"
@@ -809,7 +816,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        195
+        197
       ]
     ],
     "translation": "added label <0>{0}</0>"
@@ -844,6 +851,18 @@
       ]
     ],
     "translation": "Adding a new member will cost an additional {price} ({billingType}) per seat."
+  },
+  "mDGyPe": {
+    "message": "Adding this blocker would create a circular dependency.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ChecklistItemRow.tsx",
+        146
+      ]
+    ],
+    "translation": "Adding this blocker would create a circular dependency."
   },
   "D7/JvJ": {
     "message": "Adjust the square crop to fit your avatar.",
@@ -1380,7 +1399,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        175
+        177
       ]
     ],
     "translation": "assigned <0>{0}</0> to the card"
@@ -1404,7 +1423,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        45
+        46
       ]
     ],
     "translation": "Attachment uploaded"
@@ -1586,21 +1605,41 @@
     "translation": "Billing portal"
   },
   "++lIxB": {
-    "translation": "Blocked by",
     "message": "Blocked by",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/card/components/BlockedBy.tsx",
-        97
-      ],
-      [
-        "src/views/card/components/ChecklistItemBlocker.tsx",
-        126
+        105
       ]
     ],
+    "translation": "Blocked by",
     "obsolete": true
+  },
+  "KSYOGG": {
+    "translation": "Blockers",
+    "message": "Blockers",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/index.tsx",
+        159
+      ]
+    ]
+  },
+  "2BsWNa": {
+    "message": "Blocking",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/BlockingIndicator.tsx",
+        30
+      ]
+    ],
+    "translation": "Blocking"
   },
   "4RoY9J": {
     "message": "Blog Post",
@@ -1621,11 +1660,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        530
+        537
       ],
       [
         "src/views/card/index.tsx",
-        321
+        361
       ],
       [
         "src/views/public/board/index.tsx",
@@ -2316,6 +2355,10 @@
         44
       ],
       [
+        "src/views/card/components/BlockerSelector.tsx",
+        217
+      ],
+      [
         "src/views/card/components/Comment.tsx",
         195
       ],
@@ -2330,6 +2373,10 @@
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
         77
+      ],
+      [
+        "src/views/card/components/MarkDoneConfirmation.tsx",
+        69
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -2377,7 +2424,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        321
+        361
       ]
     ],
     "translation": "Card"
@@ -2401,11 +2448,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        382
+        422
       ],
       [
         "src/views/card/index.tsx",
-        419
+        465
       ]
     ],
     "translation": "Card not found"
@@ -2417,7 +2464,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        372
+        386
       ]
     ],
     "translation": "Card title"
@@ -2429,7 +2476,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        308
+        315
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2501,11 +2548,11 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        306
+        308
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        320
+        322
       ]
     ],
     "translation": "changed the due date to <0>{formattedDate}</0>"
@@ -2549,7 +2596,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        641
+        674
       ]
     ],
     "translation": "Checklist"
@@ -2693,7 +2740,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        373
+        413
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -2845,7 +2892,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        252
+        254
       ]
     ],
     "translation": "completed checklist item <0>{0}</0>"
@@ -3065,7 +3112,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        453
+        454
       ]
     ],
     "translation": "Continue with "
@@ -3081,7 +3128,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        371
+        372
       ]
     ],
     "translation": "Continue with {0}"
@@ -3233,11 +3280,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        648
+        681
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        141
+        142
       ]
     ],
     "translation": "Create another"
@@ -3261,7 +3308,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        658
+        691
       ]
     ],
     "translation": "Create card"
@@ -3309,7 +3356,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        153
+        154
       ]
     ],
     "translation": "Create list"
@@ -3353,7 +3400,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        468
+        482
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3369,11 +3416,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        92
+        94
       ],
       [
         "src/views/board/index.tsx",
-        671
+        679
       ]
     ],
     "translation": "Create new list"
@@ -3425,6 +3472,30 @@
       ]
     ],
     "translation": "Created"
+  },
+  "hqmh/S": {
+    "message": "Created (newest)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        121
+      ]
+    ],
+    "translation": "Created (newest)"
+  },
+  "KKohDw": {
+    "message": "Created (oldest)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        123
+      ]
+    ],
+    "translation": "Created (oldest)"
   },
   "MXSt4t": {
     "message": "Created {0}",
@@ -3815,7 +3886,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        147
+        214
       ]
     ],
     "translation": "Delete list"
@@ -3899,7 +3970,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        227
+        229
       ]
     ],
     "translation": "deleted checklist <0>{0}</0>"
@@ -3915,7 +3986,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        270
+        272
       ]
     ],
     "translation": "deleted checklist item <0>{0}</0>"
@@ -4160,9 +4231,25 @@
       [
         "src/views/boards/components/TemplateBoards.tsx",
         61
+      ],
+      [
+        "src/views/card/index.tsx",
+        525
       ]
     ],
     "translation": "Done"
+  },
+  "qJDNEJ": {
+    "message": "Done list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/List.tsx",
+        146
+      ]
+    ],
+    "translation": "Done list"
   },
   "R3FsF4": {
     "message": "Download failed",
@@ -4187,14 +4274,38 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        523
+        537
       ],
       [
         "src/views/card/index.tsx",
-        153
+        170
       ]
     ],
     "translation": "Due date"
+  },
+  "Qbf23S": {
+    "message": "Due date (latest)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        131
+      ]
+    ],
+    "translation": "Due date (latest)"
+  },
+  "zjCzPE": {
+    "message": "Due date (soonest)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        129
+      ]
+    ],
+    "translation": "Due date (soonest)"
   },
   "ri1hHe": {
     "message": "Due next month",
@@ -4411,7 +4522,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        454
+        455
       ]
     ],
     "translation": "email"
@@ -4591,7 +4702,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        418
+        419
       ]
     ],
     "translation": "Enter your email address"
@@ -4603,7 +4714,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        406
+        407
       ]
     ],
     "translation": "Enter your name"
@@ -4627,7 +4738,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        432
+        433
       ]
     ],
     "translation": "Enter your password"
@@ -5044,7 +5155,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        307
+        308
       ]
     ],
     "translation": "Failed to login with {0}. Please try again."
@@ -5084,7 +5195,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        52
+        53
       ]
     ],
     "translation": "Failed to upload attachment. Please try again."
@@ -5508,7 +5619,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        656
+        664
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -6435,6 +6546,18 @@
     ],
     "translation": "Keep in mind that this action is irreversible."
   },
+  "64rBPS": {
+    "message": "Keep your completed work organized in one place.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MoveToDoneListConfirmation.tsx",
+        52
+      ]
+    ],
+    "translation": "Keep your completed work organized in one place."
+  },
   "h7MgpO": {
     "message": "Keyboard Shortcuts",
     "placeholders": {},
@@ -6462,11 +6585,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        472
+        486
       ],
       [
         "src/views/card/index.tsx",
-        133
+        138
       ]
     ],
     "translation": "Labels"
@@ -6518,6 +6641,30 @@
       ]
     ],
     "translation": "Large"
+  },
+  "v9zd8O": {
+    "message": "Last updated (newest)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        117
+      ]
+    ],
+    "translation": "Last updated (newest)"
+  },
+  "v2g4Rs": {
+    "message": "Last updated (oldest)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        119
+      ]
+    ],
+    "translation": "Last updated (oldest)"
   },
   "8Is1ih": {
     "message": "Launch offer",
@@ -6667,7 +6814,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        306
+        313
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -6695,7 +6842,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        124
+        129
       ]
     ],
     "translation": "List"
@@ -6707,7 +6854,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        129
+        130
       ]
     ],
     "translation": "List name"
@@ -6743,7 +6890,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        602
+        623
       ]
     ],
     "translation": "Load more activities"
@@ -6767,7 +6914,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        602
+        623
       ],
       [
         "src/views/home-dashboard/RecentActivitySection.tsx",
@@ -6856,7 +7003,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        454
+        455
       ]
     ],
     "translation": "magic link"
@@ -6889,8 +7036,59 @@
     ],
     "translation": "Manage members"
   },
+  "BWTzAb": {
+    "message": "Manual",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        115
+      ]
+    ],
+    "translation": "Manual"
+  },
+  "3Sdni6": {
+    "message": "Mark as done",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MarkDoneConfirmation.tsx",
+        72
+      ],
+      [
+        "src/views/card/index.tsx",
+        560
+      ]
+    ],
+    "translation": "Mark as done"
+  },
+  "sKd49Y": {
+    "message": "Mark as not done",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/index.tsx",
+        540
+      ]
+    ],
+    "translation": "Mark as not done"
+  },
+  "kqZykd": {
+    "message": "Mark this card as done?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MarkDoneConfirmation.tsx",
+        58
+      ]
+    ],
+    "translation": "Mark this card as done?"
+  },
   "JtTwCi": {
-    "translation": "marked a checklist item as blocked by <0>{0}</0>",
     "message": "marked a checklist item as blocked by <0>{0}</0>",
     "placeholders": {
       "0": [
@@ -6901,9 +7099,10 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        332
+        334
       ]
-    ]
+    ],
+    "translation": "marked a checklist item as blocked by <0>{0}</0>"
   },
   "IDvohQ": {
     "message": "marked a checklist item as incomplete",
@@ -6928,13 +7127,12 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        261
+        263
       ]
     ],
     "translation": "marked checklist item <0>{0}</0> as incomplete"
   },
   "80PbnH": {
-    "translation": "marked this card as blocked by <0>{0}</0>",
     "message": "marked this card as blocked by <0>{0}</0>",
     "placeholders": {
       "0": [
@@ -6945,10 +7143,10 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        332
+        352
       ]
     ],
-    "obsolete": true
+    "translation": "marked this card as blocked by <0>{0}</0>"
   },
   "vo2a+a": {
     "message": "Marketing",
@@ -7045,11 +7243,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        430
+        444
       ],
       [
         "src/views/card/index.tsx",
-        143
+        148
       ],
       [
         "src/views/members/index.tsx",
@@ -7134,6 +7332,18 @@
     ],
     "translation": "monthly billing"
   },
+  "jQ0DrF": {
+    "message": "Move this card to the Done list?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MoveToDoneListConfirmation.tsx",
+        49
+      ]
+    ],
+    "translation": "Move this card to the Done list?"
+  },
   "51UCsN": {
     "message": "Move to another list",
     "placeholders": {},
@@ -7145,6 +7355,18 @@
       ]
     ],
     "translation": "Move to another list"
+  },
+  "CjE8qp": {
+    "message": "Move to Done list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MoveToDoneListConfirmation.tsx",
+        63
+      ]
+    ],
+    "translation": "Move to Done list"
   },
   "J4+OTA": {
     "message": "Move to list",
@@ -7172,7 +7394,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        163
+        165
       ]
     ],
     "translation": "moved the card from <0>{0}</0> to<1>{1}</1>"
@@ -7329,7 +7551,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        355
+        369
       ]
     ],
     "translation": "New card"
@@ -7377,11 +7599,11 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        113
+        114
       ],
       [
         "src/views/board/index.tsx",
-        620
+        628
       ]
     ],
     "translation": "New list"
@@ -7517,7 +7739,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        385
+        386
       ]
     ],
     "translation": "No authentication methods are currently available"
@@ -7572,21 +7794,16 @@
     "translation": "No cards assigned to you yet."
   },
   "l/Tg71": {
-    "translation": "No cards found",
     "message": "No cards found",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/views/card/components/BlockedBy.tsx",
-        166
-      ],
-      [
-        "src/views/card/components/ChecklistItemBlocker.tsx",
-        157
+        "src/views/card/components/BlockerSelector.tsx",
+        187
       ]
     ],
-    "obsolete": true
+    "translation": "No cards found"
   },
   "OpNhRn": {
     "message": "No credit card required",
@@ -7655,7 +7872,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        652
+        660
       ]
     ],
     "translation": "No lists"
@@ -7667,7 +7884,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        657
+        665
       ]
     ],
     "translation": "No lists have been created yet"
@@ -7760,17 +7977,29 @@
     ],
     "translation": "No wins yet. Find something to celebrate!"
   },
+  "PBxg/E": {
+    "message": "Not now",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MoveToDoneListConfirmation.tsx",
+        60
+      ]
+    ],
+    "translation": "Not now"
+  },
   "3Xx0TS": {
-    "translation": "Nothing found.",
     "message": "Nothing found.",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        316
+        335
       ]
-    ]
+    ],
+    "translation": "Nothing found."
   },
   "iDNBZe": {
     "message": "Notifications",
@@ -7911,7 +8140,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        396
+        397
       ]
     ],
     "translation": "or"
@@ -8035,7 +8264,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        274
+        275
       ]
     ],
     "translation": "Password is required to login."
@@ -8047,7 +8276,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        273
+        274
       ]
     ],
     "translation": "Password is required to sign up."
@@ -8323,7 +8552,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        422
+        423
       ]
     ],
     "translation": "Please enter a valid email address"
@@ -8335,7 +8564,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        410
+        411
       ]
     ],
     "translation": "Please enter a valid name"
@@ -8347,7 +8576,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        437
+        438
       ]
     ],
     "translation": "Please enter a valid password"
@@ -8414,12 +8643,16 @@
         68
       ],
       [
+        "src/views/board/components/List.tsx",
+        91
+      ],
+      [
         "src/views/board/components/NewCardForm.tsx",
-        203
+        206
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        79
+        80
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
@@ -8439,11 +8672,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        218
+        225
       ],
       [
         "src/views/board/index.tsx",
-        274
+        281
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -8458,12 +8691,16 @@
         74
       ],
       [
-        "src/views/card/components/ChecklistItemRow.tsx",
-        99
+        "src/views/card/components/BlockerSelector.tsx",
+        47
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        127
+        105
+      ],
+      [
+        "src/views/card/components/ChecklistItemRow.tsx",
+        133
       ],
       [
         "src/views/card/components/ChecklistNameInput.tsx",
@@ -8502,8 +8739,16 @@
         55
       ],
       [
+        "src/views/card/components/MarkDoneConfirmation.tsx",
+        36
+      ],
+      [
         "src/views/card/components/MemberSelector.tsx",
         82
+      ],
+      [
+        "src/views/card/components/MoveToDoneListConfirmation.tsx",
+        30
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
@@ -8519,11 +8764,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        236
+        255
       ],
       [
         "src/views/card/index.tsx",
-        249
+        289
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -8627,7 +8872,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        315
+        322
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -8928,22 +9173,29 @@
     ],
     "translation": "Remove"
   },
+  "LM/utn": {
+    "message": "Remove as Done list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/List.tsx",
+        198
+      ]
+    ],
+    "translation": "Remove as Done list"
+  },
   "nbwmEc": {
-    "translation": "Remove blocker",
     "message": "Remove blocker",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/views/card/components/BlockedBy.tsx",
-        123
-      ],
-      [
-        "src/views/card/components/ChecklistItemBlocker.tsx",
-        112
+        "src/views/card/components/BlockerSelector.tsx",
+        131
       ]
     ],
-    "obsolete": true
+    "translation": "Remove blocker"
   },
   "T/pF0Z": {
     "message": "Remove from favorites",
@@ -8989,20 +9241,18 @@
     "translation": "removed {0} labels: <0>{labelList}</0>"
   },
   "9xGLgk": {
-    "translation": "removed a blocker",
     "message": "removed a blocker",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        147
+        149
       ]
     ],
-    "obsolete": true
+    "translation": "removed a blocker"
   },
   "e9olSH": {
-    "translation": "removed a blocker from a checklist item",
     "message": "removed a blocker from a checklist item",
     "placeholders": {},
     "comments": [],
@@ -9011,7 +9261,8 @@
         "src/views/card/components/ActivityList.tsx",
         147
       ]
-    ]
+    ],
+    "translation": "removed a blocker from a checklist item"
   },
   "kQwvU8": {
     "message": "removed a label from the card",
@@ -9060,13 +9311,12 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        291
+        293
       ]
     ],
     "translation": "removed an attachment <0>{0}</0>"
   },
   "yIKoH5": {
-    "translation": "removed blocker <0>{0}</0>",
     "message": "removed blocker <0>{0}</0>",
     "placeholders": {
       "0": [
@@ -9077,13 +9327,12 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        341
+        361
       ]
     ],
-    "obsolete": true
+    "translation": "removed blocker <0>{0}</0>"
   },
   "HM6TQZ": {
-    "translation": "removed blocker <0>{0}</0> from a checklist item",
     "message": "removed blocker <0>{0}</0> from a checklist item",
     "placeholders": {
       "0": [
@@ -9094,9 +9343,10 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        341
+        343
       ]
-    ]
+    ],
+    "translation": "removed blocker <0>{0}</0> from a checklist item"
   },
   "Qh7QmR": {
     "message": "Removed from favorites",
@@ -9121,7 +9371,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        203
+        205
       ]
     ],
     "translation": "removed label <0>{0}</0>"
@@ -9137,7 +9387,7 @@
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        327
+        329
       ]
     ],
     "translation": "removed the due date"
@@ -9165,7 +9415,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        219
+        221
       ]
     ],
     "translation": "renamed checklist <0>{0}</0>"
@@ -9181,7 +9431,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        243
+        245
       ]
     ],
     "translation": "renamed checklist item to <0>{0}</0>"
@@ -9427,50 +9677,40 @@
     "translation": "Search boards and cards..."
   },
   "NE0czk": {
-    "translation": "Search cards...",
     "message": "Search cards...",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        293
+        312
       ]
-    ]
+    ],
+    "translation": "Search cards..."
   },
   "PB35A6": {
-    "translation": "Search for a card…",
     "message": "Search for a card…",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/views/card/components/BlockedBy.tsx",
-        154
-      ],
-      [
-        "src/views/card/components/ChecklistItemBlocker.tsx",
-        144
+        "src/views/card/components/BlockerSelector.tsx",
+        175
       ]
     ],
-    "obsolete": true
+    "translation": "Search for a card…"
   },
   "SBTElJ": {
-    "translation": "Searching…",
     "message": "Searching…",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/views/card/components/BlockedBy.tsx",
-        161
-      ],
-      [
-        "src/views/card/components/ChecklistItemBlocker.tsx",
-        152
+        "src/views/card/components/BlockerSelector.tsx",
+        182
       ]
     ],
-    "obsolete": true
+    "translation": "Searching…"
   },
   "MpFIca": {
     "message": "seats",
@@ -9615,7 +9855,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        172
+        174
       ]
     ],
     "translation": "self-assigned the card"
@@ -9703,6 +9943,18 @@
       ]
     ],
     "translation": "Set an action..."
+  },
+  "1crxj6": {
+    "message": "Set as Done list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/List.tsx",
+        199
+      ]
+    ],
+    "translation": "Set as Done list"
   },
   "8AbRER": {
     "message": "Set due date",
@@ -10052,7 +10304,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        453
+        454
       ]
     ],
     "translation": "Sign up with "
@@ -10206,6 +10458,18 @@
     ],
     "translation": "Something you're curious about..."
   },
+  "f6Hub0": {
+    "message": "Sort",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        74
+      ]
+    ],
+    "translation": "Sort"
+  },
   "vnS6Rf": {
     "message": "SSO",
     "placeholders": {},
@@ -10305,11 +10569,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        231
+        232
       ],
       [
         "src/components/AuthForm.tsx",
-        248
+        249
       ]
     ],
     "translation": "Success"
@@ -10433,11 +10697,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        530
+        537
       ],
       [
         "src/views/board/index.tsx",
-        566
+        573
       ]
     ],
     "translation": "Template"
@@ -10649,6 +10913,18 @@
       ]
     ],
     "translation": "The card has been duplicated."
+  },
+  "OFy9v+": {
+    "message": "The card will be shown as completed on the board.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MarkDoneConfirmation.tsx",
+        61
+      ]
+    ],
+    "translation": "The card will be shown as completed on the board."
   },
   "jlB2RY": {
     "message": "The current password you entered is incorrect.",
@@ -10974,6 +11250,18 @@
     ],
     "translation": "Title"
   },
+  "ibVs8L": {
+    "message": "Title (A–Z)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        125
+      ]
+    ],
+    "translation": "Title (A–Z)"
+  },
   "wK4OTM": {
     "message": "Title (optional)",
     "placeholders": {},
@@ -10985,6 +11273,18 @@
       ]
     ],
     "translation": "Title (optional)"
+  },
+  "LQscLG": {
+    "message": "Title (Z–A)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/Sort.tsx",
+        127
+      ]
+    ],
+    "translation": "Title (Z–A)"
   },
   "Se/UIp": {
     "message": "To Do",
@@ -11102,6 +11402,18 @@
     ],
     "translation": "Trusted by fast-moving teams<0/>around the world"
   },
+  "kSTagp": {
+    "message": "Unable to add blocker",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ChecklistItemRow.tsx",
+        145
+      ]
+    ],
+    "translation": "Unable to add blocker"
+  },
   "bZSICm": {
     "message": "Unable to add checklist item",
     "placeholders": {},
@@ -11133,7 +11445,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        248
+        288
       ]
     ],
     "translation": "Unable to add label"
@@ -11169,7 +11481,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        313
+        320
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11193,7 +11505,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        200
+        203
       ]
     ],
     "translation": "Unable to create card"
@@ -11217,7 +11529,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        78
+        79
       ]
     ],
     "translation": "Unable to create list"
@@ -11309,7 +11621,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        126
+        132
       ]
     ],
     "translation": "Unable to delete checklist item"
@@ -11350,6 +11662,18 @@
     ],
     "translation": "Unable to duplicate card"
   },
+  "tfNVP1": {
+    "message": "Unable to mark card as done",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/MarkDoneConfirmation.tsx",
+        35
+      ]
+    ],
+    "translation": "Unable to mark card as done"
+  },
   "K7k9u3": {
     "message": "Unable to move card",
     "placeholders": {},
@@ -11358,6 +11682,10 @@
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
         41
+      ],
+      [
+        "src/views/card/components/MoveToDoneListConfirmation.tsx",
+        29
       ]
     ],
     "translation": "Unable to move card"
@@ -11439,17 +11767,16 @@
     "translation": "Unable to test webhook"
   },
   "nAwvz3": {
-    "translation": "Unable to update blockers",
     "message": "Unable to update blockers",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
-        "src/views/card/components/BlockedBy.tsx",
-        42
+        "src/views/card/components/BlockerSelector.tsx",
+        46
       ]
     ],
-    "obsolete": true
+    "translation": "Unable to update blockers"
   },
   "T7Mywq": {
     "message": "Unable to update board",
@@ -11494,11 +11821,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        273
+        280
       ],
       [
         "src/views/card/index.tsx",
-        235
+        254
       ]
     ],
     "translation": "Unable to update card"
@@ -11522,7 +11849,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        98
+        104
       ]
     ],
     "translation": "Unable to update checklist item"
@@ -11569,8 +11896,12 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/List.tsx",
+        90
+      ],
+      [
         "src/views/board/index.tsx",
-        217
+        224
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -11654,7 +11985,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        186
+        188
       ]
     ],
     "translation": "unassigned <0>{0}</0> from the card"
@@ -11666,7 +11997,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        183
+        185
       ]
     ],
     "translation": "unassigned themselves from the card"
@@ -12007,7 +12338,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        155
+        157
       ]
     ],
     "translation": "updated the title to <0>{0}</0>"
@@ -12059,7 +12390,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        51
+        52
       ]
     ],
     "translation": "Upload failed"
@@ -12575,7 +12906,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        530
+        537
       ],
       [
         "src/views/boards/index.tsx",
@@ -12949,7 +13280,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        117
+        167
       ],
       [
         "src/views/board/components/UpdateBoardSlugButton.tsx",
@@ -12961,11 +13292,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        604
+        612
       ],
       [
         "src/views/board/index.tsx",
-        662
+        670
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -12989,7 +13320,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        249
+        250
       ]
     ],
     "translation": "You have been logged in successfully."
@@ -13001,7 +13332,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        232
+        233
       ]
     ],
     "translation": "You have been signed up successfully."
@@ -13158,7 +13489,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        46
+        47
       ]
     ],
     "translation": "Your file has been uploaded successfully."
