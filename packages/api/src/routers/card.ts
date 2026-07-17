@@ -8,17 +8,23 @@ import * as checklistRepo from "@banana/db/repository/checklist.repo";
 import * as labelRepo from "@banana/db/repository/label.repo";
 import * as listRepo from "@banana/db/repository/list.repo";
 import * as workspaceRepo from "@banana/db/repository/workspace.repo";
+import { generateAttachmentUrl, generateAvatarUrl } from "@banana/shared/utils";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import {
-  cardCreateResponseSchema,
-  cardUpdateResponseSchema,
-  cardDetailSchema,
-  commentResponseSchema,
-  commentDeleteResponseSchema,
   activityItemSchema,
+  cardCreateResponseSchema,
+  cardDetailSchema,
+  cardUpdateResponseSchema,
+  commentDeleteResponseSchema,
+  commentResponseSchema,
 } from "../schemas";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
+import {
+  getCommenterEmails,
+  notifyBlockerCompleted,
+  sendMattermostNotification,
+} from "../utils/mattermost";
 import {
   sendAssignmentPush,
   sendCardMembersPush,
@@ -26,12 +32,10 @@ import {
   sendUnassignmentPush,
 } from "../utils/notifications";
 import {
-  getCommenterEmails,
-  notifyBlockerCompleted,
-  sendMattermostNotification,
-} from "../utils/mattermost";
-import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
-import { generateAttachmentUrl, generateAvatarUrl } from "@banana/shared/utils";
+  assertCanDelete,
+  assertCanEdit,
+  assertPermission,
+} from "../utils/permissions";
 import {
   createCardWebhookPayload,
   sendWebhooksForWorkspace,
@@ -67,11 +71,20 @@ export const cardRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
       if (!userId)
-        throw new TRPCError({ message: "User not authenticated", code: "UNAUTHORIZED" });
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
 
-      const workspace = await workspaceRepo.getByPublicId(ctx.db, input.workspacePublicId);
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
       if (!workspace)
-        throw new TRPCError({ message: "Workspace not found", code: "NOT_FOUND" });
+        throw new TRPCError({
+          message: "Workspace not found",
+          code: "NOT_FOUND",
+        });
 
       await assertPermission(ctx.db, userId, workspace.id, "card:view");
 
@@ -114,10 +127,15 @@ export const cardRouter = createTRPCRouter({
         memberPublicIds: z.array(z.string().min(12)),
         position: z.enum(["start", "end"]),
         dueDate: z.date().nullable().optional(),
-        checklists: z.array(z.object({
-          name: z.string().min(1).max(255),
-          items: z.array(z.string().min(1).max(500)),
-        })).optional().default([]),
+        checklists: z
+          .array(
+            z.object({
+              name: z.string().min(1).max(255),
+              items: z.array(z.string().min(1).max(500)),
+            }),
+          )
+          .optional()
+          .default([]),
       }),
     )
     .output(cardCreateResponseSchema)
@@ -366,7 +384,12 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertPermission(ctx.db, userId, card.workspaceId, "comment:create");
+      await assertPermission(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "comment:create",
+      );
 
       const newComment = await cardCommentRepo.create(ctx.db, {
         comment: input.comment,
@@ -1072,10 +1095,7 @@ export const cardRouter = createTRPCRouter({
         | undefined;
 
       if (input.listPublicId) {
-        newList = await listRepo.getByPublicId(
-          ctx.db,
-          input.listPublicId,
-        );
+        newList = await listRepo.getByPublicId(ctx.db, input.listPublicId);
 
         if (!newList)
           throw new TRPCError({
@@ -1151,9 +1171,6 @@ export const cardRouter = createTRPCRouter({
         };
       }
 
-      // When a card is marked done without an explicit position/list change,
-      // sink it to the bottom of its current list so completed work collects
-      // at the end.
       if (
         input.isDone === true &&
         input.index === undefined &&
@@ -1281,12 +1298,14 @@ export const cardRouter = createTRPCRouter({
       ) {
         webhookChanges.dueDate = { from: previousDueDate, to: input.dueDate };
       }
-      const movedToNewList = Boolean(newListId && existingCard.listId !== newListId);
+      const movedToNewList = Boolean(
+        newListId && existingCard.listId !== newListId,
+      );
       const currentWebhookListPublicId = movedToNewList
         ? input.listPublicId!
         : existingCard.list.publicId;
       const currentWebhookListName = movedToNewList
-        ? newList?.name ?? card.listName
+        ? (newList?.name ?? card.listName)
         : existingCard.list.name;
 
       if (movedToNewList) {
@@ -1333,9 +1352,19 @@ export const cardRouter = createTRPCRouter({
         mmAction = `moved from **${existingCard.list.name}** to **${newList?.name}**`;
       } else if (input.title && existingCard.title !== input.title) {
         mmAction = "renamed the card";
-      } else if (input.dueDate !== undefined && previousDueDate?.getTime() !== input.dueDate?.getTime()) {
-        mmAction = !previousDueDate ? "set a due date on" : input.dueDate ? "updated the due date of" : "removed the due date from";
-      } else if (input.description && existingCard.description !== input.description) {
+      } else if (
+        input.dueDate !== undefined &&
+        previousDueDate?.getTime() !== input.dueDate?.getTime()
+      ) {
+        mmAction = !previousDueDate
+          ? "set a due date on"
+          : input.dueDate
+            ? "updated the due date of"
+            : "removed the due date from";
+      } else if (
+        input.description &&
+        existingCard.description !== input.description
+      ) {
         mmAction = "updated the description of";
       }
 
@@ -1352,8 +1381,6 @@ export const cardRouter = createTRPCRouter({
         });
       }
 
-      // When a card that blocks other cards is marked done, notify the members
-      // of those blocked cards via Mattermost so they know the work is unblocked.
       if (input.isDone === true && !existingCard.isDone) {
         notifyBlockerCompleted(ctx.db, {
           blockerCardId: result.id,
@@ -1574,7 +1601,10 @@ export const cardRouter = createTRPCRouter({
 
       if (input.copyLabels && sourceCard.labels?.length) {
         const labelPublicIds = sourceCard.labels.map((l) => l.publicId);
-        const labels = await labelRepo.getAllByPublicIds(ctx.db, labelPublicIds);
+        const labels = await labelRepo.getAllByPublicIds(
+          ctx.db,
+          labelPublicIds,
+        );
         if (labels.length) {
           const labelsInsert = labels.map((label) => ({
             cardId: newCard.id,

@@ -16,33 +16,36 @@ import { cards } from "./cards";
 import { imports } from "./imports";
 import { users } from "./users";
 
-export const lists = pgTable("list", {
-  id: bigserial("id", { mode: "number" }).primaryKey(),
-  publicId: varchar("publicId", { length: 12 }).notNull().unique(),
-  name: varchar("name", { length: 255 }).notNull(),
-  index: integer("index").notNull(),
-  createdBy: uuid("createdBy").references(() => users.id, {
-    onDelete: "set null",
-  }),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt"),
-  deletedAt: timestamp("deletedAt"),
-  deletedBy: uuid("deletedBy").references(() => users.id, {
-    onDelete: "set null",
-  }),
-  boardId: bigint("boardId", { mode: "number" })
-    .notNull()
-    .references(() => boards.id, { onDelete: "cascade" }),
-  importId: bigint("importId", { mode: "number" }).references(() => imports.id),
-  isDoneList: boolean("isDoneList").notNull().default(false),
-}, (table) => [
-  // Enforce a single Done list per board at the DB level (only among
-  // non-deleted lists). The app also clears rivals before setting, but this
-  // guard is the source of truth.
-  uniqueIndex("unique_done_list_per_board")
-    .on(table.boardId)
-    .where(sql`${table.isDoneList} = true AND ${table.deletedAt} IS NULL`),
-]).enableRLS();
+export const lists = pgTable(
+  "list",
+  {
+    id: bigserial("id", { mode: "number" }).primaryKey(),
+    publicId: varchar("publicId", { length: 12 }).notNull().unique(),
+    name: varchar("name", { length: 255 }).notNull(),
+    index: integer("index").notNull(),
+    createdBy: uuid("createdBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt"),
+    deletedAt: timestamp("deletedAt"),
+    deletedBy: uuid("deletedBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
+    boardId: bigint("boardId", { mode: "number" })
+      .notNull()
+      .references(() => boards.id, { onDelete: "cascade" }),
+    importId: bigint("importId", { mode: "number" }).references(
+      () => imports.id,
+    ),
+    isDoneList: boolean("isDoneList").notNull().default(false),
+  },
+  (table) => [
+    uniqueIndex("unique_done_list_per_board")
+      .on(table.boardId)
+      .where(sql`${table.isDoneList} = true AND ${table.deletedAt} IS NULL`),
+  ],
+).enableRLS();
 
 export const listsRelations = relations(lists, ({ one, many }) => ({
   createdBy: one(users, {

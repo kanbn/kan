@@ -1,6 +1,6 @@
+import type { dbClient } from "@banana/db/client";
 import { and, count, desc, eq, gt, isNull, sql } from "drizzle-orm";
 
-import type { dbClient } from "@banana/db/client";
 import { lists } from "@banana/db/schema";
 import { generateUID } from "@banana/shared/utils";
 
@@ -260,11 +260,6 @@ export const update = async (
   return result;
 };
 
-/**
- * Mark a list as the board's Done list (or unmark it).
- * Enforces a single Done list per board: when isDoneList is true,
- * any other list on the same board is unmarked first.
- */
 export const setDoneList = async (
   db: dbClient,
   args: { listPublicId: string; isDoneList: boolean },
@@ -272,23 +267,20 @@ export const setDoneList = async (
   return db.transaction(async (tx) => {
     const target = await tx.query.lists.findFirst({
       columns: { id: true, boardId: true },
-      where: and(eq(lists.publicId, args.listPublicId), isNull(lists.deletedAt)),
+      where: and(
+        eq(lists.publicId, args.listPublicId),
+        isNull(lists.deletedAt),
+      ),
     });
 
     if (!target)
       throw new Error(`List not found for public ID ${args.listPublicId}`);
 
     if (args.isDoneList && target.boardId !== null) {
-      // Clear any existing Done list on the same board
       await tx
         .update(lists)
         .set({ isDoneList: false })
-        .where(
-          and(
-            eq(lists.boardId, target.boardId),
-            isNull(lists.deletedAt),
-          ),
-        );
+        .where(and(eq(lists.boardId, target.boardId), isNull(lists.deletedAt)));
     }
 
     const [result] = await tx

@@ -8,15 +8,9 @@ import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface MarkDoneConfirmationProps {
   cardPublicId: string;
-  /** Public id of the board's Done list, if one exists. */
   doneListPublicId?: string;
 }
 
-/**
- * First popout: confirm the card is really done.
- * On confirm, marks the card done and — if a Done list exists — opens the
- * "move to Done list" follow-up popout.
- */
 export function MarkDoneConfirmation({
   cardPublicId,
   doneListPublicId,
@@ -45,8 +39,6 @@ export function MarkDoneConfirmation({
     },
     onSettled: async () => {
       await invalidateCard(utils, cardPublicId);
-      // The card is also repositioned to the bottom of its list when marked
-      // done, so refresh the board view to reflect the new order.
       await utils.board.byId.invalidate();
     },
   });

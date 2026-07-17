@@ -128,9 +128,6 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
 
   const boardType: "regular" | "template" = isTemplate ? "template" : "regular";
 
-  // Ephemeral view-sort: when anything other than "manual" is active, cards are
-  // re-ordered client-side for display and dragging is disabled (the manual
-  // index is never overwritten).
   const activeSort: SortValue = isSortValue(router.query.sort)
     ? router.query.sort
     : "manual";

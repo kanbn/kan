@@ -156,11 +156,6 @@ async function getCardMemberEmails(
   return result.map((r) => r.email);
 }
 
-/**
- * Notify members of cards that were blocked by `blockerCardId` when that blocker
- * card is marked done. Each blocked card's members (excluding the actor) get a
- * Mattermost DM letting them know the blocker is complete.
- */
 export async function notifyBlockerCompleted(
   db: dbClient,
   {
@@ -181,7 +176,6 @@ export async function notifyBlockerCompleted(
   if (!config) return;
 
   try {
-    // Find every card that owns a checklist item blocked by this blocker card.
     const blockedCardsResult = await db.execute(sql`
       SELECT DISTINCT c."id", c."publicId", c."title"
       FROM "_checklist_item_blocking" cb

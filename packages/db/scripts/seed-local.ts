@@ -10,10 +10,10 @@
  *   Password: Test123
  */
 
-import { bytesToHex } from "@noble/hashes/utils.js";
-import { scryptAsync } from "@noble/hashes/scrypt.js";
-import { eq } from "drizzle-orm";
 import * as crypto from "node:crypto";
+import { scryptAsync } from "@noble/hashes/scrypt.js";
+import { bytesToHex } from "@noble/hashes/utils.js";
+import { eq } from "drizzle-orm";
 
 import { createDrizzleClient } from "../src/client";
 import * as boardRepo from "../src/repository/board.repo";
@@ -121,7 +121,9 @@ async function main() {
       createdBy: user.id,
       createdByEmail: LOCAL_DEV_EMAIL,
     });
-    console.log(`Created workspace: ${workspace?.name} (${workspace?.publicId})`);
+    console.log(
+      `Created workspace: ${workspace?.name} (${workspace?.publicId})`,
+    );
 
     // Look up internal workspace ID
     const [wsRow] = await db

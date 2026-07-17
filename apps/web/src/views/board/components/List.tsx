@@ -76,9 +76,7 @@ export default function List({
           ...old,
           lists: old.lists.map((l) => ({
             ...l,
-            // Enforce a single Done list per board optimistically
-            isDoneList:
-              l.publicId === list.publicId ? args.isDoneList : false,
+            isDoneList: l.publicId === list.publicId ? args.isDoneList : false,
           })),
         };
       });
@@ -158,7 +156,7 @@ export default function List({
                 }
               >
                 <button
-                  className="mx-1 inline-flex h-fit items-center rounded-md p-1 px-1 text-sm font-semibold text-dark-50 hover:bg-light-400 disabled:opacity-60 disabled:cursor-not-allowed dark:hover:bg-dark-200"
+                  className="mx-1 inline-flex h-fit items-center rounded-md p-1 px-1 text-sm font-semibold text-dark-50 hover:bg-light-400 disabled:cursor-not-allowed disabled:opacity-60 dark:hover:bg-dark-200"
                   onClick={() => openNewCardForm(list.publicId)}
                   disabled={!canCreateCard}
                 >

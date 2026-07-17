@@ -32,13 +32,11 @@ export const activityTypes = [
   "card.updated.label.removed",
   "card.updated.member.added",
   "card.updated.member.removed",
-  // Checklist-item blocker activities
   "card.updated.checklist.item.blocker.added",
   "card.updated.checklist.item.blocker.removed",
   "card.updated.comment.added",
   "card.updated.comment.updated",
   "card.updated.comment.deleted",
-  // Checklist activities
   "card.updated.checklist.added",
   "card.updated.checklist.renamed",
   "card.updated.checklist.deleted",
@@ -86,9 +84,7 @@ export const cards = pgTable(
     dueDate: timestamp("dueDate"),
     isDone: boolean("isDone").notNull().default(false),
   },
-  (table) => [
-    index("card_list_number_idx").on(table.listId, table.cardNumber),
-  ],
+  (table) => [index("card_list_number_idx").on(table.listId, table.cardNumber)],
 ).enableRLS();
 
 export const cardsRelations = relations(cards, ({ one, many }) => ({

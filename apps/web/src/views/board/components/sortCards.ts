@@ -1,6 +1,6 @@
 import type { SortValue } from "./Sort";
 
-type SortableCard = {
+interface SortableCard {
   publicId: string;
   index: number;
   title: string;
@@ -8,21 +8,8 @@ type SortableCard = {
   dueDate?: Date | null;
   createdAt?: Date;
   updatedAt?: Date | null;
-};
+}
 
-/**
- * Sort the given cards for the ephemeral board view-sort.
- *
- * "manual" is a pure passthrough: cards stay in their natural drag order, so
- * the user has full control via drag (the server already sinks a card to the
- * bottom of its list when it is marked done).
- *
- * For any other sort: done cards ALWAYS sink to the bottom of the list, but
- * they are still subject to the active sort (done cards are sorted among
- * themselves) and to any filtering that produced the input array. Cards with
- * null sort keys (e.g. no due date) sink to the bottom of their group
- * regardless of direction.
- */
 export function sortCards<T extends SortableCard>(
   cards: T[],
   sort: SortValue,
@@ -60,12 +47,11 @@ export function sortCards<T extends SortableCard>(
           break;
       }
 
-      // Null keys sink to the bottom of the group no matter the direction.
       if (av === null && bv === null) return 0;
       if (av === null) return 1;
       if (bv === null) return -1;
 
-      return factor * ((av as number) - (bv as number));
+      return factor * (av - bv);
     });
   };
 

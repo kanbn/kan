@@ -447,8 +447,6 @@ export const reorderItem = async (
   });
 };
 
-// ─── Blocker relationships ─────────────────────────────────────
-
 export const getChecklistItemBlockerRelationship = async (
   db: dbClient,
   args: { checklistItemId: number; blockerCardId: number },
@@ -493,38 +491,18 @@ export const hardDeleteChecklistItemBlockerRelationship = async (
   return result;
 };
 
-/**
- * Would adding a blocker from blockerCardId to the card that owns checklistItemId
- * create a cycle? Walks blockers at the card level:
- *
- *   Card A (owns this checklist item) ← blocked-by ← Card B (blockerCardId)
- *
- * To detect a cycle, we walk backward from Card B: find all cards that Card B
- * directly blocks (i.e. blockerCardId = B), then find the cards that those cards
- * block, etc. If Card A is reachable, a cycle would exist.
- *
- * More precisely: _checklist_item_blocking(checklistItemId=X, blockerCardId=Y)
- * means "checklist item X is blocked by card Y". So if X is on card A and Y is
- * card B, then A is blocked by B. To find what B is blocked by, we look for
- * rows where blockerCardId = that-card, and the checklistItem belongs to B.
- *
- * We walk: B → cards that block B → cards that block those → ... → if we hit A → cycle.
- */
 export const wouldCreateChecklistItemCycle = async (
   db: dbClient,
   args: { checklistItemId: number; blockerCardId: number },
 ) => {
   const result = await db.execute(sql`
     WITH RECURSIVE chain(depth, card_id) AS (
-      -- Seed: what blocks blockerCardId?
-      -- Find rows where blockerCardId = some-card and the checklist item belongs to blockerCardId
       SELECT 1, cb."blockerCardId"
       FROM "_checklist_item_blocking" cb
       JOIN "card_checklist_item" cci ON cci."id" = cb."checklistItemId"
       JOIN "card_checklist" ccl ON ccl."id" = cci."checklistId"
       WHERE ccl."cardId" = ${args.blockerCardId}
       UNION ALL
-      -- Follow: for each blocker card found, what blocks it?
       SELECT c.depth + 1, cb2."blockerCardId"
       FROM chain c
       JOIN "card_checklist" ccl2 ON ccl2."cardId" = c.card_id
