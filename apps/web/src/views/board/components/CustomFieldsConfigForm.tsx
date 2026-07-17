@@ -1,7 +1,8 @@
 import { t } from "@lingui/core/macro";
 import { dump } from "js-yaml";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { HiXMark } from "react-icons/hi2";
+import { HiOutlineQuestionMarkCircle, HiXMark } from "react-icons/hi2";
 
 import {
   type CustomFieldsConfig,
@@ -241,9 +242,19 @@ export function CustomFieldsConfigForm({ boardPublicId, currentConfig }: Props) 
     <div className="flex flex-col w-full">
       <div className="px-5 pt-5 pb-2">
         <div className="flex w-full items-center justify-between pb-4">
-          <h2 className="text-sm font-bold text-neutral-900 dark:text-dark-1000">
-            {t`Custom Fields`}
-          </h2>
+          <div className="flex items-center gap-1.5">
+            <h2 className="text-sm font-bold text-neutral-900 dark:text-dark-1000">
+              {t`Custom Fields`}
+            </h2>
+            <Link
+              href="https://docs.kan.bn/custom-fields"
+              target="_blank"
+              rel="noreferrer"
+              className="text-neutral-400 hover:text-neutral-600 dark:text-dark-800 dark:hover:text-dark-900"
+            >
+              <HiOutlineQuestionMarkCircle className="h-4 w-4" />
+            </Link>
+          </div>
           <button
             type="button"
             className="rounded p-1 hover:bg-light-200 focus:outline-none dark:hover:bg-dark-300"

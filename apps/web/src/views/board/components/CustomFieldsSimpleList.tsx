@@ -71,7 +71,7 @@ export function CustomFieldsSimpleList({ fields, onChange }: Props) {
                           key = title
                             .trim()
                             .replace(/[^a-zA-Z0-9 ]/g, "")
-                            .replace(/ (([a-zA-Z0-9]))/g, (_, match) =>
+                            .replace(/ (([a-zA-Z0-9]))/g, (_, match: string) =>
                               match.toUpperCase(),
                             )
                             .replace(/^[A-Z]/, (l) => l.toLowerCase());
@@ -79,7 +79,7 @@ export function CustomFieldsSimpleList({ fields, onChange }: Props) {
                           key = title
                             .trim()
                             .replace(/[^a-zA-Z0-9 ]/g, "")
-                            .replace(/ (([a-zA-Z0-9]))/g, (_, match) =>
+                            .replace(/ (([a-zA-Z0-9]))/g, (_, match: string) =>
                               match.toUpperCase(),
                             )
                             .replace(/^[A-Z]/, (l) => l.toLowerCase());
@@ -126,7 +126,7 @@ export function CustomFieldsSimpleList({ fields, onChange }: Props) {
                   <div className="flex px-1">
                     <Input
                       placeholder={t`Options (comma separated values)`}
-                      value={field.options || ""}
+                      value={field.options ?? ""}
                       onChange={(e) =>
                         updateField(field.id, { options: e.target.value })
                       }
