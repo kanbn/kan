@@ -792,6 +792,7 @@ export const createFromSnapshot = async (
   args: {
     source: {
       name: string;
+      customFieldsConfig?: string | null;
       labels: { publicId: string; name: string; colourCode: string | null }[];
       lists: {
         name: string;
@@ -800,6 +801,7 @@ export const createFromSnapshot = async (
           title: string;
           description: string | null;
           index: number;
+          customData?: unknown;
           labels: {
             publicId: string;
             name: string;
@@ -838,6 +840,7 @@ export const createFromSnapshot = async (
         workspaceId: args.workspaceId,
         type: args.type,
         sourceBoardId: args.sourceBoardId,
+        customFieldsConfig: args.source.customFieldsConfig ?? null,
       })
       .returning({
         id: boards.id,
@@ -911,6 +914,7 @@ export const createFromSnapshot = async (
             createdBy: args.createdBy,
             listId: newListId,
             index: card.index,
+            customData: card.customData ?? null,
           })
           .returning({ id: cards.id });
 

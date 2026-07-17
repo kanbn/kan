@@ -108,6 +108,10 @@ export default function BoardDropdown({
           action: () => openModal("UPDATE_BOARD_SLUG"),
           icon: <HiLink className="h-[16px] w-[16px] text-dark-900" />,
         },
+      ]
+      : []),
+    ...(canEditBoard
+      ? [
         {
           label: t`Custom Fields`,
           action: () => openModal("CUSTOM_FIELDS_CONFIG"),
