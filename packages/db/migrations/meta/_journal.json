@@ -253,6 +253,13 @@
       "when": 1781664899204,
       "tag": "20260617025459_fixed_luminals",
       "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1784277204067,
+      "tag": "20260717130000_AddUserCalendarToken",
+      "breakpoints": true
     }
   ]
 }

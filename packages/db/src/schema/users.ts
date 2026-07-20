@@ -12,15 +12,15 @@ import { apikey } from "./auth";
 import { boards, userBoardFavorites } from "./boards";
 import { cards } from "./cards";
 import { imports } from "./imports";
-import { lists } from "./lists";
-import { workspaceMembers, workspaces } from "./workspaces";
 import { integrations } from "./integrations";
+import { lists } from "./lists";
 import {
-  userEnergyCheckin,
   userDailyQuest,
-  userWin,
+  userEnergyCheckin,
   userSideQuest,
+  userWin,
 } from "./productivity";
+import { workspaceMembers, workspaces } from "./workspaces";
 
 export const userTypeStatuses = ["human", "bot"] as const;
 export type UserType = (typeof userTypeStatuses)[number];
@@ -39,6 +39,7 @@ export const users = pgTable("user", {
   updatedAt: timestamp("updatedAt").notNull().defaultNow(),
   stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
   type: userTypeEnum("type").notNull().default("human"),
+  calendarToken: varchar("calendarToken", { length: 64 }).unique(),
 }).enableRLS();
 
 export const usersRelations = relations(users, ({ many }) => ({
@@ -109,13 +110,16 @@ export const usersToWorkspacesRelations = relations(
   }),
 );
 
-export const userBoardFavoritesRelations = relations(userBoardFavorites, ({ one }) => ({
-  user: one(users, {
-    fields: [userBoardFavorites.userId],
-    references: [users.id],
+export const userBoardFavoritesRelations = relations(
+  userBoardFavorites,
+  ({ one }) => ({
+    user: one(users, {
+      fields: [userBoardFavorites.userId],
+      references: [users.id],
+    }),
+    board: one(boards, {
+      fields: [userBoardFavorites.boardId],
+      references: [boards.id],
+    }),
   }),
-  board: one(boards, {
-    fields: [userBoardFavorites.boardId],
-    references: [boards.id],
-  }),
-}));
+);

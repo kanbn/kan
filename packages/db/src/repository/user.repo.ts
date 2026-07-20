@@ -129,3 +129,29 @@ export const update = async (
 
   return result;
 };
+
+// Secret bearer token backing a user's personal iCalendar (.ics) feed URL.
+// Nullable: null until the user explicitly generates their calendar link.
+export const getCalendarToken = async (
+  db: dbClient,
+  userId: string,
+): Promise<string | null> => {
+  const [row] = await db
+    .select({ calendarToken: users.calendarToken })
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+
+  return row?.calendarToken ?? null;
+};
+
+export const setCalendarToken = async (
+  db: dbClient,
+  userId: string,
+  token: string,
+): Promise<void> => {
+  await db
+    .update(users)
+    .set({ calendarToken: token })
+    .where(eq(users.id, userId));
+};

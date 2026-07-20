@@ -451,20 +451,20 @@
     "translation": "Activity logs"
   },
   "m16xKo": {
-    "translation": "Add",
     "message": "Add",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/SideQuestsSection.tsx",
-        139
+        141
       ],
       [
         "src/views/home-dashboard/WinsSection.tsx",
-        88
+        90
       ]
-    ]
+    ],
+    "translation": "Add"
   },
   "UGCIzB": {
     "message": "Add / edit label",
@@ -489,6 +489,30 @@
       ]
     ],
     "translation": "Add a card"
+  },
+  "P06aiF": {
+    "translation": "Add a quest...",
+    "message": "Add a quest...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/SideQuestsSection.tsx",
+        132
+      ]
+    ]
+  },
+  "145/oz": {
+    "translation": "Add a win...",
+    "message": "Add a win...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/WinsSection.tsx",
+        81
+      ]
+    ]
   },
   "qtE5nt": {
     "message": "Add an item...",
@@ -983,7 +1007,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        107
+        109
       ]
     ],
     "translation": "An error occurred while connecting your GitHub account."
@@ -995,7 +1019,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        130
+        132
       ]
     ],
     "translation": "An error occurred while disconnecting your GitHub account."
@@ -1007,7 +1031,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        87
+        89
       ]
     ],
     "translation": "An error occurred while disconnecting your Trello account."
@@ -1047,6 +1071,18 @@
       ]
     ],
     "translation": "Anyone with this link can join your workspace"
+  },
+  "xPhAJ8": {
+    "translation": "Anyone with this link can view your assigned tasks. Regenerating the link invalidates the previous one.",
+    "message": "Anyone with this link can view your assigned tasks. Regenerating the link invalidates the previous one.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        94
+      ]
+    ]
   },
   "OZtEcz": {
     "message": "API",
@@ -1727,7 +1763,11 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        111
+        113
+      ],
+      [
+        "src/views/home-dashboard/MyBoardsSection.tsx",
+        28
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -1803,11 +1843,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        123
+        125
       ],
       [
         "src/views/calendar/index.tsx",
         65
+      ],
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        50
       ]
     ],
     "translation": "Calendar"
@@ -1827,6 +1871,18 @@
       ]
     ],
     "translation": "Calendar | {0}"
+  },
+  "0MwBzk": {
+    "translation": "Calendar link ready",
+    "message": "Calendar link ready",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        33
+      ]
+    ]
   },
   "t6FvJH": {
     "message": "Can add comments",
@@ -2262,6 +2318,10 @@
         287
       ],
       [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        112
+      ],
+      [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
         206
       ],
@@ -2367,11 +2427,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        137
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        149
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2391,7 +2451,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        63
+        112
       ]
     ],
     "translation": "Change the application font size."
@@ -2403,7 +2463,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        53
+        93
       ]
     ],
     "translation": "Change your language preferences."
@@ -2729,7 +2789,6 @@
     "translation": "Complete control and ownership:"
   },
   "2PsTzL": {
-    "translation": "completed",
     "message": "completed",
     "placeholders": {},
     "comments": [],
@@ -2738,7 +2797,8 @@
         "src/views/home-dashboard/DailyQuestsSection.tsx",
         81
       ]
-    ]
+    ],
+    "translation": "completed"
   },
   "Lt+ZP3": {
     "message": "completed a checklist item",
@@ -2804,6 +2864,18 @@
     ],
     "translation": "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role."
   },
+  "HMX3Vk": {
+    "translation": "Confirm regenerate",
+    "message": "Confirm regenerate",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        106
+      ]
+    ]
+  },
   "86XI28": {
     "message": "Confirm your email preferences:",
     "placeholders": {},
@@ -2847,7 +2919,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        212
+        216
       ]
     ],
     "translation": "Connect GitHub"
@@ -2859,7 +2931,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        162
+        166
       ]
     ],
     "translation": "Connect Trello"
@@ -2883,7 +2955,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        191
+        195
       ]
     ],
     "translation": "Connect your GitHub account to import projects."
@@ -2895,7 +2967,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        149
+        153
       ]
     ],
     "translation": "Connect your Trello account to import boards."
@@ -2983,7 +3055,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        453
       ]
     ],
     "translation": "Continue with "
@@ -2999,7 +3071,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        361
+        371
       ]
     ],
     "translation": "Continue with {0}"
@@ -3039,6 +3111,18 @@
       ]
     ],
     "translation": "Copy board link"
+  },
+  "zi8xW9": {
+    "translation": "Copy calendar link",
+    "message": "Copy calendar link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        82
+      ]
+    ]
   },
   "F0YmUY": {
     "message": "Copy card link",
@@ -3123,6 +3207,18 @@
       ]
     ],
     "translation": "Core features"
+  },
+  "ezoq36": {
+    "translation": "Couldn't update calendar link",
+    "message": "Couldn't update calendar link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        40
+      ]
+    ]
   },
   "b9XOHo": {
     "message": "Create {0}",
@@ -3358,7 +3454,8 @@
         69
       ]
     ],
-    "translation": "Created {0}"
+    "translation": "Created {0}",
+    "obsolete": true
   },
   "f8lDFq": {
     "message": "created the card",
@@ -3558,7 +3655,6 @@
     "translation": "Customer Support"
   },
   "Xu7ysi": {
-    "translation": "Daily Quests",
     "message": "Daily Quests",
     "placeholders": {},
     "comments": [],
@@ -3567,7 +3663,8 @@
         "src/views/home-dashboard/DailyQuestsSection.tsx",
         77
       ]
-    ]
+    ],
+    "translation": "Daily Quests"
   },
   "pvnfJD": {
     "message": "Dark",
@@ -3672,11 +3769,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        70
+        119
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        80
+        129
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -3849,6 +3946,18 @@
     ],
     "translation": "Design"
   },
+  "osJmEN": {
+    "translation": "Disable notifications",
+    "message": "Disable notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        38
+      ]
+    ]
+  },
   "Odv3J6": {
     "message": "Disconnect GitHub",
     "placeholders": {},
@@ -3856,7 +3965,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        223
+        227
       ]
     ],
     "translation": "Disconnect GitHub"
@@ -3868,7 +3977,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        177
+        181
       ]
     ],
     "translation": "Disconnect Trello"
@@ -3892,7 +4001,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        36
+        74
       ]
     ],
     "translation": "Display name"
@@ -4316,7 +4425,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        444
+        454
       ]
     ],
     "translation": "email"
@@ -4332,7 +4441,7 @@
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        43
+        81
       ]
     ],
     "translation": "Email"
@@ -4373,6 +4482,18 @@
     ],
     "translation": "Email visibility"
   },
+  "I92Z+b": {
+    "translation": "Enable notifications",
+    "message": "Enable notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        38
+      ]
+    ]
+  },
   "bFREhu": {
     "message": "End of list",
     "placeholders": {},
@@ -4386,16 +4507,16 @@
     "translation": "End of list"
   },
   "sJ5WJw": {
-    "translation": "Energy Check-In",
     "message": "Energy Check-In",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/EnergyCheckinSection.tsx",
-        60
+        92
       ]
-    ]
+    ],
+    "translation": "Energy Check-In"
   },
   "SUXBxp": {
     "message": "Engineering",
@@ -4484,7 +4605,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        408
+        418
       ]
     ],
     "translation": "Enter your email address"
@@ -4496,7 +4617,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        396
+        406
       ]
     ],
     "translation": "Enter your name"
@@ -4520,7 +4641,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        422
+        432
       ]
     ],
     "translation": "Enter your password"
@@ -4580,7 +4701,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        106
+        108
       ]
     ],
     "translation": "Error connecting GitHub"
@@ -4652,7 +4773,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        129
+        131
       ]
     ],
     "translation": "Error disconnecting GitHub"
@@ -4664,7 +4785,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        86
+        88
       ]
     ],
     "translation": "Error disconnecting Trello"
@@ -4937,7 +5058,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        297
+        307
       ]
     ],
     "translation": "Failed to login with {0}. Please try again."
@@ -5095,16 +5216,16 @@
     "translation": "Feedback sent"
   },
   "vUDIdF": {
-    "translation": "Feel Good Productivity",
     "message": "Feel Good Productivity",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/index.tsx",
-        44
+        41
       ]
-    ]
+    ],
+    "translation": "Feel Good Productivity"
   },
   "F6m23G": {
     "message": "File uploads",
@@ -5143,7 +5264,6 @@
     "translation": "Find answers to common questions about Kan. Can't find what you're looking for? Feel free to <0>contact us</0>."
   },
   "kWEIUh": {
-    "translation": "Find the Win",
     "message": "Find the Win",
     "placeholders": {},
     "comments": [],
@@ -5152,7 +5272,8 @@
         "src/views/home-dashboard/WinsSection.tsx",
         37
       ]
-    ]
+    ],
+    "translation": "Find the Win"
   },
   "q3il6U": {
     "message": "Font size",
@@ -5161,7 +5282,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        60
+        109
       ]
     ],
     "translation": "Font size"
@@ -5318,6 +5439,30 @@
     ],
     "translation": "General"
   },
+  "BmTgHM": {
+    "translation": "Generate calendar link",
+    "message": "Generate calendar link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        63
+      ]
+    ]
+  },
+  "/6YI6c": {
+    "translation": "Get desktop notifications for mentions, comments, and board updates.",
+    "message": "Get desktop notifications for mentions, comments, and board updates.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        30
+      ]
+    ]
+  },
   "ZDIydz": {
     "message": "Get started",
     "placeholders": {},
@@ -5453,7 +5598,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        186
+        190
       ]
     ],
     "translation": "GitHub"
@@ -5465,7 +5610,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        99
+        101
       ]
     ],
     "translation": "GitHub connected"
@@ -5477,7 +5622,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        122
+        124
       ]
     ],
     "translation": "GitHub disconnected"
@@ -5517,7 +5662,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        119
+        121
       ],
       [
         "src/pages/404.tsx",
@@ -5533,7 +5678,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        131
+        133
       ]
     ],
     "translation": "Go to calendar"
@@ -5545,7 +5690,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        107
+        109
       ]
     ],
     "translation": "Go to home"
@@ -5569,7 +5714,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        155
+        157
       ]
     ],
     "translation": "Go to members"
@@ -5581,7 +5726,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        167
+        169
       ]
     ],
     "translation": "Go to settings"
@@ -5593,7 +5738,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        143
+        145
       ]
     ],
     "translation": "Go to templates"
@@ -5655,7 +5800,6 @@
     "translation": "Guest"
   },
   "2Ff4j6": {
-    "translation": "Hide explored",
     "message": "Hide explored",
     "placeholders": {},
     "comments": [],
@@ -5664,7 +5808,8 @@
         "src/views/home-dashboard/SideQuestsSection.tsx",
         71
       ]
-    ]
+    ],
+    "translation": "Hide explored"
   },
   "CB/NpV": {
     "message": "High Priority",
@@ -5709,11 +5854,11 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        99
+        101
       ],
       [
         "src/views/home-dashboard/index.tsx",
-        40
+        35
       ]
     ],
     "translation": "Home"
@@ -5725,7 +5870,7 @@
     "origin": [
       [
         "src/views/home-dashboard/index.tsx",
-        37
+        32
       ]
     ],
     "translation": "Home | banana.bn"
@@ -5743,16 +5888,16 @@
     "translation": "Host Kan on your own infrastructure. Ideal for organisations that need complete control over their data."
   },
   "V1j0aV": {
-    "translation": "How are you feeling? (optional)",
     "message": "How are you feeling? (optional)",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/EnergyCheckinSection.tsx",
-        105
+        168
       ]
-    ]
+    ],
+    "translation": "How are you feeling? (optional)"
   },
   "WI4eGo": {
     "message": "How do I get a custom URL?",
@@ -6001,6 +6146,18 @@
       ]
     ],
     "translation": "in"
+  },
+  "Gbzvg5": {
+    "translation": "In Google Calendar, go to Settings → Add calendar → From URL and paste this link. Your assigned tasks with due dates appear automatically.",
+    "message": "In Google Calendar, go to Settings → Add calendar → From URL and paste this link. Your assigned tasks with due dates appear automatically.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        69
+      ]
+    ]
   },
   "WbTDwg": {
     "message": "In Progress",
@@ -6383,7 +6540,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        50
+        90
       ]
     ],
     "translation": "Language"
@@ -6605,6 +6762,18 @@
     ],
     "translation": "Lists"
   },
+  "yQ2kGp": {
+    "translation": "Load more",
+    "message": "Load more",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/RecentActivitySection.tsx",
+        120
+      ]
+    ]
+  },
   "1rVAfU": {
     "message": "Load more activities",
     "placeholders": {},
@@ -6637,6 +6806,10 @@
       [
         "src/views/card/components/ActivityList.tsx",
         579
+      ],
+      [
+        "src/views/home-dashboard/RecentActivitySection.tsx",
+        120
       ]
     ],
     "translation": "Loading..."
@@ -6721,7 +6894,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        444
+        454
       ]
     ],
     "translation": "magic link"
@@ -6869,7 +7042,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        147
+        149
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -7031,7 +7204,8 @@
         28
       ]
     ],
-    "translation": "My Boards"
+    "translation": "My Boards",
+    "obsolete": true
   },
   "oFLZ3C": {
     "message": "My Cards",
@@ -7348,7 +7522,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        375
+        385
       ]
     ],
     "translation": "No authentication methods are currently available"
@@ -7365,6 +7539,18 @@
     ],
     "translation": "No boards found"
   },
+  "9fS0S/": {
+    "translation": "No boards found.",
+    "message": "No boards found.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/MyBoardsSection.tsx",
+        42
+      ]
+    ]
+  },
   "PDVw/v": {
     "message": "No boards yet. Create one to get started!",
     "placeholders": {},
@@ -7375,7 +7561,8 @@
         42
       ]
     ],
-    "translation": "No boards yet. Create one to get started!"
+    "translation": "No boards yet. Create one to get started!",
+    "obsolete": true
   },
   "0/h2j3": {
     "message": "No cards assigned to you yet.",
@@ -7492,7 +7679,7 @@
     "origin": [
       [
         "src/views/home-dashboard/RecentActivitySection.tsx",
-        73
+        81
       ]
     ],
     "translation": "No recent activity on your cards."
@@ -7526,16 +7713,16 @@
     "translation": "No roles found for this workspace yet."
   },
   "QsLCXD": {
-    "translation": "No side quests. Follow your curiosity!",
     "message": "No side quests. Follow your curiosity!",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/SideQuestsSection.tsx",
-        145
+        148
       ]
-    ]
+    ],
+    "translation": "No side quests. Follow your curiosity!"
   },
   "TX0bT7": {
     "message": "No webhooks configured. Add a webhook to receive notifications.",
@@ -7550,14 +7737,26 @@
     "translation": "No webhooks configured. Add a webhook to receive notifications."
   },
   "7hw65y": {
-    "translation": "No wins yet. Find something to celebrate!",
     "message": "No wins yet. Find something to celebrate!",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/WinsSection.tsx",
-        95
+        98
+      ]
+    ],
+    "translation": "No wins yet. Find something to celebrate!"
+  },
+  "iDNBZe": {
+    "translation": "Notifications",
+    "message": "Notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        101
       ]
     ]
   },
@@ -7616,7 +7815,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        73
+        122
       ]
     ],
     "translation": "Once you delete your account, there is no going back. This action cannot be undone."
@@ -7688,7 +7887,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        386
+        396
       ]
     ],
     "translation": "or"
@@ -7812,7 +8011,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        264
+        274
       ]
     ],
     "translation": "Password is required to login."
@@ -7824,7 +8023,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        263
+        273
       ]
     ],
     "translation": "Password is required to sign up."
@@ -8100,7 +8299,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        412
+        422
       ]
     ],
     "translation": "Please enter a valid email address"
@@ -8112,7 +8311,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        400
+        410
       ]
     ],
     "translation": "Please enter a valid name"
@@ -8124,7 +8323,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        427
+        437
       ]
     ],
     "translation": "Please enter a valid password"
@@ -8337,6 +8536,10 @@
       [
         "src/views/settings/components/Avatar.tsx",
         200
+      ],
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        41
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -8580,7 +8783,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        30
+        68
       ]
     ],
     "translation": "Profile picture"
@@ -8652,7 +8855,7 @@
     "origin": [
       [
         "src/views/home-dashboard/RecentActivitySection.tsx",
-        59
+        67
       ]
     ],
     "translation": "Recent Activity"
@@ -8668,6 +8871,18 @@
       ]
     ],
     "translation": "Recruitment"
+  },
+  "6exX+8": {
+    "translation": "Regenerate",
+    "message": "Regenerate",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        120
+      ]
+    ]
   },
   "ekCRTP": {
     "message": "Rejected",
@@ -9300,6 +9515,18 @@
     ],
     "translation": "Send test"
   },
+  "brMxq0": {
+    "translation": "Send test notification",
+    "message": "Send test notification",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        46
+      ]
+    ]
+  },
   "v3YoMA": {
     "message": "Senior",
     "placeholders": {},
@@ -9313,16 +9540,16 @@
     "translation": "Senior"
   },
   "NfZUor": {
-    "translation": "Set",
     "message": "Set",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/DailyQuestsSection.tsx",
-        168
+        170
       ]
-    ]
+    ],
+    "translation": "Set"
   },
   "GXGbXi": {
     "message": "Set a password to enable password-based login.",
@@ -9331,10 +9558,22 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        93
+        142
       ]
     ],
     "translation": "Set a password to enable password-based login."
+  },
+  "O3wNI6": {
+    "translation": "Set an action...",
+    "message": "Set an action...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/DailyQuestsSection.tsx",
+        161
+      ]
+    ]
   },
   "8AbRER": {
     "message": "Set due date",
@@ -9363,11 +9602,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        137
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        149
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -9415,7 +9654,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        159
+        161
       ]
     ],
     "translation": "Settings"
@@ -9427,7 +9666,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        26
+        64
       ]
     ],
     "translation": "Settings | Account"
@@ -9463,7 +9702,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        138
+        140
       ]
     ],
     "translation": "Settings | Integrations"
@@ -9517,7 +9756,6 @@
     "translation": "Shortcuts"
   },
   "1pv3tl": {
-    "translation": "Show explored",
     "message": "Show explored",
     "placeholders": {},
     "comments": [],
@@ -9526,10 +9764,10 @@
         "src/views/home-dashboard/SideQuestsSection.tsx",
         71
       ]
-    ]
+    ],
+    "translation": "Show explored"
   },
   "8RFEAq": {
-    "translation": "Side Quests",
     "message": "Side Quests",
     "placeholders": {},
     "comments": [],
@@ -9538,7 +9776,8 @@
         "src/views/home-dashboard/SideQuestsSection.tsx",
         64
       ]
-    ]
+    ],
+    "translation": "Side Quests"
   },
   "5lWFkC": {
     "message": "Sign in",
@@ -9684,7 +9923,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        453
       ]
     ],
     "translation": "Sign up with "
@@ -9801,6 +10040,18 @@
     ],
     "translation": "Something went wrong during license activation."
   },
+  "fUXc6L": {
+    "translation": "Something worth celebrating today",
+    "message": "Something worth celebrating today",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/WinsSection.tsx",
+        80
+      ]
+    ]
+  },
   "jOOtqe": {
     "translation": "Something worth celebrating today...",
     "message": "Something worth celebrating today...",
@@ -9811,19 +10062,20 @@
         "src/views/home-dashboard/WinsSection.tsx",
         79
       ]
-    ]
+    ],
+    "obsolete": true
   },
   "TV51s2": {
-    "translation": "Something you're curious about...",
     "message": "Something you're curious about...",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/SideQuestsSection.tsx",
-        130
+        131
       ]
-    ]
+    ],
+    "translation": "Something you're curious about..."
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -9868,15 +10120,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        251
+        253
       ],
       [
         "src/components/SideNavigation.tsx",
-        252
+        254
       ],
       [
         "src/components/SideNavigation.tsx",
-        262
+        264
       ]
     ],
     "translation": "Start free trial"
@@ -9924,11 +10176,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        221
+        231
       ],
       [
         "src/components/AuthForm.tsx",
-        238
+        248
       ]
     ],
     "translation": "Success"
@@ -9984,6 +10236,18 @@
       ]
     ],
     "translation": "Support the development of the project"
+  },
+  "dbOr6j": {
+    "translation": "Sync your tasks' due dates to Google Calendar (or any calendar app) using a private link.",
+    "message": "Sync your tasks' due dates to Google Calendar (or any calendar app) using a private link.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        56
+      ]
+    ]
   },
   "D+NlUC": {
     "message": "System",
@@ -10116,7 +10380,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        135
+        137
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -10640,7 +10904,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        19
+        21
       ]
     ],
     "translation": "Token is required"
@@ -10668,7 +10932,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        142
+        146
       ]
     ],
     "translation": "Trello"
@@ -10680,7 +10944,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        79
+        81
       ]
     ],
     "translation": "Trello disconnected"
@@ -11551,7 +11815,8 @@
         68
       ]
     ],
-    "translation": "Updated {0}"
+    "translation": "Updated {0}",
+    "obsolete": true
   },
   "L5ZPjz": {
     "message": "updated a checklist item",
@@ -12481,7 +12746,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        92
+        141
       ]
     ],
     "translation": "You are about to change your password."
@@ -12594,7 +12859,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        239
+        249
       ]
     ],
     "translation": "You have been logged in successfully."
@@ -12606,7 +12871,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        222
+        232
       ]
     ],
     "translation": "You have been signed up successfully."
@@ -12744,6 +13009,18 @@
     ],
     "translation": "Your boards have been imported."
   },
+  "TEJ2r7": {
+    "translation": "Your calendar link has been generated. Add it to Google Calendar to sync your due dates.",
+    "message": "Your calendar link has been generated. Add it to Google Calendar to sync your due dates.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        34
+      ]
+    ]
+  },
   "LqWW5F": {
     "message": "Your display name has been updated.",
     "placeholders": {},
@@ -12775,7 +13052,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        100
+        102
       ]
     ],
     "translation": "Your GitHub account has been connected."
@@ -12787,7 +13064,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        123
+        125
       ]
     ],
     "translation": "Your GitHub account has been disconnected."
@@ -12799,7 +13076,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        220
+        224
       ]
     ],
     "translation": "Your GitHub account is connected."
@@ -12883,7 +13160,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        80
+        82
       ]
     ],
     "translation": "Your Trello account has been disconnected."
@@ -12895,7 +13172,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        171
+        175
       ]
     ],
     "translation": "Your Trello account is connected."

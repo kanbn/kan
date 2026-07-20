@@ -425,20 +425,20 @@
     "translation": "活動日誌"
   },
   "m16xKo": {
-    "translation": "",
     "message": "Add",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/SideQuestsSection.tsx",
-        139
+        141
       ],
       [
         "src/views/home-dashboard/WinsSection.tsx",
-        88
+        90
       ]
-    ]
+    ],
+    "translation": ""
   },
   "UGCIzB": {
     "message": "Add / edit label",
@@ -463,6 +463,30 @@
       ]
     ],
     "translation": "新增卡片"
+  },
+  "P06aiF": {
+    "translation": "",
+    "message": "Add a quest...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/SideQuestsSection.tsx",
+        132
+      ]
+    ]
+  },
+  "145/oz": {
+    "translation": "",
+    "message": "Add a win...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/WinsSection.tsx",
+        81
+      ]
+    ]
   },
   "qtE5nt": {
     "message": "Add an item...",
@@ -957,7 +981,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        107
+        109
       ]
     ],
     "translation": "連接你嘅 GitHub 帳戶時發生錯誤。"
@@ -969,7 +993,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        130
+        132
       ]
     ],
     "translation": "中斷你嘅 GitHub 帳戶連接時發生錯誤。"
@@ -981,7 +1005,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        87
+        89
       ]
     ],
     "translation": "中斷你嘅 Trello 帳戶連接時發生錯誤。"
@@ -1021,6 +1045,18 @@
       ]
     ],
     "translation": "任何有呢條連結嘅人都可以加入你嘅工作區"
+  },
+  "xPhAJ8": {
+    "translation": "",
+    "message": "Anyone with this link can view your assigned tasks. Regenerating the link invalidates the previous one.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        94
+      ]
+    ]
   },
   "OZtEcz": {
     "message": "API",
@@ -1701,7 +1737,11 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        111
+        113
+      ],
+      [
+        "src/views/home-dashboard/MyBoardsSection.tsx",
+        28
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -1777,11 +1817,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        123
+        125
       ],
       [
         "src/views/calendar/index.tsx",
         65
+      ],
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        50
       ]
     ],
     "translation": ""
@@ -1801,6 +1845,18 @@
       ]
     ],
     "translation": ""
+  },
+  "0MwBzk": {
+    "translation": "",
+    "message": "Calendar link ready",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        33
+      ]
+    ]
   },
   "t6FvJH": {
     "message": "Can add comments",
@@ -2236,6 +2292,10 @@
         287
       ],
       [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        112
+      ],
+      [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
         206
       ],
@@ -2341,11 +2401,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        137
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        149
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2365,7 +2425,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        63
+        112
       ]
     ],
     "translation": "更改應用程式嘅字型大小。"
@@ -2377,7 +2437,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        53
+        93
       ]
     ],
     "translation": "更改你嘅語言偏好。"
@@ -2703,7 +2763,6 @@
     "translation": "完全控制同埋擁有權："
   },
   "2PsTzL": {
-    "translation": "",
     "message": "completed",
     "placeholders": {},
     "comments": [],
@@ -2712,7 +2771,8 @@
         "src/views/home-dashboard/DailyQuestsSection.tsx",
         81
       ]
-    ]
+    ],
+    "translation": ""
   },
   "Lt+ZP3": {
     "message": "completed a checklist item",
@@ -2778,6 +2838,18 @@
     ],
     "translation": "設定每個工作區角色允許執行嘅操作。呢啲權限適用於具有該角色嘅所有成員。"
   },
+  "HMX3Vk": {
+    "translation": "",
+    "message": "Confirm regenerate",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        106
+      ]
+    ]
+  },
   "86XI28": {
     "message": "Confirm your email preferences:",
     "placeholders": {},
@@ -2821,7 +2893,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        212
+        216
       ]
     ],
     "translation": "連接 GitHub"
@@ -2833,7 +2905,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        162
+        166
       ]
     ],
     "translation": "連接 Trello"
@@ -2857,7 +2929,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        191
+        195
       ]
     ],
     "translation": "連接你嘅 GitHub 帳戶以匯入專案。"
@@ -2869,7 +2941,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        149
+        153
       ]
     ],
     "translation": "連接你嘅 Trello 帳戶以匯入看板。"
@@ -2957,7 +3029,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        453
       ]
     ],
     "translation": "繼續使用 "
@@ -2973,7 +3045,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        361
+        371
       ]
     ],
     "translation": "繼續使用 {0}"
@@ -3013,6 +3085,18 @@
       ]
     ],
     "translation": "複製看板連結"
+  },
+  "zi8xW9": {
+    "translation": "",
+    "message": "Copy calendar link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        82
+      ]
+    ]
   },
   "F0YmUY": {
     "message": "Copy card link",
@@ -3097,6 +3181,18 @@
       ]
     ],
     "translation": "核心功能"
+  },
+  "ezoq36": {
+    "translation": "",
+    "message": "Couldn't update calendar link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        40
+      ]
+    ]
   },
   "b9XOHo": {
     "message": "Create {0}",
@@ -3332,7 +3428,8 @@
         69
       ]
     ],
-    "translation": ""
+    "translation": "",
+    "obsolete": true
   },
   "f8lDFq": {
     "message": "created the card",
@@ -3519,7 +3616,6 @@
     "translation": "客戶支援"
   },
   "Xu7ysi": {
-    "translation": "",
     "message": "Daily Quests",
     "placeholders": {},
     "comments": [],
@@ -3528,7 +3624,8 @@
         "src/views/home-dashboard/DailyQuestsSection.tsx",
         77
       ]
-    ]
+    ],
+    "translation": ""
   },
   "pvnfJD": {
     "message": "Dark",
@@ -3633,11 +3730,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        70
+        119
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        80
+        129
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -3810,6 +3907,18 @@
     ],
     "translation": "設計"
   },
+  "osJmEN": {
+    "translation": "",
+    "message": "Disable notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        38
+      ]
+    ]
+  },
   "Odv3J6": {
     "message": "Disconnect GitHub",
     "placeholders": {},
@@ -3817,7 +3926,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        223
+        227
       ]
     ],
     "translation": "中斷 GitHub 連接"
@@ -3829,7 +3938,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        177
+        181
       ]
     ],
     "translation": "中斷 Trello 連接"
@@ -3853,7 +3962,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        36
+        74
       ]
     ],
     "translation": "顯示名稱"
@@ -4277,7 +4386,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        444
+        454
       ]
     ],
     "translation": "電郵"
@@ -4293,7 +4402,7 @@
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        43
+        81
       ]
     ],
     "translation": "電郵"
@@ -4334,6 +4443,18 @@
     ],
     "translation": "電郵可見性"
   },
+  "I92Z+b": {
+    "translation": "",
+    "message": "Enable notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        38
+      ]
+    ]
+  },
   "bFREhu": {
     "message": "End of list",
     "placeholders": {},
@@ -4347,16 +4468,16 @@
     "translation": "列表末尾"
   },
   "sJ5WJw": {
-    "translation": "",
     "message": "Energy Check-In",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/EnergyCheckinSection.tsx",
-        60
+        92
       ]
-    ]
+    ],
+    "translation": ""
   },
   "SUXBxp": {
     "message": "Engineering",
@@ -4445,7 +4566,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        408
+        418
       ]
     ],
     "translation": "輸入你嘅電郵地址"
@@ -4457,7 +4578,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        396
+        406
       ]
     ],
     "translation": "輸入你嘅名"
@@ -4481,7 +4602,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        422
+        432
       ]
     ],
     "translation": "輸入你嘅密碼"
@@ -4541,7 +4662,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        106
+        108
       ]
     ],
     "translation": "連接 GitHub 時出錯"
@@ -4613,7 +4734,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        129
+        131
       ]
     ],
     "translation": "中斷 GitHub 連接時出錯"
@@ -4625,7 +4746,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        86
+        88
       ]
     ],
     "translation": "中斷 Trello 連接時出錯"
@@ -4885,7 +5006,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        297
+        307
       ]
     ],
     "translation": "用 {0} 登入失敗。請再試一次。"
@@ -5043,16 +5164,16 @@
     "translation": "意見回饋已發送"
   },
   "vUDIdF": {
-    "translation": "",
     "message": "Feel Good Productivity",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/index.tsx",
-        44
+        41
       ]
-    ]
+    ],
+    "translation": ""
   },
   "F6m23G": {
     "message": "File uploads",
@@ -5091,7 +5212,6 @@
     "translation": "喺度搵吓關於 Banana 嘅常見問題。搵唔到你想搵嘅？歡迎<0>聯絡我哋</0>。"
   },
   "kWEIUh": {
-    "translation": "",
     "message": "Find the Win",
     "placeholders": {},
     "comments": [],
@@ -5100,7 +5220,8 @@
         "src/views/home-dashboard/WinsSection.tsx",
         37
       ]
-    ]
+    ],
+    "translation": ""
   },
   "q3il6U": {
     "message": "Font size",
@@ -5109,7 +5230,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        60
+        109
       ]
     ],
     "translation": "字型大小"
@@ -5266,6 +5387,30 @@
     ],
     "translation": "一般"
   },
+  "BmTgHM": {
+    "translation": "",
+    "message": "Generate calendar link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        63
+      ]
+    ]
+  },
+  "/6YI6c": {
+    "translation": "",
+    "message": "Get desktop notifications for mentions, comments, and board updates.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        30
+      ]
+    ]
+  },
   "ZDIydz": {
     "message": "Get started",
     "placeholders": {},
@@ -5401,7 +5546,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        186
+        190
       ]
     ],
     "translation": "GitHub"
@@ -5413,7 +5558,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        99
+        101
       ]
     ],
     "translation": "GitHub 已連接"
@@ -5425,7 +5570,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        122
+        124
       ]
     ],
     "translation": "GitHub 已中斷連接"
@@ -5465,7 +5610,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        119
+        121
       ],
       [
         "src/pages/404.tsx",
@@ -5481,7 +5626,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        131
+        133
       ]
     ],
     "translation": ""
@@ -5493,7 +5638,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        107
+        109
       ]
     ],
     "translation": ""
@@ -5517,7 +5662,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        155
+        157
       ]
     ],
     "translation": "前往成員"
@@ -5529,7 +5674,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        167
+        169
       ]
     ],
     "translation": "前往設定"
@@ -5541,7 +5686,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        143
+        145
       ]
     ],
     "translation": "前往範本"
@@ -5603,7 +5748,6 @@
     "translation": "訪客"
   },
   "2Ff4j6": {
-    "translation": "",
     "message": "Hide explored",
     "placeholders": {},
     "comments": [],
@@ -5612,7 +5756,8 @@
         "src/views/home-dashboard/SideQuestsSection.tsx",
         71
       ]
-    ]
+    ],
+    "translation": ""
   },
   "CB/NpV": {
     "message": "High Priority",
@@ -5657,11 +5802,11 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        99
+        101
       ],
       [
         "src/views/home-dashboard/index.tsx",
-        40
+        35
       ]
     ],
     "translation": ""
@@ -5673,7 +5818,7 @@
     "origin": [
       [
         "src/views/home-dashboard/index.tsx",
-        37
+        32
       ]
     ],
     "translation": ""
@@ -5691,16 +5836,16 @@
     "translation": "喺你自己嘅基礎設施上託管 Banana。適合需要完全控制數據嘅組織。"
   },
   "V1j0aV": {
-    "translation": "",
     "message": "How are you feeling? (optional)",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/EnergyCheckinSection.tsx",
-        105
+        168
       ]
-    ]
+    ],
+    "translation": ""
   },
   "WI4eGo": {
     "message": "How do I get a custom URL?",
@@ -5949,6 +6094,18 @@
       ]
     ],
     "translation": "喺"
+  },
+  "Gbzvg5": {
+    "translation": "",
+    "message": "In Google Calendar, go to Settings → Add calendar → From URL and paste this link. Your assigned tasks with due dates appear automatically.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        69
+      ]
+    ]
   },
   "WbTDwg": {
     "message": "In Progress",
@@ -6305,7 +6462,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        50
+        90
       ]
     ],
     "translation": "語言"
@@ -6514,6 +6671,18 @@
     ],
     "translation": "列表"
   },
+  "yQ2kGp": {
+    "translation": "",
+    "message": "Load more",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/RecentActivitySection.tsx",
+        120
+      ]
+    ]
+  },
   "1rVAfU": {
     "message": "Load more activities",
     "placeholders": {},
@@ -6546,6 +6715,10 @@
       [
         "src/views/card/components/ActivityList.tsx",
         579
+      ],
+      [
+        "src/views/home-dashboard/RecentActivitySection.tsx",
+        120
       ]
     ],
     "translation": "載入中..."
@@ -6617,7 +6790,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        444
+        454
       ]
     ],
     "translation": "魔法連結"
@@ -6765,7 +6938,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        147
+        149
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -6927,7 +7100,8 @@
         28
       ]
     ],
-    "translation": ""
+    "translation": "",
+    "obsolete": true
   },
   "oFLZ3C": {
     "message": "My Cards",
@@ -7244,7 +7418,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        375
+        385
       ]
     ],
     "translation": "目前冇可用嘅驗證方法"
@@ -7261,6 +7435,18 @@
     ],
     "translation": "搵唔到看板"
   },
+  "9fS0S/": {
+    "translation": "",
+    "message": "No boards found.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/MyBoardsSection.tsx",
+        42
+      ]
+    ]
+  },
   "PDVw/v": {
     "message": "No boards yet. Create one to get started!",
     "placeholders": {},
@@ -7271,7 +7457,8 @@
         42
       ]
     ],
-    "translation": ""
+    "translation": "",
+    "obsolete": true
   },
   "0/h2j3": {
     "message": "No cards assigned to you yet.",
@@ -7388,7 +7575,7 @@
     "origin": [
       [
         "src/views/home-dashboard/RecentActivitySection.tsx",
-        73
+        81
       ]
     ],
     "translation": ""
@@ -7422,16 +7609,16 @@
     "translation": "呢個工作區仲未有角色。"
   },
   "QsLCXD": {
-    "translation": "",
     "message": "No side quests. Follow your curiosity!",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/SideQuestsSection.tsx",
-        145
+        148
       ]
-    ]
+    ],
+    "translation": ""
   },
   "TX0bT7": {
     "message": "No webhooks configured. Add a webhook to receive notifications.",
@@ -7446,14 +7633,26 @@
     "translation": "未設定 Webhook。新增 Webhook 以接收通知。"
   },
   "7hw65y": {
-    "translation": "",
     "message": "No wins yet. Find something to celebrate!",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/WinsSection.tsx",
-        95
+        98
+      ]
+    ],
+    "translation": ""
+  },
+  "iDNBZe": {
+    "translation": "",
+    "message": "Notifications",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        101
       ]
     ]
   },
@@ -7512,7 +7711,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        73
+        122
       ]
     ],
     "translation": "一旦你刪除帳戶，就冇得返轉頭。呢個操作無法復原。"
@@ -7584,7 +7783,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        386
+        396
       ]
     ],
     "translation": "或"
@@ -7708,7 +7907,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        264
+        274
       ]
     ],
     "translation": "登入需要密碼。"
@@ -7720,7 +7919,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        263
+        273
       ]
     ],
     "translation": "註冊需要密碼。"
@@ -7996,7 +8195,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        412
+        422
       ]
     ],
     "translation": "請輸入有效嘅電郵地址"
@@ -8008,7 +8207,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        400
+        410
       ]
     ],
     "translation": "請輸入有效嘅名"
@@ -8020,7 +8219,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        427
+        437
       ]
     ],
     "translation": "請輸入有效嘅密碼"
@@ -8233,6 +8432,10 @@
       [
         "src/views/settings/components/Avatar.tsx",
         200
+      ],
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        41
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -8476,7 +8679,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        30
+        68
       ]
     ],
     "translation": "頭像"
@@ -8548,7 +8751,7 @@
     "origin": [
       [
         "src/views/home-dashboard/RecentActivitySection.tsx",
-        59
+        67
       ]
     ],
     "translation": ""
@@ -8564,6 +8767,18 @@
       ]
     ],
     "translation": "招聘"
+  },
+  "6exX+8": {
+    "translation": "",
+    "message": "Regenerate",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        120
+      ]
+    ]
   },
   "ekCRTP": {
     "message": "Rejected",
@@ -9196,6 +9411,18 @@
     ],
     "translation": "發送測試"
   },
+  "brMxq0": {
+    "translation": "",
+    "message": "Send test notification",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/AccountSettings.tsx",
+        46
+      ]
+    ]
+  },
   "v3YoMA": {
     "message": "Senior",
     "placeholders": {},
@@ -9209,16 +9436,16 @@
     "translation": "資深"
   },
   "NfZUor": {
-    "translation": "",
     "message": "Set",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/DailyQuestsSection.tsx",
-        168
+        170
       ]
-    ]
+    ],
+    "translation": ""
   },
   "GXGbXi": {
     "message": "Set a password to enable password-based login.",
@@ -9227,10 +9454,22 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        93
+        142
       ]
     ],
     "translation": "設定密碼以啟用密碼登入。"
+  },
+  "O3wNI6": {
+    "translation": "",
+    "message": "Set an action...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/DailyQuestsSection.tsx",
+        161
+      ]
+    ]
   },
   "8AbRER": {
     "message": "Set due date",
@@ -9259,11 +9498,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        137
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        149
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -9311,7 +9550,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        159
+        161
       ]
     ],
     "translation": "設定"
@@ -9323,7 +9562,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        26
+        64
       ]
     ],
     "translation": "設定 | 帳戶"
@@ -9359,7 +9598,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        138
+        140
       ]
     ],
     "translation": "設定 | 整合"
@@ -9413,7 +9652,6 @@
     "translation": "快捷鍵"
   },
   "1pv3tl": {
-    "translation": "",
     "message": "Show explored",
     "placeholders": {},
     "comments": [],
@@ -9422,10 +9660,10 @@
         "src/views/home-dashboard/SideQuestsSection.tsx",
         71
       ]
-    ]
+    ],
+    "translation": ""
   },
   "8RFEAq": {
-    "translation": "",
     "message": "Side Quests",
     "placeholders": {},
     "comments": [],
@@ -9434,7 +9672,8 @@
         "src/views/home-dashboard/SideQuestsSection.tsx",
         64
       ]
-    ]
+    ],
+    "translation": ""
   },
   "5lWFkC": {
     "message": "Sign in",
@@ -9563,7 +9802,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        453
       ]
     ],
     "translation": "註冊使用 "
@@ -9680,6 +9919,18 @@
     ],
     "translation": "授權啟用期間出咗問題。"
   },
+  "fUXc6L": {
+    "translation": "",
+    "message": "Something worth celebrating today",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home-dashboard/WinsSection.tsx",
+        80
+      ]
+    ]
+  },
   "jOOtqe": {
     "translation": "",
     "message": "Something worth celebrating today...",
@@ -9690,19 +9941,20 @@
         "src/views/home-dashboard/WinsSection.tsx",
         79
       ]
-    ]
+    ],
+    "obsolete": true
   },
   "TV51s2": {
-    "translation": "",
     "message": "Something you're curious about...",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/home-dashboard/SideQuestsSection.tsx",
-        130
+        131
       ]
-    ]
+    ],
+    "translation": ""
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -9747,15 +9999,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        251
+        253
       ],
       [
         "src/components/SideNavigation.tsx",
-        252
+        254
       ],
       [
         "src/components/SideNavigation.tsx",
-        262
+        264
       ]
     ],
     "translation": "開始免費試用"
@@ -9803,11 +10055,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        221
+        231
       ],
       [
         "src/components/AuthForm.tsx",
-        238
+        248
       ]
     ],
     "translation": "成功"
@@ -9863,6 +10115,18 @@
       ]
     ],
     "translation": "支持專案嘅開發"
+  },
+  "dbOr6j": {
+    "translation": "",
+    "message": "Sync your tasks' due dates to Google Calendar (or any calendar app) using a private link.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        56
+      ]
+    ]
   },
   "D+NlUC": {
     "message": "System",
@@ -9995,7 +10259,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        135
+        137
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -10519,7 +10783,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        19
+        21
       ]
     ],
     "translation": "Token 係必填嘅"
@@ -10547,7 +10811,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        142
+        146
       ]
     ],
     "translation": "Trello"
@@ -10559,7 +10823,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        79
+        81
       ]
     ],
     "translation": "Trello 已中斷連接"
@@ -11430,7 +11694,8 @@
         68
       ]
     ],
-    "translation": ""
+    "translation": "",
+    "obsolete": true
   },
   "L5ZPjz": {
     "message": "updated a checklist item",
@@ -12347,7 +12612,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        92
+        141
       ]
     ],
     "translation": "你即將更改密碼。"
@@ -12447,7 +12712,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        239
+        249
       ]
     ],
     "translation": "你已成功登入。"
@@ -12459,7 +12724,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        222
+        232
       ]
     ],
     "translation": "你已成功註冊。"
@@ -12584,6 +12849,18 @@
     ],
     "translation": "你嘅看板已匯入。"
   },
+  "TEJ2r7": {
+    "translation": "",
+    "message": "Your calendar link has been generated. Add it to Google Calendar to sync your due dates.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/CalendarFeedSection.tsx",
+        34
+      ]
+    ]
+  },
   "LqWW5F": {
     "message": "Your display name has been updated.",
     "placeholders": {},
@@ -12615,7 +12892,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        100
+        102
       ]
     ],
     "translation": "你嘅 GitHub 帳戶已連接。"
@@ -12627,7 +12904,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        123
+        125
       ]
     ],
     "translation": "你嘅 GitHub 帳戶已中斷連接。"
@@ -12639,7 +12916,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        220
+        224
       ]
     ],
     "translation": "你嘅 GitHub 帳戶已連接。"
@@ -12723,7 +13000,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        80
+        82
       ]
     ],
     "translation": "你嘅 Trello 帳戶已中斷連接。"
@@ -12735,7 +13012,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        171
+        175
       ]
     ],
     "translation": "你嘅 Trello 帳戶已連接。"

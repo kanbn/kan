@@ -15,6 +15,8 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
+import CalendarFeedSection from "./components/CalendarFeedSection";
+
 const githubTokenSchema = z.object({
   token: z.string().min(1, { message: t`Token is required` }),
 });
@@ -136,6 +138,8 @@ export default function IntegrationsSettings() {
   return (
     <>
       <PageHead title={t`Settings | Integrations`} />
+
+      <CalendarFeedSection />
 
       <div className="mb-8 border-t border-light-300 dark:border-dark-300">
         <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
