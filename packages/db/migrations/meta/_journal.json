@@ -295,6 +295,13 @@
       "when": 1784755200000,
       "tag": "20260717120000_readd_card_blocking",
       "breakpoints": true
+    },
+    {
+      "idx": 42,
+      "version": "7",
+      "when": 1784277204067,
+      "tag": "20260717130000_AddUserCalendarToken",
+      "breakpoints": true
     }
   ]
 }

@@ -1,4 +1,6 @@
+import { randomBytes } from "crypto";
 import { TRPCError } from "@trpc/server";
+import { env } from "next-runtime-env";
 import { z } from "zod";
 
 import * as userRepo from "@banana/db/repository/user.repo";
@@ -117,6 +119,62 @@ export const userRouter = createTRPCRouter({
         ...result,
         image: imageUrl,
       };
+    }),
+  getCalendarFeedUrl: protectedProcedure
+    .meta({
+      openapi: {
+        method: "GET",
+        path: "/users/me/calendar-feed-url",
+        summary: "Get calendar feed URL",
+        description:
+          "Returns the authenticated user's personal iCalendar (.ics) feed URL, or null if none has been generated yet.",
+        tags: ["Users"],
+        protect: true,
+      },
+    })
+    .input(z.void())
+    .output(z.object({ url: z.string().nullable() }))
+    .query(async ({ ctx }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const token = await userRepo.getCalendarToken(ctx.db, userId);
+      if (!token) return { url: null };
+
+      return { url: `${env("NEXT_PUBLIC_BASE_URL")}/api/calendar/${token}` };
+    }),
+  regenerateCalendarToken: protectedProcedure
+    .meta({
+      openapi: {
+        method: "POST",
+        path: "/users/me/calendar-feed-url",
+        summary: "Regenerate calendar feed token",
+        description:
+          "Generates (or replaces) the secret token backing the user's iCalendar feed and returns the new feed URL. The previous URL stops working.",
+        tags: ["Users"],
+        protect: true,
+      },
+    })
+    .input(z.void())
+    .output(z.object({ url: z.string() }))
+    .mutation(async ({ ctx }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const token = randomBytes(24).toString("hex");
+      await userRepo.setCalendarToken(ctx.db, userId, token);
+
+      return { url: `${env("NEXT_PUBLIC_BASE_URL")}/api/calendar/${token}` };
     }),
   setPassword: protectedProcedure
     .meta({
