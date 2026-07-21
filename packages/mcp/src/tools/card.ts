@@ -119,7 +119,7 @@ export function registerCardTools(server: McpServer): void {
       content: z.string().describe("Comment text"),
     },
     async ({ cardPublicId, content }) => {
-      const data = await kanRequest("POST", `/cards/${cardPublicId}/comments`, { content });
+      const data = await kanRequest("POST", `/cards/${cardPublicId}/comments`, { comment: content });
       return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
     },
   );
@@ -136,7 +136,7 @@ export function registerCardTools(server: McpServer): void {
       const data = await kanRequest(
         "PUT",
         `/cards/${cardPublicId}/comments/${commentPublicId}`,
-        { content },
+        { comment: content },
       );
       return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
     },
