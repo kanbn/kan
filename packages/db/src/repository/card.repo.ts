@@ -1,3 +1,4 @@
+import type { dbClient } from "@banana/db/client";
 import {
   and,
   asc,
@@ -13,8 +14,8 @@ import {
   sql,
 } from "drizzle-orm";
 
-import type { dbClient } from "@banana/db/client";
 import {
+  boards,
   cardActivities,
   cardAttachments,
   cards,
@@ -26,7 +27,6 @@ import {
   lists,
   workspaceMembers,
   workspaces,
-  boards,
 } from "@banana/db/schema";
 import { generateUID } from "@banana/shared/utils";
 
@@ -111,7 +111,12 @@ export const create = async (
         cardNumber,
         dueDate: cardInput.dueDate ?? null,
       })
-      .returning({ id: cards.id, listId: cards.listId, publicId: cards.publicId, cardNumber: cards.cardNumber });
+      .returning({
+        id: cards.id,
+        listId: cards.listId,
+        publicId: cards.publicId,
+        cardNumber: cards.cardNumber,
+      });
 
     if (!result[0]) throw new Error("Unable to create card");
 
@@ -325,8 +330,7 @@ export const bulkCreate = async (
         .where(eq(workspaces.id, workspaceId))
         .returning({ cardCounter: workspaces.cardCounter });
 
-      if (!counterResult)
-        throw new Error(`Workspace ${workspaceId} not found`);
+      if (!counterResult) throw new Error(`Workspace ${workspaceId} not found`);
 
       const last = counterResult.cardCounter;
       const start = last - count + 1;
@@ -955,6 +959,30 @@ export const softDeleteAllByListIds = async (
   return updatedCards;
 };
 
+export const getCardsByListIds = (
+  db: dbClient,
+  listIds: number[],
+): Promise<
+  {
+    id: number;
+    publicId: string;
+    title: string;
+    description: string | null;
+    dueDate: Date | null;
+  }[]
+> => {
+  return db
+    .select({
+      id: cards.id,
+      publicId: cards.publicId,
+      title: cards.title,
+      description: cards.description,
+      dueDate: cards.dueDate,
+    })
+    .from(cards)
+    .where(and(inArray(cards.listId, listIds), isNull(cards.deletedAt)));
+};
+
 export const hardDeleteCardMemberRelationship = async (
   db: dbClient,
   args: { cardId: number; memberId: number },
@@ -1006,7 +1034,7 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
   cardPublicId: string,
 ) => {
   const result = await db.query.cards.findFirst({
-    columns: { id: true, createdBy: true },
+    columns: { id: true, createdBy: true, dueDate: true },
     where: and(eq(cards.publicId, cardPublicId), isNull(cards.deletedAt)),
     with: {
       list: {
@@ -1029,6 +1057,7 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
     ? {
         id: result.id,
         createdBy: result.createdBy,
+        dueDate: result.dueDate,
         workspaceId: result.list.board.workspaceId,
         workspaceVisibility: result.list.board.visibility,
         listPublicId: result.list.publicId,
@@ -1046,6 +1075,7 @@ export const getCalendarCards = async (
     boardId?: number;
     startDate: Date;
     endDate: Date;
+    userId?: string;
   },
 ) => {
   const conditions = [
@@ -1062,7 +1092,7 @@ export const getCalendarCards = async (
     conditions.push(eq(boards.id, args.boardId));
   }
 
-  const rows = await db
+  const query = db
     .select({
       publicId: cards.publicId,
       title: cards.title,
@@ -1076,7 +1106,25 @@ export const getCalendarCards = async (
     .innerJoin(lists, eq(cards.listId, lists.id))
     .innerJoin(boards, eq(lists.boardId, boards.id))
     .leftJoin(cardsToLabels, eq(cards.id, cardsToLabels.cardId))
-    .leftJoin(labels, eq(cardsToLabels.labelId, labels.id))
+    .leftJoin(labels, eq(cardsToLabels.labelId, labels.id));
+
+  if (args.userId) {
+    query
+      .innerJoin(
+        cardToWorkspaceMembers,
+        eq(cards.id, cardToWorkspaceMembers.cardId),
+      )
+      .innerJoin(
+        workspaceMembers,
+        and(
+          eq(cardToWorkspaceMembers.workspaceMemberId, workspaceMembers.id),
+          eq(workspaceMembers.userId, args.userId),
+          isNull(workspaceMembers.deletedAt),
+        ),
+      );
+  }
+
+  const rows = await query
     .where(and(...conditions))
     .orderBy(asc(cards.dueDate), asc(cards.index));
 
@@ -1180,9 +1228,10 @@ export const getAssignedCardsByUserId = async (
 
   const hasMore = rows.length > args.limit;
   const items = rows.slice(0, args.limit);
-  const nextCursor = hasMore && items[items.length - 1]?.updatedAt
-    ? items[items.length - 1]!.updatedAt!
-    : undefined;
+  const nextCursor =
+    hasMore && items[items.length - 1]?.updatedAt
+      ? items[items.length - 1]!.updatedAt!
+      : undefined;
 
   const cardMap = new Map<
     string,

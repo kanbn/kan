@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { env } from "next-runtime-env";
 import { eq } from "drizzle-orm";
+import { env } from "next-runtime-env";
 
 import { withApiLogging } from "@banana/api/utils/apiLogging";
 import { withRateLimit } from "@banana/api/utils/rateLimit";
@@ -10,9 +10,6 @@ import { users } from "@banana/db/schema";
 
 import { renderICal } from "~/utils/ical";
 
-// Public iCalendar (.ics) feed of a user's assigned due dates. The token in the
-// path is the ONLY authentication — calendar clients can't carry a login
-// session, so it acts as a bearer secret (see users.calendarToken).
 const TOKEN_PATTERN = /^[a-f0-9]{48}$/;
 
 export default withRateLimit(
@@ -22,9 +19,7 @@ export default withRateLimit(
       return res.status(405).json({ message: "Method not allowed" });
     }
 
-    const token =
-      typeof req.query.token === "string" ? req.query.token : "";
-    // Reject malformed tokens before hitting the DB (constant shape, no lookup).
+    const token = typeof req.query.token === "string" ? req.query.token : "";
     if (!TOKEN_PATTERN.test(token)) {
       return res.status(404).end();
     }

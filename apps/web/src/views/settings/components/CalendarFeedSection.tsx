@@ -12,10 +12,6 @@ import { useClipboard } from "~/hooks/useClipboard";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
-// Settings panel that exposes the user's personal iCalendar (.ics) feed URL so
-// they can sync their assigned due dates to Google Calendar (or any calendar
-// client supporting URL subscriptions). The token lives on the user record and
-// the feed is served session-less from /api/calendar/[token].
 export default function CalendarFeedSection() {
   const { showPopup } = usePopup();
   const { copied, copy } = useClipboard({ timeout: 2000 });

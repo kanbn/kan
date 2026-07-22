@@ -24,6 +24,7 @@ import {
   boardUpdateResponseSchema,
 } from "../schemas";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
+import { deleteCardsFromGoogleCalendars } from "../utils/googleCalendar";
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
@@ -599,6 +600,13 @@ export const boardRouter = createTRPCRouter({
       const listIds = board.lists.map((list) => list.id);
 
       const deletedAt = new Date();
+
+      // Delete Google Calendar events BEFORE soft delete cascade,
+      // since getCardMemberUserIds filters out deleted cards
+      if (listIds.length) {
+        const cardsToDelete = await cardRepo.getCardsByListIds(ctx.db, listIds);
+        await deleteCardsFromGoogleCalendars(ctx.db, cardsToDelete);
+      }
 
       await boardRepo.softDelete(ctx.db, {
         boardId: board.id,

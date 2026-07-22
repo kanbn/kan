@@ -8,26 +8,38 @@ import * as checklistRepo from "@banana/db/repository/checklist.repo";
 import * as labelRepo from "@banana/db/repository/label.repo";
 import * as listRepo from "@banana/db/repository/list.repo";
 import * as workspaceRepo from "@banana/db/repository/workspace.repo";
+import { generateAttachmentUrl, generateAvatarUrl } from "@banana/shared/utils";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import {
-  cardCreateResponseSchema,
-  cardUpdateResponseSchema,
-  cardDetailSchema,
-  commentResponseSchema,
-  commentDeleteResponseSchema,
   activityItemSchema,
+  cardCreateResponseSchema,
+  cardDetailSchema,
+  cardUpdateResponseSchema,
+  commentDeleteResponseSchema,
+  commentResponseSchema,
 } from "../schemas";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
+import {
+  deleteCardsFromGoogleCalendars,
+  getCardMemberUserIds,
+  syncCardToGoogleCalendarsForMembers,
+} from "../utils/googleCalendar";
+import {
+  getCommenterEmails,
+  sendMattermostNotification,
+} from "../utils/mattermost";
 import {
   sendAssignmentPush,
   sendCardMembersPush,
   sendMentionEmails,
   sendUnassignmentPush,
 } from "../utils/notifications";
-import { sendMattermostNotification, getCommenterEmails } from "../utils/mattermost";
-import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
-import { generateAttachmentUrl, generateAvatarUrl } from "@banana/shared/utils";
+import {
+  assertCanDelete,
+  assertCanEdit,
+  assertPermission,
+} from "../utils/permissions";
 import {
   createCardWebhookPayload,
   sendWebhooksForWorkspace,
@@ -63,11 +75,20 @@ export const cardRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
       if (!userId)
-        throw new TRPCError({ message: "User not authenticated", code: "UNAUTHORIZED" });
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
 
-      const workspace = await workspaceRepo.getByPublicId(ctx.db, input.workspacePublicId);
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
       if (!workspace)
-        throw new TRPCError({ message: "Workspace not found", code: "NOT_FOUND" });
+        throw new TRPCError({
+          message: "Workspace not found",
+          code: "NOT_FOUND",
+        });
 
       await assertPermission(ctx.db, userId, workspace.id, "card:view");
 
@@ -88,6 +109,7 @@ export const cardRouter = createTRPCRouter({
         boardId,
         startDate,
         endDate,
+        userId,
       });
     }),
   create: protectedProcedure
@@ -110,10 +132,15 @@ export const cardRouter = createTRPCRouter({
         memberPublicIds: z.array(z.string().min(12)),
         position: z.enum(["start", "end"]),
         dueDate: z.date().nullable().optional(),
-        checklists: z.array(z.object({
-          name: z.string().min(1).max(255),
-          items: z.array(z.string().min(1).max(500)),
-        })).optional().default([]),
+        checklists: z
+          .array(
+            z.object({
+              name: z.string().min(1).max(255),
+              items: z.array(z.string().min(1).max(500)),
+            }),
+          )
+          .optional()
+          .default([]),
       }),
     )
     .output(cardCreateResponseSchema)
@@ -252,6 +279,32 @@ export const cardRouter = createTRPCRouter({
           actorName: ctx.user?.name ?? "Someone",
           workspaceMemberIds: members.map((m) => m.id),
         });
+
+        if (input.dueDate) {
+          const memberUserIds = members
+            .map((m) => m.userId)
+            .filter((id): id is string => id !== null);
+          if (memberUserIds.length > 0) {
+            syncCardToGoogleCalendarsForMembers(
+              ctx.db,
+              {
+                cardPublicId: newCard.publicId,
+                title: input.title,
+                description: input.description,
+                dueDate: input.dueDate,
+                boardName: list.boardName,
+                listName: list.name,
+              },
+              "create",
+              memberUserIds,
+            ).catch((error) => {
+              console.error(
+                `[GoogleCalendar] Failed to create event for card ${newCard.publicId}:`,
+                error,
+              );
+            });
+          }
+        }
       }
 
       if (input.checklists.length > 0) {
@@ -362,7 +415,12 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      await assertPermission(ctx.db, userId, card.workspaceId, "comment:create");
+      await assertPermission(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "comment:create",
+      );
 
       const newComment = await cardCommentRepo.create(ctx.db, {
         comment: input.comment,
@@ -762,6 +820,22 @@ export const cardRouter = createTRPCRouter({
           workspaceMemberId: member.id,
         });
 
+        if (card.dueDate && member.userId) {
+          syncCardToGoogleCalendarsForMembers(
+            ctx.db,
+            {
+              cardPublicId: input.cardPublicId,
+              title: "",
+              description: "",
+              dueDate: null,
+              boardName: card.boardName,
+              listName: card.listName,
+            },
+            "delete",
+            [member.userId],
+          );
+        }
+
         return { newMember: false };
       }
 
@@ -801,6 +875,28 @@ export const cardRouter = createTRPCRouter({
         actorName: ctx.user?.name ?? "Someone",
         workspaceMemberIds: [member.id],
       });
+
+      if (card.dueDate && member.userId) {
+        const cardData = await cardRepo.getByPublicId(
+          ctx.db,
+          input.cardPublicId,
+        );
+        if (cardData) {
+          syncCardToGoogleCalendarsForMembers(
+            ctx.db,
+            {
+              cardPublicId: input.cardPublicId,
+              title: cardData.title,
+              description: cardData.description ?? "",
+              dueDate: card.dueDate,
+              boardName: card.boardName,
+              listName: card.listName,
+            },
+            "create",
+            [member.userId],
+          );
+        }
+      }
 
       return { newMember: true };
     }),
@@ -1067,10 +1163,7 @@ export const cardRouter = createTRPCRouter({
         | undefined;
 
       if (input.listPublicId) {
-        newList = await listRepo.getByPublicId(
-          ctx.db,
-          input.listPublicId,
-        );
+        newList = await listRepo.getByPublicId(ctx.db, input.listPublicId);
 
         if (!newList)
           throw new TRPCError({
@@ -1225,12 +1318,14 @@ export const cardRouter = createTRPCRouter({
       ) {
         webhookChanges.dueDate = { from: previousDueDate, to: input.dueDate };
       }
-      const movedToNewList = Boolean(newListId && existingCard.listId !== newListId);
+      const movedToNewList = Boolean(
+        newListId && existingCard.listId !== newListId,
+      );
       const currentWebhookListPublicId = movedToNewList
         ? input.listPublicId!
         : existingCard.list.publicId;
       const currentWebhookListName = movedToNewList
-        ? newList?.name ?? card.listName
+        ? (newList?.name ?? card.listName)
         : existingCard.list.name;
 
       if (movedToNewList) {
@@ -1277,9 +1372,19 @@ export const cardRouter = createTRPCRouter({
         mmAction = `moved from **${existingCard.list.name}** to **${newList?.name}**`;
       } else if (input.title && existingCard.title !== input.title) {
         mmAction = "renamed the card";
-      } else if (input.dueDate !== undefined && previousDueDate?.getTime() !== input.dueDate?.getTime()) {
-        mmAction = !previousDueDate ? "set a due date on" : input.dueDate ? "updated the due date of" : "removed the due date from";
-      } else if (input.description && existingCard.description !== input.description) {
+      } else if (
+        input.dueDate !== undefined &&
+        previousDueDate?.getTime() !== input.dueDate?.getTime()
+      ) {
+        mmAction = !previousDueDate
+          ? "set a due date on"
+          : input.dueDate
+            ? "updated the due date of"
+            : "removed the due date from";
+      } else if (
+        input.description &&
+        existingCard.description !== input.description
+      ) {
         mmAction = "updated the description of";
       }
 
@@ -1294,6 +1399,53 @@ export const cardRouter = createTRPCRouter({
         ).catch((error) => {
           console.error("Failed to send Mattermost notification:", error);
         });
+      }
+
+      if (
+        input.dueDate !== undefined &&
+        previousDueDate?.getTime() !== input.dueDate?.getTime()
+      ) {
+        const memberUserIds = await getCardMemberUserIds(
+          ctx.db,
+          input.cardPublicId,
+        );
+        if (memberUserIds.length > 0) {
+          syncCardToGoogleCalendarsForMembers(
+            ctx.db,
+            {
+              cardPublicId: result.publicId,
+              title: result.title,
+              description: result.description ?? "",
+              dueDate: result.dueDate,
+              boardName: card.boardName,
+              listName: currentWebhookListName,
+            },
+            input.dueDate ? "update" : "delete",
+            memberUserIds,
+          );
+        }
+      }
+
+      if (movedToNewList && result.dueDate) {
+        const memberUserIds = await getCardMemberUserIds(
+          ctx.db,
+          input.cardPublicId,
+        );
+        if (memberUserIds.length > 0) {
+          syncCardToGoogleCalendarsForMembers(
+            ctx.db,
+            {
+              cardPublicId: result.publicId,
+              title: result.title,
+              description: result.description ?? "",
+              dueDate: result.dueDate,
+              boardName: card.boardName,
+              listName: currentWebhookListName,
+            },
+            "update",
+            memberUserIds,
+          );
+        }
       }
 
       return result;
@@ -1343,8 +1495,17 @@ export const cardRouter = createTRPCRouter({
         card.createdBy,
       );
 
-      // Fetch full card data before delete for webhook
       const fullCard = await cardRepo.getByPublicId(ctx.db, input.cardPublicId);
+
+      if (!fullCard)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      const memberUserIds = fullCard.dueDate
+        ? await getCardMemberUserIds(ctx.db, input.cardPublicId)
+        : [];
 
       const deletedAt = new Date();
 
@@ -1353,6 +1514,25 @@ export const cardRouter = createTRPCRouter({
         deletedAt,
         deletedBy: userId,
       });
+
+      if (fullCard.dueDate && memberUserIds.length > 0) {
+        syncCardToGoogleCalendarsForMembers(
+          ctx.db,
+          {
+            cardPublicId: input.cardPublicId,
+            title: fullCard.title,
+            description: fullCard.description ?? "",
+            dueDate: null,
+          },
+          "delete",
+          memberUserIds,
+        ).catch((error) => {
+          console.error(
+            `[GoogleCalendar] Failed to delete events for card ${input.cardPublicId}:`,
+            error,
+          );
+        });
+      }
 
       await cardActivityRepo.create(ctx.db, {
         type: "card.archived",
@@ -1504,7 +1684,10 @@ export const cardRouter = createTRPCRouter({
 
       if (input.copyLabels && sourceCard.labels?.length) {
         const labelPublicIds = sourceCard.labels.map((l) => l.publicId);
-        const labels = await labelRepo.getAllByPublicIds(ctx.db, labelPublicIds);
+        const labels = await labelRepo.getAllByPublicIds(
+          ctx.db,
+          labelPublicIds,
+        );
         if (labels.length) {
           const labelsInsert = labels.map((label) => ({
             cardId: newCard.id,
@@ -1570,6 +1753,33 @@ export const cardRouter = createTRPCRouter({
             toTitle: newChecklist.name,
             createdBy: userId,
           });
+        }
+      }
+
+      const duplicatedDueDate = sourceCard.dueDate;
+      if (duplicatedDueDate && sourceCard.members?.length) {
+        const memberPublicIds = sourceCard.members.map((m) => m.publicId);
+        const members = await workspaceRepo.getAllMembersByPublicIds(
+          ctx.db,
+          memberPublicIds,
+        );
+        const memberUserIds = members
+          .map((m) => m.userId)
+          .filter((id): id is string => id !== null);
+        if (memberUserIds.length > 0) {
+          syncCardToGoogleCalendarsForMembers(
+            ctx.db,
+            {
+              cardPublicId: newCard.publicId,
+              title: input.title ?? sourceCard.title,
+              description: sourceCard.description ?? "",
+              dueDate: duplicatedDueDate,
+              boardName: targetList.boardName,
+              listName: targetList.name,
+            },
+            "create",
+            memberUserIds,
+          );
         }
       }
 

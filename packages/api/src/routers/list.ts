@@ -6,9 +6,14 @@ import * as cardRepo from "@banana/db/repository/card.repo";
 import * as activityRepo from "@banana/db/repository/cardActivity.repo";
 import * as listRepo from "@banana/db/repository/list.repo";
 
-import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { listCreateResponseSchema, listUpdateResponseSchema } from "../schemas";
-import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { deleteCardsFromGoogleCalendars } from "../utils/googleCalendar";
+import {
+  assertCanDelete,
+  assertCanEdit,
+  assertPermission,
+} from "../utils/permissions";
 
 export const listRouter = createTRPCRouter({
   create: protectedProcedure
@@ -111,6 +116,9 @@ export const listRouter = createTRPCRouter({
       );
 
       const deletedAt = new Date();
+
+      const cardsToDelete = await cardRepo.getCardsByListIds(ctx.db, [list.id]);
+      await deleteCardsFromGoogleCalendars(ctx.db, cardsToDelete);
 
       const deletedList = await listRepo.softDeleteById(ctx.db, {
         listId: list.id,

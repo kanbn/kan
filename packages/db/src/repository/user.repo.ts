@@ -1,7 +1,7 @@
+import type { dbClient } from "@banana/db/client";
 import { and, count, desc, eq, isNotNull } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
 
-import type { dbClient } from "@banana/db/client";
 import { account, apikey, users } from "@banana/db/schema";
 
 const PROVIDER_CREDENTIAL = "credential";
@@ -91,7 +91,13 @@ export const getByEmail = (db: dbClient, email: string) => {
 
 export const create = async (
   db: dbClient,
-  user: { id?: string; email: string; name?: string; type?: "human" | "bot"; stripeCustomerId?: string },
+  user: {
+    id?: string;
+    email: string;
+    name?: string;
+    type?: "human" | "bot";
+    stripeCustomerId?: string;
+  },
 ) => {
   const [result] = await db
     .insert(users)
@@ -130,8 +136,6 @@ export const update = async (
   return result;
 };
 
-// Secret bearer token backing a user's personal iCalendar (.ics) feed URL.
-// Nullable: null until the user explicitly generates their calendar link.
 export const getCalendarToken = async (
   db: dbClient,
   userId: string,
