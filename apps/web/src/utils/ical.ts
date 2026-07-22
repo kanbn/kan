@@ -1,8 +1,3 @@
-// Minimal hand-rolled iCalendar (RFC 5545) serializer for the personal
-// due-date feed. Avoids pulling in an ical library: the format we need is small
-// (one all-day-ish VEVENT per card), but the three usual footguns — text
-// escaping, 75-octet line folding, and CRLF line endings — are handled here.
-
 export interface CalendarCard {
   publicId: string;
   title: string;
@@ -15,7 +10,6 @@ export interface CalendarCard {
 
 const EVENT_DURATION_MS = 60 * 60 * 1000; // each due date becomes a 1-hour block
 
-// Format a Date as a UTC iCalendar datetime: YYYYMMDDTHHMMSSZ
 const toICalUTC = (date: Date): string => {
   const pad = (n: number) => String(n).padStart(2, "0");
   return (
@@ -28,7 +22,6 @@ const toICalUTC = (date: Date): string => {
   );
 };
 
-// Escape text per RFC 5545 §3.3.11: backslash, semicolon, comma, newline.
 const escapeText = (value: string): string =>
   value
     .replace(/\\/g, "\\\\")
@@ -36,7 +29,6 @@ const escapeText = (value: string): string =>
     .replace(/,/g, "\\,")
     .replace(/\r?\n/g, "\\n");
 
-// Fold a content line to 75 octets, continuing with CRLF + single space.
 const foldLine = (line: string): string => {
   if (line.length <= 75) return line;
   const chunks: string[] = [line.slice(0, 75)];
@@ -84,8 +76,6 @@ export const renderICal = (
       .join(",");
 
     lines.push("BEGIN:VEVENT");
-    // Stable UID keyed on the card's publicId: lets calendar clients UPDATE an
-    // event when a due date changes rather than creating a duplicate.
     lines.push(property("UID", `${card.publicId}@banana`));
     lines.push(property("DTSTAMP", now));
     lines.push(property("DTSTART", toICalUTC(start)));

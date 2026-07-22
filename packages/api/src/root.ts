@@ -4,6 +4,7 @@ import { cardRouter } from "./routers/card";
 import { checklistRouter } from "./routers/checklist";
 import { dashboardRouter } from "./routers/dashboard";
 import { feedbackRouter } from "./routers/feedback";
+import { googleCalendarRouter } from "./routers/googleCalendar";
 import { healthRouter } from "./routers/health";
 import { importRouter } from "./routers/import";
 import { integrationRouter } from "./routers/integration";
@@ -25,6 +26,7 @@ export const appRouter = createTRPCRouter({
   checklist: checklistRouter,
   dashboard: dashboardRouter,
   feedback: feedbackRouter,
+  googleCalendar: googleCalendarRouter,
   health: healthRouter,
   label: labelRouter,
   list: listRouter,

@@ -23,6 +23,12 @@ import { mergeActivities } from "../utils/activities";
 import {
   getCommenterEmails,
   notifyBlockerCompleted,
+  deleteCardsFromGoogleCalendars,
+  getCardMemberUserIds,
+  syncCardToGoogleCalendarsForMembers,
+} from "../utils/googleCalendar";
+import {
+  getCommenterEmails,
   sendMattermostNotification,
 } from "../utils/mattermost";
 import {
@@ -105,6 +111,7 @@ export const cardRouter = createTRPCRouter({
         boardId,
         startDate,
         endDate,
+        userId,
       });
     }),
   create: protectedProcedure
@@ -274,6 +281,32 @@ export const cardRouter = createTRPCRouter({
           actorName: ctx.user?.name ?? "Someone",
           workspaceMemberIds: members.map((m) => m.id),
         });
+
+        if (input.dueDate) {
+          const memberUserIds = members
+            .map((m) => m.userId)
+            .filter((id): id is string => id !== null);
+          if (memberUserIds.length > 0) {
+            syncCardToGoogleCalendarsForMembers(
+              ctx.db,
+              {
+                cardPublicId: newCard.publicId,
+                title: input.title,
+                description: input.description,
+                dueDate: input.dueDate,
+                boardName: list.boardName,
+                listName: list.name,
+              },
+              "create",
+              memberUserIds,
+            ).catch((error) => {
+              console.error(
+                `[GoogleCalendar] Failed to create event for card ${newCard.publicId}:`,
+                error,
+              );
+            });
+          }
+        }
       }
 
       if (input.checklists.length > 0) {
@@ -913,6 +946,22 @@ export const cardRouter = createTRPCRouter({
           workspaceMemberId: member.id,
         });
 
+        if (card.dueDate && member.userId) {
+          syncCardToGoogleCalendarsForMembers(
+            ctx.db,
+            {
+              cardPublicId: input.cardPublicId,
+              title: "",
+              description: "",
+              dueDate: null,
+              boardName: card.boardName,
+              listName: card.listName,
+            },
+            "delete",
+            [member.userId],
+          );
+        }
+
         return { newMember: false };
       }
 
@@ -952,6 +1001,28 @@ export const cardRouter = createTRPCRouter({
         actorName: ctx.user?.name ?? "Someone",
         workspaceMemberIds: [member.id],
       });
+
+      if (card.dueDate && member.userId) {
+        const cardData = await cardRepo.getByPublicId(
+          ctx.db,
+          input.cardPublicId,
+        );
+        if (cardData) {
+          syncCardToGoogleCalendarsForMembers(
+            ctx.db,
+            {
+              cardPublicId: input.cardPublicId,
+              title: cardData.title,
+              description: cardData.description ?? "",
+              dueDate: card.dueDate,
+              boardName: card.boardName,
+              listName: card.listName,
+            },
+            "create",
+            [member.userId],
+          );
+        }
+      }
 
       return { newMember: true };
     }),
@@ -1505,7 +1576,7 @@ export const cardRouter = createTRPCRouter({
         });
       }
 
-      if (input.isDone === true && !existingCard.isDone) {
+if (input.isDone === true && !existingCard.isDone) {
         notifyBlockerCompleted(ctx.db, {
           blockerCardId: result.id,
           blockerCardPublicId: input.cardPublicId,
@@ -1515,6 +1586,53 @@ export const cardRouter = createTRPCRouter({
         }).catch((error) => {
           console.error("Failed to send blocker-done notification:", error);
         });
+      }
+
+      if (
+        input.dueDate !== undefined &&
+        previousDueDate?.getTime() !== input.dueDate?.getTime()
+      ) {
+        const memberUserIds = await getCardMemberUserIds(
+          ctx.db,
+          input.cardPublicId,
+        );
+        if (memberUserIds.length > 0) {
+          syncCardToGoogleCalendarsForMembers(
+            ctx.db,
+            {
+              cardPublicId: result.publicId,
+              title: result.title,
+              description: result.description ?? "",
+              dueDate: result.dueDate,
+              boardName: card.boardName,
+              listName: currentWebhookListName,
+            },
+            input.dueDate ? "update" : "delete",
+            memberUserIds,
+          );
+        }
+      }
+
+      if (movedToNewList && result.dueDate) {
+        const memberUserIds = await getCardMemberUserIds(
+          ctx.db,
+          input.cardPublicId,
+        );
+        if (memberUserIds.length > 0) {
+          syncCardToGoogleCalendarsForMembers(
+            ctx.db,
+            {
+              cardPublicId: result.publicId,
+              title: result.title,
+              description: result.description ?? "",
+              dueDate: result.dueDate,
+              boardName: card.boardName,
+              listName: currentWebhookListName,
+            },
+            "update",
+            memberUserIds,
+          );
+        }
       }
 
       return result;
@@ -1564,8 +1682,17 @@ export const cardRouter = createTRPCRouter({
         card.createdBy,
       );
 
-      // Fetch full card data before delete for webhook
       const fullCard = await cardRepo.getByPublicId(ctx.db, input.cardPublicId);
+
+      if (!fullCard)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      const memberUserIds = fullCard.dueDate
+        ? await getCardMemberUserIds(ctx.db, input.cardPublicId)
+        : [];
 
       const deletedAt = new Date();
 
@@ -1574,6 +1701,25 @@ export const cardRouter = createTRPCRouter({
         deletedAt,
         deletedBy: userId,
       });
+
+      if (fullCard.dueDate && memberUserIds.length > 0) {
+        syncCardToGoogleCalendarsForMembers(
+          ctx.db,
+          {
+            cardPublicId: input.cardPublicId,
+            title: fullCard.title,
+            description: fullCard.description ?? "",
+            dueDate: null,
+          },
+          "delete",
+          memberUserIds,
+        ).catch((error) => {
+          console.error(
+            `[GoogleCalendar] Failed to delete events for card ${input.cardPublicId}:`,
+            error,
+          );
+        });
+      }
 
       await cardActivityRepo.create(ctx.db, {
         type: "card.archived",
@@ -1794,6 +1940,33 @@ export const cardRouter = createTRPCRouter({
             toTitle: newChecklist.name,
             createdBy: userId,
           });
+        }
+      }
+
+      const duplicatedDueDate = sourceCard.dueDate;
+      if (duplicatedDueDate && sourceCard.members?.length) {
+        const memberPublicIds = sourceCard.members.map((m) => m.publicId);
+        const members = await workspaceRepo.getAllMembersByPublicIds(
+          ctx.db,
+          memberPublicIds,
+        );
+        const memberUserIds = members
+          .map((m) => m.userId)
+          .filter((id): id is string => id !== null);
+        if (memberUserIds.length > 0) {
+          syncCardToGoogleCalendarsForMembers(
+            ctx.db,
+            {
+              cardPublicId: newCard.publicId,
+              title: input.title ?? sourceCard.title,
+              description: sourceCard.description ?? "",
+              dueDate: duplicatedDueDate,
+              boardName: targetList.boardName,
+              listName: targetList.name,
+            },
+            "create",
+            memberUserIds,
+          );
         }
       }
 

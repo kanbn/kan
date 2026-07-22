@@ -3,20 +3,14 @@ import { and, asc, eq, isNotNull, isNull } from "drizzle-orm";
 
 import {
   boards,
-  cardToWorkspaceMembers,
   cards,
   cardsToLabels,
+  cardToWorkspaceMembers,
   labels,
   lists,
   workspaceMembers,
 } from "@banana/db/schema";
 
-// Cards assigned to a given user across ALL their workspaces — the data behind
-// the personal iCalendar feed. Lives in its own module (rather than card.repo)
-// so the feed route pulls in only the tables it needs. Mirrors
-// card.repo.ts::getCalendarCards' join + label fan-out, but scopes by
-// assignment (cardToWorkspaceMembers → workspaceMembers) instead of by
-// workspaceId, and applies no date range.
 export const getCalendarCardsForUser = async (
   db: dbClient,
   args: { userId: string },
