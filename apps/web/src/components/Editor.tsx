@@ -180,13 +180,13 @@ const RenderSuggestions = () => {
 
       if (!props.clientRect) return;
 
-      popup[0]?.setProps({
+      popup?.[0]?.setProps({
         getReferenceClientRect: props.clientRect,
       });
     },
     onKeyDown(props: SuggestionKeyDownProps): boolean {
       if (props.event.key === "Escape") {
-        popup[0]?.hide();
+        popup?.[0]?.hide();
         return true;
       }
 
@@ -199,7 +199,7 @@ const RenderSuggestions = () => {
       );
     },
     onExit() {
-      popup[0]?.destroy();
+      popup?.[0]?.destroy();
       reactRenderer.destroy();
     },
   };
@@ -308,11 +308,11 @@ const renderMentionSuggestions = () => {
     onUpdate(props: any) {
       reactRenderer.updateProps(props);
       if (!props.clientRect) return;
-      popup[0]?.setProps({ getReferenceClientRect: props.clientRect });
+      popup?.[0]?.setProps({ getReferenceClientRect: props.clientRect });
     },
     onKeyDown(props: SuggestionKeyDownProps) {
       if (props.event.key === "Escape") {
-        popup[0]?.hide();
+        popup?.[0]?.hide();
         return true;
       }
       return (
@@ -324,7 +324,7 @@ const renderMentionSuggestions = () => {
       );
     },
     onExit() {
-      popup[0]?.destroy();
+      popup?.[0]?.destroy();
       reactRenderer.destroy();
     },
   };
