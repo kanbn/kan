@@ -48,6 +48,8 @@
     "@banana/shared": "workspace:^",
     "@electric-sql/pglite": "^0.3.7",
     "@noble/hashes": "^1.8.0",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
     "drizzle-orm": "^0.42.0",
     "drizzle-zod": "^0.5.1",
     "ioredis": "^5.9.2",

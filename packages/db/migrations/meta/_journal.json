@@ -302,6 +302,20 @@
       "when": 1784277204067,
       "tag": "20260717130000_AddUserCalendarToken",
       "breakpoints": true
+    },
+    {
+      "idx": 43,
+      "version": "7",
+      "when": 1785739200000,
+      "tag": "20260729120000_AddCardNotifications",
+      "breakpoints": true
+    },
+    {
+      "idx": 44,
+      "version": "7",
+      "when": 1785745800000,
+      "tag": "20260729130000_AddTimezoneAndOverdueNudge",
+      "breakpoints": true
     }
   ]
 }

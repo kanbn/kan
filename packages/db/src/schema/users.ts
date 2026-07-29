@@ -40,6 +40,7 @@ export const users = pgTable("user", {
   stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
   type: userTypeEnum("type").notNull().default("human"),
   calendarToken: varchar("calendarToken", { length: 64 }).unique(),
+  timezone: varchar("timezone", { length: 64 }),
 }).enableRLS();
 
 export const usersRelations = relations(users, ({ many }) => ({

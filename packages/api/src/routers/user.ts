@@ -232,4 +232,21 @@ export const userRouter = createTRPCRouter({
 
       return { success: true };
     }),
+  setTimezone: protectedProcedure
+    .input(
+      z.object({
+        timezone: z
+          .string()
+          .min(1)
+          .max(64),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+      if (!userId) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+      await userRepo.setTimezone(ctx.db, userId, input.timezone);
+      return { success: true };
+    }),
 });

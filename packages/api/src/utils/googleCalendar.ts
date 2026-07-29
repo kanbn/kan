@@ -1,6 +1,7 @@
 import type { dbClient } from "@banana/db/client";
 import { env } from "next-runtime-env";
 
+import { applyTimeOfDay } from "@banana/db/repository/cardNotification.repo";
 import * as integrationsRepo from "@banana/db/repository/integration.repo";
 
 import { decryptToken, encryptToken } from "./encryption";
@@ -12,8 +13,17 @@ export interface GoogleCalendarEvent {
   start: { dateTime: string; timeZone: string };
   end: { dateTime: string; timeZone: string };
   source?: { title: string; url: string };
+  recurrence?: string[];
+  reminders?: {
+    useDefault: boolean;
+    overrides?: { method: string; minutes: number }[];
+  };
   extendedProperties?: {
-    private?: { cardPublicId?: string };
+    private?: {
+      cardPublicId?: string;
+      cardNotificationPublicId?: string;
+      eventType?: "dueDate" | "reminder" | "overdue";
+    };
   };
 }
 
@@ -192,6 +202,7 @@ function buildEvent(card: CardEventData): GoogleCalendarEvent {
     extendedProperties: {
       private: {
         cardPublicId: card.cardPublicId,
+        eventType: "dueDate",
       },
     },
   };
@@ -240,9 +251,12 @@ export async function deleteCalendarEvent(
   accessToken: string,
   cardPublicId: string,
 ): Promise<void> {
+  // Only match the card's main due-date event (eventType=dueDate) so we never
+  // delete per-card reminder/overdue events, which are managed separately.
+  // Google ANDs multiple privateExtendedProperty params.
   const searchResult = await calendarApiFetch(
     accessToken,
-    `/calendars/primary/events?privateExtendedProperty=cardPublicId=${cardPublicId}`,
+    `/calendars/primary/events?privateExtendedProperty=cardPublicId=${cardPublicId}&privateExtendedProperty=eventType=dueDate`,
     { method: "GET" },
   );
 
@@ -360,16 +374,22 @@ export async function syncAllCardsForUser(
   );
 
   const results = await Promise.allSettled(
-    cardsToSync.map((card) =>
-      upsertCalendarEvent(accessToken, {
+    cardsToSync.map(async (card) => {
+      await upsertCalendarEvent(accessToken, {
         cardPublicId: card.cardPublicId,
         title: card.title,
         description: card.description,
         dueDate: card.dueDate!,
         boardName: card.boardName,
         listName: card.listName,
-      }),
-    ),
+      });
+      // Push the card's google_calendar reminders alongside its due-date event.
+      await syncAllCardNotificationsForUser(db, accessToken, {
+        publicId: card.cardPublicId,
+        title: card.title,
+        dueDate: card.dueDate,
+      });
+    }),
   );
 
   const failed = results.filter((r) => r.status === "rejected").length;
@@ -406,7 +426,9 @@ export async function syncCardToGoogleCalendarsForMembers(
         }
 
         if (action === "delete" || !card.dueDate) {
-          await deleteCalendarEvent(accessToken, card.cardPublicId);
+          // Remove the card's full calendar presence: due-date event plus any
+          // reminder / daily-overdue events.
+          await stopCardNotifications(accessToken, card.cardPublicId);
           console.log(
             `[GoogleCalendar] Deleted event for card ${card.cardPublicId} for user ${userId}`,
           );
@@ -418,6 +440,12 @@ export async function syncCardToGoogleCalendarsForMembers(
             dueDate: card.dueDate,
             boardName: card.boardName,
             listName: card.listName,
+          });
+          // Bring the card's google_calendar reminders along with the event.
+          await syncAllCardNotificationsForUser(db, accessToken, {
+            publicId: card.cardPublicId,
+            title: card.title,
+            dueDate: card.dueDate,
           });
           console.log(
             `[GoogleCalendar] Upserted event for card ${card.cardPublicId} for user ${userId}`,
@@ -483,6 +511,351 @@ export async function deleteCardsFromGoogleCalendars(
     if (result.status === "rejected") {
       console.error(
         `[GoogleCalendar] deleteCardsFromGoogleCalendars:`,
+        result.reason,
+      );
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Per-card reminder events (eventType = "reminder")                  */
+/* ------------------------------------------------------------------ */
+
+interface CardNotificationEventData {
+  cardPublicId: string;
+  cardNotificationPublicId: string;
+  title: string;
+  fireAt: Date;
+  boardName?: string | null;
+  listName?: string | null;
+}
+
+function buildReminderEvent(data: CardNotificationEventData): GoogleCalendarEvent {
+  const fiveMinLater = new Date(data.fireAt.getTime() + 5 * 60 * 1000);
+  return {
+    summary: `🔔 ${data.title}`,
+    description: `${data.boardName ?? ""} › ${data.listName ?? ""}`,
+    start: { dateTime: data.fireAt.toISOString(), timeZone: "UTC" },
+    end: { dateTime: fiveMinLater.toISOString(), timeZone: "UTC" },
+    source: {
+      title: "Banana",
+      url: `${env("NEXT_PUBLIC_BASE_URL") ?? "http://localhost:3000"}/cards/${data.cardPublicId}`,
+    },
+    reminders: {
+      useDefault: false,
+      overrides: [{ method: "popup", minutes: 0 }],
+    },
+    extendedProperties: {
+      private: {
+        cardPublicId: data.cardPublicId,
+        cardNotificationPublicId: data.cardNotificationPublicId,
+        eventType: "reminder",
+      },
+    },
+  };
+}
+
+export async function deleteCardNotificationCalendarEvent(
+  accessToken: string,
+  cardNotificationPublicId: string,
+): Promise<void> {
+  const searchResult = await calendarApiFetch(
+    accessToken,
+    `/calendars/primary/events?privateExtendedProperty=cardNotificationPublicId=${cardNotificationPublicId}`,
+    { method: "GET" },
+  );
+
+  const events = searchResult as { items?: { id: string }[] } | null;
+  if (events?.items) {
+    for (const evt of events.items) {
+      await calendarApiFetch(
+        accessToken,
+        `/calendars/primary/events/${evt.id}`,
+        { method: "DELETE" },
+      );
+    }
+  }
+}
+
+/** Delete every reminder event (eventType=reminder) for a card. */
+export async function deleteCardRemindersFromCalendar(
+  accessToken: string,
+  cardPublicId: string,
+): Promise<void> {
+  const searchResult = await calendarApiFetch(
+    accessToken,
+    `/calendars/primary/events?privateExtendedProperty=cardPublicId=${cardPublicId}&privateExtendedProperty=eventType=reminder`,
+    { method: "GET" },
+  );
+
+  const events = searchResult as { items?: { id: string }[] } | null;
+  if (events?.items) {
+    for (const evt of events.items) {
+      await calendarApiFetch(
+        accessToken,
+        `/calendars/primary/events/${evt.id}`,
+        { method: "DELETE" },
+      );
+    }
+  }
+}
+
+export async function upsertCardNotificationCalendarEvent(
+  accessToken: string,
+  data: CardNotificationEventData,
+): Promise<void> {
+  await deleteCardNotificationCalendarEvent(
+    accessToken,
+    data.cardNotificationPublicId,
+  );
+  const event = buildReminderEvent(data);
+  await calendarApiFetch(accessToken, `/calendars/primary/events`, {
+    method: "POST",
+    body: JSON.stringify(event),
+  });
+}
+
+/**
+ * Push every google_calendar reminder for a card onto the user's primary
+ * calendar. Called whenever the card's due-date event is synced, so the card's
+ * reminders come along for the ride. Reminders with no computable fireAt (e.g.
+ * a relative reminder on a card with no due date) are skipped.
+ */
+async function syncAllCardNotificationsForUser(
+  db: dbClient,
+  accessToken: string,
+  card: { publicId: string; title: string; dueDate: Date | null },
+): Promise<void> {
+  const cardNotificationRepo = await import(
+    "@banana/db/repository/cardNotification.repo"
+  );
+  const reminders = await cardNotificationRepo.listByCardPublicId(
+    db,
+    card.publicId,
+  );
+  const gcalReminders = reminders.filter(
+    (r) => r.channel === "google_calendar",
+  );
+  if (gcalReminders.length === 0) return;
+
+  await Promise.allSettled(
+    gcalReminders.map((r) => {
+      const fireAt =
+        r.triggerType === "relative"
+          ? cardNotificationRepo.computeRelativeFireAt(
+              card.dueDate,
+              r.offsetValue,
+              r.offsetUnit,
+              r.timeOfDay,
+              r.timezone,
+            )
+          : cardNotificationRepo.computeAbsoluteFireAt(
+              r.triggerAt,
+              r.timeOfDay,
+              r.timezone,
+            );
+      if (!fireAt) return Promise.resolve();
+      return upsertCardNotificationCalendarEvent(accessToken, {
+        cardPublicId: card.publicId,
+        cardNotificationPublicId: r.publicId,
+        title: card.title,
+        fireAt,
+      });
+    }),
+  );
+}
+
+export async function syncCardNotificationToGoogleCalendarsForMembers(
+  db: dbClient,
+  data: CardNotificationEventData,
+  memberUserIds: string[],
+): Promise<void> {
+  console.log(
+    `[GoogleCalendar] Syncing reminder ${data.cardNotificationPublicId} for ${memberUserIds.length} users`,
+  );
+
+  const results = await Promise.allSettled(
+    memberUserIds.map(async (userId) => {
+      const accessToken = await getValidAccessToken(db, userId);
+      if (!accessToken) return;
+      await upsertCardNotificationCalendarEvent(accessToken, data);
+    }),
+  );
+
+  for (const result of results) {
+    if (result.status === "rejected") {
+      console.error(
+        `[GoogleCalendar] Reminder sync failed for ${data.cardNotificationPublicId}:`,
+        result.reason,
+      );
+    }
+  }
+}
+
+export async function deleteCardNotificationFromGoogleCalendars(
+  db: dbClient,
+  cardNotificationPublicId: string,
+  memberUserIds: string[],
+): Promise<void> {
+  const results = await Promise.allSettled(
+    memberUserIds.map(async (userId) => {
+      const accessToken = await getValidAccessToken(db, userId);
+      if (!accessToken) return;
+      await deleteCardNotificationCalendarEvent(
+        accessToken,
+        cardNotificationPublicId,
+      );
+    }),
+  );
+
+  for (const result of results) {
+    if (result.status === "rejected") {
+      console.error(
+        `[GoogleCalendar] Reminder delete failed for ${cardNotificationPublicId}:`,
+        result.reason,
+      );
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Overdue daily nudge (eventType = "overdue", FREQ=DAILY)            */
+/* ------------------------------------------------------------------ */
+
+/** Next upcoming 9am wall-clock in `tz` (used as DTSTART of the daily series). */
+function nextOccurrence9am(now: Date, tz: string): Date {
+  const today9am = applyTimeOfDay(now, "09:00", tz);
+  if (today9am.getTime() > now.getTime()) return today9am;
+  return new Date(today9am.getTime() + 24 * 60 * 60 * 1000);
+}
+
+function buildOverdueEvent(
+  cardPublicId: string,
+  title: string,
+  memberTimezone: string,
+  now: Date,
+): GoogleCalendarEvent {
+  const tz = memberTimezone || "UTC";
+  const start = nextOccurrence9am(now, tz);
+  const end = new Date(start.getTime() + 5 * 60 * 1000);
+  return {
+    summary: `⏰ Overdue: ${title}`,
+    description: `This card is past its due date.`,
+    start: { dateTime: start.toISOString(), timeZone: tz },
+    end: { dateTime: end.toISOString(), timeZone: tz },
+    recurrence: ["RRULE:FREQ=DAILY"],
+    reminders: {
+      useDefault: false,
+      overrides: [{ method: "popup", minutes: 0 }],
+    },
+    source: {
+      title: "Banana",
+      url: `${env("NEXT_PUBLIC_BASE_URL") ?? "http://localhost:3000"}/cards/${cardPublicId}`,
+    },
+    extendedProperties: {
+      private: {
+        cardPublicId,
+        eventType: "overdue",
+      },
+    },
+  };
+}
+
+/**
+ * Ensure a daily 9am overdue event exists on the user's primary calendar for
+ * the card. Idempotent: if one already exists (eventType=overdue), leave it.
+ */
+export async function ensureOverdueCalendarEvent(
+  accessToken: string,
+  args: { cardPublicId: string; title: string; memberTimezone: string | null },
+): Promise<void> {
+  const searchResult = await calendarApiFetch(
+    accessToken,
+    `/calendars/primary/events?privateExtendedProperty=cardPublicId=${args.cardPublicId}&privateExtendedProperty=eventType=overdue`,
+    { method: "GET" },
+  );
+
+  const events = searchResult as { items?: { id: string }[] } | null;
+  if (events?.items && events.items.length > 0) return;
+
+  const event = buildOverdueEvent(
+    args.cardPublicId,
+    args.title,
+    args.memberTimezone ?? "UTC",
+    new Date(),
+  );
+  await calendarApiFetch(accessToken, `/calendars/primary/events`, {
+    method: "POST",
+    body: JSON.stringify(event),
+  });
+}
+
+/** Delete every overdue daily event for a card on this calendar. */
+export async function deleteOverdueCalendarEvent(
+  accessToken: string,
+  cardPublicId: string,
+): Promise<void> {
+  const searchResult = await calendarApiFetch(
+    accessToken,
+    `/calendars/primary/events?privateExtendedProperty=cardPublicId=${cardPublicId}&privateExtendedProperty=eventType=overdue`,
+    { method: "GET" },
+  );
+
+  const events = searchResult as { items?: { id: string }[] } | null;
+  if (events?.items) {
+    for (const evt of events.items) {
+      await calendarApiFetch(
+        accessToken,
+        `/calendars/primary/events/${evt.id}`,
+        { method: "DELETE" },
+      );
+    }
+  }
+}
+
+/**
+ * Remove a card's full Google Calendar presence on this calendar: its due-date
+ * event plus every reminder and daily-overdue event. Called when a card is
+ * marked done (so it stops appearing on members' calendars), loses its due
+ * date, or is deleted.
+ */
+export async function stopCardNotifications(
+  accessToken: string,
+  cardPublicId: string,
+): Promise<void> {
+  await deleteCalendarEvent(accessToken, cardPublicId);
+  await deleteCardRemindersFromCalendar(accessToken, cardPublicId);
+  await deleteOverdueCalendarEvent(accessToken, cardPublicId);
+}
+
+/**
+ * Fan `stopCardNotifications` out to every member of the card who has a Google
+ * Calendar token. Used when a card is marked done — removes the card's entire
+ * calendar presence (due-date + reminder + overdue events) for each member.
+ */
+export async function stopCardNotificationsForMembers(
+  db: dbClient,
+  cardPublicId: string,
+  memberUserIds: string[],
+): Promise<void> {
+  if (memberUserIds.length === 0) return;
+
+  console.log(
+    `[GoogleCalendar] Stopping notifications for card ${cardPublicId} for ${memberUserIds.length} users`,
+  );
+
+  const results = await Promise.allSettled(
+    memberUserIds.map(async (userId) => {
+      const accessToken = await getValidAccessToken(db, userId);
+      if (!accessToken) return;
+      await stopCardNotifications(accessToken, cardPublicId);
+    }),
+  );
+
+  for (const result of results) {
+    if (result.status === "rejected") {
+      console.error(
+        `[GoogleCalendar] stopCardNotifications failed for card ${cardPublicId}:`,
         result.reason,
       );
     }

@@ -15,6 +15,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { boards } from "./boards";
+import { cardNotifications } from "./cardNotifications";
 import { checklists } from "./checklists";
 import { imports } from "./imports";
 import { labels } from "./labels";
@@ -121,6 +122,7 @@ export const cardsRelations = relations(cards, ({ one, many }) => ({
   blockedBy: many(cardBlocking, { relationName: "cardBlockedBy" }),
   // Cards that this card blocks (this card is `blockerCardId` in _card_blocking)
   blocking: many(cardBlocking, { relationName: "cardBlocking" }),
+  notifications: many(cardNotifications),
 }));
 
 export const cardActivities = pgTable("card_activity", {

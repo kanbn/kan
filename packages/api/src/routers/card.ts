@@ -21,14 +21,14 @@ import {
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
 import {
-  getCommenterEmails,
-  notifyBlockerCompleted,
   deleteCardsFromGoogleCalendars,
   getCardMemberUserIds,
+  stopCardNotificationsForMembers,
   syncCardToGoogleCalendarsForMembers,
 } from "../utils/googleCalendar";
 import {
   getCommenterEmails,
+  notifyBlockerCompleted,
   sendMattermostNotification,
 } from "../utils/mattermost";
 import {
@@ -1576,7 +1576,7 @@ export const cardRouter = createTRPCRouter({
         });
       }
 
-if (input.isDone === true && !existingCard.isDone) {
+      if (input.isDone === true && !existingCard.isDone) {
         notifyBlockerCompleted(ctx.db, {
           blockerCardId: result.id,
           blockerCardPublicId: input.cardPublicId,
@@ -1586,6 +1586,53 @@ if (input.isDone === true && !existingCard.isDone) {
         }).catch((error) => {
           console.error("Failed to send blocker-done notification:", error);
         });
+
+        // Card is now done → stop ALL notifying. Mattermost DMs stop on their
+        // own (the poller queries filter out done cards); for Google Calendar we
+        // remove the card's entire presence (due-date + reminder + overdue
+        // events) so it no longer appears on members' calendars.
+        const doneMemberUserIds = await getCardMemberUserIds(
+          ctx.db,
+          input.cardPublicId,
+        );
+        if (doneMemberUserIds.length > 0) {
+          stopCardNotificationsForMembers(
+            ctx.db,
+            input.cardPublicId,
+            doneMemberUserIds,
+          ).catch((error) => {
+            console.error(
+              "Failed to stop card notifications on done:",
+              error,
+            );
+          });
+        }
+      }
+
+      // Card was un-done → recreate its Google Calendar notifications (the
+      // reminders were torn down when it was marked done). The due-date event +
+      // google_calendar reminders are resynced here; the daily overdue event is
+      // recreated by the poller's ensure step if the card is still overdue.
+      if (input.isDone === false && existingCard.isDone && result.dueDate) {
+        const memberUserIds = await getCardMemberUserIds(
+          ctx.db,
+          input.cardPublicId,
+        );
+        if (memberUserIds.length > 0) {
+          syncCardToGoogleCalendarsForMembers(
+            ctx.db,
+            {
+              cardPublicId: result.publicId,
+              title: result.title,
+              description: result.description ?? "",
+              dueDate: result.dueDate,
+              boardName: card.boardName,
+              listName: currentWebhookListName,
+            },
+            "update",
+            memberUserIds,
+          );
+        }
       }
 
       if (

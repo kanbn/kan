@@ -14,6 +14,7 @@ import { useEffect } from "react";
 
 import { InstallPwaButton } from "~/components/InstallPwaButton";
 import { SwUpdateToast } from "~/components/SwUpdateToast";
+import { TimezoneCapture } from "~/components/TimezoneCapture";
 import { FontSizeProvider } from "~/providers/font-size";
 import { KeyboardShortcutProvider } from "~/providers/keyboard-shortcuts";
 import { LinguiProviderWrapper } from "~/providers/lingui";
@@ -101,6 +102,7 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
       <main className="font-sans">
         <InstallPwaButton />
         <SwUpdateToast />
+        <TimezoneCapture />
         <KeyboardShortcutProvider>
           <LinguiProviderWrapper>
             <FontSizeProvider>

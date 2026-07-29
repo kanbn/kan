@@ -35,6 +35,14 @@
     "./utils/permissions": {
       "types": "./src/utils/permissions.ts",
       "default": "./src/utils/permissions.ts"
+    },
+    "./utils/mattermost": {
+      "types": "./src/utils/mattermost.ts",
+      "default": "./src/utils/mattermost.ts"
+    },
+    "./utils/googleCalendar": {
+      "types": "./src/utils/googleCalendar.ts",
+      "default": "./src/utils/googleCalendar.ts"
     }
   },
   "license": "GPL-3.0",

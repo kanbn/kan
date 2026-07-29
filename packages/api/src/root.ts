@@ -1,5 +1,6 @@
 import { attachmentRouter } from "./routers/attachment";
 import { boardRouter } from "./routers/board";
+import { cardNotificationRouter } from "./routers/cardNotification";
 import { cardRouter } from "./routers/card";
 import { checklistRouter } from "./routers/checklist";
 import { dashboardRouter } from "./routers/dashboard";
@@ -23,6 +24,7 @@ export const appRouter = createTRPCRouter({
   attachment: attachmentRouter,
   board: boardRouter,
   card: cardRouter,
+  cardNotification: cardNotificationRouter,
   checklist: checklistRouter,
   dashboard: dashboardRouter,
   feedback: feedbackRouter,

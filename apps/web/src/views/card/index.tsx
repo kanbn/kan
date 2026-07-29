@@ -31,6 +31,7 @@ import { AttachmentThumbnails } from "./components/AttachmentThumbnails";
 import { AttachmentUpload } from "./components/AttachmentUpload";
 import BlockingIndicator from "./components/BlockingIndicator";
 import BlockerSelector from "./components/BlockerSelector";
+import { CardNotificationForm } from "./components/CardNotificationForm";
 import Checklists from "./components/Checklists";
 import { DeleteCardConfirmation } from "./components/DeleteCardConfirmation";
 import { DeleteChecklistConfirmation } from "./components/DeleteChecklistConfirmation";
@@ -44,6 +45,7 @@ import { MoveToDoneListConfirmation } from "./components/MoveToDoneListConfirmat
 import MemberSelector from "./components/MemberSelector";
 import { NewChecklistForm } from "./components/NewChecklistForm";
 import NewCommentForm from "./components/NewCommentForm";
+import NotificationSelector from "./components/NotificationSelector";
 
 interface FormValues {
   cardId: string;
@@ -175,6 +177,18 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           disabled={!canEdit}
         />
       </div>
+      {!isTemplate && (
+        <div className="mb-4 flex w-full flex-row">
+          <p className="my-2 mb-2 w-[100px] text-sm font-medium">
+            {t`Notifications`}
+          </p>
+          <NotificationSelector
+            cardPublicId={cardId ?? ""}
+            isLoading={!card}
+            disabled={!canEdit}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -694,6 +708,14 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
             isVisible={isOpen && modalContentType === "EDIT_YOUTUBE"}
           >
             <EditYouTubeModal />
+          </Modal>
+
+          <Modal
+            modalSize="sm"
+            positionFromTop="sm"
+            isVisible={isOpen && modalContentType === "CARD_NOTIFICATION"}
+          >
+            <CardNotificationForm cardPublicId={cardId ?? ""} />
           </Modal>
         </>
       </div>

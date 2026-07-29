@@ -159,3 +159,15 @@ export const setCalendarToken = async (
     .set({ calendarToken: token })
     .where(eq(users.id, userId));
 };
+
+/** Persist the user's IANA timezone (captured client-side) for tz-correct nudges. */
+export const setTimezone = async (
+  db: dbClient,
+  userId: string,
+  timezone: string,
+): Promise<void> => {
+  await db
+    .update(users)
+    .set({ timezone })
+    .where(eq(users.id, userId));
+};

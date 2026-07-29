@@ -339,3 +339,105 @@ export async function sendMattermostNotification(
     log.error({ err: error, cardId }, "Failed to send Mattermost notification");
   }
 }
+
+/** Format a due date for display in a DM (UTC date, locale-stable). */
+function formatDueDate(dueDate: Date | null): string {
+  if (!dueDate) return "soon";
+  return dueDate.toLocaleDateString("en-US", {
+    timeZone: "UTC",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+interface CardReminderInput {
+  cardPublicId: string;
+  cardId: number;
+  title: string;
+  dueDate: Date | null;
+}
+
+/**
+ * Send a scheduled card reminder DM to every member of the card. Used by the
+ * card-notifications poller at the reminder's computed fire time. The message
+ * only references the due date (per product decision — no fire-time details).
+ */
+export async function sendCardReminderMattermost(
+  db: dbClient,
+  input: CardReminderInput,
+): Promise<void> {
+  const config = getMattermostConfig();
+  if (!config) return;
+
+  try {
+    const memberEmails = await getCardMemberEmails(db, input.cardId);
+    if (memberEmails.length === 0) return;
+
+    const baseUrl = env("NEXT_PUBLIC_BASE_URL");
+    const cardUrl = `${baseUrl}/cards/${input.cardPublicId}`;
+    const message = `🔔 **[${input.title}](${cardUrl})** is due ${formatDueDate(input.dueDate)}`;
+
+    const results = await Promise.allSettled(
+      memberEmails.map(async (email) => {
+        const mmUserId = await getMattermostUserIdByEmail(config, email);
+        if (!mmUserId) {
+          log.warn({ email: redactEmail(email) }, "Mattermost user not found for email");
+          return;
+        }
+        await sendMattermostDM(config, mmUserId, message);
+      }),
+    );
+
+    const failed = results.filter((r) => r.status === "rejected").length;
+    if (failed > 0) {
+      log.warn({ failed, total: memberEmails.length }, "Some reminder DMs failed");
+    }
+  } catch (error) {
+    log.error({ err: error, cardId: input.cardId }, "Failed to send card reminder");
+  }
+}
+
+interface OverdueNudgeInput {
+  cardPublicId: string;
+  cardId: number;
+  title: string;
+  dueDate: Date | null;
+  memberEmail: string;
+}
+
+/**
+ * Send an overdue nudge DM to a SINGLE member (the poller dedups per user per
+ * day, so each member is nudged individually). Message references only the due
+ * date.
+ */
+export async function sendOverdueCardMattermost(
+  db: dbClient,
+  input: OverdueNudgeInput,
+): Promise<void> {
+  void db; // member already resolved to an email upstream
+  const config = getMattermostConfig();
+  if (!config) return;
+
+  try {
+    const mmUserId = await getMattermostUserIdByEmail(config, input.memberEmail);
+    if (!mmUserId) {
+      log.warn(
+        { email: redactEmail(input.memberEmail) },
+        "Mattermost user not found for email",
+      );
+      return;
+    }
+
+    const baseUrl = env("NEXT_PUBLIC_BASE_URL");
+    const cardUrl = `${baseUrl}/cards/${input.cardPublicId}`;
+    const message = `🔔 **[${input.title}](${cardUrl})** is overdue (was due ${formatDueDate(input.dueDate)})`;
+
+    await sendMattermostDM(config, mmUserId, message);
+  } catch (error) {
+    log.error(
+      { err: error, cardId: input.cardId },
+      "Failed to send overdue card nudge",
+    );
+  }
+}
