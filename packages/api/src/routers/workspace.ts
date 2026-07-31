@@ -205,12 +205,18 @@ export const workspaceRouter = createTRPCRouter({
       z.object({
         name: z.string().min(1).max(64),
         description: z.string().max(280).optional(),
+        // NewWorkspaceForm submits slug as "" when the user leaves the URL
+        // field empty (its own schema allows .or(z.literal(""))), so the
+        // server must accept the empty string too and fall back to the
+        // generated public id below — otherwise self-hosted workspace
+        // creation fails validation whenever the slug is left blank.
         slug: z
           .string()
           .min(3)
           .max(64)
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
-          .optional(),
+          .optional()
+          .or(z.literal("")),
       }),
     )
     .output(workspaceCreateResponseSchema)
@@ -233,7 +239,9 @@ export const workspaceRouter = createTRPCRouter({
       }
 
       const workspacePublicId = generateUID();
-      const workspaceSlug = input.slug ?? workspacePublicId;
+      // `||` (not `??`): an empty-string slug must also fall back to the
+      // generated public id.
+      const workspaceSlug = input.slug || workspacePublicId;
 
       if (input.slug) {
         const reservedOrPremiumWorkspaceSlug =
