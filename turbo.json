@@ -3,28 +3,49 @@
   "ui": "tui",
   "tasks": {
     "topo": {
-      "dependsOn": ["^topo"]
+      "dependsOn": [
+        "^topo"
+      ]
     },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".cache/tsbuildinfo.json", "dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".cache/tsbuildinfo.json",
+        "dist/**"
+      ]
     },
     "dev": {
-      "dependsOn": ["^dev"],
+      "dependsOn": [
+        "^dev"
+      ],
       "cache": false,
       "persistent": false
     },
     "format": {
-      "outputs": [".cache/.prettiercache"],
+      "outputs": [
+        ".cache/.prettiercache"
+      ],
       "outputLogs": "new-only"
     },
     "lint": {
-      "dependsOn": ["^topo", "^build"],
-      "outputs": [".cache/.eslintcache"]
+      "dependsOn": [
+        "^topo",
+        "^build"
+      ],
+      "outputs": [
+        ".cache/.eslintcache"
+      ]
     },
     "typecheck": {
-      "dependsOn": ["^topo", "^build"],
-      "outputs": [".cache/tsbuildinfo.json"]
+      "dependsOn": [
+        "^topo",
+        "^build"
+      ],
+      "outputs": [
+        ".cache/tsbuildinfo.json"
+      ]
     },
     "clean": {
       "cache": false
@@ -102,7 +123,6 @@
     "NEXT_PUBLIC_KAN_ENV",
     "NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY",
     "STRIPE_SECRET_KEY",
-    "DISCORD_WEBHOOK_URL",
     "STRIPE_WEBHOOK_SECRET",
     "STRIPE_WEBHOOK_SECRET_LEGACY",
     "STRIPE_PRO_PLAN_MONTHLY_PRICE_ID",
@@ -127,12 +147,12 @@
     "PORT",
     "BETTER_AUTH_SECRET",
     "BETTER_AUTH_TRUSTED_ORIGINS",
-    "NOVU_API_KEY",
-    "EMAIL_UNSUBSCRIBE_SECRET",
     "REDIS_URL",
     "LOG_LEVEL",
     "AXIOM_TOKEN",
-    "AXIOM_DATASET"
+    "AXIOM_DATASET",
+    "KAN_BASE_URL",
+    "KAN_API_TOKEN"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",

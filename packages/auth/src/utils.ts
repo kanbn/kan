@@ -3,9 +3,8 @@ import type Stripe from "stripe";
 
 import type { dbClient } from "@kan/db/client";
 import * as userRepo from "@kan/db/repository/user.repo";
-import { notificationClient } from "@kan/email";
+import { triggerSubscriberWorkflow } from "@kan/email";
 import { createLogger } from "@kan/logger";
-import { createEmailUnsubscribeLink } from "@kan/shared";
 
 const log = createLogger("auth");
 
@@ -24,30 +23,22 @@ export async function triggerWorkflow(
   cancellationDetails?: Stripe.Subscription.CancellationDetails | null,
 ) {
   try {
-    if (!subscription.stripeCustomerId || !notificationClient) return;
+    if (!subscription.stripeCustomerId) return;
 
     const user = await userRepo.getByStripeCustomerId(
       db,
       subscription.stripeCustomerId,
     );
 
-    if (!user || !notificationClient) return;
+    if (!user) return;
 
-    const unsubscribeUrl = await createEmailUnsubscribeLink(user.id);
-
-    log.info({ workflowId, userId: user.id }, "Triggering Novu workflow");
-    await notificationClient.trigger({
-      to: {
-        subscriberId: user.id,
-      },
-      payload: {
-        ...subscription,
-        cancellationDetails,
-        emailUnsubscribeUrl: unsubscribeUrl,
-      },
+    log.info({ workflowId, userId: user.id }, "Triggering workflow");
+    await triggerSubscriberWorkflow(
       workflowId,
-    });
-    log.info({ workflowId, userId: user.id }, "Novu workflow triggered");
+      { publicId: user.id },
+      { ...subscription, cancellationDetails },
+    );
+    log.info({ workflowId, userId: user.id }, "Workflow triggered");
   } catch (error) {
     log.error({ err: error, workflowId }, "Error triggering workflow");
   }

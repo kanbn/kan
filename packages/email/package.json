@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "@kan/logger": "workspace:^",
-    "@novu/api": "^3.11.0",
     "@react-email/components": "^1.0.1",
     "nodemailer": "^7.0.3",
     "react-email": "^5.0.6"

@@ -1,4 +1,9 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { env } from "next-runtime-env";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import * as memberRepo from "@kan/db/repository/member.repo";
+
+import { createDatabaseHooks } from "./hooks";
 
 vi.mock("next-runtime-env", () => ({
   env: vi.fn(),
@@ -15,11 +20,11 @@ vi.mock("@kan/db/repository/user.repo", () => ({
 }));
 
 vi.mock("@kan/email", () => ({
-  notificationClient: null,
+  createSubscriber: vi.fn(),
+  triggerSubscriberWorkflow: vi.fn(),
 }));
 
 vi.mock("@kan/shared", () => ({
-  createEmailUnsubscribeLink: vi.fn(),
   createS3Client: vi.fn(),
 }));
 
@@ -27,17 +32,10 @@ vi.mock("@aws-sdk/client-s3", () => ({
   PutObjectCommand: vi.fn(),
 }));
 
-vi.mock("@novu/api/models/components", () => ({
-  ChatOrPushProviderEnum: { Discord: "discord" },
-}));
-
-import { env } from "next-runtime-env";
-import * as memberRepo from "@kan/db/repository/member.repo";
-import { createDatabaseHooks } from "./hooks";
-
 const mockEnv = env as ReturnType<typeof vi.fn>;
-const mockGetByEmailAndStatus =
-  memberRepo.getByEmailAndStatus as ReturnType<typeof vi.fn>;
+const mockGetByEmailAndStatus = memberRepo.getByEmailAndStatus as ReturnType<
+  typeof vi.fn
+>;
 
 const db = {} as Parameters<typeof createDatabaseHooks>[0];
 

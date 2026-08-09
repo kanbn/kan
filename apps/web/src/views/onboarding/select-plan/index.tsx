@@ -48,7 +48,11 @@ export default function SelectPlanView() {
     (searchParams.get("billing") as Billing | null) ?? "annual",
   );
   const returnUrl = searchParams.get("returnUrl") ?? "/boards";
-  const workspacePublicId = searchParams.get("workspacePublicId");
+  const workspacePublicId =
+    searchParams.get("workspacePublicId") ??
+    (typeof window !== "undefined"
+      ? localStorage.getItem("workspacePublicId")
+      : null);
   const { data: workspaces } = api.workspace.all.useQuery();
   const { data: session } = authClient.useSession();
   const { data: user } = api.user.getUser.useQuery(undefined, {

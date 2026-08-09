@@ -1,18 +1,17 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { ChatOrPushProviderEnum } from "@novu/api/models/components";
 import { createAuthMiddleware } from "better-auth/api";
 import { env } from "next-runtime-env";
 
 import type { dbClient } from "@kan/db/client";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
-import { notificationClient } from "@kan/email";
+import { createSubscriber, triggerSubscriberWorkflow } from "@kan/email";
 import { createLogger } from "@kan/logger";
-import { createEmailUnsubscribeLink, createS3Client } from "@kan/shared";
-
-const log = createLogger("auth");
+import { createS3Client } from "@kan/shared";
 
 import { downloadImage } from "./utils";
+
+const log = createLogger("auth");
 
 type BetterAuthUser = {
   id: string;
@@ -94,53 +93,49 @@ export function createDatabaseHooks(db: dbClient) {
             }
           }
 
-          if (notificationClient) {
-            try {
-              const [firstName, ...rest] = (user.name || "")
-                .split(" ")
-                .filter(Boolean);
-              const lastName = rest.length ? rest.join(" ") : undefined;
-              const avatarUrl = avatarKey
-                ? `${env("NEXT_PUBLIC_STORAGE_URL")}/${env("NEXT_PUBLIC_AVATAR_BUCKET_NAME")}/${avatarKey}`
-                : undefined;
+          const [firstName, ...rest] = (user.name || "")
+            .split(" ")
+            .filter(Boolean);
+          const lastName = rest.length ? rest.join(" ") : undefined;
 
-              const unsubscribeUrl = await createEmailUnsubscribeLink(user.id);
+          try {
+            const avatarUrl = avatarKey
+              ? `${env("NEXT_PUBLIC_STORAGE_URL")}/${env("NEXT_PUBLIC_AVATAR_BUCKET_NAME")}/${avatarKey}`
+              : undefined;
 
-              log.info({ workflowId: "user-signup", userId: user.id, email: user.email }, "Triggering Novu workflow");
-              await notificationClient.trigger({
-                to: {
-                  subscriberId: user.id,
-                  firstName: firstName,
-                  lastName: lastName,
-                  email: user.email,
-                  avatar: avatarUrl,
-                  data: {
-                    emailVerified: user.emailVerified,
-                    stripeCustomerId: user.stripeCustomerId,
-                    createdAt: user.createdAt,
-                    updatedAt: user.updatedAt,
-                  },
-                },
-                payload: {
-                  emailUnsubscribeUrl: unsubscribeUrl,
-                },
-                workflowId: "user-signup",
-              });
-              log.info({ workflowId: "user-signup", userId: user.id }, "Novu workflow triggered");
+            await createSubscriber({
+              publicId: user.id,
+              email: user.email,
+              externalId: user.id,
+              firstName,
+              lastName,
+              name: user.name,
+              attributes: {
+                avatarUrl,
+                emailVerified: user.emailVerified,
+                stripeCustomerId: user.stripeCustomerId,
+                createdAt: user.createdAt,
+                updatedAt: user.updatedAt,
+              },
+            });
+          } catch (error) {
+            log.error({ err: error }, "Error creating subscriber");
+          }
 
-              await notificationClient.subscribers.credentials.update(
-                {
-                  providerId: ChatOrPushProviderEnum.Discord,
-                  credentials: {
-                    webhookUrl: env("DISCORD_WEBHOOK_URL"),
-                  },
-                  integrationIdentifier: "discord",
-                },
-                user.id,
-              );
-            } catch (error) {
-              log.error({ err: error }, "Error adding user to notification client");
-            }
+          try {
+            log.info(
+              { workflowId: "user-signup", userId: user.id, email: user.email },
+              "Triggering user-signup workflow",
+            );
+            await triggerSubscriberWorkflow("user-signup", {
+              publicId: user.id,
+            });
+            log.info(
+              { workflowId: "user-signup", userId: user.id },
+              "user-signup workflow triggered",
+            );
+          } catch (error) {
+            log.error({ err: error }, "Error triggering user-signup workflow");
           }
         },
       },

@@ -75,7 +75,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        59
+        60
       ]
     ],
     "translation": "{0} has been added to your favorites."
@@ -91,7 +91,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        60
+        61
       ]
     ],
     "translation": "{0} has been removed from your favorites."
@@ -123,7 +123,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        557
+        565
       ]
     ],
     "translation": "{0} not found"
@@ -483,7 +483,7 @@
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
-        68
+        85
       ]
     ],
     "translation": "Add comment... (type '/' to open commands or '@' to mention)"
@@ -495,7 +495,7 @@
     "origin": [
       [
         "src/components/Editor.tsx",
-        482
+        499
       ]
     ],
     "translation": "Add description... (type '/' to open commands or '@' to mention)"
@@ -551,7 +551,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        125
+        137
       ]
     ],
     "translation": "Add to favorites"
@@ -718,7 +718,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        56
+        57
       ]
     ],
     "translation": "Added to favorites"
@@ -973,7 +973,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        64
+        68
       ]
     ],
     "translation": "Annual"
@@ -1109,7 +1109,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        114
+        115
       ]
     ],
     "translation": "Archive board"
@@ -1393,7 +1393,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        87
+        91
       ]
     ],
     "translation": "Best for small teams who want to collaborate and move faster together."
@@ -1485,7 +1485,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        530
+        538
       ],
       [
         "src/views/card/index.tsx",
@@ -1517,10 +1517,22 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        46
+        47
       ]
     ],
     "translation": "Board archived"
+  },
+  "wE3hGS": {
+    "message": "Board moved",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/MoveBoardForm.tsx",
+        33
+      ]
+    ],
+    "translation": "Board moved"
   },
   "wewm3j": {
     "message": "Board name cannot exceed 100 characters",
@@ -1577,7 +1589,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        46
+        47
       ]
     ],
     "translation": "Board unarchived"
@@ -2132,6 +2144,10 @@
         44
       ],
       [
+        "src/views/board/components/MoveBoardForm.tsx",
+        99
+      ],
+      [
         "src/views/card/components/Comment.tsx",
         195
       ],
@@ -2153,7 +2169,7 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        236
+        240
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -2226,6 +2242,18 @@
     ],
     "translation": "Card duplicated successfully."
   },
+  "AgE2vR": {
+    "message": "Card member assignments will be cleared when moving to a different workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/MoveBoardForm.tsx",
+        92
+      ]
+    ],
+    "translation": "Card member assignments will be cleared when moving to a different workspace."
+  },
   "fEY2vP": {
     "message": "Card not found",
     "placeholders": {},
@@ -2261,7 +2289,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        308
+        309
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2409,7 +2437,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        149
+        153
       ]
     ],
     "translation": "Choose a plan"
@@ -2704,7 +2732,8 @@
         81
       ]
     ],
-    "translation": "Confirm your email preferences:"
+    "translation": "Confirm your email preferences:",
+    "obsolete": true
   },
   "479pdJ": {
     "message": "Confirm your new password",
@@ -2857,7 +2886,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        242
+        246
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -3177,11 +3206,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        92
+        93
       ],
       [
         "src/views/board/index.tsx",
-        671
+        679
       ]
     ],
     "translation": "Create new list"
@@ -3558,7 +3587,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        136
+        148
       ]
     ],
     "translation": "Delete board"
@@ -3610,7 +3639,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        136
+        148
       ]
     ],
     "translation": "Delete template"
@@ -3714,6 +3743,18 @@
       ]
     ],
     "translation": "Design"
+  },
+  "Uf+1DF": {
+    "message": "Destination workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/MoveBoardForm.tsx",
+        76
+      ]
+    ],
+    "translation": "Destination workspace"
   },
   "Odv3J6": {
     "message": "Disconnect GitHub",
@@ -3821,7 +3862,8 @@
         78
       ]
     ],
-    "translation": "Do you want to unsubscribe?"
+    "translation": "Do you want to unsubscribe?",
+    "obsolete": true
   },
   "JyXBgS": {
     "message": "docs",
@@ -4082,7 +4124,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        105
+        106
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
@@ -5019,11 +5061,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        78
+        82
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        79
+        83
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -5223,7 +5265,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        656
+        664
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -5415,7 +5457,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        80
+        84
       ]
     ],
     "translation": "Good for individuals starting out who just need the essentials."
@@ -6293,7 +6335,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        306
+        307
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -6465,7 +6507,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        94
+        95
       ]
     ],
     "translation": "Make template"
@@ -6673,7 +6715,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        63
+        67
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -6698,6 +6740,30 @@
     ],
     "translation": "monthly billing"
   },
+  "sZ/WDz": {
+    "message": "Move board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/MoveBoardForm.tsx",
+        107
+      ]
+    ],
+    "translation": "Move board"
+  },
+  "VvCMyU": {
+    "message": "Move board to another workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/MoveBoardForm.tsx",
+        64
+      ]
+    ],
+    "translation": "Move board to another workspace"
+  },
   "51UCsN": {
     "message": "Move to another list",
     "placeholders": {},
@@ -6721,6 +6787,18 @@
       ]
     ],
     "translation": "Move to list"
+  },
+  "S3wq2O": {
+    "message": "Move to workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        126
+      ]
+    ],
+    "translation": "Move to workspace"
   },
   "BOqTi5": {
     "message": "moved the card from <0>{0}</0> to<1>{1}</1>",
@@ -6920,7 +6998,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        620
+        628
       ]
     ],
     "translation": "New list"
@@ -7140,7 +7218,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        652
+        660
       ]
     ],
     "translation": "No lists"
@@ -7152,7 +7230,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        657
+        665
       ]
     ],
     "translation": "No lists have been created yet"
@@ -7672,7 +7750,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        152
+        156
       ]
     ],
     "translation": "Pick a plan to get started. All paid plans include a 14-day free trial."
@@ -7836,7 +7914,7 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        68
+        69
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -7864,11 +7942,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        218
+        219
       ],
       [
         "src/views/board/index.tsx",
-        274
+        275
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -7940,7 +8018,7 @@
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
-        37
+        38
       ],
       [
         "src/views/card/index.tsx",
@@ -8052,7 +8130,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        315
+        316
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -8176,7 +8254,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        92
+        96
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -8356,7 +8434,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        124
+        136
       ]
     ],
     "translation": "Remove from favorites"
@@ -8451,7 +8529,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        57
+        58
       ]
     ],
     "translation": "Removed from favorites"
@@ -8860,6 +8938,18 @@
     ],
     "translation": "Select a list"
   },
+  "NM2hyD": {
+    "message": "Select a workspace",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/MoveBoardForm.tsx",
+        84
+      ]
+    ],
+    "translation": "Select a workspace"
+  },
   "wgNoIs": {
     "message": "Select all",
     "placeholders": {},
@@ -9223,7 +9313,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        315
+        319
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -9379,7 +9469,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        77
+        81
       ]
     ],
     "translation": "Solo"
@@ -9488,6 +9578,18 @@
     ],
     "translation": "Status"
   },
+  "hQRttt": {
+    "message": "Submit",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/NewCommentForm.tsx",
+        60
+      ]
+    ],
+    "translation": "Submit"
+  },
   "WYDptz": {
     "message": "Subscription Required",
     "placeholders": {},
@@ -9587,7 +9689,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        84
+        88
       ]
     ],
     "translation": "Team"
@@ -9639,11 +9741,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        530
+        538
       ],
       [
         "src/views/board/index.tsx",
-        566
+        574
       ]
     ],
     "translation": "Template"
@@ -9827,10 +9929,26 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        48
+        49
       ]
     ],
     "translation": "The board has been archived."
+  },
+  "ZWk38w": {
+    "message": "The board has been moved to {0}.",
+    "placeholders": {
+      "0": [
+        "targetWorkspace?.name ?? \"the workspace\""
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/MoveBoardForm.tsx",
+        34
+      ]
+    ],
+    "translation": "The board has been moved to {0}."
   },
   "C6gv54": {
     "message": "The board has been unarchived.",
@@ -9839,7 +9957,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        49
+        50
       ]
     ],
     "translation": "The board has been unarchived."
@@ -10339,7 +10457,7 @@
     "origin": [
       [
         "src/views/card/components/NewCommentForm.tsx",
-        36
+        37
       ]
     ],
     "translation": "Unable to add comment"
@@ -10387,7 +10505,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        313
+        314
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -10572,6 +10690,18 @@
     ],
     "translation": "Unable to duplicate card"
   },
+  "d196/6": {
+    "message": "Unable to move board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/MoveBoardForm.tsx",
+        45
+      ]
+    ],
+    "translation": "Unable to move board"
+  },
   "K7k9u3": {
     "message": "Unable to move card",
     "placeholders": {},
@@ -10667,7 +10797,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        67
+        68
       ]
     ],
     "translation": "Unable to update board"
@@ -10703,7 +10833,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        273
+        274
       ],
       [
         "src/views/card/index.tsx",
@@ -10779,7 +10909,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        217
+        218
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -10847,7 +10977,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        114
+        115
       ]
     ],
     "translation": "Unarchive board"
@@ -11055,7 +11185,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        95
+        99
       ]
     ],
     "translation": "Unlimited members and a custom workspace username for teams ready to scale."
@@ -11098,7 +11228,8 @@
         93
       ]
     ],
-    "translation": "Unsubscribe"
+    "translation": "Unsubscribe",
+    "obsolete": true
   },
   "EkH9pt": {
     "message": "Update",
@@ -11215,7 +11346,7 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        241
+        245
       ]
     ],
     "translation": "Upgrade"
@@ -11514,7 +11645,8 @@
         63
       ]
     ],
-    "translation": "We couldn't update your preferences. Please try again."
+    "translation": "We couldn't update your preferences. Please try again.",
+    "obsolete": true
   },
   "7sdSkl": {
     "message": "We sent a link to {magicLinkRecipient}",
@@ -11767,7 +11899,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        530
+        538
       ],
       [
         "src/views/boards/index.tsx",
@@ -12117,6 +12249,18 @@
     ],
     "translation": "You can self-host by following the instructions in our <0>repo</0>."
   },
+  "tUL16u": {
+    "message": "You don't have any other workspaces to move this board to.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/MoveBoardForm.tsx",
+        68
+      ]
+    ],
+    "translation": "You don't have any other workspaces to move this board to."
+  },
   "h2FKMV": {
     "message": "You don't have permission",
     "placeholders": {},
@@ -12136,11 +12280,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        604
+        612
       ],
       [
         "src/views/board/index.tsx",
-        662
+        670
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -12191,7 +12335,8 @@
         98
       ]
     ],
-    "translation": "You have been unsubscribed!"
+    "translation": "You have been unsubscribed!",
+    "obsolete": true
   },
   "R275Pz": {
     "message": "You have unlimited seats with your Pro Plan. There is no additional charge for new members!",
@@ -12301,7 +12446,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        260
+        264
       ]
     ],
     "translation": "Your avatar"
@@ -12484,7 +12629,8 @@
         33
       ]
     ],
-    "translation": "Your unsubscribe link is missing a token. Please open the latest email and try again."
+    "translation": "Your unsubscribe link is missing a token. Please open the latest email and try again.",
+    "obsolete": true
   },
   "GRAGsB": {
     "message": "Your workspace",

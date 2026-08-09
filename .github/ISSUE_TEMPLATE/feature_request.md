@@ -7,6 +7,9 @@ assignees: ''
 
 ---
 
+> [!IMPORTANT]
+> Wait for a maintainer to approve this issue before opening a PR. We'll signal approval with a comment or label. Feature PRs without an approved issue will be closed.
+
 ## ✨ Feature Request
 
 **Is your feature request related to a problem? Please describe.**
