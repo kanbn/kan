@@ -30,6 +30,7 @@ import UserMenu from "~/components/UserMenu";
 import WorkspaceMenu from "~/components/WorkspaceMenu";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import CollapsibleBoardList from "./CollapsibleBoardList ";
 
 interface SideNavigationProps {
   user: UserType;
@@ -93,18 +94,6 @@ export default function SideNavigation({
     icon: object;
     keyboardShortcut: KeyboardShortcut;
   }[] = [
-    {
-      name: t`Boards`,
-      href: "/boards",
-      icon: isDarkMode ? boardsIconDark : boardsIconLight,
-      keyboardShortcut: {
-        type: "SEQUENCE",
-        strokes: [{ key: "G" }, { key: "B" }],
-        action: () => router.push("/boards"),
-        group: "NAVIGATION",
-        description: t`Go to boards`,
-      },
-    },
     {
       name: t`Templates`,
       href: "/templates",
@@ -188,6 +177,23 @@ export default function SideNavigation({
 
           <WorkspaceMenu isCollapsed={isCollapsed} />
           <ul role="list" className="space-y-1">
+            <li>
+              <CollapsibleBoardList
+                href="/boards"
+                current={pathname.includes("/boards")}
+                name={t`Boards`}
+                json={isDarkMode ? boardsIconDark : boardsIconLight}
+                isCollapsed={isCollapsed}
+                onCloseSideNav={onCloseSideNav}
+                keyboardShortcut={{
+                  type: "SEQUENCE",
+                  strokes: [{ key: "G" }, { key: "B" }],
+                  action: () => router.push("/boards"),
+                  group: "NAVIGATION",
+                  description: t`Go to boards`,
+                }}
+              />
+            </li>
             {navigation.map((item) => (
               <li key={item.name}>
                 <ReactiveButton
