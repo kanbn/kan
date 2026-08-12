@@ -4,7 +4,7 @@ import { Button } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { HiBolt } from "react-icons/hi2";
 import {
   TbLayoutSidebarLeftCollapse,
@@ -92,56 +92,59 @@ export default function SideNavigation({
     href: string;
     icon: object;
     keyboardShortcut: KeyboardShortcut;
-  }[] = [
-    {
-      name: t`Boards`,
-      href: "/boards",
-      icon: isDarkMode ? boardsIconDark : boardsIconLight,
-      keyboardShortcut: {
-        type: "SEQUENCE",
-        strokes: [{ key: "G" }, { key: "B" }],
-        action: () => router.push("/boards"),
-        group: "NAVIGATION",
-        description: t`Go to boards`,
+  }[] = useMemo(
+    () => [
+      {
+        name: t`Boards`,
+        href: "/boards",
+        icon: isDarkMode ? boardsIconDark : boardsIconLight,
+        keyboardShortcut: {
+          type: "SEQUENCE",
+          strokes: [{ key: "G" }, { key: "B" }],
+          action: () => router.push("/boards"),
+          group: "NAVIGATION",
+          description: t`Go to boards`,
+        },
       },
-    },
-    {
-      name: t`Templates`,
-      href: "/templates",
-      icon: isDarkMode ? templatesIconDark : templatesIconLight,
-      keyboardShortcut: {
-        type: "SEQUENCE",
-        strokes: [{ key: "G" }, { key: "T" }],
-        action: () => router.push("/templates"),
-        group: "NAVIGATION",
-        description: t`Go to templates`,
+      {
+        name: t`Templates`,
+        href: "/templates",
+        icon: isDarkMode ? templatesIconDark : templatesIconLight,
+        keyboardShortcut: {
+          type: "SEQUENCE",
+          strokes: [{ key: "G" }, { key: "T" }],
+          action: () => router.push("/templates"),
+          group: "NAVIGATION",
+          description: t`Go to templates`,
+        },
       },
-    },
-    {
-      name: t`Members`,
-      href: "/members",
-      icon: isDarkMode ? membersIconDark : membersIconLight,
-      keyboardShortcut: {
-        type: "SEQUENCE",
-        strokes: [{ key: "G" }, { key: "M" }],
-        action: () => router.push("/members"),
-        group: "NAVIGATION",
-        description: t`Go to members`,
+      {
+        name: t`Members`,
+        href: "/members",
+        icon: isDarkMode ? membersIconDark : membersIconLight,
+        keyboardShortcut: {
+          type: "SEQUENCE",
+          strokes: [{ key: "G" }, { key: "M" }],
+          action: () => router.push("/members"),
+          group: "NAVIGATION",
+          description: t`Go to members`,
+        },
       },
-    },
-    {
-      name: t`Settings`,
-      href: "/settings",
-      icon: isDarkMode ? settingsIconDark : settingsIconLight,
-      keyboardShortcut: {
-        type: "SEQUENCE",
-        strokes: [{ key: "G" }, { key: "S" }],
-        action: () => router.push("/settings"),
-        group: "NAVIGATION",
-        description: t`Go to settings`,
+      {
+        name: t`Settings`,
+        href: "/settings",
+        icon: isDarkMode ? settingsIconDark : settingsIconLight,
+        keyboardShortcut: {
+          type: "SEQUENCE",
+          strokes: [{ key: "G" }, { key: "S" }],
+          action: () => router.push("/settings"),
+          group: "NAVIGATION",
+          description: t`Go to settings`,
+        },
       },
-    },
-  ];
+    ],
+    [isDarkMode],
+  );
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);

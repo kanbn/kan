@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { keepPreviousData } from "@tanstack/react-query";
 import { env } from "next-runtime-env";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DragDropContext, Draggable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
 import {
@@ -46,10 +46,10 @@ import { CardContextMembersModal } from "./components/CardContextMembersModal";
 import { CardContextMenu } from "./components/CardContextMenu";
 import { CardContextMoveListModal } from "./components/CardContextMoveListModal";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
-import { MoveBoardForm } from "./components/MoveBoardForm";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
 import List from "./components/List";
+import { MoveBoardForm } from "./components/MoveBoardForm";
 import { NewCardForm } from "./components/NewCardForm";
 import { NewListForm } from "./components/NewListForm";
 import { NewTemplateForm } from "./components/NewTemplateForm";
@@ -85,20 +85,25 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const { canCreateList, canEditList, canEditCard, canEditBoard } =
     usePermissions();
 
-  const { tooltipContent: createListShortcutTooltipContent } =
-    useKeyboardShortcut({
-      type: "PRESS",
-      stroke: { key: "C" },
-      action: () => boardId && canCreateList && openNewListForm(boardId),
-      description: t`Create new list`,
-      group: "ACTIONS",
-    });
-
   const boardId = params?.boardId
     ? Array.isArray(params.boardId)
       ? params.boardId[0]
       : params.boardId
     : null;
+
+  const createListShortcut = useMemo(
+    () => ({
+      type: "PRESS" as const,
+      stroke: { key: "C" },
+      action: () => boardId && canCreateList && openNewListForm(boardId),
+      description: t`Create new list`,
+      group: "ACTIONS" as const,
+    }),
+    [boardId, canCreateList],
+  );
+
+  const { tooltipContent: createListShortcutTooltipContent } =
+    useKeyboardShortcut(createListShortcut);
 
   const updateBoard = api.board.update.useMutation();
 

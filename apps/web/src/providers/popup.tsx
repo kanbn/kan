@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 
 interface PopupContextType {
   isOpen: boolean;
@@ -25,24 +25,27 @@ export const PopupProvider: React.FC<Props> = ({ children }) => {
   const [popupMessage, setPopupMessage] = useState("");
   const [popupIcon, setPopupIcon] = useState("");
 
-  const showPopup = ({
-    header,
-    message,
-    icon,
-  }: {
-    header: string;
-    message: string;
-    icon: string;
-  }) => {
-    setIsOpen(true);
-    setPopupHeader(header);
-    setPopupMessage(message);
-    setPopupIcon(icon);
-  };
+  const showPopup = useCallback(
+    ({
+      header,
+      message,
+      icon,
+    }: {
+      header: string;
+      message: string;
+      icon: string;
+    }) => {
+      setIsOpen(true);
+      setPopupHeader(header);
+      setPopupMessage(message);
+      setPopupIcon(icon);
+    },
+    [],
+  );
 
-  const hidePopup = () => {
+  const hidePopup = useCallback(() => {
     setIsOpen(false);
-  };
+  }, []);
 
   return (
     <PopupContext.Provider

@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { Button, Menu, Transition } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
-import { Fragment, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { HiCheck, HiMagnifyingGlass } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
@@ -26,17 +26,22 @@ export default function WorkspaceMenu({
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
-  const { tooltipContent: commandPaletteShortcutTooltipContent } =
-    useKeyboardShortcut({
-      type: "PRESS",
+  const commandPaletteShortcut = useMemo(
+    () => ({
+      type: "PRESS" as const,
       stroke: {
         key: "k",
-        modifiers: ["META"],
+        modifiers: ["META"] as ("META" | "CONTROL" | "ALT" | "SHIFT")[],
       },
       action: () => setIsOpen(true),
       description: t`Open command menu`,
-      group: "GENERAL",
-    });
+      group: "GENERAL" as const,
+    }),
+    [],
+  );
+
+  const { tooltipContent: commandPaletteShortcutTooltipContent } =
+    useKeyboardShortcut(commandPaletteShortcut);
 
   return (
     <>
