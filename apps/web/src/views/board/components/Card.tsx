@@ -7,10 +7,12 @@ import {
 } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
+import type { Priority } from "~/components/PriorityIcon";
 import Avatar from "~/components/Avatar";
 import Badge from "~/components/Badge";
 import CircularProgress from "~/components/CircularProgress";
 import LabelIcon from "~/components/LabelIcon";
+import { PriorityIcon } from "~/components/PriorityIcon";
 import { useLocalisation } from "~/hooks/useLocalisation";
 import { getAvatarUrl } from "~/utils/helpers";
 
@@ -24,6 +26,7 @@ const Card = ({
   comments,
   attachments,
   dueDate,
+  priority,
 }: {
   title: string;
   ticketNumber?: string | null;
@@ -47,6 +50,7 @@ const Card = ({
   comments: { publicId: string }[];
   attachments?: { publicId: string }[];
   dueDate?: Date | null;
+  priority?: Priority | null;
 }) => {
   const { dateLocale } = useLocalisation();
   const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;
@@ -66,6 +70,7 @@ const Card = ({
     description && description.replace(/<[^>]*>/g, "").trim().length > 0;
   const hasAttachments = attachments && attachments.length > 0;
   const hasDueDate = !!dueDate;
+  const hasPriority = !!priority;
 
   return (
     <div className="flex flex-col overflow-hidden rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300">
@@ -81,11 +86,18 @@ const Card = ({
       hasDescription ||
       comments.length > 0 ||
       hasDueDate ||
+      hasPriority ||
       hasAttachments ? (
         <div className="mt-2 flex flex-col justify-end">
-          <div className="space-x-0.5">
+          <div className="flex flex-wrap items-center gap-1">
+            {hasPriority && priority && (
+              <span className="flex items-center text-light-800 dark:text-dark-800">
+                <PriorityIcon priority={priority} size={14} />
+              </span>
+            )}
             {labels.map((label) => (
               <Badge
+                key={label.name}
                 value={label.name}
                 iconLeft={<LabelIcon colourCode={label.colourCode} />}
               />

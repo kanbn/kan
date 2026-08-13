@@ -8,11 +8,7 @@ import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
-export function MoveBoardForm({
-  boardPublicId,
-}: {
-  boardPublicId: string;
-}) {
+export function MoveBoardForm({ boardPublicId }: { boardPublicId: string }) {
   const router = useRouter();
   const { closeModal } = useModal();
   const { showPopup } = usePopup();

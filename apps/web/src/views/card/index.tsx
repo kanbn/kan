@@ -39,6 +39,7 @@ import ListSelector from "./components/ListSelector";
 import MemberSelector from "./components/MemberSelector";
 import { NewChecklistForm } from "./components/NewChecklistForm";
 import NewCommentForm from "./components/NewCommentForm";
+import { PrioritySelector } from "./components/PrioritySelector";
 
 interface FormValues {
   cardId: string;
@@ -154,6 +155,15 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
         <DueDateSelector
           cardPublicId={cardId ?? ""}
           dueDate={card?.dueDate}
+          isLoading={!card}
+          disabled={!canEdit}
+        />
+      </div>
+      <div className="mb-4 flex w-full flex-row">
+        <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Priority`}</p>
+        <PrioritySelector
+          cardPublicId={cardId ?? ""}
+          priority={card?.priority}
           isLoading={!card}
           disabled={!canEdit}
         />

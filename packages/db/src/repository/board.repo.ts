@@ -78,7 +78,9 @@ export const getAllByWorkspaceId = async (
       eq(boards.workspaceId, workspaceId),
       isNull(boards.deletedAt),
       opts?.type ? eq(boards.type, opts.type) : undefined,
-      opts?.archived !== undefined ? eq(boards.isArchived, opts.archived) : undefined,
+      opts?.archived !== undefined
+        ? eq(boards.isArchived, opts.archived)
+        : undefined,
     ),
   });
 
@@ -144,6 +146,31 @@ const buildDueDateWhere = (filters: DueDateFilter[]) => {
   return or(...clauses);
 };
 
+const buildPriorityWhere = (priorityFilters?: string[]) => {
+  if (!priorityFilters || !priorityFilters.length) return undefined;
+
+  const clauses = priorityFilters
+    .map((priority) => {
+      if (priority === "no-priority") {
+        return isNull(cards.priority);
+      }
+      if (
+        priority === "urgent" ||
+        priority === "high" ||
+        priority === "medium" ||
+        priority === "low"
+      ) {
+        return eq(cards.priority, priority);
+      }
+      return undefined;
+    })
+    .filter((clause): clause is NonNullable<typeof clause> => !!clause);
+
+  if (!clauses.length) return undefined;
+
+  return or(...clauses);
+};
+
 export const getByPublicId = async (
   db: dbClient,
   boardPublicId: string,
@@ -153,6 +180,7 @@ export const getByPublicId = async (
     labels: string[];
     lists: string[];
     dueDate: DueDateFilter[];
+    priority?: string[];
     type: "regular" | "template" | undefined;
   },
 ) => {
@@ -256,6 +284,7 @@ export const getByPublicId = async (
               listId: true,
               index: true,
               dueDate: true,
+              priority: true,
               cardNumber: true,
             },
             with: {
@@ -331,6 +360,7 @@ export const getByPublicId = async (
               cardIds.length > 0 ? inArray(cards.publicId, cardIds) : undefined,
               isNull(cards.deletedAt),
               buildDueDateWhere(filters.dueDate),
+              buildPriorityWhere(filters.priority),
             ),
             orderBy: [asc(cards.index)],
           },
@@ -389,6 +419,7 @@ export const getBySlug = async (
     labels: string[];
     lists: string[];
     dueDate: DueDateFilter[];
+    priority?: string[];
   },
 ) => {
   let cardIds: string[] = [];
@@ -453,6 +484,7 @@ export const getBySlug = async (
               listId: true,
               index: true,
               dueDate: true,
+              priority: true,
               cardNumber: true,
             },
             with: {
@@ -507,6 +539,7 @@ export const getBySlug = async (
               cardIds.length > 0 ? inArray(cards.publicId, cardIds) : undefined,
               isNull(cards.deletedAt),
               buildDueDateWhere(filters.dueDate),
+              buildPriorityWhere(filters.priority),
             ),
             orderBy: [asc(cards.index)],
           },
@@ -647,7 +680,9 @@ export const update = async (
       slug: boardInput.slug,
       visibility: boardInput.visibility,
       updatedAt: new Date(),
-      ...(boardInput.isArchived !== undefined && { isArchived: boardInput.isArchived })
+      ...(boardInput.isArchived !== undefined && {
+        isArchived: boardInput.isArchived,
+      }),
     })
     .where(eq(boards.publicId, boardInput.boardPublicId))
     .returning({
@@ -730,10 +765,7 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
  * Soft-deleted boards are excluded — moving a tombstoned board has
  * no defensible semantics.
  */
-export const getBoardForMove = async (
-  db: dbClient,
-  boardPublicId: string,
-) => {
+export const getBoardForMove = async (db: dbClient, boardPublicId: string) => {
   return db.query.boards.findFirst({
     columns: {
       id: true,
@@ -1073,8 +1105,8 @@ export const removeUserFavorite = async (
     .where(
       and(
         eq(userBoardFavorites.userId, userId),
-        eq(userBoardFavorites.boardId, boardId)
-      )
+        eq(userBoardFavorites.boardId, boardId),
+      ),
     )
     .returning();
 };

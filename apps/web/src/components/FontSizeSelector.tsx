@@ -1,7 +1,8 @@
 import { t } from "@lingui/core/macro";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 
-import { useFontSize, type FontSize } from "~/providers/font-size";
+import type { FontSize } from "~/providers/font-size";
+import { useFontSize } from "~/providers/font-size";
 
 const fontSizeOptions: { value: FontSize; label: () => string }[] = [
   { value: "small", label: () => t`Small` },

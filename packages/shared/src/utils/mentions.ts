@@ -8,9 +8,10 @@ export function parseMentionsFromHTML(htmlContent: string): string[] {
   if (!htmlContent) return [];
 
   // Match all mention spans with data-id attributes
-  const mentionRegex = /<span[^>]*data-type="mention"[^>]*data-id="([^"]+)"[^>]*>/gi;
+  const mentionRegex =
+    /<span[^>]*data-type="mention"[^>]*data-id="([^"]+)"[^>]*>/gi;
   const matches = Array.from(htmlContent.matchAll(mentionRegex));
-  
+
   // Extract unique mention IDs
   const mentionIds = matches
     .map((match) => match[1])
@@ -19,4 +20,3 @@ export function parseMentionsFromHTML(htmlContent: string): string[] {
   // Return unique IDs
   return Array.from(new Set(mentionIds));
 }
-

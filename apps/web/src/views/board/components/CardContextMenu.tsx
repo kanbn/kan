@@ -2,12 +2,12 @@ import { t } from "@lingui/core/macro";
 import { useEffect, useRef } from "react";
 import {
   HiLink,
+  HiOutlineArrowRightCircle,
   HiOutlineCalendar,
   HiOutlineDocumentDuplicate,
   HiOutlineTag,
   HiOutlineTrash,
   HiOutlineUserGroup,
-  HiOutlineArrowRightCircle,
 } from "react-icons/hi2";
 
 export type CardContextMenuAction =

@@ -1,10 +1,6 @@
 {
   "background_color": "#000000",
-  "categories": [
-    "business",
-    "productivity",
-    "utilities"
-  ],
+  "categories": ["business", "productivity", "utilities"],
   "description": "The open source Trello alternative.",
   "display": "standalone",
   "icons": [

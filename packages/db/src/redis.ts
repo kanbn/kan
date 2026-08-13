@@ -28,4 +28,3 @@ export async function closeRedisClient(): Promise<void> {
     redisClient = null;
   }
 }
-

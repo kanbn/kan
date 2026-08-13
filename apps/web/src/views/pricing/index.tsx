@@ -59,8 +59,6 @@ export default function PricingView() {
         </div>
 
         <div className="pb-22 flex flex-col items-center justify-center px-4">
-        
-
           <div className="mt-10 w-full">
             <FeatureComparisonTable
               frequencyValue={frequency?.value ?? "annually"}

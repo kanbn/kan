@@ -9,10 +9,9 @@ export async function invalidateCard(
   cardPublicId: string,
 ) {
   if (!cardPublicId || cardPublicId.length < 12) return;
-  
+
   await Promise.all([
     utils.card.byId.invalidate({ cardPublicId }),
     utils.card.getActivities.invalidate({ cardPublicId }),
   ]);
 }
-

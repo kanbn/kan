@@ -1,8 +1,8 @@
 import { toNodeHandler } from "better-auth/node";
 
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 import { initAuth } from "@kan/auth/server";
 import { createDrizzleClient } from "@kan/db/client";
-import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 export const config = { api: { bodyParser: false } };
 
@@ -20,7 +20,9 @@ export default withRateLimit(
      */
     const forwardedProto = req.headers["x-forwarded-proto"];
     if (forwardedProto) {
-      const p = Array.isArray(forwardedProto) ? forwardedProto[0] : forwardedProto;
+      const p = Array.isArray(forwardedProto)
+        ? forwardedProto[0]
+        : forwardedProto;
       req.headers["x-forwarded-proto"] = p?.split(",")[0]?.trim();
     }
 

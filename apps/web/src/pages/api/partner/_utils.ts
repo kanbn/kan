@@ -18,3 +18,5 @@ export function tierConfig(tier: number): TierConfig {
   if (!config) throw new Error(`Unknown partner tier: ${tier}`);
   return config;
 }
+
+export default function () {}

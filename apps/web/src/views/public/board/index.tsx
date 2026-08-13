@@ -63,6 +63,7 @@ export default function PublicBoardView() {
       ...(dueDateFilters.length > 0 && {
         dueDateFilters: dueDateFilters,
       }),
+      priorityFilters: formatToArray(router.query.priority),
     },
     {
       enabled: router.isReady && !!boardSlug,
@@ -227,6 +228,7 @@ export default function PublicBoardView() {
                               comments={card.comments ?? []}
                               attachments={card.attachments}
                               dueDate={card.dueDate ?? null}
+                              priority={card.priority ?? null}
                             />
                           </Link>
                         );

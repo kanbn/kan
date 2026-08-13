@@ -10,6 +10,6 @@
     "plugins": [{ "name": "next" }],
     "module": "esnext"
   },
-  "include": [".", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["src", "next-env.d.ts", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "bootstrap.cjs", "public"]
 }

@@ -1,8 +1,8 @@
 import { t } from "@lingui/core/macro";
 
-import { PageHead } from "~/components/PageHead";
 import Button from "~/components/Button";
 import Modal from "~/components/modal";
+import { PageHead } from "~/components/PageHead";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
@@ -18,8 +18,8 @@ export default function PermissionsSettings() {
 
   const isAdmin = workspace.role === "admin";
 
-  const resetAllOverrides = api.permission.resetWorkspaceMemberPermissions.useMutation(
-    {
+  const resetAllOverrides =
+    api.permission.resetWorkspaceMemberPermissions.useMutation({
       onSuccess: async () => {
         showPopup({
           header: t`Overrides cleared`,
@@ -41,8 +41,7 @@ export default function PermissionsSettings() {
           icon: "error",
         });
       },
-    },
-  );
+    });
 
   return (
     <>
@@ -99,5 +98,3 @@ export default function PermissionsSettings() {
     </>
   );
 }
-
-

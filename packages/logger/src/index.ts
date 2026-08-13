@@ -9,7 +9,10 @@ const axiomToken = process.env.AXIOM_TOKEN;
 const axiomDataset = process.env.AXIOM_DATASET;
 const useAxiom = isCloud && !!axiomToken && !!axiomDataset;
 
-function createAxiomStream(token: string, dataset: string): pino.DestinationStream {
+function createAxiomStream(
+  token: string,
+  dataset: string,
+): pino.DestinationStream {
   const client = new Axiom({ token });
   return {
     write(msg: string) {
@@ -35,7 +38,11 @@ export const logger = useAxiom
       ...(isDev && {
         transport: {
           target: "pino-pretty",
-          options: { colorize: true, ignore: "pid,hostname", translateTime: "HH:MM:ss" },
+          options: {
+            colorize: true,
+            ignore: "pid,hostname",
+            translateTime: "HH:MM:ss",
+          },
         },
       }),
     });

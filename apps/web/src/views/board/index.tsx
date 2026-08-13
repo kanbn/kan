@@ -140,6 +140,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     ...(semanticFilters.length > 0 && {
       dueDateFilters: semanticFilters,
     }),
+    priorityFilters: formatToArray(router.query.priority),
     type: boardType,
   };
 
@@ -784,6 +785,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                             comments={card.comments ?? []}
                                             attachments={card.attachments}
                                             dueDate={card.dueDate ?? null}
+                                            priority={card.priority ?? null}
                                           />
                                         </Link>
                                       )}

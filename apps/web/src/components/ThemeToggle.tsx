@@ -1,5 +1,5 @@
-import { CgDarkMode } from "react-icons/cg";
 import { useTheme } from "next-themes";
+import { CgDarkMode } from "react-icons/cg";
 
 const ThemeToggle = () => {
   const { theme, resolvedTheme, setTheme } = useTheme();

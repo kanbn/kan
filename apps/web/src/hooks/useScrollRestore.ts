@@ -1,5 +1,5 @@
-import type { RefObject } from "react";
 import type { NextRouter } from "next/router";
+import type { RefObject } from "react";
 import { useEffect, useRef } from "react";
 
 const scrollPositions = new Map<string, number>();

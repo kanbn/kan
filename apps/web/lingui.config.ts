@@ -1,7 +1,6 @@
 import { defineConfig } from "@lingui/cli";
 import { formatter } from "@lingui/format-json";
 
-
 export default defineConfig({
   locales: ["en", "fr", "de", "es", "it", "nl", "ru", "pl", "pt-BR"],
   sourceLocale: "en",

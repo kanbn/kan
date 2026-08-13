@@ -11,8 +11,7 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
-import { cards } from "./cards";
-import { comments } from "./cards";
+import { cards, comments } from "./cards";
 import { users } from "./users";
 import { workspaces } from "./workspaces";
 
@@ -25,7 +24,10 @@ export const notificationTypes = [
 
 export type NotificationType = (typeof notificationTypes)[number];
 
-export const notificationTypeEnum = pgEnum("notification_type", notificationTypes);
+export const notificationTypeEnum = pgEnum(
+  "notification_type",
+  notificationTypes,
+);
 
 export const notifications = pgTable(
   "notification",
@@ -95,4 +97,3 @@ export const notificationsRelations = relations(notifications, ({ one }) => ({
     relationName: "notificationsWorkspace",
   }),
 }));
-

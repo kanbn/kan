@@ -86,7 +86,6 @@ export const defaultRolePermissions: Record<Role, readonly Permission[]> = {
   ],
 } as const;
 
-
 export const permissionCategories = {
   workspace: {
     label: "Workspace",
@@ -162,4 +161,3 @@ export function hasPermissionInDefaults(
 ): boolean {
   return defaultRolePermissions[role].includes(permission);
 }
-

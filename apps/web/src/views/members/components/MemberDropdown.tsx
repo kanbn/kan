@@ -1,5 +1,5 @@
-import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
+import { Fragment } from "react";
 import { HiEllipsisVertical } from "react-icons/hi2";
 
 export default function MemberDropdown() {
@@ -8,7 +8,7 @@ export default function MemberDropdown() {
       <div>
         <Menu.Button
           type="button"
-          className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent text-dark-900 focus:outline-none "
+          className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent text-dark-900 focus:outline-none"
         >
           <span className="sr-only">Open options</span>
           <HiEllipsisVertical className="h-5 w-5" aria-hidden="true" />

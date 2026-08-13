@@ -1,8 +1,8 @@
 import { t } from "@lingui/core/macro";
 
+import LabelIcon from "~/components/LabelIcon";
 import { useModal } from "~/providers/modal";
 import { api } from "~/utils/api";
-import LabelIcon from "~/components/LabelIcon";
 import LabelSelector from "~/views/card/components/LabelSelector";
 
 export function CardContextLabelsModal() {

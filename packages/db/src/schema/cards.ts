@@ -48,12 +48,19 @@ export const activityTypes = [
   "card.updated.dueDate.added",
   "card.updated.dueDate.updated",
   "card.updated.dueDate.removed",
+  "card.updated.priority.set",
+  "card.updated.priority.changed",
+  "card.updated.priority.removed",
   "card.archived",
 ] as const;
 
 export type ActivityType = (typeof activityTypes)[number];
 
 export const activityTypeEnum = pgEnum("card_activity_type", activityTypes);
+
+export const cardPriorityValues = ["urgent", "high", "medium", "low"] as const;
+export type CardPriority = (typeof cardPriorityValues)[number];
+export const cardPriorityEnum = pgEnum("card_priority", cardPriorityValues);
 
 export const cards = pgTable(
   "card",
@@ -80,10 +87,9 @@ export const cards = pgTable(
       () => imports.id,
     ),
     dueDate: timestamp("dueDate"),
+    priority: cardPriorityEnum("priority"),
   },
-  (table) => [
-    index("card_list_number_idx").on(table.listId, table.cardNumber),
-  ],
+  (table) => [index("card_list_number_idx").on(table.listId, table.cardNumber)],
 ).enableRLS();
 
 export const cardsRelations = relations(cards, ({ one, many }) => ({
@@ -153,6 +159,8 @@ export const cardActivities = pgTable("card_activity", {
   toComment: text("toComment"),
   fromDueDate: timestamp("fromDueDate"),
   toDueDate: timestamp("toDueDate"),
+  fromPriority: varchar("fromPriority", { length: 20 }),
+  toPriority: varchar("toPriority", { length: 20 }),
   sourceBoardId: bigint("sourceBoardId", { mode: "number" }).references(
     () => boards.id,
     { onDelete: "set null" },

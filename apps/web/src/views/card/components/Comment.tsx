@@ -4,11 +4,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiEllipsisHorizontal, HiPencil, HiTrash } from "react-icons/hi2";
 
+import type { WorkspaceMember } from "~/components/Editor";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
-import Editor from "~/components/Editor";
-import type { WorkspaceMember } from "~/components/Editor";
 import Dropdown from "~/components/Dropdown";
+import Editor from "~/components/Editor";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -114,7 +114,7 @@ const Comment = ({
           },
         ]
       : []),
-    ...((isAuthor || canDeleteComment)
+    ...(isAuthor || canDeleteComment
       ? [
           {
             label: t`Delete comment`,
@@ -186,7 +186,7 @@ const Comment = ({
               disableHeadings={true}
             />
           </div>
-          <div className="flex justify-end space-x-2 mt-2">
+          <div className="mt-2 flex justify-end space-x-2">
             <Button
               size="sm"
               variant="ghost"

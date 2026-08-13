@@ -1,9 +1,9 @@
 import { t } from "@lingui/core/macro";
 
+import type { api } from "~/utils/api";
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
-import type { api } from "~/utils/api";
 
 type ResetMutation = ReturnType<
   typeof api.permission.resetWorkspaceMemberPermissions.useMutation
@@ -51,5 +51,3 @@ export function ClearCustomPermissionsConfirmation({
     </div>
   );
 }
-
-

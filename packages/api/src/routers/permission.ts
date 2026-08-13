@@ -1,10 +1,10 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
+import type { Permission } from "@kan/shared";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as permissionRepo from "@kan/db/repository/permission.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import type { Permission } from "@kan/shared";
 import { allPermissions } from "@kan/shared";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
@@ -528,10 +528,8 @@ export const permissionRouter = createTRPCRouter({
 
       const rolesWithPermissions = await Promise.all(
         roles.map(async (role) => {
-          const permissionsForRole = await permissionRepo.getPermissionsByRoleId(
-            ctx.db,
-            role.id,
-          );
+          const permissionsForRole =
+            await permissionRepo.getPermissionsByRoleId(ctx.db, role.id);
 
           return {
             publicId: role.publicId,
@@ -551,7 +549,8 @@ export const permissionRouter = createTRPCRouter({
         summary: "Get role permissions",
         method: "GET",
         path: "/workspaces/{workspacePublicId}/roles/{rolePublicId}/permissions",
-        description: "Get permissions granted to a specific role in a workspace",
+        description:
+          "Get permissions granted to a specific role in a workspace",
         tags: ["Permissions"],
         protect: true,
       },

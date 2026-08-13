@@ -1,11 +1,11 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { env } from "next-runtime-env";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import { getAvatarUrl } from "./helpers";
 
 vi.mock("next-runtime-env", () => ({
   env: vi.fn(),
 }));
-
-import { env } from "next-runtime-env";
-import { getAvatarUrl } from "./helpers";
 
 const mockEnv = env as ReturnType<typeof vi.fn>;
 

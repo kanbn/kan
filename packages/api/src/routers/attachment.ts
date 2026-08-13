@@ -5,12 +5,15 @@ import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import { generateUID } from "@kan/shared/utils";
+import {
+  deleteObject,
+  generateUID,
+  generateUploadUrl,
+} from "@kan/shared/utils";
 
-import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { attachmentConfirmResponseSchema } from "../schemas";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
-import { deleteObject, generateUploadUrl } from "@kan/shared/utils";
 
 export const attachmentRouter = createTRPCRouter({
   generateUploadUrl: protectedProcedure
