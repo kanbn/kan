@@ -19,6 +19,12 @@
   <a href="https://github.com/kanbn/kan/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-AGPLv3-purple"></a>
 </div>
 
+## Fork Information 🍴
+
+- Added Calendar View for Items w/ Due Dates
+- Added Sorting for Cards for Items w/ Due Dates
+
+
 ## Features 💫
 
 - 👁️ **Board Visibility**: Control who can view and edit your boards
@@ -27,6 +33,8 @@
 - 🔍 **Labels & Filters**: Organise and find cards quickly
 - 💬 **Comments**: Discuss and collaborate with your team
 - 📝 **Activity Log**: Track all card changes with detailed activity history
+- 📅 **Board Calendar**: View cards with due dates on a month calendar
+- ↕️ **List Sorting**: Sort cards in each column by due date to surface what’s coming next
 - 🎨 **Templates** : Save time with reusable custom board templates
 - ⚡️ **Integrations (coming soon)** : Connect your favourite tools
 
