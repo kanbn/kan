@@ -11,6 +11,7 @@ import {
   isNotNull,
   isNull,
   lte,
+  or,
   sql,
 } from "drizzle-orm";
 
@@ -22,6 +23,7 @@ import {
   cards,
   cardsToLabels,
   cardToWorkspaceMembers,
+  checklistItemBlocking,
   checklistItems,
   checklists,
   labels,
@@ -1136,6 +1138,59 @@ export const hardDeleteCardBlockerRelationship = async (
     .returning();
 
   return result;
+};
+
+/**
+ * Cards (still alive) that are blocked by `blockerCardId`, via either the
+ * card-level (`_card_blocking`) or checklist-item-level
+ * (`_checklist_item_blocking`) relationship. Used to pre-capture the affected
+ * cards before a blocker card is deleted and its relationship rows are removed,
+ * so the deletion notification still knows who to tell.
+ */
+export const getCardsBlockedByBlocker = async (
+  db: dbClient,
+  blockerCardId: number,
+) => {
+  const result = await db.execute(sql`
+    SELECT DISTINCT c."id", c."publicId", c."title"
+    FROM (
+      SELECT ccl."cardId" AS "cardId"
+      FROM "_checklist_item_blocking" cib
+      JOIN "card_checklist_item" cci ON cci."id" = cib."checklistItemId"
+      JOIN "card_checklist" ccl ON ccl."id" = cci."checklistId"
+      WHERE cib."blockerCardId" = ${blockerCardId}
+      UNION
+      SELECT cb."cardId" AS "cardId"
+      FROM "_card_blocking" cb
+      WHERE cb."blockerCardId" = ${blockerCardId}
+    ) blocked
+    JOIN "card" c ON c."id" = blocked."cardId"
+    WHERE c."deletedAt" IS NULL
+  `);
+  return (result.rows ?? []) as { id: number; publicId: string; title: string }[];
+};
+
+/**
+ * Remove every blocking relationship that involves `cardId` once the card is
+ * deleted: rows where it is the blocker (cards / checklist-items it was
+ * blocking) and rows where it is the blocked card. The join tables have no
+ * soft-delete column, so this is a hard delete — kept in sync with the card's
+ * own soft-delete so a deleted blocker stops appearing in the UI.
+ */
+export const hardDeleteBlockingRelationshipsForCard = async (
+  db: dbClient,
+  cardId: number,
+) => {
+  await db.transaction(async (tx) => {
+    await tx
+      .delete(cardBlocking)
+      .where(
+        or(eq(cardBlocking.blockerCardId, cardId), eq(cardBlocking.cardId, cardId)),
+      );
+    await tx
+      .delete(checklistItemBlocking)
+      .where(eq(checklistItemBlocking.blockerCardId, cardId));
+  });
 };
 
 /**

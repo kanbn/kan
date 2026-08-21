@@ -35,6 +35,21 @@ export const getProviderForUser = async (
   return integration;
 };
 
+export const getProviderForUserRaw = async (
+  db: dbClient,
+  userId: string,
+  provider: string,
+) => {
+  const integration = await db.query.integrations.findFirst({
+    where: and(
+      eq(integrations.userId, userId),
+      eq(integrations.provider, provider),
+    ),
+  });
+
+  return integration;
+};
+
 export const getProvidersForUser = async (db: dbClient, userId: string) => {
   const integration = await db.query.integrations.findMany({
     where: and(

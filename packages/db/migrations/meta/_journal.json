@@ -316,6 +316,20 @@
       "when": 1785745800000,
       "tag": "20260729130000_AddTimezoneAndOverdueNudge",
       "breakpoints": true
+    },
+    {
+      "idx": 45,
+      "version": "7",
+      "when": 1785832200000,
+      "tag": "20260803130000_AddCardUnblockAck",
+      "breakpoints": true
+    },
+    {
+      "idx": 46,
+      "version": "7",
+      "when": 1786123200000,
+      "tag": "20260805120000_AddCronJobState",
+      "breakpoints": true
     }
   ]
 }

@@ -6,10 +6,11 @@ import * as integrationsRepo from "@banana/db/repository/integration.repo";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import {
   buildAuthUrl,
-  deleteCalendarEvent,
   exchangeCodeForTokens,
   getAssignedDueCardsForUser,
+  getAssignedNoDueDateCardsWithRemindersForUser,
   getValidAccessToken,
+  stopCardNotifications,
   storeTokens,
   syncAllCardsForUser,
 } from "../utils/googleCalendar";
@@ -93,21 +94,33 @@ export const googleCalendarRouter = createTRPCRouter({
       const accessToken = await getValidAccessToken(ctx.db, user.id);
 
       if (accessToken) {
-        const cardsToRemove = await getAssignedDueCardsForUser(ctx.db, user.id);
+        // Every card that may have calendar presence: cards with a due date
+        // (due-date event + reminders) and cards without a due date but with
+        // google_calendar reminders (reminder events only).
+        const dueCards = await getAssignedDueCardsForUser(ctx.db, user.id);
+        const reminderOnlyCards =
+          await getAssignedNoDueDateCardsWithRemindersForUser(ctx.db, user.id);
+        const cardIds = new Set<string>([
+          ...dueCards.map((c) => c.cardPublicId),
+          ...reminderOnlyCards.map((c) => c.cardPublicId),
+        ]);
+
         console.log(
-          `[GoogleCalendar] Disconnect: removing ${cardsToRemove.length} events for user ${user.id}`,
+          `[GoogleCalendar] Disconnect: removing calendar presence for ${cardIds.size} card(s) (${dueCards.length} with due date, ${reminderOnlyCards.length} reminder-only) for user ${user.id}`,
         );
 
         const results = await Promise.allSettled(
-          cardsToRemove.map((card) =>
-            deleteCalendarEvent(accessToken, card.cardPublicId),
+          [...cardIds].map((cardPublicId) =>
+            // Removes the due-date event (if any) AND all reminder events
+            // (absolute + relative) for this card.
+            stopCardNotifications(accessToken, cardPublicId),
           ),
         );
 
         const failed = results.filter((r) => r.status === "rejected").length;
         if (failed > 0) {
           console.error(
-            `[GoogleCalendar] Disconnect: ${failed}/${cardsToRemove.length} events failed to delete for user ${user.id}`,
+            `[GoogleCalendar] Disconnect: ${failed}/${cardIds.size} cards failed to clean up for user ${user.id}`,
           );
         }
       }

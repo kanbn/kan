@@ -28,7 +28,9 @@ import {
 } from "../utils/googleCalendar";
 import {
   getCommenterEmails,
+  notifyBlockerCardDeleted,
   notifyBlockerCompleted,
+  notifyCardBlockerRemoved,
   sendMattermostNotification,
 } from "../utils/mattermost";
 import {
@@ -831,6 +833,26 @@ export const cardRouter = createTRPCRouter({
           cardId: card.id,
           fromTitle: blockerCard?.title,
           createdBy: userId,
+        });
+
+        // Notify the card's members (minus the actor) that a blocker was removed.
+        const unblockedCard = await cardRepo.getByPublicId(
+          ctx.db,
+          input.cardPublicId,
+        );
+        notifyCardBlockerRemoved(ctx.db, {
+          cardId: card.id,
+          cardPublicId: input.cardPublicId,
+          cardTitle: unblockedCard?.title ?? "",
+          blockerCardPublicId: input.blockerCardPublicId,
+          blockerTitle: blockerCard?.title ?? "",
+          actorUserId: userId,
+          actorName: ctx.user?.name ?? "Someone",
+        }).catch((error) => {
+          console.error(
+            "Failed to send blocker-removed Mattermost notification:",
+            error,
+          );
         });
 
         return { newBlocker: false };
@@ -1741,6 +1763,14 @@ export const cardRouter = createTRPCRouter({
         ? await getCardMemberUserIds(ctx.db, input.cardPublicId)
         : [];
 
+      // Pre-capture the cards this card was blocking before we delete its
+      // relationship rows — the deletion notification (fired below) needs this
+      // list and runs after the rows are gone.
+      const blockedCards = await cardRepo.getCardsBlockedByBlocker(
+        ctx.db,
+        card.id,
+      );
+
       const deletedAt = new Date();
 
       await cardRepo.softDelete(ctx.db, {
@@ -1748,6 +1778,12 @@ export const cardRouter = createTRPCRouter({
         deletedAt,
         deletedBy: userId,
       });
+
+      // The card is gone, so remove every blocking relationship it was part of.
+      // The join tables have no soft-delete column; without this a deleted
+      // blocker still shows up on the cards it was blocking (the card-detail
+      // loader does not filter the blocker's deletedAt).
+      await cardRepo.hardDeleteBlockingRelationshipsForCard(ctx.db, card.id);
 
       if (fullCard.dueDate && memberUserIds.length > 0) {
         syncCardToGoogleCalendarsForMembers(
@@ -1812,6 +1848,22 @@ export const cardRouter = createTRPCRouter({
         "archived",
       ).catch((error) => {
         console.error("Failed to send Mattermost notification:", error);
+      });
+
+      // If the deleted card was a blocker for other cards, notify their members
+      // with a "Confirm unblock" button.
+      notifyBlockerCardDeleted(ctx.db, {
+        blockerCardId: card.id,
+        blockerCardPublicId: input.cardPublicId,
+        blockerTitle: fullCard.title,
+        actorUserId: userId,
+        actorName: ctx.user?.name ?? "Someone",
+        blockedCards,
+      }).catch((error) => {
+        console.error(
+          "Failed to send blocker-deleted Mattermost notification:",
+          error,
+        );
       });
 
       return { success: true };

@@ -8,6 +8,7 @@ import { stripHtml } from "@banana/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
+import { notifyCardBlockerRemoved } from "../utils/mattermost";
 
 const checklistSchema = z.object({
   publicId: z.string().length(12),
@@ -521,6 +522,22 @@ export const checklistRouter = createTRPCRouter({
           cardId: item.checklist.cardId,
           fromTitle: blockerCard?.title,
           createdBy: userId,
+        });
+
+        // Notify the card's members (minus the actor) that a blocker was removed.
+        notifyCardBlockerRemoved(ctx.db, {
+          cardId: item.checklist.cardId,
+          cardPublicId: item.checklist.card.publicId,
+          cardTitle: item.checklist.card.title,
+          blockerCardPublicId: input.blockerCardPublicId,
+          blockerTitle: blockerCard?.title ?? "",
+          actorUserId: userId,
+          actorName: ctx.user?.name ?? "Someone",
+        }).catch((error) => {
+          console.error(
+            "Failed to send blocker-removed Mattermost notification:",
+            error,
+          );
         });
 
         return { newBlocker: false };

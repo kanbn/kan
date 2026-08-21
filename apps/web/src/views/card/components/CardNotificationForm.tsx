@@ -15,13 +15,11 @@ import { invalidateCard } from "~/utils/cardInvalidation";
 
 type Channel = "mattermost" | "google_calendar";
 type TriggerType = "relative" | "absolute";
-type OffsetUnit = "minutes" | "hours" | "days";
 
 interface FormValues {
   channel: Channel;
   triggerType: TriggerType;
   offsetValue: string;
-  offsetUnit: OffsetUnit;
   triggerAt: Date | null;
   timeOfDay: string;
 }
@@ -39,12 +37,6 @@ const CHANNEL_OPTIONS: Option<Channel>[] = [
 const TRIGGER_OPTIONS: Option<TriggerType>[] = [
   { value: "relative", label: "Relative to due date" },
   { value: "absolute", label: "Specific date" },
-];
-
-const UNIT_OPTIONS: Option<OffsetUnit>[] = [
-  { value: "minutes", label: "minutes" },
-  { value: "hours", label: "hours" },
-  { value: "days", label: "days" },
 ];
 
 function ListboxSelect<T extends string>({
@@ -120,19 +112,14 @@ export function CardNotificationForm({
         channel: "mattermost",
         triggerType: "relative",
         offsetValue: "1",
-        offsetUnit: "days",
         triggerAt: null,
         timeOfDay: "09:00",
       },
     });
 
   const triggerType = watch("triggerType");
-  const offsetUnit = watch("offsetUnit");
 
-  // A time-of-day only applies when the reminder lands on a calendar day:
-  // relative "days before" or an absolute date. For minutes/hours before, the
-  // offset is a countdown from the due instant, so no time-of-day is needed.
-  const showTimePicker = triggerType === "absolute" || offsetUnit === "days";
+  const showTimePicker = triggerType === "absolute";
 
   const createNotification = api.cardNotification.create.useMutation({
     onSuccess: async () => {
@@ -150,8 +137,6 @@ export function CardNotificationForm({
   });
 
   const onSubmit = (values: FormValues) => {
-    // Capture the browser's IANA timezone so the reminder fires at this local
-    // time for the creator (e.g. 9am US, not server time).
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     createNotification.mutate({
@@ -162,8 +147,7 @@ export function CardNotificationForm({
         values.triggerType === "relative"
           ? Number(values.offsetValue) || null
           : null,
-      offsetUnit:
-        values.triggerType === "relative" ? values.offsetUnit : null,
+      offsetUnit: values.triggerType === "relative" ? "days" : null,
       triggerAt: values.triggerType === "absolute" ? values.triggerAt : null,
       timeOfDay: values.timeOfDay,
       timezone,
@@ -218,29 +202,17 @@ export function CardNotificationForm({
         </div>
 
         {triggerType === "relative" ? (
-          <div className="flex items-end gap-2">
-            <div className="flex-1">
-              <label className={inputLabelClass}>{t`Offset`}</label>
-              <Input
-                type="number"
-                min={1}
-                placeholder="1"
-                {...register("offsetValue")}
-              />
-            </div>
-            <div className="w-32">
-              <Controller
-                name="offsetUnit"
-                control={control}
-                render={({ field }) => (
-                  <ListboxSelect
-                    value={field.value}
-                    options={UNIT_OPTIONS}
-                    onChange={field.onChange}
-                  />
-                )}
-              />
-            </div>
+          <div>
+            <label className={inputLabelClass}>{t`Offset`}</label>
+            <Input
+              type="number"
+              min={0}
+              placeholder="1"
+              {...register("offsetValue")}
+            />
+            <p className="mt-1 text-xs text-light-700 dark:text-dark-700">
+              {t`0 days if it is on due date`}
+            </p>
           </div>
         ) : (
           <div>
