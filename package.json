@@ -33,6 +33,11 @@
   },
   "prettier": "@kan/prettier-config",
   "pnpm": {
+    "supportedArchitectures": {
+      "os": ["linux", "current"],
+      "cpu": ["x64", "arm64", "current"],
+      "libc": ["glibc", "musl", "current"]
+    },
     "overrides": {
       "@types/minimatch": "npm:minimatch@*",
       "@types/glob": "npm:@types/glob@^8.1.0"
