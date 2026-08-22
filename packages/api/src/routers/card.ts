@@ -760,6 +760,8 @@ export const cardRouter = createTRPCRouter({
         cardPublicId: z.string().min(12),
         limit: z.number().min(1).max(100).optional().default(10),
         cursor: z.string().datetime().optional(), // ISO datetime string
+        filter: z.enum(["all", "activity", "comments"]).optional().default("all"),
+        sortOrder: z.enum(["asc", "desc"]).optional().default("desc"),
       }),
     )
     .output(
@@ -800,6 +802,7 @@ export const cardRouter = createTRPCRouter({
         {
           limit: input.limit,
           cursor,
+          filter: input.filter,
         },
       );
 
@@ -837,8 +840,13 @@ export const cardRouter = createTRPCRouter({
 
       const mergedActivities = mergeActivities(activitiesWithAvatarUrls);
 
+      const sortedActivities =
+        input.sortOrder === "asc"
+          ? mergedActivities
+          : [...mergedActivities].reverse();
+
       return {
-        activities: mergedActivities,
+        activities: sortedActivities,
         hasMore: result.hasMore,
         nextCursor: result.nextCursor?.toISOString() ?? null,
       };
