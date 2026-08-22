@@ -8,6 +8,7 @@ import {
   HiOutlineArrowRight,
   HiOutlineCheckCircle,
   HiOutlineClock,
+  HiOutlineFlag,
   HiOutlinePaperClip,
   HiOutlinePencil,
   HiOutlinePlus,
@@ -66,6 +67,8 @@ const getActivityText = ({
   label,
   fromTitle,
   toDueDate,
+  fromPriority,
+  toPriority,
   dateLocale,
   mergedLabels,
   attachmentName,
@@ -81,6 +84,8 @@ const getActivityText = ({
   fromTitle?: string | null;
   fromDueDate?: Date | null;
   toDueDate?: Date | null;
+  fromPriority?: string | null;
+  toPriority?: string | null;
   dateLocale: DateFnsLocale;
   mergedLabels?: string[];
   attachmentName?: string | null;
@@ -142,6 +147,9 @@ const getActivityText = ({
     "card.updated.dueDate.added": t`set the due date`,
     "card.updated.dueDate.updated": t`updated the due date`,
     "card.updated.dueDate.removed": t`removed the due date`,
+    "card.updated.priority.set": t`set the priority`,
+    "card.updated.priority.changed": t`changed the priority`,
+    "card.updated.priority.removed": t`removed the priority`,
   } as const;
 
   if (!(type in ACTIVITY_TYPE_MAP)) return null;
@@ -324,6 +332,44 @@ const getActivityText = ({
     return <Trans>removed the due date</Trans>;
   }
 
+  const formatPriorityName = (p: string | null | undefined) => {
+    if (!p) return "";
+    switch (p.toLowerCase()) {
+      case "urgent":
+        return t`Urgent`;
+      case "high":
+        return t`High`;
+      case "medium":
+        return t`Medium`;
+      case "low":
+        return t`Low`;
+      default:
+        return p;
+    }
+  };
+
+  if (type === "card.updated.priority.set" && toPriority) {
+    return (
+      <Trans>
+        set the priority to{" "}
+        <TextHighlight>{formatPriorityName(toPriority)}</TextHighlight>
+      </Trans>
+    );
+  }
+
+  if (type === "card.updated.priority.changed" && toPriority) {
+    return (
+      <Trans>
+        changed the priority to{" "}
+        <TextHighlight>{formatPriorityName(toPriority)}</TextHighlight>
+      </Trans>
+    );
+  }
+
+  if (type === "card.updated.priority.removed") {
+    return <Trans>removed the priority</Trans>;
+  }
+
   return baseText;
 };
 
@@ -349,6 +395,9 @@ const ACTIVITY_ICON_MAP: Partial<Record<ActivityType, React.ReactNode | null>> =
     "card.updated.dueDate.added": <HiOutlineClock />,
     "card.updated.dueDate.updated": <HiOutlineClock />,
     "card.updated.dueDate.removed": <HiOutlineClock />,
+    "card.updated.priority.set": <HiOutlineFlag />,
+    "card.updated.priority.changed": <HiOutlineFlag />,
+    "card.updated.priority.removed": <HiOutlineFlag />,
   } as const;
 
 const getActivityIcon = (
@@ -504,11 +553,13 @@ const ActivityList = ({
           fromTitle: activity.fromTitle ?? null,
           fromDueDate: activity.fromDueDate ?? null,
           toDueDate: activity.toDueDate ?? null,
+          fromPriority: activity.fromPriority ?? null,
+          toPriority: activity.toPriority ?? null,
           dateLocale: dateLocale,
           mergedLabels: (activity as ActivityWithMergedLabels).mergedLabels,
           attachmentName:
-            (activity as ActivityWithMergedLabels).attachment?.originalFilename ??
-            null,
+            (activity as ActivityWithMergedLabels).attachment
+              ?.originalFilename ?? null,
         });
 
         if (activity.type === "card.updated.comment.added")
@@ -541,7 +592,9 @@ const ActivityList = ({
                 size="sm"
                 name={activity.user?.name ?? ""}
                 email={activity.user?.email ?? ""}
-                imageUrl={getAvatarUrl(activity.user?.image ?? null) || undefined}
+                imageUrl={
+                  getAvatarUrl(activity.user?.image ?? null) || undefined
+                }
                 icon={getActivityIcon(
                   activity.type,
                   activity.fromList?.index,

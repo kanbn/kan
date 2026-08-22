@@ -1,13 +1,13 @@
-import { and, eq, isNull, inArray } from "drizzle-orm";
+import { and, eq, inArray, isNull } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
+import type { Permission, Role } from "@kan/shared";
 import {
   workspaceMemberPermissions,
   workspaceMembers,
   workspaceRolePermissions,
   workspaceRoles,
 } from "@kan/db/schema";
-import type { Permission, Role } from "@kan/shared";
 import { generateUID, getDefaultPermissions } from "@kan/shared";
 
 /**
@@ -490,5 +490,3 @@ export const getRolesByWorkspaceId = async (
     .from(workspaceRoles)
     .where(eq(workspaceRoles.workspaceId, workspaceId));
 };
-
-

@@ -88,7 +88,8 @@ export const JoinWorkspaceTemplate = ({
             color: "#7e7e7e",
           }}
         >
-          If you don&apos;t want to join this workspace, you can safely ignore this email.
+          If you don&apos;t want to join this workspace, you can safely ignore
+          this email.
         </Text>
         {env("NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY") !== "true" && (
           <>

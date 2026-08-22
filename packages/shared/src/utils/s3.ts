@@ -130,4 +130,3 @@ export async function generateAttachmentUrl(
     return null;
   }
 }
-

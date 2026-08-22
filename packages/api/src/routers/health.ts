@@ -18,13 +18,13 @@ import * as listRepo from "@kan/db/repository/list.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { createS3Client } from "@kan/shared/utils";
 
 import {
   adminProtectedProcedure,
   createTRPCRouter,
   publicProcedure,
 } from "../trpc";
-import { createS3Client } from "@kan/shared/utils";
 
 const checkDatabaseConnection = async (db: dbClient) => {
   try {

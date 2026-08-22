@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import React from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -7,7 +6,7 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
-import {
+import React, {
   createContext,
   useCallback,
   useContext,

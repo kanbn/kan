@@ -45,6 +45,7 @@ export const create = async (
     workspaceId: number;
     position: "start" | "end";
     dueDate?: Date | null;
+    priority?: "urgent" | "high" | "medium" | "low" | null;
   },
 ) => {
   return db.transaction(async (tx) => {
@@ -106,6 +107,7 @@ export const create = async (
         index: index,
         cardNumber,
         dueDate: cardInput.dueDate ?? null,
+        priority: cardInput.priority ?? null,
       })
       .returning({
         id: cards.id,
@@ -204,6 +206,7 @@ export const update = async (
     title?: string;
     description?: string;
     dueDate?: Date | null;
+    priority?: "urgent" | "high" | "medium" | "low" | null;
   },
   args: {
     cardPublicId: string;
@@ -215,6 +218,8 @@ export const update = async (
       title: cardInput.title,
       description: cardInput.description,
       dueDate: cardInput.dueDate !== undefined ? cardInput.dueDate : undefined,
+      priority:
+        cardInput.priority !== undefined ? cardInput.priority : undefined,
       updatedAt: new Date(),
     })
     .where(and(eq(cards.publicId, args.cardPublicId), isNull(cards.deletedAt)))
@@ -224,6 +229,7 @@ export const update = async (
       title: cards.title,
       description: cards.description,
       dueDate: cards.dueDate,
+      priority: cards.priority,
     });
 
   return result;
@@ -259,6 +265,7 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
       description: true,
       listId: true,
       dueDate: true,
+      priority: true,
     },
     with: {
       list: {
@@ -488,6 +495,7 @@ export const getWithListAndMembersByPublicId = async (
       title: true,
       description: true,
       dueDate: true,
+      priority: true,
       createdBy: true,
       cardNumber: true,
       index: true,
@@ -629,6 +637,8 @@ export const getWithListAndMembersByPublicId = async (
           toDescription: true,
           fromDueDate: true,
           toDueDate: true,
+          fromPriority: true,
+          toPriority: true,
         },
         with: {
           fromList: {
@@ -879,6 +889,7 @@ export const reorder = async (
         title: true,
         description: true,
         dueDate: true,
+        priority: true,
       },
       where: eq(cards.id, card.id),
     });

@@ -1,10 +1,5 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import type { ReactNode } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface ThemeContextProps {
   themePreference: "light" | "dark" | "system";

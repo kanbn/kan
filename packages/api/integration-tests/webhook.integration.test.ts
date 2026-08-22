@@ -1,7 +1,9 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 
 import * as webhookRepo from "@kan/db/repository/webhook.repo";
-import { createTestDb, seedTestData, type TestDbClient } from "./test-db";
+
+import type { TestDbClient } from "./test-db";
+import { createTestDb, seedTestData } from "./test-db";
 
 describe("webhook repository integration tests", () => {
   let db: TestDbClient;
@@ -90,7 +92,10 @@ describe("webhook repository integration tests", () => {
         createdBy: testUser.id,
       });
 
-      const webhooks = await webhookRepo.getAllByWorkspaceId(db, testWorkspace.id);
+      const webhooks = await webhookRepo.getAllByWorkspaceId(
+        db,
+        testWorkspace.id,
+      );
 
       expect(webhooks).toHaveLength(2);
       expect(webhooks.map((w) => w.name)).toContain("Webhook 1");
@@ -98,7 +103,10 @@ describe("webhook repository integration tests", () => {
     });
 
     it("returns empty array for workspace with no webhooks", async () => {
-      const webhooks = await webhookRepo.getAllByWorkspaceId(db, testWorkspace.id);
+      const webhooks = await webhookRepo.getAllByWorkspaceId(
+        db,
+        testWorkspace.id,
+      );
 
       expect(webhooks).toEqual([]);
     });
@@ -125,7 +133,10 @@ describe("webhook repository integration tests", () => {
       // Deactivate one webhook
       await webhookRepo.update(db, inactive!.publicId, { active: false });
 
-      const activeWebhooks = await webhookRepo.getActiveByWorkspaceId(db, testWorkspace.id);
+      const activeWebhooks = await webhookRepo.getActiveByWorkspaceId(
+        db,
+        testWorkspace.id,
+      );
 
       expect(activeWebhooks).toHaveLength(1);
       // getActiveByWorkspaceId returns only publicId, url, secret, events
@@ -166,7 +177,11 @@ describe("webhook repository integration tests", () => {
         events: ["card.created", "card.updated", "card.deleted"],
       });
 
-      expect(updated!.events).toEqual(["card.created", "card.updated", "card.deleted"]);
+      expect(updated!.events).toEqual([
+        "card.created",
+        "card.updated",
+        "card.deleted",
+      ]);
     });
 
     it("updates webhook active status", async () => {

@@ -32,6 +32,8 @@ export const create = async (
     toComment?: string;
     fromDueDate?: Date;
     toDueDate?: Date;
+    fromPriority?: string;
+    toPriority?: string;
     sourceBoardId?: number;
     attachmentId?: number;
   },
@@ -58,6 +60,8 @@ export const create = async (
       toComment: activityInput.toComment,
       fromDueDate: activityInput.fromDueDate,
       toDueDate: activityInput.toDueDate,
+      fromPriority: activityInput.fromPriority,
+      toPriority: activityInput.toPriority,
       sourceBoardId: activityInput.sourceBoardId,
       attachmentId: activityInput.attachmentId,
     })
@@ -84,6 +88,8 @@ export const bulkCreate = async (
     createdBy: string;
     fromDueDate?: Date;
     toDueDate?: Date;
+    fromPriority?: string;
+    toPriority?: string;
     sourceBoardId?: number;
     attachmentId?: number;
   }[],
@@ -132,6 +138,8 @@ export const getPaginatedActivities = async (
       toDescription: true,
       fromDueDate: true,
       toDueDate: true,
+      fromPriority: true,
+      toPriority: true,
     },
     where: and(
       eq(cardActivities.cardId, cardId),

@@ -1,6 +1,6 @@
-import { Fragment } from "react";
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
+import { Fragment } from "react";
 import { HiLink } from "react-icons/hi";
 
 import { Tooltip } from "~/components/Tooltip";
@@ -54,9 +54,7 @@ const UpdateBoardSlugButton = ({
     : [displayBaseUrl, "boards", boardPublicId];
 
   return (
-    <Tooltip
-      content={!canEdit ? t`You don't have permission` : undefined}
-    >
+    <Tooltip content={!canEdit ? t`You don't have permission` : undefined}>
       <button
         onClick={canEdit ? handleOnClick : undefined}
         disabled={!canEdit || isLoading}
@@ -74,14 +72,16 @@ const UpdateBoardSlugButton = ({
           type="button"
           onClick={(e) => {
             e.stopPropagation();
-            navigator.clipboard.writeText(boardUrl).then(
-              () =>
+            navigator.clipboard
+              .writeText(boardUrl)
+              .then(() =>
                 showPopup({
                   header: t`Link copied`,
                   icon: "success",
                   message: t`Board URL copied to clipboard`,
                 }),
-            ).catch(() => undefined);
+              )
+              .catch(() => undefined);
           }}
           className="flex h-7 w-7 items-center justify-center rounded-full hover:bg-light-200 dark:hover:bg-dark-200"
           aria-label={t`Copy board link`}

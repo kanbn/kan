@@ -135,7 +135,10 @@ export const createRESTContext = async ({ req }: CreateNextContextOptions) => {
   try {
     session = await auth.api.getSession();
   } catch (error) {
-    log.warn({ err: error }, "Failed to get session, treating as unauthenticated");
+    log.warn(
+      { err: error },
+      "Failed to get session, treating as unauthenticated",
+    );
   }
 
   return createInnerTRPCContext({
@@ -168,43 +171,48 @@ export const createTRPCRouter = t.router;
 
 export const createCallerFactory = t.createCallerFactory;
 
-const loggingMiddleware = t.middleware(async ({ path, type, next, ctx, getRawInput }) => {
-  const start = Date.now();
-  const [result, input] = await Promise.all([next(), getRawInput().catch(() => undefined)]);
-  const duration = Date.now() - start;
+const loggingMiddleware = t.middleware(
+  async ({ path, type, next, ctx, getRawInput }) => {
+    const start = Date.now();
+    const [result, input] = await Promise.all([
+      next(),
+      getRawInput().catch(() => undefined),
+    ]);
+    const duration = Date.now() - start;
 
-  const { user, transport, requestId } = ctx as {
-    user?: { id: string; email: string };
-    transport?: string;
-    requestId?: string;
-  };
-  const isCloud = process.env.NEXT_PUBLIC_KAN_ENV === "cloud";
-  const meta = {
-    requestId,
-    procedure: path,
-    type,
-    transport,
-    duration,
-    userId: user?.id,
-    ...(isCloud && { email: user?.email }),
-    input,
-  };
+    const { user, transport, requestId } = ctx as {
+      user?: { id: string; email: string };
+      transport?: string;
+      requestId?: string;
+    };
+    const isCloud = process.env.NEXT_PUBLIC_KAN_ENV === "cloud";
+    const meta = {
+      requestId,
+      procedure: path,
+      type,
+      transport,
+      duration,
+      userId: user?.id,
+      ...(isCloud && { email: user?.email }),
+      input,
+    };
 
-  const label = transport === "rest" ? "REST" : "tRPC";
+    const label = transport === "rest" ? "REST" : "tRPC";
 
-  if (result.ok) {
-    log.info({ ...meta, status: 200 }, `${label} OK`);
-  } else {
-    const status = TRPC_STATUS_MAP[result.error.code] ?? 500;
-    const errorCode = result.error.code;
-    log.error(
-      { ...meta, status, errorCode, err: result.error },
-      `${label} error`,
-    );
-  }
+    if (result.ok) {
+      log.info({ ...meta, status: 200 }, `${label} OK`);
+    } else {
+      const status = TRPC_STATUS_MAP[result.error.code] ?? 500;
+      const errorCode = result.error.code;
+      log.error(
+        { ...meta, status, errorCode, err: result.error },
+        `${label} error`,
+      );
+    }
 
-  return result;
-});
+    return result;
+  },
+);
 
 export const publicProcedure = t.procedure.use(loggingMiddleware);
 

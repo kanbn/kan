@@ -8,10 +8,22 @@ type FrequencyValue = "monthly" | "annually";
 interface PlanFeature {
   key: string;
   label: string;
-  free: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
-  teams: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
-  pro: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
-  enterprise: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
+  free:
+    | string
+    | boolean
+    | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
+  teams:
+    | string
+    | boolean
+    | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
+  pro:
+    | string
+    | boolean
+    | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
+  enterprise:
+    | string
+    | boolean
+    | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
 }
 
 interface FeatureSection {
@@ -27,10 +39,12 @@ const FeatureComparisonTable = ({
   // Keep pricing column headers visible as you scroll
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
-  const [headerRect, setHeaderRect] = useState<{ left: number; width: number }>({
-    left: 0,
-    width: 0,
-  });
+  const [headerRect, setHeaderRect] = useState<{ left: number; width: number }>(
+    {
+      left: 0,
+      width: 0,
+    },
+  );
 
   useEffect(() => {
     const HEADER_OFFSET = 64; // px; matches fixed top nav height
@@ -92,14 +106,14 @@ const FeatureComparisonTable = ({
       pro: { text: t`Unlimited file uploads`, highlightFirstWord: true },
       enterprise: { text: t`Unlimited file uploads`, highlightFirstWord: true },
     },
-      {
-        key: "workspace-username",
-        label: t`Workspace username`,
-        free: { text: t`Default username`, highlightFirstWord: true },
-        teams: { text: t`Default username`, highlightFirstWord: true },
-        pro: { text: t`Custom username`, highlightFirstWord: true },
-        enterprise: { text: t`Custom username`, highlightFirstWord: true },
-      },
+    {
+      key: "workspace-username",
+      label: t`Workspace username`,
+      free: { text: t`Default username`, highlightFirstWord: true },
+      teams: { text: t`Default username`, highlightFirstWord: true },
+      pro: { text: t`Custom username`, highlightFirstWord: true },
+      enterprise: { text: t`Custom username`, highlightFirstWord: true },
+    },
   ];
 
   const coreFeatures: PlanFeature[] = [
@@ -338,7 +352,10 @@ const FeatureComparisonTable = ({
     value,
     label,
   }: {
-    value: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
+    value:
+      | string
+      | boolean
+      | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
     label: string;
   }) => {
     if (typeof value === "object" && value !== null) {
@@ -352,7 +369,9 @@ const FeatureComparisonTable = ({
           <div className="flex items-center gap-2.5">
             <HiCheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-light-1000 dark:text-dark-1000" />
             <span className="text-sm font-medium">
-              <span className="text-light-1000 dark:text-dark-1000">{firstWord}</span>
+              <span className="text-light-1000 dark:text-dark-1000">
+                {firstWord}
+              </span>
               <span className="text-light-950 dark:text-dark-800">{rest}</span>
             </span>
           </div>
@@ -407,7 +426,10 @@ const FeatureComparisonTable = ({
   const getFeatureValue = (
     feature: PlanFeature,
     planId: string,
-  ): string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean } => {
+  ):
+    | string
+    | boolean
+    | { text: string; highlight?: boolean; highlightFirstWord?: boolean } => {
     switch (planId) {
       case "free":
         return feature.free;
@@ -431,7 +453,7 @@ const FeatureComparisonTable = ({
         >
           {isHeaderFixed && (
             <div
-              className="hidden sm:block fixed z-40 border-b border-light-300 bg-light-50/95 dark:border-dark-400 dark:bg-dark-50/95"
+              className="fixed z-40 hidden border-b border-light-300 bg-light-50/95 dark:border-dark-400 dark:bg-dark-50/95 sm:block"
               style={{
                 top: 64,
                 left: headerRect.left,
@@ -452,7 +474,9 @@ const FeatureComparisonTable = ({
                       )}
                     >
                       {plan.name}
-                      {plan.id === "pro" && <span className="ml-1 text-xl">∞</span>}
+                      {plan.id === "pro" && (
+                        <span className="ml-1 text-xl">∞</span>
+                      )}
                     </div>
                   );
                 })}
@@ -477,7 +501,9 @@ const FeatureComparisonTable = ({
                     >
                       <span className="flex items-center">
                         {plan.name}
-                        {plan.id === "pro" && <span className="ml-1 text-xl">∞</span>}
+                        {plan.id === "pro" && (
+                          <span className="ml-1 text-xl">∞</span>
+                        )}
                       </span>
                     </th>
                   );

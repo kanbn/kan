@@ -46,7 +46,6 @@ export const workspaceRolesRelations = relations(
   }),
 );
 
-
 export const workspaceRolePermissions = pgTable(
   "workspace_role_permissions",
   {
@@ -82,7 +81,9 @@ export const workspaceMemberPermissions = pgTable(
   "workspace_member_permissions",
   {
     id: bigserial("id", { mode: "number" }).primaryKey(),
-    workspaceMemberId: bigint("workspaceMemberId", { mode: "number" }).notNull(),
+    workspaceMemberId: bigint("workspaceMemberId", {
+      mode: "number",
+    }).notNull(),
     permission: varchar("permission", { length: 64 }).notNull(),
     granted: boolean("granted").notNull().default(true),
     createdAt: timestamp("createdAt").defaultNow().notNull(),

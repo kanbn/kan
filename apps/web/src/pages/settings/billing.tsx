@@ -1,8 +1,8 @@
 import type { NextPageWithLayout } from "~/pages/_app";
 import { getDashboardLayout } from "~/components/Dashboard";
+import Popup from "~/components/Popup";
 import { SettingsLayout } from "~/components/SettingsLayout";
 import BillingSettings from "~/views/settings/BillingSettings";
-import Popup from "~/components/Popup";
 
 const BillingSettingsPage: NextPageWithLayout = () => {
   return (

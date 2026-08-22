@@ -44,10 +44,7 @@ async function subscriberRequest(
     );
 
     if (!response.ok) {
-      log.error(
-        { status: response.status, body: responseBody },
-        errorMessage,
-      );
+      log.error({ status: response.status, body: responseBody }, errorMessage);
     }
   } catch (error) {
     log.error({ err: error }, errorMessage);

@@ -1,13 +1,14 @@
 import { render } from "@react-email/render";
 import nodemailer from "nodemailer";
-import { createLogger } from "@kan/logger";
 
-const log = createLogger("email");
+import { createLogger } from "@kan/logger";
 
 import JoinWorkspaceTemplate from "./templates/join-workspace";
 import MagicLinkTemplate from "./templates/magic-link";
 import MentionTemplate from "./templates/mention";
 import ResetPasswordTemplate from "./templates/reset-password";
+
+const log = createLogger("email");
 
 type Templates = "MAGIC_LINK" | "JOIN_WORKSPACE" | "RESET_PASSWORD" | "MENTION";
 
@@ -66,10 +67,16 @@ export const sendEmail = async (
       throw new Error(`Failed to send email: ${response.response}`);
     }
 
-    log.info({ to, subject, template, messageId: response.messageId }, "Email sent");
+    log.info(
+      { to, subject, template, messageId: response.messageId },
+      "Email sent",
+    );
     return response;
   } catch (error) {
-    log.error({ err: error, to, from: process.env.EMAIL_FROM, subject, template }, "Email sending failed");
+    log.error(
+      { err: error, to, from: process.env.EMAIL_FROM, subject, template },
+      "Email sending failed",
+    );
     throw error;
   }
 };

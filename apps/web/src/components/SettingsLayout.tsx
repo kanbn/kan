@@ -18,6 +18,7 @@ import {
   HiOutlineShieldCheck,
   HiOutlineUser,
 } from "react-icons/hi2";
+
 import { usePermissions } from "~/hooks/usePermissions";
 import { useWorkspace } from "~/providers/workspace";
 

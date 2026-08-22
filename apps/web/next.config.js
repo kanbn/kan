@@ -28,7 +28,6 @@ const config = {
     ],
   },
 
-
   /** Enables hot reloading for local packages without a build step */
   transpilePackages: [
     "@kan/api",

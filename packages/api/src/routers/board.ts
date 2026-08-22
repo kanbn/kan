@@ -15,15 +15,19 @@ import {
   generateUID,
 } from "@kan/shared/utils";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import {
-  boardListItemSchema,
-  boardDetailSchema,
   boardBySlugSchema,
   boardCreateResponseSchema,
+  boardDetailSchema,
+  boardListItemSchema,
   boardUpdateResponseSchema,
 } from "../schemas";
-import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import {
+  assertCanDelete,
+  assertCanEdit,
+  assertPermission,
+} from "../utils/permissions";
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
@@ -74,7 +78,7 @@ export const boardRouter = createTRPCRouter({
         {
           type: input.type,
           archived: input.archived ?? false,
-        }
+        },
       );
 
       return result;
@@ -108,6 +112,7 @@ export const boardRouter = createTRPCRouter({
             ]),
           )
           .optional(),
+        priorityFilters: z.array(z.string()).optional(),
         type: z.enum(["regular", "template"]).optional(),
       }),
     )
@@ -148,6 +153,7 @@ export const boardRouter = createTRPCRouter({
           labels: input.labels ?? [],
           lists: input.lists ?? [],
           dueDate: dueDateFilters,
+          priority: input.priorityFilters,
           type: input.type,
         },
       );
@@ -162,24 +168,24 @@ export const boardRouter = createTRPCRouter({
       // Generate presigned URLs for workspace member avatars
       const workspaceWithAvatarUrls = result.workspace
         ? {
-          ...result.workspace,
-          members: await Promise.all(
-            result.workspace.members.map(async (member) => {
-              if (!member.user?.image) {
-                return member;
-              }
+            ...result.workspace,
+            members: await Promise.all(
+              result.workspace.members.map(async (member) => {
+                if (!member.user?.image) {
+                  return member;
+                }
 
-              const avatarUrl = await generateAvatarUrl(member.user.image);
-              return {
-                ...member,
-                user: {
-                  ...member.user,
-                  image: avatarUrl,
-                },
-              };
-            }),
-          ),
-        }
+                const avatarUrl = await generateAvatarUrl(member.user.image);
+                return {
+                  ...member,
+                  user: {
+                    ...member.user,
+                    image: avatarUrl,
+                  },
+                };
+              }),
+            ),
+          }
         : result.workspace;
 
       // Generate presigned URLs for card member avatars
@@ -249,6 +255,7 @@ export const boardRouter = createTRPCRouter({
             ]),
           )
           .optional(),
+        priorityFilters: z.array(z.string()).optional(),
       }),
     )
     .output(boardBySlugSchema.nullable())
@@ -278,6 +285,7 @@ export const boardRouter = createTRPCRouter({
           labels: input.labels ?? [],
           lists: input.lists ?? [],
           dueDate: dueDateFilters,
+          priority: input.priorityFilters,
         },
       );
 
@@ -513,7 +521,11 @@ export const boardRouter = createTRPCRouter({
       }
 
       // Handle other updates (name, slug, visibility)
-      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined || input.isArchived !== undefined;
+      const hasOtherUpdates =
+        input.name ||
+        input.slug ||
+        input.visibility !== undefined ||
+        input.isArchived !== undefined;
 
       if (!hasOtherUpdates) {
         // Only favorite was updated, return success

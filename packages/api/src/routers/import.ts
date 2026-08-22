@@ -14,9 +14,9 @@ import { colours } from "@kan/shared/constants";
 import { generateSlug, generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertPermission } from "../utils/permissions";
 import { assertUserInWorkspace } from "../utils/auth";
 import { decryptToken } from "../utils/encryption";
+import { assertPermission } from "../utils/permissions";
 import { apiKeys, urls } from "./integration";
 
 export interface TrelloBoard {

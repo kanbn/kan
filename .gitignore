@@ -57,5 +57,7 @@ i18n.cache
 
 # local scripts
 scripts/
-
+.ddev
+.agent
+openspec
 .claude

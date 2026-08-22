@@ -4,9 +4,9 @@ import { createOpenApiNextHandler } from "trpc-to-openapi";
 
 import { appRouter } from "@kan/api";
 import { createRESTContext } from "@kan/api/trpc";
+import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 import { env } from "~/env";
-import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 export default withRateLimit(
   { points: 100, duration: 60 },

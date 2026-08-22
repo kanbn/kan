@@ -1,5 +1,6 @@
-import type { Permission } from "@kan/shared";
 import { useContext } from "react";
+
+import type { Permission } from "@kan/shared";
 
 import { WorkspaceContext } from "~/providers/workspace";
 import { api } from "~/utils/api";
@@ -109,4 +110,3 @@ export function usePermissions(): UsePermissionsResult {
     canEditWorkspace: hasPermission("workspace:edit"),
   };
 }
-

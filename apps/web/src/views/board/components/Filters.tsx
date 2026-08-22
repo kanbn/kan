@@ -3,6 +3,7 @@ import { t } from "@lingui/core/macro";
 import {
   HiMiniXMark,
   HiOutlineClock,
+  HiOutlineFlag,
   HiOutlineSquare3Stack3D,
   HiOutlineTag,
   HiOutlineUserCircle,
@@ -13,6 +14,7 @@ import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
 import LabelIcon from "~/components/LabelIcon";
+import { PriorityIcon } from "~/components/PriorityIcon";
 import {
   formatMemberDisplayName,
   formatToArray,
@@ -67,6 +69,7 @@ const Filters = ({
           labels: [],
           lists: [],
           dueDate: [],
+          priority: [],
         },
       });
     } catch (error) {
@@ -139,6 +142,38 @@ const Filters = ({
     },
   ];
 
+  const priorityItems = [
+    {
+      key: "urgent",
+      value: t`Urgent`,
+      selected: !!router.query.priority?.includes("urgent"),
+      leftIcon: <PriorityIcon priority="urgent" size={14} />,
+    },
+    {
+      key: "high",
+      value: t`High`,
+      selected: !!router.query.priority?.includes("high"),
+      leftIcon: <PriorityIcon priority="high" size={14} />,
+    },
+    {
+      key: "medium",
+      value: t`Medium`,
+      selected: !!router.query.priority?.includes("medium"),
+      leftIcon: <PriorityIcon priority="medium" size={14} />,
+    },
+    {
+      key: "low",
+      value: t`Low`,
+      selected: !!router.query.priority?.includes("low"),
+      leftIcon: <PriorityIcon priority="low" size={14} />,
+    },
+    {
+      key: "no-priority",
+      value: t`No priority`,
+      selected: !!router.query.priority?.includes("no-priority"),
+    },
+  ];
+
   const groups = [
     ...(formattedMembers.length
       ? [
@@ -172,6 +207,12 @@ const Filters = ({
       icon: <HiOutlineClock size={16} />,
       items: dueDateItems,
     },
+    {
+      key: "priority",
+      label: t`Priority`,
+      icon: <HiOutlineFlag size={16} />,
+      items: priorityItems,
+    },
   ];
 
   const handleSelect = async (
@@ -203,6 +244,7 @@ const Filters = ({
     ...formatToArray(router.query.labels),
     ...formatToArray(router.query.lists),
     ...formatToArray(router.query.dueDate),
+    ...formatToArray(router.query.priority),
   ].length;
 
   return (

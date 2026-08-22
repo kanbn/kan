@@ -34,7 +34,7 @@
     "comments": [],
     "origin": [
       ["src/views/boards/index.tsx", 57],
-      ["src/views/card/index.tsx", 321]
+      ["src/views/card/index.tsx", 331]
     ],
     "translation": "{0} | {1}"
   },
@@ -71,7 +71,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 570]],
+    "origin": [["src/views/board/index.tsx", 571]],
     "translation": "{0} introuvable"
   },
   "0xWkkH": {
@@ -231,7 +231,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 476],
+      ["src/views/card/index.tsx", 486],
       ["src/views/public/board/CardModal.tsx", 209]
     ],
     "translation": "Activité"
@@ -345,42 +345,42 @@
       "labelList": ["labelList"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 102]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 107]],
     "translation": "a ajouté {0} étiquettes : <0>{labelList}</0>"
   },
   "h4VV67": {
     "message": "added a checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 132]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 137]],
     "translation": "a ajouté une checklist"
   },
   "O83K21": {
     "message": "added a checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 135]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 140]],
     "translation": "a ajouté un élément de checklist"
   },
   "T21jY/": {
     "message": "added a label to the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 128]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 133]],
     "translation": "a ajouté une étiquette à la carte"
   },
   "rs7L54": {
     "message": "added a member to the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 130]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 135]],
     "translation": "a ajouté un membre à la carte"
   },
   "5y6qY8": {
     "message": "added an attachment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 140]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 145]],
     "translation": "a ajouté une pièce jointe"
   },
   "CujNX4": {
@@ -389,7 +389,7 @@
       "0": ["truncate(filename)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 278]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 286]],
     "translation": "a ajouté une pièce jointe <0>{0}</0>"
   },
   "wakO3W": {
@@ -398,7 +398,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 208]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 216]],
     "translation": "a ajouté la checklist <0>{0}</0>"
   },
   "E0t3jO": {
@@ -407,7 +407,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 232]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 240]],
     "translation": "a ajouté l'élément de checklist <0>{0}</0>"
   },
   "b5FKyH": {
@@ -416,7 +416,7 @@
       "0": ["truncate(label)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 192]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 200]],
     "translation": "a ajouté l'étiquette <0>{0}</0>"
   },
   "pL78ec": {
@@ -754,7 +754,7 @@
       "0": ["truncate(displayName)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 172]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 180]],
     "translation": "a assigné <0>{0}</0> à la carte"
   },
   "JUce1S": {
@@ -887,9 +887,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 543],
-      ["src/views/card/index.tsx", 321],
-      ["src/views/public/board/index.tsx", 125]
+      ["src/views/board/index.tsx", 544],
+      ["src/views/card/index.tsx", 331],
+      ["src/views/public/board/index.tsx", 126]
     ],
     "translation": "Tableau"
   },
@@ -934,7 +934,7 @@
     "message": "Board not found",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/public/board/index.tsx", 181]],
+    "origin": [["src/views/public/board/index.tsx", 182]],
     "translation": "Tableau introuvable"
   },
   "XNxYxq": {
@@ -973,7 +973,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/UpdateBoardSlugButton.tsx", 82],
-      ["src/views/public/board/index.tsx", 79]
+      ["src/views/public/board/index.tsx", 80]
     ],
     "translation": "URL du tableau copiée dans le presse-papiers"
   },
@@ -1312,7 +1312,7 @@
     "message": "Card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/index.tsx", 321]],
+    "origin": [["src/views/card/index.tsx", 331]],
     "translation": "Carte"
   },
   "sU2uWc": {
@@ -1344,8 +1344,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 384],
-      ["src/views/card/index.tsx", 421]
+      ["src/views/card/index.tsx", 394],
+      ["src/views/card/index.tsx", 431]
     ],
     "translation": "Carte introuvable"
   },
@@ -1361,7 +1361,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 314],
+      ["src/views/board/index.tsx", 315],
       ["src/views/card/components/Dropdown.tsx", 74],
       ["src/views/public/board/CardModal.tsx", 38]
     ],
@@ -1400,10 +1400,26 @@
     },
     "comments": [],
     "origin": [
-      ["src/views/card/components/ActivityList.tsx", 303],
-      ["src/views/card/components/ActivityList.tsx", 317]
+      ["src/views/card/components/ActivityList.tsx", 311],
+      ["src/views/card/components/ActivityList.tsx", 325]
     ],
     "translation": "a modifié la date d'échéance en <0>{formattedDate}</0>"
+  },
+  "JpJzzq": {
+    "translation": "",
+    "message": "changed the priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 151]]
+  },
+  "9ZgDRl": {
+    "translation": "",
+    "message": "changed the priority to <0>{0}</0>",
+    "placeholders": {
+      "0": ["formatPriorityName(toPriority)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 362]]
   },
   "pFGfsR": {
     "message": "Check out some of our favorite open source projects.",
@@ -1493,8 +1509,15 @@
     "message": "Clear filters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 227]],
+    "origin": [["src/views/board/components/Filters.tsx", 269]],
     "translation": "Effacer les filtres"
+  },
+  "zvDVMX": {
+    "translation": "",
+    "message": "Clear priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/PrioritySelector.tsx", 152]]
   },
   "RRn9jf": {
     "message": "Click on the link we've sent to {magicLinkRecipient} to sign in.",
@@ -1514,7 +1537,7 @@
     "comments": [],
     "origin": [
       ["src/components/Dashboard.tsx", 281],
-      ["src/views/card/index.tsx", 375],
+      ["src/views/card/index.tsx", 385],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
     ],
@@ -1588,7 +1611,7 @@
     "message": "completed a checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 137]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 142]],
     "translation": "a terminé un élément de checklist"
   },
   "29sSki": {
@@ -1597,7 +1620,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 249]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 257]],
     "translation": "a terminé l'élément de checklist <0>{0}</0>"
   },
   "tOZp9v": {
@@ -1916,7 +1939,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 99],
-      ["src/views/board/index.tsx", 684]
+      ["src/views/board/index.tsx", 685]
     ],
     "translation": "Créer une nouvelle liste"
   },
@@ -1955,7 +1978,7 @@
     "message": "created the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 124]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 129]],
     "translation": "a créé la carte"
   },
   "J5nbej": {
@@ -2192,14 +2215,14 @@
     "message": "deleted a checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 134]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 139]],
     "translation": "a supprimé une checklist"
   },
   "W5r8Qh": {
     "message": "deleted a checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 139]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 144]],
     "translation": "a supprimé un élément de checklist"
   },
   "BMkVQ3": {
@@ -2208,7 +2231,7 @@
       "0": ["truncate(fromTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 224]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 232]],
     "translation": "a supprimé la checklist <0>{0}</0>"
   },
   "CHZ1jC": {
@@ -2217,7 +2240,7 @@
       "0": ["truncate(fromTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 267]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 275]],
     "translation": "a supprimé l'élément de checklist <0>{0}</0>"
   },
   "f8fH8W": {
@@ -2362,9 +2385,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/Filters.tsx", 171],
+      ["src/views/board/components/Filters.tsx", 206],
       ["src/views/board/components/NewCardForm.tsx", 479],
-      ["src/views/card/index.tsx", 153]
+      ["src/views/card/index.tsx", 154]
     ],
     "translation": "Date d'échéance"
   },
@@ -2372,28 +2395,28 @@
     "message": "Due next month",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 132]],
+    "origin": [["src/views/board/components/Filters.tsx", 135]],
     "translation": "Échéance le mois prochain"
   },
   "iHcdea": {
     "message": "Due next week",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 127]],
+    "origin": [["src/views/board/components/Filters.tsx", 130]],
     "translation": "Échéance la semaine prochaine"
   },
   "1iShX0": {
     "message": "Due today",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 117]],
+    "origin": [["src/views/board/components/Filters.tsx", 120]],
     "translation": "Échéance aujourd'hui"
   },
   "zxKs+y": {
     "message": "Due tomorrow",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 122]],
+    "origin": [["src/views/board/components/Filters.tsx", 125]],
     "translation": "Échéance demain"
   },
   "euc6Ns": {
@@ -2989,7 +3012,7 @@
     "message": "Filter",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 221]],
+    "origin": [["src/views/board/components/Filters.tsx", 263]],
     "translation": "Filtrer"
   },
   "l31EoQ": {
@@ -3127,7 +3150,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 669]],
+    "origin": [["src/views/board/index.tsx", 670]],
     "translation": "Commencez en créant une nouvelle liste"
   },
   "oW13KZ": {
@@ -3270,6 +3293,18 @@
     "comments": [],
     "origin": [["src/views/members/index.tsx", 223]],
     "translation": "Invité"
+  },
+  "yx/fMc": {
+    "translation": "",
+    "message": "High",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/Filters.tsx", 154],
+      ["src/views/card/components/ActivityList.tsx", 341],
+      ["src/views/card/components/PrioritySelector.tsx", 73],
+      ["src/views/card/components/PrioritySelector.tsx", 83]
+    ]
   },
   "CB/NpV": {
     "message": "High Priority",
@@ -3642,9 +3677,9 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/CardContextLabelsModal.tsx", 31],
-      ["src/views/board/components/Filters.tsx", 155],
+      ["src/views/board/components/Filters.tsx", 190],
       ["src/views/board/components/NewCardForm.tsx", 428],
-      ["src/views/card/index.tsx", 133]
+      ["src/views/card/index.tsx", 134]
     ],
     "translation": "Étiquettes"
   },
@@ -3767,10 +3802,10 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/UpdateBoardSlugButton.tsx", 80],
-      ["src/views/board/index.tsx", 312],
+      ["src/views/board/index.tsx", 313],
       ["src/views/card/components/Dropdown.tsx", 72],
       ["src/views/public/board/CardModal.tsx", 36],
-      ["src/views/public/board/index.tsx", 77]
+      ["src/views/public/board/index.tsx", 78]
     ],
     "translation": "Lien copié"
   },
@@ -3780,7 +3815,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 117],
-      ["src/views/card/index.tsx", 124]
+      ["src/views/card/index.tsx", 125]
     ],
     "translation": "Liste"
   },
@@ -3795,14 +3830,14 @@
     "message": "Lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 163]],
+    "origin": [["src/views/board/components/Filters.tsx", 198]],
     "translation": "Listes"
   },
   "1rVAfU": {
     "message": "Load more activities",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 579]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 630]],
     "translation": "Charger plus d'activités"
   },
   "0qyZ4b": {
@@ -3818,7 +3853,7 @@
     "message": "Loading...",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 579]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 630]],
     "translation": "Chargement..."
   },
   "N/bcWA": {
@@ -3848,6 +3883,18 @@
     "comments": [],
     "origin": [["src/views/home/components/Testimonials.tsx", 236]],
     "translation": "Apprécié par des équipes du monde entier"
+  },
+  "nTWWCZ": {
+    "translation": "",
+    "message": "Low",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/Filters.tsx", 166],
+      ["src/views/card/components/ActivityList.tsx", 345],
+      ["src/views/card/components/PrioritySelector.tsx", 75],
+      ["src/views/card/components/PrioritySelector.tsx", 87]
+    ]
   },
   "O9jVbx": {
     "message": "Low Priority",
@@ -3884,7 +3931,7 @@
     "message": "marked a checklist item as incomplete",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 138]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 143]],
     "translation": "a marqué un élément de la checklist comme incomplet"
   },
   "jl3aEJ": {
@@ -3893,7 +3940,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 258]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 266]],
     "translation": "a marqué l'élément de checklist <0>{0}</0> comme incomplet"
   },
   "vo2a+a": {
@@ -3907,7 +3954,13 @@
     "message": "Medium",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FontSizeSelector.tsx", 8]],
+    "origin": [
+      ["src/components/FontSizeSelector.tsx", 8],
+      ["src/views/board/components/Filters.tsx", 160],
+      ["src/views/card/components/ActivityList.tsx", 343],
+      ["src/views/card/components/PrioritySelector.tsx", 74],
+      ["src/views/card/components/PrioritySelector.tsx", 85]
+    ],
     "translation": "Moyenne"
   },
   "W/Elkg": {
@@ -3929,8 +3982,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/ActivityList.tsx", 55],
-      ["src/views/card/components/ActivityList.tsx", 88],
+      ["src/views/card/components/ActivityList.tsx", 56],
+      ["src/views/card/components/ActivityList.tsx", 93],
       ["src/views/members/index.tsx", 222]
     ],
     "translation": "Membre"
@@ -3948,9 +4001,9 @@
     "comments": [],
     "origin": [
       ["src/components/SideNavigation.tsx", 122],
-      ["src/views/board/components/Filters.tsx", 147],
+      ["src/views/board/components/Filters.tsx", 182],
       ["src/views/board/components/NewCardForm.tsx", 386],
-      ["src/views/card/index.tsx", 143],
+      ["src/views/card/index.tsx", 144],
       ["src/views/members/index.tsx", 283],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 81]
     ],
@@ -4043,14 +4096,14 @@
       "1": ["truncate(toList)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 160]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 168]],
     "translation": "a déplacé la carte de <0>{0}</0> vers <1>{1}</1>"
   },
   "T7LJic": {
     "message": "moved the card to another list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 127]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 132]],
     "translation": "a déplacé la carte vers une autre liste"
   },
   "uEGGDs": {
@@ -4147,7 +4200,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 113],
-      ["src/views/board/index.tsx", 633]
+      ["src/views/board/index.tsx", 634]
     ],
     "translation": "Nouvelle liste"
   },
@@ -4252,7 +4305,7 @@
     "message": "No dates",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 137]],
+    "origin": [["src/views/board/components/Filters.tsx", 140]],
     "translation": "Aucune date"
   },
   "sY2lzr": {
@@ -4280,15 +4333,22 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 665]],
+    "origin": [["src/views/board/index.tsx", 666]],
     "translation": "Aucune liste"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 670]],
+    "origin": [["src/views/board/index.tsx", 671]],
     "translation": "Aucune liste n'a encore été créée"
+  },
+  "+X4ual": {
+    "translation": "",
+    "message": "No priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 172]]
   },
   "i30J2U": {
     "message": "No projects found",
@@ -4422,7 +4482,7 @@
     "message": "Overdue",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 112]],
+    "origin": [["src/views/board/components/Filters.tsx", 115]],
     "translation": "En retard"
   },
   "P6dJdq": {
@@ -4709,8 +4769,8 @@
       ["src/views/board/components/NewTemplateForm.tsx", 77],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 73],
       ["src/views/board/components/VisibilityButton.tsx", 57],
-      ["src/views/board/index.tsx", 224],
-      ["src/views/board/index.tsx", 280],
+      ["src/views/board/index.tsx", 225],
+      ["src/views/board/index.tsx", 281],
       ["src/views/boards/components/ImportBoardsForm.tsx", 243],
       ["src/views/boards/components/ImportBoardsForm.tsx", 395],
       ["src/views/card/components/AttachmentThumbnails.tsx", 74],
@@ -4729,8 +4789,9 @@
       ["src/views/card/components/NewChecklistForm.tsx", 71],
       ["src/views/card/components/NewChecklistItemForm.tsx", 90],
       ["src/views/card/components/NewCommentForm.tsx", 38],
-      ["src/views/card/index.tsx", 236],
-      ["src/views/card/index.tsx", 249],
+      ["src/views/card/components/PrioritySelector.tsx", 51],
+      ["src/views/card/index.tsx", 246],
+      ["src/views/card/index.tsx", 259],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 28],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 42],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 65],
@@ -4768,12 +4829,12 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 76],
       ["src/views/board/components/CardContextMoveListModal.tsx", 42],
-      ["src/views/board/index.tsx", 321],
+      ["src/views/board/index.tsx", 322],
       ["src/views/card/components/Dropdown.tsx", 55],
       ["src/views/card/components/Dropdown.tsx", 81],
       ["src/views/card/components/Dropdown.tsx", 100],
       ["src/views/public/board/CardModal.tsx", 45],
-      ["src/views/public/board/index.tsx", 86]
+      ["src/views/public/board/index.tsx", 87]
     ],
     "translation": "Veuillez réessayer."
   },
@@ -4799,6 +4860,16 @@
       ["src/views/pricing/index.tsx", 40]
     ],
     "translation": "Tarifs"
+  },
+  "1hKEom": {
+    "translation": "",
+    "message": "Priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/Filters.tsx", 212],
+      ["src/views/card/index.tsx", 163]
+    ]
   },
   "ESClHO": {
     "message": "Priority email support",
@@ -4954,28 +5025,28 @@
       "labelList": ["labelList"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 116]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 121]],
     "translation": "a retiré {0} étiquettes : <0>{labelList}</0>"
   },
   "kQwvU8": {
     "message": "removed a label from the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 129]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 134]],
     "translation": "a retiré une étiquette de la carte"
   },
   "uck1tz": {
     "message": "removed a member from the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 131]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 136]],
     "translation": "a retiré un membre de la carte"
   },
   "KEim/+": {
     "message": "removed an attachment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 141]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 146]],
     "translation": "a retiré une pièce jointe"
   },
   "zwTiVn": {
@@ -4984,7 +5055,7 @@
       "0": ["truncate(filename)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 288]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 296]],
     "translation": "a retiré une pièce jointe <0>{0}</0>"
   },
   "Qh7QmR": {
@@ -5000,7 +5071,7 @@
       "0": ["truncate(label)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 200]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 208]],
     "translation": "a retiré l'étiquette <0>{0}</0>"
   },
   "aHRWVI": {
@@ -5008,16 +5079,26 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/ActivityList.tsx", 144],
-      ["src/views/card/components/ActivityList.tsx", 324]
+      ["src/views/card/components/ActivityList.tsx", 149],
+      ["src/views/card/components/ActivityList.tsx", 332]
     ],
     "translation": "a retiré la date d'échéance"
+  },
+  "IpPZIa": {
+    "translation": "",
+    "message": "removed the priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/ActivityList.tsx", 152],
+      ["src/views/card/components/ActivityList.tsx", 370]
+    ]
   },
   "NypLoL": {
     "message": "renamed a checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 133]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 138]],
     "translation": "a renommé une checklist"
   },
   "3ZjRJY": {
@@ -5026,7 +5107,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 216]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 224]],
     "translation": "a renommé la checklist <0>{0}</0>"
   },
   "NH54UR": {
@@ -5035,7 +5116,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 240]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 248]],
     "translation": "a renommé l'élément de checklist en <0>{0}</0>"
   },
   "Yx0Ud8": {
@@ -5287,7 +5368,7 @@
     "message": "self-assigned the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 169]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 177]],
     "translation": "s'est auto-assigné la carte"
   },
   "RoafuO": {
@@ -5341,12 +5422,35 @@
     ],
     "translation": "Définir un mot de passe"
   },
+  "hNmOZ7": {
+    "translation": "",
+    "message": "Set priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/PrioritySelector.tsx", 111]]
+  },
   "Eit43O": {
     "message": "set the due date",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 142]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 147]],
     "translation": "a défini la date d'échéance"
+  },
+  "kEWNWZ": {
+    "translation": "",
+    "message": "set the priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 150]]
+  },
+  "FcwHLt": {
+    "translation": "",
+    "message": "set the priority to <0>{0}</0>",
+    "placeholders": {
+      "0": ["formatPriorityName(toPriority)"]
+    },
+    "comments": [],
+    "origin": [["src/views/card/components/ActivityList.tsx", 353]]
   },
   "JjEJSy": {
     "message": "Set up your workspace",
@@ -5717,8 +5821,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 543],
-      ["src/views/board/index.tsx", 579]
+      ["src/views/board/index.tsx", 544],
+      ["src/views/board/index.tsx", 580]
     ],
     "translation": "Modèle"
   },
@@ -5953,7 +6057,7 @@
     "message": "This board is private or does not exist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/public/board/index.tsx", 184]],
+    "origin": [["src/views/public/board/index.tsx", 185]],
     "translation": "Ce tableau est privé ou n'existe pas"
   },
   "wY+6Ye": {
@@ -6163,7 +6267,7 @@
     "message": "Unable to add label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/index.tsx", 248]],
+    "origin": [["src/views/card/index.tsx", 258]],
     "translation": "Impossible d'ajouter l'étiquette"
   },
   "LeM5RY": {
@@ -6185,10 +6289,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 319],
+      ["src/views/board/index.tsx", 320],
       ["src/views/card/components/Dropdown.tsx", 79],
       ["src/views/public/board/CardModal.tsx", 43],
-      ["src/views/public/board/index.tsx", 84]
+      ["src/views/public/board/index.tsx", 85]
     ],
     "translation": "Impossible de copier le lien"
   },
@@ -6385,8 +6489,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 279],
-      ["src/views/card/index.tsx", 235]
+      ["src/views/board/index.tsx", 280],
+      ["src/views/card/index.tsx", 245]
     ],
     "translation": "Impossible de mettre à jour la carte"
   },
@@ -6430,7 +6534,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 223],
+      ["src/views/board/index.tsx", 224],
       ["src/views/card/components/ListSelector.tsx", 54]
     ],
     "translation": "Impossible de mettre à jour la liste"
@@ -6451,6 +6555,13 @@
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 64]
     ],
     "translation": "Impossible de mettre à jour les permissions"
+  },
+  "uPW/GB": {
+    "translation": "",
+    "message": "Unable to update priority",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/PrioritySelector.tsx", 50]]
   },
   "TFv5tM": {
     "message": "Unable to update role",
@@ -6479,14 +6590,14 @@
       "0": ["truncate(displayName)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 183]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 191]],
     "translation": "a retiré <0>{0}</0> de la carte"
   },
   "hAMddS": {
     "message": "unassigned themselves from the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 180]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 188]],
     "translation": "s'est retiré de la carte"
   },
   "9Xigls": {
@@ -6635,28 +6746,28 @@
     "message": "updated a checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 136]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 141]],
     "translation": "a mis à jour un élément de la checklist"
   },
   "tGwwnq": {
     "message": "updated the description",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 126]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 131]],
     "translation": "a mis à jour la description"
   },
   "RfgJqw": {
     "message": "updated the due date",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 143]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 148]],
     "translation": "a mis à jour la date d'échéance"
   },
   "V3MPSQ": {
     "message": "updated the title",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 125]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 130]],
     "translation": "a mis à jour le titre"
   },
   "zERArS": {
@@ -6665,7 +6776,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 152]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 160]],
     "translation": "a mis à jour le titre en <0>{0}</0>"
   },
   "kwkhPe": {
@@ -6706,8 +6817,12 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      ["src/views/board/components/Filters.tsx", 148],
       ["src/views/boards/components/TemplateBoards.tsx", 50],
-      ["src/views/boards/components/TemplateBoards.tsx", 67]
+      ["src/views/boards/components/TemplateBoards.tsx", 67],
+      ["src/views/card/components/ActivityList.tsx", 339],
+      ["src/views/card/components/PrioritySelector.tsx", 72],
+      ["src/views/card/components/PrioritySelector.tsx", 81]
     ],
     "translation": "Urgent"
   },
@@ -6818,7 +6933,7 @@
     "message": "View only",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/public/board/index.tsx", 153]],
+    "origin": [["src/views/public/board/index.tsx", 154]],
     "translation": "Lecture seule"
   },
   "fSf2ee": {
@@ -6832,7 +6947,7 @@
     "message": "View workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/public/board/index.tsx", 187]],
+    "origin": [["src/views/public/board/index.tsx", 188]],
     "translation": "Voir l'espace de travail"
   },
   "2q/Q7x": {
@@ -7008,10 +7123,10 @@
     "comments": [],
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
-      ["src/views/board/index.tsx", 543],
+      ["src/views/board/index.tsx", 544],
       ["src/views/boards/index.tsx", 57],
       ["src/views/members/index.tsx", 278],
-      ["src/views/public/board/index.tsx", 125],
+      ["src/views/public/board/index.tsx", 126],
       ["src/views/public/boards/index.tsx", 75]
     ],
     "translation": "Espace de travail"
@@ -7238,8 +7353,8 @@
       ["src/views/board/components/List.tsx", 117],
       ["src/views/board/components/UpdateBoardSlugButton.tsx", 58],
       ["src/views/board/components/VisibilityButton.tsx", 72],
-      ["src/views/board/index.tsx", 617],
-      ["src/views/board/index.tsx", 675],
+      ["src/views/board/index.tsx", 618],
+      ["src/views/board/index.tsx", 676],
       ["src/views/boards/components/BoardsList.tsx", 71],
       ["src/views/boards/index.tsx", 68],
       ["src/views/boards/index.tsx", 89]

@@ -17,6 +17,7 @@ export const cardUpdateResponseSchema = z.object({
   title: z.string(),
   description: z.string().nullable(),
   dueDate: z.date().nullable(),
+  priority: z.enum(["urgent", "high", "medium", "low"]).nullable(),
 });
 
 // ─── Comment responses ───────────────────────────────────────
@@ -49,6 +50,7 @@ export const cardDetailSchema = z.object({
   cardNumber: z.number().nullable(),
   index: z.number(),
   dueDate: z.date().nullable(),
+  priority: z.enum(["urgent", "high", "medium", "low"]).nullable(),
   createdBy: z.string().nullable(),
   labels: z.array(labelSchema),
   attachments: z.array(
@@ -96,6 +98,8 @@ export const cardDetailSchema = z.object({
       toDescription: z.string().nullable(),
       fromDueDate: z.date().nullable(),
       toDueDate: z.date().nullable(),
+      fromPriority: z.string().nullable(),
+      toPriority: z.string().nullable(),
       fromList: z
         .object({
           publicId: z.string(),
@@ -159,6 +163,8 @@ export const activityItemSchema = z.object({
   toDescription: z.string().nullable(),
   fromDueDate: z.date().nullable(),
   toDueDate: z.date().nullable(),
+  fromPriority: z.string().nullable(),
+  toPriority: z.string().nullable(),
   fromList: z
     .object({
       publicId: z.string(),

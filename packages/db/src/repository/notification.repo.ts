@@ -65,10 +65,7 @@ export const exists = async (
   return !!result;
 };
 
-export const markAsRead = async (
-  db: dbClient,
-  notificationId: number,
-) => {
+export const markAsRead = async (db: dbClient, notificationId: number) => {
   const [result] = await db
     .update(notifications)
     .set({ readAt: new Date() })
@@ -78,10 +75,7 @@ export const markAsRead = async (
   return result;
 };
 
-export const getUnreadCount = async (
-  db: dbClient,
-  userId: string,
-) => {
+export const getUnreadCount = async (db: dbClient, userId: string) => {
   const result = await db
     .select({ count: count() })
     .from(notifications)
@@ -95,4 +89,3 @@ export const getUnreadCount = async (
 
   return result[0]?.count ?? 0;
 };
-

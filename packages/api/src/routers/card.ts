@@ -862,6 +862,10 @@ export const cardRouter = createTRPCRouter({
         index: z.number().optional(),
         listPublicId: z.string().min(12).optional(),
         dueDate: z.date().nullable().optional(),
+        priority: z
+          .enum(["urgent", "high", "medium", "low"])
+          .nullable()
+          .optional(),
       }),
     )
     .output(cardUpdateResponseSchema)
@@ -935,18 +939,26 @@ export const cardRouter = createTRPCRouter({
             description: string | null;
             publicId: string;
             dueDate: Date | null;
+            priority: "urgent" | "high" | "medium" | "low" | null;
           }
         | undefined;
 
       const previousDueDate = existingCard.dueDate;
+      const previousPriority = existingCard.priority;
 
-      if (input.title || input.description || input.dueDate !== undefined) {
+      if (
+        input.title ||
+        input.description ||
+        input.dueDate !== undefined ||
+        input.priority !== undefined
+      ) {
         result = await cardRepo.update(
           ctx.db,
           {
             ...(input.title && { title: input.title }),
             ...(input.description && { description: input.description }),
             ...(input.dueDate !== undefined && { dueDate: input.dueDate }),
+            ...(input.priority !== undefined && { priority: input.priority }),
           },
           { cardPublicId: input.cardPublicId },
         );
@@ -1023,6 +1035,29 @@ export const cardRouter = createTRPCRouter({
         });
       }
 
+      if (input.priority !== undefined && previousPriority !== input.priority) {
+        let priorityActivityType:
+          | "card.updated.priority.set"
+          | "card.updated.priority.changed"
+          | "card.updated.priority.removed";
+
+        if (!previousPriority) {
+          priorityActivityType = "card.updated.priority.set";
+        } else if (!input.priority) {
+          priorityActivityType = "card.updated.priority.removed";
+        } else {
+          priorityActivityType = "card.updated.priority.changed";
+        }
+
+        activities.push({
+          type: priorityActivityType,
+          cardId: result.id,
+          createdBy: userId,
+          fromPriority: previousPriority ?? undefined,
+          toPriority: input.priority ?? undefined,
+        });
+      }
+
       if (newListId && existingCard.listId !== newListId) {
         activities.push({
           type: "card.updated.list" as const,
@@ -1054,6 +1089,12 @@ export const cardRouter = createTRPCRouter({
       ) {
         webhookChanges.dueDate = { from: previousDueDate, to: input.dueDate };
       }
+      if (input.priority !== undefined && previousPriority !== input.priority) {
+        webhookChanges.priority = {
+          from: previousPriority,
+          to: input.priority,
+        };
+      }
       const movedToNewList = Boolean(
         newListId && existingCard.listId !== newListId,
       );
@@ -1083,6 +1124,7 @@ export const cardRouter = createTRPCRouter({
             title: result.title,
             description: result.description,
             dueDate: result.dueDate,
+            priority: result.priority,
             listId: currentWebhookListPublicId,
           },
           {
@@ -1287,6 +1329,7 @@ export const cardRouter = createTRPCRouter({
         workspaceId: targetList.workspaceId,
         position: "end",
         dueDate: sourceCard.dueDate ?? null,
+        priority: sourceCard.priority ?? null,
       });
 
       if (input.index !== undefined && input.index >= 0) {
