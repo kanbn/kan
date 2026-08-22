@@ -107,7 +107,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        462
+        558
       ]
     ],
     "translation": "{0} etiketter"
@@ -1278,6 +1278,22 @@
     ],
     "translation": "Ansvarlige"
   },
+  "N7m8E+": {
+    "translation": "",
+    "message": "Attach files",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/NewCardForm.tsx",
+        621
+      ],
+      [
+        "src/views/board/components/NewCardForm.tsx",
+        622
+      ]
+    ]
+  },
   "iVIGZb": {
     "message": "Attachment uploaded",
     "placeholders": {},
@@ -2277,7 +2293,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        328
+        424
       ]
     ],
     "translation": "Korttitel"
@@ -3057,7 +3073,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        527
+        653
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3085,7 +3101,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        537
+        663
       ]
     ],
     "translation": "Opret kort"
@@ -3177,7 +3193,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        424
+        520
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3961,7 +3977,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        479
+        575
       ],
       [
         "src/views/card/index.tsx",
@@ -6065,7 +6081,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        428
+        524
       ],
       [
         "src/views/card/index.tsx",
@@ -6573,7 +6589,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        386
+        482
       ],
       [
         "src/views/card/index.tsx",
@@ -6868,7 +6884,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        311
+        407
       ]
     ],
     "translation": "Nyt kort"
@@ -7840,7 +7856,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        193
+        198
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -8348,6 +8364,18 @@
       ]
     ],
     "translation": "Fjern"
+  },
+  "cILfnJ": {
+    "translation": "",
+    "message": "Remove file",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/NewCardForm.tsx",
+        640
+      ]
+    ]
   },
   "T/pF0Z": {
     "message": "Remove from favorites",
@@ -9396,6 +9424,18 @@
     ],
     "translation": "Solo"
   },
+  "whpQwW": {
+    "translation": "",
+    "message": "Some attachments failed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/NewCardForm.tsx",
+        327
+      ]
+    ]
+  },
   "J9+zIR": {
     "message": "Something went wrong during activation. Please try again.",
     "placeholders": {},
@@ -9895,6 +9935,25 @@
       ]
     ],
     "translation": "Kortet er blevet duplikeret."
+  },
+  "kwssev": {
+    "translation": "",
+    "message": "The card was created, but {failedCount} of {0} attachments could not be uploaded.",
+    "placeholders": {
+      "0": [
+        "filesToUpload.length"
+      ],
+      "failedCount": [
+        "failedCount"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/NewCardForm.tsx",
+        328
+      ]
+    ]
   },
   "jlB2RY": {
     "message": "The current password you entered is incorrect.",
@@ -10451,7 +10510,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        190
+        195
       ]
     ],
     "translation": "Kunne ikke oprette kort"

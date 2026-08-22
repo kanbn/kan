@@ -62,7 +62,7 @@
       "0": ["labelPublicIds.length"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 462]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 558]],
     "translation": "{0} labels"
   },
   "9x4DAL": {
@@ -766,6 +766,16 @@
     ],
     "translation": "Toegewezen aan"
   },
+  "N7m8E+": {
+    "translation": "Bestanden bijvoegen",
+    "message": "Attach files",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/NewCardForm.tsx", 621],
+      ["src/views/board/components/NewCardForm.tsx", 622]
+    ]
+  },
   "iVIGZb": {
     "message": "Attachment uploaded",
     "placeholders": {},
@@ -1353,7 +1363,7 @@
     "message": "Card title",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 328]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 424]],
     "translation": "Kaarttitel"
   },
   "rQXTmd": {
@@ -1834,7 +1844,7 @@
     "comments": [],
     "origin": [
       ["src/components/LabelForm.tsx", 213],
-      ["src/views/board/components/NewCardForm.tsx", 527],
+      ["src/views/board/components/NewCardForm.tsx", 653],
       ["src/views/board/components/NewListForm.tsx", 141]
     ],
     "translation": "Maak nog een"
@@ -1850,7 +1860,7 @@
     "message": "Create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 537]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 663]],
     "translation": "Maak kaart"
   },
   "d33Usy": {
@@ -1905,7 +1915,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewCardForm.tsx", 424],
+      ["src/views/board/components/NewCardForm.tsx", 520],
       ["src/views/card/components/LabelSelector.tsx", 101]
     ],
     "translation": "Maak nieuw label"
@@ -2363,7 +2373,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/Filters.tsx", 171],
-      ["src/views/board/components/NewCardForm.tsx", 479],
+      ["src/views/board/components/NewCardForm.tsx", 575],
       ["src/views/card/index.tsx", 153]
     ],
     "translation": "Vervaldatum"
@@ -3643,7 +3653,7 @@
     "origin": [
       ["src/views/board/components/CardContextLabelsModal.tsx", 31],
       ["src/views/board/components/Filters.tsx", 155],
-      ["src/views/board/components/NewCardForm.tsx", 428],
+      ["src/views/board/components/NewCardForm.tsx", 524],
       ["src/views/card/index.tsx", 133]
     ],
     "translation": "Labels"
@@ -3949,7 +3959,7 @@
     "origin": [
       ["src/components/SideNavigation.tsx", 122],
       ["src/views/board/components/Filters.tsx", 147],
-      ["src/views/board/components/NewCardForm.tsx", 386],
+      ["src/views/board/components/NewCardForm.tsx", 482],
       ["src/views/card/index.tsx", 143],
       ["src/views/members/index.tsx", 283],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 81]
@@ -4117,7 +4127,7 @@
     "message": "New card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 311]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 407]],
     "translation": "Nieuwe kaart"
   },
   "cWcxrL": {
@@ -4703,7 +4713,7 @@
       ["src/components/FeedbackModal.tsx", 41],
       ["src/components/NewWorkspaceForm.tsx", 110],
       ["src/views/board/components/BoardDropdown.tsx", 69],
-      ["src/views/board/components/NewCardForm.tsx", 193],
+      ["src/views/board/components/NewCardForm.tsx", 198],
       ["src/views/board/components/NewListForm.tsx", 79],
       ["src/views/board/components/NewTemplateForm.tsx", 61],
       ["src/views/board/components/NewTemplateForm.tsx", 77],
@@ -4932,6 +4942,13 @@
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 58]
     ],
     "translation": "Verwijderen"
+  },
+  "cILfnJ": {
+    "translation": "Bestand verwijderen",
+    "message": "Remove file",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 640]]
   },
   "T/pF0Z": {
     "message": "Remove from favorites",
@@ -5553,6 +5570,13 @@
     "origin": [["src/views/onboarding/select-plan/index.tsx", 81]],
     "translation": "Solo"
   },
+  "whpQwW": {
+    "translation": "Sommige bijlagen zijn mislukt",
+    "message": "Some attachments failed",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 327]]
+  },
   "J9+zIR": {
     "message": "Something went wrong during activation. Please try again.",
     "placeholders": {},
@@ -5856,6 +5880,16 @@
       ["src/views/board/components/CardContextDuplicateModal.tsx", 69]
     ],
     "translation": "De kaart is gedupliceerd."
+  },
+  "kwssev": {
+    "translation": "De kaart is aangemaakt, maar {failedCount} van de {0} bijlagen konden niet worden geüpload.",
+    "message": "The card was created, but {failedCount} of {0} attachments could not be uploaded.",
+    "placeholders": {
+      "0": ["filesToUpload.length"],
+      "failedCount": ["failedCount"]
+    },
+    "comments": [],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 328]]
   },
   "jlB2RY": {
     "message": "The current password you entered is incorrect.",
@@ -6196,7 +6230,7 @@
     "message": "Unable to create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 190]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 195]],
     "translation": "Kan kaart niet aanmaken"
   },
   "mHhffx": {
