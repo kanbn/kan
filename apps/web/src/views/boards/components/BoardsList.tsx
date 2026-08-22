@@ -1,8 +1,14 @@
 import Link from "next/link";
 import { t } from "@lingui/core/macro";
-import { HiOutlineRectangleStack, HiOutlineStar, HiStar } from "react-icons/hi2";
 import { motion } from "framer-motion";
+import {
+  HiOutlineRectangleStack,
+  HiOutlineStar,
+  HiStar,
+} from "react-icons/hi2";
+
 import Button from "~/components/Button";
+import ColoredBackground from "~/components/ColoredBackground";
 import PatternedBackground from "~/components/PatternedBackground";
 import { Tooltip } from "~/components/Tooltip";
 import { usePermissions } from "~/hooks/usePermissions";
@@ -10,7 +16,13 @@ import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 
-export function BoardsList({ isTemplate, archived = false }: { isTemplate?: boolean; archived?: boolean }) {
+export function BoardsList({
+  isTemplate,
+  archived = false,
+}: {
+  isTemplate?: boolean;
+  archived?: boolean;
+}) {
   const { workspace } = useWorkspace();
   const { openModal } = useModal();
   const { canCreateBoard } = usePermissions();
@@ -34,7 +46,7 @@ export function BoardsList({ isTemplate, archived = false }: { isTemplate?: bool
   const handleToggleFavorite = (
     e: React.MouseEvent,
     boardPublicId: string,
-    currentFavorite: boolean | undefined
+    currentFavorite: boolean | undefined,
   ) => {
     e.preventDefault();
     e.stopPropagation();
@@ -43,7 +55,6 @@ export function BoardsList({ isTemplate, archived = false }: { isTemplate?: bool
       favorite: !currentFavorite,
     });
   };
-
 
   if (isLoading)
     return (
@@ -60,16 +71,18 @@ export function BoardsList({ isTemplate, archived = false }: { isTemplate?: bool
         <div className="flex flex-col items-center">
           <HiOutlineRectangleStack className="h-10 w-10 text-light-800 dark:text-dark-800" />
           <p className="mb-2 mt-4 text-[14px] font-bold text-light-1000 dark:text-dark-950">
-            {archived ? t`No archived boards` : t`No ${isTemplate ? "templates" : "boards"}`}
+            {archived
+              ? t`No archived boards`
+              : t`No ${isTemplate ? "templates" : "boards"}`}
           </p>
           <p className="text-[14px] text-light-900 dark:text-dark-900">
-            {archived ? t`Boards you archive will appear here.` : t`Get started by creating a new ${isTemplate ? "template" : "board"}`}
+            {archived
+              ? t`Boards you archive will appear here.`
+              : t`Get started by creating a new ${isTemplate ? "template" : "board"}`}
           </p>
         </div>
         <Tooltip
-          content={
-            !canCreateBoard ? t`You don't have permission` : undefined
-          }
+          content={!canCreateBoard ? t`You don't have permission` : undefined}
         >
           <Button
             onClick={() => {
@@ -99,22 +112,34 @@ export function BoardsList({ isTemplate, archived = false }: { isTemplate?: bool
               type: "spring",
               stiffness: 300,
               damping: 30,
-              mass: 1
+              mass: 1,
             },
             opacity: { duration: 0.2 },
-            scale: { duration: 0.2 }
+            scale: { duration: 0.2 },
           }}
         >
           <Link
             href={`${isTemplate ? "templates" : "boards"}/${board.publicId}`}
           >
             <div className="group relative mr-5 flex h-[150px] w-full items-center justify-center rounded-md border border-dashed border-light-400 bg-light-50 shadow-sm hover:bg-light-200 dark:border-dark-600 dark:bg-dark-50 dark:hover:bg-dark-100">
-              <PatternedBackground />
+              {board.backgroundColor ? (
+                <ColoredBackground color={board.backgroundColor} />
+              ) : (
+                <PatternedBackground />
+              )}
+              <div className="pointer-events-none absolute inset-0 z-[1] rounded-md bg-black/0 transition-colors group-hover:bg-black/10" />
               <button
-                onClick={(e) => handleToggleFavorite(e, board.publicId, board.favorite)}
-                className={`absolute right-3 top-3 z-10 rounded p-1 transition-all hover:bg-light-300 dark:hover:bg-dark-200 ${board.favorite ? "" : "md:opacity-0 md:group-hover:opacity-100"
-                  }`}
-                aria-label={board.favorite ? "Remove from favorites" : "Add to favorites"}
+                onClick={(e) =>
+                  handleToggleFavorite(e, board.publicId, board.favorite)
+                }
+                className={`absolute right-3 top-3 z-10 rounded p-1 transition-all hover:bg-light-300 dark:hover:bg-dark-200 ${
+                  board.favorite
+                    ? ""
+                    : "md:opacity-0 md:group-hover:opacity-100"
+                }`}
+                aria-label={
+                  board.favorite ? "Remove from favorites" : "Add to favorites"
+                }
               >
                 {board.favorite ? (
                   <HiStar className="h-5 w-5 text-neutral-700 dark:text-dark-1000" />
@@ -122,7 +147,7 @@ export function BoardsList({ isTemplate, archived = false }: { isTemplate?: bool
                   <HiOutlineStar className="h-5 w-5 text-neutral-700 dark:text-dark-800" />
                 )}
               </button>
-              <p className="px-4 text-[14px] font-bold text-neutral-700 dark:text-dark-1000">
+              <p className="relative z-10 px-4 text-[14px] font-bold text-neutral-700 dark:text-dark-1000">
                 {board.name}
               </p>
             </div>

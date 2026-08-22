@@ -70,3 +70,15 @@ export const getAvatarUrl = (imageOrKey: string | null) => {
 
   return "";
 };
+
+export const isLightHexColor = (color: string | null | undefined) => {
+  if (!color || !/^#[0-9a-fA-F]{6}$/.test(color)) return null;
+
+  const red = parseInt(color.slice(1, 3), 16);
+  const green = parseInt(color.slice(3, 5), 16);
+  const blue = parseInt(color.slice(5, 7), 16);
+
+  const luminance = (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
+
+  return luminance > 0.6;
+};
