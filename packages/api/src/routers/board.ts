@@ -472,6 +472,11 @@ export const boardRouter = createTRPCRouter({
         visibility: z.enum(["public", "private"]).optional(),
         favorite: z.boolean().optional(),
         isArchived: z.boolean().optional(),
+        backgroundColor: z
+          .string()
+          .regex(/^#[0-9a-fA-F]{6}$/)
+          .nullable()
+          .optional(),
       }),
     )
     .output(boardUpdateResponseSchema)
@@ -513,7 +518,12 @@ export const boardRouter = createTRPCRouter({
       }
 
       // Handle other updates (name, slug, visibility)
-      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined || input.isArchived !== undefined;
+      const hasOtherUpdates =
+        input.name !== undefined ||
+        input.slug !== undefined ||
+        input.visibility !== undefined ||
+        input.isArchived !== undefined ||
+        input.backgroundColor !== undefined;
 
       if (!hasOtherUpdates) {
         // Only favorite was updated, return success
@@ -538,6 +548,7 @@ export const boardRouter = createTRPCRouter({
       const result = await boardRepo.update(ctx.db, {
         name: input.name,
         slug: input.slug,
+        backgroundColor: input.backgroundColor,
         boardPublicId: input.boardPublicId,
         visibility: input.visibility,
         isArchived: input.isArchived,

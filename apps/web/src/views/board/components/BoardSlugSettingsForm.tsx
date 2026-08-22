@@ -1,9 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { HiCheck, HiXMark } from "react-icons/hi2";
+import { HiCheck, HiLink, HiXMark } from "react-icons/hi2";
 import { z } from "zod";
 
 import Button from "~/components/Button";
@@ -15,20 +14,19 @@ import { api } from "~/utils/api";
 
 interface QueryParams {
   boardPublicId: string;
-  members: string[];
-  labels: string[];
-  lists: string[];
 }
 
-export function UpdateBoardSlugForm({
+export function BoardSlugSettingsForm({
   boardPublicId,
-  workspaceSlug,
   boardSlug,
+  workspaceSlug,
+  visibility,
   queryParams,
 }: {
   boardPublicId: string;
-  workspaceSlug: string;
   boardSlug: string;
+  workspaceSlug: string;
+  visibility: string;
   queryParams: QueryParams;
 }) {
   const { closeModal } = useModal();
@@ -63,10 +61,16 @@ export function UpdateBoardSlugForm({
   });
 
   const slug = watch("slug");
-
   const [debouncedSlug] = useDebounce(slug, 500);
 
   const updateBoardSlug = api.board.update.useMutation({
+    onSuccess: () => {
+      showPopup({
+        header: t`Board URL updated`,
+        message: t`The URL of your board has been updated.`,
+        icon: "success",
+      });
+    },
     onError: () => {
       showPopup({
         header: t`Unable to update board URL`,
@@ -75,7 +79,7 @@ export function UpdateBoardSlugForm({
       });
     },
     onSettled: async () => {
-      closeModal();
+      // closeModal();
       await utils.board.byId.invalidate(queryParams);
     },
   });
@@ -92,13 +96,7 @@ export function UpdateBoardSlugForm({
 
   const isBoardSlugAvailable = checkBoardSlugAvailability.data;
 
-  useEffect(() => {
-    const nameElement: HTMLElement | null =
-      document.querySelector<HTMLElement>("#board-slug");
-    if (nameElement) nameElement.focus();
-  }, []);
-
-  const onSubmit = (data: FormValues) => {
+  const onSubmitBoardSlug = (data: FormValues) => {
     if (!isBoardSlugAvailable) return;
     if (isBoardSlugAvailable.isReserved) return;
 
@@ -108,25 +106,20 @@ export function UpdateBoardSlugForm({
     });
   };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="px-5 pt-5">
-        <div className="flex w-full items-center justify-between pb-4">
-          <h2 className="text-sm font-bold text-neutral-900 dark:text-dark-1000">
-            {t`Edit board URL`}
-          </h2>
-          <button
-            type="button"
-            className="rounded p-1 hover:bg-light-200 focus:outline-none dark:hover:bg-dark-300"
-            onClick={(e) => {
-              e.preventDefault();
-              closeModal();
-            }}
-          >
-            <HiXMark size={18} className="text-light-900 dark:text-dark-900" />
-          </button>
-        </div>
+  const linkBaseUrl = env("NEXT_PUBLIC_BASE_URL");
 
+  const isPublic = visibility === "public";
+  const boardUrl = isPublic
+    ? `${linkBaseUrl}/${workspaceSlug}/${boardSlug}`
+    : `${linkBaseUrl}/boards/${boardPublicId}`;
+
+  return (
+    <form className="mb-10">
+      <div className="mb-3 text-sm text-light-900 dark:text-dark-900">
+        {t`Board URL`}
+      </div>
+
+      <div className="items-left flex">
         <Input
           id="board-slug"
           {...register("slug")}
@@ -140,7 +133,7 @@ export function UpdateBoardSlugForm({
           onKeyDown={async (e) => {
             if (e.key === "Enter") {
               e.preventDefault();
-              await handleSubmit(onSubmit)();
+              await handleSubmit(onSubmitBoardSlug)();
             }
           }}
           iconRight={
@@ -151,8 +144,28 @@ export function UpdateBoardSlugForm({
             )
           }
         />
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            navigator.clipboard
+              .writeText(boardUrl)
+              .then(() =>
+                showPopup({
+                  header: t`Link copied`,
+                  icon: "success",
+                  message: t`Board URL copied to clipboard`,
+                }),
+              )
+              .catch(() => undefined);
+          }}
+          className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-light-200 dark:hover:bg-dark-200"
+          aria-label={t`Copy board link`}
+        >
+          <HiLink className="h-[13px] w-[13px]" />
+        </button>
       </div>
-      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="flex pt-5">
         <div className="flex items-center gap-2">
           <Button
             variant="secondary"
@@ -161,19 +174,19 @@ export function UpdateBoardSlugForm({
           >
             {t`Edit workspace URL`}
           </Button>
-          <Button
-            type="submit"
-            isLoading={updateBoardSlug.isPending}
-            disabled={
-              !isDirty ||
-              updateBoardSlug.isPending ||
-              errors.slug?.message !== undefined ||
-              isBoardSlugAvailable?.isReserved ||
-              checkBoardSlugAvailability.isLoading
-            }
-          >
-            {t`Update`}
-          </Button>
+          {isDirty &&
+            !updateBoardSlug.isPending &&
+            errors.slug?.message === undefined &&
+            !isBoardSlugAvailable?.isReserved &&
+            !checkBoardSlugAvailability.isLoading && (
+              <Button
+                type="button"
+                onClick={handleSubmit(onSubmitBoardSlug)}
+                isLoading={updateBoardSlug.isPending}
+              >
+                {t`Update`}
+              </Button>
+            )}
         </div>
       </div>
     </form>
