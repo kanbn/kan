@@ -45,6 +45,7 @@ export const create = async (
     workspaceId: number;
     position: "start" | "end";
     dueDate?: Date | null;
+    customData?: Record<string, unknown> | null;
   },
 ) => {
   return db.transaction(async (tx) => {
@@ -106,6 +107,7 @@ export const create = async (
         index: index,
         cardNumber,
         dueDate: cardInput.dueDate ?? null,
+        customData: cardInput.customData ?? null,
       })
       .returning({
         id: cards.id,
@@ -204,6 +206,7 @@ export const update = async (
     title?: string;
     description?: string;
     dueDate?: Date | null;
+    customData?: Record<string, unknown> | null;
   },
   args: {
     cardPublicId: string;
@@ -215,6 +218,7 @@ export const update = async (
       title: cardInput.title,
       description: cardInput.description,
       dueDate: cardInput.dueDate !== undefined ? cardInput.dueDate : undefined,
+      ...(cardInput.customData !== undefined && { customData: cardInput.customData }),
       updatedAt: new Date(),
     })
     .where(and(eq(cards.publicId, args.cardPublicId), isNull(cards.deletedAt)))
@@ -224,6 +228,7 @@ export const update = async (
       title: cards.title,
       description: cards.description,
       dueDate: cards.dueDate,
+      customData: cards.customData,
     });
 
   return result;
@@ -491,6 +496,7 @@ export const getWithListAndMembersByPublicId = async (
       createdBy: true,
       cardNumber: true,
       index: true,
+      customData: true,
     },
     with: {
       labels: {
@@ -546,6 +552,7 @@ export const getWithListAndMembersByPublicId = async (
             columns: {
               publicId: true,
               name: true,
+              customFieldsConfig: true,
             },
             with: {
               labels: {
@@ -1038,4 +1045,62 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
         boardName: result.list.board.name,
       }
     : null;
+};
+
+export const getUniqueCustomFieldValues = async (
+  db: dbClient,
+  boardId: number,
+  fieldKey: string,
+  sectionKey?: string,
+  limit = 20,
+): Promise<string[]> => {
+  const result = await db.execute(sql`
+    WITH raw_values AS (
+      SELECT card."customData"
+      FROM card
+      WHERE card."listId" IN (SELECT id FROM list WHERE "boardId" = ${boardId})
+        AND card."deletedAt" IS NULL
+        AND card."customData" IS NOT NULL
+    ),
+    extracted AS (
+      -- Case 1: Object sections
+      SELECT f.value as val
+      FROM raw_values
+      CROSS JOIN LATERAL jsonb_each(raw_values."customData") AS s(key, value)
+      CROSS JOIN LATERAL jsonb_each_text(s.value) AS f(key, value)
+      WHERE jsonb_typeof(s.value) = 'object'
+        AND f.key = ${fieldKey}
+        ${sectionKey ? sql`AND s.key = ${sectionKey}` : sql``}
+      
+      UNION ALL
+      
+      -- Case 2: Array sections (list/timeseries)
+      SELECT f.value as val
+      FROM raw_values
+      CROSS JOIN LATERAL jsonb_each(raw_values."customData") AS s(key, value)
+      CROSS JOIN LATERAL jsonb_array_elements(s.value) AS arr(obj)
+      CROSS JOIN LATERAL jsonb_each_text(arr.obj) AS f(key, value)
+      WHERE jsonb_typeof(s.value) = 'array'
+        AND f.key = ${fieldKey}
+        ${sectionKey ? sql`AND s.key = ${sectionKey}` : sql``}
+
+      UNION ALL
+
+      -- Case 3: Simple array of strings (if sectionKey IS the fieldKey)
+      SELECT arr.val as val
+      FROM raw_values
+      CROSS JOIN LATERAL jsonb_each(raw_values."customData") AS s(key, value)
+      CROSS JOIN LATERAL jsonb_array_elements_text(s.value) AS arr(val)
+      WHERE jsonb_typeof(s.value) = 'array'
+        AND s.key = ${fieldKey}
+        ${sectionKey ? sql`AND s.key = ${sectionKey}` : sql``}
+    )
+    SELECT DISTINCT val
+    FROM extracted
+    WHERE val IS NOT NULL AND val <> ''
+    ORDER BY val
+    LIMIT ${limit}
+  `);
+
+  return result.rows.map((row) => String(row.val));
 };

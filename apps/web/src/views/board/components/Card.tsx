@@ -24,6 +24,7 @@ const Card = ({
   comments,
   attachments,
   dueDate,
+  showOnBoardFields,
 }: {
   title: string;
   ticketNumber?: string | null;
@@ -47,6 +48,7 @@ const Card = ({
   comments: { publicId: string }[];
   attachments?: { publicId: string }[];
   dueDate?: Date | null;
+  showOnBoardFields?: Array<{ sectionKey: string; fieldKey: string; title: string; value: string }>;
 }) => {
   const { dateLocale } = useLocalisation();
   const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;
@@ -75,6 +77,19 @@ const Card = ({
         </span>
       )}
       <span className="break-words">{title}</span>
+      {showOnBoardFields && showOnBoardFields.length > 0 && (
+        <div className="mt-1 flex flex-col gap-0.5">
+          {showOnBoardFields.map(({ sectionKey, fieldKey, title: fieldTitle, value }) => (
+            <span
+              key={`${sectionKey}.${fieldKey}`}
+              className={`kan-custom-field kan-field-${fieldKey} text-[11px] text-light-800 dark:text-dark-800`}
+              data-field-key={fieldKey}
+            >
+              <span className="font-medium">{fieldTitle}:</span> {value}
+            </span>
+          ))}
+        </div>
+      )}
       {labels.length ||
       members.length ||
       checklists.length > 0 ||

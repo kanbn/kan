@@ -2,6 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
+import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardCommentRepo from "@kan/db/repository/cardComment.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
@@ -12,6 +13,8 @@ import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
 
 import {
   activityItemSchema,
+  cardCustomFieldValuesResponseSchema,
+  cardCustomFieldValuesRequestSchema,
   cardCreateResponseSchema,
   cardDetailSchema,
   cardUpdateResponseSchema,
@@ -52,6 +55,7 @@ export const cardRouter = createTRPCRouter({
         memberPublicIds: z.array(z.string().min(12)),
         position: z.enum(["start", "end"]),
         dueDate: z.date().nullable().optional(),
+        customData: z.record(z.string(), z.unknown()).nullable().optional(),
       }),
     )
     .output(cardCreateResponseSchema)
@@ -85,6 +89,7 @@ export const cardRouter = createTRPCRouter({
         workspaceId: list.workspaceId,
         position: input.position,
         dueDate: input.dueDate ?? null,
+        customData: input.customData ?? null,
       });
 
       const newCardId = newCard.id;
@@ -647,6 +652,30 @@ export const cardRouter = createTRPCRouter({
 
       return { newMember: true };
     }),
+  getCustomFieldValues: protectedProcedure
+    .input(cardCustomFieldValuesRequestSchema)
+    .output(cardCustomFieldValuesResponseSchema)
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+      if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+      const board = await boardRepo.getWorkspaceIdAndIdByPublicId(
+        ctx.db,
+        input.boardPublicId,
+      );
+      if (!board)
+        throw new TRPCError({ code: "NOT_FOUND", message: "Board not found" });
+
+      await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
+
+      return cardRepo.getUniqueCustomFieldValues(
+        ctx.db,
+        board.id,
+        input.fieldKey,
+        input.sectionKey,
+        input.limit,
+      );
+    }),
   byId: publicProcedure
     .meta({
       openapi: {
@@ -734,6 +763,7 @@ export const cardRouter = createTRPCRouter({
 
       return {
         ...result,
+        customData: result.customData as Record<string, unknown> | null,
         attachments: attachmentsWithUrls,
         list: {
           ...result.list,
@@ -862,6 +892,7 @@ export const cardRouter = createTRPCRouter({
         index: z.number().optional(),
         listPublicId: z.string().min(12).optional(),
         dueDate: z.date().nullable().optional(),
+        customData: z.record(z.string(), z.unknown()).nullable().optional(),
       }),
     )
     .output(cardUpdateResponseSchema)
@@ -940,13 +971,14 @@ export const cardRouter = createTRPCRouter({
 
       const previousDueDate = existingCard.dueDate;
 
-      if (input.title || input.description || input.dueDate !== undefined) {
+      if (input.title || input.description || input.dueDate !== undefined || input.customData !== undefined) {
         result = await cardRepo.update(
           ctx.db,
           {
             ...(input.title && { title: input.title }),
             ...(input.description && { description: input.description }),
             ...(input.dueDate !== undefined && { dueDate: input.dueDate }),
+            ...(input.customData !== undefined && { customData: input.customData }),
           },
           { cardPublicId: input.cardPublicId },
         );
@@ -1287,6 +1319,7 @@ export const cardRouter = createTRPCRouter({
         workspaceId: targetList.workspaceId,
         position: "end",
         dueDate: sourceCard.dueDate ?? null,
+        customData: sourceCard.customData as Record<string, unknown> | null,
       });
 
       if (input.index !== undefined && input.index >= 0) {

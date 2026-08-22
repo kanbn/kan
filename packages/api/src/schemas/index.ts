@@ -13,6 +13,8 @@ export {
   commentResponseSchema,
   commentDeleteResponseSchema,
   activityItemSchema,
+  cardCustomFieldValuesResponseSchema,
+  cardCustomFieldValuesRequestSchema,
 } from "./card";
 
 export {

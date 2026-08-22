@@ -111,6 +111,21 @@ export const getIdByPublicId = async (db: dbClient, boardPublicId: string) => {
   return board;
 };
 
+export const getWorkspaceIdAndIdByPublicId = async (
+  db: dbClient,
+  boardPublicId: string,
+) => {
+  const board = await db.query.boards.findFirst({
+    columns: {
+      id: true,
+      workspaceId: true,
+    },
+    where: eq(boards.publicId, boardPublicId),
+  });
+
+  return board;
+};
+
 interface DueDateFilter {
   startDate?: Date;
   endDate?: Date;
@@ -198,6 +213,7 @@ export const getByPublicId = async (
       slug: true,
       visibility: true,
       isArchived: true,
+      customFieldsConfig: true,
     },
     with: {
       userFavorites: {
@@ -257,6 +273,7 @@ export const getByPublicId = async (
               index: true,
               dueDate: true,
               cardNumber: true,
+              customData: true,
             },
             with: {
               labels: {
@@ -638,6 +655,7 @@ export const update = async (
     visibility: BoardVisibilityStatus | undefined;
     boardPublicId: string;
     isArchived?: boolean;
+    customFieldsConfig?: string | null;
   },
 ) => {
   const [result] = await db
@@ -647,7 +665,8 @@ export const update = async (
       slug: boardInput.slug,
       visibility: boardInput.visibility,
       updatedAt: new Date(),
-      ...(boardInput.isArchived !== undefined && { isArchived: boardInput.isArchived })
+      ...(boardInput.isArchived !== undefined && { isArchived: boardInput.isArchived }),
+      ...(boardInput.customFieldsConfig !== undefined && { customFieldsConfig: boardInput.customFieldsConfig }),
     })
     .where(eq(boards.publicId, boardInput.boardPublicId))
     .returning({
@@ -773,6 +792,7 @@ export const createFromSnapshot = async (
   args: {
     source: {
       name: string;
+      customFieldsConfig?: string | null;
       labels: { publicId: string; name: string; colourCode: string | null }[];
       lists: {
         name: string;
@@ -781,6 +801,7 @@ export const createFromSnapshot = async (
           title: string;
           description: string | null;
           index: number;
+          customData?: unknown;
           labels: {
             publicId: string;
             name: string;
@@ -819,6 +840,7 @@ export const createFromSnapshot = async (
         workspaceId: args.workspaceId,
         type: args.type,
         sourceBoardId: args.sourceBoardId,
+        customFieldsConfig: args.source.customFieldsConfig ?? null,
       })
       .returning({
         id: boards.id,
@@ -892,6 +914,7 @@ export const createFromSnapshot = async (
             createdBy: args.createdBy,
             listId: newListId,
             index: card.index,
+            customData: card.customData ?? null,
           })
           .returning({ id: cards.id });
 

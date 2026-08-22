@@ -8,6 +8,7 @@ import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { colours } from "@kan/shared/constants";
+import { parseCustomFieldsConfig } from "@kan/shared";
 import {
   convertDueDateFiltersToRanges,
   generateAvatarUrl,
@@ -189,6 +190,7 @@ export const boardRouter = createTRPCRouter({
           cards: await Promise.all(
             list.cards.map(async (card) => ({
               ...card,
+              customData: card.customData as Record<string, unknown> | null,
               members: await Promise.all(
                 card.members.map(async (member) => {
                   if (!member.user?.image) return member;
@@ -472,6 +474,7 @@ export const boardRouter = createTRPCRouter({
         visibility: z.enum(["public", "private"]).optional(),
         favorite: z.boolean().optional(),
         isArchived: z.boolean().optional(),
+        customFieldsConfig: z.string().nullable().optional(),
       }),
     )
     .output(boardUpdateResponseSchema)
@@ -512,8 +515,20 @@ export const boardRouter = createTRPCRouter({
         }
       }
 
-      // Handle other updates (name, slug, visibility)
-      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined || input.isArchived !== undefined;
+      // Validate custom fields YAML before persisting
+      if (input.customFieldsConfig) {
+        try {
+          parseCustomFieldsConfig(input.customFieldsConfig);
+        } catch (err) {
+          throw new TRPCError({
+            message: (err as Error).message,
+            code: "BAD_REQUEST",
+          });
+        }
+      }
+
+      // Handle other updates (name, slug, visibility, customFieldsConfig)
+      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined || input.isArchived !== undefined || input.customFieldsConfig !== undefined;
 
       if (!hasOtherUpdates) {
         // Only favorite was updated, return success
@@ -541,6 +556,7 @@ export const boardRouter = createTRPCRouter({
         boardPublicId: input.boardPublicId,
         visibility: input.visibility,
         isArchived: input.isArchived,
+        customFieldsConfig: input.customFieldsConfig,
       });
 
       if (!result)

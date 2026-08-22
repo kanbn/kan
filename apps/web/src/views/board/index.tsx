@@ -15,6 +15,7 @@ import {
 } from "react-icons/hi2";
 
 import type { UpdateBoardInput } from "@kan/api/types";
+import { parseCustomFieldsConfig, getShowOnBoardFields } from "@kan/shared";
 
 import type { CardContextMenuAction } from "./components/CardContextMenu";
 import Button from "~/components/Button";
@@ -55,6 +56,7 @@ import { NewListForm } from "./components/NewListForm";
 import { NewTemplateForm } from "./components/NewTemplateForm";
 import UpdateBoardSlugButton from "./components/UpdateBoardSlugButton";
 import { UpdateBoardSlugForm } from "./components/UpdateBoardSlugForm";
+import { CustomFieldsConfigForm } from "./components/CustomFieldsConfigForm";
 import VisibilityButton from "./components/VisibilityButton";
 
 type PublicListId = string;
@@ -176,6 +178,19 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   }, [boardId]);
 
   const isLoading = isInitialLoading || isQueryLoading;
+
+  // Parse board's custom fields config for showOnBoard rendering
+  const boardCustomFieldsConfig = (() => {
+    if (!boardData?.customFieldsConfig) return null;
+    try {
+      return parseCustomFieldsConfig(boardData.customFieldsConfig);
+    } catch {
+      return null;
+    }
+  })();
+  const showOnBoardFieldDefs = boardCustomFieldsConfig
+    ? getShowOnBoardFields(boardCustomFieldsConfig)
+    : [];
 
   useScrollRestore(
     boardId,
@@ -406,6 +421,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             boardPublicId={boardId ?? ""}
             listPublicId={selectedPublicListId}
             queryParams={queryParams}
+            config={boardCustomFieldsConfig}
           />
         </Modal>
 
@@ -463,6 +479,16 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             workspaceSlug={workspace.slug ?? ""}
             boardSlug={boardData?.slug ?? ""}
             queryParams={queryParams}
+          />
+        </Modal>
+
+        <Modal
+          modalSize="md"
+          isVisible={isOpen && modalContentType === "CUSTOM_FIELDS_CONFIG"}
+        >
+          <CustomFieldsConfigForm
+            boardPublicId={boardId ?? ""}
+            currentConfig={boardData?.customFieldsConfig ?? null}
           />
         </Modal>
 
@@ -771,7 +797,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                           <Card
                                             title={card.title}
                                             ticketNumber={
-                                              card.cardNumber != null
+                                              card.cardNumber != null &&
+                                              boardCustomFieldsConfig?.main?.fields?.id?.showOnBoard !== false
                                                 ? `${boardData.workspace.cardPrefix}-${card.cardNumber}`
                                                 : null
                                             }
@@ -784,6 +811,25 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                             comments={card.comments ?? []}
                                             attachments={card.attachments}
                                             dueDate={card.dueDate ?? null}
+                                            showOnBoardFields={showOnBoardFieldDefs
+                                              .map(({ sectionKey, fieldKey, field }) => {
+                                                const cardData = card.customData as Record<string, unknown> | null | undefined;
+                                                const section = cardData?.[sectionKey];
+                                                const value =
+                                                  section != null &&
+                                                  typeof section === "object" &&
+                                                  !Array.isArray(section)
+                                                    ? (section as Record<string, unknown>)[fieldKey]
+                                                    : undefined;
+                                                if (value == null || value === "") return null;
+                                                return {
+                                                  sectionKey,
+                                                  fieldKey,
+                                                  title: field.title,
+                                                  value: String(value),
+                                                };
+                                              })
+                                              .filter((f): f is NonNullable<typeof f> => f !== null)}
                                           />
                                         </Link>
                                       )}

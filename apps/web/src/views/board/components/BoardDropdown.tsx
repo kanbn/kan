@@ -8,6 +8,7 @@ import {
   HiOutlineTrash,
   HiOutlineStar,
   HiStar,
+  HiOutlineAdjustmentsHorizontal,
 } from "react-icons/hi2";
 import { IoArchiveOutline } from "react-icons/io5";
 import Dropdown from "~/components/Dropdown";
@@ -106,6 +107,15 @@ export default function BoardDropdown({
           label: t`Edit board URL`,
           action: () => openModal("UPDATE_BOARD_SLUG"),
           icon: <HiLink className="h-[16px] w-[16px] text-dark-900" />,
+        },
+      ]
+      : []),
+    ...(canEditBoard
+      ? [
+        {
+          label: t`Custom Fields`,
+          action: () => openModal("CUSTOM_FIELDS_CONFIG"),
+          icon: <HiOutlineAdjustmentsHorizontal className="h-[16px] w-[16px] text-dark-900" />,
         },
       ]
       : []),

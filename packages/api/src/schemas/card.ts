@@ -17,6 +17,7 @@ export const cardUpdateResponseSchema = z.object({
   title: z.string(),
   description: z.string().nullable(),
   dueDate: z.date().nullable(),
+  customData: z.unknown(),
 });
 
 // ─── Comment responses ───────────────────────────────────────
@@ -50,6 +51,7 @@ export const cardDetailSchema = z.object({
   index: z.number(),
   dueDate: z.date().nullable(),
   createdBy: z.string().nullable(),
+  customData: z.record(z.string(), z.unknown()).nullable(),
   labels: z.array(labelSchema),
   attachments: z.array(
     z.object({
@@ -68,6 +70,7 @@ export const cardDetailSchema = z.object({
     board: z.object({
       publicId: z.string(),
       name: z.string(),
+      customFieldsConfig: z.string().nullable(),
       labels: z.array(labelSchema),
       lists: z.array(
         z.object({
@@ -121,16 +124,10 @@ export const cardDetailSchema = z.object({
           publicId: z.string(),
           user: z
             .object({
-              name: z.string().nullable(),
+              name: z.string().nullable().optional(),
               email: z.string(),
             })
             .nullable(),
-        })
-        .nullable(),
-      user: z
-        .object({
-          name: z.string().nullable(),
-          email: z.string(),
         })
         .nullable(),
       comment: z
@@ -142,9 +139,26 @@ export const cardDetailSchema = z.object({
           deletedAt: z.date().nullable(),
         })
         .nullable(),
+      user: z
+        .object({
+          name: z.string().nullable(),
+          email: z.string(),
+          id: z.string().nullable().optional(),
+          image: z.string().nullable().optional(),
+        })
+        .nullable(),
     }),
   ),
 });
+
+export const cardCustomFieldValuesRequestSchema = z.object({
+  boardPublicId: z.string().min(12),
+  fieldKey: z.string(),
+  sectionKey: z.string().optional(),
+  limit: z.number().int().min(1).max(100).optional(),
+});
+
+export const cardCustomFieldValuesResponseSchema = z.array(z.string());
 
 // ─── card.getActivities ──────────────────────────────────────
 export const activityItemSchema = z.object({

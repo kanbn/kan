@@ -1,0 +1,201 @@
+---
+title: "Custom Fields"
+description: "Extend your cards with custom fields to capture any structured data your team needs."
+---
+
+Custom fields let you add structured data to cards on a board — things like priority, client name, estimated hours, or any other information specific to your workflow.
+
+## Accessing custom fields
+
+Open the board menu (⋯ top-right of any board or template) and choose **Custom Fields**. This opens a modal with two editing modes:
+
+- **Simple** — a visual form where you can add, rename, reorder, and remove fields without touching YAML.
+- **Advanced** — a raw YAML editor that exposes the full configuration schema described below.
+
+You can switch freely between modes. If your YAML uses features not supported by the Simple editor (custom sections, `timeseries`, `keyvalue`, nested `fields`), the Simple tab is disabled to prevent data loss.
+
+---
+
+## YAML structure
+
+The configuration is a YAML document with up to three kinds of top-level keys:
+
+| Key | Description |
+|-----|-------------|
+| `main` | Fields shown in the main body of a card |
+| `sidebar` | Fields shown in the card sidebar |
+| `<any other key>` | A custom named section (Advanced only) |
+
+### Minimal example
+
+```yaml
+main:
+  fields:
+    priority:
+      title: Priority
+      type: select
+      options:
+        low: Low
+        medium: Medium
+        high: High
+      showOnBoard: true
+
+sidebar:
+  fields:
+    estimatedHours:
+      title: Estimated Hours
+      type: number
+```
+
+---
+
+## Field types
+
+| Type | Description | Simple editor |
+|------|-------------|:---:|
+| `text` | Single-line text input | ✓ |
+| `textarea` | Multi-line text input | ✓ |
+| `number` | Numeric input | ✓ |
+| `date` | Date picker | ✓ |
+| `tel` | Telephone number | ✓ |
+| `select` | Drop-down or checkbox list | ✓ |
+| `richtext` | Rich text editor | Advanced |
+| `datetime-local` | Date and time picker | Advanced |
+| `address` | Structured address | Advanced |
+| `list` | Free-form list | Advanced |
+| `section` | Collapsible group of sub-fields | Advanced |
+| `timeseries` | Time-series data entries | Advanced |
+| `keyvalue` | Arbitrary key-value pairs | Advanced |
+
+---
+
+## Field properties
+
+Every field definition can include the following properties.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `title` | string | **Required.** Label shown on the card. |
+| `type` | string | **Required.** One of the field types above. |
+| `showOnBoard` | boolean | Show the field value on the board card thumbnail. Default `false`. |
+| `placeholder` | string | Placeholder text for input fields. |
+| `description` | string | Helper text shown beneath the field. |
+| `hideLabel` | boolean | Hide the field label. Default `false`. |
+| `default` | string \| string[] | Pre-filled default value(s). |
+| `options` | map | Key-value pairs for `select` fields (key = stored value, value = display label). |
+| `multiple` | boolean | Allow multiple selections for `select` fields. Default `false`. |
+| `style` | string | Render style for `select`: `checkbox`, `radio`, `dropdown`, or `autofill`. |
+| `alwaysExpanded` | boolean | Keep a `section` field always open. Default `false`. |
+| `autofillLimit` | number | Max autocomplete suggestions for `autofill` style. |
+| `autofillFromCards` | boolean | Pull autocomplete suggestions from existing card values. |
+| `fields` | map | Nested field definitions (for `section` type only). |
+
+---
+
+## Sections
+
+### `main` and `sidebar`
+
+Both built-in sections support:
+- **Adding custom fields** under the `fields` key.
+- **Overriding built-in field labels** (e.g., renaming the description or due-date field):
+
+```yaml
+main:
+  newCardTitle: "Add story"       # overrides the new-card input placeholder
+  fields:
+    description:
+      title: "Story Description"  # overrides the built-in description label
+
+sidebar:
+  fields:
+    dueDate:
+      title: "Deadline"           # overrides the built-in due-date label
+```
+
+### Custom sections (Advanced)
+
+Any key outside `main` and `sidebar` creates a new collapsible section at the top level of the card:
+
+```yaml
+contacts:
+  title: Contacts
+  type: section
+  alwaysExpanded: false
+  fields:
+    clientName:
+      title: Client Name
+      type: text
+    clientEmail:
+      title: Client Email
+      type: text
+      placeholder: client@example.com
+```
+
+---
+
+## `select` fields in depth
+
+Options are defined as a YAML map where the **key** is stored in the card data and the **value** is the human-readable label:
+
+```yaml
+sidebar:
+  fields:
+    status:
+      title: Status
+      type: select
+      style: dropdown          # dropdown | checkbox | radio | autofill
+      multiple: false
+      default: backlog
+      showOnBoard: true
+      options:
+        backlog: Backlog
+        in_progress: In Progress
+        review: In Review
+        done: Done
+```
+
+---
+
+## Full example
+
+```yaml
+main:
+  fields:
+    priority:
+      title: Priority
+      type: select
+      style: radio
+      showOnBoard: true
+      options:
+        low: Low
+        medium: Medium
+        high: High
+    notes:
+      title: Notes
+      type: textarea
+      placeholder: Add any relevant notes…
+
+sidebar:
+  fields:
+    estimatedHours:
+      title: Estimated Hours
+      type: number
+      showOnBoard: true
+    dueDate:
+      title: Deadline
+    startDate:
+      title: Start Date
+      type: date
+
+billing:
+  title: Billing
+  type: section
+  fields:
+    rate:
+      title: Hourly Rate
+      type: number
+    invoiceRef:
+      title: Invoice Reference
+      type: text
+```
