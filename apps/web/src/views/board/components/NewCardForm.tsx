@@ -1,8 +1,10 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
+import { env } from "next-runtime-env";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { HiOutlinePaperClip } from "react-icons/hi";
 import {
   HiOutlineBarsArrowDown,
   HiOutlineBarsArrowUp,
@@ -89,6 +91,12 @@ export function NewCardForm({
   const dueDate = watch("dueDate");
   const [isDateSelectorOpen, setIsDateSelectorOpen] = useState(false);
 
+  // Files queued for upload after the card is created. Kept outside of
+  // useModalFormState: File objects do not survive serialization.
+  const [pendingFiles, setPendingFiles] = useState<File[]>([]);
+  const [isDraggingFiles, setIsDraggingFiles] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
   // saving form state whenever form values change
   useEffect(() => {
     const subscription = watch((data) => {
@@ -162,9 +170,6 @@ export function NewCardForm({
                     ...member,
                     deletedAt: null,
                   })) ?? [],
-              comments: [],
-              checklists: [],
-              attachments: [],
               _filteredLabels: labelPublicIds.map((id) => ({ publicId: id })),
               _filteredMembers: memberPublicIds.map((id) => ({ publicId: id })),
               index: position === "start" ? 0 : list.cards.length,
@@ -259,16 +264,73 @@ export function NewCardForm({
       ),
     })) ?? [];
 
-  const onSubmit = (data: NewCardFormInput) => {
-    createCard.mutate({
-      title: data.title,
-      description: data.description,
-      listPublicId: data.listPublicId,
-      labelPublicIds: data.labelPublicIds,
-      memberPublicIds: data.memberPublicIds,
-      position: data.position,
-      dueDate: data.dueDate ?? null,
-    });
+  const addFiles = (files: File[]) => {
+    if (files.length === 0) return;
+    setPendingFiles((prev) => [...prev, ...files]);
+  };
+
+  const removeFile = (index: number) => {
+    setPendingFiles((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const uploadAttachments = async (cardPublicId: string, files: File[]) => {
+    const baseUrl = env("NEXT_PUBLIC_BASE_URL") ?? "";
+    let failedCount = 0;
+
+    for (const file of files) {
+      try {
+        const response = await fetch(
+          `${baseUrl}/api/upload/attachment?cardPublicId=${encodeURIComponent(cardPublicId)}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": file.type || "application/octet-stream",
+              "x-original-filename": encodeURIComponent(file.name),
+            },
+            body: file,
+          },
+        );
+        if (!response.ok) failedCount++;
+      } catch {
+        failedCount++;
+      }
+    }
+
+    return failedCount;
+  };
+
+  const onSubmit = async (data: NewCardFormInput) => {
+    const filesToUpload = pendingFiles;
+    setPendingFiles([]);
+
+    let newCard;
+    try {
+      newCard = await createCard.mutateAsync({
+        title: data.title,
+        description: data.description,
+        listPublicId: data.listPublicId,
+        labelPublicIds: data.labelPublicIds,
+        memberPublicIds: data.memberPublicIds,
+        position: data.position,
+        dueDate: data.dueDate ?? null,
+      });
+    } catch {
+      // onError already surfaced the failure; keep the files queued for retry.
+      setPendingFiles(filesToUpload);
+      return;
+    }
+
+    if (filesToUpload.length > 0) {
+      const failedCount = await uploadAttachments(newCard.publicId, filesToUpload);
+      if (failedCount > 0) {
+        showPopup({
+          header: t`Some attachments failed`,
+          message: t`The card was created, but ${failedCount} of ${filesToUpload.length} attachments could not be uploaded.`,
+          icon: "error",
+        });
+      }
+      await utils.board.byId.invalidate(queryParams);
+    }
   };
 
   const handleToggleCreateAnother = (): void => {
@@ -304,7 +366,41 @@ export function NewCardForm({
   const selectedList = formattedLists.find((item) => item.selected);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      onDragOver={(e) => {
+        if (e.dataTransfer.types.includes("Files")) {
+          e.preventDefault();
+          setIsDraggingFiles(true);
+        }
+      }}
+      onDragLeave={(e) => {
+        e.preventDefault();
+        setIsDraggingFiles(false);
+      }}
+      onDrop={(e) => {
+        if (e.dataTransfer.files.length > 0) {
+          e.preventDefault();
+          setIsDraggingFiles(false);
+          addFiles(Array.from(e.dataTransfer.files));
+        }
+      }}
+      className={
+        isDraggingFiles
+          ? "rounded-lg ring-2 ring-inset ring-light-700 dark:ring-dark-700"
+          : undefined
+      }
+    >
+      <input
+        ref={fileInputRef}
+        type="file"
+        multiple
+        className="hidden"
+        onChange={(e) => {
+          addFiles(Array.from(e.target.files ?? []));
+          e.target.value = "";
+        }}
+      />
       <div className="px-5 pt-5">
         <div className="flex w-full items-center justify-between pb-5">
           <h2 className="text-sm font-bold text-neutral-900 dark:text-dark-1000">
@@ -519,7 +615,37 @@ export function NewCardForm({
               <HiOutlineBarsArrowDown size={14} />
             )}
           </button>
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            aria-label={t`Attach files`}
+            title={t`Attach files`}
+            className="flex h-auto items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-1.5 py-1 text-left text-xs text-light-800 hover:bg-light-300 focus-visible:outline-none dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500"
+          >
+            <HiOutlinePaperClip size={14} />
+          </button>
         </div>
+        {pendingFiles.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-1">
+            {pendingFiles.map((file, index) => (
+              <span
+                key={`${file.name}-${index}`}
+                className="flex items-center gap-1 rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-xs text-light-800 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000"
+              >
+                <HiOutlinePaperClip size={12} />
+                <span className="max-w-[180px] truncate">{file.name}</span>
+                <button
+                  type="button"
+                  onClick={() => removeFile(index)}
+                  aria-label={t`Remove file`}
+                  className="rounded p-0.5 hover:bg-light-300 focus:outline-none dark:hover:bg-dark-500"
+                >
+                  <HiXMark size={12} />
+                </button>
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="mt-5 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
