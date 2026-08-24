@@ -1279,7 +1279,6 @@
     "translation": "Assignees"
   },
   "N7m8E+": {
-    "translation": "Attach files",
     "message": "Attach files",
     "placeholders": {},
     "comments": [],
@@ -1292,7 +1291,8 @@
         "src/views/board/components/NewCardForm.tsx",
         622
       ]
-    ]
+    ],
+    "translation": "Attach files"
   },
   "iVIGZb": {
     "message": "Attachment uploaded",
@@ -8444,7 +8444,6 @@
     "translation": "Remove"
   },
   "cILfnJ": {
-    "translation": "Remove file",
     "message": "Remove file",
     "placeholders": {},
     "comments": [],
@@ -8453,7 +8452,8 @@
         "src/views/board/components/NewCardForm.tsx",
         640
       ]
-    ]
+    ],
+    "translation": "Remove file"
   },
   "T/pF0Z": {
     "message": "Remove from favorites",
@@ -9503,7 +9503,6 @@
     "translation": "Solo"
   },
   "whpQwW": {
-    "translation": "Some attachments failed",
     "message": "Some attachments failed",
     "placeholders": {},
     "comments": [],
@@ -9512,7 +9511,8 @@
         "src/views/board/components/NewCardForm.tsx",
         327
       ]
-    ]
+    ],
+    "translation": "Some attachments failed"
   },
   "J9+zIR": {
     "message": "Something went wrong during activation. Please try again.",
@@ -10015,7 +10015,6 @@
     "translation": "The card has been duplicated."
   },
   "kwssev": {
-    "translation": "The card was created, but {failedCount} of {0} attachments could not be uploaded.",
     "message": "The card was created, but {failedCount} of {0} attachments could not be uploaded.",
     "placeholders": {
       "0": [
@@ -10031,7 +10030,8 @@
         "src/views/board/components/NewCardForm.tsx",
         328
       ]
-    ]
+    ],
+    "translation": "The card was created, but {failedCount} of {0} attachments could not be uploaded."
   },
   "jlB2RY": {
     "message": "The current password you entered is incorrect.",

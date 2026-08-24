@@ -767,14 +767,14 @@
     "translation": "Assegnatari"
   },
   "N7m8E+": {
-    "translation": "Allega file",
     "message": "Attach files",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/board/components/NewCardForm.tsx", 621],
       ["src/views/board/components/NewCardForm.tsx", 622]
-    ]
+    ],
+    "translation": "Allega file"
   },
   "iVIGZb": {
     "message": "Attachment uploaded",
@@ -4944,11 +4944,11 @@
     "translation": "Rimuovi"
   },
   "cILfnJ": {
-    "translation": "Rimuovi file",
     "message": "Remove file",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 640]]
+    "origin": [["src/views/board/components/NewCardForm.tsx", 640]],
+    "translation": "Rimuovi file"
   },
   "T/pF0Z": {
     "message": "Remove from favorites",
@@ -5571,11 +5571,11 @@
     "translation": "Solo"
   },
   "whpQwW": {
-    "translation": "Alcuni allegati non sono riusciti",
     "message": "Some attachments failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 327]]
+    "origin": [["src/views/board/components/NewCardForm.tsx", 327]],
+    "translation": "Alcuni allegati non sono riusciti"
   },
   "J9+zIR": {
     "message": "Something went wrong during activation. Please try again.",
@@ -5882,14 +5882,14 @@
     "translation": "La scheda è stata duplicata."
   },
   "kwssev": {
-    "translation": "La scheda è stata creata, ma {failedCount} di {0} allegati non sono stati caricati.",
     "message": "The card was created, but {failedCount} of {0} attachments could not be uploaded.",
     "placeholders": {
       "0": ["filesToUpload.length"],
       "failedCount": ["failedCount"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 328]]
+    "origin": [["src/views/board/components/NewCardForm.tsx", 328]],
+    "translation": "La scheda è stata creata, ma {failedCount} di {0} allegati non sono stati caricati."
   },
   "jlB2RY": {
     "message": "The current password you entered is incorrect.",

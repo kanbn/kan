@@ -1279,7 +1279,6 @@
     "translation": "Ansvarlige"
   },
   "N7m8E+": {
-    "translation": "",
     "message": "Attach files",
     "placeholders": {},
     "comments": [],
@@ -1292,7 +1291,8 @@
         "src/views/board/components/NewCardForm.tsx",
         622
       ]
-    ]
+    ],
+    "translation": ""
   },
   "iVIGZb": {
     "message": "Attachment uploaded",
@@ -8366,7 +8366,6 @@
     "translation": "Fjern"
   },
   "cILfnJ": {
-    "translation": "",
     "message": "Remove file",
     "placeholders": {},
     "comments": [],
@@ -8375,7 +8374,8 @@
         "src/views/board/components/NewCardForm.tsx",
         640
       ]
-    ]
+    ],
+    "translation": ""
   },
   "T/pF0Z": {
     "message": "Remove from favorites",
@@ -9425,7 +9425,6 @@
     "translation": "Solo"
   },
   "whpQwW": {
-    "translation": "",
     "message": "Some attachments failed",
     "placeholders": {},
     "comments": [],
@@ -9434,7 +9433,8 @@
         "src/views/board/components/NewCardForm.tsx",
         327
       ]
-    ]
+    ],
+    "translation": ""
   },
   "J9+zIR": {
     "message": "Something went wrong during activation. Please try again.",
@@ -9937,7 +9937,6 @@
     "translation": "Kortet er blevet duplikeret."
   },
   "kwssev": {
-    "translation": "",
     "message": "The card was created, but {failedCount} of {0} attachments could not be uploaded.",
     "placeholders": {
       "0": [
@@ -9953,7 +9952,8 @@
         "src/views/board/components/NewCardForm.tsx",
         328
       ]
-    ]
+    ],
+    "translation": ""
   },
   "jlB2RY": {
     "message": "The current password you entered is incorrect.",

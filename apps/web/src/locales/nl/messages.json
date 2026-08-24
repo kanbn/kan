@@ -767,14 +767,14 @@
     "translation": "Toegewezen aan"
   },
   "N7m8E+": {
-    "translation": "Bestanden bijvoegen",
     "message": "Attach files",
     "placeholders": {},
     "comments": [],
     "origin": [
       ["src/views/board/components/NewCardForm.tsx", 621],
       ["src/views/board/components/NewCardForm.tsx", 622]
-    ]
+    ],
+    "translation": "Bestanden bijvoegen"
   },
   "iVIGZb": {
     "message": "Attachment uploaded",
@@ -4944,11 +4944,11 @@
     "translation": "Verwijderen"
   },
   "cILfnJ": {
-    "translation": "Bestand verwijderen",
     "message": "Remove file",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 640]]
+    "origin": [["src/views/board/components/NewCardForm.tsx", 640]],
+    "translation": "Bestand verwijderen"
   },
   "T/pF0Z": {
     "message": "Remove from favorites",
@@ -5571,11 +5571,11 @@
     "translation": "Solo"
   },
   "whpQwW": {
-    "translation": "Sommige bijlagen zijn mislukt",
     "message": "Some attachments failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 327]]
+    "origin": [["src/views/board/components/NewCardForm.tsx", 327]],
+    "translation": "Sommige bijlagen zijn mislukt"
   },
   "J9+zIR": {
     "message": "Something went wrong during activation. Please try again.",
@@ -5882,14 +5882,14 @@
     "translation": "De kaart is gedupliceerd."
   },
   "kwssev": {
-    "translation": "De kaart is aangemaakt, maar {failedCount} van de {0} bijlagen konden niet worden geüpload.",
     "message": "The card was created, but {failedCount} of {0} attachments could not be uploaded.",
     "placeholders": {
       "0": ["filesToUpload.length"],
       "failedCount": ["failedCount"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 328]]
+    "origin": [["src/views/board/components/NewCardForm.tsx", 328]],
+    "translation": "De kaart is aangemaakt, maar {failedCount} van de {0} bijlagen konden niet worden geüpload."
   },
   "jlB2RY": {
     "message": "The current password you entered is incorrect.",
