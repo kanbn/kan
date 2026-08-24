@@ -702,7 +702,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                         {boardData.lists.map((list, index) => (
                           <List
                             index={index}
-                            key={index}
+                            key={`list.${list.publicId}`}
                             list={list}
                             setSelectedPublicListId={(publicListId) =>
                               setSelectedPublicListId(publicListId)

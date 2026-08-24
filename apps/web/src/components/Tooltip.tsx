@@ -50,10 +50,9 @@ export function Tooltip({
     return () => {
       instance.destroy();
       tippyRef.current = null;
-      root.unmount();
       rootRef.current = null;
+      setTimeout(() => root.unmount());
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placement, delay]);
 
   useEffect(() => {
