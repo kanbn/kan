@@ -246,6 +246,13 @@
       "when": 1780057951781,
       "tag": "20260529123231_DropPartnerLicenseKeyUniqueConstraint",
       "breakpoints": true
+    },
+    {
+      "idx": 35,
+      "version": "7",
+      "when": 1780423448724,
+      "tag": "20260602180408_AddBoardBackgroundColor",
+      "breakpoints": true
     }
   ]
 }

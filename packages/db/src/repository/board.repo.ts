@@ -50,6 +50,7 @@ export const getAllByWorkspaceId = async (
     columns: {
       publicId: true,
       name: true,
+      backgroundColor: true,
     },
     with: {
       userFavorites: {
@@ -78,7 +79,9 @@ export const getAllByWorkspaceId = async (
       eq(boards.workspaceId, workspaceId),
       isNull(boards.deletedAt),
       opts?.type ? eq(boards.type, opts.type) : undefined,
-      opts?.archived !== undefined ? eq(boards.isArchived, opts.archived) : undefined,
+      opts?.archived !== undefined
+        ? eq(boards.isArchived, opts.archived)
+        : undefined,
     ),
   });
 
@@ -196,6 +199,7 @@ export const getByPublicId = async (
       publicId: true,
       name: true,
       slug: true,
+      backgroundColor: true,
       visibility: true,
       isArchived: true,
     },
@@ -418,6 +422,7 @@ export const getBySlug = async (
       publicId: true,
       name: true,
       slug: true,
+      backgroundColor: true,
       visibility: true,
     },
     with: {
@@ -605,6 +610,7 @@ export const create = async (
     workspaceId: number;
     importId?: number;
     slug: string;
+    backgroundColor?: string | null;
     type?: "regular" | "template";
     sourceBoardId?: number;
   },
@@ -618,6 +624,7 @@ export const create = async (
       workspaceId: boardInput.workspaceId,
       importId: boardInput.importId,
       slug: boardInput.slug,
+      backgroundColor: boardInput.backgroundColor,
       type: boardInput.type ?? "regular",
       sourceBoardId: boardInput.sourceBoardId,
     })
@@ -635,6 +642,7 @@ export const update = async (
   boardInput: {
     name: string | undefined;
     slug: string | undefined;
+    backgroundColor: string | null | undefined;
     visibility: BoardVisibilityStatus | undefined;
     boardPublicId: string;
     isArchived?: boolean;
@@ -645,9 +653,12 @@ export const update = async (
     .set({
       name: boardInput.name,
       slug: boardInput.slug,
+      backgroundColor: boardInput.backgroundColor,
       visibility: boardInput.visibility,
       updatedAt: new Date(),
-      ...(boardInput.isArchived !== undefined && { isArchived: boardInput.isArchived })
+      ...(boardInput.isArchived !== undefined && {
+        isArchived: boardInput.isArchived,
+      }),
     })
     .where(eq(boards.publicId, boardInput.boardPublicId))
     .returning({
@@ -773,6 +784,7 @@ export const createFromSnapshot = async (
   args: {
     source: {
       name: string;
+      backgroundColor: string | null;
       labels: { publicId: string; name: string; colourCode: string | null }[];
       lists: {
         name: string;
@@ -815,6 +827,7 @@ export const createFromSnapshot = async (
         publicId: generateUID(),
         name: args.name ?? args.source.name,
         slug: args.slug,
+        backgroundColor: args.source.backgroundColor,
         createdBy: args.createdBy,
         workspaceId: args.workspaceId,
         type: args.type,
@@ -1073,8 +1086,8 @@ export const removeUserFavorite = async (
     .where(
       and(
         eq(userBoardFavorites.userId, userId),
-        eq(userBoardFavorites.boardId, boardId)
-      )
+        eq(userBoardFavorites.boardId, boardId),
+      ),
     )
     .returning();
 };
