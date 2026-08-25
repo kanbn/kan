@@ -6,6 +6,8 @@ loadDotenv({ path: "../../.env" });
 const stripeEnv = (key: string, placeholder: string) =>
   process.env[key] || placeholder;
 
+const sharedEnv = { DISABLE_RATE_LIMIT: "true" };
+
 type Mode = "self-hosted" | "cloud";
 const modeConfig: Record<Mode, { port: string; env: Record<string, string> }> =
   {
@@ -54,8 +56,8 @@ const baseURL = remoteBaseURL ?? `http://localhost:${port}`;
 export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  retries: process.env.CI ? 2 : 1,
+  workers: 1,
   reporter: process.env.CI ? [["html", { open: "never" }], ["github"]] : "list",
   use: {
     baseURL,
@@ -80,6 +82,7 @@ export default defineConfig({
         env: {
           NEXT_PUBLIC_BASE_URL: baseURL,
           NEXT_PUBLIC_USE_STANDALONE_OUTPUT: "",
+          ...sharedEnv,
           ...modeEnv,
         },
       },

@@ -17,7 +17,9 @@ export class AuthPage {
   }
 
   async logIn(user: TestUser) {
-    await this.page.goto("/login");
+    if (!this.page.url().includes("/login")) {
+      await this.page.goto("/login");
+    }
     await this.page
       .getByPlaceholder("Enter your email address")
       .fill(user.email);
