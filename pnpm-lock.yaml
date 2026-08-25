@@ -476,6 +476,9 @@ importers:
       '@playwright/test':
         specifier: ^1.55.0
         version: 1.62.1
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.6.1
       eslint:
         specifier: 'catalog:'
         version: 9.34.0(jiti@2.6.1)

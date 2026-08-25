@@ -21,6 +21,7 @@
     "@kan/prettier-config": "workspace:*",
     "@kan/tsconfig": "workspace:*",
     "@playwright/test": "^1.55.0",
+    "dotenv": "^16.4.5",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
