@@ -1,4 +1,5 @@
 import type { Page } from "@playwright/test";
+import { expect } from "@playwright/test";
 
 import { waitForTrpcMutation } from "../wait-for-trpc";
 
@@ -29,6 +30,26 @@ export class SettingsPage {
     const updated = waitForTrpcMutation(this.page, "user.update");
     await this.page.getByRole("button", { name: "Update" }).click();
     await updated;
+  }
+
+  private async fillAvailableWorkspaceSlug(slug: string) {
+    await this.page.getByRole("textbox", { name: "Workspace URL" }).fill(slug);
+    await expect(
+      this.page.getByRole("button", { name: "Update" }),
+    ).toBeEnabled();
+  }
+
+  async updateWorkspaceSlug(slug: string) {
+    await this.fillAvailableWorkspaceSlug(slug);
+    const updated = waitForTrpcMutation(this.page, "workspace.update");
+    await this.page.getByRole("button", { name: "Update" }).click();
+    await updated;
+  }
+
+  async attemptWorkspaceSlugUpdate(slug: string) {
+    await this.fillAvailableWorkspaceSlug(slug);
+    await this.page.getByRole("button", { name: "Update" }).click();
+    await this.page.waitForURL(/\/upgrade\/select-plan/);
   }
 
   async createApiKey(name: string) {

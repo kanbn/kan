@@ -132,7 +132,10 @@ const Button = ({
   return (
     <button
       className={classes}
-      disabled={isLoading ?? props.disabled}
+      // `??` here would silently ignore `disabled` whenever `isLoading` is
+      // explicitly `false`
+      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+      disabled={isLoading || props.disabled}
       {...props}
     >
       {content}
