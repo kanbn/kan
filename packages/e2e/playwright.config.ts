@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import { defineConfig, devices } from "@playwright/test";
 import { config as loadDotenv } from "dotenv";
 
@@ -6,7 +7,30 @@ loadDotenv({ path: "../../.env" });
 const stripeEnv = (key: string, placeholder: string) =>
   process.env[key] || placeholder;
 
+function resolveStripeListenSecret(apiKey: string): string | undefined {
+  try {
+    return execFileSync(
+      "stripe",
+      ["listen", "--print-secret", "--api-key", apiKey],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
+    ).trim();
+  } catch {
+    return undefined;
+  }
+}
+
 const sharedEnv = { DISABLE_RATE_LIMIT: "true" };
+
+const realStripeSecretKey =
+  process.env.E2E_MODE === "cloud" &&
+  process.env.STRIPE_SECRET_KEY &&
+  process.env.STRIPE_SECRET_KEY !== "sk_test_e2e_placeholder"
+    ? process.env.STRIPE_SECRET_KEY
+    : undefined;
+
+const stripeListenSecret = realStripeSecretKey
+  ? resolveStripeListenSecret(realStripeSecretKey)
+  : undefined;
 
 type Mode = "self-hosted" | "cloud";
 const modeConfig: Record<Mode, { port: string; env: Record<string, string> }> =
@@ -23,10 +47,15 @@ const modeConfig: Record<Mode, { port: string; env: Record<string, string> }> =
           "STRIPE_SECRET_KEY",
           "sk_test_e2e_placeholder",
         ),
-        STRIPE_WEBHOOK_SECRET: stripeEnv(
-          "STRIPE_WEBHOOK_SECRET",
-          "whsec_e2e_placeholder",
-        ),
+        STRIPE_WEBHOOK_SECRET:
+          stripeListenSecret ??
+          stripeEnv("STRIPE_WEBHOOK_SECRET", "whsec_e2e_placeholder"),
+        STRIPE_WEBHOOK_SECRET_LEGACY:
+          stripeListenSecret ??
+          stripeEnv(
+            "STRIPE_WEBHOOK_SECRET_LEGACY",
+            "whsec_e2e_legacy_placeholder",
+          ),
         STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID: stripeEnv(
           "STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID",
           "price_e2e_placeholder",

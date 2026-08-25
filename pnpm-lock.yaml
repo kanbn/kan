@@ -485,6 +485,9 @@ importers:
       prettier:
         specifier: 'catalog:'
         version: 3.6.2
+      stripe:
+        specifier: ^18.2.0
+        version: 18.5.0(@types/node@25.0.0)
       typescript:
         specifier: 'catalog:'
         version: 5.9.2

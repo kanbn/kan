@@ -24,6 +24,7 @@
     "dotenv": "^16.4.5",
     "eslint": "catalog:",
     "prettier": "catalog:",
+    "stripe": "^18.2.0",
     "typescript": "catalog:"
   },
   "prettier": "@kan/prettier-config"
