@@ -1,0 +1,29 @@
+{
+  "name": "@kan/e2e",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "clean": "git clean -xdf .cache .turbo node_modules playwright-report test-results",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "test": "pnpm test:self-hosted && pnpm test:cloud",
+    "test:cloud": "E2E_MODE=cloud playwright test",
+    "test:headed": "E2E_MODE=self-hosted playwright test --headed",
+    "test:self-hosted": "E2E_MODE=self-hosted playwright test",
+    "test:ui": "E2E_MODE=self-hosted playwright test --ui",
+    "test:ui:cloud": "E2E_MODE=cloud playwright test --ui",
+    "report": "playwright show-report",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@kan/eslint-config": "workspace:*",
+    "@kan/prettier-config": "workspace:*",
+    "@kan/tsconfig": "workspace:*",
+    "@playwright/test": "^1.55.0",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  },
+  "prettier": "@kan/prettier-config"
+}
