@@ -16,6 +16,7 @@ import type { Subscription } from "@kan/shared/utils";
 import { hasActiveSubscription } from "@kan/shared/utils";
 
 import type { KeyboardShortcut } from "~/providers/keyboard-shortcuts";
+import { useLocalisation } from "~/hooks/useLocalisation";
 import boardsIconDark from "~/assets/boards-dark.json";
 import boardsIconLight from "~/assets/boards-light.json";
 import membersIconDark from "~/assets/members-dark.json";
@@ -83,6 +84,8 @@ export default function SideNavigation({
 
   const { resolvedTheme } = useTheme();
 
+  const { locale } = useLocalisation();
+
   const isCloudEnv = env("NEXT_PUBLIC_KAN_ENV") === "cloud";
 
   const isDarkMode = resolvedTheme === "dark";
@@ -143,7 +146,8 @@ export default function SideNavigation({
         },
       },
     ],
-    [isDarkMode],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isDarkMode, locale],
   );
 
   const toggleCollapse = () => {
