@@ -780,4 +780,78 @@ export const memberRouter = createTRPCRouter({
         role: input.role,
       };
     }),
+  updateApartment: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Update member apartment number",
+        method: "PUT",
+        path: "/workspaces/{workspacePublicId}/members/{memberPublicId}/apartment",
+        description: "Updates a member's apartment number (admins only)",
+        tags: ["Workspaces"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        workspacePublicId: z.string().min(12),
+        memberPublicId: z.string().min(12),
+        apartment: z.number().int().min(1).max(9999).nullable(),
+      }),
+    )
+    .output(
+      z.object({
+        success: z.boolean(),
+        apartment: z.number().nullable(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId) {
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
+      }
+
+      const workspace = await workspaceRepo.getByPublicId(
+        ctx.db,
+        input.workspacePublicId,
+      );
+
+      if (!workspace) {
+        throw new TRPCError({
+          message: "Workspace not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      await assertPermission(ctx.db, userId, workspace.id, "member:edit");
+
+      const member = await memberRepo.getByPublicId(
+        ctx.db,
+        input.memberPublicId,
+      );
+
+      if (!member || member.workspaceId !== workspace.id) {
+        throw new TRPCError({
+          message: "Member not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      if (!member.userId) {
+        throw new TRPCError({
+          message: "Member has not registered yet",
+          code: "BAD_REQUEST",
+        });
+      }
+
+      await userRepo.updateApartment(ctx.db, member.userId, input.apartment);
+
+      return {
+        success: true,
+        apartment: input.apartment,
+      };
+    }),
 });

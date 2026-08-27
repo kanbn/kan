@@ -126,3 +126,20 @@ export const update = async (
 
   return result;
 };
+
+export const updateApartment = async (
+  db: dbClient,
+  userId: string,
+  apartment: number | null,
+) => {
+  const [result] = await db
+    .update(users)
+    .set({ apartment })
+    .where(eq(users.id, userId))
+    .returning({
+      id: users.id,
+      apartment: users.apartment,
+    });
+
+  return result;
+};

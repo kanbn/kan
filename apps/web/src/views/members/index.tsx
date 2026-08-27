@@ -73,6 +73,29 @@ export default function MembersPage() {
     },
   });
 
+  const updateApartmentMutation = api.member.updateApartment.useMutation({
+    onSuccess: async () => {
+      if (workspace.publicId && workspace.publicId.length >= 12) {
+        await utils.workspace.byId.invalidate({
+          workspacePublicId: workspace.publicId,
+        });
+      }
+
+      showPopup({
+        header: t`Apartment updated`,
+        message: t`The member's apartment number has been updated.`,
+        icon: "success",
+      });
+    },
+    onError: () => {
+      showPopup({
+        header: t`Unable to update apartment`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
+    },
+  });
+
   const subscriptions = data?.subscriptions as Subscription[] | undefined;
 
   const teamSubscription = getSubscriptionByPlan(subscriptions, "team");
@@ -105,6 +128,7 @@ export default function MembersPage() {
     memberImage,
     memberRole,
     memberStatus,
+    memberApartment,
     isLastRow,
     showSkeleton,
     showPendingIcon,
@@ -116,6 +140,7 @@ export default function MembersPage() {
     memberImage?: string | null | undefined;
     memberRole?: string;
     memberStatus?: string;
+    memberApartment?: number | null;
     isLastRow?: boolean;
     showSkeleton?: boolean;
     showPendingIcon?: boolean;
@@ -127,6 +152,22 @@ export default function MembersPage() {
         workspacePublicId: workspace.publicId,
         memberPublicId,
         role: newRole,
+      });
+    };
+
+    const canEditApartment = workspace.role === "admin" && !!memberId;
+
+    const commitApartment = (value: string) => {
+      if (!memberPublicId) return;
+      const trimmed = value.trim();
+      const parsed = trimmed ? Number(trimmed) : null;
+      if (parsed !== null && (!Number.isInteger(parsed) || parsed < 1)) return;
+      if (parsed === (memberApartment ?? null)) return;
+
+      updateApartmentMutation.mutate({
+        workspacePublicId: workspace.publicId,
+        memberPublicId,
+        apartment: parsed,
       });
     };
 
@@ -178,6 +219,29 @@ export default function MembersPage() {
                     {memberEmail}
                   </p>
                 )}
+                {!showSkeleton &&
+                  (canEditApartment ? (
+                    <p className="mt-0.5 flex items-center gap-1 text-xs text-dark-900">
+                      {t`Apt.`}
+                      <input
+                        type="number"
+                        min={1}
+                        max={9999}
+                        defaultValue={memberApartment ?? ""}
+                        onBlur={(e) => commitApartment(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") e.currentTarget.blur();
+                        }}
+                        className="w-14 rounded border border-light-500 bg-transparent px-1 py-0.5 text-xs text-neutral-900 dark:border-dark-500 dark:text-dark-1000"
+                      />
+                    </p>
+                  ) : (
+                    memberApartment != null && (
+                      <p className="mt-0.5 text-xs text-dark-900">
+                        {t`Apt.`} {memberApartment}
+                      </p>
+                    )
+                  ))}
               </div>
             </div>
           </div>
@@ -368,6 +432,7 @@ export default function MembersPage() {
                             memberImage={member.user?.image}
                             memberRole={member.role}
                             memberStatus={member.status}
+                            memberApartment={member.user?.apartment}
                             isLastRow={index === data.members.length - 1}
                             showPendingIcon={isPendingInvite}
                           />

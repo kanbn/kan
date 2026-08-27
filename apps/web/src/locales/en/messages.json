@@ -37,14 +37,15 @@
         62
       ]
     ],
-    "translation": "{0}"
+    "translation": "{0}",
+    "obsolete": true
   },
   "JArWcF": {
     "message": "{0} | {1}",
     "placeholders": {
       "0": [
         "card?.title ?? t`Card`",
-        "isTemplate ? \"Templates\" : \"Boards\""
+        "isTemplate ? t`Templates` : t`Boards`"
       ],
       "1": [
         "board?.name ?? t`Board`",
@@ -55,7 +56,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        57
+        58
       ],
       [
         "src/views/card/index.tsx",
@@ -371,7 +372,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        30
+        33
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
@@ -761,7 +762,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        221
+        285
       ]
     ],
     "translation": "Admin"
@@ -990,6 +991,30 @@
     ],
     "translation": "Anyone with this link can join your workspace"
   },
+  "x6PA7s": {
+    "translation": "Apartment number",
+    "message": "Apartment number",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/AuthForm.tsx",
+        425
+      ]
+    ]
+  },
+  "bvLD6u": {
+    "translation": "Apartment updated",
+    "message": "Apartment updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        85
+      ]
+    ]
+  },
   "OZtEcz": {
     "message": "API",
     "placeholders": {},
@@ -1102,6 +1127,22 @@
     ],
     "translation": "Approval"
   },
+  "l+Z2oj": {
+    "translation": "Apt.",
+    "message": "Apt.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        225
+      ],
+      [
+        "src/views/members/index.tsx",
+        241
+      ]
+    ]
+  },
   "aKJHG+": {
     "message": "Archive board",
     "placeholders": {},
@@ -1121,7 +1162,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        31
+        34
       ]
     ],
     "translation": "Archived"
@@ -1697,7 +1738,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        98
+        101
+      ],
+      [
+        "src/views/boards/index.tsx",
+        58
+      ],
+      [
+        "src/views/boards/index.tsx",
+        63
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -2918,7 +2967,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        442
+        472
       ]
     ],
     "translation": "Continue with "
@@ -2934,7 +2983,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        360
+        371
       ]
     ],
     "translation": "Continue with {0}"
@@ -3182,7 +3231,7 @@
       ],
       [
         "src/views/boards/index.tsx",
-        45
+        46
       ]
     ],
     "translation": "Create new {0}"
@@ -3266,7 +3315,7 @@
       ],
       [
         "src/components/WorkspaceMenu.tsx",
-        176
+        178
       ]
     ],
     "translation": "Create workspace"
@@ -3944,7 +3993,7 @@
     "origin": [
       [
         "src/views/auth/login/index.tsx",
-        63
+        65
       ]
     ],
     "translation": "Don't have an account? <0><1>Sign up</1></0>"
@@ -4184,7 +4233,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        244
+        308
       ]
     ],
     "translation": "Edit permissions"
@@ -4244,7 +4293,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        473
       ]
     ],
     "translation": "email"
@@ -4400,7 +4449,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        407
+        437
       ]
     ],
     "translation": "Enter your email address"
@@ -4412,7 +4461,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        395
+        406
       ]
     ],
     "translation": "Enter your name"
@@ -4436,7 +4485,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        421
+        451
       ]
     ],
     "translation": "Enter your password"
@@ -4853,7 +4902,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        296
+        299
       ]
     ],
     "translation": "Failed to login with {0}. Please try again."
@@ -5137,7 +5186,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        311
+        375
       ]
     ],
     "translation": "Free Plan"
@@ -5409,7 +5458,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        106
+        109
       ],
       [
         "src/pages/404.tsx",
@@ -5437,7 +5486,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        130
+        133
       ]
     ],
     "translation": "Go to members"
@@ -5449,7 +5498,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        142
+        145
       ]
     ],
     "translation": "Go to settings"
@@ -5461,7 +5510,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        118
+        121
       ]
     ],
     "translation": "Go to templates"
@@ -5517,7 +5566,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        223
+        287
       ]
     ],
     "translation": "Guest"
@@ -5709,7 +5758,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        82
+        83
       ]
     ],
     "translation": "Import"
@@ -5941,7 +5990,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        330
+        394
       ]
     ],
     "translation": "Invite"
@@ -6511,7 +6560,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        473
       ]
     ],
     "translation": "magic link"
@@ -6635,7 +6684,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        222
+        286
       ]
     ],
     "translation": "Member"
@@ -6659,7 +6708,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        122
+        125
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -6675,7 +6724,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        283
+        347
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -6695,7 +6744,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        278
+        342
       ]
     ],
     "translation": "Members | {0}"
@@ -6918,7 +6967,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        104
+        105
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -7150,7 +7199,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        374
+        385
       ]
     ],
     "translation": "No authentication methods are currently available"
@@ -7430,7 +7479,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        385
+        396
       ]
     ],
     "translation": "or"
@@ -7554,7 +7603,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        263
+        266
       ]
     ],
     "translation": "Password is required to login."
@@ -7566,7 +7615,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        262
+        265
       ]
     ],
     "translation": "Password is required to sign up."
@@ -7614,7 +7663,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        230
+        294
       ]
     ],
     "translation": "Paused"
@@ -7642,7 +7691,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        230
+        294
       ]
     ],
     "translation": "Pending"
@@ -7835,6 +7884,18 @@
     ],
     "translation": "Please confirm your new password"
   },
+  "3EIRL8": {
+    "translation": "Please enter a valid apartment number",
+    "message": "Please enter a valid apartment number",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/AuthForm.tsx",
+        429
+      ]
+    ]
+  },
   "OtjenF": {
     "message": "Please enter a valid email address",
     "placeholders": {},
@@ -7842,7 +7903,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        411
+        441
       ]
     ],
     "translation": "Please enter a valid email address"
@@ -7854,7 +7915,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        399
+        410
       ]
     ],
     "translation": "Please enter a valid name"
@@ -7866,7 +7927,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        426
+        456
       ]
     ],
     "translation": "Please enter a valid password"
@@ -8067,6 +8128,10 @@
       [
         "src/views/members/index.tsx",
         70
+      ],
+      [
+        "src/views/members/index.tsx",
+        93
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -8294,7 +8359,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        308
+        372
       ]
     ],
     "translation": "Pro Plan"
@@ -8474,7 +8539,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        253
+        317
       ]
     ],
     "translation": "Remove member"
@@ -8745,7 +8810,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        352
+        416
       ]
     ],
     "translation": "Role"
@@ -8901,7 +8966,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        319
+        383
       ]
     ],
     "translation": "seats"
@@ -9181,7 +9246,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        134
+        137
       ]
     ],
     "translation": "Settings"
@@ -9409,7 +9474,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        442
+        472
       ]
     ],
     "translation": "Sign up with "
@@ -9581,15 +9646,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        228
+        232
       ],
       [
         "src/components/SideNavigation.tsx",
-        229
+        233
       ],
       [
         "src/components/SideNavigation.tsx",
-        239
+        243
       ]
     ],
     "translation": "Start free trial"
@@ -9649,11 +9714,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        220
+        223
       ],
       [
         "src/components/AuthForm.tsx",
-        237
+        240
       ]
     ],
     "translation": "Success"
@@ -9749,7 +9814,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        310
+        374
       ]
     ],
     "translation": "Team Plan"
@@ -9845,7 +9910,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        110
+        113
+      ],
+      [
+        "src/views/boards/index.tsx",
+        58
+      ],
+      [
+        "src/views/boards/index.tsx",
+        63
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -10056,6 +10129,18 @@
       ]
     ],
     "translation": "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
+  },
+  "QcS4Fw": {
+    "translation": "The member's apartment number has been updated.",
+    "message": "The member's apartment number has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        86
+      ]
+    ]
   },
   "6tDFBe": {
     "message": "The member's permissions have been updated.",
@@ -10849,6 +10934,18 @@
     ],
     "translation": "Unable to test webhook"
   },
+  "UlEacq": {
+    "translation": "Unable to update apartment",
+    "message": "Unable to update apartment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        92
+      ]
+    ]
+  },
   "T7Mywq": {
     "message": "Unable to update board",
     "placeholders": {},
@@ -11256,7 +11353,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        318
+        382
       ]
     ],
     "translation": "Unlimited seats"
@@ -11401,7 +11498,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        295
+        359
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
@@ -11569,7 +11666,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        346
+        410
       ]
     ],
     "translation": "User"
@@ -11962,11 +12059,11 @@
       ],
       [
         "src/views/boards/index.tsx",
-        57
+        58
       ],
       [
         "src/views/members/index.tsx",
-        278
+        342
       ],
       [
         "src/views/public/board/index.tsx",
@@ -12351,11 +12448,11 @@
       ],
       [
         "src/views/boards/index.tsx",
-        68
+        69
       ],
       [
         "src/views/boards/index.tsx",
-        89
+        90
       ]
     ],
     "translation": "You don't have permission"
@@ -12367,7 +12464,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        238
+        241
       ]
     ],
     "translation": "You have been logged in successfully."
@@ -12379,7 +12476,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        221
+        224
       ]
     ],
     "translation": "You have been signed up successfully."

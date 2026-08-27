@@ -37,14 +37,15 @@
         62
       ]
     ],
-    "translation": "{0}"
+    "translation": "{0}",
+    "obsolete": true
   },
   "JArWcF": {
     "message": "{0} | {1}",
     "placeholders": {
       "0": [
         "card?.title ?? t`Card`",
-        "isTemplate ? \"Templates\" : \"Boards\""
+        "isTemplate ? t`Templates` : t`Boards`"
       ],
       "1": [
         "board?.name ?? t`Board`",
@@ -55,7 +56,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        57
+        58
       ],
       [
         "src/views/card/index.tsx",
@@ -371,7 +372,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        30
+        33
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
@@ -761,7 +762,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        221
+        285
       ]
     ],
     "translation": "Адміністратор"
@@ -990,6 +991,30 @@
     ],
     "translation": "Будь-хто з цим посиланням може приєднатися до вашого робочого простору"
   },
+  "x6PA7s": {
+    "translation": "Номер квартири",
+    "message": "Apartment number",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/AuthForm.tsx",
+        425
+      ]
+    ]
+  },
+  "bvLD6u": {
+    "translation": "Квартиру оновлено",
+    "message": "Apartment updated",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        85
+      ]
+    ]
+  },
   "OZtEcz": {
     "message": "API",
     "placeholders": {},
@@ -1102,6 +1127,22 @@
     ],
     "translation": "Затвердження"
   },
+  "l+Z2oj": {
+    "translation": "Кв.",
+    "message": "Apt.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        225
+      ],
+      [
+        "src/views/members/index.tsx",
+        241
+      ]
+    ]
+  },
   "aKJHG+": {
     "message": "Archive board",
     "placeholders": {},
@@ -1121,7 +1162,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        31
+        34
       ]
     ],
     "translation": "Архівовано"
@@ -1697,7 +1738,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        98
+        101
+      ],
+      [
+        "src/views/boards/index.tsx",
+        58
+      ],
+      [
+        "src/views/boards/index.tsx",
+        63
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -2918,7 +2967,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        442
+        472
       ]
     ],
     "translation": "Продовжити через "
@@ -2934,7 +2983,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        360
+        371
       ]
     ],
     "translation": "Продовжити з {0}"
@@ -3182,7 +3231,7 @@
       ],
       [
         "src/views/boards/index.tsx",
-        45
+        46
       ]
     ],
     "translation": "Створити новий {0}"
@@ -3266,7 +3315,7 @@
       ],
       [
         "src/components/WorkspaceMenu.tsx",
-        176
+        178
       ]
     ],
     "translation": "Створити робочий простір"
@@ -3944,7 +3993,7 @@
     "origin": [
       [
         "src/views/auth/login/index.tsx",
-        63
+        65
       ]
     ],
     "translation": "Немає облікового запису? <0><1>Зареєструватися</1></0>"
@@ -4184,7 +4233,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        244
+        308
       ]
     ],
     "translation": "Редагувати дозволи"
@@ -4244,7 +4293,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        473
       ]
     ],
     "translation": "email"
@@ -4400,7 +4449,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        407
+        437
       ]
     ],
     "translation": "Введіть свій email"
@@ -4412,7 +4461,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        395
+        406
       ]
     ],
     "translation": "Введіть ваше ім'я"
@@ -4436,7 +4485,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        421
+        451
       ]
     ],
     "translation": "Введіть свій пароль"
@@ -4853,7 +4902,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        296
+        299
       ]
     ],
     "translation": "Не вдалося увійти через {0}. Спробуйте ще раз."
@@ -5137,7 +5186,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        311
+        375
       ]
     ],
     "translation": "Безкоштовний план"
@@ -5409,7 +5458,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        106
+        109
       ],
       [
         "src/pages/404.tsx",
@@ -5437,7 +5486,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        130
+        133
       ]
     ],
     "translation": "Перейти до учасників"
@@ -5449,7 +5498,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        142
+        145
       ]
     ],
     "translation": "Перейти до налаштувань"
@@ -5461,7 +5510,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        118
+        121
       ]
     ],
     "translation": "Перейти до шаблонів"
@@ -5517,7 +5566,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        223
+        287
       ]
     ],
     "translation": "Гість"
@@ -5709,7 +5758,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        82
+        83
       ]
     ],
     "translation": "Імпорт"
@@ -5941,7 +5990,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        330
+        394
       ]
     ],
     "translation": "Запросити"
@@ -6511,7 +6560,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        473
       ]
     ],
     "translation": "магічне посилання"
@@ -6635,7 +6684,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        222
+        286
       ]
     ],
     "translation": "Учасник"
@@ -6659,7 +6708,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        122
+        125
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -6675,7 +6724,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        283
+        347
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -6695,7 +6744,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        278
+        342
       ]
     ],
     "translation": "Учасники | {0}"
@@ -6918,7 +6967,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        104
+        105
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -7150,7 +7199,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        374
+        385
       ]
     ],
     "translation": "Наразі немає доступних методів автентифікації"
@@ -7430,7 +7479,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        385
+        396
       ]
     ],
     "translation": "або"
@@ -7554,7 +7603,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        263
+        266
       ]
     ],
     "translation": "Для входу потрібен пароль."
@@ -7566,7 +7615,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        262
+        265
       ]
     ],
     "translation": "Для реєстрації потрібен пароль."
@@ -7614,7 +7663,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        230
+        294
       ]
     ],
     "translation": "Призупинено"
@@ -7642,7 +7691,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        230
+        294
       ]
     ],
     "translation": "Очікує"
@@ -7835,6 +7884,18 @@
     ],
     "translation": "Будь ласка, підтвердьте новий пароль"
   },
+  "3EIRL8": {
+    "translation": "Введіть дійсний номер квартири",
+    "message": "Please enter a valid apartment number",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/AuthForm.tsx",
+        429
+      ]
+    ]
+  },
   "OtjenF": {
     "message": "Please enter a valid email address",
     "placeholders": {},
@@ -7842,7 +7903,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        411
+        441
       ]
     ],
     "translation": "Введіть дійсний email"
@@ -7854,7 +7915,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        399
+        410
       ]
     ],
     "translation": "Введіть коректне ім'я"
@@ -7866,7 +7927,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        426
+        456
       ]
     ],
     "translation": "Введіть дійсний пароль"
@@ -8067,6 +8128,10 @@
       [
         "src/views/members/index.tsx",
         70
+      ],
+      [
+        "src/views/members/index.tsx",
+        93
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -8294,7 +8359,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        308
+        372
       ]
     ],
     "translation": "План Pro"
@@ -8474,7 +8539,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        253
+        317
       ]
     ],
     "translation": "Вилучити учасника"
@@ -8745,7 +8810,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        352
+        416
       ]
     ],
     "translation": "Роль"
@@ -8901,7 +8966,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        319
+        383
       ]
     ],
     "translation": "місць"
@@ -9181,7 +9246,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        134
+        137
       ]
     ],
     "translation": "Налаштування"
@@ -9409,7 +9474,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        442
+        472
       ]
     ],
     "translation": "Зареєструватися через "
@@ -9581,15 +9646,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        228
+        232
       ],
       [
         "src/components/SideNavigation.tsx",
-        229
+        233
       ],
       [
         "src/components/SideNavigation.tsx",
-        239
+        243
       ]
     ],
     "translation": "Почати безкоштовний пробний період"
@@ -9649,11 +9714,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        220
+        223
       ],
       [
         "src/components/AuthForm.tsx",
-        237
+        240
       ]
     ],
     "translation": "Успішно"
@@ -9749,7 +9814,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        310
+        374
       ]
     ],
     "translation": "Командний план"
@@ -9845,7 +9910,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        110
+        113
+      ],
+      [
+        "src/views/boards/index.tsx",
+        58
+      ],
+      [
+        "src/views/boards/index.tsx",
+        63
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -10056,6 +10129,18 @@
       ]
     ],
     "translation": "Головна відмінність між Kan і Trello в тому, що Kan має відкритий код: будь-хто може переглядати, змінювати та доповнювати наш код. Крім того, наша хмарна версія не обмежує функції для індивідуального використання, тоді як Trello ховає базові функції, як-от кількість дошок, за платним доступом."
+  },
+  "QcS4Fw": {
+    "translation": "Номер квартири учасника оновлено.",
+    "message": "The member's apartment number has been updated.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        86
+      ]
+    ]
   },
   "6tDFBe": {
     "message": "The member's permissions have been updated.",
@@ -10849,6 +10934,18 @@
     ],
     "translation": "Не вдалося перевірити вебхук"
   },
+  "UlEacq": {
+    "translation": "Не вдалося оновити квартиру",
+    "message": "Unable to update apartment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        92
+      ]
+    ]
+  },
   "T7Mywq": {
     "message": "Unable to update board",
     "placeholders": {},
@@ -11256,7 +11353,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        318
+        382
       ]
     ],
     "translation": "Необмежена кількість місць"
@@ -11401,7 +11498,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        295
+        359
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
@@ -11569,7 +11666,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        346
+        410
       ]
     ],
     "translation": "Користувач"
@@ -11962,11 +12059,11 @@
       ],
       [
         "src/views/boards/index.tsx",
-        57
+        58
       ],
       [
         "src/views/members/index.tsx",
-        278
+        342
       ],
       [
         "src/views/public/board/index.tsx",
@@ -12351,11 +12448,11 @@
       ],
       [
         "src/views/boards/index.tsx",
-        68
+        69
       ],
       [
         "src/views/boards/index.tsx",
-        89
+        90
       ]
     ],
     "translation": "У вас немає дозволу"
@@ -12367,7 +12464,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        238
+        241
       ]
     ],
     "translation": "Ви успішно увійшли."
@@ -12379,7 +12476,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        221
+        224
       ]
     ],
     "translation": "Ви успішно зареєструвалися."

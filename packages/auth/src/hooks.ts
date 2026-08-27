@@ -157,6 +157,17 @@ export function createDatabaseHooks(db: dbClient) {
           }
         },
       },
+      update: {
+        // The apartment number is admin-managed after signup. Strip it
+        // from every better-auth update, so users cannot change it.
+        async before(user: Partial<BetterAuthUser>, _context: unknown) {
+          if ("apartment" in user) {
+            const { apartment: _apartment, ...rest } = user;
+            return { data: rest };
+          }
+          return { data: user };
+        },
+      },
     },
   };
 }

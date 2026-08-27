@@ -56,6 +56,14 @@ export const initAuth = (db: dbClient) => {
           defaultValue: null,
           input: false,
         },
+        // Apartment number. Set once at signup; later changes go only
+        // through the admin tRPC mutation, never through better-auth.
+        apartment: {
+          type: "number",
+          required: false,
+          defaultValue: null,
+          input: true,
+        },
       },
     },
     plugins: createPlugins(db),

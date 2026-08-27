@@ -230,6 +230,7 @@ export const getByPublicIdWithMembers = (
               name: true,
               email: true,
               image: true,
+              apartment: true,
             },
           },
         },

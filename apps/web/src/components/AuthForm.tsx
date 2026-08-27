@@ -41,6 +41,7 @@ interface FormValues {
   name?: string;
   email: string;
   password?: string;
+  apartment?: string;
 }
 
 interface AuthProps {
@@ -202,6 +203,7 @@ export function Auth({
     email: string,
     password?: string | null,
     name?: string,
+    apartment?: number,
   ) => {
     setIsLoginWithEmailPending(true);
     setLoginError(null);
@@ -213,6 +215,7 @@ export function Auth({
             email,
             password,
             callbackURL,
+            ...(apartment !== undefined && { apartment }),
           },
           {
             onSuccess: () =>
@@ -303,7 +306,15 @@ export function Auth({
     const sanitizedPassword = values.password?.trim()
       ? values.password
       : undefined;
-    await handleLoginWithEmail(values.email, sanitizedPassword, values.name);
+    const apartment = values.apartment?.trim()
+      ? Number(values.apartment)
+      : undefined;
+    await handleLoginWithEmail(
+      values.email,
+      sanitizedPassword,
+      values.name,
+      apartment,
+    );
   };
 
   const password = watch("password");
@@ -397,6 +408,25 @@ export function Auth({
                 {errors.name && (
                   <p className="mt-2 text-xs text-red-400">
                     {t`Please enter a valid name`}
+                  </p>
+                )}
+              </div>
+            )}
+            {isSignUp && isCredentialsEnabled && (
+              <div>
+                <Input
+                  type="number"
+                  min={1}
+                  max={9999}
+                  {...register("apartment", {
+                    required: true,
+                    pattern: /^[0-9]{1,4}$/,
+                  })}
+                  placeholder={t`Apartment number`}
+                />
+                {errors.apartment && (
+                  <p className="mt-2 text-xs text-red-400">
+                    {t`Please enter a valid apartment number`}
                   </p>
                 )}
               </div>

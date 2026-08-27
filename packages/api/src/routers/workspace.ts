@@ -127,6 +127,7 @@ export const workspaceRouter = createTRPCRouter({
                 id: null,
                 name: displayName,
                 image: null,
+                apartment: null,
               };
 
           return {
