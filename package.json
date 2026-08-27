@@ -40,7 +40,8 @@
     },
     "overrides": {
       "@types/minimatch": "npm:minimatch@*",
-      "@types/glob": "npm:@types/glob@^8.1.0"
+      "@types/glob": "npm:@types/glob@^8.1.0",
+      "next@16": "16.0.10"
     }
   }
 }
