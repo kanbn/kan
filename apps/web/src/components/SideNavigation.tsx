@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
+import { useLingui } from "@lingui/react";
 import { env } from "next-runtime-env";
 import { useTheme } from "next-themes";
 import { useEffect, useMemo, useState } from "react";
@@ -16,7 +17,6 @@ import type { Subscription } from "@kan/shared/utils";
 import { hasActiveSubscription } from "@kan/shared/utils";
 
 import type { KeyboardShortcut } from "~/providers/keyboard-shortcuts";
-import { useLocalisation } from "~/hooks/useLocalisation";
 import boardsIconDark from "~/assets/boards-dark.json";
 import boardsIconLight from "~/assets/boards-light.json";
 import membersIconDark from "~/assets/members-dark.json";
@@ -84,7 +84,7 @@ export default function SideNavigation({
 
   const { resolvedTheme } = useTheme();
 
-  const { locale } = useLocalisation();
+  const { i18n } = useLingui();
 
   const isCloudEnv = env("NEXT_PUBLIC_KAN_ENV") === "cloud";
 
@@ -147,7 +147,7 @@ export default function SideNavigation({
       },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isDarkMode, locale],
+    [isDarkMode, i18n.locale],
   );
 
   const toggleCollapse = () => {
