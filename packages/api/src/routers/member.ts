@@ -66,7 +66,7 @@ export const memberRouter = createTRPCRouter({
       await assertPermission(ctx.db, userId, workspace.id, "member:invite");
 
       const isInvitedEmailAlreadyMember = workspace.members.some(
-        (member) => member.email === input.email,
+        (member) => member.email.toLowerCase() === input.email.trim().toLowerCase(),
       );
 
       if (isInvitedEmailAlreadyMember) {
@@ -131,7 +131,11 @@ export const memberRouter = createTRPCRouter({
         }
       }
 
-      const existingUser = await userRepo.getByEmail(ctx.db, input.email);
+      // Store the email lowercase, so the signup hook lookup matches
+      // the normalized email better-auth saves.
+      const inviteeEmail = input.email.trim().toLowerCase();
+
+      const existingUser = await userRepo.getByEmail(ctx.db, inviteeEmail);
 
       // Get the workspace role to set roleId
       const memberRole = await permissionRepo.getRoleByWorkspaceIdAndName(
@@ -142,7 +146,7 @@ export const memberRouter = createTRPCRouter({
 
       const invite = await memberRepo.create(ctx.db, {
         workspaceId: workspace.id,
-        email: input.email,
+        email: inviteeEmail,
         userId: existingUser?.id ?? null,
         createdBy: userId,
         role: "member",
@@ -156,27 +160,24 @@ export const memberRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
-      const { status } = await ctx.auth.api.signInMagicLink({
-        email: input.email,
-        callbackURL: `/boards?type=invite&memberPublicId=${invite.publicId}`,
-      });
-
-      if (!status) {
-        console.error("Failed to send magic link invitation:", {
+      // Keep the invitation when the email cannot be sent. The invited
+      // user can still sign up with this email; the signup hook links
+      // the membership. Without this, instances with no SMTP roll back
+      // every invitation.
+      try {
+        const { status } = await ctx.auth.api.signInMagicLink({
           email: input.email,
           callbackURL: `/boards?type=invite&memberPublicId=${invite.publicId}`,
         });
 
-        await memberRepo.softDelete(ctx.db, {
-          memberId: invite.id,
-          deletedAt: new Date(),
-          deletedBy: userId,
-        });
-
-        throw new TRPCError({
-          message: `Failed to send magic link invitation to user with email ${input.email}.`,
-          code: "INTERNAL_SERVER_ERROR",
-        });
+        if (!status) {
+          console.error("Failed to send magic link invitation:", {
+            email: input.email,
+            callbackURL: `/boards?type=invite&memberPublicId=${invite.publicId}`,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to send magic link invitation:", error);
       }
 
       return invite;

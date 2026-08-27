@@ -55,6 +55,24 @@ export function createDatabaseHooks(db: dbClient) {
           return Promise.resolve(true);
         },
         async after(user: BetterAuthUser, _context: unknown) {
+          // Link a pending invitation at signup, so invited users join
+          // their workspace even when no magic-link email was sent.
+          try {
+            const pendingInvitation = await memberRepo.getByEmailAndStatus(
+              db,
+              user.email,
+              "invited",
+            );
+            if (pendingInvitation) {
+              await memberRepo.acceptInvite(db, {
+                memberId: pendingInvitation.id,
+                userId: user.id,
+              });
+            }
+          } catch (error) {
+            console.error("Error accepting pending invitation:", error);
+          }
+
           let avatarKey = user.image;
           const storageDomain = process.env.NEXT_PUBLIC_STORAGE_DOMAIN;
           if (
