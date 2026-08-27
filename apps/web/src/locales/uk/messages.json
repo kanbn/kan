@@ -900,7 +900,7 @@
         47
       ]
     ],
-    "translation": "Дозволити учасникам робочого простору бачити адреси електронної пошти одне одного"
+    "translation": "Дозволити учасникам робочого простору бачити email одне одного"
   },
   "WnEwDO": {
     "message": "Already have an account? <0><1>Sign in</1></0>",
@@ -2748,7 +2748,7 @@
         81
       ]
     ],
-    "translation": "Підтвердьте свої налаштування електронної пошти:",
+    "translation": "Підтвердьте свої налаштування email:",
     "obsolete": true
   },
   "479pdJ": {
@@ -4247,7 +4247,7 @@
         443
       ]
     ],
-    "translation": "електронна пошта"
+    "translation": "email"
   },
   "O3oNi5": {
     "message": "Email",
@@ -4263,7 +4263,7 @@
         43
       ]
     ],
-    "translation": "Електронна пошта"
+    "translation": "Email"
   },
   "aW3TOw": {
     "message": "Email notifications",
@@ -4275,7 +4275,7 @@
         191
       ]
     ],
-    "translation": "Сповіщення електронною поштою"
+    "translation": "Email-сповіщення"
   },
   "V1KOLq": {
     "message": "Email notifications for mentions",
@@ -4287,7 +4287,7 @@
         60
       ]
     ],
-    "translation": "Сповіщення електронною поштою про згадки"
+    "translation": "Email-сповіщення про згадки"
   },
   "IqjpYe": {
     "message": "Email visibility",
@@ -4299,7 +4299,7 @@
         73
       ]
     ],
-    "translation": "Видимість електронної пошти"
+    "translation": "Видимість email"
   },
   "bFREhu": {
     "message": "End of list",
@@ -4403,7 +4403,7 @@
         407
       ]
     ],
-    "translation": "Введіть свою адресу електронної пошти"
+    "translation": "Введіть свій email"
   },
   "n9V+ps": {
     "message": "Enter your name",
@@ -5920,7 +5920,7 @@
         50
       ]
     ],
-    "translation": "Недійсна адреса електронної пошти"
+    "translation": "Недійсний email"
   },
   "odFCYX": {
     "message": "Invalid invitation",
@@ -7845,7 +7845,7 @@
         411
       ]
     ],
-    "translation": "Введіть дійсну адресу електронної пошти"
+    "translation": "Введіть дійсний email"
   },
   "CJ3zUq": {
     "message": "Please enter a valid name",
@@ -8237,7 +8237,7 @@
         95
       ]
     ],
-    "translation": "Пріоритетна підтримка електронною поштою"
+    "translation": "Пріоритетна підтримка через email"
   },
   "ScJ9fj": {
     "message": "Privacy policy",
@@ -12294,7 +12294,7 @@
         111
       ]
     ],
-    "translation": "Ви можете запросити учасників команди: натисніть кнопку «Запросити» у верхньому правому куті <0>сторінки учасників</0> і введіть їхню адресу електронної пошти. Вони отримають лист із посиланням для приєднання до робочого простору."
+    "translation": "Ви можете запросити учасників команди: натисніть кнопку «Запросити» у верхньому правому куті <0>сторінки учасників</0> і введіть їхній email. Вони отримають лист із посиланням для приєднання до робочого простору."
   },
   "vAj6xG": {
     "message": "You can self-host by following the instructions in our <0>repo</0>.",
