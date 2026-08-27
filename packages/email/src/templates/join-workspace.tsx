@@ -3,9 +3,7 @@ import { Button } from "@react-email/button";
 import { Container } from "@react-email/container";
 import { Head } from "@react-email/head";
 import { Heading } from "@react-email/heading";
-import { Hr } from "@react-email/hr";
 import { Html } from "@react-email/html";
-import { Link } from "@react-email/link";
 import { Preview } from "@react-email/preview";
 import { Text } from "@react-email/text";
 import { env } from "next-runtime-env";
@@ -20,9 +18,9 @@ export const JoinWorkspaceTemplate = ({
   inviterName?: string;
   workspaceName?: string;
 }) => (
-  <Html>
+  <Html lang="uk">
     <Head />
-    <Preview>Join {workspaceName ?? "workspace"} on kan.bn</Preview>
+    <Preview>Запрошення до «{workspaceName ?? "робочого простору"}»</Preview>
     <Body style={{ backgroundColor: "white" }}>
       <Container
         style={{
@@ -33,25 +31,27 @@ export const JoinWorkspaceTemplate = ({
           paddingRight: "0.75rem",
         }}
       >
-        <Heading
-          style={{
-            marginTop: "2.5rem",
-            marginBottom: "2.5rem",
-            fontSize: "24px",
-            fontWeight: "bold",
-            color: "#232323",
-          }}
-        >
-          {env("NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY") !== "true" && "Kan"}
-        </Heading>
+        {env("NEXT_PUBLIC_INSTANCE_NAME") && (
+          <Heading
+            style={{
+              marginTop: "2.5rem",
+              marginBottom: "2.5rem",
+              fontSize: "24px",
+              fontWeight: "bold",
+              color: "#232323",
+            }}
+          >
+            {env("NEXT_PUBLIC_INSTANCE_NAME")}
+          </Heading>
+        )}
         <Heading
           style={{ fontSize: "24px", fontWeight: "bold", color: "#232323" }}
         >
           {inviterName
-            ? `${inviterName} invited you to join ${
-                workspaceName ?? "a workspace"
-              }`
-            : `You've been invited to join ${workspaceName ?? "a workspace"}`}
+            ? `${inviterName} запрошує вас до «${
+                workspaceName ?? "робочого простору"
+              }»`
+            : `Вас запрошено до «${workspaceName ?? "робочого простору"}»`}
         </Heading>
         <Text
           style={{
@@ -60,7 +60,7 @@ export const JoinWorkspaceTemplate = ({
             color: "#232323",
           }}
         >
-          Click the button below to add this workspace to your account.
+          Натисніть кнопку нижче, щоб приєднатися.
         </Text>
         <Button
           target="_blank"
@@ -79,7 +79,7 @@ export const JoinWorkspaceTemplate = ({
             color: "white",
           }}
         >
-          Join {workspaceName ?? "workspace"}
+          Приєднатися
         </Button>
         <Text
           style={{
@@ -88,29 +88,8 @@ export const JoinWorkspaceTemplate = ({
             color: "#7e7e7e",
           }}
         >
-          If you don&apos;t want to join this workspace, you can safely ignore this email.
+          Якщо ви не хочете приєднуватися, просто проігноруйте цей лист.
         </Text>
-        {env("NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY") !== "true" && (
-          <>
-            <Hr
-              style={{
-                marginTop: "2.5rem",
-                marginBottom: "2rem",
-                borderWidth: "1px",
-              }}
-            />
-            <Text style={{ color: "#7e7e7e" }}>
-              <Link
-                href={env("NEXT_PUBLIC_BASE_URL")}
-                target="_blank"
-                style={{ color: "#7e7e7e", textDecoration: "underline" }}
-              >
-                Kan
-              </Link>
-              , the open source Trello alternative.
-            </Text>
-          </>
-        )}
       </Container>
     </Body>
   </Html>

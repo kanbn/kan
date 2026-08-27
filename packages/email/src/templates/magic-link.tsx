@@ -3,9 +3,7 @@ import { Button } from "@react-email/button";
 import { Container } from "@react-email/container";
 import { Head } from "@react-email/head";
 import { Heading } from "@react-email/heading";
-import { Hr } from "@react-email/hr";
 import { Html } from "@react-email/html";
-import { Link } from "@react-email/link";
 import { Preview } from "@react-email/preview";
 import { Text } from "@react-email/text";
 import { env } from "next-runtime-env";
@@ -16,9 +14,9 @@ export const MagicLinkTemplate = ({
 }: {
   magicLoginUrl?: string;
 }) => (
-  <Html>
+  <Html lang="uk">
     <Head />
-    <Preview>Log in with this magic link</Preview>
+    <Preview>Посилання для входу</Preview>
     <Body style={{ backgroundColor: "white" }}>
       <Container
         style={{
@@ -29,21 +27,23 @@ export const MagicLinkTemplate = ({
           paddingRight: "0.75rem",
         }}
       >
-        <Heading
-          style={{
-            marginTop: "2.5rem",
-            marginBottom: "2.5rem",
-            fontSize: "24px",
-            fontWeight: "bold",
-            color: "#232323",
-          }}
-        >
-          kan.bn
-        </Heading>
+        {env("NEXT_PUBLIC_INSTANCE_NAME") && (
+          <Heading
+            style={{
+              marginTop: "2.5rem",
+              marginBottom: "2.5rem",
+              fontSize: "24px",
+              fontWeight: "bold",
+              color: "#232323",
+            }}
+          >
+            {env("NEXT_PUBLIC_INSTANCE_NAME")}
+          </Heading>
+        )}
         <Heading
           style={{ fontSize: "24px", fontWeight: "bold", color: "#232323" }}
         >
-          Login to your Kan account
+          Вхід до вашого акаунта
         </Heading>
         <Text
           style={{
@@ -52,7 +52,7 @@ export const MagicLinkTemplate = ({
             color: "#232323",
           }}
         >
-          Click the button below to instantly login to your account.
+          Натисніть кнопку нижче, щоб увійти.
         </Text>
         <Button
           target="_blank"
@@ -71,7 +71,7 @@ export const MagicLinkTemplate = ({
             color: "white",
           }}
         >
-          Login to your account
+          Увійти
         </Button>
         <Text
           style={{
@@ -80,24 +80,7 @@ export const MagicLinkTemplate = ({
             color: "#7e7e7e",
           }}
         >
-          If you didn&apos;t try to login, you can safely ignore this email.
-        </Text>
-        <Hr
-          style={{
-            marginTop: "2.5rem",
-            marginBottom: "2rem",
-            borderWidth: "1px",
-          }}
-        />
-        <Text style={{ color: "#7e7e7e" }}>
-          <Link
-            href={env("NEXT_PUBLIC_BASE_URL")}
-            target="_blank"
-            style={{ color: "#7e7e7e", textDecoration: "underline" }}
-          >
-            Kan
-          </Link>
-          , the open source Trello alternative.
+          Якщо ви не намагалися увійти, просто проігноруйте цей лист.
         </Text>
       </Container>
     </Body>

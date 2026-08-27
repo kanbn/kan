@@ -237,8 +237,8 @@ export function createPlugins(db: dbClient) {
             await sendEmail(
               email,
               workspaceName
-                ? `Invitation to join the workspace ${workspaceName}`
-                : "Invitation to join workspace",
+                ? `Запрошення до «${workspaceName}»`
+                : "Запрошення до робочого простору",
               "JOIN_WORKSPACE",
               {
                 magicLoginUrl: url,
@@ -249,9 +249,7 @@ export function createPlugins(db: dbClient) {
           } else {
             await sendEmail(
               email,
-              process.env.NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY === "true"
-                ? "Sign in to your account"
-                : "Sign in to Kan",
+              "Вхід до вашого акаунта",
               "MAGIC_LINK",
               {
                 magicLoginUrl: url,
