@@ -44,8 +44,7 @@ COPY --from=pruner /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
 COPY --from=pruner /app/out/json/ .
 
 ENV CI=true
-RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store,sharing=locked \
-    pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 # ============================================
 # Stage 4: Build the web application
@@ -64,9 +63,7 @@ COPY --from=pruner /app/out/full/ .
 ENV NEXT_PUBLIC_USE_STANDALONE_OUTPUT=true
 ENV CI=true
 
-RUN --mount=type=cache,id=next-cache,target=/app/apps/web/.next/cache,sharing=locked \
-    --mount=type=cache,id=turbo-cache,target=/app/.turbo,sharing=locked \
-    NEXT_PUBLIC_APP_VERSION="$APP_VERSION" pnpm build --filter=@kan/web
+RUN NEXT_PUBLIC_APP_VERSION="$APP_VERSION" pnpm build --filter=@kan/web
 
 # ============================================
 # Stage 5: Migration image (run-once container)
@@ -80,8 +77,7 @@ WORKDIR /db
 COPY packages/db/drizzle.config.ts ./drizzle.config.ts
 COPY packages/db/migrations/ ./migrations/
 
-RUN --mount=type=cache,id=npm-cache,target=/root/.npm,sharing=locked \
-    npm init -y && \
+RUN npm init -y && \
     npm install drizzle-kit drizzle-orm pg --save-exact && \
     # Strip unnecessary files from node_modules
     find node_modules -type f \( \
