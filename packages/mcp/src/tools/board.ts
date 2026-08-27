@@ -106,6 +106,8 @@ export function registerBoardTools(server: McpServer): void {
         name,
         slug,
         visibility,
+        lists: [],
+        labels: [],
       });
       return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
     },
