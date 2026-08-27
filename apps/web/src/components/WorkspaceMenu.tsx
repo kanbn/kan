@@ -155,6 +155,8 @@ export default function WorkspaceMenu({
                 </div>
               ))}
             </div>
+            {env("NEXT_PUBLIC_DISABLE_WORKSPACE_CREATION")?.toLowerCase() !==
+              "true" && (
             <div className="border-t-[1px] border-light-600 p-1 dark:border-dark-500">
               <Menu.Item>
                 <button
@@ -177,6 +179,7 @@ export default function WorkspaceMenu({
                 </button>
               </Menu.Item>
             </div>
+            )}
           </Menu.Items>
         </Transition>
       </Menu>

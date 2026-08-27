@@ -230,6 +230,14 @@ export const workspaceRouter = createTRPCRouter({
           code: "UNAUTHORIZED",
         });
 
+      if (
+        env("NEXT_PUBLIC_DISABLE_WORKSPACE_CREATION")?.toLowerCase() === "true"
+      )
+        throw new TRPCError({
+          message: `Workspace creation is disabled on this instance`,
+          code: "FORBIDDEN",
+        });
+
       // Check if slug is provided in cloud environment
       if (input.slug && env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
         throw new TRPCError({

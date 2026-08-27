@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { I18nProvider } from "@lingui/react";
+import { env } from "next-runtime-env";
 import { createContext, useContext, useEffect, useState } from "react";
 
 import type { Locale } from "~/locales";
@@ -60,8 +61,15 @@ export function LinguiProviderWrapper({
     if (savedLocale && locales.includes(savedLocale)) {
       setLocale(savedLocale);
     } else {
-      const detectedLocale = detectBrowserLocale(locales);
-      setLocale(detectedLocale);
+      const configuredDefault = env("NEXT_PUBLIC_DEFAULT_LOCALE") as
+        | Locale
+        | undefined;
+      if (configuredDefault && locales.includes(configuredDefault)) {
+        setLocale(configuredDefault);
+      } else {
+        const detectedLocale = detectBrowserLocale(locales);
+        setLocale(detectedLocale);
+      }
     }
     setIsHydrated(true);
   }, [initialLocale]);
