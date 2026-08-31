@@ -161,7 +161,12 @@ export const cardActivities = pgTable("card_activity", {
     () => cardAttachments.id,
     { onDelete: "cascade" },
   ),
-}).enableRLS();
+}, (table) => [
+  index("card_activity_card_created_at_idx").on(
+    table.cardId,
+    table.createdAt,
+  ),
+]).enableRLS();
 
 export const cardActivitiesRelations = relations(cardActivities, ({ one }) => ({
   card: one(cards, {
@@ -282,7 +287,9 @@ export const comments = pgTable("card_comments", {
   deletedBy: uuid("deletedBy").references(() => users.id, {
     onDelete: "set null",
   }),
-}).enableRLS();
+}, (table) => [
+  index("card_comments_card_id_idx").on(table.cardId),
+]).enableRLS();
 
 export const commentsRelations = relations(comments, ({ one }) => ({
   card: one(cards, {
@@ -318,7 +325,12 @@ export const cardAttachments = pgTable("card_attachment", {
   }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   deletedAt: timestamp("deletedAt"),
-}).enableRLS();
+}, (table) => [
+  index("card_attachment_card_created_at_idx").on(
+    table.cardId,
+    table.createdAt,
+  ),
+]).enableRLS();
 
 export const cardAttachmentsRelations = relations(
   cardAttachments,
