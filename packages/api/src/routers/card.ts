@@ -1303,13 +1303,21 @@ export const cardRouter = createTRPCRouter({
           ctx.db,
           labelPublicIds,
         );
-        if (labels.length) {
-          const labelsInsert = labels.map((label) => ({
+        // Labels belong to a board, so the source card's labels only apply when
+        // the copy lands on the same board. Selecting them here rather than
+        // letting the write reject keeps a cross-board duplicate working, with
+        // the labels that legitimately transfer.
+        const labelsOnTargetBoard = labels.filter(
+          (label) => label.boardId === targetList.boardId,
+        );
+
+        if (labelsOnTargetBoard.length) {
+          const labelsInsert = labelsOnTargetBoard.map((label) => ({
             cardId: newCard.id,
             labelId: label.id,
           }));
           await cardRepo.bulkCreateCardLabelRelationships(ctx.db, labelsInsert);
-          const cardActivitesInsert = labels.map((cardLabel) => ({
+          const cardActivitesInsert = labelsOnTargetBoard.map((cardLabel) => ({
             type: "card.updated.label.added" as const,
             cardId: newCard.id,
             labelId: cardLabel.id,

@@ -168,6 +168,58 @@ export const create = async (
   });
 };
 
+/**
+ * Labels are board-scoped (labels.boardId) but _card_labels stores only
+ * (cardId, labelId), so the database cannot reject a card being linked to a
+ * label from another board. Every writer below goes through this check, which
+ * is why it lives here rather than in the routers: the permission checks
+ * upstream are all workspace-scoped, and a workspace holds many boards.
+ *
+ * Throws rather than filtering. A caller that legitimately wants a subset (a
+ * cross-board duplicate, say) should select the labels it means to keep before
+ * calling, so the drop is a decision rather than a silent side effect.
+ */
+const assertLabelsBelongToCardBoards = async (
+  db: dbClient,
+  pairs: { cardId: number; labelId: number }[],
+) => {
+  if (!pairs.length) return;
+
+  const cardIds = [...new Set(pairs.map((pair) => pair.cardId))];
+  const labelIds = [...new Set(pairs.map((pair) => pair.labelId))];
+
+  const cardBoards = await db
+    .select({ cardId: cards.id, boardId: lists.boardId })
+    .from(cards)
+    .innerJoin(lists, eq(cards.listId, lists.id))
+    .where(inArray(cards.id, cardIds));
+
+  const labelBoards = await db
+    .select({ labelId: labels.id, boardId: labels.boardId })
+    .from(labels)
+    .where(inArray(labels.id, labelIds));
+
+  const boardOfCard = new Map(cardBoards.map((r) => [r.cardId, r.boardId]));
+  const boardOfLabel = new Map(labelBoards.map((r) => [r.labelId, r.boardId]));
+
+  for (const pair of pairs) {
+    const cardBoardId = boardOfCard.get(pair.cardId);
+    const labelBoardId = boardOfLabel.get(pair.labelId);
+
+    // An unknown card or label fails closed: without both boards there is no
+    // evidence the link is legitimate.
+    if (
+      cardBoardId === undefined ||
+      labelBoardId === undefined ||
+      cardBoardId !== labelBoardId
+    ) {
+      throw new Error(
+        `Label ${pair.labelId} does not belong to the board of card ${pair.cardId}`,
+      );
+    }
+  }
+};
+
 export const bulkCreateCardLabelRelationships = async (
   db: dbClient,
   cardLabelRelationshipInput: {
@@ -175,6 +227,8 @@ export const bulkCreateCardLabelRelationships = async (
     labelId: number;
   }[],
 ) => {
+  await assertLabelsBelongToCardBoards(db, cardLabelRelationshipInput);
+
   const result = await db
     .insert(cardsToLabels)
     .values(cardLabelRelationshipInput)
@@ -427,6 +481,8 @@ export const createCardLabelRelationship = async (
   db: dbClient,
   cardLabelRelationshipInput: { cardId: number; labelId: number },
 ) => {
+  await assertLabelsBelongToCardBoards(db, [cardLabelRelationshipInput]);
+
   const [result] = await db
     .insert(cardsToLabels)
     .values({
@@ -442,6 +498,8 @@ export const bulkCreateCardLabelRelationship = async (
   db: dbClient,
   cardLabelRelationshipInput: { cardId: number; labelId: number }[],
 ) => {
+  await assertLabelsBelongToCardBoards(db, cardLabelRelationshipInput);
+
   const [result] = await db
     .insert(cardsToLabels)
     .values(cardLabelRelationshipInput)
