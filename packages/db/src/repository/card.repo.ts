@@ -190,10 +190,42 @@ export const create = async (
  */
 type DbTransaction = Parameters<Parameters<dbClient["transaction"]>[0]>[0];
 
+export const cardLabelViolations = [
+  "card_not_found",
+  "label_not_found",
+  "board_mismatch",
+] as const;
+export type CardLabelViolation = (typeof cardLabelViolations)[number];
+
+/**
+ * Distinguishes the three ways a card-label link can be illegitimate. Callers
+ * map these to a status code; a bare Error left every writer that did not
+ * pre-validate reporting a client-correctable input as a 500, and reported a
+ * missing row as a board mismatch.
+ */
+export class CardLabelBoardError extends Error {
+  constructor(
+    readonly violation: CardLabelViolation,
+    readonly cardId: number,
+    readonly labelId: number,
+  ) {
+    super(
+      violation === "card_not_found"
+        ? `Card ${cardId} not found`
+        : violation === "label_not_found"
+          ? `Label ${labelId} not found`
+          : `Label ${labelId} does not belong to the board of card ${cardId}`,
+    );
+    this.name = "CardLabelBoardError";
+  }
+}
+
 export const assertCardLabelBoardsMatch = async (
   tx: DbTransaction,
   pairs: { cardId: number; labelId: number }[],
 ) => {
+  if (!pairs.length) return;
+
   {
     const cardIds = [...new Set(pairs.map((pair) => pair.cardId))];
     const labelIds = [...new Set(pairs.map((pair) => pair.labelId))];
@@ -203,6 +235,7 @@ export const assertCardLabelBoardsMatch = async (
       .from(cards)
       .innerJoin(lists, eq(cards.listId, lists.id))
       .where(inArray(cards.id, cardIds))
+      .orderBy(cards.id)
       .for("update", { of: cards });
 
     const labelBoards = await tx
@@ -221,15 +254,26 @@ export const assertCardLabelBoardsMatch = async (
 
       // An unknown card or label fails closed: without both boards there is no
       // evidence the link is legitimate.
-      if (
-        cardBoardId === undefined ||
-        labelBoardId === undefined ||
-        cardBoardId !== labelBoardId
-      ) {
-        throw new Error(
-          `Label ${pair.labelId} does not belong to the board of card ${pair.cardId}`,
+      if (cardBoardId === undefined)
+        throw new CardLabelBoardError(
+          "card_not_found",
+          pair.cardId,
+          pair.labelId,
         );
-      }
+
+      if (labelBoardId === undefined)
+        throw new CardLabelBoardError(
+          "label_not_found",
+          pair.cardId,
+          pair.labelId,
+        );
+
+      if (cardBoardId !== labelBoardId)
+        throw new CardLabelBoardError(
+          "board_mismatch",
+          pair.cardId,
+          pair.labelId,
+        );
     }
 
   }

@@ -2,6 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
+import { CardLabelBoardError } from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardCommentRepo from "@kan/db/repository/cardComment.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
@@ -548,8 +549,24 @@ export const cardRouter = createTRPCRouter({
         return { newLabel: false };
       }
 
-      const newCardLabelRelationship =
-        await cardRepo.createCardLabelRelationship(ctx.db, cardLabelIds);
+      // The public add-label path reaches the writer without pre-validating, so
+      // it maps the domain error rather than surfacing a 500 for what is a
+      // client-correctable input. A middleware could do this once for every
+      // transport, but that changes the error path for every procedure and
+      // belongs with the wider decision, not in a bug fix.
+      const newCardLabelRelationship = await cardRepo
+        .createCardLabelRelationship(ctx.db, cardLabelIds)
+        .catch((error: unknown) => {
+          if (error instanceof CardLabelBoardError)
+            throw new TRPCError({
+              message: error.message,
+              code:
+                error.violation === "board_mismatch"
+                  ? "BAD_REQUEST"
+                  : "NOT_FOUND",
+            });
+          throw error;
+        });
 
       if (!newCardLabelRelationship)
         throw new TRPCError({

@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 import { beforeEach, describe, expect, it } from "vitest";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
+import { CardLabelBoardError } from "@kan/db/repository/card.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as schema from "@kan/db/schema";
 
@@ -128,7 +129,7 @@ describe("card label board scoping", () => {
           cardId: cardOnBoardB.id,
           labelId: labelOnBoardA.id,
         }),
-      ).rejects.toThrow();
+      ).rejects.toThrow(CardLabelBoardError);
     });
 
     it("leaves no row behind when it refuses", async () => {
@@ -162,7 +163,7 @@ describe("card label board scoping", () => {
         cardRepo.bulkCreateCardLabelRelationships(db, [
           { cardId: cardOnBoardB.id, labelId: labelOnBoardA.id },
         ]),
-      ).rejects.toThrow();
+      ).rejects.toThrow(CardLabelBoardError);
     });
 
     it("refuses the whole batch rather than writing the valid half", async () => {
@@ -201,7 +202,7 @@ describe("card label board scoping", () => {
         cardRepo.bulkCreateCardLabelRelationship(db, [
           { cardId: cardOnBoardB.id, labelId: labelOnBoardA.id },
         ]),
-      ).rejects.toThrow();
+      ).rejects.toThrow(CardLabelBoardError);
     });
   });
 
@@ -227,7 +228,7 @@ describe("card label board scoping", () => {
           boardId: boardAId,
           cardId: cardOnBoardB.id,
         }),
-      ).rejects.toThrow();
+      ).rejects.toThrow(CardLabelBoardError);
     });
 
     it("leaves no orphaned label behind when it refuses", async () => {
