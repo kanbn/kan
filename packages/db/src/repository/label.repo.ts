@@ -2,6 +2,8 @@ import { and, count, eq, inArray, isNull } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import { cardsToLabels, labels } from "@kan/db/schema";
+
+import { assertCardLabelBoardsMatch } from "./card.repo";
 import { generateUID } from "@kan/shared/utils";
 
 export const getCount = async (db: dbClient) => {
@@ -23,30 +25,40 @@ export const create = async (
     cardId?: number;
   },
 ) => {
-  const [result] = await db
-    .insert(labels)
-    .values({
-      publicId: generateUID(),
-      name: labelInput.name,
-      colourCode: labelInput.colourCode,
-      createdBy: labelInput.createdBy,
-      boardId: labelInput.boardId,
-    })
-    .returning({
-      id: labels.id,
-      publicId: labels.publicId,
-      name: labels.name,
-      colourCode: labels.colourCode,
-    });
+  // Creating the label and linking it to a card is one operation: without the
+  // transaction a rejected link would leave an orphaned label behind. This is
+  // the fourth writer of _card_labels, so it takes the same board check as the
+  // three in card.repo.
+  return db.transaction(async (tx) => {
+    const [result] = await tx
+      .insert(labels)
+      .values({
+        publicId: generateUID(),
+        name: labelInput.name,
+        colourCode: labelInput.colourCode,
+        createdBy: labelInput.createdBy,
+        boardId: labelInput.boardId,
+      })
+      .returning({
+        id: labels.id,
+        publicId: labels.publicId,
+        name: labels.name,
+        colourCode: labels.colourCode,
+      });
 
-  if (labelInput.cardId && result) {
-    await db.insert(cardsToLabels).values({
-      cardId: labelInput.cardId,
-      labelId: result.id,
-    });
-  }
+    if (labelInput.cardId && result) {
+      await assertCardLabelBoardsMatch(tx, [
+        { cardId: labelInput.cardId, labelId: result.id },
+      ]);
 
-  return result;
+      await tx.insert(cardsToLabels).values({
+        cardId: labelInput.cardId,
+        labelId: result.id,
+      });
+    }
+
+    return result;
+  });
 };
 
 export const bulkCreate = async (

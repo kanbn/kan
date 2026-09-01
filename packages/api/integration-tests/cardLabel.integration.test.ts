@@ -1,6 +1,8 @@
+import { eq } from "drizzle-orm";
 import { beforeEach, describe, expect, it } from "vitest";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
+import * as labelRepo from "@kan/db/repository/label.repo";
 import * as schema from "@kan/db/schema";
 
 import { createTestDb, seedTestData, type TestDbClient } from "./test-db";
@@ -23,6 +25,8 @@ describe("card label board scoping", () => {
   let labelOnBoardA: { id: number };
   let labelOnBoardB: { id: number };
   let cardOnBoardB: { id: number };
+  let boardAId: number;
+  let boardBId: number;
 
   const makeBoard = async (publicId: string, name: string, slug: string) => {
     const [board] = await db
@@ -46,6 +50,8 @@ describe("card label board scoping", () => {
 
     const boardA = await makeBoard("bdaaaa123456", "Board A", "board-a");
     const boardB = await makeBoard("bdbbbb123456", "Board B", "board-b");
+    boardAId = boardA.id;
+    boardBId = boardB.id;
 
     const [la] = await db
       .insert(schema.lists)
@@ -199,9 +205,57 @@ describe("card label board scoping", () => {
     });
   });
 
-  it("keeps listOnBoardA available for the fixture to be meaningful", () => {
-    // Guards against the fixture silently degenerating to a single board,
-    // which would make every assertion above pass for the wrong reason.
+  describe("labelRepo.create with a cardId (the fourth writer)", () => {
+    it("links a new label to a card on the same board", async () => {
+      const result = await labelRepo.create(db, {
+        name: "New label",
+        colourCode: "#ff0000",
+        createdBy: user.id,
+        boardId: boardBId,
+        cardId: cardOnBoardB.id,
+      });
+
+      expect(result).toBeDefined();
+    });
+
+    it("refuses to link a label created on another board", async () => {
+      await expect(
+        labelRepo.create(db, {
+          name: "Board A label on a board B card",
+          colourCode: "#00ff00",
+          createdBy: user.id,
+          boardId: boardAId,
+          cardId: cardOnBoardB.id,
+        }),
+      ).rejects.toThrow();
+    });
+
+    it("leaves no orphaned label behind when it refuses", async () => {
+      // The label is created before the link, so without a transaction a
+      // rejected link would strand it on the board.
+      await labelRepo
+        .create(db, {
+          name: "Should not survive",
+          colourCode: "#0000ff",
+          createdBy: user.id,
+          boardId: boardAId,
+          cardId: cardOnBoardB.id,
+        })
+        .catch(() => undefined);
+
+      const stranded = await db.query.labels.findMany({
+        columns: { id: true },
+        where: eq(schema.labels.name, "Should not survive"),
+      });
+
+      expect(stranded).toHaveLength(0);
+    });
+  });
+
+  it("uses two genuinely different boards, so the refusals mean something", () => {
+    // The earlier version of this compared the two LIST ids, which differ even
+    // when both lists sit on one board. Compare the boards themselves.
+    expect(boardAId).not.toBe(boardBId);
     expect(listOnBoardA.id).not.toBe(listOnBoardB.id);
   });
 });

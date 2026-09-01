@@ -171,53 +171,73 @@ export const create = async (
 /**
  * Labels are board-scoped (labels.boardId) but _card_labels stores only
  * (cardId, labelId), so the database cannot reject a card being linked to a
- * label from another board. Every writer below goes through this check, which
- * is why it lives here rather than in the routers: the permission checks
- * upstream are all workspace-scoped, and a workspace holds many boards.
+ * label from another board. Every writer below goes through this, which is why
+ * it lives here rather than in the routers: the permission checks upstream are
+ * all workspace-scoped, and a workspace holds many boards.
  *
- * Throws rather than filtering. A caller that legitimately wants a subset (a
- * cross-board duplicate, say) should select the labels it means to keep before
- * calling, so the drop is a decision rather than a silent side effect.
+ * A card's board is not a property of the card, it is a property of whatever
+ * list its listId currently points at, and card.update can repoint that. So the
+ * check and the insert run in one transaction with the card rows locked
+ * (FOR UPDATE OF card): a concurrent move blocks until this commits, rather
+ * than sliding the board out from under a check that already passed.
+ *
+ * Throws on any mismatch rather than filtering. A caller wanting a subset must
+ * select it before calling, so a drop is a decision rather than a side effect.
  */
-const assertLabelsBelongToCardBoards = async (
+export const assertCardLabelBoardsMatch = async (
+  tx: Pick<dbClient, "select">,
+  pairs: { cardId: number; labelId: number }[],
+) => {
+  {
+    const cardIds = [...new Set(pairs.map((pair) => pair.cardId))];
+    const labelIds = [...new Set(pairs.map((pair) => pair.labelId))];
+
+    const cardBoards = await tx
+      .select({ cardId: cards.id, boardId: lists.boardId })
+      .from(cards)
+      .innerJoin(lists, eq(cards.listId, lists.id))
+      .where(inArray(cards.id, cardIds))
+      .for("update", { of: cards });
+
+    const labelBoards = await tx
+      .select({ labelId: labels.id, boardId: labels.boardId })
+      .from(labels)
+      .where(inArray(labels.id, labelIds));
+
+    const boardOfCard = new Map(cardBoards.map((r) => [r.cardId, r.boardId]));
+    const boardOfLabel = new Map(
+      labelBoards.map((r) => [r.labelId, r.boardId]),
+    );
+
+    for (const pair of pairs) {
+      const cardBoardId = boardOfCard.get(pair.cardId);
+      const labelBoardId = boardOfLabel.get(pair.labelId);
+
+      // An unknown card or label fails closed: without both boards there is no
+      // evidence the link is legitimate.
+      if (
+        cardBoardId === undefined ||
+        labelBoardId === undefined ||
+        cardBoardId !== labelBoardId
+      ) {
+        throw new Error(
+          `Label ${pair.labelId} does not belong to the board of card ${pair.cardId}`,
+        );
+      }
+    }
+
+  }
+};
+
+const insertCardLabelsCheckedTx = async (
   db: dbClient,
   pairs: { cardId: number; labelId: number }[],
 ) => {
-  if (!pairs.length) return;
+  return db.transaction(async (tx) => {
+    await assertCardLabelBoardsMatch(tx, pairs);
 
-  const cardIds = [...new Set(pairs.map((pair) => pair.cardId))];
-  const labelIds = [...new Set(pairs.map((pair) => pair.labelId))];
-
-  const cardBoards = await db
-    .select({ cardId: cards.id, boardId: lists.boardId })
-    .from(cards)
-    .innerJoin(lists, eq(cards.listId, lists.id))
-    .where(inArray(cards.id, cardIds));
-
-  const labelBoards = await db
-    .select({ labelId: labels.id, boardId: labels.boardId })
-    .from(labels)
-    .where(inArray(labels.id, labelIds));
-
-  const boardOfCard = new Map(cardBoards.map((r) => [r.cardId, r.boardId]));
-  const boardOfLabel = new Map(labelBoards.map((r) => [r.labelId, r.boardId]));
-
-  for (const pair of pairs) {
-    const cardBoardId = boardOfCard.get(pair.cardId);
-    const labelBoardId = boardOfLabel.get(pair.labelId);
-
-    // An unknown card or label fails closed: without both boards there is no
-    // evidence the link is legitimate.
-    if (
-      cardBoardId === undefined ||
-      labelBoardId === undefined ||
-      cardBoardId !== labelBoardId
-    ) {
-      throw new Error(
-        `Label ${pair.labelId} does not belong to the board of card ${pair.cardId}`,
-      );
-    }
-  }
+    return tx.insert(cardsToLabels).values(pairs).returning();
+  });
 };
 
 export const bulkCreateCardLabelRelationships = async (
@@ -227,14 +247,9 @@ export const bulkCreateCardLabelRelationships = async (
     labelId: number;
   }[],
 ) => {
-  await assertLabelsBelongToCardBoards(db, cardLabelRelationshipInput);
+  if (!cardLabelRelationshipInput.length) return [];
 
-  const result = await db
-    .insert(cardsToLabels)
-    .values(cardLabelRelationshipInput)
-    .returning();
-
-  return result;
+  return insertCardLabelsCheckedTx(db, cardLabelRelationshipInput);
 };
 
 export const bulkCreateCardWorkspaceMemberRelationships = async (
@@ -481,15 +496,9 @@ export const createCardLabelRelationship = async (
   db: dbClient,
   cardLabelRelationshipInput: { cardId: number; labelId: number },
 ) => {
-  await assertLabelsBelongToCardBoards(db, [cardLabelRelationshipInput]);
-
-  const [result] = await db
-    .insert(cardsToLabels)
-    .values({
-      cardId: cardLabelRelationshipInput.cardId,
-      labelId: cardLabelRelationshipInput.labelId,
-    })
-    .returning();
+  const [result] = await insertCardLabelsCheckedTx(db, [
+    cardLabelRelationshipInput,
+  ]);
 
   return result;
 };
@@ -498,12 +507,12 @@ export const bulkCreateCardLabelRelationship = async (
   db: dbClient,
   cardLabelRelationshipInput: { cardId: number; labelId: number }[],
 ) => {
-  await assertLabelsBelongToCardBoards(db, cardLabelRelationshipInput);
+  if (!cardLabelRelationshipInput.length) return undefined;
 
-  const [result] = await db
-    .insert(cardsToLabels)
-    .values(cardLabelRelationshipInput)
-    .returning();
+  const [result] = await insertCardLabelsCheckedTx(
+    db,
+    cardLabelRelationshipInput,
+  );
 
   return result;
 };
