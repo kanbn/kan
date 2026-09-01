@@ -1,0 +1,96 @@
+name: E2E
+
+on:
+  pull_request:
+    branches: ["main"]
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: kan_e2e
+          POSTGRES_USER: kan
+          POSTGRES_PASSWORD: kan
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U kan -d kan_e2e"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      CI: "true"
+      POSTGRES_URL: postgresql://kan:kan@localhost:5432/kan_e2e
+      BETTER_AUTH_SECRET: e2e-test-only-secret-not-for-prod-use
+      NEXT_PUBLIC_BASE_URL: http://localhost:3000
+      NEXT_PUBLIC_ALLOW_CREDENTIALS: "true"
+      NEXT_PUBLIC_DISABLE_SIGN_UP: "false"
+      NEXT_PUBLIC_DISABLE_EMAIL: "true"
+      STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+      STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+      STRIPE_WEBHOOK_SECRET_LEGACY: ${{ secrets.STRIPE_WEBHOOK_SECRET_LEGACY }}
+      STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID: ${{ secrets.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID }}
+      STRIPE_TEAM_PLAN_YEARLY_PRICE_ID: ${{ secrets.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID }}
+      STRIPE_PRO_PLAN_MONTHLY_PRICE_ID: ${{ secrets.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID }}
+      STRIPE_PRO_PLAN_YEARLY_PRICE_ID: ${{ secrets.STRIPE_PRO_PLAN_YEARLY_PRICE_ID }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Stripe CLI
+        run: npm install -g @stripe/cli
+
+      - name: Write .env for CI
+        run: |
+          cat > .env <<EOF
+          POSTGRES_URL=${POSTGRES_URL}
+          BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+          NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+          NEXT_PUBLIC_ALLOW_CREDENTIALS=${NEXT_PUBLIC_ALLOW_CREDENTIALS}
+          NEXT_PUBLIC_DISABLE_SIGN_UP=${NEXT_PUBLIC_DISABLE_SIGN_UP}
+          NEXT_PUBLIC_DISABLE_EMAIL=${NEXT_PUBLIC_DISABLE_EMAIL}
+          STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+          STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+          STRIPE_WEBHOOK_SECRET_LEGACY=${STRIPE_WEBHOOK_SECRET_LEGACY}
+          STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID=${STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID}
+          STRIPE_TEAM_PLAN_YEARLY_PRICE_ID=${STRIPE_TEAM_PLAN_YEARLY_PRICE_ID}
+          STRIPE_PRO_PLAN_MONTHLY_PRICE_ID=${STRIPE_PRO_PLAN_MONTHLY_PRICE_ID}
+          STRIPE_PRO_PLAN_YEARLY_PRICE_ID=${STRIPE_PRO_PLAN_YEARLY_PRICE_ID}
+          EOF
+
+      - name: Run database migrations
+        run: pnpm db:migrate
+
+      - name: Install Playwright browsers
+        run: pnpm --filter @kan/e2e exec playwright install --with-deps chromium
+
+      - name: Run e2e tests
+        run: pnpm test:e2e
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-report
+          path: packages/e2e/playwright-report/
+          retention-days: 7

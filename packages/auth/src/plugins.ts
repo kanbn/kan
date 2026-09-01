@@ -36,6 +36,7 @@ async function cancelWorkspaceAccess(
     const isPublicIdAvailable = await workspaceRepo.isWorkspaceSlugAvailable(
       db,
       workspace.publicId,
+      workspace.id,
     );
     if (!isPublicIdAvailable) {
       newSlug = generateUID();
@@ -170,6 +171,13 @@ export function createPlugins(db: dbClient) {
                 await cancelWorkspaceAccess(db, subscription.referenceId);
               },
               onSubscriptionUpdate: async ({ subscription }) => {
+                if (subscription.stripeSubscriptionId) {
+                  await subscriptionRepo.updateByStripeSubscriptionId(
+                    db,
+                    subscription.stripeSubscriptionId,
+                    { unlimitedSeats: subscription.plan === "pro" },
+                  );
+                }
                 await triggerWorkflow(db, "subscription-updated", subscription);
               },
             },

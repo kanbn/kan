@@ -21,6 +21,11 @@
     "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
     "lint:ws": "pnpm dlx sherif@latest",
     "postinstall": "pnpm lint:ws",
+    "test:e2e": "pnpm --filter @kan/e2e test",
+    "test:e2e:cloud": "pnpm --filter @kan/e2e test:cloud",
+    "test:e2e:self-hosted": "pnpm --filter @kan/e2e test:self-hosted",
+    "test:e2e:ui": "pnpm --filter @kan/e2e test:ui",
+    "test:e2e:ui:cloud": "pnpm --filter @kan/e2e test:ui:cloud",
     "typecheck": "turbo run typecheck",
     "ui-add": "turbo run ui-add"
   },
@@ -34,9 +39,20 @@
   "prettier": "@kan/prettier-config",
   "pnpm": {
     "supportedArchitectures": {
-      "os": ["linux", "current"],
-      "cpu": ["x64", "arm64", "current"],
-      "libc": ["glibc", "musl", "current"]
+      "os": [
+        "linux",
+        "current"
+      ],
+      "cpu": [
+        "x64",
+        "arm64",
+        "current"
+      ],
+      "libc": [
+        "glibc",
+        "musl",
+        "current"
+      ]
     },
     "overrides": {
       "@types/minimatch": "npm:minimatch@*",

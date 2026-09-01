@@ -558,6 +558,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
               <input
                 id="name"
                 type="text"
+                aria-label={t`Board name`}
                 {...register("name")}
                 onBlur={canEditBoard ? handleSubmit(onSubmit) : undefined}
                 readOnly={!canEditBoard}

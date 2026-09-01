@@ -379,7 +379,11 @@ export const workspaceRouter = createTRPCRouter({
           await workspaceSlugRepo.getWorkspaceSlug(ctx.db, input.slug);
 
         const isWorkspaceSlugAvailable =
-          await workspaceRepo.isWorkspaceSlugAvailable(ctx.db, input.slug);
+          await workspaceRepo.isWorkspaceSlugAvailable(
+            ctx.db,
+            input.slug,
+            workspace.id,
+          );
 
         if (
           env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
@@ -493,6 +497,7 @@ export const workspaceRouter = createTRPCRouter({
           .min(3)
           .max(64)
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
+        workspacePublicId: z.string().min(12).optional(),
       }),
     )
     .output(
@@ -517,9 +522,17 @@ export const workspaceRouter = createTRPCRouter({
         slug,
       );
 
+      const currentWorkspace = input.workspacePublicId
+        ? await workspaceRepo.getByPublicId(ctx.db, input.workspacePublicId)
+        : undefined;
+
       // check slug is not taken already
       const isWorkspaceSlugAvailable =
-        await workspaceRepo.isWorkspaceSlugAvailable(ctx.db, slug);
+        await workspaceRepo.isWorkspaceSlugAvailable(
+          ctx.db,
+          slug,
+          currentWorkspace?.id,
+        );
 
       const isAvailable =
         isWorkspaceSlugAvailable && workspaceSlug?.type !== "reserved";

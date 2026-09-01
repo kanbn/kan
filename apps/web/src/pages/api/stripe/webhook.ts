@@ -102,6 +102,34 @@ export default async function handler(
 
         break;
       }
+      case "customer.subscription.updated": {
+        const subscription = event.data.object;
+        const priceId = subscription.items.data[0]?.price.id;
+
+        if (!priceId) break;
+
+        const isTeamPrice = [
+          process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID,
+          process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID,
+        ].includes(priceId);
+        const isProPrice = [
+          process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID,
+          process.env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID,
+        ].includes(priceId);
+
+        if (!isTeamPrice && !isProPrice) break;
+
+        const plan = isTeamPrice ? "team" : ("pro" as const);
+
+        const subscriptionRow =
+          await subscriptionRepo.getByStripeSubscriptionId(db, subscription.id);
+
+        if (!subscriptionRow?.referenceId) break;
+
+        await workspaceRepo.update(db, subscriptionRow.referenceId, { plan });
+
+        break;
+      }
       default:
         log.warn({ eventType: event.type }, "Unhandled Stripe event type");
     }

@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
@@ -8,7 +9,6 @@ import { z } from "zod";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { useDebounce } from "~/hooks/useDebounce";
-import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
@@ -25,7 +25,7 @@ const UpdateWorkspaceUrlForm = ({
 }) => {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
-  const { openModal } = useModal();
+  const router = useRouter();
 
   const schema = z.object({
     slug: z
@@ -87,6 +87,7 @@ const UpdateWorkspaceUrlForm = ({
     api.workspace.checkSlugAvailability.useQuery(
       {
         workspaceSlug: debouncedSlug,
+        workspacePublicId,
       },
       {
         enabled:
@@ -100,7 +101,9 @@ const UpdateWorkspaceUrlForm = ({
     if (!isWorkspaceSlugAvailable?.isAvailable) return;
 
     if (workspacePlan !== "pro" && env("NEXT_PUBLIC_KAN_ENV") === "cloud")
-      return openModal("UPGRADE_TO_PRO", data.slug);
+      return router.push(
+        `/upgrade/select-plan?plan=pro&workspacePublicId=${workspacePublicId}&returnUrl=${encodeURIComponent("/settings/workspace")}`,
+      );
 
     updateWorkspaceSlug.mutate({
       workspacePublicId,
@@ -112,6 +115,7 @@ const UpdateWorkspaceUrlForm = ({
     <div className="flex gap-2">
       <div className="mb-4 flex w-full max-w-[325px] items-center gap-2">
         <Input
+          aria-label={t`Workspace URL`}
           {...register("slug")}
           className={`${
             isWorkspaceSlugAvailable?.isAvailable ||
