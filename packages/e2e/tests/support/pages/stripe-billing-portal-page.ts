@@ -24,6 +24,8 @@ export class StripeBillingPortalPage {
     await this.page.getByRole("link", { name: "Update subscription" }).click();
     await this.page.getByRole("button", { name: "Select" }).click();
     await this.page.getByRole("button", { name: "Continue" }).click();
-    await this.page.getByRole("button", { name: "Subscribe and pay" }).click();
+    await this.page
+      .getByRole("button", { name: /^(Confirm|Subscribe and pay)$/ })
+      .click();
   }
 }
