@@ -45,4 +45,18 @@ describe("middleware", () => {
       );
     },
   );
+
+  it("falls back to the request URL when the public URL is malformed", () => {
+    mockedEnv.mockImplementation((key) => {
+      if (key === "NEXT_PUBLIC_BASE_URL") return "kan.example.com";
+      if (key === "NEXT_PUBLIC_KAN_ENV") return "self-hosted";
+    });
+
+    const response = middleware(new NextRequest("http://localhost:3000/"));
+
+    expect(response.status).toBe(307);
+    expect(response.headers.get("location")).toBe(
+      "http://localhost:3000/login",
+    );
+  });
 });
