@@ -20,20 +20,18 @@
     },
     "comments": [],
     "origin": [["src/views/boards/index.tsx", 62]],
-    "translation": "{0}"
+    "translation": "{0}",
+    "obsolete": true
   },
   "JArWcF": {
     "message": "{0} | {1}",
     "placeholders": {
-      "0": [
-        "card?.title ?? t`Card`",
-        "isTemplate ? \"Templates\" : \"Boards\""
-      ],
+      "0": ["card?.title ?? t`Card`", "isTemplate ? t`Templates` : t`Boards`"],
       "1": ["board?.name ?? t`Board`", "workspace.name ?? t`Workspace`"]
     },
     "comments": [],
     "origin": [
-      ["src/views/boards/index.tsx", 57],
+      ["src/views/boards/index.tsx", 58],
       ["src/views/card/index.tsx", 321]
     ],
     "translation": "{0} | {1}"
@@ -220,7 +218,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/index.tsx", 30],
+      ["src/views/boards/index.tsx", 33],
       ["src/views/settings/components/NewWebhookModal.tsx", 321],
       ["src/views/settings/components/WebhookList.tsx", 106]
     ],
@@ -664,7 +662,7 @@
     "message": "Archived",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/index.tsx", 31]],
+    "origin": [["src/views/boards/index.tsx", 34]],
     "translation": "Gearchiveerd"
   },
   "lo8xBK": {
@@ -1017,6 +1015,8 @@
     "comments": [],
     "origin": [
       ["src/components/SideNavigation.tsx", 98],
+      ["src/views/boards/index.tsx", 58],
+      ["src/views/boards/index.tsx", 63],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 73]
     ],
     "translation": "Boards"
@@ -1899,7 +1899,7 @@
     "comments": [],
     "origin": [
       ["src/views/boards/components/BoardsList.tsx", 80],
-      ["src/views/boards/index.tsx", 45]
+      ["src/views/boards/index.tsx", 46]
     ],
     "translation": "Maak nieuwe {0}"
   },
@@ -3394,7 +3394,7 @@
     "message": "Import",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/index.tsx", 82]],
+    "origin": [["src/views/boards/index.tsx", 83]],
     "translation": "Importeren"
   },
   "2MPcep": {
@@ -4102,7 +4102,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/index.tsx", 104],
+      ["src/views/boards/index.tsx", 105],
       ["src/views/home/components/Features.tsx", 73]
     ],
     "translation": "Nieuw"
@@ -5780,6 +5780,8 @@
     "comments": [],
     "origin": [
       ["src/components/SideNavigation.tsx", 110],
+      ["src/views/boards/index.tsx", 58],
+      ["src/views/boards/index.tsx", 63],
       ["src/views/home/components/Features.tsx", 115]
     ],
     "translation": "Sjablonen"
@@ -7043,7 +7045,7 @@
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
       ["src/views/board/index.tsx", 543],
-      ["src/views/boards/index.tsx", 57],
+      ["src/views/boards/index.tsx", 58],
       ["src/views/members/index.tsx", 278],
       ["src/views/public/board/index.tsx", 125],
       ["src/views/public/boards/index.tsx", 75]
@@ -7275,8 +7277,8 @@
       ["src/views/board/index.tsx", 617],
       ["src/views/board/index.tsx", 675],
       ["src/views/boards/components/BoardsList.tsx", 71],
-      ["src/views/boards/index.tsx", 68],
-      ["src/views/boards/index.tsx", 89]
+      ["src/views/boards/index.tsx", 69],
+      ["src/views/boards/index.tsx", 90]
     ],
     "translation": "Je hebt geen toestemming"
   },

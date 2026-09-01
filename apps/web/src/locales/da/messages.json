@@ -37,14 +37,15 @@
         62
       ]
     ],
-    "translation": "{0}"
+    "translation": "{0}",
+    "obsolete": true
   },
   "JArWcF": {
     "message": "{0} | {1}",
     "placeholders": {
       "0": [
         "card?.title ?? t`Card`",
-        "isTemplate ? \"Templates\" : \"Boards\""
+        "isTemplate ? t`Templates` : t`Boards`"
       ],
       "1": [
         "board?.name ?? t`Board`",
@@ -55,7 +56,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        57
+        58
       ],
       [
         "src/views/card/index.tsx",
@@ -371,7 +372,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        30
+        33
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
@@ -1121,7 +1122,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        31
+        34
       ]
     ],
     "translation": "Arkiveret"
@@ -1698,6 +1699,14 @@
       [
         "src/components/SideNavigation.tsx",
         98
+      ],
+      [
+        "src/views/boards/index.tsx",
+        58
+      ],
+      [
+        "src/views/boards/index.tsx",
+        63
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -3169,7 +3178,7 @@
       ],
       [
         "src/views/boards/index.tsx",
-        45
+        46
       ]
     ],
     "translation": "Opret ny {0}"
@@ -5657,7 +5666,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        82
+        83
       ]
     ],
     "translation": "Importér"
@@ -6840,7 +6849,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        104
+        105
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -9770,6 +9779,14 @@
         110
       ],
       [
+        "src/views/boards/index.tsx",
+        58
+      ],
+      [
+        "src/views/boards/index.tsx",
+        63
+      ],
+      [
         "src/views/home/components/Features.tsx",
         115
       ]
@@ -11854,7 +11871,7 @@
       ],
       [
         "src/views/boards/index.tsx",
-        57
+        58
       ],
       [
         "src/views/members/index.tsx",
@@ -12230,11 +12247,11 @@
       ],
       [
         "src/views/boards/index.tsx",
-        68
+        69
       ],
       [
         "src/views/boards/index.tsx",
-        89
+        90
       ]
     ],
     "translation": "Du har ikke tilladelse"
