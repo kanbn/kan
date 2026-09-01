@@ -26,7 +26,7 @@
   "JArWcF": {
     "message": "{0} | {1}",
     "placeholders": {
-      "0": ["card?.title ?? t`Card`", "isTemplate ? t`Шаблоны` : t`Доски`"],
+      "0": ["card?.title ?? t`Card`", "isTemplate ? t`Templates` : t`Boards`"],
       "1": ["board?.name ?? t`Board`", "workspace.name ?? t`Workspace`"]
     },
     "comments": [],
