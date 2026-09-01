@@ -177,15 +177,21 @@ export const create = async (
  *
  * A card's board is not a property of the card, it is a property of whatever
  * list its listId currently points at, and card.update can repoint that. So the
- * check and the insert run in one transaction with the card rows locked
- * (FOR UPDATE OF card): a concurrent move blocks until this commits, rather
- * than sliding the board out from under a check that already passed.
+ * check and the insert run in one transaction with the CARD rows locked
+ * (FOR UPDATE OF card): a concurrent card move blocks until this commits.
+ *
+ * Scope of that lock, stated rather than implied: it covers card.listId
+ * changing. It does NOT lock lists, so it would not stop a writer that
+ * retargeted a list to another board without touching the card row. Nothing
+ * mutates lists.boardId today, so that path does not exist yet.
  *
  * Throws on any mismatch rather than filtering. A caller wanting a subset must
  * select it before calling, so a drop is a decision rather than a side effect.
  */
+type DbTransaction = Parameters<Parameters<dbClient["transaction"]>[0]>[0];
+
 export const assertCardLabelBoardsMatch = async (
-  tx: Pick<dbClient, "select">,
+  tx: DbTransaction,
   pairs: { cardId: number; labelId: number }[],
 ) => {
   {

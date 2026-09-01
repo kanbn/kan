@@ -85,7 +85,11 @@ export const cardRouter = createTRPCRouter({
         ? await labelRepo.getAllByPublicIds(ctx.db, input.labelPublicIds)
         : [];
 
-      if (input.labelPublicIds.length && !labelsToLink.length)
+      // Every requested label must resolve. Accepting a subset would create the
+      // card holding fewer labels than asked for, and report success.
+      const requestedLabelIds = [...new Set(input.labelPublicIds)];
+
+      if (labelsToLink.length !== requestedLabelIds.length)
         throw new TRPCError({
           message: `Labels with public IDs (${input.labelPublicIds.join(", ")}) not found`,
           code: "NOT_FOUND",
@@ -1292,6 +1296,28 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
+      // Checked before the card exists. cardRepo.create opens its own
+      // transaction, so the router cannot roll it back: a refusal after this
+      // point leaves a duplicate behind, and the caller retrying as the error
+      // message suggests would make a second one.
+      const sourceLabels = sourceCard.labels ?? [];
+      const sourceLabelRecords = input.copyLabels && sourceLabels.length
+        ? await labelRepo.getAllByPublicIds(
+            ctx.db,
+            sourceLabels.map((label) => label.publicId),
+          )
+        : [];
+
+      if (
+        sourceLabelRecords.some(
+          (label) => label.boardId !== targetList.boardId,
+        )
+      )
+        throw new TRPCError({
+          message: `Cannot copy labels to a list on a different board. Labels belong to a board, so duplicate with copyLabels: false when the target list is on another board.`,
+          code: "BAD_REQUEST",
+        });
+
       const newCard = await cardRepo.create(ctx.db, {
         title: input.title ?? sourceCard.title,
         description: sourceCard.description ?? "",
@@ -1310,29 +1336,8 @@ export const cardRouter = createTRPCRouter({
         });
       }
 
-      if (input.copyLabels && sourceCard.labels?.length) {
-        const labelPublicIds = sourceCard.labels.map((l) => l.publicId);
-        const labels = await labelRepo.getAllByPublicIds(
-          ctx.db,
-          labelPublicIds,
-        );
-        // The labels were loaded from the SOURCE card, so they all carry the
-        // source board. Filtering them against the destination board would
-        // therefore keep everything on a same-board copy and nothing on a
-        // cross-board one, making copyLabels a silent no-op that still reports
-        // success. Refuse instead, and say why: transferring labels across
-        // boards needs a rule (match by name, recreate, drop) that does not
-        // exist yet.
-        const labelsFromAnotherBoard = labels.filter(
-          (label) => label.boardId !== targetList.boardId,
-        );
-
-        if (labelsFromAnotherBoard.length)
-          throw new TRPCError({
-            message: `Cannot copy labels to a list on a different board. Labels belong to a board, so duplicate with copyLabels: false when the target list is on another board.`,
-            code: "BAD_REQUEST",
-          });
-
+      if (input.copyLabels && sourceLabelRecords.length) {
+        const labels = sourceLabelRecords;
         if (labels.length) {
           const labelsInsert = labels.map((label) => ({
             cardId: newCard.id,
