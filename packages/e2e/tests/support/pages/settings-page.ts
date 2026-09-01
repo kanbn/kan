@@ -52,6 +52,12 @@ export class SettingsPage {
     await this.page.waitForURL(/\/upgrade\/select-plan/);
   }
 
+  getWorkspaceSlugValue() {
+    return this.page
+      .getByRole("textbox", { name: "Workspace URL" })
+      .inputValue();
+  }
+
   async createApiKey(name: string) {
     await this.page.getByRole("button", { name: "Create new key" }).click();
     await this.page.getByPlaceholder("API key name").fill(name);

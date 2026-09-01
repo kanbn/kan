@@ -87,6 +87,7 @@ const UpdateWorkspaceUrlForm = ({
     api.workspace.checkSlugAvailability.useQuery(
       {
         workspaceSlug: debouncedSlug,
+        workspacePublicId,
       },
       {
         enabled:

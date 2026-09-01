@@ -70,6 +70,12 @@ test(
     await page.reload();
     await settings.open();
     await settings.goToTab("Workspace");
+
+    const workspacePublicId = await page.evaluate(() =>
+      localStorage.getItem("workspacePublicId"),
+    );
+    expect(await settings.getWorkspaceSlugValue()).toBe(workspacePublicId);
+
     await settings.attemptWorkspaceSlugUpdate(`e2e-blocked-slug-${Date.now()}`);
     await expect(page).toHaveURL(/\/upgrade\/select-plan\?.*plan=pro/);
 

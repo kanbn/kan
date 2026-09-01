@@ -7,6 +7,7 @@ import {
   ilike,
   inArray,
   isNull,
+  ne,
   or,
   sql,
 } from "drizzle-orm";
@@ -356,14 +357,24 @@ export const hardDelete = (db: dbClient, workspacePublicId: string) => {
 export const isWorkspaceSlugAvailable = async (
   db: dbClient,
   workspaceSlug: string,
+  excludeWorkspaceId?: number,
 ) => {
   const result = await db.query.workspaces.findFirst({
     columns: {
       id: true,
     },
     where: and(
-      eq(workspaces.slug, workspaceSlug),
       isNull(workspaces.deletedAt),
+      or(
+        eq(workspaces.slug, workspaceSlug),
+        // A workspace's own publicId is always reserved for itself as a
+        // slug (that's what it falls back to when it has no custom slug),
+        // so no other workspace may claim it as a custom slug either.
+        and(
+          eq(workspaces.publicId, workspaceSlug),
+          excludeWorkspaceId ? ne(workspaces.id, excludeWorkspaceId) : undefined,
+        ),
+      ),
     ),
   });
 
