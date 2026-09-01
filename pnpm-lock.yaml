@@ -545,6 +545,9 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@25.0.0)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1)
 
   packages/shared:
     dependencies:

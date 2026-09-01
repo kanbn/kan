@@ -16,6 +16,7 @@
   "scripts": {
     "build": "tsc --noEmit false --declaration false --emitDeclarationOnly false --outDir dist",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@kan/tsconfig": "workspace:*",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "^3.0.0"
   }
 }
