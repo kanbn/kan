@@ -50,4 +50,18 @@ export class MembersPage {
     await row.getByRole("combobox").selectOption(role);
     await updated;
   }
+
+  async removeMember(memberEmail: string) {
+    const row = this.page.getByRole("row", { name: new RegExp(memberEmail) });
+    await row
+      .getByRole("button", { name: "Member options", exact: true })
+      .click();
+    await this.page.getByRole("menuitem", { name: "Remove member" }).click();
+
+    const removed = waitForTrpcMutation(this.page, "member.delete");
+    await this.page
+      .getByRole("button", { name: "Remove", exact: true })
+      .click();
+    await removed;
+  }
 }

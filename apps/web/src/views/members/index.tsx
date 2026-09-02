@@ -259,6 +259,7 @@ export default function MembersPage() {
                         ),
                     },
                   ]}
+                  ariaLabel={t`Member options`}
                 >
                   <HiEllipsisHorizontal
                     size={20}
