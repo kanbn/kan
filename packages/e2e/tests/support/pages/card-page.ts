@@ -41,4 +41,25 @@ export class CardPage {
       .getByRole("button", { name: "Delete", exact: true })
       .click();
   }
+
+  private labelSelectorTrigger() {
+    return this.page.locator('[aria-label="Labels"]').filter({ visible: true });
+  }
+
+  assignedLabelBadge(name: string) {
+    return this.labelSelectorTrigger().getByText(name, { exact: true }).last();
+  }
+
+  async createAndAssignLabel(name: string) {
+    await this.labelSelectorTrigger().click();
+    await this.page.getByRole("button", { name: "Create new label" }).click();
+
+    const dialog = this.page.getByRole("dialog");
+    await dialog.getByPlaceholder("Name").fill(name);
+    const created = waitForTrpcMutation(this.page, "label.create");
+    const assigned = waitForTrpcMutation(this.page, "card.addOrRemoveLabel");
+    await dialog.getByRole("button", { name: "Create label" }).click();
+    await created;
+    await assigned;
+  }
 }

@@ -1,6 +1,8 @@
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 
+import { waitForTrpcMutation } from "../wait-for-trpc";
+
 export class MembersPage {
   constructor(private readonly page: Page) {}
 
@@ -27,5 +29,12 @@ export class MembersPage {
     await expect(this.page.getByRole("dialog")).toHaveCount(0);
 
     return link;
+  }
+
+  async changeRole(memberEmail: string, role: "admin" | "member" | "guest") {
+    const row = this.page.getByRole("row", { name: new RegExp(memberEmail) });
+    const updated = waitForTrpcMutation(this.page, "member.updateRole");
+    await row.getByRole("combobox").selectOption(role);
+    await updated;
   }
 }
