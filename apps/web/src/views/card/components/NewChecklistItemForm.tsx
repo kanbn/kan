@@ -56,11 +56,12 @@ const NewChecklistItemForm = ({
     onMutate: async (vars) => {
       await utils.card.byId.cancel({ cardPublicId });
       const previous = utils.card.byId.getData({ cardPublicId });
+      const optimisticPublicId = `PLACEHOLDER_${generateUID()}`;
 
       utils.card.byId.setData({ cardPublicId }, (old) => {
         if (!old) return old as any;
         const placeholder = {
-          publicId: `PLACEHOLDER_${generateUID()}`,
+          publicId: optimisticPublicId,
           title: vars.title,
           completed: false,
         };
@@ -80,7 +81,22 @@ const NewChecklistItemForm = ({
         onCancel();
       }
 
-      return { previous };
+      return { previous, optimisticPublicId };
+    },
+    onSuccess: (result, _vars, context) => {
+      if (!context) return;
+      utils.card.byId.setData({ cardPublicId }, (old) => {
+        if (!old) return old as any;
+        const updatedChecklists = old.checklists.map((cl) => ({
+          ...cl,
+          items: cl.items.map((item) =>
+            item.publicId === context.optimisticPublicId
+              ? { ...item, publicId: result.publicId }
+              : item,
+          ),
+        }));
+        return { ...old, checklists: updatedChecklists } as typeof old;
+      });
     },
     onError: (_err, _vars, ctx) => {
       if (ctx?.previous)

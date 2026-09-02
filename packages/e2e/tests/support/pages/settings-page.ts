@@ -75,4 +75,75 @@ export class SettingsPage {
     await this.page.getByRole("checkbox").check();
     await this.page.getByRole("button", { name: "Revoke API key" }).click();
   }
+
+  async createWebhook(name: string, url: string) {
+    await this.page.getByRole("button", { name: "Add webhook" }).click();
+
+    const dialog = this.page.getByRole("dialog");
+    await dialog.getByPlaceholder("My webhook").fill(name);
+    await dialog.getByPlaceholder("https://example.com/webhook").fill(url);
+
+    const created = waitForTrpcMutation(this.page, "webhook.create");
+    await dialog.getByRole("button", { name: "Create webhook" }).click();
+    await created;
+
+    await expect(dialog).toHaveCount(0);
+  }
+
+  async deleteWebhook() {
+    await this.page
+      .getByRole("button", { name: "Webhook options", exact: true })
+      .click();
+    await this.page.getByRole("menuitem", { name: "Delete" }).click();
+
+    const deleted = waitForTrpcMutation(this.page, "webhook.delete");
+    await this.page
+      .getByRole("button", { name: "Delete", exact: true })
+      .click();
+    await deleted;
+  }
+
+  private rolePermissionCheckbox(
+    permissionLabel: string,
+    role: "member" | "guest",
+  ) {
+    return this.page
+      .getByRole("row", { name: permissionLabel })
+      .getByRole("checkbox")
+      .nth(role === "member" ? 1 : 2);
+  }
+
+  async setRolePermission(
+    permissionLabel: string,
+    role: "member" | "guest",
+    enabled: boolean,
+  ) {
+    const updated = waitForTrpcMutation(
+      this.page,
+      enabled
+        ? "permission.grantRolePermission"
+        : "permission.revokeRolePermission",
+    );
+    await this.rolePermissionCheckbox(permissionLabel, role).click();
+    await updated;
+  }
+
+  isRolePermissionChecked(permissionLabel: string, role: "member" | "guest") {
+    return this.rolePermissionCheckbox(permissionLabel, role).isChecked();
+  }
+
+  async deleteWorkspace() {
+    await this.page
+      .getByRole("button", { name: "Delete workspace", exact: true })
+      .click();
+
+    const dialog = this.page.getByRole("dialog");
+    await dialog.getByRole("checkbox").check();
+
+    const deleted = waitForTrpcMutation(this.page, "workspace.delete");
+    await dialog
+      .getByRole("button", { name: "Delete workspace", exact: true })
+      .click();
+    await deleted;
+  }
 }
