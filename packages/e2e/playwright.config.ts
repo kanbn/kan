@@ -25,7 +25,7 @@ const mailpitHttpPort = process.env.MAILPIT_HTTP_PORT ?? "8025";
 const sharedEnv = {
   DISABLE_RATE_LIMIT: "true",
   NEXT_PUBLIC_DISABLE_EMAIL: "false",
-  SMTP_HOST: "localhost",
+  SMTP_HOST: "127.0.0.1",
   SMTP_PORT: mailpitSmtpPort,
   SMTP_USER: "",
   SMTP_PASSWORD: "",
@@ -119,7 +119,7 @@ export default defineConfig({
           : [
               {
                 command: `mailpit --smtp 0.0.0.0:${mailpitSmtpPort} --listen 0.0.0.0:${mailpitHttpPort}`,
-                url: `http://localhost:${mailpitHttpPort}/api/v1/info`,
+                url: `http://127.0.0.1:${mailpitHttpPort}/api/v1/info`,
                 reuseExistingServer: true,
                 timeout: 30_000,
               },

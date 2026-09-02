@@ -1,4 +1,4 @@
-const mailpitBaseUrl = `http://localhost:${process.env.MAILPIT_HTTP_PORT ?? "8025"}`;
+const mailpitBaseUrl = `http://127.0.0.1:${process.env.MAILPIT_HTTP_PORT ?? "8025"}`;
 
 interface MailpitMessageSummary {
   ID: string;
