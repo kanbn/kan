@@ -102,4 +102,33 @@ export class SettingsPage {
       .click();
     await deleted;
   }
+
+  private rolePermissionCheckbox(
+    permissionLabel: string,
+    role: "member" | "guest",
+  ) {
+    return this.page
+      .getByRole("row", { name: permissionLabel })
+      .getByRole("checkbox")
+      .nth(role === "member" ? 1 : 2);
+  }
+
+  async setRolePermission(
+    permissionLabel: string,
+    role: "member" | "guest",
+    enabled: boolean,
+  ) {
+    const updated = waitForTrpcMutation(
+      this.page,
+      enabled
+        ? "permission.grantRolePermission"
+        : "permission.revokeRolePermission",
+    );
+    await this.rolePermissionCheckbox(permissionLabel, role).click();
+    await updated;
+  }
+
+  isRolePermissionChecked(permissionLabel: string, role: "member" | "guest") {
+    return this.rolePermissionCheckbox(permissionLabel, role).isChecked();
+  }
 }
