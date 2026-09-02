@@ -19,7 +19,18 @@ function resolveStripeListenSecret(apiKey: string): string | undefined {
   }
 }
 
-const sharedEnv = { DISABLE_RATE_LIMIT: "true" };
+const mailpitSmtpPort = process.env.MAILPIT_SMTP_PORT ?? "1025";
+const mailpitHttpPort = process.env.MAILPIT_HTTP_PORT ?? "8025";
+
+const sharedEnv = {
+  DISABLE_RATE_LIMIT: "true",
+  NEXT_PUBLIC_DISABLE_EMAIL: "false",
+  SMTP_HOST: "localhost",
+  SMTP_PORT: mailpitSmtpPort,
+  SMTP_USER: "",
+  SMTP_PASSWORD: "",
+  SMTP_SECURE: "false",
+};
 
 const realStripeSecretKey =
   process.env.E2E_MODE === "cloud" &&
@@ -102,17 +113,29 @@ export default defineConfig({
   ],
   webServer: remoteBaseURL
     ? undefined
-    : {
-        command: `pnpm --filter @kan/web build && pnpm --filter @kan/web with-env next start -p ${port}`,
-        cwd: "../..",
-        url: baseURL,
-        reuseExistingServer: !process.env.CI,
-        timeout: 180_000,
-        env: {
-          NEXT_PUBLIC_BASE_URL: baseURL,
-          NEXT_PUBLIC_USE_STANDALONE_OUTPUT: "",
-          ...sharedEnv,
-          ...modeEnv,
+    : [
+        ...(process.env.CI
+          ? []
+          : [
+              {
+                command: `mailpit --smtp 0.0.0.0:${mailpitSmtpPort} --listen 0.0.0.0:${mailpitHttpPort}`,
+                url: `http://localhost:${mailpitHttpPort}/api/v1/info`,
+                reuseExistingServer: true,
+                timeout: 30_000,
+              },
+            ]),
+        {
+          command: `pnpm --filter @kan/web build && pnpm --filter @kan/web with-env next start -p ${port}`,
+          cwd: "../..",
+          url: baseURL,
+          reuseExistingServer: !process.env.CI,
+          timeout: 180_000,
+          env: {
+            NEXT_PUBLIC_BASE_URL: baseURL,
+            NEXT_PUBLIC_USE_STANDALONE_OUTPUT: "",
+            ...sharedEnv,
+            ...modeEnv,
+          },
         },
-      },
+      ],
 });

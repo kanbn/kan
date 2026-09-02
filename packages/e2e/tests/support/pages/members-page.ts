@@ -31,6 +31,19 @@ export class MembersPage {
     return link;
   }
 
+  async inviteByEmail(email: string) {
+    await this.openInviteModal();
+
+    const dialog = this.page.getByRole("dialog");
+    await dialog.getByPlaceholder("Email").fill(email);
+
+    const invited = waitForTrpcMutation(this.page, "member.invite");
+    await dialog.getByRole("button", { name: "Invite member" }).click();
+    await invited;
+
+    await expect(dialog).toHaveCount(0);
+  }
+
   async changeRole(memberEmail: string, role: "admin" | "member" | "guest") {
     const row = this.page.getByRole("row", { name: new RegExp(memberEmail) });
     const updated = waitForTrpcMutation(this.page, "member.updateRole");
