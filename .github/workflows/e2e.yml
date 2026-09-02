@@ -70,6 +70,11 @@ jobs:
       - name: Install Stripe CLI
         run: npm install -g @stripe/cli
 
+      - name: Install MinIO
+        run: |
+          curl -fsSL https://dl.min.io/server/minio/release/linux-amd64/minio -o /usr/local/bin/minio
+          chmod +x /usr/local/bin/minio
+
       - name: Write .env for CI
         run: |
           cat > .env <<EOF

@@ -1,7 +1,7 @@
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 
-import { waitForTrpcMutation } from "../wait-for-trpc";
+import { waitForResponsePath, waitForTrpcMutation } from "../wait-for-trpc";
 
 export class CardPage {
   constructor(private readonly page: Page) {}
@@ -61,5 +61,17 @@ export class CardPage {
     await dialog.getByRole("button", { name: "Create label" }).click();
     await created;
     await assigned;
+  }
+
+  async uploadAttachment(filePath: string) {
+    const uploaded = waitForResponsePath(this.page, "/api/upload/attachment");
+    await this.page.setInputFiles("#attachment-upload", filePath);
+    await uploaded;
+  }
+
+  async deleteAttachment(filename: string) {
+    const deleted = waitForTrpcMutation(this.page, "attachment.delete");
+    await this.page.getByRole("button", { name: `Delete ${filename}` }).click();
+    await deleted;
   }
 }

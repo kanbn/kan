@@ -22,6 +22,12 @@ function resolveStripeListenSecret(apiKey: string): string | undefined {
 const mailpitSmtpPort = process.env.MAILPIT_SMTP_PORT ?? "1025";
 const mailpitHttpPort = process.env.MAILPIT_HTTP_PORT ?? "8025";
 const trelloMockPort = process.env.TRELLO_MOCK_PORT ?? "4025";
+const minioPort = process.env.MINIO_PORT ?? "9500";
+const minioConsolePort = process.env.MINIO_CONSOLE_PORT ?? "9501";
+const minioRootUser = process.env.MINIO_ROOT_USER ?? "minioadmin";
+const minioRootPassword = process.env.MINIO_ROOT_PASSWORD ?? "minioadmin";
+const attachmentsBucket =
+  process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME ?? "e2e-attachments";
 
 const sharedEnv = {
   DISABLE_RATE_LIMIT: "true",
@@ -33,6 +39,12 @@ const sharedEnv = {
   SMTP_SECURE: "false",
   TRELLO_API_URL: `http://127.0.0.1:${trelloMockPort}`,
   TRELLO_APP_API_KEY: "e2e-mock-trello-key",
+  S3_REGION: "us-east-1",
+  S3_ENDPOINT: `http://127.0.0.1:${minioPort}`,
+  S3_ACCESS_KEY_ID: minioRootUser,
+  S3_SECRET_ACCESS_KEY: minioRootPassword,
+  S3_FORCE_PATH_STYLE: "true",
+  NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME: attachmentsBucket,
 };
 
 const realStripeSecretKey =
@@ -97,6 +109,7 @@ const remoteBaseURL = process.env.PLAYWRIGHT_BASE_URL;
 const baseURL = remoteBaseURL ?? `http://localhost:${port}`;
 
 export default defineConfig({
+  globalSetup: "./tests/support/global-setup.ts",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 1,
@@ -133,6 +146,16 @@ export default defineConfig({
           reuseExistingServer: true,
           timeout: 10_000,
           env: { TRELLO_MOCK_PORT: trelloMockPort },
+        },
+        {
+          command: `minio server /tmp/kan-e2e-minio-data --address :${minioPort} --console-address :${minioConsolePort}`,
+          url: `http://127.0.0.1:${minioPort}/minio/health/live`,
+          reuseExistingServer: true,
+          timeout: 30_000,
+          env: {
+            MINIO_ROOT_USER: minioRootUser,
+            MINIO_ROOT_PASSWORD: minioRootPassword,
+          },
         },
         {
           command: `pnpm --filter @kan/web build && pnpm --filter @kan/web with-env next start -p ${port}`,
