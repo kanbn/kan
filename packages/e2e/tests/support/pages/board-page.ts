@@ -101,6 +101,21 @@ export class BoardPage {
     await this.page.waitForURL(/\/boards$/);
   }
 
+  async makeTemplate() {
+    await this.page
+      .getByRole("button", { name: "Board options", exact: true })
+      .click();
+    await this.page.getByRole("menuitem", { name: "Make template" }).click();
+
+    const dialog = this.page.getByRole("dialog");
+    const created = waitForTrpcMutation(this.page, "board.create");
+    await dialog
+      .getByRole("button", { name: "Create template", exact: true })
+      .click();
+    await created;
+    await this.page.waitForURL(/\/templates\/[^/]+$/);
+  }
+
   async updateBoardSlug(newSlug: string) {
     await this.page
       .getByRole("button", { name: "Board options", exact: true })

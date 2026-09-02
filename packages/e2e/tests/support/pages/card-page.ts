@@ -11,6 +11,16 @@ export class CardPage {
     await titleInput.fill(title);
     await titleInput.blur();
   }
+
+  async editDescription(text: string) {
+    const editor = this.page.locator('.tiptap[contenteditable="true"]').first();
+    await editor.click();
+    await editor.pressSequentially(text);
+
+    const updated = waitForTrpcMutation(this.page, "card.update");
+    await this.page.locator("#title").click();
+    await updated;
+  }
   private currentListTrigger() {
     return this.page
       .locator('[aria-label="Current list"]')

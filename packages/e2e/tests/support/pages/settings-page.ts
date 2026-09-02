@@ -131,4 +131,19 @@ export class SettingsPage {
   isRolePermissionChecked(permissionLabel: string, role: "member" | "guest") {
     return this.rolePermissionCheckbox(permissionLabel, role).isChecked();
   }
+
+  async deleteWorkspace() {
+    await this.page
+      .getByRole("button", { name: "Delete workspace", exact: true })
+      .click();
+
+    const dialog = this.page.getByRole("dialog");
+    await dialog.getByRole("checkbox").check();
+
+    const deleted = waitForTrpcMutation(this.page, "workspace.delete");
+    await dialog
+      .getByRole("button", { name: "Delete workspace", exact: true })
+      .click();
+    await deleted;
+  }
 }
