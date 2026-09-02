@@ -10,14 +10,17 @@ import * as integrationsRepo from "@kan/db/repository/integration.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { createLogger } from "@kan/logger";
 import { colours } from "@kan/shared/constants";
 import { generateSlug, generateUID } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertPermission } from "../utils/permissions";
 import { assertUserInWorkspace } from "../utils/auth";
 import { decryptToken } from "../utils/encryption";
+import { assertPermission } from "../utils/permissions";
 import { apiKeys, urls } from "./integration";
+
+const log = createLogger("import");
 
 export interface TrelloBoard {
   id: string;
@@ -163,6 +166,17 @@ export const importRouter = createTRPCRouter({
           `${urls.trello}/members/me/boards?key=${apiKey}&token=${token}`,
         );
 
+        if (!response.ok) {
+          log.error(
+            { status: response.status },
+            "Failed to fetch Trello boards",
+          );
+          throw new TRPCError({
+            message: "Failed to fetch boards from Trello",
+            code: "INTERNAL_SERVER_ERROR",
+          });
+        }
+
         const data = (await response.json()) as TrelloBoard[];
 
         return data.map((board) => ({
@@ -236,12 +250,17 @@ export const importRouter = createTRPCRouter({
 
         const newImportId = newImport?.id;
 
-        let boardsCreated = 0;
-
-        for (const boardId of input.boardIds) {
+        const importSingleBoard = async (boardId: string): Promise<void> => {
           const response = await fetch(
             `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${integration.accessToken}&lists=open&cards=open&labels=all&checklists=all&checkItemStates=all`,
           );
+
+          if (!response.ok) {
+            throw new Error(
+              `Trello returned ${response.status} for board ${boardId}`,
+            );
+          }
+
           const data = (await response.json()) as TrelloBoard;
 
           const formattedData = {
@@ -497,16 +516,45 @@ export const importRouter = createTRPCRouter({
               }
             }
           }
+        };
 
-          boardsCreated++;
+        const results = await Promise.allSettled(
+          input.boardIds.map((boardId) => importSingleBoard(boardId)),
+        );
+
+        const boardsCreated = results.filter(
+          (result) => result.status === "fulfilled",
+        ).length;
+
+        const failures = results.filter(
+          (result): result is PromiseRejectedResult =>
+            result.status === "rejected",
+        );
+
+        if (failures.length > 0) {
+          log.error(
+            {
+              importId: newImportId,
+              failedCount: failures.length,
+              errors: failures.map((failure) => String(failure.reason)),
+            },
+            "Some Trello boards failed to import",
+          );
         }
 
-        if (boardsCreated > 0 && newImportId) {
+        if (newImportId) {
           await importRepo.update(
             ctx.db,
-            { status: "success" },
-            { importId: newImport.id },
+            { status: boardsCreated > 0 ? "success" : "failed" },
+            { importId: newImportId },
           );
+        }
+
+        if (boardsCreated === 0) {
+          throw new TRPCError({
+            message: "Failed to import any boards from Trello",
+            code: "INTERNAL_SERVER_ERROR",
+          });
         }
 
         return { boardsCreated };

@@ -21,6 +21,7 @@ function resolveStripeListenSecret(apiKey: string): string | undefined {
 
 const mailpitSmtpPort = process.env.MAILPIT_SMTP_PORT ?? "1025";
 const mailpitHttpPort = process.env.MAILPIT_HTTP_PORT ?? "8025";
+const trelloMockPort = process.env.TRELLO_MOCK_PORT ?? "4025";
 
 const sharedEnv = {
   DISABLE_RATE_LIMIT: "true",
@@ -30,6 +31,8 @@ const sharedEnv = {
   SMTP_USER: "",
   SMTP_PASSWORD: "",
   SMTP_SECURE: "false",
+  TRELLO_API_URL: `http://127.0.0.1:${trelloMockPort}`,
+  TRELLO_APP_API_KEY: "e2e-mock-trello-key",
 };
 
 const realStripeSecretKey =
@@ -124,6 +127,13 @@ export default defineConfig({
                 timeout: 30_000,
               },
             ]),
+        {
+          command: "node tests/support/trello-mock-server.js",
+          url: `http://127.0.0.1:${trelloMockPort}/health`,
+          reuseExistingServer: true,
+          timeout: 10_000,
+          env: { TRELLO_MOCK_PORT: trelloMockPort },
+        },
         {
           command: `pnpm --filter @kan/web build && pnpm --filter @kan/web with-env next start -p ${port}`,
           cwd: "../..",
