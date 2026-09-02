@@ -380,7 +380,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        106
+        104
       ]
     ],
     "translation": "Aktiv"
@@ -456,13 +456,12 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        141
+        157
       ]
     ],
     "translation": "Tilføj et punkt..."
   },
   "sFY+gw": {
-    "translation": "",
     "message": "Add card",
     "placeholders": {},
     "comments": [],
@@ -471,7 +470,8 @@
         "src/views/board/components/List.tsx",
         125
       ]
-    ]
+    ],
+    "translation": ""
   },
   "Gxxi5J": {
     "message": "Add checklist",
@@ -479,11 +479,27 @@
     "comments": [],
     "origin": [
       [
+        "src/views/card/components/AttachmentUpload.tsx",
+        124
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         123
       ]
     ],
     "translation": "Tilføj tjekliste"
+  },
+  "oqKXo7": {
+    "translation": "",
+    "message": "Add checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/Checklists.tsx",
+        154
+      ]
+    ]
   },
   "ngBZOd": {
     "message": "Add comment... (type '/' to open commands or '@' to mention)",
@@ -532,11 +548,11 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        114
+        115
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        119
+        120
       ]
     ],
     "translation": "Tilføj etiket"
@@ -548,7 +564,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        135
+        138
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -1565,7 +1581,6 @@
     "translation": "Tavle flyttet"
   },
   "qVcPNk": {
-    "translation": "",
     "message": "Board name",
     "placeholders": {},
     "comments": [],
@@ -1574,7 +1589,8 @@
         "src/views/board/index.tsx",
         561
       ]
-    ]
+    ],
+    "translation": ""
   },
   "wewm3j": {
     "message": "Board name cannot exceed 100 characters",
@@ -1613,7 +1629,6 @@
     "translation": "Tavlen blev ikke fundet"
   },
   "Mu1Zy/": {
-    "translation": "",
     "message": "Board options",
     "placeholders": {},
     "comments": [],
@@ -1622,7 +1637,8 @@
         "src/views/board/components/BoardDropdown.tsx",
         167
       ]
-    ]
+    ],
+    "translation": ""
   },
   "XNxYxq": {
     "message": "Board templates",
@@ -2329,7 +2345,6 @@
     "translation": "Kortet blev ikke fundet"
   },
   "c44pvY": {
-    "translation": "",
     "message": "Card options",
     "placeholders": {},
     "comments": [],
@@ -2338,7 +2353,8 @@
         "src/views/card/components/Dropdown.tsx",
         167
       ]
-    ]
+    ],
+    "translation": ""
   },
   "ZH7TVS": {
     "message": "Card title",
@@ -2479,7 +2495,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        119
+        130
       ]
     ],
     "translation": "Navn på tjekliste"
@@ -2671,6 +2687,18 @@
       ]
     ],
     "translation": "Kommer snart"
+  },
+  "dYbQ1T": {
+    "translation": "",
+    "message": "Comment options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/Comment.tsx",
+        161
+      ]
+    ]
   },
   "VbyRUy": {
     "message": "Comments",
@@ -3127,7 +3155,7 @@
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        141
+        156
       ]
     ],
     "translation": "Opret en til"
@@ -3163,7 +3191,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        135
+        146
       ]
     ],
     "translation": "Opret tjekliste"
@@ -3199,7 +3227,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        153
+        168
       ]
     ],
     "translation": "Opret liste"
@@ -3303,7 +3331,7 @@
       ],
       [
         "src/components/WorkspaceMenu.tsx",
-        176
+        177
       ]
     ],
     "translation": "Opret arbejdsområde"
@@ -3365,7 +3393,6 @@
     "translation": "Beskær din avatar"
   },
   "MtNNDo": {
-    "translation": "",
     "message": "Current list",
     "placeholders": {},
     "comments": [],
@@ -3374,7 +3401,8 @@
         "src/views/card/components/ListSelector.tsx",
         85
       ]
-    ]
+    ],
+    "translation": ""
   },
   "D3C4Yx": {
     "message": "Current password is required",
@@ -3608,7 +3636,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        140
+        136
       ]
     ],
     "translation": "Slet"
@@ -3660,6 +3688,18 @@
       ]
     ],
     "translation": "Slet kort"
+  },
+  "rmAXC2": {
+    "translation": "",
+    "message": "Delete checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/Checklists.tsx",
+        145
+      ]
+    ]
   },
   "njJFtc": {
     "message": "Delete comment",
@@ -4156,7 +4196,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        132
+        128
       ]
     ],
     "translation": "Rediger"
@@ -5153,7 +5193,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        311
+        312
       ]
     ],
     "translation": "Gratis abonnement"
@@ -5869,7 +5909,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        106
+        104
       ]
     ],
     "translation": "Inaktiv"
@@ -5957,7 +5997,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        330
+        331
       ]
     ],
     "translation": "Invitér"
@@ -6150,6 +6190,10 @@
       [
         "src/views/board/components/NewCardForm.tsx",
         524
+      ],
+      [
+        "src/views/card/components/LabelSelector.tsx",
+        102
       ],
       [
         "src/views/card/index.tsx",
@@ -6381,13 +6425,12 @@
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        129
+        144
       ]
     ],
     "translation": "Listenavn"
   },
   "jf++dj": {
-    "translation": "",
     "message": "List options",
     "placeholders": {},
     "comments": [],
@@ -6396,7 +6439,8 @@
         "src/views/board/components/List.tsx",
         165
       ]
-    ]
+    ],
+    "translation": ""
   },
   "h16FyT": {
     "message": "Lists",
@@ -6642,6 +6686,18 @@
     ],
     "translation": "Medlem"
   },
+  "fTHH1x": {
+    "translation": "",
+    "message": "Member options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        262
+      ]
+    ]
+  },
   "GnG6Oy": {
     "message": "members",
     "placeholders": {},
@@ -6672,12 +6728,16 @@
         482
       ],
       [
+        "src/views/card/components/MemberSelector.tsx",
+        116
+      ],
+      [
         "src/views/card/index.tsx",
         143
       ],
       [
         "src/views/members/index.tsx",
-        283
+        284
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -6697,7 +6757,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        278
+        279
       ]
     ],
     "translation": "Medlemmer | {0}"
@@ -6976,7 +7036,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        103
+        114
       ]
     ],
     "translation": "Ny tjekliste"
@@ -7012,7 +7072,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        113
+        128
       ],
       [
         "src/views/board/index.tsx",
@@ -7940,7 +8000,7 @@
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        79
+        94
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
@@ -8028,11 +8088,11 @@
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        71
+        82
       ],
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        90
+        106
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
@@ -8288,7 +8348,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        308
+        309
       ]
     ],
     "translation": "Pro-abonnement"
@@ -8739,7 +8799,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        352
+        353
       ]
     ],
     "translation": "Rolle"
@@ -8860,6 +8920,18 @@
     ],
     "translation": "Screening"
   },
+  "A1taO8": {
+    "translation": "",
+    "message": "Search",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/WorkspaceMenu.tsx",
+        102
+      ]
+    ]
+  },
   "SkCNhl": {
     "message": "Search boards and cards...",
     "placeholders": {},
@@ -8895,7 +8967,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        319
+        320
       ]
     ],
     "translation": "pladser"
@@ -9625,6 +9697,18 @@
     ],
     "translation": "Indsend"
   },
+  "DJUhvh": {
+    "translation": "",
+    "message": "Submit comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/NewCommentForm.tsx",
+        92
+      ]
+    ]
+  },
   "WYDptz": {
     "message": "Subscription Required",
     "placeholders": {},
@@ -9745,7 +9829,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        310
+        311
       ]
     ],
     "translation": "Team-abonnement"
@@ -9877,7 +9961,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        136
+        132
       ]
     ],
     "translation": "Test"
@@ -9909,7 +9993,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        174
+        171
       ]
     ],
     "translation": "Test sendt"
@@ -9925,7 +10009,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        174
+        172
       ]
     ],
     "translation": "Testwebhook sendt!"
@@ -10508,7 +10592,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        89
+        105
       ]
     ],
     "translation": "Kunne ikke tilføje punkt på tjeklisten"
@@ -10604,7 +10688,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        70
+        81
       ]
     ],
     "translation": "Kunne ikke oprette tjekliste"
@@ -10616,7 +10700,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        78
+        93
       ]
     ],
     "translation": "Kunne ikke oprette liste"
@@ -11256,7 +11340,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        318
+        319
       ]
     ],
     "translation": "Ubegrænset antal pladser"
@@ -11384,7 +11468,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        295
+        296
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
@@ -11553,7 +11637,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        346
+        347
       ]
     ],
     "translation": "Bruger"
@@ -11778,6 +11862,18 @@
     ],
     "translation": "Webhookens navn er påkrævet"
   },
+  "N1eQmK": {
+    "translation": "",
+    "message": "Webhook options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/WebhookList.tsx",
+        125
+      ]
+    ]
+  },
   "8iP9oQ": {
     "message": "Webhook test failed",
     "placeholders": {},
@@ -11937,7 +12033,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        278
+        279
       ],
       [
         "src/views/public/board/index.tsx",

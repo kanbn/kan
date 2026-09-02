@@ -380,7 +380,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        106
+        104
       ]
     ],
     "translation": "Active"
@@ -456,13 +456,12 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        141
+        157
       ]
     ],
     "translation": "Add an item..."
   },
   "sFY+gw": {
-    "translation": "Add card",
     "message": "Add card",
     "placeholders": {},
     "comments": [],
@@ -471,7 +470,8 @@
         "src/views/board/components/List.tsx",
         125
       ]
-    ]
+    ],
+    "translation": "Add card"
   },
   "Gxxi5J": {
     "message": "Add checklist",
@@ -479,11 +479,27 @@
     "comments": [],
     "origin": [
       [
+        "src/views/card/components/AttachmentUpload.tsx",
+        124
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         123
       ]
     ],
     "translation": "Add checklist"
+  },
+  "oqKXo7": {
+    "translation": "Add checklist item",
+    "message": "Add checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/Checklists.tsx",
+        154
+      ]
+    ]
   },
   "ngBZOd": {
     "message": "Add comment... (type '/' to open commands or '@' to mention)",
@@ -532,11 +548,11 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        114
+        115
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        119
+        120
       ]
     ],
     "translation": "Add label"
@@ -548,7 +564,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        135
+        138
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -1565,7 +1581,6 @@
     "translation": "Board moved"
   },
   "qVcPNk": {
-    "translation": "Board name",
     "message": "Board name",
     "placeholders": {},
     "comments": [],
@@ -1574,7 +1589,8 @@
         "src/views/board/index.tsx",
         561
       ]
-    ]
+    ],
+    "translation": "Board name"
   },
   "wewm3j": {
     "message": "Board name cannot exceed 100 characters",
@@ -1613,7 +1629,6 @@
     "translation": "Board not found"
   },
   "Mu1Zy/": {
-    "translation": "Board options",
     "message": "Board options",
     "placeholders": {},
     "comments": [],
@@ -1622,7 +1637,8 @@
         "src/views/board/components/BoardDropdown.tsx",
         167
       ]
-    ]
+    ],
+    "translation": "Board options"
   },
   "XNxYxq": {
     "message": "Board templates",
@@ -2329,7 +2345,6 @@
     "translation": "Card not found"
   },
   "c44pvY": {
-    "translation": "Card options",
     "message": "Card options",
     "placeholders": {},
     "comments": [],
@@ -2338,7 +2353,8 @@
         "src/views/card/components/Dropdown.tsx",
         167
       ]
-    ]
+    ],
+    "translation": "Card options"
   },
   "ZH7TVS": {
     "message": "Card title",
@@ -2479,7 +2495,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        119
+        130
       ]
     ],
     "translation": "Checklist name"
@@ -2671,6 +2687,18 @@
       ]
     ],
     "translation": "Coming soon"
+  },
+  "dYbQ1T": {
+    "translation": "Comment options",
+    "message": "Comment options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/Comment.tsx",
+        161
+      ]
+    ]
   },
   "VbyRUy": {
     "message": "Comments",
@@ -3140,7 +3168,7 @@
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        141
+        156
       ]
     ],
     "translation": "Create another"
@@ -3176,7 +3204,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        135
+        146
       ]
     ],
     "translation": "Create checklist"
@@ -3212,7 +3240,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        153
+        168
       ]
     ],
     "translation": "Create list"
@@ -3316,7 +3344,7 @@
       ],
       [
         "src/components/WorkspaceMenu.tsx",
-        176
+        177
       ]
     ],
     "translation": "Create workspace"
@@ -3378,7 +3406,6 @@
     "translation": "Crop your avatar"
   },
   "MtNNDo": {
-    "translation": "Current list",
     "message": "Current list",
     "placeholders": {},
     "comments": [],
@@ -3387,7 +3414,8 @@
         "src/views/card/components/ListSelector.tsx",
         85
       ]
-    ]
+    ],
+    "translation": "Current list"
   },
   "D3C4Yx": {
     "message": "Current password is required",
@@ -3634,7 +3662,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        140
+        136
       ]
     ],
     "translation": "Delete"
@@ -3686,6 +3714,18 @@
       ]
     ],
     "translation": "Delete card"
+  },
+  "rmAXC2": {
+    "translation": "Delete checklist",
+    "message": "Delete checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/Checklists.tsx",
+        145
+      ]
+    ]
   },
   "njJFtc": {
     "message": "Delete comment",
@@ -4195,7 +4235,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        132
+        128
       ]
     ],
     "translation": "Edit"
@@ -5205,7 +5245,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        311
+        312
       ]
     ],
     "translation": "Free Plan"
@@ -5921,7 +5961,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        106
+        104
       ]
     ],
     "translation": "Inactive"
@@ -6009,7 +6049,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        330
+        331
       ]
     ],
     "translation": "Invite"
@@ -6215,6 +6255,10 @@
       [
         "src/views/board/components/NewCardForm.tsx",
         524
+      ],
+      [
+        "src/views/card/components/LabelSelector.tsx",
+        102
       ],
       [
         "src/views/card/index.tsx",
@@ -6459,13 +6503,12 @@
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        129
+        144
       ]
     ],
     "translation": "List name"
   },
   "jf++dj": {
-    "translation": "List options",
     "message": "List options",
     "placeholders": {},
     "comments": [],
@@ -6474,7 +6517,8 @@
         "src/views/board/components/List.tsx",
         165
       ]
-    ]
+    ],
+    "translation": "List options"
   },
   "h16FyT": {
     "message": "Lists",
@@ -6720,6 +6764,18 @@
     ],
     "translation": "Member"
   },
+  "fTHH1x": {
+    "translation": "Member options",
+    "message": "Member options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        262
+      ]
+    ]
+  },
   "GnG6Oy": {
     "message": "members",
     "placeholders": {},
@@ -6750,12 +6806,16 @@
         482
       ],
       [
+        "src/views/card/components/MemberSelector.tsx",
+        116
+      ],
+      [
         "src/views/card/index.tsx",
         143
       ],
       [
         "src/views/members/index.tsx",
-        283
+        284
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -6775,7 +6835,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        278
+        279
       ]
     ],
     "translation": "Members | {0}"
@@ -7054,7 +7114,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        103
+        114
       ]
     ],
     "translation": "New checklist"
@@ -7090,7 +7150,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        113
+        128
       ],
       [
         "src/views/board/index.tsx",
@@ -8018,7 +8078,7 @@
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        79
+        94
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
@@ -8106,11 +8166,11 @@
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        71
+        82
       ],
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        90
+        106
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
@@ -8366,7 +8426,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        308
+        309
       ]
     ],
     "translation": "Pro Plan"
@@ -8817,7 +8877,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        352
+        353
       ]
     ],
     "translation": "Role"
@@ -8938,6 +8998,18 @@
     ],
     "translation": "Screening"
   },
+  "A1taO8": {
+    "translation": "Search",
+    "message": "Search",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/WorkspaceMenu.tsx",
+        102
+      ]
+    ]
+  },
   "SkCNhl": {
     "message": "Search boards and cards...",
     "placeholders": {},
@@ -8973,7 +9045,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        319
+        320
       ]
     ],
     "translation": "seats"
@@ -9703,6 +9775,18 @@
     ],
     "translation": "Submit"
   },
+  "DJUhvh": {
+    "translation": "Submit comment",
+    "message": "Submit comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/NewCommentForm.tsx",
+        92
+      ]
+    ]
+  },
   "WYDptz": {
     "message": "Subscription Required",
     "placeholders": {},
@@ -9823,7 +9907,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        310
+        311
       ]
     ],
     "translation": "Team Plan"
@@ -9955,7 +10039,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        136
+        132
       ]
     ],
     "translation": "Test"
@@ -9987,7 +10071,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        174
+        171
       ]
     ],
     "translation": "Test sent"
@@ -10003,7 +10087,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        174
+        172
       ]
     ],
     "translation": "Test webhook sent successfully!"
@@ -10586,7 +10670,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        89
+        105
       ]
     ],
     "translation": "Unable to add checklist item"
@@ -10682,7 +10766,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        70
+        81
       ]
     ],
     "translation": "Unable to create checklist"
@@ -10694,7 +10778,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        78
+        93
       ]
     ],
     "translation": "Unable to create list"
@@ -11334,7 +11418,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        318
+        319
       ]
     ],
     "translation": "Unlimited seats"
@@ -11479,7 +11563,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        295
+        296
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
@@ -11648,7 +11732,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        346
+        347
       ]
     ],
     "translation": "User"
@@ -11886,6 +11970,18 @@
     ],
     "translation": "Webhook name is required"
   },
+  "N1eQmK": {
+    "translation": "Webhook options",
+    "message": "Webhook options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/WebhookList.tsx",
+        125
+      ]
+    ]
+  },
   "8iP9oQ": {
     "message": "Webhook test failed",
     "placeholders": {},
@@ -12045,7 +12141,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        278
+        279
       ],
       [
         "src/views/public/board/index.tsx",

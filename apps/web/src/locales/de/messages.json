@@ -220,7 +220,7 @@
     "origin": [
       ["src/views/boards/index.tsx", 33],
       ["src/views/settings/components/NewWebhookModal.tsx", 321],
-      ["src/views/settings/components/WebhookList.tsx", 106]
+      ["src/views/settings/components/WebhookList.tsx", 104]
     ],
     "translation": "Aktiv"
   },
@@ -268,22 +268,32 @@
     "message": "Add an item...",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 141]],
+    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 157]],
     "translation": "Element hinzufügen..."
   },
   "sFY+gw": {
-    "translation": "Karte hinzufügen",
     "message": "Add card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/List.tsx", 125]]
+    "origin": [["src/views/board/components/List.tsx", 125]],
+    "translation": "Karte hinzufügen"
   },
   "Gxxi5J": {
     "message": "Add checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 123]],
+    "origin": [
+      ["src/views/card/components/AttachmentUpload.tsx", 124],
+      ["src/views/card/components/Dropdown.tsx", 123]
+    ],
     "translation": "Checkliste hinzufügen"
+  },
+  "oqKXo7": {
+    "translation": "Checklisteneintrag hinzufügen",
+    "message": "Add checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Checklists.tsx", 154]]
   },
   "ngBZOd": {
     "message": "Add comment... (type '/' to open commands or '@' to mention)",
@@ -314,8 +324,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/LabelSelector.tsx", 114],
-      ["src/views/card/components/LabelSelector.tsx", 119]
+      ["src/views/card/components/LabelSelector.tsx", 115],
+      ["src/views/card/components/LabelSelector.tsx", 120]
     ],
     "translation": "Label hinzufügen"
   },
@@ -324,7 +334,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/MemberSelector.tsx", 135],
+      ["src/views/card/components/MemberSelector.tsx", 138],
       ["src/views/members/components/InviteMemberForm.tsx", 243]
     ],
     "translation": "Mitglied hinzufügen"
@@ -933,11 +943,11 @@
     "translation": "Board verschoben"
   },
   "qVcPNk": {
-    "translation": "Board-Name",
     "message": "Board name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 561]]
+    "origin": [["src/views/board/index.tsx", 561]],
+    "translation": "Board-Name"
   },
   "wewm3j": {
     "message": "Board name cannot exceed 100 characters",
@@ -961,11 +971,11 @@
     "translation": "Board nicht gefunden"
   },
   "Mu1Zy/": {
-    "translation": "Board-Optionen",
     "message": "Board options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 167]]
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 167]],
+    "translation": "Board-Optionen"
   },
   "XNxYxq": {
     "message": "Board templates",
@@ -1381,11 +1391,11 @@
     "translation": "Karte nicht gefunden"
   },
   "c44pvY": {
-    "translation": "Karten-Optionen",
     "message": "Card options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 167]]
+    "origin": [["src/views/card/components/Dropdown.tsx", 167]],
+    "translation": "Karten-Optionen"
   },
   "ZH7TVS": {
     "message": "Card title",
@@ -1465,7 +1475,7 @@
     "message": "Checklist name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistForm.tsx", 119]],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 130]],
     "translation": "Checklistenname"
   },
   "EH8IL3": {
@@ -1587,6 +1597,13 @@
     "comments": [],
     "origin": [["src/views/home/components/Features.tsx", 67]],
     "translation": "Demnächst verfügbar"
+  },
+  "dYbQ1T": {
+    "translation": "Kommentaroptionen",
+    "message": "Comment options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Comment.tsx", 161]]
   },
   "VbyRUy": {
     "message": "Comments",
@@ -1870,7 +1887,7 @@
     "origin": [
       ["src/components/LabelForm.tsx", 213],
       ["src/views/board/components/NewCardForm.tsx", 653],
-      ["src/views/board/components/NewListForm.tsx", 141]
+      ["src/views/board/components/NewListForm.tsx", 156]
     ],
     "translation": "Weitere erstellen"
   },
@@ -1892,7 +1909,7 @@
     "message": "Create checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistForm.tsx", 135]],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 146]],
     "translation": "Checkliste erstellen"
   },
   "zKY5xi": {
@@ -1913,7 +1930,7 @@
     "message": "Create list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewListForm.tsx", 153]],
+    "origin": [["src/views/board/components/NewListForm.tsx", 168]],
     "translation": "Liste erstellen"
   },
   "VKoDQD": {
@@ -1975,7 +1992,7 @@
     "comments": [],
     "origin": [
       ["src/components/NewWorkspaceForm.tsx", 227],
-      ["src/components/WorkspaceMenu.tsx", 176]
+      ["src/components/WorkspaceMenu.tsx", 177]
     ],
     "translation": "Workspace erstellen"
   },
@@ -2012,11 +2029,11 @@
     "translation": "Avatar zuschneiden"
   },
   "MtNNDo": {
-    "translation": "Aktuelle Liste",
     "message": "Current list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ListSelector.tsx", 85]]
+    "origin": [["src/views/card/components/ListSelector.tsx", 85]],
+    "translation": "Aktuelle Liste"
   },
   "D3C4Yx": {
     "message": "Current password is required",
@@ -2158,7 +2175,7 @@
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 67],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 83],
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 82],
-      ["src/views/settings/components/WebhookList.tsx", 140]
+      ["src/views/settings/components/WebhookList.tsx", 136]
     ],
     "translation": "Löschen"
   },
@@ -2189,6 +2206,13 @@
       ["src/views/card/components/Dropdown.tsx", 152]
     ],
     "translation": "Karte löschen"
+  },
+  "rmAXC2": {
+    "translation": "Checkliste löschen",
+    "message": "Delete checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Checklists.tsx", 145]]
   },
   "njJFtc": {
     "message": "Delete comment",
@@ -2477,7 +2501,7 @@
     "comments": [],
     "origin": [
       ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 42],
-      ["src/views/settings/components/WebhookList.tsx", 132]
+      ["src/views/settings/components/WebhookList.tsx", 128]
     ],
     "translation": "Bearbeiten"
   },
@@ -3094,7 +3118,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 326],
-      ["src/views/members/index.tsx", 311]
+      ["src/views/members/index.tsx", 312]
     ],
     "translation": "Kostenloser Plan"
   },
@@ -3515,7 +3539,7 @@
     "message": "Inactive",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/WebhookList.tsx", 106]],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 104]],
     "translation": "Inaktiv"
   },
   "6mbe4b": {
@@ -3569,7 +3593,7 @@
     "message": "Invite",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 330]],
+    "origin": [["src/views/members/index.tsx", 331]],
     "translation": "Einladen"
   },
   "KLJ4eD": {
@@ -3691,6 +3715,7 @@
       ["src/views/board/components/CardContextLabelsModal.tsx", 31],
       ["src/views/board/components/Filters.tsx", 155],
       ["src/views/board/components/NewCardForm.tsx", 524],
+      ["src/views/card/components/LabelSelector.tsx", 102],
       ["src/views/card/index.tsx", 133]
     ],
     "translation": "Labels"
@@ -3834,16 +3859,16 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/List.tsx", 108],
-      ["src/views/board/components/NewListForm.tsx", 129]
+      ["src/views/board/components/NewListForm.tsx", 144]
     ],
     "translation": "Listenname"
   },
   "jf++dj": {
-    "translation": "Listen-Optionen",
     "message": "List options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/List.tsx", 165]]
+    "origin": [["src/views/board/components/List.tsx", 165]],
+    "translation": "Listen-Optionen"
   },
   "h16FyT": {
     "message": "Lists",
@@ -3989,6 +4014,13 @@
     ],
     "translation": "Mitglied"
   },
+  "fTHH1x": {
+    "translation": "Mitgliederoptionen",
+    "message": "Member options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 262]]
+  },
   "GnG6Oy": {
     "message": "members",
     "placeholders": {},
@@ -4004,8 +4036,9 @@
       ["src/components/SideNavigation.tsx", 122],
       ["src/views/board/components/Filters.tsx", 147],
       ["src/views/board/components/NewCardForm.tsx", 482],
+      ["src/views/card/components/MemberSelector.tsx", 116],
       ["src/views/card/index.tsx", 143],
-      ["src/views/members/index.tsx", 283],
+      ["src/views/members/index.tsx", 284],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 81]
     ],
     "translation": "Mitglieder"
@@ -4016,7 +4049,7 @@
       "0": ["workspace.name ?? t`Workspace`"]
     },
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 278]],
+    "origin": [["src/views/members/index.tsx", 279]],
     "translation": "Mitglieder | {0}"
   },
   "/bZzdR": {
@@ -4178,7 +4211,7 @@
     "message": "New checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistForm.tsx", 103]],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 114]],
     "translation": "Neue Checkliste"
   },
   "WYwN1G": {
@@ -4200,7 +4233,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewListForm.tsx", 113],
+      ["src/views/board/components/NewListForm.tsx", 128],
       ["src/views/board/index.tsx", 634]
     ],
     "translation": "Neue Liste"
@@ -4758,7 +4791,7 @@
       ["src/components/NewWorkspaceForm.tsx", 110],
       ["src/views/board/components/BoardDropdown.tsx", 72],
       ["src/views/board/components/NewCardForm.tsx", 198],
-      ["src/views/board/components/NewListForm.tsx", 79],
+      ["src/views/board/components/NewListForm.tsx", 94],
       ["src/views/board/components/NewTemplateForm.tsx", 61],
       ["src/views/board/components/NewTemplateForm.tsx", 77],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 73],
@@ -4780,8 +4813,8 @@
       ["src/views/card/components/LabelSelector.tsx", 75],
       ["src/views/card/components/ListSelector.tsx", 55],
       ["src/views/card/components/MemberSelector.tsx", 82],
-      ["src/views/card/components/NewChecklistForm.tsx", 71],
-      ["src/views/card/components/NewChecklistItemForm.tsx", 90],
+      ["src/views/card/components/NewChecklistForm.tsx", 82],
+      ["src/views/card/components/NewChecklistItemForm.tsx", 106],
       ["src/views/card/components/NewCommentForm.tsx", 38],
       ["src/views/card/index.tsx", 236],
       ["src/views/card/index.tsx", 249],
@@ -4895,7 +4928,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 305],
-      ["src/views/members/index.tsx", 308]
+      ["src/views/members/index.tsx", 309]
     ],
     "translation": "Pro-Plan"
   },
@@ -5160,7 +5193,7 @@
     "message": "Role",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 352]],
+    "origin": [["src/views/members/index.tsx", 353]],
     "translation": "Rolle"
   },
   "jQ6I8X": {
@@ -5234,6 +5267,13 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 76]],
     "translation": "Screening"
   },
+  "A1taO8": {
+    "translation": "Suchen",
+    "message": "Search",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/WorkspaceMenu.tsx", 102]]
+  },
   "SkCNhl": {
     "message": "Search boards and cards...",
     "placeholders": {},
@@ -5254,7 +5294,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 308],
-      ["src/views/members/index.tsx", 319]
+      ["src/views/members/index.tsx", 320]
     ],
     "translation": "Plätze"
   },
@@ -5691,6 +5731,13 @@
     "origin": [["src/views/card/components/NewCommentForm.tsx", 60]],
     "translation": "Absenden"
   },
+  "DJUhvh": {
+    "translation": "Kommentar absenden",
+    "message": "Submit comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewCommentForm.tsx", 92]]
+  },
   "WYDptz": {
     "message": "Subscription Required",
     "placeholders": {},
@@ -5765,7 +5812,7 @@
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 305],
       ["src/views/members/components/InviteMemberForm.tsx", 317],
-      ["src/views/members/index.tsx", 310]
+      ["src/views/members/index.tsx", 311]
     ],
     "translation": "Team-Plan"
   },
@@ -5841,7 +5888,7 @@
     "message": "Test",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/WebhookList.tsx", 136]],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 132]],
     "translation": "Test"
   },
   "InJcdo": {
@@ -5860,7 +5907,7 @@
     "comments": [],
     "origin": [
       ["src/views/settings/components/NewWebhookModal.tsx", 148],
-      ["src/views/settings/components/WebhookList.tsx", 174]
+      ["src/views/settings/components/WebhookList.tsx", 171]
     ],
     "translation": "Test gesendet"
   },
@@ -5870,7 +5917,7 @@
     "comments": [],
     "origin": [
       ["src/views/settings/components/NewWebhookModal.tsx", 149],
-      ["src/views/settings/components/WebhookList.tsx", 174]
+      ["src/views/settings/components/WebhookList.tsx", 172]
     ],
     "translation": "Test-Webhook erfolgreich gesendet!"
   },
@@ -6229,7 +6276,7 @@
     "message": "Unable to add checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 89]],
+    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 105]],
     "translation": "Checklistenelement konnte nicht hinzugefügt werden"
   },
   "T7DJ2k": {
@@ -6283,14 +6330,14 @@
     "message": "Unable to create checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistForm.tsx", 70]],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 81]],
     "translation": "Checkliste konnte nicht erstellt werden"
   },
   "TztLaN": {
     "message": "Unable to create list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewListForm.tsx", 78]],
+    "origin": [["src/views/board/components/NewListForm.tsx", 93]],
     "translation": "Liste konnte nicht erstellt werden"
   },
   "YcyP2z": {
@@ -6669,7 +6716,7 @@
     "message": "Unlimited seats",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 318]],
+    "origin": [["src/views/members/index.tsx", 319]],
     "translation": "Unbegrenzte Plätze"
   },
   "Ws+3X+": {
@@ -6752,7 +6799,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/index.tsx", 295],
+      ["src/views/members/index.tsx", 296],
       ["src/views/onboarding/select-plan/index.tsx", 245]
     ],
     "translation": "Upgrade"
@@ -6856,7 +6903,7 @@
     "message": "User",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 346]],
+    "origin": [["src/views/members/index.tsx", 347]],
     "translation": "Benutzer"
   },
   "tYN21H": {
@@ -6999,6 +7046,13 @@
     "origin": [["src/views/settings/components/NewWebhookModal.tsx", 19]],
     "translation": "Webhook-Name ist erforderlich"
   },
+  "N1eQmK": {
+    "translation": "Webhook-Optionen",
+    "message": "Webhook options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 125]]
+  },
   "8iP9oQ": {
     "message": "Webhook test failed",
     "placeholders": {},
@@ -7090,7 +7144,7 @@
       ["src/components/SettingsLayout.tsx", 47],
       ["src/views/board/index.tsx", 543],
       ["src/views/boards/index.tsx", 58],
-      ["src/views/members/index.tsx", 278],
+      ["src/views/members/index.tsx", 279],
       ["src/views/public/board/index.tsx", 125],
       ["src/views/public/boards/index.tsx", 75]
     ],
