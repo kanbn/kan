@@ -13,6 +13,18 @@ export class BoardPage {
     await this.page.waitForURL(/\/boards\/[^/]+$/);
   }
 
+  async createBoardFromTemplate(name: string, templateName: string) {
+    await this.page.getByRole("button", { name: "New", exact: true }).click();
+    await this.page.getByRole("heading", { name: "New board" }).waitFor();
+    await this.page.getByPlaceholder("Name", { exact: true }).fill(name);
+    await this.page.getByRole("switch", { name: "Use template" }).click();
+    await this.page.getByText(templateName, { exact: true }).click();
+    const created = waitForTrpcMutation(this.page, "board.create");
+    await this.page.getByRole("button", { name: "Create board" }).click();
+    await created;
+    await this.page.waitForURL(/\/boards\/[^/]+$/);
+  }
+
   async createList(name: string) {
     await this.page.getByRole("button", { name: "New list" }).click();
     await this.page.getByPlaceholder("List name").fill(name);
