@@ -12,14 +12,24 @@ interface MailpitMessage {
   HTML: string;
 }
 
+async function searchMessages(email: string): Promise<MailpitMessageSummary[]> {
+  const response = await fetch(
+    `${mailpitBaseUrl}/api/v1/search?query=${encodeURIComponent(`to:${email}`)}`,
+  );
+
+  if (!response.ok) {
+    throw new Error(`Mailpit search failed with status ${response.status}`);
+  }
+
+  const { messages } = (await response.json()) as MailpitSearchResponse;
+  return messages;
+}
+
 async function waitForMessageHtml(email: string): Promise<string> {
   const deadline = Date.now() + 15_000;
 
   while (Date.now() < deadline) {
-    const response = await fetch(
-      `${mailpitBaseUrl}/api/v1/search?query=${encodeURIComponent(`to:${email}`)}`,
-    );
-    const { messages } = (await response.json()) as MailpitSearchResponse;
+    const messages = await searchMessages(email);
     const latest = messages[0];
 
     if (latest) {
@@ -49,4 +59,48 @@ export async function getMagicLinkUrl(email: string): Promise<string> {
 
 export async function clearMailpitInbox() {
   await fetch(`${mailpitBaseUrl}/api/v1/messages`, { method: "DELETE" });
+}
+
+export async function getMailpitMessageCount(email: string): Promise<number> {
+  return (await searchMessages(email)).length;
+}
+
+export async function waitForMailpitMessageCount(
+  email: string,
+  expectedCount: number,
+) {
+  const deadline = Date.now() + 15_000;
+
+  while (Date.now() < deadline) {
+    const count = await getMailpitMessageCount(email);
+    if (count === expectedCount) return;
+    if (count > expectedCount) {
+      throw new Error(
+        `Expected ${expectedCount} messages for ${email}, but found ${count}`,
+      );
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 250));
+  }
+
+  throw new Error(`Expected ${expectedCount} messages for ${email} within 15s`);
+}
+
+export async function expectMailpitMessageCountToRemain(
+  email: string,
+  expectedCount: number,
+  durationMs = 1_500,
+) {
+  const deadline = Date.now() + durationMs;
+
+  while (Date.now() < deadline) {
+    const count = await getMailpitMessageCount(email);
+    if (count !== expectedCount) {
+      throw new Error(
+        `Expected ${expectedCount} messages for ${email}, but found ${count}`,
+      );
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 250));
+  }
 }
