@@ -387,7 +387,7 @@ export const workspaceRouter = createTRPCRouter({
 
         if (
           env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
-          workspace.plan !== "pro" &&
+          workspace.plan === "free" &&
           input.slug !== workspace.publicId
         ) {
           throw new TRPCError({

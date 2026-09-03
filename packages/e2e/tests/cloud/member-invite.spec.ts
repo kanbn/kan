@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import {
   hasRealStripeCredentials,
   setupStripeWebhookForwarding,
-  signUpAndUpgradeToPro,
+  signUpAndUpgradeToTeam,
 } from "../support/cloud-billing";
 import { AuthPage } from "../support/pages/auth-page";
 import { CloudOnboardingPage } from "../support/pages/cloud-onboarding-page";
@@ -13,7 +13,7 @@ import { createTestUser } from "../support/test-user";
 setupStripeWebhookForwarding();
 
 test(
-  "a second user can join a pro workspace via a shared invite link",
+  "a second user can join a team workspace via a shared invite link",
   { tag: "@cloud" },
   async ({ page, browser }) => {
     test.skip(
@@ -25,7 +25,7 @@ test(
     const userA = createTestUser();
     const members = new MembersPage(page);
 
-    await signUpAndUpgradeToPro(page, userA);
+    await signUpAndUpgradeToTeam(page, userA);
 
     await members.open();
     const inviteLink = await members.createInviteLink();

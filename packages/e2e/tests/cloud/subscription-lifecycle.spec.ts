@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import {
   hasRealStripeCredentials,
   setupStripeWebhookForwarding,
-  signUpAndUpgradeToPro,
+  signUpAndUpgradeToTeam,
 } from "../support/cloud-billing";
 import { SettingsPage } from "../support/pages/settings-page";
 import { StripeBillingPortalPage } from "../support/pages/stripe-billing-portal-page";
@@ -18,7 +18,7 @@ import { createTestUser } from "../support/test-user";
 setupStripeWebhookForwarding();
 
 test(
-  "upgrading to pro unlocks paid features; cancelling during the trial keeps access until it ends, then reverts to free",
+  "upgrading to team unlocks paid features; cancelling during the trial keeps access until it ends, then reverts to free",
   { tag: "@cloud" },
   async ({ page }) => {
     test.skip(
@@ -31,10 +31,10 @@ test(
     const settings = new SettingsPage(page);
     const billingPortal = new StripeBillingPortalPage(page);
 
-    await signUpAndUpgradeToPro(page, user);
+    await signUpAndUpgradeToTeam(page, user);
 
     await settings.goToTab("Workspace");
-    await settings.updateWorkspaceSlug(`e2e-pro-slug-${Date.now()}`);
+    await settings.updateWorkspaceSlug(`e2e-team-slug-${Date.now()}`);
 
     await settings.goToTab("Billing");
     await page.getByRole("button", { name: "Billing portal" }).click();
@@ -49,11 +49,11 @@ test(
       await page.reload();
       await settings.open();
       await settings.goToTab("Billing");
-      await expect(page.getByText("Pro (unlimited members)")).toBeVisible();
+      await expect(page.getByText("Team (1 member)")).toBeVisible();
     }).toPass({ timeout: 20_000 });
 
     await settings.goToTab("Workspace");
-    await settings.updateWorkspaceSlug(`e2e-still-pro-slug-${Date.now()}`);
+    await settings.updateWorkspaceSlug(`e2e-still-team-slug-${Date.now()}`);
 
     const clockId = await advanceTrialToEnd(customerId);
 
@@ -77,14 +77,14 @@ test(
     expect(await settings.getWorkspaceSlugValue()).toBe(workspacePublicId);
 
     await settings.attemptWorkspaceSlugUpdate(`e2e-blocked-slug-${Date.now()}`);
-    await expect(page).toHaveURL(/\/upgrade\/select-plan\?.*plan=pro/);
+    await expect(page).toHaveURL(/\/upgrade\/select-plan\?.*plan=team/);
 
     await deleteTestClock(clockId);
   },
 );
 
 test(
-  "letting the trial run its course (no cancellation) converts to a paid subscription and keeps pro access",
+  "letting the trial run its course (no cancellation) converts to a paid subscription and keeps team access",
   { tag: "@cloud" },
   async ({ page }) => {
     test.skip(
@@ -96,7 +96,7 @@ test(
     const user = createTestUser();
     const settings = new SettingsPage(page);
 
-    await signUpAndUpgradeToPro(page, user);
+    await signUpAndUpgradeToTeam(page, user);
 
     const customerId = await getCustomerIdForUserEmail(user.email);
 
@@ -109,11 +109,13 @@ test(
       await page.reload();
       await settings.open();
       await settings.goToTab("Billing");
-      await expect(page.getByText("Pro (unlimited members)")).toBeVisible();
+      await expect(page.getByText("Team (1 member)")).toBeVisible();
     }).toPass({ timeout: 30_000 });
 
     await settings.goToTab("Workspace");
-    await settings.updateWorkspaceSlug(`e2e-post-trial-pro-slug-${Date.now()}`);
+    await settings.updateWorkspaceSlug(
+      `e2e-post-trial-team-slug-${Date.now()}`,
+    );
 
     await deleteTestClock(clockId);
   },

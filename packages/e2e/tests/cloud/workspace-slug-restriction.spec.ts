@@ -24,7 +24,7 @@ test(
     await settings.goToTab("Workspace");
     await settings.attemptWorkspaceSlugUpdate(`e2e-slug-${Date.now()}`);
 
-    await expect(page).toHaveURL(/\/upgrade\/select-plan\?.*plan=pro/);
+    await expect(page).toHaveURL(/\/upgrade\/select-plan\?.*plan=team/);
   },
 );
 
