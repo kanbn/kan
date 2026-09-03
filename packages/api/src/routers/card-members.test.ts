@@ -137,7 +137,7 @@ describe("card member workspace scoping", () => {
         id: 17,
         publicId: "card-12345678",
       });
-      mockGetMembers.mockResolvedValue([{ id: 21 }]);
+      mockGetMembers.mockResolvedValue([{ id: 21, status: "active" }]);
       mockBulkCreateCardMembers.mockResolvedValue([
         { cardId: 17, workspaceMemberId: 21 },
       ]);
@@ -167,6 +167,20 @@ describe("card member workspace scoping", () => {
         }),
       ).rejects.toMatchObject({
         code: "NOT_FOUND",
+      } satisfies Partial<TRPCError>);
+
+      expect(mockCardCreate).not.toHaveBeenCalled();
+      expect(mockBulkCreateCardMembers).not.toHaveBeenCalled();
+    });
+
+    it("rejects paused members before creating the card", async () => {
+      const { cardRouter } = await import("./card");
+      mockGetMembers.mockResolvedValueOnce([{ id: 21, status: "paused" }]);
+
+      await expect(
+        cardRouter.createCaller(ctx).create(input),
+      ).rejects.toMatchObject({
+        code: "BAD_REQUEST",
       } satisfies Partial<TRPCError>);
 
       expect(mockCardCreate).not.toHaveBeenCalled();
@@ -204,7 +218,7 @@ describe("card member workspace scoping", () => {
 
     it("removes an existing member relationship in the scoped workspace", async () => {
       const { cardRouter } = await import("./card");
-      mockGetMember.mockResolvedValueOnce({ id: 21 });
+      mockGetMember.mockResolvedValueOnce({ id: 21, status: "paused" });
       mockGetCardMember.mockResolvedValueOnce({ cardId: 17, memberId: 21 });
       mockDeleteCardMember.mockResolvedValueOnce({ success: true });
       mockCreateActivity.mockResolvedValueOnce(undefined);
@@ -224,7 +238,11 @@ describe("card member workspace scoping", () => {
         boardId: 3,
         boardType: "regular",
       });
-      mockGetMember.mockResolvedValueOnce({ id: 21, role: "member" });
+      mockGetMember.mockResolvedValueOnce({
+        id: 21,
+        role: "member",
+        status: "active",
+      });
       mockGetCardMember.mockResolvedValueOnce(undefined);
       vi.mocked(filterBoardAssignable).mockResolvedValueOnce([]);
 
@@ -237,13 +255,79 @@ describe("card member workspace scoping", () => {
       expect(filterBoardAssignable).toHaveBeenCalledWith(
         mockDb,
         { id: 3, type: "regular" },
-        [{ id: 21, role: "member" }],
+        [{ id: 21, role: "member", status: "active" }],
       );
+      expect(mockCreateCardMember).not.toHaveBeenCalled();
+    });
+
+    it("rejects assigning a paused member", async () => {
+      const { cardRouter } = await import("./card");
+      mockGetCard.mockResolvedValueOnce({
+        id: 17,
+        workspaceId: 7,
+        boardId: 3,
+        boardType: "regular",
+      });
+      mockGetMember.mockResolvedValueOnce({
+        id: 21,
+        role: "member",
+        status: "paused",
+      });
+      mockGetCardMember.mockResolvedValueOnce(undefined);
+
+      await expect(
+        cardRouter.createCaller(ctx).addOrRemoveMember(input),
+      ).rejects.toMatchObject({
+        code: "BAD_REQUEST",
+      } satisfies Partial<TRPCError>);
+
       expect(mockCreateCardMember).not.toHaveBeenCalled();
     });
   });
 
   describe("duplicate", () => {
+    it("does not copy paused member assignments", async () => {
+      const { cardRouter } = await import("./card");
+      mockGetCard.mockResolvedValueOnce({ id: 17, workspaceId: 7 });
+      mockGetList.mockResolvedValueOnce({ id: 11, workspaceId: 7 });
+      mockGetCardWithMembers.mockResolvedValueOnce({
+        title: "Source card",
+        description: "",
+        dueDate: null,
+        labels: [],
+        checklists: [],
+        members: [
+          { publicId: "active-member" },
+          { publicId: "paused-member" },
+        ],
+      });
+      mockCardCreate.mockResolvedValueOnce({
+        id: 18,
+        publicId: "duplicate-123",
+      });
+      mockGetMembers.mockResolvedValueOnce([
+        { id: 21, status: "active" },
+        { id: 22, status: "paused" },
+      ]);
+
+      await expect(
+        cardRouter.createCaller(ctx).duplicate({
+          cardPublicId: "source-card-1",
+          listPublicId: "target-list-1",
+          copyLabels: false,
+          copyMembers: true,
+          copyChecklists: false,
+        }),
+      ).resolves.toEqual({ publicId: "duplicate-123" });
+
+      expect(mockBulkCreateCardMembers).toHaveBeenCalledWith(mockDb, [
+        { cardId: 18, workspaceMemberId: 21 },
+      ]);
+      expect(mockBulkCreateActivities).toHaveBeenCalledWith(mockDb, [
+        expect.objectContaining({ workspaceMemberId: 21 }),
+      ]);
+    });
+
     const input = {
       cardPublicId: "card-12345678",
       listPublicId: "list-12345678",
