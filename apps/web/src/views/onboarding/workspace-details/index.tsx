@@ -110,7 +110,7 @@ export default function WorkspaceNameView() {
           `/api/partner/link?license_key=${encodeURIComponent(storedLicenseKey)}`,
         );
       } else {
-        router.push("/boards");
+        router.push(`/boards?workspacePublicId=${workspace.publicId}`);
       }
     },
     onError: () => {
