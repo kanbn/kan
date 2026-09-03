@@ -409,6 +409,7 @@ const ActivityItems = ({
           key={activity.publicId}
           publicId={activity.comment?.publicId}
           cardPublicId={cardPublicId}
+          userId={activity.user?.id ?? null}
           name={activity.user?.name ?? ""}
           email={activity.user?.email ?? ""}
           image={activity.user?.image ?? null}
