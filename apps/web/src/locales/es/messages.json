@@ -95,7 +95,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 207]],
-    "translation": "/mes"
+    "translation": "/mes",
+    "obsolete": true
   },
   "be30i9": {
     "message": "$0",
@@ -129,7 +130,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 82],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 91],
       ["src/views/pricing/components/Pricing.tsx", 36],
       ["src/views/pricing/components/PricingTiers.tsx", 35]
     ],
@@ -139,7 +140,7 @@
     "message": "10mb file uploads",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 90]],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 98]],
     "translation": "Subidas de archivos de 10 mb"
   },
   "gkxGkF": {
@@ -147,9 +148,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/PricingTiers.tsx", 66],
-      ["src/views/pricing/components/PricingTiers.tsx", 88],
-      ["src/views/pricing/components/PricingTiers.tsx", 263]
+      ["src/views/pricing/components/PricingTiers.tsx", 67],
+      ["src/views/pricing/components/PricingTiers.tsx", 214]
     ],
     "translation": "Prueba gratuita de 14 días · Cambia de plan o cancela en cualquier momento"
   },
@@ -188,7 +188,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 283]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 255]
     ],
     "translation": "Gestor de cuenta"
   },
@@ -239,7 +239,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 148]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 149]
     ],
     "translation": "Registro de actividad"
   },
@@ -289,11 +289,11 @@
     "translation": "Añadir lista de verificación"
   },
   "oqKXo7": {
-    "translation": "Agregar elemento de lista de verificación",
     "message": "Add checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Checklists.tsx", 154]]
+    "origin": [["src/views/card/components/Checklists.tsx", 154]],
+    "translation": "Agregar elemento de lista de verificación"
   },
   "ngBZOd": {
     "message": "Add comment... (type '/' to open commands or '@' to mention)",
@@ -470,10 +470,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 264],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 265],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 266],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 267],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 238],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 239],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 240],
       ["src/views/pricing/components/Pricing.tsx", 55]
     ],
     "translation": "Roles de administrador"
@@ -482,7 +481,7 @@
     "message": "Advanced admin controls",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 103]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 82]],
     "translation": "Controles avanzados de administrador"
   },
   "/jd3aj": {
@@ -490,7 +489,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 268]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 241]
     ],
     "translation": "Roles avanzados de administrador"
   },
@@ -498,7 +497,7 @@
     "message": "Advanced security, compliance, and dedicated support for large organizations.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 97]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 76]],
     "translation": "Seguridad avanzada, cumplimiento normativo y soporte dedicado para grandes organizaciones."
   },
   "h2ztFt": {
@@ -520,7 +519,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 101]],
-    "translation": "Todas las funciones Pro +"
+    "translation": "Todas las funciones Pro +",
+    "obsolete": true
   },
   "UQbwrz": {
     "message": "All systems operational",
@@ -533,7 +533,7 @@
     "message": "All Teams features +",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 79]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 80]],
     "translation": "Todas las funciones de Teams +"
   },
   "Z3krJD": {
@@ -592,7 +592,7 @@
     "message": "Annual",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 68]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 75]],
     "translation": "Anual"
   },
   "3bqt9U": {
@@ -608,7 +608,7 @@
     "comments": [],
     "origin": [
       ["src/components/SettingsLayout.tsx", 65],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 237]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 214]
     ],
     "translation": "API"
   },
@@ -777,7 +777,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 199]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 180]
     ],
     "translation": "Asignados"
   },
@@ -809,7 +809,7 @@
     "message": "Back",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 298]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 284]],
     "translation": "Atrás"
   },
   "KNKCTb": {
@@ -833,6 +833,13 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 28]],
     "translation": "Hoja de ruta básica"
   },
+  "/XCg57": {
+    "translation": "Ideal para equipos en crecimiento que necesitan colaboración",
+    "message": "Best for growing teams that need collaboration",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 53]]
+  },
   "Cd4sTD": {
     "message": "Best for individuals and solo creators getting started",
     "placeholders": {},
@@ -844,7 +851,7 @@
     "message": "Best for large organizations with advanced needs",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 98]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 77]],
     "translation": "Ideal para grandes organizaciones con necesidades avanzadas"
   },
   "UoSI+i": {
@@ -852,21 +859,31 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 53]],
-    "translation": "Ideal para equipos pequeños y en crecimiento que necesitan colaboración"
+    "translation": "Ideal para equipos pequeños y en crecimiento que necesitan colaboración",
+    "obsolete": true
   },
   "zt/6cS": {
     "message": "Best for small teams who want to collaborate and move faster together.",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/onboarding/select-plan/index.tsx", 91]],
-    "translation": "Ideal para equipos pequeños que desean colaborar y avanzar más rápido juntos."
+    "translation": "Ideal para equipos pequeños que desean colaborar y avanzar más rápido juntos.",
+    "obsolete": true
   },
   "qaS+1/": {
     "message": "Best for teams that want to scale without limits",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 76]],
-    "translation": "Ideal para equipos que quieren escalar sin límites"
+    "translation": "Ideal para equipos que quieren escalar sin límites",
+    "obsolete": true
+  },
+  "jewQ8W": {
+    "translation": "Ideal para equipos que quieren colaborar y avanzar más rápido juntos.",
+    "message": "Best for teams who want to collaborate and move faster together.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 98]]
   },
   "ARvBT/": {
     "message": "billed annually",
@@ -982,7 +999,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 116]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 121]
     ],
     "translation": "Plantillas de tablero"
   },
@@ -1030,7 +1047,7 @@
     "comments": [],
     "origin": [
       ["src/views/home/components/Features.tsx", 85],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 132]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 135]
     ],
     "translation": "Visibilidad del tablero"
   },
@@ -1049,7 +1066,7 @@
       ["src/components/SideNavigation.tsx", 98],
       ["src/views/boards/index.tsx", 58],
       ["src/views/boards/index.tsx", 63],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 73]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 83]
     ],
     "translation": "Tableros"
   },
@@ -1336,7 +1353,7 @@
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 64],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 77],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 55],
-      ["src/views/onboarding/select-plan/index.tsx", 240],
+      ["src/views/onboarding/select-plan/index.tsx", 246],
       ["src/views/settings/components/Avatar.tsx", 287],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 206],
       [
@@ -1483,7 +1500,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 108],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 114],
       ["src/views/pricing/components/PricingTiers.tsx", 39]
     ],
     "translation": "Listas de verificación"
@@ -1492,7 +1509,7 @@
     "message": "Choose a plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 153]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 157]],
     "translation": "Elige un plan"
   },
   "5EMoSo": {
@@ -1587,7 +1604,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 309]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 279]
     ],
     "translation": "Colaboración"
   },
@@ -1599,11 +1616,11 @@
     "translation": "Próximamente"
   },
   "dYbQ1T": {
-    "translation": "Opciones de comentario",
     "message": "Comment options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Comment.tsx", 161]]
+    "origin": [["src/views/card/components/Comment.tsx", 161]],
+    "translation": "Opciones de comentario"
   },
   "VbyRUy": {
     "message": "Comments",
@@ -1657,7 +1674,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 82]],
-    "translation": "Roles de usuario y permisos configurables"
+    "translation": "Roles de usuario y permisos configurables",
+    "obsolete": true
   },
   "t0dTPm": {
     "message": "Configure webhooks to receive notifications when cards are created, updated, moved, or deleted.",
@@ -1746,7 +1764,7 @@
     "message": "Contact Sales",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 95]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 74]],
     "translation": "Contactar con ventas"
   },
   "Bhgd0l": {
@@ -1755,8 +1773,8 @@
     "comments": [],
     "origin": [
       ["src/components/FeedbackModal.tsx", 100],
-      ["src/views/pricing/components/PricingTiers.tsx", 96],
-      ["src/views/pricing/components/PricingTiers.tsx", 96]
+      ["src/views/pricing/components/PricingTiers.tsx", 75],
+      ["src/views/pricing/components/PricingTiers.tsx", 75]
     ],
     "translation": "Contáctanos"
   },
@@ -1772,8 +1790,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 246],
-      ["src/views/onboarding/workspace-details/index.tsx", 315]
+      ["src/views/onboarding/select-plan/index.tsx", 252],
+      ["src/views/onboarding/workspace-details/index.tsx", 301]
     ],
     "translation": "Continuar"
   },
@@ -1867,7 +1885,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 305]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 275]
     ],
     "translation": "Funciones principales"
   },
@@ -2059,7 +2077,8 @@
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 172],
       ["src/views/pricing/components/PricingTiers.tsx", 83]
     ],
-    "translation": "Marca personalizada"
+    "translation": "Marca personalizada",
+    "obsolete": true
   },
   "GAD3Dx": {
     "message": "Custom domain",
@@ -2079,7 +2098,7 @@
     "message": "Custom SLA",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 105]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 84]],
     "translation": "SLA personalizado"
   },
   "u2+JIh": {
@@ -2095,8 +2114,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 100],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 101]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 106],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 107]
     ],
     "translation": "Nombre de usuario personalizado"
   },
@@ -2105,7 +2124,15 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/onboarding/workspace-details/index.tsx", 241]],
-    "translation": "Los nombres de usuario personalizados requieren actualizar a un plan Pro"
+    "translation": "Los nombres de usuario personalizados requieren actualizar a un plan Pro",
+    "obsolete": true
+  },
+  "5Y8Qur": {
+    "translation": "Los nombres de usuario personalizados requieren actualizar a un plan de Equipo",
+    "message": "Custom usernames require upgrading to a Team plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 238]]
   },
   "j9IZZ0": {
     "message": "Custom workspace URL",
@@ -2121,7 +2148,7 @@
     "message": "Custom workspace username",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 81]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 58]],
     "translation": "Nombre de usuario del espacio de trabajo personalizado"
   },
   "n+xLOH": {
@@ -2149,7 +2176,7 @@
     "message": "Dedicated account manager",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 104]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 83]],
     "translation": "Gestor de cuenta dedicado"
   },
   "P8Cunr": {
@@ -2157,8 +2184,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 98],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 99]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 105]
     ],
     "translation": "Nombre de usuario predeterminado"
   },
@@ -2208,11 +2234,11 @@
     "translation": "Eliminar tarjeta"
   },
   "rmAXC2": {
-    "translation": "Eliminar lista de verificación",
     "message": "Delete checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Checklists.tsx", 145]]
+    "origin": [["src/views/card/components/Checklists.tsx", 145]],
+    "translation": "Eliminar lista de verificación"
   },
   "njJFtc": {
     "message": "Delete comment",
@@ -2589,7 +2615,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 191]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 173]
     ],
     "translation": "Notificaciones por email"
   },
@@ -2597,7 +2623,7 @@
     "message": "Email notifications for mentions",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 60]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 61]],
     "translation": "Notificaciones por email para menciones"
   },
   "IqjpYe": {
@@ -2620,7 +2646,7 @@
     "message": "Engineering",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 181]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 178]],
     "translation": "Ingeniería"
   },
   "0+ewPp": {
@@ -2701,8 +2727,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 334],
-      ["src/views/pricing/components/PricingTiers.tsx", 92]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 303],
+      ["src/views/pricing/components/PricingTiers.tsx", 71]
     ],
     "translation": "Enterprise"
   },
@@ -3053,7 +3079,7 @@
     "message": "File uploads",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 89]],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 97]],
     "translation": "Subida de archivos"
   },
   "o7J4JM": {
@@ -3089,9 +3115,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 82],
-      ["src/views/onboarding/select-plan/index.tsx", 83],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 331],
+      ["src/views/onboarding/select-plan/index.tsx", 89],
+      ["src/views/onboarding/select-plan/index.tsx", 90],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 301],
       ["src/views/pricing/components/Pricing.tsx", 32],
       ["src/views/pricing/components/Pricing.tsx", 32],
       ["src/views/pricing/components/PricingTiers.tsx", 26]
@@ -3134,9 +3160,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 239],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 240],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 241]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 216],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 217]
     ],
     "translation": "Acceso completo a la API"
   },
@@ -3170,8 +3195,7 @@
       ["src/views/home/components/Cta.tsx", 61],
       ["src/views/home/components/Header.tsx", 106],
       ["src/views/pricing/components/PricingTiers.tsx", 29],
-      ["src/views/pricing/components/PricingTiers.tsx", 50],
-      ["src/views/pricing/components/PricingTiers.tsx", 73]
+      ["src/views/pricing/components/PricingTiers.tsx", 50]
     ],
     "translation": "Comenzar"
   },
@@ -3312,7 +3336,7 @@
     "message": "Good for individuals starting out who just need the essentials.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 84]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 91]],
     "translation": "Ideal para personas que comienzan y solo necesitan lo esencial."
   },
   "cdyS7J": {
@@ -3320,9 +3344,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 257],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 258],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 259]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 232],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 233]
     ],
     "translation": "Google SSO"
   },
@@ -3331,7 +3354,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 260]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 234]
     ],
     "translation": "Google SSO + SAML"
   },
@@ -3511,7 +3534,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 313]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 283]
     ],
     "translation": "Importaciones"
   },
@@ -3564,7 +3587,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 140]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 142]
     ],
     "translation": "Búsqueda inteligente"
   },
@@ -3615,8 +3638,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 207],
-      ["src/views/pricing/components/PricingTiers.tsx", 58]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 187],
+      ["src/views/pricing/components/PricingTiers.tsx", 59]
     ],
     "translation": "Enlaces de invitación"
   },
@@ -3642,7 +3665,15 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/members/components/InviteMemberForm.tsx", 329]],
-    "translation": "Invitar miembros requiere un plan Team o Pro. Serás redirigido para actualizar tu espacio de trabajo."
+    "translation": "Invitar miembros requiere un plan Team o Pro. Serás redirigido para actualizar tu espacio de trabajo.",
+    "obsolete": true
+  },
+  "7tEnCk": {
+    "translation": "Invitar miembros requiere un plan de Equipo. Serás redirigido para actualizar tu espacio de trabajo.",
+    "message": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 329]]
   },
   "qPP4lD": {
     "message": "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace.",
@@ -3725,7 +3756,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 124]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 128]
     ],
     "translation": "Etiquetas y filtros"
   },
@@ -3755,7 +3786,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 159]],
-    "translation": "Oferta de lanzamiento"
+    "translation": "Oferta de lanzamiento",
+    "obsolete": true
   },
   "EEHmPC": {
     "message": "Launch offer: Get unlimited members with Pro",
@@ -3826,7 +3858,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 238]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 215]
     ],
     "translation": "Acceso limitado a la API"
   },
@@ -3979,7 +4011,7 @@
     "message": "Marketing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 181]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 178]],
     "translation": "Marketing"
   },
   "agPptk": {
@@ -4015,11 +4047,11 @@
     "translation": "Miembro"
   },
   "fTHH1x": {
-    "translation": "Opciones de miembro",
     "message": "Member options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 262]]
+    "origin": [["src/views/members/index.tsx", 262]],
+    "translation": "Opciones de miembro"
   },
   "GnG6Oy": {
     "message": "members",
@@ -4039,7 +4071,7 @@
       ["src/views/card/components/MemberSelector.tsx", 116],
       ["src/views/card/index.tsx", 143],
       ["src/views/members/index.tsx", 284],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 81]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 90]
     ],
     "translation": "Miembros"
   },
@@ -4057,7 +4089,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 183]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 166]
     ],
     "translation": "Menciones"
   },
@@ -4075,7 +4107,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 67],
+      ["src/views/onboarding/select-plan/index.tsx", 74],
       ["src/views/pricing/components/Pricing.tsx", 14],
       ["src/views/pricing/index.tsx", 20]
     ],
@@ -4419,7 +4451,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 245]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 221]
     ],
     "translation": "On-premise"
   },
@@ -4427,7 +4459,7 @@
     "message": "On-premise deployment option",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 106]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 85]],
     "translation": "Opción de despliegue on-premise"
   },
   "gukxZ5": {
@@ -4470,7 +4502,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 229]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 207]
     ],
     "translation": "Código abierto"
   },
@@ -4610,7 +4642,7 @@
     "comments": [],
     "origin": [
       ["src/views/pricing/components/Pricing.tsx", 100],
-      ["src/views/pricing/components/PricingTiers.tsx", 120]
+      ["src/views/pricing/components/PricingTiers.tsx", 99]
     ],
     "translation": "Frecuencia de pago"
   },
@@ -4637,7 +4669,7 @@
     "message": "Per-seat pricing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 83]],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 92]],
     "translation": "Precio por usuario"
   },
   "mrhyIB": {
@@ -4691,7 +4723,7 @@
     "message": "Pick a plan to get started. All paid plans include a 14-day free trial.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 156]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 162]],
     "translation": "Elige un plan para comenzar. Todos los planes de pago incluyen una prueba gratuita de 14 días."
   },
   "GdgCoi": {
@@ -4723,7 +4755,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 317]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 287]
     ],
     "translation": "Plataforma"
   },
@@ -4824,8 +4856,8 @@
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 93],
       ["src/views/members/components/InviteMemberForm.tsx", 112],
       ["src/views/members/index.tsx", 70],
-      ["src/views/onboarding/workspace-details/index.tsx", 121],
-      ["src/views/onboarding/workspace-details/index.tsx", 170],
+      ["src/views/onboarding/workspace-details/index.tsx", 119],
+      ["src/views/onboarding/workspace-details/index.tsx", 167],
       ["src/views/settings/components/Avatar.tsx", 200],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 40],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 46],
@@ -4891,9 +4923,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 275],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 248],
       ["src/views/pricing/components/Pricing.tsx", 56],
-      ["src/views/pricing/components/PricingTiers.tsx", 61]
+      ["src/views/pricing/components/PricingTiers.tsx", 62]
     ],
     "translation": "Soporte prioritario por correo electrónico"
   },
@@ -4920,7 +4952,8 @@
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 333],
       ["src/views/pricing/components/PricingTiers.tsx", 70]
     ],
-    "translation": "Pro"
+    "translation": "Pro",
+    "obsolete": true
   },
   "oyRjD/": {
     "message": "Pro Plan",
@@ -5185,7 +5218,7 @@
       ["src/views/home/components/Footer.tsx", 36],
       ["src/views/home/components/Header.tsx", 13],
       ["src/views/home/components/Header.tsx", 28],
-      ["src/views/onboarding/workspace-details/index.tsx", 181]
+      ["src/views/onboarding/workspace-details/index.tsx", 178]
     ],
     "translation": "Hoja de ruta"
   },
@@ -5210,7 +5243,8 @@
     "origin": [
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 164]
     ],
-    "translation": "Roles y permisos"
+    "translation": "Roles y permisos",
+    "obsolete": true
   },
   "vAR/I8": {
     "message": "Run on your own infrastructure",
@@ -5223,7 +5257,7 @@
     "message": "SAML SSO",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 102]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 81]],
     "translation": "SAML SSO"
   },
   "+5kO8P": {
@@ -5268,11 +5302,11 @@
     "translation": "Selección"
   },
   "A1taO8": {
-    "translation": "Buscar",
     "message": "Search",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/WorkspaceMenu.tsx", 102]]
+    "origin": [["src/components/WorkspaceMenu.tsx", 102]],
+    "translation": "Buscar"
   },
   "SkCNhl": {
     "message": "Search boards and cards...",
@@ -5317,7 +5351,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 321]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 291]
     ],
     "translation": "Seguridad"
   },
@@ -5451,7 +5485,7 @@
     "message": "Set up your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 199]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 196]],
     "translation": "Configura tu espacio de trabajo"
   },
   "Tz0i8g": {
@@ -5555,8 +5589,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 319],
-      ["src/views/onboarding/workspace-details/index.tsx", 386]
+      ["src/views/onboarding/select-plan/index.tsx", 325],
+      ["src/views/onboarding/workspace-details/index.tsx", 372]
     ],
     "translation": "Cerrar sesión"
   },
@@ -5620,7 +5654,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 291]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 262]
     ],
     "translation": "SLA"
   },
@@ -5649,7 +5683,7 @@
     "message": "Solo",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 81]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 88]],
     "translation": "Individual"
   },
   "whpQwW": {
@@ -5678,7 +5712,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 256]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 231]
     ],
     "translation": "SSO"
   },
@@ -5717,6 +5751,13 @@
     "origin": [["src/views/pricing/index.tsx", 47]],
     "translation": "Comienza gratis. Actualiza a medida que tu equipo crece. Sin tarifas ocultas, sin contratos."
   },
+  "lUlbS2": {
+    "translation": "Comienza tu prueba gratuita de 14 días, cancela en cualquier momento.",
+    "message": "Start your 14-day free trial, cancel anytime.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 161]]
+  },
   "uAQUqI": {
     "message": "Status",
     "placeholders": {},
@@ -5732,11 +5773,11 @@
     "translation": "Enviar"
   },
   "DJUhvh": {
-    "translation": "Enviar comentario",
     "message": "Submit comment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewCommentForm.tsx", 92]]
+    "origin": [["src/views/card/components/NewCommentForm.tsx", 92]],
+    "translation": "Enviar comentario"
   },
   "WYDptz": {
     "message": "Subscription Required",
@@ -5780,7 +5821,7 @@
     "comments": [],
     "origin": [
       ["src/components/UserMenu.tsx", 198],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 325]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 295]
     ],
     "translation": "Soporte"
   },
@@ -5802,7 +5843,7 @@
     "message": "Team",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 88]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 95]],
     "translation": "Equipo"
   },
   "bff61F": {
@@ -5821,7 +5862,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 332],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 302],
       ["src/views/pricing/components/Pricing.tsx", 46],
       ["src/views/pricing/components/PricingTiers.tsx", 47]
     ],
@@ -6110,14 +6151,14 @@
     "message": "This URL has already been taken",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 84]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 82]],
     "translation": "Esta URL ya está en uso"
   },
   "gKmoow": {
     "message": "This URL is reserved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 86]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 84]],
     "translation": "Esta URL está reservada"
   },
   "OAYToL": {
@@ -6239,7 +6280,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 218],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 197],
       ["src/views/settings/IntegrationsSettings.tsx", 142]
     ],
     "translation": "Trello"
@@ -6363,7 +6404,7 @@
     "comments": [],
     "origin": [
       ["src/components/NewWorkspaceForm.tsx", 109],
-      ["src/views/onboarding/workspace-details/index.tsx", 120]
+      ["src/views/onboarding/workspace-details/index.tsx", 118]
     ],
     "translation": "No se pudo crear el espacio de trabajo"
   },
@@ -6473,7 +6514,7 @@
     "message": "Unable to start checkout",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 169]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 166]],
     "translation": "No se pudo iniciar el proceso de pago"
   },
   "KNK33q": {
@@ -6635,10 +6676,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 74],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 75],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 76],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 77],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 84],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 85],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 86],
       ["src/views/pricing/components/Pricing.tsx", 37],
       ["src/views/pricing/components/PricingTiers.tsx", 36]
     ],
@@ -6673,10 +6713,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 91],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 92],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 93],
-      ["src/views/pricing/components/PricingTiers.tsx", 59]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 99],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 100],
+      ["src/views/pricing/components/PricingTiers.tsx", 60]
     ],
     "translation": "Subidas de archivos ilimitadas"
   },
@@ -6698,11 +6737,7 @@
     "message": "Unlimited members",
     "placeholders": {},
     "comments": [],
-    "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 84],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 85],
-      ["src/views/pricing/components/PricingTiers.tsx", 80]
-    ],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 93]],
     "translation": "Miembros ilimitados"
   },
   "8AwlaR": {
@@ -6710,7 +6745,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/onboarding/select-plan/index.tsx", 99]],
-    "translation": "Miembros ilimitados y un nombre de usuario personalizado para el espacio de trabajo para equipos listos para escalar."
+    "translation": "Miembros ilimitados y un nombre de usuario personalizado para el espacio de trabajo para equipos listos para escalar.",
+    "obsolete": true
   },
   "i5yNAO": {
     "message": "Unlimited seats",
@@ -6724,7 +6760,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 75]],
-    "translation": "Plazas ilimitadas y funciones avanzadas para equipos en crecimiento."
+    "translation": "Plazas ilimitadas y funciones avanzadas para equipos en crecimiento.",
+    "obsolete": true
   },
   "SMaFdc": {
     "message": "Unsubscribe",
@@ -6800,7 +6837,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/index.tsx", 296],
-      ["src/views/onboarding/select-plan/index.tsx", 245]
+      ["src/views/onboarding/select-plan/index.tsx", 251]
     ],
     "translation": "Actualizar"
   },
@@ -6819,7 +6856,15 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/onboarding/workspace-details/index.tsx", 265]],
-    "translation": "Actualizar a Pro ($29/mes)"
+    "translation": "Actualizar a Pro ($29/mes)",
+    "obsolete": true
+  },
+  "21QsyA": {
+    "translation": "Actualiza tu plan",
+    "message": "Upgrade your plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 157]]
   },
   "b3Thhd": {
     "message": "Upload failed",
@@ -7047,11 +7092,11 @@
     "translation": "El nombre del webhook es obligatorio"
   },
   "N1eQmK": {
-    "translation": "Opciones de webhook",
     "message": "Webhook options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/WebhookList.tsx", 125]]
+    "origin": [["src/views/settings/components/WebhookList.tsx", 125]],
+    "translation": "Opciones de webhook"
   },
   "8iP9oQ": {
     "message": "Webhook test failed",
@@ -7172,7 +7217,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 275],
+      ["src/views/onboarding/workspace-details/index.tsx", 261],
       ["src/views/settings/WorkspaceSettings.tsx", 55]
     ],
     "translation": "Descripción del espacio de trabajo"
@@ -7221,7 +7266,7 @@
     "comments": [],
     "origin": [
       ["src/components/NewWorkspaceForm.tsx", 165],
-      ["src/views/onboarding/workspace-details/index.tsx", 208],
+      ["src/views/onboarding/workspace-details/index.tsx", 205],
       ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 76],
       ["src/views/settings/WorkspaceSettings.tsx", 36]
     ],
@@ -7292,7 +7337,9 @@
     "message": "Workspace username",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 97]],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 104]
+    ],
     "translation": "Nombre de usuario del espacio de trabajo"
   },
   "/8pTF/": {
@@ -7337,7 +7384,7 @@
     "message": "You can always change these later in settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 202]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 199]],
     "translation": "Siempre puedes cambiar esto más tarde en la configuración."
   },
   "aelko+": {
@@ -7345,7 +7392,15 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/home/components/Faqs.tsx", 67]],
-    "translation": "Puedes obtener una URL personalizada para tu espacio de trabajo, como <0>kan.bn/kan</0>, yendo a la <1>configuración de tu espacio de trabajo</1> y comprando una suscripción pro. ¡Todas las suscripciones ayudan a financiar el desarrollo del proyecto!"
+    "translation": "Puedes obtener una URL personalizada para tu espacio de trabajo, como <0>kan.bn/kan</0>, yendo a la <1>configuración de tu espacio de trabajo</1> y comprando una suscripción pro. ¡Todas las suscripciones ayudan a financiar el desarrollo del proyecto!",
+    "obsolete": true
+  },
+  "oRGf3Q": {
+    "translation": "Puedes obtener una URL personalizada de espacio de trabajo, como <0>kan.bn/kan</0>, accediendo a la <1>configuración de tu espacio de trabajo</1> y actualizando a una suscripción de espacio de trabajo de Equipo. ¡Todas las suscripciones ayudan a financiar el desarrollo del proyecto!",
+    "message": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and upgrading to a Team workspace subscription. All subscriptions help fund the development of the project!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 67]]
   },
   "kSxwQL": {
     "message": "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace.",
@@ -7473,7 +7528,7 @@
     "message": "Your avatar",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 264]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 270]],
     "translation": "Tu avatar"
   },
   "evg7+A": {
@@ -7590,14 +7645,14 @@
     "message": "Your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 346]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 332]],
     "translation": "Tu espacio de trabajo"
   },
   "j0o6ml": {
     "message": "Your workspace description",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 349]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 335]],
     "translation": "Descripción de tu espacio de trabajo"
   },
   "GnSSGm": {
@@ -7641,8 +7696,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 218],
-      ["src/views/onboarding/workspace-details/index.tsx", 219]
+      ["src/views/onboarding/workspace-details/index.tsx", 215],
+      ["src/views/onboarding/workspace-details/index.tsx", 216]
     ],
     "translation": "tu-espacio-de-trabajo"
   },
