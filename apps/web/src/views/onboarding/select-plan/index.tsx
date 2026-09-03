@@ -41,12 +41,13 @@ export default function SelectPlanView() {
   const searchParams = useSearchParams();
   const requestedPlan = searchParams.get("plan");
   const returnUrl = searchParams.get("returnUrl") ?? "/boards";
+  const workspacePublicIdParam = searchParams.get("workspacePublicId");
+  const isUpgradingExistingWorkspace = !!workspacePublicIdParam;
   const workspacePublicId =
-    searchParams.get("workspacePublicId") ??
+    workspacePublicIdParam ??
     (typeof window !== "undefined"
       ? localStorage.getItem("workspacePublicId")
       : null);
-  const isUpgradingExistingWorkspace = !!workspacePublicId;
   const [selected, setSelected] = useState<PlanId>(() => {
     if (
       VALID_PLAN_IDS.includes(requestedPlan as PlanId) &&
@@ -106,7 +107,7 @@ export default function SelectPlanView() {
 
   const buildSelectPlanUrl = (plan: PlanId, b: Billing) => {
     const base = `${pathname}?plan=${plan}&billing=${b}&returnUrl=${encodeURIComponent(returnUrl)}`;
-    return workspacePublicId
+    return isUpgradingExistingWorkspace
       ? `${base}&workspacePublicId=${workspacePublicId}`
       : base;
   };
@@ -122,7 +123,7 @@ export default function SelectPlanView() {
   };
 
   const handleContinue = async () => {
-    if (workspacePublicId && selected !== "solo") {
+    if (isUpgradingExistingWorkspace && selected !== "solo") {
       const response = await fetch("/api/stripe/create_checkout_session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
