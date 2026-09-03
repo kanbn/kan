@@ -52,11 +52,7 @@ export function setupStripeWebhookForwarding() {
   });
 }
 
-export async function signUpAndUpgradeToPlan(
-  page: Page,
-  user: TestUser,
-  plan: "pro" | "team",
-) {
+export async function signUpAndUpgradeToTeam(page: Page, user: TestUser) {
   const auth = new AuthPage(page);
   const onboarding = new CloudOnboardingPage(page);
   const dashboard = new DashboardPage(page);
@@ -72,25 +68,17 @@ export async function signUpAndUpgradeToPlan(
   await page.getByRole("button", { name: "Choose plan" }).click();
   await page.waitForURL(/\/upgrade\/select-plan/);
 
-  if (plan === "team") {
-    await page.getByRole("button", { name: /^Team\b/ }).click();
-  }
+  await page.getByRole("button", { name: /^Team\b/ }).click();
 
   await page.getByRole("button", { name: "Upgrade" }).click();
   await page.waitForURL(/checkout\.stripe\.com/, { timeout: 30_000 });
   await checkout.payWithTestCard(user.email);
   await page.waitForURL(/\/settings\/billing/, { timeout: 30_000 });
 
-  const expectedLabel =
-    plan === "team" ? "Team (1 member)" : "Pro (unlimited members)";
   await expect(async () => {
     await page.reload();
     await settings.open();
     await settings.goToTab("Billing");
-    await expect(page.getByText(expectedLabel)).toBeVisible();
+    await expect(page.getByText("Team (1 member)")).toBeVisible();
   }).toPass({ timeout: 20_000 });
-}
-
-export async function signUpAndUpgradeToPro(page: Page, user: TestUser) {
-  await signUpAndUpgradeToPlan(page, user, "pro");
 }

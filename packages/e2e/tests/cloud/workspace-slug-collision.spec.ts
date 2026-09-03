@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import {
   hasRealStripeCredentials,
   setupStripeWebhookForwarding,
-  signUpAndUpgradeToPro,
+  signUpAndUpgradeToTeam,
 } from "../support/cloud-billing";
 import { AuthPage } from "../support/pages/auth-page";
 import { CloudOnboardingPage } from "../support/pages/cloud-onboarding-page";
@@ -14,7 +14,7 @@ import { createTestUser } from "../support/test-user";
 setupStripeWebhookForwarding();
 
 test(
-  "a pro workspace can't claim another workspace's publicId as its own custom slug",
+  "a team workspace can't claim another workspace's publicId as its own custom slug",
   { tag: "@cloud" },
   async ({ page, browser }) => {
     test.skip(
@@ -42,7 +42,7 @@ test(
     const userB = createTestUser();
     const settingsB = new SettingsPage(page);
 
-    await signUpAndUpgradeToPro(page, userB);
+    await signUpAndUpgradeToTeam(page, userB);
     await settingsB.goToTab("Workspace");
 
     await page

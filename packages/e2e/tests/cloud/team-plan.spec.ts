@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import {
   hasRealStripeCredentials,
   setupStripeWebhookForwarding,
-  signUpAndUpgradeToPlan,
+  signUpAndUpgradeToTeam,
 } from "../support/cloud-billing";
 import { AuthPage } from "../support/pages/auth-page";
 import { CloudOnboardingPage } from "../support/pages/cloud-onboarding-page";
@@ -29,7 +29,7 @@ test(
     const userA = createTestUser();
     const members = new MembersPage(page);
 
-    await signUpAndUpgradeToPlan(page, userA, "team");
+    await signUpAndUpgradeToTeam(page, userA);
 
     const customerId = await getCustomerIdForUserEmail(userA.email);
     expect(await getSubscriptionSeatsForCustomer(customerId)).toBe(1);

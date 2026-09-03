@@ -224,7 +224,7 @@ export default function SideNavigation({
                   <ButtonComponent
                     iconLeft={<HiBolt />}
                     variant="secondary"
-                    href={`/upgrade/select-plan?plan=pro&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/settings/billing")}`}
+                    href={`/upgrade/select-plan?plan=team&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/settings/billing")}`}
                     aria-label={t`Start free trial`}
                     title={t`Start free trial`}
                     iconOnly
@@ -234,7 +234,7 @@ export default function SideNavigation({
                     iconLeft={<HiBolt />}
                     fullWidth
                     variant="secondary"
-                    href={`/upgrade/select-plan?plan=pro&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/settings/billing")}`}
+                    href={`/upgrade/select-plan?plan=team&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/settings/billing")}`}
                   >
                     {t`Start free trial`}
                   </ButtonComponent>

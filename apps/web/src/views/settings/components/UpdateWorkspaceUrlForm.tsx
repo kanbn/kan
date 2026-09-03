@@ -100,9 +100,9 @@ const UpdateWorkspaceUrlForm = ({
   const onSubmit = (data: FormValues) => {
     if (!isWorkspaceSlugAvailable?.isAvailable) return;
 
-    if (workspacePlan !== "pro" && env("NEXT_PUBLIC_KAN_ENV") === "cloud")
+    if (workspacePlan === "free" && env("NEXT_PUBLIC_KAN_ENV") === "cloud")
       return router.push(
-        `/upgrade/select-plan?plan=pro&workspacePublicId=${workspacePublicId}&returnUrl=${encodeURIComponent("/settings/workspace")}`,
+        `/upgrade/select-plan?plan=team&workspacePublicId=${workspacePublicId}&returnUrl=${encodeURIComponent("/settings/workspace")}`,
       );
 
     updateWorkspaceSlug.mutate({
@@ -119,7 +119,7 @@ const UpdateWorkspaceUrlForm = ({
           {...register("slug")}
           className={`${
             isWorkspaceSlugAvailable?.isAvailable ||
-            (workspacePlan === "pro" && slug === workspaceUrl)
+            (workspacePlan !== "free" && slug === workspaceUrl)
               ? "focus:ring-yellow-500 dark:focus:ring-yellow-500"
               : ""
           }`}
@@ -136,7 +136,7 @@ const UpdateWorkspaceUrlForm = ({
           }
           iconRight={
             isWorkspaceSlugAvailable?.isAvailable ||
-            (workspacePlan === "pro" && slug === workspaceUrl) ? (
+            (workspacePlan !== "free" && slug === workspaceUrl) ? (
               <HiMiniStar className="h-4 w-4 text-yellow-500" />
             ) : isWorkspaceSlugAvailable?.isAvailable ? (
               <HiCheck className="h-4 w-4 dark:text-dark-1000" />

@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import {
   hasRealStripeCredentials,
   setupStripeWebhookForwarding,
-  signUpAndUpgradeToPro,
+  signUpAndUpgradeToTeam,
 } from "../support/cloud-billing";
 import { AuthPage } from "../support/pages/auth-page";
 import { CloudOnboardingPage } from "../support/pages/cloud-onboarding-page";
@@ -34,7 +34,7 @@ test(
     const settings = new SettingsPage(page);
     const billingPortal = new StripeBillingPortalPage(page);
 
-    await signUpAndUpgradeToPro(page, userA);
+    await signUpAndUpgradeToTeam(page, userA);
 
     await members.open();
     const inviteLink = await members.createInviteLink();

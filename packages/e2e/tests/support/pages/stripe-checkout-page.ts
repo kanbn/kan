@@ -32,4 +32,8 @@ export class StripeCheckoutPage {
 
     await this.page.getByRole("button", { name: "Start trial" }).click();
   }
+
+  async cancel() {
+    await this.page.getByRole("link", { name: /^Back to/ }).click();
+  }
 }

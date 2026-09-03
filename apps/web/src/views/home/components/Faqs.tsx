@@ -73,8 +73,8 @@ const Faqs = () => {
             <Link href="https://kan.bn/settings" className="underline">
               workspace settings
             </Link>{" "}
-            and purchasing a pro workspace subscription. All subscriptions help
-            fund the development of the project!
+            and upgrading to a Team workspace subscription. All subscriptions
+            help fund the development of the project!
           </Trans>
         </Text>
       ),
