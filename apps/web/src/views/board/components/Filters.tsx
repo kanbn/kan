@@ -18,9 +18,11 @@ import {
   formatToArray,
   getAvatarUrl,
 } from "~/utils/helpers";
+import { getBoardFilterMembers } from "../memberFilters";
 
 interface Member {
   publicId: string;
+  status: "active" | "invited" | "removed" | "paused";
   user: {
     name: string | null;
     image: string | null;
@@ -43,12 +45,14 @@ const Filters = ({
   position = "right",
   labels,
   members,
+  assignedMemberPublicIds,
   lists,
   isLoading,
 }: {
   position?: "left" | "right";
   labels: Label[];
   members: Member[];
+  assignedMemberPublicIds?: Set<string>;
   lists: List[];
   isLoading: boolean;
 }) => {
@@ -74,24 +78,29 @@ const Filters = ({
     }
   };
 
-  const formattedMembers = members.map((member) => ({
-    key: member.publicId,
-    value: formatMemberDisplayName(
-      member.user?.name ?? null,
-      member.user?.email ?? null,
-    ),
-    selected: !!router.query.members?.includes(member.publicId),
-    leftIcon: (
-      <Avatar
-        size="xs"
-        name={member.user?.name ?? ""}
-        imageUrl={
-          member.user?.image ? getAvatarUrl(member.user.image) : undefined
-        }
-        email={member.user?.email ?? ""}
-      />
-    ),
-  }));
+  const formattedMembers = getBoardFilterMembers(
+    members,
+    assignedMemberPublicIds,
+  ).map((member) => ({
+      key: member.publicId,
+      value: `${formatMemberDisplayName(
+        member.user?.name ?? null,
+        member.user?.email ?? null,
+      )}${member.status === "paused" ? ` (${t`Paused`})` : ""}`,
+      selected: !!router.query.members?.includes(member.publicId),
+      leftIcon: (
+        <span className={member.status === "paused" ? "opacity-50" : undefined}>
+          <Avatar
+            size="xs"
+            name={member.user?.name ?? ""}
+            imageUrl={
+              member.user?.image ? getAvatarUrl(member.user.image) : undefined
+            }
+            email={member.user?.email ?? ""}
+          />
+        </span>
+      ),
+    }));
 
   const formattedLabels = labels.map((label) => ({
     key: label.publicId,
