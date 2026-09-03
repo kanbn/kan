@@ -10,6 +10,7 @@ import {
   isNull,
   lt,
   or,
+  sql,
 } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
@@ -156,8 +157,10 @@ export const getByPublicId = async (
     lists: string[];
     dueDate: DueDateFilter[];
     type: "regular" | "template" | undefined;
+    cardView?: "full" | "summary";
   },
 ) => {
+  const includeCardDetails = filters.cardView !== "summary";
   let cardIds: string[] = [];
 
   if (filters.labels.length > 0 || filters.members.length > 0) {
@@ -254,12 +257,42 @@ export const getByPublicId = async (
             columns: {
               publicId: true,
               title: true,
-              description: true,
+              description: false,
               listId: true,
               index: true,
               dueDate: true,
               cardNumber: true,
             },
+            extras: (card) => ({
+              // Drizzle rewrites interpolated columns in relational extras to
+              // the outer card alias, so inner table aliases stay static SQL.
+              description: (includeCardDetails
+                ? sql<string | null>`${card.description}`
+                : sql<string | null>`NULL::text`
+              ).as("description"),
+              hasDescription: (includeCardDetails
+                ? sql<boolean>`FALSE`
+                : sql<boolean>`COALESCE(BTRIM(REGEXP_REPLACE(COALESCE(${card.description}, ''), '<[^>]*>', '', 'g')), '') <> ''`
+              ).as("has_description"),
+              attachmentCount: (includeCardDetails
+                ? sql<number>`0`
+                : sql<number>`(SELECT COUNT(*)::int FROM "card_attachment" AS attachment WHERE attachment."cardId" = ${card.id} AND attachment."deletedAt" IS NULL)`
+              ).as("attachment_count"),
+              hasComments: (includeCardDetails
+                ? sql<boolean>`FALSE`
+                : sql<boolean>`EXISTS (SELECT 1 FROM "card_comments" AS comment WHERE comment."cardId" = ${card.id} AND comment."deletedAt" IS NULL)`
+              ).as("has_comments"),
+              checklistSummary: (includeCardDetails
+                ? sql<{
+                    itemCount: number;
+                    completedItemCount: number;
+                  } | null>`NULL::json`
+                : sql<{
+                    itemCount: number;
+                    completedItemCount: number;
+                  }>`(SELECT JSON_BUILD_OBJECT('itemCount', COUNT(*)::int, 'completedItemCount', COUNT(*) FILTER (WHERE checklist_item.completed)::int) FROM "card_checklist_item" AS checklist_item INNER JOIN "card_checklist" AS checklist ON checklist_item."checklistId" = checklist.id WHERE checklist."cardId" = ${card.id} AND checklist."deletedAt" IS NULL AND checklist_item."deletedAt" IS NULL)`
+              ).as("checklist_summary"),
+            }),
             with: {
               labels: {
                 with: {
@@ -297,7 +330,10 @@ export const getByPublicId = async (
                 columns: {
                   publicId: true,
                 },
-                where: isNull(cardAttachments.deletedAt),
+                where: and(
+                  isNull(cardAttachments.deletedAt),
+                  includeCardDetails ? undefined : sql`FALSE`,
+                ),
                 orderBy: asc(cardAttachments.createdAt),
               },
               checklists: {
@@ -306,7 +342,10 @@ export const getByPublicId = async (
                   name: true,
                   index: true,
                 },
-                where: isNull(checklists.deletedAt),
+                where: and(
+                  isNull(checklists.deletedAt),
+                  includeCardDetails ? undefined : sql`FALSE`,
+                ),
                 orderBy: asc(checklists.index),
                 with: {
                   items: {
@@ -325,7 +364,10 @@ export const getByPublicId = async (
                 columns: {
                   publicId: true,
                 },
-                where: isNull(comments.deletedAt),
+                where: and(
+                  isNull(comments.deletedAt),
+                  includeCardDetails ? undefined : sql`FALSE`,
+                ),
                 limit: 1,
               },
             },
@@ -369,13 +411,29 @@ export const getByPublicId = async (
     userFavorites: undefined,
     lists: board.lists.map((list) => ({
       ...list,
-      cards: list.cards.map((card) => ({
-        ...card,
-        labels: card.labels.map((label) => label.label),
-        members: card.members
-          .map((member) => member.member)
-          .filter((member) => member.deletedAt === null),
-      })),
+      cards: list.cards.map((card) => {
+        return {
+          ...card,
+          ...(filters.cardView === "summary" && {
+            summary: {
+              hasDescription: card.hasDescription,
+              attachmentCount: card.attachmentCount,
+              hasComments: card.hasComments,
+              checklistItemCount: card.checklistSummary?.itemCount ?? 0,
+              completedChecklistItemCount:
+                card.checklistSummary?.completedItemCount ?? 0,
+            },
+          }),
+          hasDescription: undefined,
+          attachmentCount: undefined,
+          hasComments: undefined,
+          checklistSummary: undefined,
+          labels: card.labels.map((label) => label.label),
+          members: card.members
+            .map((member) => member.member)
+            .filter((member) => member.deletedAt === null),
+        };
+      }),
     })),
   };
 
