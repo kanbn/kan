@@ -1390,7 +1390,6 @@
     "translation": "Basic Roadmap"
   },
   "/XCg57": {
-    "translation": "Best for growing teams that need collaboration",
     "message": "Best for growing teams that need collaboration",
     "placeholders": {},
     "comments": [],
@@ -1399,7 +1398,8 @@
         "src/views/pricing/components/PricingTiers.tsx",
         53
       ]
-    ]
+    ],
+    "translation": "Best for growing teams that need collaboration"
   },
   "Cd4sTD": {
     "message": "Best for individuals and solo creators getting started",
@@ -1465,7 +1465,6 @@
     "obsolete": true
   },
   "jewQ8W": {
-    "translation": "Best for teams who want to collaborate and move faster together.",
     "message": "Best for teams who want to collaborate and move faster together.",
     "placeholders": {},
     "comments": [],
@@ -1474,7 +1473,8 @@
         "src/views/onboarding/select-plan/index.tsx",
         98
       ]
-    ]
+    ],
+    "translation": "Best for teams who want to collaborate and move faster together."
   },
   "ARvBT/": {
     "message": "billed annually",
@@ -3559,7 +3559,6 @@
     "obsolete": true
   },
   "5Y8Qur": {
-    "translation": "Custom usernames require upgrading to a Team plan",
     "message": "Custom usernames require upgrading to a Team plan",
     "placeholders": {},
     "comments": [],
@@ -3568,7 +3567,8 @@
         "src/views/onboarding/workspace-details/index.tsx",
         238
       ]
-    ]
+    ],
+    "translation": "Custom usernames require upgrading to a Team plan"
   },
   "j9IZZ0": {
     "message": "Custom workspace URL",
@@ -6156,7 +6156,6 @@
     "obsolete": true
   },
   "7tEnCk": {
-    "translation": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace.",
     "message": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace.",
     "placeholders": {},
     "comments": [],
@@ -6165,7 +6164,8 @@
         "src/views/members/components/InviteMemberForm.tsx",
         329
       ]
-    ]
+    ],
+    "translation": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace."
   },
   "qPP4lD": {
     "message": "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace.",
@@ -9788,7 +9788,6 @@
     "translation": "Start free. Upgrade as your team grows. No hidden fees, no contracts."
   },
   "lUlbS2": {
-    "translation": "Start your 14-day free trial, cancel anytime.",
     "message": "Start your 14-day free trial, cancel anytime.",
     "placeholders": {},
     "comments": [],
@@ -9797,7 +9796,8 @@
         "src/views/onboarding/select-plan/index.tsx",
         161
       ]
-    ]
+    ],
+    "translation": "Start your 14-day free trial, cancel anytime."
   },
   "uAQUqI": {
     "message": "Status",
@@ -11633,7 +11633,6 @@
     "obsolete": true
   },
   "21QsyA": {
-    "translation": "Upgrade your plan",
     "message": "Upgrade your plan",
     "placeholders": {},
     "comments": [],
@@ -11642,7 +11641,8 @@
         "src/views/onboarding/select-plan/index.tsx",
         157
       ]
-    ]
+    ],
+    "translation": "Upgrade your plan"
   },
   "b3Thhd": {
     "message": "Upload failed",
@@ -12516,7 +12516,6 @@
     "obsolete": true
   },
   "oRGf3Q": {
-    "translation": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and upgrading to a Team workspace subscription. All subscriptions help fund the development of the project!",
     "message": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and upgrading to a Team workspace subscription. All subscriptions help fund the development of the project!",
     "placeholders": {},
     "comments": [],
@@ -12525,7 +12524,8 @@
         "src/views/home/components/Faqs.tsx",
         67
       ]
-    ]
+    ],
+    "translation": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and upgrading to a Team workspace subscription. All subscriptions help fund the development of the project!"
   },
   "kSxwQL": {
     "message": "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace.",

@@ -834,11 +834,11 @@
     "translation": "Roadmap base"
   },
   "/XCg57": {
-    "translation": "Ideale per i team in crescita che hanno bisogno di collaborazione",
     "message": "Best for growing teams that need collaboration",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 53]]
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 53]],
+    "translation": "Ideale per i team in crescita che hanno bisogno di collaborazione"
   },
   "Cd4sTD": {
     "message": "Best for individuals and solo creators getting started",
@@ -879,11 +879,11 @@
     "obsolete": true
   },
   "jewQ8W": {
-    "translation": "Ideale per i team che vogliono collaborare e muoversi più velocemente insieme.",
     "message": "Best for teams who want to collaborate and move faster together.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 98]]
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 98]],
+    "translation": "Ideale per i team che vogliono collaborare e muoversi più velocemente insieme."
   },
   "ARvBT/": {
     "message": "billed annually",
@@ -2128,11 +2128,11 @@
     "obsolete": true
   },
   "5Y8Qur": {
-    "translation": "I nomi utente personalizzati richiedono l'upgrade a un piano Team",
     "message": "Custom usernames require upgrading to a Team plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 238]]
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 238]],
+    "translation": "I nomi utente personalizzati richiedono l'upgrade a un piano Team"
   },
   "j9IZZ0": {
     "message": "Custom workspace URL",
@@ -3669,11 +3669,11 @@
     "obsolete": true
   },
   "7tEnCk": {
-    "translation": "Invitare membri richiede un piano Team. Verrai reindirizzato per aggiornare il tuo workspace.",
     "message": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 329]]
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 329]],
+    "translation": "Invitare membri richiede un piano Team. Verrai reindirizzato per aggiornare il tuo workspace."
   },
   "qPP4lD": {
     "message": "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace.",
@@ -5752,11 +5752,11 @@
     "translation": "Inizia gratis. Aggiorna man mano che il tuo team cresce. Nessun costo nascosto, nessun contratto."
   },
   "lUlbS2": {
-    "translation": "Inizia la tua prova gratuita di 14 giorni, annulla in qualsiasi momento.",
     "message": "Start your 14-day free trial, cancel anytime.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 161]]
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 161]],
+    "translation": "Inizia la tua prova gratuita di 14 giorni, annulla in qualsiasi momento."
   },
   "uAQUqI": {
     "message": "Status",
@@ -6860,11 +6860,11 @@
     "obsolete": true
   },
   "21QsyA": {
-    "translation": "Aggiorna il tuo piano",
     "message": "Upgrade your plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 157]]
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 157]],
+    "translation": "Aggiorna il tuo piano"
   },
   "b3Thhd": {
     "message": "Upload failed",
@@ -7396,11 +7396,11 @@
     "obsolete": true
   },
   "oRGf3Q": {
-    "translation": "Puoi ottenere un URL personalizzato per il workspace, come <0>kan.bn/kan</0>, andando nelle <1>impostazioni del workspace</1> e passando a un abbonamento Team. Tutti gli abbonamenti aiutano a finanziare lo sviluppo del progetto!",
     "message": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and upgrading to a Team workspace subscription. All subscriptions help fund the development of the project!",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/home/components/Faqs.tsx", 67]]
+    "origin": [["src/views/home/components/Faqs.tsx", 67]],
+    "translation": "Puoi ottenere un URL personalizzato per il workspace, come <0>kan.bn/kan</0>, andando nelle <1>impostazioni del workspace</1> e passando a un abbonamento Team. Tutti gli abbonamenti aiutano a finanziare lo sviluppo del progetto!"
   },
   "kSxwQL": {
     "message": "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace.",
