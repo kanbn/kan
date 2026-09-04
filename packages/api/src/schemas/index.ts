@@ -53,6 +53,8 @@ export {
   customFieldDefinitionSchema,
   customFieldValueSchema,
   customFieldValueInputSchema,
+  customFieldFilterSchema,
+  customFieldFiltersSchema,
 } from "./custom-field";
 
 export { attachmentConfirmResponseSchema } from "./attachment";

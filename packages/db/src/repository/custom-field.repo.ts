@@ -1,4 +1,4 @@
-import { and, asc, count, eq, inArray, isNull, max } from "drizzle-orm";
+import { and, asc, count, eq, inArray, isNull, max, or } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { CustomFieldType } from "@kan/db/schema";
@@ -44,6 +44,162 @@ export type CustomFieldValueInput =
   | { type: "date"; value: Date }
   | { type: "checkbox"; value: boolean }
   | { type: "select"; optionPublicId: string };
+
+export type BoardCustomFieldFilter =
+  | {
+      type: "select";
+      fieldPublicId: string;
+      optionPublicIds: string[];
+    }
+  | {
+      type: "checkbox";
+      fieldPublicId: string;
+      values: ("checked" | "unchecked")[];
+    };
+
+export const getCardPublicIdsMatchingFilters = async (
+  db: dbClient,
+  boardScope: { publicId: string } | { slug: string; workspaceId: number },
+  filters: BoardCustomFieldFilter[],
+) => {
+  if (filters.length === 0) return null;
+
+  const boardCondition =
+    "publicId" in boardScope
+      ? eq(boards.publicId, boardScope.publicId)
+      : and(
+          eq(boards.slug, boardScope.slug),
+          eq(boards.workspaceId, boardScope.workspaceId),
+        );
+  const boardConditions = and(
+    boardCondition,
+    isNull(boards.deletedAt),
+    isNull(lists.deletedAt),
+    isNull(cards.deletedAt),
+  );
+  const selectFilters = filters.filter(
+    (filter): filter is Extract<BoardCustomFieldFilter, { type: "select" }> =>
+      filter.type === "select",
+  );
+  const checkboxFilters = filters.filter(
+    (filter): filter is Extract<BoardCustomFieldFilter, { type: "checkbox" }> =>
+      filter.type === "checkbox",
+  );
+  const needsAllBoardCards = checkboxFilters.some((filter) =>
+    filter.values.includes("unchecked"),
+  );
+
+  const [selectRows, checkedRows, boardCardRows] = await Promise.all([
+    selectFilters.length > 0
+      ? db
+          .selectDistinct({
+            cardPublicId: cards.publicId,
+            fieldPublicId: customFields.publicId,
+          })
+          .from(cards)
+          .innerJoin(lists, eq(cards.listId, lists.id))
+          .innerJoin(boards, eq(lists.boardId, boards.id))
+          .innerJoin(
+            cardCustomFieldValues,
+            eq(cardCustomFieldValues.cardId, cards.id),
+          )
+          .innerJoin(
+            customFields,
+            eq(cardCustomFieldValues.customFieldId, customFields.id),
+          )
+          .innerJoin(
+            customFieldOptions,
+            eq(cardCustomFieldValues.optionId, customFieldOptions.id),
+          )
+          .where(
+            and(
+              boardConditions,
+              eq(cardCustomFieldValues.fieldType, "select"),
+              isNull(customFields.deletedAt),
+              or(
+                ...selectFilters.map((filter) =>
+                  and(
+                    eq(customFields.publicId, filter.fieldPublicId),
+                    inArray(
+                      customFieldOptions.publicId,
+                      filter.optionPublicIds,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+      : [],
+    checkboxFilters.length > 0
+      ? db
+          .selectDistinct({
+            cardPublicId: cards.publicId,
+            fieldPublicId: customFields.publicId,
+          })
+          .from(cards)
+          .innerJoin(lists, eq(cards.listId, lists.id))
+          .innerJoin(boards, eq(lists.boardId, boards.id))
+          .innerJoin(
+            cardCustomFieldValues,
+            eq(cardCustomFieldValues.cardId, cards.id),
+          )
+          .innerJoin(
+            customFields,
+            eq(cardCustomFieldValues.customFieldId, customFields.id),
+          )
+          .where(
+            and(
+              boardConditions,
+              inArray(
+                customFields.publicId,
+                checkboxFilters.map((filter) => filter.fieldPublicId),
+              ),
+              eq(cardCustomFieldValues.fieldType, "checkbox"),
+              eq(cardCustomFieldValues.checkboxValue, true),
+              isNull(customFields.deletedAt),
+            ),
+          )
+      : [],
+    needsAllBoardCards
+      ? db
+          .select({ cardPublicId: cards.publicId })
+          .from(cards)
+          .innerJoin(lists, eq(cards.listId, lists.id))
+          .innerJoin(boards, eq(lists.boardId, boards.id))
+          .where(boardConditions)
+      : [],
+  ]);
+
+  const collectByField = (
+    rows: { cardPublicId: string; fieldPublicId: string }[],
+  ) => {
+    const result = new Map<string, Set<string>>();
+    for (const row of rows) {
+      const matches = result.get(row.fieldPublicId) ?? new Set<string>();
+      matches.add(row.cardPublicId);
+      result.set(row.fieldPublicId, matches);
+    }
+    return result;
+  };
+  const selectMatches = collectByField(selectRows);
+  const checkedMatches = collectByField(checkedRows);
+  const allBoardCards = new Set(boardCardRows.map((row) => row.cardPublicId));
+  const matchesByFilter = filters.map((filter) => {
+    if (filter.type === "select")
+      return selectMatches.get(filter.fieldPublicId) ?? new Set<string>();
+
+    const selectedValues = new Set(filter.values);
+    if (selectedValues.size === 2) return allBoardCards;
+    const checked = checkedMatches.get(filter.fieldPublicId) ?? new Set();
+    if (selectedValues.has("checked")) return checked;
+    return new Set([...allBoardCards].filter((cardId) => !checked.has(cardId)));
+  });
+
+  const [firstMatches, ...otherMatches] = matchesByFilter;
+  return [...(firstMatches ?? [])].filter((cardPublicId) =>
+    otherMatches.every((matches) => matches.has(cardPublicId)),
+  );
+};
 
 interface CreateDefinitionOptionInput {
   name: string;
