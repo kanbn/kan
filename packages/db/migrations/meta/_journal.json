@@ -253,6 +253,13 @@
       "when": 1788209875712,
       "tag": "20260831205755_AddCardRelationIndexes",
       "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1788553158783,
+      "tag": "20260904201918_AddCustomFields",
+      "breakpoints": true
     }
   ]
 }
