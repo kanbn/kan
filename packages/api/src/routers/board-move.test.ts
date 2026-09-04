@@ -1,5 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
 import { TRPCError } from "@trpc/server";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import * as boardRepo from "@kan/db/repository/board.repo";
+import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+
+import { assertCanEdit, assertPermission } from "../utils/permissions";
 
 // Mock all imports used by board.ts before importing the router
 vi.mock("@kan/db/repository/board.repo", () => ({
@@ -54,30 +59,41 @@ vi.mock("../utils/permissions", () => ({
 }));
 
 vi.mock("@kan/shared/utils", () => ({
-  generateSlug: vi.fn((name: string) => name.toLowerCase().replace(/\s+/g, "-")),
+  generateSlug: vi.fn((name: string) =>
+    name.toLowerCase().replace(/\s+/g, "-"),
+  ),
   generateUID: vi.fn(() => "abc123"),
   generateAvatarUrl: vi.fn(),
   convertDueDateFiltersToRanges: vi.fn(),
+  normalizeDescription: vi.fn((value: string | null) => value),
 }));
 
 vi.mock("@kan/shared/constants", () => ({
   colours: [],
 }));
 
-import * as boardRepo from "@kan/db/repository/board.repo";
-import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import { assertCanEdit, assertPermission } from "../utils/permissions";
-
-const mockGetBoardForMove = boardRepo.getBoardForMove as ReturnType<typeof vi.fn>;
-const mockIsBoardSlugAvailable = boardRepo.isBoardSlugAvailable as ReturnType<typeof vi.fn>;
-const mockMoveToWorkspace = boardRepo.moveToWorkspace as ReturnType<typeof vi.fn>;
-const mockWorkspaceGetByPublicId = workspaceRepo.getByPublicId as ReturnType<typeof vi.fn>;
+const mockGetBoardForMove = boardRepo.getBoardForMove as ReturnType<
+  typeof vi.fn
+>;
+const mockIsBoardSlugAvailable = boardRepo.isBoardSlugAvailable as ReturnType<
+  typeof vi.fn
+>;
+const mockMoveToWorkspace = boardRepo.moveToWorkspace as ReturnType<
+  typeof vi.fn
+>;
+const mockWorkspaceGetByPublicId = workspaceRepo.getByPublicId as ReturnType<
+  typeof vi.fn
+>;
 const mockAssertCanEdit = assertCanEdit as ReturnType<typeof vi.fn>;
 const mockAssertPermission = assertPermission as ReturnType<typeof vi.fn>;
 
 describe("board.move", () => {
   const mockDb = {} as never;
-  const mockUser = { id: "user-123", name: "Test User", email: "test@example.com" };
+  const mockUser = {
+    id: "user-123",
+    name: "Test User",
+    email: "test@example.com",
+  };
   const mockInput = {
     boardPublicId: "brd-123456789",
     targetWorkspacePublicId: "ws-target-789",
@@ -103,9 +119,9 @@ describe("board.move", () => {
     const { boardRouter } = await import("./board");
     const ctx = { user: null, db: mockDb } as never;
 
-    await expect(
-      boardRouter.createCaller(ctx).move(mockInput),
-    ).rejects.toThrow(TRPCError);
+    await expect(boardRouter.createCaller(ctx).move(mockInput)).rejects.toThrow(
+      TRPCError,
+    );
   });
 
   it("throws NOT_FOUND when board does not exist", async () => {
@@ -114,31 +130,37 @@ describe("board.move", () => {
 
     const ctx = { user: mockUser, db: mockDb } as never;
 
-    await expect(
-      boardRouter.createCaller(ctx).move(mockInput),
-    ).rejects.toThrow(TRPCError);
+    await expect(boardRouter.createCaller(ctx).move(mockInput)).rejects.toThrow(
+      TRPCError,
+    );
   });
 
   it("throws BAD_REQUEST for template boards", async () => {
     const { boardRouter } = await import("./board");
-    mockGetBoardForMove.mockResolvedValueOnce({ ...mockBoard, type: "template" });
+    mockGetBoardForMove.mockResolvedValueOnce({
+      ...mockBoard,
+      type: "template",
+    });
 
     const ctx = { user: mockUser, db: mockDb } as never;
 
-    await expect(
-      boardRouter.createCaller(ctx).move(mockInput),
-    ).rejects.toThrow(TRPCError);
+    await expect(boardRouter.createCaller(ctx).move(mockInput)).rejects.toThrow(
+      TRPCError,
+    );
   });
 
   it("throws BAD_REQUEST for archived boards", async () => {
     const { boardRouter } = await import("./board");
-    mockGetBoardForMove.mockResolvedValueOnce({ ...mockBoard, isArchived: true });
+    mockGetBoardForMove.mockResolvedValueOnce({
+      ...mockBoard,
+      isArchived: true,
+    });
 
     const ctx = { user: mockUser, db: mockDb } as never;
 
-    await expect(
-      boardRouter.createCaller(ctx).move(mockInput),
-    ).rejects.toThrow(TRPCError);
+    await expect(boardRouter.createCaller(ctx).move(mockInput)).rejects.toThrow(
+      TRPCError,
+    );
   });
 
   it("checks board:edit permission on source workspace", async () => {
@@ -150,9 +172,9 @@ describe("board.move", () => {
 
     const ctx = { user: mockUser, db: mockDb } as never;
 
-    await expect(
-      boardRouter.createCaller(ctx).move(mockInput),
-    ).rejects.toThrow(TRPCError);
+    await expect(boardRouter.createCaller(ctx).move(mockInput)).rejects.toThrow(
+      TRPCError,
+    );
 
     expect(mockAssertCanEdit).toHaveBeenCalledWith(
       mockDb,
@@ -170,9 +192,9 @@ describe("board.move", () => {
 
     const ctx = { user: mockUser, db: mockDb } as never;
 
-    await expect(
-      boardRouter.createCaller(ctx).move(mockInput),
-    ).rejects.toThrow(TRPCError);
+    await expect(boardRouter.createCaller(ctx).move(mockInput)).rejects.toThrow(
+      TRPCError,
+    );
   });
 
   it("throws NOT_FOUND when target workspace is soft-deleted", async () => {
@@ -185,9 +207,9 @@ describe("board.move", () => {
 
     const ctx = { user: mockUser, db: mockDb } as never;
 
-    await expect(
-      boardRouter.createCaller(ctx).move(mockInput),
-    ).rejects.toThrow(TRPCError);
+    await expect(boardRouter.createCaller(ctx).move(mockInput)).rejects.toThrow(
+      TRPCError,
+    );
   });
 
   it("throws BAD_REQUEST when target is the same workspace", async () => {
@@ -200,9 +222,9 @@ describe("board.move", () => {
 
     const ctx = { user: mockUser, db: mockDb } as never;
 
-    await expect(
-      boardRouter.createCaller(ctx).move(mockInput),
-    ).rejects.toThrow(TRPCError);
+    await expect(boardRouter.createCaller(ctx).move(mockInput)).rejects.toThrow(
+      TRPCError,
+    );
   });
 
   it("checks board:create permission on target workspace", async () => {
@@ -215,9 +237,9 @@ describe("board.move", () => {
 
     const ctx = { user: mockUser, db: mockDb } as never;
 
-    await expect(
-      boardRouter.createCaller(ctx).move(mockInput),
-    ).rejects.toThrow(TRPCError);
+    await expect(boardRouter.createCaller(ctx).move(mockInput)).rejects.toThrow(
+      TRPCError,
+    );
 
     expect(mockAssertPermission).toHaveBeenCalledWith(
       mockDb,
