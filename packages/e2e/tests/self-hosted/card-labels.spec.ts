@@ -6,9 +6,10 @@ import { CardPage } from "../support/pages/card-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
 import { createTestUser } from "../support/test-user";
+import { waitForTrpcMutation } from "../support/wait-for-trpc";
 
 test(
-  "a label can be created and assigned to a card, and the assignment persists",
+  "a label can be created, assigned, and edited with a custom colour",
   { tag: "@self-hosted" },
   async ({ page }) => {
     const user = createTestUser();
@@ -27,11 +28,35 @@ test(
     await board.createCard("Label test card");
     await board.openCard("Label test card");
 
-    await card.createAndAssignLabel("Urgent");
+    const labelPublicId = await card.createAndAssignLabel("Urgent");
 
     await expect(card.assignedLabelBadge("Urgent")).toBeVisible();
 
     await page.reload();
     await expect(card.assignedLabelBadge("Urgent")).toBeVisible();
+
+    const response = await page.request.post("/api/trpc/label.update?batch=1", {
+      data: {
+        "0": {
+          json: {
+            labelPublicId,
+            name: "Urgent",
+            colourCode: "#4bce97",
+          },
+        },
+      },
+    });
+    expect(response.ok()).toBe(true);
+
+    await page.reload();
+    await card.openLabelEditor("Urgent");
+
+    const dialog = page.getByRole("dialog");
+    await expect(dialog.getByRole("button", { name: "#4bce97" })).toBeVisible();
+
+    const updated = waitForTrpcMutation(page, "label.update");
+    await dialog.getByRole("button", { name: "Update label" }).click();
+    const updatedResponse = await updated;
+    expect(updatedResponse.ok()).toBe(true);
   },
 );
