@@ -31,6 +31,8 @@ import {
 } from "@kan/db/schema";
 import { generateUID, normalizeDescription } from "@kan/shared/utils";
 
+import { getBoardProjection } from "./custom-field.repo";
+
 export const getCount = async (db: dbClient) => {
   const result = await db
     .select({ count: count() })
@@ -363,14 +365,23 @@ export const getByPublicId = async (
 
   if (!board) return null;
 
+  const customFieldProjection = await getBoardProjection(
+    db,
+    board.publicId,
+    board.lists.flatMap((list) => list.cards.map((card) => card.publicId)),
+  );
+
   const formattedResult = {
     ...board,
+    customFields: customFieldProjection.definitions,
     favorite: board.userFavorites.length > 0,
     userFavorites: undefined,
     lists: board.lists.map((list) => ({
       ...list,
       cards: list.cards.map((card) => ({
         ...card,
+        customFieldValues:
+          customFieldProjection.valuesByCardPublicId[card.publicId] ?? [],
         labels: card.labels.map((label) => label.label),
         members: card.members
           .map((member) => member.member)
@@ -540,12 +551,21 @@ export const getBySlug = async (
 
   if (!board) return null;
 
+  const customFieldProjection = await getBoardProjection(
+    db,
+    board.publicId,
+    board.lists.flatMap((list) => list.cards.map((card) => card.publicId)),
+  );
+
   const formattedResult = {
     ...board,
+    customFields: customFieldProjection.definitions,
     lists: board.lists.map((list) => ({
       ...list,
       cards: list.cards.map((card) => ({
         ...card,
+        customFieldValues:
+          customFieldProjection.valuesByCardPublicId[card.publicId] ?? [],
         labels: card.labels.map((label) => label.label),
       })),
     })),

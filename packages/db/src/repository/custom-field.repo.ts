@@ -1,4 +1,4 @@
-import { and, asc, count, eq, isNull, max } from "drizzle-orm";
+import { and, asc, count, eq, inArray, isNull, max } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { CustomFieldType } from "@kan/db/schema";
@@ -25,6 +25,7 @@ export const customFieldRepositoryErrorCodes = [
   "FIELD_TYPE_MISMATCH",
   "FIELD_OPTIONS_INVALID",
   "OPTION_NOT_FOUND",
+  "ORDER_INVALID",
 ] as const;
 
 export type CustomFieldRepositoryErrorCode =
@@ -53,39 +54,219 @@ export const listDefinitionsByBoardPublicId = async (
   db: dbClient,
   boardPublicId: string,
 ) => {
-  const board = await db.query.boards.findFirst({
-    columns: { id: true },
-    where: and(eq(boards.publicId, boardPublicId), isNull(boards.deletedAt)),
-  });
+  const rows = await db
+    .select({
+      id: customFields.id,
+      publicId: customFields.publicId,
+      name: customFields.name,
+      type: customFields.type,
+      position: customFields.position,
+      showOnCard: customFields.showOnCard,
+      optionPublicId: customFieldOptions.publicId,
+      optionName: customFieldOptions.name,
+      optionColourCode: customFieldOptions.colourCode,
+      optionPosition: customFieldOptions.position,
+      optionDeletedAt: customFieldOptions.deletedAt,
+    })
+    .from(customFields)
+    .innerJoin(boards, eq(customFields.boardId, boards.id))
+    .leftJoin(
+      customFieldOptions,
+      eq(customFieldOptions.customFieldId, customFields.id),
+    )
+    .where(
+      and(
+        eq(boards.publicId, boardPublicId),
+        isNull(boards.deletedAt),
+        isNull(customFields.deletedAt),
+      ),
+    )
+    .orderBy(asc(customFields.position), asc(customFieldOptions.position));
 
-  if (!board) return null;
+  const definitions: {
+    publicId: string;
+    name: string;
+    type: CustomFieldType;
+    position: number;
+    showOnCard: boolean;
+    options: {
+      publicId: string;
+      name: string;
+      colourCode: string | null;
+      position: number;
+      deletedAt: Date | null;
+    }[];
+  }[] = [];
+  const definitionIndexes = new Map<number, number>();
 
-  return db.query.customFields.findMany({
-    columns: {
-      publicId: true,
-      name: true,
-      type: true,
-      position: true,
-      showOnCard: true,
-    },
-    where: and(
-      eq(customFields.boardId, board.id),
-      isNull(customFields.deletedAt),
-    ),
-    orderBy: [asc(customFields.position)],
-    with: {
-      options: {
-        columns: {
-          publicId: true,
-          name: true,
-          colourCode: true,
-          position: true,
-          deletedAt: true,
-        },
-        orderBy: [asc(customFieldOptions.position)],
-      },
-    },
-  });
+  for (const row of rows) {
+    let definitionIndex = definitionIndexes.get(row.id);
+    if (definitionIndex === undefined) {
+      definitionIndex = definitions.length;
+      definitionIndexes.set(row.id, definitionIndex);
+      definitions.push({
+        publicId: row.publicId,
+        name: row.name,
+        type: row.type,
+        position: row.position,
+        showOnCard: row.showOnCard,
+        options: [],
+      });
+    }
+
+    if (
+      row.optionPublicId !== null &&
+      row.optionName !== null &&
+      row.optionPosition !== null
+    ) {
+      definitions[definitionIndex]?.options.push({
+        publicId: row.optionPublicId,
+        name: row.optionName,
+        colourCode: row.optionColourCode,
+        position: row.optionPosition,
+        deletedAt: row.optionDeletedAt,
+      });
+    }
+  }
+
+  return definitions;
+};
+
+export const getBoardProjection = async (
+  db: dbClient,
+  boardPublicId: string,
+  cardPublicIds: string[],
+) => {
+  const definitions = await listDefinitionsByBoardPublicId(db, boardPublicId);
+
+  const formattedDefinitions = definitions.map((definition) => ({
+    ...definition,
+    options: definition.options.map(({ deletedAt, ...option }) => ({
+      ...option,
+      isArchived: !!deletedAt,
+    })),
+  }));
+
+  if (definitions.length === 0)
+    return { definitions: formattedDefinitions, valuesByCardPublicId: {} };
+
+  const valuesByCardPublicId: Record<
+    string,
+    {
+      publicId: string;
+      fieldPublicId: string;
+      fieldType: CustomFieldType;
+      textValue: string | null;
+      numberValue: string | null;
+      dateValue: Date | null;
+      checkboxValue: boolean | null;
+      optionPublicId: string | null;
+      optionName: string | null;
+      optionColourCode: string | null;
+      optionArchivedAt: Date | null;
+    }[]
+  > = {};
+
+  if (cardPublicIds.length > 0) {
+    const values = await db
+      .select({
+        cardPublicId: cards.publicId,
+        publicId: cardCustomFieldValues.publicId,
+        fieldPublicId: customFields.publicId,
+        fieldType: cardCustomFieldValues.fieldType,
+        textValue: cardCustomFieldValues.textValue,
+        numberValue: cardCustomFieldValues.numberValue,
+        dateValue: cardCustomFieldValues.dateValue,
+        checkboxValue: cardCustomFieldValues.checkboxValue,
+        optionPublicId: customFieldOptions.publicId,
+        optionName: customFieldOptions.name,
+        optionColourCode: customFieldOptions.colourCode,
+        optionArchivedAt: customFieldOptions.deletedAt,
+      })
+      .from(cardCustomFieldValues)
+      .innerJoin(cards, eq(cardCustomFieldValues.cardId, cards.id))
+      .innerJoin(lists, eq(cards.listId, lists.id))
+      .innerJoin(boards, eq(lists.boardId, boards.id))
+      .innerJoin(
+        customFields,
+        eq(cardCustomFieldValues.customFieldId, customFields.id),
+      )
+      .leftJoin(
+        customFieldOptions,
+        eq(cardCustomFieldValues.optionId, customFieldOptions.id),
+      )
+      .where(
+        and(
+          eq(boards.publicId, boardPublicId),
+          inArray(cards.publicId, cardPublicIds),
+          isNull(boards.deletedAt),
+          isNull(lists.deletedAt),
+          isNull(cards.deletedAt),
+          isNull(customFields.deletedAt),
+        ),
+      )
+      .orderBy(asc(cards.publicId), asc(customFields.position));
+
+    for (const { cardPublicId, ...value } of values) {
+      (valuesByCardPublicId[cardPublicId] ??= []).push(value);
+    }
+  }
+
+  return {
+    definitions: formattedDefinitions,
+    valuesByCardPublicId,
+  };
+};
+
+export const getWorkspaceAndDefinitionIdByPublicId = async (
+  db: dbClient,
+  fieldPublicId: string,
+) => {
+  const [field] = await db
+    .select({
+      id: customFields.id,
+      workspaceId: boards.workspaceId,
+    })
+    .from(customFields)
+    .innerJoin(boards, eq(customFields.boardId, boards.id))
+    .where(
+      and(
+        eq(customFields.publicId, fieldPublicId),
+        isNull(customFields.deletedAt),
+        isNull(boards.deletedAt),
+      ),
+    )
+    .limit(1);
+
+  return field ?? null;
+};
+
+export const getWorkspaceAndOptionIdByPublicId = async (
+  db: dbClient,
+  optionPublicId: string,
+) => {
+  const [option] = await db
+    .select({
+      id: customFieldOptions.id,
+      workspaceId: boards.workspaceId,
+    })
+    .from(customFieldOptions)
+    .innerJoin(
+      customFields,
+      eq(customFieldOptions.customFieldId, customFields.id),
+    )
+    .innerJoin(boards, eq(customFields.boardId, boards.id))
+    .where(
+      and(
+        eq(customFieldOptions.publicId, optionPublicId),
+        isNull(customFieldOptions.deletedAt),
+        isNull(customFields.deletedAt),
+        isNull(boards.deletedAt),
+      ),
+    )
+    .limit(1);
+
+  return option ?? null;
 };
 
 export const createDefinition = async (
@@ -266,6 +447,60 @@ export const archiveDefinition = async (
     return result;
   });
 
+export const reorderDefinitions = async (
+  db: dbClient,
+  input: {
+    boardPublicId: string;
+    fieldPublicIds: string[];
+    actorUserId: string;
+  },
+) =>
+  db.transaction(async (tx) => {
+    const [board] = await tx
+      .select({ id: boards.id, isArchived: boards.isArchived })
+      .from(boards)
+      .where(
+        and(eq(boards.publicId, input.boardPublicId), isNull(boards.deletedAt)),
+      )
+      .limit(1)
+      .for("update");
+
+    if (!board) throw new CustomFieldRepositoryError("BOARD_NOT_FOUND");
+    if (board.isArchived)
+      throw new CustomFieldRepositoryError("BOARD_ARCHIVED");
+
+    const fields = await tx
+      .select({ id: customFields.id, publicId: customFields.publicId })
+      .from(customFields)
+      .where(
+        and(eq(customFields.boardId, board.id), isNull(customFields.deletedAt)),
+      );
+    const fieldIdsByPublicId = new Map(
+      fields.map((field) => [field.publicId, field.id]),
+    );
+
+    if (
+      input.fieldPublicIds.length !== fields.length ||
+      new Set(input.fieldPublicIds).size !== input.fieldPublicIds.length ||
+      input.fieldPublicIds.some(
+        (fieldPublicId) => !fieldIdsByPublicId.has(fieldPublicId),
+      )
+    )
+      throw new CustomFieldRepositoryError("ORDER_INVALID");
+
+    for (const [position, fieldPublicId] of input.fieldPublicIds.entries()) {
+      const fieldId = fieldIdsByPublicId.get(fieldPublicId);
+      if (fieldId === undefined)
+        throw new CustomFieldRepositoryError("ORDER_INVALID");
+      await tx
+        .update(customFields)
+        .set({ position, updatedAt: new Date(), updatedBy: input.actorUserId })
+        .where(eq(customFields.id, fieldId));
+    }
+
+    return { success: true };
+  });
+
 export const createOption = async (
   db: dbClient,
   input: {
@@ -408,6 +643,63 @@ export const archiveOption = async (
 
     if (!result) throw new CustomFieldRepositoryError("OPTION_NOT_FOUND");
     return result;
+  });
+
+export const reorderOptions = async (
+  db: dbClient,
+  input: {
+    fieldPublicId: string;
+    optionPublicIds: string[];
+    actorUserId: string;
+  },
+) =>
+  db.transaction(async (tx) => {
+    const field = await getFieldContext(tx, input.fieldPublicId);
+    if (field.type !== "select")
+      throw new CustomFieldRepositoryError("FIELD_TYPE_MISMATCH");
+
+    await tx
+      .select({ id: customFields.id })
+      .from(customFields)
+      .where(eq(customFields.id, field.id))
+      .for("update");
+
+    const options = await tx
+      .select({
+        id: customFieldOptions.id,
+        publicId: customFieldOptions.publicId,
+      })
+      .from(customFieldOptions)
+      .where(
+        and(
+          eq(customFieldOptions.customFieldId, field.id),
+          isNull(customFieldOptions.deletedAt),
+        ),
+      );
+    const optionIdsByPublicId = new Map(
+      options.map((option) => [option.publicId, option.id]),
+    );
+
+    if (
+      input.optionPublicIds.length !== options.length ||
+      new Set(input.optionPublicIds).size !== input.optionPublicIds.length ||
+      input.optionPublicIds.some(
+        (optionPublicId) => !optionIdsByPublicId.has(optionPublicId),
+      )
+    )
+      throw new CustomFieldRepositoryError("ORDER_INVALID");
+
+    for (const [position, optionPublicId] of input.optionPublicIds.entries()) {
+      const optionId = optionIdsByPublicId.get(optionPublicId);
+      if (optionId === undefined)
+        throw new CustomFieldRepositoryError("ORDER_INVALID");
+      await tx
+        .update(customFieldOptions)
+        .set({ position, updatedAt: new Date(), updatedBy: input.actorUserId })
+        .where(eq(customFieldOptions.id, optionId));
+    }
+
+    return { success: true };
   });
 
 const getCardContext = async (
@@ -568,7 +860,36 @@ export const setCardValue = async (
       })
       .returning({ publicId: cardCustomFieldValues.publicId });
 
-    return result;
+    if (!result) throw new CustomFieldRepositoryError("FIELD_NOT_FOUND");
+
+    const [storedValue] = await tx
+      .select({
+        publicId: cardCustomFieldValues.publicId,
+        fieldPublicId: customFields.publicId,
+        fieldType: cardCustomFieldValues.fieldType,
+        textValue: cardCustomFieldValues.textValue,
+        numberValue: cardCustomFieldValues.numberValue,
+        dateValue: cardCustomFieldValues.dateValue,
+        checkboxValue: cardCustomFieldValues.checkboxValue,
+        optionPublicId: customFieldOptions.publicId,
+        optionName: customFieldOptions.name,
+        optionColourCode: customFieldOptions.colourCode,
+        optionArchivedAt: customFieldOptions.deletedAt,
+      })
+      .from(cardCustomFieldValues)
+      .innerJoin(
+        customFields,
+        eq(cardCustomFieldValues.customFieldId, customFields.id),
+      )
+      .leftJoin(
+        customFieldOptions,
+        eq(cardCustomFieldValues.optionId, customFieldOptions.id),
+      )
+      .where(eq(cardCustomFieldValues.publicId, result.publicId))
+      .limit(1);
+
+    if (!storedValue) throw new CustomFieldRepositoryError("FIELD_NOT_FOUND");
+    return storedValue;
   });
 
 export const clearCardValue = async (
