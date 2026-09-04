@@ -158,6 +158,7 @@ export function NewCardForm({
               comments: [],
               checklists: [],
               attachments: [],
+              customFieldValues: [],
               labels: oldBoard.labels.filter((label) =>
                 args.labelPublicIds.includes(label.publicId),
               ),
