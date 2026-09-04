@@ -67,6 +67,7 @@ import { CardContextMenu } from "./components/CardContextMenu";
 import { CardContextMoveListModal } from "./components/CardContextMoveListModal";
 import CardList from "./components/CardList";
 import CardPreview from "./components/CardPreview";
+import { CustomFieldManager } from "./components/custom-fields/custom-field-manager";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
@@ -705,6 +706,14 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             isTemplate={!!isTemplate}
             boardPublicId={boardId ?? ""}
           />
+        </Modal>
+
+        <Modal
+          modalSize="lg"
+          positionFromTop="sm"
+          isVisible={isOpen && modalContentType === "CUSTOM_FIELDS"}
+        >
+          <CustomFieldManager boardPublicId={boardId ?? ""} />
         </Modal>
 
         <Modal
