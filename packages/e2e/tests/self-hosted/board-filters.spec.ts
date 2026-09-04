@@ -43,6 +43,7 @@ test(
     await expect(page.getByText("Unlabeled card", { exact: true })).toHaveCount(
       0,
     );
+    await expect(page.getByRole("menu")).toHaveCount(0);
 
     await page.getByRole("button", { name: "Filter", exact: true }).click();
     await expect(
