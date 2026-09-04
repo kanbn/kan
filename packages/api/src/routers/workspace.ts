@@ -6,7 +6,7 @@ import type { WorkspacePlan } from "@kan/db/schema";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import * as workspaceSlugRepo from "@kan/db/repository/workspaceSlug.repo";
-import { generateAvatarUrl, generateUID } from "@kan/shared/utils";
+import { generateUID } from "@kan/shared/utils";
 
 import {
   workspaceCreateResponseSchema,
@@ -17,6 +17,7 @@ import {
   workspaceWithBoardsSchema,
 } from "../schemas";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { createAvatarUrlResolver } from "../utils/avatarUrls";
 import { assertPermission } from "../utils/permissions";
 
 export const workspaceRouter = createTRPCRouter({
@@ -90,13 +91,14 @@ export const workspaceRouter = createTRPCRouter({
       const shouldShowEmails = isAdmin || result.showEmailsToMembers === true;
 
       // Generate presigned URLs for member avatars
+      const resolveAvatarUrl = createAvatarUrlResolver();
       const membersWithAvatarUrls = await Promise.all(
         result.members.map(async (member) => {
           if (!member.user?.image) {
             return member;
           }
 
-          const avatarUrl = await generateAvatarUrl(member.user.image);
+          const avatarUrl = await resolveAvatarUrl(member.user.image);
           return {
             ...member,
             user: {
