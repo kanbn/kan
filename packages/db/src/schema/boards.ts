@@ -13,6 +13,7 @@ import {
   varchar,
   boolean,
 } from "drizzle-orm/pg-core";
+import { customFields } from "./custom-fields";
 import { imports } from "./imports";
 import { labels } from "./labels";
 import { lists } from "./lists";
@@ -79,6 +80,7 @@ export const boardsRelations = relations(boards, ({ one, many }) => ({
   lists: many(lists),
   allLists: many(lists),
   labels: many(labels),
+  customFields: many(customFields),
   deletedBy: one(users, {
     fields: [boards.deletedBy],
     references: [users.id],
