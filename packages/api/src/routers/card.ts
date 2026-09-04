@@ -176,13 +176,12 @@ export const cardRouter = createTRPCRouter({
       }
 
       if (input.description) {
-        sendMentionEmails({
+        void sendMentionEmails({
           db: ctx.db,
           cardPublicId: newCard.publicId,
-          commentHtml: input.description,
+          previousHtml: null,
+          nextHtml: input.description,
           commenterUserId: userId,
-        }).catch((error) => {
-          console.error("Failed to send mention emails:", error);
         });
       }
 
@@ -280,14 +279,13 @@ export const cardRouter = createTRPCRouter({
         createdBy: userId,
       });
 
-      sendMentionEmails({
+      void sendMentionEmails({
         db: ctx.db,
         cardPublicId: input.cardPublicId,
-        commentHtml: input.comment,
+        previousHtml: null,
+        nextHtml: input.comment,
         commenterUserId: userId,
         commentId: newComment.id,
-      }).catch((error) => {
-        console.error("Failed to send mention emails:", error);
       });
 
       return newComment;
@@ -370,14 +368,13 @@ export const cardRouter = createTRPCRouter({
         createdBy: userId,
       });
 
-      sendMentionEmails({
+      void sendMentionEmails({
         db: ctx.db,
         cardPublicId: input.cardPublicId,
-        commentHtml: input.comment,
+        previousHtml: existingComment.comment,
+        nextHtml: input.comment,
         commenterUserId: userId,
         commentId: updatedComment.id,
-      }).catch((error) => {
-        console.error("Failed to send mention emails:", error);
       });
 
       return updatedComment;
@@ -991,13 +988,12 @@ export const cardRouter = createTRPCRouter({
           toDescription: input.description,
         });
 
-        sendMentionEmails({
+        void sendMentionEmails({
           db: ctx.db,
           cardPublicId: input.cardPublicId,
-          commentHtml: input.description,
+          previousHtml: existingCard.description,
+          nextHtml: input.description,
           commenterUserId: userId,
-        }).catch((error) => {
-          console.error("Failed to send mention emails:", error);
         });
       }
 
