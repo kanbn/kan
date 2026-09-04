@@ -1903,7 +1903,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/LabelForm.tsx", 213],
+      ["src/components/LabelForm.tsx", 208],
       ["src/views/board/components/NewCardForm.tsx", 653],
       ["src/views/board/components/NewListForm.tsx", 156]
     ],
@@ -1941,7 +1941,7 @@
     "message": "Create label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/LabelForm.tsx", 236]],
+    "origin": [["src/components/LabelForm.tsx", 231]],
     "translation": "Label erstellen"
   },
   "XTKtey": {
@@ -2194,7 +2194,7 @@
     "comments": [],
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 51],
-      ["src/components/LabelForm.tsx", 228],
+      ["src/components/LabelForm.tsx", 223],
       ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 52],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 47],
       ["src/views/card/components/DeleteCardConfirmation.tsx", 92],
@@ -2552,7 +2552,7 @@
     "message": "Edit label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/LabelForm.tsx", 119]],
+    "origin": [["src/components/LabelForm.tsx", 114]],
     "translation": "Label bearbeiten"
   },
   "TCOMOO": {
@@ -4184,7 +4184,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/LabelForm.tsx", 135],
+      ["src/components/LabelForm.tsx", 130],
       ["src/views/board/components/NewTemplateForm.tsx", 118],
       ["src/views/boards/components/NewBoardForm.tsx", 134],
       ["src/views/settings/components/NewWebhookModal.tsx", 227],
@@ -4257,7 +4257,7 @@
     "message": "New label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/LabelForm.tsx", 119]],
+    "origin": [["src/components/LabelForm.tsx", 114]],
     "translation": "Neues Label"
   },
   "Sb2gYF": {
@@ -6791,7 +6791,7 @@
     "message": "Update label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/LabelForm.tsx", 236]],
+    "origin": [["src/components/LabelForm.tsx", 231]],
     "translation": "Label aktualisieren"
   },
   "L5ZPjz": {
