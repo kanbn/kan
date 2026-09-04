@@ -77,6 +77,20 @@ export const cardRouter = createTRPCRouter({
 
       await assertPermission(ctx.db, userId, list.workspaceId, "card:create");
 
+      const members = input.memberPublicIds.length
+        ? await workspaceRepo.getAllMembersByPublicIds(
+            ctx.db,
+            input.memberPublicIds,
+            list.workspaceId,
+          )
+        : [];
+
+      if (members.length !== new Set(input.memberPublicIds).size)
+        throw new TRPCError({
+          message: `Members with public IDs (${input.memberPublicIds.join(", ")}) not found`,
+          code: "NOT_FOUND",
+        });
+
       const newCard = await cardRepo.create(ctx.db, {
         title: input.title,
         description: input.description,
@@ -133,18 +147,7 @@ export const cardRouter = createTRPCRouter({
         await cardActivityRepo.bulkCreate(ctx.db, cardActivitesInsert);
       }
 
-      if (newCardId && input.memberPublicIds.length) {
-        const members = await workspaceRepo.getAllMembersByPublicIds(
-          ctx.db,
-          input.memberPublicIds,
-        );
-
-        if (!members.length)
-          throw new TRPCError({
-            message: `Members with public IDs (${input.memberPublicIds.join(", ")}) not found`,
-            code: "NOT_FOUND",
-          });
-
+      if (newCardId && members.length) {
         const membersInsert = members.map((member) => ({
           cardId: newCardId,
           workspaceMemberId: member.id,
@@ -591,6 +594,7 @@ export const cardRouter = createTRPCRouter({
       const member = await workspaceRepo.getMemberByPublicId(
         ctx.db,
         input.workspaceMemberPublicId,
+        card.workspaceId,
       );
 
       if (!member)
@@ -1324,6 +1328,7 @@ export const cardRouter = createTRPCRouter({
         const members = await workspaceRepo.getAllMembersByPublicIds(
           ctx.db,
           memberPublicIds,
+          sourceCardMeta.workspaceId,
         );
         if (members.length) {
           const membersInsert = members.map((member) => ({

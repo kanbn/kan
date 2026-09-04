@@ -327,24 +327,37 @@ export const getAllOwnedByUserId = async (db: dbClient, userId: string) => {
   });
 };
 
-export const getMemberByPublicId = (db: dbClient, memberPublicId: string) => {
+export const getMemberByPublicId = (
+  db: dbClient,
+  memberPublicId: string,
+  workspaceId: number,
+) => {
   return db.query.workspaceMembers.findFirst({
     columns: {
       id: true,
     },
-    where: eq(workspaceMembers.publicId, memberPublicId),
+    where: and(
+      eq(workspaceMembers.publicId, memberPublicId),
+      eq(workspaceMembers.workspaceId, workspaceId),
+      isNull(workspaceMembers.deletedAt),
+    ),
   });
 };
 
 export const getAllMembersByPublicIds = (
   db: dbClient,
   memberPublicIds: string[],
+  workspaceId: number,
 ) => {
   return db.query.workspaceMembers.findMany({
     columns: {
       id: true,
     },
-    where: inArray(workspaceMembers.publicId, memberPublicIds),
+    where: and(
+      inArray(workspaceMembers.publicId, memberPublicIds),
+      eq(workspaceMembers.workspaceId, workspaceId),
+      isNull(workspaceMembers.deletedAt),
+    ),
   });
 };
 
