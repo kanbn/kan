@@ -6,7 +6,7 @@ import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as customFieldRepo from "@kan/db/repository/custom-field.repo";
 
-import { assertPermission } from "../utils/permissions";
+import { assertCanEdit, assertPermission } from "../utils/permissions";
 import { customFieldRouter } from "./custom-field";
 
 vi.mock("@kan/db/repository/board.repo", () => ({
@@ -39,6 +39,7 @@ vi.mock("@kan/db/repository/custom-field.repo", async (importOriginal) => {
 });
 
 vi.mock("../utils/permissions", () => ({
+  assertCanEdit: vi.fn(),
   assertPermission: vi.fn(),
 }));
 
@@ -61,7 +62,9 @@ const mockReorderDefinitions = vi.mocked(customFieldRepo.reorderDefinitions);
 const mockCreateOption = vi.mocked(customFieldRepo.createOption);
 const mockListValues = vi.mocked(customFieldRepo.listValuesByCardPublicId);
 const mockSetCardValue = vi.mocked(customFieldRepo.setCardValue);
+const mockClearCardValue = vi.mocked(customFieldRepo.clearCardValue);
 const mockAssertPermission = vi.mocked(assertPermission);
+const mockAssertCanEdit = vi.mocked(assertCanEdit);
 
 describe("custom field router", () => {
   const mockDb = {} as never;
@@ -76,12 +79,13 @@ describe("custom field router", () => {
   const fieldPublicId = "field0000001";
   const optionPublicId = "option000001";
   const boardScope = { id: 10, workspaceId: 20 };
-  const cardScope = { id: 30, workspaceId: 20 };
+  const cardScope = { id: 30, workspaceId: 20, createdBy: mockUser.id };
   const fieldScope = { id: 40, workspaceId: 20 };
 
   beforeEach(() => {
     vi.clearAllMocks();
     mockAssertPermission.mockResolvedValue(undefined);
+    mockAssertCanEdit.mockResolvedValue(undefined);
   });
 
   it("requires authentication", async () => {
@@ -276,11 +280,12 @@ describe("custom field router", () => {
       value: { type: "number", value: "1e3" },
     });
 
-    expect(mockAssertPermission).toHaveBeenCalledWith(
+    expect(mockAssertCanEdit).toHaveBeenCalledWith(
       mockDb,
       mockUser.id,
       cardScope.workspaceId,
       "card:edit",
+      cardScope.createdBy,
     );
     expect(mockSetCardValue).toHaveBeenCalledWith(mockDb, {
       cardPublicId,
@@ -304,6 +309,28 @@ describe("custom field router", () => {
         value: { type: "text", value: "wrong type" },
       }),
     ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+  });
+
+  it("clears card values with the same creator-aware edit check", async () => {
+    mockCardScope.mockResolvedValue(cardScope as never);
+    mockClearCardValue.mockResolvedValue({ cleared: true });
+
+    await customFieldRouter.createCaller(ctx).clearValue({
+      cardPublicId,
+      fieldPublicId,
+    });
+
+    expect(mockAssertCanEdit).toHaveBeenCalledWith(
+      mockDb,
+      mockUser.id,
+      cardScope.workspaceId,
+      "card:edit",
+      cardScope.createdBy,
+    );
+    expect(mockClearCardValue).toHaveBeenCalledWith(mockDb, {
+      cardPublicId,
+      fieldPublicId,
+    });
   });
 
   it("returns NOT_FOUND before permission checks when scope is missing", async () => {

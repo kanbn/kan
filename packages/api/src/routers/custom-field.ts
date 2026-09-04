@@ -15,7 +15,7 @@ import {
   customFieldValueSchema as valueSchema,
 } from "../schemas";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertPermission } from "../utils/permissions";
+import { assertCanEdit, assertPermission } from "../utils/permissions";
 
 const requireUserId = (userId: string | undefined) => {
   if (!userId)
@@ -517,7 +517,13 @@ export const customFieldRouter = createTRPCRouter({
           message: `Card with public ID ${input.cardPublicId} not found`,
           code: "NOT_FOUND",
         });
-      await assertPermission(ctx.db, userId, card.workspaceId, "card:edit");
+      await assertCanEdit(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "card:edit",
+        card.createdBy,
+      );
 
       try {
         return await customFieldRepo.setCardValue(ctx.db, {
@@ -558,7 +564,13 @@ export const customFieldRouter = createTRPCRouter({
           message: `Card with public ID ${input.cardPublicId} not found`,
           code: "NOT_FOUND",
         });
-      await assertPermission(ctx.db, userId, card.workspaceId, "card:edit");
+      await assertCanEdit(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "card:edit",
+        card.createdBy,
+      );
 
       try {
         return await customFieldRepo.clearCardValue(ctx.db, input);

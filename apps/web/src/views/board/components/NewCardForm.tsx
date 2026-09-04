@@ -164,6 +164,7 @@ export function NewCardForm({
                 checklistItemCount: 0,
                 completedChecklistItemCount: 0,
               },
+              customFieldValues: [],
               labels: oldBoard.labels.filter((label) =>
                 args.labelPublicIds.includes(label.publicId),
               ),

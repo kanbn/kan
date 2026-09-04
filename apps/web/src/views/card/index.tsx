@@ -35,6 +35,7 @@ import { ActivitySortOrderToggle } from "./components/ActivitySortOrderToggle";
 import { AttachmentThumbnails } from "./components/AttachmentThumbnails";
 import { AttachmentUpload } from "./components/AttachmentUpload";
 import Checklists from "./components/Checklists";
+import { CustomFields } from "./components/custom-fields/custom-fields";
 import { DeleteCardConfirmation } from "./components/DeleteCardConfirmation";
 import { DeleteChecklistConfirmation } from "./components/DeleteChecklistConfirmation";
 import { DeleteCommentConfirmation } from "./components/DeleteCommentConfirmation";
@@ -164,6 +165,12 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           disabled={!canEdit}
         />
       </div>
+      <CustomFields
+        cardPublicId={cardId ?? ""}
+        definitions={card?.list.board.customFields ?? []}
+        values={card?.customFieldValues ?? []}
+        disabled={!canEdit}
+      />
     </div>
   );
 }
