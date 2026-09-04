@@ -11,7 +11,6 @@ import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
-import { colours } from "@kan/shared/constants";
 import {
   generateSlug,
   generateUID,
@@ -22,6 +21,7 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
 import { decryptToken } from "../utils/encryption";
 import { assertPermission } from "../utils/permissions";
+import { getTrelloLabelColour } from "../utils/trello";
 import { apiKeys, urls } from "./integration";
 
 const log = createLogger("import");
@@ -38,6 +38,7 @@ export interface TrelloBoard {
 interface TrelloLabel {
   id: string;
   name: string;
+  color?: string | null;
 }
 
 interface TrelloList {
@@ -256,7 +257,7 @@ export const importRouter = createTRPCRouter({
 
         const importSingleBoard = async (boardId: string): Promise<void> => {
           const response = await fetch(
-            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${integration.accessToken}&lists=open&cards=open&labels=all&checklists=all&checkItemStates=all`,
+            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${integration.accessToken}&lists=open&cards=open&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
           );
 
           if (!response.ok) {
@@ -273,6 +274,7 @@ export const importRouter = createTRPCRouter({
               .map((label) => ({
                 sourceId: label.id,
                 name: label.name,
+                colourCode: getTrelloLabelColour(label.color),
               }))
               .filter((_label) => !!_label.name),
             lists: data.lists.map((list) => ({
@@ -326,10 +328,10 @@ export const importRouter = createTRPCRouter({
           let createdCards: { id: number; sourceId: string }[] = [];
 
           if (formattedData.labels.length) {
-            const labelsInsert = formattedData.labels.map((label, index) => ({
+            const labelsInsert = formattedData.labels.map((label) => ({
               publicId: generateUID(),
               name: label.name,
-              colourCode: colours[index % colours.length]?.code ?? "#0d9488",
+              colourCode: label.colourCode,
               createdBy: userId,
               boardId: newBoardId,
               importId: newImportId,
