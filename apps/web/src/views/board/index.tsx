@@ -67,6 +67,7 @@ import { CardContextMenu } from "./components/CardContextMenu";
 import { CardContextMoveListModal } from "./components/CardContextMoveListModal";
 import CardList from "./components/CardList";
 import CardPreview from "./components/CardPreview";
+import { parseCustomFieldFilters } from "./components/custom-fields/custom-field-filters";
 import { CustomFieldManager } from "./components/custom-fields/custom-field-manager";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
@@ -169,6 +170,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     | "next-month"
     | "no-due-date"
   )[];
+  const customFieldFilters = parseCustomFieldFilters(
+    formatToArray(router.query.customFields),
+  );
 
   const boardType: "regular" | "template" = isTemplate ? "template" : "regular";
 
@@ -200,6 +204,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     lists: formatToArray(router.query.lists),
     ...(semanticFilters.length > 0 && {
       dueDateFilters: semanticFilters,
+    }),
+    ...(customFieldFilters.length > 0 && {
+      customFields: customFieldFilters,
     }),
     type: boardType,
   };
@@ -929,6 +936,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                         (member) => member.user !== null,
                       )}
                       lists={boardData.allLists}
+                      customFields={boardData.customFields}
                       isLoading={!boardData}
                     />
                   </>

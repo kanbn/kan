@@ -359,6 +359,7 @@ describe("custom field repository integration tests", () => {
         members: [],
         labels: [],
         lists: [],
+        customFields: [],
         dueDate: [],
         type: "regular",
       },
@@ -395,6 +396,7 @@ describe("custom field repository integration tests", () => {
         members: [],
         labels: [],
         lists: [],
+        customFields: [],
         dueDate: [],
       },
     );
@@ -422,12 +424,173 @@ describe("custom field repository integration tests", () => {
         members: [],
         labels: [],
         lists: [],
+        customFields: [],
         dueDate: [],
         type: "regular",
       },
     );
     expect(afterArchive!.customFields).toEqual([]);
     expect(afterArchive!.lists[0]!.cards[0]!.customFieldValues).toEqual([]);
+  });
+
+  it("filters cards with OR within a field and AND between fields", async () => {
+    const select = await createField("select", "Priority");
+    const checkbox = await createField("checkbox", "Approved");
+    const [storedBoard] = await db
+      .select({ id: boards.id, workspaceId: boards.workspaceId })
+      .from(boards)
+      .where(eq(boards.publicId, boardPublicId));
+    const [list] = await db
+      .select({ id: lists.id })
+      .from(lists)
+      .where(eq(lists.boardId, storedBoard!.id));
+    const extraCards = await db
+      .insert(cards)
+      .values([
+        {
+          publicId: "card00000002",
+          title: "Explicitly unchecked",
+          index: 1,
+          listId: list!.id,
+          createdBy: actorUserId,
+        },
+        {
+          publicId: "card00000003",
+          title: "Unset checkbox",
+          index: 2,
+          listId: list!.id,
+          createdBy: actorUserId,
+        },
+        {
+          publicId: "card00000004",
+          title: "No custom values",
+          index: 3,
+          listId: list!.id,
+          createdBy: actorUserId,
+        },
+      ])
+      .returning();
+
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId,
+      fieldPublicId: select.publicId,
+      value: { type: "select", optionPublicId: select.options[0]!.publicId },
+      actorUserId,
+    });
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId,
+      fieldPublicId: checkbox.publicId,
+      value: { type: "checkbox", value: true },
+      actorUserId,
+    });
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId: extraCards[0]!.publicId,
+      fieldPublicId: select.publicId,
+      value: { type: "select", optionPublicId: select.options[1]!.publicId },
+      actorUserId,
+    });
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId: extraCards[0]!.publicId,
+      fieldPublicId: checkbox.publicId,
+      value: { type: "checkbox", value: false },
+      actorUserId,
+    });
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId: extraCards[1]!.publicId,
+      fieldPublicId: select.publicId,
+      value: { type: "select", optionPublicId: select.options[0]!.publicId },
+      actorUserId,
+    });
+
+    const query = (customFields: customFieldRepo.BoardCustomFieldFilter[]) =>
+      boardRepo.getByPublicId(db, boardPublicId, actorUserId, {
+        members: [],
+        labels: [],
+        lists: [],
+        customFields,
+        dueDate: [],
+        type: "regular",
+      });
+    const titles = async (
+      customFields: customFieldRepo.BoardCustomFieldFilter[],
+    ) =>
+      (await query(customFields))!.lists.flatMap((boardList) =>
+        boardList.cards.map((card) => card.title),
+      );
+
+    await expect(
+      titles([
+        {
+          type: "select",
+          fieldPublicId: select.publicId,
+          optionPublicIds: select.options.map((option) => option.publicId),
+        },
+      ]),
+    ).resolves.toEqual(["Test card", "Explicitly unchecked", "Unset checkbox"]);
+    await expect(
+      titles([
+        {
+          type: "checkbox",
+          fieldPublicId: checkbox.publicId,
+          values: ["unchecked"],
+        },
+      ]),
+    ).resolves.toEqual([
+      "Explicitly unchecked",
+      "Unset checkbox",
+      "No custom values",
+    ]);
+    await expect(
+      titles([
+        {
+          type: "select",
+          fieldPublicId: select.publicId,
+          optionPublicIds: [select.options[0]!.publicId],
+        },
+        {
+          type: "checkbox",
+          fieldPublicId: checkbox.publicId,
+          values: ["unchecked"],
+        },
+      ]),
+    ).resolves.toEqual(["Unset checkbox"]);
+    await expect(
+      titles([
+        {
+          type: "select",
+          fieldPublicId: select.publicId,
+          optionPublicIds: ["option999999"],
+        },
+      ]),
+    ).resolves.toEqual([]);
+
+    await db
+      .update(boards)
+      .set({ visibility: "public" })
+      .where(eq(boards.publicId, boardPublicId));
+    const publicBoard = await boardRepo.getBySlug(
+      db,
+      "test-board",
+      storedBoard!.workspaceId,
+      {
+        members: [],
+        labels: [],
+        lists: [],
+        customFields: [
+          {
+            type: "select",
+            fieldPublicId: select.publicId,
+            optionPublicIds: [select.options[1]!.publicId],
+          },
+        ],
+        dueDate: [],
+      },
+    );
+    expect(
+      publicBoard!.lists.flatMap((boardList) =>
+        boardList.cards.map((card) => card.title),
+      ),
+    ).toEqual(["Explicitly unchecked"]);
   });
 
   it("archives definitions without deleting existing card values", async () => {

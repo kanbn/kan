@@ -13,6 +13,9 @@ import CircularProgress from "~/components/CircularProgress";
 import LabelIcon from "~/components/LabelIcon";
 import { useLocalisation } from "~/hooks/useLocalisation";
 import { getAvatarUrl } from "~/utils/helpers";
+import { CustomFieldBadges } from "./custom-fields/custom-field-badges";
+
+type BoardCustomFields = Parameters<typeof CustomFieldBadges>[0];
 
 const Card = ({
   title,
@@ -24,6 +27,8 @@ const Card = ({
   comments,
   attachments,
   dueDate,
+  customFields,
+  customFieldValues,
 }: {
   title: string;
   ticketNumber?: string | null;
@@ -47,6 +52,8 @@ const Card = ({
   comments: { publicId: string }[];
   attachments?: { publicId: string }[];
   dueDate?: Date | null;
+  customFields: BoardCustomFields["definitions"];
+  customFieldValues: BoardCustomFields["values"];
 }) => {
   const { dateLocale } = useLocalisation();
   const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;
@@ -75,6 +82,10 @@ const Card = ({
         </span>
       )}
       <span className="break-words">{title}</span>
+      <CustomFieldBadges
+        definitions={customFields}
+        values={customFieldValues}
+      />
       {labels.length ||
       members.length ||
       checklists.length > 0 ||
