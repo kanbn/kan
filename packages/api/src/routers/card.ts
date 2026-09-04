@@ -8,7 +8,11 @@ import * as checklistRepo from "@kan/db/repository/checklist.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
+import {
+  generateAttachmentUrl,
+  generateAvatarUrl,
+  normalizeDescription,
+} from "@kan/shared/utils";
 
 import {
   activityItemSchema,
@@ -79,7 +83,7 @@ export const cardRouter = createTRPCRouter({
 
       const newCard = await cardRepo.create(ctx.db, {
         title: input.title,
-        description: input.description,
+        description: normalizeDescription(input.description),
         createdBy: userId,
         listId: list.id,
         workspaceId: list.workspaceId,
@@ -1281,7 +1285,7 @@ export const cardRouter = createTRPCRouter({
 
       const newCard = await cardRepo.create(ctx.db, {
         title: input.title ?? sourceCard.title,
-        description: sourceCard.description ?? "",
+        description: normalizeDescription(sourceCard.description),
         createdBy: userId,
         listId: targetList.id,
         workspaceId: targetList.workspaceId,

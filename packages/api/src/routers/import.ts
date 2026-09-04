@@ -12,7 +12,11 @@ import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
 import { colours } from "@kan/shared/constants";
-import { generateSlug, generateUID } from "@kan/shared/utils";
+import {
+  generateSlug,
+  generateUID,
+  normalizeDescription,
+} from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
@@ -356,7 +360,7 @@ export const importRouter = createTRPCRouter({
               const cardsInsert = list.cards.map((card, index) => ({
                 publicId: generateUID(),
                 title: (card.name?.trim() ?? "Untitled Card").slice(0, 2000),
-                description: card.description,
+                description: normalizeDescription(card.description),
                 createdBy: userId,
                 listId: newListId,
                 workspaceId: workspace.id,
@@ -934,7 +938,7 @@ export const importRouter = createTRPCRouter({
           const cardsInput = itemsToInsert.map((data, index) => ({
             publicId: generateUID(),
             title: data.title,
-            description: data.description,
+            description: normalizeDescription(data.description),
             createdBy: userId,
             listId: data.listId,
             workspaceId: workspace.id,
