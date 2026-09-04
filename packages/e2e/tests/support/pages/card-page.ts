@@ -69,8 +69,26 @@ export class CardPage {
     const created = waitForTrpcMutation(this.page, "label.create");
     const assigned = waitForTrpcMutation(this.page, "card.addOrRemoveLabel");
     await dialog.getByRole("button", { name: "Create label" }).click();
-    await created;
+    const createdResponse = await created;
     await assigned;
+
+    const body = (await createdResponse.json()) as [
+      { result: { data: { json: { publicId: string } } } },
+    ];
+
+    return body[0].result.data.json.publicId;
+  }
+
+  async openLabelEditor(name: string) {
+    await this.labelSelectorTrigger().click();
+
+    const checkbox = this.page
+      .getByRole("checkbox", { name })
+      .filter({ visible: true });
+    const row = checkbox.locator("..");
+
+    await row.hover();
+    await row.getByRole("button").click();
   }
 
   async uploadAttachment(filePath: string) {
