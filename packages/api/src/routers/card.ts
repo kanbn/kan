@@ -10,7 +10,6 @@ import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import {
   generateAttachmentUrl,
-  generateAvatarUrl,
   normalizeDescription,
 } from "@kan/shared/utils";
 
@@ -24,6 +23,7 @@ import {
 } from "../schemas";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
+import { createAvatarUrlResolver } from "../utils/avatarUrls";
 import { sendMentionEmails } from "../utils/notifications";
 import {
   assertCanDelete,
@@ -715,6 +715,7 @@ export const cardRouter = createTRPCRouter({
       );
 
       // Generate presigned URLs for workspace member avatars
+      const resolveAvatarUrl = createAvatarUrlResolver();
       const workspaceWithAvatarUrls = result.list.board.workspace
         ? {
             ...result.list.board.workspace,
@@ -724,7 +725,7 @@ export const cardRouter = createTRPCRouter({
                   return member;
                 }
 
-                const avatarUrl = await generateAvatarUrl(member.user.image);
+                const avatarUrl = await resolveAvatarUrl(member.user.image);
                 return {
                   ...member,
                   user: {
@@ -809,13 +810,14 @@ export const cardRouter = createTRPCRouter({
       );
 
       // Generate presigned URLs for user avatars in activities
+      const resolveAvatarUrl = createAvatarUrlResolver();
       const activitiesWithAvatarUrls = await Promise.all(
         result.activities.map(async (activity) => {
           const updatedActivity = { ...activity };
 
           // Generate presigned URL for activity user avatar
           if (activity.user?.image) {
-            const userAvatarUrl = await generateAvatarUrl(activity.user.image);
+            const userAvatarUrl = await resolveAvatarUrl(activity.user.image);
             updatedActivity.user = {
               ...activity.user,
               image: userAvatarUrl,
@@ -824,7 +826,7 @@ export const cardRouter = createTRPCRouter({
 
           // Generate presigned URL for member user avatar (if exists)
           if (activity.member?.user?.image) {
-            const memberAvatarUrl = await generateAvatarUrl(
+            const memberAvatarUrl = await resolveAvatarUrl(
               activity.member.user.image,
             );
             updatedActivity.member = {
