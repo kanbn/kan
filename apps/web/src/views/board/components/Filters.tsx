@@ -54,10 +54,7 @@ const Filters = ({
 }) => {
   const router = useRouter();
 
-  const clearFilters = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-
+  const clearFilters = async () => {
     try {
       await router.push({
         pathname: router.pathname,
@@ -139,6 +136,13 @@ const Filters = ({
     },
   ];
 
+  const filterCounts = {
+    members: formatToArray(router.query.members).length,
+    labels: formatToArray(router.query.labels).length,
+    lists: formatToArray(router.query.lists).length,
+    dueDate: formatToArray(router.query.dueDate).length,
+  };
+
   const groups = [
     ...(formattedMembers.length
       ? [
@@ -147,6 +151,7 @@ const Filters = ({
             label: t`Members`,
             icon: <HiOutlineUserCircle size={16} />,
             items: formattedMembers,
+            selectedCount: filterCounts.members,
           },
         ]
       : []),
@@ -155,6 +160,7 @@ const Filters = ({
       label: t`Labels`,
       icon: <HiOutlineTag size={16} />,
       items: formattedLabels,
+      selectedCount: filterCounts.labels,
     },
     ...(formattedLists.length
       ? [
@@ -163,6 +169,7 @@ const Filters = ({
             label: t`Lists`,
             icon: <HiOutlineSquare3Stack3D size={16} />,
             items: formattedLists,
+            selectedCount: filterCounts.lists,
           },
         ]
       : []),
@@ -171,6 +178,7 @@ const Filters = ({
       label: t`Due date`,
       icon: <HiOutlineClock size={16} />,
       items: dueDateItems,
+      selectedCount: filterCounts.dueDate,
     },
   ];
 
@@ -198,12 +206,10 @@ const Filters = ({
     }
   };
 
-  const numOfFilters = [
-    ...formatToArray(router.query.members),
-    ...formatToArray(router.query.labels),
-    ...formatToArray(router.query.lists),
-    ...formatToArray(router.query.dueDate),
-  ].length;
+  const numOfFilters = Object.values(filterCounts).reduce(
+    (total, count) => total + count,
+    0,
+  );
 
   return (
     <div className="relative">
@@ -212,6 +218,19 @@ const Filters = ({
         handleSelect={handleSelect}
         menuSpacing="md"
         position={position}
+        backLabel={t`Back`}
+        footer={
+          numOfFilters > 0 ? (
+            <button
+              type="button"
+              onClick={clearFilters}
+              className="flex w-full items-center rounded-[5px] p-2 text-[12px] font-semibold text-dark-900 hover:bg-light-200 dark:hover:bg-dark-300"
+            >
+              <HiMiniXMark size={16} className="mr-2" aria-hidden="true" />
+              {t`Clear filters`}
+            </button>
+          ) : undefined
+        }
       >
         <Button
           variant="secondary"
@@ -221,17 +240,12 @@ const Filters = ({
           {t`Filter`}
         </Button>
         {numOfFilters > 0 && (
-          <button
-            type="button"
-            onClick={clearFilters}
-            aria-label={t`Clear filters`}
-            className="group absolute -right-[8px] -top-[8px] flex h-5 w-5 items-center justify-center rounded-full border-2 border-light-100 bg-light-1000 text-[8px] font-[700] text-light-600 dark:border-dark-50 dark:bg-dark-1000 dark:text-dark-600"
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-[8px] -top-[8px] flex h-5 w-5 items-center justify-center rounded-full border-2 border-light-100 bg-light-1000 text-[8px] font-[700] text-light-600 dark:border-dark-50 dark:bg-dark-1000 dark:text-dark-600"
           >
-            <span className="group-hover:hidden">{numOfFilters}</span>
-            <span className="hidden text-light-50 group-hover:inline dark:text-dark-50">
-              <HiMiniXMark size={12} />
-            </span>
-          </button>
+            {numOfFilters}
+          </span>
         )}
       </CheckboxDropdown>
     </div>
