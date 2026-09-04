@@ -54,3 +54,33 @@ export const customFieldValueInputSchema = z.discriminatedUnion("type", [
     optionPublicId: customFieldPublicIdSchema,
   }),
 ]);
+
+export const customFieldFilterSchema = z.discriminatedUnion("type", [
+  z.object({
+    type: z.literal("select"),
+    fieldPublicId: customFieldPublicIdSchema,
+    optionPublicIds: z
+      .array(customFieldPublicIdSchema)
+      .min(1)
+      .max(50)
+      .refine((values) => new Set(values).size === values.length),
+  }),
+  z.object({
+    type: z.literal("checkbox"),
+    fieldPublicId: customFieldPublicIdSchema,
+    values: z
+      .array(z.enum(["checked", "unchecked"]))
+      .min(1)
+      .max(2)
+      .refine((values) => new Set(values).size === values.length),
+  }),
+]);
+
+export const customFieldFiltersSchema = z
+  .array(customFieldFilterSchema)
+  .max(50)
+  .refine(
+    (filters) =>
+      new Set(filters.map((filter) => filter.fieldPublicId)).size ===
+      filters.length,
+  );
