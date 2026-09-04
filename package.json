@@ -21,6 +21,7 @@
     "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
     "lint:ws": "pnpm dlx sherif@latest",
     "postinstall": "pnpm lint:ws",
+    "test": "pnpm --filter=\"!@kan/e2e\" -r --if-present test",
     "test:e2e": "pnpm --filter @kan/e2e test",
     "test:e2e:cloud": "pnpm --filter @kan/e2e test:cloud",
     "test:e2e:self-hosted": "pnpm --filter @kan/e2e test:self-hosted",
