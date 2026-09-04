@@ -5,6 +5,10 @@ import {
   labelSchema,
   workspaceMemberSchema,
 } from "./common";
+import {
+  customFieldDefinitionSchema,
+  customFieldValueSchema,
+} from "./custom-field";
 
 // ─── board.all ───────────────────────────────────────────────
 export const boardListItemSchema = z.object({
@@ -46,6 +50,7 @@ const boardDetailCardSchema = z.object({
   attachments: z.array(z.object({ publicId: z.string() })),
   checklists: z.array(checklistResponseSchema),
   comments: z.array(z.object({ publicId: z.string() })),
+  customFieldValues: z.array(customFieldValueSchema),
 });
 
 // ─── board.byId ──────────────────────────────────────────────
@@ -62,6 +67,7 @@ export const boardDetailSchema = z.object({
     members: z.array(workspaceMemberSchema),
   }),
   labels: z.array(labelSchema),
+  customFields: z.array(customFieldDefinitionSchema),
   lists: z.array(
     z.object({
       publicId: z.string(),
@@ -89,6 +95,7 @@ const boardSlugCardSchema = z.object({
   attachments: z.array(z.object({ publicId: z.string() })),
   checklists: z.array(checklistResponseSchema),
   comments: z.array(z.object({ publicId: z.string() })),
+  customFieldValues: z.array(customFieldValueSchema),
 });
 
 // ─── board.bySlug ────────────────────────────────────────────
@@ -103,6 +110,7 @@ export const boardBySlugSchema = z.object({
     slug: z.string(),
   }),
   labels: z.array(labelSchema),
+  customFields: z.array(customFieldDefinitionSchema),
   lists: z.array(
     z.object({
       publicId: z.string(),

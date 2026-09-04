@@ -36,4 +36,15 @@ export { listCreateResponseSchema, listUpdateResponseSchema } from "./list";
 
 export { memberInviteResponseSchema } from "./member";
 
+export {
+  customFieldPublicIdSchema,
+  customFieldNameSchema,
+  customFieldColourCodeSchema,
+  customFieldNumberValueSchema,
+  customFieldOptionSchema,
+  customFieldDefinitionSchema,
+  customFieldValueSchema,
+  customFieldValueInputSchema,
+} from "./custom-field";
+
 export { attachmentConfirmResponseSchema } from "./attachment";
