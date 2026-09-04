@@ -3,6 +3,7 @@ import { boardRouter } from "./routers/board";
 import { boardMemberRouter } from "./routers/boardMember";
 import { cardRouter } from "./routers/card";
 import { checklistRouter } from "./routers/checklist";
+import { customFieldRouter } from "./routers/custom-field";
 import { feedbackRouter } from "./routers/feedback";
 import { healthRouter } from "./routers/health";
 import { importRouter } from "./routers/import";
@@ -22,6 +23,7 @@ export const appRouter = createTRPCRouter({
   boardMember: boardMemberRouter,
   card: cardRouter,
   checklist: checklistRouter,
+  customField: customFieldRouter,
   feedback: feedbackRouter,
   health: healthRouter,
   label: labelRouter,

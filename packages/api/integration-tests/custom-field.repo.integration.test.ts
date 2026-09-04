@@ -1,6 +1,8 @@
 import { eq } from "drizzle-orm";
 import { beforeEach, describe, expect, it } from "vitest";
 
+import * as boardRepo from "@kan/db/repository/board.repo";
+import * as cardRepo from "@kan/db/repository/card.repo";
 import * as customFieldRepo from "@kan/db/repository/custom-field.repo";
 import {
   boards,
@@ -73,8 +75,8 @@ describe("custom field repository integration tests", () => {
       ...(type === "select"
         ? {
             options: [
-              { name: "Low", colourCode: "green" },
-              { name: "High", colourCode: "red" },
+              { name: "Low", colourCode: "#00ff00" },
+              { name: "High", colourCode: "#ff0000" },
             ],
           }
         : {}),
@@ -96,11 +98,56 @@ describe("custom field repository integration tests", () => {
         type: "select",
         position: 1,
         options: [
-          { name: "Low", position: 0, colourCode: "green" },
-          { name: "High", position: 1, colourCode: "red" },
+          { name: "Low", position: 0, colourCode: "#00ff00" },
+          { name: "High", position: 1, colourCode: "#ff0000" },
         ],
       },
     ]);
+  });
+
+  it("reorders complete field and option sets atomically", async () => {
+    const text = await createField("text", "Customer");
+    const select = await createField("select", "Priority");
+
+    await customFieldRepo.reorderDefinitions(db, {
+      boardPublicId,
+      fieldPublicIds: [select.publicId, text.publicId],
+      actorUserId,
+    });
+    await customFieldRepo.reorderOptions(db, {
+      fieldPublicId: select.publicId,
+      optionPublicIds: [
+        select.options[1]!.publicId,
+        select.options[0]!.publicId,
+      ],
+      actorUserId,
+    });
+
+    const definitions = await customFieldRepo.listDefinitionsByBoardPublicId(
+      db,
+      boardPublicId,
+    );
+    expect(definitions.map((field) => field.publicId)).toEqual([
+      select.publicId,
+      text.publicId,
+    ]);
+    expect(definitions[0]!.options.map((option) => option.name)).toEqual([
+      "High",
+      "Low",
+    ]);
+
+    await expect(
+      customFieldRepo.reorderDefinitions(db, {
+        boardPublicId,
+        fieldPublicIds: [text.publicId],
+        actorUserId,
+      }),
+    ).rejects.toMatchObject({ code: "ORDER_INVALID" });
+    expect(
+      (
+        await customFieldRepo.listDefinitionsByBoardPublicId(db, boardPublicId)
+      ).map((field) => field.publicId),
+    ).toEqual([select.publicId, text.publicId]);
   });
 
   it("stores, updates, lists, and clears every supported value type", async () => {
@@ -288,6 +335,99 @@ describe("custom field repository integration tests", () => {
         actorUserId,
       }),
     ).rejects.toMatchObject({ code: "OPTION_NOT_FOUND" });
+  });
+
+  it("projects definitions and values through the board query", async () => {
+    const select = await createField("select", "Priority");
+    const option = select.options[0]!;
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId,
+      fieldPublicId: select.publicId,
+      value: { type: "select", optionPublicId: option.publicId },
+      actorUserId,
+    });
+    await customFieldRepo.archiveOption(db, {
+      optionPublicId: option.publicId,
+      actorUserId,
+    });
+
+    const board = await boardRepo.getByPublicId(
+      db,
+      boardPublicId,
+      actorUserId,
+      {
+        members: [],
+        labels: [],
+        lists: [],
+        dueDate: [],
+        type: "regular",
+      },
+    );
+
+    expect(board!.customFields[0]).toMatchObject({
+      publicId: select.publicId,
+      name: "Priority",
+    });
+    expect(board!.customFields[0]!.options[0]).toMatchObject({
+      publicId: option.publicId,
+      isArchived: true,
+    });
+    expect(board!.lists[0]!.cards[0]!.customFieldValues[0]).toMatchObject({
+      fieldPublicId: select.publicId,
+      optionPublicId: option.publicId,
+      optionName: "Low",
+      optionArchivedAt: expect.any(Date),
+    });
+
+    await db
+      .update(boards)
+      .set({ visibility: "public" })
+      .where(eq(boards.publicId, boardPublicId));
+    const [boardScope] = await db
+      .select({ workspaceId: boards.workspaceId })
+      .from(boards)
+      .where(eq(boards.publicId, boardPublicId));
+    const publicBoard = await boardRepo.getBySlug(
+      db,
+      "test-board",
+      boardScope!.workspaceId,
+      {
+        members: [],
+        labels: [],
+        lists: [],
+        dueDate: [],
+      },
+    );
+    expect(publicBoard!.customFields[0]!.publicId).toBe(select.publicId);
+    expect(
+      publicBoard!.lists[0]!.cards[0]!.customFieldValues[0]!.optionPublicId,
+    ).toBe(option.publicId);
+
+    const card = await cardRepo.getWithListAndMembersByPublicId(
+      db,
+      cardPublicId,
+    );
+    expect(card!.list.board.customFields[0]!.publicId).toBe(select.publicId);
+    expect(card!.customFieldValues[0]!.optionPublicId).toBe(option.publicId);
+
+    await customFieldRepo.archiveDefinition(db, {
+      fieldPublicId: select.publicId,
+      actorUserId,
+    });
+    const afterArchive = await boardRepo.getByPublicId(
+      db,
+      boardPublicId,
+      actorUserId,
+      {
+        members: [],
+        labels: [],
+        lists: [],
+        dueDate: [],
+        type: "regular",
+      },
+    );
+    expect(afterArchive!.customFields).toEqual([]);
+    expect(afterArchive!.lists[0]!.cards[0]!.customFieldValues).toEqual([]);
   });
 
   it("archives definitions without deleting existing card values", async () => {

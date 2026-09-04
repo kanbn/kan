@@ -44,4 +44,15 @@ export {
   boardMemberRemoveResponseSchema,
 } from "./boardMember";
 
+export {
+  customFieldPublicIdSchema,
+  customFieldNameSchema,
+  customFieldColourCodeSchema,
+  customFieldNumberValueSchema,
+  customFieldOptionSchema,
+  customFieldDefinitionSchema,
+  customFieldValueSchema,
+  customFieldValueInputSchema,
+} from "./custom-field";
+
 export { attachmentConfirmResponseSchema } from "./attachment";
