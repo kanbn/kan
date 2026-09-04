@@ -6,8 +6,8 @@ const board = {
   id: "mock-board-1",
   name: "Mock Trello Board",
   labels: [
-    { id: "label-1", name: "Bug" },
-    { id: "label-2", name: "Feature" },
+    { id: "label-1", name: "Bug", color: "red_dark" },
+    { id: "label-2", name: "Feature", color: "blue_light" },
   ],
   lists: [
     { id: "list-1", name: "To Do" },
@@ -19,14 +19,14 @@ const board = {
       name: "Fix login bug",
       desc: "Users can't log in",
       idList: "list-1",
-      labels: [{ id: "label-1", name: "Bug" }],
+      labels: [{ id: "label-1", name: "Bug", color: "red_dark" }],
     },
     {
       id: "card-2",
       name: "Add dark mode",
       desc: "",
       idList: "list-2",
-      labels: [{ id: "label-2", name: "Feature" }],
+      labels: [{ id: "label-2", name: "Feature", color: "blue_light" }],
     },
   ],
   checklists: [
@@ -59,6 +59,12 @@ const server = createServer((req, res) => {
   }
 
   if (url.pathname === `/boards/${board.id}`) {
+    if (url.searchParams.get("labels_limit") !== "1000") {
+      res.writeHead(400);
+      res.end(JSON.stringify({ message: "labels_limit must be 1000" }));
+      return;
+    }
+
     res.writeHead(200);
     res.end(JSON.stringify(board));
     return;

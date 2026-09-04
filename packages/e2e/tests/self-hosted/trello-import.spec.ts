@@ -52,7 +52,12 @@ test(
     await expect(page.getByText("Add dark mode")).toBeVisible();
 
     await board.openCard("Fix login bug");
-    await expect(card.assignedLabelBadge("Bug")).toBeVisible();
+    const bugLabel = card.assignedLabelBadge("Bug");
+    await expect(bugLabel).toBeVisible();
+    await expect(bugLabel.locator("..").locator("svg")).toHaveAttribute(
+      "fill",
+      "#c9372c",
+    );
     await expect(page.getByText("Reproduce issue")).toBeVisible();
     await expect(page.getByText("Write fix")).toBeVisible();
   },
