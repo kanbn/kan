@@ -89,13 +89,13 @@ test(
     await milestoneStored;
 
     const priorityStored = waitForTrpcMutation(page, "customField.setValue");
-    await page
-      .getByRole("combobox", { name: "Priority" })
-      .selectOption({ label: "High" });
+    await page.getByRole("button", { name: "Priority" }).click();
+    await page.getByRole("option", { name: "High" }).click();
     await priorityStored;
 
     const checkboxStored = waitForTrpcMutation(page, "customField.setValue");
-    await page.getByRole("combobox", { name: "Approved" }).selectOption("true");
+    await page.getByRole("button", { name: "Approved" }).click();
+    await page.getByRole("option", { name: "Checked", exact: true }).click();
     await checkboxStored;
 
     const cardReloaded = waitForTrpcQuery(page, "card.byId");
@@ -110,11 +110,9 @@ test(
     await expect(page.getByRole("textbox", { name: "Milestone" })).toHaveValue(
       "2026-09-05T12:30",
     );
-    await expect(
-      page
-        .getByRole("combobox", { name: "Priority" })
-        .locator("option:checked"),
-    ).toHaveText("High");
+    await expect(page.getByRole("button", { name: "Priority" })).toHaveText(
+      "High",
+    );
 
     const cardPath = new URL(page.url()).pathname;
     await page.goto(boardPath);
@@ -229,9 +227,8 @@ test(
     const boardPath = new URL(page.url()).pathname;
     await board.openCard("Lifecycle card");
     const valueStored = waitForTrpcMutation(page, "customField.setValue");
-    await page
-      .getByRole("combobox", { name: "Priority" })
-      .selectOption({ label: "Low" });
+    await page.getByRole("button", { name: "Priority" }).click();
+    await page.getByRole("option", { name: "Low" }).click();
     await valueStored;
 
     await page.goto(boardPath);
@@ -283,18 +280,18 @@ test(
     await reopenedDialog.getByRole("button", { name: "Close" }).click();
 
     await board.openCard("Lifecycle card");
-    const priority = page.getByRole("combobox", { name: "Priority" });
-    await expect(priority.locator("option:checked")).toHaveText(
-      "Low (Archived)",
-    );
+    const priority = page.getByRole("button", { name: "Priority" });
+    await expect(priority).toHaveText("Low (Archived)");
     const valueCleared = waitForTrpcMutation(page, "customField.clearValue");
-    await priority.selectOption("");
+    await priority.click();
+    await page.getByRole("option", { name: "Not set" }).click();
     const clearResponse = await valueCleared;
     expect(
       clearResponse.ok(),
       `${clearResponse.request().postData()}\n${await clearResponse.text()}`,
     ).toBeTruthy();
-    await expect(priority.getByRole("option", { name: /Low/ })).toHaveCount(0);
+    await priority.click();
+    await expect(page.getByRole("option", { name: /Low/ })).toHaveCount(0);
     await expect(page.getByRole("textbox", { name: "Notes" })).toHaveCount(0);
   },
 );
