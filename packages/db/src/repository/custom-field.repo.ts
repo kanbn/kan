@@ -6,11 +6,15 @@ import {
   boards,
   cardCustomFieldValues,
   cards,
+  customFieldMappings,
+  customFieldOptionMappings,
   customFieldOptions,
   customFields,
   lists,
 } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
+
+type dbTransaction = Parameters<Parameters<dbClient["transaction"]>[0]>[0];
 
 export const MAX_CUSTOM_FIELDS_PER_BOARD = 50;
 export const MAX_CUSTOM_FIELD_OPTIONS = 50;
@@ -27,6 +31,9 @@ export const customFieldRepositoryErrorCodes = [
   "OPTION_NOT_FOUND",
   "ORDER_INVALID",
   "CROSS_BOARD_COPY_UNSUPPORTED",
+  "FIELD_MAPPING_AMBIGUOUS",
+  "OPTION_MAPPING_AMBIGUOUS",
+  "ARCHIVED_FIELD_MOVE_UNSUPPORTED",
 ] as const;
 
 export type CustomFieldRepositoryErrorCode =
@@ -1011,6 +1018,331 @@ export const copyActiveCardValues = async (
 
     return { copied: inserted.length };
   });
+
+export const moveCardValuesToBoard = async (
+  db: dbTransaction,
+  input: {
+    cardId: number;
+    targetBoardId: number;
+    actorUserId: string;
+  },
+) => {
+  const values = await db
+    .select({
+      id: cardCustomFieldValues.id,
+      fieldId: customFields.id,
+      fieldName: customFields.name,
+      fieldType: customFields.type,
+      fieldShowOnCard: customFields.showOnCard,
+      fieldDeletedAt: customFields.deletedAt,
+      optionId: customFieldOptions.id,
+      optionName: customFieldOptions.name,
+      optionColourCode: customFieldOptions.colourCode,
+      optionDeletedAt: customFieldOptions.deletedAt,
+    })
+    .from(cardCustomFieldValues)
+    .innerJoin(
+      customFields,
+      eq(cardCustomFieldValues.customFieldId, customFields.id),
+    )
+    .leftJoin(
+      customFieldOptions,
+      eq(cardCustomFieldValues.optionId, customFieldOptions.id),
+    )
+    .where(eq(cardCustomFieldValues.cardId, input.cardId))
+    .orderBy(asc(customFields.position));
+
+  if (values.length === 0) return;
+  if (values.some((value) => value.fieldDeletedAt !== null))
+    throw new CustomFieldRepositoryError("ARCHIVED_FIELD_MOVE_UNSUPPORTED");
+
+  const [targetBoard] = await db
+    .select({ id: boards.id, isArchived: boards.isArchived })
+    .from(boards)
+    .where(and(eq(boards.id, input.targetBoardId), isNull(boards.deletedAt)))
+    .limit(1);
+  if (!targetBoard) throw new CustomFieldRepositoryError("BOARD_NOT_FOUND");
+  if (targetBoard.isArchived)
+    throw new CustomFieldRepositoryError("BOARD_ARCHIVED");
+
+  const [targetFieldState] = await db
+    .select({
+      count: count(customFields.id),
+      maxPosition: max(customFields.position),
+    })
+    .from(customFields)
+    .where(
+      and(
+        eq(customFields.boardId, input.targetBoardId),
+        isNull(customFields.deletedAt),
+      ),
+    );
+  let activeFieldCount = targetFieldState?.count ?? 0;
+  let nextFieldPosition = (targetFieldState?.maxPosition ?? -1) + 1;
+
+  for (const value of values) {
+    const [persistedMapping] = await db
+      .select({
+        mappingId: customFieldMappings.id,
+        id: customFields.id,
+        type: customFields.type,
+        deletedAt: customFields.deletedAt,
+      })
+      .from(customFieldMappings)
+      .innerJoin(
+        customFields,
+        eq(customFieldMappings.targetFieldId, customFields.id),
+      )
+      .where(
+        and(
+          eq(customFieldMappings.sourceFieldId, value.fieldId),
+          eq(customFieldMappings.targetBoardId, input.targetBoardId),
+        ),
+      )
+      .limit(1);
+
+    let targetField =
+      persistedMapping?.deletedAt === null
+        ? { id: persistedMapping.id, type: persistedMapping.type }
+        : undefined;
+    let clonedOptionIds: Map<number, number> | undefined;
+
+    if (!targetField) {
+      const matchingFields = await db
+        .select({ id: customFields.id, type: customFields.type })
+        .from(customFields)
+        .where(
+          and(
+            eq(customFields.boardId, input.targetBoardId),
+            eq(customFields.name, value.fieldName),
+            eq(customFields.type, value.fieldType),
+            isNull(customFields.deletedAt),
+          ),
+        )
+        .limit(2);
+
+      if (matchingFields.length > 1)
+        throw new CustomFieldRepositoryError("FIELD_MAPPING_AMBIGUOUS");
+      targetField = matchingFields[0];
+
+      if (!targetField) {
+        if (activeFieldCount >= MAX_CUSTOM_FIELDS_PER_BOARD)
+          throw new CustomFieldRepositoryError("FIELD_LIMIT_REACHED");
+
+        [targetField] = await db
+          .insert(customFields)
+          .values({
+            publicId: generateUID(),
+            boardId: input.targetBoardId,
+            name: value.fieldName,
+            type: value.fieldType,
+            position: nextFieldPosition,
+            showOnCard: value.fieldShowOnCard,
+            createdBy: input.actorUserId,
+          })
+          .returning({ id: customFields.id, type: customFields.type });
+        if (!targetField) throw new Error("Failed to clone custom field");
+        const clonedField = targetField;
+        activeFieldCount += 1;
+        nextFieldPosition += 1;
+
+        if (value.fieldType === "select") {
+          const sourceOptions = await db
+            .select({
+              id: customFieldOptions.id,
+              name: customFieldOptions.name,
+              colourCode: customFieldOptions.colourCode,
+              position: customFieldOptions.position,
+              deletedAt: customFieldOptions.deletedAt,
+            })
+            .from(customFieldOptions)
+            .where(eq(customFieldOptions.customFieldId, value.fieldId))
+            .orderBy(asc(customFieldOptions.position));
+
+          if (sourceOptions.length > 0) {
+            const insertedOptions = await db
+              .insert(customFieldOptions)
+              .values(
+                sourceOptions.map((option) => ({
+                  publicId: generateUID(),
+                  customFieldId: clonedField.id,
+                  name: option.name,
+                  colourCode: option.colourCode,
+                  position: option.position,
+                  createdBy: input.actorUserId,
+                  ...(option.deletedAt
+                    ? {
+                        deletedAt: new Date(),
+                        deletedBy: input.actorUserId,
+                      }
+                    : {}),
+                })),
+              )
+              .returning({ id: customFieldOptions.id });
+            clonedOptionIds = new Map(
+              sourceOptions.map((option, index) => {
+                const insertedOption = insertedOptions[index];
+                if (!insertedOption)
+                  throw new Error("Failed to clone custom field option");
+                return [option.id, insertedOption.id];
+              }),
+            );
+            await db.insert(customFieldOptionMappings).values(
+              sourceOptions.map((option) => {
+                const targetOptionId = clonedOptionIds?.get(option.id);
+                if (targetOptionId === undefined)
+                  throw new Error("Failed to map cloned custom field option");
+                return {
+                  sourceOptionId: option.id,
+                  targetFieldId: clonedField.id,
+                  targetOptionId,
+                  createdBy: input.actorUserId,
+                };
+              }),
+            );
+          }
+        }
+      }
+
+      if (persistedMapping) {
+        await db
+          .update(customFieldMappings)
+          .set({ targetFieldId: targetField.id })
+          .where(eq(customFieldMappings.id, persistedMapping.mappingId));
+      } else {
+        await db.insert(customFieldMappings).values({
+          sourceFieldId: value.fieldId,
+          targetBoardId: input.targetBoardId,
+          targetFieldId: targetField.id,
+          createdBy: input.actorUserId,
+        });
+      }
+    }
+
+    if (targetField.type !== value.fieldType)
+      throw new CustomFieldRepositoryError("FIELD_TYPE_MISMATCH");
+
+    let targetOptionId: number | null = null;
+    if (value.fieldType === "select") {
+      if (value.optionId === null || value.optionName === null)
+        throw new CustomFieldRepositoryError("OPTION_NOT_FOUND");
+      targetOptionId = clonedOptionIds?.get(value.optionId) ?? null;
+
+      if (targetOptionId === null) {
+        const [persistedOptionMapping] = await db
+          .select({
+            id: customFieldOptions.id,
+            deletedAt: customFieldOptions.deletedAt,
+          })
+          .from(customFieldOptionMappings)
+          .innerJoin(
+            customFieldOptions,
+            eq(customFieldOptionMappings.targetOptionId, customFieldOptions.id),
+          )
+          .where(
+            and(
+              eq(customFieldOptionMappings.sourceOptionId, value.optionId),
+              eq(customFieldOptionMappings.targetFieldId, targetField.id),
+            ),
+          )
+          .limit(1);
+        if (
+          persistedOptionMapping &&
+          (persistedOptionMapping.deletedAt === null) ===
+            (value.optionDeletedAt === null)
+        )
+          targetOptionId = persistedOptionMapping.id;
+      }
+
+      if (targetOptionId === null) {
+        const matchingOptions = await db
+          .select({
+            id: customFieldOptions.id,
+            deletedAt: customFieldOptions.deletedAt,
+          })
+          .from(customFieldOptions)
+          .where(
+            and(
+              eq(customFieldOptions.customFieldId, targetField.id),
+              eq(customFieldOptions.name, value.optionName),
+            ),
+          );
+        const sameStateOptions = matchingOptions.filter(
+          (option) =>
+            (option.deletedAt === null) === (value.optionDeletedAt === null),
+        );
+        if (sameStateOptions.length > 1)
+          throw new CustomFieldRepositoryError("OPTION_MAPPING_AMBIGUOUS");
+        targetOptionId = sameStateOptions[0]?.id ?? null;
+      }
+
+      if (targetOptionId === null) {
+        const [targetOptionState] = await db
+          .select({
+            count: count(customFieldOptions.id),
+            maxPosition: max(customFieldOptions.position),
+          })
+          .from(customFieldOptions)
+          .where(
+            and(
+              eq(customFieldOptions.customFieldId, targetField.id),
+              isNull(customFieldOptions.deletedAt),
+            ),
+          );
+        if (
+          value.optionDeletedAt === null &&
+          (targetOptionState?.count ?? 0) >= MAX_CUSTOM_FIELD_OPTIONS
+        )
+          throw new CustomFieldRepositoryError("OPTION_LIMIT_REACHED");
+
+        const [createdOption] = await db
+          .insert(customFieldOptions)
+          .values({
+            publicId: generateUID(),
+            customFieldId: targetField.id,
+            name: value.optionName,
+            colourCode: value.optionColourCode,
+            position: (targetOptionState?.maxPosition ?? -1) + 1,
+            createdBy: input.actorUserId,
+            ...(value.optionDeletedAt
+              ? { deletedAt: new Date(), deletedBy: input.actorUserId }
+              : {}),
+          })
+          .returning({ id: customFieldOptions.id });
+        if (!createdOption)
+          throw new Error("Failed to map custom field option");
+        targetOptionId = createdOption.id;
+      }
+
+      await db
+        .insert(customFieldOptionMappings)
+        .values({
+          sourceOptionId: value.optionId,
+          targetFieldId: targetField.id,
+          targetOptionId,
+          createdBy: input.actorUserId,
+        })
+        .onConflictDoUpdate({
+          target: [
+            customFieldOptionMappings.sourceOptionId,
+            customFieldOptionMappings.targetFieldId,
+          ],
+          set: { targetOptionId },
+        });
+    }
+
+    await db
+      .update(cardCustomFieldValues)
+      .set({
+        customFieldId: targetField.id,
+        fieldType: targetField.type,
+        optionId: targetOptionId,
+        updatedAt: new Date(),
+        updatedBy: input.actorUserId,
+      })
+      .where(eq(cardCustomFieldValues.id, value.id));
+  }
+};
 
 export const setCardValue = async (
   db: dbClient,
