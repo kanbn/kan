@@ -58,7 +58,7 @@ describe("board summary repository view", () => {
     await db.insert(cards).values({
       publicId: "empty1234567",
       title: "Empty summary",
-      description: "<p> </p>",
+      description: null,
       index: 1,
       listId: list!.id,
       createdBy: user.id,

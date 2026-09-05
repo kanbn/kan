@@ -272,7 +272,7 @@ export const getByPublicId = async (
               ).as("description"),
               hasDescription: (includeCardDetails
                 ? sql<boolean>`FALSE`
-                : sql<boolean>`COALESCE(BTRIM(REGEXP_REPLACE(COALESCE(${card.description}, ''), '<[^>]*>', '', 'g')), '') <> ''`
+                : sql<boolean>`${card.description} IS NOT NULL`
               ).as("has_description"),
               attachmentCount: (includeCardDetails
                 ? sql<number>`0`
