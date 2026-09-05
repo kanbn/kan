@@ -58,8 +58,12 @@ const mockListDefinitions = vi.mocked(
 );
 const mockCreateDefinition = vi.mocked(customFieldRepo.createDefinition);
 const mockUpdateDefinition = vi.mocked(customFieldRepo.updateDefinition);
+const mockArchiveDefinition = vi.mocked(customFieldRepo.archiveDefinition);
 const mockReorderDefinitions = vi.mocked(customFieldRepo.reorderDefinitions);
 const mockCreateOption = vi.mocked(customFieldRepo.createOption);
+const mockUpdateOption = vi.mocked(customFieldRepo.updateOption);
+const mockArchiveOption = vi.mocked(customFieldRepo.archiveOption);
+const mockReorderOptions = vi.mocked(customFieldRepo.reorderOptions);
 const mockListValues = vi.mocked(customFieldRepo.listValuesByCardPublicId);
 const mockSetCardValue = vi.mocked(customFieldRepo.setCardValue);
 const mockClearCardValue = vi.mocked(customFieldRepo.clearCardValue);
@@ -197,6 +201,26 @@ describe("custom field router", () => {
     );
   });
 
+  it("archives definitions with board:edit and the authenticated actor", async () => {
+    mockFieldScope.mockResolvedValue(fieldScope);
+    mockArchiveDefinition.mockResolvedValue({ publicId: fieldPublicId });
+
+    await customFieldRouter.createCaller(ctx).archiveDefinition({
+      fieldPublicId,
+    });
+
+    expect(mockAssertPermission).toHaveBeenCalledWith(
+      mockDb,
+      mockUser.id,
+      fieldScope.workspaceId,
+      "board:edit",
+    );
+    expect(mockArchiveDefinition).toHaveBeenCalledWith(mockDb, {
+      fieldPublicId,
+      actorUserId: mockUser.id,
+    });
+  });
+
   it("reorders definitions with board:edit", async () => {
     mockBoardScope.mockResolvedValue(boardScope as never);
     mockReorderDefinitions.mockResolvedValue({ success: true });
@@ -241,6 +265,56 @@ describe("custom field router", () => {
       "board:edit",
     );
     expect(mockOptionScope).not.toHaveBeenCalled();
+  });
+
+  it("updates and archives options through their board scope", async () => {
+    mockOptionScope.mockResolvedValue(fieldScope);
+    mockUpdateOption.mockResolvedValue({
+      publicId: optionPublicId,
+      name: "Urgent",
+      colourCode: "#ff0000",
+      position: 0,
+    });
+    mockArchiveOption.mockResolvedValue({ publicId: optionPublicId });
+
+    await customFieldRouter.createCaller(ctx).updateOption({
+      optionPublicId,
+      name: "Urgent",
+    });
+    await customFieldRouter.createCaller(ctx).archiveOption({ optionPublicId });
+
+    expect(mockAssertPermission).toHaveBeenCalledTimes(2);
+    expect(mockUpdateOption).toHaveBeenCalledWith(mockDb, {
+      optionPublicId,
+      name: "Urgent",
+      actorUserId: mockUser.id,
+    });
+    expect(mockArchiveOption).toHaveBeenCalledWith(mockDb, {
+      optionPublicId,
+      actorUserId: mockUser.id,
+    });
+  });
+
+  it("reorders options with board:edit", async () => {
+    mockFieldScope.mockResolvedValue(fieldScope);
+    mockReorderOptions.mockResolvedValue({ success: true });
+
+    await customFieldRouter.createCaller(ctx).reorderOptions({
+      fieldPublicId,
+      optionPublicIds: [optionPublicId],
+    });
+
+    expect(mockAssertPermission).toHaveBeenCalledWith(
+      mockDb,
+      mockUser.id,
+      fieldScope.workspaceId,
+      "board:edit",
+    );
+    expect(mockReorderOptions).toHaveBeenCalledWith(mockDb, {
+      fieldPublicId,
+      optionPublicIds: [optionPublicId],
+      actorUserId: mockUser.id,
+    });
   });
 
   it("reads card values with card:view", async () => {
