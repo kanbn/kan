@@ -1,4 +1,338 @@
 {
+  "m16xKo": {
+    "message": "Add",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 365]
+    ],
+    "translation": "Ajouter"
+  },
+  "Va3xJe": {
+    "message": "Add field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 490]
+    ],
+    "translation": "Ajouter un champ"
+  },
+  "B495Gs": {
+    "message": "Archive",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 220]
+    ],
+    "translation": "Archiver"
+  },
+  "gbhDMT": {
+    "message": "Archive custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 186]
+    ],
+    "translation": "Archiver le champ personnalisé"
+  },
+  "8G7Zb9": {
+    "message": "Archive option",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 330]
+    ],
+    "translation": "Archiver l’option"
+  },
+  "N/xzLE": {
+    "message": "Archive this field? Existing card values will be hidden but preserved.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 196]
+    ],
+    "translation": "Archiver ce champ ? Les valeurs existantes des cartes seront masquées, mais conservées."
+  },
+  "yF2aJL": {
+    "message": "Archived options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 370]
+    ],
+    "translation": "Options archivées"
+  },
+  "G1XxbZ": {
+    "message": "Checkbox",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 38]
+    ],
+    "translation": "Case à cocher"
+  },
+  "VSGGki": {
+    "message": "Checked",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-badges.tsx", 28],
+      ["src/views/board/components/Filters.tsx", 190],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 23],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 223]
+    ],
+    "translation": "Coché"
+  },
+  "IJ9AUi": {
+    "message": "Copy custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 279]
+    ],
+    "translation": "Copier les champs personnalisés"
+  },
+  "0eY3nD": {
+    "message": "Custom field name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 131]
+    ],
+    "translation": "Nom du champ personnalisé"
+  },
+  "oPwQt4": {
+    "message": "Custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/BoardDropdown.tsx", 110],
+      [
+        "src/views/board/components/custom-fields/custom-field-manager.tsx",
+        416
+      ],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 275]
+    ],
+    "translation": "Champs personnalisés"
+  },
+  "mYGY3B": {
+    "message": "Date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 36]
+    ],
+    "translation": "Date"
+  },
+  "iKQcPM": {
+    "message": "Dropdown",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 40]
+    ],
+    "translation": "Liste déroulante"
+  },
+  "nrXDdR": {
+    "message": "Field name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 467]
+    ],
+    "translation": "Nom du champ"
+  },
+  "zXgopL": {
+    "message": "Field type",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 475]
+    ],
+    "translation": "Type de champ"
+  },
+  "GLQ7v9": {
+    "message": "Fields are available as soon as you create the first one.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 419]
+    ],
+    "translation": "Les champs sont disponibles dès que vous créez le premier."
+  },
+  "rOdFNG": {
+    "message": "Move field down",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 166]
+    ],
+    "translation": "Déplacer le champ vers le bas"
+  },
+  "Yls4DD": {
+    "message": "Move field up",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 149]
+    ],
+    "translation": "Déplacer le champ vers le haut"
+  },
+  "EyDEs6": {
+    "message": "Move option down",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 308]
+    ],
+    "translation": "Déplacer l’option vers le bas"
+  },
+  "vL4DgO": {
+    "message": "Move option up",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 289]
+    ],
+    "translation": "Déplacer l’option vers le haut"
+  },
+  "CwwBeU": {
+    "message": "New option",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 354]
+    ],
+    "translation": "Nouvelle option"
+  },
+  "MTqQMG": {
+    "message": "Not set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 176],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 222]
+    ],
+    "translation": "Non défini"
+  },
+  "HptUxX": {
+    "message": "Number",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 34]
+    ],
+    "translation": "Nombre"
+  },
+  "7KcJ0c": {
+    "message": "Option colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 251]
+    ],
+    "translation": "Couleur de l’option"
+  },
+  "I7idB7": {
+    "message": "Option name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 262]
+    ],
+    "translation": "Nom de l’option"
+  },
+  "0zpgxV": {
+    "message": "Options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 244]
+    ],
+    "translation": "Options"
+  },
+  "dhRDON": {
+    "message": "Show on card front",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 228]
+    ],
+    "translation": "Afficher sur le recto de la carte"
+  },
+  "xeiujy": {
+    "message": "Text",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 32]
+    ],
+    "translation": "Texte"
+  },
+  "GShyvJ": {
+    "message": "This board has no custom fields yet.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 446]
+    ],
+    "translation": "Ce tableau ne contient pas encore de champs personnalisés."
+  },
+  "887Wwx": {
+    "message": "Unable to clear custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 97]
+    ],
+    "translation": "Impossible d’effacer le champ personnalisé"
+  },
+  "tMIe7G": {
+    "message": "Unable to create custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 405]
+    ],
+    "translation": "Impossible de créer le champ personnalisé"
+  },
+  "d76KIX": {
+    "message": "Unable to update custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 75]
+    ],
+    "translation": "Impossible de mettre à jour le champ personnalisé"
+  },
+  "ecMXs+": {
+    "message": "Unable to update custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 81]
+    ],
+    "translation": "Impossible de mettre à jour les champs personnalisés"
+  },
+  "9nuvQ0": {
+    "message": "Unchecked",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-badges.tsx", 28],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 23],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 224]
+    ],
+    "translation": "Non coché"
+  },
+  "BA+tL2": {
+    "message": "Unchecked or not set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 191]],
+    "translation": "Non coché ou non défini"
+  }
+,
   "X0N0PA": {
     "message": " (edited)",
     "placeholders": {},
