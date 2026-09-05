@@ -13,17 +13,20 @@ import {
 } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
-import type { BoardVisibilityStatus } from "@kan/db/schema";
+import type { BoardVisibilityStatus, CustomFieldType } from "@kan/db/schema";
 import {
   boards,
   cardActivities,
   cardAttachments,
+  cardCustomFieldValues,
   cards,
   cardsToLabels,
   cardToWorkspaceMembers,
   checklistItems,
   checklists,
   comments,
+  customFieldOptions,
+  customFields,
   labels,
   lists,
   userBoardFavorites,
@@ -818,6 +821,20 @@ export const createFromSnapshot = async (
   args: {
     source: {
       name: string;
+      customFields: {
+        publicId: string;
+        name: string;
+        type: "text" | "number" | "date" | "checkbox" | "select";
+        position: number;
+        showOnCard: boolean;
+        options: {
+          publicId: string;
+          name: string;
+          colourCode: string | null;
+          position: number;
+          isArchived: boolean;
+        }[];
+      }[];
       labels: { publicId: string; name: string; colourCode: string | null }[];
       lists: {
         name: string;
@@ -841,6 +858,15 @@ export const createFromSnapshot = async (
               completed: boolean;
               index: number;
             }[];
+          }[];
+          customFieldValues: {
+            fieldPublicId: string;
+            fieldType: "text" | "number" | "date" | "checkbox" | "select";
+            textValue: string | null;
+            numberValue: string | null;
+            dateValue: Date | null;
+            checkboxValue: boolean | null;
+            optionPublicId: string | null;
           }[];
         }[];
       }[];
@@ -901,6 +927,67 @@ export const createFromSnapshot = async (
       }
     }
 
+    // Custom field definitions and options
+    const customFieldMap = new Map<
+      string,
+      { id: number; type: CustomFieldType }
+    >();
+    const customFieldOptionMap = new Map<string, number>();
+    const srcCustomFields = [...args.source.customFields].sort(
+      (a, b) => a.position - b.position,
+    );
+
+    if (srcCustomFields.length > 0) {
+      const insertedFields = await tx
+        .insert(customFields)
+        .values(
+          srcCustomFields.map((field) => ({
+            publicId: generateUID(),
+            boardId: newBoard.id,
+            name: field.name,
+            type: field.type,
+            position: field.position,
+            showOnCard: field.showOnCard,
+            createdBy: args.createdBy,
+          })),
+        )
+        .returning({ id: customFields.id, type: customFields.type });
+
+      for (const [index, sourceField] of srcCustomFields.entries()) {
+        const insertedField = insertedFields[index];
+        if (!insertedField) throw new Error("Failed to create custom field");
+        customFieldMap.set(sourceField.publicId, insertedField);
+
+        const sourceOptions = [...sourceField.options].sort(
+          (a, b) => a.position - b.position,
+        );
+        if (sourceOptions.length === 0) continue;
+        const insertedOptions = await tx
+          .insert(customFieldOptions)
+          .values(
+            sourceOptions.map((option) => ({
+              publicId: generateUID(),
+              customFieldId: insertedField.id,
+              name: option.name,
+              colourCode: option.colourCode,
+              position: option.position,
+              createdBy: args.createdBy,
+              ...(option.isArchived
+                ? { deletedAt: new Date(), deletedBy: args.createdBy }
+                : {}),
+            })),
+          )
+          .returning({ id: customFieldOptions.id });
+
+        for (const [optionIndex, sourceOption] of sourceOptions.entries()) {
+          const insertedOption = insertedOptions[optionIndex];
+          if (!insertedOption)
+            throw new Error("Failed to create custom field option");
+          customFieldOptionMap.set(sourceOption.publicId, insertedOption.id);
+        }
+      }
+    }
+
     // Lists
     const listIndexToId = new Map<number, number>();
     const srcLists = [...args.source.lists].sort((a, b) => a.index - b.index);
@@ -941,6 +1028,33 @@ export const createFromSnapshot = async (
           .returning({ id: cards.id });
 
         if (!createdCard) throw new Error("Failed to create card");
+
+        if (card.customFieldValues.length > 0) {
+          const values = card.customFieldValues.map((value) => {
+            const targetField = customFieldMap.get(value.fieldPublicId);
+            if (!targetField || targetField.type !== value.fieldType)
+              throw new Error("Failed to map custom field value");
+            const optionId = value.optionPublicId
+              ? customFieldOptionMap.get(value.optionPublicId)
+              : undefined;
+            if (value.fieldType === "select" && optionId === undefined)
+              throw new Error("Failed to map custom field option value");
+
+            return {
+              publicId: generateUID(),
+              cardId: createdCard.id,
+              customFieldId: targetField.id,
+              fieldType: value.fieldType,
+              optionId: optionId ?? null,
+              textValue: value.textValue,
+              numberValue: value.numberValue,
+              dateValue: value.dateValue,
+              checkboxValue: value.checkboxValue,
+              createdBy: args.createdBy,
+            };
+          });
+          await tx.insert(cardCustomFieldValues).values(values);
+        }
 
         // Create card.created activity
         await tx.insert(cardActivities).values({

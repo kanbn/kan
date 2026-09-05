@@ -137,6 +137,7 @@ export default function CardDropdown({
                 copyLabels: true,
                 copyMembers: true,
                 copyChecklists: true,
+                copyCustomFields: true,
               });
             },
             icon: (
