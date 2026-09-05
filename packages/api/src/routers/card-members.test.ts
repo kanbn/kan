@@ -18,6 +18,7 @@ vi.mock("@kan/db/repository/card.repo", () => ({
   createCardMemberRelationship: vi.fn(),
   getWithListAndMembersByPublicId: vi.fn(),
   getByPublicId: vi.fn(),
+  reorder: vi.fn(),
 }));
 
 vi.mock("@kan/db/repository/cardActivity.repo", () => ({
@@ -28,8 +29,9 @@ vi.mock("@kan/db/repository/cardActivity.repo", () => ({
 vi.mock("@kan/db/repository/cardComment.repo", () => ({}));
 vi.mock("@kan/db/repository/checklist.repo", () => ({}));
 vi.mock("@kan/db/repository/custom-field.repo", () => ({
-  hasCardValues: vi.fn(),
   copyActiveCardValues: vi.fn(),
+  moveCardValuesToBoard: vi.fn(),
+  CustomFieldRepositoryError: class CustomFieldRepositoryError extends Error {},
 }));
 vi.mock("@kan/db/repository/label.repo", () => ({
   getAllByPublicIds: vi.fn(),
@@ -89,9 +91,9 @@ const mockBulkCreateActivities = cardActivityRepo.bulkCreate as ReturnType<
 const mockGetCardByPublicId = cardRepo.getByPublicId as ReturnType<
   typeof vi.fn
 >;
-const mockHasCustomFieldValues = customFieldRepo.hasCardValues as ReturnType<
-  typeof vi.fn
->;
+const mockMoveCustomFieldValues =
+  customFieldRepo.moveCardValuesToBoard as ReturnType<typeof vi.fn>;
+const mockReorderCard = cardRepo.reorder as ReturnType<typeof vi.fn>;
 const mockGetList = listRepo.getWorkspaceAndListIdByListPublicId as ReturnType<
   typeof vi.fn
 >;
@@ -104,6 +106,7 @@ const mockGetMember = workspaceRepo.getMemberByPublicId as ReturnType<
 const mockAssertPermission = assertPermission as ReturnType<typeof vi.fn>;
 
 describe("card member workspace scoping", () => {
+  const mockTx = {};
   const mockDb = {} as never;
   const mockUser = {
     id: "user-123",
@@ -296,10 +299,10 @@ describe("card member workspace scoping", () => {
       await expect(
         cardRouter.createCaller(ctx).update(input),
       ).rejects.toMatchObject({ code: "BAD_REQUEST" });
-      expect(mockHasCustomFieldValues).not.toHaveBeenCalled();
+      expect(mockMoveCustomFieldValues).not.toHaveBeenCalled();
     });
 
-    it("rejects a cross-board move while the card has custom values", async () => {
+    it("maps custom values in the same transaction as a cross-board move", async () => {
       const { cardRouter } = await import("./card");
       mockGetList.mockResolvedValue({
         id: 11,
@@ -309,11 +312,46 @@ describe("card member workspace scoping", () => {
         boardPublicId: "board-1234568",
         workspaceId: 7,
       });
-      mockHasCustomFieldValues.mockResolvedValue(true);
+      mockMoveCustomFieldValues.mockResolvedValue(undefined);
+      let transactionHook:
+        | ((transaction: typeof mockTx) => Promise<void>)
+        | undefined;
+      mockReorderCard.mockImplementation(
+        (
+          calledDb: unknown,
+          calledInput: unknown,
+          options: {
+            beforeReorder?: (transaction: typeof mockTx) => Promise<void>;
+          },
+        ) => {
+          expect(calledDb).toBe(mockDb);
+          expect(calledInput).toEqual({
+            cardId: 17,
+            newIndex: undefined,
+            newListId: 11,
+          });
+          transactionHook = options.beforeReorder;
+          return Promise.resolve({
+            id: 17,
+            publicId: input.cardPublicId,
+            title: "Moved card",
+            description: null,
+            dueDate: null,
+          });
+        },
+      );
 
       await expect(
         cardRouter.createCaller(ctx).update(input),
-      ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+      ).resolves.toMatchObject({ publicId: input.cardPublicId });
+      if (!transactionHook) throw new Error("Transaction hook was not passed");
+      await transactionHook(mockTx);
+      expect(mockMoveCustomFieldValues).toHaveBeenCalledWith(mockTx, {
+        cardId: 17,
+        targetBoardId: 21,
+        actorUserId: mockUser.id,
+      });
+      expect(mockReorderCard).toHaveBeenCalledTimes(1);
     });
   });
 });

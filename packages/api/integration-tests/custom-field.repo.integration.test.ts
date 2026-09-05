@@ -8,6 +8,9 @@ import {
   boards,
   cardCustomFieldValues,
   cards,
+  customFieldMappings,
+  customFieldOptionMappings,
+  customFieldOptions,
   customFields,
   lists,
 } from "@kan/db/schema";
@@ -280,6 +283,226 @@ describe("custom field repository integration tests", () => {
     ]);
   });
 
+  it("maps values transactionally when cards move between boards", async () => {
+    const text = await createField("text", "Customer");
+    const select = await createField("select", "Priority");
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId,
+      fieldPublicId: text.publicId,
+      value: { type: "text", value: "Acme" },
+      actorUserId,
+    });
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId,
+      fieldPublicId: select.publicId,
+      value: { type: "select", optionPublicId: select.options[1]!.publicId },
+      actorUserId,
+    });
+
+    const [sourceBoard] = await db
+      .select({ id: boards.id, workspaceId: boards.workspaceId })
+      .from(boards)
+      .where(eq(boards.publicId, boardPublicId));
+    const [sourceList] = await db
+      .select({ id: lists.id })
+      .from(lists)
+      .where(eq(lists.boardId, sourceBoard!.id));
+    const [secondCard] = await db
+      .insert(cards)
+      .values({
+        publicId: "card00000008",
+        title: "Second source card",
+        index: 1,
+        listId: sourceList!.id,
+        createdBy: actorUserId,
+      })
+      .returning();
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId: secondCard!.publicId,
+      fieldPublicId: select.publicId,
+      value: { type: "select", optionPublicId: select.options[1]!.publicId },
+      actorUserId,
+    });
+
+    const [targetBoard] = await db
+      .insert(boards)
+      .values({
+        publicId: "board0000008",
+        name: "Target board",
+        slug: "target-board",
+        workspaceId: sourceBoard!.workspaceId,
+        createdBy: actorUserId,
+      })
+      .returning();
+    const [targetList] = await db
+      .insert(lists)
+      .values({
+        publicId: "list00000008",
+        name: "Target list",
+        index: 0,
+        boardId: targetBoard!.id,
+        createdBy: actorUserId,
+      })
+      .returning();
+    const targetSelect = await customFieldRepo.createDefinition(db, {
+      boardPublicId: targetBoard!.publicId,
+      name: "Priority",
+      type: "select",
+      showOnCard: true,
+      actorUserId,
+      options: [{ name: "High", colourCode: "#0000ff" }],
+    });
+
+    const move = (cardId: number) =>
+      cardRepo.reorder(
+        db,
+        {
+          cardId,
+          newListId: targetList!.id,
+          newIndex: undefined,
+        },
+        {
+          beforeReorder: async (transaction) => {
+            await customFieldRepo.moveCardValuesToBoard(transaction, {
+              cardId,
+              targetBoardId: targetBoard!.id,
+              actorUserId,
+            });
+          },
+        },
+      );
+
+    const [firstCard] = await db
+      .select({ id: cards.id })
+      .from(cards)
+      .where(eq(cards.publicId, cardPublicId));
+    await expect(move(firstCard!.id)).resolves.toMatchObject({
+      id: firstCard!.id,
+    });
+
+    const firstMappings = await db.select().from(customFieldMappings);
+    const firstOptionMappings = await db
+      .select()
+      .from(customFieldOptionMappings);
+    expect(firstMappings).toHaveLength(2);
+    expect(firstOptionMappings).toHaveLength(1);
+
+    await db
+      .update(customFields)
+      .set({ name: "Renamed priority" })
+      .where(eq(customFields.publicId, targetSelect.publicId));
+    await db
+      .update(customFieldOptions)
+      .set({ name: "Renamed high" })
+      .where(
+        eq(customFieldOptions.publicId, targetSelect.options[0]!.publicId),
+      );
+
+    await expect(move(secondCard!.id)).resolves.toMatchObject({
+      id: secondCard!.id,
+    });
+    expect(
+      await db
+        .select({ id: customFields.id })
+        .from(customFields)
+        .where(eq(customFields.boardId, targetBoard!.id)),
+    ).toHaveLength(2);
+
+    const movedSelectValues = await db
+      .select({
+        cardId: cardCustomFieldValues.cardId,
+        fieldId: cardCustomFieldValues.customFieldId,
+        optionId: cardCustomFieldValues.optionId,
+      })
+      .from(cardCustomFieldValues)
+      .where(eq(cardCustomFieldValues.fieldType, "select"));
+    expect(new Set(movedSelectValues.map((value) => value.fieldId)).size).toBe(
+      1,
+    );
+    expect(new Set(movedSelectValues.map((value) => value.optionId)).size).toBe(
+      1,
+    );
+  });
+
+  it("rolls back an ambiguous cross-board field mapping", async () => {
+    const field = await createField("text", "Customer");
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId,
+      fieldPublicId: field.publicId,
+      value: { type: "text", value: "Acme" },
+      actorUserId,
+    });
+    const [sourceCard] = await db
+      .select({ id: cards.id, listId: cards.listId })
+      .from(cards)
+      .where(eq(cards.publicId, cardPublicId));
+    const [sourceBoard] = await db
+      .select({ workspaceId: boards.workspaceId })
+      .from(boards)
+      .where(eq(boards.publicId, boardPublicId));
+    const [targetBoard] = await db
+      .insert(boards)
+      .values({
+        publicId: "board0000007",
+        name: "Ambiguous target",
+        slug: "ambiguous-target",
+        workspaceId: sourceBoard!.workspaceId,
+        createdBy: actorUserId,
+      })
+      .returning();
+    const [targetList] = await db
+      .insert(lists)
+      .values({
+        publicId: "list00000007",
+        name: "Target list",
+        index: 0,
+        boardId: targetBoard!.id,
+        createdBy: actorUserId,
+      })
+      .returning();
+    await customFieldRepo.createDefinition(db, {
+      boardPublicId: targetBoard!.publicId,
+      name: "Customer",
+      type: "text",
+      showOnCard: true,
+      actorUserId,
+    });
+    await customFieldRepo.createDefinition(db, {
+      boardPublicId: targetBoard!.publicId,
+      name: "Customer",
+      type: "text",
+      showOnCard: true,
+      actorUserId,
+    });
+
+    await expect(
+      cardRepo.reorder(
+        db,
+        {
+          cardId: sourceCard!.id,
+          newListId: targetList!.id,
+          newIndex: undefined,
+        },
+        {
+          beforeReorder: async (transaction) => {
+            await customFieldRepo.moveCardValuesToBoard(transaction, {
+              cardId: sourceCard!.id,
+              targetBoardId: targetBoard!.id,
+              actorUserId,
+            });
+          },
+        },
+      ),
+    ).rejects.toMatchObject({ code: "FIELD_MAPPING_AMBIGUOUS" });
+
+    const [storedCard] = await db
+      .select({ listId: cards.listId })
+      .from(cards)
+      .where(eq(cards.id, sourceCard!.id));
+    expect(storedCard!.listId).toBe(sourceCard!.listId);
+    expect(await db.select().from(customFieldMappings)).toEqual([]);
+  });
+
   it("rejects mismatched field types and options from another field", async () => {
     const text = await createField("text");
     const firstSelect = await createField("select", "First select");
@@ -437,7 +660,7 @@ describe("custom field repository integration tests", () => {
       .set({ visibility: "public" })
       .where(eq(boards.publicId, boardPublicId));
     const [boardScope] = await db
-      .select({ workspaceId: boards.workspaceId })
+      .select({ id: boards.id, workspaceId: boards.workspaceId })
       .from(boards)
       .where(eq(boards.publicId, boardPublicId));
     const publicBoard = await boardRepo.getBySlug(
@@ -503,6 +726,8 @@ describe("custom field repository integration tests", () => {
       optionName: "Low",
       optionArchivedAt: expect.any(Date),
     });
+    expect(await db.select().from(customFieldMappings)).toHaveLength(1);
+    expect(await db.select().from(customFieldOptionMappings)).toHaveLength(2);
 
     await customFieldRepo.archiveDefinition(db, {
       fieldPublicId: select.publicId,

@@ -25,6 +25,8 @@ import {
   checklistItems,
   checklists,
   comments,
+  customFieldMappings,
+  customFieldOptionMappings,
   customFieldOptions,
   customFields,
   labels,
@@ -938,6 +940,48 @@ export const createFromSnapshot = async (
     );
 
     if (srcCustomFields.length > 0) {
+      const sourceFieldRows = args.sourceBoardId
+        ? await tx
+            .select({ id: customFields.id, publicId: customFields.publicId })
+            .from(customFields)
+            .where(
+              and(
+                eq(customFields.boardId, args.sourceBoardId),
+                inArray(
+                  customFields.publicId,
+                  srcCustomFields.map((field) => field.publicId),
+                ),
+              ),
+            )
+        : [];
+      const sourceFieldIds = new Map(
+        sourceFieldRows.map((field) => [field.publicId, field.id]),
+      );
+      const sourceOptionPublicIds = srcCustomFields.flatMap((field) =>
+        field.options.map((option) => option.publicId),
+      );
+      const sourceOptionRows =
+        args.sourceBoardId && sourceOptionPublicIds.length > 0
+          ? await tx
+              .select({
+                id: customFieldOptions.id,
+                publicId: customFieldOptions.publicId,
+              })
+              .from(customFieldOptions)
+              .innerJoin(
+                customFields,
+                eq(customFieldOptions.customFieldId, customFields.id),
+              )
+              .where(
+                and(
+                  eq(customFields.boardId, args.sourceBoardId),
+                  inArray(customFieldOptions.publicId, sourceOptionPublicIds),
+                ),
+              )
+          : [];
+      const sourceOptionIds = new Map(
+        sourceOptionRows.map((option) => [option.publicId, option.id]),
+      );
       const insertedFields = await tx
         .insert(customFields)
         .values(
@@ -952,6 +996,25 @@ export const createFromSnapshot = async (
           })),
         )
         .returning({ id: customFields.id, type: customFields.type });
+
+      if (args.sourceBoardId) {
+        await tx.insert(customFieldMappings).values(
+          srcCustomFields.map((sourceField, index) => {
+            const sourceFieldId = sourceFieldIds.get(sourceField.publicId);
+            if (sourceFieldId === undefined)
+              throw new Error("Failed to resolve source custom field");
+            const insertedField = insertedFields[index];
+            if (!insertedField)
+              throw new Error("Failed to create custom field");
+            return {
+              sourceFieldId,
+              targetBoardId: newBoard.id,
+              targetFieldId: insertedField.id,
+              createdBy: args.createdBy,
+            };
+          }),
+        );
+      }
 
       for (const [index, sourceField] of srcCustomFields.entries()) {
         const insertedField = insertedFields[index];
@@ -978,6 +1041,25 @@ export const createFromSnapshot = async (
             })),
           )
           .returning({ id: customFieldOptions.id });
+
+        if (args.sourceBoardId) {
+          await tx.insert(customFieldOptionMappings).values(
+            sourceOptions.map((sourceOption, optionIndex) => {
+              const sourceOptionId = sourceOptionIds.get(sourceOption.publicId);
+              if (sourceOptionId === undefined)
+                throw new Error("Failed to resolve source custom field option");
+              const insertedOption = insertedOptions[optionIndex];
+              if (!insertedOption)
+                throw new Error("Failed to create custom field option");
+              return {
+                sourceOptionId,
+                targetFieldId: insertedField.id,
+                targetOptionId: insertedOption.id,
+                createdBy: args.createdBy,
+              };
+            }),
+          );
+        }
 
         for (const [optionIndex, sourceOption] of sourceOptions.entries()) {
           const insertedOption = insertedOptions[optionIndex];

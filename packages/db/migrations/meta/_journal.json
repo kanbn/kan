@@ -260,6 +260,13 @@
       "when": 1788553158783,
       "tag": "20260904201918_AddCustomFields",
       "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1788597450108,
+      "tag": "20260905083730_AddCustomFieldMappings",
+      "breakpoints": true
     }
   ]
 }
