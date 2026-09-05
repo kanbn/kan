@@ -9,7 +9,7 @@ vi.mock("@kan/db/client", () => ({
 }));
 
 describe("custom field OpenAPI", () => {
-  it("publishes custom field filters as string query parameters", async () => {
+  it("publishes filters and initial select options", async () => {
     vi.stubEnv("BETTER_AUTH_SECRET", "test-only-openapi-secret-123456789");
     const { openApiDocument } = await import("./openapi");
     const operation = openApiDocument.paths?.["/boards/{boardPublicId}"]?.get;
@@ -18,5 +18,13 @@ describe("custom field OpenAPI", () => {
     const parameters = JSON.stringify(operation?.parameters);
     expect(parameters).toContain('"name":"customFields"');
     expect(parameters).toContain('"type":"array","items":{"type":"string"');
+
+    const createOperation =
+      openApiDocument.paths?.["/boards/{boardPublicId}/custom-fields"]?.post;
+    expect(createOperation).toBeDefined();
+    const requestBody = JSON.stringify(createOperation?.requestBody);
+    expect(requestBody).toContain('"options"');
+    expect(requestBody).toContain('"name"');
+    expect(requestBody).toContain('"colourCode"');
   }, 10_000);
 });

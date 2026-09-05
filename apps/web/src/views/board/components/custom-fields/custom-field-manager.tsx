@@ -17,6 +17,11 @@ import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
 type Definition = RouterOutputs["customField"]["definitionsByBoard"][number];
+interface DraftOption {
+  key: string;
+  name: string;
+  colourCode: string | null;
+}
 
 const fieldTypes: Definition["type"][] = [
   "text",
@@ -423,6 +428,8 @@ export function CustomFieldManager({
   const [name, setName] = useState("");
   const [type, setType] = useState<Definition["type"]>("select");
   const [showOnCard, setShowOnCard] = useState(true);
+  const [newOptionName, setNewOptionName] = useState("");
+  const [options, setOptions] = useState<DraftOption[]>([]);
   const { data: definitions = [], isLoading } =
     api.customField.definitionsByBoard.useQuery(
       { boardPublicId },
@@ -432,6 +439,8 @@ export function CustomFieldManager({
     onSuccess: async () => {
       setName("");
       setShowOnCard(true);
+      setNewOptionName("");
+      setOptions([]);
       await Promise.all([
         utils.customField.definitionsByBoard.invalidate({ boardPublicId }),
         utils.board.byId.invalidate({ boardPublicId }),
@@ -444,6 +453,16 @@ export function CustomFieldManager({
         icon: "error",
       }),
   });
+  const addOption = () => {
+    const optionName = newOptionName.trim();
+    if (!optionName) return;
+    setOptions((current) => [
+      ...current,
+      { key: crypto.randomUUID(), name: optionName, colourCode: null },
+    ]);
+    setNewOptionName("");
+  };
+  const hasInvalidOption = options.some((option) => !option.name.trim());
 
   return (
     <div className="max-h-[80vh] overflow-y-auto">
@@ -496,6 +515,14 @@ export function CustomFieldManager({
             name: fieldName,
             type,
             showOnCard,
+            ...(type === "select" && options.length > 0
+              ? {
+                  options: options.map(({ name: optionName, colourCode }) => ({
+                    name: optionName.trim(),
+                    colourCode,
+                  })),
+                }
+              : {}),
           });
         }}
       >
@@ -520,7 +547,7 @@ export function CustomFieldManager({
         </select>
         <Button
           type="submit"
-          disabled={!name.trim()}
+          disabled={!name.trim() || hasInvalidOption}
           isLoading={createDefinition.isPending}
           iconLeft={<HiOutlinePlus className="h-4 w-4" />}
         >
@@ -535,6 +562,124 @@ export function CustomFieldManager({
             onChange={() => setShowOnCard((current) => !current)}
           />
         </div>
+        {type === "select" && (
+          <div className="space-y-2 sm:col-span-3">
+            <h3 className="text-xs font-medium text-light-900 dark:text-dark-900">
+              {t`Options`}
+            </h3>
+            {options.length > 0 && (
+              <div className="max-h-40 space-y-2 overflow-y-auto pr-1">
+                {options.map((option, optionIndex) => (
+                  <div key={option.key} className="flex items-center gap-2">
+                    <input
+                      type="color"
+                      value={option.colourCode ?? "#64748b"}
+                      aria-label={t`Option colour`}
+                      className="h-8 w-8 shrink-0 rounded border-0 bg-transparent p-0"
+                      disabled={createDefinition.isPending}
+                      onChange={(event) =>
+                        setOptions((current) =>
+                          current.map((item) =>
+                            item.key === option.key
+                              ? { ...item, colourCode: event.target.value }
+                              : item,
+                          ),
+                        )
+                      }
+                    />
+                    <div className="min-w-0 flex-1">
+                      <Input
+                        value={option.name}
+                        maxLength={255}
+                        aria-label={t`Option name`}
+                        disabled={createDefinition.isPending}
+                        onChange={(event) =>
+                          setOptions((current) =>
+                            current.map((item) =>
+                              item.key === option.key
+                                ? { ...item, name: event.target.value }
+                                : item,
+                            ),
+                          )
+                        }
+                      />
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="xs"
+                      iconOnly
+                      aria-label={t`Move option up`}
+                      disabled={optionIndex === 0 || createDefinition.isPending}
+                      onClick={() =>
+                        setOptions((current) =>
+                          moveItem(current, optionIndex, -1),
+                        )
+                      }
+                      iconLeft={<HiChevronUp className="h-4 w-4" />}
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="xs"
+                      iconOnly
+                      aria-label={t`Move option down`}
+                      disabled={
+                        optionIndex === options.length - 1 ||
+                        createDefinition.isPending
+                      }
+                      onClick={() =>
+                        setOptions((current) =>
+                          moveItem(current, optionIndex, 1),
+                        )
+                      }
+                      iconLeft={<HiChevronDown className="h-4 w-4" />}
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="xs"
+                      iconOnly
+                      aria-label={t`Remove`}
+                      disabled={createDefinition.isPending}
+                      onClick={() =>
+                        setOptions((current) =>
+                          current.filter((item) => item.key !== option.key),
+                        )
+                      }
+                      iconLeft={<HiOutlineTrash className="h-4 w-4" />}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="flex items-center gap-2">
+              <Input
+                value={newOptionName}
+                maxLength={255}
+                placeholder={t`New option`}
+                disabled={createDefinition.isPending}
+                onChange={(event) => setNewOptionName(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    event.preventDefault();
+                    addOption();
+                  }
+                }}
+              />
+              <Button
+                type="button"
+                variant="secondary"
+                size="sm"
+                disabled={!newOptionName.trim() || createDefinition.isPending}
+                onClick={addOption}
+                iconLeft={<HiOutlinePlus className="h-4 w-4" />}
+              >
+                {t`Add`}
+              </Button>
+            </div>
+          </div>
+        )}
       </form>
     </div>
   );
