@@ -1,8 +1,10 @@
+import type { Browser, Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 
 import { AuthPage } from "../support/pages/auth-page";
 import { BoardPage } from "../support/pages/board-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
+import { MembersPage } from "../support/pages/members-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
 import { createTestUser } from "../support/test-user";
 import {
@@ -10,10 +12,34 @@ import {
   waitForTrpcQuery,
 } from "../support/wait-for-trpc";
 
+async function inviteGuest(ownerPage: Page, browser: Browser) {
+  const members = new MembersPage(ownerPage);
+  await members.open();
+  const inviteLink = await members.createInviteLink();
+
+  const guestContext = await browser.newContext();
+  const guestPage = await guestContext.newPage();
+  const guest = createTestUser();
+  await new AuthPage(guestPage).signUp(guest);
+  await new SelfHostedOnboardingPage(guestPage).createFirstWorkspace(
+    "Guest's Own Workspace",
+  );
+  await guestPage.goto(inviteLink);
+  await guestPage.waitForURL(/\/boards\?workspacePublicId=/, {
+    timeout: 20_000,
+  });
+
+  await ownerPage.reload();
+  await members.open();
+  await members.changeRole(guest.email, "guest");
+
+  return { guestContext, guestPage };
+}
+
 test(
   "a custom field can be created and populated on a card",
   { tag: "@self-hosted" },
-  async ({ page }) => {
+  async ({ page, browser }) => {
     const user = createTestUser();
     const auth = new AuthPage(page);
     const onboarding = new SelfHostedOnboardingPage(page);
@@ -71,6 +97,7 @@ test(
     const optionCreated = waitForTrpcMutation(page, "customField.createOption");
     await priorityField.getByRole("button", { name: "Add" }).click();
     await optionCreated;
+    await addField("Empty field", "Text");
     await dialog.getByRole("button", { name: "Close" }).click();
 
     const boardPath = new URL(page.url()).pathname;
@@ -174,6 +201,67 @@ test(
     await board.duplicateCard("Custom fields test card", "Done");
     await expect(page.getByText("Custom fields test card")).toHaveCount(2);
     await expect(page.getByText("Approved:", { exact: true })).toHaveCount(2);
+
+    await board.makeTemplate();
+    await page.goto("/boards");
+    await board.createBoardFromTemplate(
+      "Custom Fields Template Copy",
+      "E2E Custom Fields Board",
+    );
+    const copiedBoardPath = new URL(page.url()).pathname;
+    await expect(
+      page.getByText("Custom fields test card", { exact: true }),
+    ).toHaveCount(2);
+
+    await page
+      .getByText("Custom fields test card", { exact: true })
+      .first()
+      .click();
+    await page.waitForURL(/\/cards\/[^/]+$/);
+    await expect(
+      page.getByRole("textbox", { name: "Effort notes" }),
+    ).toHaveValue("  Preserve\nthese spaces  ");
+    await expect(page.getByRole("textbox", { name: "Estimate" })).toHaveValue(
+      "13.5",
+    );
+    await expect(page.getByRole("textbox", { name: "Milestone" })).toHaveValue(
+      "2026-09-05T12:30",
+    );
+    await expect(page.getByRole("button", { name: "Approved" })).toHaveText(
+      "Checked",
+    );
+    await expect(page.getByRole("button", { name: "Priority" })).toHaveText(
+      "High",
+    );
+
+    const { guestContext, guestPage } = await inviteGuest(page, browser);
+    await guestPage.goto(copiedBoardPath);
+    await guestPage
+      .getByText("Custom fields test card", { exact: true })
+      .first()
+      .click();
+    await guestPage.waitForURL(/\/cards\/[^/]+$/);
+
+    const customFields = guestPage
+      .getByRole("heading", { name: "Custom fields" })
+      .locator("..");
+    await expect(customFields.getByText("Effort notes")).toBeVisible();
+    await expect(customFields.getByText("Preserve these spaces")).toBeVisible();
+    await expect(customFields.getByText("Estimate")).toBeVisible();
+    await expect(customFields.getByText("13.5", { exact: true })).toBeVisible();
+    await expect(customFields.getByText("Milestone")).toBeVisible();
+    await expect(customFields.getByText("Approved")).toBeVisible();
+    await expect(
+      customFields.getByText("Checked", { exact: true }),
+    ).toBeVisible();
+    await expect(customFields.getByText("Priority")).toBeVisible();
+    await expect(customFields.getByText("High", { exact: true })).toBeVisible();
+    await expect(customFields.getByText("Empty field")).toHaveCount(0);
+    await expect(
+      guestPage.getByRole("textbox", { name: "Estimate" }),
+    ).toHaveCount(0);
+
+    await guestContext.close();
   },
 );
 
