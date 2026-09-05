@@ -68,6 +68,7 @@ export const customFields = pgTable(
       .on(table.boardId, table.position)
       .where(sql`${table.deletedAt} IS NULL`),
     unique("custom_field_id_type_unique").on(table.id, table.type),
+    unique("custom_field_id_board_unique").on(table.id, table.boardId),
   ],
 ).enableRLS();
 
@@ -196,6 +197,64 @@ export const cardCustomFieldValues = pgTable(
     index("card_custom_field_value_field_checkbox_idx")
       .on(table.customFieldId, table.checkboxValue)
       .where(sql`${table.checkboxValue} IS NOT NULL`),
+  ],
+).enableRLS();
+
+export const customFieldMappings = pgTable(
+  "custom_field_mapping",
+  {
+    id: bigserial("id", { mode: "number" }).primaryKey(),
+    sourceFieldId: bigint("sourceFieldId", { mode: "number" })
+      .notNull()
+      .references(() => customFields.id, { onDelete: "cascade" }),
+    targetBoardId: bigint("targetBoardId", { mode: "number" })
+      .notNull()
+      .references(() => boards.id, { onDelete: "cascade" }),
+    targetFieldId: bigint("targetFieldId", { mode: "number" }).notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    createdBy: uuid("createdBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
+  },
+  (table) => [
+    unique("custom_field_mapping_source_board_unique").on(
+      table.sourceFieldId,
+      table.targetBoardId,
+    ),
+    foreignKey({
+      name: "custom_field_mapping_target_field_board_fk",
+      columns: [table.targetFieldId, table.targetBoardId],
+      foreignColumns: [customFields.id, customFields.boardId],
+    }).onDelete("cascade"),
+  ],
+).enableRLS();
+
+export const customFieldOptionMappings = pgTable(
+  "custom_field_option_mapping",
+  {
+    id: bigserial("id", { mode: "number" }).primaryKey(),
+    sourceOptionId: bigint("sourceOptionId", { mode: "number" })
+      .notNull()
+      .references(() => customFieldOptions.id, { onDelete: "cascade" }),
+    targetFieldId: bigint("targetFieldId", { mode: "number" })
+      .notNull()
+      .references(() => customFields.id, { onDelete: "cascade" }),
+    targetOptionId: bigint("targetOptionId", { mode: "number" }).notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    createdBy: uuid("createdBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
+  },
+  (table) => [
+    unique("custom_field_option_mapping_source_field_unique").on(
+      table.sourceOptionId,
+      table.targetFieldId,
+    ),
+    foreignKey({
+      name: "custom_field_option_mapping_target_option_field_fk",
+      columns: [table.targetOptionId, table.targetFieldId],
+      foreignColumns: [customFieldOptions.id, customFieldOptions.customFieldId],
+    }).onDelete("cascade"),
   ],
 ).enableRLS();
 
