@@ -66,7 +66,7 @@ export interface TrelloCustomFieldItem {
     date?: string;
     number?: string;
     text?: string;
-  };
+  } | null;
 }
 
 export type TrelloCustomFieldValue =
