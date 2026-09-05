@@ -46,6 +46,15 @@ const boardDetailCardSchema = z.object({
   attachments: z.array(z.object({ publicId: z.string() })),
   checklists: z.array(checklistResponseSchema),
   comments: z.array(z.object({ publicId: z.string() })),
+  summary: z
+    .object({
+      hasDescription: z.boolean(),
+      attachmentCount: z.number().int().nonnegative(),
+      hasComments: z.boolean(),
+      checklistItemCount: z.number().int().nonnegative(),
+      completedChecklistItemCount: z.number().int().nonnegative(),
+    })
+    .optional(),
 });
 
 // ─── board.byId ──────────────────────────────────────────────
