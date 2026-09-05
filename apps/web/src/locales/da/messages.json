@@ -1,4 +1,338 @@
 {
+  "m16xKo": {
+    "message": "Add",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 365]
+    ],
+    "translation": "Tilføj"
+  },
+  "Va3xJe": {
+    "message": "Add field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 490]
+    ],
+    "translation": "Tilføj felt"
+  },
+  "B495Gs": {
+    "message": "Archive",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 220]
+    ],
+    "translation": "Arkivér"
+  },
+  "gbhDMT": {
+    "message": "Archive custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 186]
+    ],
+    "translation": "Arkivér brugerdefineret felt"
+  },
+  "8G7Zb9": {
+    "message": "Archive option",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 330]
+    ],
+    "translation": "Arkivér valgmulighed"
+  },
+  "N/xzLE": {
+    "message": "Archive this field? Existing card values will be hidden but preserved.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 196]
+    ],
+    "translation": "Arkivér dette felt? Eksisterende kortværdier skjules, men bevares."
+  },
+  "yF2aJL": {
+    "message": "Archived options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 370]
+    ],
+    "translation": "Arkiverede valgmuligheder"
+  },
+  "G1XxbZ": {
+    "message": "Checkbox",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 38]
+    ],
+    "translation": "Afkrydsningsfelt"
+  },
+  "VSGGki": {
+    "message": "Checked",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-badges.tsx", 28],
+      ["src/views/board/components/Filters.tsx", 190],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 23],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 223]
+    ],
+    "translation": "Markeret"
+  },
+  "IJ9AUi": {
+    "message": "Copy custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 279]
+    ],
+    "translation": "Kopiér brugerdefinerede felter"
+  },
+  "0eY3nD": {
+    "message": "Custom field name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 131]
+    ],
+    "translation": "Navn på brugerdefineret felt"
+  },
+  "oPwQt4": {
+    "message": "Custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/BoardDropdown.tsx", 110],
+      [
+        "src/views/board/components/custom-fields/custom-field-manager.tsx",
+        416
+      ],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 275]
+    ],
+    "translation": "Brugerdefinerede felter"
+  },
+  "mYGY3B": {
+    "message": "Date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 36]
+    ],
+    "translation": "Dato"
+  },
+  "iKQcPM": {
+    "message": "Dropdown",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 40]
+    ],
+    "translation": "Rulleliste"
+  },
+  "nrXDdR": {
+    "message": "Field name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 467]
+    ],
+    "translation": "Feltnavn"
+  },
+  "zXgopL": {
+    "message": "Field type",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 475]
+    ],
+    "translation": "Felttype"
+  },
+  "GLQ7v9": {
+    "message": "Fields are available as soon as you create the first one.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 419]
+    ],
+    "translation": "Felter er tilgængelige, så snart du opretter det første."
+  },
+  "rOdFNG": {
+    "message": "Move field down",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 166]
+    ],
+    "translation": "Flyt felt ned"
+  },
+  "Yls4DD": {
+    "message": "Move field up",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 149]
+    ],
+    "translation": "Flyt felt op"
+  },
+  "EyDEs6": {
+    "message": "Move option down",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 308]
+    ],
+    "translation": "Flyt valgmulighed ned"
+  },
+  "vL4DgO": {
+    "message": "Move option up",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 289]
+    ],
+    "translation": "Flyt valgmulighed op"
+  },
+  "CwwBeU": {
+    "message": "New option",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 354]
+    ],
+    "translation": "Ny valgmulighed"
+  },
+  "MTqQMG": {
+    "message": "Not set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 176],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 222]
+    ],
+    "translation": "Ikke angivet"
+  },
+  "HptUxX": {
+    "message": "Number",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 34]
+    ],
+    "translation": "Tal"
+  },
+  "7KcJ0c": {
+    "message": "Option colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 251]
+    ],
+    "translation": "Farve på valgmulighed"
+  },
+  "I7idB7": {
+    "message": "Option name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 262]
+    ],
+    "translation": "Navn på valgmulighed"
+  },
+  "0zpgxV": {
+    "message": "Options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 244]
+    ],
+    "translation": "Valgmuligheder"
+  },
+  "dhRDON": {
+    "message": "Show on card front",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 228]
+    ],
+    "translation": "Vis på kortets forside"
+  },
+  "xeiujy": {
+    "message": "Text",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 32]
+    ],
+    "translation": "Tekst"
+  },
+  "GShyvJ": {
+    "message": "This board has no custom fields yet.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 446]
+    ],
+    "translation": "Dette board har endnu ingen brugerdefinerede felter."
+  },
+  "887Wwx": {
+    "message": "Unable to clear custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 97]
+    ],
+    "translation": "Kunne ikke rydde det brugerdefinerede felt"
+  },
+  "tMIe7G": {
+    "message": "Unable to create custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 405]
+    ],
+    "translation": "Kunne ikke oprette det brugerdefinerede felt"
+  },
+  "d76KIX": {
+    "message": "Unable to update custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 75]
+    ],
+    "translation": "Kunne ikke opdatere det brugerdefinerede felt"
+  },
+  "ecMXs+": {
+    "message": "Unable to update custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 81]
+    ],
+    "translation": "Kunne ikke opdatere de brugerdefinerede felter"
+  },
+  "9nuvQ0": {
+    "message": "Unchecked",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-badges.tsx", 28],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 23],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 224]
+    ],
+    "translation": "Ikke markeret"
+  },
+  "BA+tL2": {
+    "message": "Unchecked or not set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 191]],
+    "translation": "Ikke markeret eller ikke angivet"
+  }
+,
   "X0N0PA": {
     "message": " (edited)",
     "placeholders": {},

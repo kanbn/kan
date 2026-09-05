@@ -1,4 +1,338 @@
 {
+  "m16xKo": {
+    "message": "Add",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 365]
+    ],
+    "translation": "Add"
+  },
+  "Va3xJe": {
+    "message": "Add field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 490]
+    ],
+    "translation": "Add field"
+  },
+  "B495Gs": {
+    "message": "Archive",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 220]
+    ],
+    "translation": "Archive"
+  },
+  "gbhDMT": {
+    "message": "Archive custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 186]
+    ],
+    "translation": "Archive custom field"
+  },
+  "8G7Zb9": {
+    "message": "Archive option",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 330]
+    ],
+    "translation": "Archive option"
+  },
+  "N/xzLE": {
+    "message": "Archive this field? Existing card values will be hidden but preserved.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 196]
+    ],
+    "translation": "Archive this field? Existing card values will be hidden but preserved."
+  },
+  "yF2aJL": {
+    "message": "Archived options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 370]
+    ],
+    "translation": "Archived options"
+  },
+  "G1XxbZ": {
+    "message": "Checkbox",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 38]
+    ],
+    "translation": "Checkbox"
+  },
+  "VSGGki": {
+    "message": "Checked",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-badges.tsx", 28],
+      ["src/views/board/components/Filters.tsx", 190],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 23],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 223]
+    ],
+    "translation": "Checked"
+  },
+  "IJ9AUi": {
+    "message": "Copy custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 279]
+    ],
+    "translation": "Copy custom fields"
+  },
+  "0eY3nD": {
+    "message": "Custom field name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 131]
+    ],
+    "translation": "Custom field name"
+  },
+  "oPwQt4": {
+    "message": "Custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/BoardDropdown.tsx", 110],
+      [
+        "src/views/board/components/custom-fields/custom-field-manager.tsx",
+        416
+      ],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 275]
+    ],
+    "translation": "Custom fields"
+  },
+  "mYGY3B": {
+    "message": "Date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 36]
+    ],
+    "translation": "Date"
+  },
+  "iKQcPM": {
+    "message": "Dropdown",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 40]
+    ],
+    "translation": "Dropdown"
+  },
+  "nrXDdR": {
+    "message": "Field name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 467]
+    ],
+    "translation": "Field name"
+  },
+  "zXgopL": {
+    "message": "Field type",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 475]
+    ],
+    "translation": "Field type"
+  },
+  "GLQ7v9": {
+    "message": "Fields are available as soon as you create the first one.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 419]
+    ],
+    "translation": "Fields are available as soon as you create the first one."
+  },
+  "rOdFNG": {
+    "message": "Move field down",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 166]
+    ],
+    "translation": "Move field down"
+  },
+  "Yls4DD": {
+    "message": "Move field up",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 149]
+    ],
+    "translation": "Move field up"
+  },
+  "EyDEs6": {
+    "message": "Move option down",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 308]
+    ],
+    "translation": "Move option down"
+  },
+  "vL4DgO": {
+    "message": "Move option up",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 289]
+    ],
+    "translation": "Move option up"
+  },
+  "CwwBeU": {
+    "message": "New option",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 354]
+    ],
+    "translation": "New option"
+  },
+  "MTqQMG": {
+    "message": "Not set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 176],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 222]
+    ],
+    "translation": "Not set"
+  },
+  "HptUxX": {
+    "message": "Number",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 34]
+    ],
+    "translation": "Number"
+  },
+  "7KcJ0c": {
+    "message": "Option colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 251]
+    ],
+    "translation": "Option colour"
+  },
+  "I7idB7": {
+    "message": "Option name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 262]
+    ],
+    "translation": "Option name"
+  },
+  "0zpgxV": {
+    "message": "Options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 244]
+    ],
+    "translation": "Options"
+  },
+  "dhRDON": {
+    "message": "Show on card front",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 228]
+    ],
+    "translation": "Show on card front"
+  },
+  "xeiujy": {
+    "message": "Text",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 32]
+    ],
+    "translation": "Text"
+  },
+  "GShyvJ": {
+    "message": "This board has no custom fields yet.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 446]
+    ],
+    "translation": "This board has no custom fields yet."
+  },
+  "887Wwx": {
+    "message": "Unable to clear custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 97]
+    ],
+    "translation": "Unable to clear custom field"
+  },
+  "tMIe7G": {
+    "message": "Unable to create custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 405]
+    ],
+    "translation": "Unable to create custom field"
+  },
+  "d76KIX": {
+    "message": "Unable to update custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 75]
+    ],
+    "translation": "Unable to update custom field"
+  },
+  "ecMXs+": {
+    "message": "Unable to update custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 81]
+    ],
+    "translation": "Unable to update custom fields"
+  },
+  "9nuvQ0": {
+    "message": "Unchecked",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-badges.tsx", 28],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 23],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 224]
+    ],
+    "translation": "Unchecked"
+  },
+  "BA+tL2": {
+    "message": "Unchecked or not set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 191]],
+    "translation": "Unchecked or not set"
+  }
+,
   "X0N0PA": {
     "message": " (edited)",
     "placeholders": {},
