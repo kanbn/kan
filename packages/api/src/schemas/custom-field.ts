@@ -84,3 +84,49 @@ export const customFieldFiltersSchema = z
       new Set(filters.map((filter) => filter.fieldPublicId)).size ===
       filters.length,
   );
+
+export const customFieldFilterTokensSchema = z
+  .array(
+    z
+      .string()
+      .max(43)
+      .regex(
+        /^[A-Za-z0-9_-]{12}:(?:select:[A-Za-z0-9_-]{12}|checkbox:(?:checked|unchecked))$/,
+      ),
+  )
+  .max(2500);
+
+export const parseCustomFieldFilterTokens = (tokens: string[]) => {
+  const filters = new Map<string, z.infer<typeof customFieldFilterSchema>>();
+
+  for (const token of new Set(customFieldFilterTokensSchema.parse(tokens))) {
+    const [fieldPublicId, type, value] = token.split(":") as [
+      string,
+      "select" | "checkbox",
+      string,
+    ];
+    const key = `${fieldPublicId}:${type}`;
+    const existing = filters.get(key);
+
+    if (type === "select") {
+      if (existing?.type === "select") existing.optionPublicIds.push(value);
+      else
+        filters.set(key, {
+          type,
+          fieldPublicId,
+          optionPublicIds: [value],
+        });
+    } else {
+      const checkboxValue = value as "checked" | "unchecked";
+      if (existing?.type === "checkbox") existing.values.push(checkboxValue);
+      else
+        filters.set(key, {
+          type,
+          fieldPublicId,
+          values: [checkboxValue],
+        });
+    }
+  }
+
+  return customFieldFiltersSchema.parse([...filters.values()]);
+};

@@ -170,9 +170,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     | "next-month"
     | "no-due-date"
   )[];
-  const customFieldFilters = parseCustomFieldFilters(
-    formatToArray(router.query.customFields),
-  );
+  const customFieldFilters = formatToArray(router.query.customFields);
 
   const boardType: "regular" | "template" = isTemplate ? "template" : "regular";
 
