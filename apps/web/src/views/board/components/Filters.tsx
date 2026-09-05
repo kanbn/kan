@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
+import { useState } from "react";
 import {
   HiMiniXMark,
   HiOutlineClock,
@@ -10,6 +11,7 @@ import {
 } from "react-icons/hi2";
 import { IoFilterOutline } from "react-icons/io5";
 
+import type { ScalarCustomFieldFilter } from "./custom-fields/custom-field-filters";
 import type { RouterOutputs } from "~/utils/api";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
@@ -20,9 +22,14 @@ import {
   formatToArray,
   getAvatarUrl,
 } from "~/utils/helpers";
+import CustomFieldFilterPanel from "./custom-fields/custom-field-filter-panel";
 import {
+  countCustomFieldFilters,
+  decodeScalarFilter,
   encodeCheckboxFilter,
+  encodeScalarFilter,
   encodeSelectFilter,
+  replaceCustomFieldFilter,
 } from "./custom-fields/custom-field-filters";
 
 interface Member {
@@ -64,6 +71,9 @@ const Filters = ({
   isLoading: boolean;
 }) => {
   const router = useRouter();
+  const [activeScalarFieldPublicId, setActiveScalarFieldPublicId] = useState<
+    string | null
+  >(null);
 
   const clearFilters = async () => {
     try {
@@ -155,6 +165,27 @@ const Filters = ({
     dueDate: formatToArray(router.query.dueDate).length,
   };
   const selectedCustomFieldFilters = formatToArray(router.query.customFields);
+  const summarizeScalarFilter = (filter: ScalarCustomFieldFilter | null) => {
+    if (!filter) return t`Set filter`;
+    if (filter.type === "text") {
+      const value =
+        filter.contains.length > 24
+          ? `${filter.contains.slice(0, 24)}…`
+          : filter.contains;
+      return `${t`Contains`}: ${value}`;
+    }
+    if (filter.type === "number")
+      return filter.operator === "equals"
+        ? `${t`Equals`}: ${filter.value}`
+        : `${filter.min ?? "…"} – ${filter.max ?? "…"}`;
+    const formatDate = (value?: string) =>
+      value ? new Date(value).toLocaleDateString() : "…";
+    return filter.operator === "range"
+      ? `${formatDate(filter.from)} – ${formatDate(filter.to)}`
+      : `${filter.operator === "before" ? t`Before` : t`After`}: ${formatDate(
+          filter.value,
+        )}`;
+  };
   const customFieldGroups = customFields.flatMap((field) => {
     if (field.type === "select") {
       const items = field.options.map((option) => {
@@ -211,7 +242,23 @@ const Filters = ({
       ];
     }
 
-    return [];
+    const filter = decodeScalarFilter(
+      field.publicId,
+      selectedCustomFieldFilters,
+    );
+    return [
+      {
+        key: `customFieldScalar:${field.publicId}`,
+        label: field.name,
+        icon: <HiOutlineTableCells size={16} />,
+        items: [
+          {
+            key: `editCustomFieldScalar:${field.publicId}`,
+            value: summarizeScalarFilter(filter),
+          },
+        ],
+      },
+    ];
   });
 
   const groups = [
@@ -259,6 +306,10 @@ const Filters = ({
     item: { key: string },
   ) => {
     if (groupKey === null) return;
+    if (groupKey.startsWith("customFieldScalar:")) {
+      setActiveScalarFieldPublicId(groupKey.split(":")[1] ?? null);
+      return;
+    }
     const queryKey = groupKey.startsWith("customField:")
       ? "customFields"
       : groupKey;
@@ -281,9 +332,40 @@ const Filters = ({
     }
   };
 
+  const updateScalarFilter = async (
+    fieldPublicId: string,
+    replacement: string[],
+  ) => {
+    await router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        customFields: replaceCustomFieldFilter(
+          selectedCustomFieldFilters,
+          fieldPublicId,
+          replacement,
+        ),
+      },
+    });
+  };
+
   const numOfFilters =
     Object.values(filterCounts).reduce((total, count) => total + count, 0) +
-    selectedCustomFieldFilters.length;
+    countCustomFieldFilters(selectedCustomFieldFilters);
+
+  const activeScalarField = customFields.find(
+    (field) =>
+      field.publicId === activeScalarFieldPublicId &&
+      (field.type === "text" ||
+        field.type === "number" ||
+        field.type === "date"),
+  ) as
+    | {
+        publicId: string;
+        name: string;
+        type: "text" | "number" | "date";
+      }
+    | undefined;
 
   return (
     <div className="relative">
@@ -322,6 +404,26 @@ const Filters = ({
           </span>
         )}
       </CheckboxDropdown>
+      {activeScalarField && (
+        <CustomFieldFilterPanel
+          key={`${activeScalarField.publicId}:${selectedCustomFieldFilters.join(
+            ",",
+          )}`}
+          field={activeScalarField}
+          initialFilter={decodeScalarFilter(
+            activeScalarField.publicId,
+            selectedCustomFieldFilters,
+          )}
+          onApply={(filter) =>
+            updateScalarFilter(
+              activeScalarField.publicId,
+              encodeScalarFilter(activeScalarField.publicId, filter),
+            )
+          }
+          onClear={() => updateScalarFilter(activeScalarField.publicId, [])}
+          onClose={() => setActiveScalarFieldPublicId(null)}
+        />
+      )}
     </div>
   );
 };

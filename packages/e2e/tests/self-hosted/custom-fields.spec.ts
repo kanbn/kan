@@ -302,6 +302,124 @@ test(
 );
 
 test(
+  "cards can be filtered by scalar custom fields",
+  { tag: "@self-hosted" },
+  async ({ page }) => {
+    test.setTimeout(60_000);
+    const user = createTestUser();
+    const board = new BoardPage(page);
+
+    await new AuthPage(page).signUp(user);
+    await new SelfHostedOnboardingPage(page).createFirstWorkspace(
+      "E2E Scalar Filter Workspace",
+    );
+    await board.createBoard("E2E Scalar Filters");
+    await board.createList("To do");
+    await board.createCard("Matching card");
+    await board.createCard("Unmatched card");
+
+    await page
+      .getByRole("button", { name: "Board options", exact: true })
+      .click();
+    await page.getByRole("menuitem", { name: "Custom fields" }).click();
+    const manager = page.getByRole("dialog");
+    const fields: [string, string][] = [
+      ["Notes", "Text"],
+      ["Estimate", "Number"],
+      ["Target", "Date"],
+    ];
+    for (const [name, type] of fields) {
+      await manager.getByPlaceholder("Field name").fill(name);
+      await manager
+        .getByRole("combobox", { name: "Field type" })
+        .selectOption({ label: type });
+      const created = waitForTrpcMutation(page, "customField.createDefinition");
+      await manager.getByRole("button", { name: "Add field" }).click();
+      await created;
+    }
+    await manager.getByRole("button", { name: "Close" }).click();
+
+    await board.openCard("Matching card");
+    const setValue = async (name: string, value: string) => {
+      const stored = waitForTrpcMutation(page, "customField.setValue");
+      const input = page.getByRole("textbox", { name });
+      await input.fill(value);
+      await input.blur();
+      await stored;
+    };
+    await setValue("Notes", "Release candidate");
+    await setValue("Estimate", "13.5");
+    await setValue("Target", "2026-09-05T12:30");
+    await page.getByRole("link", { name: "Close" }).click();
+
+    const openFilter = async (fieldName: string) => {
+      // Board refetches unmount the menu; wait out the preceding URL update.
+      await page.waitForTimeout(200);
+      await page.getByRole("button", { name: "Filter", exact: true }).click();
+      await page.getByRole("menuitem").filter({ hasText: fieldName }).click();
+      await page.getByRole("menuitem").filter({ visible: true }).click();
+      return page.getByRole("dialog");
+    };
+    const clearFilters = async () => {
+      const cleared = waitForTrpcQuery(page, "board.byId");
+      await page.getByRole("button", { name: "Clear filters" }).click();
+      await cleared;
+      await expect(page.getByText("Unmatched card")).toBeVisible();
+      await expect(
+        page.getByRole("button", { name: "Clear filters" }),
+      ).toHaveCount(0);
+    };
+
+    let filter = await openFilter("Notes");
+    await filter.getByRole("textbox", { name: "Value" }).fill("candidate");
+    let filtered = waitForTrpcQuery(page, "board.byId");
+    await filter.getByRole("button", { name: "Apply" }).click();
+    await filtered;
+    await expect(page.getByText("Matching card")).toBeVisible();
+    await expect(page.getByText("Unmatched card")).toHaveCount(0);
+
+    filter = await openFilter("Notes");
+    await expect(filter.getByRole("textbox", { name: "Value" })).toHaveValue(
+      "candidate",
+    );
+    filtered = waitForTrpcQuery(page, "board.byId");
+    await filter.getByRole("button", { name: "Clear" }).click();
+    await filtered;
+    await expect(page.getByText("Unmatched card")).toBeVisible();
+
+    filter = await openFilter("Estimate");
+    await filter
+      .getByRole("combobox", { name: "Operator" })
+      .selectOption({ label: "Range" });
+    await filter.getByRole("textbox", { name: "From" }).fill("13");
+    await filter.getByRole("textbox", { name: "To" }).fill("14");
+    filtered = waitForTrpcQuery(page, "board.byId");
+    await filter.getByRole("button", { name: "Apply" }).click();
+    await filtered;
+    await expect(page.getByText("Unmatched card")).toHaveCount(0);
+    await expect(
+      page.getByRole("button", { name: "Clear filters" }),
+    ).toHaveText("1");
+
+    filter = await openFilter("Target");
+    await filter
+      .getByRole("combobox", { name: "Operator" })
+      .selectOption({ label: "Range" });
+    await filter.getByLabel("From", { exact: true }).fill("2026-09-05");
+    await filter.getByLabel("To", { exact: true }).fill("2026-09-05");
+    filtered = waitForTrpcQuery(page, "board.byId");
+    await filter.getByRole("button", { name: "Apply" }).click();
+    await filtered;
+    await expect(page.getByText("Matching card")).toBeVisible();
+    await expect(page.getByText("Unmatched card")).toHaveCount(0);
+    await expect(
+      page.getByRole("button", { name: "Clear filters" }),
+    ).toHaveText("2");
+    await clearFilters();
+  },
+);
+
+test(
   "custom fields and options can be reordered and archived safely",
   { tag: "@self-hosted" },
   async ({ page }) => {
@@ -393,6 +511,25 @@ test(
     ).toHaveValue("High");
 
     await dialog.getByRole("button", { name: "Close" }).click();
+    await page.getByRole("button", { name: "Filter", exact: true }).click();
+    const notesFilterGroup = page
+      .getByRole("menuitem")
+      .filter({ hasText: "Notes" });
+    await notesFilterGroup.focus();
+    await page.keyboard.press("Enter");
+    const setFilter = page.getByRole("menuitem").filter({ visible: true });
+    await setFilter.focus();
+    await page.keyboard.press("Enter");
+    const filterDialog = page.getByRole("dialog");
+    const filterDialogBox = await filterDialog.boundingBox();
+    expect(filterDialogBox).not.toBeNull();
+    expect(filterDialogBox?.x).toBeGreaterThanOrEqual(0);
+    expect(
+      filterDialogBox ? filterDialogBox.x + filterDialogBox.width : 0,
+    ).toBeLessThanOrEqual(390);
+    await page.keyboard.press("Escape");
+    await expect(filterDialog).toHaveCount(0);
+
     const boardPath = new URL(page.url()).pathname;
     await board.openCard("Lifecycle card");
     await page.getByRole("button", { name: "Settings" }).click();
