@@ -4,6 +4,10 @@ import { withApiLogging } from "@kan/api/utils/apiLogging";
 import { withRateLimit } from "@kan/api/utils/rateLimit";
 
 import { env } from "~/env";
+import {
+  getAllowedAttachmentHosts,
+  isAttachmentUrlAllowed,
+} from "~/utils/attachmentDownload";
 
 export default withRateLimit(
   { points: 100, duration: 60 },
@@ -18,29 +22,26 @@ export default withRateLimit(
       return res.status(400).json({ message: "url parameter is required" });
     }
 
-    const s3Endpoint = env.S3_ENDPOINT;
+    const allowedHosts = getAllowedAttachmentHosts(
+      env.S3_ENDPOINT,
+      env.NEXT_PUBLIC_STORAGE_URL,
+    );
 
-    if (s3Endpoint) {
-      let parsed: URL;
-      try {
-        parsed = new URL(url);
-      } catch {
-        return res.status(400).json({ message: "Invalid URL" });
-      }
+    if (allowedHosts === null) {
+      return res
+        .status(500)
+        .json({ message: "Storage endpoint misconfigured" });
+    }
 
-      const hostname = parsed.hostname.toLowerCase();
-      let allowedHost: string;
-      try {
-        allowedHost = new URL(s3Endpoint).hostname.toLowerCase();
-      } catch {
-        return res
-          .status(500)
-          .json({ message: "Storage endpoint misconfigured" });
-      }
+    if (!allowedHosts.length) {
+      return res.status(403).json({
+        message:
+          "Attachment downloads require S3_ENDPOINT or NEXT_PUBLIC_STORAGE_URL to be configured",
+      });
+    }
 
-      if (hostname !== allowedHost && !hostname.endsWith(`.${allowedHost}`)) {
-        return res.status(403).json({ message: "URL not allowed" });
-      }
+    if (!isAttachmentUrlAllowed(url, allowedHosts)) {
+      return res.status(403).json({ message: "URL not allowed" });
     }
 
     try {
