@@ -1,6 +1,6 @@
 import { t } from "@lingui/core/macro";
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import type { RouterOutputs } from "~/utils/api";
 import Input from "~/components/Input";
@@ -43,6 +43,7 @@ function CustomFieldEditor({
   const [textValue, setTextValue] = useState(
     value?.textValue ?? value?.numberValue ?? "",
   );
+  const skipNextTextCommit = useRef(false);
 
   useEffect(() => {
     setTextValue(value?.textValue ?? value?.numberValue ?? "");
@@ -103,6 +104,10 @@ function CustomFieldEditor({
   });
 
   const updateTextValue = () => {
+    if (skipNextTextCommit.current) {
+      skipNextTextCommit.current = false;
+      return;
+    }
     const nextValue =
       definition.type === "number" ? textValue.trim() : textValue;
     const previousValue = value?.textValue ?? value?.numberValue ?? "";
@@ -123,6 +128,11 @@ function CustomFieldEditor({
           : { type: "text", value: nextValue },
     });
   };
+  const cancelTextUpdate = (input: HTMLInputElement | HTMLTextAreaElement) => {
+    skipNextTextCommit.current = true;
+    setTextValue(value?.textValue ?? value?.numberValue ?? "");
+    input.blur();
+  };
 
   if (definition.type === "text") {
     return (
@@ -135,6 +145,12 @@ function CustomFieldEditor({
         disabled={setValue.isPending || clearValue.isPending}
         onChange={(event) => setTextValue(event.target.value)}
         onBlur={updateTextValue}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            event.preventDefault();
+            cancelTextUpdate(event.currentTarget);
+          }
+        }}
         className="block w-full resize-y rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-sm ring-1 ring-inset ring-light-600 placeholder:text-dark-800 focus:ring-2 focus:ring-inset focus:ring-light-700 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:leading-6"
       />
     );
@@ -147,13 +163,20 @@ function CustomFieldEditor({
         aria-label={definition.name}
         type="text"
         inputMode="decimal"
+        maxLength={100}
         value={textValue}
         disabled={setValue.isPending || clearValue.isPending}
         onChange={(event) => setTextValue(event.target.value)}
         onBlur={updateTextValue}
         onKeyDown={(event) => {
-          if (event.key === "Enter")
+          if (event.key === "Enter") {
+            event.preventDefault();
             (event.currentTarget as HTMLInputElement).blur();
+          }
+          if (event.key === "Escape") {
+            event.preventDefault();
+            cancelTextUpdate(event.currentTarget);
+          }
         }}
       />
     );
