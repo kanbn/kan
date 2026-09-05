@@ -65,7 +65,12 @@ test(
     await expect(
       dialog.getByRole("heading", { name: "Custom fields" }),
     ).toBeVisible();
-    const addField = async (name: string, type: string, showOnCard = true) => {
+    const addField = async (
+      name: string,
+      type: string,
+      showOnCard = true,
+      options: string[] = [],
+    ) => {
       await dialog.getByPlaceholder("Field name").fill(name);
       await dialog
         .getByRole("combobox", { name: "Field type" })
@@ -75,6 +80,13 @@ test(
         .last();
       if ((await showOnCardToggle.isChecked()) !== showOnCard)
         await showOnCardToggle.click();
+      for (const option of options) {
+        await dialog.getByPlaceholder("New option").last().fill(option);
+        await dialog
+          .getByRole("button", { name: "Add", exact: true })
+          .last()
+          .click();
+      }
       const definitionCreated = waitForTrpcMutation(
         page,
         "customField.createDefinition",
@@ -90,13 +102,7 @@ test(
     await addField("Estimate", "Number");
     await addField("Milestone", "Date");
     await addField("Approved", "Checkbox");
-    await addField("Priority", "Dropdown");
-
-    const priorityField = dialog.locator("section").last();
-    await priorityField.getByPlaceholder("New option").fill("High");
-    const optionCreated = waitForTrpcMutation(page, "customField.createOption");
-    await priorityField.getByRole("button", { name: "Add" }).click();
-    await optionCreated;
+    await addField("Priority", "Dropdown", true, ["High"]);
     await addField("Empty field", "Text");
     await dialog.getByRole("button", { name: "Close" }).click();
 
