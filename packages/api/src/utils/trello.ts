@@ -113,7 +113,6 @@ export const formatTrelloCustomFields = (
   cards: { id: string; customFieldItems?: TrelloCustomFieldItem[] }[],
 ): TrelloCustomFieldImport => {
   const fieldsById = new Map(fields.map((field) => [field.id, field]));
-  const cardIds = new Set(cards.map((card) => card.id));
 
   if (fieldsById.size !== fields.length)
     throw new Error("Trello custom field IDs must be unique");
@@ -152,7 +151,7 @@ export const formatTrelloCustomFields = (
 
   const values = cards.flatMap((card) =>
     (card.customFieldItems ?? []).map((item) => {
-      if (item.idModel !== card.id || !cardIds.has(item.idModel))
+      if (item.idModel !== card.id)
         throw invalidCustomFieldItem(item, "belongs to another card");
 
       const field = fieldsById.get(item.idCustomField);
