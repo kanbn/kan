@@ -18,7 +18,6 @@ import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 import { formatToArray } from "~/utils/helpers";
 import Card from "~/views/board/components/Card";
-import { parseCustomFieldFilters } from "~/views/board/components/custom-fields/custom-field-filters";
 import Filters from "~/views/board/components/Filters";
 import { CardModal } from "./CardModal";
 
@@ -53,9 +52,7 @@ export default function PublicBoardView() {
     | "next-month"
     | "no-due-date"
   )[];
-  const customFieldFilters = parseCustomFieldFilters(
-    formatToArray(router.query.customFields),
-  );
+  const customFieldFilters = formatToArray(router.query.customFields);
 
   const { data, isLoading } = api.board.bySlug.useQuery(
     {
