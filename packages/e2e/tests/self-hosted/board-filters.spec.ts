@@ -43,9 +43,19 @@ test(
     await expect(page.getByText("Unlabeled card", { exact: true })).toHaveCount(
       0,
     );
+    await expect(page.getByRole("menu")).toHaveCount(0);
+
+    await page.getByRole("button", { name: "Filter", exact: true }).click();
+    await expect(
+      page.getByRole("menuitem", { name: "Labels 1", exact: true }),
+    ).toBeVisible();
+    await page.getByRole("menuitem", { name: "Labels 1", exact: true }).click();
+    await expect(
+      page.getByRole("checkbox", { name: "Urgent", exact: true }),
+    ).toBeChecked();
 
     await page
-      .getByRole("button", { name: "Clear filters", exact: true })
+      .getByRole("menuitem", { name: "Clear filters", exact: true })
       .click();
 
     await expect(page.getByText("Labeled card", { exact: true })).toBeVisible();
