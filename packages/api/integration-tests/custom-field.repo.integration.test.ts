@@ -313,6 +313,19 @@ describe("custom field repository integration tests", () => {
         await customFieldRepo.listDefinitionsByBoardPublicId(db, boardPublicId)
       ).map((field) => field.publicId),
     ).toEqual([select.publicId, text.publicId]);
+
+    await expect(
+      customFieldRepo.reorderOptions(db, {
+        fieldPublicId: select.publicId,
+        optionPublicIds: [select.options[0]!.publicId],
+        actorUserId,
+      }),
+    ).rejects.toMatchObject({ code: "ORDER_INVALID" });
+    expect(
+      (
+        await customFieldRepo.listDefinitionsByBoardPublicId(db, boardPublicId)
+      )[0]!.options.map((option) => option.name),
+    ).toEqual(["High", "Low"]);
   });
 
   it("stores, updates, lists, and clears every supported value type", async () => {
@@ -772,6 +785,13 @@ describe("custom field repository integration tests", () => {
         actorUserId,
       }),
     ).rejects.toMatchObject({ code: "OPTION_NOT_FOUND" });
+
+    await expect(
+      customFieldRepo.clearCardValue(db, {
+        cardPublicId,
+        fieldPublicId: select.publicId,
+      }),
+    ).resolves.toEqual({ cleared: true });
   });
 
   it("projects definitions and values through the board query", async () => {
