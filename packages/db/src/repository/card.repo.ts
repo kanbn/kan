@@ -28,6 +28,8 @@ import { generateUID } from "@kan/shared/utils";
 
 import { getBoardProjection } from "./custom-field.repo";
 
+type dbTransaction = Parameters<Parameters<dbClient["transaction"]>[0]>[0];
+
 export const getCount = async (db: dbClient) => {
   const result = await db
     .select({ count: count() })
@@ -728,6 +730,9 @@ export const reorder = async (
     newIndex: number | undefined;
     cardId: number;
   },
+  options?: {
+    beforeReorder?: (transaction: dbTransaction) => Promise<void>;
+  },
 ) => {
   return db.transaction(async (tx) => {
     const card = await tx.query.cards.findFirst({
@@ -777,6 +782,8 @@ export const reorder = async (
       if (!newList)
         throw new Error(`List not found for public ID ${args.newListId}`);
     }
+
+    if (options?.beforeReorder) await options.beforeReorder(tx);
 
     let newIndex = args.newIndex;
 
