@@ -40,14 +40,26 @@ function CustomFieldEditor({
 }) {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
-  const [textValue, setTextValue] = useState(
-    value?.textValue ?? value?.numberValue ?? "",
-  );
-  const skipNextTextCommit = useRef(false);
+  const persistedTextValue = value?.textValue ?? value?.numberValue ?? "";
+  const persistedDateValue = value?.dateValue
+    ? format(value.dateValue, "yyyy-MM-dd'T'HH:mm")
+    : "";
+  const [textValue, setTextValue] = useState(persistedTextValue);
+  const [dateValue, setDateValue] = useState(persistedDateValue);
+  const skipNextCommit = useRef(false);
 
   useEffect(() => {
-    setTextValue(value?.textValue ?? value?.numberValue ?? "");
-  }, [value?.numberValue, value?.textValue]);
+    setTextValue(persistedTextValue);
+  }, [persistedTextValue]);
+
+  useEffect(() => {
+    setDateValue(persistedDateValue);
+  }, [persistedDateValue]);
+
+  const resetDrafts = () => {
+    setTextValue(persistedTextValue);
+    setDateValue(persistedDateValue);
+  };
 
   const settle = async () => {
     await Promise.all([
@@ -72,7 +84,7 @@ function CustomFieldEditor({
       );
     },
     onError: () => {
-      setTextValue(value?.textValue ?? value?.numberValue ?? "");
+      resetDrafts();
       showPopup({
         header: t`Unable to update custom field`,
         message: t`Please try again later, or contact customer support.`,
@@ -94,18 +106,20 @@ function CustomFieldEditor({
           : card,
       );
     },
-    onError: () =>
+    onError: () => {
+      resetDrafts();
       showPopup({
         header: t`Unable to clear custom field`,
         message: t`Please try again later, or contact customer support.`,
         icon: "error",
-      }),
+      });
+    },
     onSettled: settle,
   });
 
   const updateTextValue = () => {
-    if (skipNextTextCommit.current) {
-      skipNextTextCommit.current = false;
+    if (skipNextCommit.current) {
+      skipNextCommit.current = false;
       return;
     }
     const nextValue =
@@ -129,8 +143,34 @@ function CustomFieldEditor({
     });
   };
   const cancelTextUpdate = (input: HTMLInputElement | HTMLTextAreaElement) => {
-    skipNextTextCommit.current = true;
-    setTextValue(value?.textValue ?? value?.numberValue ?? "");
+    skipNextCommit.current = true;
+    setTextValue(persistedTextValue);
+    input.blur();
+  };
+
+  const updateDateValue = () => {
+    if (skipNextCommit.current) {
+      skipNextCommit.current = false;
+      return;
+    }
+    if (dateValue === persistedDateValue) return;
+    if (!dateValue) {
+      clearValue.mutate({
+        cardPublicId,
+        fieldPublicId: definition.publicId,
+      });
+      return;
+    }
+    setValue.mutate({
+      cardPublicId,
+      fieldPublicId: definition.publicId,
+      value: { type: "date", value: new Date(dateValue) },
+    });
+  };
+
+  const cancelDateUpdate = (input: HTMLInputElement) => {
+    skipNextCommit.current = true;
+    setDateValue(persistedDateValue);
     input.blur();
   };
 
@@ -280,23 +320,19 @@ function CustomFieldEditor({
       id={inputId}
       aria-label={definition.name}
       type="datetime-local"
-      value={
-        value?.dateValue ? format(value.dateValue, "yyyy-MM-dd'T'HH:mm") : ""
-      }
+      value={dateValue}
       disabled={setValue.isPending || clearValue.isPending}
-      onChange={(event) => {
-        if (!event.target.value) {
-          clearValue.mutate({
-            cardPublicId,
-            fieldPublicId: definition.publicId,
-          });
-          return;
+      onChange={(event) => setDateValue(event.target.value)}
+      onBlur={updateDateValue}
+      onKeyDown={(event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          (event.currentTarget as HTMLInputElement).blur();
         }
-        setValue.mutate({
-          cardPublicId,
-          fieldPublicId: definition.publicId,
-          value: { type: "date", value: new Date(event.target.value) },
-        });
+        if (event.key === "Escape") {
+          event.preventDefault();
+          cancelDateUpdate(event.currentTarget as HTMLInputElement);
+        }
       }}
     />
   );
