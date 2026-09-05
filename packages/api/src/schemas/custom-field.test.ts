@@ -1,8 +1,17 @@
 import { describe, expect, it } from "vitest";
 
-import { parseCustomFieldFilterTokens } from "./custom-field";
+import {
+  customFieldFilterTokensSchema,
+  parseCustomFieldFilterTokens,
+} from "./custom-field";
 
 describe("custom field filter tokens", () => {
+  it("normalizes a singleton OpenAPI query parameter", () => {
+    expect(
+      customFieldFilterTokensSchema.parse("field0000001:select:option000001"),
+    ).toEqual(["field0000001:select:option000001"]);
+  });
+
   it("groups values by field and removes duplicate tokens", () => {
     expect(
       parseCustomFieldFilterTokens([
