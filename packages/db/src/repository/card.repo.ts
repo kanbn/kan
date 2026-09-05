@@ -386,6 +386,7 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
         columns: {
           publicId: true,
           name: true,
+          boardId: true,
         },
       },
     },

@@ -228,6 +228,58 @@ describe("custom field repository integration tests", () => {
     ).toEqual({ cleared: false });
   });
 
+  it("copies active custom field values when duplicating a card", async () => {
+    const text = await createField("text", "Customer");
+    const select = await createField("select", "Priority");
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId,
+      fieldPublicId: text.publicId,
+      value: { type: "text", value: "Acme" },
+      actorUserId,
+    });
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId,
+      fieldPublicId: select.publicId,
+      value: { type: "select", optionPublicId: select.options[1]!.publicId },
+      actorUserId,
+    });
+    await customFieldRepo.archiveDefinition(db, {
+      fieldPublicId: text.publicId,
+      actorUserId,
+    });
+
+    const [sourceCard] = await db
+      .select({ listId: cards.listId })
+      .from(cards)
+      .where(eq(cards.publicId, cardPublicId));
+    const [targetCard] = await db
+      .insert(cards)
+      .values({
+        publicId: "card00000009",
+        title: "Duplicated card",
+        index: 1,
+        listId: sourceCard!.listId,
+        createdBy: actorUserId,
+      })
+      .returning({ id: cards.id, publicId: cards.publicId });
+
+    await expect(
+      customFieldRepo.copyActiveCardValues(db, {
+        sourceCardPublicId: cardPublicId,
+        targetCardId: targetCard!.id,
+        actorUserId,
+      }),
+    ).resolves.toEqual({ copied: 1 });
+    await expect(
+      customFieldRepo.listValuesByCardPublicId(db, targetCard!.publicId),
+    ).resolves.toMatchObject([
+      {
+        fieldPublicId: select.publicId,
+        optionPublicId: select.options[1]!.publicId,
+      },
+    ]);
+  });
+
   it("rejects mismatched field types and options from another field", async () => {
     const text = await createField("text");
     const firstSelect = await createField("select", "First select");
@@ -258,7 +310,7 @@ describe("custom field repository integration tests", () => {
   it("rejects a field from another board", async () => {
     const field = await createField("text");
     const [currentBoard] = await db
-      .select({ workspaceId: boards.workspaceId })
+      .select({ id: boards.id, workspaceId: boards.workspaceId })
       .from(boards)
       .where(eq(boards.publicId, boardPublicId));
     const [otherBoard] = await db
@@ -411,6 +463,46 @@ describe("custom field repository integration tests", () => {
     );
     expect(card!.list.board.customFields[0]!.publicId).toBe(select.publicId);
     expect(card!.customFieldValues[0]!.optionPublicId).toBe(option.publicId);
+
+    const clonedBoard = await boardRepo.createFromSnapshot(db, {
+      source: board!,
+      workspaceId: boardScope!.workspaceId,
+      createdBy: actorUserId,
+      slug: "cloned-test-board",
+      name: "Cloned test board",
+      type: "regular",
+      sourceBoardId: boardScope!.id,
+    });
+    const clonedSnapshot = await boardRepo.getByPublicId(
+      db,
+      clonedBoard.publicId,
+      actorUserId,
+      {
+        members: [],
+        labels: [],
+        lists: [],
+        customFields: [],
+        dueDate: [],
+        type: "regular",
+      },
+    );
+    expect(clonedSnapshot!.customFields[0]).toMatchObject({
+      name: "Priority",
+      type: "select",
+      showOnCard: true,
+    });
+    expect(clonedSnapshot!.customFields[0]!.publicId).not.toBe(select.publicId);
+    expect(clonedSnapshot!.customFields[0]!.options[0]).toMatchObject({
+      name: "Low",
+      isArchived: true,
+    });
+    expect(
+      clonedSnapshot!.lists[0]!.cards[0]!.customFieldValues[0],
+    ).toMatchObject({
+      fieldType: "select",
+      optionName: "Low",
+      optionArchivedAt: expect.any(Date),
+    });
 
     await customFieldRepo.archiveDefinition(db, {
       fieldPublicId: select.publicId,

@@ -26,6 +26,7 @@ export const customFieldRepositoryErrorCodes = [
   "FIELD_OPTIONS_INVALID",
   "OPTION_NOT_FOUND",
   "ORDER_INVALID",
+  "CROSS_BOARD_COPY_UNSUPPORTED",
 ] as const;
 
 export type CustomFieldRepositoryErrorCode =
@@ -923,6 +924,93 @@ export const listValuesByCardPublicId = async (
     )
     .orderBy(asc(customFields.position));
 };
+
+export const hasCardValues = async (db: dbClient, cardId: number) => {
+  const [value] = await db
+    .select({ id: cardCustomFieldValues.id })
+    .from(cardCustomFieldValues)
+    .where(eq(cardCustomFieldValues.cardId, cardId))
+    .limit(1);
+
+  return !!value;
+};
+
+export const copyActiveCardValues = async (
+  db: dbClient,
+  input: {
+    sourceCardPublicId: string;
+    targetCardId: number;
+    actorUserId: string;
+  },
+) =>
+  db.transaction(async (tx) => {
+    const [sourceCard] = await tx
+      .select({ id: cards.id, boardId: lists.boardId })
+      .from(cards)
+      .innerJoin(lists, eq(cards.listId, lists.id))
+      .where(
+        and(
+          eq(cards.publicId, input.sourceCardPublicId),
+          isNull(cards.deletedAt),
+          isNull(lists.deletedAt),
+        ),
+      )
+      .limit(1);
+    const [targetCard] = await tx
+      .select({ boardId: lists.boardId })
+      .from(cards)
+      .innerJoin(lists, eq(cards.listId, lists.id))
+      .where(
+        and(
+          eq(cards.id, input.targetCardId),
+          isNull(cards.deletedAt),
+          isNull(lists.deletedAt),
+        ),
+      )
+      .limit(1);
+
+    if (!sourceCard || !targetCard)
+      throw new CustomFieldRepositoryError("CARD_NOT_FOUND");
+    if (sourceCard.boardId !== targetCard.boardId)
+      throw new CustomFieldRepositoryError("CROSS_BOARD_COPY_UNSUPPORTED");
+
+    const values = await tx
+      .select({
+        customFieldId: cardCustomFieldValues.customFieldId,
+        fieldType: cardCustomFieldValues.fieldType,
+        optionId: cardCustomFieldValues.optionId,
+        textValue: cardCustomFieldValues.textValue,
+        numberValue: cardCustomFieldValues.numberValue,
+        dateValue: cardCustomFieldValues.dateValue,
+        checkboxValue: cardCustomFieldValues.checkboxValue,
+      })
+      .from(cardCustomFieldValues)
+      .innerJoin(
+        customFields,
+        eq(cardCustomFieldValues.customFieldId, customFields.id),
+      )
+      .where(
+        and(
+          eq(cardCustomFieldValues.cardId, sourceCard.id),
+          isNull(customFields.deletedAt),
+        ),
+      );
+
+    if (values.length === 0) return { copied: 0 };
+    const inserted = await tx
+      .insert(cardCustomFieldValues)
+      .values(
+        values.map((value) => ({
+          ...value,
+          publicId: generateUID(),
+          cardId: input.targetCardId,
+          createdBy: input.actorUserId,
+        })),
+      )
+      .returning({ id: cardCustomFieldValues.id });
+
+    return { copied: inserted.length };
+  });
 
 export const setCardValue = async (
   db: dbClient,
