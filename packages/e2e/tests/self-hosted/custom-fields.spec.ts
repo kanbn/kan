@@ -87,10 +87,10 @@ test(
     await estimate.blur();
     await estimateStored;
 
+    const milestone = page.getByRole("textbox", { name: "Milestone" });
+    await milestone.fill("2026-09-05T12:30");
     const milestoneStored = waitForTrpcMutation(page, "customField.setValue");
-    await page
-      .getByRole("textbox", { name: "Milestone" })
-      .fill("2026-09-05T12:30");
+    await milestone.blur();
     await milestoneStored;
 
     const priorityStored = waitForTrpcMutation(page, "customField.setValue");
@@ -125,6 +125,18 @@ test(
     await field.fill("Discard this edit");
     await field.press("Escape");
     await expect(field).toHaveValue("  Preserve\nthese spaces  ");
+
+    await milestone.fill("2026-09-06T09:45");
+    await milestone.press("Escape");
+    await expect(milestone).toHaveValue("2026-09-05T12:30");
+
+    await page.route(/\/api\/trpc\/customField\.clearValue/, (route) =>
+      route.abort(),
+    );
+    await field.fill("");
+    await field.blur();
+    await expect(field).toHaveValue("  Preserve\nthese spaces  ");
+    await page.unroute(/\/api\/trpc\/customField\.clearValue/);
 
     await estimate.fill("not-a-number");
     const invalidNumberRejected = waitForTrpcMutation(
