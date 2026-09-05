@@ -85,16 +85,20 @@ export const customFieldFiltersSchema = z
       filters.length,
   );
 
-export const customFieldFilterTokensSchema = z
-  .array(
-    z
-      .string()
-      .max(43)
-      .regex(
-        /^[A-Za-z0-9_-]{12}:(?:select:[A-Za-z0-9_-]{12}|checkbox:(?:checked|unchecked))$/,
-      ),
-  )
-  .max(2500);
+// trpc-to-openapi normalizes a single query parameter value to a string.
+export const customFieldFilterTokensSchema = z.preprocess(
+  (value) => (typeof value === "string" ? [value] : value),
+  z
+    .array(
+      z
+        .string()
+        .max(43)
+        .regex(
+          /^[A-Za-z0-9_-]{12}:(?:select:[A-Za-z0-9_-]{12}|checkbox:(?:checked|unchecked))$/,
+        ),
+    )
+    .max(2500),
+) as z.ZodType<string[], z.ZodTypeDef, string | string[]>;
 
 export const parseCustomFieldFilterTokens = (tokens: string[]) => {
   const filters = new Map<string, z.infer<typeof customFieldFilterSchema>>();
