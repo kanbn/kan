@@ -36,6 +36,10 @@
       "types": "./src/utils/permissions.ts",
       "default": "./src/utils/permissions.ts"
     },
+    "./utils/trello-token": {
+      "types": "./src/utils/trello-token.ts",
+      "default": "./src/utils/trello-token.ts"
+    },
     "./utils/workspace": {
       "types": "./src/utils/workspace.ts",
       "default": "./src/utils/workspace.ts"
