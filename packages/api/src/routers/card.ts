@@ -946,13 +946,26 @@ export const cardRouter = createTRPCRouter({
         | undefined;
 
       const previousDueDate = existingCard.dueDate;
+      const normalizedDescription =
+        input.description !== undefined
+          ? normalizeDescription(input.description)
+          : undefined;
+      const descriptionChanged =
+        normalizedDescription !== undefined &&
+        existingCard.description !== normalizedDescription;
 
-      if (input.title || input.description || input.dueDate !== undefined) {
+      if (
+        input.title ||
+        normalizedDescription !== undefined ||
+        input.dueDate !== undefined
+      ) {
         result = await cardRepo.update(
           ctx.db,
           {
             ...(input.title && { title: input.title }),
-            ...(input.description && { description: input.description }),
+            ...(normalizedDescription !== undefined && {
+              description: normalizedDescription,
+            }),
             ...(input.dueDate !== undefined && { dueDate: input.dueDate }),
           },
           { cardPublicId: input.cardPublicId },
@@ -985,22 +998,24 @@ export const cardRouter = createTRPCRouter({
         });
       }
 
-      if (input.description && existingCard.description !== input.description) {
+      if (descriptionChanged) {
         activities.push({
           type: "card.updated.description" as const,
           cardId: result.id,
           createdBy: userId,
           fromDescription: existingCard.description ?? undefined,
-          toDescription: input.description,
+          toDescription: normalizedDescription ?? undefined,
         });
 
-        void sendMentionEmails({
-          db: ctx.db,
-          cardPublicId: input.cardPublicId,
-          previousHtml: existingCard.description,
-          nextHtml: input.description,
-          commenterUserId: userId,
-        });
+        if (normalizedDescription) {
+          void sendMentionEmails({
+            db: ctx.db,
+            cardPublicId: input.cardPublicId,
+            previousHtml: existingCard.description,
+            nextHtml: normalizedDescription,
+            commenterUserId: userId,
+          });
+        }
       }
 
       if (
@@ -1048,10 +1063,10 @@ export const cardRouter = createTRPCRouter({
       if (input.title && existingCard.title !== input.title) {
         webhookChanges.title = { from: existingCard.title, to: input.title };
       }
-      if (input.description && existingCard.description !== input.description) {
+      if (descriptionChanged) {
         webhookChanges.description = {
           from: existingCard.description,
-          to: input.description,
+          to: normalizedDescription,
         };
       }
       if (
