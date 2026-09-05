@@ -1,10 +1,14 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import {
   decryptTrelloToken,
   encryptTrelloToken,
   isEncryptedTrelloToken,
 } from "./trello-token";
+
+vi.hoisted(() => {
+  process.env.BETTER_AUTH_SECRET = "test-only-trello-secret-123456789";
+});
 
 describe("Trello token storage", () => {
   it("encrypts new tokens", () => {
