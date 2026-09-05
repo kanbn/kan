@@ -6,6 +6,7 @@ import type { RouterOutputs } from "~/utils/api";
 import Input from "~/components/Input";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { CustomFieldSelect } from "./custom-field-select";
 
 type Card = RouterOutputs["card"]["byId"];
 type Definition = Card["list"]["board"]["customFields"][number];
@@ -166,14 +167,33 @@ function CustomFieldEditor({
       (option) =>
         option.isArchived && option.publicId === value?.optionPublicId,
     );
+    const options = [
+      { value: "", label: t`Not set` },
+      ...(selectedArchivedOption
+        ? [
+            {
+              value: selectedArchivedOption.publicId,
+              label: `${selectedArchivedOption.name} (${t`Archived`})`,
+              colourCode: selectedArchivedOption.colourCode,
+              disabled: true,
+            },
+          ]
+        : []),
+      ...activeOptions.map((option) => ({
+        value: option.publicId,
+        label: option.name,
+        colourCode: option.colourCode,
+      })),
+    ];
     return (
-      <select
+      <CustomFieldSelect
         id={inputId}
-        aria-label={definition.name}
+        ariaLabel={definition.name}
         value={value?.optionPublicId ?? ""}
+        options={options}
         disabled={setValue.isPending || clearValue.isPending}
-        onChange={(event) => {
-          if (!event.target.value) {
+        onChange={(nextValue) => {
+          if (!nextValue) {
             clearValue.mutate({
               cardPublicId,
               fieldPublicId: definition.publicId,
@@ -185,32 +205,19 @@ function CustomFieldEditor({
             fieldPublicId: definition.publicId,
             value: {
               type: "select",
-              optionPublicId: event.target.value,
+              optionPublicId: nextValue,
             },
           });
         }}
-        className="block w-full rounded-md border-0 bg-white/5 px-3 py-1.5 text-sm shadow-sm ring-1 ring-inset ring-light-600 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700"
-      >
-        <option value="">{t`Not set`}</option>
-        {selectedArchivedOption && (
-          <option value={selectedArchivedOption.publicId} disabled>
-            {selectedArchivedOption.name} ({t`Archived`})
-          </option>
-        )}
-        {activeOptions.map((option) => (
-          <option key={option.publicId} value={option.publicId}>
-            {option.name}
-          </option>
-        ))}
-      </select>
+      />
     );
   }
 
   if (definition.type === "checkbox") {
     return (
-      <select
+      <CustomFieldSelect
         id={inputId}
-        aria-label={definition.name}
+        ariaLabel={definition.name}
         value={
           value?.checkboxValue === true
             ? "true"
@@ -218,9 +225,14 @@ function CustomFieldEditor({
               ? "false"
               : ""
         }
+        options={[
+          { value: "", label: t`Not set` },
+          { value: "true", label: t`Checked` },
+          { value: "false", label: t`Unchecked` },
+        ]}
         disabled={setValue.isPending || clearValue.isPending}
-        onChange={(event) => {
-          if (!event.target.value) {
+        onChange={(nextValue) => {
+          if (!nextValue) {
             clearValue.mutate({
               cardPublicId,
               fieldPublicId: definition.publicId,
@@ -232,16 +244,11 @@ function CustomFieldEditor({
             fieldPublicId: definition.publicId,
             value: {
               type: "checkbox",
-              value: event.target.value === "true",
+              value: nextValue === "true",
             },
           });
         }}
-        className="block w-full rounded-md border-0 bg-white/5 px-3 py-1.5 text-sm shadow-sm ring-1 ring-inset ring-light-600 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700"
-      >
-        <option value="">{t`Not set`}</option>
-        <option value="true">{t`Checked`}</option>
-        <option value="false">{t`Unchecked`}</option>
-      </select>
+      />
     );
   }
 
