@@ -26,8 +26,9 @@ test(
 
     await board.createBoard("E2E Custom Fields Board");
     await board.createList("To do");
-    await board.createCard("Custom fields test card");
-    await board.createCard("Unapproved card");
+    await board.createList("Done");
+    await board.createCard("Custom fields test card", "To do");
+    await board.createCard("Unapproved card", "To do");
 
     await page
       .getByRole("button", { name: "Board options", exact: true })
@@ -97,5 +98,9 @@ test(
     await filtered;
     await expect(page.getByText("Custom fields test card")).toBeVisible();
     await expect(page.getByText("Unapproved card")).toHaveCount(0);
+
+    await board.duplicateCard("Custom fields test card", "Done");
+    await expect(page.getByText("Custom fields test card")).toHaveCount(2);
+    await expect(page.getByText("Approved:", { exact: true })).toHaveCount(2);
   },
 );

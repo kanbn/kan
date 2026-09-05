@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
+import * as customFieldRepo from "@kan/db/repository/custom-field.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
@@ -16,6 +17,7 @@ vi.mock("@kan/db/repository/card.repo", () => ({
   hardDeleteCardMemberRelationship: vi.fn(),
   createCardMemberRelationship: vi.fn(),
   getWithListAndMembersByPublicId: vi.fn(),
+  getByPublicId: vi.fn(),
 }));
 
 vi.mock("@kan/db/repository/cardActivity.repo", () => ({
@@ -25,6 +27,10 @@ vi.mock("@kan/db/repository/cardActivity.repo", () => ({
 
 vi.mock("@kan/db/repository/cardComment.repo", () => ({}));
 vi.mock("@kan/db/repository/checklist.repo", () => ({}));
+vi.mock("@kan/db/repository/custom-field.repo", () => ({
+  hasCardValues: vi.fn(),
+  copyActiveCardValues: vi.fn(),
+}));
 vi.mock("@kan/db/repository/label.repo", () => ({
   getAllByPublicIds: vi.fn(),
 }));
@@ -78,6 +84,12 @@ const mockGetCardWithMembers =
   cardRepo.getWithListAndMembersByPublicId as ReturnType<typeof vi.fn>;
 const mockCreateActivity = cardActivityRepo.create as ReturnType<typeof vi.fn>;
 const mockBulkCreateActivities = cardActivityRepo.bulkCreate as ReturnType<
+  typeof vi.fn
+>;
+const mockGetCardByPublicId = cardRepo.getByPublicId as ReturnType<
+  typeof vi.fn
+>;
+const mockHasCustomFieldValues = customFieldRepo.hasCardValues as ReturnType<
   typeof vi.fn
 >;
 const mockGetList = listRepo.getWorkspaceAndListIdByListPublicId as ReturnType<
@@ -231,6 +243,7 @@ describe("card member workspace scoping", () => {
         members: [{ publicId: "member-a-123" }],
         labels: [],
         checklists: [],
+        customFieldValues: [],
       });
       mockCardCreate.mockResolvedValueOnce({
         id: 18,
@@ -247,6 +260,60 @@ describe("card member workspace scoping", () => {
       ).resolves.toEqual({ publicId: "copy-12345678" });
 
       expect(mockGetMembers).toHaveBeenCalledWith(mockDb, ["member-a-123"], 7);
+    });
+  });
+
+  describe("move", () => {
+    const input = {
+      cardPublicId: "card-12345678",
+      listPublicId: "list-12345678",
+    };
+
+    beforeEach(() => {
+      mockGetCard.mockResolvedValue({
+        id: 17,
+        workspaceId: 7,
+        createdBy: mockUser.id,
+      });
+      mockGetCardByPublicId.mockResolvedValue({
+        id: 17,
+        listId: 10,
+        list: { publicId: "source-list1", name: "Source", boardId: 20 },
+      });
+    });
+
+    it("rejects a target list from another workspace", async () => {
+      const { cardRouter } = await import("./card");
+      mockGetList.mockResolvedValue({
+        id: 11,
+        publicId: input.listPublicId,
+        name: "Target",
+        boardId: 21,
+        boardPublicId: "board-1234568",
+        workspaceId: 8,
+      });
+
+      await expect(
+        cardRouter.createCaller(ctx).update(input),
+      ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+      expect(mockHasCustomFieldValues).not.toHaveBeenCalled();
+    });
+
+    it("rejects a cross-board move while the card has custom values", async () => {
+      const { cardRouter } = await import("./card");
+      mockGetList.mockResolvedValue({
+        id: 11,
+        publicId: input.listPublicId,
+        name: "Target",
+        boardId: 21,
+        boardPublicId: "board-1234568",
+        workspaceId: 7,
+      });
+      mockHasCustomFieldValues.mockResolvedValue(true);
+
+      await expect(
+        cardRouter.createCaller(ctx).update(input),
+      ).rejects.toMatchObject({ code: "BAD_REQUEST" });
     });
   });
 });
