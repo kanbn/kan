@@ -70,6 +70,7 @@ export interface TrelloBoard {
   lists: TrelloList[];
   cards: TrelloCard[];
   checklists: TrelloChecklist[];
+  customFields?: TrelloCustomField[];
 }
 
 interface TrelloLabel {
@@ -272,26 +273,19 @@ export const importRouter = createTRPCRouter({
         const newImportId = newImport?.id;
 
         const importSingleBoard = async (boardId: string): Promise<void> => {
-          const [response, customFieldsResponse] = await Promise.all([
-            fetch(
-              `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&card_customFieldItems=true&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
-            ),
-            fetch(
-              `${urls.trello}/boards/${boardId}/customFields?key=${apiKey}&token=${token}`,
-            ),
-          ]);
+          const response = await fetch(
+            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&customFields=true&card_customFieldItems=true&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
+          );
 
-          if (!response.ok || !customFieldsResponse.ok) {
+          if (!response.ok) {
             throw new Error(
-              `Trello returned board=${response.status} customFields=${customFieldsResponse.status} for board ${boardId}`,
+              `Trello returned ${response.status} for board ${boardId}`,
             );
           }
 
           const data = (await response.json()) as TrelloBoard;
-          const customFields =
-            (await customFieldsResponse.json()) as TrelloCustomField[];
           const customFieldImport = formatTrelloCustomFields(
-            customFields,
+            data.customFields ?? [],
             data.cards,
           );
 
