@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { useEffect, useRef, useState } from "react";
 
 import type { RouterOutputs } from "~/utils/api";
+import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
@@ -277,41 +278,54 @@ function CustomFieldEditor({
   }
 
   if (definition.type === "checkbox") {
+    const checkboxValue = value?.checkboxValue;
+    const isSet = checkboxValue !== null && checkboxValue !== undefined;
+    const status = isSet
+      ? checkboxValue
+        ? t`Checked`
+        : t`Unchecked`
+      : t`Not set`;
+
     return (
-      <CustomFieldSelect
-        id={inputId}
-        ariaLabel={definition.name}
-        value={
-          value?.checkboxValue === true
-            ? "true"
-            : value?.checkboxValue === false
-              ? "false"
-              : ""
-        }
-        options={[
-          { value: "", label: t`Not set` },
-          { value: "true", label: t`Checked` },
-          { value: "false", label: t`Unchecked` },
-        ]}
-        disabled={setValue.isPending || clearValue.isPending}
-        onChange={(nextValue) => {
-          if (!nextValue) {
-            clearValue.mutate({
+      <div className="flex min-h-9 items-center gap-2">
+        <input
+          id={inputId}
+          type="checkbox"
+          aria-label={definition.name}
+          checked={checkboxValue === true}
+          disabled={setValue.isPending || clearValue.isPending}
+          onChange={(event) =>
+            setValue.mutate({
               cardPublicId,
               fieldPublicId: definition.publicId,
-            });
-            return;
+              value: {
+                type: "checkbox",
+                value: event.target.checked,
+              },
+            })
           }
-          setValue.mutate({
-            cardPublicId,
-            fieldPublicId: definition.publicId,
-            value: {
-              type: "checkbox",
-              value: nextValue === "true",
-            },
-          });
-        }}
-      />
+          className="h-4 w-4 cursor-pointer appearance-none rounded-md border border-light-500 bg-transparent outline-none ring-0 checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none disabled:cursor-default disabled:opacity-60 dark:border-dark-500 dark:hover:border-dark-500"
+        />
+        <span className="text-sm text-light-900 dark:text-dark-900">
+          {status}
+        </span>
+        {isSet && (
+          <Button
+            type="button"
+            variant="ghost"
+            size="xs"
+            disabled={setValue.isPending || clearValue.isPending}
+            onClick={() =>
+              clearValue.mutate({
+                cardPublicId,
+                fieldPublicId: definition.publicId,
+              })
+            }
+          >
+            {t`Not set`}
+          </Button>
+        )}
+      </div>
     );
   }
 

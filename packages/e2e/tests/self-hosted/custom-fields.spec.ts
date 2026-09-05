@@ -134,9 +134,39 @@ test(
     await page.keyboard.press("Enter");
     await priorityStored;
 
-    const checkboxStored = waitForTrpcMutation(page, "customField.setValue");
-    await page.getByRole("button", { name: "Approved" }).click();
-    await page.getByRole("option", { name: "Checked", exact: true }).click();
+    const approved = page.getByRole("checkbox", { name: "Approved" });
+    const approvedEditor = approved.locator("..");
+    await expect(approved).not.toBeChecked();
+    await expect(
+      approvedEditor.getByText("Not set", { exact: true }),
+    ).toBeVisible();
+
+    let checkboxStored = waitForTrpcMutation(page, "customField.setValue");
+    await approved.focus();
+    await page.keyboard.press("Space");
+    await checkboxStored;
+    await expect(approved).toBeChecked();
+    await expect(
+      approvedEditor.getByText("Checked", { exact: true }),
+    ).toBeVisible();
+
+    checkboxStored = waitForTrpcMutation(page, "customField.setValue");
+    await approved.click();
+    await checkboxStored;
+    await expect(approved).not.toBeChecked();
+    await expect(
+      approvedEditor.getByText("Unchecked", { exact: true }),
+    ).toBeVisible();
+
+    const checkboxCleared = waitForTrpcMutation(page, "customField.clearValue");
+    await approvedEditor.getByRole("button", { name: "Not set" }).click();
+    await checkboxCleared;
+    await expect(
+      approvedEditor.getByText("Not set", { exact: true }),
+    ).toBeVisible();
+
+    checkboxStored = waitForTrpcMutation(page, "customField.setValue");
+    await approved.click();
     await checkboxStored;
 
     const cardReloaded = waitForTrpcQuery(page, "card.byId");
@@ -233,9 +263,9 @@ test(
     await expect(page.getByRole("textbox", { name: "Milestone" })).toHaveValue(
       "2026-09-05T12:30",
     );
-    await expect(page.getByRole("button", { name: "Approved" })).toHaveText(
-      "Checked",
-    );
+    await expect(
+      page.getByRole("checkbox", { name: "Approved" }),
+    ).toBeChecked();
     await expect(page.getByRole("button", { name: "Priority" })).toHaveText(
       "High",
     );
