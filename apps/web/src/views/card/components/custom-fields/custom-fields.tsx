@@ -123,12 +123,29 @@ function CustomFieldEditor({
     });
   };
 
-  if (definition.type === "text" || definition.type === "number") {
+  if (definition.type === "text") {
+    return (
+      <textarea
+        id={inputId}
+        aria-label={definition.name}
+        rows={3}
+        maxLength={10000}
+        value={textValue}
+        disabled={setValue.isPending || clearValue.isPending}
+        onChange={(event) => setTextValue(event.target.value)}
+        onBlur={updateTextValue}
+        className="block w-full resize-y rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-sm ring-1 ring-inset ring-light-600 placeholder:text-dark-800 focus:ring-2 focus:ring-inset focus:ring-light-700 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:leading-6"
+      />
+    );
+  }
+
+  if (definition.type === "number") {
     return (
       <Input
         id={inputId}
-        type={definition.type === "number" ? "text" : definition.type}
-        inputMode={definition.type === "number" ? "decimal" : undefined}
+        aria-label={definition.name}
+        type="text"
+        inputMode="decimal"
         value={textValue}
         disabled={setValue.isPending || clearValue.isPending}
         onChange={(event) => setTextValue(event.target.value)}
@@ -152,6 +169,7 @@ function CustomFieldEditor({
     return (
       <select
         id={inputId}
+        aria-label={definition.name}
         value={value?.optionPublicId ?? ""}
         disabled={setValue.isPending || clearValue.isPending}
         onChange={(event) => {
@@ -192,6 +210,7 @@ function CustomFieldEditor({
     return (
       <select
         id={inputId}
+        aria-label={definition.name}
         value={
           value?.checkboxValue === true
             ? "true"
@@ -229,6 +248,7 @@ function CustomFieldEditor({
   return (
     <Input
       id={inputId}
+      aria-label={definition.name}
       type="datetime-local"
       value={
         value?.dateValue ? format(value.dateValue, "yyyy-MM-dd'T'HH:mm") : ""
