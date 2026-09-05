@@ -4,7 +4,10 @@ import { addYears } from "date-fns";
 import { createNextApiContext } from "@kan/api/trpc";
 import { withApiLogging } from "@kan/api/utils/apiLogging";
 import { withRateLimit } from "@kan/api/utils/rateLimit";
-import { integrations } from "@kan/db/schema";
+import { encryptTrelloToken } from "@kan/api/utils/trello-token";
+import * as integrationsRepo from "@kan/db/repository/integration.repo";
+
+import { env } from "~/env";
 
 export default withRateLimit(
   { points: 100, duration: 60 },
@@ -18,40 +21,36 @@ export default withRateLimit(
     if (!user)
       return res.status(401).json({ message: "User not authenticated" });
 
-    const apiKey = process.env.TRELLO_APP_API_KEY;
+    const apiKey = env.TRELLO_APP_API_KEY;
 
     if (!apiKey)
       return res
         .status(500)
         .json({ message: "Trello API key not set in Environment Variables" });
 
-    const token = req.body.token;
+    const body: unknown = req.body;
+    const token =
+      typeof body === "object" && body !== null && "token" in body
+        ? body.token
+        : null;
 
-    if (!token) return res.status(400).json({ message: "No token found" });
+    if (typeof token !== "string" || !token)
+      return res.status(400).json({ message: "No token found" });
 
     try {
       const { db } = await createNextApiContext(req);
 
-      await db
-        .insert(integrations)
-        .values({
-          provider: "trello",
-          userId: user.id,
-          accessToken: token,
-          expiresAt: addYears(new Date(), 1),
-        })
-        .onConflictDoUpdate({
-          set: {
-            accessToken: token,
-            expiresAt: addYears(new Date(), 1),
-          },
-          target: [integrations.userId, integrations.provider],
-        });
+      await integrationsRepo.createOrUpdateProvider(db, {
+        provider: "trello",
+        userId: user.id,
+        accessToken: encryptTrelloToken(token),
+        expiresAt: addYears(new Date(), 1),
+      });
 
       return res
         .status(200)
         .json({ message: "Trello authentication successful" });
-    } catch (err) {
+    } catch {
       return res.status(400).json({ message: "Trello authentication failed" });
     }
   }),

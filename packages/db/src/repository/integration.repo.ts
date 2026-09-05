@@ -37,6 +37,9 @@ export const getProviderForUser = async (
 
 export const getProvidersForUser = async (db: dbClient, userId: string) => {
   const integration = await db.query.integrations.findMany({
+    columns: {
+      provider: true,
+    },
     where: and(
       eq(integrations.userId, userId),
       gte(integrations.expiresAt, new Date()),

@@ -22,6 +22,7 @@ import { assertUserInWorkspace } from "../utils/auth";
 import { decryptToken } from "../utils/encryption";
 import { assertPermission } from "../utils/permissions";
 import { getTrelloLabelColour } from "../utils/trello";
+import { decryptTrelloToken } from "../utils/trello-token";
 import { apiKeys, urls } from "./integration";
 
 const log = createLogger("import");
@@ -159,7 +160,9 @@ export const importRouter = createTRPCRouter({
           "trello",
         );
 
-        const token = integration?.accessToken;
+        const token = integration
+          ? decryptTrelloToken(integration.accessToken)
+          : null;
 
         if (!token)
           throw new TRPCError({
@@ -236,6 +239,8 @@ export const importRouter = createTRPCRouter({
             code: "UNAUTHORIZED",
           });
 
+        const token = decryptTrelloToken(integration.accessToken);
+
         const workspace = await workspaceRepo.getByPublicId(
           ctx.db,
           input.workspacePublicId,
@@ -257,7 +262,7 @@ export const importRouter = createTRPCRouter({
 
         const importSingleBoard = async (boardId: string): Promise<void> => {
           const response = await fetch(
-            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${integration.accessToken}&lists=open&cards=open&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
+            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
           );
 
           if (!response.ok) {
