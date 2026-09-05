@@ -53,6 +53,15 @@
     ],
     "translation": "Dit veld archiveren? Bestaande kaartwaarden worden verborgen, maar blijven bewaard."
   },
+  "ABZuOF": {
+    "message": "Archive this option? Existing card values will keep it until changed.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 340]
+    ],
+    "translation": "Deze optie archiveren? Bestaande kaartwaarden behouden deze totdat ze worden gewijzigd."
+  },
   "yF2aJL": {
     "message": "Archived options",
     "placeholders": {},

@@ -53,6 +53,15 @@
     ],
     "translation": "Arkivér dette felt? Eksisterende kortværdier skjules, men bevares."
   },
+  "ABZuOF": {
+    "message": "Archive this option? Existing card values will keep it until changed.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 340]
+    ],
+    "translation": "Arkivér denne valgmulighed? Eksisterende kortværdier beholder den, indtil de ændres."
+  },
   "yF2aJL": {
     "message": "Archived options",
     "placeholders": {},

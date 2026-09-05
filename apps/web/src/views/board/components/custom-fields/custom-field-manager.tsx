@@ -65,6 +65,9 @@ function FieldRow({
   const [newOptionName, setNewOptionName] = useState("");
   const [isArchiveConfirmationVisible, setIsArchiveConfirmationVisible] =
     useState(false);
+  const [optionToArchive, setOptionToArchive] = useState<
+    Definition["options"][number] | null
+  >(null);
 
   useEffect(() => setName(definition.name), [definition.name]);
 
@@ -244,96 +247,126 @@ function FieldRow({
             {t`Options`}
           </h3>
           {activeOptions.map((option, optionIndex) => (
-            <div key={option.publicId} className="flex items-center gap-2">
-              <input
-                type="color"
-                value={option.colourCode ?? "#64748b"}
-                aria-label={t`Option colour`}
-                className="h-8 w-8 rounded border-0 bg-transparent p-0"
-                onChange={(event) =>
-                  updateOption.mutate({
-                    optionPublicId: option.publicId,
-                    colourCode: event.target.value,
-                  })
-                }
-              />
-              <Input
-                defaultValue={option.name}
-                aria-label={t`Option name`}
-                onBlur={(event) => {
-                  const input = event.currentTarget;
-                  const optionName = input.value.trim();
-                  if (!optionName) {
-                    input.value = option.name;
-                    return;
+            <div key={option.publicId} className="space-y-2">
+              <div className="flex items-center gap-2">
+                <input
+                  type="color"
+                  value={option.colourCode ?? "#64748b"}
+                  aria-label={t`Option colour`}
+                  className="h-8 w-8 rounded border-0 bg-transparent p-0"
+                  onChange={(event) =>
+                    updateOption.mutate({
+                      optionPublicId: option.publicId,
+                      colourCode: event.target.value,
+                    })
                   }
-                  if (optionName !== option.name)
-                    updateOption.mutate(
-                      {
-                        optionPublicId: option.publicId,
-                        name: optionName,
-                      },
-                      {
-                        onError: () => {
-                          input.value = option.name;
+                />
+                <Input
+                  defaultValue={option.name}
+                  aria-label={t`Option name`}
+                  onBlur={(event) => {
+                    const input = event.currentTarget;
+                    const optionName = input.value.trim();
+                    if (!optionName) {
+                      input.value = option.name;
+                      return;
+                    }
+                    if (optionName !== option.name)
+                      updateOption.mutate(
+                        {
+                          optionPublicId: option.publicId,
+                          name: optionName,
                         },
-                      },
-                    );
-                }}
-              />
-              <Button
-                type="button"
-                variant="ghost"
-                size="xs"
-                iconOnly
-                aria-label={t`Move option up`}
-                disabled={optionIndex === 0 || reorderOptions.isPending}
-                onClick={() =>
-                  reorderOptions.mutate({
-                    fieldPublicId: definition.publicId,
-                    optionPublicIds: moveItem(
-                      activeOptions,
-                      optionIndex,
-                      -1,
-                    ).map((item) => item.publicId),
-                  })
-                }
-                iconLeft={<HiChevronUp className="h-4 w-4" />}
-              />
-              <Button
-                type="button"
-                variant="ghost"
-                size="xs"
-                iconOnly
-                aria-label={t`Move option down`}
-                disabled={
-                  optionIndex === activeOptions.length - 1 ||
-                  reorderOptions.isPending
-                }
-                onClick={() =>
-                  reorderOptions.mutate({
-                    fieldPublicId: definition.publicId,
-                    optionPublicIds: moveItem(
-                      activeOptions,
-                      optionIndex,
-                      1,
-                    ).map((item) => item.publicId),
-                  })
-                }
-                iconLeft={<HiChevronDown className="h-4 w-4" />}
-              />
-              <Button
-                type="button"
-                variant="ghost"
-                size="xs"
-                iconOnly
-                aria-label={t`Archive option`}
-                disabled={archiveOption.isPending}
-                onClick={() =>
-                  archiveOption.mutate({ optionPublicId: option.publicId })
-                }
-                iconLeft={<HiOutlineTrash className="h-4 w-4" />}
-              />
+                        {
+                          onError: () => {
+                            input.value = option.name;
+                          },
+                        },
+                      );
+                  }}
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="xs"
+                  iconOnly
+                  aria-label={t`Move option up`}
+                  disabled={optionIndex === 0 || reorderOptions.isPending}
+                  onClick={() =>
+                    reorderOptions.mutate({
+                      fieldPublicId: definition.publicId,
+                      optionPublicIds: moveItem(
+                        activeOptions,
+                        optionIndex,
+                        -1,
+                      ).map((item) => item.publicId),
+                    })
+                  }
+                  iconLeft={<HiChevronUp className="h-4 w-4" />}
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="xs"
+                  iconOnly
+                  aria-label={t`Move option down`}
+                  disabled={
+                    optionIndex === activeOptions.length - 1 ||
+                    reorderOptions.isPending
+                  }
+                  onClick={() =>
+                    reorderOptions.mutate({
+                      fieldPublicId: definition.publicId,
+                      optionPublicIds: moveItem(
+                        activeOptions,
+                        optionIndex,
+                        1,
+                      ).map((item) => item.publicId),
+                    })
+                  }
+                  iconLeft={<HiChevronDown className="h-4 w-4" />}
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="xs"
+                  iconOnly
+                  aria-label={t`Archive option`}
+                  disabled={archiveOption.isPending}
+                  onClick={() => setOptionToArchive(option)}
+                  iconLeft={<HiOutlineTrash className="h-4 w-4" />}
+                />
+              </div>
+              {optionToArchive?.publicId === option.publicId && (
+                <div className="rounded-md bg-light-200 p-3 text-sm dark:bg-dark-300">
+                  <p className="text-light-1000 dark:text-dark-1000">
+                    {t`Archive this option? Existing card values will keep it until changed.`}
+                  </p>
+                  <div className="mt-3 flex justify-end gap-2">
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => setOptionToArchive(null)}
+                    >
+                      {t`Cancel`}
+                    </Button>
+                    <Button
+                      type="button"
+                      size="sm"
+                      isLoading={archiveOption.isPending}
+                      onClick={() =>
+                        archiveOption.mutate(
+                          { optionPublicId: option.publicId },
+                          { onSuccess: () => setOptionToArchive(null) },
+                        )
+                      }
+                    >
+                      {t`Archive`}
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
           <form
