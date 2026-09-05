@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
+import { useLingui } from "@lingui/react";
 import { env } from "next-runtime-env";
 import { useTheme } from "next-themes";
 import { useEffect, useMemo, useState } from "react";
@@ -83,6 +84,8 @@ export default function SideNavigation({
 
   const { resolvedTheme } = useTheme();
 
+  const { i18n } = useLingui();
+
   const isCloudEnv = env("NEXT_PUBLIC_KAN_ENV") === "cloud";
 
   const isDarkMode = resolvedTheme === "dark";
@@ -143,7 +146,8 @@ export default function SideNavigation({
         },
       },
     ],
-    [isDarkMode],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isDarkMode, i18n.locale],
   );
 
   const toggleCollapse = () => {
