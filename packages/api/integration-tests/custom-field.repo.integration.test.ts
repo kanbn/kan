@@ -1172,6 +1172,50 @@ describe("custom field repository integration tests", () => {
       });
     }
 
+    const [foreignBoard] = await db
+      .insert(boards)
+      .values({
+        publicId: "board0000002",
+        name: "Foreign board",
+        slug: "foreign-board",
+        workspaceId: storedBoard!.workspaceId,
+        createdBy: actorUserId,
+      })
+      .returning();
+    const [foreignList] = await db
+      .insert(lists)
+      .values({
+        publicId: "list00000002",
+        name: "Foreign list",
+        index: 0,
+        boardId: foreignBoard!.id,
+        createdBy: actorUserId,
+      })
+      .returning();
+    const [foreignCard] = await db
+      .insert(cards)
+      .values({
+        publicId: "card00000005",
+        title: "Foreign card",
+        index: 0,
+        listId: foreignList!.id,
+        createdBy: actorUserId,
+      })
+      .returning();
+    const foreignText = await customFieldRepo.createDefinition(db, {
+      boardPublicId: foreignBoard!.publicId,
+      name: "Foreign reference",
+      type: "text",
+      showOnCard: true,
+      actorUserId,
+    });
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId: foreignCard!.publicId,
+      fieldPublicId: foreignText.publicId,
+      value: { type: "text", value: "Alpha" },
+      actorUserId,
+    });
+
     const titles = async (
       customFields: customFieldRepo.BoardCustomFieldFilter[],
     ) =>
@@ -1191,6 +1235,15 @@ describe("custom field repository integration tests", () => {
         { type: "text", fieldPublicId: text.publicId, contains: "ALPHA" },
       ]),
     ).resolves.toEqual(["Test card", "Second scalar match"]);
+    await expect(
+      titles([
+        {
+          type: "text",
+          fieldPublicId: foreignText.publicId,
+          contains: "Alpha",
+        },
+      ]),
+    ).resolves.toEqual([]);
     await expect(
       titles([
         { type: "text", fieldPublicId: text.publicId, contains: "%_\\" },

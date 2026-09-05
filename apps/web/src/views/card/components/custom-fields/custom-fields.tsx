@@ -1,3 +1,4 @@
+import type { Locale } from "date-fns";
 import { t } from "@lingui/core/macro";
 import { format } from "date-fns";
 import { useEffect, useRef, useState } from "react";
@@ -5,22 +6,30 @@ import { useEffect, useRef, useState } from "react";
 import type { RouterOutputs } from "~/utils/api";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
+import { useLocalisation } from "~/hooks/useLocalisation";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { formatCustomFieldDate } from "./custom-field-date";
 import { CustomFieldSelect } from "./custom-field-select";
 
 type Card = RouterOutputs["card"]["byId"];
 type Definition = Card["list"]["board"]["customFields"][number];
 type Value = Card["customFieldValues"][number];
 
-const getDisplayValue = (definition: Definition, value: Value) => {
+const getDisplayValue = (
+  definition: Definition,
+  value: Value,
+  dateLocale: Locale,
+) => {
   switch (definition.type) {
     case "text":
       return value.textValue;
     case "number":
       return value.numberValue;
     case "date":
-      return value.dateValue ? format(value.dateValue, "PPp") : null;
+      return value.dateValue
+        ? formatCustomFieldDate(value.dateValue, dateLocale)
+        : null;
     case "checkbox":
       return value.checkboxValue ? t`Checked` : t`Unchecked`;
     case "select":
@@ -363,6 +372,8 @@ export function CustomFields({
   values: Value[];
   disabled: boolean;
 }) {
+  const { dateLocale } = useLocalisation();
+
   if (definitions.length === 0) return null;
 
   const valuesByFieldId = new Map(
@@ -390,7 +401,7 @@ export function CustomFields({
               </label>
               {disabled && value ? (
                 <div className="min-h-8 rounded-md bg-light-200 px-3 py-2 text-sm text-neutral-900 dark:bg-dark-300 dark:text-dark-1000">
-                  {getDisplayValue(definition, value)}
+                  {getDisplayValue(definition, value, dateLocale)}
                   {value.optionArchivedAt && (
                     <span className="ml-2 text-xs text-light-700 dark:text-dark-700">
                       ({t`Archived`})
