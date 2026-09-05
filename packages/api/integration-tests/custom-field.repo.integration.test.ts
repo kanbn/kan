@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
+import * as customFieldImportRepo from "@kan/db/repository/custom-field-import.repo";
 import * as customFieldRepo from "@kan/db/repository/custom-field.repo";
 import {
   boards,
@@ -21,7 +22,9 @@ import { createTestDb, seedTestData } from "./test-db";
 describe("custom field repository integration tests", () => {
   let db: TestDbClient;
   let actorUserId: string;
+  let boardId: number;
   let boardPublicId: string;
+  let cardId: number;
   let cardPublicId: string;
 
   beforeEach(async () => {
@@ -39,6 +42,7 @@ describe("custom field repository integration tests", () => {
         createdBy: actorUserId,
       })
       .returning();
+    boardId = board!.id;
     boardPublicId = board!.publicId;
 
     const [list] = await db
@@ -62,6 +66,7 @@ describe("custom field repository integration tests", () => {
         createdBy: actorUserId,
       })
       .returning();
+    cardId = card!.id;
     cardPublicId = card!.publicId;
   });
 
@@ -106,6 +111,163 @@ describe("custom field repository integration tests", () => {
         ],
       },
     ]);
+  });
+
+  it("bulk imports definitions, options and typed card values", async () => {
+    const selectedDate = new Date("2026-09-05T12:30:00.000Z");
+    const result = await customFieldImportRepo.importBoardCustomFields(db, {
+      boardId,
+      actorUserId,
+      definitions: [
+        {
+          sourceId: "field-text",
+          name: "Customer",
+          type: "text",
+          showOnCard: true,
+          options: [],
+        },
+        {
+          sourceId: "field-number",
+          name: "Amount",
+          type: "number",
+          showOnCard: true,
+          options: [],
+        },
+        {
+          sourceId: "field-date",
+          name: "Due date",
+          type: "date",
+          showOnCard: false,
+          options: [],
+        },
+        {
+          sourceId: "field-checkbox",
+          name: "Approved",
+          type: "checkbox",
+          showOnCard: true,
+          options: [],
+        },
+        {
+          sourceId: "field-select",
+          name: "Priority",
+          type: "select",
+          showOnCard: true,
+          options: [
+            {
+              sourceId: "option-low",
+              name: "Low",
+              colourCode: "#00ff00",
+            },
+            {
+              sourceId: "option-high",
+              name: "High",
+              colourCode: "#ff0000",
+            },
+          ],
+        },
+      ],
+      values: [
+        {
+          cardId,
+          fieldSourceId: "field-text",
+          value: { type: "text", value: "Acme" },
+        },
+        {
+          cardId,
+          fieldSourceId: "field-number",
+          value: { type: "number", value: "13.50" },
+        },
+        {
+          cardId,
+          fieldSourceId: "field-date",
+          value: { type: "date", value: selectedDate },
+        },
+        {
+          cardId,
+          fieldSourceId: "field-checkbox",
+          value: { type: "checkbox", value: false },
+        },
+        {
+          cardId,
+          fieldSourceId: "field-select",
+          value: { type: "select", optionSourceId: "option-high" },
+        },
+      ],
+    });
+
+    expect(result).toEqual({
+      definitionsCreated: 5,
+      optionsCreated: 2,
+      valuesCreated: 5,
+    });
+    expect(
+      await customFieldRepo.listDefinitionsByBoardPublicId(db, boardPublicId),
+    ).toMatchObject([
+      { name: "Customer", type: "text", position: 0 },
+      { name: "Amount", type: "number", position: 1 },
+      { name: "Due date", type: "date", position: 2, showOnCard: false },
+      { name: "Approved", type: "checkbox", position: 3 },
+      {
+        name: "Priority",
+        type: "select",
+        position: 4,
+        options: [
+          { name: "Low", position: 0 },
+          { name: "High", position: 1 },
+        ],
+      },
+    ]);
+    expect(
+      await customFieldRepo.listValuesByCardPublicId(db, cardPublicId),
+    ).toMatchObject([
+      { fieldType: "text", textValue: "Acme" },
+      { fieldType: "number", numberValue: "13.50" },
+      { fieldType: "date", dateValue: selectedDate },
+      { fieldType: "checkbox", checkboxValue: false },
+      { fieldType: "select", optionName: "High" },
+    ]);
+  });
+
+  it("rolls back a bulk import with a mismatched select option", async () => {
+    await expect(
+      customFieldImportRepo.importBoardCustomFields(db, {
+        boardId,
+        actorUserId,
+        definitions: [
+          {
+            sourceId: "field-first",
+            name: "First",
+            type: "select",
+            showOnCard: true,
+            options: [
+              {
+                sourceId: "option-first",
+                name: "First",
+                colourCode: null,
+              },
+            ],
+          },
+          {
+            sourceId: "field-second",
+            name: "Second",
+            type: "select",
+            showOnCard: true,
+            options: [],
+          },
+        ],
+        values: [
+          {
+            cardId,
+            fieldSourceId: "field-second",
+            value: { type: "select", optionSourceId: "option-first" },
+          },
+        ],
+      }),
+    ).rejects.toMatchObject({ code: "OPTION_NOT_FOUND" });
+
+    expect(
+      await customFieldRepo.listDefinitionsByBoardPublicId(db, boardPublicId),
+    ).toEqual([]);
   });
 
   it("reorders complete field and option sets atomically", async () => {
