@@ -169,12 +169,14 @@ describe("avatar URL resolution in routers", () => {
       labels: [],
       attachments: [],
       checklists: [],
+      customFieldValues: [],
       list: {
         publicId: "list-12345678",
         name: "List",
         board: {
           publicId: "board-1234567",
           name: "Board",
+          customFields: [],
           labels: [],
           lists: [],
           workspace: {
