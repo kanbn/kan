@@ -326,7 +326,7 @@ export function InviteMemberForm({
                     {t`Free Plan`}
                   </span>
                   <p className="mt-1">
-                    {t`Inviting members requires a Team or Pro plan. You'll be redirected to upgrade your workspace.`}
+                    {t`Inviting members requires a Team plan. You'll be redirected to upgrade your workspace.`}
                   </p>
                 </div>
               )}
@@ -350,7 +350,7 @@ export function InviteMemberForm({
           {isFreePlan ? (
             <Button
               type="button"
-              href={`/upgrade/select-plan?plan=pro&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/members")}`}
+              href={`/upgrade/select-plan?plan=team&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/members")}`}
             >
               {t`Choose plan`}
             </Button>

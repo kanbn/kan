@@ -3,49 +3,28 @@
   "ui": "tui",
   "tasks": {
     "topo": {
-      "dependsOn": [
-        "^topo"
-      ]
+      "dependsOn": ["^topo"]
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        ".cache/tsbuildinfo.json",
-        "dist/**"
-      ]
+      "dependsOn": ["^build"],
+      "outputs": [".cache/tsbuildinfo.json", "dist/**"]
     },
     "dev": {
-      "dependsOn": [
-        "^dev"
-      ],
+      "dependsOn": ["^dev"],
       "cache": false,
       "persistent": false
     },
     "format": {
-      "outputs": [
-        ".cache/.prettiercache"
-      ],
+      "outputs": [".cache/.prettiercache"],
       "outputLogs": "new-only"
     },
     "lint": {
-      "dependsOn": [
-        "^topo",
-        "^build"
-      ],
-      "outputs": [
-        ".cache/.eslintcache"
-      ]
+      "dependsOn": ["^topo", "^build"],
+      "outputs": [".cache/.eslintcache"]
     },
     "typecheck": {
-      "dependsOn": [
-        "^topo",
-        "^build"
-      ],
-      "outputs": [
-        ".cache/tsbuildinfo.json"
-      ]
+      "dependsOn": ["^topo", "^build"],
+      "outputs": [".cache/tsbuildinfo.json"]
     },
     "clean": {
       "cache": false
@@ -71,6 +50,7 @@
     "POSTGRES_URL",
     "TRELLO_APP_API_KEY",
     "TRELLO_APP_SECRET",
+    "TRELLO_API_URL",
     "GOOGLE_CLIENT_ID",
     "GOOGLE_CLIENT_SECRET",
     "BETTER_AUTH_ALLOWED_DOMAINS",
@@ -145,6 +125,15 @@
     "S3_FORCE_PATH_STYLE",
     "S3_AVATAR_UPLOAD_LIMIT",
     "PORT",
+    "CLOUD_PORT",
+    "PLAYWRIGHT_BASE_URL",
+    "MAILPIT_SMTP_PORT",
+    "MAILPIT_HTTP_PORT",
+    "TRELLO_MOCK_PORT",
+    "MINIO_PORT",
+    "MINIO_CONSOLE_PORT",
+    "MINIO_ROOT_USER",
+    "MINIO_ROOT_PASSWORD",
     "BETTER_AUTH_SECRET",
     "BETTER_AUTH_TRUSTED_ORIGINS",
     "REDIS_URL",

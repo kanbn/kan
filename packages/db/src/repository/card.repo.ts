@@ -39,7 +39,7 @@ export const create = async (
   db: dbClient,
   cardInput: {
     title: string;
-    description: string;
+    description: string | null;
     createdBy: string;
     listId: number;
     workspaceId: number;
@@ -408,7 +408,7 @@ export const bulkCreate = async (
   cardInput: {
     publicId: string;
     title: string;
-    description: string;
+    description: string | null;
     createdBy: string;
     listId: number;
     workspaceId: number;
@@ -457,7 +457,7 @@ export const bulkCreate = async (
     const allValuesToInsert: {
       publicId: string;
       title: string;
-      description: string;
+      description: string | null;
       createdBy: string;
       listId: number;
       index: number;

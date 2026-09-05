@@ -142,6 +142,7 @@ export default function Checklists({
                       </div>
                       <div>
                         <button
+                          aria-label={t`Delete checklist`}
                           className="rounded-md p-1 text-light-900 hover:bg-light-100 dark:text-dark-700 dark:hover:bg-dark-100"
                           onClick={() =>
                             openModal("DELETE_CHECKLIST", checklist.publicId)
@@ -150,6 +151,7 @@ export default function Checklists({
                           <HiXMark size={16} />
                         </button>
                         <button
+                          aria-label={t`Add checklist item`}
                           onClick={() =>
                             setActiveChecklistForm?.(checklist.publicId)
                           }

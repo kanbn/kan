@@ -1,8 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import {
-  RateLimiterRedis,
-  RateLimiterMemory,
-} from "rate-limiter-flexible";
+import { RateLimiterMemory, RateLimiterRedis } from "rate-limiter-flexible";
 
 import { getRedisClient } from "@kan/db/redis";
 import { createLogger } from "@kan/logger";
@@ -70,6 +67,10 @@ export function withRateLimit(
     res: NextApiResponse,
   ) => Promise<unknown> | unknown,
 ) {
+  if (process.env.DISABLE_RATE_LIMIT === "true") {
+    return handler;
+  }
+
   const rateLimiter = createRateLimiter(options);
   const identifier = options.identifier ?? DEFAULT_OPTIONS.identifier;
   const errorMessage = options.errorMessage ?? DEFAULT_OPTIONS.errorMessage;
@@ -99,4 +100,3 @@ export function withRateLimit(
     }
   };
 }
-

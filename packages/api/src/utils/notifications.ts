@@ -1,41 +1,45 @@
 import { env } from "next-runtime-env";
 
 import type { dbClient } from "@kan/db/client";
-import { createLogger } from "@kan/logger";
-
-const log = createLogger("notifications");
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as notificationRepo from "@kan/db/repository/notification.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { sendEmail } from "@kan/email";
-import { parseMentionsFromHTML } from "@kan/shared/utils";
+import { createLogger } from "@kan/logger";
+
+import { getNewMentionPublicIds } from "./mention-notifications";
+
+const log = createLogger("notifications");
 
 /**
- * Sends mention notification emails to mentioned members
- * Only sends emails for new mentions (checks notification table to avoid duplicates)
+ * Sends mention notification emails to members newly mentioned in the content.
  */
 export async function sendMentionEmails({
   db,
   cardPublicId,
-  commentHtml,
+  previousHtml,
+  nextHtml,
   commenterUserId,
   commentId,
 }: {
   db: dbClient;
   cardPublicId: string;
-  commentHtml: string;
+  previousHtml: string | null;
+  nextHtml: string;
   commenterUserId: string;
   commentId?: number;
 }) {
   try {
-    // Parse mentions from HTML
-    const mentionPublicIds = parseMentionsFromHTML(commentHtml);
+    const mentionPublicIds = getNewMentionPublicIds(previousHtml, nextHtml);
     if (mentionPublicIds.length === 0) return;
 
     // Get card with board information
-    const card = await cardRepo.getWithListAndMembersByPublicId(db, cardPublicId);
+    const card = await cardRepo.getWithListAndMembersByPublicId(
+      db,
+      cardPublicId,
+    );
     if (!card?.list.board) return;
 
     const board = card.list.board;
@@ -56,7 +60,10 @@ export async function sendMentionEmails({
     const commenter = await userRepo.getById(db, commenterUserId);
     if (!commenter) return;
 
-    const commenterName = commenter.name?.trim() || commenter.email;
+    const trimmedCommenterName = commenter.name?.trim();
+    const commenterName = trimmedCommenterName?.length
+      ? trimmedCommenterName
+      : commenter.email;
 
     // Get mentioned members with full details (filtered by workspace)
     const membersWithDetails = await memberRepo.getByPublicIdsWithUsers(
@@ -75,8 +82,15 @@ export async function sendMentionEmails({
     const baseUrl = env("NEXT_PUBLIC_BASE_URL");
     const cardUrl = `${baseUrl}/cards/${cardPublicId}`;
 
-    log.info({ cardPublicId, mentionCount: membersToNotify.length, commenterUserId }, "Sending mention emails");
-    // Send emails to all mentioned members (only if notification doesn't exist)
+    log.info(
+      {
+        cardPublicId,
+        mentionCount: membersToNotify.length,
+        commenterUserId,
+      },
+      "Sending mention emails",
+    );
+
     await Promise.all(
       membersToNotify.map(async (member) => {
         const userId = member.user?.id;
@@ -86,28 +100,6 @@ export async function sendMentionEmails({
         if (!userId || !email) return;
 
         try {
-          // Check if notification already exists for this mention
-          const notificationExists = await notificationRepo.exists(db, {
-            userId,
-            cardId,
-            type: "mention",
-          });
-
-          // If notification already exists, skip sending email
-          if (notificationExists) {
-            log.debug({ email, cardPublicId }, "Skipping duplicate mention email");
-            return;
-          }
-
-          // Create notification record
-          await notificationRepo.create(db, {
-            type: "mention",
-            userId,
-            cardId,
-            commentId,
-          });
-
-          // Send email
           await sendEmail(
             email,
             `${commenterName} mentioned you in a comment on ${cardTitle}`,
@@ -121,7 +113,25 @@ export async function sendMentionEmails({
           );
           log.info({ email, cardPublicId }, "Mention email sent");
         } catch (error) {
-          log.error({ err: error, email, cardPublicId }, "Failed to send mention email");
+          log.error(
+            { err: error, email, cardPublicId },
+            "Failed to send mention email",
+          );
+          return;
+        }
+
+        try {
+          await notificationRepo.create(db, {
+            type: "mention",
+            userId,
+            cardId,
+            commentId,
+          });
+        } catch (error) {
+          log.error(
+            { err: error, email, cardPublicId },
+            "Failed to record mention notification",
+          );
         }
       }),
     );
@@ -129,4 +139,3 @@ export async function sendMentionEmails({
     log.error({ err: error, cardPublicId }, "Error sending mention emails");
   }
 }
-

@@ -5,16 +5,24 @@ export default function Dropdown({
   items,
   children,
   disabled,
+  ariaLabel,
 }: {
-  items: { label: string; action?: () => void; icon?: React.ReactNode; disabled?: boolean }[];
+  items: {
+    label: string;
+    action?: () => void;
+    icon?: React.ReactNode;
+    disabled?: boolean;
+  }[];
   children: React.ReactNode;
   disabled?: boolean;
+  ariaLabel?: string;
 }) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button
           disabled={disabled}
+          aria-label={ariaLabel}
           className="flex h-7 w-7 items-center justify-center rounded-[5px] hover:bg-light-200 focus:outline-none dark:hover:bg-dark-200"
         >
           {children}
@@ -30,7 +38,7 @@ export default function Dropdown({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-[100] isolate mt-2 w-56 origin-top-right rounded-md border border-light-200 bg-white p-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-400 dark:bg-dark-300">
+        <Menu.Items className="absolute right-0 isolate z-[100] mt-2 w-56 origin-top-right rounded-md border border-light-200 bg-white p-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-400 dark:bg-dark-300">
           <div className="flex flex-col">
             {items.map((item) => (
               <Menu.Item key={item.label} disabled={item.disabled}>

@@ -52,12 +52,13 @@ export function NewListForm({
       await utils.board.byId.cancel();
 
       const currentState = utils.board.byId.getData(queryParams);
+      const optimisticPublicId = generateUID();
 
       utils.board.byId.setData(queryParams, (oldBoard) => {
         if (!oldBoard) return oldBoard;
 
         const newList = {
-          publicId: generateUID(),
+          publicId: optimisticPublicId,
           name: args.name,
           boardId: 1,
           boardPublicId,
@@ -70,7 +71,21 @@ export function NewListForm({
         return { ...oldBoard, lists: updatedLists };
       });
 
-      return { previousState: currentState };
+      return { previousState: currentState, optimisticPublicId };
+    },
+    onSuccess: (result, _args, context) => {
+      if (!context) return;
+      utils.board.byId.setData(queryParams, (oldBoard) => {
+        if (!oldBoard) return oldBoard;
+        return {
+          ...oldBoard,
+          lists: oldBoard.lists.map((list) =>
+            list.publicId === context.optimisticPublicId
+              ? { ...list, publicId: result.publicId }
+              : list,
+          ),
+        };
+      });
     },
     onError: (_error, _newList, context) => {
       utils.board.byId.setData(queryParams, context?.previousState);

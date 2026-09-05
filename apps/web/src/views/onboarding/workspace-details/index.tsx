@@ -17,7 +17,6 @@ import { authClient } from "@kan/auth/client";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import LoadingSpinner from "~/components/LoadingSpinner";
-import Toggle from "~/components/Toggle";
 import { Tooltip } from "~/components/Tooltip";
 import { useDebounce } from "~/hooks/useDebounce";
 import { usePopup } from "~/providers/popup";
@@ -50,8 +49,7 @@ export default function WorkspaceNameView() {
     }
   }, [licenseKeyParam]);
 
-  const [isProToggle, setIsProToggle] = useState(plan === "pro");
-  const effectivePlan = isProToggle ? "pro" : plan;
+  const isTeamPlan = plan === "team";
 
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
@@ -60,7 +58,7 @@ export default function WorkspaceNameView() {
 
   const handleNameChange = (value: string) => {
     setName(value);
-    if (isProToggle && !slugManuallyEdited) {
+    if (isTeamPlan && !slugManuallyEdited) {
       setSlug(slugify(value));
     }
   };
@@ -70,7 +68,7 @@ export default function WorkspaceNameView() {
 
   const slugAvailability = api.workspace.checkSlugAvailability.useQuery(
     { workspaceSlug: debouncedSlug },
-    { enabled: isProToggle && debouncedSlug.length >= 3 && !isTyping },
+    { enabled: isTeamPlan && debouncedSlug.length >= 3 && !isTyping },
   );
 
   const isSlugAvailable =
@@ -95,7 +93,7 @@ export default function WorkspaceNameView() {
 
   const utils = api.useUtils();
 
-  const previewSlug = isProToggle
+  const previewSlug = isTeamPlan
     ? slugify(slug) || slugify(name) || "your-workspace"
     : "your-workspace";
 
@@ -112,7 +110,7 @@ export default function WorkspaceNameView() {
           `/api/partner/link?license_key=${encodeURIComponent(storedLicenseKey)}`,
         );
       } else {
-        router.push("/boards");
+        router.push(`/boards?workspacePublicId=${workspace.publicId}`);
       }
     },
     onError: () => {
@@ -129,7 +127,7 @@ export default function WorkspaceNameView() {
   const handleContinue = async () => {
     if (!name.trim()) return;
 
-    if (effectivePlan === "solo" || isLicenseFlow) {
+    if (plan === "solo" || isLicenseFlow) {
       createWorkspace.mutate({
         name: name.trim(),
         ...(description.trim() && { description: description.trim() }),
@@ -137,7 +135,6 @@ export default function WorkspaceNameView() {
       return;
     }
 
-    // team/pro: redirect to Stripe — workspace created on checkout_success
     setIsRedirectingToCheckout(true);
     try {
       const response = await fetch("/api/stripe/create_checkout_session", {
@@ -148,11 +145,11 @@ export default function WorkspaceNameView() {
           ...(description.trim() && {
             workspaceDescription: description.trim(),
           }),
-          ...(effectivePlan === "pro" && slug ? { workspaceSlug: slug } : {}),
-          cancelUrl: `${window.location.pathname}?plan=${effectivePlan}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`,
+          ...(isTeamPlan && slug ? { workspaceSlug: slug } : {}),
+          cancelUrl: `${window.location.pathname}?plan=${plan}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`,
           successUrl: "/boards",
           billing,
-          plan: effectivePlan,
+          plan,
         }),
       });
       const data = await response.json();
@@ -216,7 +213,7 @@ export default function WorkspaceNameView() {
                   <div className="space-y-2">
                     <Input
                       placeholder={t`your-workspace`}
-                      value={isProToggle ? slug : t`your-workspace`}
+                      value={isTeamPlan ? slug : t`your-workspace`}
                       onChange={(e) => {
                         setSlugManuallyEdited(true);
                         setSlug(
@@ -228,24 +225,24 @@ export default function WorkspaceNameView() {
                             .slice(0, 60),
                         );
                       }}
-                      disabled={!isProToggle}
+                      disabled={!isTeamPlan}
                       prefix="kan.bn/"
                       className={
-                        !isProToggle ? "cursor-not-allowed opacity-50" : ""
+                        !isTeamPlan ? "cursor-not-allowed opacity-50" : ""
                       }
                       errorMessage={slugError}
                       iconRight={
-                        !isProToggle ? (
+                        !isTeamPlan ? (
                           <Tooltip
                             content={
-                              <span className="text-xs">{t`Custom usernames require upgrading to a Pro plan`}</span>
+                              <span className="text-xs">{t`Custom usernames require upgrading to a Team plan`}</span>
                             }
                             placement="top"
                             delay={0}
                           >
                             <HiInformationCircle className="h-4 w-4 leading-[0] text-dark-700 dark:text-dark-700" />
                           </Tooltip>
-                        ) : isProToggle && slug.length >= 3 ? (
+                        ) : isTeamPlan && slug.length >= 3 ? (
                           isTyping || slugAvailability.isPending ? (
                             <LoadingSpinner />
                           ) : isSlugAvailable ? (
@@ -253,17 +250,6 @@ export default function WorkspaceNameView() {
                           ) : null
                         ) : null
                       }
-                    />
-                  </div>
-                )}
-
-                {!isLicenseFlow && plan !== "pro" && (
-                  <div className="pb-2">
-                    <Toggle
-                      isChecked={isProToggle}
-                      onChange={() => setIsProToggle((v) => !v)}
-                      label={t`Upgrade to Pro ($29/month)`}
-                      labelPosition="after"
                     />
                   </div>
                 )}
@@ -291,7 +277,7 @@ export default function WorkspaceNameView() {
                     variant="ghost"
                     onClick={() =>
                       router.replace(
-                        `/onboarding/select-plan?plan=${effectivePlan}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`,
+                        `/onboarding/select-plan?plan=${plan}&billing=${billing}&returnUrl=${encodeURIComponent(returnUrl)}`,
                       )
                     }
                   >
@@ -304,7 +290,7 @@ export default function WorkspaceNameView() {
                     !name.trim() ||
                     createWorkspace.isPending ||
                     isRedirectingToCheckout ||
-                    (isProToggle &&
+                    (isTeamPlan &&
                       slug.length >= 3 &&
                       (isTyping || slugAvailability.isPending || !!slugError))
                   }

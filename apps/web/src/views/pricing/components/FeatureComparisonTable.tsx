@@ -8,10 +8,18 @@ type FrequencyValue = "monthly" | "annually";
 interface PlanFeature {
   key: string;
   label: string;
-  free: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
-  teams: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
-  pro: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
-  enterprise: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
+  free:
+    | string
+    | boolean
+    | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
+  teams:
+    | string
+    | boolean
+    | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
+  enterprise:
+    | string
+    | boolean
+    | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
 }
 
 interface FeatureSection {
@@ -27,10 +35,12 @@ const FeatureComparisonTable = ({
   // Keep pricing column headers visible as you scroll
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
-  const [headerRect, setHeaderRect] = useState<{ left: number; width: number }>({
-    left: 0,
-    width: 0,
-  });
+  const [headerRect, setHeaderRect] = useState<{ left: number; width: number }>(
+    {
+      left: 0,
+      width: 0,
+    },
+  );
 
   useEffect(() => {
     const HEADER_OFFSET = 64; // px; matches fixed top nav height
@@ -73,7 +83,6 @@ const FeatureComparisonTable = ({
       label: t`Boards`,
       free: { text: t`Unlimited boards`, highlightFirstWord: true },
       teams: { text: t`Unlimited boards`, highlightFirstWord: true },
-      pro: { text: t`Unlimited boards`, highlightFirstWord: true },
       enterprise: { text: t`Unlimited boards`, highlightFirstWord: true },
     },
     {
@@ -81,7 +90,6 @@ const FeatureComparisonTable = ({
       label: t`Members`,
       free: { text: t`1 user`, highlightFirstWord: true },
       teams: { text: t`Per-seat pricing`, highlightFirstWord: true },
-      pro: { text: t`Unlimited members`, highlightFirstWord: true },
       enterprise: { text: t`Unlimited members`, highlightFirstWord: true },
     },
     {
@@ -89,17 +97,15 @@ const FeatureComparisonTable = ({
       label: t`File uploads`,
       free: { text: t`10mb file uploads`, highlightFirstWord: true },
       teams: { text: t`Unlimited file uploads`, highlightFirstWord: true },
-      pro: { text: t`Unlimited file uploads`, highlightFirstWord: true },
       enterprise: { text: t`Unlimited file uploads`, highlightFirstWord: true },
     },
-      {
-        key: "workspace-username",
-        label: t`Workspace username`,
-        free: { text: t`Default username`, highlightFirstWord: true },
-        teams: { text: t`Default username`, highlightFirstWord: true },
-        pro: { text: t`Custom username`, highlightFirstWord: true },
-        enterprise: { text: t`Custom username`, highlightFirstWord: true },
-      },
+    {
+      key: "workspace-username",
+      label: t`Workspace username`,
+      free: { text: t`Default username`, highlightFirstWord: true },
+      teams: { text: t`Custom username`, highlightFirstWord: true },
+      enterprise: { text: t`Custom username`, highlightFirstWord: true },
+    },
   ];
 
   const coreFeatures: PlanFeature[] = [
@@ -108,7 +114,6 @@ const FeatureComparisonTable = ({
       label: t`Checklists`,
       free: true,
       teams: true,
-      pro: true,
       enterprise: true,
     },
     {
@@ -116,7 +121,6 @@ const FeatureComparisonTable = ({
       label: t`Board templates`,
       free: true,
       teams: true,
-      pro: true,
       enterprise: true,
     },
     {
@@ -124,7 +128,6 @@ const FeatureComparisonTable = ({
       label: t`Labels & filters`,
       free: true,
       teams: true,
-      pro: true,
       enterprise: true,
     },
     {
@@ -132,7 +135,6 @@ const FeatureComparisonTable = ({
       label: t`Board visibility`,
       free: true,
       teams: true,
-      pro: true,
       enterprise: true,
     },
     {
@@ -140,7 +142,6 @@ const FeatureComparisonTable = ({
       label: t`Intelligent search`,
       free: true,
       teams: true,
-      pro: true,
       enterprise: true,
     },
     {
@@ -148,7 +149,6 @@ const FeatureComparisonTable = ({
       label: t`Activity log`,
       free: true,
       teams: true,
-      pro: true,
       enterprise: true,
     },
     {
@@ -156,23 +156,6 @@ const FeatureComparisonTable = ({
       label: t`Comments`,
       free: true,
       teams: true,
-      pro: true,
-      enterprise: true,
-    },
-    {
-      key: "roles-permissions",
-      label: t`Roles & permissions`,
-      free: false,
-      teams: false,
-      pro: true,
-      enterprise: true,
-    },
-    {
-      key: "custom-branding",
-      label: t`Custom branding`,
-      free: false,
-      teams: false,
-      pro: true,
       enterprise: true,
     },
   ];
@@ -183,7 +166,6 @@ const FeatureComparisonTable = ({
       label: t`Mentions`,
       free: false,
       teams: true,
-      pro: true,
       enterprise: true,
     },
     {
@@ -191,7 +173,6 @@ const FeatureComparisonTable = ({
       label: t`Email notifications`,
       free: false,
       teams: true,
-      pro: true,
       enterprise: true,
     },
     {
@@ -199,7 +180,6 @@ const FeatureComparisonTable = ({
       label: t`Assignees`,
       free: false,
       teams: true,
-      pro: true,
       enterprise: true,
     },
     {
@@ -207,7 +187,6 @@ const FeatureComparisonTable = ({
       label: t`Invite links`,
       free: false,
       teams: true,
-      pro: true,
       enterprise: true,
     },
   ];
@@ -218,7 +197,6 @@ const FeatureComparisonTable = ({
       label: t`Trello`,
       free: true,
       teams: true,
-      pro: true,
       enterprise: true,
     },
   ];
@@ -229,7 +207,6 @@ const FeatureComparisonTable = ({
       label: t`Open source`,
       free: true,
       teams: true,
-      pro: true,
       enterprise: true,
     },
     {
@@ -237,7 +214,6 @@ const FeatureComparisonTable = ({
       label: t`API`,
       free: { text: t`Limited API access` },
       teams: { text: t`Full API access`, highlight: true },
-      pro: { text: t`Full API access`, highlight: true },
       enterprise: { text: t`Full API access`, highlight: true },
     },
     {
@@ -245,7 +221,6 @@ const FeatureComparisonTable = ({
       label: t`On-premise`,
       free: false,
       teams: false,
-      pro: false,
       enterprise: true,
     },
   ];
@@ -256,7 +231,6 @@ const FeatureComparisonTable = ({
       label: t`SSO`,
       free: { text: t`Google SSO`, highlight: true },
       teams: { text: t`Google SSO`, highlight: true },
-      pro: { text: t`Google SSO`, highlight: true },
       enterprise: { text: t`Google SSO + SAML`, highlight: true },
     },
     {
@@ -264,7 +238,6 @@ const FeatureComparisonTable = ({
       label: t`Admin roles`,
       free: { text: t`Admin roles`, highlight: true },
       teams: { text: t`Admin roles`, highlight: true },
-      pro: { text: t`Admin roles`, highlight: true },
       enterprise: { text: t`Advanced admin roles`, highlight: true },
     },
   ];
@@ -275,7 +248,6 @@ const FeatureComparisonTable = ({
       label: t`Priority email support`,
       free: false,
       teams: true,
-      pro: true,
       enterprise: true,
     },
     {
@@ -283,7 +255,6 @@ const FeatureComparisonTable = ({
       label: t`Account manager`,
       free: false,
       teams: false,
-      pro: false,
       enterprise: true,
     },
     {
@@ -291,7 +262,6 @@ const FeatureComparisonTable = ({
       label: t`SLA`,
       free: false,
       teams: false,
-      pro: false,
       enterprise: true,
     },
   ];
@@ -330,7 +300,6 @@ const FeatureComparisonTable = ({
   const plans = [
     { id: "free", name: t`Free`, tierId: "tier-free" },
     { id: "teams", name: t`Teams`, tierId: "tier-teams" },
-    { id: "pro", name: t`Pro`, tierId: "tier-pro" },
     { id: "enterprise", name: t`Enterprise`, tierId: "tier-enterprise" },
   ];
 
@@ -338,7 +307,10 @@ const FeatureComparisonTable = ({
     value,
     label,
   }: {
-    value: string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
+    value:
+      | string
+      | boolean
+      | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
     label: string;
   }) => {
     if (typeof value === "object" && value !== null) {
@@ -352,7 +324,9 @@ const FeatureComparisonTable = ({
           <div className="flex items-center gap-2.5">
             <HiCheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-light-1000 dark:text-dark-1000" />
             <span className="text-sm font-medium">
-              <span className="text-light-1000 dark:text-dark-1000">{firstWord}</span>
+              <span className="text-light-1000 dark:text-dark-1000">
+                {firstWord}
+              </span>
               <span className="text-light-950 dark:text-dark-800">{rest}</span>
             </span>
           </div>
@@ -407,14 +381,15 @@ const FeatureComparisonTable = ({
   const getFeatureValue = (
     feature: PlanFeature,
     planId: string,
-  ): string | boolean | { text: string; highlight?: boolean; highlightFirstWord?: boolean } => {
+  ):
+    | string
+    | boolean
+    | { text: string; highlight?: boolean; highlightFirstWord?: boolean } => {
     switch (planId) {
       case "free":
         return feature.free;
       case "teams":
         return feature.teams;
-      case "pro":
-        return feature.pro;
       case "enterprise":
         return feature.enterprise;
       default:
@@ -431,16 +406,16 @@ const FeatureComparisonTable = ({
         >
           {isHeaderFixed && (
             <div
-              className="hidden sm:block fixed z-40 border-b border-light-300 bg-light-50/95 dark:border-dark-400 dark:bg-dark-50/95"
+              className="fixed z-40 hidden border-b border-light-300 bg-light-50/95 dark:border-dark-400 dark:bg-dark-50/95 sm:block"
               style={{
                 top: 64,
                 left: headerRect.left,
                 width: headerRect.width,
               }}
             >
-              <div className="grid grid-cols-4 border-x border-light-300 dark:border-dark-300">
+              <div className="grid grid-cols-3 border-x border-light-300 dark:border-dark-300">
                 {plans.map((plan) => {
-                  const isMostPopular = plan.id === "pro";
+                  const isMostPopular = plan.id === "teams";
                   return (
                     <div
                       key={`fixed-${plan.id}`}
@@ -452,7 +427,6 @@ const FeatureComparisonTable = ({
                       )}
                     >
                       {plan.name}
-                      {plan.id === "pro" && <span className="ml-1 text-xl">∞</span>}
                     </div>
                   );
                 })}
@@ -463,22 +437,19 @@ const FeatureComparisonTable = ({
             <thead>
               <tr>
                 {plans.map((plan) => {
-                  const isMostPopular = plan.id === "pro";
+                  const isMostPopular = plan.id === "teams";
                   return (
                     <th
                       key={plan.id}
                       scope="col"
                       className={twMerge(
-                        "w-1/4 px-6 py-4 text-left text-base font-semibold",
+                        "w-1/3 px-6 py-4 text-left text-base font-semibold",
                         isMostPopular
                           ? "bg-light-200 text-light-1000 dark:bg-dark-100 dark:text-dark-1000"
                           : "bg-light-50 text-dark-50 dark:bg-dark-50 dark:text-dark-1000",
                       )}
                     >
-                      <span className="flex items-center">
-                        {plan.name}
-                        {plan.id === "pro" && <span className="ml-1 text-xl">∞</span>}
-                      </span>
+                      <span className="flex items-center">{plan.name}</span>
                     </th>
                   );
                 })}
@@ -490,13 +461,13 @@ const FeatureComparisonTable = ({
                   {section.name && (
                     <tr>
                       {plans.map((plan) => {
-                        const isPro = plan.id === "pro";
+                        const isMostPopular = plan.id === "teams";
                         return (
                           <td
                             key={plan.id}
                             className={twMerge(
                               "border-t px-6 py-3 text-left text-sm font-semibold text-dark-900 dark:text-dark-900",
-                              isPro
+                              isMostPopular
                                 ? "border-light-400 bg-light-200 dark:border-dark-400 dark:bg-dark-100"
                                 : "border-light-300 bg-light-50 dark:border-dark-400 dark:bg-dark-50",
                             )}
@@ -510,13 +481,13 @@ const FeatureComparisonTable = ({
                   {section.features.map((feature) => (
                     <tr key={feature.key}>
                       {plans.map((plan) => {
-                        const isPro = plan.id === "pro";
+                        const isMostPopular = plan.id === "teams";
                         return (
                           <td
                             key={plan.id}
                             className={twMerge(
-                              "w-1/4 border-t px-6 py-3 text-left",
-                              isPro
+                              "w-1/3 border-t px-6 py-3 text-left",
+                              isMostPopular
                                 ? "border-light-400 bg-light-200 dark:border-dark-400 dark:bg-dark-100"
                                 : "border-light-300 dark:border-dark-400",
                             )}

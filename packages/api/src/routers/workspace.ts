@@ -6,7 +6,7 @@ import type { WorkspacePlan } from "@kan/db/schema";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import * as workspaceSlugRepo from "@kan/db/repository/workspaceSlug.repo";
-import { generateAvatarUrl, generateUID } from "@kan/shared/utils";
+import { generateUID } from "@kan/shared/utils";
 
 import {
   workspaceCreateResponseSchema,
@@ -17,6 +17,7 @@ import {
   workspaceWithBoardsSchema,
 } from "../schemas";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { createAvatarUrlResolver } from "../utils/avatarUrls";
 import { assertPermission } from "../utils/permissions";
 
 export const workspaceRouter = createTRPCRouter({
@@ -90,13 +91,14 @@ export const workspaceRouter = createTRPCRouter({
       const shouldShowEmails = isAdmin || result.showEmailsToMembers === true;
 
       // Generate presigned URLs for member avatars
+      const resolveAvatarUrl = createAvatarUrlResolver();
       const membersWithAvatarUrls = await Promise.all(
         result.members.map(async (member) => {
           if (!member.user?.image) {
             return member;
           }
 
-          const avatarUrl = await generateAvatarUrl(member.user.image);
+          const avatarUrl = await resolveAvatarUrl(member.user.image);
           return {
             ...member,
             user: {
@@ -379,11 +381,15 @@ export const workspaceRouter = createTRPCRouter({
           await workspaceSlugRepo.getWorkspaceSlug(ctx.db, input.slug);
 
         const isWorkspaceSlugAvailable =
-          await workspaceRepo.isWorkspaceSlugAvailable(ctx.db, input.slug);
+          await workspaceRepo.isWorkspaceSlugAvailable(
+            ctx.db,
+            input.slug,
+            workspace.id,
+          );
 
         if (
           env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
-          workspace.plan !== "pro" &&
+          workspace.plan === "free" &&
           input.slug !== workspace.publicId
         ) {
           throw new TRPCError({
@@ -493,6 +499,7 @@ export const workspaceRouter = createTRPCRouter({
           .min(3)
           .max(64)
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
+        workspacePublicId: z.string().min(12).optional(),
       }),
     )
     .output(
@@ -517,9 +524,17 @@ export const workspaceRouter = createTRPCRouter({
         slug,
       );
 
+      const currentWorkspace = input.workspacePublicId
+        ? await workspaceRepo.getByPublicId(ctx.db, input.workspacePublicId)
+        : undefined;
+
       // check slug is not taken already
       const isWorkspaceSlugAvailable =
-        await workspaceRepo.isWorkspaceSlugAvailable(ctx.db, slug);
+        await workspaceRepo.isWorkspaceSlugAvailable(
+          ctx.db,
+          slug,
+          currentWorkspace?.id,
+        );
 
       const isAvailable =
         isWorkspaceSlugAvailable && workspaceSlug?.type !== "reserved";

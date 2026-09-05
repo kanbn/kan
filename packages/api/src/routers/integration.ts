@@ -5,16 +5,15 @@ import { z } from "zod";
 import * as integrationsRepo from "@kan/db/repository/integration.repo";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { encryptToken } from "../utils/encryption";
 
 export const urls = {
-  trello: "https://api.trello.com/1",
+  trello: process.env.TRELLO_API_URL ?? "https://api.trello.com/1",
 };
 
 export const apiKeys = {
   trello: process.env.TRELLO_APP_API_KEY,
 };
-
-import { encryptToken } from "../utils/encryption";
 
 export const integrationRouter = createTRPCRouter({
   saveGitHubToken: protectedProcedure
@@ -47,36 +46,36 @@ export const integrationRouter = createTRPCRouter({
   disconnectGitHub: protectedProcedure
     .output(z.object({ success: z.boolean() }))
     .mutation(async ({ ctx }) => {
-    const user = ctx.user;
+      const user = ctx.user;
 
-    if (!user)
-      throw new TRPCError({
-        message: "User not authenticated",
-        code: "UNAUTHORIZED",
-      });
+      if (!user)
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
 
-    await integrationsRepo.deleteProviderForUser(ctx.db, user.id, "github");
-    return { success: true };
-  }),
+      await integrationsRepo.deleteProviderForUser(ctx.db, user.id, "github");
+      return { success: true };
+    }),
 
   getGitHubStatus: protectedProcedure
     .output(z.object({ connected: z.boolean() }))
     .query(async ({ ctx }) => {
-    const user = ctx.user;
+      const user = ctx.user;
 
-    if (!user)
-      throw new TRPCError({
-        message: "User not authenticated",
-        code: "UNAUTHORIZED",
-      });
+      if (!user)
+        throw new TRPCError({
+          message: "User not authenticated",
+          code: "UNAUTHORIZED",
+        });
 
-    const connected = await integrationsRepo.isProviderAvailableForUser(
-      ctx.db,
-      user.id,
-      "github",
-    );
-    return { connected };
-  }),
+      const connected = await integrationsRepo.isProviderAvailableForUser(
+        ctx.db,
+        user.id,
+        "github",
+      );
+      return { connected };
+    }),
 
   providers: protectedProcedure
     .meta({

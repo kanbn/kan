@@ -7,6 +7,7 @@ import {
   ilike,
   inArray,
   isNull,
+  ne,
   or,
   sql,
 } from "drizzle-orm";
@@ -326,24 +327,37 @@ export const getAllOwnedByUserId = async (db: dbClient, userId: string) => {
   });
 };
 
-export const getMemberByPublicId = (db: dbClient, memberPublicId: string) => {
+export const getMemberByPublicId = (
+  db: dbClient,
+  memberPublicId: string,
+  workspaceId: number,
+) => {
   return db.query.workspaceMembers.findFirst({
     columns: {
       id: true,
     },
-    where: eq(workspaceMembers.publicId, memberPublicId),
+    where: and(
+      eq(workspaceMembers.publicId, memberPublicId),
+      eq(workspaceMembers.workspaceId, workspaceId),
+      isNull(workspaceMembers.deletedAt),
+    ),
   });
 };
 
 export const getAllMembersByPublicIds = (
   db: dbClient,
   memberPublicIds: string[],
+  workspaceId: number,
 ) => {
   return db.query.workspaceMembers.findMany({
     columns: {
       id: true,
     },
-    where: inArray(workspaceMembers.publicId, memberPublicIds),
+    where: and(
+      inArray(workspaceMembers.publicId, memberPublicIds),
+      eq(workspaceMembers.workspaceId, workspaceId),
+      isNull(workspaceMembers.deletedAt),
+    ),
   });
 };
 
@@ -356,14 +370,24 @@ export const hardDelete = (db: dbClient, workspacePublicId: string) => {
 export const isWorkspaceSlugAvailable = async (
   db: dbClient,
   workspaceSlug: string,
+  excludeWorkspaceId?: number,
 ) => {
   const result = await db.query.workspaces.findFirst({
     columns: {
       id: true,
     },
     where: and(
-      eq(workspaces.slug, workspaceSlug),
       isNull(workspaces.deletedAt),
+      or(
+        eq(workspaces.slug, workspaceSlug),
+        // A workspace's own publicId is always reserved for itself as a
+        // slug (that's what it falls back to when it has no custom slug),
+        // so no other workspace may claim it as a custom slug either.
+        and(
+          eq(workspaces.publicId, workspaceSlug),
+          excludeWorkspaceId ? ne(workspaces.id, excludeWorkspaceId) : undefined,
+        ),
+      ),
     ),
   });
 

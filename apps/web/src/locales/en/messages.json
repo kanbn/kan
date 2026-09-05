@@ -37,14 +37,15 @@
         62
       ]
     ],
-    "translation": "{0}"
+    "translation": "{0}",
+    "obsolete": true
   },
   "JArWcF": {
     "message": "{0} | {1}",
     "placeholders": {
       "0": [
         "card?.title ?? t`Card`",
-        "isTemplate ? \"Templates\" : \"Boards\""
+        "isTemplate ? t`Templates` : t`Boards`"
       ],
       "1": [
         "board?.name ?? t`Board`",
@@ -55,7 +56,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        57
+        58
       ],
       [
         "src/views/card/index.tsx",
@@ -75,7 +76,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        60
+        63
       ]
     ],
     "translation": "{0} has been added to your favorites."
@@ -91,7 +92,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        61
+        64
       ]
     ],
     "translation": "{0} has been removed from your favorites."
@@ -123,7 +124,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        570
+        571
       ]
     ],
     "translation": "{0} not found"
@@ -170,7 +171,8 @@
         207
       ]
     ],
-    "translation": "/month"
+    "translation": "/month",
+    "obsolete": true
   },
   "be30i9": {
     "message": "$0",
@@ -223,7 +225,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        82
+        91
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -243,7 +245,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        90
+        98
       ]
     ],
     "translation": "10mb file uploads"
@@ -255,15 +257,11 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        66
+        67
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        88
-      ],
-      [
-        "src/views/pricing/components/PricingTiers.tsx",
-        263
+        214
       ]
     ],
     "translation": "14 day free trial · Switch plans or cancel anytime"
@@ -323,7 +321,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        283
+        255
       ]
     ],
     "translation": "Account manager"
@@ -371,7 +369,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        30
+        33
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
@@ -379,7 +377,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        106
+        104
       ]
     ],
     "translation": "Active"
@@ -407,7 +405,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        148
+        149
       ]
     ],
     "translation": "Activity log"
@@ -443,7 +441,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        136
+        138
       ]
     ],
     "translation": "Add a card"
@@ -455,10 +453,22 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        141
+        157
       ]
     ],
     "translation": "Add an item..."
+  },
+  "sFY+gw": {
+    "message": "Add card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/List.tsx",
+        125
+      ]
+    ],
+    "translation": "Add card"
   },
   "Gxxi5J": {
     "message": "Add checklist",
@@ -466,11 +476,27 @@
     "comments": [],
     "origin": [
       [
+        "src/views/card/components/AttachmentUpload.tsx",
+        124
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         123
       ]
     ],
     "translation": "Add checklist"
+  },
+  "oqKXo7": {
+    "message": "Add checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/Checklists.tsx",
+        154
+      ]
+    ],
+    "translation": "Add checklist item"
   },
   "ngBZOd": {
     "message": "Add comment... (type '/' to open commands or '@' to mention)",
@@ -519,11 +545,11 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        114
+        115
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        119
+        120
       ]
     ],
     "translation": "Add label"
@@ -535,7 +561,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        135
+        138
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -551,7 +577,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        137
+        138
       ]
     ],
     "translation": "Add to favorites"
@@ -718,7 +744,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        57
+        60
       ]
     ],
     "translation": "Added to favorites"
@@ -773,19 +799,15 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        264
+        238
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        265
+        239
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        266
-      ],
-      [
-        "src/views/pricing/components/FeatureComparisonTable.tsx",
-        267
+        240
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -801,7 +823,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        103
+        82
       ]
     ],
     "translation": "Advanced admin controls"
@@ -813,7 +835,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        268
+        241
       ]
     ],
     "translation": "Advanced admin roles"
@@ -825,7 +847,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        97
+        76
       ]
     ],
     "translation": "Advanced security, compliance, and dedicated support for large organizations."
@@ -864,7 +886,8 @@
         101
       ]
     ],
-    "translation": "All Pro features +"
+    "translation": "All Pro features +",
+    "obsolete": true
   },
   "UQbwrz": {
     "message": "All systems operational",
@@ -885,7 +908,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        79
+        80
       ]
     ],
     "translation": "All Teams features +"
@@ -973,7 +996,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        68
+        75
       ]
     ],
     "translation": "Annual"
@@ -1001,7 +1024,7 @@
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        237
+        214
       ]
     ],
     "translation": "API"
@@ -1109,7 +1132,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        115
+        118
       ]
     ],
     "translation": "Archive board"
@@ -1121,7 +1144,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        31
+        34
       ]
     ],
     "translation": "Archived"
@@ -1273,7 +1296,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        199
+        180
       ]
     ],
     "translation": "Assignees"
@@ -1325,7 +1348,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        298
+        284
       ]
     ],
     "translation": "Back"
@@ -1366,6 +1389,18 @@
     ],
     "translation": "Basic Roadmap"
   },
+  "/XCg57": {
+    "message": "Best for growing teams that need collaboration",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/pricing/components/PricingTiers.tsx",
+        53
+      ]
+    ],
+    "translation": "Best for growing teams that need collaboration"
+  },
   "Cd4sTD": {
     "message": "Best for individuals and solo creators getting started",
     "placeholders": {},
@@ -1385,7 +1420,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        98
+        77
       ]
     ],
     "translation": "Best for large organizations with advanced needs"
@@ -1400,7 +1435,8 @@
         53
       ]
     ],
-    "translation": "Best for small and growing teams that need collaboration"
+    "translation": "Best for small and growing teams that need collaboration",
+    "obsolete": true
   },
   "zt/6cS": {
     "message": "Best for small teams who want to collaborate and move faster together.",
@@ -1412,7 +1448,8 @@
         91
       ]
     ],
-    "translation": "Best for small teams who want to collaborate and move faster together."
+    "translation": "Best for small teams who want to collaborate and move faster together.",
+    "obsolete": true
   },
   "qaS+1/": {
     "message": "Best for teams that want to scale without limits",
@@ -1424,7 +1461,20 @@
         76
       ]
     ],
-    "translation": "Best for teams that want to scale without limits"
+    "translation": "Best for teams that want to scale without limits",
+    "obsolete": true
+  },
+  "jewQ8W": {
+    "message": "Best for teams who want to collaborate and move faster together.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        98
+      ]
+    ],
+    "translation": "Best for teams who want to collaborate and move faster together."
   },
   "ARvBT/": {
     "message": "billed annually",
@@ -1524,7 +1574,8 @@
         85
       ]
     ],
-    "translation": "Board analytics"
+    "translation": "Board analytics",
+    "obsolete": true
   },
   "i0ZMQl": {
     "message": "Board archived",
@@ -1533,7 +1584,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        47
+        49
       ]
     ],
     "translation": "Board archived"
@@ -1549,6 +1600,18 @@
       ]
     ],
     "translation": "Board moved"
+  },
+  "qVcPNk": {
+    "message": "Board name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/index.tsx",
+        561
+      ]
+    ],
+    "translation": "Board name"
   },
   "wewm3j": {
     "message": "Board name cannot exceed 100 characters",
@@ -1586,6 +1649,18 @@
     ],
     "translation": "Board not found"
   },
+  "Mu1Zy/": {
+    "message": "Board options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        167
+      ]
+    ],
+    "translation": "Board options"
+  },
   "XNxYxq": {
     "message": "Board templates",
     "placeholders": {},
@@ -1593,7 +1668,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        116
+        121
       ]
     ],
     "translation": "Board templates"
@@ -1605,7 +1680,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        47
+        50
       ]
     ],
     "translation": "Board unarchived"
@@ -1673,7 +1748,7 @@
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        132
+        135
       ]
     ],
     "translation": "Board visibility"
@@ -1700,8 +1775,16 @@
         98
       ],
       [
+        "src/views/boards/index.tsx",
+        58
+      ],
+      [
+        "src/views/boards/index.tsx",
+        63
+      ],
+      [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        73
+        83
       ]
     ],
     "translation": "Boards"
@@ -2185,7 +2268,7 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        240
+        246
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -2210,10 +2293,6 @@
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
         98
-      ],
-      [
-        "src/views/settings/components/UpgradeToProConfirmation.tsx",
-        108
       ]
     ],
     "translation": "Cancel"
@@ -2285,6 +2364,18 @@
       ]
     ],
     "translation": "Card not found"
+  },
+  "c44pvY": {
+    "message": "Card options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/Dropdown.tsx",
+        167
+      ]
+    ],
+    "translation": "Card options"
   },
   "ZH7TVS": {
     "message": "Card title",
@@ -2425,7 +2516,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        119
+        130
       ]
     ],
     "translation": "Checklist name"
@@ -2437,7 +2528,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        108
+        114
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
@@ -2453,7 +2544,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        153
+        157
       ]
     ],
     "translation": "Choose a plan"
@@ -2601,7 +2692,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        309
+        279
       ]
     ],
     "translation": "Collaboration"
@@ -2614,13 +2705,21 @@
       [
         "src/views/home/components/Features.tsx",
         67
-      ],
-      [
-        "src/views/settings/components/UpgradeToProConfirmation.tsx",
-        88
       ]
     ],
     "translation": "Coming soon"
+  },
+  "dYbQ1T": {
+    "message": "Comment options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/Comment.tsx",
+        161
+      ]
+    ],
+    "translation": "Comment options"
   },
   "VbyRUy": {
     "message": "Comments",
@@ -2712,7 +2811,8 @@
         82
       ]
     ],
-    "translation": "Configurable user roles and permissions"
+    "translation": "Configurable user roles and permissions",
+    "obsolete": true
   },
   "t0dTPm": {
     "message": "Configure webhooks to receive notifications when cards are created, updated, moved, or deleted.",
@@ -2858,7 +2958,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        95
+        74
       ]
     ],
     "translation": "Contact Sales"
@@ -2874,11 +2974,11 @@
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        96
+        75
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        96
+        75
       ]
     ],
     "translation": "Contact us"
@@ -2902,11 +3002,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        246
+        252
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        315
+        301
       ]
     ],
     "translation": "Continue"
@@ -3054,7 +3154,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        305
+        275
       ]
     ],
     "translation": "Core features"
@@ -3082,7 +3182,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        213
+        208
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -3090,7 +3190,7 @@
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        141
+        156
       ]
     ],
     "translation": "Create another"
@@ -3126,7 +3226,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        135
+        146
       ]
     ],
     "translation": "Create checklist"
@@ -3150,7 +3250,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        236
+        231
       ]
     ],
     "translation": "Create label"
@@ -3162,7 +3262,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        153
+        168
       ]
     ],
     "translation": "Create list"
@@ -3182,7 +3282,7 @@
       ],
       [
         "src/views/boards/index.tsx",
-        45
+        46
       ]
     ],
     "translation": "Create new {0}"
@@ -3226,7 +3326,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        684
+        685
       ]
     ],
     "translation": "Create new list"
@@ -3266,7 +3366,7 @@
       ],
       [
         "src/components/WorkspaceMenu.tsx",
-        176
+        177
       ]
     ],
     "translation": "Create workspace"
@@ -3327,6 +3427,18 @@
     ],
     "translation": "Crop your avatar"
   },
+  "MtNNDo": {
+    "message": "Current list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ListSelector.tsx",
+        85
+      ]
+    ],
+    "translation": "Current list"
+  },
   "D3C4Yx": {
     "message": "Current password is required",
     "placeholders": {},
@@ -3365,7 +3477,8 @@
         83
       ]
     ],
-    "translation": "Custom branding"
+    "translation": "Custom branding",
+    "obsolete": true
   },
   "GAD3Dx": {
     "message": "Custom domain",
@@ -3398,7 +3511,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        105
+        84
       ]
     ],
     "translation": "Custom SLA"
@@ -3423,11 +3536,11 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        100
+        106
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        101
+        107
       ]
     ],
     "translation": "Custom username"
@@ -3442,7 +3555,20 @@
         241
       ]
     ],
-    "translation": "Custom usernames require upgrading to a Pro plan"
+    "translation": "Custom usernames require upgrading to a Pro plan",
+    "obsolete": true
+  },
+  "5Y8Qur": {
+    "message": "Custom usernames require upgrading to a Team plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/workspace-details/index.tsx",
+        238
+      ]
+    ],
+    "translation": "Custom usernames require upgrading to a Team plan"
   },
   "j9IZZ0": {
     "message": "Custom workspace URL",
@@ -3454,7 +3580,8 @@
         78
       ]
     ],
-    "translation": "Custom workspace URL"
+    "translation": "Custom workspace URL",
+    "obsolete": true
   },
   "OwneeH": {
     "message": "Custom workspace username",
@@ -3463,7 +3590,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        81
+        58
       ]
     ],
     "translation": "Custom workspace username"
@@ -3511,7 +3638,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        104
+        83
       ]
     ],
     "translation": "Dedicated account manager"
@@ -3523,11 +3650,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        98
-      ],
-      [
-        "src/views/pricing/components/FeatureComparisonTable.tsx",
-        99
+        105
       ]
     ],
     "translation": "Default username"
@@ -3543,7 +3666,7 @@
       ],
       [
         "src/components/LabelForm.tsx",
-        228
+        223
       ],
       [
         "src/components/YouTubeEmbed/YouTubeDropdown.tsx",
@@ -3571,7 +3694,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        140
+        136
       ]
     ],
     "translation": "Delete"
@@ -3603,7 +3726,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        148
+        149
       ]
     ],
     "translation": "Delete board"
@@ -3624,6 +3747,18 @@
     ],
     "translation": "Delete card"
   },
+  "rmAXC2": {
+    "message": "Delete checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/Checklists.tsx",
+        145
+      ]
+    ],
+    "translation": "Delete checklist"
+  },
   "njJFtc": {
     "message": "Delete comment",
     "placeholders": {},
@@ -3643,7 +3778,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        147
+        149
       ]
     ],
     "translation": "Delete list"
@@ -3655,7 +3790,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        148
+        149
       ]
     ],
     "translation": "Delete template"
@@ -3816,6 +3951,10 @@
       [
         "src/views/settings/AccountSettings.tsx",
         36
+      ],
+      [
+        "src/views/settings/components/UpdateDisplayNameForm.tsx",
+        71
       ]
     ],
     "translation": "Display name"
@@ -4128,7 +4267,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        132
+        128
       ]
     ],
     "translation": "Edit"
@@ -4140,7 +4279,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        106
+        109
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
@@ -4168,7 +4307,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        119
+        114
       ]
     ],
     "translation": "Edit label"
@@ -4272,7 +4411,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        191
+        173
       ]
     ],
     "translation": "Email notifications"
@@ -4284,7 +4423,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        60
+        61
       ]
     ],
     "translation": "Email notifications for mentions"
@@ -4320,7 +4459,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        181
+        178
       ]
     ],
     "translation": "Engineering"
@@ -4448,11 +4587,11 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        334
+        303
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        92
+        71
       ]
     ],
     "translation": "Enterprise"
@@ -4671,7 +4810,8 @@
         43
       ]
     ],
-    "translation": "Error upgrading subscription"
+    "translation": "Error upgrading subscription",
+    "obsolete": true
   },
   "lsgnzd": {
     "message": "Error upgrading to Pro",
@@ -5017,7 +5157,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        89
+        97
       ]
     ],
     "translation": "File uploads"
@@ -5077,15 +5217,15 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        82
+        89
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        83
+        90
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        331
+        301
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -5137,7 +5277,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        311
+        312
       ]
     ],
     "translation": "Free Plan"
@@ -5161,15 +5301,11 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        239
+        216
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        240
-      ],
-      [
-        "src/views/pricing/components/FeatureComparisonTable.tsx",
-        241
+        217
       ]
     ],
     "translation": "Full API access"
@@ -5234,10 +5370,6 @@
       [
         "src/views/pricing/components/PricingTiers.tsx",
         50
-      ],
-      [
-        "src/views/pricing/components/PricingTiers.tsx",
-        73
       ]
     ],
     "translation": "Get started"
@@ -5281,7 +5413,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        669
+        670
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -5473,7 +5605,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        84
+        91
       ]
     ],
     "translation": "Good for individuals starting out who just need the essentials."
@@ -5485,15 +5617,11 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        257
+        232
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        258
-      ],
-      [
-        "src/views/pricing/components/FeatureComparisonTable.tsx",
-        259
+        233
       ]
     ],
     "translation": "Google SSO"
@@ -5505,7 +5633,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        260
+        234
       ]
     ],
     "translation": "Google SSO + SAML"
@@ -5709,7 +5837,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        82
+        83
       ]
     ],
     "translation": "Import"
@@ -5801,7 +5929,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        313
+        283
       ]
     ],
     "translation": "Imports"
@@ -5853,7 +5981,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        106
+        104
       ]
     ],
     "translation": "Inactive"
@@ -5893,7 +6021,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        140
+        142
       ]
     ],
     "translation": "Intelligent search"
@@ -5941,7 +6069,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        330
+        331
       ]
     ],
     "translation": "Invite"
@@ -5977,11 +6105,11 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        207
+        187
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        58
+        59
       ]
     ],
     "translation": "Invite links"
@@ -6024,7 +6152,20 @@
         329
       ]
     ],
-    "translation": "Inviting members requires a Team or Pro plan. You'll be redirected to upgrade your workspace."
+    "translation": "Inviting members requires a Team or Pro plan. You'll be redirected to upgrade your workspace.",
+    "obsolete": true
+  },
+  "7tEnCk": {
+    "message": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/components/InviteMemberForm.tsx",
+        329
+      ]
+    ],
+    "translation": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace."
   },
   "qPP4lD": {
     "message": "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace.",
@@ -6149,6 +6290,10 @@
         524
       ],
       [
+        "src/views/card/components/LabelSelector.tsx",
+        102
+      ],
+      [
         "src/views/card/index.tsx",
         133
       ]
@@ -6162,7 +6307,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        124
+        128
       ]
     ],
     "translation": "Labels & filters"
@@ -6211,13 +6356,10 @@
       [
         "src/views/pricing/components/PricingTiers.tsx",
         159
-      ],
-      [
-        "src/views/settings/components/UpgradeToProConfirmation.tsx",
-        71
       ]
     ],
-    "translation": "Launch offer"
+    "translation": "Launch offer",
+    "obsolete": true
   },
   "EEHmPC": {
     "message": "Launch offer: Get unlimited members with Pro",
@@ -6335,7 +6477,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        238
+        215
       ]
     ],
     "translation": "Limited API access"
@@ -6390,11 +6532,27 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/List.tsx",
+        108
+      ],
+      [
         "src/views/board/components/NewListForm.tsx",
-        129
+        144
       ]
     ],
     "translation": "List name"
+  },
+  "jf++dj": {
+    "message": "List options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/List.tsx",
+        165
+      ]
+    ],
+    "translation": "List options"
   },
   "h16FyT": {
     "message": "Lists",
@@ -6523,7 +6681,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        95
+        98
       ]
     ],
     "translation": "Make template"
@@ -6579,7 +6737,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        181
+        178
       ]
     ],
     "translation": "Marketing"
@@ -6640,6 +6798,18 @@
     ],
     "translation": "Member"
   },
+  "fTHH1x": {
+    "message": "Member options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/index.tsx",
+        262
+      ]
+    ],
+    "translation": "Member options"
+  },
   "GnG6Oy": {
     "message": "members",
     "placeholders": {},
@@ -6670,16 +6840,20 @@
         482
       ],
       [
+        "src/views/card/components/MemberSelector.tsx",
+        116
+      ],
+      [
         "src/views/card/index.tsx",
         143
       ],
       [
         "src/views/members/index.tsx",
-        283
+        284
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        81
+        90
       ]
     ],
     "translation": "Members"
@@ -6695,7 +6869,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        278
+        279
       ]
     ],
     "translation": "Members | {0}"
@@ -6707,7 +6881,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        183
+        166
       ]
     ],
     "translation": "Mentions"
@@ -6731,7 +6905,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        67
+        74
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -6811,7 +6985,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        126
+        129
       ]
     ],
     "translation": "Move to workspace"
@@ -6866,7 +7040,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        135
+        130
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
@@ -6918,7 +7092,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        104
+        105
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -6974,7 +7148,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        103
+        114
       ]
     ],
     "translation": "New checklist"
@@ -6998,7 +7172,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        119
+        114
       ]
     ],
     "translation": "New label"
@@ -7010,11 +7184,11 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        113
+        128
       ],
       [
         "src/views/board/index.tsx",
-        633
+        634
       ]
     ],
     "translation": "New list"
@@ -7234,7 +7408,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        665
+        666
       ]
     ],
     "translation": "No lists"
@@ -7246,7 +7420,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        670
+        671
       ]
     ],
     "translation": "No lists have been created yet"
@@ -7322,7 +7496,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        245
+        221
       ]
     ],
     "translation": "On-premise"
@@ -7334,7 +7508,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        106
+        85
       ]
     ],
     "translation": "On-premise deployment option"
@@ -7406,7 +7580,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        229
+        207
       ]
     ],
     "translation": "Open source"
@@ -7630,7 +7804,7 @@
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        120
+        99
       ]
     ],
     "translation": "Payment frequency"
@@ -7678,7 +7852,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        83
+        92
       ]
     ],
     "translation": "Per-seat pricing"
@@ -7766,7 +7940,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        156
+        162
       ]
     ],
     "translation": "Pick a plan to get started. All paid plans include a 14-day free trial."
@@ -7818,7 +7992,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        317
+        287
       ]
     ],
     "translation": "Platform"
@@ -7930,7 +8104,7 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        69
+        72
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -7938,7 +8112,7 @@
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        79
+        94
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
@@ -8026,11 +8200,11 @@
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        71
+        82
       ],
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        90
+        106
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
@@ -8070,11 +8244,11 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        121
+        119
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        170
+        167
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -8103,10 +8277,6 @@
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
         76
-      ],
-      [
-        "src/views/settings/components/UpgradeToProConfirmation.tsx",
-        44
       ],
       [
         "src/views/settings/PermissionsSettings.tsx",
@@ -8222,7 +8392,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        275
+        248
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -8230,11 +8400,7 @@
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        61
-      ],
-      [
-        "src/views/settings/components/UpgradeToProConfirmation.tsx",
-        95
+        62
       ]
     ],
     "translation": "Priority email support"
@@ -8281,7 +8447,8 @@
         70
       ]
     ],
-    "translation": "Pro"
+    "translation": "Pro",
+    "obsolete": true
   },
   "oyRjD/": {
     "message": "Pro Plan",
@@ -8294,7 +8461,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        308
+        309
       ]
     ],
     "translation": "Pro Plan"
@@ -8462,7 +8629,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        136
+        138
       ]
     ],
     "translation": "Remove from favorites"
@@ -8557,7 +8724,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        58
+        61
       ]
     ],
     "translation": "Removed from favorites"
@@ -8733,7 +8900,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        181
+        178
       ]
     ],
     "translation": "Roadmap"
@@ -8745,7 +8912,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        352
+        353
       ]
     ],
     "translation": "Role"
@@ -8772,7 +8939,8 @@
         164
       ]
     ],
-    "translation": "Roles & permissions"
+    "translation": "Roles & permissions",
+    "obsolete": true
   },
   "vAR/I8": {
     "message": "Run on your own infrastructure",
@@ -8793,7 +8961,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        102
+        81
       ]
     ],
     "translation": "SAML SSO"
@@ -8866,6 +9034,18 @@
     ],
     "translation": "Screening"
   },
+  "A1taO8": {
+    "message": "Search",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/WorkspaceMenu.tsx",
+        102
+      ]
+    ],
+    "translation": "Search"
+  },
   "SkCNhl": {
     "message": "Search boards and cards...",
     "placeholders": {},
@@ -8901,7 +9081,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        319
+        320
       ]
     ],
     "translation": "seats"
@@ -8937,7 +9117,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        321
+        291
       ]
     ],
     "translation": "Security"
@@ -9165,7 +9345,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        199
+        196
       ]
     ],
     "translation": "Set up your workspace"
@@ -9341,11 +9521,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        319
+        325
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        386
+        372
       ]
     ],
     "translation": "Sign out"
@@ -9449,7 +9629,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        291
+        262
       ]
     ],
     "translation": "SLA"
@@ -9497,7 +9677,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        81
+        88
       ]
     ],
     "translation": "Solo"
@@ -9545,7 +9725,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        256
+        231
       ]
     ],
     "translation": "SSO"
@@ -9572,7 +9752,8 @@
         113
       ]
     ],
-    "translation": "Start 14 day free trial"
+    "translation": "Start 14 day free trial",
+    "obsolete": true
   },
   "4+JaWo": {
     "message": "Start free trial",
@@ -9606,6 +9787,18 @@
     ],
     "translation": "Start free. Upgrade as your team grows. No hidden fees, no contracts."
   },
+  "lUlbS2": {
+    "message": "Start your 14-day free trial, cancel anytime.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        161
+      ]
+    ],
+    "translation": "Start your 14-day free trial, cancel anytime."
+  },
   "uAQUqI": {
     "message": "Status",
     "placeholders": {},
@@ -9629,6 +9822,18 @@
       ]
     ],
     "translation": "Submit"
+  },
+  "DJUhvh": {
+    "message": "Submit comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/NewCommentForm.tsx",
+        92
+      ]
+    ],
+    "translation": "Submit comment"
   },
   "WYDptz": {
     "message": "Subscription Required",
@@ -9680,7 +9885,8 @@
         59
       ]
     ],
-    "translation": "Supercharge your workspace for just $29/month. Here's what you'll get:"
+    "translation": "Supercharge your workspace for just $29/month. Here's what you'll get:",
+    "obsolete": true
   },
   "XYLcNv": {
     "message": "Support",
@@ -9693,7 +9899,7 @@
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        325
+        295
       ]
     ],
     "translation": "Support"
@@ -9729,7 +9935,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        88
+        95
       ]
     ],
     "translation": "Team"
@@ -9749,7 +9955,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        310
+        311
       ]
     ],
     "translation": "Team Plan"
@@ -9761,7 +9967,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        332
+        302
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -9785,7 +9991,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        579
+        580
       ]
     ],
     "translation": "Template"
@@ -9848,6 +10054,14 @@
         110
       ],
       [
+        "src/views/boards/index.tsx",
+        58
+      ],
+      [
+        "src/views/boards/index.tsx",
+        63
+      ],
+      [
         "src/views/home/components/Features.tsx",
         115
       ]
@@ -9873,7 +10087,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        136
+        132
       ]
     ],
     "translation": "Test"
@@ -9905,7 +10119,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        174
+        171
       ]
     ],
     "translation": "Test sent"
@@ -9921,7 +10135,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        174
+        172
       ]
     ],
     "translation": "Test webhook sent successfully!"
@@ -9969,7 +10183,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        49
+        52
       ]
     ],
     "translation": "The board has been archived."
@@ -9997,7 +10211,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        50
+        53
       ]
     ],
     "translation": "The board has been unarchived."
@@ -10244,7 +10458,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        84
+        82
       ]
     ],
     "translation": "This URL has already been taken"
@@ -10256,7 +10470,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        86
+        84
       ]
     ],
     "translation": "This URL is reserved"
@@ -10340,7 +10554,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        125
+        129
       ]
     ],
     "translation": "This workspace username has already been taken"
@@ -10440,7 +10654,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        218
+        197
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
@@ -10504,7 +10718,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        89
+        105
       ]
     ],
     "translation": "Unable to add checklist item"
@@ -10600,7 +10814,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        70
+        81
       ]
     ],
     "translation": "Unable to create checklist"
@@ -10612,7 +10826,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        78
+        93
       ]
     ],
     "translation": "Unable to create list"
@@ -10656,7 +10870,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        120
+        118
       ]
     ],
     "translation": "Unable to create workspace"
@@ -10828,7 +11042,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        169
+        166
       ]
     ],
     "translation": "Unable to start checkout"
@@ -10856,7 +11070,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        68
+        71
       ]
     ],
     "translation": "Unable to update board"
@@ -11036,7 +11250,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        115
+        118
       ]
     ],
     "translation": "Unarchive board"
@@ -11100,19 +11314,15 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        74
+        84
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        75
+        85
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        76
-      ],
-      [
-        "src/views/pricing/components/FeatureComparisonTable.tsx",
-        77
+        86
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -11172,19 +11382,15 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        91
+        99
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        92
-      ],
-      [
-        "src/views/pricing/components/FeatureComparisonTable.tsx",
-        93
+        100
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        59
+        60
       ]
     ],
     "translation": "Unlimited file uploads"
@@ -11220,19 +11426,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        84
-      ],
-      [
-        "src/views/pricing/components/FeatureComparisonTable.tsx",
-        85
-      ],
-      [
-        "src/views/pricing/components/PricingTiers.tsx",
-        80
-      ],
-      [
-        "src/views/settings/components/UpgradeToProConfirmation.tsx",
-        68
+        93
       ]
     ],
     "translation": "Unlimited members"
@@ -11247,7 +11441,8 @@
         99
       ]
     ],
-    "translation": "Unlimited members and a custom workspace username for teams ready to scale."
+    "translation": "Unlimited members and a custom workspace username for teams ready to scale.",
+    "obsolete": true
   },
   "i5yNAO": {
     "message": "Unlimited seats",
@@ -11256,7 +11451,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        318
+        319
       ]
     ],
     "translation": "Unlimited seats"
@@ -11271,7 +11466,8 @@
         75
       ]
     ],
-    "translation": "Unlimited seats and advanced features for growing teams."
+    "translation": "Unlimited seats and advanced features for growing teams.",
+    "obsolete": true
   },
   "SMaFdc": {
     "message": "Unsubscribe",
@@ -11301,7 +11497,7 @@
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        80
+        84
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
@@ -11309,11 +11505,11 @@
       ],
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
-        89
+        90
       ],
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        157
+        161
       ]
     ],
     "translation": "Update"
@@ -11325,7 +11521,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        236
+        231
       ]
     ],
     "translation": "Update label"
@@ -11401,11 +11597,11 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        295
+        296
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        245
+        251
       ]
     ],
     "translation": "Upgrade"
@@ -11420,7 +11616,8 @@
         55
       ]
     ],
-    "translation": "Upgrade to Pro"
+    "translation": "Upgrade to Pro",
+    "obsolete": true
   },
   "cWtfn1": {
     "message": "Upgrade to Pro ($29/month)",
@@ -11432,7 +11629,20 @@
         265
       ]
     ],
-    "translation": "Upgrade to Pro ($29/month)"
+    "translation": "Upgrade to Pro ($29/month)",
+    "obsolete": true
+  },
+  "21QsyA": {
+    "message": "Upgrade your plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/onboarding/select-plan/index.tsx",
+        157
+      ]
+    ],
+    "translation": "Upgrade your plan"
   },
   "b3Thhd": {
     "message": "Upload failed",
@@ -11569,7 +11779,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        346
+        347
       ]
     ],
     "translation": "User"
@@ -11807,6 +12017,18 @@
     ],
     "translation": "Webhook name is required"
   },
+  "N1eQmK": {
+    "message": "Webhook options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/settings/components/WebhookList.tsx",
+        125
+      ]
+    ],
+    "translation": "Webhook options"
+  },
   "8iP9oQ": {
     "message": "Webhook test failed",
     "placeholders": {},
@@ -11962,11 +12184,11 @@
       ],
       [
         "src/views/boards/index.tsx",
-        57
+        58
       ],
       [
         "src/views/members/index.tsx",
-        278
+        279
       ],
       [
         "src/views/public/board/index.tsx",
@@ -12011,7 +12233,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        275
+        261
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
@@ -12087,7 +12309,11 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        208
+        205
+      ],
+      [
+        "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
+        76
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
@@ -12178,6 +12404,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
+        118
+      ],
+      [
         "src/views/settings/WorkspaceSettings.tsx",
         45
       ]
@@ -12191,7 +12421,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        97
+        104
       ]
     ],
     "translation": "Workspace username"
@@ -12267,7 +12497,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        202
+        199
       ]
     ],
     "translation": "You can always change these later in settings."
@@ -12282,7 +12512,20 @@
         67
       ]
     ],
-    "translation": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!"
+    "translation": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
+    "obsolete": true
+  },
+  "oRGf3Q": {
+    "message": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and upgrading to a Team workspace subscription. All subscriptions help fund the development of the project!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Faqs.tsx",
+        67
+      ]
+    ],
+    "translation": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and upgrading to a Team workspace subscription. All subscriptions help fund the development of the project!"
   },
   "kSxwQL": {
     "message": "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace.",
@@ -12327,7 +12570,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        117
+        118
       ],
       [
         "src/views/board/components/UpdateBoardSlugButton.tsx",
@@ -12339,11 +12582,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        617
+        618
       ],
       [
         "src/views/board/index.tsx",
-        675
+        676
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -12351,11 +12594,11 @@
       ],
       [
         "src/views/boards/index.tsx",
-        68
+        69
       ],
       [
         "src/views/boards/index.tsx",
-        89
+        90
       ]
     ],
     "translation": "You don't have permission"
@@ -12505,7 +12748,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        264
+        270
       ]
     ],
     "translation": "Your avatar"
@@ -12698,7 +12941,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        346
+        332
       ]
     ],
     "translation": "Your workspace"
@@ -12710,7 +12953,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        349
+        335
       ]
     ],
     "translation": "Your workspace description"
@@ -12770,11 +13013,11 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        218
+        215
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        219
+        216
       ]
     ],
     "translation": "your-workspace"

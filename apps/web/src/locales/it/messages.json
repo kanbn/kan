@@ -20,20 +20,18 @@
     },
     "comments": [],
     "origin": [["src/views/boards/index.tsx", 62]],
-    "translation": "{0}"
+    "translation": "{0}",
+    "obsolete": true
   },
   "JArWcF": {
     "message": "{0} | {1}",
     "placeholders": {
-      "0": [
-        "card?.title ?? t`Card`",
-        "isTemplate ? \"Templates\" : \"Boards\""
-      ],
+      "0": ["card?.title ?? t`Card`", "isTemplate ? t`Templates` : t`Boards`"],
       "1": ["board?.name ?? t`Board`", "workspace.name ?? t`Workspace`"]
     },
     "comments": [],
     "origin": [
-      ["src/views/boards/index.tsx", 57],
+      ["src/views/boards/index.tsx", 58],
       ["src/views/card/index.tsx", 321]
     ],
     "translation": "{0} | {1}"
@@ -44,7 +42,7 @@
       "0": ["boardName ?? \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 60]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 63]],
     "translation": "{0} è stato aggiunto ai tuoi preferiti."
   },
   "bDI6VI": {
@@ -53,7 +51,7 @@
       "0": ["boardName ?? \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 61]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 64]],
     "translation": "{0} è stato rimosso dai tuoi preferiti."
   },
   "CJukzS": {
@@ -71,7 +69,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 570]],
+    "origin": [["src/views/board/index.tsx", 571]],
     "translation": "{0} non trovato"
   },
   "0xWkkH": {
@@ -97,7 +95,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 207]],
-    "translation": "/mese"
+    "translation": "/mese",
+    "obsolete": true
   },
   "be30i9": {
     "message": "$0",
@@ -131,7 +130,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 82],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 91],
       ["src/views/pricing/components/Pricing.tsx", 36],
       ["src/views/pricing/components/PricingTiers.tsx", 35]
     ],
@@ -141,7 +140,7 @@
     "message": "10mb file uploads",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 90]],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 98]],
     "translation": "Caricamento file da 10 MB"
   },
   "gkxGkF": {
@@ -149,9 +148,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/PricingTiers.tsx", 66],
-      ["src/views/pricing/components/PricingTiers.tsx", 88],
-      ["src/views/pricing/components/PricingTiers.tsx", 263]
+      ["src/views/pricing/components/PricingTiers.tsx", 67],
+      ["src/views/pricing/components/PricingTiers.tsx", 214]
     ],
     "translation": "Prova gratuita di 14 giorni · Cambia piano o annulla in qualsiasi momento"
   },
@@ -190,7 +188,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 283]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 255]
     ],
     "translation": "Account manager"
   },
@@ -220,9 +218,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/index.tsx", 30],
+      ["src/views/boards/index.tsx", 33],
       ["src/views/settings/components/NewWebhookModal.tsx", 321],
-      ["src/views/settings/components/WebhookList.tsx", 106]
+      ["src/views/settings/components/WebhookList.tsx", 104]
     ],
     "translation": "Attivo"
   },
@@ -241,7 +239,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 148]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 149]
     ],
     "translation": "Registro attività"
   },
@@ -263,22 +261,39 @@
     "message": "Add a card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/List.tsx", 136]],
+    "origin": [["src/views/board/components/List.tsx", 138]],
     "translation": "Aggiungi una card"
   },
   "qtE5nt": {
     "message": "Add an item...",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 141]],
+    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 157]],
     "translation": "Aggiungi un elemento..."
+  },
+  "sFY+gw": {
+    "message": "Add card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/List.tsx", 125]],
+    "translation": "Aggiungi scheda"
   },
   "Gxxi5J": {
     "message": "Add checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 123]],
+    "origin": [
+      ["src/views/card/components/AttachmentUpload.tsx", 124],
+      ["src/views/card/components/Dropdown.tsx", 123]
+    ],
     "translation": "Aggiungi checklist"
+  },
+  "oqKXo7": {
+    "message": "Add checklist item",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Checklists.tsx", 154]],
+    "translation": "Aggiungi voce alla checklist"
   },
   "ngBZOd": {
     "message": "Add comment... (type '/' to open commands or '@' to mention)",
@@ -309,8 +324,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/LabelSelector.tsx", 114],
-      ["src/views/card/components/LabelSelector.tsx", 119]
+      ["src/views/card/components/LabelSelector.tsx", 115],
+      ["src/views/card/components/LabelSelector.tsx", 120]
     ],
     "translation": "Aggiungi etichetta"
   },
@@ -319,7 +334,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/MemberSelector.tsx", 135],
+      ["src/views/card/components/MemberSelector.tsx", 138],
       ["src/views/members/components/InviteMemberForm.tsx", 243]
     ],
     "translation": "Aggiungi membro"
@@ -328,7 +343,7 @@
     "message": "Add to favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 137]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 138]],
     "translation": "Aggiungi ai preferiti"
   },
   "cWXW+7": {
@@ -423,7 +438,7 @@
     "message": "Added to favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 57]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 60]],
     "translation": "Aggiunto ai preferiti"
   },
   "14Xi3Z": {
@@ -455,10 +470,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 264],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 265],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 266],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 267],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 238],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 239],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 240],
       ["src/views/pricing/components/Pricing.tsx", 55]
     ],
     "translation": "Ruoli admin"
@@ -467,7 +481,7 @@
     "message": "Advanced admin controls",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 103]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 82]],
     "translation": "Controlli admin avanzati"
   },
   "/jd3aj": {
@@ -475,7 +489,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 268]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 241]
     ],
     "translation": "Ruoli admin avanzati"
   },
@@ -483,7 +497,7 @@
     "message": "Advanced security, compliance, and dedicated support for large organizations.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 97]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 76]],
     "translation": "Sicurezza avanzata, conformità e supporto dedicato per grandi organizzazioni."
   },
   "h2ztFt": {
@@ -505,7 +519,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 101]],
-    "translation": "Tutte le funzionalità Pro +"
+    "translation": "Tutte le funzionalità Pro +",
+    "obsolete": true
   },
   "UQbwrz": {
     "message": "All systems operational",
@@ -518,7 +533,7 @@
     "message": "All Teams features +",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 79]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 80]],
     "translation": "Tutte le funzionalità Teams +"
   },
   "Z3krJD": {
@@ -577,7 +592,7 @@
     "message": "Annual",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 68]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 75]],
     "translation": "Annuale"
   },
   "3bqt9U": {
@@ -593,7 +608,7 @@
     "comments": [],
     "origin": [
       ["src/components/SettingsLayout.tsx", 65],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 237]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 214]
     ],
     "translation": "API"
   },
@@ -657,14 +672,14 @@
     "message": "Archive board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 115]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 118]],
     "translation": "Archivia bacheca"
   },
   "TdfEV7": {
     "message": "Archived",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/index.tsx", 31]],
+    "origin": [["src/views/boards/index.tsx", 34]],
     "translation": "Archiviato"
   },
   "lo8xBK": {
@@ -762,7 +777,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 199]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 180]
     ],
     "translation": "Assegnatari"
   },
@@ -794,7 +809,7 @@
     "message": "Back",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 298]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 284]],
     "translation": "Indietro"
   },
   "KNKCTb": {
@@ -818,6 +833,13 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 28]],
     "translation": "Roadmap base"
   },
+  "/XCg57": {
+    "message": "Best for growing teams that need collaboration",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 53]],
+    "translation": "Ideale per i team in crescita che hanno bisogno di collaborazione"
+  },
   "Cd4sTD": {
     "message": "Best for individuals and solo creators getting started",
     "placeholders": {},
@@ -829,7 +851,7 @@
     "message": "Best for large organizations with advanced needs",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 98]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 77]],
     "translation": "Ideale per grandi organizzazioni con esigenze avanzate"
   },
   "UoSI+i": {
@@ -837,21 +859,31 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 53]],
-    "translation": "Ideale per piccoli team in crescita che necessitano di collaborazione"
+    "translation": "Ideale per piccoli team in crescita che necessitano di collaborazione",
+    "obsolete": true
   },
   "zt/6cS": {
     "message": "Best for small teams who want to collaborate and move faster together.",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/onboarding/select-plan/index.tsx", 91]],
-    "translation": "Ideale per piccoli team che vogliono collaborare e muoversi più velocemente insieme."
+    "translation": "Ideale per piccoli team che vogliono collaborare e muoversi più velocemente insieme.",
+    "obsolete": true
   },
   "qaS+1/": {
     "message": "Best for teams that want to scale without limits",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 76]],
-    "translation": "Ideale per team che vogliono scalare senza limiti"
+    "translation": "Ideale per team che vogliono scalare senza limiti",
+    "obsolete": true
+  },
+  "jewQ8W": {
+    "message": "Best for teams who want to collaborate and move faster together.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 98]],
+    "translation": "Ideale per i team che vogliono collaborare e muoversi più velocemente insieme."
   },
   "ARvBT/": {
     "message": "billed annually",
@@ -910,13 +942,14 @@
     "origin": [
       ["src/views/settings/components/UpgradeToProConfirmation.tsx", 85]
     ],
-    "translation": "Analisi della board"
+    "translation": "Analisi della board",
+    "obsolete": true
   },
   "i0ZMQl": {
     "message": "Board archived",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 47]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 49]],
     "translation": "Bacheca archiviata"
   },
   "wE3hGS": {
@@ -925,6 +958,13 @@
     "comments": [],
     "origin": [["src/views/board/components/MoveBoardForm.tsx", 33]],
     "translation": "Bacheca spostata"
+  },
+  "qVcPNk": {
+    "message": "Board name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 561]],
+    "translation": "Nome bacheca"
   },
   "wewm3j": {
     "message": "Board name cannot exceed 100 characters",
@@ -947,12 +987,19 @@
     "origin": [["src/views/public/board/index.tsx", 181]],
     "translation": "Board non trovata"
   },
+  "Mu1Zy/": {
+    "message": "Board options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 167]],
+    "translation": "Opzioni bacheca"
+  },
   "XNxYxq": {
     "message": "Board templates",
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 116]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 121]
     ],
     "translation": "Template di board"
   },
@@ -960,7 +1007,7 @@
     "message": "Board unarchived",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 47]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 50]],
     "translation": "Bacheca ripristinata"
   },
   "Xid3K6": {
@@ -1000,7 +1047,7 @@
     "comments": [],
     "origin": [
       ["src/views/home/components/Features.tsx", 85],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 132]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 135]
     ],
     "translation": "Visibilità della board"
   },
@@ -1017,7 +1064,9 @@
     "comments": [],
     "origin": [
       ["src/components/SideNavigation.tsx", 98],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 73]
+      ["src/views/boards/index.tsx", 58],
+      ["src/views/boards/index.tsx", 63],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 83]
     ],
     "translation": "Board"
   },
@@ -1304,7 +1353,7 @@
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 64],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 77],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 55],
-      ["src/views/onboarding/select-plan/index.tsx", 240],
+      ["src/views/onboarding/select-plan/index.tsx", 246],
       ["src/views/settings/components/Avatar.tsx", 287],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 206],
       [
@@ -1313,8 +1362,7 @@
       ],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 88],
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 75],
-      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 98],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 108]
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 98]
     ],
     "translation": "Annulla"
   },
@@ -1358,6 +1406,13 @@
       ["src/views/card/index.tsx", 421]
     ],
     "translation": "Card non trovata"
+  },
+  "c44pvY": {
+    "message": "Card options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Dropdown.tsx", 167]],
+    "translation": "Opzioni scheda"
   },
   "ZH7TVS": {
     "message": "Card title",
@@ -1437,7 +1492,7 @@
     "message": "Checklist name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistForm.tsx", 119]],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 130]],
     "translation": "Nome della checklist"
   },
   "EH8IL3": {
@@ -1445,7 +1500,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 108],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 114],
       ["src/views/pricing/components/PricingTiers.tsx", 39]
     ],
     "translation": "Checklist"
@@ -1454,7 +1509,7 @@
     "message": "Choose a plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 153]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 157]],
     "translation": "Scegli un piano"
   },
   "5EMoSo": {
@@ -1549,7 +1604,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 309]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 279]
     ],
     "translation": "Collaborazione"
   },
@@ -1557,11 +1612,15 @@
     "message": "Coming soon",
     "placeholders": {},
     "comments": [],
-    "origin": [
-      ["src/views/home/components/Features.tsx", 67],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 88]
-    ],
+    "origin": [["src/views/home/components/Features.tsx", 67]],
     "translation": "Prossimamente"
+  },
+  "dYbQ1T": {
+    "message": "Comment options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Comment.tsx", 161]],
+    "translation": "Opzioni commento"
   },
   "VbyRUy": {
     "message": "Comments",
@@ -1615,7 +1674,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 82]],
-    "translation": "Ruoli utente e permessi configurabili"
+    "translation": "Ruoli utente e permessi configurabili",
+    "obsolete": true
   },
   "t0dTPm": {
     "message": "Configure webhooks to receive notifications when cards are created, updated, moved, or deleted.",
@@ -1704,7 +1764,7 @@
     "message": "Contact Sales",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 95]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 74]],
     "translation": "Contatta il reparto vendite"
   },
   "Bhgd0l": {
@@ -1713,8 +1773,8 @@
     "comments": [],
     "origin": [
       ["src/components/FeedbackModal.tsx", 100],
-      ["src/views/pricing/components/PricingTiers.tsx", 96],
-      ["src/views/pricing/components/PricingTiers.tsx", 96]
+      ["src/views/pricing/components/PricingTiers.tsx", 75],
+      ["src/views/pricing/components/PricingTiers.tsx", 75]
     ],
     "translation": "Contattaci"
   },
@@ -1730,8 +1790,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 246],
-      ["src/views/onboarding/workspace-details/index.tsx", 315]
+      ["src/views/onboarding/select-plan/index.tsx", 252],
+      ["src/views/onboarding/workspace-details/index.tsx", 301]
     ],
     "translation": "Continua"
   },
@@ -1825,7 +1885,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 305]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 275]
     ],
     "translation": "Funzionalità principali"
   },
@@ -1843,9 +1903,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/LabelForm.tsx", 213],
+      ["src/components/LabelForm.tsx", 208],
       ["src/views/board/components/NewCardForm.tsx", 653],
-      ["src/views/board/components/NewListForm.tsx", 141]
+      ["src/views/board/components/NewListForm.tsx", 156]
     ],
     "translation": "Crea un altro"
   },
@@ -1867,7 +1927,7 @@
     "message": "Create checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistForm.tsx", 135]],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 146]],
     "translation": "Crea checklist"
   },
   "zKY5xi": {
@@ -1881,14 +1941,14 @@
     "message": "Create label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/LabelForm.tsx", 236]],
+    "origin": [["src/components/LabelForm.tsx", 231]],
     "translation": "Crea etichetta"
   },
   "XTKtey": {
     "message": "Create list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewListForm.tsx", 153]],
+    "origin": [["src/views/board/components/NewListForm.tsx", 168]],
     "translation": "Crea lista"
   },
   "VKoDQD": {
@@ -1899,7 +1959,7 @@
     "comments": [],
     "origin": [
       ["src/views/boards/components/BoardsList.tsx", 80],
-      ["src/views/boards/index.tsx", 45]
+      ["src/views/boards/index.tsx", 46]
     ],
     "translation": "Crea nuovo {0}"
   },
@@ -1926,7 +1986,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 99],
-      ["src/views/board/index.tsx", 684]
+      ["src/views/board/index.tsx", 685]
     ],
     "translation": "Crea nuova lista"
   },
@@ -1950,7 +2010,7 @@
     "comments": [],
     "origin": [
       ["src/components/NewWorkspaceForm.tsx", 227],
-      ["src/components/WorkspaceMenu.tsx", 176]
+      ["src/components/WorkspaceMenu.tsx", 177]
     ],
     "translation": "Crea workspace"
   },
@@ -1986,6 +2046,13 @@
     "origin": [["src/views/settings/components/Avatar.tsx", 253]],
     "translation": "Ritaglia il tuo avatar"
   },
+  "MtNNDo": {
+    "message": "Current list",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ListSelector.tsx", 85]],
+    "translation": "Elenco corrente"
+  },
   "D3C4Yx": {
     "message": "Current password is required",
     "placeholders": {},
@@ -2010,7 +2077,8 @@
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 172],
       ["src/views/pricing/components/PricingTiers.tsx", 83]
     ],
-    "translation": "Branding personalizzato"
+    "translation": "Branding personalizzato",
+    "obsolete": true
   },
   "GAD3Dx": {
     "message": "Custom domain",
@@ -2030,7 +2098,7 @@
     "message": "Custom SLA",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 105]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 84]],
     "translation": "SLA personalizzato"
   },
   "u2+JIh": {
@@ -2046,8 +2114,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 100],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 101]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 106],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 107]
     ],
     "translation": "Username personalizzato"
   },
@@ -2056,7 +2124,15 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/onboarding/workspace-details/index.tsx", 241]],
-    "translation": "I nomi utente personalizzati richiedono l'aggiornamento a un piano Pro"
+    "translation": "I nomi utente personalizzati richiedono l'aggiornamento a un piano Pro",
+    "obsolete": true
+  },
+  "5Y8Qur": {
+    "message": "Custom usernames require upgrading to a Team plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 238]],
+    "translation": "I nomi utente personalizzati richiedono l'upgrade a un piano Team"
   },
   "j9IZZ0": {
     "message": "Custom workspace URL",
@@ -2065,13 +2141,14 @@
     "origin": [
       ["src/views/settings/components/UpgradeToProConfirmation.tsx", 78]
     ],
-    "translation": "URL workspace personalizzato"
+    "translation": "URL workspace personalizzato",
+    "obsolete": true
   },
   "OwneeH": {
     "message": "Custom workspace username",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 81]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 58]],
     "translation": "Username workspace personalizzato"
   },
   "n+xLOH": {
@@ -2099,7 +2176,7 @@
     "message": "Dedicated account manager",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 104]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 83]],
     "translation": "Account manager dedicato"
   },
   "P8Cunr": {
@@ -2107,8 +2184,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 98],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 99]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 105]
     ],
     "translation": "Username predefinito"
   },
@@ -2118,14 +2194,14 @@
     "comments": [],
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 51],
-      ["src/components/LabelForm.tsx", 228],
+      ["src/components/LabelForm.tsx", 223],
       ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 52],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 47],
       ["src/views/card/components/DeleteCardConfirmation.tsx", 92],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 67],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 83],
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 82],
-      ["src/views/settings/components/WebhookList.tsx", 140]
+      ["src/views/settings/components/WebhookList.tsx", 136]
     ],
     "translation": "Elimina"
   },
@@ -2144,7 +2220,7 @@
     "message": "Delete board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 148]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 149]],
     "translation": "Elimina board"
   },
   "nabda1": {
@@ -2157,6 +2233,13 @@
     ],
     "translation": "Elimina card"
   },
+  "rmAXC2": {
+    "message": "Delete checklist",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/Checklists.tsx", 145]],
+    "translation": "Elimina checklist"
+  },
   "njJFtc": {
     "message": "Delete comment",
     "placeholders": {},
@@ -2168,14 +2251,14 @@
     "message": "Delete list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/List.tsx", 147]],
+    "origin": [["src/views/board/components/List.tsx", 149]],
     "translation": "Elimina lista"
   },
   "DFjdv0": {
     "message": "Delete template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 148]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 149]],
     "translation": "Elimina template"
   },
   "snMaH4": {
@@ -2269,7 +2352,10 @@
     "message": "Display name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 36]],
+    "origin": [
+      ["src/views/settings/AccountSettings.tsx", 36],
+      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 71]
+    ],
     "translation": "Nome visualizzato"
   },
   "MlyjJu": {
@@ -2441,7 +2527,7 @@
     "comments": [],
     "origin": [
       ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 42],
-      ["src/views/settings/components/WebhookList.tsx", 132]
+      ["src/views/settings/components/WebhookList.tsx", 128]
     ],
     "translation": "Modifica"
   },
@@ -2450,7 +2536,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 106],
+      ["src/views/board/components/BoardDropdown.tsx", 109],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 116]
     ],
     "translation": "Modifica URL bacheca"
@@ -2466,7 +2552,7 @@
     "message": "Edit label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/LabelForm.tsx", 119]],
+    "origin": [["src/components/LabelForm.tsx", 114]],
     "translation": "Modifica etichetta"
   },
   "TCOMOO": {
@@ -2529,7 +2615,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 191]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 173]
     ],
     "translation": "Notifiche email"
   },
@@ -2537,7 +2623,7 @@
     "message": "Email notifications for mentions",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 60]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 61]],
     "translation": "Notifiche email per le menzioni"
   },
   "IqjpYe": {
@@ -2560,7 +2646,7 @@
     "message": "Engineering",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 181]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 178]],
     "translation": "Ingegneria"
   },
   "0+ewPp": {
@@ -2641,8 +2727,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 334],
-      ["src/views/pricing/components/PricingTiers.tsx", 92]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 303],
+      ["src/views/pricing/components/PricingTiers.tsx", 71]
     ],
     "translation": "Enterprise"
   },
@@ -2786,7 +2872,8 @@
     "origin": [
       ["src/views/settings/components/UpgradeToProConfirmation.tsx", 43]
     ],
-    "translation": "Errore durante l'upgrade dell'abbonamento"
+    "translation": "Errore durante l'upgrade dell'abbonamento",
+    "obsolete": true
   },
   "lsgnzd": {
     "message": "Error upgrading to Pro",
@@ -2992,7 +3079,7 @@
     "message": "File uploads",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 89]],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 97]],
     "translation": "Caricamento file"
   },
   "o7J4JM": {
@@ -3028,9 +3115,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 82],
-      ["src/views/onboarding/select-plan/index.tsx", 83],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 331],
+      ["src/views/onboarding/select-plan/index.tsx", 89],
+      ["src/views/onboarding/select-plan/index.tsx", 90],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 301],
       ["src/views/pricing/components/Pricing.tsx", 32],
       ["src/views/pricing/components/Pricing.tsx", 32],
       ["src/views/pricing/components/PricingTiers.tsx", 26]
@@ -3057,7 +3144,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 326],
-      ["src/views/members/index.tsx", 311]
+      ["src/views/members/index.tsx", 312]
     ],
     "translation": "Piano gratuito"
   },
@@ -3073,9 +3160,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 239],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 240],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 241]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 216],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 217]
     ],
     "translation": "Accesso API completo"
   },
@@ -3109,8 +3195,7 @@
       ["src/views/home/components/Cta.tsx", 61],
       ["src/views/home/components/Header.tsx", 106],
       ["src/views/pricing/components/PricingTiers.tsx", 29],
-      ["src/views/pricing/components/PricingTiers.tsx", 50],
-      ["src/views/pricing/components/PricingTiers.tsx", 73]
+      ["src/views/pricing/components/PricingTiers.tsx", 50]
     ],
     "translation": "Inizia"
   },
@@ -3137,7 +3222,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 669]],
+    "origin": [["src/views/board/index.tsx", 670]],
     "translation": "Inizia creando una nuova lista"
   },
   "oW13KZ": {
@@ -3251,7 +3336,7 @@
     "message": "Good for individuals starting out who just need the essentials.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 84]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 91]],
     "translation": "Perfetto per chi inizia e ha bisogno solo delle funzionalità essenziali."
   },
   "cdyS7J": {
@@ -3259,9 +3344,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 257],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 258],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 259]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 232],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 233]
     ],
     "translation": "Google SSO"
   },
@@ -3270,7 +3354,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 260]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 234]
     ],
     "translation": "Google SSO + SAML"
   },
@@ -3394,7 +3478,7 @@
     "message": "Import",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/index.tsx", 82]],
+    "origin": [["src/views/boards/index.tsx", 83]],
     "translation": "Importa"
   },
   "2MPcep": {
@@ -3450,7 +3534,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 313]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 283]
     ],
     "translation": "Importazioni"
   },
@@ -3478,7 +3562,7 @@
     "message": "Inactive",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/WebhookList.tsx", 106]],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 104]],
     "translation": "Inattivo"
   },
   "6mbe4b": {
@@ -3503,7 +3587,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 140]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 142]
     ],
     "translation": "Ricerca intelligente"
   },
@@ -3532,7 +3616,7 @@
     "message": "Invite",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 330]],
+    "origin": [["src/views/members/index.tsx", 331]],
     "translation": "Invita"
   },
   "KLJ4eD": {
@@ -3554,8 +3638,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 207],
-      ["src/views/pricing/components/PricingTiers.tsx", 58]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 187],
+      ["src/views/pricing/components/PricingTiers.tsx", 59]
     ],
     "translation": "Link di invito"
   },
@@ -3581,7 +3665,15 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/members/components/InviteMemberForm.tsx", 329]],
-    "translation": "L'invito di membri richiede un piano Team o Pro. Verrai reindirizzato per aggiornare il tuo workspace."
+    "translation": "L'invito di membri richiede un piano Team o Pro. Verrai reindirizzato per aggiornare il tuo workspace.",
+    "obsolete": true
+  },
+  "7tEnCk": {
+    "message": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 329]],
+    "translation": "Invitare membri richiede un piano Team. Verrai reindirizzato per aggiornare il tuo workspace."
   },
   "qPP4lD": {
     "message": "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace.",
@@ -3654,6 +3746,7 @@
       ["src/views/board/components/CardContextLabelsModal.tsx", 31],
       ["src/views/board/components/Filters.tsx", 155],
       ["src/views/board/components/NewCardForm.tsx", 524],
+      ["src/views/card/components/LabelSelector.tsx", 102],
       ["src/views/card/index.tsx", 133]
     ],
     "translation": "Etichette"
@@ -3663,7 +3756,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 124]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 128]
     ],
     "translation": "Etichette e filtri"
   },
@@ -3692,11 +3785,9 @@
     "message": "Launch offer",
     "placeholders": {},
     "comments": [],
-    "origin": [
-      ["src/views/pricing/components/PricingTiers.tsx", 159],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 71]
-    ],
-    "translation": "Offerta di lancio"
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 159]],
+    "translation": "Offerta di lancio",
+    "obsolete": true
   },
   "EEHmPC": {
     "message": "Launch offer: Get unlimited members with Pro",
@@ -3767,7 +3858,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 238]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 215]
     ],
     "translation": "Accesso API limitato"
   },
@@ -3798,8 +3889,18 @@
     "message": "List name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewListForm.tsx", 129]],
+    "origin": [
+      ["src/views/board/components/List.tsx", 108],
+      ["src/views/board/components/NewListForm.tsx", 144]
+    ],
     "translation": "Nome lista"
+  },
+  "jf++dj": {
+    "message": "List options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/List.tsx", 165]],
+    "translation": "Opzioni elenco"
   },
   "h16FyT": {
     "message": "Lists",
@@ -3877,7 +3978,7 @@
     "message": "Make template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 95]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 98]],
     "translation": "Crea template"
   },
   "hB02vO": {
@@ -3910,7 +4011,7 @@
     "message": "Marketing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 181]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 178]],
     "translation": "Marketing"
   },
   "agPptk": {
@@ -3945,6 +4046,13 @@
     ],
     "translation": "Membro"
   },
+  "fTHH1x": {
+    "message": "Member options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/members/index.tsx", 262]],
+    "translation": "Opzioni membro"
+  },
   "GnG6Oy": {
     "message": "members",
     "placeholders": {},
@@ -3960,9 +4068,10 @@
       ["src/components/SideNavigation.tsx", 122],
       ["src/views/board/components/Filters.tsx", 147],
       ["src/views/board/components/NewCardForm.tsx", 482],
+      ["src/views/card/components/MemberSelector.tsx", 116],
       ["src/views/card/index.tsx", 143],
-      ["src/views/members/index.tsx", 283],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 81]
+      ["src/views/members/index.tsx", 284],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 90]
     ],
     "translation": "Membri"
   },
@@ -3972,7 +4081,7 @@
       "0": ["workspace.name ?? t`Workspace`"]
     },
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 278]],
+    "origin": [["src/views/members/index.tsx", 279]],
     "translation": "Membri | {0}"
   },
   "/bZzdR": {
@@ -3980,7 +4089,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 183]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 166]
     ],
     "translation": "Menzioni"
   },
@@ -3998,7 +4107,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 67],
+      ["src/views/onboarding/select-plan/index.tsx", 74],
       ["src/views/pricing/components/Pricing.tsx", 14],
       ["src/views/pricing/index.tsx", 20]
     ],
@@ -4043,7 +4152,7 @@
     "message": "Move to workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 126]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 129]],
     "translation": "Sposta nell'area di lavoro"
   },
   "BOqTi5": {
@@ -4075,7 +4184,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/LabelForm.tsx", 135],
+      ["src/components/LabelForm.tsx", 130],
       ["src/views/board/components/NewTemplateForm.tsx", 118],
       ["src/views/boards/components/NewBoardForm.tsx", 134],
       ["src/views/settings/components/NewWebhookModal.tsx", 227],
@@ -4102,7 +4211,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/index.tsx", 104],
+      ["src/views/boards/index.tsx", 105],
       ["src/views/home/components/Features.tsx", 73]
     ],
     "translation": "Nuovo"
@@ -4134,7 +4243,7 @@
     "message": "New checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistForm.tsx", 103]],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 114]],
     "translation": "Nuova checklist"
   },
   "WYwN1G": {
@@ -4148,7 +4257,7 @@
     "message": "New label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/LabelForm.tsx", 119]],
+    "origin": [["src/components/LabelForm.tsx", 114]],
     "translation": "Nuova etichetta"
   },
   "Sb2gYF": {
@@ -4156,8 +4265,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewListForm.tsx", 113],
-      ["src/views/board/index.tsx", 633]
+      ["src/views/board/components/NewListForm.tsx", 128],
+      ["src/views/board/index.tsx", 634]
     ],
     "translation": "Nuova lista"
   },
@@ -4290,14 +4399,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 665]],
+    "origin": [["src/views/board/index.tsx", 666]],
     "translation": "Nessuna lista"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 670]],
+    "origin": [["src/views/board/index.tsx", 671]],
     "translation": "Nessuna lista è stata ancora creata"
   },
   "i30J2U": {
@@ -4342,7 +4451,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 245]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 221]
     ],
     "translation": "On-premise"
   },
@@ -4350,7 +4459,7 @@
     "message": "On-premise deployment option",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 106]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 85]],
     "translation": "Opzione di deployment on-premise"
   },
   "gukxZ5": {
@@ -4393,7 +4502,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 229]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 207]
     ],
     "translation": "Open source"
   },
@@ -4533,7 +4642,7 @@
     "comments": [],
     "origin": [
       ["src/views/pricing/components/Pricing.tsx", 100],
-      ["src/views/pricing/components/PricingTiers.tsx", 120]
+      ["src/views/pricing/components/PricingTiers.tsx", 99]
     ],
     "translation": "Frequenza di pagamento"
   },
@@ -4560,7 +4669,7 @@
     "message": "Per-seat pricing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 83]],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 92]],
     "translation": "Prezzo per postazione"
   },
   "mrhyIB": {
@@ -4614,7 +4723,7 @@
     "message": "Pick a plan to get started. All paid plans include a 14-day free trial.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 156]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 162]],
     "translation": "Scegli un piano per iniziare. Tutti i piani a pagamento includono una prova gratuita di 14 giorni."
   },
   "GdgCoi": {
@@ -4646,7 +4755,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 317]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 287]
     ],
     "translation": "Piattaforma"
   },
@@ -4712,9 +4821,9 @@
       ["src/components/DeleteLabelConfirmation.tsx", 26],
       ["src/components/FeedbackModal.tsx", 41],
       ["src/components/NewWorkspaceForm.tsx", 110],
-      ["src/views/board/components/BoardDropdown.tsx", 69],
+      ["src/views/board/components/BoardDropdown.tsx", 72],
       ["src/views/board/components/NewCardForm.tsx", 198],
-      ["src/views/board/components/NewListForm.tsx", 79],
+      ["src/views/board/components/NewListForm.tsx", 94],
       ["src/views/board/components/NewTemplateForm.tsx", 61],
       ["src/views/board/components/NewTemplateForm.tsx", 77],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 73],
@@ -4736,8 +4845,8 @@
       ["src/views/card/components/LabelSelector.tsx", 75],
       ["src/views/card/components/ListSelector.tsx", 55],
       ["src/views/card/components/MemberSelector.tsx", 82],
-      ["src/views/card/components/NewChecklistForm.tsx", 71],
-      ["src/views/card/components/NewChecklistItemForm.tsx", 90],
+      ["src/views/card/components/NewChecklistForm.tsx", 82],
+      ["src/views/card/components/NewChecklistItemForm.tsx", 106],
       ["src/views/card/components/NewCommentForm.tsx", 38],
       ["src/views/card/index.tsx", 236],
       ["src/views/card/index.tsx", 249],
@@ -4747,8 +4856,8 @@
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 93],
       ["src/views/members/components/InviteMemberForm.tsx", 112],
       ["src/views/members/index.tsx", 70],
-      ["src/views/onboarding/workspace-details/index.tsx", 121],
-      ["src/views/onboarding/workspace-details/index.tsx", 170],
+      ["src/views/onboarding/workspace-details/index.tsx", 119],
+      ["src/views/onboarding/workspace-details/index.tsx", 167],
       ["src/views/settings/components/Avatar.tsx", 200],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 40],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 46],
@@ -4756,7 +4865,6 @@
       ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 64],
       ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 59],
       ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 76],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 44],
       ["src/views/settings/PermissionsSettings.tsx", 40]
     ],
     "translation": "Riprova più tardi o contatta l'assistenza clienti."
@@ -4815,10 +4923,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 275],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 248],
       ["src/views/pricing/components/Pricing.tsx", 56],
-      ["src/views/pricing/components/PricingTiers.tsx", 61],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 95]
+      ["src/views/pricing/components/PricingTiers.tsx", 62]
     ],
     "translation": "Supporto email prioritario"
   },
@@ -4845,7 +4952,8 @@
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 333],
       ["src/views/pricing/components/PricingTiers.tsx", 70]
     ],
-    "translation": "Pro"
+    "translation": "Pro",
+    "obsolete": true
   },
   "oyRjD/": {
     "message": "Pro Plan",
@@ -4853,7 +4961,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 305],
-      ["src/views/members/index.tsx", 308]
+      ["src/views/members/index.tsx", 309]
     ],
     "translation": "Piano Pro"
   },
@@ -4954,7 +5062,7 @@
     "message": "Remove from favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 136]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 138]],
     "translation": "Rimuovi dai preferiti"
   },
   "99VIgC": {
@@ -5008,7 +5116,7 @@
     "message": "Removed from favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 58]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 61]],
     "translation": "Rimosso dai preferiti"
   },
   "YVT40D": {
@@ -5110,7 +5218,7 @@
       ["src/views/home/components/Footer.tsx", 36],
       ["src/views/home/components/Header.tsx", 13],
       ["src/views/home/components/Header.tsx", 28],
-      ["src/views/onboarding/workspace-details/index.tsx", 181]
+      ["src/views/onboarding/workspace-details/index.tsx", 178]
     ],
     "translation": "Roadmap"
   },
@@ -5118,7 +5226,7 @@
     "message": "Role",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 352]],
+    "origin": [["src/views/members/index.tsx", 353]],
     "translation": "Ruolo"
   },
   "jQ6I8X": {
@@ -5135,7 +5243,8 @@
     "origin": [
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 164]
     ],
-    "translation": "Ruoli e permessi"
+    "translation": "Ruoli e permessi",
+    "obsolete": true
   },
   "vAR/I8": {
     "message": "Run on your own infrastructure",
@@ -5148,7 +5257,7 @@
     "message": "SAML SSO",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/PricingTiers.tsx", 102]],
+    "origin": [["src/views/pricing/components/PricingTiers.tsx", 81]],
     "translation": "SAML SSO"
   },
   "+5kO8P": {
@@ -5192,6 +5301,13 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 76]],
     "translation": "Screening"
   },
+  "A1taO8": {
+    "message": "Search",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/WorkspaceMenu.tsx", 102]],
+    "translation": "Cerca"
+  },
   "SkCNhl": {
     "message": "Search boards and cards...",
     "placeholders": {},
@@ -5212,7 +5328,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 308],
-      ["src/views/members/index.tsx", 319]
+      ["src/views/members/index.tsx", 320]
     ],
     "translation": "posti"
   },
@@ -5235,7 +5351,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 321]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 291]
     ],
     "translation": "Sicurezza"
   },
@@ -5369,7 +5485,7 @@
     "message": "Set up your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 199]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 196]],
     "translation": "Configura il tuo workspace"
   },
   "Tz0i8g": {
@@ -5473,8 +5589,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 319],
-      ["src/views/onboarding/workspace-details/index.tsx", 386]
+      ["src/views/onboarding/select-plan/index.tsx", 325],
+      ["src/views/onboarding/workspace-details/index.tsx", 372]
     ],
     "translation": "Esci"
   },
@@ -5538,7 +5654,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 291]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 262]
     ],
     "translation": "SLA"
   },
@@ -5567,7 +5683,7 @@
     "message": "Solo",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 81]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 88]],
     "translation": "Solo"
   },
   "whpQwW": {
@@ -5596,7 +5712,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 256]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 231]
     ],
     "translation": "SSO"
   },
@@ -5614,7 +5730,8 @@
     "origin": [
       ["src/views/settings/components/UpgradeToProConfirmation.tsx", 113]
     ],
-    "translation": "Inizia la prova gratuita di 14 giorni"
+    "translation": "Inizia la prova gratuita di 14 giorni",
+    "obsolete": true
   },
   "4+JaWo": {
     "message": "Start free trial",
@@ -5634,6 +5751,13 @@
     "origin": [["src/views/pricing/index.tsx", 47]],
     "translation": "Inizia gratis. Aggiorna man mano che il tuo team cresce. Nessun costo nascosto, nessun contratto."
   },
+  "lUlbS2": {
+    "message": "Start your 14-day free trial, cancel anytime.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 161]],
+    "translation": "Inizia la tua prova gratuita di 14 giorni, annulla in qualsiasi momento."
+  },
   "uAQUqI": {
     "message": "Status",
     "placeholders": {},
@@ -5647,6 +5771,13 @@
     "comments": [],
     "origin": [["src/views/card/components/NewCommentForm.tsx", 60]],
     "translation": "Invia"
+  },
+  "DJUhvh": {
+    "message": "Submit comment",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/NewCommentForm.tsx", 92]],
+    "translation": "Invia commento"
   },
   "WYDptz": {
     "message": "Subscription Required",
@@ -5681,7 +5812,8 @@
     "origin": [
       ["src/views/settings/components/UpgradeToProConfirmation.tsx", 59]
     ],
-    "translation": "Potenzia il tuo workspace per soli $29 al mese. Ecco cosa otterrai:"
+    "translation": "Potenzia il tuo workspace per soli $29 al mese. Ecco cosa otterrai:",
+    "obsolete": true
   },
   "XYLcNv": {
     "message": "Support",
@@ -5689,7 +5821,7 @@
     "comments": [],
     "origin": [
       ["src/components/UserMenu.tsx", 198],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 325]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 295]
     ],
     "translation": "Supporto"
   },
@@ -5711,7 +5843,7 @@
     "message": "Team",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 88]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 95]],
     "translation": "Team"
   },
   "bff61F": {
@@ -5721,7 +5853,7 @@
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 305],
       ["src/views/members/components/InviteMemberForm.tsx", 317],
-      ["src/views/members/index.tsx", 310]
+      ["src/views/members/index.tsx", 311]
     ],
     "translation": "Piano team"
   },
@@ -5730,7 +5862,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 332],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 302],
       ["src/views/pricing/components/Pricing.tsx", 46],
       ["src/views/pricing/components/PricingTiers.tsx", 47]
     ],
@@ -5742,7 +5874,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 543],
-      ["src/views/board/index.tsx", 579]
+      ["src/views/board/index.tsx", 580]
     ],
     "translation": "Template"
   },
@@ -5780,6 +5912,8 @@
     "comments": [],
     "origin": [
       ["src/components/SideNavigation.tsx", 110],
+      ["src/views/boards/index.tsx", 58],
+      ["src/views/boards/index.tsx", 63],
       ["src/views/home/components/Features.tsx", 115]
     ],
     "translation": "Template"
@@ -5795,7 +5929,7 @@
     "message": "Test",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/WebhookList.tsx", 136]],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 132]],
     "translation": "Test"
   },
   "InJcdo": {
@@ -5814,7 +5948,7 @@
     "comments": [],
     "origin": [
       ["src/views/settings/components/NewWebhookModal.tsx", 148],
-      ["src/views/settings/components/WebhookList.tsx", 174]
+      ["src/views/settings/components/WebhookList.tsx", 171]
     ],
     "translation": "Test inviato"
   },
@@ -5824,7 +5958,7 @@
     "comments": [],
     "origin": [
       ["src/views/settings/components/NewWebhookModal.tsx", 149],
-      ["src/views/settings/components/WebhookList.tsx", 174]
+      ["src/views/settings/components/WebhookList.tsx", 172]
     ],
     "translation": "Webhook di test inviato con successo!"
   },
@@ -5853,7 +5987,7 @@
     "message": "The board has been archived.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 49]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 52]],
     "translation": "La bacheca è stata archiviata."
   },
   "ZWk38w": {
@@ -5869,7 +6003,7 @@
     "message": "The board has been unarchived.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 50]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 53]],
     "translation": "La bacheca è stata ripristinata."
   },
   "nKBUeF": {
@@ -6017,14 +6151,14 @@
     "message": "This URL has already been taken",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 84]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 82]],
     "translation": "Questo URL è già in uso"
   },
   "gKmoow": {
     "message": "This URL is reserved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 86]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 84]],
     "translation": "Questo URL è riservato"
   },
   "OAYToL": {
@@ -6083,7 +6217,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 125]
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 129]
     ],
     "translation": "Questo nome utente dello workspace è già stato utilizzato"
   },
@@ -6146,7 +6280,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 218],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 197],
       ["src/views/settings/IntegrationsSettings.tsx", 142]
     ],
     "translation": "Trello"
@@ -6183,7 +6317,7 @@
     "message": "Unable to add checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 89]],
+    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 105]],
     "translation": "Impossibile aggiungere l'elemento della checklist"
   },
   "T7DJ2k": {
@@ -6237,14 +6371,14 @@
     "message": "Unable to create checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistForm.tsx", 70]],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 81]],
     "translation": "Impossibile creare la checklist"
   },
   "TztLaN": {
     "message": "Unable to create list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewListForm.tsx", 78]],
+    "origin": [["src/views/board/components/NewListForm.tsx", 93]],
     "translation": "Impossibile creare la lista"
   },
   "YcyP2z": {
@@ -6270,7 +6404,7 @@
     "comments": [],
     "origin": [
       ["src/components/NewWorkspaceForm.tsx", 109],
-      ["src/views/onboarding/workspace-details/index.tsx", 120]
+      ["src/views/onboarding/workspace-details/index.tsx", 118]
     ],
     "translation": "Impossibile creare lo workspace"
   },
@@ -6380,7 +6514,7 @@
     "message": "Unable to start checkout",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 169]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 166]],
     "translation": "Impossibile avviare il checkout"
   },
   "KNK33q": {
@@ -6397,7 +6531,7 @@
     "message": "Unable to update board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 68]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 71]],
     "translation": "Impossibile aggiornare la board"
   },
   "XpcjLO": {
@@ -6504,7 +6638,7 @@
     "message": "Unarchive board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 115]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 118]],
     "translation": "Ripristina bacheca"
   },
   "E8zYtd": {
@@ -6542,10 +6676,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 74],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 75],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 76],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 77],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 84],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 85],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 86],
       ["src/views/pricing/components/Pricing.tsx", 37],
       ["src/views/pricing/components/PricingTiers.tsx", 36]
     ],
@@ -6580,10 +6713,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 91],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 92],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 93],
-      ["src/views/pricing/components/PricingTiers.tsx", 59]
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 99],
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 100],
+      ["src/views/pricing/components/PricingTiers.tsx", 60]
     ],
     "translation": "Caricamenti di file illimitati"
   },
@@ -6605,12 +6737,7 @@
     "message": "Unlimited members",
     "placeholders": {},
     "comments": [],
-    "origin": [
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 84],
-      ["src/views/pricing/components/FeatureComparisonTable.tsx", 85],
-      ["src/views/pricing/components/PricingTiers.tsx", 80],
-      ["src/views/settings/components/UpgradeToProConfirmation.tsx", 68]
-    ],
+    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 93]],
     "translation": "Membri illimitati"
   },
   "8AwlaR": {
@@ -6618,13 +6745,14 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/onboarding/select-plan/index.tsx", 99]],
-    "translation": "Membri illimitati e un nome utente workspace personalizzato per i team pronti a crescere."
+    "translation": "Membri illimitati e un nome utente workspace personalizzato per i team pronti a crescere.",
+    "obsolete": true
   },
   "i5yNAO": {
     "message": "Unlimited seats",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 318]],
+    "origin": [["src/views/members/index.tsx", 319]],
     "translation": "Posti illimitati"
   },
   "Ws+3X+": {
@@ -6632,7 +6760,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 75]],
-    "translation": "Posti illimitati e funzionalità avanzate per team in crescita."
+    "translation": "Posti illimitati e funzionalità avanzate per team in crescita.",
+    "obsolete": true
   },
   "SMaFdc": {
     "message": "Unsubscribe",
@@ -6651,10 +6780,10 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 175],
-      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 80],
+      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 84],
       ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 94],
-      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 89],
-      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 157]
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 90],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 161]
     ],
     "translation": "Aggiorna"
   },
@@ -6662,7 +6791,7 @@
     "message": "Update label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/LabelForm.tsx", 236]],
+    "origin": [["src/components/LabelForm.tsx", 231]],
     "translation": "Aggiorna etichetta"
   },
   "L5ZPjz": {
@@ -6707,8 +6836,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/index.tsx", 295],
-      ["src/views/onboarding/select-plan/index.tsx", 245]
+      ["src/views/members/index.tsx", 296],
+      ["src/views/onboarding/select-plan/index.tsx", 251]
     ],
     "translation": "Aggiorna"
   },
@@ -6719,14 +6848,23 @@
     "origin": [
       ["src/views/settings/components/UpgradeToProConfirmation.tsx", 55]
     ],
-    "translation": "Passa a Pro"
+    "translation": "Passa a Pro",
+    "obsolete": true
   },
   "cWtfn1": {
     "message": "Upgrade to Pro ($29/month)",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/onboarding/workspace-details/index.tsx", 265]],
-    "translation": "Passa a Pro ($29/mese)"
+    "translation": "Passa a Pro ($29/mese)",
+    "obsolete": true
+  },
+  "21QsyA": {
+    "message": "Upgrade your plan",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 157]],
+    "translation": "Aggiorna il tuo piano"
   },
   "b3Thhd": {
     "message": "Upload failed",
@@ -6810,7 +6948,7 @@
     "message": "User",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 346]],
+    "origin": [["src/views/members/index.tsx", 347]],
     "translation": "Utente"
   },
   "tYN21H": {
@@ -6953,6 +7091,13 @@
     "origin": [["src/views/settings/components/NewWebhookModal.tsx", 19]],
     "translation": "Il nome del webhook è obbligatorio"
   },
+  "N1eQmK": {
+    "message": "Webhook options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 125]],
+    "translation": "Opzioni webhook"
+  },
   "8iP9oQ": {
     "message": "Webhook test failed",
     "placeholders": {},
@@ -7043,8 +7188,8 @@
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
       ["src/views/board/index.tsx", 543],
-      ["src/views/boards/index.tsx", 57],
-      ["src/views/members/index.tsx", 278],
+      ["src/views/boards/index.tsx", 58],
+      ["src/views/members/index.tsx", 279],
       ["src/views/public/board/index.tsx", 125],
       ["src/views/public/boards/index.tsx", 75]
     ],
@@ -7072,7 +7217,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 275],
+      ["src/views/onboarding/workspace-details/index.tsx", 261],
       ["src/views/settings/WorkspaceSettings.tsx", 55]
     ],
     "translation": "Descrizione workspace"
@@ -7121,7 +7266,8 @@
     "comments": [],
     "origin": [
       ["src/components/NewWorkspaceForm.tsx", 165],
-      ["src/views/onboarding/workspace-details/index.tsx", 208],
+      ["src/views/onboarding/workspace-details/index.tsx", 205],
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 76],
       ["src/views/settings/WorkspaceSettings.tsx", 36]
     ],
     "translation": "Nome workspace"
@@ -7181,14 +7327,19 @@
     "message": "Workspace URL",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/WorkspaceSettings.tsx", 45]],
+    "origin": [
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 118],
+      ["src/views/settings/WorkspaceSettings.tsx", 45]
+    ],
     "translation": "URL del workspace"
   },
   "DSGzV+": {
     "message": "Workspace username",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/components/FeatureComparisonTable.tsx", 97]],
+    "origin": [
+      ["src/views/pricing/components/FeatureComparisonTable.tsx", 104]
+    ],
     "translation": "Nome utente del workspace"
   },
   "/8pTF/": {
@@ -7233,7 +7384,7 @@
     "message": "You can always change these later in settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 202]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 199]],
     "translation": "Potrai sempre modificarli in seguito nelle impostazioni."
   },
   "aelko+": {
@@ -7241,7 +7392,15 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/home/components/Faqs.tsx", 67]],
-    "translation": "Puoi ottenere un URL personalizzato per il workspace, come <0>kan.bn/kan</0>, andando nelle <1>impostazioni del workspace</1> e acquistando un abbonamento pro. Tutti gli abbonamenti aiutano a finanziare lo sviluppo del progetto!"
+    "translation": "Puoi ottenere un URL personalizzato per il workspace, come <0>kan.bn/kan</0>, andando nelle <1>impostazioni del workspace</1> e acquistando un abbonamento pro. Tutti gli abbonamenti aiutano a finanziare lo sviluppo del progetto!",
+    "obsolete": true
+  },
+  "oRGf3Q": {
+    "message": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and upgrading to a Team workspace subscription. All subscriptions help fund the development of the project!",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/home/components/Faqs.tsx", 67]],
+    "translation": "Puoi ottenere un URL personalizzato per il workspace, come <0>kan.bn/kan</0>, andando nelle <1>impostazioni del workspace</1> e passando a un abbonamento Team. Tutti gli abbonamenti aiutano a finanziare lo sviluppo del progetto!"
   },
   "kSxwQL": {
     "message": "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace.",
@@ -7269,14 +7428,14 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/List.tsx", 117],
+      ["src/views/board/components/List.tsx", 118],
       ["src/views/board/components/UpdateBoardSlugButton.tsx", 58],
       ["src/views/board/components/VisibilityButton.tsx", 72],
-      ["src/views/board/index.tsx", 617],
-      ["src/views/board/index.tsx", 675],
+      ["src/views/board/index.tsx", 618],
+      ["src/views/board/index.tsx", 676],
       ["src/views/boards/components/BoardsList.tsx", 71],
-      ["src/views/boards/index.tsx", 68],
-      ["src/views/boards/index.tsx", 89]
+      ["src/views/boards/index.tsx", 69],
+      ["src/views/boards/index.tsx", 90]
     ],
     "translation": "Non hai i permessi necessari"
   },
@@ -7369,7 +7528,7 @@
     "message": "Your avatar",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 264]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 270]],
     "translation": "Il tuo avatar"
   },
   "evg7+A": {
@@ -7486,14 +7645,14 @@
     "message": "Your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 346]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 332]],
     "translation": "Il tuo workspace"
   },
   "j0o6ml": {
     "message": "Your workspace description",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 349]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 335]],
     "translation": "La descrizione del tuo workspace"
   },
   "GnSSGm": {
@@ -7537,8 +7696,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 218],
-      ["src/views/onboarding/workspace-details/index.tsx", 219]
+      ["src/views/onboarding/workspace-details/index.tsx", 215],
+      ["src/views/onboarding/workspace-details/index.tsx", 216]
     ],
     "translation": "il-tuo-workspace"
   },

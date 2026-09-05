@@ -20,7 +20,7 @@ const workspaceSlugSchema = z
 interface CheckoutSessionRequest {
   successUrl: string;
   cancelUrl: string;
-  plan: "team" | "pro";
+  plan: "team";
   billing?: string;
   workspacePublicId?: string;
   slug?: string;
@@ -59,6 +59,12 @@ export default withRateLimit(
 
     if (!successUrl || !cancelUrl || !plan) {
       return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    if (plan !== "team") {
+      return res.status(400).json({
+        error: "The Pro plan is no longer available. Please choose Team.",
+      });
     }
 
     if (!workspacePublicId && !workspaceName) {
@@ -113,15 +119,10 @@ export default withRateLimit(
       resolvedWorkspacePublicId = generateUID();
     }
 
-    const isTeam = body.plan === "team";
-    const annualPriceId = isTeam
-      ? (process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID ??
-        process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID)
-      : (process.env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID ??
-        process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID);
-    const monthlyPriceId = isTeam
-      ? process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID
-      : process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID;
+    const annualPriceId =
+      process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID ??
+      process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID;
+    const monthlyPriceId = process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID;
     const priceId = billing === "annual" ? annualPriceId : monthlyPriceId;
 
     const session = await stripe.checkout.sessions.create({

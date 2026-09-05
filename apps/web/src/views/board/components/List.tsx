@@ -105,6 +105,7 @@ export default function List({
               <input
                 id="name"
                 type="text"
+                aria-label={t`List name`}
                 {...register("name")}
                 onBlur={handleSubmit(onSubmit)}
                 readOnly={!canEdit}
@@ -121,6 +122,7 @@ export default function List({
                   className="mx-1 inline-flex h-fit items-center rounded-md p-1 px-1 text-sm font-semibold text-dark-50 hover:bg-light-400 disabled:cursor-not-allowed disabled:opacity-60 dark:hover:bg-dark-200"
                   onClick={() => openNewCardForm(list.publicId)}
                   disabled={!canCreateCard}
+                  aria-label={t`Add card`}
                 >
                   <HiOutlinePlusSmall
                     className="h-5 w-5 text-dark-900"
@@ -160,7 +162,7 @@ export default function List({
 
                 return (
                   <div className="relative mr-1 inline-block">
-                    <Dropdown items={dropdownItems}>
+                    <Dropdown items={dropdownItems} ariaLabel={t`List options`}>
                       <HiEllipsisHorizontal className="h-5 w-5 text-dark-900" />
                     </Dropdown>
                   </div>

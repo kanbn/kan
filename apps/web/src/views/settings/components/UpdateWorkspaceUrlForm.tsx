@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
@@ -8,7 +9,6 @@ import { z } from "zod";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { useDebounce } from "~/hooks/useDebounce";
-import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
@@ -25,7 +25,7 @@ const UpdateWorkspaceUrlForm = ({
 }) => {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
-  const { openModal } = useModal();
+  const router = useRouter();
 
   const schema = z.object({
     slug: z
@@ -87,6 +87,7 @@ const UpdateWorkspaceUrlForm = ({
     api.workspace.checkSlugAvailability.useQuery(
       {
         workspaceSlug: debouncedSlug,
+        workspacePublicId,
       },
       {
         enabled:
@@ -99,8 +100,10 @@ const UpdateWorkspaceUrlForm = ({
   const onSubmit = (data: FormValues) => {
     if (!isWorkspaceSlugAvailable?.isAvailable) return;
 
-    if (workspacePlan !== "pro" && env("NEXT_PUBLIC_KAN_ENV") === "cloud")
-      return openModal("UPGRADE_TO_PRO", data.slug);
+    if (workspacePlan === "free" && env("NEXT_PUBLIC_KAN_ENV") === "cloud")
+      return router.push(
+        `/upgrade/select-plan?plan=team&workspacePublicId=${workspacePublicId}&returnUrl=${encodeURIComponent("/settings/workspace")}`,
+      );
 
     updateWorkspaceSlug.mutate({
       workspacePublicId,
@@ -112,10 +115,11 @@ const UpdateWorkspaceUrlForm = ({
     <div className="flex gap-2">
       <div className="mb-4 flex w-full max-w-[325px] items-center gap-2">
         <Input
+          aria-label={t`Workspace URL`}
           {...register("slug")}
           className={`${
             isWorkspaceSlugAvailable?.isAvailable ||
-            (workspacePlan === "pro" && slug === workspaceUrl)
+            (workspacePlan !== "free" && slug === workspaceUrl)
               ? "focus:ring-yellow-500 dark:focus:ring-yellow-500"
               : ""
           }`}
@@ -132,7 +136,7 @@ const UpdateWorkspaceUrlForm = ({
           }
           iconRight={
             isWorkspaceSlugAvailable?.isAvailable ||
-            (workspacePlan === "pro" && slug === workspaceUrl) ? (
+            (workspacePlan !== "free" && slug === workspaceUrl) ? (
               <HiMiniStar className="h-4 w-4 text-yellow-500" />
             ) : isWorkspaceSlugAvailable?.isAvailable ? (
               <HiCheck className="h-4 w-4 dark:text-dark-1000" />
