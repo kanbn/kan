@@ -21,7 +21,8 @@ import {
   boardBySlugSchema,
   boardCreateResponseSchema,
   boardUpdateResponseSchema,
-  customFieldFiltersSchema,
+  customFieldFilterTokensSchema,
+  parseCustomFieldFilterTokens,
 } from "../schemas";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
 import {
@@ -107,7 +108,7 @@ export const boardRouter = createTRPCRouter({
         members: z.array(z.string().min(12)).optional(),
         labels: z.array(z.string().min(12)).optional(),
         lists: z.array(z.string().min(12)).optional(),
-        customFields: customFieldFiltersSchema.optional(),
+        customFields: customFieldFilterTokensSchema.optional(),
         dueDateFilters: z
           .array(
             z.enum([
@@ -152,6 +153,9 @@ export const boardRouter = createTRPCRouter({
       const dueDateFilters = input.dueDateFilters
         ? convertDueDateFiltersToRanges(input.dueDateFilters)
         : [];
+      const customFieldFilters = parseCustomFieldFilterTokens(
+        input.customFields ?? [],
+      );
 
       const result = await boardRepo.getByPublicId(
         ctx.db,
@@ -161,7 +165,7 @@ export const boardRouter = createTRPCRouter({
           members: input.members ?? [],
           labels: input.labels ?? [],
           lists: input.lists ?? [],
-          customFields: input.customFields ?? [],
+          customFields: customFieldFilters,
           dueDate: dueDateFilters,
           type: input.type,
           cardView: input.cardView,
@@ -274,7 +278,7 @@ export const boardRouter = createTRPCRouter({
         members: z.array(z.string().min(12)).optional(),
         labels: z.array(z.string().min(12)).optional(),
         lists: z.array(z.string().min(12)).optional(),
-        customFields: customFieldFiltersSchema.optional(),
+        customFields: customFieldFilterTokensSchema.optional(),
         dueDateFilters: z
           .array(
             z.enum([
@@ -306,6 +310,9 @@ export const boardRouter = createTRPCRouter({
       const dueDateFilters = input.dueDateFilters
         ? convertDueDateFiltersToRanges(input.dueDateFilters)
         : [];
+      const customFieldFilters = parseCustomFieldFilterTokens(
+        input.customFields ?? [],
+      );
 
       const result = await boardRepo.getBySlug(
         ctx.db,
@@ -315,7 +322,7 @@ export const boardRouter = createTRPCRouter({
           members: input.members ?? [],
           labels: input.labels ?? [],
           lists: input.lists ?? [],
-          customFields: input.customFields ?? [],
+          customFields: customFieldFilters,
           dueDate: dueDateFilters,
         },
       );
