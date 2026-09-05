@@ -204,6 +204,8 @@ export default function Dashboard({
             <button
               ref={rightPanelButtonRef}
               onClick={toggleRightPanel}
+              aria-label={t`Settings`}
+              aria-expanded={isRightPanelOpen}
               className="rounded p-1.5 transition-all hover:bg-light-200 dark:hover:bg-dark-100"
             >
               {isRightPanelOpen ? (
