@@ -261,30 +261,32 @@ function FieldRow({
                     })
                   }
                 />
-                <Input
-                  defaultValue={option.name}
-                  aria-label={t`Option name`}
-                  onBlur={(event) => {
-                    const input = event.currentTarget;
-                    const optionName = input.value.trim();
-                    if (!optionName) {
-                      input.value = option.name;
-                      return;
-                    }
-                    if (optionName !== option.name)
-                      updateOption.mutate(
-                        {
-                          optionPublicId: option.publicId,
-                          name: optionName,
-                        },
-                        {
-                          onError: () => {
-                            input.value = option.name;
+                <div className="min-w-0 flex-1">
+                  <Input
+                    defaultValue={option.name}
+                    aria-label={t`Option name`}
+                    onBlur={(event) => {
+                      const input = event.currentTarget;
+                      const optionName = input.value.trim();
+                      if (!optionName) {
+                        input.value = option.name;
+                        return;
+                      }
+                      if (optionName !== option.name)
+                        updateOption.mutate(
+                          {
+                            optionPublicId: option.publicId,
+                            name: optionName,
                           },
-                        },
-                      );
-                  }}
-                />
+                          {
+                            onError: () => {
+                              input.value = option.name;
+                            },
+                          },
+                        );
+                    }}
+                  />
+                </div>
                 <Button
                   type="button"
                   variant="ghost"
@@ -420,6 +422,7 @@ export function CustomFieldManager({
   const utils = api.useUtils();
   const [name, setName] = useState("");
   const [type, setType] = useState<Definition["type"]>("select");
+  const [showOnCard, setShowOnCard] = useState(true);
   const { data: definitions = [], isLoading } =
     api.customField.definitionsByBoard.useQuery(
       { boardPublicId },
@@ -428,6 +431,7 @@ export function CustomFieldManager({
   const createDefinition = api.customField.createDefinition.useMutation({
     onSuccess: async () => {
       setName("");
+      setShowOnCard(true);
       await Promise.all([
         utils.customField.definitionsByBoard.invalidate({ boardPublicId }),
         utils.board.byId.invalidate({ boardPublicId }),
@@ -482,7 +486,7 @@ export function CustomFieldManager({
       </div>
 
       <form
-        className="sticky bottom-0 grid grid-cols-[1fr_140px_auto] gap-2 border-t border-light-400 bg-white/95 p-5 backdrop-blur dark:border-dark-500 dark:bg-dark-100/95"
+        className="sticky bottom-0 grid grid-cols-1 gap-2 border-t border-light-400 bg-white/95 p-5 backdrop-blur dark:border-dark-500 dark:bg-dark-100/95 sm:grid-cols-[minmax(0,1fr)_140px_auto]"
         onSubmit={(event) => {
           event.preventDefault();
           const fieldName = name.trim();
@@ -491,7 +495,7 @@ export function CustomFieldManager({
             boardPublicId,
             name: fieldName,
             type,
-            showOnCard: true,
+            showOnCard,
           });
         }}
       >
@@ -522,6 +526,15 @@ export function CustomFieldManager({
         >
           {t`Add field`}
         </Button>
+        <div className="sm:col-span-3">
+          <Toggle
+            label={t`Show on card front`}
+            labelPosition="after"
+            isChecked={showOnCard}
+            disabled={createDefinition.isPending}
+            onChange={() => setShowOnCard((current) => !current)}
+          />
+        </div>
       </form>
     </div>
   );
