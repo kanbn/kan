@@ -1092,6 +1092,200 @@ describe("custom field repository integration tests", () => {
     ).toEqual(["Explicitly unchecked"]);
   });
 
+  it("filters cards by text, number and date values", async () => {
+    const text = await createField("text", "Reference");
+    const number = await createField("number", "Estimate");
+    const date = await createField("date", "Target date");
+    const [storedBoard] = await db
+      .select({ id: boards.id, workspaceId: boards.workspaceId })
+      .from(boards)
+      .where(eq(boards.publicId, boardPublicId));
+    const [list] = await db
+      .select({ id: lists.id })
+      .from(lists)
+      .where(eq(lists.boardId, storedBoard!.id));
+    const extraCards = await db
+      .insert(cards)
+      .values([
+        {
+          publicId: "card00000002",
+          title: "Second scalar match",
+          index: 1,
+          listId: list!.id,
+          createdBy: actorUserId,
+        },
+        {
+          publicId: "card00000003",
+          title: "Third scalar match",
+          index: 2,
+          listId: list!.id,
+          createdBy: actorUserId,
+        },
+        {
+          publicId: "card00000004",
+          title: "No scalar values",
+          index: 3,
+          listId: list!.id,
+          createdBy: actorUserId,
+        },
+      ])
+      .returning();
+
+    const values = [
+      {
+        cardPublicId,
+        text: "Alpha 100%_\\done",
+        number: "10",
+        date: new Date("2026-01-10T12:00:00.000Z"),
+      },
+      {
+        cardPublicId: extraCards[0]!.publicId,
+        text: "alpha 100XXdone",
+        number: "20",
+        date: new Date("2026-01-20T12:00:00.000Z"),
+      },
+      {
+        cardPublicId: extraCards[1]!.publicId,
+        text: "Beta",
+        number: "30",
+        date: new Date("2026-01-30T12:00:00.000Z"),
+      },
+    ];
+    for (const value of values) {
+      await customFieldRepo.setCardValue(db, {
+        cardPublicId: value.cardPublicId,
+        fieldPublicId: text.publicId,
+        value: { type: "text", value: value.text },
+        actorUserId,
+      });
+      await customFieldRepo.setCardValue(db, {
+        cardPublicId: value.cardPublicId,
+        fieldPublicId: number.publicId,
+        value: { type: "number", value: value.number },
+        actorUserId,
+      });
+      await customFieldRepo.setCardValue(db, {
+        cardPublicId: value.cardPublicId,
+        fieldPublicId: date.publicId,
+        value: { type: "date", value: value.date },
+        actorUserId,
+      });
+    }
+
+    const titles = async (
+      customFields: customFieldRepo.BoardCustomFieldFilter[],
+    ) =>
+      (await boardRepo.getByPublicId(db, boardPublicId, actorUserId, {
+        members: [],
+        labels: [],
+        lists: [],
+        customFields,
+        dueDate: [],
+        type: "regular",
+      }))!.lists.flatMap((boardList) =>
+        boardList.cards.map((card) => card.title),
+      );
+
+    await expect(
+      titles([
+        { type: "text", fieldPublicId: text.publicId, contains: "ALPHA" },
+      ]),
+    ).resolves.toEqual(["Test card", "Second scalar match"]);
+    await expect(
+      titles([
+        { type: "text", fieldPublicId: text.publicId, contains: "%_\\" },
+      ]),
+    ).resolves.toEqual(["Test card"]);
+    await expect(
+      titles([
+        {
+          type: "number",
+          fieldPublicId: number.publicId,
+          operator: "equals",
+          value: "1e1",
+        },
+      ]),
+    ).resolves.toEqual(["Test card"]);
+    await expect(
+      titles([
+        {
+          type: "number",
+          fieldPublicId: number.publicId,
+          operator: "range",
+          min: "10",
+          max: "20",
+        },
+      ]),
+    ).resolves.toEqual(["Test card", "Second scalar match"]);
+    await expect(
+      titles([
+        {
+          type: "date",
+          fieldPublicId: date.publicId,
+          operator: "before",
+          value: new Date("2026-01-20T12:00:00.000Z"),
+        },
+      ]),
+    ).resolves.toEqual(["Test card"]);
+    await expect(
+      titles([
+        {
+          type: "date",
+          fieldPublicId: date.publicId,
+          operator: "range",
+          from: new Date("2026-01-10T12:00:00.000Z"),
+          to: new Date("2026-01-20T12:00:00.000Z"),
+        },
+      ]),
+    ).resolves.toEqual(["Test card", "Second scalar match"]);
+    await expect(
+      titles([
+        { type: "text", fieldPublicId: text.publicId, contains: "alpha" },
+        {
+          type: "number",
+          fieldPublicId: number.publicId,
+          operator: "range",
+          max: "15",
+        },
+        {
+          type: "date",
+          fieldPublicId: date.publicId,
+          operator: "after",
+          value: new Date("2026-01-01T00:00:00.000Z"),
+        },
+      ]),
+    ).resolves.toEqual(["Test card"]);
+
+    await db
+      .update(boards)
+      .set({ visibility: "public" })
+      .where(eq(boards.publicId, boardPublicId));
+    const publicBoard = await boardRepo.getBySlug(
+      db,
+      "test-board",
+      storedBoard!.workspaceId,
+      {
+        members: [],
+        labels: [],
+        lists: [],
+        customFields: [
+          {
+            type: "number",
+            fieldPublicId: number.publicId,
+            operator: "range",
+            min: "20",
+          },
+        ],
+        dueDate: [],
+      },
+    );
+    expect(
+      publicBoard!.lists.flatMap((boardList) =>
+        boardList.cards.map((card) => card.title),
+      ),
+    ).toEqual(["Second scalar match", "Third scalar match"]);
+  });
+
   it("archives definitions without deleting existing card values", async () => {
     const field = await createField("text");
     await customFieldRepo.setCardValue(db, {

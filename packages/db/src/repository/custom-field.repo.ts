@@ -1,4 +1,18 @@
-import { and, asc, count, eq, inArray, isNull, max, or } from "drizzle-orm";
+import {
+  and,
+  asc,
+  count,
+  eq,
+  gt,
+  gte,
+  ilike,
+  inArray,
+  isNull,
+  lt,
+  lte,
+  max,
+  or,
+} from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { CustomFieldType } from "@kan/db/schema";
@@ -55,6 +69,37 @@ export type CustomFieldValueInput =
 
 export type BoardCustomFieldFilter =
   | {
+      type: "text";
+      fieldPublicId: string;
+      contains: string;
+    }
+  | {
+      type: "number";
+      fieldPublicId: string;
+      operator: "equals";
+      value: string;
+    }
+  | {
+      type: "number";
+      fieldPublicId: string;
+      operator: "range";
+      min?: string;
+      max?: string;
+    }
+  | {
+      type: "date";
+      fieldPublicId: string;
+      operator: "before" | "after";
+      value: Date;
+    }
+  | {
+      type: "date";
+      fieldPublicId: string;
+      operator: "range";
+      from?: Date;
+      to?: Date;
+    }
+  | {
       type: "select";
       fieldPublicId: string;
       optionPublicIds: string[];
@@ -64,6 +109,64 @@ export type BoardCustomFieldFilter =
       fieldPublicId: string;
       values: ("checked" | "unchecked")[];
     };
+
+type ScalarCustomFieldFilter = Extract<
+  BoardCustomFieldFilter,
+  { type: "text" | "number" | "date" }
+>;
+
+const escapeLikePattern = (value: string) =>
+  value.replace(/[\\%_]/g, (character) => `\\${character}`);
+
+const getScalarFilterCondition = (filter: ScalarCustomFieldFilter) => {
+  const fieldCondition = eq(customFields.publicId, filter.fieldPublicId);
+
+  if (filter.type === "text")
+    return and(
+      fieldCondition,
+      eq(cardCustomFieldValues.fieldType, "text"),
+      ilike(
+        cardCustomFieldValues.textValue,
+        `%${escapeLikePattern(filter.contains)}%`,
+      ),
+    );
+
+  if (filter.type === "number")
+    return and(
+      fieldCondition,
+      eq(cardCustomFieldValues.fieldType, "number"),
+      filter.operator === "equals"
+        ? eq(cardCustomFieldValues.numberValue, filter.value)
+        : and(
+            filter.min === undefined
+              ? undefined
+              : gte(cardCustomFieldValues.numberValue, filter.min),
+            filter.max === undefined
+              ? undefined
+              : lte(cardCustomFieldValues.numberValue, filter.max),
+          ),
+    );
+
+  if ("value" in filter)
+    return and(
+      fieldCondition,
+      eq(cardCustomFieldValues.fieldType, "date"),
+      filter.operator === "before"
+        ? lt(cardCustomFieldValues.dateValue, filter.value)
+        : gt(cardCustomFieldValues.dateValue, filter.value),
+    );
+
+  return and(
+    fieldCondition,
+    eq(cardCustomFieldValues.fieldType, "date"),
+    filter.from === undefined
+      ? undefined
+      : gte(cardCustomFieldValues.dateValue, filter.from),
+    filter.to === undefined
+      ? undefined
+      : lte(cardCustomFieldValues.dateValue, filter.to),
+  );
+};
 
 export const getCardPublicIdsMatchingFilters = async (
   db: dbClient,
@@ -93,11 +196,15 @@ export const getCardPublicIdsMatchingFilters = async (
     (filter): filter is Extract<BoardCustomFieldFilter, { type: "checkbox" }> =>
       filter.type === "checkbox",
   );
+  const scalarFilters = filters.filter(
+    (filter): filter is ScalarCustomFieldFilter =>
+      filter.type !== "select" && filter.type !== "checkbox",
+  );
   const needsAllBoardCards = checkboxFilters.some((filter) =>
     filter.values.includes("unchecked"),
   );
 
-  const [selectRows, checkedRows, boardCardRows] = await Promise.all([
+  const [selectRows, checkedRows, scalarRows, boardRows] = await Promise.all([
     selectFilters.length > 0
       ? db
           .selectDistinct({
@@ -168,6 +275,31 @@ export const getCardPublicIdsMatchingFilters = async (
             ),
           )
       : [],
+    scalarFilters.length > 0
+      ? db
+          .selectDistinct({
+            cardPublicId: cards.publicId,
+            fieldPublicId: customFields.publicId,
+          })
+          .from(cards)
+          .innerJoin(lists, eq(cards.listId, lists.id))
+          .innerJoin(boards, eq(lists.boardId, boards.id))
+          .innerJoin(
+            cardCustomFieldValues,
+            eq(cardCustomFieldValues.cardId, cards.id),
+          )
+          .innerJoin(
+            customFields,
+            eq(cardCustomFieldValues.customFieldId, customFields.id),
+          )
+          .where(
+            and(
+              boardConditions,
+              isNull(customFields.deletedAt),
+              or(...scalarFilters.map(getScalarFilterCondition)),
+            ),
+          )
+      : [],
     needsAllBoardCards
       ? db
           .select({ cardPublicId: cards.publicId })
@@ -191,10 +323,13 @@ export const getCardPublicIdsMatchingFilters = async (
   };
   const selectMatches = collectByField(selectRows);
   const checkedMatches = collectByField(checkedRows);
-  const allBoardCards = new Set(boardCardRows.map((row) => row.cardPublicId));
+  const scalarMatches = collectByField(scalarRows);
+  const allBoardCards = new Set(boardRows.map((row) => row.cardPublicId));
   const matchesByFilter = filters.map((filter) => {
     if (filter.type === "select")
       return selectMatches.get(filter.fieldPublicId) ?? new Set<string>();
+    if (filter.type !== "checkbox")
+      return scalarMatches.get(filter.fieldPublicId) ?? new Set<string>();
 
     const selectedValues = new Set(filter.values);
     if (selectedValues.size === 2) return allBoardCards;
