@@ -2,6 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
+import { CardLabelBoardError } from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardCommentRepo from "@kan/db/repository/cardComment.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
@@ -81,6 +82,34 @@ export const cardRouter = createTRPCRouter({
 
       await assertPermission(ctx.db, userId, list.workspaceId, "card:create");
 
+      // Resolved before the card is created: the labels must belong to the
+      // board the card is being created on, and a rejection after cardRepo.create
+      // would leave the card behind with a 500 for what is a client-correctable
+      // input.
+      const labelsToLink = input.labelPublicIds.length
+        ? await labelRepo.getAllByPublicIds(ctx.db, input.labelPublicIds)
+        : [];
+
+      // Every requested label must resolve. Accepting a subset would create the
+      // card holding fewer labels than asked for, and report success.
+      const requestedLabelIds = [...new Set(input.labelPublicIds)];
+
+      if (labelsToLink.length !== requestedLabelIds.length)
+        throw new TRPCError({
+          message: `Labels with public IDs (${input.labelPublicIds.join(", ")}) not found`,
+          code: "NOT_FOUND",
+        });
+
+      const labelsFromAnotherBoard = labelsToLink.filter(
+        (label) => label.boardId !== list.boardId,
+      );
+
+      if (labelsFromAnotherBoard.length)
+        throw new TRPCError({
+          message: `Labels belong to a different board than list ${input.listPublicId}`,
+          code: "BAD_REQUEST",
+        });
+
       const members = input.memberPublicIds.length
         ? await workspaceRepo.getAllMembersByPublicIds(
             ctx.db,
@@ -113,19 +142,8 @@ export const cardRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
         });
 
-      if (newCardId && input.labelPublicIds.length) {
-        const labels = await labelRepo.getAllByPublicIds(
-          ctx.db,
-          input.labelPublicIds,
-        );
-
-        if (!labels.length)
-          throw new TRPCError({
-            message: `Labels with public IDs (${input.labelPublicIds.join(", ")}) not found`,
-            code: "NOT_FOUND",
-          });
-
-        const labelsInsert = labels.map((label) => ({
+      if (newCardId && labelsToLink.length) {
+        const labelsInsert = labelsToLink.map((label) => ({
           cardId: newCardId,
           labelId: label.id,
         }));
@@ -535,8 +553,24 @@ export const cardRouter = createTRPCRouter({
         return { newLabel: false };
       }
 
-      const newCardLabelRelationship =
-        await cardRepo.createCardLabelRelationship(ctx.db, cardLabelIds);
+      // The public add-label path reaches the writer without pre-validating, so
+      // it maps the domain error rather than surfacing a 500 for what is a
+      // client-correctable input. A middleware could do this once for every
+      // transport, but that changes the error path for every procedure and
+      // belongs with the wider decision, not in a bug fix.
+      const newCardLabelRelationship = await cardRepo
+        .createCardLabelRelationship(ctx.db, cardLabelIds)
+        .catch((error: unknown) => {
+          if (error instanceof CardLabelBoardError)
+            throw new TRPCError({
+              message: error.message,
+              code:
+                error.violation === "board_mismatch"
+                  ? "BAD_REQUEST"
+                  : "NOT_FOUND",
+            });
+          throw error;
+        });
 
       if (!newCardLabelRelationship)
         throw new TRPCError({
@@ -1285,6 +1319,28 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
+      // Checked before the card exists. cardRepo.create opens its own
+      // transaction, so the router cannot roll it back: a refusal after this
+      // point leaves a duplicate behind, and the caller retrying as the error
+      // message suggests would make a second one.
+      const sourceLabels = sourceCard.labels ?? [];
+      const sourceLabelRecords = input.copyLabels && sourceLabels.length
+        ? await labelRepo.getAllByPublicIds(
+            ctx.db,
+            sourceLabels.map((label) => label.publicId),
+          )
+        : [];
+
+      if (
+        sourceLabelRecords.some(
+          (label) => label.boardId !== targetList.boardId,
+        )
+      )
+        throw new TRPCError({
+          message: `Cannot copy labels to a list on a different board. Labels belong to a board, so duplicate with copyLabels: false when the target list is on another board.`,
+          code: "BAD_REQUEST",
+        });
+
       const newCard = await cardRepo.create(ctx.db, {
         title: input.title ?? sourceCard.title,
         description: normalizeDescription(sourceCard.description),
@@ -1303,12 +1359,8 @@ export const cardRouter = createTRPCRouter({
         });
       }
 
-      if (input.copyLabels && sourceCard.labels?.length) {
-        const labelPublicIds = sourceCard.labels.map((l) => l.publicId);
-        const labels = await labelRepo.getAllByPublicIds(
-          ctx.db,
-          labelPublicIds,
-        );
+      if (input.copyLabels && sourceLabelRecords.length) {
+        const labels = sourceLabelRecords;
         if (labels.length) {
           const labelsInsert = labels.map((label) => ({
             cardId: newCard.id,
