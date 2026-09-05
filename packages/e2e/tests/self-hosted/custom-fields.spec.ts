@@ -122,6 +122,20 @@ test(
       "High",
     );
 
+    await field.fill("Discard this edit");
+    await field.press("Escape");
+    await expect(field).toHaveValue("  Preserve\nthese spaces  ");
+
+    await estimate.fill("not-a-number");
+    const invalidNumberRejected = waitForTrpcMutation(
+      page,
+      "customField.setValue",
+    );
+    await estimate.blur();
+    expect((await invalidNumberRejected).ok()).toBe(false);
+    await expect(estimate).toHaveValue("13.5");
+    await expect(page.getByText("Unable to update custom field")).toBeVisible();
+
     const cardPath = new URL(page.url()).pathname;
     await page.goto(boardPath);
     const cardLink = page.locator(`a[href="${cardPath}"]`);
