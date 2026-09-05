@@ -38,7 +38,11 @@ export const getProviderForUser = async (
 export const getProvidersForUser = async (db: dbClient, userId: string) => {
   const integration = await db.query.integrations.findMany({
     columns: {
+      createdAt: true,
+      expiresAt: true,
       provider: true,
+      updatedAt: true,
+      userId: true,
     },
     where: and(
       eq(integrations.userId, userId),
@@ -76,6 +80,27 @@ export const createOrUpdateProvider = async (
         expiresAt: data.expiresAt,
       },
     });
+};
+
+export const updateAccessTokenIfCurrent = async (
+  db: dbClient,
+  data: {
+    userId: string;
+    provider: string;
+    currentAccessToken: string;
+    accessToken: string;
+  },
+) => {
+  await db
+    .update(integrations)
+    .set({ accessToken: data.accessToken })
+    .where(
+      and(
+        eq(integrations.userId, data.userId),
+        eq(integrations.provider, data.provider),
+        eq(integrations.accessToken, data.currentAccessToken),
+      ),
+    );
 };
 
 export const deleteProviderForUser = async (

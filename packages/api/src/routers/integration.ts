@@ -89,7 +89,17 @@ export const integrationRouter = createTRPCRouter({
       },
     })
     .input(z.void())
-    .output(z.array(z.object({ provider: z.string() })))
+    .output(
+      z.array(
+        z.object({
+          expiresAt: z.date(),
+          createdAt: z.date(),
+          updatedAt: z.date().nullable(),
+          userId: z.string(),
+          provider: z.string(),
+        }),
+      ),
+    )
     .query(async ({ ctx }) => {
       const user = ctx.user;
 
@@ -190,7 +200,14 @@ export const integrationRouter = createTRPCRouter({
           code: "BAD_REQUEST",
         });
 
-      const url = `${urls[input.provider]}/authorize?key=${apiKey}&expiration=never&response_type=token&scope=read&return_url=${env("NEXT_PUBLIC_BASE_URL")}/settings/trello/authorize&callback_method=fragment`;
-      return { url };
+      if (input.provider === "trello") {
+        const url = `${urls[input.provider]}/authorize?key=${apiKey}&expiration=never&response_type=token&scope=read&return_url=${env("NEXT_PUBLIC_BASE_URL")}/settings/trello/authorize&callback_method=fragment`;
+        return { url };
+      }
+
+      throw new TRPCError({
+        message: "Invalid provider",
+        code: "BAD_REQUEST",
+      });
     }),
 });

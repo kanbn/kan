@@ -1,6 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
+import type { dbClient } from "@kan/db/client";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
@@ -22,10 +23,40 @@ import { assertUserInWorkspace } from "../utils/auth";
 import { decryptToken } from "../utils/encryption";
 import { assertPermission } from "../utils/permissions";
 import { getTrelloLabelColour } from "../utils/trello";
-import { decryptTrelloToken } from "../utils/trello-token";
+import {
+  decryptTrelloToken,
+  encryptTrelloToken,
+  isEncryptedTrelloToken,
+} from "../utils/trello-token";
 import { apiKeys, urls } from "./integration";
 
 const log = createLogger("import");
+
+const getTrelloTokenForUser = async (db: dbClient, userId: string) => {
+  const integration = await integrationsRepo.getProviderForUser(
+    db,
+    userId,
+    "trello",
+  );
+
+  if (!integration)
+    throw new TRPCError({
+      message: "Trello token not found",
+      code: "UNAUTHORIZED",
+    });
+
+  const token = decryptTrelloToken(integration.accessToken);
+
+  if (!isEncryptedTrelloToken(integration.accessToken))
+    await integrationsRepo.updateAccessTokenIfCurrent(db, {
+      userId,
+      provider: "trello",
+      currentAccessToken: integration.accessToken,
+      accessToken: encryptTrelloToken(token),
+    });
+
+  return token;
+};
 
 export interface TrelloBoard {
   id: string;
@@ -154,21 +185,7 @@ export const importRouter = createTRPCRouter({
             code: "UNAUTHORIZED",
           });
 
-        const integration = await integrationsRepo.getProviderForUser(
-          ctx.db,
-          user.id,
-          "trello",
-        );
-
-        const token = integration
-          ? decryptTrelloToken(integration.accessToken)
-          : null;
-
-        if (!token)
-          throw new TRPCError({
-            message: "Trello token not found",
-            code: "UNAUTHORIZED",
-          });
+        const token = await getTrelloTokenForUser(ctx.db, user.id);
 
         const response = await fetch(
           `${urls.trello}/members/me/boards?key=${apiKey}&token=${token}`,
@@ -227,19 +244,7 @@ export const importRouter = createTRPCRouter({
             code: "UNAUTHORIZED",
           });
 
-        const integration = await integrationsRepo.getProviderForUser(
-          ctx.db,
-          userId,
-          "trello",
-        );
-
-        if (!integration)
-          throw new TRPCError({
-            message: "Trello token not found",
-            code: "UNAUTHORIZED",
-          });
-
-        const token = decryptTrelloToken(integration.accessToken);
+        const token = await getTrelloTokenForUser(ctx.db, userId);
 
         const workspace = await workspaceRepo.getByPublicId(
           ctx.db,
