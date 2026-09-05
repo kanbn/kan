@@ -39,11 +39,16 @@ test(
     await expect(
       dialog.getByRole("heading", { name: "Custom fields" }),
     ).toBeVisible();
-    const addField = async (name: string, type: string) => {
+    const addField = async (name: string, type: string, showOnCard = true) => {
       await dialog.getByPlaceholder("Field name").fill(name);
       await dialog
         .getByRole("combobox", { name: "Field type" })
         .selectOption({ label: type });
+      const showOnCardToggle = dialog
+        .getByRole("switch", { name: "Show on card front" })
+        .last();
+      if ((await showOnCardToggle.isChecked()) !== showOnCard)
+        await showOnCardToggle.click();
       const definitionCreated = waitForTrpcMutation(
         page,
         "customField.createDefinition",
@@ -55,7 +60,7 @@ test(
       ).toHaveValue(name);
     };
 
-    await addField("Effort notes", "Text");
+    await addField("Effort notes", "Text", false);
     await addField("Estimate", "Number");
     await addField("Milestone", "Date");
     await addField("Approved", "Checkbox");
@@ -89,8 +94,11 @@ test(
     await milestoneStored;
 
     const priorityStored = waitForTrpcMutation(page, "customField.setValue");
-    await page.getByRole("button", { name: "Priority" }).click();
-    await page.getByRole("option", { name: "High" }).click();
+    const priority = page.getByRole("button", { name: "Priority" });
+    await priority.focus();
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("End");
+    await page.keyboard.press("Enter");
     await priorityStored;
 
     const checkboxStored = waitForTrpcMutation(page, "customField.setValue");
@@ -117,8 +125,8 @@ test(
     const cardPath = new URL(page.url()).pathname;
     await page.goto(boardPath);
     const cardLink = page.locator(`a[href="${cardPath}"]`);
-    await expect(cardLink.getByText("Effort notes:")).toBeVisible();
-    await expect(cardLink.getByText("Preserve these spaces")).toBeVisible();
+    await expect(cardLink.getByText("Effort notes:")).toHaveCount(0);
+    await expect(cardLink.getByText("Preserve these spaces")).toHaveCount(0);
     await expect(cardLink.getByText("Estimate:")).toBeVisible();
     await expect(cardLink.getByText("Milestone:")).toBeVisible();
     await expect(cardLink.getByText("Priority:")).toBeVisible();
@@ -161,6 +169,11 @@ test(
     await board.createList("To do");
     await board.createCard("Lifecycle card", "To do");
 
+    await page.evaluate(() => localStorage.setItem("theme", "dark"));
+    await page.reload();
+    await expect(page.locator("html")).toHaveClass(/dark/);
+    await page.setViewportSize({ width: 390, height: 844 });
+
     const openManager = async () => {
       await page
         .getByRole("button", { name: "Board options", exact: true })
@@ -169,6 +182,12 @@ test(
       return page.getByRole("dialog");
     };
     const dialog = await openManager();
+    const dialogBox = await dialog.boundingBox();
+    expect(dialogBox).not.toBeNull();
+    expect(dialogBox?.x).toBeGreaterThanOrEqual(0);
+    expect(dialogBox ? dialogBox.x + dialogBox.width : 0).toBeLessThanOrEqual(
+      390,
+    );
     const addField = async (name: string, type: string) => {
       await dialog.getByPlaceholder("Field name").fill(name);
       await dialog
@@ -226,6 +245,7 @@ test(
     await dialog.getByRole("button", { name: "Close" }).click();
     const boardPath = new URL(page.url()).pathname;
     await board.openCard("Lifecycle card");
+    await page.getByRole("button", { name: "Settings" }).click();
     const valueStored = waitForTrpcMutation(page, "customField.setValue");
     await page.getByRole("button", { name: "Priority" }).click();
     await page.getByRole("option", { name: "Low" }).click();
@@ -280,6 +300,7 @@ test(
     await reopenedDialog.getByRole("button", { name: "Close" }).click();
 
     await board.openCard("Lifecycle card");
+    await page.getByRole("button", { name: "Settings" }).click();
     const priority = page.getByRole("button", { name: "Priority" });
     await expect(priority).toHaveText("Low (Archived)");
     const valueCleared = waitForTrpcMutation(page, "customField.clearValue");
