@@ -537,27 +537,72 @@ export const createDefinition = async (
 const getFieldContext = async (
   db: Pick<dbClient, "select">,
   fieldPublicId: string,
+  lockStrength: "share" | "update" = "update",
 ) => {
-  const [field] = await db
-    .select({
-      id: customFields.id,
-      type: customFields.type,
-      boardArchived: boards.isArchived,
-    })
+  if (lockStrength === "share") {
+    const [field] = await db
+      .select({
+        id: customFields.id,
+        type: customFields.type,
+        boardId: customFields.boardId,
+        boardArchived: boards.isArchived,
+      })
+      .from(customFields)
+      .innerJoin(boards, eq(customFields.boardId, boards.id))
+      .where(
+        and(
+          eq(customFields.publicId, fieldPublicId),
+          isNull(customFields.deletedAt),
+          isNull(boards.deletedAt),
+        ),
+      )
+      .limit(1)
+      .for("share", { of: customFields });
+
+    if (!field) throw new CustomFieldRepositoryError("FIELD_NOT_FOUND");
+    if (field.boardArchived)
+      throw new CustomFieldRepositoryError("BOARD_ARCHIVED");
+    return field;
+  }
+
+  const [fieldScope] = await db
+    .select({ id: customFields.id, boardId: customFields.boardId })
     .from(customFields)
-    .innerJoin(boards, eq(customFields.boardId, boards.id))
     .where(
       and(
         eq(customFields.publicId, fieldPublicId),
         isNull(customFields.deletedAt),
-        isNull(boards.deletedAt),
       ),
     )
     .limit(1);
+  if (!fieldScope) throw new CustomFieldRepositoryError("FIELD_NOT_FOUND");
 
+  const [board] = await db
+    .select({ id: boards.id, isArchived: boards.isArchived })
+    .from(boards)
+    .where(and(eq(boards.id, fieldScope.boardId), isNull(boards.deletedAt)))
+    .limit(1)
+    .for("update", { of: boards });
+  if (!board) throw new CustomFieldRepositoryError("FIELD_NOT_FOUND");
+  if (board.isArchived) throw new CustomFieldRepositoryError("BOARD_ARCHIVED");
+
+  const [field] = await db
+    .select({
+      id: customFields.id,
+      type: customFields.type,
+      boardId: customFields.boardId,
+    })
+    .from(customFields)
+    .where(
+      and(
+        eq(customFields.id, fieldScope.id),
+        eq(customFields.boardId, board.id),
+        isNull(customFields.deletedAt),
+      ),
+    )
+    .limit(1)
+    .for("update", { of: customFields });
   if (!field) throw new CustomFieldRepositoryError("FIELD_NOT_FOUND");
-  if (field.boardArchived)
-    throw new CustomFieldRepositoryError("BOARD_ARCHIVED");
   return field;
 };
 
@@ -638,7 +683,8 @@ export const reorderDefinitions = async (
       .from(customFields)
       .where(
         and(eq(customFields.boardId, board.id), isNull(customFields.deletedAt)),
-      );
+      )
+      .for("update", { of: customFields });
     const fieldIdsByPublicId = new Map(
       fields.map((field) => [field.publicId, field.id]),
     );
@@ -678,12 +724,6 @@ export const createOption = async (
     const field = await getFieldContext(tx, input.fieldPublicId);
     if (field.type !== "select")
       throw new CustomFieldRepositoryError("FIELD_TYPE_MISMATCH");
-
-    await tx
-      .select({ id: customFields.id })
-      .from(customFields)
-      .where(eq(customFields.id, field.id))
-      .for("update");
 
     const [optionCount] = await tx
       .select({ value: count() })
@@ -729,34 +769,42 @@ export const createOption = async (
     return result;
   });
 
-const getOptionContext = async (
-  db: Pick<dbClient, "select">,
-  optionPublicId: string,
-) => {
-  const [option] = await db
+const getOptionContext = async (db: dbTransaction, optionPublicId: string) => {
+  const [optionScope] = await db
     .select({
       id: customFieldOptions.id,
-      boardArchived: boards.isArchived,
+      fieldPublicId: customFields.publicId,
     })
     .from(customFieldOptions)
     .innerJoin(
       customFields,
       eq(customFieldOptions.customFieldId, customFields.id),
     )
-    .innerJoin(boards, eq(customFields.boardId, boards.id))
     .where(
       and(
         eq(customFieldOptions.publicId, optionPublicId),
         isNull(customFieldOptions.deletedAt),
         isNull(customFields.deletedAt),
-        isNull(boards.deletedAt),
       ),
     )
     .limit(1);
 
+  if (!optionScope) throw new CustomFieldRepositoryError("OPTION_NOT_FOUND");
+
+  await getFieldContext(db, optionScope.fieldPublicId);
+  const [option] = await db
+    .select({ id: customFieldOptions.id })
+    .from(customFieldOptions)
+    .where(
+      and(
+        eq(customFieldOptions.id, optionScope.id),
+        isNull(customFieldOptions.deletedAt),
+      ),
+    )
+    .limit(1)
+    .for("update", { of: customFieldOptions });
+
   if (!option) throw new CustomFieldRepositoryError("OPTION_NOT_FOUND");
-  if (option.boardArchived)
-    throw new CustomFieldRepositoryError("BOARD_ARCHIVED");
   return option;
 };
 
@@ -822,12 +870,6 @@ export const reorderOptions = async (
     if (field.type !== "select")
       throw new CustomFieldRepositoryError("FIELD_TYPE_MISMATCH");
 
-    await tx
-      .select({ id: customFields.id })
-      .from(customFields)
-      .where(eq(customFields.id, field.id))
-      .for("update");
-
     const options = await tx
       .select({
         id: customFieldOptions.id,
@@ -888,6 +930,34 @@ const getCardContext = async (
       ),
     )
     .limit(1);
+
+  if (!card) throw new CustomFieldRepositoryError("CARD_NOT_FOUND");
+  return card;
+};
+
+const getMutableCardContext = async (
+  db: dbTransaction,
+  cardPublicId: string,
+) => {
+  const [card] = await db
+    .select({
+      id: cards.id,
+      boardId: boards.id,
+      boardArchived: boards.isArchived,
+    })
+    .from(cards)
+    .innerJoin(lists, eq(cards.listId, lists.id))
+    .innerJoin(boards, eq(lists.boardId, boards.id))
+    .where(
+      and(
+        eq(cards.publicId, cardPublicId),
+        isNull(cards.deletedAt),
+        isNull(lists.deletedAt),
+        isNull(boards.deletedAt),
+      ),
+    )
+    .limit(1)
+    .for("share", { of: cards });
 
   if (!card) throw new CustomFieldRepositoryError("CARD_NOT_FOUND");
   return card;
@@ -962,7 +1032,8 @@ export const copyActiveCardValues = async (
           isNull(lists.deletedAt),
         ),
       )
-      .limit(1);
+      .limit(1)
+      .for("share", { of: cards });
     const [targetCard] = await tx
       .select({ boardId: lists.boardId })
       .from(cards)
@@ -974,7 +1045,8 @@ export const copyActiveCardValues = async (
           isNull(lists.deletedAt),
         ),
       )
-      .limit(1);
+      .limit(1)
+      .for("share", { of: cards });
 
     if (!sourceCard || !targetCard)
       throw new CustomFieldRepositoryError("CARD_NOT_FOUND");
@@ -1027,6 +1099,14 @@ export const moveCardValuesToBoard = async (
     actorUserId: string;
   },
 ) => {
+  const [card] = await db
+    .select({ id: cards.id })
+    .from(cards)
+    .where(and(eq(cards.id, input.cardId), isNull(cards.deletedAt)))
+    .limit(1)
+    .for("update", { of: cards });
+  if (!card) throw new CustomFieldRepositoryError("CARD_NOT_FOUND");
+
   const values = await db
     .select({
       id: cardCustomFieldValues.id,
@@ -1060,7 +1140,8 @@ export const moveCardValuesToBoard = async (
     .select({ id: boards.id, isArchived: boards.isArchived })
     .from(boards)
     .where(and(eq(boards.id, input.targetBoardId), isNull(boards.deletedAt)))
-    .limit(1);
+    .limit(1)
+    .for("update", { of: boards });
   if (!targetBoard) throw new CustomFieldRepositoryError("BOARD_NOT_FOUND");
   if (targetBoard.isArchived)
     throw new CustomFieldRepositoryError("BOARD_ARCHIVED");
@@ -1354,20 +1435,14 @@ export const setCardValue = async (
   },
 ) =>
   db.transaction(async (tx) => {
-    const card = await getCardContext(tx, input.cardPublicId);
+    const card = await getMutableCardContext(tx, input.cardPublicId);
     if (card.boardArchived)
       throw new CustomFieldRepositoryError("BOARD_ARCHIVED");
 
-    const field = await tx.query.customFields.findFirst({
-      columns: { id: true, type: true },
-      where: and(
-        eq(customFields.publicId, input.fieldPublicId),
-        eq(customFields.boardId, card.boardId),
-        isNull(customFields.deletedAt),
-      ),
-    });
+    const field = await getFieldContext(tx, input.fieldPublicId, "share");
 
-    if (!field) throw new CustomFieldRepositoryError("FIELD_NOT_FOUND");
+    if (field.boardId !== card.boardId)
+      throw new CustomFieldRepositoryError("FIELD_NOT_FOUND");
     if (field.type !== input.value.type)
       throw new CustomFieldRepositoryError("FIELD_TYPE_MISMATCH");
 
@@ -1399,14 +1474,18 @@ export const setCardValue = async (
         values.checkboxValue = input.value.value;
         break;
       case "select": {
-        const option = await tx.query.customFieldOptions.findFirst({
-          columns: { id: true },
-          where: and(
-            eq(customFieldOptions.publicId, input.value.optionPublicId),
-            eq(customFieldOptions.customFieldId, field.id),
-            isNull(customFieldOptions.deletedAt),
-          ),
-        });
+        const [option] = await tx
+          .select({ id: customFieldOptions.id })
+          .from(customFieldOptions)
+          .where(
+            and(
+              eq(customFieldOptions.publicId, input.value.optionPublicId),
+              eq(customFieldOptions.customFieldId, field.id),
+              isNull(customFieldOptions.deletedAt),
+            ),
+          )
+          .limit(1)
+          .for("share", { of: customFieldOptions });
         if (!option) throw new CustomFieldRepositoryError("OPTION_NOT_FOUND");
         values.optionId = option.id;
         break;
@@ -1473,19 +1552,13 @@ export const clearCardValue = async (
   input: { cardPublicId: string; fieldPublicId: string },
 ) =>
   db.transaction(async (tx) => {
-    const card = await getCardContext(tx, input.cardPublicId);
+    const card = await getMutableCardContext(tx, input.cardPublicId);
     if (card.boardArchived)
       throw new CustomFieldRepositoryError("BOARD_ARCHIVED");
-    const field = await tx.query.customFields.findFirst({
-      columns: { id: true },
-      where: and(
-        eq(customFields.publicId, input.fieldPublicId),
-        eq(customFields.boardId, card.boardId),
-        isNull(customFields.deletedAt),
-      ),
-    });
+    const field = await getFieldContext(tx, input.fieldPublicId, "share");
 
-    if (!field) throw new CustomFieldRepositoryError("FIELD_NOT_FOUND");
+    if (field.boardId !== card.boardId)
+      throw new CustomFieldRepositoryError("FIELD_NOT_FOUND");
 
     const [result] = await tx
       .delete(cardCustomFieldValues)
