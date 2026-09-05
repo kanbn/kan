@@ -53,6 +53,15 @@
     ],
     "translation": "Архивировать это поле? Существующие значения на карточках будут скрыты, но сохранены."
   },
+  "ABZuOF": {
+    "message": "Archive this option? Existing card values will keep it until changed.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 340]
+    ],
+    "translation": "Архивировать этот вариант? Существующие значения в карточках сохранят его до изменения."
+  },
   "yF2aJL": {
     "message": "Archived options",
     "placeholders": {},

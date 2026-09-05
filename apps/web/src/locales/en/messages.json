@@ -53,6 +53,15 @@
     ],
     "translation": "Archive this field? Existing card values will be hidden but preserved."
   },
+  "ABZuOF": {
+    "message": "Archive this option? Existing card values will keep it until changed.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 340]
+    ],
+    "translation": "Archive this option? Existing card values will keep it until changed."
+  },
   "yF2aJL": {
     "message": "Archived options",
     "placeholders": {},
