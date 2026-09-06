@@ -6,6 +6,7 @@ import { HiLink, HiXMark } from "react-icons/hi2";
 import Badge from "~/components/Badge";
 import Editor from "~/components/Editor";
 import LabelIcon from "~/components/LabelIcon";
+import { useActivitySortOrder } from "~/hooks/useActivitySortOrder";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
@@ -23,6 +24,7 @@ export function CardModal({
   boardSlug: string | null | undefined;
 }) {
   const router = useRouter();
+  const activitySortOrder = useActivitySortOrder();
   const { closeModal, isOpen } = useModal();
   const { showPopup } = usePopup();
   const [showFade, setShowFade] = useState(false);
@@ -213,6 +215,7 @@ export function CardModal({
                     <ActivityList
                       cardPublicId={cardPublicId}
                       isLoading={isLoading}
+                      order={activitySortOrder}
                       isViewOnly={true}
                     />
                   )}
