@@ -1,6 +1,7 @@
 import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
 
+import { ActivitySortOrderSelector } from "~/components/ActivitySortOrderSelector";
 import Button from "~/components/Button";
 import FeedbackModal from "~/components/FeedbackModal";
 import { FontSizeSelector } from "~/components/FontSizeSelector";
@@ -63,6 +64,16 @@ export default function AccountSettings() {
             {t`Change the application font size.`}
           </p>
           <FontSizeSelector />
+        </div>
+
+        <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+          <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
+            {t`Activity order`}
+          </h2>
+          <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+            {t`Choose whether newer or older activity appears first.`}
+          </p>
+          <ActivitySortOrderSelector />
         </div>
 
         <div className="mb-8 border-t border-light-300 dark:border-dark-300">

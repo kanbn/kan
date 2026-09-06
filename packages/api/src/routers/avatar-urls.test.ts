@@ -59,8 +59,9 @@ const mockAssertPermission = vi.mocked(assertPermission);
 const avatarKey = "avatars/shared.png";
 const signedAvatarUrl = "https://example.com/avatars/shared.png";
 const now = new Date("2026-09-04T12:00:00.000Z");
+const db = {};
 const ctx = {
-  db: {} as never,
+  db,
   user: {
     id: "user-1",
     name: "Test User",
@@ -227,5 +228,41 @@ describe("avatar URL resolution in routers", () => {
     expect(result.activities[1]?.user?.image).toBe(signedAvatarUrl);
     expect(result.activities[1]?.member?.user?.image).toBe(signedAvatarUrl);
     expect(mockGenerateAvatarUrl).toHaveBeenCalledTimes(1);
+  });
+
+  it("passes activity order and a stable cursor to the repository", async () => {
+    mockGetCard.mockResolvedValue({
+      id: 17,
+      workspaceId: 7,
+      workspaceVisibility: "public",
+    } as never);
+    mockGetActivities.mockResolvedValue({
+      activities: [createActivity("activity0002", false)],
+      hasMore: true,
+      nextCursor: {
+        createdAt: now,
+        publicId: "activity0002",
+      },
+    } as never);
+
+    const { cardRouter } = await import("./card");
+    const result = await cardRouter.createCaller(ctx).getActivities({
+      cardPublicId: "card-12345678",
+      limit: 20,
+      cursor: "2026-09-04T11:00:00.000Z",
+      cursorPublicId: "activity0001",
+      order: "newest",
+    });
+
+    expect(mockGetActivities).toHaveBeenCalledWith(db, 17, {
+      limit: 20,
+      cursor: {
+        createdAt: new Date("2026-09-04T11:00:00.000Z"),
+        publicId: "activity0001",
+      },
+      order: "newest",
+    });
+    expect(result.nextCursor).toBe(now.toISOString());
+    expect(result.nextCursorPublicId).toBe("activity0002");
   });
 });

@@ -23,6 +23,7 @@ import type {
 } from "@kan/api/types";
 import { authClient } from "@kan/auth/client";
 
+import type { ActivitySortOrder } from "~/hooks/useActivitySortOrder";
 import Avatar from "~/components/Avatar";
 import { useLocalisation } from "~/hooks/useLocalisation";
 import { api } from "~/utils/api";
@@ -371,11 +372,13 @@ const ACTIVITIES_PAGE_SIZE = 20;
 const ActivityList = ({
   cardPublicId,
   isLoading: cardIsLoading,
+  order,
   isAdmin,
   isViewOnly,
 }: {
   cardPublicId: string;
   isLoading: boolean;
+  order: ActivitySortOrder;
   isAdmin?: boolean;
   isViewOnly?: boolean;
 }) => {
@@ -387,6 +390,10 @@ const ActivityList = ({
   >([]);
   const [hasMore, setHasMore] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [nextCursor, setNextCursor] = useState<string | null>(null);
+  const [nextCursorPublicId, setNextCursorPublicId] = useState<string | null>(
+    null,
+  );
 
   const isFullyExpandedRef = useRef(false);
   const lastDataUpdatedAtRef = useRef<number | null>(null);
@@ -399,6 +406,7 @@ const ActivityList = ({
     {
       cardPublicId,
       limit: ACTIVITIES_PAGE_SIZE,
+      order,
     },
     {
       enabled: !!cardPublicId && cardPublicId.length >= 12,
@@ -406,6 +414,17 @@ const ActivityList = ({
   );
 
   useEffect(() => {
+    setAllActivities([]);
+    setHasMore(true);
+    setNextCursor(null);
+    setNextCursorPublicId(null);
+    isFullyExpandedRef.current = false;
+    lastDataUpdatedAtRef.current = null;
+  }, [cardPublicId, order]);
+
+  useEffect(() => {
+    let cancelled = false;
+
     if (firstPageData && dataUpdatedAt !== lastDataUpdatedAtRef.current) {
       lastDataUpdatedAtRef.current = dataUpdatedAt;
 
@@ -416,18 +435,18 @@ const ActivityList = ({
         const fetchAllRemaining = async () => {
           let currentActivities = [...firstPageData.activities];
           let currentHasMore = firstPageData.hasMore;
+          let currentCursor = firstPageData.nextCursor;
+          let currentCursorPublicId = firstPageData.nextCursorPublicId;
 
-          while (currentHasMore) {
-            const lastActivity =
-              currentActivities[currentActivities.length - 1];
-            if (!lastActivity) break;
-
-            const nextCursor = new Date(lastActivity.createdAt).toISOString();
+          while (currentHasMore && currentCursor && currentCursorPublicId) {
             const nextPage = await utils.card.getActivities.fetch({
               cardPublicId,
               limit: ACTIVITIES_PAGE_SIZE,
-              cursor: nextCursor,
+              cursor: currentCursor,
+              cursorPublicId: currentCursorPublicId,
+              order,
             });
+            if (cancelled) return;
 
             const existingIds = new Set(
               currentActivities.map((a) => a.publicId),
@@ -437,37 +456,52 @@ const ActivityList = ({
             );
             currentActivities = [...currentActivities, ...newActivities];
             currentHasMore = nextPage.hasMore;
+            currentCursor = nextPage.nextCursor;
+            currentCursorPublicId = nextPage.nextCursorPublicId;
           }
 
+          if (cancelled) return;
           setAllActivities(currentActivities);
-          setHasMore(false);
+          setHasMore(currentHasMore);
+          setNextCursor(currentCursor);
+          setNextCursorPublicId(currentCursorPublicId);
         };
 
         void fetchAllRemaining();
       } else {
         setAllActivities(firstPageData.activities);
         setHasMore(firstPageData.hasMore);
+        setNextCursor(firstPageData.nextCursor);
+        setNextCursorPublicId(firstPageData.nextCursorPublicId);
 
         if (!firstPageData.hasMore) {
           isFullyExpandedRef.current = true;
         }
       }
     }
-  }, [firstPageData, dataUpdatedAt, cardPublicId, utils.card.getActivities]);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    firstPageData,
+    dataUpdatedAt,
+    cardPublicId,
+    order,
+    utils.card.getActivities,
+  ]);
 
   const handleLoadMore = async () => {
-    if (isLoadingMore || !hasMore || allActivities.length === 0) return;
-
-    const lastActivity = allActivities[allActivities.length - 1];
-    if (!lastActivity) return;
+    if (isLoadingMore || !hasMore || !nextCursor || !nextCursorPublicId) return;
 
     setIsLoadingMore(true);
     try {
-      const nextCursor = new Date(lastActivity.createdAt).toISOString();
       const nextPage = await utils.card.getActivities.fetch({
         cardPublicId,
         limit: ACTIVITIES_PAGE_SIZE,
         cursor: nextCursor,
+        cursorPublicId: nextCursorPublicId,
+        order,
       });
 
       const existingIds = new Set(allActivities.map((a) => a.publicId));
@@ -476,6 +510,8 @@ const ActivityList = ({
       );
       setAllActivities((prev) => [...prev, ...newActivities]);
       setHasMore(nextPage.hasMore);
+      setNextCursor(nextPage.nextCursor);
+      setNextCursorPublicId(nextPage.nextCursorPublicId);
 
       if (!nextPage.hasMore) {
         isFullyExpandedRef.current = true;
