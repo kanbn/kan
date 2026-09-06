@@ -29,6 +29,7 @@ import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
+import { CustomFieldDraftInput } from "./custom-fields/custom-field-draft-input";
 
 type NewCardFormInput = NewCardInput & {
   isCreateAnotherEnabled: boolean;
@@ -70,6 +71,7 @@ export function NewCardForm({
       listPublicId,
       labelPublicIds: [],
       memberPublicIds: [],
+      customFieldValues: [],
       isCreateAnotherEnabled: false,
       position: "start",
       dueDate: null,
@@ -84,6 +86,7 @@ export function NewCardForm({
 
   const labelPublicIds = watch("labelPublicIds") || [];
   const memberPublicIds = watch("memberPublicIds") || [];
+  const customFieldValues = watch("customFieldValues") ?? [];
   const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
   const position = watch("position");
   const title = watch("title");
@@ -213,6 +216,7 @@ export function NewCardForm({
           listPublicId: watch("listPublicId"),
           labelPublicIds: [],
           memberPublicIds: [],
+          customFieldValues: [],
           isCreateAnotherEnabled,
           position,
           dueDate: null,
@@ -314,6 +318,7 @@ export function NewCardForm({
         memberPublicIds: data.memberPublicIds,
         position: data.position,
         dueDate: data.dueDate ?? null,
+        customFieldValues: data.customFieldValues,
       });
     } catch {
       // onError already surfaced the failure; keep the files queued for retry.
@@ -322,7 +327,10 @@ export function NewCardForm({
     }
 
     if (filesToUpload.length > 0) {
-      const failedCount = await uploadAttachments(newCard.publicId, filesToUpload);
+      const failedCount = await uploadAttachments(
+        newCard.publicId,
+        filesToUpload,
+      );
       if (failedCount > 0) {
         showPopup({
           header: t`Some attachments failed`,
@@ -362,6 +370,18 @@ export function NewCardForm({
       newLabelPublicIds.splice(currentIndex, 1);
       setValue("labelPublicIds", newLabelPublicIds);
     }
+  };
+
+  const handleCustomFieldValue = (
+    fieldPublicId: string,
+    value: NonNullable<NewCardInput["customFieldValues"]>[number]["value"],
+  ) => {
+    setValue("customFieldValues", [
+      ...customFieldValues.filter(
+        (fieldValue) => fieldValue.fieldPublicId !== fieldPublicId,
+      ),
+      { fieldPublicId, value },
+    ]);
   };
 
   const selectedList = formattedLists.find((item) => item.selected);
@@ -459,6 +479,46 @@ export function NewCardForm({
             />
           </div>
         </div>
+        {boardData && boardData.customFields.length > 0 && (
+          <section className="mt-4 border-t border-light-300 pt-4 dark:border-dark-300">
+            <h3 className="mb-3 text-xs font-medium text-light-900 dark:text-dark-900">
+              {t`Custom fields`}
+            </h3>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {boardData.customFields.map((definition) => {
+                const inputId = `new-card-custom-field-${definition.publicId}`;
+                const override = customFieldValues.find(
+                  (value) => value.fieldPublicId === definition.publicId,
+                );
+                const value = override
+                  ? override.value
+                  : definition.defaultValue;
+
+                return (
+                  <div
+                    key={definition.publicId}
+                    className="block text-xs font-medium text-light-900 dark:text-dark-900"
+                  >
+                    <label htmlFor={inputId}>{definition.name}</label>
+                    <CustomFieldDraftInput
+                      definition={definition}
+                      id={inputId}
+                      value={value}
+                      onChange={(nextValue) =>
+                        handleCustomFieldValue(definition.publicId, nextValue)
+                      }
+                    />
+                    {definition.description && (
+                      <span className="mt-1 block font-normal text-light-700 dark:text-dark-700">
+                        {definition.description}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
         <div className="mt-2 flex space-x-1">
           <div className="w-fit">
             <CheckboxDropdown

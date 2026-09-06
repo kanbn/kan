@@ -8191,5 +8191,61 @@
     "comments": [],
     "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
     "translation": "Adres URL YouTube"
+  },
+  "TlEEts": {
+    "message": "Default value",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",334]],
+    "translation": "Wartość domyślna"
+  },
+  "Nu4oKW": {
+    "message": "Description",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",308]],
+    "translation": "Opis"
+  },
+  "AoQvBa": {
+    "message": "Explain how this field should be used",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",313]],
+    "translation": "Wyjaśnij, jak należy używać tego pola"
+  },
+  "YZsaTf": {
+    "message": "Field description (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",772]],
+    "translation": "Opis pola (opcjonalnie)"
+  },
+  "jfPOyl": {
+    "message": "Hint shown in an empty field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",326]],
+    "translation": "Podpowiedź wyświetlana w pustym polu"
+  },
+  "1GuE4N": {
+    "message": "Input placeholder (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",780]],
+    "translation": "Tekst zastępczy (opcjonalnie)"
+  },
+  "xJne3c": {
+    "message": "No default",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",341],["src/views/board/components/custom-fields/custom-field-manager.tsx",387],["src/views/board/components/custom-fields/custom-field-manager.tsx",420]],
+    "translation": "Brak wartości domyślnej"
+  },
+  "hx1ePY": {
+    "message": "Placeholder",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",322]],
+    "translation": "Tekst zastępczy"
   }
 }

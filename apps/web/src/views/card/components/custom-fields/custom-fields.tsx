@@ -192,6 +192,7 @@ function CustomFieldEditor({
         rows={3}
         maxLength={10000}
         value={textValue}
+        placeholder={definition.placeholder ?? undefined}
         disabled={setValue.isPending || clearValue.isPending}
         onChange={(event) => setTextValue(event.target.value)}
         onBlur={updateTextValue}
@@ -215,6 +216,7 @@ function CustomFieldEditor({
         inputMode="decimal"
         maxLength={100}
         value={textValue}
+        placeholder={definition.placeholder ?? undefined}
         disabled={setValue.isPending || clearValue.isPending}
         onChange={(event) => setTextValue(event.target.value)}
         onBlur={updateTextValue}
@@ -415,6 +417,11 @@ export function CustomFields({
                   value={value}
                   inputId={inputId}
                 />
+              )}
+              {definition.description && (
+                <p className="text-xs text-light-700 dark:text-dark-700">
+                  {definition.description}
+                </p>
               )}
             </div>
           );

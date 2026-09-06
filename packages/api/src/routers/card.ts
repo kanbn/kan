@@ -9,10 +9,7 @@ import * as customFieldRepo from "@kan/db/repository/custom-field.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import {
-  generateAttachmentUrl,
-  normalizeDescription,
-} from "@kan/shared/utils";
+import { generateAttachmentUrl, normalizeDescription } from "@kan/shared/utils";
 
 import {
   activityItemSchema,
@@ -21,6 +18,7 @@ import {
   cardUpdateResponseSchema,
   commentDeleteResponseSchema,
   commentResponseSchema,
+  customFieldValueInputSchema,
 } from "../schemas";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
@@ -35,6 +33,20 @@ import {
   createCardWebhookPayload,
   sendWebhooksForWorkspace,
 } from "../utils/webhook";
+
+const throwCustomFieldRepositoryError = (error: unknown): never => {
+  if (!(error instanceof customFieldRepo.CustomFieldRepositoryError))
+    throw error;
+
+  throw new TRPCError({
+    message: error.message,
+    code:
+      error.code === "FIELD_NOT_FOUND" || error.code === "OPTION_NOT_FOUND"
+        ? "NOT_FOUND"
+        : "BAD_REQUEST",
+    cause: error,
+  });
+};
 
 export const cardRouter = createTRPCRouter({
   create: protectedProcedure
@@ -57,6 +69,20 @@ export const cardRouter = createTRPCRouter({
         memberPublicIds: z.array(z.string().min(12)),
         position: z.enum(["start", "end"]),
         dueDate: z.date().nullable().optional(),
+        customFieldValues: z
+          .array(
+            z.object({
+              fieldPublicId: z.string().length(12),
+              value: customFieldValueInputSchema.nullable(),
+            }),
+          )
+          .max(customFieldRepo.MAX_CUSTOM_FIELDS_PER_BOARD)
+          .refine(
+            (values) =>
+              new Set(values.map((value) => value.fieldPublicId)).size ===
+              values.length,
+          )
+          .default([]),
       }),
     )
     .output(cardCreateResponseSchema)
@@ -96,15 +122,18 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      const newCard = await cardRepo.create(ctx.db, {
-        title: input.title,
-        description: normalizeDescription(input.description),
-        createdBy: userId,
-        listId: list.id,
-        workspaceId: list.workspaceId,
-        position: input.position,
-        dueDate: input.dueDate ?? null,
-      });
+      const newCard = await cardRepo
+        .create(ctx.db, {
+          title: input.title,
+          description: normalizeDescription(input.description),
+          createdBy: userId,
+          listId: list.id,
+          workspaceId: list.workspaceId,
+          position: input.position,
+          dueDate: input.dueDate ?? null,
+          customFieldValues: input.customFieldValues,
+        })
+        .catch(throwCustomFieldRepositoryError);
 
       const newCardId = newCard.id;
 
@@ -1368,6 +1397,7 @@ export const cardRouter = createTRPCRouter({
         workspaceId: targetList.workspaceId,
         position: "end",
         dueDate: sourceCard.dueDate ?? null,
+        applyCustomFieldDefaults: !input.copyCustomFields,
       });
 
       if (input.index !== undefined && input.index >= 0) {

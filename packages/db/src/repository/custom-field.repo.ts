@@ -20,6 +20,7 @@ import {
   boards,
   cardCustomFieldValues,
   cards,
+  customFieldDefaultValues,
   customFieldMappings,
   customFieldOptionMappings,
   customFieldOptions,
@@ -41,6 +42,7 @@ export const customFieldRepositoryErrorCodes = [
   "FIELD_LIMIT_REACHED",
   "OPTION_LIMIT_REACHED",
   "FIELD_TYPE_MISMATCH",
+  "FIELD_METADATA_INVALID",
   "FIELD_OPTIONS_INVALID",
   "OPTION_NOT_FOUND",
   "ORDER_INVALID",
@@ -66,6 +68,44 @@ export type CustomFieldValueInput =
   | { type: "date"; value: Date }
   | { type: "checkbox"; value: boolean }
   | { type: "select"; optionPublicId: string };
+
+interface StoredCustomFieldValue {
+  fieldType: CustomFieldType;
+  optionId: number | null;
+  textValue: string | null;
+  numberValue: string | null;
+  dateValue: Date | null;
+  checkboxValue: boolean | null;
+}
+
+const mapStoredValueInput = (
+  value: Omit<StoredCustomFieldValue, "optionId"> & {
+    optionPublicId: string | null;
+  },
+): CustomFieldValueInput => {
+  switch (value.fieldType) {
+    case "text":
+      if (value.textValue === null)
+        throw new CustomFieldRepositoryError("FIELD_TYPE_MISMATCH");
+      return { type: "text", value: value.textValue };
+    case "number":
+      if (value.numberValue === null)
+        throw new CustomFieldRepositoryError("FIELD_TYPE_MISMATCH");
+      return { type: "number", value: value.numberValue };
+    case "date":
+      if (value.dateValue === null)
+        throw new CustomFieldRepositoryError("FIELD_TYPE_MISMATCH");
+      return { type: "date", value: value.dateValue };
+    case "checkbox":
+      if (value.checkboxValue === null)
+        throw new CustomFieldRepositoryError("FIELD_TYPE_MISMATCH");
+      return { type: "checkbox", value: value.checkboxValue };
+    case "select":
+      if (value.optionPublicId === null)
+        throw new CustomFieldRepositoryError("OPTION_NOT_FOUND");
+      return { type: "select", optionPublicId: value.optionPublicId };
+  }
+};
 
 export type BoardCustomFieldFilter =
   | {
@@ -358,6 +398,8 @@ export const listDefinitionsByBoardPublicId = async (
       id: customFields.id,
       publicId: customFields.publicId,
       name: customFields.name,
+      description: customFields.description,
+      placeholder: customFields.placeholder,
       type: customFields.type,
       position: customFields.position,
       showOnCard: customFields.showOnCard,
@@ -383,8 +425,11 @@ export const listDefinitionsByBoardPublicId = async (
     .orderBy(asc(customFields.position), asc(customFieldOptions.position));
 
   const definitions: {
+    id: number;
     publicId: string;
     name: string;
+    description: string | null;
+    placeholder: string | null;
     type: CustomFieldType;
     position: number;
     showOnCard: boolean;
@@ -395,6 +440,7 @@ export const listDefinitionsByBoardPublicId = async (
       position: number;
       deletedAt: Date | null;
     }[];
+    defaultValue: CustomFieldValueInput | null;
   }[] = [];
   const definitionIndexes = new Map<number, number>();
 
@@ -404,12 +450,16 @@ export const listDefinitionsByBoardPublicId = async (
       definitionIndex = definitions.length;
       definitionIndexes.set(row.id, definitionIndex);
       definitions.push({
+        id: row.id,
         publicId: row.publicId,
         name: row.name,
+        description: row.description,
+        placeholder: row.placeholder,
         type: row.type,
         position: row.position,
         showOnCard: row.showOnCard,
         options: [],
+        defaultValue: null,
       });
     }
 
@@ -428,7 +478,42 @@ export const listDefinitionsByBoardPublicId = async (
     }
   }
 
-  return definitions;
+  const defaults = await db
+    .select({
+      customFieldId: customFieldDefaultValues.customFieldId,
+      fieldType: customFieldDefaultValues.fieldType,
+      textValue: customFieldDefaultValues.textValue,
+      numberValue: customFieldDefaultValues.numberValue,
+      dateValue: customFieldDefaultValues.dateValue,
+      checkboxValue: customFieldDefaultValues.checkboxValue,
+      optionPublicId: customFieldOptions.publicId,
+    })
+    .from(customFieldDefaultValues)
+    .innerJoin(
+      customFields,
+      eq(customFieldDefaultValues.customFieldId, customFields.id),
+    )
+    .innerJoin(boards, eq(customFields.boardId, boards.id))
+    .leftJoin(
+      customFieldOptions,
+      eq(customFieldDefaultValues.optionId, customFieldOptions.id),
+    )
+    .where(
+      and(
+        eq(boards.publicId, boardPublicId),
+        isNull(boards.deletedAt),
+        isNull(customFields.deletedAt),
+      ),
+    );
+  const definitionsById = new Map(
+    definitions.map((definition) => [definition.id, definition]),
+  );
+  for (const value of defaults) {
+    const definition = definitionsById.get(value.customFieldId);
+    if (definition) definition.defaultValue = mapStoredValueInput(value);
+  }
+
+  return definitions.map(({ id: _id, ...definition }) => definition);
 };
 
 export const getBoardProjection = async (
@@ -573,6 +658,8 @@ export const createDefinition = async (
   input: {
     boardPublicId: string;
     name: string;
+    description?: string | null;
+    placeholder?: string | null;
     type: CustomFieldType;
     showOnCard: boolean;
     actorUserId: string;
@@ -594,6 +681,8 @@ export const createDefinition = async (
       throw new CustomFieldRepositoryError("BOARD_ARCHIVED");
 
     const options = input.options ?? [];
+    if (input.placeholder && input.type !== "text" && input.type !== "number")
+      throw new CustomFieldRepositoryError("FIELD_METADATA_INVALID");
     if (input.type !== "select" && options.length > 0)
       throw new CustomFieldRepositoryError("FIELD_OPTIONS_INVALID");
     if (options.length > MAX_CUSTOM_FIELD_OPTIONS)
@@ -622,6 +711,8 @@ export const createDefinition = async (
         publicId: generateUID(),
         boardId: board.id,
         name: input.name,
+        description: input.description ?? null,
+        placeholder: input.placeholder ?? null,
         type: input.type,
         position: (lastField?.position ?? -1) + 1,
         showOnCard: input.showOnCard,
@@ -631,6 +722,8 @@ export const createDefinition = async (
         id: customFields.id,
         publicId: customFields.publicId,
         name: customFields.name,
+        description: customFields.description,
+        placeholder: customFields.placeholder,
         type: customFields.type,
         position: customFields.position,
         showOnCard: customFields.showOnCard,
@@ -662,10 +755,13 @@ export const createDefinition = async (
     return {
       publicId: field.publicId,
       name: field.name,
+      description: field.description,
+      placeholder: field.placeholder,
       type: field.type,
       position: field.position,
       showOnCard: field.showOnCard,
       options: createdOptions,
+      defaultValue: null,
     };
   });
 
@@ -741,21 +837,129 @@ const getFieldContext = async (
   return field;
 };
 
+const resolveValueColumns = async (
+  db: dbTransaction,
+  field: { id: number; type: CustomFieldType },
+  value: CustomFieldValueInput,
+): Promise<Omit<StoredCustomFieldValue, "fieldType">> => {
+  if (field.type !== value.type)
+    throw new CustomFieldRepositoryError("FIELD_TYPE_MISMATCH");
+
+  const columns = {
+    optionId: null,
+    textValue: null,
+    numberValue: null,
+    dateValue: null,
+    checkboxValue: null,
+  } satisfies Omit<StoredCustomFieldValue, "fieldType">;
+
+  switch (value.type) {
+    case "text":
+      return { ...columns, textValue: value.value };
+    case "number":
+      return { ...columns, numberValue: value.value };
+    case "date":
+      return { ...columns, dateValue: value.value };
+    case "checkbox":
+      return { ...columns, checkboxValue: value.value };
+    case "select": {
+      const [option] = await db
+        .select({ id: customFieldOptions.id })
+        .from(customFieldOptions)
+        .where(
+          and(
+            eq(customFieldOptions.publicId, value.optionPublicId),
+            eq(customFieldOptions.customFieldId, field.id),
+            isNull(customFieldOptions.deletedAt),
+          ),
+        )
+        .limit(1)
+        .for("share", { of: customFieldOptions });
+      if (!option) throw new CustomFieldRepositoryError("OPTION_NOT_FOUND");
+      return { ...columns, optionId: option.id };
+    }
+  }
+};
+
+const getDefaultValue = async (db: dbTransaction, customFieldId: number) => {
+  const [value] = await db
+    .select({
+      fieldType: customFieldDefaultValues.fieldType,
+      textValue: customFieldDefaultValues.textValue,
+      numberValue: customFieldDefaultValues.numberValue,
+      dateValue: customFieldDefaultValues.dateValue,
+      checkboxValue: customFieldDefaultValues.checkboxValue,
+      optionPublicId: customFieldOptions.publicId,
+    })
+    .from(customFieldDefaultValues)
+    .leftJoin(
+      customFieldOptions,
+      eq(customFieldDefaultValues.optionId, customFieldOptions.id),
+    )
+    .where(eq(customFieldDefaultValues.customFieldId, customFieldId))
+    .limit(1);
+
+  return value ? mapStoredValueInput(value) : null;
+};
+
+const setDefaultValue = async (
+  db: dbTransaction,
+  field: { id: number; type: CustomFieldType },
+  value: CustomFieldValueInput | null,
+  actorUserId: string,
+) => {
+  if (value === null) {
+    await db
+      .delete(customFieldDefaultValues)
+      .where(eq(customFieldDefaultValues.customFieldId, field.id));
+    return;
+  }
+
+  const columns = await resolveValueColumns(db, field, value);
+  await db
+    .insert(customFieldDefaultValues)
+    .values({
+      customFieldId: field.id,
+      fieldType: field.type,
+      ...columns,
+      createdBy: actorUserId,
+    })
+    .onConflictDoUpdate({
+      target: customFieldDefaultValues.customFieldId,
+      set: {
+        ...columns,
+        updatedAt: new Date(),
+        updatedBy: actorUserId,
+      },
+    });
+};
+
 export const updateDefinition = async (
   db: dbClient,
   input: {
     fieldPublicId: string;
     name?: string;
+    description?: string | null;
+    placeholder?: string | null;
     showOnCard?: boolean;
+    defaultValue?: CustomFieldValueInput | null;
     actorUserId: string;
   },
 ) =>
   db.transaction(async (tx) => {
     const field = await getFieldContext(tx, input.fieldPublicId);
+    if (input.placeholder && field.type !== "text" && field.type !== "number")
+      throw new CustomFieldRepositoryError("FIELD_METADATA_INVALID");
     const [result] = await tx
       .update(customFields)
       .set({
         ...(input.name !== undefined ? { name: input.name } : {}),
+        ...(input.description !== undefined
+          ? { description: input.description }
+          : {}),
+        ...(input.placeholder !== undefined
+          ? { placeholder: input.placeholder }
+          : {}),
         ...(input.showOnCard !== undefined
           ? { showOnCard: input.showOnCard }
           : {}),
@@ -766,13 +970,20 @@ export const updateDefinition = async (
       .returning({
         publicId: customFields.publicId,
         name: customFields.name,
+        description: customFields.description,
+        placeholder: customFields.placeholder,
         type: customFields.type,
         position: customFields.position,
         showOnCard: customFields.showOnCard,
       });
 
     if (!result) throw new CustomFieldRepositoryError("FIELD_NOT_FOUND");
-    return result;
+    if (input.defaultValue !== undefined)
+      await setDefaultValue(tx, field, input.defaultValue, input.actorUserId);
+    return {
+      ...result,
+      defaultValue: await getDefaultValue(tx, field.id),
+    };
   });
 
 export const archiveDefinition = async (
@@ -982,6 +1193,9 @@ export const archiveOption = async (
 ) =>
   db.transaction(async (tx) => {
     const option = await getOptionContext(tx, input.optionPublicId);
+    await tx
+      .delete(customFieldDefaultValues)
+      .where(eq(customFieldDefaultValues.optionId, option.id));
     const [result] = await tx
       .update(customFieldOptions)
       .set({ deletedAt: new Date(), deletedBy: input.actorUserId })
@@ -1247,6 +1461,8 @@ export const moveCardValuesToBoard = async (
       id: cardCustomFieldValues.id,
       fieldId: customFields.id,
       fieldName: customFields.name,
+      fieldDescription: customFields.description,
+      fieldPlaceholder: customFields.placeholder,
       fieldType: customFields.type,
       fieldShowOnCard: customFields.showOnCard,
       fieldDeletedAt: customFields.deletedAt,
@@ -1351,6 +1567,8 @@ export const moveCardValuesToBoard = async (
             publicId: generateUID(),
             boardId: input.targetBoardId,
             name: value.fieldName,
+            description: value.fieldDescription,
+            placeholder: value.fieldPlaceholder,
             type: value.fieldType,
             position: nextFieldPosition,
             showOnCard: value.fieldShowOnCard,
@@ -1417,6 +1635,35 @@ export const moveCardValuesToBoard = async (
               }),
             );
           }
+        }
+
+        const [sourceDefault] = await db
+          .select({
+            fieldType: customFieldDefaultValues.fieldType,
+            optionId: customFieldDefaultValues.optionId,
+            textValue: customFieldDefaultValues.textValue,
+            numberValue: customFieldDefaultValues.numberValue,
+            dateValue: customFieldDefaultValues.dateValue,
+            checkboxValue: customFieldDefaultValues.checkboxValue,
+          })
+          .from(customFieldDefaultValues)
+          .where(eq(customFieldDefaultValues.customFieldId, value.fieldId))
+          .limit(1);
+        if (sourceDefault) {
+          const targetDefaultOptionId = sourceDefault.optionId
+            ? clonedOptionIds?.get(sourceDefault.optionId)
+            : null;
+          if (
+            sourceDefault.fieldType === "select" &&
+            targetDefaultOptionId === undefined
+          )
+            throw new Error("Failed to clone custom field default option");
+          await db.insert(customFieldDefaultValues).values({
+            ...sourceDefault,
+            customFieldId: clonedField.id,
+            optionId: targetDefaultOptionId ?? null,
+            createdBy: input.actorUserId,
+          });
         }
       }
 
@@ -1558,6 +1805,108 @@ export const moveCardValuesToBoard = async (
       })
       .where(eq(cardCustomFieldValues.id, value.id));
   }
+};
+
+export const applyInitialCardValues = async (
+  db: dbTransaction,
+  input: {
+    cardId: number;
+    actorUserId: string;
+    values: {
+      fieldPublicId: string;
+      value: CustomFieldValueInput | null;
+    }[];
+  },
+) => {
+  const fieldPublicIds = input.values.map((value) => value.fieldPublicId);
+  if (new Set(fieldPublicIds).size !== fieldPublicIds.length)
+    throw new CustomFieldRepositoryError("FIELD_OPTIONS_INVALID");
+
+  const [card] = await db
+    .select({ boardId: lists.boardId })
+    .from(cards)
+    .innerJoin(lists, eq(cards.listId, lists.id))
+    .where(and(eq(cards.id, input.cardId), isNull(cards.deletedAt)))
+    .limit(1)
+    .for("share", { of: cards });
+  if (!card) throw new CustomFieldRepositoryError("CARD_NOT_FOUND");
+
+  const fields = await db
+    .select({
+      id: customFields.id,
+      publicId: customFields.publicId,
+      type: customFields.type,
+      defaultFieldType: customFieldDefaultValues.fieldType,
+      defaultOptionId: customFieldDefaultValues.optionId,
+      defaultTextValue: customFieldDefaultValues.textValue,
+      defaultNumberValue: customFieldDefaultValues.numberValue,
+      defaultDateValue: customFieldDefaultValues.dateValue,
+      defaultCheckboxValue: customFieldDefaultValues.checkboxValue,
+      defaultOptionDeletedAt: customFieldOptions.deletedAt,
+    })
+    .from(customFields)
+    .leftJoin(
+      customFieldDefaultValues,
+      eq(customFieldDefaultValues.customFieldId, customFields.id),
+    )
+    .leftJoin(
+      customFieldOptions,
+      eq(customFieldDefaultValues.optionId, customFieldOptions.id),
+    )
+    .where(
+      and(
+        eq(customFields.boardId, card.boardId),
+        isNull(customFields.deletedAt),
+      ),
+    )
+    .for("share", { of: customFields });
+  const fieldsByPublicId = new Map(
+    fields.map((field) => [field.publicId, field]),
+  );
+  if (fieldPublicIds.some((publicId) => !fieldsByPublicId.has(publicId)))
+    throw new CustomFieldRepositoryError("FIELD_NOT_FOUND");
+
+  const explicitValues = new Map(
+    input.values.map((value) => [value.fieldPublicId, value.value]),
+  );
+  const inserts = [];
+
+  for (const field of fields) {
+    const hasExplicitValue = explicitValues.has(field.publicId);
+    const explicitValue = explicitValues.get(field.publicId);
+
+    let columns: Omit<StoredCustomFieldValue, "fieldType"> | null = null;
+    if (hasExplicitValue) {
+      if (explicitValue === null || explicitValue === undefined) continue;
+      columns = await resolveValueColumns(db, field, explicitValue);
+    } else if (
+      field.defaultFieldType !== null &&
+      (field.defaultFieldType !== "select" ||
+        field.defaultOptionDeletedAt === null)
+    ) {
+      columns = {
+        optionId: field.defaultOptionId,
+        textValue: field.defaultTextValue,
+        numberValue: field.defaultNumberValue,
+        dateValue: field.defaultDateValue,
+        checkboxValue: field.defaultCheckboxValue,
+      };
+    }
+
+    if (columns)
+      inserts.push({
+        publicId: generateUID(),
+        cardId: input.cardId,
+        customFieldId: field.id,
+        fieldType: field.type,
+        ...columns,
+        createdBy: input.actorUserId,
+      });
+  }
+
+  if (inserts.length > 0)
+    await db.insert(cardCustomFieldValues).values(inserts);
+  return { applied: inserts.length };
 };
 
 export const setCardValue = async (

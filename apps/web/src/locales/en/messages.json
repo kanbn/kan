@@ -13518,5 +13518,61 @@
       ]
     ],
     "translation": "YouTube URL"
+  },
+  "TlEEts": {
+    "message": "Default value",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",334]],
+    "translation": "Default value"
+  },
+  "Nu4oKW": {
+    "message": "Description",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",308]],
+    "translation": "Description"
+  },
+  "AoQvBa": {
+    "message": "Explain how this field should be used",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",313]],
+    "translation": "Explain how this field should be used"
+  },
+  "YZsaTf": {
+    "message": "Field description (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",772]],
+    "translation": "Field description (optional)"
+  },
+  "jfPOyl": {
+    "message": "Hint shown in an empty field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",326]],
+    "translation": "Hint shown in an empty field"
+  },
+  "1GuE4N": {
+    "message": "Input placeholder (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",780]],
+    "translation": "Input placeholder (optional)"
+  },
+  "xJne3c": {
+    "message": "No default",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",341],["src/views/board/components/custom-fields/custom-field-manager.tsx",387],["src/views/board/components/custom-fields/custom-field-manager.tsx",420]],
+    "translation": "No default"
+  },
+  "hx1ePY": {
+    "message": "Placeholder",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",322]],
+    "translation": "Placeholder"
   }
 }

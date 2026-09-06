@@ -8191,5 +8191,61 @@
     "comments": [],
     "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
     "translation": "URL de YouTube"
+  },
+  "TlEEts": {
+    "message": "Default value",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",334]],
+    "translation": "Valor predeterminado"
+  },
+  "Nu4oKW": {
+    "message": "Description",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",308]],
+    "translation": "Descripción"
+  },
+  "AoQvBa": {
+    "message": "Explain how this field should be used",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",313]],
+    "translation": "Explica cómo debe usarse este campo"
+  },
+  "YZsaTf": {
+    "message": "Field description (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",772]],
+    "translation": "Descripción del campo (opcional)"
+  },
+  "jfPOyl": {
+    "message": "Hint shown in an empty field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",326]],
+    "translation": "Texto de ayuda que se muestra en un campo vacío"
+  },
+  "1GuE4N": {
+    "message": "Input placeholder (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",780]],
+    "translation": "Marcador de posición (opcional)"
+  },
+  "xJne3c": {
+    "message": "No default",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",341],["src/views/board/components/custom-fields/custom-field-manager.tsx",387],["src/views/board/components/custom-fields/custom-field-manager.tsx",420]],
+    "translation": "Sin valor predeterminado"
+  },
+  "hx1ePY": {
+    "message": "Placeholder",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",322]],
+    "translation": "Marcador de posición"
   }
 }

@@ -8191,5 +8191,61 @@
     "comments": [],
     "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
     "translation": "URL YouTube"
+  },
+  "TlEEts": {
+    "message": "Default value",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",334]],
+    "translation": "Valore predefinito"
+  },
+  "Nu4oKW": {
+    "message": "Description",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",308]],
+    "translation": "Descrizione"
+  },
+  "AoQvBa": {
+    "message": "Explain how this field should be used",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",313]],
+    "translation": "Spiega come deve essere usato questo campo"
+  },
+  "YZsaTf": {
+    "message": "Field description (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",772]],
+    "translation": "Descrizione del campo (facoltativa)"
+  },
+  "jfPOyl": {
+    "message": "Hint shown in an empty field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",326]],
+    "translation": "Suggerimento mostrato in un campo vuoto"
+  },
+  "1GuE4N": {
+    "message": "Input placeholder (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",780]],
+    "translation": "Segnaposto (facoltativo)"
+  },
+  "xJne3c": {
+    "message": "No default",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",341],["src/views/board/components/custom-fields/custom-field-manager.tsx",387],["src/views/board/components/custom-fields/custom-field-manager.tsx",420]],
+    "translation": "Nessun valore predefinito"
+  },
+  "hx1ePY": {
+    "message": "Placeholder",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",322]],
+    "translation": "Segnaposto"
   }
 }

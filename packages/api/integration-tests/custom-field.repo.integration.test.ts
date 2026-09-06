@@ -9,6 +9,7 @@ import {
   boards,
   cardCustomFieldValues,
   cards,
+  customFieldDefaultValues,
   customFieldMappings,
   customFieldOptionMappings,
   customFieldOptions,
@@ -111,6 +112,153 @@ describe("custom field repository integration tests", () => {
         ],
       },
     ]);
+  });
+
+  it("stores field metadata and typed defaults", async () => {
+    const text = await createField("text", "Customer");
+    const select = await createField("select", "Priority");
+
+    await customFieldRepo.updateDefinition(db, {
+      fieldPublicId: text.publicId,
+      description: "Used by the triage team",
+      placeholder: "Customer name",
+      defaultValue: { type: "text", value: "Acme" },
+      actorUserId,
+    });
+    await customFieldRepo.updateDefinition(db, {
+      fieldPublicId: select.publicId,
+      defaultValue: {
+        type: "select",
+        optionPublicId: select.options[1]!.publicId,
+      },
+      actorUserId,
+    });
+
+    await expect(
+      customFieldRepo.listDefinitionsByBoardPublicId(db, boardPublicId),
+    ).resolves.toMatchObject([
+      {
+        description: "Used by the triage team",
+        placeholder: "Customer name",
+        defaultValue: { type: "text", value: "Acme" },
+      },
+      {
+        defaultValue: {
+          type: "select",
+          optionPublicId: select.options[1]!.publicId,
+        },
+      },
+    ]);
+
+    await expect(
+      customFieldRepo.updateDefinition(db, {
+        fieldPublicId: select.publicId,
+        defaultValue: { type: "text", value: "invalid" },
+        actorUserId,
+      }),
+    ).rejects.toMatchObject({ code: "FIELD_TYPE_MISMATCH" });
+    await expect(
+      customFieldRepo.updateDefinition(db, {
+        fieldPublicId: select.publicId,
+        placeholder: "Select placeholders are unsupported",
+        actorUserId,
+      }),
+    ).rejects.toMatchObject({ code: "FIELD_METADATA_INVALID" });
+
+    await customFieldRepo.archiveOption(db, {
+      optionPublicId: select.options[1]!.publicId,
+      actorUserId,
+    });
+    expect(
+      (
+        await customFieldRepo.listDefinitionsByBoardPublicId(db, boardPublicId)
+      )[1]?.defaultValue,
+    ).toBeNull();
+    await expect(
+      db.select().from(customFieldDefaultValues),
+    ).resolves.toHaveLength(1);
+  });
+
+  it("applies defaults and explicit custom field values when creating cards", async () => {
+    const text = await createField("text", "Customer");
+    const checkbox = await createField("checkbox", "Approved");
+    const select = await createField("select", "Priority");
+    await customFieldRepo.updateDefinition(db, {
+      fieldPublicId: text.publicId,
+      defaultValue: { type: "text", value: "Acme" },
+      actorUserId,
+    });
+    await customFieldRepo.updateDefinition(db, {
+      fieldPublicId: checkbox.publicId,
+      defaultValue: { type: "checkbox", value: true },
+      actorUserId,
+    });
+    await customFieldRepo.updateDefinition(db, {
+      fieldPublicId: select.publicId,
+      defaultValue: {
+        type: "select",
+        optionPublicId: select.options[0]!.publicId,
+      },
+      actorUserId,
+    });
+    const [list] = await db
+      .select({ id: lists.id, workspaceId: boards.workspaceId })
+      .from(lists)
+      .innerJoin(boards, eq(lists.boardId, boards.id))
+      .where(eq(lists.boardId, boardId));
+
+    const created = await cardRepo.create(db, {
+      title: "Created with fields",
+      description: null,
+      createdBy: actorUserId,
+      listId: list!.id,
+      workspaceId: list!.workspaceId,
+      position: "end",
+      customFieldValues: [
+        {
+          fieldPublicId: text.publicId,
+          value: { type: "text", value: "Globex" },
+        },
+        { fieldPublicId: checkbox.publicId, value: null },
+      ],
+    });
+
+    await expect(
+      customFieldRepo.listValuesByCardPublicId(db, created.publicId),
+    ).resolves.toMatchObject([
+      { fieldPublicId: text.publicId, textValue: "Globex" },
+      {
+        fieldPublicId: select.publicId,
+        optionPublicId: select.options[0]!.publicId,
+      },
+    ]);
+  });
+
+  it("rolls back card creation when an initial value is invalid", async () => {
+    const text = await createField("text", "Customer");
+    const [list] = await db
+      .select({ id: lists.id, workspaceId: boards.workspaceId })
+      .from(lists)
+      .innerJoin(boards, eq(lists.boardId, boards.id))
+      .where(eq(lists.boardId, boardId));
+
+    await expect(
+      cardRepo.create(db, {
+        title: "Invalid card",
+        description: null,
+        createdBy: actorUserId,
+        listId: list!.id,
+        workspaceId: list!.workspaceId,
+        position: "end",
+        customFieldValues: [
+          {
+            fieldPublicId: text.publicId,
+            value: { type: "checkbox", value: true },
+          },
+        ],
+      }),
+    ).rejects.toMatchObject({ code: "FIELD_TYPE_MISMATCH" });
+    await expect(db.select().from(cards)).resolves.toHaveLength(1);
   });
 
   it("bulk imports definitions, options and typed card values", async () => {
@@ -461,6 +609,13 @@ describe("custom field repository integration tests", () => {
   it("maps values transactionally when cards move between boards", async () => {
     const text = await createField("text", "Customer");
     const select = await createField("select", "Priority");
+    await customFieldRepo.updateDefinition(db, {
+      fieldPublicId: text.publicId,
+      description: "Billing customer",
+      placeholder: "Customer name",
+      defaultValue: { type: "text", value: "Unknown" },
+      actorUserId,
+    });
     await customFieldRepo.setCardValue(db, {
       cardPublicId,
       fieldPublicId: text.publicId,
@@ -582,6 +737,18 @@ describe("custom field repository integration tests", () => {
         .from(customFields)
         .where(eq(customFields.boardId, targetBoard!.id)),
     ).toHaveLength(2);
+    const targetDefinitions =
+      await customFieldRepo.listDefinitionsByBoardPublicId(
+        db,
+        targetBoard!.publicId,
+      );
+    expect(
+      targetDefinitions.find((field) => field.type === "text"),
+    ).toMatchObject({
+      description: "Billing customer",
+      placeholder: "Customer name",
+      defaultValue: { type: "text", value: "Unknown" },
+    });
 
     const movedSelectValues = await db
       .select({
@@ -803,6 +970,15 @@ describe("custom field repository integration tests", () => {
       value: { type: "select", optionPublicId: option.publicId },
       actorUserId,
     });
+    await customFieldRepo.updateDefinition(db, {
+      fieldPublicId: select.publicId,
+      description: "Choose the triage priority",
+      defaultValue: {
+        type: "select",
+        optionPublicId: select.options[1]!.publicId,
+      },
+      actorUserId,
+    });
     await customFieldRepo.archiveOption(db, {
       optionPublicId: option.publicId,
       actorUserId,
@@ -825,6 +1001,11 @@ describe("custom field repository integration tests", () => {
     expect(board!.customFields[0]).toMatchObject({
       publicId: select.publicId,
       name: "Priority",
+      description: "Choose the triage priority",
+      defaultValue: {
+        type: "select",
+        optionPublicId: select.options[1]!.publicId,
+      },
     });
     expect(board!.customFields[0]!.options[0]).toMatchObject({
       publicId: option.publicId,
@@ -893,6 +1074,7 @@ describe("custom field repository integration tests", () => {
     );
     expect(clonedSnapshot!.customFields[0]).toMatchObject({
       name: "Priority",
+      description: "Choose the triage priority",
       type: "select",
       showOnCard: true,
     });
@@ -900,6 +1082,10 @@ describe("custom field repository integration tests", () => {
     expect(clonedSnapshot!.customFields[0]!.options[0]).toMatchObject({
       name: "Low",
       isArchived: true,
+    });
+    expect(clonedSnapshot!.customFields[0]!.defaultValue).toEqual({
+      type: "select",
+      optionPublicId: clonedSnapshot!.customFields[0]!.options[1]!.publicId,
     });
     expect(
       clonedSnapshot!.lists[0]!.cards[0]!.customFieldValues[0],
