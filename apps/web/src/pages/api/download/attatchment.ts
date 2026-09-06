@@ -22,10 +22,13 @@ export default withRateLimit(
       return res.status(400).json({ message: "url parameter is required" });
     }
 
-    const allowedHosts = getAllowedAttachmentHosts(
-      env.S3_ENDPOINT,
-      env.NEXT_PUBLIC_STORAGE_URL,
-    );
+    const bucket = env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+
+    const allowedHosts = getAllowedAttachmentHosts({
+      s3Endpoint: env.S3_ENDPOINT,
+      storageUrl: env.NEXT_PUBLIC_STORAGE_URL,
+      bucket,
+    });
 
     if (allowedHosts === null) {
       return res
@@ -33,14 +36,14 @@ export default withRateLimit(
         .json({ message: "Storage endpoint misconfigured" });
     }
 
-    if (!allowedHosts.length) {
+    if (!allowedHosts.length || !bucket) {
       return res.status(403).json({
         message:
-          "Attachment downloads require S3_ENDPOINT or NEXT_PUBLIC_STORAGE_URL to be configured",
+          "Attachment downloads require NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME and one of S3_ENDPOINT or NEXT_PUBLIC_STORAGE_URL to be configured",
       });
     }
 
-    if (!isAttachmentUrlAllowed(url, allowedHosts)) {
+    if (!isAttachmentUrlAllowed(url, allowedHosts, bucket)) {
       return res.status(403).json({ message: "URL not allowed" });
     }
 
