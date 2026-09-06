@@ -225,7 +225,7 @@ function CustomFieldEditor({
           }
           if (event.key === "Escape") {
             event.preventDefault();
-            cancelTextUpdate(event.currentTarget);
+            cancelTextUpdate(event.currentTarget as HTMLInputElement);
           }
         }}
       />
