@@ -108,6 +108,8 @@ describe("custom field router", () => {
         name: "Priority",
         description: null,
         placeholder: null,
+        sectionLabel: null,
+        placement: "sidebar",
         type: "select",
         position: 0,
         showOnCard: true,
@@ -146,6 +148,8 @@ describe("custom field router", () => {
       name: "Priority",
       description: null,
       placeholder: null,
+      sectionLabel: "Workflow",
+      placement: "sidebar",
       type: "select",
       position: 0,
       showOnCard: true,
@@ -165,6 +169,7 @@ describe("custom field router", () => {
       name: "Priority",
       description: "Used during triage",
       placeholder: "Choose priority",
+      sectionLabel: "Workflow",
       type: "select",
       showOnCard: true,
       options: [{ name: "High", colourCode: "#ff0000" }],
@@ -181,6 +186,8 @@ describe("custom field router", () => {
       name: "Priority",
       description: "Used during triage",
       placeholder: "Choose priority",
+      sectionLabel: "Workflow",
+      placement: "sidebar",
       type: "select",
       showOnCard: true,
       options: [{ name: "High", colourCode: "#ff0000" }],
@@ -195,6 +202,8 @@ describe("custom field router", () => {
       name: "Customer",
       description: null,
       placeholder: null,
+      sectionLabel: null,
+      placement: "main",
       type: "text",
       position: 0,
       showOnCard: false,
@@ -203,6 +212,8 @@ describe("custom field router", () => {
 
     await customFieldRouter.createCaller(ctx).updateDefinition({
       fieldPublicId,
+      sectionLabel: null,
+      placement: "main",
       showOnCard: false,
       defaultValue: { type: "text", value: "Unknown" },
     });
@@ -215,6 +226,8 @@ describe("custom field router", () => {
     );
     expect(mockUpdateDefinition).toHaveBeenCalledWith(mockDb, {
       fieldPublicId,
+      sectionLabel: null,
+      placement: "main",
       showOnCard: false,
       defaultValue: { type: "text", value: "Unknown" },
       actorUserId: mockUser.id,

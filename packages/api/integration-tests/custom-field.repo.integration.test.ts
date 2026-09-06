@@ -101,7 +101,14 @@ describe("custom field repository integration tests", () => {
     );
 
     expect(definitions).toMatchObject([
-      { name: "Customer", type: "text", position: 0, options: [] },
+      {
+        name: "Customer",
+        type: "text",
+        position: 0,
+        sectionLabel: null,
+        placement: "sidebar",
+        options: [],
+      },
       {
         name: "Priority",
         type: "select",
@@ -122,6 +129,8 @@ describe("custom field repository integration tests", () => {
       fieldPublicId: text.publicId,
       description: "Used by the triage team",
       placeholder: "Customer name",
+      sectionLabel: "Commercial",
+      placement: "main",
       defaultValue: { type: "text", value: "Acme" },
       actorUserId,
     });
@@ -140,6 +149,8 @@ describe("custom field repository integration tests", () => {
       {
         description: "Used by the triage team",
         placeholder: "Customer name",
+        sectionLabel: "Commercial",
+        placement: "main",
         defaultValue: { type: "text", value: "Acme" },
       },
       {
@@ -613,6 +624,8 @@ describe("custom field repository integration tests", () => {
       fieldPublicId: text.publicId,
       description: "Billing customer",
       placeholder: "Customer name",
+      sectionLabel: "Billing",
+      placement: "main",
       defaultValue: { type: "text", value: "Unknown" },
       actorUserId,
     });
@@ -747,6 +760,8 @@ describe("custom field repository integration tests", () => {
     ).toMatchObject({
       description: "Billing customer",
       placeholder: "Customer name",
+      sectionLabel: "Billing",
+      placement: "main",
       defaultValue: { type: "text", value: "Unknown" },
     });
 
@@ -973,6 +988,8 @@ describe("custom field repository integration tests", () => {
     await customFieldRepo.updateDefinition(db, {
       fieldPublicId: select.publicId,
       description: "Choose the triage priority",
+      sectionLabel: "Workflow",
+      placement: "main",
       defaultValue: {
         type: "select",
         optionPublicId: select.options[1]!.publicId,
@@ -1002,6 +1019,8 @@ describe("custom field repository integration tests", () => {
       publicId: select.publicId,
       name: "Priority",
       description: "Choose the triage priority",
+      sectionLabel: "Workflow",
+      placement: "main",
       defaultValue: {
         type: "select",
         optionPublicId: select.options[1]!.publicId,
@@ -1075,6 +1094,8 @@ describe("custom field repository integration tests", () => {
     expect(clonedSnapshot!.customFields[0]).toMatchObject({
       name: "Priority",
       description: "Choose the triage priority",
+      sectionLabel: "Workflow",
+      placement: "main",
       type: "select",
       showOnCard: true,
     });

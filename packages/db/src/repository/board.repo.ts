@@ -829,6 +829,8 @@ export const createFromSnapshot = async (
         name: string;
         description: string | null;
         placeholder: string | null;
+        sectionLabel: string | null;
+        placement: "main" | "sidebar";
         type: "text" | "number" | "date" | "checkbox" | "select";
         position: number;
         showOnCard: boolean;
@@ -1001,6 +1003,8 @@ export const createFromSnapshot = async (
             name: field.name,
             description: field.description,
             placeholder: field.placeholder,
+            sectionLabel: field.sectionLabel,
+            placement: field.placement,
             type: field.type,
             position: field.position,
             showOnCard: field.showOnCard,
