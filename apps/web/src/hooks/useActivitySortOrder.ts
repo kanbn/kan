@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 export type ActivitySortOrder = "oldest" | "newest";
 
@@ -30,26 +30,23 @@ export const setActivitySortOrder = (order: ActivitySortOrder) => {
   window.dispatchEvent(new Event(CHANGE_EVENT));
 };
 
-export const useActivitySortOrder = () => {
-  const [order, setOrder] = useState<ActivitySortOrder>(
-    DEFAULT_ACTIVITY_SORT_ORDER,
-  );
+const subscribe = (onStoreChange: () => void) => {
+  const handleStorage = (event: StorageEvent) => {
+    if (event.key === STORAGE_KEY || event.key === null) onStoreChange();
+  };
 
-  useEffect(() => {
-    const syncOrder = () => setOrder(getSnapshot());
-    const handleStorage = (event: StorageEvent) => {
-      if (event.key === STORAGE_KEY || event.key === null) syncOrder();
-    };
+  window.addEventListener("storage", handleStorage);
+  window.addEventListener(CHANGE_EVENT, onStoreChange);
 
-    syncOrder();
-    window.addEventListener("storage", handleStorage);
-    window.addEventListener(CHANGE_EVENT, syncOrder);
-
-    return () => {
-      window.removeEventListener("storage", handleStorage);
-      window.removeEventListener(CHANGE_EVENT, syncOrder);
-    };
-  }, []);
-
-  return order;
+  return () => {
+    window.removeEventListener("storage", handleStorage);
+    window.removeEventListener(CHANGE_EVENT, onStoreChange);
+  };
 };
+
+export const useActivitySortOrder = () =>
+  useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    () => DEFAULT_ACTIVITY_SORT_ORDER,
+  );
