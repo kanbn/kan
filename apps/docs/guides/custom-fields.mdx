@@ -1,0 +1,81 @@
+---
+title: Custom fields
+description: "Add structured, board-specific information to cards."
+---
+
+Custom fields let a board define structured information that does not fit a
+label, member or due date. You can use them for a workflow status, customer
+reference, story points, review date or yes/no flag.
+
+## Create and manage fields
+
+Open **Board options**, then select **Custom fields**. Board editors can create,
+reorder and archive fields and configure how each field is displayed.
+
+Kan supports the following field types:
+
+| Type     | Use it for                                |
+| -------- | ----------------------------------------- |
+| Text     | Names, references and short notes         |
+| Number   | Estimates, costs and other numeric values |
+| Date     | Dates and times                           |
+| Checkbox | Yes/no or complete/incomplete values      |
+| Dropdown | One value from a list you define          |
+
+For a dropdown field, **Options** are the values that card editors can choose.
+Each option has a name, colour and order. For example, a `Status` field might
+offer `Planned`, `In progress`, `Blocked` and `Done`.
+
+Archiving a field or dropdown option prevents new assignments without deleting
+values already stored on cards.
+
+## Descriptions, placeholders and defaults
+
+A field description explains how the field should be used and appears with the
+field on card forms. Text and number fields can also have a short placeholder
+inside an empty input.
+
+A default value is applied when a new card is created. Card editors can replace
+the suggested value or deliberately leave the field empty. Changing a default
+does not update existing cards.
+
+## Choose where fields appear
+
+Use **Placement** to show a field in the card's **Main panel** or **Sidebar**.
+An optional **Section** groups related fields under a shared heading. Sections
+are flat: a field belongs to at most one named section, and sections cannot be
+nested.
+
+**Show on card front** is independent from placement. Enable it when a populated
+value should also appear on cards in the board view.
+
+On mobile, main-panel fields remain in the card body. Sidebar fields are
+available from the card's settings drawer.
+
+## Set values on a card
+
+Open a card and edit its custom fields in the configured main or sidebar
+section. Changes are saved using the same inline editing behaviour as other card
+details.
+
+Custom fields also appear while creating a card. Defaults are prefilled, and
+you can replace or clear them before adding the card.
+
+## Filter a board
+
+Open **Filter** and choose a custom field to limit the visible cards. Dropdown
+and checkbox fields offer their available values. Text, number and date fields
+offer controls appropriate to their type. Custom-field conditions combine with
+the board's other active filters.
+
+## Duplicate, move and import
+
+Card duplication can copy custom-field values. Board templates copy field
+definitions, dropdown options, defaults and values. Moving a populated card to
+another board preserves its values by reusing compatible target fields or
+creating an explicit mapping.
+
+The Trello importer brings across supported definitions, dropdown options,
+card-front visibility and current card values. Trello does not provide Kan's
+placement, section or default metadata, so imported fields start in the sidebar
+without a section or default. You can configure those properties after import.
