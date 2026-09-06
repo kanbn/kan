@@ -2,6 +2,8 @@ import { z } from "zod";
 
 export const customFieldPublicIdSchema = z.string().length(12);
 export const customFieldNameSchema = z.string().trim().min(1).max(255);
+export const customFieldDescriptionSchema = z.string().trim().max(2000);
+export const customFieldPlaceholderSchema = z.string().trim().max(255);
 export const customFieldColourCodeSchema = z
   .string()
   .regex(/^#[0-9a-fA-F]{6}$/)
@@ -21,13 +23,27 @@ export const customFieldOptionSchema = z.object({
   isArchived: z.boolean(),
 });
 
+export const customFieldValueInputSchema = z.discriminatedUnion("type", [
+  z.object({ type: z.literal("text"), value: z.string().min(1).max(10000) }),
+  z.object({ type: z.literal("number"), value: customFieldNumberValueSchema }),
+  z.object({ type: z.literal("date"), value: z.date() }),
+  z.object({ type: z.literal("checkbox"), value: z.boolean() }),
+  z.object({
+    type: z.literal("select"),
+    optionPublicId: customFieldPublicIdSchema,
+  }),
+]);
+
 export const customFieldDefinitionSchema = z.object({
   publicId: customFieldPublicIdSchema,
   name: customFieldNameSchema,
+  description: customFieldDescriptionSchema.nullable(),
+  placeholder: customFieldPlaceholderSchema.nullable(),
   type: z.enum(["text", "number", "date", "checkbox", "select"]),
   position: z.number().int().nonnegative(),
   showOnCard: z.boolean(),
   options: z.array(customFieldOptionSchema),
+  defaultValue: customFieldValueInputSchema.nullable(),
 });
 
 export const customFieldValueSchema = z.object({
@@ -43,17 +59,6 @@ export const customFieldValueSchema = z.object({
   optionColourCode: z.string().nullable(),
   optionArchivedAt: z.date().nullable(),
 });
-
-export const customFieldValueInputSchema = z.discriminatedUnion("type", [
-  z.object({ type: z.literal("text"), value: z.string().min(1).max(10000) }),
-  z.object({ type: z.literal("number"), value: customFieldNumberValueSchema }),
-  z.object({ type: z.literal("date"), value: z.date() }),
-  z.object({ type: z.literal("checkbox"), value: z.boolean() }),
-  z.object({
-    type: z.literal("select"),
-    optionPublicId: customFieldPublicIdSchema,
-  }),
-]);
 
 const customFieldTextFilterSchema = z.object({
   type: z.literal("text"),

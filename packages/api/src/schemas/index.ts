@@ -47,6 +47,8 @@ export {
 export {
   customFieldPublicIdSchema,
   customFieldNameSchema,
+  customFieldDescriptionSchema,
+  customFieldPlaceholderSchema,
   customFieldColourCodeSchema,
   customFieldNumberValueSchema,
   customFieldOptionSchema,

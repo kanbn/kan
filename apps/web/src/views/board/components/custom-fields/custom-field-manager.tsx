@@ -1,4 +1,5 @@
 import { t } from "@lingui/core/macro";
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import {
   HiChevronDown,
@@ -67,6 +68,14 @@ function FieldRow({
   const utils = api.useUtils();
   const { showPopup } = usePopup();
   const [name, setName] = useState(definition.name);
+  const [description, setDescription] = useState(definition.description ?? "");
+  const [placeholder, setPlaceholder] = useState(definition.placeholder ?? "");
+  const [defaultText, setDefaultText] = useState(
+    definition.defaultValue?.type === "text" ||
+      definition.defaultValue?.type === "number"
+      ? definition.defaultValue.value
+      : "",
+  );
   const [newOptionName, setNewOptionName] = useState("");
   const [isArchiveConfirmationVisible, setIsArchiveConfirmationVisible] =
     useState(false);
@@ -75,6 +84,22 @@ function FieldRow({
   >(null);
 
   useEffect(() => setName(definition.name), [definition.name]);
+  useEffect(
+    () => setDescription(definition.description ?? ""),
+    [definition.description],
+  );
+  useEffect(
+    () => setPlaceholder(definition.placeholder ?? ""),
+    [definition.placeholder],
+  );
+  useEffect(() => {
+    setDefaultText(
+      definition.defaultValue?.type === "text" ||
+        definition.defaultValue?.type === "number"
+        ? definition.defaultValue.value
+        : "",
+    );
+  }, [definition.defaultValue]);
 
   const invalidate = async () => {
     await Promise.all([
@@ -129,6 +154,38 @@ function FieldRow({
       },
       { onError: () => setName(definition.name) },
     );
+  };
+  const saveDescription = () => {
+    const nextDescription = description.trim() || null;
+    if (nextDescription === definition.description) return;
+    updateDefinition.mutate({
+      fieldPublicId: definition.publicId,
+      description: nextDescription,
+    });
+  };
+  const savePlaceholder = () => {
+    const nextPlaceholder = placeholder.trim() || null;
+    if (nextPlaceholder === definition.placeholder) return;
+    updateDefinition.mutate({
+      fieldPublicId: definition.publicId,
+      placeholder: nextPlaceholder,
+    });
+  };
+  const saveDefaultText = () => {
+    if (definition.type !== "text" && definition.type !== "number") return;
+    const nextDefault =
+      definition.type === "number" ? defaultText.trim() : defaultText;
+    const previousDefault =
+      definition.defaultValue?.type === definition.type
+        ? definition.defaultValue.value
+        : "";
+    if (nextDefault === previousDefault) return;
+    updateDefinition.mutate({
+      fieldPublicId: definition.publicId,
+      defaultValue: nextDefault
+        ? { type: definition.type, value: nextDefault }
+        : null,
+    });
   };
 
   return (
@@ -244,6 +301,143 @@ function FieldRow({
             })
           }
         />
+      </div>
+
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        <label className="block text-xs font-medium text-light-900 dark:text-dark-900 sm:col-span-2">
+          {t`Description`}
+          <textarea
+            rows={2}
+            maxLength={2000}
+            value={description}
+            placeholder={t`Explain how this field should be used`}
+            disabled={updateDefinition.isPending}
+            onChange={(event) => setDescription(event.target.value)}
+            onBlur={saveDescription}
+            className="mt-1 block w-full resize-y rounded-md border-0 bg-white/5 px-3 py-1.5 text-sm font-normal shadow-sm ring-1 ring-inset ring-light-600 placeholder:text-light-700 focus:ring-2 focus:ring-inset focus:ring-light-700 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700 dark:placeholder:text-dark-700 dark:focus:ring-dark-700"
+          />
+        </label>
+        {(definition.type === "text" || definition.type === "number") && (
+          <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
+            {t`Placeholder`}
+            <Input
+              value={placeholder}
+              maxLength={255}
+              placeholder={t`Hint shown in an empty field`}
+              disabled={updateDefinition.isPending}
+              onChange={(event) => setPlaceholder(event.target.value)}
+              onBlur={savePlaceholder}
+            />
+          </label>
+        )}
+        <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
+          {t`Default value`}
+          {(definition.type === "text" || definition.type === "number") && (
+            <Input
+              type="text"
+              inputMode={definition.type === "number" ? "decimal" : undefined}
+              maxLength={definition.type === "number" ? 100 : 10000}
+              value={defaultText}
+              placeholder={t`No default`}
+              disabled={updateDefinition.isPending}
+              onChange={(event) => setDefaultText(event.target.value)}
+              onBlur={saveDefaultText}
+            />
+          )}
+          {definition.type === "date" && (
+            <Input
+              type="datetime-local"
+              value={
+                definition.defaultValue?.type === "date"
+                  ? format(definition.defaultValue.value, "yyyy-MM-dd'T'HH:mm")
+                  : ""
+              }
+              disabled={updateDefinition.isPending}
+              onChange={(event) =>
+                updateDefinition.mutate({
+                  fieldPublicId: definition.publicId,
+                  defaultValue: event.target.value
+                    ? { type: "date", value: new Date(event.target.value) }
+                    : null,
+                })
+              }
+            />
+          )}
+          {definition.type === "select" && (
+            <select
+              value={
+                definition.defaultValue?.type === "select"
+                  ? definition.defaultValue.optionPublicId
+                  : ""
+              }
+              disabled={updateDefinition.isPending}
+              onChange={(event) =>
+                updateDefinition.mutate({
+                  fieldPublicId: definition.publicId,
+                  defaultValue: event.target.value
+                    ? {
+                        type: "select",
+                        optionPublicId: event.target.value,
+                      }
+                    : null,
+                })
+              }
+              className="mt-1 block w-full rounded-md border-0 bg-white/5 px-3 py-1.5 text-sm font-normal shadow-sm ring-1 ring-inset ring-light-600 focus:ring-2 focus:ring-inset focus:ring-light-700 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700"
+            >
+              <option value="">{t`No default`}</option>
+              {activeOptions.map((option) => (
+                <option key={option.publicId} value={option.publicId}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
+          )}
+          {definition.type === "checkbox" && (
+            <div className="mt-2 flex min-h-8 items-center gap-2">
+              <input
+                type="checkbox"
+                checked={
+                  definition.defaultValue?.type === "checkbox" &&
+                  definition.defaultValue.value
+                }
+                disabled={updateDefinition.isPending}
+                onChange={(event) =>
+                  updateDefinition.mutate({
+                    fieldPublicId: definition.publicId,
+                    defaultValue: {
+                      type: "checkbox",
+                      value: event.target.checked,
+                    },
+                  })
+                }
+                className="h-4 w-4 cursor-pointer appearance-none rounded-md border border-light-500 bg-transparent outline-none ring-0 checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 dark:border-dark-500"
+              />
+              <span className="text-sm font-normal text-light-900 dark:text-dark-900">
+                {definition.defaultValue?.type === "checkbox"
+                  ? definition.defaultValue.value
+                    ? t`Checked`
+                    : t`Unchecked`
+                  : t`No default`}
+              </span>
+              {definition.defaultValue?.type === "checkbox" && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="xs"
+                  disabled={updateDefinition.isPending}
+                  onClick={() =>
+                    updateDefinition.mutate({
+                      fieldPublicId: definition.publicId,
+                      defaultValue: null,
+                    })
+                  }
+                >
+                  {t`Clear`}
+                </Button>
+              )}
+            </div>
+          )}
+        </label>
       </div>
 
       {definition.type === "select" && (
@@ -426,6 +620,8 @@ export function CustomFieldManager({
   const { showPopup } = usePopup();
   const utils = api.useUtils();
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [placeholder, setPlaceholder] = useState("");
   const [type, setType] = useState<Definition["type"]>("select");
   const [showOnCard, setShowOnCard] = useState(true);
   const [newOptionName, setNewOptionName] = useState("");
@@ -438,6 +634,8 @@ export function CustomFieldManager({
   const createDefinition = api.customField.createDefinition.useMutation({
     onSuccess: async () => {
       setName("");
+      setDescription("");
+      setPlaceholder("");
       setShowOnCard(true);
       setNewOptionName("");
       setOptions([]);
@@ -513,6 +711,11 @@ export function CustomFieldManager({
           createDefinition.mutate({
             boardPublicId,
             name: fieldName,
+            description: description.trim() || null,
+            placeholder:
+              type === "text" || type === "number"
+                ? placeholder.trim() || null
+                : null,
             type,
             showOnCard,
             ...(type === "select" && options.length > 0
@@ -561,6 +764,24 @@ export function CustomFieldManager({
             disabled={createDefinition.isPending}
             onChange={() => setShowOnCard((current) => !current)}
           />
+        </div>
+        <div className="grid gap-2 sm:col-span-3 sm:grid-cols-2">
+          <Input
+            value={description}
+            maxLength={2000}
+            placeholder={t`Field description (optional)`}
+            disabled={createDefinition.isPending}
+            onChange={(event) => setDescription(event.target.value)}
+          />
+          {(type === "text" || type === "number") && (
+            <Input
+              value={placeholder}
+              maxLength={255}
+              placeholder={t`Input placeholder (optional)`}
+              disabled={createDefinition.isPending}
+              onChange={(event) => setPlaceholder(event.target.value)}
+            />
+          )}
         </div>
         {type === "select" && (
           <div className="space-y-2 sm:col-span-3">
