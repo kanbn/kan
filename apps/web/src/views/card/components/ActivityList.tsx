@@ -369,21 +369,113 @@ const getActivityIcon = (
 
 const ACTIVITIES_PAGE_SIZE = 20;
 
+const ActivityItems = ({
+  activities,
+  cardPublicId,
+  isLoading,
+  isViewOnly,
+}: {
+  activities: GetCardActivitiesOutput["activities"];
+  cardPublicId: string;
+  isLoading: boolean;
+  isViewOnly?: boolean;
+}) => {
+  const { dateLocale } = useLocalisation();
+  const { data: sessionData } = authClient.useSession();
+
+  return activities.map((activity, index) => {
+    const activityText = getActivityText({
+      type: activity.type,
+      toTitle: activity.toTitle,
+      fromList: activity.fromList?.name ?? null,
+      toList: activity.toList?.name ?? null,
+      memberName: activity.member?.user?.name ?? null,
+      memberEmail: activity.member?.user?.email ?? null,
+      isSelf: activity.member?.user?.id === sessionData?.user.id,
+      label: activity.label?.name ?? null,
+      fromTitle: activity.fromTitle ?? null,
+      fromDueDate: activity.fromDueDate ?? null,
+      toDueDate: activity.toDueDate ?? null,
+      dateLocale,
+      mergedLabels: (activity as ActivityWithMergedLabels).mergedLabels,
+      attachmentName:
+        (activity as ActivityWithMergedLabels).attachment?.originalFilename ??
+        null,
+    });
+
+    if (activity.type === "card.updated.comment.added")
+      return (
+        <Comment
+          key={activity.publicId}
+          publicId={activity.comment?.publicId}
+          cardPublicId={cardPublicId}
+          name={activity.user?.name ?? ""}
+          email={activity.user?.email ?? ""}
+          image={activity.user?.image ?? null}
+          isLoading={isLoading}
+          createdAt={activity.createdAt.toISOString()}
+          comment={activity.comment?.comment}
+          isEdited={!!activity.comment?.updatedAt}
+          isAuthor={activity.comment?.createdBy === sessionData?.user.id}
+          isViewOnly={!!isViewOnly}
+        />
+      );
+
+    if (!activityText) return null;
+
+    return (
+      <div
+        key={activity.publicId}
+        className="relative flex items-center space-x-2"
+      >
+        <div className="relative">
+          <Avatar
+            size="sm"
+            name={activity.user?.name ?? ""}
+            email={activity.user?.email ?? ""}
+            imageUrl={getAvatarUrl(activity.user?.image ?? null) || undefined}
+            icon={getActivityIcon(
+              activity.type,
+              activity.fromList?.index,
+              activity.toList?.index,
+            )}
+            isLoading={isLoading}
+          />
+          {index !== activities.length - 1 && (
+            <div className="absolute bottom-[-14px] left-1/2 top-[30px] w-0.5 -translate-x-1/2 bg-light-600 dark:bg-dark-600" />
+          )}
+        </div>
+        <p className="text-sm">
+          <span className="font-medium dark:text-dark-1000">{`${getUserDisplayName(activity.user)} `}</span>
+          <span className="space-x-1 text-light-900 dark:text-dark-800">
+            {activityText}
+          </span>
+          <span className="mx-1 text-light-900 dark:text-dark-800">·</span>
+          <span className="space-x-1 text-light-900 dark:text-dark-800">
+            {formatDistanceToNow(new Date(activity.createdAt), {
+              addSuffix: true,
+              locale: dateLocale,
+            })}
+          </span>
+        </p>
+      </div>
+    );
+  });
+};
+
 const ActivityList = ({
   cardPublicId,
   isLoading: cardIsLoading,
   order,
-  isAdmin,
+  recentCommentPublicIds = [],
   isViewOnly,
 }: {
   cardPublicId: string;
   isLoading: boolean;
   order: ActivitySortOrder;
-  isAdmin?: boolean;
+  recentCommentPublicIds?: string[];
   isViewOnly?: boolean;
 }) => {
-  const { dateLocale } = useLocalisation();
-  const { data: sessionData } = authClient.useSession();
   const utils = api.useUtils();
   const [allActivities, setAllActivities] = useState<
     GetCardActivitiesOutput["activities"]
@@ -410,6 +502,20 @@ const ActivityList = ({
     },
     {
       enabled: !!cardPublicId && cardPublicId.length >= 12,
+    },
+  );
+  const { data: recentPageData } = api.card.getActivities.useQuery(
+    {
+      cardPublicId,
+      limit: 100,
+      order: "newest",
+    },
+    {
+      enabled:
+        order === "oldest" &&
+        recentCommentPublicIds.length > 0 &&
+        !!cardPublicId &&
+        cardPublicId.length >= 12,
     },
   );
 
@@ -524,87 +630,30 @@ const ActivityList = ({
   const isFetching = isFetchingFirst || isLoadingMore;
   const isLoading =
     cardIsLoading || (isFetchingFirst && allActivities.length === 0);
+  const loadedActivityIds = new Set(
+    allActivities.map((activity) => activity.publicId),
+  );
+  const recentCommentIds = new Set(recentCommentPublicIds);
+  const recentActivities =
+    order === "oldest"
+      ? (recentPageData?.activities ?? [])
+          .filter(
+            (activity) =>
+              activity.comment?.publicId &&
+              recentCommentIds.has(activity.comment.publicId) &&
+              !loadedActivityIds.has(activity.publicId),
+          )
+          .reverse()
+      : [];
 
   return (
     <div className="flex flex-col space-y-4 pt-4">
-      {allActivities.map((activity, index) => {
-        const activityText = getActivityText({
-          type: activity.type,
-          toTitle: activity.toTitle,
-          fromList: activity.fromList?.name ?? null,
-          toList: activity.toList?.name ?? null,
-          memberName: activity.member?.user?.name ?? null,
-          memberEmail: activity.member?.user?.email ?? null,
-          isSelf: activity.member?.user?.id === sessionData?.user.id,
-          label: activity.label?.name ?? null,
-          fromTitle: activity.fromTitle ?? null,
-          fromDueDate: activity.fromDueDate ?? null,
-          toDueDate: activity.toDueDate ?? null,
-          dateLocale: dateLocale,
-          mergedLabels: (activity as ActivityWithMergedLabels).mergedLabels,
-          attachmentName:
-            (activity as ActivityWithMergedLabels).attachment?.originalFilename ??
-            null,
-        });
-
-        if (activity.type === "card.updated.comment.added")
-          return (
-            <Comment
-              key={activity.publicId}
-              publicId={activity.comment?.publicId}
-              cardPublicId={cardPublicId}
-              name={activity.user?.name ?? ""}
-              email={activity.user?.email ?? ""}
-              image={activity.user?.image ?? null}
-              isLoading={isLoading}
-              createdAt={activity.createdAt.toISOString()}
-              comment={activity.comment?.comment}
-              isEdited={!!activity.comment?.updatedAt}
-              isAuthor={activity.comment?.createdBy === sessionData?.user.id}
-              isViewOnly={!!isViewOnly}
-            />
-          );
-
-        if (!activityText) return null;
-
-        return (
-          <div
-            key={activity.publicId}
-            className="relative flex items-center space-x-2"
-          >
-            <div className="relative">
-              <Avatar
-                size="sm"
-                name={activity.user?.name ?? ""}
-                email={activity.user?.email ?? ""}
-                imageUrl={getAvatarUrl(activity.user?.image ?? null) || undefined}
-                icon={getActivityIcon(
-                  activity.type,
-                  activity.fromList?.index,
-                  activity.toList?.index,
-                )}
-                isLoading={isLoading}
-              />
-              {index !== allActivities.length - 1 && (
-                <div className="absolute bottom-[-14px] left-1/2 top-[30px] w-0.5 -translate-x-1/2 bg-light-600 dark:bg-dark-600" />
-              )}
-            </div>
-            <p className="text-sm">
-              <span className="font-medium dark:text-dark-1000">{`${getUserDisplayName(activity.user)} `}</span>
-              <span className="space-x-1 text-light-900 dark:text-dark-800">
-                {activityText}
-              </span>
-              <span className="mx-1 text-light-900 dark:text-dark-800">·</span>
-              <span className="space-x-1 text-light-900 dark:text-dark-800">
-                {formatDistanceToNow(new Date(activity.createdAt), {
-                  addSuffix: true,
-                  locale: dateLocale,
-                })}
-              </span>
-            </p>
-          </div>
-        );
-      })}
+      <ActivityItems
+        activities={allActivities}
+        cardPublicId={cardPublicId}
+        isLoading={isLoading}
+        isViewOnly={isViewOnly}
+      />
       {hasMore && (
         <div className="flex justify-center pt-4">
           <button
@@ -616,6 +665,12 @@ const ActivityList = ({
           </button>
         </div>
       )}
+      <ActivityItems
+        activities={recentActivities}
+        cardPublicId={cardPublicId}
+        isLoading={isLoading}
+        isViewOnly={isViewOnly}
+      />
     </div>
   );
 };
