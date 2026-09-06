@@ -70,6 +70,9 @@ function FieldRow({
   const [name, setName] = useState(definition.name);
   const [description, setDescription] = useState(definition.description ?? "");
   const [placeholder, setPlaceholder] = useState(definition.placeholder ?? "");
+  const [sectionLabel, setSectionLabel] = useState(
+    definition.sectionLabel ?? "",
+  );
   const [defaultText, setDefaultText] = useState(
     definition.defaultValue?.type === "text" ||
       definition.defaultValue?.type === "number"
@@ -91,6 +94,10 @@ function FieldRow({
   useEffect(
     () => setPlaceholder(definition.placeholder ?? ""),
     [definition.placeholder],
+  );
+  useEffect(
+    () => setSectionLabel(definition.sectionLabel ?? ""),
+    [definition.sectionLabel],
   );
   useEffect(() => {
     setDefaultText(
@@ -169,6 +176,14 @@ function FieldRow({
     updateDefinition.mutate({
       fieldPublicId: definition.publicId,
       placeholder: nextPlaceholder,
+    });
+  };
+  const saveSectionLabel = () => {
+    const nextSectionLabel = sectionLabel.trim() || null;
+    if (nextSectionLabel === definition.sectionLabel) return;
+    updateDefinition.mutate({
+      fieldPublicId: definition.publicId,
+      sectionLabel: nextSectionLabel,
     });
   };
   const saveDefaultText = () => {
@@ -287,6 +302,37 @@ function FieldRow({
           </div>
         </div>
       )}
+
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
+          {t`Placement`}
+          <select
+            value={definition.placement}
+            disabled={updateDefinition.isPending}
+            onChange={(event) =>
+              updateDefinition.mutate({
+                fieldPublicId: definition.publicId,
+                placement: event.target.value as Definition["placement"],
+              })
+            }
+            className="mt-1 block w-full rounded-md border-0 bg-white/5 px-3 py-1.5 text-sm font-normal shadow-sm ring-1 ring-inset ring-light-600 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700"
+          >
+            <option value="sidebar">{t`Sidebar`}</option>
+            <option value="main">{t`Main panel`}</option>
+          </select>
+        </label>
+        <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
+          {t`Section`}
+          <Input
+            value={sectionLabel}
+            maxLength={255}
+            placeholder={t`No section`}
+            disabled={updateDefinition.isPending}
+            onChange={(event) => setSectionLabel(event.target.value)}
+            onBlur={saveSectionLabel}
+          />
+        </label>
+      </div>
 
       <div className="mt-3">
         <Toggle
@@ -622,6 +668,9 @@ export function CustomFieldManager({
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [placeholder, setPlaceholder] = useState("");
+  const [sectionLabel, setSectionLabel] = useState("");
+  const [placement, setPlacement] =
+    useState<Definition["placement"]>("sidebar");
   const [type, setType] = useState<Definition["type"]>("select");
   const [showOnCard, setShowOnCard] = useState(true);
   const [newOptionName, setNewOptionName] = useState("");
@@ -636,6 +685,8 @@ export function CustomFieldManager({
       setName("");
       setDescription("");
       setPlaceholder("");
+      setSectionLabel("");
+      setPlacement("sidebar");
       setShowOnCard(true);
       setNewOptionName("");
       setOptions([]);
@@ -716,6 +767,8 @@ export function CustomFieldManager({
               type === "text" || type === "number"
                 ? placeholder.trim() || null
                 : null,
+            sectionLabel: sectionLabel.trim() || null,
+            placement,
             type,
             showOnCard,
             ...(type === "select" && options.length > 0
@@ -764,6 +817,32 @@ export function CustomFieldManager({
             disabled={createDefinition.isPending}
             onChange={() => setShowOnCard((current) => !current)}
           />
+        </div>
+        <div className="grid gap-2 sm:col-span-3 sm:grid-cols-2">
+          <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
+            {t`Placement`}
+            <select
+              value={placement}
+              disabled={createDefinition.isPending}
+              onChange={(event) =>
+                setPlacement(event.target.value as Definition["placement"])
+              }
+              className="mt-1 block w-full rounded-md border-0 bg-white/5 px-3 py-1.5 text-sm font-normal shadow-sm ring-1 ring-inset ring-light-600 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700"
+            >
+              <option value="sidebar">{t`Sidebar`}</option>
+              <option value="main">{t`Main panel`}</option>
+            </select>
+          </label>
+          <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
+            {t`Section`}
+            <Input
+              value={sectionLabel}
+              maxLength={255}
+              placeholder={t`Section name (optional)`}
+              disabled={createDefinition.isPending}
+              onChange={(event) => setSectionLabel(event.target.value)}
+            />
+          </label>
         </div>
         <div className="grid gap-2 sm:col-span-3 sm:grid-cols-2">
           <Input

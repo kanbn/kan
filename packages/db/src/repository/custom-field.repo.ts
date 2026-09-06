@@ -15,7 +15,7 @@ import {
 } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
-import type { CustomFieldType } from "@kan/db/schema";
+import type { CustomFieldPlacement, CustomFieldType } from "@kan/db/schema";
 import {
   boards,
   cardCustomFieldValues,
@@ -400,6 +400,8 @@ export const listDefinitionsByBoardPublicId = async (
       name: customFields.name,
       description: customFields.description,
       placeholder: customFields.placeholder,
+      sectionLabel: customFields.sectionLabel,
+      placement: customFields.placement,
       type: customFields.type,
       position: customFields.position,
       showOnCard: customFields.showOnCard,
@@ -430,6 +432,8 @@ export const listDefinitionsByBoardPublicId = async (
     name: string;
     description: string | null;
     placeholder: string | null;
+    sectionLabel: string | null;
+    placement: CustomFieldPlacement;
     type: CustomFieldType;
     position: number;
     showOnCard: boolean;
@@ -455,6 +459,8 @@ export const listDefinitionsByBoardPublicId = async (
         name: row.name,
         description: row.description,
         placeholder: row.placeholder,
+        sectionLabel: row.sectionLabel,
+        placement: row.placement,
         type: row.type,
         position: row.position,
         showOnCard: row.showOnCard,
@@ -660,6 +666,8 @@ export const createDefinition = async (
     name: string;
     description?: string | null;
     placeholder?: string | null;
+    sectionLabel?: string | null;
+    placement?: CustomFieldPlacement;
     type: CustomFieldType;
     showOnCard: boolean;
     actorUserId: string;
@@ -713,6 +721,8 @@ export const createDefinition = async (
         name: input.name,
         description: input.description ?? null,
         placeholder: input.placeholder ?? null,
+        sectionLabel: input.sectionLabel ?? null,
+        placement: input.placement ?? "sidebar",
         type: input.type,
         position: (lastField?.position ?? -1) + 1,
         showOnCard: input.showOnCard,
@@ -724,6 +734,8 @@ export const createDefinition = async (
         name: customFields.name,
         description: customFields.description,
         placeholder: customFields.placeholder,
+        sectionLabel: customFields.sectionLabel,
+        placement: customFields.placement,
         type: customFields.type,
         position: customFields.position,
         showOnCard: customFields.showOnCard,
@@ -757,6 +769,8 @@ export const createDefinition = async (
       name: field.name,
       description: field.description,
       placeholder: field.placeholder,
+      sectionLabel: field.sectionLabel,
+      placement: field.placement,
       type: field.type,
       position: field.position,
       showOnCard: field.showOnCard,
@@ -941,6 +955,8 @@ export const updateDefinition = async (
     name?: string;
     description?: string | null;
     placeholder?: string | null;
+    sectionLabel?: string | null;
+    placement?: CustomFieldPlacement;
     showOnCard?: boolean;
     defaultValue?: CustomFieldValueInput | null;
     actorUserId: string;
@@ -960,6 +976,12 @@ export const updateDefinition = async (
         ...(input.placeholder !== undefined
           ? { placeholder: input.placeholder }
           : {}),
+        ...(input.sectionLabel !== undefined
+          ? { sectionLabel: input.sectionLabel }
+          : {}),
+        ...(input.placement !== undefined
+          ? { placement: input.placement }
+          : {}),
         ...(input.showOnCard !== undefined
           ? { showOnCard: input.showOnCard }
           : {}),
@@ -972,6 +994,8 @@ export const updateDefinition = async (
         name: customFields.name,
         description: customFields.description,
         placeholder: customFields.placeholder,
+        sectionLabel: customFields.sectionLabel,
+        placement: customFields.placement,
         type: customFields.type,
         position: customFields.position,
         showOnCard: customFields.showOnCard,
@@ -1463,6 +1487,8 @@ export const moveCardValuesToBoard = async (
       fieldName: customFields.name,
       fieldDescription: customFields.description,
       fieldPlaceholder: customFields.placeholder,
+      fieldSectionLabel: customFields.sectionLabel,
+      fieldPlacement: customFields.placement,
       fieldType: customFields.type,
       fieldShowOnCard: customFields.showOnCard,
       fieldDeletedAt: customFields.deletedAt,
@@ -1569,6 +1595,8 @@ export const moveCardValuesToBoard = async (
             name: value.fieldName,
             description: value.fieldDescription,
             placeholder: value.fieldPlaceholder,
+            sectionLabel: value.fieldSectionLabel,
+            placement: value.fieldPlacement,
             type: value.fieldType,
             position: nextFieldPosition,
             showOnCard: value.fieldShowOnCard,

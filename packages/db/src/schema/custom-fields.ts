@@ -34,6 +34,12 @@ export const customFieldTypeEnum = pgEnum(
   "custom_field_type",
   customFieldTypes,
 );
+export const customFieldPlacements = ["main", "sidebar"] as const;
+export type CustomFieldPlacement = (typeof customFieldPlacements)[number];
+export const customFieldPlacementEnum = pgEnum(
+  "custom_field_placement",
+  customFieldPlacements,
+);
 
 export const customFields = pgTable(
   "custom_field",
@@ -46,6 +52,10 @@ export const customFields = pgTable(
     name: varchar("name", { length: 255 }).notNull(),
     description: text("description"),
     placeholder: varchar("placeholder", { length: 255 }),
+    sectionLabel: varchar("sectionLabel", { length: 255 }),
+    placement: customFieldPlacementEnum("placement")
+      .notNull()
+      .default("sidebar"),
     type: customFieldTypeEnum("type").notNull(),
     position: integer("position").notNull(),
     showOnCard: boolean("showOnCard").notNull().default(true),

@@ -70,6 +70,8 @@ test(
       type: string,
       showOnCard = true,
       options: string[] = [],
+      placement: "main" | "sidebar" = "sidebar",
+      sectionLabel?: string,
     ) => {
       await dialog.getByPlaceholder("Field name").fill(name);
       await dialog
@@ -80,6 +82,14 @@ test(
         .last();
       if ((await showOnCardToggle.isChecked()) !== showOnCard)
         await showOnCardToggle.click();
+      await dialog
+        .getByRole("combobox", { name: "Placement" })
+        .last()
+        .selectOption(placement);
+      if (sectionLabel)
+        await dialog
+          .getByPlaceholder("Section name (optional)")
+          .fill(sectionLabel);
       for (const option of options) {
         await dialog.getByPlaceholder("New option").last().fill(option);
         await dialog
@@ -98,8 +108,8 @@ test(
       ).toHaveValue(name);
     };
 
-    await addField("Effort notes", "Text", false);
-    await addField("Estimate", "Number");
+    await addField("Effort notes", "Text", false, [], "main", "Delivery");
+    await addField("Estimate", "Number", true, [], "sidebar", "Planning");
     await addField("Milestone", "Date");
     await addField("Approved", "Checkbox");
     await addField("Priority", "Dropdown", true, ["High"]);
@@ -108,6 +118,18 @@ test(
 
     const boardPath = new URL(page.url()).pathname;
     await board.openCard("Custom fields test card");
+    const deliverySection = page
+      .getByRole("heading", { name: "Delivery" })
+      .locator("..");
+    const planningSection = page
+      .getByRole("heading", { name: "Planning" })
+      .locator("..");
+    await expect(
+      deliverySection.getByRole("textbox", { name: "Effort notes" }),
+    ).toBeVisible();
+    await expect(
+      planningSection.getByRole("textbox", { name: "Estimate" }),
+    ).toBeVisible();
     const field = page.getByRole("textbox", { name: "Effort notes" });
     await field.fill("  Preserve\nthese spaces  ");
     const valueStored = waitForTrpcMutation(page, "customField.setValue");
@@ -278,21 +300,19 @@ test(
       .click();
     await guestPage.waitForURL(/\/cards\/[^/]+$/);
 
-    const customFields = guestPage
-      .getByRole("heading", { name: "Custom fields" })
-      .locator("..");
-    await expect(customFields.getByText("Effort notes")).toBeVisible();
-    await expect(customFields.getByText("Preserve these spaces")).toBeVisible();
-    await expect(customFields.getByText("Estimate")).toBeVisible();
-    await expect(customFields.getByText("13.5", { exact: true })).toBeVisible();
-    await expect(customFields.getByText("Milestone")).toBeVisible();
-    await expect(customFields.getByText("Approved")).toBeVisible();
     await expect(
-      customFields.getByText("Checked", { exact: true }),
-    ).toBeVisible();
-    await expect(customFields.getByText("Priority")).toBeVisible();
-    await expect(customFields.getByText("High", { exact: true })).toBeVisible();
-    await expect(customFields.getByText("Empty field")).toHaveCount(0);
+      guestPage.getByRole("heading", { name: "Custom fields" }),
+    ).toHaveCount(2);
+    await expect(guestPage.getByText("Effort notes")).toBeVisible();
+    await expect(guestPage.getByText("Preserve these spaces")).toBeVisible();
+    await expect(guestPage.getByText("Estimate")).toBeVisible();
+    await expect(guestPage.getByText("13.5", { exact: true })).toBeVisible();
+    await expect(guestPage.getByText("Milestone")).toBeVisible();
+    await expect(guestPage.getByText("Approved")).toBeVisible();
+    await expect(guestPage.getByText("Checked", { exact: true })).toBeVisible();
+    await expect(guestPage.getByText("Priority")).toBeVisible();
+    await expect(guestPage.getByText("High", { exact: true })).toBeVisible();
+    await expect(guestPage.getByText("Empty field")).toHaveCount(0);
     await expect(
       guestPage.getByRole("textbox", { name: "Estimate" }),
     ).toHaveCount(0);

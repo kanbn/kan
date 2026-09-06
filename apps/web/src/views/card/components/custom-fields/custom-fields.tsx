@@ -10,6 +10,7 @@ import { useLocalisation } from "~/hooks/useLocalisation";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 import { formatCustomFieldDate } from "./custom-field-date";
+import { groupCustomFieldDefinitions } from "./custom-field-layout";
 import { CustomFieldSelect } from "./custom-field-select";
 
 type Card = RouterOutputs["card"]["byId"];
@@ -368,64 +369,81 @@ export function CustomFields({
   definitions,
   values,
   disabled,
+  placement,
 }: {
   cardPublicId: string;
   definitions: Definition[];
   values: Value[];
   disabled: boolean;
+  placement: Definition["placement"];
 }) {
   const { dateLocale } = useLocalisation();
-
-  if (definitions.length === 0) return null;
-
   const valuesByFieldId = new Map(
     values.map((value) => [value.fieldPublicId, value]),
   );
+  const sections = groupCustomFieldDefinitions(
+    definitions,
+    placement,
+    (definition) => !disabled || valuesByFieldId.has(definition.publicId),
+  );
+
+  if (sections.length === 0) return null;
 
   return (
     <section className="mt-6 border-t border-light-300 pt-5 dark:border-dark-300">
       <h2 className="mb-4 text-sm font-medium text-neutral-900 dark:text-dark-1000">
         {t`Custom fields`}
       </h2>
-      <div className="space-y-4">
-        {definitions.map((definition) => {
-          const value = valuesByFieldId.get(definition.publicId);
-          if (disabled && !value) return null;
-          const inputId = `custom-field-${definition.publicId}`;
+      <div className="space-y-5">
+        {sections.map((section, sectionIndex) => (
+          <section
+            key={`${section.label ?? "unsectioned"}-${sectionIndex}`}
+            className="space-y-4"
+          >
+            {section.label && (
+              <h3 className="break-words text-xs font-semibold uppercase tracking-wide text-light-700 dark:text-dark-700">
+                {section.label}
+              </h3>
+            )}
+            {section.definitions.map((definition) => {
+              const value = valuesByFieldId.get(definition.publicId);
+              const inputId = `custom-field-${definition.publicId}`;
 
-          return (
-            <div key={definition.publicId} className="space-y-1.5">
-              <label
-                htmlFor={disabled ? undefined : inputId}
-                className="block text-xs font-medium text-light-900 dark:text-dark-900"
-              >
-                {definition.name}
-              </label>
-              {disabled && value ? (
-                <div className="min-h-8 rounded-md bg-light-200 px-3 py-2 text-sm text-neutral-900 dark:bg-dark-300 dark:text-dark-1000">
-                  {getDisplayValue(definition, value, dateLocale)}
-                  {value.optionArchivedAt && (
-                    <span className="ml-2 text-xs text-light-700 dark:text-dark-700">
-                      ({t`Archived`})
-                    </span>
+              return (
+                <div key={definition.publicId} className="space-y-1.5">
+                  <label
+                    htmlFor={disabled ? undefined : inputId}
+                    className="block text-xs font-medium text-light-900 dark:text-dark-900"
+                  >
+                    {definition.name}
+                  </label>
+                  {disabled && value ? (
+                    <div className="min-h-8 rounded-md bg-light-200 px-3 py-2 text-sm text-neutral-900 dark:bg-dark-300 dark:text-dark-1000">
+                      {getDisplayValue(definition, value, dateLocale)}
+                      {value.optionArchivedAt && (
+                        <span className="ml-2 text-xs text-light-700 dark:text-dark-700">
+                          ({t`Archived`})
+                        </span>
+                      )}
+                    </div>
+                  ) : (
+                    <CustomFieldEditor
+                      cardPublicId={cardPublicId}
+                      definition={definition}
+                      value={value}
+                      inputId={inputId}
+                    />
+                  )}
+                  {definition.description && (
+                    <p className="text-xs text-light-700 dark:text-dark-700">
+                      {definition.description}
+                    </p>
                   )}
                 </div>
-              ) : (
-                <CustomFieldEditor
-                  cardPublicId={cardPublicId}
-                  definition={definition}
-                  value={value}
-                  inputId={inputId}
-                />
-              )}
-              {definition.description && (
-                <p className="text-xs text-light-700 dark:text-dark-700">
-                  {definition.description}
-                </p>
-              )}
-            </div>
-          );
-        })}
+              );
+            })}
+          </section>
+        ))}
       </div>
     </section>
   );

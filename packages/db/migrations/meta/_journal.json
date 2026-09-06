@@ -274,6 +274,13 @@
       "when": 1788697474807,
       "tag": "20260906122434_AddCustomFieldMetadataAndDefaults",
       "breakpoints": true
+    },
+    {
+      "idx": 39,
+      "version": "7",
+      "when": 1788699430216,
+      "tag": "20260906125710_AddCustomFieldLayout",
+      "breakpoints": true
     }
   ]
 }
