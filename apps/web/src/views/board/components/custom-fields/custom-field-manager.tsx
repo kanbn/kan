@@ -324,6 +324,7 @@ function FieldRow({
         <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
           {t`Section`}
           <Input
+            className="mt-1"
             value={sectionLabel}
             maxLength={255}
             placeholder={t`No section`}
@@ -367,6 +368,7 @@ function FieldRow({
           <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
             {t`Placeholder`}
             <Input
+              className="mt-1"
               value={placeholder}
               maxLength={255}
               placeholder={t`Hint shown in an empty field`}
@@ -380,6 +382,7 @@ function FieldRow({
           {t`Default value`}
           {(definition.type === "text" || definition.type === "number") && (
             <Input
+              className="mt-1"
               type="text"
               inputMode={definition.type === "number" ? "decimal" : undefined}
               maxLength={definition.type === "number" ? 100 : 10000}
@@ -392,6 +395,7 @@ function FieldRow({
           )}
           {definition.type === "date" && (
             <Input
+              className="mt-1"
               type="datetime-local"
               value={
                 definition.defaultValue?.type === "date"
@@ -836,6 +840,7 @@ export function CustomFieldManager({
           <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
             {t`Section`}
             <Input
+              className="mt-1"
               value={sectionLabel}
               maxLength={255}
               placeholder={t`Section name (optional)`}
@@ -844,7 +849,11 @@ export function CustomFieldManager({
             />
           </label>
         </div>
-        <div className="grid gap-2 sm:col-span-3 sm:grid-cols-2">
+        <div
+          className={`grid gap-2 sm:col-span-3 ${
+            type === "text" || type === "number" ? "sm:grid-cols-2" : ""
+          }`}
+        >
           <Input
             value={description}
             maxLength={2000}
