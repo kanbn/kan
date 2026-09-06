@@ -70,6 +70,9 @@ test(
   "card activity order persists and keeps new comments visible across pagination",
   { tag: "@self-hosted" },
   async ({ page }) => {
+    const pageErrors: string[] = [];
+    page.on("pageerror", (error) => pageErrors.push(error.message));
+
     const user = createTestUser();
     const auth = new AuthPage(page);
     const onboarding = new SelfHostedOnboardingPage(page);
@@ -135,6 +138,7 @@ test(
     const setting = page.locator("#activity-sort-order-select");
     await expect(setting).toHaveValue("newest");
     await setting.selectOption("oldest");
+    expect(pageErrors).toEqual([]);
 
     await page.goto(`/cards/${cardPublicId}`);
     await expect(
