@@ -14,6 +14,8 @@ describe("custom field definitions", () => {
         name: "Customer",
         description: "Billing account",
         placeholder: "Customer name",
+        sectionLabel: "Commercial",
+        placement: "main",
         type: "text",
         position: 0,
         showOnCard: true,
@@ -23,6 +25,8 @@ describe("custom field definitions", () => {
     ).toMatchObject({
       description: "Billing account",
       placeholder: "Customer name",
+      sectionLabel: "Commercial",
+      placement: "main",
       defaultValue: { type: "text", value: "Acme" },
     });
   });
@@ -33,6 +37,26 @@ describe("custom field definitions", () => {
       name: "Customer",
       description: null,
       placeholder: "x".repeat(256),
+      sectionLabel: null,
+      placement: "sidebar",
+      type: "text" as const,
+      position: 0,
+      showOnCard: true,
+      options: [],
+      defaultValue: null,
+    };
+
+    expect(() => customFieldDefinitionSchema.parse(definition)).toThrow();
+  });
+
+  it("rejects invalid layout metadata", () => {
+    const definition = {
+      publicId: "field0000001",
+      name: "Customer",
+      description: null,
+      placeholder: null,
+      sectionLabel: "x".repeat(256),
+      placement: "footer",
       type: "text" as const,
       position: 0,
       showOnCard: true,

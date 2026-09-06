@@ -41,6 +41,8 @@ export {
   customFieldNameSchema,
   customFieldDescriptionSchema,
   customFieldPlaceholderSchema,
+  customFieldPlacementSchema,
+  customFieldSectionLabelSchema,
   customFieldColourCodeSchema,
   customFieldNumberValueSchema,
   customFieldOptionSchema,
