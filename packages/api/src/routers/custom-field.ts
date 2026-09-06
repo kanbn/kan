@@ -12,7 +12,9 @@ import {
   customFieldNameSchema as nameSchema,
   customFieldOptionSchema as optionSchema,
   customFieldPlaceholderSchema as placeholderSchema,
+  customFieldPlacementSchema as placementSchema,
   customFieldPublicIdSchema as publicIdSchema,
+  customFieldSectionLabelSchema as sectionLabelSchema,
   customFieldValueInputSchema as valueInputSchema,
   customFieldValueSchema as valueSchema,
 } from "../schemas";
@@ -50,6 +52,8 @@ const mapDefinition = (definition: {
   name: string;
   description: string | null;
   placeholder: string | null;
+  sectionLabel: string | null;
+  placement: "main" | "sidebar";
   type: "text" | "number" | "date" | "checkbox" | "select";
   position: number;
   showOnCard: boolean;
@@ -120,6 +124,8 @@ export const customFieldRouter = createTRPCRouter({
         name: nameSchema,
         description: descriptionSchema.nullable().optional(),
         placeholder: placeholderSchema.nullable().optional(),
+        sectionLabel: sectionLabelSchema.nullable().optional(),
+        placement: placementSchema.default("sidebar"),
         type: z.enum(["text", "number", "date", "checkbox", "select"]),
         showOnCard: z.boolean().default(true),
         options: z
@@ -176,14 +182,26 @@ export const customFieldRouter = createTRPCRouter({
           name: nameSchema.optional(),
           description: descriptionSchema.nullable().optional(),
           placeholder: placeholderSchema.nullable().optional(),
+          sectionLabel: sectionLabelSchema.nullable().optional(),
+          placement: placementSchema.optional(),
           showOnCard: z.boolean().optional(),
           defaultValue: valueInputSchema.nullable().optional(),
         })
         .refine(
-          ({ name, description, placeholder, showOnCard, defaultValue }) =>
+          ({
+            name,
+            description,
+            placeholder,
+            sectionLabel,
+            placement,
+            showOnCard,
+            defaultValue,
+          }) =>
             name !== undefined ||
             description !== undefined ||
             placeholder !== undefined ||
+            sectionLabel !== undefined ||
+            placement !== undefined ||
             showOnCard !== undefined ||
             defaultValue !== undefined,
           { message: "At least one field must be updated" },
