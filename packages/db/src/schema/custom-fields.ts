@@ -44,6 +44,8 @@ export const customFields = pgTable(
       .notNull()
       .references(() => boards.id, { onDelete: "cascade" }),
     name: varchar("name", { length: 255 }).notNull(),
+    description: text("description"),
+    placeholder: varchar("placeholder", { length: 255 }),
     type: customFieldTypeEnum("type").notNull(),
     position: integer("position").notNull(),
     showOnCard: boolean("showOnCard").notNull().default(true),
@@ -106,6 +108,78 @@ export const customFieldOptions = pgTable(
     unique("custom_field_option_id_field_unique").on(
       table.id,
       table.customFieldId,
+    ),
+  ],
+).enableRLS();
+
+export const customFieldDefaultValues = pgTable(
+  "custom_field_default_value",
+  {
+    customFieldId: bigint("customFieldId", { mode: "number" }).primaryKey(),
+    fieldType: customFieldTypeEnum("fieldType").notNull(),
+    optionId: bigint("optionId", { mode: "number" }),
+    textValue: text("textValue"),
+    numberValue: numeric("numberValue"),
+    dateValue: timestamp("dateValue", { withTimezone: true }),
+    checkboxValue: boolean("checkboxValue"),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    createdBy: uuid("createdBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
+    updatedAt: timestamp("updatedAt"),
+    updatedBy: uuid("updatedBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
+  },
+  (table) => [
+    foreignKey({
+      name: "custom_field_default_value_field_type_fk",
+      columns: [table.customFieldId, table.fieldType],
+      foreignColumns: [customFields.id, customFields.type],
+    }).onDelete("cascade"),
+    foreignKey({
+      name: "custom_field_default_value_option_field_fk",
+      columns: [table.optionId, table.customFieldId],
+      foreignColumns: [customFieldOptions.id, customFieldOptions.customFieldId],
+    }),
+    check(
+      "custom_field_default_value_shape_check",
+      sql`(
+        ${table.fieldType} = 'text'
+        AND ${table.textValue} IS NOT NULL
+        AND ${table.numberValue} IS NULL
+        AND ${table.dateValue} IS NULL
+        AND ${table.checkboxValue} IS NULL
+        AND ${table.optionId} IS NULL
+      ) OR (
+        ${table.fieldType} = 'number'
+        AND ${table.textValue} IS NULL
+        AND ${table.numberValue} IS NOT NULL
+        AND ${table.dateValue} IS NULL
+        AND ${table.checkboxValue} IS NULL
+        AND ${table.optionId} IS NULL
+      ) OR (
+        ${table.fieldType} = 'date'
+        AND ${table.textValue} IS NULL
+        AND ${table.numberValue} IS NULL
+        AND ${table.dateValue} IS NOT NULL
+        AND ${table.checkboxValue} IS NULL
+        AND ${table.optionId} IS NULL
+      ) OR (
+        ${table.fieldType} = 'checkbox'
+        AND ${table.textValue} IS NULL
+        AND ${table.numberValue} IS NULL
+        AND ${table.dateValue} IS NULL
+        AND ${table.checkboxValue} IS NOT NULL
+        AND ${table.optionId} IS NULL
+      ) OR (
+        ${table.fieldType} = 'select'
+        AND ${table.textValue} IS NULL
+        AND ${table.numberValue} IS NULL
+        AND ${table.dateValue} IS NULL
+        AND ${table.checkboxValue} IS NULL
+        AND ${table.optionId} IS NOT NULL
+      )`,
     ),
   ],
 ).enableRLS();
@@ -266,6 +340,7 @@ export const customFieldsRelations = relations(
       references: [boards.id],
     }),
     options: many(customFieldOptions),
+    defaultValue: one(customFieldDefaultValues),
     values: many(cardCustomFieldValues),
     createdByUser: one(users, {
       fields: [customFields.createdBy],
@@ -286,6 +361,30 @@ export const customFieldsRelations = relations(
       fields: [customFields.importId],
       references: [imports.id],
       relationName: "customFieldsImport",
+    }),
+  }),
+);
+
+export const customFieldDefaultValuesRelations = relations(
+  customFieldDefaultValues,
+  ({ one }) => ({
+    customField: one(customFields, {
+      fields: [customFieldDefaultValues.customFieldId],
+      references: [customFields.id],
+    }),
+    option: one(customFieldOptions, {
+      fields: [customFieldDefaultValues.optionId],
+      references: [customFieldOptions.id],
+    }),
+    createdByUser: one(users, {
+      fields: [customFieldDefaultValues.createdBy],
+      references: [users.id],
+      relationName: "customFieldDefaultValuesCreatedByUser",
+    }),
+    updatedByUser: one(users, {
+      fields: [customFieldDefaultValues.updatedBy],
+      references: [users.id],
+      relationName: "customFieldDefaultValuesUpdatedByUser",
     }),
   }),
 );
