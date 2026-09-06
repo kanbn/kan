@@ -105,11 +105,9 @@ export class CardPage {
 
   private activitySection() {
     return this.page
-      .locator("div")
-      .filter({
-        has: this.page.getByRole("heading", { name: "Activity", exact: true }),
-      })
-      .last();
+      .getByRole("heading", { name: "Activity", exact: true })
+      .locator("..")
+      .locator("..");
   }
 
   private editableCommentEditor() {
