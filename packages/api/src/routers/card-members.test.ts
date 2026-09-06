@@ -29,9 +29,14 @@ vi.mock("@kan/db/repository/cardActivity.repo", () => ({
 vi.mock("@kan/db/repository/cardComment.repo", () => ({}));
 vi.mock("@kan/db/repository/checklist.repo", () => ({}));
 vi.mock("@kan/db/repository/custom-field.repo", () => ({
+  MAX_CUSTOM_FIELDS_PER_BOARD: 50,
   copyActiveCardValues: vi.fn(),
   moveCardValuesToBoard: vi.fn(),
-  CustomFieldRepositoryError: class CustomFieldRepositoryError extends Error {},
+  CustomFieldRepositoryError: class CustomFieldRepositoryError extends Error {
+    constructor(public readonly code: string) {
+      super(code);
+    }
+  },
 }));
 vi.mock("@kan/db/repository/label.repo", () => ({
   getAllByPublicIds: vi.fn(),
@@ -160,6 +165,39 @@ describe("card member workspace scoping", () => {
         input.memberPublicIds,
         7,
       );
+    });
+
+    it("passes initial custom field values to transactional card creation", async () => {
+      const { cardRouter } = await import("./card");
+      const customFieldValues = [
+        {
+          fieldPublicId: "field0000001",
+          value: { type: "checkbox" as const, value: false },
+        },
+      ];
+
+      await cardRouter.createCaller(ctx).create({
+        ...input,
+        customFieldValues,
+      });
+
+      expect(mockCardCreate).toHaveBeenCalledWith(
+        mockDb,
+        expect.objectContaining({ customFieldValues }),
+      );
+    });
+
+    it("returns a client error when an initial custom field is invalid", async () => {
+      const { cardRouter } = await import("./card");
+      mockCardCreate.mockRejectedValueOnce(
+        new customFieldRepo.CustomFieldRepositoryError("FIELD_TYPE_MISMATCH"),
+      );
+
+      await expect(
+        cardRouter.createCaller(ctx).create(input),
+      ).rejects.toMatchObject({
+        code: "BAD_REQUEST",
+      } satisfies Partial<TRPCError>);
     });
 
     it("rejects the whole request when any member is outside the workspace", async () => {

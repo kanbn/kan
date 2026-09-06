@@ -25,6 +25,7 @@ import {
   checklistItems,
   checklists,
   comments,
+  customFieldDefaultValues,
   customFieldMappings,
   customFieldOptionMappings,
   customFieldOptions,
@@ -38,8 +39,8 @@ import { generateUID, normalizeDescription } from "@kan/shared/utils";
 
 import type { BoardCustomFieldFilter } from "./custom-field.repo";
 import {
-  getCardPublicIdsMatchingFilters,
   getBoardProjection,
+  getCardPublicIdsMatchingFilters,
 } from "./custom-field.repo";
 
 export const getCount = async (db: dbClient) => {
@@ -826,9 +827,18 @@ export const createFromSnapshot = async (
       customFields: {
         publicId: string;
         name: string;
+        description: string | null;
+        placeholder: string | null;
         type: "text" | "number" | "date" | "checkbox" | "select";
         position: number;
         showOnCard: boolean;
+        defaultValue:
+          | { type: "text"; value: string }
+          | { type: "number"; value: string }
+          | { type: "date"; value: Date }
+          | { type: "checkbox"; value: boolean }
+          | { type: "select"; optionPublicId: string }
+          | null;
         options: {
           publicId: string;
           name: string;
@@ -989,6 +999,8 @@ export const createFromSnapshot = async (
             publicId: generateUID(),
             boardId: newBoard.id,
             name: field.name,
+            description: field.description,
+            placeholder: field.placeholder,
             type: field.type,
             position: field.position,
             showOnCard: field.showOnCard,
@@ -1024,23 +1036,24 @@ export const createFromSnapshot = async (
         const sourceOptions = [...sourceField.options].sort(
           (a, b) => a.position - b.position,
         );
-        if (sourceOptions.length === 0) continue;
-        const insertedOptions = await tx
-          .insert(customFieldOptions)
-          .values(
-            sourceOptions.map((option) => ({
-              publicId: generateUID(),
-              customFieldId: insertedField.id,
-              name: option.name,
-              colourCode: option.colourCode,
-              position: option.position,
-              createdBy: args.createdBy,
-              ...(option.isArchived
-                ? { deletedAt: new Date(), deletedBy: args.createdBy }
-                : {}),
-            })),
-          )
-          .returning({ id: customFieldOptions.id });
+        const insertedOptions = sourceOptions.length
+          ? await tx
+              .insert(customFieldOptions)
+              .values(
+                sourceOptions.map((option) => ({
+                  publicId: generateUID(),
+                  customFieldId: insertedField.id,
+                  name: option.name,
+                  colourCode: option.colourCode,
+                  position: option.position,
+                  createdBy: args.createdBy,
+                  ...(option.isArchived
+                    ? { deletedAt: new Date(), deletedBy: args.createdBy }
+                    : {}),
+                })),
+              )
+              .returning({ id: customFieldOptions.id })
+          : [];
 
         if (args.sourceBoardId) {
           await tx.insert(customFieldOptionMappings).values(
@@ -1066,6 +1079,39 @@ export const createFromSnapshot = async (
           if (!insertedOption)
             throw new Error("Failed to create custom field option");
           customFieldOptionMap.set(sourceOption.publicId, insertedOption.id);
+        }
+
+        if (sourceField.defaultValue) {
+          const defaultValue = sourceField.defaultValue;
+          const columns = {
+            optionId: null as number | null,
+            textValue: null as string | null,
+            numberValue: null as string | null,
+            dateValue: null as Date | null,
+            checkboxValue: null as boolean | null,
+          };
+          if (defaultValue.type === "text")
+            columns.textValue = defaultValue.value;
+          if (defaultValue.type === "number")
+            columns.numberValue = defaultValue.value;
+          if (defaultValue.type === "date")
+            columns.dateValue = defaultValue.value;
+          if (defaultValue.type === "checkbox")
+            columns.checkboxValue = defaultValue.value;
+          if (defaultValue.type === "select") {
+            const optionId = customFieldOptionMap.get(
+              defaultValue.optionPublicId,
+            );
+            if (optionId === undefined)
+              throw new Error("Failed to map custom field default option");
+            columns.optionId = optionId;
+          }
+          await tx.insert(customFieldDefaultValues).values({
+            customFieldId: insertedField.id,
+            fieldType: defaultValue.type,
+            ...columns,
+            createdBy: args.createdBy,
+          });
         }
       }
     }

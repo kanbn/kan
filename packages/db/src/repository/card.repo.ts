@@ -26,7 +26,11 @@ import {
 } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
-import { getBoardProjection } from "./custom-field.repo";
+import type { CustomFieldValueInput } from "./custom-field.repo";
+import {
+  applyInitialCardValues,
+  getBoardProjection,
+} from "./custom-field.repo";
 
 type dbTransaction = Parameters<Parameters<dbClient["transaction"]>[0]>[0];
 
@@ -49,6 +53,11 @@ export const create = async (
     workspaceId: number;
     position: "start" | "end";
     dueDate?: Date | null;
+    customFieldValues?: {
+      fieldPublicId: string;
+      value: CustomFieldValueInput | null;
+    }[];
+    applyCustomFieldDefaults?: boolean;
   },
 ) => {
   return db.transaction(async (tx) => {
@@ -126,6 +135,13 @@ export const create = async (
       type: "card.created",
       createdBy: cardInput.createdBy,
     });
+
+    if (cardInput.applyCustomFieldDefaults !== false)
+      await applyInitialCardValues(tx, {
+        cardId: result[0].id,
+        actorUserId: cardInput.createdBy,
+        values: cardInput.customFieldValues ?? [],
+      });
 
     const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
 

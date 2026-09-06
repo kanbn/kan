@@ -1,9 +1,48 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  customFieldDefinitionSchema,
   customFieldFilterTokensSchema,
   parseCustomFieldFilterTokens,
 } from "./custom-field";
+
+describe("custom field definitions", () => {
+  it("accepts metadata and typed defaults", () => {
+    expect(
+      customFieldDefinitionSchema.parse({
+        publicId: "field0000001",
+        name: "Customer",
+        description: "Billing account",
+        placeholder: "Customer name",
+        type: "text",
+        position: 0,
+        showOnCard: true,
+        options: [],
+        defaultValue: { type: "text", value: "Acme" },
+      }),
+    ).toMatchObject({
+      description: "Billing account",
+      placeholder: "Customer name",
+      defaultValue: { type: "text", value: "Acme" },
+    });
+  });
+
+  it("rejects overlong metadata", () => {
+    const definition = {
+      publicId: "field0000001",
+      name: "Customer",
+      description: null,
+      placeholder: "x".repeat(256),
+      type: "text" as const,
+      position: 0,
+      showOnCard: true,
+      options: [],
+      defaultValue: null,
+    };
+
+    expect(() => customFieldDefinitionSchema.parse(definition)).toThrow();
+  });
+});
 
 describe("custom field filter tokens", () => {
   const encode = (value: string) => Buffer.from(value).toString("base64url");
