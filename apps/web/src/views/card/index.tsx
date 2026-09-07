@@ -166,6 +166,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           <CardCoverSelector
             cardPublicId={cardId ?? ""}
             cover={card?.cover}
+            attachments={card?.attachments}
             isLoading={!card}
           />
         </div>
@@ -400,7 +401,12 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
         <div className="scrollbar-thumb-rounded-[4px] scrollbar-track-rounded-[4px] w-full flex-1 overflow-y-auto scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 hover:scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 dark:hover:scrollbar-thumb-dark-300">
           <div className="p-auto mx-auto flex h-full w-full max-w-[800px] flex-col">
             <div className="p-6 md:p-8">
-              {card?.cover && <CardCoverBanner cover={card.cover} />}
+              {card?.cover && (
+                <CardCoverBanner
+                  cover={card.cover}
+                  boardPublicId={card.list.board.publicId}
+                />
+              )}
               <div className="mb-8 md:mt-4">
                 {!card && isLoading && (
                   <div className="flex space-x-2">
