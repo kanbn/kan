@@ -14,6 +14,7 @@ import LabelIcon from "~/components/LabelIcon";
 import { useLocalisation } from "~/hooks/useLocalisation";
 import { getContrastingTextColour } from "~/utils/cardCovers";
 import { getAvatarUrl } from "~/utils/helpers";
+import { useCardCoverImage } from "./CardCoverImages";
 
 const Card = ({
   title,
@@ -59,6 +60,10 @@ const Card = ({
     | null;
 }) => {
   const { dateLocale } = useLocalisation();
+  const attachmentPublicId =
+    cover?.kind === "attachment" ? cover.attachmentPublicId : undefined;
+  const { ref: coverRef, url: coverUrl } =
+    useCardCoverImage(attachmentPublicId);
   const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;
   const isOverdue = dueDate ? isBefore(dueDate, startOfDay(new Date())) : false;
   const completedItems = checklists.reduce((acc, checklist) => {
@@ -80,6 +85,7 @@ const Card = ({
 
   return (
     <div
+      ref={coverRef}
       className={twMerge(
         "flex flex-col overflow-hidden rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300",
         isFullColourCover && "min-h-28 justify-end py-3",
@@ -94,6 +100,22 @@ const Card = ({
           style={{ backgroundColor: cover.colourCode }}
           aria-hidden="true"
         />
+      )}
+      {cover?.kind === "attachment" && (
+        <div className="-mx-3 -mt-2 mb-2 h-32 overflow-hidden bg-light-200 dark:bg-dark-100">
+          {coverUrl && (
+            // The URL already points to a resized preview; proxying it through
+            // Next Image would add a second image pipeline for a signed URL.
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={coverUrl}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover"
+            />
+          )}
+        </div>
       )}
       {ticketNumber && !isFullColourCover && (
         <span className="mb-1 text-xs text-light-700 dark:text-dark-800">
