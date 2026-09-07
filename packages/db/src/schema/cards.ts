@@ -1,7 +1,8 @@
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
   bigint,
   bigserial,
+  check,
   index,
   integer,
   pgEnum,
@@ -48,12 +49,15 @@ export const activityTypes = [
   "card.updated.dueDate.added",
   "card.updated.dueDate.updated",
   "card.updated.dueDate.removed",
+  "card.updated.cover",
   "card.archived",
 ] as const;
 
 export type ActivityType = (typeof activityTypes)[number];
 
 export const activityTypeEnum = pgEnum("card_activity_type", activityTypes);
+
+export const cardCoverSizeEnum = pgEnum("card_cover_size", ["normal", "full"]);
 
 export const cards = pgTable(
   "card",
@@ -80,9 +84,15 @@ export const cards = pgTable(
       () => imports.id,
     ),
     dueDate: timestamp("dueDate"),
+    coverColourCode: varchar("coverColourCode", { length: 7 }),
+    coverSize: cardCoverSizeEnum("coverSize").notNull().default("normal"),
   },
   (table) => [
     index("card_list_number_idx").on(table.listId, table.cardNumber),
+    check(
+      "card_cover_colour_code_check",
+      sql`${table.coverColourCode} IS NULL OR ${table.coverColourCode} ~ '^#[0-9A-Fa-f]{6}$'`,
+    ),
   ],
 ).enableRLS();
 

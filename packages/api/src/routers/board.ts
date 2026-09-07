@@ -23,6 +23,7 @@ import {
   boardUpdateResponseSchema,
 } from "../schemas";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
+import { formatCardCover } from "../utils/cardCover";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 
 export const boardRouter = createTRPCRouter({
@@ -191,6 +192,7 @@ export const boardRouter = createTRPCRouter({
           cards: await Promise.all(
             list.cards.map(async (card) => ({
               ...card,
+              cover: formatCardCover(card),
               members: await Promise.all(
                 card.members.map(async (member) => {
                   if (!member.user?.image) return member;
@@ -283,7 +285,18 @@ export const boardRouter = createTRPCRouter({
         },
       );
 
-      return result;
+      if (!result) return null;
+
+      return {
+        ...result,
+        lists: result.lists.map((list) => ({
+          ...list,
+          cards: list.cards.map((card) => ({
+            ...card,
+            cover: formatCardCover(card),
+          })),
+        })),
+      };
     }),
   create: protectedProcedure
     .meta({

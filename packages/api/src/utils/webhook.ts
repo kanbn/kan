@@ -20,6 +20,11 @@ export interface WebhookPayload {
       title: string;
       description?: string | null;
       dueDate?: string | null; // ISO string after JSON serialization
+      cover?: {
+        kind: "colour";
+        colourCode: string;
+        size: "normal" | "full";
+      } | null;
       listId: string;
       boardId: string;
     };
@@ -226,6 +231,11 @@ export function createCardWebhookPayload(
     title: string;
     description?: string | null;
     dueDate?: Date | null;
+    cover?: {
+      kind: "colour";
+      colourCode: string;
+      size: "normal" | "full";
+    } | null;
     listId: string;
   },
   context: {
@@ -249,6 +259,7 @@ export function createCardWebhookPayload(
         title: card.title,
         description: card.description,
         dueDate: card.dueDate?.toISOString() ?? null,
+        ...(card.cover !== undefined && { cover: card.cover }),
         listId: card.listId,
         boardId: context.boardId,
       },
