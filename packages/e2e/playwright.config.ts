@@ -40,7 +40,7 @@ const sharedEnv = {
   TRELLO_API_URL: `http://127.0.0.1:${trelloMockPort}`,
   TRELLO_APP_API_KEY: "e2e-mock-trello-key",
   S3_REGION: "us-east-1",
-  S3_ENDPOINT: `http://127.0.0.1:${minioPort}`,
+  S3_ENDPOINT: `http://localhost:${minioPort}`,
   S3_ACCESS_KEY_ID: minioRootUser,
   S3_SECRET_ACCESS_KEY: minioRootPassword,
   S3_FORCE_PATH_STYLE: "true",
