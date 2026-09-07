@@ -34,8 +34,25 @@ const trelloLabelColours: Record<string, string> = {
 const defaultLabelColour = "#0d9488";
 const colourlessLabelColour = "#8590a2";
 
+export const trelloCardFields = [
+  "id",
+  "name",
+  "desc",
+  "idList",
+  "labels",
+  "idChecklists",
+  "cover",
+  "idAttachmentCover",
+] as const;
+
 export const getTrelloLabelColour = (colour: string | null | undefined) => {
   if (!colour) return colourlessLabelColour;
 
   return trelloLabelColours[colour] ?? defaultLabelColour;
+};
+
+export const getTrelloCoverColour = (colour: string | null | undefined) => {
+  if (!colour) return null;
+
+  return trelloLabelColours[colour] ?? null;
 };

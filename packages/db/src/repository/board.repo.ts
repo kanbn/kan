@@ -286,6 +286,8 @@ export const getByPublicId = async (
               index: true,
               dueDate: true,
               cardNumber: true,
+              coverColourCode: true,
+              coverSize: true,
             },
             with: {
               labels: {
@@ -605,6 +607,8 @@ export const getBySlug = async (
               index: true,
               dueDate: true,
               cardNumber: true,
+              coverColourCode: true,
+              coverSize: true,
             },
             with: {
               labels: {
@@ -947,6 +951,8 @@ export const createFromSnapshot = async (
           title: string;
           description: string | null;
           index: number;
+          coverColourCode: string | null;
+          coverSize: "normal" | "full";
           labels: {
             publicId: string;
             name: string;
@@ -1066,6 +1072,8 @@ export const createFromSnapshot = async (
             createdBy: args.createdBy,
             listId: newListId,
             index: card.index,
+            coverColourCode: card.coverColourCode,
+            coverSize: card.coverSize,
           })
           .returning({ id: cards.id });
 

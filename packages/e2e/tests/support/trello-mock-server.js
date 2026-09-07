@@ -20,6 +20,7 @@ const board = {
       desc: "Users can't log in",
       idList: "list-1",
       labels: [{ id: "label-1", name: "Bug", color: "red_dark" }],
+      cover: { color: "sky", size: "full" },
     },
     {
       id: "card-2",
@@ -67,6 +68,7 @@ const server = createServer((req, res) => {
   if (url.pathname === `/boards/${board.id}`) {
     if (
       url.searchParams.get("labels_limit") !== "1000" ||
+      !url.searchParams.get("card_fields")?.split(",").includes("cover") ||
       url.searchParams.get("token") !== "mock-trello-token"
     ) {
       res.writeHead(400);

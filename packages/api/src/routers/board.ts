@@ -23,6 +23,7 @@ import {
   boardUpdateResponseSchema,
 } from "../schemas";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
+import { formatCardCover } from "../utils/cardCover";
 import {
   assertBoardAccess,
   assertCanDelete,
@@ -227,12 +228,13 @@ export const boardRouter = createTRPCRouter({
 
                 return {
                   ...card,
+                  cover: formatCardCover(card),
                   members,
                   summary: card.summary,
                 };
               }
 
-              return { ...card, members };
+              return { ...card, cover: formatCardCover(card), members };
             }),
           ),
         })),
@@ -315,7 +317,18 @@ export const boardRouter = createTRPCRouter({
         },
       );
 
-      return result;
+      if (!result) return null;
+
+      return {
+        ...result,
+        lists: result.lists.map((list) => ({
+          ...list,
+          cards: list.cards.map((card) => ({
+            ...card,
+            cover: formatCardCover(card),
+          })),
+        })),
+      };
     }),
   create: protectedProcedure
     .meta({
