@@ -9,13 +9,14 @@ import {
   useState,
 } from "react";
 
+import type { CardCoverPreviewSource } from "~/utils/cardCoverUrls";
 import { api } from "~/utils/api";
 import { getNextCardCoverUrlBatch } from "~/utils/cardCoverUrls";
 
 interface CardCoverImagesContextValue {
   register: (attachmentPublicId: string, element: HTMLElement) => void;
   unregister: (element: HTMLElement) => void;
-  urls: Record<string, string | null>;
+  urls: Record<string, CardCoverPreviewSource[]>;
 }
 
 const CardCoverImagesContext = createContext<CardCoverImagesContextValue>({
@@ -36,7 +37,9 @@ export function CardCoverImagesProvider({
   const [visibleAttachmentPublicIds, setVisibleAttachmentPublicIds] = useState<
     Set<string>
   >(new Set());
-  const [urls, setUrls] = useState<Record<string, string | null>>({});
+  const [urls, setUrls] = useState<Record<string, CardCoverPreviewSource[]>>(
+    {},
+  );
   const [batch, setBatch] = useState<string[]>([]);
 
   useEffect(() => {
@@ -95,7 +98,7 @@ export function CardCoverImagesProvider({
     {
       boardPublicId,
       attachmentPublicIds: batch,
-      width: 640,
+      widths: [320, 640],
     },
     {
       enabled: boardPublicId.length >= 12 && batch.length > 0,
@@ -108,7 +111,7 @@ export function CardCoverImagesProvider({
 
     setUrls((current) => ({
       ...current,
-      ...Object.fromEntries(batch.map((publicId) => [publicId, null])),
+      ...Object.fromEntries(batch.map((publicId) => [publicId, []])),
       ...coverUrls.data,
     }));
     setBatch([]);
@@ -150,7 +153,7 @@ export function CardCoverImagesProvider({
 export function useCardCoverImage(attachmentPublicId: string | undefined): {
   ref: RefCallback<HTMLElement>;
   isResolved: boolean;
-  url: string | null;
+  sources: CardCoverPreviewSource[] | undefined;
 } {
   const { register, unregister, urls } = useContext(CardCoverImagesContext);
   const element = useRef<HTMLElement | null>(null);
@@ -177,6 +180,6 @@ export function useCardCoverImage(attachmentPublicId: string | undefined): {
   return {
     ref,
     isResolved: attachmentPublicId ? attachmentPublicId in urls : true,
-    url: attachmentPublicId ? (urls[attachmentPublicId] ?? null) : null,
+    sources: attachmentPublicId ? urls[attachmentPublicId] : undefined,
   };
 }

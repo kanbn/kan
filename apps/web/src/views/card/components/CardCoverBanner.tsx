@@ -4,6 +4,7 @@ import type { GetCardByIdOutput } from "@kan/api/types";
 
 import { useCardCoverDisplay } from "~/providers/card-cover-display";
 import { api } from "~/utils/api";
+import { getCardCoverImageAttributes } from "~/utils/cardCoverUrls";
 
 export function CardCoverBanner({
   cover,
@@ -20,7 +21,7 @@ export function CardCoverBanner({
     {
       boardPublicId,
       attachmentPublicIds: attachmentPublicId ? [attachmentPublicId] : [],
-      width: 1280,
+      widths: [640, 1280],
     },
     {
       enabled: boardPublicId.length >= 12 && !!attachmentPublicId,
@@ -31,17 +32,21 @@ export function CardCoverBanner({
   if (!showCover) return null;
 
   if (cover?.kind === "attachment") {
-    const coverUrl = coverUrls.data?.[cover.attachmentPublicId];
-    if (!coverUrl && (coverUrls.isSuccess || coverUrls.isError)) return null;
+    const coverImage = getCardCoverImageAttributes(
+      coverUrls.data?.[cover.attachmentPublicId],
+    );
+    if (!coverImage && (coverUrls.isSuccess || coverUrls.isError)) return null;
 
     return (
       <div className="mb-6 h-48 w-full overflow-hidden rounded-md bg-light-200 dark:bg-dark-100">
-        {coverUrl && (
+        {coverImage && (
           // The URL already points to a resized preview; proxying it through
           // Next Image would add a second image pipeline for a signed URL.
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={coverUrl}
+            src={coverImage.src}
+            srcSet={coverImage.srcSet}
+            sizes="(max-width: 800px) calc(100vw - 3rem), 736px"
             alt=""
             decoding="async"
             className={twMerge(
