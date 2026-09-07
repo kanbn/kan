@@ -1,5 +1,8 @@
+import { twMerge } from "tailwind-merge";
+
 import type { GetCardByIdOutput } from "@kan/api/types";
 
+import { useCardCoverDisplay } from "~/providers/card-cover-display";
 import { api } from "~/utils/api";
 
 export function CardCoverBanner({
@@ -9,8 +12,10 @@ export function CardCoverBanner({
   cover: GetCardByIdOutput["cover"];
   boardPublicId: string;
 }) {
+  const { display, isReady } = useCardCoverDisplay();
+  const showCover = isReady && display !== "hidden";
   const attachmentPublicId =
-    cover?.kind === "attachment" ? cover.attachmentPublicId : null;
+    showCover && cover?.kind === "attachment" ? cover.attachmentPublicId : null;
   const coverUrls = api.board.coverUrls.useQuery(
     {
       boardPublicId,
@@ -23,8 +28,11 @@ export function CardCoverBanner({
     },
   );
 
+  if (!showCover) return null;
+
   if (cover?.kind === "attachment") {
     const coverUrl = coverUrls.data?.[cover.attachmentPublicId];
+    if (!coverUrl && (coverUrls.isSuccess || coverUrls.isError)) return null;
 
     return (
       <div className="mb-6 h-48 w-full overflow-hidden rounded-md bg-light-200 dark:bg-dark-100">
@@ -36,7 +44,11 @@ export function CardCoverBanner({
             src={coverUrl}
             alt=""
             decoding="async"
-            className="h-full w-full object-cover"
+            className={twMerge(
+              "h-full w-full object-cover",
+              display === "subdued" &&
+                "opacity-60 saturate-50 dark:opacity-50 dark:brightness-75",
+            )}
           />
         )}
       </div>
@@ -47,7 +59,10 @@ export function CardCoverBanner({
 
   return (
     <div
-      className="mb-6 h-28 w-full rounded-md"
+      className={twMerge(
+        "mb-6 h-28 w-full rounded-md",
+        display === "subdued" && "opacity-50 saturate-50 dark:opacity-40",
+      )}
       style={{ backgroundColor: cover.colourCode }}
       aria-hidden="true"
     />
