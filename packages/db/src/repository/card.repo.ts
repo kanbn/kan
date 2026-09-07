@@ -459,6 +459,11 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
       coverSize: true,
     },
     with: {
+      coverAttachment: {
+        columns: {
+          publicId: true,
+        },
+      },
       list: {
         columns: {
           publicId: true,
@@ -697,6 +702,11 @@ export const getWithListAndMembersByPublicId = async (
       index: true,
     },
     with: {
+      coverAttachment: {
+        columns: {
+          publicId: true,
+        },
+      },
       labels: {
         with: {
           label: {
