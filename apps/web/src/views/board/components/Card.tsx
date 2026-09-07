@@ -14,6 +14,7 @@ import LabelIcon from "~/components/LabelIcon";
 import { useLocalisation } from "~/hooks/useLocalisation";
 import { useCardCoverDisplay } from "~/providers/card-cover-display";
 import { getContrastingTextColour } from "~/utils/cardCovers";
+import { getCardCoverImageAttributes } from "~/utils/cardCoverUrls";
 import { getAvatarUrl } from "~/utils/helpers";
 import { useCardCoverImage } from "./CardCoverImages";
 
@@ -71,8 +72,9 @@ const Card = ({
   const {
     ref: coverRef,
     isResolved: isCoverResolved,
-    url: coverUrl,
+    sources: coverSources,
   } = useCardCoverImage(attachmentPublicId);
+  const coverImage = getCardCoverImageAttributes(coverSources);
   const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;
   const isOverdue = dueDate ? isBefore(dueDate, startOfDay(new Date())) : false;
   const completedItems = checklists.reduce((acc, checklist) => {
@@ -96,12 +98,12 @@ const Card = ({
     showCover &&
     cover?.kind === "attachment" &&
     cover.size === "full" &&
-    (!isCoverResolved || !!coverUrl);
+    (!isCoverResolved || !!coverImage);
   const showNormalImageCover =
     showCover &&
     cover?.kind === "attachment" &&
     cover.size === "normal" &&
-    (!isCoverResolved || !!coverUrl);
+    (!isCoverResolved || !!coverImage);
   const isFullCover = isFullColourCover || isFullImageCover;
 
   return (
@@ -135,12 +137,14 @@ const Card = ({
       )}
       {showNormalImageCover && (
         <div className="-mx-3 -mt-2 mb-2 h-32 overflow-hidden bg-light-200 dark:bg-dark-100">
-          {coverUrl && (
+          {coverImage && (
             // The URL already points to a resized preview; proxying it through
             // Next Image would add a second image pipeline for a signed URL.
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={coverUrl}
+              src={coverImage.src}
+              srcSet={coverImage.srcSet}
+              sizes="264px"
               alt=""
               loading="lazy"
               decoding="async"
@@ -155,12 +159,14 @@ const Card = ({
       )}
       {isFullImageCover && (
         <>
-          {coverUrl && (
+          {coverImage && (
             // The URL already points to a resized preview; proxying it through
             // Next Image would add a second image pipeline for a signed URL.
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={coverUrl}
+              src={coverImage.src}
+              srcSet={coverImage.srcSet}
+              sizes="264px"
               alt=""
               loading="lazy"
               decoding="async"
