@@ -1,6 +1,7 @@
 import {
   DeleteObjectCommand,
   GetObjectCommand,
+  HeadObjectCommand,
   PutObjectCommand,
   S3Client,
 } from "@aws-sdk/client-s3";
@@ -75,6 +76,66 @@ export async function deleteObject(bucket: string, key: string) {
   );
 }
 
+export async function getObjectMetadata(bucket: string, key: string) {
+  const client = createS3Client();
+
+  try {
+    const result = await client.send(
+      new HeadObjectCommand({ Bucket: bucket, Key: key }),
+    );
+    return {
+      contentLength: result.ContentLength,
+      contentType: result.ContentType,
+    };
+  } catch (error) {
+    const statusCode =
+      typeof error === "object" &&
+      error !== null &&
+      "$metadata" in error &&
+      typeof error.$metadata === "object" &&
+      error.$metadata !== null &&
+      "httpStatusCode" in error.$metadata
+        ? error.$metadata.httpStatusCode
+        : undefined;
+    if (
+      statusCode === 404 ||
+      (typeof error === "object" &&
+        error !== null &&
+        "name" in error &&
+        (error.name === "NotFound" || error.name === "NoSuchKey"))
+    )
+      return null;
+    throw error;
+  }
+}
+
+export async function getObjectBytes(bucket: string, key: string) {
+  const client = createS3Client();
+  const result = await client.send(
+    new GetObjectCommand({ Bucket: bucket, Key: key }),
+  );
+
+  if (!result.Body) throw new Error("Object has no body");
+  return result.Body.transformToByteArray();
+}
+
+export async function putObject(
+  bucket: string,
+  key: string,
+  body: Uint8Array,
+  contentType: string,
+) {
+  const client = createS3Client();
+  await client.send(
+    new PutObjectCommand({
+      Bucket: bucket,
+      Key: key,
+      Body: body,
+      ContentType: contentType,
+    }),
+  );
+}
+
 /**
  * Generate presigned URL for an avatar image
  * Returns the URL as-is if it's already a full URL (external provider)
@@ -130,4 +191,3 @@ export async function generateAttachmentUrl(
     return null;
   }
 }
-

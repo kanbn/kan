@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
+import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import * as cardCommentRepo from "@kan/db/repository/cardComment.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
@@ -27,6 +28,10 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
 import { formatCardCover } from "../utils/cardCover";
+import {
+  CardCoverPreviewError,
+  ensureCardCoverPreviews,
+} from "../utils/cardCoverPreview";
 import { sendMentionEmails } from "../utils/notifications";
 import {
   assertCanDelete,
@@ -869,11 +874,18 @@ export const cardRouter = createTRPCRouter({
       z.object({
         cardPublicId: z.string().min(12),
         cover: z
-          .object({
-            kind: z.literal("colour"),
-            colourCode: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
-            size: cardCoverSizeSchema.optional(),
-          })
+          .discriminatedUnion("kind", [
+            z.object({
+              kind: z.literal("colour"),
+              colourCode: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
+              size: cardCoverSizeSchema.optional(),
+            }),
+            z.object({
+              kind: z.literal("attachment"),
+              attachmentPublicId: z.string().min(12),
+              size: cardCoverSizeSchema.optional(),
+            }),
+          ])
           .nullable(),
       }),
     )
@@ -917,13 +929,91 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
-      const coverColourCode = input.cover?.colourCode ?? null;
+      const coverColourCode =
+        input.cover?.kind === "colour" ? input.cover.colourCode : null;
+      const coverAttachmentPublicId =
+        input.cover?.kind === "attachment"
+          ? input.cover.attachmentPublicId
+          : null;
       const coverSize = input.cover?.size ?? existingCard.coverSize;
       const previousCover = formatCardCover(existingCard);
-      const nextCover = formatCardCover({ coverColourCode, coverSize });
+      const nextCover = formatCardCover({
+        coverColourCode,
+        coverAttachment: coverAttachmentPublicId
+          ? { publicId: coverAttachmentPublicId }
+          : null,
+        coverSize,
+      });
+
+      if (coverAttachmentPublicId) {
+        const attachment = await cardAttachmentRepo.getCoverCandidateByPublicId(
+          ctx.db,
+          coverAttachmentPublicId,
+        );
+
+        if (!attachment)
+          throw new TRPCError({
+            message: "Cover attachment not found",
+            code: "NOT_FOUND",
+          });
+
+        if (attachment.cardId !== existingCard.id)
+          throw new TRPCError({
+            message: "Cover attachment belongs to another card",
+            code: "BAD_REQUEST",
+          });
+
+        if (attachment.deletedAt)
+          throw new TRPCError({
+            message: "Deleted attachment cannot be used as a cover",
+            code: "BAD_REQUEST",
+          });
+
+        const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+        if (!bucket)
+          throw new TRPCError({
+            message: "Attachments bucket not configured",
+            code: "INTERNAL_SERVER_ERROR",
+          });
+
+        try {
+          const preview = await ensureCardCoverPreviews({
+            bucket,
+            attachmentPublicId: attachment.publicId,
+            s3Key: attachment.s3Key,
+          });
+
+          if (
+            preview.sourceContentType &&
+            preview.sourceContentType !== attachment.contentType
+          )
+            await cardAttachmentRepo.updateContentType(ctx.db, {
+              attachmentId: attachment.id,
+              contentType: preview.sourceContentType,
+            });
+        } catch (error) {
+          if (
+            error instanceof CardCoverPreviewError &&
+            error.code !== "STORAGE_FAILURE"
+          )
+            throw new TRPCError({
+              message: error.message,
+              code: "BAD_REQUEST",
+              cause: error,
+            });
+
+          throw new TRPCError({
+            message: "Failed to prepare card cover previews",
+            code: "INTERNAL_SERVER_ERROR",
+            cause: error,
+          });
+        }
+      }
 
       if (
         existingCard.coverColourCode === coverColourCode &&
+        (existingCard.coverAttachment?.publicId ?? null) ===
+          coverAttachmentPublicId &&
         existingCard.coverSize === coverSize
       ) {
         return { publicId: existingCard.publicId, cover: previousCover };
@@ -932,6 +1022,7 @@ export const cardRouter = createTRPCRouter({
       const result = await cardRepo.updateCover(ctx.db, {
         cardPublicId: input.cardPublicId,
         coverColourCode,
+        coverAttachmentPublicId,
         coverSize,
         createdBy: userId,
       });

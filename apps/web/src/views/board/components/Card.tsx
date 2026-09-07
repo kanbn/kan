@@ -49,11 +49,14 @@ const Card = ({
   comments: { publicId: string }[];
   attachments?: { publicId: string }[];
   dueDate?: Date | null;
-  cover?: {
-    kind: "colour";
-    colourCode: string;
-    size: "normal" | "full";
-  } | null;
+  cover?:
+    | ({
+        size: "normal" | "full";
+      } & (
+        | { kind: "colour"; colourCode: string }
+        | { kind: "attachment"; attachmentPublicId: string }
+      ))
+    | null;
 }) => {
   const { dateLocale } = useLocalisation();
   const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;

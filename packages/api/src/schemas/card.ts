@@ -15,6 +15,11 @@ export const cardCoverSchema = z
       colourCode: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
       size: cardCoverSizeSchema,
     }),
+    z.object({
+      kind: z.literal("attachment"),
+      attachmentPublicId: z.string(),
+      size: cardCoverSizeSchema,
+    }),
   ])
   .nullable();
 

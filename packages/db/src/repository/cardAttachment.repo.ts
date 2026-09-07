@@ -1,7 +1,14 @@
-import { and, count, eq, isNull } from "drizzle-orm";
+import { and, count, eq, inArray, isNull } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
-import { cardActivities, cardAttachments, cards } from "@kan/db/schema";
+import {
+  boards,
+  cardActivities,
+  cardAttachments,
+  cards,
+  lists,
+  workspaces,
+} from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
 export const getCount = async (db: dbClient) => {
@@ -81,6 +88,25 @@ export const getByPublicId = (db: dbClient, publicId: string) => {
   });
 };
 
+export const getCoverCandidateByPublicId = async (
+  db: dbClient,
+  publicId: string,
+) => {
+  const [result] = await db
+    .select({
+      id: cardAttachments.id,
+      publicId: cardAttachments.publicId,
+      cardId: cardAttachments.cardId,
+      contentType: cardAttachments.contentType,
+      s3Key: cardAttachments.s3Key,
+      deletedAt: cardAttachments.deletedAt,
+    })
+    .from(cardAttachments)
+    .where(eq(cardAttachments.publicId, publicId));
+
+  return result;
+};
+
 export const getAllByCardId = (db: dbClient, cardId: number) => {
   return db.query.cardAttachments.findMany({
     where: and(
@@ -89,6 +115,52 @@ export const getAllByCardId = (db: dbClient, cardId: number) => {
     ),
     orderBy: (attachments, { desc }) => [desc(attachments.createdAt)],
   });
+};
+
+export const updateContentType = async (
+  db: dbClient,
+  args: { attachmentId: number; contentType: string },
+) => {
+  const [result] = await db
+    .update(cardAttachments)
+    .set({ contentType: args.contentType })
+    .where(
+      and(
+        eq(cardAttachments.id, args.attachmentId),
+        isNull(cardAttachments.deletedAt),
+      ),
+    )
+    .returning({ id: cardAttachments.id });
+
+  return result;
+};
+
+export const getSelectedCoverAttachmentsByBoardPublicId = async (
+  db: dbClient,
+  args: { boardPublicId: string; attachmentPublicIds: string[] },
+) => {
+  if (args.attachmentPublicIds.length === 0) return [];
+
+  return db
+    .select({
+      publicId: cardAttachments.publicId,
+    })
+    .from(cardAttachments)
+    .innerJoin(cards, eq(cards.coverAttachmentId, cardAttachments.id))
+    .innerJoin(lists, eq(lists.id, cards.listId))
+    .innerJoin(boards, eq(boards.id, lists.boardId))
+    .innerJoin(workspaces, eq(workspaces.id, boards.workspaceId))
+    .where(
+      and(
+        eq(boards.publicId, args.boardPublicId),
+        isNull(boards.deletedAt),
+        isNull(workspaces.deletedAt),
+        isNull(lists.deletedAt),
+        isNull(cards.deletedAt),
+        isNull(cardAttachments.deletedAt),
+        inArray(cardAttachments.publicId, args.attachmentPublicIds),
+      ),
+    );
 };
 
 export const softDeleteWithActivity = async (
