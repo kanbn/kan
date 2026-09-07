@@ -12,6 +12,7 @@ import Badge from "~/components/Badge";
 import CircularProgress from "~/components/CircularProgress";
 import LabelIcon from "~/components/LabelIcon";
 import { useLocalisation } from "~/hooks/useLocalisation";
+import { getContrastingTextColour } from "~/utils/cardCovers";
 import { getAvatarUrl } from "~/utils/helpers";
 
 const Card = ({
@@ -24,6 +25,7 @@ const Card = ({
   comments,
   attachments,
   dueDate,
+  cover,
 }: {
   title: string;
   ticketNumber?: string | null;
@@ -47,6 +49,11 @@ const Card = ({
   comments: { publicId: string }[];
   attachments?: { publicId: string }[];
   dueDate?: Date | null;
+  cover?: {
+    kind: "colour";
+    colourCode: string;
+    size: "normal" | "full";
+  } | null;
 }) => {
   const { dateLocale } = useLocalisation();
   const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;
@@ -66,22 +73,51 @@ const Card = ({
     description && description.replace(/<[^>]*>/g, "").trim().length > 0;
   const hasAttachments = attachments && attachments.length > 0;
   const hasDueDate = !!dueDate;
+  const isFullColourCover = cover?.kind === "colour" && cover.size === "full";
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300">
-      {ticketNumber && (
+    <div
+      className={twMerge(
+        "flex flex-col overflow-hidden rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300",
+        isFullColourCover && "min-h-28 justify-end py-3",
+      )}
+      style={
+        isFullColourCover ? { backgroundColor: cover.colourCode } : undefined
+      }
+    >
+      {cover?.kind === "colour" && !isFullColourCover && (
+        <div
+          className="-mx-3 -mt-2 mb-2 h-6"
+          style={{ backgroundColor: cover.colourCode }}
+          aria-hidden="true"
+        />
+      )}
+      {ticketNumber && !isFullColourCover && (
         <span className="mb-1 text-xs text-light-700 dark:text-dark-800">
           {ticketNumber}
         </span>
       )}
-      <span className="break-words">{title}</span>
-      {labels.length ||
-      members.length ||
-      checklists.length > 0 ||
-      hasDescription ||
-      comments.length > 0 ||
-      hasDueDate ||
-      hasAttachments ? (
+      <span
+        className={twMerge(
+          "break-words",
+          isFullColourCover && "text-base font-semibold",
+        )}
+        style={
+          isFullColourCover
+            ? { color: getContrastingTextColour(cover.colourCode) }
+            : undefined
+        }
+      >
+        {title}
+      </span>
+      {!isFullColourCover &&
+      (labels.length ||
+        members.length ||
+        checklists.length > 0 ||
+        hasDescription ||
+        comments.length > 0 ||
+        hasDueDate ||
+        hasAttachments) ? (
         <div className="mt-2 flex flex-col justify-end">
           <div className="space-x-0.5">
             {labels.map((label) => (
