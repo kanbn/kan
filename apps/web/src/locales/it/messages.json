@@ -809,7 +809,10 @@
     "message": "Back",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 284]],
+    "origin": [
+      ["src/views/board/components/Filters.tsx", 221],
+      ["src/views/onboarding/workspace-details/index.tsx", 284]
+    ],
     "translation": "Indietro"
   },
   "KNKCTb": {
@@ -1558,7 +1561,7 @@
     "message": "Clear filters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 227]],
+    "origin": [["src/views/board/components/Filters.tsx", 230]],
     "translation": "Cancella filtri"
   },
   "RRn9jf": {
@@ -2458,7 +2461,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/Filters.tsx", 171],
+      ["src/views/board/components/Filters.tsx", 178],
       ["src/views/board/components/NewCardForm.tsx", 575],
       ["src/views/card/index.tsx", 153]
     ],
@@ -2468,28 +2471,28 @@
     "message": "Due next month",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 132]],
+    "origin": [["src/views/board/components/Filters.tsx", 129]],
     "translation": "Scadenza il mese prossimo"
   },
   "iHcdea": {
     "message": "Due next week",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 127]],
+    "origin": [["src/views/board/components/Filters.tsx", 124]],
     "translation": "Scadenza la prossima settimana"
   },
   "1iShX0": {
     "message": "Due today",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 117]],
+    "origin": [["src/views/board/components/Filters.tsx", 114]],
     "translation": "Scadenza oggi"
   },
   "zxKs+y": {
     "message": "Due tomorrow",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 122]],
+    "origin": [["src/views/board/components/Filters.tsx", 119]],
     "translation": "Scadenza domani"
   },
   "euc6Ns": {
@@ -3086,7 +3089,7 @@
     "message": "Filter",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 221]],
+    "origin": [["src/views/board/components/Filters.tsx", 240]],
     "translation": "Filtra"
   },
   "l31EoQ": {
@@ -3744,7 +3747,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/CardContextLabelsModal.tsx", 31],
-      ["src/views/board/components/Filters.tsx", 155],
+      ["src/views/board/components/Filters.tsx", 160],
       ["src/views/board/components/NewCardForm.tsx", 524],
       ["src/views/card/components/LabelSelector.tsx", 102],
       ["src/views/card/index.tsx", 133]
@@ -3906,7 +3909,7 @@
     "message": "Lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 163]],
+    "origin": [["src/views/board/components/Filters.tsx", 169]],
     "translation": "Liste"
   },
   "1rVAfU": {
@@ -4066,7 +4069,7 @@
     "comments": [],
     "origin": [
       ["src/components/SideNavigation.tsx", 122],
-      ["src/views/board/components/Filters.tsx", 147],
+      ["src/views/board/components/Filters.tsx", 151],
       ["src/views/board/components/NewCardForm.tsx", 482],
       ["src/views/card/components/MemberSelector.tsx", 116],
       ["src/views/card/index.tsx", 143],
@@ -4371,7 +4374,7 @@
     "message": "No dates",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 137]],
+    "origin": [["src/views/board/components/Filters.tsx", 134]],
     "translation": "Nessuna data"
   },
   "sY2lzr": {
@@ -4541,7 +4544,7 @@
     "message": "Overdue",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/Filters.tsx", 112]],
+    "origin": [["src/views/board/components/Filters.tsx", 109]],
     "translation": "In ritardo"
   },
   "P6dJdq": {

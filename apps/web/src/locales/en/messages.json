@@ -1347,6 +1347,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/Filters.tsx",
+        221
+      ],
+      [
         "src/views/onboarding/workspace-details/index.tsx",
         284
       ]
@@ -2612,7 +2616,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        227
+        230
       ]
     ],
     "translation": "Clear filters"
@@ -4151,7 +4155,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        171
+        178
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -4171,7 +4175,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        132
+        129
       ]
     ],
     "translation": "Due next month"
@@ -4183,7 +4187,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        127
+        124
       ]
     ],
     "translation": "Due next week"
@@ -4195,7 +4199,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        117
+        114
       ]
     ],
     "translation": "Due today"
@@ -4207,7 +4211,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        122
+        119
       ]
     ],
     "translation": "Due tomorrow"
@@ -5169,7 +5173,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        221
+        240
       ]
     ],
     "translation": "Filter"
@@ -6283,7 +6287,7 @@
       ],
       [
         "src/views/board/components/Filters.tsx",
-        155
+        160
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -6561,7 +6565,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        163
+        169
       ]
     ],
     "translation": "Lists"
@@ -6833,7 +6837,7 @@
       ],
       [
         "src/views/board/components/Filters.tsx",
-        147
+        151
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -7360,7 +7364,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        137
+        134
       ]
     ],
     "translation": "No dates"
@@ -7644,7 +7648,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        112
+        109
       ]
     ],
     "translation": "Overdue"

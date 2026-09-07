@@ -1347,6 +1347,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/Filters.tsx",
+        221
+      ],
+      [
         "src/views/onboarding/workspace-details/index.tsx",
         284
       ]
@@ -2612,7 +2616,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        227
+        230
       ]
     ],
     "translation": "Ryd filtre"
@@ -4112,7 +4116,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        171
+        178
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -4132,7 +4136,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        132
+        129
       ]
     ],
     "translation": "Forfalder næste måned"
@@ -4144,7 +4148,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        127
+        124
       ]
     ],
     "translation": "Forfalder i næste uge"
@@ -4156,7 +4160,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        117
+        114
       ]
     ],
     "translation": "Forfalder i dag"
@@ -4168,7 +4172,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        122
+        119
       ]
     ],
     "translation": "Forfalder i morgen"
@@ -5117,7 +5121,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        221
+        240
       ]
     ],
     "translation": "Filter"
@@ -6218,7 +6222,7 @@
       ],
       [
         "src/views/board/components/Filters.tsx",
-        155
+        160
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -6483,7 +6487,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        163
+        169
       ]
     ],
     "translation": "Lister"
@@ -6755,7 +6759,7 @@
       ],
       [
         "src/views/board/components/Filters.tsx",
-        147
+        151
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -7282,7 +7286,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        137
+        134
       ]
     ],
     "translation": "Ingen datoer"
@@ -7566,7 +7570,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        112
+        109
       ]
     ],
     "translation": "Overskredet"
