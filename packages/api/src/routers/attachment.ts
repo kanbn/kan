@@ -5,12 +5,15 @@ import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import { generateUID } from "@kan/shared/utils";
+import {
+  deleteObject,
+  generateUID,
+  generateUploadUrl,
+} from "@kan/shared/utils";
 
-import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { attachmentConfirmResponseSchema } from "../schemas";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertPermission } from "../utils/permissions";
-import { deleteObject, generateUploadUrl } from "@kan/shared/utils";
 
 export const attachmentRouter = createTRPCRouter({
   generateUploadUrl: protectedProcedure
@@ -196,30 +199,32 @@ export const attachmentRouter = createTRPCRouter({
       const workspaceId = attachment.card.list.board.workspaceId;
       await assertPermission(ctx.db, userId, workspaceId, "card:edit");
 
+      const deletedAttachment = await cardAttachmentRepo.softDeleteWithActivity(
+        ctx.db,
+        {
+          attachmentId: attachment.id,
+          cardId: attachment.cardId,
+          createdBy: userId,
+        },
+      );
+
+      if (!deletedAttachment)
+        throw new TRPCError({
+          message: `Attachment with public ID ${input.attachmentPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
       const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
       if (bucket) {
         try {
-          await deleteObject(bucket, attachment.s3Key);
+          await deleteObject(bucket, deletedAttachment.s3Key);
         } catch (error) {
           console.error(
-            `Failed to delete attachment from S3: ${attachment.s3Key}`,
+            `Failed to delete attachment from S3: ${deletedAttachment.s3Key}`,
             error,
           );
         }
       }
-
-      await cardAttachmentRepo.softDelete(ctx.db, {
-        attachmentId: attachment.id,
-        deletedAt: new Date(),
-      });
-
-      await cardActivityRepo.create(ctx.db, {
-        type: "card.updated.attachment.removed",
-        cardId: attachment.cardId,
-        attachmentId: attachment.id,
-        fromTitle: attachment.originalFilename,
-        createdBy: userId,
-      });
 
       return { success: true };
     }),

@@ -79,6 +79,7 @@ describe("card cover updates", () => {
       description: null,
       dueDate: null,
       coverColourCode: "#0d9488",
+      coverAttachmentId: null,
       coverSize: "normal",
     });
 
@@ -136,6 +137,7 @@ describe("card cover updates", () => {
       description: null,
       dueDate: null,
       coverColourCode: null,
+      coverAttachmentId: null,
       coverSize: "full",
     });
 
