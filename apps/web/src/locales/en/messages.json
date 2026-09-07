@@ -124,7 +124,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        571
+        579
       ]
     ],
     "translation": "{0} not found"
@@ -441,7 +441,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        138
+        140
       ]
     ],
     "translation": "Add a card"
@@ -465,7 +465,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        125
+        127
       ]
     ],
     "translation": "Add card"
@@ -1551,7 +1551,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        543
+        551
       ],
       [
         "src/views/card/index.tsx",
@@ -1608,7 +1608,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        561
+        569
       ]
     ],
     "translation": "Board name"
@@ -3326,7 +3326,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        685
+        693
       ]
     ],
     "translation": "Create new list"
@@ -3778,7 +3778,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        149
+        151
       ]
     ],
     "translation": "Delete list"
@@ -5413,7 +5413,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        670
+        678
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -6533,7 +6533,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        108
+        110
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -6549,7 +6549,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        165
+        167
       ]
     ],
     "translation": "List options"
@@ -7188,7 +7188,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        634
+        642
       ]
     ],
     "translation": "New list"
@@ -7408,7 +7408,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        666
+        674
       ]
     ],
     "translation": "No lists"
@@ -7420,7 +7420,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        671
+        679
       ]
     ],
     "translation": "No lists have been created yet"
@@ -9987,11 +9987,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        543
+        551
       ],
       [
         "src/views/board/index.tsx",
-        580
+        588
       ]
     ],
     "translation": "Template"
@@ -12180,7 +12180,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        543
+        551
       ],
       [
         "src/views/boards/index.tsx",
@@ -12570,7 +12570,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        118
+        120
       ],
       [
         "src/views/board/components/UpdateBoardSlugButton.tsx",
@@ -12582,11 +12582,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        618
+        626
       ],
       [
         "src/views/board/index.tsx",
-        676
+        684
       ],
       [
         "src/views/boards/components/BoardsList.tsx",

@@ -124,7 +124,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        571
+        579
       ]
     ],
     "translation": "{0} blev ikke fundet"
@@ -441,7 +441,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        138
+        140
       ]
     ],
     "translation": "Tilføj et kort"
@@ -465,7 +465,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        125
+        127
       ]
     ],
     "translation": ""
@@ -1551,7 +1551,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        543
+        551
       ],
       [
         "src/views/card/index.tsx",
@@ -1608,7 +1608,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        561
+        569
       ]
     ],
     "translation": ""
@@ -3313,7 +3313,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        685
+        693
       ]
     ],
     "translation": "Opret ny liste"
@@ -3752,7 +3752,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        149
+        151
       ]
     ],
     "translation": "Slet liste"
@@ -5361,7 +5361,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        670
+        678
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny liste"
@@ -6455,7 +6455,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        108
+        110
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -6471,7 +6471,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        165
+        167
       ]
     ],
     "translation": ""
@@ -7110,7 +7110,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        634
+        642
       ]
     ],
     "translation": "Ny liste"
@@ -7330,7 +7330,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        666
+        674
       ]
     ],
     "translation": "Ingen lister"
@@ -7342,7 +7342,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        671
+        679
       ]
     ],
     "translation": "Der er endnu ikke oprettet nogen lister"
@@ -9909,11 +9909,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        543
+        551
       ],
       [
         "src/views/board/index.tsx",
-        580
+        588
       ]
     ],
     "translation": "Skabelon"
@@ -12072,7 +12072,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        543
+        551
       ],
       [
         "src/views/boards/index.tsx",
@@ -12449,7 +12449,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        118
+        120
       ],
       [
         "src/views/board/components/UpdateBoardSlugButton.tsx",
@@ -12461,11 +12461,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        618
+        626
       ],
       [
         "src/views/board/index.tsx",
-        676
+        684
       ],
       [
         "src/views/boards/components/BoardsList.tsx",

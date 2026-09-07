@@ -69,7 +69,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 571]],
+    "origin": [["src/views/board/index.tsx", 579]],
     "translation": "{0} nie znaleziono"
   },
   "0xWkkH": {
@@ -261,7 +261,7 @@
     "message": "Add a card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/List.tsx", 138]],
+    "origin": [["src/views/board/components/List.tsx", 140]],
     "translation": "Dodaj kartę"
   },
   "qtE5nt": {
@@ -275,7 +275,7 @@
     "message": "Add card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/List.tsx", 125]],
+    "origin": [["src/views/board/components/List.tsx", 127]],
     "translation": "Dodaj kartę"
   },
   "Gxxi5J": {
@@ -929,7 +929,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 543],
+      ["src/views/board/index.tsx", 551],
       ["src/views/card/index.tsx", 321],
       ["src/views/public/board/index.tsx", 125]
     ],
@@ -963,7 +963,7 @@
     "message": "Board name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 561]],
+    "origin": [["src/views/board/index.tsx", 569]],
     "translation": "Nazwa tablicy"
   },
   "wewm3j": {
@@ -1986,7 +1986,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 99],
-      ["src/views/board/index.tsx", 685]
+      ["src/views/board/index.tsx", 693]
     ],
     "translation": "Utwórz nową listę"
   },
@@ -2251,7 +2251,7 @@
     "message": "Delete list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/List.tsx", 149]],
+    "origin": [["src/views/board/components/List.tsx", 151]],
     "translation": "Usuń listę"
   },
   "DFjdv0": {
@@ -3222,7 +3222,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 670]],
+    "origin": [["src/views/board/index.tsx", 678]],
     "translation": "Rozpocznij, tworząc nową listę"
   },
   "oW13KZ": {
@@ -3890,7 +3890,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/List.tsx", 108],
+      ["src/views/board/components/List.tsx", 110],
       ["src/views/board/components/NewListForm.tsx", 144]
     ],
     "translation": "Nazwa listy"
@@ -3899,7 +3899,7 @@
     "message": "List options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/List.tsx", 165]],
+    "origin": [["src/views/board/components/List.tsx", 167]],
     "translation": "Opcje listy"
   },
   "h16FyT": {
@@ -4266,7 +4266,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 128],
-      ["src/views/board/index.tsx", 634]
+      ["src/views/board/index.tsx", 642]
     ],
     "translation": "Nowa lista"
   },
@@ -4399,14 +4399,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 666]],
+    "origin": [["src/views/board/index.tsx", 674]],
     "translation": "Brak list"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 671]],
+    "origin": [["src/views/board/index.tsx", 679]],
     "translation": "Nie utworzono jeszcze żadnych list"
   },
   "i30J2U": {
@@ -5873,8 +5873,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 543],
-      ["src/views/board/index.tsx", 580]
+      ["src/views/board/index.tsx", 551],
+      ["src/views/board/index.tsx", 588]
     ],
     "translation": "Szablon"
   },
@@ -7187,7 +7187,7 @@
     "comments": [],
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
-      ["src/views/board/index.tsx", 543],
+      ["src/views/board/index.tsx", 551],
       ["src/views/boards/index.tsx", 58],
       ["src/views/members/index.tsx", 279],
       ["src/views/public/board/index.tsx", 125],
@@ -7428,11 +7428,11 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/List.tsx", 118],
+      ["src/views/board/components/List.tsx", 120],
       ["src/views/board/components/UpdateBoardSlugButton.tsx", 58],
       ["src/views/board/components/VisibilityButton.tsx", 72],
-      ["src/views/board/index.tsx", 618],
-      ["src/views/board/index.tsx", 676],
+      ["src/views/board/index.tsx", 626],
+      ["src/views/board/index.tsx", 684],
       ["src/views/boards/components/BoardsList.tsx", 71],
       ["src/views/boards/index.tsx", 69],
       ["src/views/boards/index.tsx", 90]
