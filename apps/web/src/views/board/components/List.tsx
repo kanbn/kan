@@ -16,6 +16,7 @@ import { Tooltip } from "~/components/Tooltip";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { api } from "~/utils/api";
+import { isPlaceholderPublicId } from "~/utils/helpers";
 
 interface ListProps {
   children: ReactNode;
@@ -47,11 +48,12 @@ export default function List({
   const { canCreateCard, canEditList, canDeleteList } = usePermissions();
   const { data: session } = authClient.useSession();
   const isCreator = list.createdBy && session?.user.id === list.createdBy;
+  const isOptimistic = isPlaceholderPublicId(list.publicId);
   const canEdit = canEditList || isCreator;
-  const canDrag = canEditList || isCreator;
+  const canDrag = !isOptimistic && (canEditList || isCreator);
 
   const openNewCardForm = (publicListId: PublicListId) => {
-    if (!canCreateCard) return;
+    if (!canCreateCard || isOptimistic) return;
     openModal("NEW_CARD");
     setSelectedPublicListId(publicListId);
   };
@@ -70,7 +72,7 @@ export default function List({
   });
 
   const onSubmit = (values: FormValues) => {
-    if (!canEdit) return;
+    if (!canEdit || isOptimistic) return;
     updateList.mutate({
       listPublicId: values.listPublicId,
       name: values.name,
@@ -108,7 +110,7 @@ export default function List({
                 aria-label={t`List name`}
                 {...register("name")}
                 onBlur={handleSubmit(onSubmit)}
-                readOnly={!canEdit}
+                readOnly={!canEdit || isOptimistic}
                 className="w-full border-0 bg-transparent px-4 pt-1 text-sm font-medium text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000"
               />
             </form>
@@ -121,7 +123,7 @@ export default function List({
                 <button
                   className="mx-1 inline-flex h-fit items-center rounded-md p-1 px-1 text-sm font-semibold text-dark-50 hover:bg-light-400 disabled:cursor-not-allowed disabled:opacity-60 dark:hover:bg-dark-200"
                   onClick={() => openNewCardForm(list.publicId)}
-                  disabled={!canCreateCard}
+                  disabled={!canCreateCard || isOptimistic}
                   aria-label={t`Add card`}
                 >
                   <HiOutlinePlusSmall
@@ -132,7 +134,7 @@ export default function List({
               </Tooltip>
               {(() => {
                 const dropdownItems = [
-                  ...(canCreateCard
+                  ...(canCreateCard && !isOptimistic
                     ? [
                         {
                           label: t`Add a card`,
@@ -143,7 +145,7 @@ export default function List({
                         },
                       ]
                     : []),
-                  ...(canDeleteList || isCreator
+                  ...(!isOptimistic && (canDeleteList || isCreator)
                     ? [
                         {
                           label: t`Delete list`,

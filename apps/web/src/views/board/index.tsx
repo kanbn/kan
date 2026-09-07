@@ -35,7 +35,7 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
-import { formatToArray } from "~/utils/helpers";
+import { formatToArray, isPlaceholderPublicId } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import BoardDropdown from "./components/BoardDropdown";
 import Card from "./components/Card";
@@ -357,14 +357,22 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       return;
     }
 
-    if (type === "LIST" && canEditList) {
+    if (
+      type === "LIST" &&
+      canEditList &&
+      !isPlaceholderPublicId(draggableId)
+    ) {
       updateListMutation.mutate({
         listPublicId: draggableId,
         index: destination.index,
       });
     }
 
-    if (type === "CARD" && canEditCard) {
+    if (
+      type === "CARD" &&
+      canEditCard &&
+      !isPlaceholderPublicId(destination.droppableId)
+    ) {
       updateCardMutation.mutate({
         cardPublicId: draggableId,
 
@@ -712,6 +720,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                             <Droppable
                               droppableId={`${list.publicId}`}
                               type="CARD"
+                              isDropDisabled={isPlaceholderPublicId(
+                                list.publicId,
+                              )}
                             >
                               {(provided) => (
                                 <div

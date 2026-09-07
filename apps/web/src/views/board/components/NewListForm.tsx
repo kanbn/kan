@@ -52,7 +52,7 @@ export function NewListForm({
       await utils.board.byId.cancel();
 
       const currentState = utils.board.byId.getData(queryParams);
-      const optimisticPublicId = generateUID();
+      const optimisticPublicId = `PLACEHOLDER_${generateUID()}`;
 
       utils.board.byId.setData(queryParams, (oldBoard) => {
         if (!oldBoard) return oldBoard;

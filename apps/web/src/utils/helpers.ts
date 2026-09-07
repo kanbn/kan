@@ -9,6 +9,9 @@ export const formatToArray = (
   return value ? [value] : [];
 };
 
+export const isPlaceholderPublicId = (publicId: string) =>
+  publicId.startsWith("PLACEHOLDER_");
+
 export const inferInitialsFromEmail = (email: string) => {
   const localPart = email.split("@")[0];
   if (!localPart) return "";
