@@ -49,10 +49,23 @@ export const boardRouter = createTRPCRouter({
       z.object({
         boardPublicId: z.string().min(12),
         attachmentPublicIds: z.array(z.string().min(12)).max(50),
-        width: z.union([z.literal(320), z.literal(640), z.literal(1280)]),
+        widths: z
+          .array(z.union([z.literal(320), z.literal(640), z.literal(1280)]))
+          .min(1)
+          .max(3),
       }),
     )
-    .output(z.record(z.string(), z.string().url().nullable()))
+    .output(
+      z.record(
+        z.string(),
+        z.array(
+          z.object({
+            width: z.union([z.literal(320), z.literal(640), z.literal(1280)]),
+            url: z.string().url(),
+          }),
+        ),
+      ),
+    )
     .query(async ({ ctx, input }) => {
       const board = await boardRepo.getCoverAccessByPublicId(
         ctx.db,
@@ -76,6 +89,7 @@ export const boardRouter = createTRPCRouter({
       }
 
       const attachmentPublicIds = [...new Set(input.attachmentPublicIds)];
+      const widths = [...new Set(input.widths)];
       const attachments =
         await cardAttachmentRepo.getSelectedCoverAttachmentsByBoardPublicId(
           ctx.db,
@@ -88,8 +102,8 @@ export const boardRouter = createTRPCRouter({
         attachments.map((attachment) => attachment.publicId),
       );
       const result = Object.fromEntries(
-        attachmentPublicIds.map((publicId) => [publicId, null]),
-      ) as Record<string, string | null>;
+        attachmentPublicIds.map((publicId) => [publicId, []]),
+      ) as Record<string, { width: (typeof widths)[number]; url: string }[]>;
       const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
 
       if (!bucket) return result;
@@ -98,24 +112,31 @@ export const boardRouter = createTRPCRouter({
         attachmentPublicIds.map(async (publicId) => {
           if (!available.has(publicId)) return;
 
-          try {
-            const previewKey = getCardCoverPreviewKey(publicId, input.width);
-            const preview = await inspectStoredObject(bucket, previewKey);
-            if (
-              preview?.contentType !== "image/webp" ||
-              !preview.contentLength ||
-              preview.contentLength <= 0
-            )
-              return;
+          const variants = await Promise.all(
+            widths.map(async (width) => {
+              try {
+                const previewKey = getCardCoverPreviewKey(publicId, width);
+                const preview = await inspectStoredObject(bucket, previewKey);
+                if (
+                  preview?.contentType !== "image/webp" ||
+                  !preview.contentLength ||
+                  preview.contentLength <= 0
+                )
+                  return null;
 
-            result[publicId] = await generateDownloadUrl(
-              bucket,
-              previewKey,
-              86400,
-            );
-          } catch {
-            result[publicId] = null;
-          }
+                return {
+                  width,
+                  url: await generateDownloadUrl(bucket, previewKey, 86400),
+                };
+              } catch {
+                return null;
+              }
+            }),
+          );
+
+          result[publicId] = variants.filter(
+            (variant): variant is NonNullable<typeof variant> => !!variant,
+          );
         }),
       );
 

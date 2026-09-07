@@ -62,7 +62,7 @@ describe("board card cover URL resolution", () => {
     );
   });
 
-  it("deduplicates a public-board batch and leaves unavailable covers null", async () => {
+  it("deduplicates a public-board batch and leaves unavailable covers empty", async () => {
     const { boardRouter } = await import("./board");
     const result = await boardRouter
       .createCaller({
@@ -76,7 +76,7 @@ describe("board card cover URL resolution", () => {
           attachmentPublicId,
           missingAttachmentPublicId,
         ],
-        width: 640,
+        widths: [320, 640, 640],
       });
 
     expect(
@@ -85,15 +85,21 @@ describe("board card cover URL resolution", () => {
       boardPublicId,
       attachmentPublicIds: [attachmentPublicId, missingAttachmentPublicId],
     });
-    expect(inspectStoredObject).toHaveBeenCalledTimes(1);
-    expect(generateDownloadUrl).toHaveBeenCalledWith(
-      "attachments",
-      getCardCoverPreviewKey(attachmentPublicId, 640),
-      86400,
-    );
+    expect(inspectStoredObject).toHaveBeenCalledTimes(2);
+    expect(generateDownloadUrl).toHaveBeenCalledTimes(2);
+    for (const width of [320, 640] as const) {
+      expect(generateDownloadUrl).toHaveBeenCalledWith(
+        "attachments",
+        getCardCoverPreviewKey(attachmentPublicId, width),
+        86400,
+      );
+    }
     expect(result).toEqual({
-      [attachmentPublicId]: "https://storage.example/preview.webp",
-      [missingAttachmentPublicId]: null,
+      [attachmentPublicId]: [
+        { width: 320, url: "https://storage.example/preview.webp" },
+        { width: 640, url: "https://storage.example/preview.webp" },
+      ],
+      [missingAttachmentPublicId]: [],
     });
     expect(assertPermission).not.toHaveBeenCalled();
   });
@@ -110,13 +116,36 @@ describe("board card cover URL resolution", () => {
       boardRouter.createCaller({ db: mockDb, user: null } as never).coverUrls({
         boardPublicId,
         attachmentPublicIds: [attachmentPublicId],
-        width: 320,
+        widths: [320],
       }),
     ).rejects.toThrow("not authenticated");
 
     expect(
       cardAttachmentRepo.getSelectedCoverAttachmentsByBoardPublicId,
     ).not.toHaveBeenCalled();
+  });
+
+  it("returns the prepared variants when another requested width is missing", async () => {
+    vi.mocked(inspectStoredObject).mockImplementation(async (_bucket, key) =>
+      key === getCardCoverPreviewKey(attachmentPublicId, 320)
+        ? { contentLength: 2048, contentType: "image/webp" }
+        : null,
+    );
+    const { boardRouter } = await import("./board");
+
+    const result = await boardRouter
+      .createCaller({ db: mockDb, user: null } as never)
+      .coverUrls({
+        boardPublicId,
+        attachmentPublicIds: [attachmentPublicId],
+        widths: [320, 640],
+      });
+
+    expect(result).toEqual({
+      [attachmentPublicId]: [
+        { width: 320, url: "https://storage.example/preview.webp" },
+      ],
+    });
   });
 
   it("authorizes a private board once for the whole batch", async () => {
@@ -136,7 +165,7 @@ describe("board card cover URL resolution", () => {
       .coverUrls({
         boardPublicId,
         attachmentPublicIds: [attachmentPublicId],
-        width: 320,
+        widths: [320],
       });
 
     expect(assertPermission).toHaveBeenCalledTimes(1);
