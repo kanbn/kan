@@ -16,8 +16,10 @@ import {
 
 import {
   activityItemSchema,
+  cardCoverSizeSchema,
   cardCreateResponseSchema,
   cardDetailSchema,
+  cardUpdateCoverResponseSchema,
   cardUpdateResponseSchema,
   commentDeleteResponseSchema,
   commentResponseSchema,
@@ -25,6 +27,7 @@ import {
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
+import { formatCardCover } from "../utils/cardCover";
 import { sendMentionEmails } from "../utils/notifications";
 import {
   assertCanDelete,
@@ -774,6 +777,7 @@ export const cardRouter = createTRPCRouter({
 
       return {
         ...result,
+        cover: formatCardCover(result),
         attachments: attachmentsWithUrls,
         list: {
           ...result.list,
@@ -901,6 +905,124 @@ export const cardRouter = createTRPCRouter({
         nextCursor: result.nextCursor?.createdAt.toISOString() ?? null,
         nextCursorPublicId: result.nextCursor?.publicId ?? null,
       };
+    }),
+  updateCover: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Update a card cover",
+        method: "PUT",
+        path: "/cards/{cardPublicId}/cover",
+        description: "Updates or removes a card cover by its public ID",
+        tags: ["Cards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+        cover: z
+          .object({
+            kind: z.literal("colour"),
+            colourCode: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
+            size: cardCoverSizeSchema.optional(),
+          })
+          .nullable(),
+      }),
+    )
+    .output(cardUpdateCoverResponseSchema)
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!card)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertCanEdit(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "card:edit",
+        card.createdBy,
+      );
+
+      const existingCard = await cardRepo.getByPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!existingCard)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      const coverColourCode = input.cover?.colourCode ?? null;
+      const coverSize = input.cover?.size ?? existingCard.coverSize;
+      const previousCover = formatCardCover(existingCard);
+      const nextCover = formatCardCover({ coverColourCode, coverSize });
+
+      if (
+        existingCard.coverColourCode === coverColourCode &&
+        existingCard.coverSize === coverSize
+      ) {
+        return { publicId: existingCard.publicId, cover: previousCover };
+      }
+
+      const result = await cardRepo.updateCover(ctx.db, {
+        cardPublicId: input.cardPublicId,
+        coverColourCode,
+        coverSize,
+        createdBy: userId,
+      });
+
+      if (!result)
+        throw new TRPCError({
+          message: `Failed to update card cover`,
+          code: "INTERNAL_SERVER_ERROR",
+        });
+
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        card.workspaceId,
+        createCardWebhookPayload(
+          "card.updated",
+          {
+            id: String(result.id),
+            publicId: result.publicId,
+            title: result.title,
+            description: result.description,
+            dueDate: result.dueDate,
+            listId: existingCard.list.publicId,
+            cover: nextCover,
+          },
+          {
+            boardId: card.boardPublicId,
+            boardName: card.boardName,
+            listName: existingCard.list.name,
+            user: ctx.user
+              ? { id: ctx.user.id, name: ctx.user.name }
+              : undefined,
+            changes: {
+              cover: { from: previousCover, to: nextCover },
+            },
+          },
+        ),
+      );
+
+      return { publicId: result.publicId, cover: nextCover };
     }),
   update: protectedProcedure
     .meta({
@@ -1382,6 +1504,8 @@ export const cardRouter = createTRPCRouter({
         workspaceId: targetList.workspaceId,
         position: "end",
         dueDate: sourceCard.dueDate ?? null,
+        coverColourCode: sourceCard.coverColourCode,
+        coverSize: sourceCard.coverSize,
       });
 
       if (input.index !== undefined && input.index >= 0) {

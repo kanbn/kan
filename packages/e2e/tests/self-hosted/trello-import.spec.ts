@@ -9,7 +9,7 @@ import { createTestUser } from "../support/test-user";
 import { waitForTrpcMutation } from "../support/wait-for-trpc";
 
 test(
-  "a Trello board can be imported with its lists, cards, labels, and checklists",
+  "a Trello board can be imported with its lists, cards, labels, checklists, and covers",
   { tag: "@self-hosted" },
   async ({ page }) => {
     const user = createTestUser();
@@ -50,6 +50,14 @@ test(
 
     await expect(page.getByText("Fix login bug")).toBeVisible();
     await expect(page.getByText("Add dark mode")).toBeVisible();
+    await expect(page.getByText("Fix login bug")).toHaveCSS(
+      "color",
+      "rgb(0, 0, 0)",
+    );
+    await expect(page.getByText("Fix login bug").locator("..")).toHaveCSS(
+      "background-color",
+      "rgb(108, 195, 224)",
+    );
 
     await board.openCard("Fix login bug");
     const bugLabel = card.assignedLabelBadge("Bug");
