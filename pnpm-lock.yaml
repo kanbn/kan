@@ -335,6 +335,9 @@ importers:
       rate-limiter-flexible:
         specifier: ^9.0.1
         version: 9.0.1
+      sharp:
+        specifier: 0.34.5
+        version: 0.34.5
       superjson:
         specifier: 2.2.1
         version: 2.2.1
