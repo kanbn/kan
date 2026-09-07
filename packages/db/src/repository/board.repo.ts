@@ -31,6 +31,7 @@ import {
   lists,
   userBoardFavorites,
   workspaceMembers,
+  workspaces,
 } from "@kan/db/schema";
 import { generateUID, normalizeDescription } from "@kan/shared/utils";
 
@@ -290,6 +291,11 @@ export const getByPublicId = async (
               coverSize: true,
             },
             with: {
+              coverAttachment: {
+                columns: {
+                  publicId: true,
+                },
+              },
               labels: {
                 with: {
                   label: {
@@ -611,6 +617,11 @@ export const getBySlug = async (
               coverSize: true,
             },
             with: {
+              coverAttachment: {
+                columns: {
+                  publicId: true,
+                },
+              },
               labels: {
                 with: {
                   label: {
@@ -893,6 +904,29 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
     },
     where: eq(boards.publicId, boardPublicId),
   });
+
+  return result;
+};
+
+export const getCoverAccessByPublicId = async (
+  db: dbClient,
+  boardPublicId: string,
+) => {
+  const [result] = await db
+    .select({
+      id: boards.id,
+      workspaceId: boards.workspaceId,
+      visibility: boards.visibility,
+    })
+    .from(boards)
+    .innerJoin(workspaces, eq(workspaces.id, boards.workspaceId))
+    .where(
+      and(
+        eq(boards.publicId, boardPublicId),
+        isNull(boards.deletedAt),
+        isNull(workspaces.deletedAt),
+      ),
+    );
 
   return result;
 };

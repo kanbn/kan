@@ -50,4 +50,29 @@ describe("card cover webhook payload", () => {
       cover: { from: null, to: cover },
     });
   });
+
+  it("includes an attachment cover without storage metadata", () => {
+    const cover = {
+      kind: "attachment" as const,
+      attachmentPublicId: "attachment01",
+      size: "full" as const,
+    };
+    const payload = createCardWebhookPayload(
+      "card.updated",
+      {
+        id: "card-123",
+        publicId: "card-pub-123",
+        title: "Test Card",
+        cover,
+        listId: "list-456",
+      },
+      {
+        boardId: "board-789",
+        changes: { cover: { from: null, to: cover } },
+      },
+    );
+
+    expect(payload.data.card.cover).toEqual(cover);
+    expect(payload.data.card.cover).not.toHaveProperty("s3Key");
+  });
 });

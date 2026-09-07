@@ -67,6 +67,7 @@ describe("card description updates", () => {
       listId: 3,
       dueDate: null,
       coverColourCode: null,
+      coverAttachment: null,
       coverSize: "normal",
       list: {
         publicId: "list-12345678",

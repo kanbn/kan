@@ -47,7 +47,7 @@ const seedCard = async () => {
     })
     .returning();
 
-  return { db, user, list: list!, card: card! };
+  return { db, user, board: board!, list: list!, card: card! };
 };
 
 const seedAttachment = async (
@@ -131,7 +131,7 @@ describe("card cover repository", () => {
   });
 
   it("only selects a non-deleted attachment from the same card", async () => {
-    const { db, user, list, card } = await seedCard();
+    const { db, user, board, list, card } = await seedCard();
     const attachment = await seedAttachment(db, card.id, user.id, "cover");
 
     const selected = await cardRepo.updateCover(db, {
@@ -147,6 +147,13 @@ describe("card cover repository", () => {
       coverColourCode: null,
       coverSize: "full",
     });
+
+    await expect(
+      cardAttachmentRepo.getSelectedCoverAttachmentsByBoardPublicId(db, {
+        boardPublicId: board.publicId,
+        attachmentPublicIds: [attachment.publicId],
+      }),
+    ).resolves.toEqual([{ publicId: attachment.publicId }]);
 
     const [otherCard] = await db
       .insert(cards)
@@ -173,6 +180,13 @@ describe("card cover repository", () => {
       .update(cardAttachments)
       .set({ deletedAt: new Date() })
       .where(eq(cardAttachments.id, attachment.id));
+
+    await expect(
+      cardAttachmentRepo.getSelectedCoverAttachmentsByBoardPublicId(db, {
+        boardPublicId: board.publicId,
+        attachmentPublicIds: [attachment.publicId],
+      }),
+    ).resolves.toEqual([]);
 
     await expect(
       cardRepo.updateCover(db, {
