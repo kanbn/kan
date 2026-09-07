@@ -90,6 +90,7 @@ export function CardCoverSelector({
     onSettled: async () => {
       await invalidateCard(utils, cardPublicId);
       await Promise.all([
+        utils.board.coverUrls.invalidate(),
         utils.board.byId.invalidate(),
         utils.board.bySlug.invalidate(),
       ]);
