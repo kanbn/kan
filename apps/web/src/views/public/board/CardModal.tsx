@@ -95,7 +95,12 @@ export function CardModal({
     <div className="flex h-full flex-1 flex-row">
       <div className="flex h-full w-full flex-col overflow-hidden">
         <div className="h-full p-8">
-          {data?.cover && <CardCoverBanner cover={data.cover} />}
+          {data?.cover && (
+            <CardCoverBanner
+              cover={data.cover}
+              boardPublicId={data.list.board.publicId}
+            />
+          )}
           <div className="mb-6">
             <div className="flex w-full items-start justify-between gap-4">
               <div className="flex-1">
