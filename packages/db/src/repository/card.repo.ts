@@ -238,21 +238,50 @@ export const updateCover = async (
   input: {
     cardPublicId: string;
     coverColourCode: string | null;
+    coverAttachmentPublicId?: string | null;
     coverSize: "normal" | "full";
     createdBy: string;
   },
 ) => {
   return db.transaction(async (tx) => {
+    const [lockedCard] = await tx
+      .select({ id: cards.id })
+      .from(cards)
+      .where(
+        and(eq(cards.publicId, input.cardPublicId), isNull(cards.deletedAt)),
+      )
+      .for("update");
+
+    if (!lockedCard) return undefined;
+
+    let coverAttachmentId: number | null = null;
+
+    if (input.coverAttachmentPublicId) {
+      const [attachment] = await tx
+        .select({ id: cardAttachments.id })
+        .from(cardAttachments)
+        .where(
+          and(
+            eq(cardAttachments.cardId, lockedCard.id),
+            eq(cardAttachments.publicId, input.coverAttachmentPublicId),
+            isNull(cardAttachments.deletedAt),
+          ),
+        )
+        .for("update");
+
+      if (!attachment) return undefined;
+      coverAttachmentId = attachment.id;
+    }
+
     const [card] = await tx
       .update(cards)
       .set({
         coverColourCode: input.coverColourCode,
+        coverAttachmentId,
         coverSize: input.coverSize,
         updatedAt: new Date(),
       })
-      .where(
-        and(eq(cards.publicId, input.cardPublicId), isNull(cards.deletedAt)),
-      )
+      .where(eq(cards.id, lockedCard.id))
       .returning({
         id: cards.id,
         publicId: cards.publicId,
@@ -260,6 +289,7 @@ export const updateCover = async (
         description: cards.description,
         dueDate: cards.dueDate,
         coverColourCode: cards.coverColourCode,
+        coverAttachmentId: cards.coverAttachmentId,
         coverSize: cards.coverSize,
       });
 

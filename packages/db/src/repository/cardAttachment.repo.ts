@@ -1,7 +1,7 @@
 import { and, count, eq, isNull } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
-import { cardAttachments } from "@kan/db/schema";
+import { cardActivities, cardAttachments, cards } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
 export const getCount = async (db: dbClient) => {
@@ -91,18 +91,77 @@ export const getAllByCardId = (db: dbClient, cardId: number) => {
   });
 };
 
-export const softDelete = async (
+export const softDeleteWithActivity = async (
   db: dbClient,
   args: {
     attachmentId: number;
-    deletedAt: Date;
+    cardId: number;
+    createdBy: string;
   },
 ) => {
-  const [result] = await db
-    .update(cardAttachments)
-    .set({ deletedAt: args.deletedAt })
-    .where(eq(cardAttachments.id, args.attachmentId))
-    .returning({ id: cardAttachments.id });
+  return db.transaction(async (tx) => {
+    const [card] = await tx
+      .select({ id: cards.id })
+      .from(cards)
+      .where(and(eq(cards.id, args.cardId), isNull(cards.deletedAt)))
+      .for("update");
 
-  return result;
+    if (!card) return undefined;
+
+    const [attachment] = await tx
+      .select({
+        id: cardAttachments.id,
+        publicId: cardAttachments.publicId,
+        originalFilename: cardAttachments.originalFilename,
+        s3Key: cardAttachments.s3Key,
+      })
+      .from(cardAttachments)
+      .where(
+        and(
+          eq(cardAttachments.id, args.attachmentId),
+          eq(cardAttachments.cardId, card.id),
+          isNull(cardAttachments.deletedAt),
+        ),
+      )
+      .for("update");
+
+    if (!attachment) return undefined;
+
+    const deletedAt = new Date();
+    const [clearedCover] = await tx
+      .update(cards)
+      .set({ coverAttachmentId: null, updatedAt: deletedAt })
+      .where(
+        and(eq(cards.id, card.id), eq(cards.coverAttachmentId, attachment.id)),
+      )
+      .returning({ id: cards.id });
+
+    await tx
+      .update(cardAttachments)
+      .set({ deletedAt })
+      .where(eq(cardAttachments.id, attachment.id));
+
+    await tx.insert(cardActivities).values([
+      {
+        publicId: generateUID(),
+        type: "card.updated.attachment.removed",
+        cardId: card.id,
+        attachmentId: attachment.id,
+        fromTitle: attachment.originalFilename,
+        createdBy: args.createdBy,
+      },
+      ...(clearedCover
+        ? [
+            {
+              publicId: generateUID(),
+              type: "card.updated.cover" as const,
+              cardId: card.id,
+              createdBy: args.createdBy,
+            },
+          ]
+        : []),
+    ]);
+
+    return { ...attachment, coverCleared: Boolean(clearedCover) };
+  });
 };
