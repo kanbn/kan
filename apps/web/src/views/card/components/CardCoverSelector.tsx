@@ -113,7 +113,7 @@ export function CardCoverSelector({
       cover: {
         kind: "attachment",
         attachmentPublicId,
-        size: "normal",
+        size: cover?.size ?? "normal",
       },
     });
   };
@@ -144,7 +144,7 @@ export function CardCoverSelector({
         cover: {
           kind: "attachment",
           attachmentPublicId: attachment.publicId,
-          size: "normal",
+          size: cover?.size ?? "normal",
         },
       });
     } catch {
@@ -163,6 +163,15 @@ export function CardCoverSelector({
       updateCover.mutate({
         cardPublicId,
         cover: { kind: "colour", colourCode: cover.colourCode, size },
+      });
+    } else if (cover?.kind === "attachment") {
+      updateCover.mutate({
+        cardPublicId,
+        cover: {
+          kind: "attachment",
+          attachmentPublicId: cover.attachmentPublicId,
+          size,
+        },
       });
     }
   };
@@ -227,7 +236,7 @@ export function CardCoverSelector({
                   type="button"
                   aria-pressed={cover?.size === size}
                   onClick={() => setSize(size)}
-                  disabled={cover?.kind !== "colour" || updateCover.isPending}
+                  disabled={!cover || updateCover.isPending}
                   className={`rounded px-2 py-1 text-xs font-medium disabled:cursor-not-allowed disabled:opacity-50 ${cover?.size === size ? "bg-light-50 text-light-1000 shadow-sm dark:bg-dark-100 dark:text-dark-1000" : "text-light-800 hover:text-light-1000 dark:text-dark-800 dark:hover:text-dark-1000"}`}
                 >
                   {size === "normal" ? t`Normal` : t`Full`}

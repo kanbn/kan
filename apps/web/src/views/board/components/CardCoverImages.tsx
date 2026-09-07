@@ -149,6 +149,7 @@ export function CardCoverImagesProvider({
 
 export function useCardCoverImage(attachmentPublicId: string | undefined): {
   ref: RefCallback<HTMLElement>;
+  isResolved: boolean;
   url: string | null;
 } {
   const { register, unregister, urls } = useContext(CardCoverImagesContext);
@@ -175,6 +176,7 @@ export function useCardCoverImage(attachmentPublicId: string | undefined): {
 
   return {
     ref,
+    isResolved: attachmentPublicId ? attachmentPublicId in urls : true,
     url: attachmentPublicId ? (urls[attachmentPublicId] ?? null) : null,
   };
 }
