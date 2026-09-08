@@ -489,7 +489,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                     </>
                   )}
                   <div className="border-t-[1px] border-light-300 pt-12 dark:border-dark-300">
-                    <div className="flex items-center justify-between pb-4">
+                    <header className="flex items-center justify-between pb-4">
                       <h2 className="text-md font-medium text-light-1000 dark:text-dark-1000">
                         {t`Activity`}
                       </h2>
@@ -497,7 +497,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                         order={activitySortOrder}
                         onChange={setActivitySortOrder}
                       />
-                    </div>
+                    </header>
                     {!isTemplate && activitySortOrder === "newest" && (
                       <div className="mb-2">
                         <NewCommentForm
