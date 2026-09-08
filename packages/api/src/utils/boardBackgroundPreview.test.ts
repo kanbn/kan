@@ -3,12 +3,15 @@ import { describe, expect, it, vi } from "vitest";
 
 import {
   boardBackgroundPreviewWidths,
+  cloneBoardBackgroundObjects,
   ensureBoardBackgroundPreviews,
   getBoardBackgroundPreviewKey,
 } from "./boardBackgroundPreview";
 
 const sourceKey = "workspace/board-backgrounds/board1234567/source.jpg";
 const boardPublicId = "board1234567";
+const clonedBoardPublicId = "cloned123456";
+const clonedSourceKey = "workspace/board-backgrounds/cloned123456/source.jpg";
 
 const createStorage = (source: Uint8Array) => {
   const objects = new Map<string, { body: Uint8Array; contentType: string }>([
@@ -50,6 +53,14 @@ const createStorage = (source: Uint8Array) => {
         objects.delete(key);
         return Promise.resolve();
       }),
+      copyObject: vi.fn(
+        (_bucket: string, copiedSourceKey: string, targetKey: string) => {
+          const object = objects.get(copiedSourceKey);
+          if (!object) return Promise.reject(new Error("not found"));
+          objects.set(targetKey, object);
+          return Promise.resolve();
+        },
+      ),
     },
   };
 };
@@ -198,5 +209,84 @@ describe("board background previews", () => {
         ),
       ).toBe(false);
     expect(storage.deleteObject).toHaveBeenCalledTimes(3);
+  });
+
+  it("copies a source image and creates board-owned previews", async () => {
+    const source = await sharp({
+      create: {
+        width: 1200,
+        height: 800,
+        channels: 3,
+        background: "#0d9488",
+      },
+    })
+      .jpeg()
+      .toBuffer();
+    const { objects, storage } = createStorage(source);
+
+    const result = await cloneBoardBackgroundObjects({
+      bucket: "attachments",
+      sourceKey,
+      targetBoardPublicId: clonedBoardPublicId,
+      targetKey: clonedSourceKey,
+      storage,
+    });
+
+    expect(result).toBe(clonedSourceKey);
+    expect(storage.copyObject).toHaveBeenCalledWith(
+      "attachments",
+      sourceKey,
+      clonedSourceKey,
+    );
+    expect(objects.has(sourceKey)).toBe(true);
+    expect(objects.has(clonedSourceKey)).toBe(true);
+    for (const width of boardBackgroundPreviewWidths)
+      expect(
+        objects.has(
+          getBoardBackgroundPreviewKey(
+            clonedBoardPublicId,
+            clonedSourceKey,
+            width,
+          ),
+        ),
+      ).toBe(true);
+  });
+
+  it("rolls back only the copied objects when preview creation fails", async () => {
+    const source = await sharp({
+      create: {
+        width: 1200,
+        height: 800,
+        channels: 3,
+        background: "#0d9488",
+      },
+    })
+      .jpeg()
+      .toBuffer();
+    const { objects, storage } = createStorage(source);
+    storage.putObject.mockRejectedValueOnce(new Error("Garage unavailable"));
+
+    await expect(
+      cloneBoardBackgroundObjects({
+        bucket: "attachments",
+        sourceKey,
+        targetBoardPublicId: clonedBoardPublicId,
+        targetKey: clonedSourceKey,
+        storage,
+      }),
+    ).rejects.toMatchObject({ code: "STORAGE_FAILURE" });
+
+    expect(objects.has(sourceKey)).toBe(true);
+    expect(objects.has(clonedSourceKey)).toBe(false);
+    for (const width of boardBackgroundPreviewWidths)
+      expect(
+        objects.has(
+          getBoardBackgroundPreviewKey(
+            clonedBoardPublicId,
+            clonedSourceKey,
+            width,
+          ),
+        ),
+      ).toBe(false);
   });
 });

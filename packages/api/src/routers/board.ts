@@ -25,7 +25,10 @@ import {
 } from "../schemas";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
 import { formatBoardBackground } from "../utils/boardBackground";
-import { deleteBoardBackgroundObjects } from "../utils/boardBackgroundPreview";
+import {
+  cloneBoardBackgroundObjects,
+  deleteBoardBackgroundObjects,
+} from "../utils/boardBackgroundPreview";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 
 const logger = createLogger("board");
@@ -416,17 +419,79 @@ export const boardRouter = createTRPCRouter({
         if (!isSlugUnique || input.type === "template")
           slug = `${slug}-${generateUID()}`;
 
-        const result = await boardRepo.createFromSnapshot(ctx.db, {
-          source: sourceBoard,
-          workspaceId: workspace.id,
-          createdBy: userId,
-          slug,
-          name: input.name,
-          type: input.type ?? "regular",
-          sourceBoardId: sourceBoardInfo.id,
-        });
+        const targetBoardPublicId = generateUID();
+        let targetBackgroundImageKey: string | null = null;
+        let backgroundWasCloned = false;
 
-        return result;
+        try {
+          if (sourceBoard.backgroundImageKey) {
+            const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+            if (!bucket)
+              throw new TRPCError({
+                message: "Attachments bucket not configured",
+                code: "INTERNAL_SERVER_ERROR",
+              });
+
+            const sourceFilename =
+              sourceBoard.backgroundImageKey.split("/").at(-1) ?? "background";
+            const sanitizedFilename =
+              sourceFilename.replace(/[^a-zA-Z0-9._-]/g, "_").slice(-200) ||
+              "background";
+            targetBackgroundImageKey = `${workspace.publicId}/board-backgrounds/${targetBoardPublicId}/${sanitizedFilename}`;
+
+            await cloneBoardBackgroundObjects({
+              bucket,
+              sourceKey: sourceBoard.backgroundImageKey,
+              targetBoardPublicId,
+              targetKey: targetBackgroundImageKey,
+            });
+            backgroundWasCloned = true;
+          }
+
+          return await boardRepo.createFromSnapshot(ctx.db, {
+            source: sourceBoard,
+            workspaceId: workspace.id,
+            createdBy: userId,
+            publicId: targetBoardPublicId,
+            backgroundColourCode: sourceBoard.backgroundImageKey
+              ? null
+              : sourceBoard.backgroundColourCode,
+            backgroundImageKey: targetBackgroundImageKey,
+            slug,
+            name: input.name,
+            type: input.type ?? "regular",
+            sourceBoardId: sourceBoardInfo.id,
+          });
+        } catch (error) {
+          if (targetBackgroundImageKey && backgroundWasCloned) {
+            const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+            if (bucket) {
+              const deletions = await deleteBoardBackgroundObjects({
+                bucket,
+                boardPublicId: targetBoardPublicId,
+                s3Key: targetBackgroundImageKey,
+              });
+              deletions.forEach(({ key, result: deletion }) => {
+                if (deletion?.status === "rejected")
+                  logger.warn(
+                    {
+                      err: deletion.reason,
+                      key,
+                      boardPublicId: targetBoardPublicId,
+                    },
+                    "Failed to roll back copied board background object",
+                  );
+              });
+            }
+          }
+
+          if (error instanceof TRPCError) throw error;
+          throw new TRPCError({
+            message: "Failed to create board from source",
+            code: "INTERNAL_SERVER_ERROR",
+            cause: error,
+          });
+        }
       }
 
       // Otherwise, create a new board with provided lists and labels
