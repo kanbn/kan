@@ -23,6 +23,44 @@ const createBoard = async () => {
 };
 
 describe("board background repository", () => {
+  it("persists an explicitly owned background when copying a board", async () => {
+    const db = await createTestDb();
+    const { user, workspace } = await seedTestData(db);
+
+    const copied = await boardRepo.createFromSnapshot(db, {
+      source: {
+        name: "Source board",
+        labels: [],
+        lists: [],
+      },
+      workspaceId: workspace.id,
+      createdBy: user.id,
+      publicId: "copied123456",
+      backgroundColourCode: null,
+      backgroundImageKey:
+        "workspace1234/board-backgrounds/copied123456/forest.jpg",
+      slug: "copied-board",
+      name: "Copied board",
+      type: "regular",
+    });
+
+    const stored = await db.query.boards.findFirst({
+      columns: {
+        publicId: true,
+        backgroundColourCode: true,
+        backgroundImageKey: true,
+      },
+      where: eq(boards.id, copied.id),
+    });
+
+    expect(stored).toEqual({
+      publicId: "copied123456",
+      backgroundColourCode: null,
+      backgroundImageKey:
+        "workspace1234/board-backgrounds/copied123456/forest.jpg",
+    });
+  });
+
   it("sets a colour and clears a previously selected image", async () => {
     const { db, board } = await createBoard();
 
