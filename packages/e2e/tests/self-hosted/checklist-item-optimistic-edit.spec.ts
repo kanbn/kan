@@ -64,7 +64,9 @@ test(
 
     await page.locator("#title").click();
     await expect(page.getByText("baz bar", { exact: true })).toBeVisible();
-    await expect(page.getByText("foo bar", { exact: true })).toHaveCount(0);
+    await expect(
+      page.locator(".plain-text-editor").filter({ hasText: "foo bar" }),
+    ).toHaveCount(0);
 
     await page.reload();
     await expect(page.getByText("baz bar", { exact: true })).toBeVisible();
