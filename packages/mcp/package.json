@@ -9,11 +9,11 @@
   "exports": {
     ".": {
       "types": "./src/server.ts",
-      "default": "./src/server.ts"
+      "default": "./dist/server.js"
     },
     "./client": {
       "types": "./src/client.ts",
-      "default": "./src/client.ts"
+      "default": "./dist/client.js"
     }
   },
   "files": [
@@ -26,6 +26,7 @@
   "scripts": {
     "build": "tsc --noEmit false --declaration false --emitDeclarationOnly false --outDir dist",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc --noEmit false --declaration false --emitDeclarationOnly false --outDir dist",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
