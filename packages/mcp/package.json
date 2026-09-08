@@ -6,6 +6,16 @@
   "bin": {
     "kan-mcp": "./dist/index.js"
   },
+  "exports": {
+    ".": {
+      "types": "./src/server.ts",
+      "default": "./src/server.ts"
+    },
+    "./client": {
+      "types": "./src/client.ts",
+      "default": "./src/client.ts"
+    }
+  },
   "files": [
     "dist",
     "README.md"
