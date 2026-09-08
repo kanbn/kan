@@ -6,6 +6,7 @@ import {
   HiLink,
   HiOutlineDocumentDuplicate,
   HiOutlineLink,
+  HiOutlinePhoto,
   HiOutlineStar,
   HiOutlineTrash,
   HiOutlineUserGroup,
@@ -163,6 +164,17 @@ export default function BoardDropdown({
             action: () => openModal("CREATE_TEMPLATE"),
             icon: (
               <HiOutlineDocumentDuplicate className="h-[16px] w-[16px] text-dark-900" />
+            ),
+          },
+        ]
+      : []),
+    ...(!isTemplate && canEditBoard
+      ? [
+          {
+            label: t`Change background`,
+            action: () => openModal("CHANGE_BOARD_BACKGROUND"),
+            icon: (
+              <HiOutlinePhoto className="h-[16px] w-[16px] text-dark-900" />
             ),
           },
         ]

@@ -31,6 +31,7 @@ import {
   lists,
   userBoardFavorites,
   workspaceMembers,
+  workspaces,
 } from "@kan/db/schema";
 import { generateUID, normalizeDescription } from "@kan/shared/utils";
 
@@ -66,6 +67,8 @@ export const getAllByWorkspaceId = async (
     columns: {
       publicId: true,
       name: true,
+      backgroundColourCode: true,
+      backgroundImageKey: true,
     },
     with: {
       userFavorites: {
@@ -224,6 +227,8 @@ export const getByPublicId = async (
       slug: true,
       visibility: true,
       isArchived: true,
+      backgroundColourCode: true,
+      backgroundImageKey: true,
     },
     with: {
       userFavorites: {
@@ -570,6 +575,8 @@ export const getBySlug = async (
       name: true,
       slug: true,
       visibility: true,
+      backgroundColourCode: true,
+      backgroundImageKey: true,
     },
     with: {
       workspace: {
@@ -802,6 +809,10 @@ export const update = async (
     visibility: BoardVisibilityStatus | undefined;
     boardPublicId: string;
     isArchived?: boolean;
+    background?:
+      | { kind: "colour"; colourCode: string }
+      | { kind: "image"; imageKey: string }
+      | null;
   },
 ) => {
   const [result] = await db
@@ -813,6 +824,16 @@ export const update = async (
       updatedAt: new Date(),
       ...(boardInput.isArchived !== undefined && {
         isArchived: boardInput.isArchived,
+      }),
+      ...(boardInput.background !== undefined && {
+        backgroundColourCode:
+          boardInput.background?.kind === "colour"
+            ? boardInput.background.colourCode
+            : null,
+        backgroundImageKey:
+          boardInput.background?.kind === "image"
+            ? boardInput.background.imageKey
+            : null,
       }),
     })
     .where(eq(boards.publicId, boardInput.boardPublicId))
@@ -886,11 +907,36 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
       type: true,
       visibility: true,
       deletedAt: true,
+      backgroundImageKey: true,
     },
     where: eq(boards.publicId, boardPublicId),
   });
 
   return result;
+};
+
+export const getBackgroundsByPublicIds = async (
+  db: dbClient,
+  boardPublicIds: string[],
+) => {
+  if (boardPublicIds.length === 0) return [];
+
+  return db
+    .select({
+      publicId: boards.publicId,
+      workspaceId: boards.workspaceId,
+      visibility: boards.visibility,
+      backgroundImageKey: boards.backgroundImageKey,
+    })
+    .from(boards)
+    .innerJoin(workspaces, eq(workspaces.id, boards.workspaceId))
+    .where(
+      and(
+        inArray(boards.publicId, boardPublicIds),
+        isNull(boards.deletedAt),
+        isNull(workspaces.deletedAt),
+      ),
+    );
 };
 
 /**
