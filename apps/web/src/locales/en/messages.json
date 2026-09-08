@@ -493,7 +493,7 @@
     "origin": [
       [
         "src/views/card/components/Checklists.tsx",
-        154
+        155
       ]
     ],
     "translation": "Add checklist item"
@@ -533,7 +533,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        169
+        170
       ]
     ],
     "translation": "Add details..."
@@ -3758,7 +3758,7 @@
     "origin": [
       [
         "src/views/card/components/Checklists.tsx",
-        145
+        146
       ]
     ],
     "translation": "Delete checklist"
@@ -8156,11 +8156,11 @@
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        67
+        68
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        95
+        96
       ],
       [
         "src/views/card/components/ChecklistNameInput.tsx",
@@ -8168,7 +8168,7 @@
       ],
       [
         "src/views/card/components/Checklists.tsx",
-        81
+        82
       ],
       [
         "src/views/card/components/Comment.tsx",
@@ -10922,7 +10922,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        94
+        95
       ]
     ],
     "translation": "Unable to delete checklist item"
@@ -11010,7 +11010,7 @@
     "origin": [
       [
         "src/views/card/components/Checklists.tsx",
-        80
+        81
       ]
     ],
     "translation": "Unable to reorder checklist item"
@@ -11138,7 +11138,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        66
+        67
       ]
     ],
     "translation": "Unable to update checklist item"
