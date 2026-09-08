@@ -126,10 +126,12 @@ describe("board card cover URL resolution", () => {
   });
 
   it("returns the prepared variants when another requested width is missing", async () => {
-    vi.mocked(inspectStoredObject).mockImplementation(async (_bucket, key) =>
-      key === getCardCoverPreviewKey(attachmentPublicId, 320)
-        ? { contentLength: 2048, contentType: "image/webp" }
-        : null,
+    vi.mocked(inspectStoredObject).mockImplementation((_bucket, key) =>
+      Promise.resolve(
+        key === getCardCoverPreviewKey(attachmentPublicId, 320)
+          ? { contentLength: 2048, contentType: "image/webp" }
+          : null,
+      ),
     );
     const { boardRouter } = await import("./board");
 
