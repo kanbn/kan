@@ -5,6 +5,15 @@ vi.mock("next-runtime-env", () => ({
   env: vi.fn(),
 }));
 
+vi.mock("@kan/api/trpc-context", () => ({
+  createNextApiContext: vi
+    .fn()
+    .mockRejectedValue(new Error("no auth in tests")),
+}));
+vi.mock("@kan/logger", () => ({
+  createLogger: vi.fn(() => ({ info: vi.fn(), error: vi.fn() })),
+}));
+
 const request = vi.fn();
 vi.mock("@kan/mcp/client", () => ({
   createKanClient: vi.fn(() => ({ request })),
@@ -44,13 +53,14 @@ function makeReqRes(headers: Record<string, string> = {}) {
     method: "POST",
     headers: { authorization: "Bearer kan_test_token", ...headers },
   } as unknown as NextApiRequest;
+  const statusSpy = vi.fn().mockReturnThis();
   const res = {
     setHeader: vi.fn(),
-    status: vi.fn().mockReturnThis(),
+    status: statusSpy,
     json: vi.fn(),
     on: vi.fn(),
   } as unknown as NextApiResponse;
-  return { req, res };
+  return { req, res, statusSpy };
 }
 
 describe("POST /api/mcp", () => {
@@ -74,10 +84,10 @@ describe("POST /api/mcp", () => {
     });
     request.mockResolvedValueOnce([{ workspace: { plan: "free" } }]);
 
-    const { req, res } = makeReqRes();
+    const { req, res, statusSpy } = makeReqRes();
     await handler(req, res);
 
-    expect(res.status).toHaveBeenCalledWith(403);
+    expect(statusSpy).toHaveBeenCalledWith(403);
     expect(connect).not.toHaveBeenCalled();
   });
 
@@ -92,10 +102,10 @@ describe("POST /api/mcp", () => {
       { workspace: { plan: "team" } },
     ]);
 
-    const { req, res } = makeReqRes();
+    const { req, res, statusSpy } = makeReqRes();
     await handler(req, res);
 
-    expect(res.status).not.toHaveBeenCalledWith(403);
+    expect(statusSpy).not.toHaveBeenCalledWith(403);
     expect(connect).toHaveBeenCalled();
   });
 
@@ -106,11 +116,11 @@ describe("POST /api/mcp", () => {
       return undefined;
     });
 
-    const { req, res } = makeReqRes();
+    const { req, res, statusSpy } = makeReqRes();
     await handler(req, res);
 
     expect(request).not.toHaveBeenCalled();
-    expect(res.status).not.toHaveBeenCalledWith(403);
+    expect(statusSpy).not.toHaveBeenCalledWith(403);
     expect(connect).toHaveBeenCalled();
   });
 
@@ -129,7 +139,6 @@ describe("POST /api/mcp", () => {
   });
 
   it("returns a clean 500 instead of throwing when the plan check fails unexpectedly", async () => {
-    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
     mockedEnv.mockImplementation((key: string) => {
       if (key === "NEXT_PUBLIC_BASE_URL") return "https://kan.bn";
       if (key === "NEXT_PUBLIC_KAN_ENV") return "cloud";
@@ -137,11 +146,10 @@ describe("POST /api/mcp", () => {
     });
     request.mockRejectedValueOnce(new TypeError("fetch failed"));
 
-    const { req, res } = makeReqRes();
+    const { req, res, statusSpy } = makeReqRes();
     await expect(handler(req, res)).resolves.not.toThrow();
 
-    expect(res.status).toHaveBeenCalledWith(500);
+    expect(statusSpy).toHaveBeenCalledWith(500);
     expect(connect).not.toHaveBeenCalled();
-    spy.mockRestore();
   });
 });

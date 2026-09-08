@@ -3,6 +3,7 @@ import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/
 import { env } from "next-runtime-env";
 
 import type { KanClient } from "@kan/mcp/client";
+import { withApiLogging } from "@kan/api/utils/apiLogging";
 import { createKanMcpServer } from "@kan/mcp";
 import { createKanClient, KanApiError } from "@kan/mcp/client";
 import { isPaidWorkspacePlan } from "@kan/shared/utils";
@@ -31,10 +32,7 @@ async function hasPaidWorkspace(client: KanClient): Promise<boolean> {
   return memberships.some((m) => isPaidWorkspacePlan(m.workspace.plan));
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     res.status(405).json({ error: "Method not allowed" });
@@ -66,9 +64,7 @@ export default async function handler(
         res.status(401).json({ error: "Invalid API key" });
         return;
       }
-      console.error("Failed to verify workspace plan for hosted MCP:", error);
-      res.status(500).json({ error: "Failed to verify workspace plan" });
-      return;
+      throw error;
     }
     if (!eligible) {
       res.status(403).json({
@@ -92,6 +88,8 @@ export default async function handler(
   await server.connect(transport);
   await transport.handleRequest(req, res);
 }
+
+export default withApiLogging(handler, { transport: "mcp" });
 
 export const config = {
   api: {

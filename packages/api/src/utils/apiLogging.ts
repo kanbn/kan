@@ -14,7 +14,9 @@ export function withApiLogging(
     req: NextApiRequest,
     res: NextApiResponse,
   ) => Promise<unknown> | unknown,
+  options?: { transport?: string },
 ) {
+  const transport = options?.transport ?? "rest";
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const start = Date.now();
     const requestId = randomUUID();
@@ -59,7 +61,7 @@ export function withApiLogging(
     const meta = {
       requestId,
       procedure: route,
-      transport: "rest",
+      transport,
       duration,
       userId,
       ...(isCloud && email && { email }),
