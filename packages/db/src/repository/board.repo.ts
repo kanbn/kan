@@ -849,6 +849,9 @@ export const createFromSnapshot = async (
     };
     workspaceId: number;
     createdBy: string;
+    publicId?: string;
+    backgroundColourCode?: string | null;
+    backgroundImageKey?: string | null;
     slug: string;
     name?: string;
     type: "regular" | "template";
@@ -859,13 +862,15 @@ export const createFromSnapshot = async (
     const [newBoard] = await tx
       .insert(boards)
       .values({
-        publicId: generateUID(),
+        publicId: args.publicId ?? generateUID(),
         name: args.name ?? args.source.name,
         slug: args.slug,
         createdBy: args.createdBy,
         workspaceId: args.workspaceId,
         type: args.type,
         sourceBoardId: args.sourceBoardId,
+        backgroundColourCode: args.backgroundColourCode,
+        backgroundImageKey: args.backgroundImageKey,
       })
       .returning({
         id: boards.id,
