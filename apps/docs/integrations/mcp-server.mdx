@@ -6,13 +6,72 @@ tag: "NEW"
 
 Kan ships with a [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that lets any MCP-compatible AI client read and control your Kan instance using natural language: list boards, move cards, manage checklists, invite members, and more.
 
-## Prerequisites
+## Two ways to connect
+
+<CardGroup cols={2}>
+  <Card title="Hosted" icon="cloud" color="#0284c7">
+    Point your client at `https://mcp.kan.bn` with an API key. No install, no
+    environment variables. **Requires a Team, Pro, or Enterprise workspace
+    plan** on Kan Cloud.
+  </Card>
+  <Card title="Local" icon="terminal" color="#65a30d">
+    Run the server yourself with `npx`. Works against self-hosted or Kan Cloud
+    instances, on any plan including Free.
+  </Card>
+</CardGroup>
+
+## Hosted (Kan Cloud)
+
+<Note>
+  The hosted endpoint requires a **Team, Pro, or Enterprise** workspace plan. An
+  API key belonging to an account with only Free-plan workspaces gets a `403`
+  from every request. Use the Local server below instead: it works on any plan.
+</Note>
+
+Get a Kan Cloud API key from **Settings → API Keys → Create key**, then point your client at:
+
+```
+https://mcp.kan.bn
+```
+
+authenticating with:
+
+```
+Authorization: Bearer kan_your_api_key_here
+```
+
+For example, in Claude Desktop's config:
+
+```json
+{
+  "mcpServers": {
+    "kan": {
+      "type": "http",
+      "url": "https://mcp.kan.bn",
+      "headers": {
+        "Authorization": "Bearer kan_your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+<Note>
+  Exact config syntax for remote/HTTP MCP servers varies by client and changes
+  as clients add support. Check your client's docs if the shape above doesn't
+  match. Every client needs the same two things: the URL and the `Authorization:
+  Bearer` header.
+</Note>
+
+## Local (self-hosted or Kan Cloud, any plan)
+
+### Prerequisites
 
 - Node.js 18+
 - A running Kan instance (self-hosted or cloud)
 - A Kan API key (**Settings → API Keys → Create key**)
 
-## Installation
+### Installation
 
 You do **not** need to clone the repository. The recommended way is `npx`, which runs the server on-demand and always uses the latest version:
 
@@ -27,7 +86,7 @@ npm install -g @kan/mcp
 kan-mcp
 ```
 
-## Configuration
+### Configuration
 
 The server is configured via two environment variables:
 
@@ -59,7 +118,7 @@ The server is configured via two environment variables:
   </Tab>
 </Tabs>
 
-## Client setup
+### Client setup
 
 <Tabs>
   <Tab title="Claude Desktop">
@@ -105,9 +164,10 @@ The server is configured via two environment variables:
 </Tabs>
 
 <Note>
-  ChatGPT's MCP support currently expects a remote (URL-based) connector rather
-  than a local process, so it isn't a fit for the local server above. It'll be a
-  natural client for the hosted `mcp.kan.bn` endpoint once that ships.
+  ChatGPT's MCP support is oriented around remote connectors configured via its
+  own UI rather than a client-side config file like the ones above. Check
+  ChatGPT's own connector docs for how it expects the URL and credentials to be
+  supplied.
 </Note>
 
 ## Example prompts
@@ -161,9 +221,15 @@ The MCP server exposes 46 tools across 7 resource types:
 ## Troubleshooting
 
 <AccordionGroup>
+  <Accordion title="The hosted endpoint returns a 403">
+    The API key's account doesn't have a Team, Pro, or Enterprise workspace. The
+    hosted server (`mcp.kan.bn`) is a paid-plan feature. Either upgrade a
+    workspace, or switch to the Local setup above, which works on any plan.
+  </Accordion>
   <Accordion title="Every tool call fails with an authentication error">
-    Double check `KAN_API_TOKEN`: it must be a key created under **Settings →
-    API Keys**, not your login password. Confirm `KAN_BASE_URL` points at the
+    Double check `KAN_API_TOKEN` (local) or the `Authorization` header (hosted):
+    it must be a key created under **Settings → API Keys**, not your login
+    password. For the local server, confirm `KAN_BASE_URL` points at the
     instance the key was created on (a self-hosted key won't work against Kan
     Cloud, and vice versa).
   </Accordion>
@@ -174,9 +240,10 @@ The MCP server exposes 46 tools across 7 resource types:
     operations per prompt.
   </Accordion>
   <Accordion title="The client can't find the kan-mcp command">
-    Make sure Node.js 18+ is installed and on the `PATH` the client uses to
-    spawn subprocesses. GUI apps like Claude Desktop don't always inherit your
-    shell's `PATH`. Using the full `npx` invocation (rather than a bare
-    `kan-mcp` after a global install) avoids this in most cases.
+    This applies to the Local setup only. Make sure Node.js 18+ is installed and
+    on the `PATH` the client uses to spawn subprocesses. GUI apps like Claude
+    Desktop don't always inherit your shell's `PATH`. Using the full `npx`
+    invocation (rather than a bare `kan-mcp` after a global install) avoids this
+    in most cases.
   </Accordion>
 </AccordionGroup>
