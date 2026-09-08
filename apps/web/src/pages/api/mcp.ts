@@ -14,8 +14,9 @@ interface WorkspaceMembership {
 
 function getApiToken(req: NextApiRequest): string | null {
   const authorization = req.headers.authorization;
-  if (authorization?.startsWith("Bearer ")) {
-    return authorization.slice(7);
+  const bearerMatch = authorization?.match(/^Bearer (.+)$/i);
+  if (bearerMatch) {
+    return bearerMatch[1] ?? null;
   }
   const apiKeyHeader = req.headers["x-api-key"];
   if (typeof apiKeyHeader === "string") {

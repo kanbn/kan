@@ -29,13 +29,6 @@ export function withApiLogging(
         Object.keys(req.body).length > 0 && { body: req.body }),
     };
 
-    let statusCode = 200;
-    const originalStatus = res.status.bind(res);
-    res.status = (code: number) => {
-      statusCode = code;
-      return originalStatus(code);
-    };
-
     let userId: string | undefined;
     let email: string | undefined;
     try {
@@ -51,11 +44,12 @@ export function withApiLogging(
       await handler(req, res);
     } catch (err) {
       handlerError = err;
-      statusCode = 500;
       if (!res.headersSent) {
         res.status(500).json({ error: "Internal server error" });
       }
     }
+
+    const statusCode = res.statusCode || (handlerError ? 500 : 200);
 
     const duration = Date.now() - start;
     const meta = {
@@ -73,10 +67,10 @@ export function withApiLogging(
       }),
     };
 
-    if (statusCode < 400) {
-      log.info(meta, "API OK");
-    } else {
+    if (statusCode >= 400 || handlerError) {
       log.error(meta, "API error");
+    } else {
+      log.info(meta, "API OK");
     }
   };
 }

@@ -18,9 +18,13 @@ function makeReqRes() {
     url: "/api/example",
     headers: {},
   } as unknown as NextApiRequest;
-  const statusSpy = vi.fn().mockReturnThis();
   const res = {
-    status: statusSpy,
+    statusCode: 200,
+    headersSent: false,
+    status(this: NextApiResponse, code: number) {
+      (this as unknown as { statusCode: number }).statusCode = code;
+      return this;
+    },
     json: vi.fn(),
   } as unknown as NextApiResponse;
   return { req, res };
@@ -57,6 +61,38 @@ describe("withApiLogging", () => {
     expect(info).toHaveBeenCalledWith(
       expect.objectContaining({ transport: "mcp" }),
       "API OK",
+    );
+  });
+
+  it("logs as an error when statusCode is set directly, without going through status()", async () => {
+    error.mockClear();
+    const { req, res } = makeReqRes();
+    const handler = withApiLogging(async (_req, res) => {
+      (res as unknown as { statusCode: number }).statusCode = 406;
+    });
+
+    await handler(req, res);
+
+    expect(error).toHaveBeenCalledWith(
+      expect.objectContaining({ status: 406 }),
+      "API error",
+    );
+  });
+
+  it("logs as an error when the handler throws after headers were already sent", async () => {
+    error.mockClear();
+    const { req, res } = makeReqRes();
+    (res as unknown as { headersSent: boolean }).headersSent = true;
+    (res as unknown as { statusCode: number }).statusCode = 200;
+    const handler = withApiLogging(async () => {
+      throw new Error("boom");
+    });
+
+    await handler(req, res);
+
+    expect(error).toHaveBeenCalledWith(
+      expect.objectContaining({ status: 200, error: "boom" }),
+      "API error",
     );
   });
 });

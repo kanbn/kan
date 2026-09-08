@@ -2,6 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
 import type { KanClient } from "../client.js";
+import { findWorkspaceByName } from "./shared.js";
 
 export function registerBoardTools(server: McpServer, client: KanClient): void {
   server.tool(
@@ -38,24 +39,11 @@ export function registerBoardTools(server: McpServer, client: KanClient): void {
         .describe("The board name (e.g. 'Mechanics Rework')"),
     },
     async ({ workspaceName, boardName }) => {
-      const memberships = await client.request<
-        { workspace: { publicId: string; name: string } }[]
-      >("GET", "/workspaces");
-      const membership = memberships.find(
-        (m) => m.workspace.name.toLowerCase() === workspaceName.toLowerCase(),
-      );
-      if (!membership) {
-        const names = memberships.map((m) => m.workspace.name).join(", ");
-        return {
-          content: [
-            {
-              type: "text",
-              text: `No workspace found with name "${workspaceName}". Available: ${names}`,
-            },
-          ],
-        };
+      const result = await findWorkspaceByName(client, workspaceName);
+      if (!result.found) {
+        return { content: [{ type: "text", text: result.message }] };
       }
-      const workspace = membership.workspace;
+      const workspace = result.workspace;
       const boards = await client.request<{ publicId: string; name: string }[]>(
         "GET",
         `/workspaces/${workspace.publicId}/boards`,

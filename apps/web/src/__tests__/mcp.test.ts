@@ -138,6 +138,18 @@ describe("POST /api/mcp", () => {
     );
   });
 
+  it('accepts a lowercase "bearer" auth scheme', async () => {
+    const { req, res, statusSpy } = makeReqRes({
+      authorization: "bearer kan_test_token",
+    });
+    await handler(req, res);
+
+    expect(statusSpy).not.toHaveBeenCalledWith(401);
+    expect(mockedCreateKanClient).toHaveBeenCalledWith(
+      expect.objectContaining({ apiToken: "kan_test_token" }),
+    );
+  });
+
   it("returns a clean 500 instead of throwing when the plan check fails unexpectedly", async () => {
     mockedEnv.mockImplementation((key: string) => {
       if (key === "NEXT_PUBLIC_BASE_URL") return "https://kan.bn";

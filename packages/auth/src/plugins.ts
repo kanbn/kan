@@ -17,6 +17,17 @@ import { triggerWorkflow } from "./utils";
 
 const log = createLogger("auth");
 
+export function getApiKeyFromHeaders(
+  headers: Headers | null | undefined,
+): string | null {
+  const authorization = headers?.get("authorization");
+  const bearerMatch = authorization?.match(/^Bearer (.+)$/i);
+  if (bearerMatch) {
+    return bearerMatch[1] ?? null;
+  }
+  return headers?.get("x-api-key") ?? null;
+}
+
 async function cancelWorkspaceAccess(
   db: dbClient,
   workspacePublicId: string,
@@ -186,13 +197,7 @@ export function createPlugins(db: dbClient) {
       : []),
     apiKey({
       enableSessionForAPIKeys: true,
-      customAPIKeyGetter: (ctx) => {
-        const authorization = ctx.headers?.get("authorization");
-        if (authorization?.startsWith("Bearer ")) {
-          return authorization.slice(7);
-        }
-        return ctx.headers?.get("x-api-key") ?? null;
-      },
+      customAPIKeyGetter: (ctx) => getApiKeyFromHeaders(ctx.headers),
       rateLimit: {
         enabled: true,
         timeWindow: 1000 * 60, // 1 minute
