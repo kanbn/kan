@@ -616,6 +616,10 @@ export const create = async (
     slug: string;
     type?: "regular" | "template";
     sourceBoardId?: number;
+    background?:
+      | { kind: "colour"; colourCode: string }
+      | { kind: "image"; imageKey: string }
+      | null;
   },
 ) => {
   const [result] = await db
@@ -629,6 +633,14 @@ export const create = async (
       slug: boardInput.slug,
       type: boardInput.type ?? "regular",
       sourceBoardId: boardInput.sourceBoardId,
+      backgroundColourCode:
+        boardInput.background?.kind === "colour"
+          ? boardInput.background.colourCode
+          : null,
+      backgroundImageKey:
+        boardInput.background?.kind === "image"
+          ? boardInput.background.imageKey
+          : null,
     })
     .returning({
       id: boards.id,
