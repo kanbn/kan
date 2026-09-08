@@ -23,6 +23,34 @@ const createBoard = async () => {
 };
 
 describe("board background repository", () => {
+  it("sets a background while creating an imported board", async () => {
+    const db = await createTestDb();
+    const { user, workspace } = await seedTestData(db);
+
+    const imported = await boardRepo.create(db, {
+      publicId: "boardimp1234",
+      name: "Imported board",
+      createdBy: user.id,
+      workspaceId: workspace.id,
+      slug: "imported-board",
+      background: { kind: "colour", colourCode: "#EF763A" },
+    });
+
+    if (!imported) throw new Error("Failed to create imported board");
+    const stored = await db.query.boards.findFirst({
+      columns: {
+        backgroundColourCode: true,
+        backgroundImageKey: true,
+      },
+      where: eq(boards.id, imported.id),
+    });
+
+    expect(stored).toEqual({
+      backgroundColourCode: "#EF763A",
+      backgroundImageKey: null,
+    });
+  });
+
   it("persists an explicitly owned background when copying a board", async () => {
     const db = await createTestDb();
     const { user, workspace } = await seedTestData(db);

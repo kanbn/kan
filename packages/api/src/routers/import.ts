@@ -20,9 +20,14 @@ import {
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
+import { deleteBoardBackgroundObjects } from "../utils/boardBackgroundPreview";
 import { decryptToken } from "../utils/encryption";
 import { assertPermission } from "../utils/permissions";
-import { getTrelloLabelColour } from "../utils/trello";
+import {
+  getTrelloBoardBackground,
+  getTrelloLabelColour,
+} from "../utils/trello";
+import { importTrelloBoardBackground } from "../utils/trello-board-background";
 import {
   decryptTrelloToken,
   encryptTrelloToken,
@@ -31,6 +36,26 @@ import {
 import { apiKeys, urls } from "./integration";
 
 const log = createLogger("import");
+
+const cleanupTrelloBoardBackground = async (args: {
+  bucket: string;
+  boardPublicId: string;
+  imageKey: string;
+  trelloBoardId: string;
+}) => {
+  const deletions = await deleteBoardBackgroundObjects({
+    bucket: args.bucket,
+    boardPublicId: args.boardPublicId,
+    s3Key: args.imageKey,
+  });
+  deletions.forEach(({ key, result }) => {
+    if (result?.status === "rejected")
+      log.warn(
+        { err: result.reason, key, trelloBoardId: args.trelloBoardId },
+        "Failed to roll back a Trello board background import",
+      );
+  });
+};
 
 const getTrelloTokenForUser = async (db: dbClient, userId: string) => {
   const integration = await integrationsRepo.getProviderForUser(
@@ -65,6 +90,19 @@ export interface TrelloBoard {
   lists: TrelloList[];
   cards: TrelloCard[];
   checklists: TrelloChecklist[];
+  prefs?: TrelloBoardPrefs;
+}
+
+interface TrelloBoardPrefs {
+  backgroundColor?: string | null;
+  backgroundImage?: string | null;
+  backgroundImageScaled?:
+    | {
+        width: number;
+        height: number;
+        url: string;
+      }[]
+    | null;
 }
 
 interface TrelloLabel {
@@ -267,7 +305,7 @@ export const importRouter = createTRPCRouter({
 
         const importSingleBoard = async (boardId: string): Promise<void> => {
           const response = await fetch(
-            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
+            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${token}&fields=name,prefs&lists=open&cards=open&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
           );
 
           if (!response.ok) {
@@ -316,23 +354,84 @@ export const importRouter = createTRPCRouter({
           };
 
           const boardPublicId = generateUID();
+          const backgroundSource = getTrelloBoardBackground(data.prefs);
+          let background:
+            | { kind: "colour"; colourCode: string }
+            | { kind: "image"; imageKey: string }
+            | null = null;
 
-          const newBoard = await boardRepo.create(ctx.db, {
-            publicId: boardPublicId,
-            name: formattedData.name,
-            slug: boardPublicId,
-            createdBy: userId,
-            importId: newImportId,
-            workspaceId: workspace.id,
-          });
+          if (backgroundSource?.kind === "colour") {
+            background = backgroundSource;
+          } else if (backgroundSource?.kind === "image") {
+            const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+            if (bucket) {
+              const targetKey = `${workspace.publicId}/board-backgrounds/${boardPublicId}/${generateUID()}-trello-background`;
+              try {
+                await importTrelloBoardBackground({
+                  bucket,
+                  boardPublicId,
+                  sourceUrl: backgroundSource.url,
+                  targetKey,
+                });
+                background = { kind: "image", imageKey: targetKey };
+              } catch (error) {
+                log.warn(
+                  { err: error, trelloBoardId: boardId },
+                  "Failed to import Trello board background image",
+                );
+              }
+            }
+
+            if (!background && backgroundSource.fallbackColourCode)
+              background = {
+                kind: "colour",
+                colourCode: backgroundSource.fallbackColourCode,
+              };
+          }
+
+          let newBoard: Awaited<ReturnType<typeof boardRepo.create>>;
+          try {
+            newBoard = await boardRepo.create(ctx.db, {
+              publicId: boardPublicId,
+              name: formattedData.name,
+              slug: boardPublicId,
+              createdBy: userId,
+              importId: newImportId,
+              workspaceId: workspace.id,
+              background,
+            });
+          } catch (error) {
+            if (background?.kind === "image") {
+              const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+              if (bucket)
+                await cleanupTrelloBoardBackground({
+                  bucket,
+                  boardPublicId,
+                  imageKey: background.imageKey,
+                  trelloBoardId: boardId,
+                });
+            }
+            throw error;
+          }
 
           const newBoardId = newBoard?.id;
 
-          if (!newBoardId)
+          if (!newBoardId) {
+            if (background?.kind === "image") {
+              const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+              if (bucket)
+                await cleanupTrelloBoardBackground({
+                  bucket,
+                  boardPublicId,
+                  imageKey: background.imageKey,
+                  trelloBoardId: boardId,
+                });
+            }
             throw new TRPCError({
               message: "Failed to create new board",
               code: "INTERNAL_SERVER_ERROR",
             });
+          }
 
           let createdLabels: { id: number; sourceId: string }[] = [];
           let createdCards: { id: number; sourceId: string }[] = [];
