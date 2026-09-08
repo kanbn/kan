@@ -1522,7 +1522,9 @@ export const cardRouter = createTRPCRouter({
         position: "end",
         dueDate: sourceCard.dueDate ?? null,
         coverColourCode: sourceCard.coverColourCode,
-        coverSize: sourceCard.coverSize,
+        coverSize: sourceCard.coverColourCode
+          ? sourceCard.coverSize
+          : "normal",
       });
 
       if (input.index !== undefined && input.index >= 0) {

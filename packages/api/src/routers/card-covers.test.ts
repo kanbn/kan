@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
+import * as listRepo from "@kan/db/repository/list.repo";
 
 import * as cardCoverPreview from "../utils/cardCoverPreview";
 import { assertCanEdit } from "../utils/permissions";
@@ -13,6 +14,8 @@ import {
 vi.mock("@kan/db/repository/card.repo", () => ({
   getWorkspaceAndCardIdByCardPublicId: vi.fn(),
   getByPublicId: vi.fn(),
+  getWithListAndMembersByPublicId: vi.fn(),
+  create: vi.fn(),
   updateCover: vi.fn(),
 }));
 vi.mock("@kan/db/client", () => ({
@@ -24,6 +27,9 @@ vi.mock("@kan/auth/server", () => ({
 vi.mock("@kan/db/repository/cardAttachment.repo", () => ({
   getCoverCandidateByPublicId: vi.fn(),
   updateContentType: vi.fn(),
+}));
+vi.mock("@kan/db/repository/list.repo", () => ({
+  getWorkspaceAndListIdByListPublicId: vi.fn(),
 }));
 vi.mock("../utils/cardCoverPreview", async (importOriginal) => ({
   ...(await importOriginal()),
@@ -303,5 +309,84 @@ describe("card cover updates", () => {
 
     expect(cardCoverPreview.ensureCardCoverPreviews).not.toHaveBeenCalled();
     expect(cardRepo.updateCover).not.toHaveBeenCalled();
+  });
+});
+
+describe("card cover duplication", () => {
+  const duplicateInput = {
+    cardPublicId,
+    listPublicId: "target-list1",
+    copyLabels: false,
+    copyMembers: false,
+    copyChecklists: false,
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(assertCanEdit).mockResolvedValue(undefined);
+    vi.mocked(cardRepo.getWorkspaceAndCardIdByCardPublicId).mockResolvedValue(
+      cardMeta,
+    );
+    vi.mocked(listRepo.getWorkspaceAndListIdByListPublicId).mockResolvedValue({
+      id: 4,
+      publicId: duplicateInput.listPublicId,
+      name: "Target",
+      createdBy: "user-123",
+      workspaceId: cardMeta.workspaceId,
+      boardPublicId: cardMeta.boardPublicId,
+      boardName: cardMeta.boardName,
+    });
+    vi.mocked(cardRepo.create).mockResolvedValue({
+      id: 5,
+      publicId: "copy-12345678",
+      listId: 4,
+      cardNumber: null,
+    });
+  });
+
+  it("preserves a full colour cover", async () => {
+    vi.mocked(cardRepo.getWithListAndMembersByPublicId).mockResolvedValue({
+      ...existingCard,
+      coverColourCode: "#0d9488",
+      coverSize: "full",
+      members: [],
+      labels: [],
+      checklists: [],
+      attachments: [],
+    } as never);
+
+    const { cardRouter } = await import("./card");
+    await cardRouter.createCaller(ctx).duplicate(duplicateInput);
+
+    expect(cardRepo.create).toHaveBeenCalledWith(
+      mockDb,
+      expect.objectContaining({
+        coverColourCode: "#0d9488",
+        coverSize: "full",
+      }),
+    );
+  });
+
+  it("does not retain image presentation when attachments are not copied", async () => {
+    vi.mocked(cardRepo.getWithListAndMembersByPublicId).mockResolvedValue({
+      ...existingCard,
+      coverAttachment: { publicId: "attachment01" },
+      coverSize: "full",
+      members: [],
+      labels: [],
+      checklists: [],
+      attachments: [],
+    } as never);
+
+    const { cardRouter } = await import("./card");
+    await cardRouter.createCaller(ctx).duplicate(duplicateInput);
+
+    expect(cardRepo.create).toHaveBeenCalledWith(
+      mockDb,
+      expect.objectContaining({
+        coverColourCode: null,
+        coverSize: "normal",
+      }),
+    );
   });
 });
