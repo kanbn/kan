@@ -3,7 +3,10 @@ import { t } from "@lingui/core/macro";
 import { HiOutlineRectangleStack, HiOutlineStar, HiStar } from "react-icons/hi2";
 import { motion } from "framer-motion";
 import Button from "~/components/Button";
-import PatternedBackground from "~/components/PatternedBackground";
+import {
+  BoardBackground,
+  BoardBackgroundImagesProvider,
+} from "~/components/BoardBackground";
 import { Tooltip } from "~/components/Tooltip";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
@@ -83,7 +86,7 @@ export function BoardsList({ isTemplate, archived = false }: { isTemplate?: bool
       </div>
     );
 
-  return (
+  const boardsList = (
     <motion.div
       className="3xl:grid-cols-4 grid h-fit w-full grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3"
       layout
@@ -109,10 +112,13 @@ export function BoardsList({ isTemplate, archived = false }: { isTemplate?: bool
             href={`${isTemplate ? "templates" : "boards"}/${board.publicId}`}
           >
             <div className="group relative mr-5 flex h-[150px] w-full items-center justify-center rounded-md border border-dashed border-light-400 bg-light-50 shadow-sm hover:bg-light-200 dark:border-dark-600 dark:bg-dark-50 dark:hover:bg-dark-100">
-              <PatternedBackground />
+              <BoardBackground
+                boardPublicId={board.publicId}
+                background={board.background}
+              />
               <button
                 onClick={(e) => handleToggleFavorite(e, board.publicId, board.favorite)}
-                className={`absolute right-3 top-3 z-10 rounded p-1 transition-all hover:bg-light-300 dark:hover:bg-dark-200 ${board.favorite ? "" : "md:opacity-0 md:group-hover:opacity-100"
+                className={`absolute right-3 top-3 z-10 rounded bg-light-50/80 p-1 backdrop-blur-sm transition-all hover:bg-light-300 dark:bg-dark-50/80 dark:hover:bg-dark-200 ${board.favorite ? "" : "md:opacity-0 md:group-hover:opacity-100"
                   }`}
                 aria-label={board.favorite ? "Remove from favorites" : "Add to favorites"}
               >
@@ -122,7 +128,9 @@ export function BoardsList({ isTemplate, archived = false }: { isTemplate?: bool
                   <HiOutlineStar className="h-5 w-5 text-neutral-700 dark:text-dark-800" />
                 )}
               </button>
-              <p className="px-4 text-[14px] font-bold text-neutral-700 dark:text-dark-1000">
+              <p
+                className={`relative px-4 py-2 text-[14px] font-bold text-neutral-700 dark:text-dark-1000 ${board.background ? "rounded-md bg-light-50/80 shadow-sm backdrop-blur-sm dark:bg-dark-50/80" : ""}`}
+              >
                 {board.name}
               </p>
             </div>
@@ -130,5 +138,11 @@ export function BoardsList({ isTemplate, archived = false }: { isTemplate?: bool
         </motion.div>
       ))}
     </motion.div>
+  );
+
+  return (
+    <BoardBackgroundImagesProvider>
+      {boardsList}
+    </BoardBackgroundImagesProvider>
   );
 }

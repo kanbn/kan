@@ -7,6 +7,7 @@ import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { createLogger } from "@kan/logger";
 import { colours } from "@kan/shared/constants";
 import {
   convertDueDateFiltersToRanges,
@@ -23,7 +24,11 @@ import {
   boardUpdateResponseSchema,
 } from "../schemas";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
+import { formatBoardBackground } from "../utils/boardBackground";
+import { deleteBoardBackgroundObjects } from "../utils/boardBackgroundPreview";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
+
+const logger = createLogger("board");
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
@@ -67,7 +72,7 @@ export const boardRouter = createTRPCRouter({
 
       await assertPermission(ctx.db, userId, workspace.id, "board:view");
 
-      const result = boardRepo.getAllByWorkspaceId(
+      const result = await boardRepo.getAllByWorkspaceId(
         ctx.db,
         workspace.id,
         userId,
@@ -77,7 +82,15 @@ export const boardRouter = createTRPCRouter({
         }
       );
 
-      return result;
+      return result.map(
+        ({ backgroundColourCode, backgroundImageKey, ...board }) => ({
+          ...board,
+          background: formatBoardBackground({
+            backgroundColourCode,
+            backgroundImageKey,
+          }),
+        }),
+      );
     }),
   byId: protectedProcedure
     .meta({
@@ -206,8 +219,15 @@ export const boardRouter = createTRPCRouter({
         })),
       );
 
+      const { backgroundColourCode, backgroundImageKey, ...boardResult } =
+        result;
+
       return {
-        ...result,
+        ...boardResult,
+        background: formatBoardBackground({
+          backgroundColourCode,
+          backgroundImageKey,
+        }),
         lists: listsWithAvatarUrls,
         workspace: workspaceWithAvatarUrls,
       };
@@ -283,7 +303,18 @@ export const boardRouter = createTRPCRouter({
         },
       );
 
-      return result;
+      if (!result) return null;
+
+      const { backgroundColourCode, backgroundImageKey, ...boardResult } =
+        result;
+
+      return {
+        ...boardResult,
+        background: formatBoardBackground({
+          backgroundColourCode,
+          backgroundImageKey,
+        }),
+      };
     }),
   create: protectedProcedure
     .meta({
@@ -474,6 +505,15 @@ export const boardRouter = createTRPCRouter({
         visibility: z.enum(["public", "private"]).optional(),
         favorite: z.boolean().optional(),
         isArchived: z.boolean().optional(),
+        background: z
+          .union([
+            z.null(),
+            z.object({
+              kind: z.literal("colour"),
+              colourCode: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
+            }),
+          ])
+          .optional(),
       }),
     )
     .output(boardUpdateResponseSchema)
@@ -515,7 +555,12 @@ export const boardRouter = createTRPCRouter({
       }
 
       // Handle other updates (name, slug, visibility)
-      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined || input.isArchived !== undefined;
+      const hasOtherUpdates =
+        input.name !== undefined ||
+        input.slug !== undefined ||
+        input.visibility !== undefined ||
+        input.isArchived !== undefined ||
+        input.background !== undefined;
 
       if (!hasOtherUpdates) {
         // Only favorite was updated, return success
@@ -543,6 +588,10 @@ export const boardRouter = createTRPCRouter({
         boardPublicId: input.boardPublicId,
         visibility: input.visibility,
         isArchived: input.isArchived,
+        background:
+          input.background?.kind === "colour"
+            ? { kind: "colour", colourCode: input.background.colourCode }
+            : input.background,
       });
 
       if (!result)
@@ -550,6 +599,28 @@ export const boardRouter = createTRPCRouter({
           message: `Failed to update board`,
           code: "INTERNAL_SERVER_ERROR",
         });
+
+      if (input.background !== undefined && board.backgroundImageKey) {
+        const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+        if (bucket) {
+          const deletions = await deleteBoardBackgroundObjects({
+            bucket,
+            boardPublicId: input.boardPublicId,
+            s3Key: board.backgroundImageKey,
+          });
+          deletions.forEach(({ key, result: deletion }) => {
+            if (deletion?.status === "rejected")
+              logger.warn(
+                {
+                  err: deletion.reason,
+                  key,
+                  boardPublicId: input.boardPublicId,
+                },
+                "Failed to delete replaced board background object",
+              );
+          });
+        }
+      }
 
       return result;
     }),

@@ -2,8 +2,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { t } from "@lingui/core/macro";
+import type { RouterOutputs } from "~/utils/api";
+import {
+  BoardBackground,
+  BoardBackgroundImagesProvider,
+} from "~/components/BoardBackground";
 import { PageHead } from "~/components/PageHead";
-import PatternedBackground from "~/components/PatternedBackground";
 import { api } from "~/utils/api";
 
 export default function PublicBoardsView() {
@@ -35,7 +39,7 @@ export default function PublicBoardsView() {
     workspaceSlug,
   }: {
     isLoading: boolean;
-    boards: { publicId: string; name: string; slug: string }[];
+    boards: RouterOutputs["workspace"]["bySlug"]["boards"];
     workspaceSlug: string;
   }) => {
     if (isLoading)
@@ -50,7 +54,7 @@ export default function PublicBoardsView() {
 
     if (boards.length === 0) return <></>;
 
-    return (
+    const boardsList = (
       <div className="grid h-full w-full grid-cols-2 grid-rows-2 gap-4">
         {boards.map((board) => (
           <Link
@@ -59,14 +63,25 @@ export default function PublicBoardsView() {
             className="h-full"
           >
             <div className="relative flex h-full w-full items-center justify-center rounded-md border border-dashed border-light-400 bg-light-50 shadow-sm hover:bg-light-200 dark:border-dark-600 dark:bg-dark-50 dark:hover:bg-dark-100">
-              <PatternedBackground />
-              <p className="text-md px-4 font-medium text-neutral-900 dark:text-dark-1000">
+              <BoardBackground
+                boardPublicId={board.publicId}
+                background={board.background}
+              />
+              <p
+                className={`text-md relative px-4 py-2 font-medium text-neutral-900 dark:text-dark-1000 ${board.background ? "rounded-md bg-light-50/80 shadow-sm backdrop-blur-sm dark:bg-dark-50/80" : ""}`}
+              >
                 {board.name}
               </p>
             </div>
           </Link>
         ))}
       </div>
+    );
+
+    return (
+      <BoardBackgroundImagesProvider>
+        {boardsList}
+      </BoardBackgroundImagesProvider>
     );
   };
 
