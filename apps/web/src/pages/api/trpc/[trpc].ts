@@ -2,9 +2,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { createNextApiHandler } from "@trpc/server/adapters/next";
 
 import { appRouter } from "@kan/api/root";
-import { createTRPCContext } from "@kan/api/trpc";
-import { env } from "~/env";
+import { createTRPCContext } from "@kan/api/trpc-context";
 import { withRateLimit } from "@kan/api/utils/rateLimit";
+
+import { env } from "~/env";
 
 const nextApiHandler = createNextApiHandler({
   router: appRouter,
