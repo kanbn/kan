@@ -224,6 +224,7 @@ export function BoardBackground({
       <div
         className="pointer-events-none absolute inset-0 h-full w-full select-none"
         style={{ backgroundColor: background.colourCode }}
+        data-board-background="colour"
         aria-hidden="true"
       />
     );
@@ -234,6 +235,7 @@ export function BoardBackground({
       <div
         ref={ref}
         className="pointer-events-none absolute inset-0 h-full w-full select-none"
+        data-board-background="image"
         aria-hidden="true"
       >
         {image ? (
