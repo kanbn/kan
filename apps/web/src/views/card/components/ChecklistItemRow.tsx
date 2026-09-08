@@ -15,6 +15,7 @@ interface ChecklistItemRowProps {
     publicId: string;
     title: string;
     completed: boolean;
+    clientId?: string;
   };
   cardPublicId: string;
   onCreateNewItem?: () => void;
@@ -163,7 +164,7 @@ export default function ChecklistItemRow({
 
       <div className="flex-1 pr-7">
         <PlainTextEditor
-          key={item.publicId}
+          key={item.clientId ?? item.publicId}
           content={item.title}
           readOnly={viewOnly}
           placeholder={t`Add details...`}
