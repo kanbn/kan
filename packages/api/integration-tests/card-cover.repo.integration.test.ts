@@ -1,6 +1,7 @@
 import { eq } from "drizzle-orm";
 import { describe, expect, it } from "vitest";
 
+import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import {
@@ -300,5 +301,68 @@ describe("card cover repository", () => {
 
     expect(unchangedCard!.coverAttachmentId).toBe(attachment.id);
     expect(unchangedAttachment!.deletedAt).toBeNull();
+  });
+
+  it("copies colour covers but not image-only presentation state", async () => {
+    const { db, user, board } = await seedCard();
+
+    const copiedBoard = await boardRepo.createFromSnapshot(db, {
+      source: {
+        name: "Source board",
+        labels: [],
+        lists: [
+          {
+            name: "Todo",
+            index: 0,
+            cards: [
+              {
+                title: "Colour cover",
+                description: null,
+                index: 0,
+                coverColourCode: "#0d9488",
+                coverSize: "full",
+                labels: [],
+              },
+              {
+                title: "Image cover",
+                description: null,
+                index: 1,
+                coverColourCode: null,
+                coverSize: "full",
+                labels: [],
+              },
+            ],
+          },
+        ],
+      },
+      workspaceId: board.workspaceId,
+      createdBy: user.id,
+      slug: "copied-cover-board",
+      type: "regular",
+    });
+
+    const copied = await db.query.boards.findFirst({
+      where: eq(boards.publicId, copiedBoard.publicId),
+      with: {
+        lists: {
+          with: { cards: true },
+        },
+      },
+    });
+
+    expect(copied?.lists[0]?.cards).toEqual([
+      expect.objectContaining({
+        title: "Colour cover",
+        coverColourCode: "#0d9488",
+        coverAttachmentId: null,
+        coverSize: "full",
+      }),
+      expect.objectContaining({
+        title: "Image cover",
+        coverColourCode: null,
+        coverAttachmentId: null,
+        coverSize: "normal",
+      }),
+    ]);
   });
 });
