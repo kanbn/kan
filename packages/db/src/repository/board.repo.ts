@@ -934,7 +934,7 @@ export const createFromSnapshot = async (
             listId: newListId,
             index: card.index,
             coverColourCode: card.coverColourCode,
-            coverSize: card.coverSize,
+            coverSize: card.coverColourCode ? card.coverSize : "normal",
           })
           .returning({ id: cards.id });
 
