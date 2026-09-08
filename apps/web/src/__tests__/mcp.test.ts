@@ -35,7 +35,9 @@ vi.mock("@modelcontextprotocol/sdk/server/streamableHttp.js", () => ({
 
 const { env } = await import("next-runtime-env");
 const mockedEnv = vi.mocked(env);
-const handler = (await import("./mcp.js")).default;
+const { createKanClient } = await import("@kan/mcp/client");
+const mockedCreateKanClient = vi.mocked(createKanClient);
+const handler = (await import("../pages/api/mcp.js")).default;
 
 function makeReqRes(headers: Record<string, string> = {}) {
   const req = {
@@ -56,6 +58,7 @@ describe("POST /api/mcp", () => {
     request.mockReset();
     connect.mockClear();
     handleRequest.mockClear();
+    mockedCreateKanClient.mockClear();
     mockedEnv.mockReset();
     mockedEnv.mockImplementation((key: string) => {
       if (key === "NEXT_PUBLIC_BASE_URL") return "https://kan.bn";
@@ -109,5 +112,36 @@ describe("POST /api/mcp", () => {
     expect(request).not.toHaveBeenCalled();
     expect(res.status).not.toHaveBeenCalledWith(403);
     expect(connect).toHaveBeenCalled();
+  });
+
+  it("strips a trailing slash from NEXT_PUBLIC_BASE_URL", async () => {
+    mockedEnv.mockImplementation((key: string) => {
+      if (key === "NEXT_PUBLIC_BASE_URL") return "https://kan.bn/";
+      return undefined;
+    });
+
+    const { req, res } = makeReqRes();
+    await handler(req, res);
+
+    expect(mockedCreateKanClient).toHaveBeenCalledWith(
+      expect.objectContaining({ baseUrl: "https://kan.bn" }),
+    );
+  });
+
+  it("returns a clean 500 instead of throwing when the plan check fails unexpectedly", async () => {
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
+    mockedEnv.mockImplementation((key: string) => {
+      if (key === "NEXT_PUBLIC_BASE_URL") return "https://kan.bn";
+      if (key === "NEXT_PUBLIC_KAN_ENV") return "cloud";
+      return undefined;
+    });
+    request.mockRejectedValueOnce(new TypeError("fetch failed"));
+
+    const { req, res } = makeReqRes();
+    await expect(handler(req, res)).resolves.not.toThrow();
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(connect).not.toHaveBeenCalled();
+    spy.mockRestore();
   });
 });

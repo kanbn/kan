@@ -38,14 +38,14 @@ export function registerBoardTools(server: McpServer, client: KanClient): void {
         .describe("The board name (e.g. 'Mechanics Rework')"),
     },
     async ({ workspaceName, boardName }) => {
-      const workspaces = await client.request<
-        { publicId: string; name: string }[]
+      const memberships = await client.request<
+        { workspace: { publicId: string; name: string } }[]
       >("GET", "/workspaces");
-      const workspace = workspaces.find(
-        (w) => w.name.toLowerCase() === workspaceName.toLowerCase(),
+      const membership = memberships.find(
+        (m) => m.workspace.name.toLowerCase() === workspaceName.toLowerCase(),
       );
-      if (!workspace) {
-        const names = workspaces.map((w) => w.name).join(", ");
+      if (!membership) {
+        const names = memberships.map((m) => m.workspace.name).join(", ");
         return {
           content: [
             {
@@ -55,6 +55,7 @@ export function registerBoardTools(server: McpServer, client: KanClient): void {
           ],
         };
       }
+      const workspace = membership.workspace;
       const boards = await client.request<{ publicId: string; name: string }[]>(
         "GET",
         `/workspaces/${workspace.publicId}/boards`,

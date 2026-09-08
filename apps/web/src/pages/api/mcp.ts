@@ -48,11 +48,12 @@ export default async function handler(
     return;
   }
 
-  const baseUrl = env("NEXT_PUBLIC_BASE_URL");
-  if (!baseUrl) {
+  const rawBaseUrl = env("NEXT_PUBLIC_BASE_URL");
+  if (!rawBaseUrl) {
     res.status(500).json({ error: "NEXT_PUBLIC_BASE_URL is not configured" });
     return;
   }
+  const baseUrl = rawBaseUrl.replace(/\/$/, "");
 
   const client = createKanClient({ baseUrl, apiToken });
 
@@ -65,7 +66,9 @@ export default async function handler(
         res.status(401).json({ error: "Invalid API key" });
         return;
       }
-      throw error;
+      console.error("Failed to verify workspace plan for hosted MCP:", error);
+      res.status(500).json({ error: "Failed to verify workspace plan" });
+      return;
     }
     if (!eligible) {
       res.status(403).json({

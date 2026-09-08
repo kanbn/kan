@@ -27,6 +27,7 @@
     "build": "tsc --noEmit false --declaration false --emitDeclarationOnly false --outDir dist",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc --noEmit false --declaration false --emitDeclarationOnly false --outDir dist",
+    "dev:watch": "tsc --noEmit false --declaration false --emitDeclarationOnly false --outDir dist --watch --preserveWatchOutput",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },

@@ -12,9 +12,12 @@ export function registerWorkspaceTools(
     "List all workspaces the authenticated user belongs to. Call this first to resolve a workspace name to its publicId before calling any other workspace-scoped tool.",
     {},
     async () => {
-      const data = await client.request("GET", "/workspaces");
+      const memberships = await client.request<
+        { workspace: Record<string, unknown> }[]
+      >("GET", "/workspaces");
+      const workspaces = memberships.map((m) => m.workspace);
       return {
-        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+        content: [{ type: "text", text: JSON.stringify(workspaces, null, 2) }],
       };
     },
   );
@@ -24,14 +27,14 @@ export function registerWorkspaceTools(
     "Find a workspace by its name (case-insensitive). Returns the matching workspace including its publicId. Use this whenever you only know the workspace name and need its publicId.",
     { name: z.string().describe("Workspace name to search for") },
     async ({ name }) => {
-      const workspaces = await client.request<
-        { publicId: string; name: string }[]
+      const memberships = await client.request<
+        { workspace: { publicId: string; name: string } }[]
       >("GET", "/workspaces");
-      const match = workspaces.find(
-        (w) => w.name.toLowerCase() === name.toLowerCase(),
+      const match = memberships.find(
+        (m) => m.workspace.name.toLowerCase() === name.toLowerCase(),
       );
       if (!match) {
-        const names = workspaces.map((w) => w.name).join(", ");
+        const names = memberships.map((m) => m.workspace.name).join(", ");
         return {
           content: [
             {
@@ -42,7 +45,9 @@ export function registerWorkspaceTools(
         };
       }
       return {
-        content: [{ type: "text", text: JSON.stringify(match, null, 2) }],
+        content: [
+          { type: "text", text: JSON.stringify(match.workspace, null, 2) },
+        ],
       };
     },
   );
