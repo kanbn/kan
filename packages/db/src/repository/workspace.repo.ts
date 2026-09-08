@@ -270,6 +270,8 @@ export const getBySlugWithBoards = (db: dbClient, workspaceSlug: string) => {
           publicId: true,
           slug: true,
           name: true,
+          backgroundColourCode: true,
+          backgroundImageKey: true,
         },
         where: and(
           isNull(boards.deletedAt),
@@ -385,7 +387,9 @@ export const isWorkspaceSlugAvailable = async (
         // so no other workspace may claim it as a custom slug either.
         and(
           eq(workspaces.publicId, workspaceSlug),
-          excludeWorkspaceId ? ne(workspaces.id, excludeWorkspaceId) : undefined,
+          excludeWorkspaceId
+            ? ne(workspaces.id, excludeWorkspaceId)
+            : undefined,
         ),
       ),
     ),

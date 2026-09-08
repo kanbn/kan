@@ -6,10 +6,13 @@ import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 import { HiLink, HiOutlineLockClosed } from "react-icons/hi2";
 
+import {
+  BoardBackground,
+  BoardBackgroundImagesProvider,
+} from "~/components/BoardBackground";
 import Button from "~/components/Button";
 import Modal from "~/components/modal";
 import { PageHead } from "~/components/PageHead";
-import PatternedBackground from "~/components/PatternedBackground";
 import Popup from "~/components/Popup";
 import ThemeToggle from "~/components/ThemeToggle";
 import { useDragToScroll } from "~/hooks/useDragToScroll";
@@ -133,14 +136,21 @@ export default function PublicBoardView() {
 
       <div className="relative flex h-screen flex-col bg-light-100 px-4 pt-4 dark:bg-dark-50">
         <div className="relative h-full overflow-hidden rounded-md border pb-8 dark:border-dark-200">
-          <PatternedBackground />
+          <BoardBackgroundImagesProvider>
+            <BoardBackground
+              boardPublicId={data?.publicId ?? ""}
+              background={data?.background}
+            />
+          </BoardBackgroundImagesProvider>
           <div className="z-10 flex w-full justify-between p-8">
             {isLoading || !router.isReady ? (
               <div className="flex space-x-2">
                 <div className="h-[2.3rem] w-[150px] animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-100" />
               </div>
             ) : (
-              <h1 className="font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000 sm:text-[1.2rem]">
+              <h1
+                className={`relative font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000 sm:text-[1.2rem] ${data?.background ? "rounded-md bg-light-50/80 px-2 shadow-sm backdrop-blur-sm dark:bg-dark-50/80" : ""}`}
+              >
                 {data?.name}
               </h1>
             )}
