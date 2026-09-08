@@ -7711,34 +7711,6 @@
     "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
     "translation": "URL do YouTube"
   },
-  "0Mb5Vr": {
-    "message": "Activity order",
-    "placeholders": {},
-    "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 71]],
-    "translation": "Ordem das atividades"
-  },
-  "niRekC": {
-    "message": "Choose whether newer or older activity appears first.",
-    "placeholders": {},
-    "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 74]],
-    "translation": "Escolha se as atividades mais recentes ou mais antigas aparecem primeiro."
-  },
-  "cTUByn": {
-    "message": "Newest first",
-    "placeholders": {},
-    "comments": [],
-    "origin": [["src/components/ActivitySortOrderSelector.tsx", 15]],
-    "translation": "Mais recentes primeiro"
-  },
-  "n6QD94": {
-    "message": "Oldest first",
-    "placeholders": {},
-    "comments": [],
-    "origin": [["src/components/ActivitySortOrderSelector.tsx", 14]],
-    "translation": "Mais antigas primeiro"
-  },
   "0XmVWH": {
     "message": "Show newest activity first",
     "placeholders": {},

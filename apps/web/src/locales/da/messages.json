@@ -12878,34 +12878,6 @@
     ],
     "translation": "YouTube-URL"
   },
-  "0Mb5Vr": {
-    "message": "Activity order",
-    "placeholders": {},
-    "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 71]],
-    "translation": "Aktivitetsrækkefølge"
-  },
-  "niRekC": {
-    "message": "Choose whether newer or older activity appears first.",
-    "placeholders": {},
-    "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 74]],
-    "translation": "Vælg, om nyere eller ældre aktiviteter skal vises først."
-  },
-  "cTUByn": {
-    "message": "Newest first",
-    "placeholders": {},
-    "comments": [],
-    "origin": [["src/components/ActivitySortOrderSelector.tsx", 15]],
-    "translation": "Nyeste først"
-  },
-  "n6QD94": {
-    "message": "Oldest first",
-    "placeholders": {},
-    "comments": [],
-    "origin": [["src/components/ActivitySortOrderSelector.tsx", 14]],
-    "translation": "Ældste først"
-  },
   "0XmVWH": {
     "message": "Show newest activity first",
     "placeholders": {},
