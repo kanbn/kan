@@ -16,6 +16,10 @@
       "types": "./src/trpc.ts",
       "default": "./src/trpc.ts"
     },
+    "./trpc-context": {
+      "types": "./src/trpc-context.ts",
+      "default": "./src/trpc-context.ts"
+    },
     "./types": {
       "types": "./src/types/router.types.ts",
       "default": "./src/types/router.types.ts"
