@@ -7710,5 +7710,89 @@
     "comments": [],
     "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
     "translation": "YouTube-URL"
+  },
+  "sIpTuZ": {
+    "message": "Change background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 146],["src/views/board/components/BoardDropdown.tsx", 110]],
+    "translation": "Achtergrond wijzigen"
+  },
+  "jM7ASy": {
+    "message": "Choose a JPEG, PNG, WebP, GIF, or AVIF image.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 87]],
+    "translation": "Kies een JPEG-, PNG-, WebP-, GIF- of AVIF-afbeelding."
+  },
+  "SYb0Ub": {
+    "message": "Choose an image smaller than 50 MB.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 96]],
+    "translation": "Kies een afbeelding kleiner dan 50 MB."
+  },
+  "xHwgs0": {
+    "message": "Colours",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 172]],
+    "translation": "Kleuren"
+  },
+  "MnzgwU": {
+    "message": "Failed to upload the board background. Please try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 132]],
+    "translation": "De bordachtergrond kon niet worden geüpload. Probeer het opnieuw."
+  },
+  "4HhvKN": {
+    "message": "Image is too large",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 95]],
+    "translation": "De afbeelding is te groot"
+  },
+  "zawWn4": {
+    "message": "Imported colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 160]],
+    "translation": "Geïmporteerde kleur"
+  },
+  "ylbfBl": {
+    "message": "Remove background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 225]],
+    "translation": "Achtergrond verwijderen"
+  },
+  "wBhT2m": {
+    "message": "Unable to update board background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 59]],
+    "translation": "De bordachtergrond kon niet worden bijgewerkt"
+  },
+  "8a8jKE": {
+    "message": "Unsupported image",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 86]],
+    "translation": "Niet-ondersteunde afbeelding"
+  },
+  "6MxxvO": {
+    "message": "Upload image",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 213]],
+    "translation": "Afbeelding uploaden"
+  },
+  "gANddk": {
+    "message": "Uploading…",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 213]],
+    "translation": "Uploaden…"
   }
 }

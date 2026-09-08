@@ -7710,5 +7710,89 @@
     "comments": [],
     "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
     "translation": "URL do YouTube"
+  },
+  "sIpTuZ": {
+    "message": "Change background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 146],["src/views/board/components/BoardDropdown.tsx", 110]],
+    "translation": "Alterar plano de fundo"
+  },
+  "jM7ASy": {
+    "message": "Choose a JPEG, PNG, WebP, GIF, or AVIF image.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 87]],
+    "translation": "Escolha uma imagem JPEG, PNG, WebP, GIF ou AVIF."
+  },
+  "SYb0Ub": {
+    "message": "Choose an image smaller than 50 MB.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 96]],
+    "translation": "Escolha uma imagem menor que 50 MB."
+  },
+  "xHwgs0": {
+    "message": "Colours",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 172]],
+    "translation": "Cores"
+  },
+  "MnzgwU": {
+    "message": "Failed to upload the board background. Please try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 132]],
+    "translation": "Não foi possível enviar o plano de fundo do quadro. Tente novamente."
+  },
+  "4HhvKN": {
+    "message": "Image is too large",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 95]],
+    "translation": "A imagem é muito grande"
+  },
+  "zawWn4": {
+    "message": "Imported colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 160]],
+    "translation": "Cor importada"
+  },
+  "ylbfBl": {
+    "message": "Remove background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 225]],
+    "translation": "Remover plano de fundo"
+  },
+  "wBhT2m": {
+    "message": "Unable to update board background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 59]],
+    "translation": "Não foi possível atualizar o plano de fundo do quadro"
+  },
+  "8a8jKE": {
+    "message": "Unsupported image",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 86]],
+    "translation": "Imagem não compatível"
+  },
+  "6MxxvO": {
+    "message": "Upload image",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 213]],
+    "translation": "Enviar imagem"
+  },
+  "gANddk": {
+    "message": "Uploading…",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 213]],
+    "translation": "Enviando…"
   }
 }

@@ -12877,5 +12877,89 @@
       ]
     ],
     "translation": "YouTube-URL"
+  },
+  "sIpTuZ": {
+    "message": "Change background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 146],["src/views/board/components/BoardDropdown.tsx", 110]],
+    "translation": "Skift baggrund"
+  },
+  "jM7ASy": {
+    "message": "Choose a JPEG, PNG, WebP, GIF, or AVIF image.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 87]],
+    "translation": "Vælg et JPEG-, PNG-, WebP-, GIF- eller AVIF-billede."
+  },
+  "SYb0Ub": {
+    "message": "Choose an image smaller than 50 MB.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 96]],
+    "translation": "Vælg et billede på under 50 MB."
+  },
+  "xHwgs0": {
+    "message": "Colours",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 172]],
+    "translation": "Farver"
+  },
+  "MnzgwU": {
+    "message": "Failed to upload the board background. Please try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 132]],
+    "translation": "Baggrunden kunne ikke uploades. Prøv igen."
+  },
+  "4HhvKN": {
+    "message": "Image is too large",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 95]],
+    "translation": "Billedet er for stort"
+  },
+  "zawWn4": {
+    "message": "Imported colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 160]],
+    "translation": "Importeret farve"
+  },
+  "ylbfBl": {
+    "message": "Remove background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 225]],
+    "translation": "Fjern baggrund"
+  },
+  "wBhT2m": {
+    "message": "Unable to update board background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 59]],
+    "translation": "Baggrunden kunne ikke opdateres"
+  },
+  "8a8jKE": {
+    "message": "Unsupported image",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 86]],
+    "translation": "Ikke-understøttet billede"
+  },
+  "6MxxvO": {
+    "message": "Upload image",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 213]],
+    "translation": "Upload billede"
+  },
+  "gANddk": {
+    "message": "Uploading…",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 213]],
+    "translation": "Uploader…"
   }
 }

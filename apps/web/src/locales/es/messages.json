@@ -7710,5 +7710,89 @@
     "comments": [],
     "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
     "translation": "URL de YouTube"
+  },
+  "sIpTuZ": {
+    "message": "Change background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 146],["src/views/board/components/BoardDropdown.tsx", 110]],
+    "translation": "Cambiar fondo"
+  },
+  "jM7ASy": {
+    "message": "Choose a JPEG, PNG, WebP, GIF, or AVIF image.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 87]],
+    "translation": "Elige una imagen JPEG, PNG, WebP, GIF o AVIF."
+  },
+  "SYb0Ub": {
+    "message": "Choose an image smaller than 50 MB.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 96]],
+    "translation": "Elige una imagen de menos de 50 MB."
+  },
+  "xHwgs0": {
+    "message": "Colours",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 172]],
+    "translation": "Colores"
+  },
+  "MnzgwU": {
+    "message": "Failed to upload the board background. Please try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 132]],
+    "translation": "No se pudo subir el fondo del tablero. Inténtalo de nuevo."
+  },
+  "4HhvKN": {
+    "message": "Image is too large",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 95]],
+    "translation": "La imagen es demasiado grande"
+  },
+  "zawWn4": {
+    "message": "Imported colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 160]],
+    "translation": "Color importado"
+  },
+  "ylbfBl": {
+    "message": "Remove background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 225]],
+    "translation": "Quitar fondo"
+  },
+  "wBhT2m": {
+    "message": "Unable to update board background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 59]],
+    "translation": "No se pudo actualizar el fondo del tablero"
+  },
+  "8a8jKE": {
+    "message": "Unsupported image",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 86]],
+    "translation": "Imagen no compatible"
+  },
+  "6MxxvO": {
+    "message": "Upload image",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 213]],
+    "translation": "Subir imagen"
+  },
+  "gANddk": {
+    "message": "Uploading…",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 213]],
+    "translation": "Subiendo…"
   }
 }
