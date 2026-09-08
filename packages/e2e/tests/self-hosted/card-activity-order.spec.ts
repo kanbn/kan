@@ -134,13 +134,13 @@ test(
     ).toBeVisible();
     await expect(newestComment).toBeVisible();
 
-    await page.goto("/settings/account");
-    const setting = page.locator("#activity-sort-order-select");
-    await expect(setting).toHaveValue("newest");
-    await setting.selectOption("oldest");
+    await page
+      .getByRole("button", { name: "Show oldest activity first" })
+      .click();
+    expect(
+      await page.evaluate((key) => localStorage.getItem(key), activityOrderKey),
+    ).toBe("oldest");
     expect(pageErrors).toEqual([]);
-
-    await page.goto(`/cards/${cardPublicId}`);
     await expect(
       page.getByRole("button", { name: "Show newest activity first" }),
     ).toBeVisible();

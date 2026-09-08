@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Per-account preference to show card activity newest-first or oldest-first
+- Browser-local preference to show card activity newest-first or oldest-first
 
 ## [0.2.4](https://github.com/kanbn/kan/compare/v0.2.3...v0.2.4) - 2025-01-14
 
