@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import sharp from "sharp";
 
 import {
+  copyObject,
   deleteObject,
   getObjectBytes,
   getObjectMetadata,
@@ -89,11 +90,25 @@ export interface BoardBackgroundPreviewStorage {
   deleteObject: (bucket: string, key: string) => Promise<void>;
 }
 
+export interface BoardBackgroundCloneStorage
+  extends BoardBackgroundPreviewStorage {
+  copyObject: (
+    bucket: string,
+    sourceKey: string,
+    targetKey: string,
+  ) => Promise<void>;
+}
+
 const createStorage = (): BoardBackgroundPreviewStorage => ({
   headObject: getObjectMetadata,
   getObject: getObjectBytes,
   putObject,
   deleteObject,
+});
+
+const createCloneStorage = (): BoardBackgroundCloneStorage => ({
+  ...createStorage(),
+  copyObject,
 });
 
 export const inspectBoardBackgroundObject = async (
@@ -285,4 +300,34 @@ export const ensureBoardBackgroundPreviews = async (args: {
   } finally {
     releasePreviewBuildSlot?.();
   }
+};
+
+export const cloneBoardBackgroundObjects = async (args: {
+  bucket: string;
+  sourceKey: string;
+  targetBoardPublicId: string;
+  targetKey: string;
+  storage?: BoardBackgroundCloneStorage;
+}) => {
+  const storage = args.storage ?? createCloneStorage();
+
+  try {
+    await storage.copyObject(args.bucket, args.sourceKey, args.targetKey);
+    await ensureBoardBackgroundPreviews({
+      bucket: args.bucket,
+      boardPublicId: args.targetBoardPublicId,
+      s3Key: args.targetKey,
+      storage,
+    });
+  } catch (error) {
+    await deleteBoardBackgroundObjects({
+      bucket: args.bucket,
+      boardPublicId: args.targetBoardPublicId,
+      s3Key: args.targetKey,
+      storage,
+    });
+    throw error;
+  }
+
+  return args.targetKey;
 };
