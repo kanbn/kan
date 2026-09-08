@@ -7,7 +7,6 @@ import { generateUID } from "@kan/shared/utils";
 
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
-import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface FormValues {
   title: string;
@@ -62,6 +61,7 @@ const NewChecklistItemForm = ({
         if (!old) return old as any;
         const placeholder = {
           publicId: optimisticPublicId,
+          clientId: optimisticPublicId,
           title: vars.title,
           completed: false,
         };
@@ -108,7 +108,7 @@ const NewChecklistItemForm = ({
       });
     },
     onSettled: async () => {
-      await invalidateCard(utils, cardPublicId);
+      await utils.card.getActivities.invalidate({ cardPublicId });
     },
   });
 
