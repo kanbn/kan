@@ -2,26 +2,29 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
-import { registerWorkspaceTools } from "./tools/workspace.js";
+import { configFromEnv, createKanClient } from "./client.js";
 import { registerBoardTools } from "./tools/board.js";
-import { registerListTools } from "./tools/list.js";
 import { registerCardTools } from "./tools/card.js";
 import { registerChecklistTools } from "./tools/checklist.js";
 import { registerLabelTools } from "./tools/label.js";
+import { registerListTools } from "./tools/list.js";
 import { registerMemberTools } from "./tools/member.js";
+import { registerWorkspaceTools } from "./tools/workspace.js";
+
+const client = createKanClient(configFromEnv());
 
 const server = new McpServer({
   name: "kan",
   version: "0.1.0",
 });
 
-registerWorkspaceTools(server);
-registerBoardTools(server);
-registerListTools(server);
-registerCardTools(server);
-registerChecklistTools(server);
-registerLabelTools(server);
-registerMemberTools(server);
+registerWorkspaceTools(server, client);
+registerBoardTools(server, client);
+registerListTools(server, client);
+registerCardTools(server, client);
+registerChecklistTools(server, client);
+registerLabelTools(server, client);
+registerMemberTools(server, client);
 
 const transport = new StdioServerTransport();
 await server.connect(transport);

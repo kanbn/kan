@@ -1,15 +1,19 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { kanRequest } from "../client.js";
 
-export function registerCardTools(server: McpServer): void {
+import type { KanClient } from "../client.js";
+
+export function registerCardTools(server: McpServer, client: KanClient): void {
   server.tool(
     "create_card",
     "Create a new card in a list",
     {
       listPublicId: z.string().describe("The list's public ID"),
       title: z.string().describe("Card title"),
-      description: z.string().optional().describe("Card description (markdown supported)"),
+      description: z
+        .string()
+        .optional()
+        .describe("Card description (markdown supported)"),
       dueDate: z.string().optional().describe("Due date in ISO 8601 format"),
       labelPublicIds: z
         .array(z.string())
@@ -24,8 +28,16 @@ export function registerCardTools(server: McpServer): void {
         .optional()
         .describe("Where to insert the card in the list (default: end)"),
     },
-    async ({ listPublicId, title, description, dueDate, labelPublicIds, memberPublicIds, position }) => {
-      const data = await kanRequest("POST", "/cards", {
+    async ({
+      listPublicId,
+      title,
+      description,
+      dueDate,
+      labelPublicIds,
+      memberPublicIds,
+      position,
+    }) => {
+      const data = await client.request("POST", "/cards", {
         listPublicId,
         title,
         description,
@@ -34,7 +46,9 @@ export function registerCardTools(server: McpServer): void {
         memberPublicIds: memberPublicIds ?? [],
         position: position ?? "end",
       });
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -43,8 +57,10 @@ export function registerCardTools(server: McpServer): void {
     "Get full details of a card including comments, checklists, labels and members",
     { cardPublicId: z.string().describe("The card's public ID") },
     async ({ cardPublicId }) => {
-      const data = await kanRequest("GET", `/cards/${cardPublicId}`);
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      const data = await client.request("GET", `/cards/${cardPublicId}`);
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -55,17 +71,26 @@ export function registerCardTools(server: McpServer): void {
       cardPublicId: z.string().describe("The card's public ID"),
       title: z.string().optional().describe("New card title"),
       description: z.string().optional().describe("New description"),
-      dueDate: z.string().nullable().optional().describe("Due date in ISO 8601, or null to clear"),
-      listPublicId: z.string().optional().describe("Move card to this list (public ID)"),
+      dueDate: z
+        .string()
+        .nullable()
+        .optional()
+        .describe("Due date in ISO 8601, or null to clear"),
+      listPublicId: z
+        .string()
+        .optional()
+        .describe("Move card to this list (public ID)"),
     },
     async ({ cardPublicId, title, description, dueDate, listPublicId }) => {
-      const data = await kanRequest("PUT", `/cards/${cardPublicId}`, {
+      const data = await client.request("PUT", `/cards/${cardPublicId}`, {
         title,
         description,
         dueDate,
         listPublicId,
       });
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -74,8 +99,10 @@ export function registerCardTools(server: McpServer): void {
     "Delete a card (soft delete)",
     { cardPublicId: z.string().describe("The card's public ID") },
     async ({ cardPublicId }) => {
-      const data = await kanRequest("DELETE", `/cards/${cardPublicId}`);
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      const data = await client.request("DELETE", `/cards/${cardPublicId}`);
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -90,10 +117,16 @@ export function registerCardTools(server: McpServer): void {
         .describe("Target list public ID (defaults to same list)"),
     },
     async ({ cardPublicId, targetListPublicId }) => {
-      const data = await kanRequest("POST", `/cards/${cardPublicId}/duplicate`, {
-        targetListPublicId,
-      });
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      const data = await client.request(
+        "POST",
+        `/cards/${cardPublicId}/duplicate`,
+        {
+          targetListPublicId,
+        },
+      );
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -102,12 +135,20 @@ export function registerCardTools(server: McpServer): void {
     "Get the activity history of a card",
     {
       cardPublicId: z.string().describe("The card's public ID"),
-      cursor: z.string().optional().describe("Pagination cursor from a previous response"),
+      cursor: z
+        .string()
+        .optional()
+        .describe("Pagination cursor from a previous response"),
     },
     async ({ cardPublicId, cursor }) => {
       const params = cursor ? `?cursor=${encodeURIComponent(cursor)}` : "";
-      const data = await kanRequest("GET", `/cards/${cardPublicId}/activities${params}`);
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      const data = await client.request(
+        "GET",
+        `/cards/${cardPublicId}/activities${params}`,
+      );
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -119,8 +160,14 @@ export function registerCardTools(server: McpServer): void {
       content: z.string().describe("Comment text"),
     },
     async ({ cardPublicId, content }) => {
-      const data = await kanRequest("POST", `/cards/${cardPublicId}/comments`, { comment: content });
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      const data = await client.request(
+        "POST",
+        `/cards/${cardPublicId}/comments`,
+        { comment: content },
+      );
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -133,12 +180,14 @@ export function registerCardTools(server: McpServer): void {
       content: z.string().describe("New comment text"),
     },
     async ({ cardPublicId, commentPublicId, content }) => {
-      const data = await kanRequest(
+      const data = await client.request(
         "PUT",
         `/cards/${cardPublicId}/comments/${commentPublicId}`,
         { comment: content },
       );
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -150,11 +199,13 @@ export function registerCardTools(server: McpServer): void {
       commentPublicId: z.string().describe("The comment's public ID"),
     },
     async ({ cardPublicId, commentPublicId }) => {
-      const data = await kanRequest(
+      const data = await client.request(
         "DELETE",
         `/cards/${cardPublicId}/comments/${commentPublicId}`,
       );
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -166,11 +217,13 @@ export function registerCardTools(server: McpServer): void {
       labelPublicId: z.string().describe("The label's public ID"),
     },
     async ({ cardPublicId, labelPublicId }) => {
-      const data = await kanRequest(
+      const data = await client.request(
         "PUT",
         `/cards/${cardPublicId}/labels/${labelPublicId}`,
       );
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -179,14 +232,18 @@ export function registerCardTools(server: McpServer): void {
     "Add or remove a member assignment on a card (toggles if already assigned)",
     {
       cardPublicId: z.string().describe("The card's public ID"),
-      workspaceMemberPublicId: z.string().describe("The workspace member's public ID"),
+      workspaceMemberPublicId: z
+        .string()
+        .describe("The workspace member's public ID"),
     },
     async ({ cardPublicId, workspaceMemberPublicId }) => {
-      const data = await kanRequest(
+      const data = await client.request(
         "PUT",
         `/cards/${cardPublicId}/members/${workspaceMemberPublicId}`,
       );
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 }
