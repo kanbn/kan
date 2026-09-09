@@ -7710,5 +7710,103 @@
     "comments": [],
     "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
     "translation": "URL YouTube"
+  },
+  "t0qQZE": {
+    "message": "Confirm your password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 112]],
+    "translation": "Confirmez votre mot de passe"
+  },
+  "dDyAXD": {
+    "message": "Enter a new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 99]],
+    "translation": "Saisissez un nouveau mot de passe"
+  },
+  "GbjlZL": {
+    "message": "Forgot password | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 58]],
+    "translation": "Mot de passe oublié | kan.bn"
+  },
+  "UNMVei": {
+    "message": "Forgot password?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 436]],
+    "translation": "Mot de passe oublié ?"
+  },
+  "glx6on": {
+    "message": "Forgot your password?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 68]],
+    "translation": "Vous avez oublié votre mot de passe ?"
+  },
+  "OSmrFy": {
+    "message": "Remembered your password? <0><1>Sign in</1></0>",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 111], ["src/views/auth/reset-password/index.tsx", 146]],
+    "translation": "Vous vous souvenez de votre mot de passe ? <0><1>Se connecter</1></0>"
+  },
+  "RfwZxd": {
+    "message": "Reset password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 130]],
+    "translation": "Réinitialiser le mot de passe"
+  },
+  "S57AHL": {
+    "message": "Reset password | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 79]],
+    "translation": "Réinitialisation du mot de passe | kan.bn"
+  },
+  "eaUTwS": {
+    "message": "Send reset link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 103]],
+    "translation": "Envoyer le lien de réinitialisation"
+  },
+  "+DlsTY": {
+    "message": "Set a new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 89]],
+    "translation": "Définir un nouveau mot de passe"
+  },
+  "kf83Ld": {
+    "message": "Something went wrong.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 49]],
+    "translation": "Une erreur s'est produite."
+  },
+  "ROcqIU": {
+    "message": "This password reset link is invalid or has expired.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 65], ["src/views/auth/reset-password/index.tsx", 139]],
+    "translation": "Ce lien de réinitialisation de mot de passe est invalide ou a expiré."
+  },
+  "nB44E/": {
+    "message": "We've sent a password reset link to {emailSentTo}.",
+    "placeholders": {"emailSentTo": ["emailSentTo"]},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 73]],
+    "translation": "Nous avons envoyé un lien de réinitialisation de mot de passe à {emailSentTo}."
+  },
+  "A7TuZy": {
+    "message": "Your password has been reset successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 71]],
+    "translation": "Votre mot de passe a été réinitialisé avec succès."
   }
 }

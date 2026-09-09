@@ -12877,5 +12877,103 @@
       ]
     ],
     "translation": "YouTube-URL"
+  },
+  "t0qQZE": {
+    "message": "Confirm your password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 112]],
+    "translation": "Bekræft din adgangskode"
+  },
+  "dDyAXD": {
+    "message": "Enter a new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 99]],
+    "translation": "Indtast en ny adgangskode"
+  },
+  "GbjlZL": {
+    "message": "Forgot password | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 58]],
+    "translation": "Glemt adgangskode | kan.bn"
+  },
+  "UNMVei": {
+    "message": "Forgot password?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 436]],
+    "translation": "Glemt adgangskode?"
+  },
+  "glx6on": {
+    "message": "Forgot your password?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 68]],
+    "translation": "Har du glemt din adgangskode?"
+  },
+  "OSmrFy": {
+    "message": "Remembered your password? <0><1>Sign in</1></0>",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 111], ["src/views/auth/reset-password/index.tsx", 146]],
+    "translation": "Husket din adgangskode? <0><1>Log ind</1></0>"
+  },
+  "RfwZxd": {
+    "message": "Reset password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 130]],
+    "translation": "Nulstil adgangskode"
+  },
+  "S57AHL": {
+    "message": "Reset password | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 79]],
+    "translation": "Nulstil adgangskode | kan.bn"
+  },
+  "eaUTwS": {
+    "message": "Send reset link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 103]],
+    "translation": "Send nulstillingslink"
+  },
+  "+DlsTY": {
+    "message": "Set a new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 89]],
+    "translation": "Angiv en ny adgangskode"
+  },
+  "kf83Ld": {
+    "message": "Something went wrong.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 49]],
+    "translation": "Noget gik galt."
+  },
+  "ROcqIU": {
+    "message": "This password reset link is invalid or has expired.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 65], ["src/views/auth/reset-password/index.tsx", 139]],
+    "translation": "Dette link til nulstilling af adgangskode er ugyldigt eller er udløbet."
+  },
+  "nB44E/": {
+    "message": "We've sent a password reset link to {emailSentTo}.",
+    "placeholders": {"emailSentTo": ["emailSentTo"]},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 73]],
+    "translation": "Vi har sendt et link til nulstilling af adgangskode til {emailSentTo}."
+  },
+  "A7TuZy": {
+    "message": "Your password has been reset successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 71]],
+    "translation": "Din adgangskode er blevet nulstillet."
   }
 }
