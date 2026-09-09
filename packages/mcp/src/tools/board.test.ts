@@ -1,12 +1,8 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { describe, expect, it, vi } from "vitest";
 
-import { kanRequest } from "../client.js";
+import type { KanClient } from "../client.js";
 import { registerBoardTools } from "./board.js";
-
-vi.mock("../client.js", () => ({
-  kanRequest: vi.fn(),
-}));
 
 describe("create_board", () => {
   it("forwards documented input with the backend-required empty arrays", async () => {
@@ -16,10 +12,10 @@ describe("create_board", () => {
         tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
       },
     } as unknown as McpServer;
-    const request = vi.mocked(kanRequest);
-    request.mockResolvedValueOnce({ publicId: "board-123456" });
+    const request = vi.fn().mockResolvedValueOnce({ publicId: "board-123456" });
+    const client: KanClient = { request };
 
-    registerBoardTools(server);
+    registerBoardTools(server, client);
 
     await tools.get("create_board")?.({
       workspacePublicId: "workspace-123456",
@@ -38,5 +34,41 @@ describe("create_board", () => {
         labels: [],
       },
     );
+  });
+});
+
+describe("find_board_by_name", () => {
+  it("resolves the workspace from GET /workspaces' nested membership shape", async () => {
+    const tools = new Map<string, (...args: unknown[]) => unknown>();
+    const server = {
+      tool: (name: string, ...args: unknown[]) => {
+        tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
+      },
+    } as unknown as McpServer;
+    const request = vi
+      .fn()
+      .mockResolvedValueOnce([
+        { role: "admin", workspace: { publicId: "ws-123456", name: "Eng" } },
+      ])
+      .mockResolvedValueOnce([{ publicId: "board-123456", name: "Roadmap" }]);
+    const client: KanClient = { request };
+
+    registerBoardTools(server, client);
+
+    const result = (await tools.get("find_board_by_name")?.({
+      workspaceName: "eng",
+      boardName: "roadmap",
+    })) as { content: { text: string }[] };
+
+    expect(request).toHaveBeenNthCalledWith(1, "GET", "/workspaces");
+    expect(request).toHaveBeenNthCalledWith(
+      2,
+      "GET",
+      "/workspaces/ws-123456/boards",
+    );
+    expect(JSON.parse(result.content[0]!.text)).toEqual({
+      publicId: "board-123456",
+      name: "Roadmap",
+    });
   });
 });

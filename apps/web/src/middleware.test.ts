@@ -59,4 +59,36 @@ describe("middleware", () => {
       "http://localhost:3000/login",
     );
   });
+
+  it.each(["mcp.kan.bn", "mcp-staging.kan.bn"])(
+    "rewrites requests with Host: %s to /api/mcp",
+    (host) => {
+      mockedEnv.mockImplementation((key) => {
+        if (key === "NEXT_PUBLIC_KAN_ENV") return "cloud";
+      });
+
+      const response = middleware(
+        new NextRequest("http://localhost:3000/", { headers: { host } }),
+      );
+
+      const rewriteTarget = response.headers.get("x-middleware-rewrite");
+      expect(rewriteTarget).not.toBeNull();
+      expect(new URL(rewriteTarget!).pathname).toBe("/api/mcp");
+    },
+  );
+
+  it("does not rewrite the main app domain", () => {
+    mockedEnv.mockImplementation((key) => {
+      if (key === "NEXT_PUBLIC_KAN_ENV") return "cloud";
+    });
+
+    const response = middleware(
+      new NextRequest("http://localhost:3000/", {
+        headers: { host: "kan.bn" },
+      }),
+    );
+
+    expect(response.headers.get("x-middleware-rewrite")).toBeNull();
+    expect(response.headers.get("location")).toBeNull();
+  });
 });
