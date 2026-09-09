@@ -79,6 +79,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const server = createKanMcpServer(client);
   const transport = new StreamableHTTPServerTransport({
     sessionIdGenerator: undefined,
+    enableJsonResponse: true,
   });
 
   res.on("close", () => {
