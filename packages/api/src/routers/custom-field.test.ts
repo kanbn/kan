@@ -26,6 +26,7 @@ vi.mock("@kan/db/repository/custom-field.repo", async (importOriginal) => {
     getWorkspaceAndOptionIdByPublicId: vi.fn(),
     createDefinition: vi.fn(),
     updateDefinition: vi.fn(),
+    saveDefinition: vi.fn(),
     archiveDefinition: vi.fn(),
     reorderDefinitions: vi.fn(),
     createOption: vi.fn(),
@@ -58,6 +59,7 @@ const mockListDefinitions = vi.mocked(
 );
 const mockCreateDefinition = vi.mocked(customFieldRepo.createDefinition);
 const mockUpdateDefinition = vi.mocked(customFieldRepo.updateDefinition);
+const mockSaveDefinition = vi.mocked(customFieldRepo.saveDefinition);
 const mockArchiveDefinition = vi.mocked(customFieldRepo.archiveDefinition);
 const mockReorderDefinitions = vi.mocked(customFieldRepo.reorderDefinitions);
 const mockCreateOption = vi.mocked(customFieldRepo.createOption);
@@ -230,6 +232,54 @@ describe("custom field router", () => {
       placement: "main",
       showOnCard: false,
       defaultValue: { type: "text", value: "Unknown" },
+      actorUserId: mockUser.id,
+    });
+  });
+
+  it("saves a complete definition draft with board:edit", async () => {
+    mockFieldScope.mockResolvedValue(fieldScope);
+    mockSaveDefinition.mockResolvedValue({ success: true });
+
+    await customFieldRouter.createCaller(ctx).saveDefinition({
+      fieldPublicId,
+      name: "Priority",
+      description: "Used during triage",
+      placeholder: null,
+      sectionLabel: "Planning",
+      placement: "main",
+      showOnCard: true,
+      defaultValue: { type: "select", optionKey: "new:high" },
+      options: [
+        {
+          key: "new:high",
+          name: "High",
+          colourCode: null,
+        },
+      ],
+    });
+
+    expect(mockAssertPermission).toHaveBeenCalledWith(
+      mockDb,
+      mockUser.id,
+      fieldScope.workspaceId,
+      "board:edit",
+    );
+    expect(mockSaveDefinition).toHaveBeenCalledWith(mockDb, {
+      fieldPublicId,
+      name: "Priority",
+      description: "Used during triage",
+      placeholder: null,
+      sectionLabel: "Planning",
+      placement: "main",
+      showOnCard: true,
+      defaultValue: { type: "select", optionKey: "new:high" },
+      options: [
+        {
+          key: "new:high",
+          name: "High",
+          colourCode: null,
+        },
+      ],
       actorUserId: mockUser.id,
     });
   });
