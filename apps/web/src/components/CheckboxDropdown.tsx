@@ -19,7 +19,8 @@ interface Group {
   key: string;
   label: string;
   icon: React.ReactNode;
-  items: Item[];
+  items?: Item[];
+  groups?: Group[];
   selectedCount?: number;
 }
 
@@ -59,11 +60,22 @@ export default function CheckboxDropdown({
   backLabel = "Back",
   footer,
 }: CheckboxDropdownProps) {
-  const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
+  const [selectedGroupPath, setSelectedGroupPath] = useState<string[]>([]);
 
-  const selectedGroupDetails = groups?.find(
-    (group) => group.key === selectedGroup,
-  );
+  const findGroup = (path: string[]) => {
+    let availableGroups = groups;
+    let selectedGroup: Group | undefined;
+
+    for (const key of path) {
+      selectedGroup = availableGroups?.find((group) => group.key === key);
+      if (!selectedGroup) return undefined;
+      availableGroups = selectedGroup.groups;
+    }
+
+    return selectedGroup;
+  };
+
+  const selectedGroupDetails = findGroup(selectedGroupPath);
 
   const menuSpacingClass = {
     sm: "top-[26px]",
@@ -93,7 +105,7 @@ export default function CheckboxDropdown({
                   e.preventDefault();
                   handleSelect(groupKey, { key: item.key, value: item.value });
                   if (item.selected === undefined) {
-                    setSelectedGroup(null);
+                    setSelectedGroupPath([]);
                     close();
                   }
                 }}
@@ -109,7 +121,7 @@ export default function CheckboxDropdown({
                     key: item.key,
                     value: item.value,
                   });
-                  setSelectedGroup(null);
+                  setSelectedGroupPath([]);
                   close();
                 }}
               >
@@ -183,6 +195,28 @@ export default function CheckboxDropdown({
     </>
   );
 
+  const renderMenuGroups = (menuGroups: Group[]) =>
+    menuGroups.map((group) => (
+      <Menu.Item key={group.key}>
+        <div
+          className="flex items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300"
+          onClick={(event) => {
+            event.preventDefault();
+            setSelectedGroupPath([...selectedGroupPath, group.key]);
+          }}
+        >
+          <span className="mr-2 text-dark-900">{group.icon}</span>
+          <span className="pointer-events-none text-[12px] text-dark-900">
+            {group.label}
+          </span>
+          <span className="ml-auto flex items-center gap-2 text-dark-900">
+            {renderSelectedCount(group.selectedCount)}
+            <HiChevronRight size={14} aria-hidden="true" />
+          </span>
+        </div>
+      </Menu.Item>
+    ));
+
   return (
     <Menu
       as="div"
@@ -207,7 +241,7 @@ export default function CheckboxDropdown({
             leave="transition ease-in duration-75"
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
-            afterLeave={() => setSelectedGroup(null)}
+            afterLeave={() => setSelectedGroupPath([])}
           >
             <Menu.Items
               className={twMerge(
@@ -217,32 +251,10 @@ export default function CheckboxDropdown({
               )}
             >
               <div className="max-h-[350px] overflow-y-auto p-1">
-                {!selectedGroup ? (
+                {selectedGroupPath.length === 0 ? (
                   <>
                     {items && renderMenuItems(items, null, close)}
-
-                    {groups?.map((group) => (
-                      <Menu.Item key={group.key}>
-                        <div
-                          className="flex items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setSelectedGroup(group.key);
-                          }}
-                        >
-                          <span className="mr-2 text-dark-900">
-                            {group.icon}
-                          </span>
-                          <span className="pointer-events-none text-[12px] text-dark-900">
-                            {group.label}
-                          </span>
-                          <span className="ml-auto flex items-center gap-2 text-dark-900">
-                            {renderSelectedCount(group.selectedCount)}
-                            <HiChevronRight size={14} aria-hidden="true" />
-                          </span>
-                        </div>
-                      </Menu.Item>
-                    ))}
+                    {groups && renderMenuGroups(groups)}
                   </>
                 ) : (
                   <>
@@ -250,9 +262,9 @@ export default function CheckboxDropdown({
                       <button
                         type="button"
                         className="flex w-full items-center rounded-[5px] p-2 text-dark-900 hover:bg-light-200 dark:hover:bg-dark-300"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setSelectedGroup(null);
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setSelectedGroupPath((path) => path.slice(0, -1));
                         }}
                       >
                         <span className="sr-only">{backLabel}</span>
@@ -271,9 +283,11 @@ export default function CheckboxDropdown({
                     {selectedGroupDetails?.items &&
                       renderMenuItems(
                         selectedGroupDetails.items,
-                        selectedGroup,
+                        selectedGroupDetails.key,
                         close,
                       )}
+                    {selectedGroupDetails?.groups &&
+                      renderMenuGroups(selectedGroupDetails.groups)}
                   </>
                 )}
               </div>
