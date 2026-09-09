@@ -256,6 +256,11 @@ test(
     await expect(page.getByText("Custom fields test card")).toBeVisible();
     await expect(page.getByText("Unapproved card")).toHaveCount(0);
     await page.keyboard.press("Escape");
+
+    await page.getByRole("button", { name: "Filter", exact: true }).click();
+    await expect(
+      page.getByRole("menuitem", { name: "Approved 1", exact: true }),
+    ).toBeVisible();
     await page.keyboard.press("Escape");
 
     await board.duplicateCard("Custom fields test card", "Done");
@@ -444,9 +449,12 @@ test(
     await filter.getByRole("button", { name: "Apply" }).click();
     await filtered;
     await expect(page.getByText("Unmatched card")).toHaveCount(0);
+
+    await page.getByRole("button", { name: "Filter", exact: true }).click();
     await expect(
-      page.getByRole("button", { name: "Clear filters" }),
-    ).toHaveText("1");
+      page.getByRole("menuitem", { name: "Estimate 1", exact: true }),
+    ).toBeVisible();
+    await page.keyboard.press("Escape");
 
     filter = await openFilter("Target");
     await filter
@@ -459,9 +467,14 @@ test(
     await filtered;
     await expect(page.getByText("Matching card")).toBeVisible();
     await expect(page.getByText("Unmatched card")).toHaveCount(0);
+
+    await page.getByRole("button", { name: "Filter", exact: true }).click();
     await expect(
-      page.getByRole("button", { name: "Clear filters" }),
-    ).toHaveText("2");
+      page.getByRole("menuitem", { name: "Estimate 1", exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("menuitem", { name: "Target 1", exact: true }),
+    ).toBeVisible();
     await clearFilters();
   },
 );
