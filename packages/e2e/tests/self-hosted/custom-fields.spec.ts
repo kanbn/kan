@@ -259,18 +259,22 @@ test(
     await expect(page.getByText("Custom fields test card")).toBeVisible();
     await expect(page.getByText("Unapproved card")).toHaveCount(0);
     await page.keyboard.press("Escape");
+    await expect(page.getByRole("menu", { name: "Filter" })).toHaveCount(0);
 
     await page.getByRole("button", { name: "Filter", exact: true }).click();
+    const customFieldFilters = page
+      .getByRole("menuitem")
+      .filter({ hasText: "Custom fields" });
     await expect(
-      page.getByRole("menuitem", { name: "Custom fields 1", exact: true }),
+      customFieldFilters.getByText("1", { exact: true }),
     ).toBeVisible();
-    await page
-      .getByRole("menuitem", { name: "Custom fields 1", exact: true })
-      .click();
-    await expect(
-      page.getByRole("menuitem", { name: "Approved 1", exact: true }),
-    ).toBeVisible();
-    await page.keyboard.press("Escape");
+    await customFieldFilters.click();
+    const approvedFilter = page
+      .getByRole("menuitem")
+      .filter({ hasText: "Approved" });
+    await expect(approvedFilter.getByText("1", { exact: true })).toBeVisible();
+    await page.getByRole("button", { name: "Filter", exact: true }).click();
+    await expect(page.getByRole("menu", { name: "Filter" })).toHaveCount(0);
 
     await board.duplicateCard("Custom fields test card", "Done");
     await expect(page.getByText("Custom fields test card")).toHaveCount(2);
@@ -422,16 +426,19 @@ test(
         .filter({ hasText: "Custom fields" })
         .click();
       await page.getByRole("menuitem").filter({ hasText: fieldName }).click();
-      await page.getByRole("menuitem").filter({ visible: true }).click();
+      await page
+        .getByRole("menuitem")
+        .filter({ hasNotText: /^(Back|Clear filters)/ })
+        .click();
       return page.getByRole("dialog");
     };
     const clearFilters = async () => {
       const cleared = waitForTrpcQuery(page, "board.byId");
-      await page.getByRole("button", { name: "Clear filters" }).click();
+      await page.getByRole("menuitem", { name: "Clear filters" }).click();
       await cleared;
       await expect(page.getByText("Unmatched card")).toBeVisible();
       await expect(
-        page.getByRole("button", { name: "Clear filters" }),
+        page.getByRole("menuitem", { name: "Clear filters" }),
       ).toHaveCount(0);
     };
 
@@ -464,16 +471,19 @@ test(
     await expect(page.getByText("Unmatched card")).toHaveCount(0);
 
     await page.getByRole("button", { name: "Filter", exact: true }).click();
+    const customFieldsWithEstimate = page
+      .getByRole("menuitem")
+      .filter({ hasText: "Custom fields" });
     await expect(
-      page.getByRole("menuitem", { name: "Custom fields 1", exact: true }),
+      customFieldsWithEstimate.getByText("1", { exact: true }),
     ).toBeVisible();
-    await page
-      .getByRole("menuitem", { name: "Custom fields 1", exact: true })
-      .click();
-    await expect(
-      page.getByRole("menuitem", { name: "Estimate 1", exact: true }),
-    ).toBeVisible();
-    await page.keyboard.press("Escape");
+    await customFieldsWithEstimate.click();
+    const estimateFilter = page
+      .getByRole("menuitem")
+      .filter({ hasText: "Estimate" });
+    await expect(estimateFilter.getByText("1", { exact: true })).toBeVisible();
+    await page.getByRole("button", { name: "Filter", exact: true }).click();
+    await expect(page.getByRole("menu", { name: "Filter" })).toHaveCount(0);
 
     filter = await openFilter("Target");
     await filter
@@ -488,18 +498,18 @@ test(
     await expect(page.getByText("Unmatched card")).toHaveCount(0);
 
     await page.getByRole("button", { name: "Filter", exact: true }).click();
+    const customFieldsWithEstimateAndTarget = page
+      .getByRole("menuitem")
+      .filter({ hasText: "Custom fields" });
     await expect(
-      page.getByRole("menuitem", { name: "Custom fields 2", exact: true }),
+      customFieldsWithEstimateAndTarget.getByText("2", { exact: true }),
     ).toBeVisible();
-    await page
-      .getByRole("menuitem", { name: "Custom fields 2", exact: true })
-      .click();
-    await expect(
-      page.getByRole("menuitem", { name: "Estimate 1", exact: true }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("menuitem", { name: "Target 1", exact: true }),
-    ).toBeVisible();
+    await customFieldsWithEstimateAndTarget.click();
+    await expect(estimateFilter.getByText("1", { exact: true })).toBeVisible();
+    const targetFilter = page
+      .getByRole("menuitem")
+      .filter({ hasText: "Target" });
+    await expect(targetFilter.getByText("1", { exact: true })).toBeVisible();
     await clearFilters();
   },
 );
@@ -619,7 +629,9 @@ test(
       .filter({ hasText: "Notes" });
     await notesFilterGroup.focus();
     await page.keyboard.press("Enter");
-    const setFilter = page.getByRole("menuitem").filter({ visible: true });
+    const setFilter = page
+      .getByRole("menuitem")
+      .filter({ hasNotText: /^(Back|Clear filters)/ });
     await setFilter.focus();
     await page.keyboard.press("Enter");
     const filterDialog = page.getByRole("dialog");
