@@ -16,6 +16,7 @@ interface ChecklistItem {
   publicId: string;
   title: string;
   completed: boolean;
+  clientId?: string;
 }
 
 interface Checklist {
@@ -191,7 +192,7 @@ export default function Checklists({
                     >
                       {checklist.items.map((item, index) => (
                         <Draggable
-                          key={item.publicId}
+                          key={item.clientId ?? item.publicId}
                           draggableId={item.publicId}
                           index={index}
                           isDragDisabled={viewOnly}
@@ -210,6 +211,7 @@ export default function Checklists({
                                   publicId: item.publicId,
                                   title: item.title,
                                   completed: item.completed,
+                                  clientId: item.clientId,
                                 }}
                                 cardPublicId={cardPublicId}
                                 onCreateNewItem={() =>
