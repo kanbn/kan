@@ -88,13 +88,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   });
 
   await server.connect(transport);
-  await transport.handleRequest(req, res);
+  await transport.handleRequest(req, res, req.body);
 }
 
 export default withApiLogging(handler, { transport: "mcp" });
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
