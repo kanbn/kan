@@ -10,6 +10,7 @@ import {
   customFieldDefinitionSchema as definitionSchema,
   customFieldDescriptionSchema as descriptionSchema,
   customFieldNameSchema as nameSchema,
+  customFieldNumberValueSchema as numberValueSchema,
   customFieldOptionSchema as optionSchema,
   customFieldPlaceholderSchema as placeholderSchema,
   customFieldPlacementSchema as placementSchema,
@@ -20,6 +21,23 @@ import {
 } from "../schemas";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertCanEdit, assertPermission } from "../utils/permissions";
+
+const definitionOptionDraftSchema = z.object({
+  key: z.string().min(1).max(64),
+  publicId: publicIdSchema.optional(),
+  name: nameSchema,
+  colourCode: colourCodeSchema.optional(),
+});
+const definitionDefaultDraftSchema = z.discriminatedUnion("type", [
+  z.object({ type: z.literal("text"), value: z.string().min(1).max(10000) }),
+  z.object({ type: z.literal("number"), value: numberValueSchema }),
+  z.object({ type: z.literal("date"), value: z.date() }),
+  z.object({ type: z.literal("checkbox"), value: z.boolean() }),
+  z.object({
+    type: z.literal("select"),
+    optionKey: z.string().min(1).max(64),
+  }),
+]);
 
 const requireUserId = (userId: string | undefined) => {
   if (!userId)
@@ -223,6 +241,56 @@ export const customFieldRouter = createTRPCRouter({
 
       try {
         return await customFieldRepo.updateDefinition(ctx.db, {
+          ...input,
+          actorUserId: userId,
+        });
+      } catch (error) {
+        return throwRepositoryError(error);
+      }
+    }),
+
+  saveDefinition: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Save a custom field definition",
+        method: "PUT",
+        path: "/custom-fields/{fieldPublicId}/configuration",
+        description: "Atomically saves a custom field and its active options",
+        tags: ["Custom fields"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        fieldPublicId: publicIdSchema,
+        name: nameSchema,
+        description: descriptionSchema.nullable(),
+        placeholder: placeholderSchema.nullable(),
+        sectionLabel: sectionLabelSchema.nullable(),
+        placement: placementSchema,
+        showOnCard: z.boolean(),
+        defaultValue: definitionDefaultDraftSchema.nullable(),
+        options: z
+          .array(definitionOptionDraftSchema)
+          .max(customFieldRepo.MAX_CUSTOM_FIELD_OPTIONS),
+      }),
+    )
+    .output(z.object({ success: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = requireUserId(ctx.user?.id);
+      const field = await customFieldRepo.getWorkspaceAndDefinitionIdByPublicId(
+        ctx.db,
+        input.fieldPublicId,
+      );
+      if (!field)
+        throw new TRPCError({
+          message: `Custom field ${input.fieldPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+      await assertPermission(ctx.db, userId, field.workspaceId, "board:edit");
+
+      try {
+        return await customFieldRepo.saveDefinition(ctx.db, {
           ...input,
           actorUserId: userId,
         });

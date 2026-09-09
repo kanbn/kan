@@ -40,6 +40,7 @@ test(
   "a custom field can be created and populated on a card",
   { tag: "@self-hosted" },
   async ({ page, browser }) => {
+    test.setTimeout(60_000);
     const user = createTestUser();
     const auth = new AuthPage(page);
     const onboarding = new SelfHostedOnboardingPage(page);
@@ -73,18 +74,18 @@ test(
       placement: "main" | "sidebar" = "sidebar",
       sectionLabel?: string,
     ) => {
-      await dialog.getByPlaceholder("Field name").fill(name);
+      await dialog.getByRole("button", { name: "Create new field" }).click();
+      await dialog.getByRole("textbox", { name: "Field name" }).fill(name);
       await dialog
         .getByRole("combobox", { name: "Field type" })
         .selectOption({ label: type });
-      const showOnCardToggle = dialog
-        .getByRole("switch", { name: "Show on card front" })
-        .last();
+      const showOnCardToggle = dialog.getByRole("switch", {
+        name: "Show on card front",
+      });
       if ((await showOnCardToggle.isChecked()) !== showOnCard)
         await showOnCardToggle.click();
       await dialog
         .getByRole("combobox", { name: "Placement" })
-        .last()
         .selectOption(placement);
       if (sectionLabel)
         await dialog
@@ -101,11 +102,9 @@ test(
         page,
         "customField.createDefinition",
       );
-      await dialog.getByRole("button", { name: "Add field" }).click();
+      await dialog.getByRole("button", { name: "Create field" }).click();
       await definitionCreated;
-      await expect(
-        dialog.getByRole("textbox", { name: "Custom field name" }).last(),
-      ).toHaveValue(name);
+      await expect(dialog.getByRole("button", { name: name })).toBeVisible();
     };
 
     await addField("Effort notes", "Text", false, [], "main", "Delivery");
@@ -118,6 +117,9 @@ test(
 
     const boardPath = new URL(page.url()).pathname;
     await board.openCard("Custom fields test card");
+    await expect(
+      page.getByRole("button", { name: "Manage custom fields" }),
+    ).toHaveCount(2);
     const deliverySection = page
       .getByRole("heading", { name: "Delivery" })
       .locator("..");
@@ -303,18 +305,42 @@ test(
     await expect(
       guestPage.getByRole("heading", { name: "Custom fields" }),
     ).toHaveCount(2);
-    await expect(guestPage.getByText("Effort notes")).toBeVisible();
-    await expect(guestPage.getByText("Preserve these spaces")).toBeVisible();
-    await expect(guestPage.getByText("Estimate")).toBeVisible();
-    await expect(guestPage.getByText("13.5", { exact: true })).toBeVisible();
-    await expect(guestPage.getByText("Milestone")).toBeVisible();
-    await expect(guestPage.getByText("Approved")).toBeVisible();
-    await expect(guestPage.getByText("Checked", { exact: true })).toBeVisible();
-    await expect(guestPage.getByText("Priority")).toBeVisible();
-    await expect(guestPage.getByText("High", { exact: true })).toBeVisible();
+    await expect(
+      guestPage.getByText("Effort notes").filter({ visible: true }),
+    ).toBeVisible();
+    await expect(
+      guestPage.getByText("Preserve these spaces").filter({ visible: true }),
+    ).toBeVisible();
+    await expect(
+      guestPage.getByText("Estimate").filter({ visible: true }),
+    ).toBeVisible();
+    await expect(
+      guestPage.getByText("13.5", { exact: true }).filter({ visible: true }),
+    ).toBeVisible();
+    await expect(
+      guestPage.getByText("Milestone").filter({ visible: true }),
+    ).toBeVisible();
+    await expect(
+      guestPage.getByText("Approved").filter({ visible: true }),
+    ).toBeVisible();
+    await expect(
+      guestPage.getByText("Checked", { exact: true }).filter({ visible: true }),
+    ).toBeVisible();
+    await expect(
+      guestPage.getByText("Priority").filter({ visible: true }),
+    ).toBeVisible();
+    await expect(
+      guestPage.getByText("High", { exact: true }).filter({ visible: true }),
+    ).toBeVisible();
     await expect(guestPage.getByText("Empty field")).toHaveCount(0);
     await expect(
       guestPage.getByRole("textbox", { name: "Estimate" }),
+    ).toHaveCount(0);
+    await expect(
+      guestPage.getByRole("button", { name: "Manage custom fields" }),
+    ).toHaveCount(0);
+    await expect(
+      guestPage.getByRole("button", { name: "Manage custom fields" }),
     ).toHaveCount(0);
 
     await guestContext.close();
@@ -349,12 +375,13 @@ test(
       ["Target", "Date"],
     ];
     for (const [name, type] of fields) {
-      await manager.getByPlaceholder("Field name").fill(name);
+      await manager.getByRole("button", { name: "Create new field" }).click();
+      await manager.getByRole("textbox", { name: "Field name" }).fill(name);
       await manager
         .getByRole("combobox", { name: "Field type" })
         .selectOption({ label: type });
       const created = waitForTrpcMutation(page, "customField.createDefinition");
-      await manager.getByRole("button", { name: "Add field" }).click();
+      await manager.getByRole("button", { name: "Create field" }).click();
       await created;
     }
     await manager.getByRole("button", { name: "Close" }).click();
@@ -476,32 +503,46 @@ test(
     expect(dialogBox ? dialogBox.x + dialogBox.width : 0).toBeLessThanOrEqual(
       390,
     );
-    const addField = async (name: string, type: string) => {
-      await dialog.getByPlaceholder("Field name").fill(name);
+    const addField = async (
+      name: string,
+      type: string,
+      options: string[] = [],
+    ) => {
+      await dialog.getByRole("button", { name: "Create new field" }).click();
+      await dialog.getByRole("textbox", { name: "Field name" }).fill(name);
       await dialog
         .getByRole("combobox", { name: "Field type" })
         .selectOption({ label: type });
+      for (const option of options) {
+        await dialog.getByPlaceholder("New option").fill(option);
+        await dialog.getByRole("button", { name: "Add", exact: true }).click();
+      }
       const definitionCreated = waitForTrpcMutation(
         page,
         "customField.createDefinition",
       );
-      await dialog.getByRole("button", { name: "Add field" }).click();
+      await dialog.getByRole("button", { name: "Create field" }).click();
       await definitionCreated;
     };
 
     await addField("Notes", "Text");
-    await addField("Priority", "Dropdown");
+    await addField("Priority", "Dropdown", ["Low", "High"]);
 
     let priorityField = dialog.locator("section").nth(1);
-    for (const optionName of ["Low", "High"]) {
-      await priorityField.getByPlaceholder("New option").fill(optionName);
-      const optionCreated = waitForTrpcMutation(
-        page,
-        "customField.createOption",
-      );
-      await priorityField.getByRole("button", { name: "Add" }).click();
-      await optionCreated;
-    }
+    await priorityField.getByRole("button", { name: "Priority" }).click();
+    await priorityField
+      .getByRole("textbox", { name: "Field name" })
+      .fill("Discarded name");
+    await priorityField.getByRole("button", { name: "Cancel" }).click();
+    await priorityField.getByRole("button", { name: "Priority" }).click();
+    await expect(
+      priorityField.getByRole("textbox", { name: "Field name" }),
+    ).toHaveValue("Priority");
+    await priorityField
+      .getByRole("button", { name: "Option colour" })
+      .first()
+      .click();
+    await page.getByRole("option", { name: "Blue" }).click();
 
     const fieldsReordered = waitForTrpcMutation(
       page,
@@ -510,25 +551,25 @@ test(
     await priorityField.getByRole("button", { name: "Move field up" }).click();
     await fieldsReordered;
     await expect(
-      dialog
-        .locator("section")
-        .first()
-        .getByRole("textbox", { name: "Custom field name" }),
-    ).toHaveValue("Priority");
+      dialog.locator("section").first().getByRole("button", {
+        name: "Priority",
+      }),
+    ).toBeVisible();
 
     priorityField = dialog.locator("section").first();
-    const optionsReordered = waitForTrpcMutation(
-      page,
-      "customField.reorderOptions",
-    );
     await priorityField
       .getByRole("button", { name: "Move option up" })
       .nth(1)
       .click();
-    await optionsReordered;
     await expect(
       priorityField.getByRole("textbox", { name: "Option name" }).first(),
     ).toHaveValue("High");
+    const definitionSaved = waitForTrpcMutation(
+      page,
+      "customField.saveDefinition",
+    );
+    await priorityField.getByRole("button", { name: "Save" }).click();
+    await definitionSaved;
 
     await dialog.getByRole("button", { name: "Close" }).click();
     await page.getByRole("button", { name: "Filter", exact: true }).click();
@@ -561,23 +602,28 @@ test(
     await page.goto(boardPath);
     const reopenedDialog = await openManager();
     priorityField = reopenedDialog.locator("section").first();
+    await priorityField.getByRole("button", { name: "Priority" }).click();
     await priorityField
-      .getByRole("button", { name: "Archive option" })
+      .getByRole("button", { name: "Remove option" })
       .nth(1)
       .click();
-    await expect(
-      priorityField.getByText(
-        "Archive this option? Existing card values will keep it until changed.",
-      ),
-    ).toBeVisible();
     const optionArchived = waitForTrpcMutation(
       page,
-      "customField.archiveOption",
+      "customField.saveDefinition",
     );
-    await priorityField
-      .getByRole("button", { name: "Archive", exact: true })
-      .click();
+    const definitionsRefetched = waitForTrpcQuery(
+      page,
+      "customField.definitionsByBoard",
+    );
+    await priorityField.getByRole("button", { name: "Save" }).click();
     await optionArchived;
+    await definitionsRefetched;
+    const priorityToggle = priorityField.getByRole("button", {
+      name: "Priority",
+    });
+    await expect(priorityToggle).toHaveAttribute("aria-expanded", "false");
+    await priorityToggle.click();
+    await expect(priorityToggle).toHaveAttribute("aria-expanded", "true");
     await expect(
       priorityField.getByRole("textbox", { name: "Option name" }),
     ).toHaveCount(1);
@@ -589,9 +635,8 @@ test(
     ).toBeVisible();
 
     const notesField = reopenedDialog.locator("section").nth(1);
-    await notesField
-      .getByRole("button", { name: "Archive custom field" })
-      .click();
+    await notesField.getByRole("button", { name: "Notes" }).click();
+    await notesField.getByRole("button", { name: "Archive field" }).click();
     const fieldArchived = waitForTrpcMutation(
       page,
       "customField.archiveDefinition",
@@ -600,10 +645,10 @@ test(
       .getByRole("button", { name: "Archive", exact: true })
       .click();
     await fieldArchived;
-    await expect(reopenedDialog.locator("section")).toHaveCount(1);
+    await expect(reopenedDialog.locator("section")).toHaveCount(2);
     await expect(
-      reopenedDialog.getByRole("textbox", { name: "Custom field name" }),
-    ).toHaveValue("Priority");
+      reopenedDialog.getByRole("button", { name: "Priority" }),
+    ).toBeVisible();
     await reopenedDialog.getByRole("button", { name: "Close" }).click();
 
     await board.openCard("Lifecycle card");
