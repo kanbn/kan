@@ -246,6 +246,9 @@ test(
     await expect(cardLink.getByText("Approved:")).toBeVisible();
 
     await page.getByRole("button", { name: "Filter", exact: true }).click();
+    await page
+      .getByRole("menuitem", { name: "Custom fields", exact: true })
+      .click();
     await page.getByRole("menuitem").filter({ hasText: "Approved" }).click();
     const filtered = waitForTrpcQuery(page, "board.byId");
     await page
@@ -258,6 +261,12 @@ test(
     await page.keyboard.press("Escape");
 
     await page.getByRole("button", { name: "Filter", exact: true }).click();
+    await expect(
+      page.getByRole("menuitem", { name: "Custom fields 1", exact: true }),
+    ).toBeVisible();
+    await page
+      .getByRole("menuitem", { name: "Custom fields 1", exact: true })
+      .click();
     await expect(
       page.getByRole("menuitem", { name: "Approved 1", exact: true }),
     ).toBeVisible();
@@ -408,6 +417,10 @@ test(
       // Board refetches unmount the menu; wait out the preceding URL update.
       await page.waitForTimeout(200);
       await page.getByRole("button", { name: "Filter", exact: true }).click();
+      await page
+        .getByRole("menuitem")
+        .filter({ hasText: "Custom fields" })
+        .click();
       await page.getByRole("menuitem").filter({ hasText: fieldName }).click();
       await page.getByRole("menuitem").filter({ visible: true }).click();
       return page.getByRole("dialog");
@@ -452,6 +465,12 @@ test(
 
     await page.getByRole("button", { name: "Filter", exact: true }).click();
     await expect(
+      page.getByRole("menuitem", { name: "Custom fields 1", exact: true }),
+    ).toBeVisible();
+    await page
+      .getByRole("menuitem", { name: "Custom fields 1", exact: true })
+      .click();
+    await expect(
       page.getByRole("menuitem", { name: "Estimate 1", exact: true }),
     ).toBeVisible();
     await page.keyboard.press("Escape");
@@ -469,6 +488,12 @@ test(
     await expect(page.getByText("Unmatched card")).toHaveCount(0);
 
     await page.getByRole("button", { name: "Filter", exact: true }).click();
+    await expect(
+      page.getByRole("menuitem", { name: "Custom fields 2", exact: true }),
+    ).toBeVisible();
+    await page
+      .getByRole("menuitem", { name: "Custom fields 2", exact: true })
+      .click();
     await expect(
       page.getByRole("menuitem", { name: "Estimate 1", exact: true }),
     ).toBeVisible();
@@ -586,6 +611,9 @@ test(
 
     await dialog.getByRole("button", { name: "Close" }).click();
     await page.getByRole("button", { name: "Filter", exact: true }).click();
+    await page
+      .getByRole("menuitem", { name: "Custom fields", exact: true })
+      .click();
     const notesFilterGroup = page
       .getByRole("menuitem")
       .filter({ hasText: "Notes" });

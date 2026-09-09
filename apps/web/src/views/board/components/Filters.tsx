@@ -301,7 +301,17 @@ const Filters = ({
       items: dueDateItems,
       selectedCount: filterCounts.dueDate,
     },
-    ...customFieldGroups,
+    ...(customFieldGroups.length > 0
+      ? [
+          {
+            key: "customFields",
+            label: t`Custom fields`,
+            icon: <HiOutlineTableCells size={16} />,
+            groups: customFieldGroups,
+            selectedCount: countCustomFieldFilters(selectedCustomFieldFilters),
+          },
+        ]
+      : []),
   ];
 
   const handleSelect = async (
