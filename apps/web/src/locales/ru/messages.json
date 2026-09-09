@@ -1,4 +1,86 @@
 {
+  "fbs2GN": {
+    "message": "Archive field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 638]
+    ],
+    "translation": "Архивировать поле"
+  },
+  "A3eIjV": {
+    "message": "Create field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 873]
+    ],
+    "translation": "Создать поле"
+  },
+  "mlqmxU": {
+    "message": "Create new field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 726]
+    ],
+    "translation": "Создать новое поле"
+  },
+  "zawWn4": {
+    "message": "Imported colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-colour-picker.tsx", 33]
+    ],
+    "translation": "Импортированный цвет"
+  },
+  "BQuR+c": {
+    "message": "Manage custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 407]
+    ],
+    "translation": "Управлять пользовательскими полями"
+  },
+  "07xRBp": {
+    "message": "No colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-colour-picker.tsx", 31],
+      ["src/views/board/components/custom-fields/custom-field-colour-picker.tsx", 38]
+    ],
+    "translation": "Без цвета"
+  },
+  "qUP8x5": {
+    "message": "Open a field to edit its settings.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 902]
+    ],
+    "translation": "Откройте поле, чтобы изменить его настройки."
+  },
+  "00Lxnh": {
+    "message": "Remove option",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 138]
+    ],
+    "translation": "Удалить вариант"
+  },
+  "1jnGvW": {
+    "message": "Shown on card front",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 386]
+    ],
+    "translation": "Показывается на карточке"
+  },
   "m16xKo": {
     "message": "Add",
     "placeholders": {},

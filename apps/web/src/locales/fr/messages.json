@@ -1,4 +1,86 @@
 {
+  "fbs2GN": {
+    "message": "Archive field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 638]
+    ],
+    "translation": "Archiver le champ"
+  },
+  "A3eIjV": {
+    "message": "Create field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 873]
+    ],
+    "translation": "Créer le champ"
+  },
+  "mlqmxU": {
+    "message": "Create new field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 726]
+    ],
+    "translation": "Créer un nouveau champ"
+  },
+  "zawWn4": {
+    "message": "Imported colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-colour-picker.tsx", 33]
+    ],
+    "translation": "Couleur importée"
+  },
+  "BQuR+c": {
+    "message": "Manage custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 407]
+    ],
+    "translation": "Gérer les champs personnalisés"
+  },
+  "07xRBp": {
+    "message": "No colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-colour-picker.tsx", 31],
+      ["src/views/board/components/custom-fields/custom-field-colour-picker.tsx", 38]
+    ],
+    "translation": "Aucune couleur"
+  },
+  "qUP8x5": {
+    "message": "Open a field to edit its settings.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 902]
+    ],
+    "translation": "Ouvrez un champ pour modifier ses paramètres."
+  },
+  "00Lxnh": {
+    "message": "Remove option",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 138]
+    ],
+    "translation": "Supprimer l’option"
+  },
+  "1jnGvW": {
+    "message": "Shown on card front",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 386]
+    ],
+    "translation": "Affiché sur la carte"
+  },
   "m16xKo": {
     "message": "Add",
     "placeholders": {},

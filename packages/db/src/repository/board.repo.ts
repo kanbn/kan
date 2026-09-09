@@ -1059,7 +1059,7 @@ export const createFromSnapshot = async (
               .returning({ id: customFieldOptions.id })
           : [];
 
-        if (args.sourceBoardId) {
+        if (args.sourceBoardId && sourceOptions.length > 0) {
           await tx.insert(customFieldOptionMappings).values(
             sourceOptions.map((sourceOption, optionIndex) => {
               const sourceOptionId = sourceOptionIds.get(sourceOption.publicId);
