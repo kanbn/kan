@@ -214,6 +214,7 @@ const Filters = ({
               label: field.name,
               icon: <HiOutlineTableCells size={16} />,
               items,
+              selectedCount: items.filter((item) => item.selected).length,
             },
           ]
         : [];
@@ -238,6 +239,7 @@ const Filters = ({
           label: field.name,
           icon: <HiOutlineTableCells size={16} />,
           items,
+          selectedCount: items.filter((item) => item.selected).length,
         },
       ];
     }
@@ -257,6 +259,7 @@ const Filters = ({
             value: summarizeScalarFilter(filter),
           },
         ],
+        selectedCount: filter ? 1 : 0,
       },
     ];
   });
