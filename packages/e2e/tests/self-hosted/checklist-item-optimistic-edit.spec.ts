@@ -62,15 +62,19 @@ test(
     releaseCreateItemRequest();
     await created;
 
+    const itemText = page.locator(".plain-text-editor").filter({
+      hasText: "baz bar",
+    });
+
     const updated = waitForTrpcMutation(page, "checklist.updateItem");
     await page.locator("#title").click();
-    await expect(page.getByText("baz bar", { exact: true })).toBeVisible();
+    await expect(itemText).toBeVisible();
     await expect(
       page.locator(".plain-text-editor").filter({ hasText: "foo bar" }),
     ).toHaveCount(0);
     await updated;
 
     await page.reload();
-    await expect(page.getByText("baz bar", { exact: true })).toBeVisible();
+    await expect(itemText).toBeVisible();
   },
 );
