@@ -7710,5 +7710,103 @@
     "comments": [],
     "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
     "translation": "URL do YouTube"
+  },
+  "t0qQZE": {
+    "message": "Confirm your password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 112]],
+    "translation": "Confirme sua senha"
+  },
+  "dDyAXD": {
+    "message": "Enter a new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 99]],
+    "translation": "Digite uma nova senha"
+  },
+  "GbjlZL": {
+    "message": "Forgot password | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 58]],
+    "translation": "Esqueceu a senha | kan.bn"
+  },
+  "UNMVei": {
+    "message": "Forgot password?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 436]],
+    "translation": "Esqueceu a senha?"
+  },
+  "glx6on": {
+    "message": "Forgot your password?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 68]],
+    "translation": "Esqueceu sua senha?"
+  },
+  "OSmrFy": {
+    "message": "Remembered your password? <0><1>Sign in</1></0>",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 111], ["src/views/auth/reset-password/index.tsx", 146]],
+    "translation": "Lembrou da sua senha? <0><1>Entrar</1></0>"
+  },
+  "RfwZxd": {
+    "message": "Reset password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 130]],
+    "translation": "Redefinir senha"
+  },
+  "S57AHL": {
+    "message": "Reset password | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 79]],
+    "translation": "Redefinir senha | kan.bn"
+  },
+  "eaUTwS": {
+    "message": "Send reset link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 103]],
+    "translation": "Enviar link de redefinição"
+  },
+  "+DlsTY": {
+    "message": "Set a new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 89]],
+    "translation": "Defina uma nova senha"
+  },
+  "kf83Ld": {
+    "message": "Something went wrong.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 49]],
+    "translation": "Algo deu errado."
+  },
+  "ROcqIU": {
+    "message": "This password reset link is invalid or has expired.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 65], ["src/views/auth/reset-password/index.tsx", 139]],
+    "translation": "Este link de redefinição de senha é inválido ou expirou."
+  },
+  "nB44E/": {
+    "message": "We've sent a password reset link to {emailSentTo}.",
+    "placeholders": {"emailSentTo": ["emailSentTo"]},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 73]],
+    "translation": "Enviamos um link de redefinição de senha para {emailSentTo}."
+  },
+  "A7TuZy": {
+    "message": "Your password has been reset successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 71]],
+    "translation": "Sua senha foi redefinida com sucesso."
   }
 }

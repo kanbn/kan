@@ -13037,5 +13037,185 @@
       ]
     ],
     "translation": "YouTube URL"
+  },
+  "t0qQZE": {
+    "message": "Confirm your password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        112
+      ]
+    ],
+    "translation": "Confirm your password"
+  },
+  "dDyAXD": {
+    "message": "Enter a new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        99
+      ]
+    ],
+    "translation": "Enter a new password"
+  },
+  "GbjlZL": {
+    "message": "Forgot password | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        58
+      ]
+    ],
+    "translation": "Forgot password | kan.bn"
+  },
+  "UNMVei": {
+    "message": "Forgot password?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/AuthForm.tsx",
+        436
+      ]
+    ],
+    "translation": "Forgot password?"
+  },
+  "glx6on": {
+    "message": "Forgot your password?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        68
+      ]
+    ],
+    "translation": "Forgot your password?"
+  },
+  "OSmrFy": {
+    "message": "Remembered your password? <0><1>Sign in</1></0>",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        111
+      ],
+      [
+        "src/views/auth/reset-password/index.tsx",
+        146
+      ]
+    ],
+    "translation": "Remembered your password? <0><1>Sign in</1></0>"
+  },
+  "RfwZxd": {
+    "message": "Reset password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        130
+      ]
+    ],
+    "translation": "Reset password"
+  },
+  "S57AHL": {
+    "message": "Reset password | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        79
+      ]
+    ],
+    "translation": "Reset password | kan.bn"
+  },
+  "eaUTwS": {
+    "message": "Send reset link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        103
+      ]
+    ],
+    "translation": "Send reset link"
+  },
+  "+DlsTY": {
+    "message": "Set a new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        89
+      ]
+    ],
+    "translation": "Set a new password"
+  },
+  "kf83Ld": {
+    "message": "Something went wrong.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        49
+      ]
+    ],
+    "translation": "Something went wrong."
+  },
+  "ROcqIU": {
+    "message": "This password reset link is invalid or has expired.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        65
+      ],
+      [
+        "src/views/auth/reset-password/index.tsx",
+        139
+      ]
+    ],
+    "translation": "This password reset link is invalid or has expired."
+  },
+  "nB44E/": {
+    "message": "We've sent a password reset link to {emailSentTo}.",
+    "placeholders": {
+      "emailSentTo": [
+        "emailSentTo"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        73
+      ]
+    ],
+    "translation": "We've sent a password reset link to {emailSentTo}."
+  },
+  "A7TuZy": {
+    "message": "Your password has been reset successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        71
+      ]
+    ],
+    "translation": "Your password has been reset successfully."
   }
 }
