@@ -69,6 +69,17 @@ export type CustomFieldValueInput =
   | { type: "checkbox"; value: boolean }
   | { type: "select"; optionPublicId: string };
 
+export interface CustomFieldDefinitionOptionDraft {
+  key: string;
+  publicId?: string;
+  name: string;
+  colourCode?: string | null;
+}
+
+export type CustomFieldDefinitionDefaultDraft =
+  | Exclude<CustomFieldValueInput, { type: "select" }>
+  | { type: "select"; optionKey: string };
+
 interface StoredCustomFieldValue {
   fieldType: CustomFieldType;
   optionId: number | null;
@@ -1008,6 +1019,147 @@ export const updateDefinition = async (
       ...result,
       defaultValue: await getDefaultValue(tx, field.id),
     };
+  });
+
+export const saveDefinition = async (
+  db: dbClient,
+  input: {
+    fieldPublicId: string;
+    name: string;
+    description: string | null;
+    placeholder: string | null;
+    sectionLabel: string | null;
+    placement: CustomFieldPlacement;
+    showOnCard: boolean;
+    defaultValue: CustomFieldDefinitionDefaultDraft | null;
+    options: CustomFieldDefinitionOptionDraft[];
+    actorUserId: string;
+  },
+) =>
+  db.transaction(async (tx) => {
+    const field = await getFieldContext(tx, input.fieldPublicId);
+    if (input.placeholder && field.type !== "text" && field.type !== "number")
+      throw new CustomFieldRepositoryError("FIELD_METADATA_INVALID");
+    if (field.type !== "select" && input.options.length > 0)
+      throw new CustomFieldRepositoryError("FIELD_OPTIONS_INVALID");
+    if (input.options.length > MAX_CUSTOM_FIELD_OPTIONS)
+      throw new CustomFieldRepositoryError("OPTION_LIMIT_REACHED");
+    if (
+      new Set(input.options.map(({ key }) => key)).size !== input.options.length
+    )
+      throw new CustomFieldRepositoryError("FIELD_OPTIONS_INVALID");
+
+    const existingOptions = await tx
+      .select({
+        id: customFieldOptions.id,
+        publicId: customFieldOptions.publicId,
+      })
+      .from(customFieldOptions)
+      .where(
+        and(
+          eq(customFieldOptions.customFieldId, field.id),
+          isNull(customFieldOptions.deletedAt),
+        ),
+      )
+      .for("update", { of: customFieldOptions });
+    const existingOptionsByPublicId = new Map(
+      existingOptions.map((option) => [option.publicId, option]),
+    );
+    const suppliedPublicIds = input.options.flatMap(({ publicId }) =>
+      publicId ? [publicId] : [],
+    );
+    if (
+      new Set(suppliedPublicIds).size !== suppliedPublicIds.length ||
+      suppliedPublicIds.some(
+        (publicId) => !existingOptionsByPublicId.has(publicId),
+      )
+    )
+      throw new CustomFieldRepositoryError("FIELD_OPTIONS_INVALID");
+
+    const removedOptions = existingOptions.filter(
+      ({ publicId }) => !suppliedPublicIds.includes(publicId),
+    );
+    if (removedOptions.length > 0)
+      await tx
+        .update(customFieldOptions)
+        .set({
+          deletedAt: new Date(),
+          deletedBy: input.actorUserId,
+          updatedAt: new Date(),
+          updatedBy: input.actorUserId,
+        })
+        .where(
+          inArray(
+            customFieldOptions.id,
+            removedOptions.map(({ id }) => id),
+          ),
+        );
+
+    const optionPublicIdsByKey = new Map<string, string>();
+    for (const [position, option] of input.options.entries()) {
+      if (option.publicId) {
+        await tx
+          .update(customFieldOptions)
+          .set({
+            name: option.name,
+            colourCode: option.colourCode ?? null,
+            position,
+            updatedAt: new Date(),
+            updatedBy: input.actorUserId,
+          })
+          .where(eq(customFieldOptions.publicId, option.publicId));
+        optionPublicIdsByKey.set(option.key, option.publicId);
+        continue;
+      }
+
+      const [createdOption] = await tx
+        .insert(customFieldOptions)
+        .values({
+          publicId: generateUID(),
+          customFieldId: field.id,
+          name: option.name,
+          colourCode: option.colourCode ?? null,
+          position,
+          createdBy: input.actorUserId,
+        })
+        .returning({ publicId: customFieldOptions.publicId });
+      if (!createdOption)
+        throw new CustomFieldRepositoryError("OPTION_NOT_FOUND");
+      optionPublicIdsByKey.set(option.key, createdOption.publicId);
+    }
+
+    const resolvedDefaultValue =
+      input.defaultValue?.type === "select"
+        ? (() => {
+            const optionPublicId = optionPublicIdsByKey.get(
+              input.defaultValue.optionKey,
+            );
+            if (!optionPublicId)
+              throw new CustomFieldRepositoryError("OPTION_NOT_FOUND");
+            return { type: "select", optionPublicId } as const;
+          })()
+        : input.defaultValue;
+    if (resolvedDefaultValue && resolvedDefaultValue.type !== field.type)
+      throw new CustomFieldRepositoryError("FIELD_TYPE_MISMATCH");
+
+    const [updatedField] = await tx
+      .update(customFields)
+      .set({
+        name: input.name,
+        description: input.description,
+        placeholder: input.placeholder,
+        sectionLabel: input.sectionLabel,
+        placement: input.placement,
+        showOnCard: input.showOnCard,
+        updatedAt: new Date(),
+        updatedBy: input.actorUserId,
+      })
+      .where(eq(customFields.id, field.id))
+      .returning({ publicId: customFields.publicId });
+    if (!updatedField) throw new CustomFieldRepositoryError("FIELD_NOT_FOUND");
+
+    await setDefaultValue(tx, field, resolvedDefaultValue, input.actorUserId);
+    return { success: true };
   });
 
 export const archiveDefinition = async (

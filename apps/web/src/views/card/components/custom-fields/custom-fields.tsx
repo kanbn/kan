@@ -2,6 +2,7 @@ import type { Locale } from "date-fns";
 import { t } from "@lingui/core/macro";
 import { format } from "date-fns";
 import { useEffect, useRef, useState } from "react";
+import { HiOutlinePencil } from "react-icons/hi2";
 
 import type { RouterOutputs } from "~/utils/api";
 import Button from "~/components/Button";
@@ -370,12 +371,14 @@ export function CustomFields({
   values,
   disabled,
   placement,
+  onManageDefinitions,
 }: {
   cardPublicId: string;
   definitions: Definition[];
   values: Value[];
   disabled: boolean;
   placement: Definition["placement"];
+  onManageDefinitions?: () => void;
 }) {
   const { dateLocale } = useLocalisation();
   const valuesByFieldId = new Map(
@@ -391,9 +394,22 @@ export function CustomFields({
 
   return (
     <section className="mt-6 border-t border-light-300 pt-5 dark:border-dark-300">
-      <h2 className="mb-4 text-sm font-medium text-neutral-900 dark:text-dark-1000">
-        {t`Custom fields`}
-      </h2>
+      <div className="mb-4 flex items-center gap-2">
+        <h2 className="text-sm font-medium text-neutral-900 dark:text-dark-1000">
+          {t`Custom fields`}
+        </h2>
+        {onManageDefinitions && (
+          <Button
+            type="button"
+            variant="ghost"
+            size="xs"
+            iconOnly
+            aria-label={t`Manage custom fields`}
+            onClick={onManageDefinitions}
+            iconLeft={<HiOutlinePencil className="h-4 w-4" />}
+          />
+        )}
+      </div>
       <div className="space-y-5">
         {sections.map((section, sectionIndex) => (
           <section

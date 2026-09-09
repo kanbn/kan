@@ -190,6 +190,89 @@ describe("custom field repository integration tests", () => {
     ).resolves.toHaveLength(1);
   });
 
+  it("atomically saves definition drafts and preserves archived option values", async () => {
+    const select = await createField("select", "Priority");
+    await customFieldRepo.setCardValue(db, {
+      cardPublicId,
+      fieldPublicId: select.publicId,
+      value: {
+        type: "select",
+        optionPublicId: select.options[1]!.publicId,
+      },
+      actorUserId,
+    });
+
+    await customFieldRepo.saveDefinition(db, {
+      fieldPublicId: select.publicId,
+      name: "Delivery priority",
+      description: "Used by delivery",
+      placeholder: null,
+      sectionLabel: "Planning",
+      placement: "main",
+      showOnCard: false,
+      defaultValue: { type: "select", optionKey: "new:urgent" },
+      options: [
+        {
+          key: select.options[0]!.publicId,
+          publicId: select.options[0]!.publicId,
+          name: "Low priority",
+          colourCode: null,
+        },
+        {
+          key: "new:urgent",
+          name: "Urgent",
+          colourCode: "#dc2626",
+        },
+      ],
+      actorUserId,
+    });
+
+    const [definition] = await customFieldRepo.listDefinitionsByBoardPublicId(
+      db,
+      boardPublicId,
+    );
+    const urgent = definition!.options.find(({ name }) => name === "Urgent");
+    expect(definition).toMatchObject({
+      name: "Delivery priority",
+      description: "Used by delivery",
+      sectionLabel: "Planning",
+      placement: "main",
+      showOnCard: false,
+      defaultValue: {
+        type: "select",
+        optionPublicId: urgent!.publicId,
+      },
+    });
+    expect(definition!.options).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: "Low priority",
+          colourCode: null,
+          position: 0,
+          deletedAt: null,
+        }),
+        expect.objectContaining({
+          name: "High",
+          deletedAt: expect.any(Date),
+        }),
+        expect.objectContaining({
+          name: "Urgent",
+          colourCode: "#dc2626",
+          position: 1,
+          deletedAt: null,
+        }),
+      ]),
+    );
+    await expect(
+      customFieldRepo.listValuesByCardPublicId(db, cardPublicId),
+    ).resolves.toEqual([
+      expect.objectContaining({
+        optionPublicId: select.options[1]!.publicId,
+        optionArchivedAt: expect.any(Date),
+      }),
+    ]);
+  });
+
   it("applies defaults and explicit custom field values when creating cards", async () => {
     const text = await createField("text", "Customer");
     const checkbox = await createField("checkbox", "Approved");
@@ -1137,6 +1220,60 @@ describe("custom field repository integration tests", () => {
     );
     expect(afterArchive!.customFields).toEqual([]);
     expect(afterArchive!.lists[0]!.cards[0]!.customFieldValues).toEqual([]);
+  });
+
+  it("clones fields without dropdown options from a board snapshot", async () => {
+    const textField = await createField("text", "Reference");
+    const [sourceBoard] = await db
+      .select({ id: boards.id, workspaceId: boards.workspaceId })
+      .from(boards)
+      .where(eq(boards.publicId, boardPublicId));
+    const sourceSnapshot = await boardRepo.getByPublicId(
+      db,
+      boardPublicId,
+      actorUserId,
+      {
+        members: [],
+        labels: [],
+        lists: [],
+        customFields: [],
+        dueDate: [],
+        type: "regular",
+      },
+    );
+
+    const clonedBoard = await boardRepo.createFromSnapshot(db, {
+      source: sourceSnapshot!,
+      workspaceId: sourceBoard!.workspaceId,
+      createdBy: actorUserId,
+      slug: "text-field-clone",
+      name: "Text field clone",
+      type: "template",
+      sourceBoardId: sourceBoard!.id,
+    });
+    const clonedSnapshot = await boardRepo.getByPublicId(
+      db,
+      clonedBoard.publicId,
+      actorUserId,
+      {
+        members: [],
+        labels: [],
+        lists: [],
+        customFields: [],
+        dueDate: [],
+        type: "template",
+      },
+    );
+
+    expect(clonedSnapshot!.customFields).toHaveLength(1);
+    expect(clonedSnapshot!.customFields[0]).toMatchObject({
+      name: "Reference",
+      type: "text",
+      options: [],
+    });
+    expect(clonedSnapshot!.customFields[0]!.publicId).not.toBe(
+      textField.publicId,
+    );
   });
 
   it("filters cards with OR within a field and AND between fields", async () => {
