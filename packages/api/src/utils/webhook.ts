@@ -10,6 +10,19 @@ const log = createLogger("webhook");
 
 export type WebhookEventType = WebhookEvent;
 
+type WebhookCardCover =
+  | {
+      kind: "colour";
+      colourCode: string;
+      size: "normal" | "full";
+    }
+  | {
+      kind: "attachment";
+      attachmentPublicId: string;
+      size: "normal" | "full";
+    }
+  | null;
+
 export interface WebhookPayload {
   event: WebhookEventType;
   timestamp: string;
@@ -20,6 +33,7 @@ export interface WebhookPayload {
       title: string;
       description?: string | null;
       dueDate?: string | null; // ISO string after JSON serialization
+      cover?: WebhookCardCover;
       listId: string;
       boardId: string;
     };
@@ -226,6 +240,7 @@ export function createCardWebhookPayload(
     title: string;
     description?: string | null;
     dueDate?: Date | null;
+    cover?: WebhookCardCover;
     listId: string;
   },
   context: {
@@ -249,6 +264,7 @@ export function createCardWebhookPayload(
         title: card.title,
         description: card.description,
         dueDate: card.dueDate?.toISOString() ?? null,
+        ...(card.cover !== undefined && { cover: card.cover }),
         listId: card.listId,
         boardId: context.boardId,
       },

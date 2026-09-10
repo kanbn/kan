@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { getTrelloLabelColour } from "./trello";
+import {
+  getTrelloCardCoverSource,
+  getTrelloCoverColour,
+  getTrelloLabelColour,
+  trelloCardFields,
+} from "./trello";
 
 describe("getTrelloLabelColour", () => {
   it.each([
@@ -47,5 +52,119 @@ describe("getTrelloLabelColour", () => {
 
   it("uses the default Kan colour for an unknown Trello colour", () => {
     expect(getTrelloLabelColour("future_colour")).toBe("#0d9488");
+  });
+});
+
+describe("getTrelloCoverColour", () => {
+  it("maps a named Trello cover colour", () => {
+    expect(getTrelloCoverColour("sky")).toBe("#6cc3e0");
+  });
+
+  it.each([null, undefined, "", "future_colour"])(
+    "does not invent a cover colour for %s",
+    (colour) => {
+      expect(getTrelloCoverColour(colour)).toBeNull();
+    },
+  );
+});
+
+describe("trelloCardFields", () => {
+  it("requests the current and legacy Trello cover fields", () => {
+    expect(trelloCardFields).toEqual(
+      expect.arrayContaining(["cover", "idAttachmentCover"]),
+    );
+  });
+});
+
+describe("getTrelloCardCoverSource", () => {
+  it("prefers the selected uploaded attachment", () => {
+    expect(
+      getTrelloCardCoverSource({
+        id: "card-1",
+        idAttachmentCover: "attachment-1",
+        attachments: [
+          {
+            id: "attachment-2",
+            name: "other.png",
+            url: "https://trello.com/1/cards/card-1/attachments/attachment-2/download/other.png",
+            bytes: 321,
+            isUpload: true,
+          },
+          {
+            id: "attachment-1",
+            name: "cover.png",
+            url: "https://trello.com/1/cards/card-1/attachments/attachment-1/download/cover.png",
+            bytes: 123,
+            isUpload: true,
+          },
+        ],
+        cover: {
+          idUploadedBackground: "background-1",
+          scaled: [
+            {
+              url: "https://trello-backgrounds.s3.amazonaws.com/background.jpg",
+              bytes: 456,
+              width: 1200,
+              height: 800,
+            },
+          ],
+        },
+      }),
+    ).toEqual({
+      kind: "attachment",
+      cardId: "card-1",
+      attachmentId: "attachment-1",
+      name: "cover.png",
+      url: "https://trello.com/1/cards/card-1/attachments/attachment-1/download/cover.png",
+      bytes: 123,
+    });
+  });
+
+  it("uses the largest uploaded-background rendition", () => {
+    expect(
+      getTrelloCardCoverSource({
+        id: "card-1",
+        cover: {
+          idUploadedBackground: "background-1",
+          scaled: [
+            {
+              url: "https://trello-backgrounds.s3.amazonaws.com/small.jpg",
+              bytes: 100,
+              width: 480,
+              height: 320,
+            },
+            {
+              url: "https://trello-backgrounds.s3.amazonaws.com/large.jpg",
+              bytes: 500,
+              width: 1920,
+              height: 1280,
+            },
+          ],
+        },
+      }),
+    ).toEqual({
+      kind: "uploaded-background",
+      backgroundId: "background-1",
+      name: "large.jpg",
+      url: "https://trello-backgrounds.s3.amazonaws.com/large.jpg",
+      bytes: 500,
+    });
+  });
+
+  it("does not import a non-uploaded attachment", () => {
+    expect(
+      getTrelloCardCoverSource({
+        id: "card-1",
+        idAttachmentCover: "attachment-1",
+        attachments: [
+          {
+            id: "attachment-1",
+            name: "external",
+            url: "https://example.com/image.png",
+            isUpload: false,
+          },
+        ],
+      }),
+    ).toBeNull();
   });
 });

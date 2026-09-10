@@ -32,6 +32,18 @@ export class SettingsPage {
     await updated;
   }
 
+  async setCardCoverDisplay(value: "prominent" | "subdued" | "hidden") {
+    const selector = this.page.locator("#card-cover-display-select");
+    await expect(selector).toBeEnabled();
+    await selector.selectOption(value);
+  }
+
+  async expectCardCoverDisplay(value: "prominent" | "subdued" | "hidden") {
+    await expect(this.page.locator("#card-cover-display-select")).toHaveValue(
+      value,
+    );
+  }
+
   private async fillAvailableWorkspaceSlug(slug: string) {
     await this.page.getByRole("textbox", { name: "Workspace URL" }).fill(slug);
     await expect(
