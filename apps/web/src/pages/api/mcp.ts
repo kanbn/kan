@@ -4,6 +4,11 @@ import { env } from "next-runtime-env";
 
 import type { KanClient } from "@kan/mcp/client";
 import { withApiLogging } from "@kan/api/utils/apiLogging";
+import { getApiToken } from "@kan/api/utils/apiToken";
+import {
+  getCachedPaidWorkspaceEligibility,
+  setCachedPaidWorkspaceEligibility,
+} from "@kan/api/utils/paidWorkspaceCache";
 import { createKanMcpServer } from "@kan/mcp";
 import { createKanClient, KanApiError } from "@kan/mcp/client";
 import { isPaidWorkspacePlan } from "@kan/shared/utils";
@@ -12,25 +17,27 @@ interface WorkspaceMembership {
   workspace: { plan: string };
 }
 
-function getApiToken(req: NextApiRequest): string | null {
-  const authorization = req.headers.authorization;
-  const bearerMatch = authorization?.match(/^Bearer (.+)$/i);
-  if (bearerMatch) {
-    return bearerMatch[1] ?? null;
+async function hasPaidWorkspace(
+  client: KanClient,
+  apiToken: string,
+): Promise<boolean> {
+  if (await getCachedPaidWorkspaceEligibility(apiToken)) {
+    return true;
   }
-  const apiKeyHeader = req.headers["x-api-key"];
-  if (typeof apiKeyHeader === "string") {
-    return apiKeyHeader;
-  }
-  return null;
-}
 
-async function hasPaidWorkspace(client: KanClient): Promise<boolean> {
   const memberships = await client.request<WorkspaceMembership[]>(
     "GET",
     "/workspaces",
   );
-  return memberships.some((m) => isPaidWorkspacePlan(m.workspace.plan));
+  const eligible = memberships.some((m) =>
+    isPaidWorkspacePlan(m.workspace.plan),
+  );
+
+  if (eligible) {
+    await setCachedPaidWorkspaceEligibility(apiToken);
+  }
+
+  return eligible;
 }
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -59,10 +66,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
     let eligible: boolean;
     try {
-      eligible = await hasPaidWorkspace(client);
+      eligible = await hasPaidWorkspace(client, apiToken);
     } catch (error) {
       if (error instanceof KanApiError && error.status === 401) {
         res.status(401).json({ error: "Invalid API key" });
+        return;
+      }
+      if (error instanceof KanApiError && error.status === 429) {
+        res.status(429).json({ error: error.message });
         return;
       }
       throw error;

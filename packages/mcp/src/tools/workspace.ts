@@ -144,7 +144,7 @@ export function registerWorkspaceTools(
     "Check whether a workspace slug is available",
     { slug: z.string().describe("Slug to check") },
     async ({ slug }) => {
-      const params = new URLSearchParams({ slug });
+      const params = new URLSearchParams({ workspaceSlug: slug });
       const data = await client.request(
         "GET",
         `/workspaces/check-slug-availability?${params}`,

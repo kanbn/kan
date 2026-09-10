@@ -72,3 +72,30 @@ describe("find_board_by_name", () => {
     });
   });
 });
+
+describe("update_board", () => {
+  it("sends the favorite flag as `favorite` in the update payload", async () => {
+    const tools = new Map<string, (...args: unknown[]) => unknown>();
+    const server = {
+      tool: (name: string, ...args: unknown[]) => {
+        tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
+      },
+    } as unknown as McpServer;
+    const request = vi.fn().mockResolvedValueOnce({ publicId: "board-123456" });
+    const client: KanClient = { request };
+
+    registerBoardTools(server, client);
+
+    await tools.get("update_board")?.({
+      boardPublicId: "board-123456",
+      isFavorite: true,
+    });
+
+    expect(request).toHaveBeenCalledWith("PUT", "/boards/board-123456", {
+      name: undefined,
+      slug: undefined,
+      visibility: undefined,
+      favorite: true,
+    });
+  });
+});

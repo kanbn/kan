@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { describe, expect, it, vi } from "vitest";
 
+const createNextApiContext = vi.fn().mockRejectedValue(new Error("no auth"));
 vi.mock("../trpc-context", () => ({
-  createNextApiContext: vi.fn().mockRejectedValue(new Error("no auth")),
+  createNextApiContext: (req: NextApiRequest) => createNextApiContext(req),
 }));
 
 const info = vi.fn();
@@ -94,5 +95,20 @@ describe("withApiLogging", () => {
       expect.objectContaining({ status: 200, error: "boom" }),
       "API error",
     );
+  });
+
+  it("looks up the session for every transport, including mcp", async () => {
+    createNextApiContext.mockClear();
+    const { req, res } = makeReqRes();
+    const handler = withApiLogging(
+      async (_req, res) => {
+        res.status(200).json({ ok: true });
+      },
+      { transport: "mcp" },
+    );
+
+    await handler(req, res);
+
+    expect(createNextApiContext).toHaveBeenCalledWith(req);
   });
 });

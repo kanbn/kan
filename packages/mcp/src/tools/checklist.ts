@@ -99,7 +99,7 @@ export function registerChecklistTools(
         `/checklists/items/${checklistItemPublicId}`,
         {
           title,
-          isCompleted,
+          completed: isCompleted,
           index,
         },
       );
