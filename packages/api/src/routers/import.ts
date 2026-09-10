@@ -5,6 +5,7 @@ import type { dbClient } from "@kan/db/client";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
+import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
 import * as importRepo from "@kan/db/repository/import.repo";
 import * as integrationsRepo from "@kan/db/repository/integration.repo";
@@ -18,15 +19,19 @@ import {
   normalizeDescription,
 } from "@kan/shared/utils";
 
+import type { TrelloCardCoverSource } from "../utils/trello-card-cover";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
+import { deleteCardCoverObjects } from "../utils/cardCoverPreview";
 import { decryptToken } from "../utils/encryption";
 import { assertPermission } from "../utils/permissions";
 import {
+  getTrelloCardCoverSource,
   getTrelloCoverColour,
   getTrelloLabelColour,
   trelloCardFields,
 } from "../utils/trello";
+import { importTrelloCardCover } from "../utils/trello-card-cover";
 import {
   decryptTrelloToken,
   encryptTrelloToken,
@@ -60,6 +65,60 @@ const getTrelloTokenForUser = async (db: dbClient, userId: string) => {
     });
 
   return token;
+};
+
+const materializeTrelloCardCover = async (args: {
+  db: dbClient;
+  bucket: string;
+  workspaceId: number;
+  card: { id: number; publicId: string };
+  source: TrelloCardCoverSource;
+  apiKey: string;
+  token: string;
+  userId: string;
+}) => {
+  const attachmentPublicId = generateUID();
+  const originalFilename =
+    args.source.name.trim().slice(0, 255) || "trello-cover";
+  const filename =
+    originalFilename.replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 200) ||
+    "trello-cover";
+  const s3Key = `${args.workspaceId}/${args.card.publicId}/${attachmentPublicId}-${filename}`;
+  const imported = await importTrelloCardCover({
+    bucket: args.bucket,
+    attachmentPublicId,
+    source: args.source,
+    targetKey: s3Key,
+    apiKey: args.apiKey,
+    token: args.token,
+  });
+
+  try {
+    await cardAttachmentRepo.createImportedCover(args.db, {
+      publicId: attachmentPublicId,
+      cardId: args.card.id,
+      filename,
+      originalFilename,
+      contentType: imported.contentType,
+      size: imported.size,
+      s3Key,
+      createdBy: args.userId,
+    });
+  } catch (error) {
+    const deletions = await deleteCardCoverObjects({
+      bucket: args.bucket,
+      attachmentPublicId,
+      s3Key,
+    });
+    deletions.forEach(({ key, result }) => {
+      if (result?.status === "rejected")
+        log.warn(
+          { err: result.reason, key, cardPublicId: args.card.publicId },
+          "Failed to roll back a Trello card cover import",
+        );
+    });
+    throw error;
+  }
 };
 
 export interface TrelloBoard {
@@ -149,9 +208,26 @@ interface TrelloCard {
   labels: TrelloLabel[];
   idChecklists: string[];
   checkItemStates: TrelloCheckItemState[];
+  idAttachmentCover?: string | null;
+  attachments?: {
+    id: string;
+    name: string;
+    url: string;
+    bytes?: number | null;
+    isUpload?: boolean;
+  }[];
   cover?: {
     color?: string | null;
     size?: "normal" | "full" | null;
+    idUploadedBackground?: string | null;
+    scaled?:
+      | {
+          url: string;
+          bytes?: number | null;
+          width: number;
+          height: number;
+        }[]
+      | null;
   };
 }
 
@@ -275,7 +351,7 @@ export const importRouter = createTRPCRouter({
 
         const importSingleBoard = async (boardId: string): Promise<void> => {
           const response = await fetch(
-            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&card_fields=${trelloCardFields.join(",")}&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
+            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&card_fields=${trelloCardFields.join(",")}&card_attachments=cover&card_attachment_fields=name,url,bytes,isUpload&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
           );
 
           if (!response.ok) {
@@ -303,6 +379,7 @@ export const importRouter = createTRPCRouter({
                   sourceId: _card.id,
                   name: _card.name,
                   description: _card.desc,
+                  coverSource: getTrelloCardCoverSource(_card),
                   coverColourCode: getTrelloCoverColour(_card.cover?.color),
                   coverSize:
                     _card.cover?.size === "full"
@@ -348,7 +425,14 @@ export const importRouter = createTRPCRouter({
             });
 
           let createdLabels: { id: number; sourceId: string }[] = [];
-          let createdCards: { id: number; sourceId: string }[] = [];
+          let createdCards: {
+            id: number;
+            publicId: string;
+            sourceId: string;
+          }[] = [];
+          const attachmentsBucket =
+            process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+          let missingAttachmentsBucketLogged = false;
 
           if (formattedData.labels.length) {
             const labelsInsert = formattedData.labels.map((label) => ({
@@ -407,9 +491,10 @@ export const importRouter = createTRPCRouter({
                 newCards
                   .map((card, index) => ({
                     id: card.id,
+                    publicId: cardsInsert[index]?.publicId ?? "",
                     sourceId: list.cards[index]?.sourceId ?? "",
                   }))
-                  .filter((card) => !!card.sourceId),
+                  .filter((card) => !!card.publicId && !!card.sourceId),
               );
 
               const activities = newCards.map((card) => ({
@@ -420,6 +505,55 @@ export const importRouter = createTRPCRouter({
 
               if (newCards.length > 0) {
                 await cardActivityRepo.bulkCreate(ctx.db, activities);
+              }
+
+              const cardsWithImageCovers = list.cards.filter(
+                (card) => card.coverSource,
+              );
+              if (cardsWithImageCovers.length && attachmentsBucket) {
+                const coverResults = await Promise.allSettled(
+                  cardsWithImageCovers.map(async (card) => {
+                    const createdCard = createdCards.find(
+                      (item) => item.sourceId === card.sourceId,
+                    );
+                    if (!createdCard || !card.coverSource) return;
+
+                    await materializeTrelloCardCover({
+                      db: ctx.db,
+                      bucket: attachmentsBucket,
+                      workspaceId: workspace.id,
+                      card: createdCard,
+                      source: card.coverSource,
+                      apiKey,
+                      token,
+                      userId,
+                    });
+                  }),
+                );
+
+                coverResults.forEach((result, index) => {
+                  if (result.status === "rejected")
+                    log.warn(
+                      {
+                        error:
+                          result.reason instanceof Error
+                            ? result.reason.message
+                            : String(result.reason),
+                        trelloBoardId: boardId,
+                        trelloCardId: cardsWithImageCovers[index]?.sourceId,
+                      },
+                      "Failed to import a Trello card cover image",
+                    );
+                });
+              } else if (
+                cardsWithImageCovers.length &&
+                !missingAttachmentsBucketLogged
+              ) {
+                log.warn(
+                  { trelloBoardId: boardId },
+                  "Skipped Trello card cover images because the attachments bucket is not configured",
+                );
+                missingAttachmentsBucketLogged = true;
               }
 
               const checklistsToCreate: {
