@@ -1,6 +1,7 @@
 import { randomUUID } from "crypto";
 import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
 import type { NextApiRequest } from "next";
+import { TRPCError } from "@trpc/server";
 
 import type { dbClient } from "@kan/db/client";
 import { initAuth } from "@kan/auth/server";
@@ -98,6 +99,17 @@ export const createNextApiContext = async (req: NextApiRequest) => {
   });
 };
 
+const isRateLimitedApiKeyError = (
+  error: unknown,
+): error is { body: { details?: { tryAgainIn?: number } } } => {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    (error as { name?: unknown }).name === "APIError" &&
+    (error as { body?: { code?: unknown } }).body?.code === "RATE_LIMITED"
+  );
+};
+
 export const createRESTContext = async ({ req }: CreateNextContextOptions) => {
   const headers = new Headers(req.headers as Record<string, string>);
   const auth = createAuthWithHeaders(baseAuth, headers);
@@ -106,6 +118,15 @@ export const createRESTContext = async ({ req }: CreateNextContextOptions) => {
   try {
     session = await auth.api.getSession();
   } catch (error) {
+    if (isRateLimitedApiKeyError(error)) {
+      const tryAgainIn = error.body.details?.tryAgainIn;
+      throw new TRPCError({
+        code: "TOO_MANY_REQUESTS",
+        message:
+          "Rate limit exceeded for this API key." +
+          (tryAgainIn ? ` Try again in ${Math.ceil(tryAgainIn / 1000)}s.` : ""),
+      });
+    }
     log.warn(
       { err: error },
       "Failed to get session, treating as unauthenticated",

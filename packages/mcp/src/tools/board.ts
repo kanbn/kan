@@ -96,7 +96,7 @@ export function registerBoardTools(server: McpServer, client: KanClient): void {
 
   server.tool(
     "get_board_by_slug",
-    "Get a board by workspace slug and board slug",
+    "Get a board by workspace slug and board slug. Only returns boards with public visibility.",
     {
       workspaceSlug: z.string().describe("The workspace slug"),
       boardSlug: z.string().describe("The board slug"),
@@ -166,7 +166,7 @@ export function registerBoardTools(server: McpServer, client: KanClient): void {
         name,
         slug,
         visibility,
-        isFavorite,
+        favorite: isFavorite,
       });
       return {
         content: [{ type: "text", text: JSON.stringify(data, null, 2) }],

@@ -46,6 +46,9 @@ const { env } = await import("next-runtime-env");
 const mockedEnv = vi.mocked(env);
 const { createKanClient } = await import("@kan/mcp/client");
 const mockedCreateKanClient = vi.mocked(createKanClient);
+const { clearPaidWorkspaceCache } = await import(
+  "@kan/api/utils/paidWorkspaceCache"
+);
 const handler = (await import("../pages/api/mcp.js")).default;
 
 function makeReqRes(headers: Record<string, string> = {}) {
@@ -74,6 +77,7 @@ describe("POST /api/mcp", () => {
       if (key === "NEXT_PUBLIC_BASE_URL") return "https://kan.bn";
       return undefined;
     });
+    clearPaidWorkspaceCache();
   });
 
   it("rejects a free-plan-only workspace on Kan Cloud with 403", async () => {
@@ -162,6 +166,48 @@ describe("POST /api/mcp", () => {
     await expect(handler(req, res)).resolves.not.toThrow();
 
     expect(statusSpy).toHaveBeenCalledWith(500);
+    expect(connect).not.toHaveBeenCalled();
+  });
+
+  it("skips the redundant plan check on a second call with the same token", async () => {
+    mockedEnv.mockImplementation((key: string) => {
+      if (key === "NEXT_PUBLIC_BASE_URL") return "https://kan.bn";
+      if (key === "NEXT_PUBLIC_KAN_ENV") return "cloud";
+      return undefined;
+    });
+    request.mockResolvedValueOnce([{ workspace: { plan: "team" } }]);
+
+    const first = makeReqRes();
+    await handler(first.req, first.res);
+    expect(request).toHaveBeenCalledTimes(1);
+    expect(connect).toHaveBeenCalledTimes(1);
+
+    const second = makeReqRes();
+    await handler(second.req, second.res);
+
+    expect(request).toHaveBeenCalledTimes(1);
+    expect(second.statusSpy).not.toHaveBeenCalledWith(403);
+    expect(connect).toHaveBeenCalledTimes(2);
+  });
+
+  it("returns a real 429 instead of a generic 500 when the plan check is rate limited", async () => {
+    mockedEnv.mockImplementation((key: string) => {
+      if (key === "NEXT_PUBLIC_BASE_URL") return "https://kan.bn";
+      if (key === "NEXT_PUBLIC_KAN_ENV") return "cloud";
+      return undefined;
+    });
+    const { KanApiError } = await import("@kan/mcp/client");
+    request.mockRejectedValueOnce(
+      new KanApiError(429, "Too Many Requests", {
+        message: "Too many requests, please try again later.",
+      }),
+    );
+
+    const { req, res, statusSpy } = makeReqRes();
+    await expect(handler(req, res)).resolves.not.toThrow();
+
+    expect(statusSpy).toHaveBeenCalledWith(429);
+    expect(statusSpy).not.toHaveBeenCalledWith(500);
     expect(connect).not.toHaveBeenCalled();
   });
 });

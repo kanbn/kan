@@ -95,3 +95,29 @@ describe("find_workspace_by_name", () => {
     );
   });
 });
+
+describe("check_workspace_slug_availability", () => {
+  it("queries the backend's `workspaceSlug` param", async () => {
+    const tools = new Map<string, (...args: unknown[]) => unknown>();
+    const server = {
+      tool: (name: string, ...args: unknown[]) => {
+        tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
+      },
+    } as unknown as McpServer;
+    const request = vi
+      .fn()
+      .mockResolvedValueOnce({ isAvailable: true, isReserved: false });
+    const client: KanClient = { request };
+
+    registerWorkspaceTools(server, client);
+
+    await tools.get("check_workspace_slug_availability")?.({
+      slug: "my-new-workspace",
+    });
+
+    expect(request).toHaveBeenCalledWith(
+      "GET",
+      "/workspaces/check-slug-availability?workspaceSlug=my-new-workspace",
+    );
+  });
+});

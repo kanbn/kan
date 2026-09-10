@@ -4,12 +4,12 @@ import { createOpenApiNextHandler } from "trpc-to-openapi";
 
 import { appRouter } from "@kan/api";
 import { createRESTContext } from "@kan/api/trpc-context";
-import { withRateLimit } from "@kan/api/utils/rateLimit";
+import { tokenOrIpIdentifier, withRateLimit } from "@kan/api/utils/rateLimit";
 
 import { env } from "~/env";
 
 export default withRateLimit(
-  { points: 100, duration: 60 },
+  { points: 600, duration: 60, identifier: tokenOrIpIdentifier },
   async (req: NextApiRequest, res: NextApiResponse) => {
     await cors(req, res);
 
