@@ -1,4 +1,16 @@
-import { and, asc, count, eq, gt, inArray, isNull, or } from "drizzle-orm";
+import {
+  and,
+  asc,
+  count,
+  desc,
+  eq,
+  gt,
+  inArray,
+  isNull,
+  lt,
+  or,
+} from "drizzle-orm";
+import { alias } from "drizzle-orm/pg-core";
 
 import type { dbClient } from "@kan/db/client";
 import type { ActivityType } from "@kan/db/schema";
@@ -106,11 +118,16 @@ export const getPaginatedActivities = async (
   cardId: number,
   options?: {
     limit?: number;
-    cursor?: Date; // createdAt cursor for pagination
+    cursor?: {
+      createdAt: Date;
+      publicId?: string;
+    };
+    order?: "oldest" | "newest";
   },
 ) => {
   const limit = options?.limit ?? 20;
   const cursor = options?.cursor;
+  const order = options?.order ?? "oldest";
 
   const validComments = await db
     .select({ id: comments.id })
@@ -118,6 +135,44 @@ export const getPaginatedActivities = async (
     .where(and(eq(comments.cardId, cardId), isNull(comments.deletedAt)));
 
   const validCommentIds = validComments.map((comment) => comment.id);
+
+  const cursorCondition = (() => {
+    if (!cursor) return undefined;
+
+    const cursorActivity = alias(cardActivities, "cursor_activity");
+    const cursorTimestamp = cursor.publicId
+      ? db
+          .select({ createdAt: cursorActivity.createdAt })
+          .from(cursorActivity)
+          .where(
+            and(
+              eq(cursorActivity.publicId, cursor.publicId),
+              eq(cursorActivity.cardId, cardId),
+            ),
+          )
+          .limit(1)
+      : cursor.createdAt;
+
+    return order === "newest"
+      ? cursor.publicId
+        ? or(
+            lt(cardActivities.createdAt, cursorTimestamp),
+            and(
+              eq(cardActivities.createdAt, cursorTimestamp),
+              lt(cardActivities.publicId, cursor.publicId),
+            ),
+          )
+        : lt(cardActivities.createdAt, cursor.createdAt)
+      : cursor.publicId
+        ? or(
+            gt(cardActivities.createdAt, cursorTimestamp),
+            and(
+              eq(cardActivities.createdAt, cursorTimestamp),
+              gt(cardActivities.publicId, cursor.publicId),
+            ),
+          )
+        : gt(cardActivities.createdAt, cursor.createdAt);
+  })();
 
   const activities = await db.query.cardActivities.findMany({
     columns: {
@@ -135,7 +190,7 @@ export const getPaginatedActivities = async (
     },
     where: and(
       eq(cardActivities.cardId, cardId),
-      cursor ? gt(cardActivities.createdAt, cursor) : undefined,
+      cursorCondition,
       or(
         isNull(cardActivities.commentId),
         inArray(cardActivities.commentId, validCommentIds),
@@ -202,13 +257,22 @@ export const getPaginatedActivities = async (
         },
       },
     },
-    orderBy: asc(cardActivities.createdAt), // required for merging and pagination
+    orderBy:
+      order === "newest"
+        ? [desc(cardActivities.createdAt), desc(cardActivities.publicId)]
+        : [asc(cardActivities.createdAt), asc(cardActivities.publicId)],
     limit: limit + 1, // fetch one extra to check if there are more
   });
 
   const hasMore = activities.length > limit;
   const items = activities.slice(0, limit);
-  const nextCursor = hasMore ? items[items.length - 1]?.createdAt : undefined;
+  const lastItem = hasMore ? items[items.length - 1] : undefined;
+  const nextCursor = lastItem
+    ? {
+        createdAt: lastItem.createdAt,
+        publicId: lastItem.publicId,
+      }
+    : undefined;
 
   return {
     activities: items,

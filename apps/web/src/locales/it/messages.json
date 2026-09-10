@@ -7710,5 +7710,19 @@
     "comments": [],
     "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
     "translation": "URL YouTube"
+  },
+  "0XmVWH": {
+    "message": "Show newest activity first",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivitySortOrderToggle.tsx", 17]],
+    "translation": "Mostra prima le attività più recenti"
+  },
+  "EL+7I2": {
+    "message": "Show oldest activity first",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/card/components/ActivitySortOrderToggle.tsx", 16]],
+    "translation": "Mostra prima le attività meno recenti"
   }
 }
