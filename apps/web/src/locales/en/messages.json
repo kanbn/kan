@@ -13037,5 +13037,89 @@
       ]
     ],
     "translation": "YouTube URL"
+  },
+  "sIpTuZ": {
+    "message": "Change background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 146],["src/views/board/components/BoardDropdown.tsx", 110]],
+    "translation": "Change background"
+  },
+  "jM7ASy": {
+    "message": "Choose a JPEG, PNG, WebP, GIF, or AVIF image.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 87]],
+    "translation": "Choose a JPEG, PNG, WebP, GIF, or AVIF image."
+  },
+  "SYb0Ub": {
+    "message": "Choose an image smaller than 50 MB.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 96]],
+    "translation": "Choose an image smaller than 50 MB."
+  },
+  "xHwgs0": {
+    "message": "Colours",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 172]],
+    "translation": "Colours"
+  },
+  "MnzgwU": {
+    "message": "Failed to upload the board background. Please try again.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 132]],
+    "translation": "Failed to upload the board background. Please try again."
+  },
+  "4HhvKN": {
+    "message": "Image is too large",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 95]],
+    "translation": "Image is too large"
+  },
+  "zawWn4": {
+    "message": "Imported colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 160]],
+    "translation": "Imported colour"
+  },
+  "ylbfBl": {
+    "message": "Remove background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 225]],
+    "translation": "Remove background"
+  },
+  "wBhT2m": {
+    "message": "Unable to update board background",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 59]],
+    "translation": "Unable to update board background"
+  },
+  "8a8jKE": {
+    "message": "Unsupported image",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 86]],
+    "translation": "Unsupported image"
+  },
+  "6MxxvO": {
+    "message": "Upload image",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 213]],
+    "translation": "Upload image"
+  },
+  "gANddk": {
+    "message": "Uploading…",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/BoardBackgroundForm.tsx", 213]],
+    "translation": "Uploading…"
   }
 }
