@@ -1,4 +1,14 @@
-import { and, asc, count, eq, gt, inArray, isNull, or } from "drizzle-orm";
+import {
+  and,
+  asc,
+  count,
+  eq,
+  gt,
+  inArray,
+  isNull,
+  notInArray,
+  or,
+} from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { ActivityType } from "@kan/db/schema";
@@ -101,16 +111,24 @@ export const bulkCreate = async (
   return results;
 };
 
+const COMMENT_TYPES = [
+  "card.updated.comment.added",
+  "card.updated.comment.updated",
+  "card.updated.comment.deleted",
+] as const;
+
 export const getPaginatedActivities = async (
   db: dbClient,
   cardId: number,
   options?: {
     limit?: number;
     cursor?: Date; // createdAt cursor for pagination
+    filter?: "all" | "activity" | "comments";
   },
 ) => {
   const limit = options?.limit ?? 20;
   const cursor = options?.cursor;
+  const filter = options?.filter ?? "all";
 
   const validComments = await db
     .select({ id: comments.id })
@@ -118,6 +136,13 @@ export const getPaginatedActivities = async (
     .where(and(eq(comments.cardId, cardId), isNull(comments.deletedAt)));
 
   const validCommentIds = validComments.map((comment) => comment.id);
+
+  const filterCondition =
+    filter === "comments"
+      ? inArray(cardActivities.type, [...COMMENT_TYPES])
+      : filter === "activity"
+        ? notInArray(cardActivities.type, [...COMMENT_TYPES])
+        : undefined;
 
   const activities = await db.query.cardActivities.findMany({
     columns: {
@@ -140,6 +165,7 @@ export const getPaginatedActivities = async (
         isNull(cardActivities.commentId),
         inArray(cardActivities.commentId, validCommentIds),
       ),
+      filterCondition,
     ),
     with: {
       fromList: {
