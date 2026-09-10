@@ -59,6 +59,44 @@ export const create = async (
   return result;
 };
 
+export const createImportedCover = async (
+  db: dbClient,
+  input: {
+    publicId: string;
+    cardId: number;
+    filename: string;
+    originalFilename: string;
+    contentType: string;
+    size: number;
+    s3Key: string;
+    createdBy: string;
+  },
+) =>
+  db.transaction(async (tx) => {
+    const [attachment] = await tx
+      .insert(cardAttachments)
+      .values(input)
+      .returning({
+        id: cardAttachments.id,
+        publicId: cardAttachments.publicId,
+      });
+
+    if (!attachment) throw new Error("Failed to create imported attachment");
+
+    const [card] = await tx
+      .update(cards)
+      .set({
+        coverAttachmentId: attachment.id,
+        coverColourCode: null,
+      })
+      .where(and(eq(cards.id, input.cardId), isNull(cards.deletedAt)))
+      .returning({ id: cards.id });
+
+    if (!card) throw new Error("Imported cover card was not found");
+
+    return attachment;
+  });
+
 export const getByPublicId = (db: dbClient, publicId: string) => {
   return db.query.cardAttachments.findFirst({
     where: eq(cardAttachments.publicId, publicId),
