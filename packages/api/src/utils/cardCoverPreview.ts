@@ -68,7 +68,7 @@ interface StoredObjectMetadata {
   contentType?: string;
 }
 
-interface CardCoverPreviewStorage {
+export interface CardCoverPreviewStorage {
   headObject: (
     bucket: string,
     key: string,
@@ -96,6 +96,30 @@ export const inspectStoredObject = async (
   storage: CardCoverPreviewStorage = createStorage(),
 ) => storage.headObject(bucket, key);
 
+export const getCardCoverPreviewKeys = (attachmentPublicId: string) =>
+  cardCoverPreviewWidths.map((width) => ({
+    width,
+    key: getCardCoverPreviewKey(attachmentPublicId, width),
+  }));
+
+export const deleteCardCoverObjects = async (args: {
+  bucket: string;
+  attachmentPublicId: string;
+  s3Key: string;
+  storage?: CardCoverPreviewStorage;
+}) => {
+  const storage = args.storage ?? createStorage();
+  const keys = [
+    args.s3Key,
+    ...getCardCoverPreviewKeys(args.attachmentPublicId).map(({ key }) => key),
+  ];
+  const results = await Promise.allSettled(
+    keys.map((key) => storage.deleteObject(args.bucket, key)),
+  );
+
+  return keys.map((key, index) => ({ key, result: results[index] }));
+};
+
 export const ensureCardCoverPreviews = async (args: {
   bucket: string;
   attachmentPublicId: string;
@@ -103,10 +127,7 @@ export const ensureCardCoverPreviews = async (args: {
   storage?: CardCoverPreviewStorage;
 }) => {
   const storage = args.storage ?? createStorage();
-  const previewKeys = cardCoverPreviewWidths.map((width) => ({
-    width,
-    key: getCardCoverPreviewKey(args.attachmentPublicId, width),
-  }));
+  const previewKeys = getCardCoverPreviewKeys(args.attachmentPublicId);
   let releasePreviewBuildSlot: (() => void) | undefined;
 
   try {
