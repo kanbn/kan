@@ -185,3 +185,68 @@ test(
     ).toHaveText("raw link");
   },
 );
+
+test(
+  "unsafe markdown and HTML are not rendered as executable content",
+  { tag: "@self-hosted" },
+  async ({ page }) => {
+    await page.addInitScript(() => {
+      (
+        window as typeof window & { __markdownSecurityTriggered?: boolean }
+      ).__markdownSecurityTriggered = false;
+    });
+    await setupCard(page);
+
+    const cardPublicId = page.url().split("/cards/")[1];
+    if (!cardPublicId) throw new Error("Could not resolve cardPublicId");
+
+    const response = await page.request.post("/api/trpc/card.update?batch=1", {
+      data: {
+        "0": {
+          json: {
+            cardPublicId,
+            description: [
+              "[safe link](https://example.com)",
+              "",
+              "[unsafe link](javascript:alert(1))",
+              "",
+              '<img src="x" onerror="window.__markdownSecurityTriggered = true">',
+              "",
+              '<svg onload="window.__markdownSecurityTriggered = true"></svg>',
+              "",
+              '<a href="javascript:alert(1)" onclick="window.__markdownSecurityTriggered = true">raw unsafe link</a>',
+              "",
+              "<script>window.__markdownSecurityTriggered = true</script>",
+            ].join("\n"),
+          },
+        },
+      },
+    });
+    expect(response.ok()).toBe(true);
+    await page.reload();
+
+    const description = page.locator('.tiptap[contenteditable="true"]').first();
+    const safeLink = description.locator('a[href="https://example.com"]');
+
+    await expect(safeLink).toHaveText("safe link");
+    await expect(safeLink).toHaveAttribute("target", "_blank");
+    await expect(safeLink).toHaveAttribute("rel", "noopener noreferrer");
+    await expect(description.locator("a")).toHaveCount(1);
+    await expect(description.locator("img,script,svg")).toHaveCount(0);
+    await expect(
+      description.locator("[onerror],[onload],[onclick]"),
+    ).toHaveCount(0);
+    await expect
+      .poll(() =>
+        page.evaluate(
+          () =>
+            (
+              window as typeof window & {
+                __markdownSecurityTriggered?: boolean;
+              }
+            ).__markdownSecurityTriggered,
+        ),
+      )
+      .toBe(false);
+  },
+);
