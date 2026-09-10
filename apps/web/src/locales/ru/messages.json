@@ -7710,5 +7710,103 @@
     "comments": [],
     "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
     "translation": "YouTube URL"
+  },
+  "t0qQZE": {
+    "message": "Confirm your password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 112]],
+    "translation": "Подтвердите пароль"
+  },
+  "dDyAXD": {
+    "message": "Enter a new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 99]],
+    "translation": "Введите новый пароль"
+  },
+  "GbjlZL": {
+    "message": "Forgot password | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 58]],
+    "translation": "Забыли пароль | kan.bn"
+  },
+  "UNMVei": {
+    "message": "Forgot password?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/AuthForm.tsx", 436]],
+    "translation": "Забыли пароль?"
+  },
+  "glx6on": {
+    "message": "Forgot your password?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 68]],
+    "translation": "Забыли пароль?"
+  },
+  "OSmrFy": {
+    "message": "Remembered your password? <0><1>Sign in</1></0>",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 111], ["src/views/auth/reset-password/index.tsx", 146]],
+    "translation": "Вспомнили пароль? <0><1>Войти</1></0>"
+  },
+  "RfwZxd": {
+    "message": "Reset password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 130]],
+    "translation": "Сбросить пароль"
+  },
+  "S57AHL": {
+    "message": "Reset password | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 79]],
+    "translation": "Сброс пароля | kan.bn"
+  },
+  "eaUTwS": {
+    "message": "Send reset link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 103]],
+    "translation": "Отправить ссылку для сброса"
+  },
+  "+DlsTY": {
+    "message": "Set a new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 89]],
+    "translation": "Установите новый пароль"
+  },
+  "kf83Ld": {
+    "message": "Something went wrong.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 49]],
+    "translation": "Что-то пошло не так."
+  },
+  "ROcqIU": {
+    "message": "This password reset link is invalid or has expired.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 65], ["src/views/auth/reset-password/index.tsx", 139]],
+    "translation": "Эта ссылка для сброса пароля недействительна или истекла."
+  },
+  "nB44E/": {
+    "message": "We've sent a password reset link to {emailSentTo}.",
+    "placeholders": {"emailSentTo": ["emailSentTo"]},
+    "comments": [],
+    "origin": [["src/views/auth/forgot-password/index.tsx", 73]],
+    "translation": "Мы отправили ссылку для сброса пароля на {emailSentTo}."
+  },
+  "A7TuZy": {
+    "message": "Your password has been reset successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/auth/reset-password/index.tsx", 71]],
+    "translation": "Ваш пароль был успешно сброшен."
   }
 }
