@@ -11,7 +11,7 @@ import { twMerge } from "tailwind-merge";
 interface Item {
   key: string;
   value: string;
-  selected: boolean;
+  selected?: boolean;
   leftIcon?: React.ReactNode;
 }
 
@@ -19,7 +19,8 @@ interface Group {
   key: string;
   label: string;
   icon: React.ReactNode;
-  items: Item[];
+  items?: Item[];
+  groups?: Group[];
   selectedCount?: number;
 }
 
@@ -59,11 +60,22 @@ export default function CheckboxDropdown({
   backLabel = "Back",
   footer,
 }: CheckboxDropdownProps) {
-  const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
+  const [selectedGroupPath, setSelectedGroupPath] = useState<string[]>([]);
 
-  const selectedGroupDetails = groups?.find(
-    (group) => group.key === selectedGroup,
-  );
+  const findGroup = (path: string[]) => {
+    let availableGroups = groups;
+    let selectedGroup: Group | undefined;
+
+    for (const key of path) {
+      selectedGroup = availableGroups?.find((group) => group.key === key);
+      if (!selectedGroup) return undefined;
+      availableGroups = selectedGroup.groups;
+    }
+
+    return selectedGroup;
+  };
+
+  const selectedGroupDetails = findGroup(selectedGroupPath);
 
   const menuSpacingClass = {
     sm: "top-[26px]",
@@ -78,7 +90,11 @@ export default function CheckboxDropdown({
       </span>
     ) : null;
 
-  const renderMenuItems = (items: Item[], groupKey: string | null) => (
+  const renderMenuItems = (
+    items: Item[],
+    groupKey: string | null,
+    close: () => void,
+  ) => (
     <>
       {items.length > 0
         ? items.map((item) => (
@@ -88,30 +104,60 @@ export default function CheckboxDropdown({
                 onClick={(e) => {
                   e.preventDefault();
                   handleSelect(groupKey, { key: item.key, value: item.value });
+                  if (item.selected === undefined) {
+                    setSelectedGroupPath([]);
+                    close();
+                  }
+                }}
+                onKeyDown={(event) => {
+                  if (
+                    item.selected !== undefined ||
+                    (event.key !== "Enter" && event.key !== " ")
+                  )
+                    return;
+                  event.preventDefault();
+                  event.stopPropagation();
+                  handleSelect(groupKey, {
+                    key: item.key,
+                    value: item.value,
+                  });
+                  setSelectedGroupPath([]);
+                  close();
                 }}
               >
-                <input
-                  id={item.key}
-                  name={item.key}
-                  type="checkbox"
-                  className="h-[14px] w-[14px] rounded bg-transparent"
-                  onClick={(event) => event.stopPropagation()}
-                  onChange={() =>
-                    handleSelect(groupKey, { key: item.key, value: item.value })
-                  }
-                  checked={item.selected}
-                />
+                {item.selected !== undefined && (
+                  <input
+                    id={item.key}
+                    name={item.key}
+                    type="checkbox"
+                    className="h-[14px] w-[14px] rounded bg-transparent"
+                    onClick={(event) => event.stopPropagation()}
+                    onChange={() =>
+                      handleSelect(groupKey, {
+                        key: item.key,
+                        value: item.value,
+                      })
+                    }
+                    checked={item.selected}
+                  />
+                )}
                 {item.leftIcon && (
                   <span className="ml-3 flex items-center">
                     {item.leftIcon}
                   </span>
                 )}
-                <label
-                  htmlFor={item.key}
-                  className="ml-3 text-[12px] text-dark-900"
-                >
-                  {item.value}
-                </label>
+                {item.selected === undefined ? (
+                  <span className="text-[12px] text-dark-900">
+                    {item.value}
+                  </span>
+                ) : (
+                  <label
+                    htmlFor={item.key}
+                    className="ml-3 text-[12px] text-dark-900"
+                  >
+                    {item.value}
+                  </label>
+                )}
                 {handleEdit && (
                   <button
                     type="button"
@@ -149,101 +195,111 @@ export default function CheckboxDropdown({
     </>
   );
 
+  const renderMenuGroups = (menuGroups: Group[]) =>
+    menuGroups.map((group) => (
+      <Menu.Item key={group.key}>
+        <div
+          className="flex items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300"
+          onClick={(event) => {
+            event.preventDefault();
+            setSelectedGroupPath([...selectedGroupPath, group.key]);
+          }}
+        >
+          <span className="mr-2 text-dark-900">{group.icon}</span>
+          <span className="pointer-events-none text-[12px] text-dark-900">
+            {group.label}
+          </span>
+          <span className="ml-auto flex items-center gap-2 text-dark-900">
+            {renderSelectedCount(group.selectedCount)}
+            <HiChevronRight size={14} aria-hidden="true" />
+          </span>
+        </div>
+      </Menu.Item>
+    ));
+
   return (
     <Menu
       as="div"
       className="relative flex w-full flex-wrap items-center text-left"
     >
-      <>
-        <Menu.Button
-          as={asChild ? "div" : undefined}
-          disabled={disabled}
-          aria-label={ariaLabel}
-          className="h-full w-full cursor-pointer focus-visible:outline-none disabled:cursor-not-allowed"
-        >
-          {children}
-        </Menu.Button>
-
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-          afterLeave={() => setSelectedGroup(null)}
-        >
-          <Menu.Items
-            className={twMerge(
-              "mt-2s absolute z-50 w-56 origin-top-left rounded-md border-[1px] border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-500 dark:bg-dark-200",
-              position === "left" ? "left-0" : "right-0",
-              menuSpacingClass[menuSpacing],
-            )}
+      {({ close }) => (
+        <>
+          <Menu.Button
+            as={asChild ? "div" : undefined}
+            disabled={disabled}
+            aria-label={ariaLabel}
+            className="h-full w-full cursor-pointer focus-visible:outline-none disabled:cursor-not-allowed"
           >
-            <div className="max-h-[350px] overflow-y-auto p-1">
-              {!selectedGroup ? (
-                <>
-                  {items && renderMenuItems(items, null)}
+            {children}
+          </Menu.Button>
 
-                  {groups?.map((group) => (
-                    <Menu.Item key={group.key}>
-                      <div
-                        className="flex items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setSelectedGroup(group.key);
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+            afterLeave={() => setSelectedGroupPath([])}
+          >
+            <Menu.Items
+              className={twMerge(
+                "mt-2s absolute z-50 w-56 origin-top-left rounded-md border-[1px] border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-500 dark:bg-dark-200",
+                position === "left" ? "left-0" : "right-0",
+                menuSpacingClass[menuSpacing],
+              )}
+            >
+              <div className="max-h-[350px] overflow-y-auto p-1">
+                {selectedGroupPath.length === 0 ? (
+                  <>
+                    {items && renderMenuItems(items, null, close)}
+                    {groups && renderMenuGroups(groups)}
+                  </>
+                ) : (
+                  <>
+                    <Menu.Item>
+                      <button
+                        type="button"
+                        className="flex w-full items-center rounded-[5px] p-2 text-dark-900 hover:bg-light-200 dark:hover:bg-dark-300"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setSelectedGroupPath((path) => path.slice(0, -1));
                         }}
                       >
-                        <span className="mr-2 text-dark-900">{group.icon}</span>
-                        <span className="pointer-events-none text-[12px] text-dark-900">
-                          {group.label}
+                        <span className="sr-only">{backLabel}</span>
+                        <HiChevronLeft size={14} aria-hidden="true" />
+                        <span className="ml-2 text-[12px] font-semibold">
+                          {selectedGroupDetails?.label}
                         </span>
-                        <span className="ml-auto flex items-center gap-2 text-dark-900">
-                          {renderSelectedCount(group.selectedCount)}
-                          <HiChevronRight size={14} aria-hidden="true" />
+                        <span className="ml-auto flex items-center">
+                          {renderSelectedCount(
+                            selectedGroupDetails?.selectedCount,
+                          )}
                         </span>
-                      </div>
+                      </button>
                     </Menu.Item>
-                  ))}
-                </>
-              ) : (
-                <>
-                  <Menu.Item>
-                    <button
-                      type="button"
-                      className="flex w-full items-center rounded-[5px] p-2 text-dark-900 hover:bg-light-200 dark:hover:bg-dark-300"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelectedGroup(null);
-                      }}
-                    >
-                      <span className="sr-only">{backLabel}</span>
-                      <HiChevronLeft size={14} aria-hidden="true" />
-                      <span className="ml-2 text-[12px] font-semibold">
-                        {selectedGroupDetails?.label}
-                      </span>
-                      <span className="ml-auto flex items-center">
-                        {renderSelectedCount(
-                          selectedGroupDetails?.selectedCount,
-                        )}
-                      </span>
-                    </button>
-                  </Menu.Item>
-                  <div className="my-1 border-t border-light-200 dark:border-dark-500" />
-                  {selectedGroupDetails?.items &&
-                    renderMenuItems(selectedGroupDetails.items, selectedGroup)}
-                </>
-              )}
-            </div>
-            {footer && (
-              <div className="border-t border-light-200 p-1 dark:border-dark-500">
-                <Menu.Item>{footer}</Menu.Item>
+                    <div className="my-1 border-t border-light-200 dark:border-dark-500" />
+                    {selectedGroupDetails?.items &&
+                      renderMenuItems(
+                        selectedGroupDetails.items,
+                        selectedGroupDetails.key,
+                        close,
+                      )}
+                    {selectedGroupDetails?.groups &&
+                      renderMenuGroups(selectedGroupDetails.groups)}
+                  </>
+                )}
               </div>
-            )}
-          </Menu.Items>
-        </Transition>
-      </>
+              {footer && (
+                <div className="border-t border-light-200 p-1 dark:border-dark-500">
+                  <Menu.Item>{footer}</Menu.Item>
+                </div>
+              )}
+            </Menu.Items>
+          </Transition>
+        </>
+      )}
     </Menu>
   );
 }

@@ -15,6 +15,7 @@ export const openApiDocument = generateOpenApiDocument(appRouter, {
     "Boards",
     "Lists",
     "Cards",
+    "Custom fields",
     "Labels",
     "Imports",
     "Integrations",

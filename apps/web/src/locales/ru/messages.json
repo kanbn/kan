@@ -1,4 +1,567 @@
 {
+  "fbs2GN": {
+    "message": "Archive field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 638]
+    ],
+    "translation": "Архивировать поле"
+  },
+  "A3eIjV": {
+    "message": "Create field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 873]
+    ],
+    "translation": "Создать поле"
+  },
+  "mlqmxU": {
+    "message": "Create new field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 726]
+    ],
+    "translation": "Создать новое поле"
+  },
+  "zawWn4": {
+    "message": "Imported colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-colour-picker.tsx", 33]
+    ],
+    "translation": "Импортированный цвет"
+  },
+  "BQuR+c": {
+    "message": "Manage custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 407]
+    ],
+    "translation": "Управлять пользовательскими полями"
+  },
+  "07xRBp": {
+    "message": "No colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-colour-picker.tsx", 31],
+      ["src/views/board/components/custom-fields/custom-field-colour-picker.tsx", 38]
+    ],
+    "translation": "Без цвета"
+  },
+  "qUP8x5": {
+    "message": "Open a field to edit its settings.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 902]
+    ],
+    "translation": "Откройте поле, чтобы изменить его настройки."
+  },
+  "00Lxnh": {
+    "message": "Remove option",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 138]
+    ],
+    "translation": "Удалить вариант"
+  },
+  "1jnGvW": {
+    "message": "Shown on card front",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 386]
+    ],
+    "translation": "Показывается на карточке"
+  },
+  "m16xKo": {
+    "message": "Add",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 365]
+    ],
+    "translation": "Добавить"
+  },
+  "Va3xJe": {
+    "message": "Add field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 490]
+    ],
+    "translation": "Добавить поле"
+  },
+  "B495Gs": {
+    "message": "Archive",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 220]
+    ],
+    "translation": "Архивировать"
+  },
+  "gbhDMT": {
+    "message": "Archive custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 186]
+    ],
+    "translation": "Архивировать пользовательское поле"
+  },
+  "8G7Zb9": {
+    "message": "Archive option",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 330]
+    ],
+    "translation": "Архивировать вариант"
+  },
+  "N/xzLE": {
+    "message": "Archive this field? Existing card values will be hidden but preserved.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 196]
+    ],
+    "translation": "Архивировать это поле? Существующие значения на карточках будут скрыты, но сохранены."
+  },
+  "ABZuOF": {
+    "message": "Archive this option? Existing card values will keep it until changed.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 340]
+    ],
+    "translation": "Архивировать этот вариант? Существующие значения в карточках сохранят его до изменения."
+  },
+  "yF2aJL": {
+    "message": "Archived options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 370]
+    ],
+    "translation": "Архивированные варианты"
+  },
+  "G1XxbZ": {
+    "message": "Checkbox",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 38]
+    ],
+    "translation": "Флажок"
+  },
+  "VSGGki": {
+    "message": "Checked",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-badges.tsx", 28],
+      ["src/views/board/components/Filters.tsx", 190],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 23],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 223]
+    ],
+    "translation": "Отмечено"
+  },
+  "IJ9AUi": {
+    "message": "Copy custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 279]
+    ],
+    "translation": "Копировать пользовательские поля"
+  },
+  "0eY3nD": {
+    "message": "Custom field name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 131]
+    ],
+    "translation": "Название пользовательского поля"
+  },
+  "oPwQt4": {
+    "message": "Custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/BoardDropdown.tsx", 110],
+      [
+        "src/views/board/components/custom-fields/custom-field-manager.tsx",
+        416
+      ],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 275]
+    ],
+    "translation": "Пользовательские поля"
+  },
+  "mYGY3B": {
+    "message": "Date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 36]
+    ],
+    "translation": "Дата"
+  },
+  "iKQcPM": {
+    "message": "Dropdown",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 40]
+    ],
+    "translation": "Выпадающий список"
+  },
+  "nrXDdR": {
+    "message": "Field name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 467]
+    ],
+    "translation": "Название поля"
+  },
+  "zXgopL": {
+    "message": "Field type",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 475]
+    ],
+    "translation": "Тип поля"
+  },
+  "GLQ7v9": {
+    "message": "Fields are available as soon as you create the first one.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 419]
+    ],
+    "translation": "Поля станут доступны сразу после создания первого."
+  },
+  "rOdFNG": {
+    "message": "Move field down",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 166]
+    ],
+    "translation": "Переместить поле вниз"
+  },
+  "Yls4DD": {
+    "message": "Move field up",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 149]
+    ],
+    "translation": "Переместить поле вверх"
+  },
+  "EyDEs6": {
+    "message": "Move option down",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 308]
+    ],
+    "translation": "Переместить вариант вниз"
+  },
+  "vL4DgO": {
+    "message": "Move option up",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 289]
+    ],
+    "translation": "Переместить вариант вверх"
+  },
+  "CwwBeU": {
+    "message": "New option",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 354]
+    ],
+    "translation": "Новый вариант"
+  },
+  "MTqQMG": {
+    "message": "Not set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 176],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 222]
+    ],
+    "translation": "Не задано"
+  },
+  "HptUxX": {
+    "message": "Number",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 34]
+    ],
+    "translation": "Число"
+  },
+  "7KcJ0c": {
+    "message": "Option colour",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 251]
+    ],
+    "translation": "Цвет варианта"
+  },
+  "I7idB7": {
+    "message": "Option name",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 262]
+    ],
+    "translation": "Название варианта"
+  },
+  "0zpgxV": {
+    "message": "Options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 244]
+    ],
+    "translation": "Варианты"
+  },
+  "dhRDON": {
+    "message": "Show on card front",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 228]
+    ],
+    "translation": "Показывать на лицевой стороне карточки"
+  },
+  "xeiujy": {
+    "message": "Text",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 32]
+    ],
+    "translation": "Текст"
+  },
+  "GShyvJ": {
+    "message": "This board has no custom fields yet.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 446]
+    ],
+    "translation": "На этой доске пока нет пользовательских полей."
+  },
+  "887Wwx": {
+    "message": "Unable to clear custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 97]
+    ],
+    "translation": "Не удалось очистить пользовательское поле"
+  },
+  "tMIe7G": {
+    "message": "Unable to create custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 405]
+    ],
+    "translation": "Не удалось создать пользовательское поле"
+  },
+  "d76KIX": {
+    "message": "Unable to update custom field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 75]
+    ],
+    "translation": "Не удалось обновить пользовательское поле"
+  },
+  "ecMXs+": {
+    "message": "Unable to update custom fields",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-manager.tsx", 81]
+    ],
+    "translation": "Не удалось обновить пользовательские поля"
+  },
+  "9nuvQ0": {
+    "message": "Unchecked",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-badges.tsx", 28],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 23],
+      ["src/views/card/components/custom-fields/custom-fields.tsx", 224]
+    ],
+    "translation": "Не отмечено"
+  },
+  "BA+tL2": {
+    "message": "Unchecked or not set",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/Filters.tsx", 191]],
+    "translation": "Не отмечено или не задано"
+  },
+  "NawEr2": {
+    "message": "After",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 186],
+      ["src/views/board/components/Filters.tsx", 182]
+    ],
+    "translation": "После"
+  }
+,
+  "DB8zMK": {
+    "message": "Apply",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 307]
+    ],
+    "translation": "Применить"
+  }
+,
+  "EmSrGB": {
+    "message": "Before",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 185],
+      ["src/views/board/components/Filters.tsx", 182]
+    ],
+    "translation": "До"
+  }
+,
+  "xCJdfg": {
+    "message": "Clear",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 289]
+    ],
+    "translation": "Очистить"
+  }
+,
+  "/5mghO": {
+    "message": "Contains",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 178],
+      ["src/views/board/components/Filters.tsx", 172]
+    ],
+    "translation": "Содержит"
+  }
+,
+  "f9yJNM": {
+    "message": "Equals",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 181],
+      ["src/views/board/components/Filters.tsx", 176]
+    ],
+    "translation": "Равно"
+  }
+,
+  "wP7Cju": {
+    "message": "Filter by value",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 213]
+    ],
+    "translation": "Фильтр по значению"
+  }
+,
+  "ejVYRQ": {
+    "message": "From",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 244],
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 247]
+    ],
+    "translation": "От"
+  }
+,
+  "tgPwON": {
+    "message": "Operator",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 224],
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 226]
+    ],
+    "translation": "Оператор"
+  }
+,
+  "6jAi8c": {
+    "message": "Range",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 182],
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 187]
+    ],
+    "translation": "Диапазон"
+  }
+,
+  "+9/nz4": {
+    "message": "Set filter",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/Filters.tsx", 166]
+    ],
+    "translation": "Задать фильтр"
+  }
+,
+  "/jQctM": {
+    "message": "To",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 265],
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 267]
+    ],
+    "translation": "До"
+  }
+,
+  "wMHvYH": {
+    "message": "Value",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 244],
+      ["src/views/board/components/custom-fields/custom-field-filter-panel.tsx", 247]
+    ],
+    "translation": "Значение"
+  }
+,
   "X0N0PA": {
     "message": " (edited)",
     "placeholders": {},
@@ -7710,5 +8273,103 @@
     "comments": [],
     "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
     "translation": "YouTube URL"
+  },
+  "TlEEts": {
+    "message": "Default value",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",334]],
+    "translation": "Значение по умолчанию"
+  },
+  "Nu4oKW": {
+    "message": "Description",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",308]],
+    "translation": "Описание"
+  },
+  "AoQvBa": {
+    "message": "Explain how this field should be used",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",313]],
+    "translation": "Объясните, как следует использовать это поле"
+  },
+  "YZsaTf": {
+    "message": "Field description (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",772]],
+    "translation": "Описание поля (необязательно)"
+  },
+  "jfPOyl": {
+    "message": "Hint shown in an empty field",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",326]],
+    "translation": "Подсказка в пустом поле"
+  },
+  "1GuE4N": {
+    "message": "Input placeholder (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",780]],
+    "translation": "Плейсхолдер (необязательно)"
+  },
+  "xJne3c": {
+    "message": "No default",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",341],["src/views/board/components/custom-fields/custom-field-manager.tsx",387],["src/views/board/components/custom-fields/custom-field-manager.tsx",420]],
+    "translation": "Без значения по умолчанию"
+  },
+  "hx1ePY": {
+    "message": "Placeholder",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",322]],
+    "translation": "Плейсхолдер"
+  },
+  "Ch2KQj": {
+    "message": "Main panel",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",321],["src/views/board/components/custom-fields/custom-field-manager.tsx",833]],
+    "translation": "Основная панель"
+  },
+  "q9gKtl": {
+    "message": "No section",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",329]],
+    "translation": "Без раздела"
+  },
+  "MFTZK8": {
+    "message": "Placement",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",308],["src/views/board/components/custom-fields/custom-field-manager.tsx",823]],
+    "translation": "Расположение"
+  },
+  "BhZ5PL": {
+    "message": "Section",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",325],["src/views/board/components/custom-fields/custom-field-manager.tsx",837]],
+    "translation": "Раздел"
+  },
+  "1IoHLw": {
+    "message": "Section name (optional)",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",841]],
+    "translation": "Название раздела (необязательно)"
+  },
+  "uWi2Q+": {
+    "message": "Sidebar",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/custom-fields/custom-field-manager.tsx",320],["src/views/board/components/custom-fields/custom-field-manager.tsx",832]],
+    "translation": "Боковая панель"
   }
 }

@@ -253,6 +253,34 @@
       "when": 1788209875712,
       "tag": "20260831205755_AddCardRelationIndexes",
       "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1788553158783,
+      "tag": "20260904201918_AddCustomFields",
+      "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1788597450108,
+      "tag": "20260905083730_AddCustomFieldMappings",
+      "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1788697474807,
+      "tag": "20260906122434_AddCustomFieldMetadataAndDefaults",
+      "breakpoints": true
+    },
+    {
+      "idx": 39,
+      "version": "7",
+      "when": 1788699430216,
+      "tag": "20260906125710_AddCustomFieldLayout",
+      "breakpoints": true
     }
   ]
 }

@@ -26,6 +26,14 @@ import {
 } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
+import type { CustomFieldValueInput } from "./custom-field.repo";
+import {
+  applyInitialCardValues,
+  getBoardProjection,
+} from "./custom-field.repo";
+
+type dbTransaction = Parameters<Parameters<dbClient["transaction"]>[0]>[0];
+
 export const getCount = async (db: dbClient) => {
   const result = await db
     .select({ count: count() })
@@ -45,6 +53,11 @@ export const create = async (
     workspaceId: number;
     position: "start" | "end";
     dueDate?: Date | null;
+    customFieldValues?: {
+      fieldPublicId: string;
+      value: CustomFieldValueInput | null;
+    }[];
+    applyCustomFieldDefaults?: boolean;
   },
 ) => {
   return db.transaction(async (tx) => {
@@ -122,6 +135,13 @@ export const create = async (
       type: "card.created",
       createdBy: cardInput.createdBy,
     });
+
+    if (cardInput.applyCustomFieldDefaults !== false)
+      await applyInitialCardValues(tx, {
+        cardId: result[0].id,
+        actorUserId: cardInput.createdBy,
+        values: cardInput.customFieldValues ?? [],
+      });
 
     const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
 
@@ -265,6 +285,7 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
         columns: {
           publicId: true,
           name: true,
+          boardId: true,
         },
       },
     },
@@ -691,8 +712,23 @@ export const getWithListAndMembersByPublicId = async (
 
   if (!card) return null;
 
+  const customFieldProjection = await getBoardProjection(
+    db,
+    card.list.board.publicId,
+    [card.publicId],
+  );
+
   const formattedResult = {
     ...card,
+    customFieldValues:
+      customFieldProjection.valuesByCardPublicId[card.publicId] ?? [],
+    list: {
+      ...card.list,
+      board: {
+        ...card.list.board,
+        customFields: customFieldProjection.definitions,
+      },
+    },
     labels: card.labels.map((label) => label.label),
     members: card.members.map((member) => member.member),
     activities: card.activities.filter(
@@ -709,6 +745,9 @@ export const reorder = async (
     newListId: number | undefined;
     newIndex: number | undefined;
     cardId: number;
+  },
+  options?: {
+    beforeReorder?: (transaction: dbTransaction) => Promise<void>;
   },
 ) => {
   return db.transaction(async (tx) => {
@@ -759,6 +798,8 @@ export const reorder = async (
       if (!newList)
         throw new Error(`List not found for public ID ${args.newListId}`);
     }
+
+    if (options?.beforeReorder) await options.beforeReorder(tx);
 
     let newIndex = args.newIndex;
 

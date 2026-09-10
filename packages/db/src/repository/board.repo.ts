@@ -13,23 +13,35 @@ import {
 } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
-import type { BoardVisibilityStatus } from "@kan/db/schema";
+import type { BoardVisibilityStatus, CustomFieldType } from "@kan/db/schema";
 import {
   boards,
   cardActivities,
   cardAttachments,
+  cardCustomFieldValues,
   cards,
   cardsToLabels,
   cardToWorkspaceMembers,
   checklistItems,
   checklists,
   comments,
+  customFieldDefaultValues,
+  customFieldMappings,
+  customFieldOptionMappings,
+  customFieldOptions,
+  customFields,
   labels,
   lists,
   userBoardFavorites,
   workspaceMembers,
 } from "@kan/db/schema";
 import { generateUID, normalizeDescription } from "@kan/shared/utils";
+
+import type { BoardCustomFieldFilter } from "./custom-field.repo";
+import {
+  getBoardProjection,
+  getCardPublicIdsMatchingFilters,
+} from "./custom-field.repo";
 
 export const getCount = async (db: dbClient) => {
   const result = await db
@@ -154,6 +166,7 @@ export const getByPublicId = async (
     members: string[];
     labels: string[];
     lists: string[];
+    customFields: BoardCustomFieldFilter[];
     dueDate: DueDateFilter[];
     type: "regular" | "template" | undefined;
   },
@@ -192,6 +205,12 @@ export const getByPublicId = async (
 
     cardIds = filteredCards.map((card) => card.publicId);
   }
+
+  const customFieldCardIds = await getCardPublicIdsMatchingFilters(
+    db,
+    { publicId: boardPublicId },
+    filters.customFields,
+  );
 
   const board = await db.query.boards.findFirst({
     columns: {
@@ -332,6 +351,9 @@ export const getByPublicId = async (
             where: and(
               cardIds.length > 0 ? inArray(cards.publicId, cardIds) : undefined,
               isNull(cards.deletedAt),
+              customFieldCardIds
+                ? inArray(cards.publicId, customFieldCardIds)
+                : undefined,
               buildDueDateWhere(filters.dueDate),
             ),
             orderBy: [asc(cards.index)],
@@ -363,14 +385,23 @@ export const getByPublicId = async (
 
   if (!board) return null;
 
+  const customFieldProjection = await getBoardProjection(
+    db,
+    board.publicId,
+    board.lists.flatMap((list) => list.cards.map((card) => card.publicId)),
+  );
+
   const formattedResult = {
     ...board,
+    customFields: customFieldProjection.definitions,
     favorite: board.userFavorites.length > 0,
     userFavorites: undefined,
     lists: board.lists.map((list) => ({
       ...list,
       cards: list.cards.map((card) => ({
         ...card,
+        customFieldValues:
+          customFieldProjection.valuesByCardPublicId[card.publicId] ?? [],
         labels: card.labels.map((label) => label.label),
         members: card.members
           .map((member) => member.member)
@@ -390,6 +421,7 @@ export const getBySlug = async (
     members: string[];
     labels: string[];
     lists: string[];
+    customFields: BoardCustomFieldFilter[];
     dueDate: DueDateFilter[];
   },
 ) => {
@@ -414,6 +446,12 @@ export const getBySlug = async (
 
     cardIds = filteredCards.map((card) => card.publicId);
   }
+
+  const customFieldCardIds = await getCardPublicIdsMatchingFilters(
+    db,
+    { slug: boardSlug, workspaceId },
+    filters.customFields,
+  );
 
   const board = await db.query.boards.findFirst({
     columns: {
@@ -508,6 +546,9 @@ export const getBySlug = async (
             where: and(
               cardIds.length > 0 ? inArray(cards.publicId, cardIds) : undefined,
               isNull(cards.deletedAt),
+              customFieldCardIds
+                ? inArray(cards.publicId, customFieldCardIds)
+                : undefined,
               buildDueDateWhere(filters.dueDate),
             ),
             orderBy: [asc(cards.index)],
@@ -540,12 +581,21 @@ export const getBySlug = async (
 
   if (!board) return null;
 
+  const customFieldProjection = await getBoardProjection(
+    db,
+    board.publicId,
+    board.lists.flatMap((list) => list.cards.map((card) => card.publicId)),
+  );
+
   const formattedResult = {
     ...board,
+    customFields: customFieldProjection.definitions,
     lists: board.lists.map((list) => ({
       ...list,
       cards: list.cards.map((card) => ({
         ...card,
+        customFieldValues:
+          customFieldProjection.valuesByCardPublicId[card.publicId] ?? [],
         labels: card.labels.map((label) => label.label),
       })),
     })),
@@ -774,6 +824,31 @@ export const createFromSnapshot = async (
   args: {
     source: {
       name: string;
+      customFields: {
+        publicId: string;
+        name: string;
+        description: string | null;
+        placeholder: string | null;
+        sectionLabel: string | null;
+        placement: "main" | "sidebar";
+        type: "text" | "number" | "date" | "checkbox" | "select";
+        position: number;
+        showOnCard: boolean;
+        defaultValue:
+          | { type: "text"; value: string }
+          | { type: "number"; value: string }
+          | { type: "date"; value: Date }
+          | { type: "checkbox"; value: boolean }
+          | { type: "select"; optionPublicId: string }
+          | null;
+        options: {
+          publicId: string;
+          name: string;
+          colourCode: string | null;
+          position: number;
+          isArchived: boolean;
+        }[];
+      }[];
       labels: { publicId: string; name: string; colourCode: string | null }[];
       lists: {
         name: string;
@@ -797,6 +872,15 @@ export const createFromSnapshot = async (
               completed: boolean;
               index: number;
             }[];
+          }[];
+          customFieldValues: {
+            fieldPublicId: string;
+            fieldType: "text" | "number" | "date" | "checkbox" | "select";
+            textValue: string | null;
+            numberValue: string | null;
+            dateValue: Date | null;
+            checkboxValue: boolean | null;
+            optionPublicId: string | null;
           }[];
         }[];
       }[];
@@ -857,6 +941,185 @@ export const createFromSnapshot = async (
       }
     }
 
+    // Custom field definitions and options
+    const customFieldMap = new Map<
+      string,
+      { id: number; type: CustomFieldType }
+    >();
+    const customFieldOptionMap = new Map<string, number>();
+    const srcCustomFields = [...args.source.customFields].sort(
+      (a, b) => a.position - b.position,
+    );
+
+    if (srcCustomFields.length > 0) {
+      const sourceFieldRows = args.sourceBoardId
+        ? await tx
+            .select({ id: customFields.id, publicId: customFields.publicId })
+            .from(customFields)
+            .where(
+              and(
+                eq(customFields.boardId, args.sourceBoardId),
+                inArray(
+                  customFields.publicId,
+                  srcCustomFields.map((field) => field.publicId),
+                ),
+              ),
+            )
+        : [];
+      const sourceFieldIds = new Map(
+        sourceFieldRows.map((field) => [field.publicId, field.id]),
+      );
+      const sourceOptionPublicIds = srcCustomFields.flatMap((field) =>
+        field.options.map((option) => option.publicId),
+      );
+      const sourceOptionRows =
+        args.sourceBoardId && sourceOptionPublicIds.length > 0
+          ? await tx
+              .select({
+                id: customFieldOptions.id,
+                publicId: customFieldOptions.publicId,
+              })
+              .from(customFieldOptions)
+              .innerJoin(
+                customFields,
+                eq(customFieldOptions.customFieldId, customFields.id),
+              )
+              .where(
+                and(
+                  eq(customFields.boardId, args.sourceBoardId),
+                  inArray(customFieldOptions.publicId, sourceOptionPublicIds),
+                ),
+              )
+          : [];
+      const sourceOptionIds = new Map(
+        sourceOptionRows.map((option) => [option.publicId, option.id]),
+      );
+      const insertedFields = await tx
+        .insert(customFields)
+        .values(
+          srcCustomFields.map((field) => ({
+            publicId: generateUID(),
+            boardId: newBoard.id,
+            name: field.name,
+            description: field.description,
+            placeholder: field.placeholder,
+            sectionLabel: field.sectionLabel,
+            placement: field.placement,
+            type: field.type,
+            position: field.position,
+            showOnCard: field.showOnCard,
+            createdBy: args.createdBy,
+          })),
+        )
+        .returning({ id: customFields.id, type: customFields.type });
+
+      if (args.sourceBoardId) {
+        await tx.insert(customFieldMappings).values(
+          srcCustomFields.map((sourceField, index) => {
+            const sourceFieldId = sourceFieldIds.get(sourceField.publicId);
+            if (sourceFieldId === undefined)
+              throw new Error("Failed to resolve source custom field");
+            const insertedField = insertedFields[index];
+            if (!insertedField)
+              throw new Error("Failed to create custom field");
+            return {
+              sourceFieldId,
+              targetBoardId: newBoard.id,
+              targetFieldId: insertedField.id,
+              createdBy: args.createdBy,
+            };
+          }),
+        );
+      }
+
+      for (const [index, sourceField] of srcCustomFields.entries()) {
+        const insertedField = insertedFields[index];
+        if (!insertedField) throw new Error("Failed to create custom field");
+        customFieldMap.set(sourceField.publicId, insertedField);
+
+        const sourceOptions = [...sourceField.options].sort(
+          (a, b) => a.position - b.position,
+        );
+        const insertedOptions = sourceOptions.length
+          ? await tx
+              .insert(customFieldOptions)
+              .values(
+                sourceOptions.map((option) => ({
+                  publicId: generateUID(),
+                  customFieldId: insertedField.id,
+                  name: option.name,
+                  colourCode: option.colourCode,
+                  position: option.position,
+                  createdBy: args.createdBy,
+                  ...(option.isArchived
+                    ? { deletedAt: new Date(), deletedBy: args.createdBy }
+                    : {}),
+                })),
+              )
+              .returning({ id: customFieldOptions.id })
+          : [];
+
+        if (args.sourceBoardId && sourceOptions.length > 0) {
+          await tx.insert(customFieldOptionMappings).values(
+            sourceOptions.map((sourceOption, optionIndex) => {
+              const sourceOptionId = sourceOptionIds.get(sourceOption.publicId);
+              if (sourceOptionId === undefined)
+                throw new Error("Failed to resolve source custom field option");
+              const insertedOption = insertedOptions[optionIndex];
+              if (!insertedOption)
+                throw new Error("Failed to create custom field option");
+              return {
+                sourceOptionId,
+                targetFieldId: insertedField.id,
+                targetOptionId: insertedOption.id,
+                createdBy: args.createdBy,
+              };
+            }),
+          );
+        }
+
+        for (const [optionIndex, sourceOption] of sourceOptions.entries()) {
+          const insertedOption = insertedOptions[optionIndex];
+          if (!insertedOption)
+            throw new Error("Failed to create custom field option");
+          customFieldOptionMap.set(sourceOption.publicId, insertedOption.id);
+        }
+
+        if (sourceField.defaultValue) {
+          const defaultValue = sourceField.defaultValue;
+          const columns = {
+            optionId: null as number | null,
+            textValue: null as string | null,
+            numberValue: null as string | null,
+            dateValue: null as Date | null,
+            checkboxValue: null as boolean | null,
+          };
+          if (defaultValue.type === "text")
+            columns.textValue = defaultValue.value;
+          if (defaultValue.type === "number")
+            columns.numberValue = defaultValue.value;
+          if (defaultValue.type === "date")
+            columns.dateValue = defaultValue.value;
+          if (defaultValue.type === "checkbox")
+            columns.checkboxValue = defaultValue.value;
+          if (defaultValue.type === "select") {
+            const optionId = customFieldOptionMap.get(
+              defaultValue.optionPublicId,
+            );
+            if (optionId === undefined)
+              throw new Error("Failed to map custom field default option");
+            columns.optionId = optionId;
+          }
+          await tx.insert(customFieldDefaultValues).values({
+            customFieldId: insertedField.id,
+            fieldType: defaultValue.type,
+            ...columns,
+            createdBy: args.createdBy,
+          });
+        }
+      }
+    }
+
     // Lists
     const listIndexToId = new Map<number, number>();
     const srcLists = [...args.source.lists].sort((a, b) => a.index - b.index);
@@ -897,6 +1160,33 @@ export const createFromSnapshot = async (
           .returning({ id: cards.id });
 
         if (!createdCard) throw new Error("Failed to create card");
+
+        if (card.customFieldValues.length > 0) {
+          const values = card.customFieldValues.map((value) => {
+            const targetField = customFieldMap.get(value.fieldPublicId);
+            if (!targetField || targetField.type !== value.fieldType)
+              throw new Error("Failed to map custom field value");
+            const optionId = value.optionPublicId
+              ? customFieldOptionMap.get(value.optionPublicId)
+              : undefined;
+            if (value.fieldType === "select" && optionId === undefined)
+              throw new Error("Failed to map custom field option value");
+
+            return {
+              publicId: generateUID(),
+              cardId: createdCard.id,
+              customFieldId: targetField.id,
+              fieldType: value.fieldType,
+              optionId: optionId ?? null,
+              textValue: value.textValue,
+              numberValue: value.numberValue,
+              dateValue: value.dateValue,
+              checkboxValue: value.checkboxValue,
+              createdBy: args.createdBy,
+            };
+          });
+          await tx.insert(cardCustomFieldValues).values(values);
+        }
 
         // Create card.created activity
         await tx.insert(cardActivities).values({
