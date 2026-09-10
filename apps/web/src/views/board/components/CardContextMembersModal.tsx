@@ -1,9 +1,9 @@
 import { t } from "@lingui/core/macro";
 
+import Avatar from "~/components/Avatar";
 import { useModal } from "~/providers/modal";
 import { api } from "~/utils/api";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
-import Avatar from "~/components/Avatar";
 import MemberSelector from "~/views/card/components/MemberSelector";
 
 export function CardContextMembersModal() {
@@ -18,29 +18,49 @@ export function CardContextMembersModal() {
   const workspaceMembers = board?.workspace?.members ?? [];
   const selectedMembers = card?.members ?? [];
 
-  const formattedMembers = workspaceMembers.map((member) => {
+  const formattedMembers = workspaceMembers.flatMap((member) => {
     const isSelected = selectedMembers.some(
       (m) => m.publicId === member.publicId,
     );
-    return {
-      key: member.publicId,
-      value: formatMemberDisplayName(
-        member.user?.name ?? null,
-        member.user?.email ?? member.email,
-      ),
-      imageUrl: member.user?.image ? getAvatarUrl(member.user.image) : undefined,
-      selected: isSelected,
-      leftIcon: (
-        <Avatar
-          size="xs"
-          name={member.user?.name ?? ""}
-          imageUrl={
-            member.user?.image ? getAvatarUrl(member.user.image) : undefined
-          }
-          email={member.user?.email ?? member.email}
-        />
-      ),
-    };
+
+    if (member.status === "paused" && !isSelected) return [];
+
+    const displayName = formatMemberDisplayName(
+      member.user?.name ?? null,
+      member.user?.email ?? member.email,
+    );
+
+    return [
+      {
+        key: member.publicId,
+        value:
+          member.status === "paused"
+            ? `${displayName} (${t`Paused`})`
+            : displayName,
+        imageUrl: member.user?.image
+          ? getAvatarUrl(member.user.image)
+          : undefined,
+        email: member.user?.email ?? member.email,
+        userId: member.user?.id ?? null,
+        name: member.user?.name ?? null,
+        status: member.status,
+        selected: isSelected,
+        leftIcon: (
+          <span
+            className={member.status === "paused" ? "opacity-50" : undefined}
+          >
+            <Avatar
+              size="xs"
+              name={member.user?.name ?? ""}
+              imageUrl={
+                member.user?.image ? getAvatarUrl(member.user.image) : undefined
+              }
+              email={member.user?.email ?? member.email}
+            />
+          </span>
+        ),
+      },
+    ];
   });
 
   if (!cardPublicId) return null;

@@ -244,25 +244,30 @@ export function NewCardForm({
       selected: list.publicId === watch("listPublicId"),
     })) ?? [];
 
-  const formattedMembers =
-    boardData?.workspace.members.map((member) => ({
-      key: member.publicId,
-      value: formatMemberDisplayName(
-        member.user?.name ?? null,
-        member.user?.email ?? member.email,
-      ),
-      selected: memberPublicIds.includes(member.publicId),
-      leftIcon: (
-        <Avatar
-          size="xs"
-          name={member.user?.name ?? ""}
-          imageUrl={
-            member.user?.image ? getAvatarUrl(member.user.image) : undefined
-          }
-          email={member.user?.email ?? member.email}
-        />
-      ),
-    })) ?? [];
+  const assignableMembers =
+    boardData?.workspace.members.filter(
+      (member) => member.status !== "paused",
+    ) ?? [];
+
+  const formattedMembers = assignableMembers.map((member) => ({
+    key: member.publicId,
+    value: formatMemberDisplayName(
+      member.user?.name ?? null,
+      member.user?.email ?? member.email,
+    ),
+    selected: memberPublicIds.includes(member.publicId),
+    status: member.status,
+    leftIcon: (
+      <Avatar
+        size="xs"
+        name={member.user?.name ?? ""}
+        imageUrl={
+          member.user?.image ? getAvatarUrl(member.user.image) : undefined
+        }
+        email={member.user?.email ?? member.email}
+      />
+    ),
+  }));
 
   const addFiles = (files: File[]) => {
     if (files.length === 0) return;
@@ -439,21 +444,19 @@ export function NewCardForm({
                 setValue("description", value);
                 saveFormState({ ...formState, description: value });
               }}
-              workspaceMembers={
-                boardData?.workspace.members.map(
-                  (member): WorkspaceMember => ({
-                    publicId: member.publicId,
-                    email: member.email,
-                    user: member.user
-                      ? {
-                          id: member.publicId,
-                          name: member.user.name,
-                          image: member.user.image ?? null,
-                        }
-                      : null,
-                  }),
-                ) ?? []
-              }
+              workspaceMembers={assignableMembers.map(
+                (member): WorkspaceMember => ({
+                  publicId: member.publicId,
+                  email: member.email,
+                  user: member.user
+                    ? {
+                        id: member.publicId,
+                        name: member.user.name,
+                        image: member.user.image ?? null,
+                      }
+                    : null,
+                }),
+              )}
               enableYouTubeEmbed={false}
             />
           </div>
