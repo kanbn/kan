@@ -5,12 +5,20 @@ import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import { generateUID } from "@kan/shared/utils";
+import {
+  deleteObject,
+  generateUID,
+  generateUploadUrl,
+} from "@kan/shared/utils";
 
-import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { attachmentConfirmResponseSchema } from "../schemas";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
+import {
+  cardCoverPreviewWidths,
+  getCardCoverPreviewKey,
+  inspectStoredObject,
+} from "../utils/cardCoverPreview";
 import { assertPermission } from "../utils/permissions";
-import { deleteObject, generateUploadUrl } from "@kan/shared/utils";
 
 export const attachmentRouter = createTRPCRouter({
   generateUploadUrl: protectedProcedure
@@ -104,11 +112,14 @@ export const attachmentRouter = createTRPCRouter({
     .input(
       z.object({
         cardPublicId: z.string().min(12),
-        s3Key: z.string(),
-        filename: z.string(),
-        originalFilename: z.string(),
-        contentType: z.string(),
-        size: z.number().positive(),
+        s3Key: z.string().min(1).max(500),
+        filename: z.string().min(1).max(255),
+        originalFilename: z.string().min(1).max(255),
+        contentType: z.string().min(1).max(100),
+        size: z
+          .number()
+          .positive()
+          .max(50 * 1024 * 1024),
       }),
     )
     .output(attachmentConfirmResponseSchema)
@@ -133,11 +144,57 @@ export const attachmentRouter = createTRPCRouter({
         });
       await assertPermission(ctx.db, userId, card.workspaceId, "card:edit");
 
+      const workspace = await workspaceRepo.getById(ctx.db, card.workspaceId);
+      if (!workspace)
+        throw new TRPCError({
+          message: "Workspace not found",
+          code: "NOT_FOUND",
+        });
+
+      const expectedKeyPrefix = `${workspace.publicId}/${input.cardPublicId}/`;
+      const keySuffix = input.s3Key.slice(expectedKeyPrefix.length);
+      if (
+        !input.s3Key.startsWith(expectedKeyPrefix) ||
+        !keySuffix ||
+        keySuffix.includes("/")
+      )
+        throw new TRPCError({
+          message: "Attachment key does not belong to this card upload",
+          code: "BAD_REQUEST",
+        });
+
+      const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+      if (!bucket)
+        throw new TRPCError({
+          message: "Attachments bucket not configured",
+          code: "INTERNAL_SERVER_ERROR",
+        });
+
+      const storedObject = await inspectStoredObject(bucket, input.s3Key);
+      if (!storedObject)
+        throw new TRPCError({
+          message: "Uploaded attachment object not found",
+          code: "BAD_REQUEST",
+        });
+
+      if (storedObject.contentLength !== input.size)
+        throw new TRPCError({
+          message: "Uploaded attachment size does not match confirmation",
+          code: "BAD_REQUEST",
+        });
+
+      const contentType = storedObject.contentType ?? input.contentType;
+      if (contentType.length > 100)
+        throw new TRPCError({
+          message: "Uploaded attachment content type is too long",
+          code: "BAD_REQUEST",
+        });
+
       const attachment = await cardAttachmentRepo.create(ctx.db, {
         cardId: card.id,
         filename: input.filename,
         originalFilename: input.originalFilename,
-        contentType: input.contentType,
+        contentType,
         size: input.size,
         s3Key: input.s3Key,
         createdBy: userId,
@@ -196,30 +253,41 @@ export const attachmentRouter = createTRPCRouter({
       const workspaceId = attachment.card.list.board.workspaceId;
       await assertPermission(ctx.db, userId, workspaceId, "card:edit");
 
+      const deletedAttachment = await cardAttachmentRepo.softDeleteWithActivity(
+        ctx.db,
+        {
+          attachmentId: attachment.id,
+          cardId: attachment.cardId,
+          createdBy: userId,
+        },
+      );
+
+      if (!deletedAttachment)
+        throw new TRPCError({
+          message: `Attachment with public ID ${input.attachmentPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
       const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
       if (bucket) {
-        try {
-          await deleteObject(bucket, attachment.s3Key);
-        } catch (error) {
-          console.error(
-            `Failed to delete attachment from S3: ${attachment.s3Key}`,
-            error,
-          );
-        }
+        const keys = [
+          deletedAttachment.s3Key,
+          ...cardCoverPreviewWidths.map((width) =>
+            getCardCoverPreviewKey(deletedAttachment.publicId, width),
+          ),
+        ];
+        const deletions = await Promise.allSettled(
+          keys.map((key) => deleteObject(bucket, key)),
+        );
+
+        deletions.forEach((result, index) => {
+          if (result.status === "rejected")
+            console.error(
+              `Failed to delete attachment object from S3: ${keys[index]}`,
+              result.reason,
+            );
+        });
       }
-
-      await cardAttachmentRepo.softDelete(ctx.db, {
-        attachmentId: attachment.id,
-        deletedAt: new Date(),
-      });
-
-      await cardActivityRepo.create(ctx.db, {
-        type: "card.updated.attachment.removed",
-        cardId: attachment.cardId,
-        attachmentId: attachment.id,
-        fromTitle: attachment.originalFilename,
-        createdBy: userId,
-      });
 
       return { success: true };
     }),

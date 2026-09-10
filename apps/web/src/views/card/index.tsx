@@ -28,6 +28,8 @@ import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmatio
 import ActivityList from "./components/ActivityList";
 import { AttachmentThumbnails } from "./components/AttachmentThumbnails";
 import { AttachmentUpload } from "./components/AttachmentUpload";
+import { CardCoverBanner } from "./components/CardCoverBanner";
+import { CardCoverSelector } from "./components/CardCoverSelector";
 import Checklists from "./components/Checklists";
 import { DeleteCardConfirmation } from "./components/DeleteCardConfirmation";
 import { DeleteChecklistConfirmation } from "./components/DeleteChecklistConfirmation";
@@ -158,6 +160,17 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           disabled={!canEdit}
         />
       </div>
+      {canEdit && (
+        <div className="mb-4 flex w-full flex-row">
+          <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`Cover`}</p>
+          <CardCoverSelector
+            cardPublicId={cardId ?? ""}
+            cover={card?.cover}
+            attachments={card?.attachments}
+            isLoading={!card}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -388,6 +401,12 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
         <div className="scrollbar-thumb-rounded-[4px] scrollbar-track-rounded-[4px] w-full flex-1 overflow-y-auto scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 hover:scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 dark:hover:scrollbar-thumb-dark-300">
           <div className="p-auto mx-auto flex h-full w-full max-w-[800px] flex-col">
             <div className="p-6 md:p-8">
+              {card?.cover && (
+                <CardCoverBanner
+                  cover={card.cover}
+                  boardPublicId={card.list.board.publicId}
+                />
+              )}
               <div className="mb-8 md:mt-4">
                 {!card && isLoading && (
                   <div className="flex space-x-2">

@@ -97,6 +97,47 @@ export class CardPage {
     await uploaded;
   }
 
+  private coverSelectorTrigger() {
+    return this.page.getByRole("button", { name: "Card cover" });
+  }
+
+  async openCoverSelector() {
+    const trigger = this.coverSelectorTrigger();
+    if ((await trigger.getAttribute("aria-expanded")) !== "true") {
+      await trigger.click();
+    }
+  }
+
+  async closeCoverSelector() {
+    const trigger = this.coverSelectorTrigger();
+    if ((await trigger.getAttribute("aria-expanded")) === "true") {
+      await trigger
+        .locator("..")
+        .locator("div.fixed.inset-0")
+        .click({ position: { x: 1, y: 1 } });
+    }
+  }
+
+  async uploadCover(filePath: string) {
+    await this.openCoverSelector();
+
+    const fileChooser = this.page.waitForEvent("filechooser");
+    const uploaded = waitForResponsePath(this.page, "/api/upload/attachment");
+    const updated = waitForTrpcMutation(this.page, "card.updateCover");
+    await this.page.getByRole("button", { name: "Upload image" }).click();
+    await (await fileChooser).setFiles(filePath);
+    await uploaded;
+    await updated;
+  }
+
+  async setCoverSize(size: "Normal" | "Full") {
+    await this.openCoverSelector();
+
+    const updated = waitForTrpcMutation(this.page, "card.updateCover");
+    await this.page.getByRole("button", { name: size, exact: true }).click();
+    await updated;
+  }
+
   async deleteAttachment(filename: string) {
     const deleted = waitForTrpcMutation(this.page, "attachment.delete");
     await this.page.getByRole("button", { name: `Delete ${filename}` }).click();

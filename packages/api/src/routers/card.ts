@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
+import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import * as cardCommentRepo from "@kan/db/repository/cardComment.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
@@ -15,8 +16,10 @@ import {
 
 import {
   activityItemSchema,
+  cardCoverSizeSchema,
   cardCreateResponseSchema,
   cardDetailSchema,
+  cardUpdateCoverResponseSchema,
   cardUpdateResponseSchema,
   commentDeleteResponseSchema,
   commentResponseSchema,
@@ -24,6 +27,11 @@ import {
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
+import { formatCardCover } from "../utils/cardCover";
+import {
+  CardCoverPreviewError,
+  ensureCardCoverPreviews,
+} from "../utils/cardCoverPreview";
 import { sendMentionEmails } from "../utils/notifications";
 import {
   assertCanDelete,
@@ -740,6 +748,7 @@ export const cardRouter = createTRPCRouter({
 
       return {
         ...result,
+        cover: formatCardCover(result),
         attachments: attachmentsWithUrls,
         list: {
           ...result.list,
@@ -849,6 +858,210 @@ export const cardRouter = createTRPCRouter({
         hasMore: result.hasMore,
         nextCursor: result.nextCursor?.toISOString() ?? null,
       };
+    }),
+  updateCover: protectedProcedure
+    .meta({
+      openapi: {
+        summary: "Update a card cover",
+        method: "PUT",
+        path: "/cards/{cardPublicId}/cover",
+        description: "Updates or removes a card cover by its public ID",
+        tags: ["Cards"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+        cover: z
+          .discriminatedUnion("kind", [
+            z.object({
+              kind: z.literal("colour"),
+              colourCode: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
+              size: cardCoverSizeSchema.optional(),
+            }),
+            z.object({
+              kind: z.literal("attachment"),
+              attachmentPublicId: z.string().min(12),
+              size: cardCoverSizeSchema.optional(),
+            }),
+          ])
+          .nullable(),
+      }),
+    )
+    .output(cardUpdateCoverResponseSchema)
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!card)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      await assertCanEdit(
+        ctx.db,
+        userId,
+        card.workspaceId,
+        "card:edit",
+        card.createdBy,
+      );
+
+      const existingCard = await cardRepo.getByPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!existingCard)
+        throw new TRPCError({
+          message: `Card with public ID ${input.cardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      const coverColourCode =
+        input.cover?.kind === "colour" ? input.cover.colourCode : null;
+      const coverAttachmentPublicId =
+        input.cover?.kind === "attachment"
+          ? input.cover.attachmentPublicId
+          : null;
+      const coverSize = input.cover?.size ?? existingCard.coverSize;
+      const previousCover = formatCardCover(existingCard);
+      const nextCover = formatCardCover({
+        coverColourCode,
+        coverAttachment: coverAttachmentPublicId
+          ? { publicId: coverAttachmentPublicId }
+          : null,
+        coverSize,
+      });
+
+      if (coverAttachmentPublicId) {
+        const attachment = await cardAttachmentRepo.getCoverCandidateByPublicId(
+          ctx.db,
+          coverAttachmentPublicId,
+        );
+
+        if (!attachment)
+          throw new TRPCError({
+            message: "Cover attachment not found",
+            code: "NOT_FOUND",
+          });
+
+        if (attachment.cardId !== existingCard.id)
+          throw new TRPCError({
+            message: "Cover attachment belongs to another card",
+            code: "BAD_REQUEST",
+          });
+
+        if (attachment.deletedAt)
+          throw new TRPCError({
+            message: "Deleted attachment cannot be used as a cover",
+            code: "BAD_REQUEST",
+          });
+
+        const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+        if (!bucket)
+          throw new TRPCError({
+            message: "Attachments bucket not configured",
+            code: "INTERNAL_SERVER_ERROR",
+          });
+
+        try {
+          const preview = await ensureCardCoverPreviews({
+            bucket,
+            attachmentPublicId: attachment.publicId,
+            s3Key: attachment.s3Key,
+          });
+
+          if (
+            preview.sourceContentType &&
+            preview.sourceContentType !== attachment.contentType
+          )
+            await cardAttachmentRepo.updateContentType(ctx.db, {
+              attachmentId: attachment.id,
+              contentType: preview.sourceContentType,
+            });
+        } catch (error) {
+          if (
+            error instanceof CardCoverPreviewError &&
+            error.code !== "STORAGE_FAILURE"
+          )
+            throw new TRPCError({
+              message: error.message,
+              code: "BAD_REQUEST",
+              cause: error,
+            });
+
+          throw new TRPCError({
+            message: "Failed to prepare card cover previews",
+            code: "INTERNAL_SERVER_ERROR",
+            cause: error,
+          });
+        }
+      }
+
+      if (
+        existingCard.coverColourCode === coverColourCode &&
+        (existingCard.coverAttachment?.publicId ?? null) ===
+          coverAttachmentPublicId &&
+        existingCard.coverSize === coverSize
+      ) {
+        return { publicId: existingCard.publicId, cover: previousCover };
+      }
+
+      const result = await cardRepo.updateCover(ctx.db, {
+        cardPublicId: input.cardPublicId,
+        coverColourCode,
+        coverAttachmentPublicId,
+        coverSize,
+        createdBy: userId,
+      });
+
+      if (!result)
+        throw new TRPCError({
+          message: `Failed to update card cover`,
+          code: "INTERNAL_SERVER_ERROR",
+        });
+
+      void sendWebhooksForWorkspace(
+        ctx.db,
+        card.workspaceId,
+        createCardWebhookPayload(
+          "card.updated",
+          {
+            id: String(result.id),
+            publicId: result.publicId,
+            title: result.title,
+            description: result.description,
+            dueDate: result.dueDate,
+            listId: existingCard.list.publicId,
+            cover: nextCover,
+          },
+          {
+            boardId: card.boardPublicId,
+            boardName: card.boardName,
+            listName: existingCard.list.name,
+            user: ctx.user
+              ? { id: ctx.user.id, name: ctx.user.name }
+              : undefined,
+            changes: {
+              cover: { from: previousCover, to: nextCover },
+            },
+          },
+        ),
+      );
+
+      return { publicId: result.publicId, cover: nextCover };
     }),
   update: protectedProcedure
     .meta({
@@ -1308,6 +1521,10 @@ export const cardRouter = createTRPCRouter({
         workspaceId: targetList.workspaceId,
         position: "end",
         dueDate: sourceCard.dueDate ?? null,
+        coverColourCode: sourceCard.coverColourCode,
+        coverSize: sourceCard.coverColourCode
+          ? sourceCard.coverSize
+          : "normal",
       });
 
       if (input.index !== undefined && input.index >= 0) {
