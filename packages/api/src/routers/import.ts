@@ -487,15 +487,17 @@ export const importRouter = createTRPCRouter({
                   code: "INTERNAL_SERVER_ERROR",
                 });
 
-              createdCards = createdCards.concat(
-                newCards
-                  .map((card, index) => ({
-                    id: card.id,
-                    publicId: cardsInsert[index]?.publicId ?? "",
-                    sourceId: list.cards[index]?.sourceId ?? "",
-                  }))
-                  .filter((card) => !!card.publicId && !!card.sourceId),
+              const createdListCards = newCards
+                .map((card, index) => ({
+                  id: card.id,
+                  publicId: cardsInsert[index]?.publicId ?? "",
+                  sourceId: list.cards[index]?.sourceId ?? "",
+                }))
+                .filter((card) => !!card.publicId && !!card.sourceId);
+              const createdListCardsBySourceId = new Map(
+                createdListCards.map((card) => [card.sourceId, card]),
               );
+              createdCards = createdCards.concat(createdListCards);
 
               const activities = newCards.map((card) => ({
                 type: "card.created" as const,
@@ -513,8 +515,8 @@ export const importRouter = createTRPCRouter({
               if (cardsWithImageCovers.length && attachmentsBucket) {
                 const coverResults = await Promise.allSettled(
                   cardsWithImageCovers.map(async (card) => {
-                    const createdCard = createdCards.find(
-                      (item) => item.sourceId === card.sourceId,
+                    const createdCard = createdListCardsBySourceId.get(
+                      card.sourceId,
                     );
                     if (!createdCard || !card.coverSource) return;
 
