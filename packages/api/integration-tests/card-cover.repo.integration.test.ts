@@ -75,6 +75,64 @@ const seedAttachment = async (
 };
 
 describe("card cover repository", () => {
+  it("creates and selects an imported cover without synthetic activity", async () => {
+    const { db, user, card } = await seedCard();
+    await db
+      .update(cards)
+      .set({ coverColourCode: "#6cc3e0", coverSize: "full" })
+      .where(eq(cards.id, card.id));
+
+    const attachment = await cardAttachmentRepo.createImportedCover(db, {
+      publicId: "importcover1",
+      cardId: card.id,
+      filename: "cover.png",
+      originalFilename: "Imported cover.png",
+      contentType: "image/png",
+      size: 1024,
+      s3Key: "workspace/card/imported-cover.png",
+      createdBy: user.id,
+    });
+
+    const [updatedCard] = await db
+      .select()
+      .from(cards)
+      .where(eq(cards.id, card.id));
+    const activities = await db
+      .select()
+      .from(cardActivities)
+      .where(eq(cardActivities.cardId, card.id));
+
+    expect(updatedCard).toMatchObject({
+      coverAttachmentId: attachment.id,
+      coverColourCode: null,
+      coverSize: "full",
+    });
+    expect(activities).toEqual([]);
+  });
+
+  it("rolls back an imported attachment when its card does not exist", async () => {
+    const { db, user } = await seedCard();
+
+    await expect(
+      cardAttachmentRepo.createImportedCover(db, {
+        publicId: "orphancover1",
+        cardId: 999999,
+        filename: "cover.png",
+        originalFilename: "cover.png",
+        contentType: "image/png",
+        size: 1024,
+        s3Key: "workspace/card/orphan-cover.png",
+        createdBy: user.id,
+      }),
+    ).rejects.toThrow();
+
+    const orphan = await db
+      .select()
+      .from(cardAttachments)
+      .where(eq(cardAttachments.publicId, "orphancover1"));
+    expect(orphan).toEqual([]);
+  });
+
   it("applies the migration default and stores cover activity atomically", async () => {
     const { db, user, card } = await seedCard();
 
