@@ -27,6 +27,11 @@ export function createS3Client() {
     endpoint: process.env.S3_ENDPOINT ?? "",
     forcePathStyle: process.env.S3_FORCE_PATH_STYLE === "true",
     credentials,
+    // Browser uploads do not carry the SDK-computed optional checksum after the
+    // URL has been signed. Requiring checksums only for S3 operations that
+    // mandate them also keeps compatible providers such as Garage from
+    // rejecting the uploaded body with InvalidDigest.
+    requestChecksumCalculation: "WHEN_REQUIRED",
   });
 }
 
@@ -130,4 +135,3 @@ export async function generateAttachmentUrl(
     return null;
   }
 }
-
