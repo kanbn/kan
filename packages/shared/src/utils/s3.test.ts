@@ -39,4 +39,13 @@ describe("createS3Client", () => {
     await expect(client.config.region()).resolves.toBe("eu-west-1");
     client.destroy();
   });
+
+  it("does not add optional checksums to presigned browser uploads", async () => {
+    const client = createS3Client();
+
+    await expect(client.config.requestChecksumCalculation()).resolves.toBe(
+      "WHEN_REQUIRED",
+    );
+    client.destroy();
+  });
 });
