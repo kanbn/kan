@@ -22,6 +22,7 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { getBoardReturnUrl } from "~/utils/board-return-url";
 import { invalidateCard } from "~/utils/cardInvalidation";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmation";
@@ -370,7 +371,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                   cardIndex={card?.index}
                 />
                 <Link
-                  href={`/${isTemplate ? "templates" : "boards"}/${boardId}`}
+                  href={getBoardReturnUrl(
+                    router.query.returnUrl,
+                    `/${isTemplate ? "templates" : "boards"}/${boardId}`,
+                  )}
                   className="flex h-7 w-7 items-center justify-center rounded-[5px] text-light-900 hover:bg-light-200 dark:text-dark-900 dark:hover:bg-dark-200"
                   aria-label={t`Close`}
                 >

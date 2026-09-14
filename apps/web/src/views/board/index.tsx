@@ -90,6 +90,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       ? params.boardId[0]
       : params.boardId
     : null;
+  const cardReturnQuery = router.asPath.includes("?")
+    ? `?returnUrl=${encodeURIComponent(router.asPath)}`
+    : "";
 
   const createListShortcut = useMemo(
     () => ({
@@ -767,8 +770,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                           key={card.publicId}
                                           href={
                                             isTemplate
-                                              ? `/templates/${boardId}/cards/${card.publicId}`
-                                              : `/cards/${card.publicId}`
+                                              ? `/templates/${boardId}/cards/${card.publicId}${cardReturnQuery}`
+                                              : `/cards/${card.publicId}${cardReturnQuery}`
                                           }
                                           className={`mb-2 flex !cursor-pointer flex-col ${
                                             card.publicId.startsWith(
