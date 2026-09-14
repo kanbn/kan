@@ -728,6 +728,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                 <div
                                   ref={provided.innerRef}
                                   {...provided.droppableProps}
+                                  data-list-scroll-id={list.publicId}
                                   className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 h-full max-h-[calc(100dvh-225px)] min-h-[2rem] overflow-y-auto pb-[calc(0.75rem+env(safe-area-inset-bottom))] pr-1 scrollbar dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600"
                                 >
                                   {list.cards.map((card, index) => (
