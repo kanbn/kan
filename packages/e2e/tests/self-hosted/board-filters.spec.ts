@@ -110,6 +110,17 @@ test(
     expect(new URL(page.url()).searchParams.get("returnUrl")).toBe(
       `${expectedBoardUrl.pathname}${expectedBoardUrl.search}`,
     );
+    await page
+      .getByRole("link", { name: "Filtered board", exact: true })
+      .click();
+    await page.waitForURL(expectedBoardUrl.toString());
+
+    await expect(
+      page.getByText("Nonmatching card", { exact: true }),
+    ).toHaveCount(0);
+
+    await page.getByText("Matching card", { exact: true }).click();
+    await page.waitForURL((url) => url.pathname.startsWith("/cards/"));
     await page.getByRole("link", { name: "Close" }).click();
     await page.waitForURL(expectedBoardUrl.toString());
 
@@ -154,7 +165,8 @@ test(
       .filter({ has: page.getByText("Direct card", { exact: true }) })
       .getAttribute("href");
     expect(cardHref).toMatch(/^\/cards\/[^?]+$/);
-    await page.goto(cardHref as string);
+    if (!cardHref) throw new Error("Could not find direct card link");
+    await page.goto(cardHref);
     await page.waitForURL((url) => url.pathname.startsWith("/cards/"));
     await page.getByRole("link", { name: "Close" }).click();
 

@@ -214,6 +214,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const board = card?.list.board;
   const workspaceMembers = board?.workspace.members;
   const boardId = board?.publicId;
+  const boardReturnUrl = getBoardReturnUrl(
+    router.query.returnUrl,
+    `/${isTemplate ? "templates" : "boards"}/${boardId}`,
+  );
 
   const editorWorkspaceMembers =
     workspaceMembers
@@ -341,7 +345,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                 <IoChevronForwardSharp className="h-[10px] w-[10px] text-light-900 dark:text-dark-900" />
                 <Link
                   className="whitespace-nowrap text-sm font-bold leading-[1.5rem] text-light-900 dark:text-dark-950"
-                  href={`${isTemplate ? "/templates" : "/boards"}/${board?.publicId}`}
+                  href={boardReturnUrl}
                 >
                   {board?.name}
                 </Link>
@@ -371,10 +375,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                   cardIndex={card?.index}
                 />
                 <Link
-                  href={getBoardReturnUrl(
-                    router.query.returnUrl,
-                    `/${isTemplate ? "templates" : "boards"}/${boardId}`,
-                  )}
+                  href={boardReturnUrl}
                   className="flex h-7 w-7 items-center justify-center rounded-[5px] text-light-900 hover:bg-light-200 dark:text-dark-900 dark:hover:bg-dark-200"
                   aria-label={t`Close`}
                 >
