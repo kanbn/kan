@@ -150,7 +150,8 @@ test(
     await board.createCard("Direct card");
 
     const cardHref = await page
-      .getByRole("link", { name: "Direct card", exact: true })
+      .locator('a[href^="/cards/"]')
+      .filter({ has: page.getByText("Direct card", { exact: true }) })
       .getAttribute("href");
     expect(cardHref).toMatch(/^\/cards\/[^?]+$/);
     await page.goto(cardHref as string);
