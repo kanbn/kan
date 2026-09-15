@@ -60,7 +60,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        321
+        326
       ]
     ],
     "translation": "{0} | {1}"
@@ -124,7 +124,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        579
+        582
       ]
     ],
     "translation": "{0} blev ikke fundet"
@@ -389,7 +389,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        476
+        481
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -1555,11 +1555,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        551
+        554
       ],
       [
         "src/views/card/index.tsx",
-        321
+        326
       ],
       [
         "src/views/public/board/index.tsx",
@@ -1612,7 +1612,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        569
+        572
       ]
     ],
     "translation": ""
@@ -2308,7 +2308,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        321
+        326
       ]
     ],
     "translation": "Kort"
@@ -2360,11 +2360,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        384
+        389
       ],
       [
         "src/views/card/index.tsx",
-        421
+        426
       ]
     ],
     "translation": "Kortet blev ikke fundet"
@@ -2400,7 +2400,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        314
+        317
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2652,7 +2652,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        375
+        380
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3313,11 +3313,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        99
+        102
       ],
       [
         "src/views/board/index.tsx",
-        693
+        696
       ]
     ],
     "translation": "Opret ny liste"
@@ -4124,7 +4124,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        153
+        154
       ]
     ],
     "translation": "Forfaldsdato"
@@ -5365,7 +5365,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        678
+        681
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny liste"
@@ -6234,7 +6234,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        133
+        134
       ]
     ],
     "translation": "Etiketter"
@@ -6419,7 +6419,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        312
+        315
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -6447,7 +6447,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        124
+        125
       ]
     ],
     "translation": "Liste"
@@ -6771,7 +6771,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        143
+        144
       ],
       [
         "src/views/members/index.tsx",
@@ -7114,7 +7114,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        642
+        645
       ]
     ],
     "translation": "Ny liste"
@@ -7334,7 +7334,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        674
+        677
       ]
     ],
     "translation": "Ingen lister"
@@ -7346,7 +7346,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        679
+        682
       ]
     ],
     "translation": "Der er endnu ikke oprettet nogen lister"
@@ -8058,11 +8058,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        224
+        227
       ],
       [
         "src/views/board/index.tsx",
-        280
+        283
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -8138,11 +8138,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        236
+        241
       ],
       [
         "src/views/card/index.tsx",
-        249
+        254
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -8242,7 +8242,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        321
+        324
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -9913,11 +9913,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        551
+        554
       ],
       [
         "src/views/board/index.tsx",
-        588
+        591
       ]
     ],
     "translation": "Skabelon"
@@ -10668,7 +10668,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        248
+        253
       ]
     ],
     "translation": "Kunne ikke tilføje etiket"
@@ -10704,7 +10704,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        319
+        322
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11032,11 +11032,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        279
+        282
       ],
       [
         "src/views/card/index.tsx",
-        235
+        240
       ]
     ],
     "translation": "Kunne ikke opdatere kort"
@@ -11108,7 +11108,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        223
+        226
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -12076,7 +12076,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        551
+        554
       ],
       [
         "src/views/boards/index.tsx",
@@ -12465,11 +12465,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        626
+        629
       ],
       [
         "src/views/board/index.tsx",
-        684
+        687
       ],
       [
         "src/views/boards/components/BoardsList.tsx",

@@ -60,7 +60,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        321
+        326
       ]
     ],
     "translation": "{0} | {1}"
@@ -124,7 +124,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        579
+        582
       ]
     ],
     "translation": "{0} not found"
@@ -389,7 +389,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        476
+        481
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -1555,11 +1555,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        551
+        554
       ],
       [
         "src/views/card/index.tsx",
-        321
+        326
       ],
       [
         "src/views/public/board/index.tsx",
@@ -1612,7 +1612,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        569
+        572
       ]
     ],
     "translation": "Board name"
@@ -2308,7 +2308,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        321
+        326
       ]
     ],
     "translation": "Card"
@@ -2360,11 +2360,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        384
+        389
       ],
       [
         "src/views/card/index.tsx",
-        421
+        426
       ]
     ],
     "translation": "Card not found"
@@ -2400,7 +2400,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        314
+        317
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2652,7 +2652,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        375
+        380
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3326,11 +3326,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        99
+        102
       ],
       [
         "src/views/board/index.tsx",
-        693
+        696
       ]
     ],
     "translation": "Create new list"
@@ -4163,7 +4163,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        153
+        154
       ]
     ],
     "translation": "Due date"
@@ -5417,7 +5417,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        678
+        681
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -6299,7 +6299,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        133
+        134
       ]
     ],
     "translation": "Labels"
@@ -6497,7 +6497,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        312
+        315
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -6525,7 +6525,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        124
+        125
       ]
     ],
     "translation": "List"
@@ -6849,7 +6849,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        143
+        144
       ],
       [
         "src/views/members/index.tsx",
@@ -7192,7 +7192,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        642
+        645
       ]
     ],
     "translation": "New list"
@@ -7412,7 +7412,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        674
+        677
       ]
     ],
     "translation": "No lists"
@@ -7424,7 +7424,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        679
+        682
       ]
     ],
     "translation": "No lists have been created yet"
@@ -8136,11 +8136,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        224
+        227
       ],
       [
         "src/views/board/index.tsx",
-        280
+        283
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -8216,11 +8216,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        236
+        241
       ],
       [
         "src/views/card/index.tsx",
-        249
+        254
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -8320,7 +8320,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        321
+        324
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -9991,11 +9991,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        551
+        554
       ],
       [
         "src/views/board/index.tsx",
-        588
+        591
       ]
     ],
     "translation": "Template"
@@ -10746,7 +10746,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        248
+        253
       ]
     ],
     "translation": "Unable to add label"
@@ -10782,7 +10782,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        319
+        322
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11110,11 +11110,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        279
+        282
       ],
       [
         "src/views/card/index.tsx",
-        235
+        240
       ]
     ],
     "translation": "Unable to update card"
@@ -11186,7 +11186,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        223
+        226
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -12184,7 +12184,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        551
+        554
       ],
       [
         "src/views/boards/index.tsx",
@@ -12586,11 +12586,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        626
+        629
       ],
       [
         "src/views/board/index.tsx",
-        684
+        687
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
