@@ -1,7 +1,9 @@
-import { relations } from "drizzle-orm";
+import type { AnyPgColumn } from "drizzle-orm/pg-core";
+import { relations, sql } from "drizzle-orm";
 import {
   bigint,
   bigserial,
+  check,
   index,
   integer,
   pgEnum,
@@ -48,12 +50,15 @@ export const activityTypes = [
   "card.updated.dueDate.added",
   "card.updated.dueDate.updated",
   "card.updated.dueDate.removed",
+  "card.updated.cover",
   "card.archived",
 ] as const;
 
 export type ActivityType = (typeof activityTypes)[number];
 
 export const activityTypeEnum = pgEnum("card_activity_type", activityTypes);
+
+export const cardCoverSizeEnum = pgEnum("card_cover_size", ["normal", "full"]);
 
 export const cards = pgTable(
   "card",
@@ -80,9 +85,25 @@ export const cards = pgTable(
       () => imports.id,
     ),
     dueDate: timestamp("dueDate"),
+    coverColourCode: varchar("coverColourCode", { length: 7 }),
+    coverAttachmentId: bigint("coverAttachmentId", {
+      mode: "number",
+    }).references((): AnyPgColumn => cardAttachments.id, {
+      onDelete: "set null",
+    }),
+    coverSize: cardCoverSizeEnum("coverSize").notNull().default("normal"),
   },
   (table) => [
     index("card_list_number_idx").on(table.listId, table.cardNumber),
+    index("card_cover_attachment_idx").on(table.coverAttachmentId),
+    check(
+      "card_cover_colour_code_check",
+      sql`${table.coverColourCode} IS NULL OR ${table.coverColourCode} ~ '^#[0-9A-Fa-f]{6}$'`,
+    ),
+    check(
+      "card_cover_source_check",
+      sql`${table.coverColourCode} IS NULL OR ${table.coverAttachmentId} IS NULL`,
+    ),
   ],
 ).enableRLS();
 
@@ -113,6 +134,11 @@ export const cardsRelations = relations(cards, ({ one, many }) => ({
   activities: many(cardActivities),
   checklists: many(checklists),
   attachments: many(cardAttachments),
+  coverAttachment: one(cardAttachments, {
+    fields: [cards.coverAttachmentId],
+    references: [cardAttachments.id],
+    relationName: "cardCoverAttachment",
+  }),
 }));
 
 export const cardActivities = pgTable("card_activity", {
