@@ -45,6 +45,8 @@ export const create = async (
     workspaceId: number;
     position: "start" | "end";
     dueDate?: Date | null;
+    coverColourCode?: string | null;
+    coverSize?: "normal" | "full";
   },
 ) => {
   return db.transaction(async (tx) => {
@@ -106,6 +108,8 @@ export const create = async (
         index: index,
         cardNumber,
         dueDate: cardInput.dueDate ?? null,
+        coverColourCode: cardInput.coverColourCode ?? null,
+        coverSize: cardInput.coverSize ?? "normal",
       })
       .returning({
         id: cards.id,
@@ -229,6 +233,79 @@ export const update = async (
   return result;
 };
 
+export const updateCover = async (
+  db: dbClient,
+  input: {
+    cardPublicId: string;
+    coverColourCode: string | null;
+    coverAttachmentPublicId?: string | null;
+    coverSize: "normal" | "full";
+    createdBy: string;
+  },
+) => {
+  return db.transaction(async (tx) => {
+    const [lockedCard] = await tx
+      .select({ id: cards.id })
+      .from(cards)
+      .where(
+        and(eq(cards.publicId, input.cardPublicId), isNull(cards.deletedAt)),
+      )
+      .for("update");
+
+    if (!lockedCard) return undefined;
+
+    let coverAttachmentId: number | null = null;
+
+    if (input.coverAttachmentPublicId) {
+      const [attachment] = await tx
+        .select({ id: cardAttachments.id })
+        .from(cardAttachments)
+        .where(
+          and(
+            eq(cardAttachments.cardId, lockedCard.id),
+            eq(cardAttachments.publicId, input.coverAttachmentPublicId),
+            isNull(cardAttachments.deletedAt),
+          ),
+        )
+        .for("update");
+
+      if (!attachment) return undefined;
+      coverAttachmentId = attachment.id;
+    }
+
+    const [card] = await tx
+      .update(cards)
+      .set({
+        coverColourCode: input.coverColourCode,
+        coverAttachmentId,
+        coverSize: input.coverSize,
+        updatedAt: new Date(),
+      })
+      .where(eq(cards.id, lockedCard.id))
+      .returning({
+        id: cards.id,
+        publicId: cards.publicId,
+        title: cards.title,
+        description: cards.description,
+        dueDate: cards.dueDate,
+        coverColourCode: cards.coverColourCode,
+        coverAttachmentId: cards.coverAttachmentId,
+        coverSize: cards.coverSize,
+      });
+
+    if (!card) return undefined;
+
+    await tx.insert(cardActivities).values({
+      publicId: generateUID(),
+      type: "card.updated.cover",
+      cardId: card.id,
+      createdBy: input.createdBy,
+    });
+
+    return card;
+  });
+};
+
 export const getCardWithListByPublicId = (
   db: dbClient,
   cardPublicId: string,
@@ -259,8 +336,15 @@ export const getByPublicId = (db: dbClient, cardPublicId: string) => {
       description: true,
       listId: true,
       dueDate: true,
+      coverColourCode: true,
+      coverSize: true,
     },
     with: {
+      coverAttachment: {
+        columns: {
+          publicId: true,
+        },
+      },
       list: {
         columns: {
           publicId: true,
@@ -295,6 +379,8 @@ export const bulkCreate = async (
     workspaceId: number;
     index: number;
     importId?: number;
+    coverColourCode?: string | null;
+    coverSize?: "normal" | "full";
   }[],
 ) => {
   if (cardInput.length === 0) return [];
@@ -344,6 +430,8 @@ export const bulkCreate = async (
       index: number;
       cardNumber: number;
       importId?: number;
+      coverColourCode?: string | null;
+      coverSize?: "normal" | "full";
     }[] = [];
 
     // For each list, append incoming cards after current max index, preserving incoming order
@@ -372,6 +460,8 @@ export const bulkCreate = async (
           index: nextIndex++,
           cardNumber,
           importId: it.importId,
+          coverColourCode: it.coverColourCode ?? null,
+          coverSize: it.coverSize ?? "normal",
         });
       }
     }
@@ -488,11 +578,18 @@ export const getWithListAndMembersByPublicId = async (
       title: true,
       description: true,
       dueDate: true,
+      coverColourCode: true,
+      coverSize: true,
       createdBy: true,
       cardNumber: true,
       index: true,
     },
     with: {
+      coverAttachment: {
+        columns: {
+          publicId: true,
+        },
+      },
       labels: {
         with: {
           label: {

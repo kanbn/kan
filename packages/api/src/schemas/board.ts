@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { cardCoverSchema } from "./card";
 import {
   checklistResponseSchema,
   labelSchema,
@@ -41,6 +42,7 @@ const boardDetailCardSchema = z.object({
   index: z.number(),
   cardNumber: z.number().nullable(),
   dueDate: z.date().nullable(),
+  cover: cardCoverSchema,
   labels: z.array(labelSchema),
   members: z.array(boardCardMemberSchema),
   attachments: z.array(z.object({ publicId: z.string() })),
@@ -53,7 +55,7 @@ export const boardDetailSchema = z.object({
   publicId: z.string(),
   name: z.string(),
   slug: z.string(),
-  visibility: z.string(),
+  visibility: z.enum(["public", "private"]),
   isArchived: z.boolean(),
   favorite: z.boolean(),
   workspace: z.object({
@@ -85,6 +87,7 @@ const boardSlugCardSchema = z.object({
   description: z.string().nullable(),
   index: z.number(),
   dueDate: z.date().nullable(),
+  cover: cardCoverSchema,
   labels: z.array(labelSchema),
   attachments: z.array(z.object({ publicId: z.string() })),
   checklists: z.array(checklistResponseSchema),
@@ -96,7 +99,7 @@ export const boardBySlugSchema = z.object({
   publicId: z.string(),
   name: z.string(),
   slug: z.string(),
-  visibility: z.string(),
+  visibility: z.enum(["public", "private"]),
   workspace: z.object({
     publicId: z.string(),
     name: z.string(),

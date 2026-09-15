@@ -11,6 +11,7 @@ import {
   HiOutlinePaperClip,
   HiOutlinePencil,
   HiOutlinePlus,
+  HiOutlineSwatch,
   HiOutlineTag,
   HiOutlineTrash,
   HiOutlineUserMinus,
@@ -142,6 +143,7 @@ const getActivityText = ({
     "card.updated.dueDate.added": t`set the due date`,
     "card.updated.dueDate.updated": t`updated the due date`,
     "card.updated.dueDate.removed": t`removed the due date`,
+    "card.updated.cover": t`changed the card cover`,
   } as const;
 
   if (!(type in ACTIVITY_TYPE_MAP)) return null;
@@ -349,6 +351,7 @@ const ACTIVITY_ICON_MAP: Partial<Record<ActivityType, React.ReactNode | null>> =
     "card.updated.dueDate.added": <HiOutlineClock />,
     "card.updated.dueDate.updated": <HiOutlineClock />,
     "card.updated.dueDate.removed": <HiOutlineClock />,
+    "card.updated.cover": <HiOutlineSwatch />,
   } as const;
 
 const getActivityIcon = (
