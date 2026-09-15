@@ -299,13 +299,14 @@ export const customFieldRouter = createTRPCRouter({
       }
     }),
 
-  archiveDefinition: protectedProcedure
+  deleteDefinition: protectedProcedure
     .meta({
       openapi: {
-        summary: "Archive a custom field definition",
+        summary: "Delete a custom field definition",
         method: "DELETE",
         path: "/custom-fields/{fieldPublicId}",
-        description: "Archives a custom field definition and preserves values",
+        description:
+          "Soft-deletes a custom field definition and preserves values",
         tags: ["Custom fields"],
         protect: true,
       },
@@ -326,7 +327,7 @@ export const customFieldRouter = createTRPCRouter({
       await assertPermission(ctx.db, userId, field.workspaceId, "board:edit");
 
       try {
-        await customFieldRepo.archiveDefinition(ctx.db, {
+        await customFieldRepo.deleteDefinition(ctx.db, {
           ...input,
           actorUserId: userId,
         });

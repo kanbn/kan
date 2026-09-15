@@ -2,7 +2,6 @@ import { t } from "@lingui/core/macro";
 import { format } from "date-fns";
 
 import type { RouterInputs, RouterOutputs } from "~/utils/api";
-import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { CustomFieldSelect } from "~/views/card/components/custom-fields/custom-field-select";
 
@@ -103,32 +102,20 @@ export function CustomFieldDraftInput({
       />
     );
 
-  const isSet = value?.type === "checkbox";
   return (
-    <div className="flex min-h-9 items-center gap-2">
+    <div className="flex min-h-9 items-center">
       <input
         id={id}
         type="checkbox"
         aria-label={definition.name}
-        checked={isSet && value.value}
+        checked={value?.type === "checkbox" && value.value}
         onChange={(event) =>
-          onChange({ type: "checkbox", value: event.target.checked })
+          onChange(
+            event.target.checked ? { type: "checkbox", value: true } : null,
+          )
         }
         className="h-4 w-4 cursor-pointer appearance-none rounded-md border border-light-500 bg-transparent outline-none ring-0 checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none dark:border-dark-500 dark:hover:border-dark-500"
       />
-      <span className="text-sm text-light-900 dark:text-dark-900">
-        {isSet ? (value.value ? t`Checked` : t`Unchecked`) : t`Not set`}
-      </span>
-      {isSet && (
-        <Button
-          type="button"
-          variant="ghost"
-          size="xs"
-          onClick={() => onChange(null)}
-        >
-          {t`Not set`}
-        </Button>
-      )}
     </div>
   );
 }
