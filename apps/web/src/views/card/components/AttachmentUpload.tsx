@@ -52,6 +52,7 @@ export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
         message: t`Failed to upload attachment. Please try again.`,
         icon: "error",
       });
+    } finally {
       setUploading(false);
     }
   };
