@@ -55,7 +55,7 @@ export const boardDetailSchema = z.object({
   publicId: z.string(),
   name: z.string(),
   slug: z.string(),
-  visibility: z.string(),
+  visibility: z.enum(["public", "private"]),
   isArchived: z.boolean(),
   favorite: z.boolean(),
   workspace: z.object({
@@ -99,7 +99,7 @@ export const boardBySlugSchema = z.object({
   publicId: z.string(),
   name: z.string(),
   slug: z.string(),
-  visibility: z.string(),
+  visibility: z.enum(["public", "private"]),
   workspace: z.object({
     publicId: z.string(),
     name: z.string(),
