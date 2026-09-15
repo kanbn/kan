@@ -663,7 +663,7 @@ describe("custom field repository integration tests", () => {
       value: { type: "select", optionPublicId: select.options[1]!.publicId },
       actorUserId,
     });
-    await customFieldRepo.archiveDefinition(db, {
+    await customFieldRepo.deleteDefinition(db, {
       fieldPublicId: text.publicId,
       actorUserId,
     });
@@ -1201,7 +1201,7 @@ describe("custom field repository integration tests", () => {
     expect(await db.select().from(customFieldMappings)).toHaveLength(1);
     expect(await db.select().from(customFieldOptionMappings)).toHaveLength(2);
 
-    await customFieldRepo.archiveDefinition(db, {
+    await customFieldRepo.deleteDefinition(db, {
       fieldPublicId: select.publicId,
       actorUserId,
     });
@@ -1683,7 +1683,7 @@ describe("custom field repository integration tests", () => {
     ).toEqual(["Second scalar match", "Third scalar match"]);
   });
 
-  it("archives definitions without deleting existing card values", async () => {
+  it("soft-deletes definitions without deleting existing card values", async () => {
     const field = await createField("text");
     await customFieldRepo.setCardValue(db, {
       cardPublicId,
@@ -1692,7 +1692,7 @@ describe("custom field repository integration tests", () => {
       actorUserId,
     });
 
-    await customFieldRepo.archiveDefinition(db, {
+    await customFieldRepo.deleteDefinition(db, {
       fieldPublicId: field.publicId,
       actorUserId,
     });

@@ -87,10 +87,12 @@ test(
       await dialog
         .getByRole("combobox", { name: "Placement" })
         .selectOption(placement);
-      if (sectionLabel)
+      if (sectionLabel) {
+        await dialog.getByRole("button", { name: "Advanced settings" }).click();
         await dialog
           .getByPlaceholder("Section name (optional)")
           .fill(sectionLabel);
+      }
       for (const option of options) {
         await dialog.getByPlaceholder("New option").last().fill(option);
         await dialog
@@ -111,7 +113,7 @@ test(
     await addField("Estimate", "Number", true, [], "sidebar", "Planning");
     await addField("Milestone", "Date");
     await addField("Approved", "Checkbox");
-    await addField("Priority", "Dropdown", true, ["High"]);
+    await addField("Priority", "Choice", true, ["High"]);
     await addField("Empty field", "Text");
     await dialog.getByRole("button", { name: "Close" }).click();
 
@@ -159,39 +161,22 @@ test(
     await priorityStored;
 
     const approved = page.getByRole("checkbox", { name: "Approved" });
-    const approvedEditor = approved.locator("..");
     await expect(approved).not.toBeChecked();
-    await expect(
-      approvedEditor.getByText("Not set", { exact: true }),
-    ).toBeVisible();
 
-    let checkboxStored = waitForTrpcMutation(page, "customField.setValue");
+    const checkboxStored = waitForTrpcMutation(page, "customField.setValue");
     await approved.focus();
     await page.keyboard.press("Space");
     await checkboxStored;
     await expect(approved).toBeChecked();
-    await expect(
-      approvedEditor.getByText("Checked", { exact: true }),
-    ).toBeVisible();
-
-    checkboxStored = waitForTrpcMutation(page, "customField.setValue");
-    await approved.click();
-    await checkboxStored;
-    await expect(approved).not.toBeChecked();
-    await expect(
-      approvedEditor.getByText("Unchecked", { exact: true }),
-    ).toBeVisible();
 
     const checkboxCleared = waitForTrpcMutation(page, "customField.clearValue");
-    await approvedEditor.getByRole("button", { name: "Not set" }).click();
-    await checkboxCleared;
-    await expect(
-      approvedEditor.getByText("Not set", { exact: true }),
-    ).toBeVisible();
-
-    checkboxStored = waitForTrpcMutation(page, "customField.setValue");
     await approved.click();
-    await checkboxStored;
+    await checkboxCleared;
+    await expect(approved).not.toBeChecked();
+
+    const checkboxRestored = waitForTrpcMutation(page, "customField.setValue");
+    await approved.click();
+    await checkboxRestored;
 
     const cardReloaded = waitForTrpcQuery(page, "card.byId");
     await page.reload();
@@ -226,14 +211,13 @@ test(
     await page.unroute(/\/api\/trpc\/customField\.clearValue/);
 
     await estimate.fill("not-a-number");
-    const invalidNumberRejected = waitForTrpcMutation(
-      page,
-      "customField.setValue",
-    );
     await estimate.blur();
-    expect((await invalidNumberRejected).ok()).toBe(false);
-    await expect(estimate).toHaveValue("13.5");
-    await expect(page.getByText("Unable to update custom field")).toBeVisible();
+    await expect(estimate).toHaveValue("not-a-number");
+    await expect(page.getByText("Enter a valid number.")).toBeVisible();
+    await expect(page.getByText("Unable to update custom field")).toHaveCount(
+      0,
+    );
+    await estimate.fill("13.5");
 
     const cardPath = new URL(page.url()).pathname;
     await page.goto(boardPath);
@@ -243,7 +227,7 @@ test(
     await expect(cardLink.getByText("Estimate:")).toBeVisible();
     await expect(cardLink.getByText("Milestone:")).toBeVisible();
     await expect(cardLink.getByText("Priority:")).toBeVisible();
-    await expect(cardLink.getByText("Approved:")).toBeVisible();
+    await expect(cardLink.getByText("Approved", { exact: true })).toBeVisible();
 
     await page.getByRole("button", { name: "Filter", exact: true }).click();
     await page
@@ -278,7 +262,7 @@ test(
 
     await board.duplicateCard("Custom fields test card", "Done");
     await expect(page.getByText("Custom fields test card")).toHaveCount(2);
-    await expect(page.getByText("Approved:", { exact: true })).toHaveCount(2);
+    await expect(page.getByText("Approved", { exact: true })).toHaveCount(2);
 
     await board.makeTemplate();
     await page.goto("/boards");
@@ -342,8 +326,8 @@ test(
       guestPage.getByText("Approved").filter({ visible: true }),
     ).toBeVisible();
     await expect(
-      guestPage.getByText("Checked", { exact: true }).filter({ visible: true }),
-    ).toBeVisible();
+      guestPage.getByRole("checkbox", { name: "Approved" }),
+    ).toBeChecked();
     await expect(
       guestPage.getByText("Priority").filter({ visible: true }),
     ).toBeVisible();
@@ -515,7 +499,7 @@ test(
 );
 
 test(
-  "custom fields and options can be reordered and archived safely",
+  "custom fields and options can be reordered and removed safely",
   { tag: "@self-hosted" },
   async ({ page }) => {
     const user = createTestUser();
@@ -574,7 +558,7 @@ test(
     };
 
     await addField("Notes", "Text");
-    await addField("Priority", "Dropdown", ["Low", "High"]);
+    await addField("Priority", "Choice", ["Low", "High"]);
 
     let priorityField = dialog.locator("section").nth(1);
     await priorityField.getByRole("button", { name: "Priority" }).click();
@@ -689,13 +673,13 @@ test(
 
     const notesField = reopenedDialog.locator("section").nth(1);
     await notesField.getByRole("button", { name: "Notes" }).click();
-    await notesField.getByRole("button", { name: "Archive field" }).click();
+    await notesField.getByRole("button", { name: "Delete field" }).click();
     const fieldArchived = waitForTrpcMutation(
       page,
-      "customField.archiveDefinition",
+      "customField.deleteDefinition",
     );
     await notesField
-      .getByRole("button", { name: "Archive", exact: true })
+      .getByRole("button", { name: "Delete", exact: true })
       .click();
     await fieldArchived;
     await expect(reopenedDialog.locator("section")).toHaveCount(2);

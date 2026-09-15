@@ -27,7 +27,7 @@ vi.mock("@kan/db/repository/custom-field.repo", async (importOriginal) => {
     createDefinition: vi.fn(),
     updateDefinition: vi.fn(),
     saveDefinition: vi.fn(),
-    archiveDefinition: vi.fn(),
+    deleteDefinition: vi.fn(),
     reorderDefinitions: vi.fn(),
     createOption: vi.fn(),
     updateOption: vi.fn(),
@@ -60,7 +60,7 @@ const mockListDefinitions = vi.mocked(
 const mockCreateDefinition = vi.mocked(customFieldRepo.createDefinition);
 const mockUpdateDefinition = vi.mocked(customFieldRepo.updateDefinition);
 const mockSaveDefinition = vi.mocked(customFieldRepo.saveDefinition);
-const mockArchiveDefinition = vi.mocked(customFieldRepo.archiveDefinition);
+const mockDeleteDefinition = vi.mocked(customFieldRepo.deleteDefinition);
 const mockReorderDefinitions = vi.mocked(customFieldRepo.reorderDefinitions);
 const mockCreateOption = vi.mocked(customFieldRepo.createOption);
 const mockUpdateOption = vi.mocked(customFieldRepo.updateOption);
@@ -284,11 +284,11 @@ describe("custom field router", () => {
     });
   });
 
-  it("archives definitions with board:edit and the authenticated actor", async () => {
+  it("soft-deletes definitions with board:edit and the authenticated actor", async () => {
     mockFieldScope.mockResolvedValue(fieldScope);
-    mockArchiveDefinition.mockResolvedValue({ publicId: fieldPublicId });
+    mockDeleteDefinition.mockResolvedValue({ publicId: fieldPublicId });
 
-    await customFieldRouter.createCaller(ctx).archiveDefinition({
+    await customFieldRouter.createCaller(ctx).deleteDefinition({
       fieldPublicId,
     });
 
@@ -298,7 +298,7 @@ describe("custom field router", () => {
       fieldScope.workspaceId,
       "board:edit",
     );
-    expect(mockArchiveDefinition).toHaveBeenCalledWith(mockDb, {
+    expect(mockDeleteDefinition).toHaveBeenCalledWith(mockDb, {
       fieldPublicId,
       actorUserId: mockUser.id,
     });

@@ -10,6 +10,7 @@ import Input from "~/components/Input";
 import { useLocalisation } from "~/hooks/useLocalisation";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { isValidCustomFieldNumberValue } from "../../../custom-fields/custom-field-number";
 import { formatCustomFieldDate } from "./custom-field-date";
 import { groupCustomFieldDefinitions } from "./custom-field-layout";
 import { CustomFieldSelect } from "./custom-field-select";
@@ -33,7 +34,7 @@ const getDisplayValue = (
         ? formatCustomFieldDate(value.dateValue, dateLocale)
         : null;
     case "checkbox":
-      return value.checkboxValue ? t`Checked` : t`Unchecked`;
+      return null;
     case "select":
       return value.optionName;
   }
@@ -58,10 +59,12 @@ function CustomFieldEditor({
     : "";
   const [textValue, setTextValue] = useState(persistedTextValue);
   const [dateValue, setDateValue] = useState(persistedDateValue);
+  const [showNumberError, setShowNumberError] = useState(false);
   const skipNextCommit = useRef(false);
 
   useEffect(() => {
     setTextValue(persistedTextValue);
+    setShowNumberError(false);
   }, [persistedTextValue]);
 
   useEffect(() => {
@@ -71,6 +74,7 @@ function CustomFieldEditor({
   const resetDrafts = () => {
     setTextValue(persistedTextValue);
     setDateValue(persistedDateValue);
+    setShowNumberError(false);
   };
 
   const settle = async () => {
@@ -139,12 +143,21 @@ function CustomFieldEditor({
     const previousValue = value?.textValue ?? value?.numberValue ?? "";
     if (nextValue === previousValue) return;
     if (!nextValue.trim()) {
+      setShowNumberError(false);
       clearValue.mutate({
         cardPublicId,
         fieldPublicId: definition.publicId,
       });
       return;
     }
+    if (
+      definition.type === "number" &&
+      !isValidCustomFieldNumberValue(nextValue)
+    ) {
+      setShowNumberError(true);
+      return;
+    }
+    setShowNumberError(false);
     setValue.mutate({
       cardPublicId,
       fieldPublicId: definition.publicId,
@@ -219,8 +232,18 @@ function CustomFieldEditor({
         maxLength={100}
         value={textValue}
         placeholder={definition.placeholder ?? undefined}
+        errorMessage={showNumberError ? t`Enter a valid number.` : undefined}
+        aria-invalid={showNumberError}
         disabled={setValue.isPending || clearValue.isPending}
-        onChange={(event) => setTextValue(event.target.value)}
+        onChange={(event) => {
+          setTextValue(event.target.value);
+          if (
+            showNumberError &&
+            (!event.target.value.trim() ||
+              isValidCustomFieldNumberValue(event.target.value))
+          )
+            setShowNumberError(false);
+        }}
         onBlur={updateTextValue}
         onKeyDown={(event) => {
           if (event.key === "Enter") {
@@ -292,52 +315,31 @@ function CustomFieldEditor({
 
   if (definition.type === "checkbox") {
     const checkboxValue = value?.checkboxValue;
-    const isSet = checkboxValue !== null && checkboxValue !== undefined;
-    const status = isSet
-      ? checkboxValue
-        ? t`Checked`
-        : t`Unchecked`
-      : t`Not set`;
 
     return (
-      <div className="flex min-h-9 items-center gap-2">
+      <div className="flex min-h-9 items-center">
         <input
           id={inputId}
           type="checkbox"
           aria-label={definition.name}
           checked={checkboxValue === true}
           disabled={setValue.isPending || clearValue.isPending}
-          onChange={(event) =>
-            setValue.mutate({
-              cardPublicId,
-              fieldPublicId: definition.publicId,
-              value: {
-                type: "checkbox",
-                value: event.target.checked,
-              },
-            })
-          }
-          className="h-4 w-4 cursor-pointer appearance-none rounded-md border border-light-500 bg-transparent outline-none ring-0 checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none disabled:cursor-default disabled:opacity-60 dark:border-dark-500 dark:hover:border-dark-500"
-        />
-        <span className="text-sm text-light-900 dark:text-dark-900">
-          {status}
-        </span>
-        {isSet && (
-          <Button
-            type="button"
-            variant="ghost"
-            size="xs"
-            disabled={setValue.isPending || clearValue.isPending}
-            onClick={() =>
+          onChange={(event) => {
+            if (!event.target.checked) {
               clearValue.mutate({
                 cardPublicId,
                 fieldPublicId: definition.publicId,
-              })
+              });
+              return;
             }
-          >
-            {t`Not set`}
-          </Button>
-        )}
+            setValue.mutate({
+              cardPublicId,
+              fieldPublicId: definition.publicId,
+              value: { type: "checkbox", value: true },
+            });
+          }}
+          className="h-4 w-4 cursor-pointer appearance-none rounded-md border border-light-500 bg-transparent outline-none ring-0 checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none disabled:cursor-default disabled:opacity-60 dark:border-dark-500 dark:hover:border-dark-500"
+        />
       </div>
     );
   }
@@ -434,14 +436,27 @@ export function CustomFields({
                     {definition.name}
                   </label>
                   {disabled && value ? (
-                    <div className="min-h-8 rounded-md bg-light-200 px-3 py-2 text-sm text-neutral-900 dark:bg-dark-300 dark:text-dark-1000">
-                      {getDisplayValue(definition, value, dateLocale)}
-                      {value.optionArchivedAt && (
-                        <span className="ml-2 text-xs text-light-700 dark:text-dark-700">
-                          ({t`Archived`})
-                        </span>
-                      )}
-                    </div>
+                    definition.type === "checkbox" ? (
+                      <div className="flex min-h-8 items-center">
+                        <input
+                          type="checkbox"
+                          aria-label={definition.name}
+                          checked={value.checkboxValue === true}
+                          readOnly
+                          tabIndex={-1}
+                          className="pointer-events-none h-4 w-4 appearance-none rounded-md border border-light-500 bg-transparent outline-none ring-0 checked:bg-blue-600 dark:border-dark-500"
+                        />
+                      </div>
+                    ) : (
+                      <div className="min-h-8 rounded-md bg-light-200 px-3 py-2 text-sm text-neutral-900 dark:bg-dark-300 dark:text-dark-1000">
+                        {getDisplayValue(definition, value, dateLocale)}
+                        {value.optionArchivedAt && (
+                          <span className="ml-2 text-xs text-light-700 dark:text-dark-700">
+                            ({t`Archived`})
+                          </span>
+                        )}
+                      </div>
+                    )
                   ) : (
                     <CustomFieldEditor
                       cardPublicId={cardPublicId}
