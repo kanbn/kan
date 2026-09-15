@@ -17,6 +17,7 @@ import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { isValidCustomFieldNumberValue } from "../../../custom-fields/custom-field-number";
 import { CustomFieldColourPicker } from "./custom-field-colour-picker";
 
 type Definition = RouterOutputs["customField"]["definitionsByBoard"][number];
@@ -48,12 +49,60 @@ const getFieldTypeLabel = (type: Definition["type"]) => {
     case "checkbox":
       return t`Checkbox`;
     case "select":
-      return t`Dropdown`;
+      return t`Choice`;
+  }
+};
+
+const getFieldTypeDescription = (type: Definition["type"]) => {
+  switch (type) {
+    case "text":
+      return t`Any text, including numbers.`;
+    case "number":
+      return t`Numbers only. Supports numeric filters and ranges.`;
+    case "date":
+      return t`A date and optional time.`;
+    case "checkbox":
+      return t`A simple checked or unchecked flag.`;
+    case "select":
+      return t`Choose one option from a list.`;
   }
 };
 
 const getPlacementLabel = (placement: Definition["placement"]) =>
   placement === "main" ? t`Main panel` : t`Sidebar`;
+
+function AdvancedSettings({
+  isExpanded,
+  onToggle,
+  children,
+}: {
+  isExpanded: boolean;
+  onToggle: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-md border border-light-400 dark:border-dark-500">
+      <button
+        type="button"
+        aria-expanded={isExpanded}
+        className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-xs font-medium text-light-900 hover:bg-light-200 dark:text-dark-900 dark:hover:bg-dark-300"
+        onClick={onToggle}
+      >
+        {isExpanded ? (
+          <HiChevronDown className="h-4 w-4" />
+        ) : (
+          <HiChevronRight className="h-4 w-4" />
+        )}
+        {t`Advanced settings`}
+      </button>
+      {isExpanded && (
+        <div className="space-y-3 border-t border-light-400 p-3 dark:border-dark-500">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
 
 const moveItem = <T,>(items: T[], index: number, offset: number) => {
   const targetIndex = index + offset;
@@ -251,12 +300,13 @@ function FieldRow({
   const [showOnCard, setShowOnCard] = useState(definition.showOnCard);
   const [defaultText, setDefaultText] = useState("");
   const [defaultDate, setDefaultDate] = useState("");
-  const [defaultCheckbox, setDefaultCheckbox] = useState<"" | "true" | "false">(
-    "",
-  );
+  const [defaultCheckbox, setDefaultCheckbox] = useState<"" | "true">("");
   const [defaultOptionKey, setDefaultOptionKey] = useState("");
   const [options, setOptions] = useState(() => getDraftOptions(definition));
-  const [isArchiveConfirmationVisible, setIsArchiveConfirmationVisible] =
+  const [isAdvancedExpanded, setIsAdvancedExpanded] = useState(
+    !!definition.sectionLabel || !!definition.placeholder,
+  );
+  const [isDeleteConfirmationVisible, setIsDeleteConfirmationVisible] =
     useState(false);
 
   const resetDraft = () => {
@@ -281,7 +331,7 @@ function FieldRow({
       definition.defaultValue?.type === "checkbox"
         ? definition.defaultValue.value
           ? "true"
-          : "false"
+          : ""
         : "",
     );
     setDefaultOptionKey(
@@ -290,6 +340,9 @@ function FieldRow({
         : "",
     );
     setOptions(getDraftOptions(definition));
+    setIsAdvancedExpanded(
+      !!definition.sectionLabel || !!definition.placeholder,
+    );
   };
 
   useEffect(resetDraft, [definition]);
@@ -313,7 +366,7 @@ function FieldRow({
         icon: "error",
       }),
   });
-  const archiveDefinition = api.customField.archiveDefinition.useMutation({
+  const deleteDefinition = api.customField.deleteDefinition.useMutation({
     onSuccess: invalidate,
     onError: () =>
       showPopup({
@@ -338,6 +391,10 @@ function FieldRow({
     (option) => option.isArchived,
   );
   const hasInvalidOption = options.some((option) => !option.name.trim());
+  const hasInvalidNumberDefault =
+    definition.type === "number" &&
+    !!defaultText.trim() &&
+    !isValidCustomFieldNumberValue(defaultText);
 
   const getDefaultValue = (): DefinitionDraft["defaultValue"] => {
     switch (definition.type) {
@@ -352,9 +409,7 @@ function FieldRow({
           ? { type: "date", value: new Date(defaultDate) }
           : null;
       case "checkbox":
-        return defaultCheckbox
-          ? { type: "checkbox", value: defaultCheckbox === "true" }
-          : null;
+        return defaultCheckbox ? { type: "checkbox", value: true } : null;
       case "select":
         return defaultOptionKey
           ? { type: "select", optionKey: defaultOptionKey }
@@ -432,7 +487,8 @@ function FieldRow({
           onSubmit={(event) => {
             event.preventDefault();
             const fieldName = name.trim();
-            if (!fieldName || hasInvalidOption) return;
+            if (!fieldName || hasInvalidOption || hasInvalidNumberDefault)
+              return;
             saveDefinition.mutate({
               fieldPublicId: definition.publicId,
               name: fieldName,
@@ -467,33 +523,20 @@ function FieldRow({
               onChange={(event) => setName(event.target.value)}
             />
           </label>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
-              {t`Placement`}
-              <select
-                value={placement}
-                disabled={saveDefinition.isPending}
-                onChange={(event) =>
-                  setPlacement(event.target.value as Definition["placement"])
-                }
-                className="mt-1 block w-full rounded-md border-0 bg-white/5 px-3 py-1.5 text-sm font-normal shadow-sm ring-1 ring-inset ring-light-600 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700"
-              >
-                <option value="sidebar">{t`Sidebar`}</option>
-                <option value="main">{t`Main panel`}</option>
-              </select>
-            </label>
-            <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
-              {t`Section`}
-              <Input
-                className="mt-1"
-                value={sectionLabel}
-                maxLength={255}
-                placeholder={t`No section`}
-                disabled={saveDefinition.isPending}
-                onChange={(event) => setSectionLabel(event.target.value)}
-              />
-            </label>
-          </div>
+          <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
+            {t`Placement`}
+            <select
+              value={placement}
+              disabled={saveDefinition.isPending}
+              onChange={(event) =>
+                setPlacement(event.target.value as Definition["placement"])
+              }
+              className="mt-1 block w-full rounded-md border-0 bg-white/5 px-3 py-1.5 text-sm font-normal shadow-sm ring-1 ring-inset ring-light-600 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700"
+            >
+              <option value="sidebar">{t`Sidebar`}</option>
+              <option value="main">{t`Main panel`}</option>
+            </select>
+          </label>
           <Toggle
             label={t`Show on card front`}
             labelPosition="after"
@@ -514,19 +557,6 @@ function FieldRow({
                 className="mt-1 block w-full resize-y rounded-md border-0 bg-white/5 px-3 py-1.5 text-sm font-normal shadow-sm ring-1 ring-inset ring-light-600 placeholder:text-light-700 focus:ring-2 focus:ring-inset focus:ring-light-700 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700 dark:placeholder:text-dark-700 dark:focus:ring-dark-700"
               />
             </label>
-            {(definition.type === "text" || definition.type === "number") && (
-              <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
-                {t`Placeholder`}
-                <Input
-                  className="mt-1"
-                  value={placeholder}
-                  maxLength={255}
-                  placeholder={t`Hint shown in an empty field`}
-                  disabled={saveDefinition.isPending}
-                  onChange={(event) => setPlaceholder(event.target.value)}
-                />
-              </label>
-            )}
             <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
               {t`Default value`}
               {(definition.type === "text" || definition.type === "number") && (
@@ -539,6 +569,12 @@ function FieldRow({
                   maxLength={definition.type === "number" ? 100 : 10000}
                   value={defaultText}
                   placeholder={t`No default`}
+                  errorMessage={
+                    hasInvalidNumberDefault
+                      ? t`Enter a valid number.`
+                      : undefined
+                  }
+                  aria-invalid={hasInvalidNumberDefault}
                   disabled={saveDefinition.isPending}
                   onChange={(event) => setDefaultText(event.target.value)}
                 />
@@ -572,19 +608,48 @@ function FieldRow({
                   value={defaultCheckbox}
                   disabled={saveDefinition.isPending}
                   onChange={(event) =>
-                    setDefaultCheckbox(
-                      event.target.value as "" | "true" | "false",
-                    )
+                    setDefaultCheckbox(event.target.value as "" | "true")
                   }
                   className="mt-1 block w-full rounded-md border-0 bg-white/5 px-3 py-1.5 text-sm font-normal shadow-sm ring-1 ring-inset ring-light-600 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700"
                 >
                   <option value="">{t`No default`}</option>
                   <option value="true">{t`Checked`}</option>
-                  <option value="false">{t`Unchecked`}</option>
                 </select>
               )}
             </label>
           </div>
+          <AdvancedSettings
+            isExpanded={isAdvancedExpanded}
+            onToggle={() => setIsAdvancedExpanded((current) => !current)}
+          >
+            <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
+              {t`Section`}
+              <Input
+                className="mt-1"
+                value={sectionLabel}
+                maxLength={255}
+                placeholder={t`No section`}
+                disabled={saveDefinition.isPending}
+                onChange={(event) => setSectionLabel(event.target.value)}
+              />
+            </label>
+            {(definition.type === "text" || definition.type === "number") && (
+              <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
+                {t`Input hint`}
+                <Input
+                  className="mt-1"
+                  value={placeholder}
+                  maxLength={255}
+                  placeholder={t`Example or expected format`}
+                  disabled={saveDefinition.isPending}
+                  onChange={(event) => setPlaceholder(event.target.value)}
+                />
+                <span className="mt-1 block font-normal text-light-700 dark:text-dark-700">
+                  {t`Shown only while the card field is empty. This is not a card value.`}
+                </span>
+              </label>
+            )}
+          </AdvancedSettings>
           {definition.type === "select" && (
             <OptionDrafts
               options={options}
@@ -601,29 +666,29 @@ function FieldRow({
               {archivedOptions.map(({ name }) => name).join(", ")}
             </p>
           )}
-          {isArchiveConfirmationVisible && (
+          {isDeleteConfirmationVisible && (
             <div className="rounded-md bg-light-200 p-3 text-sm dark:bg-dark-300">
-              <p className="text-light-1000 dark:text-dark-1000">{t`Archive this field? Existing card values will be hidden but preserved.`}</p>
+              <p className="text-light-1000 dark:text-dark-1000">{t`Delete this field? It will be removed from the board and all cards.`}</p>
               <div className="mt-3 flex justify-end gap-2">
                 <Button
                   type="button"
                   variant="secondary"
                   size="sm"
-                  onClick={() => setIsArchiveConfirmationVisible(false)}
+                  onClick={() => setIsDeleteConfirmationVisible(false)}
                 >{t`Cancel`}</Button>
                 <Button
                   type="button"
                   size="sm"
-                  isLoading={archiveDefinition.isPending}
+                  isLoading={deleteDefinition.isPending}
                   onClick={() =>
-                    archiveDefinition.mutate(
+                    deleteDefinition.mutate(
                       { fieldPublicId: definition.publicId },
                       {
-                        onSuccess: () => setIsArchiveConfirmationVisible(false),
+                        onSuccess: () => setIsDeleteConfirmationVisible(false),
                       },
                     )
                   }
-                >{t`Archive`}</Button>
+                >{t`Delete`}</Button>
               </div>
             </div>
           )}
@@ -633,9 +698,9 @@ function FieldRow({
               variant="ghost"
               size="sm"
               disabled={saveDefinition.isPending}
-              onClick={() => setIsArchiveConfirmationVisible(true)}
+              onClick={() => setIsDeleteConfirmationVisible(true)}
               iconLeft={<HiOutlineTrash className="h-4 w-4" />}
-            >{t`Archive field`}</Button>
+            >{t`Delete field`}</Button>
             <div className="flex items-center gap-2">
               <Button
                 type="button"
@@ -650,7 +715,9 @@ function FieldRow({
               <Button
                 type="submit"
                 size="sm"
-                disabled={!name.trim() || hasInvalidOption}
+                disabled={
+                  !name.trim() || hasInvalidOption || hasInvalidNumberDefault
+                }
                 isLoading={saveDefinition.isPending}
               >{t`Save`}</Button>
             </div>
@@ -681,6 +748,7 @@ function CreateField({
   const [type, setType] = useState<Definition["type"]>("select");
   const [showOnCard, setShowOnCard] = useState(true);
   const [options, setOptions] = useState<DraftOption[]>([]);
+  const [isAdvancedExpanded, setIsAdvancedExpanded] = useState(false);
   const resetDraft = () => {
     setName("");
     setDescription("");
@@ -690,6 +758,7 @@ function CreateField({
     setType("select");
     setShowOnCard(true);
     setOptions([]);
+    setIsAdvancedExpanded(false);
   };
   const createDefinition = api.customField.createDefinition.useMutation({
     onSuccess: async () => {
@@ -782,35 +851,25 @@ function CreateField({
                   </option>
                 ))}
               </select>
+              <span className="mt-1 block font-normal text-light-700 dark:text-dark-700">
+                {getFieldTypeDescription(type)}
+              </span>
             </label>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
-              {t`Placement`}
-              <select
-                value={placement}
-                disabled={createDefinition.isPending}
-                onChange={(event) =>
-                  setPlacement(event.target.value as Definition["placement"])
-                }
-                className="mt-1 block w-full rounded-md border-0 bg-white/5 px-3 py-1.5 text-sm font-normal shadow-sm ring-1 ring-inset ring-light-600 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700"
-              >
-                <option value="sidebar">{t`Sidebar`}</option>
-                <option value="main">{t`Main panel`}</option>
-              </select>
-            </label>
-            <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
-              {t`Section`}
-              <Input
-                className="mt-1"
-                value={sectionLabel}
-                maxLength={255}
-                placeholder={t`Section name (optional)`}
-                disabled={createDefinition.isPending}
-                onChange={(event) => setSectionLabel(event.target.value)}
-              />
-            </label>
-          </div>
+          <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
+            {t`Placement`}
+            <select
+              value={placement}
+              disabled={createDefinition.isPending}
+              onChange={(event) =>
+                setPlacement(event.target.value as Definition["placement"])
+              }
+              className="mt-1 block w-full rounded-md border-0 bg-white/5 px-3 py-1.5 text-sm font-normal shadow-sm ring-1 ring-inset ring-light-600 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700"
+            >
+              <option value="sidebar">{t`Sidebar`}</option>
+              <option value="main">{t`Main panel`}</option>
+            </select>
+          </label>
           <Toggle
             label={t`Show on card front`}
             labelPosition="after"
@@ -818,9 +877,7 @@ function CreateField({
             disabled={createDefinition.isPending}
             onChange={() => setShowOnCard((current) => !current)}
           />
-          <div
-            className={`grid gap-3 ${type === "text" || type === "number" ? "sm:grid-cols-2" : ""}`}
-          >
+          <div className="grid gap-3">
             <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
               {t`Description`}
               <Input
@@ -832,20 +889,39 @@ function CreateField({
                 onChange={(event) => setDescription(event.target.value)}
               />
             </label>
+          </div>
+          <AdvancedSettings
+            isExpanded={isAdvancedExpanded}
+            onToggle={() => setIsAdvancedExpanded((current) => !current)}
+          >
+            <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
+              {t`Section`}
+              <Input
+                className="mt-1"
+                value={sectionLabel}
+                maxLength={255}
+                placeholder={t`Section name (optional)`}
+                disabled={createDefinition.isPending}
+                onChange={(event) => setSectionLabel(event.target.value)}
+              />
+            </label>
             {(type === "text" || type === "number") && (
               <label className="block text-xs font-medium text-light-900 dark:text-dark-900">
-                {t`Placeholder`}
+                {t`Input hint`}
                 <Input
                   className="mt-1"
                   value={placeholder}
                   maxLength={255}
-                  placeholder={t`Input placeholder (optional)`}
+                  placeholder={t`Example or expected format`}
                   disabled={createDefinition.isPending}
                   onChange={(event) => setPlaceholder(event.target.value)}
                 />
+                <span className="mt-1 block font-normal text-light-700 dark:text-dark-700">
+                  {t`Shown only while the card field is empty. This is not a card value.`}
+                </span>
               </label>
             )}
-          </div>
+          </AdvancedSettings>
           {type === "select" && (
             <OptionDrafts
               options={options}
@@ -895,8 +971,8 @@ export function CustomFieldManager({
     );
 
   return (
-    <div className="max-h-[80vh] overflow-y-auto">
-      <div className="sticky top-0 z-10 flex items-center justify-between border-b border-light-400 bg-white/95 px-5 py-4 backdrop-blur dark:border-dark-500 dark:bg-dark-100/95">
+    <div className="max-h-[80vh] overflow-y-auto rounded-lg bg-white dark:bg-dark-100">
+      <div className="sticky top-0 z-10 flex items-center justify-between border-b border-light-400 bg-white px-5 py-4 dark:border-dark-500 dark:bg-dark-100">
         <div>
           <h2 className="text-sm font-medium text-neutral-900 dark:text-dark-1000">{t`Custom fields`}</h2>
           <p className="mt-1 text-xs text-light-800 dark:text-dark-800">{t`Open a field to edit its settings.`}</p>

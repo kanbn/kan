@@ -1162,7 +1162,7 @@ export const saveDefinition = async (
     return { success: true };
   });
 
-export const archiveDefinition = async (
+export const deleteDefinition = async (
   db: dbClient,
   input: { fieldPublicId: string; actorUserId: string },
 ) =>

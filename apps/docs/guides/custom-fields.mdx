@@ -11,7 +11,7 @@ reference, story points, review date or yes/no flag.
 
 Open **Board options**, then select **Custom fields**. You can also use the edit
 button beside **Custom fields** on a card. Board editors can create, reorder and
-archive fields and configure how each field is displayed.
+delete fields and configure how each field is displayed.
 
 Fields are collapsed by default. Open a field to edit its settings, then choose
 **Save** to apply the complete configuration or **Cancel** to discard the
@@ -25,23 +25,24 @@ Kan supports the following field types:
 | Number   | Estimates, costs and other numeric values |
 | Date     | Dates and times                           |
 | Checkbox | Yes/no or complete/incomplete values      |
-| Dropdown | One value from a list you define          |
+| Choice   | One value from a list you define          |
 
-For a dropdown field, **Options** are the values that card editors can choose.
+For a choice field, **Options** are the values that card editors can choose.
 Each option has a name and order. Colour is optional; when it helps distinguish
 values, choose one from the same palette used by labels. Imported colours that
 are outside that palette remain intact until you replace or remove them. For
 example, a `Status` field might offer `Planned`, `In progress`, `Blocked` and
 `Done`.
 
-Archiving a field or dropdown option prevents new assignments without deleting
-values already stored on cards.
+Deleting a field removes it from the board and its cards. Archiving a choice
+option prevents new assignments without deleting values already stored on
+cards.
 
-## Descriptions, placeholders and defaults
+## Descriptions, input hints and defaults
 
 A field description explains how the field should be used and appears with the
-field on card forms. Text and number fields can also have a short placeholder
-inside an empty input.
+field on card forms. Text and number fields can also have a short **Input hint**
+inside an empty input. The hint is not a card value.
 
 A default value is applied when a new card is created. Card editors can replace
 the suggested value or deliberately leave the field empty. Changing a default
@@ -64,7 +65,8 @@ available from the card's settings drawer.
 
 Open a card and edit its custom fields in the configured main or sidebar
 section. Changes are saved using the same inline editing behaviour as other card
-details.
+details. Checkbox fields are either checked or unchecked; unchecking one clears
+its stored value.
 
 Custom fields also appear while creating a card. Defaults are prefilled, and
 you can replace or clear them before adding the card.
@@ -72,7 +74,7 @@ you can replace or clear them before adding the card.
 ## Filter a board
 
 Open **Filter**, choose **Custom fields**, then choose a field to limit the
-visible cards. Dropdown and checkbox fields offer their available values. Text,
+visible cards. Choice and checkbox fields offer their available values. Text,
 number and date fields offer controls appropriate to their type. Custom-field
 conditions combine with the board's other active filters.
 

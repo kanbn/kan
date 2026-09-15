@@ -1,3 +1,7 @@
+import { isValidCustomFieldNumberValue } from "../../../custom-fields/custom-field-number";
+
+export { isValidCustomFieldNumberValue } from "../../../custom-fields/custom-field-number";
+
 export type CustomFieldFilterType = "select" | "checkbox";
 export type CheckboxFilterValue = "checked" | "unchecked";
 
@@ -25,10 +29,6 @@ export type ScalarCustomFieldFilter =
       from?: string;
       to?: string;
     };
-
-export const isValidCustomFieldNumberValue = (value: string) =>
-  value.length <= 100 &&
-  /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/.test(value);
 
 const isCanonicalDate = (value: string) => {
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(value))

@@ -25,7 +25,7 @@ const getDisplayValue = (
         ? format(value.dateValue, "PP", { locale: dateLocale })
         : null;
     case "checkbox":
-      return value.checkboxValue ? t`Checked` : t`Unchecked`;
+      return null;
     case "select":
       return value.optionName;
   }
@@ -44,7 +44,11 @@ export function CustomFieldBadges({
   );
   const visibleValues = definitions.flatMap((definition) => {
     const value = valuesByFieldId.get(definition.publicId);
-    return definition.showOnCard && value ? [{ definition, value }] : [];
+    return definition.showOnCard &&
+      value &&
+      (definition.type !== "checkbox" || value.checkboxValue === true)
+      ? [{ definition, value }]
+      : [];
   });
 
   if (visibleValues.length === 0) return null;
@@ -56,21 +60,36 @@ export function CustomFieldBadges({
           key={definition.publicId}
           className="flex min-w-0 max-w-full items-center gap-1.5 rounded bg-light-200 px-2 py-1 text-[11px] dark:bg-dark-400"
         >
-          <span className="shrink-0 text-light-800 dark:text-dark-800">
-            {definition.name}:
-          </span>
-          {definition.type === "select" && (
-            <span
-              className="h-2 w-2 shrink-0 rounded-full border border-black/10"
-              style={{
-                backgroundColor: value.optionColourCode ?? "transparent",
-              }}
-            />
+          {definition.type === "checkbox" ? (
+            <>
+              <span
+                aria-hidden="true"
+                className="h-3 w-3 shrink-0 rounded border border-blue-600 bg-blue-600"
+              />
+              <span className="truncate text-light-1000 dark:text-dark-1000">
+                {definition.name}
+              </span>
+              <span className="sr-only">{t`Checked`}</span>
+            </>
+          ) : (
+            <>
+              <span className="shrink-0 text-light-800 dark:text-dark-800">
+                {definition.name}:
+              </span>
+              {definition.type === "select" && (
+                <span
+                  className="h-2 w-2 shrink-0 rounded-full border border-black/10"
+                  style={{
+                    backgroundColor: value.optionColourCode ?? "transparent",
+                  }}
+                />
+              )}
+              <span className="truncate text-light-1000 dark:text-dark-1000">
+                {getDisplayValue(definition, value, dateLocale)}
+                {value.optionArchivedAt ? ` (${t`Archived`})` : null}
+              </span>
+            </>
           )}
-          <span className="truncate text-light-1000 dark:text-dark-1000">
-            {getDisplayValue(definition, value, dateLocale)}
-            {value.optionArchivedAt ? ` (${t`Archived`})` : null}
-          </span>
         </div>
       ))}
     </div>
