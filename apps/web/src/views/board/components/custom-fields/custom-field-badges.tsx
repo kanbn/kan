@@ -1,6 +1,7 @@
 import type { Locale } from "date-fns";
 import { t } from "@lingui/core/macro";
 import { format } from "date-fns";
+import { HiCheck } from "react-icons/hi2";
 
 import type { RouterOutputs } from "~/utils/api";
 import { useLocalisation } from "~/hooks/useLocalisation";
@@ -62,9 +63,9 @@ export function CustomFieldBadges({
         >
           {definition.type === "checkbox" ? (
             <>
-              <span
+              <HiCheck
                 aria-hidden="true"
-                className="h-3 w-3 shrink-0 rounded border border-blue-600 bg-blue-600"
+                className="h-3.5 w-3.5 shrink-0 text-blue-600"
               />
               <span className="truncate text-light-1000 dark:text-dark-1000">
                 {definition.name}
