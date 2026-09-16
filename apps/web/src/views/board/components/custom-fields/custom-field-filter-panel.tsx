@@ -5,6 +5,7 @@ import { Fragment, useMemo, useState } from "react";
 import type { ScalarCustomFieldFilter } from "./custom-field-filters";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
+import { usePopup } from "~/providers/popup";
 import { isValidCustomFieldNumberValue } from "./custom-field-filters";
 
 type ScalarFieldType = "text" | "number" | "date";
@@ -93,6 +94,7 @@ const CustomFieldFilterPanel = ({
   onClear,
   onClose,
 }: Props) => {
+  const { showPopup } = usePopup();
   const initialValues = useMemo(
     () => getInitialValues(field.type, initialFilter),
     [field.type, initialFilter],
@@ -153,8 +155,12 @@ const CustomFieldFilterPanel = ({
     try {
       await onApply(filter);
       onClose();
-    } catch (error) {
-      console.error(error);
+    } catch {
+      showPopup({
+        header: t`Unable to update filters`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -165,8 +171,12 @@ const CustomFieldFilterPanel = ({
     try {
       await onClear();
       onClose();
-    } catch (error) {
-      console.error(error);
+    } catch {
+      showPopup({
+        header: t`Unable to update filters`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
     } finally {
       setIsSubmitting(false);
     }
