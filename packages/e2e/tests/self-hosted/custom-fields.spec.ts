@@ -522,11 +522,6 @@ test(
     await board.createList("To do");
     await board.createCard("Lifecycle card", "To do");
 
-    await page.evaluate(() => localStorage.setItem("theme", "dark"));
-    await page.reload();
-    await expect(page.locator("html")).toHaveClass(/dark/);
-    await page.setViewportSize({ width: 390, height: 844 });
-
     const openManager = async () => {
       await page
         .getByRole("button", { name: "Board options", exact: true })
@@ -534,6 +529,24 @@ test(
       await page.getByRole("menuitem", { name: "Custom fields" }).click();
       return page.getByRole("dialog");
     };
+
+    await page.evaluate(() => localStorage.setItem("theme", "light"));
+    await page.reload();
+    const lightDialog = await openManager();
+    const lightBackdrop = lightDialog
+      .locator("div.fixed.inset-0.transition-opacity")
+      .first();
+    await expect(lightBackdrop).toHaveCSS(
+      "background-color",
+      "rgba(0, 0, 0, 0.2)",
+    );
+    await lightDialog.getByRole("button", { name: "Close" }).click();
+
+    await page.evaluate(() => localStorage.setItem("theme", "dark"));
+    await page.reload();
+    await expect(page.locator("html")).toHaveClass(/dark/);
+    await page.setViewportSize({ width: 390, height: 844 });
+
     const dialog = await openManager();
     const dialogBox = await dialog.boundingBox();
     expect(dialogBox).not.toBeNull();
