@@ -58,7 +58,7 @@ const getFieldTypeDescription = (type: Definition["type"]) => {
     case "text":
       return t`Any text, including numbers.`;
     case "number":
-      return t`Numbers only. Supports numeric filters and ranges.`;
+      return t`Enter a single number.`;
     case "date":
       return t`A date and optional time.`;
     case "checkbox":
@@ -418,7 +418,11 @@ function FieldRow({
   };
 
   return (
-    <section className="rounded-md border border-light-400 dark:border-dark-500">
+    <section
+      className={`rounded-md border border-light-400 dark:border-dark-500 ${
+        isExpanded ? "bg-light-100 dark:bg-dark-200" : ""
+      }`}
+    >
       <div className="flex items-center gap-1 p-2">
         <button
           type="button"
@@ -779,7 +783,11 @@ function CreateField({
   const hasInvalidOption = options.some((option) => !option.name.trim());
 
   return (
-    <section className="rounded-md border border-dashed border-light-500 dark:border-dark-500">
+    <section
+      className={`rounded-md border border-dashed border-light-500 dark:border-dark-500 ${
+        isExpanded ? "bg-light-100 dark:bg-dark-200" : ""
+      }`}
+    >
       <button
         type="button"
         aria-expanded={isExpanded}

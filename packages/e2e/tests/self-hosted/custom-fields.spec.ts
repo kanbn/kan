@@ -79,6 +79,8 @@ test(
       await dialog
         .getByRole("combobox", { name: "Field type" })
         .selectOption({ label: type });
+      if (type === "Number")
+        await expect(dialog.getByText("Enter a single number.")).toBeVisible();
       const showOnCardToggle = dialog.getByRole("switch", {
         name: "Show on card front",
       });
@@ -227,7 +229,11 @@ test(
     await expect(cardLink.getByText("Estimate:")).toBeVisible();
     await expect(cardLink.getByText("Milestone:")).toBeVisible();
     await expect(cardLink.getByText("Priority:")).toBeVisible();
-    await expect(cardLink.getByText("Approved", { exact: true })).toBeVisible();
+    const approvedBadge = cardLink
+      .getByText("Approved", { exact: true })
+      .locator("..");
+    await expect(approvedBadge).toBeVisible();
+    await expect(approvedBadge.locator("svg")).toBeVisible();
 
     await page.getByRole("button", { name: "Filter", exact: true }).click();
     await page
