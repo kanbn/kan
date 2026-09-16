@@ -406,6 +406,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
         <Modal
           modalSize="lg"
           positionFromTop="sm"
+          backdropVariant="dimmed"
           isVisible={isOpen && modalContentType === "CUSTOM_FIELDS"}
         >
           <CustomFieldManager boardPublicId={boardId ?? ""} />

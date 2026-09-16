@@ -418,11 +418,7 @@ function FieldRow({
   };
 
   return (
-    <section
-      className={`rounded-md border border-light-400 dark:border-dark-500 ${
-        isExpanded ? "bg-light-100 dark:bg-dark-200" : ""
-      }`}
-    >
+    <section className="rounded-md border border-light-400 dark:border-dark-500">
       <div className="flex items-center gap-1 p-2">
         <button
           type="button"
@@ -783,11 +779,7 @@ function CreateField({
   const hasInvalidOption = options.some((option) => !option.name.trim());
 
   return (
-    <section
-      className={`rounded-md border border-dashed border-light-500 dark:border-dark-500 ${
-        isExpanded ? "bg-light-100 dark:bg-dark-200" : ""
-      }`}
-    >
+    <section className="rounded-md border border-dashed border-light-500 dark:border-dark-500">
       <button
         type="button"
         aria-expanded={isExpanded}

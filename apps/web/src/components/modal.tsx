@@ -7,6 +7,7 @@ interface Props {
   children: React.ReactNode;
   modalSize?: "sm" | "md" | "lg";
   positionFromTop?: "sm" | "md" | "lg";
+  backdropVariant?: "default" | "dimmed";
   isVisible?: boolean;
   closeOnClickOutside?: boolean;
   centered?: boolean;
@@ -16,6 +17,7 @@ const Modal: React.FC<Props> = ({
   children,
   modalSize = "sm",
   positionFromTop = "md",
+  backdropVariant = "default",
   isVisible,
   closeOnClickOutside,
   centered = false,
@@ -42,6 +44,11 @@ const Modal: React.FC<Props> = ({
     lg: "mt-[50vh]",
   };
 
+  const backdropVariantMap = {
+    default: "bg-light-50 bg-opacity-40 dark:bg-dark-50 dark:bg-opacity-40",
+    dimmed: "bg-black/20 dark:bg-black/40",
+  };
+
   return (
     <Transition.Root show={shouldShow} as={Fragment}>
       <Dialog
@@ -58,7 +65,9 @@ const Modal: React.FC<Props> = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-light-50 bg-opacity-40 transition-opacity dark:bg-dark-50 dark:bg-opacity-40" />
+          <div
+            className={`fixed inset-0 transition-opacity ${backdropVariantMap[backdropVariant]}`}
+          />
         </Transition.Child>
 
         <div className="fixed inset-0 z-50 w-screen overflow-y-auto">
