@@ -64,6 +64,7 @@ describe("card description updates", () => {
       listId: 3,
       dueDate: null,
       list: {
+        boardId: 4,
         publicId: "list-12345678",
         name: "Todo",
       },
