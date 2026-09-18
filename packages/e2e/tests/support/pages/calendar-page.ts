@@ -81,13 +81,17 @@ export class CalendarPage {
 
   async expectUnlocked() {
     await expect(
-      this.page.getByRole("heading", { name: "See every card by due date" }),
+      this.page.getByRole("heading", {
+        name: "Never lose track of what's due",
+      }),
     ).toHaveCount(0);
   }
 
   async expectLocked() {
     await expect(
-      this.page.getByRole("heading", { name: "See every card by due date" }),
+      this.page.getByRole("heading", {
+        name: "Never lose track of what's due",
+      }),
     ).toBeVisible();
     await expect(
       this.page.getByRole("link", { name: "Upgrade", exact: true }),
