@@ -442,10 +442,10 @@ const CalendarView = ({
                 <HiCalendarDays className="h-4 w-4" />
               </div>
               <h3 className="mb-2 text-base font-bold text-light-1000 dark:text-dark-1000">
-                {t`See every card by due date`}
+                {t`Never lose track of what's due`}
               </h3>
               <p className="mb-5 text-sm leading-relaxed text-light-900 dark:text-dark-900">
-                {t`Lay cards out across the month and drag one to a new date to reschedule it. Available on paid plans.`}
+                {t`See all your cards across the month, then drag and drop to reschedule. Available on paid plans.`}
               </p>
               <Button href={upgradeUrl} fullWidth>
                 {t`Upgrade`}
