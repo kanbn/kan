@@ -1,9 +1,9 @@
 import { spawn } from "node:child_process";
 import type { ChildProcessWithoutNullStreams } from "node:child_process";
 
-const READY_TIMEOUT_MS = 45_000;
+const READY_TIMEOUT_MS = 10_000;
 const READY_RETRIES = 2;
-const RETRY_DELAY_MS = 2_000;
+const RETRY_DELAY_MS = 1_000;
 
 export interface StripeListener {
   process: ChildProcessWithoutNullStreams;
