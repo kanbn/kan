@@ -368,16 +368,23 @@ const getActivityIcon = (
 
 const ACTIVITIES_PAGE_SIZE = 20;
 
+export type ActivityFeedFilter = "all" | "activity" | "comments";
+export type ActivityFeedSortOrder = "desc" | "asc";
+
 const ActivityList = ({
   cardPublicId,
   isLoading: cardIsLoading,
   isAdmin,
   isViewOnly,
+  filter = "all",
+  sortOrder = "desc",
 }: {
   cardPublicId: string;
   isLoading: boolean;
   isAdmin?: boolean;
   isViewOnly?: boolean;
+  filter?: ActivityFeedFilter;
+  sortOrder?: ActivityFeedSortOrder;
 }) => {
   const { dateLocale } = useLocalisation();
   const { data: sessionData } = authClient.useSession();
@@ -391,6 +398,14 @@ const ActivityList = ({
   const isFullyExpandedRef = useRef(false);
   const lastDataUpdatedAtRef = useRef<number | null>(null);
 
+  // Reset accumulated activities when filter or sortOrder changes
+  useEffect(() => {
+    setAllActivities([]);
+    setHasMore(true);
+    isFullyExpandedRef.current = false;
+    lastDataUpdatedAtRef.current = null;
+  }, [filter, sortOrder]);
+
   const {
     data: firstPageData,
     isFetching: isFetchingFirst,
@@ -399,6 +414,8 @@ const ActivityList = ({
     {
       cardPublicId,
       limit: ACTIVITIES_PAGE_SIZE,
+      filter,
+      sortOrder,
     },
     {
       enabled: !!cardPublicId && cardPublicId.length >= 12,
@@ -427,6 +444,8 @@ const ActivityList = ({
               cardPublicId,
               limit: ACTIVITIES_PAGE_SIZE,
               cursor: nextCursor,
+              filter,
+              sortOrder,
             });
 
             const existingIds = new Set(
@@ -453,7 +472,7 @@ const ActivityList = ({
         }
       }
     }
-  }, [firstPageData, dataUpdatedAt, cardPublicId, utils.card.getActivities]);
+  }, [firstPageData, dataUpdatedAt, cardPublicId, filter, sortOrder, utils.card.getActivities]);
 
   const handleLoadMore = async () => {
     if (isLoadingMore || !hasMore || allActivities.length === 0) return;
@@ -468,6 +487,8 @@ const ActivityList = ({
         cardPublicId,
         limit: ACTIVITIES_PAGE_SIZE,
         cursor: nextCursor,
+        filter,
+        sortOrder,
       });
 
       const existingIds = new Set(allActivities.map((a) => a.publicId));
