@@ -1,10 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import type { Readable } from "node:stream";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 
 import { createNextApiContext } from "@kan/api/trpc-context";
 import { withApiLogging } from "@kan/api/utils/apiLogging";
 import { withRateLimit } from "@kan/api/utils/rateLimit";
 import * as userRepo from "@kan/db/repository/user.repo";
+import { createLogger } from "@kan/logger";
 import { createS3Client } from "@kan/shared/utils";
 
 import { env } from "~/env";
@@ -14,6 +16,20 @@ const MAX_SIZE_BYTES = parseInt(
   10,
 ); // Default 2MB
 const allowedContentTypes = ["image/jpeg", "image/png", "image/webp"];
+
+const log = createLogger("api");
+
+async function buffer(readable: Readable, maxSizeBytes: number) {
+  const chunks: Buffer[] = [];
+  let size = 0;
+  for await (const chunk of readable as AsyncIterable<Buffer | string>) {
+    const buf = typeof chunk === "string" ? Buffer.from(chunk) : chunk;
+    size += buf.length;
+    if (size > maxSizeBytes) return null;
+    chunks.push(buf);
+  }
+  return Buffer.concat(chunks);
+}
 
 export const config = {
   api: {
@@ -80,6 +96,12 @@ export default withRateLimit(
 
       const s3Key = `${user.id}/${sanitizedFilename}`;
 
+      const body = await buffer(req, MAX_SIZE_BYTES);
+
+      if (!body) {
+        return res.status(400).json({ error: "File too large" });
+      }
+
       const client = createS3Client();
 
       // Upload the file to S3
@@ -87,9 +109,9 @@ export default withRateLimit(
         new PutObjectCommand({
           Bucket: bucket,
           Key: s3Key,
-          Body: req,
+          Body: body,
           ContentType: contentType,
-          ContentLength: contentLength,
+          ContentLength: body.length,
         }),
       );
 
@@ -102,10 +124,11 @@ export default withRateLimit(
         key: s3Key,
         filename: sanitizedFilename,
         contentType,
-        size: contentLength,
+        size: body.length,
         user: updatedUser,
       });
     } catch (error) {
+      log.error({ err: error }, "Avatar upload failed");
       return res.status(500).json({ error: "Internal server error" });
     }
   }),
