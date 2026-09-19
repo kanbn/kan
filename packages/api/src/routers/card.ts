@@ -766,6 +766,8 @@ export const cardRouter = createTRPCRouter({
         cardPublicId: z.string().min(12),
         limit: z.number().min(1).max(100).optional().default(10),
         cursor: z.string().datetime().optional(), // ISO datetime string
+        cursorPublicId: z.string().length(12).optional(),
+        order: z.enum(["oldest", "newest"]).optional().default("oldest"),
       }),
     )
     .output(
@@ -773,6 +775,7 @@ export const cardRouter = createTRPCRouter({
         activities: z.array(activityItemSchema),
         hasMore: z.boolean(),
         nextCursor: z.string().datetime().nullable(),
+        nextCursorPublicId: z.string().length(12).nullable(),
       }),
     )
     .query(async ({ ctx, input }) => {
@@ -799,13 +802,19 @@ export const cardRouter = createTRPCRouter({
         await assertPermission(ctx.db, userId, card.workspaceId, "card:view");
       }
 
-      const cursor = input.cursor ? new Date(input.cursor) : undefined;
+      const cursor = input.cursor
+        ? {
+            createdAt: new Date(input.cursor),
+            publicId: input.cursorPublicId,
+          }
+        : undefined;
       const result = await cardActivityRepo.getPaginatedActivities(
         ctx.db,
         card.id,
         {
           limit: input.limit,
           cursor,
+          order: input.order,
         },
       );
 
@@ -842,12 +851,21 @@ export const cardRouter = createTRPCRouter({
         }),
       );
 
-      const mergedActivities = mergeActivities(activitiesWithAvatarUrls);
+      const chronologicalActivities =
+        input.order === "newest"
+          ? [...activitiesWithAvatarUrls].reverse()
+          : activitiesWithAvatarUrls;
+      const mergedActivities = mergeActivities(chronologicalActivities);
+      const orderedActivities =
+        input.order === "newest"
+          ? [...mergedActivities].reverse()
+          : mergedActivities;
 
       return {
-        activities: mergedActivities,
+        activities: orderedActivities,
         hasMore: result.hasMore,
-        nextCursor: result.nextCursor?.toISOString() ?? null,
+        nextCursor: result.nextCursor?.createdAt.toISOString() ?? null,
+        nextCursorPublicId: result.nextCursor?.publicId ?? null,
       };
     }),
   update: protectedProcedure
