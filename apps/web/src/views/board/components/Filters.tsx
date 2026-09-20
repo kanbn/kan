@@ -400,7 +400,7 @@ const Filters = ({
           ) : undefined
         }
       >
-        <Button variant="secondary" disabled={isLoading}>
+        <Button variant="secondary" disabled={isLoading} aria-label={t`Filter`}>
           <span className="flex items-center gap-2">
             <IoFilterOutline />
             <span className="hidden sm:inline">{t`Filter`}</span>
