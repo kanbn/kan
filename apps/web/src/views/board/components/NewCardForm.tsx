@@ -48,6 +48,7 @@ interface NewCardFormProps {
   boardPublicId: string;
   listPublicId: string;
   queryParams: QueryParams;
+  initialDueDate?: Date | null;
 }
 
 export function NewCardForm({
@@ -55,6 +56,7 @@ export function NewCardForm({
   boardPublicId,
   listPublicId,
   queryParams,
+  initialDueDate = null,
 }: NewCardFormProps) {
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
@@ -74,7 +76,7 @@ export function NewCardForm({
       customFieldValues: [],
       isCreateAnotherEnabled: false,
       position: "start",
-      dueDate: null,
+      dueDate: initialDueDate,
     },
     resetOnClose: true,
   });
