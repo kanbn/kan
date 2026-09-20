@@ -253,6 +253,20 @@
       "when": 1788209875712,
       "tag": "20260831205755_AddCardRelationIndexes",
       "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1788781560413,
+      "tag": "20260907114600_AddCardCovers",
+      "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1788788062533,
+      "tag": "20260907133422_AddImageCardCovers",
+      "breakpoints": true
     }
   ]
 }

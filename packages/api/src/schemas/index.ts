@@ -8,7 +8,10 @@ export {
 
 export {
   cardCreateResponseSchema,
+  cardCoverSchema,
+  cardCoverSizeSchema,
   cardUpdateResponseSchema,
+  cardUpdateCoverResponseSchema,
   cardDetailSchema,
   commentResponseSchema,
   commentDeleteResponseSchema,
