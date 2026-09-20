@@ -304,6 +304,16 @@ export const checklistRouter = createTRPCRouter({
           code: "UNAUTHORIZED",
         });
 
+      if (
+        input.title === undefined &&
+        input.completed === undefined &&
+        input.index === undefined
+      )
+        throw new TRPCError({
+          message: `At least one of title, completed, or index must be provided`,
+          code: "BAD_REQUEST",
+        });
+
       const item = await checklistRepo.getChecklistItemByPublicIdWithChecklist(
         ctx.db,
         input.checklistItemPublicId,

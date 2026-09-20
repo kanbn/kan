@@ -1,8 +1,13 @@
-import type { RefObject } from "react";
 import type { NextRouter } from "next/router";
+import type { RefObject } from "react";
 import { useEffect, useRef } from "react";
 
-const scrollPositions = new Map<string, number>();
+interface BoardScrollPosition {
+  left: number;
+  lists: Map<string, number>;
+}
+
+const scrollPositions = new Map<string, BoardScrollPosition>();
 
 export function useScrollRestore(
   boardId: string | null | undefined,
@@ -19,7 +24,17 @@ export function useScrollRestore(
 
     const saveScrollPosition = () => {
       if (scrollRef.current) {
-        scrollPositions.set(boardId, scrollRef.current.scrollLeft);
+        const lists = new Map<string, number>();
+        scrollRef.current
+          .querySelectorAll<HTMLElement>("[data-list-scroll-id]")
+          .forEach((list) => {
+            const listId = list.dataset.listScrollId;
+            if (listId) lists.set(listId, list.scrollTop);
+          });
+        scrollPositions.set(boardId, {
+          left: scrollRef.current.scrollLeft,
+          lists,
+        });
       }
     };
 
@@ -34,11 +49,34 @@ export function useScrollRestore(
     const saved = scrollPositions.get(boardId);
     if (saved === undefined) return;
 
-    // StrictModeDroppable delays rendering by one requestAnimationFrame
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (scrollRef.current) scrollRef.current.scrollLeft = saved;
+    const container = scrollRef.current;
+    if (!container) return;
+
+    let frame: number | undefined;
+    const restore = () => {
+      const lists = container.querySelectorAll<HTMLElement>(
+        "[data-list-scroll-id]",
+      );
+      if (lists.length === 0) return;
+
+      observer.disconnect();
+      frame = requestAnimationFrame(() => {
+        container.scrollLeft = saved.left;
+        lists.forEach((list) => {
+          const top = saved.lists.get(list.dataset.listScrollId ?? "");
+          if (top !== undefined) list.scrollTop = top;
+        });
       });
-    });
+    };
+
+    // StrictModeDroppable mounts list containers after the board is ready.
+    const observer = new MutationObserver(restore);
+    observer.observe(container, { childList: true, subtree: true });
+    restore();
+
+    return () => {
+      observer.disconnect();
+      if (frame !== undefined) cancelAnimationFrame(frame);
+    };
   }, [isReady, scrollRef, boardId]);
 }
