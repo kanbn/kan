@@ -93,14 +93,12 @@ const VisibilityButton = ({
               boardPublicId,
             });
           }}
-          menuSpacing="md"
         >
-          <Button
-            variant="secondary"
-            iconLeft={isPublic ? <HiOutlineEye /> : <HiOutlineEyeSlash />}
-            disabled={isLoading || !canEdit}
-          >
-            {t`Visibility`}
+          <Button variant="secondary" disabled={isLoading || !canEdit}>
+            <span className="flex items-center gap-2">
+              {isPublic ? <HiOutlineEye /> : <HiOutlineEyeSlash />}
+              <span className="hidden sm:inline">{t`Visibility`}</span>
+            </span>
           </Button>
         </CheckboxDropdown>
       </Tooltip>

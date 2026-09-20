@@ -216,7 +216,6 @@ const Filters = ({
       <CheckboxDropdown
         groups={groups}
         handleSelect={handleSelect}
-        menuSpacing="md"
         position={position}
         backLabel={t`Back`}
         footer={
@@ -232,12 +231,11 @@ const Filters = ({
           ) : undefined
         }
       >
-        <Button
-          variant="secondary"
-          disabled={isLoading}
-          iconLeft={<IoFilterOutline />}
-        >
-          {t`Filter`}
+        <Button variant="secondary" disabled={isLoading}>
+          <span className="flex items-center gap-2">
+            <IoFilterOutline />
+            <span className="hidden sm:inline">{t`Filter`}</span>
+          </span>
         </Button>
         {numOfFilters > 0 && (
           <span

@@ -265,14 +265,14 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
     "Add or remove a member assignment on a card (toggles if already assigned)",
     {
       cardPublicId: z.string().describe("The card's public ID"),
-      workspaceMemberPublicId: z
+      memberPublicId: z
         .string()
         .describe("The workspace member's public ID"),
     },
-    async ({ cardPublicId, workspaceMemberPublicId }) => {
+    async ({ cardPublicId, memberPublicId }) => {
       const data = await client.request(
         "PUT",
-        `/cards/${cardPublicId}/members/${workspaceMemberPublicId}`,
+        `/cards/${cardPublicId}/members/${memberPublicId}`,
       );
       return {
         content: [{ type: "text", text: JSON.stringify(data, null, 2) }],

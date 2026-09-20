@@ -41,6 +41,7 @@ test(
 
     await card.uploadAttachment(attachmentFixture);
     await expect(attachmentItem).toBeVisible();
+    await expect(page.locator("#attachment-upload")).toBeEnabled();
 
     await page.reload();
     await expect(attachmentItem).toBeVisible();

@@ -1,20 +1,23 @@
 import { spawn } from "node:child_process";
 import type { ChildProcessWithoutNullStreams } from "node:child_process";
 
-const READY_TIMEOUT_MS = 20_000;
+const READY_TIMEOUT_MS = 10_000;
+const READY_RETRIES = 2;
+const RETRY_DELAY_MS = 1_000;
 
 export interface StripeListener {
   process: ChildProcessWithoutNullStreams;
   stop: () => void;
 }
 
-export function startStripeListen(
+function attemptStripeListen(
   forwardUrl: string,
   apiKey: string,
 ): Promise<StripeListener> {
   return new Promise((resolve, reject) => {
     const child = spawn("stripe", [
       "listen",
+      "--skip-update",
       "--forward-to",
       forwardUrl,
       "--api-key",
@@ -44,4 +47,18 @@ export function startStripeListen(
       reject(err);
     });
   });
+}
+
+export async function startStripeListen(
+  forwardUrl: string,
+  apiKey: string,
+): Promise<StripeListener> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await attemptStripeListen(forwardUrl, apiKey);
+    } catch (err) {
+      if (attempt >= READY_RETRIES) throw err;
+      await new Promise((r) => setTimeout(r, RETRY_DELAY_MS));
+    }
+  }
 }
