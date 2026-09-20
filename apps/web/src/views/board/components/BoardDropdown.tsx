@@ -165,6 +165,7 @@ export default function BoardDropdown({
       disabled={isLoading || isArchiveActionPending}
       items={items}
       ariaLabel={t`Board options`}
+      menuGap="md"
     >
       <HiEllipsisHorizontal className="h-5 w-5 text-dark-900" />
     </Dropdown>
