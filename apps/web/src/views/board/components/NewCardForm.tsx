@@ -11,7 +11,7 @@ import {
   HiXMark,
 } from "react-icons/hi2";
 
-import type { NewCardInput } from "@kan/api/types";
+import type { GetBoardByIdOutput, NewCardInput } from "@kan/api/types";
 import { generateUID } from "@kan/shared/utils";
 
 import type { WorkspaceMember } from "~/components/Editor";
@@ -40,11 +40,12 @@ interface QueryParams {
   members: string[];
   labels: string[];
   lists: string[];
+  cardView: "summary";
 }
 
 interface NewCardFormProps {
   isTemplate: boolean;
-  boardPublicId: string;
+  boardData?: GetBoardByIdOutput;
   listPublicId: string;
   queryParams: QueryParams;
   initialDueDate?: Date | null;
@@ -52,7 +53,7 @@ interface NewCardFormProps {
 
 export function NewCardForm({
   isTemplate,
-  boardPublicId,
+  boardData,
   listPublicId,
   queryParams,
   initialDueDate = null,
@@ -107,10 +108,6 @@ export function NewCardForm({
     return () => subscription.unsubscribe();
   }, [watch, saveFormState]);
 
-  const { data: boardData } = api.board.byId.useQuery(queryParams, {
-    enabled: !!boardPublicId,
-  });
-
   // this adds the new created label to selected labels
   useEffect(() => {
     const newLabelId = modalStates.NEW_LABEL_CREATED;
@@ -160,6 +157,13 @@ export function NewCardForm({
               comments: [],
               checklists: [],
               attachments: [],
+              summary: {
+                hasDescription: false,
+                attachmentCount: 0,
+                hasComments: false,
+                checklistItemCount: 0,
+                completedChecklistItemCount: 0,
+              },
               labels: oldBoard.labels.filter((label) =>
                 args.labelPublicIds.includes(label.publicId),
               ),

@@ -19,6 +19,7 @@ const Card = ({
   ticketNumber,
   labels,
   members,
+  summary,
   checklists,
   description,
   comments,
@@ -33,6 +34,13 @@ const Card = ({
     email: string;
     user: { name: string | null; email: string; image: string | null } | null;
   }[];
+  summary?: {
+    hasDescription: boolean;
+    attachmentCount: number;
+    hasComments: boolean;
+    checklistItemCount: number;
+    completedChecklistItemCount: number;
+  };
   checklists: {
     publicId: string;
     name: string;
@@ -45,26 +53,35 @@ const Card = ({
   }[];
   description: string | null;
   comments: { publicId: string }[];
-  attachments?: { publicId: string }[];
+  attachments: { publicId: string }[];
   dueDate?: Date | null;
 }) => {
   const { dateLocale } = useLocalisation();
   const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;
   const isOverdue = dueDate ? isBefore(dueDate, startOfDay(new Date())) : false;
-  const completedItems = checklists.reduce((acc, checklist) => {
-    return acc + checklist.items.filter((item) => item.completed).length;
-  }, 0);
-
-  const totalItems = checklists.reduce((acc, checklist) => {
-    return acc + checklist.items.length;
-  }, 0);
-
+  const cardSummary = summary ?? {
+    hasDescription:
+      (description?.replace(/<[^>]*>/g, "").trim().length ?? 0) > 0,
+    attachmentCount: attachments.length,
+    hasComments: comments.length > 0,
+    checklistItemCount: checklists.reduce(
+      (count, checklist) => count + checklist.items.length,
+      0,
+    ),
+    completedChecklistItemCount: checklists.reduce(
+      (count, checklist) =>
+        count + checklist.items.filter((item) => item.completed).length,
+      0,
+    ),
+  };
   const progress =
-    totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
-
-  const hasDescription =
-    description && description.replace(/<[^>]*>/g, "").trim().length > 0;
-  const hasAttachments = attachments && attachments.length > 0;
+    cardSummary.checklistItemCount > 0
+      ? Math.round(
+          (cardSummary.completedChecklistItemCount /
+            cardSummary.checklistItemCount) *
+            100,
+        )
+      : 0;
   const hasDueDate = !!dueDate;
 
   return (
@@ -77,11 +94,11 @@ const Card = ({
       <span className="break-words">{title}</span>
       {labels.length ||
       members.length ||
-      checklists.length > 0 ||
-      hasDescription ||
-      comments.length > 0 ||
+      cardSummary.checklistItemCount > 0 ||
+      cardSummary.hasDescription ||
+      cardSummary.hasComments ||
       hasDueDate ||
-      hasAttachments ? (
+      cardSummary.attachmentCount > 0 ? (
         <div className="mt-2 flex flex-col justify-end">
           <div className="space-x-0.5">
             {labels.map((label) => (
@@ -93,7 +110,7 @@ const Card = ({
           </div>
           <div className="mt-2 flex items-center justify-between gap-1">
             <div className="flex items-center gap-2">
-              {hasDescription && (
+              {cardSummary.hasDescription && (
                 <div className="flex items-center gap-1 text-light-700 dark:text-dark-800">
                   <HiBars3BottomLeft className="h-4 w-4" />
                 </div>
@@ -115,19 +132,19 @@ const Card = ({
                   </span>
                 </div>
               )}
-              {comments.length > 0 && (
+              {cardSummary.hasComments && (
                 <div className="flex items-center gap-1 text-light-700 dark:text-dark-800">
                   <HiChatBubbleLeft className="h-4 w-4" />
                 </div>
               )}
-              {hasAttachments && (
+              {cardSummary.attachmentCount > 0 && (
                 <div className="flex items-center gap-1 text-light-700 dark:text-dark-800">
                   <HiOutlinePaperClip className="h-4 w-4" />
                 </div>
               )}
             </div>
             <div className="flex items-center justify-end gap-1">
-              {checklists.length > 0 && (
+              {cardSummary.checklistItemCount > 0 && (
                 <div className="flex items-center gap-1 rounded-full border-[1px] border-light-300 px-2 py-1 dark:border-dark-600">
                   <CircularProgress
                     progress={progress || 2}
@@ -135,7 +152,8 @@ const Card = ({
                     className="flex-shrink-0"
                   />
                   <span className="text-[10px] text-light-900 dark:text-dark-950">
-                    {completedItems}/{totalItems}
+                    {cardSummary.completedChecklistItemCount}/
+                    {cardSummary.checklistItemCount}
                   </span>
                 </div>
               )}
