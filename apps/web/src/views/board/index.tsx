@@ -47,6 +47,7 @@ import { CardContextLabelsModal } from "./components/CardContextLabelsModal";
 import { CardContextMembersModal } from "./components/CardContextMembersModal";
 import { CardContextMenu } from "./components/CardContextMenu";
 import { CardContextMoveListModal } from "./components/CardContextMoveListModal";
+import { CustomFieldManager } from "./components/custom-fields/custom-field-manager";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
@@ -141,6 +142,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     | "next-month"
     | "no-due-date"
   )[];
+  const customFieldFilters = formatToArray(router.query.customFields);
 
   const boardType: "regular" | "template" = isTemplate ? "template" : "regular";
 
@@ -172,6 +174,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     lists: formatToArray(router.query.lists),
     ...(semanticFilters.length > 0 && {
       dueDateFilters: semanticFilters,
+    }),
+    ...(customFieldFilters.length > 0 && {
+      customFields: customFieldFilters,
     }),
     type: boardType,
   };
@@ -476,6 +481,15 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
         </Modal>
 
         <Modal
+          modalSize="lg"
+          positionFromTop="sm"
+          backdropVariant="dimmed"
+          isVisible={isOpen && modalContentType === "CUSTOM_FIELDS"}
+        >
+          <CustomFieldManager boardPublicId={boardId ?? ""} />
+        </Modal>
+
+        <Modal
           modalSize="sm"
           isVisible={isOpen && modalContentType === "DELETE_LIST"}
         >
@@ -688,6 +702,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                         (member) => member.user !== null,
                       )}
                       lists={boardData.allLists}
+                      customFields={boardData.customFields}
+                      position="left"
                       isLoading={!boardData}
                     />
                   </>
@@ -890,6 +906,12 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                               comments={card.comments ?? []}
                                               attachments={card.attachments}
                                               dueDate={card.dueDate ?? null}
+                                              customFields={
+                                                boardData.customFields
+                                              }
+                                              customFieldValues={
+                                                card.customFieldValues
+                                              }
                                             />
                                           </Link>
                                         )}

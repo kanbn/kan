@@ -26,10 +26,12 @@ import { getBoardReturnUrl } from "~/utils/board-return-url";
 import { invalidateCard } from "~/utils/cardInvalidation";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmation";
+import { CustomFieldManager } from "../board/components/custom-fields/custom-field-manager";
 import ActivityList from "./components/ActivityList";
 import { AttachmentThumbnails } from "./components/AttachmentThumbnails";
 import { AttachmentUpload } from "./components/AttachmentUpload";
 import Checklists from "./components/Checklists";
+import { CustomFields } from "./components/custom-fields/custom-fields";
 import { DeleteCardConfirmation } from "./components/DeleteCardConfirmation";
 import { DeleteChecklistConfirmation } from "./components/DeleteChecklistConfirmation";
 import { DeleteCommentConfirmation } from "./components/DeleteCommentConfirmation";
@@ -49,7 +51,8 @@ interface FormValues {
 
 export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   const router = useRouter();
-  const { canEditCard } = usePermissions();
+  const { canEditBoard, canEditCard } = usePermissions();
+  const { openModal } = useModal();
   const { data: session } = authClient.useSession();
   const cardId = Array.isArray(router.query.cardId)
     ? router.query.cardId[0]
@@ -120,7 +123,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
     }) ?? [];
 
   return (
-    <div className="h-full w-[360px] border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
+    <div className="h-full w-full border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900 md:w-[360px]">
       <div className="mb-4 flex w-full flex-row pt-[18px]">
         <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
         <ListSelector
@@ -159,6 +162,18 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           disabled={!canEdit}
         />
       </div>
+      <CustomFields
+        cardPublicId={cardId ?? ""}
+        definitions={card?.list.board.customFields ?? []}
+        values={card?.customFieldValues ?? []}
+        disabled={!canEdit}
+        placement="sidebar"
+        onManageDefinitions={
+          canEditBoard && !isTemplate
+            ? () => openModal("CUSTOM_FIELDS")
+            : undefined
+        }
+      />
     </div>
   );
 }
@@ -173,10 +188,11 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     clearModalState,
     isOpen,
     modalStates,
+    openModal,
   } = useModal();
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
-  const { canEditCard } = usePermissions();
+  const { canEditBoard, canEditCard } = usePermissions();
   const { data: session } = authClient.useSession();
   const [activeChecklistForm, setActiveChecklistForm] = useState<string | null>(
     null,
@@ -451,6 +467,18 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                       </div>
                     </form>
                   </div>
+                  <CustomFields
+                    cardPublicId={card.publicId}
+                    definitions={card.list.board.customFields}
+                    values={card.customFieldValues}
+                    disabled={!canEdit}
+                    placement="main"
+                    onManageDefinitions={
+                      canEditBoard && !isTemplate
+                        ? () => openModal("CUSTOM_FIELDS")
+                        : undefined
+                    }
+                  />
                   <Checklists
                     checklists={card.checklists}
                     cardPublicId={cardId}
@@ -503,6 +531,15 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
         </div>
 
         <>
+          <Modal
+            modalSize="lg"
+            positionFromTop="sm"
+            backdropVariant="dimmed"
+            isVisible={isOpen && modalContentType === "CUSTOM_FIELDS"}
+          >
+            <CustomFieldManager boardPublicId={boardId ?? ""} />
+          </Modal>
+
           <Modal
             modalSize="md"
             isVisible={isOpen && modalContentType === "NEW_FEEDBACK"}
