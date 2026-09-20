@@ -4,6 +4,7 @@ export {
   boardBySlugSchema,
   boardCreateResponseSchema,
   boardUpdateResponseSchema,
+  boardBackgroundSchema,
 } from "./board";
 
 export {
