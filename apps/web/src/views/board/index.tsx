@@ -17,6 +17,7 @@ import {
 import type { UpdateBoardInput } from "@kan/api/types";
 
 import type { CardContextMenuAction } from "./components/CardContextMenu";
+import type { BoardView } from "./components/ViewToggle";
 import Button from "~/components/Button";
 import { DeleteLabelConfirmation } from "~/components/DeleteLabelConfirmation";
 import { LabelForm } from "~/components/LabelForm";
@@ -38,6 +39,7 @@ import { api } from "~/utils/api";
 import { formatToArray, isPlaceholderPublicId } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import BoardDropdown from "./components/BoardDropdown";
+import CalendarView from "./components/CalendarView";
 import Card from "./components/Card";
 import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
 import { CardContextDuplicateModal } from "./components/CardContextDuplicateModal";
@@ -53,8 +55,8 @@ import { MoveBoardForm } from "./components/MoveBoardForm";
 import { NewCardForm } from "./components/NewCardForm";
 import { NewListForm } from "./components/NewListForm";
 import { NewTemplateForm } from "./components/NewTemplateForm";
-import UpdateBoardSlugButton from "./components/UpdateBoardSlugButton";
 import { UpdateBoardSlugForm } from "./components/UpdateBoardSlugForm";
+import ViewToggle from "./components/ViewToggle";
 import VisibilityButton from "./components/VisibilityButton";
 
 type PublicListId = string;
@@ -69,6 +71,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     useModal();
   const [selectedPublicListId, setSelectedPublicListId] =
     useState<PublicListId>("");
+  const [newCardInitialDueDate, setNewCardInitialDueDate] =
+    useState<Date | null>(null);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   const [contextMenu, setContextMenu] = useState<{
@@ -82,14 +86,22 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     direction: "horizontal",
   });
 
-  const { canCreateList, canEditList, canEditCard, canEditBoard } =
-    usePermissions();
+  const {
+    canCreateList,
+    canEditList,
+    canEditCard,
+    canEditBoard,
+    canCreateCard,
+  } = usePermissions();
 
   const boardId = params?.boardId
     ? Array.isArray(params.boardId)
       ? params.boardId[0]
       : params.boardId
     : null;
+  const cardReturnQuery = router.asPath.includes("?")
+    ? `?returnUrl=${encodeURIComponent(router.asPath)}`
+    : "";
 
   const createListShortcut = useMemo(
     () => ({
@@ -131,6 +143,27 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   )[];
 
   const boardType: "regular" | "template" = isTemplate ? "template" : "regular";
+
+  const isFreeCloudPlan =
+    env("NEXT_PUBLIC_KAN_ENV") === "cloud" && workspace.plan === "free";
+
+  const upgradeUrl = `/upgrade/select-plan?plan=team&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent(router.asPath)}`;
+
+  const requestedView: BoardView =
+    router.query.view === "calendar" ? "calendar" : "board";
+
+  const view: BoardView = isTemplate ? "board" : requestedView;
+
+  const handleViewChange = (nextView: BoardView) => {
+    const nextQuery = { ...router.query };
+    if (nextView === "calendar") {
+      nextQuery.view = "calendar";
+    } else {
+      delete nextQuery.view;
+    }
+
+    void router.push({ pathname: router.pathname, query: nextQuery });
+  };
 
   const queryParams = {
     boardPublicId: boardId ?? "",
@@ -286,6 +319,43 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     },
   });
 
+  const updateCardDueDateMutation = api.card.update.useMutation({
+    onMutate: async (args) => {
+      await utils.board.byId.cancel();
+
+      const currentState = utils.board.byId.getData(queryParams);
+
+      utils.board.byId.setData(queryParams, (oldBoard) => {
+        if (!oldBoard) return oldBoard;
+
+        return {
+          ...oldBoard,
+          lists: oldBoard.lists.map((list) => ({
+            ...list,
+            cards: list.cards.map((card) =>
+              card.publicId === args.cardPublicId
+                ? { ...card, dueDate: args.dueDate ?? null }
+                : card,
+            ),
+          })),
+        };
+      });
+
+      return { previousState: currentState };
+    },
+    onError: (_error, _args, context) => {
+      utils.board.byId.setData(queryParams, context?.previousState);
+      showPopup({
+        header: t`Unable to update due date`,
+        message: t`Please try again later, or contact customer support.`,
+        icon: "error",
+      });
+    },
+    onSettled: async () => {
+      await utils.board.byId.invalidate(queryParams);
+    },
+  });
+
   useEffect(() => {
     if (isSuccess && boardData) {
       setValue("name", boardData.name || "");
@@ -295,6 +365,20 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const openNewListForm = (publicBoardId: string) => {
     openModal("NEW_LIST");
     setSelectedPublicListId(publicBoardId);
+  };
+
+  const openNewCardForDate = (date: Date) => {
+    const targetListPublicId = boardData?.lists[0]?.publicId;
+    if (!canCreateCard || !targetListPublicId || isFreeCloudPlan) return;
+
+    setSelectedPublicListId(targetListPublicId);
+    setNewCardInitialDueDate(date);
+    openModal("NEW_CARD");
+  };
+
+  const handleCalendarCardDrop = (cardPublicId: string, dueDate: Date) => {
+    if (!canEditCard || isFreeCloudPlan) return;
+    updateCardDueDateMutation.mutate({ cardPublicId, dueDate });
   };
 
   const handleCardContextMenuAction = (action: CardContextMenuAction) => {
@@ -357,11 +441,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       return;
     }
 
-    if (
-      type === "LIST" &&
-      canEditList &&
-      !isPlaceholderPublicId(draggableId)
-    ) {
+    if (type === "LIST" && canEditList && !isPlaceholderPublicId(draggableId)) {
       updateListMutation.mutate({
         listPublicId: draggableId,
         index: destination.index,
@@ -414,6 +494,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             boardPublicId={boardId ?? ""}
             listPublicId={selectedPublicListId}
             queryParams={queryParams}
+            initialDueDate={newCardInitialDueDate}
           />
         </Modal>
 
@@ -579,7 +660,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
               {t`${isTemplate ? "Template" : "Board"} not found`}
             </p>
           )}
-          <div className="order-1 mb-4 flex items-center justify-end space-x-2 md:order-2 md:mb-0">
+          <div className="order-1 mb-4 flex items-center justify-end space-x-1.5 sm:space-x-2 md:order-2 md:mb-0">
             {isTemplate && (
               <div className="inline-flex cursor-default items-center justify-center whitespace-nowrap rounded-md border-[1px] border-light-300 bg-light-50 px-3 py-2 text-sm font-semibold text-light-950 shadow-sm dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950">
                 <span className="mr-2">
@@ -590,15 +671,6 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             )}
             {!isTemplate && (
               <>
-                <UpdateBoardSlugButton
-                  handleOnClick={() => openModal("UPDATE_BOARD_SLUG")}
-                  isLoading={isLoading}
-                  workspaceSlug={workspace.slug ?? ""}
-                  boardSlug={boardData?.slug ?? ""}
-                  boardPublicId={boardId ?? ""}
-                  visibility={boardData?.visibility ?? "private"}
-                  canEdit={canEditBoard}
-                />
                 <VisibilityButton
                   visibility={boardData?.visibility ?? "private"}
                   boardPublicId={boardId ?? ""}
@@ -608,18 +680,21 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                   isAdmin={workspace.role === "admin"}
                 />
                 {boardData && (
-                  <Filters
-                    labels={boardData.labels}
-                    members={boardData.workspace.members.filter(
-                      (member) => member.user !== null,
-                    )}
-                    assignedMemberPublicIds={new Set(
-                      boardData.assignedMemberPublicIds,
-                    )}
-                    lists={boardData.allLists}
-                    position="left"
-                    isLoading={!boardData}
-                  />
+                  <>
+                    <ViewToggle view={view} onChange={handleViewChange} />
+                    <Filters
+                      labels={boardData.labels}
+                      members={boardData.workspace.members.filter(
+                        (member) => member.user !== null,
+                      )}
+                      assignedMemberPublicIds={new Set(
+                        boardData.assignedMemberPublicIds,
+                      )}
+                      lists={boardData.allLists}
+                      position="left"
+                      isLoading={!boardData}
+                    />
+                  </>
                 )}
               </>
             )}
@@ -631,18 +706,15 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
               }
             >
               <Button
-                iconLeft={
-                  <HiOutlinePlusSmall
-                    className="-mr-0.5 h-5 w-5"
-                    aria-hidden="true"
-                  />
-                }
                 onClick={() => {
                   if (boardId && canCreateList) openNewListForm(boardId);
                 }}
                 disabled={!boardData || !canCreateList}
               >
-                {t`New list`}
+                <span className="flex items-center gap-2">
+                  <HiOutlinePlusSmall className="h-5 w-5" aria-hidden="true" />
+                  <span className="hidden sm:inline">{t`New list`}</span>
+                </span>
               </Button>
             </Tooltip>
             <BoardDropdown
@@ -656,170 +728,194 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           </div>
         </div>
 
-        <div
-          ref={scrollRef}
-          onMouseDown={onMouseDown}
-          className={`scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] z-0 flex-1 snap-x snap-mandatory scroll-pl-[10px] overflow-y-hidden overflow-x-scroll overscroll-contain scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 md:snap-none`}
-        >
-          {isLoading ? (
-            <div className="ml-[2rem] flex">
-              <div className="0 mr-5 h-[500px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
-              <div className="0 mr-5 h-[275px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
-              <div className="0 mr-5 h-[375px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
-            </div>
-          ) : boardData ? (
-            <>
-              {boardData.lists.length === 0 ? (
-                <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
-                  <div className="flex flex-col items-center">
-                    <HiOutlineSquare3Stack3D className="h-10 w-10 text-light-800 dark:text-dark-800" />
-                    <p className="mb-2 mt-4 text-[14px] font-bold text-light-1000 dark:text-dark-950">
-                      {t`No lists`}
-                    </p>
-                    <p className="text-[14px] text-light-900 dark:text-dark-900">
-                      {canCreateList
-                        ? t`Get started by creating a new list`
-                        : t`No lists have been created yet`}
-                    </p>
-                  </div>
-                  <Tooltip
-                    content={
-                      !canCreateList ? t`You don't have permission` : undefined
-                    }
-                  >
-                    <Button
-                      onClick={() => {
-                        if (boardId && canCreateList) openNewListForm(boardId);
-                      }}
-                      disabled={!canCreateList}
+        {view === "calendar" ? (
+          boardData && (
+            <CalendarView
+              lists={boardData.lists}
+              cardPrefix={boardData.workspace.cardPrefix}
+              weekStartsOn={workspace.weekStartDay}
+              isTemplate={!!isTemplate}
+              boardId={boardId ?? ""}
+              canEditCard={canEditCard}
+              canCreateCard={canCreateCard}
+              cardReturnQuery={cardReturnQuery}
+              isLocked={isFreeCloudPlan}
+              upgradeUrl={upgradeUrl}
+              onDateClick={openNewCardForDate}
+              onCardDrop={handleCalendarCardDrop}
+            />
+          )
+        ) : (
+          <div
+            ref={scrollRef}
+            onMouseDown={onMouseDown}
+            className={`scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] z-0 flex-1 snap-x snap-mandatory scroll-pl-[10px] overflow-y-hidden overflow-x-scroll overscroll-contain scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 md:snap-none`}
+          >
+            {isLoading ? (
+              <div className="ml-[2rem] flex">
+                <div className="0 mr-5 h-[500px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
+                <div className="0 mr-5 h-[275px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
+                <div className="0 mr-5 h-[375px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
+              </div>
+            ) : boardData ? (
+              <>
+                {boardData.lists.length === 0 ? (
+                  <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
+                    <div className="flex flex-col items-center">
+                      <HiOutlineSquare3Stack3D className="h-10 w-10 text-light-800 dark:text-dark-800" />
+                      <p className="mb-2 mt-4 text-[14px] font-bold text-light-1000 dark:text-dark-950">
+                        {t`No lists`}
+                      </p>
+                      <p className="text-[14px] text-light-900 dark:text-dark-900">
+                        {canCreateList
+                          ? t`Get started by creating a new list`
+                          : t`No lists have been created yet`}
+                      </p>
+                    </div>
+                    <Tooltip
+                      content={
+                        !canCreateList
+                          ? t`You don't have permission`
+                          : undefined
+                      }
                     >
-                      {t`Create new list`}
-                    </Button>
-                  </Tooltip>
-                </div>
-              ) : (
-                <DragDropContext onDragEnd={onDragEnd}>
-                  <Droppable
-                    droppableId="all-lists"
-                    direction="horizontal"
-                    type="LIST"
-                  >
-                    {(provided) => (
-                      <div
-                        className="flex w-max"
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}
+                      <Button
+                        onClick={() => {
+                          if (boardId && canCreateList)
+                            openNewListForm(boardId);
+                        }}
+                        disabled={!canCreateList}
                       >
-                        <div className="min-w-[10px] md:min-w-[2rem]" />
-                        {boardData.lists.map((list, index) => (
-                          <List
-                            index={index}
-                            key={`list.${list.publicId}`}
-                            list={list}
-                            setSelectedPublicListId={(publicListId) =>
-                              setSelectedPublicListId(publicListId)
-                            }
-                          >
-                            <Droppable
-                              droppableId={`${list.publicId}`}
-                              type="CARD"
-                              isDropDisabled={isPlaceholderPublicId(
-                                list.publicId,
-                              )}
+                        {t`Create new list`}
+                      </Button>
+                    </Tooltip>
+                  </div>
+                ) : (
+                  <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable
+                      droppableId="all-lists"
+                      direction="horizontal"
+                      type="LIST"
+                    >
+                      {(provided) => (
+                        <div
+                          className="flex w-max"
+                          ref={provided.innerRef}
+                          {...provided.droppableProps}
+                        >
+                          <div className="min-w-[10px] md:min-w-[2rem]" />
+                          {boardData.lists.map((list, index) => (
+                            <List
+                              index={index}
+                              key={`list.${list.publicId}`}
+                              list={list}
+                              setSelectedPublicListId={(publicListId) => {
+                                setNewCardInitialDueDate(null);
+                                setSelectedPublicListId(publicListId);
+                              }}
                             >
-                              {(provided) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.droppableProps}
-                                  className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 h-full max-h-[calc(100dvh-225px)] min-h-[2rem] overflow-y-auto pb-[calc(0.75rem+env(safe-area-inset-bottom))] pr-1 scrollbar dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600"
-                                >
-                                  {list.cards.map((card, index) => (
-                                    <Draggable
-                                      key={card.publicId}
-                                      draggableId={card.publicId}
-                                      index={index}
-                                      isDragDisabled={!canEditCard}
-                                    >
-                                      {(provided) => (
-                                        <Link
-                                          onClick={(e) => {
-                                            if (
+                              <Droppable
+                                droppableId={`${list.publicId}`}
+                                type="CARD"
+                                isDropDisabled={isPlaceholderPublicId(
+                                  list.publicId,
+                                )}
+                              >
+                                {(provided) => (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                    data-list-scroll-id={list.publicId}
+                                    className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 h-full max-h-[calc(100dvh-225px)] min-h-[2rem] overflow-y-auto pb-[calc(0.75rem+env(safe-area-inset-bottom))] pr-1 scrollbar dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600"
+                                  >
+                                    {list.cards.map((card, index) => (
+                                      <Draggable
+                                        key={card.publicId}
+                                        draggableId={card.publicId}
+                                        index={index}
+                                        isDragDisabled={!canEditCard}
+                                      >
+                                        {(provided) => (
+                                          <Link
+                                            onClick={(e) => {
+                                              if (
+                                                card.publicId.startsWith(
+                                                  "PLACEHOLDER",
+                                                )
+                                              )
+                                                e.preventDefault();
+                                            }}
+                                            onContextMenu={(e) => {
+                                              if (
+                                                card.publicId.startsWith(
+                                                  "PLACEHOLDER",
+                                                ) ||
+                                                env("NEXT_PUBLIC_KAN_ENV") ===
+                                                  "cloud"
+                                              )
+                                                return;
+                                              e.preventDefault();
+                                              setContextMenu({
+                                                x: e.clientX,
+                                                y: e.clientY,
+                                                cardPublicId: card.publicId,
+                                              });
+                                            }}
+                                            key={card.publicId}
+                                            href={
+                                              isTemplate
+                                                ? `/templates/${boardId}/cards/${card.publicId}${cardReturnQuery}`
+                                                : `/cards/${card.publicId}${cardReturnQuery}`
+                                            }
+                                            className={`mb-2 flex !cursor-pointer flex-col ${
                                               card.publicId.startsWith(
                                                 "PLACEHOLDER",
                                               )
-                                            )
-                                              e.preventDefault();
-                                          }}
-                                          onContextMenu={(e) => {
-                                            if (
-                                              card.publicId.startsWith(
-                                                "PLACEHOLDER",
-                                              ) ||
-                                              env("NEXT_PUBLIC_KAN_ENV") ===
-                                                "cloud"
-                                            )
-                                              return;
-                                            e.preventDefault();
-                                            setContextMenu({
-                                              x: e.clientX,
-                                              y: e.clientY,
-                                              cardPublicId: card.publicId,
-                                            });
-                                          }}
-                                          key={card.publicId}
-                                          href={
-                                            isTemplate
-                                              ? `/templates/${boardId}/cards/${card.publicId}`
-                                              : `/cards/${card.publicId}`
-                                          }
-                                          className={`mb-2 flex !cursor-pointer flex-col ${
-                                            card.publicId.startsWith(
-                                              "PLACEHOLDER",
-                                            )
-                                              ? "pointer-events-none"
-                                              : ""
-                                          }`}
-                                          ref={provided.innerRef}
-                                          {...provided.draggableProps}
-                                          {...provided.dragHandleProps}
-                                        >
-                                          <Card
-                                            title={card.title}
-                                            ticketNumber={
-                                              card.cardNumber != null
-                                                ? `${boardData.workspace.cardPrefix}-${card.cardNumber}`
-                                                : null
-                                            }
-                                            labels={card.labels}
-                                            members={card.members}
-                                            checklists={card.checklists ?? []}
-                                            description={
-                                              card.description ?? null
-                                            }
-                                            comments={card.comments ?? []}
-                                            attachments={card.attachments}
-                                            dueDate={card.dueDate ?? null}
-                                          />
-                                        </Link>
-                                      )}
-                                    </Draggable>
-                                  ))}
-                                  {provided.placeholder}
-                                </div>
-                              )}
-                            </Droppable>
-                          </List>
-                        ))}
-                        <div className="min-w-[calc(100vw-18rem)] md:min-w-[0.75rem]" />
-                        {provided.placeholder}
-                      </div>
-                    )}
-                  </Droppable>
-                </DragDropContext>
-              )}
-            </>
-          ) : null}
-        </div>
+                                                ? "pointer-events-none"
+                                                : ""
+                                            }`}
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                          >
+                                            <Card
+                                              title={card.title}
+                                              ticketNumber={
+                                                card.cardNumber != null
+                                                  ? `${boardData.workspace.cardPrefix}-${card.cardNumber}`
+                                                  : null
+                                              }
+                                              labels={card.labels}
+                                              members={card.members}
+                                              checklists={card.checklists ?? []}
+                                              description={
+                                                card.description ?? null
+                                              }
+                                              comments={card.comments ?? []}
+                                              attachments={card.attachments}
+                                              dueDate={card.dueDate ?? null}
+                                            />
+                                          </Link>
+                                        )}
+                                      </Draggable>
+                                    ))}
+                                    {provided.placeholder}
+                                  </div>
+                                )}
+                              </Droppable>
+                            </List>
+                          ))}
+                          <div className="min-w-[calc(100vw-18rem)] md:min-w-[0.75rem]" />
+                          {provided.placeholder}
+                        </div>
+                      )}
+                    </Droppable>
+                  </DragDropContext>
+                )}
+              </>
+            ) : null}
+          </div>
+        )}
         {contextMenu && (
           <CardContextMenu
             x={contextMenu.x}

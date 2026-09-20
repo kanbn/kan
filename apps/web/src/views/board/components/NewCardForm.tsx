@@ -47,6 +47,7 @@ interface NewCardFormProps {
   boardPublicId: string;
   listPublicId: string;
   queryParams: QueryParams;
+  initialDueDate?: Date | null;
 }
 
 export function NewCardForm({
@@ -54,6 +55,7 @@ export function NewCardForm({
   boardPublicId,
   listPublicId,
   queryParams,
+  initialDueDate = null,
 }: NewCardFormProps) {
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
@@ -72,7 +74,7 @@ export function NewCardForm({
       memberPublicIds: [],
       isCreateAnotherEnabled: false,
       position: "start",
-      dueDate: null,
+      dueDate: initialDueDate,
     },
     resetOnClose: true,
   });
@@ -326,7 +328,10 @@ export function NewCardForm({
     }
 
     if (filesToUpload.length > 0) {
-      const failedCount = await uploadAttachments(newCard.publicId, filesToUpload);
+      const failedCount = await uploadAttachments(
+        newCard.publicId,
+        filesToUpload,
+      );
       if (failedCount > 0) {
         showPopup({
           header: t`Some attachments failed`,
