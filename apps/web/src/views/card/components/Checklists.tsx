@@ -1,16 +1,28 @@
-import type { DropResult } from "react-beautiful-dnd";
+import type { DragEndEvent } from "@dnd-kit/core";
+import {
+  closestCenter,
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import { t } from "@lingui/core/macro";
-import { DragDropContext, Draggable } from "react-beautiful-dnd";
+import { useMemo } from "react";
 import { HiPlus, HiXMark } from "react-icons/hi2";
 
 import CircularProgress from "~/components/CircularProgress";
-import { StrictModeDroppable as Droppable } from "~/components/StrictModeDroppable";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
-import ChecklistItemRow from "./ChecklistItemRow";
 import ChecklistNameInput from "./ChecklistNameInput";
 import NewChecklistItemForm from "./NewChecklistItemForm";
+import SortableChecklistItemRow from "./SortableChecklistItemRow";
 
 interface ChecklistItem {
   publicId: string;
@@ -88,25 +100,56 @@ export default function Checklists({
     },
   });
 
-  const onDragEnd = (result: DropResult) => {
-    if (!result.destination) return;
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
 
-    const { source, destination, draggableId } = result;
+  const itemIdsByChecklist = useMemo(
+    () =>
+      new Map(
+        checklists.map((checklist) => [
+          checklist.publicId,
+          checklist.items.map((item) => item.publicId),
+        ]),
+      ),
+    [checklists],
+  );
 
-    if (source.droppableId !== destination.droppableId) return;
+  const handleDragEnd = ({ active, over }: DragEndEvent) => {
+    if (!over || active.id === over.id) return;
 
-    if (source.index === destination.index) return;
+    const checklist = checklists.find((cl) =>
+      cl.items.some((item) => item.publicId === active.id),
+    );
+    if (!checklist) return;
+
+    const overIndex = checklist.items.findIndex(
+      (item) => item.publicId === over.id,
+    );
+    if (overIndex === -1) return;
+
+    const oldIndex = checklist.items.findIndex(
+      (item) => item.publicId === active.id,
+    );
+    if (oldIndex === overIndex) return;
 
     reorderItemMutation.mutate({
-      checklistItemPublicId: draggableId,
-      index: destination.index,
+      checklistItemPublicId: String(active.id),
+      index: overIndex,
     });
   };
 
   if (checklists.length === 0) return null;
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+    >
       <div className="border-light-300 pb-4 dark:border-dark-300">
         <div>
           {checklists.map((checklist) => {
@@ -179,56 +222,29 @@ export default function Checklists({
                   )}
                 </div>
 
-                <Droppable
-                  droppableId={checklist.publicId}
-                  type="CHECKLIST_ITEM"
-                  isDropDisabled={viewOnly}
+                <SortableContext
+                  items={itemIdsByChecklist.get(checklist.publicId) ?? []}
+                  strategy={verticalListSortingStrategy}
                 >
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                      className="ml-1"
-                    >
-                      {checklist.items.map((item, index) => (
-                        <Draggable
-                          key={item.clientId ?? item.publicId}
-                          draggableId={item.publicId}
-                          index={index}
-                          isDragDisabled={viewOnly}
-                        >
-                          {(provided, snapshot) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              style={{
-                                ...provided.draggableProps.style,
-                                opacity: snapshot.isDragging ? 0.8 : 1,
-                              }}
-                            >
-                              <ChecklistItemRow
-                                item={{
-                                  publicId: item.publicId,
-                                  title: item.title,
-                                  completed: item.completed,
-                                  clientId: item.clientId,
-                                }}
-                                cardPublicId={cardPublicId}
-                                onCreateNewItem={() =>
-                                  setActiveChecklistForm?.(checklist.publicId)
-                                }
-                                viewOnly={viewOnly}
-                                dragHandleProps={provided.dragHandleProps}
-                                isDragging={snapshot.isDragging}
-                              />
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
+                  <div className="ml-1">
+                    {checklist.items.map((item) => (
+                      <SortableChecklistItemRow
+                        key={item.clientId ?? item.publicId}
+                        item={{
+                          publicId: item.publicId,
+                          title: item.title,
+                          completed: item.completed,
+                          clientId: item.clientId,
+                        }}
+                        cardPublicId={cardPublicId}
+                        onCreateNewItem={() =>
+                          setActiveChecklistForm?.(checklist.publicId)
+                        }
+                        viewOnly={viewOnly}
+                      />
+                    ))}
+                  </div>
+                </SortableContext>
                 {activeChecklistForm === checklist.publicId && !viewOnly && (
                   <div className="ml-1">
                     <NewChecklistItemForm
@@ -244,6 +260,6 @@ export default function Checklists({
           })}
         </div>
       </div>
-    </DragDropContext>
+    </DndContext>
   );
 }
