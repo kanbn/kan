@@ -69,7 +69,6 @@ export function useScrollRestore(
       });
     };
 
-    // StrictModeDroppable mounts list containers after the board is ready.
     const observer = new MutationObserver(restore);
     observer.observe(container, { childList: true, subtree: true });
     restore();

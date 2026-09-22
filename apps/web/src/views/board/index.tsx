@@ -1,12 +1,30 @@
-import type { DropResult } from "react-beautiful-dnd";
-import Link from "next/link";
+import type {
+  CollisionDetection,
+  DragEndEvent,
+  DragOverEvent,
+  DragStartEvent,
+  UniqueIdentifier,
+} from "@dnd-kit/core";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
+import {
+  DndContext,
+  DragOverlay,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  horizontalListSortingStrategy,
+  SortableContext,
+  sortableKeyboardCoordinates,
+} from "@dnd-kit/sortable";
 import { t } from "@lingui/core/macro";
 import { keepPreviousData } from "@tanstack/react-query";
 import { env } from "next-runtime-env";
-import { useEffect, useMemo, useState } from "react";
-import { DragDropContext, Draggable } from "react-beautiful-dnd";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   HiOutlinePlusSmall,
@@ -18,6 +36,8 @@ import type { UpdateBoardInput } from "@kan/api/types";
 
 import type { CardContextMenuAction } from "./components/CardContextMenu";
 import type { BoardView } from "./components/ViewToggle";
+import type { DragData } from "./dnd/types";
+import type { BoardCard, BoardList } from "./types";
 import Button from "~/components/Button";
 import { DeleteLabelConfirmation } from "~/components/DeleteLabelConfirmation";
 import { LabelForm } from "~/components/LabelForm";
@@ -25,7 +45,6 @@ import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
-import { StrictModeDroppable as Droppable } from "~/components/StrictModeDroppable";
 import { Tooltip } from "~/components/Tooltip";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
 import { useDragToScroll } from "~/hooks/useDragToScroll";
@@ -40,13 +59,14 @@ import { formatToArray, isPlaceholderPublicId } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import BoardDropdown from "./components/BoardDropdown";
 import CalendarView from "./components/CalendarView";
-import Card from "./components/Card";
 import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
 import { CardContextDuplicateModal } from "./components/CardContextDuplicateModal";
 import { CardContextLabelsModal } from "./components/CardContextLabelsModal";
 import { CardContextMembersModal } from "./components/CardContextMembersModal";
 import { CardContextMenu } from "./components/CardContextMenu";
 import { CardContextMoveListModal } from "./components/CardContextMoveListModal";
+import CardList from "./components/CardList";
+import CardPreview from "./components/CardPreview";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
@@ -58,8 +78,15 @@ import { NewTemplateForm } from "./components/NewTemplateForm";
 import { UpdateBoardSlugForm } from "./components/UpdateBoardSlugForm";
 import ViewToggle from "./components/ViewToggle";
 import VisibilityButton from "./components/VisibilityButton";
+import { createBoardCollisionDetection } from "./dnd/collision";
 
 type PublicListId = string;
+
+function getEventData(
+  entity: { data: { current: unknown } } | null | undefined,
+): DragData | undefined {
+  return entity?.data.current as DragData | undefined;
+}
 
 export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const params = useParams() as { boardId: string | string[] } | null;
@@ -376,9 +403,16 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     openModal("NEW_CARD");
   };
 
-  const handleCalendarCardDrop = (cardPublicId: string, dueDate: Date) => {
-    if (!canEditCard || isFreeCloudPlan) return;
-    updateCardDueDateMutation.mutate({ cardPublicId, dueDate });
+  const handleCalendarCardDrop = (
+    cardPublicId: string,
+    dueDate: Date,
+    onSettled: () => void,
+  ) => {
+    if (!canEditCard || isFreeCloudPlan) {
+      onSettled();
+      return;
+    }
+    updateCardDueDateMutation.mutate({ cardPublicId, dueDate }, { onSettled });
   };
 
   const handleCardContextMenuAction = (action: CardContextMenuAction) => {
@@ -431,36 +465,229 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     openModal(modalType, cardPublicId);
   };
 
-  const onDragEnd = ({
-    source: _source,
-    destination,
-    draggableId,
-    type,
-  }: DropResult): void => {
-    if (!destination) {
+  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
+  const [activeWidth, setActiveWidth] = useState<number | null>(null);
+  const [dragCardsByList, setDragCardsByList] = useState<Record<
+    string,
+    BoardCard[]
+  > | null>(null);
+  const [dragListOrder, setDragListOrder] = useState<BoardList[] | null>(null);
+  const lastOverIdRef = useRef<UniqueIdentifier | null>(null);
+
+  useEffect(() => {
+    if (activeId == null) return;
+    document.body.style.cursor = "grabbing";
+    return () => {
+      document.body.style.cursor = "";
+    };
+  }, [activeId]);
+
+  const baseCardsByList = useMemo(() => {
+    const map: Record<string, BoardCard[]> = {};
+    boardData?.lists.forEach((list) => {
+      map[list.publicId] = list.cards;
+    });
+    return map;
+  }, [boardData]);
+
+  const cardsByList = dragCardsByList ?? baseCardsByList;
+  const lists = useMemo(
+    () => dragListOrder ?? boardData?.lists ?? [],
+    [dragListOrder, boardData?.lists],
+  );
+  // See the comment in CardList.tsx: dnd-kit disables the reflow
+  // transition for a frame whenever the items array reference changes, so
+  // this needs to stay stable across renders that don't actually reorder
+  // the lists.
+  const listIds = useMemo(() => lists.map((list) => list.publicId), [lists]);
+
+  const collisionDetectionStrategy: CollisionDetection = useMemo(
+    () => createBoardCollisionDetection(lastOverIdRef),
+    [],
+  );
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
+
+  const canScroll = useCallback(
+    (element: Element) =>
+      element === scrollRef.current ||
+      element.hasAttribute("data-list-scroll-id"),
+    [scrollRef],
+  );
+
+  const handleDragStart = ({ active }: DragStartEvent): void => {
+    setActiveId(active.id);
+    setActiveWidth(active.rect.current.initial?.width ?? null);
+    if (getEventData(active)?.type === "CARD") {
+      setDragCardsByList(baseCardsByList);
+    }
+  };
+
+  const handleDragOver = ({ active, over }: DragOverEvent): void => {
+    if (!over) return;
+
+    const activeData = getEventData(active);
+    if (activeData?.type !== "CARD") return;
+
+    const overData = getEventData(over);
+    const destListPublicId =
+      overData?.type === "CARD" || overData?.type === "LIST_BODY"
+        ? overData.listPublicId
+        : undefined;
+    if (!destListPublicId) return;
+
+    setDragCardsByList((current) => {
+      const lists = current ?? baseCardsByList;
+      const sourceListPublicId = Object.keys(lists).find((listId) =>
+        lists[listId]?.some((card) => card.publicId === active.id),
+      );
+
+      if (!sourceListPublicId || sourceListPublicId === destListPublicId) {
+        return current;
+      }
+
+      const sourceCards = lists[sourceListPublicId] ?? [];
+      const activeIndex = sourceCards.findIndex(
+        (card) => card.publicId === active.id,
+      );
+      const movedCard = sourceCards[activeIndex];
+      if (!movedCard) return current;
+
+      const destCards = lists[destListPublicId] ?? [];
+      const overIndex =
+        overData?.type === "CARD"
+          ? destCards.findIndex((card) => card.publicId === over.id)
+          : -1;
+
+      let insertAt: number;
+      if (overIndex === -1) {
+        insertAt = destCards.length;
+      } else {
+        const overRect = over.rect;
+        const isBelowOverItem =
+          active.rect.current.translated &&
+          active.rect.current.translated.top > overRect.top + overRect.height;
+        insertAt = overIndex + (isBelowOverItem ? 1 : 0);
+      }
+
+      return {
+        ...lists,
+        [sourceListPublicId]: [
+          ...sourceCards.slice(0, activeIndex),
+          ...sourceCards.slice(activeIndex + 1),
+        ],
+        [destListPublicId]: [
+          ...destCards.slice(0, insertAt),
+          movedCard,
+          ...destCards.slice(insertAt),
+        ],
+      };
+    });
+  };
+
+  const handleDragEnd = ({ active, over }: DragEndEvent): void => {
+    setActiveId(null);
+    setActiveWidth(null);
+    const activeData = getEventData(active);
+    const activeIdStr = String(active.id);
+
+    if (activeData?.type === "LIST") {
+      const currentLists = boardData?.lists;
+      if (
+        !over ||
+        !canEditList ||
+        isPlaceholderPublicId(activeIdStr) ||
+        !currentLists
+      ) {
+        return;
+      }
+      if (getEventData(over)?.type !== "LIST") return;
+
+      const oldIndex = currentLists.findIndex(
+        (list) => list.publicId === active.id,
+      );
+      const newIndex = currentLists.findIndex(
+        (list) => list.publicId === over.id,
+      );
+      if (oldIndex === -1 || newIndex === -1 || oldIndex === newIndex) return;
+
+      setDragListOrder(arrayMove(currentLists, oldIndex, newIndex));
+
+      updateListMutation.mutate(
+        { listPublicId: activeIdStr, index: newIndex },
+        { onSettled: () => setDragListOrder(null) },
+      );
       return;
     }
 
-    if (type === "LIST" && canEditList && !isPlaceholderPublicId(draggableId)) {
-      updateListMutation.mutate({
-        listPublicId: draggableId,
-        index: destination.index,
-      });
-    }
+    if (activeData?.type === "CARD") {
+      const finalLists = dragCardsByList ?? baseCardsByList;
 
-    if (
-      type === "CARD" &&
-      canEditCard &&
-      !isPlaceholderPublicId(destination.droppableId)
-    ) {
-      updateCardMutation.mutate({
-        cardPublicId: draggableId,
+      if (!over || !canEditCard || isPlaceholderPublicId(activeIdStr)) {
+        setDragCardsByList(null);
+        return;
+      }
 
-        listPublicId: destination.droppableId,
-        index: destination.index,
-      });
+      const overData = getEventData(over);
+      const destListPublicId =
+        overData?.type === "CARD" || overData?.type === "LIST_BODY"
+          ? overData.listPublicId
+          : undefined;
+      if (!destListPublicId || isPlaceholderPublicId(destListPublicId)) {
+        setDragCardsByList(null);
+        return;
+      }
+
+      const destCards = finalLists[destListPublicId] ?? [];
+      const activeIndex = destCards.findIndex(
+        (card) => card.publicId === active.id,
+      );
+      if (activeIndex === -1) {
+        setDragCardsByList(null);
+        return;
+      }
+      const rawOverIndex =
+        overData?.type === "CARD"
+          ? destCards.findIndex((card) => card.publicId === over.id)
+          : -1;
+      const overIndex =
+        rawOverIndex === -1 ? destCards.length - 1 : rawOverIndex;
+
+      const finalPreview = {
+        ...finalLists,
+        [destListPublicId]: arrayMove(destCards, activeIndex, overIndex),
+      };
+      const finalIndex =
+        finalPreview[destListPublicId]?.findIndex(
+          (card) => card.publicId === active.id,
+        ) ?? overIndex;
+
+      setDragCardsByList(finalPreview);
+
+      updateCardMutation.mutate(
+        {
+          cardPublicId: activeIdStr,
+          listPublicId: destListPublicId,
+          index: finalIndex,
+        },
+        { onSettled: () => setDragCardsByList(null) },
+      );
     }
   };
+
+  const activeCard = useMemo(() => {
+    if (activeId == null) return null;
+    for (const cards of Object.values(cardsByList)) {
+      const found = cards.find((card) => card.publicId === activeId);
+      if (found) return found;
+    }
+    return null;
+  }, [activeId, cardsByList]);
 
   const renderModalContent = () => {
     return (
@@ -787,126 +1014,68 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                     </Tooltip>
                   </div>
                 ) : (
-                  <DragDropContext onDragEnd={onDragEnd}>
-                    <Droppable
-                      droppableId="all-lists"
-                      direction="horizontal"
-                      type="LIST"
+                  <DndContext
+                    sensors={sensors}
+                    collisionDetection={collisionDetectionStrategy}
+                    autoScroll={{ canScroll }}
+                    onDragStart={handleDragStart}
+                    onDragOver={handleDragOver}
+                    onDragEnd={handleDragEnd}
+                  >
+                    <SortableContext
+                      items={listIds}
+                      strategy={horizontalListSortingStrategy}
                     >
-                      {(provided) => (
-                        <div
-                          className="flex w-max"
-                          ref={provided.innerRef}
-                          {...provided.droppableProps}
-                        >
-                          <div className="min-w-[10px] md:min-w-[2rem]" />
-                          {boardData.lists.map((list, index) => (
-                            <List
-                              index={index}
-                              key={`list.${list.publicId}`}
-                              list={list}
-                              setSelectedPublicListId={(publicListId) => {
-                                setNewCardInitialDueDate(null);
-                                setSelectedPublicListId(publicListId);
+                      <div className="flex w-max">
+                        <div className="min-w-[10px] md:min-w-[2rem]" />
+                        {lists.map((list) => (
+                          <List
+                            key={`list.${list.publicId}`}
+                            list={list}
+                            setSelectedPublicListId={(publicListId) => {
+                              setNewCardInitialDueDate(null);
+                              setSelectedPublicListId(publicListId);
+                            }}
+                          >
+                            <CardList
+                              listPublicId={list.publicId}
+                              cards={cardsByList[list.publicId] ?? list.cards}
+                              cardPrefix={boardData.workspace.cardPrefix}
+                              canEditCard={!!canEditCard}
+                              freezeHeight={dragCardsByList !== null}
+                              getCardHref={(cardPublicId) =>
+                                isTemplate
+                                  ? `/templates/${boardId}/cards/${cardPublicId}${cardReturnQuery}`
+                                  : `/cards/${cardPublicId}${cardReturnQuery}`
+                              }
+                              onContextMenu={(e, cardPublicId) => {
+                                setContextMenu({
+                                  x: e.clientX,
+                                  y: e.clientY,
+                                  cardPublicId,
+                                });
                               }}
-                            >
-                              <Droppable
-                                droppableId={`${list.publicId}`}
-                                type="CARD"
-                                isDropDisabled={isPlaceholderPublicId(
-                                  list.publicId,
-                                )}
-                              >
-                                {(provided) => (
-                                  <div
-                                    ref={provided.innerRef}
-                                    {...provided.droppableProps}
-                                    data-list-scroll-id={list.publicId}
-                                    className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 h-full max-h-[calc(100dvh-225px)] min-h-[2rem] overflow-y-auto pb-[calc(0.75rem+env(safe-area-inset-bottom))] pr-1 scrollbar dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600"
-                                  >
-                                    {list.cards.map((card, index) => (
-                                      <Draggable
-                                        key={card.publicId}
-                                        draggableId={card.publicId}
-                                        index={index}
-                                        isDragDisabled={!canEditCard}
-                                      >
-                                        {(provided) => (
-                                          <Link
-                                            onClick={(e) => {
-                                              if (
-                                                card.publicId.startsWith(
-                                                  "PLACEHOLDER",
-                                                )
-                                              )
-                                                e.preventDefault();
-                                            }}
-                                            onContextMenu={(e) => {
-                                              if (
-                                                card.publicId.startsWith(
-                                                  "PLACEHOLDER",
-                                                ) ||
-                                                env("NEXT_PUBLIC_KAN_ENV") ===
-                                                  "cloud"
-                                              )
-                                                return;
-                                              e.preventDefault();
-                                              setContextMenu({
-                                                x: e.clientX,
-                                                y: e.clientY,
-                                                cardPublicId: card.publicId,
-                                              });
-                                            }}
-                                            key={card.publicId}
-                                            href={
-                                              isTemplate
-                                                ? `/templates/${boardId}/cards/${card.publicId}${cardReturnQuery}`
-                                                : `/cards/${card.publicId}${cardReturnQuery}`
-                                            }
-                                            className={`mb-2 flex !cursor-pointer flex-col ${
-                                              card.publicId.startsWith(
-                                                "PLACEHOLDER",
-                                              )
-                                                ? "pointer-events-none"
-                                                : ""
-                                            }`}
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                          >
-                                            <Card
-                                              title={card.title}
-                                              ticketNumber={
-                                                card.cardNumber != null
-                                                  ? `${boardData.workspace.cardPrefix}-${card.cardNumber}`
-                                                  : null
-                                              }
-                                              labels={card.labels}
-                                              members={card.members}
-                                              checklists={card.checklists ?? []}
-                                              description={
-                                                card.description ?? null
-                                              }
-                                              comments={card.comments ?? []}
-                                              attachments={card.attachments}
-                                              dueDate={card.dueDate ?? null}
-                                            />
-                                          </Link>
-                                        )}
-                                      </Draggable>
-                                    ))}
-                                    {provided.placeholder}
-                                  </div>
-                                )}
-                              </Droppable>
-                            </List>
-                          ))}
-                          <div className="min-w-[calc(100vw-18rem)] md:min-w-[0.75rem]" />
-                          {provided.placeholder}
+                            />
+                          </List>
+                        ))}
+                        <div className="min-w-[calc(100vw-18rem)] md:min-w-[0.75rem]" />
+                      </div>
+                    </SortableContext>
+                    <DragOverlay dropAnimation={activeCard ? undefined : null}>
+                      {activeCard ? (
+                        <div
+                          style={
+                            activeWidth ? { width: activeWidth } : undefined
+                          }
+                        >
+                          <CardPreview
+                            card={activeCard}
+                            cardPrefix={boardData.workspace.cardPrefix}
+                          />
                         </div>
-                      )}
-                    </Droppable>
-                  </DragDropContext>
+                      ) : null}
+                    </DragOverlay>
+                  </DndContext>
                 )}
               </>
             ) : null}

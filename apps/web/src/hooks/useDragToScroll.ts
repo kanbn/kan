@@ -66,17 +66,15 @@ export function useDragToScroll({
     const container = scrollRef.current;
 
     // Check if the click is on an interactive or draggable element
-    // We need to be careful not to interfere with react-beautiful-dnd dragging
+    // We need to be careful not to interfere with dnd-kit dragging
     const isInteractiveElement =
-      target.closest("a") ||
-      target.closest("button") ||
-      target.closest("input") ||
-      target.closest("textarea") ||
-      target.closest("[role='button']") ||
-      target.closest("[draggable='true']") ||
-      target.closest(".react-beautiful-dnd-drag-handle") ||
-      target.closest("[data-rbd-drag-handle-draggable-id]") ||
-      target.closest("[data-rbd-draggable-id]");
+      target.closest("a") ??
+      target.closest("button") ??
+      target.closest("input") ??
+      target.closest("textarea") ??
+      target.closest("[role='button']") ??
+      target.closest("[draggable='true']") ??
+      target.closest("[data-board-draggable]");
 
     // Don't start dragging if clicking on interactive elements
     if (isInteractiveElement) return;
