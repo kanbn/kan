@@ -55,6 +55,12 @@ The easiest way to deploy Kan is through Railway. We've partnered with Railway t
   <img src="https://railway.app/button.svg" alt="Deploy on Railway" height="40" />
 </a>
 
+Alternatively one-click deployment via RepoCloud
+
+<a href="https://repocloud.io/details/Kan/">
+  <img src="https://d16t0pc4846x52.cloudfront.net/deploylobe.svg" alt="Deploy on RepoCloud" height="40" />
+</a>
+
 ### Docker Compose
 
 Alternatively, you can self-host Kan with Docker Compose. This will set up everything for you including your postgres database and automatically run migrations.
