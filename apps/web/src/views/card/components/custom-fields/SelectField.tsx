@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiCheck, HiPencil, HiXMark } from "react-icons/hi2";
 import { t } from "@lingui/core/macro";
 
@@ -64,6 +64,42 @@ export function SelectField({
       ? [String(effectiveValue)]
       : [];
 
+  // ── "Other" free-text option (checkbox/radio only) ──────────────────────────
+  // Any selected value that isn't an option key is the user's own entry.
+  const optionKeys = Object.keys(options);
+  const otherLabel =
+    isCheckboxOrRadio && field.allowOther
+      ? typeof field.allowOther === "string"
+        ? field.allowOther
+        : t`Other`
+      : null;
+  const customValueOf = (values: string[]) =>
+    values.find((v) => !optionKeys.includes(v)) ?? "";
+  const withOther = (values: string[], text: string) => {
+    const known = isMultiple ? values.filter((v) => optionKeys.includes(v)) : [];
+    const trimmed = text.trim();
+    return trimmed ? [...known, trimmed] : known;
+  };
+  const toFieldValue = (values: string[]) =>
+    isMultiple ? values : values[0] ?? null;
+
+  const savedCustomValue = customValueOf(selectedValues);
+  // otherActive tracks a checked "Other" box whose text is still empty
+  const [otherActive, setOtherActive] = useState(savedCustomValue !== "");
+  const [otherText, setOtherText] = useState(savedCustomValue);
+
+  useEffect(() => {
+    if (savedCustomValue) {
+      setOtherText(savedCustomValue);
+      setOtherActive(true);
+    }
+  }, [savedCustomValue]);
+
+  const resetOther = () => {
+    setOtherActive(savedCustomValue !== "");
+    setOtherText(savedCustomValue);
+  };
+
   const [isEditing, setIsEditing] = useState(false);
   // local draft while editing
   const [draft, setDraft] = useState<string[]>(selectedValues);
@@ -71,16 +107,18 @@ export function SelectField({
   const startEditing = () => {
     if (!canEdit) return;
     setDraft(selectedValues);
+    resetOther();
     setIsEditing(true);
   };
 
   const commitEdit = () => {
-    onChange(isMultiple ? draft : draft[0] ?? null);
+    onChange(toFieldValue(draft));
     setIsEditing(false);
   };
 
   const cancelEdit = () => {
     setDraft(selectedValues);
+    resetOther();
     setIsEditing(false);
   };
 
@@ -89,7 +127,21 @@ export function SelectField({
       setDraft(checked ? [...draft, optionKey] : draft.filter((v) => v !== optionKey));
     } else {
       setDraft(checked ? [optionKey] : []);
+      if (checked) {
+        setOtherActive(false);
+        setOtherText("");
+      }
     }
+  };
+
+  const handleDraftOtherToggle = (checked: boolean) => {
+    setOtherActive(checked);
+    setDraft(withOther(draft, checked ? otherText : ""));
+  };
+
+  const handleDraftOtherTextChange = (text: string) => {
+    setOtherText(text);
+    setDraft(withOther(draft, text));
   };
 
   const handleDraftSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -116,8 +168,64 @@ export function SelectField({
       onChange(next);
     } else {
       onChange(checked ? optionKey : null);
+      if (checked) {
+        setOtherActive(false);
+        setOtherText("");
+      }
     }
   };
+
+  const handleImmediateOtherToggle = (checked: boolean) => {
+    if (!canEdit) return;
+    setOtherActive(checked);
+    onChange(toFieldValue(withOther(selectedValues, checked ? otherText : "")));
+  };
+
+  const handleImmediateOtherBlur = () => {
+    if (!canEdit || otherText.trim() === savedCustomValue) return;
+    onChange(toFieldValue(withOther(selectedValues, otherText)));
+  };
+
+  const renderOtherOption = ({
+    checked,
+    name,
+    onToggle,
+    onTextChange,
+    onTextBlur,
+  }: {
+    checked: boolean;
+    name: string;
+    onToggle: (checked: boolean) => void;
+    onTextChange: (text: string) => void;
+    onTextBlur?: () => void;
+  }) => (
+    <div className="flex items-center gap-2 text-sm text-neutral-800 dark:text-dark-900">
+      <label
+        className={`flex shrink-0 items-center gap-2 ${!canEdit ? "cursor-default opacity-60" : "cursor-pointer"}`}
+      >
+        <input
+          type={style === "radio" ? "radio" : "checkbox"}
+          name={name}
+          checked={checked}
+          disabled={!canEdit}
+          onChange={(e) => onToggle(e.target.checked)}
+          className="rounded"
+        />
+        {otherLabel}
+      </label>
+      {checked && (
+        <input
+          type="text"
+          value={otherText}
+          onChange={(e) => onTextChange(e.target.value)}
+          onBlur={onTextBlur}
+          readOnly={!canEdit}
+          placeholder={t`Please specify`}
+          className="min-w-0 flex-1 rounded border border-light-400 bg-transparent px-2 py-0.5 text-sm text-neutral-900 focus:border-neutral-400 focus:outline-none dark:border-dark-400 dark:text-dark-1000 dark:focus:border-dark-600"
+        />
+      )}
+    </div>
+  );
 
   // Summary of selected values for read mode
   const selectedLabels = selectedValues
@@ -156,6 +264,14 @@ export function SelectField({
             {label}
           </label>
         ))}
+        {otherLabel &&
+          renderOtherOption({
+            checked: otherActive || savedCustomValue !== "",
+            name: fieldKey,
+            onToggle: handleImmediateOtherToggle,
+            onTextChange: setOtherText,
+            onTextBlur: handleImmediateOtherBlur,
+          })}
       </div>
     );
   }
@@ -314,6 +430,13 @@ export function SelectField({
               {label}
             </label>
           ))}
+          {otherLabel &&
+            renderOtherOption({
+              checked: otherActive || customValueOf(draft) !== "",
+              name: `${fieldKey}-edit`,
+              onToggle: handleDraftOtherToggle,
+              onTextChange: handleDraftOtherTextChange,
+            })}
         </div>
       )}
 

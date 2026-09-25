@@ -1,4 +1,5 @@
 import type { CustomFieldDef } from "@kan/shared";
+import { isHtmlInputType } from "@kan/shared";
 import type { WorkspaceMember } from "~/components/Editor";
 
 import { DateField } from "./DateField";
@@ -37,25 +38,23 @@ export function FieldRenderer({
   sectionKey,
   isSidebar = false,
 }: Props) {
-  switch (field.type) {
-    case "text":
-    case "textarea":
-    case "number":
-    case "tel":
-      return (
-        <TextField
-          fieldKey={fieldKey}
-          field={field}
-          value={value}
-          onChange={(v) => onChange(v)}
-          canEdit={canEdit}
-          embedded={embedded}
-          boardPublicId={boardPublicId}
-          sectionKey={sectionKey}
-          isSidebar={isSidebar}
-        />
-      );
+  if (field.type === "textarea" || isHtmlInputType(field.type)) {
+    return (
+      <TextField
+        fieldKey={fieldKey}
+        field={field}
+        value={value}
+        onChange={(v) => onChange(v)}
+        canEdit={canEdit}
+        embedded={embedded}
+        boardPublicId={boardPublicId}
+        sectionKey={sectionKey}
+        isSidebar={isSidebar}
+      />
+    );
+  }
 
+  switch (field.type) {
     case "richtext":
       return (
         <RichTextField

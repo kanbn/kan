@@ -3,14 +3,34 @@ import { z } from "zod";
 
 // ─── Field types ──────────────────────────────────────────────────────────────
 
-export const CustomFieldTypeSchema = z.enum([
+// Standard HTML <input> types that render as a plain input element.
+export const HTML_INPUT_TYPES = [
   "text",
+  "number",
+  "range",
+  "tel",
+  "email",
+  "url",
+  "search",
+  "password",
+  "color",
+  "time",
+  "month",
+  "week",
+] as const;
+
+export type HtmlInputType = (typeof HTML_INPUT_TYPES)[number];
+
+export function isHtmlInputType(type: string): type is HtmlInputType {
+  return (HTML_INPUT_TYPES as readonly string[]).includes(type);
+}
+
+export const CustomFieldTypeSchema = z.enum([
+  ...HTML_INPUT_TYPES,
   "textarea",
   "richtext",
   "date",
   "datetime-local",
-  "number",
-  "tel",
   "select",
   "section",
   "address",
@@ -35,6 +55,11 @@ export interface CustomFieldDef {
   description?: string;
   autofillLimit?: number;
   autofillFromCards?: boolean;
+  min?: number | string;
+  max?: number | string;
+  step?: number | string;
+  /** checkbox/radio styles: append an "Other" option with a free-text input. A string sets its label. */
+  allowOther?: boolean | string;
   default?: string | string[];
   options?: Record<string, string>;
   fields?: Record<string, CustomFieldDef>;
@@ -53,6 +78,10 @@ export const CustomFieldDefSchema: z.ZodType<CustomFieldDef> = z.lazy(() =>
     description: z.string().optional(),
     autofillLimit: z.number().optional(),
     autofillFromCards: z.boolean().optional(),
+    min: z.union([z.number(), z.string()]).optional(),
+    max: z.union([z.number(), z.string()]).optional(),
+    step: z.union([z.number(), z.string()]).optional(),
+    allowOther: z.union([z.boolean(), z.string()]).optional(),
     default: z.union([z.string(), z.array(z.string())]).optional(),
     options: z.record(z.string(), z.string()).optional(),
     fields: z.record(z.string(), CustomFieldDefSchema).optional(),

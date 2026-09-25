@@ -58,24 +58,27 @@ export function TextField({
     }
   }, [draft, field.type, isFocused, embedded]);
 
-  const handleBlur = () => {
-    if (!embedded) {
-      setIsFocused(false);
-    }
-    if (field.type === "number") {
-      onChange(draft === "" ? null : Number(draft));
-    } else {
-      onChange(draft === "" ? null : draft);
-    }
-  };
+  const isNumeric = field.type === "number" || field.type === "range";
 
-  const handleSuggestionClick = (val: string) => {
-    setDraft(val);
-    if (field.type === "number") {
+  const commit = (val: string) => {
+    if (val === externalValue) return;
+    if (isNumeric) {
       onChange(val === "" ? null : Number(val));
     } else {
       onChange(val === "" ? null : val);
     }
+  };
+
+  const handleBlur = () => {
+    if (!embedded) {
+      setIsFocused(false);
+    }
+    commit(draft);
+  };
+
+  const handleSuggestionClick = (val: string) => {
+    setDraft(val);
+    commit(val);
     setIsFocused(false);
   };
 
@@ -114,16 +117,42 @@ export function TextField({
             embedded ? baseClass : staticClass
           } resize-none overflow-hidden`}
         />
+      ) : field.type === "range" ? (
+        <div className="flex items-center gap-2">
+          <input
+            type="range"
+            min={field.min}
+            max={field.max}
+            step={field.step}
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onPointerUp={(e) => commit(e.currentTarget.value)}
+            onKeyUp={(e) => commit(e.currentTarget.value)}
+            onBlur={handleBlur}
+            disabled={!canEdit}
+            className="flex-1 disabled:opacity-60"
+          />
+          <span className="w-6 text-right text-sm tabular-nums text-neutral-900 dark:text-dark-1000">
+            {draft === "" ? "–" : draft}
+          </span>
+        </div>
       ) : (
         <input
-          type={field.type === "number" ? "number" : "text"}
+          type={field.type}
+          min={field.min}
+          max={field.max}
+          step={field.step}
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           onFocus={() => setIsFocused(true)}
           onBlur={handleBlur}
           readOnly={!canEdit}
+          // readOnly doesn't stop the color picker from opening
+          disabled={!canEdit && field.type === "color"}
           placeholder={field.placeholder}
-          className={embedded ? baseClass : staticClass}
+          className={`${embedded ? baseClass : staticClass} ${
+            field.type === "color" ? "h-8 cursor-pointer p-0.5" : ""
+          }`}
         />
       )}
 
