@@ -32,6 +32,10 @@
       "types": "./src/utils/rateLimit.ts",
       "default": "./src/utils/rateLimit.ts"
     },
+    "./utils/trpcRateLimit": {
+      "types": "./src/utils/trpcRateLimit.ts",
+      "default": "./src/utils/trpcRateLimit.ts"
+    },
     "./utils/apiLogging": {
       "types": "./src/utils/apiLogging.ts",
       "default": "./src/utils/apiLogging.ts"
