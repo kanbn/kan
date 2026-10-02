@@ -71,6 +71,9 @@ services:
       - NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY=${NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY}
 
       # Auth config (optional)
+      # NEXT_PUBLIC_ALLOW_CREDENTIALS must be "true" for email & password auth.
+      # If it is blank and no OAuth/OIDC provider is configured, the sign up page
+      # has no available auth method and no user can be created.
       - NEXT_PUBLIC_ALLOW_CREDENTIALS=${NEXT_PUBLIC_ALLOW_CREDENTIALS}
       - NEXT_PUBLIC_DISABLE_SIGN_UP=${NEXT_PUBLIC_DISABLE_SIGN_UP}
 
