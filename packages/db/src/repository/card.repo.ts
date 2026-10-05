@@ -168,6 +168,128 @@ export const create = async (
   });
 };
 
+/**
+ * Labels are board-scoped (labels.boardId) but _card_labels stores only
+ * (cardId, labelId), so the database cannot reject a card being linked to a
+ * label from another board. Every writer below goes through this, which is why
+ * it lives here rather than in the routers: the permission checks upstream are
+ * all workspace-scoped, and a workspace holds many boards.
+ *
+ * A card's board is not a property of the card, it is a property of whatever
+ * list its listId currently points at, and card.update can repoint that. So the
+ * check and the insert run in one transaction with the CARD rows locked
+ * (FOR UPDATE OF card): a concurrent card move blocks until this commits.
+ *
+ * Scope of that lock, stated rather than implied: it covers card.listId
+ * changing. It does NOT lock lists, so it would not stop a writer that
+ * retargeted a list to another board without touching the card row. Nothing
+ * mutates lists.boardId today, so that path does not exist yet.
+ *
+ * Throws on any mismatch rather than filtering. A caller wanting a subset must
+ * select it before calling, so a drop is a decision rather than a side effect.
+ */
+type DbTransaction = Parameters<Parameters<dbClient["transaction"]>[0]>[0];
+
+export const cardLabelViolations = [
+  "card_not_found",
+  "label_not_found",
+  "board_mismatch",
+] as const;
+export type CardLabelViolation = (typeof cardLabelViolations)[number];
+
+/**
+ * Distinguishes the three ways a card-label link can be illegitimate. Callers
+ * map these to a status code; a bare Error left every writer that did not
+ * pre-validate reporting a client-correctable input as a 500, and reported a
+ * missing row as a board mismatch.
+ */
+export class CardLabelBoardError extends Error {
+  constructor(
+    readonly violation: CardLabelViolation,
+    readonly cardId: number,
+    readonly labelId: number,
+  ) {
+    super(
+      violation === "card_not_found"
+        ? `Card ${cardId} not found`
+        : violation === "label_not_found"
+          ? `Label ${labelId} not found`
+          : `Label ${labelId} does not belong to the board of card ${cardId}`,
+    );
+    this.name = "CardLabelBoardError";
+  }
+}
+
+export const assertCardLabelBoardsMatch = async (
+  tx: DbTransaction,
+  pairs: { cardId: number; labelId: number }[],
+) => {
+  if (!pairs.length) return;
+
+  {
+    const cardIds = [...new Set(pairs.map((pair) => pair.cardId))];
+    const labelIds = [...new Set(pairs.map((pair) => pair.labelId))];
+
+    const cardBoards = await tx
+      .select({ cardId: cards.id, boardId: lists.boardId })
+      .from(cards)
+      .innerJoin(lists, eq(cards.listId, lists.id))
+      .where(inArray(cards.id, cardIds))
+      .orderBy(cards.id)
+      .for("update", { of: cards });
+
+    const labelBoards = await tx
+      .select({ labelId: labels.id, boardId: labels.boardId })
+      .from(labels)
+      .where(inArray(labels.id, labelIds));
+
+    const boardOfCard = new Map(cardBoards.map((r) => [r.cardId, r.boardId]));
+    const boardOfLabel = new Map(
+      labelBoards.map((r) => [r.labelId, r.boardId]),
+    );
+
+    for (const pair of pairs) {
+      const cardBoardId = boardOfCard.get(pair.cardId);
+      const labelBoardId = boardOfLabel.get(pair.labelId);
+
+      // An unknown card or label fails closed: without both boards there is no
+      // evidence the link is legitimate.
+      if (cardBoardId === undefined)
+        throw new CardLabelBoardError(
+          "card_not_found",
+          pair.cardId,
+          pair.labelId,
+        );
+
+      if (labelBoardId === undefined)
+        throw new CardLabelBoardError(
+          "label_not_found",
+          pair.cardId,
+          pair.labelId,
+        );
+
+      if (cardBoardId !== labelBoardId)
+        throw new CardLabelBoardError(
+          "board_mismatch",
+          pair.cardId,
+          pair.labelId,
+        );
+    }
+
+  }
+};
+
+const insertCardLabelsCheckedTx = async (
+  db: dbClient,
+  pairs: { cardId: number; labelId: number }[],
+) => {
+  return db.transaction(async (tx) => {
+    await assertCardLabelBoardsMatch(tx, pairs);
+
+    return tx.insert(cardsToLabels).values(pairs).returning();
+  });
+};
+
 export const bulkCreateCardLabelRelationships = async (
   db: dbClient,
   cardLabelRelationshipInput: {
@@ -175,12 +297,9 @@ export const bulkCreateCardLabelRelationships = async (
     labelId: number;
   }[],
 ) => {
-  const result = await db
-    .insert(cardsToLabels)
-    .values(cardLabelRelationshipInput)
-    .returning();
+  if (!cardLabelRelationshipInput.length) return [];
 
-  return result;
+  return insertCardLabelsCheckedTx(db, cardLabelRelationshipInput);
 };
 
 export const bulkCreateCardWorkspaceMemberRelationships = async (
@@ -427,13 +546,9 @@ export const createCardLabelRelationship = async (
   db: dbClient,
   cardLabelRelationshipInput: { cardId: number; labelId: number },
 ) => {
-  const [result] = await db
-    .insert(cardsToLabels)
-    .values({
-      cardId: cardLabelRelationshipInput.cardId,
-      labelId: cardLabelRelationshipInput.labelId,
-    })
-    .returning();
+  const [result] = await insertCardLabelsCheckedTx(db, [
+    cardLabelRelationshipInput,
+  ]);
 
   return result;
 };
@@ -442,10 +557,12 @@ export const bulkCreateCardLabelRelationship = async (
   db: dbClient,
   cardLabelRelationshipInput: { cardId: number; labelId: number }[],
 ) => {
-  const [result] = await db
-    .insert(cardsToLabels)
-    .values(cardLabelRelationshipInput)
-    .returning();
+  if (!cardLabelRelationshipInput.length) return undefined;
+
+  const [result] = await insertCardLabelsCheckedTx(
+    db,
+    cardLabelRelationshipInput,
+  );
 
   return result;
 };
