@@ -42,7 +42,10 @@ export const initAuth = (db: dbClient) => {
       disableSignUp: false,
       sendResetPassword: async (data) => {
         await sendEmail(data.user.email, "Reset Password", "RESET_PASSWORD", {
-          resetPasswordUrl: data.url,
+          resetPasswordUrl: data.url.replace(
+            "/api/auth/reset-password/",
+            "/reset-password/",
+          ),
           resetPasswordToken: data.token,
         });
       },

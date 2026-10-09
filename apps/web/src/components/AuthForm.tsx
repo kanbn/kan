@@ -1,4 +1,5 @@
 import type { SocialProvider } from "better-auth/social-providers";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
@@ -425,6 +426,16 @@ export function Auth({
                     {errors.password.message ??
                       t`Please enter a valid password`}
                   </p>
+                )}
+                {!isSignUp && (
+                  <div className="mt-1 flex justify-end">
+                    <Link
+                      href="/forgot-password"
+                      className="text-xs text-light-900 underline dark:text-dark-900"
+                    >
+                      {t`Forgot password?`}
+                    </Link>
+                  </div>
                 )}
               </div>
             )}
