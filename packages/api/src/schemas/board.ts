@@ -4,6 +4,7 @@ import {
   checklistResponseSchema,
   labelSchema,
   workspaceMemberSchema,
+  workspaceMemberStatusSchema,
 } from "./common";
 
 // ─── board.all ───────────────────────────────────────────────
@@ -25,6 +26,7 @@ export const boardListItemSchema = z.object({
 const boardCardMemberSchema = z.object({
   publicId: z.string(),
   email: z.string(),
+  status: workspaceMemberStatusSchema,
   user: z
     .object({
       name: z.string().nullable(),
@@ -56,6 +58,7 @@ export const boardDetailSchema = z.object({
   visibility: z.string(),
   isArchived: z.boolean(),
   favorite: z.boolean(),
+  assignedMemberPublicIds: z.array(z.string()),
   workspace: z.object({
     publicId: z.string(),
     cardPrefix: z.string(),

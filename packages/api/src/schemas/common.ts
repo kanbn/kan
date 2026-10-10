@@ -32,9 +32,16 @@ export const userSchema = z.object({
 });
 
 // Workspace member sub-object
+export const workspaceMemberStatusSchema = z.enum([
+  "active",
+  "invited",
+  "removed",
+  "paused",
+]);
+
 export const workspaceMemberSchema = z.object({
   publicId: z.string(),
   email: z.string(),
-  status: z.string(),
+  status: workspaceMemberStatusSchema,
   user: userSchema.nullable(),
 });
