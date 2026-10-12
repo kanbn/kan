@@ -9,6 +9,23 @@ function getDb() {
   return db;
 }
 
+export async function setWorkspacePlan(
+  workspacePublicId: string,
+  plan: "free" | "team" | "pro" | "enterprise",
+) {
+  const client = getDb();
+
+  const workspace = await workspaceRepo.getByPublicId(
+    client,
+    workspacePublicId,
+  );
+  if (!workspace) {
+    throw new Error(`Workspace ${workspacePublicId} not found`);
+  }
+
+  await workspaceRepo.update(client, workspacePublicId, { plan });
+}
+
 export async function seedGrandfatheredProSubscription(
   workspacePublicId: string,
 ) {
