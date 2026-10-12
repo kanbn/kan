@@ -38,6 +38,9 @@ jobs:
           --health-retries 10
     env:
       CI: "true"
+      MINIO_PORT: "9500"
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
       POSTGRES_URL: postgresql://kan:kan@localhost:5432/kan_e2e
       BETTER_AUTH_SECRET: e2e-test-only-secret-not-for-prod-use
       NEXT_PUBLIC_BASE_URL: http://localhost:3000
@@ -70,10 +73,26 @@ jobs:
       - name: Install Stripe CLI
         run: npm install -g @stripe/cli
 
-      - name: Install MinIO
+      - name: Start MinIO
         run: |
-          curl -fsSL https://dl.min.io/server/minio/release/linux-amd64/minio -o /usr/local/bin/minio
-          chmod +x /usr/local/bin/minio
+          # Pin the community image used only by this local E2E S3 fixture.
+          docker run --detach --rm \
+            --name kan-e2e-minio \
+            --publish "127.0.0.1:${MINIO_PORT}:9000" \
+            --env MINIO_ROOT_USER \
+            --env MINIO_ROOT_PASSWORD \
+            quay.io/minio/minio@sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e \
+            server /data
+
+          for _ in {1..30}; do
+            if curl -fsS "http://127.0.0.1:${MINIO_PORT}/minio/health/live" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+
+          docker logs kan-e2e-minio
+          exit 1
 
       - name: Write .env for CI
         run: |

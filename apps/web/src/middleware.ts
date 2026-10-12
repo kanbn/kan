@@ -4,6 +4,11 @@ import { env } from "next-runtime-env";
 
 const MCP_HOSTNAMES = new Set(["mcp.kan.bn", "mcp-staging.kan.bn"]);
 
+const OAUTH_DISCOVERY_PATHS = new Set([
+  "/.well-known/oauth-protected-resource",
+  "/.well-known/oauth-authorization-server",
+]);
+
 function resolveLoginUrl(request: NextRequest) {
   const publicBaseUrl = env("NEXT_PUBLIC_BASE_URL");
 
@@ -20,6 +25,15 @@ function resolveLoginUrl(request: NextRequest) {
 
 export function middleware(request: NextRequest) {
   const host = request.headers.get("host")?.split(":")[0];
+
+  if (
+    host &&
+    MCP_HOSTNAMES.has(host) &&
+    OAUTH_DISCOVERY_PATHS.has(request.nextUrl.pathname)
+  ) {
+    return new NextResponse(null, { status: 404 });
+  }
+
   if (request.nextUrl.pathname === "/" && host && MCP_HOSTNAMES.has(host)) {
     const url = request.nextUrl.clone();
     url.pathname = "/api/mcp";
@@ -36,5 +50,9 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/"],
+  matcher: [
+    "/",
+    "/.well-known/oauth-protected-resource",
+    "/.well-known/oauth-authorization-server",
+  ],
 };

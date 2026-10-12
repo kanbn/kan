@@ -19,7 +19,6 @@ import {
 } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertUserInWorkspace } from "../utils/auth";
 import { decryptToken } from "../utils/encryption";
 import { assertPermission } from "../utils/permissions";
 import { getTrelloLabelColour } from "../utils/trello";
@@ -729,7 +728,11 @@ export const importRouter = createTRPCRouter({
             message: "Workspace not found",
           });
 
-        await assertUserInWorkspace(ctx.db, userId, workspace.id);
+        // Importing creates a board, so this must require board:create like
+        // the Trello import does (importBoards), not just membership: a
+        // guest (or a member with board:create explicitly revoked) is a
+        // legitimate workspace member but must not be able to create boards.
+        await assertPermission(ctx.db, userId, workspace.id, "board:create");
 
         const newImport = await importRepo.create(ctx.db, {
           source: "github",
