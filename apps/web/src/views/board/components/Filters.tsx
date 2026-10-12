@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
+import { useLingui } from "@lingui/react";
 import {
   HiMiniXMark,
   HiOutlineClock,
@@ -57,6 +58,7 @@ const Filters = ({
   isLoading: boolean;
 }) => {
   const router = useRouter();
+  const { i18n } = useLingui();
 
   const clearFilters = async () => {
     try {
@@ -78,6 +80,7 @@ const Filters = ({
   const formattedMembers = getBoardFilterMembers(
     members,
     assignedMemberPublicIds,
+    i18n.locale,
   ).map((member) => ({
     key: member.publicId,
     value: `${formatMemberDisplayName(
