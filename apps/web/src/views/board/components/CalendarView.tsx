@@ -1,5 +1,16 @@
-import type { DropResult } from "react-beautiful-dnd";
+import type { DragEndEvent } from "@dnd-kit/core";
+import type { ReactNode } from "react";
 import Link from "next/link";
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  useDraggable,
+  useDroppable,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 import { t } from "@lingui/core/macro";
 import {
   addMonths,
@@ -14,8 +25,7 @@ import {
   startOfWeek,
   subMonths,
 } from "date-fns";
-import { useMemo, useState } from "react";
-import { DragDropContext, Draggable } from "react-beautiful-dnd";
+import { useEffect, useMemo, useState } from "react";
 import {
   HiCalendarDays,
   HiChevronLeft,
@@ -26,7 +36,6 @@ import { twMerge } from "tailwind-merge";
 
 import Button from "~/components/Button";
 import LabelIcon from "~/components/LabelIcon";
-import { StrictModeDroppable as Droppable } from "~/components/StrictModeDroppable";
 import { useLocalisation } from "~/hooks/useLocalisation";
 import { isPlaceholderPublicId } from "~/utils/helpers";
 
@@ -38,6 +47,87 @@ interface CalendarCard {
   cardNumber: number | null;
   dueDate: Date | null;
   labels: { name: string; colourCode: string | null }[];
+}
+
+interface DraggableCalendarCardProps {
+  card: CalendarCard;
+  href: string;
+  ticketNumber: string | null;
+  disabled: boolean;
+}
+
+function DraggableCalendarCard({
+  card,
+  href,
+  ticketNumber,
+  disabled,
+}: DraggableCalendarCardProps) {
+  const { attributes, listeners, setNodeRef, transform, isDragging } =
+    useDraggable({
+      id: card.publicId,
+      disabled,
+    });
+
+  return (
+    <li
+      ref={setNodeRef}
+      style={{
+        transform: CSS.Translate.toString(transform),
+        opacity: isDragging ? 0 : 1,
+      }}
+      {...attributes}
+      {...listeners}
+    >
+      <Link
+        href={href}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (isPlaceholderPublicId(card.publicId)) {
+            e.preventDefault();
+          }
+        }}
+        className={twMerge(
+          "group flex items-center gap-1.5 rounded-[4px] px-1 py-0.5 text-xs hover:bg-light-200 dark:hover:bg-dark-200",
+          !disabled && isDragging ? "cursor-grabbing" : "cursor-pointer",
+        )}
+      >
+        <span className="flex size-2 flex-none items-center">
+          {card.labels[0] && (
+            <LabelIcon colourCode={card.labels[0].colourCode} />
+          )}
+        </span>
+        <span className="flex-auto truncate text-light-1000 dark:text-dark-1000">
+          {card.title}
+        </span>
+        {ticketNumber && (
+          <span className="hidden flex-none text-light-800 dark:text-dark-800 xl:block">
+            {ticketNumber}
+          </span>
+        )}
+      </Link>
+    </li>
+  );
+}
+
+interface DroppableDayCellProps {
+  dayKey: string;
+  children: ReactNode;
+}
+
+function DroppableDayCell({ dayKey, children }: DroppableDayCellProps) {
+  const { setNodeRef, isOver } = useDroppable({ id: dayKey });
+
+  return (
+    <ol
+      ref={setNodeRef}
+      className={twMerge(
+        "mt-1 min-h-0 flex-1 space-y-px rounded-[4px]",
+        isOver && "bg-light-200 dark:bg-dark-200",
+      )}
+    >
+      {children}
+    </ol>
+  );
 }
 
 interface CalendarViewProps {
@@ -52,7 +142,11 @@ interface CalendarViewProps {
   isLocked: boolean;
   upgradeUrl: string;
   onDateClick: (date: Date) => void;
-  onCardDrop: (cardPublicId: string, dueDate: Date) => void;
+  onCardDrop: (
+    cardPublicId: string,
+    dueDate: Date,
+    onSettled: () => void,
+  ) => void;
 }
 
 const CalendarView = ({
@@ -83,13 +177,22 @@ const CalendarView = ({
   const ticketNumber = (card: CalendarCard) =>
     card.cardNumber != null ? `${cardPrefix}-${card.cardNumber}` : null;
 
+  const [pendingMove, setPendingMove] = useState<{
+    cardPublicId: string;
+    dueDate: Date;
+  } | null>(null);
+
   const cardsByDay = useMemo(() => {
     const map = new Map<string, CalendarCard[]>();
 
     for (const list of lists) {
       for (const card of list.cards) {
-        if (!card.dueDate) continue;
-        const key = format(card.dueDate, "yyyy-MM-dd");
+        const dueDate =
+          pendingMove?.cardPublicId === card.publicId
+            ? pendingMove.dueDate
+            : card.dueDate;
+        if (!dueDate) continue;
+        const key = format(dueDate, "yyyy-MM-dd");
         const existing = map.get(key) ?? [];
         existing.push(card);
         map.set(key, existing);
@@ -97,7 +200,7 @@ const CalendarView = ({
     }
 
     return map;
-  }, [lists]);
+  }, [lists, pendingMove]);
 
   const days = useMemo(() => {
     const monthStart = startOfMonth(currentMonth);
@@ -140,15 +243,45 @@ const CalendarView = ({
     setSelectedDate(isSameMonth(month, today) ? today : startOfMonth(month));
   };
 
-  const handleDragEnd = ({ destination, source, draggableId }: DropResult) => {
-    if (!destination || destination.droppableId === source.droppableId) {
-      return;
-    }
+  const [activeId, setActiveId] = useState<string | null>(null);
 
-    const targetDay = days.find((day) => day.key === destination.droppableId);
+  useEffect(() => {
+    if (activeId == null) return;
+    document.body.style.cursor = "grabbing";
+    return () => {
+      document.body.style.cursor = "";
+    };
+  }, [activeId]);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),
+  );
+
+  const activeCard = useMemo(
+    () =>
+      activeId == null
+        ? null
+        : (days
+            .flatMap((day) => day.cards)
+            .find((card) => card.publicId === activeId) ?? null),
+    [activeId, days],
+  );
+
+  const handleDragEnd = ({ active, over }: DragEndEvent) => {
+    setActiveId(null);
+    if (!over) return;
+
+    const sourceDay = days.find((day) =>
+      day.cards.some((card) => card.publicId === active.id),
+    );
+    if (!sourceDay || sourceDay.key === over.id) return;
+
+    const targetDay = days.find((day) => day.key === over.id);
     if (!targetDay) return;
 
-    onCardDrop(draggableId, targetDay.date);
+    const cardPublicId = String(active.id);
+    setPendingMove({ cardPublicId, dueDate: targetDay.date });
+    onCardDrop(cardPublicId, targetDay.date, () => setPendingMove(null));
   };
 
   const navButtonClasses =
@@ -213,7 +346,12 @@ const CalendarView = ({
               ))}
             </div>
 
-            <DragDropContext onDragEnd={handleDragEnd}>
+            <DndContext
+              sensors={sensors}
+              onDragStart={({ active }) => setActiveId(String(active.id))}
+              onDragEnd={handleDragEnd}
+              onDragCancel={() => setActiveId(null)}
+            >
               <div className="hidden min-h-0 flex-1 overflow-y-auto bg-light-300 dark:bg-dark-300 lg:block">
                 <div className="grid min-h-full auto-rows-[minmax(7.5rem,1fr)] grid-cols-7 gap-px">
                   {days.map((day) => {
@@ -244,89 +382,55 @@ const CalendarView = ({
                         >
                           {format(day.date, "d")}
                         </time>
-                        <Droppable droppableId={day.key}>
-                          {(provided, snapshot) => (
-                            <ol
-                              ref={provided.innerRef}
-                              {...provided.droppableProps}
-                              className={twMerge(
-                                "mt-1 min-h-0 flex-1 space-y-px rounded-[4px]",
-                                snapshot.isDraggingOver &&
-                                  "bg-light-200 dark:bg-dark-200",
-                              )}
+                        <DroppableDayCell dayKey={day.key}>
+                          {day.cards.slice(0, MAX_CARDS_PER_DAY).map((card) => (
+                            <DraggableCalendarCard
+                              key={card.publicId}
+                              card={card}
+                              href={cardHref(card.publicId)}
+                              ticketNumber={ticketNumber(card)}
+                              disabled={
+                                !canEditCard ||
+                                isPlaceholderPublicId(card.publicId)
+                              }
+                            />
+                          ))}
+                          {overflowCount > 0 && (
+                            <li
+                              onClick={(e) => e.stopPropagation()}
+                              className="px-1 text-xs text-light-800 dark:text-dark-800"
                             >
-                              {day.cards
-                                .slice(0, MAX_CARDS_PER_DAY)
-                                .map((card, index) => (
-                                  <Draggable
-                                    key={card.publicId}
-                                    draggableId={card.publicId}
-                                    index={index}
-                                    isDragDisabled={
-                                      !canEditCard ||
-                                      isPlaceholderPublicId(card.publicId)
-                                    }
-                                  >
-                                    {(dragProvided) => (
-                                      <li
-                                        ref={dragProvided.innerRef}
-                                        {...dragProvided.draggableProps}
-                                        {...dragProvided.dragHandleProps}
-                                      >
-                                        <Link
-                                          href={cardHref(card.publicId)}
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            if (
-                                              isPlaceholderPublicId(
-                                                card.publicId,
-                                              )
-                                            ) {
-                                              e.preventDefault();
-                                            }
-                                          }}
-                                          className="group flex items-center gap-1.5 rounded-[4px] px-1 py-0.5 text-xs hover:bg-light-200 dark:hover:bg-dark-200"
-                                        >
-                                          <span className="flex size-2 flex-none items-center">
-                                            {card.labels[0] && (
-                                              <LabelIcon
-                                                colourCode={
-                                                  card.labels[0].colourCode
-                                                }
-                                              />
-                                            )}
-                                          </span>
-                                          <span className="flex-auto truncate text-light-1000 dark:text-dark-1000">
-                                            {card.title}
-                                          </span>
-                                          {ticketNumber(card) && (
-                                            <span className="hidden flex-none text-light-800 dark:text-dark-800 xl:block">
-                                              {ticketNumber(card)}
-                                            </span>
-                                          )}
-                                        </Link>
-                                      </li>
-                                    )}
-                                  </Draggable>
-                                ))}
-                              {provided.placeholder}
-                              {overflowCount > 0 && (
-                                <li
-                                  onClick={(e) => e.stopPropagation()}
-                                  className="px-1 text-xs text-light-800 dark:text-dark-800"
-                                >
-                                  {t`+ ${overflowCount} more`}
-                                </li>
-                              )}
-                            </ol>
+                              {t`+ ${overflowCount} more`}
+                            </li>
                           )}
-                        </Droppable>
+                        </DroppableDayCell>
                       </div>
                     );
                   })}
                 </div>
               </div>
-            </DragDropContext>
+              <DragOverlay>
+                {activeCard ? (
+                  <div className="flex items-center gap-1.5 rounded-[4px] bg-light-50 px-1 py-0.5 text-xs shadow-md dark:bg-dark-50">
+                    <span className="flex size-2 flex-none items-center">
+                      {activeCard.labels[0] && (
+                        <LabelIcon
+                          colourCode={activeCard.labels[0].colourCode}
+                        />
+                      )}
+                    </span>
+                    <span className="flex-auto truncate text-light-1000 dark:text-dark-1000">
+                      {activeCard.title}
+                    </span>
+                    {ticketNumber(activeCard) && (
+                      <span className="flex-none text-light-800 dark:text-dark-800">
+                        {ticketNumber(activeCard)}
+                      </span>
+                    )}
+                  </div>
+                ) : null}
+              </DragOverlay>
+            </DndContext>
 
             <div className="min-h-0 flex-1 overflow-y-auto bg-light-300 dark:bg-dark-300 lg:hidden">
               <div className="isolate grid min-h-full auto-rows-[minmax(3.5rem,1fr)] grid-cols-7 gap-px">
