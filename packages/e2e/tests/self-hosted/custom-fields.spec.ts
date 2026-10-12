@@ -304,10 +304,14 @@ test(
 
     const { guestContext, guestPage } = await inviteGuest(page, browser);
     await guestPage.goto(copiedBoardPath);
-    await guestPage
+    const guestCardHref = await guestPage
       .getByText("Custom fields test card", { exact: true })
       .first()
-      .click();
+      .locator("xpath=ancestor::a[1]")
+      .getAttribute("href");
+    expect(guestCardHref).toMatch(/^\/cards\/[^/]+$/);
+    if (!guestCardHref) throw new Error("Could not resolve guest card URL");
+    await guestPage.goto(guestCardHref);
     await guestPage.waitForURL(/\/cards\/[^/]+$/);
 
     await expect(
