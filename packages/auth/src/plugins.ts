@@ -13,7 +13,6 @@ import { generateUID } from "@kan/shared/utils";
 import { createStripeClient } from "@kan/stripe";
 
 import { socialProvidersPlugin } from "./providers";
-import { triggerWorkflow } from "./utils";
 
 const log = createLogger("auth");
 
@@ -82,36 +81,12 @@ export function createPlugins(db: dbClient) {
                   priceId: process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID!,
                   annualDiscountPriceId:
                     process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID!,
-                  freeTrial: {
-                    days: 14,
-                    onTrialStart: async (subscription) => {
-                      await triggerWorkflow(db, "trial-start", subscription);
-                    },
-                    onTrialEnd: async ({ subscription }) => {
-                      await triggerWorkflow(db, "trial-end", subscription);
-                    },
-                    onTrialExpired: async (subscription) => {
-                      await triggerWorkflow(db, "trial-expired", subscription);
-                    },
-                  },
                 },
                 {
                   name: "pro",
                   priceId: process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID!,
                   annualDiscountPriceId:
                     process.env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID!,
-                  freeTrial: {
-                    days: 14,
-                    onTrialStart: async (subscription) => {
-                      await triggerWorkflow(db, "trial-start", subscription);
-                    },
-                    onTrialEnd: async ({ subscription }) => {
-                      await triggerWorkflow(db, "trial-end", subscription);
-                    },
-                    onTrialExpired: async (subscription) => {
-                      await triggerWorkflow(db, "trial-expired", subscription);
-                    },
-                  },
                 },
               ],
               authorizeReference: async (data) => {
@@ -167,17 +142,6 @@ export function createPlugins(db: dbClient) {
                   }
                 }
               },
-              onSubscriptionCancel: async ({
-                subscription,
-                cancellationDetails,
-              }) => {
-                await triggerWorkflow(
-                  db,
-                  "subscription-canceled",
-                  subscription,
-                  cancellationDetails,
-                );
-              },
               onSubscriptionDeleted: async ({ subscription }) => {
                 await cancelWorkspaceAccess(db, subscription.referenceId);
               },
@@ -189,7 +153,6 @@ export function createPlugins(db: dbClient) {
                     { unlimitedSeats: subscription.plan === "pro" },
                   );
                 }
-                await triggerWorkflow(db, "subscription-updated", subscription);
               },
             },
           }),

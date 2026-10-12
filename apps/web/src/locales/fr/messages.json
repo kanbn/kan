@@ -37,13 +37,13 @@
     "translation": "{0} | {1}"
   },
   "baIPh3": {
-    "translation": "{0} cartes à échéance",
     "message": "{0} cards due",
     "placeholders": {
       "0": ["day.cards.length"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 364]]
+    "origin": [["src/views/board/components/CalendarView.tsx", 468]],
+    "translation": "{0} cartes à échéance"
   },
   "mU+M00": {
     "message": "{0} has been added to your favorites.",
@@ -78,7 +78,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 660]],
+    "origin": [["src/views/board/index.tsx", 887]],
     "translation": "{0} introuvable"
   },
   "0xWkkH": {
@@ -108,13 +108,13 @@
     "obsolete": true
   },
   "h/eDNV": {
-    "translation": "+ {overflowCount} de plus",
     "message": "+ {overflowCount} more",
     "placeholders": {
       "overflowCount": ["overflowCount"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 318]]
+    "origin": [["src/views/board/components/CalendarView.tsx", 403]],
+    "translation": "+ {overflowCount} de plus"
   },
   "be30i9": {
     "message": "$0",
@@ -172,11 +172,11 @@
     "translation": "Essai gratuit de 14 jours · Changez de forfait ou annulez à tout moment"
   },
   "31OyXI": {
-    "translation": "Essai gratuit de 14 jours · annulation à tout moment",
     "message": "14-day free trial · cancel anytime",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 454]]
+    "origin": [["src/views/board/components/CalendarView.tsx", 558]],
+    "translation": "Essai gratuit de 14 jours · annulation à tout moment"
   },
   "4obmDr": {
     "message": "404 - Page Not Found | kan.bn",
@@ -286,7 +286,7 @@
     "message": "Add a card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/List.tsx", 140]],
+    "origin": [["src/views/board/components/List.tsx", 152]],
     "translation": "Ajouter une carte"
   },
   "qtE5nt": {
@@ -301,8 +301,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CalendarView.tsx", 395],
-      ["src/views/board/components/List.tsx", 127]
+      ["src/views/board/components/CalendarView.tsx", 499],
+      ["src/views/board/components/List.tsx", 139]
     ],
     "translation": "Ajouter une carte"
   },
@@ -320,7 +320,7 @@
     "message": "Add checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Checklists.tsx", 155]],
+    "origin": [["src/views/card/components/Checklists.tsx", 198]],
     "translation": "Ajouter un élément de liste de contrôle"
   },
   "ngBZOd": {
@@ -344,7 +344,7 @@
     "message": "Add details...",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 170]],
+    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 176]],
     "translation": "Ajouter des détails..."
   },
   "lyqwgn": {
@@ -960,7 +960,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 632],
+      ["src/views/board/index.tsx", 859],
       ["src/views/card/index.tsx", 326],
       ["src/views/public/board/index.tsx", 125]
     ],
@@ -994,7 +994,7 @@
     "message": "Board name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 650]],
+    "origin": [["src/views/board/index.tsx", 877]],
     "translation": "Nom du tableau"
   },
   "wewm3j": {
@@ -1127,11 +1127,11 @@
     "translation": "Rapport de bug"
   },
   "AjVXBS": {
-    "translation": "Calendrier",
     "message": "Calendar",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/ViewToggle.tsx", 42]]
+    "origin": [["src/views/board/components/ViewToggle.tsx", 42]],
+    "translation": "Calendrier"
   },
   "t6FvJH": {
     "message": "Can add comments",
@@ -1461,7 +1461,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 398],
+      ["src/views/board/index.tsx", 432],
       ["src/views/card/components/Dropdown.tsx", 74],
       ["src/views/public/board/CardModal.tsx", 38]
     ],
@@ -2021,8 +2021,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 111],
-      ["src/views/board/index.tsx", 785]
+      ["src/views/board/index.tsx", 138],
+      ["src/views/board/index.tsx", 1012]
     ],
     "translation": "Créer une nouvelle liste"
   },
@@ -2273,7 +2273,7 @@
     "message": "Delete checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Checklists.tsx", 146]],
+    "origin": [["src/views/card/components/Checklists.tsx", 189]],
     "translation": "Supprimer la liste de contrôle"
   },
   "njJFtc": {
@@ -2287,7 +2287,7 @@
     "message": "Delete list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/List.tsx", 151]],
+    "origin": [["src/views/board/components/List.tsx", 163]],
     "translation": "Supprimer la liste"
   },
   "DFjdv0": {
@@ -3258,7 +3258,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 767]],
+    "origin": [["src/views/board/index.tsx", 994]],
     "translation": "Commencez en créant une nouvelle liste"
   },
   "oW13KZ": {
@@ -3903,7 +3903,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 396],
+      ["src/views/board/index.tsx", 430],
       ["src/views/card/components/Dropdown.tsx", 72],
       ["src/views/public/board/CardModal.tsx", 36],
       ["src/views/public/board/index.tsx", 77]
@@ -3925,7 +3925,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/List.tsx", 110],
+      ["src/views/board/components/List.tsx", 124],
       ["src/views/board/components/NewListForm.tsx", 144]
     ],
     "translation": "Nom de la liste"
@@ -3934,7 +3934,7 @@
     "message": "List options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/List.tsx", 167]],
+    "origin": [["src/views/board/components/List.tsx", 179]],
     "translation": "Options de la liste"
   },
   "h16FyT": {
@@ -4245,11 +4245,11 @@
     "translation": "Besoin d'aide ?"
   },
   "PSXKxs": {
-    "translation": "Ne perdez jamais de vue ce qui est dû",
     "message": "Never lose track of what's due",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 445]]
+    "origin": [["src/views/board/components/CalendarView.tsx", 549]],
+    "translation": "Ne perdez jamais de vue ce qui est dû"
   },
   "isRobC": {
     "message": "New",
@@ -4311,7 +4311,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 128],
-      ["src/views/board/index.tsx", 712]
+      ["src/views/board/index.tsx", 939]
     ],
     "translation": "Nouvelle liste"
   },
@@ -4369,11 +4369,11 @@
     "translation": "Newsletter"
   },
   "g8JmSC": {
-    "translation": "Mois prochain",
     "message": "Next month",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 186]]
+    "origin": [["src/views/board/components/CalendarView.tsx", 319]],
+    "translation": "Mois prochain"
   },
   "HeFWjW": {
     "message": "Next Steps",
@@ -4413,11 +4413,11 @@
     "translation": "Aucun tableau trouvé"
   },
   "WAQMrN": {
-    "translation": "Aucune carte à échéance",
     "message": "No cards due",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 401]]
+    "origin": [["src/views/board/components/CalendarView.tsx", 505]],
+    "translation": "Aucune carte à échéance"
   },
   "OpNhRn": {
     "message": "No credit card required",
@@ -4458,14 +4458,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 763]],
+    "origin": [["src/views/board/index.tsx", 990]],
     "translation": "Aucune liste"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 768]],
+    "origin": [["src/views/board/index.tsx", 995]],
     "translation": "Aucune liste n'a encore été créée"
   },
   "i30J2U": {
@@ -4887,16 +4887,16 @@
       ["src/views/board/components/NewTemplateForm.tsx", 77],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 73],
       ["src/views/board/components/VisibilityButton.tsx", 57],
-      ["src/views/board/index.tsx", 257],
-      ["src/views/board/index.tsx", 313],
-      ["src/views/board/index.tsx", 350],
+      ["src/views/board/index.tsx", 284],
+      ["src/views/board/index.tsx", 340],
+      ["src/views/board/index.tsx", 377],
       ["src/views/boards/components/ImportBoardsForm.tsx", 243],
       ["src/views/boards/components/ImportBoardsForm.tsx", 395],
       ["src/views/card/components/AttachmentThumbnails.tsx", 74],
-      ["src/views/card/components/ChecklistItemRow.tsx", 68],
-      ["src/views/card/components/ChecklistItemRow.tsx", 96],
+      ["src/views/card/components/ChecklistItemRow.tsx", 73],
+      ["src/views/card/components/ChecklistItemRow.tsx", 101],
       ["src/views/card/components/ChecklistNameInput.tsx", 47],
-      ["src/views/card/components/Checklists.tsx", 82],
+      ["src/views/card/components/Checklists.tsx", 94],
       ["src/views/card/components/Comment.tsx", 93],
       ["src/views/card/components/DeleteCardConfirmation.tsx", 52],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 38],
@@ -4946,7 +4946,7 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 76],
       ["src/views/board/components/CardContextMoveListModal.tsx", 42],
-      ["src/views/board/index.tsx", 405],
+      ["src/views/board/index.tsx", 439],
       ["src/views/card/components/Dropdown.tsx", 55],
       ["src/views/card/components/Dropdown.tsx", 81],
       ["src/views/card/components/Dropdown.tsx", 100],
@@ -4965,11 +4965,11 @@
     "translation": "Position dans la liste (0 = premier, laisser vide pour la fin)"
   },
   "1xwZj/": {
-    "translation": "Mois précédent",
     "message": "Previous month",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 169]]
+    "origin": [["src/views/board/components/CalendarView.tsx", 302]],
+    "translation": "Mois précédent"
   },
   "aHCEmh": {
     "message": "Pricing",
@@ -5423,11 +5423,11 @@
     "translation": "Sécurité"
   },
   "iL+dpm": {
-    "translation": "Consultez toutes vos cartes du mois, puis glissez-déposez pour reprogrammer. Disponible sur les forfaits payants.",
     "message": "See all your cards across the month, then drag and drop to reschedule. Available on paid plans.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 448]]
+    "origin": [["src/views/board/components/CalendarView.tsx", 552]],
+    "translation": "Consultez toutes vos cartes du mois, puis glissez-déposez pour reprogrammer. Disponible sur les forfaits payants."
   },
   "K3iLeO": {
     "message": "See what our users are saying about Kan",
@@ -5947,8 +5947,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 632],
-      ["src/views/board/index.tsx", 669]
+      ["src/views/board/index.tsx", 859],
+      ["src/views/board/index.tsx", 896]
     ],
     "translation": "Modèle"
   },
@@ -6329,11 +6329,11 @@
     "translation": "À faire"
   },
   "ecUA8p": {
-    "translation": "Aujourd'hui",
     "message": "Today",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 181]]
+    "origin": [["src/views/board/components/CalendarView.tsx", 314]],
+    "translation": "Aujourd'hui"
   },
   "4gAX8s": {
     "message": "Toggle menu",
@@ -6434,7 +6434,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 403],
+      ["src/views/board/index.tsx", 437],
       ["src/views/card/components/Dropdown.tsx", 79],
       ["src/views/public/board/CardModal.tsx", 43],
       ["src/views/public/board/index.tsx", 84]
@@ -6516,7 +6516,7 @@
     "message": "Unable to delete checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 95]],
+    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 100]],
     "translation": "Impossible de supprimer l'élément de liste de contrôle"
   },
   "2QGEbi": {
@@ -6572,7 +6572,7 @@
     "message": "Unable to reorder checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Checklists.tsx", 81]],
+    "origin": [["src/views/card/components/Checklists.tsx", 93]],
     "translation": "Impossible de réorganiser l'élément de la checklist"
   },
   "vfRdCZ": {
@@ -6634,7 +6634,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 312],
+      ["src/views/board/index.tsx", 339],
       ["src/views/card/index.tsx", 240]
     ],
     "translation": "Impossible de mettre à jour la carte"
@@ -6650,7 +6650,7 @@
     "message": "Unable to update checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 67]],
+    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 72]],
     "translation": "Impossible de mettre à jour l'élément de la checklist"
   },
   "fYVH36": {
@@ -6665,7 +6665,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 349],
+      ["src/views/board/index.tsx", 376],
       ["src/views/card/components/DueDateSelector.tsx", 63]
     ],
     "translation": "Impossible de mettre à jour la date d'échéance"
@@ -6682,7 +6682,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 256],
+      ["src/views/board/index.tsx", 283],
       ["src/views/card/components/ListSelector.tsx", 54]
     ],
     "translation": "Impossible de mettre à jour la liste"
@@ -6920,7 +6920,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CalendarView.tsx", 451],
+      ["src/views/board/components/CalendarView.tsx", 555],
       ["src/views/members/index.tsx", 296],
       ["src/views/onboarding/select-plan/index.tsx", 251]
     ],
@@ -7272,7 +7272,7 @@
     "comments": [],
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
-      ["src/views/board/index.tsx", 632],
+      ["src/views/board/index.tsx", 859],
       ["src/views/boards/index.tsx", 58],
       ["src/views/members/index.tsx", 279],
       ["src/views/public/board/index.tsx", 125],
@@ -7513,10 +7513,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/List.tsx", 120],
+      ["src/views/board/components/List.tsx", 133],
       ["src/views/board/components/VisibilityButton.tsx", 72],
-      ["src/views/board/index.tsx", 700],
-      ["src/views/board/index.tsx", 774],
+      ["src/views/board/index.tsx", 927],
+      ["src/views/board/index.tsx", 1001],
       ["src/views/boards/components/BoardsList.tsx", 71],
       ["src/views/boards/index.tsx", 69],
       ["src/views/boards/index.tsx", 90]
