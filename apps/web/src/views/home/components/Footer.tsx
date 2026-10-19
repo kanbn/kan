@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { t } from "@lingui/core/macro";
-import { FaDiscord, FaGithub } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 
 import { LanguageSelector } from "~/components/LanguageSelector";
 
@@ -61,9 +61,6 @@ const Footer = () => {
             <div className="mb-2 flex items-center gap-2">
               <Link href="https://github.com/kanbn/kan" target="_blank">
                 <FaGithub className="h-8 w-8 rounded-lg border border-light-300 p-1.5 text-light-1000 hover:bg-light-100 dark:border-dark-300 dark:text-dark-1000 dark:hover:bg-dark-100" />
-              </Link>
-              <Link href="https://discord.gg/e6ejRb6CmT" target="_blank">
-                <FaDiscord className="h-8 w-8 rounded-lg border border-light-300 p-1.5 text-light-1000 hover:bg-light-100 dark:border-dark-300 dark:text-dark-1000 dark:hover:bg-dark-100" />
               </Link>
             </div>
 

@@ -12,7 +12,7 @@
   ·
   <a href="https://docs.kan.bn">Docs</a>
   ·
-  <a href="https://discord.gg/e6ejRb6CmT">Discord</a>
+  <a href="https://github.com/kanbn/kan/discussions">Discussions</a>
 </p>
 
 <div align="center">
@@ -253,4 +253,4 @@ Kan is licensed under the [AGPLv3 license](LICENSE).
 
 ## Contact 📧
 
-For support or to get in touch, please email [henry@kan.bn](mailto:henry@kan.bn) or join our [Discord server](https://discord.gg/e6ejRb6CmT).
+For support or to get in touch, please email [henry@kan.bn](mailto:henry@kan.bn) or ask in [GitHub Discussions](https://github.com/kanbn/kan/discussions).

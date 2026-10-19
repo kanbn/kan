@@ -45,7 +45,7 @@ Bug fixes and documentation improvements don't need prior approval - just open a
 
 ## Need help?
 
-- Join our [Discord server](https://discord.gg/e6ejRb6CmT)
+- Ask questions in [GitHub Discussions](https://github.com/kanbn/kan/discussions)
 - Check existing issues and PRs before opening new ones
 - Email [henry@kan.bn](mailto:henry@kan.bn) for major concerns
 
