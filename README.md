@@ -55,6 +55,12 @@ The easiest way to deploy Kan is through Railway. We've partnered with Railway t
   <img src="https://railway.app/button.svg" alt="Deploy on Railway" height="40" />
 </a>
 
+To run Kan on managed ZopCloud or in an AWS or GCP account you already own, deploy with ZopDay:
+
+<a href="https://zop.dev/zopday/app/deploy?image=ghcr.io/kanbn/kan:latest&amp;port=3000&amp;name=kan&amp;utm_source=github&amp;utm_medium=one_click&amp;utm_content=kan">
+  <img src="https://zop.dev/deploytozopday-inkhard.svg" alt="Deploy to ZopDay" height="40" />
+</a>
+
 ### Docker Compose
 
 Alternatively, you can self-host Kan with Docker Compose. This will set up everything for you including your postgres database and automatically run migrations.
