@@ -1,6 +1,13 @@
 import type { ReactNode } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { api } from "~/utils/api";
 
@@ -9,6 +16,7 @@ interface WorkspaceContextProps {
   isLoading: boolean;
   hasLoaded: boolean;
   switchWorkspace: (_workspace: Workspace) => void;
+  selectWorkspaceById: (publicId: string) => void;
   availableWorkspaces: Workspace[];
 }
 
@@ -77,6 +85,26 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
     router.push(`/boards`);
   };
 
+  // Read by selectWorkspaceById, so its identity stays stable and pages
+  // re-run their sync only when the open board or card changes.
+  const availableWorkspacesRef = useRef<Workspace[]>([]);
+
+  // Makes the workspace that owns the open board or card current, without
+  // navigating. If workspaces haven't loaded yet, the stored id is picked up
+  // when they do.
+  const selectWorkspaceById = useCallback((publicId: string) => {
+    localStorage.setItem("workspacePublicId", publicId);
+
+    const match = availableWorkspacesRef.current.find(
+      (w) => w.publicId === publicId,
+    );
+    if (!match) return;
+
+    setWorkspace((current) =>
+      current.publicId === publicId ? current : match,
+    );
+  }, []);
+
   useEffect(() => {
     if (!data?.length) {
       if (!isLoading && !isFetching) setHasLoaded(true);
@@ -99,7 +127,10 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         hasLoaded: true,
       })) as Workspace[];
 
-      if (workspaces.length) setAvailableWorkspaces(workspaces);
+      if (workspaces.length) {
+        availableWorkspacesRef.current = workspaces;
+        setAvailableWorkspaces(workspaces);
+      }
     }
 
     if (storedWorkspaceId !== null) {
@@ -178,6 +209,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
         hasLoaded,
         availableWorkspaces,
         switchWorkspace,
+        selectWorkspaceById,
       }}
     >
       {children}
