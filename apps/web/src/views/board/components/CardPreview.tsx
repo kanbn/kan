@@ -1,12 +1,17 @@
-import type { BoardCard } from "../types";
+import type { BoardCard, BoardData } from "../types";
 import Card from "./Card";
 
 interface CardPreviewProps {
   card: BoardCard;
   cardPrefix: string;
+  customFields: BoardData["customFields"];
 }
 
-export default function CardPreview({ card, cardPrefix }: CardPreviewProps) {
+export default function CardPreview({
+  card,
+  cardPrefix,
+  customFields,
+}: CardPreviewProps) {
   return (
     <Card
       title={card.title}
@@ -20,6 +25,8 @@ export default function CardPreview({ card, cardPrefix }: CardPreviewProps) {
       comments={card.comments ?? []}
       attachments={card.attachments}
       dueDate={card.dueDate ?? null}
+      customFields={customFields}
+      customFieldValues={card.customFieldValues}
     />
   );
 }

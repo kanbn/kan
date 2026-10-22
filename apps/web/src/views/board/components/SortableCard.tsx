@@ -4,13 +4,14 @@ import { CSS } from "@dnd-kit/utilities";
 import { env } from "next-runtime-env";
 
 import type { CardDragData } from "../dnd/types";
-import type { BoardCard } from "../types";
+import type { BoardCard, BoardData } from "../types";
 import CardPreview from "./CardPreview";
 
 interface SortableCardProps {
   card: BoardCard;
   listPublicId: string;
   cardPrefix: string;
+  customFields: BoardData["customFields"];
   cardHref: string;
   canEditCard: boolean;
   onContextMenu: (event: React.MouseEvent, cardPublicId: string) => void;
@@ -20,6 +21,7 @@ export default function SortableCard({
   card,
   listPublicId,
   cardPrefix,
+  customFields,
   cardHref,
   canEditCard,
   onContextMenu,
@@ -69,7 +71,11 @@ export default function SortableCard({
       {...attributes}
       {...listeners}
     >
-      <CardPreview card={card} cardPrefix={cardPrefix} />
+      <CardPreview
+        card={card}
+        cardPrefix={cardPrefix}
+        customFields={customFields}
+      />
     </Link>
   );
 }

@@ -10,6 +10,11 @@ import {
 
 import { boards } from "./boards";
 import { cards } from "./cards";
+import {
+  cardCustomFieldValues,
+  customFieldOptions,
+  customFields,
+} from "./custom-fields";
 import { labels } from "./labels";
 import { lists } from "./lists";
 import { users } from "./users";
@@ -42,4 +47,7 @@ export const importsRelations = relations(imports, ({ one, many }) => ({
   cards: many(cards),
   lists: many(lists),
   labels: many(labels),
+  customFields: many(customFields),
+  customFieldOptions: many(customFieldOptions),
+  cardCustomFieldValues: many(cardCustomFieldValues),
 }));

@@ -6,7 +6,7 @@ import {
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 
 import type { ListBodyDragData } from "../dnd/types";
-import type { BoardCard } from "../types";
+import type { BoardCard, BoardData } from "../types";
 import { isPlaceholderPublicId } from "~/utils/helpers";
 import { getListBodyId } from "../dnd/ids";
 import SortableCard from "./SortableCard";
@@ -15,6 +15,7 @@ interface CardListProps {
   listPublicId: string;
   cards: BoardCard[];
   cardPrefix: string;
+  customFields: BoardData["customFields"];
   canEditCard: boolean;
   freezeHeight: boolean;
   getCardHref: (cardPublicId: string) => string;
@@ -25,6 +26,7 @@ export default function CardList({
   listPublicId,
   cards,
   cardPrefix,
+  customFields,
   canEditCard,
   freezeHeight,
   getCardHref,
@@ -88,6 +90,7 @@ export default function CardList({
               card={card}
               listPublicId={listPublicId}
               cardPrefix={cardPrefix}
+              customFields={customFields}
               cardHref={getCardHref(card.publicId)}
               canEditCard={canEditCard}
               onContextMenu={onContextMenu}

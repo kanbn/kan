@@ -15,6 +15,7 @@ import {
 
 import { boards } from "./boards";
 import { checklists } from "./checklists";
+import { cardCustomFieldValues } from "./custom-fields";
 import { imports } from "./imports";
 import { labels } from "./labels";
 import { lists } from "./lists";
@@ -113,6 +114,7 @@ export const cardsRelations = relations(cards, ({ one, many }) => ({
   activities: many(cardActivities),
   checklists: many(checklists),
   attachments: many(cardAttachments),
+  customFieldValues: many(cardCustomFieldValues),
 }));
 
 export const cardActivities = pgTable("card_activity", {

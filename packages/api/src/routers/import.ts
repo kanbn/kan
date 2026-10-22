@@ -6,6 +6,7 @@ import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
+import * as customFieldImportRepo from "@kan/db/repository/custom-field-import.repo";
 import * as importRepo from "@kan/db/repository/import.repo";
 import * as integrationsRepo from "@kan/db/repository/integration.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
@@ -18,10 +19,14 @@ import {
   normalizeDescription,
 } from "@kan/shared/utils";
 
+import type { TrelloCustomField, TrelloCustomFieldItem } from "../utils/trello";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { decryptToken } from "../utils/encryption";
 import { assertPermission } from "../utils/permissions";
-import { getTrelloLabelColour } from "../utils/trello";
+import {
+  formatTrelloCustomFields,
+  getTrelloLabelColour,
+} from "../utils/trello";
 import {
   decryptTrelloToken,
   encryptTrelloToken,
@@ -64,6 +69,7 @@ export interface TrelloBoard {
   lists: TrelloList[];
   cards: TrelloCard[];
   checklists: TrelloChecklist[];
+  customFields?: TrelloCustomField[];
 }
 
 interface TrelloLabel {
@@ -144,6 +150,7 @@ interface TrelloCard {
   labels: TrelloLabel[];
   idChecklists: string[];
   checkItemStates: TrelloCheckItemState[];
+  customFieldItems?: TrelloCustomFieldItem[];
 }
 
 interface TrelloCheckItemState {
@@ -266,7 +273,7 @@ export const importRouter = createTRPCRouter({
 
         const importSingleBoard = async (boardId: string): Promise<void> => {
           const response = await fetch(
-            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
+            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&customFields=true&card_customFieldItems=true&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
           );
 
           if (!response.ok) {
@@ -276,6 +283,10 @@ export const importRouter = createTRPCRouter({
           }
 
           const data = (await response.json()) as TrelloBoard;
+          const customFieldImport = formatTrelloCustomFields(
+            data.customFields ?? [],
+            data.cards,
+          );
 
           const formattedData = {
             name: data.name,
@@ -531,6 +542,28 @@ export const importRouter = createTRPCRouter({
               }
             }
           }
+
+          const cardIdsBySourceId = new Map(
+            createdCards.map((card) => [card.sourceId, card.id]),
+          );
+          await customFieldImportRepo.importBoardCustomFields(ctx.db, {
+            boardId: newBoardId,
+            actorUserId: userId,
+            ...(newImportId !== undefined ? { importId: newImportId } : {}),
+            definitions: customFieldImport.definitions,
+            values: customFieldImport.values.map((entry) => {
+              const cardId = cardIdsBySourceId.get(entry.cardSourceId);
+              if (cardId === undefined)
+                throw new Error(
+                  `Trello custom field item ${entry.sourceId} references an unimported card`,
+                );
+              return {
+                cardId,
+                fieldSourceId: entry.fieldSourceId,
+                value: entry.value,
+              };
+            }),
+          });
         };
 
         const results = await Promise.allSettled(
