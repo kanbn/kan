@@ -57,6 +57,19 @@ export async function getMagicLinkUrl(email: string): Promise<string> {
   return match[1].replace(/&amp;/g, "&");
 }
 
+export async function getResetPasswordUrl(email: string): Promise<string> {
+  const html = await waitForMessageHtml(email);
+  const match = /href="([^"]*\/reset-password\/[^"]*)"/.exec(html);
+
+  if (!match?.[1]) {
+    throw new Error(
+      `Could not find a password-reset URL in the email to ${email}`,
+    );
+  }
+
+  return match[1].replace(/&amp;/g, "&");
+}
+
 export async function clearMailpitInbox() {
   await fetch(`${mailpitBaseUrl}/api/v1/messages`, { method: "DELETE" });
 }
