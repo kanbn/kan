@@ -15,6 +15,7 @@ export default function CardPreview({ card, cardPrefix }: CardPreviewProps) {
       }
       labels={card.labels}
       members={card.members}
+      summary={card.summary}
       checklists={card.checklists ?? []}
       description={card.description ?? null}
       comments={card.comments ?? []}
