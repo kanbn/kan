@@ -171,9 +171,10 @@ const NewChecklistItemForm = ({
                 onCancel();
               }
             }}
-            innerRef={(el) => {
-              editableRef.current = (el as unknown as HTMLElement) ?? null;
-            }}
+            // Must be a stable ref: react-contenteditable re-renders when
+            // `innerRef` changes identity, and that re-render resets the caret,
+            // which cancels dead-key / IME composition on every keystroke.
+            innerRef={editableRef}
           />
         </div>
       </div>
