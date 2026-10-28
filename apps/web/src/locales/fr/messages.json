@@ -32,7 +32,7 @@
     "comments": [],
     "origin": [
       ["src/views/boards/index.tsx", 58],
-      ["src/views/card/index.tsx", 326]
+      ["src/views/card/index.tsx", 331]
     ],
     "translation": "{0} | {1}"
   },
@@ -78,7 +78,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 887]],
+    "origin": [["src/views/board/index.tsx", 892]],
     "translation": "{0} introuvable"
   },
   "0xWkkH": {
@@ -254,7 +254,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 481],
+      ["src/views/card/index.tsx", 486],
       ["src/views/public/board/CardModal.tsx", 209]
     ],
     "translation": "Activité"
@@ -960,8 +960,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 859],
-      ["src/views/card/index.tsx", 326],
+      ["src/views/board/index.tsx", 864],
+      ["src/views/card/index.tsx", 331],
       ["src/views/public/board/index.tsx", 125]
     ],
     "translation": "Tableau"
@@ -994,7 +994,7 @@
     "message": "Board name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 877]],
+    "origin": [["src/views/board/index.tsx", 882]],
     "translation": "Nom du tableau"
   },
   "wewm3j": {
@@ -1405,7 +1405,7 @@
     "message": "Card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/index.tsx", 326]],
+    "origin": [["src/views/card/index.tsx", 331]],
     "translation": "Carte"
   },
   "sU2uWc": {
@@ -1437,8 +1437,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 389],
-      ["src/views/card/index.tsx", 426]
+      ["src/views/card/index.tsx", 394],
+      ["src/views/card/index.tsx", 431]
     ],
     "translation": "Carte introuvable"
   },
@@ -1461,7 +1461,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 432],
+      ["src/views/board/index.tsx", 437],
       ["src/views/card/components/Dropdown.tsx", 74],
       ["src/views/public/board/CardModal.tsx", 38]
     ],
@@ -1614,7 +1614,7 @@
     "comments": [],
     "origin": [
       ["src/components/Dashboard.tsx", 281],
-      ["src/views/card/index.tsx", 380],
+      ["src/views/card/index.tsx", 385],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 172],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
     ],
@@ -2022,7 +2022,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 138],
-      ["src/views/board/index.tsx", 1012]
+      ["src/views/board/index.tsx", 1017]
     ],
     "translation": "Créer une nouvelle liste"
   },
@@ -3258,7 +3258,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 994]],
+    "origin": [["src/views/board/index.tsx", 999]],
     "translation": "Commencez en créant une nouvelle liste"
   },
   "oW13KZ": {
@@ -3903,7 +3903,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 430],
+      ["src/views/board/index.tsx", 435],
       ["src/views/card/components/Dropdown.tsx", 72],
       ["src/views/public/board/CardModal.tsx", 36],
       ["src/views/public/board/index.tsx", 77]
@@ -4311,7 +4311,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 128],
-      ["src/views/board/index.tsx", 939]
+      ["src/views/board/index.tsx", 944]
     ],
     "translation": "Nouvelle liste"
   },
@@ -4458,14 +4458,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 990]],
+    "origin": [["src/views/board/index.tsx", 995]],
     "translation": "Aucune liste"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 995]],
+    "origin": [["src/views/board/index.tsx", 1000]],
     "translation": "Aucune liste n'a encore été créée"
   },
   "i30J2U": {
@@ -4887,9 +4887,9 @@
       ["src/views/board/components/NewTemplateForm.tsx", 77],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 73],
       ["src/views/board/components/VisibilityButton.tsx", 57],
-      ["src/views/board/index.tsx", 284],
-      ["src/views/board/index.tsx", 340],
-      ["src/views/board/index.tsx", 377],
+      ["src/views/board/index.tsx", 289],
+      ["src/views/board/index.tsx", 345],
+      ["src/views/board/index.tsx", 382],
       ["src/views/boards/components/ImportBoardsForm.tsx", 243],
       ["src/views/boards/components/ImportBoardsForm.tsx", 395],
       ["src/views/card/components/AttachmentThumbnails.tsx", 74],
@@ -4908,8 +4908,8 @@
       ["src/views/card/components/NewChecklistForm.tsx", 82],
       ["src/views/card/components/NewChecklistItemForm.tsx", 106],
       ["src/views/card/components/NewCommentForm.tsx", 38],
-      ["src/views/card/index.tsx", 241],
-      ["src/views/card/index.tsx", 254],
+      ["src/views/card/index.tsx", 246],
+      ["src/views/card/index.tsx", 259],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 28],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 42],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 65],
@@ -4946,7 +4946,7 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 76],
       ["src/views/board/components/CardContextMoveListModal.tsx", 42],
-      ["src/views/board/index.tsx", 439],
+      ["src/views/board/index.tsx", 444],
       ["src/views/card/components/Dropdown.tsx", 55],
       ["src/views/card/components/Dropdown.tsx", 81],
       ["src/views/card/components/Dropdown.tsx", 100],
@@ -5947,8 +5947,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 859],
-      ["src/views/board/index.tsx", 896]
+      ["src/views/board/index.tsx", 864],
+      ["src/views/board/index.tsx", 901]
     ],
     "translation": "Modèle"
   },
@@ -6412,7 +6412,7 @@
     "message": "Unable to add label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/index.tsx", 253]],
+    "origin": [["src/views/card/index.tsx", 258]],
     "translation": "Impossible d'ajouter l'étiquette"
   },
   "LeM5RY": {
@@ -6434,7 +6434,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 437],
+      ["src/views/board/index.tsx", 442],
       ["src/views/card/components/Dropdown.tsx", 79],
       ["src/views/public/board/CardModal.tsx", 43],
       ["src/views/public/board/index.tsx", 84]
@@ -6634,8 +6634,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 339],
-      ["src/views/card/index.tsx", 240]
+      ["src/views/board/index.tsx", 344],
+      ["src/views/card/index.tsx", 245]
     ],
     "translation": "Impossible de mettre à jour la carte"
   },
@@ -6665,7 +6665,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 376],
+      ["src/views/board/index.tsx", 381],
       ["src/views/card/components/DueDateSelector.tsx", 63]
     ],
     "translation": "Impossible de mettre à jour la date d'échéance"
@@ -6682,7 +6682,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 283],
+      ["src/views/board/index.tsx", 288],
       ["src/views/card/components/ListSelector.tsx", 54]
     ],
     "translation": "Impossible de mettre à jour la liste"
@@ -7272,7 +7272,7 @@
     "comments": [],
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
-      ["src/views/board/index.tsx", 859],
+      ["src/views/board/index.tsx", 864],
       ["src/views/boards/index.tsx", 58],
       ["src/views/members/index.tsx", 279],
       ["src/views/public/board/index.tsx", 125],
@@ -7515,8 +7515,8 @@
     "origin": [
       ["src/views/board/components/List.tsx", 133],
       ["src/views/board/components/VisibilityButton.tsx", 72],
-      ["src/views/board/index.tsx", 927],
-      ["src/views/board/index.tsx", 1001],
+      ["src/views/board/index.tsx", 932],
+      ["src/views/board/index.tsx", 1006],
       ["src/views/boards/components/BoardsList.tsx", 71],
       ["src/views/boards/index.tsx", 69],
       ["src/views/boards/index.tsx", 90]
