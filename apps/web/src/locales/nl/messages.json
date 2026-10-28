@@ -1091,7 +1091,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 98],
+      ["src/components/SideNavigation.tsx", 101],
       ["src/views/boards/index.tsx", 58],
       ["src/views/boards/index.tsx", 63],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 83]
@@ -3335,7 +3335,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 106],
+      ["src/components/SideNavigation.tsx", 109],
       ["src/pages/404.tsx", 44]
     ],
     "translation": "Ga naar borden"
@@ -3351,21 +3351,21 @@
     "message": "Go to members",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SideNavigation.tsx", 130]],
+    "origin": [["src/components/SideNavigation.tsx", 133]],
     "translation": "Ga naar leden"
   },
   "1WuwiM": {
     "message": "Go to settings",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SideNavigation.tsx", 142]],
+    "origin": [["src/components/SideNavigation.tsx", 145]],
     "translation": "Ga naar instellingen"
   },
   "csFbe+": {
     "message": "Go to templates",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SideNavigation.tsx", 118]],
+    "origin": [["src/components/SideNavigation.tsx", 121]],
     "translation": "Ga naar sjablonen"
   },
   "SUvm1Y": {
@@ -4103,7 +4103,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 122],
+      ["src/components/SideNavigation.tsx", 125],
       ["src/views/board/components/Filters.tsx", 151],
       ["src/views/board/components/NewCardForm.tsx", 487],
       ["src/views/card/components/MemberSelector.tsx", 116],
@@ -5568,7 +5568,7 @@
     "comments": [],
     "origin": [
       ["src/components/SettingsLayout.tsx", 102],
-      ["src/components/SideNavigation.tsx", 134]
+      ["src/components/SideNavigation.tsx", 137]
     ],
     "translation": "Instellingen"
   },
@@ -5812,9 +5812,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 228],
-      ["src/components/SideNavigation.tsx", 229],
-      ["src/components/SideNavigation.tsx", 239]
+      ["src/components/SideNavigation.tsx", 232],
+      ["src/components/SideNavigation.tsx", 233],
+      ["src/components/SideNavigation.tsx", 243]
     ],
     "translation": "Start gratis proefperiode"
   },
@@ -5985,7 +5985,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 110],
+      ["src/components/SideNavigation.tsx", 113],
       ["src/views/boards/index.tsx", 58],
       ["src/views/boards/index.tsx", 63],
       ["src/views/home/components/Features.tsx", 115]

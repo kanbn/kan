@@ -515,6 +515,9 @@ importers:
       '@react-email/components':
         specifier: ^1.0.1
         version: 1.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@subscriber.dev/sdk':
+        specifier: ^0.1.0
+        version: 0.1.0
       nodemailer:
         specifier: ^7.0.3
         version: 7.0.6
@@ -3870,6 +3873,10 @@ packages:
 
   '@standard-schema/spec@1.0.0':
     resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
+
+  '@subscriber.dev/sdk@0.1.0':
+    resolution: {integrity: sha512-UC4kz/r/H6lw+rNSYOjru8h9ZRkEmSSWIuTyGU30MbieNM4NbGOW770PR05Ob8IZTao8hB3rmJjKL7EHIveWBQ==}
+    engines: {node: '>=18'}
 
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0':
     resolution: {integrity: sha512-b9MIk7yhdS1pMCZM8VeNfUlSKVRhsHZNMl5O9SfaX0l0t5wjdgu4IDzGB8bpnGBBOjGST3rRFVsaaEtI4W6f7g==}
@@ -12452,6 +12459,8 @@ snapshots:
   '@socket.io/component-emitter@3.1.2': {}
 
   '@standard-schema/spec@1.0.0': {}
+
+  '@subscriber.dev/sdk@0.1.0': {}
 
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0(@babel/core@7.28.3)':
     dependencies:
