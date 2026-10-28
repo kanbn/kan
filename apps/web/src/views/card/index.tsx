@@ -175,7 +175,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     modalStates,
   } = useModal();
   const { showPopup } = usePopup();
-  const { workspace } = useWorkspace();
+  const { workspace, selectWorkspaceById } = useWorkspace();
   const { canEditCard } = usePermissions();
   const { data: session } = authClient.useSession();
   const [activeChecklistForm, setActiveChecklistForm] = useState<string | null>(
@@ -203,6 +203,11 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
       }
     }
   }, [router, cardId, isLoading, error, card]);
+
+  const cardWorkspacePublicId = card?.list.board.workspace.publicId;
+  useEffect(() => {
+    if (cardWorkspacePublicId) selectWorkspaceById(cardWorkspacePublicId);
+  }, [cardWorkspacePublicId, selectWorkspaceById]);
 
   const isCreator = card?.createdBy && session?.user.id === card.createdBy;
   const canEdit = canEditCard || isCreator;

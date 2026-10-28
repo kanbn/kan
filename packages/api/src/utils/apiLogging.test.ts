@@ -97,6 +97,44 @@ describe("withApiLogging", () => {
     );
   });
 
+  it("redacts secrets in the logged body and query", async () => {
+    info.mockClear();
+    const { req, res } = makeReqRes();
+    Object.assign(req, {
+      query: { code: "oauth-code", page: "2" },
+      body: { token: "trello-token", name: "Board" },
+    });
+    const handler = withApiLogging((_req, res) => {
+      res.status(200).json({ ok: true });
+    });
+
+    await handler(req, res);
+
+    expect(info).toHaveBeenCalledWith(
+      expect.objectContaining({
+        input: {
+          query: { code: "[REDACTED]", page: "2" },
+          body: { token: "[REDACTED]", name: "Board" },
+        },
+      }),
+      "API OK",
+    );
+  });
+
+  it("passes the original token to the handler", async () => {
+    const { req, res } = makeReqRes();
+    Object.assign(req, { body: { token: "trello-token" } });
+    let received: unknown;
+    const handler = withApiLogging((req, res) => {
+      received = (req.body as { token: string }).token;
+      res.status(200).json({ ok: true });
+    });
+
+    await handler(req, res);
+
+    expect(received).toBe("trello-token");
+  });
+
   it("looks up the session for every transport, including mcp", async () => {
     createNextApiContext.mockClear();
     const { req, res } = makeReqRes();

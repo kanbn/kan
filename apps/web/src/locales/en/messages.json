@@ -60,7 +60,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        326
+        331
       ]
     ],
     "translation": "{0} | {1}"
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        887
+        892
       ]
     ],
     "translation": "{0} not found"
@@ -433,7 +433,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        481
+        486
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -1603,11 +1603,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        859
+        864
       ],
       [
         "src/views/card/index.tsx",
-        326
+        331
       ],
       [
         "src/views/public/board/index.tsx",
@@ -1660,7 +1660,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        877
+        882
       ]
     ],
     "translation": "Board name"
@@ -1820,7 +1820,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        98
+        101
       ],
       [
         "src/views/boards/index.tsx",
@@ -2364,7 +2364,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        326
+        331
       ]
     ],
     "translation": "Card"
@@ -2416,11 +2416,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        389
+        394
       ],
       [
         "src/views/card/index.tsx",
-        426
+        431
       ]
     ],
     "translation": "Card not found"
@@ -2456,7 +2456,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        432
+        437
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2708,7 +2708,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        380
+        385
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3387,7 +3387,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        1012
+        1017
       ]
     ],
     "translation": "Create new list"
@@ -5474,7 +5474,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        994
+        999
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -5602,7 +5602,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        106
+        109
       ],
       [
         "src/pages/404.tsx",
@@ -5630,7 +5630,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        130
+        133
       ]
     ],
     "translation": "Go to members"
@@ -5642,7 +5642,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        142
+        145
       ]
     ],
     "translation": "Go to settings"
@@ -5654,7 +5654,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        118
+        121
       ]
     ],
     "translation": "Go to templates"
@@ -6550,7 +6550,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        430
+        435
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -6890,7 +6890,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        122
+        125
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -7261,7 +7261,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        939
+        944
       ]
     ],
     "translation": "New list"
@@ -7505,7 +7505,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        990
+        995
       ]
     ],
     "translation": "No lists"
@@ -7517,7 +7517,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        995
+        1000
       ]
     ],
     "translation": "No lists have been created yet"
@@ -8229,15 +8229,15 @@
       ],
       [
         "src/views/board/index.tsx",
-        284
+        289
       ],
       [
         "src/views/board/index.tsx",
-        340
+        345
       ],
       [
         "src/views/board/index.tsx",
-        377
+        382
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -8313,11 +8313,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        241
+        246
       ],
       [
         "src/views/card/index.tsx",
-        254
+        259
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -8417,7 +8417,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        439
+        444
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -9486,7 +9486,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        134
+        137
       ]
     ],
     "translation": "Settings"
@@ -9887,15 +9887,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        228
+        232
       ],
       [
         "src/components/SideNavigation.tsx",
-        229
+        233
       ],
       [
         "src/components/SideNavigation.tsx",
-        239
+        243
       ]
     ],
     "translation": "Start free trial"
@@ -10112,11 +10112,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        859
+        864
       ],
       [
         "src/views/board/index.tsx",
-        896
+        901
       ]
     ],
     "translation": "Template"
@@ -10176,7 +10176,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        110
+        113
       ],
       [
         "src/views/boards/index.tsx",
@@ -10879,7 +10879,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        253
+        258
       ]
     ],
     "translation": "Unable to add label"
@@ -10915,7 +10915,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        437
+        442
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11243,11 +11243,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        339
+        344
       ],
       [
         "src/views/card/index.tsx",
-        240
+        245
       ]
     ],
     "translation": "Unable to update card"
@@ -11295,7 +11295,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        376
+        381
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
@@ -11323,7 +11323,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        283
+        288
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -12325,7 +12325,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        859
+        864
       ],
       [
         "src/views/boards/index.tsx",
@@ -12723,11 +12723,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        927
+        932
       ],
       [
         "src/views/board/index.tsx",
-        1001
+        1006
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
