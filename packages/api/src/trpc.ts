@@ -7,6 +7,7 @@ import { ZodError } from "zod";
 import { createLogger } from "@kan/logger";
 
 import type { createTRPCContext } from "./trpc-context";
+import { redactSensitive } from "./utils/redact";
 
 const log = createLogger("api");
 
@@ -75,7 +76,7 @@ const loggingMiddleware = t.middleware(
       duration,
       userId: user?.id,
       ...(isCloud && { email: user?.email }),
-      input,
+      input: redactSensitive(input),
     };
 
     const label = transport === "rest" ? "REST" : "tRPC";

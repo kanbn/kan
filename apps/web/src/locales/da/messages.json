@@ -60,7 +60,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        326
+        331
       ]
     ],
     "translation": "{0} | {1}"
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        887
+        892
       ]
     ],
     "translation": "{0} blev ikke fundet"
@@ -433,7 +433,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        481
+        486
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -1603,11 +1603,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        859
+        864
       ],
       [
         "src/views/card/index.tsx",
-        326
+        331
       ],
       [
         "src/views/public/board/index.tsx",
@@ -1660,7 +1660,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        877
+        882
       ]
     ],
     "translation": ""
@@ -1820,7 +1820,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        98
+        101
       ],
       [
         "src/views/boards/index.tsx",
@@ -2364,7 +2364,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        326
+        331
       ]
     ],
     "translation": "Kort"
@@ -2416,11 +2416,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        389
+        394
       ],
       [
         "src/views/card/index.tsx",
-        426
+        431
       ]
     ],
     "translation": "Kortet blev ikke fundet"
@@ -2456,7 +2456,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        432
+        437
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2708,7 +2708,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        380
+        385
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3065,7 +3065,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        442
+        467
       ]
     ],
     "translation": "Fortsæt med "
@@ -3081,7 +3081,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        360
+        364
       ]
     ],
     "translation": "Fortsæt med {0}"
@@ -3374,7 +3374,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        1012
+        1017
       ]
     ],
     "translation": "Opret ny liste"
@@ -4405,7 +4405,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        468
       ]
     ],
     "translation": "e-mail"
@@ -4561,7 +4561,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        407
+        432
       ]
     ],
     "translation": "Indtast din e-mailadresse"
@@ -4573,7 +4573,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        395
+        420
       ]
     ],
     "translation": "Indtast dit navn"
@@ -4597,7 +4597,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        421
+        446
       ]
     ],
     "translation": "Indtast din adgangskode"
@@ -5002,7 +5002,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        296
+        300
       ]
     ],
     "translation": "Login med {0} mislykkedes. Prøv igen."
@@ -5422,7 +5422,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        994
+        999
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny liste"
@@ -5550,7 +5550,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        106
+        109
       ],
       [
         "src/pages/404.tsx",
@@ -5578,7 +5578,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        130
+        133
       ]
     ],
     "translation": "Gå til medlemmer"
@@ -5590,7 +5590,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        142
+        145
       ]
     ],
     "translation": "Gå til indstillinger"
@@ -5602,7 +5602,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        118
+        121
       ]
     ],
     "translation": "Gå til skabeloner"
@@ -6472,7 +6472,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        430
+        435
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -6652,7 +6652,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        468
       ]
     ],
     "translation": "magisk link"
@@ -6812,7 +6812,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        122
+        125
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -7183,7 +7183,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        939
+        944
       ]
     ],
     "translation": "Ny liste"
@@ -7331,7 +7331,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        374
+        379
       ]
     ],
     "translation": "Ingen godkendelsesmetoder er tilgængelige i øjeblikket"
@@ -7427,7 +7427,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        990
+        995
       ]
     ],
     "translation": "Ingen lister"
@@ -7439,7 +7439,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        995
+        1000
       ]
     ],
     "translation": "Der er endnu ikke oprettet nogen lister"
@@ -7623,7 +7623,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        385
+        410
       ]
     ],
     "translation": "eller"
@@ -7747,7 +7747,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        263
+        267
       ]
     ],
     "translation": "Adgangskode er påkrævet for at logge ind."
@@ -7759,7 +7759,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        262
+        266
       ]
     ],
     "translation": "Adgangskode er påkrævet for at oprette en konto."
@@ -8035,7 +8035,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        411
+        436
       ]
     ],
     "translation": "Indtast en gyldig e-mailadresse"
@@ -8047,7 +8047,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        399
+        424
       ]
     ],
     "translation": "Indtast et gyldigt navn"
@@ -8059,7 +8059,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        426
+        451
       ]
     ],
     "translation": "Indtast en gyldig adgangskode"
@@ -8151,15 +8151,15 @@
       ],
       [
         "src/views/board/index.tsx",
-        284
+        289
       ],
       [
         "src/views/board/index.tsx",
-        340
+        345
       ],
       [
         "src/views/board/index.tsx",
-        377
+        382
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -8235,11 +8235,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        241
+        246
       ],
       [
         "src/views/card/index.tsx",
-        254
+        259
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -8339,7 +8339,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        439
+        444
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -9281,6 +9281,22 @@
     ],
     "translation": "tildelte sig selv til kortet"
   },
+  "f2zPy/": {
+    "translation": "",
+    "message": "Self-hosting? Set <0>{CREDENTIALS_ENV_HINT}</0> to enable email and password sign in, or configure an OAuth provider. See the <1>self-hosting guide</1>.",
+    "placeholders": {
+      "CREDENTIALS_ENV_HINT": [
+        "CREDENTIALS_ENV_HINT"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/components/AuthForm.tsx",
+        385
+      ]
+    ]
+  },
   "RoafuO": {
     "message": "Send feedback",
     "placeholders": {},
@@ -9408,7 +9424,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        134
+        137
       ]
     ],
     "translation": "Indstillinger"
@@ -9636,7 +9652,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        442
+        467
       ]
     ],
     "translation": "Opret konto med "
@@ -9809,15 +9825,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        228
+        232
       ],
       [
         "src/components/SideNavigation.tsx",
-        229
+        233
       ],
       [
         "src/components/SideNavigation.tsx",
-        239
+        243
       ]
     ],
     "translation": "Start gratis prøveperiode"
@@ -9901,11 +9917,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        220
+        224
       ],
       [
         "src/components/AuthForm.tsx",
-        237
+        241
       ]
     ],
     "translation": "Fuldført"
@@ -10034,11 +10050,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        859
+        864
       ],
       [
         "src/views/board/index.tsx",
-        896
+        901
       ]
     ],
     "translation": "Skabelon"
@@ -10098,7 +10114,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        110
+        113
       ],
       [
         "src/views/boards/index.tsx",
@@ -10801,7 +10817,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        253
+        258
       ]
     ],
     "translation": "Kunne ikke tilføje etiket"
@@ -10837,7 +10853,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        437
+        442
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11165,11 +11181,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        339
+        344
       ],
       [
         "src/views/card/index.tsx",
-        240
+        245
       ]
     ],
     "translation": "Kunne ikke opdatere kort"
@@ -11217,7 +11233,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        376
+        381
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
@@ -11245,7 +11261,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        283
+        288
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -12217,7 +12233,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        859
+        864
       ],
       [
         "src/views/boards/index.tsx",
@@ -12602,11 +12618,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        927
+        932
       ],
       [
         "src/views/board/index.tsx",
-        1001
+        1006
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -12630,7 +12646,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        238
+        242
       ]
     ],
     "translation": "Du er logget ind."
@@ -12642,7 +12658,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        221
+        225
       ]
     ],
     "translation": "Din konto er oprettet."

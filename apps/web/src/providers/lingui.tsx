@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import type { Locale } from "~/locales";
 import { defaultLocale, locales } from "~/locales";
 import { activateLocale, i18n, initializeI18n } from "~/utils/i18n";
+import { matchBrowserLocale } from "~/utils/locale";
 
 interface LinguiContextType {
   locale: Locale;
@@ -27,22 +28,16 @@ interface LinguiProviderProps {
   initialLocale?: Locale;
 }
 
-function detectBrowserLocale(availableLocales: readonly string[]): Locale {
+function detectBrowserLocale(availableLocales: readonly Locale[]): Locale {
   if (typeof navigator === "undefined") {
     return defaultLocale;
   }
 
   const browserLanguages = navigator.languages || [navigator.language];
 
-  for (const browserLang of browserLanguages) {
-    const langCode = browserLang.split("-")[0];
-
-    if (langCode && availableLocales.includes(langCode.toLowerCase())) {
-      return langCode.toLowerCase() as Locale;
-    }
-  }
-
-  return defaultLocale;
+  return (
+    matchBrowserLocale(browserLanguages, availableLocales) ?? defaultLocale
+  );
 }
 
 export function LinguiProviderWrapper({
