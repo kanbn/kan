@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { kanRequest } from "../client.js";
+
+import type { KanClient } from "../client.js";
 
 // Preset colour palette supported by the Kan UI.
 // Mirrors packages/shared/src/constants/colours.ts. Keep in sync.
@@ -31,14 +32,16 @@ function resolveColourCode(
   return undefined;
 }
 
-export function registerLabelTools(server: McpServer): void {
+export function registerLabelTools(server: McpServer, client: KanClient): void {
   server.tool(
     "get_label",
     "Get a label by its public ID",
     { labelPublicId: z.string().describe("The label's public ID") },
     async ({ labelPublicId }) => {
-      const data = await kanRequest("GET", `/labels/${labelPublicId}`);
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      const data = await client.request("GET", `/labels/${labelPublicId}`);
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -53,16 +56,21 @@ export function registerLabelTools(server: McpServer): void {
         .string()
         .regex(/^#[0-9a-fA-F]{6}$/)
         .optional()
-        .describe("Explicit 7-char hex colour (e.g. #0d9488). Overrides `colour` if both are set."),
+        .describe(
+          "Explicit 7-char hex colour (e.g. #0d9488). Overrides `colour` if both are set.",
+        ),
     },
     async ({ boardPublicId, name, colour, colourCode }) => {
-      const resolved = resolveColourCode(colour, colourCode) ?? COLOUR_PRESETS.Teal;
-      const data = await kanRequest("POST", "/labels", {
+      const resolved =
+        resolveColourCode(colour, colourCode) ?? COLOUR_PRESETS.Teal;
+      const data = await client.request("POST", "/labels", {
         boardPublicId,
         name,
         colourCode: resolved,
       });
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -77,15 +85,23 @@ export function registerLabelTools(server: McpServer): void {
         .string()
         .regex(/^#[0-9a-fA-F]{6}$/)
         .optional()
-        .describe("Explicit 7-char hex colour. Overrides `colour` if both are set."),
+        .describe(
+          "Explicit 7-char hex colour. Overrides `colour` if both are set.",
+        ),
     },
     async ({ labelPublicId, name, colour, colourCode }) => {
       const resolved = resolveColourCode(colour, colourCode);
       const body: Record<string, unknown> = {};
       if (name !== undefined) body.name = name;
       if (resolved !== undefined) body.colourCode = resolved;
-      const data = await kanRequest("PUT", `/labels/${labelPublicId}`, body);
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      const data = await client.request(
+        "PUT",
+        `/labels/${labelPublicId}`,
+        body,
+      );
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -94,8 +110,10 @@ export function registerLabelTools(server: McpServer): void {
     "Delete a label",
     { labelPublicId: z.string().describe("The label's public ID") },
     async ({ labelPublicId }) => {
-      const data = await kanRequest("DELETE", `/labels/${labelPublicId}`);
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      const data = await client.request("DELETE", `/labels/${labelPublicId}`);
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 }

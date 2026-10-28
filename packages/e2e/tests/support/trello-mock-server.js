@@ -53,15 +53,24 @@ const server = createServer((req, res) => {
   }
 
   if (url.pathname === "/members/me/boards") {
+    if (url.searchParams.get("token") !== "mock-trello-token") {
+      res.writeHead(401);
+      res.end(JSON.stringify({ message: "Invalid token" }));
+      return;
+    }
+
     res.writeHead(200);
     res.end(JSON.stringify([{ id: board.id, name: board.name }]));
     return;
   }
 
   if (url.pathname === `/boards/${board.id}`) {
-    if (url.searchParams.get("labels_limit") !== "1000") {
+    if (
+      url.searchParams.get("labels_limit") !== "1000" ||
+      url.searchParams.get("token") !== "mock-trello-token"
+    ) {
       res.writeHead(400);
-      res.end(JSON.stringify({ message: "labels_limit must be 1000" }));
+      res.end(JSON.stringify({ message: "Required board fields are missing" }));
       return;
     }
 

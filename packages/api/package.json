@@ -16,6 +16,10 @@
       "types": "./src/trpc.ts",
       "default": "./src/trpc.ts"
     },
+    "./trpc-context": {
+      "types": "./src/trpc-context.ts",
+      "default": "./src/trpc-context.ts"
+    },
     "./types": {
       "types": "./src/types/router.types.ts",
       "default": "./src/types/router.types.ts"
@@ -32,13 +36,29 @@
       "types": "./src/utils/apiLogging.ts",
       "default": "./src/utils/apiLogging.ts"
     },
+    "./utils/redact": {
+      "types": "./src/utils/redact.ts",
+      "default": "./src/utils/redact.ts"
+    },
     "./utils/permissions": {
       "types": "./src/utils/permissions.ts",
       "default": "./src/utils/permissions.ts"
     },
+    "./utils/trello-token": {
+      "types": "./src/utils/trello-token.ts",
+      "default": "./src/utils/trello-token.ts"
+    },
     "./utils/workspace": {
       "types": "./src/utils/workspace.ts",
       "default": "./src/utils/workspace.ts"
+    },
+    "./utils/apiToken": {
+      "types": "./src/utils/apiToken.ts",
+      "default": "./src/utils/apiToken.ts"
+    },
+    "./utils/paidWorkspaceCache": {
+      "types": "./src/utils/paidWorkspaceCache.ts",
+      "default": "./src/utils/paidWorkspaceCache.ts"
     }
   },
   "license": "GPL-3.0",

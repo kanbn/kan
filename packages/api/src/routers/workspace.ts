@@ -47,6 +47,80 @@ export const workspaceRouter = createTRPCRouter({
 
       return result;
     }),
+  checkSlugAvailability: publicProcedure
+    .meta({
+      openapi: {
+        summary: "Check if a workspace slug is available",
+        method: "GET",
+        path: "/workspaces/check-slug-availability",
+        description: "Checks if a workspace slug is available",
+        tags: ["Workspaces"],
+        protect: true,
+      },
+    })
+    .input(
+      z.object({
+        workspaceSlug: z
+          .string()
+          .min(3)
+          .max(64)
+          .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
+        workspacePublicId: z.string().min(12).optional(),
+      }),
+    )
+    .output(
+      z.object({
+        isAvailable: z.boolean(),
+        isReserved: z.boolean(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+
+      if (!userId)
+        throw new TRPCError({
+          message: `User not authenticated`,
+          code: "UNAUTHORIZED",
+        });
+
+      const slug = input.workspaceSlug.toLowerCase();
+      // check slug is not reserved
+      const workspaceSlug = await workspaceSlugRepo.getWorkspaceSlug(
+        ctx.db,
+        slug,
+      );
+
+      const currentWorkspace = input.workspacePublicId
+        ? await workspaceRepo.getByPublicId(ctx.db, input.workspacePublicId)
+        : undefined;
+
+      // check slug is not taken already
+      const isWorkspaceSlugAvailable =
+        await workspaceRepo.isWorkspaceSlugAvailable(
+          ctx.db,
+          slug,
+          currentWorkspace?.id,
+        );
+
+      const isAvailable =
+        isWorkspaceSlugAvailable && workspaceSlug?.type !== "reserved";
+      const isReserved = workspaceSlug?.type === "reserved";
+
+      if (env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
+        await workspaceSlugRepo.createWorkspaceSlugCheck(ctx.db, {
+          slug,
+          userId,
+          available: isAvailable,
+          reserved: isReserved,
+        });
+      }
+
+      return {
+        isAvailable:
+          isWorkspaceSlugAvailable && workspaceSlug?.type !== "reserved",
+        isReserved: workspaceSlug?.type === "reserved",
+      };
+    }),
   byId: protectedProcedure
     .meta({
       openapi: {
@@ -480,80 +554,6 @@ export const workspaceRouter = createTRPCRouter({
       await workspaceRepo.hardDelete(ctx.db, input.workspacePublicId);
 
       return { success: true };
-    }),
-  checkSlugAvailability: publicProcedure
-    .meta({
-      openapi: {
-        summary: "Check if a workspace slug is available",
-        method: "GET",
-        path: "/workspaces/check-slug-availability",
-        description: "Checks if a workspace slug is available",
-        tags: ["Workspaces"],
-        protect: true,
-      },
-    })
-    .input(
-      z.object({
-        workspaceSlug: z
-          .string()
-          .min(3)
-          .max(64)
-          .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
-        workspacePublicId: z.string().min(12).optional(),
-      }),
-    )
-    .output(
-      z.object({
-        isAvailable: z.boolean(),
-        isReserved: z.boolean(),
-      }),
-    )
-    .query(async ({ ctx, input }) => {
-      const userId = ctx.user?.id;
-
-      if (!userId)
-        throw new TRPCError({
-          message: `User not authenticated`,
-          code: "UNAUTHORIZED",
-        });
-
-      const slug = input.workspaceSlug.toLowerCase();
-      // check slug is not reserved
-      const workspaceSlug = await workspaceSlugRepo.getWorkspaceSlug(
-        ctx.db,
-        slug,
-      );
-
-      const currentWorkspace = input.workspacePublicId
-        ? await workspaceRepo.getByPublicId(ctx.db, input.workspacePublicId)
-        : undefined;
-
-      // check slug is not taken already
-      const isWorkspaceSlugAvailable =
-        await workspaceRepo.isWorkspaceSlugAvailable(
-          ctx.db,
-          slug,
-          currentWorkspace?.id,
-        );
-
-      const isAvailable =
-        isWorkspaceSlugAvailable && workspaceSlug?.type !== "reserved";
-      const isReserved = workspaceSlug?.type === "reserved";
-
-      if (env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
-        await workspaceSlugRepo.createWorkspaceSlugCheck(ctx.db, {
-          slug,
-          userId,
-          available: isAvailable,
-          reserved: isReserved,
-        });
-      }
-
-      return {
-        isAvailable:
-          isWorkspaceSlugAvailable && workspaceSlug?.type !== "reserved",
-        isReserved: workspaceSlug?.type === "reserved",
-      };
     }),
   search: protectedProcedure
     .meta({

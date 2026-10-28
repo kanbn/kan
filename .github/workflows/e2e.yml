@@ -38,6 +38,9 @@ jobs:
           --health-retries 10
     env:
       CI: "true"
+      MINIO_PORT: "9500"
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
       POSTGRES_URL: postgresql://kan:kan@localhost:5432/kan_e2e
       BETTER_AUTH_SECRET: e2e-test-only-secret-not-for-prod-use
       NEXT_PUBLIC_BASE_URL: http://localhost:3000
@@ -72,8 +75,17 @@ jobs:
 
       - name: Install MinIO
         run: |
-          curl -fsSL https://dl.min.io/server/minio/release/linux-amd64/minio -o /usr/local/bin/minio
-          chmod +x /usr/local/bin/minio
+          MINIO_RELEASE="RELEASE.2025-09-07T16-13-09Z"
+          MINIO_BINARY="minio.linux-amd64.${MINIO_RELEASE}"
+          MINIO_SHA256="7c5bd8512c6e966455b1d198209358b2d191c77a83ab377c4073281065fb855f"
+          MINIO_PATH="${RUNNER_TEMP}/minio"
+
+          curl -fsSL \
+            "https://github.com/minio/minio/releases/download/${MINIO_RELEASE}/${MINIO_BINARY}" \
+            -o "${MINIO_PATH}"
+          echo "${MINIO_SHA256}  ${MINIO_PATH}" | sha256sum --check
+          chmod +x "${MINIO_PATH}"
+          echo "${RUNNER_TEMP}" >> "${GITHUB_PATH}"
 
       - name: Write .env for CI
         run: |

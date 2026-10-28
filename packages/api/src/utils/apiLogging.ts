@@ -3,7 +3,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { createLogger } from "@kan/logger";
 
-import { createNextApiContext } from "../trpc";
+import { createNextApiContext } from "../trpc-context";
+import { redactSensitive } from "./redact";
 
 const log = createLogger("api");
 
@@ -14,24 +15,23 @@ export function withApiLogging(
     req: NextApiRequest,
     res: NextApiResponse,
   ) => Promise<unknown> | unknown,
+  options?: { transport?: string },
 ) {
+  const transport = options?.transport ?? "rest";
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const start = Date.now();
     const requestId = randomUUID();
     const route = req.url?.split("?")[0] ?? "unknown";
     const input = {
       ...(req.query &&
-        Object.keys(req.query).length > 0 && { query: req.query }),
+        Object.keys(req.query).length > 0 && {
+          query: redactSensitive(req.query),
+        }),
       ...(req.body &&
         typeof req.body === "object" &&
-        Object.keys(req.body).length > 0 && { body: req.body }),
-    };
-
-    let statusCode = 200;
-    const originalStatus = res.status.bind(res);
-    res.status = (code: number) => {
-      statusCode = code;
-      return originalStatus(code);
+        Object.keys(req.body).length > 0 && {
+          body: redactSensitive(req.body),
+        }),
     };
 
     let userId: string | undefined;
@@ -49,17 +49,18 @@ export function withApiLogging(
       await handler(req, res);
     } catch (err) {
       handlerError = err;
-      statusCode = 500;
       if (!res.headersSent) {
         res.status(500).json({ error: "Internal server error" });
       }
     }
 
+    const statusCode = res.statusCode || (handlerError ? 500 : 200);
+
     const duration = Date.now() - start;
     const meta = {
       requestId,
       procedure: route,
-      transport: "rest",
+      transport,
       duration,
       userId,
       ...(isCloud && email && { email }),
@@ -71,10 +72,10 @@ export function withApiLogging(
       }),
     };
 
-    if (statusCode < 400) {
-      log.info(meta, "API OK");
-    } else {
+    if (statusCode >= 400 || handlerError) {
       log.error(meta, "API error");
+    } else {
+      log.info(meta, "API OK");
     }
   };
 }

@@ -3,8 +3,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import type { Readable } from "node:stream";
 
 import type { dbClient } from "@kan/db/client";
-import { createNextApiContext } from "@kan/api/trpc";
+import { createNextApiContext } from "@kan/api/trpc-context";
 import { withApiLogging } from "@kan/api/utils/apiLogging";
+import { redactSensitive } from "@kan/api/utils/redact";
 import { cancelWorkspaceAccess } from "@kan/api/utils/workspace";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
@@ -189,7 +190,7 @@ export default withApiLogging(
     const { event, license_key, license_status, tier, prev_license_key } =
       payload;
 
-    log.info({ headers: req.headers, payload }, "partner webhook received");
+    log.info({ payload: redactSensitive(payload) }, "partner webhook received");
 
     const { db } = await createNextApiContext(req);
 

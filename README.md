@@ -219,130 +219,17 @@ See `.env.example` for a complete list of supported environment variables.
 
 ## MCP Server (AI Control) 🤖
 
-Kan ships with a [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that lets any MCP-compatible AI client — GitHub Copilot, Claude Desktop, Cursor, Codex, and others — read and control your Kan instance using natural language.
+Kan ships with a [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that lets any MCP-compatible AI client (Claude Desktop, Codex, Cursor, GitHub Copilot, and others) read and control your Kan instance using natural language.
 
-### Prerequisites
-
-- Node.js 18+
-- A running Kan instance (self-hosted or cloud)
-- A Kan API key (Settings → API Keys → Create key)
-
-### Installation
-
-You do **not** need to clone this repository. The recommended way is to use `npx`, which runs the server on-demand and always uses the latest version — no global install required:
+Run it with `npx`, no clone or global install required:
 
 ```bash
 npx -y @kan/mcp
 ```
 
-Alternatively, install it globally:
+Configure it with two environment variables: `KAN_BASE_URL` (your Kan instance) and `KAN_API_TOKEN` (from **Settings → API Keys**). Then point your client's MCP config at the `npx -y @kan/mcp` command.
 
-```bash
-npm install -g @kan/mcp
-kan-mcp
-```
-
-### Configuration
-
-The server is configured via two environment variables:
-
-| Variable        | Description                         | Example                        |
-| --------------- | ----------------------------------- | ------------------------------ |
-| `KAN_BASE_URL`  | Base URL of your Kan instance       | `https://your-kan.example.com` |
-| `KAN_API_TOKEN` | API key from your Kan user settings | `kan_xxxxxxxxxxxx`             |
-
-#### GitHub Copilot (VS Code)
-
-Add the following to your VS Code `mcp.json` (open it via **MCP: Open User MCP Configuration** from the Command Palette):
-
-```json
-{
-  "servers": {
-    "kan": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@kan/mcp"],
-      "env": {
-        "KAN_BASE_URL": "https://your-kan-instance.com",
-        "KAN_API_TOKEN": "kan_your_api_key_here"
-      }
-    }
-  }
-}
-```
-
-Then use Copilot in **Agent mode** to interact with Kan.
-
-#### Claude Desktop
-
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
-
-```json
-{
-  "mcpServers": {
-    "kan": {
-      "command": "npx",
-      "args": ["-y", "@kan/mcp"],
-      "env": {
-        "KAN_BASE_URL": "https://your-kan-instance.com",
-        "KAN_API_TOKEN": "kan_your_api_key_here"
-      }
-    }
-  }
-}
-```
-
-#### Cursor / Codex / other clients
-
-Use the same `command` + `args` + `env` pattern above — all MCP stdio clients follow the same format.
-
-### Example prompts
-
-Once connected, you can ask your AI assistant things like:
-
-**Browsing**
-
-- _"List all my workspaces"_
-- _"Show me all boards in the Marketing workspace"_
-- _"What cards are in the Backlog list of the Q3 Planning board?"_
-- _"Get the full details of card X including comments and checklists"_
-
-**Managing cards**
-
-- _"Create a card called 'Fix login bug' in the To Do list of the Dev board"_
-- _"Move the 'API redesign' card to the In Progress list"_
-- _"Set a due date of next Friday on the 'Write docs' card"_
-- _"Add a comment to the 'Deploy to prod' card saying the deployment is blocked"_
-- _"Duplicate the 'Sprint template' card into the new Sprint 4 list"_
-- _"Mark the 'Setup CI' checklist item as complete"_
-
-**Organisation**
-
-- _"Add the 'urgent' label to all cards assigned to me in the Backend board"_
-- _"Create a 'Release checklist' checklist on the v2.0 card with items: smoke test, update changelog, tag release"_
-- _"What tasks are assigned to @alice in the Mechanics Rework board?"_
-
-**Workspace management**
-
-- _"Create a new workspace called 'Client Projects'"_
-- _"Invite bob@example.com to the Marketing workspace as a member"_
-- _"Create a new board called 'Sprint 5' in the Dev workspace with lists: Backlog, In Progress, Done"_
-- _"Search for anything related to 'authentication' across the Dev workspace"_
-
-### Available tools
-
-The MCP server exposes 46 tools across 7 resource types:
-
-| Resource          | Tools                                                               |
-| ----------------- | ------------------------------------------------------------------- |
-| Workspaces        | list, find by name, get, create, update, delete, search, check slug |
-| Boards            | list, find by name, get, get by slug, create, update, delete        |
-| Lists             | create, update, delete                                              |
-| Cards             | create, get, update, delete, duplicate, get activities              |
-| Card interactions | add/update/delete comment, toggle label, toggle member              |
-| Checklists        | create, update, delete, create item, update item, delete item       |
-| Labels            | get, create, update, delete                                         |
-| Members           | invite, remove, update role, manage invite links                    |
+See the [MCP Server docs](https://docs.kan.bn/integrations/mcp-server) for per-client config (Claude Desktop, Codex, and others), example prompts, the full tool reference, and troubleshooting.
 
 ## Contributing 🤝
 

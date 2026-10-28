@@ -321,7 +321,7 @@ export const update = async (
   db: dbClient,
   cardInput: {
     title?: string;
-    description?: string;
+    description?: string | null;
     dueDate?: Date | null;
   },
   args: {

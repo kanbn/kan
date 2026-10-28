@@ -2,11 +2,8 @@ import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 
 import type { AppRouter } from "./root";
 import { appRouter } from "./root";
-import {
-  createCallerFactory,
-  createNextApiContext,
-  createTRPCContext,
-} from "./trpc";
+import { createCallerFactory } from "./trpc";
+import { createNextApiContext, createTRPCContext } from "./trpc-context";
 
 const createCaller = createCallerFactory(appRouter);
 

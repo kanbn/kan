@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Upload } from "@aws-sdk/lib-storage";
 
-import { createNextApiContext } from "@kan/api/trpc";
+import { createNextApiContext } from "@kan/api/trpc-context";
 import { withApiLogging } from "@kan/api/utils/apiLogging";
 import { assertPermission } from "@kan/api/utils/permissions";
 import { withRateLimit } from "@kan/api/utils/rateLimit";

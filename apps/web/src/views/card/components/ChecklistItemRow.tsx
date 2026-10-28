@@ -1,4 +1,7 @@
-import type { DraggableProvided } from "react-beautiful-dnd";
+import type {
+  DraggableAttributes,
+  DraggableSyntheticListeners,
+} from "@dnd-kit/core";
 import { t } from "@lingui/core/macro";
 import { useState } from "react";
 import { HiXMark } from "react-icons/hi2";
@@ -15,11 +18,13 @@ interface ChecklistItemRowProps {
     publicId: string;
     title: string;
     completed: boolean;
+    clientId?: string;
   };
   cardPublicId: string;
   onCreateNewItem?: () => void;
   viewOnly?: boolean;
-  dragHandleProps?: DraggableProvided["dragHandleProps"];
+  dragHandleAttributes?: DraggableAttributes;
+  dragHandleListeners?: DraggableSyntheticListeners;
   isDragging?: boolean;
 }
 
@@ -28,7 +33,8 @@ export default function ChecklistItemRow({
   cardPublicId,
   onCreateNewItem,
   viewOnly = false,
-  dragHandleProps,
+  dragHandleAttributes,
+  dragHandleListeners,
   isDragging = false,
 }: ChecklistItemRowProps) {
   const utils = api.useUtils();
@@ -132,7 +138,8 @@ export default function ChecklistItemRow({
     >
       {!viewOnly && (
         <div
-          {...dragHandleProps}
+          {...dragHandleAttributes}
+          {...dragHandleListeners}
           className="absolute left-0 top-1/2 flex h-[20px] w-[20px] -translate-x-full -translate-y-1/2 cursor-grab items-center justify-center pr-1 opacity-0 transition-opacity group-hover:opacity-75 hover:opacity-100 active:cursor-grabbing"
         >
           <RiDraggable className="h-4 w-4 text-light-700 dark:text-dark-700" />
@@ -163,7 +170,7 @@ export default function ChecklistItemRow({
 
       <div className="flex-1 pr-7">
         <PlainTextEditor
-          key={item.publicId}
+          key={item.clientId ?? item.publicId}
           content={item.title}
           readOnly={viewOnly}
           placeholder={t`Add details...`}

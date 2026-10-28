@@ -96,8 +96,6 @@ export const integrationRouter = createTRPCRouter({
           createdAt: z.date(),
           updatedAt: z.date().nullable(),
           userId: z.string(),
-          accessToken: z.string(),
-          refreshToken: z.string().nullable(),
           provider: z.string(),
         }),
       ),

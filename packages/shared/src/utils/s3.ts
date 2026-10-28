@@ -8,6 +8,8 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { env } from "next-runtime-env";
 
 export function createS3Client() {
+  const region =
+    process.env.S3_REGION === "" ? undefined : process.env.S3_REGION;
   const credentials =
     process.env.S3_ACCESS_KEY_ID && process.env.S3_SECRET_ACCESS_KEY
       ? {
@@ -23,7 +25,7 @@ export function createS3Client() {
   // set a meaningless value. Real AWS S3 users should still set
   // S3_REGION explicitly to their bucket's actual region.
   return new S3Client({
-    region: process.env.S3_REGION ?? "us-east-1",
+    region: region ?? "us-east-1",
     endpoint: process.env.S3_ENDPOINT ?? "",
     forcePathStyle: process.env.S3_FORCE_PATH_STYLE === "true",
     credentials,
@@ -130,4 +132,3 @@ export async function generateAttachmentUrl(
     return null;
   }
 }
-
