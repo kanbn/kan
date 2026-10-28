@@ -3065,7 +3065,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        442
+        467
       ]
     ],
     "translation": "Fortsæt med "
@@ -3081,7 +3081,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        360
+        364
       ]
     ],
     "translation": "Fortsæt med {0}"
@@ -4405,7 +4405,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        468
       ]
     ],
     "translation": "e-mail"
@@ -4561,7 +4561,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        407
+        432
       ]
     ],
     "translation": "Indtast din e-mailadresse"
@@ -4573,7 +4573,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        395
+        420
       ]
     ],
     "translation": "Indtast dit navn"
@@ -4597,7 +4597,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        421
+        446
       ]
     ],
     "translation": "Indtast din adgangskode"
@@ -5002,7 +5002,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        296
+        300
       ]
     ],
     "translation": "Login med {0} mislykkedes. Prøv igen."
@@ -6652,7 +6652,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        468
       ]
     ],
     "translation": "magisk link"
@@ -7331,7 +7331,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        374
+        379
       ]
     ],
     "translation": "Ingen godkendelsesmetoder er tilgængelige i øjeblikket"
@@ -7623,7 +7623,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        385
+        410
       ]
     ],
     "translation": "eller"
@@ -7747,7 +7747,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        263
+        267
       ]
     ],
     "translation": "Adgangskode er påkrævet for at logge ind."
@@ -7759,7 +7759,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        262
+        266
       ]
     ],
     "translation": "Adgangskode er påkrævet for at oprette en konto."
@@ -8035,7 +8035,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        411
+        436
       ]
     ],
     "translation": "Indtast en gyldig e-mailadresse"
@@ -8047,7 +8047,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        399
+        424
       ]
     ],
     "translation": "Indtast et gyldigt navn"
@@ -8059,7 +8059,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        426
+        451
       ]
     ],
     "translation": "Indtast en gyldig adgangskode"
@@ -9281,6 +9281,22 @@
     ],
     "translation": "tildelte sig selv til kortet"
   },
+  "f2zPy/": {
+    "translation": "",
+    "message": "Self-hosting? Set <0>{CREDENTIALS_ENV_HINT}</0> to enable email and password sign in, or configure an OAuth provider. See the <1>self-hosting guide</1>.",
+    "placeholders": {
+      "CREDENTIALS_ENV_HINT": [
+        "CREDENTIALS_ENV_HINT"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/components/AuthForm.tsx",
+        385
+      ]
+    ]
+  },
   "RoafuO": {
     "message": "Send feedback",
     "placeholders": {},
@@ -9636,7 +9652,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        442
+        467
       ]
     ],
     "translation": "Opret konto med "
@@ -9901,11 +9917,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        220
+        224
       ],
       [
         "src/components/AuthForm.tsx",
-        237
+        241
       ]
     ],
     "translation": "Fuldført"
@@ -12630,7 +12646,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        238
+        242
       ]
     ],
     "translation": "Du er logget ind."
@@ -12642,7 +12658,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        221
+        225
       ]
     ],
     "translation": "Din konto er oprettet."

@@ -3078,7 +3078,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        442
+        467
       ]
     ],
     "translation": "Continue with "
@@ -3094,7 +3094,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        360
+        364
       ]
     ],
     "translation": "Continue with {0}"
@@ -4444,7 +4444,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        468
       ]
     ],
     "translation": "email"
@@ -4600,7 +4600,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        407
+        432
       ]
     ],
     "translation": "Enter your email address"
@@ -4612,7 +4612,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        395
+        420
       ]
     ],
     "translation": "Enter your name"
@@ -4636,7 +4636,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        421
+        446
       ]
     ],
     "translation": "Enter your password"
@@ -5054,7 +5054,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        296
+        300
       ]
     ],
     "translation": "Failed to login with {0}. Please try again."
@@ -6730,7 +6730,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        443
+        468
       ]
     ],
     "translation": "magic link"
@@ -7409,7 +7409,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        374
+        379
       ]
     ],
     "translation": "No authentication methods are currently available"
@@ -7701,7 +7701,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        385
+        410
       ]
     ],
     "translation": "or"
@@ -7825,7 +7825,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        263
+        267
       ]
     ],
     "translation": "Password is required to login."
@@ -7837,7 +7837,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        262
+        266
       ]
     ],
     "translation": "Password is required to sign up."
@@ -8113,7 +8113,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        411
+        436
       ]
     ],
     "translation": "Please enter a valid email address"
@@ -8125,7 +8125,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        399
+        424
       ]
     ],
     "translation": "Please enter a valid name"
@@ -8137,7 +8137,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        426
+        451
       ]
     ],
     "translation": "Please enter a valid password"
@@ -9359,6 +9359,22 @@
     ],
     "translation": "self-assigned the card"
   },
+  "f2zPy/": {
+    "translation": "Self-hosting? Set <0>{CREDENTIALS_ENV_HINT}</0> to enable email and password sign in, or configure an OAuth provider. See the <1>self-hosting guide</1>.",
+    "message": "Self-hosting? Set <0>{CREDENTIALS_ENV_HINT}</0> to enable email and password sign in, or configure an OAuth provider. See the <1>self-hosting guide</1>.",
+    "placeholders": {
+      "CREDENTIALS_ENV_HINT": [
+        "CREDENTIALS_ENV_HINT"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/components/AuthForm.tsx",
+        385
+      ]
+    ]
+  },
   "RoafuO": {
     "message": "Send feedback",
     "placeholders": {},
@@ -9714,7 +9730,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        442
+        467
       ]
     ],
     "translation": "Sign up with "
@@ -9979,11 +9995,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        220
+        224
       ],
       [
         "src/components/AuthForm.tsx",
-        237
+        241
       ]
     ],
     "translation": "Success"
@@ -12751,7 +12767,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        238
+        242
       ]
     ],
     "translation": "You have been logged in successfully."
@@ -12763,7 +12779,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        221
+        225
       ]
     ],
     "translation": "You have been signed up successfully."
