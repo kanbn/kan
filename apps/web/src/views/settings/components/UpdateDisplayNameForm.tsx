@@ -67,7 +67,11 @@ const UpdateDisplayNameForm = ({ displayName }: { displayName: string }) => {
   return (
     <div className="flex gap-2">
       <div className="mb-4 flex w-full max-w-[325px] items-center gap-2">
-        <Input {...register("name")} errorMessage={errors.name?.message} />
+        <Input
+          aria-label={t`Display name`}
+          {...register("name")}
+          errorMessage={errors.name?.message}
+        />
       </div>
       {isDirty && (
         <div>

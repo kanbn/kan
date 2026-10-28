@@ -306,6 +306,7 @@ export const getMemberWithRole = async (
       and(
         eq(workspaceMembers.userId, userId),
         eq(workspaceMembers.workspaceId, workspaceId),
+        eq(workspaceMembers.status, "active"),
         isNull(workspaceMembers.deletedAt),
       ),
     )

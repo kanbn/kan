@@ -1,6 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
+import type { dbClient } from "@kan/db/client";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
@@ -10,14 +11,51 @@ import * as integrationsRepo from "@kan/db/repository/integration.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import { colours } from "@kan/shared/constants";
-import { generateSlug, generateUID } from "@kan/shared/utils";
+import { createLogger } from "@kan/logger";
+import {
+  generateSlug,
+  generateUID,
+  normalizeDescription,
+} from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertPermission } from "../utils/permissions";
-import { assertUserInWorkspace } from "../utils/auth";
 import { decryptToken } from "../utils/encryption";
+import { assertPermission } from "../utils/permissions";
+import { getTrelloLabelColour } from "../utils/trello";
+import {
+  decryptTrelloToken,
+  encryptTrelloToken,
+  isEncryptedTrelloToken,
+} from "../utils/trello-token";
 import { apiKeys, urls } from "./integration";
+
+const log = createLogger("import");
+
+const getTrelloTokenForUser = async (db: dbClient, userId: string) => {
+  const integration = await integrationsRepo.getProviderForUser(
+    db,
+    userId,
+    "trello",
+  );
+
+  if (!integration)
+    throw new TRPCError({
+      message: "Trello token not found",
+      code: "UNAUTHORIZED",
+    });
+
+  const token = decryptTrelloToken(integration.accessToken);
+
+  if (!isEncryptedTrelloToken(integration.accessToken))
+    await integrationsRepo.updateAccessTokenIfCurrent(db, {
+      userId,
+      provider: "trello",
+      currentAccessToken: integration.accessToken,
+      accessToken: encryptTrelloToken(token),
+    });
+
+  return token;
+};
 
 export interface TrelloBoard {
   id: string;
@@ -31,6 +69,7 @@ export interface TrelloBoard {
 interface TrelloLabel {
   id: string;
   name: string;
+  color?: string | null;
 }
 
 interface TrelloList {
@@ -145,23 +184,22 @@ export const importRouter = createTRPCRouter({
             code: "UNAUTHORIZED",
           });
 
-        const integration = await integrationsRepo.getProviderForUser(
-          ctx.db,
-          user.id,
-          "trello",
-        );
-
-        const token = integration?.accessToken;
-
-        if (!token)
-          throw new TRPCError({
-            message: "Trello token not found",
-            code: "UNAUTHORIZED",
-          });
+        const token = await getTrelloTokenForUser(ctx.db, user.id);
 
         const response = await fetch(
           `${urls.trello}/members/me/boards?key=${apiKey}&token=${token}`,
         );
+
+        if (!response.ok) {
+          log.error(
+            { status: response.status },
+            "Failed to fetch Trello boards",
+          );
+          throw new TRPCError({
+            message: "Failed to fetch boards from Trello",
+            code: "INTERNAL_SERVER_ERROR",
+          });
+        }
 
         const data = (await response.json()) as TrelloBoard[];
 
@@ -205,17 +243,7 @@ export const importRouter = createTRPCRouter({
             code: "UNAUTHORIZED",
           });
 
-        const integration = await integrationsRepo.getProviderForUser(
-          ctx.db,
-          userId,
-          "trello",
-        );
-
-        if (!integration)
-          throw new TRPCError({
-            message: "Trello token not found",
-            code: "UNAUTHORIZED",
-          });
+        const token = await getTrelloTokenForUser(ctx.db, userId);
 
         const workspace = await workspaceRepo.getByPublicId(
           ctx.db,
@@ -236,12 +264,17 @@ export const importRouter = createTRPCRouter({
 
         const newImportId = newImport?.id;
 
-        let boardsCreated = 0;
-
-        for (const boardId of input.boardIds) {
+        const importSingleBoard = async (boardId: string): Promise<void> => {
           const response = await fetch(
-            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${integration.accessToken}&lists=open&cards=open&labels=all&checklists=all&checkItemStates=all`,
+            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
           );
+
+          if (!response.ok) {
+            throw new Error(
+              `Trello returned ${response.status} for board ${boardId}`,
+            );
+          }
+
           const data = (await response.json()) as TrelloBoard;
 
           const formattedData = {
@@ -250,6 +283,7 @@ export const importRouter = createTRPCRouter({
               .map((label) => ({
                 sourceId: label.id,
                 name: label.name,
+                colourCode: getTrelloLabelColour(label.color),
               }))
               .filter((_label) => !!_label.name),
             lists: data.lists.map((list) => ({
@@ -303,10 +337,10 @@ export const importRouter = createTRPCRouter({
           let createdCards: { id: number; sourceId: string }[] = [];
 
           if (formattedData.labels.length) {
-            const labelsInsert = formattedData.labels.map((label, index) => ({
+            const labelsInsert = formattedData.labels.map((label) => ({
               publicId: generateUID(),
               name: label.name,
-              colourCode: colours[index % colours.length]?.code ?? "#0d9488",
+              colourCode: label.colourCode,
               createdBy: userId,
               boardId: newBoardId,
               importId: newImportId,
@@ -337,7 +371,7 @@ export const importRouter = createTRPCRouter({
               const cardsInsert = list.cards.map((card, index) => ({
                 publicId: generateUID(),
                 title: (card.name?.trim() ?? "Untitled Card").slice(0, 2000),
-                description: card.description,
+                description: normalizeDescription(card.description),
                 createdBy: userId,
                 listId: newListId,
                 workspaceId: workspace.id,
@@ -497,16 +531,45 @@ export const importRouter = createTRPCRouter({
               }
             }
           }
+        };
 
-          boardsCreated++;
+        const results = await Promise.allSettled(
+          input.boardIds.map((boardId) => importSingleBoard(boardId)),
+        );
+
+        const boardsCreated = results.filter(
+          (result) => result.status === "fulfilled",
+        ).length;
+
+        const failures = results.filter(
+          (result): result is PromiseRejectedResult =>
+            result.status === "rejected",
+        );
+
+        if (failures.length > 0) {
+          log.error(
+            {
+              importId: newImportId,
+              failedCount: failures.length,
+              errors: failures.map((failure) => String(failure.reason)),
+            },
+            "Some Trello boards failed to import",
+          );
         }
 
-        if (boardsCreated > 0 && newImportId) {
+        if (newImportId) {
           await importRepo.update(
             ctx.db,
-            { status: "success" },
-            { importId: newImport.id },
+            { status: boardsCreated > 0 ? "success" : "failed" },
+            { importId: newImportId },
           );
+        }
+
+        if (boardsCreated === 0) {
+          throw new TRPCError({
+            message: "Failed to import any boards from Trello",
+            code: "INTERNAL_SERVER_ERROR",
+          });
         }
 
         return { boardsCreated };
@@ -665,7 +728,11 @@ export const importRouter = createTRPCRouter({
             message: "Workspace not found",
           });
 
-        await assertUserInWorkspace(ctx.db, userId, workspace.id);
+        // Importing creates a board, so this must require board:create like
+        // the Trello import does (importBoards), not just membership: a
+        // guest (or a member with board:create explicitly revoked) is a
+        // legitimate workspace member but must not be able to create boards.
+        await assertPermission(ctx.db, userId, workspace.id, "board:create");
 
         const newImport = await importRepo.create(ctx.db, {
           source: "github",
@@ -886,7 +953,7 @@ export const importRouter = createTRPCRouter({
           const cardsInput = itemsToInsert.map((data, index) => ({
             publicId: generateUID(),
             title: data.title,
-            description: data.description,
+            description: normalizeDescription(data.description),
             createdBy: userId,
             listId: data.listId,
             workspaceId: workspace.id,

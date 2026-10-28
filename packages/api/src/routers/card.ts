@@ -8,7 +8,10 @@ import * as checklistRepo from "@kan/db/repository/checklist.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import { generateAttachmentUrl, generateAvatarUrl } from "@kan/shared/utils";
+import {
+  generateAttachmentUrl,
+  normalizeDescription,
+} from "@kan/shared/utils";
 
 import {
   activityItemSchema,
@@ -20,6 +23,7 @@ import {
 } from "../schemas";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
+import { createAvatarUrlResolver } from "../utils/avatarUrls";
 import { sendMentionEmails } from "../utils/notifications";
 import {
   assertCanDelete,
@@ -77,9 +81,23 @@ export const cardRouter = createTRPCRouter({
 
       await assertPermission(ctx.db, userId, list.workspaceId, "card:create");
 
+      const members = input.memberPublicIds.length
+        ? await workspaceRepo.getAllMembersByPublicIds(
+            ctx.db,
+            input.memberPublicIds,
+            list.workspaceId,
+          )
+        : [];
+
+      if (members.length !== new Set(input.memberPublicIds).size)
+        throw new TRPCError({
+          message: `Members with public IDs (${input.memberPublicIds.join(", ")}) not found`,
+          code: "NOT_FOUND",
+        });
+
       const newCard = await cardRepo.create(ctx.db, {
         title: input.title,
-        description: input.description,
+        description: normalizeDescription(input.description),
         createdBy: userId,
         listId: list.id,
         workspaceId: list.workspaceId,
@@ -133,18 +151,7 @@ export const cardRouter = createTRPCRouter({
         await cardActivityRepo.bulkCreate(ctx.db, cardActivitesInsert);
       }
 
-      if (newCardId && input.memberPublicIds.length) {
-        const members = await workspaceRepo.getAllMembersByPublicIds(
-          ctx.db,
-          input.memberPublicIds,
-        );
-
-        if (!members.length)
-          throw new TRPCError({
-            message: `Members with public IDs (${input.memberPublicIds.join(", ")}) not found`,
-            code: "NOT_FOUND",
-          });
-
+      if (newCardId && members.length) {
         const membersInsert = members.map((member) => ({
           cardId: newCardId,
           workspaceMemberId: member.id,
@@ -173,13 +180,12 @@ export const cardRouter = createTRPCRouter({
       }
 
       if (input.description) {
-        sendMentionEmails({
+        void sendMentionEmails({
           db: ctx.db,
           cardPublicId: newCard.publicId,
-          commentHtml: input.description,
+          previousHtml: null,
+          nextHtml: input.description,
           commenterUserId: userId,
-        }).catch((error) => {
-          console.error("Failed to send mention emails:", error);
         });
       }
 
@@ -277,14 +283,13 @@ export const cardRouter = createTRPCRouter({
         createdBy: userId,
       });
 
-      sendMentionEmails({
+      void sendMentionEmails({
         db: ctx.db,
         cardPublicId: input.cardPublicId,
-        commentHtml: input.comment,
+        previousHtml: null,
+        nextHtml: input.comment,
         commenterUserId: userId,
         commentId: newComment.id,
-      }).catch((error) => {
-        console.error("Failed to send mention emails:", error);
       });
 
       return newComment;
@@ -367,14 +372,13 @@ export const cardRouter = createTRPCRouter({
         createdBy: userId,
       });
 
-      sendMentionEmails({
+      void sendMentionEmails({
         db: ctx.db,
         cardPublicId: input.cardPublicId,
-        commentHtml: input.comment,
+        previousHtml: existingComment.comment,
+        nextHtml: input.comment,
         commenterUserId: userId,
         commentId: updatedComment.id,
-      }).catch((error) => {
-        console.error("Failed to send mention emails:", error);
       });
 
       return updatedComment;
@@ -591,6 +595,7 @@ export const cardRouter = createTRPCRouter({
       const member = await workspaceRepo.getMemberByPublicId(
         ctx.db,
         input.workspaceMemberPublicId,
+        card.workspaceId,
       );
 
       if (!member)
@@ -710,6 +715,7 @@ export const cardRouter = createTRPCRouter({
       );
 
       // Generate presigned URLs for workspace member avatars
+      const resolveAvatarUrl = createAvatarUrlResolver();
       const workspaceWithAvatarUrls = result.list.board.workspace
         ? {
             ...result.list.board.workspace,
@@ -719,7 +725,7 @@ export const cardRouter = createTRPCRouter({
                   return member;
                 }
 
-                const avatarUrl = await generateAvatarUrl(member.user.image);
+                const avatarUrl = await resolveAvatarUrl(member.user.image);
                 return {
                   ...member,
                   user: {
@@ -804,13 +810,14 @@ export const cardRouter = createTRPCRouter({
       );
 
       // Generate presigned URLs for user avatars in activities
+      const resolveAvatarUrl = createAvatarUrlResolver();
       const activitiesWithAvatarUrls = await Promise.all(
         result.activities.map(async (activity) => {
           const updatedActivity = { ...activity };
 
           // Generate presigned URL for activity user avatar
           if (activity.user?.image) {
-            const userAvatarUrl = await generateAvatarUrl(activity.user.image);
+            const userAvatarUrl = await resolveAvatarUrl(activity.user.image);
             updatedActivity.user = {
               ...activity.user,
               image: userAvatarUrl,
@@ -819,7 +826,7 @@ export const cardRouter = createTRPCRouter({
 
           // Generate presigned URL for member user avatar (if exists)
           if (activity.member?.user?.image) {
-            const memberAvatarUrl = await generateAvatarUrl(
+            const memberAvatarUrl = await resolveAvatarUrl(
               activity.member.user.image,
             );
             updatedActivity.member = {
@@ -939,13 +946,26 @@ export const cardRouter = createTRPCRouter({
         | undefined;
 
       const previousDueDate = existingCard.dueDate;
+      const normalizedDescription =
+        input.description !== undefined
+          ? normalizeDescription(input.description)
+          : undefined;
+      const descriptionChanged =
+        normalizedDescription !== undefined &&
+        existingCard.description !== normalizedDescription;
 
-      if (input.title || input.description || input.dueDate !== undefined) {
+      if (
+        input.title ||
+        normalizedDescription !== undefined ||
+        input.dueDate !== undefined
+      ) {
         result = await cardRepo.update(
           ctx.db,
           {
             ...(input.title && { title: input.title }),
-            ...(input.description && { description: input.description }),
+            ...(normalizedDescription !== undefined && {
+              description: normalizedDescription,
+            }),
             ...(input.dueDate !== undefined && { dueDate: input.dueDate }),
           },
           { cardPublicId: input.cardPublicId },
@@ -978,23 +998,24 @@ export const cardRouter = createTRPCRouter({
         });
       }
 
-      if (input.description && existingCard.description !== input.description) {
+      if (descriptionChanged) {
         activities.push({
           type: "card.updated.description" as const,
           cardId: result.id,
           createdBy: userId,
           fromDescription: existingCard.description ?? undefined,
-          toDescription: input.description,
+          toDescription: normalizedDescription ?? undefined,
         });
 
-        sendMentionEmails({
-          db: ctx.db,
-          cardPublicId: input.cardPublicId,
-          commentHtml: input.description,
-          commenterUserId: userId,
-        }).catch((error) => {
-          console.error("Failed to send mention emails:", error);
-        });
+        if (normalizedDescription) {
+          void sendMentionEmails({
+            db: ctx.db,
+            cardPublicId: input.cardPublicId,
+            previousHtml: existingCard.description,
+            nextHtml: normalizedDescription,
+            commenterUserId: userId,
+          });
+        }
       }
 
       if (
@@ -1042,10 +1063,10 @@ export const cardRouter = createTRPCRouter({
       if (input.title && existingCard.title !== input.title) {
         webhookChanges.title = { from: existingCard.title, to: input.title };
       }
-      if (input.description && existingCard.description !== input.description) {
+      if (descriptionChanged) {
         webhookChanges.description = {
           from: existingCard.description,
-          to: input.description,
+          to: normalizedDescription,
         };
       }
       if (
@@ -1281,7 +1302,7 @@ export const cardRouter = createTRPCRouter({
 
       const newCard = await cardRepo.create(ctx.db, {
         title: input.title ?? sourceCard.title,
-        description: sourceCard.description ?? "",
+        description: normalizeDescription(sourceCard.description),
         createdBy: userId,
         listId: targetList.id,
         workspaceId: targetList.workspaceId,
@@ -1324,6 +1345,7 @@ export const cardRouter = createTRPCRouter({
         const members = await workspaceRepo.getAllMembersByPublicIds(
           ctx.db,
           memberPublicIds,
+          sourceCardMeta.workspaceId,
         );
         if (members.length) {
           const membersInsert = members.map((member) => ({

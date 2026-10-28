@@ -1,4 +1,4 @@
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { AnimatePresence, motion } from "framer-motion";
@@ -11,8 +11,10 @@ import { authClient } from "@kan/auth/client";
 import Button from "~/components/Button";
 import { api } from "~/utils/api";
 
-type PlanId = "solo" | "team" | "pro";
+type PlanId = "solo" | "team";
 type Billing = "monthly" | "annual";
+
+const VALID_PLAN_IDS: PlanId[] = ["solo", "team"];
 
 // Each user orbits via a zero-size pivot div at center (144,144) that rotates.
 // The icon is offset from the pivot by `radius` pixels along the x-axis.
@@ -26,33 +28,38 @@ const ORBIT_USERS: Record<
     { id: "t1", angle: 45, radius: 104, duration: 50 },
     { id: "t2", angle: 170, radius: 104, duration: 50 },
     { id: "t3", angle: 290, radius: 104, duration: 50 },
-  ],
-  pro: [
-    { id: "t1", angle: 45, radius: 104, duration: 50 },
-    { id: "t2", angle: 170, radius: 104, duration: 50 },
-    { id: "t3", angle: 290, radius: 104, duration: 50 },
-    { id: "p1", angle: 10, radius: 144, duration: 70 },
-    { id: "p2", angle: 120, radius: 144, duration: 70 },
-    { id: "p4", angle: 240, radius: 144, duration: 70 },
-    { id: "p3", angle: 230, radius: 64, duration: 30 },
+    { id: "t4", angle: 10, radius: 144, duration: 70 },
+    { id: "t5", angle: 120, radius: 144, duration: 70 },
+    { id: "t6", angle: 240, radius: 144, duration: 70 },
+    { id: "t7", angle: 230, radius: 64, duration: 30 },
   ],
 };
 
 export default function SelectPlanView() {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [selected, setSelected] = useState<PlanId>(
-    (searchParams.get("plan") as PlanId | null) ?? "solo",
-  );
-  const [billing, setBilling] = useState<Billing>(
-    (searchParams.get("billing") as Billing | null) ?? "annual",
-  );
+  const requestedPlan = searchParams.get("plan");
   const returnUrl = searchParams.get("returnUrl") ?? "/boards";
+  const workspacePublicIdParam = searchParams.get("workspacePublicId");
+  const isUpgradingExistingWorkspace = !!workspacePublicIdParam;
   const workspacePublicId =
-    searchParams.get("workspacePublicId") ??
+    workspacePublicIdParam ??
     (typeof window !== "undefined"
       ? localStorage.getItem("workspacePublicId")
       : null);
+  const [selected, setSelected] = useState<PlanId>(() => {
+    if (
+      VALID_PLAN_IDS.includes(requestedPlan as PlanId) &&
+      !(requestedPlan === "solo" && isUpgradingExistingWorkspace)
+    ) {
+      return requestedPlan as PlanId;
+    }
+    return isUpgradingExistingWorkspace ? "team" : "solo";
+  });
+  const [billing, setBilling] = useState<Billing>(
+    (searchParams.get("billing") as Billing | null) ?? "annual",
+  );
   const { data: workspaces } = api.workspace.all.useQuery();
   const { data: session } = authClient.useSession();
   const { data: user } = api.user.getUser.useQuery(undefined, {
@@ -88,22 +95,19 @@ export default function SelectPlanView() {
       name: t`Team`,
       monthly: "$10/user/mo",
       annual: "$8/user/mo",
-      description: t`Best for small teams who want to collaborate and move faster together.`,
-      trial: true,
-    },
-    {
-      id: "pro",
-      name: t`Pro`,
-      monthly: "$29/mo",
-      annual: "$23/mo",
-      description: t`Unlimited members and a custom workspace username for teams ready to scale.`,
+      description: t`Best for teams who want to collaborate and move faster together.`,
       trial: true,
     },
   ];
 
+  const visiblePlans = isUpgradingExistingWorkspace
+    ? PLANS.filter((plan) => plan.id !== "solo")
+    : PLANS;
+  const onlyPlan = visiblePlans.length === 1 ? visiblePlans[0] : undefined;
+
   const buildSelectPlanUrl = (plan: PlanId, b: Billing) => {
-    const base = `/onboarding/select-plan?plan=${plan}&billing=${b}&returnUrl=${encodeURIComponent(returnUrl)}`;
-    return workspacePublicId
+    const base = `${pathname}?plan=${plan}&billing=${b}&returnUrl=${encodeURIComponent(returnUrl)}`;
+    return isUpgradingExistingWorkspace
       ? `${base}&workspacePublicId=${workspacePublicId}`
       : base;
   };
@@ -119,7 +123,7 @@ export default function SelectPlanView() {
   };
 
   const handleContinue = async () => {
-    if (workspacePublicId && selected !== "solo") {
+    if (isUpgradingExistingWorkspace && selected !== "solo") {
       const response = await fetch("/api/stripe/create_checkout_session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -128,7 +132,7 @@ export default function SelectPlanView() {
           billing,
           workspacePublicId,
           successUrl: returnUrl,
-          cancelUrl: returnUrl,
+          cancelUrl: buildSelectPlanUrl(selected, billing),
         }),
       });
       const { url } = (await response.json()) as { url: string };
@@ -150,10 +154,12 @@ export default function SelectPlanView() {
           <div className="flex flex-col p-6 md:w-[55%] md:p-8">
             <div className="flex-1">
               <h2 className="text-xl font-bold text-light-1000 dark:text-dark-1000">
-                {t`Choose a plan`}
+                {onlyPlan ? t`Upgrade your plan` : t`Choose a plan`}
               </h2>
               <p className="mt-1 text-sm text-light-800 dark:text-dark-800">
-                {t`Pick a plan to get started. All paid plans include a 14-day free trial.`}
+                {onlyPlan
+                  ? t`Start your 14-day free trial, cancel anytime.`
+                  : t`Pick a plan to get started. All paid plans include a 14-day free trial.`}
               </p>
 
               {/* Billing toggle */}
@@ -181,7 +187,7 @@ export default function SelectPlanView() {
               </div>
 
               <div className="mt-4 space-y-3">
-                {PLANS.map((plan) => {
+                {visiblePlans.map((plan) => {
                   const badge =
                     billing === "annual" ? plan.annual : plan.monthly;
                   return (

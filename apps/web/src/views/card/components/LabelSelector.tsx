@@ -99,6 +99,7 @@ export default function LabelSelector({
           handleEdit={disabled ? undefined : (labelPublicId) => openModal("EDIT_LABEL", labelPublicId)}
           handleCreate={disabled ? undefined : () => openModal("NEW_LABEL")}
           createNewItemLabel={t`Create new label`}
+          ariaLabel={t`Labels`}
           disabled={disabled}
           asChild
         >

@@ -3,7 +3,11 @@ export interface KanConfig {
   apiToken: string;
 }
 
-function getConfig(): KanConfig {
+export interface KanClient {
+  request<T>(method: string, path: string, body?: unknown): Promise<T>;
+}
+
+export function configFromEnv(): KanConfig {
   const baseUrl = process.env["KAN_BASE_URL"];
   const apiToken = process.env["KAN_API_TOKEN"];
 
@@ -31,34 +35,33 @@ export class KanApiError extends Error {
   }
 }
 
-export async function kanRequest<T>(
-  method: string,
-  path: string,
-  body?: unknown,
-): Promise<T> {
-  const config = getConfig();
-  const url = `${config.baseUrl}/api/v1${path}`;
+export function createKanClient(config: KanConfig): KanClient {
+  return {
+    async request<T>(method: string, path: string, body?: unknown): Promise<T> {
+      const url = `${config.baseUrl}/api/v1${path}`;
 
-  const res = await fetch(url, {
-    method,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${config.apiToken}`,
+      const res = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${config.apiToken}`,
+        },
+        body: body !== undefined ? JSON.stringify(body) : undefined,
+      });
+
+      let data: unknown;
+      const contentType = res.headers.get("content-type") ?? "";
+      if (contentType.includes("application/json")) {
+        data = await res.json();
+      } else {
+        data = await res.text();
+      }
+
+      if (!res.ok) {
+        throw new KanApiError(res.status, res.statusText, data);
+      }
+
+      return data as T;
     },
-    body: body !== undefined ? JSON.stringify(body) : undefined,
-  });
-
-  let data: unknown;
-  const contentType = res.headers.get("content-type") ?? "";
-  if (contentType.includes("application/json")) {
-    data = await res.json();
-  } else {
-    data = await res.text();
-  }
-
-  if (!res.ok) {
-    throw new KanApiError(res.status, res.statusText, data);
-  }
-
-  return data as T;
+  };
 }

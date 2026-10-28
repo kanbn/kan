@@ -5,13 +5,16 @@ mode: "wide"
 tag: "NEW"
 ---
 
-This guide introduces how to self-host Kan. It starts with the minimal Docker Compose setup (web + PostgreSQL) and points you to optional features like email and S3-based file storage.
+This guide introduces how to self-host Kan. It starts with the minimal Docker Compose setup (web + migrate + PostgreSQL) and points you to optional features like email and S3-based file storage.
 
 ## What you’ll set up
 
 <CardGroup cols={2}>
   <Card title="Kan" icon="globe" color="#0284c7" horizontal>
     Next.js application served on port 3000.
+  </Card>
+  <Card title="Migrate" icon="arrows-rotate" color="#f59e0b" horizontal>
+    One-off service that runs database migrations before web starts.
   </Card>
   <Card title="PostgreSQL 15" icon="database" color="#65a30d" horizontal>
     Primary database for Kan data.
@@ -39,6 +42,18 @@ This guide introduces how to self-host Kan. It starts with the minimal Docker Co
 
     ```yaml
     services:
+      migrate:
+        image: ghcr.io/kanbn/kan-migrate:latest
+        container_name: kan-migrate
+        networks:
+          - kan-network
+        environment:
+          POSTGRES_URL: postgresql://kan:your_postgres_password@postgres:5432/kan_db
+        depends_on:
+          postgres:
+            condition: service_healthy
+        restart: "no"
+
       web:
         image: ghcr.io/kanbn/kan:latest
         container_name: kan-web
@@ -52,7 +67,8 @@ This guide introduces how to self-host Kan. It starts with the minimal Docker Co
           POSTGRES_URL: postgresql://kan:your_postgres_password@postgres:5432/kan_db
           NEXT_PUBLIC_ALLOW_CREDENTIALS: true
         depends_on:
-          - postgres
+          migrate:
+            condition: service_completed_successfully
         restart: unless-stopped
 
       postgres:
@@ -66,6 +82,11 @@ This guide introduces how to self-host Kan. It starts with the minimal Docker Co
           - 5432:5432
         volumes:
           - kan_postgres_data:/var/lib/postgresql/data
+        healthcheck:
+          test: ["CMD-SHELL", "pg_isready -U kan -d kan_db"]
+          interval: 5s
+          timeout: 5s
+          retries: 10
         restart: unless-stopped
         networks:
           - kan-network
@@ -90,7 +111,7 @@ This guide introduces how to self-host Kan. It starts with the minimal Docker Co
     docker compose up -d
     ```
 
-    Once started, open [http://localhost:3000](http://localhost:3000).
+    The `migrate` service runs the database migrations to completion before the `web` service starts, so once it's up open [http://localhost:3000](http://localhost:3000).
 
   </Step>
 
@@ -99,6 +120,7 @@ This guide introduces how to self-host Kan. It starts with the minimal Docker Co
 
     - Stop the containers: <code>docker compose down</code>
     - View logs: <code>docker compose logs -f</code>
+    - View logs for a specific service: <code>docker compose logs -f web</code> or <code>docker compose logs -f migrate</code>
     - Restart: <code>docker compose restart</code>
 
   </Step>

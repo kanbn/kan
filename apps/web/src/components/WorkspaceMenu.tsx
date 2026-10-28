@@ -99,6 +99,7 @@ export default function WorkspaceMenu({
               </Menu.Button>
               <Tooltip content={commandPaletteShortcutTooltipContent}>
                 <Button
+                  aria-label={t`Search`}
                   className={twMerge(
                     "mb-1 h-[34px] w-[34px] flex-shrink-0 rounded-lg bg-light-200 p-2 hover:bg-light-300 focus:outline-none dark:bg-dark-200 dark:hover:bg-dark-300",
                     isCollapsed && "md:mb-2 md:h-9 md:w-9",

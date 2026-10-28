@@ -37,10 +37,11 @@ export function NewChecklistForm({ cardPublicId }: { cardPublicId: string }) {
       const previous = utils.card.byId.getData({
         cardPublicId: args.cardPublicId,
       });
+      const optimisticPublicId = `PLACEHOLDER_${generateUID()}`;
       utils.card.byId.setData({ cardPublicId: args.cardPublicId }, (old) => {
         if (!old) return old as any;
         const placeholderChecklist = {
-          publicId: `PLACEHOLDER_${generateUID()}`,
+          publicId: optimisticPublicId,
           name: args.name,
           index: old.checklists.length,
           items: [] as {
@@ -55,10 +56,20 @@ export function NewChecklistForm({ cardPublicId }: { cardPublicId: string }) {
           checklists: [...old.checklists, placeholderChecklist],
         } as typeof old;
       });
-      return { previous };
+      return { previous, optimisticPublicId };
     },
-    onSuccess: (data) => {
+    onSuccess: (data, vars, context) => {
       setModalState("ADD_CHECKLIST", { createdChecklistId: data.publicId });
+      if (!context) return;
+      utils.card.byId.setData({ cardPublicId: vars.cardPublicId }, (old) => {
+        if (!old) return old as any;
+        const updatedChecklists = old.checklists.map((cl) =>
+          cl.publicId === context.optimisticPublicId
+            ? { ...cl, publicId: data.publicId }
+            : cl,
+        );
+        return { ...old, checklists: updatedChecklists } as typeof old;
+      });
     },
     onError: (_error, vars, ctx) => {
       if (ctx?.previous)

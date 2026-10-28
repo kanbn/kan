@@ -2,7 +2,7 @@ import { randomUUID } from "crypto";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Readable } from "node:stream";
 
-import { createNextApiContext } from "@kan/api/trpc";
+import { createNextApiContext } from "@kan/api/trpc-context";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
@@ -99,6 +99,34 @@ export default async function handler(
               meta.workspaceSlug && { slug: meta.workspaceSlug }),
           });
         }
+
+        break;
+      }
+      case "customer.subscription.updated": {
+        const subscription = event.data.object;
+        const priceId = subscription.items.data[0]?.price.id;
+
+        if (!priceId) break;
+
+        const isTeamPrice = [
+          process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID,
+          process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID,
+        ].includes(priceId);
+        const isProPrice = [
+          process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID,
+          process.env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID,
+        ].includes(priceId);
+
+        if (!isTeamPrice && !isProPrice) break;
+
+        const plan = isTeamPrice ? "team" : ("pro" as const);
+
+        const subscriptionRow =
+          await subscriptionRepo.getByStripeSubscriptionId(db, subscription.id);
+
+        if (!subscriptionRow?.referenceId) break;
+
+        await workspaceRepo.update(db, subscriptionRow.referenceId, { plan });
 
         break;
       }

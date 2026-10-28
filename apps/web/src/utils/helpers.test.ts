@@ -5,9 +5,16 @@ vi.mock("next-runtime-env", () => ({
 }));
 
 import { env } from "next-runtime-env";
-import { getAvatarUrl } from "./helpers";
+import { getAvatarUrl, isPlaceholderPublicId } from "./helpers";
 
 const mockEnv = env as ReturnType<typeof vi.fn>;
+
+describe("isPlaceholderPublicId", () => {
+  it("identifies optimistic entity IDs", () => {
+    expect(isPlaceholderPublicId("PLACEHOLDER_abc123")).toBe(true);
+    expect(isPlaceholderPublicId("abc123")).toBe(false);
+  });
+});
 
 describe("getAvatarUrl", () => {
   beforeEach(() => {

@@ -1,0 +1,9 @@
+{
+  "extends": "@kan/tsconfig/base.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "dom"],
+    "module": "esnext"
+  },
+  "include": ["."],
+  "exclude": ["node_modules", "playwright-report", "test-results"]
+}

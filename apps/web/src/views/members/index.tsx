@@ -259,6 +259,7 @@ export default function MembersPage() {
                         ),
                     },
                   ]}
+                  ariaLabel={t`Member options`}
                 >
                   <HiEllipsisHorizontal
                     size={20}
@@ -288,7 +289,7 @@ export default function MembersPage() {
               <>
                 {!isPaidPlan && (
                   <Link
-                    href={`/upgrade/select-plan?plan=pro&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/members")}`}
+                    href={`/upgrade/select-plan?plan=team&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/members")}`}
                     className="hidden items-center rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-center text-xs text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-400 lg:flex"
                   >
                     <HiBolt />

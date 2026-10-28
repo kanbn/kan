@@ -73,7 +73,7 @@ export default function BillingSettings() {
             <Button
               onClick={() =>
                 router.push(
-                  `/upgrade/select-plan?plan=pro&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/settings/billing")}`,
+                  `/upgrade/select-plan?plan=team&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/settings/billing")}`,
                 )
               }
             >

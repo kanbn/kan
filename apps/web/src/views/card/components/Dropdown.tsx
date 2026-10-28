@@ -164,7 +164,7 @@ export default function CardDropdown({
   }
 
   return (
-    <Dropdown items={items}>
+    <Dropdown items={items} ariaLabel={t`Card options`}>
       <HiEllipsisHorizontal className="h-5 w-5 text-dark-900" />
     </Dropdown>
   );

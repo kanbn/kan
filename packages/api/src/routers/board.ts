@@ -10,7 +10,6 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { colours } from "@kan/shared/constants";
 import {
   convertDueDateFiltersToRanges,
-  generateAvatarUrl,
   generateSlug,
   generateUID,
 } from "@kan/shared/utils";
@@ -23,6 +22,7 @@ import {
   boardCreateResponseSchema,
   boardUpdateResponseSchema,
 } from "../schemas";
+import { createAvatarUrlResolver } from "../utils/avatarUrls";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 
 export const boardRouter = createTRPCRouter({
@@ -159,6 +159,8 @@ export const boardRouter = createTRPCRouter({
         });
       }
 
+      const resolveAvatarUrl = createAvatarUrlResolver();
+
       // Generate presigned URLs for workspace member avatars
       const workspaceWithAvatarUrls = result.workspace
         ? {
@@ -169,7 +171,7 @@ export const boardRouter = createTRPCRouter({
                 return member;
               }
 
-              const avatarUrl = await generateAvatarUrl(member.user.image);
+              const avatarUrl = await resolveAvatarUrl(member.user.image);
               return {
                 ...member,
                 user: {
@@ -192,7 +194,7 @@ export const boardRouter = createTRPCRouter({
               members: await Promise.all(
                 card.members.map(async (member) => {
                   if (!member.user?.image) return member;
-                  const avatarUrl = await generateAvatarUrl(member.user.image);
+                  const avatarUrl = await resolveAvatarUrl(member.user.image);
                   return {
                     ...member,
                     user: { ...member.user, image: avatarUrl },

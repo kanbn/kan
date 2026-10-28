@@ -52,6 +52,7 @@ export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
         message: t`Failed to upload attachment. Please try again.`,
         icon: "error",
       });
+    } finally {
       setUploading(false);
     }
   };
@@ -121,6 +122,7 @@ export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
           <Button
             type="button"
             variant="ghost"
+            aria-label={t`Add checklist`}
             iconLeft={
               <HiCheckBadge className="h-4 w-4 text-light-950 dark:text-dark-950" />
             }

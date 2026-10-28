@@ -13,9 +13,19 @@ import { generateUID } from "@kan/shared/utils";
 import { createStripeClient } from "@kan/stripe";
 
 import { socialProvidersPlugin } from "./providers";
-import { triggerWorkflow } from "./utils";
 
 const log = createLogger("auth");
+
+export function getApiKeyFromHeaders(
+  headers: Headers | null | undefined,
+): string | null {
+  const authorization = headers?.get("authorization");
+  const bearerMatch = authorization?.match(/^Bearer (.+)$/i);
+  if (bearerMatch) {
+    return bearerMatch[1] ?? null;
+  }
+  return headers?.get("x-api-key") ?? null;
+}
 
 async function cancelWorkspaceAccess(
   db: dbClient,
@@ -36,6 +46,7 @@ async function cancelWorkspaceAccess(
     const isPublicIdAvailable = await workspaceRepo.isWorkspaceSlugAvailable(
       db,
       workspace.publicId,
+      workspace.id,
     );
     if (!isPublicIdAvailable) {
       newSlug = generateUID();
@@ -70,36 +81,12 @@ export function createPlugins(db: dbClient) {
                   priceId: process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID!,
                   annualDiscountPriceId:
                     process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID!,
-                  freeTrial: {
-                    days: 14,
-                    onTrialStart: async (subscription) => {
-                      await triggerWorkflow(db, "trial-start", subscription);
-                    },
-                    onTrialEnd: async ({ subscription }) => {
-                      await triggerWorkflow(db, "trial-end", subscription);
-                    },
-                    onTrialExpired: async (subscription) => {
-                      await triggerWorkflow(db, "trial-expired", subscription);
-                    },
-                  },
                 },
                 {
                   name: "pro",
                   priceId: process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID!,
                   annualDiscountPriceId:
                     process.env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID!,
-                  freeTrial: {
-                    days: 14,
-                    onTrialStart: async (subscription) => {
-                      await triggerWorkflow(db, "trial-start", subscription);
-                    },
-                    onTrialEnd: async ({ subscription }) => {
-                      await triggerWorkflow(db, "trial-end", subscription);
-                    },
-                    onTrialExpired: async (subscription) => {
-                      await triggerWorkflow(db, "trial-expired", subscription);
-                    },
-                  },
                 },
               ],
               authorizeReference: async (data) => {
@@ -155,22 +142,17 @@ export function createPlugins(db: dbClient) {
                   }
                 }
               },
-              onSubscriptionCancel: async ({
-                subscription,
-                cancellationDetails,
-              }) => {
-                await triggerWorkflow(
-                  db,
-                  "subscription-canceled",
-                  subscription,
-                  cancellationDetails,
-                );
-              },
               onSubscriptionDeleted: async ({ subscription }) => {
                 await cancelWorkspaceAccess(db, subscription.referenceId);
               },
               onSubscriptionUpdate: async ({ subscription }) => {
-                await triggerWorkflow(db, "subscription-updated", subscription);
+                if (subscription.stripeSubscriptionId) {
+                  await subscriptionRepo.updateByStripeSubscriptionId(
+                    db,
+                    subscription.stripeSubscriptionId,
+                    { unlimitedSeats: subscription.plan === "pro" },
+                  );
+                }
               },
             },
           }),
@@ -178,17 +160,11 @@ export function createPlugins(db: dbClient) {
       : []),
     apiKey({
       enableSessionForAPIKeys: true,
-      customAPIKeyGetter: (ctx) => {
-        const authorization = ctx.headers?.get("authorization");
-        if (authorization?.startsWith("Bearer ")) {
-          return authorization.slice(7);
-        }
-        return ctx.headers?.get("x-api-key") ?? null;
-      },
+      customAPIKeyGetter: (ctx) => getApiKeyFromHeaders(ctx.headers),
       rateLimit: {
         enabled: true,
         timeWindow: 1000 * 60, // 1 minute
-        maxRequests: 100, // 100 requests per minute
+        maxRequests: 600,
       },
     }),
     magicLink({

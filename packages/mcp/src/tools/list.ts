@@ -1,8 +1,9 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { kanRequest } from "../client.js";
 
-export function registerListTools(server: McpServer): void {
+import type { KanClient } from "../client.js";
+
+export function registerListTools(server: McpServer, client: KanClient): void {
   server.tool(
     "create_list",
     "Create a new list inside a board",
@@ -11,8 +12,13 @@ export function registerListTools(server: McpServer): void {
       name: z.string().describe("List name"),
     },
     async ({ boardPublicId, name }) => {
-      const data = await kanRequest("POST", "/lists", { boardPublicId, name });
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      const data = await client.request("POST", "/lists", {
+        boardPublicId,
+        name,
+      });
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -25,8 +31,13 @@ export function registerListTools(server: McpServer): void {
       index: z.number().int().optional().describe("New position index"),
     },
     async ({ listPublicId, name, index }) => {
-      const data = await kanRequest("PUT", `/lists/${listPublicId}`, { name, index });
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      const data = await client.request("PUT", `/lists/${listPublicId}`, {
+        name,
+        index,
+      });
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 
@@ -35,8 +46,10 @@ export function registerListTools(server: McpServer): void {
     "Delete a list and all its cards",
     { listPublicId: z.string().describe("The list's public ID") },
     async ({ listPublicId }) => {
-      const data = await kanRequest("DELETE", `/lists/${listPublicId}`);
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      const data = await client.request("DELETE", `/lists/${listPublicId}`);
+      return {
+        content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+      };
     },
   );
 }

@@ -3,6 +3,7 @@ import {
   bigint,
   bigserial,
   boolean,
+  index,
   integer,
   pgTable,
   timestamp,
@@ -30,7 +31,9 @@ export const checklists = pgTable("card_checklist", {
   deletedBy: uuid("deletedBy").references(() => users.id, {
     onDelete: "set null",
   }),
-}).enableRLS();
+}, (table) => [
+  index("card_checklist_card_index_idx").on(table.cardId, table.index),
+]).enableRLS();
 
 export const checklistsRelations = relations(checklists, ({ one, many }) => ({
   card: one(cards, {
@@ -69,7 +72,12 @@ export const checklistItems = pgTable("card_checklist_item", {
   deletedBy: uuid("deletedBy").references(() => users.id, {
     onDelete: "set null",
   }),
-}).enableRLS();
+}, (table) => [
+  index("card_checklist_item_checklist_index_idx").on(
+    table.checklistId,
+    table.index,
+  ),
+]).enableRLS();
 
 export const checklistItemsRelations = relations(checklistItems, ({ one }) => ({
   checklist: one(checklists, {

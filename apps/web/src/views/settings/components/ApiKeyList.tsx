@@ -114,6 +114,7 @@ export default function ApiKeyList() {
                       openModal("REVOKE_API_KEY", keyId, keyName ?? ""),
                   },
                 ]}
+                ariaLabel="API key options"
               >
                 <HiEllipsisHorizontal
                   size={25}

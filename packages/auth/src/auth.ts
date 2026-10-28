@@ -31,6 +31,9 @@ export const initAuth = (db: dbClient) => {
       updateAge: 60 * 60 * 24 * 2, // Update session expiry every 48 hours if user is active
       freshAge: 0,
     },
+    ...(env("DISABLE_RATE_LIMIT") === "true"
+      ? { rateLimit: { enabled: false } }
+      : {}),
     emailAndPassword: {
       enabled: env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true",
       // Sign-up restriction is handled by the user.create.before database

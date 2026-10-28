@@ -1,11 +1,10 @@
-import { PGlite } from "@electric-sql/pglite";
-import { uuid_ossp } from "@electric-sql/pglite/contrib/uuid_ossp";
-import { pg_trgm } from "@electric-sql/pglite/contrib/pg_trgm";
-import { drizzle } from "drizzle-orm/pglite";
-import { migrate } from "drizzle-orm/pglite/migrator";
 import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 import type { Pool } from "pg";
+import { PGlite } from "@electric-sql/pglite";
+import { drizzle } from "drizzle-orm/pglite";
+import { migrate } from "drizzle-orm/pglite/migrator";
 
+import { pgliteExtensions } from "@kan/db/client";
 import * as schema from "@kan/db/schema";
 
 export type TestDbClient = NodePgDatabase<typeof schema> & {
@@ -18,7 +17,7 @@ export type TestDbClient = NodePgDatabase<typeof schema> & {
  */
 export async function createTestDb(): Promise<TestDbClient> {
   const client = new PGlite({
-    extensions: { uuid_ossp, pg_trgm },
+    extensions: pgliteExtensions,
   });
 
   const db = drizzle(client, { schema });

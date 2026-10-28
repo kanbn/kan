@@ -169,7 +169,7 @@ export function UpdateBoardSlugForm({
               updateBoardSlug.isPending ||
               errors.slug?.message !== undefined ||
               isBoardSlugAvailable?.isReserved ||
-              checkBoardSlugAvailability.isLoading
+              checkBoardSlugAvailability.isPending
             }
           >
             {t`Update`}
