@@ -8,6 +8,7 @@ import * as permissionRepo from "@kan/db/repository/permission.repo";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { createLogger } from "@kan/logger";
 import {
   generateUID,
   getSeatLimit,
@@ -23,6 +24,8 @@ import {
   assertCanManageRole,
   assertPermission,
 } from "../utils/permissions";
+
+const log = createLogger("member");
 
 export const memberRouter = createTRPCRouter({
   invite: protectedProcedure
@@ -103,17 +106,44 @@ export const memberRouter = createTRPCRouter({
         // Update the Stripe subscription
         if (activeTeamSubscription?.stripeSubscriptionId && !unlimitedSeats) {
           try {
-            await updateSubscriptionSeats(
+            const updatedSubscription = await updateSubscriptionSeats(
               activeTeamSubscription.stripeSubscriptionId,
               1,
             );
+            log.info(
+              {
+                workspacePublicId: workspace.publicId,
+                stripeSubscriptionId:
+                  activeTeamSubscription.stripeSubscriptionId,
+                newQuantity: updatedSubscription.items.data[0]?.quantity,
+              },
+              "Incremented Stripe subscription seats for invited member",
+            );
           } catch (error) {
-            console.error("Failed to update Stripe subscription seats:", error);
+            log.error(
+              {
+                err: error,
+                workspacePublicId: workspace.publicId,
+                stripeSubscriptionId:
+                  activeTeamSubscription.stripeSubscriptionId,
+              },
+              "Failed to increment Stripe subscription seats",
+            );
             throw new TRPCError({
               message: `Failed to update subscription for the new member.`,
               code: "INTERNAL_SERVER_ERROR",
             });
           }
+        } else if (activeTeamSubscription) {
+          log.warn(
+            {
+              workspacePublicId: workspace.publicId,
+              hasStripeSubscriptionId:
+                !!activeTeamSubscription.stripeSubscriptionId,
+              unlimitedSeats,
+            },
+            "Skipped Stripe seat increment for invited member",
+          );
         }
 
         const seatLimit = getSeatLimit(subscriptions);
@@ -262,16 +292,40 @@ export const memberRouter = createTRPCRouter({
         // Only decrease seats if there's an active subscription and stripeSubscriptionId
         if (activeTeamSubscription?.stripeSubscriptionId && !unlimitedSeats) {
           try {
-            await updateSubscriptionSeats(
+            const updatedSubscription = await updateSubscriptionSeats(
               activeTeamSubscription.stripeSubscriptionId,
               -1,
             );
+            log.info(
+              {
+                workspacePublicId: workspace.publicId,
+                stripeSubscriptionId:
+                  activeTeamSubscription.stripeSubscriptionId,
+                newQuantity: updatedSubscription.items.data[0]?.quantity,
+              },
+              "Decremented Stripe subscription seats for removed member",
+            );
           } catch (error) {
-            console.error(
-              "Failed to decrease Stripe subscription seats:",
-              error,
+            log.error(
+              {
+                err: error,
+                workspacePublicId: workspace.publicId,
+                stripeSubscriptionId:
+                  activeTeamSubscription.stripeSubscriptionId,
+              },
+              "Failed to decrease Stripe subscription seats",
             );
           }
+        } else if (activeTeamSubscription) {
+          log.warn(
+            {
+              workspacePublicId: workspace.publicId,
+              hasStripeSubscriptionId:
+                !!activeTeamSubscription.stripeSubscriptionId,
+              unlimitedSeats,
+            },
+            "Skipped Stripe seat decrement for removed member",
+          );
         }
       }
 
@@ -647,17 +701,44 @@ export const memberRouter = createTRPCRouter({
         // Update the Stripe subscription
         if (activeTeamSubscription?.stripeSubscriptionId && !unlimitedSeats) {
           try {
-            await updateSubscriptionSeats(
+            const updatedSubscription = await updateSubscriptionSeats(
               activeTeamSubscription.stripeSubscriptionId,
               1,
             );
+            log.info(
+              {
+                workspacePublicId: workspace.publicId,
+                stripeSubscriptionId:
+                  activeTeamSubscription.stripeSubscriptionId,
+                newQuantity: updatedSubscription.items.data[0]?.quantity,
+              },
+              "Incremented Stripe subscription seats for invite link acceptance",
+            );
           } catch (error) {
-            console.error("Failed to update Stripe subscription seats:", error);
+            log.error(
+              {
+                err: error,
+                workspacePublicId: workspace.publicId,
+                stripeSubscriptionId:
+                  activeTeamSubscription.stripeSubscriptionId,
+              },
+              "Failed to increment Stripe subscription seats",
+            );
             throw new TRPCError({
               message: `Failed to update subscription for the new member.`,
               code: "INTERNAL_SERVER_ERROR",
             });
           }
+        } else if (activeTeamSubscription) {
+          log.warn(
+            {
+              workspacePublicId: workspace.publicId,
+              hasStripeSubscriptionId:
+                !!activeTeamSubscription.stripeSubscriptionId,
+              unlimitedSeats,
+            },
+            "Skipped Stripe seat increment for invite link acceptance",
+          );
         }
 
         const seatLimit = getSeatLimit(subscriptions);

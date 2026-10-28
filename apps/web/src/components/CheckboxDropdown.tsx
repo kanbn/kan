@@ -28,7 +28,6 @@ interface CheckboxDropdownProps {
   items?: Item[];
   groups?: Group[];
   createNewItemLabel?: string;
-  menuSpacing?: "sm" | "md" | "lg";
   position?: "left" | "right";
   handleSelect: (
     groupKey: string | null,
@@ -48,7 +47,6 @@ export default function CheckboxDropdown({
   items,
   groups,
   createNewItemLabel = "Create new",
-  menuSpacing = "sm",
   position = "left",
   handleSelect,
   handleEdit,
@@ -64,12 +62,6 @@ export default function CheckboxDropdown({
   const selectedGroupDetails = groups?.find(
     (group) => group.key === selectedGroup,
   );
-
-  const menuSpacingClass = {
-    sm: "top-[26px]",
-    md: "top-[32px]",
-    lg: "top-[38px]",
-  };
 
   const renderSelectedCount = (count?: number) =>
     count ? (
@@ -176,9 +168,8 @@ export default function CheckboxDropdown({
         >
           <Menu.Items
             className={twMerge(
-              "mt-2s absolute z-50 w-56 origin-top-left rounded-md border-[1px] border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-500 dark:bg-dark-200",
+              "absolute top-full z-50 mt-1 w-56 origin-top-left rounded-md border-[1px] border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-500 dark:bg-dark-200",
               position === "left" ? "left-0" : "right-0",
-              menuSpacingClass[menuSpacing],
             )}
           >
             <div className="max-h-[350px] overflow-y-auto p-1">
