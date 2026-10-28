@@ -1,8 +1,11 @@
+import { createHash } from "crypto";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { RateLimiterMemory, RateLimiterRedis } from "rate-limiter-flexible";
 
 import { getRedisClient } from "@kan/db/redis";
 import { createLogger } from "@kan/logger";
+
+import { getApiToken } from "./apiToken";
 
 const log = createLogger("rateLimit");
 
@@ -11,6 +14,11 @@ export interface RateLimitOptions {
   duration?: number;
   identifier?: (req: NextApiRequest) => string | Promise<string>;
   errorMessage?: string;
+  onRateLimit?: (
+    req: NextApiRequest,
+    res: NextApiResponse,
+    errorMessage: string,
+  ) => unknown;
 }
 
 const defaultIdentifier = (req: NextApiRequest): string => {
@@ -29,6 +37,14 @@ const defaultIdentifier = (req: NextApiRequest): string => {
     "unknown";
 
   return ip;
+};
+
+export const tokenOrIpIdentifier = (req: NextApiRequest): string => {
+  const token = getApiToken(req);
+  if (token) {
+    return `token_${createHash("sha256").update(token).digest("hex")}`;
+  }
+  return defaultIdentifier(req);
 };
 
 const DEFAULT_OPTIONS = {
@@ -91,6 +107,10 @@ export function withRateLimit(
         typeof error === "object" &&
         ("msBeforeNext" in error || "remainingPoints" in error)
       ) {
+        if (options.onRateLimit) {
+          return options.onRateLimit(req, res, errorMessage);
+        }
+
         return res.status(429).json({
           message: errorMessage,
         });

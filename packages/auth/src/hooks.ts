@@ -5,7 +5,7 @@ import { env } from "next-runtime-env";
 import type { dbClient } from "@kan/db/client";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
-import { createSubscriber, triggerSubscriberWorkflow } from "@kan/email";
+import { subscriber } from "@kan/email";
 import { createLogger } from "@kan/logger";
 import { createS3Client } from "@kan/shared";
 
@@ -103,7 +103,7 @@ export function createDatabaseHooks(db: dbClient) {
               ? `${env("NEXT_PUBLIC_STORAGE_URL")}/${env("NEXT_PUBLIC_AVATAR_BUCKET_NAME")}/${avatarKey}`
               : undefined;
 
-            await createSubscriber({
+            await subscriber?.subscribers.create({
               publicId: user.id,
               email: user.email,
               externalId: user.id,
@@ -127,8 +127,9 @@ export function createDatabaseHooks(db: dbClient) {
               { workflowId: "user-signup", userId: user.id, email: user.email },
               "Triggering user-signup workflow",
             );
-            await triggerSubscriberWorkflow("user-signup", {
-              publicId: user.id,
+            await subscriber?.workflows.trigger({
+              key: "user-signup",
+              subscriber: { publicId: user.id },
             });
             log.info(
               { workflowId: "user-signup", userId: user.id },

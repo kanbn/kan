@@ -22,6 +22,7 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { getBoardReturnUrl } from "~/utils/board-return-url";
 import { invalidateCard } from "~/utils/cardInvalidation";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmation";
@@ -174,7 +175,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     modalStates,
   } = useModal();
   const { showPopup } = usePopup();
-  const { workspace } = useWorkspace();
+  const { workspace, selectWorkspaceById } = useWorkspace();
   const { canEditCard } = usePermissions();
   const { data: session } = authClient.useSession();
   const [activeChecklistForm, setActiveChecklistForm] = useState<string | null>(
@@ -203,6 +204,11 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     }
   }, [router, cardId, isLoading, error, card]);
 
+  const cardWorkspacePublicId = card?.list.board.workspace.publicId;
+  useEffect(() => {
+    if (cardWorkspacePublicId) selectWorkspaceById(cardWorkspacePublicId);
+  }, [cardWorkspacePublicId, selectWorkspaceById]);
+
   const isCreator = card?.createdBy && session?.user.id === card.createdBy;
   const canEdit = canEditCard || isCreator;
 
@@ -213,6 +219,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const board = card?.list.board;
   const workspaceMembers = board?.workspace.members;
   const boardId = board?.publicId;
+  const boardReturnUrl = getBoardReturnUrl(
+    router.query.returnUrl,
+    `/${isTemplate ? "templates" : "boards"}/${boardId}`,
+  );
 
   const editorWorkspaceMembers =
     workspaceMembers
@@ -340,7 +350,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                 <IoChevronForwardSharp className="h-[10px] w-[10px] text-light-900 dark:text-dark-900" />
                 <Link
                   className="whitespace-nowrap text-sm font-bold leading-[1.5rem] text-light-900 dark:text-dark-950"
-                  href={`${isTemplate ? "/templates" : "/boards"}/${board?.publicId}`}
+                  href={boardReturnUrl}
                 >
                   {board?.name}
                 </Link>
@@ -370,7 +380,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                   cardIndex={card?.index}
                 />
                 <Link
-                  href={`/${isTemplate ? "templates" : "boards"}/${boardId}`}
+                  href={boardReturnUrl}
                   className="flex h-7 w-7 items-center justify-center rounded-[5px] text-light-900 hover:bg-light-200 dark:text-dark-900 dark:hover:bg-dark-200"
                   aria-label={t`Close`}
                 >
