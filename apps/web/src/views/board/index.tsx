@@ -93,7 +93,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const router = useRouter();
   const utils = api.useUtils();
   const { showPopup } = usePopup();
-  const { workspace } = useWorkspace();
+  const { workspace, selectWorkspaceById } = useWorkspace();
   const { openModal, modalContentType, entityId, isOpen, setModalState } =
     useModal();
   const [selectedPublicListId, setSelectedPublicListId] =
@@ -224,6 +224,11 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       }
     }
   }, [router, boardId, isQueryLoading, error, boardData]);
+
+  const boardWorkspacePublicId = boardData?.workspace.publicId;
+  useEffect(() => {
+    if (boardWorkspacePublicId) selectWorkspaceById(boardWorkspacePublicId);
+  }, [boardWorkspacePublicId, selectWorkspaceById]);
 
   const refetchBoard = async () => {
     if (boardId) await utils.board.byId.refetch({ boardPublicId: boardId });
