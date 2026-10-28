@@ -14,6 +14,11 @@ export interface RateLimitOptions {
   duration?: number;
   identifier?: (req: NextApiRequest) => string | Promise<string>;
   errorMessage?: string;
+  onRateLimit?: (
+    req: NextApiRequest,
+    res: NextApiResponse,
+    errorMessage: string,
+  ) => unknown;
 }
 
 const defaultIdentifier = (req: NextApiRequest): string => {
@@ -102,6 +107,10 @@ export function withRateLimit(
         typeof error === "object" &&
         ("msBeforeNext" in error || "remainingPoints" in error)
       ) {
+        if (options.onRateLimit) {
+          return options.onRateLimit(req, res, errorMessage);
+        }
+
         return res.status(429).json({
           message: errorMessage,
         });
