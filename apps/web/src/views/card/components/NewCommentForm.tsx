@@ -18,9 +18,11 @@ interface FormValues {
 const NewCommentForm = ({
   cardPublicId,
   workspaceMembers,
+  onCommentCreated,
 }: {
   cardPublicId: string;
   workspaceMembers: WorkspaceMember[];
+  onCommentCreated?: (commentPublicId: string) => void;
 }) => {
   const utils = api.useUtils();
   const { showPopup } = usePopup();
@@ -32,6 +34,9 @@ const NewCommentForm = ({
   });
 
   const addCommentMutation = api.card.addComment.useMutation({
+    onSuccess: (comment) => {
+      onCommentCreated?.(comment.publicId);
+    },
     onError: (_error, _newList) => {
       showPopup({
         header: t`Unable to add comment`,
