@@ -60,7 +60,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        331
+        348
       ]
     ],
     "translation": "{0} | {1}"
@@ -433,11 +433,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        486
+        504
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        209
+        211
       ]
     ],
     "translation": "Aktivitet"
@@ -557,7 +557,7 @@
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
-        85
+        90
       ]
     ],
     "translation": "Tilføj kommentar... (skriv '/' for at åbne kommandoer eller '@' for at nævne)"
@@ -656,7 +656,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        102
+        103
       ]
     ],
     "translation": "tilføjede {0} etiketter: <0>{labelList}</0>"
@@ -668,7 +668,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        132
+        133
       ]
     ],
     "translation": "tilføjede en tjekliste"
@@ -680,7 +680,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        135
+        136
       ]
     ],
     "translation": "tilføjede et punkt på tjeklisten"
@@ -692,7 +692,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        128
+        129
       ]
     ],
     "translation": "tilføjede en etiket til kortet"
@@ -704,7 +704,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        130
+        131
       ]
     ],
     "translation": "tilføjede et medlem til kortet"
@@ -716,7 +716,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        140
+        141
       ]
     ],
     "translation": "tilføjede en vedhæftet fil"
@@ -732,7 +732,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        278
+        279
       ]
     ],
     "translation": "tilføjede en vedhæftet fil <0>{0}</0>"
@@ -748,7 +748,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        208
+        209
       ]
     ],
     "translation": "tilføjede tjeklisten <0>{0}</0>"
@@ -764,7 +764,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        232
+        233
       ]
     ],
     "translation": "tilføjede tjeklistepunktet <0>{0}</0>"
@@ -780,7 +780,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        192
+        193
       ]
     ],
     "translation": "tilføjede etiketten <0>{0}</0>"
@@ -1332,7 +1332,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        172
+        173
       ]
     ],
     "translation": "tildelte <0>{0}</0> til kortet"
@@ -1607,7 +1607,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        331
+        348
       ],
       [
         "src/views/public/board/index.tsx",
@@ -2364,7 +2364,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        331
+        348
       ]
     ],
     "translation": "Kort"
@@ -2416,11 +2416,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        394
+        411
       ],
       [
         "src/views/card/index.tsx",
-        431
+        448
       ]
     ],
     "translation": "Kortet blev ikke fundet"
@@ -2464,7 +2464,7 @@
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        38
+        40
       ]
     ],
     "translation": "Kortets URL er kopieret til udklipsholderen"
@@ -2528,11 +2528,11 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        303
+        304
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        317
+        318
       ]
     ],
     "translation": "ændrede forfaldsdatoen til <0>{formattedDate}</0>"
@@ -2708,7 +2708,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        385
+        402
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -2840,7 +2840,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        137
+        138
       ]
     ],
     "translation": "fuldførte et punkt på tjeklisten"
@@ -2856,7 +2856,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        249
+        250
       ]
     ],
     "translation": "fuldførte tjeklistepunktet <0>{0}</0>"
@@ -3438,7 +3438,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        124
+        125
       ]
     ],
     "translation": "oprettede kortet"
@@ -3869,7 +3869,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        134
+        135
       ]
     ],
     "translation": "slettede en tjekliste"
@@ -3881,7 +3881,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        139
+        140
       ]
     ],
     "translation": "slettede et punkt på tjeklisten"
@@ -3897,7 +3897,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        224
+        225
       ]
     ],
     "translation": "slettede tjeklisten <0>{0}</0>"
@@ -3913,7 +3913,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        267
+        268
       ]
     ],
     "translation": "slettede tjeklistepunktet <0>{0}</0>"
@@ -4181,7 +4181,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        154
+        159
       ]
     ],
     "translation": "Forfaldsdato"
@@ -6291,7 +6291,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        134
+        139
       ]
     ],
     "translation": "Etiketter"
@@ -6480,7 +6480,7 @@
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        36
+        38
       ],
       [
         "src/views/public/board/index.tsx",
@@ -6500,7 +6500,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        125
+        130
       ]
     ],
     "translation": "Liste"
@@ -6556,7 +6556,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        579
+        664
       ]
     ],
     "translation": "Indlæs flere aktiviteter"
@@ -6580,7 +6580,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        579
+        664
       ]
     ],
     "translation": "Indlæser..."
@@ -6692,7 +6692,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        138
+        139
       ]
     ],
     "translation": "markerede et punkt på tjeklisten som ikke fuldført"
@@ -6708,7 +6708,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        258
+        259
       ]
     ],
     "translation": "markerede tjeklistepunktet <0>{0}</0> som ikke fuldført"
@@ -6768,11 +6768,11 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        55
+        56
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        88
+        89
       ],
       [
         "src/views/members/index.tsx",
@@ -6828,7 +6828,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        144
+        149
       ],
       [
         "src/views/members/index.tsx",
@@ -6987,7 +6987,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        160
+        161
       ]
     ],
     "translation": "flyttede kortet fra <0>{0}</0> til <1>{1}</1>"
@@ -6999,7 +6999,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        127
+        128
       ]
     ],
     "translation": "flyttede kortet til en anden liste"
@@ -8231,15 +8231,15 @@
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
-        38
-      ],
-      [
-        "src/views/card/index.tsx",
-        246
+        43
       ],
       [
         "src/views/card/index.tsx",
         259
+      ],
+      [
+        "src/views/card/index.tsx",
+        272
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -8355,7 +8355,7 @@
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        45
+        47
       ],
       [
         "src/views/public/board/index.tsx",
@@ -8695,7 +8695,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        116
+        117
       ]
     ],
     "translation": "fjernede {0} etiketter: <0>{labelList}</0>"
@@ -8707,7 +8707,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        129
+        130
       ]
     ],
     "translation": "fjernede en etiket fra kortet"
@@ -8719,7 +8719,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        131
+        132
       ]
     ],
     "translation": "fjernede et medlem fra kortet"
@@ -8731,7 +8731,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        141
+        142
       ]
     ],
     "translation": "fjernede en vedhæftet fil"
@@ -8747,7 +8747,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        288
+        289
       ]
     ],
     "translation": "fjernede en vedhæftet fil <0>{0}</0>"
@@ -8775,7 +8775,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        200
+        201
       ]
     ],
     "translation": "fjernede etiketten <0>{0}</0>"
@@ -8787,11 +8787,11 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        144
+        145
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        324
+        325
       ]
     ],
     "translation": "fjernede forfaldsdatoen"
@@ -8803,7 +8803,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        133
+        134
       ]
     ],
     "translation": "omdøbte en tjekliste"
@@ -8819,7 +8819,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        216
+        217
       ]
     ],
     "translation": "omdøbte tjeklisten <0>{0}</0>"
@@ -8835,7 +8835,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        240
+        241
       ]
     ],
     "translation": "omdøbte tjeklistepunktet til <0>{0}</0>"
@@ -9276,13 +9276,12 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        169
+        170
       ]
     ],
     "translation": "tildelte sig selv til kortet"
   },
   "f2zPy/": {
-    "translation": "",
     "message": "Self-hosting? Set <0>{CREDENTIALS_ENV_HINT}</0> to enable email and password sign in, or configure an OAuth provider. See the <1>self-hosting guide</1>.",
     "placeholders": {
       "CREDENTIALS_ENV_HINT": [
@@ -9295,7 +9294,8 @@
         "src/components/AuthForm.tsx",
         385
       ]
-    ]
+    ],
+    "translation": ""
   },
   "RoafuO": {
     "message": "Send feedback",
@@ -9396,7 +9396,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        142
+        143
       ]
     ],
     "translation": "angav forfaldsdatoen"
@@ -9524,6 +9524,30 @@
       ]
     ],
     "translation": "Genveje"
+  },
+  "0XmVWH": {
+    "translation": "",
+    "message": "Show newest activity first",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ActivitySortOrderToggle.tsx",
+        17
+      ]
+    ]
+  },
+  "EL+7I2": {
+    "translation": "",
+    "message": "Show oldest activity first",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ActivitySortOrderToggle.tsx",
+        16
+      ]
+    ]
   },
   "5lWFkC": {
     "message": "Sign in",
@@ -9881,7 +9905,7 @@
     "origin": [
       [
         "src/views/card/components/NewCommentForm.tsx",
-        60
+        65
       ]
     ],
     "translation": "Indsend"
@@ -9893,7 +9917,7 @@
     "origin": [
       [
         "src/views/card/components/NewCommentForm.tsx",
-        92
+        97
       ]
     ],
     "translation": ""
@@ -10805,7 +10829,7 @@
     "origin": [
       [
         "src/views/card/components/NewCommentForm.tsx",
-        37
+        42
       ]
     ],
     "translation": "Kunne ikke tilføje kommentar"
@@ -10817,7 +10841,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        258
+        271
       ]
     ],
     "translation": "Kunne ikke tilføje etiket"
@@ -10861,7 +10885,7 @@
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        43
+        45
       ],
       [
         "src/views/public/board/index.tsx",
@@ -11185,7 +11209,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        245
+        258
       ]
     ],
     "translation": "Kunne ikke opdatere kort"
@@ -11345,7 +11369,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        183
+        184
       ]
     ],
     "translation": "fjernede tildelingen af <0>{0}</0> fra kortet"
@@ -11357,7 +11381,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        180
+        181
       ]
     ],
     "translation": "fjernede sin egen tildeling fra kortet"
@@ -11595,7 +11619,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        136
+        137
       ]
     ],
     "translation": "opdaterede et punkt på tjeklisten"
@@ -11607,7 +11631,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        126
+        127
       ]
     ],
     "translation": "opdaterede beskrivelsen"
@@ -11619,7 +11643,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        143
+        144
       ]
     ],
     "translation": "opdaterede forfaldsdatoen"
@@ -11631,7 +11655,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        125
+        126
       ]
     ],
     "translation": "opdaterede titlen"
@@ -11647,7 +11671,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        152
+        153
       ]
     ],
     "translation": "opdaterede titlen til <0>{0}</0>"
