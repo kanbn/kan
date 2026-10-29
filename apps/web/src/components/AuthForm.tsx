@@ -427,7 +427,7 @@ export function Auth({
                       t`Please enter a valid password`}
                   </p>
                 )}
-                {!isSignUp && (
+                {!isSignUp && isEmailSendingEnabled && (
                   <div className="mt-1 flex justify-end">
                     <Link
                       href="/forgot-password"
