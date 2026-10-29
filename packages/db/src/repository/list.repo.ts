@@ -206,7 +206,7 @@ export const bulkCreate = async (
 };
 
 export const getByPublicId = async (db: dbClient, listPublicId: string) => {
-  return db.query.lists.findFirst({
+  const result = await db.query.lists.findFirst({
     columns: {
       id: true,
       publicId: true,
@@ -214,8 +214,23 @@ export const getByPublicId = async (db: dbClient, listPublicId: string) => {
       boardId: true,
       index: true,
     },
+    with: {
+      board: {
+        columns: { workspaceId: true, type: true },
+      },
+    },
     where: and(eq(lists.publicId, listPublicId), isNull(lists.deletedAt)),
   });
+
+  if (!result) return result;
+
+  const { board, ...list } = result;
+
+  return {
+    ...list,
+    workspaceId: board.workspaceId,
+    boardType: board.type,
+  };
 };
 
 export const getWithCardsByPublicId = async (
@@ -419,7 +434,7 @@ export const getWorkspaceAndListIdByListPublicId = async (
   listPublicId: string,
 ) => {
   const result = await db.query.lists.findFirst({
-    columns: { id: true, name: true, createdBy: true },
+    columns: { id: true, name: true, createdBy: true, boardId: true },
     where: and(eq(lists.publicId, listPublicId), isNull(lists.deletedAt)),
     with: {
       board: {
@@ -427,6 +442,7 @@ export const getWorkspaceAndListIdByListPublicId = async (
           publicId: true,
           workspaceId: true,
           name: true,
+          type: true,
         },
       },
     },
@@ -439,6 +455,8 @@ export const getWorkspaceAndListIdByListPublicId = async (
         name: result.name,
         createdBy: result.createdBy,
         workspaceId: result.board.workspaceId,
+        boardId: result.boardId,
+        boardType: result.board.type,
         boardPublicId: result.board.publicId,
         boardName: result.board.name,
       }

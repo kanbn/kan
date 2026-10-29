@@ -15,6 +15,7 @@ import {
 import type { dbClient } from "@kan/db/client";
 import type { BoardVisibilityStatus } from "@kan/db/schema";
 import {
+  boardMembers,
   boards,
   cardActivities,
   cardAttachments,
@@ -31,6 +32,8 @@ import {
 } from "@kan/db/schema";
 import { generateUID, normalizeDescription } from "@kan/shared/utils";
 
+import * as boardMemberRepo from "./boardMember.repo";
+
 export const getCount = async (db: dbClient) => {
   const result = await db
     .select({ count: count() })
@@ -44,8 +47,19 @@ export const getAllByWorkspaceId = async (
   db: dbClient,
   workspaceId: number,
   userId: string,
-  opts?: { type?: "regular" | "template"; archived?: boolean },
+  opts?: {
+    type?: "regular" | "template";
+    archived?: boolean;
+    isWorkspaceAdmin?: boolean;
+  },
 ) => {
+  // Templates and public boards stay visible to the whole workspace;
+  // regular private boards are scoped to explicit board membership unless
+  // the user is a workspace admin.
+  const memberBoardIds = opts?.isWorkspaceAdmin
+    ? undefined
+    : await boardMemberRepo.getMemberBoardIds(db, { workspaceId, userId });
+
   const boardsData = await db.query.boards.findMany({
     columns: {
       publicId: true,
@@ -80,6 +94,13 @@ export const getAllByWorkspaceId = async (
       opts?.type ? eq(boards.type, opts.type) : undefined,
       opts?.archived !== undefined
         ? eq(boards.isArchived, opts.archived)
+        : undefined,
+      memberBoardIds
+        ? or(
+            eq(boards.type, "template"),
+            eq(boards.visibility, "public"),
+            inArray(boards.id, memberBoardIds),
+          )
         : undefined,
     ),
   });
@@ -563,6 +584,7 @@ export const getWithListIdsByPublicId = (
       id: true,
       workspaceId: true,
       createdBy: true,
+      type: true,
     },
     with: {
       lists: {
@@ -611,25 +633,37 @@ export const create = async (
     sourceBoardId?: number;
   },
 ) => {
-  const [result] = await db
-    .insert(boards)
-    .values({
-      publicId: boardInput.publicId ?? generateUID(),
-      name: boardInput.name,
-      createdBy: boardInput.createdBy,
-      workspaceId: boardInput.workspaceId,
-      importId: boardInput.importId,
-      slug: boardInput.slug,
-      type: boardInput.type ?? "regular",
-      sourceBoardId: boardInput.sourceBoardId,
-    })
-    .returning({
-      id: boards.id,
-      publicId: boards.publicId,
-      name: boards.name,
-    });
+  return db.transaction(async (tx) => {
+    const type = boardInput.type ?? "regular";
 
-  return result;
+    const [result] = await tx
+      .insert(boards)
+      .values({
+        publicId: boardInput.publicId ?? generateUID(),
+        name: boardInput.name,
+        createdBy: boardInput.createdBy,
+        workspaceId: boardInput.workspaceId,
+        importId: boardInput.importId,
+        slug: boardInput.slug,
+        type,
+        sourceBoardId: boardInput.sourceBoardId,
+      })
+      .returning({
+        id: boards.id,
+        publicId: boards.publicId,
+        name: boards.name,
+      });
+
+    if (result && type === "regular") {
+      await boardMemberRepo.addCreatorAsAdmin(tx, {
+        boardId: result.id,
+        workspaceId: boardInput.workspaceId,
+        userId: boardInput.createdBy,
+      });
+    }
+
+    return result;
+  });
 };
 
 export const update = async (
@@ -721,6 +755,8 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
       id: true,
       workspaceId: true,
       createdBy: true,
+      type: true,
+      visibility: true,
     },
     where: eq(boards.publicId, boardPublicId),
   });
@@ -828,6 +864,14 @@ export const createFromSnapshot = async (
       });
 
     if (!newBoard) throw new Error("Failed to create board");
+
+    if (args.type === "regular") {
+      await boardMemberRepo.addCreatorAsAdmin(tx, {
+        boardId: newBoard.id,
+        workspaceId: args.workspaceId,
+        userId: args.createdBy,
+      });
+    }
 
     // Labels
     const srcLabels = args.source.labels;
@@ -998,6 +1042,7 @@ export const moveToWorkspace = async (
   db: dbClient,
   boardId: number,
   targetWorkspaceId: number,
+  movedBy: string,
   newSlug?: string,
 ) => {
   return db.transaction(async (tx) => {
@@ -1044,6 +1089,16 @@ export const moveToWorkspace = async (
           .where(inArray(cardToWorkspaceMembers.cardId, cardIds));
       }
     }
+
+    // Board memberships reference members of the old workspace; reset them
+    // so only the user who moved the board has access in the new workspace.
+    await tx.delete(boardMembers).where(eq(boardMembers.boardId, boardId));
+
+    await boardMemberRepo.addCreatorAsAdmin(tx, {
+      boardId,
+      workspaceId: targetWorkspaceId,
+      userId: movedBy,
+    });
 
     return updatedBoard;
   });

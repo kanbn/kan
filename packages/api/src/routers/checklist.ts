@@ -7,7 +7,7 @@ import * as checklistRepo from "@kan/db/repository/checklist.repo";
 import { stripHtml } from "@kan/shared/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertPermission } from "../utils/permissions";
+import { assertBoardAccess, assertPermission } from "../utils/permissions";
 
 const checklistSchema = z.object({
   publicId: z.string().length(12),
@@ -59,6 +59,11 @@ export const checklistRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
       await assertPermission(ctx.db, userId, card.workspaceId, "card:edit");
+      await assertBoardAccess(ctx.db, userId, {
+        id: card.boardId,
+        workspaceId: card.workspaceId,
+        type: card.boardType,
+      });
 
       const newChecklist = await checklistRepo.create(ctx.db, {
         name: input.name,
@@ -122,6 +127,11 @@ export const checklistRouter = createTRPCRouter({
         checklist.card.list.board.workspace.id,
         "card:edit",
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: checklist.card.list.board.id,
+        workspaceId: checklist.card.list.board.workspace.id,
+        type: checklist.card.list.board.type,
+      });
 
       const previousName = checklist.name;
 
@@ -182,6 +192,11 @@ export const checklistRouter = createTRPCRouter({
         checklist.card.list.board.workspace.id,
         "card:edit",
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: checklist.card.list.board.id,
+        workspaceId: checklist.card.list.board.workspace.id,
+        type: checklist.card.list.board.type,
+      });
 
       await checklistRepo.softDeleteAllItemsByChecklistId(ctx.db, {
         checklistId: checklist.id,
@@ -253,6 +268,11 @@ export const checklistRouter = createTRPCRouter({
         checklist.card.list.board.workspace.id,
         "card:edit",
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: checklist.card.list.board.id,
+        workspaceId: checklist.card.list.board.workspace.id,
+        type: checklist.card.list.board.type,
+      });
 
       const newChecklistItem = await checklistRepo.createItem(ctx.db, {
         title: input.title,
@@ -330,6 +350,11 @@ export const checklistRouter = createTRPCRouter({
         item.checklist.card.list.board.workspace.id,
         "card:edit",
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: item.checklist.card.list.board.id,
+        workspaceId: item.checklist.card.list.board.workspace.id,
+        type: item.checklist.card.list.board.type,
+      });
 
       const previousTitle = item.title;
 
@@ -418,6 +443,11 @@ export const checklistRouter = createTRPCRouter({
         item.checklist.card.list.board.workspace.id,
         "card:edit",
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: item.checklist.card.list.board.id,
+        workspaceId: item.checklist.card.list.board.workspace.id,
+        type: item.checklist.card.list.board.type,
+      });
 
       const deleted = await checklistRepo.softDeleteItemById(ctx.db, {
         id: item.id,
