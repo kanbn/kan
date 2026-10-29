@@ -333,6 +333,7 @@ describe("card cover duplication", () => {
       name: "Target",
       createdBy: "user-123",
       workspaceId: cardMeta.workspaceId,
+      boardId: 3,
       boardPublicId: cardMeta.boardPublicId,
       boardName: cardMeta.boardName,
     });
