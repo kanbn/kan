@@ -44,6 +44,13 @@ describe("board summary repository view", () => {
         createdBy: user.id,
       })
       .returning();
+    await db.insert(lists).values({
+      publicId: "emptylist123",
+      name: "Empty list",
+      index: 1,
+      boardId: board!.id,
+      createdBy: user.id,
+    });
     const [card] = await db
       .insert(cards)
       .values({
@@ -73,6 +80,17 @@ describe("board summary repository view", () => {
         createdBy: user.id,
       })
       .returning();
+    const [deletedChecklist] = await db
+      .insert(checklists)
+      .values({
+        publicId: "deletedcheck",
+        name: "Deleted checklist",
+        index: 1,
+        cardId: card!.id,
+        createdBy: user.id,
+        deletedAt: new Date(),
+      })
+      .returning();
 
     await db.insert(checklistItems).values([
       {
@@ -89,6 +107,14 @@ describe("board summary repository view", () => {
         completed: false,
         index: 1,
         checklistId: checklist!.id,
+        createdBy: user.id,
+      },
+      {
+        publicId: "item45678901",
+        title: "In deleted checklist",
+        completed: true,
+        index: 0,
+        checklistId: deletedChecklist!.id,
         createdBy: user.id,
       },
       {
@@ -194,8 +220,24 @@ describe("board summary repository view", () => {
         completedChecklistItemCount: 0,
       },
     });
+    expect(Object.keys(summaryCard ?? {})).not.toContain("id");
 
     expect(() => boardDetailSchema.parse(full)).not.toThrow();
+    expect(() => boardDetailSchema.parse(summary)).not.toThrow();
+  });
+
+  it("returns no summary rows for an empty list filter", async () => {
+    const summary = await boardRepo.getByPublicId(db, "board1234567", userId, {
+      members: [],
+      labels: [],
+      lists: ["emptylist123"],
+      dueDate: [],
+      type: "regular",
+      cardView: "summary",
+    });
+
+    expect(summary?.lists).toHaveLength(1);
+    expect(summary?.lists[0]?.cards).toEqual([]);
     expect(() => boardDetailSchema.parse(summary)).not.toThrow();
   });
 });
