@@ -1773,6 +1773,18 @@
     ],
     "translation": "Board URL copied to clipboard"
   },
+  "spRiNh": {
+    "translation": "Board URL is required",
+    "message": "Board URL is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/UpdateBoardSlugForm.tsx",
+        42
+      ]
+    ]
+  },
   "TmvrjU": {
     "message": "Board URL must be at least 3 characters long",
     "placeholders": {},
@@ -1783,7 +1795,8 @@
         42
       ]
     ],
-    "translation": "Board URL must be at least 3 characters long"
+    "translation": "Board URL must be at least 3 characters long",
+    "obsolete": true
   },
   "qzdST2": {
     "message": "Board visibility",
@@ -9604,7 +9617,6 @@
     "translation": "Shortcuts"
   },
   "0XmVWH": {
-    "translation": "Show newest activity first",
     "message": "Show newest activity first",
     "placeholders": {},
     "comments": [],
@@ -9613,10 +9625,10 @@
         "src/views/card/components/ActivitySortOrderToggle.tsx",
         17
       ]
-    ]
+    ],
+    "translation": "Show newest activity first"
   },
   "EL+7I2": {
-    "translation": "Show oldest activity first",
     "message": "Show oldest activity first",
     "placeholders": {},
     "comments": [],
@@ -9625,7 +9637,8 @@
         "src/views/card/components/ActivitySortOrderToggle.tsx",
         16
       ]
-    ]
+    ],
+    "translation": "Show oldest activity first"
   },
   "5lWFkC": {
     "message": "Sign in",

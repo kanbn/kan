@@ -1773,6 +1773,18 @@
     ],
     "translation": "Tavlens URL er kopieret til udklipsholderen"
   },
+  "spRiNh": {
+    "translation": "",
+    "message": "Board URL is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/UpdateBoardSlugForm.tsx",
+        42
+      ]
+    ]
+  },
   "TmvrjU": {
     "message": "Board URL must be at least 3 characters long",
     "placeholders": {},
@@ -1783,7 +1795,8 @@
         42
       ]
     ],
-    "translation": "Tavlens URL skal være mindst 3 tegn lang"
+    "translation": "Tavlens URL skal være mindst 3 tegn lang",
+    "obsolete": true
   },
   "qzdST2": {
     "message": "Board visibility",
@@ -9526,7 +9539,6 @@
     "translation": "Genveje"
   },
   "0XmVWH": {
-    "translation": "",
     "message": "Show newest activity first",
     "placeholders": {},
     "comments": [],
@@ -9535,10 +9547,10 @@
         "src/views/card/components/ActivitySortOrderToggle.tsx",
         17
       ]
-    ]
+    ],
+    "translation": ""
   },
   "EL+7I2": {
-    "translation": "",
     "message": "Show oldest activity first",
     "placeholders": {},
     "comments": [],
@@ -9547,7 +9559,8 @@
         "src/views/card/components/ActivitySortOrderToggle.tsx",
         16
       ]
-    ]
+    ],
+    "translation": ""
   },
   "5lWFkC": {
     "message": "Sign in",

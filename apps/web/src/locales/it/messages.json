@@ -1773,6 +1773,18 @@
     ],
     "translation": "URL della board copiato negli appunti"
   },
+  "spRiNh": {
+    "translation": "",
+    "message": "Board URL is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/UpdateBoardSlugForm.tsx",
+        42
+      ]
+    ]
+  },
   "TmvrjU": {
     "message": "Board URL must be at least 3 characters long",
     "placeholders": {},
@@ -1783,7 +1795,8 @@
         42
       ]
     ],
-    "translation": "L'URL della board deve contenere almeno 3 caratteri"
+    "translation": "L'URL della board deve contenere almeno 3 caratteri",
+    "obsolete": true
   },
   "qzdST2": {
     "message": "Board visibility",
@@ -9604,7 +9617,6 @@
     "translation": "Scorciatoie"
   },
   "0XmVWH": {
-    "translation": "",
     "message": "Show newest activity first",
     "placeholders": {},
     "comments": [],
@@ -9613,10 +9625,10 @@
         "src/views/card/components/ActivitySortOrderToggle.tsx",
         17
       ]
-    ]
+    ],
+    "translation": ""
   },
   "EL+7I2": {
-    "translation": "",
     "message": "Show oldest activity first",
     "placeholders": {},
     "comments": [],
@@ -9625,7 +9637,8 @@
         "src/views/card/components/ActivitySortOrderToggle.tsx",
         16
       ]
-    ]
+    ],
+    "translation": ""
   },
   "5lWFkC": {
     "message": "Sign in",
