@@ -17,6 +17,10 @@ import Modal from "~/components/modal";
 import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
+import {
+  setActivitySortOrder,
+  useActivitySortOrder,
+} from "~/hooks/useActivitySortOrder";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -27,6 +31,7 @@ import { invalidateCard } from "~/utils/cardInvalidation";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmation";
 import ActivityList from "./components/ActivityList";
+import { ActivitySortOrderToggle } from "./components/ActivitySortOrderToggle";
 import { AttachmentThumbnails } from "./components/AttachmentThumbnails";
 import { AttachmentUpload } from "./components/AttachmentUpload";
 import Checklists from "./components/Checklists";
@@ -165,6 +170,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
 
 export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const router = useRouter();
+  const activitySortOrder = useActivitySortOrder();
   const utils = api.useUtils();
   const {
     modalContentType,
@@ -175,16 +181,23 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     modalStates,
   } = useModal();
   const { showPopup } = usePopup();
-  const { workspace } = useWorkspace();
+  const { workspace, selectWorkspaceById } = useWorkspace();
   const { canEditCard } = usePermissions();
   const { data: session } = authClient.useSession();
   const [activeChecklistForm, setActiveChecklistForm] = useState<string | null>(
     null,
   );
+  const [recentCommentPublicIds, setRecentCommentPublicIds] = useState<
+    string[]
+  >([]);
 
   const cardId = Array.isArray(router.query.cardId)
     ? router.query.cardId[0]
     : router.query.cardId;
+
+  useEffect(() => {
+    setRecentCommentPublicIds([]);
+  }, [cardId]);
 
   const {
     data: card,
@@ -203,6 +216,11 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
       }
     }
   }, [router, cardId, isLoading, error, card]);
+
+  const cardWorkspacePublicId = card?.list.board.workspace.publicId;
+  useEffect(() => {
+    if (cardWorkspacePublicId) selectWorkspaceById(cardWorkspacePublicId);
+  }, [cardWorkspacePublicId, selectWorkspaceById]);
 
   const isCreator = card?.createdBy && session?.user.id === card.createdBy;
   const canEdit = canEditCard || isCreator;
@@ -276,6 +294,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
       title: values.title,
       description: values.description,
     });
+  };
+
+  const handleCommentCreated = (commentPublicId: string) => {
+    setRecentCommentPublicIds((current) => [...current, commentPublicId]);
   };
 
   // this adds the new created label to selected labels
@@ -477,21 +499,38 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                     </>
                   )}
                   <div className="border-t-[1px] border-light-300 pt-12 dark:border-dark-300">
-                    <h2 className="text-md pb-4 font-medium text-light-1000 dark:text-dark-1000">
-                      {t`Activity`}
-                    </h2>
+                    <header className="flex items-center justify-between pb-4">
+                      <h2 className="text-md font-medium text-light-1000 dark:text-dark-1000">
+                        {t`Activity`}
+                      </h2>
+                      <ActivitySortOrderToggle
+                        order={activitySortOrder}
+                        onChange={setActivitySortOrder}
+                      />
+                    </header>
+                    {!isTemplate && activitySortOrder === "newest" && (
+                      <div className="mb-2">
+                        <NewCommentForm
+                          cardPublicId={cardId}
+                          workspaceMembers={editorWorkspaceMembers}
+                          onCommentCreated={handleCommentCreated}
+                        />
+                      </div>
+                    )}
                     <div>
                       <ActivityList
                         cardPublicId={cardId}
                         isLoading={!card}
-                        isAdmin={workspace.role === "admin"}
+                        order={activitySortOrder}
+                        recentCommentPublicIds={recentCommentPublicIds}
                       />
                     </div>
-                    {!isTemplate && (
+                    {!isTemplate && activitySortOrder === "oldest" && (
                       <div className="mt-6">
                         <NewCommentForm
                           cardPublicId={cardId}
                           workspaceMembers={editorWorkspaceMembers}
+                          onCommentCreated={handleCommentCreated}
                         />
                       </div>
                     )}

@@ -1,4 +1,5 @@
 import type { SocialProvider } from "better-auth/social-providers";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
@@ -36,6 +37,9 @@ import Input from "~/components/Input";
 import { usePopup } from "~/providers/popup";
 
 type AuthProvider = SocialProvider | "oidc";
+
+// Kept out of the translated message so it is never localised.
+const CREDENTIALS_ENV_HINT = "NEXT_PUBLIC_ALLOW_CREDENTIALS=true";
 
 interface FormValues {
   name?: string;
@@ -368,12 +372,33 @@ export function Auth({
       )}
       {!(isCredentialsEnabled || isMagicLinkAvailable) &&
         socialProviders?.length === 0 && (
-          <div className="flex w-full items-center gap-4">
-            <div className="h-[1px] w-1/3 bg-light-600 dark:bg-dark-600" />
-            <span className="text-center text-sm text-light-900 dark:text-dark-900">
-              {t`No authentication methods are currently available`}
-            </span>
-            <div className="h-[1px] w-1/3 bg-light-600 dark:bg-dark-600" />
+          <div className="space-y-4">
+            <div className="flex w-full items-center gap-4">
+              <div className="h-[1px] w-1/3 bg-light-600 dark:bg-dark-600" />
+              <span className="text-center text-sm text-light-900 dark:text-dark-900">
+                {t`No authentication methods are currently available`}
+              </span>
+              <div className="h-[1px] w-1/3 bg-light-600 dark:bg-dark-600" />
+            </div>
+            {!isCloudEnv && (
+              <p className="text-center text-xs text-light-900 dark:text-dark-900">
+                <Trans>
+                  Self-hosting? Set{" "}
+                  <code className="font-mono">{CREDENTIALS_ENV_HINT}</code> to
+                  enable email and password sign in, or configure an OAuth
+                  provider. See the{" "}
+                  <Link
+                    href="https://docs.kan.bn/guides/self-hosting/introduction"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-blue-600 underline dark:text-blue-300"
+                  >
+                    self-hosting guide
+                  </Link>
+                  .
+                </Trans>
+              </p>
+            )}
           </div>
         )}
       {(isCredentialsEnabled || isMagicLinkAvailable) && (

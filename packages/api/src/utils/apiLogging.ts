@@ -4,6 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { createLogger } from "@kan/logger";
 
 import { createNextApiContext } from "../trpc-context";
+import { redactSensitive } from "./redact";
 
 const log = createLogger("api");
 
@@ -23,10 +24,14 @@ export function withApiLogging(
     const route = req.url?.split("?")[0] ?? "unknown";
     const input = {
       ...(req.query &&
-        Object.keys(req.query).length > 0 && { query: req.query }),
+        Object.keys(req.query).length > 0 && {
+          query: redactSensitive(req.query),
+        }),
       ...(req.body &&
         typeof req.body === "object" &&
-        Object.keys(req.body).length > 0 && { body: req.body }),
+        Object.keys(req.body).length > 0 && {
+          body: redactSensitive(req.body),
+        }),
     };
 
     let userId: string | undefined;

@@ -244,7 +244,7 @@ export const boardRouter = createTRPCRouter({
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
         boardSlug: z
           .string()
-          .min(3)
+          .min(1)
           .max(60)
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
         members: z.array(z.string().min(12)).optional(),
@@ -478,7 +478,7 @@ export const boardRouter = createTRPCRouter({
         name: z.string().min(1).optional(),
         slug: z
           .string()
-          .min(3)
+          .min(1)
           .max(60)
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
           .optional(),
@@ -791,7 +791,7 @@ export const boardRouter = createTRPCRouter({
       z.object({
         boardSlug: z
           .string()
-          .min(3)
+          .min(1)
           .max(60)
           .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/),
         boardPublicId: z.string().min(12),
