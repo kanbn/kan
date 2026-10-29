@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { t } from "@lingui/core/macro";
+import { useEffect } from "react";
+
 import type { RouterOutputs } from "~/utils/api";
 import {
   BoardBackground,
