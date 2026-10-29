@@ -67,7 +67,6 @@ import { CardContextMenu } from "./components/CardContextMenu";
 import { CardContextMoveListModal } from "./components/CardContextMoveListModal";
 import CardList from "./components/CardList";
 import CardPreview from "./components/CardPreview";
-import { parseCustomFieldFilters } from "./components/custom-fields/custom-field-filters";
 import { CustomFieldManager } from "./components/custom-fields/custom-field-manager";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
@@ -930,6 +929,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                       )}
                       lists={boardData.allLists}
                       customFields={boardData.customFields}
+                      position="left"
                       isLoading={!boardData}
                     />
                   </>
@@ -1059,6 +1059,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                               listPublicId={list.publicId}
                               cards={cardsByList[list.publicId] ?? list.cards}
                               cardPrefix={boardData.workspace.cardPrefix}
+                              customFields={boardData.customFields}
                               canEditCard={!!canEditCard}
                               freezeHeight={dragCardsByList !== null}
                               getCardHref={(cardPublicId) =>
@@ -1089,6 +1090,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                           <CardPreview
                             card={activeCard}
                             cardPrefix={boardData.workspace.cardPrefix}
+                            customFields={boardData.customFields}
                           />
                         </div>
                       ) : null}
