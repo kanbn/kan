@@ -25,6 +25,7 @@
   "dependencies": {
     "@kan/logger": "workspace:^",
     "@react-email/components": "^1.0.1",
+    "@subscriber.dev/sdk": "^0.1.0",
     "nodemailer": "^7.0.3",
     "react-email": "^5.0.6"
   },
