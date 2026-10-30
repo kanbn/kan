@@ -1,6 +1,7 @@
 import { TRPCError } from "@trpc/server";
 
 import type { dbClient } from "@kan/db/client";
+import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as permissionRepo from "@kan/db/repository/permission.repo";
 import type { Permission, Role } from "@kan/shared";
@@ -290,6 +291,133 @@ export async function assertCanEdit(
   // Neither condition met - deny editing
   throw new TRPCError({
     message: `You do not have permission to edit this entity (${permission})`,
+    code: "FORBIDDEN",
+  });
+}
+
+/**
+ * Check if a user holds the workspace-level "admin" role (distinct from
+ * board-level admin, and from any custom role/permission overrides).
+ */
+export async function isWorkspaceAdmin(
+  db: dbClient,
+  userId: string,
+  workspaceId: number,
+): Promise<boolean> {
+  const member = await permissionRepo.getMemberWithRole(
+    db,
+    userId,
+    workspaceId,
+  );
+
+  return member?.role === "admin";
+}
+
+/**
+ * Check if a user can see a specific board: templates stay open to the
+ * whole workspace, workspace admins see every board, everyone else must
+ * hold an explicit board membership.
+ */
+export async function hasBoardAccess(
+  db: dbClient,
+  userId: string,
+  board: { id: number; workspaceId: number; type: string },
+): Promise<boolean> {
+  if (board.type !== "regular") return true;
+
+  const member = await permissionRepo.getMemberWithRole(
+    db,
+    userId,
+    board.workspaceId,
+  );
+
+  if (!member) return false;
+  if (member.role === "admin") return true;
+
+  const membership = await boardMemberRepo.getMembership(db, {
+    boardId: board.id,
+    userId,
+  });
+
+  return !!membership;
+}
+
+/**
+ * Assert a user can see a board - throws NOT_FOUND (rather than FORBIDDEN)
+ * since uninvited boards should be invisible, not merely inaccessible.
+ *
+ * This is the strict check: it does NOT treat "public" boards as open to
+ * the whole workspace. Use it to gate reads and writes of board-scoped
+ * content (cards, lists, labels, ...), where "public" only ever means
+ * "viewable via the public share link", never "editable by any member".
+ * For board-level read endpoints that should also honor public sharing,
+ * use assertBoardViewAccess instead.
+ */
+export async function assertBoardAccess(
+  db: dbClient,
+  userId: string,
+  board: { id: number; workspaceId: number; type: string },
+): Promise<void> {
+  const allowed = await hasBoardAccess(db, userId, board);
+
+  if (!allowed) {
+    throw new TRPCError({
+      message: `Board not found`,
+      code: "NOT_FOUND",
+    });
+  }
+}
+
+/**
+ * Like assertBoardAccess, but a "public" board is also visible to every
+ * workspace member - matching the pre-existing public share-link feature,
+ * which already lets even anonymous, non-workspace users view it. Reserved
+ * for read-only board endpoints (board.byId, board.all, label.byPublicId);
+ * mutations must keep using assertBoardAccess.
+ */
+export async function assertBoardViewAccess(
+  db: dbClient,
+  userId: string,
+  board: { id: number; workspaceId: number; type: string; visibility: string },
+): Promise<void> {
+  if (board.visibility === "public") return;
+
+  await assertBoardAccess(db, userId, board);
+}
+
+/**
+ * Assert a user can manage a board's membership: workspace admins always
+ * can, otherwise the user must be a board admin themselves.
+ */
+export async function assertCanManageBoardMembers(
+  db: dbClient,
+  userId: string,
+  board: { id: number; workspaceId: number },
+): Promise<void> {
+  const member = await permissionRepo.getMemberWithRole(
+    db,
+    userId,
+    board.workspaceId,
+  );
+
+  if (!member) {
+    throw new TRPCError({
+      message: "You are not a member of this workspace",
+      code: "FORBIDDEN",
+    });
+  }
+
+  if (member.role === "admin") return;
+
+  const membership = await boardMemberRepo.getMembership(db, {
+    boardId: board.id,
+    userId,
+  });
+
+  if (membership?.role === "admin") return;
+
+  throw new TRPCError({
+    message: "You do not have permission to manage members of this board",
     code: "FORBIDDEN",
   });
 }

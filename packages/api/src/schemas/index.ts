@@ -36,4 +36,12 @@ export { listCreateResponseSchema, listUpdateResponseSchema } from "./list";
 
 export { memberInviteResponseSchema } from "./member";
 
+export {
+  boardMemberRoleSchema,
+  boardMemberSchema,
+  boardMemberAddResponseSchema,
+  boardMemberUpdateRoleResponseSchema,
+  boardMemberRemoveResponseSchema,
+} from "./boardMember";
+
 export { attachmentConfirmResponseSchema } from "./attachment";

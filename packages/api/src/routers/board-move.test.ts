@@ -51,6 +51,8 @@ vi.mock("../utils/permissions", () => ({
   assertCanEdit: vi.fn(),
   assertCanDelete: vi.fn(),
   assertPermission: vi.fn(),
+  assertBoardAccess: vi.fn(),
+  isWorkspaceAdmin: vi.fn(),
 }));
 
 vi.mock("@kan/shared/utils", () => ({
@@ -242,6 +244,7 @@ describe("board.move", () => {
       mockDb,
       mockBoard.id,
       mockTargetWorkspace.id,
+      mockUser.id,
       "my-board-abc123",
     );
   });
@@ -262,6 +265,7 @@ describe("board.move", () => {
       mockDb,
       mockBoard.id,
       mockTargetWorkspace.id,
+      mockUser.id,
       "my-board",
     );
   });

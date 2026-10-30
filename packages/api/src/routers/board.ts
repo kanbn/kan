@@ -23,7 +23,14 @@ import {
   boardUpdateResponseSchema,
 } from "../schemas";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
-import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
+import {
+  assertBoardAccess,
+  assertBoardViewAccess,
+  assertCanDelete,
+  assertCanEdit,
+  assertPermission,
+  isWorkspaceAdmin,
+} from "../utils/permissions";
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
@@ -67,6 +74,8 @@ export const boardRouter = createTRPCRouter({
 
       await assertPermission(ctx.db, userId, workspace.id, "board:view");
 
+      const isAdmin = await isWorkspaceAdmin(ctx.db, userId, workspace.id);
+
       const result = boardRepo.getAllByWorkspaceId(
         ctx.db,
         workspace.id,
@@ -74,6 +83,7 @@ export const boardRouter = createTRPCRouter({
         {
           type: input.type,
           archived: input.archived ?? false,
+          isWorkspaceAdmin: isAdmin,
         }
       );
 
@@ -133,6 +143,7 @@ export const boardRouter = createTRPCRouter({
         });
 
       await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
+      await assertBoardViewAccess(ctx.db, userId, board);
 
       // Convert semantic string filters to date ranges expected by the repo
       const dueDateFilters = input.dueDateFilters
@@ -504,6 +515,7 @@ export const boardRouter = createTRPCRouter({
         "board:edit",
         board.createdBy ?? null,
       );
+      await assertBoardAccess(ctx.db, userId, board);
 
       // Handle favorite toggle separately
       if (input.favorite !== undefined) {
@@ -597,6 +609,7 @@ export const boardRouter = createTRPCRouter({
         "board:delete",
         board.createdBy ?? null,
       );
+      await assertBoardAccess(ctx.db, userId, board);
 
       const listIds = board.lists.map((list) => list.id);
 
@@ -708,6 +721,7 @@ export const boardRouter = createTRPCRouter({
         "board:edit",
         board.createdBy ?? null,
       );
+      await assertBoardAccess(ctx.db, userId, board);
 
       // Get target workspace. workspaceRepo.getByPublicId does not yet
       // filter soft-deleted workspaces (legacy: same is true for several
@@ -756,6 +770,7 @@ export const boardRouter = createTRPCRouter({
         ctx.db,
         board.id,
         targetWorkspace.id,
+        userId,
         slug,
       );
 
