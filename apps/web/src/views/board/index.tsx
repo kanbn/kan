@@ -38,6 +38,10 @@ import type { CardContextMenuAction } from "./components/CardContextMenu";
 import type { BoardView } from "./components/ViewToggle";
 import type { DragData } from "./dnd/types";
 import type { BoardCard, BoardList } from "./types";
+import {
+  BoardBackground,
+  BoardBackgroundImagesProvider,
+} from "~/components/BoardBackground";
 import Button from "~/components/Button";
 import { DeleteLabelConfirmation } from "~/components/DeleteLabelConfirmation";
 import { LabelForm } from "~/components/LabelForm";
@@ -57,6 +61,7 @@ import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
 import { formatToArray, isPlaceholderPublicId } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
+import { BoardBackgroundForm } from "./components/BoardBackgroundForm";
 import BoardDropdown from "./components/BoardDropdown";
 import CalendarView from "./components/CalendarView";
 import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
@@ -796,6 +801,16 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
 
         <Modal
           modalSize="sm"
+          isVisible={isOpen && modalContentType === "CHANGE_BOARD_BACKGROUND"}
+        >
+          <BoardBackgroundForm
+            boardPublicId={boardId ?? ""}
+            background={boardData?.background}
+          />
+        </Modal>
+
+        <Modal
+          modalSize="sm"
           isVisible={isOpen && modalContentType === "CREATE_TEMPLATE"}
         >
           <NewTemplateForm
@@ -864,7 +879,12 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
         title={`${boardData?.name ?? (isTemplate ? t`Template` : t`Board`)} | ${workspace.name ?? t`Workspace`}`}
       />
       <div className="relative flex h-full flex-col">
-        <PatternedBackground />
+        <BoardBackgroundImagesProvider>
+          <BoardBackground
+            boardPublicId={boardId ?? ""}
+            background={boardData?.background}
+          />
+        </BoardBackgroundImagesProvider>
         <div className="z-10 flex w-full flex-col justify-between p-6 md:flex-row md:p-8">
           {isLoading && !boardData && (
             <div className="flex space-x-2">
@@ -883,7 +903,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 {...register("name")}
                 onBlur={canEditBoard ? handleSubmit(onSubmit) : undefined}
                 readOnly={!canEditBoard}
-                className="block border-0 bg-transparent p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none disabled:cursor-not-allowed dark:text-dark-1000 sm:text-[1.2rem]"
+                className={`block border-0 p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none disabled:cursor-not-allowed dark:text-dark-1000 sm:text-[1.2rem] ${boardData.background ? "rounded-md bg-light-50/80 px-2 shadow-sm backdrop-blur-sm dark:bg-dark-50/80" : "bg-transparent"}`}
               />
             </form>
           )}

@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { boardBackgroundSchema } from "./board";
 import { userSchema } from "./common";
 
 // ─── workspace.all ───────────────────────────────────────────
@@ -65,6 +66,7 @@ export const workspaceWithBoardsSchema = z.object({
       publicId: z.string(),
       slug: z.string(),
       name: z.string(),
+      background: boardBackgroundSchema.nullable(),
     }),
   ),
 });
