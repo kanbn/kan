@@ -451,6 +451,16 @@ export function Auth({
                       t`Please enter a valid password`}
                   </p>
                 )}
+                {!isSignUp && isEmailSendingEnabled && (
+                  <div className="mt-1 flex justify-end">
+                    <Link
+                      href="/forgot-password"
+                      className="text-xs text-light-900 underline dark:text-dark-900"
+                    >
+                      {t`Forgot password?`}
+                    </Link>
+                  </div>
+                )}
               </div>
             )}
             {loginError && (
