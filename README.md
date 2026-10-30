@@ -19,24 +19,24 @@
   <a href="https://github.com/kanbn/kan/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-AGPLv3-purple"></a>
 </div>
 
-## Features 💫
+## Features
 
-- 👁️ **Board Visibility**: Control who can view and edit your boards
-- 🤝 **Workspace Members**: Invite members and collaborate with your team
-- 🚀 **Trello Imports**: Easily import your Trello boards
-- 🔍 **Labels & Filters**: Organise and find cards quickly
-- 💬 **Comments**: Discuss and collaborate with your team
-- 📝 **Activity Log**: Track all card changes with detailed activity history
-- 🎨 **Templates** : Save time with reusable custom board templates
-- ⚡️ **Integrations (coming soon)** : Connect your favourite tools
+- **Board Visibility**: Control who can view and edit your boards
+- **Workspace Members**: Invite members and collaborate with your team
+- **Trello Imports**: Easily import your Trello boards
+- **Labels & Filters**: Organise and find cards quickly
+- **Comments**: Discuss and collaborate with your team
+- **Activity Log**: Track all card changes with detailed activity history
+- **Templates**: Save time with reusable custom board templates
+- **Integrations (coming soon)**: Connect your favourite tools
 
 See our [roadmap](https://kan.bn/kan/roadmap) for upcoming features.
 
-## Screenshot 👁️
+## Screenshot
 
 <img width="1507" alt="hero-dark" src="https://github.com/user-attachments/assets/8490104a-cd5d-49de-afc2-152fd8a93119" />
 
-## Made With 🛠️
+## Made With
 
 - [Next.js](https://nextjs.org/?ref=kan.bn)
 - [tRPC](https://trpc.io/?ref=kan.bn)
@@ -45,7 +45,7 @@ See our [roadmap](https://kan.bn/kan/roadmap) for upcoming features.
 - [Drizzle ORM](https://orm.drizzle.team/?ref=kan.bn)
 - [React Email](https://react.email/?ref=kan.bn)
 
-## Self Hosting 🐳
+## Self Hosting
 
 ### One-click Deployments
 
@@ -59,69 +59,9 @@ The easiest way to deploy Kan is through Railway. We've partnered with Railway t
 
 Alternatively, you can self-host Kan with Docker Compose. This will set up everything for you including your postgres database and automatically run migrations.
 
-1. Create a `.env` file with your environment variables (see [Environment Variables](#environment-variables-) section below)
+1. Create a `.env` file with your environment variables (see [Environment Variables](#environment-variables) section below)
 
-2. Use the provided `docker-compose.yml` file or create your own with the following configuration:
-
-```yaml
-services:
-  migrate:
-    image: ghcr.io/kanbn/kan-migrate:latest
-    container_name: kan-migrate
-    networks:
-      - kan-network
-    environment:
-      - POSTGRES_URL=${POSTGRES_URL}
-    depends_on:
-      postgres:
-        condition: service_healthy
-    restart: "no"
-
-  web:
-    image: ghcr.io/kanbn/kan:latest
-    container_name: kan-web
-    ports:
-      - "${WEB_PORT:-3000}:3000"
-    networks:
-      - kan-network
-    env_file:
-      - .env
-    environment:
-      - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
-      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
-      - POSTGRES_URL=${POSTGRES_URL}
-      - NEXT_PUBLIC_ALLOW_CREDENTIALS=true
-    depends_on:
-      migrate:
-        condition: service_completed_successfully
-    restart: unless-stopped
-
-  postgres:
-    image: postgres:15
-    container_name: kan-db
-    environment:
-      - POSTGRES_DB=kan_db
-      - POSTGRES_USER=kan
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    ports:
-      - 5432:5432
-    volumes:
-      - kan_postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U kan -d kan_db"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
-    restart: unless-stopped
-    networks:
-      - kan-network
-
-networks:
-  kan-network:
-
-volumes:
-  kan_postgres_data:
-```
+2. Use the [docker-compose.yml](./docker-compose.yml) file provided in the repository, which sets up Postgres, runs migrations, and starts the web service
 
 3. Start the containers in detached mode:
 
@@ -129,19 +69,16 @@ volumes:
 docker compose up -d
 ```
 
-The `migrate` service will automatically run database migrations before the web service starts. The application will be available at http://localhost:3000 (or the port specified in `WEB_PORT`).
+The application will be available at http://localhost:3000 (or the port specified in `WEB_PORT`).
 
 **Managing containers:**
 
 - To stop the containers: `docker compose down`
 - To view logs: `docker compose logs -f`
-- To view logs for a specific service: `docker compose logs -f web` or `docker compose logs -f migrate`
 - To restart the containers: `docker compose restart`
 - To rebuild after code changes: `docker compose up -d --build`
 
-For the complete Docker Compose configuration with all optional features, see [docker-compose.yml](./docker-compose.yml) in the repository.
-
-## Local Development 🧑‍💻
+## Local Development
 
 1. Clone the repository (or fork)
 
@@ -168,56 +105,19 @@ pnpm db:migrate
 pnpm dev
 ```
 
-## Environment Variables 🔐
+## Environment Variables
 
-| Variable                                  | Description                                               | Required                                    | Example                                                     |
-| ----------------------------------------- | --------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------------- |
-| `POSTGRES_URL`                            | PostgreSQL connection URL                                 | To use external database                    | `postgres://user:pass@localhost:5432/db`                    |
-| `REDIS_URL`                               | Redis connection URL                                      | For rate limiting (optional)                | `redis://localhost:6379` or `redis://redis:6379` (Docker)   |
-| `EMAIL_FROM`                              | Sender email address                                      | For Email                                   | `"Kan <hello@mail.kan.bn>"`                                 |
-| `SMTP_HOST`                               | SMTP server hostname                                      | For Email                                   | `smtp.resend.com`                                           |
-| `SMTP_PORT`                               | SMTP server port                                          | For Email                                   | `465`                                                       |
-| `SMTP_USER`                               | SMTP username/email                                       | No                                          | `resend`                                                    |
-| `SMTP_PASSWORD`                           | SMTP password/token                                       | No                                          | `re_xxxx`                                                   |
-| `SMTP_SECURE`                             | Use secure SMTP connection (defaults to true if not set)  | For Email                                   | `true`                                                      |
-| `SMTP_REJECT_UNAUTHORIZED`                | Reject invalid certificates (defaults to true if not set) | For Email                                   | `false`                                                     |
-| `NEXT_PUBLIC_DISABLE_EMAIL`               | To disable all email features                             | For Email                                   | `true`                                                      |
-| `NEXT_PUBLIC_BASE_URL`                    | Base URL of your installation                             | Yes                                         | `http://localhost:3000`                                     |
-| `NEXT_API_BODY_SIZE_LIMIT`                | Maximum API request body size (defaults to 1mb)           | No                                          | `50mb`                                                      |
-| `BETTER_AUTH_ALLOWED_DOMAINS`             | Comma-separated list of allowed domains for OIDC logins   | For OIDC/Social login                       | `example.com,subsidiary.com`                                |
-| `BETTER_AUTH_SECRET`                      | Auth encryption secret                                    | Yes                                         | Random 32+ char string                                      |
-| `BETTER_AUTH_TRUSTED_ORIGINS`             | Allowed callback origins                                  | No                                          | `http://localhost:3000,http://localhost:3001`               |
-| `GOOGLE_CLIENT_ID`                        | Google OAuth client ID                                    | For Google login                            | `xxx.apps.googleusercontent.com`                            |
-| `GOOGLE_CLIENT_SECRET`                    | Google OAuth client secret                                | For Google login                            | `xxx`                                                       |
-| `DISCORD_CLIENT_ID`                       | Discord OAuth client ID                                   | For Discord login                           | `xxx`                                                       |
-| `DISCORD_CLIENT_SECRET`                   | Discord OAuth client secret                               | For Discord login                           | `xxx`                                                       |
-| `GITHUB_CLIENT_ID`                        | GitHub OAuth client ID                                    | For GitHub login                            | `xxx`                                                       |
-| `GITHUB_CLIENT_SECRET`                    | GitHub OAuth client secret                                | For GitHub login                            | `xxx`                                                       |
-| `OIDC_CLIENT_ID`                          | Generic OIDC client ID                                    | For OIDC login                              | `xxx`                                                       |
-| `OIDC_CLIENT_SECRET`                      | Generic OIDC client secret                                | For OIDC login                              | `xxx`                                                       |
-| `OIDC_DISCOVERY_URL`                      | OIDC discovery URL                                        | For OIDC login                              | `https://auth.example.com/.well-known/openid-configuration` |
-| `TRELLO_APP_API_KEY`                      | Trello app API key                                        | For Trello import                           | `xxx`                                                       |
-| `TRELLO_APP_API_SECRET`                   | Trello app API secret                                     | For Trello import                           | `xxx`                                                       |
-| `S3_REGION`                               | S3 storage region                                         | For file uploads                            | `WEUR`                                                      |
-| `S3_ENDPOINT`                             | S3 endpoint URL                                           | For file uploads                            | `https://xxx.r2.cloudflarestorage.com`                      |
-| `S3_ACCESS_KEY_ID`                        | S3 access key                                             | For file uploads (optional with IRSA)       | `xxx`                                                       |
-| `S3_SECRET_ACCESS_KEY`                    | S3 secret key                                             | For file uploads (optional with IRSA)       | `xxx`                                                       |
-| `S3_FORCE_PATH_STYLE`                     | Use path-style URLs for S3                                | For file uploads                            | `true`                                                      |
-| `S3_AVATAR_UPLOAD_LIMIT`                  | Maximum avatar file size in bytes                         | For file uploads                            | `2097152` (2MB)                                             |
-| `NEXT_PUBLIC_STORAGE_URL`                 | Storage service URL                                       | For file uploads                            | `https://storage.kanbn.com`                                 |
-| `NEXT_PUBLIC_STORAGE_DOMAIN`              | Storage domain name                                       | For file uploads                            | `kanbn.com`                                                 |
-| `NEXT_PUBLIC_USE_VIRTUAL_HOSTED_URLS`     | Use virtual-hosted style URLs (bucket.domain.com)         | For file uploads (optional)                 | `true`                                                      |
-| `NEXT_PUBLIC_AVATAR_BUCKET_NAME`          | S3 bucket name for avatars                                | For file uploads                            | `avatars`                                                   |
-| `NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME`     | S3 bucket name for attachments                            | For file uploads                            | `attachments`                                               |
-| `NEXT_PUBLIC_ALLOW_CREDENTIALS`           | Allow email & password login                              | For authentication                          | `true`                                                      |
-| `NEXT_PUBLIC_DISABLE_SIGN_UP`             | Disable sign up                                           | For authentication                          | `false`                                                     |
-| `NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY` | Hide “Powered by kan.bn” on public boards (self-host)     | For white labelling                         | `true`                                                      |
-| `KAN_ADMIN_API_KEY`                       | Admin API key for stats and admin endpoints               | For admin/monitoring                        | `your-secret-admin-key`                                     |
-| `LOG_LEVEL`                               | Log verbosity level (debug, info, warn, error)            | No (defaults to debug in dev, info in prod) | `info`                                                      |
+At minimum, you'll need:
 
-See `.env.example` for a complete list of supported environment variables.
+| Variable               | Description                   | Example                                  |
+| ----------------------- | ------------------------------ | ----------------------------------------- |
+| `POSTGRES_URL`          | PostgreSQL connection URL      | `postgres://user:pass@localhost:5432/db`  |
+| `NEXT_PUBLIC_BASE_URL`  | Base URL of your installation  | `http://localhost:3000`                   |
+| `BETTER_AUTH_SECRET`    | Auth encryption secret         | Random 32+ char string                    |
 
-## MCP Server (AI Control) 🤖
+Optional integrations (email/SMTP, OAuth and OIDC login, S3-compatible file storage, Trello import, rate limiting, white labelling, and more) are configured through additional variables. See [.env.example](./.env.example) for the complete list.
+
+## MCP Server
 
 Kan ships with a [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that lets any MCP-compatible AI client (Claude Desktop, Codex, Cursor, GitHub Copilot, and others) read and control your Kan instance using natural language.
 
@@ -231,26 +131,26 @@ Configure it with two environment variables: `KAN_BASE_URL` (your Kan instance) 
 
 See the [MCP Server docs](https://docs.kan.bn/integrations/mcp-server) for per-client config (Claude Desktop, Codex, and others), example prompts, the full tool reference, and troubleshooting.
 
-## Contributing 🤝
+## Contributing
 
 We welcome contributions! Please read our [contribution guidelines](CONTRIBUTING.md) before submitting a pull request.
 
-## Contributors 👥
+## Contributors
 
 <a href="https://github.com/kanbn/kan/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=kanbn/kan" />
 </a>
 
-## Sponsors ❤️
+## Sponsors
 
 [<img height="100" alt="image" src="https://github.com/user-attachments/assets/e331c71f-ac86-46a6-bceb-ce276de094b0" />](https://www.testmuai.com)
 
 Proudly sponsored by [TestMu AI (formerly LambdaTest)](https://www.testmuai.com) - an AI-native testing cloud platform built for modern engineering teams. Covering everything from autonomous test creation and fast execution to testing AI agents like chatbots and voice assistants. If you're serious about testing, go check them out.
 
-## License 📝
+## License
 
 Kan is licensed under the [AGPLv3 license](LICENSE).
 
-## Contact 📧
+## Contact
 
 For support or to get in touch, please email [henry@kan.bn](mailto:henry@kan.bn) or join our [Discord server](https://discord.gg/e6ejRb6CmT).
