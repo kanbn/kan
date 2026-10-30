@@ -1589,7 +1589,6 @@
     "translation": "Portal rozliczeniowy"
   },
   "OLMhPm": {
-    "translation": "",
     "message": "Blockquote",
     "placeholders": {},
     "comments": [],
@@ -1598,7 +1597,8 @@
         "src/components/Editor.tsx",
         427
       ]
-    ]
+    ],
+    "translation": ""
   },
   "4RoY9J": {
     "message": "Blog Post",
@@ -1919,7 +1919,6 @@
     "translation": "Zgłoszenie błędu"
   },
   "s1c0ja": {
-    "translation": "",
     "message": "Bullet List",
     "placeholders": {},
     "comments": [],
@@ -1928,7 +1927,8 @@
         "src/components/Editor.tsx",
         417
       ]
-    ]
+    ],
+    "translation": ""
   },
   "AjVXBS": {
     "message": "Calendar",
@@ -2515,7 +2515,6 @@
     "translation": "Adres URL karty skopiowany do schowka"
   },
   "Ccpbzh": {
-    "translation": "",
     "message": "Cards",
     "placeholders": {},
     "comments": [],
@@ -2524,7 +2523,8 @@
         "src/utils/permission-category-label.ts",
         16
       ]
-    ]
+    ],
+    "translation": ""
   },
   "VhMDMg": {
     "message": "Change Password",
@@ -2779,7 +2779,6 @@
     "translation": "Zamknij"
   },
   "N2eHWq": {
-    "translation": "",
     "message": "Code Block",
     "placeholders": {},
     "comments": [],
@@ -2788,7 +2787,8 @@
         "src/components/Editor.tsx",
         432
       ]
-    ]
+    ],
+    "translation": ""
   },
   "TcXcmk": {
     "message": "Code Review",
@@ -5789,7 +5789,6 @@
     "translation": "Gość"
   },
   "lXKZGw": {
-    "translation": "",
     "message": "Heading 1",
     "placeholders": {},
     "comments": [],
@@ -5798,10 +5797,10 @@
         "src/components/Editor.tsx",
         395
       ]
-    ]
+    ],
+    "translation": ""
   },
   "El7NbA": {
-    "translation": "",
     "message": "Heading 2",
     "placeholders": {},
     "comments": [],
@@ -5810,10 +5809,10 @@
         "src/components/Editor.tsx",
         401
       ]
-    ]
+    ],
+    "translation": ""
   },
   "SFN6dN": {
-    "translation": "",
     "message": "Heading 3",
     "placeholders": {},
     "comments": [],
@@ -5822,7 +5821,8 @@
         "src/components/Editor.tsx",
         407
       ]
-    ]
+    ],
+    "translation": ""
   },
   "CB/NpV": {
     "message": "High Priority",
@@ -7832,7 +7832,6 @@
     "translation": "lub"
   },
   "Uci+Ph": {
-    "translation": "",
     "message": "Ordered List",
     "placeholders": {},
     "comments": [],
@@ -7841,7 +7840,8 @@
         "src/components/Editor.tsx",
         422
       ]
-    ]
+    ],
+    "translation": ""
   },
   "ZqDqbi": {
     "message": "Organize and find cards quickly with powerful filtering tools.",
