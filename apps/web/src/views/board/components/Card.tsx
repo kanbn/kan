@@ -12,7 +12,11 @@ import Badge from "~/components/Badge";
 import CircularProgress from "~/components/CircularProgress";
 import LabelIcon from "~/components/LabelIcon";
 import { useLocalisation } from "~/hooks/useLocalisation";
+import { useCardCoverDisplay } from "~/providers/card-cover-display";
+import { getContrastingTextColour } from "~/utils/cardCovers";
+import { getCardCoverImageAttributes } from "~/utils/cardCoverUrls";
 import { getAvatarUrl } from "~/utils/helpers";
+import { useCardCoverImage } from "./CardCoverImages";
 
 const Card = ({
   title,
@@ -24,6 +28,7 @@ const Card = ({
   comments,
   attachments,
   dueDate,
+  cover,
 }: {
   title: string;
   ticketNumber?: string | null;
@@ -47,8 +52,29 @@ const Card = ({
   comments: { publicId: string }[];
   attachments?: { publicId: string }[];
   dueDate?: Date | null;
+  cover?:
+    | ({
+        size: "normal" | "full";
+      } & (
+        | { kind: "colour"; colourCode: string }
+        | { kind: "attachment"; attachmentPublicId: string }
+      ))
+    | null;
 }) => {
   const { dateLocale } = useLocalisation();
+  const { display: coverDisplay, isReady: isCoverDisplayReady } =
+    useCardCoverDisplay();
+  const showCover = isCoverDisplayReady && coverDisplay !== "hidden";
+  const attachmentPublicId =
+    showCover && cover?.kind === "attachment"
+      ? cover.attachmentPublicId
+      : undefined;
+  const {
+    ref: coverRef,
+    isResolved: isCoverResolved,
+    sources: coverSources,
+  } = useCardCoverImage(attachmentPublicId);
+  const coverImage = getCardCoverImageAttributes(coverSources);
   const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;
   const isOverdue = dueDate ? isBefore(dueDate, startOfDay(new Date())) : false;
   const completedItems = checklists.reduce((acc, checklist) => {
@@ -66,22 +92,126 @@ const Card = ({
     description && description.replace(/<[^>]*>/g, "").trim().length > 0;
   const hasAttachments = attachments && attachments.length > 0;
   const hasDueDate = !!dueDate;
+  const isFullColourCover =
+    showCover && cover?.kind === "colour" && cover.size === "full";
+  const isFullImageCover =
+    showCover &&
+    cover?.kind === "attachment" &&
+    cover.size === "full" &&
+    (!isCoverResolved || !!coverImage);
+  const showNormalImageCover =
+    showCover &&
+    cover?.kind === "attachment" &&
+    cover.size === "normal" &&
+    (!isCoverResolved || !!coverImage);
+  const isFullCover = isFullColourCover || isFullImageCover;
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300">
-      {ticketNumber && (
-        <span className="mb-1 text-xs text-light-700 dark:text-dark-800">
+    <div
+      ref={coverRef}
+      className={twMerge(
+        "relative flex flex-col overflow-hidden rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300",
+        isFullColourCover && "min-h-28 justify-end py-3",
+        isFullImageCover && "min-h-40 justify-end py-3",
+      )}
+      style={
+        isFullColourCover ? { backgroundColor: cover.colourCode } : undefined
+      }
+    >
+      {isFullColourCover && coverDisplay === "subdued" && (
+        <div
+          className="pointer-events-none absolute inset-0 bg-white/60 dark:bg-black/55"
+          aria-hidden="true"
+        />
+      )}
+      {showCover && cover?.kind === "colour" && !isFullColourCover && (
+        <div
+          className={twMerge(
+            "-mx-3 -mt-2 mb-2 h-6",
+            coverDisplay === "subdued" &&
+              "opacity-50 saturate-50 dark:opacity-40",
+          )}
+          style={{ backgroundColor: cover.colourCode }}
+          aria-hidden="true"
+        />
+      )}
+      {showNormalImageCover && (
+        <div className="-mx-3 -mt-2 mb-2 h-32 overflow-hidden bg-light-200 dark:bg-dark-100">
+          {coverImage && (
+            // The URL already points to a resized preview; proxying it through
+            // Next Image would add a second image pipeline for a signed URL.
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={coverImage.src}
+              srcSet={coverImage.srcSet}
+              sizes="264px"
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className={twMerge(
+                "h-full w-full object-cover",
+                coverDisplay === "subdued" &&
+                  "opacity-60 saturate-50 dark:opacity-50 dark:brightness-75",
+              )}
+            />
+          )}
+        </div>
+      )}
+      {isFullImageCover && (
+        <>
+          {coverImage && (
+            // The URL already points to a resized preview; proxying it through
+            // Next Image would add a second image pipeline for a signed URL.
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={coverImage.src}
+              srcSet={coverImage.srcSet}
+              sizes="264px"
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className={twMerge(
+                "pointer-events-none absolute inset-0 h-full w-full object-cover",
+                coverDisplay === "subdued" &&
+                  "opacity-60 saturate-50 dark:opacity-50 dark:brightness-75",
+              )}
+            />
+          )}
+          <div
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/5"
+            aria-hidden="true"
+          />
+        </>
+      )}
+      {ticketNumber && !isFullCover && (
+        <span className="relative z-[1] mb-1 text-xs text-light-700 dark:text-dark-800">
           {ticketNumber}
         </span>
       )}
-      <span className="break-words">{title}</span>
-      {labels.length ||
-      members.length ||
-      checklists.length > 0 ||
-      hasDescription ||
-      comments.length > 0 ||
-      hasDueDate ||
-      hasAttachments ? (
+      <span
+        className={twMerge(
+          "relative z-[1] break-words",
+          isFullCover && "text-base font-semibold",
+          isFullImageCover && "text-white drop-shadow-sm",
+        )}
+        style={
+          isFullColourCover
+            ? coverDisplay === "subdued"
+              ? undefined
+              : { color: getContrastingTextColour(cover.colourCode) }
+            : undefined
+        }
+      >
+        {title}
+      </span>
+      {!isFullCover &&
+      (labels.length ||
+        members.length ||
+        checklists.length > 0 ||
+        hasDescription ||
+        comments.length > 0 ||
+        hasDueDate ||
+        hasAttachments) ? (
         <div className="mt-2 flex flex-col justify-end">
           <div className="space-x-0.5">
             {labels.map((label) => (

@@ -18,6 +18,7 @@ import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 import { formatToArray } from "~/utils/helpers";
 import Card from "~/views/board/components/Card";
+import { CardCoverImagesProvider } from "~/views/board/components/CardCoverImages";
 import Filters from "~/views/board/components/Filters";
 import { CardModal } from "./CardModal";
 
@@ -120,7 +121,7 @@ export default function PublicBoardView() {
   ]);
 
   return (
-    <>
+    <CardCoverImagesProvider boardPublicId={data?.publicId ?? ""}>
       <PageHead
         title={`${data?.name ?? t`Board`} | ${data?.workspace.name ?? t`Workspace`}`}
       />
@@ -227,6 +228,7 @@ export default function PublicBoardView() {
                               comments={card.comments ?? []}
                               attachments={card.attachments}
                               dueDate={card.dueDate ?? null}
+                              cover={card.cover}
                             />
                           </Link>
                         );
@@ -275,6 +277,6 @@ export default function PublicBoardView() {
           boardSlug={data?.slug}
         />
       </Modal>
-    </>
+    </CardCoverImagesProvider>
   );
 }

@@ -4,12 +4,14 @@ import { z } from "zod";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as activityRepo from "@kan/db/repository/cardActivity.repo";
+import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { colours } from "@kan/shared/constants";
 import {
   convertDueDateFiltersToRanges,
+  generateDownloadUrl,
   generateSlug,
   generateUID,
 } from "@kan/shared/utils";
@@ -23,9 +25,123 @@ import {
   boardUpdateResponseSchema,
 } from "../schemas";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
+import { formatCardCover } from "../utils/cardCover";
+import {
+  getCardCoverPreviewKey,
+  inspectStoredObject,
+} from "../utils/cardCoverPreview";
 import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
 
 export const boardRouter = createTRPCRouter({
+  coverUrls: publicProcedure
+    .meta({
+      openapi: {
+        method: "GET",
+        path: "/boards/{boardPublicId}/cover-urls",
+        summary: "Resolve card cover preview URLs",
+        description:
+          "Resolves a bounded batch of selected card cover previews for a board",
+        tags: ["Boards"],
+        protect: false,
+      },
+    })
+    .input(
+      z.object({
+        boardPublicId: z.string().min(12),
+        attachmentPublicIds: z.array(z.string().min(12)).max(50),
+        widths: z
+          .array(z.union([z.literal(320), z.literal(640), z.literal(1280)]))
+          .min(1)
+          .max(3),
+      }),
+    )
+    .output(
+      z.record(
+        z.string(),
+        z.array(
+          z.object({
+            width: z.union([z.literal(320), z.literal(640), z.literal(1280)]),
+            url: z.string().url(),
+          }),
+        ),
+      ),
+    )
+    .query(async ({ ctx, input }) => {
+      const board = await boardRepo.getCoverAccessByPublicId(
+        ctx.db,
+        input.boardPublicId,
+      );
+
+      if (!board)
+        throw new TRPCError({
+          message: `Board with public ID ${input.boardPublicId} not found`,
+          code: "NOT_FOUND",
+        });
+
+      if (board.visibility !== "public") {
+        const userId = ctx.user?.id;
+        if (!userId)
+          throw new TRPCError({
+            message: "User not authenticated",
+            code: "UNAUTHORIZED",
+          });
+        await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
+      }
+
+      const attachmentPublicIds = [...new Set(input.attachmentPublicIds)];
+      const widths = [...new Set(input.widths)];
+      const attachments =
+        await cardAttachmentRepo.getSelectedCoverAttachmentsByBoardPublicId(
+          ctx.db,
+          {
+          boardPublicId: input.boardPublicId,
+          attachmentPublicIds,
+          },
+        );
+      const available = new Set(
+        attachments.map((attachment) => attachment.publicId),
+      );
+      const result = Object.fromEntries(
+        attachmentPublicIds.map((publicId) => [publicId, []]),
+      ) as Record<string, { width: (typeof widths)[number]; url: string }[]>;
+      const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+
+      if (!bucket) return result;
+
+      await Promise.all(
+        attachmentPublicIds.map(async (publicId) => {
+          if (!available.has(publicId)) return;
+
+          const variants = await Promise.all(
+            widths.map(async (width) => {
+              try {
+                const previewKey = getCardCoverPreviewKey(publicId, width);
+                const preview = await inspectStoredObject(bucket, previewKey);
+                if (
+                  preview?.contentType !== "image/webp" ||
+                  !preview.contentLength ||
+                  preview.contentLength <= 0
+                )
+                  return null;
+
+                return {
+                  width,
+                  url: await generateDownloadUrl(bucket, previewKey, 86400),
+                };
+              } catch {
+                return null;
+              }
+            }),
+          );
+
+          result[publicId] = variants.filter(
+            (variant): variant is NonNullable<typeof variant> => !!variant,
+          );
+        }),
+      );
+
+      return result;
+    }),
   all: protectedProcedure
     .meta({
       openapi: {
@@ -191,6 +307,7 @@ export const boardRouter = createTRPCRouter({
           cards: await Promise.all(
             list.cards.map(async (card) => ({
               ...card,
+              cover: formatCardCover(card),
               members: await Promise.all(
                 card.members.map(async (member) => {
                   if (!member.user?.image) return member;
@@ -283,7 +400,18 @@ export const boardRouter = createTRPCRouter({
         },
       );
 
-      return result;
+      if (!result) return null;
+
+      return {
+        ...result,
+        lists: result.lists.map((list) => ({
+          ...list,
+          cards: list.cards.map((card) => ({
+            ...card,
+            cover: formatCardCover(card),
+          })),
+        })),
+      };
     }),
   create: protectedProcedure
     .meta({
