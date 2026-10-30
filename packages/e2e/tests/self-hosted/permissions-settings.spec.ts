@@ -96,10 +96,49 @@ test(
     await settings.goToTab("Permissions");
     await settings.setRolePermission("Can create cards", "member", false);
 
-    const { memberPage, memberContext } = await inviteSecondMember(
+    const { memberUser, memberPage, memberContext } = await inviteSecondMember(
       page,
       browser,
     );
+
+    const workspacePublicId = await page.evaluate(() =>
+      localStorage.getItem("workspacePublicId"),
+    );
+    if (!workspacePublicId)
+      throw new Error("workspacePublicId not found in localStorage");
+
+    const workspaceResponse = await page.request.get(
+      `/api/trpc/workspace.byId?batch=1&input=${encodeURIComponent(
+        JSON.stringify({ "0": { json: { workspacePublicId } } }),
+      )}`,
+    );
+    const workspaceBody = (await workspaceResponse.json()) as [
+      {
+        result: {
+          data: { json: { members: { publicId: string; email?: string }[] } };
+        };
+      },
+    ];
+    const invitedMember = workspaceBody[0].result.data.json.members.find(
+      (member) => member.email === memberUser.email,
+    );
+    if (!invitedMember)
+      throw new Error("Could not resolve invited member's publicId");
+
+    const boardMemberAddResponse = await page.request.post(
+      "/api/trpc/boardMember.add?batch=1",
+      {
+        data: {
+          "0": {
+            json: {
+              boardPublicId,
+              workspaceMemberPublicId: invitedMember.publicId,
+            },
+          },
+        },
+      },
+    );
+    expect(boardMemberAddResponse.ok()).toBe(true);
 
     const cardInput = {
       title: "Blocked card",
