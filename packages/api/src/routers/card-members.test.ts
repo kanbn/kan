@@ -44,6 +44,7 @@ vi.mock("@kan/auth/server", () => ({
 vi.mock("@kan/shared/utils", () => ({
   generateAttachmentUrl: vi.fn(),
   generateAvatarUrl: vi.fn(),
+  workspacePlans: ["free", "team", "pro", "enterprise"],
   normalizeDescription: vi.fn((description: string) => description),
 }));
 vi.mock("../utils/notifications", () => ({

@@ -28,6 +28,7 @@ import {
   lists,
   userBoardFavorites,
   workspaceMembers,
+  workspaces,
 } from "@kan/db/schema";
 import { generateUID, normalizeDescription } from "@kan/shared/utils";
 
@@ -259,8 +260,15 @@ export const getByPublicId = async (
               index: true,
               dueDate: true,
               cardNumber: true,
+              coverColourCode: true,
+              coverSize: true,
             },
             with: {
+              coverAttachment: {
+                columns: {
+                  publicId: true,
+                },
+              },
               labels: {
                 with: {
                   label: {
@@ -456,8 +464,15 @@ export const getBySlug = async (
               index: true,
               dueDate: true,
               cardNumber: true,
+              coverColourCode: true,
+              coverSize: true,
             },
             with: {
+              coverAttachment: {
+                columns: {
+                  publicId: true,
+                },
+              },
               labels: {
                 with: {
                   label: {
@@ -728,6 +743,29 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
   return result;
 };
 
+export const getCoverAccessByPublicId = async (
+  db: dbClient,
+  boardPublicId: string,
+) => {
+  const [result] = await db
+    .select({
+      id: boards.id,
+      workspaceId: boards.workspaceId,
+      visibility: boards.visibility,
+    })
+    .from(boards)
+    .innerJoin(workspaces, eq(workspaces.id, boards.workspaceId))
+    .where(
+      and(
+        eq(boards.publicId, boardPublicId),
+        isNull(boards.deletedAt),
+        isNull(workspaces.deletedAt),
+      ),
+    );
+
+  return result;
+};
+
 /**
  * Fetches the board fields needed by the move mutation:
  * identity, naming, type guards, and workspace ownership.
@@ -782,6 +820,8 @@ export const createFromSnapshot = async (
           title: string;
           description: string | null;
           index: number;
+          coverColourCode: string | null;
+          coverSize: "normal" | "full";
           labels: {
             publicId: string;
             name: string;
@@ -893,6 +933,8 @@ export const createFromSnapshot = async (
             createdBy: args.createdBy,
             listId: newListId,
             index: card.index,
+            coverColourCode: card.coverColourCode,
+            coverSize: card.coverColourCode ? card.coverSize : "normal",
           })
           .returning({ id: cards.id });
 

@@ -67,6 +67,7 @@ import { CardContextMenu } from "./components/CardContextMenu";
 import { CardContextMoveListModal } from "./components/CardContextMoveListModal";
 import CardList from "./components/CardList";
 import CardPreview from "./components/CardPreview";
+import { CardCoverImagesProvider } from "./components/CardCoverImages";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
@@ -859,7 +860,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   };
 
   return (
-    <>
+    <CardCoverImagesProvider boardPublicId={boardId ?? ""}>
       <PageHead
         title={`${boardData?.name ?? (isTemplate ? t`Template` : t`Board`)} | ${workspace.name ?? t`Workspace`}`}
       />
@@ -1097,6 +1098,6 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
         )}
         {renderModalContent()}
       </div>
-    </>
+    </CardCoverImagesProvider>
   );
 }
