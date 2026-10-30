@@ -719,6 +719,7 @@ export const getWithListAndMembersByPublicId = async (
             columns: {
               publicId: true,
               email: true,
+              status: true,
             },
             with: {
               user: {

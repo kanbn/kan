@@ -124,6 +124,12 @@ export const cardRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
 
+      if (members.some((member) => member.status === "paused"))
+        throw new TRPCError({
+          message: `Paused members cannot be assigned to cards`,
+          code: "BAD_REQUEST",
+        });
+
       const newCard = await cardRepo.create(ctx.db, {
         title: input.title,
         description: normalizeDescription(input.description),
@@ -667,6 +673,12 @@ export const cardRouter = createTRPCRouter({
 
         return { newMember: false };
       }
+
+      if (member.status === "paused")
+        throw new TRPCError({
+          message: `Paused members cannot be assigned to cards`,
+          code: "BAD_REQUEST",
+        });
 
       const newCardMemberRelationship =
         await cardRepo.createCardMemberRelationship(ctx.db, cardMemberIds);
@@ -1417,8 +1429,11 @@ export const cardRouter = createTRPCRouter({
           memberPublicIds,
           sourceCardMeta.workspaceId,
         );
-        if (members.length) {
-          const membersInsert = members.map((member) => ({
+        const assignableMembers = members.filter(
+          (member) => member.status !== "paused",
+        );
+        if (assignableMembers.length) {
+          const membersInsert = assignableMembers.map((member) => ({
             cardId: newCard.id,
             workspaceMemberId: member.id,
           }));
@@ -1426,7 +1441,7 @@ export const cardRouter = createTRPCRouter({
             ctx.db,
             membersInsert,
           );
-          const cardActivitesInsert = members.map((member) => ({
+          const cardActivitesInsert = assignableMembers.map((member) => ({
             type: "card.updated.member.added" as const,
             cardId: newCard.id,
             workspaceMemberId: member.id,
