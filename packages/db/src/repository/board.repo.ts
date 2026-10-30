@@ -156,8 +156,10 @@ export const getByPublicId = async (
     lists: string[];
     dueDate: DueDateFilter[];
     type: "regular" | "template" | undefined;
+    cardView?: "full" | "summary";
   },
 ) => {
+  const includeCardDetails = filters.cardView !== "summary";
   let cardIds: string[] = [];
 
   if (filters.labels.length > 0 || filters.members.length > 0) {
@@ -252,9 +254,10 @@ export const getByPublicId = async (
         with: {
           cards: {
             columns: {
+              id: true,
               publicId: true,
               title: true,
-              description: true,
+              description: includeCardDetails,
               listId: true,
               index: true,
               dueDate: true,
@@ -293,41 +296,47 @@ export const getByPublicId = async (
                   },
                 },
               },
-              attachments: {
-                columns: {
-                  publicId: true,
+              ...(includeCardDetails && {
+                attachments: {
+                  columns: {
+                    publicId: true,
+                  },
+                  where: isNull(cardAttachments.deletedAt),
+                  orderBy: asc(cardAttachments.createdAt),
                 },
-                where: isNull(cardAttachments.deletedAt),
-                orderBy: asc(cardAttachments.createdAt),
-              },
-              checklists: {
-                columns: {
-                  publicId: true,
-                  name: true,
-                  index: true,
-                },
-                where: isNull(checklists.deletedAt),
-                orderBy: asc(checklists.index),
-                with: {
-                  items: {
-                    columns: {
-                      publicId: true,
-                      title: true,
-                      completed: true,
-                      index: true,
+              }),
+              ...(includeCardDetails && {
+                checklists: {
+                  columns: {
+                    publicId: true,
+                    name: true,
+                    index: true,
+                  },
+                  where: isNull(checklists.deletedAt),
+                  orderBy: asc(checklists.index),
+                  with: {
+                    items: {
+                      columns: {
+                        publicId: true,
+                        title: true,
+                        completed: true,
+                        index: true,
+                      },
+                      where: isNull(checklistItems.deletedAt),
+                      orderBy: asc(checklistItems.index),
                     },
-                    where: isNull(checklistItems.deletedAt),
-                    orderBy: asc(checklistItems.index),
                   },
                 },
-              },
-              comments: {
-                columns: {
-                  publicId: true,
+              }),
+              ...(includeCardDetails && {
+                comments: {
+                  columns: {
+                    publicId: true,
+                  },
+                  where: isNull(comments.deletedAt),
+                  limit: 1,
                 },
-                where: isNull(comments.deletedAt),
-                limit: 1,
-              },
+              }),
             },
             where: and(
               cardIds.length > 0 ? inArray(cards.publicId, cardIds) : undefined,
@@ -363,19 +372,135 @@ export const getByPublicId = async (
 
   if (!board) return null;
 
+  const summaryByCardId = new Map<
+    number,
+    {
+      hasDescription: boolean;
+      attachmentCount: number;
+      hasComments: boolean;
+      checklistItemCount: number;
+      completedChecklistItemCount: number;
+    }
+  >();
+
+  if (!includeCardDetails) {
+    const ids = board.lists.flatMap((list) =>
+      list.cards.map((card) => card.id),
+    );
+
+    if (ids.length > 0) {
+      const [descriptions, attachments, cardComments, items, completedItems] =
+        await Promise.all([
+          db
+            .select({ id: cards.id })
+            .from(cards)
+            .where(and(inArray(cards.id, ids), isNotNull(cards.description))),
+          db
+            .select({ cardId: cardAttachments.cardId, count: count() })
+            .from(cardAttachments)
+            .where(
+              and(
+                inArray(cardAttachments.cardId, ids),
+                isNull(cardAttachments.deletedAt),
+              ),
+            )
+            .groupBy(cardAttachments.cardId),
+          db
+            .select({ cardId: comments.cardId, count: count() })
+            .from(comments)
+            .where(
+              and(inArray(comments.cardId, ids), isNull(comments.deletedAt)),
+            )
+            .groupBy(comments.cardId),
+          db
+            .select({ cardId: checklists.cardId, count: count() })
+            .from(checklistItems)
+            .innerJoin(
+              checklists,
+              eq(checklistItems.checklistId, checklists.id),
+            )
+            .where(
+              and(
+                inArray(checklists.cardId, ids),
+                isNull(checklists.deletedAt),
+                isNull(checklistItems.deletedAt),
+              ),
+            )
+            .groupBy(checklists.cardId),
+          db
+            .select({ cardId: checklists.cardId, count: count() })
+            .from(checklistItems)
+            .innerJoin(
+              checklists,
+              eq(checklistItems.checklistId, checklists.id),
+            )
+            .where(
+              and(
+                inArray(checklists.cardId, ids),
+                isNull(checklists.deletedAt),
+                isNull(checklistItems.deletedAt),
+                eq(checklistItems.completed, true),
+              ),
+            )
+            .groupBy(checklists.cardId),
+        ]);
+
+      const attachmentCounts = new Map(
+        attachments.map(({ cardId, count }) => [cardId, count]),
+      );
+      const commentCounts = new Map(
+        cardComments.map(({ cardId, count }) => [cardId, count]),
+      );
+      const itemCounts = new Map(
+        items.map(({ cardId, count }) => [cardId, count]),
+      );
+      const completedItemCounts = new Map(
+        completedItems.map(({ cardId, count }) => [cardId, count]),
+      );
+
+      const cardsWithDescription = new Set(descriptions.map(({ id }) => id));
+      for (const id of ids) {
+        summaryByCardId.set(id, {
+          hasDescription: cardsWithDescription.has(id),
+          attachmentCount: attachmentCounts.get(id) ?? 0,
+          hasComments: (commentCounts.get(id) ?? 0) > 0,
+          checklistItemCount: itemCounts.get(id) ?? 0,
+          completedChecklistItemCount: completedItemCounts.get(id) ?? 0,
+        });
+      }
+    }
+  }
+
   const formattedResult = {
     ...board,
     favorite: board.userFavorites.length > 0,
     userFavorites: undefined,
     lists: board.lists.map((list) => ({
       ...list,
-      cards: list.cards.map((card) => ({
-        ...card,
-        labels: card.labels.map((label) => label.label),
-        members: card.members
-          .map((member) => member.member)
-          .filter((member) => member.deletedAt === null),
-      })),
+      cards: list.cards.map((card) => {
+        const { id: _id, ...cardWithoutId } = card;
+        return {
+          ...cardWithoutId,
+          ...(filters.cardView === "summary" && {
+            summary: summaryByCardId.get(card.id),
+          }),
+          description: includeCardDetails
+            ? ((card as { description?: string | null }).description ?? null)
+            : null,
+          attachments: includeCardDetails ? card.attachments : [],
+          checklists: includeCardDetails
+            ? card.checklists.map((checklist) => ({
+                ...checklist,
+                items: "items" in checklist ? checklist.items : [],
+              }))
+            : [],
+          comments: includeCardDetails ? card.comments : [],
+          labels: card.labels.map((label) => label.label),
+          members: card.members
+            .map((member) => member.member)
+            .filter((member) => member.deletedAt === null),
+        };
+      }),
     })),
   };
 
