@@ -473,7 +473,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMenu.tsx",
-        50
+        51
       ]
     ],
     "translation": "Tilføj / rediger etiket"
@@ -836,6 +836,10 @@
       [
         "src/views/members/index.tsx",
         221
+      ],
+      [
+        "src/views/settings/components/RolePermissions.tsx",
+        14
       ]
     ],
     "translation": "Administrator"
@@ -1584,6 +1588,18 @@
     ],
     "translation": "Faktureringsportal"
   },
+  "OLMhPm": {
+    "message": "Blockquote",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Editor.tsx",
+        427
+      ]
+    ],
+    "translation": ""
+  },
   "4RoY9J": {
     "message": "Blog Post",
     "placeholders": {},
@@ -1773,6 +1789,18 @@
     ],
     "translation": "Tavlens URL er kopieret til udklipsholderen"
   },
+  "spRiNh": {
+    "message": "Board URL is required",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/UpdateBoardSlugForm.tsx",
+        42
+      ]
+    ],
+    "translation": ""
+  },
   "TmvrjU": {
     "message": "Board URL must be at least 3 characters long",
     "placeholders": {},
@@ -1783,7 +1811,8 @@
         42
       ]
     ],
-    "translation": "Tavlens URL skal være mindst 3 tegn lang"
+    "translation": "Tavlens URL skal være mindst 3 tegn lang",
+    "obsolete": true
   },
   "qzdST2": {
     "message": "Board visibility",
@@ -1821,6 +1850,10 @@
       [
         "src/components/SideNavigation.tsx",
         101
+      ],
+      [
+        "src/utils/permission-category-label.ts",
+        12
       ],
       [
         "src/views/boards/index.tsx",
@@ -1885,6 +1918,18 @@
     ],
     "translation": "Fejlrapport"
   },
+  "s1c0ja": {
+    "message": "Bullet List",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Editor.tsx",
+        417
+      ]
+    ],
+    "translation": ""
+  },
   "AjVXBS": {
     "message": "Calendar",
     "placeholders": {},
@@ -1904,11 +1949,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        146
+        149
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        35
+        44
       ]
     ],
     "translation": "Kan tilføje kommentarer"
@@ -1920,11 +1965,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        131
+        134
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        20
+        29
       ]
     ],
     "translation": "Kan oprette tavler"
@@ -1936,11 +1981,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        141
+        144
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        30
+        39
       ]
     ],
     "translation": "Kan oprette kort"
@@ -1952,11 +1997,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        136
+        139
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        25
+        34
       ]
     ],
     "translation": "Kan oprette lister"
@@ -1968,11 +2013,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        133
+        136
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        22
+        31
       ]
     ],
     "translation": "Kan slette tavler"
@@ -1984,11 +2029,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        143
+        146
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        32
+        41
       ]
     ],
     "translation": "Kan slette kort"
@@ -2000,11 +2045,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        148
+        151
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        37
+        46
       ]
     ],
     "translation": "Kan slette kommentarer"
@@ -2016,11 +2061,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        138
+        141
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        27
+        36
       ]
     ],
     "translation": "Kan slette lister"
@@ -2032,11 +2077,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        127
+        130
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        16
+        25
       ]
     ],
     "translation": "Kan slette arbejdsområdet"
@@ -2048,11 +2093,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        132
+        135
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        21
+        30
       ]
     ],
     "translation": "Kan redigere tavler"
@@ -2064,11 +2109,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        142
+        145
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        31
+        40
       ]
     ],
     "translation": "Kan redigere kort"
@@ -2080,11 +2125,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        147
+        150
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        36
+        45
       ]
     ],
     "translation": "Kan redigere kommentarer"
@@ -2096,11 +2141,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        137
+        140
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        26
+        35
       ]
     ],
     "translation": "Kan redigere lister"
@@ -2112,11 +2157,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        152
+        155
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        41
+        50
       ]
     ],
     "translation": "Kan redigere medlemsroller og rettigheder"
@@ -2128,11 +2173,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        126
+        129
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        15
+        24
       ]
     ],
     "translation": "Kan redigere arbejdsområdet"
@@ -2144,11 +2189,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        151
+        154
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        40
+        49
       ]
     ],
     "translation": "Kan invitere medlemmer"
@@ -2160,11 +2205,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        128
+        131
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        17
+        26
       ]
     ],
     "translation": "Kan administrere indstillinger for arbejdsområdet"
@@ -2176,11 +2221,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        153
+        156
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        42
+        51
       ]
     ],
     "translation": "Kan fjerne medlemmer"
@@ -2192,11 +2237,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        130
+        133
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        19
+        28
       ]
     ],
     "translation": "Kan se tavler"
@@ -2208,11 +2253,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        140
+        143
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        29
+        38
       ]
     ],
     "translation": "Kan se kort"
@@ -2224,11 +2269,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        145
+        148
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        34
+        43
       ]
     ],
     "translation": "Kan se kommentarer"
@@ -2240,11 +2285,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        135
+        138
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        24
+        33
       ]
     ],
     "translation": "Kan se lister"
@@ -2256,11 +2301,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        150
+        153
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        39
+        48
       ]
     ],
     "translation": "Kan se medlemmer"
@@ -2272,11 +2317,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        125
+        128
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        14
+        23
       ]
     ],
     "translation": "Kan se arbejdsområdet"
@@ -2468,6 +2513,18 @@
       ]
     ],
     "translation": "Kortets URL er kopieret til udklipsholderen"
+  },
+  "Ccpbzh": {
+    "message": "Cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/utils/permission-category-label.ts",
+        16
+      ]
+    ],
+    "translation": ""
   },
   "VhMDMg": {
     "message": "Change Password",
@@ -2712,7 +2769,7 @@
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        172
+        175
       ],
       [
         "src/views/settings/components/NewApiKeyModal.tsx",
@@ -2720,6 +2777,18 @@
       ]
     ],
     "translation": "Luk"
+  },
+  "N2eHWq": {
+    "message": "Code Block",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Editor.tsx",
+        432
+      ]
+    ],
+    "translation": ""
   },
   "TcXcmk": {
     "message": "Code Review",
@@ -2786,6 +2855,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/utils/permission-category-label.ts",
+        18
+      ],
       [
         "src/views/home/components/Features.tsx",
         105
@@ -3166,7 +3239,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMenu.tsx",
-        62
+        63
       ]
     ],
     "translation": "Kopiér link til kort"
@@ -3773,7 +3846,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMenu.tsx",
-        74
+        75
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -4257,7 +4330,7 @@
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
-        68
+        69
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -4341,7 +4414,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        162
+        165
       ],
       [
         "src/views/members/index.tsx",
@@ -5655,9 +5728,49 @@
       [
         "src/views/members/index.tsx",
         223
+      ],
+      [
+        "src/views/settings/components/RolePermissions.tsx",
+        18
       ]
     ],
     "translation": "Gæst"
+  },
+  "lXKZGw": {
+    "message": "Heading 1",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Editor.tsx",
+        395
+      ]
+    ],
+    "translation": ""
+  },
+  "El7NbA": {
+    "message": "Heading 2",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Editor.tsx",
+        401
+      ]
+    ],
+    "translation": ""
+  },
+  "SFN6dN": {
+    "message": "Heading 3",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Editor.tsx",
+        407
+      ]
+    ],
+    "translation": ""
   },
   "CB/NpV": {
     "message": "High Priority",
@@ -6539,6 +6652,10 @@
     "comments": [],
     "origin": [
       [
+        "src/utils/permission-category-label.ts",
+        14
+      ],
+      [
         "src/views/board/components/Filters.tsx",
         169
       ],
@@ -6568,7 +6685,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        180
+        183
       ]
     ],
     "translation": "Indlæser rettigheder..."
@@ -6680,7 +6797,7 @@
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
-        38
+        39
       ]
     ],
     "translation": "Administrer medlemmer"
@@ -6777,6 +6894,10 @@
       [
         "src/views/members/index.tsx",
         222
+      ],
+      [
+        "src/views/settings/components/RolePermissions.tsx",
+        16
       ]
     ],
     "translation": "Medlem"
@@ -6813,6 +6934,10 @@
       [
         "src/components/SideNavigation.tsx",
         125
+      ],
+      [
+        "src/utils/permission-category-label.ts",
+        20
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -6944,7 +7069,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMenu.tsx",
-        44
+        45
       ]
     ],
     "translation": "Flyt til en anden liste"
@@ -7479,7 +7604,7 @@
     "origin": [
       [
         "src/views/settings/components/RolePermissions.tsx",
-        110
+        120
       ]
     ],
     "translation": "Der er endnu ikke fundet nogen roller for dette arbejdsområde."
@@ -7627,6 +7752,18 @@
       ]
     ],
     "translation": "eller"
+  },
+  "Uci+Ph": {
+    "message": "Ordered List",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Editor.tsx",
+        422
+      ]
+    ],
+    "translation": ""
   },
   "ZqDqbi": {
     "message": "Organize and find cards quickly with powerful filtering tools.",
@@ -7895,7 +8032,7 @@
     "origin": [
       [
         "src/views/settings/components/RolePermissions.tsx",
-        119
+        129
       ]
     ],
     "translation": "Rettighed"
@@ -7919,7 +8056,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        80
+        83
       ]
     ],
     "translation": "Rettigheder nulstillet"
@@ -7931,11 +8068,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        34
+        37
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        57
+        60
       ]
     ],
     "translation": "Rettigheder opdateret"
@@ -8247,15 +8384,15 @@
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        42
+        45
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        65
+        68
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        93
+        96
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -8875,7 +9012,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        245
+        248
       ]
     ],
     "translation": "Nulstil til rollens standardindstillinger"
@@ -9356,7 +9493,7 @@
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
-        56
+        57
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
@@ -9526,7 +9663,6 @@
     "translation": "Genveje"
   },
   "0XmVWH": {
-    "translation": "",
     "message": "Show newest activity first",
     "placeholders": {},
     "comments": [],
@@ -9535,10 +9671,10 @@
         "src/views/card/components/ActivitySortOrderToggle.tsx",
         17
       ]
-    ]
+    ],
+    "translation": ""
   },
   "EL+7I2": {
-    "translation": "",
     "message": "Show oldest activity first",
     "placeholders": {},
     "comments": [],
@@ -9547,7 +9683,8 @@
         "src/views/card/components/ActivitySortOrderToggle.tsx",
         16
       ]
-    ]
+    ],
+    "translation": ""
   },
   "5lWFkC": {
     "message": "Sign in",
@@ -10365,11 +10502,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        35
+        38
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        58
+        61
       ]
     ],
     "translation": "Medlemmets rettigheder er blevet opdateret."
@@ -10533,7 +10670,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        81
+        84
       ]
     ],
     "translation": "Dette medlems rettigheder er nulstillet til standardindstillingerne for rollen."
@@ -11117,7 +11254,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        92
+        95
       ]
     ],
     "translation": "Kunne ikke nulstille rettigheder"
@@ -11313,11 +11450,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        41
+        44
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        64
+        67
       ]
     ],
     "translation": "Kunne ikke opdatere rettigheder"
@@ -12254,6 +12391,10 @@
       [
         "src/components/SettingsLayout.tsx",
         47
+      ],
+      [
+        "src/utils/permission-category-label.ts",
+        10
       ],
       [
         "src/views/board/index.tsx",

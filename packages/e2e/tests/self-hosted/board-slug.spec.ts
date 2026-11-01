@@ -36,5 +36,16 @@ test(
       { result: { data: { json: { slug: string } } } },
     ];
     expect(body[0].result.data.json.slug).toBe(newSlug);
+
+    await board.updateBoardSlug("x");
+    const shortSlugResponse = await page.request.get(
+      `/api/trpc/board.byId?batch=1&input=${encodeURIComponent(
+        JSON.stringify({ "0": { json: { boardPublicId } } }),
+      )}`,
+    );
+    const shortSlugBody = (await shortSlugResponse.json()) as [
+      { result: { data: { json: { slug: string } } } },
+    ];
+    expect(shortSlugBody[0].result.data.json.slug).toBe("x");
   },
 );

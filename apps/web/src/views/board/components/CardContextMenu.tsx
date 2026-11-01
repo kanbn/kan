@@ -1,4 +1,5 @@
 import { t } from "@lingui/core/macro";
+import { useLingui } from "@lingui/react";
 import { useEffect, useRef } from "react";
 import {
   HiLink,
@@ -29,49 +30,49 @@ interface CardContextMenuProps {
 
 const MENU_ITEMS: {
   action: CardContextMenuAction;
-  label: string;
+  label: () => string;
   icon: React.ReactNode;
   requiresEdit: boolean;
 }[] = [
   {
     action: "members",
-    label: t`Manage members`,
+    label: () => t`Manage members`,
     icon: <HiOutlineUserGroup className="h-4 w-4 shrink-0" />,
     requiresEdit: true,
   },
   {
     action: "move",
-    label: t`Move to another list`,
+    label: () => t`Move to another list`,
     icon: <HiOutlineArrowRightCircle className="h-4 w-4 shrink-0" />,
     requiresEdit: true,
   },
   {
     action: "labels",
-    label: t`Add / edit label`,
+    label: () => t`Add / edit label`,
     icon: <HiOutlineTag className="h-4 w-4 shrink-0" />,
     requiresEdit: true,
   },
   {
     action: "dueDate",
-    label: t`Set due date`,
+    label: () => t`Set due date`,
     icon: <HiOutlineCalendar className="h-4 w-4 shrink-0" />,
     requiresEdit: true,
   },
   {
     action: "copyLink",
-    label: t`Copy link to card`,
+    label: () => t`Copy link to card`,
     icon: <HiLink className="h-4 w-4 shrink-0" />,
     requiresEdit: false,
   },
   {
     action: "duplicate",
-    label: t`Duplicate card`,
+    label: () => t`Duplicate card`,
     icon: <HiOutlineDocumentDuplicate className="h-4 w-4 shrink-0" />,
     requiresEdit: true,
   },
   {
     action: "delete",
-    label: t`Delete card`,
+    label: () => t`Delete card`,
     icon: <HiOutlineTrash className="h-4 w-4 shrink-0" />,
     requiresEdit: true,
   },
@@ -84,6 +85,7 @@ export function CardContextMenu({
   onAction,
   canEdit,
 }: CardContextMenuProps) {
+  useLingui();
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -122,7 +124,7 @@ export function CardContextMenu({
           className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-neutral-900 hover:bg-light-200 dark:text-dark-1000 dark:hover:bg-dark-400"
         >
           {icon}
-          {label}
+          {label()}
         </button>
       ))}
     </div>

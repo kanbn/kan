@@ -60,6 +60,51 @@ test(
 );
 
 test(
+  "permission labels follow the selected language after navigation and reload",
+  { tag: "@self-hosted" },
+  async ({ page }) => {
+    const owner = createTestUser();
+    const auth = new AuthPage(page);
+    const onboarding = new SelfHostedOnboardingPage(page);
+    const settings = new SettingsPage(page);
+
+    await auth.signUp(owner);
+    await onboarding.createFirstWorkspace("E2E Test Workspace");
+
+    await settings.open();
+    await settings.goToTab("Permissions");
+    await expect(
+      page.getByRole("cell", { name: "Can view workspace" }),
+    ).toBeVisible();
+
+    await settings.goToTab("Account");
+    await page.locator("#language-select").selectOption("ru");
+    await expect(page.locator("#language-select")).toHaveValue("ru");
+    await expect
+      .poll(() => page.evaluate(() => localStorage.getItem("locale")))
+      .toBe("ru");
+
+    await settings.goToTab("Разрешения");
+    await expect(
+      page.getByRole("columnheader", { name: "Админ" }),
+    ).toBeVisible();
+    await page.reload();
+
+    await expect(
+      page.getByRole("cell", {
+        name: "Может просматривать рабочее пространство",
+      }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("cell", { name: "Рабочее пространство", exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("columnheader", { name: "Админ" }),
+    ).toBeVisible();
+  },
+);
+
+test(
   "revoking a permission from the member role blocks that action for members",
   { tag: "@self-hosted" },
   async ({ page, browser }) => {

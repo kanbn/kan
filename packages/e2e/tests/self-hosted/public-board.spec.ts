@@ -45,10 +45,11 @@ test(
       throw new Error("workspacePublicId not found in localStorage");
     }
 
-    await board.createBoard("Public Board Test");
+    await board.createBoard("RS");
     await board.createList("To do");
     await board.createCard("Visible to anyone");
     const publicBoardSlug = await getBoardSlug(page);
+    expect(publicBoardSlug).toBe("rs");
 
     await page.getByRole("button", { name: "Visibility" }).click();
     await page
@@ -64,9 +65,7 @@ test(
     const anonPage = await anonContext.newPage();
 
     await anonPage.goto(`/${workspacePublicId}/${publicBoardSlug}`);
-    await expect(
-      anonPage.getByRole("heading", { name: "Public Board Test" }),
-    ).toBeVisible();
+    await expect(anonPage.getByRole("heading", { name: "RS" })).toBeVisible();
     await expect(anonPage.getByText("Visible to anyone")).toBeVisible();
 
     await anonPage.goto(`/${workspacePublicId}/${privateBoardSlug}`);

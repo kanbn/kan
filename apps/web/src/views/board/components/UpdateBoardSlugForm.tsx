@@ -38,8 +38,8 @@ export function UpdateBoardSlugForm({
   const schema = z.object({
     slug: z
       .string()
-      .min(3, {
-        message: t`Board URL must be at least 3 characters long`,
+      .min(1, {
+        message: t`Board URL is required`,
       })
       .max(60, { message: t`Board URL cannot exceed 60 characters` })
       .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/, {

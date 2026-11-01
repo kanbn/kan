@@ -1,4 +1,5 @@
 import { t } from "@lingui/core/macro";
+import { useLingui } from "@lingui/react";
 import { HiXMark } from "react-icons/hi2";
 
 import type { Permission } from "@kan/shared";
@@ -10,8 +11,10 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { permissionCategoryLabel } from "~/utils/permission-category-label";
 
 export function EditMemberPermissionsModal() {
+  useLingui();
   const { workspace } = useWorkspace();
   const { modalContentType, entityId, entityLabel, closeModal } = useModal();
   const { showPopup } = usePopup();
@@ -191,7 +194,7 @@ export function EditMemberPermissionsModal() {
                 }`}
               >
                 <div className="my-2 text-[12px] font-semibold text-light-900 dark:text-dark-950">
-                  {category.label}
+                  {permissionCategoryLabel(category.label)}
                 </div>
                 <div className="space-y-1.5">
                   {category.permissions.map((permission) => {

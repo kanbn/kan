@@ -1,48 +1,58 @@
 import { t } from "@lingui/core/macro";
+import { useLingui } from "@lingui/react";
 
 import { permissionCategories, roles } from "@kan/shared";
 import type { Permission, Role } from "@kan/shared";
 
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { permissionCategoryLabel } from "~/utils/permission-category-label";
 
 function formatRoleLabel(role: Role) {
-  return role.charAt(0).toUpperCase() + role.slice(1);
+  switch (role) {
+    case "admin":
+      return t`Admin`;
+    case "member":
+      return t`Member`;
+    case "guest":
+      return t`Guest`;
+  }
 }
 
-const permissionLabels: Record<Permission, string> = {
-  "workspace:view": t`Can view workspace`,
-  "workspace:edit": t`Can edit workspace`,
-  "workspace:delete": t`Can delete workspace`,
-  "workspace:manage": t`Can manage workspace settings`,
+const permissionLabels: Record<Permission, () => string> = {
+  "workspace:view": () => t`Can view workspace`,
+  "workspace:edit": () => t`Can edit workspace`,
+  "workspace:delete": () => t`Can delete workspace`,
+  "workspace:manage": () => t`Can manage workspace settings`,
 
-  "board:view": t`Can view boards`,
-  "board:create": t`Can create boards`,
-  "board:edit": t`Can edit boards`,
-  "board:delete": t`Can delete boards`,
+  "board:view": () => t`Can view boards`,
+  "board:create": () => t`Can create boards`,
+  "board:edit": () => t`Can edit boards`,
+  "board:delete": () => t`Can delete boards`,
 
-  "list:view": t`Can view lists`,
-  "list:create": t`Can create lists`,
-  "list:edit": t`Can edit lists`,
-  "list:delete": t`Can delete lists`,
+  "list:view": () => t`Can view lists`,
+  "list:create": () => t`Can create lists`,
+  "list:edit": () => t`Can edit lists`,
+  "list:delete": () => t`Can delete lists`,
 
-  "card:view": t`Can view cards`,
-  "card:create": t`Can create cards`,
-  "card:edit": t`Can edit cards`,
-  "card:delete": t`Can delete cards`,
+  "card:view": () => t`Can view cards`,
+  "card:create": () => t`Can create cards`,
+  "card:edit": () => t`Can edit cards`,
+  "card:delete": () => t`Can delete cards`,
 
-  "comment:view": t`Can view comments`,
-  "comment:create": t`Can add comments`,
-  "comment:edit": t`Can edit comments`,
-  "comment:delete": t`Can delete comments`,
+  "comment:view": () => t`Can view comments`,
+  "comment:create": () => t`Can add comments`,
+  "comment:edit": () => t`Can edit comments`,
+  "comment:delete": () => t`Can delete comments`,
 
-  "member:view": t`Can view members`,
-  "member:invite": t`Can invite members`,
-  "member:edit": t`Can edit member roles and permissions`,
-  "member:remove": t`Can remove members`,
+  "member:view": () => t`Can view members`,
+  "member:invite": () => t`Can invite members`,
+  "member:edit": () => t`Can edit member roles and permissions`,
+  "member:remove": () => t`Can remove members`,
 };
 
 export function RolePermissions() {
+  useLingui();
   const { workspace } = useWorkspace();
 
   const utils = api.useUtils();
@@ -138,13 +148,13 @@ export function RolePermissions() {
                   colSpan={1 + orderedRoleNames.length}
                   className="px-4 py-2 text-xs font-semibold tracking-wide text-light-900 dark:text-dark-900"
                 >
-                  {category.label}
+                  {permissionCategoryLabel(category.label)}
                 </td>
               </tr>
               {category.permissions.map((permission) => (
                 <tr key={permission}>
                   <td className="w-1/2 px-4 py-2 text-sm text-light-900 dark:text-dark-900">
-                    {permissionLabels[permission] ?? permission}
+                    {permissionLabels[permission]()}
                   </td>
                   {orderedRoleNames.map((roleName) => {
                     const role = systemRoles.find((r) => r.name === roleName);
