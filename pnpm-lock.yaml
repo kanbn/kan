@@ -103,6 +103,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.3.4
         version: 3.10.0(react-hook-form@7.62.0(react@18.3.1))
+      '@kan.bn/mcp':
+        specifier: workspace:*
+        version: link:../../packages/mcp
       '@kan/api':
         specifier: workspace:*
         version: link:../../packages/api
@@ -118,9 +121,6 @@ importers:
       '@kan/logger':
         specifier: workspace:^
         version: link:../../packages/logger
-      '@kan/mcp':
-        specifier: workspace:*
-        version: link:../../packages/mcp
       '@kan/shared':
         specifier: workspace:^
         version: link:../../packages/shared

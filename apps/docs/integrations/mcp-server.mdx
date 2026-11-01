@@ -76,13 +76,13 @@ For example, in Claude Desktop's config:
 You do **not** need to clone the repository. The recommended way is `npx`, which runs the server on-demand and always uses the latest version:
 
 ```bash
-npx -y @kan/mcp
+npx -y @kan.bn/mcp
 ```
 
 Alternatively, install it globally:
 
 ```bash
-npm install -g @kan/mcp
+npm install -g @kan.bn/mcp
 kan-mcp
 ```
 
@@ -129,7 +129,7 @@ The server is configured via two environment variables:
       "mcpServers": {
         "kan": {
           "command": "npx",
-          "args": ["-y", "@kan/mcp"],
+          "args": ["-y", "@kan.bn/mcp"],
           "env": {
             "KAN_BASE_URL": "https://your-kan-instance.com",
             "KAN_API_TOKEN": "kan_your_api_key_here"
@@ -146,7 +146,7 @@ The server is configured via two environment variables:
     ```toml
     [mcp_servers.kan]
     command = "npx"
-    args = ["-y", "@kan/mcp"]
+    args = ["-y", "@kan.bn/mcp"]
     env = { "KAN_BASE_URL" = "https://your-kan-instance.com", "KAN_API_TOKEN" = "kan_your_api_key_here" }
     ```
 
@@ -156,7 +156,7 @@ The server is configured via two environment variables:
 
     ```bash
     command: npx
-    args: -y @kan/mcp
+    args: -y @kan.bn/mcp
     env: KAN_BASE_URL, KAN_API_TOKEN
     ```
 
