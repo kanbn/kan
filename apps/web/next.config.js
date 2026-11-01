@@ -35,7 +35,7 @@ const config = {
     "@kan/shared",
     "@kan/auth",
     "@kan/stripe",
-    "@kan/mcp",
+    "@kan.bn/mcp",
   ],
 
   /** We already do linting and typechecking as separate tasks in CI */
