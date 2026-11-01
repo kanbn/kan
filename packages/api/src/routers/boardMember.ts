@@ -15,7 +15,7 @@ import {
 } from "../schemas";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import {
-  assertBoardAccess,
+  assertBoardViewAccess,
   assertCanManageBoardMembers,
   assertPermission,
 } from "../utils/permissions";
@@ -82,7 +82,7 @@ export const boardMemberRouter = createTRPCRouter({
       const board = await getRegularBoardOrThrow(ctx.db, input.boardPublicId);
 
       await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
-      await assertBoardAccess(ctx.db, userId, board);
+      await assertBoardViewAccess(ctx.db, userId, board);
 
       const members = await boardMemberRepo.getByBoardId(ctx.db, board.id);
 
