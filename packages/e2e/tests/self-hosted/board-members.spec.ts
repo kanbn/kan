@@ -26,7 +26,14 @@ async function inviteSecondMember(ownerPage: Page, browser: Browser) {
     timeout: 20_000,
   });
 
-  return { memberUser, memberContext, memberPage };
+  const ownerWorkspacePublicId = new URL(memberPage.url()).searchParams.get(
+    "workspacePublicId",
+  );
+  if (!ownerWorkspacePublicId) {
+    throw new Error("Expected workspacePublicId in the post-invite URL");
+  }
+
+  return { memberUser, memberContext, memberPage, ownerWorkspacePublicId };
 }
 
 test(
@@ -47,12 +54,15 @@ test(
     await board.createBoard("Members Board");
     const boardUrl = page.url();
 
-    const { memberUser, memberContext, memberPage } = await inviteSecondMember(
-      page,
-      browser,
-    );
+    const { memberUser, memberContext, memberPage, ownerWorkspacePublicId } =
+      await inviteSecondMember(page, browser);
 
-    await memberPage.goto("/boards");
+    // A fresh navigation with the shared workspace pinned in the URL, since
+    // the invite-accept redirect can leave the client's workspace list
+    // query stale and fall back to the member's own workspace (see
+    // WorkspaceProvider) — pinning it here keeps this assertion about board
+    // visibility, not about that unrelated race.
+    await memberPage.goto(`/boards?workspacePublicId=${ownerWorkspacePublicId}`);
     await expect(
       memberPage.getByRole("link", { name: "Members Board" }),
     ).toHaveCount(0);
@@ -61,7 +71,7 @@ test(
     await board.goToBoardMembers();
     await boardMembers.addMember(memberUser.email);
 
-    await memberPage.goto("/boards");
+    await memberPage.goto(`/boards?workspacePublicId=${ownerWorkspacePublicId}`);
     await expect(
       memberPage.getByRole("link", { name: "Members Board" }),
     ).toBeVisible();
