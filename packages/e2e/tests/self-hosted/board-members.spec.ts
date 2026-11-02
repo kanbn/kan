@@ -57,11 +57,7 @@ test(
     const { memberUser, memberContext, memberPage, ownerWorkspacePublicId } =
       await inviteSecondMember(page, browser);
 
-    // A fresh navigation with the shared workspace pinned in the URL, since
-    // the invite-accept redirect can leave the client's workspace list
-    // query stale and fall back to the member's own workspace (see
-    // WorkspaceProvider) — pinning it here keeps this assertion about board
-    // visibility, not about that unrelated race.
+    // Pin the workspace: WorkspaceProvider can race to the member's own one post-invite.
     await memberPage.goto(`/boards?workspacePublicId=${ownerWorkspacePublicId}`);
     await expect(
       memberPage.getByRole("link", { name: "Members Board" }),
