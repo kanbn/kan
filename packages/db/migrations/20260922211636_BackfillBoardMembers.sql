@@ -17,6 +17,7 @@ WITH admin_candidate AS (
 		AND wm."status" <> 'removed'
 	ORDER BY
 		b."id",
+		(wm."status" = 'active') DESC,
 		(wm."userId" IS NOT NULL AND wm."userId" = b."createdBy") DESC,
 		(wm."userId" IS NOT NULL) DESC,
 		wm."id" ASC
