@@ -36,7 +36,7 @@ Key domain settings:
 ## Prerequisites
 
 - Docker and Docker Compose
-- Open local ports: 3000 (Kan), 5432 (Postgres), 9000/9001 (MinIO)
+- Open local ports: 3000 (Kan), 9000/9001 (MinIO)
 - A long random string for <code>BETTER_AUTH_SECRET</code> (32+ chars)
 
 <Note type="warning">
@@ -96,8 +96,6 @@ Key domain settings:
       postgres:
         image: postgres:15
         container_name: kan-db
-        ports:
-          - "5432:5432"
         environment:
           POSTGRES_USER: kan
           POSTGRES_PASSWORD: changeme
