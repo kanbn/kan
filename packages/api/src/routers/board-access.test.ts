@@ -189,3 +189,50 @@ describe("board.all visibility scoping", () => {
     );
   });
 });
+
+describe("board.create cloning access", () => {
+  const mockDb = {} as never;
+  const mockUser = { id: "user-123", name: "Test User", email: "test@example.com" };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockAssertPermission.mockResolvedValue(undefined);
+  });
+
+  it("won't clone a board the caller can't see", async () => {
+    const { boardRouter } = await import("./board");
+    const workspaceRepo = await import("@kan/db/repository/workspace.repo");
+    vi.mocked(workspaceRepo.getByPublicId).mockResolvedValueOnce({
+      id: 10,
+    } as never);
+    const sourceBoard = {
+      id: 1,
+      workspaceId: 10,
+      type: "regular" as const,
+      visibility: "private" as const,
+      deletedAt: null,
+    };
+    mockGetBoard.mockResolvedValueOnce(sourceBoard);
+    mockAssertBoardViewAccess.mockRejectedValueOnce(
+      new TRPCError({ code: "NOT_FOUND", message: "Board not found" }),
+    );
+    const ctx = { user: mockUser, db: mockDb } as never;
+
+    await expect(
+      boardRouter.createCaller(ctx).create({
+        name: "Copy",
+        workspacePublicId: "wsp-123456789",
+        lists: [],
+        labels: [],
+        sourceBoardPublicId: "brd-123456789",
+      }),
+    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+
+    expect(mockAssertBoardViewAccess).toHaveBeenCalledWith(
+      mockDb,
+      mockUser.id,
+      sourceBoard,
+    );
+    expect(mockGetByPublicId).not.toHaveBeenCalled();
+  });
+});
