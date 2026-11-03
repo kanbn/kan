@@ -1,4 +1,4 @@
-import { and, asc, count, eq, isNull, ne } from "drizzle-orm";
+import { and, asc, count, eq, isNotNull, isNull, ne } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { BoardMemberRole } from "@kan/db/schema";
@@ -156,13 +156,22 @@ export const removeAllForMember = async (
 
     if (!isSoleAdmin) continue;
 
+    // Only promote someone who can actually manage the board: an active,
+    // signed-up member. If there's nobody, workspace admins still can.
     const [replacement] = await db
       .select({ workspaceMemberId: boardMembers.workspaceMemberId })
       .from(boardMembers)
+      .innerJoin(
+        workspaceMembers,
+        eq(workspaceMembers.id, boardMembers.workspaceMemberId),
+      )
       .where(
         and(
           eq(boardMembers.boardId, boardId),
           ne(boardMembers.workspaceMemberId, workspaceMemberId),
+          eq(workspaceMembers.status, "active"),
+          isNotNull(workspaceMembers.userId),
+          isNull(workspaceMembers.deletedAt),
         ),
       )
       .orderBy(asc(boardMembers.createdAt))
