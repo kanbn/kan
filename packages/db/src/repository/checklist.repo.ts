@@ -1,4 +1,4 @@
-import { and, count, desc, eq, isNull } from "drizzle-orm";
+import { and, count, desc, eq, gt, isNull, sql } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import { checklistItems, checklists } from "@kan/db/schema";
@@ -381,43 +381,93 @@ export const reorderItem = async (
       throw new Error(`Checklist item not found for ID ${args.itemId}`);
     }
 
-    // `args.newIndex` is the item's desired position among its non-deleted
-    // siblings (as rendered in the UI), not a raw stored `index` value.
-    // Soft-deletes leave gaps in the stored indexes, so we rank the
-    // siblings ourselves and recompact them rather than comparing
-    // `args.newIndex` against stored index values directly.
-    const siblings = await tx.query.checklistItems.findMany({
-      columns: { id: true },
-      where: and(
-        eq(checklistItems.checklistId, item.checklistId),
-        isNull(checklistItems.deletedAt),
-      ),
-      orderBy: [checklistItems.index],
-    });
-
-    const currentPosition = siblings.findIndex((s) => s.id === item.id);
-
-    if (currentPosition === -1) {
-      throw new Error(`Checklist item not found for ID ${args.itemId}`);
-    }
-
-    const targetPosition = Math.min(
-      Math.max(args.newIndex, 0),
-      siblings.length - 1,
-    );
-
-    if (currentPosition !== targetPosition) {
-      const [moved] = siblings.splice(currentPosition, 1);
-      siblings.splice(targetPosition, 0, moved!);
-
-      await Promise.all(
-        siblings.map((sibling, index) =>
-          tx
-            .update(checklistItems)
-            .set({ index })
-            .where(eq(checklistItems.id, sibling.id)),
+    const [{ count: siblingCount } = { count: 0 }] = await tx
+      .select({ count: count() })
+      .from(checklistItems)
+      .where(
+        and(
+          eq(checklistItems.checklistId, item.checklistId),
+          isNull(checklistItems.deletedAt),
         ),
       );
+
+    // args.newIndex is a UI position, not a stored index, so rank by
+    // current index (ROW_NUMBER) rather than comparing raw values.
+    const targetPosition = Math.min(
+      Math.max(args.newIndex, 0),
+      Math.max(siblingCount - 1, 0),
+    );
+
+    await tx.execute(sql`
+      WITH ranked AS (
+        SELECT id, ROW_NUMBER() OVER (ORDER BY index, id) - 1 AS rank
+        FROM card_checklist_item
+        WHERE "checklistId" = ${item.checklistId} AND "deletedAt" IS NULL
+      ),
+      moved AS (
+        SELECT rank AS current_rank FROM ranked WHERE id = ${item.id}
+      )
+      UPDATE card_checklist_item t
+      SET index =
+        CASE
+          WHEN t.id = ${item.id} THEN ${targetPosition}
+          WHEN (SELECT current_rank FROM moved) < ${targetPosition}
+            AND r.rank > (SELECT current_rank FROM moved) AND r.rank <= ${targetPosition}
+            THEN r.rank - 1
+          WHEN (SELECT current_rank FROM moved) > ${targetPosition}
+            AND r.rank >= ${targetPosition} AND r.rank < (SELECT current_rank FROM moved)
+            THEN r.rank + 1
+          ELSE r.rank
+        END
+      FROM ranked r
+      WHERE t.id = r.id;
+    `);
+
+    // Safety net against a concurrent reorder race, mirrors list.repo.ts.
+    const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
+
+    const duplicateIndices = await tx
+      .select({ index: checklistItems.index, count: countExpr })
+      .from(checklistItems)
+      .where(
+        and(
+          eq(checklistItems.checklistId, item.checklistId),
+          isNull(checklistItems.deletedAt),
+        ),
+      )
+      .groupBy(checklistItems.index)
+      .having(gt(countExpr, 1));
+
+    if (duplicateIndices.length > 0) {
+      await tx.execute(sql`
+        WITH ordered AS (
+          SELECT id, ROW_NUMBER() OVER (ORDER BY "index", id) - 1 AS new_index
+          FROM "card_checklist_item"
+          WHERE "checklistId" = ${item.checklistId} AND "deletedAt" IS NULL
+        )
+        UPDATE "card_checklist_item" ci
+        SET "index" = o.new_index
+        FROM ordered o
+        WHERE ci.id = o.id;
+      `);
+
+      const postFixDupes = await tx
+        .select({ index: checklistItems.index, count: countExpr })
+        .from(checklistItems)
+        .where(
+          and(
+            eq(checklistItems.checklistId, item.checklistId),
+            isNull(checklistItems.deletedAt),
+          ),
+        )
+        .groupBy(checklistItems.index)
+        .having(gt(countExpr, 1));
+
+      if (postFixDupes.length > 0) {
+        throw new Error(
+          `Invariant violation: duplicate indices remain after compaction for checklist ${item.checklistId}`,
+        );
+      }
     }
 
     const updated = await tx.query.checklistItems.findFirst({

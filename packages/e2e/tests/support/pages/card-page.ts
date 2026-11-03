@@ -191,6 +191,36 @@ export class CardPage {
     await updated;
   }
 
+  private checklistItemRow(title: string) {
+    return this.page.locator("div.items-start").filter({ hasText: title });
+  }
+
+  async deleteChecklistItem(title: string) {
+    const row = this.checklistItemRow(title);
+    await row.hover();
+    const deleted = waitForTrpcMutation(this.page, "checklist.deleteItem");
+    await row.getByRole("button").click();
+    await deleted;
+  }
+
+  async getChecklistItemTitles() {
+    return this.page
+      .locator("div.items-start .plain-text-editor")
+      .allTextContents();
+  }
+
+  async dragChecklistItemDown(title: string, steps: number) {
+    const handle = this.checklistItemRow(title).locator(".cursor-grab");
+    await handle.focus();
+    await this.page.keyboard.press("Space");
+    for (let i = 0; i < steps; i++) {
+      await this.page.keyboard.press("ArrowDown");
+    }
+    const reordered = waitForTrpcMutation(this.page, "checklist.updateItem");
+    await this.page.keyboard.press("Space");
+    await reordered;
+  }
+
   async deleteChecklist() {
     await this.page
       .getByRole("button", { name: "Delete checklist", exact: true })
