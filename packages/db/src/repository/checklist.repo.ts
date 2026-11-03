@@ -381,77 +381,63 @@ export const reorderItem = async (
       throw new Error(`Checklist item not found for ID ${args.itemId}`);
     }
 
-    const [{ count: siblingCount } = { count: 0 }] = await tx
-      .select({ count: count() })
+    // Lock every live sibling for the rest of this transaction, so a
+    // concurrent reorder/delete on the same checklist serializes instead of
+    // racing against this one's rank computation (mirrors lockAdminRows in
+    // boardMember.repo.ts).
+    const siblings = await tx
+      .select({ id: checklistItems.id })
       .from(checklistItems)
       .where(
         and(
           eq(checklistItems.checklistId, item.checklistId),
           isNull(checklistItems.deletedAt),
         ),
-      );
+      )
+      .orderBy(checklistItems.index, checklistItems.id)
+      .for("update");
+
+    const currentPosition = siblings.findIndex((s) => s.id === item.id);
+
+    if (currentPosition === -1) {
+      throw new Error(`Checklist item not found for ID ${args.itemId}`);
+    }
 
     // args.newIndex is a UI position, not a stored index, so rank by
     // current index (ROW_NUMBER) rather than comparing raw values.
     const targetPosition = Math.min(
       Math.max(args.newIndex, 0),
-      Math.max(siblingCount - 1, 0),
+      siblings.length - 1,
     );
 
-    await tx.execute(sql`
-      WITH ranked AS (
-        SELECT id, ROW_NUMBER() OVER (ORDER BY index, id) - 1 AS rank
-        FROM card_checklist_item
-        WHERE "checklistId" = ${item.checklistId} AND "deletedAt" IS NULL
-      ),
-      moved AS (
-        SELECT rank AS current_rank FROM ranked WHERE id = ${item.id}
-      )
-      UPDATE card_checklist_item t
-      SET index =
-        CASE
-          WHEN t.id = ${item.id} THEN ${targetPosition}
-          WHEN (SELECT current_rank FROM moved) < ${targetPosition}
-            AND r.rank > (SELECT current_rank FROM moved) AND r.rank <= ${targetPosition}
-            THEN r.rank - 1
-          WHEN (SELECT current_rank FROM moved) > ${targetPosition}
-            AND r.rank >= ${targetPosition} AND r.rank < (SELECT current_rank FROM moved)
-            THEN r.rank + 1
-          ELSE r.rank
-        END
-      FROM ranked r
-      WHERE t.id = r.id;
-    `);
-
-    // Safety net against a concurrent reorder race, mirrors list.repo.ts.
-    const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
-
-    const duplicateIndices = await tx
-      .select({ index: checklistItems.index, count: countExpr })
-      .from(checklistItems)
-      .where(
-        and(
-          eq(checklistItems.checklistId, item.checklistId),
-          isNull(checklistItems.deletedAt),
-        ),
-      )
-      .groupBy(checklistItems.index)
-      .having(gt(countExpr, 1));
-
-    if (duplicateIndices.length > 0) {
+    if (currentPosition !== targetPosition) {
       await tx.execute(sql`
-        WITH ordered AS (
-          SELECT id, ROW_NUMBER() OVER (ORDER BY "index", id) - 1 AS new_index
-          FROM "card_checklist_item"
+        WITH ranked AS (
+          SELECT id, ROW_NUMBER() OVER (ORDER BY index, id) - 1 AS rank
+          FROM card_checklist_item
           WHERE "checklistId" = ${item.checklistId} AND "deletedAt" IS NULL
         )
-        UPDATE "card_checklist_item" ci
-        SET "index" = o.new_index
-        FROM ordered o
-        WHERE ci.id = o.id;
+        UPDATE card_checklist_item t
+        SET index =
+          CASE
+            WHEN t.id = ${item.id} THEN ${targetPosition}
+            WHEN ${currentPosition} < ${targetPosition}
+              AND r.rank > ${currentPosition} AND r.rank <= ${targetPosition}
+              THEN r.rank - 1
+            WHEN ${currentPosition} > ${targetPosition}
+              AND r.rank >= ${targetPosition} AND r.rank < ${currentPosition}
+              THEN r.rank + 1
+            ELSE r.rank
+          END
+        FROM ranked r
+        WHERE t.id = r.id;
       `);
 
-      const postFixDupes = await tx
+      // Safety net: the lock above should make this unreachable, but fail
+      // loudly rather than silently leaving a corrupted order if it ever is.
+      const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
+
+      const duplicateIndices = await tx
         .select({ index: checklistItems.index, count: countExpr })
         .from(checklistItems)
         .where(
@@ -463,9 +449,9 @@ export const reorderItem = async (
         .groupBy(checklistItems.index)
         .having(gt(countExpr, 1));
 
-      if (postFixDupes.length > 0) {
+      if (duplicateIndices.length > 0) {
         throw new Error(
-          `Invariant violation: duplicate indices remain after compaction for checklist ${item.checklistId}`,
+          `Invariant violation: duplicate indices for checklist ${item.checklistId}`,
         );
       }
     }
@@ -476,7 +462,10 @@ export const reorderItem = async (
         title: true,
         completed: true,
       },
-      where: eq(checklistItems.id, args.itemId),
+      where: and(
+        eq(checklistItems.id, args.itemId),
+        isNull(checklistItems.deletedAt),
+      ),
     });
 
     if (!updated) {
