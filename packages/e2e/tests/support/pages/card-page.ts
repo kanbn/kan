@@ -199,7 +199,7 @@ export class CardPage {
     const row = this.checklistItemRow(title);
     await row.hover();
     const deleted = waitForTrpcMutation(this.page, "checklist.deleteItem");
-    await row.getByRole("button").click();
+    await row.locator("button").click();
     await deleted;
   }
 
