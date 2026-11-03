@@ -1199,6 +1199,33 @@ export const cardRouter = createTRPCRouter({
         });
       }
 
+      // Moving to another board unassigns anyone who isn't on that board.
+      if (newList && newList.boardId !== card.boardId) {
+        const assignees = await cardRepo.getAssignees(ctx.db, card.id);
+        const keep = new Set(
+          (
+            await filterBoardAssignable(
+              ctx.db,
+              { id: newList.boardId, type: newList.boardType },
+              assignees,
+            )
+          ).map((member) => member.id),
+        );
+
+        for (const member of assignees.filter((m) => !keep.has(m.id))) {
+          await cardRepo.hardDeleteCardMemberRelationship(ctx.db, {
+            cardId: card.id,
+            memberId: member.id,
+          });
+          activities.push({
+            type: "card.updated.member.removed" as const,
+            cardId: card.id,
+            workspaceMemberId: member.id,
+            createdBy: userId,
+          });
+        }
+      }
+
       if (activities.length > 0) {
         await cardActivityRepo.bulkCreate(ctx.db, activities);
       }

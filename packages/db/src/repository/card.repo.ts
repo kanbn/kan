@@ -1075,6 +1075,17 @@ export const softDeleteAllByListIds = async (
   return updatedCards;
 };
 
+export const getAssignees = (db: dbClient, cardId: number) => {
+  return db
+    .select({ id: workspaceMembers.id, role: workspaceMembers.role })
+    .from(cardToWorkspaceMembers)
+    .innerJoin(
+      workspaceMembers,
+      eq(workspaceMembers.id, cardToWorkspaceMembers.workspaceMemberId),
+    )
+    .where(eq(cardToWorkspaceMembers.cardId, cardId));
+};
+
 export const hardDeleteCardMemberRelationship = async (
   db: dbClient,
   args: { cardId: number; memberId: number },
