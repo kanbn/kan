@@ -52,7 +52,6 @@ vi.mock("../utils/permissions", () => ({
   assertCanDelete: vi.fn(),
   assertPermission: vi.fn(),
   assertBoardAccess: vi.fn(),
-  assertBoardViewAccess: vi.fn(),
   isWorkspaceAdmin: vi.fn(),
 }));
 
@@ -69,7 +68,7 @@ vi.mock("@kan/shared/constants", () => ({
 
 import * as boardRepo from "@kan/db/repository/board.repo";
 import {
-  assertBoardViewAccess,
+  assertBoardAccess,
   assertPermission,
   isWorkspaceAdmin,
 } from "../utils/permissions";
@@ -82,7 +81,7 @@ const mockGetAllByWorkspaceId = boardRepo.getAllByWorkspaceId as ReturnType<
   typeof vi.fn
 >;
 const mockAssertPermission = assertPermission as ReturnType<typeof vi.fn>;
-const mockAssertBoardViewAccess = assertBoardViewAccess as ReturnType<
+const mockAssertBoardAccess = assertBoardAccess as ReturnType<
   typeof vi.fn
 >;
 const mockIsWorkspaceAdmin = isWorkspaceAdmin as ReturnType<typeof vi.fn>;
@@ -100,10 +99,10 @@ describe("board.byId access gating", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockAssertPermission.mockResolvedValue(undefined);
-    mockAssertBoardViewAccess.mockResolvedValue(undefined);
+    mockAssertBoardAccess.mockResolvedValue(undefined);
   });
 
-  it("checks board view access (public-sharing aware)", async () => {
+  it("checks board access", async () => {
     const { boardRouter } = await import("./board");
     mockGetBoard.mockResolvedValueOnce(mockRegularBoard);
     mockGetByPublicId.mockResolvedValueOnce(null);
@@ -113,17 +112,17 @@ describe("board.byId access gating", () => {
       boardRouter.createCaller(ctx).byId({ boardPublicId: "brd-123456789" }),
     ).rejects.toThrow(TRPCError);
 
-    expect(mockAssertBoardViewAccess).toHaveBeenCalledWith(
+    expect(mockAssertBoardAccess).toHaveBeenCalledWith(
       mockDb,
       mockUser.id,
       mockRegularBoard,
     );
   });
 
-  it("propagates NOT_FOUND from assertBoardViewAccess for uninvited members", async () => {
+  it("propagates NOT_FOUND from assertBoardAccess for uninvited members", async () => {
     const { boardRouter } = await import("./board");
     mockGetBoard.mockResolvedValueOnce(mockRegularBoard);
-    mockAssertBoardViewAccess.mockRejectedValueOnce(
+    mockAssertBoardAccess.mockRejectedValueOnce(
       new TRPCError({ code: "NOT_FOUND", message: "Board not found" }),
     );
     const ctx = { user: mockUser, db: mockDb } as never;
@@ -213,7 +212,7 @@ describe("board.create cloning access", () => {
       deletedAt: null,
     };
     mockGetBoard.mockResolvedValueOnce(sourceBoard);
-    mockAssertBoardViewAccess.mockRejectedValueOnce(
+    mockAssertBoardAccess.mockRejectedValueOnce(
       new TRPCError({ code: "NOT_FOUND", message: "Board not found" }),
     );
     const ctx = { user: mockUser, db: mockDb } as never;
@@ -228,7 +227,7 @@ describe("board.create cloning access", () => {
       }),
     ).rejects.toMatchObject({ code: "NOT_FOUND" });
 
-    expect(mockAssertBoardViewAccess).toHaveBeenCalledWith(
+    expect(mockAssertBoardAccess).toHaveBeenCalledWith(
       mockDb,
       mockUser.id,
       sourceBoard,

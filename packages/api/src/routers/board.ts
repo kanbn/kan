@@ -25,7 +25,6 @@ import {
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
 import {
   assertBoardAccess,
-  assertBoardViewAccess,
   assertCanDelete,
   assertCanEdit,
   assertPermission,
@@ -144,7 +143,7 @@ export const boardRouter = createTRPCRouter({
         });
 
       await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
-      await assertBoardViewAccess(ctx.db, userId, board);
+      await assertBoardAccess(ctx.db, userId, board);
 
       // Convert semantic string filters to date ranges expected by the repo
       const dueDateFilters = input.dueDateFilters
@@ -361,7 +360,7 @@ export const boardRouter = createTRPCRouter({
 
         // Copying a board exposes all of its content, so the caller must be
         // able to see the source board.
-        await assertBoardViewAccess(ctx.db, userId, sourceBoardInfo);
+        await assertBoardAccess(ctx.db, userId, sourceBoardInfo);
 
         // Get the full board data with the correct type
         const sourceBoard = await boardRepo.getByPublicId(

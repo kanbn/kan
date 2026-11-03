@@ -55,9 +55,9 @@ export const getAllByWorkspaceId = async (
     isWorkspaceAdmin?: boolean;
   },
 ) => {
-  // Templates and public boards stay visible to the whole workspace;
-  // regular private boards are scoped to explicit board membership unless
-  // the user is a workspace admin.
+  // Templates stay visible to the whole workspace; regular boards (public
+  // or private) are scoped to explicit board membership unless the user is
+  // a workspace admin. Public only means "viewable via the share link".
   const memberBoardIds = opts?.isWorkspaceAdmin
     ? undefined
     : await boardMemberRepo.getMemberBoardIds(db, { workspaceId, userId });
@@ -100,7 +100,6 @@ export const getAllByWorkspaceId = async (
       memberBoardIds
         ? or(
             eq(boards.type, "template"),
-            eq(boards.visibility, "public"),
             inArray(boards.id, memberBoardIds),
           )
         : undefined,

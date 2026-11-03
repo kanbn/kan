@@ -369,12 +369,9 @@ export async function filterBoardAssignable<
  * Assert a user can see a board - throws NOT_FOUND (rather than FORBIDDEN)
  * since uninvited boards should be invisible, not merely inaccessible.
  *
- * This is the strict check: it does NOT treat "public" boards as open to
- * the whole workspace. Use it to gate reads and writes of board-scoped
- * content (cards, lists, labels, ...), where "public" only ever means
- * "viewable via the public share link", never "editable by any member".
- * For board-level read endpoints that should also honor public sharing,
- * use assertBoardViewAccess instead.
+ * "Public" boards are not open to the whole workspace: public only means
+ * "viewable via the public share link" (board.bySlug), so non-members can't
+ * see or edit them inside the app either.
  */
 export async function assertBoardAccess(
   db: dbClient,
@@ -389,23 +386,6 @@ export async function assertBoardAccess(
       code: "NOT_FOUND",
     });
   }
-}
-
-/**
- * Like assertBoardAccess, but a "public" board is also visible to every
- * workspace member - matching the pre-existing public share-link feature,
- * which already lets even anonymous, non-workspace users view it. Reserved
- * for read-only board endpoints (board.byId, board.all, label.byPublicId);
- * mutations must keep using assertBoardAccess.
- */
-export async function assertBoardViewAccess(
-  db: dbClient,
-  userId: string,
-  board: { id: number; workspaceId: number; type: string; visibility: string },
-): Promise<void> {
-  if (board.visibility === "public") return;
-
-  await assertBoardAccess(db, userId, board);
 }
 
 /**

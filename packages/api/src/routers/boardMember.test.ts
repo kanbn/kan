@@ -20,7 +20,7 @@ vi.mock("@kan/db/repository/member.repo", () => ({
 
 vi.mock("../utils/permissions", () => ({
   assertPermission: vi.fn(),
-  assertBoardViewAccess: vi.fn(),
+  assertBoardAccess: vi.fn(),
   assertCanManageBoardMembers: vi.fn(),
 }));
 
@@ -28,7 +28,7 @@ import * as boardRepo from "@kan/db/repository/board.repo";
 import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import {
-  assertBoardViewAccess,
+  assertBoardAccess,
   assertCanManageBoardMembers,
   assertPermission,
 } from "../utils/permissions";
@@ -42,7 +42,7 @@ const mockUpdateRole = boardMemberRepo.updateRole as ReturnType<typeof vi.fn>;
 const mockRemove = boardMemberRepo.remove as ReturnType<typeof vi.fn>;
 const mockGetMemberByPublicId = memberRepo.getByPublicId as ReturnType<typeof vi.fn>;
 const mockAssertPermission = assertPermission as ReturnType<typeof vi.fn>;
-const mockAssertBoardViewAccess = assertBoardViewAccess as ReturnType<
+const mockAssertBoardAccess = assertBoardAccess as ReturnType<
   typeof vi.fn
 >;
 const mockAssertCanManageBoardMembers =
@@ -70,7 +70,7 @@ describe("boardMember router", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockAssertPermission.mockResolvedValue(undefined);
-    mockAssertBoardViewAccess.mockResolvedValue(undefined);
+    mockAssertBoardAccess.mockResolvedValue(undefined);
     mockAssertCanManageBoardMembers.mockResolvedValue(undefined);
     mockGetBoard.mockResolvedValue(mockBoard);
     mockGetMemberByPublicId.mockResolvedValue(mockTargetMember);
@@ -125,7 +125,7 @@ describe("boardMember router", () => {
 
       await boardMemberRouter.createCaller(ctx).all({ boardPublicId: "brd-123456789" });
 
-      expect(mockAssertBoardViewAccess).toHaveBeenCalledWith(
+      expect(mockAssertBoardAccess).toHaveBeenCalledWith(
         mockDb,
         mockUser.id,
         mockBoard,

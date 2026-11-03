@@ -440,7 +440,6 @@ export const searchBoardsAndCards = async (
   const boardAccess = memberBoardIds
     ? or(
         eq(boards.type, "template"),
-        eq(boards.visibility, "public"),
         inArray(boards.id, memberBoardIds),
       )
     : undefined;

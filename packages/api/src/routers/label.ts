@@ -8,7 +8,6 @@ import * as labelRepo from "@kan/db/repository/label.repo";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import {
   assertBoardAccess,
-  assertBoardViewAccess,
   assertPermission,
 } from "../utils/permissions";
 
@@ -52,11 +51,10 @@ export const labelRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
       await assertPermission(ctx.db, userId, label.workspaceId, "board:view");
-      await assertBoardViewAccess(ctx.db, userId, {
+      await assertBoardAccess(ctx.db, userId, {
         id: label.boardId,
         workspaceId: label.workspaceId,
         type: label.boardType,
-        visibility: label.boardVisibility,
       });
 
       const result = await labelRepo.getByPublicId(ctx.db, input.labelPublicId);
