@@ -3,6 +3,7 @@ import { env } from "next-runtime-env";
 import { z } from "zod";
 
 import type { WorkspacePlan } from "@kan/db/schema";
+import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import * as workspaceSlugRepo from "@kan/db/repository/workspaceSlug.repo";
@@ -18,7 +19,7 @@ import {
 } from "../schemas";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
-import { assertPermission } from "../utils/permissions";
+import { assertPermission, isWorkspaceAdmin } from "../utils/permissions";
 
 export const workspaceRouter = createTRPCRouter({
   all: protectedProcedure
@@ -622,11 +623,23 @@ export const workspaceRouter = createTRPCRouter({
         });
       await assertPermission(ctx.db, userId, workspace.id, "workspace:view");
 
+      const memberBoardIds = (await isWorkspaceAdmin(
+        ctx.db,
+        userId,
+        workspace.id,
+      ))
+        ? undefined
+        : await boardMemberRepo.getMemberBoardIds(ctx.db, {
+            workspaceId: workspace.id,
+            userId,
+          });
+
       const result = await workspaceRepo.searchBoardsAndCards(
         ctx.db,
         workspace.id,
         input.query,
         input.limit,
+        memberBoardIds,
       );
 
       return result;
