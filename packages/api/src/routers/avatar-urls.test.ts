@@ -7,6 +7,10 @@ import { generateAvatarUrl } from "@kan/shared/utils";
 
 import { assertPermission } from "../utils/permissions";
 
+vi.mock("@kan/db/repository/boardMember.repo", () => ({
+  isOnBoard: vi.fn(),
+}));
+
 vi.mock("@kan/db/repository/card.repo", () => ({
   getWorkspaceAndCardIdByCardPublicId: vi.fn(),
   getWithListAndMembersByPublicId: vi.fn(),

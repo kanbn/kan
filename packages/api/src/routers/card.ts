@@ -1,6 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
+import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import { CardLabelBoardError } from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
@@ -698,6 +699,21 @@ export const cardRouter = createTRPCRouter({
 
         return { newMember: false };
       }
+
+      // Only assign people who can see the board: workspace admins see every
+      // board, everyone else needs a board membership on regular boards.
+      if (
+        card.boardType === "regular" &&
+        member.role !== "admin" &&
+        !(await boardMemberRepo.isOnBoard(ctx.db, {
+          boardId: card.boardId,
+          workspaceMemberId: member.id,
+        }))
+      )
+        throw new TRPCError({
+          message: `Member is not on this board`,
+          code: "BAD_REQUEST",
+        });
 
       const newCardMemberRelationship =
         await cardRepo.createCardMemberRelationship(ctx.db, cardMemberIds);

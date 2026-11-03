@@ -242,6 +242,24 @@ export const getMembership = async (
   return result;
 };
 
+export const isOnBoard = async (
+  db: dbClient,
+  args: { boardId: number; workspaceMemberId: number },
+) => {
+  const [result] = await db
+    .select({ boardId: boardMembers.boardId })
+    .from(boardMembers)
+    .where(
+      and(
+        eq(boardMembers.boardId, args.boardId),
+        eq(boardMembers.workspaceMemberId, args.workspaceMemberId),
+      ),
+    )
+    .limit(1);
+
+  return !!result;
+};
+
 export const getMemberBoardIds = async (
   db: dbClient,
   args: { workspaceId: number; userId: string },

@@ -335,6 +335,7 @@ export const getMemberByPublicId = (
   return db.query.workspaceMembers.findFirst({
     columns: {
       id: true,
+      role: true,
     },
     where: and(
       eq(workspaceMembers.publicId, memberPublicId),

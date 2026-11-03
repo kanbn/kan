@@ -1,12 +1,17 @@
 import type { TRPCError } from "@trpc/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
 import { assertPermission } from "../utils/permissions";
+
+vi.mock("@kan/db/repository/boardMember.repo", () => ({
+  isOnBoard: vi.fn(),
+}));
 
 vi.mock("@kan/db/repository/card.repo", () => ({
   create: vi.fn(),
@@ -205,6 +210,31 @@ describe("card member workspace scoping", () => {
         cardRouter.createCaller(ctx).addOrRemoveMember(input),
       ).resolves.toEqual({ newMember: false });
 
+      expect(mockCreateCardMember).not.toHaveBeenCalled();
+    });
+
+    it("rejects assigning a member who is not on the board", async () => {
+      const { cardRouter } = await import("./card");
+      mockGetCard.mockResolvedValueOnce({
+        id: 17,
+        workspaceId: 7,
+        boardId: 3,
+        boardType: "regular",
+      });
+      mockGetMember.mockResolvedValueOnce({ id: 21, role: "member" });
+      mockGetCardMember.mockResolvedValueOnce(undefined);
+      vi.mocked(boardMemberRepo.isOnBoard).mockResolvedValueOnce(false);
+
+      await expect(
+        cardRouter.createCaller(ctx).addOrRemoveMember(input),
+      ).rejects.toMatchObject({
+        code: "BAD_REQUEST",
+      } satisfies Partial<TRPCError>);
+
+      expect(boardMemberRepo.isOnBoard).toHaveBeenCalledWith(mockDb, {
+        boardId: 3,
+        workspaceMemberId: 21,
+      });
       expect(mockCreateCardMember).not.toHaveBeenCalled();
     });
   });
