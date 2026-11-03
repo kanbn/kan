@@ -1,6 +1,7 @@
 import { env } from "next-runtime-env";
 
 import type { dbClient } from "@kan/db/client";
+import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as notificationRepo from "@kan/db/repository/notification.repo";
@@ -10,6 +11,7 @@ import { sendEmail } from "@kan/email";
 import { createLogger } from "@kan/logger";
 
 import { getNewMentionPublicIds } from "./mention-notifications";
+import { hasBoardAccess } from "./permissions";
 
 const log = createLogger("notifications");
 
@@ -72,10 +74,25 @@ export async function sendMentionEmails({
       workspaceId,
     );
 
-    // Filter out the commenter
-    const membersToNotify = membersWithDetails.filter(
-      (member) => member.user?.id !== commenterUserId,
+    const boardAccess = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
+      db,
+      board.publicId,
     );
+    if (!boardAccess) return;
+
+    // Filter out the commenter and anyone who can't see this board, so a
+    // private board's name and card title aren't emailed to non-members.
+    const membersToNotify = (
+      await Promise.all(
+        membersWithDetails.map(async (member) =>
+          member.user?.id &&
+          member.user.id !== commenterUserId &&
+          (await hasBoardAccess(db, member.user.id, boardAccess))
+            ? member
+            : null,
+        ),
+      )
+    ).filter((member) => member !== null);
 
     if (membersToNotify.length === 0) return;
 
