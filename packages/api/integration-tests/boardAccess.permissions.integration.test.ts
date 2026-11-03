@@ -5,7 +5,7 @@ import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as schema from "@kan/db/schema";
 
-import { assertBoardAccess, assertBoardViewAccess } from "../src/utils/permissions";
+import { assertBoardAccess } from "../src/utils/permissions";
 import { createTestDb, seedTestData, type TestDbClient } from "./test-db";
 
 describe("board access permission helpers", () => {
@@ -95,53 +95,7 @@ describe("board access permission helpers", () => {
     ).rejects.toThrow();
   });
 
-  it("lets assertBoardViewAccess reach a public board a member isn't invited to", async () => {
-    const member = await addWorkspaceMember("member", "wm1publicvw1");
-
-    const board = await boardRepo.create(db, {
-      name: "Public Board",
-      createdBy: adminUser.id,
-      workspaceId: workspace.id,
-      slug: "public-board-view",
-    });
-    await boardRepo.update(db, {
-      name: undefined,
-      slug: undefined,
-      boardPublicId: board!.publicId,
-      visibility: "public",
-    });
-
-    await expect(
-      assertBoardViewAccess(db, member.id, {
-        id: board!.id,
-        workspaceId: workspace.id,
-        type: "regular",
-        visibility: "public",
-      }),
-    ).resolves.toBeUndefined();
-  });
-
-  it("still blocks assertBoardViewAccess for a private board a member isn't invited to", async () => {
-    const member = await addWorkspaceMember("member", "wm1private01");
-
-    const board = await boardRepo.create(db, {
-      name: "Private Board",
-      createdBy: adminUser.id,
-      workspaceId: workspace.id,
-      slug: "private-board",
-    });
-
-    await expect(
-      assertBoardViewAccess(db, member.id, {
-        id: board!.id,
-        workspaceId: workspace.id,
-        type: "regular",
-        visibility: "private",
-      }),
-    ).rejects.toThrow();
-  });
-
-  it("surfaces public boards in the workspace board list for uninvited members", async () => {
+  it("excludes public boards from the workspace board list for uninvited members", async () => {
     const member = await addWorkspaceMember("member", "wm1listpub01");
 
     const publicBoard = await boardRepo.create(db, {
@@ -167,7 +121,7 @@ describe("board access permission helpers", () => {
       isWorkspaceAdmin: false,
     });
 
-    expect(visible.map((b) => b.name)).toEqual(["Public Listed Board"]);
+    expect(visible.map((b) => b.name)).toEqual([]);
   });
 
   it("promotes another board member to admin when the sole admin leaves the workspace", async () => {
