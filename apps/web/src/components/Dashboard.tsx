@@ -176,7 +176,7 @@ export default function Dashboard({
           height: 100vh;
           overflow: hidden;
           min-width: 320px;
-          background-color: ${!isDarkMode ? "hsl(0deg 0% 97.3%)" : "#1c1c1c"};
+          background-color: ${!isDarkMode ? "hsl(0deg 0% 97.3%)" : "#18201f"};
         }
       `}</style>
       <div className="relative flex h-screen flex-col bg-light-50 dark:bg-dark-50 md:bg-light-100 md:p-3 md:dark:bg-dark-100">
