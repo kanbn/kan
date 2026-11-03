@@ -27,9 +27,11 @@ import { mergeActivities } from "../utils/activities";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
 import { sendMentionEmails } from "../utils/notifications";
 import {
+  assertBoardAccess,
   assertCanDelete,
   assertCanEdit,
   assertPermission,
+  filterBoardAssignable,
 } from "../utils/permissions";
 import {
   createCardWebhookPayload,
@@ -81,6 +83,11 @@ export const cardRouter = createTRPCRouter({
         });
 
       await assertPermission(ctx.db, userId, list.workspaceId, "card:create");
+      await assertBoardAccess(ctx.db, userId, {
+        id: list.boardId,
+        workspaceId: list.workspaceId,
+        type: list.boardType,
+      });
 
       // Resolved before the card is created: the labels must belong to the
       // board the card is being created on, and a rejection after cardRepo.create
@@ -122,6 +129,18 @@ export const cardRouter = createTRPCRouter({
         throw new TRPCError({
           message: `Members with public IDs (${input.memberPublicIds.join(", ")}) not found`,
           code: "NOT_FOUND",
+        });
+
+      const assignableMembers = await filterBoardAssignable(
+        ctx.db,
+        { id: list.boardId, type: list.boardType },
+        members,
+      );
+
+      if (assignableMembers.length !== members.length)
+        throw new TRPCError({
+          message: `Members must be on the board to be assigned`,
+          code: "BAD_REQUEST",
         });
 
       const newCard = await cardRepo.create(ctx.db, {
@@ -280,6 +299,11 @@ export const cardRouter = createTRPCRouter({
         card.workspaceId,
         "comment:create",
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: card.boardId,
+        workspaceId: card.workspaceId,
+        type: card.boardType,
+      });
 
       const newComment = await cardCommentRepo.create(ctx.db, {
         comment: input.comment,
@@ -369,6 +393,11 @@ export const cardRouter = createTRPCRouter({
         "comment:edit",
         existingComment.createdBy,
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: card.boardId,
+        workspaceId: card.workspaceId,
+        type: card.boardType,
+      });
 
       const updatedComment = await cardCommentRepo.update(ctx.db, {
         id: existingComment.id,
@@ -456,6 +485,11 @@ export const cardRouter = createTRPCRouter({
         "comment:delete",
         existingComment.createdBy,
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: card.boardId,
+        workspaceId: card.workspaceId,
+        type: card.boardType,
+      });
 
       const deletedComment = await cardCommentRepo.softDelete(ctx.db, {
         commentId: existingComment.id,
@@ -517,6 +551,11 @@ export const cardRouter = createTRPCRouter({
         });
 
       await assertPermission(ctx.db, userId, card.workspaceId, "card:edit");
+      await assertBoardAccess(ctx.db, userId, {
+        id: card.boardId,
+        workspaceId: card.workspaceId,
+        type: card.boardType,
+      });
 
       const label = await labelRepo.getByPublicId(ctx.db, input.labelPublicId);
 
@@ -625,6 +664,11 @@ export const cardRouter = createTRPCRouter({
         });
 
       await assertPermission(ctx.db, userId, card.workspaceId, "card:edit");
+      await assertBoardAccess(ctx.db, userId, {
+        id: card.boardId,
+        workspaceId: card.workspaceId,
+        type: card.boardType,
+      });
 
       const member = await workspaceRepo.getMemberByPublicId(
         ctx.db,
@@ -667,6 +711,19 @@ export const cardRouter = createTRPCRouter({
 
         return { newMember: false };
       }
+
+      // Only assign people who can see the board.
+      const [assignable] = await filterBoardAssignable(
+        ctx.db,
+        { id: card.boardId, type: card.boardType },
+        [member],
+      );
+
+      if (!assignable)
+        throw new TRPCError({
+          message: `Member is not on this board`,
+          code: "BAD_REQUEST",
+        });
 
       const newCardMemberRelationship =
         await cardRepo.createCardMemberRelationship(ctx.db, cardMemberIds);
@@ -720,6 +777,11 @@ export const cardRouter = createTRPCRouter({
           });
 
         await assertPermission(ctx.db, userId, card.workspaceId, "card:view");
+        await assertBoardAccess(ctx.db, userId, {
+          id: card.boardId,
+          workspaceId: card.workspaceId,
+          type: card.boardType,
+        });
       }
 
       const result = await cardRepo.getWithListAndMembersByPublicId(
@@ -753,8 +815,15 @@ export const cardRouter = createTRPCRouter({
       const workspaceWithAvatarUrls = result.list.board.workspace
         ? {
             ...result.list.board.workspace,
+            // Only offer people who belong on this board as assignees/mentions.
             members: await Promise.all(
-              result.list.board.workspace.members.map(async (member) => {
+              (
+                await filterBoardAssignable(
+                  ctx.db,
+                  { id: card.boardId, type: card.boardType },
+                  result.list.board.workspace.members,
+                )
+              ).map(async (member) => {
                 if (!member.user?.image) {
                   return member;
                 }
@@ -834,6 +903,11 @@ export const cardRouter = createTRPCRouter({
           });
 
         await assertPermission(ctx.db, userId, card.workspaceId, "card:view");
+        await assertBoardAccess(ctx.db, userId, {
+          id: card.boardId,
+          workspaceId: card.workspaceId,
+          type: card.boardType,
+        });
       }
 
       const cursor = input.cursor
@@ -951,6 +1025,11 @@ export const cardRouter = createTRPCRouter({
         "card:edit",
         card.createdBy,
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: card.boardId,
+        workspaceId: card.workspaceId,
+        type: card.boardType,
+      });
 
       const existingCard = await cardRepo.getByPublicId(
         ctx.db,
@@ -965,6 +1044,8 @@ export const cardRouter = createTRPCRouter({
             name: string;
             boardId: number;
             index: number;
+            workspaceId: number;
+            boardType: string;
           }
         | undefined;
 
@@ -976,6 +1057,18 @@ export const cardRouter = createTRPCRouter({
             message: `List with public ID ${input.listPublicId} not found`,
             code: "NOT_FOUND",
           });
+
+        if (newList.workspaceId !== card.workspaceId)
+          throw new TRPCError({
+            message: `Target list must be in the same workspace`,
+            code: "BAD_REQUEST",
+          });
+
+        await assertBoardAccess(ctx.db, userId, {
+          id: newList.boardId,
+          workspaceId: newList.workspaceId,
+          type: newList.boardType,
+        });
 
         newListId = newList.id;
       }
@@ -1106,6 +1199,33 @@ export const cardRouter = createTRPCRouter({
         });
       }
 
+      // Moving to another board unassigns anyone who isn't on that board.
+      if (newList && newList.boardId !== card.boardId) {
+        const assignees = await cardRepo.getAssignees(ctx.db, card.id);
+        const keep = new Set(
+          (
+            await filterBoardAssignable(
+              ctx.db,
+              { id: newList.boardId, type: newList.boardType },
+              assignees,
+            )
+          ).map((member) => member.id),
+        );
+
+        for (const member of assignees.filter((m) => !keep.has(m.id))) {
+          await cardRepo.hardDeleteCardMemberRelationship(ctx.db, {
+            cardId: card.id,
+            memberId: member.id,
+          });
+          activities.push({
+            type: "card.updated.member.removed" as const,
+            cardId: card.id,
+            workspaceMemberId: member.id,
+            createdBy: userId,
+          });
+        }
+      }
+
       if (activities.length > 0) {
         await cardActivityRepo.bulkCreate(ctx.db, activities);
       }
@@ -1221,6 +1341,11 @@ export const cardRouter = createTRPCRouter({
         "card:delete",
         card.createdBy,
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: card.boardId,
+        workspaceId: card.workspaceId,
+        type: card.boardType,
+      });
 
       // Fetch full card data before delete for webhook
       const fullCard = await cardRepo.getByPublicId(ctx.db, input.cardPublicId);
@@ -1323,6 +1448,11 @@ export const cardRouter = createTRPCRouter({
         sourceCardMeta.workspaceId,
         "card:create",
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: sourceCardMeta.boardId,
+        workspaceId: sourceCardMeta.workspaceId,
+        type: sourceCardMeta.boardType,
+      });
 
       const targetList = await listRepo.getWorkspaceAndListIdByListPublicId(
         ctx.db,
@@ -1340,6 +1470,12 @@ export const cardRouter = createTRPCRouter({
           message: `Target list must be in the same workspace`,
           code: "BAD_REQUEST",
         });
+
+      await assertBoardAccess(ctx.db, userId, {
+        id: targetList.boardId,
+        workspaceId: targetList.workspaceId,
+        type: targetList.boardType,
+      });
 
       const sourceCard = await cardRepo.getWithListAndMembersByPublicId(
         ctx.db,
@@ -1412,10 +1548,16 @@ export const cardRouter = createTRPCRouter({
 
       if (input.copyMembers && sourceCard.members?.length) {
         const memberPublicIds = sourceCard.members.map((m) => m.publicId);
-        const members = await workspaceRepo.getAllMembersByPublicIds(
+        // Drop anyone who isn't on the target board (e.g. copying a card
+        // from a board they're on to one they aren't).
+        const members = await filterBoardAssignable(
           ctx.db,
-          memberPublicIds,
-          sourceCardMeta.workspaceId,
+          { id: targetList.boardId, type: targetList.boardType },
+          await workspaceRepo.getAllMembersByPublicIds(
+            ctx.db,
+            memberPublicIds,
+            sourceCardMeta.workspaceId,
+          ),
         );
         if (members.length) {
           const membersInsert = members.map((member) => ({

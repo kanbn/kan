@@ -8,7 +8,12 @@ import * as listRepo from "@kan/db/repository/list.repo";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { listCreateResponseSchema, listUpdateResponseSchema } from "../schemas";
-import { assertCanDelete, assertCanEdit, assertPermission } from "../utils/permissions";
+import {
+  assertBoardAccess,
+  assertCanDelete,
+  assertCanEdit,
+  assertPermission,
+} from "../utils/permissions";
 
 export const listRouter = createTRPCRouter({
   create: protectedProcedure
@@ -50,6 +55,7 @@ export const listRouter = createTRPCRouter({
         });
 
       await assertPermission(ctx.db, userId, board.workspaceId, "list:create");
+      await assertBoardAccess(ctx.db, userId, board);
 
       const result = await listRepo.create(ctx.db, {
         name: input.name,
@@ -109,6 +115,11 @@ export const listRouter = createTRPCRouter({
         "list:delete",
         list.createdBy,
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: list.boardId,
+        workspaceId: list.workspaceId,
+        type: list.boardType,
+      });
 
       const deletedAt = new Date();
 
@@ -192,6 +203,11 @@ export const listRouter = createTRPCRouter({
         "list:edit",
         list.createdBy,
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: list.boardId,
+        workspaceId: list.workspaceId,
+        type: list.boardType,
+      });
 
       let result: { name: string; publicId: string } | undefined;
 

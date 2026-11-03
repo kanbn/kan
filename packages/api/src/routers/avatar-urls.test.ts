@@ -7,6 +7,11 @@ import { generateAvatarUrl } from "@kan/shared/utils";
 
 import { assertPermission } from "../utils/permissions";
 
+vi.mock("@kan/db/repository/boardMember.repo", () => ({
+  getMemberBoardIds: vi.fn(),
+  getWorkspaceMemberIds: vi.fn(),
+}));
+
 vi.mock("@kan/db/repository/card.repo", () => ({
   getWorkspaceAndCardIdByCardPublicId: vi.fn(),
   getWithListAndMembersByPublicId: vi.fn(),
@@ -38,6 +43,10 @@ vi.mock("../utils/notifications", () => ({
   sendMentionEmails: vi.fn(),
 }));
 vi.mock("../utils/permissions", () => ({
+  filterBoardAssignable: vi.fn(
+    (_db: unknown, _board: unknown, members: unknown) =>
+      Promise.resolve(members),
+  ),
   assertCanDelete: vi.fn(),
   assertCanEdit: vi.fn(),
   assertPermission: vi.fn(),

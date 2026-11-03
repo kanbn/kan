@@ -15,7 +15,7 @@ import {
 
 import { workspacePlans } from "@kan/shared/utils";
 
-import { boards } from "./boards";
+import { boardMembers, boards } from "./boards";
 import { workspaceMemberPermissions, workspaceRoles } from "./permissions";
 import { subscription } from "./subscriptions";
 import { users } from "./users";
@@ -127,6 +127,7 @@ export const workspaceMembersRelations = relations(
       relationName: "workspaceMemberRole",
     }),
     permissions: many(workspaceMemberPermissions),
+    boardMemberships: many(boardMembers),
   }),
 );
 

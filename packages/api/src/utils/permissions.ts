@@ -1,6 +1,7 @@
 import { TRPCError } from "@trpc/server";
 
 import type { dbClient } from "@kan/db/client";
+import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as permissionRepo from "@kan/db/repository/permission.repo";
 import type { Permission, Role } from "@kan/shared";
@@ -290,6 +291,136 @@ export async function assertCanEdit(
   // Neither condition met - deny editing
   throw new TRPCError({
     message: `You do not have permission to edit this entity (${permission})`,
+    code: "FORBIDDEN",
+  });
+}
+
+/**
+ * Check if a user holds the workspace-level "admin" role (distinct from
+ * board-level admin, and from any custom role/permission overrides).
+ */
+export async function isWorkspaceAdmin(
+  db: dbClient,
+  userId: string,
+  workspaceId: number,
+): Promise<boolean> {
+  const member = await permissionRepo.getMemberWithRole(
+    db,
+    userId,
+    workspaceId,
+  );
+
+  return member?.role === "admin";
+}
+
+/**
+ * Check if a user can see a specific board: templates stay open to the
+ * whole workspace, workspace admins see every board, everyone else must
+ * hold an explicit board membership.
+ */
+export async function hasBoardAccess(
+  db: dbClient,
+  userId: string,
+  board: { id: number; workspaceId: number; type: string },
+): Promise<boolean> {
+  if (board.type !== "regular") return true;
+
+  const member = await permissionRepo.getMemberWithRole(
+    db,
+    userId,
+    board.workspaceId,
+  );
+
+  if (!member) return false;
+  if (member.role === "admin") return true;
+
+  const membership = await boardMemberRepo.getMembership(db, {
+    boardId: board.id,
+    userId,
+  });
+
+  return !!membership;
+}
+
+/**
+ * Narrow workspace members to the ones who belong on a board's cards
+ * (assignees, mentions): workspace admins and board members. Templates stay
+ * open to the whole workspace.
+ */
+export async function filterBoardAssignable<
+  T extends { id: number; role: string },
+>(
+  db: dbClient,
+  board: { id: number; type: string },
+  members: T[],
+): Promise<T[]> {
+  if (board.type !== "regular" || !members.length) return members;
+
+  const onBoard = new Set(
+    await boardMemberRepo.getWorkspaceMemberIds(db, board.id),
+  );
+
+  return members.filter(
+    (member) => member.role === "admin" || onBoard.has(member.id),
+  );
+}
+
+/**
+ * Assert a user can see a board - throws NOT_FOUND (rather than FORBIDDEN)
+ * since uninvited boards should be invisible, not merely inaccessible.
+ *
+ * "Public" boards are not open to the whole workspace: public only means
+ * "viewable via the public share link" (board.bySlug), so non-members can't
+ * see or edit them inside the app either.
+ */
+export async function assertBoardAccess(
+  db: dbClient,
+  userId: string,
+  board: { id: number; workspaceId: number; type: string },
+): Promise<void> {
+  const allowed = await hasBoardAccess(db, userId, board);
+
+  if (!allowed) {
+    throw new TRPCError({
+      message: `Board not found`,
+      code: "NOT_FOUND",
+    });
+  }
+}
+
+/**
+ * Assert a user can manage a board's membership: workspace admins always
+ * can, otherwise the user must be a board admin themselves.
+ */
+export async function assertCanManageBoardMembers(
+  db: dbClient,
+  userId: string,
+  board: { id: number; workspaceId: number },
+): Promise<void> {
+  const member = await permissionRepo.getMemberWithRole(
+    db,
+    userId,
+    board.workspaceId,
+  );
+
+  if (!member) {
+    throw new TRPCError({
+      message: "You are not a member of this workspace",
+      code: "FORBIDDEN",
+    });
+  }
+
+  if (member.role === "admin") return;
+
+  const membership = await boardMemberRepo.getMembership(db, {
+    boardId: board.id,
+    userId,
+  });
+
+  if (membership?.role === "admin") return;
+
+  throw new TRPCError({
+    message: "You do not have permission to manage members of this board",
     code: "FORBIDDEN",
   });
 }

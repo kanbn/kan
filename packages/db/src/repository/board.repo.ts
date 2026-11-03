@@ -9,12 +9,15 @@ import {
   isNotNull,
   isNull,
   lt,
+  notInArray,
   or,
+  sql,
 } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import type { BoardVisibilityStatus } from "@kan/db/schema";
 import {
+  boardMembers,
   boards,
   cardActivities,
   cardAttachments,
@@ -31,6 +34,8 @@ import {
 } from "@kan/db/schema";
 import { generateUID, normalizeDescription } from "@kan/shared/utils";
 
+import * as boardMemberRepo from "./boardMember.repo";
+
 export const getCount = async (db: dbClient) => {
   const result = await db
     .select({ count: count() })
@@ -44,8 +49,19 @@ export const getAllByWorkspaceId = async (
   db: dbClient,
   workspaceId: number,
   userId: string,
-  opts?: { type?: "regular" | "template"; archived?: boolean },
+  opts?: {
+    type?: "regular" | "template";
+    archived?: boolean;
+    isWorkspaceAdmin?: boolean;
+  },
 ) => {
+  // Templates stay visible to the whole workspace; regular boards (public
+  // or private) are scoped to explicit board membership unless the user is
+  // a workspace admin. Public only means "viewable via the share link".
+  const memberBoardIds = opts?.isWorkspaceAdmin
+    ? undefined
+    : await boardMemberRepo.getMemberBoardIds(db, { workspaceId, userId });
+
   const boardsData = await db.query.boards.findMany({
     columns: {
       publicId: true,
@@ -80,6 +96,12 @@ export const getAllByWorkspaceId = async (
       opts?.type ? eq(boards.type, opts.type) : undefined,
       opts?.archived !== undefined
         ? eq(boards.isArchived, opts.archived)
+        : undefined,
+      memberBoardIds
+        ? or(
+            eq(boards.type, "template"),
+            inArray(boards.id, memberBoardIds),
+          )
         : undefined,
     ),
   });
@@ -216,9 +238,11 @@ export const getByPublicId = async (
         with: {
           members: {
             columns: {
+              id: true,
               publicId: true,
               email: true,
               status: true,
+              role: true,
             },
             with: {
               user: {
@@ -563,6 +587,7 @@ export const getWithListIdsByPublicId = (
       id: true,
       workspaceId: true,
       createdBy: true,
+      type: true,
     },
     with: {
       lists: {
@@ -611,25 +636,37 @@ export const create = async (
     sourceBoardId?: number;
   },
 ) => {
-  const [result] = await db
-    .insert(boards)
-    .values({
-      publicId: boardInput.publicId ?? generateUID(),
-      name: boardInput.name,
-      createdBy: boardInput.createdBy,
-      workspaceId: boardInput.workspaceId,
-      importId: boardInput.importId,
-      slug: boardInput.slug,
-      type: boardInput.type ?? "regular",
-      sourceBoardId: boardInput.sourceBoardId,
-    })
-    .returning({
-      id: boards.id,
-      publicId: boards.publicId,
-      name: boards.name,
-    });
+  return db.transaction(async (tx) => {
+    const type = boardInput.type ?? "regular";
 
-  return result;
+    const [result] = await tx
+      .insert(boards)
+      .values({
+        publicId: boardInput.publicId ?? generateUID(),
+        name: boardInput.name,
+        createdBy: boardInput.createdBy,
+        workspaceId: boardInput.workspaceId,
+        importId: boardInput.importId,
+        slug: boardInput.slug,
+        type,
+        sourceBoardId: boardInput.sourceBoardId,
+      })
+      .returning({
+        id: boards.id,
+        publicId: boards.publicId,
+        name: boards.name,
+      });
+
+    if (result && type === "regular") {
+      await boardMemberRepo.addCreatorAsAdmin(tx, {
+        boardId: result.id,
+        workspaceId: boardInput.workspaceId,
+        userId: boardInput.createdBy,
+      });
+    }
+
+    return result;
+  });
 };
 
 export const update = async (
@@ -721,6 +758,9 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
       id: true,
       workspaceId: true,
       createdBy: true,
+      type: true,
+      visibility: true,
+      deletedAt: true,
     },
     where: eq(boards.publicId, boardPublicId),
   });
@@ -828,6 +868,14 @@ export const createFromSnapshot = async (
       });
 
     if (!newBoard) throw new Error("Failed to create board");
+
+    if (args.type === "regular") {
+      await boardMemberRepo.addCreatorAsAdmin(tx, {
+        boardId: newBoard.id,
+        workspaceId: args.workspaceId,
+        userId: args.createdBy,
+      });
+    }
 
     // Labels
     const srcLabels = args.source.labels;
@@ -998,6 +1046,7 @@ export const moveToWorkspace = async (
   db: dbClient,
   boardId: number,
   targetWorkspaceId: number,
+  movedBy: string,
   newSlug?: string,
 ) => {
   return db.transaction(async (tx) => {
@@ -1044,6 +1093,44 @@ export const moveToWorkspace = async (
           .where(inArray(cardToWorkspaceMembers.cardId, cardIds));
       }
     }
+
+    // Board memberships reference members of the old workspace. Carry them
+    // over (same role) for people who are also in the target workspace; the
+    // mover is re-added as admin below. Everyone else loses access.
+    await tx.execute(sql`
+      INSERT INTO "board_members" ("boardId", "workspaceMemberId", "role", "createdBy", "createdAt")
+      SELECT bm."boardId", target."id", bm."role", bm."createdBy", now()
+      FROM "board_members" bm
+      INNER JOIN "workspace_members" source ON source."id" = bm."workspaceMemberId"
+      INNER JOIN "workspace_members" target ON target."userId" = source."userId"
+        AND target."workspaceId" = ${targetWorkspaceId}
+        AND target."deletedAt" IS NULL
+        AND target."status" <> 'removed'
+      WHERE bm."boardId" = ${boardId}
+        AND source."userId" <> ${movedBy}
+      ON CONFLICT DO NOTHING
+    `);
+
+    await tx
+      .delete(boardMembers)
+      .where(
+        and(
+          eq(boardMembers.boardId, boardId),
+          notInArray(
+            boardMembers.workspaceMemberId,
+            tx
+              .select({ id: workspaceMembers.id })
+              .from(workspaceMembers)
+              .where(eq(workspaceMembers.workspaceId, targetWorkspaceId)),
+          ),
+        ),
+      );
+
+    await boardMemberRepo.addCreatorAsAdmin(tx, {
+      boardId,
+      workspaceId: targetWorkspaceId,
+      userId: movedBy,
+    });
 
     return updatedBoard;
   });

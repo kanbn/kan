@@ -17,13 +17,20 @@ import { imports } from "./imports";
 import { labels } from "./labels";
 import { lists } from "./lists";
 import { users } from "./users";
-import { workspaces } from "./workspaces";
+import { workspaceMembers, workspaces } from "./workspaces";
 
 export const boardVisibilityStatuses = ["private", "public"] as const;
 export type BoardVisibilityStatus = (typeof boardVisibilityStatuses)[number];
 export const boardVisibilityEnum = pgEnum(
   "board_visibility",
   boardVisibilityStatuses,
+);
+
+export const boardMemberRoles = ["admin", "member"] as const;
+export type BoardMemberRole = (typeof boardMemberRoles)[number];
+export const boardMemberRoleEnum = pgEnum(
+  "board_member_role",
+  boardMemberRoles,
 );
 
 export const boardTypes = ["regular", "template"] as const;
@@ -71,6 +78,7 @@ export const boards = pgTable(
 
 export const boardsRelations = relations(boards, ({ one, many }) => ({
   userFavorites: many(userBoardFavorites),
+  members: many(boardMembers),
   createdBy: one(users, {
     fields: [boards.createdBy],
     references: [users.id],
@@ -113,3 +121,36 @@ export const userBoardFavorites = pgTable(
     boardIdx: index("user_board_favorite_board_idx").on(table.boardId),
   }),
 );
+export const boardMembers = pgTable(
+  "board_members",
+  {
+    boardId: bigint("boardId", { mode: "number" })
+      .notNull()
+      .references(() => boards.id, { onDelete: "cascade" }),
+    workspaceMemberId: bigint("workspaceMemberId", { mode: "number" })
+      .notNull()
+      .references(() => workspaceMembers.id, { onDelete: "cascade" }),
+    role: boardMemberRoleEnum("role").notNull().default("member"),
+    createdBy: uuid("createdBy").references(() => users.id, {
+      onDelete: "set null",
+    }),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.boardId, table.workspaceMemberId] }),
+    index("board_members_workspace_member_idx").on(table.workspaceMemberId),
+  ],
+).enableRLS();
+
+export const boardMembersRelations = relations(boardMembers, ({ one }) => ({
+  board: one(boards, {
+    fields: [boardMembers.boardId],
+    references: [boards.id],
+    relationName: "boardMembersBoard",
+  }),
+  member: one(workspaceMembers, {
+    fields: [boardMembers.workspaceMemberId],
+    references: [workspaceMembers.id],
+    relationName: "boardMembersMember",
+  }),
+}));

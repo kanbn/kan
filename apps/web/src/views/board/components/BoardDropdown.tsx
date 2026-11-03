@@ -7,6 +7,7 @@ import {
   HiOutlineDocumentDuplicate,
   HiOutlineStar,
   HiOutlineTrash,
+  HiOutlineUserGroup,
   HiStar,
 } from "react-icons/hi2";
 import { IoArchiveOutline } from "react-icons/io5";
@@ -92,6 +93,17 @@ export default function BoardDropdown({
   const isArchiveActionPending = updateBoard.isPending;
 
   const items = [
+    ...(!isTemplate
+      ? [
+          {
+            label: t`Board members`,
+            action: () => router.push(`/boards/${boardPublicId}/members`),
+            icon: (
+              <HiOutlineUserGroup className="h-[16px] w-[16px] text-dark-900" />
+            ),
+          },
+        ]
+      : []),
     ...(!isTemplate && canCreateBoard
       ? [
           {

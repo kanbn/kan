@@ -253,6 +253,20 @@
       "when": 1788209875712,
       "tag": "20260831205755_AddCardRelationIndexes",
       "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1790111788030,
+      "tag": "20260922211628_AddBoardMembers",
+      "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1790111796287,
+      "tag": "20260922211636_BackfillBoardMembers",
+      "breakpoints": true
     }
   ]
 }

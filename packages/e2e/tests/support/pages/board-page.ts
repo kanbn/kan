@@ -83,6 +83,14 @@ export class BoardPage {
     await input.blur();
   }
 
+  async goToBoardMembers() {
+    await this.page
+      .getByRole("button", { name: "Board options", exact: true })
+      .click();
+    await this.page.getByRole("menuitem", { name: "Board members" }).click();
+    await this.page.waitForURL(/\/boards\/[^/]+\/members$/);
+  }
+
   async archiveBoard() {
     await this.page
       .getByRole("button", { name: "Board options", exact: true })

@@ -10,6 +10,8 @@ const mocks = vi.hoisted(() => ({
   createNotification: vi.fn(),
   getUser: vi.fn(),
   getWorkspace: vi.fn(),
+  getBoard: vi.fn(),
+  hasBoardAccess: vi.fn(),
   sendEmail: vi.fn(),
   log: {
     debug: vi.fn(),
@@ -20,6 +22,14 @@ const mocks = vi.hoisted(() => ({
 
 vi.mock("next-runtime-env", () => ({
   env: vi.fn(() => "https://kan.example.com"),
+}));
+
+vi.mock("@kan/db/repository/board.repo", () => ({
+  getWorkspaceAndBoardIdByBoardPublicId: mocks.getBoard,
+}));
+
+vi.mock("./permissions", () => ({
+  hasBoardAccess: mocks.hasBoardAccess,
 }));
 
 vi.mock("@kan/db/repository/card.repo", () => ({
@@ -67,12 +77,15 @@ describe("sendMentionEmails", () => {
       title: "A card",
       list: {
         board: {
+          publicId: "board-public-id",
           name: "A board",
           workspace: { publicId: "workspace-public-id" },
         },
       },
     });
     mocks.getWorkspace.mockResolvedValue({ id: 7 });
+    mocks.getBoard.mockResolvedValue({ id: 3, workspaceId: 7, type: "regular" });
+    mocks.hasBoardAccess.mockResolvedValue(true);
     mocks.getUser.mockResolvedValue({
       id: authorUserId,
       name: "Author",
@@ -104,6 +117,27 @@ describe("sendMentionEmails", () => {
       7,
     );
     expect(mocks.sendEmail).toHaveBeenCalledOnce();
+  });
+
+  it("does not email members who can't access the board", async () => {
+    mocks.hasBoardAccess.mockResolvedValue(false);
+
+    await sendMentionEmails({
+      db,
+      cardPublicId: "card-public-id",
+      previousHtml: null,
+      nextHtml: mention(mentionedMemberPublicId),
+      commenterUserId: authorUserId,
+      commentId: 21,
+    });
+
+    expect(mocks.hasBoardAccess).toHaveBeenCalledWith(
+      db,
+      "mentioned-user-id",
+      { id: 3, workspaceId: 7, type: "regular" },
+    );
+    expect(mocks.sendEmail).not.toHaveBeenCalled();
+    expect(mocks.createNotification).not.toHaveBeenCalled();
   });
 
   it("records the notification only after SMTP accepts the email", async () => {

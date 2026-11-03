@@ -335,6 +335,7 @@ export const getMemberByPublicId = (
   return db.query.workspaceMembers.findFirst({
     columns: {
       id: true,
+      role: true,
     },
     where: and(
       eq(workspaceMembers.publicId, memberPublicId),
@@ -352,6 +353,7 @@ export const getAllMembersByPublicIds = (
   return db.query.workspaceMembers.findMany({
     columns: {
       id: true,
+      role: true,
     },
     where: and(
       inArray(workspaceMembers.publicId, memberPublicIds),
@@ -429,8 +431,18 @@ export const searchBoardsAndCards = async (
   workspaceId: number,
   query: string,
   limit = 20,
+  // Undefined for workspace admins; otherwise the user's board memberships,
+  // matching the scoping in boardRepo.getAllByWorkspaceId.
+  memberBoardIds?: number[],
 ) => {
   const searchQuery = `%${query}%`;
+
+  const boardAccess = memberBoardIds
+    ? or(
+        eq(boards.type, "template"),
+        inArray(boards.id, memberBoardIds),
+      )
+    : undefined;
 
   const ticketId = parseTicketId(query.trim());
 
@@ -454,6 +466,7 @@ export const searchBoardsAndCards = async (
           sql`similarity(${boards.name}, ${query}) > 0.2`, // Fuzzy match
         ),
         isNull(boards.deletedAt),
+        boardAccess,
       ),
     )
     .orderBy(
@@ -472,6 +485,7 @@ export const searchBoardsAndCards = async (
         isNull(cards.deletedAt),
         isNull(lists.deletedAt),
         isNull(boards.deletedAt),
+        boardAccess,
       )
     : and(
         eq(boards.workspaceId, workspaceId),
@@ -482,6 +496,7 @@ export const searchBoardsAndCards = async (
         isNull(cards.deletedAt),
         isNull(lists.deletedAt),
         isNull(boards.deletedAt),
+        boardAccess,
       );
 
   const cardResults = await db

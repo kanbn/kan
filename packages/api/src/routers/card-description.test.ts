@@ -26,6 +26,7 @@ vi.mock("../utils/permissions", () => ({
   assertCanDelete: vi.fn(),
   assertCanEdit: vi.fn(),
   assertPermission: vi.fn(),
+  assertBoardAccess: vi.fn(),
 }));
 vi.mock("../utils/webhook", () => ({
   createCardWebhookPayload: vi.fn(() => ({})),
@@ -53,6 +54,8 @@ describe("card description updates", () => {
       workspaceVisibility: "private",
       listPublicId: "list-12345678",
       listName: "Todo",
+      boardId: 5,
+      boardType: "regular",
       boardPublicId: "board-1234567",
       boardName: "Board",
     });

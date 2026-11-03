@@ -6,7 +6,7 @@ import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
-import { assertPermission } from "../utils/permissions";
+import { assertPermission, filterBoardAssignable } from "../utils/permissions";
 
 vi.mock("@kan/db/repository/card.repo", () => ({
   create: vi.fn(),
@@ -16,6 +16,9 @@ vi.mock("@kan/db/repository/card.repo", () => ({
   hardDeleteCardMemberRelationship: vi.fn(),
   createCardMemberRelationship: vi.fn(),
   getWithListAndMembersByPublicId: vi.fn(),
+  getByPublicId: vi.fn(),
+  reorder: vi.fn(),
+  getAssignees: vi.fn(),
 }));
 
 vi.mock("@kan/db/repository/cardActivity.repo", () => ({
@@ -30,6 +33,7 @@ vi.mock("@kan/db/repository/label.repo", () => ({
 }));
 vi.mock("@kan/db/repository/list.repo", () => ({
   getWorkspaceAndListIdByListPublicId: vi.fn(),
+  getByPublicId: vi.fn(),
 }));
 vi.mock("@kan/db/repository/workspace.repo", () => ({
   getAllMembersByPublicIds: vi.fn(),
@@ -50,9 +54,14 @@ vi.mock("../utils/notifications", () => ({
   sendMentionEmails: vi.fn(),
 }));
 vi.mock("../utils/permissions", () => ({
+  filterBoardAssignable: vi.fn(
+    (_db: unknown, _board: unknown, members: unknown) =>
+      Promise.resolve(members),
+  ),
   assertCanDelete: vi.fn(),
   assertCanEdit: vi.fn(),
   assertPermission: vi.fn(),
+  assertBoardAccess: vi.fn(),
 }));
 vi.mock("../utils/webhook", () => ({
   createCardWebhookPayload: vi.fn(() => ({})),
@@ -206,6 +215,32 @@ describe("card member workspace scoping", () => {
 
       expect(mockCreateCardMember).not.toHaveBeenCalled();
     });
+
+    it("rejects assigning a member who is not on the board", async () => {
+      const { cardRouter } = await import("./card");
+      mockGetCard.mockResolvedValueOnce({
+        id: 17,
+        workspaceId: 7,
+        boardId: 3,
+        boardType: "regular",
+      });
+      mockGetMember.mockResolvedValueOnce({ id: 21, role: "member" });
+      mockGetCardMember.mockResolvedValueOnce(undefined);
+      vi.mocked(filterBoardAssignable).mockResolvedValueOnce([]);
+
+      await expect(
+        cardRouter.createCaller(ctx).addOrRemoveMember(input),
+      ).rejects.toMatchObject({
+        code: "BAD_REQUEST",
+      } satisfies Partial<TRPCError>);
+
+      expect(filterBoardAssignable).toHaveBeenCalledWith(
+        mockDb,
+        { id: 3, type: "regular" },
+        [{ id: 21, role: "member" }],
+      );
+      expect(mockCreateCardMember).not.toHaveBeenCalled();
+    });
   });
 
   describe("duplicate", () => {
@@ -247,6 +282,65 @@ describe("card member workspace scoping", () => {
       ).resolves.toEqual({ publicId: "copy-12345678" });
 
       expect(mockGetMembers).toHaveBeenCalledWith(mockDb, ["member-a-123"], 7);
+    });
+  });
+
+  describe("update", () => {
+    it("unassigns members who aren't on the target board when moving boards", async () => {
+      const { cardRouter } = await import("./card");
+      mockGetCard.mockResolvedValueOnce({
+        id: 17,
+        workspaceId: 7,
+        boardId: 3,
+        boardType: "regular",
+        createdBy: "user-1",
+      });
+      vi.mocked(cardRepo.getByPublicId).mockResolvedValueOnce({
+        listId: 1,
+        dueDate: null,
+        description: "",
+        list: { publicId: "list-source12", name: "Source" },
+      } as never);
+      vi.mocked(listRepo.getByPublicId).mockResolvedValueOnce({
+        id: 2,
+        publicId: "list-target12",
+        name: "Target",
+        boardId: 4,
+        index: 0,
+        workspaceId: 7,
+        boardType: "regular",
+      });
+      vi.mocked(cardRepo.reorder).mockResolvedValueOnce({
+        id: 17,
+        title: "Card",
+        description: "",
+        publicId: "card-12345678",
+        dueDate: null,
+      } as never);
+      const stays = { id: 21, role: "member" };
+      const leaves = { id: 22, role: "member" };
+      vi.mocked(cardRepo.getAssignees).mockResolvedValueOnce([
+        stays,
+        leaves,
+      ] as never);
+      vi.mocked(filterBoardAssignable).mockResolvedValueOnce([stays]);
+
+      await cardRouter.createCaller(ctx).update({
+        cardPublicId: "card-12345678",
+        listPublicId: "list-target12",
+        index: 0,
+      });
+
+      expect(filterBoardAssignable).toHaveBeenCalledWith(
+        mockDb,
+        { id: 4, type: "regular" },
+        [stays, leaves],
+      );
+      expect(mockDeleteCardMember).toHaveBeenCalledTimes(1);
+      expect(mockDeleteCardMember).toHaveBeenCalledWith(mockDb, {
+        cardId: 17,
+        memberId: 22,
+      });
     });
   });
 });

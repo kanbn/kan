@@ -689,9 +689,11 @@ export const getWithListAndMembersByPublicId = async (
                 with: {
                   members: {
                     columns: {
+                      id: true,
                       publicId: true,
                       email: true,
                       status: true,
+                      role: true,
                     },
                     with: {
                       user: {
@@ -1073,6 +1075,17 @@ export const softDeleteAllByListIds = async (
   return updatedCards;
 };
 
+export const getAssignees = (db: dbClient, cardId: number) => {
+  return db
+    .select({ id: workspaceMembers.id, role: workspaceMembers.role })
+    .from(cardToWorkspaceMembers)
+    .innerJoin(
+      workspaceMembers,
+      eq(workspaceMembers.id, cardToWorkspaceMembers.workspaceMemberId),
+    )
+    .where(eq(cardToWorkspaceMembers.cardId, cardId));
+};
+
 export const hardDeleteCardMemberRelationship = async (
   db: dbClient,
   args: { cardId: number; memberId: number },
@@ -1128,7 +1141,7 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
     where: and(eq(cards.publicId, cardPublicId), isNull(cards.deletedAt)),
     with: {
       list: {
-        columns: { name: true, publicId: true },
+        columns: { name: true, publicId: true, boardId: true },
         with: {
           board: {
             columns: {
@@ -1136,6 +1149,7 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
               workspaceId: true,
               visibility: true,
               name: true,
+              type: true,
             },
           },
         },
@@ -1151,6 +1165,8 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
         workspaceVisibility: result.list.board.visibility,
         listPublicId: result.list.publicId,
         listName: result.list.name,
+        boardId: result.list.boardId,
+        boardType: result.list.board.type,
         boardPublicId: result.list.board.publicId,
         boardName: result.list.board.name,
       }

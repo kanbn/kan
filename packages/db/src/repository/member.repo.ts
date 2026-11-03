@@ -5,6 +5,8 @@ import type { MemberRole, MemberStatus } from "@kan/db/schema";
 import { workspaceMembers } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
 
+import * as boardMemberRepo from "./boardMember.repo";
+
 export const getActiveCount = async (db: dbClient) => {
   const result = await db
     .select({ count: count() })
@@ -152,21 +154,27 @@ export const softDelete = async (
     deletedBy: string;
   },
 ) => {
-  const [result] = await db
-    .update(workspaceMembers)
-    .set({ deletedAt: args.deletedAt, deletedBy: args.deletedBy })
-    .where(
-      and(
-        eq(workspaceMembers.id, args.memberId),
-        isNull(workspaceMembers.deletedAt),
-      ),
-    )
-    .returning({
-      id: workspaceMembers.id,
-      publicId: workspaceMembers.publicId,
-    });
+  return db.transaction(async (tx) => {
+    const [result] = await tx
+      .update(workspaceMembers)
+      .set({ deletedAt: args.deletedAt, deletedBy: args.deletedBy })
+      .where(
+        and(
+          eq(workspaceMembers.id, args.memberId),
+          isNull(workspaceMembers.deletedAt),
+        ),
+      )
+      .returning({
+        id: workspaceMembers.id,
+        publicId: workspaceMembers.publicId,
+      });
 
-  return result;
+    if (result) {
+      await boardMemberRepo.removeAllForMember(tx, result.id);
+    }
+
+    return result;
+  });
 };
 
 export const unpauseAllMembers = async (db: dbClient, workspaceId: number) => {

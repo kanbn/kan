@@ -151,11 +151,11 @@ export const getWorkspaceAndLabelIdByLabelPublicId = async (
   labelPublicId: string,
 ) => {
   const result = await db.query.labels.findFirst({
-    columns: { id: true },
+    columns: { id: true, boardId: true },
     where: eq(labels.publicId, labelPublicId),
     with: {
       board: {
-        columns: { workspaceId: true },
+        columns: { workspaceId: true, type: true, visibility: true },
       },
     },
   });
@@ -164,6 +164,9 @@ export const getWorkspaceAndLabelIdByLabelPublicId = async (
     ? {
         id: result.id,
         workspaceId: result.board.workspaceId,
+        boardId: result.boardId,
+        boardType: result.board.type,
+        boardVisibility: result.board.visibility,
       }
     : null;
 };
