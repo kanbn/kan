@@ -9,7 +9,9 @@ import {
   isNotNull,
   isNull,
   lt,
+  notInArray,
   or,
+  sql,
 } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
@@ -1093,9 +1095,37 @@ export const moveToWorkspace = async (
       }
     }
 
-    // Board memberships reference members of the old workspace; reset them
-    // so only the user who moved the board has access in the new workspace.
-    await tx.delete(boardMembers).where(eq(boardMembers.boardId, boardId));
+    // Board memberships reference members of the old workspace. Carry them
+    // over (same role) for people who are also in the target workspace; the
+    // mover is re-added as admin below. Everyone else loses access.
+    await tx.execute(sql`
+      INSERT INTO "board_members" ("boardId", "workspaceMemberId", "role", "createdBy", "createdAt")
+      SELECT bm."boardId", target."id", bm."role", bm."createdBy", now()
+      FROM "board_members" bm
+      INNER JOIN "workspace_members" source ON source."id" = bm."workspaceMemberId"
+      INNER JOIN "workspace_members" target ON target."userId" = source."userId"
+        AND target."workspaceId" = ${targetWorkspaceId}
+        AND target."deletedAt" IS NULL
+        AND target."status" <> 'removed'
+      WHERE bm."boardId" = ${boardId}
+        AND source."userId" <> ${movedBy}
+      ON CONFLICT DO NOTHING
+    `);
+
+    await tx
+      .delete(boardMembers)
+      .where(
+        and(
+          eq(boardMembers.boardId, boardId),
+          notInArray(
+            boardMembers.workspaceMemberId,
+            tx
+              .select({ id: workspaceMembers.id })
+              .from(workspaceMembers)
+              .where(eq(workspaceMembers.workspaceId, targetWorkspaceId)),
+          ),
+        ),
+      );
 
     await boardMemberRepo.addCreatorAsAdmin(tx, {
       boardId,
