@@ -33,13 +33,11 @@ test(
     await card.addChecklistItem("Item C");
     await card.addChecklistItem("Item D");
 
-    // Deleting B leaves a gap in the stored indexes behind A, C, D.
     await card.deleteChecklistItem("Item B");
     await expect
       .poll(() => card.getChecklistItemTitles())
       .toEqual(["Item A", "Item C", "Item D"]);
 
-    // Drag A down one slot, to land between C and D.
     await card.dragChecklistItemDown("Item A", 1);
     await expect
       .poll(() => card.getChecklistItemTitles())

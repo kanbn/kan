@@ -381,10 +381,6 @@ export const reorderItem = async (
       throw new Error(`Checklist item not found for ID ${args.itemId}`);
     }
 
-    // Lock every live sibling for the rest of this transaction, so a
-    // concurrent reorder/delete on the same checklist serializes instead of
-    // racing against this one's rank computation (mirrors lockAdminRows in
-    // boardMember.repo.ts).
     const siblings = await tx
       .select({ id: checklistItems.id })
       .from(checklistItems)
@@ -403,8 +399,6 @@ export const reorderItem = async (
       throw new Error(`Checklist item not found for ID ${args.itemId}`);
     }
 
-    // args.newIndex is a UI position, not a stored index, so rank by
-    // current index (ROW_NUMBER) rather than comparing raw values.
     const targetPosition = Math.min(
       Math.max(args.newIndex, 0),
       siblings.length - 1,
@@ -433,8 +427,6 @@ export const reorderItem = async (
         WHERE t.id = r.id;
       `);
 
-      // Safety net: the lock above should make this unreachable, but fail
-      // loudly rather than silently leaving a corrupted order if it ever is.
       const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
 
       const duplicateIndices = await tx
