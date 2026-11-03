@@ -45,7 +45,7 @@ export function AddBoardMemberForm({
 
   return (
     <div className="p-5">
-      <div className="text-neutral-9000 flex w-full items-center justify-between pb-4 dark:text-dark-1000">
+      <div className="flex w-full items-center justify-between pb-4 text-neutral-900 dark:text-dark-1000">
         <h2 className="text-sm font-bold">{t`Add board member`}</h2>
         <button
           type="button"

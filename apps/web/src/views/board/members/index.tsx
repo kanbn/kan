@@ -41,8 +41,7 @@ export default function BoardMembersView() {
     error: boardMembersError,
   } = api.boardMember.all.useQuery({ boardPublicId }, { enabled, retry: false });
 
-  // Candidates come from the whole workspace: board.byId only returns people
-  // already on the board (plus workspace admins).
+  // board.byId only returns people already on the board, so fetch the full roster separately.
   const { data: workspaceData } = api.workspace.byId.useQuery(
     { workspacePublicId: workspace.publicId },
     { enabled: workspace.publicId.length >= 12 },

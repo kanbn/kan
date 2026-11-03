@@ -43,7 +43,7 @@ export function RemoveBoardMemberConfirmation({
     <div className="p-5">
       <div className="flex w-full flex-col justify-between pb-4">
         <h2 className="text-md pb-4 font-medium text-neutral-900 dark:text-dark-1000">
-          <Trans>Are you sure want to remove {entityLabel}?</Trans>
+          <Trans>Are you sure you want to remove {entityLabel}?</Trans>
         </h2>
         <p className="text-sm font-medium text-light-900 dark:text-dark-900">
           {t`They'll lose access to this board, but will remain a member of the workspace.`}
