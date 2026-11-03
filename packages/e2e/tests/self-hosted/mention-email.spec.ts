@@ -1,5 +1,5 @@
 import type { Browser, Locator, Page } from "@playwright/test";
-import { test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 import type { TestUser } from "../support/test-user";
 import {
@@ -35,6 +35,43 @@ async function joinWorkspace(
     timeout: 20_000,
   });
   await memberContext.close();
+}
+
+async function addToBoard(page: Page, boardPublicId: string, email: string) {
+  const workspacePublicId = await page.evaluate(() =>
+    localStorage.getItem("workspacePublicId"),
+  );
+  if (!workspacePublicId)
+    throw new Error("workspacePublicId not found in localStorage");
+
+  const workspaceResponse = await page.request.get(
+    `/api/trpc/workspace.byId?batch=1&input=${encodeURIComponent(
+      JSON.stringify({ "0": { json: { workspacePublicId } } }),
+    )}`,
+  );
+  const workspaceBody = (await workspaceResponse.json()) as [
+    {
+      result: {
+        data: { json: { members: { publicId: string; email?: string }[] } };
+      };
+    },
+  ];
+  const member = workspaceBody[0].result.data.json.members.find(
+    (m) => m.email === email,
+  );
+  if (!member) throw new Error(`Could not resolve member ${email}`);
+
+  const response = await page.request.post(
+    "/api/trpc/boardMember.add?batch=1",
+    {
+      data: {
+        "0": {
+          json: { boardPublicId, workspaceMemberPublicId: member.publicId },
+        },
+      },
+    },
+  );
+  expect(response.ok()).toBe(true);
 }
 
 function commentEditor(page: Page): Locator {
@@ -95,6 +132,10 @@ test(
     const boardUrl = page.url();
 
     await joinWorkspace(page, browser, recipient);
+    // Mention emails only go to people who can see the board.
+    const boardPublicId = boardUrl.split("/boards/")[1];
+    if (!boardPublicId) throw new Error("Could not resolve board from URL");
+    await addToBoard(page, boardPublicId, recipient.email);
     await page.goto(boardUrl);
     await board.openCard("Mention email card");
     await clearMailpitInbox();
