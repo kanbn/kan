@@ -1,4 +1,4 @@
-import { and, count, desc, eq, isNull, sql } from "drizzle-orm";
+import { and, count, desc, eq, isNull } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import { checklistItems, checklists } from "@kan/db/schema";
@@ -369,7 +369,6 @@ export const reorderItem = async (
     const item = await tx.query.checklistItems.findFirst({
       columns: {
         id: true,
-        index: true,
         checklistId: true,
       },
       where: and(
@@ -382,58 +381,53 @@ export const reorderItem = async (
       throw new Error(`Checklist item not found for ID ${args.itemId}`);
     }
 
-    const currentIndex = item.index;
-    const newIndex = args.newIndex;
+    // `args.newIndex` is the item's desired position among its non-deleted
+    // siblings (as rendered in the UI), not a raw stored `index` value.
+    // Soft-deletes leave gaps in the stored indexes, so we rank the
+    // siblings ourselves and recompact them rather than comparing
+    // `args.newIndex` against stored index values directly.
+    const siblings = await tx.query.checklistItems.findMany({
+      columns: { id: true },
+      where: and(
+        eq(checklistItems.checklistId, item.checklistId),
+        isNull(checklistItems.deletedAt),
+      ),
+      orderBy: [checklistItems.index],
+    });
 
-    if (currentIndex === newIndex) {
-      const unchanged = await tx.query.checklistItems.findFirst({
-        columns: {
-          publicId: true,
-          title: true,
-          completed: true,
-        },
-        where: and(
-          eq(checklistItems.id, args.itemId),
-          isNull(checklistItems.deletedAt),
+    const currentPosition = siblings.findIndex((s) => s.id === item.id);
+
+    if (currentPosition === -1) {
+      throw new Error(`Checklist item not found for ID ${args.itemId}`);
+    }
+
+    const targetPosition = Math.min(
+      Math.max(args.newIndex, 0),
+      siblings.length - 1,
+    );
+
+    if (currentPosition !== targetPosition) {
+      const [moved] = siblings.splice(currentPosition, 1);
+      siblings.splice(targetPosition, 0, moved!);
+
+      await Promise.all(
+        siblings.map((sibling, index) =>
+          tx
+            .update(checklistItems)
+            .set({ index })
+            .where(eq(checklistItems.id, sibling.id)),
         ),
-      });
-
-      if (!unchanged) {
-        throw new Error(`Checklist item not found for ID ${args.itemId}`);
-      }
-
-      return unchanged;
+      );
     }
 
-    if (currentIndex < newIndex) {
-      await tx.execute(sql`
-        UPDATE card_checklist_item
-        SET index = index - 1
-        WHERE "checklistId" = ${item.checklistId}
-        AND index > ${currentIndex}
-        AND index <= ${newIndex}
-        AND "deletedAt" IS NULL
-        `);
-    } else {
-      await tx.execute(sql`
-        UPDATE card_checklist_item
-        SET index = index + 1
-        WHERE "checklistId" = ${item.checklistId}
-        AND index >= ${newIndex}
-        AND index < ${currentIndex}
-        AND "deletedAt" IS NULL
-        `);
-    }
-
-    const [updated] = await tx
-      .update(checklistItems)
-      .set({ index: newIndex })
-      .where(eq(checklistItems.id, args.itemId))
-      .returning({
-        publicId: checklistItems.publicId,
-        title: checklistItems.title,
-        completed: checklistItems.completed,
-      });
+    const updated = await tx.query.checklistItems.findFirst({
+      columns: {
+        publicId: true,
+        title: true,
+        completed: true,
+      },
+      where: eq(checklistItems.id, args.itemId),
+    });
 
     if (!updated) {
       throw new Error(`Failed to update checklist item with ID ${args.itemId}`);
