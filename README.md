@@ -78,6 +78,28 @@ The application will be available at http://localhost:3000 (or the port specifie
 - To restart the containers: `docker compose restart`
 - To rebuild after code changes: `docker compose up -d --build`
 
+**Changing the database password:**
+
+`POSTGRES_PASSWORD` is only applied when PostgreSQL creates the
+`kan_postgres_data` volume for the first time. Changing it later does not update
+the password stored in the database, so the application fails with
+`password authentication failed for user "kan"` (SQLSTATE `28P01`).
+
+Update the stored password without deleting any data:
+
+```bash
+docker compose exec postgres psql -U kan -d kan_db \
+  -c "ALTER ROLE kan WITH PASSWORD 'your_new_password';"
+```
+
+Then set the same value in `POSTGRES_PASSWORD` and, if you use an external
+database, in `POSTGRES_URL`, and run `docker compose up -d`. When `POSTGRES_URL`
+is empty, the compose file builds it from `POSTGRES_PASSWORD`, so the two values
+cannot drift apart. If the password contains URL-reserved characters such as
+`@`, `:`, `/`, or `%`, set `POSTGRES_URL` explicitly with the password
+percent-encoded. Deleting the volume also resets the password, but destroys all
+Kan data, so only do that for a fresh install.
+
 ## Local Development
 
 1. Clone the repository (or fork)
@@ -110,10 +132,14 @@ pnpm dev
 At minimum, you'll need:
 
 | Variable               | Description                   | Example                                  |
-| ----------------------- | ------------------------------ | ----------------------------------------- |
-| `POSTGRES_URL`          | PostgreSQL connection URL      | `postgres://user:pass@localhost:5432/db`  |
-| `NEXT_PUBLIC_BASE_URL`  | Base URL of your installation  | `http://localhost:3000`                   |
-| `BETTER_AUTH_SECRET`    | Auth encryption secret         | Random 32+ char string                    |
+| ---------------------- | ----------------------------- | ---------------------------------------- |
+| `POSTGRES_URL`         | PostgreSQL connection URL     | `postgres://user:pass@localhost:5432/db` |
+| `NEXT_PUBLIC_BASE_URL` | Base URL of your installation | `http://localhost:3000`                  |
+| `BETTER_AUTH_SECRET`   | Auth encryption secret        | Random 32+ char string                   |
+
+When using the bundled `docker-compose.yml`, leave `POSTGRES_URL` empty and set
+`POSTGRES_PASSWORD` instead; the compose file connects to the bundled database
+using that password.
 
 Optional integrations (email/SMTP, OAuth and OIDC login, S3-compatible file storage, Trello import, rate limiting, white labelling, and more) are configured through additional variables. See [.env.example](./.env.example) for the complete list.
 

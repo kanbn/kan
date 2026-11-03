@@ -9,7 +9,9 @@ services:
       dockerfile: ./apps/web/Dockerfile
       target: migrate
     environment:
-      - POSTGRES_URL=${POSTGRES_URL}
+      # Empty POSTGRES_URL means "use the bundled database". The URL is built
+      # from POSTGRES_PASSWORD so the two values cannot drift apart.
+      - POSTGRES_URL=${POSTGRES_URL:-postgresql://kan:${POSTGRES_PASSWORD}@postgres:5432/kan_db}
     depends_on:
       postgres:
         condition: service_healthy
@@ -32,7 +34,9 @@ services:
       # Required environment variables
       - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
-      - POSTGRES_URL=${POSTGRES_URL}
+      # Empty POSTGRES_URL means "use the bundled database". The URL is built
+      # from POSTGRES_PASSWORD so the two values cannot drift apart.
+      - POSTGRES_URL=${POSTGRES_URL:-postgresql://kan:${POSTGRES_PASSWORD}@postgres:5432/kan_db}
 
       # Redis (optional - for rate limiting)
       - REDIS_URL=${REDIS_URL}
@@ -140,7 +144,7 @@ services:
     environment:
       - POSTGRES_DB=kan_db
       - POSTGRES_USER=kan
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set}
     ports:
       - 5432:5432
     volumes:

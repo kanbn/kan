@@ -113,6 +113,22 @@ This guide introduces how to self-host Kan. It starts with the minimal Docker Co
 
     The `migrate` service runs the database migrations to completion before the `web` service starts, so once it's up open [http://localhost:3000](http://localhost:3000).
 
+    <Warning>
+      `POSTGRES_PASSWORD` is only applied when PostgreSQL creates the
+      `kan_postgres_data` volume for the first time. Changing it later does not
+      update the password stored in the database and causes
+      `password authentication failed for user "kan"` (SQLSTATE `28P01`).
+      Update the stored password instead of deleting the volume:
+
+      ```bash
+      docker compose exec postgres psql -U kan -d kan_db \
+        -c "ALTER ROLE kan WITH PASSWORD 'your_new_password';"
+      ```
+
+      Then update `POSTGRES_PASSWORD` and `POSTGRES_URL`, and run
+      `docker compose up -d`.
+    </Warning>
+
   </Step>
 
   <Step title="Manage the containers">
