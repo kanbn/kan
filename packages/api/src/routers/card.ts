@@ -1,7 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
-import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import { CardLabelBoardError } from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
@@ -32,6 +31,7 @@ import {
   assertCanDelete,
   assertCanEdit,
   assertPermission,
+  filterBoardAssignable,
 } from "../utils/permissions";
 import {
   createCardWebhookPayload,
@@ -129,6 +129,18 @@ export const cardRouter = createTRPCRouter({
         throw new TRPCError({
           message: `Members with public IDs (${input.memberPublicIds.join(", ")}) not found`,
           code: "NOT_FOUND",
+        });
+
+      const assignableMembers = await filterBoardAssignable(
+        ctx.db,
+        { id: list.boardId, type: list.boardType },
+        members,
+      );
+
+      if (assignableMembers.length !== members.length)
+        throw new TRPCError({
+          message: `Members must be on the board to be assigned`,
+          code: "BAD_REQUEST",
         });
 
       const newCard = await cardRepo.create(ctx.db, {
@@ -700,16 +712,14 @@ export const cardRouter = createTRPCRouter({
         return { newMember: false };
       }
 
-      // Only assign people who can see the board: workspace admins see every
-      // board, everyone else needs a board membership on regular boards.
-      if (
-        card.boardType === "regular" &&
-        member.role !== "admin" &&
-        !(await boardMemberRepo.isOnBoard(ctx.db, {
-          boardId: card.boardId,
-          workspaceMemberId: member.id,
-        }))
-      )
+      // Only assign people who can see the board.
+      const [assignable] = await filterBoardAssignable(
+        ctx.db,
+        { id: card.boardId, type: card.boardType },
+        [member],
+      );
+
+      if (!assignable)
         throw new TRPCError({
           message: `Member is not on this board`,
           code: "BAD_REQUEST",
@@ -805,8 +815,15 @@ export const cardRouter = createTRPCRouter({
       const workspaceWithAvatarUrls = result.list.board.workspace
         ? {
             ...result.list.board.workspace,
+            // Only offer people who belong on this board as assignees/mentions.
             members: await Promise.all(
-              result.list.board.workspace.members.map(async (member) => {
+              (
+                await filterBoardAssignable(
+                  ctx.db,
+                  { id: card.boardId, type: card.boardType },
+                  result.list.board.workspace.members,
+                )
+              ).map(async (member) => {
                 if (!member.user?.image) {
                   return member;
                 }
@@ -1504,10 +1521,16 @@ export const cardRouter = createTRPCRouter({
 
       if (input.copyMembers && sourceCard.members?.length) {
         const memberPublicIds = sourceCard.members.map((m) => m.publicId);
-        const members = await workspaceRepo.getAllMembersByPublicIds(
+        // Drop anyone who isn't on the target board (e.g. copying a card
+        // from a board they're on to one they aren't).
+        const members = await filterBoardAssignable(
           ctx.db,
-          memberPublicIds,
-          sourceCardMeta.workspaceId,
+          { id: targetList.boardId, type: targetList.boardType },
+          await workspaceRepo.getAllMembersByPublicIds(
+            ctx.db,
+            memberPublicIds,
+            sourceCardMeta.workspaceId,
+          ),
         );
         if (members.length) {
           const membersInsert = members.map((member) => ({

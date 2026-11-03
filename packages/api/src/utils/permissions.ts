@@ -343,6 +343,29 @@ export async function hasBoardAccess(
 }
 
 /**
+ * Narrow workspace members to the ones who belong on a board's cards
+ * (assignees, mentions): workspace admins and board members. Templates stay
+ * open to the whole workspace.
+ */
+export async function filterBoardAssignable<
+  T extends { id: number; role: string },
+>(
+  db: dbClient,
+  board: { id: number; type: string },
+  members: T[],
+): Promise<T[]> {
+  if (board.type !== "regular" || !members.length) return members;
+
+  const onBoard = new Set(
+    await boardMemberRepo.getWorkspaceMemberIds(db, board.id),
+  );
+
+  return members.filter(
+    (member) => member.role === "admin" || onBoard.has(member.id),
+  );
+}
+
+/**
  * Assert a user can see a board - throws NOT_FOUND (rather than FORBIDDEN)
  * since uninvited boards should be invisible, not merely inaccessible.
  *

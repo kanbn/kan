@@ -1,17 +1,12 @@
 import type { TRPCError } from "@trpc/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
-import { assertPermission } from "../utils/permissions";
-
-vi.mock("@kan/db/repository/boardMember.repo", () => ({
-  isOnBoard: vi.fn(),
-}));
+import { assertPermission, filterBoardAssignable } from "../utils/permissions";
 
 vi.mock("@kan/db/repository/card.repo", () => ({
   create: vi.fn(),
@@ -55,6 +50,10 @@ vi.mock("../utils/notifications", () => ({
   sendMentionEmails: vi.fn(),
 }));
 vi.mock("../utils/permissions", () => ({
+  filterBoardAssignable: vi.fn(
+    (_db: unknown, _board: unknown, members: unknown) =>
+      Promise.resolve(members),
+  ),
   assertCanDelete: vi.fn(),
   assertCanEdit: vi.fn(),
   assertPermission: vi.fn(),
@@ -223,7 +222,7 @@ describe("card member workspace scoping", () => {
       });
       mockGetMember.mockResolvedValueOnce({ id: 21, role: "member" });
       mockGetCardMember.mockResolvedValueOnce(undefined);
-      vi.mocked(boardMemberRepo.isOnBoard).mockResolvedValueOnce(false);
+      vi.mocked(filterBoardAssignable).mockResolvedValueOnce([]);
 
       await expect(
         cardRouter.createCaller(ctx).addOrRemoveMember(input),
@@ -231,10 +230,11 @@ describe("card member workspace scoping", () => {
         code: "BAD_REQUEST",
       } satisfies Partial<TRPCError>);
 
-      expect(boardMemberRepo.isOnBoard).toHaveBeenCalledWith(mockDb, {
-        boardId: 3,
-        workspaceMemberId: 21,
-      });
+      expect(filterBoardAssignable).toHaveBeenCalledWith(
+        mockDb,
+        { id: 3, type: "regular" },
+        [{ id: 21, role: "member" }],
+      );
       expect(mockCreateCardMember).not.toHaveBeenCalled();
     });
   });

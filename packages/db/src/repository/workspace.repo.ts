@@ -353,6 +353,7 @@ export const getAllMembersByPublicIds = (
   return db.query.workspaceMembers.findMany({
     columns: {
       id: true,
+      role: true,
     },
     where: and(
       inArray(workspaceMembers.publicId, memberPublicIds),

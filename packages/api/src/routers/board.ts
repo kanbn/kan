@@ -29,6 +29,7 @@ import {
   assertCanDelete,
   assertCanEdit,
   assertPermission,
+  filterBoardAssignable,
   isWorkspaceAdmin,
 } from "../utils/permissions";
 
@@ -176,8 +177,11 @@ export const boardRouter = createTRPCRouter({
       const workspaceWithAvatarUrls = result.workspace
         ? {
           ...result.workspace,
+          // Only offer people who belong on this board as assignees/filters.
           members: await Promise.all(
-            result.workspace.members.map(async (member) => {
+            (
+              await filterBoardAssignable(ctx.db, board, result.workspace.members)
+            ).map(async (member) => {
               if (!member.user?.image) {
                 return member;
               }

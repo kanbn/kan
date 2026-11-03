@@ -251,22 +251,13 @@ export const getMembership = async (
   return result;
 };
 
-export const isOnBoard = async (
-  db: dbClient,
-  args: { boardId: number; workspaceMemberId: number },
-) => {
-  const [result] = await db
-    .select({ boardId: boardMembers.boardId })
+export const getWorkspaceMemberIds = async (db: dbClient, boardId: number) => {
+  const rows = await db
+    .select({ workspaceMemberId: boardMembers.workspaceMemberId })
     .from(boardMembers)
-    .where(
-      and(
-        eq(boardMembers.boardId, args.boardId),
-        eq(boardMembers.workspaceMemberId, args.workspaceMemberId),
-      ),
-    )
-    .limit(1);
+    .where(eq(boardMembers.boardId, boardId));
 
-  return !!result;
+  return rows.map((row) => row.workspaceMemberId);
 };
 
 export const getMemberBoardIds = async (
