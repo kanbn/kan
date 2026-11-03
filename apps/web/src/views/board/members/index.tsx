@@ -41,7 +41,13 @@ export default function BoardMembersView() {
     error: boardMembersError,
   } = api.boardMember.all.useQuery({ boardPublicId }, { enabled, retry: false });
 
-  const workspaceMembers = board?.workspace.members ?? [];
+  // Candidates come from the whole workspace: board.byId only returns people
+  // already on the board (plus workspace admins).
+  const { data: workspaceData } = api.workspace.byId.useQuery(
+    { workspacePublicId: workspace.publicId },
+    { enabled: workspace.publicId.length >= 12 },
+  );
+  const workspaceMembers = workspaceData?.members ?? [];
 
   const myMembership = boardMembers?.find(
     (member) => member.user?.id === session?.user.id,
@@ -286,7 +292,7 @@ export default function BoardMembersView() {
             boardPublicId={boardPublicId}
             availableMembers={availableWorkspaceMembers.map((member) => ({
               publicId: member.publicId,
-              label: `${formatMemberDisplayName(member.user?.name ?? null, member.user?.email ?? member.email)} (${member.user?.email ?? member.email})`,
+              label: `${formatMemberDisplayName(member.user?.name ?? null, member.user?.email ?? member.email ?? null)} (${member.user?.email ?? member.email})`,
             }))}
           />
         </Modal>
