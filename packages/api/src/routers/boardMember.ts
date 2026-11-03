@@ -29,7 +29,7 @@ const getRegularBoardOrThrow = async (
     boardPublicId,
   );
 
-  if (!board)
+  if (!board || board.deletedAt)
     throw new TRPCError({
       message: `Board with public ID ${boardPublicId} not found`,
       code: "NOT_FOUND",

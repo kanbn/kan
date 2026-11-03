@@ -757,6 +757,7 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
       createdBy: true,
       type: true,
       visibility: true,
+      deletedAt: true,
     },
     where: eq(boards.publicId, boardPublicId),
   });

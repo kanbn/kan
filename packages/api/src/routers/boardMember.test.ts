@@ -96,6 +96,18 @@ describe("boardMember router", () => {
       ).rejects.toThrow(TRPCError);
     });
 
+    it("throws NOT_FOUND when the board is soft-deleted", async () => {
+      const { boardMemberRouter } = await import("./boardMember");
+      mockGetBoard.mockResolvedValueOnce({ ...mockBoard, deletedAt: new Date() });
+      const ctx = { user: mockUser, db: mockDb } as never;
+
+      await expect(
+        boardMemberRouter
+          .createCaller(ctx)
+          .all({ boardPublicId: "brd-123456789" }),
+      ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    });
+
     it("throws BAD_REQUEST for template boards", async () => {
       const { boardMemberRouter } = await import("./boardMember");
       mockGetBoard.mockResolvedValueOnce({ ...mockBoard, type: "template" });
