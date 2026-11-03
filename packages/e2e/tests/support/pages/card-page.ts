@@ -192,7 +192,9 @@ export class CardPage {
   }
 
   private checklistItemRow(title: string) {
-    return this.page.locator("div.items-start").filter({ hasText: title });
+    return this.page
+      .locator("div.items-start")
+      .filter({ has: this.page.getByText(title, { exact: true }) });
   }
 
   async deleteChecklistItem(title: string) {
@@ -213,8 +215,13 @@ export class CardPage {
     const handle = this.checklistItemRow(title).locator(".cursor-grab");
     await handle.focus();
     await this.page.keyboard.press("Space");
+    // dnd-kit measures droppable rects asynchronously after pickup; without
+    // a pause here the following ArrowDown can fire before it's ready and
+    // silently fail to move the active item.
+    await this.page.waitForTimeout(100);
     for (let i = 0; i < steps; i++) {
       await this.page.keyboard.press("ArrowDown");
+      await this.page.waitForTimeout(100);
     }
     const reordered = waitForTrpcMutation(this.page, "checklist.updateItem");
     await this.page.keyboard.press("Space");

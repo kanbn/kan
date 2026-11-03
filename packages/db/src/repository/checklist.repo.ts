@@ -1,4 +1,4 @@
-import { and, count, desc, eq, gt, isNull, sql } from "drizzle-orm";
+import { and, count, desc, eq, isNull, sql } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import { checklistItems, checklists } from "@kan/db/schema";
@@ -426,26 +426,6 @@ export const reorderItem = async (
         FROM ranked r
         WHERE t.id = r.id;
       `);
-
-      const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
-
-      const duplicateIndices = await tx
-        .select({ index: checklistItems.index, count: countExpr })
-        .from(checklistItems)
-        .where(
-          and(
-            eq(checklistItems.checklistId, item.checklistId),
-            isNull(checklistItems.deletedAt),
-          ),
-        )
-        .groupBy(checklistItems.index)
-        .having(gt(countExpr, 1));
-
-      if (duplicateIndices.length > 0) {
-        throw new Error(
-          `Invariant violation: duplicate indices for checklist ${item.checklistId}`,
-        );
-      }
     }
 
     const updated = await tx.query.checklistItems.findFirst({
