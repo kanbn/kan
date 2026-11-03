@@ -92,7 +92,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        63
+        64
       ]
     ],
     "translation": "{0} er føjet til dine favoritter."
@@ -108,7 +108,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        64
+        65
       ]
     ],
     "translation": "{0} er fjernet fra dine favoritter."
@@ -502,6 +502,18 @@
     ],
     "translation": "Tilføj et punkt..."
   },
+  "0Jeh9Q": {
+    "translation": "",
+    "message": "Add board member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/members/components/AddBoardMemberForm.tsx",
+        49
+      ]
+    ]
+  },
   "sFY+gw": {
     "message": "Add card",
     "placeholders": {},
@@ -608,6 +620,14 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/members/components/AddBoardMemberForm.tsx",
+        97
+      ],
+      [
+        "src/views/board/members/index.tsx",
+        223
+      ],
+      [
         "src/views/card/components/MemberSelector.tsx",
         138
       ],
@@ -625,7 +645,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        138
+        150
       ]
     ],
     "translation": "Føj til favoritter"
@@ -792,7 +812,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        60
+        61
       ]
     ],
     "translation": "Føjet til favoritter"
@@ -833,6 +853,14 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/members/index.tsx",
+        156
+      ],
+      [
+        "src/views/board/members/index.tsx",
+        172
+      ],
       [
         "src/views/members/index.tsx",
         221
@@ -1184,7 +1212,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        118
+        130
       ]
     ],
     "translation": "Arkivér tavle"
@@ -1324,6 +1352,22 @@
       ]
     ],
     "translation": "Er du sikker på, at du vil slette din konto?"
+  },
+  "NPVcwK": {
+    "translation": "",
+    "message": "Are you sure you want to remove {entityLabel}?",
+    "placeholders": {
+      "entityLabel": [
+        "entityLabel"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
+        46
+      ]
+    ]
   },
   "PyYD/v": {
     "message": "assigned <0>{0}</0> to the card",
@@ -1622,6 +1666,10 @@
         864
       ],
       [
+        "src/views/board/members/index.tsx",
+        209
+      ],
+      [
         "src/views/card/index.tsx",
         348
       ],
@@ -1652,10 +1700,54 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        49
+        50
       ]
     ],
     "translation": "Tavle arkiveret"
+  },
+  "uxBHQx": {
+    "translation": "",
+    "message": "Board member options",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/members/index.tsx",
+        193
+      ]
+    ]
+  },
+  "tKo0Sh": {
+    "translation": "",
+    "message": "Board members",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        99
+      ],
+      [
+        "src/views/board/members/index.tsx",
+        214
+      ]
+    ]
+  },
+  "vTPHCg": {
+    "translation": "",
+    "message": "Board members | {0}",
+    "placeholders": {
+      "0": [
+        "board?.name ?? t`Board`"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/members/index.tsx",
+        209
+      ]
+    ]
   },
   "wE3hGS": {
     "message": "Board moved",
@@ -1724,7 +1816,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        167
+        179
       ]
     ],
     "translation": ""
@@ -1748,7 +1840,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        50
+        51
       ]
     ],
     "translation": "Tavle fjernet fra arkivet"
@@ -2350,6 +2442,14 @@
       [
         "src/views/board/components/MoveBoardForm.tsx",
         99
+      ],
+      [
+        "src/views/board/members/components/AddBoardMemberForm.tsx",
+        89
+      ],
+      [
+        "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
+        54
       ],
       [
         "src/views/card/components/Comment.tsx",
@@ -3834,7 +3934,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        149
+        161
       ]
     ],
     "translation": "Slet tavle"
@@ -3898,7 +3998,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        149
+        161
       ]
     ],
     "translation": "Slet skabelon"
@@ -4374,7 +4474,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        109
+        121
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
@@ -4939,6 +5039,18 @@
       ]
     ],
     "translation": "Hændelser"
+  },
+  "6ZIzI/": {
+    "translation": "",
+    "message": "Every active workspace member is already on this board.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/members/components/AddBoardMemberForm.tsx",
+        61
+      ]
+    ]
   },
   "8iP0S8": {
     "message": "Everything in the free plan, plus:",
@@ -6781,7 +6893,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        98
+        110
       ]
     ],
     "translation": "Gør til skabelon"
@@ -6883,6 +6995,14 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/members/index.tsx",
+        156
+      ],
+      [
+        "src/views/board/members/index.tsx",
+        173
+      ],
       [
         "src/views/card/components/ActivityList.tsx",
         56
@@ -7093,7 +7213,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        129
+        141
       ]
     ],
     "translation": "Flyt til arbejdsområde"
@@ -8260,7 +8380,7 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        72
+        73
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -8776,6 +8896,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
+        57
+      ],
+      [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
         58
       ]
@@ -8794,6 +8918,18 @@
     ],
     "translation": ""
   },
+  "Tir5Ud": {
+    "translation": "",
+    "message": "Remove from board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/members/index.tsx",
+        183
+      ]
+    ]
+  },
   "T/pF0Z": {
     "message": "Remove from favorites",
     "placeholders": {},
@@ -8801,7 +8937,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        138
+        150
       ]
     ],
     "translation": "Fjern fra favoritter"
@@ -8896,7 +9032,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        61
+        62
       ]
     ],
     "translation": "Fjernet fra favoritter"
@@ -9082,6 +9218,14 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/members/index.tsx",
+        169
+      ],
+      [
+        "src/views/board/members/index.tsx",
+        250
+      ],
       [
         "src/views/members/index.tsx",
         353
@@ -9329,6 +9473,18 @@
       ]
     ],
     "translation": "Vælg en liste"
+  },
+  "E5eC82": {
+    "translation": "",
+    "message": "Select a member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/members/components/AddBoardMemberForm.tsx",
+        77
+      ]
+    ]
   },
   "NM2hyD": {
     "message": "Select a workspace",
@@ -10407,7 +10563,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        52
+        53
       ]
     ],
     "translation": "Tavlen er blevet arkiveret."
@@ -10435,7 +10591,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        53
+        54
       ]
     ],
     "translation": "Tavlen er fjernet fra arkivet."
@@ -10586,6 +10742,18 @@
       ]
     ],
     "translation": "De vil ikke længere kunne tilgå dette arbejdsområde."
+  },
+  "TZtx59": {
+    "translation": "",
+    "message": "They'll lose access to this board, but will remain a member of the workspace.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
+        49
+      ]
+    ]
   },
   "3LDCpD": {
     "message": "This action can't be undone.",
@@ -10983,6 +11151,18 @@
     ],
     "translation": "Kunne ikke tilføje etiket"
   },
+  "RHGJpb": {
+    "translation": "",
+    "message": "Unable to add member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/members/components/AddBoardMemberForm.tsx",
+        30
+      ]
+    ]
+  },
   "LeM5RY": {
     "message": "Unable to clear overrides",
     "placeholders": {},
@@ -11229,6 +11409,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
+        25
+      ],
+      [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
         27
       ]
@@ -11306,7 +11490,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        71
+        72
       ]
     ],
     "translation": "Kunne ikke opdatere tavle"
@@ -11465,6 +11649,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/members/index.tsx",
+        70
+      ],
+      [
         "src/views/members/index.tsx",
         69
       ]
@@ -11490,7 +11678,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        118
+        130
       ]
     ],
     "translation": "Fjern tavle fra arkiv"
@@ -12005,6 +12193,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/members/index.tsx",
+        244
+      ],
+      [
         "src/views/members/index.tsx",
         347
       ]
@@ -12483,6 +12675,18 @@
     ],
     "translation": "Beskrivelsen af arbejdsområdet er opdateret"
   },
+  "CbGxon": {
+    "translation": "",
+    "message": "Workspace member",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/members/components/AddBoardMemberForm.tsx",
+        69
+      ]
+    ]
+  },
   "wtxjAY": {
     "message": "Workspace members",
     "placeholders": {},
@@ -12851,6 +13055,18 @@
       ]
     ],
     "translation": "Du loggede ind uden en adgangskode. Indstil en adgangskode for at aktivere login med adgangskode."
+  },
+  "R3sENX": {
+    "translation": "",
+    "message": "You're not a member of this board yet. Ask a board admin to add you.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/members/index.tsx",
+        230
+      ]
+    ]
   },
   "2SePRT": {
     "message": "You've been invited to join a workspace on kan.bn.",
