@@ -44,10 +44,11 @@ const getRegularBoardOrThrow = async (
   return board;
 };
 
-const getActiveWorkspaceMemberOrThrow = async (
+const getWorkspaceMemberOrThrow = async (
   db: dbClient,
   workspaceMemberPublicId: string,
   workspaceId: number,
+  opts: { requireActive: boolean },
 ) => {
   const member = await memberRepo.getByPublicId(db, workspaceMemberPublicId);
 
@@ -57,7 +58,7 @@ const getActiveWorkspaceMemberOrThrow = async (
       code: "NOT_FOUND",
     });
 
-  if (member.status !== "active")
+  if (opts.requireActive && member.status !== "active")
     throw new TRPCError({
       message: `Only active workspace members can be added to a board`,
       code: "BAD_REQUEST",
@@ -118,10 +119,11 @@ export const boardMemberRouter = createTRPCRouter({
 
       await assertCanManageBoardMembers(ctx.db, userId, board);
 
-      const member = await getActiveWorkspaceMemberOrThrow(
+      const member = await getWorkspaceMemberOrThrow(
         ctx.db,
         input.workspaceMemberPublicId,
         board.workspaceId,
+        { requireActive: true },
       );
 
       const result = await boardMemberRepo.add(ctx.db, {
@@ -161,10 +163,12 @@ export const boardMemberRouter = createTRPCRouter({
 
       await assertCanManageBoardMembers(ctx.db, userId, board);
 
-      const member = await getActiveWorkspaceMemberOrThrow(
+      const member = await getWorkspaceMemberOrThrow(
         ctx.db,
         input.workspaceMemberPublicId,
         board.workspaceId,
+        // Demoting an invited/paused member is fine; promoting one isn't.
+        { requireActive: input.role === "admin" },
       );
 
       let result;
@@ -213,10 +217,11 @@ export const boardMemberRouter = createTRPCRouter({
 
       await assertCanManageBoardMembers(ctx.db, userId, board);
 
-      const member = await getActiveWorkspaceMemberOrThrow(
+      const member = await getWorkspaceMemberOrThrow(
         ctx.db,
         input.workspaceMemberPublicId,
         board.workspaceId,
+        { requireActive: false },
       );
 
       let result;

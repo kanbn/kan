@@ -320,5 +320,22 @@ describe("boardMember router", () => {
 
       expect(result).toEqual({ publicId: "wsm-target-12" });
     });
+
+    it("removes an invited (not yet active) board member", async () => {
+      const { boardMemberRouter } = await import("./boardMember");
+      mockGetMemberByPublicId.mockResolvedValueOnce({
+        ...mockTargetMember,
+        status: "invited",
+      });
+      mockRemove.mockResolvedValueOnce({ boardId: 1, workspaceMemberId: 5 });
+      const ctx = { user: mockUser, db: mockDb } as never;
+
+      const result = await boardMemberRouter.createCaller(ctx).remove({
+        boardPublicId: "brd-123456789",
+        workspaceMemberPublicId: "wsm-target-12",
+      });
+
+      expect(result).toEqual({ publicId: "wsm-target-12" });
+    });
   });
 });
