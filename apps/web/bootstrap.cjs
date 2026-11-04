@@ -62,4 +62,9 @@ if (process.env.RUN_MIGRATIONS === "true") {
 // 3. Start the Next.js standalone server
 // ---------------------------------------------------------------------------
 
+const drainMs = 10_000;
+const on = process.on.bind(process);
+process.on = (event, listener) =>
+  on(event, event === "SIGTERM" ? () => setTimeout(listener, drainMs, event) : listener);
+
 require("./apps/web/server.js");
