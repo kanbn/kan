@@ -1,0 +1,32 @@
+# Cloud stack for Docker Swarm (staging and production). Self-hosters: use the root docker-compose.yml.
+# networks and deploy are written out on the service so the proxy labels and network can be added to them.
+services:
+  web:
+    image: ghcr.io/kanbn/kan:main
+    env_file:
+      - .env
+    environment:
+      - RUN_MIGRATIONS=true
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD", "/nodejs/bin/node", "-e", "fetch('http://127.0.0.1:3000/api/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - dokploy-network
+    deploy:
+      replicas: 1
+      update_config:
+        order: start-first
+        failure_action: rollback
+        monitor: 30s
+      rollback_config:
+        order: start-first
+      restart_policy:
+        condition: any
+
+networks:
+  dokploy-network:
+    external: true

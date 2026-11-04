@@ -38,7 +38,28 @@ writeFileSync(
 );
 
 // ---------------------------------------------------------------------------
-// 2. Start the Next.js standalone server
+// 2. Run database migrations when RUN_MIGRATIONS=true
+// ---------------------------------------------------------------------------
+//
+// For deploys without a separate migrate container (Docker Swarm has no
+// depends_on). Runs the same drizzle-kit migrate as the migrate image, and
+// without NODE_ENV like that image, because drizzle.config.ts turns on SSL in
+// production.
+
+if (process.env.RUN_MIGRATIONS === "true") {
+  const { spawnSync } = require("child_process");
+  const migrateDir = path.join(__dirname, "migrate");
+  const { NODE_ENV: _nodeEnv, ...env } = process.env;
+  const result = spawnSync(
+    process.execPath,
+    [path.join(migrateDir, "node_modules", "drizzle-kit", "bin.cjs"), "migrate"],
+    { cwd: migrateDir, env, stdio: "inherit" },
+  );
+  if (result.status !== 0) process.exit(result.status ?? 1);
+}
+
+// ---------------------------------------------------------------------------
+// 3. Start the Next.js standalone server
 // ---------------------------------------------------------------------------
 
 require("./apps/web/server.js");

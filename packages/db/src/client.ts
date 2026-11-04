@@ -39,6 +39,9 @@ export const createDrizzleClient = (): dbClient => {
   const pool = new Pool({
     connectionString,
   });
+  // Idle connections error when Postgres restarts; without a listener that crashes the process.
+  // The pool drops the dead client and reconnects on the next query.
+  pool.on("error", (err) => log.error({ err }, "Postgres pool error"));
 
   return drizzlePg(pool, { schema }) as dbClient;
 };

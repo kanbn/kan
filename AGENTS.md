@@ -139,6 +139,7 @@ Kan is an open-source project management tool (Trello alternative) built with:
 - **Transactions**: Use database transactions for multi-step operations
 - **Index Management**: When deleting/moving cards, maintain sequential indices
 - **Activity Tracking**: Create activity records for all significant changes
+- **Backwards-Compatible Migrations**: Cloud deploys start the new version before stopping the old one, so every migration must work with the previous release. Add columns and tables first; drop or rename them in a later release once no running code uses them
 
 ## API Patterns
 

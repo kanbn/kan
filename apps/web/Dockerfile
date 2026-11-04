@@ -121,6 +121,8 @@ COPY --chown=1000:1000 --from=builder /app/apps/web/public/ ./apps/web/public/
 
 # Copy bootstrap script for runtime env var injection
 COPY --chown=1000:1000 apps/web/bootstrap.cjs ./bootstrap.cjs
+# Copy the migrate stage so bootstrap.cjs can run migrations (RUN_MIGRATIONS=true)
+COPY --chown=1000:1000 --from=migrate /db/ ./migrate/
 
 USER 1000:1000
 
