@@ -3360,7 +3360,6 @@
     "translation": "Kopiér medlemmer"
   },
   "FO91Ip": {
-    "translation": "",
     "message": "Copy public link",
     "placeholders": {},
     "comments": [],
@@ -3369,7 +3368,8 @@
         "src/views/board/components/BoardDropdown.tsx",
         140
       ]
-    ]
+    ],
+    "translation": ""
   },
   "7mrkyO": {
     "message": "Copy ticket ID",
@@ -8830,7 +8830,6 @@
     "translation": "Offentlig"
   },
   "NBrXwv": {
-    "translation": "",
     "message": "Public board URL copied to clipboard",
     "placeholders": {},
     "comments": [],
@@ -8839,7 +8838,8 @@
         "src/views/board/components/BoardDropdown.tsx",
         128
       ]
-    ]
+    ],
+    "translation": ""
   },
   "ABCjd9": {
     "message": "Publishing",
@@ -10460,7 +10460,6 @@
     "translation": "Skabelonens navn er påkrævet"
   },
   "2oYalC": {
-    "translation": "",
     "message": "Template URL copied to clipboard",
     "placeholders": {},
     "comments": [],
@@ -10469,7 +10468,8 @@
         "src/views/board/components/BoardDropdown.tsx",
         121
       ]
-    ]
+    ],
+    "translation": ""
   },
   "iTylMl": {
     "message": "Templates",
