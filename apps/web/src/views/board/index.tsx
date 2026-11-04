@@ -952,6 +952,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
               isArchived={boardData?.isArchived ?? false}
               isFavorite={boardData?.favorite}
               boardName={boardData?.name}
+              workspaceSlug={workspace.slug ?? ""}
+              boardSlug={boardData?.slug ?? ""}
+              visibility={boardData?.visibility ?? "private"}
             />
           </div>
         </div>
