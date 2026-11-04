@@ -92,7 +92,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        64
+        71
       ]
     ],
     "translation": "{0} został dodany do ulubionych."
@@ -108,7 +108,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        65
+        72
       ]
     ],
     "translation": "{0} został usunięty z ulubionych."
@@ -503,7 +503,6 @@
     "translation": "Dodaj element..."
   },
   "0Jeh9Q": {
-    "translation": "",
     "message": "Add board member",
     "placeholders": {},
     "comments": [],
@@ -512,7 +511,8 @@
         "src/views/board/members/components/AddBoardMemberForm.tsx",
         49
       ]
-    ]
+    ],
+    "translation": ""
   },
   "sFY+gw": {
     "message": "Add card",
@@ -645,7 +645,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        150
+        202
       ]
     ],
     "translation": "Dodaj do ulubionych"
@@ -812,7 +812,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        61
+        68
       ]
     ],
     "translation": "Dodano do ulubionych"
@@ -1212,7 +1212,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        130
+        182
       ]
     ],
     "translation": "Zarchiwizuj tablicę"
@@ -1354,7 +1354,6 @@
     "translation": "Czy na pewno chcesz usunąć swoje konto?"
   },
   "NPVcwK": {
-    "translation": "",
     "message": "Are you sure you want to remove {entityLabel}?",
     "placeholders": {
       "entityLabel": [
@@ -1367,7 +1366,8 @@
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         46
       ]
-    ]
+    ],
+    "translation": ""
   },
   "PyYD/v": {
     "message": "assigned <0>{0}</0> to the card",
@@ -1700,13 +1700,12 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        50
+        57
       ]
     ],
     "translation": "Tablica zarchiwizowana"
   },
   "uxBHQx": {
-    "translation": "",
     "message": "Board member options",
     "placeholders": {},
     "comments": [],
@@ -1715,26 +1714,26 @@
         "src/views/board/members/index.tsx",
         193
       ]
-    ]
+    ],
+    "translation": ""
   },
   "tKo0Sh": {
-    "translation": "",
     "message": "Board members",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        99
+        151
       ],
       [
         "src/views/board/members/index.tsx",
         214
       ]
-    ]
+    ],
+    "translation": ""
   },
   "vTPHCg": {
-    "translation": "",
     "message": "Board members | {0}",
     "placeholders": {
       "0": [
@@ -1747,7 +1746,8 @@
         "src/views/board/members/index.tsx",
         209
       ]
-    ]
+    ],
+    "translation": ""
   },
   "wE3hGS": {
     "message": "Board moved",
@@ -1816,7 +1816,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        179
+        231
       ]
     ],
     "translation": "Opcje tablicy"
@@ -1840,7 +1840,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        51
+        58
       ]
     ],
     "translation": "Tablica przywrócona z archiwum"
@@ -1874,6 +1874,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        122
+      ],
       [
         "src/views/public/board/index.tsx",
         79
@@ -3302,12 +3306,11 @@
     "comments": [],
     "origin": [
       [
-        "src/views/board/components/UpdateBoardSlugButton.tsx",
-        87
+        "src/views/board/components/BoardDropdown.tsx",
+        133
       ]
     ],
-    "translation": "Kopiuj link do tablicy",
-    "obsolete": true
+    "translation": "Kopiuj link do tablicy"
   },
   "F0YmUY": {
     "message": "Copy card link",
@@ -3368,6 +3371,18 @@
       ]
     ],
     "translation": "Kopiuj członków"
+  },
+  "FO91Ip": {
+    "translation": "",
+    "message": "Copy public link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        140
+      ]
+    ]
   },
   "7mrkyO": {
     "message": "Copy ticket ID",
@@ -3560,7 +3575,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        1017
+        1020
       ]
     ],
     "translation": "Utwórz nową listę"
@@ -3960,7 +3975,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        161
+        213
       ]
     ],
     "translation": "Usuń tablicę"
@@ -4024,7 +4039,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        161
+        213
       ]
     ],
     "translation": "Usuń szablon"
@@ -4513,7 +4528,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        121
+        173
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
@@ -5093,7 +5108,6 @@
     "translation": "Zdarzenia"
   },
   "6ZIzI/": {
-    "translation": "",
     "message": "Every active workspace member is already on this board.",
     "placeholders": {},
     "comments": [],
@@ -5102,7 +5116,8 @@
         "src/views/board/members/components/AddBoardMemberForm.tsx",
         61
       ]
-    ]
+    ],
+    "translation": ""
   },
   "8iP0S8": {
     "message": "Everything in the free plan, plus:",
@@ -5659,7 +5674,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        999
+        1002
       ]
     ],
     "translation": "Rozpocznij, tworząc nową listę"
@@ -6774,6 +6789,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/BoardDropdown.tsx",
+        106
+      ],
+      [
         "src/views/board/index.tsx",
         435
       ],
@@ -6971,7 +6990,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        110
+        162
       ]
     ],
     "translation": "Utwórz szablon"
@@ -7291,7 +7310,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        141
+        193
       ]
     ],
     "translation": "Przenieś do obszaru roboczego"
@@ -7750,7 +7769,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        995
+        998
       ]
     ],
     "translation": "Brak list"
@@ -7762,7 +7781,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1000
+        1003
       ]
     ],
     "translation": "Nie utworzono jeszcze żadnych list"
@@ -8458,7 +8477,7 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        73
+        80
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -8664,6 +8683,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        111
+      ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
         76
@@ -8884,6 +8907,18 @@
     ],
     "translation": "Publiczne"
   },
+  "NBrXwv": {
+    "translation": "",
+    "message": "Public board URL copied to clipboard",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        128
+      ]
+    ]
+  },
   "ABCjd9": {
     "message": "Publishing",
     "placeholders": {},
@@ -8997,7 +9032,6 @@
     "translation": "Usuń plik"
   },
   "Tir5Ud": {
-    "translation": "",
     "message": "Remove from board",
     "placeholders": {},
     "comments": [],
@@ -9006,7 +9040,8 @@
         "src/views/board/members/index.tsx",
         183
       ]
-    ]
+    ],
+    "translation": ""
   },
   "T/pF0Z": {
     "message": "Remove from favorites",
@@ -9015,7 +9050,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        150
+        202
       ]
     ],
     "translation": "Usuń z ulubionych"
@@ -9110,7 +9145,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        62
+        69
       ]
     ],
     "translation": "Usunięto z ulubionych"
@@ -9553,7 +9588,6 @@
     "translation": "Wybierz listę"
   },
   "E5eC82": {
-    "translation": "",
     "message": "Select a member",
     "placeholders": {},
     "comments": [],
@@ -9562,7 +9596,8 @@
         "src/views/board/members/components/AddBoardMemberForm.tsx",
         77
       ]
-    ]
+    ],
+    "translation": ""
   },
   "NM2hyD": {
     "message": "Select a workspace",
@@ -10502,6 +10537,18 @@
     ],
     "translation": "Nazwa szablonu jest wymagana"
   },
+  "2oYalC": {
+    "translation": "",
+    "message": "Template URL copied to clipboard",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        121
+      ]
+    ]
+  },
   "iTylMl": {
     "message": "Templates",
     "placeholders": {},
@@ -10641,7 +10688,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        53
+        60
       ]
     ],
     "translation": "Tablica została zarchiwizowana."
@@ -10669,7 +10716,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        54
+        61
       ]
     ],
     "translation": "Tablica została przywrócona z archiwum."
@@ -10822,7 +10869,6 @@
     "translation": "Nie będą mogli uzyskać dostępu do tego workspace’a."
   },
   "TZtx59": {
-    "translation": "",
     "message": "They'll lose access to this board, but will remain a member of the workspace.",
     "placeholders": {},
     "comments": [],
@@ -10831,7 +10877,8 @@
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         49
       ]
-    ]
+    ],
+    "translation": ""
   },
   "3LDCpD": {
     "message": "This action can't be undone.",
@@ -11230,7 +11277,6 @@
     "translation": "Nie można dodać etykiety"
   },
   "RHGJpb": {
-    "translation": "",
     "message": "Unable to add member",
     "placeholders": {},
     "comments": [],
@@ -11239,7 +11285,8 @@
         "src/views/board/members/components/AddBoardMemberForm.tsx",
         30
       ]
-    ]
+    ],
+    "translation": ""
   },
   "LeM5RY": {
     "message": "Unable to clear overrides",
@@ -11270,6 +11317,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        110
+      ],
       [
         "src/views/board/index.tsx",
         442
@@ -11568,7 +11619,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        72
+        79
       ]
     ],
     "translation": "Nie można zaktualizować tablicy"
@@ -11756,7 +11807,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        130
+        182
       ]
     ],
     "translation": "Przywróć tablicę z archiwum"
@@ -12797,7 +12848,6 @@
     "translation": "Opis przestrzeni roboczej zaktualizowany"
   },
   "CbGxon": {
-    "translation": "",
     "message": "Workspace member",
     "placeholders": {},
     "comments": [],
@@ -12806,7 +12856,8 @@
         "src/views/board/members/components/AddBoardMemberForm.tsx",
         69
       ]
-    ]
+    ],
+    "translation": ""
   },
   "wtxjAY": {
     "message": "Workspace members",
@@ -13112,7 +13163,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        1006
+        1009
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -13204,7 +13255,6 @@
     "translation": "Zalogowałeś się bez hasła. Ustaw hasło, aby włączyć logowanie za pomocą hasła."
   },
   "R3sENX": {
-    "translation": "",
     "message": "You're not a member of this board yet. Ask a board admin to add you.",
     "placeholders": {},
     "comments": [],
@@ -13213,7 +13263,8 @@
         "src/views/board/members/index.tsx",
         230
       ]
-    ]
+    ],
+    "translation": ""
   },
   "2SePRT": {
     "message": "You've been invited to join a workspace on kan.bn.",

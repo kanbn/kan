@@ -92,7 +92,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        64
+        71
       ]
     ],
     "translation": "{0} has been added to your favorites."
@@ -108,7 +108,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        65
+        72
       ]
     ],
     "translation": "{0} has been removed from your favorites."
@@ -503,7 +503,6 @@
     "translation": "Add an item..."
   },
   "0Jeh9Q": {
-    "translation": "Add board member",
     "message": "Add board member",
     "placeholders": {},
     "comments": [],
@@ -512,7 +511,8 @@
         "src/views/board/members/components/AddBoardMemberForm.tsx",
         49
       ]
-    ]
+    ],
+    "translation": "Add board member"
   },
   "sFY+gw": {
     "message": "Add card",
@@ -645,7 +645,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        150
+        202
       ]
     ],
     "translation": "Add to favorites"
@@ -812,7 +812,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        61
+        68
       ]
     ],
     "translation": "Added to favorites"
@@ -1212,7 +1212,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        130
+        182
       ]
     ],
     "translation": "Archive board"
@@ -1354,7 +1354,6 @@
     "translation": "Are you sure you want to delete your account?"
   },
   "NPVcwK": {
-    "translation": "Are you sure you want to remove {entityLabel}?",
     "message": "Are you sure you want to remove {entityLabel}?",
     "placeholders": {
       "entityLabel": [
@@ -1367,7 +1366,8 @@
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         46
       ]
-    ]
+    ],
+    "translation": "Are you sure you want to remove {entityLabel}?"
   },
   "PyYD/v": {
     "message": "assigned <0>{0}</0> to the card",
@@ -1700,13 +1700,12 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        50
+        57
       ]
     ],
     "translation": "Board archived"
   },
   "uxBHQx": {
-    "translation": "Board member options",
     "message": "Board member options",
     "placeholders": {},
     "comments": [],
@@ -1715,26 +1714,26 @@
         "src/views/board/members/index.tsx",
         193
       ]
-    ]
+    ],
+    "translation": "Board member options"
   },
   "tKo0Sh": {
-    "translation": "Board members",
     "message": "Board members",
     "placeholders": {},
     "comments": [],
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        99
+        151
       ],
       [
         "src/views/board/members/index.tsx",
         214
       ]
-    ]
+    ],
+    "translation": "Board members"
   },
   "vTPHCg": {
-    "translation": "Board members | {0}",
     "message": "Board members | {0}",
     "placeholders": {
       "0": [
@@ -1747,7 +1746,8 @@
         "src/views/board/members/index.tsx",
         209
       ]
-    ]
+    ],
+    "translation": "Board members | {0}"
   },
   "wE3hGS": {
     "message": "Board moved",
@@ -1816,7 +1816,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        179
+        231
       ]
     ],
     "translation": "Board options"
@@ -1840,7 +1840,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        51
+        58
       ]
     ],
     "translation": "Board unarchived"
@@ -1874,6 +1874,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        122
+      ],
       [
         "src/views/public/board/index.tsx",
         79
@@ -3302,12 +3306,11 @@
     "comments": [],
     "origin": [
       [
-        "src/views/board/components/UpdateBoardSlugButton.tsx",
-        87
+        "src/views/board/components/BoardDropdown.tsx",
+        133
       ]
     ],
-    "translation": "Copy board link",
-    "obsolete": true
+    "translation": "Copy board link"
   },
   "F0YmUY": {
     "message": "Copy card link",
@@ -3368,6 +3371,18 @@
       ]
     ],
     "translation": "Copy members"
+  },
+  "FO91Ip": {
+    "translation": "Copy public link",
+    "message": "Copy public link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        140
+      ]
+    ]
   },
   "7mrkyO": {
     "message": "Copy ticket ID",
@@ -3560,7 +3575,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        1017
+        1020
       ]
     ],
     "translation": "Create new list"
@@ -3960,7 +3975,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        161
+        213
       ]
     ],
     "translation": "Delete board"
@@ -4024,7 +4039,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        161
+        213
       ]
     ],
     "translation": "Delete template"
@@ -4513,7 +4528,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        121
+        173
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
@@ -5093,7 +5108,6 @@
     "translation": "Events"
   },
   "6ZIzI/": {
-    "translation": "Every active workspace member is already on this board.",
     "message": "Every active workspace member is already on this board.",
     "placeholders": {},
     "comments": [],
@@ -5102,7 +5116,8 @@
         "src/views/board/members/components/AddBoardMemberForm.tsx",
         61
       ]
-    ]
+    ],
+    "translation": "Every active workspace member is already on this board."
   },
   "8iP0S8": {
     "message": "Everything in the free plan, plus:",
@@ -5659,7 +5674,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        999
+        1002
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -6774,6 +6789,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/BoardDropdown.tsx",
+        106
+      ],
+      [
         "src/views/board/index.tsx",
         435
       ],
@@ -6971,7 +6990,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        110
+        162
       ]
     ],
     "translation": "Make template"
@@ -7291,7 +7310,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        141
+        193
       ]
     ],
     "translation": "Move to workspace"
@@ -7750,7 +7769,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        995
+        998
       ]
     ],
     "translation": "No lists"
@@ -7762,7 +7781,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1000
+        1003
       ]
     ],
     "translation": "No lists have been created yet"
@@ -8458,7 +8477,7 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        73
+        80
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -8664,6 +8683,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        111
+      ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
         76
@@ -8884,6 +8907,18 @@
     ],
     "translation": "Public"
   },
+  "NBrXwv": {
+    "translation": "Public board URL copied to clipboard",
+    "message": "Public board URL copied to clipboard",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        128
+      ]
+    ]
+  },
   "ABCjd9": {
     "message": "Publishing",
     "placeholders": {},
@@ -8997,7 +9032,6 @@
     "translation": "Remove file"
   },
   "Tir5Ud": {
-    "translation": "Remove from board",
     "message": "Remove from board",
     "placeholders": {},
     "comments": [],
@@ -9006,7 +9040,8 @@
         "src/views/board/members/index.tsx",
         183
       ]
-    ]
+    ],
+    "translation": "Remove from board"
   },
   "T/pF0Z": {
     "message": "Remove from favorites",
@@ -9015,7 +9050,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        150
+        202
       ]
     ],
     "translation": "Remove from favorites"
@@ -9110,7 +9145,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        62
+        69
       ]
     ],
     "translation": "Removed from favorites"
@@ -9553,7 +9588,6 @@
     "translation": "Select a list"
   },
   "E5eC82": {
-    "translation": "Select a member",
     "message": "Select a member",
     "placeholders": {},
     "comments": [],
@@ -9562,7 +9596,8 @@
         "src/views/board/members/components/AddBoardMemberForm.tsx",
         77
       ]
-    ]
+    ],
+    "translation": "Select a member"
   },
   "NM2hyD": {
     "message": "Select a workspace",
@@ -10502,6 +10537,18 @@
     ],
     "translation": "Template name is required"
   },
+  "2oYalC": {
+    "translation": "Template URL copied to clipboard",
+    "message": "Template URL copied to clipboard",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        121
+      ]
+    ]
+  },
   "iTylMl": {
     "message": "Templates",
     "placeholders": {},
@@ -10641,7 +10688,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        53
+        60
       ]
     ],
     "translation": "The board has been archived."
@@ -10669,7 +10716,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        54
+        61
       ]
     ],
     "translation": "The board has been unarchived."
@@ -10822,7 +10869,6 @@
     "translation": "They won't be able to access this workspace."
   },
   "TZtx59": {
-    "translation": "They'll lose access to this board, but will remain a member of the workspace.",
     "message": "They'll lose access to this board, but will remain a member of the workspace.",
     "placeholders": {},
     "comments": [],
@@ -10831,7 +10877,8 @@
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         49
       ]
-    ]
+    ],
+    "translation": "They'll lose access to this board, but will remain a member of the workspace."
   },
   "3LDCpD": {
     "message": "This action can't be undone.",
@@ -11230,7 +11277,6 @@
     "translation": "Unable to add label"
   },
   "RHGJpb": {
-    "translation": "Unable to add member",
     "message": "Unable to add member",
     "placeholders": {},
     "comments": [],
@@ -11239,7 +11285,8 @@
         "src/views/board/members/components/AddBoardMemberForm.tsx",
         30
       ]
-    ]
+    ],
+    "translation": "Unable to add member"
   },
   "LeM5RY": {
     "message": "Unable to clear overrides",
@@ -11270,6 +11317,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        110
+      ],
       [
         "src/views/board/index.tsx",
         442
@@ -11568,7 +11619,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        72
+        79
       ]
     ],
     "translation": "Unable to update board"
@@ -11756,7 +11807,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        130
+        182
       ]
     ],
     "translation": "Unarchive board"
@@ -12797,7 +12848,6 @@
     "translation": "Workspace description updated"
   },
   "CbGxon": {
-    "translation": "Workspace member",
     "message": "Workspace member",
     "placeholders": {},
     "comments": [],
@@ -12806,7 +12856,8 @@
         "src/views/board/members/components/AddBoardMemberForm.tsx",
         69
       ]
-    ]
+    ],
+    "translation": "Workspace member"
   },
   "wtxjAY": {
     "message": "Workspace members",
@@ -13112,7 +13163,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        1006
+        1009
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -13204,7 +13255,6 @@
     "translation": "You signed in without a password. Set a password to enable password-based login."
   },
   "R3sENX": {
-    "translation": "You're not a member of this board yet. Ask a board admin to add you.",
     "message": "You're not a member of this board yet. Ask a board admin to add you.",
     "placeholders": {},
     "comments": [],
@@ -13213,7 +13263,8 @@
         "src/views/board/members/index.tsx",
         230
       ]
-    ]
+    ],
+    "translation": "You're not a member of this board yet. Ask a board admin to add you."
   },
   "2SePRT": {
     "message": "You've been invited to join a workspace on kan.bn.",
