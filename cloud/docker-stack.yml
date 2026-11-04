@@ -18,6 +18,8 @@ services:
       - dokploy-network
     deploy:
       replicas: 1
+      labels:
+        - traefik.swarm.lbswarm=true
       update_config:
         order: start-first
         failure_action: rollback
