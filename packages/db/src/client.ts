@@ -40,10 +40,15 @@ export const createDrizzleClient = (): dbClient => {
   // pg treats sslmode=require as "verify the cert" unless parsed with
   // useLibpqCompat; passing connectionString itself (not discrete fields)
   // makes pg re-parse it without that flag, clobbering any fix.
-  const clientConfig = toClientConfig(
-    parseConnectionString(connectionString, { useLibpqCompat: true }),
-  );
-  const pool = new Pool(clientConfig);
+  const parsedConnection = parseConnectionString(connectionString, {
+    useLibpqCompat: true,
+  });
+  // no-verify is a pg-only extension, not a real libpq sslmode, so
+  // useLibpqCompat doesn't recognize it and would silently start verifying.
+  if (parsedConnection.sslmode === "no-verify" && typeof parsedConnection.ssl === "object") {
+    parsedConnection.ssl = { ...parsedConnection.ssl, rejectUnauthorized: false };
+  }
+  const pool = new Pool(toClientConfig(parsedConnection));
   // Idle connections error when Postgres restarts; without a listener that crashes the process.
   // The pool drops the dead client and reconnects on the next query.
   pool.on("error", (err) => log.error({ err }, "Postgres pool error"));
