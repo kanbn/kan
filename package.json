@@ -2,7 +2,7 @@
   "name": "kan",
   "private": true,
   "engines": {
-    "node": ">=20.18.1",
+    "node": ">=24.0.0",
     "pnpm": "^9.14.2"
   },
   "packageManager": "pnpm@9.14.2",
