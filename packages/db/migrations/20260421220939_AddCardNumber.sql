@@ -1,6 +1,6 @@
-ALTER TABLE "card" ADD COLUMN "cardNumber" integer;--> statement-breakpoint
-ALTER TABLE "workspace" ADD COLUMN "cardPrefix" varchar(10) DEFAULT '' NOT NULL;--> statement-breakpoint
-ALTER TABLE "workspace" ADD COLUMN "cardCounter" integer DEFAULT 0 NOT NULL;--> statement-breakpoint
+ALTER TABLE "card" ADD COLUMN IF NOT EXISTS "cardNumber" integer;--> statement-breakpoint
+ALTER TABLE "workspace" ADD COLUMN IF NOT EXISTS "cardPrefix" varchar(10) DEFAULT '' NOT NULL;--> statement-breakpoint
+ALTER TABLE "workspace" ADD COLUMN IF NOT EXISTS "cardCounter" integer DEFAULT 0 NOT NULL;--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "card_list_number_idx" ON "card" USING btree ("listId","cardNumber");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "workspace_card_prefix_idx" ON "workspace" USING btree ("cardPrefix");--> statement-breakpoint
 

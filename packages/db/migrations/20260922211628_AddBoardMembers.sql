@@ -1,4 +1,9 @@
-CREATE TYPE "public"."board_member_role" AS ENUM('admin', 'member');--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."board_member_role" AS ENUM('admin', 'member');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "board_members" (
 	"boardId" bigint NOT NULL,
 	"workspaceMemberId" bigint NOT NULL,
