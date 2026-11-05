@@ -46,6 +46,15 @@ const boardDetailCardSchema = z.object({
   attachments: z.array(z.object({ publicId: z.string() })),
   checklists: z.array(checklistResponseSchema),
   comments: z.array(z.object({ publicId: z.string() })),
+  summary: z
+    .object({
+      hasDescription: z.boolean(),
+      attachmentCount: z.number().int().nonnegative(),
+      hasComments: z.boolean(),
+      checklistItemCount: z.number().int().nonnegative(),
+      completedChecklistItemCount: z.number().int().nonnegative(),
+    })
+    .optional(),
 });
 
 // ─── board.byId ──────────────────────────────────────────────
@@ -53,7 +62,7 @@ export const boardDetailSchema = z.object({
   publicId: z.string(),
   name: z.string(),
   slug: z.string(),
-  visibility: z.string(),
+  visibility: z.enum(["private", "public"]),
   isArchived: z.boolean(),
   favorite: z.boolean(),
   workspace: z.object({
@@ -96,7 +105,7 @@ export const boardBySlugSchema = z.object({
   publicId: z.string(),
   name: z.string(),
   slug: z.string(),
-  visibility: z.string(),
+  visibility: z.enum(["private", "public"]),
   workspace: z.object({
     publicId: z.string(),
     name: z.string(),

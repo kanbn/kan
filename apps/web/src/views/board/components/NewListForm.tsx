@@ -22,6 +22,7 @@ interface QueryParams {
   members: string[];
   labels: string[];
   lists: string[];
+  cardView: "summary";
 }
 
 export function NewListForm({

@@ -17,24 +17,15 @@ import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 
 interface CardContextDuplicateModalProps {
-  boardPublicId?: string;
-  isTemplate?: boolean;
+  lists: { publicId: string; name: string }[];
 }
 
 export function CardContextDuplicateModal({
-  boardPublicId: boardPublicIdProp,
-  isTemplate: isTemplateProp,
-}: CardContextDuplicateModalProps = {}) {
-  const { entityId: cardPublicId, closeModal, getModalState } = useModal();
+  lists,
+}: CardContextDuplicateModalProps) {
+  const { entityId: cardPublicId, closeModal } = useModal();
   const { showPopup } = usePopup();
   const utils = api.useUtils();
-
-  const modalState = getModalState("CARD_CONTEXT_DUPLICATE") as
-    | { boardPublicId: string; isTemplate?: boolean }
-    | undefined;
-  const boardPublicId =
-    boardPublicIdProp ?? modalState?.boardPublicId ?? "";
-  const isTemplate = isTemplateProp ?? modalState?.isTemplate ?? false;
 
   const [listPublicId, setListPublicId] = useState("");
   const [copyLabels, setCopyLabels] = useState(true);
@@ -48,13 +39,10 @@ export function CardContextDuplicateModal({
     { enabled: !!cardPublicId && cardPublicId.length >= 12 },
   );
 
-  const boardType = isTemplate ? "template" : "regular";
-  const { data: board } = api.board.byId.useQuery(
-    { boardPublicId, type: boardType },
-    { enabled: !!boardPublicId },
-  );
-  const lists = board?.lists ?? [];
-  const listOptions = lists.map((l) => ({ publicId: l.publicId, name: l.name }));
+  const listOptions = lists.map((l) => ({
+    publicId: l.publicId,
+    name: l.name,
+  }));
   const currentListPublicId = card?.list?.publicId;
   const hasLabels = (card?.labels?.length ?? 0) > 0;
   const hasMembers = (card?.members?.length ?? 0) > 0;
