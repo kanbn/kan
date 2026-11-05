@@ -436,6 +436,9 @@ importers:
       pg:
         specifier: ^8.11.3
         version: 8.16.3
+      pg-connection-string:
+        specifier: ^2.9.1
+        version: 2.9.1
       uuid:
         specifier: ^11.1.0
         version: 11.1.0
