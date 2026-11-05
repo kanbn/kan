@@ -369,7 +369,6 @@ export const reorderItem = async (
     const item = await tx.query.checklistItems.findFirst({
       columns: {
         id: true,
-        index: true,
         checklistId: true,
       },
       where: and(
@@ -382,58 +381,64 @@ export const reorderItem = async (
       throw new Error(`Checklist item not found for ID ${args.itemId}`);
     }
 
-    const currentIndex = item.index;
-    const newIndex = args.newIndex;
-
-    if (currentIndex === newIndex) {
-      const unchanged = await tx.query.checklistItems.findFirst({
-        columns: {
-          publicId: true,
-          title: true,
-          completed: true,
-        },
-        where: and(
-          eq(checklistItems.id, args.itemId),
+    const siblings = await tx
+      .select({ id: checklistItems.id })
+      .from(checklistItems)
+      .where(
+        and(
+          eq(checklistItems.checklistId, item.checklistId),
           isNull(checklistItems.deletedAt),
         ),
-      });
+      )
+      .orderBy(checklistItems.index, checklistItems.id)
+      .for("update");
 
-      if (!unchanged) {
-        throw new Error(`Checklist item not found for ID ${args.itemId}`);
-      }
+    const currentPosition = siblings.findIndex((s) => s.id === item.id);
 
-      return unchanged;
+    if (currentPosition === -1) {
+      throw new Error(`Checklist item not found for ID ${args.itemId}`);
     }
 
-    if (currentIndex < newIndex) {
+    const targetPosition = Math.min(
+      Math.max(args.newIndex, 0),
+      siblings.length - 1,
+    );
+
+    if (currentPosition !== targetPosition) {
       await tx.execute(sql`
-        UPDATE card_checklist_item
-        SET index = index - 1
-        WHERE "checklistId" = ${item.checklistId}
-        AND index > ${currentIndex}
-        AND index <= ${newIndex}
-        AND "deletedAt" IS NULL
-        `);
-    } else {
-      await tx.execute(sql`
-        UPDATE card_checklist_item
-        SET index = index + 1
-        WHERE "checklistId" = ${item.checklistId}
-        AND index >= ${newIndex}
-        AND index < ${currentIndex}
-        AND "deletedAt" IS NULL
-        `);
+        WITH ranked AS (
+          SELECT id, ROW_NUMBER() OVER (ORDER BY index, id) - 1 AS rank
+          FROM card_checklist_item
+          WHERE "checklistId" = ${item.checklistId} AND "deletedAt" IS NULL
+        )
+        UPDATE card_checklist_item t
+        SET index =
+          CASE
+            WHEN t.id = ${item.id} THEN ${targetPosition}
+            WHEN ${currentPosition} < ${targetPosition}
+              AND r.rank > ${currentPosition} AND r.rank <= ${targetPosition}
+              THEN r.rank - 1
+            WHEN ${currentPosition} > ${targetPosition}
+              AND r.rank >= ${targetPosition} AND r.rank < ${currentPosition}
+              THEN r.rank + 1
+            ELSE r.rank
+          END
+        FROM ranked r
+        WHERE t.id = r.id;
+      `);
     }
 
-    const [updated] = await tx
-      .update(checklistItems)
-      .set({ index: newIndex })
-      .where(eq(checklistItems.id, args.itemId))
-      .returning({
-        publicId: checklistItems.publicId,
-        title: checklistItems.title,
-        completed: checklistItems.completed,
-      });
+    const updated = await tx.query.checklistItems.findFirst({
+      columns: {
+        publicId: true,
+        title: true,
+        completed: true,
+      },
+      where: and(
+        eq(checklistItems.id, args.itemId),
+        isNull(checklistItems.deletedAt),
+      ),
+    });
 
     if (!updated) {
       throw new Error(`Failed to update checklist item with ID ${args.itemId}`);
