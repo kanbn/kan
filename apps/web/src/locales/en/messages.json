@@ -4209,7 +4209,6 @@
     "translation": "Discuss and collaborate on cards."
   },
   "7oGBMv": {
-    "translation": "Discussions",
     "message": "Discussions",
     "placeholders": {},
     "comments": [],
@@ -4218,7 +4217,8 @@
         "src/views/home/components/Footer.tsx",
         39
       ]
-    ]
+    ],
+    "translation": "Discussions"
   },
   "pfa8F0": {
     "message": "Display name",
