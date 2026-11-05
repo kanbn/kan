@@ -155,7 +155,7 @@ const Testimonials = () => {
       name: "Fox",
       handle: "@dscfox",
       image: "/testimonials/avatars/fox.png",
-      link: "https://discord.gg/e6ejRb6CmT",
+      link: "https://github.com/kanbn/kan/discussions",
       rowSpan: 2,
       text: (
         <>
@@ -176,7 +176,7 @@ const Testimonials = () => {
       name: "Hanno Braun",
       handle: "@hannobraun",
       image: "/testimonials/avatars/hanno_braun.webp",
-      link: "https://discord.gg/e6ejRb6CmT",
+      link: "https://github.com/kanbn/kan/discussions",
       text: (
         <>
           I've been very impressed with the app so far! It's great to have such
@@ -220,7 +220,7 @@ const Testimonials = () => {
       name: "BRAVO68WEB",
       handle: "@bravo68web",
       image: "/testimonials/avatars/bravo68web.jpeg",
-      link: "https://discord.gg/e6ejRb6CmT",
+      link: "https://github.com/kanbn/kan/discussions",
       text: <>I have fallen in love with the project.</>,
     },
   ];
