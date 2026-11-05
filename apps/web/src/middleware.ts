@@ -40,6 +40,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
+  if (
+    request.nextUrl.pathname === "/forgot-password" &&
+    env("NEXT_PUBLIC_DISABLE_EMAIL")?.toLowerCase() === "true"
+  ) {
+    return NextResponse.redirect(resolveLoginUrl(request));
+  }
+
   if (request.nextUrl.pathname === "/") {
     if (env("NEXT_PUBLIC_KAN_ENV") !== "cloud") {
       return NextResponse.redirect(resolveLoginUrl(request));
@@ -52,6 +59,7 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/",
+    "/forgot-password",
     "/.well-known/oauth-protected-resource",
     "/.well-known/oauth-authorization-server",
   ],

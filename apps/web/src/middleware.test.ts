@@ -60,6 +60,38 @@ describe("middleware", () => {
     );
   });
 
+  it("redirects /forgot-password to login when email is disabled", () => {
+    mockedEnv.mockImplementation((key) => {
+      if (key === "NEXT_PUBLIC_BASE_URL") return "https://kan.example.com";
+      if (key === "NEXT_PUBLIC_DISABLE_EMAIL") return "true";
+    });
+
+    const response = middleware(
+      new NextRequest("http://localhost:3000/forgot-password"),
+    );
+
+    expect(response.status).toBe(307);
+    expect(response.headers.get("location")).toBe(
+      "https://kan.example.com/login",
+    );
+  });
+
+  it.each([undefined, "", "false"])(
+    "does not redirect /forgot-password when email is disabled is %s",
+    (disableEmail) => {
+      mockedEnv.mockImplementation((key) => {
+        if (key === "NEXT_PUBLIC_DISABLE_EMAIL") return disableEmail;
+        if (key === "NEXT_PUBLIC_KAN_ENV") return "cloud";
+      });
+
+      const response = middleware(
+        new NextRequest("http://localhost:3000/forgot-password"),
+      );
+
+      expect(response.headers.get("location")).toBeNull();
+    },
+  );
+
   it.each(["mcp.kan.bn", "mcp-staging.kan.bn"])(
     "rewrites requests with Host: %s to /api/mcp",
     (host) => {
@@ -73,7 +105,8 @@ describe("middleware", () => {
 
       const rewriteTarget = response.headers.get("x-middleware-rewrite");
       expect(rewriteTarget).not.toBeNull();
-      expect(new URL(rewriteTarget!).pathname).toBe("/api/mcp");
+      if (!rewriteTarget) throw new Error("Expected rewrite target");
+      expect(new URL(rewriteTarget).pathname).toBe("/api/mcp");
     },
   );
 
