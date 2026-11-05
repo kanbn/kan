@@ -336,6 +336,7 @@ export const getMemberByPublicId = (
     columns: {
       id: true,
       role: true,
+      status: true,
     },
     where: and(
       eq(workspaceMembers.publicId, memberPublicId),
@@ -354,6 +355,7 @@ export const getAllMembersByPublicIds = (
     columns: {
       id: true,
       role: true,
+      status: true,
     },
     where: and(
       inArray(workspaceMembers.publicId, memberPublicIds),

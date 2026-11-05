@@ -4,6 +4,7 @@ import {
   checklistResponseSchema,
   labelSchema,
   workspaceMemberSchema,
+  workspaceMemberStatusSchema,
 } from "./common";
 
 // ─── card.create ─────────────────────────────────────────────
@@ -34,6 +35,7 @@ export const commentDeleteResponseSchema = z.object({
 const cardMemberSchema = z.object({
   publicId: z.string(),
   email: z.string(),
+  status: workspaceMemberStatusSchema,
   user: z
     .object({
       id: z.string().nullable(),
