@@ -2985,7 +2985,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        95
+        96
       ]
     ],
     "translation": "Firma"
@@ -3195,7 +3195,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        38
+        42
       ],
       [
         "src/views/home/components/Header.tsx",
@@ -4208,6 +4208,18 @@
     ],
     "translation": "Dyskutuj i współpracuj nad kartami."
   },
+  "7oGBMv": {
+    "translation": "",
+    "message": "Discussions",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Footer.tsx",
+        39
+      ]
+    ]
+  },
   "pfa8F0": {
     "message": "Display name",
     "placeholders": {},
@@ -4332,7 +4344,7 @@
       ],
       [
         "src/views/home/components/Footer.tsx",
-        78
+        79
       ],
       [
         "src/views/home/components/Header.tsx",
@@ -5354,7 +5366,7 @@
       ],
       [
         "src/views/home/components/Footer.tsx",
-        52
+        56
       ]
     ],
     "translation": "FAQ"
@@ -5402,7 +5414,7 @@
       ],
       [
         "src/views/home/components/Footer.tsx",
-        50
+        54
       ],
       [
         "src/views/home/components/Header.tsx",
@@ -6786,7 +6798,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        131
+        132
       ]
     ],
     "translation": "Prawne"
@@ -6798,7 +6810,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        45
+        49
       ]
     ],
     "translation": "Licencja"
@@ -8069,7 +8081,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        39
+        43
       ],
       [
         "src/views/oss-friends/index.tsx",
@@ -8837,7 +8849,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        51
+        55
       ],
       [
         "src/views/home/components/Header.tsx",
@@ -8889,7 +8901,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        43
+        47
       ]
     ],
     "translation": "Polityka prywatności"
@@ -9409,7 +9421,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        114
+        115
       ]
     ],
     "translation": "Zasoby"
@@ -10744,7 +10756,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        42
+        46
       ]
     ],
     "translation": "Regulamin"
