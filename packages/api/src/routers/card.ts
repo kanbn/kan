@@ -25,6 +25,7 @@ import {
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { mergeActivities } from "../utils/activities";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
+import { assertNoNewPausedMentions } from "../utils/mention-permissions";
 import { sendMentionEmails } from "../utils/notifications";
 import {
   assertBoardAccess,
@@ -149,9 +150,17 @@ export const cardRouter = createTRPCRouter({
           code: "BAD_REQUEST",
         });
 
+      const description = normalizeDescription(input.description);
+      await assertNoNewPausedMentions(
+        ctx.db,
+        list.workspaceId,
+        null,
+        description ?? "",
+      );
+
       const newCard = await cardRepo.create(ctx.db, {
         title: input.title,
-        description: normalizeDescription(input.description),
+        description,
         createdBy: userId,
         listId: list.id,
         workspaceId: list.workspaceId,
@@ -311,6 +320,13 @@ export const cardRouter = createTRPCRouter({
         type: card.boardType,
       });
 
+      await assertNoNewPausedMentions(
+        ctx.db,
+        card.workspaceId,
+        null,
+        input.comment,
+      );
+
       const newComment = await cardCommentRepo.create(ctx.db, {
         comment: input.comment,
         createdBy: userId,
@@ -404,6 +420,13 @@ export const cardRouter = createTRPCRouter({
         workspaceId: card.workspaceId,
         type: card.boardType,
       });
+
+      await assertNoNewPausedMentions(
+        ctx.db,
+        card.workspaceId,
+        existingComment.comment,
+        input.comment,
+      );
 
       const updatedComment = await cardCommentRepo.update(ctx.db, {
         id: existingComment.id,
@@ -1110,6 +1133,14 @@ export const cardRouter = createTRPCRouter({
       const descriptionChanged =
         normalizedDescription !== undefined &&
         existingCard.description !== normalizedDescription;
+
+      if (descriptionChanged)
+        await assertNoNewPausedMentions(
+          ctx.db,
+          card.workspaceId,
+          existingCard.description,
+          normalizedDescription ?? "",
+        );
 
       if (
         input.title ||
