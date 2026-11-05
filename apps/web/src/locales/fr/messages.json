@@ -124,7 +124,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        563
+        567
       ]
     ],
     "translation": "{0} étiquettes"
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        892
+        886
       ]
     ],
     "translation": "{0} introuvable"
@@ -1404,11 +1404,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        626
+        630
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        627
+        631
       ]
     ],
     "translation": "Joindre des fichiers"
@@ -1663,7 +1663,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        864
+        858
       ],
       [
         "src/views/board/members/index.tsx",
@@ -1768,7 +1768,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        882
+        876
       ]
     ],
     "translation": "Nom du tableau"
@@ -2437,7 +2437,7 @@
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        267
+        255
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
@@ -2525,7 +2525,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        67
+        55
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2593,7 +2593,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        429
+        433
       ]
     ],
     "translation": "Titre de la carte"
@@ -2605,7 +2605,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        437
+        438
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -3105,7 +3105,6 @@
     "translation": "Confirmez votre nouveau mot de passe"
   },
   "t0qQZE": {
-    "translation": "",
     "message": "Confirm your password",
     "placeholders": {},
     "comments": [],
@@ -3114,7 +3113,8 @@
         "src/views/auth/reset-password/index.tsx",
         112
       ]
-    ]
+    ],
+    "translation": ""
   },
   "iSLIjg": {
     "message": "Connect",
@@ -3347,7 +3347,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        257
+        245
       ]
     ],
     "translation": "Copier les listes de contrôle"
@@ -3359,7 +3359,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        221
+        209
       ]
     ],
     "translation": "Copier les étiquettes"
@@ -3383,7 +3383,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        239
+        227
       ]
     ],
     "translation": "Copier les membres"
@@ -3451,11 +3451,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        658
+        662
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        156
+        157
       ]
     ],
     "translation": "Créer un autre"
@@ -3479,7 +3479,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        668
+        672
       ]
     ],
     "translation": "Créer une carte"
@@ -3527,7 +3527,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        168
+        169
       ]
     ],
     "translation": "Créer une liste"
@@ -3571,7 +3571,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        525
+        529
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3591,7 +3591,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        1020
+        1014
       ]
     ],
     "translation": "Créer une nouvelle liste"
@@ -4420,7 +4420,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        580
+        584
       ],
       [
         "src/views/card/index.tsx",
@@ -4484,7 +4484,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        279
+        267
       ]
     ],
     "translation": "Dupliquer"
@@ -4496,7 +4496,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        111
+        99
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -4516,7 +4516,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        279
+        267
       ]
     ],
     "translation": "Duplication en cours…"
@@ -4712,7 +4712,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        200
+        188
       ]
     ],
     "translation": "Fin de la liste"
@@ -4762,7 +4762,6 @@
     "translation": "Saisissez un titre personnalisé"
   },
   "dDyAXD": {
-    "translation": "",
     "message": "Enter a new password",
     "placeholders": {},
     "comments": [],
@@ -4771,7 +4770,8 @@
         "src/views/auth/reset-password/index.tsx",
         99
       ]
-    ]
+    ],
+    "translation": ""
   },
   "rQRXo8": {
     "message": "Enter new secret to update",
@@ -5504,7 +5504,6 @@
     "translation": "Pour une durabilité à long terme, nous reconnaissons que tous les bons projets open source ont besoin d'une source de revenus. La nôtre provient de l'offre cloud payante pour les espaces de travail avec plusieurs utilisateurs et pour les slugs d'espace de travail personnalisés. Il n'y a aucune obligation de l'utiliser, et vous pouvez héberger le logiciel sur votre propre infrastructure gratuitement."
   },
   "GbjlZL": {
-    "translation": "",
     "message": "Forgot password | kan.bn",
     "placeholders": {},
     "comments": [],
@@ -5513,10 +5512,10 @@
         "src/views/auth/forgot-password/index.tsx",
         58
       ]
-    ]
+    ],
+    "translation": ""
   },
   "UNMVei": {
-    "translation": "",
     "message": "Forgot password?",
     "placeholders": {},
     "comments": [],
@@ -5525,10 +5524,10 @@
         "src/components/AuthForm.tsx",
         460
       ]
-    ]
+    ],
+    "translation": ""
   },
   "glx6on": {
-    "translation": "",
     "message": "Forgot your password?",
     "placeholders": {},
     "comments": [],
@@ -5537,7 +5536,8 @@
         "src/views/auth/forgot-password/index.tsx",
         68
       ]
-    ]
+    ],
+    "translation": ""
   },
   "2POOFK": {
     "message": "Free",
@@ -5742,7 +5742,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1002
+        996
       ]
     ],
     "translation": "Commencez en créant une nouvelle liste"
@@ -6656,7 +6656,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        529
+        533
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -6862,7 +6862,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        435
+        436
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -6886,7 +6886,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        117
+        105
       ],
       [
         "src/views/card/index.tsx",
@@ -6906,7 +6906,7 @@
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        144
+        145
       ]
     ],
     "translation": "Nom de la liste"
@@ -7230,7 +7230,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        487
+        491
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
@@ -7541,7 +7541,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        412
+        416
       ]
     ],
     "translation": "Nouvelle carte"
@@ -7589,11 +7589,11 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        128
+        129
       ],
       [
         "src/views/board/index.tsx",
-        944
+        938
       ]
     ],
     "translation": "Nouvelle liste"
@@ -7837,7 +7837,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        998
+        992
       ]
     ],
     "translation": "Aucune liste"
@@ -7849,7 +7849,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1003
+        997
       ]
     ],
     "translation": "Aucune liste n'a encore été créée"
@@ -8565,11 +8565,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        200
+        204
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        94
+        95
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
@@ -8589,15 +8589,15 @@
       ],
       [
         "src/views/board/index.tsx",
-        289
+        290
       ],
       [
         "src/views/board/index.tsx",
-        345
+        346
       ],
       [
         "src/views/board/index.tsx",
-        382
+        383
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -8773,7 +8773,7 @@
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        76
+        64
       ],
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
@@ -8781,7 +8781,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        444
+        445
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -8813,7 +8813,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        193
+        181
       ]
     ],
     "translation": "Position dans la liste (0 = premier, laisser vide pour la fin)"
@@ -9076,7 +9076,6 @@
     "translation": "Rejeté"
   },
   "OSmrFy": {
-    "translation": "",
     "message": "Remembered your password? <0><1>Sign in</1></0>",
     "placeholders": {},
     "comments": [],
@@ -9089,7 +9088,8 @@
         "src/views/auth/reset-password/index.tsx",
         146
       ]
-    ]
+    ],
+    "translation": ""
   },
   "qlAIQ1": {
     "message": "Remote",
@@ -9126,7 +9126,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        645
+        649
       ]
     ],
     "translation": "Supprimer le fichier"
@@ -9355,7 +9355,6 @@
     "translation": "Recherche"
   },
   "RfwZxd": {
-    "translation": "",
     "message": "Reset password",
     "placeholders": {},
     "comments": [],
@@ -9364,10 +9363,10 @@
         "src/views/auth/reset-password/index.tsx",
         130
       ]
-    ]
+    ],
+    "translation": ""
   },
   "S57AHL": {
-    "translation": "",
     "message": "Reset password | kan.bn",
     "placeholders": {},
     "comments": [],
@@ -9376,7 +9375,8 @@
         "src/views/auth/reset-password/index.tsx",
         79
       ]
-    ]
+    ],
+    "translation": ""
   },
   "e4hPSt": {
     "message": "Reset to role defaults",
@@ -9706,7 +9706,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        131
+        119
       ]
     ],
     "translation": "Sélectionner une liste"
@@ -9840,7 +9840,6 @@
     "translation": "Envoyer un commentaire"
   },
   "eaUTwS": {
-    "translation": "",
     "message": "Send reset link",
     "placeholders": {},
     "comments": [],
@@ -9849,7 +9848,8 @@
         "src/views/auth/forgot-password/index.tsx",
         103
       ]
-    ]
+    ],
+    "translation": ""
   },
   "eus61c": {
     "message": "Send test",
@@ -9876,7 +9876,6 @@
     "translation": "Senior"
   },
   "+DlsTY": {
-    "translation": "",
     "message": "Set a new password",
     "placeholders": {},
     "comments": [],
@@ -9885,7 +9884,8 @@
         "src/views/auth/reset-password/index.tsx",
         89
       ]
-    ]
+    ],
+    "translation": ""
   },
   "GXGbXi": {
     "message": "Set a password to enable password-based login.",
@@ -10330,7 +10330,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        332
+        336
       ]
     ],
     "translation": "Certaines pièces jointes ont échoué"
@@ -10360,7 +10360,6 @@
     "translation": "Une erreur s'est produite lors de l'activation de la licence."
   },
   "kf83Ld": {
-    "translation": "",
     "message": "Something went wrong.",
     "placeholders": {},
     "comments": [],
@@ -10369,7 +10368,8 @@
         "src/views/auth/forgot-password/index.tsx",
         49
       ]
-    ]
+    ],
+    "translation": ""
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -10644,11 +10644,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        864
+        858
       ],
       [
         "src/views/board/index.tsx",
-        901
+        895
       ]
     ],
     "translation": "Modèle"
@@ -10892,7 +10892,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        69
+        57
       ]
     ],
     "translation": "La carte a été dupliquée."
@@ -10911,7 +10911,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        333
+        337
       ]
     ],
     "translation": "La carte a été créée, mais {failedCount} pièce(s) jointe(s) sur {0} n'a/ont pas pu être téléchargée(s)."
@@ -11133,7 +11133,6 @@
     "translation": "Les permissions de ce membre ont été réinitialisées aux valeurs par défaut de son rôle."
   },
   "ROcqIU": {
-    "translation": "",
     "message": "This password reset link is invalid or has expired.",
     "placeholders": {},
     "comments": [],
@@ -11146,7 +11145,8 @@
         "src/views/auth/reset-password/index.tsx",
         139
       ]
-    ]
+    ],
+    "translation": ""
   },
   "HQVm6e": {
     "message": "This URL has already been taken",
@@ -11287,7 +11287,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        180
+        168
       ]
     ],
     "translation": "Titre (facultatif)"
@@ -11503,7 +11503,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        442
+        443
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11527,7 +11527,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        197
+        201
       ]
     ],
     "translation": "Impossible de créer la carte"
@@ -11551,7 +11551,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        93
+        94
       ]
     ],
     "translation": "Impossible de créer la liste"
@@ -11679,7 +11679,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        75
+        63
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11835,7 +11835,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        344
+        345
       ],
       [
         "src/views/card/index.tsx",
@@ -11887,7 +11887,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        381
+        382
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
@@ -11915,7 +11915,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        288
+        289
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -12691,7 +12691,6 @@
     "translation": "Nous ne faisons que commencer."
   },
   "nB44E/": {
-    "translation": "",
     "message": "We've sent a password reset link to {emailSentTo}.",
     "placeholders": {
       "emailSentTo": [
@@ -12704,7 +12703,8 @@
         "src/views/auth/forgot-password/index.tsx",
         73
       ]
-    ]
+    ],
+    "translation": ""
   },
   "an6ayw": {
     "message": "Webhook created",
@@ -12945,7 +12945,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        864
+        858
       ],
       [
         "src/views/boards/index.tsx",
@@ -13355,11 +13355,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        932
+        926
       ],
       [
         "src/views/board/index.tsx",
-        1009
+        1003
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -13647,7 +13647,6 @@
     "translation": "Votre mot de passe a été modifié."
   },
   "A7TuZy": {
-    "translation": "",
     "message": "Your password has been reset successfully.",
     "placeholders": {},
     "comments": [],
@@ -13656,7 +13655,8 @@
         "src/views/auth/reset-password/index.tsx",
         71
       ]
-    ]
+    ],
+    "translation": ""
   },
   "EuK5ez": {
     "message": "Your password has been set.",
