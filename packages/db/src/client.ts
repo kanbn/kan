@@ -37,12 +37,9 @@ export const createDrizzleClient = (): dbClient => {
     return db as unknown as dbClient;
   }
 
-  // pg's own connection-string parsing ignores useLibpqCompat and treats
-  // sslmode=require as "verify the cert" instead of libpq's "just encrypt",
-  // so self-signed/private-CA Postgres servers fail with "self-signed
-  // certificate" even when the url is correct. Parsing it ourselves and
-  // passing discrete fields (not connectionString) avoids pg re-parsing it
-  // the wrong way.
+  // pg treats sslmode=require as "verify the cert" unless parsed with
+  // useLibpqCompat; passing connectionString itself (not discrete fields)
+  // makes pg re-parse it without that flag, clobbering any fix.
   const clientConfig = toClientConfig(
     parseConnectionString(connectionString, { useLibpqCompat: true }),
   );
