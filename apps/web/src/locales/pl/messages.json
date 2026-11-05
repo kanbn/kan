@@ -2720,6 +2720,10 @@
         56
       ],
       [
+        "src/views/auth/forgot-password/index.tsx",
+        68
+      ],
+      [
         "src/views/auth/login/index.tsx",
         43
       ],
@@ -3100,6 +3104,18 @@
     ],
     "translation": "Potwierdź nowe hasło"
   },
+  "t0qQZE": {
+    "translation": "",
+    "message": "Confirm your password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        112
+      ]
+    ]
+  },
   "iSLIjg": {
     "message": "Connect",
     "placeholders": {},
@@ -3255,7 +3271,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        467
+        477
       ]
     ],
     "translation": "Kontynuuj przez "
@@ -4632,7 +4648,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        468
+        478
       ]
     ],
     "translation": "email"
@@ -4745,6 +4761,18 @@
     ],
     "translation": "Wprowadź własny tytuł"
   },
+  "dDyAXD": {
+    "translation": "",
+    "message": "Enter a new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        99
+      ]
+    ]
+  },
   "rQRXo8": {
     "message": "Enter new secret to update",
     "placeholders": {},
@@ -4789,6 +4817,10 @@
       [
         "src/components/AuthForm.tsx",
         432
+      ],
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        85
       ]
     ],
     "translation": "Wprowadź swój adres e-mail"
@@ -5470,6 +5502,42 @@
       ]
     ],
     "translation": "Aby zapewnić długoterminową stabilność, wiemy, że wszystkie dobre projekty open source potrzebują źródła finansowania. Naszym jest płatna chmura dla przestrzeni roboczych z wieloma użytkownikami oraz dla niestandardowych slugów przestrzeni roboczych. Nie ma obowiązku korzystania z tej opcji – możesz samodzielnie hostować oprogramowanie na własnej infrastrukturze bez żadnych opłat."
+  },
+  "GbjlZL": {
+    "translation": "",
+    "message": "Forgot password | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        58
+      ]
+    ]
+  },
+  "UNMVei": {
+    "translation": "",
+    "message": "Forgot password?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/AuthForm.tsx",
+        460
+      ]
+    ]
+  },
+  "glx6on": {
+    "translation": "",
+    "message": "Forgot your password?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        68
+      ]
+    ]
   },
   "2POOFK": {
     "message": "Free",
@@ -6978,7 +7046,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        468
+        478
       ]
     ],
     "translation": "magic link"
@@ -8124,6 +8192,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/auth/reset-password/index.tsx",
+        27
+      ],
+      [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
         23
       ]
@@ -8147,6 +8219,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        31
+      ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
         30
@@ -8390,6 +8466,10 @@
       [
         "src/components/AuthForm.tsx",
         436
+      ],
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        89
       ]
     ],
     "translation": "Wprowadź poprawny adres e-mail"
@@ -8414,6 +8494,10 @@
       [
         "src/components/AuthForm.tsx",
         451
+      ],
+      [
+        "src/views/auth/reset-password/index.tsx",
+        104
       ]
     ],
     "translation": "Wprowadź poprawne hasło"
@@ -8991,6 +9075,22 @@
     ],
     "translation": "Odrzucono"
   },
+  "OSmrFy": {
+    "translation": "",
+    "message": "Remembered your password? <0><1>Sign in</1></0>",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        111
+      ],
+      [
+        "src/views/auth/reset-password/index.tsx",
+        146
+      ]
+    ]
+  },
   "qlAIQ1": {
     "message": "Remote",
     "placeholders": {},
@@ -9253,6 +9353,30 @@
       ]
     ],
     "translation": "Badania"
+  },
+  "RfwZxd": {
+    "translation": "",
+    "message": "Reset password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        130
+      ]
+    ]
+  },
+  "S57AHL": {
+    "translation": "",
+    "message": "Reset password | kan.bn",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        79
+      ]
+    ]
   },
   "e4hPSt": {
     "message": "Reset to role defaults",
@@ -9715,6 +9839,18 @@
     ],
     "translation": "Prześlij opinię"
   },
+  "eaUTwS": {
+    "translation": "",
+    "message": "Send reset link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        103
+      ]
+    ]
+  },
   "eus61c": {
     "message": "Send test",
     "placeholders": {},
@@ -9738,6 +9874,18 @@
       ]
     ],
     "translation": "Starszy"
+  },
+  "+DlsTY": {
+    "translation": "",
+    "message": "Set a new password",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        89
+      ]
+    ]
   },
   "GXGbXi": {
     "message": "Set a password to enable password-based login.",
@@ -10082,7 +10230,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        467
+        477
       ]
     ],
     "translation": "Zarejestruj się przez "
@@ -10210,6 +10358,18 @@
       ]
     ],
     "translation": "Coś poszło nie tak podczas aktywacji licencji."
+  },
+  "kf83Ld": {
+    "translation": "",
+    "message": "Something went wrong.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        49
+      ]
+    ]
   },
   "vnS6Rf": {
     "message": "SSO",
@@ -10352,6 +10512,10 @@
       [
         "src/components/AuthForm.tsx",
         241
+      ],
+      [
+        "src/views/auth/reset-password/index.tsx",
+        70
       ]
     ],
     "translation": "Sukces"
@@ -10967,6 +11131,22 @@
       ]
     ],
     "translation": "Uprawnienia tego członka zostały zresetowane do domyślnych dla jego roli."
+  },
+  "ROcqIU": {
+    "translation": "",
+    "message": "This password reset link is invalid or has expired.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        65
+      ],
+      [
+        "src/views/auth/reset-password/index.tsx",
+        139
+      ]
+    ]
   },
   "HQVm6e": {
     "message": "This URL has already been taken",
@@ -12510,6 +12690,22 @@
     ],
     "translation": "Dopiero zaczynamy."
   },
+  "nB44E/": {
+    "translation": "",
+    "message": "We've sent a password reset link to {emailSentTo}.",
+    "placeholders": {
+      "emailSentTo": [
+        "emailSentTo"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/forgot-password/index.tsx",
+        73
+      ]
+    ]
+  },
   "an6ayw": {
     "message": "Webhook created",
     "placeholders": {},
@@ -13449,6 +13645,18 @@
       ]
     ],
     "translation": "Twoje hasło zostało zmienione."
+  },
+  "A7TuZy": {
+    "translation": "",
+    "message": "Your password has been reset successfully.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/auth/reset-password/index.tsx",
+        71
+      ]
+    ]
   },
   "EuK5ez": {
     "message": "Your password has been set.",
