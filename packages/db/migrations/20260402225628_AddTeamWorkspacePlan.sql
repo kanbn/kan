@@ -1,1 +1,1 @@
-ALTER TYPE "public"."workspace_plan" ADD VALUE 'team' BEFORE 'pro';
+ALTER TYPE "public"."workspace_plan" ADD VALUE IF NOT EXISTS 'team' BEFORE 'pro';
