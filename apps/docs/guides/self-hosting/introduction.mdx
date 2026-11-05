@@ -78,8 +78,6 @@ This guide introduces how to self-host Kan. It starts with the minimal Docker Co
           POSTGRES_DB: kan_db
           POSTGRES_USER: kan
           POSTGRES_PASSWORD: your_postgres_password
-        ports:
-          - 5432:5432
         volumes:
           - kan_postgres_data:/var/lib/postgresql/data
         healthcheck:
