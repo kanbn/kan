@@ -267,6 +267,13 @@
       "when": 1790111796287,
       "tag": "20260922211636_BackfillBoardMembers",
       "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1793927804461,
+      "tag": "20261106011644_AddBoardBackgrounds",
+      "breakpoints": true
     }
   ]
 }

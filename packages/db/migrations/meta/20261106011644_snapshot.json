@@ -1,6 +1,6 @@
 {
-  "id": "645fce05-252c-49d1-9ada-c9175b9c442e",
-  "prevId": "0a957d57-84fa-4cda-bf23-33671a559873",
+  "id": "b3b9c0d3-b51a-4d85-9aa0-8a3190edd13a",
+  "prevId": "46474e9a-da35-45b2-a74f-9a2824975db3",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -389,6 +389,116 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": true
+    },
+    "public.board_members": {
+      "name": "board_members",
+      "schema": "",
+      "columns": {
+        "boardId": {
+          "name": "boardId",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "workspaceMemberId": {
+          "name": "workspaceMemberId",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "board_member_role",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'member'"
+        },
+        "createdBy": {
+          "name": "createdBy",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "board_members_workspace_member_idx": {
+          "name": "board_members_workspace_member_idx",
+          "columns": [
+            {
+              "expression": "workspaceMemberId",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "board_members_boardId_board_id_fk": {
+          "name": "board_members_boardId_board_id_fk",
+          "tableFrom": "board_members",
+          "tableTo": "board",
+          "columnsFrom": [
+            "boardId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "board_members_workspaceMemberId_workspace_members_id_fk": {
+          "name": "board_members_workspaceMemberId_workspace_members_id_fk",
+          "tableFrom": "board_members",
+          "tableTo": "workspace_members",
+          "columnsFrom": [
+            "workspaceMemberId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "board_members_createdBy_user_id_fk": {
+          "name": "board_members_createdBy_user_id_fk",
+          "tableFrom": "board_members",
+          "tableTo": "user",
+          "columnsFrom": [
+            "createdBy"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "board_members_boardId_workspaceMemberId_pk": {
+          "name": "board_members_boardId_workspaceMemberId_pk",
+          "columns": [
+            "boardId",
+            "workspaceMemberId"
+          ]
+        }
+      },
       "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
@@ -3926,6 +4036,14 @@
     }
   },
   "enums": {
+    "public.board_member_role": {
+      "name": "board_member_role",
+      "schema": "public",
+      "values": [
+        "admin",
+        "member"
+      ]
+    },
     "public.board_type": {
       "name": "board_type",
       "schema": "public",

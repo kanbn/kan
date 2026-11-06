@@ -18,7 +18,11 @@ import {
   getBoardBackgroundPreviewKeys,
   inspectBoardBackgroundObject,
 } from "../utils/boardBackgroundPreview";
-import { assertCanEdit, assertPermission } from "../utils/permissions";
+import {
+  assertBoardAccess,
+  assertCanEdit,
+  assertPermission,
+} from "../utils/permissions";
 
 const logger = createLogger("board-background");
 const maxSourceBytes = 50 * 1024 * 1024;
@@ -84,6 +88,7 @@ const getEditableBoard = async (
     "board:edit",
     board.createdBy ?? null,
   );
+  await assertBoardAccess(db, userId, board);
 
   return board;
 };
@@ -312,6 +317,13 @@ export const boardBackgroundRouter = createTRPCRouter({
           privateWorkspaceIds.map((workspaceId) =>
             assertPermission(ctx.db, userId, workspaceId, "board:view"),
           ),
+        );
+
+      if (userId)
+        await Promise.all(
+          boards
+            .filter((board) => board.visibility !== "public")
+            .map((board) => assertBoardAccess(ctx.db, userId, board)),
         );
 
       const hasImages = boards.some((board) => board.backgroundImageKey);

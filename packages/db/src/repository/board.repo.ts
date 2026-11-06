@@ -101,10 +101,7 @@ export const getAllByWorkspaceId = async (
         ? eq(boards.isArchived, opts.archived)
         : undefined,
       memberBoardIds
-        ? or(
-            eq(boards.type, "template"),
-            inArray(boards.id, memberBoardIds),
-          )
+        ? or(eq(boards.type, "template"), inArray(boards.id, memberBoardIds))
         : undefined,
     ),
   });
@@ -935,6 +932,8 @@ export const getBackgroundsByPublicIds = async (
 
   return db
     .select({
+      id: boards.id,
+      type: boards.type,
       publicId: boards.publicId,
       workspaceId: boards.workspaceId,
       visibility: boards.visibility,

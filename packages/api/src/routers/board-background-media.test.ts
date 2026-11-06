@@ -12,7 +12,11 @@ import {
   ensureBoardBackgroundPreviews,
   inspectBoardBackgroundObject,
 } from "../utils/boardBackgroundPreview";
-import { assertCanEdit, assertPermission } from "../utils/permissions";
+import {
+  assertBoardAccess,
+  assertCanEdit,
+  assertPermission,
+} from "../utils/permissions";
 import { boardBackgroundRouter } from "./boardBackground";
 
 vi.mock("@kan/db/repository/board.repo", () => ({
@@ -34,6 +38,7 @@ vi.mock("@kan/shared/utils", () => ({
 }));
 
 vi.mock("../utils/permissions", () => ({
+  assertBoardAccess: vi.fn(),
   assertCanEdit: vi.fn(),
   assertPermission: vi.fn(),
 }));
@@ -54,6 +59,7 @@ const ensurePreviews = vi.mocked(ensureBoardBackgroundPreviews);
 const deleteObjects = vi.mocked(deleteBoardBackgroundObjects);
 const canEdit = vi.mocked(assertCanEdit);
 const canView = vi.mocked(assertPermission);
+const canAccessBoard = vi.mocked(assertBoardAccess);
 const signUpload = vi.mocked(generateUploadUrl);
 const signDownload = vi.mocked(generateDownloadUrl);
 
@@ -70,6 +76,9 @@ describe("board background media", () => {
   const board = {
     id: 1,
     workspaceId: 2,
+    type: "regular" as const,
+    visibility: "private" as const,
+    deletedAt: null,
     createdBy: user.id,
     backgroundImageKey: null,
   };
@@ -124,6 +133,25 @@ describe("board background media", () => {
       3600,
     );
     expect(result).toEqual({ url: "https://upload.example", key: uploadKey });
+  });
+
+  it("does not issue an upload URL to an uninvited board member", async () => {
+    canAccessBoard.mockRejectedValueOnce(
+      new TRPCError({ code: "NOT_FOUND", message: "Board not found" }),
+    );
+
+    await expect(
+      boardBackgroundRouter
+        .createCaller({ db, user } as never)
+        .generateUploadUrl({
+          boardPublicId,
+          filename: "background.jpg",
+          contentType: "image/jpeg",
+          size: 1024,
+        }),
+    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+
+    expect(signUpload).not.toHaveBeenCalled();
   });
 
   it("rejects a confirmation key owned by another board", async () => {
@@ -209,6 +237,8 @@ describe("board background media", () => {
   it("serves public board previews without a session", async () => {
     getBackgrounds.mockResolvedValue([
       {
+        id: board.id,
+        type: board.type,
         publicId: boardPublicId,
         workspaceId: board.workspaceId,
         visibility: "public",
@@ -222,12 +252,15 @@ describe("board background media", () => {
 
     expect(result[boardPublicId]).toHaveLength(3);
     expect(canView).not.toHaveBeenCalled();
+    expect(canAccessBoard).not.toHaveBeenCalled();
     expect(signDownload).toHaveBeenCalledTimes(3);
   });
 
   it("does not expose private board previews without a session", async () => {
     getBackgrounds.mockResolvedValue([
       {
+        id: board.id,
+        type: board.type,
         publicId: boardPublicId,
         workspaceId: board.workspaceId,
         visibility: "private",
@@ -247,12 +280,16 @@ describe("board background media", () => {
   it("checks each private workspace once for a signed-in user", async () => {
     getBackgrounds.mockResolvedValue([
       {
+        id: board.id,
+        type: board.type,
         publicId: boardPublicId,
         workspaceId: board.workspaceId,
         visibility: "private",
         backgroundImageKey: uploadKey,
       },
       {
+        id: 3,
+        type: board.type,
         publicId: "board7654321",
         workspaceId: board.workspaceId,
         visibility: "private",
@@ -271,6 +308,31 @@ describe("board background media", () => {
       board.workspaceId,
       "board:view",
     );
+    expect(canAccessBoard).toHaveBeenCalledTimes(2);
+  });
+
+  it("does not sign private previews for an uninvited workspace member", async () => {
+    getBackgrounds.mockResolvedValue([
+      {
+        id: board.id,
+        type: board.type,
+        publicId: boardPublicId,
+        workspaceId: board.workspaceId,
+        visibility: "private",
+        backgroundImageKey: uploadKey,
+      },
+    ]);
+    canAccessBoard.mockRejectedValueOnce(
+      new TRPCError({ code: "NOT_FOUND", message: "Board not found" }),
+    );
+
+    await expect(
+      boardBackgroundRouter
+        .createCaller({ db, user } as never)
+        .urls({ boardPublicIds: [boardPublicId] }),
+    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+
+    expect(signDownload).not.toHaveBeenCalled();
   });
 
   it("preserves the current image when an idempotent database update fails", async () => {

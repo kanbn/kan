@@ -15,14 +15,14 @@ import {
   generateUID,
 } from "@kan/shared/utils";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import {
-  boardListItemSchema,
-  boardDetailSchema,
   boardBySlugSchema,
   boardCreateResponseSchema,
+  boardDetailSchema,
+  boardListItemSchema,
   boardUpdateResponseSchema,
 } from "../schemas";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
 import { formatBoardBackground } from "../utils/boardBackground";
 import {
@@ -37,7 +37,6 @@ import {
   filterBoardAssignable,
   isWorkspaceAdmin,
 } from "../utils/permissions";
-
 
 const logger = createLogger("board");
 
@@ -194,27 +193,31 @@ export const boardRouter = createTRPCRouter({
       // Generate presigned URLs for workspace member avatars
       const workspaceWithAvatarUrls = result.workspace
         ? {
-          ...result.workspace,
-          // Only offer people who belong on this board as assignees/filters.
-          members: await Promise.all(
-            (
-              await filterBoardAssignable(ctx.db, board, result.workspace.members)
-            ).map(async (member) => {
-              if (!member.user?.image) {
-                return member;
-              }
+            ...result.workspace,
+            // Only offer people who belong on this board as assignees/filters.
+            members: await Promise.all(
+              (
+                await filterBoardAssignable(
+                  ctx.db,
+                  board,
+                  result.workspace.members,
+                )
+              ).map(async (member) => {
+                if (!member.user?.image) {
+                  return member;
+                }
 
-              const avatarUrl = await resolveAvatarUrl(member.user.image);
-              return {
-                ...member,
-                user: {
-                  ...member.user,
-                  image: avatarUrl,
-                },
-              };
-            }),
-          ),
-        }
+                const avatarUrl = await resolveAvatarUrl(member.user.image);
+                return {
+                  ...member,
+                  user: {
+                    ...member.user,
+                    image: avatarUrl,
+                  },
+                };
+              }),
+            ),
+          }
         : result.workspace;
 
       // Generate presigned URLs for card member avatars

@@ -11,7 +11,7 @@ import { assertPermission } from "../utils/permissions";
 import { boardRouter } from "./board";
 
 vi.mock("@kan/db/repository/board.repo", () => ({
-  getIdByPublicId: vi.fn(),
+  getWorkspaceAndBoardIdByBoardPublicId: vi.fn(),
   getByPublicId: vi.fn(),
   isSlugUnique: vi.fn(),
   createFromSnapshot: vi.fn(),
@@ -25,6 +25,7 @@ vi.mock("@kan/db/repository/label.repo", () => ({}));
 vi.mock("@kan/db/repository/list.repo", () => ({}));
 
 vi.mock("../utils/permissions", () => ({
+  assertBoardAccess: vi.fn(),
   assertCanEdit: vi.fn(),
   assertCanDelete: vi.fn(),
   assertPermission: vi.fn(),
@@ -41,7 +42,9 @@ vi.mock("../utils/boardBackgroundPreview", () => ({
 }));
 
 const getWorkspace = vi.mocked(workspaceRepo.getByPublicId);
-const getSourceBoardInfo = vi.mocked(boardRepo.getIdByPublicId);
+const getSourceBoardInfo = vi.mocked(
+  boardRepo.getWorkspaceAndBoardIdByBoardPublicId,
+);
 const getSourceBoard = vi.mocked(boardRepo.getByPublicId);
 const isSlugUnique = vi.mocked(boardRepo.isSlugUnique);
 const createFromSnapshot = vi.mocked(boardRepo.createFromSnapshot);
@@ -83,8 +86,9 @@ describe("board background copying", () => {
     getSourceBoardInfo.mockResolvedValue({
       id: 2,
       type: "regular",
-      isArchived: false,
-    });
+      workspaceId: workspace.id,
+      deletedAt: null,
+    } as never);
     getSourceBoard.mockResolvedValue(sourceBoard as never);
     isSlugUnique.mockResolvedValue(true);
     assertCanCreate.mockResolvedValue(undefined);
