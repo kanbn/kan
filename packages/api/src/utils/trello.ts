@@ -33,9 +33,68 @@ const trelloLabelColours: Record<string, string> = {
 
 const defaultLabelColour = "#0d9488";
 const colourlessLabelColour = "#8590a2";
+const hexColourPattern = /^#[0-9A-Fa-f]{6}$/;
+
+interface TrelloBoardBackgroundPrefs {
+  backgroundColor?: string | null;
+  backgroundImage?: string | null;
+  backgroundImageScaled?:
+    | {
+        width: number;
+        height: number;
+        url: string;
+      }[]
+    | null;
+}
+
+export type TrelloBoardBackground =
+  | {
+      kind: "colour";
+      colourCode: string;
+    }
+  | {
+      kind: "image";
+      url: string;
+      fallbackColourCode: string | null;
+    }
+  | null;
 
 export const getTrelloLabelColour = (colour: string | null | undefined) => {
   if (!colour) return colourlessLabelColour;
 
   return trelloLabelColours[colour] ?? defaultLabelColour;
+};
+
+export const getTrelloBoardBackground = (
+  prefs: TrelloBoardBackgroundPrefs | null | undefined,
+): TrelloBoardBackground => {
+  if (!prefs) return null;
+
+  const colourCode =
+    prefs.backgroundColor && hexColourPattern.test(prefs.backgroundColor)
+      ? prefs.backgroundColor
+      : null;
+  const rendition = [...(prefs.backgroundImageScaled ?? [])]
+    .filter(
+      (item) =>
+        item.url &&
+        Number.isFinite(item.width) &&
+        item.width > 0 &&
+        Number.isFinite(item.height) &&
+        item.height > 0,
+    )
+    .sort(
+      (left, right) => right.width * right.height - left.width * left.height,
+    )
+    .at(0);
+  const imageUrl = rendition?.url ?? prefs.backgroundImage;
+
+  if (imageUrl)
+    return {
+      kind: "image",
+      url: imageUrl,
+      fallbackColourCode: colourCode,
+    };
+
+  return colourCode ? { kind: "colour", colourCode } : null;
 };
