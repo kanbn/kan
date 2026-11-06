@@ -39,6 +39,7 @@ import {
   isWorkspaceAdmin,
 } from "../utils/permissions";
 
+
 export const boardRouter = createTRPCRouter({
   coverUrls: publicProcedure
     .meta({
@@ -93,6 +94,7 @@ export const boardRouter = createTRPCRouter({
             code: "UNAUTHORIZED",
           });
         await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
+        await assertBoardAccess(ctx.db, userId, board);
       }
 
       const attachmentPublicIds = [...new Set(input.attachmentPublicIds)];
@@ -323,6 +325,7 @@ export const boardRouter = createTRPCRouter({
           cards: await Promise.all(
             list.cards.map(async (card) => {
               const members = await Promise.all(
+
                 card.members.map(async (member) => {
                   if (!member.user?.image) return member;
                   const avatarUrl = await resolveAvatarUrl(member.user.image);

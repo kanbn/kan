@@ -5,7 +5,7 @@ import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 
 import * as cardCoverPreview from "../utils/cardCoverPreview";
-import { assertCanEdit } from "../utils/permissions";
+import { assertBoardAccess, assertCanEdit } from "../utils/permissions";
 import {
   createCardWebhookPayload,
   sendWebhooksForWorkspace,
@@ -36,6 +36,7 @@ vi.mock("../utils/cardCoverPreview", async (importOriginal) => ({
   ensureCardCoverPreviews: vi.fn(),
 }));
 vi.mock("../utils/permissions", () => ({
+  assertBoardAccess: vi.fn(),
   assertCanDelete: vi.fn(),
   assertCanEdit: vi.fn(),
   assertPermission: vi.fn(),
@@ -63,6 +64,8 @@ const cardMeta = {
   workspaceVisibility: "private" as const,
   listPublicId: "list-12345678",
   listName: "Todo",
+  boardId: 3,
+  boardType: "regular" as const,
   boardPublicId: "board-1234567",
   boardName: "Board",
 };
@@ -121,6 +124,9 @@ describe("card cover updates", () => {
       },
     });
 
+    expect(assertBoardAccess).toHaveBeenCalledWith(mockDb, "user-123", {
+      id: cardMeta.boardId, workspaceId: cardMeta.workspaceId, type: cardMeta.boardType,
+    });
     expect(assertCanEdit).toHaveBeenCalledWith(
       mockDb,
       "user-123",
@@ -334,6 +340,7 @@ describe("card cover duplication", () => {
       createdBy: "user-123",
       workspaceId: cardMeta.workspaceId,
       boardId: 3,
+      boardType: "regular",
       boardPublicId: cardMeta.boardPublicId,
       boardName: cardMeta.boardName,
     });

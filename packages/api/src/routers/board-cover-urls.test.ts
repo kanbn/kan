@@ -8,7 +8,7 @@ import {
   getCardCoverPreviewKey,
   inspectStoredObject,
 } from "../utils/cardCoverPreview";
-import { assertPermission } from "../utils/permissions";
+import { assertBoardAccess, assertPermission } from "../utils/permissions";
 
 vi.mock("@kan/db/repository/board.repo", () => ({
   getCoverAccessByPublicId: vi.fn(),
@@ -31,6 +31,7 @@ vi.mock("../utils/cardCoverPreview", async (importOriginal) => ({
   inspectStoredObject: vi.fn(),
 }));
 vi.mock("../utils/permissions", () => ({
+  assertBoardAccess: vi.fn(),
   assertCanDelete: vi.fn(),
   assertCanEdit: vi.fn(),
   assertPermission: vi.fn(),
@@ -49,6 +50,7 @@ describe("board card cover URL resolution", () => {
       id: 1,
       workspaceId: 2,
       visibility: "public",
+      type: "regular",
     });
     vi.mocked(
       cardAttachmentRepo.getSelectedCoverAttachmentsByBoardPublicId,
@@ -102,6 +104,7 @@ describe("board card cover URL resolution", () => {
       [missingAttachmentPublicId]: [],
     });
     expect(assertPermission).not.toHaveBeenCalled();
+    expect(assertBoardAccess).not.toHaveBeenCalled();
   });
 
   it("requires board access before resolving private covers", async () => {
@@ -109,6 +112,7 @@ describe("board card cover URL resolution", () => {
       id: 1,
       workspaceId: 2,
       visibility: "private",
+      type: "regular",
     });
     const { boardRouter } = await import("./board");
 
@@ -155,6 +159,7 @@ describe("board card cover URL resolution", () => {
       id: 1,
       workspaceId: 2,
       visibility: "private",
+      type: "regular",
     });
     vi.mocked(assertPermission).mockResolvedValue(undefined);
     const { boardRouter } = await import("./board");
@@ -170,6 +175,9 @@ describe("board card cover URL resolution", () => {
         widths: [320],
       });
 
+    expect(assertBoardAccess).toHaveBeenCalledWith(mockDb, "user-123", {
+      id: 1, workspaceId: 2, visibility: "private", type: "regular",
+    });
     expect(assertPermission).toHaveBeenCalledTimes(1);
     expect(assertPermission).toHaveBeenCalledWith(
       mockDb,

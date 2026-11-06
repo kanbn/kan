@@ -41,7 +41,7 @@ vi.mock("../utils/cardCoverPreview", async (importOriginal) => ({
   ...(await importOriginal()),
   inspectStoredObject: vi.fn(),
 }));
-vi.mock("../utils/permissions", () => ({ assertPermission: vi.fn() }));
+vi.mock("../utils/permissions", () => ({ assertPermission: vi.fn(), assertBoardAccess: vi.fn() }));
 
 const cardPublicId = "card-12345678";
 const workspacePublicId = "workspace123";
@@ -71,6 +71,8 @@ describe("attachment confirmation", () => {
       workspaceVisibility: "private",
       listPublicId: "list-12345678",
       listName: "Todo",
+      boardId: 3,
+      boardType: "regular",
       boardPublicId: "board-1234567",
       boardName: "Board",
     });

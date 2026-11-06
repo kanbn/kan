@@ -917,6 +917,7 @@ export const getCoverAccessByPublicId = async (
       id: boards.id,
       workspaceId: boards.workspaceId,
       visibility: boards.visibility,
+      type: boards.type,
     })
     .from(boards)
     .innerJoin(workspaces, eq(workspaces.id, boards.workspaceId))
