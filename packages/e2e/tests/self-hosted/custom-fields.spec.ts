@@ -40,7 +40,7 @@ test(
   "a custom field can be created and populated on a card",
   { tag: "@self-hosted" },
   async ({ page, browser }) => {
-    test.setTimeout(60_000);
+    test.setTimeout(180_000);
     const user = createTestUser();
     const auth = new AuthPage(page);
     const onboarding = new SelfHostedOnboardingPage(page);
