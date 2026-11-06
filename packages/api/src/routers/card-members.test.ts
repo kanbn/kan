@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
+import * as customFieldRepo from "@kan/db/repository/custom-field.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
@@ -28,6 +29,16 @@ vi.mock("@kan/db/repository/cardActivity.repo", () => ({
 
 vi.mock("@kan/db/repository/cardComment.repo", () => ({}));
 vi.mock("@kan/db/repository/checklist.repo", () => ({}));
+vi.mock("@kan/db/repository/custom-field.repo", () => ({
+  MAX_CUSTOM_FIELDS_PER_BOARD: 50,
+  copyActiveCardValues: vi.fn(),
+  moveCardValuesToBoard: vi.fn(),
+  CustomFieldRepositoryError: class CustomFieldRepositoryError extends Error {
+    constructor(public readonly code: string) {
+      super(code);
+    }
+  },
+}));
 vi.mock("@kan/db/repository/label.repo", () => ({
   getAllByPublicIds: vi.fn(),
 }));
@@ -89,6 +100,12 @@ const mockCreateActivity = cardActivityRepo.create as ReturnType<typeof vi.fn>;
 const mockBulkCreateActivities = cardActivityRepo.bulkCreate as ReturnType<
   typeof vi.fn
 >;
+const mockGetCardByPublicId = cardRepo.getByPublicId as ReturnType<
+  typeof vi.fn
+>;
+const mockMoveCustomFieldValues =
+  customFieldRepo.moveCardValuesToBoard as ReturnType<typeof vi.fn>;
+const mockReorderCard = cardRepo.reorder as ReturnType<typeof vi.fn>;
 const mockGetList = listRepo.getWorkspaceAndListIdByListPublicId as ReturnType<
   typeof vi.fn
 >;
@@ -101,6 +118,7 @@ const mockGetMember = workspaceRepo.getMemberByPublicId as ReturnType<
 const mockAssertPermission = assertPermission as ReturnType<typeof vi.fn>;
 
 describe("card member workspace scoping", () => {
+  const mockTx = {};
   const mockDb = {} as never;
   const mockUser = {
     id: "user-123",
@@ -154,6 +172,39 @@ describe("card member workspace scoping", () => {
         input.memberPublicIds,
         7,
       );
+    });
+
+    it("passes initial custom field values to transactional card creation", async () => {
+      const { cardRouter } = await import("./card");
+      const customFieldValues = [
+        {
+          fieldPublicId: "field0000001",
+          value: { type: "checkbox" as const, value: false },
+        },
+      ];
+
+      await cardRouter.createCaller(ctx).create({
+        ...input,
+        customFieldValues,
+      });
+
+      expect(mockCardCreate).toHaveBeenCalledWith(
+        mockDb,
+        expect.objectContaining({ customFieldValues }),
+      );
+    });
+
+    it("returns a client error when an initial custom field is invalid", async () => {
+      const { cardRouter } = await import("./card");
+      mockCardCreate.mockRejectedValueOnce(
+        new customFieldRepo.CustomFieldRepositoryError("FIELD_TYPE_MISMATCH"),
+      );
+
+      await expect(
+        cardRouter.createCaller(ctx).create(input),
+      ).rejects.toMatchObject({
+        code: "BAD_REQUEST",
+      } satisfies Partial<TRPCError>);
     });
 
     it("rejects the whole request when any member is outside the workspace", async () => {
@@ -266,6 +317,7 @@ describe("card member workspace scoping", () => {
         members: [{ publicId: "member-a-123" }],
         labels: [],
         checklists: [],
+        customFieldValues: [],
       });
       mockCardCreate.mockResolvedValueOnce({
         id: 18,
@@ -299,9 +351,9 @@ describe("card member workspace scoping", () => {
         listId: 1,
         dueDate: null,
         description: "",
-        list: { publicId: "list-source12", name: "Source" },
+        list: { publicId: "list-source12", name: "Source", boardId: 3 },
       } as never);
-      vi.mocked(listRepo.getByPublicId).mockResolvedValueOnce({
+      mockGetList.mockResolvedValueOnce({
         id: 2,
         publicId: "list-target12",
         name: "Target",
@@ -341,6 +393,100 @@ describe("card member workspace scoping", () => {
         cardId: 17,
         memberId: 22,
       });
+    });
+  });
+
+  describe("move", () => {
+    const input = {
+      cardPublicId: "card-12345678",
+      listPublicId: "list-12345678",
+    };
+
+    beforeEach(() => {
+      mockGetCard.mockResolvedValue({
+        id: 17,
+        workspaceId: 7,
+        boardId: 20,
+        boardType: "regular",
+        createdBy: mockUser.id,
+      });
+      vi.mocked(cardRepo.getAssignees).mockResolvedValue([]);
+      mockGetCardByPublicId.mockResolvedValue({
+        id: 17,
+        listId: 10,
+        list: { publicId: "source-list1", name: "Source", boardId: 20 },
+      });
+    });
+
+    it("rejects a target list from another workspace", async () => {
+      const { cardRouter } = await import("./card");
+      mockGetList.mockResolvedValue({
+        id: 11,
+        publicId: input.listPublicId,
+        name: "Target",
+        boardId: 21,
+        boardType: "regular",
+        boardPublicId: "board-1234568",
+        workspaceId: 8,
+      });
+
+      await expect(
+        cardRouter.createCaller(ctx).update(input),
+      ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+      expect(mockMoveCustomFieldValues).not.toHaveBeenCalled();
+    });
+
+    it("maps custom values in the same transaction as a cross-board move", async () => {
+      const { cardRouter } = await import("./card");
+      mockGetList.mockResolvedValue({
+        id: 11,
+        publicId: input.listPublicId,
+        name: "Target",
+        boardId: 21,
+        boardType: "regular",
+        boardPublicId: "board-1234568",
+        workspaceId: 7,
+      });
+      mockMoveCustomFieldValues.mockResolvedValue(undefined);
+      let transactionHook:
+        | ((transaction: typeof mockTx) => Promise<void>)
+        | undefined;
+      mockReorderCard.mockImplementation(
+        (
+          calledDb: unknown,
+          calledInput: unknown,
+          options: {
+            beforeReorder?: (transaction: typeof mockTx) => Promise<void>;
+          },
+        ) => {
+          expect(calledDb).toBe(mockDb);
+          expect(calledInput).toEqual({
+            cardId: 17,
+            newIndex: undefined,
+            newListId: 11,
+          });
+          transactionHook = options.beforeReorder;
+          return Promise.resolve({
+            id: 17,
+            publicId: input.cardPublicId,
+            title: "Moved card",
+            description: null,
+            dueDate: null,
+          });
+        },
+      );
+
+      await expect(
+        cardRouter.createCaller(ctx).update(input),
+      ).resolves.toMatchObject({ publicId: input.cardPublicId });
+      if (!transactionHook) throw new Error("Transaction hook was not passed");
+      await transactionHook(mockTx);
+      expect(mockMoveCustomFieldValues).toHaveBeenCalledWith(mockTx, {
+        cardId: 17,
+        targetBoardId: 21,
+        actorUserId: mockUser.id,
+      });
+      expect(mockReorderCard).toHaveBeenCalledTimes(1);
     });
   });
 });

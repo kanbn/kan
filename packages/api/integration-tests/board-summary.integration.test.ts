@@ -172,6 +172,7 @@ describe("board summary repository view", () => {
       members: [],
       labels: [],
       lists: [],
+      customFields: [],
       dueDate: [],
       type: "regular" as const,
     };
@@ -231,6 +232,7 @@ describe("board summary repository view", () => {
       members: [],
       labels: [],
       lists: ["emptylist123"],
+      customFields: [],
       dueDate: [],
       type: "regular",
       cardView: "summary",

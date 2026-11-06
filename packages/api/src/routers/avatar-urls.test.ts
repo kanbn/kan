@@ -38,6 +38,7 @@ vi.mock("@kan/shared/utils", () => ({
   generateAttachmentUrl: vi.fn(),
   generateAvatarUrl: vi.fn(),
   generateUID: vi.fn(),
+  workspacePlans: ["free", "team", "pro", "enterprise"],
 }));
 vi.mock("../utils/notifications", () => ({
   sendMentionEmails: vi.fn(),
@@ -179,12 +180,14 @@ describe("avatar URL resolution in routers", () => {
       labels: [],
       attachments: [],
       checklists: [],
+      customFieldValues: [],
       list: {
         publicId: "list-12345678",
         name: "List",
         board: {
           publicId: "board-1234567",
           name: "Board",
+          customFields: [],
           labels: [],
           lists: [],
           workspace: {

@@ -52,6 +52,7 @@ export default function PublicBoardView() {
     | "next-month"
     | "no-due-date"
   )[];
+  const customFieldFilters = formatToArray(router.query.customFields);
 
   const { data, isLoading } = api.board.bySlug.useQuery(
     {
@@ -62,6 +63,9 @@ export default function PublicBoardView() {
       lists: formatToArray(router.query.lists),
       ...(dueDateFilters.length > 0 && {
         dueDateFilters: dueDateFilters,
+      }),
+      ...(customFieldFilters.length > 0 && {
+        customFields: customFieldFilters,
       }),
     },
     {
@@ -156,6 +160,7 @@ export default function PublicBoardView() {
                   labels={data.labels ?? []}
                   members={[]}
                   lists={data.allLists ?? []}
+                  customFields={data.customFields}
                   isLoading={isLoading}
                 />
               </div>
@@ -227,6 +232,8 @@ export default function PublicBoardView() {
                               comments={card.comments ?? []}
                               attachments={card.attachments}
                               dueDate={card.dueDate ?? null}
+                              customFields={data.customFields}
+                              customFieldValues={card.customFieldValues}
                             />
                           </Link>
                         );

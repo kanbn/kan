@@ -267,6 +267,13 @@
       "when": 1790111796287,
       "tag": "20260922211636_BackfillBoardMembers",
       "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1793926820766,
+      "tag": "20261106010020_AddCustomFields",
+      "breakpoints": true
     }
   ]
 }
