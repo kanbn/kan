@@ -626,6 +626,8 @@ export const getWorkspaceAndDefinitionIdByPublicId = async (
   const [field] = await db
     .select({
       id: customFields.id,
+      boardId: boards.id,
+      boardType: boards.type,
       workspaceId: boards.workspaceId,
     })
     .from(customFields)
@@ -649,6 +651,8 @@ export const getWorkspaceAndOptionIdByPublicId = async (
   const [option] = await db
     .select({
       id: customFieldOptions.id,
+      boardId: boards.id,
+      boardType: boards.type,
       workspaceId: boards.workspaceId,
     })
     .from(customFieldOptions)

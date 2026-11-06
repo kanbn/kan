@@ -1,6 +1,6 @@
 {
-  "id": "00d2bd92-b175-4425-a9c1-92acac5b1dee",
-  "prevId": "602d5422-e16e-43c2-9a27-deb92fd9f1b9",
+  "id": "eb7d76d9-00e7-4791-8d7a-e7187d3e5ade",
+  "prevId": "46474e9a-da35-45b2-a74f-9a2824975db3",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -389,6 +389,116 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": true
+    },
+    "public.board_members": {
+      "name": "board_members",
+      "schema": "",
+      "columns": {
+        "boardId": {
+          "name": "boardId",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "workspaceMemberId": {
+          "name": "workspaceMemberId",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "board_member_role",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'member'"
+        },
+        "createdBy": {
+          "name": "createdBy",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "board_members_workspace_member_idx": {
+          "name": "board_members_workspace_member_idx",
+          "columns": [
+            {
+              "expression": "workspaceMemberId",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "board_members_boardId_board_id_fk": {
+          "name": "board_members_boardId_board_id_fk",
+          "tableFrom": "board_members",
+          "tableTo": "board",
+          "columnsFrom": [
+            "boardId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "board_members_workspaceMemberId_workspace_members_id_fk": {
+          "name": "board_members_workspaceMemberId_workspace_members_id_fk",
+          "tableFrom": "board_members",
+          "tableTo": "workspace_members",
+          "columnsFrom": [
+            "workspaceMemberId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "board_members_createdBy_user_id_fk": {
+          "name": "board_members_createdBy_user_id_fk",
+          "tableFrom": "board_members",
+          "tableTo": "user",
+          "columnsFrom": [
+            "createdBy"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "board_members_boardId_workspaceMemberId_pk": {
+          "name": "board_members_boardId_workspaceMemberId_pk",
+          "columns": [
+            "boardId",
+            "workspaceMemberId"
+          ]
+        }
+      },
       "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
@@ -2779,6 +2889,20 @@
           "primaryKey": false,
           "notNull": false
         },
+        "sectionLabel": {
+          "name": "sectionLabel",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "placement": {
+          "name": "placement",
+          "type": "custom_field_placement",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'sidebar'"
+        },
         "type": {
           "name": "type",
           "type": "custom_field_type",
@@ -4956,6 +5080,14 @@
     }
   },
   "enums": {
+    "public.board_member_role": {
+      "name": "board_member_role",
+      "schema": "public",
+      "values": [
+        "admin",
+        "member"
+      ]
+    },
     "public.board_type": {
       "name": "board_type",
       "schema": "public",
@@ -5002,6 +5134,14 @@
         "card.updated.dueDate.updated",
         "card.updated.dueDate.removed",
         "card.archived"
+      ]
+    },
+    "public.custom_field_placement": {
+      "name": "custom_field_placement",
+      "schema": "public",
+      "values": [
+        "main",
+        "sidebar"
       ]
     },
     "public.custom_field_type": {

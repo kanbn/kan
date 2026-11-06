@@ -1073,7 +1073,6 @@ export const cardRouter = createTRPCRouter({
             publicId: string;
             name: string;
             boardId: number;
-            index: number;
             workspaceId: number;
             boardType: string;
             boardPublicId: string;
@@ -1566,17 +1565,16 @@ export const cardRouter = createTRPCRouter({
       // point leaves a duplicate behind, and the caller retrying as the error
       // message suggests would make a second one.
       const sourceLabels = sourceCard.labels ?? [];
-      const sourceLabelRecords = input.copyLabels && sourceLabels.length
-        ? await labelRepo.getAllByPublicIds(
-            ctx.db,
-            sourceLabels.map((label) => label.publicId),
-          )
-        : [];
+      const sourceLabelRecords =
+        input.copyLabels && sourceLabels.length
+          ? await labelRepo.getAllByPublicIds(
+              ctx.db,
+              sourceLabels.map((label) => label.publicId),
+            )
+          : [];
 
       if (
-        sourceLabelRecords.some(
-          (label) => label.boardId !== targetList.boardId,
-        )
+        sourceLabelRecords.some((label) => label.boardId !== targetList.boardId)
       )
         throw new TRPCError({
           message: `Cannot copy labels to a list on a different board. Labels belong to a board, so duplicate with copyLabels: false when the target list is on another board.`,

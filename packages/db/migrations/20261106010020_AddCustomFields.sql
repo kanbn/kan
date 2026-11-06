@@ -1,3 +1,4 @@
+CREATE TYPE "public"."custom_field_placement" AS ENUM('main', 'sidebar');--> statement-breakpoint
 CREATE TYPE "public"."custom_field_type" AS ENUM('text', 'number', 'date', 'checkbox', 'select');--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "card_custom_field_value" (
 	"id" bigserial PRIMARY KEY NOT NULL,
@@ -56,6 +57,79 @@ CREATE TABLE IF NOT EXISTS "card_custom_field_value" (
 );
 --> statement-breakpoint
 ALTER TABLE "card_custom_field_value" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "custom_field_default_value" (
+	"customFieldId" bigint PRIMARY KEY NOT NULL,
+	"fieldType" "custom_field_type" NOT NULL,
+	"optionId" bigint,
+	"textValue" text,
+	"numberValue" numeric,
+	"dateValue" timestamp with time zone,
+	"checkboxValue" boolean,
+	"createdAt" timestamp DEFAULT now() NOT NULL,
+	"createdBy" uuid,
+	"updatedAt" timestamp,
+	"updatedBy" uuid,
+	CONSTRAINT "custom_field_default_value_shape_check" CHECK ((
+        "custom_field_default_value"."fieldType" = 'text'
+        AND "custom_field_default_value"."textValue" IS NOT NULL
+        AND "custom_field_default_value"."numberValue" IS NULL
+        AND "custom_field_default_value"."dateValue" IS NULL
+        AND "custom_field_default_value"."checkboxValue" IS NULL
+        AND "custom_field_default_value"."optionId" IS NULL
+      ) OR (
+        "custom_field_default_value"."fieldType" = 'number'
+        AND "custom_field_default_value"."textValue" IS NULL
+        AND "custom_field_default_value"."numberValue" IS NOT NULL
+        AND "custom_field_default_value"."dateValue" IS NULL
+        AND "custom_field_default_value"."checkboxValue" IS NULL
+        AND "custom_field_default_value"."optionId" IS NULL
+      ) OR (
+        "custom_field_default_value"."fieldType" = 'date'
+        AND "custom_field_default_value"."textValue" IS NULL
+        AND "custom_field_default_value"."numberValue" IS NULL
+        AND "custom_field_default_value"."dateValue" IS NOT NULL
+        AND "custom_field_default_value"."checkboxValue" IS NULL
+        AND "custom_field_default_value"."optionId" IS NULL
+      ) OR (
+        "custom_field_default_value"."fieldType" = 'checkbox'
+        AND "custom_field_default_value"."textValue" IS NULL
+        AND "custom_field_default_value"."numberValue" IS NULL
+        AND "custom_field_default_value"."dateValue" IS NULL
+        AND "custom_field_default_value"."checkboxValue" IS NOT NULL
+        AND "custom_field_default_value"."optionId" IS NULL
+      ) OR (
+        "custom_field_default_value"."fieldType" = 'select'
+        AND "custom_field_default_value"."textValue" IS NULL
+        AND "custom_field_default_value"."numberValue" IS NULL
+        AND "custom_field_default_value"."dateValue" IS NULL
+        AND "custom_field_default_value"."checkboxValue" IS NULL
+        AND "custom_field_default_value"."optionId" IS NOT NULL
+      ))
+);
+--> statement-breakpoint
+ALTER TABLE "custom_field_default_value" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "custom_field_mapping" (
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"sourceFieldId" bigint NOT NULL,
+	"targetBoardId" bigint NOT NULL,
+	"targetFieldId" bigint NOT NULL,
+	"createdAt" timestamp DEFAULT now() NOT NULL,
+	"createdBy" uuid,
+	CONSTRAINT "custom_field_mapping_source_board_unique" UNIQUE("sourceFieldId","targetBoardId")
+);
+--> statement-breakpoint
+ALTER TABLE "custom_field_mapping" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "custom_field_option_mapping" (
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"sourceOptionId" bigint NOT NULL,
+	"targetFieldId" bigint NOT NULL,
+	"targetOptionId" bigint NOT NULL,
+	"createdAt" timestamp DEFAULT now() NOT NULL,
+	"createdBy" uuid,
+	CONSTRAINT "custom_field_option_mapping_source_field_unique" UNIQUE("sourceOptionId","targetFieldId")
+);
+--> statement-breakpoint
+ALTER TABLE "custom_field_option_mapping" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "custom_field_option" (
 	"id" bigserial PRIMARY KEY NOT NULL,
 	"publicId" varchar(12) NOT NULL,
@@ -80,6 +154,10 @@ CREATE TABLE IF NOT EXISTS "custom_field" (
 	"publicId" varchar(12) NOT NULL,
 	"boardId" bigint NOT NULL,
 	"name" varchar(255) NOT NULL,
+	"description" text,
+	"placeholder" varchar(255),
+	"sectionLabel" varchar(255),
+	"placement" "custom_field_placement" DEFAULT 'sidebar' NOT NULL,
 	"type" "custom_field_type" NOT NULL,
 	"position" integer NOT NULL,
 	"showOnCard" boolean DEFAULT true NOT NULL,
@@ -91,7 +169,8 @@ CREATE TABLE IF NOT EXISTS "custom_field" (
 	"deletedBy" uuid,
 	"importId" bigint,
 	CONSTRAINT "custom_field_publicId_unique" UNIQUE("publicId"),
-	CONSTRAINT "custom_field_id_type_unique" UNIQUE("id","type")
+	CONSTRAINT "custom_field_id_type_unique" UNIQUE("id","type"),
+	CONSTRAINT "custom_field_id_board_unique" UNIQUE("id","boardId")
 );
 --> statement-breakpoint
 ALTER TABLE "custom_field" ENABLE ROW LEVEL SECURITY;--> statement-breakpoint
@@ -127,6 +206,78 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "card_custom_field_value" ADD CONSTRAINT "card_custom_field_value_option_field_fk" FOREIGN KEY ("optionId","customFieldId") REFERENCES "public"."custom_field_option"("id","customFieldId") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "custom_field_default_value" ADD CONSTRAINT "custom_field_default_value_createdBy_user_id_fk" FOREIGN KEY ("createdBy") REFERENCES "public"."user"("id") ON DELETE set null ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "custom_field_default_value" ADD CONSTRAINT "custom_field_default_value_updatedBy_user_id_fk" FOREIGN KEY ("updatedBy") REFERENCES "public"."user"("id") ON DELETE set null ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "custom_field_default_value" ADD CONSTRAINT "custom_field_default_value_field_type_fk" FOREIGN KEY ("customFieldId","fieldType") REFERENCES "public"."custom_field"("id","type") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "custom_field_default_value" ADD CONSTRAINT "custom_field_default_value_option_field_fk" FOREIGN KEY ("optionId","customFieldId") REFERENCES "public"."custom_field_option"("id","customFieldId") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "custom_field_mapping" ADD CONSTRAINT "custom_field_mapping_sourceFieldId_custom_field_id_fk" FOREIGN KEY ("sourceFieldId") REFERENCES "public"."custom_field"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "custom_field_mapping" ADD CONSTRAINT "custom_field_mapping_targetBoardId_board_id_fk" FOREIGN KEY ("targetBoardId") REFERENCES "public"."board"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "custom_field_mapping" ADD CONSTRAINT "custom_field_mapping_createdBy_user_id_fk" FOREIGN KEY ("createdBy") REFERENCES "public"."user"("id") ON DELETE set null ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "custom_field_mapping" ADD CONSTRAINT "custom_field_mapping_target_field_board_fk" FOREIGN KEY ("targetFieldId","targetBoardId") REFERENCES "public"."custom_field"("id","boardId") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "custom_field_option_mapping" ADD CONSTRAINT "custom_field_option_mapping_sourceOptionId_custom_field_option_id_fk" FOREIGN KEY ("sourceOptionId") REFERENCES "public"."custom_field_option"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "custom_field_option_mapping" ADD CONSTRAINT "custom_field_option_mapping_targetFieldId_custom_field_id_fk" FOREIGN KEY ("targetFieldId") REFERENCES "public"."custom_field"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "custom_field_option_mapping" ADD CONSTRAINT "custom_field_option_mapping_createdBy_user_id_fk" FOREIGN KEY ("createdBy") REFERENCES "public"."user"("id") ON DELETE set null ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "custom_field_option_mapping" ADD CONSTRAINT "custom_field_option_mapping_target_option_field_fk" FOREIGN KEY ("targetOptionId","targetFieldId") REFERENCES "public"."custom_field_option"("id","customFieldId") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

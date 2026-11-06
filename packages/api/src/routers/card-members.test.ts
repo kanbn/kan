@@ -351,9 +351,9 @@ describe("card member workspace scoping", () => {
         listId: 1,
         dueDate: null,
         description: "",
-        list: { publicId: "list-source12", name: "Source" },
+        list: { publicId: "list-source12", name: "Source", boardId: 3 },
       } as never);
-      vi.mocked(listRepo.getByPublicId).mockResolvedValueOnce({
+      mockGetList.mockResolvedValueOnce({
         id: 2,
         publicId: "list-target12",
         name: "Target",
@@ -406,8 +406,11 @@ describe("card member workspace scoping", () => {
       mockGetCard.mockResolvedValue({
         id: 17,
         workspaceId: 7,
+        boardId: 20,
+        boardType: "regular",
         createdBy: mockUser.id,
       });
+      vi.mocked(cardRepo.getAssignees).mockResolvedValue([]);
       mockGetCardByPublicId.mockResolvedValue({
         id: 17,
         listId: 10,
@@ -422,6 +425,7 @@ describe("card member workspace scoping", () => {
         publicId: input.listPublicId,
         name: "Target",
         boardId: 21,
+        boardType: "regular",
         boardPublicId: "board-1234568",
         workspaceId: 8,
       });
@@ -439,6 +443,7 @@ describe("card member workspace scoping", () => {
         publicId: input.listPublicId,
         name: "Target",
         boardId: 21,
+        boardType: "regular",
         boardPublicId: "board-1234568",
         workspaceId: 7,
       });

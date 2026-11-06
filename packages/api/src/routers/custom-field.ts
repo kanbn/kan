@@ -20,7 +20,11 @@ import {
   customFieldValueSchema as valueSchema,
 } from "../schemas";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { assertCanEdit, assertPermission } from "../utils/permissions";
+import {
+  assertBoardAccess,
+  assertCanEdit,
+  assertPermission,
+} from "../utils/permissions";
 
 const definitionOptionDraftSchema = z.object({
   key: z.string().min(1).max(64),
@@ -117,6 +121,7 @@ export const customFieldRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
       await assertPermission(ctx.db, userId, board.workspaceId, "board:view");
+      await assertBoardAccess(ctx.db, userId, board);
 
       const definitions = await customFieldRepo.listDefinitionsByBoardPublicId(
         ctx.db,
@@ -170,6 +175,7 @@ export const customFieldRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
       await assertPermission(ctx.db, userId, board.workspaceId, "board:edit");
+      await assertBoardAccess(ctx.db, userId, board);
 
       try {
         const definition = await customFieldRepo.createDefinition(ctx.db, {
@@ -238,6 +244,11 @@ export const customFieldRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
       await assertPermission(ctx.db, userId, field.workspaceId, "board:edit");
+      await assertBoardAccess(ctx.db, userId, {
+        id: field.boardId,
+        workspaceId: field.workspaceId,
+        type: field.boardType,
+      });
 
       try {
         return await customFieldRepo.updateDefinition(ctx.db, {
@@ -288,6 +299,11 @@ export const customFieldRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
       await assertPermission(ctx.db, userId, field.workspaceId, "board:edit");
+      await assertBoardAccess(ctx.db, userId, {
+        id: field.boardId,
+        workspaceId: field.workspaceId,
+        type: field.boardType,
+      });
 
       try {
         return await customFieldRepo.saveDefinition(ctx.db, {
@@ -325,6 +341,11 @@ export const customFieldRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
       await assertPermission(ctx.db, userId, field.workspaceId, "board:edit");
+      await assertBoardAccess(ctx.db, userId, {
+        id: field.boardId,
+        workspaceId: field.workspaceId,
+        type: field.boardType,
+      });
 
       try {
         await customFieldRepo.deleteDefinition(ctx.db, {
@@ -369,6 +390,7 @@ export const customFieldRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
       await assertPermission(ctx.db, userId, board.workspaceId, "board:edit");
+      await assertBoardAccess(ctx.db, userId, board);
 
       try {
         return await customFieldRepo.reorderDefinitions(ctx.db, {
@@ -411,6 +433,11 @@ export const customFieldRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
       await assertPermission(ctx.db, userId, field.workspaceId, "board:edit");
+      await assertBoardAccess(ctx.db, userId, {
+        id: field.boardId,
+        workspaceId: field.workspaceId,
+        type: field.boardType,
+      });
 
       try {
         const option = await customFieldRepo.createOption(ctx.db, {
@@ -460,6 +487,11 @@ export const customFieldRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
       await assertPermission(ctx.db, userId, option.workspaceId, "board:edit");
+      await assertBoardAccess(ctx.db, userId, {
+        id: option.boardId,
+        workspaceId: option.workspaceId,
+        type: option.boardType,
+      });
 
       try {
         const updated = await customFieldRepo.updateOption(ctx.db, {
@@ -497,6 +529,11 @@ export const customFieldRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
       await assertPermission(ctx.db, userId, option.workspaceId, "board:edit");
+      await assertBoardAccess(ctx.db, userId, {
+        id: option.boardId,
+        workspaceId: option.workspaceId,
+        type: option.boardType,
+      });
 
       try {
         await customFieldRepo.archiveOption(ctx.db, {
@@ -541,6 +578,11 @@ export const customFieldRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
       await assertPermission(ctx.db, userId, field.workspaceId, "board:edit");
+      await assertBoardAccess(ctx.db, userId, {
+        id: field.boardId,
+        workspaceId: field.workspaceId,
+        type: field.boardType,
+      });
 
       try {
         return await customFieldRepo.reorderOptions(ctx.db, {
@@ -577,6 +619,11 @@ export const customFieldRouter = createTRPCRouter({
           code: "NOT_FOUND",
         });
       await assertPermission(ctx.db, userId, card.workspaceId, "card:view");
+      await assertBoardAccess(ctx.db, userId, {
+        id: card.boardId,
+        workspaceId: card.workspaceId,
+        type: card.boardType,
+      });
 
       try {
         return await customFieldRepo.listValuesByCardPublicId(
@@ -625,6 +672,11 @@ export const customFieldRouter = createTRPCRouter({
         "card:edit",
         card.createdBy,
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: card.boardId,
+        workspaceId: card.workspaceId,
+        type: card.boardType,
+      });
 
       try {
         return await customFieldRepo.setCardValue(ctx.db, {
@@ -672,6 +724,11 @@ export const customFieldRouter = createTRPCRouter({
         "card:edit",
         card.createdBy,
       );
+      await assertBoardAccess(ctx.db, userId, {
+        id: card.boardId,
+        workspaceId: card.workspaceId,
+        type: card.boardType,
+      });
 
       try {
         return await customFieldRepo.clearCardValue(ctx.db, input);

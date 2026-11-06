@@ -6,7 +6,11 @@ import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as customFieldRepo from "@kan/db/repository/custom-field.repo";
 
-import { assertCanEdit, assertPermission } from "../utils/permissions";
+import {
+  assertBoardAccess,
+  assertCanEdit,
+  assertPermission,
+} from "../utils/permissions";
 import { customFieldRouter } from "./custom-field";
 
 vi.mock("@kan/db/repository/board.repo", () => ({
@@ -40,6 +44,7 @@ vi.mock("@kan/db/repository/custom-field.repo", async (importOriginal) => {
 });
 
 vi.mock("../utils/permissions", () => ({
+  assertBoardAccess: vi.fn(),
   assertCanEdit: vi.fn(),
   assertPermission: vi.fn(),
 }));
@@ -71,6 +76,7 @@ const mockSetCardValue = vi.mocked(customFieldRepo.setCardValue);
 const mockClearCardValue = vi.mocked(customFieldRepo.clearCardValue);
 const mockAssertPermission = vi.mocked(assertPermission);
 const mockAssertCanEdit = vi.mocked(assertCanEdit);
+const mockAssertBoardAccess = vi.mocked(assertBoardAccess);
 
 describe("custom field router", () => {
   const mockDb = {} as never;
@@ -84,15 +90,178 @@ describe("custom field router", () => {
   const cardPublicId = "card00000001";
   const fieldPublicId = "field0000001";
   const optionPublicId = "option000001";
-  const boardScope = { id: 10, workspaceId: 20 };
-  const cardScope = { id: 30, workspaceId: 20, createdBy: mockUser.id };
-  const fieldScope = { id: 40, workspaceId: 20 };
+  const boardScope = { id: 10, workspaceId: 20, type: "regular" as const };
+  const cardScope = {
+    id: 30,
+    boardId: 10,
+    boardType: "regular" as const,
+    workspaceId: 20,
+    createdBy: mockUser.id,
+  };
+  const fieldScope = {
+    id: 40,
+    boardId: 10,
+    boardType: "regular" as const,
+    workspaceId: 20,
+  };
 
   beforeEach(() => {
     vi.clearAllMocks();
     mockAssertPermission.mockResolvedValue(undefined);
     mockAssertCanEdit.mockResolvedValue(undefined);
+    mockAssertBoardAccess.mockResolvedValue(undefined);
   });
+
+  const boardAccessCases: {
+    name: string;
+    call: (
+      caller: ReturnType<typeof customFieldRouter.createCaller>,
+    ) => Promise<unknown>;
+  }[] = [
+    {
+      name: "definitionsByBoard",
+      call: (caller) => caller.definitionsByBoard({ boardPublicId }),
+    },
+    {
+      name: "createDefinition",
+      call: (caller) =>
+        caller.createDefinition({
+          boardPublicId,
+          name: "Priority",
+          type: "text",
+        }),
+    },
+    {
+      name: "updateDefinition",
+      call: (caller) =>
+        caller.updateDefinition({ fieldPublicId, name: "Priority" }),
+    },
+    {
+      name: "saveDefinition",
+      call: (caller) =>
+        caller.saveDefinition({
+          fieldPublicId,
+          name: "Priority",
+          description: null,
+          placeholder: null,
+          sectionLabel: null,
+          placement: "sidebar",
+          showOnCard: true,
+          defaultValue: null,
+          options: [],
+        }),
+    },
+    {
+      name: "deleteDefinition",
+      call: (caller) => caller.deleteDefinition({ fieldPublicId }),
+    },
+    {
+      name: "reorderDefinitions",
+      call: (caller) =>
+        caller.reorderDefinitions({
+          boardPublicId,
+          fieldPublicIds: [fieldPublicId],
+        }),
+    },
+    {
+      name: "createOption",
+      call: (caller) => caller.createOption({ fieldPublicId, name: "High" }),
+    },
+    {
+      name: "updateOption",
+      call: (caller) => caller.updateOption({ optionPublicId, name: "Urgent" }),
+    },
+    {
+      name: "archiveOption",
+      call: (caller) => caller.archiveOption({ optionPublicId }),
+    },
+    {
+      name: "reorderOptions",
+      call: (caller) =>
+        caller.reorderOptions({
+          fieldPublicId,
+          optionPublicIds: [optionPublicId],
+        }),
+    },
+    {
+      name: "valuesByCard",
+      call: (caller) => caller.valuesByCard({ cardPublicId }),
+    },
+    {
+      name: "setValue",
+      call: (caller) =>
+        caller.setValue({
+          cardPublicId,
+          fieldPublicId,
+          value: { type: "text", value: "High" },
+        }),
+    },
+    {
+      name: "clearValue",
+      call: (caller) => caller.clearValue({ cardPublicId, fieldPublicId }),
+    },
+  ];
+
+  describe.each(["private", "public"] as const)(
+    "uninvited %s board",
+    (visibility) => {
+      it.each(boardAccessCases)(
+        "blocks $name before reading or changing custom fields",
+        async ({ name, call }) => {
+          mockBoardScope.mockResolvedValue({
+            ...boardScope,
+            visibility,
+          } as never);
+          mockFieldScope.mockResolvedValue(fieldScope);
+          mockOptionScope.mockResolvedValue({ ...fieldScope, id: 50 });
+          mockCardScope.mockResolvedValue({
+            ...cardScope,
+            workspaceVisibility: visibility,
+          } as never);
+          mockAssertBoardAccess.mockRejectedValue(
+            new TRPCError({ code: "NOT_FOUND", message: "Board not found" }),
+          );
+
+          await expect(
+            call(customFieldRouter.createCaller(ctx)),
+          ).rejects.toMatchObject({ code: "NOT_FOUND" });
+
+          expect(mockAssertBoardAccess).toHaveBeenCalledExactlyOnceWith(
+            mockDb,
+            mockUser.id,
+            expect.objectContaining(boardScope),
+          );
+          if (name === "setValue" || name === "clearValue") {
+            // A successful creator fallback must not bypass a removed board invitation.
+            expect(mockAssertCanEdit).toHaveBeenCalledWith(
+              mockDb,
+              mockUser.id,
+              cardScope.workspaceId,
+              "card:edit",
+              mockUser.id,
+            );
+          }
+          for (const repositoryCall of [
+            mockListDefinitions,
+            mockCreateDefinition,
+            mockUpdateDefinition,
+            mockSaveDefinition,
+            mockDeleteDefinition,
+            mockReorderDefinitions,
+            mockCreateOption,
+            mockUpdateOption,
+            mockArchiveOption,
+            mockReorderOptions,
+            mockListValues,
+            mockSetCardValue,
+            mockClearCardValue,
+          ]) {
+            expect(repositoryCall).not.toHaveBeenCalled();
+          }
+        },
+      );
+    },
+  );
 
   it("requires authentication", async () => {
     await expect(
