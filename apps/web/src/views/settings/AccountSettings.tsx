@@ -2,6 +2,7 @@ import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
 
 import Button from "~/components/Button";
+import { CardCoverDisplaySelector } from "~/components/CardCoverDisplaySelector";
 import FeedbackModal from "~/components/FeedbackModal";
 import { FontSizeSelector } from "~/components/FontSizeSelector";
 import { LanguageSelector } from "~/components/LanguageSelector";
@@ -63,6 +64,16 @@ export default function AccountSettings() {
             {t`Change the application font size.`}
           </p>
           <FontSizeSelector />
+        </div>
+
+        <div className="mb-8 border-t border-light-300 dark:border-dark-300">
+          <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
+            {t`Card covers`}
+          </h2>
+          <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
+            {t`Choose how card covers appear on this device.`}
+          </p>
+          <CardCoverDisplaySelector />
         </div>
 
         <div className="mb-8 border-t border-light-300 dark:border-dark-300">

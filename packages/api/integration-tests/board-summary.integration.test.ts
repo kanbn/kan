@@ -1,3 +1,4 @@
+import { formatCardCover } from "../src/utils/cardCover";
 import { beforeEach, describe, expect, it } from "vitest";
 
 import * as boardRepo from "@kan/db/repository/board.repo";
@@ -222,8 +223,16 @@ describe("board summary repository view", () => {
     });
     expect(Object.keys(summaryCard ?? {})).not.toContain("id");
 
-    expect(() => boardDetailSchema.parse(full)).not.toThrow();
-    expect(() => boardDetailSchema.parse(summary)).not.toThrow();
+    // The router formats raw cover columns into the public cover object.
+    const withCovers = (board: typeof full) => ({
+      ...board,
+      lists: board!.lists.map((list) => ({
+        ...list,
+        cards: list.cards.map((card) => ({ ...card, cover: formatCardCover(card) })),
+      })),
+    });
+    expect(() => boardDetailSchema.parse(withCovers(full))).not.toThrow();
+    expect(() => boardDetailSchema.parse(withCovers(summary))).not.toThrow();
   });
 
   it("returns no summary rows for an empty list filter", async () => {

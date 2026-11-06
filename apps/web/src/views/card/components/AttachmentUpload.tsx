@@ -1,5 +1,4 @@
 import { t } from "@lingui/core/macro";
-import { env } from "next-runtime-env";
 import { useRef, useState } from "react";
 import { HiOutlinePaperClip } from "react-icons/hi";
 import { HiCheckBadge } from "react-icons/hi2";
@@ -9,6 +8,7 @@ import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { uploadAttachment } from "~/utils/attachmentUpload";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
 export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
@@ -23,22 +23,7 @@ export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
     setUploading(true);
 
     try {
-      const baseUrl = env("NEXT_PUBLIC_BASE_URL") ?? "";
-      const response = await fetch(
-        `${baseUrl}/api/upload/attachment?cardPublicId=${encodeURIComponent(cardPublicId)}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": file.type,
-            "x-original-filename": encodeURIComponent(file.name),
-          },
-          body: file,
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error("Upload failed");
-      }
+      await uploadAttachment(cardPublicId, file);
 
       await invalidateCard(utils, cardPublicId);
       showPopup({

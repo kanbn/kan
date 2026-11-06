@@ -56,6 +56,7 @@ vi.mock("../utils/permissions", () => ({
 }));
 
 vi.mock("@kan/shared/utils", () => ({
+  workspacePlans: ["free", "team", "pro", "enterprise"],
   generateSlug: vi.fn((name: string) => name.toLowerCase().replace(/\s+/g, "-")),
   generateUID: vi.fn(() => "abc123"),
   generateAvatarUrl: vi.fn(),

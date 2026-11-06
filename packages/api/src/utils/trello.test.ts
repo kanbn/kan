@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 
-import { getTrelloLabelColour } from "./trello";
+import {
+  getTrelloCoverColour,
+  getTrelloLabelColour,
+  trelloCardFields,
+} from "./trello";
 
 describe("getTrelloLabelColour", () => {
   it.each([
@@ -47,5 +51,26 @@ describe("getTrelloLabelColour", () => {
 
   it("uses the default Kan colour for an unknown Trello colour", () => {
     expect(getTrelloLabelColour("future_colour")).toBe("#0d9488");
+  });
+});
+
+describe("getTrelloCoverColour", () => {
+  it("maps a named Trello cover colour", () => {
+    expect(getTrelloCoverColour("sky")).toBe("#6cc3e0");
+  });
+
+  it.each([null, undefined, "", "future_colour"])(
+    "does not invent a cover colour for %s",
+    (colour) => {
+      expect(getTrelloCoverColour(colour)).toBeNull();
+    },
+  );
+});
+
+describe("trelloCardFields", () => {
+  it("requests the current and legacy Trello cover fields", () => {
+    expect(trelloCardFields).toEqual(
+      expect.arrayContaining(["cover", "idAttachmentCover"]),
+    );
   });
 });

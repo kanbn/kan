@@ -21,7 +21,11 @@ import {
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { decryptToken } from "../utils/encryption";
 import { assertPermission } from "../utils/permissions";
-import { getTrelloLabelColour } from "../utils/trello";
+import {
+  getTrelloCoverColour,
+  getTrelloLabelColour,
+  trelloCardFields,
+} from "../utils/trello";
 import {
   decryptTrelloToken,
   encryptTrelloToken,
@@ -144,6 +148,10 @@ interface TrelloCard {
   labels: TrelloLabel[];
   idChecklists: string[];
   checkItemStates: TrelloCheckItemState[];
+  cover?: {
+    color?: string | null;
+    size?: "normal" | "full" | null;
+  };
 }
 
 interface TrelloCheckItemState {
@@ -266,7 +274,7 @@ export const importRouter = createTRPCRouter({
 
         const importSingleBoard = async (boardId: string): Promise<void> => {
           const response = await fetch(
-            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
+            `${urls.trello}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&card_fields=${trelloCardFields.join(",")}&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
           );
 
           if (!response.ok) {
@@ -294,6 +302,11 @@ export const importRouter = createTRPCRouter({
                   sourceId: _card.id,
                   name: _card.name,
                   description: _card.desc,
+                  coverColourCode: getTrelloCoverColour(_card.cover?.color),
+                  coverSize:
+                    _card.cover?.size === "full"
+                      ? ("full" as const)
+                      : ("normal" as const),
                   labels: _card.labels.map((label) => ({
                     sourceId: label.id,
                     name: label.name,
@@ -377,6 +390,8 @@ export const importRouter = createTRPCRouter({
                 workspaceId: workspace.id,
                 index,
                 importId: newImportId,
+                coverColourCode: card.coverColourCode,
+                coverSize: card.coverSize,
               }));
 
               const newCards = await cardRepo.bulkCreate(ctx.db, cardsInsert);

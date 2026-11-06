@@ -6,6 +6,23 @@ import {
   workspaceMemberSchema,
 } from "./common";
 
+export const cardCoverSizeSchema = z.enum(["normal", "full"]);
+
+export const cardCoverSchema = z
+  .discriminatedUnion("kind", [
+    z.object({
+      kind: z.literal("colour"),
+      colourCode: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
+      size: cardCoverSizeSchema,
+    }),
+    z.object({
+      kind: z.literal("attachment"),
+      attachmentPublicId: z.string(),
+      size: cardCoverSizeSchema,
+    }),
+  ])
+  .nullable();
+
 // ─── card.create ─────────────────────────────────────────────
 export const cardCreateResponseSchema = z.object({
   publicId: z.string(),
@@ -17,6 +34,11 @@ export const cardUpdateResponseSchema = z.object({
   title: z.string(),
   description: z.string().nullable(),
   dueDate: z.date().nullable(),
+});
+
+export const cardUpdateCoverResponseSchema = z.object({
+  publicId: z.string(),
+  cover: cardCoverSchema,
 });
 
 // ─── Comment responses ───────────────────────────────────────
@@ -49,6 +71,7 @@ export const cardDetailSchema = z.object({
   cardNumber: z.number().nullable(),
   index: z.number(),
   dueDate: z.date().nullable(),
+  cover: cardCoverSchema,
   createdBy: z.string().nullable(),
   labels: z.array(labelSchema),
   attachments: z.array(
