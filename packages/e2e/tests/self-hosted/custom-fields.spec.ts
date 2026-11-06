@@ -2,6 +2,7 @@ import type { Browser, Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 
 import { AuthPage } from "../support/pages/auth-page";
+import { BoardMembersPage } from "../support/pages/board-members-page";
 import { BoardPage } from "../support/pages/board-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
 import { MembersPage } from "../support/pages/members-page";
@@ -33,7 +34,7 @@ async function inviteGuest(ownerPage: Page, browser: Browser) {
   await members.open();
   await members.changeRole(guest.email, "guest");
 
-  return { guestContext, guestPage };
+  return { guest, guestContext, guestPage };
 }
 
 test(
@@ -302,7 +303,10 @@ test(
       "High",
     );
 
-    const { guestContext, guestPage } = await inviteGuest(page, browser);
+    const { guest, guestContext, guestPage } = await inviteGuest(page, browser);
+    await page.goto(copiedBoardPath);
+    await board.goToBoardMembers();
+    await new BoardMembersPage(page).addMember(guest.email);
     await guestPage.goto(copiedBoardPath);
     const guestCardHref = await guestPage
       .getByText("Custom fields test card", { exact: true })
