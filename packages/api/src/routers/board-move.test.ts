@@ -60,6 +60,7 @@ vi.mock("@kan/shared/utils", () => ({
   generateUID: vi.fn(() => "abc123"),
   generateAvatarUrl: vi.fn(),
   convertDueDateFiltersToRanges: vi.fn(),
+  workspacePlans: ["free", "team", "pro", "enterprise"],
 }));
 
 vi.mock("@kan/shared/constants", () => ({

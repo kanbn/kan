@@ -267,6 +267,20 @@
       "when": 1790111796287,
       "tag": "20260922211636_BackfillBoardMembers",
       "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1793927311565,
+      "tag": "20261106010831_AddCardCovers",
+      "breakpoints": true
+    },
+    {
+      "idx": 39,
+      "version": "7",
+      "when": 1793927353472,
+      "tag": "20261106010913_AddImageCardCovers",
+      "breakpoints": true
     }
   ]
 }
