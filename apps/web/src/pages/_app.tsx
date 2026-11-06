@@ -5,7 +5,6 @@ import type { NextPage, Viewport } from "next";
 import type { AppProps, AppType } from "next/app";
 import type { ReactElement, ReactNode } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import Script from "next/script";
 import { env } from "next-runtime-env";
 import { ThemeProvider } from "next-themes";
 import posthog from "posthog-js";
@@ -73,13 +72,6 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
           position: relative;
         }
       `}</style>
-      {env("NEXT_PUBLIC_UMAMI_ID") && (
-        <Script
-          defer
-          src="https://cloud.umami.is/script.js"
-          data-website-id={env("NEXT_PUBLIC_UMAMI_ID")}
-        />
-      )}
       <script src="/__ENV.js" />
       <main className="font-sans">
         <KeyboardShortcutProvider>
