@@ -185,6 +185,21 @@ export default function List({
               />
             </button>
           </Tooltip>
+          {!isOptimistic && (
+            <Tooltip content={t`Collapse list`}>
+              <button
+                type="button"
+                onClick={onToggleCollapsed}
+                aria-label={t`Collapse list`}
+                className="inline-flex h-7 w-7 items-center justify-center rounded-[5px] text-dark-900 hover:bg-light-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-light-700 dark:hover:bg-dark-200"
+              >
+                <HiOutlineArrowsPointingIn
+                  className="h-4 w-4"
+                  aria-hidden="true"
+                />
+              </button>
+            </Tooltip>
+          )}
           {(() => {
             const dropdownItems = [
               ...(canCreateCard && !isOptimistic
@@ -194,17 +209,6 @@ export default function List({
                       action: () => openNewCardForm(list.publicId),
                       icon: (
                         <HiOutlineSquaresPlus className="h-[18px] w-[18px] text-dark-900" />
-                      ),
-                    },
-                  ]
-                : []),
-              ...(!isOptimistic
-                ? [
-                    {
-                      label: t`Collapse list`,
-                      action: onToggleCollapsed,
-                      icon: (
-                        <HiOutlineArrowsPointingIn className="h-[18px] w-[18px] text-dark-900" />
                       ),
                     },
                   ]
