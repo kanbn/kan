@@ -257,7 +257,7 @@ export default function Avatar({
               </p>
             </div>
             <div className="max-h-[80vh]">
-              <div className="rounded-md border border-light-600 p-2 dark:border-dark-600">
+              <div className="flex justify-center rounded-md border border-light-600 p-2 dark:border-dark-600">
                 <AnyReactCrop
                   crop={crop}
                   onChange={(_crop: LocalPixelCrop, percentCrop: PercentCrop) =>
@@ -265,7 +265,7 @@ export default function Avatar({
                   }
                   aspect={1}
                   circularCrop
-                  className="w-full"
+                  className="max-h-[50vh]"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -273,7 +273,7 @@ export default function Avatar({
                     src={selectedPreviewUrl ?? undefined}
                     alt="Avatar to crop"
                     onLoad={onImageLoad}
-                    className="h-auto max-h-[50vh] w-full object-contain"
+                    className="h-auto w-auto"
                   />
                 </AnyReactCrop>
               </div>
