@@ -47,6 +47,7 @@ import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
 import { Tooltip } from "~/components/Tooltip";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
+import { useCollapsedLists } from "~/hooks/useCollapsedLists";
 import { useDragToScroll } from "~/hooks/useDragToScroll";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useScrollRestore } from "~/hooks/useScrollRestore";
@@ -126,6 +127,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       ? params.boardId[0]
       : params.boardId
     : null;
+  const { collapsedListIds, toggleList } = useCollapsedLists(boardId ?? null);
   const cardReturnQuery = router.asPath.includes("?")
     ? `?returnUrl=${encodeURIComponent(router.asPath)}`
     : "";
@@ -1034,30 +1036,37 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                           <List
                             key={`list.${list.publicId}`}
                             list={list}
+                            cardCount={
+                              (cardsByList[list.publicId] ?? list.cards).length
+                            }
+                            isCollapsed={collapsedListIds.has(list.publicId)}
+                            onToggleCollapsed={() => toggleList(list.publicId)}
                             setSelectedPublicListId={(publicListId) => {
                               setNewCardInitialDueDate(null);
                               setSelectedPublicListId(publicListId);
                             }}
                           >
-                            <CardList
-                              listPublicId={list.publicId}
-                              cards={cardsByList[list.publicId] ?? list.cards}
-                              cardPrefix={boardData.workspace.cardPrefix}
-                              canEditCard={!!canEditCard}
-                              freezeHeight={dragCardsByList !== null}
-                              getCardHref={(cardPublicId) =>
-                                isTemplate
-                                  ? `/templates/${boardId}/cards/${cardPublicId}${cardReturnQuery}`
-                                  : `/cards/${cardPublicId}${cardReturnQuery}`
-                              }
-                              onContextMenu={(e, cardPublicId) => {
-                                setContextMenu({
-                                  x: e.clientX,
-                                  y: e.clientY,
-                                  cardPublicId,
-                                });
-                              }}
-                            />
+                            {!collapsedListIds.has(list.publicId) && (
+                              <CardList
+                                listPublicId={list.publicId}
+                                cards={cardsByList[list.publicId] ?? list.cards}
+                                cardPrefix={boardData.workspace.cardPrefix}
+                                canEditCard={!!canEditCard}
+                                freezeHeight={dragCardsByList !== null}
+                                getCardHref={(cardPublicId) =>
+                                  isTemplate
+                                    ? `/templates/${boardId}/cards/${cardPublicId}${cardReturnQuery}`
+                                    : `/cards/${cardPublicId}${cardReturnQuery}`
+                                }
+                                onContextMenu={(e, cardPublicId) => {
+                                  setContextMenu({
+                                    x: e.clientX,
+                                    y: e.clientY,
+                                    cardPublicId,
+                                  });
+                                }}
+                              />
+                            )}
                           </List>
                         ))}
                         <div className="min-w-[calc(100vw-18rem)] md:min-w-[0.75rem]" />
