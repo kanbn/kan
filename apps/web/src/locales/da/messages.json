@@ -329,7 +329,7 @@
     "origin": [
       [
         "src/views/home/index.tsx",
-        71
+        74
       ]
     ],
     "translation": "En kraftfuld og fleksibel Kanban-app, der hjælper dig med at organisere arbejdet, følge fremdriften og levere resultater – alt samlet ét sted."
@@ -5738,7 +5738,7 @@
     "origin": [
       [
         "src/views/home/index.tsx",
-        75
+        78
       ]
     ],
     "translation": "Kom i gang i Cloud"
@@ -7711,7 +7711,7 @@
     "origin": [
       [
         "src/views/home/index.tsx",
-        85
+        88
       ]
     ],
     "translation": "Intet kreditkort påkrævet"
@@ -8787,11 +8787,11 @@
       ],
       [
         "src/views/pricing/index.tsx",
-        34
+        35
       ],
       [
         "src/views/pricing/index.tsx",
-        40
+        43
       ]
     ],
     "translation": "Priser"
@@ -9728,7 +9728,7 @@
     "origin": [
       [
         "src/views/home/index.tsx",
-        81
+        84
       ]
     ],
     "translation": "Selvhost med GitHub"
@@ -10180,10 +10180,22 @@
       ],
       [
         "src/views/pricing/index.tsx",
-        44
+        47
       ]
     ],
     "translation": "Enkle priser"
+  },
+  "/ty94x": {
+    "translation": "",
+    "message": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/pricing/index.tsx",
+        36
+      ]
+    ]
   },
   "sBhOFG": {
     "message": "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done.",
@@ -10324,7 +10336,7 @@
     "origin": [
       [
         "src/views/home/index.tsx",
-        37
+        40
       ]
     ],
     "translation": "Giv en stjerne på GitHub"
@@ -10369,7 +10381,7 @@
     "origin": [
       [
         "src/views/pricing/index.tsx",
-        47
+        50
       ]
     ],
     "translation": "Start gratis. Opgrader, efterhånden som dit team vokser. Ingen skjulte gebyrer, ingen binding."
@@ -10909,7 +10921,7 @@
     "origin": [
       [
         "src/views/home/index.tsx",
-        65
+        68
       ]
     ],
     "translation": "Open source-<0/>alternativet til Trello"

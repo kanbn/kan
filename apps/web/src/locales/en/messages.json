@@ -329,7 +329,7 @@
     "origin": [
       [
         "src/views/home/index.tsx",
-        71
+        74
       ]
     ],
     "translation": "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
@@ -5790,7 +5790,7 @@
     "origin": [
       [
         "src/views/home/index.tsx",
-        75
+        78
       ]
     ],
     "translation": "Get started on Cloud"
@@ -7789,7 +7789,7 @@
     "origin": [
       [
         "src/views/home/index.tsx",
-        85
+        88
       ]
     ],
     "translation": "No credit card required"
@@ -8865,11 +8865,11 @@
       ],
       [
         "src/views/pricing/index.tsx",
-        34
+        35
       ],
       [
         "src/views/pricing/index.tsx",
-        40
+        43
       ]
     ],
     "translation": "Pricing"
@@ -9806,7 +9806,7 @@
     "origin": [
       [
         "src/views/home/index.tsx",
-        81
+        84
       ]
     ],
     "translation": "Self host with Github"
@@ -10258,10 +10258,22 @@
       ],
       [
         "src/views/pricing/index.tsx",
-        44
+        47
       ]
     ],
     "translation": "Simple pricing"
+  },
+  "/ty94x": {
+    "translation": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts.",
+    "message": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/pricing/index.tsx",
+        36
+      ]
+    ]
   },
   "sBhOFG": {
     "message": "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done.",
@@ -10402,7 +10414,7 @@
     "origin": [
       [
         "src/views/home/index.tsx",
-        37
+        40
       ]
     ],
     "translation": "Star on Github"
@@ -10447,7 +10459,7 @@
     "origin": [
       [
         "src/views/pricing/index.tsx",
-        47
+        50
       ]
     ],
     "translation": "Start free. Upgrade as your team grows. No hidden fees, no contracts."
@@ -10987,7 +10999,7 @@
     "origin": [
       [
         "src/views/home/index.tsx",
-        65
+        68
       ]
     ],
     "translation": "The open source <0/> alternative to Trello"

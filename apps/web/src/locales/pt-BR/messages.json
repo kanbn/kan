@@ -189,7 +189,7 @@
     "message": "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/home/index.tsx", 71]],
+    "origin": [["src/views/home/index.tsx", 74]],
     "translation": "Um aplicativo kanban poderoso e flexível que ajuda você a organizar o trabalho, acompanhar o progresso e entregar resultados — tudo em um só lugar."
   },
   "AeXO77": {
@@ -3443,7 +3443,7 @@
     "message": "Get started on Cloud",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/home/index.tsx", 75]],
+    "origin": [["src/views/home/index.tsx", 78]],
     "translation": "Começar na nuvem"
   },
   "7hktsm": {
@@ -4617,7 +4617,7 @@
     "message": "No credit card required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/home/index.tsx", 85]],
+    "origin": [["src/views/home/index.tsx", 88]],
     "translation": "Não é necessário cartão de crédito"
   },
   "MK16u2": {
@@ -5190,8 +5190,8 @@
       ["src/views/home/components/Header.tsx", 18],
       ["src/views/home/components/Header.tsx", 34],
       ["src/views/pricing/components/Pricing.tsx", 85],
-      ["src/views/pricing/index.tsx", 34],
-      ["src/views/pricing/index.tsx", 40]
+      ["src/views/pricing/index.tsx", 35],
+      ["src/views/pricing/index.tsx", 43]
     ],
     "translation": "Preços"
   },
@@ -5752,7 +5752,7 @@
     "message": "Self host with Github",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/home/index.tsx", 81]],
+    "origin": [["src/views/home/index.tsx", 84]],
     "translation": "Auto-hospedar com Github"
   },
   "VXk54Y": {
@@ -6014,9 +6014,16 @@
     "comments": [],
     "origin": [
       ["src/views/pricing/components/Pricing.tsx", 89],
-      ["src/views/pricing/index.tsx", 44]
+      ["src/views/pricing/index.tsx", 47]
     ],
     "translation": "Preços simples"
+  },
+  "/ty94x": {
+    "translation": "Preços simples e transparentes. Comece grátis com quadros e cartões ilimitados e faça upgrade conforme sua equipe crescer. Sem taxas ocultas, sem contratos.",
+    "message": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/pricing/index.tsx", 36]]
   },
   "sBhOFG": {
     "message": "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done.",
@@ -6103,7 +6110,7 @@
     "message": "Star on Github",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/home/index.tsx", 37]],
+    "origin": [["src/views/home/index.tsx", 40]],
     "translation": "Favoritar no Github"
   },
   "veIDCY": {
@@ -6131,7 +6138,7 @@
     "message": "Start free. Upgrade as your team grows. No hidden fees, no contracts.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/index.tsx", 47]],
+    "origin": [["src/views/pricing/index.tsx", 50]],
     "translation": "Comece grátis. Faça upgrade conforme sua equipe cresce. Sem taxas ocultas, sem contratos."
   },
   "lUlbS2": {
@@ -6453,7 +6460,7 @@
     "message": "The open source <0/> alternative to Trello",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/home/index.tsx", 65]],
+    "origin": [["src/views/home/index.tsx", 68]],
     "translation": "A alternativa open source <0/> ao Trello"
   },
   "0xD8Of": {
