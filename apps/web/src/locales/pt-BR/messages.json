@@ -10,7 +10,7 @@
     "message": ", or see our",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 102]],
+    "origin": [["src/components/FeedbackModal.tsx", 106]],
     "translation": ", ou veja nosso"
   },
   "J/hVSQ": {
@@ -1918,7 +1918,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/FeedbackModal.tsx", 100],
+      ["src/components/FeedbackModal.tsx", 104],
       ["src/views/pricing/components/PricingTiers.tsx", 75],
       ["src/views/pricing/components/PricingTiers.tsx", 75]
     ],
@@ -2558,7 +2558,7 @@
     "message": "docs",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 109]],
+    "origin": [["src/components/FeedbackModal.tsx", 113]],
     "translation": "docs"
   },
   "TbjyhA": {
@@ -3242,7 +3242,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/FeedbackModal.tsx", 59],
+      ["src/components/FeedbackModal.tsx", 63],
       ["src/components/UserMenu.tsx", 217]
     ],
     "translation": "Feedback"
@@ -3251,7 +3251,7 @@
     "message": "Feedback sent",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 33]],
+    "origin": [["src/components/FeedbackModal.tsx", 34]],
     "translation": "Feedback enviado"
   },
   "F6m23G": {
@@ -3695,7 +3695,7 @@
     "message": "Ideas to improve this page...",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 75]],
+    "origin": [["src/components/FeedbackModal.tsx", 79]],
     "translation": "Ideias para melhorar esta página..."
   },
   "l3s5ri": {
@@ -4435,7 +4435,7 @@
     "message": "Need help?",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 95]],
+    "origin": [["src/components/FeedbackModal.tsx", 99]],
     "translation": "Precisa de ajuda?"
   },
   "PSXKxs": {
@@ -5087,7 +5087,7 @@
     "comments": [],
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 26],
-      ["src/components/FeedbackModal.tsx", 41],
+      ["src/components/FeedbackModal.tsx", 42],
       ["src/components/NewWorkspaceForm.tsx", 110],
       ["src/views/board/components/BoardDropdown.tsx", 80],
       ["src/views/board/components/NewCardForm.tsx", 204],
@@ -5775,7 +5775,7 @@
     "message": "Send feedback",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 116]],
+    "origin": [["src/components/FeedbackModal.tsx", 120]],
     "translation": "Enviar feedback"
   },
   "eaUTwS": {
@@ -6019,11 +6019,11 @@
     "translation": "Preços simples"
   },
   "/ty94x": {
-    "translation": "Preços simples e transparentes. Comece grátis com quadros e cartões ilimitados e faça upgrade conforme sua equipe crescer. Sem taxas ocultas, sem contratos.",
     "message": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/index.tsx", 36]]
+    "origin": [["src/views/pricing/index.tsx", 36]],
+    "translation": "Preços simples e transparentes. Comece grátis com quadros e cartões ilimitados e faça upgrade conforme sua equipe crescer. Sem taxas ocultas, sem contratos."
   },
   "sBhOFG": {
     "message": "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done.",
@@ -6371,7 +6371,7 @@
     "message": "Thank you for your feedback!",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 34]],
+    "origin": [["src/components/FeedbackModal.tsx", 35]],
     "translation": "Obrigado pelo seu feedback!"
   },
   "ssK7k+": {
@@ -6948,7 +6948,7 @@
     "message": "Unable to send feedback",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 40]],
+    "origin": [["src/components/FeedbackModal.tsx", 41]],
     "translation": "Não foi possível enviar o feedback"
   },
   "Q60WUZ": {

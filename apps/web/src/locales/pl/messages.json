@@ -10,7 +10,7 @@
     "message": ", or see our",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 102]],
+    "origin": [["src/components/FeedbackModal.tsx", 106]],
     "translation": ", lub zobacz nasze"
   },
   "J/hVSQ": {
@@ -1918,7 +1918,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/FeedbackModal.tsx", 100],
+      ["src/components/FeedbackModal.tsx", 104],
       ["src/views/pricing/components/PricingTiers.tsx", 75],
       ["src/views/pricing/components/PricingTiers.tsx", 75]
     ],
@@ -2558,7 +2558,7 @@
     "message": "docs",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 109]],
+    "origin": [["src/components/FeedbackModal.tsx", 113]],
     "translation": "dokumentacja"
   },
   "TbjyhA": {
@@ -3242,7 +3242,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/FeedbackModal.tsx", 59],
+      ["src/components/FeedbackModal.tsx", 63],
       ["src/components/UserMenu.tsx", 217]
     ],
     "translation": "Opinia"
@@ -3251,7 +3251,7 @@
     "message": "Feedback sent",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 33]],
+    "origin": [["src/components/FeedbackModal.tsx", 34]],
     "translation": "Opinia została wysłana"
   },
   "F6m23G": {
@@ -3695,7 +3695,7 @@
     "message": "Ideas to improve this page...",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 75]],
+    "origin": [["src/components/FeedbackModal.tsx", 79]],
     "translation": "Pomysły na ulepszenie tej strony..."
   },
   "l3s5ri": {
@@ -4435,7 +4435,7 @@
     "message": "Need help?",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 95]],
+    "origin": [["src/components/FeedbackModal.tsx", 99]],
     "translation": "Potrzebujesz pomocy?"
   },
   "PSXKxs": {
@@ -5087,7 +5087,7 @@
     "comments": [],
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 26],
-      ["src/components/FeedbackModal.tsx", 41],
+      ["src/components/FeedbackModal.tsx", 42],
       ["src/components/NewWorkspaceForm.tsx", 110],
       ["src/views/board/components/BoardDropdown.tsx", 80],
       ["src/views/board/components/NewCardForm.tsx", 204],
@@ -5775,7 +5775,7 @@
     "message": "Send feedback",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 116]],
+    "origin": [["src/components/FeedbackModal.tsx", 120]],
     "translation": "Prześlij opinię"
   },
   "eaUTwS": {
@@ -6019,11 +6019,11 @@
     "translation": "Prosty cennik"
   },
   "/ty94x": {
-    "translation": "Proste i przejrzyste ceny. Zacznij za darmo z nieograniczoną liczbą tablic i kart, a gdy Twój zespół się rozrośnie, przejdź na wyższy plan. Bez ukrytych opłat i bez zobowiązań umownych.",
     "message": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/pricing/index.tsx", 36]]
+    "origin": [["src/views/pricing/index.tsx", 36]],
+    "translation": "Proste i przejrzyste ceny. Zacznij za darmo z nieograniczoną liczbą tablic i kart, a gdy Twój zespół się rozrośnie, przejdź na wyższy plan. Bez ukrytych opłat i bez zobowiązań umownych."
   },
   "sBhOFG": {
     "message": "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done.",
@@ -6371,7 +6371,7 @@
     "message": "Thank you for your feedback!",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 34]],
+    "origin": [["src/components/FeedbackModal.tsx", 35]],
     "translation": "Dziękujemy za Twoją opinię!"
   },
   "ssK7k+": {
@@ -6948,7 +6948,7 @@
     "message": "Unable to send feedback",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/FeedbackModal.tsx", 40]],
+    "origin": [["src/components/FeedbackModal.tsx", 41]],
     "translation": "Nie można wysłać opinii"
   },
   "Q60WUZ": {

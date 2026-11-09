@@ -18,7 +18,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        102
+        106
       ]
     ],
     "translation": ", eller se vores"
@@ -3210,7 +3210,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        100
+        104
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
@@ -4265,7 +4265,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        109
+        113
       ]
     ],
     "translation": "dokumentation"
@@ -5382,7 +5382,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        59
+        63
       ],
       [
         "src/components/UserMenu.tsx",
@@ -5398,7 +5398,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        33
+        34
       ]
     ],
     "translation": "Feedback sendt"
@@ -6154,7 +6154,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        75
+        79
       ]
     ],
     "translation": "Idéer til at forbedre denne side..."
@@ -7407,7 +7407,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        95
+        99
       ]
     ],
     "translation": "Brug for hjælp?"
@@ -8487,7 +8487,7 @@
       ],
       [
         "src/components/FeedbackModal.tsx",
-        41
+        42
       ],
       [
         "src/components/NewWorkspaceForm.tsx",
@@ -9768,7 +9768,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        116
+        120
       ]
     ],
     "translation": "Send feedback"
@@ -10186,7 +10186,6 @@
     "translation": "Enkle priser"
   },
   "/ty94x": {
-    "translation": "",
     "message": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts.",
     "placeholders": {},
     "comments": [],
@@ -10195,7 +10194,8 @@
         "src/views/pricing/index.tsx",
         36
       ]
-    ]
+    ],
+    "translation": ""
   },
   "sBhOFG": {
     "message": "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done.",
@@ -10774,7 +10774,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        34
+        35
       ]
     ],
     "translation": "Tak for din feedback!"
@@ -11705,7 +11705,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        40
+        41
       ]
     ],
     "translation": "Kunne ikke sende feedback"

@@ -18,7 +18,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        102
+        106
       ]
     ],
     "translation": ", or see our"
@@ -3223,7 +3223,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        100
+        104
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
@@ -4304,7 +4304,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        109
+        113
       ]
     ],
     "translation": "docs"
@@ -5434,7 +5434,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        59
+        63
       ],
       [
         "src/components/UserMenu.tsx",
@@ -5450,7 +5450,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        33
+        34
       ]
     ],
     "translation": "Feedback sent"
@@ -6206,7 +6206,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        75
+        79
       ]
     ],
     "translation": "Ideas to improve this page..."
@@ -7485,7 +7485,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        95
+        99
       ]
     ],
     "translation": "Need help?"
@@ -8565,7 +8565,7 @@
       ],
       [
         "src/components/FeedbackModal.tsx",
-        41
+        42
       ],
       [
         "src/components/NewWorkspaceForm.tsx",
@@ -9846,7 +9846,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        116
+        120
       ]
     ],
     "translation": "Send feedback"
@@ -10264,7 +10264,6 @@
     "translation": "Simple pricing"
   },
   "/ty94x": {
-    "translation": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts.",
     "message": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts.",
     "placeholders": {},
     "comments": [],
@@ -10273,7 +10272,8 @@
         "src/views/pricing/index.tsx",
         36
       ]
-    ]
+    ],
+    "translation": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts."
   },
   "sBhOFG": {
     "message": "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done.",
@@ -10852,7 +10852,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        34
+        35
       ]
     ],
     "translation": "Thank you for your feedback!"
@@ -11783,7 +11783,7 @@
     "origin": [
       [
         "src/components/FeedbackModal.tsx",
-        40
+        41
       ]
     ],
     "translation": "Unable to send feedback"
