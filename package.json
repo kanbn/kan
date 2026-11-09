@@ -19,7 +19,7 @@
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
     "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
-    "lint:ws": "pnpm dlx sherif@latest",
+    "lint:ws": "pnpm dlx sherif@latest -i zod",
     "postinstall": "pnpm lint:ws",
     "test": "pnpm --filter=\"!@kan/e2e\" -r --if-present test",
     "test:e2e": "pnpm --filter @kan/e2e test",
