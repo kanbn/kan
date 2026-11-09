@@ -9,11 +9,49 @@ services:
       - RUN_MIGRATIONS=true
     stop_grace_period: 30s
     healthcheck:
-      test: ["CMD", "/nodejs/bin/node", "-e", "fetch('http://127.0.0.1:3000/api/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"]
+      test:
+        [
+          "CMD",
+          "/nodejs/bin/node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/api/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))",
+        ]
       interval: 5s
       timeout: 10s
       retries: 3
       start_period: 60s
+    networks:
+      - dokploy-network
+    deploy:
+      replicas: 1
+      labels:
+        - traefik.swarm.lbswarm=true
+      update_config:
+        order: start-first
+        failure_action: rollback
+        monitor: 30s
+      rollback_config:
+        order: start-first
+      restart_policy:
+        condition: any
+
+  api:
+    image: ghcr.io/kanbn/kan-api:main
+    env_file:
+      - .env
+    stop_grace_period: 30s
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:4000/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))",
+        ]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     networks:
       - dokploy-network
     deploy:
