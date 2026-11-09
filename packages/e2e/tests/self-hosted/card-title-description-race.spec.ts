@@ -29,18 +29,13 @@ test(
     const cardPublicId = page.url().split("/cards/")[1];
     if (!cardPublicId) throw new Error("Could not resolve cardPublicId");
 
-    // Hold the title's save in flight so the description can be edited
-    // while the card.byId refetch it triggers is still pending.
+    // Hold the title save so the description can be edited while it's still pending.
     let releaseTitleSave: () => void = () => undefined;
     const titleSaveGate = new Promise<void>((resolve) => {
       releaseTitleSave = resolve;
     });
-    let gatedOnce = false;
     await page.route(/\/api\/trpc\/card\.update/, async (route) => {
-      if (!gatedOnce) {
-        gatedOnce = true;
-        await titleSaveGate;
-      }
+      await titleSaveGate;
       await route.continue();
     });
 
@@ -49,8 +44,7 @@ test(
 
     const titleSaved = waitForTrpcMutation(page, "card.update");
 
-    // Clicking into the description blurs the title textarea, firing the
-    // (now gated) title save, before any description text exists.
+    // Clicking into the description blurs and saves the (now gated) title.
     const description = page
       .locator('.tiptap[contenteditable="true"]')
       .first();
@@ -60,8 +54,7 @@ test(
     releaseTitleSave();
     await titleSaved;
 
-    // The title save's response lands and invalidates card.byId; give the
-    // resulting refetch a moment to resolve before saving the description.
+    // Give the card.byId refetch the save just triggered a moment to resolve.
     await page.waitForTimeout(500);
 
     const descriptionSaved = waitForTrpcMutation(page, "card.update");
