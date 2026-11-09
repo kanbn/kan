@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { t } from "@lingui/core/macro";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
+
+import { useCreateFeedback } from "@kan/api-client/hooks";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 interface NewFeedbackFormInput {
   feedback: string;
@@ -25,29 +25,33 @@ export default function FeedbackModal() {
       },
     });
 
-  const createFeedback = api.feedback.create.useMutation({
-    onSuccess: async () => {
-      reset();
-      closeModal();
-      showPopup({
-        header: t`Feedback sent`,
-        message: t`Thank you for your feedback!`,
-        icon: "success",
-      });
-    },
-    onError: async () => {
-      showPopup({
-        header: t`Unable to send feedback`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
+  const createFeedback = useCreateFeedback({
+    mutation: {
+      onSuccess: () => {
+        reset();
+        closeModal();
+        showPopup({
+          header: t`Feedback sent`,
+          message: t`Thank you for your feedback!`,
+          icon: "success",
+        });
+      },
+      onError: () => {
+        showPopup({
+          header: t`Unable to send feedback`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
     },
   });
 
   const onSubmit = (values: NewFeedbackFormInput) => {
     createFeedback.mutate({
-      feedback: values.feedback,
-      url: window.location.href,
+      data: {
+        feedback: values.feedback,
+        url: window.location.href,
+      },
     });
   };
 

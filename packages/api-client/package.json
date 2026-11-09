@@ -1,0 +1,40 @@
+{
+  "name": "@kan/api-client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./hooks": {
+      "types": "./src/generated.ts",
+      "default": "./src/generated.ts"
+    }
+  },
+  "license": "GPL-3.0",
+  "scripts": {
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "orval --watch & tsc --watch --preserveWatchOutput",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "generate": "orval"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "catalog:",
+    "next-runtime-env": "^1.7.2"
+  },
+  "devDependencies": {
+    "@kan/eslint-config": "workspace:*",
+    "@kan/prettier-config": "workspace:*",
+    "@kan/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "orval": "^8.40.0",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  },
+  "prettier": "@kan/prettier-config"
+}

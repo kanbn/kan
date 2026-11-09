@@ -59,6 +59,7 @@ i18n.cache
 
 # pgdata
 /apps/web/pgdata
+/apps/api/pgdata
 
 # local scripts
 scripts/

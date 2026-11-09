@@ -29,6 +29,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@kan.bn/mcp": "workspace:*",
     "@kan/api": "workspace:*",
+    "@kan/api-client": "workspace:*",
     "@kan/auth": "workspace:*",
     "@kan/db": "workspace:^",
     "@kan/email": "workspace:^",

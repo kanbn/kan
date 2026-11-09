@@ -31,7 +31,7 @@ FROM alpine AS pruner
 WORKDIR /app
 COPY . .
 
-RUN turbo prune --scope=@kan/web --scope=@kan/db --docker
+RUN turbo prune --scope=@kan/web --scope=@kan/api-server --scope=@kan/db --docker
 
 # ============================================
 # Stage 3: Install dependencies
@@ -128,3 +128,26 @@ USER 1000:1000
 
 EXPOSE 3000
 CMD ["bootstrap.cjs"]
+
+# ============================================
+# Stage 7: Production api image
+# ============================================
+# ponytail: runs TS source through the same swc-node loader as `pnpm dev`/`pnpm
+# start` instead of a precompiled dist/ — apps/api's own tsc build is a
+# type-check-only no-op (see apps/api/package.json), since the workspace's
+# other packages aren't written for strict Node16 module resolution. A real
+# bundled build is a later optimization, not a correctness requirement.
+FROM alpine AS api
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=4000
+
+COPY --chown=node:node --from=deps /app/ ./
+COPY --chown=node:node --from=pruner /app/out/full/ .
+
+USER node
+WORKDIR /app/apps/api
+
+EXPOSE 4000
+CMD ["node", "--import", "@swc-node/register/esm-register", "src/main.ts"]
