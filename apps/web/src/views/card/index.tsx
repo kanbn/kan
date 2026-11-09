@@ -287,16 +287,11 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
         title: card?.title ?? "",
         description: card?.description ?? "",
       },
-      // Every card mutation (title, description, labels, due date, etc.)
-      // invalidates card.byId, which re-triggers the `values` sync above.
-      // keepDirtyValues stops that resync from overwriting a field the user
-      // is still editing with the server's now-stale value.
+      // keepDirtyValues: a card.byId refetch shouldn't overwrite a field still being edited.
       resetOptions: { keepDirtyValues: true },
     });
 
-  // Dirty fields are kept across the resync above by design, so switching to
-  // a different card needs its own clean reset or a leftover edit from the
-  // previous card would carry over.
+  // Force a clean reset on card switch, since keepDirtyValues would otherwise carry a dirty field over.
   useEffect(() => {
     reset({
       cardId: cardId ?? "",
