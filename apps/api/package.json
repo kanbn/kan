@@ -20,15 +20,17 @@
     "@kan/auth": "workspace:*",
     "@kan/db": "workspace:*",
     "@kan/logger": "workspace:^",
+    "@modelcontextprotocol/sdk": "^1.11.0",
     "@nestjs/common": "^11.2.7",
     "@nestjs/core": "^11.2.7",
     "@nestjs/platform-express": "^11.2.7",
     "@nestjs/swagger": "^11.4.7",
+    "@rekog/mcp-nest": "^1.9.11",
     "nestjs-zod": "^5.5.0",
     "rate-limiter-flexible": "^9.0.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
-    "zod": "catalog:"
+    "zod": "^4.3.5"
   },
   "devDependencies": {
     "@kan/eslint-config": "workspace:*",
