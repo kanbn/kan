@@ -7,6 +7,7 @@ import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { createLogger } from "@kan/logger";
 import { colours } from "@kan/shared/constants";
 import {
   convertDueDateFiltersToRanges,
@@ -14,15 +15,20 @@ import {
   generateUID,
 } from "@kan/shared/utils";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import {
-  boardListItemSchema,
-  boardDetailSchema,
   boardBySlugSchema,
   boardCreateResponseSchema,
+  boardDetailSchema,
+  boardListItemSchema,
   boardUpdateResponseSchema,
 } from "../schemas";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { createAvatarUrlResolver } from "../utils/avatarUrls";
+import { formatBoardBackground } from "../utils/boardBackground";
+import {
+  cloneBoardBackgroundObjects,
+  deleteBoardBackgroundObjects,
+} from "../utils/boardBackgroundPreview";
 import {
   assertBoardAccess,
   assertCanDelete,
@@ -31,6 +37,8 @@ import {
   filterBoardAssignable,
   isWorkspaceAdmin,
 } from "../utils/permissions";
+
+const logger = createLogger("board");
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
@@ -76,7 +84,7 @@ export const boardRouter = createTRPCRouter({
 
       const isAdmin = await isWorkspaceAdmin(ctx.db, userId, workspace.id);
 
-      const result = boardRepo.getAllByWorkspaceId(
+      const result = await boardRepo.getAllByWorkspaceId(
         ctx.db,
         workspace.id,
         userId,
@@ -84,10 +92,18 @@ export const boardRouter = createTRPCRouter({
           type: input.type,
           archived: input.archived ?? false,
           isWorkspaceAdmin: isAdmin,
-        }
+        },
       );
 
-      return result;
+      return result.map(
+        ({ backgroundColourCode, backgroundImageKey, ...board }) => ({
+          ...board,
+          background: formatBoardBackground({
+            backgroundColourCode,
+            backgroundImageKey,
+          }),
+        }),
+      );
     }),
   byId: protectedProcedure
     .meta({
@@ -177,27 +193,31 @@ export const boardRouter = createTRPCRouter({
       // Generate presigned URLs for workspace member avatars
       const workspaceWithAvatarUrls = result.workspace
         ? {
-          ...result.workspace,
-          // Only offer people who belong on this board as assignees/filters.
-          members: await Promise.all(
-            (
-              await filterBoardAssignable(ctx.db, board, result.workspace.members)
-            ).map(async (member) => {
-              if (!member.user?.image) {
-                return member;
-              }
+            ...result.workspace,
+            // Only offer people who belong on this board as assignees/filters.
+            members: await Promise.all(
+              (
+                await filterBoardAssignable(
+                  ctx.db,
+                  board,
+                  result.workspace.members,
+                )
+              ).map(async (member) => {
+                if (!member.user?.image) {
+                  return member;
+                }
 
-              const avatarUrl = await resolveAvatarUrl(member.user.image);
-              return {
-                ...member,
-                user: {
-                  ...member.user,
-                  image: avatarUrl,
-                },
-              };
-            }),
-          ),
-        }
+                const avatarUrl = await resolveAvatarUrl(member.user.image);
+                return {
+                  ...member,
+                  user: {
+                    ...member.user,
+                    image: avatarUrl,
+                  },
+                };
+              }),
+            ),
+          }
         : result.workspace;
 
       // Generate presigned URLs for card member avatars
@@ -238,8 +258,15 @@ export const boardRouter = createTRPCRouter({
         })),
       );
 
+      const { backgroundColourCode, backgroundImageKey, ...boardResult } =
+        result;
+
       return {
-        ...result,
+        ...boardResult,
+        background: formatBoardBackground({
+          backgroundColourCode,
+          backgroundImageKey,
+        }),
         lists: listsWithAvatarUrls,
         workspace: workspaceWithAvatarUrls,
       };
@@ -315,7 +342,18 @@ export const boardRouter = createTRPCRouter({
         },
       );
 
-      return result;
+      if (!result) return null;
+
+      const { backgroundColourCode, backgroundImageKey, ...boardResult } =
+        result;
+
+      return {
+        ...boardResult,
+        background: formatBoardBackground({
+          backgroundColourCode,
+          backgroundImageKey,
+        }),
+      };
     }),
   create: protectedProcedure
     .meta({
@@ -422,17 +460,79 @@ export const boardRouter = createTRPCRouter({
         if (!isSlugUnique || input.type === "template")
           slug = `${slug}-${generateUID()}`;
 
-        const result = await boardRepo.createFromSnapshot(ctx.db, {
-          source: sourceBoard,
-          workspaceId: workspace.id,
-          createdBy: userId,
-          slug,
-          name: input.name,
-          type: input.type ?? "regular",
-          sourceBoardId: sourceBoardInfo.id,
-        });
+        const targetBoardPublicId = generateUID();
+        let targetBackgroundImageKey: string | null = null;
+        let backgroundWasCloned = false;
 
-        return result;
+        try {
+          if (sourceBoard.backgroundImageKey) {
+            const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+            if (!bucket)
+              throw new TRPCError({
+                message: "Attachments bucket not configured",
+                code: "INTERNAL_SERVER_ERROR",
+              });
+
+            const sourceFilename =
+              sourceBoard.backgroundImageKey.split("/").at(-1) ?? "background";
+            const sanitizedFilename =
+              sourceFilename.replace(/[^a-zA-Z0-9._-]/g, "_").slice(-200) ||
+              "background";
+            targetBackgroundImageKey = `${workspace.publicId}/board-backgrounds/${targetBoardPublicId}/${sanitizedFilename}`;
+
+            await cloneBoardBackgroundObjects({
+              bucket,
+              sourceKey: sourceBoard.backgroundImageKey,
+              targetBoardPublicId,
+              targetKey: targetBackgroundImageKey,
+            });
+            backgroundWasCloned = true;
+          }
+
+          return await boardRepo.createFromSnapshot(ctx.db, {
+            source: sourceBoard,
+            workspaceId: workspace.id,
+            createdBy: userId,
+            publicId: targetBoardPublicId,
+            backgroundColourCode: sourceBoard.backgroundImageKey
+              ? null
+              : sourceBoard.backgroundColourCode,
+            backgroundImageKey: targetBackgroundImageKey,
+            slug,
+            name: input.name,
+            type: input.type ?? "regular",
+            sourceBoardId: sourceBoardInfo.id,
+          });
+        } catch (error) {
+          if (targetBackgroundImageKey && backgroundWasCloned) {
+            const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+            if (bucket) {
+              const deletions = await deleteBoardBackgroundObjects({
+                bucket,
+                boardPublicId: targetBoardPublicId,
+                s3Key: targetBackgroundImageKey,
+              });
+              deletions.forEach(({ key, result: deletion }) => {
+                if (deletion?.status === "rejected")
+                  logger.warn(
+                    {
+                      err: deletion.reason,
+                      key,
+                      boardPublicId: targetBoardPublicId,
+                    },
+                    "Failed to roll back copied board background object",
+                  );
+              });
+            }
+          }
+
+          if (error instanceof TRPCError) throw error;
+          throw new TRPCError({
+            message: "Failed to create board from source",
+            code: "INTERNAL_SERVER_ERROR",
+            cause: error,
+          });
+        }
       }
 
       // Otherwise, create a new board with provided lists and labels
@@ -511,6 +611,15 @@ export const boardRouter = createTRPCRouter({
         visibility: z.enum(["public", "private"]).optional(),
         favorite: z.boolean().optional(),
         isArchived: z.boolean().optional(),
+        background: z
+          .union([
+            z.null(),
+            z.object({
+              kind: z.literal("colour"),
+              colourCode: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
+            }),
+          ])
+          .optional(),
       }),
     )
     .output(boardUpdateResponseSchema)
@@ -553,7 +662,12 @@ export const boardRouter = createTRPCRouter({
       }
 
       // Handle other updates (name, slug, visibility)
-      const hasOtherUpdates = input.name || input.slug || input.visibility !== undefined || input.isArchived !== undefined;
+      const hasOtherUpdates =
+        input.name !== undefined ||
+        input.slug !== undefined ||
+        input.visibility !== undefined ||
+        input.isArchived !== undefined ||
+        input.background !== undefined;
 
       if (!hasOtherUpdates) {
         // Only favorite was updated, return success
@@ -581,6 +695,10 @@ export const boardRouter = createTRPCRouter({
         boardPublicId: input.boardPublicId,
         visibility: input.visibility,
         isArchived: input.isArchived,
+        background:
+          input.background?.kind === "colour"
+            ? { kind: "colour", colourCode: input.background.colourCode }
+            : input.background,
       });
 
       if (!result)
@@ -588,6 +706,28 @@ export const boardRouter = createTRPCRouter({
           message: `Failed to update board`,
           code: "INTERNAL_SERVER_ERROR",
         });
+
+      if (input.background !== undefined && board.backgroundImageKey) {
+        const bucket = process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+        if (bucket) {
+          const deletions = await deleteBoardBackgroundObjects({
+            bucket,
+            boardPublicId: input.boardPublicId,
+            s3Key: board.backgroundImageKey,
+          });
+          deletions.forEach(({ key, result: deletion }) => {
+            if (deletion?.status === "rejected")
+              logger.warn(
+                {
+                  err: deletion.reason,
+                  key,
+                  boardPublicId: input.boardPublicId,
+                },
+                "Failed to delete replaced board background object",
+              );
+          });
+        }
+      }
 
       return result;
     }),
