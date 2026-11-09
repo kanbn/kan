@@ -1,0 +1,48 @@
+{
+  "name": "@kan/api-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "pnpm with-env node --watch --import @swc-node/register/esm-register src/main.ts",
+    "start": "pnpm with-env node --import @swc-node/register/esm-register src/main.ts",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "openapi": "node --import @swc-node/register/esm-register src/openapi.generate.ts",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "with-env": "dotenv -e ../../.env --",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@kan/auth": "workspace:*",
+    "@kan/db": "workspace:*",
+    "@kan/logger": "workspace:^",
+    "@nestjs/common": "^11.2.7",
+    "@nestjs/core": "^11.2.7",
+    "@nestjs/platform-express": "^11.2.7",
+    "@nestjs/swagger": "^11.4.7",
+    "nestjs-zod": "^5.5.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@kan/eslint-config": "workspace:*",
+    "@kan/prettier-config": "workspace:*",
+    "@kan/tsconfig": "workspace:*",
+    "@nestjs/testing": "^11.2.7",
+    "@swc-node/register": "^1.12.1",
+    "@swc/core": "^1.16.13",
+    "@types/express": "^5.0.6",
+    "dotenv-cli": "^7.4.4",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:",
+    "unplugin-swc": "^2.0.0",
+    "vitest": "^3.0.0"
+  },
+  "prettier": "@kan/prettier-config"
+}
