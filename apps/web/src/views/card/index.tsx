@@ -280,13 +280,26 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     },
   });
 
-  const { register, handleSubmit, setValue, watch } = useForm<FormValues>({
-    values: {
+  const { register, handleSubmit, setValue, watch, reset } =
+    useForm<FormValues>({
+      values: {
+        cardId: cardId ?? "",
+        title: card?.title ?? "",
+        description: card?.description ?? "",
+      },
+      // keepDirtyValues: a card.byId refetch shouldn't overwrite a field still being edited.
+      resetOptions: { keepDirtyValues: true },
+    });
+
+  // Force a clean reset on card switch, since keepDirtyValues would otherwise carry a dirty field over.
+  useEffect(() => {
+    reset({
       cardId: cardId ?? "",
       title: card?.title ?? "",
       description: card?.description ?? "",
-    },
-  });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cardId]);
 
   const onSubmit = (values: FormValues) => {
     updateCard.mutate({
@@ -461,7 +474,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                           content={card.description}
                           onChange={
                             canEdit
-                              ? (e) => setValue("description", e)
+                              ? (e) =>
+                                  setValue("description", e, {
+                                    shouldDirty: true,
+                                  })
                               : undefined
                           }
                           onBlur={
