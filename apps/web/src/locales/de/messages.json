@@ -32,7 +32,7 @@
     "comments": [],
     "origin": [
       ["src/views/boards/index.tsx", 58],
-      ["src/views/card/index.tsx", 348]
+      ["src/views/card/index.tsx", 361]
     ],
     "translation": "{0} | {1}"
   },
@@ -254,7 +254,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 504],
+      ["src/views/card/index.tsx", 520],
       ["src/views/public/board/CardModal.tsx", 211]
     ],
     "translation": "Aktivität"
@@ -999,7 +999,7 @@
     "origin": [
       ["src/views/board/index.tsx", 858],
       ["src/views/board/members/index.tsx", 209],
-      ["src/views/card/index.tsx", 348],
+      ["src/views/card/index.tsx", 361],
       ["src/views/public/board/index.tsx", 125]
     ],
     "translation": "Board"
@@ -1493,7 +1493,7 @@
     "message": "Card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/index.tsx", 348]],
+    "origin": [["src/views/card/index.tsx", 361]],
     "translation": "Karte"
   },
   "sU2uWc": {
@@ -1525,8 +1525,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 411],
-      ["src/views/card/index.tsx", 448]
+      ["src/views/card/index.tsx", 424],
+      ["src/views/card/index.tsx", 461]
     ],
     "translation": "Karte nicht gefunden"
   },
@@ -1710,7 +1710,7 @@
     "comments": [],
     "origin": [
       ["src/components/Dashboard.tsx", 281],
-      ["src/views/card/index.tsx", 402],
+      ["src/views/card/index.tsx", 415],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 175],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
     ],
