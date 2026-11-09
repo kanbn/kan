@@ -97,6 +97,9 @@ importers:
       nestjs-zod:
         specifier: ^5.5.0
         version: 5.6.0(@nestjs/common@11.2.9(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/swagger@11.4.8(@nestjs/common@11.2.9(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.2.9)(reflect-metadata@0.2.2))(rxjs@7.8.2)(zod@3.25.76)
+      rate-limiter-flexible:
+        specifier: ^9.0.1
+        version: 9.0.1
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
