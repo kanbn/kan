@@ -69,6 +69,18 @@ export const initAuth = (db: dbClient) => {
     hooks: createMiddlewareHooks(db),
     advanced: {
       cookiePrefix: "kan",
+      ...(env("BETTER_AUTH_COOKIE_DOMAIN")
+        ? {
+            crossSubDomainCookies: {
+              enabled: true,
+              domain: env("BETTER_AUTH_COOKIE_DOMAIN"),
+            },
+            defaultCookieAttributes: {
+              sameSite: "lax" as const,
+              secure: true,
+            },
+          }
+        : {}),
       database: {
         generateId: false,
       },
