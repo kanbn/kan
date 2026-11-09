@@ -280,13 +280,31 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     },
   });
 
-  const { register, handleSubmit, setValue, watch } = useForm<FormValues>({
-    values: {
+  const { register, handleSubmit, setValue, watch, reset } =
+    useForm<FormValues>({
+      values: {
+        cardId: cardId ?? "",
+        title: card?.title ?? "",
+        description: card?.description ?? "",
+      },
+      // Every card mutation (title, description, labels, due date, etc.)
+      // invalidates card.byId, which re-triggers the `values` sync above.
+      // keepDirtyValues stops that resync from overwriting a field the user
+      // is still editing with the server's now-stale value.
+      resetOptions: { keepDirtyValues: true },
+    });
+
+  // Dirty fields are kept across the resync above by design, so switching to
+  // a different card needs its own clean reset or a leftover edit from the
+  // previous card would carry over.
+  useEffect(() => {
+    reset({
       cardId: cardId ?? "",
       title: card?.title ?? "",
       description: card?.description ?? "",
-    },
-  });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cardId]);
 
   const onSubmit = (values: FormValues) => {
     updateCard.mutate({
@@ -461,7 +479,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                           content={card.description}
                           onChange={
                             canEdit
-                              ? (e) => setValue("description", e)
+                              ? (e) =>
+                                  setValue("description", e, {
+                                    shouldDirty: true,
+                                  })
                               : undefined
                           }
                           onBlur={
