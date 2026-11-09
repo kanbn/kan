@@ -28,7 +28,7 @@ async function bootstrap() {
     .getHttpAdapter()
     .get("/openapi.json", (_req, res: Response) => res.json(document));
 
-  const port = process.env.PORT ?? 4000;
+  const port = process.env.API_PORT ?? 4000;
   await app.listen(port);
   console.log(`🚀 API server running on http://localhost:${port}`);
 }

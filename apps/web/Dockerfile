@@ -141,7 +141,7 @@ FROM alpine AS api
 WORKDIR /app
 
 ENV NODE_ENV=production
-ENV PORT=4000
+ENV API_PORT=4000
 
 COPY --chown=node:node --from=deps /app/ ./
 COPY --chown=node:node --from=pruner /app/out/full/ .
