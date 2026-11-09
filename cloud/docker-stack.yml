@@ -39,10 +39,6 @@ services:
     image: ghcr.io/kanbn/kan-api:main
     env_file:
       - .env
-    environment:
-      # the shared .env's PORT is for the web service; pin api's own port so
-      # it doesn't inherit that value and mismatch its healthcheck/Traefik target
-      - PORT=4000
     stop_grace_period: 30s
     healthcheck:
       test:
