@@ -31,6 +31,7 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
   MIGRATE_IMAGE_NAME: ${{ github.repository }}-migrate
+  API_IMAGE_NAME: ${{ github.repository }}-api
 
 jobs:
   # Each architecture builds on its own native runner, so arm64 no longer runs
@@ -39,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [web, migrate]
+        target: [web, migrate, api]
         platform: [linux/amd64, linux/arm64]
     runs-on: ${{ matrix.platform == 'linux/arm64' && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     permissions:
@@ -57,7 +58,11 @@ jobs:
 
       - name: Name the image and platform
         run: |
-          if [[ "$TARGET" == "web" ]]; then IMAGE="$REGISTRY/$IMAGE_NAME"; else IMAGE="$REGISTRY/$MIGRATE_IMAGE_NAME"; fi
+          case "$TARGET" in
+            web) IMAGE="$REGISTRY/$IMAGE_NAME" ;;
+            migrate) IMAGE="$REGISTRY/$MIGRATE_IMAGE_NAME" ;;
+            api) IMAGE="$REGISTRY/$API_IMAGE_NAME" ;;
+          esac
           echo "IMAGE=${IMAGE,,}" >> "$GITHUB_ENV"
           echo "ARCH=${PLATFORM#linux/}" >> "$GITHUB_ENV"
         env:
@@ -164,7 +169,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        target: [web, migrate]
+        target: [web, migrate, api]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -176,7 +181,11 @@ jobs:
     steps:
       - name: Name the image
         run: |
-          if [[ "$TARGET" == "web" ]]; then IMAGE="$REGISTRY/$IMAGE_NAME"; else IMAGE="$REGISTRY/$MIGRATE_IMAGE_NAME"; fi
+          case "$TARGET" in
+            web) IMAGE="$REGISTRY/$IMAGE_NAME" ;;
+            migrate) IMAGE="$REGISTRY/$MIGRATE_IMAGE_NAME" ;;
+            api) IMAGE="$REGISTRY/$API_IMAGE_NAME" ;;
+          esac
           echo "IMAGE=${IMAGE,,}" >> "$GITHUB_ENV"
         env:
           TARGET: ${{ matrix.target }}

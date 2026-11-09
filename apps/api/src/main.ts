@@ -5,7 +5,7 @@ import { NestFactory } from "@nestjs/core";
 import { ZodValidationPipe } from "nestjs-zod";
 
 import { AppModule } from "./app.module.js";
-import { writeOpenApiDocuments } from "./openapi.js";
+import { buildOpenApiDocument } from "./openapi.js";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -21,8 +21,9 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ZodValidationPipe());
 
-  const document = writeOpenApiDocuments(app);
-  console.log("📄 OpenAPI spec written to openapi.json");
+  // Served from memory, not disk — openapi.json on disk is produced by the
+  // dedicated `pnpm openapi` script (see openapi.generate.ts), not on boot.
+  const document = buildOpenApiDocument(app);
   app
     .getHttpAdapter()
     .get("/openapi.json", (_req, res: Response) => res.json(document));
