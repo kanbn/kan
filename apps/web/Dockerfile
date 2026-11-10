@@ -26,12 +26,24 @@ RUN apk update && \
 # ============================================
 # Stage 2: Prune the monorepo
 # ============================================
+# Scoped to web alone: apps/api gets its own prune/deps pair below so its
+# image doesn't carry web's node_modules (Next.js, Tiptap, Stripe UI, etc).
 FROM alpine AS pruner
 
 WORKDIR /app
 COPY . .
 
-RUN turbo prune --scope=@kan/web --scope=@kan/api-server --scope=@kan/db --docker
+RUN turbo prune --scope=@kan/web --scope=@kan/db --docker
+
+# ============================================
+# Stage 2b: Prune the monorepo for the api image
+# ============================================
+FROM alpine AS pruner-api
+
+WORKDIR /app
+COPY . .
+
+RUN turbo prune --scope=@kan/api-server --scope=@kan/db --docker
 
 # ============================================
 # Stage 3: Install dependencies
@@ -46,6 +58,39 @@ COPY --from=pruner /app/out/json/ .
 ENV CI=true
 RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store,sharing=locked \
     pnpm install --frozen-lockfile
+
+# ============================================
+# Stage 3b: Install dependencies for the api image
+# ============================================
+# --prod: apps/api has no dist build (see Stage 7) and runs its TS source
+# directly via @swc-node/register at container boot, so that loader,
+# @swc/core and @kan/tsconfig (for the tsconfig.json it reads at startup)
+# are real `dependencies`, not devDependencies — they survive --prod.
+FROM alpine AS deps-api
+WORKDIR /app
+
+COPY --from=pruner-api /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=pruner-api /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
+COPY --from=pruner-api /app/out/json/ .
+
+ENV CI=true
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store,sharing=locked \
+    pnpm install --frozen-lockfile --prod && \
+    # --prod doesn't exclude workspace-linked devDependencies, so
+    # @kan/eslint-config/@kan/prettier-config still install, pulling in
+    # eslint/typescript-eslint/babel/playwright-core as real deps — none
+    # imported by apps/api (plain `prettier` stays: @react-email/render, a
+    # real dep via @kan/email, needs it at runtime). better-auth's Next.js
+    # integration is an unused optional peer that still pulls in next, its
+    # per-platform @next/swc binaries, and sharp.
+    rm -rf node_modules/next node_modules/@next node_modules/sharp node_modules/@img \
+           node_modules/eslint node_modules/@eslint-community \
+           node_modules/typescript-eslint node_modules/@typescript-eslint \
+           node_modules/@kan/eslint-config node_modules/@kan/prettier-config \
+           node_modules/prettier-plugin-tailwindcss \
+           node_modules/@ianvs node_modules/@babel \
+           node_modules/playwright-core node_modules/es-abstract \
+           node_modules/turbo-linux-64 node_modules/turbo-linux-arm64
 
 # ============================================
 # Stage 4: Build the web application
@@ -143,8 +188,8 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV API_PORT=4000
 
-COPY --chown=node:node --from=deps /app/ ./
-COPY --chown=node:node --from=pruner /app/out/full/ .
+COPY --chown=node:node --from=deps-api /app/ ./
+COPY --chown=node:node --from=pruner-api /app/out/full/ .
 
 USER node
 WORKDIR /app/apps/api

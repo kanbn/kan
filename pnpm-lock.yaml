@@ -85,6 +85,9 @@ importers:
       '@kan/logger':
         specifier: workspace:^
         version: link:../../packages/logger
+      '@kan/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
       '@modelcontextprotocol/sdk':
         specifier: ^1.11.0
         version: 1.32.2(zod@4.6.7)
@@ -103,6 +106,12 @@ importers:
       '@rekog/mcp-nest':
         specifier: ^1.9.11
         version: 1.9.11(@modelcontextprotocol/sdk@1.32.2(zod@4.6.7))(@nestjs/common@11.2.9(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.2.9)(@nestjs/jwt@11.0.2(@nestjs/common@11.2.9(reflect-metadata@0.2.2)(rxjs@7.8.2)))(@nestjs/passport@11.0.5(@nestjs/common@11.2.9(reflect-metadata@0.2.2)(rxjs@7.8.2))(passport@0.7.0))(express@5.2.1)(reflect-metadata@0.2.2)(zod@4.6.7)
+      '@swc-node/register':
+        specifier: ^1.12.1
+        version: 1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.17))(@swc/types@0.1.28)(typescript@5.9.2)
+      '@swc/core':
+        specifier: ^1.16.13
+        version: 1.16.22(@swc/helpers@0.5.17)
       '@trpc/server':
         specifier: 'catalog:'
         version: 11.5.0(typescript@5.9.2)
@@ -128,18 +137,9 @@ importers:
       '@kan/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@kan/tsconfig':
-        specifier: workspace:*
-        version: link:../../tooling/typescript
       '@nestjs/testing':
         specifier: ^11.2.7
         version: 11.2.9(@nestjs/common@11.2.9(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.2.9)(@nestjs/platform-express@11.2.9)
-      '@swc-node/register':
-        specifier: ^1.12.1
-        version: 1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.17))(@swc/types@0.1.28)(typescript@5.9.2)
-      '@swc/core':
-        specifier: ^1.16.13
-        version: 1.16.22(@swc/helpers@0.5.17)
       '@types/express':
         specifier: ^5.0.6
         version: 5.0.6
@@ -500,31 +500,31 @@ importers:
       '@better-auth/stripe':
         specifier: ^1.4.6
         version: 1.4.6(@better-auth/core@1.4.6(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.18)(better-call@1.1.5(zod@4.6.7))(jose@6.1.3)(kysely@0.28.8)(nanostores@1.1.0))(better-auth@1.4.6(next@16.0.8(@playwright/test@1.62.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(stripe@18.5.0(@types/node@25.0.0))
-      '@kan/logger':
-        specifier: workspace:^
-        version: link:../logger
-      better-auth:
-        specifier: ^1.4.6
-        version: 1.4.6(next@16.0.8(@playwright/test@1.62.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-    devDependencies:
       '@kan/db':
         specifier: workspace:*
         version: link:../db
       '@kan/email':
         specifier: workspace:*
         version: link:../email
-      '@kan/eslint-config':
-        specifier: workspace:*
-        version: link:../../tooling/eslint
-      '@kan/prettier-config':
-        specifier: workspace:*
-        version: link:../../tooling/prettier
+      '@kan/logger':
+        specifier: workspace:^
+        version: link:../logger
       '@kan/shared':
         specifier: workspace:*
         version: link:../shared
       '@kan/stripe':
         specifier: workspace:*
         version: link:../stripe
+      better-auth:
+        specifier: ^1.4.6
+        version: 1.4.6(next@16.0.8(@playwright/test@1.62.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    devDependencies:
+      '@kan/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@kan/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
       '@kan/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
