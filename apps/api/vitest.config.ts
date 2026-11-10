@@ -14,5 +14,10 @@ export default defineConfig({
   test: {
     include: ["src/**/*.spec.ts"],
     globals: true,
+    // @kan/db falls back to a single on-disk PGLite instance (./pgdata) when
+    // POSTGRES_URL is unset; concurrent workers race to open/migrate it,
+    // crashing the WASM runtime. One fork serializes every spec file.
+    pool: "forks",
+    poolOptions: { forks: { singleFork: true } },
   },
 });

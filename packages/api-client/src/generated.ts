@@ -6,12 +6,20 @@
  * OpenAPI spec version: 1.0.0
  */
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
   QueryClient,
+  QueryFunction,
+  QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
   UseMutationResult,
+  UseQueryOptions,
+  UseQueryResult,
 } from "@tanstack/react-query";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { customFetch } from "./mutator/custom-fetch";
 
@@ -26,7 +34,47 @@ export interface CreateFeedbackResponseDto {
   success: boolean;
 }
 
+export interface CreateListDto {
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 12 */
+  boardPublicId: string;
+}
+
+export interface ListResponseDto {
+  publicId: string;
+  name: string;
+}
+
+export interface DeleteListResponseDto {
+  success: boolean;
+}
+
+export interface UpdateListDto {
+  /** @minLength 1 */
+  name?: string;
+  index?: number;
+}
+
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
+
+const withQueryKey = <T extends object, K>(
+  query: T,
+  queryKey: K,
+): T & { queryKey: K } => {
+  const result = { queryKey } as T & { queryKey: K };
+  for (const key of Object.keys(query)) {
+    // The explicit queryKey always wins, matching the previous
+    // `{ ...query, queryKey }` spread where it was set last.
+    if (key === "queryKey") continue;
+    Object.defineProperty(result, key, {
+      enumerable: true,
+      configurable: true,
+      get: () => (query as Record<string, unknown>)[key],
+    });
+  }
+  return result;
+};
 
 export type createFeedbackResponse201 = {
   data: CreateFeedbackResponseDto;
@@ -148,4 +196,719 @@ export const useCreateFeedback = <TError = unknown, TContext = unknown>(
   TContext
 > => {
   return useMutation(getCreateFeedbackMutationOptions(options), queryClient);
+};
+
+export type createListResponse201 = {
+  data: ListResponseDto;
+  status: 201;
+};
+
+export type createListResponseSuccess = createListResponse201 & {
+  headers: Headers;
+};
+export type createListResponse = createListResponseSuccess;
+
+export const getCreateListUrl = () => {
+  return `/lists`;
+};
+
+/**
+ * @summary Create a list
+ */
+export const createList = async (
+  createListDto: CreateListDto,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<createListResponse> => {
+  const getHeaders = (
+    h?: NonNullable<RequestInit["headers"]>,
+  ): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(
+          h as Iterable<Iterable<string>>,
+          (entry) => Array.from(entry) as [string, string],
+        ),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<
+      string | readonly string[] | undefined
+    >(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+  return customFetch<createListResponse>(getCreateListUrl(), {
+    credentials: "include",
+    ...options,
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...getHeaders(options?.headers),
+    },
+    body: JSON.stringify(createListDto),
+  });
+};
+
+export const getCreateListMutationKey = () => ["createList"] as const;
+
+export const getCreateListMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createList>>,
+    TError,
+    CreateListMutationVariables,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createList>>,
+  TError,
+  CreateListMutationVariables,
+  TContext
+> => {
+  const mutationKey = getCreateListMutationKey();
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createList>>,
+    CreateListMutationVariables
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createList(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateListMutationResult = NonNullable<
+  Awaited<ReturnType<typeof createList>>
+>;
+export type CreateListMutationBody = CreateListDto;
+export type CreateListMutationError = unknown;
+export type CreateListMutationVariables = { data: CreateListDto };
+
+/** @summary Create a list */
+export const useCreateList = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof createList>>,
+      TError,
+      CreateListMutationVariables,
+      TContext
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof createList>>,
+  TError,
+  CreateListMutationVariables,
+  TContext
+> => {
+  return useMutation(getCreateListMutationOptions(options), queryClient);
+};
+
+export type deleteListResponse200 = {
+  data: DeleteListResponseDto;
+  status: 200;
+};
+
+export type deleteListResponseSuccess = deleteListResponse200 & {
+  headers: Headers;
+};
+export type deleteListResponse = deleteListResponseSuccess;
+
+export const getDeleteListUrl = (listPublicId: string) => {
+  return `/lists/${listPublicId}`;
+};
+
+/**
+ * @summary Delete a list
+ */
+export const deleteList = async (
+  listPublicId: string,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<deleteListResponse> => {
+  return customFetch<deleteListResponse>(getDeleteListUrl(listPublicId), {
+    credentials: "include",
+    ...options,
+    method: "DELETE",
+  });
+};
+
+export const getDeleteListMutationKey = () => ["deleteList"] as const;
+
+export const getDeleteListMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteList>>,
+    TError,
+    DeleteListMutationVariables,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteList>>,
+  TError,
+  DeleteListMutationVariables,
+  TContext
+> => {
+  const mutationKey = getDeleteListMutationKey();
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteList>>,
+    DeleteListMutationVariables
+  > = (props) => {
+    const { listPublicId } = props ?? {};
+
+    return deleteList(listPublicId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type DeleteListMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteList>>
+>;
+
+export type DeleteListMutationError = unknown;
+export type DeleteListMutationVariables = { listPublicId: string };
+
+/** @summary Delete a list */
+export const useDeleteList = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof deleteList>>,
+      TError,
+      DeleteListMutationVariables,
+      TContext
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof deleteList>>,
+  TError,
+  DeleteListMutationVariables,
+  TContext
+> => {
+  return useMutation(getDeleteListMutationOptions(options), queryClient);
+};
+
+export type updateListResponse200 = {
+  data: ListResponseDto;
+  status: 200;
+};
+
+export type updateListResponseSuccess = updateListResponse200 & {
+  headers: Headers;
+};
+export type updateListResponse = updateListResponseSuccess;
+
+export const getUpdateListUrl = (listPublicId: string) => {
+  return `/lists/${listPublicId}`;
+};
+
+/**
+ * @summary Update a list
+ */
+export const updateList = async (
+  listPublicId: string,
+  updateListDto: UpdateListDto,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<updateListResponse> => {
+  const getHeaders = (
+    h?: NonNullable<RequestInit["headers"]>,
+  ): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(
+          h as Iterable<Iterable<string>>,
+          (entry) => Array.from(entry) as [string, string],
+        ),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<
+      string | readonly string[] | undefined
+    >(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+  return customFetch<updateListResponse>(getUpdateListUrl(listPublicId), {
+    credentials: "include",
+    ...options,
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      ...getHeaders(options?.headers),
+    },
+    body: JSON.stringify(updateListDto),
+  });
+};
+
+export const getUpdateListMutationKey = () => ["updateList"] as const;
+
+export const getUpdateListMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateList>>,
+    TError,
+    UpdateListMutationVariables,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof updateList>>,
+  TError,
+  UpdateListMutationVariables,
+  TContext
+> => {
+  const mutationKey = getUpdateListMutationKey();
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof updateList>>,
+    UpdateListMutationVariables
+  > = (props) => {
+    const { listPublicId, data } = props ?? {};
+
+    return updateList(listPublicId, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type UpdateListMutationResult = NonNullable<
+  Awaited<ReturnType<typeof updateList>>
+>;
+export type UpdateListMutationBody = UpdateListDto;
+export type UpdateListMutationError = unknown;
+export type UpdateListMutationVariables = {
+  listPublicId: string;
+  data: UpdateListDto;
+};
+
+/** @summary Update a list */
+export const useUpdateList = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof updateList>>,
+      TError,
+      UpdateListMutationVariables,
+      TContext
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof updateList>>,
+  TError,
+  UpdateListMutationVariables,
+  TContext
+> => {
+  return useMutation(getUpdateListMutationOptions(options), queryClient);
+};
+
+export type streamableHttpControllerHandlePostRequestResponse201 = {
+  data: void;
+  status: 201;
+};
+
+export type streamableHttpControllerHandlePostRequestResponseSuccess =
+  streamableHttpControllerHandlePostRequestResponse201 & {
+    headers: Headers;
+  };
+export type streamableHttpControllerHandlePostRequestResponse =
+  streamableHttpControllerHandlePostRequestResponseSuccess;
+
+export const getStreamableHttpControllerHandlePostRequestUrl = () => {
+  return `/mcp`;
+};
+
+export const streamableHttpControllerHandlePostRequest = async (
+  options?: Parameters<typeof customFetch>[1],
+): Promise<streamableHttpControllerHandlePostRequestResponse> => {
+  return customFetch<streamableHttpControllerHandlePostRequestResponse>(
+    getStreamableHttpControllerHandlePostRequestUrl(),
+    {
+      credentials: "include",
+      ...options,
+      method: "POST",
+    },
+  );
+};
+
+export const getStreamableHttpControllerHandlePostRequestMutationKey = () =>
+  ["streamableHttpControllerHandlePostRequest"] as const;
+
+export const getStreamableHttpControllerHandlePostRequestMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof streamableHttpControllerHandlePostRequest>>,
+    TError,
+    void,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof streamableHttpControllerHandlePostRequest>>,
+  TError,
+  void,
+  TContext
+> => {
+  const mutationKey = getStreamableHttpControllerHandlePostRequestMutationKey();
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof streamableHttpControllerHandlePostRequest>>,
+    void
+  > = () => {
+    return streamableHttpControllerHandlePostRequest(requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type StreamableHttpControllerHandlePostRequestMutationResult =
+  NonNullable<
+    Awaited<ReturnType<typeof streamableHttpControllerHandlePostRequest>>
+  >;
+
+export type StreamableHttpControllerHandlePostRequestMutationError = unknown;
+
+export const useStreamableHttpControllerHandlePostRequest = <
+  TError = unknown,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof streamableHttpControllerHandlePostRequest>>,
+      TError,
+      void,
+      TContext
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof streamableHttpControllerHandlePostRequest>>,
+  TError,
+  void,
+  TContext
+> => {
+  return useMutation(
+    getStreamableHttpControllerHandlePostRequestMutationOptions(options),
+    queryClient,
+  );
+};
+
+export type streamableHttpControllerHandleGetRequestResponse200 = {
+  data: void;
+  status: 200;
+};
+
+export type streamableHttpControllerHandleGetRequestResponseSuccess =
+  streamableHttpControllerHandleGetRequestResponse200 & {
+    headers: Headers;
+  };
+export type streamableHttpControllerHandleGetRequestResponse =
+  streamableHttpControllerHandleGetRequestResponseSuccess;
+
+export const getStreamableHttpControllerHandleGetRequestUrl = () => {
+  return `/mcp`;
+};
+
+export const streamableHttpControllerHandleGetRequest = async (
+  options?: Parameters<typeof customFetch>[1],
+): Promise<streamableHttpControllerHandleGetRequestResponse> => {
+  return customFetch<streamableHttpControllerHandleGetRequestResponse>(
+    getStreamableHttpControllerHandleGetRequestUrl(),
+    {
+      credentials: "include",
+      ...options,
+      method: "GET",
+    },
+  );
+};
+
+export const getStreamableHttpControllerHandleGetRequestQueryKey = () => {
+  return [`/mcp`] as const;
+};
+
+export const getStreamableHttpControllerHandleGetRequestQueryOptions = <
+  TData = Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseQueryOptions<
+      Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ??
+    getStreamableHttpControllerHandleGetRequestQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>
+  > = ({ signal }) =>
+    streamableHttpControllerHandleGetRequest({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type StreamableHttpControllerHandleGetRequestQueryResult = NonNullable<
+  Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>
+>;
+export type StreamableHttpControllerHandleGetRequestQueryError = unknown;
+
+export function useStreamableHttpControllerHandleGetRequest<
+  TData = Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>,
+  TError = unknown,
+>(
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>,
+          TError,
+          Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>
+        >,
+        "initialData"
+      >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useStreamableHttpControllerHandleGetRequest<
+  TData = Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>,
+  TError = unknown,
+>(
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>,
+          TError,
+          Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>
+        >,
+        "initialData"
+      >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useStreamableHttpControllerHandleGetRequest<
+  TData = Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>,
+  TError = unknown,
+>(
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+export function useStreamableHttpControllerHandleGetRequest<
+  TData = Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>,
+  TError = unknown,
+>(
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof streamableHttpControllerHandleGetRequest>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions =
+    getStreamableHttpControllerHandleGetRequestQueryOptions(options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+export type streamableHttpControllerHandleDeleteRequestResponse200 = {
+  data: void;
+  status: 200;
+};
+
+export type streamableHttpControllerHandleDeleteRequestResponseSuccess =
+  streamableHttpControllerHandleDeleteRequestResponse200 & {
+    headers: Headers;
+  };
+export type streamableHttpControllerHandleDeleteRequestResponse =
+  streamableHttpControllerHandleDeleteRequestResponseSuccess;
+
+export const getStreamableHttpControllerHandleDeleteRequestUrl = () => {
+  return `/mcp`;
+};
+
+export const streamableHttpControllerHandleDeleteRequest = async (
+  options?: Parameters<typeof customFetch>[1],
+): Promise<streamableHttpControllerHandleDeleteRequestResponse> => {
+  return customFetch<streamableHttpControllerHandleDeleteRequestResponse>(
+    getStreamableHttpControllerHandleDeleteRequestUrl(),
+    {
+      credentials: "include",
+      ...options,
+      method: "DELETE",
+    },
+  );
+};
+
+export const getStreamableHttpControllerHandleDeleteRequestMutationKey = () =>
+  ["streamableHttpControllerHandleDeleteRequest"] as const;
+
+export const getStreamableHttpControllerHandleDeleteRequestMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof streamableHttpControllerHandleDeleteRequest>>,
+    TError,
+    void,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof streamableHttpControllerHandleDeleteRequest>>,
+  TError,
+  void,
+  TContext
+> => {
+  const mutationKey =
+    getStreamableHttpControllerHandleDeleteRequestMutationKey();
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof streamableHttpControllerHandleDeleteRequest>>,
+    void
+  > = () => {
+    return streamableHttpControllerHandleDeleteRequest(requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type StreamableHttpControllerHandleDeleteRequestMutationResult =
+  NonNullable<
+    Awaited<ReturnType<typeof streamableHttpControllerHandleDeleteRequest>>
+  >;
+
+export type StreamableHttpControllerHandleDeleteRequestMutationError = unknown;
+
+export const useStreamableHttpControllerHandleDeleteRequest = <
+  TError = unknown,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof streamableHttpControllerHandleDeleteRequest>>,
+      TError,
+      void,
+      TContext
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof streamableHttpControllerHandleDeleteRequest>>,
+  TError,
+  void,
+  TContext
+> => {
+  return useMutation(
+    getStreamableHttpControllerHandleDeleteRequestMutationOptions(options),
+    queryClient,
+  );
 };

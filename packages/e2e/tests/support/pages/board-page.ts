@@ -1,7 +1,11 @@
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 
-import { waitForTrpcMutation, waitForTrpcQuery } from "../wait-for-trpc";
+import {
+  waitForResponsePath,
+  waitForTrpcMutation,
+  waitForTrpcQuery,
+} from "../wait-for-trpc";
 
 export class BoardPage {
   constructor(private readonly page: Page) {}
@@ -29,7 +33,7 @@ export class BoardPage {
   async createList(name: string) {
     await this.page.getByRole("button", { name: "New list" }).click();
     await this.page.getByPlaceholder("List name").fill(name);
-    const created = waitForTrpcMutation(this.page, "list.create");
+    const created = waitForResponsePath(this.page, "/lists");
     await this.page.getByRole("button", { name: "Create list" }).click();
     await this.page
       .getByRole("heading", { name: "New list" })

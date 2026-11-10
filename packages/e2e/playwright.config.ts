@@ -108,6 +108,9 @@ const { port, env: modeEnv } = modeConfig[mode];
 const remoteBaseURL = process.env.PLAYWRIGHT_BASE_URL;
 const baseURL = remoteBaseURL ?? `http://localhost:${port}`;
 
+const apiPort = process.env.API_E2E_PORT ?? "4100";
+const apiBaseURL = `http://localhost:${apiPort}`;
+
 export default defineConfig({
   globalSetup: "./tests/support/global-setup.ts",
   fullyParallel: true,
@@ -158,6 +161,14 @@ export default defineConfig({
           },
         },
         {
+          command: "pnpm --filter @kan/api-server start",
+          cwd: "../..",
+          url: `${apiBaseURL}/health`,
+          reuseExistingServer: !process.env.CI,
+          timeout: 60_000,
+          env: { API_PORT: apiPort, CORS_ORIGIN: baseURL },
+        },
+        {
           command: `pnpm --filter @kan/web build && pnpm --filter @kan/web with-env next start -p ${port}`,
           cwd: "../..",
           url: baseURL,
@@ -165,6 +176,7 @@ export default defineConfig({
           timeout: 180_000,
           env: {
             NEXT_PUBLIC_BASE_URL: baseURL,
+            NEXT_PUBLIC_API_BASE_URL: apiBaseURL,
             NEXT_PUBLIC_USE_STANDALONE_OUTPUT: "",
             ...sharedEnv,
             ...modeEnv,

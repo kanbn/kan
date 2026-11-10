@@ -5,7 +5,7 @@ import { BoardPage } from "../support/pages/board-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
 import { createTestUser } from "../support/test-user";
-import { waitForTrpcMutation } from "../support/wait-for-trpc";
+import { waitForResponsePath } from "../support/wait-for-trpc";
 
 test(
   "an optimistic list cannot be mutated before the server assigns its ID",
@@ -26,14 +26,14 @@ test(
     const listRequestGate = new Promise<void>((resolve) => {
       releaseListRequest = resolve;
     });
-    await page.route(/\/api\/trpc\/list\.create/, async (route) => {
+    await page.route(/\/lists$/, async (route) => {
       await listRequestGate;
       await route.continue();
     });
 
     await page.getByRole("button", { name: "New list" }).click();
     await page.getByPlaceholder("List name").fill("Delayed list");
-    const created = waitForTrpcMutation(page, "list.create");
+    const created = waitForResponsePath(page, "/lists");
     await page.getByRole("button", { name: "Create list" }).click();
 
     const listName = page.locator('input[aria-label="List name"][readonly]');

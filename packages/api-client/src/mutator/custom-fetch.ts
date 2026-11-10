@@ -9,9 +9,14 @@ export const customFetch = async <T>(
     ...options,
     credentials: "include",
   });
-  const data = await response.json().catch(() => undefined);
+  const isJson = response.headers
+    .get("content-type")
+    ?.includes("application/json");
+  const data = isJson
+    ? await response.json().catch(() => undefined)
+    : undefined;
 
-  if (!response.ok) {
+  if (!response.ok || !isJson) {
     const message =
       typeof data === "object" && data && "message" in data
         ? String((data as { message: unknown }).message)
