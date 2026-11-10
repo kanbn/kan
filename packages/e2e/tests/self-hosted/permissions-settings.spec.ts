@@ -1,6 +1,7 @@
 import type { Browser, Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import { AuthPage } from "../support/pages/auth-page";
 import { BoardPage } from "../support/pages/board-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
@@ -171,16 +172,9 @@ test(
       throw new Error("Could not resolve invited member's publicId");
 
     const boardMemberAddResponse = await page.request.post(
-      "/api/trpc/boardMember.add?batch=1",
+      `${apiBaseURL}/boards/${boardPublicId}/members`,
       {
-        data: {
-          "0": {
-            json: {
-              boardPublicId,
-              workspaceMemberPublicId: invitedMember.publicId,
-            },
-          },
-        },
+        data: { workspaceMemberPublicId: invitedMember.publicId },
       },
     );
     expect(boardMemberAddResponse.ok()).toBe(true);
