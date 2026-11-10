@@ -3,7 +3,9 @@ import { McpTransportType, McpModule as RekogMcpModule } from "@rekog/mcp-nest";
 
 import { AuthGuard } from "../../common/guards/auth.guard.js";
 import { FeedbackModule } from "../feedback/feedback.module.js";
+import { ListModule } from "../list/list.module.js";
 import { FeedbackTools } from "./tools/feedback.tools.js";
+import { ListTools } from "./tools/list.tools.js";
 
 const SERVER_NAME = "kan";
 
@@ -16,7 +18,8 @@ const SERVER_NAME = "kan";
       guards: [AuthGuard],
     }),
     FeedbackModule,
+    ListModule,
   ],
-  providers: [FeedbackTools],
+  providers: [FeedbackTools, ListTools],
 })
 export class McpModule {}
