@@ -795,7 +795,7 @@
     "message": "Are you sure you want to delete this label?",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/DeleteLabelConfirmation.tsx", 41]],
+    "origin": [["src/components/DeleteLabelConfirmation.tsx", 44]],
     "translation": "Êtes-vous sûr de vouloir supprimer cette étiquette ?"
   },
   "74F7N/": {
@@ -1461,7 +1461,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/DeleteLabelConfirmation.tsx", 49],
+      ["src/components/DeleteLabelConfirmation.tsx", 52],
       ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 176],
       ["src/views/board/components/CardContextDuplicateModal.tsx", 255],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 44],
@@ -2056,7 +2056,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/LabelForm.tsx", 208],
+      ["src/components/LabelForm.tsx", 217],
       ["src/views/board/components/NewCardForm.tsx", 662],
       ["src/views/board/components/NewListForm.tsx", 162]
     ],
@@ -2094,7 +2094,7 @@
     "message": "Create label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/LabelForm.tsx", 231]],
+    "origin": [["src/components/LabelForm.tsx", 240]],
     "translation": "Créer une étiquette"
   },
   "XTKtey": {
@@ -2346,8 +2346,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/DeleteLabelConfirmation.tsx", 51],
-      ["src/components/LabelForm.tsx", 223],
+      ["src/components/DeleteLabelConfirmation.tsx", 54],
+      ["src/components/LabelForm.tsx", 232],
       ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 52],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 47],
       ["src/views/card/components/DeleteCardConfirmation.tsx", 92],
@@ -2712,7 +2712,7 @@
     "message": "Edit label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/LabelForm.tsx", 114]],
+    "origin": [["src/components/LabelForm.tsx", 123]],
     "translation": "Modifier l'étiquette"
   },
   "TCOMOO": {
@@ -2956,7 +2956,7 @@
     "message": "Error deleting label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/DeleteLabelConfirmation.tsx", 25]],
+    "origin": [["src/components/DeleteLabelConfirmation.tsx", 27]],
     "translation": "Erreur lors de la suppression de l'étiquette"
   },
   "9s9O5h": {
@@ -4416,7 +4416,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/LabelForm.tsx", 130],
+      ["src/components/LabelForm.tsx", 139],
       ["src/views/board/components/NewTemplateForm.tsx", 118],
       ["src/views/boards/components/NewBoardForm.tsx", 134],
       ["src/views/settings/components/NewWebhookModal.tsx", 227],
@@ -4496,7 +4496,7 @@
     "message": "New label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/LabelForm.tsx", 114]],
+    "origin": [["src/components/LabelForm.tsx", 123]],
     "translation": "Nouvelle étiquette"
   },
   "Sb2gYF": {
@@ -5086,7 +5086,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/DeleteLabelConfirmation.tsx", 26],
+      ["src/components/DeleteLabelConfirmation.tsx", 28],
       ["src/components/FeedbackModal.tsx", 42],
       ["src/components/NewWorkspaceForm.tsx", 110],
       ["src/views/board/components/BoardDropdown.tsx", 80],
@@ -6512,7 +6512,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/DeleteLabelConfirmation.tsx", 44],
+      ["src/components/DeleteLabelConfirmation.tsx", 47],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 39],
       ["src/views/card/components/DeleteCardConfirmation.tsx", 78],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 59],
@@ -7238,7 +7238,7 @@
     "message": "Update label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/LabelForm.tsx", 231]],
+    "origin": [["src/components/LabelForm.tsx", 240]],
     "translation": "Mettre à jour l'étiquette"
   },
   "L5ZPjz": {

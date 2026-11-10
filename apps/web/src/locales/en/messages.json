@@ -1336,7 +1336,7 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        41
+        44
       ]
     ],
     "translation": "Are you sure you want to delete this label?"
@@ -2429,7 +2429,7 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        49
+        52
       ],
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
@@ -3447,7 +3447,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        208
+        217
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -3515,7 +3515,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        231
+        240
       ]
     ],
     "translation": "Create label"
@@ -3927,11 +3927,11 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        51
+        54
       ],
       [
         "src/components/LabelForm.tsx",
-        223
+        232
       ],
       [
         "src/components/YouTubeEmbed/YouTubeDropdown.tsx",
@@ -4584,7 +4584,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        114
+        123
       ]
     ],
     "translation": "Edit label"
@@ -4976,7 +4976,7 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        25
+        27
       ]
     ],
     "translation": "Error deleting label"
@@ -7445,7 +7445,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        130
+        139
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
@@ -7589,7 +7589,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        114
+        123
       ]
     ],
     "translation": "New label"
@@ -8561,7 +8561,7 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        26
+        28
       ],
       [
         "src/components/FeedbackModal.tsx",
@@ -11075,7 +11075,7 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        44
+        47
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
@@ -12282,7 +12282,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        231
+        240
       ]
     ],
     "translation": "Update label"
