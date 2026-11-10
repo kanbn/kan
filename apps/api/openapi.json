@@ -1,6 +1,185 @@
 {
   "openapi": "3.0.0",
   "paths": {
+    "/boards/{boardPublicId}/members": {
+      "get": {
+        "operationId": "getBoardMembers",
+        "parameters": [
+          {
+            "name": "boardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BoardMemberDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List a board's members",
+        "tags": [
+          "Board Members"
+        ]
+      },
+      "post": {
+        "operationId": "addBoardMember",
+        "parameters": [
+          {
+            "name": "boardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBoardMemberDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoardMemberRoleResultDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add a workspace member to a board",
+        "tags": [
+          "Board Members"
+        ]
+      }
+    },
+    "/boards/{boardPublicId}/members/{workspaceMemberPublicId}": {
+      "put": {
+        "operationId": "updateBoardMemberRole",
+        "parameters": [
+          {
+            "name": "boardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspaceMemberPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBoardMemberRoleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoardMemberRoleResultDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a board member's role",
+        "tags": [
+          "Board Members"
+        ]
+      },
+      "delete": {
+        "operationId": "removeBoardMember",
+        "parameters": [
+          {
+            "name": "boardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspaceMemberPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoardMemberRemoveResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Remove a member from a board",
+        "tags": [
+          "Board Members"
+        ]
+      }
+    },
     "/feedback": {
       "post": {
         "operationId": "createFeedback",
@@ -362,6 +541,136 @@
       }
     },
     "schemas": {
+      "BoardMemberDto": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "member"
+            ]
+          },
+          "workspaceRole": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "nullable": true
+              },
+              "name": {
+                "type": "string",
+                "nullable": true
+              },
+              "email": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string",
+                "nullable": true
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "email",
+              "image"
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "publicId",
+          "email",
+          "status",
+          "role",
+          "workspaceRole",
+          "createdAt",
+          "user"
+        ]
+      },
+      "AddBoardMemberDto": {
+        "type": "object",
+        "properties": {
+          "workspaceMemberPublicId": {
+            "type": "string",
+            "minLength": 12
+          },
+          "role": {
+            "default": "member",
+            "type": "string",
+            "enum": [
+              "admin",
+              "member"
+            ]
+          }
+        },
+        "required": [
+          "workspaceMemberPublicId"
+        ]
+      },
+      "BoardMemberRoleResultDto": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "member"
+            ]
+          }
+        },
+        "required": [
+          "publicId",
+          "role"
+        ]
+      },
+      "UpdateBoardMemberRoleDto": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "member"
+            ]
+          }
+        },
+        "required": [
+          "role"
+        ]
+      },
+      "BoardMemberRemoveResponseDto": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "publicId"
+        ]
+      },
       "CreateFeedbackDto": {
         "type": "object",
         "properties": {

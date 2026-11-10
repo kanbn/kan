@@ -1,8 +1,14 @@
 import { useParams } from "next/navigation";
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { HiEllipsisHorizontal, HiOutlinePlusSmall } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
+import {
+  getGetBoardMembersQueryKey,
+  useGetBoardMembers,
+  useUpdateBoardMemberRole,
+} from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
 import Avatar from "~/components/Avatar";
@@ -26,7 +32,7 @@ export default function BoardMembersView() {
   const { data: session } = authClient.useSession();
   const { modalContentType, openModal, isOpen } = useModal();
   const { showPopup } = usePopup();
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
 
   const enabled = boardPublicId.length >= 12;
 
@@ -36,10 +42,11 @@ export default function BoardMembersView() {
   );
 
   const {
-    data: boardMembers,
+    data: boardMembersResult,
     isLoading,
     error: boardMembersError,
-  } = api.boardMember.all.useQuery({ boardPublicId }, { enabled, retry: false });
+  } = useGetBoardMembers(boardPublicId, { query: { enabled, retry: false } });
+  const boardMembers = boardMembersResult?.data;
 
   // board.byId only returns people already on the board, so fetch the full roster separately.
   const { data: workspaceData } = api.workspace.byId.useQuery(
@@ -63,14 +70,22 @@ export default function BoardMembersView() {
       ),
   );
 
-  const updateRole = api.boardMember.updateRole.useMutation({
-    onSuccess: () => utils.boardMember.all.invalidate({ boardPublicId }),
-    onError: (error) => {
-      showPopup({
-        header: t`Unable to update role`,
-        message: error.message,
-        icon: "error",
-      });
+  const updateRole = useUpdateBoardMemberRole({
+    mutation: {
+      onSuccess: () =>
+        queryClient.invalidateQueries({
+          queryKey: getGetBoardMembersQueryKey(boardPublicId),
+        }),
+      onError: (error) => {
+        showPopup({
+          header: t`Unable to update role`,
+          message:
+            error instanceof Error
+              ? error.message
+              : t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
     },
   });
 
@@ -78,7 +93,11 @@ export default function BoardMembersView() {
     workspaceMemberPublicId: string,
     role: "admin" | "member",
   ) => {
-    updateRole.mutate({ boardPublicId, workspaceMemberPublicId, role });
+    updateRole.mutate({
+      boardPublicId,
+      workspaceMemberPublicId,
+      data: { role },
+    });
   };
 
   const TableRow = ({

@@ -1,11 +1,16 @@
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { HiXMark } from "react-icons/hi2";
+
+import {
+  getGetBoardMembersQueryKey,
+  useAddBoardMember,
+} from "@kan/api-client/hooks";
 
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 export function AddBoardMemberForm({
   boardPublicId,
@@ -16,21 +21,28 @@ export function AddBoardMemberForm({
 }) {
   const { closeModal } = useModal();
   const { showPopup } = usePopup();
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
   const [selectedPublicId, setSelectedPublicId] = useState("");
 
-  const addMember = api.boardMember.add.useMutation({
-    onSuccess: async () => {
-      closeModal();
-      setSelectedPublicId("");
-      await utils.boardMember.all.invalidate({ boardPublicId });
-    },
-    onError: (error) => {
-      showPopup({
-        header: t`Unable to add member`,
-        message: error.message,
-        icon: "error",
-      });
+  const addMember = useAddBoardMember({
+    mutation: {
+      onSuccess: async () => {
+        closeModal();
+        setSelectedPublicId("");
+        await queryClient.invalidateQueries({
+          queryKey: getGetBoardMembersQueryKey(boardPublicId),
+        });
+      },
+      onError: (error) => {
+        showPopup({
+          header: t`Unable to add member`,
+          message:
+            error instanceof Error
+              ? error.message
+              : t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
     },
   });
 
@@ -39,7 +51,7 @@ export function AddBoardMemberForm({
 
     addMember.mutate({
       boardPublicId,
-      workspaceMemberPublicId: selectedPublicId,
+      data: { workspaceMemberPublicId: selectedPublicId },
     });
   };
 
@@ -49,7 +61,7 @@ export function AddBoardMemberForm({
         <h2 className="text-sm font-bold">{t`Add board member`}</h2>
         <button
           type="button"
-          className="rounded p-1 focus:outline-none hover:bg-light-300 dark:hover:bg-dark-300"
+          className="rounded p-1 hover:bg-light-300 focus:outline-none dark:hover:bg-dark-300"
           onClick={() => closeModal()}
         >
           <HiXMark size={18} className="text-light-900 dark:text-dark-900" />
