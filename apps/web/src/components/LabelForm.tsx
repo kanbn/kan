@@ -5,13 +5,17 @@ import { Controller, useForm } from "react-hook-form";
 import { HiChevronUpDown, HiXMark } from "react-icons/hi2";
 
 import type { Colour } from "@kan/shared/constants";
+import {
+  useCreateLabel,
+  useGetLabel,
+  useUpdateLabel,
+} from "@kan/api-client/hooks";
 import { colours } from "@kan/shared/constants";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
-import { api } from "~/utils/api";
 import { resolveLabelColour } from "~/utils/labelColours";
 
 interface LabelFormInput {
@@ -31,54 +35,55 @@ export function LabelForm({
 }) {
   const { closeModal, entityId, openModal, setModalState } = useModal();
 
-  const label = api.label.byPublicId.useQuery(
-    {
-      labelPublicId: entityId,
-    },
-    {
-      enabled: !!isEdit && entityId.length >= 12,
-    },
-  );
+  const label = useGetLabel(entityId, {
+    query: { enabled: !!isEdit && entityId.length >= 12 },
+  });
 
   const { control, register, reset, handleSubmit, setValue, watch } =
     useForm<LabelFormInput>({
       values: {
-        name: isEdit && label.data?.name ? label.data.name : "",
-        colour: resolveLabelColour(isEdit ? label.data?.colourCode : undefined),
+        name: isEdit && label.data?.data.name ? label.data.data.name : "",
+        colour: resolveLabelColour(
+          isEdit ? label.data?.data.colourCode : undefined,
+        ),
         isCreateAnotherEnabled: false,
       },
     });
 
   const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
 
-  const createLabel = api.label.create.useMutation({
-    onSuccess: (newLabel) => {
-      const currentColourIndex = colours.findIndex(
-        (c) => c.code === watch("colour").code,
-      );
-      try {
-        refetch();
-        setModalState("NEW_LABEL_CREATED", newLabel.publicId);
-        if (!isCreateAnotherEnabled) {
-          closeModal();
-        } else {
-          const newFormState = {
-            name: "",
-            colour: colours[(currentColourIndex + 1) % colours.length],
-            isCreateAnotherEnabled,
-          };
-          reset(newFormState);
+  const createLabel = useCreateLabel({
+    mutation: {
+      onSuccess: (newLabel) => {
+        const currentColourIndex = colours.findIndex(
+          (c) => c.code === watch("colour").code,
+        );
+        try {
+          refetch();
+          setModalState("NEW_LABEL_CREATED", newLabel.data.publicId);
+          if (!isCreateAnotherEnabled) {
+            closeModal();
+          } else {
+            const newFormState = {
+              name: "",
+              colour: colours[(currentColourIndex + 1) % colours.length],
+              isCreateAnotherEnabled,
+            };
+            reset(newFormState);
+          }
+        } catch (e) {
+          console.error(e);
         }
-      } catch (e) {
-        console.error(e);
-      }
+      },
     },
   });
 
-  const updateLabel = api.label.update.useMutation({
-    onSuccess: () => {
-      refetch();
-      closeModal();
+  const updateLabel = useUpdateLabel({
+    mutation: {
+      onSuccess: () => {
+        refetch();
+        closeModal();
+      },
     },
   });
 
@@ -87,15 +92,19 @@ export function LabelForm({
 
     if (isEdit) {
       updateLabel.mutate({
-        labelPublicId: label.data?.publicId ?? "",
-        name: values.name,
-        colourCode: values.colour.code,
+        labelPublicId: label.data?.data.publicId ?? "",
+        data: {
+          name: values.name,
+          colourCode: values.colour.code,
+        },
       });
     } else {
       createLabel.mutate({
-        name: values.name,
-        colourCode: values.colour.code,
-        boardPublicId,
+        data: {
+          name: values.name,
+          colourCode: values.colour.code,
+          boardPublicId,
+        },
       });
     }
   };

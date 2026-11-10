@@ -1,9 +1,10 @@
 import { t } from "@lingui/core/macro";
 
+import { useDeleteLabel } from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 export function DeleteLabelConfirmation({
   labelPublicId,
@@ -15,17 +16,19 @@ export function DeleteLabelConfirmation({
   const { closeModal, closeModals } = useModal();
   const { showPopup } = usePopup();
 
-  const deleteLabelMutation = api.label.delete.useMutation({
-    onSuccess: () => {
-      refetch();
-      closeModals(2);
+  const deleteLabelMutation = useDeleteLabel({
+    mutation: {
+      onSuccess: () => {
+        refetch();
+        closeModals(2);
+      },
+      onError: () =>
+        showPopup({
+          header: t`Error deleting label`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        }),
     },
-    onError: () =>
-      showPopup({
-        header: t`Error deleting label`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      }),
   });
 
   const handleDeleteLabel = () => {

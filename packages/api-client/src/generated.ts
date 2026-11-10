@@ -34,6 +34,45 @@ export interface CreateFeedbackResponseDto {
   success: boolean;
 }
 
+export interface LabelResponseDto {
+  publicId: string;
+  name: string;
+  /** @nullable */
+  colourCode: string | null;
+}
+
+export interface CreateLabelDto {
+  /**
+   * @minLength 1
+   * @maxLength 36
+   */
+  name: string;
+  /** @minLength 12 */
+  boardPublicId: string;
+  /**
+   * @minLength 7
+   * @maxLength 7
+   */
+  colourCode: string;
+}
+
+export interface UpdateLabelDto {
+  /**
+   * @minLength 1
+   * @maxLength 36
+   */
+  name: string;
+  /**
+   * @minLength 7
+   * @maxLength 7
+   */
+  colourCode: string;
+}
+
+export interface DeleteLabelResponseDto {
+  success: boolean;
+}
+
 export interface CreateListDto {
   /** @minLength 1 */
   name: string;
@@ -196,6 +235,507 @@ export const useCreateFeedback = <TError = unknown, TContext = unknown>(
   TContext
 > => {
   return useMutation(getCreateFeedbackMutationOptions(options), queryClient);
+};
+
+export type getLabelResponse200 = {
+  data: LabelResponseDto;
+  status: 200;
+};
+
+export type getLabelResponseSuccess = getLabelResponse200 & {
+  headers: Headers;
+};
+export type getLabelResponse = getLabelResponseSuccess;
+
+export const getGetLabelUrl = (labelPublicId: string) => {
+  return `/labels/${labelPublicId}`;
+};
+
+/**
+ * @summary Get a label by public ID
+ */
+export const getLabel = async (
+  labelPublicId: string,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<getLabelResponse> => {
+  return customFetch<getLabelResponse>(getGetLabelUrl(labelPublicId), {
+    credentials: "include",
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetLabelQueryKey = (labelPublicId: string) => {
+  return [`/labels/${labelPublicId}`] as const;
+};
+
+export const getGetLabelQueryOptions = <
+  TData = Awaited<ReturnType<typeof getLabel>>,
+  TError = unknown,
+>(
+  labelPublicId: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabel>>, TError, TData>
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetLabelQueryKey(labelPublicId);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getLabel>>> = ({
+    signal,
+  }) => getLabel(labelPublicId, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: labelPublicId !== null && labelPublicId !== undefined,
+    ...queryOptions,
+  } as UseQueryOptions<Awaited<ReturnType<typeof getLabel>>, TError, TData> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+};
+
+export type GetLabelQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getLabel>>
+>;
+export type GetLabelQueryError = unknown;
+
+/** @summary Get a label by public ID */
+export function useGetLabel<
+  TData = Awaited<ReturnType<typeof getLabel>>,
+  TError = unknown,
+>(
+  labelPublicId: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabel>>, TError, TData>
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getLabel>>,
+          TError,
+          Awaited<ReturnType<typeof getLabel>>
+        >,
+        "initialData"
+      >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+/** @summary Get a label by public ID */
+export function useGetLabel<
+  TData = Awaited<ReturnType<typeof getLabel>>,
+  TError = unknown,
+>(
+  labelPublicId: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabel>>, TError, TData>
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getLabel>>,
+          TError,
+          Awaited<ReturnType<typeof getLabel>>
+        >,
+        "initialData"
+      >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+/** @summary Get a label by public ID */
+export function useGetLabel<
+  TData = Awaited<ReturnType<typeof getLabel>>,
+  TError = unknown,
+>(
+  labelPublicId: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabel>>, TError, TData>
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+/** @summary Get a label by public ID */
+export function useGetLabel<
+  TData = Awaited<ReturnType<typeof getLabel>>,
+  TError = unknown,
+>(
+  labelPublicId: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getLabel>>, TError, TData>
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetLabelQueryOptions(labelPublicId, options);
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+export type updateLabelResponse200 = {
+  data: LabelResponseDto;
+  status: 200;
+};
+
+export type updateLabelResponseSuccess = updateLabelResponse200 & {
+  headers: Headers;
+};
+export type updateLabelResponse = updateLabelResponseSuccess;
+
+export const getUpdateLabelUrl = (labelPublicId: string) => {
+  return `/labels/${labelPublicId}`;
+};
+
+/**
+ * @summary Update a label
+ */
+export const updateLabel = async (
+  labelPublicId: string,
+  updateLabelDto: UpdateLabelDto,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<updateLabelResponse> => {
+  const getHeaders = (
+    h?: NonNullable<RequestInit["headers"]>,
+  ): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(
+          h as Iterable<Iterable<string>>,
+          (entry) => Array.from(entry) as [string, string],
+        ),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<
+      string | readonly string[] | undefined
+    >(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+  return customFetch<updateLabelResponse>(getUpdateLabelUrl(labelPublicId), {
+    credentials: "include",
+    ...options,
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      ...getHeaders(options?.headers),
+    },
+    body: JSON.stringify(updateLabelDto),
+  });
+};
+
+export const getUpdateLabelMutationKey = () => ["updateLabel"] as const;
+
+export const getUpdateLabelMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateLabel>>,
+    TError,
+    UpdateLabelMutationVariables,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof updateLabel>>,
+  TError,
+  UpdateLabelMutationVariables,
+  TContext
+> => {
+  const mutationKey = getUpdateLabelMutationKey();
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof updateLabel>>,
+    UpdateLabelMutationVariables
+  > = (props) => {
+    const { labelPublicId, data } = props ?? {};
+
+    return updateLabel(labelPublicId, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type UpdateLabelMutationResult = NonNullable<
+  Awaited<ReturnType<typeof updateLabel>>
+>;
+export type UpdateLabelMutationBody = UpdateLabelDto;
+export type UpdateLabelMutationError = unknown;
+export type UpdateLabelMutationVariables = {
+  labelPublicId: string;
+  data: UpdateLabelDto;
+};
+
+/** @summary Update a label */
+export const useUpdateLabel = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof updateLabel>>,
+      TError,
+      UpdateLabelMutationVariables,
+      TContext
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof updateLabel>>,
+  TError,
+  UpdateLabelMutationVariables,
+  TContext
+> => {
+  return useMutation(getUpdateLabelMutationOptions(options), queryClient);
+};
+
+export type deleteLabelResponse200 = {
+  data: DeleteLabelResponseDto;
+  status: 200;
+};
+
+export type deleteLabelResponseSuccess = deleteLabelResponse200 & {
+  headers: Headers;
+};
+export type deleteLabelResponse = deleteLabelResponseSuccess;
+
+export const getDeleteLabelUrl = (labelPublicId: string) => {
+  return `/labels/${labelPublicId}`;
+};
+
+/**
+ * @summary Delete a label
+ */
+export const deleteLabel = async (
+  labelPublicId: string,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<deleteLabelResponse> => {
+  return customFetch<deleteLabelResponse>(getDeleteLabelUrl(labelPublicId), {
+    credentials: "include",
+    ...options,
+    method: "DELETE",
+  });
+};
+
+export const getDeleteLabelMutationKey = () => ["deleteLabel"] as const;
+
+export const getDeleteLabelMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteLabel>>,
+    TError,
+    DeleteLabelMutationVariables,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteLabel>>,
+  TError,
+  DeleteLabelMutationVariables,
+  TContext
+> => {
+  const mutationKey = getDeleteLabelMutationKey();
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteLabel>>,
+    DeleteLabelMutationVariables
+  > = (props) => {
+    const { labelPublicId } = props ?? {};
+
+    return deleteLabel(labelPublicId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type DeleteLabelMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteLabel>>
+>;
+
+export type DeleteLabelMutationError = unknown;
+export type DeleteLabelMutationVariables = { labelPublicId: string };
+
+/** @summary Delete a label */
+export const useDeleteLabel = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof deleteLabel>>,
+      TError,
+      DeleteLabelMutationVariables,
+      TContext
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof deleteLabel>>,
+  TError,
+  DeleteLabelMutationVariables,
+  TContext
+> => {
+  return useMutation(getDeleteLabelMutationOptions(options), queryClient);
+};
+
+export type createLabelResponse201 = {
+  data: LabelResponseDto;
+  status: 201;
+};
+
+export type createLabelResponseSuccess = createLabelResponse201 & {
+  headers: Headers;
+};
+export type createLabelResponse = createLabelResponseSuccess;
+
+export const getCreateLabelUrl = () => {
+  return `/labels`;
+};
+
+/**
+ * @summary Create a label
+ */
+export const createLabel = async (
+  createLabelDto: CreateLabelDto,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<createLabelResponse> => {
+  const getHeaders = (
+    h?: NonNullable<RequestInit["headers"]>,
+  ): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(
+          h as Iterable<Iterable<string>>,
+          (entry) => Array.from(entry) as [string, string],
+        ),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<
+      string | readonly string[] | undefined
+    >(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+  return customFetch<createLabelResponse>(getCreateLabelUrl(), {
+    credentials: "include",
+    ...options,
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...getHeaders(options?.headers),
+    },
+    body: JSON.stringify(createLabelDto),
+  });
+};
+
+export const getCreateLabelMutationKey = () => ["createLabel"] as const;
+
+export const getCreateLabelMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createLabel>>,
+    TError,
+    CreateLabelMutationVariables,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createLabel>>,
+  TError,
+  CreateLabelMutationVariables,
+  TContext
+> => {
+  const mutationKey = getCreateLabelMutationKey();
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createLabel>>,
+    CreateLabelMutationVariables
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createLabel(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateLabelMutationResult = NonNullable<
+  Awaited<ReturnType<typeof createLabel>>
+>;
+export type CreateLabelMutationBody = CreateLabelDto;
+export type CreateLabelMutationError = unknown;
+export type CreateLabelMutationVariables = { data: CreateLabelDto };
+
+/** @summary Create a label */
+export const useCreateLabel = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof createLabel>>,
+      TError,
+      CreateLabelMutationVariables,
+      TContext
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof createLabel>>,
+  TError,
+  CreateLabelMutationVariables,
+  TContext
+> => {
+  return useMutation(getCreateLabelMutationOptions(options), queryClient);
 };
 
 export type createListResponse201 = {
