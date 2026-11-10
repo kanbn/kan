@@ -5,6 +5,7 @@ import { NestFactory } from "@nestjs/core";
 import { ZodValidationPipe } from "nestjs-zod";
 
 import { AppModule } from "./app.module.js";
+import { TrpcErrorFilter } from "./common/filters/trpc-error.filter.js";
 import { buildOpenApiDocument } from "./openapi.js";
 
 async function bootstrap() {
@@ -20,6 +21,7 @@ async function bootstrap() {
   });
 
   app.useGlobalPipes(new ZodValidationPipe());
+  app.useGlobalFilters(new TrpcErrorFilter());
 
   // Served from memory, not disk — openapi.json on disk is produced by the
   // dedicated `pnpm openapi` script (see openapi.generate.ts), not on boot.

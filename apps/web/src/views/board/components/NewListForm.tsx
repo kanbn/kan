@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
 
 import type { NewListInput } from "@kan/api/types";
+import { useCreateList } from "@kan/api-client/hooks";
 import { generateUID } from "@kan/shared/utils";
 
 import Button from "~/components/Button";
@@ -48,56 +49,58 @@ export function NewListForm({
 
   const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
 
-  const createList = api.list.create.useMutation({
-    onMutate: async (args) => {
-      await utils.board.byId.cancel();
+  const createList = useCreateList({
+    mutation: {
+      onMutate: async (args) => {
+        await utils.board.byId.cancel();
 
-      const currentState = utils.board.byId.getData(queryParams);
-      const optimisticPublicId = `PLACEHOLDER_${generateUID()}`;
+        const currentState = utils.board.byId.getData(queryParams);
+        const optimisticPublicId = `PLACEHOLDER_${generateUID()}`;
 
-      utils.board.byId.setData(queryParams, (oldBoard) => {
-        if (!oldBoard) return oldBoard;
+        utils.board.byId.setData(queryParams, (oldBoard) => {
+          if (!oldBoard) return oldBoard;
 
-        const newList = {
-          publicId: optimisticPublicId,
-          name: args.name,
-          boardId: 1,
-          boardPublicId,
-          cards: [],
-          index: oldBoard.lists.length,
-        };
+          const newList = {
+            publicId: optimisticPublicId,
+            name: args.data.name,
+            boardId: 1,
+            boardPublicId,
+            cards: [],
+            index: oldBoard.lists.length,
+          };
 
-        const updatedLists = [...oldBoard.lists, newList];
+          const updatedLists = [...oldBoard.lists, newList];
 
-        return { ...oldBoard, lists: updatedLists };
-      });
+          return { ...oldBoard, lists: updatedLists };
+        });
 
-      return { previousState: currentState, optimisticPublicId };
-    },
-    onSuccess: (result, _args, context) => {
-      if (!context) return;
-      utils.board.byId.setData(queryParams, (oldBoard) => {
-        if (!oldBoard) return oldBoard;
-        return {
-          ...oldBoard,
-          lists: oldBoard.lists.map((list) =>
-            list.publicId === context.optimisticPublicId
-              ? { ...list, publicId: result.publicId }
-              : list,
-          ),
-        };
-      });
-    },
-    onError: (_error, _newList, context) => {
-      utils.board.byId.setData(queryParams, context?.previousState);
-      showPopup({
-        header: t`Unable to create list`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await utils.board.byId.invalidate(queryParams);
+        return { previousState: currentState, optimisticPublicId };
+      },
+      onSuccess: (result, _args, context) => {
+        if (!context) return;
+        utils.board.byId.setData(queryParams, (oldBoard) => {
+          if (!oldBoard) return oldBoard;
+          return {
+            ...oldBoard,
+            lists: oldBoard.lists.map((list) =>
+              list.publicId === context.optimisticPublicId
+                ? { ...list, publicId: result.data.publicId }
+                : list,
+            ),
+          };
+        });
+      },
+      onError: (_error, _newList, context) => {
+        utils.board.byId.setData(queryParams, context?.previousState);
+        showPopup({
+          header: t`Unable to create list`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        await utils.board.byId.invalidate(queryParams);
+      },
     },
   });
 
@@ -116,8 +119,10 @@ export function NewListForm({
     });
 
     createList.mutate({
-      name: data.name,
-      boardPublicId,
+      data: {
+        name: data.name,
+        boardPublicId,
+      },
     });
   };
 

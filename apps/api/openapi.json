@@ -37,6 +37,161 @@
           "Feedback"
         ]
       }
+    },
+    "/lists": {
+      "post": {
+        "operationId": "createList",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateListDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a list",
+        "tags": [
+          "Lists"
+        ]
+      }
+    },
+    "/lists/{listPublicId}": {
+      "delete": {
+        "operationId": "deleteList",
+        "parameters": [
+          {
+            "name": "listPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteListResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a list",
+        "tags": [
+          "Lists"
+        ]
+      },
+      "put": {
+        "operationId": "updateList",
+        "parameters": [
+          {
+            "name": "listPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateListDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a list",
+        "tags": [
+          "Lists"
+        ]
+      }
+    },
+    "/mcp": {
+      "post": {
+        "operationId": "StreamableHttpController_handlePostRequest",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "StreamableHttp"
+        ]
+      },
+      "get": {
+        "operationId": "StreamableHttpController_handleGetRequest",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "StreamableHttp"
+        ]
+      },
+      "delete": {
+        "operationId": "StreamableHttpController_handleDeleteRequest",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "StreamableHttp"
+        ]
+      }
     }
   },
   "info": {
@@ -83,6 +238,61 @@
         "required": [
           "success"
         ]
+      },
+      "CreateListDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "boardPublicId": {
+            "type": "string",
+            "minLength": 12
+          }
+        },
+        "required": [
+          "name",
+          "boardPublicId"
+        ]
+      },
+      "ListResponseDto": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "publicId",
+          "name"
+        ]
+      },
+      "DeleteListResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ]
+      },
+      "UpdateListDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "index": {
+            "type": "number"
+          }
+        }
       }
     }
   }

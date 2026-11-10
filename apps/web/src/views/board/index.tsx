@@ -33,6 +33,7 @@ import {
 } from "react-icons/hi2";
 
 import type { UpdateBoardInput } from "@kan/api/types";
+import { useUpdateList } from "@kan/api-client/hooks";
 
 import type { CardContextMenuAction } from "./components/CardContextMenu";
 import type { BoardView } from "./components/ViewToggle";
@@ -250,49 +251,51 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     !isLoading && (boardData?.lists.length ?? 0) > 0,
   );
 
-  const updateListMutation = api.list.update.useMutation({
-    onMutate: async (args) => {
-      await utils.board.byId.cancel();
+  const updateListMutation = useUpdateList({
+    mutation: {
+      onMutate: async (args) => {
+        await utils.board.byId.cancel();
 
-      const currentState = utils.board.byId.getData(queryParams);
+        const currentState = utils.board.byId.getData(queryParams);
 
-      utils.board.byId.setData(queryParams, (oldBoard) => {
-        if (!oldBoard) return oldBoard;
+        utils.board.byId.setData(queryParams, (oldBoard) => {
+          if (!oldBoard) return oldBoard;
 
-        const updatedLists = Array.from(oldBoard.lists);
+          const updatedLists = Array.from(oldBoard.lists);
 
-        const sourceList = updatedLists.find(
-          (list) => list.publicId === args.listPublicId,
-        );
+          const sourceList = updatedLists.find(
+            (list) => list.publicId === args.listPublicId,
+          );
 
-        const currentIndex = sourceList?.index;
+          const currentIndex = sourceList?.index;
 
-        if (currentIndex === undefined) return oldBoard;
+          if (currentIndex === undefined) return oldBoard;
 
-        const removedList = updatedLists.splice(currentIndex, 1)[0];
+          const removedList = updatedLists.splice(currentIndex, 1)[0];
 
-        if (removedList && args.index !== undefined) {
-          updatedLists.splice(args.index, 0, removedList);
+          if (removedList && args.data.index !== undefined) {
+            updatedLists.splice(args.data.index, 0, removedList);
 
-          return {
-            ...oldBoard,
-            lists: updatedLists,
-          };
-        }
-      });
+            return {
+              ...oldBoard,
+              lists: updatedLists,
+            };
+          }
+        });
 
-      return { previousState: currentState };
-    },
-    onError: (_error, _newList, context) => {
-      utils.board.byId.setData(queryParams, context?.previousState);
-      showPopup({
-        header: t`Unable to update list`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await utils.board.byId.invalidate(queryParams);
+        return { previousState: currentState };
+      },
+      onError: (_error, _newList, context) => {
+        utils.board.byId.setData(queryParams, context?.previousState);
+        showPopup({
+          header: t`Unable to update list`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        await utils.board.byId.invalidate(queryParams);
+      },
     },
   });
 
@@ -621,7 +624,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       setDragListOrder(arrayMove(currentLists, oldIndex, newIndex));
 
       updateListMutation.mutate(
-        { listPublicId: activeIdStr, index: newIndex },
+        { listPublicId: activeIdStr, data: { index: newIndex } },
         { onSettled: () => setDragListOrder(null) },
       );
       return;

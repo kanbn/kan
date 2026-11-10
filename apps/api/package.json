@@ -17,6 +17,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@kan/api": "workspace:*",
     "@kan/auth": "workspace:*",
     "@kan/db": "workspace:*",
     "@kan/logger": "workspace:^",
@@ -26,6 +27,7 @@
     "@nestjs/platform-express": "^11.2.7",
     "@nestjs/swagger": "^11.4.7",
     "@rekog/mcp-nest": "^1.9.11",
+    "@trpc/server": "catalog:",
     "nestjs-zod": "^5.5.0",
     "rate-limiter-flexible": "^9.0.1",
     "reflect-metadata": "^0.2.2",
