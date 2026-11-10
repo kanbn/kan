@@ -1,23 +1,9 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Param,
-  Post,
-  Put,
-  UseGuards,
-} from "@nestjs/common";
-import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiParam,
-  ApiResponse,
-  ApiTags,
-} from "@nestjs/swagger";
+import { Body, Delete, Param, Post, Put } from "@nestjs/common";
+import { ApiOperation, ApiParam, ApiResponse } from "@nestjs/swagger";
 
 import type { User } from "../../common/interfaces/user.interface.js";
+import { AuthenticatedController } from "../../common/decorators/authenticated-controller.decorator.js";
 import { CurrentUser } from "../../common/decorators/current-user.decorator.js";
-import { AuthGuard } from "../../common/guards/auth.guard.js";
 import {
   CreateListDto,
   DeleteListResponseDto,
@@ -26,10 +12,7 @@ import {
 } from "./dto/list.dto.js";
 import { ListService } from "./list.service.js";
 
-@ApiTags("Lists")
-@ApiBearerAuth("bearer")
-@Controller("lists")
-@UseGuards(AuthGuard)
+@AuthenticatedController("Lists", "lists")
 export class ListController {
   constructor(private readonly listService: ListService) {}
 

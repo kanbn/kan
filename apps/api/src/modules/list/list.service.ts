@@ -1,5 +1,4 @@
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
-import { TRPCError } from "@trpc/server";
 
 import {
   assertBoardAccess,
@@ -12,6 +11,7 @@ import * as cardRepo from "@kan/db/repository/card.repo";
 import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 
+import { assertFound } from "../../common/assert-found.util.js";
 import { db } from "../../common/session.util.js";
 
 @Injectable()
@@ -21,16 +21,10 @@ export class ListService {
     boardPublicId: string;
     userId: string;
   }) {
-    const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
-      db,
-      input.boardPublicId,
+    const board = await assertFound(
+      boardRepo.getWorkspaceAndBoardIdByBoardPublicId(db, input.boardPublicId),
+      `Board with public ID ${input.boardPublicId} not found`,
     );
-
-    if (!board)
-      throw new TRPCError({
-        message: `Board with public ID ${input.boardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
 
     await assertPermission(db, input.userId, board.workspaceId, "list:create");
     await assertBoardAccess(db, input.userId, board);
@@ -43,16 +37,10 @@ export class ListService {
   }
 
   async delete(input: { listPublicId: string; userId: string }) {
-    const list = await listRepo.getWorkspaceAndListIdByListPublicId(
-      db,
-      input.listPublicId,
+    const list = await assertFound(
+      listRepo.getWorkspaceAndListIdByListPublicId(db, input.listPublicId),
+      `List with public ID ${input.listPublicId} not found`,
     );
-
-    if (!list)
-      throw new TRPCError({
-        message: `List with public ID ${input.listPublicId} not found`,
-        code: "NOT_FOUND",
-      });
 
     await assertCanDelete(
       db,
@@ -98,16 +86,10 @@ export class ListService {
     name?: string;
     index?: number;
   }) {
-    const list = await listRepo.getWorkspaceAndListIdByListPublicId(
-      db,
-      input.listPublicId,
+    const list = await assertFound(
+      listRepo.getWorkspaceAndListIdByListPublicId(db, input.listPublicId),
+      `List with public ID ${input.listPublicId} not found`,
     );
-
-    if (!list)
-      throw new TRPCError({
-        message: `List with public ID ${input.listPublicId} not found`,
-        code: "NOT_FOUND",
-      });
 
     await assertCanEdit(
       db,
