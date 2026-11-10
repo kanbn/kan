@@ -3,9 +3,7 @@ import type { Response } from "express";
 import { Catch, HttpStatus } from "@nestjs/common";
 import { TRPCError } from "@trpc/server";
 
-// Ported db/permission helpers (e.g. @kan/api/utils/permissions) throw
-// TRPCError rather than Nest HttpExceptions — map their codes once here
-// instead of re-implementing each assert* in Nest terms.
+// @kan/api/utils/permissions throws TRPCError, not Nest HttpExceptions — map it once here.
 const STATUS_BY_CODE: Partial<Record<TRPCError["code"], HttpStatus>> = {
   BAD_REQUEST: HttpStatus.BAD_REQUEST,
   UNAUTHORIZED: HttpStatus.UNAUTHORIZED,

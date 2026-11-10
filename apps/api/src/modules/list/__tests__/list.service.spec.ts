@@ -88,9 +88,7 @@ describe("ListService.delete", () => {
 
     expect(result).toEqual({ success: true });
     expect(bulkCreate).toHaveBeenCalled();
-    // Deep-equality matchers (toHaveBeenCalledWith/toEqual) on this spy's
-    // call args crash the vitest worker in this repo (OOM) when another
-    // test in the file restores it afterwards — check fields shallowly.
+    // toHaveBeenCalledWith/toEqual on this spy's args crashes vitest (OOM) here — check shallowly.
     const activities = bulkCreate.mock.calls[0]?.[1] as
       | { type: string; createdBy: string; cardId: number }[]
       | undefined;
