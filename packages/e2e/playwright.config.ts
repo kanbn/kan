@@ -2,6 +2,8 @@ import { execFileSync } from "node:child_process";
 import { defineConfig, devices } from "@playwright/test";
 import { config as loadDotenv } from "dotenv";
 
+import { apiBaseURL, apiPort } from "./tests/support/api-base-url";
+
 loadDotenv({ path: "../../.env" });
 
 const stripeEnv = (key: string, placeholder: string) =>
@@ -107,9 +109,6 @@ const { port, env: modeEnv } = modeConfig[mode];
 
 const remoteBaseURL = process.env.PLAYWRIGHT_BASE_URL;
 const baseURL = remoteBaseURL ?? `http://localhost:${port}`;
-
-const apiPort = process.env.API_E2E_PORT ?? "4100";
-const apiBaseURL = `http://localhost:${apiPort}`;
 
 export default defineConfig({
   globalSetup: "./tests/support/global-setup.ts",
