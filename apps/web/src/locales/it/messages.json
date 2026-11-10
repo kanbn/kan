@@ -78,7 +78,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 886]],
+    "origin": [["src/views/board/index.tsx", 889]],
     "translation": "{0} non trovato"
   },
   "0xWkkH": {
@@ -997,7 +997,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 858],
+      ["src/views/board/index.tsx", 861],
       ["src/views/board/members/index.tsx", 209],
       ["src/views/card/index.tsx", 361],
       ["src/views/public/board/index.tsx", 125]
@@ -1058,7 +1058,7 @@
     "message": "Board name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 876]],
+    "origin": [["src/views/board/index.tsx", 879]],
     "translation": "Nome bacheca"
   },
   "wewm3j": {
@@ -1549,7 +1549,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 438],
+      ["src/views/board/index.tsx", 441],
       ["src/views/card/components/Dropdown.tsx", 74],
       ["src/views/public/board/CardModal.tsx", 40]
     ],
@@ -2058,7 +2058,7 @@
     "origin": [
       ["src/components/LabelForm.tsx", 208],
       ["src/views/board/components/NewCardForm.tsx", 662],
-      ["src/views/board/components/NewListForm.tsx", 157]
+      ["src/views/board/components/NewListForm.tsx", 162]
     ],
     "translation": "Crea un altro"
   },
@@ -2101,7 +2101,7 @@
     "message": "Create list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewListForm.tsx", 169]],
+    "origin": [["src/views/board/components/NewListForm.tsx", 174]],
     "translation": "Crea lista"
   },
   "VKoDQD": {
@@ -2138,8 +2138,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 138],
-      ["src/views/board/index.tsx", 1014]
+      ["src/views/board/index.tsx", 139],
+      ["src/views/board/index.tsx", 1017]
     ],
     "translation": "Crea nuova lista"
   },
@@ -3422,7 +3422,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 996]],
+    "origin": [["src/views/board/index.tsx", 999]],
     "translation": "Inizia creando una nuova lista"
   },
   "oW13KZ": {
@@ -4092,7 +4092,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/BoardDropdown.tsx", 106],
-      ["src/views/board/index.tsx", 436],
+      ["src/views/board/index.tsx", 439],
       ["src/views/card/components/Dropdown.tsx", 72],
       ["src/views/public/board/CardModal.tsx", 38],
       ["src/views/public/board/index.tsx", 77]
@@ -4115,7 +4115,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/List.tsx", 124],
-      ["src/views/board/components/NewListForm.tsx", 145]
+      ["src/views/board/components/NewListForm.tsx", 150]
     ],
     "translation": "Nome lista"
   },
@@ -4504,8 +4504,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewListForm.tsx", 129],
-      ["src/views/board/index.tsx", 938]
+      ["src/views/board/components/NewListForm.tsx", 134],
+      ["src/views/board/index.tsx", 941]
     ],
     "translation": "Nuova lista"
   },
@@ -4652,14 +4652,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 992]],
+    "origin": [["src/views/board/index.tsx", 995]],
     "translation": "Nessuna lista"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 997]],
+    "origin": [["src/views/board/index.tsx", 1000]],
     "translation": "Nessuna lista è stata ancora creata"
   },
   "i30J2U": {
@@ -5091,14 +5091,14 @@
       ["src/components/NewWorkspaceForm.tsx", 110],
       ["src/views/board/components/BoardDropdown.tsx", 80],
       ["src/views/board/components/NewCardForm.tsx", 204],
-      ["src/views/board/components/NewListForm.tsx", 95],
+      ["src/views/board/components/NewListForm.tsx", 97],
       ["src/views/board/components/NewTemplateForm.tsx", 61],
       ["src/views/board/components/NewTemplateForm.tsx", 77],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 73],
       ["src/views/board/components/VisibilityButton.tsx", 57],
-      ["src/views/board/index.tsx", 290],
-      ["src/views/board/index.tsx", 346],
-      ["src/views/board/index.tsx", 383],
+      ["src/views/board/index.tsx", 292],
+      ["src/views/board/index.tsx", 349],
+      ["src/views/board/index.tsx", 386],
       ["src/views/boards/components/ImportBoardsForm.tsx", 243],
       ["src/views/boards/components/ImportBoardsForm.tsx", 395],
       ["src/views/card/components/AttachmentThumbnails.tsx", 74],
@@ -5156,7 +5156,7 @@
       ["src/views/board/components/BoardDropdown.tsx", 111],
       ["src/views/board/components/CardContextDuplicateModal.tsx", 64],
       ["src/views/board/components/CardContextMoveListModal.tsx", 42],
-      ["src/views/board/index.tsx", 445],
+      ["src/views/board/index.tsx", 448],
       ["src/views/card/components/Dropdown.tsx", 55],
       ["src/views/card/components/Dropdown.tsx", 81],
       ["src/views/card/components/Dropdown.tsx", 100],
@@ -6264,8 +6264,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 858],
-      ["src/views/board/index.tsx", 895]
+      ["src/views/board/index.tsx", 861],
+      ["src/views/board/index.tsx", 898]
     ],
     "translation": "Template"
   },
@@ -6790,7 +6790,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/BoardDropdown.tsx", 110],
-      ["src/views/board/index.tsx", 443],
+      ["src/views/board/index.tsx", 446],
       ["src/views/card/components/Dropdown.tsx", 79],
       ["src/views/public/board/CardModal.tsx", 45],
       ["src/views/public/board/index.tsx", 84]
@@ -6815,7 +6815,7 @@
     "message": "Unable to create list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewListForm.tsx", 94]],
+    "origin": [["src/views/board/components/NewListForm.tsx", 96]],
     "translation": "Impossibile creare la lista"
   },
   "YcyP2z": {
@@ -6994,7 +6994,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 345],
+      ["src/views/board/index.tsx", 348],
       ["src/views/card/index.tsx", 258]
     ],
     "translation": "Impossibile aggiornare la card"
@@ -7025,7 +7025,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 382],
+      ["src/views/board/index.tsx", 385],
       ["src/views/card/components/DueDateSelector.tsx", 63]
     ],
     "translation": "Impossibile aggiornare la data di scadenza"
@@ -7042,7 +7042,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 289],
+      ["src/views/board/index.tsx", 291],
       ["src/views/card/components/ListSelector.tsx", 54]
     ],
     "translation": "Impossibile aggiornare la lista"
@@ -7648,7 +7648,7 @@
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
       ["src/utils/permission-category-label.ts", 10],
-      ["src/views/board/index.tsx", 858],
+      ["src/views/board/index.tsx", 861],
       ["src/views/boards/index.tsx", 58],
       ["src/views/members/index.tsx", 279],
       ["src/views/public/board/index.tsx", 125],
@@ -7900,8 +7900,8 @@
     "origin": [
       ["src/views/board/components/List.tsx", 133],
       ["src/views/board/components/VisibilityButton.tsx", 72],
-      ["src/views/board/index.tsx", 926],
-      ["src/views/board/index.tsx", 1003],
+      ["src/views/board/index.tsx", 929],
+      ["src/views/board/index.tsx", 1006],
       ["src/views/boards/components/BoardsList.tsx", 71],
       ["src/views/boards/index.tsx", 69],
       ["src/views/boards/index.tsx", 90]
