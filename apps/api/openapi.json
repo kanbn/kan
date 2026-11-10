@@ -38,6 +38,157 @@
         ]
       }
     },
+    "/labels/{labelPublicId}": {
+      "get": {
+        "operationId": "getLabel",
+        "parameters": [
+          {
+            "name": "labelPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LabelResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a label by public ID",
+        "tags": [
+          "Labels"
+        ]
+      },
+      "put": {
+        "operationId": "updateLabel",
+        "parameters": [
+          {
+            "name": "labelPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLabelDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LabelResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a label",
+        "tags": [
+          "Labels"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteLabel",
+        "parameters": [
+          {
+            "name": "labelPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteLabelResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a label",
+        "tags": [
+          "Labels"
+        ]
+      }
+    },
+    "/labels": {
+      "post": {
+        "operationId": "createLabel",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLabelDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LabelResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a label",
+        "tags": [
+          "Labels"
+        ]
+      }
+    },
     "/lists": {
       "post": {
         "operationId": "createList",
@@ -229,6 +380,80 @@
         ]
       },
       "CreateFeedbackResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ]
+      },
+      "LabelResponseDto": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "colourCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "publicId",
+          "name",
+          "colourCode"
+        ]
+      },
+      "CreateLabelDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 36
+          },
+          "boardPublicId": {
+            "type": "string",
+            "minLength": 12
+          },
+          "colourCode": {
+            "type": "string",
+            "minLength": 7,
+            "maxLength": 7
+          }
+        },
+        "required": [
+          "name",
+          "boardPublicId",
+          "colourCode"
+        ]
+      },
+      "UpdateLabelDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 36
+          },
+          "colourCode": {
+            "type": "string",
+            "minLength": 7,
+            "maxLength": 7
+          }
+        },
+        "required": [
+          "name",
+          "colourCode"
+        ]
+      },
+      "DeleteLabelResponseDto": {
         "type": "object",
         "properties": {
           "success": {

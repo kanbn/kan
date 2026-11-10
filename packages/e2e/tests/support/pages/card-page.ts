@@ -66,17 +66,15 @@ export class CardPage {
 
     const dialog = this.page.getByRole("dialog");
     await dialog.getByPlaceholder("Name").fill(name);
-    const created = waitForTrpcMutation(this.page, "label.create");
+    const created = waitForResponsePath(this.page, "/labels");
     const assigned = waitForTrpcMutation(this.page, "card.addOrRemoveLabel");
     await dialog.getByRole("button", { name: "Create label" }).click();
     const createdResponse = await created;
     await assigned;
 
-    const body = (await createdResponse.json()) as [
-      { result: { data: { json: { publicId: string } } } },
-    ];
+    const body = (await createdResponse.json()) as { publicId: string };
 
-    return body[0].result.data.json.publicId;
+    return body.publicId;
   }
 
   async openLabelEditor(name: string) {

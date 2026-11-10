@@ -1,9 +1,13 @@
 import type { Page } from "@playwright/test";
 
-export function waitForResponsePath(page: Page, pathSubstring: string) {
+export function waitForResponsePath(
+  page: Page,
+  pathSubstring: string,
+  method = "POST",
+) {
   return page.waitForResponse(
     (res) =>
-      res.url().includes(pathSubstring) && res.request().method() === "POST",
+      res.url().includes(pathSubstring) && res.request().method() === method,
   );
 }
 
