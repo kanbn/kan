@@ -494,7 +494,7 @@
     "message": "Adjust the square crop to fit your avatar.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 256]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 253]],
     "translation": "Pas de vierkante uitsnede aan zodat deze bij je avatar past."
   },
   "U3pytU": {
@@ -636,7 +636,7 @@
     "message": "Annual",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 78]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 77]],
     "translation": "Jaarlijks"
   },
   "3bqt9U": {
@@ -943,7 +943,7 @@
     "message": "Best for teams who want to collaborate and move faster together.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 101]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 100]],
     "translation": "Ideaal voor teams die willen samenwerken en sneller vooruit willen komen."
   },
   "ARvBT/": {
@@ -1476,8 +1476,8 @@
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 68],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 77],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 64],
-      ["src/views/onboarding/select-plan/index.tsx", 249],
-      ["src/views/settings/components/Avatar.tsx", 287],
+      ["src/views/onboarding/select-plan/index.tsx", 248],
+      ["src/views/settings/components/Avatar.tsx", 284],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 206],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
@@ -1567,8 +1567,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/AccountSettings.tsx", 88],
-      ["src/views/settings/AccountSettings.tsx", 100],
+      ["src/views/settings/AccountSettings.tsx", 93],
+      ["src/views/settings/AccountSettings.tsx", 105],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
     ],
@@ -1578,14 +1578,14 @@
     "message": "Change the application font size.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 63]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 68]],
     "translation": "Pas de lettergrootte van de applicatie aan."
   },
   "yD3ZSw": {
     "message": "Change your language preferences.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 53]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 58]],
     "translation": "Wijzig je taalvoorkeuren."
   },
   "gZxH/p": {
@@ -1640,7 +1640,7 @@
     "message": "Choose a plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 160]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 159]],
     "translation": "Kies een abonnement"
   },
   "5EMoSo": {
@@ -1709,7 +1709,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/Dashboard.tsx", 281],
+      ["src/components/Dashboard.tsx", 278],
       ["src/views/card/index.tsx", 415],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 184],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
@@ -1936,7 +1936,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 255],
+      ["src/views/onboarding/select-plan/index.tsx", 254],
       ["src/views/onboarding/workspace-details/index.tsx", 324]
     ],
     "translation": "Doorgaan"
@@ -2196,7 +2196,7 @@
     "message": "Crop your avatar",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 253]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 250]],
     "translation": "Bijsnijden van je avatar"
   },
   "MtNNDo": {
@@ -2363,8 +2363,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/AccountSettings.tsx", 70],
-      ["src/views/settings/AccountSettings.tsx", 80],
+      ["src/views/settings/AccountSettings.tsx", 75],
+      ["src/views/settings/AccountSettings.tsx", 85],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 96]
     ],
     "translation": "Account verwijderen"
@@ -2513,8 +2513,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/AccountSettings.tsx", 36],
-      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 71]
+      ["src/views/settings/AccountSettings.tsx", 39],
+      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 73]
     ],
     "translation": "Weergavenaam"
   },
@@ -2522,21 +2522,21 @@
     "message": "Display name cannot exceed 280 characters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 22]],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 24]],
     "translation": "Weergavenaam mag niet meer dan 280 tekens bevatten"
   },
   "KFJgmZ": {
     "message": "Display name must be at least 3 characters long",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 19]],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 21]],
     "translation": "Weergavenaam moet minimaal 3 tekens lang zijn"
   },
   "x8GeCD": {
     "message": "Display name updated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 41]],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 44]],
     "translation": "Weergavenaam bijgewerkt"
   },
   "evj0lK": {
@@ -2610,7 +2610,7 @@
     "message": "Download failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 142]],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 146]],
     "translation": "Download mislukt"
   },
   "XicmhT": {
@@ -2766,7 +2766,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 281],
-      ["src/views/settings/AccountSettings.tsx", 43]
+      ["src/views/settings/AccountSettings.tsx", 46]
     ],
     "translation": "E-mail"
   },
@@ -3005,7 +3005,7 @@
     "message": "Error updating display name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 54]],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 57]],
     "translation": "Fout bij bijwerken van weergavenaam"
   },
   "CkVV1t": {
@@ -3059,7 +3059,7 @@
     "comments": [],
     "origin": [
       ["src/views/settings/components/Avatar.tsx", 69],
-      ["src/views/settings/components/Avatar.tsx", 199]
+      ["src/views/settings/components/Avatar.tsx", 196]
     ],
     "translation": "Fout bij uploaden van profielafbeelding"
   },
@@ -3279,7 +3279,7 @@
     "message": "Font size",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 60]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 65]],
     "translation": "Lettergrootte"
   },
   "+3TYXa": {
@@ -3315,8 +3315,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      ["src/views/onboarding/select-plan/index.tsx", 91],
       ["src/views/onboarding/select-plan/index.tsx", 92],
-      ["src/views/onboarding/select-plan/index.tsx", 93],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 301],
       ["src/views/pricing/components/Pricing.tsx", 32],
       ["src/views/pricing/components/Pricing.tsx", 32],
@@ -3536,7 +3536,7 @@
     "message": "Good for individuals starting out who just need the essentials.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 94]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 93]],
     "translation": "Geschikt voor individuen die net beginnen en alleen de basisbehoeften hebben."
   },
   "cdyS7J": {
@@ -3995,7 +3995,7 @@
     "message": "Language",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 50]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 55]],
     "translation": "Taal"
   },
   "k7rCa/": {
@@ -4060,14 +4060,14 @@
     "message": "License activated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 115]],
+    "origin": [["src/components/Dashboard.tsx", 112]],
     "translation": "Licentie geactiveerd"
   },
   "K3LUJr": {
     "message": "License activation failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 129]],
+    "origin": [["src/components/Dashboard.tsx", 126]],
     "translation": "Licentieactivering mislukt"
   },
   "1njn7W": {
@@ -4339,7 +4339,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 77],
+      ["src/views/onboarding/select-plan/index.tsx", 76],
       ["src/views/pricing/components/Pricing.tsx", 14],
       ["src/views/pricing/index.tsx", 20]
     ],
@@ -4631,7 +4631,7 @@
     "message": "No download URL available for this attachment.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 143]],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 147]],
     "translation": "Geen download-URL beschikbaar voor deze bijlage."
   },
   "TXO5TM": {
@@ -4645,7 +4645,7 @@
     "message": "No license key was provided. Please try activating again.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 126]],
+    "origin": [["src/components/Dashboard.tsx", 123]],
     "translation": "Er is geen licentiecode opgegeven. Probeer het opnieuw te activeren."
   },
   "hXMFoN": {
@@ -4726,7 +4726,7 @@
     "message": "Once you delete your account, there is no going back. This action cannot be undone.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 73]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 78]],
     "translation": "Zodra je je account verwijdert, is er geen weg terug. Deze actie kan niet ongedaan worden gemaakt."
   },
   "dmKdk0": {
@@ -4836,7 +4836,7 @@
     "message": "Password already set",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 271]],
+    "origin": [["src/components/Dashboard.tsx", 268]],
     "translation": "Wachtwoord is al ingesteld"
   },
   "IrZaAn": {
@@ -4985,7 +4985,7 @@
     "message": "Pick a plan to get started. All paid plans include a 14-day free trial.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 165]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 164]],
     "translation": "Kies een abonnement om te beginnen. Alle betaalde abonnementen hebben een gratis proefperiode van 14 dagen."
   },
   "GdgCoi": {
@@ -5107,7 +5107,7 @@
       ["src/views/board/members/index.tsx", 88],
       ["src/views/boards/components/ImportBoardsForm.tsx", 243],
       ["src/views/boards/components/ImportBoardsForm.tsx", 395],
-      ["src/views/card/components/AttachmentThumbnails.tsx", 74],
+      ["src/views/card/components/AttachmentThumbnails.tsx", 77],
       ["src/views/card/components/ChecklistItemRow.tsx", 81],
       ["src/views/card/components/ChecklistItemRow.tsx", 111],
       ["src/views/card/components/ChecklistNameInput.tsx", 52],
@@ -5133,10 +5133,10 @@
       ["src/views/members/index.tsx", 78],
       ["src/views/onboarding/workspace-details/index.tsx", 139],
       ["src/views/onboarding/workspace-details/index.tsx", 190],
-      ["src/views/settings/components/Avatar.tsx", 200],
+      ["src/views/settings/components/Avatar.tsx", 197],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 40],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 54],
-      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 55],
+      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 58],
       ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 72],
       ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 67],
       ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 85],
@@ -5259,14 +5259,14 @@
     "message": "Profile image updated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 189]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 186]],
     "translation": "Profielafbeelding bijgewerkt"
   },
   "4XF0BB": {
     "message": "Profile picture",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 30]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 33]],
     "translation": "Profielfoto"
   },
   "7d1a0d": {
@@ -5605,7 +5605,7 @@
     "origin": [
       ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 183],
       ["src/views/card/components/Comment.tsx", 202],
-      ["src/views/settings/components/Avatar.tsx", 290]
+      ["src/views/settings/components/Avatar.tsx", 287]
     ],
     "translation": "Opslaan"
   },
@@ -5816,7 +5816,7 @@
     "message": "Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 93]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 98]],
     "translation": "Stel een wachtwoord in om inloggen met wachtwoord mogelijk te maken."
   },
   "8AbRER": {
@@ -5835,8 +5835,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/AccountSettings.tsx", 88],
-      ["src/views/settings/AccountSettings.tsx", 100],
+      ["src/views/settings/AccountSettings.tsx", 93],
+      ["src/views/settings/AccountSettings.tsx", 105],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
     ],
@@ -5870,7 +5870,7 @@
     "message": "Settings | Account",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 26]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 29]],
     "translation": "Instellingen | Account"
   },
   "iy1wb+": {
@@ -5971,7 +5971,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 328],
+      ["src/views/onboarding/select-plan/index.tsx", 327],
       ["src/views/onboarding/workspace-details/index.tsx", 395]
     ],
     "translation": "Uitloggen"
@@ -6072,7 +6072,7 @@
     "message": "Solo",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 91]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 90]],
     "translation": "Solo"
   },
   "whpQwW": {
@@ -6093,7 +6093,7 @@
     "message": "Something went wrong during license activation.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 132]],
+    "origin": [["src/components/Dashboard.tsx", 129]],
     "translation": "Er is iets misgegaan tijdens de licentieactivering."
   },
   "kf83Ld": {
@@ -6151,7 +6151,7 @@
     "message": "Start your 14-day free trial, cancel anytime.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 164]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 163]],
     "translation": "Start je gratis proefperiode van 14 dagen, op elk moment opzegbaar."
   },
   "uAQUqI": {
@@ -6240,7 +6240,7 @@
     "message": "Team",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 98]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 97]],
     "translation": "Team"
   },
   "bff61F": {
@@ -6384,7 +6384,7 @@
     "message": "That license key could not be found. Please contact support.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 124]],
+    "origin": [["src/components/Dashboard.tsx", 121]],
     "translation": "Die licentiecode kon niet worden gevonden. Neem contact op met de ondersteuning."
   },
   "NcFrgC": {
@@ -6855,7 +6855,7 @@
     "message": "Unable to delete attachment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 73]],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 76]],
     "translation": "Kan bijlage niet verwijderen"
   },
   "Z6r9z1": {
@@ -7233,7 +7233,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 175],
-      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 84],
+      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 86],
       ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 103],
       ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 99],
       ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 170]
@@ -7291,7 +7291,7 @@
     "origin": [
       ["src/views/board/components/CalendarView.tsx", 555],
       ["src/views/members/index.tsx", 305],
-      ["src/views/onboarding/select-plan/index.tsx", 254]
+      ["src/views/onboarding/select-plan/index.tsx", 253]
     ],
     "translation": "Upgraden"
   },
@@ -7317,7 +7317,7 @@
     "message": "Upgrade your plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 160]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 159]],
     "translation": "Upgrade je abonnement"
   },
   "b3Thhd": {
@@ -7853,7 +7853,7 @@
     "message": "You are about to change your password.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 92]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 97]],
     "translation": "Je staat op het punt je wachtwoord te wijzigen."
   },
   "3WXdoZ": {
@@ -7994,7 +7994,7 @@
     "message": "Your account already has a password. You can change it from your account settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 273]],
+    "origin": [["src/components/Dashboard.tsx", 270]],
     "translation": "Uw account heeft al een wachtwoord. U kunt dit wijzigen via uw accountinstellingen."
   },
   "GoDLB9": {
@@ -8010,7 +8010,7 @@
     "message": "Your avatar",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 273]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 272]],
     "translation": "Jouw avatar"
   },
   "evg7+A": {
@@ -8024,7 +8024,7 @@
     "message": "Your display name has been updated.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 42]],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 45]],
     "translation": "Je weergavenaam is bijgewerkt."
   },
   "tca56/": {
@@ -8059,14 +8059,14 @@
     "message": "Your license has been activated successfully.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 116]],
+    "origin": [["src/components/Dashboard.tsx", 113]],
     "translation": "Uw licentie is succesvol geactiveerd."
   },
   "+A6Wuq": {
     "message": "Your license is not active. Please check your account.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 125]],
+    "origin": [["src/components/Dashboard.tsx", 122]],
     "translation": "Uw licentie is niet actief. Controleer uw account."
   },
   "Ozt2vv": {
@@ -8098,7 +8098,7 @@
     "message": "Your profile image has been updated.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 190]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 187]],
     "translation": "Je profielafbeelding is bijgewerkt."
   },
   "+jbXzb": {
