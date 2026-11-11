@@ -18,6 +18,7 @@ import {
   getHasAvailablePartnerSlotQueryKey,
   useCheckSlugAvailability,
   useCreateWorkspace,
+  useGetUser,
   useGetWorkspaces,
 } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
@@ -28,7 +29,6 @@ import LoadingSpinner from "~/components/LoadingSpinner";
 import { Tooltip } from "~/components/Tooltip";
 import { useDebounce } from "~/hooks/useDebounce";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 function slugify(value: string) {
   return value
@@ -98,8 +98,8 @@ export default function WorkspaceNameView() {
       : undefined;
 
   const { data: session } = authClient.useSession();
-  const { data: user } = api.user.getUser.useQuery(undefined, {
-    enabled: !!session?.user,
+  const { data: user } = useGetUser({
+    query: { enabled: !!session?.user, select: (res) => res.data },
   });
   const { data: workspaces } = useGetWorkspaces({
     query: { select: (res) => res.data },
