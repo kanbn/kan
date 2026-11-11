@@ -7,6 +7,7 @@ import DateSelector from "~/components/DateSelector";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { useBoardCache } from "~/utils/boardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface DueDateSelectorProps {
@@ -25,6 +26,7 @@ export function DueDateSelector({
   const { showPopup } = usePopup();
   const { workspace } = useWorkspace();
   const utils = api.useUtils();
+  const boardCache = useBoardCache();
   const [isOpen, setIsOpen] = useState(false);
   const [pendingDate, setPendingDate] = useState<Date | null | undefined>(
     dueDate,
@@ -67,7 +69,7 @@ export function DueDateSelector({
     },
     onSettled: async () => {
       await invalidateCard(utils, cardPublicId);
-      await utils.board.byId.invalidate();
+      await boardCache.invalidate();
     },
   });
 

@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import { AuthPage } from "../support/pages/auth-page";
 import { BoardPage } from "../support/pages/board-page";
 import { CardPage } from "../support/pages/card-page";
@@ -84,40 +85,28 @@ test(
     expect(cardJson.dueDate).not.toBeNull();
 
     const boardResponse = await page.request.get(
-      `/api/trpc/board.byId?batch=1&input=${encodeURIComponent(
-        JSON.stringify({
-          "0": { json: { boardPublicId, cardView: "summary" } },
-        }),
-      )}`,
+      `${apiBaseURL}/boards/${boardPublicId}?cardView=summary`,
     );
     expect(boardResponse.ok()).toBe(true);
-    const boardBody = (await boardResponse.json()) as [
-      {
-        result: {
-          data: {
-            json: {
-              lists: {
-                cards: {
-                  publicId: string;
-                  description: string | null;
-                  attachments: { publicId: string }[];
-                  comments: { publicId: string }[];
-                  checklists: { publicId: string }[];
-                  summary?: {
-                    hasDescription: boolean;
-                    attachmentCount: number;
-                    hasComments: boolean;
-                    checklistItemCount: number;
-                    completedChecklistItemCount: number;
-                  };
-                }[];
-              }[];
-            };
+    const boardBody = (await boardResponse.json()) as {
+      lists: {
+        cards: {
+          publicId: string;
+          description: string | null;
+          attachments: { publicId: string }[];
+          comments: { publicId: string }[];
+          checklists: { publicId: string }[];
+          summary?: {
+            hasDescription: boolean;
+            attachmentCount: number;
+            hasComments: boolean;
+            checklistItemCount: number;
+            completedChecklistItemCount: number;
           };
-        };
-      },
-    ];
-    const boardCard = boardBody[0].result.data.json.lists
+        }[];
+      }[];
+    };
+    const boardCard = boardBody.lists
       .flatMap((list) => list.cards)
       .find((item) => item.publicId === cardPublicId);
 

@@ -1,11 +1,7 @@
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 
-import {
-  waitForResponsePath,
-  waitForTrpcMutation,
-  waitForTrpcQuery,
-} from "../wait-for-trpc";
+import { waitForResponsePath, waitForTrpcMutation } from "../wait-for-trpc";
 
 export class BoardPage {
   constructor(private readonly page: Page) {}
@@ -24,7 +20,7 @@ export class BoardPage {
     await this.page.getByPlaceholder("Name", { exact: true }).fill(name);
     await this.page.getByRole("switch", { name: "Use template" }).click();
     await this.page.getByText(templateName, { exact: true }).click();
-    const created = waitForTrpcMutation(this.page, "board.create");
+    const created = waitForResponsePath(this.page, "/boards", "POST");
     await this.page.getByRole("button", { name: "Create board" }).click();
     await created;
     await this.page.waitForURL(/\/boards\/[^/]+$/);
@@ -120,7 +116,7 @@ export class BoardPage {
     await this.page.getByRole("menuitem", { name: "Make template" }).click();
 
     const dialog = this.page.getByRole("dialog");
-    const created = waitForTrpcMutation(this.page, "board.create");
+    const created = waitForResponsePath(this.page, "/boards", "POST");
     await dialog
       .getByRole("button", { name: "Create template", exact: true })
       .click();
@@ -140,7 +136,7 @@ export class BoardPage {
       dialog.getByRole("button", { name: "Update", exact: true }),
     ).toBeEnabled();
 
-    const updated = waitForTrpcMutation(this.page, "board.update");
+    const updated = waitForResponsePath(this.page, "/boards/", "PUT");
     await dialog.getByRole("button", { name: "Update", exact: true }).click();
     await updated;
   }
@@ -156,7 +152,7 @@ export class BoardPage {
     const dialog = this.page.getByRole("dialog");
     await dialog.getByRole("combobox").selectOption({ label: workspaceName });
 
-    const moved = waitForTrpcMutation(this.page, "board.move");
+    const moved = waitForResponsePath(this.page, "/move", "POST");
     await dialog
       .getByRole("button", { name: "Move board", exact: true })
       .click();
@@ -186,7 +182,11 @@ export class BoardPage {
       .click();
     await this.page.getByRole("menuitem", { name: "Labels" }).click();
 
-    const updated = waitForTrpcQuery(this.page, "board.byId");
+    const updated = this.page.waitForResponse(
+      (res) =>
+        /^\/boards\/[^/]+$/.test(new URL(res.url()).pathname) &&
+        res.request().method() === "GET",
+    );
     await this.page
       .getByRole("checkbox", { name: labelName })
       .filter({ visible: true })

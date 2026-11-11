@@ -4,6 +4,7 @@ import { McpTransportType, McpModule as RekogMcpModule } from "@rekog/mcp-nest";
 import { AuthGuard } from "../../common/guards/auth.guard.js";
 import { AttachmentModule } from "../attachment/attachment.module.js";
 import { BoardMemberModule } from "../board-member/board-member.module.js";
+import { BoardModule } from "../board/board.module.js";
 import { ChecklistModule } from "../checklist/checklist.module.js";
 import { FeedbackModule } from "../feedback/feedback.module.js";
 import { LabelModule } from "../label/label.module.js";
@@ -15,6 +16,7 @@ import { WebhookModule } from "../webhook/webhook.module.js";
 import { WorkspaceModule } from "../workspace/workspace.module.js";
 import { AttachmentTools } from "./tools/attachment.tools.js";
 import { BoardMemberTools } from "./tools/board-member.tools.js";
+import { BoardTools } from "./tools/board.tools.js";
 import { ChecklistTools } from "./tools/checklist.tools.js";
 import { FeedbackTools } from "./tools/feedback.tools.js";
 import { LabelTools } from "./tools/label.tools.js";
@@ -36,6 +38,7 @@ const SERVER_NAME = "kan";
       guards: [AuthGuard],
     }),
     AttachmentModule,
+    BoardModule,
     BoardMemberModule,
     ChecklistModule,
     FeedbackModule,
@@ -49,6 +52,7 @@ const SERVER_NAME = "kan";
   ],
   providers: [
     AttachmentTools,
+    BoardTools,
     BoardMemberTools,
     ChecklistTools,
     FeedbackTools,

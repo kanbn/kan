@@ -15,6 +15,7 @@ import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { useBoardCache } from "~/utils/boardCache";
 
 export default function CardDropdown({
   cardPublicId,
@@ -37,7 +38,7 @@ export default function CardDropdown({
   const { showPopup } = usePopup();
   const { canEditCard, canDeleteCard } = usePermissions();
   const { data: session } = authClient.useSession();
-  const utils = api.useUtils();
+  const boardCache = useBoardCache();
   const isCreator = cardCreatedBy && session?.user.id === cardCreatedBy;
 
   const duplicateCard = api.card.duplicate.useMutation({
@@ -56,7 +57,7 @@ export default function CardDropdown({
       });
     },
     onSettled: async () => {
-      await utils.board.byId.invalidate();
+      await boardCache.invalidate();
     },
   });
 

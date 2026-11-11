@@ -129,6 +129,494 @@
         ]
       }
     },
+    "/workspaces/{workspacePublicId}/boards": {
+      "get": {
+        "operationId": "getBoards",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "regular",
+                "template"
+              ]
+            }
+          },
+          {
+            "name": "archived",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BoardListItemDto_Output"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List a workspace's boards",
+        "tags": [
+          "Boards"
+        ]
+      },
+      "post": {
+        "operationId": "createBoard",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBoardDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoardCreateResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a board",
+        "tags": [
+          "Boards"
+        ]
+      }
+    },
+    "/boards/{boardPublicId}": {
+      "get": {
+        "operationId": "getBoard",
+        "parameters": [
+          {
+            "name": "boardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "members",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 12
+              }
+            }
+          },
+          {
+            "name": "labels",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 12
+              }
+            }
+          },
+          {
+            "name": "lists",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 12
+              }
+            }
+          },
+          {
+            "name": "dueDateFilters",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "overdue",
+                  "today",
+                  "tomorrow",
+                  "next-week",
+                  "next-month",
+                  "no-due-date"
+                ]
+              }
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "regular",
+                "template"
+              ]
+            }
+          },
+          {
+            "name": "cardView",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "full",
+              "type": "string",
+              "enum": [
+                "full",
+                "summary"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoardDetailDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a board by public ID",
+        "tags": [
+          "Boards"
+        ]
+      },
+      "put": {
+        "operationId": "updateBoard",
+        "parameters": [
+          {
+            "name": "boardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBoardDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoardUpdateResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a board",
+        "tags": [
+          "Boards"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteBoard",
+        "parameters": [
+          {
+            "name": "boardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a board",
+        "tags": [
+          "Boards"
+        ]
+      }
+    },
+    "/boards/{boardPublicId}/move": {
+      "post": {
+        "operationId": "moveBoard",
+        "parameters": [
+          {
+            "name": "boardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveBoardDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Move a board to another workspace",
+        "tags": [
+          "Boards"
+        ]
+      }
+    },
+    "/boards/{boardPublicId}/check-slug-availability": {
+      "get": {
+        "operationId": "checkBoardSlugAvailability",
+        "parameters": [
+          {
+            "name": "boardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "boardSlug",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "minLength": 1,
+              "maxLength": 60,
+              "pattern": "^(?![-]+$)[a-zA-Z0-9-]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoardSlugAvailabilityDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Check if a board slug is available",
+        "tags": [
+          "Boards"
+        ]
+      }
+    },
+    "/workspaces/{workspaceSlug}/boards/{boardSlug}": {
+      "get": {
+        "operationId": "getPublicBoardBySlug",
+        "parameters": [
+          {
+            "name": "workspaceSlug",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "boardSlug",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "members",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 12
+              }
+            }
+          },
+          {
+            "name": "labels",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 12
+              }
+            }
+          },
+          {
+            "name": "lists",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 12
+              }
+            }
+          },
+          {
+            "name": "dueDateFilters",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "overdue",
+                  "today",
+                  "tomorrow",
+                  "next-week",
+                  "next-month",
+                  "no-due-date"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoardBySlugDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a public board by workspace and board slug",
+        "tags": [
+          "Boards"
+        ]
+      }
+    },
     "/boards/{boardPublicId}/members": {
       "get": {
         "operationId": "getBoardMembers",
@@ -2862,6 +3350,876 @@
         ],
         "additionalProperties": false
       },
+      "BoardListItemDto_Output": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "favorite": {
+            "type": "boolean"
+          },
+          "lists": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "index": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "publicId",
+                "name",
+                "index"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "colourCode": {
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "publicId",
+                "name",
+                "colourCode"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "publicId",
+          "name",
+          "favorite",
+          "lists",
+          "labels"
+        ],
+        "additionalProperties": false
+      },
+      "CreateBoardDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "lists": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "regular",
+              "template"
+            ]
+          },
+          "sourceBoardPublicId": {
+            "type": "string",
+            "minLength": 12
+          }
+        },
+        "required": [
+          "name",
+          "lists",
+          "labels"
+        ]
+      },
+      "BoardCreateResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "publicId",
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "BoardDetailDto_Output": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "private",
+              "public"
+            ]
+          },
+          "isArchived": {
+            "type": "boolean"
+          },
+          "favorite": {
+            "type": "boolean"
+          },
+          "workspace": {
+            "type": "object",
+            "properties": {
+              "publicId": {
+                "type": "string"
+              },
+              "cardPrefix": {
+                "type": "string"
+              },
+              "members": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "publicId": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "name": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "image": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name",
+                        "email",
+                        "image"
+                      ],
+                      "additionalProperties": false,
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "publicId",
+                    "email",
+                    "status",
+                    "user"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "publicId",
+              "cardPrefix",
+              "members"
+            ],
+            "additionalProperties": false
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "colourCode": {
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "publicId",
+                "name",
+                "colourCode"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "lists": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "index": {
+                  "type": "number"
+                },
+                "cards": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "publicId": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "index": {
+                        "type": "number"
+                      },
+                      "cardNumber": {
+                        "type": "number",
+                        "nullable": true
+                      },
+                      "dueDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                        "nullable": true
+                      },
+                      "labels": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "publicId": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "colourCode": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "publicId",
+                            "name",
+                            "colourCode"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "members": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "publicId": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            },
+                            "user": {
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "email": {
+                                  "type": "string"
+                                },
+                                "image": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "name",
+                                "email",
+                                "image"
+                              ],
+                              "additionalProperties": false,
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "publicId",
+                            "email",
+                            "user"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "attachments": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "publicId": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "publicId"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "checklists": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "publicId": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "index": {
+                              "type": "number"
+                            },
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "publicId": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "completed": {
+                                    "type": "boolean"
+                                  },
+                                  "index": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": [
+                                  "publicId",
+                                  "title",
+                                  "completed",
+                                  "index"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          },
+                          "required": [
+                            "publicId",
+                            "name",
+                            "index",
+                            "items"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "comments": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "publicId": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "publicId"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "summary": {
+                        "type": "object",
+                        "properties": {
+                          "hasDescription": {
+                            "type": "boolean"
+                          },
+                          "attachmentCount": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 9007199254740991
+                          },
+                          "hasComments": {
+                            "type": "boolean"
+                          },
+                          "checklistItemCount": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 9007199254740991
+                          },
+                          "completedChecklistItemCount": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 9007199254740991
+                          }
+                        },
+                        "required": [
+                          "hasDescription",
+                          "attachmentCount",
+                          "hasComments",
+                          "checklistItemCount",
+                          "completedChecklistItemCount"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "publicId",
+                      "title",
+                      "description",
+                      "index",
+                      "cardNumber",
+                      "dueDate",
+                      "labels",
+                      "members",
+                      "attachments",
+                      "checklists",
+                      "comments"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "publicId",
+                "name",
+                "index",
+                "cards"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "allLists": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "publicId",
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "publicId",
+          "name",
+          "slug",
+          "visibility",
+          "isArchived",
+          "favorite",
+          "workspace",
+          "labels",
+          "lists",
+          "allLists"
+        ],
+        "additionalProperties": false
+      },
+      "UpdateBoardDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "slug": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60,
+            "pattern": "^(?![-]+$)[a-zA-Z0-9-]+$"
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "public",
+              "private"
+            ]
+          },
+          "favorite": {
+            "type": "boolean"
+          },
+          "isArchived": {
+            "type": "boolean"
+          }
+        }
+      },
+      "BoardUpdateResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "publicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SuccessResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
+      },
+      "MoveBoardDto": {
+        "type": "object",
+        "properties": {
+          "targetWorkspacePublicId": {
+            "type": "string",
+            "minLength": 12
+          }
+        },
+        "required": [
+          "targetWorkspacePublicId"
+        ]
+      },
+      "BoardSlugAvailabilityDto_Output": {
+        "type": "object",
+        "properties": {
+          "isReserved": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "isReserved"
+        ],
+        "additionalProperties": false
+      },
+      "BoardBySlugDto_Output": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "private",
+              "public"
+            ]
+          },
+          "workspace": {
+            "type": "object",
+            "properties": {
+              "publicId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "slug": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "publicId",
+              "name",
+              "slug"
+            ],
+            "additionalProperties": false
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "colourCode": {
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "publicId",
+                "name",
+                "colourCode"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "lists": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "index": {
+                  "type": "number"
+                },
+                "cards": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "publicId": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "index": {
+                        "type": "number"
+                      },
+                      "dueDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                        "nullable": true
+                      },
+                      "labels": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "publicId": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "colourCode": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "publicId",
+                            "name",
+                            "colourCode"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "attachments": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "publicId": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "publicId"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "checklists": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "publicId": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "index": {
+                              "type": "number"
+                            },
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "publicId": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "completed": {
+                                    "type": "boolean"
+                                  },
+                                  "index": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": [
+                                  "publicId",
+                                  "title",
+                                  "completed",
+                                  "index"
+                                ],
+                                "additionalProperties": false
+                              }
+                            }
+                          },
+                          "required": [
+                            "publicId",
+                            "name",
+                            "index",
+                            "items"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "comments": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "publicId": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "publicId"
+                          ],
+                          "additionalProperties": false
+                        }
+                      }
+                    },
+                    "required": [
+                      "publicId",
+                      "title",
+                      "description",
+                      "index",
+                      "dueDate",
+                      "labels",
+                      "attachments",
+                      "checklists",
+                      "comments"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "publicId",
+                "name",
+                "index",
+                "cards"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "allLists": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "publicId",
+                "name"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "publicId",
+          "name",
+          "slug",
+          "visibility",
+          "workspace",
+          "labels",
+          "lists",
+          "allLists"
+        ],
+        "additionalProperties": false
+      },
       "BoardMemberDto_Output": {
         "type": "object",
         "properties": {
@@ -3285,18 +4643,6 @@
         "required": [
           "token"
         ]
-      },
-      "SuccessResponseDto_Output": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "success"
-        ],
-        "additionalProperties": false
       },
       "GitHubStatusResponseDto_Output": {
         "type": "object",

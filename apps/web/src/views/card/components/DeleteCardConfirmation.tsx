@@ -5,6 +5,7 @@ import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { useBoardCache } from "~/utils/boardCache";
 
 interface DeleteCardConfirmationProps {
   cardPublicId: string;
@@ -16,7 +17,7 @@ export function DeleteCardConfirmation({
   boardPublicId,
 }: DeleteCardConfirmationProps) {
   const { closeModal } = useModal();
-  const utils = api.useUtils();
+  const boardCache = useBoardCache();
   const router = useRouter();
   const { showPopup } = usePopup();
 
@@ -26,11 +27,11 @@ export function DeleteCardConfirmation({
 
   const deleteCardMutation = api.card.delete.useMutation({
     onMutate: async (args) => {
-      await utils.board.byId.cancel();
+      await boardCache.cancel();
 
-      const currentState = utils.board.byId.getData(queryParams);
+      const currentState = boardCache.getData(queryParams);
 
-      utils.board.byId.setData(queryParams, (oldBoard) => {
+      boardCache.setData(queryParams, (oldBoard) => {
         if (!oldBoard) return oldBoard;
 
         const updatedLists = oldBoard.lists.map((list) => {
@@ -46,7 +47,7 @@ export function DeleteCardConfirmation({
       return { previousState: currentState };
     },
     onError: (_error, _newList, context) => {
-      utils.board.byId.setData(queryParams, context?.previousState);
+      boardCache.setData(queryParams, context?.previousState);
       showPopup({
         header: t`Unable to delete card`,
         message: t`Please try again later, or contact customer support.`,
@@ -58,7 +59,7 @@ export function DeleteCardConfirmation({
     },
     onSettled: async () => {
       closeModal();
-      await utils.board.byId.invalidate(queryParams);
+      await boardCache.invalidate(queryParams.boardPublicId);
     },
   });
 

@@ -37,15 +37,9 @@ test(
     await board.moveToWorkspace("Second Workspace");
 
     const response = await page.request.get(
-      `/api/trpc/board.byId?batch=1&input=${encodeURIComponent(
-        JSON.stringify({ "0": { json: { boardPublicId } } }),
-      )}`,
+      `${apiBaseURL}/boards/${boardPublicId}`,
     );
-    const body = (await response.json()) as [
-      { result: { data: { json: { workspace: { publicId: string } } } } },
-    ];
-    expect(body[0].result.data.json.workspace.publicId).toBe(
-      secondWorkspacePublicId,
-    );
+    const body = (await response.json()) as { workspace: { publicId: string } };
+    expect(body.workspace.publicId).toBe(secondWorkspacePublicId);
   },
 );

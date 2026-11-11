@@ -15,6 +15,7 @@ import Input from "~/components/Input";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { useBoardCache } from "~/utils/boardCache";
 
 interface CardContextDuplicateModalProps {
   lists: { publicId: string; name: string }[];
@@ -25,7 +26,7 @@ export function CardContextDuplicateModal({
 }: CardContextDuplicateModalProps) {
   const { entityId: cardPublicId, closeModal } = useModal();
   const { showPopup } = usePopup();
-  const utils = api.useUtils();
+  const boardCache = useBoardCache();
 
   const [listPublicId, setListPublicId] = useState("");
   const [copyLabels, setCopyLabels] = useState(true);
@@ -66,15 +67,14 @@ export function CardContextDuplicateModal({
       });
     },
     onSettled: async () => {
-      await utils.board.byId.invalidate();
+      await boardCache.invalidate();
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!cardPublicId || !listPublicId) return;
-    const indexNum =
-      position === "" ? undefined : parseInt(position, 10);
+    const indexNum = position === "" ? undefined : parseInt(position, 10);
     if (
       position !== "" &&
       (indexNum === undefined || isNaN(indexNum) || indexNum < 0)
@@ -114,8 +114,7 @@ export function CardContextDuplicateModal({
               >
                 <span className="block truncate">
                   {listPublicId
-                    ? listOptions.find((o) => o.publicId === listPublicId)
-                        ?.name
+                    ? listOptions.find((o) => o.publicId === listPublicId)?.name
                     : t`Select a list`}
                 </span>
                 <span className="pointer-events-none absolute right-2 top-1/2 flex -translate-y-1/2 items-center">
@@ -131,7 +130,7 @@ export function CardContextDuplicateModal({
                 leaveTo="opacity-0"
               >
                 <ListboxOptions className="absolute z-50 mt-1 w-full overflow-hidden rounded-md border border-light-200 bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-400 dark:bg-dark-200">
-                  <div className="max-h-60 overflow-y-auto py-1 pr-1 scrollbar scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600">
+                  <div className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] max-h-60 overflow-y-auto py-1 pr-1 scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600">
                     {listOptions.map((option) => {
                       const isCurrentList =
                         option.publicId === currentListPublicId;

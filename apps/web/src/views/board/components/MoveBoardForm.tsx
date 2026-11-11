@@ -2,17 +2,14 @@ import { useRouter } from "next/navigation";
 import { t } from "@lingui/core/macro";
 import { useState } from "react";
 
+import { useMoveBoard } from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
 
-export function MoveBoardForm({
-  boardPublicId,
-}: {
-  boardPublicId: string;
-}) {
+export function MoveBoardForm({ boardPublicId }: { boardPublicId: string }) {
   const router = useRouter();
   const { closeModal } = useModal();
   const { showPopup } = usePopup();
@@ -23,38 +20,37 @@ export function MoveBoardForm({
     (ws) => ws.publicId !== workspace.publicId && ws.role !== "guest",
   );
 
-  const moveBoard = api.board.move.useMutation({
-    onSuccess: () => {
-      const targetWorkspace = availableWorkspaces.find(
-        (ws) => ws.publicId === targetWorkspacePublicId,
-      );
-      closeModal();
-      showPopup({
-        header: t`Board moved`,
-        message: t`The board has been moved to ${targetWorkspace?.name ?? "the workspace"}.`,
-        icon: "success",
-      });
-      if (targetWorkspace) {
-        switchWorkspace(targetWorkspace);
-      } else {
-        router.push("/boards");
-      }
-    },
-    onError: (error) => {
-      showPopup({
-        header: t`Unable to move board`,
-        message: error.message,
-        icon: "error",
-      });
+  const moveBoard = useMoveBoard({
+    mutation: {
+      onSuccess: () => {
+        const targetWorkspace = availableWorkspaces.find(
+          (ws) => ws.publicId === targetWorkspacePublicId,
+        );
+        closeModal();
+        showPopup({
+          header: t`Board moved`,
+          message: t`The board has been moved to ${targetWorkspace?.name ?? "the workspace"}.`,
+          icon: "success",
+        });
+        if (targetWorkspace) {
+          switchWorkspace(targetWorkspace);
+        } else {
+          router.push("/boards");
+        }
+      },
+      onError: (error) => {
+        showPopup({
+          header: t`Unable to move board`,
+          message: error instanceof Error ? error.message : "",
+          icon: "error",
+        });
+      },
     },
   });
 
   const handleMoveBoard = () => {
     if (!targetWorkspacePublicId) return;
-    moveBoard.mutate({
-      boardPublicId,
-      targetWorkspacePublicId,
-    });
+    moveBoard.mutate({ boardPublicId, data: { targetWorkspacePublicId } });
   };
 
   return (

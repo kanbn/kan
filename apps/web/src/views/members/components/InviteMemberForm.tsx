@@ -29,8 +29,8 @@ import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
 import { getApiErrorStatus } from "~/utils/apiError";
+import { useBoardCache } from "~/utils/boardCache";
 
 export function InviteMemberForm({
   subscriptions,
@@ -43,7 +43,7 @@ export function InviteMemberForm({
   memberCount: number;
   seatLimit: number | null;
 }) {
-  const utils = api.useUtils();
+  const boardCache = useBoardCache();
   const queryClient = useQueryClient();
   const [isShareInviteLinkEnabled, setIsShareInviteLinkEnabled] =
     useState(false);
@@ -74,7 +74,7 @@ export function InviteMemberForm({
     resolver: zodResolver(InviteMemberSchema),
   });
 
-  const refetchBoards = () => utils.board.all.refetch();
+  const refetchBoards = () => boardCache.refetchLists();
 
   // Fetch active invite link on component mount
   const { data: activeInviteLink, refetch: _refetchInviteLink } =

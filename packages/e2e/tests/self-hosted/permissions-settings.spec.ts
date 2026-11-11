@@ -126,16 +126,12 @@ test(
     if (!boardPublicId) throw new Error("Could not resolve board from URL");
 
     const listResponse = await page.request.get(
-      `/api/trpc/board.byId?batch=1&input=${encodeURIComponent(
-        JSON.stringify({
-          "0": { json: { boardPublicId } },
-        }),
-      )}`,
+      `${apiBaseURL}/boards/${boardPublicId}`,
     );
-    const listBody = (await listResponse.json()) as [
-      { result: { data: { json: { lists: { publicId: string }[] } } } },
-    ];
-    const targetListPublicId = listBody[0].result.data.json.lists[0]?.publicId;
+    const listBody = (await listResponse.json()) as {
+      lists: { publicId: string }[];
+    };
+    const targetListPublicId = listBody.lists[0]?.publicId;
     if (!targetListPublicId) throw new Error("Could not resolve list publicId");
 
     await settings.open();
