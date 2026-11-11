@@ -8,12 +8,14 @@ import { FeedbackModule } from "../feedback/feedback.module.js";
 import { LabelModule } from "../label/label.module.js";
 import { ListModule } from "../list/list.module.js";
 import { MemberModule } from "../member/member.module.js";
+import { WorkspaceModule } from "../workspace/workspace.module.js";
 import { BoardMemberTools } from "./tools/board-member.tools.js";
 import { ChecklistTools } from "./tools/checklist.tools.js";
 import { FeedbackTools } from "./tools/feedback.tools.js";
 import { LabelTools } from "./tools/label.tools.js";
 import { ListTools } from "./tools/list.tools.js";
 import { MemberTools } from "./tools/member.tools.js";
+import { WorkspaceTools } from "./tools/workspace.tools.js";
 
 const SERVER_NAME = "kan";
 
@@ -31,6 +33,7 @@ const SERVER_NAME = "kan";
     LabelModule,
     ListModule,
     MemberModule,
+    WorkspaceModule,
   ],
   providers: [
     BoardMemberTools,
@@ -39,6 +42,7 @@ const SERVER_NAME = "kan";
     LabelTools,
     ListTools,
     MemberTools,
+    WorkspaceTools,
   ],
 })
 export class McpModule {}
