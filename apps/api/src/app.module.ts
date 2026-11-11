@@ -10,6 +10,7 @@ import { FeedbackModule } from "./modules/feedback/feedback.module.js";
 import { LabelModule } from "./modules/label/label.module.js";
 import { ListModule } from "./modules/list/list.module.js";
 import { McpModule } from "./modules/mcp/mcp.module.js";
+import { MemberModule } from "./modules/member/member.module.js";
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { McpModule } from "./modules/mcp/mcp.module.js";
     LabelModule,
     ListModule,
     McpModule,
+    MemberModule,
   ],
   controllers: [HealthController],
   providers: [

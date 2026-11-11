@@ -3,13 +3,14 @@ import { t } from "@lingui/core/macro";
 import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 
+import { useAcceptInviteLink, useGetInviteByCode } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
 import Button from "~/components/Button";
 import LoadingSpinner from "~/components/LoadingSpinner";
 import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
-import { api } from "~/utils/api";
+import { getApiErrorStatus } from "~/utils/apiError";
 
 export default function InvitePage() {
   const router = useRouter();
@@ -23,35 +24,40 @@ export default function InvitePage() {
 
   const inviteCode = Array.isArray(code) ? code[0] : code;
 
-  const acceptInviteMutation = api.member.acceptInviteLink.useMutation({
-    onSuccess: (result) => {
-      if (result.success) {
-        return router.push(
-          `/boards?workspacePublicId=${result.workspacePublicId}`,
-        );
-      }
-    },
-    onError: (error) => {
-      if (error.data?.code === "CONFLICT") {
-        return router.push(`/boards`);
-      }
+  const acceptInviteMutation = useAcceptInviteLink({
+    mutation: {
+      onSuccess: (result) => {
+        if (result.data.success) {
+          return router.push(
+            `/boards?workspacePublicId=${result.data.workspacePublicId}`,
+          );
+        }
+      },
+      onError: (error) => {
+        const status = getApiErrorStatus(error);
 
-      if (
-        error.data?.code === "FORBIDDEN" &&
-        error.message === "SEAT_LIMIT_REACHED"
-      ) {
+        if (status === 409) {
+          return router.push(`/boards`);
+        }
+
+        if (
+          status === 403 &&
+          error instanceof Error &&
+          error.message === "SEAT_LIMIT_REACHED"
+        ) {
+          setError(
+            t`This workspace has reached its member limit. The workspace owner will need to upgrade their plan.`,
+          );
+          setIsProcessing(false);
+          return;
+        }
+
         setError(
-          t`This workspace has reached its member limit. The workspace owner will need to upgrade their plan.`,
+          (error instanceof Error && error.message) ||
+            t`Failed to accept invitation. Please try again later, or contact customer support.`,
         );
         setIsProcessing(false);
-        return;
-      }
-
-      setError(
-        error.message ||
-          t`Failed to accept invitation. Please try again later, or contact customer support.`,
-      );
-      setIsProcessing(false);
+      },
     },
   });
 
@@ -59,13 +65,9 @@ export default function InvitePage() {
     data: inviteInfo,
     isLoading: isInviteInfoLoading,
     isError: isInviteInfoError,
-  } = api.member.getInviteByCode.useQuery(
-    { inviteCode: inviteCode ?? "" },
-    {
-      enabled: !!inviteCode,
-      retry: false,
-    },
-  );
+  } = useGetInviteByCode(inviteCode ?? "", {
+    query: { enabled: !!inviteCode, retry: false },
+  });
 
   // Auto accept invite if user is logged in
   useEffect(() => {
@@ -74,7 +76,7 @@ export default function InvitePage() {
       setError(null);
 
       acceptInviteMutation.mutate({
-        inviteCode,
+        data: { inviteCode },
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -22,6 +22,7 @@
     "@kan/db": "workspace:*",
     "@kan/logger": "workspace:^",
     "@kan/shared": "workspace:^",
+    "@kan/stripe": "workspace:^",
     "@kan/tsconfig": "workspace:*",
     "@modelcontextprotocol/sdk": "^1.11.0",
     "@nestjs/common": "^11.2.7",

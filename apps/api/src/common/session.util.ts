@@ -24,3 +24,13 @@ export async function resolveUserFromHeaders(
   const session = await auth.api.getSession({ headers });
   return { user: (session?.user as User | undefined) ?? null };
 }
+
+export function sendMagicLinkInvite(
+  headers: Headers,
+  input: { email: string; callbackURL: string },
+) {
+  return auth.api.signInMagicLink({
+    headers,
+    body: { email: input.email, callbackURL: input.callbackURL },
+  });
+}

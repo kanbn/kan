@@ -88,6 +88,9 @@ importers:
       '@kan/shared':
         specifier: workspace:^
         version: link:../../packages/shared
+      '@kan/stripe':
+        specifier: workspace:^
+        version: link:../../packages/stripe
       '@kan/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
