@@ -1092,6 +1092,498 @@
           "Invites"
         ]
       }
+    },
+    "/workspaces/{workspacePublicId}/permissions/me": {
+      "get": {
+        "operationId": "getMyPermissions",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMyPermissionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get my permissions",
+        "tags": [
+          "Permissions"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}/members/{memberPublicId}/permissions": {
+      "get": {
+        "operationId": "getMemberPermissions",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memberPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMemberPermissionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get member permissions",
+        "tags": [
+          "Permissions"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}/members/{memberPublicId}/permissions/grant": {
+      "post": {
+        "operationId": "grantPermission",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memberPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionActionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Grant permission to member",
+        "tags": [
+          "Permissions"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}/members/{memberPublicId}/permissions/revoke": {
+      "post": {
+        "operationId": "revokePermission",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memberPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionActionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Revoke permission from member",
+        "tags": [
+          "Permissions"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}/members/{memberPublicId}/permissions/reset": {
+      "post": {
+        "operationId": "resetMemberPermissions",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memberPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Reset member permissions to role defaults",
+        "tags": [
+          "Permissions"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}/members/permissions/reset": {
+      "post": {
+        "operationId": "resetWorkspaceMemberPermissions",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Reset all member permission overrides in a workspace",
+        "tags": [
+          "Permissions"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}/roles": {
+      "get": {
+        "operationId": "getWorkspaceRoles",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWorkspaceRolesResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get workspace roles",
+        "tags": [
+          "Permissions"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}/roles/permissions": {
+      "get": {
+        "operationId": "getWorkspaceRolePermissions",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWorkspaceRolePermissionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get workspace role permissions",
+        "tags": [
+          "Permissions"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}/roles/{rolePublicId}/permissions": {
+      "get": {
+        "operationId": "getRolePermissions",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rolePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRolePermissionsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get role permissions",
+        "tags": [
+          "Permissions"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}/roles/{rolePublicId}/permissions/grant": {
+      "post": {
+        "operationId": "grantRolePermission",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rolePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionActionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Grant permission to role",
+        "tags": [
+          "Permissions"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}/roles/{rolePublicId}/permissions/revoke": {
+      "post": {
+        "operationId": "revokeRolePermission",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rolePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionActionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Revoke permission from role",
+        "tags": [
+          "Permissions"
+        ]
+      }
     }
   },
   "info": {
@@ -1677,6 +2169,209 @@
         },
         "required": [
           "success"
+        ]
+      },
+      "GetMyPermissionsResponseDto": {
+        "type": "object",
+        "properties": {
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "role": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "permissions",
+          "role"
+        ]
+      },
+      "GetMemberPermissionsResponseDto": {
+        "type": "object",
+        "properties": {
+          "memberPublicId": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "overrides": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "permission": {
+                  "type": "string"
+                },
+                "granted": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "permission",
+                "granted"
+              ]
+            }
+          }
+        },
+        "required": [
+          "memberPublicId",
+          "role",
+          "permissions",
+          "overrides"
+        ]
+      },
+      "PermissionActionDto": {
+        "type": "object",
+        "properties": {
+          "permission": {
+            "type": "string",
+            "enum": [
+              "workspace:view",
+              "workspace:edit",
+              "workspace:delete",
+              "workspace:manage",
+              "board:view",
+              "board:create",
+              "board:edit",
+              "board:delete",
+              "list:view",
+              "list:create",
+              "list:edit",
+              "list:delete",
+              "card:view",
+              "card:create",
+              "card:edit",
+              "card:delete",
+              "comment:view",
+              "comment:create",
+              "comment:edit",
+              "comment:delete",
+              "member:view",
+              "member:invite",
+              "member:edit",
+              "member:remove"
+            ]
+          }
+        },
+        "required": [
+          "permission"
+        ]
+      },
+      "SuccessResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ]
+      },
+      "GetWorkspaceRolesResponseDto": {
+        "type": "object",
+        "properties": {
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string",
+                  "minLength": 12
+                },
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "hierarchyLevel": {
+                  "type": "number"
+                },
+                "isSystem": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "publicId",
+                "name",
+                "description",
+                "hierarchyLevel",
+                "isSystem"
+              ]
+            }
+          }
+        },
+        "required": [
+          "roles"
+        ]
+      },
+      "GetWorkspaceRolePermissionsResponseDto": {
+        "type": "object",
+        "properties": {
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string",
+                  "minLength": 12
+                },
+                "name": {
+                  "type": "string"
+                },
+                "permissions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "publicId",
+                "name",
+                "permissions"
+              ]
+            }
+          }
+        },
+        "required": [
+          "roles"
+        ]
+      },
+      "GetRolePermissionsResponseDto": {
+        "type": "object",
+        "properties": {
+          "rolePublicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "rolePublicId",
+          "name",
+          "permissions"
         ]
       }
     }

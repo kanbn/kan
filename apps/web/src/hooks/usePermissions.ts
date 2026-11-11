@@ -1,8 +1,9 @@
-import type { Permission } from "@kan/shared";
 import { useContext } from "react";
 
+import type { Permission } from "@kan/shared";
+import { useGetMyPermissions } from "@kan/api-client/hooks";
+
 import { WorkspaceContext } from "~/providers/workspace";
-import { api } from "~/utils/api";
 
 interface UsePermissionsResult {
   permissions: Permission[];
@@ -34,6 +35,13 @@ interface UsePermissionsResult {
 export function usePermissions(): UsePermissionsResult {
   // Check if WorkspaceProvider is available (for public board views, it may not be)
   const workspaceContext = useContext(WorkspaceContext);
+  const workspacePublicId = workspaceContext?.workspace.publicId ?? "";
+
+  // Always call the hook (never conditionally) so hook order stays stable
+  // across renders; `enabled` controls whether it actually fetches.
+  const { data: result, isLoading } = useGetMyPermissions(workspacePublicId, {
+    query: { enabled: !!workspaceContext && !!workspacePublicId },
+  });
 
   // If WorkspaceProvider is not available, return safe defaults
   if (!workspaceContext) {
@@ -66,17 +74,8 @@ export function usePermissions(): UsePermissionsResult {
     return emptyPermissions;
   }
 
-  const { workspace } = workspaceContext;
-
-  const { data, isLoading } = api.permission.getMyPermissions.useQuery(
-    { workspacePublicId: workspace.publicId },
-    {
-      enabled: !!workspace.publicId,
-    },
-  );
-
-  const permissions = (data?.permissions ?? []) as Permission[];
-  const role = data?.role ?? null;
+  const permissions = (result?.data.permissions ?? []) as Permission[];
+  const role = result?.data.role ?? null;
 
   const hasPermission = (permission: Permission): boolean => {
     return permissions.includes(permission);
@@ -109,4 +108,3 @@ export function usePermissions(): UsePermissionsResult {
     canEditWorkspace: hasPermission("workspace:edit"),
   };
 }
-

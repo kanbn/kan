@@ -1,8 +1,16 @@
 import { t } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
+import { useQueryClient } from "@tanstack/react-query";
 import { HiXMark } from "react-icons/hi2";
 
 import type { Permission } from "@kan/shared";
+import {
+  getGetMemberPermissionsQueryKey,
+  useGetMemberPermissions,
+  useGrantPermission,
+  useResetMemberPermissions,
+  useRevokePermission,
+} from "@kan/api-client/hooks";
 import { permissionCategories } from "@kan/shared";
 
 import Button from "~/components/Button";
@@ -10,7 +18,6 @@ import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
 import { permissionCategoryLabel } from "~/utils/permission-category-label";
 
 export function EditMemberPermissionsModal() {
@@ -18,89 +25,91 @@ export function EditMemberPermissionsModal() {
   const { workspace } = useWorkspace();
   const { modalContentType, entityId, entityLabel, closeModal } = useModal();
   const { showPopup } = usePopup();
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
 
-  const { data, isLoading } = api.permission.getMemberPermissions.useQuery(
+  const { data: result, isLoading } = useGetMemberPermissions(
+    workspace.publicId,
+    entityId,
     {
-      workspacePublicId: workspace.publicId,
-      memberPublicId: entityId,
-    },
-    {
-      enabled:
-        modalContentType === "EDIT_MEMBER_PERMISSIONS" && !!entityId,
+      query: {
+        enabled: modalContentType === "EDIT_MEMBER_PERMISSIONS" && !!entityId,
+      },
     },
   );
+  const data = result?.data;
 
-  const grantMutation = api.permission.grantPermission.useMutation({
-    onSuccess: () => {
-      showPopup({
-        header: t`Permissions updated`,
-        message: t`The member's permissions have been updated.`,
-        icon: "success",
-      });
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to update permissions`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await utils.permission.getMemberPermissions.invalidate({
-        workspacePublicId: workspace.publicId,
-        memberPublicId: entityId,
-      });
+  const invalidateMemberPermissions = () =>
+    queryClient.invalidateQueries({
+      queryKey: getGetMemberPermissionsQueryKey(workspace.publicId, entityId),
+    });
+
+  const grantMutation = useGrantPermission({
+    mutation: {
+      onSuccess: () => {
+        showPopup({
+          header: t`Permissions updated`,
+          message: t`The member's permissions have been updated.`,
+          icon: "success",
+        });
+      },
+      onError: () => {
+        showPopup({
+          header: t`Unable to update permissions`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        await invalidateMemberPermissions();
+      },
     },
   });
 
-  const revokeMutation = api.permission.revokePermission.useMutation({
-    onSuccess: () => {
-      showPopup({
-        header: t`Permissions updated`,
-        message: t`The member's permissions have been updated.`,
-        icon: "success",
-      });
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to update permissions`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await utils.permission.getMemberPermissions.invalidate({
-        workspacePublicId: workspace.publicId,
-        memberPublicId: entityId,
-      });
+  const revokeMutation = useRevokePermission({
+    mutation: {
+      onSuccess: () => {
+        showPopup({
+          header: t`Permissions updated`,
+          message: t`The member's permissions have been updated.`,
+          icon: "success",
+        });
+      },
+      onError: () => {
+        showPopup({
+          header: t`Unable to update permissions`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        await invalidateMemberPermissions();
+      },
     },
   });
 
-  const resetMutation = api.permission.resetMemberPermissions.useMutation({
-    onSuccess: async () => {
-      showPopup({
-        header: t`Permissions reset`,
-        message: t`This member's permissions have been reset to their role defaults.`,
-        icon: "success",
-      });
+  const resetMutation = useResetMemberPermissions({
+    mutation: {
+      onSuccess: async () => {
+        showPopup({
+          header: t`Permissions reset`,
+          message: t`This member's permissions have been reset to their role defaults.`,
+          icon: "success",
+        });
 
-      await utils.permission.getMemberPermissions.invalidate({
-        workspacePublicId: workspace.publicId,
-        memberPublicId: entityId,
-      });
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to reset permissions`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
+        await invalidateMemberPermissions();
+      },
+      onError: () => {
+        showPopup({
+          header: t`Unable to reset permissions`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
     },
   });
 
   const effectivePermissions = (data?.permissions ?? []) as Permission[];
-  const hasOverrides = (data?.overrides?.length ?? 0) > 0;
+  const hasOverrides = (data?.overrides.length ?? 0) > 0;
   const isBusy =
     grantMutation.isPending ||
     revokeMutation.isPending ||
@@ -113,13 +122,13 @@ export function EditMemberPermissionsModal() {
       grantMutation.mutate({
         workspacePublicId: workspace.publicId,
         memberPublicId: entityId,
-        permission,
+        data: { permission },
       });
     } else {
       revokeMutation.mutate({
         workspacePublicId: workspace.publicId,
         memberPublicId: entityId,
-        permission,
+        data: { permission },
       });
     }
   };
@@ -183,7 +192,7 @@ export function EditMemberPermissionsModal() {
             {t`Loading permissions...`}
           </p>
         ) : (
-          <div className="max-h-80 pb-4 space-y-3 overflow-y-auto pr-1">
+          <div className="max-h-80 space-y-3 overflow-y-auto pb-4 pr-1">
             {Object.values(permissionCategories).map((category, index) => (
               <div
                 key={category.label}
@@ -252,5 +261,3 @@ export function EditMemberPermissionsModal() {
     </div>
   );
 }
-
-
