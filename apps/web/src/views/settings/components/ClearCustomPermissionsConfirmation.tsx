@@ -1,13 +1,12 @@
 import { t } from "@lingui/core/macro";
 
+import type { useResetWorkspaceMemberPermissions } from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
-import type { api } from "~/utils/api";
 
-type ResetMutation = ReturnType<
-  typeof api.permission.resetWorkspaceMemberPermissions.useMutation
->;
+type ResetMutation = ReturnType<typeof useResetWorkspaceMemberPermissions>;
 
 export function ClearCustomPermissionsConfirmation({
   resetAllOverrides,
@@ -51,5 +50,3 @@ export function ClearCustomPermissionsConfirmation({
     </div>
   );
 }
-
-

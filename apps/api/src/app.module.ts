@@ -11,6 +11,7 @@ import { LabelModule } from "./modules/label/label.module.js";
 import { ListModule } from "./modules/list/list.module.js";
 import { McpModule } from "./modules/mcp/mcp.module.js";
 import { MemberModule } from "./modules/member/member.module.js";
+import { PermissionModule } from "./modules/permission/permission.module.js";
 import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
 
 @Module({
@@ -22,6 +23,7 @@ import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
     ListModule,
     McpModule,
     MemberModule,
+    PermissionModule,
     WorkspaceModule,
   ],
   controllers: [HealthController],

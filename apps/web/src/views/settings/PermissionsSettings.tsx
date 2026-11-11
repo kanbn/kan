@@ -1,7 +1,10 @@
 import { t } from "@lingui/core/macro";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { getGetWorkspaceQueryKey } from "@kan/api-client/hooks";
+import {
+  getGetWorkspaceQueryKey,
+  useResetWorkspaceMemberPermissions,
+} from "@kan/api-client/hooks";
 
 import Button from "~/components/Button";
 import Modal from "~/components/modal";
@@ -9,7 +12,6 @@ import { PageHead } from "~/components/PageHead";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
 import { ClearCustomPermissionsConfirmation } from "./components/ClearCustomPermissionsConfirmation";
 import { RolePermissions } from "./components/RolePermissions";
 
@@ -21,8 +23,8 @@ export default function PermissionsSettings() {
 
   const isAdmin = workspace.role === "admin";
 
-  const resetAllOverrides =
-    api.permission.resetWorkspaceMemberPermissions.useMutation({
+  const resetAllOverrides = useResetWorkspaceMemberPermissions({
+    mutation: {
       onSuccess: async () => {
         showPopup({
           header: t`Overrides cleared`,
@@ -44,7 +46,8 @@ export default function PermissionsSettings() {
           icon: "error",
         });
       },
-    });
+    },
+  });
 
   return (
     <>
