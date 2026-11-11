@@ -180,6 +180,258 @@
         ]
       }
     },
+    "/checklists/{checklistPublicId}": {
+      "put": {
+        "operationId": "updateChecklist",
+        "parameters": [
+          {
+            "name": "checklistPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateChecklistDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChecklistResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a checklist",
+        "tags": [
+          "Cards"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteChecklist",
+        "parameters": [
+          {
+            "name": "checklistPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteChecklistResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a checklist",
+        "tags": [
+          "Cards"
+        ]
+      }
+    },
+    "/checklists/{checklistPublicId}/items": {
+      "post": {
+        "operationId": "createChecklistItem",
+        "parameters": [
+          {
+            "name": "checklistPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChecklistItemDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChecklistItemResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add an item to a checklist",
+        "tags": [
+          "Cards"
+        ]
+      }
+    },
+    "/checklists/items/{checklistItemPublicId}": {
+      "patch": {
+        "operationId": "updateChecklistItem",
+        "parameters": [
+          {
+            "name": "checklistItemPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateChecklistItemDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChecklistItemResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a checklist item",
+        "tags": [
+          "Cards"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteChecklistItem",
+        "parameters": [
+          {
+            "name": "checklistItemPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteChecklistResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a checklist item",
+        "tags": [
+          "Cards"
+        ]
+      }
+    },
+    "/cards/{cardPublicId}/checklists": {
+      "post": {
+        "operationId": "createChecklist",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChecklistDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChecklistResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add a checklist to a card",
+        "tags": [
+          "Cards"
+        ]
+      }
+    },
     "/feedback": {
       "post": {
         "operationId": "createFeedback",
@@ -669,6 +921,108 @@
         },
         "required": [
           "publicId"
+        ]
+      },
+      "UpdateChecklistDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "ChecklistResponseDto": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "publicId",
+          "name"
+        ]
+      },
+      "DeleteChecklistResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ]
+      },
+      "CreateChecklistItemDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
+      "ChecklistItemResponseDto": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "completed": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "publicId",
+          "title",
+          "completed"
+        ]
+      },
+      "UpdateChecklistItemDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "completed": {
+            "type": "boolean"
+          },
+          "index": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        }
+      },
+      "CreateChecklistDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        },
+        "required": [
+          "name"
         ]
       },
       "CreateFeedbackDto": {

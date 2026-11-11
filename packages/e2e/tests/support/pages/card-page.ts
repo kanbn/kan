@@ -161,7 +161,7 @@ export class CardPage {
     const nameInput = dialog.getByPlaceholder("Checklist name");
     await nameInput.fill(name);
 
-    const created = waitForTrpcMutation(this.page, "checklist.create");
+    const created = waitForResponsePath(this.page, "/checklists", "POST");
     await dialog
       .getByRole("button", { name: "Create checklist", exact: true })
       .click();
@@ -177,14 +177,18 @@ export class CardPage {
     await itemInput.click();
     await itemInput.pressSequentially(title);
 
-    const created = waitForTrpcMutation(this.page, "checklist.createItem");
+    const created = waitForResponsePath(this.page, "/items", "POST");
     await this.page.keyboard.press("Enter");
     await created;
   }
 
   async toggleChecklistItem(title: string) {
     const row = this.page.locator("div.items-start").filter({ hasText: title });
-    const updated = waitForTrpcMutation(this.page, "checklist.updateItem");
+    const updated = waitForResponsePath(
+      this.page,
+      "/checklists/items/",
+      "PATCH",
+    );
     await row.getByRole("checkbox").click();
     await updated;
   }
@@ -198,7 +202,11 @@ export class CardPage {
   async deleteChecklistItem(title: string) {
     const row = this.checklistItemRow(title);
     await row.hover();
-    const deleted = waitForTrpcMutation(this.page, "checklist.deleteItem");
+    const deleted = waitForResponsePath(
+      this.page,
+      "/checklists/items/",
+      "DELETE",
+    );
     await row.locator("button").click();
     await deleted;
   }
@@ -221,7 +229,11 @@ export class CardPage {
       await this.page.keyboard.press("ArrowDown");
       await this.page.waitForTimeout(100);
     }
-    const reordered = waitForTrpcMutation(this.page, "checklist.updateItem");
+    const reordered = waitForResponsePath(
+      this.page,
+      "/checklists/items/",
+      "PATCH",
+    );
     await this.page.keyboard.press("Space");
     await reordered;
   }
@@ -230,7 +242,7 @@ export class CardPage {
     await this.page
       .getByRole("button", { name: "Delete checklist", exact: true })
       .click();
-    const deleted = waitForTrpcMutation(this.page, "checklist.delete");
+    const deleted = waitForResponsePath(this.page, "/checklists/", "DELETE");
     await this.page
       .getByRole("button", { name: "Delete", exact: true })
       .click();

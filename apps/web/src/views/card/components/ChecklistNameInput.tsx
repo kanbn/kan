@@ -2,6 +2,8 @@ import { t } from "@lingui/core/macro";
 import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
+import { useUpdateChecklist } from "@kan/api-client/hooks";
+
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
 import { invalidateCard } from "~/utils/cardInvalidation";
@@ -26,30 +28,34 @@ export default function ChecklistNameInput({
     setName(initialName);
   }, [initialName, checklistPublicId]);
 
-  const update = api.checklist.update.useMutation({
-    onMutate: async (vars) => {
-      await utils.card.byId.cancel({ cardPublicId });
-      const previous = utils.card.byId.getData({ cardPublicId });
-      utils.card.byId.setData({ cardPublicId }, (old) => {
-        if (!old) return old as any;
-        const updated = old.checklists.map((cl) =>
-          cl.publicId === checklistPublicId ? { ...cl, name: vars.name } : cl,
-        );
-        return { ...old, checklists: updated } as typeof old;
-      });
-      return { previous };
-    },
-    onError: (_err, _vars, ctx) => {
-      if (ctx?.previous)
-        utils.card.byId.setData({ cardPublicId }, ctx.previous);
-      showPopup({
-        header: t`Unable to update checklist`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await invalidateCard(utils, cardPublicId);
+  const update = useUpdateChecklist({
+    mutation: {
+      onMutate: async (vars) => {
+        await utils.card.byId.cancel({ cardPublicId });
+        const previous = utils.card.byId.getData({ cardPublicId });
+        utils.card.byId.setData({ cardPublicId }, (old) => {
+          if (!old) return old as any;
+          const updated = old.checklists.map((cl) =>
+            cl.publicId === checklistPublicId
+              ? { ...cl, name: vars.data.name }
+              : cl,
+          );
+          return { ...old, checklists: updated } as typeof old;
+        });
+        return { previous };
+      },
+      onError: (_err, _vars, ctx) => {
+        if (ctx?.previous)
+          utils.card.byId.setData({ cardPublicId }, ctx.previous);
+        showPopup({
+          header: t`Unable to update checklist`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        await invalidateCard(utils, cardPublicId);
+      },
     },
   });
 
@@ -57,7 +63,7 @@ export default function ChecklistNameInput({
     if (viewOnly) return;
     const trimmed = name.trim();
     if (!trimmed || trimmed === initialName) return;
-    update.mutate({ checklistPublicId, name: trimmed });
+    update.mutate({ checklistPublicId, data: { name: trimmed } });
   };
 
   return (

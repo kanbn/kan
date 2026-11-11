@@ -85,6 +85,9 @@ importers:
       '@kan/logger':
         specifier: workspace:^
         version: link:../../packages/logger
+      '@kan/shared':
+        specifier: workspace:^
+        version: link:../../packages/shared
       '@kan/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript

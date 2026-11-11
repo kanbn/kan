@@ -16,6 +16,8 @@ import { t } from "@lingui/core/macro";
 import { useMemo } from "react";
 import { HiPlus, HiXMark } from "react-icons/hi2";
 
+import { useUpdateChecklistItem } from "@kan/api-client/hooks";
+
 import CircularProgress from "~/components/CircularProgress";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -57,46 +59,48 @@ export default function Checklists({
 
   const utils = api.useUtils();
 
-  const reorderItemMutation = api.checklist.updateItem.useMutation({
-    onMutate: async (vars) => {
-      await utils.card.byId.cancel({ cardPublicId });
-      const previous = utils.card.byId.getData({ cardPublicId });
+  const reorderItemMutation = useUpdateChecklistItem({
+    mutation: {
+      onMutate: async (vars) => {
+        await utils.card.byId.cancel({ cardPublicId });
+        const previous = utils.card.byId.getData({ cardPublicId });
 
-      utils.card.byId.setData({ cardPublicId }, (old) => {
-        if (!old) return old;
+        utils.card.byId.setData({ cardPublicId }, (old) => {
+          if (!old) return old;
 
-        const updatedChecklists = old.checklists.map((cl) => {
-          const itemIndex = cl.items.findIndex(
-            (item) => item.publicId === vars.checklistItemPublicId,
-          );
+          const updatedChecklists = old.checklists.map((cl) => {
+            const itemIndex = cl.items.findIndex(
+              (item) => item.publicId === vars.checklistItemPublicId,
+            );
 
-          if (itemIndex === -1 || vars.index === undefined) return cl;
+            if (itemIndex === -1 || vars.data.index === undefined) return cl;
 
-          const newIndex = vars.index;
-          const items = Array.from(cl.items);
-          const [movedItem] = items.splice(itemIndex, 1);
-          if (!movedItem) return cl;
-          items.splice(newIndex, 0, movedItem);
+            const newIndex = vars.data.index;
+            const items = Array.from(cl.items);
+            const [movedItem] = items.splice(itemIndex, 1);
+            if (!movedItem) return cl;
+            items.splice(newIndex, 0, movedItem);
 
-          return { ...cl, items };
+            return { ...cl, items };
+          });
+
+          return { ...old, checklists: updatedChecklists } as typeof old;
         });
 
-        return { ...old, checklists: updatedChecklists } as typeof old;
-      });
-
-      return { previous };
-    },
-    onError: (_err, _vars, ctx) => {
-      if (ctx?.previous)
-        utils.card.byId.setData({ cardPublicId }, ctx.previous);
-      showPopup({
-        header: t`Unable to reorder checklist item`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await utils.card.byId.invalidate({ cardPublicId });
+        return { previous };
+      },
+      onError: (_err, _vars, ctx) => {
+        if (ctx?.previous)
+          utils.card.byId.setData({ cardPublicId }, ctx.previous);
+        showPopup({
+          header: t`Unable to reorder checklist item`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        await utils.card.byId.invalidate({ cardPublicId });
+      },
     },
   });
 
@@ -138,7 +142,7 @@ export default function Checklists({
 
     reorderItemMutation.mutate({
       checklistItemPublicId: String(active.id),
-      index: overIndex,
+      data: { index: overIndex },
     });
   };
 

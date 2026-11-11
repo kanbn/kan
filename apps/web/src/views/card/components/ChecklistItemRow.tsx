@@ -8,6 +8,11 @@ import { HiXMark } from "react-icons/hi2";
 import { RiDraggable } from "react-icons/ri";
 import { twMerge } from "tailwind-merge";
 
+import {
+  useDeleteChecklistItem,
+  useUpdateChecklistItem,
+} from "@kan/api-client/hooks";
+
 import PlainTextEditor from "~/components/PlainTextEditor";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
@@ -41,69 +46,75 @@ export default function ChecklistItemRow({
   const { showPopup } = usePopup();
   const [completed, setCompleted] = useState(item.completed);
 
-  const updateItem = api.checklist.updateItem.useMutation({
-    onMutate: async (vars) => {
-      await utils.card.byId.cancel({ cardPublicId });
-      const previous = utils.card.byId.getData({ cardPublicId });
-      utils.card.byId.setData({ cardPublicId }, (old) => {
-        if (!old) return old as any;
-        const updatedChecklists = old.checklists.map((cl) => ({
-          ...cl,
-          items: cl.items.map((ci) =>
-            ci.publicId === item.publicId
-              ? {
-                  ...ci,
-                  ...(vars.title !== undefined ? { title: vars.title } : {}),
-                  ...(vars.completed !== undefined
-                    ? { completed: vars.completed }
-                    : {}),
-                }
-              : ci,
-          ),
-        }));
-        return { ...old, checklists: updatedChecklists } as typeof old;
-      });
-      return { previous };
-    },
-    onError: (_err, _vars, ctx) => {
-      if (ctx?.previous)
-        utils.card.byId.setData({ cardPublicId }, ctx.previous);
-      showPopup({
-        header: t`Unable to update checklist item`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await invalidateCard(utils, cardPublicId);
+  const updateItem = useUpdateChecklistItem({
+    mutation: {
+      onMutate: async (vars) => {
+        await utils.card.byId.cancel({ cardPublicId });
+        const previous = utils.card.byId.getData({ cardPublicId });
+        utils.card.byId.setData({ cardPublicId }, (old) => {
+          if (!old) return old as any;
+          const updatedChecklists = old.checklists.map((cl) => ({
+            ...cl,
+            items: cl.items.map((ci) =>
+              ci.publicId === item.publicId
+                ? {
+                    ...ci,
+                    ...(vars.data.title !== undefined
+                      ? { title: vars.data.title }
+                      : {}),
+                    ...(vars.data.completed !== undefined
+                      ? { completed: vars.data.completed }
+                      : {}),
+                  }
+                : ci,
+            ),
+          }));
+          return { ...old, checklists: updatedChecklists } as typeof old;
+        });
+        return { previous };
+      },
+      onError: (_err, _vars, ctx) => {
+        if (ctx?.previous)
+          utils.card.byId.setData({ cardPublicId }, ctx.previous);
+        showPopup({
+          header: t`Unable to update checklist item`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        await invalidateCard(utils, cardPublicId);
+      },
     },
   });
 
-  const deleteItem = api.checklist.deleteItem.useMutation({
-    onMutate: async () => {
-      await utils.card.byId.cancel({ cardPublicId });
-      const previous = utils.card.byId.getData({ cardPublicId });
-      utils.card.byId.setData({ cardPublicId }, (old) => {
-        if (!old) return old as any;
-        const updatedChecklists = old.checklists.map((cl) => ({
-          ...cl,
-          items: cl.items.filter((ci) => ci.publicId !== item.publicId),
-        }));
-        return { ...old, checklists: updatedChecklists } as typeof old;
-      });
-      return { previous };
-    },
-    onError: (_err, _vars, ctx) => {
-      if (ctx?.previous)
-        utils.card.byId.setData({ cardPublicId }, ctx.previous);
-      showPopup({
-        header: t`Unable to delete checklist item`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await invalidateCard(utils, cardPublicId);
+  const deleteItem = useDeleteChecklistItem({
+    mutation: {
+      onMutate: async () => {
+        await utils.card.byId.cancel({ cardPublicId });
+        const previous = utils.card.byId.getData({ cardPublicId });
+        utils.card.byId.setData({ cardPublicId }, (old) => {
+          if (!old) return old as any;
+          const updatedChecklists = old.checklists.map((cl) => ({
+            ...cl,
+            items: cl.items.filter((ci) => ci.publicId !== item.publicId),
+          }));
+          return { ...old, checklists: updatedChecklists } as typeof old;
+        });
+        return { previous };
+      },
+      onError: (_err, _vars, ctx) => {
+        if (ctx?.previous)
+          utils.card.byId.setData({ cardPublicId }, ctx.previous);
+        showPopup({
+          header: t`Unable to delete checklist item`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        await invalidateCard(utils, cardPublicId);
+      },
     },
   });
 
@@ -112,7 +123,7 @@ export default function ChecklistItemRow({
     setCompleted((prev) => !prev);
     updateItem.mutate({
       checklistItemPublicId: item.publicId,
-      completed: !completed,
+      data: { completed: !completed },
     });
   };
 
@@ -120,7 +131,7 @@ export default function ChecklistItemRow({
     if (!plain || plain === item.title) return;
     updateItem.mutate({
       checklistItemPublicId: item.publicId,
-      title: plain,
+      data: { title: plain },
     });
   };
 

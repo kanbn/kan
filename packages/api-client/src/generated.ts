@@ -101,6 +101,59 @@ export interface BoardMemberRemoveResponseDto {
   publicId: string;
 }
 
+export interface UpdateChecklistDto {
+  /**
+     * @minLength 1
+     * @maxLength 255
+     */
+  name: string;
+}
+
+export interface ChecklistResponseDto {
+  publicId: string;
+  name: string;
+}
+
+export interface DeleteChecklistResponseDto {
+  success: boolean;
+}
+
+export interface CreateChecklistItemDto {
+  /**
+     * @minLength 1
+     * @maxLength 500
+     */
+  title: string;
+}
+
+export interface ChecklistItemResponseDto {
+  publicId: string;
+  title: string;
+  completed: boolean;
+}
+
+export interface UpdateChecklistItemDto {
+  /**
+     * @minLength 1
+     * @maxLength 500
+     */
+  title?: string;
+  completed?: boolean;
+  /**
+     * @minimum 0
+     * @maximum 9007199254740991
+     */
+  index?: number;
+}
+
+export interface CreateChecklistDto {
+  /**
+     * @minLength 1
+     * @maxLength 255
+     */
+  name: string;
+}
+
 export interface CreateFeedbackDto {
   /** @minLength 1 */
   feedback: string;
@@ -593,6 +646,576 @@ export const useRemoveBoardMember = <TError = unknown,
         TContext
       > => {
       return useMutation(getRemoveBoardMemberMutationOptions(options), queryClient);
+    }
+
+export type updateChecklistResponse200 = {
+  data: ChecklistResponseDto
+  status: 200
+}
+
+export type updateChecklistResponseSuccess = (updateChecklistResponse200) & {
+  headers: Headers;
+};
+;
+
+export type updateChecklistResponse = (updateChecklistResponseSuccess)
+
+export const getUpdateChecklistUrl = (checklistPublicId: string,) => {
+
+
+
+
+  return `/checklists/${checklistPublicId}`
+}
+
+/**
+ * @summary Update a checklist
+ */
+export const updateChecklist = async (checklistPublicId: string,
+    updateChecklistDto: UpdateChecklistDto, options?: Parameters<typeof customFetch>[1]): Promise<updateChecklistResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<updateChecklistResponse>(getUpdateChecklistUrl(checklistPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(updateChecklistDto)
+  }
+);}
+
+
+
+
+
+export const getUpdateChecklistMutationKey = () => ['updateChecklist'] as const;
+
+export const getUpdateChecklistMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateChecklist>>, TError,UpdateChecklistMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateChecklist>>, TError,UpdateChecklistMutationVariables, TContext> => {
+
+const mutationKey = getUpdateChecklistMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateChecklist>>, UpdateChecklistMutationVariables> = (props) => {
+          const {checklistPublicId,data} = props ?? {};
+
+          return  updateChecklist(checklistPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateChecklistMutationResult = NonNullable<Awaited<ReturnType<typeof updateChecklist>>>
+    export type UpdateChecklistMutationBody = UpdateChecklistDto
+    export type UpdateChecklistMutationError = unknown
+    export type UpdateChecklistMutationVariables = {checklistPublicId: string;data: UpdateChecklistDto}
+
+    /** @summary Update a checklist */
+export const useUpdateChecklist = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateChecklist>>, TError,UpdateChecklistMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof updateChecklist>>,
+        TError,
+        UpdateChecklistMutationVariables,
+        TContext
+      > => {
+      return useMutation(getUpdateChecklistMutationOptions(options), queryClient);
+    }
+
+export type deleteChecklistResponse200 = {
+  data: DeleteChecklistResponseDto
+  status: 200
+}
+
+export type deleteChecklistResponseSuccess = (deleteChecklistResponse200) & {
+  headers: Headers;
+};
+;
+
+export type deleteChecklistResponse = (deleteChecklistResponseSuccess)
+
+export const getDeleteChecklistUrl = (checklistPublicId: string,) => {
+
+
+
+
+  return `/checklists/${checklistPublicId}`
+}
+
+/**
+ * @summary Delete a checklist
+ */
+export const deleteChecklist = async (checklistPublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<deleteChecklistResponse> => {
+
+  return customFetch<deleteChecklistResponse>(getDeleteChecklistUrl(checklistPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+
+export const getDeleteChecklistMutationKey = () => ['deleteChecklist'] as const;
+
+export const getDeleteChecklistMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteChecklist>>, TError,DeleteChecklistMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteChecklist>>, TError,DeleteChecklistMutationVariables, TContext> => {
+
+const mutationKey = getDeleteChecklistMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteChecklist>>, DeleteChecklistMutationVariables> = (props) => {
+          const {checklistPublicId} = props ?? {};
+
+          return  deleteChecklist(checklistPublicId,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteChecklistMutationResult = NonNullable<Awaited<ReturnType<typeof deleteChecklist>>>
+
+    export type DeleteChecklistMutationError = unknown
+    export type DeleteChecklistMutationVariables = {checklistPublicId: string}
+
+    /** @summary Delete a checklist */
+export const useDeleteChecklist = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteChecklist>>, TError,DeleteChecklistMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteChecklist>>,
+        TError,
+        DeleteChecklistMutationVariables,
+        TContext
+      > => {
+      return useMutation(getDeleteChecklistMutationOptions(options), queryClient);
+    }
+
+export type createChecklistItemResponse201 = {
+  data: ChecklistItemResponseDto
+  status: 201
+}
+
+export type createChecklistItemResponseSuccess = (createChecklistItemResponse201) & {
+  headers: Headers;
+};
+;
+
+export type createChecklistItemResponse = (createChecklistItemResponseSuccess)
+
+export const getCreateChecklistItemUrl = (checklistPublicId: string,) => {
+
+
+
+
+  return `/checklists/${checklistPublicId}/items`
+}
+
+/**
+ * @summary Add an item to a checklist
+ */
+export const createChecklistItem = async (checklistPublicId: string,
+    createChecklistItemDto: CreateChecklistItemDto, options?: Parameters<typeof customFetch>[1]): Promise<createChecklistItemResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<createChecklistItemResponse>(getCreateChecklistItemUrl(checklistPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(createChecklistItemDto)
+  }
+);}
+
+
+
+
+
+export const getCreateChecklistItemMutationKey = () => ['createChecklistItem'] as const;
+
+export const getCreateChecklistItemMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createChecklistItem>>, TError,CreateChecklistItemMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createChecklistItem>>, TError,CreateChecklistItemMutationVariables, TContext> => {
+
+const mutationKey = getCreateChecklistItemMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createChecklistItem>>, CreateChecklistItemMutationVariables> = (props) => {
+          const {checklistPublicId,data} = props ?? {};
+
+          return  createChecklistItem(checklistPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateChecklistItemMutationResult = NonNullable<Awaited<ReturnType<typeof createChecklistItem>>>
+    export type CreateChecklistItemMutationBody = CreateChecklistItemDto
+    export type CreateChecklistItemMutationError = unknown
+    export type CreateChecklistItemMutationVariables = {checklistPublicId: string;data: CreateChecklistItemDto}
+
+    /** @summary Add an item to a checklist */
+export const useCreateChecklistItem = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createChecklistItem>>, TError,CreateChecklistItemMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof createChecklistItem>>,
+        TError,
+        CreateChecklistItemMutationVariables,
+        TContext
+      > => {
+      return useMutation(getCreateChecklistItemMutationOptions(options), queryClient);
+    }
+
+export type updateChecklistItemResponse200 = {
+  data: ChecklistItemResponseDto
+  status: 200
+}
+
+export type updateChecklistItemResponseSuccess = (updateChecklistItemResponse200) & {
+  headers: Headers;
+};
+;
+
+export type updateChecklistItemResponse = (updateChecklistItemResponseSuccess)
+
+export const getUpdateChecklistItemUrl = (checklistItemPublicId: string,) => {
+
+
+
+
+  return `/checklists/items/${checklistItemPublicId}`
+}
+
+/**
+ * @summary Update a checklist item
+ */
+export const updateChecklistItem = async (checklistItemPublicId: string,
+    updateChecklistItemDto: UpdateChecklistItemDto, options?: Parameters<typeof customFetch>[1]): Promise<updateChecklistItemResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<updateChecklistItemResponse>(getUpdateChecklistItemUrl(checklistItemPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(updateChecklistItemDto)
+  }
+);}
+
+
+
+
+
+export const getUpdateChecklistItemMutationKey = () => ['updateChecklistItem'] as const;
+
+export const getUpdateChecklistItemMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateChecklistItem>>, TError,UpdateChecklistItemMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateChecklistItem>>, TError,UpdateChecklistItemMutationVariables, TContext> => {
+
+const mutationKey = getUpdateChecklistItemMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateChecklistItem>>, UpdateChecklistItemMutationVariables> = (props) => {
+          const {checklistItemPublicId,data} = props ?? {};
+
+          return  updateChecklistItem(checklistItemPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateChecklistItemMutationResult = NonNullable<Awaited<ReturnType<typeof updateChecklistItem>>>
+    export type UpdateChecklistItemMutationBody = UpdateChecklistItemDto
+    export type UpdateChecklistItemMutationError = unknown
+    export type UpdateChecklistItemMutationVariables = {checklistItemPublicId: string;data: UpdateChecklistItemDto}
+
+    /** @summary Update a checklist item */
+export const useUpdateChecklistItem = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateChecklistItem>>, TError,UpdateChecklistItemMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof updateChecklistItem>>,
+        TError,
+        UpdateChecklistItemMutationVariables,
+        TContext
+      > => {
+      return useMutation(getUpdateChecklistItemMutationOptions(options), queryClient);
+    }
+
+export type deleteChecklistItemResponse200 = {
+  data: DeleteChecklistResponseDto
+  status: 200
+}
+
+export type deleteChecklistItemResponseSuccess = (deleteChecklistItemResponse200) & {
+  headers: Headers;
+};
+;
+
+export type deleteChecklistItemResponse = (deleteChecklistItemResponseSuccess)
+
+export const getDeleteChecklistItemUrl = (checklistItemPublicId: string,) => {
+
+
+
+
+  return `/checklists/items/${checklistItemPublicId}`
+}
+
+/**
+ * @summary Delete a checklist item
+ */
+export const deleteChecklistItem = async (checklistItemPublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<deleteChecklistItemResponse> => {
+
+  return customFetch<deleteChecklistItemResponse>(getDeleteChecklistItemUrl(checklistItemPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+
+export const getDeleteChecklistItemMutationKey = () => ['deleteChecklistItem'] as const;
+
+export const getDeleteChecklistItemMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteChecklistItem>>, TError,DeleteChecklistItemMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteChecklistItem>>, TError,DeleteChecklistItemMutationVariables, TContext> => {
+
+const mutationKey = getDeleteChecklistItemMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteChecklistItem>>, DeleteChecklistItemMutationVariables> = (props) => {
+          const {checklistItemPublicId} = props ?? {};
+
+          return  deleteChecklistItem(checklistItemPublicId,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteChecklistItemMutationResult = NonNullable<Awaited<ReturnType<typeof deleteChecklistItem>>>
+
+    export type DeleteChecklistItemMutationError = unknown
+    export type DeleteChecklistItemMutationVariables = {checklistItemPublicId: string}
+
+    /** @summary Delete a checklist item */
+export const useDeleteChecklistItem = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteChecklistItem>>, TError,DeleteChecklistItemMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteChecklistItem>>,
+        TError,
+        DeleteChecklistItemMutationVariables,
+        TContext
+      > => {
+      return useMutation(getDeleteChecklistItemMutationOptions(options), queryClient);
+    }
+
+export type createChecklistResponse201 = {
+  data: ChecklistResponseDto
+  status: 201
+}
+
+export type createChecklistResponseSuccess = (createChecklistResponse201) & {
+  headers: Headers;
+};
+;
+
+export type createChecklistResponse = (createChecklistResponseSuccess)
+
+export const getCreateChecklistUrl = (cardPublicId: string,) => {
+
+
+
+
+  return `/cards/${cardPublicId}/checklists`
+}
+
+/**
+ * @summary Add a checklist to a card
+ */
+export const createChecklist = async (cardPublicId: string,
+    createChecklistDto: CreateChecklistDto, options?: Parameters<typeof customFetch>[1]): Promise<createChecklistResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<createChecklistResponse>(getCreateChecklistUrl(cardPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(createChecklistDto)
+  }
+);}
+
+
+
+
+
+export const getCreateChecklistMutationKey = () => ['createChecklist'] as const;
+
+export const getCreateChecklistMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createChecklist>>, TError,CreateChecklistMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createChecklist>>, TError,CreateChecklistMutationVariables, TContext> => {
+
+const mutationKey = getCreateChecklistMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createChecklist>>, CreateChecklistMutationVariables> = (props) => {
+          const {cardPublicId,data} = props ?? {};
+
+          return  createChecklist(cardPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateChecklistMutationResult = NonNullable<Awaited<ReturnType<typeof createChecklist>>>
+    export type CreateChecklistMutationBody = CreateChecklistDto
+    export type CreateChecklistMutationError = unknown
+    export type CreateChecklistMutationVariables = {cardPublicId: string;data: CreateChecklistDto}
+
+    /** @summary Add a checklist to a card */
+export const useCreateChecklist = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createChecklist>>, TError,CreateChecklistMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof createChecklist>>,
+        TError,
+        CreateChecklistMutationVariables,
+        TContext
+      > => {
+      return useMutation(getCreateChecklistMutationOptions(options), queryClient);
     }
 
 export type createFeedbackResponse201 = {
