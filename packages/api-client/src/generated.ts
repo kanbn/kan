@@ -68,10 +68,10 @@ export interface DeleteAttachmentResponseDtoOutput {
   success: boolean;
 }
 
-export type BoardMemberDtoRole = typeof BoardMemberDtoRole[keyof typeof BoardMemberDtoRole];
+export type BoardMemberDtoOutputRole = typeof BoardMemberDtoOutputRole[keyof typeof BoardMemberDtoOutputRole];
 
 
-export const BoardMemberDtoRole = {
+export const BoardMemberDtoOutputRole = {
   admin: 'admin',
   member: 'member',
 } as const;
@@ -79,7 +79,7 @@ export const BoardMemberDtoRole = {
 /**
  * @nullable
  */
-export type BoardMemberDtoUser = {
+export type BoardMemberDtoOutputUser = {
   /** @nullable */
   id: string | null;
   /** @nullable */
@@ -89,16 +89,16 @@ export type BoardMemberDtoUser = {
   image: string | null;
 } | null;
 
-export interface BoardMemberDto {
+export interface BoardMemberDtoOutput {
   publicId: string;
   email: string;
   status: string;
-  role: BoardMemberDtoRole;
+  role: BoardMemberDtoOutputRole;
   workspaceRole: string;
   /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$ */
   createdAt: string;
   /** @nullable */
-  user: BoardMemberDtoUser;
+  user: BoardMemberDtoOutputUser;
 }
 
 export type AddBoardMemberDtoRole = typeof AddBoardMemberDtoRole[keyof typeof AddBoardMemberDtoRole];
@@ -115,17 +115,17 @@ export interface AddBoardMemberDto {
   role?: AddBoardMemberDtoRole;
 }
 
-export type BoardMemberRoleResultDtoRole = typeof BoardMemberRoleResultDtoRole[keyof typeof BoardMemberRoleResultDtoRole];
+export type BoardMemberRoleResultDtoOutputRole = typeof BoardMemberRoleResultDtoOutputRole[keyof typeof BoardMemberRoleResultDtoOutputRole];
 
 
-export const BoardMemberRoleResultDtoRole = {
+export const BoardMemberRoleResultDtoOutputRole = {
   admin: 'admin',
   member: 'member',
 } as const;
 
-export interface BoardMemberRoleResultDto {
+export interface BoardMemberRoleResultDtoOutput {
   publicId: string;
-  role: BoardMemberRoleResultDtoRole;
+  role: BoardMemberRoleResultDtoOutputRole;
 }
 
 export type UpdateBoardMemberRoleDtoRole = typeof UpdateBoardMemberRoleDtoRole[keyof typeof UpdateBoardMemberRoleDtoRole];
@@ -140,7 +140,7 @@ export interface UpdateBoardMemberRoleDto {
   role: UpdateBoardMemberRoleDtoRole;
 }
 
-export interface BoardMemberRemoveResponseDto {
+export interface BoardMemberRemoveResponseDtoOutput {
   publicId: string;
 }
 
@@ -152,12 +152,12 @@ export interface UpdateChecklistDto {
   name: string;
 }
 
-export interface ChecklistResponseDto {
+export interface ChecklistResponseDtoOutput {
   publicId: string;
   name: string;
 }
 
-export interface DeleteChecklistResponseDto {
+export interface DeleteChecklistResponseDtoOutput {
   success: boolean;
 }
 
@@ -169,7 +169,7 @@ export interface CreateChecklistItemDto {
   title: string;
 }
 
-export interface ChecklistItemResponseDto {
+export interface ChecklistItemResponseDtoOutput {
   publicId: string;
   title: string;
   completed: boolean;
@@ -204,11 +204,11 @@ export interface CreateFeedbackDto {
   url: string;
 }
 
-export interface CreateFeedbackResponseDto {
+export interface CreateFeedbackResponseDtoOutput {
   success: boolean;
 }
 
-export interface LabelResponseDto {
+export interface LabelResponseDtoOutput {
   publicId: string;
   name: string;
   /** @nullable */
@@ -243,7 +243,7 @@ export interface UpdateLabelDto {
   colourCode: string;
 }
 
-export interface DeleteLabelResponseDto {
+export interface DeleteLabelResponseDtoOutput {
   success: boolean;
 }
 
@@ -254,12 +254,12 @@ export interface CreateListDto {
   boardPublicId: string;
 }
 
-export interface ListResponseDto {
+export interface ListResponseDtoOutput {
   publicId: string;
   name: string;
 }
 
-export interface DeleteListResponseDto {
+export interface DeleteListResponseDtoOutput {
   success: boolean;
 }
 
@@ -274,11 +274,11 @@ export interface InviteMemberDto {
   email: string;
 }
 
-export interface MemberInviteResponseDto {
+export interface MemberInviteResponseDtoOutput {
   publicId: string;
 }
 
-export interface DeleteMemberResponseDto {
+export interface DeleteMemberResponseDtoOutput {
   success: boolean;
 }
 
@@ -295,12 +295,12 @@ export interface UpdateMemberRoleDto {
   role: UpdateMemberRoleDtoRole;
 }
 
-export interface UpdateMemberRoleResponseDto {
+export interface UpdateMemberRoleResponseDtoOutput {
   success: boolean;
   role: string;
 }
 
-export interface ActiveInviteLinkResponseDto {
+export interface ActiveInviteLinkResponseDtoOutput {
   id?: number;
   inviteCode?: string;
   inviteLink?: string;
@@ -309,7 +309,7 @@ export interface ActiveInviteLinkResponseDto {
   expiresAt?: string;
 }
 
-export interface CreateInviteLinkResponseDto {
+export interface CreateInviteLinkResponseDtoOutput {
   publicId: string;
   inviteCode: string;
   inviteLink: string;
@@ -320,11 +320,11 @@ export interface CreateInviteLinkResponseDto {
   expiresAt: string | null;
 }
 
-export interface DeactivateInviteLinkResponseDto {
+export interface DeactivateInviteLinkResponseDtoOutput {
   success: boolean;
 }
 
-export interface InviteByCodeResponseDto {
+export interface InviteByCodeResponseDtoOutput {
   publicId: string;
   status: string;
   /**
@@ -339,27 +339,27 @@ export interface AcceptInviteLinkDto {
   inviteCode: string;
 }
 
-export interface AcceptInviteLinkResponseDto {
+export interface AcceptInviteLinkResponseDtoOutput {
   success: boolean;
   workspacePublicId?: string;
   workspaceSlug?: string;
 }
 
-export interface GetMyPermissionsResponseDto {
+export interface GetMyPermissionsResponseDtoOutput {
   permissions: string[];
   role: string;
 }
 
-export type GetMemberPermissionsResponseDtoOverridesItem = {
+export type GetMemberPermissionsResponseDtoOutputOverridesItem = {
   permission: string;
   granted: boolean;
 };
 
-export interface GetMemberPermissionsResponseDto {
+export interface GetMemberPermissionsResponseDtoOutput {
   memberPublicId: string;
   role: string;
   permissions: string[];
-  overrides: GetMemberPermissionsResponseDtoOverridesItem[];
+  overrides: GetMemberPermissionsResponseDtoOutputOverridesItem[];
 }
 
 export type PermissionActionDtoPermission = typeof PermissionActionDtoPermission[keyof typeof PermissionActionDtoPermission];
@@ -396,11 +396,11 @@ export interface PermissionActionDto {
   permission: PermissionActionDtoPermission;
 }
 
-export interface SuccessResponseDto {
+export interface SuccessResponseDtoOutput {
   success: boolean;
 }
 
-export type GetWorkspaceRolesResponseDtoRolesItem = {
+export type GetWorkspaceRolesResponseDtoOutputRolesItem = {
   /** @minLength 12 */
   publicId: string;
   name: string;
@@ -410,22 +410,22 @@ export type GetWorkspaceRolesResponseDtoRolesItem = {
   isSystem: boolean;
 };
 
-export interface GetWorkspaceRolesResponseDto {
-  roles: GetWorkspaceRolesResponseDtoRolesItem[];
+export interface GetWorkspaceRolesResponseDtoOutput {
+  roles: GetWorkspaceRolesResponseDtoOutputRolesItem[];
 }
 
-export type GetWorkspaceRolePermissionsResponseDtoRolesItem = {
+export type GetWorkspaceRolePermissionsResponseDtoOutputRolesItem = {
   /** @minLength 12 */
   publicId: string;
   name: string;
   permissions: string[];
 };
 
-export interface GetWorkspaceRolePermissionsResponseDto {
-  roles: GetWorkspaceRolePermissionsResponseDtoRolesItem[];
+export interface GetWorkspaceRolePermissionsResponseDtoOutput {
+  roles: GetWorkspaceRolePermissionsResponseDtoOutputRolesItem[];
 }
 
-export interface GetRolePermissionsResponseDto {
+export interface GetRolePermissionsResponseDtoOutput {
   rolePublicId: string;
   name: string;
   permissions: string[];
@@ -470,10 +470,6 @@ export interface UpdateUserResponseDtoOutput {
 export interface SetPasswordDto {
   /** @minLength 8 */
   newPassword: string;
-}
-
-export interface SuccessResponseDtoOutput {
-  success: boolean;
 }
 
 export type SearchBoardResultDtoType = typeof SearchBoardResultDtoType[keyof typeof SearchBoardResultDtoType];
@@ -526,23 +522,23 @@ export interface SearchCardResultDto {
   type: SearchCardResultDtoType;
 }
 
-export type WorkspaceListItemDtoWorkspacePlan = typeof WorkspaceListItemDtoWorkspacePlan[keyof typeof WorkspaceListItemDtoWorkspacePlan];
+export type WorkspaceListItemDtoOutputWorkspacePlan = typeof WorkspaceListItemDtoOutputWorkspacePlan[keyof typeof WorkspaceListItemDtoOutputWorkspacePlan];
 
 
-export const WorkspaceListItemDtoWorkspacePlan = {
+export const WorkspaceListItemDtoOutputWorkspacePlan = {
   free: 'free',
   team: 'team',
   pro: 'pro',
   enterprise: 'enterprise',
 } as const;
 
-export type WorkspaceListItemDtoWorkspace = {
+export type WorkspaceListItemDtoOutputWorkspace = {
   publicId: string;
   name: string;
   /** @nullable */
   description: string | null;
   slug: string;
-  plan: WorkspaceListItemDtoWorkspacePlan;
+  plan: WorkspaceListItemDtoOutputWorkspacePlan;
   /** @nullable */
   weekStartDay: number | null;
   cardPrefix: string;
@@ -553,35 +549,35 @@ export type WorkspaceListItemDtoWorkspace = {
   deletedAt: string | null;
 };
 
-export interface WorkspaceListItemDto {
+export interface WorkspaceListItemDtoOutput {
   role: string;
-  workspace: WorkspaceListItemDtoWorkspace;
+  workspace: WorkspaceListItemDtoOutputWorkspace;
 }
 
-export interface CheckSlugAvailabilityResponseDto {
+export interface CheckSlugAvailabilityResponseDtoOutput {
   isAvailable: boolean;
   isReserved: boolean;
 }
 
-export type WorkspaceWithBoardsResponseDtoBoardsItem = {
+export type WorkspaceWithBoardsResponseDtoOutputBoardsItem = {
   publicId: string;
   slug: string;
   name: string;
 };
 
-export interface WorkspaceWithBoardsResponseDto {
+export interface WorkspaceWithBoardsResponseDtoOutput {
   publicId: string;
   name: string;
   /** @nullable */
   description: string | null;
   slug: string;
-  boards: WorkspaceWithBoardsResponseDtoBoardsItem[];
+  boards: WorkspaceWithBoardsResponseDtoOutputBoardsItem[];
 }
 
 /**
  * @nullable
  */
-export type WorkspaceDetailResponseDtoMembersItemUser = {
+export type WorkspaceDetailResponseDtoOutputMembersItemUser = {
   /** @nullable */
   id: string | null;
   /** @nullable */
@@ -591,7 +587,7 @@ export type WorkspaceDetailResponseDtoMembersItemUser = {
   image: string | null;
 } | null;
 
-export type WorkspaceDetailResponseDtoMembersItem = {
+export type WorkspaceDetailResponseDtoOutputMembersItem = {
   publicId: string;
   email?: string;
   role: string;
@@ -599,10 +595,10 @@ export type WorkspaceDetailResponseDtoMembersItem = {
   /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$ */
   createdAt: string;
   /** @nullable */
-  user: WorkspaceDetailResponseDtoMembersItemUser;
+  user: WorkspaceDetailResponseDtoOutputMembersItemUser;
 };
 
-export type WorkspaceDetailResponseDtoSubscriptionsItem = {
+export type WorkspaceDetailResponseDtoOutputSubscriptionsItem = {
   plan: string;
   status: string;
   /** @nullable */
@@ -623,7 +619,7 @@ export type WorkspaceDetailResponseDtoSubscriptionsItem = {
   periodEnd: string | null;
 };
 
-export interface WorkspaceDetailResponseDto {
+export interface WorkspaceDetailResponseDtoOutput {
   publicId: string;
   name: string;
   slug: string;
@@ -631,8 +627,8 @@ export interface WorkspaceDetailResponseDto {
   showEmailsToMembers: boolean | null;
   /** @nullable */
   weekStartDay: number | null;
-  members: WorkspaceDetailResponseDtoMembersItem[];
-  subscriptions: WorkspaceDetailResponseDtoSubscriptionsItem[];
+  members: WorkspaceDetailResponseDtoOutputMembersItem[];
+  subscriptions: WorkspaceDetailResponseDtoOutputSubscriptionsItem[];
 }
 
 export interface CreateWorkspaceDto {
@@ -646,23 +642,23 @@ export interface CreateWorkspaceDto {
   slug?: string;
 }
 
-export type WorkspaceCreateResponseDtoPlan = typeof WorkspaceCreateResponseDtoPlan[keyof typeof WorkspaceCreateResponseDtoPlan];
+export type WorkspaceCreateResponseDtoOutputPlan = typeof WorkspaceCreateResponseDtoOutputPlan[keyof typeof WorkspaceCreateResponseDtoOutputPlan];
 
 
-export const WorkspaceCreateResponseDtoPlan = {
+export const WorkspaceCreateResponseDtoOutputPlan = {
   free: 'free',
   team: 'team',
   pro: 'pro',
   enterprise: 'enterprise',
 } as const;
 
-export interface WorkspaceCreateResponseDto {
+export interface WorkspaceCreateResponseDtoOutput {
   publicId: string;
   name: string;
   slug: string;
   /** @nullable */
   description: string | null;
-  plan: WorkspaceCreateResponseDtoPlan;
+  plan: WorkspaceCreateResponseDtoOutputPlan;
   cardPrefix: string;
 }
 
@@ -691,30 +687,30 @@ export interface UpdateWorkspaceDto {
   weekStartDay?: typeof UpdateWorkspaceDtoWeekStartDay[keyof typeof UpdateWorkspaceDtoWeekStartDay];
 }
 
-export type WorkspaceUpdateResponseDtoPlan = typeof WorkspaceUpdateResponseDtoPlan[keyof typeof WorkspaceUpdateResponseDtoPlan];
+export type WorkspaceUpdateResponseDtoOutputPlan = typeof WorkspaceUpdateResponseDtoOutputPlan[keyof typeof WorkspaceUpdateResponseDtoOutputPlan];
 
 
-export const WorkspaceUpdateResponseDtoPlan = {
+export const WorkspaceUpdateResponseDtoOutputPlan = {
   free: 'free',
   team: 'team',
   pro: 'pro',
   enterprise: 'enterprise',
 } as const;
 
-export interface WorkspaceUpdateResponseDto {
+export interface WorkspaceUpdateResponseDtoOutput {
   publicId: string;
   name: string;
   slug: string;
   /** @nullable */
   description: string | null;
-  plan: WorkspaceUpdateResponseDtoPlan;
+  plan: WorkspaceUpdateResponseDtoOutputPlan;
   /** @nullable */
   showEmailsToMembers: boolean | null;
   /** @nullable */
   weekStartDay: number | null;
 }
 
-export interface WorkspaceDeleteResponseDto {
+export interface WorkspaceDeleteResponseDtoOutput {
   success: boolean;
 }
 
@@ -1047,7 +1043,7 @@ export const useDeleteAttachment = <TError = unknown,
     }
 
 export type getBoardMembersResponse200 = {
-  data: BoardMemberDto[]
+  data: BoardMemberDtoOutput[]
   status: 200
 }
 
@@ -1161,7 +1157,7 @@ export function useGetBoardMembers<TData = Awaited<ReturnType<typeof getBoardMem
 
 
 export type addBoardMemberResponse201 = {
-  data: BoardMemberRoleResultDto
+  data: BoardMemberRoleResultDtoOutput
   status: 201
 }
 
@@ -1261,7 +1257,7 @@ export const useAddBoardMember = <TError = unknown,
     }
 
 export type updateBoardMemberRoleResponse200 = {
-  data: BoardMemberRoleResultDto
+  data: BoardMemberRoleResultDtoOutput
   status: 200
 }
 
@@ -1363,7 +1359,7 @@ export const useUpdateBoardMemberRole = <TError = unknown,
     }
 
 export type removeBoardMemberResponse200 = {
-  data: BoardMemberRemoveResponseDto
+  data: BoardMemberRemoveResponseDtoOutput
   status: 200
 }
 
@@ -1450,7 +1446,7 @@ export const useRemoveBoardMember = <TError = unknown,
     }
 
 export type updateChecklistResponse200 = {
-  data: ChecklistResponseDto
+  data: ChecklistResponseDtoOutput
   status: 200
 }
 
@@ -1550,7 +1546,7 @@ export const useUpdateChecklist = <TError = unknown,
     }
 
 export type deleteChecklistResponse200 = {
-  data: DeleteChecklistResponseDto
+  data: DeleteChecklistResponseDtoOutput
   status: 200
 }
 
@@ -1635,7 +1631,7 @@ export const useDeleteChecklist = <TError = unknown,
     }
 
 export type createChecklistItemResponse201 = {
-  data: ChecklistItemResponseDto
+  data: ChecklistItemResponseDtoOutput
   status: 201
 }
 
@@ -1735,7 +1731,7 @@ export const useCreateChecklistItem = <TError = unknown,
     }
 
 export type updateChecklistItemResponse200 = {
-  data: ChecklistItemResponseDto
+  data: ChecklistItemResponseDtoOutput
   status: 200
 }
 
@@ -1835,7 +1831,7 @@ export const useUpdateChecklistItem = <TError = unknown,
     }
 
 export type deleteChecklistItemResponse200 = {
-  data: DeleteChecklistResponseDto
+  data: DeleteChecklistResponseDtoOutput
   status: 200
 }
 
@@ -1920,7 +1916,7 @@ export const useDeleteChecklistItem = <TError = unknown,
     }
 
 export type createChecklistResponse201 = {
-  data: ChecklistResponseDto
+  data: ChecklistResponseDtoOutput
   status: 201
 }
 
@@ -2020,7 +2016,7 @@ export const useCreateChecklist = <TError = unknown,
     }
 
 export type createFeedbackResponse201 = {
-  data: CreateFeedbackResponseDto
+  data: CreateFeedbackResponseDtoOutput
   status: 201
 }
 
@@ -2119,7 +2115,7 @@ export const useCreateFeedback = <TError = unknown,
     }
 
 export type getLabelResponse200 = {
-  data: LabelResponseDto
+  data: LabelResponseDtoOutput
   status: 200
 }
 
@@ -2233,7 +2229,7 @@ export function useGetLabel<TData = Awaited<ReturnType<typeof getLabel>>, TError
 
 
 export type updateLabelResponse200 = {
-  data: LabelResponseDto
+  data: LabelResponseDtoOutput
   status: 200
 }
 
@@ -2333,7 +2329,7 @@ export const useUpdateLabel = <TError = unknown,
     }
 
 export type deleteLabelResponse200 = {
-  data: DeleteLabelResponseDto
+  data: DeleteLabelResponseDtoOutput
   status: 200
 }
 
@@ -2418,7 +2414,7 @@ export const useDeleteLabel = <TError = unknown,
     }
 
 export type createLabelResponse201 = {
-  data: LabelResponseDto
+  data: LabelResponseDtoOutput
   status: 201
 }
 
@@ -2517,7 +2513,7 @@ export const useCreateLabel = <TError = unknown,
     }
 
 export type createListResponse201 = {
-  data: ListResponseDto
+  data: ListResponseDtoOutput
   status: 201
 }
 
@@ -2616,7 +2612,7 @@ export const useCreateList = <TError = unknown,
     }
 
 export type deleteListResponse200 = {
-  data: DeleteListResponseDto
+  data: DeleteListResponseDtoOutput
   status: 200
 }
 
@@ -2701,7 +2697,7 @@ export const useDeleteList = <TError = unknown,
     }
 
 export type updateListResponse200 = {
-  data: ListResponseDto
+  data: ListResponseDtoOutput
   status: 200
 }
 
@@ -3070,7 +3066,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     }
 
 export type inviteMemberResponse201 = {
-  data: MemberInviteResponseDto
+  data: MemberInviteResponseDtoOutput
   status: 201
 }
 
@@ -3170,7 +3166,7 @@ export const useInviteMember = <TError = unknown,
     }
 
 export type deleteMemberResponse200 = {
-  data: DeleteMemberResponseDto
+  data: DeleteMemberResponseDtoOutput
   status: 200
 }
 
@@ -3257,7 +3253,7 @@ export const useDeleteMember = <TError = unknown,
     }
 
 export type updateMemberRoleResponse200 = {
-  data: UpdateMemberRoleResponseDto
+  data: UpdateMemberRoleResponseDtoOutput
   status: 200
 }
 
@@ -3359,7 +3355,7 @@ export const useUpdateMemberRole = <TError = unknown,
     }
 
 export type getActiveInviteLinkResponse200 = {
-  data: ActiveInviteLinkResponseDto
+  data: ActiveInviteLinkResponseDtoOutput
   status: 200
 }
 
@@ -3473,7 +3469,7 @@ export function useGetActiveInviteLink<TData = Awaited<ReturnType<typeof getActi
 
 
 export type createInviteLinkResponse201 = {
-  data: CreateInviteLinkResponseDto
+  data: CreateInviteLinkResponseDtoOutput
   status: 201
 }
 
@@ -3558,7 +3554,7 @@ export const useCreateInviteLink = <TError = unknown,
     }
 
 export type deactivateInviteLinkResponse200 = {
-  data: DeactivateInviteLinkResponseDto
+  data: DeactivateInviteLinkResponseDtoOutput
   status: 200
 }
 
@@ -3643,7 +3639,7 @@ export const useDeactivateInviteLink = <TError = unknown,
     }
 
 export type getInviteByCodeResponse200 = {
-  data: InviteByCodeResponseDto
+  data: InviteByCodeResponseDtoOutput
   status: 200
 }
 
@@ -3757,7 +3753,7 @@ export function useGetInviteByCode<TData = Awaited<ReturnType<typeof getInviteBy
 
 
 export type acceptInviteLinkResponse200 = {
-  data: AcceptInviteLinkResponseDto
+  data: AcceptInviteLinkResponseDtoOutput
   status: 200
 }
 
@@ -3856,7 +3852,7 @@ export const useAcceptInviteLink = <TError = unknown,
     }
 
 export type getMyPermissionsResponse200 = {
-  data: GetMyPermissionsResponseDto
+  data: GetMyPermissionsResponseDtoOutput
   status: 200
 }
 
@@ -3970,7 +3966,7 @@ export function useGetMyPermissions<TData = Awaited<ReturnType<typeof getMyPermi
 
 
 export type getMemberPermissionsResponse200 = {
-  data: GetMemberPermissionsResponseDto
+  data: GetMemberPermissionsResponseDtoOutput
   status: 200
 }
 
@@ -4092,7 +4088,7 @@ export function useGetMemberPermissions<TData = Awaited<ReturnType<typeof getMem
 
 
 export type grantPermissionResponse200 = {
-  data: SuccessResponseDto
+  data: SuccessResponseDtoOutput
   status: 200
 }
 
@@ -4194,7 +4190,7 @@ export const useGrantPermission = <TError = unknown,
     }
 
 export type revokePermissionResponse200 = {
-  data: SuccessResponseDto
+  data: SuccessResponseDtoOutput
   status: 200
 }
 
@@ -4296,7 +4292,7 @@ export const useRevokePermission = <TError = unknown,
     }
 
 export type resetMemberPermissionsResponse200 = {
-  data: SuccessResponseDto
+  data: SuccessResponseDtoOutput
   status: 200
 }
 
@@ -4383,7 +4379,7 @@ export const useResetMemberPermissions = <TError = unknown,
     }
 
 export type resetWorkspaceMemberPermissionsResponse200 = {
-  data: SuccessResponseDto
+  data: SuccessResponseDtoOutput
   status: 200
 }
 
@@ -4468,7 +4464,7 @@ export const useResetWorkspaceMemberPermissions = <TError = unknown,
     }
 
 export type getWorkspaceRolesResponse200 = {
-  data: GetWorkspaceRolesResponseDto
+  data: GetWorkspaceRolesResponseDtoOutput
   status: 200
 }
 
@@ -4582,7 +4578,7 @@ export function useGetWorkspaceRoles<TData = Awaited<ReturnType<typeof getWorksp
 
 
 export type getWorkspaceRolePermissionsResponse200 = {
-  data: GetWorkspaceRolePermissionsResponseDto
+  data: GetWorkspaceRolePermissionsResponseDtoOutput
   status: 200
 }
 
@@ -4696,7 +4692,7 @@ export function useGetWorkspaceRolePermissions<TData = Awaited<ReturnType<typeof
 
 
 export type getRolePermissionsResponse200 = {
-  data: GetRolePermissionsResponseDto
+  data: GetRolePermissionsResponseDtoOutput
   status: 200
 }
 
@@ -4818,7 +4814,7 @@ export function useGetRolePermissions<TData = Awaited<ReturnType<typeof getRoleP
 
 
 export type grantRolePermissionResponse200 = {
-  data: SuccessResponseDto
+  data: SuccessResponseDtoOutput
   status: 200
 }
 
@@ -4920,7 +4916,7 @@ export const useGrantRolePermission = <TError = unknown,
     }
 
 export type revokeRolePermissionResponse200 = {
-  data: SuccessResponseDto
+  data: SuccessResponseDtoOutput
   status: 200
 }
 
@@ -5334,7 +5330,7 @@ export const useSetPassword = <TError = unknown,
     }
 
 export type getWorkspacesResponse200 = {
-  data: WorkspaceListItemDto[]
+  data: WorkspaceListItemDtoOutput[]
   status: 200
 }
 
@@ -5448,7 +5444,7 @@ export function useGetWorkspaces<TData = Awaited<ReturnType<typeof getWorkspaces
 
 
 export type createWorkspaceResponse201 = {
-  data: WorkspaceCreateResponseDto
+  data: WorkspaceCreateResponseDtoOutput
   status: 201
 }
 
@@ -5547,7 +5543,7 @@ export const useCreateWorkspace = <TError = unknown,
     }
 
 export type checkSlugAvailabilityResponse200 = {
-  data: CheckSlugAvailabilityResponseDto
+  data: CheckSlugAvailabilityResponseDtoOutput
   status: 200
 }
 
@@ -5782,7 +5778,7 @@ export function useHasAvailablePartnerSlot<TData = Awaited<ReturnType<typeof has
 
 
 export type getWorkspaceBySlugResponse200 = {
-  data: WorkspaceWithBoardsResponseDto
+  data: WorkspaceWithBoardsResponseDtoOutput
   status: 200
 }
 
@@ -5896,7 +5892,7 @@ export function useGetWorkspaceBySlug<TData = Awaited<ReturnType<typeof getWorks
 
 
 export type getWorkspaceResponse200 = {
-  data: WorkspaceDetailResponseDto
+  data: WorkspaceDetailResponseDtoOutput
   status: 200
 }
 
@@ -6010,7 +6006,7 @@ export function useGetWorkspace<TData = Awaited<ReturnType<typeof getWorkspace>>
 
 
 export type updateWorkspaceResponse200 = {
-  data: WorkspaceUpdateResponseDto
+  data: WorkspaceUpdateResponseDtoOutput
   status: 200
 }
 
@@ -6110,7 +6106,7 @@ export const useUpdateWorkspace = <TError = unknown,
     }
 
 export type deleteWorkspaceResponse200 = {
-  data: WorkspaceDeleteResponseDto
+  data: WorkspaceDeleteResponseDtoOutput
   status: 200
 }
 

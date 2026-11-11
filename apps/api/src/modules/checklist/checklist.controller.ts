@@ -1,5 +1,6 @@
 import { Body, Delete, Param, Patch, Post, Put } from "@nestjs/common";
-import { ApiOperation, ApiParam, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ZodResponse } from "nestjs-zod";
 
 import type { User } from "../../common/interfaces/user.interface.js";
 import { AuthenticatedController } from "../../common/decorators/authenticated-controller.decorator.js";
@@ -25,7 +26,7 @@ export class CardChecklistController {
     summary: "Add a checklist to a card",
   })
   @ApiParam({ name: "cardPublicId" })
-  @ApiResponse({ status: 201, type: ChecklistResponseDto })
+  @ZodResponse({ status: 201, type: ChecklistResponseDto })
   async create(
     @CurrentUser() user: User,
     @Param("cardPublicId") cardPublicId: string,
@@ -44,9 +45,12 @@ export class ChecklistController {
   constructor(private readonly checklistService: ChecklistService) {}
 
   @Put(":checklistPublicId")
-  @ApiOperation({ operationId: "updateChecklist", summary: "Update a checklist" })
+  @ApiOperation({
+    operationId: "updateChecklist",
+    summary: "Update a checklist",
+  })
   @ApiParam({ name: "checklistPublicId" })
-  @ApiResponse({ status: 200, type: ChecklistResponseDto })
+  @ZodResponse({ status: 200, type: ChecklistResponseDto })
   async update(
     @CurrentUser() user: User,
     @Param("checklistPublicId") checklistPublicId: string,
@@ -60,9 +64,12 @@ export class ChecklistController {
   }
 
   @Delete(":checklistPublicId")
-  @ApiOperation({ operationId: "deleteChecklist", summary: "Delete a checklist" })
+  @ApiOperation({
+    operationId: "deleteChecklist",
+    summary: "Delete a checklist",
+  })
   @ApiParam({ name: "checklistPublicId" })
-  @ApiResponse({ status: 200, type: DeleteChecklistResponseDto })
+  @ZodResponse({ status: 200, type: DeleteChecklistResponseDto })
   async delete(
     @CurrentUser() user: User,
     @Param("checklistPublicId") checklistPublicId: string,
@@ -79,7 +86,7 @@ export class ChecklistController {
     summary: "Add an item to a checklist",
   })
   @ApiParam({ name: "checklistPublicId" })
-  @ApiResponse({ status: 201, type: ChecklistItemResponseDto })
+  @ZodResponse({ status: 201, type: ChecklistItemResponseDto })
   async createItem(
     @CurrentUser() user: User,
     @Param("checklistPublicId") checklistPublicId: string,
@@ -98,7 +105,7 @@ export class ChecklistController {
     summary: "Update a checklist item",
   })
   @ApiParam({ name: "checklistItemPublicId" })
-  @ApiResponse({ status: 200, type: ChecklistItemResponseDto })
+  @ZodResponse({ status: 200, type: ChecklistItemResponseDto })
   async updateItem(
     @CurrentUser() user: User,
     @Param("checklistItemPublicId") checklistItemPublicId: string,
@@ -119,7 +126,7 @@ export class ChecklistController {
     summary: "Delete a checklist item",
   })
   @ApiParam({ name: "checklistItemPublicId" })
-  @ApiResponse({ status: 200, type: DeleteChecklistResponseDto })
+  @ZodResponse({ status: 200, type: DeleteChecklistResponseDto })
   async deleteItem(
     @CurrentUser() user: User,
     @Param("checklistItemPublicId") checklistItemPublicId: string,
