@@ -2983,6 +2983,37 @@
           "Workspaces"
         ]
       }
+    },
+    "/stats": {
+      "get": {
+        "operationId": "getStats",
+        "parameters": [
+          {
+            "name": "x-admin-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatsDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Instance-wide counts of users, workspaces, boards, cards, etc.",
+        "tags": [
+          "Health"
+        ]
+      }
     }
   },
   "info": {
@@ -5489,6 +5520,70 @@
         "required": [
           "success"
         ]
+      },
+      "StatsDto_Output": {
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "number"
+          },
+          "workspaces": {
+            "type": "number"
+          },
+          "boards": {
+            "type": "number"
+          },
+          "lists": {
+            "type": "number"
+          },
+          "cards": {
+            "type": "number"
+          },
+          "cardComments": {
+            "type": "number"
+          },
+          "cardAttachments": {
+            "type": "number"
+          },
+          "cardActivityLogs": {
+            "type": "number"
+          },
+          "labels": {
+            "type": "number"
+          },
+          "checklists": {
+            "type": "number"
+          },
+          "checklistItems": {
+            "type": "number"
+          },
+          "activeMembers": {
+            "type": "number"
+          },
+          "activeInviteLinks": {
+            "type": "number"
+          },
+          "imports": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "users",
+          "workspaces",
+          "boards",
+          "lists",
+          "cards",
+          "cardComments",
+          "cardAttachments",
+          "cardActivityLogs",
+          "labels",
+          "checklists",
+          "checklistItems",
+          "activeMembers",
+          "activeInviteLinks",
+          "imports"
+        ],
+        "additionalProperties": false
       }
     }
   }
