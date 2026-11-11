@@ -186,11 +186,7 @@ export class BoardPage {
       .click();
     await this.page.getByRole("menuitem", { name: "Labels" }).click();
 
-    const updated = this.page.waitForResponse(
-      (res) =>
-        /^\/boards\/[^/]+$/.test(new URL(res.url()).pathname) &&
-        res.request().method() === "GET",
-    );
+    const updated = waitForApi(this.page, "GET", /^\/boards\/[^/]+$/);
     await this.page
       .getByRole("checkbox", { name: labelName })
       .filter({ visible: true })

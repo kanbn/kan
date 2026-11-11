@@ -82,6 +82,7 @@ services:
       - NEXT_PUBLIC_DISABLE_SIGN_UP=${NEXT_PUBLIC_DISABLE_SIGN_UP}
 
       # API configuration (optional)
+      - KAN_API_URL=${KAN_API_URL}
       - NEXT_API_BODY_SIZE_LIMIT=${NEXT_API_BODY_SIZE_LIMIT}
 
       # Integration providers

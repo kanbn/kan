@@ -28,8 +28,7 @@ services:
       target: web
     env_file:
       - .env
-    environment:
-      # Required environment variables
+    environment: &kan-env # Required environment variables
       - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - POSTGRES_URL=${POSTGRES_URL}
@@ -78,6 +77,7 @@ services:
       - NEXT_PUBLIC_DISABLE_SIGN_UP=${NEXT_PUBLIC_DISABLE_SIGN_UP}
 
       # API configuration (optional)
+      - KAN_API_URL=${KAN_API_URL:-http://api:4000}
       - NEXT_API_BODY_SIZE_LIMIT=${NEXT_API_BODY_SIZE_LIMIT}
 
       # Integration providers (optional)
@@ -131,6 +131,37 @@ services:
       - APPLE_CLIENT_ID=${APPLE_CLIENT_ID}
       - APPLE_CLIENT_SECRET=${APPLE_CLIENT_SECRET}
       - APPLE_APP_BUNDLE_IDENTIFIER=${APPLE_APP_BUNDLE_IDENTIFIER}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      api:
+        condition: service_started
+    restart: unless-stopped
+
+  api:
+    image: ghcr.io/kanbn/kan-api:latest
+    container_name: kan-api
+    networks:
+      - kan-network
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+      target: api
+    env_file:
+      - .env
+    environment: *kan-env
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:4000/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))",
+        ]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+      start_period: 30s
     depends_on:
       migrate:
         condition: service_completed_successfully
