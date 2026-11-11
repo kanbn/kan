@@ -84,20 +84,12 @@ test(
     );
 
     const membersResponse = await memberPage.request.get(
-      `/api/trpc/workspace.byId?batch=1&input=${encodeURIComponent(
-        JSON.stringify({ "0": { json: { workspacePublicId } } }),
-      )}`,
+      `${apiBaseURL}/workspaces/${workspacePublicId}`,
     );
-    const membersBody = (await membersResponse.json()) as [
-      {
-        result: {
-          data: {
-            json: { members: { publicId: string; email: string }[] };
-          };
-        };
-      },
-    ];
-    const ownMember = membersBody[0].result.data.json.members.find(
+    const membersBody = (await membersResponse.json()) as {
+      members: { publicId: string; email: string }[];
+    };
+    const ownMember = membersBody.members.find(
       (m) => m.email === memberUser.email,
     );
     if (!ownMember) {

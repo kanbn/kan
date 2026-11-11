@@ -6,10 +6,11 @@ import { Fragment, useMemo, useState } from "react";
 import { HiCheck, HiMagnifyingGlass } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
+import { useHasAvailablePartnerSlot } from "@kan/api-client/hooks";
+
 import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
 import CommandPallette from "./CommandPallette";
 import { Tooltip } from "./Tooltip";
 
@@ -21,8 +22,9 @@ export default function WorkspaceMenu({
   const { workspace, isLoading, availableWorkspaces, switchWorkspace } =
     useWorkspace();
   const { openModal } = useModal();
-  const { data: hasPartnerSlot } =
-    api.workspace.hasAvailablePartnerSlot.useQuery();
+  const { data: hasPartnerSlot } = useHasAvailablePartnerSlot({
+    query: { select: (res) => res.data },
+  });
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 

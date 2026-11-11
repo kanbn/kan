@@ -154,18 +154,12 @@ test(
       throw new Error("workspacePublicId not found in localStorage");
 
     const workspaceResponse = await page.request.get(
-      `/api/trpc/workspace.byId?batch=1&input=${encodeURIComponent(
-        JSON.stringify({ "0": { json: { workspacePublicId } } }),
-      )}`,
+      `${apiBaseURL}/workspaces/${workspacePublicId}`,
     );
-    const workspaceBody = (await workspaceResponse.json()) as [
-      {
-        result: {
-          data: { json: { members: { publicId: string; email?: string }[] } };
-        };
-      },
-    ];
-    const invitedMember = workspaceBody[0].result.data.json.members.find(
+    const workspaceBody = (await workspaceResponse.json()) as {
+      members: { publicId: string; email?: string }[];
+    };
+    const invitedMember = workspaceBody.members.find(
       (member) => member.email === memberUser.email,
     );
     if (!invitedMember)

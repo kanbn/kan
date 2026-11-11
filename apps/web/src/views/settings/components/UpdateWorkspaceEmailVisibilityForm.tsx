@@ -1,8 +1,13 @@
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
+import {
+  getGetWorkspaceQueryKey,
+  useUpdateWorkspace,
+} from "@kan/api-client/hooks";
+
 import Toggle from "~/components/Toggle";
-import { api } from "~/utils/api";
 
 export default function UpdateWorkspaceEmailVisibilityForm({
   workspacePublicId,
@@ -13,20 +18,22 @@ export default function UpdateWorkspaceEmailVisibilityForm({
   showEmailsToMembers: boolean;
   disabled?: boolean;
 }) {
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
   const [isChecked, setIsChecked] = useState(showEmailsToMembers);
 
   useEffect(() => {
     setIsChecked(showEmailsToMembers);
   }, [showEmailsToMembers]);
 
-  const updateWorkspace = api.workspace.update.useMutation({
-    onSuccess: () => {
-      if (workspacePublicId && workspacePublicId.length >= 12) {
-        void utils.workspace.byId.invalidate({
-          workspacePublicId,
-        });
-      }
+  const updateWorkspace = useUpdateWorkspace({
+    mutation: {
+      onSuccess: () => {
+        if (workspacePublicId && workspacePublicId.length >= 12) {
+          void queryClient.invalidateQueries({
+            queryKey: getGetWorkspaceQueryKey(workspacePublicId),
+          });
+        }
+      },
     },
   });
 
@@ -36,7 +43,7 @@ export default function UpdateWorkspaceEmailVisibilityForm({
     setIsChecked(newValue);
     updateWorkspace.mutate({
       workspacePublicId,
-      showEmailsToMembers: newValue,
+      data: { showEmailsToMembers: newValue },
     });
   };
 

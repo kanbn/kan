@@ -12,32 +12,10 @@ import { t } from "@lingui/macro";
 import { useState } from "react";
 import { HiDocumentText, HiFolder, HiMagnifyingGlass } from "react-icons/hi2";
 
+import { useSearchWorkspace } from "@kan/api-client/hooks";
+
 import { useDebounce } from "~/hooks/useDebounce";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
-
-type SearchResult =
-  | {
-      publicId: string;
-      title: string;
-      description: string | null;
-      slug: string;
-      updatedAt: Date | null;
-      createdAt: Date;
-      type: "board";
-    }
-  | {
-      publicId: string;
-      title: string;
-      description: string | null;
-      boardPublicId: string;
-      boardName: string;
-      listName: string;
-      cardNumber: number | null;
-      updatedAt: Date | null;
-      createdAt: Date;
-      type: "card";
-    };
 
 export default function CommandPallette({
   isOpen,
@@ -58,22 +36,23 @@ export default function CommandPallette({
     isLoading,
     isFetched,
     isPlaceholderData,
-  } = api.workspace.search.useQuery(
+  } = useSearchWorkspace(
+    workspace.publicId,
+    { query: debouncedQuery },
     {
-      workspacePublicId: workspace.publicId,
-      query: debouncedQuery,
-    },
-    {
-      enabled: Boolean(workspace.publicId && debouncedQuery.trim().length > 0),
-      placeholderData: (previousData) => previousData,
+      query: {
+        enabled: Boolean(
+          workspace.publicId && debouncedQuery.trim().length > 0,
+        ),
+        placeholderData: (previousData) => previousData,
+        select: (res) => res.data,
+      },
     },
   );
 
   // Clear results when query is empty, otherwise show search results
   const results =
-    debouncedQuery.trim().length === 0
-      ? []
-      : ((searchResults ?? []) as SearchResult[]);
+    debouncedQuery.trim().length === 0 ? [] : (searchResults ?? []);
 
   const hasSearched = Boolean(debouncedQuery.trim().length > 0);
 

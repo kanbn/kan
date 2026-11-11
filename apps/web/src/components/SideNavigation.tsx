@@ -14,6 +14,7 @@ import {
 import { twMerge } from "tailwind-merge";
 
 import type { Subscription } from "@kan/shared/utils";
+import { useGetWorkspace } from "@kan/api-client/hooks";
 import { hasActiveSubscription } from "@kan/shared/utils";
 
 import type { KeyboardShortcut } from "~/providers/keyboard-shortcuts";
@@ -30,7 +31,6 @@ import ReactiveButton from "~/components/ReactiveButton";
 import UserMenu from "~/components/UserMenu";
 import WorkspaceMenu from "~/components/WorkspaceMenu";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
 
 interface SideNavigationProps {
   user: UserType;
@@ -54,10 +54,12 @@ export default function SideNavigation({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isInitialised, setIsInitialised] = useState(false);
 
-  const { data: workspaceData } = api.workspace.byId.useQuery(
-    { workspacePublicId: workspace.publicId },
-    { enabled: !!workspace.publicId && workspace.publicId.length >= 12 },
-  );
+  const { data: workspaceData } = useGetWorkspace(workspace.publicId, {
+    query: {
+      enabled: !!workspace.publicId && workspace.publicId.length >= 12,
+      select: (res) => res.data,
+    },
+  });
 
   const subscriptions = workspaceData?.subscriptions as
     | Subscription[]

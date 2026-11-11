@@ -6,6 +6,7 @@ import { useState } from "react";
 import { HiUser } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
+import { useGetWorkspaces } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
 import Button from "~/components/Button";
@@ -60,7 +61,9 @@ export default function SelectPlanView() {
   const [billing, setBilling] = useState<Billing>(
     (searchParams.get("billing") as Billing | null) ?? "annual",
   );
-  const { data: workspaces } = api.workspace.all.useQuery();
+  const { data: workspaces } = useGetWorkspaces({
+    query: { select: (res) => res.data },
+  });
   const { data: session } = authClient.useSession();
   const { data: user } = api.user.getUser.useQuery(undefined, {
     enabled: !!session?.user,

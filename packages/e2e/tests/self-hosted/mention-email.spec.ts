@@ -46,20 +46,12 @@ async function addToBoard(page: Page, boardPublicId: string, email: string) {
     throw new Error("workspacePublicId not found in localStorage");
 
   const workspaceResponse = await page.request.get(
-    `/api/trpc/workspace.byId?batch=1&input=${encodeURIComponent(
-      JSON.stringify({ "0": { json: { workspacePublicId } } }),
-    )}`,
+    `${apiBaseURL}/workspaces/${workspacePublicId}`,
   );
-  const workspaceBody = (await workspaceResponse.json()) as [
-    {
-      result: {
-        data: { json: { members: { publicId: string; email?: string }[] } };
-      };
-    },
-  ];
-  const member = workspaceBody[0].result.data.json.members.find(
-    (m) => m.email === email,
-  );
+  const workspaceBody = (await workspaceResponse.json()) as {
+    members: { publicId: string; email?: string }[];
+  };
+  const member = workspaceBody.members.find((m) => m.email === email);
   if (!member) throw new Error(`Could not resolve member ${email}`);
 
   const response = await page.request.post(

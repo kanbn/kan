@@ -1,16 +1,22 @@
 import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { env } from "next-runtime-env";
 import { useForm } from "react-hook-form";
 import { HiCheck, HiMiniStar } from "react-icons/hi2";
 import { z } from "zod";
 
+import {
+  getGetWorkspacesQueryKey,
+  useCheckSlugAvailability,
+  useUpdateWorkspace,
+} from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { useDebounce } from "~/hooks/useDebounce";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 const UpdateWorkspaceUrlForm = ({
   workspacePublicId,
@@ -23,7 +29,7 @@ const UpdateWorkspaceUrlForm = ({
   workspacePlan: "free" | "team" | "pro" | "enterprise";
   disabled?: boolean;
 }) => {
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
   const { showPopup } = usePopup();
   const router = useRouter();
 
@@ -56,26 +62,30 @@ const UpdateWorkspaceUrlForm = ({
 
   const slug = watch("slug");
 
-  const updateWorkspaceSlug = api.workspace.update.useMutation({
-    onSuccess: async () => {
-      showPopup({
-        header: t`Workspace slug updated`,
-        message: t`Your workspace slug has been updated.`,
-        icon: "success",
-      });
-      try {
-        await utils.workspace.all.refetch();
-      } catch (e) {
-        console.error(e);
-        throw e;
-      }
-    },
-    onError: () => {
-      showPopup({
-        header: t`Error updating workspace URL`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
+  const updateWorkspaceSlug = useUpdateWorkspace({
+    mutation: {
+      onSuccess: async () => {
+        showPopup({
+          header: t`Workspace slug updated`,
+          message: t`Your workspace slug has been updated.`,
+          icon: "success",
+        });
+        try {
+          await queryClient.refetchQueries({
+            queryKey: getGetWorkspacesQueryKey(),
+          });
+        } catch (e) {
+          console.error(e);
+          throw e;
+        }
+      },
+      onError: () => {
+        showPopup({
+          header: t`Error updating workspace URL`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
     },
   });
 
@@ -83,17 +93,16 @@ const UpdateWorkspaceUrlForm = ({
 
   const isTyping = slug !== debouncedSlug;
 
-  const checkWorkspaceSlugAvailability =
-    api.workspace.checkSlugAvailability.useQuery(
-      {
-        workspaceSlug: debouncedSlug,
-        workspacePublicId,
-      },
-      {
+  const checkWorkspaceSlugAvailability = useCheckSlugAvailability(
+    { workspaceSlug: debouncedSlug, workspacePublicId },
+    {
+      query: {
         enabled:
           !!debouncedSlug && debouncedSlug !== workspaceUrl && !errors.slug,
+        select: (res) => res.data,
       },
-    );
+    },
+  );
 
   const isWorkspaceSlugAvailable = checkWorkspaceSlugAvailability.data;
 
@@ -107,7 +116,7 @@ const UpdateWorkspaceUrlForm = ({
 
     updateWorkspaceSlug.mutate({
       workspacePublicId,
-      slug: data.slug,
+      data: { slug: data.slug },
     });
   };
 

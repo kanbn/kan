@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,6 +15,7 @@ import { z } from "zod";
 import type { InviteMemberInput } from "@kan/api/types";
 import type { Subscription } from "@kan/shared/utils";
 import {
+  getGetWorkspaceQueryKey,
   useCreateInviteLink,
   useDeactivateInviteLink,
   useGetActiveInviteLink,
@@ -42,6 +44,7 @@ export function InviteMemberForm({
   seatLimit: number | null;
 }) {
   const utils = api.useUtils();
+  const queryClient = useQueryClient();
   const [isShareInviteLinkEnabled, setIsShareInviteLinkEnabled] =
     useState(false);
   const [inviteLink, setInviteLink] = useState<string>("");
@@ -91,7 +94,9 @@ export function InviteMemberForm({
     mutation: {
       onSuccess: async () => {
         closeModal();
-        await utils.workspace.byId.refetch();
+        await queryClient.refetchQueries({
+          queryKey: getGetWorkspaceQueryKey(workspace.publicId),
+        });
         await refetchBoards();
       },
       onError: (error) => {

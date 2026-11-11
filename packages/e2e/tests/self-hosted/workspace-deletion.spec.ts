@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import { AuthPage } from "../support/pages/auth-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
@@ -34,9 +35,7 @@ test(
     await page.waitForURL((url) => !url.pathname.startsWith("/settings"));
 
     const response = await page.request.get(
-      `/api/trpc/workspace.byId?batch=1&input=${encodeURIComponent(
-        JSON.stringify({ "0": { json: { workspacePublicId } } }),
-      )}`,
+      `${apiBaseURL}/workspaces/${workspacePublicId}`,
     );
     expect(response.status()).toBe(404);
   },

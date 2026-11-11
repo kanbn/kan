@@ -1,5 +1,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import {
@@ -12,6 +13,13 @@ import {
   HiLockClosed,
 } from "react-icons/hi2";
 
+import {
+  getGetWorkspacesQueryKey,
+  getHasAvailablePartnerSlotQueryKey,
+  useCheckSlugAvailability,
+  useCreateWorkspace,
+  useGetWorkspaces,
+} from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
 import Button from "~/components/Button";
@@ -66,9 +74,14 @@ export default function WorkspaceNameView() {
   const [debouncedSlug] = useDebounce(slug, 500);
   const isTyping = slug !== debouncedSlug;
 
-  const slugAvailability = api.workspace.checkSlugAvailability.useQuery(
+  const slugAvailability = useCheckSlugAvailability(
     { workspaceSlug: debouncedSlug },
-    { enabled: isTeamPlan && debouncedSlug.length >= 3 && !isTyping },
+    {
+      query: {
+        enabled: isTeamPlan && debouncedSlug.length >= 3 && !isTyping,
+        select: (res) => res.data,
+      },
+    },
   );
 
   const isSlugAvailable =
@@ -88,37 +101,45 @@ export default function WorkspaceNameView() {
   const { data: user } = api.user.getUser.useQuery(undefined, {
     enabled: !!session?.user,
   });
-  const { data: workspaces } = api.workspace.all.useQuery();
+  const { data: workspaces } = useGetWorkspaces({
+    query: { select: (res) => res.data },
+  });
   const hasExistingWorkspace = !!workspaces?.length;
 
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
 
   const previewSlug = isTeamPlan
     ? slugify(slug) || slugify(name) || "your-workspace"
     : "your-workspace";
 
-  const createWorkspace = api.workspace.create.useMutation({
-    onSuccess: async (workspace) => {
-      if (!workspace.publicId) return;
-      localStorage.setItem("workspacePublicId", workspace.publicId);
-      void utils.workspace.all.invalidate();
-      void utils.workspace.hasAvailablePartnerSlot.invalidate();
-      const storedLicenseKey = localStorage.getItem("partnerLicenseKey");
-      if (storedLicenseKey) {
-        localStorage.removeItem("partnerLicenseKey");
-        router.push(
-          `/api/partner/link?license_key=${encodeURIComponent(storedLicenseKey)}`,
-        );
-      } else {
-        router.push(`/boards?workspacePublicId=${workspace.publicId}`);
-      }
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to create workspace`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
+  const createWorkspace = useCreateWorkspace({
+    mutation: {
+      onSuccess: async ({ data: workspace }) => {
+        if (!workspace.publicId) return;
+        localStorage.setItem("workspacePublicId", workspace.publicId);
+        void queryClient.invalidateQueries({
+          queryKey: getGetWorkspacesQueryKey(),
+        });
+        void queryClient.invalidateQueries({
+          queryKey: getHasAvailablePartnerSlotQueryKey(),
+        });
+        const storedLicenseKey = localStorage.getItem("partnerLicenseKey");
+        if (storedLicenseKey) {
+          localStorage.removeItem("partnerLicenseKey");
+          router.push(
+            `/api/partner/link?license_key=${encodeURIComponent(storedLicenseKey)}`,
+          );
+        } else {
+          router.push(`/boards?workspacePublicId=${workspace.publicId}`);
+        }
+      },
+      onError: () => {
+        showPopup({
+          header: t`Unable to create workspace`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
     },
   });
 
@@ -129,8 +150,10 @@ export default function WorkspaceNameView() {
 
     if (plan === "solo" || isLicenseFlow) {
       createWorkspace.mutate({
-        name: name.trim(),
-        ...(description.trim() && { description: description.trim() }),
+        data: {
+          name: name.trim(),
+          ...(description.trim() && { description: description.trim() }),
+        },
       });
       return;
     }

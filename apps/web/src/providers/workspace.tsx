@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import React, {
   createContext,
   useCallback,
@@ -9,7 +10,10 @@ import React, {
   useState,
 } from "react";
 
-import { api } from "~/utils/api";
+import {
+  getGetWorkspacesQueryKey,
+  useGetWorkspaces,
+} from "@kan/api-client/hooks";
 
 interface WorkspaceContextProps {
   workspace: Workspace;
@@ -66,13 +70,13 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
   const pollAttemptsRef = React.useRef(0);
   const MAX_POLL_ATTEMPTS = 5;
 
-  const { data, isLoading, isFetching } = api.workspace.all.useQuery(
-    undefined,
-    {
+  const { data, isLoading, isFetching } = useGetWorkspaces({
+    query: {
       refetchInterval: pendingWorkspaceId ? 2000 : false,
+      select: (res) => res.data,
     },
-  );
-  const utils = api.useUtils();
+  });
+  const queryClient = useQueryClient();
 
   const switchWorkspace = (_workspace: Workspace) => {
     localStorage.setItem("workspacePublicId", _workspace.publicId);
@@ -80,7 +84,7 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
     setWorkspace(_workspace);
 
     // Refetch workspace data to ensure availableWorkspaces is up to date
-    void utils.workspace.all.refetch();
+    void queryClient.refetchQueries({ queryKey: getGetWorkspacesQueryKey() });
 
     router.push(`/boards`);
   };

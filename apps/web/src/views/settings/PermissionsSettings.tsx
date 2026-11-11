@@ -1,6 +1,10 @@
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 
-import { useResetWorkspaceMemberPermissions } from "@kan/api-client/hooks";
+import {
+  getGetWorkspaceQueryKey,
+  useResetWorkspaceMemberPermissions,
+} from "@kan/api-client/hooks";
 
 import Button from "~/components/Button";
 import Modal from "~/components/modal";
@@ -8,7 +12,6 @@ import { PageHead } from "~/components/PageHead";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
 import { ClearCustomPermissionsConfirmation } from "./components/ClearCustomPermissionsConfirmation";
 import { RolePermissions } from "./components/RolePermissions";
 
@@ -16,7 +19,7 @@ export default function PermissionsSettings() {
   const { workspace } = useWorkspace();
   const { openModal, isOpen, modalContentType } = useModal();
   const { showPopup } = usePopup();
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
 
   const isAdmin = workspace.role === "admin";
 
@@ -31,8 +34,8 @@ export default function PermissionsSettings() {
 
         // Refresh any relevant workspace data
         if (workspace.publicId && workspace.publicId.length >= 12) {
-          await utils.workspace.byId.invalidate({
-            workspacePublicId: workspace.publicId,
+          await queryClient.invalidateQueries({
+            queryKey: getGetWorkspaceQueryKey(workspace.publicId),
           });
         }
       },

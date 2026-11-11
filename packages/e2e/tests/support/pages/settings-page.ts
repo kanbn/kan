@@ -20,7 +20,7 @@ export class SettingsPage {
 
   async updateWorkspaceName(name: string) {
     await this.page.getByRole("textbox", { name: "Workspace name" }).fill(name);
-    const updated = waitForTrpcMutation(this.page, "workspace.update");
+    const updated = waitForResponsePath(this.page, "/workspaces/", "PUT");
     await this.page.getByRole("button", { name: "Update" }).click();
     await updated;
   }
@@ -41,7 +41,7 @@ export class SettingsPage {
 
   async updateWorkspaceSlug(slug: string) {
     await this.fillAvailableWorkspaceSlug(slug);
-    const updated = waitForTrpcMutation(this.page, "workspace.update");
+    const updated = waitForResponsePath(this.page, "/workspaces/", "PUT");
     await this.page.getByRole("button", { name: "Update" }).click();
     await updated;
   }
@@ -139,7 +139,7 @@ export class SettingsPage {
     const dialog = this.page.getByRole("dialog");
     await dialog.getByRole("checkbox").check();
 
-    const deleted = waitForTrpcMutation(this.page, "workspace.delete");
+    const deleted = waitForResponsePath(this.page, "/workspaces/", "DELETE");
     await dialog
       .getByRole("button", { name: "Delete workspace", exact: true })
       .click();

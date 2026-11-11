@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { env } from "next-runtime-env";
 import {
   HiBolt,
@@ -10,7 +11,11 @@ import {
 import { twMerge } from "tailwind-merge";
 
 import type { Subscription } from "@kan/shared/utils";
-import { useUpdateMemberRole } from "@kan/api-client/hooks";
+import {
+  getGetWorkspaceQueryKey,
+  useGetWorkspace,
+  useUpdateMemberRole,
+} from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 import {
   getSeatLimit,
@@ -29,7 +34,6 @@ import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
 import { getAvatarUrl } from "~/utils/helpers";
 import { DeleteMemberConfirmation } from "./components/DeleteMemberConfirmation";
 import { EditMemberPermissionsModal } from "./components/EditMemberPermissionsModal";
@@ -40,23 +44,25 @@ export default function MembersPage() {
   const { workspace } = useWorkspace();
   const { showPopup } = usePopup();
 
-  const { data, isLoading } = api.workspace.byId.useQuery(
-    { workspacePublicId: workspace.publicId },
-    { enabled: !!workspace.publicId && workspace.publicId.length >= 12 },
-  );
+  const { data, isLoading } = useGetWorkspace(workspace.publicId, {
+    query: {
+      enabled: !!workspace.publicId && workspace.publicId.length >= 12,
+      select: (res) => res.data,
+    },
+  });
 
   const { data: session } = authClient.useSession();
 
   const { canEditMember } = usePermissions();
 
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
 
   const updateRoleMutation = useUpdateMemberRole({
     mutation: {
       onSuccess: async () => {
         if (workspace.publicId && workspace.publicId.length >= 12) {
-          await utils.workspace.byId.invalidate({
-            workspacePublicId: workspace.publicId,
+          await queryClient.invalidateQueries({
+            queryKey: getGetWorkspaceQueryKey(workspace.publicId),
           });
         }
 

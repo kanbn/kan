@@ -1,6 +1,7 @@
 import { t } from "@lingui/core/macro";
 
 import type { Subscription } from "@kan/shared/utils";
+import { useGetWorkspace } from "@kan/api-client/hooks";
 
 import Button from "~/components/Button";
 import FeedbackModal from "~/components/FeedbackModal";
@@ -10,7 +11,6 @@ import { PageHead } from "~/components/PageHead";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
 import { DeleteWorkspaceConfirmation } from "./components/DeleteWorkspaceConfirmation";
 import UpdateWeekStartDayForm from "./components/UpdateWeekStartDayForm";
 import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescriptionForm";
@@ -22,10 +22,12 @@ export default function WorkspaceSettings() {
   const { modalContentType, openModal, isOpen } = useModal();
   const { workspace } = useWorkspace();
   const { canEditWorkspace } = usePermissions();
-  const { data: workspaceData } = api.workspace.byId.useQuery(
-    { workspacePublicId: workspace.publicId },
-    { enabled: !!workspace.publicId && workspace.publicId.length >= 12 },
-  );
+  const { data: workspaceData } = useGetWorkspace(workspace.publicId, {
+    query: {
+      enabled: !!workspace.publicId && workspace.publicId.length >= 12,
+      select: (res) => res.data,
+    },
+  });
 
   return (
     <>

@@ -1,7 +1,12 @@
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
-import { api } from "~/utils/api";
+import {
+  getGetWorkspaceQueryKey,
+  getGetWorkspacesQueryKey,
+  useUpdateWorkspace,
+} from "@kan/api-client/hooks";
 
 export default function UpdateWeekStartDayForm({
   workspacePublicId,
@@ -12,21 +17,25 @@ export default function UpdateWeekStartDayForm({
   weekStartDay: number;
   disabled?: boolean;
 }) {
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
   const [value, setValue] = useState(weekStartDay);
 
   useEffect(() => {
     setValue(weekStartDay);
   }, [weekStartDay]);
 
-  const updateWorkspace = api.workspace.update.useMutation({
-    onSuccess: () => {
-      if (workspacePublicId && workspacePublicId.length >= 12) {
-        void utils.workspace.byId.invalidate({
-          workspacePublicId,
-        });
-        void utils.workspace.all.invalidate();
-      }
+  const updateWorkspace = useUpdateWorkspace({
+    mutation: {
+      onSuccess: () => {
+        if (workspacePublicId && workspacePublicId.length >= 12) {
+          void queryClient.invalidateQueries({
+            queryKey: getGetWorkspaceQueryKey(workspacePublicId),
+          });
+          void queryClient.invalidateQueries({
+            queryKey: getGetWorkspacesQueryKey(),
+          });
+        }
+      },
     },
   });
 
@@ -36,7 +45,7 @@ export default function UpdateWeekStartDayForm({
     setValue(newValue);
     updateWorkspace.mutate({
       workspacePublicId,
-      weekStartDay: newValue as 0 | 1 | 6,
+      data: { weekStartDay: newValue as 0 | 1 | 6 },
     });
   };
 

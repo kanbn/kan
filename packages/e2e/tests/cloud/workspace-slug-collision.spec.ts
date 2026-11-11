@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import {
   hasRealStripeCredentials,
   setupStripeWebhookForwarding,
@@ -56,23 +57,12 @@ test(
     const workspacePublicIdB = await page.evaluate(() =>
       localStorage.getItem("workspacePublicId"),
     );
-    const response = await page.request.post(
-      "/api/trpc/workspace.update?batch=1",
-      {
-        data: {
-          "0": {
-            json: {
-              workspacePublicId: workspacePublicIdB,
-              slug: workspacePublicIdA,
-            },
-          },
-        },
-      },
+    const response = await page.request.put(
+      `${apiBaseURL}/workspaces/${workspacePublicIdB}`,
+      { data: { slug: workspacePublicIdA } },
     );
     expect(response.status()).toBe(409);
-    const body = (await response.json()) as [
-      { error: { json: { message: string } } },
-    ];
-    expect(body[0].error.json.message).toBe("Workspace slug already taken");
+    const body = (await response.json()) as { message: string };
+    expect(body.message).toBe("Workspace slug already taken");
   },
 );
