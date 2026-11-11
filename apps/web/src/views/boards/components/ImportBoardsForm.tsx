@@ -13,9 +13,13 @@ import {
 } from "react-icons/hi2";
 
 import {
+  useGetGitHubProjects,
   useGetGitHubStatus,
   useGetIntegrationAuthorizationUrl,
   useGetIntegrationProviders,
+  useGetTrelloBoards,
+  useImportGitHubProjects,
+  useImportTrelloBoards,
 } from "@kan/api-client/hooks";
 
 import Button from "~/components/Button";
@@ -218,8 +222,9 @@ const ImportGithub: React.FC = () => {
 
   const refetchBoards = () => utils.board.all.refetch();
 
-  const { data: projects, isLoading: projectsLoading } =
-    api.import.github.getProjects.useQuery();
+  const { data: projects, isLoading: projectsLoading } = useGetGitHubProjects({
+    query: { select: (res) => res.data },
+  });
 
   const {
     register: registerProjects,
@@ -232,26 +237,28 @@ const ImportGithub: React.FC = () => {
     ),
   });
 
-  const importProjects = api.import.github.importProjects.useMutation({
-    onSuccess: async () => {
-      showPopup({
-        header: t`Import complete`,
-        message: t`Your projects have been imported.`,
-        icon: "success",
-      });
-      try {
-        await refetchBoards();
-        closeModal();
-      } catch (e) {
-        console.error(e);
-      }
-    },
-    onError: () => {
-      showPopup({
-        header: t`Import failed`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
+  const importProjects = useImportGitHubProjects({
+    mutation: {
+      onSuccess: async () => {
+        showPopup({
+          header: t`Import complete`,
+          message: t`Your projects have been imported.`,
+          icon: "success",
+        });
+        try {
+          await refetchBoards();
+          closeModal();
+        } catch (e) {
+          console.error(e);
+        }
+      },
+      onError: () => {
+        showPopup({
+          header: t`Import failed`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
     },
   });
 
@@ -269,8 +276,7 @@ const ImportGithub: React.FC = () => {
     );
 
     importProjects.mutate({
-      projectIds,
-      workspacePublicId: workspace.publicId,
+      data: { projectIds, workspacePublicId: workspace.publicId },
     });
   };
 
@@ -370,8 +376,9 @@ const ImportTrello: React.FC = () => {
 
   const refetchBoards = () => utils.board.all.refetch();
 
-  const { data: boards, isLoading: boardsLoading } =
-    api.import.trello.getBoards.useQuery();
+  const { data: boards, isLoading: boardsLoading } = useGetTrelloBoards({
+    query: { select: (res) => res.data },
+  });
 
   const {
     register: registerBoards,
@@ -384,26 +391,28 @@ const ImportTrello: React.FC = () => {
     ),
   });
 
-  const importBoards = api.import.trello.importBoards.useMutation({
-    onSuccess: async () => {
-      showPopup({
-        header: t`Import complete`,
-        message: t`Your boards have been imported.`,
-        icon: "success",
-      });
-      try {
-        await refetchBoards();
-        closeModal();
-      } catch (e) {
-        console.error(e);
-      }
-    },
-    onError: () => {
-      showPopup({
-        header: t`Import failed`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
+  const importBoards = useImportTrelloBoards({
+    mutation: {
+      onSuccess: async () => {
+        showPopup({
+          header: t`Import complete`,
+          message: t`Your boards have been imported.`,
+          icon: "success",
+        });
+        try {
+          await refetchBoards();
+          closeModal();
+        } catch (e) {
+          console.error(e);
+        }
+      },
+      onError: () => {
+        showPopup({
+          header: t`Import failed`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
     },
   });
 
@@ -418,8 +427,7 @@ const ImportTrello: React.FC = () => {
     const boardIds = Object.keys(values).filter((key) => values[key] === true);
 
     importBoards.mutate({
-      boardIds,
-      workspacePublicId: workspace.publicId,
+      data: { boardIds, workspacePublicId: workspace.publicId },
     });
   };
 
