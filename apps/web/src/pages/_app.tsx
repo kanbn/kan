@@ -13,6 +13,7 @@ import { useEffect } from "react";
 
 import { env } from "@kan/shared/env";
 
+import { ApiUnavailableBanner } from "~/components/ApiUnavailableBanner";
 import { env as appEnv } from "~/env";
 import { FontSizeProvider } from "~/providers/font-size";
 import { KeyboardShortcutProvider } from "~/providers/keyboard-shortcuts";
@@ -78,6 +79,7 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
                 >
                   <ModalProvider>
                     <PopupProvider>
+                      <ApiUnavailableBanner />
                       {posthogKey ? (
                         <PostHogProvider client={posthog}>
                           {getLayout(<Component {...pageProps} />)}
