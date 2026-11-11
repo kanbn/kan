@@ -1,17 +1,23 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
 import { z } from "zod";
 
+import {
+  getGetWebhooksQueryKey,
+  useCreateWebhook,
+  useTestWebhook,
+  useUpdateWebhook,
+} from "@kan/api-client/hooks";
 import { webhookEvents } from "@kan/db/schema";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 const newWebhookSchema = z.object({
   name: z
@@ -55,7 +61,7 @@ export function NewWebhookModal({
 
   const modalState = isEdit ? getModalState("EDIT_WEBHOOK") : null;
 
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -103,68 +109,84 @@ export function NewWebhookModal({
     };
   }, [isEdit, clearModalState]);
 
-  const createWebhookMutation = api.webhook.create.useMutation({
-    onSuccess: () => {
-      void utils.webhook.list.invalidate({ workspacePublicId });
-      showPopup({
-        header: t`Webhook created`,
-        message: t`Webhook created successfully`,
-        icon: "success",
-      });
-      closeModal();
-    },
-    onError: (error) => {
-      showPopup({
-        header: t`Unable to create webhook`,
-        message: error.message || t`Failed to create webhook`,
-        icon: "error",
-      });
-    },
-  });
-
-  const updateWebhookMutation = api.webhook.update.useMutation({
-    onSuccess: () => {
-      void utils.webhook.list.invalidate({ workspacePublicId });
-      showPopup({
-        header: t`Webhook updated`,
-        message: t`Webhook updated successfully`,
-        icon: "success",
-      });
-      closeModal();
-    },
-    onError: (error) => {
-      showPopup({
-        header: t`Unable to update webhook`,
-        message: error.message || t`Failed to update webhook`,
-        icon: "error",
-      });
-    },
-  });
-
-  const testWebhookMutation = api.webhook.test.useMutation({
-    onSuccess: (result) => {
-      if (result.success) {
+  const createWebhookMutation = useCreateWebhook({
+    mutation: {
+      onSuccess: () => {
+        void queryClient.invalidateQueries({
+          queryKey: getGetWebhooksQueryKey(workspacePublicId),
+        });
         showPopup({
-          header: t`Test sent`,
-          message: t`Test webhook sent successfully!`,
+          header: t`Webhook created`,
+          message: t`Webhook created successfully`,
           icon: "success",
         });
-      } else {
+        closeModal();
+      },
+      onError: (error) => {
         showPopup({
-          header: t`Test failed`,
-          message: result.error || t`Webhook test failed`,
+          header: t`Unable to create webhook`,
+          message:
+            (error instanceof Error && error.message) ||
+            t`Failed to create webhook`,
           icon: "error",
         });
-      }
-      setIsTestingWebhook(false);
+      },
     },
-    onError: (error) => {
-      showPopup({
-        header: t`Unable to test webhook`,
-        message: error.message || t`Failed to test webhook`,
-        icon: "error",
-      });
-      setIsTestingWebhook(false);
+  });
+
+  const updateWebhookMutation = useUpdateWebhook({
+    mutation: {
+      onSuccess: () => {
+        void queryClient.invalidateQueries({
+          queryKey: getGetWebhooksQueryKey(workspacePublicId),
+        });
+        showPopup({
+          header: t`Webhook updated`,
+          message: t`Webhook updated successfully`,
+          icon: "success",
+        });
+        closeModal();
+      },
+      onError: (error) => {
+        showPopup({
+          header: t`Unable to update webhook`,
+          message:
+            (error instanceof Error && error.message) ||
+            t`Failed to update webhook`,
+          icon: "error",
+        });
+      },
+    },
+  });
+
+  const testWebhookMutation = useTestWebhook({
+    mutation: {
+      onSuccess: ({ data: result }) => {
+        if (result.success) {
+          showPopup({
+            header: t`Test sent`,
+            message: t`Test webhook sent successfully!`,
+            icon: "success",
+          });
+        } else {
+          showPopup({
+            header: t`Test failed`,
+            message: result.error || t`Webhook test failed`,
+            icon: "error",
+          });
+        }
+        setIsTestingWebhook(false);
+      },
+      onError: (error) => {
+        showPopup({
+          header: t`Unable to test webhook`,
+          message:
+            (error instanceof Error && error.message) ||
+            t`Failed to test webhook`,
+          icon: "error",
+        });
+        setIsTestingWebhook(false);
+      },
     },
   });
 
@@ -172,20 +194,24 @@ export function NewWebhookModal({
     if (isEdit && webhookPublicId) {
       updateWebhookMutation.mutate({
         workspacePublicId,
-        webhookPublicId: webhookPublicId,
-        name: data.name,
-        url: data.url,
-        secret: data.secret || undefined,
-        events: data.events,
-        active: data.active,
+        webhookPublicId,
+        data: {
+          name: data.name,
+          url: data.url,
+          secret: data.secret || undefined,
+          events: data.events,
+          active: data.active,
+        },
       });
     } else {
       createWebhookMutation.mutate({
         workspacePublicId,
-        name: data.name,
-        url: data.url,
-        secret: data.secret || undefined,
-        events: data.events,
+        data: {
+          name: data.name,
+          url: data.url,
+          secret: data.secret || undefined,
+          events: data.events,
+        },
       });
     }
   };

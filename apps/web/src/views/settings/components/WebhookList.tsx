@@ -4,11 +4,12 @@ import { format } from "date-fns";
 import { HiEllipsisHorizontal } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
+import { useGetWebhooks, useTestWebhook } from "@kan/api-client/hooks";
+
 import Dropdown from "~/components/Dropdown";
 import { useLocalisation } from "~/hooks/useLocalisation";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 interface TableRowProps {
   publicId?: string;
@@ -16,7 +17,7 @@ interface TableRowProps {
   url?: string;
   events?: string[];
   active?: boolean;
-  createdAt?: Date | null;
+  createdAt?: string | null;
   dateLocale?: DateFnsLocale;
   isLastRow?: boolean;
   showSkeleton?: boolean;
@@ -29,9 +30,9 @@ function formatEvents(events: string[]) {
   return events.map((e) => e.replace("card.", "")).join(", ");
 }
 
-function formatDate(date?: Date | null, locale?: DateFnsLocale) {
+function formatDate(date?: string | null, locale?: DateFnsLocale) {
   if (!date) return "Never";
-  return format(date, "MMM d, yyyy", { locale });
+  return format(new Date(date), "MMM d, yyyy", { locale });
 }
 
 function TableRow({
@@ -160,32 +161,36 @@ export default function WebhookList({ workspacePublicId }: WebhookListProps) {
   const { showPopup } = usePopup();
   const { dateLocale } = useLocalisation();
 
-  const { data: webhooks, isLoading } = api.webhook.list.useQuery({
-    workspacePublicId,
+  const { data: webhooks, isLoading } = useGetWebhooks(workspacePublicId, {
+    query: { select: (res) => res.data },
   });
 
-  const testWebhookMutation = api.webhook.test.useMutation({
-    onSuccess: (result) => {
-      if (result.success) {
+  const testWebhookMutation = useTestWebhook({
+    mutation: {
+      onSuccess: ({ data: result }) => {
+        if (result.success) {
+          showPopup({
+            header: t`Test sent`,
+            message: t`Test webhook sent successfully!`,
+            icon: "success",
+          });
+        } else {
+          showPopup({
+            header: t`Test failed`,
+            message: result.error || t`Webhook test failed`,
+            icon: "error",
+          });
+        }
+      },
+      onError: (error) => {
         showPopup({
-          header: t`Test sent`,
-          message: t`Test webhook sent successfully!`,
-          icon: "success",
-        });
-      } else {
-        showPopup({
-          header: t`Test failed`,
-          message: result.error || t`Webhook test failed`,
+          header: t`Unable to test webhook`,
+          message:
+            (error instanceof Error && error.message) ||
+            t`Failed to test webhook`,
           icon: "error",
         });
-      }
-    },
-    onError: (error) => {
-      showPopup({
-        header: t`Unable to test webhook`,
-        message: error.message || t`Failed to test webhook`,
-        icon: "error",
-      });
+      },
     },
   });
 

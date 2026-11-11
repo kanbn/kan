@@ -1,10 +1,15 @@
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { HiXMark } from "react-icons/hi2";
+
+import {
+  getGetWebhooksQueryKey,
+  useDeleteWebhook,
+} from "@kan/api-client/hooks";
 
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 interface DeleteWebhookConfirmationProps {
   workspacePublicId: string;
@@ -19,24 +24,30 @@ export function DeleteWebhookConfirmation({
     entityLabel: webhookName,
   } = useModal();
   const { showPopup } = usePopup();
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
 
-  const deleteWebhookMutation = api.webhook.delete.useMutation({
-    onSuccess: () => {
-      void utils.webhook.list.invalidate({ workspacePublicId });
-      showPopup({
-        header: t`Webhook deleted`,
-        message: t`Webhook deleted successfully`,
-        icon: "success",
-      });
-      closeModal();
-    },
-    onError: (error) => {
-      showPopup({
-        header: t`Unable to delete webhook`,
-        message: error.message || t`Failed to delete webhook`,
-        icon: "error",
-      });
+  const deleteWebhookMutation = useDeleteWebhook({
+    mutation: {
+      onSuccess: () => {
+        void queryClient.invalidateQueries({
+          queryKey: getGetWebhooksQueryKey(workspacePublicId),
+        });
+        showPopup({
+          header: t`Webhook deleted`,
+          message: t`Webhook deleted successfully`,
+          icon: "success",
+        });
+        closeModal();
+      },
+      onError: (error) => {
+        showPopup({
+          header: t`Unable to delete webhook`,
+          message:
+            (error instanceof Error && error.message) ||
+            t`Failed to delete webhook`,
+          icon: "error",
+        });
+      },
     },
   });
 

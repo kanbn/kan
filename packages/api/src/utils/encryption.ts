@@ -1,18 +1,19 @@
 import crypto from "crypto";
 
 const ALGORITHM = "aes-256-gcm";
-const SECRET_KEY = process.env.BETTER_AUTH_SECRET;
-
-if (!SECRET_KEY) {
-  throw new Error("Encryption key is missing. Set BETTER_AUTH_SECRET.");
-}
-
-// Ensure the key is exactly 32 bytes
-const key = crypto.createHash("sha256").update(String(SECRET_KEY)).digest();
+// Resolved on use, not import, so code that only loads this module (OpenAPI
+// generation, tests) doesn't need the secret.
+const getKey = () => {
+  const secret = process.env.BETTER_AUTH_SECRET;
+  if (!secret)
+    throw new Error("Encryption key is missing. Set BETTER_AUTH_SECRET.");
+  // Ensure the key is exactly 32 bytes
+  return crypto.createHash("sha256").update(secret).digest();
+};
 
 export const encryptToken = (text: string) => {
   const iv = crypto.randomBytes(12); // 12 bytes is the recommended IV size for GCM
-  const cipher = crypto.createCipheriv(ALGORITHM, key, iv);
+  const cipher = crypto.createCipheriv(ALGORITHM, getKey(), iv);
 
   // buffer concat is faster/cleaner for raw binary manipulation
   const encrypted = Buffer.concat([
@@ -41,7 +42,7 @@ export const decryptToken = (text: string) => {
   const authTag = combined.subarray(12, 28);
   const encryptedText = combined.subarray(28);
 
-  const decipher = crypto.createDecipheriv(ALGORITHM, key, iv);
+  const decipher = crypto.createDecipheriv(ALGORITHM, getKey(), iv);
   decipher.setAuthTag(authTag);
 
   // If the cookie was tampered with, this will throw an error

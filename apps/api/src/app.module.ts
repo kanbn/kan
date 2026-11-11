@@ -9,12 +9,14 @@ import { AttachmentModule } from "./modules/attachment/attachment.module.js";
 import { BoardMemberModule } from "./modules/board-member/board-member.module.js";
 import { ChecklistModule } from "./modules/checklist/checklist.module.js";
 import { FeedbackModule } from "./modules/feedback/feedback.module.js";
+import { IntegrationModule } from "./modules/integration/integration.module.js";
 import { LabelModule } from "./modules/label/label.module.js";
 import { ListModule } from "./modules/list/list.module.js";
 import { McpModule } from "./modules/mcp/mcp.module.js";
 import { MemberModule } from "./modules/member/member.module.js";
 import { PermissionModule } from "./modules/permission/permission.module.js";
 import { UserModule } from "./modules/user/user.module.js";
+import { WebhookModule } from "./modules/webhook/webhook.module.js";
 import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
 
 @Module({
@@ -23,12 +25,14 @@ import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
     BoardMemberModule,
     ChecklistModule,
     FeedbackModule,
+    IntegrationModule,
     LabelModule,
     ListModule,
     McpModule,
     MemberModule,
     PermissionModule,
     UserModule,
+    WebhookModule,
     WorkspaceModule,
   ],
   controllers: [HealthController],

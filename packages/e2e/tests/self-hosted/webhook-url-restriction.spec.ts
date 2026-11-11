@@ -1,6 +1,7 @@
 import type { Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import { AuthPage } from "../support/pages/auth-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
@@ -11,18 +12,10 @@ async function attemptCreateWebhook(
   workspacePublicId: string,
   url: string,
 ) {
-  return page.request.post("/api/trpc/webhook.create?batch=1", {
-    data: {
-      "0": {
-        json: {
-          workspacePublicId,
-          name: "SSRF test webhook",
-          url,
-          events: ["card.created"],
-        },
-      },
-    },
-  });
+  return page.request.post(
+    `${apiBaseURL}/workspaces/${workspacePublicId}/webhooks`,
+    { data: { name: "SSRF test webhook", url, events: ["card.created"] } },
+  );
 }
 
 test(
@@ -58,13 +51,9 @@ test(
     }
 
     const listResponse = await page.request.get(
-      `/api/trpc/webhook.list?batch=1&input=${encodeURIComponent(
-        JSON.stringify({ "0": { json: { workspacePublicId } } }),
-      )}`,
+      `${apiBaseURL}/workspaces/${workspacePublicId}/webhooks`,
     );
-    const listBody = (await listResponse.json()) as [
-      { result: { data: { json: unknown[] } } },
-    ];
-    expect(listBody[0].result.data.json).toHaveLength(0);
+    expect(listResponse.status()).toBe(200);
+    expect(await listResponse.json()).toHaveLength(0);
   },
 );

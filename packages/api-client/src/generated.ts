@@ -208,6 +208,50 @@ export interface CreateFeedbackResponseDtoOutput {
   success: boolean;
 }
 
+export interface IntegrationProviderDtoOutput {
+  provider: string;
+  userId: string;
+  /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$ */
+  expiresAt: string;
+  /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$ */
+  createdAt: string;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  updatedAt: string | null;
+}
+
+export type DisconnectIntegrationDtoProvider = typeof DisconnectIntegrationDtoProvider[keyof typeof DisconnectIntegrationDtoProvider];
+
+
+export const DisconnectIntegrationDtoProvider = {
+  trello: 'trello',
+  github: 'github',
+} as const;
+
+export interface DisconnectIntegrationDto {
+  provider: DisconnectIntegrationDtoProvider;
+}
+
+export interface EmptyResponseDtoOutput { [key: string]: never }
+
+export interface AuthorizationUrlResponseDtoOutput {
+  url: string;
+}
+
+export interface SaveGitHubTokenDto {
+  token: string;
+}
+
+export interface SuccessResponseDtoOutput {
+  success: boolean;
+}
+
+export interface GitHubStatusResponseDtoOutput {
+  connected: boolean;
+}
+
 export interface LabelResponseDtoOutput {
   publicId: string;
   name: string;
@@ -396,10 +440,6 @@ export interface PermissionActionDto {
   permission: PermissionActionDtoPermission;
 }
 
-export interface SuccessResponseDtoOutput {
-  success: boolean;
-}
-
 export type GetWorkspaceRolesResponseDtoOutputRolesItem = {
   /** @minLength 12 */
   publicId: string;
@@ -470,6 +510,88 @@ export interface UpdateUserResponseDtoOutput {
 export interface SetPasswordDto {
   /** @minLength 8 */
   newPassword: string;
+}
+
+export type WebhookResponseDtoOutputEventsItem = typeof WebhookResponseDtoOutputEventsItem[keyof typeof WebhookResponseDtoOutputEventsItem];
+
+
+export const WebhookResponseDtoOutputEventsItem = {
+  cardcreated: 'card.created',
+  cardupdated: 'card.updated',
+  cardmoved: 'card.moved',
+  carddeleted: 'card.deleted',
+} as const;
+
+export interface WebhookResponseDtoOutput {
+  publicId: string;
+  name: string;
+  url: string;
+  events: WebhookResponseDtoOutputEventsItem[];
+  active: boolean;
+  /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$ */
+  createdAt: string;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  updatedAt: string | null;
+}
+
+export type CreateWebhookDtoEventsItem = typeof CreateWebhookDtoEventsItem[keyof typeof CreateWebhookDtoEventsItem];
+
+
+export const CreateWebhookDtoEventsItem = {
+  cardcreated: 'card.created',
+  cardupdated: 'card.updated',
+  cardmoved: 'card.moved',
+  carddeleted: 'card.deleted',
+} as const;
+
+export interface CreateWebhookDto {
+  /**
+     * @minLength 1
+     * @maxLength 255
+     */
+  name: string;
+  url: string;
+  /** @maxLength 512 */
+  secret?: string;
+  /** @minItems 1 */
+  events: CreateWebhookDtoEventsItem[];
+}
+
+export type UpdateWebhookDtoEventsItem = typeof UpdateWebhookDtoEventsItem[keyof typeof UpdateWebhookDtoEventsItem];
+
+
+export const UpdateWebhookDtoEventsItem = {
+  cardcreated: 'card.created',
+  cardupdated: 'card.updated',
+  cardmoved: 'card.moved',
+  carddeleted: 'card.deleted',
+} as const;
+
+export interface UpdateWebhookDto {
+  /**
+     * @minLength 1
+     * @maxLength 255
+     */
+  name?: string;
+  url?: string;
+  /** @maxLength 512 */
+  secret?: string;
+  /** @minItems 1 */
+  events?: UpdateWebhookDtoEventsItem[];
+  active?: boolean;
+}
+
+export interface DeleteWebhookResponseDtoOutput {
+  success: boolean;
+}
+
+export interface TestWebhookResponseDtoOutput {
+  success: boolean;
+  statusCode?: number;
+  error?: string;
 }
 
 export type SearchBoardResultDtoType = typeof SearchBoardResultDtoType[keyof typeof SearchBoardResultDtoType];
@@ -713,6 +835,17 @@ export interface WorkspaceUpdateResponseDtoOutput {
 export interface WorkspaceDeleteResponseDtoOutput {
   success: boolean;
 }
+
+export type GetIntegrationAuthorizationUrlParams = {
+  provider: GetIntegrationAuthorizationUrlProvider;
+};
+
+export type GetIntegrationAuthorizationUrlProvider = typeof GetIntegrationAuthorizationUrlProvider[keyof typeof GetIntegrationAuthorizationUrlProvider];
+
+
+export const GetIntegrationAuthorizationUrlProvider = {
+  trello: 'trello',
+} as const;
 
 export type CheckSlugAvailabilityParams = {
   /**
@@ -2113,6 +2246,638 @@ export const useCreateFeedback = <TError = unknown,
       > => {
       return useMutation(getCreateFeedbackMutationOptions(options), queryClient);
     }
+
+export type getIntegrationProvidersResponse200 = {
+  data: IntegrationProviderDtoOutput[]
+  status: 200
+}
+
+export type getIntegrationProvidersResponseSuccess = (getIntegrationProvidersResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getIntegrationProvidersResponse = (getIntegrationProvidersResponseSuccess)
+
+export const getGetIntegrationProvidersUrl = () => {
+
+
+
+
+  return `/integration/providers`
+}
+
+/**
+ * @summary Get the current user's integration providers
+ */
+export const getIntegrationProviders = async ( options?: Parameters<typeof customFetch>[1]): Promise<getIntegrationProvidersResponse> => {
+
+  return customFetch<getIntegrationProvidersResponse>(getGetIntegrationProvidersUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetIntegrationProvidersQueryKey = () => {
+    return [
+    `/integration/providers`
+    ] as const;
+    }
+
+
+export const getGetIntegrationProvidersQueryOptions = <TData = Awaited<ReturnType<typeof getIntegrationProviders>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getIntegrationProviders>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetIntegrationProvidersQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getIntegrationProviders>>> = ({ signal }) => getIntegrationProviders({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getIntegrationProviders>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetIntegrationProvidersQueryResult = NonNullable<Awaited<ReturnType<typeof getIntegrationProviders>>>
+export type GetIntegrationProvidersQueryError = unknown
+
+
+/** @summary Get the current user's integration providers */
+export function useGetIntegrationProviders<TData = Awaited<ReturnType<typeof getIntegrationProviders>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getIntegrationProviders>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getIntegrationProviders>>,
+          TError,
+          Awaited<ReturnType<typeof getIntegrationProviders>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get the current user's integration providers */
+export function useGetIntegrationProviders<TData = Awaited<ReturnType<typeof getIntegrationProviders>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getIntegrationProviders>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getIntegrationProviders>>,
+          TError,
+          Awaited<ReturnType<typeof getIntegrationProviders>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get the current user's integration providers */
+export function useGetIntegrationProviders<TData = Awaited<ReturnType<typeof getIntegrationProviders>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getIntegrationProviders>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get the current user's integration providers */
+export function useGetIntegrationProviders<TData = Awaited<ReturnType<typeof getIntegrationProviders>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getIntegrationProviders>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetIntegrationProvidersQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type disconnectIntegrationResponse201 = {
+  data: EmptyResponseDtoOutput
+  status: 201
+}
+
+export type disconnectIntegrationResponseSuccess = (disconnectIntegrationResponse201) & {
+  headers: Headers;
+};
+;
+
+export type disconnectIntegrationResponse = (disconnectIntegrationResponseSuccess)
+
+export const getDisconnectIntegrationUrl = () => {
+
+
+
+
+  return `/integration/disconnect`
+}
+
+/**
+ * @summary Disconnect an integration
+ */
+export const disconnectIntegration = async (disconnectIntegrationDto: DisconnectIntegrationDto, options?: Parameters<typeof customFetch>[1]): Promise<disconnectIntegrationResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<disconnectIntegrationResponse>(getDisconnectIntegrationUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(disconnectIntegrationDto)
+  }
+);}
+
+
+
+
+
+export const getDisconnectIntegrationMutationKey = () => ['disconnectIntegration'] as const;
+
+export const getDisconnectIntegrationMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof disconnectIntegration>>, TError,DisconnectIntegrationMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof disconnectIntegration>>, TError,DisconnectIntegrationMutationVariables, TContext> => {
+
+const mutationKey = getDisconnectIntegrationMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof disconnectIntegration>>, DisconnectIntegrationMutationVariables> = (props) => {
+          const {data} = props ?? {};
+
+          return  disconnectIntegration(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DisconnectIntegrationMutationResult = NonNullable<Awaited<ReturnType<typeof disconnectIntegration>>>
+    export type DisconnectIntegrationMutationBody = DisconnectIntegrationDto
+    export type DisconnectIntegrationMutationError = unknown
+    export type DisconnectIntegrationMutationVariables = {data: DisconnectIntegrationDto}
+
+    /** @summary Disconnect an integration */
+export const useDisconnectIntegration = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof disconnectIntegration>>, TError,DisconnectIntegrationMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof disconnectIntegration>>,
+        TError,
+        DisconnectIntegrationMutationVariables,
+        TContext
+      > => {
+      return useMutation(getDisconnectIntegrationMutationOptions(options), queryClient);
+    }
+
+export type getIntegrationAuthorizationUrlResponse200 = {
+  data: AuthorizationUrlResponseDtoOutput
+  status: 200
+}
+
+export type getIntegrationAuthorizationUrlResponseSuccess = (getIntegrationAuthorizationUrlResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getIntegrationAuthorizationUrlResponse = (getIntegrationAuthorizationUrlResponseSuccess)
+
+export const getGetIntegrationAuthorizationUrlUrl = (params: GetIntegrationAuthorizationUrlParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : String(value))
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/integration/authorize?${stringifiedParams}` : `/integration/authorize`
+}
+
+/**
+ * @summary Get the authorization URL for an integration
+ */
+export const getIntegrationAuthorizationUrl = async (params: GetIntegrationAuthorizationUrlParams, options?: Parameters<typeof customFetch>[1]): Promise<getIntegrationAuthorizationUrlResponse> => {
+
+  return customFetch<getIntegrationAuthorizationUrlResponse>(getGetIntegrationAuthorizationUrlUrl(params),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetIntegrationAuthorizationUrlQueryKey = (params?: GetIntegrationAuthorizationUrlParams,) => {
+    return [
+    `/integration/authorize`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getGetIntegrationAuthorizationUrlQueryOptions = <TData = Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>, TError = unknown>(params: GetIntegrationAuthorizationUrlParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetIntegrationAuthorizationUrlQueryKey(params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>> = ({ signal }) => getIntegrationAuthorizationUrl(params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetIntegrationAuthorizationUrlQueryResult = NonNullable<Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>>
+export type GetIntegrationAuthorizationUrlQueryError = unknown
+
+
+/** @summary Get the authorization URL for an integration */
+export function useGetIntegrationAuthorizationUrl<TData = Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>, TError = unknown>(
+ params: GetIntegrationAuthorizationUrlParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>,
+          TError,
+          Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get the authorization URL for an integration */
+export function useGetIntegrationAuthorizationUrl<TData = Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>, TError = unknown>(
+ params: GetIntegrationAuthorizationUrlParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>,
+          TError,
+          Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get the authorization URL for an integration */
+export function useGetIntegrationAuthorizationUrl<TData = Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>, TError = unknown>(
+ params: GetIntegrationAuthorizationUrlParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get the authorization URL for an integration */
+export function useGetIntegrationAuthorizationUrl<TData = Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>, TError = unknown>(
+ params: GetIntegrationAuthorizationUrlParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getIntegrationAuthorizationUrl>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetIntegrationAuthorizationUrlQueryOptions(params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type saveGitHubTokenResponse201 = {
+  data: SuccessResponseDtoOutput
+  status: 201
+}
+
+export type saveGitHubTokenResponseSuccess = (saveGitHubTokenResponse201) & {
+  headers: Headers;
+};
+;
+
+export type saveGitHubTokenResponse = (saveGitHubTokenResponseSuccess)
+
+export const getSaveGitHubTokenUrl = () => {
+
+
+
+
+  return `/integration/github/token`
+}
+
+/**
+ * @summary Save a GitHub access token for the current user
+ */
+export const saveGitHubToken = async (saveGitHubTokenDto: SaveGitHubTokenDto, options?: Parameters<typeof customFetch>[1]): Promise<saveGitHubTokenResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<saveGitHubTokenResponse>(getSaveGitHubTokenUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(saveGitHubTokenDto)
+  }
+);}
+
+
+
+
+
+export const getSaveGitHubTokenMutationKey = () => ['saveGitHubToken'] as const;
+
+export const getSaveGitHubTokenMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof saveGitHubToken>>, TError,SaveGitHubTokenMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof saveGitHubToken>>, TError,SaveGitHubTokenMutationVariables, TContext> => {
+
+const mutationKey = getSaveGitHubTokenMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof saveGitHubToken>>, SaveGitHubTokenMutationVariables> = (props) => {
+          const {data} = props ?? {};
+
+          return  saveGitHubToken(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type SaveGitHubTokenMutationResult = NonNullable<Awaited<ReturnType<typeof saveGitHubToken>>>
+    export type SaveGitHubTokenMutationBody = SaveGitHubTokenDto
+    export type SaveGitHubTokenMutationError = unknown
+    export type SaveGitHubTokenMutationVariables = {data: SaveGitHubTokenDto}
+
+    /** @summary Save a GitHub access token for the current user */
+export const useSaveGitHubToken = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof saveGitHubToken>>, TError,SaveGitHubTokenMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof saveGitHubToken>>,
+        TError,
+        SaveGitHubTokenMutationVariables,
+        TContext
+      > => {
+      return useMutation(getSaveGitHubTokenMutationOptions(options), queryClient);
+    }
+
+export type disconnectGitHubResponse200 = {
+  data: SuccessResponseDtoOutput
+  status: 200
+}
+
+export type disconnectGitHubResponseSuccess = (disconnectGitHubResponse200) & {
+  headers: Headers;
+};
+;
+
+export type disconnectGitHubResponse = (disconnectGitHubResponseSuccess)
+
+export const getDisconnectGitHubUrl = () => {
+
+
+
+
+  return `/integration/github`
+}
+
+/**
+ * @summary Disconnect the current user's GitHub integration
+ */
+export const disconnectGitHub = async ( options?: Parameters<typeof customFetch>[1]): Promise<disconnectGitHubResponse> => {
+
+  return customFetch<disconnectGitHubResponse>(getDisconnectGitHubUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+
+export const getDisconnectGitHubMutationKey = () => ['disconnectGitHub'] as const;
+
+export const getDisconnectGitHubMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof disconnectGitHub>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof disconnectGitHub>>, TError,void, TContext> => {
+
+const mutationKey = getDisconnectGitHubMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof disconnectGitHub>>, void> = () => {
+
+
+          return  disconnectGitHub(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DisconnectGitHubMutationResult = NonNullable<Awaited<ReturnType<typeof disconnectGitHub>>>
+
+    export type DisconnectGitHubMutationError = unknown
+
+
+    /** @summary Disconnect the current user's GitHub integration */
+export const useDisconnectGitHub = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof disconnectGitHub>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof disconnectGitHub>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getDisconnectGitHubMutationOptions(options), queryClient);
+    }
+
+export type getGitHubStatusResponse200 = {
+  data: GitHubStatusResponseDtoOutput
+  status: 200
+}
+
+export type getGitHubStatusResponseSuccess = (getGitHubStatusResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getGitHubStatusResponse = (getGitHubStatusResponseSuccess)
+
+export const getGetGitHubStatusUrl = () => {
+
+
+
+
+  return `/integration/github/status`
+}
+
+/**
+ * @summary Check whether the current user has connected GitHub
+ */
+export const getGitHubStatus = async ( options?: Parameters<typeof customFetch>[1]): Promise<getGitHubStatusResponse> => {
+
+  return customFetch<getGitHubStatusResponse>(getGetGitHubStatusUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetGitHubStatusQueryKey = () => {
+    return [
+    `/integration/github/status`
+    ] as const;
+    }
+
+
+export const getGetGitHubStatusQueryOptions = <TData = Awaited<ReturnType<typeof getGitHubStatus>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGitHubStatus>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetGitHubStatusQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getGitHubStatus>>> = ({ signal }) => getGitHubStatus({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getGitHubStatus>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetGitHubStatusQueryResult = NonNullable<Awaited<ReturnType<typeof getGitHubStatus>>>
+export type GetGitHubStatusQueryError = unknown
+
+
+/** @summary Check whether the current user has connected GitHub */
+export function useGetGitHubStatus<TData = Awaited<ReturnType<typeof getGitHubStatus>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGitHubStatus>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getGitHubStatus>>,
+          TError,
+          Awaited<ReturnType<typeof getGitHubStatus>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Check whether the current user has connected GitHub */
+export function useGetGitHubStatus<TData = Awaited<ReturnType<typeof getGitHubStatus>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGitHubStatus>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getGitHubStatus>>,
+          TError,
+          Awaited<ReturnType<typeof getGitHubStatus>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Check whether the current user has connected GitHub */
+export function useGetGitHubStatus<TData = Awaited<ReturnType<typeof getGitHubStatus>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGitHubStatus>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Check whether the current user has connected GitHub */
+export function useGetGitHubStatus<TData = Awaited<ReturnType<typeof getGitHubStatus>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGitHubStatus>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetGitHubStatusQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
 
 export type getLabelResponse200 = {
   data: LabelResponseDtoOutput
@@ -5327,6 +6092,496 @@ export const useSetPassword = <TError = unknown,
         TContext
       > => {
       return useMutation(getSetPasswordMutationOptions(options), queryClient);
+    }
+
+export type getWebhooksResponse200 = {
+  data: WebhookResponseDtoOutput[]
+  status: 200
+}
+
+export type getWebhooksResponseSuccess = (getWebhooksResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getWebhooksResponse = (getWebhooksResponseSuccess)
+
+export const getGetWebhooksUrl = (workspacePublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/webhooks`
+}
+
+/**
+ * @summary List a workspace's webhooks
+ */
+export const getWebhooks = async (workspacePublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<getWebhooksResponse> => {
+
+  return customFetch<getWebhooksResponse>(getGetWebhooksUrl(workspacePublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetWebhooksQueryKey = (workspacePublicId: string,) => {
+    return [
+    `/workspaces/${workspacePublicId}/webhooks`
+    ] as const;
+    }
+
+
+export const getGetWebhooksQueryOptions = <TData = Awaited<ReturnType<typeof getWebhooks>>, TError = unknown>(workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWebhooks>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetWebhooksQueryKey(workspacePublicId);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getWebhooks>>> = ({ signal }) => getWebhooks(workspacePublicId, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: workspacePublicId !== null && workspacePublicId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getWebhooks>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetWebhooksQueryResult = NonNullable<Awaited<ReturnType<typeof getWebhooks>>>
+export type GetWebhooksQueryError = unknown
+
+
+/** @summary List a workspace's webhooks */
+export function useGetWebhooks<TData = Awaited<ReturnType<typeof getWebhooks>>, TError = unknown>(
+ workspacePublicId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWebhooks>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getWebhooks>>,
+          TError,
+          Awaited<ReturnType<typeof getWebhooks>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary List a workspace's webhooks */
+export function useGetWebhooks<TData = Awaited<ReturnType<typeof getWebhooks>>, TError = unknown>(
+ workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWebhooks>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getWebhooks>>,
+          TError,
+          Awaited<ReturnType<typeof getWebhooks>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary List a workspace's webhooks */
+export function useGetWebhooks<TData = Awaited<ReturnType<typeof getWebhooks>>, TError = unknown>(
+ workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWebhooks>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary List a workspace's webhooks */
+export function useGetWebhooks<TData = Awaited<ReturnType<typeof getWebhooks>>, TError = unknown>(
+ workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWebhooks>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetWebhooksQueryOptions(workspacePublicId,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type createWebhookResponse201 = {
+  data: WebhookResponseDtoOutput
+  status: 201
+}
+
+export type createWebhookResponseSuccess = (createWebhookResponse201) & {
+  headers: Headers;
+};
+;
+
+export type createWebhookResponse = (createWebhookResponseSuccess)
+
+export const getCreateWebhookUrl = (workspacePublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/webhooks`
+}
+
+/**
+ * @summary Create a webhook
+ */
+export const createWebhook = async (workspacePublicId: string,
+    createWebhookDto: CreateWebhookDto, options?: Parameters<typeof customFetch>[1]): Promise<createWebhookResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<createWebhookResponse>(getCreateWebhookUrl(workspacePublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(createWebhookDto)
+  }
+);}
+
+
+
+
+
+export const getCreateWebhookMutationKey = () => ['createWebhook'] as const;
+
+export const getCreateWebhookMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createWebhook>>, TError,CreateWebhookMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createWebhook>>, TError,CreateWebhookMutationVariables, TContext> => {
+
+const mutationKey = getCreateWebhookMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createWebhook>>, CreateWebhookMutationVariables> = (props) => {
+          const {workspacePublicId,data} = props ?? {};
+
+          return  createWebhook(workspacePublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateWebhookMutationResult = NonNullable<Awaited<ReturnType<typeof createWebhook>>>
+    export type CreateWebhookMutationBody = CreateWebhookDto
+    export type CreateWebhookMutationError = unknown
+    export type CreateWebhookMutationVariables = {workspacePublicId: string;data: CreateWebhookDto}
+
+    /** @summary Create a webhook */
+export const useCreateWebhook = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createWebhook>>, TError,CreateWebhookMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof createWebhook>>,
+        TError,
+        CreateWebhookMutationVariables,
+        TContext
+      > => {
+      return useMutation(getCreateWebhookMutationOptions(options), queryClient);
+    }
+
+export type updateWebhookResponse200 = {
+  data: WebhookResponseDtoOutput
+  status: 200
+}
+
+export type updateWebhookResponseSuccess = (updateWebhookResponse200) & {
+  headers: Headers;
+};
+;
+
+export type updateWebhookResponse = (updateWebhookResponseSuccess)
+
+export const getUpdateWebhookUrl = (workspacePublicId: string,
+    webhookPublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/webhooks/${webhookPublicId}`
+}
+
+/**
+ * @summary Update a webhook
+ */
+export const updateWebhook = async (workspacePublicId: string,
+    webhookPublicId: string,
+    updateWebhookDto: UpdateWebhookDto, options?: Parameters<typeof customFetch>[1]): Promise<updateWebhookResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<updateWebhookResponse>(getUpdateWebhookUrl(workspacePublicId,webhookPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(updateWebhookDto)
+  }
+);}
+
+
+
+
+
+export const getUpdateWebhookMutationKey = () => ['updateWebhook'] as const;
+
+export const getUpdateWebhookMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateWebhook>>, TError,UpdateWebhookMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateWebhook>>, TError,UpdateWebhookMutationVariables, TContext> => {
+
+const mutationKey = getUpdateWebhookMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateWebhook>>, UpdateWebhookMutationVariables> = (props) => {
+          const {workspacePublicId,webhookPublicId,data} = props ?? {};
+
+          return  updateWebhook(workspacePublicId,webhookPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateWebhookMutationResult = NonNullable<Awaited<ReturnType<typeof updateWebhook>>>
+    export type UpdateWebhookMutationBody = UpdateWebhookDto
+    export type UpdateWebhookMutationError = unknown
+    export type UpdateWebhookMutationVariables = {workspacePublicId: string;webhookPublicId: string;data: UpdateWebhookDto}
+
+    /** @summary Update a webhook */
+export const useUpdateWebhook = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateWebhook>>, TError,UpdateWebhookMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof updateWebhook>>,
+        TError,
+        UpdateWebhookMutationVariables,
+        TContext
+      > => {
+      return useMutation(getUpdateWebhookMutationOptions(options), queryClient);
+    }
+
+export type deleteWebhookResponse200 = {
+  data: DeleteWebhookResponseDtoOutput
+  status: 200
+}
+
+export type deleteWebhookResponseSuccess = (deleteWebhookResponse200) & {
+  headers: Headers;
+};
+;
+
+export type deleteWebhookResponse = (deleteWebhookResponseSuccess)
+
+export const getDeleteWebhookUrl = (workspacePublicId: string,
+    webhookPublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/webhooks/${webhookPublicId}`
+}
+
+/**
+ * @summary Delete a webhook
+ */
+export const deleteWebhook = async (workspacePublicId: string,
+    webhookPublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<deleteWebhookResponse> => {
+
+  return customFetch<deleteWebhookResponse>(getDeleteWebhookUrl(workspacePublicId,webhookPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+
+export const getDeleteWebhookMutationKey = () => ['deleteWebhook'] as const;
+
+export const getDeleteWebhookMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteWebhook>>, TError,DeleteWebhookMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteWebhook>>, TError,DeleteWebhookMutationVariables, TContext> => {
+
+const mutationKey = getDeleteWebhookMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteWebhook>>, DeleteWebhookMutationVariables> = (props) => {
+          const {workspacePublicId,webhookPublicId} = props ?? {};
+
+          return  deleteWebhook(workspacePublicId,webhookPublicId,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteWebhookMutationResult = NonNullable<Awaited<ReturnType<typeof deleteWebhook>>>
+
+    export type DeleteWebhookMutationError = unknown
+    export type DeleteWebhookMutationVariables = {workspacePublicId: string;webhookPublicId: string}
+
+    /** @summary Delete a webhook */
+export const useDeleteWebhook = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteWebhook>>, TError,DeleteWebhookMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteWebhook>>,
+        TError,
+        DeleteWebhookMutationVariables,
+        TContext
+      > => {
+      return useMutation(getDeleteWebhookMutationOptions(options), queryClient);
+    }
+
+export type testWebhookResponse201 = {
+  data: TestWebhookResponseDtoOutput
+  status: 201
+}
+
+export type testWebhookResponseSuccess = (testWebhookResponse201) & {
+  headers: Headers;
+};
+;
+
+export type testWebhookResponse = (testWebhookResponseSuccess)
+
+export const getTestWebhookUrl = (workspacePublicId: string,
+    webhookPublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/webhooks/${webhookPublicId}/test`
+}
+
+/**
+ * @summary Send a test payload to a webhook
+ */
+export const testWebhook = async (workspacePublicId: string,
+    webhookPublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<testWebhookResponse> => {
+
+  return customFetch<testWebhookResponse>(getTestWebhookUrl(workspacePublicId,webhookPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getTestWebhookMutationKey = () => ['testWebhook'] as const;
+
+export const getTestWebhookMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof testWebhook>>, TError,TestWebhookMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof testWebhook>>, TError,TestWebhookMutationVariables, TContext> => {
+
+const mutationKey = getTestWebhookMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof testWebhook>>, TestWebhookMutationVariables> = (props) => {
+          const {workspacePublicId,webhookPublicId} = props ?? {};
+
+          return  testWebhook(workspacePublicId,webhookPublicId,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type TestWebhookMutationResult = NonNullable<Awaited<ReturnType<typeof testWebhook>>>
+
+    export type TestWebhookMutationError = unknown
+    export type TestWebhookMutationVariables = {workspacePublicId: string;webhookPublicId: string}
+
+    /** @summary Send a test payload to a webhook */
+export const useTestWebhook = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof testWebhook>>, TError,TestWebhookMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof testWebhook>>,
+        TError,
+        TestWebhookMutationVariables,
+        TContext
+      > => {
+      return useMutation(getTestWebhookMutationOptions(options), queryClient);
     }
 
 export type getWorkspacesResponse200 = {
