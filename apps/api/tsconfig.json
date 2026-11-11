@@ -3,6 +3,7 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "jsx": "react-jsx",
     "rootDir": "./src",
     "outDir": "./dist",
     "paths": {

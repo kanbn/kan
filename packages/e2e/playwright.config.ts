@@ -165,7 +165,13 @@ export default defineConfig({
           url: `${apiBaseURL}/health`,
           reuseExistingServer: !process.env.CI,
           timeout: 60_000,
-          env: { API_PORT: apiPort, CORS_ORIGIN: baseURL },
+          env: {
+            API_PORT: apiPort,
+            CORS_ORIGIN: baseURL,
+            NEXT_PUBLIC_BASE_URL: baseURL,
+            ...sharedEnv,
+            ...modeEnv,
+          },
         },
         {
           command: `pnpm --filter @kan/web build && pnpm --filter @kan/web with-env next start -p ${port}`,
