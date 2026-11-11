@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
-import { APP_GUARD } from "@nestjs/core";
+import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
+import { ZodSerializerInterceptor } from "nestjs-zod";
 
 import { RateLimitGuard } from "./common/guards/rate-limit.guard.js";
 import { createRateLimiter, RATE_LIMITER } from "./common/rate-limiter.js";
@@ -29,6 +30,7 @@ import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
   controllers: [HealthController],
   providers: [
     { provide: APP_GUARD, useClass: RateLimitGuard },
+    { provide: APP_INTERCEPTOR, useClass: ZodSerializerInterceptor },
     { provide: RATE_LIMITER, useFactory: createRateLimiter },
   ],
 })
