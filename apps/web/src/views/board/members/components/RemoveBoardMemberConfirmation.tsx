@@ -1,10 +1,15 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
+import { useQueryClient } from "@tanstack/react-query";
+
+import {
+  getGetBoardMembersQueryKey,
+  useRemoveBoardMember,
+} from "@kan/api-client/hooks";
 
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 export function RemoveBoardMemberConfirmation({
   boardPublicId,
@@ -13,20 +18,27 @@ export function RemoveBoardMemberConfirmation({
 }) {
   const { closeModal, entityId, entityLabel } = useModal();
   const { showPopup } = usePopup();
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
 
-  const removeMember = api.boardMember.remove.useMutation({
-    onSuccess: async () => {
-      closeModal();
-      await utils.boardMember.all.invalidate({ boardPublicId });
-    },
-    onError: (error) => {
-      showPopup({
-        header: t`Unable to remove member`,
-        message: error.message,
-        icon: "error",
-      });
-      closeModal();
+  const removeMember = useRemoveBoardMember({
+    mutation: {
+      onSuccess: async () => {
+        closeModal();
+        await queryClient.invalidateQueries({
+          queryKey: getGetBoardMembersQueryKey(boardPublicId),
+        });
+      },
+      onError: (error) => {
+        showPopup({
+          header: t`Unable to remove member`,
+          message:
+            error instanceof Error
+              ? error.message
+              : t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+        closeModal();
+      },
     },
   });
 

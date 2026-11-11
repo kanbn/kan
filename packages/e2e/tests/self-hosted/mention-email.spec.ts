@@ -2,6 +2,7 @@ import type { Browser, Locator, Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 
 import type { TestUser } from "../support/test-user";
+import { apiBaseURL } from "../support/api-base-url";
 import {
   clearMailpitInbox,
   expectMailpitMessageCountToRemain,
@@ -62,14 +63,8 @@ async function addToBoard(page: Page, boardPublicId: string, email: string) {
   if (!member) throw new Error(`Could not resolve member ${email}`);
 
   const response = await page.request.post(
-    "/api/trpc/boardMember.add?batch=1",
-    {
-      data: {
-        "0": {
-          json: { boardPublicId, workspaceMemberPublicId: member.publicId },
-        },
-      },
-    },
+    `${apiBaseURL}/boards/${boardPublicId}/members`,
+    { data: { workspaceMemberPublicId: member.publicId } },
   );
   expect(response.ok()).toBe(true);
 }

@@ -1,6 +1,6 @@
 import type { Page } from "@playwright/test";
 
-import { waitForTrpcMutation } from "../wait-for-trpc";
+import { waitForResponsePath } from "../wait-for-trpc";
 
 export class BoardMembersPage {
   constructor(private readonly page: Page) {}
@@ -18,14 +18,14 @@ export class BoardMembersPage {
     }
     await select.selectOption(optionValue);
 
-    const added = waitForTrpcMutation(this.page, "boardMember.add");
+    const added = waitForResponsePath(this.page, "/members");
     await dialog.getByRole("button", { name: "Add member" }).click();
     await added;
   }
 
   async changeRole(memberEmail: string, role: "admin" | "member") {
     const row = this.page.getByRole("row", { name: new RegExp(memberEmail) });
-    const updated = waitForTrpcMutation(this.page, "boardMember.updateRole");
+    const updated = waitForResponsePath(this.page, "/members/", "PUT");
     await row.getByRole("combobox").selectOption(role);
     await updated;
   }
@@ -39,8 +39,10 @@ export class BoardMembersPage {
       .getByRole("menuitem", { name: "Remove from board" })
       .click();
 
-    const removed = waitForTrpcMutation(this.page, "boardMember.remove");
-    await this.page.getByRole("button", { name: "Remove", exact: true }).click();
+    const removed = waitForResponsePath(this.page, "/members/", "DELETE");
+    await this.page
+      .getByRole("button", { name: "Remove", exact: true })
+      .click();
     await removed;
   }
 }
