@@ -39,7 +39,7 @@ export interface GenerateUploadUrlDto {
   size: number;
 }
 
-export interface UploadUrlResponseDto {
+export interface UploadUrlResponseDtoOutput {
   url: string;
   key: string;
 }
@@ -53,7 +53,7 @@ export interface ConfirmAttachmentDto {
   size: number;
 }
 
-export interface AttachmentResponseDto {
+export interface AttachmentResponseDtoOutput {
   publicId: string;
   filename: string;
   originalFilename: string;
@@ -64,7 +64,7 @@ export interface AttachmentResponseDto {
   createdAt: string;
 }
 
-export interface DeleteAttachmentResponseDto {
+export interface DeleteAttachmentResponseDtoOutput {
   success: boolean;
 }
 
@@ -434,13 +434,13 @@ export interface GetRolePermissionsResponseDto {
 /**
  * @nullable
  */
-export type UserResponseDtoApiKey = {
+export type UserResponseDtoOutputApiKey = {
   id: number;
   /** @nullable */
   prefix: string | null;
 } | null;
 
-export interface UserResponseDto {
+export interface UserResponseDtoOutput {
   id: string;
   email: string;
   /** @nullable */
@@ -452,7 +452,7 @@ export interface UserResponseDto {
   hasPassword: boolean;
   hasMagicLinkAccount: boolean;
   /** @nullable */
-  apiKey: UserResponseDtoApiKey;
+  apiKey: UserResponseDtoOutputApiKey;
 }
 
 export interface UpdateUserDto {
@@ -460,7 +460,7 @@ export interface UpdateUserDto {
   image?: string;
 }
 
-export interface UpdateUserResponseDto {
+export interface UpdateUserResponseDtoOutput {
   /** @nullable */
   name: string | null;
   /** @nullable */
@@ -470,6 +470,10 @@ export interface UpdateUserResponseDto {
 export interface SetPasswordDto {
   /** @minLength 8 */
   newPassword: string;
+}
+
+export interface SuccessResponseDtoOutput {
+  success: boolean;
 }
 
 export type SearchBoardResultDtoType = typeof SearchBoardResultDtoType[keyof typeof SearchBoardResultDtoType];
@@ -758,7 +762,7 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
 };
 
 export type generateAttachmentUploadUrlResponse201 = {
-  data: UploadUrlResponseDto
+  data: UploadUrlResponseDtoOutput
   status: 201
 }
 
@@ -858,7 +862,7 @@ export const useGenerateAttachmentUploadUrl = <TError = unknown,
     }
 
 export type confirmAttachmentResponse201 = {
-  data: AttachmentResponseDto
+  data: AttachmentResponseDtoOutput
   status: 201
 }
 
@@ -958,7 +962,7 @@ export const useConfirmAttachment = <TError = unknown,
     }
 
 export type deleteAttachmentResponse200 = {
-  data: DeleteAttachmentResponseDto
+  data: DeleteAttachmentResponseDtoOutput
   status: 200
 }
 
@@ -5018,7 +5022,7 @@ export const useRevokeRolePermission = <TError = unknown,
     }
 
 export type getUserResponse200 = {
-  data: UserResponseDto
+  data: UserResponseDtoOutput
   status: 200
 }
 
@@ -5132,7 +5136,7 @@ export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError =
 
 
 export type updateUserResponse200 = {
-  data: UpdateUserResponseDto
+  data: UpdateUserResponseDtoOutput
   status: 200
 }
 
@@ -5231,7 +5235,7 @@ export const useUpdateUser = <TError = unknown,
     }
 
 export type setPasswordResponse201 = {
-  data: SuccessResponseDto
+  data: SuccessResponseDtoOutput
   status: 201
 }
 

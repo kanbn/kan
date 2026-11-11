@@ -1,5 +1,6 @@
 import { Body, Delete, Param, Post } from "@nestjs/common";
-import { ApiOperation, ApiParam, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ZodResponse } from "nestjs-zod";
 
 import type { User } from "../../common/interfaces/user.interface.js";
 import { AuthenticatedController } from "../../common/decorators/authenticated-controller.decorator.js";
@@ -23,7 +24,7 @@ export class CardAttachmentController {
     summary: "Generate a presigned URL for uploading an attachment",
   })
   @ApiParam({ name: "cardPublicId" })
-  @ApiResponse({ status: 201, type: UploadUrlResponseDto })
+  @ZodResponse({ status: 201, type: UploadUrlResponseDto })
   async generateUploadUrl(
     @CurrentUser() user: User,
     @Param("cardPublicId") cardPublicId: string,
@@ -43,7 +44,7 @@ export class CardAttachmentController {
     summary: "Confirm an attachment upload and save it to the card",
   })
   @ApiParam({ name: "cardPublicId" })
-  @ApiResponse({ status: 201, type: AttachmentResponseDto })
+  @ZodResponse({ status: 201, type: AttachmentResponseDto })
   async confirm(
     @CurrentUser() user: User,
     @Param("cardPublicId") cardPublicId: string,
@@ -67,7 +68,7 @@ export class AttachmentController {
     summary: "Delete an attachment",
   })
   @ApiParam({ name: "attachmentPublicId" })
-  @ApiResponse({ status: 200, type: DeleteAttachmentResponseDto })
+  @ZodResponse({ status: 200, type: DeleteAttachmentResponseDto })
   async delete(
     @CurrentUser() user: User,
     @Param("attachmentPublicId") attachmentPublicId: string,

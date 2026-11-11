@@ -1,5 +1,6 @@
 import { Body, Get, Post, Put, Req } from "@nestjs/common";
-import { ApiOperation, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation } from "@nestjs/swagger";
+import { ZodResponse } from "nestjs-zod";
 
 import type { AuthenticatedRequest } from "../../common/interfaces/request.interface.js";
 import type { User } from "../../common/interfaces/user.interface.js";
@@ -21,7 +22,7 @@ export class UserController {
 
   @Get("me")
   @ApiOperation({ operationId: "getUser", summary: "Get the current user" })
-  @ApiResponse({ status: 200, type: UserResponseDto })
+  @ZodResponse({ status: 200, type: UserResponseDto })
   async getUser(@CurrentUser() user: User): Promise<UserResponseDto> {
     return this.userService.getUser({ userId: user.id });
   }
@@ -31,7 +32,7 @@ export class UserController {
     operationId: "updateUser",
     summary: "Update the current user",
   })
-  @ApiResponse({ status: 200, type: UpdateUserResponseDto })
+  @ZodResponse({ status: 200, type: UpdateUserResponseDto })
   async update(
     @CurrentUser() user: User,
     @Body() input: UpdateUserDto,
@@ -48,7 +49,7 @@ export class UserController {
     operationId: "setPassword",
     summary: "Set a password for a user who has none yet",
   })
-  @ApiResponse({ status: 201, type: SuccessResponseDto })
+  @ZodResponse({ status: 201, type: SuccessResponseDto })
   async setPassword(
     @CurrentUser() user: User,
     @Body() input: SetPasswordDto,

@@ -30,7 +30,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UploadUrlResponseDto"
+                  "$ref": "#/components/schemas/UploadUrlResponseDto_Output"
                 }
               }
             }
@@ -76,7 +76,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AttachmentResponseDto"
+                  "$ref": "#/components/schemas/AttachmentResponseDto_Output"
                 }
               }
             }
@@ -112,7 +112,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeleteAttachmentResponseDto"
+                  "$ref": "#/components/schemas/DeleteAttachmentResponseDto_Output"
                 }
               }
             }
@@ -1723,7 +1723,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponseDto"
+                  "$ref": "#/components/schemas/UserResponseDto_Output"
                 }
               }
             }
@@ -1760,7 +1760,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateUserResponseDto"
+                  "$ref": "#/components/schemas/UpdateUserResponseDto_Output"
                 }
               }
             }
@@ -1797,7 +1797,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponseDto"
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
                 }
               }
             }
@@ -2213,7 +2213,7 @@
           "size"
         ]
       },
-      "UploadUrlResponseDto": {
+      "UploadUrlResponseDto_Output": {
         "type": "object",
         "properties": {
           "url": {
@@ -2226,7 +2226,8 @@
         "required": [
           "url",
           "key"
-        ]
+        ],
+        "additionalProperties": false
       },
       "ConfirmAttachmentDto": {
         "type": "object",
@@ -2257,7 +2258,7 @@
           "size"
         ]
       },
-      "AttachmentResponseDto": {
+      "AttachmentResponseDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -2292,9 +2293,10 @@
           "size",
           "s3Key",
           "createdAt"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "DeleteAttachmentResponseDto": {
+      "DeleteAttachmentResponseDto_Output": {
         "type": "object",
         "properties": {
           "success": {
@@ -2303,7 +2305,8 @@
         },
         "required": [
           "success"
-        ]
+        ],
+        "additionalProperties": false
       },
       "BoardMemberDto": {
         "type": "object",
@@ -3076,7 +3079,7 @@
           "permissions"
         ]
       },
-      "UserResponseDto": {
+      "UserResponseDto_Output": {
         "type": "object",
         "properties": {
           "id": {
@@ -3118,6 +3121,7 @@
               "id",
               "prefix"
             ],
+            "additionalProperties": false,
             "nullable": true
           }
         },
@@ -3130,7 +3134,8 @@
           "hasPassword",
           "hasMagicLinkAccount",
           "apiKey"
-        ]
+        ],
+        "additionalProperties": false
       },
       "UpdateUserDto": {
         "type": "object",
@@ -3143,7 +3148,7 @@
           }
         }
       },
-      "UpdateUserResponseDto": {
+      "UpdateUserResponseDto_Output": {
         "type": "object",
         "properties": {
           "name": {
@@ -3158,7 +3163,8 @@
         "required": [
           "name",
           "image"
-        ]
+        ],
+        "additionalProperties": false
       },
       "SetPasswordDto": {
         "type": "object",
@@ -3171,6 +3177,18 @@
         "required": [
           "newPassword"
         ]
+      },
+      "SuccessResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
       },
       "SearchBoardResultDto": {
         "type": "object",
