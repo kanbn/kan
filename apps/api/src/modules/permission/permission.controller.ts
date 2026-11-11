@@ -1,5 +1,6 @@
 import { Body, Get, Param, Post } from "@nestjs/common";
-import { ApiOperation, ApiParam, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ZodResponse } from "nestjs-zod";
 
 import type { User } from "../../common/interfaces/user.interface.js";
 import { AuthenticatedController } from "../../common/decorators/authenticated-controller.decorator.js";
@@ -25,7 +26,7 @@ export class PermissionController {
     summary: "Get my permissions",
   })
   @ApiParam({ name: "workspacePublicId" })
-  @ApiResponse({ status: 200, type: GetMyPermissionsResponseDto })
+  @ZodResponse({ status: 200, type: GetMyPermissionsResponseDto })
   async getMyPermissions(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -43,7 +44,7 @@ export class PermissionController {
   })
   @ApiParam({ name: "workspacePublicId" })
   @ApiParam({ name: "memberPublicId" })
-  @ApiResponse({ status: 200, type: GetMemberPermissionsResponseDto })
+  @ZodResponse({ status: 200, type: GetMemberPermissionsResponseDto })
   async getMemberPermissions(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -63,7 +64,7 @@ export class PermissionController {
   })
   @ApiParam({ name: "workspacePublicId" })
   @ApiParam({ name: "memberPublicId" })
-  @ApiResponse({ status: 200, type: SuccessResponseDto })
+  @ZodResponse({ status: 200, type: SuccessResponseDto })
   async grantPermission(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -85,7 +86,7 @@ export class PermissionController {
   })
   @ApiParam({ name: "workspacePublicId" })
   @ApiParam({ name: "memberPublicId" })
-  @ApiResponse({ status: 200, type: SuccessResponseDto })
+  @ZodResponse({ status: 200, type: SuccessResponseDto })
   async revokePermission(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -107,7 +108,7 @@ export class PermissionController {
   })
   @ApiParam({ name: "workspacePublicId" })
   @ApiParam({ name: "memberPublicId" })
-  @ApiResponse({ status: 200, type: SuccessResponseDto })
+  @ZodResponse({ status: 200, type: SuccessResponseDto })
   async resetMemberPermissions(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -126,7 +127,7 @@ export class PermissionController {
     summary: "Reset all member permission overrides in a workspace",
   })
   @ApiParam({ name: "workspacePublicId" })
-  @ApiResponse({ status: 200, type: SuccessResponseDto })
+  @ZodResponse({ status: 200, type: SuccessResponseDto })
   async resetWorkspaceMemberPermissions(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -143,7 +144,7 @@ export class PermissionController {
     summary: "Get workspace roles",
   })
   @ApiParam({ name: "workspacePublicId" })
-  @ApiResponse({ status: 200, type: GetWorkspaceRolesResponseDto })
+  @ZodResponse({ status: 200, type: GetWorkspaceRolesResponseDto })
   async getWorkspaceRoles(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -160,7 +161,7 @@ export class PermissionController {
     summary: "Get workspace role permissions",
   })
   @ApiParam({ name: "workspacePublicId" })
-  @ApiResponse({ status: 200, type: GetWorkspaceRolePermissionsResponseDto })
+  @ZodResponse({ status: 200, type: GetWorkspaceRolePermissionsResponseDto })
   async getWorkspaceRolePermissions(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -178,7 +179,7 @@ export class PermissionController {
   })
   @ApiParam({ name: "workspacePublicId" })
   @ApiParam({ name: "rolePublicId" })
-  @ApiResponse({ status: 200, type: GetRolePermissionsResponseDto })
+  @ZodResponse({ status: 200, type: GetRolePermissionsResponseDto })
   async getRolePermissions(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -198,7 +199,7 @@ export class PermissionController {
   })
   @ApiParam({ name: "workspacePublicId" })
   @ApiParam({ name: "rolePublicId" })
-  @ApiResponse({ status: 200, type: SuccessResponseDto })
+  @ZodResponse({ status: 200, type: SuccessResponseDto })
   async grantRolePermission(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -220,7 +221,7 @@ export class PermissionController {
   })
   @ApiParam({ name: "workspacePublicId" })
   @ApiParam({ name: "rolePublicId" })
-  @ApiResponse({ status: 200, type: SuccessResponseDto })
+  @ZodResponse({ status: 200, type: SuccessResponseDto })
   async revokeRolePermission(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
