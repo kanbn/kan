@@ -1,8 +1,11 @@
+import type { MiddlewareConsumer, NestModule } from "@nestjs/common";
 import { Module } from "@nestjs/common";
-import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
 import { ZodSerializerInterceptor } from "nestjs-zod";
 
 import { RateLimitGuard } from "./common/guards/rate-limit.guard.js";
+import { ErrorCaptureFilter } from "./common/logging/error-capture.filter.js";
+import { RequestLoggingMiddleware } from "./common/logging/request-logging.middleware.js";
 import { createRateLimiter, RATE_LIMITER } from "./common/rate-limiter.js";
 import { HealthController } from "./health.controller.js";
 import { AttachmentModule } from "./modules/attachment/attachment.module.js";
@@ -45,9 +48,14 @@ import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
   ],
   controllers: [HealthController],
   providers: [
+    { provide: APP_FILTER, useClass: ErrorCaptureFilter },
     { provide: APP_GUARD, useClass: RateLimitGuard },
     { provide: APP_INTERCEPTOR, useClass: ZodSerializerInterceptor },
     { provide: RATE_LIMITER, useFactory: createRateLimiter },
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(RequestLoggingMiddleware).forRoutes("*path");
+  }
+}

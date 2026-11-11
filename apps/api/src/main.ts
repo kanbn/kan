@@ -4,11 +4,16 @@ import type { Response } from "express";
 import { NestFactory } from "@nestjs/core";
 import { ZodValidationPipe } from "nestjs-zod";
 
+import { createLogger } from "@kan/logger";
+
 import { AppModule } from "./app.module.js";
+import { NestPinoLogger } from "./common/logging/nest-pino.logger.js";
 import { buildOpenApiDocument } from "./openapi.js";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: new NestPinoLogger(),
+  });
   app.enableShutdownHooks(["SIGINT"]);
 
   app.enableCors({
@@ -30,7 +35,7 @@ async function bootstrap() {
 
   const port = process.env.API_PORT ?? 4000;
   await app.listen(port);
-  console.log(`🚀 API server running on http://localhost:${port}`);
+  createLogger("api").info({ port }, "API server running");
 }
 
 void bootstrap();
