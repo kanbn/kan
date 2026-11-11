@@ -6,7 +6,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        153
+        155
       ]
     ],
     "translation": " (edited)"
@@ -60,7 +60,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        361
+        372
       ]
     ],
     "translation": "{0} | {1}"
@@ -124,7 +124,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        569
+        572
       ]
     ],
     "translation": "{0} labels"
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        897
+        899
       ]
     ],
     "translation": "{0} not found"
@@ -433,7 +433,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        520
+        531
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -541,7 +541,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        124
+        126
       ]
     ],
     "translation": "Add checklist"
@@ -565,11 +565,11 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        185
+        187
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
-        90
+        94
       ]
     ],
     "translation": "Add comment... (type '/' to open commands or '@' to mention)"
@@ -605,11 +605,11 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        121
+        125
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        128
+        132
       ]
     ],
     "translation": "Add label"
@@ -629,7 +629,7 @@
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        140
+        144
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -676,7 +676,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        103
+        99
       ]
     ],
     "translation": "added {0} labels: <0>{labelList}</0>"
@@ -688,7 +688,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        133
+        129
       ]
     ],
     "translation": "added a checklist"
@@ -700,7 +700,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        136
+        132
       ]
     ],
     "translation": "added a checklist item"
@@ -712,7 +712,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        129
+        125
       ]
     ],
     "translation": "added a label to the card"
@@ -724,7 +724,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        131
+        127
       ]
     ],
     "translation": "added a member to the card"
@@ -736,7 +736,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        141
+        137
       ]
     ],
     "translation": "added an attachment"
@@ -752,7 +752,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        279
+        275
       ]
     ],
     "translation": "added an attachment <0>{0}</0>"
@@ -768,7 +768,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        209
+        205
       ]
     ],
     "translation": "added checklist <0>{0}</0>"
@@ -784,7 +784,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        233
+        229
       ]
     ],
     "translation": "added checklist item <0>{0}</0>"
@@ -800,7 +800,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        193
+        189
       ]
     ],
     "translation": "added label <0>{0}</0>"
@@ -1300,7 +1300,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        76
+        79
       ]
     ],
     "translation": "Are you sure you want to delete this card?"
@@ -1324,7 +1324,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
-        66
+        70
       ]
     ],
     "translation": "Are you sure you want to delete this comment?"
@@ -1380,7 +1380,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        173
+        169
       ]
     ],
     "translation": "assigned <0>{0}</0> to the card"
@@ -1404,11 +1404,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        632
+        635
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        633
+        636
       ]
     ],
     "translation": "Attach files"
@@ -1663,7 +1663,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        869
+        871
       ],
       [
         "src/views/board/members/index.tsx",
@@ -1671,7 +1671,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        361
+        372
       ],
       [
         "src/views/public/board/index.tsx",
@@ -1768,7 +1768,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        887
+        889
       ]
     ],
     "translation": "Board name"
@@ -2437,7 +2437,7 @@
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        254
+        264
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
@@ -2457,11 +2457,11 @@
       ],
       [
         "src/views/card/components/Comment.tsx",
-        195
+        197
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        87
+        90
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -2469,7 +2469,7 @@
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
-        77
+        81
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -2513,7 +2513,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        361
+        372
       ]
     ],
     "translation": "Card"
@@ -2525,11 +2525,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        56
+        63
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        47
+        48
       ]
     ],
     "translation": "Card duplicated"
@@ -2541,7 +2541,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        49
+        50
       ]
     ],
     "translation": "Card duplicated successfully."
@@ -2565,11 +2565,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        424
+        435
       ],
       [
         "src/views/card/index.tsx",
-        461
+        472
       ]
     ],
     "translation": "Card not found"
@@ -2581,7 +2581,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        168
+        172
       ]
     ],
     "translation": "Card options"
@@ -2593,7 +2593,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        435
+        438
       ]
     ],
     "translation": "Card title"
@@ -2605,15 +2605,15 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        449
+        451
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        75
+        77
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        40
+        42
       ]
     ],
     "translation": "Card URL copied to clipboard"
@@ -2689,11 +2689,11 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        304
+        300
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        318
+        314
       ]
     ],
     "translation": "changed the due date to <0>{formattedDate}</0>"
@@ -2873,7 +2873,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        415
+        426
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -2953,7 +2953,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        161
+        163
       ]
     ],
     "translation": "Comment options"
@@ -3021,7 +3021,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        138
+        134
       ]
     ],
     "translation": "completed a checklist item"
@@ -3037,7 +3037,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        250
+        246
       ]
     ],
     "translation": "completed checklist item <0>{0}</0>"
@@ -3335,7 +3335,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        108
+        110
       ]
     ],
     "translation": "Copy card link"
@@ -3347,7 +3347,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        244
+        254
       ]
     ],
     "translation": "Copy checklists"
@@ -3359,7 +3359,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        208
+        218
       ]
     ],
     "translation": "Copy labels"
@@ -3383,7 +3383,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        226
+        236
       ]
     ],
     "translation": "Copy members"
@@ -3407,7 +3407,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        115
+        117
       ]
     ],
     "translation": "Copy ticket ID"
@@ -3451,7 +3451,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        664
+        667
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3479,7 +3479,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        674
+        677
       ]
     ],
     "translation": "Create card"
@@ -3571,11 +3571,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        531
+        534
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        107
+        111
       ]
     ],
     "translation": "Create new label"
@@ -3591,7 +3591,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        1025
+        1027
       ]
     ],
     "translation": "Create new list"
@@ -3655,7 +3655,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        125
+        121
       ]
     ],
     "translation": "created the card"
@@ -3699,7 +3699,7 @@
     "origin": [
       [
         "src/views/card/components/ListSelector.tsx",
-        87
+        90
       ]
     ],
     "translation": "Current list"
@@ -3943,7 +3943,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        93
+        96
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -3951,7 +3951,7 @@
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
-        83
+        87
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
@@ -4007,7 +4007,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        153
+        157
       ]
     ],
     "translation": "Delete card"
@@ -4031,7 +4031,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        120
+        122
       ]
     ],
     "translation": "Delete comment"
@@ -4099,7 +4099,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        135
+        131
       ]
     ],
     "translation": "deleted a checklist"
@@ -4111,7 +4111,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        140
+        136
       ]
     ],
     "translation": "deleted a checklist item"
@@ -4127,7 +4127,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        225
+        221
       ]
     ],
     "translation": "deleted checklist <0>{0}</0>"
@@ -4143,7 +4143,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        268
+        264
       ]
     ],
     "translation": "deleted checklist item <0>{0}</0>"
@@ -4372,15 +4372,15 @@
     "origin": [
       [
         "src/views/board/components/CardContextDueDateModal.tsx",
-        36
+        39
       ],
       [
         "src/views/board/components/CardContextLabelsModal.tsx",
-        48
+        51
       ],
       [
         "src/views/board/components/CardContextMembersModal.tsx",
-        68
+        73
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
@@ -4432,11 +4432,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        586
+        589
       ],
       [
         "src/views/card/index.tsx",
-        159
+        165
       ]
     ],
     "translation": "Due date"
@@ -4496,7 +4496,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        266
+        276
       ]
     ],
     "translation": "Duplicate"
@@ -4508,7 +4508,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        99
+        109
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -4516,7 +4516,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        131
+        133
       ]
     ],
     "translation": "Duplicate card"
@@ -4528,7 +4528,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        266
+        276
       ]
     ],
     "translation": "Duplicating…"
@@ -4572,7 +4572,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        111
+        113
       ]
     ],
     "translation": "Edit comment"
@@ -4724,7 +4724,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        187
+        197
       ]
     ],
     "translation": "End of list"
@@ -5754,7 +5754,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1007
+        1009
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -6182,7 +6182,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        92
+        94
       ]
     ],
     "translation": "ID copied"
@@ -6514,7 +6514,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        117
+        121
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -6660,7 +6660,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextLabelsModal.tsx",
-        31
+        34
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -6668,15 +6668,15 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        535
+        538
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        108
+        112
       ],
       [
         "src/views/card/index.tsx",
-        139
+        145
       ]
     ],
     "translation": "Labels"
@@ -6874,15 +6874,15 @@
       ],
       [
         "src/views/board/index.tsx",
-        447
+        449
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        73
+        75
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        38
+        40
       ],
       [
         "src/views/public/board/index.tsx",
@@ -6898,11 +6898,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        105
+        115
       ],
       [
         "src/views/card/index.tsx",
-        130
+        136
       ]
     ],
     "translation": "List"
@@ -6962,7 +6962,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        664
+        660
       ]
     ],
     "translation": "Load more activities"
@@ -6986,7 +6986,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        664
+        660
       ]
     ],
     "translation": "Loading..."
@@ -7082,7 +7082,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMembersModal.tsx",
-        51
+        56
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -7098,7 +7098,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        139
+        135
       ]
     ],
     "translation": "marked a checklist item as incomplete"
@@ -7114,7 +7114,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        259
+        255
       ]
     ],
     "translation": "marked checklist item <0>{0}</0> as incomplete"
@@ -7182,11 +7182,11 @@
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        56
+        52
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        89
+        85
       ],
       [
         "src/views/members/index.tsx",
@@ -7242,15 +7242,15 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        493
+        496
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        118
+        122
       ],
       [
         "src/views/card/index.tsx",
-        149
+        155
       ],
       [
         "src/views/members/index.tsx",
@@ -7378,7 +7378,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        72
+        79
       ]
     ],
     "translation": "Move to list"
@@ -7409,7 +7409,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        161
+        157
       ]
     ],
     "translation": "moved the card from <0>{0}</0> to<1>{1}</1>"
@@ -7421,7 +7421,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        128
+        124
       ]
     ],
     "translation": "moved the card to another list"
@@ -7553,7 +7553,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        418
+        421
       ]
     ],
     "translation": "New card"
@@ -7605,7 +7605,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        949
+        951
       ]
     ],
     "translation": "New list"
@@ -7849,7 +7849,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1003
+        1005
       ]
     ],
     "translation": "No lists"
@@ -7861,7 +7861,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1008
+        1010
       ]
     ],
     "translation": "No lists have been created yet"
@@ -8577,7 +8577,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        206
+        209
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -8605,11 +8605,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        357
+        358
       ],
       [
         "src/views/board/index.tsx",
-        394
+        396
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -8653,11 +8653,11 @@
       ],
       [
         "src/views/card/components/Comment.tsx",
-        93
+        92
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        53
+        55
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -8665,23 +8665,23 @@
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
-        46
+        49
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        66
+        80
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        77
+        80
       ],
       [
         "src/views/card/components/ListSelector.tsx",
-        57
+        60
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        84
+        87
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
@@ -8693,15 +8693,15 @@
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
-        43
+        46
       ],
       [
         "src/views/card/index.tsx",
-        259
+        268
       ],
       [
         "src/views/card/index.tsx",
-        272
+        282
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -8797,31 +8797,31 @@
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        65
+        72
       ],
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        44
+        51
       ],
       [
         "src/views/board/index.tsx",
-        456
+        458
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        56
+        57
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        82
+        84
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        101
+        103
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        47
+        49
       ],
       [
         "src/views/public/board/index.tsx",
@@ -8837,7 +8837,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        180
+        190
       ]
     ],
     "translation": "Position in list (0 = first, leave empty for end)"
@@ -9150,7 +9150,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        651
+        654
       ]
     ],
     "translation": "Remove file"
@@ -9205,7 +9205,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        117
+        113
       ]
     ],
     "translation": "removed {0} labels: <0>{labelList}</0>"
@@ -9217,7 +9217,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        130
+        126
       ]
     ],
     "translation": "removed a label from the card"
@@ -9229,7 +9229,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        132
+        128
       ]
     ],
     "translation": "removed a member from the card"
@@ -9241,7 +9241,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        142
+        138
       ]
     ],
     "translation": "removed an attachment"
@@ -9257,7 +9257,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        289
+        285
       ]
     ],
     "translation": "removed an attachment <0>{0}</0>"
@@ -9285,7 +9285,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        201
+        197
       ]
     ],
     "translation": "removed label <0>{0}</0>"
@@ -9297,11 +9297,11 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        145
+        141
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        325
+        321
       ]
     ],
     "translation": "removed the due date"
@@ -9313,7 +9313,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        134
+        130
       ]
     ],
     "translation": "renamed a checklist"
@@ -9329,7 +9329,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        217
+        213
       ]
     ],
     "translation": "renamed checklist <0>{0}</0>"
@@ -9345,7 +9345,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        241
+        237
       ]
     ],
     "translation": "renamed checklist item to <0>{0}</0>"
@@ -9566,7 +9566,7 @@
       ],
       [
         "src/views/card/components/Comment.tsx",
-        202
+        204
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -9730,7 +9730,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        118
+        128
       ]
     ],
     "translation": "Select a list"
@@ -9830,7 +9830,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        170
+        166
       ]
     ],
     "translation": "self-assigned the card"
@@ -9930,7 +9930,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDueDateModal.tsx",
-        20
+        23
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -9938,7 +9938,7 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        123
+        137
       ]
     ],
     "translation": "Set due date"
@@ -9974,7 +9974,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        143
+        139
       ]
     ],
     "translation": "set the due date"
@@ -10366,7 +10366,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        338
+        341
       ]
     ],
     "translation": "Some attachments failed"
@@ -10507,7 +10507,7 @@
     "origin": [
       [
         "src/views/card/components/NewCommentForm.tsx",
-        65
+        69
       ]
     ],
     "translation": "Submit"
@@ -10519,7 +10519,7 @@
     "origin": [
       [
         "src/views/card/components/NewCommentForm.tsx",
-        97
+        101
       ]
     ],
     "translation": "Submit comment"
@@ -10680,11 +10680,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        869
+        871
       ],
       [
         "src/views/board/index.tsx",
-        906
+        908
       ]
     ],
     "translation": "Template"
@@ -10928,7 +10928,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        58
+        65
       ]
     ],
     "translation": "The card has been duplicated."
@@ -10947,7 +10947,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        339
+        342
       ]
     ],
     "translation": "The card was created, but {failedCount} of {0} attachments could not be uploaded."
@@ -11095,7 +11095,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        79
+        82
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -11103,7 +11103,7 @@
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
-        69
+        73
       ]
     ],
     "translation": "This action can't be undone."
@@ -11299,7 +11299,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        94
+        96
       ]
     ],
     "translation": "Ticket ID copied to clipboard"
@@ -11312,6 +11312,10 @@
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
         127
+      ],
+      [
+        "src/views/board/components/NewCardForm.tsx",
+        208
       ]
     ],
     "translation": "Title"
@@ -11323,7 +11327,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        167
+        177
       ]
     ],
     "translation": "Title (optional)"
@@ -11475,7 +11479,7 @@
     "origin": [
       [
         "src/views/card/components/NewCommentForm.tsx",
-        42
+        45
       ]
     ],
     "translation": "Unable to add comment"
@@ -11487,7 +11491,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        271
+        281
       ]
     ],
     "translation": "Unable to add label"
@@ -11523,7 +11527,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        99
+        101
       ]
     ],
     "translation": "Unable to copy ID"
@@ -11539,15 +11543,15 @@
       ],
       [
         "src/views/board/index.tsx",
-        454
+        456
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        80
+        82
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        45
+        47
       ],
       [
         "src/views/public/board/index.tsx",
@@ -11563,7 +11567,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        203
+        206
       ]
     ],
     "translation": "Unable to create card"
@@ -11655,7 +11659,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        52
+        54
       ]
     ],
     "translation": "Unable to delete card"
@@ -11691,7 +11695,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
-        45
+        48
       ]
     ],
     "translation": "Unable to delete comment"
@@ -11715,11 +11719,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        64
+        71
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        54
+        55
       ]
     ],
     "translation": "Unable to duplicate card"
@@ -11743,7 +11747,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        43
+        50
       ]
     ],
     "translation": "Unable to move card"
@@ -11871,11 +11875,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        356
+        357
       ],
       [
         "src/views/card/index.tsx",
-        258
+        267
       ]
     ],
     "translation": "Unable to update card"
@@ -11911,7 +11915,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        92
+        91
       ]
     ],
     "translation": "Unable to update comment"
@@ -11923,11 +11927,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        393
+        395
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        65
+        79
       ]
     ],
     "translation": "Unable to update due date"
@@ -11939,7 +11943,7 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        76
+        79
       ]
     ],
     "translation": "Unable to update labels"
@@ -11955,7 +11959,7 @@
       ],
       [
         "src/views/card/components/ListSelector.tsx",
-        56
+        59
       ]
     ],
     "translation": "Unable to update list"
@@ -11967,7 +11971,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        83
+        86
       ]
     ],
     "translation": "Unable to update members"
@@ -12039,7 +12043,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        184
+        180
       ]
     ],
     "translation": "unassigned <0>{0}</0> from the card"
@@ -12051,7 +12055,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        181
+        177
       ]
     ],
     "translation": "unassigned themselves from the card"
@@ -12306,7 +12310,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        137
+        133
       ]
     ],
     "translation": "updated a checklist item"
@@ -12318,7 +12322,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        127
+        123
       ]
     ],
     "translation": "updated the description"
@@ -12330,7 +12334,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        144
+        140
       ]
     ],
     "translation": "updated the due date"
@@ -12342,7 +12346,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        126
+        122
       ]
     ],
     "translation": "updated the title"
@@ -12358,7 +12362,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        153
+        149
       ]
     ],
     "translation": "updated the title to <0>{0}</0>"
@@ -12981,7 +12985,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        869
+        871
       ],
       [
         "src/views/boards/index.tsx",
@@ -13391,11 +13395,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        937
+        939
       ],
       [
         "src/views/board/index.tsx",
-        1014
+        1016
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
