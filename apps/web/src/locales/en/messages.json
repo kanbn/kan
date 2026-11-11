@@ -92,7 +92,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        71
+        74
       ]
     ],
     "translation": "{0} has been added to your favorites."
@@ -108,7 +108,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        72
+        75
       ]
     ],
     "translation": "{0} has been removed from your favorites."
@@ -124,7 +124,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        567
+        569
       ]
     ],
     "translation": "{0} labels"
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        889
+        897
       ]
     ],
     "translation": "{0} not found"
@@ -156,7 +156,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        489
+        506
       ]
     ],
     "translation": "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
@@ -172,7 +172,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        341
+        356
       ]
     ],
     "translation": "{projectCount, plural, one {Import project (1)} other {Import projects ({projectCount})}}"
@@ -417,11 +417,11 @@
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        321
+        347
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        104
+        105
       ]
     ],
     "translation": "Active"
@@ -541,7 +541,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        123
+        124
       ]
     ],
     "translation": "Add checklist"
@@ -605,11 +605,11 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        115
+        121
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        120
+        128
       ]
     ],
     "translation": "Add label"
@@ -625,11 +625,11 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        245
+        244
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        138
+        140
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -645,7 +645,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        202
+        198
       ]
     ],
     "translation": "Add to favorites"
@@ -812,7 +812,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        68
+        71
       ]
     ],
     "translation": "Added to favorites"
@@ -843,7 +843,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        256
+        253
       ]
     ],
     "translation": "Adjust the square crop to fit your avatar."
@@ -855,11 +855,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        178
+        177
       ],
       [
         "src/views/board/members/index.tsx",
-        194
+        193
       ],
       [
         "src/views/members/index.tsx",
@@ -1028,7 +1028,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        107
+        120
       ]
     ],
     "translation": "An error occurred while connecting your GitHub account."
@@ -1040,7 +1040,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        130
+        144
       ]
     ],
     "translation": "An error occurred while disconnecting your GitHub account."
@@ -1052,7 +1052,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        87
+        98
       ]
     ],
     "translation": "An error occurred while disconnecting your Trello account."
@@ -1076,7 +1076,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        78
+        77
       ]
     ],
     "translation": "Annual"
@@ -1212,7 +1212,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        182
+        178
       ]
     ],
     "translation": "Archive board"
@@ -1256,7 +1256,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        69
+        80
       ]
     ],
     "translation": "Are you sure you want to delete the webhook \"{webhookName}\"? This action cannot be undone."
@@ -1300,7 +1300,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        75
+        76
       ]
     ],
     "translation": "Are you sure you want to delete this card?"
@@ -1404,11 +1404,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        630
+        632
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        631
+        633
       ]
     ],
     "translation": "Attach files"
@@ -1571,7 +1571,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        101
+        100
       ]
     ],
     "translation": "Best for teams who want to collaborate and move faster together."
@@ -1663,11 +1663,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        861
+        869
       ],
       [
         "src/views/board/members/index.tsx",
-        231
+        230
       ],
       [
         "src/views/card/index.tsx",
@@ -1675,7 +1675,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        125
+        129
       ]
     ],
     "translation": "Board"
@@ -1700,7 +1700,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        57
+        60
       ]
     ],
     "translation": "Board archived"
@@ -1712,7 +1712,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        215
+        214
       ]
     ],
     "translation": "Board member options"
@@ -1724,11 +1724,11 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        151
+        147
       ],
       [
         "src/views/board/members/index.tsx",
-        236
+        235
       ]
     ],
     "translation": "Board members"
@@ -1744,7 +1744,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        231
+        230
       ]
     ],
     "translation": "Board members | {0}"
@@ -1756,7 +1756,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        33
+        31
       ]
     ],
     "translation": "Board moved"
@@ -1768,7 +1768,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        879
+        887
       ]
     ],
     "translation": "Board name"
@@ -1780,7 +1780,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        23
+        25
       ]
     ],
     "translation": "Board name cannot exceed 100 characters"
@@ -1792,7 +1792,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        22
+        24
       ]
     ],
     "translation": "Board name is required"
@@ -1804,7 +1804,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        181
+        185
       ]
     ],
     "translation": "Board not found"
@@ -1816,7 +1816,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        231
+        227
       ]
     ],
     "translation": "Board options"
@@ -1840,7 +1840,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        58
+        61
       ]
     ],
     "translation": "Board unarchived"
@@ -1852,7 +1852,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        46
+        51
       ]
     ],
     "translation": "Board URL can only contain letters, numbers, and hyphens"
@@ -1864,7 +1864,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        44
+        49
       ]
     ],
     "translation": "Board URL cannot exceed 60 characters"
@@ -1876,11 +1876,11 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        122
+        120
       ],
       [
         "src/views/public/board/index.tsx",
-        79
+        83
       ]
     ],
     "translation": "Board URL copied to clipboard"
@@ -1892,7 +1892,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        42
+        47
       ]
     ],
     "translation": "Board URL is required"
@@ -1933,7 +1933,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        49
+        52
       ]
     ],
     "translation": "Board visibility updated"
@@ -1973,7 +1973,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        66
+        80
       ]
     ],
     "translation": "Boards you archive will appear here."
@@ -2437,7 +2437,7 @@
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        255
+        254
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
@@ -2445,7 +2445,7 @@
       ],
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        99
+        95
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -2461,7 +2461,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        86
+        87
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -2477,11 +2477,11 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        249
+        248
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        287
+        284
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2497,7 +2497,7 @@
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        75
+        86
       ],
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
@@ -2525,11 +2525,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        55
+        56
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        46
+        47
       ]
     ],
     "translation": "Card duplicated"
@@ -2541,7 +2541,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        48
+        49
       ]
     ],
     "translation": "Card duplicated successfully."
@@ -2553,7 +2553,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        92
+        88
       ]
     ],
     "translation": "Card member assignments will be cleared when moving to a different workspace."
@@ -2581,7 +2581,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        167
+        168
       ]
     ],
     "translation": "Card options"
@@ -2593,7 +2593,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        433
+        435
       ]
     ],
     "translation": "Card title"
@@ -2605,11 +2605,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        441
+        449
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        74
+        75
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -2637,11 +2637,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        93
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        105
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2661,7 +2661,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        63
+        68
       ]
     ],
     "translation": "Change the application font size."
@@ -2673,7 +2673,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        53
+        58
       ]
     ],
     "translation": "Change your language preferences."
@@ -2769,7 +2769,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        160
+        159
       ]
     ],
     "translation": "Choose a plan"
@@ -2869,7 +2869,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        281
+        278
       ],
       [
         "src/views/card/index.tsx",
@@ -3123,7 +3123,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        195
+        208
       ]
     ],
     "translation": "Connect"
@@ -3135,7 +3135,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        212
+        229
       ]
     ],
     "translation": "Connect GitHub"
@@ -3147,7 +3147,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        162
+        177
       ]
     ],
     "translation": "Connect Trello"
@@ -3171,7 +3171,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        191
+        208
       ]
     ],
     "translation": "Connect your GitHub account to import projects."
@@ -3183,7 +3183,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        149
+        164
       ]
     ],
     "translation": "Connect your Trello account to import boards."
@@ -3255,7 +3255,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        255
+        254
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -3323,7 +3323,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        133
+        131
       ]
     ],
     "translation": "Copy board link"
@@ -3335,7 +3335,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        107
+        108
       ]
     ],
     "translation": "Copy card link"
@@ -3347,7 +3347,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        245
+        244
       ]
     ],
     "translation": "Copy checklists"
@@ -3359,7 +3359,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        209
+        208
       ]
     ],
     "translation": "Copy labels"
@@ -3383,7 +3383,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        227
+        226
       ]
     ],
     "translation": "Copy members"
@@ -3395,7 +3395,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        140
+        138
       ]
     ],
     "translation": "Copy public link"
@@ -3407,7 +3407,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        114
+        115
       ]
     ],
     "translation": "Copy ticket ID"
@@ -3435,7 +3435,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        166
+        173
       ]
     ],
     "translation": "Create {0}"
@@ -3451,7 +3451,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        662
+        664
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3479,7 +3479,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        672
+        674
       ]
     ],
     "translation": "Create card"
@@ -3543,7 +3543,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        80
+        93
       ],
       [
         "src/views/boards/index.tsx",
@@ -3571,11 +3571,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        529
+        531
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        101
+        107
       ]
     ],
     "translation": "Create new label"
@@ -3587,11 +3587,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        139
+        145
       ],
       [
         "src/views/board/index.tsx",
-        1017
+        1025
       ]
     ],
     "translation": "Create new list"
@@ -3603,7 +3603,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        132
+        137
       ]
     ],
     "translation": "Create template"
@@ -3615,7 +3615,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        344
+        370
       ]
     ],
     "translation": "Create webhook"
@@ -3643,7 +3643,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        238
+        243
       ]
     ],
     "translation": "Created"
@@ -3687,7 +3687,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        253
+        250
       ]
     ],
     "translation": "Crop your avatar"
@@ -3699,7 +3699,7 @@
     "origin": [
       [
         "src/views/card/components/ListSelector.tsx",
-        85
+        87
       ]
     ],
     "translation": "Current list"
@@ -3943,7 +3943,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        92
+        93
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -3955,11 +3955,11 @@
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        82
+        93
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        136
+        137
       ]
     ],
     "translation": "Delete"
@@ -3971,11 +3971,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        70
+        75
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        80
+        85
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -3991,7 +3991,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        213
+        209
       ]
     ],
     "translation": "Delete board"
@@ -4007,7 +4007,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        152
+        153
       ]
     ],
     "translation": "Delete card"
@@ -4055,7 +4055,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        213
+        209
       ]
     ],
     "translation": "Delete template"
@@ -4067,7 +4067,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        55
+        66
       ]
     ],
     "translation": "Delete webhook"
@@ -4167,7 +4167,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        76
+        72
       ]
     ],
     "translation": "Destination workspace"
@@ -4179,7 +4179,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        223
+        240
       ]
     ],
     "translation": "Disconnect GitHub"
@@ -4191,7 +4191,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        177
+        194
       ]
     ],
     "translation": "Disconnect Trello"
@@ -4227,11 +4227,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        36
+        39
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        71
+        73
       ]
     ],
     "translation": "Display name"
@@ -4243,7 +4243,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        22
+        24
       ]
     ],
     "translation": "Display name cannot exceed 280 characters"
@@ -4255,7 +4255,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        19
+        21
       ]
     ],
     "translation": "Display name must be at least 3 characters long"
@@ -4267,7 +4267,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        41
+        44
       ]
     ],
     "translation": "Display name updated"
@@ -4416,7 +4416,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        142
+        146
       ]
     ],
     "translation": "Download failed"
@@ -4432,7 +4432,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        584
+        586
       ],
       [
         "src/views/card/index.tsx",
@@ -4496,7 +4496,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        267
+        266
       ]
     ],
     "translation": "Duplicate"
@@ -4516,7 +4516,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        130
+        131
       ]
     ],
     "translation": "Duplicate card"
@@ -4528,7 +4528,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        267
+        266
       ]
     ],
     "translation": "Duplicating…"
@@ -4544,7 +4544,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        128
+        129
       ]
     ],
     "translation": "Edit"
@@ -4556,11 +4556,11 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        173
+        169
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        116
+        121
       ]
     ],
     "translation": "Edit board URL"
@@ -4612,7 +4612,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        210
+        236
       ]
     ],
     "translation": "Edit webhook"
@@ -4624,7 +4624,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        162
+        167
       ]
     ],
     "translation": "Edit workspace URL"
@@ -4676,7 +4676,7 @@
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        43
+        46
       ]
     ],
     "translation": "Email"
@@ -4724,7 +4724,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        188
+        187
       ]
     ],
     "translation": "End of list"
@@ -4792,7 +4792,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        258
+        284
       ]
     ],
     "translation": "Enter new secret to update"
@@ -4896,11 +4896,11 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        77
+        81
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        92
+        96
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -4928,7 +4928,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        106
+        119
       ]
     ],
     "translation": "Error connecting GitHub"
@@ -5000,7 +5000,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        129
+        143
       ]
     ],
     "translation": "Error disconnecting GitHub"
@@ -5012,7 +5012,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        86
+        97
       ]
     ],
     "translation": "Error disconnecting Trello"
@@ -5052,7 +5052,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        54
+        57
       ]
     ],
     "translation": "Error updating display name"
@@ -5130,7 +5130,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        199
+        196
       ]
     ],
     "translation": "Error uploading profile image"
@@ -5142,11 +5142,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        271
+        297
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        226
+        231
       ]
     ],
     "translation": "Events"
@@ -5242,11 +5242,11 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        78
+        82
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        93
+        97
       ]
     ],
     "translation": "Failed to create board"
@@ -5258,7 +5258,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        119
+        130
       ]
     ],
     "translation": "Failed to create webhook"
@@ -5270,7 +5270,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        37
+        47
       ]
     ],
     "translation": "Failed to delete webhook"
@@ -5310,11 +5310,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        164
+        185
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        186
+        190
       ]
     ],
     "translation": "Failed to test webhook"
@@ -5326,7 +5326,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        138
+        155
       ]
     ],
     "translation": "Failed to update webhook"
@@ -5498,7 +5498,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        60
+        65
       ]
     ],
     "translation": "Font size"
@@ -5558,11 +5558,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        92
+        91
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        93
+        92
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -5742,7 +5742,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        66
+        81
       ]
     ],
     "translation": "Get started by creating a new {0}"
@@ -5754,7 +5754,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        999
+        1007
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -5818,7 +5818,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        186
+        203
       ]
     ],
     "translation": "GitHub"
@@ -5830,7 +5830,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        99
+        112
       ]
     ],
     "translation": "GitHub connected"
@@ -5842,7 +5842,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        122
+        136
       ]
     ],
     "translation": "GitHub disconnected"
@@ -5946,7 +5946,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        94
+        93
       ]
     ],
     "translation": "Good for individuals starting out who just need the essentials."
@@ -6062,7 +6062,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        259
+        285
       ]
     ],
     "translation": "HMAC secret for signature verification"
@@ -6182,7 +6182,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        91
+        92
       ]
     ],
     "translation": "ID copied"
@@ -6230,11 +6230,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        229
+        244
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        381
+        398
       ]
     ],
     "translation": "Import complete"
@@ -6246,11 +6246,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        242
+        257
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        394
+        411
       ]
     ],
     "translation": "Import failed"
@@ -6362,7 +6362,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        104
+        105
       ]
     ],
     "translation": "Inactive"
@@ -6514,7 +6514,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        115
+        117
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -6668,11 +6668,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        533
+        535
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        102
+        108
       ],
       [
         "src/views/card/index.tsx",
@@ -6712,7 +6712,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        50
+        55
       ]
     ],
     "translation": "Language"
@@ -6822,7 +6822,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        115
+        112
       ]
     ],
     "translation": "License activated"
@@ -6834,7 +6834,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        129
+        126
       ]
     ],
     "translation": "License activation failed"
@@ -6870,15 +6870,15 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        106
+        104
       ],
       [
         "src/views/board/index.tsx",
-        439
+        447
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        72
+        73
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -6886,7 +6886,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        77
+        81
       ]
     ],
     "translation": "Link copied"
@@ -7070,7 +7070,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        162
+        158
       ]
     ],
     "translation": "Make template"
@@ -7174,11 +7174,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        178
+        177
       ],
       [
         "src/views/board/members/index.tsx",
-        195
+        194
       ],
       [
         "src/views/card/components/ActivityList.tsx",
@@ -7242,11 +7242,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        491
+        493
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        116
+        118
       ],
       [
         "src/views/card/index.tsx",
@@ -7310,7 +7310,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        77
+        76
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -7342,7 +7342,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        107
+        103
       ]
     ],
     "translation": "Move board"
@@ -7354,7 +7354,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        64
+        60
       ]
     ],
     "translation": "Move board to another workspace"
@@ -7378,7 +7378,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        70
+        72
       ]
     ],
     "translation": "Move to list"
@@ -7390,7 +7390,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        193
+        189
       ]
     ],
     "translation": "Move to workspace"
@@ -7433,7 +7433,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        231
+        257
       ]
     ],
     "translation": "My webhook"
@@ -7449,19 +7449,19 @@
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        118
+        123
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        134
+        141
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        227
+        253
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        214
+        219
       ]
     ],
     "translation": "Name"
@@ -7529,7 +7529,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        120
+        127
       ]
     ],
     "translation": "New {0}"
@@ -7553,7 +7553,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        416
+        418
       ]
     ],
     "translation": "New card"
@@ -7577,7 +7577,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        513
+        530
       ]
     ],
     "translation": "New import"
@@ -7605,7 +7605,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        941
+        949
       ]
     ],
     "translation": "New list"
@@ -7641,7 +7641,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        104
+        109
       ]
     ],
     "translation": "New template"
@@ -7665,7 +7665,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        210
+        236
       ]
     ],
     "translation": "New webhook"
@@ -7729,7 +7729,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        63
+        76
       ]
     ],
     "translation": "No {0}"
@@ -7741,7 +7741,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        63
+        75
       ]
     ],
     "translation": "No archived boards"
@@ -7765,7 +7765,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        432
+        449
       ]
     ],
     "translation": "No boards found"
@@ -7813,7 +7813,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        143
+        147
       ]
     ],
     "translation": "No download URL available for this attachment."
@@ -7837,7 +7837,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        126
+        123
       ]
     ],
     "translation": "No license key was provided. Please try activating again."
@@ -7849,7 +7849,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        995
+        1003
       ]
     ],
     "translation": "No lists"
@@ -7861,7 +7861,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1000
+        1008
       ]
     ],
     "translation": "No lists have been created yet"
@@ -7873,7 +7873,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        283
+        298
       ]
     ],
     "translation": "No projects found"
@@ -7913,7 +7913,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        196
+        201
       ]
     ],
     "translation": "No webhooks configured. Add a webhook to receive notifications."
@@ -7973,7 +7973,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        73
+        78
       ]
     ],
     "translation": "Once you delete your account, there is no going back. This action cannot be undone."
@@ -8157,7 +8157,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        271
+        268
       ]
     ],
     "translation": "Password already set"
@@ -8401,7 +8401,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        165
+        164
       ]
     ],
     "translation": "Pick a plan to get started. All paid plans include a 14-day free trial."
@@ -8521,7 +8521,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        24
+        30
       ]
     ],
     "translation": "Please enter a valid URL"
@@ -8573,11 +8573,11 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        80
+        83
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        204
+        206
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -8585,31 +8585,31 @@
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        61
+        63
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        77
+        79
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        73
+        79
       ],
       [
         "src/views/board/components/VisibilityButton.tsx",
-        57
+        60
       ],
       [
         "src/views/board/index.tsx",
-        292
+        300
       ],
       [
         "src/views/board/index.tsx",
-        349
+        357
       ],
       [
         "src/views/board/index.tsx",
-        386
+        394
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -8621,19 +8621,19 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        88
+        87
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        243
+        258
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        395
+        412
       ],
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        74
+        77
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
@@ -8657,7 +8657,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        52
+        53
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -8669,19 +8669,19 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        64
+        66
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        75
+        77
       ],
       [
         "src/views/card/components/ListSelector.tsx",
-        55
+        57
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        82
+        84
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
@@ -8737,7 +8737,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        200
+        197
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -8749,7 +8749,7 @@
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        55
+        58
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
@@ -8793,31 +8793,31 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        111
+        109
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        64
+        65
       ],
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        42
+        44
       ],
       [
         "src/views/board/index.tsx",
-        448
+        456
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        55
+        56
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        81
+        82
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        100
+        101
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -8825,7 +8825,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        86
+        90
       ]
     ],
     "translation": "Please try again."
@@ -8837,7 +8837,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        181
+        180
       ]
     ],
     "translation": "Position in list (0 = first, leave empty for end)"
@@ -8925,7 +8925,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        84
+        88
       ]
     ],
     "translation": "Private"
@@ -8986,7 +8986,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        189
+        186
       ]
     ],
     "translation": "Profile image updated"
@@ -8998,7 +8998,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        30
+        33
       ]
     ],
     "translation": "Profile picture"
@@ -9010,7 +9010,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        79
+        83
       ]
     ],
     "translation": "Public"
@@ -9022,7 +9022,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        128
+        126
       ]
     ],
     "translation": "Public board URL copied to clipboard"
@@ -9150,7 +9150,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        649
+        651
       ]
     ],
     "translation": "Remove file"
@@ -9162,7 +9162,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        205
+        204
       ]
     ],
     "translation": "Remove from board"
@@ -9174,7 +9174,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        202
+        198
       ]
     ],
     "translation": "Remove from favorites"
@@ -9269,7 +9269,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        69
+        72
       ]
     ],
     "translation": "Removed from favorites"
@@ -9481,11 +9481,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        191
+        190
       ],
       [
         "src/views/board/members/index.tsx",
-        272
+        271
       ],
       [
         "src/views/members/index.tsx",
@@ -9570,7 +9570,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        290
+        287
       ]
     ],
     "translation": "Save"
@@ -9582,7 +9582,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        344
+        370
       ]
     ],
     "translation": "Save changes"
@@ -9670,7 +9670,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        251
+        277
       ]
     ],
     "translation": "Secret (optional)"
@@ -9682,7 +9682,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        28
+        34
       ]
     ],
     "translation": "Secret cannot exceed 512 characters"
@@ -9730,7 +9730,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        119
+        118
       ]
     ],
     "translation": "Select a list"
@@ -9754,7 +9754,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        84
+        80
       ]
     ],
     "translation": "Select a workspace"
@@ -9766,11 +9766,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        315
+        330
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        464
+        481
       ]
     ],
     "translation": "Select all"
@@ -9782,7 +9782,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        32
+        38
       ]
     ],
     "translation": "Select at least one event"
@@ -9794,7 +9794,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        195
+        208
       ]
     ],
     "translation": "Select source"
@@ -9882,7 +9882,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        338
+        364
       ]
     ],
     "translation": "Send test"
@@ -9918,7 +9918,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        93
+        98
       ]
     ],
     "translation": "Set a password to enable password-based login."
@@ -9938,7 +9938,7 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        121
+        123
       ]
     ],
     "translation": "Set due date"
@@ -9950,11 +9950,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        93
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        105
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -10014,7 +10014,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        26
+        29
       ]
     ],
     "translation": "Settings | Account"
@@ -10050,7 +10050,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        138
+        153
       ]
     ],
     "translation": "Settings | Integrations"
@@ -10186,7 +10186,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        328
+        327
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -10354,7 +10354,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        91
+        90
       ]
     ],
     "translation": "Solo"
@@ -10366,7 +10366,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        336
+        338
       ]
     ],
     "translation": "Some attachments failed"
@@ -10390,7 +10390,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        132
+        129
       ]
     ],
     "translation": "Something went wrong during license activation."
@@ -10483,7 +10483,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        164
+        163
       ]
     ],
     "translation": "Start your 14-day free trial, cancel anytime."
@@ -10495,7 +10495,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        232
+        237
       ]
     ],
     "translation": "Status"
@@ -10628,7 +10628,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        98
+        97
       ]
     ],
     "translation": "Team"
@@ -10680,11 +10680,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        861
+        869
       ],
       [
         "src/views/board/index.tsx",
-        898
+        906
       ]
     ],
     "translation": "Template"
@@ -10696,7 +10696,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        67
+        69
       ]
     ],
     "translation": "Template created"
@@ -10708,7 +10708,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        68
+        70
       ]
     ],
     "translation": "Template created successfully"
@@ -10720,7 +10720,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        19
+        20
       ]
     ],
     "translation": "Template name cannot exceed 100 characters"
@@ -10732,7 +10732,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        18
+        19
       ]
     ],
     "translation": "Template name is required"
@@ -10744,7 +10744,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        121
+        119
       ]
     ],
     "translation": "Template URL copied to clipboard"
@@ -10792,7 +10792,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        132
+        133
       ]
     ],
     "translation": "Test"
@@ -10804,11 +10804,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        154
+        173
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        177
+        179
       ]
     ],
     "translation": "Test failed"
@@ -10820,11 +10820,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        148
+        167
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        171
+        173
       ]
     ],
     "translation": "Test sent"
@@ -10836,11 +10836,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        149
+        168
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        172
+        174
       ]
     ],
     "translation": "Test webhook sent successfully!"
@@ -10876,7 +10876,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        124
+        121
       ]
     ],
     "translation": "That license key could not be found. Please contact support."
@@ -10888,7 +10888,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        60
+        63
       ]
     ],
     "translation": "The board has been archived."
@@ -10904,7 +10904,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        34
+        32
       ]
     ],
     "translation": "The board has been moved to {0}."
@@ -10916,7 +10916,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        61
+        64
       ]
     ],
     "translation": "The board has been unarchived."
@@ -10928,7 +10928,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        57
+        58
       ]
     ],
     "translation": "The card has been duplicated."
@@ -10947,7 +10947,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        337
+        339
       ]
     ],
     "translation": "The card was created, but {failedCount} of {0} attachments could not be uploaded."
@@ -11039,7 +11039,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        50
+        53
       ]
     ],
     "translation": "The visibility of your board has been set to {0}."
@@ -11095,7 +11095,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        78
+        79
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -11127,7 +11127,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        184
+        188
       ]
     ],
     "translation": "This board is private or does not exist"
@@ -11139,7 +11139,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        136
+        141
       ]
     ],
     "translation": "This board URL has already been taken"
@@ -11299,7 +11299,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        93
+        94
       ]
     ],
     "translation": "Ticket ID copied to clipboard"
@@ -11323,7 +11323,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        168
+        167
       ]
     ],
     "translation": "Title (optional)"
@@ -11375,7 +11375,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        19
+        27
       ]
     ],
     "translation": "Token is required"
@@ -11403,7 +11403,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        142
+        157
       ]
     ],
     "translation": "Trello"
@@ -11415,7 +11415,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        79
+        90
       ]
     ],
     "translation": "Trello disconnected"
@@ -11523,7 +11523,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        98
+        99
       ]
     ],
     "translation": "Unable to copy ID"
@@ -11535,15 +11535,15 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        110
+        108
       ],
       [
         "src/views/board/index.tsx",
-        446
+        454
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        79
+        80
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -11551,7 +11551,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        84
+        88
       ]
     ],
     "translation": "Unable to copy link"
@@ -11563,7 +11563,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        201
+        203
       ]
     ],
     "translation": "Unable to create card"
@@ -11599,11 +11599,11 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        60
+        62
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        76
+        78
       ]
     ],
     "translation": "Unable to create template"
@@ -11615,7 +11615,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        118
+        127
       ]
     ],
     "translation": "Unable to create webhook"
@@ -11643,7 +11643,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        73
+        76
       ]
     ],
     "translation": "Unable to delete attachment"
@@ -11655,7 +11655,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        51
+        52
       ]
     ],
     "translation": "Unable to delete card"
@@ -11703,7 +11703,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        36
+        44
       ]
     ],
     "translation": "Unable to delete webhook"
@@ -11715,11 +11715,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        63
+        64
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        53
+        54
       ]
     ],
     "translation": "Unable to duplicate card"
@@ -11731,7 +11731,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        45
+        43
       ]
     ],
     "translation": "Unable to move board"
@@ -11743,7 +11743,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        41
+        43
       ]
     ],
     "translation": "Unable to move card"
@@ -11819,11 +11819,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        163
+        182
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        185
+        187
       ]
     ],
     "translation": "Unable to test webhook"
@@ -11835,7 +11835,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        79
+        82
       ]
     ],
     "translation": "Unable to update board"
@@ -11847,7 +11847,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        72
+        78
       ]
     ],
     "translation": "Unable to update board URL"
@@ -11859,7 +11859,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        56
+        59
       ]
     ],
     "translation": "Unable to update board visibility"
@@ -11871,7 +11871,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        348
+        356
       ],
       [
         "src/views/card/index.tsx",
@@ -11923,11 +11923,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        385
+        393
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        63
+        65
       ]
     ],
     "translation": "Unable to update due date"
@@ -11939,7 +11939,7 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        74
+        76
       ]
     ],
     "translation": "Unable to update labels"
@@ -11951,11 +11951,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        291
+        299
       ],
       [
         "src/views/card/components/ListSelector.tsx",
-        54
+        56
       ]
     ],
     "translation": "Unable to update list"
@@ -11967,7 +11967,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        81
+        83
       ]
     ],
     "translation": "Unable to update members"
@@ -11995,7 +11995,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        84
+        83
       ],
       [
         "src/views/members/index.tsx",
@@ -12011,7 +12011,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        137
+        152
       ]
     ],
     "translation": "Unable to update webhook"
@@ -12023,7 +12023,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        182
+        178
       ]
     ],
     "translation": "Unarchive board"
@@ -12266,11 +12266,11 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        175
+        180
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        84
+        86
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
@@ -12378,7 +12378,7 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        254
+        253
       ]
     ],
     "translation": "Upgrade"
@@ -12416,7 +12416,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        160
+        159
       ]
     ],
     "translation": "Upgrade your plan"
@@ -12456,11 +12456,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        239
+        265
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        220
+        225
       ]
     ],
     "translation": "URL"
@@ -12488,7 +12488,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        25
+        31
       ]
     ],
     "translation": "URL cannot exceed 2048 characters"
@@ -12532,7 +12532,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        154
+        161
       ]
     ],
     "translation": "Use template"
@@ -12544,7 +12544,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        265
+        291
       ]
     ],
     "translation": "Used to sign webhook payloads for verification. Leave blank to keep existing secret."
@@ -12556,7 +12556,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        266
+        265
       ],
       [
         "src/views/members/index.tsx",
@@ -12632,7 +12632,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        153
+        157
       ]
     ],
     "translation": "View only"
@@ -12656,7 +12656,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        187
+        191
       ]
     ],
     "translation": "View workspace"
@@ -12668,7 +12668,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        100
+        104
       ]
     ],
     "translation": "Visibility"
@@ -12749,7 +12749,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        110
+        119
       ]
     ],
     "translation": "Webhook created"
@@ -12761,7 +12761,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        111
+        120
       ]
     ],
     "translation": "Webhook created successfully"
@@ -12773,7 +12773,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        28
+        36
       ]
     ],
     "translation": "Webhook deleted"
@@ -12785,7 +12785,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        29
+        37
       ]
     ],
     "translation": "Webhook deleted successfully"
@@ -12797,7 +12797,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        20
+        26
       ]
     ],
     "translation": "Webhook name cannot exceed 255 characters"
@@ -12809,7 +12809,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        19
+        25
       ]
     ],
     "translation": "Webhook name is required"
@@ -12821,7 +12821,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        125
+        126
       ]
     ],
     "translation": "Webhook options"
@@ -12833,11 +12833,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        155
+        174
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        178
+        180
       ]
     ],
     "translation": "Webhook test failed"
@@ -12849,7 +12849,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        129
+        144
       ]
     ],
     "translation": "Webhook updated"
@@ -12861,7 +12861,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        130
+        145
       ]
     ],
     "translation": "Webhook updated successfully"
@@ -12873,7 +12873,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        23
+        29
       ]
     ],
     "translation": "Webhook URL is required"
@@ -12981,7 +12981,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        861
+        869
       ],
       [
         "src/views/boards/index.tsx",
@@ -12993,7 +12993,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        125
+        129
       ],
       [
         "src/views/public/boards/index.tsx",
@@ -13298,7 +13298,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        92
+        97
       ]
     ],
     "translation": "You are about to change your password."
@@ -13371,7 +13371,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        68
+        64
       ]
     ],
     "translation": "You don't have any other workspaces to move this board to."
@@ -13387,19 +13387,19 @@
       ],
       [
         "src/views/board/components/VisibilityButton.tsx",
-        72
+        76
       ],
       [
         "src/views/board/index.tsx",
-        929
+        937
       ],
       [
         "src/views/board/index.tsx",
-        1006
+        1014
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
-        71
+        85
       ],
       [
         "src/views/boards/index.tsx",
@@ -13493,7 +13493,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        252
+        251
       ]
     ],
     "translation": "You're not a member of this board yet. Ask a board admin to add you."
@@ -13545,7 +13545,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        273
+        270
       ]
     ],
     "translation": "Your account already has a password. You can change it from your account settings."
@@ -13569,7 +13569,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        273
+        272
       ]
     ],
     "translation": "Your avatar"
@@ -13581,7 +13581,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        382
+        399
       ]
     ],
     "translation": "Your boards have been imported."
@@ -13593,7 +13593,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        42
+        45
       ]
     ],
     "translation": "Your display name has been updated."
@@ -13617,7 +13617,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        100
+        113
       ]
     ],
     "translation": "Your GitHub account has been connected."
@@ -13629,7 +13629,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        123
+        137
       ]
     ],
     "translation": "Your GitHub account has been disconnected."
@@ -13641,7 +13641,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        220
+        237
       ]
     ],
     "translation": "Your GitHub account is connected."
@@ -13653,7 +13653,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        116
+        113
       ]
     ],
     "translation": "Your license has been activated successfully."
@@ -13665,7 +13665,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        125
+        122
       ]
     ],
     "translation": "Your license is not active. Please check your account."
@@ -13713,7 +13713,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        190
+        187
       ]
     ],
     "translation": "Your profile image has been updated."
@@ -13725,7 +13725,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        230
+        245
       ]
     ],
     "translation": "Your projects have been imported."
@@ -13737,7 +13737,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        80
+        91
       ]
     ],
     "translation": "Your Trello account has been disconnected."
@@ -13749,7 +13749,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        171
+        186
       ]
     ],
     "translation": "Your Trello account is connected."

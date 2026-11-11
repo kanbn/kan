@@ -92,7 +92,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        71
+        74
       ]
     ],
     "translation": "{0} er føjet til dine favoritter."
@@ -108,7 +108,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        72
+        75
       ]
     ],
     "translation": "{0} er fjernet fra dine favoritter."
@@ -124,7 +124,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        567
+        569
       ]
     ],
     "translation": "{0} etiketter"
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        889
+        897
       ]
     ],
     "translation": "{0} blev ikke fundet"
@@ -156,7 +156,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        489
+        506
       ]
     ],
     "translation": "{boardCount, plural, one {Importér tavle (1)} other {Importér tavler ({boardCount})}}"
@@ -172,7 +172,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        341
+        356
       ]
     ],
     "translation": "{projectCount, plural, one {Importér projekt (1)} other {Importér projekter ({projectCount})}}"
@@ -417,11 +417,11 @@
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        321
+        347
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        104
+        105
       ]
     ],
     "translation": "Aktiv"
@@ -541,7 +541,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        123
+        124
       ]
     ],
     "translation": "Tilføj tjekliste"
@@ -605,11 +605,11 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        115
+        121
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        120
+        128
       ]
     ],
     "translation": "Tilføj etiket"
@@ -625,11 +625,11 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        245
+        244
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        138
+        140
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -645,7 +645,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        202
+        198
       ]
     ],
     "translation": "Føj til favoritter"
@@ -812,7 +812,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        68
+        71
       ]
     ],
     "translation": "Føjet til favoritter"
@@ -843,7 +843,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        256
+        253
       ]
     ],
     "translation": "Juster den kvadratiske beskæring, så den passer til din avatar."
@@ -855,11 +855,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        178
+        177
       ],
       [
         "src/views/board/members/index.tsx",
-        194
+        193
       ],
       [
         "src/views/members/index.tsx",
@@ -1028,7 +1028,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        107
+        120
       ]
     ],
     "translation": "Der opstod en fejl under tilslutning af din GitHub-konto."
@@ -1040,7 +1040,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        130
+        144
       ]
     ],
     "translation": "Der opstod en fejl under afbrydelse af din GitHub-konto."
@@ -1052,7 +1052,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        87
+        98
       ]
     ],
     "translation": "Der opstod en fejl under afbrydelse af din Trello-konto."
@@ -1076,7 +1076,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        78
+        77
       ]
     ],
     "translation": "Årligt"
@@ -1212,7 +1212,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        182
+        178
       ]
     ],
     "translation": "Arkivér tavle"
@@ -1256,7 +1256,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        69
+        80
       ]
     ],
     "translation": "Er du sikker på, at du vil slette webhooken \"{webhookName}\"? Denne handling kan ikke fortrydes."
@@ -1300,7 +1300,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        75
+        76
       ]
     ],
     "translation": "Er du sikker på, at du vil slette dette kort?"
@@ -1404,11 +1404,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        630
+        632
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        631
+        633
       ]
     ],
     "translation": ""
@@ -1571,7 +1571,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        101
+        100
       ]
     ],
     "translation": ""
@@ -1663,11 +1663,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        861
+        869
       ],
       [
         "src/views/board/members/index.tsx",
-        231
+        230
       ],
       [
         "src/views/card/index.tsx",
@@ -1675,7 +1675,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        125
+        129
       ]
     ],
     "translation": "Tavle"
@@ -1700,7 +1700,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        57
+        60
       ]
     ],
     "translation": "Tavle arkiveret"
@@ -1712,7 +1712,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        215
+        214
       ]
     ],
     "translation": ""
@@ -1724,11 +1724,11 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        151
+        147
       ],
       [
         "src/views/board/members/index.tsx",
-        236
+        235
       ]
     ],
     "translation": ""
@@ -1744,7 +1744,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        231
+        230
       ]
     ],
     "translation": ""
@@ -1756,7 +1756,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        33
+        31
       ]
     ],
     "translation": "Tavle flyttet"
@@ -1768,7 +1768,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        879
+        887
       ]
     ],
     "translation": ""
@@ -1780,7 +1780,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        23
+        25
       ]
     ],
     "translation": "Tavlens navn må højst være 100 tegn"
@@ -1792,7 +1792,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        22
+        24
       ]
     ],
     "translation": "Tavlens navn er påkrævet"
@@ -1804,7 +1804,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        181
+        185
       ]
     ],
     "translation": "Tavlen blev ikke fundet"
@@ -1816,7 +1816,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        231
+        227
       ]
     ],
     "translation": ""
@@ -1840,7 +1840,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        58
+        61
       ]
     ],
     "translation": "Tavle fjernet fra arkivet"
@@ -1852,7 +1852,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        46
+        51
       ]
     ],
     "translation": "Tavlens URL må kun indeholde bogstaver, tal og bindestreger"
@@ -1864,7 +1864,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        44
+        49
       ]
     ],
     "translation": "Tavlens URL må højst være 60 tegn"
@@ -1876,11 +1876,11 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        122
+        120
       ],
       [
         "src/views/public/board/index.tsx",
-        79
+        83
       ]
     ],
     "translation": "Tavlens URL er kopieret til udklipsholderen"
@@ -1892,7 +1892,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        42
+        47
       ]
     ],
     "translation": ""
@@ -1933,7 +1933,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        49
+        52
       ]
     ],
     "translation": "Tavlens synlighed er opdateret"
@@ -1973,7 +1973,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        66
+        80
       ]
     ],
     "translation": "Tavler, du arkiverer, vises her."
@@ -2437,7 +2437,7 @@
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        255
+        254
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
@@ -2445,7 +2445,7 @@
       ],
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        99
+        95
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -2461,7 +2461,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        86
+        87
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -2477,11 +2477,11 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        249
+        248
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        287
+        284
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2497,7 +2497,7 @@
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        75
+        86
       ],
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
@@ -2525,11 +2525,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        55
+        56
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        46
+        47
       ]
     ],
     "translation": "Kort duplikeret"
@@ -2541,7 +2541,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        48
+        49
       ]
     ],
     "translation": "Kortet blev duplikeret."
@@ -2553,7 +2553,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        92
+        88
       ]
     ],
     "translation": "Tildelinger af medlemmer til kortet fjernes, når kortet flyttes til et andet arbejdsområde."
@@ -2581,7 +2581,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        167
+        168
       ]
     ],
     "translation": ""
@@ -2593,7 +2593,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        433
+        435
       ]
     ],
     "translation": "Korttitel"
@@ -2605,11 +2605,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        441
+        449
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        74
+        75
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -2637,11 +2637,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        93
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        105
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2661,7 +2661,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        63
+        68
       ]
     ],
     "translation": "Skift appens skriftstørrelse."
@@ -2673,7 +2673,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        53
+        58
       ]
     ],
     "translation": "Skift dine sprogindstillinger."
@@ -2769,7 +2769,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        160
+        159
       ]
     ],
     "translation": "Vælg et abonnement"
@@ -2869,7 +2869,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        281
+        278
       ],
       [
         "src/views/card/index.tsx",
@@ -3110,7 +3110,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        195
+        208
       ]
     ],
     "translation": "Forbind"
@@ -3122,7 +3122,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        212
+        229
       ]
     ],
     "translation": "Forbind GitHub"
@@ -3134,7 +3134,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        162
+        177
       ]
     ],
     "translation": "Forbind Trello"
@@ -3158,7 +3158,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        191
+        208
       ]
     ],
     "translation": "Forbind din GitHub-konto for at importere projekter."
@@ -3170,7 +3170,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        149
+        164
       ]
     ],
     "translation": "Forbind din Trello-konto for at importere tavler."
@@ -3242,7 +3242,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        255
+        254
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -3310,7 +3310,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        133
+        131
       ]
     ],
     "translation": "Kopiér link til tavle"
@@ -3322,7 +3322,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        107
+        108
       ]
     ],
     "translation": "Kopiér link til kort"
@@ -3334,7 +3334,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        245
+        244
       ]
     ],
     "translation": "Kopiér tjeklister"
@@ -3346,7 +3346,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        209
+        208
       ]
     ],
     "translation": "Kopiér etiketter"
@@ -3370,7 +3370,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        227
+        226
       ]
     ],
     "translation": "Kopiér medlemmer"
@@ -3382,7 +3382,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        140
+        138
       ]
     ],
     "translation": ""
@@ -3394,7 +3394,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        114
+        115
       ]
     ],
     "translation": "Kopiér ticket-ID"
@@ -3422,7 +3422,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        166
+        173
       ]
     ],
     "translation": "Opret {0}"
@@ -3438,7 +3438,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        662
+        664
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3466,7 +3466,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        672
+        674
       ]
     ],
     "translation": "Opret kort"
@@ -3530,7 +3530,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        80
+        93
       ],
       [
         "src/views/boards/index.tsx",
@@ -3558,11 +3558,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        529
+        531
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        101
+        107
       ]
     ],
     "translation": "Opret ny etiket"
@@ -3574,11 +3574,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        139
+        145
       ],
       [
         "src/views/board/index.tsx",
-        1017
+        1025
       ]
     ],
     "translation": "Opret ny liste"
@@ -3590,7 +3590,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        132
+        137
       ]
     ],
     "translation": "Opret skabelon"
@@ -3602,7 +3602,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        344
+        370
       ]
     ],
     "translation": "Opret webhook"
@@ -3630,7 +3630,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        238
+        243
       ]
     ],
     "translation": "Oprettet"
@@ -3674,7 +3674,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        253
+        250
       ]
     ],
     "translation": "Beskær din avatar"
@@ -3686,7 +3686,7 @@
     "origin": [
       [
         "src/views/card/components/ListSelector.tsx",
-        85
+        87
       ]
     ],
     "translation": ""
@@ -3917,7 +3917,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        92
+        93
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -3929,11 +3929,11 @@
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        82
+        93
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        136
+        137
       ]
     ],
     "translation": "Slet"
@@ -3945,11 +3945,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        70
+        75
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        80
+        85
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -3965,7 +3965,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        213
+        209
       ]
     ],
     "translation": "Slet tavle"
@@ -3981,7 +3981,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        152
+        153
       ]
     ],
     "translation": "Slet kort"
@@ -4029,7 +4029,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        213
+        209
       ]
     ],
     "translation": "Slet skabelon"
@@ -4041,7 +4041,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        55
+        66
       ]
     ],
     "translation": "Slet webhook"
@@ -4141,7 +4141,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        76
+        72
       ]
     ],
     "translation": "Målarbejdsområde"
@@ -4153,7 +4153,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        223
+        240
       ]
     ],
     "translation": "Afbryd GitHub"
@@ -4165,7 +4165,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        177
+        194
       ]
     ],
     "translation": "Afbryd Trello"
@@ -4201,11 +4201,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        36
+        39
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        71
+        73
       ]
     ],
     "translation": "Vist navn"
@@ -4217,7 +4217,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        22
+        24
       ]
     ],
     "translation": "Det viste navn må højst være 280 tegn"
@@ -4229,7 +4229,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        19
+        21
       ]
     ],
     "translation": "Det viste navn skal være mindst 3 tegn langt"
@@ -4241,7 +4241,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        41
+        44
       ]
     ],
     "translation": "Det viste navn er opdateret"
@@ -4377,7 +4377,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        142
+        146
       ]
     ],
     "translation": "Download mislykkedes"
@@ -4393,7 +4393,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        584
+        586
       ],
       [
         "src/views/card/index.tsx",
@@ -4457,7 +4457,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        267
+        266
       ]
     ],
     "translation": "Duplikér"
@@ -4477,7 +4477,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        130
+        131
       ]
     ],
     "translation": "Duplikér kort"
@@ -4489,7 +4489,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        267
+        266
       ]
     ],
     "translation": "Duplikerer…"
@@ -4505,7 +4505,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        128
+        129
       ]
     ],
     "translation": "Rediger"
@@ -4517,11 +4517,11 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        173
+        169
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        116
+        121
       ]
     ],
     "translation": "Rediger tavlens URL"
@@ -4573,7 +4573,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        210
+        236
       ]
     ],
     "translation": "Rediger webhook"
@@ -4585,7 +4585,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        162
+        167
       ]
     ],
     "translation": "Rediger URL til arbejdsområde"
@@ -4637,7 +4637,7 @@
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        43
+        46
       ]
     ],
     "translation": "E-mail"
@@ -4685,7 +4685,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        188
+        187
       ]
     ],
     "translation": "Slutningen af listen"
@@ -4753,7 +4753,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        258
+        284
       ]
     ],
     "translation": "Indtast ny hemmelighed for at opdatere"
@@ -4857,11 +4857,11 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        77
+        81
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        92
+        96
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -4889,7 +4889,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        106
+        119
       ]
     ],
     "translation": "Fejl ved forbindelse til GitHub"
@@ -4961,7 +4961,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        129
+        143
       ]
     ],
     "translation": "Fejl ved afbrydelse af GitHub"
@@ -4973,7 +4973,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        86
+        97
       ]
     ],
     "translation": "Fejl ved afbrydelse af Trello"
@@ -5013,7 +5013,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        54
+        57
       ]
     ],
     "translation": "Fejl ved opdatering af vist navn"
@@ -5078,7 +5078,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        199
+        196
       ]
     ],
     "translation": "Fejl ved upload af profilbillede"
@@ -5090,11 +5090,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        271
+        297
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        226
+        231
       ]
     ],
     "translation": "Hændelser"
@@ -5190,11 +5190,11 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        78
+        82
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        93
+        97
       ]
     ],
     "translation": "Tavlen kunne ikke oprettes"
@@ -5206,7 +5206,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        119
+        130
       ]
     ],
     "translation": "Webhooken kunne ikke oprettes"
@@ -5218,7 +5218,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        37
+        47
       ]
     ],
     "translation": "Webhooken kunne ikke slettes"
@@ -5258,11 +5258,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        164
+        185
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        186
+        190
       ]
     ],
     "translation": "Test af webhook mislykkedes"
@@ -5274,7 +5274,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        138
+        155
       ]
     ],
     "translation": "Webhooken kunne ikke opdateres"
@@ -5446,7 +5446,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        60
+        65
       ]
     ],
     "translation": "Skriftstørrelse"
@@ -5506,11 +5506,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        92
+        91
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        93
+        92
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -5690,7 +5690,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        66
+        81
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny {0}"
@@ -5702,7 +5702,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        999
+        1007
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny liste"
@@ -5766,7 +5766,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        186
+        203
       ]
     ],
     "translation": "GitHub"
@@ -5778,7 +5778,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        99
+        112
       ]
     ],
     "translation": "GitHub forbundet"
@@ -5790,7 +5790,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        122
+        136
       ]
     ],
     "translation": "GitHub afbrudt"
@@ -5894,7 +5894,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        94
+        93
       ]
     ],
     "translation": "Godt til enkeltpersoner, der er ved at komme i gang og kun har brug for det mest nødvendige."
@@ -6010,7 +6010,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        259
+        285
       ]
     ],
     "translation": "HMAC-hemmelighed til signaturverificering"
@@ -6130,7 +6130,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        91
+        92
       ]
     ],
     "translation": "ID kopieret"
@@ -6178,11 +6178,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        229
+        244
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        381
+        398
       ]
     ],
     "translation": "Import fuldført"
@@ -6194,11 +6194,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        242
+        257
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        394
+        411
       ]
     ],
     "translation": "Import mislykkedes"
@@ -6310,7 +6310,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        104
+        105
       ]
     ],
     "translation": "Inaktiv"
@@ -6462,7 +6462,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        115
+        117
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -6603,11 +6603,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        533
+        535
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        102
+        108
       ],
       [
         "src/views/card/index.tsx",
@@ -6647,7 +6647,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        50
+        55
       ]
     ],
     "translation": "Sprog"
@@ -6744,7 +6744,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        115
+        112
       ]
     ],
     "translation": "Licens aktiveret"
@@ -6756,7 +6756,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        129
+        126
       ]
     ],
     "translation": "Aktivering af licens mislykkedes"
@@ -6792,15 +6792,15 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        106
+        104
       ],
       [
         "src/views/board/index.tsx",
-        439
+        447
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        72
+        73
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -6808,7 +6808,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        77
+        81
       ]
     ],
     "translation": "Link kopieret"
@@ -6992,7 +6992,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        162
+        158
       ]
     ],
     "translation": "Gør til skabelon"
@@ -7096,11 +7096,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        178
+        177
       ],
       [
         "src/views/board/members/index.tsx",
-        195
+        194
       ],
       [
         "src/views/card/components/ActivityList.tsx",
@@ -7164,11 +7164,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        491
+        493
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        116
+        118
       ],
       [
         "src/views/card/index.tsx",
@@ -7232,7 +7232,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        77
+        76
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -7264,7 +7264,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        107
+        103
       ]
     ],
     "translation": "Flyt tavle"
@@ -7276,7 +7276,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        64
+        60
       ]
     ],
     "translation": "Flyt tavle til et andet arbejdsområde"
@@ -7300,7 +7300,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        70
+        72
       ]
     ],
     "translation": "Flyt til liste"
@@ -7312,7 +7312,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        193
+        189
       ]
     ],
     "translation": "Flyt til arbejdsområde"
@@ -7355,7 +7355,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        231
+        257
       ]
     ],
     "translation": "Min webhook"
@@ -7371,19 +7371,19 @@
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        118
+        123
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        134
+        141
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        227
+        253
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        214
+        219
       ]
     ],
     "translation": "Navn"
@@ -7451,7 +7451,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        120
+        127
       ]
     ],
     "translation": "Ny {0}"
@@ -7475,7 +7475,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        416
+        418
       ]
     ],
     "translation": "Nyt kort"
@@ -7499,7 +7499,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        513
+        530
       ]
     ],
     "translation": "Ny import"
@@ -7527,7 +7527,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        941
+        949
       ]
     ],
     "translation": "Ny liste"
@@ -7563,7 +7563,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        104
+        109
       ]
     ],
     "translation": "Ny skabelon"
@@ -7587,7 +7587,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        210
+        236
       ]
     ],
     "translation": "Ny webhook"
@@ -7651,7 +7651,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        63
+        76
       ]
     ],
     "translation": "Ingen {0}"
@@ -7663,7 +7663,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        63
+        75
       ]
     ],
     "translation": "Ingen arkiverede tavler"
@@ -7687,7 +7687,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        432
+        449
       ]
     ],
     "translation": "Ingen tavler fundet"
@@ -7735,7 +7735,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        143
+        147
       ]
     ],
     "translation": "Der er ingen download-URL tilgængelig for denne vedhæftede fil."
@@ -7759,7 +7759,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        126
+        123
       ]
     ],
     "translation": "Der blev ikke angivet nogen licensnøgle. Prøv at aktivere igen."
@@ -7771,7 +7771,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        995
+        1003
       ]
     ],
     "translation": "Ingen lister"
@@ -7783,7 +7783,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1000
+        1008
       ]
     ],
     "translation": "Der er endnu ikke oprettet nogen lister"
@@ -7795,7 +7795,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        283
+        298
       ]
     ],
     "translation": "Ingen projekter fundet"
@@ -7835,7 +7835,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        196
+        201
       ]
     ],
     "translation": "Ingen webhooks konfigureret. Tilføj en webhook for at modtage notifikationer."
@@ -7895,7 +7895,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        73
+        78
       ]
     ],
     "translation": "Når du sletter din konto, kan du ikke gå tilbage. Denne handling kan ikke fortrydes."
@@ -8079,7 +8079,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        271
+        268
       ]
     ],
     "translation": "Adgangskode allerede indstillet"
@@ -8323,7 +8323,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        165
+        164
       ]
     ],
     "translation": "Vælg et abonnement for at komme i gang. Alle betalte abonnementer inkluderer 14 dages gratis prøveperiode."
@@ -8443,7 +8443,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        24
+        30
       ]
     ],
     "translation": "Indtast en gyldig URL"
@@ -8495,11 +8495,11 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        80
+        83
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        204
+        206
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -8507,31 +8507,31 @@
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        61
+        63
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        77
+        79
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        73
+        79
       ],
       [
         "src/views/board/components/VisibilityButton.tsx",
-        57
+        60
       ],
       [
         "src/views/board/index.tsx",
-        292
+        300
       ],
       [
         "src/views/board/index.tsx",
-        349
+        357
       ],
       [
         "src/views/board/index.tsx",
-        386
+        394
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -8543,19 +8543,19 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        88
+        87
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        243
+        258
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        395
+        412
       ],
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        74
+        77
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
@@ -8579,7 +8579,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        52
+        53
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -8591,19 +8591,19 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        64
+        66
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        75
+        77
       ],
       [
         "src/views/card/components/ListSelector.tsx",
-        55
+        57
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        82
+        84
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
@@ -8659,7 +8659,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        200
+        197
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -8671,7 +8671,7 @@
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        55
+        58
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
@@ -8715,31 +8715,31 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        111
+        109
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        64
+        65
       ],
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        42
+        44
       ],
       [
         "src/views/board/index.tsx",
-        448
+        456
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        55
+        56
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        81
+        82
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        100
+        101
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -8747,7 +8747,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        86
+        90
       ]
     ],
     "translation": "Prøv igen."
@@ -8759,7 +8759,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        181
+        180
       ]
     ],
     "translation": "Placering på listen (0 = først, lad feltet være tomt for sidst)"
@@ -8847,7 +8847,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        84
+        88
       ]
     ],
     "translation": "Privat"
@@ -8908,7 +8908,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        189
+        186
       ]
     ],
     "translation": "Profilbillede opdateret"
@@ -8920,7 +8920,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        30
+        33
       ]
     ],
     "translation": "Profilbillede"
@@ -8932,7 +8932,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        79
+        83
       ]
     ],
     "translation": "Offentlig"
@@ -8944,7 +8944,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        128
+        126
       ]
     ],
     "translation": ""
@@ -9072,7 +9072,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        649
+        651
       ]
     ],
     "translation": ""
@@ -9084,7 +9084,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        205
+        204
       ]
     ],
     "translation": ""
@@ -9096,7 +9096,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        202
+        198
       ]
     ],
     "translation": "Fjern fra favoritter"
@@ -9191,7 +9191,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        69
+        72
       ]
     ],
     "translation": "Fjernet fra favoritter"
@@ -9403,11 +9403,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        191
+        190
       ],
       [
         "src/views/board/members/index.tsx",
-        272
+        271
       ],
       [
         "src/views/members/index.tsx",
@@ -9492,7 +9492,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        290
+        287
       ]
     ],
     "translation": "Gem"
@@ -9504,7 +9504,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        344
+        370
       ]
     ],
     "translation": "Gem ændringer"
@@ -9592,7 +9592,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        251
+        277
       ]
     ],
     "translation": "Hemmelighed (valgfrit)"
@@ -9604,7 +9604,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        28
+        34
       ]
     ],
     "translation": "Hemmeligheden må højst være 512 tegn"
@@ -9652,7 +9652,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        119
+        118
       ]
     ],
     "translation": "Vælg en liste"
@@ -9676,7 +9676,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        84
+        80
       ]
     ],
     "translation": "Vælg et arbejdsområde"
@@ -9688,11 +9688,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        315
+        330
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        464
+        481
       ]
     ],
     "translation": "Vælg alle"
@@ -9704,7 +9704,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        32
+        38
       ]
     ],
     "translation": "Vælg mindst én hændelse"
@@ -9716,7 +9716,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        195
+        208
       ]
     ],
     "translation": "Vælg kilde"
@@ -9804,7 +9804,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        338
+        364
       ]
     ],
     "translation": "Send test"
@@ -9840,7 +9840,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        93
+        98
       ]
     ],
     "translation": "Indstil en adgangskode for at aktivere login med adgangskode."
@@ -9860,7 +9860,7 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        121
+        123
       ]
     ],
     "translation": "Angiv forfaldsdato"
@@ -9872,11 +9872,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        93
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        105
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -9936,7 +9936,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        26
+        29
       ]
     ],
     "translation": "Indstillinger | Konto"
@@ -9972,7 +9972,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        138
+        153
       ]
     ],
     "translation": "Indstillinger | Integrationer"
@@ -10108,7 +10108,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        328
+        327
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -10276,7 +10276,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        91
+        90
       ]
     ],
     "translation": "Solo"
@@ -10288,7 +10288,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        336
+        338
       ]
     ],
     "translation": ""
@@ -10312,7 +10312,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        132
+        129
       ]
     ],
     "translation": "Noget gik galt under aktiveringen af licensen."
@@ -10405,7 +10405,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        164
+        163
       ]
     ],
     "translation": ""
@@ -10417,7 +10417,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        232
+        237
       ]
     ],
     "translation": "Status"
@@ -10550,7 +10550,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        98
+        97
       ]
     ],
     "translation": "Team"
@@ -10602,11 +10602,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        861
+        869
       ],
       [
         "src/views/board/index.tsx",
-        898
+        906
       ]
     ],
     "translation": "Skabelon"
@@ -10618,7 +10618,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        67
+        69
       ]
     ],
     "translation": "Skabelon oprettet"
@@ -10630,7 +10630,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        68
+        70
       ]
     ],
     "translation": "Skabelonen blev oprettet"
@@ -10642,7 +10642,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        19
+        20
       ]
     ],
     "translation": "Skabelonens navn må højst være 100 tegn"
@@ -10654,7 +10654,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        18
+        19
       ]
     ],
     "translation": "Skabelonens navn er påkrævet"
@@ -10666,7 +10666,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        121
+        119
       ]
     ],
     "translation": ""
@@ -10714,7 +10714,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        132
+        133
       ]
     ],
     "translation": "Test"
@@ -10726,11 +10726,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        154
+        173
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        177
+        179
       ]
     ],
     "translation": "Test mislykkedes"
@@ -10742,11 +10742,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        148
+        167
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        171
+        173
       ]
     ],
     "translation": "Test sendt"
@@ -10758,11 +10758,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        149
+        168
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        172
+        174
       ]
     ],
     "translation": "Testwebhook sendt!"
@@ -10798,7 +10798,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        124
+        121
       ]
     ],
     "translation": "Licensnøglen blev ikke fundet. Kontakt support."
@@ -10810,7 +10810,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        60
+        63
       ]
     ],
     "translation": "Tavlen er blevet arkiveret."
@@ -10826,7 +10826,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        34
+        32
       ]
     ],
     "translation": "Tavlen er flyttet til {0}."
@@ -10838,7 +10838,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        61
+        64
       ]
     ],
     "translation": "Tavlen er fjernet fra arkivet."
@@ -10850,7 +10850,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        57
+        58
       ]
     ],
     "translation": "Kortet er blevet duplikeret."
@@ -10869,7 +10869,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        337
+        339
       ]
     ],
     "translation": ""
@@ -10961,7 +10961,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        50
+        53
       ]
     ],
     "translation": "Synligheden af din tavle er sat til {0}."
@@ -11017,7 +11017,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        78
+        79
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -11049,7 +11049,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        184
+        188
       ]
     ],
     "translation": "Denne tavle er privat eller findes ikke"
@@ -11061,7 +11061,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        136
+        141
       ]
     ],
     "translation": "Denne tavle-URL er allerede taget"
@@ -11221,7 +11221,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        93
+        94
       ]
     ],
     "translation": "Sags-ID kopieret til udklipsholderen"
@@ -11245,7 +11245,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        168
+        167
       ]
     ],
     "translation": "Titel (valgfrit)"
@@ -11297,7 +11297,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        19
+        27
       ]
     ],
     "translation": "Token er påkrævet"
@@ -11325,7 +11325,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        142
+        157
       ]
     ],
     "translation": "Trello"
@@ -11337,7 +11337,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        79
+        90
       ]
     ],
     "translation": "Trello afbrudt"
@@ -11445,7 +11445,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        98
+        99
       ]
     ],
     "translation": "Kunne ikke kopiere ID"
@@ -11457,15 +11457,15 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        110
+        108
       ],
       [
         "src/views/board/index.tsx",
-        446
+        454
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        79
+        80
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -11473,7 +11473,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        84
+        88
       ]
     ],
     "translation": "Kunne ikke kopiere link"
@@ -11485,7 +11485,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        201
+        203
       ]
     ],
     "translation": "Kunne ikke oprette kort"
@@ -11521,11 +11521,11 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        60
+        62
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        76
+        78
       ]
     ],
     "translation": "Kunne ikke oprette skabelon"
@@ -11537,7 +11537,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        118
+        127
       ]
     ],
     "translation": "Kunne ikke oprette webhook"
@@ -11565,7 +11565,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        73
+        76
       ]
     ],
     "translation": "Kunne ikke slette vedhæftet fil"
@@ -11577,7 +11577,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        51
+        52
       ]
     ],
     "translation": "Kunne ikke slette kort"
@@ -11625,7 +11625,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        36
+        44
       ]
     ],
     "translation": "Kunne ikke slette webhook"
@@ -11637,11 +11637,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        63
+        64
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        53
+        54
       ]
     ],
     "translation": "Kunne ikke duplikere kort"
@@ -11653,7 +11653,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        45
+        43
       ]
     ],
     "translation": "Kunne ikke flytte tavle"
@@ -11665,7 +11665,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        41
+        43
       ]
     ],
     "translation": "Kunne ikke flytte kort"
@@ -11741,11 +11741,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        163
+        182
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        185
+        187
       ]
     ],
     "translation": "Kunne ikke teste webhook"
@@ -11757,7 +11757,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        79
+        82
       ]
     ],
     "translation": "Kunne ikke opdatere tavle"
@@ -11769,7 +11769,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        72
+        78
       ]
     ],
     "translation": "Kunne ikke opdatere tavlens URL"
@@ -11781,7 +11781,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        56
+        59
       ]
     ],
     "translation": "Kunne ikke opdatere tavlens synlighed"
@@ -11793,7 +11793,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        348
+        356
       ],
       [
         "src/views/card/index.tsx",
@@ -11845,11 +11845,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        385
+        393
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        63
+        65
       ]
     ],
     "translation": "Kunne ikke opdatere forfaldsdato"
@@ -11861,7 +11861,7 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        74
+        76
       ]
     ],
     "translation": "Kunne ikke opdatere etiketter"
@@ -11873,11 +11873,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        291
+        299
       ],
       [
         "src/views/card/components/ListSelector.tsx",
-        54
+        56
       ]
     ],
     "translation": "Kunne ikke opdatere liste"
@@ -11889,7 +11889,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        81
+        83
       ]
     ],
     "translation": "Kunne ikke opdatere medlemmer"
@@ -11917,7 +11917,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        84
+        83
       ],
       [
         "src/views/members/index.tsx",
@@ -11933,7 +11933,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        137
+        152
       ]
     ],
     "translation": "Kunne ikke opdatere webhook"
@@ -11945,7 +11945,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        182
+        178
       ]
     ],
     "translation": "Fjern tavle fra arkiv"
@@ -12171,11 +12171,11 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        175
+        180
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        84
+        86
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
@@ -12283,7 +12283,7 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        254
+        253
       ]
     ],
     "translation": "Opgrader"
@@ -12321,7 +12321,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        160
+        159
       ]
     ],
     "translation": ""
@@ -12361,11 +12361,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        239
+        265
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        220
+        225
       ]
     ],
     "translation": "URL"
@@ -12393,7 +12393,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        25
+        31
       ]
     ],
     "translation": "URL må højst være 2048 tegn"
@@ -12437,7 +12437,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        154
+        161
       ]
     ],
     "translation": "Brug skabelon"
@@ -12449,7 +12449,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        265
+        291
       ]
     ],
     "translation": "Bruges til at signere webhook-payloads til verificering. Lad feltet være tomt for at beholde den eksisterende hemmelighed."
@@ -12461,7 +12461,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        266
+        265
       ],
       [
         "src/views/members/index.tsx",
@@ -12537,7 +12537,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        153
+        157
       ]
     ],
     "translation": "Kun visning"
@@ -12561,7 +12561,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        187
+        191
       ]
     ],
     "translation": "Se arbejdsområde"
@@ -12573,7 +12573,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        100
+        104
       ]
     ],
     "translation": "Synlighed"
@@ -12641,7 +12641,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        110
+        119
       ]
     ],
     "translation": "Webhook oprettet"
@@ -12653,7 +12653,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        111
+        120
       ]
     ],
     "translation": "Webhooken blev oprettet"
@@ -12665,7 +12665,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        28
+        36
       ]
     ],
     "translation": "Webhook slettet"
@@ -12677,7 +12677,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        29
+        37
       ]
     ],
     "translation": "Webhooken blev slettet"
@@ -12689,7 +12689,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        20
+        26
       ]
     ],
     "translation": "Webhookens navn må højst være 255 tegn"
@@ -12701,7 +12701,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        19
+        25
       ]
     ],
     "translation": "Webhookens navn er påkrævet"
@@ -12713,7 +12713,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        125
+        126
       ]
     ],
     "translation": ""
@@ -12725,11 +12725,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        155
+        174
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        178
+        180
       ]
     ],
     "translation": "Webhook-test mislykkedes"
@@ -12741,7 +12741,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        129
+        144
       ]
     ],
     "translation": "Webhook opdateret"
@@ -12753,7 +12753,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        130
+        145
       ]
     ],
     "translation": "Webhooken blev opdateret"
@@ -12765,7 +12765,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        23
+        29
       ]
     ],
     "translation": "Webhook-URL er påkrævet"
@@ -12873,7 +12873,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        861
+        869
       ],
       [
         "src/views/boards/index.tsx",
@@ -12885,7 +12885,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        125
+        129
       ],
       [
         "src/views/public/boards/index.tsx",
@@ -13177,7 +13177,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        92
+        97
       ]
     ],
     "translation": "Du er ved at ændre din adgangskode."
@@ -13250,7 +13250,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        68
+        64
       ]
     ],
     "translation": "Du har ingen andre arbejdsområder, som denne tavle kan flyttes til."
@@ -13266,19 +13266,19 @@
       ],
       [
         "src/views/board/components/VisibilityButton.tsx",
-        72
+        76
       ],
       [
         "src/views/board/index.tsx",
-        929
+        937
       ],
       [
         "src/views/board/index.tsx",
-        1006
+        1014
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
-        71
+        85
       ],
       [
         "src/views/boards/index.tsx",
@@ -13346,7 +13346,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        252
+        251
       ]
     ],
     "translation": ""
@@ -13398,7 +13398,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        273
+        270
       ]
     ],
     "translation": "Din konto har allerede en adgangskode. Du kan ændre den under dine kontoindstillinger."
@@ -13422,7 +13422,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        273
+        272
       ]
     ],
     "translation": "Din avatar"
@@ -13434,7 +13434,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        382
+        399
       ]
     ],
     "translation": "Dine tavler er blevet importeret."
@@ -13446,7 +13446,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        42
+        45
       ]
     ],
     "translation": "Dit viste navn er blevet opdateret."
@@ -13470,7 +13470,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        100
+        113
       ]
     ],
     "translation": "Din GitHub-konto er blevet forbundet."
@@ -13482,7 +13482,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        123
+        137
       ]
     ],
     "translation": "Din GitHub-konto er blevet afbrudt."
@@ -13494,7 +13494,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        220
+        237
       ]
     ],
     "translation": "Din GitHub-konto er forbundet."
@@ -13506,7 +13506,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        116
+        113
       ]
     ],
     "translation": "Din licens er blevet aktiveret."
@@ -13518,7 +13518,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        125
+        122
       ]
     ],
     "translation": "Din licens er ikke aktiv. Kontrollér din konto."
@@ -13566,7 +13566,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        190
+        187
       ]
     ],
     "translation": "Dit profilbillede er blevet opdateret."
@@ -13578,7 +13578,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        230
+        245
       ]
     ],
     "translation": "Dine projekter er blevet importeret."
@@ -13590,7 +13590,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        80
+        91
       ]
     ],
     "translation": "Din Trello-konto er blevet afbrudt."
@@ -13602,7 +13602,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        171
+        186
       ]
     ],
     "translation": "Din Trello-konto er forbundet."

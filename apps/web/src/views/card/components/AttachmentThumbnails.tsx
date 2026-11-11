@@ -11,8 +11,9 @@ import {
   HiXMark,
 } from "react-icons/hi2";
 
+import { useDeleteAttachment } from "@kan/api-client/hooks";
+
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
@@ -50,40 +51,42 @@ export function AttachmentThumbnails({
 
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const deleteAttachment = api.attachment.delete.useMutation({
-    onMutate: async (args) => {
-      if (isReadOnly) return;
+  const deleteAttachment = useDeleteAttachment({
+    mutation: {
+      onMutate: async (args) => {
+        if (isReadOnly) return;
 
-      await cardCache.byId.cancel({ cardPublicId });
-      const currentState = cardCache.byId.getData({ cardPublicId });
+        await cardCache.byId.cancel({ cardPublicId });
+        const currentState = cardCache.byId.getData({ cardPublicId });
 
-      cardCache.byId.setData({ cardPublicId }, (oldCard) => {
-        if (!oldCard) return oldCard;
-        const updatedAttachments = oldCard.attachments.filter(
-          (attachment) => attachment.publicId !== args.attachmentPublicId,
-        );
-        return { ...oldCard, attachments: updatedAttachments };
-      });
+        cardCache.byId.setData({ cardPublicId }, (oldCard) => {
+          if (!oldCard) return oldCard;
+          const updatedAttachments = oldCard.attachments.filter(
+            (attachment) => attachment.publicId !== args.attachmentPublicId,
+          );
+          return { ...oldCard, attachments: updatedAttachments };
+        });
 
-      return { previousState: currentState };
-    },
-    onError: (_error, _args, context) => {
-      if (isReadOnly) return;
-      cardCache.byId.setData({ cardPublicId }, context?.previousState);
-      showPopup({
-        header: t`Unable to delete attachment`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSuccess: () => {
-      if (isReadOnly) return;
-      // Close viewer if the deleted image was being viewed
-      setSelectedIndex(null);
-    },
-    onSettled: async () => {
-      if (isReadOnly) return;
-      await invalidateCard(cardCache, cardPublicId);
+        return { previousState: currentState };
+      },
+      onError: (_error, _args, context) => {
+        if (isReadOnly) return;
+        cardCache.byId.setData({ cardPublicId }, context?.previousState);
+        showPopup({
+          header: t`Unable to delete attachment`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSuccess: () => {
+        if (isReadOnly) return;
+        // Close viewer if the deleted image was being viewed
+        setSelectedIndex(null);
+      },
+      onSettled: async () => {
+        if (isReadOnly) return;
+        await invalidateCard(cardCache, cardPublicId);
+      },
     },
   });
 

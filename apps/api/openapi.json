@@ -1,6 +1,134 @@
 {
   "openapi": "3.0.0",
   "paths": {
+    "/cards/{cardPublicId}/attachments/upload-url": {
+      "post": {
+        "operationId": "generateAttachmentUploadUrl",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateUploadUrlDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadUrlResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Generate a presigned URL for uploading an attachment",
+        "tags": [
+          "Attachments"
+        ]
+      }
+    },
+    "/cards/{cardPublicId}/attachments/confirm": {
+      "post": {
+        "operationId": "confirmAttachment",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmAttachmentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Confirm an attachment upload and save it to the card",
+        "tags": [
+          "Attachments"
+        ]
+      }
+    },
+    "/attachments/{attachmentPublicId}": {
+      "delete": {
+        "operationId": "deleteAttachment",
+        "parameters": [
+          {
+            "name": "attachmentPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteAttachmentResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete an attachment",
+        "tags": [
+          "Attachments"
+        ]
+      }
+    },
     "/workspaces/{workspacePublicId}/boards": {
       "get": {
         "operationId": "getBoards",
@@ -510,7 +638,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/BoardMemberDto"
+                    "$ref": "#/components/schemas/BoardMemberDto_Output"
                   }
                 }
               }
@@ -555,7 +683,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BoardMemberRoleResultDto"
+                  "$ref": "#/components/schemas/BoardMemberRoleResultDto_Output"
                 }
               }
             }
@@ -609,7 +737,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BoardMemberRoleResultDto"
+                  "$ref": "#/components/schemas/BoardMemberRoleResultDto_Output"
                 }
               }
             }
@@ -651,7 +779,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BoardMemberRemoveResponseDto"
+                  "$ref": "#/components/schemas/BoardMemberRemoveResponseDto_Output"
                 }
               }
             }
@@ -1194,7 +1322,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChecklistResponseDto"
+                  "$ref": "#/components/schemas/ChecklistResponseDto_Output"
                 }
               }
             }
@@ -1228,7 +1356,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeleteChecklistResponseDto"
+                  "$ref": "#/components/schemas/DeleteChecklistResponseDto_Output"
                 }
               }
             }
@@ -1274,7 +1402,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChecklistItemResponseDto"
+                  "$ref": "#/components/schemas/ChecklistItemResponseDto_Output"
                 }
               }
             }
@@ -1320,7 +1448,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChecklistItemResponseDto"
+                  "$ref": "#/components/schemas/ChecklistItemResponseDto_Output"
                 }
               }
             }
@@ -1354,7 +1482,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeleteChecklistResponseDto"
+                  "$ref": "#/components/schemas/DeleteChecklistResponseDto_Output"
                 }
               }
             }
@@ -1400,7 +1528,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChecklistResponseDto"
+                  "$ref": "#/components/schemas/ChecklistResponseDto_Output"
                 }
               }
             }
@@ -1437,7 +1565,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateFeedbackResponseDto"
+                  "$ref": "#/components/schemas/CreateFeedbackResponseDto_Output"
                 }
               }
             }
@@ -1804,7 +1932,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LabelResponseDto"
+                  "$ref": "#/components/schemas/LabelResponseDto_Output"
                 }
               }
             }
@@ -1848,7 +1976,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LabelResponseDto"
+                  "$ref": "#/components/schemas/LabelResponseDto_Output"
                 }
               }
             }
@@ -1882,7 +2010,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeleteLabelResponseDto"
+                  "$ref": "#/components/schemas/DeleteLabelResponseDto_Output"
                 }
               }
             }
@@ -1919,7 +2047,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LabelResponseDto"
+                  "$ref": "#/components/schemas/LabelResponseDto_Output"
                 }
               }
             }
@@ -1956,7 +2084,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListResponseDto"
+                  "$ref": "#/components/schemas/ListResponseDto_Output"
                 }
               }
             }
@@ -1992,7 +2120,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeleteListResponseDto"
+                  "$ref": "#/components/schemas/DeleteListResponseDto_Output"
                 }
               }
             }
@@ -2036,7 +2164,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListResponseDto"
+                  "$ref": "#/components/schemas/ListResponseDto_Output"
                 }
               }
             }
@@ -2120,7 +2248,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MemberInviteResponseDto"
+                  "$ref": "#/components/schemas/MemberInviteResponseDto_Output"
                 }
               }
             }
@@ -2164,7 +2292,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeleteMemberResponseDto"
+                  "$ref": "#/components/schemas/DeleteMemberResponseDto_Output"
                 }
               }
             }
@@ -2218,7 +2346,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateMemberRoleResponseDto"
+                  "$ref": "#/components/schemas/UpdateMemberRoleResponseDto_Output"
                 }
               }
             }
@@ -2254,7 +2382,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ActiveInviteLinkResponseDto"
+                  "$ref": "#/components/schemas/ActiveInviteLinkResponseDto_Output"
                 }
               }
             }
@@ -2290,7 +2418,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateInviteLinkResponseDto"
+                  "$ref": "#/components/schemas/CreateInviteLinkResponseDto_Output"
                 }
               }
             }
@@ -2324,7 +2452,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeactivateInviteLinkResponseDto"
+                  "$ref": "#/components/schemas/DeactivateInviteLinkResponseDto_Output"
                 }
               }
             }
@@ -2360,7 +2488,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InviteByCodeResponseDto"
+                  "$ref": "#/components/schemas/InviteByCodeResponseDto_Output"
                 }
               }
             }
@@ -2392,7 +2520,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AcceptInviteLinkResponseDto"
+                  "$ref": "#/components/schemas/AcceptInviteLinkResponseDto_Output"
                 }
               }
             }
@@ -2428,7 +2556,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetMyPermissionsResponseDto"
+                  "$ref": "#/components/schemas/GetMyPermissionsResponseDto_Output"
                 }
               }
             }
@@ -2472,7 +2600,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetMemberPermissionsResponseDto"
+                  "$ref": "#/components/schemas/GetMemberPermissionsResponseDto_Output"
                 }
               }
             }
@@ -2526,7 +2654,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponseDto"
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
                 }
               }
             }
@@ -2580,7 +2708,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponseDto"
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
                 }
               }
             }
@@ -2624,7 +2752,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponseDto"
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
                 }
               }
             }
@@ -2660,7 +2788,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponseDto"
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
                 }
               }
             }
@@ -2696,7 +2824,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetWorkspaceRolesResponseDto"
+                  "$ref": "#/components/schemas/GetWorkspaceRolesResponseDto_Output"
                 }
               }
             }
@@ -2732,7 +2860,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetWorkspaceRolePermissionsResponseDto"
+                  "$ref": "#/components/schemas/GetWorkspaceRolePermissionsResponseDto_Output"
                 }
               }
             }
@@ -2776,7 +2904,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetRolePermissionsResponseDto"
+                  "$ref": "#/components/schemas/GetRolePermissionsResponseDto_Output"
                 }
               }
             }
@@ -2830,7 +2958,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponseDto"
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
                 }
               }
             }
@@ -2884,7 +3012,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponseDto"
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
                 }
               }
             }
@@ -2898,6 +3026,107 @@
         "summary": "Revoke permission from role",
         "tags": [
           "Permissions"
+        ]
+      }
+    },
+    "/users/me": {
+      "get": {
+        "operationId": "getUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get the current user",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/users": {
+      "put": {
+        "operationId": "updateUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateUserResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update the current user",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/users/me/password": {
+      "post": {
+        "operationId": "setPassword",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetPasswordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Set a password for a user who has none yet",
+        "tags": [
+          "Users"
         ]
       }
     },
@@ -3136,7 +3365,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WorkspaceListItemDto"
+                    "$ref": "#/components/schemas/WorkspaceListItemDto_Output"
                   }
                 }
               }
@@ -3172,7 +3401,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceCreateResponseDto"
+                  "$ref": "#/components/schemas/WorkspaceCreateResponseDto_Output"
                 }
               }
             }
@@ -3220,7 +3449,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CheckSlugAvailabilityResponseDto"
+                  "$ref": "#/components/schemas/CheckSlugAvailabilityResponseDto_Output"
                 }
               }
             }
@@ -3283,7 +3512,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceWithBoardsResponseDto"
+                  "$ref": "#/components/schemas/WorkspaceWithBoardsResponseDto_Output"
                 }
               }
             }
@@ -3319,7 +3548,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceDetailResponseDto"
+                  "$ref": "#/components/schemas/WorkspaceDetailResponseDto_Output"
                 }
               }
             }
@@ -3363,7 +3592,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceUpdateResponseDto"
+                  "$ref": "#/components/schemas/WorkspaceUpdateResponseDto_Output"
                 }
               }
             }
@@ -3397,7 +3626,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WorkspaceDeleteResponseDto"
+                  "$ref": "#/components/schemas/WorkspaceDeleteResponseDto_Output"
                 }
               }
             }
@@ -3530,6 +3759,125 @@
       }
     },
     "schemas": {
+      "GenerateUploadUrlDto": {
+        "type": "object",
+        "properties": {
+          "filename": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number",
+            "exclusiveMinimum": true,
+            "maximum": 52428800,
+            "minimum": 0
+          }
+        },
+        "required": [
+          "filename",
+          "contentType",
+          "size"
+        ]
+      },
+      "UploadUrlResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "key"
+        ],
+        "additionalProperties": false
+      },
+      "ConfirmAttachmentDto": {
+        "type": "object",
+        "properties": {
+          "s3Key": {
+            "type": "string"
+          },
+          "filename": {
+            "type": "string"
+          },
+          "originalFilename": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number",
+            "exclusiveMinimum": true,
+            "minimum": 0
+          }
+        },
+        "required": [
+          "s3Key",
+          "filename",
+          "originalFilename",
+          "contentType",
+          "size"
+        ]
+      },
+      "AttachmentResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "filename": {
+            "type": "string"
+          },
+          "originalFilename": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number"
+          },
+          "s3Key": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          }
+        },
+        "required": [
+          "publicId",
+          "filename",
+          "originalFilename",
+          "contentType",
+          "size",
+          "s3Key",
+          "createdAt"
+        ],
+        "additionalProperties": false
+      },
+      "DeleteAttachmentResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
+      },
       "BoardListItemDto_Output": {
         "type": "object",
         "properties": {
@@ -4400,7 +4748,7 @@
         ],
         "additionalProperties": false
       },
-      "BoardMemberDto": {
+      "BoardMemberDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -4452,6 +4800,7 @@
               "email",
               "image"
             ],
+            "additionalProperties": false,
             "nullable": true
           }
         },
@@ -4463,7 +4812,8 @@
           "workspaceRole",
           "createdAt",
           "user"
-        ]
+        ],
+        "additionalProperties": false
       },
       "AddBoardMemberDto": {
         "type": "object",
@@ -4485,7 +4835,7 @@
           "workspaceMemberPublicId"
         ]
       },
-      "BoardMemberRoleResultDto": {
+      "BoardMemberRoleResultDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -4502,7 +4852,8 @@
         "required": [
           "publicId",
           "role"
-        ]
+        ],
+        "additionalProperties": false
       },
       "UpdateBoardMemberRoleDto": {
         "type": "object",
@@ -4519,7 +4870,7 @@
           "role"
         ]
       },
-      "BoardMemberRemoveResponseDto": {
+      "BoardMemberRemoveResponseDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -4528,7 +4879,8 @@
         },
         "required": [
           "publicId"
-        ]
+        ],
+        "additionalProperties": false
       },
       "CreateCardDto": {
         "type": "object",
@@ -5606,7 +5958,7 @@
           "name"
         ]
       },
-      "ChecklistResponseDto": {
+      "ChecklistResponseDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -5619,9 +5971,10 @@
         "required": [
           "publicId",
           "name"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "DeleteChecklistResponseDto": {
+      "DeleteChecklistResponseDto_Output": {
         "type": "object",
         "properties": {
           "success": {
@@ -5630,7 +5983,8 @@
         },
         "required": [
           "success"
-        ]
+        ],
+        "additionalProperties": false
       },
       "CreateChecklistItemDto": {
         "type": "object",
@@ -5645,7 +5999,7 @@
           "title"
         ]
       },
-      "ChecklistItemResponseDto": {
+      "ChecklistItemResponseDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -5662,7 +6016,8 @@
           "publicId",
           "title",
           "completed"
-        ]
+        ],
+        "additionalProperties": false
       },
       "UpdateChecklistItemDto": {
         "type": "object",
@@ -5712,7 +6067,7 @@
           "url"
         ]
       },
-      "CreateFeedbackResponseDto": {
+      "CreateFeedbackResponseDto_Output": {
         "type": "object",
         "properties": {
           "success": {
@@ -5721,7 +6076,8 @@
         },
         "required": [
           "success"
-        ]
+        ],
+        "additionalProperties": false
       },
       "ExternalSourceItemDto_Output": {
         "type": "object",
@@ -5891,7 +6247,7 @@
         ],
         "additionalProperties": false
       },
-      "LabelResponseDto": {
+      "LabelResponseDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -5909,7 +6265,8 @@
           "publicId",
           "name",
           "colourCode"
-        ]
+        ],
+        "additionalProperties": false
       },
       "CreateLabelDto": {
         "type": "object",
@@ -5954,7 +6311,7 @@
           "colourCode"
         ]
       },
-      "DeleteLabelResponseDto": {
+      "DeleteLabelResponseDto_Output": {
         "type": "object",
         "properties": {
           "success": {
@@ -5963,7 +6320,8 @@
         },
         "required": [
           "success"
-        ]
+        ],
+        "additionalProperties": false
       },
       "CreateListDto": {
         "type": "object",
@@ -5982,7 +6340,7 @@
           "boardPublicId"
         ]
       },
-      "ListResponseDto": {
+      "ListResponseDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -5995,9 +6353,10 @@
         "required": [
           "publicId",
           "name"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "DeleteListResponseDto": {
+      "DeleteListResponseDto_Output": {
         "type": "object",
         "properties": {
           "success": {
@@ -6006,7 +6365,8 @@
         },
         "required": [
           "success"
-        ]
+        ],
+        "additionalProperties": false
       },
       "UpdateListDto": {
         "type": "object",
@@ -6033,7 +6393,7 @@
           "email"
         ]
       },
-      "MemberInviteResponseDto": {
+      "MemberInviteResponseDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -6042,9 +6402,10 @@
         },
         "required": [
           "publicId"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "DeleteMemberResponseDto": {
+      "DeleteMemberResponseDto_Output": {
         "type": "object",
         "properties": {
           "success": {
@@ -6053,7 +6414,8 @@
         },
         "required": [
           "success"
-        ]
+        ],
+        "additionalProperties": false
       },
       "UpdateMemberRoleDto": {
         "type": "object",
@@ -6071,7 +6433,7 @@
           "role"
         ]
       },
-      "UpdateMemberRoleResponseDto": {
+      "UpdateMemberRoleResponseDto_Output": {
         "type": "object",
         "properties": {
           "success": {
@@ -6084,9 +6446,10 @@
         "required": [
           "success",
           "role"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "ActiveInviteLinkResponseDto": {
+      "ActiveInviteLinkResponseDto_Output": {
         "type": "object",
         "properties": {
           "id": {
@@ -6109,9 +6472,10 @@
         },
         "required": [
           "isActive"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "CreateInviteLinkResponseDto": {
+      "CreateInviteLinkResponseDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -6135,9 +6499,10 @@
           "inviteCode",
           "inviteLink",
           "expiresAt"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "DeactivateInviteLinkResponseDto": {
+      "DeactivateInviteLinkResponseDto_Output": {
         "type": "object",
         "properties": {
           "success": {
@@ -6146,9 +6511,10 @@
         },
         "required": [
           "success"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "InviteByCodeResponseDto": {
+      "InviteByCodeResponseDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -6168,7 +6534,8 @@
           "publicId",
           "status",
           "expiresAt"
-        ]
+        ],
+        "additionalProperties": false
       },
       "AcceptInviteLinkDto": {
         "type": "object",
@@ -6182,7 +6549,7 @@
           "inviteCode"
         ]
       },
-      "AcceptInviteLinkResponseDto": {
+      "AcceptInviteLinkResponseDto_Output": {
         "type": "object",
         "properties": {
           "success": {
@@ -6197,9 +6564,10 @@
         },
         "required": [
           "success"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "GetMyPermissionsResponseDto": {
+      "GetMyPermissionsResponseDto_Output": {
         "type": "object",
         "properties": {
           "permissions": {
@@ -6215,9 +6583,10 @@
         "required": [
           "permissions",
           "role"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "GetMemberPermissionsResponseDto": {
+      "GetMemberPermissionsResponseDto_Output": {
         "type": "object",
         "properties": {
           "memberPublicId": {
@@ -6247,7 +6616,8 @@
               "required": [
                 "permission",
                 "granted"
-              ]
+              ],
+              "additionalProperties": false
             }
           }
         },
@@ -6256,7 +6626,8 @@
           "role",
           "permissions",
           "overrides"
-        ]
+        ],
+        "additionalProperties": false
       },
       "PermissionActionDto": {
         "type": "object",
@@ -6295,18 +6666,7 @@
           "permission"
         ]
       },
-      "SuccessResponseDto": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "success"
-        ]
-      },
-      "GetWorkspaceRolesResponseDto": {
+      "GetWorkspaceRolesResponseDto_Output": {
         "type": "object",
         "properties": {
           "roles": {
@@ -6338,15 +6698,17 @@
                 "description",
                 "hierarchyLevel",
                 "isSystem"
-              ]
+              ],
+              "additionalProperties": false
             }
           }
         },
         "required": [
           "roles"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "GetWorkspaceRolePermissionsResponseDto": {
+      "GetWorkspaceRolePermissionsResponseDto_Output": {
         "type": "object",
         "properties": {
           "roles": {
@@ -6372,15 +6734,17 @@
                 "publicId",
                 "name",
                 "permissions"
-              ]
+              ],
+              "additionalProperties": false
             }
           }
         },
         "required": [
           "roles"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "GetRolePermissionsResponseDto": {
+      "GetRolePermissionsResponseDto_Output": {
         "type": "object",
         "properties": {
           "rolePublicId": {
@@ -6400,6 +6764,106 @@
           "rolePublicId",
           "name",
           "permissions"
+        ],
+        "additionalProperties": false
+      },
+      "UserResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          },
+          "stripeCustomerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasPassword": {
+            "type": "boolean"
+          },
+          "hasMagicLinkAccount": {
+            "type": "boolean"
+          },
+          "apiKey": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "prefix": {
+                "type": "string",
+                "nullable": true
+              }
+            },
+            "required": [
+              "id",
+              "prefix"
+            ],
+            "additionalProperties": false,
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "name",
+          "image",
+          "stripeCustomerId",
+          "hasPassword",
+          "hasMagicLinkAccount",
+          "apiKey"
+        ],
+        "additionalProperties": false
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateUserResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name",
+          "image"
+        ],
+        "additionalProperties": false
+      },
+      "SetPasswordDto": {
+        "type": "object",
+        "properties": {
+          "newPassword": {
+            "type": "string",
+            "minLength": 8
+          }
+        },
+        "required": [
+          "newPassword"
         ]
       },
       "WebhookResponseDto_Output": {
@@ -6651,7 +7115,7 @@
           "type"
         ]
       },
-      "WorkspaceListItemDto": {
+      "WorkspaceListItemDto_Output": {
         "type": "object",
         "properties": {
           "role": {
@@ -6705,15 +7169,17 @@
               "weekStartDay",
               "cardPrefix",
               "deletedAt"
-            ]
+            ],
+            "additionalProperties": false
           }
         },
         "required": [
           "role",
           "workspace"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "CheckSlugAvailabilityResponseDto": {
+      "CheckSlugAvailabilityResponseDto_Output": {
         "type": "object",
         "properties": {
           "isAvailable": {
@@ -6726,9 +7192,10 @@
         "required": [
           "isAvailable",
           "isReserved"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "WorkspaceWithBoardsResponseDto": {
+      "WorkspaceWithBoardsResponseDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -6763,7 +7230,8 @@
                 "publicId",
                 "slug",
                 "name"
-              ]
+              ],
+              "additionalProperties": false
             }
           }
         },
@@ -6773,9 +7241,10 @@
           "description",
           "slug",
           "boards"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "WorkspaceDetailResponseDto": {
+      "WorkspaceDetailResponseDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -6841,6 +7310,7 @@
                     "name",
                     "image"
                   ],
+                  "additionalProperties": false,
                   "nullable": true
                 }
               },
@@ -6850,7 +7320,8 @@
                 "status",
                 "createdAt",
                 "user"
-              ]
+              ],
+              "additionalProperties": false
             }
           },
           "subscriptions": {
@@ -6897,7 +7368,8 @@
                 "partnerTier",
                 "periodStart",
                 "periodEnd"
-              ]
+              ],
+              "additionalProperties": false
             }
           }
         },
@@ -6909,7 +7381,8 @@
           "weekStartDay",
           "members",
           "subscriptions"
-        ]
+        ],
+        "additionalProperties": false
       },
       "CreateWorkspaceDto": {
         "type": "object",
@@ -6942,7 +7415,7 @@
           "name"
         ]
       },
-      "WorkspaceCreateResponseDto": {
+      "WorkspaceCreateResponseDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -6978,7 +7451,8 @@
           "description",
           "plan",
           "cardPrefix"
-        ]
+        ],
+        "additionalProperties": false
       },
       "UpdateWorkspaceDto": {
         "type": "object",
@@ -7026,7 +7500,7 @@
           }
         }
       },
-      "WorkspaceUpdateResponseDto": {
+      "WorkspaceUpdateResponseDto_Output": {
         "type": "object",
         "properties": {
           "publicId": {
@@ -7068,9 +7542,10 @@
           "plan",
           "showEmailsToMembers",
           "weekStartDay"
-        ]
+        ],
+        "additionalProperties": false
       },
-      "WorkspaceDeleteResponseDto": {
+      "WorkspaceDeleteResponseDto_Output": {
         "type": "object",
         "properties": {
           "success": {
@@ -7079,7 +7554,8 @@
         },
         "required": [
           "success"
-        ]
+        ],
+        "additionalProperties": false
       },
       "StatsDto_Output": {
         "type": "object",
