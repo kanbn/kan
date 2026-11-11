@@ -156,7 +156,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        498
+        506
       ]
     ],
     "translation": "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
@@ -172,7 +172,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        350
+        356
       ]
     ],
     "translation": "{projectCount, plural, one {Import project (1)} other {Import projects ({projectCount})}}"
@@ -3123,7 +3123,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        204
+        208
       ]
     ],
     "translation": "Connect"
@@ -6230,11 +6230,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        238
+        244
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        390
+        398
       ]
     ],
     "translation": "Import complete"
@@ -6246,11 +6246,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        251
+        257
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        403
+        411
       ]
     ],
     "translation": "Import failed"
@@ -7577,7 +7577,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        522
+        530
       ]
     ],
     "translation": "New import"
@@ -7765,7 +7765,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        441
+        449
       ]
     ],
     "translation": "No boards found"
@@ -7873,7 +7873,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        292
+        298
       ]
     ],
     "translation": "No projects found"
@@ -8625,11 +8625,11 @@
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        252
+        258
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        404
+        412
       ],
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
@@ -9766,11 +9766,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        324
+        330
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        473
+        481
       ]
     ],
     "translation": "Select all"
@@ -9794,7 +9794,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        204
+        208
       ]
     ],
     "translation": "Select source"
@@ -13581,7 +13581,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        391
+        399
       ]
     ],
     "translation": "Your boards have been imported."
@@ -13725,7 +13725,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        239
+        245
       ]
     ],
     "translation": "Your projects have been imported."

@@ -87,7 +87,7 @@
       "boardCount": ["boardCount"]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 498]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 506]],
     "translation": "{boardCount, plural, one {Board importieren (1)} other {Boards importieren ({boardCount})}}"
   },
   "yndBF+": {
@@ -96,7 +96,7 @@
       "projectCount": ["projectCount"]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 350]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 356]],
     "translation": "{projectCount, plural, one {Projekt importieren (1)} other {Projekte importieren ({projectCount})}}"
   },
   "9lFfqv": {
@@ -1858,7 +1858,7 @@
     "message": "Connect",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 204]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 208]],
     "translation": "Verbinden"
   },
   "3jod3l": {
@@ -3710,8 +3710,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/components/ImportBoardsForm.tsx", 238],
-      ["src/views/boards/components/ImportBoardsForm.tsx", 390]
+      ["src/views/boards/components/ImportBoardsForm.tsx", 244],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 398]
     ],
     "translation": "Import abgeschlossen"
   },
@@ -3720,8 +3720,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/components/ImportBoardsForm.tsx", 251],
-      ["src/views/boards/components/ImportBoardsForm.tsx", 403]
+      ["src/views/boards/components/ImportBoardsForm.tsx", 257],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 411]
     ],
     "translation": "Import fehlgeschlagen"
   },
@@ -4489,7 +4489,7 @@
     "message": "New import",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 522]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 530]],
     "translation": "Neuer Import"
   },
   "n1GRql": {
@@ -4603,7 +4603,7 @@
     "message": "No boards found",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 441]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 449]],
     "translation": "Keine Boards gefunden"
   },
   "WAQMrN": {
@@ -4666,7 +4666,7 @@
     "message": "No projects found",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 292]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 298]],
     "translation": "Keine Projekte gefunden"
   },
   "ERpq2P": {
@@ -5105,8 +5105,8 @@
         37
       ],
       ["src/views/board/members/index.tsx", 88],
-      ["src/views/boards/components/ImportBoardsForm.tsx", 252],
-      ["src/views/boards/components/ImportBoardsForm.tsx", 404],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 258],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 412],
       ["src/views/card/components/AttachmentThumbnails.tsx", 77],
       ["src/views/card/components/ChecklistItemRow.tsx", 81],
       ["src/views/card/components/ChecklistItemRow.tsx", 111],
@@ -5728,8 +5728,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/components/ImportBoardsForm.tsx", 324],
-      ["src/views/boards/components/ImportBoardsForm.tsx", 473]
+      ["src/views/boards/components/ImportBoardsForm.tsx", 330],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 481]
     ],
     "translation": "Alle auswählen"
   },
@@ -5744,7 +5744,7 @@
     "message": "Select source",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 204]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 208]],
     "translation": "Quelle auswählen"
   },
   "ppaRWv": {
@@ -8017,7 +8017,7 @@
     "message": "Your boards have been imported.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 391]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 399]],
     "translation": "Ihre Boards wurden importiert."
   },
   "LqWW5F": {
@@ -8105,7 +8105,7 @@
     "message": "Your projects have been imported.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 239]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 245]],
     "translation": "Ihre Projekte wurden importiert."
   },
   "CJWDTP": {
