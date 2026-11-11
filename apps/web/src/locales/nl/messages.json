@@ -87,7 +87,7 @@
       "boardCount": ["boardCount"]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 489]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 498]],
     "translation": "{boardCount, plural, one {Bord importeren (1)} other {Borden importeren ({boardCount})}}"
   },
   "yndBF+": {
@@ -96,7 +96,7 @@
       "projectCount": ["projectCount"]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 341]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 350]],
     "translation": "{projectCount, plural, one {Project importeren (1)} other {Projecten importeren ({projectCount})}}"
   },
   "9lFfqv": {
@@ -244,8 +244,8 @@
     "comments": [],
     "origin": [
       ["src/views/boards/index.tsx", 33],
-      ["src/views/settings/components/NewWebhookModal.tsx", 321],
-      ["src/views/settings/components/WebhookList.tsx", 104]
+      ["src/views/settings/components/NewWebhookModal.tsx", 347],
+      ["src/views/settings/components/WebhookList.tsx", 105]
     ],
     "translation": "Actief"
   },
@@ -494,7 +494,7 @@
     "message": "Adjust the square crop to fit your avatar.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 256]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 253]],
     "translation": "Pas de vierkante uitsnede aan zodat deze bij je avatar past."
   },
   "U3pytU": {
@@ -606,21 +606,21 @@
     "message": "An error occurred while connecting your GitHub account.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 107]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 120]],
     "translation": "Er is een fout opgetreden bij het verbinden van je GitHub-account."
   },
   "Dz63YI": {
     "message": "An error occurred while disconnecting your GitHub account.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 130]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 144]],
     "translation": "Er is een fout opgetreden bij het loskoppelen van je GitHub-account."
   },
   "WmPhYW": {
     "message": "An error occurred while disconnecting your Trello account.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 87]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 98]],
     "translation": "Er is een fout opgetreden bij het loskoppelen van je Trello-account."
   },
   "ZXSPJt": {
@@ -636,7 +636,7 @@
     "message": "Annual",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 78]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 77]],
     "translation": "Jaarlijks"
   },
   "3bqt9U": {
@@ -744,7 +744,7 @@
     },
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 69]
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 80]
     ],
     "translation": "Weet je zeker dat je de webhook \"{webhookName}\" wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt."
   },
@@ -943,7 +943,7 @@
     "message": "Best for teams who want to collaborate and move faster together.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 101]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 100]],
     "translation": "Ideaal voor teams die willen samenwerken en sneller vooruit willen komen."
   },
   "ARvBT/": {
@@ -1476,15 +1476,15 @@
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 68],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 77],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 64],
-      ["src/views/onboarding/select-plan/index.tsx", 249],
-      ["src/views/settings/components/Avatar.tsx", 287],
+      ["src/views/onboarding/select-plan/index.tsx", 248],
+      ["src/views/settings/components/Avatar.tsx", 284],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 206],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
         39
       ],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 88],
-      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 75],
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 86],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 107]
     ],
     "translation": "Annuleren"
@@ -1567,8 +1567,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/AccountSettings.tsx", 88],
-      ["src/views/settings/AccountSettings.tsx", 100],
+      ["src/views/settings/AccountSettings.tsx", 93],
+      ["src/views/settings/AccountSettings.tsx", 105],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
     ],
@@ -1578,14 +1578,14 @@
     "message": "Change the application font size.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 63]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 68]],
     "translation": "Pas de lettergrootte van de applicatie aan."
   },
   "yD3ZSw": {
     "message": "Change your language preferences.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 53]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 58]],
     "translation": "Wijzig je taalvoorkeuren."
   },
   "gZxH/p": {
@@ -1640,7 +1640,7 @@
     "message": "Choose a plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 160]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 159]],
     "translation": "Kies een abonnement"
   },
   "5EMoSo": {
@@ -1709,7 +1709,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/Dashboard.tsx", 281],
+      ["src/components/Dashboard.tsx", 278],
       ["src/views/card/index.tsx", 415],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 184],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
@@ -1858,21 +1858,21 @@
     "message": "Connect",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 195]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 204]],
     "translation": "Verbinden"
   },
   "3jod3l": {
     "message": "Connect GitHub",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 212]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 229]],
     "translation": "GitHub verbinden"
   },
   "nk7caK": {
     "message": "Connect Trello",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 162]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 177]],
     "translation": "Verbind Trello"
   },
   "sDLCvT": {
@@ -1886,14 +1886,14 @@
     "message": "Connect your GitHub account to import projects.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 191]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 208]],
     "translation": "Verbind je GitHub-account om projecten te importeren."
   },
   "5eZwRW": {
     "message": "Connect your Trello account to import boards.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 149]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 164]],
     "translation": "Verbind je Trello-account om boards te importeren."
   },
   "jfC/xh": {
@@ -1936,7 +1936,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 255],
+      ["src/views/onboarding/select-plan/index.tsx", 254],
       ["src/views/onboarding/workspace-details/index.tsx", 324]
     ],
     "translation": "Doorgaan"
@@ -2154,7 +2154,7 @@
     "message": "Create webhook",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 344]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 370]],
     "translation": "Webhook aanmaken"
   },
   "FdtSNC": {
@@ -2171,7 +2171,7 @@
     "message": "Created",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/WebhookList.tsx", 238]],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 243]],
     "translation": "Aangemaakt"
   },
   "f8lDFq": {
@@ -2196,7 +2196,7 @@
     "message": "Crop your avatar",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 253]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 250]],
     "translation": "Bijsnijden van je avatar"
   },
   "MtNNDo": {
@@ -2353,8 +2353,8 @@
       ["src/views/card/components/DeleteCardConfirmation.tsx", 92],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 71],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 83],
-      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 82],
-      ["src/views/settings/components/WebhookList.tsx", 136]
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 93],
+      ["src/views/settings/components/WebhookList.tsx", 137]
     ],
     "translation": "Verwijderen"
   },
@@ -2363,8 +2363,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/AccountSettings.tsx", 70],
-      ["src/views/settings/AccountSettings.tsx", 80],
+      ["src/views/settings/AccountSettings.tsx", 75],
+      ["src/views/settings/AccountSettings.tsx", 85],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 96]
     ],
     "translation": "Account verwijderen"
@@ -2419,7 +2419,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 55]
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 66]
     ],
     "translation": "Webhook verwijderen"
   },
@@ -2484,14 +2484,14 @@
     "message": "Disconnect GitHub",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 223]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 240]],
     "translation": "GitHub loskoppelen"
   },
   "YBBifR": {
     "message": "Disconnect Trello",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 177]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 194]],
     "translation": "Trello loskoppelen"
   },
   "1sRmLC": {
@@ -2513,8 +2513,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/AccountSettings.tsx", 36],
-      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 71]
+      ["src/views/settings/AccountSettings.tsx", 39],
+      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 73]
     ],
     "translation": "Weergavenaam"
   },
@@ -2522,21 +2522,21 @@
     "message": "Display name cannot exceed 280 characters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 22]],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 24]],
     "translation": "Weergavenaam mag niet meer dan 280 tekens bevatten"
   },
   "KFJgmZ": {
     "message": "Display name must be at least 3 characters long",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 19]],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 21]],
     "translation": "Weergavenaam moet minimaal 3 tekens lang zijn"
   },
   "x8GeCD": {
     "message": "Display name updated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 41]],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 44]],
     "translation": "Weergavenaam bijgewerkt"
   },
   "evj0lK": {
@@ -2610,7 +2610,7 @@
     "message": "Download failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 142]],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 146]],
     "translation": "Download mislukt"
   },
   "XicmhT": {
@@ -2687,7 +2687,7 @@
     "comments": [],
     "origin": [
       ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 42],
-      ["src/views/settings/components/WebhookList.tsx", 128]
+      ["src/views/settings/components/WebhookList.tsx", 129]
     ],
     "translation": "Bewerken"
   },
@@ -2729,7 +2729,7 @@
     "message": "Edit webhook",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 210]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 236]],
     "translation": "Webhook bewerken"
   },
   "klpSmb": {
@@ -2766,7 +2766,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/InviteMemberForm.tsx", 281],
-      ["src/views/settings/AccountSettings.tsx", 43]
+      ["src/views/settings/AccountSettings.tsx", 46]
     ],
     "translation": "E-mail"
   },
@@ -2838,7 +2838,7 @@
     "message": "Enter new secret to update",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 258]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 284]],
     "translation": "Voer nieuw geheim in om bij te werken"
   },
   "fR9laE": {
@@ -2926,7 +2926,7 @@
     "message": "Error connecting GitHub",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 106]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 119]],
     "translation": "Fout bij verbinden met GitHub"
   },
   "cji2nM": {
@@ -2972,14 +2972,14 @@
     "message": "Error disconnecting GitHub",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 129]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 143]],
     "translation": "Fout bij loskoppelen van GitHub"
   },
   "lKAvEd": {
     "message": "Error disconnecting Trello",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 86]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 97]],
     "translation": "Fout bij loskoppelen Trello"
   },
   "rarRW/": {
@@ -3005,7 +3005,7 @@
     "message": "Error updating display name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 54]],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 57]],
     "translation": "Fout bij bijwerken van weergavenaam"
   },
   "CkVV1t": {
@@ -3059,7 +3059,7 @@
     "comments": [],
     "origin": [
       ["src/views/settings/components/Avatar.tsx", 69],
-      ["src/views/settings/components/Avatar.tsx", 199]
+      ["src/views/settings/components/Avatar.tsx", 196]
     ],
     "translation": "Fout bij uploaden van profielafbeelding"
   },
@@ -3068,8 +3068,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/NewWebhookModal.tsx", 271],
-      ["src/views/settings/components/WebhookList.tsx", 226]
+      ["src/views/settings/components/NewWebhookModal.tsx", 297],
+      ["src/views/settings/components/WebhookList.tsx", 231]
     ],
     "translation": "Gebeurtenissen"
   },
@@ -3138,7 +3138,7 @@
     "message": "Failed to create webhook",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 119]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 130]],
     "translation": "Webhook aanmaken mislukt"
   },
   "9YPBHv": {
@@ -3146,7 +3146,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 37]
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 47]
     ],
     "translation": "Webhook verwijderen mislukt"
   },
@@ -3171,8 +3171,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/NewWebhookModal.tsx", 164],
-      ["src/views/settings/components/WebhookList.tsx", 186]
+      ["src/views/settings/components/NewWebhookModal.tsx", 185],
+      ["src/views/settings/components/WebhookList.tsx", 190]
     ],
     "translation": "Webhook testen mislukt"
   },
@@ -3180,7 +3180,7 @@
     "message": "Failed to update webhook",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 138]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 155]],
     "translation": "Webhook bijwerken mislukt"
   },
   "ZL1A+p": {
@@ -3279,7 +3279,7 @@
     "message": "Font size",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 60]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 65]],
     "translation": "Lettergrootte"
   },
   "+3TYXa": {
@@ -3315,8 +3315,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      ["src/views/onboarding/select-plan/index.tsx", 91],
       ["src/views/onboarding/select-plan/index.tsx", 92],
-      ["src/views/onboarding/select-plan/index.tsx", 93],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 301],
       ["src/views/pricing/components/Pricing.tsx", 32],
       ["src/views/pricing/components/Pricing.tsx", 32],
@@ -3459,7 +3459,7 @@
     "comments": [],
     "origin": [
       ["src/views/home/components/Footer.tsx", 37],
-      ["src/views/settings/IntegrationsSettings.tsx", 186]
+      ["src/views/settings/IntegrationsSettings.tsx", 203]
     ],
     "translation": "GitHub"
   },
@@ -3467,14 +3467,14 @@
     "message": "GitHub connected",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 99]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 112]],
     "translation": "GitHub verbonden"
   },
   "/bBVaD": {
     "message": "GitHub disconnected",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 122]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 136]],
     "translation": "GitHub losgekoppeld"
   },
   "7eMo+U": {
@@ -3536,7 +3536,7 @@
     "message": "Good for individuals starting out who just need the essentials.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 94]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 93]],
     "translation": "Geschikt voor individuen die net beginnen en alleen de basisbehoeften hebben."
   },
   "cdyS7J": {
@@ -3607,7 +3607,7 @@
     "message": "HMAC secret for signature verification",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 259]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 285]],
     "translation": "HMAC-geheim voor handtekeningverificatie"
   },
   "LrcnbT": {
@@ -3710,8 +3710,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/components/ImportBoardsForm.tsx", 229],
-      ["src/views/boards/components/ImportBoardsForm.tsx", 381]
+      ["src/views/boards/components/ImportBoardsForm.tsx", 238],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 390]
     ],
     "translation": "Import voltooid"
   },
@@ -3720,8 +3720,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/components/ImportBoardsForm.tsx", 242],
-      ["src/views/boards/components/ImportBoardsForm.tsx", 394]
+      ["src/views/boards/components/ImportBoardsForm.tsx", 251],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 403]
     ],
     "translation": "Import mislukt"
   },
@@ -3786,7 +3786,7 @@
     "message": "Inactive",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/WebhookList.tsx", 104]],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 105]],
     "translation": "Inactief"
   },
   "6mbe4b": {
@@ -3995,7 +3995,7 @@
     "message": "Language",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 50]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 55]],
     "translation": "Taal"
   },
   "k7rCa/": {
@@ -4060,14 +4060,14 @@
     "message": "License activated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 115]],
+    "origin": [["src/components/Dashboard.tsx", 112]],
     "translation": "Licentie geactiveerd"
   },
   "K3LUJr": {
     "message": "License activation failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 129]],
+    "origin": [["src/components/Dashboard.tsx", 126]],
     "translation": "Licentieactivering mislukt"
   },
   "1njn7W": {
@@ -4339,7 +4339,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 77],
+      ["src/views/onboarding/select-plan/index.tsx", 76],
       ["src/views/pricing/components/Pricing.tsx", 14],
       ["src/views/pricing/index.tsx", 20]
     ],
@@ -4408,7 +4408,7 @@
     "message": "My webhook",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 231]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 257]],
     "translation": "Mijn webhook"
   },
   "6YtxFj": {
@@ -4419,8 +4419,8 @@
       ["src/components/LabelForm.tsx", 139],
       ["src/views/board/components/NewTemplateForm.tsx", 118],
       ["src/views/boards/components/NewBoardForm.tsx", 134],
-      ["src/views/settings/components/NewWebhookModal.tsx", 227],
-      ["src/views/settings/components/WebhookList.tsx", 214]
+      ["src/views/settings/components/NewWebhookModal.tsx", 253],
+      ["src/views/settings/components/WebhookList.tsx", 219]
     ],
     "translation": "Naam"
   },
@@ -4489,7 +4489,7 @@
     "message": "New import",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 513]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 522]],
     "translation": "Nieuwe import"
   },
   "n1GRql": {
@@ -4545,7 +4545,7 @@
     "message": "New webhook",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 210]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 236]],
     "translation": "Nieuwe webhook"
   },
   "curoK5": {
@@ -4603,7 +4603,7 @@
     "message": "No boards found",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 432]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 441]],
     "translation": "Geen borden gevonden"
   },
   "WAQMrN": {
@@ -4631,7 +4631,7 @@
     "message": "No download URL available for this attachment.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 143]],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 147]],
     "translation": "Geen download-URL beschikbaar voor deze bijlage."
   },
   "TXO5TM": {
@@ -4645,7 +4645,7 @@
     "message": "No license key was provided. Please try activating again.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 126]],
+    "origin": [["src/components/Dashboard.tsx", 123]],
     "translation": "Er is geen licentiecode opgegeven. Probeer het opnieuw te activeren."
   },
   "hXMFoN": {
@@ -4666,7 +4666,7 @@
     "message": "No projects found",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 283]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 292]],
     "translation": "Geen projecten gevonden"
   },
   "ERpq2P": {
@@ -4689,7 +4689,7 @@
     "message": "No webhooks configured. Add a webhook to receive notifications.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/WebhookList.tsx", 196]],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 201]],
     "translation": "Geen webhooks geconfigureerd. Voeg een webhook toe om meldingen te ontvangen."
   },
   "9h7RDh": {
@@ -4726,7 +4726,7 @@
     "message": "Once you delete your account, there is no going back. This action cannot be undone.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 73]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 78]],
     "translation": "Zodra je je account verwijdert, is er geen weg terug. Deze actie kan niet ongedaan worden gemaakt."
   },
   "dmKdk0": {
@@ -4836,7 +4836,7 @@
     "message": "Password already set",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 271]],
+    "origin": [["src/components/Dashboard.tsx", 268]],
     "translation": "Wachtwoord is al ingesteld"
   },
   "IrZaAn": {
@@ -4985,7 +4985,7 @@
     "message": "Pick a plan to get started. All paid plans include a 14-day free trial.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 165]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 164]],
     "translation": "Kies een abonnement om te beginnen. Alle betaalde abonnementen hebben een gratis proefperiode van 14 dagen."
   },
   "GdgCoi": {
@@ -5061,7 +5061,7 @@
     "message": "Please enter a valid URL",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 24]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 30]],
     "translation": "Voer een geldige URL in"
   },
   "tmlJN1": {
@@ -5105,9 +5105,9 @@
         37
       ],
       ["src/views/board/members/index.tsx", 88],
-      ["src/views/boards/components/ImportBoardsForm.tsx", 243],
-      ["src/views/boards/components/ImportBoardsForm.tsx", 395],
-      ["src/views/card/components/AttachmentThumbnails.tsx", 74],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 252],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 404],
+      ["src/views/card/components/AttachmentThumbnails.tsx", 77],
       ["src/views/card/components/ChecklistItemRow.tsx", 81],
       ["src/views/card/components/ChecklistItemRow.tsx", 111],
       ["src/views/card/components/ChecklistNameInput.tsx", 52],
@@ -5133,10 +5133,10 @@
       ["src/views/members/index.tsx", 78],
       ["src/views/onboarding/workspace-details/index.tsx", 139],
       ["src/views/onboarding/workspace-details/index.tsx", 190],
-      ["src/views/settings/components/Avatar.tsx", 200],
+      ["src/views/settings/components/Avatar.tsx", 197],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 40],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 54],
-      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 55],
+      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 58],
       ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 72],
       ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 67],
       ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 85],
@@ -5259,14 +5259,14 @@
     "message": "Profile image updated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 189]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 186]],
     "translation": "Profielafbeelding bijgewerkt"
   },
   "4XF0BB": {
     "message": "Profile picture",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 30]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 33]],
     "translation": "Profielfoto"
   },
   "7d1a0d": {
@@ -5605,7 +5605,7 @@
     "origin": [
       ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 183],
       ["src/views/card/components/Comment.tsx", 202],
-      ["src/views/settings/components/Avatar.tsx", 290]
+      ["src/views/settings/components/Avatar.tsx", 287]
     ],
     "translation": "Opslaan"
   },
@@ -5613,7 +5613,7 @@
     "message": "Save changes",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 344]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 370]],
     "translation": "Wijzigingen opslaan"
   },
   "MdwUGG": {
@@ -5665,14 +5665,14 @@
     "message": "Secret (optional)",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 251]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 277]],
     "translation": "Geheim (optioneel)"
   },
   "OkTY4+": {
     "message": "Secret cannot exceed 512 characters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 28]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 34]],
     "translation": "Geheim mag niet meer dan 512 tekens bevatten"
   },
   "a3LDKx": {
@@ -5728,8 +5728,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/components/ImportBoardsForm.tsx", 315],
-      ["src/views/boards/components/ImportBoardsForm.tsx", 464]
+      ["src/views/boards/components/ImportBoardsForm.tsx", 324],
+      ["src/views/boards/components/ImportBoardsForm.tsx", 473]
     ],
     "translation": "Alles selecteren"
   },
@@ -5737,14 +5737,14 @@
     "message": "Select at least one event",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 32]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 38]],
     "translation": "Selecteer minimaal één gebeurtenis"
   },
   "rYUZIe": {
     "message": "Select source",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 195]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 204]],
     "translation": "Selecteer bron"
   },
   "ppaRWv": {
@@ -5795,7 +5795,7 @@
     "message": "Send test",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 338]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 364]],
     "translation": "Test verzenden"
   },
   "v3YoMA": {
@@ -5816,7 +5816,7 @@
     "message": "Set a password to enable password-based login.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 93]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 98]],
     "translation": "Stel een wachtwoord in om inloggen met wachtwoord mogelijk te maken."
   },
   "8AbRER": {
@@ -5835,8 +5835,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/AccountSettings.tsx", 88],
-      ["src/views/settings/AccountSettings.tsx", 100],
+      ["src/views/settings/AccountSettings.tsx", 93],
+      ["src/views/settings/AccountSettings.tsx", 105],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
     ],
@@ -5870,7 +5870,7 @@
     "message": "Settings | Account",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 26]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 29]],
     "translation": "Instellingen | Account"
   },
   "iy1wb+": {
@@ -5891,7 +5891,7 @@
     "message": "Settings | Integrations",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 138]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 153]],
     "translation": "Instellingen | Integraties"
   },
   "F/FPk/": {
@@ -5971,7 +5971,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 328],
+      ["src/views/onboarding/select-plan/index.tsx", 327],
       ["src/views/onboarding/workspace-details/index.tsx", 395]
     ],
     "translation": "Uitloggen"
@@ -6072,7 +6072,7 @@
     "message": "Solo",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 91]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 90]],
     "translation": "Solo"
   },
   "whpQwW": {
@@ -6093,7 +6093,7 @@
     "message": "Something went wrong during license activation.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 132]],
+    "origin": [["src/components/Dashboard.tsx", 129]],
     "translation": "Er is iets misgegaan tijdens de licentieactivering."
   },
   "kf83Ld": {
@@ -6151,14 +6151,14 @@
     "message": "Start your 14-day free trial, cancel anytime.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 164]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 163]],
     "translation": "Start je gratis proefperiode van 14 dagen, op elk moment opzegbaar."
   },
   "uAQUqI": {
     "message": "Status",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/WebhookList.tsx", 232]],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 237]],
     "translation": "Status"
   },
   "hQRttt": {
@@ -6240,7 +6240,7 @@
     "message": "Team",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 98]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 97]],
     "translation": "Team"
   },
   "bff61F": {
@@ -6333,7 +6333,7 @@
     "message": "Test",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/WebhookList.tsx", 132]],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 133]],
     "translation": "Test"
   },
   "InJcdo": {
@@ -6341,8 +6341,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/NewWebhookModal.tsx", 154],
-      ["src/views/settings/components/WebhookList.tsx", 177]
+      ["src/views/settings/components/NewWebhookModal.tsx", 173],
+      ["src/views/settings/components/WebhookList.tsx", 179]
     ],
     "translation": "Test mislukt"
   },
@@ -6351,8 +6351,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/NewWebhookModal.tsx", 148],
-      ["src/views/settings/components/WebhookList.tsx", 171]
+      ["src/views/settings/components/NewWebhookModal.tsx", 167],
+      ["src/views/settings/components/WebhookList.tsx", 173]
     ],
     "translation": "Test verzonden"
   },
@@ -6361,8 +6361,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/NewWebhookModal.tsx", 149],
-      ["src/views/settings/components/WebhookList.tsx", 172]
+      ["src/views/settings/components/NewWebhookModal.tsx", 168],
+      ["src/views/settings/components/WebhookList.tsx", 174]
     ],
     "translation": "Test webhook succesvol verzonden!"
   },
@@ -6384,7 +6384,7 @@
     "message": "That license key could not be found. Please contact support.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 124]],
+    "origin": [["src/components/Dashboard.tsx", 121]],
     "translation": "Die licentiecode kon niet worden gevonden. Neem contact op met de ondersteuning."
   },
   "NcFrgC": {
@@ -6698,7 +6698,7 @@
     "message": "Token is required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 19]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 27]],
     "translation": "Token is vereist"
   },
   "eEQyz+": {
@@ -6714,7 +6714,7 @@
     "comments": [],
     "origin": [
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 197],
-      ["src/views/settings/IntegrationsSettings.tsx", 142]
+      ["src/views/settings/IntegrationsSettings.tsx", 157]
     ],
     "translation": "Trello"
   },
@@ -6722,7 +6722,7 @@
     "message": "Trello disconnected",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 79]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 90]],
     "translation": "Trello losgekoppeld"
   },
   "kxEs5t": {
@@ -6838,7 +6838,7 @@
     "message": "Unable to create webhook",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 118]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 127]],
     "translation": "Kan webhook niet aanmaken"
   },
   "MxQXhL": {
@@ -6855,7 +6855,7 @@
     "message": "Unable to delete attachment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 73]],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 76]],
     "translation": "Kan bijlage niet verwijderen"
   },
   "Z6r9z1": {
@@ -6893,7 +6893,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 36]
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 44]
     ],
     "translation": "Kan webhook niet verwijderen"
   },
@@ -6969,8 +6969,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/NewWebhookModal.tsx", 163],
-      ["src/views/settings/components/WebhookList.tsx", 185]
+      ["src/views/settings/components/NewWebhookModal.tsx", 182],
+      ["src/views/settings/components/WebhookList.tsx", 187]
     ],
     "translation": "Kan webhook niet testen"
   },
@@ -7084,7 +7084,7 @@
     "message": "Unable to update webhook",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 137]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 152]],
     "translation": "Kan webhook niet bijwerken"
   },
   "It4/FS": {
@@ -7233,7 +7233,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 175],
-      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 84],
+      ["src/views/settings/components/UpdateDisplayNameForm.tsx", 86],
       ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 103],
       ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 99],
       ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 170]
@@ -7291,7 +7291,7 @@
     "origin": [
       ["src/views/board/components/CalendarView.tsx", 555],
       ["src/views/members/index.tsx", 305],
-      ["src/views/onboarding/select-plan/index.tsx", 254]
+      ["src/views/onboarding/select-plan/index.tsx", 253]
     ],
     "translation": "Upgraden"
   },
@@ -7317,7 +7317,7 @@
     "message": "Upgrade your plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 160]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 159]],
     "translation": "Upgrade je abonnement"
   },
   "b3Thhd": {
@@ -7342,8 +7342,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/NewWebhookModal.tsx", 239],
-      ["src/views/settings/components/WebhookList.tsx", 220]
+      ["src/views/settings/components/NewWebhookModal.tsx", 265],
+      ["src/views/settings/components/WebhookList.tsx", 225]
     ],
     "translation": "URL"
   },
@@ -7361,7 +7361,7 @@
     "message": "URL cannot exceed 2048 characters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 25]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 31]],
     "translation": "URL mag niet langer zijn dan 2048 tekens"
   },
   "i5rE2/": {
@@ -7395,7 +7395,7 @@
     "message": "Used to sign webhook payloads for verification. Leave blank to keep existing secret.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 265]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 291]],
     "translation": "Wordt gebruikt om webhook-payloads te ondertekenen voor verificatie. Laat leeg om het bestaande geheim te behouden."
   },
   "7PzzBU": {
@@ -7515,14 +7515,14 @@
     "message": "Webhook created",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 110]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 119]],
     "translation": "Webhook aangemaakt"
   },
   "GdWB+V": {
     "message": "Webhook created successfully",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 111]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 120]],
     "translation": "Webhook succesvol aangemaakt"
   },
   "LnaC5y": {
@@ -7530,7 +7530,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 28]
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 36]
     ],
     "translation": "Webhook verwijderd"
   },
@@ -7539,7 +7539,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 29]
+      ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 37]
     ],
     "translation": "Webhook succesvol verwijderd"
   },
@@ -7547,21 +7547,21 @@
     "message": "Webhook name cannot exceed 255 characters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 20]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 26]],
     "translation": "Webhooknaam mag niet langer zijn dan 255 tekens"
   },
   "U2+rn0": {
     "message": "Webhook name is required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 19]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 25]],
     "translation": "Webhooknaam is verplicht"
   },
   "N1eQmK": {
     "message": "Webhook options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/WebhookList.tsx", 125]],
+    "origin": [["src/views/settings/components/WebhookList.tsx", 126]],
     "translation": "Webhook-opties"
   },
   "8iP9oQ": {
@@ -7569,8 +7569,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/NewWebhookModal.tsx", 155],
-      ["src/views/settings/components/WebhookList.tsx", 178]
+      ["src/views/settings/components/NewWebhookModal.tsx", 174],
+      ["src/views/settings/components/WebhookList.tsx", 180]
     ],
     "translation": "Webhook-test mislukt"
   },
@@ -7578,21 +7578,21 @@
     "message": "Webhook updated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 129]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 144]],
     "translation": "Webhook bijgewerkt"
   },
   "3d54Wj": {
     "message": "Webhook updated successfully",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 130]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 145]],
     "translation": "Webhook succesvol bijgewerkt"
   },
   "Hf1cEZ": {
     "message": "Webhook URL is required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 23]],
+    "origin": [["src/views/settings/components/NewWebhookModal.tsx", 29]],
     "translation": "Webhook-URL is verplicht"
   },
   "v1kQyJ": {
@@ -7853,7 +7853,7 @@
     "message": "You are about to change your password.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/AccountSettings.tsx", 92]],
+    "origin": [["src/views/settings/AccountSettings.tsx", 97]],
     "translation": "Je staat op het punt je wachtwoord te wijzigen."
   },
   "3WXdoZ": {
@@ -7994,7 +7994,7 @@
     "message": "Your account already has a password. You can change it from your account settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 273]],
+    "origin": [["src/components/Dashboard.tsx", 270]],
     "translation": "Uw account heeft al een wachtwoord. U kunt dit wijzigen via uw accountinstellingen."
   },
   "GoDLB9": {
@@ -8010,21 +8010,21 @@
     "message": "Your avatar",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 273]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 272]],
     "translation": "Jouw avatar"
   },
   "evg7+A": {
     "message": "Your boards have been imported.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 382]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 391]],
     "translation": "Je borden zijn geïmporteerd."
   },
   "LqWW5F": {
     "message": "Your display name has been updated.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 42]],
+    "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 45]],
     "translation": "Je weergavenaam is bijgewerkt."
   },
   "tca56/": {
@@ -8038,35 +8038,35 @@
     "message": "Your GitHub account has been connected.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 100]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 113]],
     "translation": "Je GitHub-account is gekoppeld."
   },
   "AdxYds": {
     "message": "Your GitHub account has been disconnected.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 123]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 137]],
     "translation": "Je GitHub-account is ontkoppeld."
   },
   "PELbXB": {
     "message": "Your GitHub account is connected.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 220]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 237]],
     "translation": "Je GitHub-account is gekoppeld."
   },
   "ygpeZ8": {
     "message": "Your license has been activated successfully.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 116]],
+    "origin": [["src/components/Dashboard.tsx", 113]],
     "translation": "Uw licentie is succesvol geactiveerd."
   },
   "+A6Wuq": {
     "message": "Your license is not active. Please check your account.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 125]],
+    "origin": [["src/components/Dashboard.tsx", 122]],
     "translation": "Uw licentie is niet actief. Controleer uw account."
   },
   "Ozt2vv": {
@@ -8098,28 +8098,28 @@
     "message": "Your profile image has been updated.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 190]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 187]],
     "translation": "Je profielafbeelding is bijgewerkt."
   },
   "+jbXzb": {
     "message": "Your projects have been imported.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 230]],
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 239]],
     "translation": "Je projecten zijn geïmporteerd."
   },
   "CJWDTP": {
     "message": "Your Trello account has been disconnected.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 80]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 91]],
     "translation": "Je Trello-account is losgekoppeld."
   },
   "WRsbHO": {
     "message": "Your Trello account is connected.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/IntegrationsSettings.tsx", 171]],
+    "origin": [["src/views/settings/IntegrationsSettings.tsx", 186]],
     "translation": "Je Trello-account is gekoppeld."
   },
   "25fAUC": {

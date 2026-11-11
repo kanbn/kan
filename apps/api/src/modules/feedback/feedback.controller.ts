@@ -6,12 +6,8 @@ import {
   Post,
   UseGuards,
 } from "@nestjs/common";
-import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
+import { ZodResponse } from "nestjs-zod";
 
 import type { User } from "../../common/interfaces/user.interface.js";
 import { CurrentUser } from "../../common/decorators/current-user.decorator.js";
@@ -32,7 +28,7 @@ export class FeedbackController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ operationId: "createFeedback", summary: "Submit feedback" })
-  @ApiResponse({ status: 201, type: CreateFeedbackResponseDto })
+  @ZodResponse({ status: 201, type: CreateFeedbackResponseDto })
   async create(
     @CurrentUser() user: User,
     @Body() input: CreateFeedbackDto,

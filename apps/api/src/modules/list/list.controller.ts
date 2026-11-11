@@ -1,5 +1,6 @@
 import { Body, Delete, Param, Post, Put } from "@nestjs/common";
-import { ApiOperation, ApiParam, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ZodResponse } from "nestjs-zod";
 
 import type { User } from "../../common/interfaces/user.interface.js";
 import { AuthenticatedController } from "../../common/decorators/authenticated-controller.decorator.js";
@@ -18,7 +19,7 @@ export class ListController {
 
   @Post()
   @ApiOperation({ operationId: "createList", summary: "Create a list" })
-  @ApiResponse({ status: 201, type: ListResponseDto })
+  @ZodResponse({ status: 201, type: ListResponseDto })
   async create(
     @CurrentUser() user: User,
     @Body() input: CreateListDto,
@@ -33,7 +34,7 @@ export class ListController {
   @Delete(":listPublicId")
   @ApiOperation({ operationId: "deleteList", summary: "Delete a list" })
   @ApiParam({ name: "listPublicId" })
-  @ApiResponse({ status: 200, type: DeleteListResponseDto })
+  @ZodResponse({ status: 200, type: DeleteListResponseDto })
   async delete(
     @CurrentUser() user: User,
     @Param("listPublicId") listPublicId: string,
@@ -44,7 +45,7 @@ export class ListController {
   @Put(":listPublicId")
   @ApiOperation({ operationId: "updateList", summary: "Update a list" })
   @ApiParam({ name: "listPublicId" })
-  @ApiResponse({ status: 200, type: ListResponseDto })
+  @ZodResponse({ status: 200, type: ListResponseDto })
   async update(
     @CurrentUser() user: User,
     @Param("listPublicId") listPublicId: string,

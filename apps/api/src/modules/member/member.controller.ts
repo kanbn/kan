@@ -8,7 +8,8 @@ import {
   Put,
   Req,
 } from "@nestjs/common";
-import { ApiOperation, ApiParam, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ZodResponse } from "nestjs-zod";
 
 import type { AuthenticatedRequest } from "../../common/interfaces/request.interface.js";
 import type { User } from "../../common/interfaces/user.interface.js";
@@ -40,7 +41,7 @@ export class WorkspaceMemberController {
     summary: "Invite a member to a workspace",
   })
   @ApiParam({ name: "workspacePublicId" })
-  @ApiResponse({ status: 201, type: MemberInviteResponseDto })
+  @ZodResponse({ status: 201, type: MemberInviteResponseDto })
   async invite(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -62,7 +63,7 @@ export class WorkspaceMemberController {
   })
   @ApiParam({ name: "workspacePublicId" })
   @ApiParam({ name: "memberPublicId" })
-  @ApiResponse({ status: 200, type: DeleteMemberResponseDto })
+  @ZodResponse({ status: 200, type: DeleteMemberResponseDto })
   async delete(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -82,7 +83,7 @@ export class WorkspaceMemberController {
   })
   @ApiParam({ name: "workspacePublicId" })
   @ApiParam({ name: "memberPublicId" })
-  @ApiResponse({ status: 200, type: UpdateMemberRoleResponseDto })
+  @ZodResponse({ status: 200, type: UpdateMemberRoleResponseDto })
   async updateRole(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -103,7 +104,7 @@ export class WorkspaceMemberController {
     summary: "Get active invite link for workspace",
   })
   @ApiParam({ name: "workspacePublicId" })
-  @ApiResponse({ status: 200, type: ActiveInviteLinkResponseDto })
+  @ZodResponse({ status: 200, type: ActiveInviteLinkResponseDto })
   async getActiveInviteLink(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -120,7 +121,7 @@ export class WorkspaceMemberController {
     summary: "Create invite link for workspace",
   })
   @ApiParam({ name: "workspacePublicId" })
-  @ApiResponse({ status: 201, type: CreateInviteLinkResponseDto })
+  @ZodResponse({ status: 201, type: CreateInviteLinkResponseDto })
   async createInviteLink(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -137,7 +138,7 @@ export class WorkspaceMemberController {
     summary: "Deactivate invite link for workspace",
   })
   @ApiParam({ name: "workspacePublicId" })
-  @ApiResponse({ status: 200, type: DeactivateInviteLinkResponseDto })
+  @ZodResponse({ status: 200, type: DeactivateInviteLinkResponseDto })
   async deactivateInviteLink(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -159,7 +160,7 @@ export class InviteController {
     summary: "Get invite information by code",
   })
   @ApiParam({ name: "inviteCode" })
-  @ApiResponse({ status: 200, type: InviteByCodeResponseDto })
+  @ZodResponse({ status: 200, type: InviteByCodeResponseDto })
   async getInviteByCode(
     @Param("inviteCode") inviteCode: string,
   ): Promise<InviteByCodeResponseDto> {
@@ -176,7 +177,7 @@ export class AuthenticatedInviteController {
     operationId: "acceptInviteLink",
     summary: "Accept an invite link",
   })
-  @ApiResponse({ status: 200, type: AcceptInviteLinkResponseDto })
+  @ZodResponse({ status: 200, type: AcceptInviteLinkResponseDto })
   async acceptInviteLink(
     @CurrentUser() user: User,
     @Body() input: AcceptInviteLinkDto,
