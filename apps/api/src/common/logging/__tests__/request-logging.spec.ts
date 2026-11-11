@@ -90,7 +90,7 @@ let app: INestApplication;
 let url: string;
 
 // The log line is written on the response's "finish" event.
-const lastLog = async (level: "info" | "error") => {
+const lastLog = async (level: "info" | "warn" | "error") => {
   await vi.waitFor(() => expect(logs[level]).toHaveBeenCalled());
   return logs[level].mock.calls.at(-1) as [Record<string, unknown>, string];
 };
@@ -136,7 +136,7 @@ describe("request logging", () => {
     expect(typeof meta.duration).toBe("number");
   });
 
-  it("logs a 4xx as an error with its message, and leaves the response unchanged", async () => {
+  it("logs a 4xx as a warning with its message, and leaves the response unchanged", async () => {
     const res = await fetch(`${url}/missing`);
 
     expect(res.status).toBe(404);
@@ -145,7 +145,7 @@ describe("request logging", () => {
       message: "Thing not found",
       error: "Not Found",
     });
-    const [meta, msg] = await lastLog("error");
+    const [meta, msg] = await lastLog("warn");
     expect(msg).toBe("REST error");
     expect(meta).toMatchObject({ status: 404, error: "Thing not found" });
     expect(meta).not.toHaveProperty("err");
@@ -165,7 +165,7 @@ describe("request logging", () => {
 
     expect(res.status).toBe(404);
     expect(res.headers.get("x-request-id")).toMatch(/^[0-9a-f-]{36}$/);
-    const [meta] = await lastLog("error");
+    const [meta] = await lastLog("warn");
     expect(meta).toMatchObject({ procedure: "GET /nope", status: 404 });
   });
 
@@ -173,6 +173,7 @@ describe("request logging", () => {
     await fetch(`${url}/health`);
     await new Promise((resolve) => setTimeout(resolve, 50));
     expect(logs.info).not.toHaveBeenCalled();
+    expect(logs.warn).not.toHaveBeenCalled();
     expect(logs.error).not.toHaveBeenCalled();
   });
 });

@@ -56,7 +56,8 @@ export class RequestLoggingMiddleware implements NestMiddleware {
             : { error: error.message })),
       };
 
-      if (status >= 400) log.error(meta, "REST error");
+      if (status >= 500) log.error(meta, "REST error");
+      else if (status >= 400) log.warn(meta, "REST error");
       else log.info(meta, "REST OK");
     });
 
