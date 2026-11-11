@@ -1,10 +1,13 @@
-import { z } from "zod";
 import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { z } from "zod";
 
-import { CreateLabelSchema, UpdateLabelSchema } from "../../label/dto/label.dto.js";
+import {
+  CreateLabelSchema,
+  UpdateLabelSchema,
+} from "../../label/dto/label.dto.js";
 import { LabelService } from "../../label/label.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import { Tool } from "../tool.decorator.js";
 
 const GetLabelSchema = z.object({
   labelPublicId: z.string().min(12),
@@ -41,6 +44,9 @@ export class LabelTools {
 
   @Tool({
     name: "create_label",
+    params: {
+      name: "Label name, up to 36 characters.",
+    },
     description: "Create a label on a board, on behalf of the current user.",
     parameters: CreateLabelSchema,
   })
@@ -60,7 +66,11 @@ export class LabelTools {
 
   @Tool({
     name: "update_label",
-    description: "Update a label's name or colour, on behalf of the current user.",
+    params: {
+      name: "New label name, up to 36 characters.",
+    },
+    description:
+      "Update a label's name or colour, on behalf of the current user.",
     parameters: UpdateLabelWithIdSchema,
   })
   async updateLabel(

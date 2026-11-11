@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { CardService } from "../../card/card.service.js";
@@ -11,8 +10,15 @@ import {
   UpdateCardSchema,
 } from "../../card/dto/card.dto.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import { Tool } from "../tool.decorator.js";
 
 const CardIdSchema = z.object({ cardPublicId: z.string().min(12) });
+const CreateCardWithDefaultsSchema = CreateCardSchema.extend({
+  description: CreateCardSchema.shape.description.default(""),
+  labelPublicIds: CreateCardSchema.shape.labelPublicIds.default([]),
+  memberPublicIds: CreateCardSchema.shape.memberPublicIds.default([]),
+  position: CreateCardSchema.shape.position.default("end"),
+});
 const UpdateCardWithIdSchema = UpdateCardSchema.extend(CardIdSchema.shape);
 const DuplicateCardWithIdSchema = DuplicateCardSchema.extend(
   CardIdSchema.shape,
@@ -67,12 +73,17 @@ export class CardTools {
 
   @Tool({
     name: "create_card",
+    params: {
+      title: "Card title.",
+      description: "Card description, in markdown.",
+      dueDate: "Due date in ISO 8601, e.g. 2026-12-31T17:00:00Z.",
+    },
     description:
       "Create a card in a list, optionally with labels, members and a due date (ISO 8601).",
-    parameters: CreateCardSchema,
+    parameters: CreateCardWithDefaultsSchema,
   })
   async createCard(
-    args: z.infer<typeof CreateCardSchema>,
+    args: z.infer<typeof CreateCardWithDefaultsSchema>,
     _context: unknown,
     rawRequest: McpRequest,
   ) {
@@ -86,6 +97,14 @@ export class CardTools {
 
   @Tool({
     name: "update_card",
+    params: {
+      title: "New card title.",
+      description: "New card description, in markdown.",
+      listPublicId:
+        "Move the card to this list. Get its public ID from get_board.",
+      index:
+        "Zero-based position in the card's list (or in listPublicId when moving); 0 is the top.",
+    },
     description:
       "Update a card's title, description or due date, or move it (listPublicId and/or index).",
     parameters: UpdateCardWithIdSchema,
@@ -123,6 +142,12 @@ export class CardTools {
 
   @Tool({
     name: "duplicate_card",
+    params: {
+      title: "Title for the duplicate. Defaults to the original title.",
+      listPublicId:
+        "The list to put the duplicate in. Get its public ID from get_board.",
+      index: "Zero-based position in the target list. Defaults to the end.",
+    },
     description:
       "Duplicate a card into a list, optionally copying labels, members and checklists.",
     parameters: DuplicateCardWithIdSchema,

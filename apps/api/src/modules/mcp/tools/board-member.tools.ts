@@ -1,6 +1,5 @@
-import { z } from "zod";
 import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { z } from "zod";
 
 import { BoardMemberService } from "../../board-member/board-member.service.js";
 import {
@@ -8,6 +7,7 @@ import {
   UpdateBoardMemberRoleSchema,
 } from "../../board-member/dto/board-member.dto.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import { Tool } from "../tool.decorator.js";
 
 const ListBoardMembersSchema = z.object({
   boardPublicId: z.string().min(12),
@@ -50,6 +50,9 @@ export class BoardMemberTools {
 
   @Tool({
     name: "add_board_member",
+    params: {
+      role: "Board role: 'admin' or 'member' (default).",
+    },
     description:
       "Add a workspace member to a board, on behalf of the current user.",
     parameters: AddBoardMemberWithBoardSchema,
@@ -70,8 +73,10 @@ export class BoardMemberTools {
 
   @Tool({
     name: "update_board_member_role",
-    description:
-      "Update a board member's role, on behalf of the current user.",
+    params: {
+      role: "New board role: 'admin' or 'member'.",
+    },
+    description: "Update a board member's role, on behalf of the current user.",
     parameters: UpdateBoardMemberRoleWithIdsSchema,
   })
   async updateBoardMemberRole(

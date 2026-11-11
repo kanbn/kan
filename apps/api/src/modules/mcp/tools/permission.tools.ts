@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { PermissionActionSchema } from "../../permission/dto/permission.dto.js";
 import { PermissionService } from "../../permission/permission.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import { Tool } from "../tool.decorator.js";
 
 const WorkspaceSchema = z.object({
   workspacePublicId: z.string().min(12),

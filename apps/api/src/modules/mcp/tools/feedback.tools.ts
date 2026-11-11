@@ -1,10 +1,10 @@
 import type { z } from "zod";
 import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
 
 import { CreateFeedbackSchema } from "../../feedback/dto/create-feedback.dto.js";
 import { FeedbackService } from "../../feedback/feedback.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import { Tool } from "../tool.decorator.js";
 
 @Injectable()
 export class FeedbackTools {
@@ -12,6 +12,9 @@ export class FeedbackTools {
 
   @Tool({
     name: "submit_feedback",
+    params: {
+      url: "The page the feedback is about.",
+    },
     description: "Submit feedback about kan on behalf of the current user.",
     parameters: CreateFeedbackSchema,
   })

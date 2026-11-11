@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { UpdateUserSchema } from "../../user/dto/user.dto.js";
 import { UserService } from "../../user/user.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import { Tool } from "../tool.decorator.js";
 
 @Injectable()
 export class UserTools {
@@ -26,6 +26,9 @@ export class UserTools {
 
   @Tool({
     name: "update_current_user",
+    params: {
+      name: "New display name.",
+    },
     description: "Update the current user's display name or avatar.",
     parameters: UpdateUserSchema,
   })

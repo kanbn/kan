@@ -1,5 +1,4 @@
-import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { z } from "zod";
 
 import {
@@ -10,9 +9,17 @@ import {
 } from "../../workspace/dto/workspace.dto.js";
 import { WorkspaceService } from "../../workspace/workspace.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import { Tool } from "../tool.decorator.js";
 
 const WorkspaceIdSchema = z.object({
   workspacePublicId: z.string().min(12),
+});
+
+const WorkspaceNameSchema = z.object({
+  name: z
+    .string()
+    .min(1)
+    .describe("Workspace name to look up (case-insensitive)."),
 });
 
 const WorkspaceSlugSchema = z.object({
@@ -27,13 +34,32 @@ const SearchWorkspaceSchema = SearchQuerySchema.extend({
   workspacePublicId: z.string().min(12),
 });
 
+export async function findWorkspaceByName(
+  workspaceService: WorkspaceService,
+  userId: string,
+  name: string,
+) {
+  const workspaces = (await workspaceService.all({ userId })).map(
+    (membership) => membership.workspace,
+  );
+  const match = workspaces.find(
+    (workspace) => workspace.name.toLowerCase() === name.toLowerCase(),
+  );
+  if (!match)
+    throw new NotFoundException(
+      `No workspace named "${name}". Available workspaces: ${workspaces.map((w) => w.name).join(", ")}`,
+    );
+  return match;
+}
+
 @Injectable()
 export class WorkspaceTools {
   constructor(private readonly workspaceService: WorkspaceService) {}
 
   @Tool({
     name: "list_workspaces",
-    description: "List all workspaces the current user belongs to.",
+    description:
+      "List all workspaces the current user belongs to. Call this first to resolve a workspace name to its publicId before calling any other workspace-scoped tool.",
     parameters: z.object({}),
   })
   async listWorkspaces(
@@ -46,7 +72,25 @@ export class WorkspaceTools {
   }
 
   @Tool({
+    name: "find_workspace_by_name",
+    description:
+      "Find a workspace by its name (case-insensitive) and return it with its publicId. Use this whenever you only know the workspace name.",
+    parameters: WorkspaceNameSchema,
+  })
+  async findWorkspaceByName(
+    args: z.infer<typeof WorkspaceNameSchema>,
+    _context: unknown,
+    rawRequest: { user?: unknown } | undefined,
+  ) {
+    const user = requireMcpUser(rawRequest);
+    return findWorkspaceByName(this.workspaceService, user.id, args.name);
+  }
+
+  @Tool({
     name: "check_workspace_slug_availability",
+    params: {
+      workspaceSlug: "The slug to check.",
+    },
     description: "Check whether a workspace slug is available.",
     parameters: CheckSlugAvailabilityQuerySchema,
   })
@@ -99,6 +143,11 @@ export class WorkspaceTools {
 
   @Tool({
     name: "create_workspace",
+    params: {
+      name: "Workspace name.",
+      description: "Short description of the workspace.",
+      slug: "URL slug for the workspace (letters, numbers, hyphens). Generated from the name if omitted.",
+    },
     description: "Create a workspace, on behalf of the current user.",
     parameters: CreateWorkspaceSchema,
   })
@@ -119,6 +168,11 @@ export class WorkspaceTools {
 
   @Tool({
     name: "update_workspace",
+    params: {
+      name: "New workspace name.",
+      description: "New workspace description.",
+      slug: "New URL slug for the workspace.",
+    },
     description: "Update a workspace, on behalf of the current user.",
     parameters: UpdateWorkspaceWithIdSchema,
   })
