@@ -1,12 +1,13 @@
 import type { Locator, Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import { AuthPage } from "../support/pages/auth-page";
 import { BoardPage } from "../support/pages/board-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
 import { createTestUser } from "../support/test-user";
-import { waitForTrpcMutation } from "../support/wait-for-trpc";
+import { waitForApi } from "../support/wait-for-trpc";
 
 async function pastePlainText(locator: Locator, value: string) {
   await locator.click();
@@ -94,7 +95,7 @@ test(
     );
     await expectDescriptionFormatting(description);
 
-    const updated = waitForTrpcMutation(page, "card.update");
+    const updated = waitForApi(page, "PUT", /^\/cards\/[^/]+$/);
     await page.locator("#title").click();
     await updated;
     await page.reload();
@@ -118,7 +119,11 @@ test(
     );
     await expectPastedCommentFormatting(commentEditor);
 
-    const addedPastedComment = waitForTrpcMutation(page, "card.addComment");
+    const addedPastedComment = waitForApi(
+      page,
+      "POST",
+      /^\/cards\/[^/]+\/comments$/,
+    );
     await page
       .getByRole("button", { name: "Submit comment", exact: true })
       .click();
@@ -136,7 +141,11 @@ test(
     await expect(commentEditor.locator("strong")).toHaveText("typed bold");
     await expect(commentEditor.locator("code")).toHaveText("typed code");
 
-    const addedTypedComment = waitForTrpcMutation(page, "card.addComment");
+    const addedTypedComment = waitForApi(
+      page,
+      "POST",
+      /^\/cards\/[^/]+\/comments$/,
+    );
     await page
       .getByRole("button", { name: "Submit comment", exact: true })
       .click();
@@ -149,22 +158,17 @@ test(
     await expect(typedComment.locator("strong")).toHaveText("typed bold");
     await expect(typedComment.locator("code")).toHaveText("typed code");
 
-    const rawMarkdownResponse = await page.request.post(
-      "/api/trpc/card.update?batch=1",
+    const rawMarkdownResponse = await page.request.put(
+      `${apiBaseURL}/cards/${cardPublicId}`,
       {
         data: {
-          "0": {
-            json: {
-              cardPublicId,
-              description: [
-                "# Imported notes",
-                "",
-                "**raw bold text**",
-                "",
-                "[raw link](https://example.net)",
-              ].join("\n"),
-            },
-          },
+          description: [
+            "# Imported notes",
+            "",
+            "**raw bold text**",
+            "",
+            "[raw link](https://example.net)",
+          ].join("\n"),
         },
       },
     );
@@ -200,28 +204,26 @@ test(
     const cardPublicId = page.url().split("/cards/")[1];
     if (!cardPublicId) throw new Error("Could not resolve cardPublicId");
 
-    const response = await page.request.post("/api/trpc/card.update?batch=1", {
-      data: {
-        "0": {
-          json: {
-            cardPublicId,
-            description: [
-              "[safe link](https://example.com)",
-              "",
-              "[unsafe link](javascript:alert(1))",
-              "",
-              '<img src="x" onerror="window.__markdownSecurityTriggered = true">',
-              "",
-              '<svg onload="window.__markdownSecurityTriggered = true"></svg>',
-              "",
-              '<a href="javascript:alert(1)" onclick="window.__markdownSecurityTriggered = true">raw unsafe link</a>',
-              "",
-              "<script>window.__markdownSecurityTriggered = true</script>",
-            ].join("\n"),
-          },
+    const response = await page.request.put(
+      `${apiBaseURL}/cards/${cardPublicId}`,
+      {
+        data: {
+          description: [
+            "[safe link](https://example.com)",
+            "",
+            "[unsafe link](javascript:alert(1))",
+            "",
+            '<img src="x" onerror="window.__markdownSecurityTriggered = true">',
+            "",
+            '<svg onload="window.__markdownSecurityTriggered = true"></svg>',
+            "",
+            '<a href="javascript:alert(1)" onclick="window.__markdownSecurityTriggered = true">raw unsafe link</a>',
+            "",
+            "<script>window.__markdownSecurityTriggered = true</script>",
+          ].join("\n"),
         },
       },
-    });
+    );
     expect(response.ok()).toBe(true);
     await page.reload();
 

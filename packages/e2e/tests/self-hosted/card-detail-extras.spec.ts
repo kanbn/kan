@@ -57,26 +57,16 @@ test(
     if (!cardPublicId) throw new Error("Could not resolve cardPublicId");
 
     const cardResponse = await page.request.get(
-      `/api/trpc/card.byId?batch=1&input=${encodeURIComponent(
-        JSON.stringify({ "0": { json: { cardPublicId } } }),
-      )}`,
+      `${apiBaseURL}/cards/${cardPublicId}`,
     );
-    const cardBody = (await cardResponse.json()) as [
-      {
-        result: {
-          data: {
-            json: {
-              members: {
-                email: string;
-                user: { name: string | null } | null;
-              }[];
-              dueDate: string | null;
-            };
-          };
-        };
-      },
-    ];
-    const cardJson = cardBody[0].result.data.json;
+    const cardBody = (await cardResponse.json()) as {
+      members: {
+        email: string;
+        user: { name: string | null } | null;
+      }[];
+      dueDate: string | null;
+    };
+    const cardJson = cardBody;
     expect(
       cardJson.members.some(
         (m) => m.user?.name === user.name || m.email === user.email,

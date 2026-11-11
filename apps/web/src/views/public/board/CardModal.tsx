@@ -3,13 +3,15 @@ import { t } from "@lingui/core/macro";
 import { useEffect, useRef, useState } from "react";
 import { HiLink, HiXMark } from "react-icons/hi2";
 
+import { useGetCard } from "@kan/api-client/hooks";
+
 import Badge from "~/components/Badge";
 import Editor from "~/components/Editor";
 import LabelIcon from "~/components/LabelIcon";
 import { useActivitySortOrder } from "~/hooks/useActivitySortOrder";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
+import { getApiErrorStatus } from "~/utils/apiError";
 import ActivityList from "~/views/card/components/ActivityList";
 import { AttachmentThumbnails } from "~/views/card/components/AttachmentThumbnails";
 import Checklists from "~/views/card/components/Checklists";
@@ -49,19 +51,17 @@ export function CardModal({
     }
   };
 
-  const { data, isLoading, error } = api.card.byId.useQuery(
-    {
-      cardPublicId: cardPublicId ?? "",
-    },
-    {
+  const { data, isLoading, error } = useGetCard(cardPublicId ?? "", {
+    query: {
       enabled: isOpen && !!cardPublicId && cardPublicId.length >= 12,
+      select: (res) => res.data,
     },
-  );
+  });
 
   // Redirect to 404 if card doesn't exist
   useEffect(() => {
     if (isOpen && cardPublicId && !isLoading) {
-      if (error?.data?.code === "NOT_FOUND" || (!data && !isLoading && error)) {
+      if (getApiErrorStatus(error) === 404 || (!data && !isLoading && error)) {
         // Close modal first, then redirect
         closeModal();
         router.replace("/404");

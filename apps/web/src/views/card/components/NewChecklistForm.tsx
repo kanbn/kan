@@ -10,7 +10,7 @@ import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
+import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface NewChecklistFormInput {
@@ -22,7 +22,7 @@ export function NewChecklistForm({ cardPublicId }: { cardPublicId: string }) {
   const { closeModal, setModalState } = useModal();
   const { showPopup } = usePopup();
 
-  const utils = api.useUtils();
+  const cardCache = useCardCache();
 
   const { register, handleSubmit, reset, watch } =
     useForm<NewChecklistFormInput>({
@@ -35,12 +35,12 @@ export function NewChecklistForm({ cardPublicId }: { cardPublicId: string }) {
   const createChecklist = useCreateChecklist({
     mutation: {
       onMutate: async (args) => {
-        await utils.card.byId.cancel({ cardPublicId: args.cardPublicId });
-        const previous = utils.card.byId.getData({
+        await cardCache.byId.cancel({ cardPublicId: args.cardPublicId });
+        const previous = cardCache.byId.getData({
           cardPublicId: args.cardPublicId,
         });
         const optimisticPublicId = `PLACEHOLDER_${generateUID()}`;
-        utils.card.byId.setData({ cardPublicId: args.cardPublicId }, (old) => {
+        cardCache.byId.setData({ cardPublicId: args.cardPublicId }, (old) => {
           if (!old) return old as any;
           const placeholderChecklist = {
             publicId: optimisticPublicId,
@@ -65,7 +65,7 @@ export function NewChecklistForm({ cardPublicId }: { cardPublicId: string }) {
           createdChecklistId: result.data.publicId,
         });
         if (!context) return;
-        utils.card.byId.setData({ cardPublicId: vars.cardPublicId }, (old) => {
+        cardCache.byId.setData({ cardPublicId: vars.cardPublicId }, (old) => {
           if (!old) return old as any;
           const updatedChecklists = old.checklists.map((cl) =>
             cl.publicId === context.optimisticPublicId
@@ -77,7 +77,7 @@ export function NewChecklistForm({ cardPublicId }: { cardPublicId: string }) {
       },
       onError: (_error, vars, ctx) => {
         if (ctx?.previous)
-          utils.card.byId.setData(
+          cardCache.byId.setData(
             { cardPublicId: vars.cardPublicId },
             ctx.previous,
           );
@@ -88,7 +88,7 @@ export function NewChecklistForm({ cardPublicId }: { cardPublicId: string }) {
         });
       },
       onSettled: async (_data, _error, vars) => {
-        await invalidateCard(utils, vars.cardPublicId);
+        await invalidateCard(cardCache, vars.cardPublicId);
       },
     },
   });

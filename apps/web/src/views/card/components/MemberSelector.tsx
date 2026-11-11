@@ -2,12 +2,14 @@ import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { HiMiniPlus } from "react-icons/hi2";
 
+import { useToggleCardMember } from "@kan/api-client/hooks";
+
 import Avatar from "~/components/Avatar";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 import { useBoardCache } from "~/utils/boardCache";
+import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface MemberSelectorProps {
@@ -30,64 +32,66 @@ export default function MemberSelector({
   disabled = false,
 }: MemberSelectorProps) {
   const router = useRouter();
-  const utils = api.useUtils();
+  const cardCache = useCardCache();
   const boardCache = useBoardCache();
   const { openModal } = useModal();
   const { showPopup } = usePopup();
 
-  const addOrRemoveMember = api.card.addOrRemoveMember.useMutation({
-    onMutate: async (update) => {
-      await utils.card.byId.cancel();
+  const addOrRemoveMember = useToggleCardMember({
+    mutation: {
+      onMutate: async (update) => {
+        await cardCache.byId.cancel();
 
-      const previousCard = utils.card.byId.getData({ cardPublicId });
+        const previousCard = cardCache.byId.getData({ cardPublicId });
 
-      utils.card.byId.setData({ cardPublicId }, (oldCard) => {
-        if (!oldCard) return oldCard;
+        cardCache.byId.setData({ cardPublicId }, (oldCard) => {
+          if (!oldCard) return oldCard;
 
-        const hasMember = oldCard.members.some(
-          (member) => member.publicId === update.workspaceMemberPublicId,
-        );
+          const hasMember = oldCard.members.some(
+            (member) => member.publicId === update.workspaceMemberPublicId,
+          );
 
-        const memberToAdd = oldCard.members.find(
-          (member) => member.publicId === update.workspaceMemberPublicId,
-        );
+          const memberToAdd = oldCard.members.find(
+            (member) => member.publicId === update.workspaceMemberPublicId,
+          );
 
-        const updatedMembers = hasMember
-          ? oldCard.members.filter(
-              (member) => member.publicId !== update.workspaceMemberPublicId,
-            )
-          : [
-              ...oldCard.members,
-              {
-                publicId: update.workspaceMemberPublicId,
-                email: memberToAdd?.email ?? "",
-                deletedAt: null,
-                user: {
-                  id: memberToAdd?.user?.id ?? "",
-                  name: memberToAdd?.user?.name ?? "",
+          const updatedMembers = hasMember
+            ? oldCard.members.filter(
+                (member) => member.publicId !== update.workspaceMemberPublicId,
+              )
+            : [
+                ...oldCard.members,
+                {
+                  publicId: update.workspaceMemberPublicId,
+                  email: memberToAdd?.email ?? "",
+                  deletedAt: null,
+                  user: {
+                    id: memberToAdd?.user?.id ?? "",
+                    name: memberToAdd?.user?.name ?? "",
+                  },
                 },
-              },
-            ];
+              ];
 
-        return {
-          ...oldCard,
-          members: updatedMembers,
-        };
-      });
+          return {
+            ...oldCard,
+            members: updatedMembers,
+          };
+        });
 
-      return { previousCard };
-    },
-    onError: (_error, _newList, context) => {
-      utils.card.byId.setData({ cardPublicId }, context?.previousCard);
-      showPopup({
-        header: t`Unable to update members`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await invalidateCard(utils, cardPublicId);
-      await boardCache.invalidate();
+        return { previousCard };
+      },
+      onError: (_error, _newList, context) => {
+        cardCache.byId.setData({ cardPublicId }, context?.previousCard);
+        showPopup({
+          header: t`Unable to update members`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        await invalidateCard(cardCache, cardPublicId);
+        await boardCache.invalidate();
+      },
     },
   });
 

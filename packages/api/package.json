@@ -36,6 +36,10 @@
       "types": "./src/utils/trpcRateLimit.ts",
       "default": "./src/utils/trpcRateLimit.ts"
     },
+    "./utils/activities": {
+      "types": "./src/utils/activities.ts",
+      "default": "./src/utils/activities.ts"
+    },
     "./utils/apiLogging": {
       "types": "./src/utils/apiLogging.ts",
       "default": "./src/utils/apiLogging.ts"
@@ -75,6 +79,10 @@
     "./utils/apiToken": {
       "types": "./src/utils/apiToken.ts",
       "default": "./src/utils/apiToken.ts"
+    },
+    "./utils/notifications": {
+      "types": "./src/utils/notifications.ts",
+      "default": "./src/utils/notifications.ts"
     },
     "./utils/paidWorkspaceCache": {
       "types": "./src/utils/paidWorkspaceCache.ts",

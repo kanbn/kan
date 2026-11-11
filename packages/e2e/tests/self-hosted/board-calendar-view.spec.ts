@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import { AuthPage } from "../support/pages/auth-page";
 import { BoardPage } from "../support/pages/board-page";
 import { CalendarPage, toDateKey } from "../support/pages/calendar-page";
@@ -84,14 +85,10 @@ test(
     const cardPublicId = cardHref.split("/cards/")[1]?.split("?")[0];
 
     const cardResponse = await page.request.get(
-      `/api/trpc/card.byId?batch=1&input=${encodeURIComponent(
-        JSON.stringify({ "0": { json: { cardPublicId } } }),
-      )}`,
+      `${apiBaseURL}/cards/${cardPublicId}`,
     );
-    const cardBody = (await cardResponse.json()) as [
-      { result: { data: { json: { dueDate: string | null } } } },
-    ];
-    const dueDate = cardBody[0].result.data.json.dueDate;
+    const cardBody = (await cardResponse.json()) as { dueDate: string | null };
+    const dueDate = cardBody.dueDate;
     expect(dueDate ? toDateKey(new Date(dueDate)) : null).toBe(
       toDateKey(targetDate),
     );

@@ -22,7 +22,7 @@ import {
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 import { t } from "@lingui/core/macro";
-import { keepPreviousData } from "@tanstack/react-query";
+import { keepPreviousData, useMutation } from "@tanstack/react-query";
 import { env } from "next-runtime-env";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -59,9 +59,9 @@ import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
 import { getApiErrorStatus } from "~/utils/apiError";
 import { useBoardCache } from "~/utils/boardCache";
+import { updateCardFromInput } from "~/utils/cardMutations";
 import { formatToArray, isPlaceholderPublicId } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import BoardDropdown from "./components/BoardDropdown";
@@ -307,7 +307,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     },
   });
 
-  const updateCardMutation = api.card.update.useMutation({
+  const updateCardMutation = useMutation({
+    mutationFn: updateCardFromInput,
     onMutate: async (args) => {
       await boardCache.cancel();
 
@@ -363,7 +364,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     },
   });
 
-  const updateCardDueDateMutation = api.card.update.useMutation({
+  const updateCardDueDateMutation = useMutation({
+    mutationFn: updateCardFromInput,
     onMutate: async (args) => {
       await boardCache.cancel();
 

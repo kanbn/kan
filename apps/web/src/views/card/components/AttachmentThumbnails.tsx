@@ -14,7 +14,7 @@ import {
 import { useDeleteAttachment } from "@kan/api-client/hooks";
 
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
+import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface Attachment {
@@ -36,7 +36,7 @@ export function AttachmentThumbnails({
   isReadOnly?: boolean;
 }) {
   const { showPopup } = usePopup();
-  const utils = api.useUtils();
+  const cardCache = useCardCache();
   const imageAttachments =
     attachments?.filter(
       (attachment) =>
@@ -56,10 +56,10 @@ export function AttachmentThumbnails({
       onMutate: async (args) => {
         if (isReadOnly) return;
 
-        await utils.card.byId.cancel({ cardPublicId });
-        const currentState = utils.card.byId.getData({ cardPublicId });
+        await cardCache.byId.cancel({ cardPublicId });
+        const currentState = cardCache.byId.getData({ cardPublicId });
 
-        utils.card.byId.setData({ cardPublicId }, (oldCard) => {
+        cardCache.byId.setData({ cardPublicId }, (oldCard) => {
           if (!oldCard) return oldCard;
           const updatedAttachments = oldCard.attachments.filter(
             (attachment) => attachment.publicId !== args.attachmentPublicId,
@@ -71,7 +71,7 @@ export function AttachmentThumbnails({
       },
       onError: (_error, _args, context) => {
         if (isReadOnly) return;
-        utils.card.byId.setData({ cardPublicId }, context?.previousState);
+        cardCache.byId.setData({ cardPublicId }, context?.previousState);
         showPopup({
           header: t`Unable to delete attachment`,
           message: t`Please try again later, or contact customer support.`,
@@ -85,7 +85,7 @@ export function AttachmentThumbnails({
       },
       onSettled: async () => {
         if (isReadOnly) return;
-        await invalidateCard(utils, cardPublicId);
+        await invalidateCard(cardCache, cardPublicId);
       },
     },
   });

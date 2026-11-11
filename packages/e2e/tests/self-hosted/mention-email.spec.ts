@@ -14,7 +14,7 @@ import { DashboardPage } from "../support/pages/dashboard-page";
 import { MembersPage } from "../support/pages/members-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
 import { createTestUser } from "../support/test-user";
-import { waitForTrpcMutation } from "../support/wait-for-trpc";
+import { waitForApi } from "../support/wait-for-trpc";
 
 async function joinWorkspace(
   ownerPage: Page,
@@ -91,7 +91,7 @@ async function startEditingComment(page: Page): Promise<Locator> {
 }
 
 async function saveComment(page: Page) {
-  const updated = waitForTrpcMutation(page, "card.updateComment");
+  const updated = waitForApi(page, "PUT", /^\/cards\/[^/]+\/comments\//);
   await page.getByRole("button", { name: "Save", exact: true }).click();
   await updated;
 }
@@ -132,7 +132,7 @@ test(
     await newCommentEditor.pressSequentially("Please review this, ");
     await insertMention(page, newCommentEditor, recipient.name);
 
-    const added = waitForTrpcMutation(page, "card.addComment");
+    const added = waitForApi(page, "POST", /^\/cards\/[^/]+\/comments$/);
     await page
       .getByRole("button", { name: "Submit comment", exact: true })
       .click();

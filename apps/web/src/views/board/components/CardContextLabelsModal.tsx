@@ -1,17 +1,20 @@
 import { t } from "@lingui/core/macro";
 
-import { useModal } from "~/providers/modal";
-import { api } from "~/utils/api";
+import { useGetCard } from "@kan/api-client/hooks";
+
 import LabelIcon from "~/components/LabelIcon";
+import { useModal } from "~/providers/modal";
 import LabelSelector from "~/views/card/components/LabelSelector";
 
 export function CardContextLabelsModal() {
   const { entityId: cardPublicId, closeModal } = useModal();
 
-  const { data: card, isLoading } = api.card.byId.useQuery(
-    { cardPublicId: cardPublicId ?? "" },
-    { enabled: !!cardPublicId && cardPublicId.length >= 12 },
-  );
+  const { data: card, isLoading } = useGetCard(cardPublicId ?? "", {
+    query: {
+      enabled: !!cardPublicId && cardPublicId.length >= 12,
+      select: (res) => res.data,
+    },
+  });
 
   const boardLabels = card?.list?.board?.labels ?? [];
   const selectedLabels = card?.labels ?? [];

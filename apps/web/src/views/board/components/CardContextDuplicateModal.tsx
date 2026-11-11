@@ -10,11 +10,12 @@ import { useState } from "react";
 import { HiChevronDown } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
+import { useDuplicateCard, useGetCard } from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 import { useBoardCache } from "~/utils/boardCache";
 
 interface CardContextDuplicateModalProps {
@@ -35,9 +36,14 @@ export function CardContextDuplicateModal({
   const [position, setPosition] = useState<string>("");
   const [title, setTitle] = useState("");
 
-  const { data: card, isLoading: isCardLoading } = api.card.byId.useQuery(
-    { cardPublicId: cardPublicId ?? "" },
-    { enabled: !!cardPublicId && cardPublicId.length >= 12 },
+  const { data: card, isLoading: isCardLoading } = useGetCard(
+    cardPublicId ?? "",
+    {
+      query: {
+        enabled: !!cardPublicId && cardPublicId.length >= 12,
+        select: (res) => res.data,
+      },
+    },
   );
 
   const listOptions = lists.map((l) => ({
@@ -50,24 +56,26 @@ export function CardContextDuplicateModal({
   const hasChecklists = (card?.checklists?.length ?? 0) > 0;
   const hasAnyCopyOption = hasLabels || hasMembers || hasChecklists;
 
-  const duplicateCard = api.card.duplicate.useMutation({
-    onSuccess: () => {
-      showPopup({
-        header: t`Card duplicated`,
-        icon: "success",
-        message: t`The card has been duplicated.`,
-      });
-      closeModal();
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to duplicate card`,
-        message: t`Please try again.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await boardCache.invalidate();
+  const duplicateCard = useDuplicateCard({
+    mutation: {
+      onSuccess: () => {
+        showPopup({
+          header: t`Card duplicated`,
+          icon: "success",
+          message: t`The card has been duplicated.`,
+        });
+        closeModal();
+      },
+      onError: () => {
+        showPopup({
+          header: t`Unable to duplicate card`,
+          message: t`Please try again.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        await boardCache.invalidate();
+      },
     },
   });
 
@@ -82,12 +90,14 @@ export function CardContextDuplicateModal({
       return;
     duplicateCard.mutate({
       cardPublicId,
-      listPublicId,
-      copyLabels,
-      copyMembers,
-      copyChecklists,
-      ...(typeof indexNum === "number" && { index: indexNum }),
-      title: title.trim() || undefined,
+      data: {
+        listPublicId,
+        copyLabels,
+        copyMembers,
+        copyChecklists,
+        ...(typeof indexNum === "number" && { index: indexNum }),
+        title: title.trim() || undefined,
+      },
     });
   };
 

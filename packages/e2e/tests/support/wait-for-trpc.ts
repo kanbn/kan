@@ -22,3 +22,11 @@ export function waitForTrpcQuery(page: Page, procedure: string) {
       res.request().method() === "GET",
   );
 }
+
+export function waitForApi(page: Page, method: string, pathname: RegExp) {
+  return page.waitForResponse(
+    (res) =>
+      res.request().method() === method &&
+      pathname.test(new URL(res.url()).pathname),
+  );
+}

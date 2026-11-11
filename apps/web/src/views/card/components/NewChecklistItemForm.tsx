@@ -7,7 +7,7 @@ import { useCreateChecklistItem } from "@kan/api-client/hooks";
 import { generateUID } from "@kan/shared/utils";
 
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
+import { useCardCache } from "~/utils/cardCache";
 
 interface FormValues {
   title: string;
@@ -26,7 +26,7 @@ const NewChecklistItemForm = ({
   onCancel,
   readOnly = false,
 }: NewChecklistItemFormProps) => {
-  const utils = api.useUtils();
+  const cardCache = useCardCache();
   const { showPopup } = usePopup();
 
   const { setValue, watch, reset, getValues } = useForm<FormValues>({
@@ -55,11 +55,11 @@ const NewChecklistItemForm = ({
   const addChecklistItemMutation = useCreateChecklistItem({
     mutation: {
       onMutate: async (vars) => {
-        await utils.card.byId.cancel({ cardPublicId });
-        const previous = utils.card.byId.getData({ cardPublicId });
+        await cardCache.byId.cancel({ cardPublicId });
+        const previous = cardCache.byId.getData({ cardPublicId });
         const optimisticPublicId = `PLACEHOLDER_${generateUID()}`;
 
-        utils.card.byId.setData({ cardPublicId }, (old) => {
+        cardCache.byId.setData({ cardPublicId }, (old) => {
           if (!old) return old as any;
           const placeholder = {
             publicId: optimisticPublicId,
@@ -87,7 +87,7 @@ const NewChecklistItemForm = ({
       },
       onSuccess: (result, _vars, context) => {
         if (!context) return;
-        utils.card.byId.setData({ cardPublicId }, (old) => {
+        cardCache.byId.setData({ cardPublicId }, (old) => {
           if (!old) return old as any;
           const updatedChecklists = old.checklists.map((cl) => ({
             ...cl,
@@ -102,7 +102,7 @@ const NewChecklistItemForm = ({
       },
       onError: (_err, _vars, ctx) => {
         if (ctx?.previous)
-          utils.card.byId.setData({ cardPublicId }, ctx.previous);
+          cardCache.byId.setData({ cardPublicId }, ctx.previous);
         showPopup({
           header: t`Unable to add checklist item`,
           message: t`Please try again later, or contact customer support.`,
@@ -110,7 +110,7 @@ const NewChecklistItemForm = ({
         });
       },
       onSettled: async () => {
-        await utils.card.getActivities.invalidate({ cardPublicId });
+        await cardCache.getActivities.invalidate({ cardPublicId });
       },
     },
   });

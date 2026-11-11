@@ -2,13 +2,15 @@ import { t } from "@lingui/core/macro";
 import { useForm } from "react-hook-form";
 import { HiOutlineArrowUp } from "react-icons/hi2";
 
+import { useAddCardComment } from "@kan/api-client/hooks";
+
 import type { WorkspaceMember } from "~/components/Editor";
 import Editor from "~/components/Editor";
 import LoadingSpinner from "~/components/LoadingSpinner";
 import { Tooltip } from "~/components/Tooltip";
 import { usePermissions } from "~/hooks/usePermissions";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
+import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface FormValues {
@@ -24,7 +26,7 @@ const NewCommentForm = ({
   workspaceMembers: WorkspaceMember[];
   onCommentCreated?: (commentPublicId: string) => void;
 }) => {
-  const utils = api.useUtils();
+  const cardCache = useCardCache();
   const { showPopup } = usePopup();
   const { canCreateComment } = usePermissions();
   const { handleSubmit, setValue, watch, reset } = useForm<FormValues>({
@@ -33,27 +35,29 @@ const NewCommentForm = ({
     },
   });
 
-  const addCommentMutation = api.card.addComment.useMutation({
-    onSuccess: (comment) => {
-      onCommentCreated?.(comment.publicId);
-    },
-    onError: (_error, _newList) => {
-      showPopup({
-        header: t`Unable to add comment`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      reset();
-      await invalidateCard(utils, cardPublicId);
+  const addCommentMutation = useAddCardComment({
+    mutation: {
+      onSuccess: ({ data: comment }) => {
+        onCommentCreated?.(comment.publicId);
+      },
+      onError: (_error, _newList) => {
+        showPopup({
+          header: t`Unable to add comment`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        reset();
+        await invalidateCard(cardCache, cardPublicId);
+      },
     },
   });
 
   const onSubmit = (data: FormValues) => {
     addCommentMutation.mutate({
       cardPublicId,
-      comment: data.comment,
+      data: { comment: data.comment },
     });
   };
 

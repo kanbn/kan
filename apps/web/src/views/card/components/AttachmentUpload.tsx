@@ -8,13 +8,13 @@ import { twMerge } from "tailwind-merge";
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
+import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
 export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
   const { openModal } = useModal();
   const { showPopup } = usePopup();
-  const utils = api.useUtils();
+  const cardCache = useCardCache();
   const [uploading, setUploading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -40,7 +40,7 @@ export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
         throw new Error("Upload failed");
       }
 
-      await invalidateCard(utils, cardPublicId);
+      await invalidateCard(cardCache, cardPublicId);
       showPopup({
         header: t`Attachment uploaded`,
         message: t`Your file has been uploaded successfully.`,

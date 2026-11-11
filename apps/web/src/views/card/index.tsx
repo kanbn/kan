@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
+import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
 import { IoChevronForwardSharp } from "react-icons/io5";
 
+import { useGetCard, useToggleCardLabel } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
 import Avatar from "~/components/Avatar";
@@ -25,9 +27,11 @@ import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
+import { getApiErrorStatus } from "~/utils/apiError";
 import { getBoardReturnUrl } from "~/utils/board-return-url";
+import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
+import { updateCardFromInput } from "~/utils/cardMutations";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmation";
 import ActivityList from "./components/ActivityList";
@@ -60,10 +64,12 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
     ? router.query.cardId[0]
     : router.query.cardId;
 
-  const { data: card } = api.card.byId.useQuery(
-    { cardPublicId: cardId ?? "" },
-    { enabled: !!cardId && cardId.length >= 12 },
-  );
+  const { data: card } = useGetCard(cardId ?? "", {
+    query: {
+      enabled: !!cardId && cardId.length >= 12,
+      select: (res) => res.data,
+    },
+  });
 
   const isCreator = card?.createdBy && session?.user.id === card.createdBy;
   const canEdit = canEditCard || isCreator;
@@ -171,7 +177,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
 export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const router = useRouter();
   const activitySortOrder = useActivitySortOrder();
-  const utils = api.useUtils();
+  const cardCache = useCardCache();
   const {
     modalContentType,
     entityId,
@@ -203,15 +209,17 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     data: card,
     isLoading,
     error,
-  } = api.card.byId.useQuery(
-    { cardPublicId: cardId ?? "" },
-    { enabled: !!cardId && cardId.length >= 12 },
-  );
+  } = useGetCard(cardId ?? "", {
+    query: {
+      enabled: !!cardId && cardId.length >= 12,
+      select: (res) => res.data,
+    },
+  });
 
   // Redirect to 404 if card doesn't exist
   useEffect(() => {
     if (router.isReady && cardId && !isLoading) {
-      if (error?.data?.code === "NOT_FOUND" || (!card && !isLoading)) {
+      if (getApiErrorStatus(error) === 404 || (!card && !isLoading)) {
         router.replace("/404");
       }
     }
@@ -226,7 +234,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const canEdit = canEditCard || isCreator;
 
   const refetchCard = async () => {
-    if (cardId) await utils.card.byId.refetch({ cardPublicId: cardId });
+    if (cardId) await cardCache.byId.refetch({ cardPublicId: cardId });
   };
 
   const board = card?.list.board;
@@ -252,7 +260,8 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
           : null,
       })) ?? [];
 
-  const updateCard = api.card.update.useMutation({
+  const updateCard = useMutation({
+    mutationFn: updateCardFromInput,
     onError: () => {
       showPopup({
         header: t`Unable to update card`,
@@ -261,22 +270,24 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
       });
     },
     onSettled: async () => {
-      if (cardId) await invalidateCard(utils, cardId);
+      if (cardId) await invalidateCard(cardCache, cardId);
     },
   });
 
-  const addOrRemoveLabel = api.card.addOrRemoveLabel.useMutation({
-    onError: () => {
-      showPopup({
-        header: t`Unable to add label`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      if (cardId) {
-        await utils.card.byId.invalidate({ cardPublicId: cardId });
-      }
+  const addOrRemoveLabel = useToggleCardLabel({
+    mutation: {
+      onError: () => {
+        showPopup({
+          header: t`Unable to add label`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        if (cardId) {
+          await cardCache.byId.invalidate({ cardPublicId: cardId });
+        }
+      },
     },
   });
 

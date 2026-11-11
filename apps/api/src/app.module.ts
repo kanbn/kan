@@ -8,6 +8,7 @@ import { HealthController } from "./health.controller.js";
 import { AttachmentModule } from "./modules/attachment/attachment.module.js";
 import { BoardMemberModule } from "./modules/board-member/board-member.module.js";
 import { BoardModule } from "./modules/board/board.module.js";
+import { CardModule } from "./modules/card/card.module.js";
 import { ChecklistModule } from "./modules/checklist/checklist.module.js";
 import { FeedbackModule } from "./modules/feedback/feedback.module.js";
 import { ImportModule } from "./modules/import/import.module.js";
@@ -27,6 +28,7 @@ import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
     AttachmentModule,
     BoardModule,
     BoardMemberModule,
+    CardModule,
     ChecklistModule,
     FeedbackModule,
     ImportModule,

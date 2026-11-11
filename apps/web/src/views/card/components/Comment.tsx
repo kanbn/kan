@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiEllipsisHorizontal, HiPencil, HiTrash } from "react-icons/hi2";
 
+import { useGetCard, useUpdateCardComment } from "@kan/api-client/hooks";
+
 import type { WorkspaceMember } from "~/components/Editor";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
@@ -12,7 +14,7 @@ import Editor from "~/components/Editor";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
+import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 import { getAvatarUrl } from "~/utils/helpers";
 
@@ -46,7 +48,7 @@ const Comment = ({
   isViewOnly: boolean;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const utils = api.useUtils();
+  const cardCache = useCardCache();
   const { showPopup } = usePopup();
   const { openModal } = useModal();
   const { canEditComment, canDeleteComment } = usePermissions();
@@ -56,14 +58,12 @@ const Comment = ({
     },
   });
 
-  const { data: cardData } = api.card.byId.useQuery(
-    {
-      cardPublicId,
-    },
-    {
+  const { data: cardData } = useGetCard(cardPublicId, {
+    query: {
       enabled: !!cardPublicId && cardPublicId.length >= 12,
+      select: (res) => res.data,
     },
-  );
+  });
 
   const workspaceMembers: WorkspaceMember[] =
     cardData?.list.board.workspace.members
@@ -80,27 +80,29 @@ const Comment = ({
           : null,
       })) ?? [];
 
-  if (!publicId) return null;
-
-  const updateCommentMutation = api.card.updateComment.useMutation({
-    onSuccess: async () => {
-      await invalidateCard(utils, cardPublicId);
-      setIsEditing(false);
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to update comment`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
+  const updateCommentMutation = useUpdateCardComment({
+    mutation: {
+      onSuccess: async () => {
+        await invalidateCard(cardCache, cardPublicId);
+        setIsEditing(false);
+      },
+      onError: () => {
+        showPopup({
+          header: t`Unable to update comment`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
     },
   });
+
+  if (!publicId) return null;
 
   const onSubmit = (data: FormValues) => {
     updateCommentMutation.mutate({
       cardPublicId,
-      comment: data.comment,
       commentPublicId: publicId,
+      data: { comment: data.comment },
     });
   };
 

@@ -1,11 +1,12 @@
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import { AuthPage } from "../support/pages/auth-page";
 import { BoardPage } from "../support/pages/board-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
 import { createTestUser } from "../support/test-user";
-import { waitForTrpcMutation } from "../support/wait-for-trpc";
+import { waitForApi } from "../support/wait-for-trpc";
 
 test(
   "editing the description right after the title save keeps both edits",
@@ -34,20 +35,18 @@ test(
     const titleSaveGate = new Promise<void>((resolve) => {
       releaseTitleSave = resolve;
     });
-    await page.route(/\/api\/trpc\/card\.update/, async (route) => {
-      await titleSaveGate;
+    await page.route(/\/cards\/[^/?]+$/, async (route) => {
+      if (route.request().method() === "PUT") await titleSaveGate;
       await route.continue();
     });
 
     const titleInput = page.locator("#title");
     await titleInput.fill("Card race test card v2");
 
-    const titleSaved = waitForTrpcMutation(page, "card.update");
+    const titleSaved = waitForApi(page, "PUT", /^\/cards\/[^/]+$/);
 
     // Clicking into the description blurs and saves the (now gated) title.
-    const description = page
-      .locator('.tiptap[contenteditable="true"]')
-      .first();
+    const description = page.locator('.tiptap[contenteditable="true"]').first();
     await description.click();
     await description.pressSequentially("new description text");
 
@@ -57,19 +56,18 @@ test(
     // Give the card.byId refetch the save just triggered a moment to resolve.
     await page.waitForTimeout(500);
 
-    const descriptionSaved = waitForTrpcMutation(page, "card.update");
+    const descriptionSaved = waitForApi(page, "PUT", /^\/cards\/[^/]+$/);
     await titleInput.click();
     await descriptionSaved;
 
     const cardResponse = await page.request.get(
-      `/api/trpc/card.byId?batch=1&input=${encodeURIComponent(
-        JSON.stringify({ "0": { json: { cardPublicId } } }),
-      )}`,
+      `${apiBaseURL}/cards/${cardPublicId}`,
     );
-    const cardBody = (await cardResponse.json()) as [
-      { result: { data: { json: { title: string; description: string } } } },
-    ];
-    const cardJson = cardBody[0].result.data.json;
+    const cardBody = (await cardResponse.json()) as {
+      title: string;
+      description: string;
+    };
+    const cardJson = cardBody;
 
     expect(cardJson.title).toBe("Card race test card v2");
     expect(cardJson.description).toContain("new description text");
