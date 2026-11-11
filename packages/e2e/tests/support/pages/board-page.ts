@@ -1,7 +1,7 @@
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 
-import { waitForResponsePath, waitForTrpcMutation } from "../wait-for-trpc";
+import { waitForApi, waitForResponsePath } from "../wait-for-trpc";
 
 export class BoardPage {
   constructor(private readonly page: Page) {}
@@ -44,7 +44,7 @@ export class BoardPage {
       : this.page;
     await scope.getByRole("button", { name: "Add card", exact: true }).click();
     await this.page.getByPlaceholder("Card title").fill(title);
-    const created = waitForTrpcMutation(this.page, "card.create");
+    const created = waitForApi(this.page, "POST", /^\/cards$/);
     await this.page.getByRole("button", { name: "Create card" }).click();
     await this.page
       .getByRole("heading", { name: "New card" })
@@ -169,7 +169,11 @@ export class BoardPage {
     await dialog.getByRole("button", { name: "Select a list" }).click();
     await this.page.getByRole("option", { name: targetListName }).click();
 
-    const duplicated = waitForTrpcMutation(this.page, "card.duplicate");
+    const duplicated = waitForApi(
+      this.page,
+      "POST",
+      /^\/cards\/[^/]+\/duplicate$/,
+    );
     await dialog
       .getByRole("button", { name: "Duplicate", exact: true })
       .click();

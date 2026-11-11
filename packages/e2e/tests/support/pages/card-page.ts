@@ -1,7 +1,11 @@
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 
-import { waitForResponsePath, waitForTrpcMutation } from "../wait-for-trpc";
+import {
+  waitForApi,
+  waitForResponsePath,
+  waitForTrpcMutation,
+} from "../wait-for-trpc";
 
 export class CardPage {
   constructor(private readonly page: Page) {}
@@ -17,7 +21,7 @@ export class CardPage {
     await editor.click();
     await editor.pressSequentially(text);
 
-    const updated = waitForTrpcMutation(this.page, "card.update");
+    const updated = waitForApi(this.page, "PUT", /^\/cards\/[^/]+$/);
     await this.page.locator("#title").click();
     await updated;
   }
@@ -29,7 +33,7 @@ export class CardPage {
 
   async moveToList(targetListName: string) {
     await this.currentListTrigger().click();
-    const updated = waitForTrpcMutation(this.page, "card.update");
+    const updated = waitForApi(this.page, "PUT", /^\/cards\/[^/]+$/);
     await this.page
       .getByRole("checkbox", { name: targetListName })
       .filter({ visible: true })
@@ -67,7 +71,7 @@ export class CardPage {
     const dialog = this.page.getByRole("dialog");
     await dialog.getByPlaceholder("Name").fill(name);
     const created = waitForResponsePath(this.page, "/labels");
-    const assigned = waitForTrpcMutation(this.page, "card.addOrRemoveLabel");
+    const assigned = waitForApi(this.page, "PUT", /^\/cards\/[^/]+\/labels\//);
     await dialog.getByRole("button", { name: "Create label" }).click();
     const createdResponse = await created;
     await assigned;
@@ -116,7 +120,7 @@ export class CardPage {
     const editor = this.editableCommentEditor();
     await editor.click();
     await editor.pressSequentially(text);
-    const added = waitForTrpcMutation(this.page, "card.addComment");
+    const added = waitForApi(this.page, "POST", /^\/cards\/[^/]+\/comments$/);
     await this.page
       .getByRole("button", { name: "Submit comment", exact: true })
       .click();
@@ -134,7 +138,7 @@ export class CardPage {
     await this.page.keyboard.press("ControlOrMeta+A");
     await editor.pressSequentially(newText);
 
-    const updated = waitForTrpcMutation(this.page, "card.updateComment");
+    const updated = waitForApi(this.page, "PUT", /^\/cards\/[^/]+\/comments\//);
     await this.page.getByRole("button", { name: "Save", exact: true }).click();
     await updated;
   }
@@ -145,7 +149,11 @@ export class CardPage {
       .click();
     await this.page.getByRole("menuitem", { name: "Delete comment" }).click();
 
-    const deleted = waitForTrpcMutation(this.page, "card.deleteComment");
+    const deleted = waitForApi(
+      this.page,
+      "DELETE",
+      /^\/cards\/[^/]+\/comments\//,
+    );
     await this.page
       .getByRole("button", { name: "Delete", exact: true })
       .click();
@@ -257,7 +265,7 @@ export class CardPage {
 
   async assignMember(memberName: string) {
     await this.memberSelectorTrigger().click();
-    const updated = waitForTrpcMutation(this.page, "card.addOrRemoveMember");
+    const updated = waitForApi(this.page, "PUT", /^\/cards\/[^/]+\/members\//);
     await this.page
       .getByRole("checkbox", { name: memberName })
       .filter({ visible: true })
@@ -278,7 +286,7 @@ export class CardPage {
       .filter({ visible: true })
       .click();
 
-    const updated = waitForTrpcMutation(this.page, "card.update");
+    const updated = waitForApi(this.page, "PUT", /^\/cards\/[^/]+$/);
     await this.page.mouse.click(10, 10);
     await updated;
   }

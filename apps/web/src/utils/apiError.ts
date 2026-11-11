@@ -10,3 +10,22 @@ export function getApiErrorStatus(error: unknown): number | undefined {
   }
   return undefined;
 }
+
+/**
+ * The validation message for one request field, from the `errors` (zod
+ * issues) a 400 "Validation failed" response carries.
+ */
+export function getApiFieldError(
+  error: unknown,
+  field: string,
+): string | undefined {
+  const issues =
+    error instanceof Error && "data" in error
+      ? (error as Error & { data?: { errors?: unknown } }).data?.errors
+      : undefined;
+  if (!Array.isArray(issues)) return undefined;
+  const issue = (issues as { path?: unknown[]; message?: string }[]).find(
+    (item) => item.path?.[0] === field,
+  );
+  return issue?.message;
+}

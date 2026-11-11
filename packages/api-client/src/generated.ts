@@ -436,6 +436,495 @@ export interface BoardMemberRemoveResponseDto {
   publicId: string;
 }
 
+export type CreateCardDtoPosition = typeof CreateCardDtoPosition[keyof typeof CreateCardDtoPosition];
+
+
+export const CreateCardDtoPosition = {
+  start: 'start',
+  end: 'end',
+} as const;
+
+export interface CreateCardDto {
+  /**
+     * @minLength 1
+     * @maxLength 2000
+     */
+  title: string;
+  /** @maxLength 10000 */
+  description: string;
+  /** @minLength 12 */
+  listPublicId: string;
+  /** @items.minLength 12 */
+  labelPublicIds: string[];
+  /** @items.minLength 12 */
+  memberPublicIds: string[];
+  position: CreateCardDtoPosition;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  dueDate?: string | null;
+}
+
+export interface PublicIdResponseDtoOutput {
+  publicId: string;
+}
+
+export interface UpdateCardDto {
+  /**
+     * @minLength 1
+     * @maxLength 2000
+     */
+  title?: string;
+  description?: string;
+  index?: number;
+  /** @minLength 12 */
+  listPublicId?: string;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  dueDate?: string | null;
+}
+
+export interface CardUpdateResponseDtoOutput {
+  publicId: string;
+  title: string;
+  /** @nullable */
+  description: string | null;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  dueDate: string | null;
+}
+
+export interface DuplicateCardDto {
+  /** @minLength 12 */
+  listPublicId: string;
+  /**
+     * @minimum 0
+     * @maximum 9007199254740991
+     */
+  index?: number;
+  /**
+     * @minLength 1
+     * @maxLength 2000
+     */
+  title?: string;
+  copyLabels: boolean;
+  copyMembers: boolean;
+  copyChecklists: boolean;
+}
+
+export interface CommentDto {
+  /** @minLength 1 */
+  comment: string;
+}
+
+export interface CommentResponseDtoOutput {
+  publicId: string;
+  comment: string;
+}
+
+export interface ToggleLabelResponseDtoOutput {
+  newLabel: boolean;
+}
+
+export interface ToggleMemberResponseDtoOutput {
+  newMember: boolean;
+}
+
+export type CardDetailDtoOutputLabelsItem = {
+  publicId: string;
+  name: string;
+  /** @nullable */
+  colourCode: string | null;
+};
+
+export type CardDetailDtoOutputAttachmentsItem = {
+  publicId: string;
+  contentType: string;
+  s3Key: string;
+  /** @nullable */
+  originalFilename: string | null;
+  /** @nullable */
+  size: number | null;
+  /** @nullable */
+  url: string | null;
+};
+
+export type CardDetailDtoOutputChecklistsItemItemsItem = {
+  publicId: string;
+  title: string;
+  completed: boolean;
+  index: number;
+};
+
+export type CardDetailDtoOutputChecklistsItem = {
+  publicId: string;
+  name: string;
+  index: number;
+  items: CardDetailDtoOutputChecklistsItemItemsItem[];
+};
+
+export type CardDetailDtoOutputListBoardLabelsItem = {
+  publicId: string;
+  name: string;
+  /** @nullable */
+  colourCode: string | null;
+};
+
+export type CardDetailDtoOutputListBoardListsItem = {
+  publicId: string;
+  name: string;
+};
+
+/**
+ * @nullable
+ */
+export type CardDetailDtoOutputListBoardWorkspaceMembersItemUser = {
+  /** @nullable */
+  id: string | null;
+  /** @nullable */
+  name: string | null;
+  email: string;
+  /** @nullable */
+  image: string | null;
+} | null;
+
+export type CardDetailDtoOutputListBoardWorkspaceMembersItem = {
+  publicId: string;
+  email: string;
+  status: string;
+  /** @nullable */
+  user: CardDetailDtoOutputListBoardWorkspaceMembersItemUser;
+};
+
+export type CardDetailDtoOutputListBoardWorkspace = {
+  publicId: string;
+  cardPrefix: string;
+  members: CardDetailDtoOutputListBoardWorkspaceMembersItem[];
+};
+
+export type CardDetailDtoOutputListBoard = {
+  publicId: string;
+  name: string;
+  labels: CardDetailDtoOutputListBoardLabelsItem[];
+  lists: CardDetailDtoOutputListBoardListsItem[];
+  workspace: CardDetailDtoOutputListBoardWorkspace;
+};
+
+export type CardDetailDtoOutputList = {
+  publicId: string;
+  name: string;
+  board: CardDetailDtoOutputListBoard;
+};
+
+/**
+ * @nullable
+ */
+export type CardDetailDtoOutputMembersItemUser = {
+  /** @nullable */
+  id: string | null;
+  /** @nullable */
+  name: string | null;
+} | null;
+
+export type CardDetailDtoOutputMembersItem = {
+  publicId: string;
+  email: string;
+  /** @nullable */
+  user: CardDetailDtoOutputMembersItemUser;
+};
+
+/**
+ * @nullable
+ */
+export type CardDetailDtoOutputActivitiesItemFromList = {
+  publicId: string;
+  name: string;
+  index: number;
+} | null;
+
+/**
+ * @nullable
+ */
+export type CardDetailDtoOutputActivitiesItemToList = {
+  publicId: string;
+  name: string;
+  index: number;
+} | null;
+
+/**
+ * @nullable
+ */
+export type CardDetailDtoOutputActivitiesItemLabel = {
+  publicId: string;
+  name: string;
+} | null;
+
+/**
+ * @nullable
+ */
+export type CardDetailDtoOutputActivitiesItemComment = {
+  publicId: string;
+  comment: string;
+  /** @nullable */
+  createdBy: string | null;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  updatedAt: string | null;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  deletedAt: string | null;
+} | null;
+
+/**
+ * @nullable
+ */
+export type CardDetailDtoOutputActivitiesItemMemberUser = {
+  /** @nullable */
+  name: string | null;
+  email: string;
+} | null;
+
+/**
+ * @nullable
+ */
+export type CardDetailDtoOutputActivitiesItemMember = {
+  publicId: string;
+  /** @nullable */
+  user: CardDetailDtoOutputActivitiesItemMemberUser;
+} | null;
+
+/**
+ * @nullable
+ */
+export type CardDetailDtoOutputActivitiesItemUser = {
+  /** @nullable */
+  name: string | null;
+  email: string;
+} | null;
+
+export type CardDetailDtoOutputActivitiesItem = {
+  publicId: string;
+  type: string;
+  /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$ */
+  createdAt: string;
+  /** @nullable */
+  fromIndex: number | null;
+  /** @nullable */
+  toIndex: number | null;
+  /** @nullable */
+  fromTitle: string | null;
+  /** @nullable */
+  toTitle: string | null;
+  /** @nullable */
+  fromDescription: string | null;
+  /** @nullable */
+  toDescription: string | null;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  fromDueDate: string | null;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  toDueDate: string | null;
+  /** @nullable */
+  fromList: CardDetailDtoOutputActivitiesItemFromList;
+  /** @nullable */
+  toList: CardDetailDtoOutputActivitiesItemToList;
+  /** @nullable */
+  label: CardDetailDtoOutputActivitiesItemLabel;
+  /** @nullable */
+  comment: CardDetailDtoOutputActivitiesItemComment;
+  /** @nullable */
+  member: CardDetailDtoOutputActivitiesItemMember;
+  /** @nullable */
+  user: CardDetailDtoOutputActivitiesItemUser;
+};
+
+export interface CardDetailDtoOutput {
+  publicId: string;
+  title: string;
+  /** @nullable */
+  description: string | null;
+  /** @nullable */
+  cardNumber: number | null;
+  index: number;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  dueDate: string | null;
+  /** @nullable */
+  createdBy: string | null;
+  labels: CardDetailDtoOutputLabelsItem[];
+  attachments: CardDetailDtoOutputAttachmentsItem[];
+  checklists: CardDetailDtoOutputChecklistsItem[];
+  list: CardDetailDtoOutputList;
+  members: CardDetailDtoOutputMembersItem[];
+  activities: CardDetailDtoOutputActivitiesItem[];
+}
+
+/**
+ * @nullable
+ */
+export type ActivitiesResponseDtoOutputActivitiesItemFromList = {
+  publicId: string;
+  name: string;
+  index: number;
+} | null;
+
+/**
+ * @nullable
+ */
+export type ActivitiesResponseDtoOutputActivitiesItemToList = {
+  publicId: string;
+  name: string;
+  index: number;
+} | null;
+
+/**
+ * @nullable
+ */
+export type ActivitiesResponseDtoOutputActivitiesItemLabel = {
+  publicId: string;
+  name: string;
+} | null;
+
+/**
+ * @nullable
+ */
+export type ActivitiesResponseDtoOutputActivitiesItemComment = {
+  publicId: string;
+  comment: string;
+  /** @nullable */
+  createdBy: string | null;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  updatedAt: string | null;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  deletedAt: string | null;
+} | null;
+
+/**
+ * @nullable
+ */
+export type ActivitiesResponseDtoOutputActivitiesItemMemberUser = {
+  /** @nullable */
+  id: string | null;
+  /** @nullable */
+  name: string | null;
+  email: string;
+  /** @nullable */
+  image: string | null;
+} | null;
+
+/**
+ * @nullable
+ */
+export type ActivitiesResponseDtoOutputActivitiesItemMember = {
+  publicId: string;
+  /** @nullable */
+  user: ActivitiesResponseDtoOutputActivitiesItemMemberUser;
+} | null;
+
+/**
+ * @nullable
+ */
+export type ActivitiesResponseDtoOutputActivitiesItemUser = {
+  /** @nullable */
+  id: string | null;
+  /** @nullable */
+  name: string | null;
+  email: string;
+  /** @nullable */
+  image: string | null;
+} | null;
+
+/**
+ * @nullable
+ */
+export type ActivitiesResponseDtoOutputActivitiesItemAttachment = {
+  publicId: string;
+  filename: string;
+  /** @nullable */
+  originalFilename: string | null;
+} | null;
+
+export type ActivitiesResponseDtoOutputActivitiesItem = {
+  publicId: string;
+  type: string;
+  /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$ */
+  createdAt: string;
+  /** @nullable */
+  fromIndex: number | null;
+  /** @nullable */
+  toIndex: number | null;
+  /** @nullable */
+  fromTitle: string | null;
+  /** @nullable */
+  toTitle: string | null;
+  /** @nullable */
+  fromDescription: string | null;
+  /** @nullable */
+  toDescription: string | null;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  fromDueDate: string | null;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  toDueDate: string | null;
+  /** @nullable */
+  fromList: ActivitiesResponseDtoOutputActivitiesItemFromList;
+  /** @nullable */
+  toList: ActivitiesResponseDtoOutputActivitiesItemToList;
+  /** @nullable */
+  label: ActivitiesResponseDtoOutputActivitiesItemLabel;
+  /** @nullable */
+  comment: ActivitiesResponseDtoOutputActivitiesItemComment;
+  /** @nullable */
+  member: ActivitiesResponseDtoOutputActivitiesItemMember;
+  /** @nullable */
+  user: ActivitiesResponseDtoOutputActivitiesItemUser;
+  /** @nullable */
+  attachment: ActivitiesResponseDtoOutputActivitiesItemAttachment;
+};
+
+export interface ActivitiesResponseDtoOutput {
+  activities: ActivitiesResponseDtoOutputActivitiesItem[];
+  hasMore: boolean;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  nextCursor: string | null;
+  /**
+     * @minLength 12
+     * @maxLength 12
+     * @nullable
+     */
+  nextCursorPublicId: string | null;
+}
+
 export interface UpdateChecklistDto {
   /**
      * @minLength 1
@@ -1219,6 +1708,30 @@ export const GetPublicBoardBySlugDueDateFiltersItem = {
   'next-week': 'next-week',
   'next-month': 'next-month',
   'no-due-date': 'no-due-date',
+} as const;
+
+export type GetCardActivitiesParams = {
+  /**
+   * @minimum 1
+   * @maximum 100
+   */
+  limit?: number;
+  /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$ */
+  cursor?: string;
+  /**
+   * @minLength 12
+   * @maxLength 12
+   */
+  cursorPublicId?: string;
+  order?: GetCardActivitiesOrder;
+};
+
+export type GetCardActivitiesOrder = typeof GetCardActivitiesOrder[keyof typeof GetCardActivitiesOrder];
+
+
+export const GetCardActivitiesOrder = {
+  oldest: 'oldest',
+  newest: 'newest',
 } as const;
 
 export type GetIntegrationAuthorizationUrlParams = {
@@ -2600,6 +3113,1096 @@ export const useRemoveBoardMember = <TError = unknown,
       > => {
       return useMutation(getRemoveBoardMemberMutationOptions(options), queryClient);
     }
+
+export type createCardResponse201 = {
+  data: PublicIdResponseDtoOutput
+  status: 201
+}
+
+export type createCardResponseSuccess = (createCardResponse201) & {
+  headers: Headers;
+};
+;
+
+export type createCardResponse = (createCardResponseSuccess)
+
+export const getCreateCardUrl = () => {
+
+
+
+
+  return `/cards`
+}
+
+/**
+ * @summary Create a card
+ */
+export const createCard = async (createCardDto: CreateCardDto, options?: Parameters<typeof customFetch>[1]): Promise<createCardResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<createCardResponse>(getCreateCardUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(createCardDto)
+  }
+);}
+
+
+
+
+
+export const getCreateCardMutationKey = () => ['createCard'] as const;
+
+export const getCreateCardMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createCard>>, TError,CreateCardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createCard>>, TError,CreateCardMutationVariables, TContext> => {
+
+const mutationKey = getCreateCardMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createCard>>, CreateCardMutationVariables> = (props) => {
+          const {data} = props ?? {};
+
+          return  createCard(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateCardMutationResult = NonNullable<Awaited<ReturnType<typeof createCard>>>
+    export type CreateCardMutationBody = CreateCardDto
+    export type CreateCardMutationError = unknown
+    export type CreateCardMutationVariables = {data: CreateCardDto}
+
+    /** @summary Create a card */
+export const useCreateCard = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createCard>>, TError,CreateCardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof createCard>>,
+        TError,
+        CreateCardMutationVariables,
+        TContext
+      > => {
+      return useMutation(getCreateCardMutationOptions(options), queryClient);
+    }
+
+export type updateCardResponse200 = {
+  data: CardUpdateResponseDtoOutput
+  status: 200
+}
+
+export type updateCardResponseSuccess = (updateCardResponse200) & {
+  headers: Headers;
+};
+;
+
+export type updateCardResponse = (updateCardResponseSuccess)
+
+export const getUpdateCardUrl = (cardPublicId: string,) => {
+
+
+
+
+  return `/cards/${cardPublicId}`
+}
+
+/**
+ * @summary Update a card
+ */
+export const updateCard = async (cardPublicId: string,
+    updateCardDto: UpdateCardDto, options?: Parameters<typeof customFetch>[1]): Promise<updateCardResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<updateCardResponse>(getUpdateCardUrl(cardPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(updateCardDto)
+  }
+);}
+
+
+
+
+
+export const getUpdateCardMutationKey = () => ['updateCard'] as const;
+
+export const getUpdateCardMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCard>>, TError,UpdateCardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateCard>>, TError,UpdateCardMutationVariables, TContext> => {
+
+const mutationKey = getUpdateCardMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateCard>>, UpdateCardMutationVariables> = (props) => {
+          const {cardPublicId,data} = props ?? {};
+
+          return  updateCard(cardPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateCardMutationResult = NonNullable<Awaited<ReturnType<typeof updateCard>>>
+    export type UpdateCardMutationBody = UpdateCardDto
+    export type UpdateCardMutationError = unknown
+    export type UpdateCardMutationVariables = {cardPublicId: string;data: UpdateCardDto}
+
+    /** @summary Update a card */
+export const useUpdateCard = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCard>>, TError,UpdateCardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof updateCard>>,
+        TError,
+        UpdateCardMutationVariables,
+        TContext
+      > => {
+      return useMutation(getUpdateCardMutationOptions(options), queryClient);
+    }
+
+export type deleteCardResponse200 = {
+  data: SuccessResponseDtoOutput
+  status: 200
+}
+
+export type deleteCardResponseSuccess = (deleteCardResponse200) & {
+  headers: Headers;
+};
+;
+
+export type deleteCardResponse = (deleteCardResponseSuccess)
+
+export const getDeleteCardUrl = (cardPublicId: string,) => {
+
+
+
+
+  return `/cards/${cardPublicId}`
+}
+
+/**
+ * @summary Delete a card
+ */
+export const deleteCard = async (cardPublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<deleteCardResponse> => {
+
+  return customFetch<deleteCardResponse>(getDeleteCardUrl(cardPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+
+export const getDeleteCardMutationKey = () => ['deleteCard'] as const;
+
+export const getDeleteCardMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCard>>, TError,DeleteCardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteCard>>, TError,DeleteCardMutationVariables, TContext> => {
+
+const mutationKey = getDeleteCardMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteCard>>, DeleteCardMutationVariables> = (props) => {
+          const {cardPublicId} = props ?? {};
+
+          return  deleteCard(cardPublicId,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteCardMutationResult = NonNullable<Awaited<ReturnType<typeof deleteCard>>>
+
+    export type DeleteCardMutationError = unknown
+    export type DeleteCardMutationVariables = {cardPublicId: string}
+
+    /** @summary Delete a card */
+export const useDeleteCard = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCard>>, TError,DeleteCardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteCard>>,
+        TError,
+        DeleteCardMutationVariables,
+        TContext
+      > => {
+      return useMutation(getDeleteCardMutationOptions(options), queryClient);
+    }
+
+export type getCardResponse200 = {
+  data: CardDetailDtoOutput
+  status: 200
+}
+
+export type getCardResponseSuccess = (getCardResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getCardResponse = (getCardResponseSuccess)
+
+export const getGetCardUrl = (cardPublicId: string,) => {
+
+
+
+
+  return `/cards/${cardPublicId}`
+}
+
+/**
+ * @summary Get a card by public ID
+ */
+export const getCard = async (cardPublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<getCardResponse> => {
+
+  return customFetch<getCardResponse>(getGetCardUrl(cardPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetCardQueryKey = (cardPublicId: string,) => {
+    return [
+    `/cards/${cardPublicId}`
+    ] as const;
+    }
+
+
+export const getGetCardQueryOptions = <TData = Awaited<ReturnType<typeof getCard>>, TError = unknown>(cardPublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCard>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetCardQueryKey(cardPublicId);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getCard>>> = ({ signal }) => getCard(cardPublicId, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: cardPublicId !== null && cardPublicId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getCard>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetCardQueryResult = NonNullable<Awaited<ReturnType<typeof getCard>>>
+export type GetCardQueryError = unknown
+
+
+/** @summary Get a card by public ID */
+export function useGetCard<TData = Awaited<ReturnType<typeof getCard>>, TError = unknown>(
+ cardPublicId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCard>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getCard>>,
+          TError,
+          Awaited<ReturnType<typeof getCard>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get a card by public ID */
+export function useGetCard<TData = Awaited<ReturnType<typeof getCard>>, TError = unknown>(
+ cardPublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCard>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getCard>>,
+          TError,
+          Awaited<ReturnType<typeof getCard>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get a card by public ID */
+export function useGetCard<TData = Awaited<ReturnType<typeof getCard>>, TError = unknown>(
+ cardPublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCard>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get a card by public ID */
+export function useGetCard<TData = Awaited<ReturnType<typeof getCard>>, TError = unknown>(
+ cardPublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCard>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetCardQueryOptions(cardPublicId,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type duplicateCardResponse201 = {
+  data: PublicIdResponseDtoOutput
+  status: 201
+}
+
+export type duplicateCardResponseSuccess = (duplicateCardResponse201) & {
+  headers: Headers;
+};
+;
+
+export type duplicateCardResponse = (duplicateCardResponseSuccess)
+
+export const getDuplicateCardUrl = (cardPublicId: string,) => {
+
+
+
+
+  return `/cards/${cardPublicId}/duplicate`
+}
+
+/**
+ * @summary Duplicate a card
+ */
+export const duplicateCard = async (cardPublicId: string,
+    duplicateCardDto: DuplicateCardDto, options?: Parameters<typeof customFetch>[1]): Promise<duplicateCardResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<duplicateCardResponse>(getDuplicateCardUrl(cardPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(duplicateCardDto)
+  }
+);}
+
+
+
+
+
+export const getDuplicateCardMutationKey = () => ['duplicateCard'] as const;
+
+export const getDuplicateCardMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof duplicateCard>>, TError,DuplicateCardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof duplicateCard>>, TError,DuplicateCardMutationVariables, TContext> => {
+
+const mutationKey = getDuplicateCardMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof duplicateCard>>, DuplicateCardMutationVariables> = (props) => {
+          const {cardPublicId,data} = props ?? {};
+
+          return  duplicateCard(cardPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DuplicateCardMutationResult = NonNullable<Awaited<ReturnType<typeof duplicateCard>>>
+    export type DuplicateCardMutationBody = DuplicateCardDto
+    export type DuplicateCardMutationError = unknown
+    export type DuplicateCardMutationVariables = {cardPublicId: string;data: DuplicateCardDto}
+
+    /** @summary Duplicate a card */
+export const useDuplicateCard = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof duplicateCard>>, TError,DuplicateCardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof duplicateCard>>,
+        TError,
+        DuplicateCardMutationVariables,
+        TContext
+      > => {
+      return useMutation(getDuplicateCardMutationOptions(options), queryClient);
+    }
+
+export type addCardCommentResponse201 = {
+  data: CommentResponseDtoOutput
+  status: 201
+}
+
+export type addCardCommentResponseSuccess = (addCardCommentResponse201) & {
+  headers: Headers;
+};
+;
+
+export type addCardCommentResponse = (addCardCommentResponseSuccess)
+
+export const getAddCardCommentUrl = (cardPublicId: string,) => {
+
+
+
+
+  return `/cards/${cardPublicId}/comments`
+}
+
+/**
+ * @summary Add a comment
+ */
+export const addCardComment = async (cardPublicId: string,
+    commentDto: CommentDto, options?: Parameters<typeof customFetch>[1]): Promise<addCardCommentResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<addCardCommentResponse>(getAddCardCommentUrl(cardPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(commentDto)
+  }
+);}
+
+
+
+
+
+export const getAddCardCommentMutationKey = () => ['addCardComment'] as const;
+
+export const getAddCardCommentMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof addCardComment>>, TError,AddCardCommentMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof addCardComment>>, TError,AddCardCommentMutationVariables, TContext> => {
+
+const mutationKey = getAddCardCommentMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof addCardComment>>, AddCardCommentMutationVariables> = (props) => {
+          const {cardPublicId,data} = props ?? {};
+
+          return  addCardComment(cardPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type AddCardCommentMutationResult = NonNullable<Awaited<ReturnType<typeof addCardComment>>>
+    export type AddCardCommentMutationBody = CommentDto
+    export type AddCardCommentMutationError = unknown
+    export type AddCardCommentMutationVariables = {cardPublicId: string;data: CommentDto}
+
+    /** @summary Add a comment */
+export const useAddCardComment = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof addCardComment>>, TError,AddCardCommentMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof addCardComment>>,
+        TError,
+        AddCardCommentMutationVariables,
+        TContext
+      > => {
+      return useMutation(getAddCardCommentMutationOptions(options), queryClient);
+    }
+
+export type updateCardCommentResponse200 = {
+  data: CommentResponseDtoOutput
+  status: 200
+}
+
+export type updateCardCommentResponseSuccess = (updateCardCommentResponse200) & {
+  headers: Headers;
+};
+;
+
+export type updateCardCommentResponse = (updateCardCommentResponseSuccess)
+
+export const getUpdateCardCommentUrl = (cardPublicId: string,
+    commentPublicId: string,) => {
+
+
+
+
+  return `/cards/${cardPublicId}/comments/${commentPublicId}`
+}
+
+/**
+ * @summary Update a comment
+ */
+export const updateCardComment = async (cardPublicId: string,
+    commentPublicId: string,
+    commentDto: CommentDto, options?: Parameters<typeof customFetch>[1]): Promise<updateCardCommentResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<updateCardCommentResponse>(getUpdateCardCommentUrl(cardPublicId,commentPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(commentDto)
+  }
+);}
+
+
+
+
+
+export const getUpdateCardCommentMutationKey = () => ['updateCardComment'] as const;
+
+export const getUpdateCardCommentMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCardComment>>, TError,UpdateCardCommentMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateCardComment>>, TError,UpdateCardCommentMutationVariables, TContext> => {
+
+const mutationKey = getUpdateCardCommentMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateCardComment>>, UpdateCardCommentMutationVariables> = (props) => {
+          const {cardPublicId,commentPublicId,data} = props ?? {};
+
+          return  updateCardComment(cardPublicId,commentPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateCardCommentMutationResult = NonNullable<Awaited<ReturnType<typeof updateCardComment>>>
+    export type UpdateCardCommentMutationBody = CommentDto
+    export type UpdateCardCommentMutationError = unknown
+    export type UpdateCardCommentMutationVariables = {cardPublicId: string;commentPublicId: string;data: CommentDto}
+
+    /** @summary Update a comment */
+export const useUpdateCardComment = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCardComment>>, TError,UpdateCardCommentMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof updateCardComment>>,
+        TError,
+        UpdateCardCommentMutationVariables,
+        TContext
+      > => {
+      return useMutation(getUpdateCardCommentMutationOptions(options), queryClient);
+    }
+
+export type deleteCardCommentResponse200 = {
+  data: PublicIdResponseDtoOutput
+  status: 200
+}
+
+export type deleteCardCommentResponseSuccess = (deleteCardCommentResponse200) & {
+  headers: Headers;
+};
+;
+
+export type deleteCardCommentResponse = (deleteCardCommentResponseSuccess)
+
+export const getDeleteCardCommentUrl = (cardPublicId: string,
+    commentPublicId: string,) => {
+
+
+
+
+  return `/cards/${cardPublicId}/comments/${commentPublicId}`
+}
+
+/**
+ * @summary Delete a comment
+ */
+export const deleteCardComment = async (cardPublicId: string,
+    commentPublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<deleteCardCommentResponse> => {
+
+  return customFetch<deleteCardCommentResponse>(getDeleteCardCommentUrl(cardPublicId,commentPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+
+export const getDeleteCardCommentMutationKey = () => ['deleteCardComment'] as const;
+
+export const getDeleteCardCommentMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCardComment>>, TError,DeleteCardCommentMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteCardComment>>, TError,DeleteCardCommentMutationVariables, TContext> => {
+
+const mutationKey = getDeleteCardCommentMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteCardComment>>, DeleteCardCommentMutationVariables> = (props) => {
+          const {cardPublicId,commentPublicId} = props ?? {};
+
+          return  deleteCardComment(cardPublicId,commentPublicId,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteCardCommentMutationResult = NonNullable<Awaited<ReturnType<typeof deleteCardComment>>>
+
+    export type DeleteCardCommentMutationError = unknown
+    export type DeleteCardCommentMutationVariables = {cardPublicId: string;commentPublicId: string}
+
+    /** @summary Delete a comment */
+export const useDeleteCardComment = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCardComment>>, TError,DeleteCardCommentMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteCardComment>>,
+        TError,
+        DeleteCardCommentMutationVariables,
+        TContext
+      > => {
+      return useMutation(getDeleteCardCommentMutationOptions(options), queryClient);
+    }
+
+export type toggleCardLabelResponse200 = {
+  data: ToggleLabelResponseDtoOutput
+  status: 200
+}
+
+export type toggleCardLabelResponseSuccess = (toggleCardLabelResponse200) & {
+  headers: Headers;
+};
+;
+
+export type toggleCardLabelResponse = (toggleCardLabelResponseSuccess)
+
+export const getToggleCardLabelUrl = (cardPublicId: string,
+    labelPublicId: string,) => {
+
+
+
+
+  return `/cards/${cardPublicId}/labels/${labelPublicId}`
+}
+
+/**
+ * @summary Add or remove a label on a card
+ */
+export const toggleCardLabel = async (cardPublicId: string,
+    labelPublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<toggleCardLabelResponse> => {
+
+  return customFetch<toggleCardLabelResponse>(getToggleCardLabelUrl(cardPublicId,labelPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'PUT'
+
+
+  }
+);}
+
+
+
+
+
+export const getToggleCardLabelMutationKey = () => ['toggleCardLabel'] as const;
+
+export const getToggleCardLabelMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof toggleCardLabel>>, TError,ToggleCardLabelMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof toggleCardLabel>>, TError,ToggleCardLabelMutationVariables, TContext> => {
+
+const mutationKey = getToggleCardLabelMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof toggleCardLabel>>, ToggleCardLabelMutationVariables> = (props) => {
+          const {cardPublicId,labelPublicId} = props ?? {};
+
+          return  toggleCardLabel(cardPublicId,labelPublicId,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ToggleCardLabelMutationResult = NonNullable<Awaited<ReturnType<typeof toggleCardLabel>>>
+
+    export type ToggleCardLabelMutationError = unknown
+    export type ToggleCardLabelMutationVariables = {cardPublicId: string;labelPublicId: string}
+
+    /** @summary Add or remove a label on a card */
+export const useToggleCardLabel = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof toggleCardLabel>>, TError,ToggleCardLabelMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof toggleCardLabel>>,
+        TError,
+        ToggleCardLabelMutationVariables,
+        TContext
+      > => {
+      return useMutation(getToggleCardLabelMutationOptions(options), queryClient);
+    }
+
+export type toggleCardMemberResponse200 = {
+  data: ToggleMemberResponseDtoOutput
+  status: 200
+}
+
+export type toggleCardMemberResponseSuccess = (toggleCardMemberResponse200) & {
+  headers: Headers;
+};
+;
+
+export type toggleCardMemberResponse = (toggleCardMemberResponseSuccess)
+
+export const getToggleCardMemberUrl = (cardPublicId: string,
+    workspaceMemberPublicId: string,) => {
+
+
+
+
+  return `/cards/${cardPublicId}/members/${workspaceMemberPublicId}`
+}
+
+/**
+ * @summary Add or remove a member on a card
+ */
+export const toggleCardMember = async (cardPublicId: string,
+    workspaceMemberPublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<toggleCardMemberResponse> => {
+
+  return customFetch<toggleCardMemberResponse>(getToggleCardMemberUrl(cardPublicId,workspaceMemberPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'PUT'
+
+
+  }
+);}
+
+
+
+
+
+export const getToggleCardMemberMutationKey = () => ['toggleCardMember'] as const;
+
+export const getToggleCardMemberMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof toggleCardMember>>, TError,ToggleCardMemberMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof toggleCardMember>>, TError,ToggleCardMemberMutationVariables, TContext> => {
+
+const mutationKey = getToggleCardMemberMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof toggleCardMember>>, ToggleCardMemberMutationVariables> = (props) => {
+          const {cardPublicId,workspaceMemberPublicId} = props ?? {};
+
+          return  toggleCardMember(cardPublicId,workspaceMemberPublicId,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ToggleCardMemberMutationResult = NonNullable<Awaited<ReturnType<typeof toggleCardMember>>>
+
+    export type ToggleCardMemberMutationError = unknown
+    export type ToggleCardMemberMutationVariables = {cardPublicId: string;workspaceMemberPublicId: string}
+
+    /** @summary Add or remove a member on a card */
+export const useToggleCardMember = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof toggleCardMember>>, TError,ToggleCardMemberMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof toggleCardMember>>,
+        TError,
+        ToggleCardMemberMutationVariables,
+        TContext
+      > => {
+      return useMutation(getToggleCardMemberMutationOptions(options), queryClient);
+    }
+
+export type getCardActivitiesResponse200 = {
+  data: ActivitiesResponseDtoOutput
+  status: 200
+}
+
+export type getCardActivitiesResponseSuccess = (getCardActivitiesResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getCardActivitiesResponse = (getCardActivitiesResponseSuccess)
+
+export const getGetCardActivitiesUrl = (cardPublicId: string,
+    params?: GetCardActivitiesParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : String(value))
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/cards/${cardPublicId}/activities?${stringifiedParams}` : `/cards/${cardPublicId}/activities`
+}
+
+/**
+ * @summary Get a card's activities, paginated
+ */
+export const getCardActivities = async (cardPublicId: string,
+    params?: GetCardActivitiesParams, options?: Parameters<typeof customFetch>[1]): Promise<getCardActivitiesResponse> => {
+
+  return customFetch<getCardActivitiesResponse>(getGetCardActivitiesUrl(cardPublicId,params),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetCardActivitiesQueryKey = (cardPublicId: string,
+    params?: GetCardActivitiesParams,) => {
+    return [
+    `/cards/${cardPublicId}/activities`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getGetCardActivitiesQueryOptions = <TData = Awaited<ReturnType<typeof getCardActivities>>, TError = unknown>(cardPublicId: string,
+    params?: GetCardActivitiesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCardActivities>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetCardActivitiesQueryKey(cardPublicId,params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getCardActivities>>> = ({ signal }) => getCardActivities(cardPublicId,params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: cardPublicId !== null && cardPublicId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getCardActivities>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetCardActivitiesQueryResult = NonNullable<Awaited<ReturnType<typeof getCardActivities>>>
+export type GetCardActivitiesQueryError = unknown
+
+
+/** @summary Get a card's activities, paginated */
+export function useGetCardActivities<TData = Awaited<ReturnType<typeof getCardActivities>>, TError = unknown>(
+ cardPublicId: string,
+    params: undefined |  GetCardActivitiesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCardActivities>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getCardActivities>>,
+          TError,
+          Awaited<ReturnType<typeof getCardActivities>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get a card's activities, paginated */
+export function useGetCardActivities<TData = Awaited<ReturnType<typeof getCardActivities>>, TError = unknown>(
+ cardPublicId: string,
+    params?: GetCardActivitiesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCardActivities>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getCardActivities>>,
+          TError,
+          Awaited<ReturnType<typeof getCardActivities>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get a card's activities, paginated */
+export function useGetCardActivities<TData = Awaited<ReturnType<typeof getCardActivities>>, TError = unknown>(
+ cardPublicId: string,
+    params?: GetCardActivitiesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCardActivities>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get a card's activities, paginated */
+export function useGetCardActivities<TData = Awaited<ReturnType<typeof getCardActivities>>, TError = unknown>(
+ cardPublicId: string,
+    params?: GetCardActivitiesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getCardActivities>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetCardActivitiesQueryOptions(cardPublicId,params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
 
 export type updateChecklistResponse200 = {
   data: ChecklistResponseDto

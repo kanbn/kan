@@ -668,6 +668,503 @@
         ]
       }
     },
+    "/cards": {
+      "post": {
+        "operationId": "createCard",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCardDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicIdResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a card",
+        "tags": [
+          "Cards"
+        ]
+      }
+    },
+    "/cards/{cardPublicId}": {
+      "put": {
+        "operationId": "updateCard",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCardDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardUpdateResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a card",
+        "tags": [
+          "Cards"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteCard",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a card",
+        "tags": [
+          "Cards"
+        ]
+      },
+      "get": {
+        "operationId": "getCard",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardDetailDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a card by public ID",
+        "tags": [
+          "Cards"
+        ]
+      }
+    },
+    "/cards/{cardPublicId}/duplicate": {
+      "post": {
+        "operationId": "duplicateCard",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateCardDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicIdResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Duplicate a card",
+        "tags": [
+          "Cards"
+        ]
+      }
+    },
+    "/cards/{cardPublicId}/comments": {
+      "post": {
+        "operationId": "addCardComment",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add a comment",
+        "tags": [
+          "Cards"
+        ]
+      }
+    },
+    "/cards/{cardPublicId}/comments/{commentPublicId}": {
+      "put": {
+        "operationId": "updateCardComment",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "commentPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a comment",
+        "tags": [
+          "Cards"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteCardComment",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "commentPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicIdResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a comment",
+        "tags": [
+          "Cards"
+        ]
+      }
+    },
+    "/cards/{cardPublicId}/labels/{labelPublicId}": {
+      "put": {
+        "operationId": "toggleCardLabel",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "labelPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToggleLabelResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add or remove a label on a card",
+        "tags": [
+          "Cards"
+        ]
+      }
+    },
+    "/cards/{cardPublicId}/members/{workspaceMemberPublicId}": {
+      "put": {
+        "operationId": "toggleCardMember",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspaceMemberPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToggleMemberResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add or remove a member on a card",
+        "tags": [
+          "Cards"
+        ]
+      }
+    },
+    "/cards/{cardPublicId}/activities": {
+      "get": {
+        "operationId": "getCardActivities",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "cursorPublicId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minLength": 12,
+              "maxLength": 12,
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "oldest",
+              "type": "string",
+              "enum": [
+                "oldest",
+                "newest"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivitiesResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a card's activities, paginated",
+        "tags": [
+          "Cards"
+        ]
+      }
+    },
     "/checklists/{checklistPublicId}": {
       "put": {
         "operationId": "updateChecklist",
@@ -4032,6 +4529,1069 @@
         "required": [
           "publicId"
         ]
+      },
+      "CreateCardDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 10000
+          },
+          "listPublicId": {
+            "type": "string",
+            "minLength": 12
+          },
+          "labelPublicIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 12
+            }
+          },
+          "memberPublicIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 12
+            }
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "start",
+              "end"
+            ]
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+            "nullable": true
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "listPublicId",
+          "labelPublicIds",
+          "memberPublicIds",
+          "position"
+        ]
+      },
+      "PublicIdResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "publicId"
+        ],
+        "additionalProperties": false
+      },
+      "UpdateCardDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "description": {
+            "type": "string"
+          },
+          "index": {
+            "type": "number"
+          },
+          "listPublicId": {
+            "type": "string",
+            "minLength": 12
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+            "nullable": true
+          }
+        }
+      },
+      "CardUpdateResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+            "nullable": true
+          }
+        },
+        "required": [
+          "publicId",
+          "title",
+          "description",
+          "dueDate"
+        ],
+        "additionalProperties": false
+      },
+      "DuplicateCardDto": {
+        "type": "object",
+        "properties": {
+          "listPublicId": {
+            "type": "string",
+            "minLength": 12
+          },
+          "index": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "copyLabels": {
+            "type": "boolean"
+          },
+          "copyMembers": {
+            "type": "boolean"
+          },
+          "copyChecklists": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "listPublicId",
+          "copyLabels",
+          "copyMembers",
+          "copyChecklists"
+        ]
+      },
+      "CommentDto": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "comment"
+        ]
+      },
+      "CommentResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "publicId",
+          "comment"
+        ],
+        "additionalProperties": false
+      },
+      "ToggleLabelResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "newLabel": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "newLabel"
+        ],
+        "additionalProperties": false
+      },
+      "ToggleMemberResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "newMember": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "newMember"
+        ],
+        "additionalProperties": false
+      },
+      "CardDetailDto_Output": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardNumber": {
+            "type": "number",
+            "nullable": true
+          },
+          "index": {
+            "type": "number"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "colourCode": {
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "publicId",
+                "name",
+                "colourCode"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "contentType": {
+                  "type": "string"
+                },
+                "s3Key": {
+                  "type": "string"
+                },
+                "originalFilename": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "size": {
+                  "type": "number",
+                  "nullable": true
+                },
+                "url": {
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "publicId",
+                "contentType",
+                "s3Key",
+                "originalFilename",
+                "size",
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "checklists": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "index": {
+                  "type": "number"
+                },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "publicId": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "completed": {
+                        "type": "boolean"
+                      },
+                      "index": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "publicId",
+                      "title",
+                      "completed",
+                      "index"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "publicId",
+                "name",
+                "index",
+                "items"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "list": {
+            "type": "object",
+            "properties": {
+              "publicId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "board": {
+                "type": "object",
+                "properties": {
+                  "publicId": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "labels": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "publicId": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "colourCode": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "required": [
+                        "publicId",
+                        "name",
+                        "colourCode"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "lists": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "publicId": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "publicId",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "workspace": {
+                    "type": "object",
+                    "properties": {
+                      "publicId": {
+                        "type": "string"
+                      },
+                      "cardPrefix": {
+                        "type": "string"
+                      },
+                      "members": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "publicId": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            },
+                            "status": {
+                              "type": "string"
+                            },
+                            "user": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "email": {
+                                  "type": "string"
+                                },
+                                "image": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "name",
+                                "email",
+                                "image"
+                              ],
+                              "additionalProperties": false,
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "publicId",
+                            "email",
+                            "status",
+                            "user"
+                          ],
+                          "additionalProperties": false
+                        }
+                      }
+                    },
+                    "required": [
+                      "publicId",
+                      "cardPrefix",
+                      "members"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "publicId",
+                  "name",
+                  "labels",
+                  "lists",
+                  "workspace"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "publicId",
+              "name",
+              "board"
+            ],
+            "additionalProperties": false
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "name": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                }
+              },
+              "required": [
+                "publicId",
+                "email",
+                "user"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "activities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                },
+                "fromIndex": {
+                  "type": "number",
+                  "nullable": true
+                },
+                "toIndex": {
+                  "type": "number",
+                  "nullable": true
+                },
+                "fromTitle": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "toTitle": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "fromDescription": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "toDescription": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "fromDueDate": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                  "nullable": true
+                },
+                "toDueDate": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                  "nullable": true
+                },
+                "fromList": {
+                  "type": "object",
+                  "properties": {
+                    "publicId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "index": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "publicId",
+                    "name",
+                    "index"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                },
+                "toList": {
+                  "type": "object",
+                  "properties": {
+                    "publicId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "index": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "publicId",
+                    "name",
+                    "index"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                },
+                "label": {
+                  "type": "object",
+                  "properties": {
+                    "publicId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "publicId",
+                    "name"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                },
+                "comment": {
+                  "type": "object",
+                  "properties": {
+                    "publicId": {
+                      "type": "string"
+                    },
+                    "comment": {
+                      "type": "string"
+                    },
+                    "createdBy": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                      "nullable": true
+                    },
+                    "deletedAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "publicId",
+                    "comment",
+                    "createdBy",
+                    "updatedAt",
+                    "deletedAt"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                },
+                "member": {
+                  "type": "object",
+                  "properties": {
+                    "publicId": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "email": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "email"
+                      ],
+                      "additionalProperties": false,
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "publicId",
+                    "user"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "email"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                }
+              },
+              "required": [
+                "publicId",
+                "type",
+                "createdAt",
+                "fromIndex",
+                "toIndex",
+                "fromTitle",
+                "toTitle",
+                "fromDescription",
+                "toDescription",
+                "fromDueDate",
+                "toDueDate",
+                "fromList",
+                "toList",
+                "label",
+                "comment",
+                "member",
+                "user"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "publicId",
+          "title",
+          "description",
+          "cardNumber",
+          "index",
+          "dueDate",
+          "createdBy",
+          "labels",
+          "attachments",
+          "checklists",
+          "list",
+          "members",
+          "activities"
+        ],
+        "additionalProperties": false
+      },
+      "ActivitiesResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "activities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                },
+                "fromIndex": {
+                  "type": "number",
+                  "nullable": true
+                },
+                "toIndex": {
+                  "type": "number",
+                  "nullable": true
+                },
+                "fromTitle": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "toTitle": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "fromDescription": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "toDescription": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "fromDueDate": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                  "nullable": true
+                },
+                "toDueDate": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                  "nullable": true
+                },
+                "fromList": {
+                  "type": "object",
+                  "properties": {
+                    "publicId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "index": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "publicId",
+                    "name",
+                    "index"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                },
+                "toList": {
+                  "type": "object",
+                  "properties": {
+                    "publicId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "index": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "publicId",
+                    "name",
+                    "index"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                },
+                "label": {
+                  "type": "object",
+                  "properties": {
+                    "publicId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "publicId",
+                    "name"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                },
+                "comment": {
+                  "type": "object",
+                  "properties": {
+                    "publicId": {
+                      "type": "string"
+                    },
+                    "comment": {
+                      "type": "string"
+                    },
+                    "createdBy": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                      "nullable": true
+                    },
+                    "deletedAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "publicId",
+                    "comment",
+                    "createdBy",
+                    "updatedAt",
+                    "deletedAt"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                },
+                "member": {
+                  "type": "object",
+                  "properties": {
+                    "publicId": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "name": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "image": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name",
+                        "email",
+                        "image"
+                      ],
+                      "additionalProperties": false,
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "publicId",
+                    "user"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "name": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name",
+                    "email",
+                    "image"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                },
+                "attachment": {
+                  "type": "object",
+                  "properties": {
+                    "publicId": {
+                      "type": "string"
+                    },
+                    "filename": {
+                      "type": "string"
+                    },
+                    "originalFilename": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "publicId",
+                    "filename",
+                    "originalFilename"
+                  ],
+                  "additionalProperties": false,
+                  "nullable": true
+                }
+              },
+              "required": [
+                "publicId",
+                "type",
+                "createdAt",
+                "fromIndex",
+                "toIndex",
+                "fromTitle",
+                "toTitle",
+                "fromDescription",
+                "toDescription",
+                "fromDueDate",
+                "toDueDate",
+                "fromList",
+                "toList",
+                "label",
+                "comment",
+                "member",
+                "user",
+                "attachment"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "hasMore": {
+            "type": "boolean"
+          },
+          "nextCursor": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+            "nullable": true
+          },
+          "nextCursorPublicId": {
+            "type": "string",
+            "minLength": 12,
+            "maxLength": 12,
+            "nullable": true
+          }
+        },
+        "required": [
+          "activities",
+          "hasMore",
+          "nextCursor",
+          "nextCursorPublicId"
+        ],
+        "additionalProperties": false
       },
       "UpdateChecklistDto": {
         "type": "object",

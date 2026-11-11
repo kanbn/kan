@@ -179,8 +179,10 @@ test(
     };
 
     const blockedResponse = await memberPage.request.post(
-      "/api/trpc/card.create?batch=1",
-      { data: { "0": { json: cardInput } } },
+      `${apiBaseURL}/cards`,
+      {
+        data: cardInput,
+      },
     );
     expect(blockedResponse.status()).toBe(403);
 
@@ -189,8 +191,10 @@ test(
     await settings.setRolePermission("Can create cards", "member", true);
 
     const allowedResponse = await memberPage.request.post(
-      "/api/trpc/card.create?batch=1",
-      { data: { "0": { json: cardInput } } },
+      `${apiBaseURL}/cards`,
+      {
+        data: cardInput,
+      },
     );
     expect(allowedResponse.ok()).toBe(true);
 

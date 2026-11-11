@@ -1,28 +1,35 @@
 import { t } from "@lingui/core/macro";
+import { useMutation } from "@tanstack/react-query";
+
+import { useGetCard } from "@kan/api-client/hooks";
 
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 import { useBoardCache } from "~/utils/boardCache";
+import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
+import { updateCardFromInput } from "~/utils/cardMutations";
 
 export function CardContextMoveListModal() {
   const { entityId: cardPublicId, closeModal } = useModal();
   const { showPopup } = usePopup();
-  const utils = api.useUtils();
+  const cardCache = useCardCache();
   const boardCache = useBoardCache();
 
-  const { data: card, isLoading } = api.card.byId.useQuery(
-    { cardPublicId: cardPublicId ?? "" },
-    { enabled: !!cardPublicId && cardPublicId.length >= 12 },
-  );
+  const { data: card, isLoading } = useGetCard(cardPublicId ?? "", {
+    query: {
+      enabled: !!cardPublicId && cardPublicId.length >= 12,
+      select: (res) => res.data,
+    },
+  });
 
-  const updateCardList = api.card.update.useMutation({
+  const updateCardList = useMutation({
+    mutationFn: updateCardFromInput,
     onMutate: async (vars) => {
       if (!cardPublicId) return undefined;
-      await utils.card.byId.cancel();
-      const previous = utils.card.byId.getData({ cardPublicId });
-      utils.card.byId.setData({ cardPublicId }, (old) => {
+      await cardCache.byId.cancel();
+      const previous = cardCache.byId.getData({ cardPublicId });
+      cardCache.byId.setData({ cardPublicId }, (old) => {
         if (!old) return old;
         const list = old.list.board?.lists?.find(
           (l) => l.publicId === vars.listPublicId,
@@ -37,7 +44,7 @@ export function CardContextMoveListModal() {
     },
     onError: (_err, _vars, ctx) => {
       if (cardPublicId && ctx?.previous) {
-        utils.card.byId.setData({ cardPublicId }, ctx.previous);
+        cardCache.byId.setData({ cardPublicId }, ctx.previous);
       }
       showPopup({
         header: t`Unable to move card`,
@@ -47,7 +54,7 @@ export function CardContextMoveListModal() {
     },
     onSettled: async () => {
       if (cardPublicId) {
-        await invalidateCard(utils, cardPublicId);
+        await invalidateCard(cardCache, cardPublicId);
         await boardCache.invalidate();
       }
     },

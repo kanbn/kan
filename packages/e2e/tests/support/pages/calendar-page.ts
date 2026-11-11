@@ -1,7 +1,7 @@
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 
-import { waitForTrpcMutation } from "../wait-for-trpc";
+import { waitForApi } from "../wait-for-trpc";
 
 export function toDateKey(date: Date) {
   const year = date.getFullYear();
@@ -71,7 +71,7 @@ export class CalendarPage {
     await this.dayCell(date).click();
     await this.page.getByRole("heading", { name: "New card" }).waitFor();
     await this.page.getByPlaceholder("Card title").fill(title);
-    const created = waitForTrpcMutation(this.page, "card.create");
+    const created = waitForApi(this.page, "POST", /^\/cards$/);
     await this.page.getByRole("button", { name: "Create card" }).click();
     await this.page
       .getByRole("heading", { name: "New card" })

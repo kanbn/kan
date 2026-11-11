@@ -1,10 +1,11 @@
 import { useRouter } from "next/navigation";
 import { t } from "@lingui/core/macro";
 
+import { useDeleteCard } from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 import { useBoardCache } from "~/utils/boardCache";
 
 interface DeleteCardConfirmationProps {
@@ -25,41 +26,43 @@ export function DeleteCardConfirmation({
     boardPublicId,
   };
 
-  const deleteCardMutation = api.card.delete.useMutation({
-    onMutate: async (args) => {
-      await boardCache.cancel();
+  const deleteCardMutation = useDeleteCard({
+    mutation: {
+      onMutate: async (args) => {
+        await boardCache.cancel();
 
-      const currentState = boardCache.getData(queryParams);
+        const currentState = boardCache.getData(queryParams);
 
-      boardCache.setData(queryParams, (oldBoard) => {
-        if (!oldBoard) return oldBoard;
+        boardCache.setData(queryParams, (oldBoard) => {
+          if (!oldBoard) return oldBoard;
 
-        const updatedLists = oldBoard.lists.map((list) => {
-          const updatedCards = list.cards.filter(
-            (card) => card.publicId !== args.cardPublicId,
-          );
-          return { ...list, cards: updatedCards };
+          const updatedLists = oldBoard.lists.map((list) => {
+            const updatedCards = list.cards.filter(
+              (card) => card.publicId !== args.cardPublicId,
+            );
+            return { ...list, cards: updatedCards };
+          });
+
+          return { ...oldBoard, lists: updatedLists };
         });
 
-        return { ...oldBoard, lists: updatedLists };
-      });
-
-      return { previousState: currentState };
-    },
-    onError: (_error, _newList, context) => {
-      boardCache.setData(queryParams, context?.previousState);
-      showPopup({
-        header: t`Unable to delete card`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSuccess: () => {
-      router.push(`/boards/${boardPublicId}`);
-    },
-    onSettled: async () => {
-      closeModal();
-      await boardCache.invalidate(queryParams.boardPublicId);
+        return { previousState: currentState };
+      },
+      onError: (_error, _newList, context) => {
+        boardCache.setData(queryParams, context?.previousState);
+        showPopup({
+          header: t`Unable to delete card`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSuccess: () => {
+        router.push(`/boards/${boardPublicId}`);
+      },
+      onSettled: async () => {
+        closeModal();
+        await boardCache.invalidate(queryParams.boardPublicId);
+      },
     },
   });
 

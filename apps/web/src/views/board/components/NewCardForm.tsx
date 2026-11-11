@@ -1,5 +1,6 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
+import { useMutation } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { env } from "next-runtime-env";
 import { useEffect, useRef, useState } from "react";
@@ -28,8 +29,9 @@ import { useModalFormState } from "~/hooks/useModalFormState";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
+import { getApiFieldError } from "~/utils/apiError";
 import { useBoardCache } from "~/utils/boardCache";
+import { createCardFromInput } from "~/utils/cardMutations";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 
 type NewCardFormInput = NewCardInput & {
@@ -138,7 +140,8 @@ export function NewCardForm({
     }
   }, [boardData?.labels, labelPublicIds, modalStates.NEW_LABEL_CREATED]);
 
-  const createCard = api.card.create.useMutation({
+  const createCard = useMutation({
+    mutationFn: createCardFromInput,
     onMutate: async (args) => {
       await boardCache.cancel();
 
@@ -201,8 +204,8 @@ export function NewCardForm({
       boardCache.setData(queryParams, context?.previousState);
       showPopup({
         header: t`Unable to create card`,
-        message: error.data?.zodError?.fieldErrors.title?.[0]
-          ? `${error.data.zodError.fieldErrors.title[0].replace("String", "Title")}`
+        message: getApiFieldError(error, "title")
+          ? `${t`Title`}: ${getApiFieldError(error, "title")}`
           : t`Please try again later, or contact customer support.`,
         icon: "error",
       });

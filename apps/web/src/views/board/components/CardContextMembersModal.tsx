@@ -1,18 +1,21 @@
 import { t } from "@lingui/core/macro";
 
-import { useModal } from "~/providers/modal";
-import { api } from "~/utils/api";
-import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
+import { useGetCard } from "@kan/api-client/hooks";
+
 import Avatar from "~/components/Avatar";
+import { useModal } from "~/providers/modal";
+import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import MemberSelector from "~/views/card/components/MemberSelector";
 
 export function CardContextMembersModal() {
   const { entityId: cardPublicId, closeModal } = useModal();
 
-  const { data: card, isLoading } = api.card.byId.useQuery(
-    { cardPublicId: cardPublicId ?? "" },
-    { enabled: !!cardPublicId && cardPublicId.length >= 12 },
-  );
+  const { data: card, isLoading } = useGetCard(cardPublicId ?? "", {
+    query: {
+      enabled: !!cardPublicId && cardPublicId.length >= 12,
+      select: (res) => res.data,
+    },
+  });
 
   const board = card?.list?.board;
   const workspaceMembers = board?.workspace?.members ?? [];
@@ -28,7 +31,9 @@ export function CardContextMembersModal() {
         member.user?.name ?? null,
         member.user?.email ?? member.email,
       ),
-      imageUrl: member.user?.image ? getAvatarUrl(member.user.image) : undefined,
+      imageUrl: member.user?.image
+        ? getAvatarUrl(member.user.image)
+        : undefined,
       selected: isSelected,
       leftIcon: (
         <Avatar

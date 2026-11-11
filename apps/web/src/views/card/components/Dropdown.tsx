@@ -8,13 +8,13 @@ import {
   HiOutlineTrash,
 } from "react-icons/hi2";
 
+import { useDuplicateCard } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
 import Dropdown from "~/components/Dropdown";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 import { useBoardCache } from "~/utils/boardCache";
 
 export default function CardDropdown({
@@ -41,23 +41,25 @@ export default function CardDropdown({
   const boardCache = useBoardCache();
   const isCreator = cardCreatedBy && session?.user.id === cardCreatedBy;
 
-  const duplicateCard = api.card.duplicate.useMutation({
-    onSuccess: () => {
-      showPopup({
-        header: t`Card duplicated`,
-        icon: "success",
-        message: t`Card duplicated successfully.`,
-      });
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to duplicate card`,
-        icon: "error",
-        message: t`Please try again.`,
-      });
-    },
-    onSettled: async () => {
-      await boardCache.invalidate();
+  const duplicateCard = useDuplicateCard({
+    mutation: {
+      onSuccess: () => {
+        showPopup({
+          header: t`Card duplicated`,
+          icon: "success",
+          message: t`Card duplicated successfully.`,
+        });
+      },
+      onError: () => {
+        showPopup({
+          header: t`Unable to duplicate card`,
+          icon: "error",
+          message: t`Please try again.`,
+        });
+      },
+      onSettled: async () => {
+        await boardCache.invalidate();
+      },
     },
   });
 
@@ -133,11 +135,13 @@ export default function CardDropdown({
               if (!listPublicId || cardIndex === undefined) return;
               duplicateCard.mutate({
                 cardPublicId,
-                listPublicId,
-                index: cardIndex + 1,
-                copyLabels: true,
-                copyMembers: true,
-                copyChecklists: true,
+                data: {
+                  listPublicId,
+                  index: cardIndex + 1,
+                  copyLabels: true,
+                  copyMembers: true,
+                  copyChecklists: true,
+                },
               });
             },
             icon: (

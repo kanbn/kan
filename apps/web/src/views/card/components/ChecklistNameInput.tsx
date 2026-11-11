@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 import { useUpdateChecklist } from "@kan/api-client/hooks";
 
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
+import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
 export default function ChecklistNameInput({
@@ -19,7 +19,7 @@ export default function ChecklistNameInput({
   cardPublicId: string;
   viewOnly?: boolean;
 }) {
-  const utils = api.useUtils();
+  const cardCache = useCardCache();
   const { showPopup } = usePopup();
   const [name, setName] = useState(initialName);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -31,9 +31,9 @@ export default function ChecklistNameInput({
   const update = useUpdateChecklist({
     mutation: {
       onMutate: async (vars) => {
-        await utils.card.byId.cancel({ cardPublicId });
-        const previous = utils.card.byId.getData({ cardPublicId });
-        utils.card.byId.setData({ cardPublicId }, (old) => {
+        await cardCache.byId.cancel({ cardPublicId });
+        const previous = cardCache.byId.getData({ cardPublicId });
+        cardCache.byId.setData({ cardPublicId }, (old) => {
           if (!old) return old as any;
           const updated = old.checklists.map((cl) =>
             cl.publicId === checklistPublicId
@@ -46,7 +46,7 @@ export default function ChecklistNameInput({
       },
       onError: (_err, _vars, ctx) => {
         if (ctx?.previous)
-          utils.card.byId.setData({ cardPublicId }, ctx.previous);
+          cardCache.byId.setData({ cardPublicId }, ctx.previous);
         showPopup({
           header: t`Unable to update checklist`,
           message: t`Please try again later, or contact customer support.`,
@@ -54,7 +54,7 @@ export default function ChecklistNameInput({
         });
       },
       onSettled: async () => {
-        await invalidateCard(utils, cardPublicId);
+        await invalidateCard(cardCache, cardPublicId);
       },
     },
   });

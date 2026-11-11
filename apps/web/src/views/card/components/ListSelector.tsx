@@ -1,10 +1,12 @@
 import { t } from "@lingui/core/macro";
+import { useMutation } from "@tanstack/react-query";
 
 import CheckboxDropdown from "~/components/CheckboxDropdown";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 import { useBoardCache } from "~/utils/boardCache";
+import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
+import { updateCardFromInput } from "~/utils/cardMutations";
 
 interface ListSelectorProps {
   cardPublicId: string;
@@ -23,18 +25,19 @@ export default function ListSelector({
   isLoading,
   disabled = false,
 }: ListSelectorProps) {
-  const utils = api.useUtils();
+  const cardCache = useCardCache();
   const boardCache = useBoardCache();
 
   const { showPopup } = usePopup();
 
-  const updateCardList = api.card.update.useMutation({
+  const updateCardList = useMutation({
+    mutationFn: updateCardFromInput,
     onMutate: async (newList) => {
-      await utils.card.byId.cancel();
+      await cardCache.byId.cancel();
 
-      const previousCard = utils.card.byId.getData({ cardPublicId });
+      const previousCard = cardCache.byId.getData({ cardPublicId });
 
-      utils.card.byId.setData({ cardPublicId }, (oldCard) => {
+      cardCache.byId.setData({ cardPublicId }, (oldCard) => {
         if (!oldCard) return oldCard;
 
         return {
@@ -51,7 +54,7 @@ export default function ListSelector({
       return { previousCard };
     },
     onError: (_error, _newList, context) => {
-      utils.card.byId.setData({ cardPublicId }, context?.previousCard);
+      cardCache.byId.setData({ cardPublicId }, context?.previousCard);
       showPopup({
         header: t`Unable to update list`,
         message: t`Please try again later, or contact customer support.`,
@@ -59,7 +62,7 @@ export default function ListSelector({
       });
     },
     onSettled: async () => {
-      await invalidateCard(utils, cardPublicId);
+      await invalidateCard(cardCache, cardPublicId);
       await boardCache.invalidate();
     },
   });

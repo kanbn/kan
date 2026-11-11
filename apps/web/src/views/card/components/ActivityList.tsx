@@ -17,31 +17,27 @@ import {
   HiOutlineUserPlus,
 } from "react-icons/hi2";
 
-import type {
-  GetCardActivitiesOutput,
-  GetCardByIdOutput,
-} from "@kan/api/types";
+import { useGetCardActivities } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
 import type { ActivitySortOrder } from "~/hooks/useActivitySortOrder";
+import type { CardActivities, CardDetail } from "~/utils/cardCache";
 import Avatar from "~/components/Avatar";
 import { useLocalisation } from "~/hooks/useLocalisation";
-import { api } from "~/utils/api";
+import { useCardCache } from "~/utils/cardCache";
 import { getAvatarUrl } from "~/utils/helpers";
 import Comment from "./Comment";
 
-type ActivityType =
-  NonNullable<GetCardByIdOutput>["activities"][number]["type"];
+type ActivityType = CardDetail["activities"][number]["type"];
 
-type ActivityWithMergedLabels =
-  GetCardActivitiesOutput["activities"][number] & {
-    mergedLabels?: string[];
-    attachment?: {
-      publicId: string;
-      filename: string;
-      originalFilename: string;
-    } | null;
-  };
+type ActivityWithMergedLabels = CardActivities["activities"][number] & {
+  mergedLabels?: string[];
+  attachment?: {
+    publicId: string;
+    filename: string;
+    originalFilename: string;
+  } | null;
+};
 
 const truncate = (value: string | null, maxLength = 50) => {
   if (!value) return value;
@@ -375,7 +371,7 @@ const ActivityItems = ({
   isLoading,
   isViewOnly,
 }: {
-  activities: GetCardActivitiesOutput["activities"];
+  activities: CardActivities["activities"];
   cardPublicId: string;
   isLoading: boolean;
   isViewOnly?: boolean;
@@ -394,8 +390,8 @@ const ActivityItems = ({
       isSelf: activity.member?.user?.id === sessionData?.user.id,
       label: activity.label?.name ?? null,
       fromTitle: activity.fromTitle ?? null,
-      fromDueDate: activity.fromDueDate ?? null,
-      toDueDate: activity.toDueDate ?? null,
+      fromDueDate: activity.fromDueDate ? new Date(activity.fromDueDate) : null,
+      toDueDate: activity.toDueDate ? new Date(activity.toDueDate) : null,
       dateLocale,
       mergedLabels: (activity as ActivityWithMergedLabels).mergedLabels,
       attachmentName:
@@ -413,7 +409,7 @@ const ActivityItems = ({
           email={activity.user?.email ?? ""}
           image={activity.user?.image ?? null}
           isLoading={isLoading}
-          createdAt={activity.createdAt.toISOString()}
+          createdAt={activity.createdAt}
           comment={activity.comment?.comment}
           isEdited={!!activity.comment?.updatedAt}
           isAuthor={activity.comment?.createdBy === sessionData?.user.id}
@@ -476,9 +472,9 @@ const ActivityList = ({
   recentCommentPublicIds?: string[];
   isViewOnly?: boolean;
 }) => {
-  const utils = api.useUtils();
+  const cardCache = useCardCache();
   const [allActivities, setAllActivities] = useState<
-    GetCardActivitiesOutput["activities"]
+    CardActivities["activities"]
   >([]);
   const [hasMore, setHasMore] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -494,28 +490,28 @@ const ActivityList = ({
     data: firstPageData,
     isFetching: isFetchingFirst,
     dataUpdatedAt,
-  } = api.card.getActivities.useQuery(
+  } = useGetCardActivities(
+    cardPublicId,
+    { limit: ACTIVITIES_PAGE_SIZE, order },
     {
-      cardPublicId,
-      limit: ACTIVITIES_PAGE_SIZE,
-      order,
-    },
-    {
-      enabled: !!cardPublicId && cardPublicId.length >= 12,
+      query: {
+        enabled: !!cardPublicId && cardPublicId.length >= 12,
+        select: (res) => res.data,
+      },
     },
   );
-  const { data: recentPageData } = api.card.getActivities.useQuery(
+  const { data: recentPageData } = useGetCardActivities(
+    cardPublicId,
+    { limit: 100, order: "newest" },
     {
-      cardPublicId,
-      limit: 100,
-      order: "newest",
-    },
-    {
-      enabled:
-        order === "oldest" &&
-        recentCommentPublicIds.length > 0 &&
-        !!cardPublicId &&
-        cardPublicId.length >= 12,
+      query: {
+        enabled:
+          order === "oldest" &&
+          recentCommentPublicIds.length > 0 &&
+          !!cardPublicId &&
+          cardPublicId.length >= 12,
+        select: (res) => res.data,
+      },
     },
   );
 
@@ -545,7 +541,7 @@ const ActivityList = ({
           let currentCursorPublicId = firstPageData.nextCursorPublicId;
 
           while (currentHasMore && currentCursor && currentCursorPublicId) {
-            const nextPage = await utils.card.getActivities.fetch({
+            const nextPage = await cardCache.getActivities.fetch({
               cardPublicId,
               limit: ACTIVITIES_PAGE_SIZE,
               cursor: currentCursor,
@@ -594,7 +590,7 @@ const ActivityList = ({
     dataUpdatedAt,
     cardPublicId,
     order,
-    utils.card.getActivities,
+    cardCache.getActivities,
   ]);
 
   const handleLoadMore = async () => {
@@ -602,7 +598,7 @@ const ActivityList = ({
 
     setIsLoadingMore(true);
     try {
-      const nextPage = await utils.card.getActivities.fetch({
+      const nextPage = await cardCache.getActivities.fetch({
         cardPublicId,
         limit: ACTIVITIES_PAGE_SIZE,
         cursor: nextCursor,

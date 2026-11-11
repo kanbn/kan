@@ -1,9 +1,11 @@
 import { t } from "@lingui/core/macro";
 
+import { useDeleteCardComment } from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
+import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface DeleteCommentConfirmationProps {
@@ -16,39 +18,41 @@ export function DeleteCommentConfirmation({
   commentPublicId,
 }: DeleteCommentConfirmationProps) {
   const { closeModal } = useModal();
-  const utils = api.useUtils();
+  const cardCache = useCardCache();
   const { showPopup } = usePopup();
 
   const queryParams = {
     cardPublicId,
   };
 
-  const deleteCommentMutation = api.card.deleteComment.useMutation({
-    onMutate: async (args) => {
-      closeModal();
-      await utils.card.byId.cancel();
-      const currentState = utils.card.byId.getData(queryParams);
+  const deleteCommentMutation = useDeleteCardComment({
+    mutation: {
+      onMutate: async (args) => {
+        closeModal();
+        await cardCache.byId.cancel();
+        const currentState = cardCache.byId.getData(queryParams);
 
-      utils.card.byId.setData(queryParams, (oldCard) => {
-        if (!oldCard) return oldCard;
-        const updatedActivities = oldCard.activities.filter(
-          (activity) => activity.comment?.publicId !== args.commentPublicId,
-        );
-        return { ...oldCard, activities: updatedActivities };
-      });
+        cardCache.byId.setData(queryParams, (oldCard) => {
+          if (!oldCard) return oldCard;
+          const updatedActivities = oldCard.activities.filter(
+            (activity) => activity.comment?.publicId !== args.commentPublicId,
+          );
+          return { ...oldCard, activities: updatedActivities };
+        });
 
-      return { previousState: currentState };
-    },
-    onError: (_error, _newList, context) => {
-      utils.card.byId.setData(queryParams, context?.previousState);
-      showPopup({
-        header: t`Unable to delete comment`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await invalidateCard(utils, cardPublicId);
+        return { previousState: currentState };
+      },
+      onError: (_error, _newList, context) => {
+        cardCache.byId.setData(queryParams, context?.previousState);
+        showPopup({
+          header: t`Unable to delete comment`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        await invalidateCard(cardCache, cardPublicId);
+      },
     },
   });
 
