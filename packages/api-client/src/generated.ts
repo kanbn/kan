@@ -1192,6 +1192,23 @@ export interface WorkspaceDeleteResponseDtoOutput {
   success: boolean;
 }
 
+export interface StatsDtoOutput {
+  users: number;
+  workspaces: number;
+  boards: number;
+  lists: number;
+  cards: number;
+  cardComments: number;
+  cardAttachments: number;
+  cardActivityLogs: number;
+  labels: number;
+  checklists: number;
+  checklistItems: number;
+  activeMembers: number;
+  activeInviteLinks: number;
+  imports: number;
+}
+
 export type GetBoardsParams = {
   type?: GetBoardsType;
   archived?: GetBoardsArchived;
@@ -9359,6 +9376,120 @@ export function useSearchWorkspace<TData = Awaited<ReturnType<typeof searchWorks
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getSearchWorkspaceQueryOptions(workspacePublicId,params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type getStatsResponse200 = {
+  data: StatsDtoOutput
+  status: 200
+}
+
+export type getStatsResponseSuccess = (getStatsResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getStatsResponse = (getStatsResponseSuccess)
+
+export const getGetStatsUrl = () => {
+
+
+
+
+  return `/stats`
+}
+
+/**
+ * @summary Instance-wide counts of users, workspaces, boards, cards, etc.
+ */
+export const getStats = async ( options?: Parameters<typeof customFetch>[1]): Promise<getStatsResponse> => {
+
+  return customFetch<getStatsResponse>(getGetStatsUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetStatsQueryKey = () => {
+    return [
+    `/stats`
+    ] as const;
+    }
+
+
+export const getGetStatsQueryOptions = <TData = Awaited<ReturnType<typeof getStats>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStats>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetStatsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getStats>>> = ({ signal }) => getStats({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getStats>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetStatsQueryResult = NonNullable<Awaited<ReturnType<typeof getStats>>>
+export type GetStatsQueryError = unknown
+
+
+/** @summary Instance-wide counts of users, workspaces, boards, cards, etc. */
+export function useGetStats<TData = Awaited<ReturnType<typeof getStats>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStats>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getStats>>,
+          TError,
+          Awaited<ReturnType<typeof getStats>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Instance-wide counts of users, workspaces, boards, cards, etc. */
+export function useGetStats<TData = Awaited<ReturnType<typeof getStats>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStats>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getStats>>,
+          TError,
+          Awaited<ReturnType<typeof getStats>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Instance-wide counts of users, workspaces, boards, cards, etc. */
+export function useGetStats<TData = Awaited<ReturnType<typeof getStats>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStats>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Instance-wide counts of users, workspaces, boards, cards, etc. */
+export function useGetStats<TData = Awaited<ReturnType<typeof getStats>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getStats>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetStatsQueryOptions(options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
