@@ -1,5 +1,10 @@
-import { Injectable } from "@nestjs/common";
-import { TRPCError } from "@trpc/server";
+import {
+  BadRequestException,
+  ConflictException,
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+} from "@nestjs/common";
 
 import type { WorkspacePlan } from "@kan/db/schema";
 import { createAvatarUrlResolver } from "@kan/api/utils/avatarUrls";
@@ -148,10 +153,9 @@ export class WorkspaceService {
     userEmail: string;
   }) {
     if (input.slug && isCloudEnv())
-      throw new TRPCError({
-        message: "Custom URLs are only available for Pro workspaces",
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(
+        "Custom URLs are only available for Pro workspaces",
+      );
 
     const workspacePublicId = generateUID();
     // An empty-string slug must also fall back to the generated public id,
@@ -166,16 +170,14 @@ export class WorkspaceService {
         await workspaceRepo.isWorkspaceSlugAvailable(db, input.slug);
 
       if (reservedOrPremiumWorkspaceSlug)
-        throw new TRPCError({
-          message: `Workspace slug '${input.slug}' is reserved or premium`,
-          code: "BAD_REQUEST",
-        });
+        throw new BadRequestException(
+          `Workspace slug '${input.slug}' is reserved or premium`,
+        );
 
       if (!isWorkspaceSlugAvailable)
-        throw new TRPCError({
-          message: `Workspace slug '${input.slug}' is already taken`,
-          code: "BAD_REQUEST",
-        });
+        throw new BadRequestException(
+          `Workspace slug '${input.slug}' is already taken`,
+        );
     }
 
     const result = await workspaceRepo.create(db, {
@@ -188,10 +190,7 @@ export class WorkspaceService {
     });
 
     if (!result.publicId || !result.name || !result.slug || !result.cardPrefix)
-      throw new TRPCError({
-        message: `Unable to create workspace`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(`Unable to create workspace`);
 
     let unlinkedSlot: Awaited<
       ReturnType<typeof subscriptionRepo.getFirstUnlinkedSlotByLicenseKey>
@@ -269,19 +268,15 @@ export class WorkspaceService {
         workspace.plan === "free" &&
         input.slug !== workspace.publicId
       )
-        throw new TRPCError({
-          message: `Workspace slug cannot be changed in cloud without upgrading to a paid plan`,
-          code: "FORBIDDEN",
-        });
+        throw new ForbiddenException(
+          `Workspace slug cannot be changed in cloud without upgrading to a paid plan`,
+        );
 
       if (
         reservedOrPremiumWorkspaceSlug?.type === "reserved" ||
         !isWorkspaceSlugAvailable
       )
-        throw new TRPCError({
-          message: `Workspace slug already taken`,
-          code: "CONFLICT",
-        });
+        throw new ConflictException(`Workspace slug already taken`);
     }
 
     const result = await workspaceRepo.update(db, input.workspacePublicId, {
@@ -293,10 +288,7 @@ export class WorkspaceService {
     });
 
     if (!result)
-      throw new TRPCError({
-        message: `Unable to delete workspace`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(`Unable to delete workspace`);
 
     return result;
   }

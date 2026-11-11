@@ -50,7 +50,7 @@ describe("UserService.getUser", () => {
     vi.spyOn(userRepo, "getById").mockResolvedValue(undefined);
 
     await expect(service.getUser({ userId: "user_1" })).rejects.toMatchObject({
-      code: "NOT_FOUND",
+      status: 404,
     });
   });
 });
@@ -100,7 +100,7 @@ describe("UserService.setPassword", () => {
         newPassword: "hunter2hunter2",
         headers: new Headers(),
       }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
     expect(setPassword).not.toHaveBeenCalled();
   });
 
@@ -116,6 +116,6 @@ describe("UserService.setPassword", () => {
         newPassword: "hunter2hunter2",
         headers: new Headers(),
       }),
-    ).rejects.toMatchObject({ code: "INTERNAL_SERVER_ERROR" });
+    ).rejects.toMatchObject({ status: 500 });
   });
 });

@@ -161,7 +161,7 @@ describe("WorkspaceService.byId", () => {
 
     await expect(
       service.byId({ workspacePublicId: "missing_1234", userId: "user_1" }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 });
 
@@ -176,7 +176,7 @@ describe("WorkspaceService.create", () => {
         userId: "user_1",
         userEmail: "henry@kan.bn",
       }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
   });
 
   it("rejects a slug that is already taken", async () => {
@@ -195,7 +195,7 @@ describe("WorkspaceService.create", () => {
         userEmail: "henry@kan.bn",
       }),
     ).rejects.toMatchObject({
-      code: "BAD_REQUEST",
+      status: 400,
       message: "Workspace slug 'acme' is already taken",
     });
   });
@@ -277,7 +277,7 @@ describe("WorkspaceService.update", () => {
         userId: "user_1",
         slug: "new-slug",
       }),
-    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    ).rejects.toMatchObject({ status: 403 });
   });
 
   it("throws CONFLICT when the slug is taken", async () => {
@@ -291,7 +291,7 @@ describe("WorkspaceService.update", () => {
         userId: "user_1",
         slug: "taken",
       }),
-    ).rejects.toMatchObject({ code: "CONFLICT" });
+    ).rejects.toMatchObject({ status: 409 });
   });
 
   it("requires workspace:edit", async () => {

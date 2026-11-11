@@ -1,5 +1,10 @@
-import { Injectable } from "@nestjs/common";
-import { TRPCError } from "@trpc/server";
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from "@nestjs/common";
 
 import { createAvatarUrlResolver } from "@kan/api/utils/avatarUrls";
 import {
@@ -66,10 +71,9 @@ export class BoardService {
     );
 
     if (!workspace)
-      throw new TRPCError({
-        message: `Workspace with public ID ${input.workspacePublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Workspace with public ID ${input.workspacePublicId} not found`,
+      );
 
     await assertPermission(db, userId, workspace.id, "board:view");
 
@@ -108,10 +112,9 @@ export class BoardService {
     );
 
     if (!board)
-      throw new TRPCError({
-        message: `Board with public ID ${input.boardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Board with public ID ${input.boardPublicId} not found`,
+      );
 
     await assertPermission(db, userId, board.workspaceId, "board:view");
     await assertBoardAccess(db, userId, board);
@@ -136,10 +139,9 @@ export class BoardService {
     );
 
     if (!result) {
-      throw new TRPCError({
-        message: `Board with public ID ${input.boardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Board with public ID ${input.boardPublicId} not found`,
+      );
     }
 
     const resolveAvatarUrl = createAvatarUrlResolver();
@@ -187,10 +189,9 @@ export class BoardService {
 
             if (input.cardView === "summary") {
               if (!card.summary) {
-                throw new TRPCError({
-                  message: "Card summary was not returned",
-                  code: "INTERNAL_SERVER_ERROR",
-                });
+                throw new InternalServerErrorException(
+                  "Card summary was not returned",
+                );
               }
 
               return {
@@ -234,10 +235,9 @@ export class BoardService {
     );
 
     if (!workspace)
-      throw new TRPCError({
-        message: `Workspace with slug ${input.workspaceSlug} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Workspace with slug ${input.workspaceSlug} not found`,
+      );
 
     // Convert semantic string filters to date ranges expected by the repo
     const dueDateFilters = input.dueDateFilters
@@ -257,10 +257,9 @@ export class BoardService {
     );
 
     if (!result)
-      throw new TRPCError({
-        message: `Board with slug ${input.boardSlug} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Board with slug ${input.boardSlug} not found`,
+      );
 
     return withIsoDueDates(result);
   }
@@ -281,10 +280,9 @@ export class BoardService {
     );
 
     if (!workspace)
-      throw new TRPCError({
-        message: `Workspace with public ID ${input.workspacePublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Workspace with public ID ${input.workspacePublicId} not found`,
+      );
 
     await assertPermission(db, userId, workspace.id, "board:create");
 
@@ -298,10 +296,9 @@ export class BoardService {
         );
 
       if (!sourceBoardInfo || sourceBoardInfo.deletedAt)
-        throw new TRPCError({
-          message: `Source board with public ID ${input.sourceBoardPublicId} not found`,
-          code: "NOT_FOUND",
-        });
+        throw new NotFoundException(
+          `Source board with public ID ${input.sourceBoardPublicId} not found`,
+        );
 
       // Copying a board exposes all of its content, so the caller must be
       // able to see the source board.
@@ -322,10 +319,9 @@ export class BoardService {
       );
 
       if (!sourceBoard)
-        throw new TRPCError({
-          message: `Source board with public ID ${input.sourceBoardPublicId} not found`,
-          code: "NOT_FOUND",
-        });
+        throw new NotFoundException(
+          `Source board with public ID ${input.sourceBoardPublicId} not found`,
+        );
 
       // Verify the source board belongs to the same workspace
       const sourceWorkspace = await workspaceRepo.getByPublicId(
@@ -334,10 +330,9 @@ export class BoardService {
       );
 
       if (!sourceWorkspace || sourceWorkspace.id !== workspace.id)
-        throw new TRPCError({
-          message: `Source board does not belong to this workspace`,
-          code: "FORBIDDEN",
-        });
+        throw new ForbiddenException(
+          `Source board does not belong to this workspace`,
+        );
 
       let slug = generateSlug(input.name);
 
@@ -383,10 +378,7 @@ export class BoardService {
     });
 
     if (!result)
-      throw new TRPCError({
-        message: `Failed to create board`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(`Failed to create board`);
 
     if (input.lists.length) {
       const listInputs = input.lists.map((list, index) => ({
@@ -431,10 +423,9 @@ export class BoardService {
     );
 
     if (!board)
-      throw new TRPCError({
-        message: `Board with public ID ${input.boardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Board with public ID ${input.boardPublicId} not found`,
+      );
 
     await assertCanEdit(
       db,
@@ -474,10 +465,9 @@ export class BoardService {
       );
 
       if (!isBoardSlugAvailable) {
-        throw new TRPCError({
-          message: `Board slug ${input.slug} is not available`,
-          code: "BAD_REQUEST",
-        });
+        throw new BadRequestException(
+          `Board slug ${input.slug} is not available`,
+        );
       }
     }
 
@@ -490,10 +480,7 @@ export class BoardService {
     });
 
     if (!result)
-      throw new TRPCError({
-        message: `Failed to update board`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(`Failed to update board`);
 
     return result;
   }
@@ -506,10 +493,9 @@ export class BoardService {
     );
 
     if (!board)
-      throw new TRPCError({
-        message: `Board with public ID ${input.boardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Board with public ID ${input.boardPublicId} not found`,
+      );
 
     await assertCanDelete(
       db,
@@ -538,10 +524,7 @@ export class BoardService {
       });
 
       if (!Array.isArray(deletedLists)) {
-        throw new TRPCError({
-          message: `Failed to delete lists`,
-          code: "INTERNAL_SERVER_ERROR",
-        });
+        throw new InternalServerErrorException(`Failed to delete lists`);
       }
 
       const deletedCards = await cardRepo.softDeleteAllByListIds(db, {
@@ -551,10 +534,7 @@ export class BoardService {
       });
 
       if (!Array.isArray(deletedCards)) {
-        throw new TRPCError({
-          message: `Failed to delete cards`,
-          code: "INTERNAL_SERVER_ERROR",
-        });
+        throw new InternalServerErrorException(`Failed to delete cards`);
       }
 
       if (deletedCards.length) {
@@ -581,22 +561,19 @@ export class BoardService {
     const board = await boardRepo.getBoardForMove(db, input.boardPublicId);
 
     if (!board)
-      throw new TRPCError({
-        message: `Board with public ID ${input.boardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Board with public ID ${input.boardPublicId} not found`,
+      );
 
     if (board.type === "template")
-      throw new TRPCError({
-        message: `Templates cannot be moved between workspaces`,
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(
+        `Templates cannot be moved between workspaces`,
+      );
 
     if (board.isArchived)
-      throw new TRPCError({
-        message: `Archived boards cannot be moved. Unarchive the board first.`,
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(
+        `Archived boards cannot be moved. Unarchive the board first.`,
+      );
 
     // Check permission to edit board in source workspace
     await assertCanEdit(
@@ -619,16 +596,10 @@ export class BoardService {
     );
 
     if (!targetWorkspace || targetWorkspace.deletedAt)
-      throw new TRPCError({
-        message: `Target workspace not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(`Target workspace not found`);
 
     if (targetWorkspace.id === board.workspaceId)
-      throw new TRPCError({
-        message: `Board is already in this workspace`,
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(`Board is already in this workspace`);
 
     // Check permission to create boards in target workspace
     await assertPermission(db, userId, targetWorkspace.id, "board:create");
@@ -667,10 +638,9 @@ export class BoardService {
     );
 
     if (!board)
-      throw new TRPCError({
-        message: `Board with public ID ${input.boardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Board with public ID ${input.boardPublicId} not found`,
+      );
 
     const isBoardSlugAvailable = await boardRepo.isBoardSlugAvailable(
       db,

@@ -1,10 +1,10 @@
-import { TRPCError } from "@trpc/server";
+import { ForbiddenException, NotFoundException } from "@nestjs/common";
 
 import type { dbClient } from "@kan/db/client";
+import type { Permission, Role } from "@kan/shared";
 import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as permissionRepo from "@kan/db/repository/permission.repo";
-import type { Permission, Role } from "@kan/shared";
 import { canManageRole, getDefaultPermissions } from "@kan/shared";
 
 /**
@@ -95,7 +95,11 @@ export async function hasPermission(
   workspaceId: number,
   permission: Permission,
 ): Promise<boolean> {
-  const member = await permissionRepo.getMemberWithRole(db, userId, workspaceId);
+  const member = await permissionRepo.getMemberWithRole(
+    db,
+    userId,
+    workspaceId,
+  );
 
   if (!member) {
     return false;
@@ -122,7 +126,11 @@ export async function getUserPermissions(
   role: string;
   roleId: number | null;
 } | null> {
-  const member = await permissionRepo.getMemberWithRole(db, userId, workspaceId);
+  const member = await permissionRepo.getMemberWithRole(
+    db,
+    userId,
+    workspaceId,
+  );
 
   if (!member) {
     return null;
@@ -154,10 +162,9 @@ export async function assertPermission(
   const hasIt = await hasPermission(db, userId, workspaceId, permission);
 
   if (!hasIt) {
-    throw new TRPCError({
-      message: `You do not have permission to perform this action (${permission})`,
-      code: "FORBIDDEN",
-    });
+    throw new ForbiddenException(
+      `You do not have permission to perform this action (${permission})`,
+    );
   }
 }
 
@@ -177,19 +184,15 @@ export async function assertCanManageRole(
   );
 
   if (!managerMember) {
-    throw new TRPCError({
-      message: "You are not a member of this workspace",
-      code: "FORBIDDEN",
-    });
+    throw new ForbiddenException("You are not a member of this workspace");
   }
 
   const managerRole = managerMember.role;
 
   if (!canManageRole(managerRole, targetRoleName as Role)) {
-    throw new TRPCError({
-      message: `You cannot assign the "${targetRoleName}" role`,
-      code: "FORBIDDEN",
-    });
+    throw new ForbiddenException(
+      `You cannot assign the "${targetRoleName}" role`,
+    );
   }
 }
 
@@ -209,29 +212,22 @@ export async function assertCanManageMember(
   );
 
   if (!managerMember) {
-    throw new TRPCError({
-      message: "You are not a member of this workspace",
-      code: "FORBIDDEN",
-    });
+    throw new ForbiddenException("You are not a member of this workspace");
   }
 
   const targetMember = await memberRepo.getById(db, targetMemberId);
 
   if (!targetMember) {
-    throw new TRPCError({
-      message: "Target member not found",
-      code: "NOT_FOUND",
-    });
+    throw new NotFoundException("Target member not found");
   }
 
   const managerRole = managerMember.role;
   const targetRole = targetMember.role;
 
   if (!canManageRole(managerRole, targetRole)) {
-    throw new TRPCError({
-      message: "You cannot manage this member due to role hierarchy",
-      code: "FORBIDDEN",
-    });
+    throw new ForbiddenException(
+      "You cannot manage this member due to role hierarchy",
+    );
   }
 }
 
@@ -246,7 +242,12 @@ export async function assertCanDelete(
   createdBy: string | null,
 ): Promise<void> {
   // Check if user has the general delete permission
-  const hasDeletePermission = await hasPermission(db, userId, workspaceId, permission);
+  const hasDeletePermission = await hasPermission(
+    db,
+    userId,
+    workspaceId,
+    permission,
+  );
 
   // If user has permission, allow deletion
   if (hasDeletePermission) {
@@ -259,10 +260,9 @@ export async function assertCanDelete(
   }
 
   // Neither condition met - deny deletion
-  throw new TRPCError({
-    message: `You do not have permission to delete this entity (${permission})`,
-    code: "FORBIDDEN",
-  });
+  throw new ForbiddenException(
+    `You do not have permission to delete this entity (${permission})`,
+  );
 }
 
 /**
@@ -276,7 +276,12 @@ export async function assertCanEdit(
   createdBy: string | null,
 ): Promise<void> {
   // Check if user has the general edit permission
-  const hasEditPermission = await hasPermission(db, userId, workspaceId, permission);
+  const hasEditPermission = await hasPermission(
+    db,
+    userId,
+    workspaceId,
+    permission,
+  );
 
   // If user has permission, allow editing
   if (hasEditPermission) {
@@ -289,10 +294,9 @@ export async function assertCanEdit(
   }
 
   // Neither condition met - deny editing
-  throw new TRPCError({
-    message: `You do not have permission to edit this entity (${permission})`,
-    code: "FORBIDDEN",
-  });
+  throw new ForbiddenException(
+    `You do not have permission to edit this entity (${permission})`,
+  );
 }
 
 /**
@@ -381,10 +385,7 @@ export async function assertBoardAccess(
   const allowed = await hasBoardAccess(db, userId, board);
 
   if (!allowed) {
-    throw new TRPCError({
-      message: `Board not found`,
-      code: "NOT_FOUND",
-    });
+    throw new NotFoundException(`Board not found`);
   }
 }
 
@@ -404,10 +405,7 @@ export async function assertCanManageBoardMembers(
   );
 
   if (!member) {
-    throw new TRPCError({
-      message: "You are not a member of this workspace",
-      code: "FORBIDDEN",
-    });
+    throw new ForbiddenException("You are not a member of this workspace");
   }
 
   if (member.role === "admin") return;
@@ -419,8 +417,7 @@ export async function assertCanManageBoardMembers(
 
   if (membership?.role === "admin") return;
 
-  throw new TRPCError({
-    message: "You do not have permission to manage members of this board",
-    code: "FORBIDDEN",
-  });
+  throw new ForbiddenException(
+    "You do not have permission to manage members of this board",
+  );
 }

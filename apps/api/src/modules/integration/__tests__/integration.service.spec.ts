@@ -48,7 +48,7 @@ describe("IntegrationService", () => {
 
     await expect(
       service.disconnect({ userId: "user_1", provider: "trello" }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 
   it("builds the Trello authorize URL when not yet connected", async () => {
@@ -72,7 +72,7 @@ describe("IntegrationService", () => {
 
     await expect(
       service.getAuthorizationUrl({ userId: "user_1", provider: "trello" }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
   });
 
   it("throws when the Trello API key is not configured", async () => {
@@ -80,7 +80,7 @@ describe("IntegrationService", () => {
 
     await expect(
       service.getAuthorizationUrl({ userId: "user_1", provider: "trello" }),
-    ).rejects.toMatchObject({ code: "INTERNAL_SERVER_ERROR" });
+    ).rejects.toMatchObject({ status: 500 });
   });
 
   it("stores the GitHub token encrypted, never in plaintext", async () => {

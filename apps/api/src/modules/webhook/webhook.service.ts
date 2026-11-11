@@ -1,5 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { TRPCError } from "@trpc/server";
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from "@nestjs/common";
 
 import type { WebhookEvent } from "@kan/db/schema";
 import { assertPermission } from "@kan/api/utils/permissions";
@@ -51,7 +54,7 @@ export class WebhookService {
     const webhook = await webhookRepo.getByPublicId(db, webhookPublicId);
 
     if (!webhook || webhook.workspaceId !== workspace.id)
-      throw new TRPCError({ message: "Webhook not found", code: "NOT_FOUND" });
+      throw new NotFoundException("Webhook not found");
 
     return webhook;
   }
@@ -88,10 +91,7 @@ export class WebhookService {
     });
 
     if (!result)
-      throw new TRPCError({
-        message: "Unable to create webhook",
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException("Unable to create webhook");
 
     return toResponse(result);
   }
@@ -121,10 +121,7 @@ export class WebhookService {
     });
 
     if (!result)
-      throw new TRPCError({
-        message: "Unable to update webhook",
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException("Unable to update webhook");
 
     return toResponse(result);
   }

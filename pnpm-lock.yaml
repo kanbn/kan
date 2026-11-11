@@ -432,6 +432,9 @@ importers:
       '@kan/stripe':
         specifier: workspace:^
         version: link:../stripe
+      '@nestjs/common':
+        specifier: ^11.2.7
+        version: 11.2.9(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@trpc/server':
         specifier: 'catalog:'
         version: 11.5.0(typescript@5.9.2)

@@ -1,5 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { TRPCError } from "@trpc/server";
+import {
+  BadRequestException,
+  ConflictException,
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from "@nestjs/common";
 
 import {
   assertCanManageMember,
@@ -48,10 +54,9 @@ export class MemberService {
     );
 
     if (isInvitedEmailAlreadyMember)
-      throw new TRPCError({
-        message: `User with email ${input.email} is already a member of this workspace`,
-        code: "CONFLICT",
-      });
+      throw new ConflictException(
+        `User with email ${input.email} is already a member of this workspace`,
+      );
 
     if (isCloudEnv()) {
       const subscriptions = await subscriptionRepo.getByReferenceId(
@@ -67,10 +72,9 @@ export class MemberService {
       const unlimitedSeats = hasUnlimitedSeats(subscriptions);
 
       if (!activeTeamSubscription && !activeProSubscription)
-        throw new TRPCError({
-          message: `Workspace with public ID ${workspace.publicId} does not have an active subscription`,
-          code: "NOT_FOUND",
-        });
+        throw new NotFoundException(
+          `Workspace with public ID ${workspace.publicId} does not have an active subscription`,
+        );
 
       if (activeTeamSubscription?.stripeSubscriptionId && !unlimitedSeats) {
         try {
@@ -95,10 +99,9 @@ export class MemberService {
             },
             "Failed to increment Stripe subscription seats",
           );
-          throw new TRPCError({
-            message: `Failed to update subscription for the new member.`,
-            code: "INTERNAL_SERVER_ERROR",
-          });
+          throw new InternalServerErrorException(
+            `Failed to update subscription for the new member.`,
+          );
         }
       } else if (activeTeamSubscription) {
         log.warn(
@@ -119,10 +122,7 @@ export class MemberService {
           workspace.id,
         );
         if (memberCount >= seatLimit)
-          throw new TRPCError({
-            message: `SEAT_LIMIT_REACHED`,
-            code: "FORBIDDEN",
-          });
+          throw new ForbiddenException(`SEAT_LIMIT_REACHED`);
       }
     }
 
@@ -145,10 +145,9 @@ export class MemberService {
     });
 
     if (!invite)
-      throw new TRPCError({
-        message: `Unable to invite user with email ${input.email}`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(
+        `Unable to invite user with email ${input.email}`,
+      );
 
     const { status } = await sendMagicLinkInvite(input.headers, {
       email: input.email,
@@ -167,10 +166,9 @@ export class MemberService {
         deletedBy: input.userId,
       });
 
-      throw new TRPCError({
-        message: `Failed to send magic link invitation to user with email ${input.email}.`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(
+        `Failed to send magic link invitation to user with email ${input.email}.`,
+      );
     }
 
     return invite;
@@ -191,10 +189,9 @@ export class MemberService {
     const member = await memberRepo.getByPublicId(db, input.memberPublicId);
 
     if (!member || member.workspaceId !== workspace.id)
-      throw new TRPCError({
-        message: `Member with public ID ${input.memberPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Member with public ID ${input.memberPublicId} not found`,
+      );
 
     const deletedMember = await memberRepo.softDelete(db, {
       memberId: member.id,
@@ -203,10 +200,9 @@ export class MemberService {
     });
 
     if (!deletedMember)
-      throw new TRPCError({
-        message: `Failed to delete member with public ID ${input.memberPublicId}`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(
+        `Failed to delete member with public ID ${input.memberPublicId}`,
+      );
 
     if (isCloudEnv()) {
       const subscriptions = await subscriptionRepo.getByReferenceId(
@@ -313,10 +309,9 @@ export class MemberService {
       const activeProSubscription = getSubscriptionByPlan(subscriptions, "pro");
 
       if (!activeTeamSubscription && !activeProSubscription)
-        throw new TRPCError({
-          message: `Invite links require a Team or Pro subscription`,
-          code: "FORBIDDEN",
-        });
+        throw new ForbiddenException(
+          `Invite links require a Team or Pro subscription`,
+        );
     }
 
     await inviteLinkRepo.deactivateAllActiveForWorkspace(db, {
@@ -336,10 +331,7 @@ export class MemberService {
     });
 
     if (!inviteLink)
-      throw new TRPCError({
-        message: `Failed to create invite link`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(`Failed to create invite link`);
 
     return {
       publicId: inviteLink.publicId,
@@ -376,10 +368,7 @@ export class MemberService {
       invite.status !== "active" ||
       (invite.expiresAt && new Date() > invite.expiresAt)
     )
-      throw new TRPCError({
-        message: `Invalid or expired invite link`,
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(`Invalid or expired invite link`);
 
     return {
       publicId: invite.publicId,
@@ -396,10 +385,7 @@ export class MemberService {
       invite.status !== "active" ||
       (invite.expiresAt && new Date() > invite.expiresAt)
     )
-      throw new TRPCError({
-        message: `Invalid or expired invite link`,
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(`Invalid or expired invite link`);
 
     const workspace = await assertFound(
       workspaceRepo.getById(db, invite.workspaceId),
@@ -413,10 +399,7 @@ export class MemberService {
     );
 
     if (isMember)
-      throw new TRPCError({
-        message: `User is already a member of this workspace`,
-        code: "CONFLICT",
-      });
+      throw new ConflictException(`User is already a member of this workspace`);
 
     const user = await assertFound(
       userRepo.getById(db, input.userId),
@@ -437,10 +420,9 @@ export class MemberService {
       const unlimitedSeats = hasUnlimitedSeats(subscriptions);
 
       if (!activeTeamSubscription && !activeProSubscription)
-        throw new TRPCError({
-          message: `Workspace with public ID ${workspace.publicId} does not have an active subscription`,
-          code: "NOT_FOUND",
-        });
+        throw new NotFoundException(
+          `Workspace with public ID ${workspace.publicId} does not have an active subscription`,
+        );
 
       if (activeTeamSubscription?.stripeSubscriptionId && !unlimitedSeats) {
         try {
@@ -465,10 +447,9 @@ export class MemberService {
             },
             "Failed to increment Stripe subscription seats",
           );
-          throw new TRPCError({
-            message: `Failed to update subscription for the new member.`,
-            code: "INTERNAL_SERVER_ERROR",
-          });
+          throw new InternalServerErrorException(
+            `Failed to update subscription for the new member.`,
+          );
         }
       } else if (activeTeamSubscription) {
         log.warn(
@@ -489,10 +470,7 @@ export class MemberService {
           workspace.id,
         );
         if (memberCount >= seatLimit)
-          throw new TRPCError({
-            message: `SEAT_LIMIT_REACHED`,
-            code: "FORBIDDEN",
-          });
+          throw new ForbiddenException(`SEAT_LIMIT_REACHED`);
       }
     }
 
@@ -535,10 +513,7 @@ export class MemberService {
     const member = await memberRepo.getByPublicId(db, input.memberPublicId);
 
     if (!member || member.workspaceId !== workspace.id)
-      throw new TRPCError({
-        message: `Member not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(`Member not found`);
 
     await assertCanManageMember(db, input.userId, workspace.id, member.id);
     await assertCanManageRole(db, input.userId, workspace.id, input.role);

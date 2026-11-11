@@ -52,10 +52,9 @@ beforeEach(() => {
 
 describe("ChecklistService.create", () => {
   it("creates a checklist on the resolved card", async () => {
-    vi.spyOn(
-      cardRepo,
-      "getWorkspaceAndCardIdByCardPublicId",
-    ).mockResolvedValue(card as never);
+    vi.spyOn(cardRepo, "getWorkspaceAndCardIdByCardPublicId").mockResolvedValue(
+      card as never,
+    );
     vi.spyOn(checklistRepo, "create").mockResolvedValue({
       id: 1,
       publicId: "checklist_12345",
@@ -76,10 +75,9 @@ describe("ChecklistService.create", () => {
   });
 
   it("throws NOT_FOUND when the card doesn't exist", async () => {
-    vi.spyOn(
-      cardRepo,
-      "getWorkspaceAndCardIdByCardPublicId",
-    ).mockResolvedValue(null as never);
+    vi.spyOn(cardRepo, "getWorkspaceAndCardIdByCardPublicId").mockResolvedValue(
+      null as never,
+    );
 
     await expect(
       service.create({
@@ -87,7 +85,7 @@ describe("ChecklistService.create", () => {
         name: "Steps",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 });
 

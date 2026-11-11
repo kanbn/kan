@@ -72,7 +72,7 @@ describe("PermissionService.getMyPermissions", () => {
         workspacePublicId: "workspace_12345",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    ).rejects.toMatchObject({ status: 403 });
   });
 });
 
@@ -114,7 +114,7 @@ describe("PermissionService.getMemberPermissions", () => {
         memberPublicId: "member_12345",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 });
 
@@ -293,7 +293,7 @@ describe("PermissionService.getRolePermissions", () => {
         rolePublicId: "role_missing",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 });
 
@@ -331,7 +331,7 @@ describe("PermissionService.grantRolePermission", () => {
         permission: "card:edit",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    ).rejects.toMatchObject({ status: 403 });
   });
 
   it("throws FORBIDDEN when granting workspace:manage to a non-admin role", async () => {
@@ -347,7 +347,7 @@ describe("PermissionService.grantRolePermission", () => {
         permission: "workspace:manage",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    ).rejects.toMatchObject({ status: 403 });
   });
 
   it("throws FORBIDDEN when granting workspace:delete to a non-admin role", async () => {
@@ -363,7 +363,7 @@ describe("PermissionService.grantRolePermission", () => {
         permission: "workspace:delete",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    ).rejects.toMatchObject({ status: 403 });
   });
 });
 
@@ -401,6 +401,6 @@ describe("PermissionService.revokeRolePermission", () => {
         permission: "card:edit",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    ).rejects.toMatchObject({ status: 403 });
   });
 });

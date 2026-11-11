@@ -63,16 +63,15 @@ describe("ListService.create", () => {
         boardPublicId: "board_missing",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 });
 
 describe("ListService.delete", () => {
   it("soft deletes the list and its cards", async () => {
-    vi.spyOn(
-      listRepo,
-      "getWorkspaceAndListIdByListPublicId",
-    ).mockResolvedValue(list as never);
+    vi.spyOn(listRepo, "getWorkspaceAndListIdByListPublicId").mockResolvedValue(
+      list as never,
+    );
     vi.spyOn(listRepo, "softDeleteById").mockResolvedValue({ id: 1 } as never);
     vi.spyOn(cardRepo, "softDeleteAllByListIds").mockResolvedValue([
       { id: 1 },
@@ -97,23 +96,21 @@ describe("ListService.delete", () => {
   });
 
   it("throws NOT_FOUND when the list doesn't exist", async () => {
-    vi.spyOn(
-      listRepo,
-      "getWorkspaceAndListIdByListPublicId",
-    ).mockResolvedValue(undefined as never);
+    vi.spyOn(listRepo, "getWorkspaceAndListIdByListPublicId").mockResolvedValue(
+      undefined as never,
+    );
 
     await expect(
       service.delete({ listPublicId: "list_missing", userId: "user_1" }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 });
 
 describe("ListService.update", () => {
   it("renames the list", async () => {
-    vi.spyOn(
-      listRepo,
-      "getWorkspaceAndListIdByListPublicId",
-    ).mockResolvedValue(list as never);
+    vi.spyOn(listRepo, "getWorkspaceAndListIdByListPublicId").mockResolvedValue(
+      list as never,
+    );
     vi.spyOn(listRepo, "update").mockResolvedValue({
       publicId: "list_12345",
       name: "Doing",
@@ -129,10 +126,9 @@ describe("ListService.update", () => {
   });
 
   it("reorders the list when an index is given", async () => {
-    vi.spyOn(
-      listRepo,
-      "getWorkspaceAndListIdByListPublicId",
-    ).mockResolvedValue(list as never);
+    vi.spyOn(listRepo, "getWorkspaceAndListIdByListPublicId").mockResolvedValue(
+      list as never,
+    );
     vi.spyOn(listRepo, "reorder").mockResolvedValue({
       publicId: "list_12345",
       name: "To do",
@@ -148,10 +144,9 @@ describe("ListService.update", () => {
   });
 
   it("throws when neither update produces a result", async () => {
-    vi.spyOn(
-      listRepo,
-      "getWorkspaceAndListIdByListPublicId",
-    ).mockResolvedValue(list as never);
+    vi.spyOn(listRepo, "getWorkspaceAndListIdByListPublicId").mockResolvedValue(
+      list as never,
+    );
 
     await expect(
       service.update({ listPublicId: "list_12345", userId: "user_1" }),

@@ -85,7 +85,7 @@ describe("MemberService.invite", () => {
         userId: "user_1",
         headers: new Headers(),
       }),
-    ).rejects.toMatchObject({ code: "CONFLICT" });
+    ).rejects.toMatchObject({ status: 409 });
   });
 
   it("throws NOT_FOUND in the cloud environment when there is no active subscription", async () => {
@@ -102,7 +102,7 @@ describe("MemberService.invite", () => {
         userId: "user_1",
         headers: new Headers(),
       }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 
   it("throws FORBIDDEN with SEAT_LIMIT_REACHED when the workspace is at its seat limit", async () => {
@@ -126,7 +126,7 @@ describe("MemberService.invite", () => {
         headers: new Headers(),
       }),
     ).rejects.toMatchObject({
-      code: "FORBIDDEN",
+      status: 403,
       message: "SEAT_LIMIT_REACHED",
     });
   });
@@ -209,7 +209,7 @@ describe("MemberService.invite", () => {
         userId: "user_1",
         headers: new Headers(),
       }),
-    ).rejects.toMatchObject({ code: "INTERNAL_SERVER_ERROR" });
+    ).rejects.toMatchObject({ status: 500 });
   });
 
   it("rolls back the member and throws when the magic link invite fails to send", async () => {
@@ -238,7 +238,7 @@ describe("MemberService.invite", () => {
         userId: "user_1",
         headers: new Headers(),
       }),
-    ).rejects.toMatchObject({ code: "INTERNAL_SERVER_ERROR" });
+    ).rejects.toMatchObject({ status: 500 });
 
     expect(softDelete).toHaveBeenCalledWith(
       expect.anything(),
@@ -284,7 +284,7 @@ describe("MemberService.delete", () => {
         memberPublicId: "member_12345",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 
   it("decrements Stripe seats in the cloud environment", async () => {
@@ -392,7 +392,7 @@ describe("MemberService.createInviteLink", () => {
         workspacePublicId: "workspace_12345",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    ).rejects.toMatchObject({ status: 403 });
   });
 
   it("creates an invite link and deactivates any existing ones", async () => {
@@ -424,7 +424,7 @@ describe("MemberService.getInviteByCode", () => {
 
     await expect(
       service.getInviteByCode({ inviteCode: "bad-code" }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
   });
 
   it("throws BAD_REQUEST for an expired invite", async () => {
@@ -436,7 +436,7 @@ describe("MemberService.getInviteByCode", () => {
 
     await expect(
       service.getInviteByCode({ inviteCode: "code123" }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
   });
 
   it("returns invite info for a valid code", async () => {
@@ -469,7 +469,7 @@ describe("MemberService.acceptInviteLink", () => {
 
     await expect(
       service.acceptInviteLink({ inviteCode: "bad-code", userId: "user_1" }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
   });
 
   it("throws CONFLICT when the user is already a member", async () => {
@@ -483,7 +483,7 @@ describe("MemberService.acceptInviteLink", () => {
 
     await expect(
       service.acceptInviteLink({ inviteCode: "code123", userId: "user_1" }),
-    ).rejects.toMatchObject({ code: "CONFLICT" });
+    ).rejects.toMatchObject({ status: 409 });
   });
 
   it("accepts the invite and adds the user as an active member", async () => {
@@ -545,7 +545,7 @@ describe("MemberService.acceptInviteLink", () => {
     await expect(
       service.acceptInviteLink({ inviteCode: "code123", userId: "user_1" }),
     ).rejects.toMatchObject({
-      code: "FORBIDDEN",
+      status: 403,
       message: "SEAT_LIMIT_REACHED",
     });
   });
@@ -597,7 +597,7 @@ describe("MemberService.updateRole", () => {
         role: "admin",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 
   it("checks assertCanManageMember and assertCanManageRole", async () => {

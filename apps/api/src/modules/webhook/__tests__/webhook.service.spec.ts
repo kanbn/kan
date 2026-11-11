@@ -96,7 +96,7 @@ describe("WebhookService", () => {
         webhookPublicId: "webhook_12345",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
     expect(hardDelete).not.toHaveBeenCalled();
   });
 

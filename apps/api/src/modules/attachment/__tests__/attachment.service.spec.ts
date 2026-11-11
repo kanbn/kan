@@ -91,7 +91,7 @@ describe("AttachmentService.generateUploadUrl", () => {
         contentType: "image/png",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 });
 
@@ -162,6 +162,6 @@ describe("AttachmentService.delete", () => {
 
     await expect(
       service.delete({ attachmentPublicId: "attachment_1", userId: "user_1" }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 });

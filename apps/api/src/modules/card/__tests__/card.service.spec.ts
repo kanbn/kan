@@ -103,7 +103,7 @@ describe("CardService.byId", () => {
   it("rejects anonymous callers on private boards", async () => {
     await expect(
       service.byId({ cardPublicId: "card_1234567" }),
-    ).rejects.toMatchObject({ code: "UNAUTHORIZED" });
+    ).rejects.toMatchObject({ status: 401 });
   });
 
   it("checks card:view and board access for signed-in callers on private boards", async () => {
@@ -127,7 +127,7 @@ describe("CardService.getActivities", () => {
         limit: 10,
         order: "oldest",
       }),
-    ).rejects.toMatchObject({ code: "UNAUTHORIZED" });
+    ).rejects.toMatchObject({ status: 401 });
   });
 
   it("passes the cursor through and returns an ISO next cursor", async () => {
@@ -195,7 +195,7 @@ describe("CardService.create", () => {
 
     await expect(
       service.create({ ...input, labelPublicIds: ["label_123456"] }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
     expect(create).not.toHaveBeenCalled();
   });
 
@@ -208,7 +208,7 @@ describe("CardService.create", () => {
 
     await expect(
       service.create({ ...input, memberPublicIds: ["member_12345"] }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
     expect(create).not.toHaveBeenCalled();
   });
 
@@ -262,7 +262,7 @@ describe("CardService.update", () => {
         userId: "user_1",
         userName: "Henry",
       }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
   });
 
   it("logs a due date added activity and returns an ISO due date", async () => {
@@ -350,7 +350,7 @@ describe("CardService.addOrRemoveLabel", () => {
         labelPublicId: "label_123456",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
   });
 });
 
@@ -368,7 +368,7 @@ describe("CardService.updateComment", () => {
         comment: "hi",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 });
 
@@ -396,7 +396,7 @@ describe("CardService.duplicate", () => {
         copyChecklists: false,
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
     expect(create).not.toHaveBeenCalled();
   });
 });
