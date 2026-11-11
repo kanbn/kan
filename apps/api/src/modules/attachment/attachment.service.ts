@@ -1,5 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { TRPCError } from "@trpc/server";
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from "@nestjs/common";
 
 import {
   assertBoardAccess,
@@ -55,10 +58,9 @@ export class AttachmentService {
 
     const bucket = getBucket();
     if (!bucket)
-      throw new TRPCError({
-        message: `Attachments bucket not configured`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(
+        `Attachments bucket not configured`,
+      );
 
     const sanitizedFilename = input.filename
       .replace(/[^a-zA-Z0-9._-]/g, "_")
@@ -92,10 +94,7 @@ export class AttachmentService {
     });
 
     if (!attachment)
-      throw new TRPCError({
-        message: "Failed to create attachment",
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException("Failed to create attachment");
 
     await cardActivityRepo.create(db, {
       type: "card.updated.attachment.added",
@@ -123,10 +122,9 @@ export class AttachmentService {
     );
 
     if (!attachment || attachment.deletedAt)
-      throw new TRPCError({
-        message: `Attachment with public ID ${input.attachmentPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Attachment with public ID ${input.attachmentPublicId} not found`,
+      );
 
     const board = attachment.card.list.board;
     await assertPermission(db, input.userId, board.workspaceId, "card:edit");

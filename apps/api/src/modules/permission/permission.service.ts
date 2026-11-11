@@ -1,5 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { TRPCError } from "@trpc/server";
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 
 import type { Permission } from "@kan/shared";
 import {
@@ -21,7 +24,7 @@ export class PermissionService {
     const member = await memberRepo.getByPublicId(db, memberPublicId);
 
     if (!member || member.workspaceId !== workspaceId)
-      throw new TRPCError({ message: "Member not found", code: "NOT_FOUND" });
+      throw new NotFoundException("Member not found");
 
     return member;
   }
@@ -33,8 +36,7 @@ export class PermissionService {
       rolePublicId,
     );
 
-    if (!role)
-      throw new TRPCError({ message: "Role not found", code: "NOT_FOUND" });
+    if (!role) throw new NotFoundException("Role not found");
 
     return role;
   }
@@ -48,10 +50,7 @@ export class PermissionService {
     const result = await getUserPermissions(db, input.userId, workspace.id);
 
     if (!result)
-      throw new TRPCError({
-        message: "You are not a member of this workspace",
-        code: "FORBIDDEN",
-      });
+      throw new ForbiddenException("You are not a member of this workspace");
 
     return result;
   }
@@ -285,21 +284,16 @@ export class PermissionService {
     const role = await this.getRoleOrThrow(input.rolePublicId, workspace.id);
 
     if (role.name === "admin" && role.isSystem)
-      throw new TRPCError({
-        message: "Admin role permissions cannot be modified",
-        code: "FORBIDDEN",
-      });
+      throw new ForbiddenException("Admin role permissions cannot be modified");
 
     if (
       (input.permission === "workspace:manage" ||
         input.permission === "workspace:delete") &&
       role.name !== "admin"
     )
-      throw new TRPCError({
-        message:
-          "Only the admin role can manage billing or delete the workspace",
-        code: "FORBIDDEN",
-      });
+      throw new ForbiddenException(
+        "Only the admin role can manage billing or delete the workspace",
+      );
 
     await permissionRepo.grantRolePermission(db, role.id, input.permission);
 
@@ -322,10 +316,7 @@ export class PermissionService {
     const role = await this.getRoleOrThrow(input.rolePublicId, workspace.id);
 
     if (role.name === "admin" && role.isSystem)
-      throw new TRPCError({
-        message: "Admin role permissions cannot be modified",
-        code: "FORBIDDEN",
-      });
+      throw new ForbiddenException("Admin role permissions cannot be modified");
 
     await permissionRepo.revokeRolePermission(db, role.id, input.permission);
 

@@ -1,7 +1,7 @@
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 
-import { waitForResponsePath } from "../wait-for-trpc";
+import { waitForResponsePath } from "../wait-for-api";
 
 export class MembersPage {
   constructor(private readonly page: Page) {}

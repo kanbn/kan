@@ -1,5 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { TRPCError } from "@trpc/server";
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from "@nestjs/common";
 
 import * as userRepo from "@kan/db/repository/user.repo";
 import { generateAvatarUrl } from "@kan/shared/utils";
@@ -54,18 +57,14 @@ export class UserService {
     );
 
     if (user.hasPassword)
-      throw new TRPCError({
-        message: `Password already set; use change password instead`,
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(
+        `Password already set; use change password instead`,
+      );
 
     try {
       await setUserPassword(input.headers, input.newPassword);
     } catch {
-      throw new TRPCError({
-        message: "Failed to set password",
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException("Failed to set password");
     }
 
     return { success: true };

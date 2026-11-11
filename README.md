@@ -39,7 +39,7 @@ See our [roadmap](https://kan.bn/kan/roadmap) for upcoming features.
 ## Made With
 
 - [Next.js](https://nextjs.org/?ref=kan.bn)
-- [tRPC](https://trpc.io/?ref=kan.bn)
+- [NestJS](https://nestjs.com/?ref=kan.bn)
 - [Better Auth](https://better-auth.com/?ref=kan.bn)
 - [Tailwind CSS](https://tailwindcss.com/?ref=kan.bn)
 - [Drizzle ORM](https://orm.drizzle.team/?ref=kan.bn)

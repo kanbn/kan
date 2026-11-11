@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
 
-import type { NewListInput } from "@kan/api/types";
+import type { CreateListDto as NewListInput } from "@kan/api-client/hooks";
 import { useCreateList } from "@kan/api-client/hooks";
 import { generateUID } from "@kan/shared/utils";
 

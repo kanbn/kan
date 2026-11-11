@@ -1,4 +1,4 @@
-import { TRPCError } from "@trpc/server";
+import { ForbiddenException } from "@nestjs/common";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import * as avatarUrls from "@kan/api/utils/avatarUrls";
@@ -88,7 +88,7 @@ describe("BoardService.byId", () => {
         cardView: "full",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 });
 
@@ -104,7 +104,7 @@ describe("BoardService.bySlug", () => {
 
     await expect(
       service.bySlug({ workspaceSlug: "acme", boardSlug: "roadmap" }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 
   it("returns ISO due dates", async () => {
@@ -186,7 +186,7 @@ describe("BoardService.create", () => {
         sourceBoardPublicId: "board_source1",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    ).rejects.toMatchObject({ status: 403 });
     expect(permissions.assertBoardAccess).toHaveBeenCalled();
     expect(snapshot).not.toHaveBeenCalled();
   });
@@ -219,7 +219,7 @@ describe("BoardService.update", () => {
         slug: "taken",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
   });
 });
 
@@ -256,9 +256,9 @@ describe("BoardService.move", () => {
   };
 
   it.each([
-    [{ ...movable, type: "template" }, "BAD_REQUEST"],
-    [{ ...movable, isArchived: true }, "BAD_REQUEST"],
-  ])("rejects moving %o", async (source, code) => {
+    [{ ...movable, type: "template" }, 400],
+    [{ ...movable, isArchived: true }, 400],
+  ])("rejects moving %o", async (source, status) => {
     vi.spyOn(boardRepo, "getBoardForMove").mockResolvedValue(source as never);
 
     await expect(
@@ -267,7 +267,7 @@ describe("BoardService.move", () => {
         targetWorkspacePublicId: "workspace_target",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code });
+    ).rejects.toMatchObject({ status });
   });
 
   it("rejects a deleted target workspace", async () => {
@@ -283,7 +283,7 @@ describe("BoardService.move", () => {
         targetWorkspacePublicId: "workspace_target",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 
   it("requires board:create in the target workspace before moving", async () => {
@@ -293,7 +293,7 @@ describe("BoardService.move", () => {
       deletedAt: null,
     } as never);
     vi.spyOn(permissions, "assertPermission").mockRejectedValue(
-      new TRPCError({ code: "FORBIDDEN" }),
+      new ForbiddenException(),
     );
     const moveRepo = vi.spyOn(boardRepo, "moveToWorkspace");
 
@@ -303,7 +303,7 @@ describe("BoardService.move", () => {
         targetWorkspacePublicId: "workspace_target",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "FORBIDDEN" });
+    ).rejects.toMatchObject({ status: 403 });
     expect(permissions.assertPermission).toHaveBeenCalledWith(
       expect.anything(),
       "user_1",

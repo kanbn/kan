@@ -1,7 +1,7 @@
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 
-import { waitForResponsePath, waitForTrpcMutation } from "../wait-for-trpc";
+import { waitForResponsePath } from "../wait-for-api";
 
 export class SettingsPage {
   constructor(private readonly page: Page) {}
@@ -64,7 +64,9 @@ export class SettingsPage {
     await this.page.getByRole("button", { name: "Create API key" }).click();
     const dialog = this.page.getByRole("dialog");
     await dialog.getByRole("heading", { name: "API key created" }).waitFor();
+    const key = await dialog.locator("input[readonly]").first().inputValue();
     await dialog.getByRole("button", { name: "Close" }).click();
+    return key;
   }
 
   async revokeApiKey() {

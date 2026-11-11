@@ -1,5 +1,10 @@
-import { Injectable } from "@nestjs/common";
-import { TRPCError } from "@trpc/server";
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+  UnauthorizedException,
+} from "@nestjs/common";
 
 import { mergeActivities } from "@kan/api/utils/activities";
 import { createAvatarUrlResolver } from "@kan/api/utils/avatarUrls";
@@ -51,10 +56,9 @@ export class CardService {
     );
 
     if (!list)
-      throw new TRPCError({
-        message: `List with public ID ${input.listPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `List with public ID ${input.listPublicId} not found`,
+      );
 
     await assertPermission(db, userId, list.workspaceId, "card:create");
     await assertBoardAccess(db, userId, {
@@ -76,20 +80,18 @@ export class CardService {
     const requestedLabelIds = [...new Set(input.labelPublicIds)];
 
     if (labelsToLink.length !== requestedLabelIds.length)
-      throw new TRPCError({
-        message: `Labels with public IDs (${input.labelPublicIds.join(", ")}) not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Labels with public IDs (${input.labelPublicIds.join(", ")}) not found`,
+      );
 
     const labelsFromAnotherBoard = labelsToLink.filter(
       (label) => label.boardId !== list.boardId,
     );
 
     if (labelsFromAnotherBoard.length)
-      throw new TRPCError({
-        message: `Labels belong to a different board than list ${input.listPublicId}`,
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(
+        `Labels belong to a different board than list ${input.listPublicId}`,
+      );
 
     const members = input.memberPublicIds.length
       ? await workspaceRepo.getAllMembersByPublicIds(
@@ -100,10 +102,9 @@ export class CardService {
       : [];
 
     if (members.length !== new Set(input.memberPublicIds).size)
-      throw new TRPCError({
-        message: `Members with public IDs (${input.memberPublicIds.join(", ")}) not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Members with public IDs (${input.memberPublicIds.join(", ")}) not found`,
+      );
 
     const assignableMembers = await filterBoardAssignable(
       db,
@@ -112,10 +113,9 @@ export class CardService {
     );
 
     if (assignableMembers.length !== members.length)
-      throw new TRPCError({
-        message: `Members must be on the board to be assigned`,
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(
+        `Members must be on the board to be assigned`,
+      );
 
     const newCard = await cardRepo.create(db, {
       title: input.title,
@@ -130,10 +130,7 @@ export class CardService {
     const newCardId = newCard.id;
 
     if (!newCardId)
-      throw new TRPCError({
-        message: `Failed to create card`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(`Failed to create card`);
 
     if (newCardId && labelsToLink.length) {
       const labelsInsert = labelsToLink.map((label) => ({
@@ -147,10 +144,9 @@ export class CardService {
       );
 
       if (!cardLabels.length)
-        throw new TRPCError({
-          message: `Failed to create card label relationships`,
-          code: "INTERNAL_SERVER_ERROR",
-        });
+        throw new InternalServerErrorException(
+          `Failed to create card label relationships`,
+        );
 
       const cardActivitesInsert = cardLabels.map((cardLabel) => ({
         type: "card.updated.label.added" as const,
@@ -175,10 +171,9 @@ export class CardService {
         );
 
       if (!cardMembers.length)
-        throw new TRPCError({
-          message: `Failed to create card member relationships`,
-          code: "INTERNAL_SERVER_ERROR",
-        });
+        throw new InternalServerErrorException(
+          `Failed to create card member relationships`,
+        );
 
       const cardActivitesInsert = cardMembers.map((cardMember) => ({
         type: "card.updated.member.added" as const,
@@ -240,10 +235,9 @@ export class CardService {
     );
 
     if (!card)
-      throw new TRPCError({
-        message: `Card with public ID ${input.cardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
 
     await assertPermission(db, userId, card.workspaceId, "comment:create");
     await assertBoardAccess(db, userId, {
@@ -259,10 +253,7 @@ export class CardService {
     });
 
     if (!newComment?.id)
-      throw new TRPCError({
-        message: `Failed to create comment`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(`Failed to create comment`);
 
     await cardActivityRepo.create(db, {
       type: "card.updated.comment.added" as const,
@@ -297,10 +288,9 @@ export class CardService {
     );
 
     if (!card)
-      throw new TRPCError({
-        message: `Card with public ID ${input.cardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
 
     const existingComment = await cardCommentRepo.getByPublicId(
       db,
@@ -308,10 +298,9 @@ export class CardService {
     );
 
     if (!existingComment || existingComment.cardId !== card.id)
-      throw new TRPCError({
-        message: `Comment with public ID ${input.commentPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Comment with public ID ${input.commentPublicId} not found`,
+      );
 
     await assertCanEdit(
       db,
@@ -332,10 +321,7 @@ export class CardService {
     });
 
     if (!updatedComment?.id)
-      throw new TRPCError({
-        message: `Failed to update comment`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(`Failed to update comment`);
 
     await cardActivityRepo.create(db, {
       type: "card.updated.comment.updated" as const,
@@ -370,10 +356,9 @@ export class CardService {
     );
 
     if (!card)
-      throw new TRPCError({
-        message: `Card with public ID ${input.cardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
 
     const existingComment = await cardCommentRepo.getByPublicId(
       db,
@@ -381,10 +366,9 @@ export class CardService {
     );
 
     if (!existingComment || existingComment.cardId !== card.id)
-      throw new TRPCError({
-        message: `Comment with public ID ${input.commentPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Comment with public ID ${input.commentPublicId} not found`,
+      );
 
     await assertCanDelete(
       db,
@@ -406,10 +390,7 @@ export class CardService {
     });
 
     if (!deletedComment)
-      throw new TRPCError({
-        message: `Failed to delete comment`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(`Failed to delete comment`);
 
     await cardActivityRepo.create(db, {
       type: "card.updated.comment.deleted" as const,
@@ -433,10 +414,9 @@ export class CardService {
     );
 
     if (!card)
-      throw new TRPCError({
-        message: `Card with public ID ${input.cardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
 
     await assertPermission(db, userId, card.workspaceId, "card:edit");
     await assertBoardAccess(db, userId, {
@@ -448,10 +428,9 @@ export class CardService {
     const label = await labelRepo.getByPublicId(db, input.labelPublicId);
 
     if (!label)
-      throw new TRPCError({
-        message: `Label with public ID ${input.labelPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Label with public ID ${input.labelPublicId} not found`,
+      );
 
     const cardLabelIds = { cardId: card.id, labelId: label.id };
 
@@ -465,10 +444,9 @@ export class CardService {
         await cardRepo.hardDeleteCardLabelRelationship(db, cardLabelIds);
 
       if (!deletedCardLabelRelationship)
-        throw new TRPCError({
-          message: `Failed to remove label from card`,
-          code: "INTERNAL_SERVER_ERROR",
-        });
+        throw new InternalServerErrorException(
+          `Failed to remove label from card`,
+        );
 
       await cardActivityRepo.create(db, {
         type: "card.updated.label.removed" as const,
@@ -489,21 +467,14 @@ export class CardService {
       .createCardLabelRelationship(db, cardLabelIds)
       .catch((error: unknown) => {
         if (error instanceof CardLabelBoardError)
-          throw new TRPCError({
-            message: error.message,
-            code:
-              error.violation === "board_mismatch"
-                ? "BAD_REQUEST"
-                : "NOT_FOUND",
-          });
+          throw error.violation === "board_mismatch"
+            ? new BadRequestException(error.message)
+            : new NotFoundException(error.message);
         throw error;
       });
 
     if (!newCardLabelRelationship)
-      throw new TRPCError({
-        message: `Failed to add label to card`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(`Failed to add label to card`);
 
     await cardActivityRepo.create(db, {
       type: "card.updated.label.added" as const,
@@ -527,10 +498,9 @@ export class CardService {
     );
 
     if (!card)
-      throw new TRPCError({
-        message: `Card with public ID ${input.cardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
 
     await assertPermission(db, userId, card.workspaceId, "card:edit");
     await assertBoardAccess(db, userId, {
@@ -546,10 +516,9 @@ export class CardService {
     );
 
     if (!member)
-      throw new TRPCError({
-        message: `Member with public ID ${input.workspaceMemberPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Member with public ID ${input.workspaceMemberPublicId} not found`,
+      );
 
     const cardMemberIds = { cardId: card.id, memberId: member.id };
 
@@ -563,10 +532,9 @@ export class CardService {
         await cardRepo.hardDeleteCardMemberRelationship(db, cardMemberIds);
 
       if (!deletedCardMemberRelationship.success)
-        throw new TRPCError({
-          message: `Failed to remove member from card`,
-          code: "INTERNAL_SERVER_ERROR",
-        });
+        throw new InternalServerErrorException(
+          `Failed to remove member from card`,
+        );
 
       await cardActivityRepo.create(db, {
         type: "card.updated.member.removed" as const,
@@ -586,19 +554,13 @@ export class CardService {
     );
 
     if (!assignable)
-      throw new TRPCError({
-        message: `Member is not on this board`,
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(`Member is not on this board`);
 
     const newCardMemberRelationship =
       await cardRepo.createCardMemberRelationship(db, cardMemberIds);
 
     if (!newCardMemberRelationship.success)
-      throw new TRPCError({
-        message: `Failed to add member to card`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(`Failed to add member to card`);
 
     await cardActivityRepo.create(db, {
       type: "card.updated.member.added" as const,
@@ -617,19 +579,14 @@ export class CardService {
     );
 
     if (!card)
-      throw new TRPCError({
-        message: `Card with public ID ${input.cardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
 
     if (card.workspaceVisibility === "private") {
       const userId = input.userId;
 
-      if (!userId)
-        throw new TRPCError({
-          message: `User not authenticated`,
-          code: "UNAUTHORIZED",
-        });
+      if (!userId) throw new UnauthorizedException(`User not authenticated`);
 
       await assertPermission(db, userId, card.workspaceId, "card:view");
       await assertBoardAccess(db, userId, {
@@ -645,10 +602,9 @@ export class CardService {
     );
 
     if (!result)
-      throw new TRPCError({
-        message: `Card with public ID ${input.cardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
 
     // Generate URLs for all attachments
     const attachmentsWithUrls = await Promise.all(
@@ -721,19 +677,14 @@ export class CardService {
     );
 
     if (!card)
-      throw new TRPCError({
-        message: `Card with public ID ${input.cardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
 
     if (card.workspaceVisibility === "private") {
       const userId = input.userId;
 
-      if (!userId)
-        throw new TRPCError({
-          message: `User not authenticated`,
-          code: "UNAUTHORIZED",
-        });
+      if (!userId) throw new UnauthorizedException(`User not authenticated`);
 
       await assertPermission(db, userId, card.workspaceId, "card:view");
       await assertBoardAccess(db, userId, {
@@ -823,10 +774,9 @@ export class CardService {
     );
 
     if (!card)
-      throw new TRPCError({
-        message: `Card with public ID ${input.cardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
 
     await assertCanEdit(
       db,
@@ -860,16 +810,14 @@ export class CardService {
       newList = await listRepo.getByPublicId(db, input.listPublicId);
 
       if (!newList)
-        throw new TRPCError({
-          message: `List with public ID ${input.listPublicId} not found`,
-          code: "NOT_FOUND",
-        });
+        throw new NotFoundException(
+          `List with public ID ${input.listPublicId} not found`,
+        );
 
       if (newList.workspaceId !== card.workspaceId)
-        throw new TRPCError({
-          message: `Target list must be in the same workspace`,
-          code: "BAD_REQUEST",
-        });
+        throw new BadRequestException(
+          `Target list must be in the same workspace`,
+        );
 
       await assertBoardAccess(db, userId, {
         id: newList.boardId,
@@ -881,10 +829,9 @@ export class CardService {
     }
 
     if (!existingCard) {
-      throw new TRPCError({
-        message: `Card with public ID ${input.cardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
     }
 
     let result:
@@ -933,10 +880,7 @@ export class CardService {
     }
 
     if (!result)
-      throw new TRPCError({
-        message: `Failed to update card`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(`Failed to update card`);
 
     const activities = [];
 
@@ -1111,10 +1055,9 @@ export class CardService {
     );
 
     if (!card)
-      throw new TRPCError({
-        message: `Card with public ID ${input.cardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
 
     await assertCanDelete(
       db,
@@ -1193,10 +1136,9 @@ export class CardService {
     );
 
     if (!sourceCardMeta)
-      throw new TRPCError({
-        message: `Card with public ID ${input.cardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
 
     await assertPermission(
       db,
@@ -1216,16 +1158,14 @@ export class CardService {
     );
 
     if (!targetList)
-      throw new TRPCError({
-        message: `List with public ID ${input.listPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `List with public ID ${input.listPublicId} not found`,
+      );
 
     if (targetList.workspaceId !== sourceCardMeta.workspaceId)
-      throw new TRPCError({
-        message: `Target list must be in the same workspace`,
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(
+        `Target list must be in the same workspace`,
+      );
 
     await assertBoardAccess(db, userId, {
       id: targetList.boardId,
@@ -1239,10 +1179,9 @@ export class CardService {
     );
 
     if (!sourceCard)
-      throw new TRPCError({
-        message: `Card with public ID ${input.cardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
 
     // Checked before the card exists. cardRepo.create opens its own
     // transaction, so the router cannot roll it back: a refusal after this
@@ -1260,10 +1199,9 @@ export class CardService {
     if (
       sourceLabelRecords.some((label) => label.boardId !== targetList.boardId)
     )
-      throw new TRPCError({
-        message: `Cannot copy labels to a list on a different board. Labels belong to a board, so duplicate with copyLabels: false when the target list is on another board.`,
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(
+        `Cannot copy labels to a list on a different board. Labels belong to a board, so duplicate with copyLabels: false when the target list is on another board.`,
+      );
 
     const newCard = await cardRepo.create(db, {
       title: input.title ?? sourceCard.title,

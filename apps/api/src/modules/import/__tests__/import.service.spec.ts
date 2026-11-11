@@ -1,4 +1,4 @@
-import { TRPCError } from "@trpc/server";
+import { ForbiddenException } from "@nestjs/common";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import * as encryption from "@kan/api/utils/encryption";
@@ -161,7 +161,7 @@ describe("ImportService.importTrelloBoards", () => {
         workspacePublicId: "workspace_12345",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "INTERNAL_SERVER_ERROR" });
+    ).rejects.toMatchObject({ status: 500 });
     expect(importRepo.update).toHaveBeenCalledWith(
       expect.anything(),
       { status: "failed" },
@@ -180,7 +180,7 @@ describe("ImportService.importTrelloBoards", () => {
         workspacePublicId: "workspace_12345",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "UNAUTHORIZED" });
+    ).rejects.toMatchObject({ status: 401 });
   });
 });
 
@@ -189,7 +189,7 @@ describe("ImportService board:create authorization", () => {
     "%s import requires board:create, not just membership",
     async (source) => {
       vi.spyOn(permissions, "assertPermission").mockRejectedValue(
-        new TRPCError({ code: "FORBIDDEN" }),
+        new ForbiddenException(),
       );
       const create = vi.spyOn(boardRepo, "create");
 
@@ -206,7 +206,7 @@ describe("ImportService board:create authorization", () => {
               userId: "guest_1",
             });
 
-      await expect(call).rejects.toMatchObject({ code: "FORBIDDEN" });
+      await expect(call).rejects.toMatchObject({ status: 403 });
       expect(permissions.assertPermission).toHaveBeenCalledWith(
         expect.anything(),
         "guest_1",
@@ -252,6 +252,6 @@ describe("ImportService.getGitHubProjects", () => {
 
     await expect(
       service.getGitHubProjects({ userId: "user_1" }),
-    ).rejects.toMatchObject({ code: "INTERNAL_SERVER_ERROR" });
+    ).rejects.toMatchObject({ status: 500 });
   });
 });

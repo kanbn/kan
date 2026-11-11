@@ -57,7 +57,7 @@ describe("LabelService.byPublicId", () => {
 
     await expect(
       service.byPublicId({ labelPublicId: "label_missing", userId: "user_1" }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 });
 

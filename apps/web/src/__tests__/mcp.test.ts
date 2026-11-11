@@ -5,7 +5,7 @@ vi.mock("next-runtime-env", () => ({
   env: vi.fn(),
 }));
 
-vi.mock("@kan/api/trpc-context", () => ({
+vi.mock("@kan/api/context", () => ({
   createNextApiContext: vi
     .fn()
     .mockRejectedValue(new Error("no auth in tests")),

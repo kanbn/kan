@@ -6,7 +6,7 @@ import { CardPage } from "../support/pages/card-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
 import { createTestUser } from "../support/test-user";
-import { waitForResponsePath } from "../support/wait-for-trpc";
+import { waitForResponsePath } from "../support/wait-for-api";
 
 test(
   "editing a checklist item right after creating it keeps the cursor and the edit",

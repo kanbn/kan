@@ -52,7 +52,12 @@ describe("BoardMemberService.all", () => {
           email: "member@kan.bn",
           role: "member",
           status: "active",
-          user: { id: "user_2", name: "Jo", email: "member@kan.bn", image: null },
+          user: {
+            id: "user_2",
+            name: "Jo",
+            email: "member@kan.bn",
+            image: null,
+          },
         },
       },
     ] as never);
@@ -83,7 +88,7 @@ describe("BoardMemberService.all", () => {
 
     await expect(
       service.all({ boardPublicId: "board_12345", userId: "user_1" }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
   });
 
   it("throws NOT_FOUND for a deleted board", async () => {
@@ -94,7 +99,7 @@ describe("BoardMemberService.all", () => {
 
     await expect(
       service.all({ boardPublicId: "board_12345", userId: "user_1" }),
-    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ status: 404 });
   });
 });
 
@@ -130,7 +135,7 @@ describe("BoardMemberService.add", () => {
         role: "member",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "CONFLICT" });
+    ).rejects.toMatchObject({ status: 409 });
   });
 
   it("throws BAD_REQUEST when the member isn't active", async () => {
@@ -146,7 +151,7 @@ describe("BoardMemberService.add", () => {
         role: "member",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
   });
 });
 
@@ -185,7 +190,7 @@ describe("BoardMemberService.updateRole", () => {
         role: "member",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
   });
 });
 
@@ -219,6 +224,6 @@ describe("BoardMemberService.remove", () => {
         workspaceMemberPublicId: "member_12345",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    ).rejects.toMatchObject({ status: 400 });
   });
 });

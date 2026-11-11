@@ -1,5 +1,9 @@
-import { Injectable } from "@nestjs/common";
-import { TRPCError } from "@trpc/server";
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 
 import {
   assertBoardAccess,
@@ -23,16 +27,14 @@ export class BoardMemberService {
     );
 
     if (!board || board.deletedAt)
-      throw new TRPCError({
-        message: `Board with public ID ${boardPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Board with public ID ${boardPublicId} not found`,
+      );
 
     if (board.type !== "regular")
-      throw new TRPCError({
-        message: `Board membership is only supported for regular boards`,
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(
+        `Board membership is only supported for regular boards`,
+      );
 
     return board;
   }
@@ -45,16 +47,14 @@ export class BoardMemberService {
     const member = await memberRepo.getByPublicId(db, workspaceMemberPublicId);
 
     if (!member || member.workspaceId !== workspaceId || member.deletedAt)
-      throw new TRPCError({
-        message: `Workspace member with public ID ${workspaceMemberPublicId} not found`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `Workspace member with public ID ${workspaceMemberPublicId} not found`,
+      );
 
     if (opts.requireActive && member.status !== "active")
-      throw new TRPCError({
-        message: `Only active workspace members can be added to a board`,
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException(
+        `Only active workspace members can be added to a board`,
+      );
 
     return member;
   }
@@ -102,10 +102,9 @@ export class BoardMemberService {
     });
 
     if (!result)
-      throw new TRPCError({
-        message: `${member.email} is already a member of this board`,
-        code: "CONFLICT",
-      });
+      throw new ConflictException(
+        `${member.email} is already a member of this board`,
+      );
 
     return { publicId: member.publicId, role: result.role };
   }
@@ -136,16 +135,15 @@ export class BoardMemberService {
       });
     } catch (error) {
       if (error instanceof boardMemberRepo.CannotRemoveLastBoardAdminError)
-        throw new TRPCError({ message: error.message, code: "BAD_REQUEST" });
+        throw new BadRequestException(error.message);
 
       throw error;
     }
 
     if (!result)
-      throw new TRPCError({
-        message: `${member.email} is not a member of this board`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `${member.email} is not a member of this board`,
+      );
 
     return { publicId: member.publicId, role: result.role };
   }
@@ -173,16 +171,15 @@ export class BoardMemberService {
       });
     } catch (error) {
       if (error instanceof boardMemberRepo.CannotRemoveLastBoardAdminError)
-        throw new TRPCError({ message: error.message, code: "BAD_REQUEST" });
+        throw new BadRequestException(error.message);
 
       throw error;
     }
 
     if (!result)
-      throw new TRPCError({
-        message: `${member.email} is not a member of this board`,
-        code: "NOT_FOUND",
-      });
+      throw new NotFoundException(
+        `${member.email} is not a member of this board`,
+      );
 
     return { publicId: member.publicId };
   }

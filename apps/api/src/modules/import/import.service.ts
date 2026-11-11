@@ -1,5 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { TRPCError } from "@trpc/server";
+import {
+  Injectable,
+  InternalServerErrorException,
+  UnauthorizedException,
+} from "@nestjs/common";
 
 import { decryptToken } from "@kan/api/utils/encryption";
 import { assertPermission } from "@kan/api/utils/permissions";
@@ -42,10 +45,7 @@ const trelloUrl = () =>
 const getTrelloApiKey = () => {
   const apiKey = process.env.TRELLO_APP_API_KEY;
   if (!apiKey)
-    throw new TRPCError({
-      message: "Trello API key not found",
-      code: "INTERNAL_SERVER_ERROR",
-    });
+    throw new InternalServerErrorException("Trello API key not found");
   return apiKey;
 };
 
@@ -56,11 +56,7 @@ const getTrelloTokenForUser = async (userId: string) => {
     "trello",
   );
 
-  if (!integration)
-    throw new TRPCError({
-      message: "Trello token not found",
-      code: "UNAUTHORIZED",
-    });
+  if (!integration) throw new UnauthorizedException("Trello token not found");
 
   const token = decryptTrelloToken(integration.accessToken);
 
@@ -82,11 +78,7 @@ const getGitHubTokenForUser = async (userId: string) => {
     "github",
   );
 
-  if (!integration)
-    throw new TRPCError({
-      message: "GitHub token not found",
-      code: "UNAUTHORIZED",
-    });
+  if (!integration) throw new UnauthorizedException("GitHub token not found");
 
   return decryptToken(integration.accessToken);
 };
@@ -116,10 +108,9 @@ export class ImportService {
 
     if (!response.ok) {
       log.error({ status: response.status }, "Failed to fetch Trello boards");
-      throw new TRPCError({
-        message: "Failed to fetch boards from Trello",
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(
+        "Failed to fetch boards from Trello",
+      );
     }
 
     const data = (await response.json()) as TrelloBoard[];
@@ -211,10 +202,7 @@ export class ImportService {
       const newBoardId = newBoard?.id;
 
       if (!newBoardId)
-        throw new TRPCError({
-          message: "Failed to create new board",
-          code: "INTERNAL_SERVER_ERROR",
-        });
+        throw new InternalServerErrorException("Failed to create new board");
 
       let createdLabels: { id: number; sourceId: string }[] = [];
       let createdCards: { id: number; sourceId: string }[] = [];
@@ -265,10 +253,9 @@ export class ImportService {
           const newCards = await cardRepo.bulkCreate(db, cardsInsert);
 
           if (!newCards.length)
-            throw new TRPCError({
-              message: "Failed to create new cards",
-              code: "INTERNAL_SERVER_ERROR",
-            });
+            throw new InternalServerErrorException(
+              "Failed to create new cards",
+            );
 
           createdCards = createdCards.concat(
             newCards
@@ -448,10 +435,9 @@ export class ImportService {
     }
 
     if (boardsCreated === 0)
-      throw new TRPCError({
-        message: "Failed to import any boards from Trello",
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(
+        "Failed to import any boards from Trello",
+      );
 
     return { boardsCreated };
   }
@@ -501,20 +487,18 @@ export class ImportService {
         },
         "GitHub API error fetching projects",
       );
-      throw new TRPCError({
-        message: `Failed to fetch GitHub projects: ${response.status} ${response.statusText}`,
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(
+        `Failed to fetch GitHub projects: ${response.status} ${response.statusText}`,
+      );
     }
 
     const result = (await response.json()) as GitHubProjectsResponse;
 
     if (result.errors) {
       log.error({ errors: result.errors }, "GitHub GraphQL errors");
-      throw new TRPCError({
-        message: "Failed to fetch GitHub projects (GraphQL Error)",
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(
+        "Failed to fetch GitHub projects (GraphQL Error)",
+      );
     }
 
     const userProjects = result.data.viewer.projectsV2.nodes ?? [];
@@ -546,10 +530,7 @@ export class ImportService {
     });
 
     if (!newImport)
-      throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: "Failed to create import record",
-      });
+      throw new InternalServerErrorException("Failed to create import record");
 
     const newImportId = newImport.id;
     let projectsImported = 0;

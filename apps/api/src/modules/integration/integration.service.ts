@@ -1,5 +1,9 @@
-import { Injectable } from "@nestjs/common";
-import { TRPCError } from "@trpc/server";
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from "@nestjs/common";
 
 import { encryptToken } from "@kan/api/utils/encryption";
 import * as integrationsRepo from "@kan/db/repository/integration.repo";
@@ -30,11 +34,7 @@ export class IntegrationService {
       input.provider,
     );
 
-    if (!integration)
-      throw new TRPCError({
-        message: "Integration not found",
-        code: "NOT_FOUND",
-      });
+    if (!integration) throw new NotFoundException("Integration not found");
 
     await integrationsRepo.deleteProviderForUser(
       db,
@@ -49,10 +49,9 @@ export class IntegrationService {
     const apiKey = process.env.TRELLO_APP_API_KEY;
 
     if (!apiKey)
-      throw new TRPCError({
-        message: "Trello API key not set in environment variables",
-        code: "INTERNAL_SERVER_ERROR",
-      });
+      throw new InternalServerErrorException(
+        "Trello API key not set in environment variables",
+      );
 
     const integration = await integrationsRepo.getProviderForUser(
       db,
@@ -61,10 +60,7 @@ export class IntegrationService {
     );
 
     if (integration)
-      throw new TRPCError({
-        message: "Trello integration already exists",
-        code: "BAD_REQUEST",
-      });
+      throw new BadRequestException("Trello integration already exists");
 
     const trelloUrl = process.env.TRELLO_API_URL ?? "https://api.trello.com/1";
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;

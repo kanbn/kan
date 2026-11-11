@@ -32,7 +32,6 @@ import {
   HiOutlineSquare3Stack3D,
 } from "react-icons/hi2";
 
-import type { UpdateBoardInput } from "@kan/api/types";
 import {
   useGetBoard,
   useUpdateBoard,
@@ -86,6 +85,11 @@ import { UpdateBoardSlugForm } from "./components/UpdateBoardSlugForm";
 import ViewToggle from "./components/ViewToggle";
 import VisibilityButton from "./components/VisibilityButton";
 import { createBoardCollisionDetection } from "./dnd/collision";
+
+interface UpdateBoardInput {
+  boardPublicId: string;
+  name: string;
+}
 
 type PublicListId = string;
 

@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import type { Readable } from "node:stream";
 
 import type { dbClient } from "@kan/db/client";
-import { createNextApiContext } from "@kan/api/trpc-context";
+import { createNextApiContext } from "@kan/api/context";
 import { withApiLogging } from "@kan/api/utils/apiLogging";
 import { redactSensitive } from "@kan/api/utils/redact";
 import { cancelWorkspaceAccess } from "@kan/api/utils/workspace";

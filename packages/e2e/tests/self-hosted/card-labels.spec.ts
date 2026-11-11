@@ -7,7 +7,7 @@ import { CardPage } from "../support/pages/card-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
 import { createTestUser } from "../support/test-user";
-import { waitForResponsePath } from "../support/wait-for-trpc";
+import { waitForResponsePath } from "../support/wait-for-api";
 
 test(
   "a label can be created, assigned, and edited with a custom colour",

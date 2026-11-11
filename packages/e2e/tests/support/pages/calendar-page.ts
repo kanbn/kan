@@ -1,7 +1,7 @@
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 
-import { waitForApi } from "../wait-for-trpc";
+import { waitForApi } from "../wait-for-api";
 
 export function toDateKey(date: Date) {
   const year = date.getFullYear();

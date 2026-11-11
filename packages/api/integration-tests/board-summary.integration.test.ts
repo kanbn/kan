@@ -12,7 +12,6 @@ import {
 } from "@kan/db/schema";
 
 import type { TestDbClient } from "./test-db";
-import { boardDetailSchema } from "../src/schemas/board";
 import { createTestDb, seedTestData } from "./test-db";
 
 describe("board summary repository view", () => {
@@ -221,9 +220,6 @@ describe("board summary repository view", () => {
       },
     });
     expect(Object.keys(summaryCard ?? {})).not.toContain("id");
-
-    expect(() => boardDetailSchema.parse(full)).not.toThrow();
-    expect(() => boardDetailSchema.parse(summary)).not.toThrow();
   });
 
   it("returns no summary rows for an empty list filter", async () => {
@@ -238,6 +234,5 @@ describe("board summary repository view", () => {
 
     expect(summary?.lists).toHaveLength(1);
     expect(summary?.lists[0]?.cards).toEqual([]);
-    expect(() => boardDetailSchema.parse(summary)).not.toThrow();
   });
 });

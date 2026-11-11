@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { createLogger } from "@kan/logger";
 
-import { createNextApiContext } from "../trpc-context";
+import { createNextApiContext } from "../context";
 import { redactSensitive } from "./redact";
 
 const log = createLogger("api");
