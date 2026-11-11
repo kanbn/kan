@@ -4,6 +4,7 @@ import { APP_GUARD } from "@nestjs/core";
 import { RateLimitGuard } from "./common/guards/rate-limit.guard.js";
 import { createRateLimiter, RATE_LIMITER } from "./common/rate-limiter.js";
 import { HealthController } from "./health.controller.js";
+import { AttachmentModule } from "./modules/attachment/attachment.module.js";
 import { BoardMemberModule } from "./modules/board-member/board-member.module.js";
 import { ChecklistModule } from "./modules/checklist/checklist.module.js";
 import { FeedbackModule } from "./modules/feedback/feedback.module.js";
@@ -12,10 +13,12 @@ import { ListModule } from "./modules/list/list.module.js";
 import { McpModule } from "./modules/mcp/mcp.module.js";
 import { MemberModule } from "./modules/member/member.module.js";
 import { PermissionModule } from "./modules/permission/permission.module.js";
+import { UserModule } from "./modules/user/user.module.js";
 import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
 
 @Module({
   imports: [
+    AttachmentModule,
     BoardMemberModule,
     ChecklistModule,
     FeedbackModule,
@@ -24,6 +27,7 @@ import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
     McpModule,
     MemberModule,
     PermissionModule,
+    UserModule,
     WorkspaceModule,
   ],
   controllers: [HealthController],

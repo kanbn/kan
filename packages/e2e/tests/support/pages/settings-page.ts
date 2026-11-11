@@ -27,7 +27,7 @@ export class SettingsPage {
 
   async updateDisplayName(name: string) {
     await this.page.getByRole("textbox", { name: "Display name" }).fill(name);
-    const updated = waitForTrpcMutation(this.page, "user.update");
+    const updated = waitForResponsePath(this.page, "/users", "PUT");
     await this.page.getByRole("button", { name: "Update" }).click();
     await updated;
   }

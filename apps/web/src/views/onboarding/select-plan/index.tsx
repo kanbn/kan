@@ -6,11 +6,10 @@ import { useState } from "react";
 import { HiUser } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
-import { useGetWorkspaces } from "@kan/api-client/hooks";
+import { useGetUser, useGetWorkspaces } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
 import Button from "~/components/Button";
-import { api } from "~/utils/api";
 
 type PlanId = "solo" | "team";
 type Billing = "monthly" | "annual";
@@ -65,8 +64,8 @@ export default function SelectPlanView() {
     query: { select: (res) => res.data },
   });
   const { data: session } = authClient.useSession();
-  const { data: user } = api.user.getUser.useQuery(undefined, {
-    enabled: !!session?.user,
+  const { data: user } = useGetUser({
+    query: { enabled: !!session?.user, select: (res) => res.data },
   });
 
   const userImage = user?.image ?? session?.user.image ?? null;
