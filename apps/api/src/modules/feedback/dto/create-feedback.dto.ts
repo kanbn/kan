@@ -2,8 +2,8 @@ import { createZodDto } from "nestjs-zod";
 import { z } from "zod";
 
 export const CreateFeedbackSchema = z.object({
-  feedback: z.string().min(1),
-  url: z.string().min(1),
+  feedback: z.string().min(1).describe("The feedback message."),
+  url: z.string().min(1).describe("The page the feedback is about."),
 });
 
 export const CreateFeedbackResponseSchema = z.object({

@@ -89,6 +89,9 @@ export interface BoardListItemDtoOutput {
   labels: BoardListItemDtoOutputLabelsItem[];
 }
 
+/**
+ * 'regular' for a board (default), 'template' for a board template.
+ */
 export type CreateBoardDtoType = typeof CreateBoardDtoType[keyof typeof CreateBoardDtoType];
 
 
@@ -99,16 +102,27 @@ export const CreateBoardDtoType = {
 
 export interface CreateBoardDto {
   /**
+     * Board name.
      * @minLength 1
      * @maxLength 100
      */
   name: string;
-  /** @items.minLength 1 */
+  /**
+     * Names of the lists to create, in order, e.g. ['To do', 'Done'].
+     * @items.minLength 1
+     */
   lists: string[];
-  /** @items.minLength 1 */
+  /**
+     * Names of the labels to create, e.g. ['Bug', 'Feature'].
+     * @items.minLength 1
+     */
   labels: string[];
+  /** 'regular' for a board (default), 'template' for a board template. */
   type?: CreateBoardDtoType;
-  /** @minLength 12 */
+  /**
+     * Public ID of a board or template to copy lists and labels from.
+     * @minLength 12
+     */
   sourceBoardPublicId?: string;
 }
 
@@ -272,6 +286,9 @@ export interface BoardDetailDtoOutput {
   allLists: BoardDetailDtoOutputAllListsItem[];
 }
 
+/**
+ * 'public' boards can be viewed by anyone with the link, 'private' only by members.
+ */
 export type UpdateBoardDtoVisibility = typeof UpdateBoardDtoVisibility[keyof typeof UpdateBoardDtoVisibility];
 
 
@@ -281,16 +298,23 @@ export const UpdateBoardDtoVisibility = {
 } as const;
 
 export interface UpdateBoardDto {
-  /** @minLength 1 */
+  /**
+     * New board name.
+     * @minLength 1
+     */
   name?: string;
   /**
+     * New URL slug of letters, numbers and hyphens.
      * @minLength 1
      * @maxLength 60
      * @pattern ^(?![-]+$)[a-zA-Z0-9-]+$
      */
   slug?: string;
+  /** 'public' boards can be viewed by anyone with the link, 'private' only by members. */
   visibility?: UpdateBoardDtoVisibility;
+  /** Whether the board is in the current user's favourites. */
   favorite?: boolean;
+  /** Archive (true) or restore (false) the board. */
   isArchived?: boolean;
 }
 
@@ -305,7 +329,10 @@ export interface SuccessResponseDtoOutput {
 }
 
 export interface MoveBoardDto {
-  /** @minLength 12 */
+  /**
+     * Public ID of the workspace to move the board to.
+     * @minLength 12
+     */
   targetWorkspacePublicId: string;
 }
 
@@ -436,6 +463,9 @@ export interface BoardMemberDtoOutput {
   user: BoardMemberDtoOutputUser;
 }
 
+/**
+ * Board role: 'admin' or 'member' (default).
+ */
 export type AddBoardMemberDtoRole = typeof AddBoardMemberDtoRole[keyof typeof AddBoardMemberDtoRole];
 
 
@@ -445,8 +475,12 @@ export const AddBoardMemberDtoRole = {
 } as const;
 
 export interface AddBoardMemberDto {
-  /** @minLength 12 */
+  /**
+     * Public ID of the workspace member (not the user ID) to add.
+     * @minLength 12
+     */
   workspaceMemberPublicId: string;
+  /** Board role: 'admin' or 'member' (default). */
   role?: AddBoardMemberDtoRole;
 }
 
@@ -463,6 +497,9 @@ export interface BoardMemberRoleResultDtoOutput {
   role: BoardMemberRoleResultDtoOutputRole;
 }
 
+/**
+ * New board role: 'admin' or 'member'.
+ */
 export type UpdateBoardMemberRoleDtoRole = typeof UpdateBoardMemberRoleDtoRole[keyof typeof UpdateBoardMemberRoleDtoRole];
 
 
@@ -472,6 +509,7 @@ export const UpdateBoardMemberRoleDtoRole = {
 } as const;
 
 export interface UpdateBoardMemberRoleDto {
+  /** New board role: 'admin' or 'member'. */
   role: UpdateBoardMemberRoleDtoRole;
 }
 
@@ -479,6 +517,9 @@ export interface BoardMemberRemoveResponseDtoOutput {
   publicId: string;
 }
 
+/**
+ * Add the card at the start or end of the list.
+ */
 export type CreateCardDtoPosition = typeof CreateCardDtoPosition[keyof typeof CreateCardDtoPosition];
 
 
@@ -489,20 +530,35 @@ export const CreateCardDtoPosition = {
 
 export interface CreateCardDto {
   /**
+     * Card title.
      * @minLength 1
      * @maxLength 2000
      */
   title: string;
-  /** @maxLength 10000 */
+  /**
+     * Card description. Plain text, or markdown or HTML for formatting.
+     * @maxLength 10000
+     */
   description: string;
-  /** @minLength 12 */
+  /**
+     * Public ID of the list to add the card to.
+     * @minLength 12
+     */
   listPublicId: string;
-  /** @items.minLength 12 */
+  /**
+     * Public IDs of board labels to attach.
+     * @items.minLength 12
+     */
   labelPublicIds: string[];
-  /** @items.minLength 12 */
+  /**
+     * Public IDs of workspace members (not user IDs) to assign.
+     * @items.minLength 12
+     */
   memberPublicIds: string[];
+  /** Add the card at the start or end of the list. */
   position: CreateCardDtoPosition;
   /**
+     * Due date in ISO 8601, e.g. 2026-12-31T17:00:00Z.
      * @nullable
      * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
      */
@@ -515,15 +571,22 @@ export interface PublicIdResponseDtoOutput {
 
 export interface UpdateCardDto {
   /**
+     * New card title.
      * @minLength 1
      * @maxLength 2000
      */
   title?: string;
+  /** New card description. Plain text, or markdown or HTML for formatting. */
   description?: string;
+  /** Zero-based position in the card's list, or in listPublicId when moving; 0 is the top. */
   index?: number;
-  /** @minLength 12 */
+  /**
+     * Public ID of a list to move the card to.
+     * @minLength 12
+     */
   listPublicId?: string;
   /**
+     * Due date in ISO 8601, e.g. 2026-12-31T17:00:00Z, or null to clear it.
      * @nullable
      * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
      */
@@ -543,25 +606,36 @@ export interface CardUpdateResponseDtoOutput {
 }
 
 export interface DuplicateCardDto {
-  /** @minLength 12 */
+  /**
+     * Public ID of the list to put the copy in.
+     * @minLength 12
+     */
   listPublicId: string;
   /**
+     * Zero-based position in that list. Defaults to the end.
      * @minimum 0
      * @maximum 9007199254740991
      */
   index?: number;
   /**
+     * Title for the copy. Defaults to the original title.
      * @minLength 1
      * @maxLength 2000
      */
   title?: string;
+  /** Copy the card's labels. */
   copyLabels: boolean;
+  /** Copy the card's assigned members. */
   copyMembers: boolean;
+  /** Copy the card's checklists. */
   copyChecklists: boolean;
 }
 
 export interface CommentDto {
-  /** @minLength 1 */
+  /**
+     * Comment text. Plain text, or markdown or HTML for formatting.
+     * @minLength 1
+     */
   comment: string;
 }
 
@@ -970,6 +1044,7 @@ export interface ActivitiesResponseDtoOutput {
 
 export interface UpdateChecklistDto {
   /**
+     * New checklist name.
      * @minLength 1
      * @maxLength 255
      */
@@ -987,6 +1062,7 @@ export interface DeleteChecklistResponseDtoOutput {
 
 export interface CreateChecklistItemDto {
   /**
+     * Checklist item text.
      * @minLength 1
      * @maxLength 500
      */
@@ -1001,12 +1077,15 @@ export interface ChecklistItemResponseDtoOutput {
 
 export interface UpdateChecklistItemDto {
   /**
+     * New checklist item text.
      * @minLength 1
      * @maxLength 500
      */
   title?: string;
+  /** Whether the item is done. */
   completed?: boolean;
   /**
+     * Zero-based position within the checklist.
      * @minimum 0
      * @maximum 9007199254740991
      */
@@ -1015,6 +1094,7 @@ export interface UpdateChecklistItemDto {
 
 export interface CreateChecklistDto {
   /**
+     * Checklist name.
      * @minLength 1
      * @maxLength 255
      */
@@ -1022,9 +1102,15 @@ export interface CreateChecklistDto {
 }
 
 export interface CreateFeedbackDto {
-  /** @minLength 1 */
+  /**
+     * The feedback message.
+     * @minLength 1
+     */
   feedback: string;
-  /** @minLength 1 */
+  /**
+     * The page the feedback is about.
+     * @minLength 1
+     */
   url: string;
 }
 
@@ -1106,13 +1192,18 @@ export interface LabelResponseDtoOutput {
 
 export interface CreateLabelDto {
   /**
+     * Label name.
      * @minLength 1
      * @maxLength 36
      */
   name: string;
-  /** @minLength 12 */
+  /**
+     * Public ID of the board the label belongs to.
+     * @minLength 12
+     */
   boardPublicId: string;
   /**
+     * Label colour as a hex code, e.g. #0d9488.
      * @minLength 7
      * @maxLength 7
      */
@@ -1121,11 +1212,13 @@ export interface CreateLabelDto {
 
 export interface UpdateLabelDto {
   /**
+     * Label name.
      * @minLength 1
      * @maxLength 36
      */
   name: string;
   /**
+     * Label colour as a hex code, e.g. #0d9488.
      * @minLength 7
      * @maxLength 7
      */
@@ -1137,9 +1230,15 @@ export interface DeleteLabelResponseDtoOutput {
 }
 
 export interface CreateListDto {
-  /** @minLength 1 */
+  /**
+     * List name.
+     * @minLength 1
+     */
   name: string;
-  /** @minLength 12 */
+  /**
+     * Public ID of the board to add the list to.
+     * @minLength 12
+     */
   boardPublicId: string;
 }
 
@@ -1153,13 +1252,20 @@ export interface DeleteListResponseDtoOutput {
 }
 
 export interface UpdateListDto {
-  /** @minLength 1 */
+  /**
+     * New list name.
+     * @minLength 1
+     */
   name?: string;
+  /** Zero-based position of the list on the board; 0 is leftmost. */
   index?: number;
 }
 
 export interface InviteMemberDto {
-  /** @pattern ^(?:[A-Za-z0-9_'+\-]+\.)*[A-Za-z0-9_'+\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$ */
+  /**
+     * Email address to invite.
+     * @pattern ^(?:[A-Za-z0-9_'+\-]+\.)*[A-Za-z0-9_'+\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+     */
   email: string;
 }
 
@@ -1171,6 +1277,9 @@ export interface DeleteMemberResponseDtoOutput {
   success: boolean;
 }
 
+/**
+ * New workspace role: 'admin', 'member' or 'guest'.
+ */
 export type UpdateMemberRoleDtoRole = typeof UpdateMemberRoleDtoRole[keyof typeof UpdateMemberRoleDtoRole];
 
 
@@ -1181,6 +1290,7 @@ export const UpdateMemberRoleDtoRole = {
 } as const;
 
 export interface UpdateMemberRoleDto {
+  /** New workspace role: 'admin', 'member' or 'guest'. */
   role: UpdateMemberRoleDtoRole;
 }
 
@@ -1251,6 +1361,9 @@ export interface GetMemberPermissionsResponseDtoOutput {
   overrides: GetMemberPermissionsResponseDtoOutputOverridesItem[];
 }
 
+/**
+ * The permission, as resource:action, e.g. board:edit.
+ */
 export type PermissionActionDtoPermission = typeof PermissionActionDtoPermission[keyof typeof PermissionActionDtoPermission];
 
 
@@ -1282,6 +1395,7 @@ export const PermissionActionDtoPermission = {
 } as const;
 
 export interface PermissionActionDto {
+  /** The permission, as resource:action, e.g. board:edit. */
   permission: PermissionActionDtoPermission;
 }
 
@@ -1341,7 +1455,9 @@ export interface UserResponseDtoOutput {
 }
 
 export interface UpdateUserDto {
+  /** New display name. */
   name?: string;
+  /** New avatar image URL. */
   image?: string;
 }
 
@@ -1394,14 +1510,22 @@ export const CreateWebhookDtoEventsItem = {
 
 export interface CreateWebhookDto {
   /**
+     * A label for the webhook.
      * @minLength 1
      * @maxLength 255
      */
   name: string;
+  /** HTTPS URL to send events to. Must be a public host. */
   url: string;
-  /** @maxLength 512 */
+  /**
+     * Secret used to sign each delivery so the receiver can verify it.
+     * @maxLength 512
+     */
   secret?: string;
-  /** @minItems 1 */
+  /**
+     * Card events to send, e.g. ['card.created', 'card.moved'].
+     * @minItems 1
+     */
   events: CreateWebhookDtoEventsItem[];
 }
 
@@ -1417,15 +1541,24 @@ export const UpdateWebhookDtoEventsItem = {
 
 export interface UpdateWebhookDto {
   /**
+     * New label for the webhook.
      * @minLength 1
      * @maxLength 255
      */
   name?: string;
+  /** New HTTPS URL to send events to. Must be a public host. */
   url?: string;
-  /** @maxLength 512 */
+  /**
+     * New secret used to sign deliveries.
+     * @maxLength 512
+     */
   secret?: string;
-  /** @minItems 1 */
+  /**
+     * Card events to send, e.g. ['card.created', 'card.moved'].
+     * @minItems 1
+     */
   events?: UpdateWebhookDtoEventsItem[];
+  /** Whether the webhook sends events. */
   active?: boolean;
 }
 
@@ -1600,12 +1733,17 @@ export interface WorkspaceDetailResponseDtoOutput {
 
 export interface CreateWorkspaceDto {
   /**
+     * Workspace name.
      * @minLength 1
      * @maxLength 64
      */
   name: string;
-  /** @maxLength 280 */
+  /**
+     * Short description of the workspace.
+     * @maxLength 280
+     */
   description?: string;
+  /** URL slug of letters, numbers and hyphens. Generated if omitted or empty. */
   slug?: string;
 }
 
@@ -1635,22 +1773,27 @@ export const UpdateWorkspaceDtoWeekStartDay = {  NUMBER_0: 0,
 } as const
 export interface UpdateWorkspaceDto {
   /**
+     * New workspace name.
      * @minLength 3
      * @maxLength 64
      */
   name?: string;
   /**
+     * New URL slug of letters, numbers and hyphens.
      * @minLength 3
      * @maxLength 64
      * @pattern ^(?![-]+$)[a-zA-Z0-9-]+$
      */
   slug?: string;
   /**
+     * New workspace description.
      * @minLength 3
      * @maxLength 280
      */
   description?: string;
+  /** Whether members can see each other's email addresses. */
   showEmailsToMembers?: boolean;
+  /** First day of the week: 0 Sunday, 1 Monday or 6 Saturday. */
   weekStartDay?: typeof UpdateWorkspaceDtoWeekStartDay[keyof typeof UpdateWorkspaceDtoWeekStartDay];
 }
 
@@ -1792,17 +1935,23 @@ export const GetPublicBoardBySlugDueDateFiltersItem = {
 
 export type GetCardActivitiesParams = {
   /**
+   * Maximum number of activities to return.
    * @minimum 1
    * @maximum 100
    */
   limit?: number;
-  /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$ */
+  /**
+   * Pagination cursor: nextCursor from the previous page.
+   * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+   */
   cursor?: string;
   /**
+   * Pagination cursor: nextCursorPublicId from the previous page.
    * @minLength 12
    * @maxLength 12
    */
   cursorPublicId?: string;
+  /** Return the oldest or newest activities first. */
   order?: GetCardActivitiesOrder;
 };
 
@@ -1827,22 +1976,28 @@ export const GetIntegrationAuthorizationUrlProvider = {
 
 export type CheckSlugAvailabilityParams = {
   /**
+   * The slug to check.
    * @minLength 3
    * @maxLength 64
    * @pattern ^(?![-]+$)[a-zA-Z0-9-]+$
    */
   workspaceSlug: string;
-  /** @minLength 12 */
+  /**
+   * When renaming, the public ID of the workspace being renamed, so its own slug counts as available.
+   * @minLength 12
+   */
   workspacePublicId?: string;
 };
 
 export type SearchWorkspaceParams = {
   /**
+   * Text to search for in board and card titles.
    * @minLength 1
    * @maxLength 100
    */
   query: string;
   /**
+   * Maximum number of results.
    * @minimum 1
    * @maximum 50
    */

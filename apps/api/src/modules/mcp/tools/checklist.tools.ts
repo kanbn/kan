@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { Tool } from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { ChecklistService } from "../../checklist/checklist.service.js";
@@ -9,32 +10,36 @@ import {
   UpdateChecklistSchema,
 } from "../../checklist/dto/checklist.dto.js";
 import { requireMcpUser } from "../mcp-user.util.js";
-import { Tool } from "../tool.decorator.js";
+import {
+  cardPublicId,
+  checklistItemPublicId,
+  checklistPublicId,
+} from "./public-ids.js";
 
 const CreateChecklistWithCardSchema = CreateChecklistSchema.extend({
-  cardPublicId: z.string().min(12),
+  cardPublicId,
 });
 
 const UpdateChecklistWithIdSchema = UpdateChecklistSchema.extend({
-  checklistPublicId: z.string().min(12),
+  checklistPublicId,
 });
 
 const DeleteChecklistSchema = z.object({
-  checklistPublicId: z.string().min(12),
+  checklistPublicId,
 });
 
 const CreateChecklistItemWithChecklistSchema = CreateChecklistItemSchema.extend(
   {
-    checklistPublicId: z.string().min(12),
+    checklistPublicId,
   },
 );
 
 const UpdateChecklistItemWithIdSchema = UpdateChecklistItemSchema.extend({
-  checklistItemPublicId: z.string().min(12),
+  checklistItemPublicId,
 });
 
 const DeleteChecklistItemSchema = z.object({
-  checklistItemPublicId: z.string().min(12),
+  checklistItemPublicId,
 });
 
 @Injectable()
@@ -43,9 +48,6 @@ export class ChecklistTools {
 
   @Tool({
     name: "create_checklist",
-    params: {
-      name: "Checklist name.",
-    },
     description: "Add a checklist to a card, on behalf of the current user.",
     parameters: CreateChecklistWithCardSchema,
   })
@@ -64,9 +66,6 @@ export class ChecklistTools {
 
   @Tool({
     name: "update_checklist",
-    params: {
-      name: "New checklist name.",
-    },
     description: "Update a checklist's name, on behalf of the current user.",
     parameters: UpdateChecklistWithIdSchema,
   })
@@ -102,9 +101,6 @@ export class ChecklistTools {
 
   @Tool({
     name: "create_checklist_item",
-    params: {
-      title: "Checklist item text.",
-    },
     description: "Add an item to a checklist, on behalf of the current user.",
     parameters: CreateChecklistItemWithChecklistSchema,
   })
@@ -123,10 +119,6 @@ export class ChecklistTools {
 
   @Tool({
     name: "update_checklist_item",
-    params: {
-      title: "New checklist item text.",
-      index: "Zero-based position within the checklist.",
-    },
     description:
       "Update a checklist item's title, completed state, or position, on behalf of the current user.",
     parameters: UpdateChecklistItemWithIdSchema,

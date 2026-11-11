@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
+import { Tool } from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import {
@@ -9,10 +10,10 @@ import {
 } from "../../workspace/dto/workspace.dto.js";
 import { WorkspaceService } from "../../workspace/workspace.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
-import { Tool } from "../tool.decorator.js";
+import { workspacePublicId, workspaceSlug } from "./public-ids.js";
 
 const WorkspaceIdSchema = z.object({
-  workspacePublicId: z.string().min(12),
+  workspacePublicId,
 });
 
 const WorkspaceNameSchema = z.object({
@@ -23,15 +24,15 @@ const WorkspaceNameSchema = z.object({
 });
 
 const WorkspaceSlugSchema = z.object({
-  workspaceSlug: z.string().min(1),
+  workspaceSlug,
 });
 
 const UpdateWorkspaceWithIdSchema = UpdateWorkspaceSchema.extend({
-  workspacePublicId: z.string().min(12),
+  workspacePublicId,
 });
 
 const SearchWorkspaceSchema = SearchQuerySchema.extend({
-  workspacePublicId: z.string().min(12),
+  workspacePublicId,
 });
 
 export async function findWorkspaceByName(
@@ -88,9 +89,6 @@ export class WorkspaceTools {
 
   @Tool({
     name: "check_workspace_slug_availability",
-    params: {
-      workspaceSlug: "The slug to check.",
-    },
     description: "Check whether a workspace slug is available.",
     parameters: CheckSlugAvailabilityQuerySchema,
   })
@@ -143,11 +141,6 @@ export class WorkspaceTools {
 
   @Tool({
     name: "create_workspace",
-    params: {
-      name: "Workspace name.",
-      description: "Short description of the workspace.",
-      slug: "URL slug for the workspace (letters, numbers, hyphens). Generated from the name if omitted.",
-    },
     description: "Create a workspace, on behalf of the current user.",
     parameters: CreateWorkspaceSchema,
   })
@@ -168,11 +161,6 @@ export class WorkspaceTools {
 
   @Tool({
     name: "update_workspace",
-    params: {
-      name: "New workspace name.",
-      description: "New workspace description.",
-      slug: "New URL slug for the workspace.",
-    },
     description: "Update a workspace, on behalf of the current user.",
     parameters: UpdateWorkspaceWithIdSchema,
   })

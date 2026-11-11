@@ -1,6 +1,9 @@
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
 
-import { assertBoardAccess, assertPermission } from "@kan/api/utils/permissions";
+import {
+  assertBoardAccess,
+  assertPermission,
+} from "@kan/api/utils/permissions";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
@@ -56,7 +59,8 @@ export class LabelService {
       boardId: board.id,
     });
 
-    if (!result) throw new InternalServerErrorException("Failed to create label");
+    if (!result)
+      throw new InternalServerErrorException("Failed to create label");
 
     return {
       publicId: result.publicId,
@@ -89,7 +93,8 @@ export class LabelService {
       colourCode: input.colourCode,
     });
 
-    if (!result) throw new InternalServerErrorException("Failed to update label");
+    if (!result)
+      throw new InternalServerErrorException("Failed to update label");
 
     return {
       publicId: result.publicId,

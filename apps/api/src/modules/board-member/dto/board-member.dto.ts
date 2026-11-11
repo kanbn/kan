@@ -23,14 +23,19 @@ export const BoardMemberSchema = z.object({
 export class BoardMemberDto extends createZodDto(BoardMemberSchema) {}
 
 export const AddBoardMemberSchema = z.object({
-  workspaceMemberPublicId: z.string().min(12),
-  role: BoardMemberRoleSchema.default("member"),
+  workspaceMemberPublicId: z
+    .string()
+    .min(12)
+    .describe("Public ID of the workspace member (not the user ID) to add."),
+  role: BoardMemberRoleSchema.default("member").describe(
+    "Board role: 'admin' or 'member' (default).",
+  ),
 });
 
 export class AddBoardMemberDto extends createZodDto(AddBoardMemberSchema) {}
 
 export const UpdateBoardMemberRoleSchema = z.object({
-  role: BoardMemberRoleSchema,
+  role: BoardMemberRoleSchema.describe("New board role: 'admin' or 'member'."),
 });
 
 export class UpdateBoardMemberRoleDto extends createZodDto(

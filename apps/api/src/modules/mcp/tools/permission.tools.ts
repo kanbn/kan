@@ -1,18 +1,23 @@
 import { Injectable } from "@nestjs/common";
+import { Tool } from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { PermissionActionSchema } from "../../permission/dto/permission.dto.js";
 import { PermissionService } from "../../permission/permission.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
-import { Tool } from "../tool.decorator.js";
+import {
+  memberPublicId,
+  rolePublicId,
+  workspacePublicId,
+} from "./public-ids.js";
 
 const WorkspaceSchema = z.object({
-  workspacePublicId: z.string().min(12),
+  workspacePublicId,
 });
 
 const WorkspaceMemberSchema = z.object({
-  workspacePublicId: z.string().min(12),
-  memberPublicId: z.string().min(12),
+  workspacePublicId,
+  memberPublicId,
 });
 
 const MemberPermissionActionSchema = WorkspaceMemberSchema.extend(
@@ -20,8 +25,8 @@ const MemberPermissionActionSchema = WorkspaceMemberSchema.extend(
 );
 
 const WorkspaceRoleSchema = z.object({
-  workspacePublicId: z.string().min(12),
-  rolePublicId: z.string().min(12),
+  workspacePublicId,
+  rolePublicId,
 });
 
 const RolePermissionActionSchema = WorkspaceRoleSchema.extend(

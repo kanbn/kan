@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { Tool } from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import {
@@ -7,14 +8,14 @@ import {
 } from "../../webhook/dto/webhook.dto.js";
 import { WebhookService } from "../../webhook/webhook.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
-import { Tool } from "../tool.decorator.js";
+import { webhookPublicId, workspacePublicId } from "./public-ids.js";
 
 const WorkspaceIdSchema = z.object({
-  workspacePublicId: z.string().min(12),
+  workspacePublicId,
 });
 
 const WebhookIdSchema = WorkspaceIdSchema.extend({
-  webhookPublicId: z.string().min(12),
+  webhookPublicId,
 });
 
 const CreateWebhookWithWorkspaceSchema = CreateWebhookSchema.extend(
@@ -48,9 +49,6 @@ export class WebhookTools {
 
   @Tool({
     name: "create_webhook",
-    params: {
-      name: "A label for the webhook.",
-    },
     description: "Create a webhook for a workspace (HTTPS, public hosts only).",
     parameters: CreateWebhookWithWorkspaceSchema,
   })
@@ -65,9 +63,6 @@ export class WebhookTools {
 
   @Tool({
     name: "update_webhook",
-    params: {
-      name: "New label for the webhook.",
-    },
     description: "Update a workspace webhook.",
     parameters: UpdateWebhookWithIdSchema,
   })

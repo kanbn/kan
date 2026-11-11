@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
+import { Tool } from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { BoardService } from "../../board/board.service.js";
@@ -9,16 +10,28 @@ import {
 } from "../../board/dto/board.dto.js";
 import { WorkspaceService } from "../../workspace/workspace.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
-import { Tool } from "../tool.decorator.js";
+import {
+  boardPublicId,
+  workspacePublicId,
+  workspaceSlug,
+} from "./public-ids.js";
 import { findWorkspaceByName } from "./workspace.tools.js";
 
 const ListBoardsSchema = z.object({
-  workspacePublicId: z.string().min(12),
-  type: z.enum(["regular", "template"]).optional(),
-  archived: z.boolean().optional(),
+  workspacePublicId,
+  type: z
+    .enum(["regular", "template"])
+    .optional()
+    .describe(
+      "'regular' for boards (default), 'template' for board templates.",
+    ),
+  archived: z
+    .boolean()
+    .optional()
+    .describe("List archived boards instead of active ones."),
 });
 
-const BoardIdSchema = z.object({ boardPublicId: z.string().min(12) });
+const BoardIdSchema = z.object({ boardPublicId });
 
 const dueDateFilterSchema = z.enum([
   "overdue",
@@ -63,12 +76,12 @@ const BoardNameSchema = z.object({
 });
 
 const BoardSlugSchema = z.object({
-  workspaceSlug: z.string().min(1),
+  workspaceSlug,
   boardSlug: z.string().min(1).describe("The board's URL slug."),
 });
 
 const CreateBoardWithWorkspaceSchema = CreateBoardSchema.extend({
-  workspacePublicId: z.string().min(12),
+  workspacePublicId,
 });
 
 const UpdateBoardWithIdSchema = UpdateBoardSchema.extend(BoardIdSchema.shape);
@@ -170,10 +183,6 @@ export class BoardTools {
 
   @Tool({
     name: "create_board",
-    params: {
-      name: "Board name.",
-      type: "'regular' to create a board, 'template' to create a board template.",
-    },
     description:
       "Create a board in a workspace with initial lists and labels, optionally copying a source board.",
     parameters: CreateBoardWithWorkspaceSchema,
@@ -189,10 +198,6 @@ export class BoardTools {
 
   @Tool({
     name: "update_board",
-    params: {
-      name: "New board name.",
-      slug: "New URL slug for the board.",
-    },
     description:
       "Update a board's name, slug, visibility, favourite or archived state.",
     parameters: UpdateBoardWithIdSchema,

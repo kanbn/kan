@@ -10,16 +10,25 @@ export const LabelResponseSchema = z.object({
 export class LabelResponseDto extends createZodDto(LabelResponseSchema) {}
 
 export const CreateLabelSchema = z.object({
-  name: z.string().min(1).max(36),
-  boardPublicId: z.string().min(12),
-  colourCode: z.string().length(7),
+  name: z.string().min(1).max(36).describe("Label name."),
+  boardPublicId: z
+    .string()
+    .min(12)
+    .describe("Public ID of the board the label belongs to."),
+  colourCode: z
+    .string()
+    .length(7)
+    .describe("Label colour as a hex code, e.g. #0d9488."),
 });
 
 export class CreateLabelDto extends createZodDto(CreateLabelSchema) {}
 
 export const UpdateLabelSchema = z.object({
-  name: z.string().min(1).max(36),
-  colourCode: z.string().length(7),
+  name: z.string().min(1).max(36).describe("Label name."),
+  colourCode: z
+    .string()
+    .length(7)
+    .describe("Label colour as a hex code, e.g. #0d9488."),
 });
 
 export class UpdateLabelDto extends createZodDto(UpdateLabelSchema) {}
