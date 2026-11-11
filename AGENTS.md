@@ -5,7 +5,7 @@
 Kan is an open-source project management tool (Trello alternative) built with:
 
 - **Frontend**: Next.js, React, TypeScript, Tailwind CSS
-- **Backend**: tRPC, Node.js
+- **Backend**: NestJS (`apps/api`), Node.js
 - **Database**: PostgreSQL with Drizzle ORM
 - **Monorepo**: pnpm workspaces with Turbo
 - **Auth**: Better Auth
@@ -25,7 +25,9 @@ Kan is an open-source project management tool (Trello alternative) built with:
 ## Project Structure
 
 - `apps/web/` - Next.js web application
-- `packages/api/` - tRPC API routers
+- `apps/api/` - NestJS REST API (also serves the MCP server)
+- `packages/api/` - Shared API utilities (permissions, webhooks, notifications)
+- `packages/api-client/` - React Query hooks generated from the API's OpenAPI spec
 - `packages/db/` - Database schema, migrations, and repositories
 - `packages/auth/` - Authentication package
 - `packages/shared/` - Shared utilities
@@ -59,14 +61,15 @@ Kan is an open-source project management tool (Trello alternative) built with:
 - **Index Management**: Cards have `index` fields that must be maintained sequentially per list
 - **Activity Logging**: Use `card_activity` table to track all card changes
 
-### API Layer (`packages/api/`)
+### API Layer (`apps/api/`)
 
-- **Routers**: Create tRPC routers in `src/routers/`
-- **Procedures**: Use `protectedProcedure` for authenticated endpoints, `publicProcedure` for public
-- **Validation**: Use Zod schemas for input validation
-- **Error Handling**: Use `TRPCError` with appropriate error codes
-- **OpenAPI**: Add OpenAPI metadata for all endpoints
-- **Authorization**: Always check workspace membership with `assertUserInWorkspace`
+- **Modules**: One NestJS module per resource in `src/modules/<name>/` (controller, service, `dto/`, `__tests__/`)
+- **Controllers**: Use `@AuthenticatedController` for authenticated endpoints; public endpoints use a plain `@Controller` (or `OptionalAuthGuard` when signed-in users see more)
+- **Validation**: Define request and response shapes as Zod schemas wrapped in `createZodDto`
+- **Responses**: Declare every response with `@ZodResponse({ type: Dto })`; the global serializer strips fields the DTO doesn't declare, so internal IDs never leak
+- **Error Handling**: Throw Nest HTTP exceptions (`NotFoundException`, `ForbiddenException`, `BadRequestException`, ...)
+- **Authorization**: Always check permissions with `assertPermission` / `assertBoardAccess` from `@kan/api/utils/permissions`
+- **Client**: After changing endpoints run `cd apps/api && pnpm openapi`, then `cd packages/api-client && pnpm generate`
 
 ### Frontend (`apps/web/`)
 
@@ -75,7 +78,7 @@ Kan is an open-source project management tool (Trello alternative) built with:
 - **Hooks**: Custom hooks in `src/hooks/`
 - **i18n**: Use `t` template literal for translations (Lingui)
 - **Styling**: Use Tailwind CSS classes
-- **State Management**: Use tRPC React Query hooks for server state
+- **State Management**: Use the generated hooks from `@kan/api-client/hooks` for server state
 - **Modals**: Use `useModal` hook for modal management
 - **Popups**: Use `usePopup` hook for toast notifications
 
@@ -145,7 +148,7 @@ Kan is an open-source project management tool (Trello alternative) built with:
 
 - **Input Validation**: Always validate inputs with Zod
 - **Error Messages**: Provide clear, user-friendly error messages
-- **Optimistic Updates**: Use tRPC's `onMutate` for optimistic UI updates
+- **Optimistic Updates**: Use React Query's `onMutate` for optimistic UI updates
 - **Cache Invalidation**: Properly invalidate queries after mutations
 - **ID Exposure**: Never expose internal database IDs (`id`, `cardId`, `listId`, etc.) in API responses, URLs, or frontend code - always use `publicId` for external communication
 
@@ -180,11 +183,11 @@ Always check:
 2. User has access to workspace
 3. User has permission for the operation
 
-Use `assertUserInWorkspace` helper for workspace checks.
+Use `assertPermission` from `@kan/api/utils/permissions` for workspace checks.
 
 ### Error Handling
 
-- Use TRPCError with appropriate codes (UNAUTHORIZED, NOT_FOUND, etc.)
+- Throw Nest HTTP exceptions with the appropriate status (`UnauthorizedException`, `NotFoundException`, etc.)
 - Provide user-friendly error messages
 - Log errors appropriately using the `@kan/logger` package
 - Show popup notifications for user-facing errors
@@ -224,7 +227,7 @@ Use `assertUserInWorkspace` helper for workspace checks.
 1. **Database**: Update schema in `packages/db/src/schema/`
 2. **Migration**: Create migration with `cd packages/db && pnpm drizzle-kit generate --name "MigrationName"`, then run with `pnpm db:migrate`
 3. **Repository**: Add repository functions in `packages/db/src/repository/`
-4. **API**: Add tRPC router procedures in `packages/api/src/routers/`
+4. **API**: Add a NestJS module (controller, service, DTOs) in `apps/api/src/modules/`, then regenerate the client
 5. **Frontend**: Add UI components in `apps/web/src/`
 6. **i18n**: Add translations for new strings
 
@@ -250,8 +253,7 @@ Update all of the following:
 
 ## API Endpoints
 
-- Use tRPC procedures (not REST)
-- Add OpenAPI metadata for documentation
+- Add NestJS controller endpoints with `@ApiOperation` and `@ZodResponse` metadata
 - Validate inputs with Zod
 - Check workspace permissions
 - Create activity records for significant changes
@@ -260,7 +262,7 @@ Update all of the following:
 
 - Use Tailwind for styling
 - Follow existing component patterns
-- Use tRPC hooks for data fetching
+- Use the generated `@kan/api-client/hooks` for data fetching
 - Implement optimistic updates where appropriate
 - Add proper loading and error states
 
