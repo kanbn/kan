@@ -165,6 +165,31 @@ export interface CreateFeedbackResponseDto {
   success: boolean;
 }
 
+export interface ExternalSourceItemDtoOutput {
+  id: string;
+  name: string;
+}
+
+export interface ImportTrelloBoardsDto {
+  boardIds: string[];
+  /** @minLength 12 */
+  workspacePublicId: string;
+}
+
+export interface ImportTrelloBoardsResponseDtoOutput {
+  boardsCreated: number;
+}
+
+export interface ImportGitHubProjectsDto {
+  projectIds: string[];
+  /** @minLength 12 */
+  workspacePublicId: string;
+}
+
+export interface ImportGitHubProjectsResponseDtoOutput {
+  projectsImported: number;
+}
+
 export interface IntegrationProviderDtoOutput {
   provider: string;
   userId: string;
@@ -1880,6 +1905,432 @@ export const useCreateFeedback = <TError = unknown,
         TContext
       > => {
       return useMutation(getCreateFeedbackMutationOptions(options), queryClient);
+    }
+
+export type getTrelloBoardsResponse200 = {
+  data: ExternalSourceItemDtoOutput[]
+  status: 200
+}
+
+export type getTrelloBoardsResponseSuccess = (getTrelloBoardsResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getTrelloBoardsResponse = (getTrelloBoardsResponseSuccess)
+
+export const getGetTrelloBoardsUrl = () => {
+
+
+
+
+  return `/integrations/trello/boards`
+}
+
+/**
+ * @summary List the current user's Trello boards
+ */
+export const getTrelloBoards = async ( options?: Parameters<typeof customFetch>[1]): Promise<getTrelloBoardsResponse> => {
+
+  return customFetch<getTrelloBoardsResponse>(getGetTrelloBoardsUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetTrelloBoardsQueryKey = () => {
+    return [
+    `/integrations/trello/boards`
+    ] as const;
+    }
+
+
+export const getGetTrelloBoardsQueryOptions = <TData = Awaited<ReturnType<typeof getTrelloBoards>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getTrelloBoards>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetTrelloBoardsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getTrelloBoards>>> = ({ signal }) => getTrelloBoards({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getTrelloBoards>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetTrelloBoardsQueryResult = NonNullable<Awaited<ReturnType<typeof getTrelloBoards>>>
+export type GetTrelloBoardsQueryError = unknown
+
+
+/** @summary List the current user's Trello boards */
+export function useGetTrelloBoards<TData = Awaited<ReturnType<typeof getTrelloBoards>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getTrelloBoards>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getTrelloBoards>>,
+          TError,
+          Awaited<ReturnType<typeof getTrelloBoards>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary List the current user's Trello boards */
+export function useGetTrelloBoards<TData = Awaited<ReturnType<typeof getTrelloBoards>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getTrelloBoards>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getTrelloBoards>>,
+          TError,
+          Awaited<ReturnType<typeof getTrelloBoards>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary List the current user's Trello boards */
+export function useGetTrelloBoards<TData = Awaited<ReturnType<typeof getTrelloBoards>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getTrelloBoards>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary List the current user's Trello boards */
+export function useGetTrelloBoards<TData = Awaited<ReturnType<typeof getTrelloBoards>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getTrelloBoards>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetTrelloBoardsQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type getGitHubProjectsResponse200 = {
+  data: ExternalSourceItemDtoOutput[]
+  status: 200
+}
+
+export type getGitHubProjectsResponseSuccess = (getGitHubProjectsResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getGitHubProjectsResponse = (getGitHubProjectsResponseSuccess)
+
+export const getGetGitHubProjectsUrl = () => {
+
+
+
+
+  return `/integrations/github/projects`
+}
+
+/**
+ * @summary List the current user's GitHub projects
+ */
+export const getGitHubProjects = async ( options?: Parameters<typeof customFetch>[1]): Promise<getGitHubProjectsResponse> => {
+
+  return customFetch<getGitHubProjectsResponse>(getGetGitHubProjectsUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetGitHubProjectsQueryKey = () => {
+    return [
+    `/integrations/github/projects`
+    ] as const;
+    }
+
+
+export const getGetGitHubProjectsQueryOptions = <TData = Awaited<ReturnType<typeof getGitHubProjects>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGitHubProjects>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetGitHubProjectsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getGitHubProjects>>> = ({ signal }) => getGitHubProjects({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getGitHubProjects>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetGitHubProjectsQueryResult = NonNullable<Awaited<ReturnType<typeof getGitHubProjects>>>
+export type GetGitHubProjectsQueryError = unknown
+
+
+/** @summary List the current user's GitHub projects */
+export function useGetGitHubProjects<TData = Awaited<ReturnType<typeof getGitHubProjects>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGitHubProjects>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getGitHubProjects>>,
+          TError,
+          Awaited<ReturnType<typeof getGitHubProjects>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary List the current user's GitHub projects */
+export function useGetGitHubProjects<TData = Awaited<ReturnType<typeof getGitHubProjects>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGitHubProjects>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getGitHubProjects>>,
+          TError,
+          Awaited<ReturnType<typeof getGitHubProjects>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary List the current user's GitHub projects */
+export function useGetGitHubProjects<TData = Awaited<ReturnType<typeof getGitHubProjects>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGitHubProjects>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary List the current user's GitHub projects */
+export function useGetGitHubProjects<TData = Awaited<ReturnType<typeof getGitHubProjects>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getGitHubProjects>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetGitHubProjectsQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type importTrelloBoardsResponse201 = {
+  data: ImportTrelloBoardsResponseDtoOutput
+  status: 201
+}
+
+export type importTrelloBoardsResponseSuccess = (importTrelloBoardsResponse201) & {
+  headers: Headers;
+};
+;
+
+export type importTrelloBoardsResponse = (importTrelloBoardsResponseSuccess)
+
+export const getImportTrelloBoardsUrl = () => {
+
+
+
+
+  return `/imports/trello/boards`
+}
+
+/**
+ * @summary Import boards from Trello into a workspace
+ */
+export const importTrelloBoards = async (importTrelloBoardsDto: ImportTrelloBoardsDto, options?: Parameters<typeof customFetch>[1]): Promise<importTrelloBoardsResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<importTrelloBoardsResponse>(getImportTrelloBoardsUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(importTrelloBoardsDto)
+  }
+);}
+
+
+
+
+
+export const getImportTrelloBoardsMutationKey = () => ['importTrelloBoards'] as const;
+
+export const getImportTrelloBoardsMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof importTrelloBoards>>, TError,ImportTrelloBoardsMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof importTrelloBoards>>, TError,ImportTrelloBoardsMutationVariables, TContext> => {
+
+const mutationKey = getImportTrelloBoardsMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof importTrelloBoards>>, ImportTrelloBoardsMutationVariables> = (props) => {
+          const {data} = props ?? {};
+
+          return  importTrelloBoards(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ImportTrelloBoardsMutationResult = NonNullable<Awaited<ReturnType<typeof importTrelloBoards>>>
+    export type ImportTrelloBoardsMutationBody = ImportTrelloBoardsDto
+    export type ImportTrelloBoardsMutationError = unknown
+    export type ImportTrelloBoardsMutationVariables = {data: ImportTrelloBoardsDto}
+
+    /** @summary Import boards from Trello into a workspace */
+export const useImportTrelloBoards = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof importTrelloBoards>>, TError,ImportTrelloBoardsMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof importTrelloBoards>>,
+        TError,
+        ImportTrelloBoardsMutationVariables,
+        TContext
+      > => {
+      return useMutation(getImportTrelloBoardsMutationOptions(options), queryClient);
+    }
+
+export type importGitHubProjectsResponse201 = {
+  data: ImportGitHubProjectsResponseDtoOutput
+  status: 201
+}
+
+export type importGitHubProjectsResponseSuccess = (importGitHubProjectsResponse201) & {
+  headers: Headers;
+};
+;
+
+export type importGitHubProjectsResponse = (importGitHubProjectsResponseSuccess)
+
+export const getImportGitHubProjectsUrl = () => {
+
+
+
+
+  return `/imports/github/projects`
+}
+
+/**
+ * @summary Import projects from GitHub into a workspace
+ */
+export const importGitHubProjects = async (importGitHubProjectsDto: ImportGitHubProjectsDto, options?: Parameters<typeof customFetch>[1]): Promise<importGitHubProjectsResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<importGitHubProjectsResponse>(getImportGitHubProjectsUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(importGitHubProjectsDto)
+  }
+);}
+
+
+
+
+
+export const getImportGitHubProjectsMutationKey = () => ['importGitHubProjects'] as const;
+
+export const getImportGitHubProjectsMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof importGitHubProjects>>, TError,ImportGitHubProjectsMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof importGitHubProjects>>, TError,ImportGitHubProjectsMutationVariables, TContext> => {
+
+const mutationKey = getImportGitHubProjectsMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof importGitHubProjects>>, ImportGitHubProjectsMutationVariables> = (props) => {
+          const {data} = props ?? {};
+
+          return  importGitHubProjects(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ImportGitHubProjectsMutationResult = NonNullable<Awaited<ReturnType<typeof importGitHubProjects>>>
+    export type ImportGitHubProjectsMutationBody = ImportGitHubProjectsDto
+    export type ImportGitHubProjectsMutationError = unknown
+    export type ImportGitHubProjectsMutationVariables = {data: ImportGitHubProjectsDto}
+
+    /** @summary Import projects from GitHub into a workspace */
+export const useImportGitHubProjects = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof importGitHubProjects>>, TError,ImportGitHubProjectsMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof importGitHubProjects>>,
+        TError,
+        ImportGitHubProjectsMutationVariables,
+        TContext
+      > => {
+      return useMutation(getImportGitHubProjectsMutationOptions(options), queryClient);
     }
 
 export type getIntegrationProvidersResponse200 = {

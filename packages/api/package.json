@@ -60,6 +60,10 @@
       "types": "./src/utils/webhook.ts",
       "default": "./src/utils/webhook.ts"
     },
+    "./utils/trello": {
+      "types": "./src/utils/trello.ts",
+      "default": "./src/utils/trello.ts"
+    },
     "./utils/trello-token": {
       "types": "./src/utils/trello-token.ts",
       "default": "./src/utils/trello-token.ts"

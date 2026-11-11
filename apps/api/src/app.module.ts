@@ -7,6 +7,7 @@ import { HealthController } from "./health.controller.js";
 import { BoardMemberModule } from "./modules/board-member/board-member.module.js";
 import { ChecklistModule } from "./modules/checklist/checklist.module.js";
 import { FeedbackModule } from "./modules/feedback/feedback.module.js";
+import { ImportModule } from "./modules/import/import.module.js";
 import { IntegrationModule } from "./modules/integration/integration.module.js";
 import { LabelModule } from "./modules/label/label.module.js";
 import { ListModule } from "./modules/list/list.module.js";
@@ -21,6 +22,7 @@ import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
     BoardMemberModule,
     ChecklistModule,
     FeedbackModule,
+    ImportModule,
     IntegrationModule,
     LabelModule,
     ListModule,

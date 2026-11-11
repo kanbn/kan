@@ -469,6 +469,140 @@
         ]
       }
     },
+    "/integrations/trello/boards": {
+      "get": {
+        "operationId": "getTrelloBoards",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExternalSourceItemDto_Output"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List the current user's Trello boards",
+        "tags": [
+          "Integrations"
+        ]
+      }
+    },
+    "/integrations/github/projects": {
+      "get": {
+        "operationId": "getGitHubProjects",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExternalSourceItemDto_Output"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List the current user's GitHub projects",
+        "tags": [
+          "Integrations"
+        ]
+      }
+    },
+    "/imports/trello/boards": {
+      "post": {
+        "operationId": "importTrelloBoards",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportTrelloBoardsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportTrelloBoardsResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Import boards from Trello into a workspace",
+        "tags": [
+          "Imports"
+        ]
+      }
+    },
+    "/imports/github/projects": {
+      "post": {
+        "operationId": "importGitHubProjects",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportGitHubProjectsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportGitHubProjectsResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Import projects from GitHub into a workspace",
+        "tags": [
+          "Imports"
+        ]
+      }
+    },
     "/integration/providers": {
       "get": {
         "operationId": "getIntegrationProviders",
@@ -2639,6 +2773,84 @@
         "required": [
           "success"
         ]
+      },
+      "ExternalSourceItemDto_Output": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "ImportTrelloBoardsDto": {
+        "type": "object",
+        "properties": {
+          "boardIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "workspacePublicId": {
+            "type": "string",
+            "minLength": 12
+          }
+        },
+        "required": [
+          "boardIds",
+          "workspacePublicId"
+        ]
+      },
+      "ImportTrelloBoardsResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "boardsCreated": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "boardsCreated"
+        ],
+        "additionalProperties": false
+      },
+      "ImportGitHubProjectsDto": {
+        "type": "object",
+        "properties": {
+          "projectIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "workspacePublicId": {
+            "type": "string",
+            "minLength": 12
+          }
+        },
+        "required": [
+          "projectIds",
+          "workspacePublicId"
+        ]
+      },
+      "ImportGitHubProjectsResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "projectsImported": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "projectsImported"
+        ],
+        "additionalProperties": false
       },
       "IntegrationProviderDto_Output": {
         "type": "object",
