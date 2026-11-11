@@ -509,7 +509,7 @@
     "origin": [
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
-        49
+        61
       ]
     ],
     "translation": "Add board member"
@@ -621,11 +621,11 @@
     "origin": [
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
-        97
+        109
       ],
       [
         "src/views/board/members/index.tsx",
-        223
+        242
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
@@ -855,11 +855,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        156
+        175
       ],
       [
         "src/views/board/members/index.tsx",
-        172
+        191
       ],
       [
         "src/views/members/index.tsx",
@@ -1364,7 +1364,7 @@
     "origin": [
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
-        46
+        58
       ]
     ],
     "translation": "Are you sure you want to remove {entityLabel}?"
@@ -1667,7 +1667,7 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        209
+        228
       ],
       [
         "src/views/card/index.tsx",
@@ -1712,7 +1712,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        193
+        212
       ]
     ],
     "translation": "Board member options"
@@ -1728,7 +1728,7 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        214
+        233
       ]
     ],
     "translation": "Board members"
@@ -1744,7 +1744,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        209
+        228
       ]
     ],
     "translation": "Board members | {0}"
@@ -2449,11 +2449,11 @@
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
-        89
+        101
       ],
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
-        54
+        66
       ],
       [
         "src/views/card/components/Comment.tsx",
@@ -5158,7 +5158,7 @@
     "origin": [
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
-        61
+        73
       ]
     ],
     "translation": "Every active workspace member is already on this board."
@@ -7174,11 +7174,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        156
+        175
       ],
       [
         "src/views/board/members/index.tsx",
-        173
+        192
       ],
       [
         "src/views/card/components/ActivityList.tsx",
@@ -8612,6 +8612,18 @@
         386
       ],
       [
+        "src/views/board/members/components/AddBoardMemberForm.tsx",
+        42
+      ],
+      [
+        "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
+        37
+      ],
+      [
+        "src/views/board/members/index.tsx",
+        85
+      ],
+      [
         "src/views/boards/components/ImportBoardsForm.tsx",
         243
       ],
@@ -9122,7 +9134,7 @@
     "origin": [
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
-        57
+        69
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -9150,7 +9162,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        183
+        202
       ]
     ],
     "translation": "Remove from board"
@@ -9469,11 +9481,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        169
+        188
       ],
       [
         "src/views/board/members/index.tsx",
-        250
+        269
       ],
       [
         "src/views/members/index.tsx",
@@ -9730,7 +9742,7 @@
     "origin": [
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
-        77
+        89
       ]
     ],
     "translation": "Select a member"
@@ -11063,7 +11075,7 @@
     "origin": [
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
-        49
+        61
       ]
     ],
     "translation": "They'll lose access to this board, but will remain a member of the workspace."
@@ -11487,7 +11499,7 @@
     "origin": [
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
-        30
+        38
       ]
     ],
     "translation": "Unable to add member"
@@ -11743,7 +11755,7 @@
     "origin": [
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
-        25
+        33
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -11983,7 +11995,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        70
+        81
       ],
       [
         "src/views/members/index.tsx",
@@ -12544,7 +12556,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        244
+        263
       ],
       [
         "src/views/members/index.tsx",
@@ -13074,7 +13086,7 @@
     "origin": [
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
-        69
+        81
       ]
     ],
     "translation": "Workspace member"
@@ -13481,7 +13493,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        230
+        249
       ]
     ],
     "translation": "You're not a member of this board yet. Ask a board admin to add you."
