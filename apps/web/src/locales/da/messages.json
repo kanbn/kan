@@ -843,7 +843,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        256
+        253
       ]
     ],
     "translation": "Juster den kvadratiske beskæring, så den passer til din avatar."
@@ -1076,7 +1076,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        78
+        77
       ]
     ],
     "translation": "Årligt"
@@ -1571,7 +1571,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        101
+        100
       ]
     ],
     "translation": ""
@@ -2477,11 +2477,11 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        249
+        248
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        287
+        284
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2637,11 +2637,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        93
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        105
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2661,7 +2661,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        63
+        68
       ]
     ],
     "translation": "Skift appens skriftstørrelse."
@@ -2673,7 +2673,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        53
+        58
       ]
     ],
     "translation": "Skift dine sprogindstillinger."
@@ -2769,7 +2769,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        160
+        159
       ]
     ],
     "translation": "Vælg et abonnement"
@@ -2869,7 +2869,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        281
+        278
       ],
       [
         "src/views/card/index.tsx",
@@ -3242,7 +3242,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        255
+        254
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -3674,7 +3674,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        253
+        250
       ]
     ],
     "translation": "Beskær din avatar"
@@ -3945,11 +3945,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        70
+        75
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        80
+        85
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -4201,11 +4201,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        36
+        39
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        71
+        73
       ]
     ],
     "translation": "Vist navn"
@@ -4217,7 +4217,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        22
+        24
       ]
     ],
     "translation": "Det viste navn må højst være 280 tegn"
@@ -4229,7 +4229,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        19
+        21
       ]
     ],
     "translation": "Det viste navn skal være mindst 3 tegn langt"
@@ -4241,7 +4241,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        41
+        44
       ]
     ],
     "translation": "Det viste navn er opdateret"
@@ -4377,7 +4377,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        142
+        146
       ]
     ],
     "translation": "Download mislykkedes"
@@ -4637,7 +4637,7 @@
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        43
+        46
       ]
     ],
     "translation": "E-mail"
@@ -5013,7 +5013,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        54
+        57
       ]
     ],
     "translation": "Fejl ved opdatering af vist navn"
@@ -5078,7 +5078,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        199
+        196
       ]
     ],
     "translation": "Fejl ved upload af profilbillede"
@@ -5446,7 +5446,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        60
+        65
       ]
     ],
     "translation": "Skriftstørrelse"
@@ -5506,11 +5506,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        92
+        91
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        93
+        92
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -5894,7 +5894,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        94
+        93
       ]
     ],
     "translation": "Godt til enkeltpersoner, der er ved at komme i gang og kun har brug for det mest nødvendige."
@@ -6647,7 +6647,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        50
+        55
       ]
     ],
     "translation": "Sprog"
@@ -6744,7 +6744,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        115
+        112
       ]
     ],
     "translation": "Licens aktiveret"
@@ -6756,7 +6756,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        129
+        126
       ]
     ],
     "translation": "Aktivering af licens mislykkedes"
@@ -7232,7 +7232,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        77
+        76
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -7735,7 +7735,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        143
+        147
       ]
     ],
     "translation": "Der er ingen download-URL tilgængelig for denne vedhæftede fil."
@@ -7759,7 +7759,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        126
+        123
       ]
     ],
     "translation": "Der blev ikke angivet nogen licensnøgle. Prøv at aktivere igen."
@@ -7895,7 +7895,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        73
+        78
       ]
     ],
     "translation": "Når du sletter din konto, kan du ikke gå tilbage. Denne handling kan ikke fortrydes."
@@ -8079,7 +8079,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        271
+        268
       ]
     ],
     "translation": "Adgangskode allerede indstillet"
@@ -8323,7 +8323,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        165
+        164
       ]
     ],
     "translation": "Vælg et abonnement for at komme i gang. Alle betalte abonnementer inkluderer 14 dages gratis prøveperiode."
@@ -8555,7 +8555,7 @@
       ],
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        74
+        77
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
@@ -8659,7 +8659,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        200
+        197
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -8671,7 +8671,7 @@
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        55
+        58
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
@@ -8908,7 +8908,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        189
+        186
       ]
     ],
     "translation": "Profilbillede opdateret"
@@ -8920,7 +8920,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        30
+        33
       ]
     ],
     "translation": "Profilbillede"
@@ -9492,7 +9492,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        290
+        287
       ]
     ],
     "translation": "Gem"
@@ -9840,7 +9840,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        93
+        98
       ]
     ],
     "translation": "Indstil en adgangskode for at aktivere login med adgangskode."
@@ -9872,11 +9872,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        93
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        105
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -9936,7 +9936,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        26
+        29
       ]
     ],
     "translation": "Indstillinger | Konto"
@@ -10108,7 +10108,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        328
+        327
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -10276,7 +10276,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        91
+        90
       ]
     ],
     "translation": "Solo"
@@ -10312,7 +10312,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        132
+        129
       ]
     ],
     "translation": "Noget gik galt under aktiveringen af licensen."
@@ -10405,7 +10405,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        164
+        163
       ]
     ],
     "translation": ""
@@ -10550,7 +10550,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        98
+        97
       ]
     ],
     "translation": "Team"
@@ -10798,7 +10798,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        124
+        121
       ]
     ],
     "translation": "Licensnøglen blev ikke fundet. Kontakt support."
@@ -11565,7 +11565,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        73
+        76
       ]
     ],
     "translation": "Kunne ikke slette vedhæftet fil"
@@ -12175,7 +12175,7 @@
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        84
+        86
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
@@ -12283,7 +12283,7 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        254
+        253
       ]
     ],
     "translation": "Opgrader"
@@ -12321,7 +12321,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        160
+        159
       ]
     ],
     "translation": ""
@@ -13177,7 +13177,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        92
+        97
       ]
     ],
     "translation": "Du er ved at ændre din adgangskode."
@@ -13398,7 +13398,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        273
+        270
       ]
     ],
     "translation": "Din konto har allerede en adgangskode. Du kan ændre den under dine kontoindstillinger."
@@ -13422,7 +13422,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        273
+        272
       ]
     ],
     "translation": "Din avatar"
@@ -13446,7 +13446,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        42
+        45
       ]
     ],
     "translation": "Dit viste navn er blevet opdateret."
@@ -13506,7 +13506,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        116
+        113
       ]
     ],
     "translation": "Din licens er blevet aktiveret."
@@ -13518,7 +13518,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        125
+        122
       ]
     ],
     "translation": "Din licens er ikke aktiv. Kontrollér din konto."
@@ -13566,7 +13566,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        190
+        187
       ]
     ],
     "translation": "Dit profilbillede er blevet opdateret."

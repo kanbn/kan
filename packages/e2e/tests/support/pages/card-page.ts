@@ -96,7 +96,7 @@ export class CardPage {
   }
 
   async deleteAttachment(filename: string) {
-    const deleted = waitForTrpcMutation(this.page, "attachment.delete");
+    const deleted = waitForResponsePath(this.page, "/attachments/", "DELETE");
     await this.page.getByRole("button", { name: `Delete ${filename}` }).click();
     await deleted;
   }

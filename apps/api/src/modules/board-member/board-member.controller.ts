@@ -1,5 +1,6 @@
 import { Body, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { ApiOperation, ApiParam, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ZodResponse } from "nestjs-zod";
 
 import type { User } from "../../common/interfaces/user.interface.js";
 import { AuthenticatedController } from "../../common/decorators/authenticated-controller.decorator.js";
@@ -23,7 +24,7 @@ export class BoardMemberController {
     summary: "List a board's members",
   })
   @ApiParam({ name: "boardPublicId" })
-  @ApiResponse({ status: 200, type: BoardMemberDto, isArray: true })
+  @ZodResponse({ status: 200, type: [BoardMemberDto] })
   async all(
     @CurrentUser() user: User,
     @Param("boardPublicId") boardPublicId: string,
@@ -37,7 +38,7 @@ export class BoardMemberController {
     summary: "Add a workspace member to a board",
   })
   @ApiParam({ name: "boardPublicId" })
-  @ApiResponse({ status: 201, type: BoardMemberRoleResultDto })
+  @ZodResponse({ status: 201, type: BoardMemberRoleResultDto })
   async add(
     @CurrentUser() user: User,
     @Param("boardPublicId") boardPublicId: string,
@@ -58,7 +59,7 @@ export class BoardMemberController {
   })
   @ApiParam({ name: "boardPublicId" })
   @ApiParam({ name: "workspaceMemberPublicId" })
-  @ApiResponse({ status: 200, type: BoardMemberRoleResultDto })
+  @ZodResponse({ status: 200, type: BoardMemberRoleResultDto })
   async updateRole(
     @CurrentUser() user: User,
     @Param("boardPublicId") boardPublicId: string,
@@ -80,7 +81,7 @@ export class BoardMemberController {
   })
   @ApiParam({ name: "boardPublicId" })
   @ApiParam({ name: "workspaceMemberPublicId" })
-  @ApiResponse({ status: 200, type: BoardMemberRemoveResponseDto })
+  @ZodResponse({ status: 200, type: BoardMemberRemoveResponseDto })
   async remove(
     @CurrentUser() user: User,
     @Param("boardPublicId") boardPublicId: string,

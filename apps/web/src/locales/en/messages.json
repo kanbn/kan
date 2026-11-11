@@ -843,7 +843,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        256
+        253
       ]
     ],
     "translation": "Adjust the square crop to fit your avatar."
@@ -1076,7 +1076,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        78
+        77
       ]
     ],
     "translation": "Annual"
@@ -1571,7 +1571,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        101
+        100
       ]
     ],
     "translation": "Best for teams who want to collaborate and move faster together."
@@ -2477,11 +2477,11 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        249
+        248
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        287
+        284
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2637,11 +2637,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        93
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        105
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2661,7 +2661,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        63
+        68
       ]
     ],
     "translation": "Change the application font size."
@@ -2673,7 +2673,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        53
+        58
       ]
     ],
     "translation": "Change your language preferences."
@@ -2769,7 +2769,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        160
+        159
       ]
     ],
     "translation": "Choose a plan"
@@ -2869,7 +2869,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        281
+        278
       ],
       [
         "src/views/card/index.tsx",
@@ -3255,7 +3255,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        255
+        254
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -3687,7 +3687,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        253
+        250
       ]
     ],
     "translation": "Crop your avatar"
@@ -3971,11 +3971,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        70
+        75
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        80
+        85
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -4227,11 +4227,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        36
+        39
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        71
+        73
       ]
     ],
     "translation": "Display name"
@@ -4243,7 +4243,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        22
+        24
       ]
     ],
     "translation": "Display name cannot exceed 280 characters"
@@ -4255,7 +4255,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        19
+        21
       ]
     ],
     "translation": "Display name must be at least 3 characters long"
@@ -4267,7 +4267,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        41
+        44
       ]
     ],
     "translation": "Display name updated"
@@ -4416,7 +4416,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        142
+        146
       ]
     ],
     "translation": "Download failed"
@@ -4676,7 +4676,7 @@
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        43
+        46
       ]
     ],
     "translation": "Email"
@@ -5052,7 +5052,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        54
+        57
       ]
     ],
     "translation": "Error updating display name"
@@ -5130,7 +5130,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        199
+        196
       ]
     ],
     "translation": "Error uploading profile image"
@@ -5498,7 +5498,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        60
+        65
       ]
     ],
     "translation": "Font size"
@@ -5558,11 +5558,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        92
+        91
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        93
+        92
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -5946,7 +5946,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        94
+        93
       ]
     ],
     "translation": "Good for individuals starting out who just need the essentials."
@@ -6712,7 +6712,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        50
+        55
       ]
     ],
     "translation": "Language"
@@ -6822,7 +6822,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        115
+        112
       ]
     ],
     "translation": "License activated"
@@ -6834,7 +6834,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        129
+        126
       ]
     ],
     "translation": "License activation failed"
@@ -7310,7 +7310,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        77
+        76
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -7813,7 +7813,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        143
+        147
       ]
     ],
     "translation": "No download URL available for this attachment."
@@ -7837,7 +7837,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        126
+        123
       ]
     ],
     "translation": "No license key was provided. Please try activating again."
@@ -7973,7 +7973,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        73
+        78
       ]
     ],
     "translation": "Once you delete your account, there is no going back. This action cannot be undone."
@@ -8157,7 +8157,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        271
+        268
       ]
     ],
     "translation": "Password already set"
@@ -8401,7 +8401,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        165
+        164
       ]
     ],
     "translation": "Pick a plan to get started. All paid plans include a 14-day free trial."
@@ -8633,7 +8633,7 @@
       ],
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        74
+        77
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
@@ -8737,7 +8737,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        200
+        197
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -8749,7 +8749,7 @@
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        55
+        58
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
@@ -8986,7 +8986,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        189
+        186
       ]
     ],
     "translation": "Profile image updated"
@@ -8998,7 +8998,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        30
+        33
       ]
     ],
     "translation": "Profile picture"
@@ -9570,7 +9570,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        290
+        287
       ]
     ],
     "translation": "Save"
@@ -9918,7 +9918,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        93
+        98
       ]
     ],
     "translation": "Set a password to enable password-based login."
@@ -9950,11 +9950,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        93
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        105
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -10014,7 +10014,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        26
+        29
       ]
     ],
     "translation": "Settings | Account"
@@ -10186,7 +10186,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        328
+        327
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -10354,7 +10354,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        91
+        90
       ]
     ],
     "translation": "Solo"
@@ -10390,7 +10390,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        132
+        129
       ]
     ],
     "translation": "Something went wrong during license activation."
@@ -10483,7 +10483,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        164
+        163
       ]
     ],
     "translation": "Start your 14-day free trial, cancel anytime."
@@ -10628,7 +10628,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        98
+        97
       ]
     ],
     "translation": "Team"
@@ -10876,7 +10876,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        124
+        121
       ]
     ],
     "translation": "That license key could not be found. Please contact support."
@@ -11643,7 +11643,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        73
+        76
       ]
     ],
     "translation": "Unable to delete attachment"
@@ -12270,7 +12270,7 @@
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        84
+        86
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
@@ -12378,7 +12378,7 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        254
+        253
       ]
     ],
     "translation": "Upgrade"
@@ -12416,7 +12416,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        160
+        159
       ]
     ],
     "translation": "Upgrade your plan"
@@ -13298,7 +13298,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        92
+        97
       ]
     ],
     "translation": "You are about to change your password."
@@ -13545,7 +13545,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        273
+        270
       ]
     ],
     "translation": "Your account already has a password. You can change it from your account settings."
@@ -13569,7 +13569,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        273
+        272
       ]
     ],
     "translation": "Your avatar"
@@ -13593,7 +13593,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        42
+        45
       ]
     ],
     "translation": "Your display name has been updated."
@@ -13653,7 +13653,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        116
+        113
       ]
     ],
     "translation": "Your license has been activated successfully."
@@ -13665,7 +13665,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        125
+        122
       ]
     ],
     "translation": "Your license is not active. Please check your account."
@@ -13713,7 +13713,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        190
+        187
       ]
     ],
     "translation": "Your profile image has been updated."
