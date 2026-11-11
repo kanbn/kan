@@ -1,7 +1,7 @@
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 
-import { waitForTrpcMutation } from "../wait-for-trpc";
+import { waitForResponsePath, waitForTrpcMutation } from "../wait-for-trpc";
 
 export class SettingsPage {
   constructor(private readonly page: Page) {}
@@ -118,11 +118,10 @@ export class SettingsPage {
     role: "member" | "guest",
     enabled: boolean,
   ) {
-    const updated = waitForTrpcMutation(
+    const updated = waitForResponsePath(
       this.page,
-      enabled
-        ? "permission.grantRolePermission"
-        : "permission.revokeRolePermission",
+      enabled ? "/permissions/grant" : "/permissions/revoke",
+      "POST",
     );
     await this.rolePermissionCheckbox(permissionLabel, role).click();
     await updated;

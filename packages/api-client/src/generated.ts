@@ -302,6 +302,92 @@ export interface AcceptInviteLinkResponseDto {
   workspaceSlug?: string;
 }
 
+export interface GetMyPermissionsResponseDto {
+  permissions: string[];
+  role: string;
+}
+
+export type GetMemberPermissionsResponseDtoOverridesItem = {
+  permission: string;
+  granted: boolean;
+};
+
+export interface GetMemberPermissionsResponseDto {
+  memberPublicId: string;
+  role: string;
+  permissions: string[];
+  overrides: GetMemberPermissionsResponseDtoOverridesItem[];
+}
+
+export type PermissionActionDtoPermission = typeof PermissionActionDtoPermission[keyof typeof PermissionActionDtoPermission];
+
+
+export const PermissionActionDtoPermission = {
+  'workspace:view': 'workspace:view',
+  'workspace:edit': 'workspace:edit',
+  'workspace:delete': 'workspace:delete',
+  'workspace:manage': 'workspace:manage',
+  'board:view': 'board:view',
+  'board:create': 'board:create',
+  'board:edit': 'board:edit',
+  'board:delete': 'board:delete',
+  'list:view': 'list:view',
+  'list:create': 'list:create',
+  'list:edit': 'list:edit',
+  'list:delete': 'list:delete',
+  'card:view': 'card:view',
+  'card:create': 'card:create',
+  'card:edit': 'card:edit',
+  'card:delete': 'card:delete',
+  'comment:view': 'comment:view',
+  'comment:create': 'comment:create',
+  'comment:edit': 'comment:edit',
+  'comment:delete': 'comment:delete',
+  'member:view': 'member:view',
+  'member:invite': 'member:invite',
+  'member:edit': 'member:edit',
+  'member:remove': 'member:remove',
+} as const;
+
+export interface PermissionActionDto {
+  permission: PermissionActionDtoPermission;
+}
+
+export interface SuccessResponseDto {
+  success: boolean;
+}
+
+export type GetWorkspaceRolesResponseDtoRolesItem = {
+  /** @minLength 12 */
+  publicId: string;
+  name: string;
+  /** @nullable */
+  description: string | null;
+  hierarchyLevel: number;
+  isSystem: boolean;
+};
+
+export interface GetWorkspaceRolesResponseDto {
+  roles: GetWorkspaceRolesResponseDtoRolesItem[];
+}
+
+export type GetWorkspaceRolePermissionsResponseDtoRolesItem = {
+  /** @minLength 12 */
+  publicId: string;
+  name: string;
+  permissions: string[];
+};
+
+export interface GetWorkspaceRolePermissionsResponseDto {
+  roles: GetWorkspaceRolePermissionsResponseDtoRolesItem[];
+}
+
+export interface GetRolePermissionsResponseDto {
+  rolePublicId: string;
+  name: string;
+  permissions: string[];
+}
+
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 
@@ -3128,4 +3214,1170 @@ export const useAcceptInviteLink = <TError = unknown,
         TContext
       > => {
       return useMutation(getAcceptInviteLinkMutationOptions(options), queryClient);
+    }
+
+export type getMyPermissionsResponse200 = {
+  data: GetMyPermissionsResponseDto
+  status: 200
+}
+
+export type getMyPermissionsResponseSuccess = (getMyPermissionsResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getMyPermissionsResponse = (getMyPermissionsResponseSuccess)
+
+export const getGetMyPermissionsUrl = (workspacePublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/permissions/me`
+}
+
+/**
+ * @summary Get my permissions
+ */
+export const getMyPermissions = async (workspacePublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<getMyPermissionsResponse> => {
+
+  return customFetch<getMyPermissionsResponse>(getGetMyPermissionsUrl(workspacePublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetMyPermissionsQueryKey = (workspacePublicId: string,) => {
+    return [
+    `/workspaces/${workspacePublicId}/permissions/me`
+    ] as const;
+    }
+
+
+export const getGetMyPermissionsQueryOptions = <TData = Awaited<ReturnType<typeof getMyPermissions>>, TError = unknown>(workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyPermissions>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetMyPermissionsQueryKey(workspacePublicId);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyPermissions>>> = ({ signal }) => getMyPermissions(workspacePublicId, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: workspacePublicId !== null && workspacePublicId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getMyPermissions>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyPermissionsQueryResult = NonNullable<Awaited<ReturnType<typeof getMyPermissions>>>
+export type GetMyPermissionsQueryError = unknown
+
+
+/** @summary Get my permissions */
+export function useGetMyPermissions<TData = Awaited<ReturnType<typeof getMyPermissions>>, TError = unknown>(
+ workspacePublicId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyPermissions>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyPermissions>>,
+          TError,
+          Awaited<ReturnType<typeof getMyPermissions>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get my permissions */
+export function useGetMyPermissions<TData = Awaited<ReturnType<typeof getMyPermissions>>, TError = unknown>(
+ workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyPermissions>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyPermissions>>,
+          TError,
+          Awaited<ReturnType<typeof getMyPermissions>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get my permissions */
+export function useGetMyPermissions<TData = Awaited<ReturnType<typeof getMyPermissions>>, TError = unknown>(
+ workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyPermissions>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get my permissions */
+export function useGetMyPermissions<TData = Awaited<ReturnType<typeof getMyPermissions>>, TError = unknown>(
+ workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyPermissions>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetMyPermissionsQueryOptions(workspacePublicId,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type getMemberPermissionsResponse200 = {
+  data: GetMemberPermissionsResponseDto
+  status: 200
+}
+
+export type getMemberPermissionsResponseSuccess = (getMemberPermissionsResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getMemberPermissionsResponse = (getMemberPermissionsResponseSuccess)
+
+export const getGetMemberPermissionsUrl = (workspacePublicId: string,
+    memberPublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/members/${memberPublicId}/permissions`
+}
+
+/**
+ * @summary Get member permissions
+ */
+export const getMemberPermissions = async (workspacePublicId: string,
+    memberPublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<getMemberPermissionsResponse> => {
+
+  return customFetch<getMemberPermissionsResponse>(getGetMemberPermissionsUrl(workspacePublicId,memberPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetMemberPermissionsQueryKey = (workspacePublicId: string,
+    memberPublicId: string,) => {
+    return [
+    `/workspaces/${workspacePublicId}/members/${memberPublicId}/permissions`
+    ] as const;
+    }
+
+
+export const getGetMemberPermissionsQueryOptions = <TData = Awaited<ReturnType<typeof getMemberPermissions>>, TError = unknown>(workspacePublicId: string,
+    memberPublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMemberPermissions>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetMemberPermissionsQueryKey(workspacePublicId,memberPublicId);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getMemberPermissions>>> = ({ signal }) => getMemberPermissions(workspacePublicId,memberPublicId, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: workspacePublicId !== null && workspacePublicId !== undefined && memberPublicId !== null && memberPublicId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getMemberPermissions>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMemberPermissionsQueryResult = NonNullable<Awaited<ReturnType<typeof getMemberPermissions>>>
+export type GetMemberPermissionsQueryError = unknown
+
+
+/** @summary Get member permissions */
+export function useGetMemberPermissions<TData = Awaited<ReturnType<typeof getMemberPermissions>>, TError = unknown>(
+ workspacePublicId: string,
+    memberPublicId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMemberPermissions>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMemberPermissions>>,
+          TError,
+          Awaited<ReturnType<typeof getMemberPermissions>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get member permissions */
+export function useGetMemberPermissions<TData = Awaited<ReturnType<typeof getMemberPermissions>>, TError = unknown>(
+ workspacePublicId: string,
+    memberPublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMemberPermissions>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMemberPermissions>>,
+          TError,
+          Awaited<ReturnType<typeof getMemberPermissions>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get member permissions */
+export function useGetMemberPermissions<TData = Awaited<ReturnType<typeof getMemberPermissions>>, TError = unknown>(
+ workspacePublicId: string,
+    memberPublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMemberPermissions>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get member permissions */
+export function useGetMemberPermissions<TData = Awaited<ReturnType<typeof getMemberPermissions>>, TError = unknown>(
+ workspacePublicId: string,
+    memberPublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMemberPermissions>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetMemberPermissionsQueryOptions(workspacePublicId,memberPublicId,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type grantPermissionResponse200 = {
+  data: SuccessResponseDto
+  status: 200
+}
+
+export type grantPermissionResponseSuccess = (grantPermissionResponse200) & {
+  headers: Headers;
+};
+;
+
+export type grantPermissionResponse = (grantPermissionResponseSuccess)
+
+export const getGrantPermissionUrl = (workspacePublicId: string,
+    memberPublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/members/${memberPublicId}/permissions/grant`
+}
+
+/**
+ * @summary Grant permission to member
+ */
+export const grantPermission = async (workspacePublicId: string,
+    memberPublicId: string,
+    permissionActionDto: PermissionActionDto, options?: Parameters<typeof customFetch>[1]): Promise<grantPermissionResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<grantPermissionResponse>(getGrantPermissionUrl(workspacePublicId,memberPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(permissionActionDto)
+  }
+);}
+
+
+
+
+
+export const getGrantPermissionMutationKey = () => ['grantPermission'] as const;
+
+export const getGrantPermissionMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof grantPermission>>, TError,GrantPermissionMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof grantPermission>>, TError,GrantPermissionMutationVariables, TContext> => {
+
+const mutationKey = getGrantPermissionMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof grantPermission>>, GrantPermissionMutationVariables> = (props) => {
+          const {workspacePublicId,memberPublicId,data} = props ?? {};
+
+          return  grantPermission(workspacePublicId,memberPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type GrantPermissionMutationResult = NonNullable<Awaited<ReturnType<typeof grantPermission>>>
+    export type GrantPermissionMutationBody = PermissionActionDto
+    export type GrantPermissionMutationError = unknown
+    export type GrantPermissionMutationVariables = {workspacePublicId: string;memberPublicId: string;data: PermissionActionDto}
+
+    /** @summary Grant permission to member */
+export const useGrantPermission = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof grantPermission>>, TError,GrantPermissionMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof grantPermission>>,
+        TError,
+        GrantPermissionMutationVariables,
+        TContext
+      > => {
+      return useMutation(getGrantPermissionMutationOptions(options), queryClient);
+    }
+
+export type revokePermissionResponse200 = {
+  data: SuccessResponseDto
+  status: 200
+}
+
+export type revokePermissionResponseSuccess = (revokePermissionResponse200) & {
+  headers: Headers;
+};
+;
+
+export type revokePermissionResponse = (revokePermissionResponseSuccess)
+
+export const getRevokePermissionUrl = (workspacePublicId: string,
+    memberPublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/members/${memberPublicId}/permissions/revoke`
+}
+
+/**
+ * @summary Revoke permission from member
+ */
+export const revokePermission = async (workspacePublicId: string,
+    memberPublicId: string,
+    permissionActionDto: PermissionActionDto, options?: Parameters<typeof customFetch>[1]): Promise<revokePermissionResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<revokePermissionResponse>(getRevokePermissionUrl(workspacePublicId,memberPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(permissionActionDto)
+  }
+);}
+
+
+
+
+
+export const getRevokePermissionMutationKey = () => ['revokePermission'] as const;
+
+export const getRevokePermissionMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof revokePermission>>, TError,RevokePermissionMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof revokePermission>>, TError,RevokePermissionMutationVariables, TContext> => {
+
+const mutationKey = getRevokePermissionMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof revokePermission>>, RevokePermissionMutationVariables> = (props) => {
+          const {workspacePublicId,memberPublicId,data} = props ?? {};
+
+          return  revokePermission(workspacePublicId,memberPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type RevokePermissionMutationResult = NonNullable<Awaited<ReturnType<typeof revokePermission>>>
+    export type RevokePermissionMutationBody = PermissionActionDto
+    export type RevokePermissionMutationError = unknown
+    export type RevokePermissionMutationVariables = {workspacePublicId: string;memberPublicId: string;data: PermissionActionDto}
+
+    /** @summary Revoke permission from member */
+export const useRevokePermission = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof revokePermission>>, TError,RevokePermissionMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof revokePermission>>,
+        TError,
+        RevokePermissionMutationVariables,
+        TContext
+      > => {
+      return useMutation(getRevokePermissionMutationOptions(options), queryClient);
+    }
+
+export type resetMemberPermissionsResponse200 = {
+  data: SuccessResponseDto
+  status: 200
+}
+
+export type resetMemberPermissionsResponseSuccess = (resetMemberPermissionsResponse200) & {
+  headers: Headers;
+};
+;
+
+export type resetMemberPermissionsResponse = (resetMemberPermissionsResponseSuccess)
+
+export const getResetMemberPermissionsUrl = (workspacePublicId: string,
+    memberPublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/members/${memberPublicId}/permissions/reset`
+}
+
+/**
+ * @summary Reset member permissions to role defaults
+ */
+export const resetMemberPermissions = async (workspacePublicId: string,
+    memberPublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<resetMemberPermissionsResponse> => {
+
+  return customFetch<resetMemberPermissionsResponse>(getResetMemberPermissionsUrl(workspacePublicId,memberPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getResetMemberPermissionsMutationKey = () => ['resetMemberPermissions'] as const;
+
+export const getResetMemberPermissionsMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof resetMemberPermissions>>, TError,ResetMemberPermissionsMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof resetMemberPermissions>>, TError,ResetMemberPermissionsMutationVariables, TContext> => {
+
+const mutationKey = getResetMemberPermissionsMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof resetMemberPermissions>>, ResetMemberPermissionsMutationVariables> = (props) => {
+          const {workspacePublicId,memberPublicId} = props ?? {};
+
+          return  resetMemberPermissions(workspacePublicId,memberPublicId,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ResetMemberPermissionsMutationResult = NonNullable<Awaited<ReturnType<typeof resetMemberPermissions>>>
+
+    export type ResetMemberPermissionsMutationError = unknown
+    export type ResetMemberPermissionsMutationVariables = {workspacePublicId: string;memberPublicId: string}
+
+    /** @summary Reset member permissions to role defaults */
+export const useResetMemberPermissions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof resetMemberPermissions>>, TError,ResetMemberPermissionsMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof resetMemberPermissions>>,
+        TError,
+        ResetMemberPermissionsMutationVariables,
+        TContext
+      > => {
+      return useMutation(getResetMemberPermissionsMutationOptions(options), queryClient);
+    }
+
+export type resetWorkspaceMemberPermissionsResponse200 = {
+  data: SuccessResponseDto
+  status: 200
+}
+
+export type resetWorkspaceMemberPermissionsResponseSuccess = (resetWorkspaceMemberPermissionsResponse200) & {
+  headers: Headers;
+};
+;
+
+export type resetWorkspaceMemberPermissionsResponse = (resetWorkspaceMemberPermissionsResponseSuccess)
+
+export const getResetWorkspaceMemberPermissionsUrl = (workspacePublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/members/permissions/reset`
+}
+
+/**
+ * @summary Reset all member permission overrides in a workspace
+ */
+export const resetWorkspaceMemberPermissions = async (workspacePublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<resetWorkspaceMemberPermissionsResponse> => {
+
+  return customFetch<resetWorkspaceMemberPermissionsResponse>(getResetWorkspaceMemberPermissionsUrl(workspacePublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getResetWorkspaceMemberPermissionsMutationKey = () => ['resetWorkspaceMemberPermissions'] as const;
+
+export const getResetWorkspaceMemberPermissionsMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof resetWorkspaceMemberPermissions>>, TError,ResetWorkspaceMemberPermissionsMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof resetWorkspaceMemberPermissions>>, TError,ResetWorkspaceMemberPermissionsMutationVariables, TContext> => {
+
+const mutationKey = getResetWorkspaceMemberPermissionsMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof resetWorkspaceMemberPermissions>>, ResetWorkspaceMemberPermissionsMutationVariables> = (props) => {
+          const {workspacePublicId} = props ?? {};
+
+          return  resetWorkspaceMemberPermissions(workspacePublicId,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ResetWorkspaceMemberPermissionsMutationResult = NonNullable<Awaited<ReturnType<typeof resetWorkspaceMemberPermissions>>>
+
+    export type ResetWorkspaceMemberPermissionsMutationError = unknown
+    export type ResetWorkspaceMemberPermissionsMutationVariables = {workspacePublicId: string}
+
+    /** @summary Reset all member permission overrides in a workspace */
+export const useResetWorkspaceMemberPermissions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof resetWorkspaceMemberPermissions>>, TError,ResetWorkspaceMemberPermissionsMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof resetWorkspaceMemberPermissions>>,
+        TError,
+        ResetWorkspaceMemberPermissionsMutationVariables,
+        TContext
+      > => {
+      return useMutation(getResetWorkspaceMemberPermissionsMutationOptions(options), queryClient);
+    }
+
+export type getWorkspaceRolesResponse200 = {
+  data: GetWorkspaceRolesResponseDto
+  status: 200
+}
+
+export type getWorkspaceRolesResponseSuccess = (getWorkspaceRolesResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getWorkspaceRolesResponse = (getWorkspaceRolesResponseSuccess)
+
+export const getGetWorkspaceRolesUrl = (workspacePublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/roles`
+}
+
+/**
+ * @summary Get workspace roles
+ */
+export const getWorkspaceRoles = async (workspacePublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<getWorkspaceRolesResponse> => {
+
+  return customFetch<getWorkspaceRolesResponse>(getGetWorkspaceRolesUrl(workspacePublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetWorkspaceRolesQueryKey = (workspacePublicId: string,) => {
+    return [
+    `/workspaces/${workspacePublicId}/roles`
+    ] as const;
+    }
+
+
+export const getGetWorkspaceRolesQueryOptions = <TData = Awaited<ReturnType<typeof getWorkspaceRoles>>, TError = unknown>(workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWorkspaceRoles>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetWorkspaceRolesQueryKey(workspacePublicId);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getWorkspaceRoles>>> = ({ signal }) => getWorkspaceRoles(workspacePublicId, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: workspacePublicId !== null && workspacePublicId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getWorkspaceRoles>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetWorkspaceRolesQueryResult = NonNullable<Awaited<ReturnType<typeof getWorkspaceRoles>>>
+export type GetWorkspaceRolesQueryError = unknown
+
+
+/** @summary Get workspace roles */
+export function useGetWorkspaceRoles<TData = Awaited<ReturnType<typeof getWorkspaceRoles>>, TError = unknown>(
+ workspacePublicId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWorkspaceRoles>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getWorkspaceRoles>>,
+          TError,
+          Awaited<ReturnType<typeof getWorkspaceRoles>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get workspace roles */
+export function useGetWorkspaceRoles<TData = Awaited<ReturnType<typeof getWorkspaceRoles>>, TError = unknown>(
+ workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWorkspaceRoles>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getWorkspaceRoles>>,
+          TError,
+          Awaited<ReturnType<typeof getWorkspaceRoles>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get workspace roles */
+export function useGetWorkspaceRoles<TData = Awaited<ReturnType<typeof getWorkspaceRoles>>, TError = unknown>(
+ workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWorkspaceRoles>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get workspace roles */
+export function useGetWorkspaceRoles<TData = Awaited<ReturnType<typeof getWorkspaceRoles>>, TError = unknown>(
+ workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWorkspaceRoles>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetWorkspaceRolesQueryOptions(workspacePublicId,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type getWorkspaceRolePermissionsResponse200 = {
+  data: GetWorkspaceRolePermissionsResponseDto
+  status: 200
+}
+
+export type getWorkspaceRolePermissionsResponseSuccess = (getWorkspaceRolePermissionsResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getWorkspaceRolePermissionsResponse = (getWorkspaceRolePermissionsResponseSuccess)
+
+export const getGetWorkspaceRolePermissionsUrl = (workspacePublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/roles/permissions`
+}
+
+/**
+ * @summary Get workspace role permissions
+ */
+export const getWorkspaceRolePermissions = async (workspacePublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<getWorkspaceRolePermissionsResponse> => {
+
+  return customFetch<getWorkspaceRolePermissionsResponse>(getGetWorkspaceRolePermissionsUrl(workspacePublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetWorkspaceRolePermissionsQueryKey = (workspacePublicId: string,) => {
+    return [
+    `/workspaces/${workspacePublicId}/roles/permissions`
+    ] as const;
+    }
+
+
+export const getGetWorkspaceRolePermissionsQueryOptions = <TData = Awaited<ReturnType<typeof getWorkspaceRolePermissions>>, TError = unknown>(workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWorkspaceRolePermissions>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetWorkspaceRolePermissionsQueryKey(workspacePublicId);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getWorkspaceRolePermissions>>> = ({ signal }) => getWorkspaceRolePermissions(workspacePublicId, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: workspacePublicId !== null && workspacePublicId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getWorkspaceRolePermissions>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetWorkspaceRolePermissionsQueryResult = NonNullable<Awaited<ReturnType<typeof getWorkspaceRolePermissions>>>
+export type GetWorkspaceRolePermissionsQueryError = unknown
+
+
+/** @summary Get workspace role permissions */
+export function useGetWorkspaceRolePermissions<TData = Awaited<ReturnType<typeof getWorkspaceRolePermissions>>, TError = unknown>(
+ workspacePublicId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWorkspaceRolePermissions>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getWorkspaceRolePermissions>>,
+          TError,
+          Awaited<ReturnType<typeof getWorkspaceRolePermissions>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get workspace role permissions */
+export function useGetWorkspaceRolePermissions<TData = Awaited<ReturnType<typeof getWorkspaceRolePermissions>>, TError = unknown>(
+ workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWorkspaceRolePermissions>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getWorkspaceRolePermissions>>,
+          TError,
+          Awaited<ReturnType<typeof getWorkspaceRolePermissions>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get workspace role permissions */
+export function useGetWorkspaceRolePermissions<TData = Awaited<ReturnType<typeof getWorkspaceRolePermissions>>, TError = unknown>(
+ workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWorkspaceRolePermissions>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get workspace role permissions */
+export function useGetWorkspaceRolePermissions<TData = Awaited<ReturnType<typeof getWorkspaceRolePermissions>>, TError = unknown>(
+ workspacePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getWorkspaceRolePermissions>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetWorkspaceRolePermissionsQueryOptions(workspacePublicId,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type getRolePermissionsResponse200 = {
+  data: GetRolePermissionsResponseDto
+  status: 200
+}
+
+export type getRolePermissionsResponseSuccess = (getRolePermissionsResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getRolePermissionsResponse = (getRolePermissionsResponseSuccess)
+
+export const getGetRolePermissionsUrl = (workspacePublicId: string,
+    rolePublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/roles/${rolePublicId}/permissions`
+}
+
+/**
+ * @summary Get role permissions
+ */
+export const getRolePermissions = async (workspacePublicId: string,
+    rolePublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<getRolePermissionsResponse> => {
+
+  return customFetch<getRolePermissionsResponse>(getGetRolePermissionsUrl(workspacePublicId,rolePublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetRolePermissionsQueryKey = (workspacePublicId: string,
+    rolePublicId: string,) => {
+    return [
+    `/workspaces/${workspacePublicId}/roles/${rolePublicId}/permissions`
+    ] as const;
+    }
+
+
+export const getGetRolePermissionsQueryOptions = <TData = Awaited<ReturnType<typeof getRolePermissions>>, TError = unknown>(workspacePublicId: string,
+    rolePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getRolePermissions>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetRolePermissionsQueryKey(workspacePublicId,rolePublicId);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getRolePermissions>>> = ({ signal }) => getRolePermissions(workspacePublicId,rolePublicId, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: workspacePublicId !== null && workspacePublicId !== undefined && rolePublicId !== null && rolePublicId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getRolePermissions>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetRolePermissionsQueryResult = NonNullable<Awaited<ReturnType<typeof getRolePermissions>>>
+export type GetRolePermissionsQueryError = unknown
+
+
+/** @summary Get role permissions */
+export function useGetRolePermissions<TData = Awaited<ReturnType<typeof getRolePermissions>>, TError = unknown>(
+ workspacePublicId: string,
+    rolePublicId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getRolePermissions>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getRolePermissions>>,
+          TError,
+          Awaited<ReturnType<typeof getRolePermissions>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get role permissions */
+export function useGetRolePermissions<TData = Awaited<ReturnType<typeof getRolePermissions>>, TError = unknown>(
+ workspacePublicId: string,
+    rolePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getRolePermissions>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getRolePermissions>>,
+          TError,
+          Awaited<ReturnType<typeof getRolePermissions>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get role permissions */
+export function useGetRolePermissions<TData = Awaited<ReturnType<typeof getRolePermissions>>, TError = unknown>(
+ workspacePublicId: string,
+    rolePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getRolePermissions>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get role permissions */
+export function useGetRolePermissions<TData = Awaited<ReturnType<typeof getRolePermissions>>, TError = unknown>(
+ workspacePublicId: string,
+    rolePublicId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getRolePermissions>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetRolePermissionsQueryOptions(workspacePublicId,rolePublicId,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type grantRolePermissionResponse200 = {
+  data: SuccessResponseDto
+  status: 200
+}
+
+export type grantRolePermissionResponseSuccess = (grantRolePermissionResponse200) & {
+  headers: Headers;
+};
+;
+
+export type grantRolePermissionResponse = (grantRolePermissionResponseSuccess)
+
+export const getGrantRolePermissionUrl = (workspacePublicId: string,
+    rolePublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/roles/${rolePublicId}/permissions/grant`
+}
+
+/**
+ * @summary Grant permission to role
+ */
+export const grantRolePermission = async (workspacePublicId: string,
+    rolePublicId: string,
+    permissionActionDto: PermissionActionDto, options?: Parameters<typeof customFetch>[1]): Promise<grantRolePermissionResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<grantRolePermissionResponse>(getGrantRolePermissionUrl(workspacePublicId,rolePublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(permissionActionDto)
+  }
+);}
+
+
+
+
+
+export const getGrantRolePermissionMutationKey = () => ['grantRolePermission'] as const;
+
+export const getGrantRolePermissionMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof grantRolePermission>>, TError,GrantRolePermissionMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof grantRolePermission>>, TError,GrantRolePermissionMutationVariables, TContext> => {
+
+const mutationKey = getGrantRolePermissionMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof grantRolePermission>>, GrantRolePermissionMutationVariables> = (props) => {
+          const {workspacePublicId,rolePublicId,data} = props ?? {};
+
+          return  grantRolePermission(workspacePublicId,rolePublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type GrantRolePermissionMutationResult = NonNullable<Awaited<ReturnType<typeof grantRolePermission>>>
+    export type GrantRolePermissionMutationBody = PermissionActionDto
+    export type GrantRolePermissionMutationError = unknown
+    export type GrantRolePermissionMutationVariables = {workspacePublicId: string;rolePublicId: string;data: PermissionActionDto}
+
+    /** @summary Grant permission to role */
+export const useGrantRolePermission = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof grantRolePermission>>, TError,GrantRolePermissionMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof grantRolePermission>>,
+        TError,
+        GrantRolePermissionMutationVariables,
+        TContext
+      > => {
+      return useMutation(getGrantRolePermissionMutationOptions(options), queryClient);
+    }
+
+export type revokeRolePermissionResponse200 = {
+  data: SuccessResponseDto
+  status: 200
+}
+
+export type revokeRolePermissionResponseSuccess = (revokeRolePermissionResponse200) & {
+  headers: Headers;
+};
+;
+
+export type revokeRolePermissionResponse = (revokeRolePermissionResponseSuccess)
+
+export const getRevokeRolePermissionUrl = (workspacePublicId: string,
+    rolePublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/roles/${rolePublicId}/permissions/revoke`
+}
+
+/**
+ * @summary Revoke permission from role
+ */
+export const revokeRolePermission = async (workspacePublicId: string,
+    rolePublicId: string,
+    permissionActionDto: PermissionActionDto, options?: Parameters<typeof customFetch>[1]): Promise<revokeRolePermissionResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<revokeRolePermissionResponse>(getRevokeRolePermissionUrl(workspacePublicId,rolePublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(permissionActionDto)
+  }
+);}
+
+
+
+
+
+export const getRevokeRolePermissionMutationKey = () => ['revokeRolePermission'] as const;
+
+export const getRevokeRolePermissionMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof revokeRolePermission>>, TError,RevokeRolePermissionMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof revokeRolePermission>>, TError,RevokeRolePermissionMutationVariables, TContext> => {
+
+const mutationKey = getRevokeRolePermissionMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof revokeRolePermission>>, RevokeRolePermissionMutationVariables> = (props) => {
+          const {workspacePublicId,rolePublicId,data} = props ?? {};
+
+          return  revokeRolePermission(workspacePublicId,rolePublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type RevokeRolePermissionMutationResult = NonNullable<Awaited<ReturnType<typeof revokeRolePermission>>>
+    export type RevokeRolePermissionMutationBody = PermissionActionDto
+    export type RevokeRolePermissionMutationError = unknown
+    export type RevokeRolePermissionMutationVariables = {workspacePublicId: string;rolePublicId: string;data: PermissionActionDto}
+
+    /** @summary Revoke permission from role */
+export const useRevokeRolePermission = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof revokeRolePermission>>, TError,RevokeRolePermissionMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof revokeRolePermission>>,
+        TError,
+        RevokeRolePermissionMutationVariables,
+        TContext
+      > => {
+      return useMutation(getRevokeRolePermissionMutationOptions(options), queryClient);
     }
