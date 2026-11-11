@@ -1092,6 +1092,363 @@
           "Invites"
         ]
       }
+    },
+    "/workspaces": {
+      "get": {
+        "operationId": "getWorkspaces",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkspaceListItemDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get all workspaces",
+        "tags": [
+          "Workspaces"
+        ]
+      },
+      "post": {
+        "operationId": "createWorkspace",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkspaceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceCreateResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a workspace",
+        "tags": [
+          "Workspaces"
+        ]
+      }
+    },
+    "/workspaces/check-slug-availability": {
+      "get": {
+        "operationId": "checkSlugAvailability",
+        "parameters": [
+          {
+            "name": "workspaceSlug",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "minLength": 3,
+              "maxLength": 64,
+              "pattern": "^(?![-]+$)[a-zA-Z0-9-]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspacePublicId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minLength": 12,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckSlugAvailabilityResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Check if a workspace slug is available",
+        "tags": [
+          "Workspaces"
+        ]
+      }
+    },
+    "/workspaces/has-available-partner-slot": {
+      "get": {
+        "operationId": "hasAvailablePartnerSlot",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Check if the user has an available partner license slot",
+        "tags": [
+          "Workspaces"
+        ]
+      }
+    },
+    "/workspaces/slug/{workspaceSlug}": {
+      "get": {
+        "operationId": "getWorkspaceBySlug",
+        "parameters": [
+          {
+            "name": "workspaceSlug",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceWithBoardsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a workspace by slug",
+        "tags": [
+          "Workspaces"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}": {
+      "get": {
+        "operationId": "getWorkspace",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceDetailResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a workspace by public ID",
+        "tags": [
+          "Workspaces"
+        ]
+      },
+      "put": {
+        "operationId": "updateWorkspace",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWorkspaceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceUpdateResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a workspace",
+        "tags": [
+          "Workspaces"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteWorkspace",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceDeleteResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a workspace",
+        "tags": [
+          "Workspaces"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}/search": {
+      "get": {
+        "operationId": "searchWorkspace",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/SearchBoardResultDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SearchCardResultDto"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Search boards and cards in a workspace",
+        "tags": [
+          "Workspaces"
+        ]
+      }
     }
   },
   "info": {
@@ -1673,6 +2030,537 @@
           },
           "workspaceSlug": {
             "type": "string"
+          }
+        },
+        "required": [
+          "success"
+        ]
+      },
+      "SearchBoardResultDto": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "slug": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "board"
+            ]
+          }
+        },
+        "required": [
+          "publicId",
+          "title",
+          "description",
+          "slug",
+          "updatedAt",
+          "createdAt",
+          "type"
+        ]
+      },
+      "SearchCardResultDto": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "boardPublicId": {
+            "type": "string"
+          },
+          "boardName": {
+            "type": "string"
+          },
+          "listName": {
+            "type": "string"
+          },
+          "cardNumber": {
+            "type": "number",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "card"
+            ]
+          }
+        },
+        "required": [
+          "publicId",
+          "title",
+          "description",
+          "boardPublicId",
+          "boardName",
+          "listName",
+          "cardNumber",
+          "updatedAt",
+          "createdAt",
+          "type"
+        ]
+      },
+      "WorkspaceListItemDto": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "workspace": {
+            "type": "object",
+            "properties": {
+              "publicId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string",
+                "nullable": true
+              },
+              "slug": {
+                "type": "string"
+              },
+              "plan": {
+                "type": "string",
+                "enum": [
+                  "free",
+                  "team",
+                  "pro",
+                  "enterprise"
+                ]
+              },
+              "weekStartDay": {
+                "type": "number",
+                "nullable": true
+              },
+              "cardPrefix": {
+                "type": "string"
+              },
+              "deletedAt": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                "nullable": true
+              }
+            },
+            "required": [
+              "publicId",
+              "name",
+              "description",
+              "slug",
+              "plan",
+              "weekStartDay",
+              "cardPrefix",
+              "deletedAt"
+            ]
+          }
+        },
+        "required": [
+          "role",
+          "workspace"
+        ]
+      },
+      "CheckSlugAvailabilityResponseDto": {
+        "type": "object",
+        "properties": {
+          "isAvailable": {
+            "type": "boolean"
+          },
+          "isReserved": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "isAvailable",
+          "isReserved"
+        ]
+      },
+      "WorkspaceWithBoardsResponseDto": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "slug": {
+            "type": "string"
+          },
+          "boards": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "publicId",
+                "slug",
+                "name"
+              ]
+            }
+          }
+        },
+        "required": [
+          "publicId",
+          "name",
+          "description",
+          "slug",
+          "boards"
+        ]
+      },
+      "WorkspaceDetailResponseDto": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "showEmailsToMembers": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "weekStartDay": {
+            "type": "number",
+            "nullable": true
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "name": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name",
+                    "image"
+                  ],
+                  "nullable": true
+                }
+              },
+              "required": [
+                "publicId",
+                "role",
+                "status",
+                "createdAt",
+                "user"
+              ]
+            }
+          },
+          "subscriptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "plan": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "seats": {
+                  "type": "number",
+                  "nullable": true
+                },
+                "unlimitedSeats": {
+                  "type": "boolean",
+                  "nullable": true
+                },
+                "partnerTier": {
+                  "type": "number",
+                  "nullable": true
+                },
+                "periodStart": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                  "nullable": true
+                },
+                "periodEnd": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "plan",
+                "status",
+                "seats",
+                "unlimitedSeats",
+                "partnerTier",
+                "periodStart",
+                "periodEnd"
+              ]
+            }
+          }
+        },
+        "required": [
+          "publicId",
+          "name",
+          "slug",
+          "showEmailsToMembers",
+          "weekStartDay",
+          "members",
+          "subscriptions"
+        ]
+      },
+      "CreateWorkspaceDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 280
+          },
+          "slug": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 64,
+                "pattern": "^(?![-]+$)[a-zA-Z0-9-]+$"
+              },
+              {
+                "type": "string",
+                "maxLength": 0
+              }
+            ]
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "WorkspaceCreateResponseDto": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "plan": {
+            "type": "string",
+            "enum": [
+              "free",
+              "team",
+              "pro",
+              "enterprise"
+            ]
+          },
+          "cardPrefix": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "publicId",
+          "name",
+          "slug",
+          "description",
+          "plan",
+          "cardPrefix"
+        ]
+      },
+      "UpdateWorkspaceDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          "slug": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^(?![-]+$)[a-zA-Z0-9-]+$"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 280
+          },
+          "showEmailsToMembers": {
+            "type": "boolean"
+          },
+          "weekStartDay": {
+            "anyOf": [
+              {
+                "type": "number",
+                "enum": [
+                  0
+                ]
+              },
+              {
+                "type": "number",
+                "enum": [
+                  1
+                ]
+              },
+              {
+                "type": "number",
+                "enum": [
+                  6
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "WorkspaceUpdateResponseDto": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "plan": {
+            "type": "string",
+            "enum": [
+              "free",
+              "team",
+              "pro",
+              "enterprise"
+            ]
+          },
+          "showEmailsToMembers": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "weekStartDay": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "publicId",
+          "name",
+          "slug",
+          "description",
+          "plan",
+          "showEmailsToMembers",
+          "weekStartDay"
+        ]
+      },
+      "WorkspaceDeleteResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
           }
         },
         "required": [

@@ -1,8 +1,11 @@
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 
-import { PageHead } from "~/components/PageHead";
+import { getGetWorkspaceQueryKey } from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import Modal from "~/components/modal";
+import { PageHead } from "~/components/PageHead";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
@@ -14,12 +17,12 @@ export default function PermissionsSettings() {
   const { workspace } = useWorkspace();
   const { openModal, isOpen, modalContentType } = useModal();
   const { showPopup } = usePopup();
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
 
   const isAdmin = workspace.role === "admin";
 
-  const resetAllOverrides = api.permission.resetWorkspaceMemberPermissions.useMutation(
-    {
+  const resetAllOverrides =
+    api.permission.resetWorkspaceMemberPermissions.useMutation({
       onSuccess: async () => {
         showPopup({
           header: t`Overrides cleared`,
@@ -29,8 +32,8 @@ export default function PermissionsSettings() {
 
         // Refresh any relevant workspace data
         if (workspace.publicId && workspace.publicId.length >= 12) {
-          await utils.workspace.byId.invalidate({
-            workspacePublicId: workspace.publicId,
+          await queryClient.invalidateQueries({
+            queryKey: getGetWorkspaceQueryKey(workspace.publicId),
           });
         }
       },
@@ -41,8 +44,7 @@ export default function PermissionsSettings() {
           icon: "error",
         });
       },
-    },
-  );
+    });
 
   return (
     <>
@@ -99,5 +101,3 @@ export default function PermissionsSettings() {
     </>
   );
 }
-
-

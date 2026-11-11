@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { env } from "next-runtime-env";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -7,13 +8,18 @@ import { HiCheck, HiXMark } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 import { z } from "zod";
 
+import {
+  getGetWorkspacesQueryKey,
+  useCheckSlugAvailability,
+  useCreateWorkspace,
+} from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { useDebounce } from "~/hooks/useDebounce";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
 import LoadingSpinner from "./LoadingSpinner";
 
 const schema = z.object({
@@ -55,7 +61,7 @@ export function NewWorkspaceForm() {
     },
     mode: "onSubmit",
   });
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
 
   const hasAvailableWorkspaces = availableWorkspaces.length > 0;
 
@@ -74,42 +80,46 @@ export function NewWorkspaceForm() {
     }
   }, [isTyping, debouncedSlug, trigger, clearErrors]);
 
-  const checkWorkspaceSlugAvailability =
-    api.workspace.checkSlugAvailability.useQuery(
-      {
-        workspaceSlug: debouncedSlug ?? "",
-      },
-      {
+  const checkWorkspaceSlugAvailability = useCheckSlugAvailability(
+    { workspaceSlug: debouncedSlug ?? "" },
+    {
+      query: {
         enabled: !!debouncedSlug && debouncedSlug.length >= 3 && !errors.slug,
+        select: (res) => res.data,
       },
-    );
+    },
+  );
 
   const isWorkspaceSlugAvailable = checkWorkspaceSlugAvailability.data;
 
-  const createWorkspace = api.workspace.create.useMutation({
-    onSuccess: (values) => {
-      if (values.publicId && values.name) {
-        void utils.workspace.all.invalidate();
-        switchWorkspace({
-          publicId: values.publicId,
-          name: values.name,
-          description: values.description,
-          slug: values.slug,
-          plan: values.plan,
-          cardPrefix: values.cardPrefix,
-          role: "admin",
-          weekStartDay: 1,
-        });
+  const createWorkspace = useCreateWorkspace({
+    mutation: {
+      onSuccess: ({ data: values }) => {
+        if (values.publicId && values.name) {
+          void queryClient.invalidateQueries({
+            queryKey: getGetWorkspacesQueryKey(),
+          });
+          switchWorkspace({
+            publicId: values.publicId,
+            name: values.name,
+            description: values.description,
+            slug: values.slug,
+            plan: values.plan,
+            cardPrefix: values.cardPrefix,
+            role: "admin",
+            weekStartDay: 1,
+          });
 
-        closeModal();
-      }
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to create workspace`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
+          closeModal();
+        }
+      },
+      onError: () => {
+        showPopup({
+          header: t`Unable to create workspace`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
     },
   });
 
@@ -128,8 +138,7 @@ export function NewWorkspaceForm() {
     }
 
     createWorkspace.mutate({
-      name: values.name,
-      slug: values.slug,
+      data: { name: values.name, slug: values.slug },
     });
   };
 

@@ -1,16 +1,19 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
+import { useQueryClient } from "@tanstack/react-query";
 
-import { useDeleteMember } from "@kan/api-client/hooks";
+import {
+  getGetWorkspaceQueryKey,
+  useDeleteMember,
+} from "@kan/api-client/hooks";
 
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
 
 export function DeleteMemberConfirmation() {
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
   const { closeModal, entityLabel, entityId } = useModal();
   const { workspace } = useWorkspace();
   const { showPopup } = usePopup();
@@ -20,7 +23,9 @@ export function DeleteMemberConfirmation() {
       onSuccess: async () => {
         closeModal();
         try {
-          await utils.workspace.byId.refetch();
+          await queryClient.refetchQueries({
+            queryKey: getGetWorkspaceQueryKey(workspace.publicId),
+          });
         } catch (e) {
           console.error(e);
         }

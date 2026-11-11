@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import { AuthPage } from "../support/pages/auth-page";
 import { BoardPage } from "../support/pages/board-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
@@ -21,15 +22,12 @@ test(
     await dashboard.expectSignedInAs(user);
 
     const secondWorkspaceResponse = await page.request.post(
-      "/api/trpc/workspace.create?batch=1",
-      { data: { "0": { json: { name: "Second Workspace" } } } },
+      `${apiBaseURL}/workspaces`,
+      { data: { name: "Second Workspace" } },
     );
     expect(secondWorkspaceResponse.ok()).toBe(true);
-    const secondWorkspaceBody = (await secondWorkspaceResponse.json()) as [
-      { result: { data: { json: { publicId: string } } } },
-    ];
-    const secondWorkspacePublicId =
-      secondWorkspaceBody[0].result.data.json.publicId;
+    const { publicId: secondWorkspacePublicId } =
+      (await secondWorkspaceResponse.json()) as { publicId: string };
 
     await board.createBoard("E2E Test Board");
     const boardPublicId = page.url().split("/boards/")[1];

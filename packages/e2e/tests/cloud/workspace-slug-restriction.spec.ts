@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import { AuthPage } from "../support/pages/auth-page";
 import { CloudOnboardingPage } from "../support/pages/cloud-onboarding-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
@@ -46,25 +47,14 @@ test(
     );
     expect(workspacePublicId).toBeTruthy();
 
-    const response = await page.request.post(
-      "/api/trpc/workspace.update?batch=1",
-      {
-        data: {
-          "0": {
-            json: {
-              workspacePublicId,
-              slug: `e2e-slug-${Date.now()}`,
-            },
-          },
-        },
-      },
+    const response = await page.request.put(
+      `${apiBaseURL}/workspaces/${workspacePublicId}`,
+      { data: { slug: `e2e-slug-${Date.now()}` } },
     );
 
     expect(response.status()).toBe(403);
-    const body = (await response.json()) as [
-      { error: { json: { message: string } } },
-    ];
-    expect(body[0].error.json.message).toBe(
+    const body = (await response.json()) as { message: string };
+    expect(body.message).toBe(
       "Workspace slug cannot be changed in cloud without upgrading to a paid plan",
     );
   },

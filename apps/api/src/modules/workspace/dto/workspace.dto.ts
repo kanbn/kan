@@ -113,7 +113,7 @@ export const CreateWorkspaceSchema = z.object({
     .max(64)
     .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/)
     .optional()
-    .or(z.literal("")),
+    .or(z.string().max(0)),
 });
 
 export class CreateWorkspaceDto extends createZodDto(CreateWorkspaceSchema) {}

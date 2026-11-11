@@ -7,6 +7,7 @@ import { twMerge } from "tailwind-merge";
 import {
   getGetBoardMembersQueryKey,
   useGetBoardMembers,
+  useGetWorkspace,
   useUpdateBoardMemberRole,
 } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
@@ -49,10 +50,12 @@ export default function BoardMembersView() {
   const boardMembers = boardMembersResult?.data;
 
   // board.byId only returns people already on the board, so fetch the full roster separately.
-  const { data: workspaceData } = api.workspace.byId.useQuery(
-    { workspacePublicId: workspace.publicId },
-    { enabled: workspace.publicId.length >= 12 },
-  );
+  const { data: workspaceData } = useGetWorkspace(workspace.publicId, {
+    query: {
+      enabled: workspace.publicId.length >= 12,
+      select: (res) => res.data,
+    },
+  });
   const workspaceMembers = workspaceData?.members ?? [];
 
   const myMembership = boardMembers?.find(

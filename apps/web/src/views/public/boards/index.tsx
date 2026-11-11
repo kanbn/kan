@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { t } from "@lingui/core/macro";
+import { useEffect } from "react";
+
+import { useGetWorkspaceBySlug } from "@kan/api-client/hooks";
+
 import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
-import { api } from "~/utils/api";
+import { getApiErrorStatus } from "~/utils/apiError";
 
 export default function PublicBoardsView() {
   const router = useRouter();
@@ -13,17 +16,17 @@ export default function PublicBoardsView() {
     ? router.query.workspaceSlug[0]
     : router.query.workspaceSlug;
 
-  const { data, isLoading, error } = api.workspace.bySlug.useQuery(
+  const { data, isLoading, error } = useGetWorkspaceBySlug(
+    workspaceSlug ?? "",
     {
-      workspaceSlug: workspaceSlug ?? "",
+      query: { enabled: !!workspaceSlug, select: (res) => res.data },
     },
-    { enabled: !!workspaceSlug },
   );
 
   // Redirect to 404 if workspace doesn't exist
   useEffect(() => {
     if (router.isReady && workspaceSlug && !isLoading) {
-      if (error?.data?.code === "NOT_FOUND" || (!data && !isLoading)) {
+      if (getApiErrorStatus(error) === 404 || (!data && !isLoading)) {
         router.replace("/404");
       }
     }

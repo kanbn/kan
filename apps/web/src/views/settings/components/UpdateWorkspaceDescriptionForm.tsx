@@ -1,12 +1,17 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+import {
+  getGetWorkspacesQueryKey,
+  useUpdateWorkspace,
+} from "@kan/api-client/hooks";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 const UpdateWorkspaceDescriptionForm = ({
   workspacePublicId,
@@ -17,7 +22,7 @@ const UpdateWorkspaceDescriptionForm = ({
   workspaceDescription: string;
   disabled?: boolean;
 }) => {
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
   const { showPopup } = usePopup();
 
   const schema = z.object({
@@ -44,33 +49,37 @@ const UpdateWorkspaceDescriptionForm = ({
     },
   });
 
-  const updateWorkspaceDescription = api.workspace.update.useMutation({
-    onSuccess: async () => {
-      showPopup({
-        header: t`Workspace description updated`,
-        message: t`Your workspace description has been updated.`,
-        icon: "success",
-      });
-      try {
-        await utils.workspace.all.refetch();
-      } catch (e) {
-        console.error(e);
-        throw e;
-      }
-    },
-    onError: () => {
-      showPopup({
-        header: t`Error updating workspace description`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
+  const updateWorkspaceDescription = useUpdateWorkspace({
+    mutation: {
+      onSuccess: async () => {
+        showPopup({
+          header: t`Workspace description updated`,
+          message: t`Your workspace description has been updated.`,
+          icon: "success",
+        });
+        try {
+          await queryClient.refetchQueries({
+            queryKey: getGetWorkspacesQueryKey(),
+          });
+        } catch (e) {
+          console.error(e);
+          throw e;
+        }
+      },
+      onError: () => {
+        showPopup({
+          header: t`Error updating workspace description`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
     },
   });
 
   const onSubmit = (data: FormValues) => {
     updateWorkspaceDescription.mutate({
       workspacePublicId,
-      description: data.description,
+      data: { description: data.description },
     });
   };
 
