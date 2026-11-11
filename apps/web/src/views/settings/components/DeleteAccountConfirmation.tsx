@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { t } from "@lingui/core/macro";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { authClient } from "@kan/auth/client";
@@ -8,14 +8,13 @@ import { authClient } from "@kan/auth/client";
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 export function DeleteAccountConfirmation() {
   const { closeModal } = useModal();
   const { showPopup } = usePopup();
   const router = useRouter();
 
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
 
   const [isAcknowledgmentChecked, setIsAcknowledgmentChecked] = useState(false);
 
@@ -29,7 +28,7 @@ export function DeleteAccountConfirmation() {
         icon: "success",
       });
 
-      utils.invalidate();
+      void queryClient.invalidateQueries();
 
       router.push("/");
     },

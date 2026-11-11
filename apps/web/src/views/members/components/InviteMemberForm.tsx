@@ -12,7 +12,6 @@ import {
 } from "react-icons/hi2";
 import { z } from "zod";
 
-import type { InviteMemberInput } from "@kan/api/types";
 import type { Subscription } from "@kan/shared/utils";
 import {
   getGetWorkspaceQueryKey,
@@ -31,6 +30,11 @@ import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { getApiErrorStatus } from "~/utils/apiError";
 import { useBoardCache } from "~/utils/boardCache";
+
+interface InviteMemberInput {
+  email: string;
+  workspacePublicId: string;
+}
 
 export function InviteMemberForm({
   subscriptions,

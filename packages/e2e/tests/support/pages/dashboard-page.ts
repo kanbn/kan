@@ -1,7 +1,7 @@
 import type { Page } from "@playwright/test";
 
 import type { TestUser } from "../test-user";
-import { waitForResponsePath } from "../wait-for-trpc";
+import { waitForResponsePath } from "../wait-for-api";
 
 export class DashboardPage {
   constructor(private readonly page: Page) {}

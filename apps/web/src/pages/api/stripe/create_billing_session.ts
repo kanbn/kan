@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { env } from "next-runtime-env";
 
-import { createNextApiContext } from "@kan/api/trpc-context";
+import { createNextApiContext } from "@kan/api/context";
 import { withApiLogging } from "@kan/api/utils/apiLogging";
 import { withRateLimit } from "@kan/api/utils/rateLimit";
 import { createStripeClient } from "@kan/stripe";

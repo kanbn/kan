@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { describe, expect, it, vi } from "vitest";
 
 const createNextApiContext = vi.fn().mockRejectedValue(new Error("no auth"));
-vi.mock("../trpc-context", () => ({
+vi.mock("../context", () => ({
   createNextApiContext: (req: NextApiRequest) => createNextApiContext(req),
 }));
 

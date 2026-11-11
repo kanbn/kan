@@ -1,11 +1,7 @@
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 
-import {
-  waitForApi,
-  waitForResponsePath,
-  waitForTrpcMutation,
-} from "../wait-for-trpc";
+import { waitForApi, waitForResponsePath } from "../wait-for-api";
 
 export class CardPage {
   constructor(private readonly page: Page) {}

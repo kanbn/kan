@@ -5,7 +5,7 @@ import { BoardPage } from "../support/pages/board-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
 import { createTestUser } from "../support/test-user";
-import { waitForResponsePath } from "../support/wait-for-trpc";
+import { waitForResponsePath } from "../support/wait-for-api";
 
 test(
   "an optimistic list cannot be mutated before the server assigns its ID",

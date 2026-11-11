@@ -11,18 +11,6 @@ export function waitForResponsePath(
   );
 }
 
-export function waitForTrpcMutation(page: Page, procedure: string) {
-  return waitForResponsePath(page, `/api/trpc/${procedure}`);
-}
-
-export function waitForTrpcQuery(page: Page, procedure: string) {
-  return page.waitForResponse(
-    (res) =>
-      res.url().includes(`/api/trpc/${procedure}`) &&
-      res.request().method() === "GET",
-  );
-}
-
 export function waitForApi(page: Page, method: string, pathname: RegExp) {
   return page.waitForResponse(
     (res) =>

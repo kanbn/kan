@@ -7,7 +7,7 @@ import { BoardPage } from "../support/pages/board-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
 import { createTestUser } from "../support/test-user";
-import { waitForApi } from "../support/wait-for-trpc";
+import { waitForApi } from "../support/wait-for-api";
 
 async function pastePlainText(locator: Locator, value: string) {
   await locator.click();

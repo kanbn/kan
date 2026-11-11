@@ -12,11 +12,11 @@ import {
   HiXMark,
 } from "react-icons/hi2";
 
-import type { NewCardInput } from "@kan/api/types";
 import { generateUID } from "@kan/shared/utils";
 
 import type { WorkspaceMember } from "~/components/Editor";
 import type { BoardDetail } from "~/utils/boardCache";
+import type { CreateCardInput } from "~/utils/cardMutations";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
@@ -34,7 +34,7 @@ import { useBoardCache } from "~/utils/boardCache";
 import { createCardFromInput } from "~/utils/cardMutations";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 
-type NewCardFormInput = NewCardInput & {
+type NewCardFormInput = CreateCardInput & {
   isCreateAnotherEnabled: boolean;
   dueDate?: Date | null;
 };

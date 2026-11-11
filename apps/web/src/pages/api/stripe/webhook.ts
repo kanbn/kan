@@ -2,7 +2,7 @@ import { randomUUID } from "crypto";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Readable } from "node:stream";
 
-import { createNextApiContext } from "@kan/api/trpc-context";
+import { createNextApiContext } from "@kan/api/context";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";

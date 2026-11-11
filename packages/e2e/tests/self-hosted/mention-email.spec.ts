@@ -14,7 +14,7 @@ import { DashboardPage } from "../support/pages/dashboard-page";
 import { MembersPage } from "../support/pages/members-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
 import { createTestUser } from "../support/test-user";
-import { waitForApi } from "../support/wait-for-trpc";
+import { waitForApi } from "../support/wait-for-api";
 
 async function joinWorkspace(
   ownerPage: Page,

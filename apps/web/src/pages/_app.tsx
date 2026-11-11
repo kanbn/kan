@@ -5,6 +5,7 @@ import type { NextPage } from "next";
 import type { AppProps, AppType } from "next/app";
 import type { ReactElement, ReactNode } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { env } from "next-runtime-env";
 import { ThemeProvider } from "next-themes";
 import posthog from "posthog-js";
@@ -16,7 +17,8 @@ import { KeyboardShortcutProvider } from "~/providers/keyboard-shortcuts";
 import { LinguiProviderWrapper } from "~/providers/lingui";
 import { ModalProvider } from "~/providers/modal";
 import { PopupProvider } from "~/providers/popup";
-import { api } from "~/utils/api";
+
+const queryClient = new QueryClient();
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -61,32 +63,34 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
       `}</style>
       <script src="/__ENV.js" />
       <main className="font-sans">
-        <KeyboardShortcutProvider>
-          <LinguiProviderWrapper>
-            <FontSizeProvider>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-              >
-                <ModalProvider>
-                  <PopupProvider>
-                    {posthogKey ? (
-                      <PostHogProvider client={posthog}>
-                        {getLayout(<Component {...pageProps} />)}
-                      </PostHogProvider>
-                    ) : (
-                      getLayout(<Component {...pageProps} />)
-                    )}
-                  </PopupProvider>
-                </ModalProvider>
-              </ThemeProvider>
-            </FontSizeProvider>
-          </LinguiProviderWrapper>
-        </KeyboardShortcutProvider>
+        <QueryClientProvider client={queryClient}>
+          <KeyboardShortcutProvider>
+            <LinguiProviderWrapper>
+              <FontSizeProvider>
+                <ThemeProvider
+                  attribute="class"
+                  defaultTheme="system"
+                  enableSystem
+                >
+                  <ModalProvider>
+                    <PopupProvider>
+                      {posthogKey ? (
+                        <PostHogProvider client={posthog}>
+                          {getLayout(<Component {...pageProps} />)}
+                        </PostHogProvider>
+                      ) : (
+                        getLayout(<Component {...pageProps} />)
+                      )}
+                    </PopupProvider>
+                  </ModalProvider>
+                </ThemeProvider>
+              </FontSizeProvider>
+            </LinguiProviderWrapper>
+          </KeyboardShortcutProvider>
+        </QueryClientProvider>
       </main>
     </>
   );
 };
 
-export default api.withTRPC(MyApp);
+export default MyApp;
