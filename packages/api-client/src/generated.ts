@@ -25,6 +25,49 @@ import type {
 } from '@tanstack/react-query';
 
 import { customFetch } from './mutator/custom-fetch';
+export interface GenerateUploadUrlDto {
+  /**
+     * @minLength 1
+     * @maxLength 255
+     */
+  filename: string;
+  contentType: string;
+  /**
+     * @maximum 52428800
+     * @exclusiveMinimum 0
+     */
+  size: number;
+}
+
+export interface UploadUrlResponseDtoOutput {
+  url: string;
+  key: string;
+}
+
+export interface ConfirmAttachmentDto {
+  s3Key: string;
+  filename: string;
+  originalFilename: string;
+  contentType: string;
+  /** @exclusiveMinimum 0 */
+  size: number;
+}
+
+export interface AttachmentResponseDtoOutput {
+  publicId: string;
+  filename: string;
+  originalFilename: string;
+  contentType: string;
+  size: number;
+  s3Key: string;
+  /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$ */
+  createdAt: string;
+}
+
+export interface DeleteAttachmentResponseDtoOutput {
+  success: boolean;
+}
+
 export type BoardMemberDtoOutputRole = typeof BoardMemberDtoOutputRole[keyof typeof BoardMemberDtoOutputRole];
 
 
@@ -388,6 +431,47 @@ export interface GetRolePermissionsResponseDtoOutput {
   permissions: string[];
 }
 
+/**
+ * @nullable
+ */
+export type UserResponseDtoOutputApiKey = {
+  id: number;
+  /** @nullable */
+  prefix: string | null;
+} | null;
+
+export interface UserResponseDtoOutput {
+  id: string;
+  email: string;
+  /** @nullable */
+  name: string | null;
+  /** @nullable */
+  image: string | null;
+  /** @nullable */
+  stripeCustomerId: string | null;
+  hasPassword: boolean;
+  hasMagicLinkAccount: boolean;
+  /** @nullable */
+  apiKey: UserResponseDtoOutputApiKey;
+}
+
+export interface UpdateUserDto {
+  name?: string;
+  image?: string;
+}
+
+export interface UpdateUserResponseDtoOutput {
+  /** @nullable */
+  name: string | null;
+  /** @nullable */
+  image: string | null;
+}
+
+export interface SetPasswordDto {
+  /** @minLength 8 */
+  newPassword: string;
+}
+
 export type SearchBoardResultDtoType = typeof SearchBoardResultDtoType[keyof typeof SearchBoardResultDtoType];
 
 
@@ -672,6 +756,291 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   }
   return result;
 };
+
+export type generateAttachmentUploadUrlResponse201 = {
+  data: UploadUrlResponseDtoOutput
+  status: 201
+}
+
+export type generateAttachmentUploadUrlResponseSuccess = (generateAttachmentUploadUrlResponse201) & {
+  headers: Headers;
+};
+;
+
+export type generateAttachmentUploadUrlResponse = (generateAttachmentUploadUrlResponseSuccess)
+
+export const getGenerateAttachmentUploadUrlUrl = (cardPublicId: string,) => {
+
+
+
+
+  return `/cards/${cardPublicId}/attachments/upload-url`
+}
+
+/**
+ * @summary Generate a presigned URL for uploading an attachment
+ */
+export const generateAttachmentUploadUrl = async (cardPublicId: string,
+    generateUploadUrlDto: GenerateUploadUrlDto, options?: Parameters<typeof customFetch>[1]): Promise<generateAttachmentUploadUrlResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<generateAttachmentUploadUrlResponse>(getGenerateAttachmentUploadUrlUrl(cardPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(generateUploadUrlDto)
+  }
+);}
+
+
+
+
+
+export const getGenerateAttachmentUploadUrlMutationKey = () => ['generateAttachmentUploadUrl'] as const;
+
+export const getGenerateAttachmentUploadUrlMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof generateAttachmentUploadUrl>>, TError,GenerateAttachmentUploadUrlMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof generateAttachmentUploadUrl>>, TError,GenerateAttachmentUploadUrlMutationVariables, TContext> => {
+
+const mutationKey = getGenerateAttachmentUploadUrlMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof generateAttachmentUploadUrl>>, GenerateAttachmentUploadUrlMutationVariables> = (props) => {
+          const {cardPublicId,data} = props ?? {};
+
+          return  generateAttachmentUploadUrl(cardPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type GenerateAttachmentUploadUrlMutationResult = NonNullable<Awaited<ReturnType<typeof generateAttachmentUploadUrl>>>
+    export type GenerateAttachmentUploadUrlMutationBody = GenerateUploadUrlDto
+    export type GenerateAttachmentUploadUrlMutationError = unknown
+    export type GenerateAttachmentUploadUrlMutationVariables = {cardPublicId: string;data: GenerateUploadUrlDto}
+
+    /** @summary Generate a presigned URL for uploading an attachment */
+export const useGenerateAttachmentUploadUrl = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof generateAttachmentUploadUrl>>, TError,GenerateAttachmentUploadUrlMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof generateAttachmentUploadUrl>>,
+        TError,
+        GenerateAttachmentUploadUrlMutationVariables,
+        TContext
+      > => {
+      return useMutation(getGenerateAttachmentUploadUrlMutationOptions(options), queryClient);
+    }
+
+export type confirmAttachmentResponse201 = {
+  data: AttachmentResponseDtoOutput
+  status: 201
+}
+
+export type confirmAttachmentResponseSuccess = (confirmAttachmentResponse201) & {
+  headers: Headers;
+};
+;
+
+export type confirmAttachmentResponse = (confirmAttachmentResponseSuccess)
+
+export const getConfirmAttachmentUrl = (cardPublicId: string,) => {
+
+
+
+
+  return `/cards/${cardPublicId}/attachments/confirm`
+}
+
+/**
+ * @summary Confirm an attachment upload and save it to the card
+ */
+export const confirmAttachment = async (cardPublicId: string,
+    confirmAttachmentDto: ConfirmAttachmentDto, options?: Parameters<typeof customFetch>[1]): Promise<confirmAttachmentResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<confirmAttachmentResponse>(getConfirmAttachmentUrl(cardPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(confirmAttachmentDto)
+  }
+);}
+
+
+
+
+
+export const getConfirmAttachmentMutationKey = () => ['confirmAttachment'] as const;
+
+export const getConfirmAttachmentMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof confirmAttachment>>, TError,ConfirmAttachmentMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof confirmAttachment>>, TError,ConfirmAttachmentMutationVariables, TContext> => {
+
+const mutationKey = getConfirmAttachmentMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof confirmAttachment>>, ConfirmAttachmentMutationVariables> = (props) => {
+          const {cardPublicId,data} = props ?? {};
+
+          return  confirmAttachment(cardPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ConfirmAttachmentMutationResult = NonNullable<Awaited<ReturnType<typeof confirmAttachment>>>
+    export type ConfirmAttachmentMutationBody = ConfirmAttachmentDto
+    export type ConfirmAttachmentMutationError = unknown
+    export type ConfirmAttachmentMutationVariables = {cardPublicId: string;data: ConfirmAttachmentDto}
+
+    /** @summary Confirm an attachment upload and save it to the card */
+export const useConfirmAttachment = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof confirmAttachment>>, TError,ConfirmAttachmentMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof confirmAttachment>>,
+        TError,
+        ConfirmAttachmentMutationVariables,
+        TContext
+      > => {
+      return useMutation(getConfirmAttachmentMutationOptions(options), queryClient);
+    }
+
+export type deleteAttachmentResponse200 = {
+  data: DeleteAttachmentResponseDtoOutput
+  status: 200
+}
+
+export type deleteAttachmentResponseSuccess = (deleteAttachmentResponse200) & {
+  headers: Headers;
+};
+;
+
+export type deleteAttachmentResponse = (deleteAttachmentResponseSuccess)
+
+export const getDeleteAttachmentUrl = (attachmentPublicId: string,) => {
+
+
+
+
+  return `/attachments/${attachmentPublicId}`
+}
+
+/**
+ * @summary Delete an attachment
+ */
+export const deleteAttachment = async (attachmentPublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<deleteAttachmentResponse> => {
+
+  return customFetch<deleteAttachmentResponse>(getDeleteAttachmentUrl(attachmentPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+
+export const getDeleteAttachmentMutationKey = () => ['deleteAttachment'] as const;
+
+export const getDeleteAttachmentMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteAttachment>>, TError,DeleteAttachmentMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteAttachment>>, TError,DeleteAttachmentMutationVariables, TContext> => {
+
+const mutationKey = getDeleteAttachmentMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteAttachment>>, DeleteAttachmentMutationVariables> = (props) => {
+          const {attachmentPublicId} = props ?? {};
+
+          return  deleteAttachment(attachmentPublicId,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteAttachmentMutationResult = NonNullable<Awaited<ReturnType<typeof deleteAttachment>>>
+
+    export type DeleteAttachmentMutationError = unknown
+    export type DeleteAttachmentMutationVariables = {attachmentPublicId: string}
+
+    /** @summary Delete an attachment */
+export const useDeleteAttachment = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteAttachment>>, TError,DeleteAttachmentMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteAttachment>>,
+        TError,
+        DeleteAttachmentMutationVariables,
+        TContext
+      > => {
+      return useMutation(getDeleteAttachmentMutationOptions(options), queryClient);
+    }
 
 export type getBoardMembersResponse200 = {
   data: BoardMemberDtoOutput[]
@@ -4646,6 +5015,318 @@ export const useRevokeRolePermission = <TError = unknown,
         TContext
       > => {
       return useMutation(getRevokeRolePermissionMutationOptions(options), queryClient);
+    }
+
+export type getUserResponse200 = {
+  data: UserResponseDtoOutput
+  status: 200
+}
+
+export type getUserResponseSuccess = (getUserResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getUserResponse = (getUserResponseSuccess)
+
+export const getGetUserUrl = () => {
+
+
+
+
+  return `/users/me`
+}
+
+/**
+ * @summary Get the current user
+ */
+export const getUser = async ( options?: Parameters<typeof customFetch>[1]): Promise<getUserResponse> => {
+
+  return customFetch<getUserResponse>(getGetUserUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetUserQueryKey = () => {
+    return [
+    `/users/me`
+    ] as const;
+    }
+
+
+export const getGetUserQueryOptions = <TData = Awaited<ReturnType<typeof getUser>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetUserQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getUser>>> = ({ signal }) => getUser({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetUserQueryResult = NonNullable<Awaited<ReturnType<typeof getUser>>>
+export type GetUserQueryError = unknown
+
+
+/** @summary Get the current user */
+export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getUser>>,
+          TError,
+          Awaited<ReturnType<typeof getUser>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get the current user */
+export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getUser>>,
+          TError,
+          Awaited<ReturnType<typeof getUser>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get the current user */
+export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get the current user */
+export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getUser>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetUserQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type updateUserResponse200 = {
+  data: UpdateUserResponseDtoOutput
+  status: 200
+}
+
+export type updateUserResponseSuccess = (updateUserResponse200) & {
+  headers: Headers;
+};
+;
+
+export type updateUserResponse = (updateUserResponseSuccess)
+
+export const getUpdateUserUrl = () => {
+
+
+
+
+  return `/users`
+}
+
+/**
+ * @summary Update the current user
+ */
+export const updateUser = async (updateUserDto: UpdateUserDto, options?: Parameters<typeof customFetch>[1]): Promise<updateUserResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<updateUserResponse>(getUpdateUserUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(updateUserDto)
+  }
+);}
+
+
+
+
+
+export const getUpdateUserMutationKey = () => ['updateUser'] as const;
+
+export const getUpdateUserMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateUser>>, TError,UpdateUserMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateUser>>, TError,UpdateUserMutationVariables, TContext> => {
+
+const mutationKey = getUpdateUserMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateUser>>, UpdateUserMutationVariables> = (props) => {
+          const {data} = props ?? {};
+
+          return  updateUser(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateUserMutationResult = NonNullable<Awaited<ReturnType<typeof updateUser>>>
+    export type UpdateUserMutationBody = UpdateUserDto
+    export type UpdateUserMutationError = unknown
+    export type UpdateUserMutationVariables = {data: UpdateUserDto}
+
+    /** @summary Update the current user */
+export const useUpdateUser = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateUser>>, TError,UpdateUserMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof updateUser>>,
+        TError,
+        UpdateUserMutationVariables,
+        TContext
+      > => {
+      return useMutation(getUpdateUserMutationOptions(options), queryClient);
+    }
+
+export type setPasswordResponse201 = {
+  data: SuccessResponseDtoOutput
+  status: 201
+}
+
+export type setPasswordResponseSuccess = (setPasswordResponse201) & {
+  headers: Headers;
+};
+;
+
+export type setPasswordResponse = (setPasswordResponseSuccess)
+
+export const getSetPasswordUrl = () => {
+
+
+
+
+  return `/users/me/password`
+}
+
+/**
+ * @summary Set a password for a user who has none yet
+ */
+export const setPassword = async (setPasswordDto: SetPasswordDto, options?: Parameters<typeof customFetch>[1]): Promise<setPasswordResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<setPasswordResponse>(getSetPasswordUrl(),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(setPasswordDto)
+  }
+);}
+
+
+
+
+
+export const getSetPasswordMutationKey = () => ['setPassword'] as const;
+
+export const getSetPasswordMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof setPassword>>, TError,SetPasswordMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof setPassword>>, TError,SetPasswordMutationVariables, TContext> => {
+
+const mutationKey = getSetPasswordMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof setPassword>>, SetPasswordMutationVariables> = (props) => {
+          const {data} = props ?? {};
+
+          return  setPassword(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type SetPasswordMutationResult = NonNullable<Awaited<ReturnType<typeof setPassword>>>
+    export type SetPasswordMutationBody = SetPasswordDto
+    export type SetPasswordMutationError = unknown
+    export type SetPasswordMutationVariables = {data: SetPasswordDto}
+
+    /** @summary Set a password for a user who has none yet */
+export const useSetPassword = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof setPassword>>, TError,SetPasswordMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof setPassword>>,
+        TError,
+        SetPasswordMutationVariables,
+        TContext
+      > => {
+      return useMutation(getSetPasswordMutationOptions(options), queryClient);
     }
 
 export type getWorkspacesResponse200 = {

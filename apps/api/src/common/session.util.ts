@@ -34,3 +34,7 @@ export function sendMagicLinkInvite(
     body: { email: input.email, callbackURL: input.callbackURL },
   });
 }
+
+export function setUserPassword(headers: Headers, newPassword: string) {
+  return auth.api.setPassword({ headers, body: { newPassword } });
+}
