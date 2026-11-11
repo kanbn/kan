@@ -6,6 +6,7 @@ import { twMerge } from "tailwind-merge";
 
 import {
   getGetBoardMembersQueryKey,
+  useGetBoard,
   useGetBoardMembers,
   useGetWorkspace,
   useUpdateBoardMemberRole,
@@ -20,7 +21,6 @@ import { PageHead } from "~/components/PageHead";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { AddBoardMemberForm } from "./components/AddBoardMemberForm";
 import { RemoveBoardMemberConfirmation } from "./components/RemoveBoardMemberConfirmation";
@@ -37,10 +37,9 @@ export default function BoardMembersView() {
 
   const enabled = boardPublicId.length >= 12;
 
-  const { data: board } = api.board.byId.useQuery(
-    { boardPublicId },
-    { enabled },
-  );
+  const { data: board } = useGetBoard(boardPublicId, undefined, {
+    query: { enabled, select: (res) => res.data },
+  });
 
   const {
     data: boardMembersResult,

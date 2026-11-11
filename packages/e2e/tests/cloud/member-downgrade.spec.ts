@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import {
   hasRealStripeCredentials,
   setupStripeWebhookForwarding,
@@ -86,9 +87,7 @@ test(
       page.getByRole("row", { name: new RegExp(userB.email) }),
     ).toContainText("Paused");
 
-    const boardAllUrl = `/api/trpc/board.all?batch=1&input=${encodeURIComponent(
-      JSON.stringify({ "0": { json: { workspacePublicId } } }),
-    )}`;
+    const boardAllUrl = `${apiBaseURL}/workspaces/${workspacePublicId}/boards`;
 
     const ownerBoardsResponse = await page.request.get(boardAllUrl);
     expect(ownerBoardsResponse.ok()).toBe(true);

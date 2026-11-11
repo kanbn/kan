@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import { AuthPage } from "../support/pages/auth-page";
 import { BoardPage } from "../support/pages/board-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
@@ -28,24 +29,16 @@ test(
     await board.updateBoardSlug(newSlug);
 
     const response = await page.request.get(
-      `/api/trpc/board.byId?batch=1&input=${encodeURIComponent(
-        JSON.stringify({ "0": { json: { boardPublicId } } }),
-      )}`,
+      `${apiBaseURL}/boards/${boardPublicId}`,
     );
-    const body = (await response.json()) as [
-      { result: { data: { json: { slug: string } } } },
-    ];
-    expect(body[0].result.data.json.slug).toBe(newSlug);
+    const body = (await response.json()) as { slug: string };
+    expect(body.slug).toBe(newSlug);
 
     await board.updateBoardSlug("x");
     const shortSlugResponse = await page.request.get(
-      `/api/trpc/board.byId?batch=1&input=${encodeURIComponent(
-        JSON.stringify({ "0": { json: { boardPublicId } } }),
-      )}`,
+      `${apiBaseURL}/boards/${boardPublicId}`,
     );
-    const shortSlugBody = (await shortSlugResponse.json()) as [
-      { result: { data: { json: { slug: string } } } },
-    ];
-    expect(shortSlugBody[0].result.data.json.slug).toBe("x");
+    const shortSlugBody = (await shortSlugResponse.json()) as { slug: string };
+    expect(shortSlugBody.slug).toBe("x");
   },
 );

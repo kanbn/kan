@@ -3,12 +3,14 @@ import { t } from "@lingui/core/macro";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { useBoardCache } from "~/utils/boardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
 export function CardContextMoveListModal() {
   const { entityId: cardPublicId, closeModal } = useModal();
   const { showPopup } = usePopup();
   const utils = api.useUtils();
+  const boardCache = useBoardCache();
 
   const { data: card, isLoading } = api.card.byId.useQuery(
     { cardPublicId: cardPublicId ?? "" },
@@ -46,7 +48,7 @@ export function CardContextMoveListModal() {
     onSettled: async () => {
       if (cardPublicId) {
         await invalidateCard(utils, cardPublicId);
-        await utils.board.byId.invalidate();
+        await boardCache.invalidate();
       }
     },
   });
@@ -79,7 +81,7 @@ export function CardContextMoveListModal() {
           ))}
         </div>
       ) : (
-        <div className="max-h-[60vh] overflow-y-auto pr-1 scrollbar scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600">
+        <div className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] max-h-[60vh] overflow-y-auto pr-1 scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600">
           <ul className="space-y-1">
             {lists.map((list) => (
               <li key={list.publicId}>

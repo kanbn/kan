@@ -25,6 +25,341 @@ import type {
 } from '@tanstack/react-query';
 
 import { customFetch } from './mutator/custom-fetch';
+export type BoardListItemDtoOutputListsItem = {
+  publicId: string;
+  name: string;
+  index: number;
+};
+
+export type BoardListItemDtoOutputLabelsItem = {
+  publicId: string;
+  name: string;
+  /** @nullable */
+  colourCode: string | null;
+};
+
+export interface BoardListItemDtoOutput {
+  publicId: string;
+  name: string;
+  favorite: boolean;
+  lists: BoardListItemDtoOutputListsItem[];
+  labels: BoardListItemDtoOutputLabelsItem[];
+}
+
+export type CreateBoardDtoType = typeof CreateBoardDtoType[keyof typeof CreateBoardDtoType];
+
+
+export const CreateBoardDtoType = {
+  regular: 'regular',
+  template: 'template',
+} as const;
+
+export interface CreateBoardDto {
+  /**
+     * @minLength 1
+     * @maxLength 100
+     */
+  name: string;
+  /** @items.minLength 1 */
+  lists: string[];
+  /** @items.minLength 1 */
+  labels: string[];
+  type?: CreateBoardDtoType;
+  /** @minLength 12 */
+  sourceBoardPublicId?: string;
+}
+
+export interface BoardCreateResponseDtoOutput {
+  publicId: string;
+  name: string;
+}
+
+export type BoardDetailDtoOutputVisibility = typeof BoardDetailDtoOutputVisibility[keyof typeof BoardDetailDtoOutputVisibility];
+
+
+export const BoardDetailDtoOutputVisibility = {
+  private: 'private',
+  public: 'public',
+} as const;
+
+/**
+ * @nullable
+ */
+export type BoardDetailDtoOutputWorkspaceMembersItemUser = {
+  /** @nullable */
+  id: string | null;
+  /** @nullable */
+  name: string | null;
+  email: string;
+  /** @nullable */
+  image: string | null;
+} | null;
+
+export type BoardDetailDtoOutputWorkspaceMembersItem = {
+  publicId: string;
+  email: string;
+  status: string;
+  /** @nullable */
+  user: BoardDetailDtoOutputWorkspaceMembersItemUser;
+};
+
+export type BoardDetailDtoOutputWorkspace = {
+  publicId: string;
+  cardPrefix: string;
+  members: BoardDetailDtoOutputWorkspaceMembersItem[];
+};
+
+export type BoardDetailDtoOutputLabelsItem = {
+  publicId: string;
+  name: string;
+  /** @nullable */
+  colourCode: string | null;
+};
+
+export type BoardDetailDtoOutputListsItemCardsItemLabelsItem = {
+  publicId: string;
+  name: string;
+  /** @nullable */
+  colourCode: string | null;
+};
+
+/**
+ * @nullable
+ */
+export type BoardDetailDtoOutputListsItemCardsItemMembersItemUser = {
+  /** @nullable */
+  name: string | null;
+  email: string;
+  /** @nullable */
+  image: string | null;
+} | null;
+
+export type BoardDetailDtoOutputListsItemCardsItemMembersItem = {
+  publicId: string;
+  email: string;
+  /** @nullable */
+  user: BoardDetailDtoOutputListsItemCardsItemMembersItemUser;
+};
+
+export type BoardDetailDtoOutputListsItemCardsItemAttachmentsItem = {
+  publicId: string;
+};
+
+export type BoardDetailDtoOutputListsItemCardsItemChecklistsItemItemsItem = {
+  publicId: string;
+  title: string;
+  completed: boolean;
+  index: number;
+};
+
+export type BoardDetailDtoOutputListsItemCardsItemChecklistsItem = {
+  publicId: string;
+  name: string;
+  index: number;
+  items: BoardDetailDtoOutputListsItemCardsItemChecklistsItemItemsItem[];
+};
+
+export type BoardDetailDtoOutputListsItemCardsItemCommentsItem = {
+  publicId: string;
+};
+
+export type BoardDetailDtoOutputListsItemCardsItemSummary = {
+  hasDescription: boolean;
+  /**
+     * @minimum 0
+     * @maximum 9007199254740991
+     */
+  attachmentCount: number;
+  hasComments: boolean;
+  /**
+     * @minimum 0
+     * @maximum 9007199254740991
+     */
+  checklistItemCount: number;
+  /**
+     * @minimum 0
+     * @maximum 9007199254740991
+     */
+  completedChecklistItemCount: number;
+};
+
+export type BoardDetailDtoOutputListsItemCardsItem = {
+  publicId: string;
+  title: string;
+  /** @nullable */
+  description: string | null;
+  index: number;
+  /** @nullable */
+  cardNumber: number | null;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  dueDate: string | null;
+  labels: BoardDetailDtoOutputListsItemCardsItemLabelsItem[];
+  members: BoardDetailDtoOutputListsItemCardsItemMembersItem[];
+  attachments: BoardDetailDtoOutputListsItemCardsItemAttachmentsItem[];
+  checklists: BoardDetailDtoOutputListsItemCardsItemChecklistsItem[];
+  comments: BoardDetailDtoOutputListsItemCardsItemCommentsItem[];
+  summary?: BoardDetailDtoOutputListsItemCardsItemSummary;
+};
+
+export type BoardDetailDtoOutputListsItem = {
+  publicId: string;
+  name: string;
+  index: number;
+  cards: BoardDetailDtoOutputListsItemCardsItem[];
+};
+
+export type BoardDetailDtoOutputAllListsItem = {
+  publicId: string;
+  name: string;
+};
+
+export interface BoardDetailDtoOutput {
+  publicId: string;
+  name: string;
+  slug: string;
+  visibility: BoardDetailDtoOutputVisibility;
+  isArchived: boolean;
+  favorite: boolean;
+  workspace: BoardDetailDtoOutputWorkspace;
+  labels: BoardDetailDtoOutputLabelsItem[];
+  lists: BoardDetailDtoOutputListsItem[];
+  allLists: BoardDetailDtoOutputAllListsItem[];
+}
+
+export type UpdateBoardDtoVisibility = typeof UpdateBoardDtoVisibility[keyof typeof UpdateBoardDtoVisibility];
+
+
+export const UpdateBoardDtoVisibility = {
+  public: 'public',
+  private: 'private',
+} as const;
+
+export interface UpdateBoardDto {
+  /** @minLength 1 */
+  name?: string;
+  /**
+     * @minLength 1
+     * @maxLength 60
+     * @pattern ^(?![-]+$)[a-zA-Z0-9-]+$
+     */
+  slug?: string;
+  visibility?: UpdateBoardDtoVisibility;
+  favorite?: boolean;
+  isArchived?: boolean;
+}
+
+export interface BoardUpdateResponseDtoOutput {
+  success?: boolean;
+  publicId?: string;
+  name?: string;
+}
+
+export interface SuccessResponseDtoOutput {
+  success: boolean;
+}
+
+export interface MoveBoardDto {
+  /** @minLength 12 */
+  targetWorkspacePublicId: string;
+}
+
+export interface BoardSlugAvailabilityDtoOutput {
+  isReserved: boolean;
+}
+
+export type BoardBySlugDtoOutputVisibility = typeof BoardBySlugDtoOutputVisibility[keyof typeof BoardBySlugDtoOutputVisibility];
+
+
+export const BoardBySlugDtoOutputVisibility = {
+  private: 'private',
+  public: 'public',
+} as const;
+
+export type BoardBySlugDtoOutputWorkspace = {
+  publicId: string;
+  name: string;
+  slug: string;
+};
+
+export type BoardBySlugDtoOutputLabelsItem = {
+  publicId: string;
+  name: string;
+  /** @nullable */
+  colourCode: string | null;
+};
+
+export type BoardBySlugDtoOutputListsItemCardsItemLabelsItem = {
+  publicId: string;
+  name: string;
+  /** @nullable */
+  colourCode: string | null;
+};
+
+export type BoardBySlugDtoOutputListsItemCardsItemAttachmentsItem = {
+  publicId: string;
+};
+
+export type BoardBySlugDtoOutputListsItemCardsItemChecklistsItemItemsItem = {
+  publicId: string;
+  title: string;
+  completed: boolean;
+  index: number;
+};
+
+export type BoardBySlugDtoOutputListsItemCardsItemChecklistsItem = {
+  publicId: string;
+  name: string;
+  index: number;
+  items: BoardBySlugDtoOutputListsItemCardsItemChecklistsItemItemsItem[];
+};
+
+export type BoardBySlugDtoOutputListsItemCardsItemCommentsItem = {
+  publicId: string;
+};
+
+export type BoardBySlugDtoOutputListsItemCardsItem = {
+  publicId: string;
+  title: string;
+  /** @nullable */
+  description: string | null;
+  index: number;
+  /**
+     * @nullable
+     * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+     */
+  dueDate: string | null;
+  labels: BoardBySlugDtoOutputListsItemCardsItemLabelsItem[];
+  attachments: BoardBySlugDtoOutputListsItemCardsItemAttachmentsItem[];
+  checklists: BoardBySlugDtoOutputListsItemCardsItemChecklistsItem[];
+  comments: BoardBySlugDtoOutputListsItemCardsItemCommentsItem[];
+};
+
+export type BoardBySlugDtoOutputListsItem = {
+  publicId: string;
+  name: string;
+  index: number;
+  cards: BoardBySlugDtoOutputListsItemCardsItem[];
+};
+
+export type BoardBySlugDtoOutputAllListsItem = {
+  publicId: string;
+  name: string;
+};
+
+export interface BoardBySlugDtoOutput {
+  publicId: string;
+  name: string;
+  slug: string;
+  visibility: BoardBySlugDtoOutputVisibility;
+  workspace: BoardBySlugDtoOutputWorkspace;
+  labels: BoardBySlugDtoOutputLabelsItem[];
+  lists: BoardBySlugDtoOutputListsItem[];
+  allLists: BoardBySlugDtoOutputAllListsItem[];
+}
+
 export type BoardMemberDtoRole = typeof BoardMemberDtoRole[keyof typeof BoardMemberDtoRole];
 
 
@@ -224,10 +559,6 @@ export interface AuthorizationUrlResponseDtoOutput {
 
 export interface SaveGitHubTokenDto {
   token: string;
-}
-
-export interface SuccessResponseDtoOutput {
-  success: boolean;
 }
 
 export interface GitHubStatusResponseDtoOutput {
@@ -781,6 +1112,98 @@ export interface WorkspaceDeleteResponseDto {
   success: boolean;
 }
 
+export type GetBoardsParams = {
+  type?: GetBoardsType;
+  archived?: GetBoardsArchived;
+};
+
+export type GetBoardsType = typeof GetBoardsType[keyof typeof GetBoardsType];
+
+
+export const GetBoardsType = {
+  regular: 'regular',
+  template: 'template',
+} as const;
+
+export type GetBoardsArchived = typeof GetBoardsArchived[keyof typeof GetBoardsArchived];
+
+
+export const GetBoardsArchived = {
+  true: 'true',
+  false: 'false',
+} as const;
+
+export type GetBoardParams = {
+  /** @items.minLength 12 */
+  members?: string[];
+  /** @items.minLength 12 */
+  labels?: string[];
+  /** @items.minLength 12 */
+  lists?: string[];
+  dueDateFilters?: GetBoardDueDateFiltersItem[];
+  type?: GetBoardType;
+  cardView?: GetBoardCardView;
+};
+
+export type GetBoardDueDateFiltersItem = typeof GetBoardDueDateFiltersItem[keyof typeof GetBoardDueDateFiltersItem];
+
+
+export const GetBoardDueDateFiltersItem = {
+  overdue: 'overdue',
+  today: 'today',
+  tomorrow: 'tomorrow',
+  'next-week': 'next-week',
+  'next-month': 'next-month',
+  'no-due-date': 'no-due-date',
+} as const;
+
+export type GetBoardType = typeof GetBoardType[keyof typeof GetBoardType];
+
+
+export const GetBoardType = {
+  regular: 'regular',
+  template: 'template',
+} as const;
+
+export type GetBoardCardView = typeof GetBoardCardView[keyof typeof GetBoardCardView];
+
+
+export const GetBoardCardView = {
+  full: 'full',
+  summary: 'summary',
+} as const;
+
+export type CheckBoardSlugAvailabilityParams = {
+  /**
+   * @minLength 1
+   * @maxLength 60
+   * @pattern ^(?![-]+$)[a-zA-Z0-9-]+$
+   */
+  boardSlug: string;
+};
+
+export type GetPublicBoardBySlugParams = {
+  /** @items.minLength 12 */
+  members?: string[];
+  /** @items.minLength 12 */
+  labels?: string[];
+  /** @items.minLength 12 */
+  lists?: string[];
+  dueDateFilters?: GetPublicBoardBySlugDueDateFiltersItem[];
+};
+
+export type GetPublicBoardBySlugDueDateFiltersItem = typeof GetPublicBoardBySlugDueDateFiltersItem[keyof typeof GetPublicBoardBySlugDueDateFiltersItem];
+
+
+export const GetPublicBoardBySlugDueDateFiltersItem = {
+  overdue: 'overdue',
+  today: 'today',
+  tomorrow: 'tomorrow',
+  'next-week': 'next-week',
+  'next-month': 'next-month',
+  'no-due-date': 'no-due-date',
+} as const;
+
 export type GetIntegrationAuthorizationUrlParams = {
   provider: GetIntegrationAuthorizationUrlProvider;
 };
@@ -834,6 +1257,929 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   }
   return result;
 };
+
+export type getBoardsResponse200 = {
+  data: BoardListItemDtoOutput[]
+  status: 200
+}
+
+export type getBoardsResponseSuccess = (getBoardsResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getBoardsResponse = (getBoardsResponseSuccess)
+
+export const getGetBoardsUrl = (workspacePublicId: string,
+    params?: GetBoardsParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : String(value))
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/workspaces/${workspacePublicId}/boards?${stringifiedParams}` : `/workspaces/${workspacePublicId}/boards`
+}
+
+/**
+ * @summary List a workspace's boards
+ */
+export const getBoards = async (workspacePublicId: string,
+    params?: GetBoardsParams, options?: Parameters<typeof customFetch>[1]): Promise<getBoardsResponse> => {
+
+  return customFetch<getBoardsResponse>(getGetBoardsUrl(workspacePublicId,params),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetBoardsQueryKey = (workspacePublicId: string,
+    params?: GetBoardsParams,) => {
+    return [
+    `/workspaces/${workspacePublicId}/boards`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getGetBoardsQueryOptions = <TData = Awaited<ReturnType<typeof getBoards>>, TError = unknown>(workspacePublicId: string,
+    params?: GetBoardsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getBoards>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetBoardsQueryKey(workspacePublicId,params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getBoards>>> = ({ signal }) => getBoards(workspacePublicId,params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: workspacePublicId !== null && workspacePublicId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getBoards>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetBoardsQueryResult = NonNullable<Awaited<ReturnType<typeof getBoards>>>
+export type GetBoardsQueryError = unknown
+
+
+/** @summary List a workspace's boards */
+export function useGetBoards<TData = Awaited<ReturnType<typeof getBoards>>, TError = unknown>(
+ workspacePublicId: string,
+    params: undefined |  GetBoardsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getBoards>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getBoards>>,
+          TError,
+          Awaited<ReturnType<typeof getBoards>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary List a workspace's boards */
+export function useGetBoards<TData = Awaited<ReturnType<typeof getBoards>>, TError = unknown>(
+ workspacePublicId: string,
+    params?: GetBoardsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getBoards>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getBoards>>,
+          TError,
+          Awaited<ReturnType<typeof getBoards>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary List a workspace's boards */
+export function useGetBoards<TData = Awaited<ReturnType<typeof getBoards>>, TError = unknown>(
+ workspacePublicId: string,
+    params?: GetBoardsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getBoards>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary List a workspace's boards */
+export function useGetBoards<TData = Awaited<ReturnType<typeof getBoards>>, TError = unknown>(
+ workspacePublicId: string,
+    params?: GetBoardsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getBoards>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetBoardsQueryOptions(workspacePublicId,params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type createBoardResponse201 = {
+  data: BoardCreateResponseDtoOutput
+  status: 201
+}
+
+export type createBoardResponseSuccess = (createBoardResponse201) & {
+  headers: Headers;
+};
+;
+
+export type createBoardResponse = (createBoardResponseSuccess)
+
+export const getCreateBoardUrl = (workspacePublicId: string,) => {
+
+
+
+
+  return `/workspaces/${workspacePublicId}/boards`
+}
+
+/**
+ * @summary Create a board
+ */
+export const createBoard = async (workspacePublicId: string,
+    createBoardDto: CreateBoardDto, options?: Parameters<typeof customFetch>[1]): Promise<createBoardResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<createBoardResponse>(getCreateBoardUrl(workspacePublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(createBoardDto)
+  }
+);}
+
+
+
+
+
+export const getCreateBoardMutationKey = () => ['createBoard'] as const;
+
+export const getCreateBoardMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBoard>>, TError,CreateBoardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createBoard>>, TError,CreateBoardMutationVariables, TContext> => {
+
+const mutationKey = getCreateBoardMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createBoard>>, CreateBoardMutationVariables> = (props) => {
+          const {workspacePublicId,data} = props ?? {};
+
+          return  createBoard(workspacePublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateBoardMutationResult = NonNullable<Awaited<ReturnType<typeof createBoard>>>
+    export type CreateBoardMutationBody = CreateBoardDto
+    export type CreateBoardMutationError = unknown
+    export type CreateBoardMutationVariables = {workspacePublicId: string;data: CreateBoardDto}
+
+    /** @summary Create a board */
+export const useCreateBoard = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createBoard>>, TError,CreateBoardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof createBoard>>,
+        TError,
+        CreateBoardMutationVariables,
+        TContext
+      > => {
+      return useMutation(getCreateBoardMutationOptions(options), queryClient);
+    }
+
+export type getBoardResponse200 = {
+  data: BoardDetailDtoOutput
+  status: 200
+}
+
+export type getBoardResponseSuccess = (getBoardResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getBoardResponse = (getBoardResponseSuccess)
+
+export const getGetBoardUrl = (boardPublicId: string,
+    params?: GetBoardParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    const explodeParameters = ["members","labels","lists","dueDateFilters"];
+
+    if (Array.isArray(value) && explodeParameters.includes(key)) {
+      value.forEach((v) => {
+        normalizedParams.append(key, v === null ? 'null' : String(v));
+      });
+      return;
+    }
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : String(value))
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/boards/${boardPublicId}?${stringifiedParams}` : `/boards/${boardPublicId}`
+}
+
+/**
+ * @summary Get a board by public ID
+ */
+export const getBoard = async (boardPublicId: string,
+    params?: GetBoardParams, options?: Parameters<typeof customFetch>[1]): Promise<getBoardResponse> => {
+
+  return customFetch<getBoardResponse>(getGetBoardUrl(boardPublicId,params),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetBoardQueryKey = (boardPublicId: string,
+    params?: GetBoardParams,) => {
+    return [
+    `/boards/${boardPublicId}`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getGetBoardQueryOptions = <TData = Awaited<ReturnType<typeof getBoard>>, TError = unknown>(boardPublicId: string,
+    params?: GetBoardParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getBoard>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetBoardQueryKey(boardPublicId,params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getBoard>>> = ({ signal }) => getBoard(boardPublicId,params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: boardPublicId !== null && boardPublicId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getBoard>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetBoardQueryResult = NonNullable<Awaited<ReturnType<typeof getBoard>>>
+export type GetBoardQueryError = unknown
+
+
+/** @summary Get a board by public ID */
+export function useGetBoard<TData = Awaited<ReturnType<typeof getBoard>>, TError = unknown>(
+ boardPublicId: string,
+    params: undefined |  GetBoardParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getBoard>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getBoard>>,
+          TError,
+          Awaited<ReturnType<typeof getBoard>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get a board by public ID */
+export function useGetBoard<TData = Awaited<ReturnType<typeof getBoard>>, TError = unknown>(
+ boardPublicId: string,
+    params?: GetBoardParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getBoard>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getBoard>>,
+          TError,
+          Awaited<ReturnType<typeof getBoard>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get a board by public ID */
+export function useGetBoard<TData = Awaited<ReturnType<typeof getBoard>>, TError = unknown>(
+ boardPublicId: string,
+    params?: GetBoardParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getBoard>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get a board by public ID */
+export function useGetBoard<TData = Awaited<ReturnType<typeof getBoard>>, TError = unknown>(
+ boardPublicId: string,
+    params?: GetBoardParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getBoard>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetBoardQueryOptions(boardPublicId,params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type updateBoardResponse200 = {
+  data: BoardUpdateResponseDtoOutput
+  status: 200
+}
+
+export type updateBoardResponseSuccess = (updateBoardResponse200) & {
+  headers: Headers;
+};
+;
+
+export type updateBoardResponse = (updateBoardResponseSuccess)
+
+export const getUpdateBoardUrl = (boardPublicId: string,) => {
+
+
+
+
+  return `/boards/${boardPublicId}`
+}
+
+/**
+ * @summary Update a board
+ */
+export const updateBoard = async (boardPublicId: string,
+    updateBoardDto: UpdateBoardDto, options?: Parameters<typeof customFetch>[1]): Promise<updateBoardResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<updateBoardResponse>(getUpdateBoardUrl(boardPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(updateBoardDto)
+  }
+);}
+
+
+
+
+
+export const getUpdateBoardMutationKey = () => ['updateBoard'] as const;
+
+export const getUpdateBoardMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBoard>>, TError,UpdateBoardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateBoard>>, TError,UpdateBoardMutationVariables, TContext> => {
+
+const mutationKey = getUpdateBoardMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateBoard>>, UpdateBoardMutationVariables> = (props) => {
+          const {boardPublicId,data} = props ?? {};
+
+          return  updateBoard(boardPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateBoardMutationResult = NonNullable<Awaited<ReturnType<typeof updateBoard>>>
+    export type UpdateBoardMutationBody = UpdateBoardDto
+    export type UpdateBoardMutationError = unknown
+    export type UpdateBoardMutationVariables = {boardPublicId: string;data: UpdateBoardDto}
+
+    /** @summary Update a board */
+export const useUpdateBoard = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateBoard>>, TError,UpdateBoardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof updateBoard>>,
+        TError,
+        UpdateBoardMutationVariables,
+        TContext
+      > => {
+      return useMutation(getUpdateBoardMutationOptions(options), queryClient);
+    }
+
+export type deleteBoardResponse200 = {
+  data: SuccessResponseDtoOutput
+  status: 200
+}
+
+export type deleteBoardResponseSuccess = (deleteBoardResponse200) & {
+  headers: Headers;
+};
+;
+
+export type deleteBoardResponse = (deleteBoardResponseSuccess)
+
+export const getDeleteBoardUrl = (boardPublicId: string,) => {
+
+
+
+
+  return `/boards/${boardPublicId}`
+}
+
+/**
+ * @summary Delete a board
+ */
+export const deleteBoard = async (boardPublicId: string, options?: Parameters<typeof customFetch>[1]): Promise<deleteBoardResponse> => {
+
+  return customFetch<deleteBoardResponse>(getDeleteBoardUrl(boardPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+
+export const getDeleteBoardMutationKey = () => ['deleteBoard'] as const;
+
+export const getDeleteBoardMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBoard>>, TError,DeleteBoardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteBoard>>, TError,DeleteBoardMutationVariables, TContext> => {
+
+const mutationKey = getDeleteBoardMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteBoard>>, DeleteBoardMutationVariables> = (props) => {
+          const {boardPublicId} = props ?? {};
+
+          return  deleteBoard(boardPublicId,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteBoardMutationResult = NonNullable<Awaited<ReturnType<typeof deleteBoard>>>
+
+    export type DeleteBoardMutationError = unknown
+    export type DeleteBoardMutationVariables = {boardPublicId: string}
+
+    /** @summary Delete a board */
+export const useDeleteBoard = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBoard>>, TError,DeleteBoardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteBoard>>,
+        TError,
+        DeleteBoardMutationVariables,
+        TContext
+      > => {
+      return useMutation(getDeleteBoardMutationOptions(options), queryClient);
+    }
+
+export type moveBoardResponse201 = {
+  data: SuccessResponseDtoOutput
+  status: 201
+}
+
+export type moveBoardResponseSuccess = (moveBoardResponse201) & {
+  headers: Headers;
+};
+;
+
+export type moveBoardResponse = (moveBoardResponseSuccess)
+
+export const getMoveBoardUrl = (boardPublicId: string,) => {
+
+
+
+
+  return `/boards/${boardPublicId}/move`
+}
+
+/**
+ * @summary Move a board to another workspace
+ */
+export const moveBoard = async (boardPublicId: string,
+    moveBoardDto: MoveBoardDto, options?: Parameters<typeof customFetch>[1]): Promise<moveBoardResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<moveBoardResponse>(getMoveBoardUrl(boardPublicId),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(moveBoardDto)
+  }
+);}
+
+
+
+
+
+export const getMoveBoardMutationKey = () => ['moveBoard'] as const;
+
+export const getMoveBoardMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof moveBoard>>, TError,MoveBoardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof moveBoard>>, TError,MoveBoardMutationVariables, TContext> => {
+
+const mutationKey = getMoveBoardMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof moveBoard>>, MoveBoardMutationVariables> = (props) => {
+          const {boardPublicId,data} = props ?? {};
+
+          return  moveBoard(boardPublicId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type MoveBoardMutationResult = NonNullable<Awaited<ReturnType<typeof moveBoard>>>
+    export type MoveBoardMutationBody = MoveBoardDto
+    export type MoveBoardMutationError = unknown
+    export type MoveBoardMutationVariables = {boardPublicId: string;data: MoveBoardDto}
+
+    /** @summary Move a board to another workspace */
+export const useMoveBoard = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof moveBoard>>, TError,MoveBoardMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof moveBoard>>,
+        TError,
+        MoveBoardMutationVariables,
+        TContext
+      > => {
+      return useMutation(getMoveBoardMutationOptions(options), queryClient);
+    }
+
+export type checkBoardSlugAvailabilityResponse200 = {
+  data: BoardSlugAvailabilityDtoOutput
+  status: 200
+}
+
+export type checkBoardSlugAvailabilityResponseSuccess = (checkBoardSlugAvailabilityResponse200) & {
+  headers: Headers;
+};
+;
+
+export type checkBoardSlugAvailabilityResponse = (checkBoardSlugAvailabilityResponseSuccess)
+
+export const getCheckBoardSlugAvailabilityUrl = (boardPublicId: string,
+    params: CheckBoardSlugAvailabilityParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : String(value))
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/boards/${boardPublicId}/check-slug-availability?${stringifiedParams}` : `/boards/${boardPublicId}/check-slug-availability`
+}
+
+/**
+ * @summary Check if a board slug is available
+ */
+export const checkBoardSlugAvailability = async (boardPublicId: string,
+    params: CheckBoardSlugAvailabilityParams, options?: Parameters<typeof customFetch>[1]): Promise<checkBoardSlugAvailabilityResponse> => {
+
+  return customFetch<checkBoardSlugAvailabilityResponse>(getCheckBoardSlugAvailabilityUrl(boardPublicId,params),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getCheckBoardSlugAvailabilityQueryKey = (boardPublicId: string,
+    params?: CheckBoardSlugAvailabilityParams,) => {
+    return [
+    `/boards/${boardPublicId}/check-slug-availability`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getCheckBoardSlugAvailabilityQueryOptions = <TData = Awaited<ReturnType<typeof checkBoardSlugAvailability>>, TError = unknown>(boardPublicId: string,
+    params: CheckBoardSlugAvailabilityParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof checkBoardSlugAvailability>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getCheckBoardSlugAvailabilityQueryKey(boardPublicId,params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof checkBoardSlugAvailability>>> = ({ signal }) => checkBoardSlugAvailability(boardPublicId,params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: boardPublicId !== null && boardPublicId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof checkBoardSlugAvailability>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type CheckBoardSlugAvailabilityQueryResult = NonNullable<Awaited<ReturnType<typeof checkBoardSlugAvailability>>>
+export type CheckBoardSlugAvailabilityQueryError = unknown
+
+
+/** @summary Check if a board slug is available */
+export function useCheckBoardSlugAvailability<TData = Awaited<ReturnType<typeof checkBoardSlugAvailability>>, TError = unknown>(
+ boardPublicId: string,
+    params: CheckBoardSlugAvailabilityParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof checkBoardSlugAvailability>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof checkBoardSlugAvailability>>,
+          TError,
+          Awaited<ReturnType<typeof checkBoardSlugAvailability>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Check if a board slug is available */
+export function useCheckBoardSlugAvailability<TData = Awaited<ReturnType<typeof checkBoardSlugAvailability>>, TError = unknown>(
+ boardPublicId: string,
+    params: CheckBoardSlugAvailabilityParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof checkBoardSlugAvailability>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof checkBoardSlugAvailability>>,
+          TError,
+          Awaited<ReturnType<typeof checkBoardSlugAvailability>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Check if a board slug is available */
+export function useCheckBoardSlugAvailability<TData = Awaited<ReturnType<typeof checkBoardSlugAvailability>>, TError = unknown>(
+ boardPublicId: string,
+    params: CheckBoardSlugAvailabilityParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof checkBoardSlugAvailability>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Check if a board slug is available */
+export function useCheckBoardSlugAvailability<TData = Awaited<ReturnType<typeof checkBoardSlugAvailability>>, TError = unknown>(
+ boardPublicId: string,
+    params: CheckBoardSlugAvailabilityParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof checkBoardSlugAvailability>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getCheckBoardSlugAvailabilityQueryOptions(boardPublicId,params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export type getPublicBoardBySlugResponse200 = {
+  data: BoardBySlugDtoOutput
+  status: 200
+}
+
+export type getPublicBoardBySlugResponseSuccess = (getPublicBoardBySlugResponse200) & {
+  headers: Headers;
+};
+;
+
+export type getPublicBoardBySlugResponse = (getPublicBoardBySlugResponseSuccess)
+
+export const getGetPublicBoardBySlugUrl = (workspaceSlug: string,
+    boardSlug: string,
+    params?: GetPublicBoardBySlugParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    const explodeParameters = ["members","labels","lists","dueDateFilters"];
+
+    if (Array.isArray(value) && explodeParameters.includes(key)) {
+      value.forEach((v) => {
+        normalizedParams.append(key, v === null ? 'null' : String(v));
+      });
+      return;
+    }
+
+
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/workspaces/${workspaceSlug}/boards/${boardSlug}?${stringifiedParams}` : `/workspaces/${workspaceSlug}/boards/${boardSlug}`
+}
+
+/**
+ * @summary Get a public board by workspace and board slug
+ */
+export const getPublicBoardBySlug = async (workspaceSlug: string,
+    boardSlug: string,
+    params?: GetPublicBoardBySlugParams, options?: Parameters<typeof customFetch>[1]): Promise<getPublicBoardBySlugResponse> => {
+
+  return customFetch<getPublicBoardBySlugResponse>(getGetPublicBoardBySlugUrl(workspaceSlug,boardSlug,params),
+  {
+      credentials: 'include',
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetPublicBoardBySlugQueryKey = (workspaceSlug: string,
+    boardSlug: string,
+    params?: GetPublicBoardBySlugParams,) => {
+    return [
+    `/workspaces/${workspaceSlug}/boards/${boardSlug}`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getGetPublicBoardBySlugQueryOptions = <TData = Awaited<ReturnType<typeof getPublicBoardBySlug>>, TError = unknown>(workspaceSlug: string,
+    boardSlug: string,
+    params?: GetPublicBoardBySlugParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPublicBoardBySlug>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetPublicBoardBySlugQueryKey(workspaceSlug,boardSlug,params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPublicBoardBySlug>>> = ({ signal }) => getPublicBoardBySlug(workspaceSlug,boardSlug,params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: workspaceSlug !== null && workspaceSlug !== undefined && boardSlug !== null && boardSlug !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getPublicBoardBySlug>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetPublicBoardBySlugQueryResult = NonNullable<Awaited<ReturnType<typeof getPublicBoardBySlug>>>
+export type GetPublicBoardBySlugQueryError = unknown
+
+
+/** @summary Get a public board by workspace and board slug */
+export function useGetPublicBoardBySlug<TData = Awaited<ReturnType<typeof getPublicBoardBySlug>>, TError = unknown>(
+ workspaceSlug: string,
+    boardSlug: string,
+    params: undefined |  GetPublicBoardBySlugParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPublicBoardBySlug>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getPublicBoardBySlug>>,
+          TError,
+          Awaited<ReturnType<typeof getPublicBoardBySlug>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get a public board by workspace and board slug */
+export function useGetPublicBoardBySlug<TData = Awaited<ReturnType<typeof getPublicBoardBySlug>>, TError = unknown>(
+ workspaceSlug: string,
+    boardSlug: string,
+    params?: GetPublicBoardBySlugParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPublicBoardBySlug>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getPublicBoardBySlug>>,
+          TError,
+          Awaited<ReturnType<typeof getPublicBoardBySlug>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get a public board by workspace and board slug */
+export function useGetPublicBoardBySlug<TData = Awaited<ReturnType<typeof getPublicBoardBySlug>>, TError = unknown>(
+ workspaceSlug: string,
+    boardSlug: string,
+    params?: GetPublicBoardBySlugParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPublicBoardBySlug>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/** @summary Get a public board by workspace and board slug */
+export function useGetPublicBoardBySlug<TData = Awaited<ReturnType<typeof getPublicBoardBySlug>>, TError = unknown>(
+ workspaceSlug: string,
+    boardSlug: string,
+    params?: GetPublicBoardBySlugParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPublicBoardBySlug>>, TError, TData>>, request?: SecondParameter<typeof customFetch>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetPublicBoardBySlugQueryOptions(workspaceSlug,boardSlug,params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
 
 export type getBoardMembersResponse200 = {
   data: BoardMemberDto[]

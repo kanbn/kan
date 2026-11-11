@@ -3,7 +3,7 @@ import { useDeleteList } from "@kan/api-client/hooks";
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
+import { useBoardCache } from "~/utils/boardCache";
 
 interface DeleteListConfirmationProps {
   listPublicId: string;
@@ -22,7 +22,7 @@ export function DeleteListConfirmation({
   listPublicId,
   queryParams,
 }: DeleteListConfirmationProps) {
-  const utils = api.useUtils();
+  const boardCache = useBoardCache();
   const { closeModal } = useModal();
   const { showPopup } = usePopup();
 
@@ -37,7 +37,7 @@ export function DeleteListConfirmation({
       },
       onSettled: async () => {
         closeModal();
-        await utils.board.byId.invalidate(queryParams);
+        await boardCache.invalidate(queryParams.boardPublicId);
       },
     },
   });

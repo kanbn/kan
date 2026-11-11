@@ -1,6 +1,7 @@
 import type { Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import { AuthPage } from "../support/pages/auth-page";
 import { BoardPage } from "../support/pages/board-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
@@ -14,14 +15,10 @@ async function getBoardSlug(page: Page) {
   }
 
   const response = await page.request.get(
-    `/api/trpc/board.byId?batch=1&input=${encodeURIComponent(
-      JSON.stringify({ "0": { json: { boardPublicId } } }),
-    )}`,
+    `${apiBaseURL}/boards/${boardPublicId}`,
   );
-  const body = (await response.json()) as [
-    { result: { data: { json: { slug: string } } } },
-  ];
-  return body[0].result.data.json.slug;
+  const body = (await response.json()) as { slug: string };
+  return body.slug;
 }
 
 test(

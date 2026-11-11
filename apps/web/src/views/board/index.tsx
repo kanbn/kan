@@ -33,7 +33,11 @@ import {
 } from "react-icons/hi2";
 
 import type { UpdateBoardInput } from "@kan/api/types";
-import { useUpdateList } from "@kan/api-client/hooks";
+import {
+  useGetBoard,
+  useUpdateBoard,
+  useUpdateList,
+} from "@kan/api-client/hooks";
 
 import type { CardContextMenuAction } from "./components/CardContextMenu";
 import type { BoardView } from "./components/ViewToggle";
@@ -56,6 +60,8 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { getApiErrorStatus } from "~/utils/apiError";
+import { useBoardCache } from "~/utils/boardCache";
 import { formatToArray, isPlaceholderPublicId } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import BoardDropdown from "./components/BoardDropdown";
@@ -92,7 +98,7 @@ function getEventData(
 export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const params = useParams() as { boardId: string | string[] } | null;
   const router = useRouter();
-  const utils = api.useUtils();
+  const boardCache = useBoardCache();
   const { showPopup } = usePopup();
   const { workspace, selectWorkspaceById } = useWorkspace();
   const { openModal, modalContentType, entityId, isOpen, setModalState } =
@@ -145,7 +151,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const { tooltipContent: createListShortcutTooltipContent } =
     useKeyboardShortcut(createListShortcut);
 
-  const updateBoard = api.board.update.useMutation();
+  const updateBoard = useUpdateBoard();
 
   const { register, handleSubmit, setValue } = useForm<UpdateBoardInput>({
     values: {
@@ -157,7 +163,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const onSubmit = (values: UpdateBoardInput) => {
     updateBoard.mutate({
       boardPublicId: values.boardPublicId,
-      name: values.name,
+      data: { name: values.name },
     });
   };
 
@@ -204,24 +210,26 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     type: boardType,
     cardView: "summary" as const,
   };
+  const { boardPublicId: _boardPublicId, ...boardQueryParams } = queryParams;
 
   const {
     data: boardData,
     isSuccess,
     isLoading: isQueryLoading,
     error,
-  } = api.board.byId.useQuery(queryParams, {
-    enabled: !!boardId,
-    placeholderData: keepPreviousData,
+  } = useGetBoard(queryParams.boardPublicId, boardQueryParams, {
+    query: {
+      enabled: !!boardId,
+      placeholderData: keepPreviousData,
+      retry: false,
+      select: (res) => res.data,
+    },
   });
 
   // Redirect to 404 if board doesn't exist
   useEffect(() => {
     if (router.isReady && boardId && !isQueryLoading) {
-      if (
-        error?.data?.code === "NOT_FOUND" ||
-        (!boardData && !isQueryLoading)
-      ) {
+      if (getApiErrorStatus(error) === 404 || (!boardData && !isQueryLoading)) {
         router.replace("/404");
       }
     }
@@ -233,7 +241,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   }, [boardWorkspacePublicId, selectWorkspaceById]);
 
   const refetchBoard = async () => {
-    if (boardId) await utils.board.byId.refetch(queryParams);
+    if (boardId) await boardCache.refetch(queryParams.boardPublicId);
   };
 
   useEffect(() => {
@@ -254,11 +262,11 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const updateListMutation = useUpdateList({
     mutation: {
       onMutate: async (args) => {
-        await utils.board.byId.cancel();
+        await boardCache.cancel();
 
-        const currentState = utils.board.byId.getData(queryParams);
+        const currentState = boardCache.getData(queryParams);
 
-        utils.board.byId.setData(queryParams, (oldBoard) => {
+        boardCache.setData(queryParams, (oldBoard) => {
           if (!oldBoard) return oldBoard;
 
           const updatedLists = Array.from(oldBoard.lists);
@@ -286,7 +294,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
         return { previousState: currentState };
       },
       onError: (_error, _newList, context) => {
-        utils.board.byId.setData(queryParams, context?.previousState);
+        boardCache.setData(queryParams, context?.previousState);
         showPopup({
           header: t`Unable to update list`,
           message: t`Please try again later, or contact customer support.`,
@@ -294,18 +302,18 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
         });
       },
       onSettled: async () => {
-        await utils.board.byId.invalidate(queryParams);
+        await boardCache.invalidate(queryParams.boardPublicId);
       },
     },
   });
 
   const updateCardMutation = api.card.update.useMutation({
     onMutate: async (args) => {
-      await utils.board.byId.cancel();
+      await boardCache.cancel();
 
-      const currentState = utils.board.byId.getData(queryParams);
+      const currentState = boardCache.getData(queryParams);
 
-      utils.board.byId.setData(queryParams, (oldBoard) => {
+      boardCache.setData(queryParams, (oldBoard) => {
         if (!oldBoard) return oldBoard;
 
         const updatedLists = Array.from(oldBoard.lists);
@@ -343,7 +351,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       return { previousState: currentState };
     },
     onError: (_error, _newList, context) => {
-      utils.board.byId.setData(queryParams, context?.previousState);
+      boardCache.setData(queryParams, context?.previousState);
       showPopup({
         header: t`Unable to update card`,
         message: t`Please try again later, or contact customer support.`,
@@ -351,17 +359,17 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       });
     },
     onSettled: async () => {
-      await utils.board.byId.invalidate(queryParams);
+      await boardCache.invalidate(queryParams.boardPublicId);
     },
   });
 
   const updateCardDueDateMutation = api.card.update.useMutation({
     onMutate: async (args) => {
-      await utils.board.byId.cancel();
+      await boardCache.cancel();
 
-      const currentState = utils.board.byId.getData(queryParams);
+      const currentState = boardCache.getData(queryParams);
 
-      utils.board.byId.setData(queryParams, (oldBoard) => {
+      boardCache.setData(queryParams, (oldBoard) => {
         if (!oldBoard) return oldBoard;
 
         return {
@@ -370,7 +378,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             ...list,
             cards: list.cards.map((card) =>
               card.publicId === args.cardPublicId
-                ? { ...card, dueDate: args.dueDate ?? null }
+                ? { ...card, dueDate: args.dueDate?.toISOString() ?? null }
                 : card,
             ),
           })),
@@ -380,7 +388,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       return { previousState: currentState };
     },
     onError: (_error, _args, context) => {
-      utils.board.byId.setData(queryParams, context?.previousState);
+      boardCache.setData(queryParams, context?.previousState);
       showPopup({
         header: t`Unable to update due date`,
         message: t`Please try again later, or contact customer support.`,
@@ -388,7 +396,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       });
     },
     onSettled: async () => {
-      await utils.board.byId.invalidate(queryParams);
+      await boardCache.invalidate(queryParams.boardPublicId);
     },
   });
 

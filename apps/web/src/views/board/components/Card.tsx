@@ -24,7 +24,7 @@ const Card = ({
   description,
   comments,
   attachments,
-  dueDate,
+  dueDate: dueDateIso,
 }: {
   title: string;
   ticketNumber?: string | null;
@@ -54,9 +54,10 @@ const Card = ({
   description: string | null;
   comments: { publicId: string }[];
   attachments: { publicId: string }[];
-  dueDate?: Date | null;
+  dueDate?: string | null;
 }) => {
   const { dateLocale } = useLocalisation();
+  const dueDate = dueDateIso ? new Date(dueDateIso) : null;
   const showYear = dueDate ? !isSameYear(dueDate, new Date()) : false;
   const isOverdue = dueDate ? isBefore(dueDate, startOfDay(new Date())) : false;
   const cardSummary = summary ?? {

@@ -11,10 +11,11 @@ import {
   HiXMark,
 } from "react-icons/hi2";
 
-import type { GetBoardByIdOutput, NewCardInput } from "@kan/api/types";
+import type { NewCardInput } from "@kan/api/types";
 import { generateUID } from "@kan/shared/utils";
 
 import type { WorkspaceMember } from "~/components/Editor";
+import type { BoardDetail } from "~/utils/boardCache";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
@@ -28,6 +29,7 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { useBoardCache } from "~/utils/boardCache";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 
 type NewCardFormInput = NewCardInput & {
@@ -45,7 +47,7 @@ interface QueryParams {
 
 interface NewCardFormProps {
   isTemplate: boolean;
-  boardData?: GetBoardByIdOutput;
+  boardData?: BoardDetail;
   listPublicId: string;
   queryParams: QueryParams;
   initialDueDate?: Date | null;
@@ -62,7 +64,7 @@ export function NewCardForm({
   const { workspace } = useWorkspace();
   const { closeModal, openModal, modalStates, clearModalState } = useModal();
 
-  const utils = api.useUtils();
+  const boardCache = useBoardCache();
 
   // persists the form values
   const { formState, saveFormState } = useModalFormState<NewCardFormInput>({
@@ -138,11 +140,11 @@ export function NewCardForm({
 
   const createCard = api.card.create.useMutation({
     onMutate: async (args) => {
-      await utils.board.byId.cancel();
+      await boardCache.cancel();
 
-      const currentState = utils.board.byId.getData(queryParams);
+      const currentState = boardCache.getData(queryParams);
 
-      utils.board.byId.setData(queryParams, (oldBoard) => {
+      boardCache.setData(queryParams, (oldBoard) => {
         if (!oldBoard) return oldBoard;
 
         const updatedLists = oldBoard.lists.map((list) => {
@@ -152,7 +154,7 @@ export function NewCardForm({
               title: args.title,
               listId: 2,
               description: "",
-              dueDate: args.dueDate ?? null,
+              dueDate: args.dueDate?.toISOString() ?? null,
               cardNumber: null,
               comments: [],
               checklists: [],
@@ -196,7 +198,7 @@ export function NewCardForm({
       return { previousState: currentState };
     },
     onError: (error, _newList, context) => {
-      utils.board.byId.setData(queryParams, context?.previousState);
+      boardCache.setData(queryParams, context?.previousState);
       showPopup({
         header: t`Unable to create card`,
         message: error.data?.zodError?.fieldErrors.title?.[0]
@@ -225,7 +227,7 @@ export function NewCardForm({
         reset(newFormState);
         saveFormState(newFormState);
       }
-      await utils.board.byId.invalidate(queryParams);
+      await boardCache.invalidate(queryParams.boardPublicId);
     },
   });
 
@@ -338,7 +340,7 @@ export function NewCardForm({
           icon: "error",
         });
       }
-      await utils.board.byId.invalidate(queryParams);
+      await boardCache.invalidate(queryParams.boardPublicId);
     }
   };
 

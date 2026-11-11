@@ -13,11 +13,13 @@ import {
 } from "react-icons/hi2";
 import { IoArchiveOutline } from "react-icons/io5";
 
+import { useUpdateBoard } from "@kan/api-client/hooks";
+
 import Dropdown from "~/components/Dropdown";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
+import { useBoardCache } from "~/utils/boardCache";
 
 export default function BoardDropdown({
   isTemplate,
@@ -45,56 +47,52 @@ export default function BoardDropdown({
   const { showPopup } = usePopup();
   const { canEditBoard, canDeleteBoard, canCreateBoard, canArchiveBoard } =
     usePermissions();
-  const utils = api.useUtils();
+  const boardCache = useBoardCache();
 
-  const updateBoard = api.board.update.useMutation({
-    onSuccess: (_data, variables) => {
-      void utils.board.all.invalidate();
-      void utils.board.byId.invalidate();
-      if (variables.isArchived !== undefined) {
+  const updateBoard = useUpdateBoard({
+    mutation: {
+      onSuccess: (_data, { data: variables }) => {
+        void boardCache.invalidateLists();
+        void boardCache.invalidate();
+        if (variables.isArchived !== undefined) {
+          showPopup({
+            header: variables.isArchived
+              ? t`Board archived`
+              : t`Board unarchived`,
+            message: variables.isArchived
+              ? t`The board has been archived.`
+              : t`The board has been unarchived.`,
+            icon: "success",
+          });
+          void router.push(`/boards`);
+        } else if (variables.favorite !== undefined) {
+          showPopup({
+            header: variables.favorite
+              ? t`Added to favorites`
+              : t`Removed from favorites`,
+            message: variables.favorite
+              ? t`${boardName ?? "Board"} has been added to your favorites.`
+              : t`${boardName ?? "Board"} has been removed from your favorites.`,
+            icon: "success",
+          });
+        }
+      },
+      onError: () => {
         showPopup({
-          header: variables.isArchived
-            ? t`Board archived`
-            : t`Board unarchived`,
-          message: variables.isArchived
-            ? t`The board has been archived.`
-            : t`The board has been unarchived.`,
-          icon: "success",
+          header: t`Unable to update board`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
         });
-        void router.push(`/boards`);
-      } else if (variables.favorite !== undefined) {
-        showPopup({
-          header: variables.favorite
-            ? t`Added to favorites`
-            : t`Removed from favorites`,
-          message: variables.favorite
-            ? t`${boardName ?? "Board"} has been added to your favorites.`
-            : t`${boardName ?? "Board"} has been removed from your favorites.`,
-          icon: "success",
-        });
-      }
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to update board`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
+      },
     },
   });
 
   const handleToggleFavorite = () => {
-    updateBoard.mutate({
-      boardPublicId,
-      favorite: !isFavorite,
-    });
+    updateBoard.mutate({ boardPublicId, data: { favorite: !isFavorite } });
   };
 
   const handleArchiveOrUnarchive = () => {
-    updateBoard.mutate({
-      boardPublicId,
-      isArchived: !isArchived,
-    });
+    updateBoard.mutate({ boardPublicId, data: { isArchived: !isArchived } });
   };
 
   const isArchiveActionPending = updateBoard.isPending;
@@ -139,9 +137,7 @@ export default function BoardDropdown({
           {
             label: t`Copy public link`,
             action: handleCopyPublicLink,
-            icon: (
-              <HiOutlineLink className="h-[16px] w-[16px] text-dark-900" />
-            ),
+            icon: <HiOutlineLink className="h-[16px] w-[16px] text-dark-900" />,
           },
         ]
       : []),

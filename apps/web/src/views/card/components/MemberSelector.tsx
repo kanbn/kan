@@ -7,6 +7,7 @@ import CheckboxDropdown from "~/components/CheckboxDropdown";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { api } from "~/utils/api";
+import { useBoardCache } from "~/utils/boardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface MemberSelectorProps {
@@ -30,6 +31,7 @@ export default function MemberSelector({
 }: MemberSelectorProps) {
   const router = useRouter();
   const utils = api.useUtils();
+  const boardCache = useBoardCache();
   const { openModal } = useModal();
   const { showPopup } = usePopup();
 
@@ -85,7 +87,7 @@ export default function MemberSelector({
     },
     onSettled: async () => {
       await invalidateCard(utils, cardPublicId);
-      await utils.board.byId.invalidate();
+      await boardCache.invalidate();
     },
   });
 

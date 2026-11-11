@@ -27,7 +27,7 @@ import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
-import { api } from "~/utils/api";
+import { useBoardCache } from "~/utils/boardCache";
 
 const integrationProviders: Record<
   string,
@@ -214,13 +214,13 @@ const SelectSource = ({
 };
 
 const ImportGithub: React.FC = () => {
-  const utils = api.useUtils();
+  const boardCache = useBoardCache();
   const { closeModal } = useModal();
   const { workspace } = useWorkspace();
   const { showPopup } = usePopup();
   const [isSelectAllEnabled, setIsSelectAllEnabled] = useState(false);
 
-  const refetchBoards = () => utils.board.all.refetch();
+  const refetchBoards = () => boardCache.refetchLists();
 
   const { data: projects, isLoading: projectsLoading } = useGetGitHubProjects({
     query: { select: (res) => res.data },
@@ -368,13 +368,13 @@ const ImportGithub: React.FC = () => {
 };
 
 const ImportTrello: React.FC = () => {
-  const utils = api.useUtils();
+  const boardCache = useBoardCache();
   const { closeModal } = useModal();
   const { workspace } = useWorkspace();
   const { showPopup } = usePopup();
   const [isSelectAllEnabled, setIsSelectAllEnabled] = useState(false);
 
-  const refetchBoards = () => utils.board.all.refetch();
+  const refetchBoards = () => boardCache.refetchLists();
 
   const { data: boards, isLoading: boardsLoading } = useGetTrelloBoards({
     query: { select: (res) => res.data },

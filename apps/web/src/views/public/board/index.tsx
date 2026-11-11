@@ -6,6 +6,8 @@ import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 import { HiLink, HiOutlineLockClosed } from "react-icons/hi2";
 
+import { useGetPublicBoardBySlug } from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import Modal from "~/components/modal";
 import { PageHead } from "~/components/PageHead";
@@ -15,7 +17,6 @@ import ThemeToggle from "~/components/ThemeToggle";
 import { useDragToScroll } from "~/hooks/useDragToScroll";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 import { formatToArray } from "~/utils/helpers";
 import Card from "~/views/board/components/Card";
 import Filters from "~/views/board/components/Filters";
@@ -53,20 +54,23 @@ export default function PublicBoardView() {
     | "no-due-date"
   )[];
 
-  const { data, isLoading } = api.board.bySlug.useQuery(
+  const { data, isLoading } = useGetPublicBoardBySlug(
+    workspaceSlug ?? "",
+    boardSlug ?? "",
     {
-      boardSlug: boardSlug ?? "",
-      workspaceSlug: workspaceSlug ?? "",
       members: formatToArray(router.query.members),
       labels: formatToArray(router.query.labels),
       lists: formatToArray(router.query.lists),
-      ...(dueDateFilters.length > 0 && {
-        dueDateFilters: dueDateFilters,
-      }),
+      ...(dueDateFilters.length > 0 && { dueDateFilters }),
     },
     {
-      enabled: router.isReady && !!boardSlug,
-      placeholderData: keepPreviousData,
+      query: {
+        enabled: router.isReady && !!boardSlug,
+        placeholderData: keepPreviousData,
+        // An unknown or private board is a 404; show "not found" straight away.
+        retry: false,
+        select: (res) => res.data,
+      },
     },
   );
 

@@ -6,11 +6,12 @@ import { useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
 import { z } from "zod";
 
+import { useCreateBoard } from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 const schema = z.object({
   name: z
@@ -53,41 +54,45 @@ export function NewTemplateForm({
     },
   });
 
-  const createBoard = api.board.create.useMutation({
-    onSuccess: (newTemplate) => {
-      if (!newTemplate) {
+  const createBoard = useCreateBoard({
+    mutation: {
+      onSuccess: ({ data: newTemplate }) => {
+        if (!newTemplate) {
+          showPopup({
+            header: t`Unable to create template`,
+            message: t`Please try again later, or contact customer support.`,
+            icon: "error",
+          });
+        } else {
+          router.push(`/templates/${newTemplate.publicId}`);
+          showPopup({
+            header: t`Template created`,
+            message: t`Template created successfully`,
+            icon: "success",
+          });
+        }
+        closeModal();
+      },
+      onError: () => {
         showPopup({
           header: t`Unable to create template`,
           message: t`Please try again later, or contact customer support.`,
           icon: "error",
         });
-      } else {
-        router.push(`/templates/${newTemplate.publicId}`);
-        showPopup({
-          header: t`Template created`,
-          message: t`Template created successfully`,
-          icon: "success",
-        });
-      }
-      closeModal();
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to create template`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
+      },
     },
   });
 
   const onSubmit = (data: NewBoardInputWithTemplate) => {
     createBoard.mutate({
-      name: data.name,
       workspacePublicId: data.workspacePublicId,
-      sourceBoardPublicId: data.sourceBoardPublicId,
-      lists: [],
-      labels: [],
-      type: "template",
+      data: {
+        name: data.name,
+        sourceBoardPublicId: data.sourceBoardPublicId,
+        lists: [],
+        labels: [],
+        type: "template",
+      },
     });
   };
 

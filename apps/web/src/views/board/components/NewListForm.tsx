@@ -12,7 +12,7 @@ import Input from "~/components/Input";
 import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
+import { useBoardCache } from "~/utils/boardCache";
 
 type NewListFormInput = NewListInput & {
   isCreateAnotherEnabled: boolean;
@@ -36,7 +36,7 @@ export function NewListForm({
   const { closeModal } = useModal();
   const { showPopup } = usePopup();
 
-  const utils = api.useUtils();
+  const boardCache = useBoardCache();
 
   const { register, handleSubmit, reset, setValue, watch } =
     useForm<NewListFormInput>({
@@ -52,12 +52,12 @@ export function NewListForm({
   const createList = useCreateList({
     mutation: {
       onMutate: async (args) => {
-        await utils.board.byId.cancel();
+        await boardCache.cancel();
 
-        const currentState = utils.board.byId.getData(queryParams);
+        const currentState = boardCache.getData(queryParams);
         const optimisticPublicId = `PLACEHOLDER_${generateUID()}`;
 
-        utils.board.byId.setData(queryParams, (oldBoard) => {
+        boardCache.setData(queryParams, (oldBoard) => {
           if (!oldBoard) return oldBoard;
 
           const newList = {
@@ -78,7 +78,7 @@ export function NewListForm({
       },
       onSuccess: (result, _args, context) => {
         if (!context) return;
-        utils.board.byId.setData(queryParams, (oldBoard) => {
+        boardCache.setData(queryParams, (oldBoard) => {
           if (!oldBoard) return oldBoard;
           return {
             ...oldBoard,
@@ -91,7 +91,7 @@ export function NewListForm({
         });
       },
       onError: (_error, _newList, context) => {
-        utils.board.byId.setData(queryParams, context?.previousState);
+        boardCache.setData(queryParams, context?.previousState);
         showPopup({
           header: t`Unable to create list`,
           message: t`Please try again later, or contact customer support.`,
@@ -99,7 +99,7 @@ export function NewListForm({
         });
       },
       onSettled: async () => {
-        await utils.board.byId.invalidate(queryParams);
+        await boardCache.invalidate(queryParams.boardPublicId);
       },
     },
   });

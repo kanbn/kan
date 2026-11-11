@@ -1,9 +1,10 @@
 import { useRouter } from "next/navigation";
 import { t } from "@lingui/core/macro";
 
+import { useDeleteBoard } from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
-import { api } from "~/utils/api";
 
 export function DeleteBoardConfirmation({
   boardPublicId,
@@ -15,18 +16,17 @@ export function DeleteBoardConfirmation({
   const router = useRouter();
   const { closeModal } = useModal();
 
-  const deleteBoard = api.board.delete.useMutation({
-    onSuccess: () => {
-      closeModal();
-      router.push(isTemplate ? `/templates` : `/boards`);
+  const deleteBoard = useDeleteBoard({
+    mutation: {
+      onSuccess: () => {
+        closeModal();
+        router.push(isTemplate ? `/templates` : `/boards`);
+      },
     },
   });
 
   const handleDeleteBoard = () => {
-    if (boardPublicId)
-      deleteBoard.mutate({
-        boardPublicId: boardPublicId,
-      });
+    if (boardPublicId) deleteBoard.mutate({ boardPublicId });
   };
 
   return (

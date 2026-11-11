@@ -45,7 +45,7 @@ interface CalendarCard {
   publicId: string;
   title: string;
   cardNumber: number | null;
-  dueDate: Date | null;
+  dueDate: string | null;
   labels: { name: string; colourCode: string | null }[];
 }
 
@@ -190,7 +190,7 @@ const CalendarView = ({
         const dueDate =
           pendingMove?.cardPublicId === card.publicId
             ? pendingMove.dueDate
-            : card.dueDate;
+            : card.dueDate && new Date(card.dueDate);
         if (!dueDate) continue;
         const key = format(dueDate, "yyyy-MM-dd");
         const existing = map.get(key) ?? [];
