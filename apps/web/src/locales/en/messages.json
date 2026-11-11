@@ -156,7 +156,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        489
+        498
       ]
     ],
     "translation": "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
@@ -172,7 +172,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        341
+        350
       ]
     ],
     "translation": "{projectCount, plural, one {Import project (1)} other {Import projects ({projectCount})}}"
@@ -417,11 +417,11 @@
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        321
+        347
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        104
+        105
       ]
     ],
     "translation": "Active"
@@ -1028,7 +1028,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        107
+        120
       ]
     ],
     "translation": "An error occurred while connecting your GitHub account."
@@ -1040,7 +1040,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        130
+        144
       ]
     ],
     "translation": "An error occurred while disconnecting your GitHub account."
@@ -1052,7 +1052,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        87
+        98
       ]
     ],
     "translation": "An error occurred while disconnecting your Trello account."
@@ -1256,7 +1256,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        69
+        80
       ]
     ],
     "translation": "Are you sure you want to delete the webhook \"{webhookName}\"? This action cannot be undone."
@@ -2497,7 +2497,7 @@
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        75
+        86
       ],
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
@@ -3123,7 +3123,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        195
+        204
       ]
     ],
     "translation": "Connect"
@@ -3135,7 +3135,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        212
+        229
       ]
     ],
     "translation": "Connect GitHub"
@@ -3147,7 +3147,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        162
+        177
       ]
     ],
     "translation": "Connect Trello"
@@ -3171,7 +3171,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        191
+        208
       ]
     ],
     "translation": "Connect your GitHub account to import projects."
@@ -3183,7 +3183,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        149
+        164
       ]
     ],
     "translation": "Connect your Trello account to import boards."
@@ -3615,7 +3615,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        344
+        370
       ]
     ],
     "translation": "Create webhook"
@@ -3643,7 +3643,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        238
+        243
       ]
     ],
     "translation": "Created"
@@ -3955,11 +3955,11 @@
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        82
+        93
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        136
+        137
       ]
     ],
     "translation": "Delete"
@@ -4067,7 +4067,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        55
+        66
       ]
     ],
     "translation": "Delete webhook"
@@ -4179,7 +4179,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        223
+        240
       ]
     ],
     "translation": "Disconnect GitHub"
@@ -4191,7 +4191,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        177
+        194
       ]
     ],
     "translation": "Disconnect Trello"
@@ -4544,7 +4544,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        128
+        129
       ]
     ],
     "translation": "Edit"
@@ -4612,7 +4612,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        210
+        236
       ]
     ],
     "translation": "Edit webhook"
@@ -4792,7 +4792,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        258
+        284
       ]
     ],
     "translation": "Enter new secret to update"
@@ -4928,7 +4928,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        106
+        119
       ]
     ],
     "translation": "Error connecting GitHub"
@@ -5000,7 +5000,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        129
+        143
       ]
     ],
     "translation": "Error disconnecting GitHub"
@@ -5012,7 +5012,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        86
+        97
       ]
     ],
     "translation": "Error disconnecting Trello"
@@ -5142,11 +5142,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        271
+        297
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        226
+        231
       ]
     ],
     "translation": "Events"
@@ -5258,7 +5258,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        119
+        130
       ]
     ],
     "translation": "Failed to create webhook"
@@ -5270,7 +5270,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        37
+        47
       ]
     ],
     "translation": "Failed to delete webhook"
@@ -5310,11 +5310,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        164
+        185
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        186
+        190
       ]
     ],
     "translation": "Failed to test webhook"
@@ -5326,7 +5326,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        138
+        155
       ]
     ],
     "translation": "Failed to update webhook"
@@ -5818,7 +5818,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        186
+        203
       ]
     ],
     "translation": "GitHub"
@@ -5830,7 +5830,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        99
+        112
       ]
     ],
     "translation": "GitHub connected"
@@ -5842,7 +5842,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        122
+        136
       ]
     ],
     "translation": "GitHub disconnected"
@@ -6062,7 +6062,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        259
+        285
       ]
     ],
     "translation": "HMAC secret for signature verification"
@@ -6230,11 +6230,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        229
+        238
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        381
+        390
       ]
     ],
     "translation": "Import complete"
@@ -6246,11 +6246,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        242
+        251
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        394
+        403
       ]
     ],
     "translation": "Import failed"
@@ -6362,7 +6362,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        104
+        105
       ]
     ],
     "translation": "Inactive"
@@ -7433,7 +7433,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        231
+        257
       ]
     ],
     "translation": "My webhook"
@@ -7457,11 +7457,11 @@
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        227
+        253
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        214
+        219
       ]
     ],
     "translation": "Name"
@@ -7577,7 +7577,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        513
+        522
       ]
     ],
     "translation": "New import"
@@ -7665,7 +7665,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        210
+        236
       ]
     ],
     "translation": "New webhook"
@@ -7765,7 +7765,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        432
+        441
       ]
     ],
     "translation": "No boards found"
@@ -7873,7 +7873,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        283
+        292
       ]
     ],
     "translation": "No projects found"
@@ -7913,7 +7913,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        196
+        201
       ]
     ],
     "translation": "No webhooks configured. Add a webhook to receive notifications."
@@ -8521,7 +8521,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        24
+        30
       ]
     ],
     "translation": "Please enter a valid URL"
@@ -8625,11 +8625,11 @@
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        243
+        252
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        395
+        404
       ],
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
@@ -9582,7 +9582,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        344
+        370
       ]
     ],
     "translation": "Save changes"
@@ -9670,7 +9670,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        251
+        277
       ]
     ],
     "translation": "Secret (optional)"
@@ -9682,7 +9682,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        28
+        34
       ]
     ],
     "translation": "Secret cannot exceed 512 characters"
@@ -9766,11 +9766,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        315
+        324
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        464
+        473
       ]
     ],
     "translation": "Select all"
@@ -9782,7 +9782,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        32
+        38
       ]
     ],
     "translation": "Select at least one event"
@@ -9794,7 +9794,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        195
+        204
       ]
     ],
     "translation": "Select source"
@@ -9882,7 +9882,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        338
+        364
       ]
     ],
     "translation": "Send test"
@@ -10050,7 +10050,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        138
+        153
       ]
     ],
     "translation": "Settings | Integrations"
@@ -10495,7 +10495,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        232
+        237
       ]
     ],
     "translation": "Status"
@@ -10792,7 +10792,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        132
+        133
       ]
     ],
     "translation": "Test"
@@ -10804,11 +10804,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        154
+        173
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        177
+        179
       ]
     ],
     "translation": "Test failed"
@@ -10820,11 +10820,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        148
+        167
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        171
+        173
       ]
     ],
     "translation": "Test sent"
@@ -10836,11 +10836,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        149
+        168
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        172
+        174
       ]
     ],
     "translation": "Test webhook sent successfully!"
@@ -11375,7 +11375,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        19
+        27
       ]
     ],
     "translation": "Token is required"
@@ -11403,7 +11403,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        142
+        157
       ]
     ],
     "translation": "Trello"
@@ -11415,7 +11415,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        79
+        90
       ]
     ],
     "translation": "Trello disconnected"
@@ -11615,7 +11615,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        118
+        127
       ]
     ],
     "translation": "Unable to create webhook"
@@ -11703,7 +11703,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        36
+        44
       ]
     ],
     "translation": "Unable to delete webhook"
@@ -11819,11 +11819,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        163
+        182
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        185
+        187
       ]
     ],
     "translation": "Unable to test webhook"
@@ -12011,7 +12011,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        137
+        152
       ]
     ],
     "translation": "Unable to update webhook"
@@ -12456,11 +12456,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        239
+        265
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        220
+        225
       ]
     ],
     "translation": "URL"
@@ -12488,7 +12488,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        25
+        31
       ]
     ],
     "translation": "URL cannot exceed 2048 characters"
@@ -12544,7 +12544,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        265
+        291
       ]
     ],
     "translation": "Used to sign webhook payloads for verification. Leave blank to keep existing secret."
@@ -12749,7 +12749,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        110
+        119
       ]
     ],
     "translation": "Webhook created"
@@ -12761,7 +12761,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        111
+        120
       ]
     ],
     "translation": "Webhook created successfully"
@@ -12773,7 +12773,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        28
+        36
       ]
     ],
     "translation": "Webhook deleted"
@@ -12785,7 +12785,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        29
+        37
       ]
     ],
     "translation": "Webhook deleted successfully"
@@ -12797,7 +12797,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        20
+        26
       ]
     ],
     "translation": "Webhook name cannot exceed 255 characters"
@@ -12809,7 +12809,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        19
+        25
       ]
     ],
     "translation": "Webhook name is required"
@@ -12821,7 +12821,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        125
+        126
       ]
     ],
     "translation": "Webhook options"
@@ -12833,11 +12833,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        155
+        174
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        178
+        180
       ]
     ],
     "translation": "Webhook test failed"
@@ -12849,7 +12849,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        129
+        144
       ]
     ],
     "translation": "Webhook updated"
@@ -12861,7 +12861,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        130
+        145
       ]
     ],
     "translation": "Webhook updated successfully"
@@ -12873,7 +12873,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        23
+        29
       ]
     ],
     "translation": "Webhook URL is required"
@@ -13581,7 +13581,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        382
+        391
       ]
     ],
     "translation": "Your boards have been imported."
@@ -13617,7 +13617,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        100
+        113
       ]
     ],
     "translation": "Your GitHub account has been connected."
@@ -13629,7 +13629,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        123
+        137
       ]
     ],
     "translation": "Your GitHub account has been disconnected."
@@ -13641,7 +13641,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        220
+        237
       ]
     ],
     "translation": "Your GitHub account is connected."
@@ -13725,7 +13725,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        230
+        239
       ]
     ],
     "translation": "Your projects have been imported."
@@ -13737,7 +13737,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        80
+        91
       ]
     ],
     "translation": "Your Trello account has been disconnected."
@@ -13749,7 +13749,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        171
+        186
       ]
     ],
     "translation": "Your Trello account is connected."
