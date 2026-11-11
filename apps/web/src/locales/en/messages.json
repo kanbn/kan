@@ -867,7 +867,7 @@
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        14
+        20
       ]
     ],
     "translation": "Admin"
@@ -951,7 +951,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        26
+        28
       ]
     ],
     "translation": "All member permission overrides have been reset to their role defaults."
@@ -2045,11 +2045,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        149
+        158
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        44
+        50
       ]
     ],
     "translation": "Can add comments"
@@ -2061,11 +2061,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        134
+        143
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        29
+        35
       ]
     ],
     "translation": "Can create boards"
@@ -2077,11 +2077,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        144
+        153
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        39
+        45
       ]
     ],
     "translation": "Can create cards"
@@ -2093,11 +2093,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        139
+        148
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        34
+        40
       ]
     ],
     "translation": "Can create lists"
@@ -2109,11 +2109,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        136
+        145
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        31
+        37
       ]
     ],
     "translation": "Can delete boards"
@@ -2125,11 +2125,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        146
+        155
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        41
+        47
       ]
     ],
     "translation": "Can delete cards"
@@ -2141,11 +2141,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        151
+        160
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        46
+        52
       ]
     ],
     "translation": "Can delete comments"
@@ -2157,11 +2157,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        141
+        150
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        36
+        42
       ]
     ],
     "translation": "Can delete lists"
@@ -2173,11 +2173,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        130
+        139
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        25
+        31
       ]
     ],
     "translation": "Can delete workspace"
@@ -2189,11 +2189,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        135
+        144
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        30
+        36
       ]
     ],
     "translation": "Can edit boards"
@@ -2205,11 +2205,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        145
+        154
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        40
+        46
       ]
     ],
     "translation": "Can edit cards"
@@ -2221,11 +2221,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        150
+        159
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        45
+        51
       ]
     ],
     "translation": "Can edit comments"
@@ -2237,11 +2237,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        140
+        149
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        35
+        41
       ]
     ],
     "translation": "Can edit lists"
@@ -2253,11 +2253,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        155
+        164
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        50
+        56
       ]
     ],
     "translation": "Can edit member roles and permissions"
@@ -2269,11 +2269,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        129
+        138
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        24
+        30
       ]
     ],
     "translation": "Can edit workspace"
@@ -2285,11 +2285,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        154
+        163
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        49
+        55
       ]
     ],
     "translation": "Can invite members"
@@ -2301,11 +2301,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        131
+        140
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        26
+        32
       ]
     ],
     "translation": "Can manage workspace settings"
@@ -2317,11 +2317,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        156
+        165
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        51
+        57
       ]
     ],
     "translation": "Can remove members"
@@ -2333,11 +2333,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        133
+        142
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        28
+        34
       ]
     ],
     "translation": "Can view boards"
@@ -2349,11 +2349,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        143
+        152
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        38
+        44
       ]
     ],
     "translation": "Can view cards"
@@ -2365,11 +2365,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        148
+        157
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        43
+        49
       ]
     ],
     "translation": "Can view comments"
@@ -2381,11 +2381,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        138
+        147
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        33
+        39
       ]
     ],
     "translation": "Can view lists"
@@ -2397,11 +2397,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        153
+        162
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        48
+        54
       ]
     ],
     "translation": "Can view members"
@@ -2413,11 +2413,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        128
+        137
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        23
+        29
       ]
     ],
     "translation": "Can view workspace"
@@ -2489,7 +2489,7 @@
       ],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
-        40
+        39
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -2797,7 +2797,7 @@
     "origin": [
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
-        32
+        31
       ]
     ],
     "translation": "Clear all custom permissions?"
@@ -2809,7 +2809,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        67
+        69
       ]
     ],
     "translation": "Clear any custom member permissions so that all members only inherit permissions from their role defaults."
@@ -2821,11 +2821,11 @@
     "origin": [
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
-        48
+        47
       ],
       [
         "src/views/settings/PermissionsSettings.tsx",
-        80
+        82
       ]
     ],
     "translation": "Clear custom permissions"
@@ -2877,7 +2877,7 @@
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        175
+        184
       ],
       [
         "src/views/settings/components/NewApiKeyModal.tsx",
@@ -3074,7 +3074,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        56
+        58
       ]
     ],
     "translation": "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role."
@@ -3764,7 +3764,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        64
+        66
       ]
     ],
     "translation": "Custom permissions"
@@ -4596,7 +4596,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        165
+        174
       ],
       [
         "src/views/members/index.tsx",
@@ -5990,7 +5990,7 @@
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        18
+        24
       ]
     ],
     "translation": "Guest"
@@ -6974,7 +6974,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        183
+        192
       ]
     ],
     "translation": "Loading permissions..."
@@ -7194,7 +7194,7 @@
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        16
+        22
       ]
     ],
     "translation": "Member"
@@ -7901,7 +7901,7 @@
     "origin": [
       [
         "src/views/settings/components/RolePermissions.tsx",
-        120
+        131
       ]
     ],
     "translation": "No roles found for this workspace yet."
@@ -8109,7 +8109,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        25
+        27
       ]
     ],
     "translation": "Overrides cleared"
@@ -8337,7 +8337,7 @@
     "origin": [
       [
         "src/views/settings/components/RolePermissions.tsx",
-        129
+        140
       ]
     ],
     "translation": "Permission"
@@ -8361,7 +8361,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        83
+        94
       ]
     ],
     "translation": "Permissions reset"
@@ -8373,11 +8373,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        37
+        50
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        60
+        72
       ]
     ],
     "translation": "Permissions updated"
@@ -8709,15 +8709,15 @@
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        45
+        58
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        68
+        80
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        96
+        104
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -8765,7 +8765,7 @@
       ],
       [
         "src/views/settings/PermissionsSettings.tsx",
-        40
+        42
       ]
     ],
     "translation": "Please try again later, or contact customer support."
@@ -9409,7 +9409,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        248
+        257
       ]
     ],
     "translation": "Reset to role defaults"
@@ -10062,7 +10062,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        49
+        51
       ]
     ],
     "translation": "Settings | Permissions"
@@ -10983,11 +10983,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        38
+        51
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        61
+        73
       ]
     ],
     "translation": "The member's permissions have been updated."
@@ -11163,7 +11163,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        84
+        95
       ]
     ],
     "translation": "This member's permissions have been reset to their role defaults."
@@ -11215,7 +11215,7 @@
     "origin": [
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
-        35
+        34
       ]
     ],
     "translation": "This will remove all custom member permissions in this workspace. Members will inherit permissions only from their roles."
@@ -11511,7 +11511,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        39
+        41
       ]
     ],
     "translation": "Unable to clear overrides"
@@ -11783,7 +11783,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        95
+        103
       ]
     ],
     "translation": "Unable to reset permissions"
@@ -11979,11 +11979,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        44
+        57
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        67
+        79
       ]
     ],
     "translation": "Unable to update permissions"
@@ -13194,7 +13194,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        53
+        55
       ]
     ],
     "translation": "Workspace permissions"
@@ -13469,7 +13469,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        86
+        88
       ]
     ],
     "translation": "You need to be an admin to manage workspace permissions."

@@ -867,7 +867,7 @@
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        14
+        20
       ]
     ],
     "translation": "Administrator"
@@ -951,7 +951,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        26
+        28
       ]
     ],
     "translation": "Alle brugerdefinerede medlemsrettigheder er nulstillet til standardindstillingerne for deres roller."
@@ -2045,11 +2045,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        149
+        158
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        44
+        50
       ]
     ],
     "translation": "Kan tilføje kommentarer"
@@ -2061,11 +2061,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        134
+        143
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        29
+        35
       ]
     ],
     "translation": "Kan oprette tavler"
@@ -2077,11 +2077,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        144
+        153
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        39
+        45
       ]
     ],
     "translation": "Kan oprette kort"
@@ -2093,11 +2093,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        139
+        148
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        34
+        40
       ]
     ],
     "translation": "Kan oprette lister"
@@ -2109,11 +2109,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        136
+        145
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        31
+        37
       ]
     ],
     "translation": "Kan slette tavler"
@@ -2125,11 +2125,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        146
+        155
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        41
+        47
       ]
     ],
     "translation": "Kan slette kort"
@@ -2141,11 +2141,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        151
+        160
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        46
+        52
       ]
     ],
     "translation": "Kan slette kommentarer"
@@ -2157,11 +2157,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        141
+        150
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        36
+        42
       ]
     ],
     "translation": "Kan slette lister"
@@ -2173,11 +2173,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        130
+        139
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        25
+        31
       ]
     ],
     "translation": "Kan slette arbejdsområdet"
@@ -2189,11 +2189,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        135
+        144
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        30
+        36
       ]
     ],
     "translation": "Kan redigere tavler"
@@ -2205,11 +2205,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        145
+        154
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        40
+        46
       ]
     ],
     "translation": "Kan redigere kort"
@@ -2221,11 +2221,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        150
+        159
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        45
+        51
       ]
     ],
     "translation": "Kan redigere kommentarer"
@@ -2237,11 +2237,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        140
+        149
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        35
+        41
       ]
     ],
     "translation": "Kan redigere lister"
@@ -2253,11 +2253,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        155
+        164
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        50
+        56
       ]
     ],
     "translation": "Kan redigere medlemsroller og rettigheder"
@@ -2269,11 +2269,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        129
+        138
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        24
+        30
       ]
     ],
     "translation": "Kan redigere arbejdsområdet"
@@ -2285,11 +2285,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        154
+        163
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        49
+        55
       ]
     ],
     "translation": "Kan invitere medlemmer"
@@ -2301,11 +2301,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        131
+        140
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        26
+        32
       ]
     ],
     "translation": "Kan administrere indstillinger for arbejdsområdet"
@@ -2317,11 +2317,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        156
+        165
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        51
+        57
       ]
     ],
     "translation": "Kan fjerne medlemmer"
@@ -2333,11 +2333,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        133
+        142
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        28
+        34
       ]
     ],
     "translation": "Kan se tavler"
@@ -2349,11 +2349,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        143
+        152
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        38
+        44
       ]
     ],
     "translation": "Kan se kort"
@@ -2365,11 +2365,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        148
+        157
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        43
+        49
       ]
     ],
     "translation": "Kan se kommentarer"
@@ -2381,11 +2381,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        138
+        147
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        33
+        39
       ]
     ],
     "translation": "Kan se lister"
@@ -2397,11 +2397,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        153
+        162
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        48
+        54
       ]
     ],
     "translation": "Kan se medlemmer"
@@ -2413,11 +2413,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        128
+        137
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        23
+        29
       ]
     ],
     "translation": "Kan se arbejdsområdet"
@@ -2489,7 +2489,7 @@
       ],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
-        40
+        39
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -2797,7 +2797,7 @@
     "origin": [
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
-        32
+        31
       ]
     ],
     "translation": "Ryd alle brugerdefinerede rettigheder?"
@@ -2809,7 +2809,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        67
+        69
       ]
     ],
     "translation": "Ryd alle brugerdefinerede medlemsrettigheder, så alle medlemmer kun arver rettigheder fra deres standardrolle."
@@ -2821,11 +2821,11 @@
     "origin": [
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
-        48
+        47
       ],
       [
         "src/views/settings/PermissionsSettings.tsx",
-        80
+        82
       ]
     ],
     "translation": "Ryd brugerdefinerede rettigheder"
@@ -2877,7 +2877,7 @@
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        175
+        184
       ],
       [
         "src/views/settings/components/NewApiKeyModal.tsx",
@@ -3074,7 +3074,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        56
+        58
       ]
     ],
     "translation": "Konfigurer, hvilke handlinger der er tilladt for hver rolle i arbejdsområdet. Disse rettigheder gælder for alle medlemmer med den pågældende rolle."
@@ -3751,7 +3751,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        64
+        66
       ]
     ],
     "translation": "Brugerdefinerede rettigheder"
@@ -4557,7 +4557,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        165
+        174
       ],
       [
         "src/views/members/index.tsx",
@@ -5938,7 +5938,7 @@
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        18
+        24
       ]
     ],
     "translation": "Gæst"
@@ -6896,7 +6896,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        183
+        192
       ]
     ],
     "translation": "Indlæser rettigheder..."
@@ -7116,7 +7116,7 @@
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
-        16
+        22
       ]
     ],
     "translation": "Medlem"
@@ -7823,7 +7823,7 @@
     "origin": [
       [
         "src/views/settings/components/RolePermissions.tsx",
-        120
+        131
       ]
     ],
     "translation": "Der er endnu ikke fundet nogen roller for dette arbejdsområde."
@@ -8031,7 +8031,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        25
+        27
       ]
     ],
     "translation": "Tilsidesættelser ryddet"
@@ -8259,7 +8259,7 @@
     "origin": [
       [
         "src/views/settings/components/RolePermissions.tsx",
-        129
+        140
       ]
     ],
     "translation": "Rettighed"
@@ -8283,7 +8283,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        83
+        94
       ]
     ],
     "translation": "Rettigheder nulstillet"
@@ -8295,11 +8295,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        37
+        50
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        60
+        72
       ]
     ],
     "translation": "Rettigheder opdateret"
@@ -8631,15 +8631,15 @@
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        45
+        58
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        68
+        80
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        96
+        104
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -8687,7 +8687,7 @@
       ],
       [
         "src/views/settings/PermissionsSettings.tsx",
-        40
+        42
       ]
     ],
     "translation": "Prøv igen senere, eller kontakt kundesupport."
@@ -9331,7 +9331,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        248
+        257
       ]
     ],
     "translation": "Nulstil til rollens standardindstillinger"
@@ -9984,7 +9984,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        49
+        51
       ]
     ],
     "translation": "Indstillinger | Rettigheder"
@@ -10905,11 +10905,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        38
+        51
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        61
+        73
       ]
     ],
     "translation": "Medlemmets rettigheder er blevet opdateret."
@@ -11085,7 +11085,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        84
+        95
       ]
     ],
     "translation": "Dette medlems rettigheder er nulstillet til standardindstillingerne for rollen."
@@ -11137,7 +11137,7 @@
     "origin": [
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
-        35
+        34
       ]
     ],
     "translation": "Dette fjerner alle brugerdefinerede medlemsrettigheder i arbejdsområdet. Medlemmer vil derefter kun arve rettigheder fra deres roller."
@@ -11433,7 +11433,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        39
+        41
       ]
     ],
     "translation": "Kunne ikke rydde tilsidesættelser"
@@ -11705,7 +11705,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        95
+        103
       ]
     ],
     "translation": "Kunne ikke nulstille rettigheder"
@@ -11901,11 +11901,11 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        44
+        57
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        67
+        79
       ]
     ],
     "translation": "Kunne ikke opdatere rettigheder"
@@ -13073,7 +13073,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        53
+        55
       ]
     ],
     "translation": "Rettigheder for arbejdsområdet"
@@ -13322,7 +13322,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        86
+        88
       ]
     ],
     "translation": "Du skal være administrator for at administrere rettigheder for arbejdsområdet."

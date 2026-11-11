@@ -505,7 +505,7 @@
       ["src/views/board/members/index.tsx", 175],
       ["src/views/board/members/index.tsx", 191],
       ["src/views/members/index.tsx", 224],
-      ["src/views/settings/components/RolePermissions.tsx", 14]
+      ["src/views/settings/components/RolePermissions.tsx", 20]
     ],
     "translation": "Administrador"
   },
@@ -555,7 +555,7 @@
     "message": "All member permission overrides have been reset to their role defaults.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 26]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 28]],
     "translation": "Todas as substituições de permissões de membros foram redefinidas para os padrões de suas funções."
   },
   "ZAs2NN": {
@@ -1221,8 +1221,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 149],
-      ["src/views/settings/components/RolePermissions.tsx", 44]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 158],
+      ["src/views/settings/components/RolePermissions.tsx", 50]
     ],
     "translation": "Pode adicionar comentários"
   },
@@ -1231,8 +1231,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 134],
-      ["src/views/settings/components/RolePermissions.tsx", 29]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 143],
+      ["src/views/settings/components/RolePermissions.tsx", 35]
     ],
     "translation": "Pode criar quadros"
   },
@@ -1241,8 +1241,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 144],
-      ["src/views/settings/components/RolePermissions.tsx", 39]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 153],
+      ["src/views/settings/components/RolePermissions.tsx", 45]
     ],
     "translation": "Pode criar cartões"
   },
@@ -1251,8 +1251,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 139],
-      ["src/views/settings/components/RolePermissions.tsx", 34]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 148],
+      ["src/views/settings/components/RolePermissions.tsx", 40]
     ],
     "translation": "Pode criar listas"
   },
@@ -1261,8 +1261,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 136],
-      ["src/views/settings/components/RolePermissions.tsx", 31]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 145],
+      ["src/views/settings/components/RolePermissions.tsx", 37]
     ],
     "translation": "Pode excluir quadros"
   },
@@ -1271,8 +1271,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 146],
-      ["src/views/settings/components/RolePermissions.tsx", 41]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 155],
+      ["src/views/settings/components/RolePermissions.tsx", 47]
     ],
     "translation": "Pode excluir cartões"
   },
@@ -1281,8 +1281,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 151],
-      ["src/views/settings/components/RolePermissions.tsx", 46]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 160],
+      ["src/views/settings/components/RolePermissions.tsx", 52]
     ],
     "translation": "Pode excluir comentários"
   },
@@ -1291,8 +1291,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 141],
-      ["src/views/settings/components/RolePermissions.tsx", 36]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 150],
+      ["src/views/settings/components/RolePermissions.tsx", 42]
     ],
     "translation": "Pode excluir listas"
   },
@@ -1301,8 +1301,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 130],
-      ["src/views/settings/components/RolePermissions.tsx", 25]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 139],
+      ["src/views/settings/components/RolePermissions.tsx", 31]
     ],
     "translation": "Pode excluir workspace"
   },
@@ -1311,8 +1311,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 135],
-      ["src/views/settings/components/RolePermissions.tsx", 30]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 144],
+      ["src/views/settings/components/RolePermissions.tsx", 36]
     ],
     "translation": "Pode editar quadros"
   },
@@ -1321,8 +1321,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 145],
-      ["src/views/settings/components/RolePermissions.tsx", 40]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 154],
+      ["src/views/settings/components/RolePermissions.tsx", 46]
     ],
     "translation": "Pode editar cartões"
   },
@@ -1331,8 +1331,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 150],
-      ["src/views/settings/components/RolePermissions.tsx", 45]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 159],
+      ["src/views/settings/components/RolePermissions.tsx", 51]
     ],
     "translation": "Pode editar comentários"
   },
@@ -1341,8 +1341,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 140],
-      ["src/views/settings/components/RolePermissions.tsx", 35]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 149],
+      ["src/views/settings/components/RolePermissions.tsx", 41]
     ],
     "translation": "Pode editar listas"
   },
@@ -1351,8 +1351,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 155],
-      ["src/views/settings/components/RolePermissions.tsx", 50]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 164],
+      ["src/views/settings/components/RolePermissions.tsx", 56]
     ],
     "translation": "Pode editar funções e permissões de membros"
   },
@@ -1361,8 +1361,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 129],
-      ["src/views/settings/components/RolePermissions.tsx", 24]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 138],
+      ["src/views/settings/components/RolePermissions.tsx", 30]
     ],
     "translation": "Pode editar workspace"
   },
@@ -1371,8 +1371,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 154],
-      ["src/views/settings/components/RolePermissions.tsx", 49]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 163],
+      ["src/views/settings/components/RolePermissions.tsx", 55]
     ],
     "translation": "Pode convidar membros"
   },
@@ -1381,8 +1381,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 131],
-      ["src/views/settings/components/RolePermissions.tsx", 26]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 140],
+      ["src/views/settings/components/RolePermissions.tsx", 32]
     ],
     "translation": "Pode gerenciar configurações do workspace"
   },
@@ -1391,8 +1391,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 156],
-      ["src/views/settings/components/RolePermissions.tsx", 51]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 165],
+      ["src/views/settings/components/RolePermissions.tsx", 57]
     ],
     "translation": "Pode remover membros"
   },
@@ -1401,8 +1401,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 133],
-      ["src/views/settings/components/RolePermissions.tsx", 28]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 142],
+      ["src/views/settings/components/RolePermissions.tsx", 34]
     ],
     "translation": "Pode visualizar quadros"
   },
@@ -1411,8 +1411,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 143],
-      ["src/views/settings/components/RolePermissions.tsx", 38]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 152],
+      ["src/views/settings/components/RolePermissions.tsx", 44]
     ],
     "translation": "Pode visualizar cartões"
   },
@@ -1421,8 +1421,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 148],
-      ["src/views/settings/components/RolePermissions.tsx", 43]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 157],
+      ["src/views/settings/components/RolePermissions.tsx", 49]
     ],
     "translation": "Pode visualizar comentários"
   },
@@ -1431,8 +1431,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 138],
-      ["src/views/settings/components/RolePermissions.tsx", 33]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 147],
+      ["src/views/settings/components/RolePermissions.tsx", 39]
     ],
     "translation": "Pode visualizar listas"
   },
@@ -1441,8 +1441,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 153],
-      ["src/views/settings/components/RolePermissions.tsx", 48]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 162],
+      ["src/views/settings/components/RolePermissions.tsx", 54]
     ],
     "translation": "Pode visualizar membros"
   },
@@ -1451,8 +1451,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 128],
-      ["src/views/settings/components/RolePermissions.tsx", 23]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 137],
+      ["src/views/settings/components/RolePermissions.tsx", 29]
     ],
     "translation": "Pode visualizar workspace"
   },
@@ -1481,7 +1481,7 @@
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 206],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
-        40
+        39
       ],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 88],
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 75],
@@ -1660,7 +1660,7 @@
     "origin": [
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
-        32
+        31
       ]
     ],
     "translation": "Limpar todas as permissões personalizadas?"
@@ -1669,7 +1669,7 @@
     "message": "Clear any custom member permissions so that all members only inherit permissions from their role defaults.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 67]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 69]],
     "translation": "Limpe quaisquer permissões personalizadas de membros para que todos os membros herdem apenas as permissões padrão de suas funções."
   },
   "jL82rC": {
@@ -1679,9 +1679,9 @@
     "origin": [
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
-        48
+        47
       ],
-      ["src/views/settings/PermissionsSettings.tsx", 80]
+      ["src/views/settings/PermissionsSettings.tsx", 82]
     ],
     "translation": "Limpar permissões personalizadas"
   },
@@ -1711,7 +1711,7 @@
     "origin": [
       ["src/components/Dashboard.tsx", 281],
       ["src/views/card/index.tsx", 415],
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 175],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 184],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
     ],
     "translation": "Fechar"
@@ -1827,7 +1827,7 @@
     "message": "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 56]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 58]],
     "translation": "Configure quais ações são permitidas para cada função do workspace. Essas permissões se aplicam a todos os membros com essa função."
   },
   "86XI28": {
@@ -2244,7 +2244,7 @@
     "message": "Custom permissions",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 64]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 66]],
     "translation": "Permissões personalizadas"
   },
   "UirJfL": {
@@ -2720,7 +2720,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 165],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 174],
       ["src/views/members/index.tsx", 247]
     ],
     "translation": "Editar permissões"
@@ -3564,7 +3564,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/index.tsx", 226],
-      ["src/views/settings/components/RolePermissions.tsx", 18]
+      ["src/views/settings/components/RolePermissions.tsx", 24]
     ],
     "translation": "Convidado"
   },
@@ -4149,7 +4149,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 183]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 192]
     ],
     "translation": "Carregando permissões..."
   },
@@ -4273,7 +4273,7 @@
       ["src/views/card/components/ActivityList.tsx", 56],
       ["src/views/card/components/ActivityList.tsx", 89],
       ["src/views/members/index.tsx", 225],
-      ["src/views/settings/components/RolePermissions.tsx", 16]
+      ["src/views/settings/components/RolePermissions.tsx", 22]
     ],
     "translation": "Membro"
   },
@@ -4682,7 +4682,7 @@
     "message": "No roles found for this workspace yet.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/RolePermissions.tsx", 120]],
+    "origin": [["src/views/settings/components/RolePermissions.tsx", 131]],
     "translation": "Nenhuma função encontrada para este workspace ainda."
   },
   "TX0bT7": {
@@ -4808,7 +4808,7 @@
     "message": "Overrides cleared",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 25]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 27]],
     "translation": "Substituições removidas"
   },
   "SPLN9O": {
@@ -4945,7 +4945,7 @@
     "message": "Permission",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/RolePermissions.tsx", 129]],
+    "origin": [["src/views/settings/components/RolePermissions.tsx", 140]],
     "translation": "Permissão"
   },
   "9cDpsw": {
@@ -4960,7 +4960,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 83]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 94]
     ],
     "translation": "Permissões redefinidas"
   },
@@ -4969,8 +4969,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 37],
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 60]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 50],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 72]
     ],
     "translation": "Permissões atualizadas"
   },
@@ -5126,9 +5126,9 @@
       ["src/views/card/index.tsx", 259],
       ["src/views/card/index.tsx", 272],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 31],
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 45],
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 68],
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 96],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 58],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 80],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 104],
       ["src/views/members/components/InviteMemberForm.tsx", 122],
       ["src/views/members/index.tsx", 72],
       ["src/views/onboarding/workspace-details/index.tsx", 119],
@@ -5140,7 +5140,7 @@
       ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 64],
       ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 59],
       ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 76],
-      ["src/views/settings/PermissionsSettings.tsx", 40]
+      ["src/views/settings/PermissionsSettings.tsx", 42]
     ],
     "translation": "Por favor, tente novamente mais tarde ou entre em contato com o suporte ao cliente."
   },
@@ -5510,7 +5510,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 248]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 257]
     ],
     "translation": "Redefinir para padrões da função"
   },
@@ -5898,7 +5898,7 @@
     "message": "Settings | Permissions",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 49]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 51]],
     "translation": "Configurações | Permissões"
   },
   "+h2faV": {
@@ -6450,8 +6450,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 38],
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 61]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 51],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 73]
     ],
     "translation": "As permissões do membro foram atualizadas."
   },
@@ -6559,7 +6559,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 84]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 95]
     ],
     "translation": "As permissões deste membro foram redefinidas para os padrões de sua função."
   },
@@ -6594,7 +6594,7 @@
     "origin": [
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
-        35
+        34
       ]
     ],
     "translation": "Isso removerá todas as permissões personalizadas de membros neste workspace. Os membros herdarão permissões apenas de suas funções."
@@ -6780,7 +6780,7 @@
     "message": "Unable to clear overrides",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 39]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 41]],
     "translation": "Não foi possível limpar substituições"
   },
   "5MPY04": {
@@ -6946,7 +6946,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 95]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 103]
     ],
     "translation": "Não foi possível redefinir as permissões"
   },
@@ -7065,8 +7065,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 44],
-      ["src/views/members/components/EditMemberPermissionsModal.tsx", 67]
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 57],
+      ["src/views/members/components/EditMemberPermissionsModal.tsx", 79]
     ],
     "translation": "Não foi possível atualizar as permissões"
   },
@@ -7787,7 +7787,7 @@
     "message": "Workspace permissions",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 53]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 55]],
     "translation": "Permissões do workspace"
   },
   "MN6YzG": {
@@ -7948,7 +7948,7 @@
     "message": "You need to be an admin to manage workspace permissions.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 86]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 88]],
     "translation": "Você precisa ser um administrador para gerenciar as permissões do workspace."
   },
   "ZhQoZn": {
