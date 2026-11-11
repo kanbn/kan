@@ -469,6 +469,203 @@
         ]
       }
     },
+    "/integration/providers": {
+      "get": {
+        "operationId": "getIntegrationProviders",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IntegrationProviderDto_Output"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get the current user's integration providers",
+        "tags": [
+          "Integration"
+        ]
+      }
+    },
+    "/integration/disconnect": {
+      "post": {
+        "operationId": "disconnectIntegration",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisconnectIntegrationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Disconnect an integration",
+        "tags": [
+          "Integration"
+        ]
+      }
+    },
+    "/integration/authorize": {
+      "get": {
+        "operationId": "getIntegrationAuthorizationUrl",
+        "parameters": [
+          {
+            "name": "provider",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "trello"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizationUrlResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get the authorization URL for an integration",
+        "tags": [
+          "Integration"
+        ]
+      }
+    },
+    "/integration/github/token": {
+      "post": {
+        "operationId": "saveGitHubToken",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveGitHubTokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Save a GitHub access token for the current user",
+        "tags": [
+          "Integration"
+        ]
+      }
+    },
+    "/integration/github": {
+      "delete": {
+        "operationId": "disconnectGitHub",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Disconnect the current user's GitHub integration",
+        "tags": [
+          "Integration"
+        ]
+      }
+    },
+    "/integration/github/status": {
+      "get": {
+        "operationId": "getGitHubStatus",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GitHubStatusResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Check whether the current user has connected GitHub",
+        "tags": [
+          "Integration"
+        ]
+      }
+    },
     "/labels/{labelPublicId}": {
       "get": {
         "operationId": "getLabel",
@@ -1585,6 +1782,229 @@
         ]
       }
     },
+    "/workspaces/{workspacePublicId}/webhooks": {
+      "get": {
+        "operationId": "getWebhooks",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WebhookResponseDto_Output"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List a workspace's webhooks",
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "post": {
+        "operationId": "createWebhook",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWebhookDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a webhook",
+        "tags": [
+          "Webhooks"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}/webhooks/{webhookPublicId}": {
+      "put": {
+        "operationId": "updateWebhook",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "webhookPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWebhookDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a webhook",
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteWebhook",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "webhookPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteWebhookResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a webhook",
+        "tags": [
+          "Webhooks"
+        ]
+      }
+    },
+    "/workspaces/{workspacePublicId}/webhooks/{webhookPublicId}/test": {
+      "post": {
+        "operationId": "testWebhook",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "webhookPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestWebhookResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Send a test payload to a webhook",
+        "tags": [
+          "Webhooks"
+        ]
+      }
+    },
     "/workspaces": {
       "get": {
         "operationId": "getWorkspaces",
@@ -2220,6 +2640,108 @@
           "success"
         ]
       },
+      "IntegrationProviderDto_Output": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+            "nullable": true
+          }
+        },
+        "required": [
+          "provider",
+          "userId",
+          "expiresAt",
+          "createdAt",
+          "updatedAt"
+        ],
+        "additionalProperties": false
+      },
+      "DisconnectIntegrationDto": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "trello",
+              "github"
+            ]
+          }
+        },
+        "required": [
+          "provider"
+        ]
+      },
+      "EmptyResponseDto_Output": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "AuthorizationUrlResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": false
+      },
+      "SaveGitHubTokenDto": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ]
+      },
+      "SuccessResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
+      },
+      "GitHubStatusResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "connected": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "connected"
+        ],
+        "additionalProperties": false
+      },
       "LabelResponseDto": {
         "type": "object",
         "properties": {
@@ -2730,6 +3252,154 @@
           "name",
           "permissions"
         ]
+      },
+      "WebhookResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "publicId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "card.created",
+                "card.updated",
+                "card.moved",
+                "card.deleted"
+              ]
+            }
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+            "nullable": true
+          }
+        },
+        "required": [
+          "publicId",
+          "name",
+          "url",
+          "events",
+          "active",
+          "createdAt",
+          "updatedAt"
+        ],
+        "additionalProperties": false
+      },
+      "CreateWebhookDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "url": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string",
+            "maxLength": 512
+          },
+          "events": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "card.created",
+                "card.updated",
+                "card.moved",
+                "card.deleted"
+              ]
+            }
+          }
+        },
+        "required": [
+          "name",
+          "url",
+          "events"
+        ]
+      },
+      "UpdateWebhookDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "url": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string",
+            "maxLength": 512
+          },
+          "events": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "card.created",
+                "card.updated",
+                "card.moved",
+                "card.deleted"
+              ]
+            }
+          },
+          "active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DeleteWebhookResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
+      },
+      "TestWebhookResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "statusCode": {
+            "type": "number"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
       },
       "SearchBoardResultDto": {
         "type": "object",

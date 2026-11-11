@@ -12,6 +12,12 @@ import {
   HiXMark,
 } from "react-icons/hi2";
 
+import {
+  useGetGitHubStatus,
+  useGetIntegrationAuthorizationUrl,
+  useGetIntegrationProviders,
+} from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
@@ -39,9 +45,9 @@ const SelectSource = ({
   handleNextStep: (provider: string) => void;
 }) => {
   const { data: integrations, refetch: refetchIntegrations } =
-    api.integration.providers.useQuery();
+    useGetIntegrationProviders({ query: { select: (res) => res.data } });
   const { data: githubStatus, refetch: refetchGithubStatus } =
-    api.integration.getGitHubStatus.useQuery();
+    useGetGitHubStatus({ query: { select: (res) => res.data } });
 
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
@@ -49,12 +55,15 @@ const SelectSource = ({
     },
   });
 
-  const { data: trelloUrl } = api.integration.getAuthorizationUrl.useQuery(
+  const { data: trelloUrl } = useGetIntegrationAuthorizationUrl(
     { provider: "trello" },
     {
-      enabled: !integrations?.some(
-        (integration) => integration.provider === "trello",
-      ),
+      query: {
+        enabled: !integrations?.some(
+          (integration) => integration.provider === "trello",
+        ),
+        select: (res) => res.data,
+      },
     },
   );
 

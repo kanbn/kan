@@ -52,6 +52,14 @@
       "types": "./src/utils/avatarUrls.ts",
       "default": "./src/utils/avatarUrls.ts"
     },
+    "./utils/encryption": {
+      "types": "./src/utils/encryption.ts",
+      "default": "./src/utils/encryption.ts"
+    },
+    "./utils/webhook": {
+      "types": "./src/utils/webhook.ts",
+      "default": "./src/utils/webhook.ts"
+    },
     "./utils/trello-token": {
       "types": "./src/utils/trello-token.ts",
       "default": "./src/utils/trello-token.ts"

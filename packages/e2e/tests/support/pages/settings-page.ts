@@ -83,7 +83,7 @@ export class SettingsPage {
     await dialog.getByPlaceholder("My webhook").fill(name);
     await dialog.getByPlaceholder("https://example.com/webhook").fill(url);
 
-    const created = waitForTrpcMutation(this.page, "webhook.create");
+    const created = waitForResponsePath(this.page, "/webhooks", "POST");
     await dialog.getByRole("button", { name: "Create webhook" }).click();
     await created;
 
@@ -96,7 +96,7 @@ export class SettingsPage {
       .click();
     await this.page.getByRole("menuitem", { name: "Delete" }).click();
 
-    const deleted = waitForTrpcMutation(this.page, "webhook.delete");
+    const deleted = waitForResponsePath(this.page, "/webhooks/", "DELETE");
     await this.page
       .getByRole("button", { name: "Delete", exact: true })
       .click();

@@ -5,6 +5,15 @@ import { useForm } from "react-hook-form";
 import { HiMiniArrowTopRightOnSquare } from "react-icons/hi2";
 import { z } from "zod";
 
+import {
+  useDisconnectGitHub,
+  useDisconnectIntegration,
+  useGetGitHubStatus,
+  useGetIntegrationAuthorizationUrl,
+  useGetIntegrationProviders,
+  useSaveGitHubToken,
+} from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import FeedbackModal from "~/components/FeedbackModal";
 import Input from "~/components/Input";
@@ -13,7 +22,6 @@ import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 const githubTokenSchema = z.object({
   token: z.string().min(1, { message: t`Token is required` }),
@@ -41,23 +49,26 @@ export default function IntegrationsSettings() {
     data: integrations,
     refetch: refetchIntegrations,
     isLoading: integrationsLoading,
-  } = api.integration.providers.useQuery();
+  } = useGetIntegrationProviders({ query: { select: (res) => res.data } });
 
   const { data: trelloUrl, refetch: refetchTrelloUrl } =
-    api.integration.getAuthorizationUrl.useQuery(
+    useGetIntegrationAuthorizationUrl(
       { provider: "trello" },
       {
-        enabled:
-          !integrationsLoading &&
-          !integrations?.some(
-            (integration) => integration.provider === "trello",
-          ),
-        refetchOnWindowFocus: true,
+        query: {
+          enabled:
+            !integrationsLoading &&
+            !integrations?.some(
+              (integration) => integration.provider === "trello",
+            ),
+          refetchOnWindowFocus: true,
+          select: (res) => res.data,
+        },
       },
     );
 
   const { data: githubStatus, refetch: refetchGithubStatus } =
-    api.integration.getGitHubStatus.useQuery();
+    useGetGitHubStatus({ query: { select: (res) => res.data } });
 
   useEffect(() => {
     const handleFocus = () => {
@@ -70,8 +81,8 @@ export default function IntegrationsSettings() {
     };
   }, [refetchIntegrations, refetchGithubStatus]);
 
-  const { mutateAsync: disconnectTrello } =
-    api.integration.disconnect.useMutation({
+  const { mutateAsync: disconnectTrello } = useDisconnectIntegration({
+    mutation: {
       onSuccess: () => {
         void refetchIntegrations();
         void refetchTrelloUrl();
@@ -88,34 +99,37 @@ export default function IntegrationsSettings() {
           icon: "error",
         });
       },
-    });
+    },
+  });
 
   const { mutateAsync: saveGithubToken, isPending: isSavingGithubToken } =
-    api.integration.saveGitHubToken.useMutation({
-      onSuccess: () => {
-        void refetchGithubStatus();
-        reset();
-        showPopup({
-          header: t`GitHub connected`,
-          message: t`Your GitHub account has been connected.`,
-          icon: "success",
-        });
-      },
-      onError: () => {
-        showPopup({
-          header: t`Error connecting GitHub`,
-          message: t`An error occurred while connecting your GitHub account.`,
-          icon: "error",
-        });
+    useSaveGitHubToken({
+      mutation: {
+        onSuccess: () => {
+          void refetchGithubStatus();
+          reset();
+          showPopup({
+            header: t`GitHub connected`,
+            message: t`Your GitHub account has been connected.`,
+            icon: "success",
+          });
+        },
+        onError: () => {
+          showPopup({
+            header: t`Error connecting GitHub`,
+            message: t`An error occurred while connecting your GitHub account.`,
+            icon: "error",
+          });
+        },
       },
     });
 
   const onSubmitGithubToken = (data: GitHubTokenFormValues) => {
-    void saveGithubToken({ token: data.token });
+    void saveGithubToken({ data: { token: data.token } });
   };
 
-  const { mutateAsync: disconnectGithub } =
-    api.integration.disconnectGitHub.useMutation({
+  const { mutateAsync: disconnectGithub } = useDisconnectGitHub({
+    mutation: {
       onSuccess: () => {
         void refetchGithubStatus();
         showPopup({
@@ -131,7 +145,8 @@ export default function IntegrationsSettings() {
           icon: "error",
         });
       },
-    });
+    },
+  });
 
   return (
     <>
@@ -172,7 +187,9 @@ export default function IntegrationsSettings() {
               </p>
               <Button
                 variant="secondary"
-                onClick={() => disconnectTrello({ provider: "trello" })}
+                onClick={() =>
+                  disconnectTrello({ data: { provider: "trello" } })
+                }
               >
                 {t`Disconnect Trello`}
               </Button>
