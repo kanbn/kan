@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        899
+        903
       ]
     ],
     "translation": "{0} blev ikke fundet"
@@ -229,11 +229,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        189
+        193
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        201
+        205
       ]
     ],
     "translation": "$10/måned"
@@ -245,7 +245,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        201
+        205
       ]
     ],
     "translation": "$8/måned"
@@ -353,7 +353,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        27
+        26
       ]
     ],
     "translation": "Konto slettet"
@@ -633,7 +633,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        266
+        270
       ]
     ],
     "translation": "Tilføj medlem"
@@ -831,7 +831,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        343
+        347
       ]
     ],
     "translation": "Tilføjelse af et nyt medlem koster yderligere {price} ({billingType}) pr. plads."
@@ -1088,7 +1088,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        317
+        321
       ]
     ],
     "translation": "Alle med dette link kan deltage i dit arbejdsområde"
@@ -1348,7 +1348,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        54
+        53
       ]
     ],
     "translation": "Er du sikker på, at du vil slette din konto?"
@@ -1583,7 +1583,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        202
+        206
       ]
     ],
     "translation": "faktureres årligt"
@@ -1595,7 +1595,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        202
+        206
       ]
     ],
     "translation": "faktureres månedligt"
@@ -1663,7 +1663,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        871
+        875
       ],
       [
         "src/views/board/members/index.tsx",
@@ -1768,7 +1768,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        889
+        893
       ]
     ],
     "translation": ""
@@ -2493,7 +2493,7 @@
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        88
+        87
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
@@ -2605,7 +2605,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        451
+        455
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2781,7 +2781,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        378
+        382
       ],
       [
         "src/views/settings/BillingSettings.tsx",
@@ -3490,7 +3490,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        366
+        370
       ]
     ],
     "translation": "Opret invitationslink"
@@ -3574,11 +3574,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        145
+        149
       ],
       [
         "src/views/board/index.tsx",
-        1027
+        1031
       ]
     ],
     "translation": "Opret ny liste"
@@ -3865,7 +3865,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        365
+        369
       ]
     ],
     "translation": "Deaktivér invitationslink"
@@ -3953,7 +3953,7 @@
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        96
+        95
       ]
     ],
     "translation": "Slet konto"
@@ -4633,7 +4633,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        281
+        285
       ],
       [
         "src/views/settings/AccountSettings.tsx",
@@ -4865,7 +4865,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        249
+        253
       ]
     ],
     "translation": "Fejl"
@@ -4901,7 +4901,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        153
+        157
       ]
     ],
     "translation": "Fejl ved oprettelse af invitationslink"
@@ -4913,7 +4913,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        171
+        175
       ]
     ],
     "translation": "Fejl ved deaktivering af invitationslink"
@@ -4925,7 +4925,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        39
+        38
       ]
     ],
     "translation": "Fejl ved sletning af konto"
@@ -4985,11 +4985,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        110
+        114
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        126
+        130
       ]
     ],
     "translation": "Fejl ved invitation af medlem"
@@ -5178,7 +5178,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        250
+        254
       ]
     ],
     "translation": "Invitationslinket kunne ikke kopieres"
@@ -5562,7 +5562,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        349
+        353
       ],
       [
         "src/views/members/index.tsx",
@@ -5702,7 +5702,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1009
+        1013
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny liste"
@@ -6106,7 +6106,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        82
+        81
       ]
     ],
     "translation": "Jeg bekræfter, at alle mine kontodata slettes permanent, og ønsker at fortsætte."
@@ -6374,7 +6374,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        60
+        64
       ]
     ],
     "translation": "Ugyldig e-mailadresse"
@@ -6410,7 +6410,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        243
+        247
       ]
     ],
     "translation": "Invitationslink kopieret"
@@ -6422,7 +6422,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        244
+        248
       ]
     ],
     "translation": "Invitationslink kopieret til udklipsholderen"
@@ -6450,7 +6450,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        148
+        152
       ]
     ],
     "translation": "Invitationslinks kræver et Team- eller Pro-abonnement. Opgrader dit arbejdsområde."
@@ -6466,7 +6466,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        386
+        390
       ]
     ],
     "translation": "Invitér medlem"
@@ -6491,7 +6491,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        352
+        356
       ]
     ],
     "translation": ""
@@ -6567,7 +6567,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        57
+        56
       ],
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
@@ -6796,7 +6796,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        449
+        453
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -7252,7 +7252,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        190
+        194
       ]
     ],
     "translation": "månedlig fakturering"
@@ -7527,7 +7527,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        951
+        955
       ]
     ],
     "translation": "Ny liste"
@@ -7771,7 +7771,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1005
+        1009
       ]
     ],
     "translation": "Ingen lister"
@@ -7783,7 +7783,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1010
+        1014
       ]
     ],
     "translation": "Der er endnu ikke oprettet nogen lister"
@@ -8523,15 +8523,15 @@
       ],
       [
         "src/views/board/index.tsx",
-        300
+        304
       ],
       [
         "src/views/board/index.tsx",
-        358
+        362
       ],
       [
         "src/views/board/index.tsx",
-        396
+        400
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -8643,7 +8643,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        127
+        131
       ],
       [
         "src/views/members/index.tsx",
@@ -8663,7 +8663,7 @@
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        40
+        39
       ],
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
@@ -8699,11 +8699,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        154
+        158
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        172
+        176
       ]
     ],
     "translation": "Prøv igen senere."
@@ -8727,7 +8727,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        458
+        462
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -8880,7 +8880,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        328
+        332
       ],
       [
         "src/views/members/index.tsx",
@@ -8896,7 +8896,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        340
+        344
       ]
     ],
     "translation": "Pro-abonnement ∞"
@@ -9564,7 +9564,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        120
+        124
       ]
     ],
     "translation": "Grænsen for pladser er nået"
@@ -9576,7 +9576,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        331
+        335
       ],
       [
         "src/views/members/index.tsx",
@@ -10453,7 +10453,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        147
+        151
       ]
     ],
     "translation": "Abonnement påkrævet"
@@ -10562,11 +10562,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        328
+        332
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        340
+        344
       ],
       [
         "src/views/members/index.tsx",
@@ -10602,11 +10602,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        871
+        875
       ],
       [
         "src/views/board/index.tsx",
-        908
+        912
       ]
     ],
     "translation": "Skabelon"
@@ -11161,7 +11161,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        60
+        59
       ]
     ],
     "translation": "Dette medfører permanent sletning af alle data, der er knyttet til din konto."
@@ -11465,7 +11465,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        456
+        460
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11797,7 +11797,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        357
+        361
       ],
       [
         "src/views/card/index.tsx",
@@ -11849,7 +11849,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        395
+        399
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
@@ -11877,7 +11877,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        299
+        303
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -12481,7 +12481,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        111
+        115
       ]
     ],
     "translation": "Brugeren er allerede medlem af dette arbejdsområde"
@@ -12877,7 +12877,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        871
+        875
       ],
       [
         "src/views/boards/index.tsx",
@@ -13274,11 +13274,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        939
+        943
       ],
       [
         "src/views/board/index.tsx",
-        1016
+        1020
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -13390,7 +13390,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        121
+        125
       ]
     ],
     "translation": "Du har nået grænsen på {0} pladser. Opgrader dit abonnement for at tilføje flere medlemmer."
@@ -13414,7 +13414,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        28
+        27
       ]
     ],
     "translation": "Din konto er blevet slettet."

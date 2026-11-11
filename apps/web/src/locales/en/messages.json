@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        899
+        903
       ]
     ],
     "translation": "{0} not found"
@@ -229,11 +229,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        189
+        193
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        201
+        205
       ]
     ],
     "translation": "$10/month"
@@ -245,7 +245,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        201
+        205
       ]
     ],
     "translation": "$8/month"
@@ -353,7 +353,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        27
+        26
       ]
     ],
     "translation": "Account deleted"
@@ -633,7 +633,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        266
+        270
       ]
     ],
     "translation": "Add member"
@@ -831,7 +831,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        343
+        347
       ]
     ],
     "translation": "Adding a new member will cost an additional {price} ({billingType}) per seat."
@@ -1088,7 +1088,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        317
+        321
       ]
     ],
     "translation": "Anyone with this link can join your workspace"
@@ -1348,7 +1348,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        54
+        53
       ]
     ],
     "translation": "Are you sure you want to delete your account?"
@@ -1583,7 +1583,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        202
+        206
       ]
     ],
     "translation": "billed annually"
@@ -1595,7 +1595,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        202
+        206
       ]
     ],
     "translation": "billed monthly"
@@ -1663,7 +1663,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        871
+        875
       ],
       [
         "src/views/board/members/index.tsx",
@@ -1768,7 +1768,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        889
+        893
       ]
     ],
     "translation": "Board name"
@@ -2493,7 +2493,7 @@
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        88
+        87
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
@@ -2605,7 +2605,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        451
+        455
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2781,7 +2781,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        378
+        382
       ],
       [
         "src/views/settings/BillingSettings.tsx",
@@ -3503,7 +3503,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        366
+        370
       ]
     ],
     "translation": "Create invite link"
@@ -3587,11 +3587,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        145
+        149
       ],
       [
         "src/views/board/index.tsx",
-        1027
+        1031
       ]
     ],
     "translation": "Create new list"
@@ -3891,7 +3891,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        365
+        369
       ]
     ],
     "translation": "Deactivate invite link"
@@ -3979,7 +3979,7 @@
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        96
+        95
       ]
     ],
     "translation": "Delete account"
@@ -4672,7 +4672,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        281
+        285
       ],
       [
         "src/views/settings/AccountSettings.tsx",
@@ -4904,7 +4904,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        249
+        253
       ]
     ],
     "translation": "Error"
@@ -4940,7 +4940,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        153
+        157
       ]
     ],
     "translation": "Error creating invite link"
@@ -4952,7 +4952,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        171
+        175
       ]
     ],
     "translation": "Error deactivating invite link"
@@ -4964,7 +4964,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        39
+        38
       ]
     ],
     "translation": "Error deleting account"
@@ -5024,11 +5024,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        110
+        114
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        126
+        130
       ]
     ],
     "translation": "Error inviting member"
@@ -5230,7 +5230,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        250
+        254
       ]
     ],
     "translation": "Failed to copy invite link"
@@ -5614,7 +5614,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        349
+        353
       ],
       [
         "src/views/members/index.tsx",
@@ -5754,7 +5754,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1009
+        1013
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -6158,7 +6158,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        82
+        81
       ]
     ],
     "translation": "I acknowledge that all of my account data will be permanently deleted and want to proceed."
@@ -6426,7 +6426,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        60
+        64
       ]
     ],
     "translation": "Invalid email address"
@@ -6462,7 +6462,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        243
+        247
       ]
     ],
     "translation": "Invite link copied"
@@ -6474,7 +6474,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        244
+        248
       ]
     ],
     "translation": "Invite link copied to clipboard"
@@ -6502,7 +6502,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        148
+        152
       ]
     ],
     "translation": "Invite links require a Team or Pro subscription. Please upgrade your workspace."
@@ -6518,7 +6518,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        386
+        390
       ]
     ],
     "translation": "Invite member"
@@ -6543,7 +6543,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        352
+        356
       ]
     ],
     "translation": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace."
@@ -6632,7 +6632,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        57
+        56
       ],
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
@@ -6874,7 +6874,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        449
+        453
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -7330,7 +7330,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        190
+        194
       ]
     ],
     "translation": "monthly billing"
@@ -7605,7 +7605,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        951
+        955
       ]
     ],
     "translation": "New list"
@@ -7849,7 +7849,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1005
+        1009
       ]
     ],
     "translation": "No lists"
@@ -7861,7 +7861,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1010
+        1014
       ]
     ],
     "translation": "No lists have been created yet"
@@ -8601,15 +8601,15 @@
       ],
       [
         "src/views/board/index.tsx",
-        300
+        304
       ],
       [
         "src/views/board/index.tsx",
-        358
+        362
       ],
       [
         "src/views/board/index.tsx",
-        396
+        400
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -8721,7 +8721,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        127
+        131
       ],
       [
         "src/views/members/index.tsx",
@@ -8741,7 +8741,7 @@
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        40
+        39
       ],
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
@@ -8777,11 +8777,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        154
+        158
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        172
+        176
       ]
     ],
     "translation": "Please try again later."
@@ -8805,7 +8805,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        458
+        462
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -8958,7 +8958,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        328
+        332
       ],
       [
         "src/views/members/index.tsx",
@@ -8974,7 +8974,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        340
+        344
       ]
     ],
     "translation": "Pro Plan ∞"
@@ -9642,7 +9642,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        120
+        124
       ]
     ],
     "translation": "Seat limit reached"
@@ -9654,7 +9654,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        331
+        335
       ],
       [
         "src/views/members/index.tsx",
@@ -10531,7 +10531,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        147
+        151
       ]
     ],
     "translation": "Subscription Required"
@@ -10640,11 +10640,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        328
+        332
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        340
+        344
       ],
       [
         "src/views/members/index.tsx",
@@ -10680,11 +10680,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        871
+        875
       ],
       [
         "src/views/board/index.tsx",
-        908
+        912
       ]
     ],
     "translation": "Template"
@@ -11239,7 +11239,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        60
+        59
       ]
     ],
     "translation": "This will result in the permanent deletion of all data associated with your account."
@@ -11543,7 +11543,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        456
+        460
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11875,7 +11875,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        357
+        361
       ],
       [
         "src/views/card/index.tsx",
@@ -11927,7 +11927,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        395
+        399
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
@@ -11955,7 +11955,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        299
+        303
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -12576,7 +12576,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        111
+        115
       ]
     ],
     "translation": "User is already a member of this workspace"
@@ -12985,7 +12985,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        871
+        875
       ],
       [
         "src/views/boards/index.tsx",
@@ -13395,11 +13395,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        939
+        943
       ],
       [
         "src/views/board/index.tsx",
-        1016
+        1020
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -13537,7 +13537,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        121
+        125
       ]
     ],
     "translation": "You've reached your {0}-seat limit. Please upgrade your plan to add more members."
@@ -13561,7 +13561,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        28
+        27
       ]
     ],
     "translation": "Your account has been deleted."

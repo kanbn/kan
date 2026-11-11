@@ -78,7 +78,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 899]],
+    "origin": [["src/views/board/index.tsx", 903]],
     "translation": "{0} не найдено"
   },
   "0xWkkH": {
@@ -131,8 +131,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 189],
-      ["src/views/members/components/InviteMemberForm.tsx", 201]
+      ["src/views/members/components/InviteMemberForm.tsx", 193],
+      ["src/views/members/components/InviteMemberForm.tsx", 205]
     ],
     "translation": "$10/месяц"
   },
@@ -140,7 +140,7 @@
     "message": "$8/month",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 201]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 205]],
     "translation": "$8/месяц"
   },
   "zMlxCA": {
@@ -204,7 +204,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 27]
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 26]
     ],
     "translation": "Аккаунт удалён"
   },
@@ -374,7 +374,7 @@
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 109],
       ["src/views/board/members/index.tsx", 244],
       ["src/views/card/components/MemberSelector.tsx", 144],
-      ["src/views/members/components/InviteMemberForm.tsx", 266]
+      ["src/views/members/components/InviteMemberForm.tsx", 270]
     ],
     "translation": "Добавить участника"
   },
@@ -487,7 +487,7 @@
       "billingType": ["billingType"]
     },
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 343]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 347]],
     "translation": "Добавление нового участника будет стоить дополнительно {price} ({billingType}) за место."
   },
   "D7/JvJ": {
@@ -643,7 +643,7 @@
     "message": "Anyone with this link can join your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 317]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 321]],
     "translation": "Любой, у кого есть эта ссылка, может присоединиться к вашему рабочему пространству"
   },
   "OZtEcz": {
@@ -803,7 +803,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 54]
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 53]
     ],
     "translation": "Вы уверены, что хотите удалить свой аккаунт?"
   },
@@ -950,14 +950,14 @@
     "message": "billed annually",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 202]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 206]],
     "translation": "оплата ежегодно"
   },
   "+VoTOr": {
     "message": "billed monthly",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 202]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 206]],
     "translation": "оплата ежемесячно"
   },
   "R+w/Va": {
@@ -997,7 +997,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 871],
+      ["src/views/board/index.tsx", 875],
       ["src/views/board/members/index.tsx", 230],
       ["src/views/card/index.tsx", 372],
       ["src/views/public/board/index.tsx", 129]
@@ -1058,7 +1058,7 @@
     "message": "Board name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 889]],
+    "origin": [["src/views/board/index.tsx", 893]],
     "translation": "Название доски"
   },
   "wewm3j": {
@@ -1483,7 +1483,7 @@
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
         39
       ],
-      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 88],
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 87],
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 86],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 107]
     ],
@@ -1549,7 +1549,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 451],
+      ["src/views/board/index.tsx", 455],
       ["src/views/card/components/Dropdown.tsx", 77],
       ["src/views/public/board/CardModal.tsx", 42]
     ],
@@ -1648,7 +1648,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 378],
+      ["src/views/members/components/InviteMemberForm.tsx", 382],
       ["src/views/settings/BillingSettings.tsx", 83]
     ],
     "translation": "Выберите тариф"
@@ -2087,7 +2087,7 @@
     "message": "Create invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 366]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 370]],
     "translation": "Создать пригласительную ссылку"
   },
   "QtACvI": {
@@ -2138,8 +2138,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 145],
-      ["src/views/board/index.tsx", 1027]
+      ["src/views/board/index.tsx", 149],
+      ["src/views/board/index.tsx", 1031]
     ],
     "translation": "Создать новый список"
   },
@@ -2322,7 +2322,7 @@
     "message": "Deactivate invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 365]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 369]],
     "translation": "Деактивировать ссылку-приглашение"
   },
   "bKzM8L": {
@@ -2365,7 +2365,7 @@
     "origin": [
       ["src/views/settings/AccountSettings.tsx", 75],
       ["src/views/settings/AccountSettings.tsx", 85],
-      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 96]
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 95]
     ],
     "translation": "Удалить аккаунт"
   },
@@ -2765,7 +2765,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 281],
+      ["src/views/members/components/InviteMemberForm.tsx", 285],
       ["src/views/settings/AccountSettings.tsx", 46]
     ],
     "translation": "Email"
@@ -2909,7 +2909,7 @@
     "origin": [
       ["src/views/boards/components/NewBoardForm.tsx", 81],
       ["src/views/boards/components/NewBoardForm.tsx", 96],
-      ["src/views/members/components/InviteMemberForm.tsx", 249]
+      ["src/views/members/components/InviteMemberForm.tsx", 253]
     ],
     "translation": "Ошибка"
   },
@@ -2933,14 +2933,14 @@
     "message": "Error creating invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 153]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 157]],
     "translation": "Ошибка при создании ссылки-приглашения"
   },
   "USVCGU": {
     "message": "Error deactivating invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 171]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 175]],
     "translation": "Ошибка при деактивации ссылки-приглашения"
   },
   "bqAQaT": {
@@ -2948,7 +2948,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 39]
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 38]
     ],
     "translation": "Ошибка при удалении аккаунта"
   },
@@ -2987,8 +2987,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 110],
-      ["src/views/members/components/InviteMemberForm.tsx", 126]
+      ["src/views/members/components/InviteMemberForm.tsx", 114],
+      ["src/views/members/components/InviteMemberForm.tsx", 130]
     ],
     "translation": "Ошибка при приглашении участника"
   },
@@ -3121,7 +3121,7 @@
     "message": "Failed to copy invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 250]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 254]],
     "translation": "Не удалось скопировать ссылку-приглашение"
   },
   "53QYh8": {
@@ -3343,7 +3343,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 349],
+      ["src/views/members/components/InviteMemberForm.tsx", 353],
       ["src/views/members/index.tsx", 321]
     ],
     "translation": "Бесплатный тариф"
@@ -3422,7 +3422,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1009]],
+    "origin": [["src/views/board/index.tsx", 1013]],
     "translation": "Начните с создания нового списка"
   },
   "oW13KZ": {
@@ -3664,7 +3664,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 82]
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 81]
     ],
     "translation": "Я подтверждаю, что все данные моего аккаунта будут безвозвратно удалены, и хочу продолжить."
   },
@@ -3826,7 +3826,7 @@
     "message": "Invalid email address",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 60]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 64]],
     "translation": "Недействительный адрес электронной почты"
   },
   "odFCYX": {
@@ -3847,14 +3847,14 @@
     "message": "Invite link copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 243]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 247]],
     "translation": "Ссылка-приглашение скопирована"
   },
   "mZGPxt": {
     "message": "Invite link copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 244]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 248]],
     "translation": "Ссылка-приглашение скопирована в буфер обмена"
   },
   "D9ROdV": {
@@ -3871,7 +3871,7 @@
     "message": "Invite links require a Team or Pro subscription. Please upgrade your workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 148]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 152]],
     "translation": "Ссылки-приглашения доступны только с подпиской Team или Pro. Пожалуйста, обновите тариф вашего рабочего пространства."
   },
   "+djOzj": {
@@ -3880,7 +3880,7 @@
     "comments": [],
     "origin": [
       ["src/views/card/components/MemberSelector.tsx", 121],
-      ["src/views/members/components/InviteMemberForm.tsx", 386]
+      ["src/views/members/components/InviteMemberForm.tsx", 390]
     ],
     "translation": "Пригласить участника"
   },
@@ -3896,7 +3896,7 @@
     "message": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 352]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 356]],
     "translation": "Приглашение участников требует тарифного плана Team. Вы будете перенаправлены для обновления вашего рабочего пространства."
   },
   "qPP4lD": {
@@ -3950,7 +3950,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 57],
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 56],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 76]
     ],
     "translation": "Обратите внимание: это действие необратимо."
@@ -4092,7 +4092,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/BoardDropdown.tsx", 104],
-      ["src/views/board/index.tsx", 449],
+      ["src/views/board/index.tsx", 453],
       ["src/views/card/components/Dropdown.tsx", 75],
       ["src/views/public/board/CardModal.tsx", 40],
       ["src/views/public/board/index.tsx", 81]
@@ -4349,7 +4349,7 @@
     "message": "monthly billing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 190]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 194]],
     "translation": "ежемесячная оплата"
   },
   "sZ/WDz": {
@@ -4505,7 +4505,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 134],
-      ["src/views/board/index.tsx", 951]
+      ["src/views/board/index.tsx", 955]
     ],
     "translation": "Новый список"
   },
@@ -4652,14 +4652,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1005]],
+    "origin": [["src/views/board/index.tsx", 1009]],
     "translation": "Нет списков"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1010]],
+    "origin": [["src/views/board/index.tsx", 1014]],
     "translation": "Списки ещё не созданы"
   },
   "i30J2U": {
@@ -5096,9 +5096,9 @@
       ["src/views/board/components/NewTemplateForm.tsx", 79],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 79],
       ["src/views/board/components/VisibilityButton.tsx", 60],
-      ["src/views/board/index.tsx", 300],
-      ["src/views/board/index.tsx", 358],
-      ["src/views/board/index.tsx", 396],
+      ["src/views/board/index.tsx", 304],
+      ["src/views/board/index.tsx", 362],
+      ["src/views/board/index.tsx", 400],
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 42],
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
@@ -5129,12 +5129,12 @@
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 58],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 80],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 104],
-      ["src/views/members/components/InviteMemberForm.tsx", 127],
+      ["src/views/members/components/InviteMemberForm.tsx", 131],
       ["src/views/members/index.tsx", 78],
       ["src/views/onboarding/workspace-details/index.tsx", 139],
       ["src/views/onboarding/workspace-details/index.tsx", 190],
       ["src/views/settings/components/Avatar.tsx", 197],
-      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 40],
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 39],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 54],
       ["src/views/settings/components/UpdateDisplayNameForm.tsx", 58],
       ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 72],
@@ -5149,8 +5149,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 154],
-      ["src/views/members/components/InviteMemberForm.tsx", 172]
+      ["src/views/members/components/InviteMemberForm.tsx", 158],
+      ["src/views/members/components/InviteMemberForm.tsx", 176]
     ],
     "translation": "Пожалуйста, попробуйте позже."
   },
@@ -5162,7 +5162,7 @@
       ["src/views/board/components/BoardDropdown.tsx", 109],
       ["src/views/board/components/CardContextDuplicateModal.tsx", 72],
       ["src/views/board/components/CardContextMoveListModal.tsx", 51],
-      ["src/views/board/index.tsx", 458],
+      ["src/views/board/index.tsx", 462],
       ["src/views/card/components/Dropdown.tsx", 57],
       ["src/views/card/components/Dropdown.tsx", 84],
       ["src/views/card/components/Dropdown.tsx", 103],
@@ -5243,7 +5243,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 328],
+      ["src/views/members/components/InviteMemberForm.tsx", 332],
       ["src/views/members/index.tsx", 318]
     ],
     "translation": "Тариф Pro"
@@ -5252,7 +5252,7 @@
     "message": "Pro Plan ∞",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 340]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 344]],
     "translation": "Тариф Pro ∞"
   },
   "0rPv1T": {
@@ -5648,7 +5648,7 @@
     "message": "Seat limit reached",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 120]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 124]],
     "translation": "Достигнут лимит мест"
   },
   "MpFIca": {
@@ -5656,7 +5656,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 331],
+      ["src/views/members/components/InviteMemberForm.tsx", 335],
       ["src/views/members/index.tsx", 329]
     ],
     "translation": "мест"
@@ -6179,7 +6179,7 @@
     "message": "Subscription Required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 147]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 151]],
     "translation": "Требуется подписка"
   },
   "zzDlyQ": {
@@ -6248,8 +6248,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 328],
-      ["src/views/members/components/InviteMemberForm.tsx", 340],
+      ["src/views/members/components/InviteMemberForm.tsx", 332],
+      ["src/views/members/components/InviteMemberForm.tsx", 344],
       ["src/views/members/index.tsx", 320]
     ],
     "translation": "Тариф для команды"
@@ -6270,8 +6270,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 871],
-      ["src/views/board/index.tsx", 908]
+      ["src/views/board/index.tsx", 875],
+      ["src/views/board/index.tsx", 912]
     ],
     "translation": "Шаблон"
   },
@@ -6613,7 +6613,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 60]
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 59]
     ],
     "translation": "Это приведёт к безвозвратному удалению всех данных, связанных с вашим аккаунтом."
   },
@@ -6799,7 +6799,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/BoardDropdown.tsx", 108],
-      ["src/views/board/index.tsx", 456],
+      ["src/views/board/index.tsx", 460],
       ["src/views/card/components/Dropdown.tsx", 82],
       ["src/views/public/board/CardModal.tsx", 47],
       ["src/views/public/board/index.tsx", 88]
@@ -7003,7 +7003,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 357],
+      ["src/views/board/index.tsx", 361],
       ["src/views/card/index.tsx", 267]
     ],
     "translation": "Не удалось обновить карточку"
@@ -7034,7 +7034,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 395],
+      ["src/views/board/index.tsx", 399],
       ["src/views/card/components/DueDateSelector.tsx", 79]
     ],
     "translation": "Не удалось обновить дату выполнения"
@@ -7051,7 +7051,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 299],
+      ["src/views/board/index.tsx", 303],
       ["src/views/card/components/ListSelector.tsx", 59]
     ],
     "translation": "Не удалось обновить список"
@@ -7415,7 +7415,7 @@
     "message": "User is already a member of this workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 111]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 115]],
     "translation": "Пользователь уже является участником этого рабочего пространства"
   },
   "vSJd18": {
@@ -7657,7 +7657,7 @@
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
       ["src/utils/permission-category-label.ts", 10],
-      ["src/views/board/index.tsx", 871],
+      ["src/views/board/index.tsx", 875],
       ["src/views/boards/index.tsx", 58],
       ["src/views/members/index.tsx", 288],
       ["src/views/public/board/index.tsx", 129],
@@ -7909,8 +7909,8 @@
     "origin": [
       ["src/views/board/components/List.tsx", 133],
       ["src/views/board/components/VisibilityButton.tsx", 76],
-      ["src/views/board/index.tsx", 939],
-      ["src/views/board/index.tsx", 1016],
+      ["src/views/board/index.tsx", 943],
+      ["src/views/board/index.tsx", 1020],
       ["src/views/boards/components/BoardsList.tsx", 85],
       ["src/views/boards/index.tsx", 69],
       ["src/views/boards/index.tsx", 90]
@@ -7990,7 +7990,7 @@
       "0": ["seatLimit ?? 0"]
     },
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 121]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 125]],
     "translation": "Вы достигли лимита в {0} мест. Пожалуйста, обновите тарифный план, чтобы добавить больше участников."
   },
   "8Zjc7q": {
@@ -8005,7 +8005,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 28]
+      ["src/views/settings/components/DeleteAccountConfirmation.tsx", 27]
     ],
     "translation": "Ваш аккаунт был удалён."
   },
