@@ -229,11 +229,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        169
+        184
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        181
+        196
       ]
     ],
     "translation": "$10/month"
@@ -245,7 +245,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        181
+        196
       ]
     ],
     "translation": "$8/month"
@@ -633,7 +633,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        243
+        261
       ]
     ],
     "translation": "Add member"
@@ -831,7 +831,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        320
+        338
       ]
     ],
     "translation": "Adding a new member will cost an additional {price} ({billingType}) per seat."
@@ -863,7 +863,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        221
+        224
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -1088,7 +1088,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        294
+        312
       ]
     ],
     "translation": "Anyone with this link can join your workspace"
@@ -1240,7 +1240,7 @@
     "origin": [
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        47
+        51
       ]
     ],
     "translation": "Are you sure want to remove {entityLabel}?"
@@ -1583,7 +1583,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        182
+        197
       ]
     ],
     "translation": "billed annually"
@@ -1595,7 +1595,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        182
+        197
       ]
     ],
     "translation": "billed monthly"
@@ -2473,7 +2473,7 @@
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        55
+        59
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
@@ -2781,7 +2781,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        355
+        373
       ],
       [
         "src/views/settings/BillingSettings.tsx",
@@ -3503,7 +3503,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        343
+        361
       ]
     ],
     "translation": "Create invite link"
@@ -3891,7 +3891,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        342
+        360
       ]
     ],
     "translation": "Deactivate invite link"
@@ -4600,7 +4600,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        244
+        247
       ]
     ],
     "translation": "Edit permissions"
@@ -4672,7 +4672,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        258
+        276
       ],
       [
         "src/views/settings/AccountSettings.tsx",
@@ -4904,7 +4904,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        226
+        244
       ]
     ],
     "translation": "Error"
@@ -4940,7 +4940,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        136
+        148
       ]
     ],
     "translation": "Error creating invite link"
@@ -4952,7 +4952,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        152
+        166
       ]
     ],
     "translation": "Error deactivating invite link"
@@ -5024,11 +5024,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        96
+        105
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        111
+        121
       ]
     ],
     "translation": "Error inviting member"
@@ -5218,7 +5218,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        52
+        57
       ]
     ],
     "translation": "Failed to accept invitation. Please try again later, or contact customer support."
@@ -5230,7 +5230,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        227
+        245
       ]
     ],
     "translation": "Failed to copy invite link"
@@ -5614,11 +5614,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        326
+        344
       ],
       [
         "src/views/members/index.tsx",
-        312
+        315
       ]
     ],
     "translation": "Free Plan"
@@ -5854,7 +5854,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        124
+        126
       ]
     ],
     "translation": "Go Home"
@@ -5870,7 +5870,7 @@
       ],
       [
         "src/views/invite/index.tsx",
-        155
+        157
       ]
     ],
     "translation": "Go to app"
@@ -5986,7 +5986,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        223
+        226
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -6426,7 +6426,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        50
+        57
       ]
     ],
     "translation": "Invalid email address"
@@ -6438,7 +6438,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        116
+        118
       ]
     ],
     "translation": "Invalid invitation"
@@ -6450,7 +6450,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        331
+        334
       ]
     ],
     "translation": "Invite"
@@ -6462,7 +6462,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        220
+        238
       ]
     ],
     "translation": "Invite link copied"
@@ -6474,7 +6474,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        221
+        239
       ]
     ],
     "translation": "Invite link copied to clipboard"
@@ -6502,7 +6502,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        131
+        143
       ]
     ],
     "translation": "Invite links require a Team or Pro subscription. Please upgrade your workspace."
@@ -6518,7 +6518,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        363
+        381
       ]
     ],
     "translation": "Invite member"
@@ -6543,7 +6543,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        329
+        347
       ]
     ],
     "translation": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace."
@@ -6568,11 +6568,11 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        90
+        92
       ],
       [
         "src/views/invite/index.tsx",
-        140
+        142
       ]
     ],
     "translation": "Join workspace"
@@ -6584,7 +6584,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        102
+        104
       ]
     ],
     "translation": "Join workspace | kan.bn"
@@ -7190,7 +7190,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        222
+        225
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -7206,7 +7206,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        262
+        265
       ]
     ],
     "translation": "Member options"
@@ -7254,7 +7254,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        284
+        287
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -7274,7 +7274,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        279
+        282
       ]
     ],
     "translation": "Members | {0}"
@@ -7330,7 +7330,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        170
+        185
       ]
     ],
     "translation": "monthly billing"
@@ -8249,7 +8249,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        230
+        233
       ]
     ],
     "translation": "Paused"
@@ -8277,7 +8277,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        230
+        233
       ]
     ],
     "translation": "Pending"
@@ -8705,7 +8705,7 @@
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        28
+        31
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -8721,11 +8721,11 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        112
+        122
       ],
       [
         "src/views/members/index.tsx",
-        70
+        72
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -8777,11 +8777,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        137
+        149
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        153
+        167
       ]
     ],
     "translation": "Please try again later."
@@ -8958,11 +8958,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        305
+        323
       ],
       [
         "src/views/members/index.tsx",
-        309
+        312
       ]
     ],
     "translation": "Pro Plan"
@@ -8974,7 +8974,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        317
+        335
       ]
     ],
     "translation": "Pro Plan ∞"
@@ -9138,7 +9138,7 @@
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        58
+        62
       ]
     ],
     "translation": "Remove"
@@ -9186,7 +9186,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        253
+        256
       ]
     ],
     "translation": "Remove member"
@@ -9489,7 +9489,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        353
+        356
       ]
     ],
     "translation": "Role"
@@ -9501,7 +9501,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        62
+        64
       ]
     ],
     "translation": "Role updated"
@@ -9642,7 +9642,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        105
+        115
       ]
     ],
     "translation": "Seat limit reached"
@@ -9654,11 +9654,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        308
+        326
       ],
       [
         "src/views/members/index.tsx",
-        320
+        323
       ]
     ],
     "translation": "seats"
@@ -10146,7 +10146,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        165
+        167
       ]
     ],
     "translation": "Sign In"
@@ -10202,7 +10202,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        173
+        175
       ]
     ],
     "translation": "Sign Up"
@@ -10531,7 +10531,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        130
+        142
       ]
     ],
     "translation": "Subscription Required"
@@ -10640,15 +10640,15 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        305
+        323
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        317
+        335
       ],
       [
         "src/views/members/index.tsx",
-        311
+        314
       ]
     ],
     "translation": "Team Plan"
@@ -10999,7 +10999,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        63
+        65
       ]
     ],
     "translation": "The member's role has been updated."
@@ -11063,7 +11063,7 @@
     "origin": [
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        50
+        54
       ]
     ],
     "translation": "They won't be able to access this workspace."
@@ -11151,7 +11151,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        119
+        121
       ]
     ],
     "translation": "This invitation link is invalid or has expired."
@@ -11251,7 +11251,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        44
+        49
       ]
     ],
     "translation": "This workspace has reached its member limit. The workspace owner will need to upgrade their plan."
@@ -11759,7 +11759,7 @@
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        27
+        30
       ]
     ],
     "translation": "Unable to remove member"
@@ -11999,7 +11999,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        69
+        71
       ]
     ],
     "translation": "Unable to update role"
@@ -12224,7 +12224,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        319
+        322
       ]
     ],
     "translation": "Unlimited seats"
@@ -12374,7 +12374,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        296
+        299
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
@@ -12560,7 +12560,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        347
+        350
       ]
     ],
     "translation": "User"
@@ -12572,7 +12572,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        97
+        106
       ]
     ],
     "translation": "User is already a member of this workspace"
@@ -12989,7 +12989,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        279
+        282
       ],
       [
         "src/views/public/board/index.tsx",
@@ -13505,7 +13505,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        145
+        147
       ]
     ],
     "translation": "You've been invited to join a workspace on kan.bn."
@@ -13517,7 +13517,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        146
+        148
       ]
     ],
     "translation": "You've been invited to join a workspace."
@@ -13533,7 +13533,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        106
+        116
       ]
     ],
     "translation": "You've reached your {0}-seat limit. Please upgrade your plan to add more members."

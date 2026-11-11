@@ -131,8 +131,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 169],
-      ["src/views/members/components/InviteMemberForm.tsx", 181]
+      ["src/views/members/components/InviteMemberForm.tsx", 184],
+      ["src/views/members/components/InviteMemberForm.tsx", 196]
     ],
     "translation": "€10/maand"
   },
@@ -140,7 +140,7 @@
     "message": "$8/month",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 181]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 196]],
     "translation": "€8/maand"
   },
   "zMlxCA": {
@@ -374,7 +374,7 @@
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 109],
       ["src/views/board/members/index.tsx", 242],
       ["src/views/card/components/MemberSelector.tsx", 138],
-      ["src/views/members/components/InviteMemberForm.tsx", 243]
+      ["src/views/members/components/InviteMemberForm.tsx", 261]
     ],
     "translation": "Lid toevoegen"
   },
@@ -487,7 +487,7 @@
       "billingType": ["billingType"]
     },
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 320]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 338]],
     "translation": "Het toevoegen van een nieuw lid kost {price} ({billingType}) extra per seat."
   },
   "D7/JvJ": {
@@ -504,7 +504,7 @@
     "origin": [
       ["src/views/board/members/index.tsx", 175],
       ["src/views/board/members/index.tsx", 191],
-      ["src/views/members/index.tsx", 221],
+      ["src/views/members/index.tsx", 224],
       ["src/views/settings/components/RolePermissions.tsx", 14]
     ],
     "translation": "Beheerder"
@@ -643,7 +643,7 @@
     "message": "Anyone with this link can join your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 294]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 312]],
     "translation": "Iedereen met deze link kan lid worden van je werkruimte"
   },
   "OZtEcz": {
@@ -733,7 +733,7 @@
     },
     "comments": [],
     "origin": [
-      ["src/views/members/components/DeleteMemberConfirmation.tsx", 47]
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 51]
     ],
     "translation": "Weet je zeker dat je {entityLabel} wilt verwijderen?"
   },
@@ -950,14 +950,14 @@
     "message": "billed annually",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 182]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 197]],
     "translation": "jaarlijks gefactureerd"
   },
   "+VoTOr": {
     "message": "billed monthly",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 182]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 197]],
     "translation": "maandelijks gefactureerd"
   },
   "R+w/Va": {
@@ -1475,7 +1475,7 @@
       ["src/views/card/components/DeleteCardConfirmation.tsx", 86],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 68],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 77],
-      ["src/views/members/components/DeleteMemberConfirmation.tsx", 55],
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 59],
       ["src/views/onboarding/select-plan/index.tsx", 246],
       ["src/views/settings/components/Avatar.tsx", 287],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 206],
@@ -1648,7 +1648,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 355],
+      ["src/views/members/components/InviteMemberForm.tsx", 373],
       ["src/views/settings/BillingSettings.tsx", 80]
     ],
     "translation": "Kies abonnement"
@@ -2087,7 +2087,7 @@
     "message": "Create invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 343]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 361]],
     "translation": "Maak uitnodigingslink"
   },
   "QtACvI": {
@@ -2322,7 +2322,7 @@
     "message": "Deactivate invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 342]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 360]],
     "translation": "Uitnodigingslink deactiveren"
   },
   "bKzM8L": {
@@ -2721,7 +2721,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 165],
-      ["src/views/members/index.tsx", 244]
+      ["src/views/members/index.tsx", 247]
     ],
     "translation": "Rechten bewerken"
   },
@@ -2765,7 +2765,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 258],
+      ["src/views/members/components/InviteMemberForm.tsx", 276],
       ["src/views/settings/AccountSettings.tsx", 43]
     ],
     "translation": "E-mail"
@@ -2909,7 +2909,7 @@
     "origin": [
       ["src/views/boards/components/NewBoardForm.tsx", 77],
       ["src/views/boards/components/NewBoardForm.tsx", 92],
-      ["src/views/members/components/InviteMemberForm.tsx", 226]
+      ["src/views/members/components/InviteMemberForm.tsx", 244]
     ],
     "translation": "Fout"
   },
@@ -2933,14 +2933,14 @@
     "message": "Error creating invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 136]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 148]],
     "translation": "Fout bij aanmaken uitnodigingslink"
   },
   "USVCGU": {
     "message": "Error deactivating invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 152]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 166]],
     "translation": "Fout bij deactiveren uitnodigingslink"
   },
   "bqAQaT": {
@@ -2987,8 +2987,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 96],
-      ["src/views/members/components/InviteMemberForm.tsx", 111]
+      ["src/views/members/components/InviteMemberForm.tsx", 105],
+      ["src/views/members/components/InviteMemberForm.tsx", 121]
     ],
     "translation": "Fout bij uitnodigen lid"
   },
@@ -3114,14 +3114,14 @@
     "message": "Failed to accept invitation. Please try again later, or contact customer support.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/invite/index.tsx", 52]],
+    "origin": [["src/views/invite/index.tsx", 57]],
     "translation": "Uitnodiging accepteren mislukt. Probeer het later opnieuw of neem contact op met klantenservice."
   },
   "lXvXNI": {
     "message": "Failed to copy invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 227]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 245]],
     "translation": "Uitnodigingslink kopiëren mislukt"
   },
   "53QYh8": {
@@ -3343,8 +3343,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 326],
-      ["src/views/members/index.tsx", 312]
+      ["src/views/members/components/InviteMemberForm.tsx", 344],
+      ["src/views/members/index.tsx", 315]
     ],
     "translation": "Gratis abonnement"
   },
@@ -3481,7 +3481,7 @@
     "message": "Go Home",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/invite/index.tsx", 124]],
+    "origin": [["src/views/invite/index.tsx", 126]],
     "translation": "Ga naar home"
   },
   "UveK6V": {
@@ -3490,7 +3490,7 @@
     "comments": [],
     "origin": [
       ["src/views/home/components/Header.tsx", 100],
-      ["src/views/invite/index.tsx", 155]
+      ["src/views/invite/index.tsx", 157]
     ],
     "translation": "Ga naar app"
   },
@@ -3563,7 +3563,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/index.tsx", 223],
+      ["src/views/members/index.tsx", 226],
       ["src/views/settings/components/RolePermissions.tsx", 18]
     ],
     "translation": "Gast"
@@ -3826,35 +3826,35 @@
     "message": "Invalid email address",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 50]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 57]],
     "translation": "Ongeldig e-mailadres"
   },
   "odFCYX": {
     "message": "Invalid invitation",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/invite/index.tsx", 116]],
+    "origin": [["src/views/invite/index.tsx", 118]],
     "translation": "Ongeldige uitnodiging"
   },
   "MFKlMB": {
     "message": "Invite",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 331]],
+    "origin": [["src/views/members/index.tsx", 334]],
     "translation": "Uitnodigen"
   },
   "KLJ4eD": {
     "message": "Invite link copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 220]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 238]],
     "translation": "Uitnodigingslink gekopieerd"
   },
   "mZGPxt": {
     "message": "Invite link copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 221]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 239]],
     "translation": "Uitnodigingslink gekopieerd naar klembord"
   },
   "D9ROdV": {
@@ -3871,7 +3871,7 @@
     "message": "Invite links require a Team or Pro subscription. Please upgrade your workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 131]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 143]],
     "translation": "Uitnodigingslinks vereisen een Team- of Pro-abonnement. Upgrade je workspace."
   },
   "+djOzj": {
@@ -3880,7 +3880,7 @@
     "comments": [],
     "origin": [
       ["src/views/card/components/MemberSelector.tsx", 115],
-      ["src/views/members/components/InviteMemberForm.tsx", 363]
+      ["src/views/members/components/InviteMemberForm.tsx", 381]
     ],
     "translation": "Lid uitnodigen"
   },
@@ -3896,7 +3896,7 @@
     "message": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 329]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 347]],
     "translation": "Het uitnodigen van leden vereist een Team-abonnement. Je wordt doorgestuurd om je workspace te upgraden."
   },
   "qPP4lD": {
@@ -3912,8 +3912,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/invite/index.tsx", 90],
-      ["src/views/invite/index.tsx", 140]
+      ["src/views/invite/index.tsx", 92],
+      ["src/views/invite/index.tsx", 142]
     ],
     "translation": "Deelnemen aan workspace"
   },
@@ -3921,7 +3921,7 @@
     "message": "Join workspace | kan.bn",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/invite/index.tsx", 102]],
+    "origin": [["src/views/invite/index.tsx", 104]],
     "translation": "Deelnemen aan workspace | kan.bn"
   },
   "wM8xd8": {
@@ -4272,7 +4272,7 @@
       ["src/views/board/members/index.tsx", 192],
       ["src/views/card/components/ActivityList.tsx", 56],
       ["src/views/card/components/ActivityList.tsx", 89],
-      ["src/views/members/index.tsx", 222],
+      ["src/views/members/index.tsx", 225],
       ["src/views/settings/components/RolePermissions.tsx", 16]
     ],
     "translation": "Lid"
@@ -4281,7 +4281,7 @@
     "message": "Member options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 262]],
+    "origin": [["src/views/members/index.tsx", 265]],
     "translation": "Ledenopties"
   },
   "GnG6Oy": {
@@ -4302,7 +4302,7 @@
       ["src/views/board/components/NewCardForm.tsx", 491],
       ["src/views/card/components/MemberSelector.tsx", 116],
       ["src/views/card/index.tsx", 149],
-      ["src/views/members/index.tsx", 284],
+      ["src/views/members/index.tsx", 287],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 90]
     ],
     "translation": "Leden"
@@ -4313,7 +4313,7 @@
       "0": ["workspace.name ?? t`Workspace`"]
     },
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 279]],
+    "origin": [["src/views/members/index.tsx", 282]],
     "translation": "Leden | {0}"
   },
   "/bZzdR": {
@@ -4349,7 +4349,7 @@
     "message": "monthly billing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 170]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 185]],
     "translation": "maandelijkse facturering"
   },
   "sZ/WDz": {
@@ -4895,7 +4895,7 @@
     "message": "Paused",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 230]],
+    "origin": [["src/views/members/index.tsx", 233]],
     "translation": "Gepauzeerd"
   },
   "UbYdrA": {
@@ -4912,7 +4912,7 @@
     "message": "Pending",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 230]],
+    "origin": [["src/views/members/index.tsx", 233]],
     "translation": "In behandeling"
   },
   "oVBq1w": {
@@ -5125,12 +5125,12 @@
       ["src/views/card/components/NewCommentForm.tsx", 43],
       ["src/views/card/index.tsx", 259],
       ["src/views/card/index.tsx", 272],
-      ["src/views/members/components/DeleteMemberConfirmation.tsx", 28],
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 31],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 45],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 68],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 96],
-      ["src/views/members/components/InviteMemberForm.tsx", 112],
-      ["src/views/members/index.tsx", 70],
+      ["src/views/members/components/InviteMemberForm.tsx", 122],
+      ["src/views/members/index.tsx", 72],
       ["src/views/onboarding/workspace-details/index.tsx", 119],
       ["src/views/onboarding/workspace-details/index.tsx", 167],
       ["src/views/settings/components/Avatar.tsx", 200],
@@ -5149,8 +5149,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 137],
-      ["src/views/members/components/InviteMemberForm.tsx", 153]
+      ["src/views/members/components/InviteMemberForm.tsx", 149],
+      ["src/views/members/components/InviteMemberForm.tsx", 167]
     ],
     "translation": "Probeer het later opnieuw."
   },
@@ -5243,8 +5243,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 305],
-      ["src/views/members/index.tsx", 309]
+      ["src/views/members/components/InviteMemberForm.tsx", 323],
+      ["src/views/members/index.tsx", 312]
     ],
     "translation": "Pro-abonnement"
   },
@@ -5252,7 +5252,7 @@
     "message": "Pro Plan ∞",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 317]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 335]],
     "translation": "Pro-abonnement ∞"
   },
   "0rPv1T": {
@@ -5351,7 +5351,7 @@
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         69
       ],
-      ["src/views/members/components/DeleteMemberConfirmation.tsx", 58]
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 62]
     ],
     "translation": "Verwijderen"
   },
@@ -5380,7 +5380,7 @@
     "message": "Remove member",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 253]],
+    "origin": [["src/views/members/index.tsx", 256]],
     "translation": "Lid verwijderen"
   },
   "BZkYSt": {
@@ -5554,7 +5554,7 @@
     "origin": [
       ["src/views/board/members/index.tsx", 188],
       ["src/views/board/members/index.tsx", 269],
-      ["src/views/members/index.tsx", 353]
+      ["src/views/members/index.tsx", 356]
     ],
     "translation": "Rol"
   },
@@ -5562,7 +5562,7 @@
     "message": "Role updated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 62]],
+    "origin": [["src/views/members/index.tsx", 64]],
     "translation": "Rol bijgewerkt"
   },
   "RzxgOE": {
@@ -5648,7 +5648,7 @@
     "message": "Seat limit reached",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 105]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 115]],
     "translation": "Plaatslimiet bereikt"
   },
   "MpFIca": {
@@ -5656,8 +5656,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 308],
-      ["src/views/members/index.tsx", 320]
+      ["src/views/members/components/InviteMemberForm.tsx", 326],
+      ["src/views/members/index.tsx", 323]
     ],
     "translation": "plaatsen"
   },
@@ -5947,7 +5947,7 @@
     "message": "Sign In",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/invite/index.tsx", 165]],
+    "origin": [["src/views/invite/index.tsx", 167]],
     "translation": "Inloggen"
   },
   "jbGGzf": {
@@ -5980,7 +5980,7 @@
     "message": "Sign Up",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/invite/index.tsx", 173]],
+    "origin": [["src/views/invite/index.tsx", 175]],
     "translation": "Registreren"
   },
   "sUZo7y": {
@@ -6179,7 +6179,7 @@
     "message": "Subscription Required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 130]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 142]],
     "translation": "Abonnement vereist"
   },
   "zzDlyQ": {
@@ -6248,9 +6248,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 305],
-      ["src/views/members/components/InviteMemberForm.tsx", 317],
-      ["src/views/members/index.tsx", 311]
+      ["src/views/members/components/InviteMemberForm.tsx", 323],
+      ["src/views/members/components/InviteMemberForm.tsx", 335],
+      ["src/views/members/index.tsx", 314]
     ],
     "translation": "Teamabonnement"
   },
@@ -6459,7 +6459,7 @@
     "message": "The member's role has been updated.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 63]],
+    "origin": [["src/views/members/index.tsx", 65]],
     "translation": "De rol van het lid is bijgewerkt."
   },
   "gUX7b+": {
@@ -6497,7 +6497,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/DeleteMemberConfirmation.tsx", 50]
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 54]
     ],
     "translation": "Ze kunnen geen toegang meer krijgen tot deze workspace."
   },
@@ -6551,7 +6551,7 @@
     "message": "This invitation link is invalid or has expired.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/invite/index.tsx", 119]],
+    "origin": [["src/views/invite/index.tsx", 121]],
     "translation": "Deze uitnodigingslink is ongeldig of verlopen."
   },
   "vlxQFL": {
@@ -6621,7 +6621,7 @@
     "message": "This workspace has reached its member limit. The workspace owner will need to upgrade their plan.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/invite/index.tsx", 44]],
+    "origin": [["src/views/invite/index.tsx", 49]],
     "translation": "Deze workspace heeft het maximale aantal leden bereikt. De eigenaar van de workspace moet het abonnement upgraden."
   },
   "duf3Nr": {
@@ -6930,7 +6930,7 @@
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         33
       ],
-      ["src/views/members/components/DeleteMemberConfirmation.tsx", 27]
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 30]
     ],
     "translation": "Kan lid niet verwijderen"
   },
@@ -7076,7 +7076,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/members/index.tsx", 81],
-      ["src/views/members/index.tsx", 69]
+      ["src/views/members/index.tsx", 71]
     ],
     "translation": "Kan rol niet bijwerken"
   },
@@ -7205,7 +7205,7 @@
     "message": "Unlimited seats",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 319]],
+    "origin": [["src/views/members/index.tsx", 322]],
     "translation": "Onbeperkt aantal plaatsen"
   },
   "Ws+3X+": {
@@ -7290,7 +7290,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/CalendarView.tsx", 555],
-      ["src/views/members/index.tsx", 296],
+      ["src/views/members/index.tsx", 299],
       ["src/views/onboarding/select-plan/index.tsx", 251]
     ],
     "translation": "Upgraden"
@@ -7404,7 +7404,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/members/index.tsx", 263],
-      ["src/views/members/index.tsx", 347]
+      ["src/views/members/index.tsx", 350]
     ],
     "translation": "Gebruiker"
   },
@@ -7412,7 +7412,7 @@
     "message": "User is already a member of this workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 97]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 106]],
     "translation": "Gebruiker is al lid van deze workspace"
   },
   "vSJd18": {
@@ -7656,7 +7656,7 @@
       ["src/utils/permission-category-label.ts", 10],
       ["src/views/board/index.tsx", 861],
       ["src/views/boards/index.tsx", 58],
-      ["src/views/members/index.tsx", 279],
+      ["src/views/members/index.tsx", 282],
       ["src/views/public/board/index.tsx", 125],
       ["src/views/public/boards/index.tsx", 75]
     ],
@@ -7971,14 +7971,14 @@
     "message": "You've been invited to join a workspace on kan.bn.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/invite/index.tsx", 145]],
+    "origin": [["src/views/invite/index.tsx", 147]],
     "translation": "Je bent uitgenodigd om lid te worden van een werkruimte op kan.bn."
   },
   "uOqaMC": {
     "message": "You've been invited to join a workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/invite/index.tsx", 146]],
+    "origin": [["src/views/invite/index.tsx", 148]],
     "translation": "Je bent uitgenodigd om lid te worden van een werkruimte."
   },
   "QriiAI": {
@@ -7987,7 +7987,7 @@
       "0": ["seatLimit ?? 0"]
     },
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 106]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 116]],
     "translation": "Je hebt de limiet van {0} plaatsen bereikt. Upgrade je abonnement om meer leden toe te voegen."
   },
   "8Zjc7q": {

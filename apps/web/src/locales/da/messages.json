@@ -229,11 +229,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        169
+        184
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        181
+        196
       ]
     ],
     "translation": "$10/måned"
@@ -245,7 +245,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        181
+        196
       ]
     ],
     "translation": "$8/måned"
@@ -633,7 +633,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        243
+        261
       ]
     ],
     "translation": "Tilføj medlem"
@@ -831,7 +831,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        320
+        338
       ]
     ],
     "translation": "Tilføjelse af et nyt medlem koster yderligere {price} ({billingType}) pr. plads."
@@ -863,7 +863,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        221
+        224
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -1088,7 +1088,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        294
+        312
       ]
     ],
     "translation": "Alle med dette link kan deltage i dit arbejdsområde"
@@ -1240,7 +1240,7 @@
     "origin": [
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        47
+        51
       ]
     ],
     "translation": "Er du sikker på, at du vil fjerne {entityLabel}?"
@@ -1583,7 +1583,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        182
+        197
       ]
     ],
     "translation": "faktureres årligt"
@@ -1595,7 +1595,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        182
+        197
       ]
     ],
     "translation": "faktureres månedligt"
@@ -2473,7 +2473,7 @@
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        55
+        59
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
@@ -2781,7 +2781,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        355
+        373
       ],
       [
         "src/views/settings/BillingSettings.tsx",
@@ -3490,7 +3490,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        343
+        361
       ]
     ],
     "translation": "Opret invitationslink"
@@ -3865,7 +3865,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        342
+        360
       ]
     ],
     "translation": "Deaktivér invitationslink"
@@ -4561,7 +4561,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        244
+        247
       ]
     ],
     "translation": "Rediger rettigheder"
@@ -4633,7 +4633,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        258
+        276
       ],
       [
         "src/views/settings/AccountSettings.tsx",
@@ -4865,7 +4865,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        226
+        244
       ]
     ],
     "translation": "Fejl"
@@ -4901,7 +4901,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        136
+        148
       ]
     ],
     "translation": "Fejl ved oprettelse af invitationslink"
@@ -4913,7 +4913,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        152
+        166
       ]
     ],
     "translation": "Fejl ved deaktivering af invitationslink"
@@ -4985,11 +4985,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        96
+        105
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        111
+        121
       ]
     ],
     "translation": "Fejl ved invitation af medlem"
@@ -5166,7 +5166,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        52
+        57
       ]
     ],
     "translation": "Invitationen kunne ikke accepteres. Prøv igen senere, eller kontakt kundesupport."
@@ -5178,7 +5178,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        227
+        245
       ]
     ],
     "translation": "Invitationslinket kunne ikke kopieres"
@@ -5562,11 +5562,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        326
+        344
       ],
       [
         "src/views/members/index.tsx",
-        312
+        315
       ]
     ],
     "translation": "Gratis abonnement"
@@ -5802,7 +5802,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        124
+        126
       ]
     ],
     "translation": "Gå til forsiden"
@@ -5818,7 +5818,7 @@
       ],
       [
         "src/views/invite/index.tsx",
-        155
+        157
       ]
     ],
     "translation": "Gå til appen"
@@ -5934,7 +5934,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        223
+        226
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -6374,7 +6374,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        50
+        57
       ]
     ],
     "translation": "Ugyldig e-mailadresse"
@@ -6386,7 +6386,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        116
+        118
       ]
     ],
     "translation": "Ugyldig invitation"
@@ -6398,7 +6398,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        331
+        334
       ]
     ],
     "translation": "Invitér"
@@ -6410,7 +6410,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        220
+        238
       ]
     ],
     "translation": "Invitationslink kopieret"
@@ -6422,7 +6422,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        221
+        239
       ]
     ],
     "translation": "Invitationslink kopieret til udklipsholderen"
@@ -6450,7 +6450,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        131
+        143
       ]
     ],
     "translation": "Invitationslinks kræver et Team- eller Pro-abonnement. Opgrader dit arbejdsområde."
@@ -6466,7 +6466,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        363
+        381
       ]
     ],
     "translation": "Invitér medlem"
@@ -6491,7 +6491,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        329
+        347
       ]
     ],
     "translation": ""
@@ -6503,11 +6503,11 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        90
+        92
       ],
       [
         "src/views/invite/index.tsx",
-        140
+        142
       ]
     ],
     "translation": "Deltag i arbejdsområde"
@@ -6519,7 +6519,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        102
+        104
       ]
     ],
     "translation": "Deltag i arbejdsområde | kan.bn"
@@ -7112,7 +7112,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        222
+        225
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -7128,7 +7128,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        262
+        265
       ]
     ],
     "translation": ""
@@ -7176,7 +7176,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        284
+        287
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -7196,7 +7196,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        279
+        282
       ]
     ],
     "translation": "Medlemmer | {0}"
@@ -7252,7 +7252,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        170
+        185
       ]
     ],
     "translation": "månedlig fakturering"
@@ -8171,7 +8171,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        230
+        233
       ]
     ],
     "translation": "Sat på pause"
@@ -8199,7 +8199,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        230
+        233
       ]
     ],
     "translation": "Afventer"
@@ -8627,7 +8627,7 @@
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        28
+        31
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -8643,11 +8643,11 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        112
+        122
       ],
       [
         "src/views/members/index.tsx",
-        70
+        72
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -8699,11 +8699,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        137
+        149
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        153
+        167
       ]
     ],
     "translation": "Prøv igen senere."
@@ -8880,11 +8880,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        305
+        323
       ],
       [
         "src/views/members/index.tsx",
-        309
+        312
       ]
     ],
     "translation": "Pro-abonnement"
@@ -8896,7 +8896,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        317
+        335
       ]
     ],
     "translation": "Pro-abonnement ∞"
@@ -9060,7 +9060,7 @@
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        58
+        62
       ]
     ],
     "translation": "Fjern"
@@ -9108,7 +9108,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        253
+        256
       ]
     ],
     "translation": "Fjern medlem"
@@ -9411,7 +9411,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        353
+        356
       ]
     ],
     "translation": "Rolle"
@@ -9423,7 +9423,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        62
+        64
       ]
     ],
     "translation": "Rolle opdateret"
@@ -9564,7 +9564,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        105
+        115
       ]
     ],
     "translation": "Grænsen for pladser er nået"
@@ -9576,11 +9576,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        308
+        326
       ],
       [
         "src/views/members/index.tsx",
-        320
+        323
       ]
     ],
     "translation": "pladser"
@@ -10068,7 +10068,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        165
+        167
       ]
     ],
     "translation": "Log ind"
@@ -10124,7 +10124,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        173
+        175
       ]
     ],
     "translation": "Opret konto"
@@ -10453,7 +10453,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        130
+        142
       ]
     ],
     "translation": "Abonnement påkrævet"
@@ -10562,15 +10562,15 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        305
+        323
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        317
+        335
       ],
       [
         "src/views/members/index.tsx",
-        311
+        314
       ]
     ],
     "translation": "Team-abonnement"
@@ -10921,7 +10921,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        63
+        65
       ]
     ],
     "translation": "Medlemmets rolle er blevet opdateret."
@@ -10985,7 +10985,7 @@
     "origin": [
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        50
+        54
       ]
     ],
     "translation": "De vil ikke længere kunne tilgå dette arbejdsområde."
@@ -11073,7 +11073,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        119
+        121
       ]
     ],
     "translation": "Dette invitationslink er ugyldigt eller udløbet."
@@ -11173,7 +11173,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        44
+        49
       ]
     ],
     "translation": "Dette arbejdsområde har nået sin medlemsgrænse. Ejeren af arbejdsområdet skal opgradere abonnementet."
@@ -11681,7 +11681,7 @@
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        27
+        30
       ]
     ],
     "translation": "Kunne ikke fjerne medlem"
@@ -11921,7 +11921,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        69
+        71
       ]
     ],
     "translation": "Kunne ikke opdatere rolle"
@@ -12146,7 +12146,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        319
+        322
       ]
     ],
     "translation": "Ubegrænset antal pladser"
@@ -12279,7 +12279,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        296
+        299
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
@@ -12465,7 +12465,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        347
+        350
       ]
     ],
     "translation": "Bruger"
@@ -12477,7 +12477,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        97
+        106
       ]
     ],
     "translation": "Brugeren er allerede medlem af dette arbejdsområde"
@@ -12881,7 +12881,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        279
+        282
       ],
       [
         "src/views/public/board/index.tsx",
@@ -13358,7 +13358,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        145
+        147
       ]
     ],
     "translation": "Du er blevet inviteret til at deltage i et arbejdsområde på kan.bn."
@@ -13370,7 +13370,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        146
+        148
       ]
     ],
     "translation": "Du er blevet inviteret til at deltage i et arbejdsområde."
@@ -13386,7 +13386,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        106
+        116
       ]
     ],
     "translation": "Du har nået grænsen på {0} pladser. Opgrader dit abonnement for at tilføje flere medlemmer."
