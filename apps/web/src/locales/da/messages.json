@@ -156,7 +156,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        489
+        506
       ]
     ],
     "translation": "{boardCount, plural, one {Importér tavle (1)} other {Importér tavler ({boardCount})}}"
@@ -172,7 +172,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        341
+        356
       ]
     ],
     "translation": "{projectCount, plural, one {Importér projekt (1)} other {Importér projekter ({projectCount})}}"
@@ -417,11 +417,11 @@
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        321
+        347
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        104
+        105
       ]
     ],
     "translation": "Aktiv"
@@ -843,7 +843,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        256
+        253
       ]
     ],
     "translation": "Juster den kvadratiske beskæring, så den passer til din avatar."
@@ -1028,7 +1028,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        107
+        120
       ]
     ],
     "translation": "Der opstod en fejl under tilslutning af din GitHub-konto."
@@ -1040,7 +1040,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        130
+        144
       ]
     ],
     "translation": "Der opstod en fejl under afbrydelse af din GitHub-konto."
@@ -1052,7 +1052,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        87
+        98
       ]
     ],
     "translation": "Der opstod en fejl under afbrydelse af din Trello-konto."
@@ -1076,7 +1076,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        78
+        77
       ]
     ],
     "translation": "Årligt"
@@ -1256,7 +1256,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        69
+        80
       ]
     ],
     "translation": "Er du sikker på, at du vil slette webhooken \"{webhookName}\"? Denne handling kan ikke fortrydes."
@@ -1571,7 +1571,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        101
+        100
       ]
     ],
     "translation": ""
@@ -2477,11 +2477,11 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        249
+        248
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        287
+        284
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2497,7 +2497,7 @@
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        75
+        86
       ],
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
@@ -2637,11 +2637,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        93
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        105
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2661,7 +2661,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        63
+        68
       ]
     ],
     "translation": "Skift appens skriftstørrelse."
@@ -2673,7 +2673,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        53
+        58
       ]
     ],
     "translation": "Skift dine sprogindstillinger."
@@ -2769,7 +2769,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        160
+        159
       ]
     ],
     "translation": "Vælg et abonnement"
@@ -2869,7 +2869,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        281
+        278
       ],
       [
         "src/views/card/index.tsx",
@@ -3110,7 +3110,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        195
+        208
       ]
     ],
     "translation": "Forbind"
@@ -3122,7 +3122,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        212
+        229
       ]
     ],
     "translation": "Forbind GitHub"
@@ -3134,7 +3134,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        162
+        177
       ]
     ],
     "translation": "Forbind Trello"
@@ -3158,7 +3158,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        191
+        208
       ]
     ],
     "translation": "Forbind din GitHub-konto for at importere projekter."
@@ -3170,7 +3170,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        149
+        164
       ]
     ],
     "translation": "Forbind din Trello-konto for at importere tavler."
@@ -3242,7 +3242,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        255
+        254
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -3602,7 +3602,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        344
+        370
       ]
     ],
     "translation": "Opret webhook"
@@ -3630,7 +3630,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        238
+        243
       ]
     ],
     "translation": "Oprettet"
@@ -3674,7 +3674,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        253
+        250
       ]
     ],
     "translation": "Beskær din avatar"
@@ -3929,11 +3929,11 @@
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        82
+        93
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        136
+        137
       ]
     ],
     "translation": "Slet"
@@ -3945,11 +3945,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        70
+        75
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        80
+        85
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -4041,7 +4041,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        55
+        66
       ]
     ],
     "translation": "Slet webhook"
@@ -4153,7 +4153,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        223
+        240
       ]
     ],
     "translation": "Afbryd GitHub"
@@ -4165,7 +4165,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        177
+        194
       ]
     ],
     "translation": "Afbryd Trello"
@@ -4201,11 +4201,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        36
+        39
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        71
+        73
       ]
     ],
     "translation": "Vist navn"
@@ -4217,7 +4217,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        22
+        24
       ]
     ],
     "translation": "Det viste navn må højst være 280 tegn"
@@ -4229,7 +4229,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        19
+        21
       ]
     ],
     "translation": "Det viste navn skal være mindst 3 tegn langt"
@@ -4241,7 +4241,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        41
+        44
       ]
     ],
     "translation": "Det viste navn er opdateret"
@@ -4377,7 +4377,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        142
+        146
       ]
     ],
     "translation": "Download mislykkedes"
@@ -4505,7 +4505,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        128
+        129
       ]
     ],
     "translation": "Rediger"
@@ -4573,7 +4573,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        210
+        236
       ]
     ],
     "translation": "Rediger webhook"
@@ -4637,7 +4637,7 @@
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        43
+        46
       ]
     ],
     "translation": "E-mail"
@@ -4753,7 +4753,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        258
+        284
       ]
     ],
     "translation": "Indtast ny hemmelighed for at opdatere"
@@ -4889,7 +4889,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        106
+        119
       ]
     ],
     "translation": "Fejl ved forbindelse til GitHub"
@@ -4961,7 +4961,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        129
+        143
       ]
     ],
     "translation": "Fejl ved afbrydelse af GitHub"
@@ -4973,7 +4973,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        86
+        97
       ]
     ],
     "translation": "Fejl ved afbrydelse af Trello"
@@ -5013,7 +5013,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        54
+        57
       ]
     ],
     "translation": "Fejl ved opdatering af vist navn"
@@ -5078,7 +5078,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        199
+        196
       ]
     ],
     "translation": "Fejl ved upload af profilbillede"
@@ -5090,11 +5090,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        271
+        297
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        226
+        231
       ]
     ],
     "translation": "Hændelser"
@@ -5206,7 +5206,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        119
+        130
       ]
     ],
     "translation": "Webhooken kunne ikke oprettes"
@@ -5218,7 +5218,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        37
+        47
       ]
     ],
     "translation": "Webhooken kunne ikke slettes"
@@ -5258,11 +5258,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        164
+        185
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        186
+        190
       ]
     ],
     "translation": "Test af webhook mislykkedes"
@@ -5274,7 +5274,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        138
+        155
       ]
     ],
     "translation": "Webhooken kunne ikke opdateres"
@@ -5446,7 +5446,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        60
+        65
       ]
     ],
     "translation": "Skriftstørrelse"
@@ -5506,11 +5506,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        92
+        91
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        93
+        92
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -5766,7 +5766,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        186
+        203
       ]
     ],
     "translation": "GitHub"
@@ -5778,7 +5778,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        99
+        112
       ]
     ],
     "translation": "GitHub forbundet"
@@ -5790,7 +5790,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        122
+        136
       ]
     ],
     "translation": "GitHub afbrudt"
@@ -5894,7 +5894,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        94
+        93
       ]
     ],
     "translation": "Godt til enkeltpersoner, der er ved at komme i gang og kun har brug for det mest nødvendige."
@@ -6010,7 +6010,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        259
+        285
       ]
     ],
     "translation": "HMAC-hemmelighed til signaturverificering"
@@ -6178,11 +6178,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        229
+        244
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        381
+        398
       ]
     ],
     "translation": "Import fuldført"
@@ -6194,11 +6194,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        242
+        257
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        394
+        411
       ]
     ],
     "translation": "Import mislykkedes"
@@ -6310,7 +6310,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        104
+        105
       ]
     ],
     "translation": "Inaktiv"
@@ -6647,7 +6647,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        50
+        55
       ]
     ],
     "translation": "Sprog"
@@ -6744,7 +6744,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        115
+        112
       ]
     ],
     "translation": "Licens aktiveret"
@@ -6756,7 +6756,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        129
+        126
       ]
     ],
     "translation": "Aktivering af licens mislykkedes"
@@ -7232,7 +7232,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        77
+        76
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -7355,7 +7355,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        231
+        257
       ]
     ],
     "translation": "Min webhook"
@@ -7379,11 +7379,11 @@
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        227
+        253
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        214
+        219
       ]
     ],
     "translation": "Navn"
@@ -7499,7 +7499,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        513
+        530
       ]
     ],
     "translation": "Ny import"
@@ -7587,7 +7587,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        210
+        236
       ]
     ],
     "translation": "Ny webhook"
@@ -7687,7 +7687,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        432
+        449
       ]
     ],
     "translation": "Ingen tavler fundet"
@@ -7735,7 +7735,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        143
+        147
       ]
     ],
     "translation": "Der er ingen download-URL tilgængelig for denne vedhæftede fil."
@@ -7759,7 +7759,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        126
+        123
       ]
     ],
     "translation": "Der blev ikke angivet nogen licensnøgle. Prøv at aktivere igen."
@@ -7795,7 +7795,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        283
+        298
       ]
     ],
     "translation": "Ingen projekter fundet"
@@ -7835,7 +7835,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        196
+        201
       ]
     ],
     "translation": "Ingen webhooks konfigureret. Tilføj en webhook for at modtage notifikationer."
@@ -7895,7 +7895,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        73
+        78
       ]
     ],
     "translation": "Når du sletter din konto, kan du ikke gå tilbage. Denne handling kan ikke fortrydes."
@@ -8079,7 +8079,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        271
+        268
       ]
     ],
     "translation": "Adgangskode allerede indstillet"
@@ -8323,7 +8323,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        165
+        164
       ]
     ],
     "translation": "Vælg et abonnement for at komme i gang. Alle betalte abonnementer inkluderer 14 dages gratis prøveperiode."
@@ -8443,7 +8443,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        24
+        30
       ]
     ],
     "translation": "Indtast en gyldig URL"
@@ -8547,15 +8547,15 @@
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        243
+        258
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        395
+        412
       ],
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        74
+        77
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
@@ -8659,7 +8659,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        200
+        197
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -8671,7 +8671,7 @@
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        55
+        58
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
@@ -8908,7 +8908,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        189
+        186
       ]
     ],
     "translation": "Profilbillede opdateret"
@@ -8920,7 +8920,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        30
+        33
       ]
     ],
     "translation": "Profilbillede"
@@ -9492,7 +9492,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        290
+        287
       ]
     ],
     "translation": "Gem"
@@ -9504,7 +9504,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        344
+        370
       ]
     ],
     "translation": "Gem ændringer"
@@ -9592,7 +9592,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        251
+        277
       ]
     ],
     "translation": "Hemmelighed (valgfrit)"
@@ -9604,7 +9604,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        28
+        34
       ]
     ],
     "translation": "Hemmeligheden må højst være 512 tegn"
@@ -9688,11 +9688,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        315
+        330
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        464
+        481
       ]
     ],
     "translation": "Vælg alle"
@@ -9704,7 +9704,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        32
+        38
       ]
     ],
     "translation": "Vælg mindst én hændelse"
@@ -9716,7 +9716,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        195
+        208
       ]
     ],
     "translation": "Vælg kilde"
@@ -9804,7 +9804,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        338
+        364
       ]
     ],
     "translation": "Send test"
@@ -9840,7 +9840,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        93
+        98
       ]
     ],
     "translation": "Indstil en adgangskode for at aktivere login med adgangskode."
@@ -9872,11 +9872,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        88
+        93
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        100
+        105
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -9936,7 +9936,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        26
+        29
       ]
     ],
     "translation": "Indstillinger | Konto"
@@ -9972,7 +9972,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        138
+        153
       ]
     ],
     "translation": "Indstillinger | Integrationer"
@@ -10108,7 +10108,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        328
+        327
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -10276,7 +10276,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        91
+        90
       ]
     ],
     "translation": "Solo"
@@ -10312,7 +10312,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        132
+        129
       ]
     ],
     "translation": "Noget gik galt under aktiveringen af licensen."
@@ -10405,7 +10405,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        164
+        163
       ]
     ],
     "translation": ""
@@ -10417,7 +10417,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        232
+        237
       ]
     ],
     "translation": "Status"
@@ -10550,7 +10550,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        98
+        97
       ]
     ],
     "translation": "Team"
@@ -10714,7 +10714,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        132
+        133
       ]
     ],
     "translation": "Test"
@@ -10726,11 +10726,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        154
+        173
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        177
+        179
       ]
     ],
     "translation": "Test mislykkedes"
@@ -10742,11 +10742,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        148
+        167
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        171
+        173
       ]
     ],
     "translation": "Test sendt"
@@ -10758,11 +10758,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        149
+        168
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        172
+        174
       ]
     ],
     "translation": "Testwebhook sendt!"
@@ -10798,7 +10798,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        124
+        121
       ]
     ],
     "translation": "Licensnøglen blev ikke fundet. Kontakt support."
@@ -11297,7 +11297,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        19
+        27
       ]
     ],
     "translation": "Token er påkrævet"
@@ -11325,7 +11325,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        142
+        157
       ]
     ],
     "translation": "Trello"
@@ -11337,7 +11337,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        79
+        90
       ]
     ],
     "translation": "Trello afbrudt"
@@ -11537,7 +11537,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        118
+        127
       ]
     ],
     "translation": "Kunne ikke oprette webhook"
@@ -11565,7 +11565,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        73
+        76
       ]
     ],
     "translation": "Kunne ikke slette vedhæftet fil"
@@ -11625,7 +11625,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        36
+        44
       ]
     ],
     "translation": "Kunne ikke slette webhook"
@@ -11741,11 +11741,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        163
+        182
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        185
+        187
       ]
     ],
     "translation": "Kunne ikke teste webhook"
@@ -11933,7 +11933,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        137
+        152
       ]
     ],
     "translation": "Kunne ikke opdatere webhook"
@@ -12175,7 +12175,7 @@
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        84
+        86
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
@@ -12283,7 +12283,7 @@
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        254
+        253
       ]
     ],
     "translation": "Opgrader"
@@ -12321,7 +12321,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        160
+        159
       ]
     ],
     "translation": ""
@@ -12361,11 +12361,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        239
+        265
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        220
+        225
       ]
     ],
     "translation": "URL"
@@ -12393,7 +12393,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        25
+        31
       ]
     ],
     "translation": "URL må højst være 2048 tegn"
@@ -12449,7 +12449,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        265
+        291
       ]
     ],
     "translation": "Bruges til at signere webhook-payloads til verificering. Lad feltet være tomt for at beholde den eksisterende hemmelighed."
@@ -12641,7 +12641,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        110
+        119
       ]
     ],
     "translation": "Webhook oprettet"
@@ -12653,7 +12653,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        111
+        120
       ]
     ],
     "translation": "Webhooken blev oprettet"
@@ -12665,7 +12665,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        28
+        36
       ]
     ],
     "translation": "Webhook slettet"
@@ -12677,7 +12677,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        29
+        37
       ]
     ],
     "translation": "Webhooken blev slettet"
@@ -12689,7 +12689,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        20
+        26
       ]
     ],
     "translation": "Webhookens navn må højst være 255 tegn"
@@ -12701,7 +12701,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        19
+        25
       ]
     ],
     "translation": "Webhookens navn er påkrævet"
@@ -12713,7 +12713,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        125
+        126
       ]
     ],
     "translation": ""
@@ -12725,11 +12725,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        155
+        174
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        178
+        180
       ]
     ],
     "translation": "Webhook-test mislykkedes"
@@ -12741,7 +12741,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        129
+        144
       ]
     ],
     "translation": "Webhook opdateret"
@@ -12753,7 +12753,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        130
+        145
       ]
     ],
     "translation": "Webhooken blev opdateret"
@@ -12765,7 +12765,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        23
+        29
       ]
     ],
     "translation": "Webhook-URL er påkrævet"
@@ -13177,7 +13177,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        92
+        97
       ]
     ],
     "translation": "Du er ved at ændre din adgangskode."
@@ -13398,7 +13398,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        273
+        270
       ]
     ],
     "translation": "Din konto har allerede en adgangskode. Du kan ændre den under dine kontoindstillinger."
@@ -13422,7 +13422,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        273
+        272
       ]
     ],
     "translation": "Din avatar"
@@ -13434,7 +13434,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        382
+        399
       ]
     ],
     "translation": "Dine tavler er blevet importeret."
@@ -13446,7 +13446,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
-        42
+        45
       ]
     ],
     "translation": "Dit viste navn er blevet opdateret."
@@ -13470,7 +13470,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        100
+        113
       ]
     ],
     "translation": "Din GitHub-konto er blevet forbundet."
@@ -13482,7 +13482,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        123
+        137
       ]
     ],
     "translation": "Din GitHub-konto er blevet afbrudt."
@@ -13494,7 +13494,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        220
+        237
       ]
     ],
     "translation": "Din GitHub-konto er forbundet."
@@ -13506,7 +13506,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        116
+        113
       ]
     ],
     "translation": "Din licens er blevet aktiveret."
@@ -13518,7 +13518,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        125
+        122
       ]
     ],
     "translation": "Din licens er ikke aktiv. Kontrollér din konto."
@@ -13566,7 +13566,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        190
+        187
       ]
     ],
     "translation": "Dit profilbillede er blevet opdateret."
@@ -13578,7 +13578,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        230
+        245
       ]
     ],
     "translation": "Dine projekter er blevet importeret."
@@ -13590,7 +13590,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        80
+        91
       ]
     ],
     "translation": "Din Trello-konto er blevet afbrudt."
@@ -13602,7 +13602,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        171
+        186
       ]
     ],
     "translation": "Din Trello-konto er forbundet."

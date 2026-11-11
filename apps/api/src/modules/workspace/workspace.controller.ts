@@ -7,6 +7,7 @@ import {
   ApiResponse,
   getSchemaPath,
 } from "@nestjs/swagger";
+import { ZodResponse } from "nestjs-zod";
 
 import type { User } from "../../common/interfaces/user.interface.js";
 import type { SearchResultSchema } from "./dto/workspace.dto.js";
@@ -36,7 +37,7 @@ export class WorkspaceController {
 
   @Get()
   @ApiOperation({ operationId: "getWorkspaces", summary: "Get all workspaces" })
-  @ApiResponse({ status: 200, type: WorkspaceListItemDto, isArray: true })
+  @ZodResponse({ status: 200, type: [WorkspaceListItemDto] })
   async all(@CurrentUser() user: User): Promise<WorkspaceListItemDto[]> {
     return this.workspaceService.all({ userId: user.id });
   }
@@ -48,7 +49,7 @@ export class WorkspaceController {
     operationId: "checkSlugAvailability",
     summary: "Check if a workspace slug is available",
   })
-  @ApiResponse({ status: 200, type: CheckSlugAvailabilityResponseDto })
+  @ZodResponse({ status: 200, type: CheckSlugAvailabilityResponseDto })
   async checkSlugAvailability(
     @CurrentUser() user: User,
     @Query() query: CheckSlugAvailabilityQueryDto,
@@ -77,7 +78,7 @@ export class WorkspaceController {
     summary: "Get a workspace by slug",
   })
   @ApiParam({ name: "workspaceSlug" })
-  @ApiResponse({ status: 200, type: WorkspaceWithBoardsResponseDto })
+  @ZodResponse({ status: 200, type: WorkspaceWithBoardsResponseDto })
   async bySlug(
     @CurrentUser() user: User,
     @Param("workspaceSlug") workspaceSlug: string,
@@ -91,7 +92,7 @@ export class WorkspaceController {
     summary: "Get a workspace by public ID",
   })
   @ApiParam({ name: "workspacePublicId" })
-  @ApiResponse({ status: 200, type: WorkspaceDetailResponseDto })
+  @ZodResponse({ status: 200, type: WorkspaceDetailResponseDto })
   async byId(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -135,7 +136,7 @@ export class WorkspaceController {
     operationId: "createWorkspace",
     summary: "Create a workspace",
   })
-  @ApiResponse({ status: 201, type: WorkspaceCreateResponseDto })
+  @ZodResponse({ status: 201, type: WorkspaceCreateResponseDto })
   async create(
     @CurrentUser() user: User,
     @Body() input: CreateWorkspaceDto,
@@ -155,7 +156,7 @@ export class WorkspaceController {
     summary: "Update a workspace",
   })
   @ApiParam({ name: "workspacePublicId" })
-  @ApiResponse({ status: 200, type: WorkspaceUpdateResponseDto })
+  @ZodResponse({ status: 200, type: WorkspaceUpdateResponseDto })
   async update(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,
@@ -178,7 +179,7 @@ export class WorkspaceController {
     summary: "Delete a workspace",
   })
   @ApiParam({ name: "workspacePublicId" })
-  @ApiResponse({ status: 200, type: WorkspaceDeleteResponseDto })
+  @ZodResponse({ status: 200, type: WorkspaceDeleteResponseDto })
   async delete(
     @CurrentUser() user: User,
     @Param("workspacePublicId") workspacePublicId: string,

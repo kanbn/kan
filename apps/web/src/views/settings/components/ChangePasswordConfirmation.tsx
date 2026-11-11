@@ -1,17 +1,17 @@
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { getGetUserQueryKey, useSetPassword } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 const buildSchema = (hasPassword: boolean) => {
   const base = z.object({
@@ -53,7 +53,7 @@ export function ChangePasswordFormConfirmation({ hasPassword }: Props) {
   const { closeModal } = useModal();
   const { showPopup } = usePopup();
   const router = useRouter();
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -66,13 +66,13 @@ export function ChangePasswordFormConfirmation({ hasPassword }: Props) {
     mode: "onChange",
   });
 
-  const setPasswordMutation = api.user.setPassword.useMutation();
+  const setPasswordMutation = useSetPassword();
 
   const changePasswordMutation = useMutation({
     mutationFn: async (data: FormValues) => {
       if (!hasPassword) {
         await setPasswordMutation.mutateAsync({
-          newPassword: data.newPassword,
+          data: { newPassword: data.newPassword },
         });
         return;
       }
@@ -101,7 +101,7 @@ export function ChangePasswordFormConfirmation({ hasPassword }: Props) {
         sessionStorage.removeItem("set_password_prompted");
       }
 
-      utils.user.getUser.invalidate();
+      void queryClient.invalidateQueries({ queryKey: getGetUserQueryKey() });
       reset();
       router.push("/");
     },

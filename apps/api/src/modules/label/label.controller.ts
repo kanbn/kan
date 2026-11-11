@@ -1,5 +1,6 @@
 import { Body, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { ApiOperation, ApiParam, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiParam } from "@nestjs/swagger";
+import { ZodResponse } from "nestjs-zod";
 
 import type { User } from "../../common/interfaces/user.interface.js";
 import { AuthenticatedController } from "../../common/decorators/authenticated-controller.decorator.js";
@@ -17,9 +18,12 @@ export class LabelController {
   constructor(private readonly labelService: LabelService) {}
 
   @Get(":labelPublicId")
-  @ApiOperation({ operationId: "getLabel", summary: "Get a label by public ID" })
+  @ApiOperation({
+    operationId: "getLabel",
+    summary: "Get a label by public ID",
+  })
   @ApiParam({ name: "labelPublicId" })
-  @ApiResponse({ status: 200, type: LabelResponseDto })
+  @ZodResponse({ status: 200, type: LabelResponseDto })
   async byPublicId(
     @CurrentUser() user: User,
     @Param("labelPublicId") labelPublicId: string,
@@ -29,7 +33,7 @@ export class LabelController {
 
   @Post()
   @ApiOperation({ operationId: "createLabel", summary: "Create a label" })
-  @ApiResponse({ status: 201, type: LabelResponseDto })
+  @ZodResponse({ status: 201, type: LabelResponseDto })
   async create(
     @CurrentUser() user: User,
     @Body() input: CreateLabelDto,
@@ -45,7 +49,7 @@ export class LabelController {
   @Put(":labelPublicId")
   @ApiOperation({ operationId: "updateLabel", summary: "Update a label" })
   @ApiParam({ name: "labelPublicId" })
-  @ApiResponse({ status: 200, type: LabelResponseDto })
+  @ZodResponse({ status: 200, type: LabelResponseDto })
   async update(
     @CurrentUser() user: User,
     @Param("labelPublicId") labelPublicId: string,
@@ -62,7 +66,7 @@ export class LabelController {
   @Delete(":labelPublicId")
   @ApiOperation({ operationId: "deleteLabel", summary: "Delete a label" })
   @ApiParam({ name: "labelPublicId" })
-  @ApiResponse({ status: 200, type: DeleteLabelResponseDto })
+  @ZodResponse({ status: 200, type: DeleteLabelResponseDto })
   async delete(
     @CurrentUser() user: User,
     @Param("labelPublicId") labelPublicId: string,

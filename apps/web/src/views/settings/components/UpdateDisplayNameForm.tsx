@@ -1,15 +1,17 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+import { getGetUserQueryKey, useUpdateUser } from "@kan/api-client/hooks";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { usePopup } from "~/providers/popup";
-import { api } from "~/utils/api";
 
 const UpdateDisplayNameForm = ({ displayName }: { displayName: string }) => {
-  const utils = api.useUtils();
+  const queryClient = useQueryClient();
   const { showPopup } = usePopup();
 
   const schema = z.object({
@@ -35,33 +37,33 @@ const UpdateDisplayNameForm = ({ displayName }: { displayName: string }) => {
     },
   });
 
-  const updateDisplayName = api.user.update.useMutation({
-    onSuccess: async () => {
-      showPopup({
-        header: t`Display name updated`,
-        message: t`Your display name has been updated.`,
-        icon: "success",
-      });
-      try {
-        await utils.user.getUser.refetch();
-      } catch (e) {
-        console.error(e);
-        throw e;
-      }
-    },
-    onError: () => {
-      showPopup({
-        header: t`Error updating display name`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
+  const updateDisplayName = useUpdateUser({
+    mutation: {
+      onSuccess: async () => {
+        showPopup({
+          header: t`Display name updated`,
+          message: t`Your display name has been updated.`,
+          icon: "success",
+        });
+        try {
+          await queryClient.refetchQueries({ queryKey: getGetUserQueryKey() });
+        } catch (e) {
+          console.error(e);
+          throw e;
+        }
+      },
+      onError: () => {
+        showPopup({
+          header: t`Error updating display name`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
     },
   });
 
   const onSubmit = (data: FormValues) => {
-    updateDisplayName.mutate({
-      name: data.name,
-    });
+    updateDisplayName.mutate({ data: { name: data.name } });
   };
 
   return (

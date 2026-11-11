@@ -10,13 +10,13 @@ import {
   TbLayoutSidebarRightExpand,
 } from "react-icons/tb";
 
+import { useGetUser } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
 import { useClickOutside } from "~/hooks/useClickOutside";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace, WorkspaceProvider } from "~/providers/workspace";
-import { api } from "~/utils/api";
 import { ChangePasswordFormConfirmation } from "~/views/settings/components/ChangePasswordConfirmation";
 import Button from "./Button";
 import Modal from "./modal";
@@ -55,12 +55,9 @@ export default function Dashboard({
   const searchParams = useSearchParams();
 
   const { data: session, isPending: sessionLoading } = authClient.useSession();
-  const { data: user, isLoading: userLoading } = api.user.getUser.useQuery(
-    undefined,
-    {
-      enabled: !!session?.user,
-    },
-  );
+  const { data: user, isLoading: userLoading } = useGetUser({
+    query: { enabled: !!session?.user, select: (res) => res.data },
+  });
 
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
   const [isRightPanelOpen, setIsRightPanelOpen] = useState(false);
