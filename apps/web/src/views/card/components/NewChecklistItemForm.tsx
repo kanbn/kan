@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import ContentEditable from "react-contenteditable";
 import { useForm } from "react-hook-form";
 
+import { useCreateChecklistItem } from "@kan/api-client/hooks";
 import { generateUID } from "@kan/shared/utils";
 
 import { usePopup } from "~/providers/popup";
@@ -51,64 +52,66 @@ const NewChecklistItemForm = ({
     }, 100);
   };
 
-  const addChecklistItemMutation = api.checklist.createItem.useMutation({
-    onMutate: async (vars) => {
-      await utils.card.byId.cancel({ cardPublicId });
-      const previous = utils.card.byId.getData({ cardPublicId });
-      const optimisticPublicId = `PLACEHOLDER_${generateUID()}`;
+  const addChecklistItemMutation = useCreateChecklistItem({
+    mutation: {
+      onMutate: async (vars) => {
+        await utils.card.byId.cancel({ cardPublicId });
+        const previous = utils.card.byId.getData({ cardPublicId });
+        const optimisticPublicId = `PLACEHOLDER_${generateUID()}`;
 
-      utils.card.byId.setData({ cardPublicId }, (old) => {
-        if (!old) return old as any;
-        const placeholder = {
-          publicId: optimisticPublicId,
-          clientId: optimisticPublicId,
-          title: vars.title,
-          completed: false,
-        };
-        const updatedChecklists = old.checklists.map((cl) =>
-          cl.publicId === checklistPublicId
-            ? { ...cl, items: [...cl.items, placeholder] }
-            : cl,
-        );
-        return { ...old, checklists: updatedChecklists } as typeof old;
-      });
+        utils.card.byId.setData({ cardPublicId }, (old) => {
+          if (!old) return old as any;
+          const placeholder = {
+            publicId: optimisticPublicId,
+            clientId: optimisticPublicId,
+            title: vars.data.title,
+            completed: false,
+          };
+          const updatedChecklists = old.checklists.map((cl) =>
+            cl.publicId === checklistPublicId
+              ? { ...cl, items: [...cl.items, placeholder] }
+              : cl,
+          );
+          return { ...old, checklists: updatedChecklists } as typeof old;
+        });
 
-      if (keepOpenRef.current) {
-        reset({ title: "" });
-        if (editableRef.current) editableRef.current.innerHTML = "";
-        refocusEditable();
-      } else {
-        onCancel();
-      }
+        if (keepOpenRef.current) {
+          reset({ title: "" });
+          if (editableRef.current) editableRef.current.innerHTML = "";
+          refocusEditable();
+        } else {
+          onCancel();
+        }
 
-      return { previous, optimisticPublicId };
-    },
-    onSuccess: (result, _vars, context) => {
-      if (!context) return;
-      utils.card.byId.setData({ cardPublicId }, (old) => {
-        if (!old) return old as any;
-        const updatedChecklists = old.checklists.map((cl) => ({
-          ...cl,
-          items: cl.items.map((item) =>
-            item.publicId === context.optimisticPublicId
-              ? { ...item, publicId: result.publicId }
-              : item,
-          ),
-        }));
-        return { ...old, checklists: updatedChecklists } as typeof old;
-      });
-    },
-    onError: (_err, _vars, ctx) => {
-      if (ctx?.previous)
-        utils.card.byId.setData({ cardPublicId }, ctx.previous);
-      showPopup({
-        header: t`Unable to add checklist item`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await utils.card.getActivities.invalidate({ cardPublicId });
+        return { previous, optimisticPublicId };
+      },
+      onSuccess: (result, _vars, context) => {
+        if (!context) return;
+        utils.card.byId.setData({ cardPublicId }, (old) => {
+          if (!old) return old as any;
+          const updatedChecklists = old.checklists.map((cl) => ({
+            ...cl,
+            items: cl.items.map((item) =>
+              item.publicId === context.optimisticPublicId
+                ? { ...item, publicId: result.data.publicId }
+                : item,
+            ),
+          }));
+          return { ...old, checklists: updatedChecklists } as typeof old;
+        });
+      },
+      onError: (_err, _vars, ctx) => {
+        if (ctx?.previous)
+          utils.card.byId.setData({ cardPublicId }, ctx.previous);
+        showPopup({
+          header: t`Unable to add checklist item`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
+      onSettled: async () => {
+        await utils.card.getActivities.invalidate({ cardPublicId });
+      },
     },
   });
 
@@ -132,7 +135,7 @@ const NewChecklistItemForm = ({
     }
     addChecklistItemMutation.mutate({
       checklistPublicId,
-      title: plain,
+      data: { title: plain },
     });
   };
 

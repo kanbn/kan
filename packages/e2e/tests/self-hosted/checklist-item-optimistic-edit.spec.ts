@@ -6,7 +6,7 @@ import { CardPage } from "../support/pages/card-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
 import { SelfHostedOnboardingPage } from "../support/pages/self-hosted-onboarding-page";
 import { createTestUser } from "../support/test-user";
-import { waitForTrpcMutation } from "../support/wait-for-trpc";
+import { waitForResponsePath } from "../support/wait-for-trpc";
 
 test(
   "editing a checklist item right after creating it keeps the cursor and the edit",
@@ -34,7 +34,7 @@ test(
     const createItemGate = new Promise<void>((resolve) => {
       releaseCreateItemRequest = resolve;
     });
-    await page.route(/\/api\/trpc\/checklist\.createItem/, async (route) => {
+    await page.route(/\/items$/, async (route) => {
       await createItemGate;
       await route.continue();
     });
@@ -45,7 +45,7 @@ test(
     const itemInput = page.locator('[id^="checklist-item-input-"]');
     await itemInput.click();
     await itemInput.pressSequentially("foo bar");
-    const created = waitForTrpcMutation(page, "checklist.createItem");
+    const created = waitForResponsePath(page, "/items");
     await page.keyboard.press("Enter");
 
     await page.waitForTimeout(200);
@@ -66,7 +66,7 @@ test(
       hasText: "baz bar",
     });
 
-    const updated = waitForTrpcMutation(page, "checklist.updateItem");
+    const updated = waitForResponsePath(page, "/checklists/items/", "PATCH");
     await page.locator("#title").click();
     await expect(itemText).toBeVisible();
     await expect(
