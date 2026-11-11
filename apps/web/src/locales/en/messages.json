@@ -497,7 +497,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        157
+        160
       ]
     ],
     "translation": "Add an item..."
@@ -553,7 +553,7 @@
     "origin": [
       [
         "src/views/card/components/Checklists.tsx",
-        198
+        202
       ]
     ],
     "translation": "Add checklist item"
@@ -593,7 +593,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        176
+        187
       ]
     ],
     "translation": "Add details..."
@@ -1312,7 +1312,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        56
+        60
       ]
     ],
     "translation": "Are you sure you want to delete this checklist?"
@@ -2465,7 +2465,7 @@
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        64
+        68
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
@@ -2741,7 +2741,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        130
+        135
       ]
     ],
     "translation": "Checklist name"
@@ -3491,7 +3491,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        146
+        151
       ]
     ],
     "translation": "Create checklist"
@@ -3947,7 +3947,7 @@
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        67
+        71
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
@@ -4019,7 +4019,7 @@
     "origin": [
       [
         "src/views/card/components/Checklists.tsx",
-        189
+        193
       ]
     ],
     "translation": "Delete checklist"
@@ -7565,7 +7565,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        114
+        119
       ]
     ],
     "translation": "New checklist"
@@ -8637,19 +8637,19 @@
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        73
+        81
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        101
+        111
       ],
       [
         "src/views/card/components/ChecklistNameInput.tsx",
-        47
+        52
       ],
       [
         "src/views/card/components/Checklists.tsx",
-        94
+        97
       ],
       [
         "src/views/card/components/Comment.tsx",
@@ -8661,7 +8661,7 @@
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        38
+        41
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
@@ -8685,11 +8685,11 @@
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        82
+        86
       ],
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        106
+        108
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
@@ -11099,7 +11099,7 @@
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        59
+        63
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
@@ -11463,7 +11463,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        105
+        107
       ]
     ],
     "translation": "Unable to add checklist item"
@@ -11575,7 +11575,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        81
+        85
       ]
     ],
     "translation": "Unable to create checklist"
@@ -11667,7 +11667,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        37
+        40
       ]
     ],
     "translation": "Unable to delete checklist"
@@ -11679,7 +11679,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        100
+        110
       ]
     ],
     "translation": "Unable to delete checklist item"
@@ -11771,7 +11771,7 @@
     "origin": [
       [
         "src/views/card/components/Checklists.tsx",
-        93
+        96
       ]
     ],
     "translation": "Unable to reorder checklist item"
@@ -11887,7 +11887,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistNameInput.tsx",
-        46
+        51
       ]
     ],
     "translation": "Unable to update checklist"
@@ -11899,7 +11899,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        72
+        80
       ]
     ],
     "translation": "Unable to update checklist item"

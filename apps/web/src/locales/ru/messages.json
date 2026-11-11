@@ -293,7 +293,7 @@
     "message": "Add an item...",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 157]],
+    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 160]],
     "translation": "Добавить элемент..."
   },
   "0Jeh9Q": {
@@ -329,7 +329,7 @@
     "message": "Add checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Checklists.tsx", 198]],
+    "origin": [["src/views/card/components/Checklists.tsx", 202]],
     "translation": "Добавить элемент чек-листа"
   },
   "ngBZOd": {
@@ -353,7 +353,7 @@
     "message": "Add details...",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 176]],
+    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 187]],
     "translation": "Добавить детали..."
   },
   "lyqwgn": {
@@ -780,7 +780,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 56]
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 60]
     ],
     "translation": "Вы уверены, что хотите удалить этот чек-лист?"
   },
@@ -1473,7 +1473,7 @@
       ],
       ["src/views/card/components/Comment.tsx", 195],
       ["src/views/card/components/DeleteCardConfirmation.tsx", 86],
-      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 64],
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 68],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 77],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 55],
       ["src/views/onboarding/select-plan/index.tsx", 246],
@@ -1623,7 +1623,7 @@
     "message": "Checklist name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistForm.tsx", 130]],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 135]],
     "translation": "Название чек-листа"
   },
   "EH8IL3": {
@@ -2080,7 +2080,7 @@
     "message": "Create checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistForm.tsx", 146]],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 151]],
     "translation": "Создать чек-лист"
   },
   "zKY5xi": {
@@ -2351,7 +2351,7 @@
       ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 52],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 47],
       ["src/views/card/components/DeleteCardConfirmation.tsx", 92],
-      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 67],
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 71],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 83],
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 82],
       ["src/views/settings/components/WebhookList.tsx", 136]
@@ -2390,7 +2390,7 @@
     "message": "Delete checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Checklists.tsx", 189]],
+    "origin": [["src/views/card/components/Checklists.tsx", 193]],
     "translation": "Удалить чек-лист"
   },
   "njJFtc": {
@@ -4482,7 +4482,7 @@
     "message": "New checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistForm.tsx", 114]],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 119]],
     "translation": "Новый чек-лист"
   },
   "WYwN1G": {
@@ -5108,20 +5108,20 @@
       ["src/views/boards/components/ImportBoardsForm.tsx", 243],
       ["src/views/boards/components/ImportBoardsForm.tsx", 395],
       ["src/views/card/components/AttachmentThumbnails.tsx", 74],
-      ["src/views/card/components/ChecklistItemRow.tsx", 73],
-      ["src/views/card/components/ChecklistItemRow.tsx", 101],
-      ["src/views/card/components/ChecklistNameInput.tsx", 47],
-      ["src/views/card/components/Checklists.tsx", 94],
+      ["src/views/card/components/ChecklistItemRow.tsx", 81],
+      ["src/views/card/components/ChecklistItemRow.tsx", 111],
+      ["src/views/card/components/ChecklistNameInput.tsx", 52],
+      ["src/views/card/components/Checklists.tsx", 97],
       ["src/views/card/components/Comment.tsx", 93],
       ["src/views/card/components/DeleteCardConfirmation.tsx", 52],
-      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 38],
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 41],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 46],
       ["src/views/card/components/DueDateSelector.tsx", 64],
       ["src/views/card/components/LabelSelector.tsx", 75],
       ["src/views/card/components/ListSelector.tsx", 55],
       ["src/views/card/components/MemberSelector.tsx", 82],
-      ["src/views/card/components/NewChecklistForm.tsx", 82],
-      ["src/views/card/components/NewChecklistItemForm.tsx", 106],
+      ["src/views/card/components/NewChecklistForm.tsx", 86],
+      ["src/views/card/components/NewChecklistItemForm.tsx", 108],
       ["src/views/card/components/NewCommentForm.tsx", 43],
       ["src/views/card/index.tsx", 259],
       ["src/views/card/index.tsx", 272],
@@ -6521,7 +6521,7 @@
       ["src/components/DeleteLabelConfirmation.tsx", 47],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 39],
       ["src/views/card/components/DeleteCardConfirmation.tsx", 78],
-      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 59],
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 63],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 69]
     ],
     "translation": "Это действие нельзя отменить."
@@ -6750,7 +6750,7 @@
     "message": "Unable to add checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 105]],
+    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 107]],
     "translation": "Не удалось добавить элемент контрольного списка"
   },
   "T7DJ2k": {
@@ -6814,7 +6814,7 @@
     "message": "Unable to create checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistForm.tsx", 81]],
+    "origin": [["src/views/card/components/NewChecklistForm.tsx", 85]],
     "translation": "Не удалось создать контрольный список"
   },
   "TztLaN": {
@@ -6870,7 +6870,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 37]
+      ["src/views/card/components/DeleteChecklistConfirmation.tsx", 40]
     ],
     "translation": "Не удалось удалить контрольный список"
   },
@@ -6878,7 +6878,7 @@
     "message": "Unable to delete checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 100]],
+    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 110]],
     "translation": "Не удалось удалить элемент контрольного списка"
   },
   "2QGEbi": {
@@ -6938,7 +6938,7 @@
     "message": "Unable to reorder checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Checklists.tsx", 93]],
+    "origin": [["src/views/card/components/Checklists.tsx", 96]],
     "translation": "Не удалось изменить порядок элемента контрольного списка"
   },
   "vfRdCZ": {
@@ -7009,14 +7009,14 @@
     "message": "Unable to update checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ChecklistNameInput.tsx", 46]],
+    "origin": [["src/views/card/components/ChecklistNameInput.tsx", 51]],
     "translation": "Не удалось обновить контрольный список"
   },
   "WQPDcG": {
     "message": "Unable to update checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 72]],
+    "origin": [["src/views/card/components/ChecklistItemRow.tsx", 80]],
     "translation": "Не удалось обновить элемент контрольного списка"
   },
   "fYVH36": {

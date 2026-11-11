@@ -497,7 +497,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        157
+        160
       ]
     ],
     "translation": "Tilføj et punkt..."
@@ -553,7 +553,7 @@
     "origin": [
       [
         "src/views/card/components/Checklists.tsx",
-        198
+        202
       ]
     ],
     "translation": ""
@@ -593,7 +593,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        176
+        187
       ]
     ],
     "translation": "Tilføj detaljer..."
@@ -1312,7 +1312,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        56
+        60
       ]
     ],
     "translation": "Er du sikker på, at du vil slette denne tjekliste?"
@@ -2465,7 +2465,7 @@
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        64
+        68
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
@@ -2741,7 +2741,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        130
+        135
       ]
     ],
     "translation": "Navn på tjekliste"
@@ -3478,7 +3478,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        146
+        151
       ]
     ],
     "translation": "Opret tjekliste"
@@ -3921,7 +3921,7 @@
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        67
+        71
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
@@ -3993,7 +3993,7 @@
     "origin": [
       [
         "src/views/card/components/Checklists.tsx",
-        189
+        193
       ]
     ],
     "translation": ""
@@ -7487,7 +7487,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        114
+        119
       ]
     ],
     "translation": "Ny tjekliste"
@@ -8559,19 +8559,19 @@
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        73
+        81
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        101
+        111
       ],
       [
         "src/views/card/components/ChecklistNameInput.tsx",
-        47
+        52
       ],
       [
         "src/views/card/components/Checklists.tsx",
-        94
+        97
       ],
       [
         "src/views/card/components/Comment.tsx",
@@ -8583,7 +8583,7 @@
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        38
+        41
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
@@ -8607,11 +8607,11 @@
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        82
+        86
       ],
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        106
+        108
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
@@ -11021,7 +11021,7 @@
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        59
+        63
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
@@ -11385,7 +11385,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        105
+        107
       ]
     ],
     "translation": "Kunne ikke tilføje punkt på tjeklisten"
@@ -11497,7 +11497,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        81
+        85
       ]
     ],
     "translation": "Kunne ikke oprette tjekliste"
@@ -11589,7 +11589,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        37
+        40
       ]
     ],
     "translation": "Kunne ikke slette tjekliste"
@@ -11601,7 +11601,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        100
+        110
       ]
     ],
     "translation": "Kunne ikke slette punkt på tjeklisten"
@@ -11693,7 +11693,7 @@
     "origin": [
       [
         "src/views/card/components/Checklists.tsx",
-        93
+        96
       ]
     ],
     "translation": "Kunne ikke ændre rækkefølgen på tjeklistepunktet"
@@ -11809,7 +11809,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistNameInput.tsx",
-        46
+        51
       ]
     ],
     "translation": "Kunne ikke opdatere tjekliste"
@@ -11821,7 +11821,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        72
+        80
       ]
     ],
     "translation": "Kunne ikke opdatere tjeklistepunkt"
