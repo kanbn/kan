@@ -51,7 +51,7 @@
       "0": ["boardName ?? \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 71]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 74]],
     "translation": "{0} wurde zu deinen Favoriten hinzugefügt."
   },
   "bDI6VI": {
@@ -60,7 +60,7 @@
       "0": ["boardName ?? \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 72]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 75]],
     "translation": "{0} wurde aus deinen Favoriten entfernt."
   },
   "CJukzS": {
@@ -69,7 +69,7 @@
       "0": ["labelPublicIds.length"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 567]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 569]],
     "translation": "{0} Labels"
   },
   "9x4DAL": {
@@ -78,7 +78,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 889]],
+    "origin": [["src/views/board/index.tsx", 897]],
     "translation": "{0} nicht gefunden"
   },
   "0xWkkH": {
@@ -321,7 +321,7 @@
     "comments": [],
     "origin": [
       ["src/views/card/components/AttachmentUpload.tsx", 125],
-      ["src/views/card/components/Dropdown.tsx", 123]
+      ["src/views/card/components/Dropdown.tsx", 124]
     ],
     "translation": "Checkliste hinzufügen"
   },
@@ -361,8 +361,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/LabelSelector.tsx", 115],
-      ["src/views/card/components/LabelSelector.tsx", 120]
+      ["src/views/card/components/LabelSelector.tsx", 121],
+      ["src/views/card/components/LabelSelector.tsx", 128]
     ],
     "translation": "Label hinzufügen"
   },
@@ -372,8 +372,8 @@
     "comments": [],
     "origin": [
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 109],
-      ["src/views/board/members/index.tsx", 245],
-      ["src/views/card/components/MemberSelector.tsx", 138],
+      ["src/views/board/members/index.tsx", 244],
+      ["src/views/card/components/MemberSelector.tsx", 140],
       ["src/views/members/components/InviteMemberForm.tsx", 266]
     ],
     "translation": "Mitglied hinzufügen"
@@ -382,7 +382,7 @@
     "message": "Add to favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 202]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 198]],
     "translation": "Zu Favoriten hinzufügen"
   },
   "cWXW+7": {
@@ -477,7 +477,7 @@
     "message": "Added to favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 68]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 71]],
     "translation": "Zu Favoriten hinzugefügt"
   },
   "14Xi3Z": {
@@ -502,8 +502,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 178],
-      ["src/views/board/members/index.tsx", 194],
+      ["src/views/board/members/index.tsx", 177],
+      ["src/views/board/members/index.tsx", 193],
       ["src/views/members/index.tsx", 230],
       ["src/views/settings/components/RolePermissions.tsx", 20]
     ],
@@ -716,7 +716,7 @@
     "message": "Archive board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 182]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 178]],
     "translation": "Board archivieren"
   },
   "TdfEV7": {
@@ -772,7 +772,7 @@
     "message": "Are you sure you want to delete this card?",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 75]],
+    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 76]],
     "translation": "Möchten Sie diese Karte wirklich löschen?"
   },
   "Fpci8b": {
@@ -844,8 +844,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewCardForm.tsx", 630],
-      ["src/views/board/components/NewCardForm.tsx", 631]
+      ["src/views/board/components/NewCardForm.tsx", 632],
+      ["src/views/board/components/NewCardForm.tsx", 633]
     ],
     "translation": "Dateien anhängen"
   },
@@ -997,10 +997,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 861],
-      ["src/views/board/members/index.tsx", 231],
+      ["src/views/board/index.tsx", 869],
+      ["src/views/board/members/index.tsx", 230],
       ["src/views/card/index.tsx", 361],
-      ["src/views/public/board/index.tsx", 125]
+      ["src/views/public/board/index.tsx", 129]
     ],
     "translation": "Board"
   },
@@ -1018,14 +1018,14 @@
     "message": "Board archived",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 57]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 60]],
     "translation": "Board archiviert"
   },
   "uxBHQx": {
     "message": "Board member options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/members/index.tsx", 215]],
+    "origin": [["src/views/board/members/index.tsx", 214]],
     "translation": "Optionen für Boardmitglieder"
   },
   "tKo0Sh": {
@@ -1033,8 +1033,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 151],
-      ["src/views/board/members/index.tsx", 236]
+      ["src/views/board/components/BoardDropdown.tsx", 147],
+      ["src/views/board/members/index.tsx", 235]
     ],
     "translation": "Boardmitglieder"
   },
@@ -1044,49 +1044,49 @@
       "0": ["board?.name ?? t`Board`"]
     },
     "comments": [],
-    "origin": [["src/views/board/members/index.tsx", 231]],
+    "origin": [["src/views/board/members/index.tsx", 230]],
     "translation": "Boardmitglieder | {0}"
   },
   "wE3hGS": {
     "message": "Board moved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 33]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 31]],
     "translation": "Board verschoben"
   },
   "qVcPNk": {
     "message": "Board name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 879]],
+    "origin": [["src/views/board/index.tsx", 887]],
     "translation": "Board-Name"
   },
   "wewm3j": {
     "message": "Board name cannot exceed 100 characters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/NewBoardForm.tsx", 23]],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 25]],
     "translation": "Board-Name darf 100 Zeichen nicht überschreiten"
   },
   "R1c3Mq": {
     "message": "Board name is required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/NewBoardForm.tsx", 22]],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 24]],
     "translation": "Board-Name ist erforderlich"
   },
   "jwI32v": {
     "message": "Board not found",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/public/board/index.tsx", 181]],
+    "origin": [["src/views/public/board/index.tsx", 185]],
     "translation": "Board nicht gefunden"
   },
   "Mu1Zy/": {
     "message": "Board options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 231]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 227]],
     "translation": "Board-Optionen"
   },
   "XNxYxq": {
@@ -1102,21 +1102,21 @@
     "message": "Board unarchived",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 58]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 61]],
     "translation": "Board wiederhergestellt"
   },
   "Xid3K6": {
     "message": "Board URL can only contain letters, numbers, and hyphens",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 46]],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 51]],
     "translation": "Board-URL darf nur Buchstaben, Zahlen und Bindestriche enthalten"
   },
   "gv5kbo": {
     "message": "Board URL cannot exceed 60 characters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 44]],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 49]],
     "translation": "Board-URL darf 60 Zeichen nicht überschreiten"
   },
   "8+BY11": {
@@ -1124,8 +1124,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 122],
-      ["src/views/public/board/index.tsx", 79]
+      ["src/views/board/components/BoardDropdown.tsx", 120],
+      ["src/views/public/board/index.tsx", 83]
     ],
     "translation": "Board-URL in Zwischenablage kopiert"
   },
@@ -1133,7 +1133,7 @@
     "message": "Board URL is required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 42]],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 47]],
     "translation": "Board-URL ist erforderlich"
   },
   "TmvrjU": {
@@ -1158,7 +1158,7 @@
     "message": "Board visibility updated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/VisibilityButton.tsx", 49]],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 52]],
     "translation": "Board-Sichtbarkeit aktualisiert"
   },
   "8TveY+": {
@@ -1178,7 +1178,7 @@
     "message": "Boards you archive will appear here.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/BoardsList.tsx", 66]],
+    "origin": [["src/views/boards/components/BoardsList.tsx", 80]],
     "translation": "Boards, die du archivierst, werden hier angezeigt."
   },
   "ZDo4HN": {
@@ -1463,16 +1463,16 @@
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 52],
       ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 176],
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 255],
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 254],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 44],
-      ["src/views/board/components/MoveBoardForm.tsx", 99],
+      ["src/views/board/components/MoveBoardForm.tsx", 95],
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 101],
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         66
       ],
       ["src/views/card/components/Comment.tsx", 195],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 86],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 87],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 68],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 77],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 64],
@@ -1501,8 +1501,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 55],
-      ["src/views/card/components/Dropdown.tsx", 46]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 56],
+      ["src/views/card/components/Dropdown.tsx", 47]
     ],
     "translation": "Karte dupliziert"
   },
@@ -1510,14 +1510,14 @@
     "message": "Card duplicated successfully.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 48]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 49]],
     "translation": "Karte erfolgreich dupliziert."
   },
   "AgE2vR": {
     "message": "Card member assignments will be cleared when moving to a different workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 92]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 88]],
     "translation": "Kartenmitgliederzuweisungen werden beim Verschieben in einen anderen Workspace gelöscht."
   },
   "fEY2vP": {
@@ -1534,14 +1534,14 @@
     "message": "Card options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 167]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 168]],
     "translation": "Karten-Optionen"
   },
   "ZH7TVS": {
     "message": "Card title",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 433]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 435]],
     "translation": "Kartentitel"
   },
   "rQXTmd": {
@@ -1549,8 +1549,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 441],
-      ["src/views/card/components/Dropdown.tsx", 74],
+      ["src/views/board/index.tsx", 449],
+      ["src/views/card/components/Dropdown.tsx", 75],
       ["src/views/public/board/CardModal.tsx", 40]
     ],
     "translation": "Karten-URL in Zwischenablage kopiert"
@@ -1975,14 +1975,14 @@
     "message": "Copy board link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 133]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 131]],
     "translation": "Board-Link kopieren"
   },
   "F0YmUY": {
     "message": "Copy card link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 107]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 108]],
     "translation": "Karten-Link kopieren"
   },
   "0utuU6": {
@@ -1990,7 +1990,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 245]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 244]
     ],
     "translation": "Checklisten kopieren"
   },
@@ -1999,7 +1999,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 209]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 208]
     ],
     "translation": "Labels kopieren"
   },
@@ -2015,7 +2015,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 227]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 226]
     ],
     "translation": "Mitglieder kopieren"
   },
@@ -2023,14 +2023,14 @@
     "message": "Copy public link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 140]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 138]],
     "translation": "Öffentlichen Link kopieren"
   },
   "7mrkyO": {
     "message": "Copy ticket ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 114]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 115]],
     "translation": "Ticket-ID kopieren"
   },
   "9PaIxv": {
@@ -2048,7 +2048,7 @@
       "0": ["isTemplate ? \"template\" : \"board\""]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/NewBoardForm.tsx", 166]],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 173]],
     "translation": "{0} erstellen"
   },
   "vgdzLf": {
@@ -2057,7 +2057,7 @@
     "comments": [],
     "origin": [
       ["src/components/LabelForm.tsx", 217],
-      ["src/views/board/components/NewCardForm.tsx", 662],
+      ["src/views/board/components/NewCardForm.tsx", 664],
       ["src/views/board/components/NewListForm.tsx", 162]
     ],
     "translation": "Weitere erstellen"
@@ -2073,7 +2073,7 @@
     "message": "Create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 672]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 674]],
     "translation": "Karte erstellen"
   },
   "d33Usy": {
@@ -2111,7 +2111,7 @@
     },
     "comments": [],
     "origin": [
-      ["src/views/boards/components/BoardsList.tsx", 80],
+      ["src/views/boards/components/BoardsList.tsx", 93],
       ["src/views/boards/index.tsx", 46]
     ],
     "translation": "Neues {0} erstellen"
@@ -2128,8 +2128,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewCardForm.tsx", 529],
-      ["src/views/card/components/LabelSelector.tsx", 101]
+      ["src/views/board/components/NewCardForm.tsx", 531],
+      ["src/views/card/components/LabelSelector.tsx", 107]
     ],
     "translation": "Neues Label erstellen"
   },
@@ -2138,8 +2138,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 139],
-      ["src/views/board/index.tsx", 1017]
+      ["src/views/board/index.tsx", 145],
+      ["src/views/board/index.tsx", 1025]
     ],
     "translation": "Neue Liste erstellen"
   },
@@ -2147,7 +2147,7 @@
     "message": "Create template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewTemplateForm.tsx", 132]],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 137]],
     "translation": "Vorlage erstellen"
   },
   "SiPp29": {
@@ -2203,7 +2203,7 @@
     "message": "Current list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ListSelector.tsx", 85]],
+    "origin": [["src/views/card/components/ListSelector.tsx", 87]],
     "translation": "Aktuelle Liste"
   },
   "D3C4Yx": {
@@ -2350,7 +2350,7 @@
       ["src/components/LabelForm.tsx", 232],
       ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 52],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 47],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 92],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 93],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 71],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 83],
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 93],
@@ -2373,7 +2373,7 @@
     "message": "Delete board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 213]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 209]],
     "translation": "Board löschen"
   },
   "nabda1": {
@@ -2382,7 +2382,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/CardContextMenu.tsx", 75],
-      ["src/views/card/components/Dropdown.tsx", 152]
+      ["src/views/card/components/Dropdown.tsx", 153]
     ],
     "translation": "Karte löschen"
   },
@@ -2411,7 +2411,7 @@
     "message": "Delete template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 213]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 209]],
     "translation": "Vorlage löschen"
   },
   "snMaH4": {
@@ -2477,7 +2477,7 @@
     "message": "Destination workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 76]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 72]],
     "translation": "Ziel-Workspace"
   },
   "Odv3J6": {
@@ -2619,7 +2619,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/Filters.tsx", 178],
-      ["src/views/board/components/NewCardForm.tsx", 584],
+      ["src/views/board/components/NewCardForm.tsx", 586],
       ["src/views/card/index.tsx", 159]
     ],
     "translation": "Fälligkeitsdatum"
@@ -2657,7 +2657,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 267]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 266]
     ],
     "translation": "Duplizieren"
   },
@@ -2668,7 +2668,7 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 99],
       ["src/views/board/components/CardContextMenu.tsx", 69],
-      ["src/views/card/components/Dropdown.tsx", 130]
+      ["src/views/card/components/Dropdown.tsx", 131]
     ],
     "translation": "Karte duplizieren"
   },
@@ -2677,7 +2677,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 267]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 266]
     ],
     "translation": "Wird dupliziert…"
   },
@@ -2696,8 +2696,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 173],
-      ["src/views/board/components/UpdateBoardSlugForm.tsx", 116]
+      ["src/views/board/components/BoardDropdown.tsx", 169],
+      ["src/views/board/components/UpdateBoardSlugForm.tsx", 121]
     ],
     "translation": "Board-URL bearbeiten"
   },
@@ -2736,7 +2736,7 @@
     "message": "Edit workspace URL",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 162]],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 167]],
     "translation": "Workspace-URL bearbeiten"
   },
   "PRofO0": {
@@ -2798,7 +2798,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 188]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 187]
     ],
     "translation": "Ende der Liste"
   },
@@ -2907,8 +2907,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/components/NewBoardForm.tsx", 77],
-      ["src/views/boards/components/NewBoardForm.tsx", 92],
+      ["src/views/boards/components/NewBoardForm.tsx", 81],
+      ["src/views/boards/components/NewBoardForm.tsx", 96],
       ["src/views/members/components/InviteMemberForm.tsx", 249]
     ],
     "translation": "Fehler"
@@ -3129,8 +3129,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/components/NewBoardForm.tsx", 78],
-      ["src/views/boards/components/NewBoardForm.tsx", 93]
+      ["src/views/boards/components/NewBoardForm.tsx", 82],
+      ["src/views/boards/components/NewBoardForm.tsx", 97]
     ],
     "translation": "Board konnte nicht erstellt werden"
   },
@@ -3415,14 +3415,14 @@
       "0": ["isTemplate ? \"template\" : \"board\""]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/BoardsList.tsx", 66]],
+    "origin": [["src/views/boards/components/BoardsList.tsx", 81]],
     "translation": "Legen Sie los, indem Sie ein neues {0} erstellen"
   },
   "zC8Whw": {
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 999]],
+    "origin": [["src/views/board/index.tsx", 1007]],
     "translation": "Legen Sie los, indem Sie eine neue Liste erstellen"
   },
   "oW13KZ": {
@@ -3681,7 +3681,7 @@
     "message": "ID copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 91]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 92]],
     "translation": "ID kopiert"
   },
   "iwr7AP": {
@@ -3879,7 +3879,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/MemberSelector.tsx", 115],
+      ["src/views/card/components/MemberSelector.tsx", 117],
       ["src/views/members/components/InviteMemberForm.tsx", 386]
     ],
     "translation": "Mitglied einladen"
@@ -3969,8 +3969,8 @@
     "origin": [
       ["src/views/board/components/CardContextLabelsModal.tsx", 31],
       ["src/views/board/components/Filters.tsx", 160],
-      ["src/views/board/components/NewCardForm.tsx", 533],
-      ["src/views/card/components/LabelSelector.tsx", 102],
+      ["src/views/board/components/NewCardForm.tsx", 535],
+      ["src/views/card/components/LabelSelector.tsx", 108],
       ["src/views/card/index.tsx", 139]
     ],
     "translation": "Labels"
@@ -4091,11 +4091,11 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 106],
-      ["src/views/board/index.tsx", 439],
-      ["src/views/card/components/Dropdown.tsx", 72],
+      ["src/views/board/components/BoardDropdown.tsx", 104],
+      ["src/views/board/index.tsx", 447],
+      ["src/views/card/components/Dropdown.tsx", 73],
       ["src/views/public/board/CardModal.tsx", 38],
-      ["src/views/public/board/index.tsx", 77]
+      ["src/views/public/board/index.tsx", 81]
     ],
     "translation": "Link kopiert"
   },
@@ -4206,7 +4206,7 @@
     "message": "Make template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 162]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 158]],
     "translation": "Vorlage erstellen"
   },
   "hB02vO": {
@@ -4268,8 +4268,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 178],
-      ["src/views/board/members/index.tsx", 195],
+      ["src/views/board/members/index.tsx", 177],
+      ["src/views/board/members/index.tsx", 194],
       ["src/views/card/components/ActivityList.tsx", 56],
       ["src/views/card/components/ActivityList.tsx", 89],
       ["src/views/members/index.tsx", 231],
@@ -4299,8 +4299,8 @@
       ["src/components/SideNavigation.tsx", 127],
       ["src/utils/permission-category-label.ts", 20],
       ["src/views/board/components/Filters.tsx", 151],
-      ["src/views/board/components/NewCardForm.tsx", 491],
-      ["src/views/card/components/MemberSelector.tsx", 116],
+      ["src/views/board/components/NewCardForm.tsx", 493],
+      ["src/views/card/components/MemberSelector.tsx", 118],
       ["src/views/card/index.tsx", 149],
       ["src/views/members/index.tsx", 293],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 90]
@@ -4356,14 +4356,14 @@
     "message": "Move board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 107]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 103]],
     "translation": "Board verschieben"
   },
   "VvCMyU": {
     "message": "Move board to another workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 64]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 60]],
     "translation": "Board in einen anderen Workspace verschieben"
   },
   "51UCsN": {
@@ -4377,14 +4377,14 @@
     "message": "Move to list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 70]],
+    "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 72]],
     "translation": "In Liste verschieben"
   },
   "S3wq2O": {
     "message": "Move to workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 193]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 189]],
     "translation": "In Workspace verschieben"
   },
   "BOqTi5": {
@@ -4417,8 +4417,8 @@
     "comments": [],
     "origin": [
       ["src/components/LabelForm.tsx", 139],
-      ["src/views/board/components/NewTemplateForm.tsx", 118],
-      ["src/views/boards/components/NewBoardForm.tsx", 134],
+      ["src/views/board/components/NewTemplateForm.tsx", 123],
+      ["src/views/boards/components/NewBoardForm.tsx", 141],
       ["src/views/settings/components/NewWebhookModal.tsx", 253],
       ["src/views/settings/components/WebhookList.tsx", 219]
     ],
@@ -4461,7 +4461,7 @@
       "0": ["isTemplate ? \"template\" : \"board\""]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/NewBoardForm.tsx", 120]],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 127]],
     "translation": "Neues {0}"
   },
   "TjREUS": {
@@ -4475,7 +4475,7 @@
     "message": "New card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 416]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 418]],
     "translation": "Neue Karte"
   },
   "cWcxrL": {
@@ -4505,7 +4505,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 134],
-      ["src/views/board/index.tsx", 941]
+      ["src/views/board/index.tsx", 949]
     ],
     "translation": "Neue Liste"
   },
@@ -4531,7 +4531,7 @@
     "message": "New template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewTemplateForm.tsx", 104]],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 109]],
     "translation": "Neue Vorlage"
   },
   "RJA+sg": {
@@ -4582,14 +4582,14 @@
       "0": ["isTemplate ? \"templates\" : \"boards\""]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/BoardsList.tsx", 63]],
+    "origin": [["src/views/boards/components/BoardsList.tsx", 76]],
     "translation": "Keine {0}"
   },
   "tlhgDC": {
     "message": "No archived boards",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/BoardsList.tsx", 63]],
+    "origin": [["src/views/boards/components/BoardsList.tsx", 75]],
     "translation": "Keine archivierten Boards"
   },
   "Eg99Sc": {
@@ -4652,14 +4652,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 995]],
+    "origin": [["src/views/board/index.tsx", 1003]],
     "translation": "Keine Listen"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1000]],
+    "origin": [["src/views/board/index.tsx", 1008]],
     "translation": "Es wurden noch keine Listen erstellt"
   },
   "i30J2U": {
@@ -5089,22 +5089,22 @@
       ["src/components/DeleteLabelConfirmation.tsx", 28],
       ["src/components/FeedbackModal.tsx", 42],
       ["src/components/NewWorkspaceForm.tsx", 119],
-      ["src/views/board/components/BoardDropdown.tsx", 80],
-      ["src/views/board/components/NewCardForm.tsx", 204],
+      ["src/views/board/components/BoardDropdown.tsx", 83],
+      ["src/views/board/components/NewCardForm.tsx", 206],
       ["src/views/board/components/NewListForm.tsx", 97],
-      ["src/views/board/components/NewTemplateForm.tsx", 61],
-      ["src/views/board/components/NewTemplateForm.tsx", 77],
-      ["src/views/board/components/UpdateBoardSlugForm.tsx", 73],
-      ["src/views/board/components/VisibilityButton.tsx", 57],
-      ["src/views/board/index.tsx", 292],
-      ["src/views/board/index.tsx", 349],
-      ["src/views/board/index.tsx", 386],
+      ["src/views/board/components/NewTemplateForm.tsx", 63],
+      ["src/views/board/components/NewTemplateForm.tsx", 79],
+      ["src/views/board/components/UpdateBoardSlugForm.tsx", 79],
+      ["src/views/board/components/VisibilityButton.tsx", 60],
+      ["src/views/board/index.tsx", 300],
+      ["src/views/board/index.tsx", 357],
+      ["src/views/board/index.tsx", 394],
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 42],
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         37
       ],
-      ["src/views/board/members/index.tsx", 88],
+      ["src/views/board/members/index.tsx", 87],
       ["src/views/boards/components/ImportBoardsForm.tsx", 258],
       ["src/views/boards/components/ImportBoardsForm.tsx", 412],
       ["src/views/card/components/AttachmentThumbnails.tsx", 77],
@@ -5113,13 +5113,13 @@
       ["src/views/card/components/ChecklistNameInput.tsx", 52],
       ["src/views/card/components/Checklists.tsx", 97],
       ["src/views/card/components/Comment.tsx", 93],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 52],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 53],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 41],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 46],
-      ["src/views/card/components/DueDateSelector.tsx", 64],
-      ["src/views/card/components/LabelSelector.tsx", 75],
-      ["src/views/card/components/ListSelector.tsx", 55],
-      ["src/views/card/components/MemberSelector.tsx", 82],
+      ["src/views/card/components/DueDateSelector.tsx", 66],
+      ["src/views/card/components/LabelSelector.tsx", 77],
+      ["src/views/card/components/ListSelector.tsx", 57],
+      ["src/views/card/components/MemberSelector.tsx", 84],
       ["src/views/card/components/NewChecklistForm.tsx", 86],
       ["src/views/card/components/NewChecklistItemForm.tsx", 108],
       ["src/views/card/components/NewCommentForm.tsx", 43],
@@ -5159,15 +5159,15 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 111],
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 64],
-      ["src/views/board/components/CardContextMoveListModal.tsx", 42],
-      ["src/views/board/index.tsx", 448],
-      ["src/views/card/components/Dropdown.tsx", 55],
-      ["src/views/card/components/Dropdown.tsx", 81],
-      ["src/views/card/components/Dropdown.tsx", 100],
+      ["src/views/board/components/BoardDropdown.tsx", 109],
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 65],
+      ["src/views/board/components/CardContextMoveListModal.tsx", 44],
+      ["src/views/board/index.tsx", 456],
+      ["src/views/card/components/Dropdown.tsx", 56],
+      ["src/views/card/components/Dropdown.tsx", 82],
+      ["src/views/card/components/Dropdown.tsx", 101],
       ["src/views/public/board/CardModal.tsx", 47],
-      ["src/views/public/board/index.tsx", 86]
+      ["src/views/public/board/index.tsx", 90]
     ],
     "translation": "Bitte versuchen Sie es erneut."
   },
@@ -5176,7 +5176,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 181]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 180]
     ],
     "translation": "Position in Liste (0 = erste, leer lassen für Ende)"
   },
@@ -5223,7 +5223,7 @@
     "message": "Private",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/VisibilityButton.tsx", 84]],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 88]],
     "translation": "Privat"
   },
   "3fPjUY": {
@@ -5273,14 +5273,14 @@
     "message": "Public",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/VisibilityButton.tsx", 79]],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 83]],
     "translation": "Öffentlich"
   },
   "NBrXwv": {
     "message": "Public board URL copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 128]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 126]],
     "translation": "Öffentliche Board-URL in die Zwischenablage kopiert"
   },
   "ABCjd9": {
@@ -5359,21 +5359,21 @@
     "message": "Remove file",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 649]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 651]],
     "translation": "Datei entfernen"
   },
   "Tir5Ud": {
     "message": "Remove from board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/members/index.tsx", 205]],
+    "origin": [["src/views/board/members/index.tsx", 204]],
     "translation": "Vom Board entfernen"
   },
   "T/pF0Z": {
     "message": "Remove from favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 202]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 198]],
     "translation": "Aus Favoriten entfernen"
   },
   "99VIgC": {
@@ -5427,7 +5427,7 @@
     "message": "Removed from favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 69]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 72]],
     "translation": "Aus Favoriten entfernt"
   },
   "YVT40D": {
@@ -5552,8 +5552,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 191],
-      ["src/views/board/members/index.tsx", 272],
+      ["src/views/board/members/index.tsx", 190],
+      ["src/views/board/members/index.tsx", 271],
       ["src/views/members/index.tsx", 362]
     ],
     "translation": "Rolle"
@@ -5703,7 +5703,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 119]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 118]
     ],
     "translation": "Liste auswählen"
   },
@@ -5720,7 +5720,7 @@
     "message": "Select a workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 84]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 80]],
     "translation": "Workspace auswählen"
   },
   "wgNoIs": {
@@ -5826,7 +5826,7 @@
     "origin": [
       ["src/views/board/components/CardContextDueDateModal.tsx", 20],
       ["src/views/board/components/CardContextMenu.tsx", 57],
-      ["src/views/card/components/DueDateSelector.tsx", 121]
+      ["src/views/card/components/DueDateSelector.tsx", 123]
     ],
     "translation": "Fälligkeitsdatum festlegen"
   },
@@ -6079,7 +6079,7 @@
     "message": "Some attachments failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 336]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 338]],
     "translation": "Einige Anhänge sind fehlgeschlagen"
   },
   "J9+zIR": {
@@ -6270,8 +6270,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 861],
-      ["src/views/board/index.tsx", 898]
+      ["src/views/board/index.tsx", 869],
+      ["src/views/board/index.tsx", 906]
     ],
     "translation": "Vorlage"
   },
@@ -6279,35 +6279,35 @@
     "message": "Template created",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewTemplateForm.tsx", 67]],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 69]],
     "translation": "Vorlage erstellt"
   },
   "QHhZeE": {
     "message": "Template created successfully",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewTemplateForm.tsx", 68]],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 70]],
     "translation": "Vorlage erfolgreich erstellt"
   },
   "notwF1": {
     "message": "Template name cannot exceed 100 characters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewTemplateForm.tsx", 19]],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 20]],
     "translation": "Der Vorlagenname darf 100 Zeichen nicht überschreiten"
   },
   "6OTo9n": {
     "message": "Template name is required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewTemplateForm.tsx", 18]],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 19]],
     "translation": "Vorlagenname ist erforderlich"
   },
   "2oYalC": {
     "message": "Template URL copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 121]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 119]],
     "translation": "Vorlagen-URL in die Zwischenablage kopiert"
   },
   "iTylMl": {
@@ -6391,7 +6391,7 @@
     "message": "The board has been archived.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 60]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 63]],
     "translation": "Das Board wurde archiviert."
   },
   "ZWk38w": {
@@ -6400,14 +6400,14 @@
       "0": ["targetWorkspace?.name ?? \"the workspace\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 34]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 32]],
     "translation": "Das Board wurde nach {0} verschoben."
   },
   "C6gv54": {
     "message": "The board has been unarchived.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 61]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 64]],
     "translation": "Das Board wurde wiederhergestellt."
   },
   "nKBUeF": {
@@ -6415,7 +6415,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 57]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 58]
     ],
     "translation": "Die Karte wurde dupliziert."
   },
@@ -6426,7 +6426,7 @@
       "failedCount": ["failedCount"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 337]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 339]],
     "translation": "Die Karte wurde erstellt, aber {failedCount} von {0} Anhängen konnten nicht hochgeladen werden."
   },
   "jlB2RY": {
@@ -6482,7 +6482,7 @@
       "0": ["isPublic ? \"public\" : \"private\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/VisibilityButton.tsx", 50]],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 53]],
     "translation": "Die Sichtbarkeit Ihres Boards wurde auf {0} gesetzt."
   },
   "FEr96N": {
@@ -6520,7 +6520,7 @@
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 47],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 39],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 78],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 79],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 63],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 69]
     ],
@@ -6537,14 +6537,14 @@
     "message": "This board is private or does not exist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/public/board/index.tsx", 184]],
+    "origin": [["src/views/public/board/index.tsx", 188]],
     "translation": "Dieses Board ist privat oder existiert nicht"
   },
   "wY+6Ye": {
     "message": "This board URL has already been taken",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 136]],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 141]],
     "translation": "Diese Board-URL ist bereits vergeben"
   },
   "mTwGOf": {
@@ -6651,7 +6651,7 @@
     "message": "Ticket ID copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 93]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 94]],
     "translation": "Ticket-ID in die Zwischenablage kopiert"
   },
   "MHrjPM": {
@@ -6666,7 +6666,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 168]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 167]
     ],
     "translation": "Titel (optional)"
   },
@@ -6787,7 +6787,7 @@
     "message": "Unable to copy ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 98]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 99]],
     "translation": "ID konnte nicht kopiert werden"
   },
   "W1ewR0": {
@@ -6795,11 +6795,11 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 110],
-      ["src/views/board/index.tsx", 446],
-      ["src/views/card/components/Dropdown.tsx", 79],
+      ["src/views/board/components/BoardDropdown.tsx", 108],
+      ["src/views/board/index.tsx", 454],
+      ["src/views/card/components/Dropdown.tsx", 80],
       ["src/views/public/board/CardModal.tsx", 45],
-      ["src/views/public/board/index.tsx", 84]
+      ["src/views/public/board/index.tsx", 88]
     ],
     "translation": "Link konnte nicht kopiert werden"
   },
@@ -6807,7 +6807,7 @@
     "message": "Unable to create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 201]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 203]],
     "translation": "Karte konnte nicht erstellt werden"
   },
   "mHhffx": {
@@ -6829,8 +6829,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewTemplateForm.tsx", 60],
-      ["src/views/board/components/NewTemplateForm.tsx", 76]
+      ["src/views/board/components/NewTemplateForm.tsx", 62],
+      ["src/views/board/components/NewTemplateForm.tsx", 78]
     ],
     "translation": "Vorlage konnte nicht erstellt werden"
   },
@@ -6862,7 +6862,7 @@
     "message": "Unable to delete card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 51]],
+    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 52]],
     "translation": "Karte konnte nicht gelöscht werden"
   },
   "DahTzR": {
@@ -6902,8 +6902,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 63],
-      ["src/views/card/components/Dropdown.tsx", 53]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 64],
+      ["src/views/card/components/Dropdown.tsx", 54]
     ],
     "translation": "Karte konnte nicht dupliziert werden"
   },
@@ -6911,14 +6911,14 @@
     "message": "Unable to move board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 45]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 43]],
     "translation": "Board konnte nicht verschoben werden"
   },
   "K7k9u3": {
     "message": "Unable to move card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 41]],
+    "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 43]],
     "translation": "Karte konnte nicht verschoben werden"
   },
   "8yFGGF": {
@@ -6978,21 +6978,21 @@
     "message": "Unable to update board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 79]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 82]],
     "translation": "Board konnte nicht aktualisiert werden"
   },
   "XpcjLO": {
     "message": "Unable to update board URL",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 72]],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 78]],
     "translation": "Board-URL konnte nicht aktualisiert werden"
   },
   "Wy6pcF": {
     "message": "Unable to update board visibility",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/VisibilityButton.tsx", 56]],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 59]],
     "translation": "Board-Sichtbarkeit konnte nicht aktualisiert werden"
   },
   "o9WLwO": {
@@ -7000,7 +7000,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 348],
+      ["src/views/board/index.tsx", 356],
       ["src/views/card/index.tsx", 258]
     ],
     "translation": "Karte konnte nicht aktualisiert werden"
@@ -7031,8 +7031,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 385],
-      ["src/views/card/components/DueDateSelector.tsx", 63]
+      ["src/views/board/index.tsx", 393],
+      ["src/views/card/components/DueDateSelector.tsx", 65]
     ],
     "translation": "Fälligkeitsdatum konnte nicht aktualisiert werden"
   },
@@ -7040,7 +7040,7 @@
     "message": "Unable to update labels",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/LabelSelector.tsx", 74]],
+    "origin": [["src/views/card/components/LabelSelector.tsx", 76]],
     "translation": "Labels konnten nicht aktualisiert werden"
   },
   "I0gAKM": {
@@ -7048,8 +7048,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 291],
-      ["src/views/card/components/ListSelector.tsx", 54]
+      ["src/views/board/index.tsx", 299],
+      ["src/views/card/components/ListSelector.tsx", 56]
     ],
     "translation": "Liste konnte nicht aktualisiert werden"
   },
@@ -7057,7 +7057,7 @@
     "message": "Unable to update members",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/MemberSelector.tsx", 81]],
+    "origin": [["src/views/card/components/MemberSelector.tsx", 83]],
     "translation": "Mitglieder konnten nicht aktualisiert werden"
   },
   "GYv20o": {
@@ -7075,7 +7075,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 84],
+      ["src/views/board/members/index.tsx", 83],
       ["src/views/members/index.tsx", 77]
     ],
     "translation": "Rolle konnte nicht aktualisiert werden"
@@ -7091,7 +7091,7 @@
     "message": "Unarchive board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 182]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 178]],
     "translation": "Board wiederherstellen"
   },
   "E8zYtd": {
@@ -7232,7 +7232,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/UpdateBoardSlugForm.tsx", 175],
+      ["src/views/board/components/UpdateBoardSlugForm.tsx", 180],
       ["src/views/settings/components/UpdateDisplayNameForm.tsx", 86],
       ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 103],
       ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 99],
@@ -7388,7 +7388,7 @@
     "message": "Use template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/NewBoardForm.tsx", 154]],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 161]],
     "translation": "Vorlage verwenden"
   },
   "n6EWYz": {
@@ -7403,7 +7403,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 266],
+      ["src/views/board/members/index.tsx", 265],
       ["src/views/members/index.tsx", 356]
     ],
     "translation": "Benutzer"
@@ -7447,7 +7447,7 @@
     "message": "View only",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/public/board/index.tsx", 153]],
+    "origin": [["src/views/public/board/index.tsx", 157]],
     "translation": "Nur ansehen"
   },
   "fSf2ee": {
@@ -7461,14 +7461,14 @@
     "message": "View workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/public/board/index.tsx", 187]],
+    "origin": [["src/views/public/board/index.tsx", 191]],
     "translation": "Workspace anzeigen"
   },
   "2q/Q7x": {
     "message": "Visibility",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/VisibilityButton.tsx", 100]],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 104]],
     "translation": "Sichtbarkeit"
   },
   "BJbLe4": {
@@ -7654,10 +7654,10 @@
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
       ["src/utils/permission-category-label.ts", 10],
-      ["src/views/board/index.tsx", 861],
+      ["src/views/board/index.tsx", 869],
       ["src/views/boards/index.tsx", 58],
       ["src/views/members/index.tsx", 288],
-      ["src/views/public/board/index.tsx", 125],
+      ["src/views/public/board/index.tsx", 129],
       ["src/views/public/boards/index.tsx", 78]
     ],
     "translation": "Workspace"
@@ -7896,7 +7896,7 @@
     "message": "You don't have any other workspaces to move this board to.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 68]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 64]],
     "translation": "Sie haben keine anderen Workspaces, in die Sie dieses Board verschieben können."
   },
   "h2FKMV": {
@@ -7905,10 +7905,10 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/List.tsx", 133],
-      ["src/views/board/components/VisibilityButton.tsx", 72],
-      ["src/views/board/index.tsx", 929],
-      ["src/views/board/index.tsx", 1006],
-      ["src/views/boards/components/BoardsList.tsx", 71],
+      ["src/views/board/components/VisibilityButton.tsx", 76],
+      ["src/views/board/index.tsx", 937],
+      ["src/views/board/index.tsx", 1014],
+      ["src/views/boards/components/BoardsList.tsx", 85],
       ["src/views/boards/index.tsx", 69],
       ["src/views/boards/index.tsx", 90]
     ],
@@ -7964,7 +7964,7 @@
     "message": "You're not a member of this board yet. Ask a board admin to add you.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/members/index.tsx", 252]],
+    "origin": [["src/views/board/members/index.tsx", 251]],
     "translation": "Du bist noch kein Mitglied dieses Boards. Bitte einen Board-Admin, dich hinzuzufügen."
   },
   "2SePRT": {

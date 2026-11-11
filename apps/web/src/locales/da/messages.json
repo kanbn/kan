@@ -92,7 +92,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        71
+        74
       ]
     ],
     "translation": "{0} er føjet til dine favoritter."
@@ -108,7 +108,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        72
+        75
       ]
     ],
     "translation": "{0} er fjernet fra dine favoritter."
@@ -124,7 +124,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        567
+        569
       ]
     ],
     "translation": "{0} etiketter"
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        889
+        897
       ]
     ],
     "translation": "{0} blev ikke fundet"
@@ -541,7 +541,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        123
+        124
       ]
     ],
     "translation": "Tilføj tjekliste"
@@ -605,11 +605,11 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        115
+        121
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        120
+        128
       ]
     ],
     "translation": "Tilføj etiket"
@@ -625,11 +625,11 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        245
+        244
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        138
+        140
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -645,7 +645,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        202
+        198
       ]
     ],
     "translation": "Føj til favoritter"
@@ -812,7 +812,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        68
+        71
       ]
     ],
     "translation": "Føjet til favoritter"
@@ -855,11 +855,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        178
+        177
       ],
       [
         "src/views/board/members/index.tsx",
-        194
+        193
       ],
       [
         "src/views/members/index.tsx",
@@ -1212,7 +1212,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        182
+        178
       ]
     ],
     "translation": "Arkivér tavle"
@@ -1300,7 +1300,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        75
+        76
       ]
     ],
     "translation": "Er du sikker på, at du vil slette dette kort?"
@@ -1404,11 +1404,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        630
+        632
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        631
+        633
       ]
     ],
     "translation": ""
@@ -1663,11 +1663,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        861
+        869
       ],
       [
         "src/views/board/members/index.tsx",
-        231
+        230
       ],
       [
         "src/views/card/index.tsx",
@@ -1675,7 +1675,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        125
+        129
       ]
     ],
     "translation": "Tavle"
@@ -1700,7 +1700,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        57
+        60
       ]
     ],
     "translation": "Tavle arkiveret"
@@ -1712,7 +1712,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        215
+        214
       ]
     ],
     "translation": ""
@@ -1724,11 +1724,11 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        151
+        147
       ],
       [
         "src/views/board/members/index.tsx",
-        236
+        235
       ]
     ],
     "translation": ""
@@ -1744,7 +1744,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        231
+        230
       ]
     ],
     "translation": ""
@@ -1756,7 +1756,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        33
+        31
       ]
     ],
     "translation": "Tavle flyttet"
@@ -1768,7 +1768,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        879
+        887
       ]
     ],
     "translation": ""
@@ -1780,7 +1780,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        23
+        25
       ]
     ],
     "translation": "Tavlens navn må højst være 100 tegn"
@@ -1792,7 +1792,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        22
+        24
       ]
     ],
     "translation": "Tavlens navn er påkrævet"
@@ -1804,7 +1804,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        181
+        185
       ]
     ],
     "translation": "Tavlen blev ikke fundet"
@@ -1816,7 +1816,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        231
+        227
       ]
     ],
     "translation": ""
@@ -1840,7 +1840,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        58
+        61
       ]
     ],
     "translation": "Tavle fjernet fra arkivet"
@@ -1852,7 +1852,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        46
+        51
       ]
     ],
     "translation": "Tavlens URL må kun indeholde bogstaver, tal og bindestreger"
@@ -1864,7 +1864,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        44
+        49
       ]
     ],
     "translation": "Tavlens URL må højst være 60 tegn"
@@ -1876,11 +1876,11 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        122
+        120
       ],
       [
         "src/views/public/board/index.tsx",
-        79
+        83
       ]
     ],
     "translation": "Tavlens URL er kopieret til udklipsholderen"
@@ -1892,7 +1892,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        42
+        47
       ]
     ],
     "translation": ""
@@ -1933,7 +1933,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        49
+        52
       ]
     ],
     "translation": "Tavlens synlighed er opdateret"
@@ -1973,7 +1973,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        66
+        80
       ]
     ],
     "translation": "Tavler, du arkiverer, vises her."
@@ -2437,7 +2437,7 @@
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        255
+        254
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
@@ -2445,7 +2445,7 @@
       ],
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        99
+        95
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -2461,7 +2461,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        86
+        87
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -2525,11 +2525,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        55
+        56
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        46
+        47
       ]
     ],
     "translation": "Kort duplikeret"
@@ -2541,7 +2541,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        48
+        49
       ]
     ],
     "translation": "Kortet blev duplikeret."
@@ -2553,7 +2553,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        92
+        88
       ]
     ],
     "translation": "Tildelinger af medlemmer til kortet fjernes, når kortet flyttes til et andet arbejdsområde."
@@ -2581,7 +2581,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        167
+        168
       ]
     ],
     "translation": ""
@@ -2593,7 +2593,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        433
+        435
       ]
     ],
     "translation": "Korttitel"
@@ -2605,11 +2605,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        441
+        449
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        74
+        75
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -3310,7 +3310,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        133
+        131
       ]
     ],
     "translation": "Kopiér link til tavle"
@@ -3322,7 +3322,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        107
+        108
       ]
     ],
     "translation": "Kopiér link til kort"
@@ -3334,7 +3334,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        245
+        244
       ]
     ],
     "translation": "Kopiér tjeklister"
@@ -3346,7 +3346,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        209
+        208
       ]
     ],
     "translation": "Kopiér etiketter"
@@ -3370,7 +3370,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        227
+        226
       ]
     ],
     "translation": "Kopiér medlemmer"
@@ -3382,7 +3382,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        140
+        138
       ]
     ],
     "translation": ""
@@ -3394,7 +3394,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        114
+        115
       ]
     ],
     "translation": "Kopiér ticket-ID"
@@ -3422,7 +3422,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        166
+        173
       ]
     ],
     "translation": "Opret {0}"
@@ -3438,7 +3438,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        662
+        664
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3466,7 +3466,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        672
+        674
       ]
     ],
     "translation": "Opret kort"
@@ -3530,7 +3530,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        80
+        93
       ],
       [
         "src/views/boards/index.tsx",
@@ -3558,11 +3558,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        529
+        531
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        101
+        107
       ]
     ],
     "translation": "Opret ny etiket"
@@ -3574,11 +3574,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        139
+        145
       ],
       [
         "src/views/board/index.tsx",
-        1017
+        1025
       ]
     ],
     "translation": "Opret ny liste"
@@ -3590,7 +3590,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        132
+        137
       ]
     ],
     "translation": "Opret skabelon"
@@ -3686,7 +3686,7 @@
     "origin": [
       [
         "src/views/card/components/ListSelector.tsx",
-        85
+        87
       ]
     ],
     "translation": ""
@@ -3917,7 +3917,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        92
+        93
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -3965,7 +3965,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        213
+        209
       ]
     ],
     "translation": "Slet tavle"
@@ -3981,7 +3981,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        152
+        153
       ]
     ],
     "translation": "Slet kort"
@@ -4029,7 +4029,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        213
+        209
       ]
     ],
     "translation": "Slet skabelon"
@@ -4141,7 +4141,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        76
+        72
       ]
     ],
     "translation": "Målarbejdsområde"
@@ -4393,7 +4393,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        584
+        586
       ],
       [
         "src/views/card/index.tsx",
@@ -4457,7 +4457,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        267
+        266
       ]
     ],
     "translation": "Duplikér"
@@ -4477,7 +4477,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        130
+        131
       ]
     ],
     "translation": "Duplikér kort"
@@ -4489,7 +4489,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        267
+        266
       ]
     ],
     "translation": "Duplikerer…"
@@ -4517,11 +4517,11 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        173
+        169
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        116
+        121
       ]
     ],
     "translation": "Rediger tavlens URL"
@@ -4585,7 +4585,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        162
+        167
       ]
     ],
     "translation": "Rediger URL til arbejdsområde"
@@ -4685,7 +4685,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        188
+        187
       ]
     ],
     "translation": "Slutningen af listen"
@@ -4857,11 +4857,11 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        77
+        81
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        92
+        96
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -5190,11 +5190,11 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        78
+        82
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        93
+        97
       ]
     ],
     "translation": "Tavlen kunne ikke oprettes"
@@ -5690,7 +5690,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        66
+        81
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny {0}"
@@ -5702,7 +5702,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        999
+        1007
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny liste"
@@ -6130,7 +6130,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        91
+        92
       ]
     ],
     "translation": "ID kopieret"
@@ -6462,7 +6462,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        115
+        117
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -6603,11 +6603,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        533
+        535
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        102
+        108
       ],
       [
         "src/views/card/index.tsx",
@@ -6792,15 +6792,15 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        106
+        104
       ],
       [
         "src/views/board/index.tsx",
-        439
+        447
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        72
+        73
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -6808,7 +6808,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        77
+        81
       ]
     ],
     "translation": "Link kopieret"
@@ -6992,7 +6992,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        162
+        158
       ]
     ],
     "translation": "Gør til skabelon"
@@ -7096,11 +7096,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        178
+        177
       ],
       [
         "src/views/board/members/index.tsx",
-        195
+        194
       ],
       [
         "src/views/card/components/ActivityList.tsx",
@@ -7164,11 +7164,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        491
+        493
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        116
+        118
       ],
       [
         "src/views/card/index.tsx",
@@ -7264,7 +7264,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        107
+        103
       ]
     ],
     "translation": "Flyt tavle"
@@ -7276,7 +7276,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        64
+        60
       ]
     ],
     "translation": "Flyt tavle til et andet arbejdsområde"
@@ -7300,7 +7300,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        70
+        72
       ]
     ],
     "translation": "Flyt til liste"
@@ -7312,7 +7312,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        193
+        189
       ]
     ],
     "translation": "Flyt til arbejdsområde"
@@ -7371,11 +7371,11 @@
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        118
+        123
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        134
+        141
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
@@ -7451,7 +7451,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        120
+        127
       ]
     ],
     "translation": "Ny {0}"
@@ -7475,7 +7475,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        416
+        418
       ]
     ],
     "translation": "Nyt kort"
@@ -7527,7 +7527,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        941
+        949
       ]
     ],
     "translation": "Ny liste"
@@ -7563,7 +7563,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        104
+        109
       ]
     ],
     "translation": "Ny skabelon"
@@ -7651,7 +7651,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        63
+        76
       ]
     ],
     "translation": "Ingen {0}"
@@ -7663,7 +7663,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        63
+        75
       ]
     ],
     "translation": "Ingen arkiverede tavler"
@@ -7771,7 +7771,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        995
+        1003
       ]
     ],
     "translation": "Ingen lister"
@@ -7783,7 +7783,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1000
+        1008
       ]
     ],
     "translation": "Der er endnu ikke oprettet nogen lister"
@@ -8495,11 +8495,11 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        80
+        83
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        204
+        206
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -8507,31 +8507,31 @@
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        61
+        63
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        77
+        79
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        73
+        79
       ],
       [
         "src/views/board/components/VisibilityButton.tsx",
-        57
+        60
       ],
       [
         "src/views/board/index.tsx",
-        292
+        300
       ],
       [
         "src/views/board/index.tsx",
-        349
+        357
       ],
       [
         "src/views/board/index.tsx",
-        386
+        394
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -8543,7 +8543,7 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        88
+        87
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -8579,7 +8579,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        52
+        53
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -8591,19 +8591,19 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        64
+        66
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        75
+        77
       ],
       [
         "src/views/card/components/ListSelector.tsx",
-        55
+        57
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        82
+        84
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
@@ -8715,31 +8715,31 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        111
+        109
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        64
+        65
       ],
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        42
+        44
       ],
       [
         "src/views/board/index.tsx",
-        448
+        456
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        55
+        56
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        81
+        82
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        100
+        101
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -8747,7 +8747,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        86
+        90
       ]
     ],
     "translation": "Prøv igen."
@@ -8759,7 +8759,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        181
+        180
       ]
     ],
     "translation": "Placering på listen (0 = først, lad feltet være tomt for sidst)"
@@ -8847,7 +8847,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        84
+        88
       ]
     ],
     "translation": "Privat"
@@ -8932,7 +8932,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        79
+        83
       ]
     ],
     "translation": "Offentlig"
@@ -8944,7 +8944,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        128
+        126
       ]
     ],
     "translation": ""
@@ -9072,7 +9072,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        649
+        651
       ]
     ],
     "translation": ""
@@ -9084,7 +9084,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        205
+        204
       ]
     ],
     "translation": ""
@@ -9096,7 +9096,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        202
+        198
       ]
     ],
     "translation": "Fjern fra favoritter"
@@ -9191,7 +9191,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        69
+        72
       ]
     ],
     "translation": "Fjernet fra favoritter"
@@ -9403,11 +9403,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        191
+        190
       ],
       [
         "src/views/board/members/index.tsx",
-        272
+        271
       ],
       [
         "src/views/members/index.tsx",
@@ -9652,7 +9652,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        119
+        118
       ]
     ],
     "translation": "Vælg en liste"
@@ -9676,7 +9676,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        84
+        80
       ]
     ],
     "translation": "Vælg et arbejdsområde"
@@ -9860,7 +9860,7 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        121
+        123
       ]
     ],
     "translation": "Angiv forfaldsdato"
@@ -10288,7 +10288,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        336
+        338
       ]
     ],
     "translation": ""
@@ -10602,11 +10602,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        861
+        869
       ],
       [
         "src/views/board/index.tsx",
-        898
+        906
       ]
     ],
     "translation": "Skabelon"
@@ -10618,7 +10618,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        67
+        69
       ]
     ],
     "translation": "Skabelon oprettet"
@@ -10630,7 +10630,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        68
+        70
       ]
     ],
     "translation": "Skabelonen blev oprettet"
@@ -10642,7 +10642,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        19
+        20
       ]
     ],
     "translation": "Skabelonens navn må højst være 100 tegn"
@@ -10654,7 +10654,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        18
+        19
       ]
     ],
     "translation": "Skabelonens navn er påkrævet"
@@ -10666,7 +10666,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        121
+        119
       ]
     ],
     "translation": ""
@@ -10810,7 +10810,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        60
+        63
       ]
     ],
     "translation": "Tavlen er blevet arkiveret."
@@ -10826,7 +10826,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        34
+        32
       ]
     ],
     "translation": "Tavlen er flyttet til {0}."
@@ -10838,7 +10838,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        61
+        64
       ]
     ],
     "translation": "Tavlen er fjernet fra arkivet."
@@ -10850,7 +10850,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        57
+        58
       ]
     ],
     "translation": "Kortet er blevet duplikeret."
@@ -10869,7 +10869,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        337
+        339
       ]
     ],
     "translation": ""
@@ -10961,7 +10961,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        50
+        53
       ]
     ],
     "translation": "Synligheden af din tavle er sat til {0}."
@@ -11017,7 +11017,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        78
+        79
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -11049,7 +11049,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        184
+        188
       ]
     ],
     "translation": "Denne tavle er privat eller findes ikke"
@@ -11061,7 +11061,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        136
+        141
       ]
     ],
     "translation": "Denne tavle-URL er allerede taget"
@@ -11221,7 +11221,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        93
+        94
       ]
     ],
     "translation": "Sags-ID kopieret til udklipsholderen"
@@ -11245,7 +11245,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        168
+        167
       ]
     ],
     "translation": "Titel (valgfrit)"
@@ -11445,7 +11445,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        98
+        99
       ]
     ],
     "translation": "Kunne ikke kopiere ID"
@@ -11457,15 +11457,15 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        110
+        108
       ],
       [
         "src/views/board/index.tsx",
-        446
+        454
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        79
+        80
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -11473,7 +11473,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        84
+        88
       ]
     ],
     "translation": "Kunne ikke kopiere link"
@@ -11485,7 +11485,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        201
+        203
       ]
     ],
     "translation": "Kunne ikke oprette kort"
@@ -11521,11 +11521,11 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        60
+        62
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        76
+        78
       ]
     ],
     "translation": "Kunne ikke oprette skabelon"
@@ -11577,7 +11577,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        51
+        52
       ]
     ],
     "translation": "Kunne ikke slette kort"
@@ -11637,11 +11637,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        63
+        64
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        53
+        54
       ]
     ],
     "translation": "Kunne ikke duplikere kort"
@@ -11653,7 +11653,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        45
+        43
       ]
     ],
     "translation": "Kunne ikke flytte tavle"
@@ -11665,7 +11665,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        41
+        43
       ]
     ],
     "translation": "Kunne ikke flytte kort"
@@ -11757,7 +11757,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        79
+        82
       ]
     ],
     "translation": "Kunne ikke opdatere tavle"
@@ -11769,7 +11769,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        72
+        78
       ]
     ],
     "translation": "Kunne ikke opdatere tavlens URL"
@@ -11781,7 +11781,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        56
+        59
       ]
     ],
     "translation": "Kunne ikke opdatere tavlens synlighed"
@@ -11793,7 +11793,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        348
+        356
       ],
       [
         "src/views/card/index.tsx",
@@ -11845,11 +11845,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        385
+        393
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        63
+        65
       ]
     ],
     "translation": "Kunne ikke opdatere forfaldsdato"
@@ -11861,7 +11861,7 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        74
+        76
       ]
     ],
     "translation": "Kunne ikke opdatere etiketter"
@@ -11873,11 +11873,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        291
+        299
       ],
       [
         "src/views/card/components/ListSelector.tsx",
-        54
+        56
       ]
     ],
     "translation": "Kunne ikke opdatere liste"
@@ -11889,7 +11889,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        81
+        83
       ]
     ],
     "translation": "Kunne ikke opdatere medlemmer"
@@ -11917,7 +11917,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        84
+        83
       ],
       [
         "src/views/members/index.tsx",
@@ -11945,7 +11945,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        182
+        178
       ]
     ],
     "translation": "Fjern tavle fra arkiv"
@@ -12171,7 +12171,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        175
+        180
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
@@ -12437,7 +12437,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        154
+        161
       ]
     ],
     "translation": "Brug skabelon"
@@ -12461,7 +12461,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        266
+        265
       ],
       [
         "src/views/members/index.tsx",
@@ -12537,7 +12537,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        153
+        157
       ]
     ],
     "translation": "Kun visning"
@@ -12561,7 +12561,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        187
+        191
       ]
     ],
     "translation": "Se arbejdsområde"
@@ -12573,7 +12573,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        100
+        104
       ]
     ],
     "translation": "Synlighed"
@@ -12873,7 +12873,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        861
+        869
       ],
       [
         "src/views/boards/index.tsx",
@@ -12885,7 +12885,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        125
+        129
       ],
       [
         "src/views/public/boards/index.tsx",
@@ -13250,7 +13250,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        68
+        64
       ]
     ],
     "translation": "Du har ingen andre arbejdsområder, som denne tavle kan flyttes til."
@@ -13266,19 +13266,19 @@
       ],
       [
         "src/views/board/components/VisibilityButton.tsx",
-        72
+        76
       ],
       [
         "src/views/board/index.tsx",
-        929
+        937
       ],
       [
         "src/views/board/index.tsx",
-        1006
+        1014
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
-        71
+        85
       ],
       [
         "src/views/boards/index.tsx",
@@ -13346,7 +13346,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        252
+        251
       ]
     ],
     "translation": ""

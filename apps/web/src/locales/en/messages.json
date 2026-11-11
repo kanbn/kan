@@ -92,7 +92,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        71
+        74
       ]
     ],
     "translation": "{0} has been added to your favorites."
@@ -108,7 +108,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        72
+        75
       ]
     ],
     "translation": "{0} has been removed from your favorites."
@@ -124,7 +124,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        567
+        569
       ]
     ],
     "translation": "{0} labels"
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        889
+        897
       ]
     ],
     "translation": "{0} not found"
@@ -541,7 +541,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        123
+        124
       ]
     ],
     "translation": "Add checklist"
@@ -605,11 +605,11 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        115
+        121
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        120
+        128
       ]
     ],
     "translation": "Add label"
@@ -625,11 +625,11 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        245
+        244
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        138
+        140
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -645,7 +645,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        202
+        198
       ]
     ],
     "translation": "Add to favorites"
@@ -812,7 +812,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        68
+        71
       ]
     ],
     "translation": "Added to favorites"
@@ -855,11 +855,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        178
+        177
       ],
       [
         "src/views/board/members/index.tsx",
-        194
+        193
       ],
       [
         "src/views/members/index.tsx",
@@ -1212,7 +1212,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        182
+        178
       ]
     ],
     "translation": "Archive board"
@@ -1300,7 +1300,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        75
+        76
       ]
     ],
     "translation": "Are you sure you want to delete this card?"
@@ -1404,11 +1404,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        630
+        632
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        631
+        633
       ]
     ],
     "translation": "Attach files"
@@ -1663,11 +1663,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        861
+        869
       ],
       [
         "src/views/board/members/index.tsx",
-        231
+        230
       ],
       [
         "src/views/card/index.tsx",
@@ -1675,7 +1675,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        125
+        129
       ]
     ],
     "translation": "Board"
@@ -1700,7 +1700,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        57
+        60
       ]
     ],
     "translation": "Board archived"
@@ -1712,7 +1712,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        215
+        214
       ]
     ],
     "translation": "Board member options"
@@ -1724,11 +1724,11 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        151
+        147
       ],
       [
         "src/views/board/members/index.tsx",
-        236
+        235
       ]
     ],
     "translation": "Board members"
@@ -1744,7 +1744,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        231
+        230
       ]
     ],
     "translation": "Board members | {0}"
@@ -1756,7 +1756,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        33
+        31
       ]
     ],
     "translation": "Board moved"
@@ -1768,7 +1768,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        879
+        887
       ]
     ],
     "translation": "Board name"
@@ -1780,7 +1780,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        23
+        25
       ]
     ],
     "translation": "Board name cannot exceed 100 characters"
@@ -1792,7 +1792,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        22
+        24
       ]
     ],
     "translation": "Board name is required"
@@ -1804,7 +1804,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        181
+        185
       ]
     ],
     "translation": "Board not found"
@@ -1816,7 +1816,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        231
+        227
       ]
     ],
     "translation": "Board options"
@@ -1840,7 +1840,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        58
+        61
       ]
     ],
     "translation": "Board unarchived"
@@ -1852,7 +1852,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        46
+        51
       ]
     ],
     "translation": "Board URL can only contain letters, numbers, and hyphens"
@@ -1864,7 +1864,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        44
+        49
       ]
     ],
     "translation": "Board URL cannot exceed 60 characters"
@@ -1876,11 +1876,11 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        122
+        120
       ],
       [
         "src/views/public/board/index.tsx",
-        79
+        83
       ]
     ],
     "translation": "Board URL copied to clipboard"
@@ -1892,7 +1892,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        42
+        47
       ]
     ],
     "translation": "Board URL is required"
@@ -1933,7 +1933,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        49
+        52
       ]
     ],
     "translation": "Board visibility updated"
@@ -1973,7 +1973,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        66
+        80
       ]
     ],
     "translation": "Boards you archive will appear here."
@@ -2437,7 +2437,7 @@
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        255
+        254
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
@@ -2445,7 +2445,7 @@
       ],
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        99
+        95
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -2461,7 +2461,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        86
+        87
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -2525,11 +2525,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        55
+        56
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        46
+        47
       ]
     ],
     "translation": "Card duplicated"
@@ -2541,7 +2541,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        48
+        49
       ]
     ],
     "translation": "Card duplicated successfully."
@@ -2553,7 +2553,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        92
+        88
       ]
     ],
     "translation": "Card member assignments will be cleared when moving to a different workspace."
@@ -2581,7 +2581,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        167
+        168
       ]
     ],
     "translation": "Card options"
@@ -2593,7 +2593,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        433
+        435
       ]
     ],
     "translation": "Card title"
@@ -2605,11 +2605,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        441
+        449
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        74
+        75
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -3323,7 +3323,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        133
+        131
       ]
     ],
     "translation": "Copy board link"
@@ -3335,7 +3335,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        107
+        108
       ]
     ],
     "translation": "Copy card link"
@@ -3347,7 +3347,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        245
+        244
       ]
     ],
     "translation": "Copy checklists"
@@ -3359,7 +3359,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        209
+        208
       ]
     ],
     "translation": "Copy labels"
@@ -3383,7 +3383,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        227
+        226
       ]
     ],
     "translation": "Copy members"
@@ -3395,7 +3395,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        140
+        138
       ]
     ],
     "translation": "Copy public link"
@@ -3407,7 +3407,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        114
+        115
       ]
     ],
     "translation": "Copy ticket ID"
@@ -3435,7 +3435,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        166
+        173
       ]
     ],
     "translation": "Create {0}"
@@ -3451,7 +3451,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        662
+        664
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3479,7 +3479,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        672
+        674
       ]
     ],
     "translation": "Create card"
@@ -3543,7 +3543,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        80
+        93
       ],
       [
         "src/views/boards/index.tsx",
@@ -3571,11 +3571,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        529
+        531
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        101
+        107
       ]
     ],
     "translation": "Create new label"
@@ -3587,11 +3587,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        139
+        145
       ],
       [
         "src/views/board/index.tsx",
-        1017
+        1025
       ]
     ],
     "translation": "Create new list"
@@ -3603,7 +3603,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        132
+        137
       ]
     ],
     "translation": "Create template"
@@ -3699,7 +3699,7 @@
     "origin": [
       [
         "src/views/card/components/ListSelector.tsx",
-        85
+        87
       ]
     ],
     "translation": "Current list"
@@ -3943,7 +3943,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        92
+        93
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -3991,7 +3991,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        213
+        209
       ]
     ],
     "translation": "Delete board"
@@ -4007,7 +4007,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        152
+        153
       ]
     ],
     "translation": "Delete card"
@@ -4055,7 +4055,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        213
+        209
       ]
     ],
     "translation": "Delete template"
@@ -4167,7 +4167,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        76
+        72
       ]
     ],
     "translation": "Destination workspace"
@@ -4432,7 +4432,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        584
+        586
       ],
       [
         "src/views/card/index.tsx",
@@ -4496,7 +4496,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        267
+        266
       ]
     ],
     "translation": "Duplicate"
@@ -4516,7 +4516,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        130
+        131
       ]
     ],
     "translation": "Duplicate card"
@@ -4528,7 +4528,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        267
+        266
       ]
     ],
     "translation": "Duplicating…"
@@ -4556,11 +4556,11 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        173
+        169
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        116
+        121
       ]
     ],
     "translation": "Edit board URL"
@@ -4624,7 +4624,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        162
+        167
       ]
     ],
     "translation": "Edit workspace URL"
@@ -4724,7 +4724,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        188
+        187
       ]
     ],
     "translation": "End of list"
@@ -4896,11 +4896,11 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        77
+        81
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        92
+        96
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -5242,11 +5242,11 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        78
+        82
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        93
+        97
       ]
     ],
     "translation": "Failed to create board"
@@ -5742,7 +5742,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        66
+        81
       ]
     ],
     "translation": "Get started by creating a new {0}"
@@ -5754,7 +5754,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        999
+        1007
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -6182,7 +6182,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        91
+        92
       ]
     ],
     "translation": "ID copied"
@@ -6514,7 +6514,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        115
+        117
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -6668,11 +6668,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        533
+        535
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        102
+        108
       ],
       [
         "src/views/card/index.tsx",
@@ -6870,15 +6870,15 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        106
+        104
       ],
       [
         "src/views/board/index.tsx",
-        439
+        447
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        72
+        73
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -6886,7 +6886,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        77
+        81
       ]
     ],
     "translation": "Link copied"
@@ -7070,7 +7070,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        162
+        158
       ]
     ],
     "translation": "Make template"
@@ -7174,11 +7174,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        178
+        177
       ],
       [
         "src/views/board/members/index.tsx",
-        195
+        194
       ],
       [
         "src/views/card/components/ActivityList.tsx",
@@ -7242,11 +7242,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        491
+        493
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        116
+        118
       ],
       [
         "src/views/card/index.tsx",
@@ -7342,7 +7342,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        107
+        103
       ]
     ],
     "translation": "Move board"
@@ -7354,7 +7354,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        64
+        60
       ]
     ],
     "translation": "Move board to another workspace"
@@ -7378,7 +7378,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        70
+        72
       ]
     ],
     "translation": "Move to list"
@@ -7390,7 +7390,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        193
+        189
       ]
     ],
     "translation": "Move to workspace"
@@ -7449,11 +7449,11 @@
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        118
+        123
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        134
+        141
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
@@ -7529,7 +7529,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        120
+        127
       ]
     ],
     "translation": "New {0}"
@@ -7553,7 +7553,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        416
+        418
       ]
     ],
     "translation": "New card"
@@ -7605,7 +7605,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        941
+        949
       ]
     ],
     "translation": "New list"
@@ -7641,7 +7641,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        104
+        109
       ]
     ],
     "translation": "New template"
@@ -7729,7 +7729,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        63
+        76
       ]
     ],
     "translation": "No {0}"
@@ -7741,7 +7741,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        63
+        75
       ]
     ],
     "translation": "No archived boards"
@@ -7849,7 +7849,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        995
+        1003
       ]
     ],
     "translation": "No lists"
@@ -7861,7 +7861,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1000
+        1008
       ]
     ],
     "translation": "No lists have been created yet"
@@ -8573,11 +8573,11 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        80
+        83
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        204
+        206
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -8585,31 +8585,31 @@
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        61
+        63
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        77
+        79
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        73
+        79
       ],
       [
         "src/views/board/components/VisibilityButton.tsx",
-        57
+        60
       ],
       [
         "src/views/board/index.tsx",
-        292
+        300
       ],
       [
         "src/views/board/index.tsx",
-        349
+        357
       ],
       [
         "src/views/board/index.tsx",
-        386
+        394
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -8621,7 +8621,7 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        88
+        87
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -8657,7 +8657,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        52
+        53
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -8669,19 +8669,19 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        64
+        66
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
-        75
+        77
       ],
       [
         "src/views/card/components/ListSelector.tsx",
-        55
+        57
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        82
+        84
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
@@ -8793,31 +8793,31 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        111
+        109
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        64
+        65
       ],
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        42
+        44
       ],
       [
         "src/views/board/index.tsx",
-        448
+        456
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        55
+        56
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        81
+        82
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        100
+        101
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -8825,7 +8825,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        86
+        90
       ]
     ],
     "translation": "Please try again."
@@ -8837,7 +8837,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        181
+        180
       ]
     ],
     "translation": "Position in list (0 = first, leave empty for end)"
@@ -8925,7 +8925,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        84
+        88
       ]
     ],
     "translation": "Private"
@@ -9010,7 +9010,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        79
+        83
       ]
     ],
     "translation": "Public"
@@ -9022,7 +9022,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        128
+        126
       ]
     ],
     "translation": "Public board URL copied to clipboard"
@@ -9150,7 +9150,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        649
+        651
       ]
     ],
     "translation": "Remove file"
@@ -9162,7 +9162,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        205
+        204
       ]
     ],
     "translation": "Remove from board"
@@ -9174,7 +9174,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        202
+        198
       ]
     ],
     "translation": "Remove from favorites"
@@ -9269,7 +9269,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        69
+        72
       ]
     ],
     "translation": "Removed from favorites"
@@ -9481,11 +9481,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        191
+        190
       ],
       [
         "src/views/board/members/index.tsx",
-        272
+        271
       ],
       [
         "src/views/members/index.tsx",
@@ -9730,7 +9730,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        119
+        118
       ]
     ],
     "translation": "Select a list"
@@ -9754,7 +9754,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        84
+        80
       ]
     ],
     "translation": "Select a workspace"
@@ -9938,7 +9938,7 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        121
+        123
       ]
     ],
     "translation": "Set due date"
@@ -10366,7 +10366,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        336
+        338
       ]
     ],
     "translation": "Some attachments failed"
@@ -10680,11 +10680,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        861
+        869
       ],
       [
         "src/views/board/index.tsx",
-        898
+        906
       ]
     ],
     "translation": "Template"
@@ -10696,7 +10696,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        67
+        69
       ]
     ],
     "translation": "Template created"
@@ -10708,7 +10708,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        68
+        70
       ]
     ],
     "translation": "Template created successfully"
@@ -10720,7 +10720,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        19
+        20
       ]
     ],
     "translation": "Template name cannot exceed 100 characters"
@@ -10732,7 +10732,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        18
+        19
       ]
     ],
     "translation": "Template name is required"
@@ -10744,7 +10744,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        121
+        119
       ]
     ],
     "translation": "Template URL copied to clipboard"
@@ -10888,7 +10888,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        60
+        63
       ]
     ],
     "translation": "The board has been archived."
@@ -10904,7 +10904,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        34
+        32
       ]
     ],
     "translation": "The board has been moved to {0}."
@@ -10916,7 +10916,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        61
+        64
       ]
     ],
     "translation": "The board has been unarchived."
@@ -10928,7 +10928,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        57
+        58
       ]
     ],
     "translation": "The card has been duplicated."
@@ -10947,7 +10947,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        337
+        339
       ]
     ],
     "translation": "The card was created, but {failedCount} of {0} attachments could not be uploaded."
@@ -11039,7 +11039,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        50
+        53
       ]
     ],
     "translation": "The visibility of your board has been set to {0}."
@@ -11095,7 +11095,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        78
+        79
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -11127,7 +11127,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        184
+        188
       ]
     ],
     "translation": "This board is private or does not exist"
@@ -11139,7 +11139,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        136
+        141
       ]
     ],
     "translation": "This board URL has already been taken"
@@ -11299,7 +11299,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        93
+        94
       ]
     ],
     "translation": "Ticket ID copied to clipboard"
@@ -11323,7 +11323,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        168
+        167
       ]
     ],
     "translation": "Title (optional)"
@@ -11523,7 +11523,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        98
+        99
       ]
     ],
     "translation": "Unable to copy ID"
@@ -11535,15 +11535,15 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        110
+        108
       ],
       [
         "src/views/board/index.tsx",
-        446
+        454
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        79
+        80
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -11551,7 +11551,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        84
+        88
       ]
     ],
     "translation": "Unable to copy link"
@@ -11563,7 +11563,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        201
+        203
       ]
     ],
     "translation": "Unable to create card"
@@ -11599,11 +11599,11 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        60
+        62
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        76
+        78
       ]
     ],
     "translation": "Unable to create template"
@@ -11655,7 +11655,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        51
+        52
       ]
     ],
     "translation": "Unable to delete card"
@@ -11715,11 +11715,11 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        63
+        64
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        53
+        54
       ]
     ],
     "translation": "Unable to duplicate card"
@@ -11731,7 +11731,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        45
+        43
       ]
     ],
     "translation": "Unable to move board"
@@ -11743,7 +11743,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
-        41
+        43
       ]
     ],
     "translation": "Unable to move card"
@@ -11835,7 +11835,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        79
+        82
       ]
     ],
     "translation": "Unable to update board"
@@ -11847,7 +11847,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        72
+        78
       ]
     ],
     "translation": "Unable to update board URL"
@@ -11859,7 +11859,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        56
+        59
       ]
     ],
     "translation": "Unable to update board visibility"
@@ -11871,7 +11871,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        348
+        356
       ],
       [
         "src/views/card/index.tsx",
@@ -11923,11 +11923,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        385
+        393
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        63
+        65
       ]
     ],
     "translation": "Unable to update due date"
@@ -11939,7 +11939,7 @@
     "origin": [
       [
         "src/views/card/components/LabelSelector.tsx",
-        74
+        76
       ]
     ],
     "translation": "Unable to update labels"
@@ -11951,11 +11951,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        291
+        299
       ],
       [
         "src/views/card/components/ListSelector.tsx",
-        54
+        56
       ]
     ],
     "translation": "Unable to update list"
@@ -11967,7 +11967,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        81
+        83
       ]
     ],
     "translation": "Unable to update members"
@@ -11995,7 +11995,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        84
+        83
       ],
       [
         "src/views/members/index.tsx",
@@ -12023,7 +12023,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        182
+        178
       ]
     ],
     "translation": "Unarchive board"
@@ -12266,7 +12266,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        175
+        180
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
@@ -12532,7 +12532,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        154
+        161
       ]
     ],
     "translation": "Use template"
@@ -12556,7 +12556,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        266
+        265
       ],
       [
         "src/views/members/index.tsx",
@@ -12632,7 +12632,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        153
+        157
       ]
     ],
     "translation": "View only"
@@ -12656,7 +12656,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        187
+        191
       ]
     ],
     "translation": "View workspace"
@@ -12668,7 +12668,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        100
+        104
       ]
     ],
     "translation": "Visibility"
@@ -12981,7 +12981,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        861
+        869
       ],
       [
         "src/views/boards/index.tsx",
@@ -12993,7 +12993,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        125
+        129
       ],
       [
         "src/views/public/boards/index.tsx",
@@ -13371,7 +13371,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        68
+        64
       ]
     ],
     "translation": "You don't have any other workspaces to move this board to."
@@ -13387,19 +13387,19 @@
       ],
       [
         "src/views/board/components/VisibilityButton.tsx",
-        72
+        76
       ],
       [
         "src/views/board/index.tsx",
-        929
+        937
       ],
       [
         "src/views/board/index.tsx",
-        1006
+        1014
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
-        71
+        85
       ],
       [
         "src/views/boards/index.tsx",
@@ -13493,7 +13493,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        252
+        251
       ]
     ],
     "translation": "You're not a member of this board yet. Ask a board admin to add you."

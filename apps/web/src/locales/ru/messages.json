@@ -51,7 +51,7 @@
       "0": ["boardName ?? \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 71]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 74]],
     "translation": "{0} добавлен в избранное."
   },
   "bDI6VI": {
@@ -60,7 +60,7 @@
       "0": ["boardName ?? \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 72]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 75]],
     "translation": "{0} удалён из избранного."
   },
   "CJukzS": {
@@ -69,7 +69,7 @@
       "0": ["labelPublicIds.length"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 567]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 569]],
     "translation": "{0} метки"
   },
   "9x4DAL": {
@@ -78,7 +78,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 889]],
+    "origin": [["src/views/board/index.tsx", 897]],
     "translation": "{0} не найдено"
   },
   "0xWkkH": {
@@ -321,7 +321,7 @@
     "comments": [],
     "origin": [
       ["src/views/card/components/AttachmentUpload.tsx", 125],
-      ["src/views/card/components/Dropdown.tsx", 123]
+      ["src/views/card/components/Dropdown.tsx", 124]
     ],
     "translation": "Добавить чек-лист"
   },
@@ -361,8 +361,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/LabelSelector.tsx", 115],
-      ["src/views/card/components/LabelSelector.tsx", 120]
+      ["src/views/card/components/LabelSelector.tsx", 121],
+      ["src/views/card/components/LabelSelector.tsx", 128]
     ],
     "translation": "Добавить метку"
   },
@@ -372,8 +372,8 @@
     "comments": [],
     "origin": [
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 109],
-      ["src/views/board/members/index.tsx", 245],
-      ["src/views/card/components/MemberSelector.tsx", 138],
+      ["src/views/board/members/index.tsx", 244],
+      ["src/views/card/components/MemberSelector.tsx", 140],
       ["src/views/members/components/InviteMemberForm.tsx", 266]
     ],
     "translation": "Добавить участника"
@@ -382,7 +382,7 @@
     "message": "Add to favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 202]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 198]],
     "translation": "Добавить в избранное"
   },
   "cWXW+7": {
@@ -477,7 +477,7 @@
     "message": "Added to favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 68]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 71]],
     "translation": "Добавлено в избранное"
   },
   "14Xi3Z": {
@@ -502,8 +502,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 178],
-      ["src/views/board/members/index.tsx", 194],
+      ["src/views/board/members/index.tsx", 177],
+      ["src/views/board/members/index.tsx", 193],
       ["src/views/members/index.tsx", 230],
       ["src/views/settings/components/RolePermissions.tsx", 20]
     ],
@@ -716,7 +716,7 @@
     "message": "Archive board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 182]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 178]],
     "translation": "Архивировать доску"
   },
   "TdfEV7": {
@@ -772,7 +772,7 @@
     "message": "Are you sure you want to delete this card?",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 75]],
+    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 76]],
     "translation": "Вы уверены, что хотите удалить эту карточку?"
   },
   "Fpci8b": {
@@ -844,8 +844,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewCardForm.tsx", 630],
-      ["src/views/board/components/NewCardForm.tsx", 631]
+      ["src/views/board/components/NewCardForm.tsx", 632],
+      ["src/views/board/components/NewCardForm.tsx", 633]
     ],
     "translation": "Прикрепить файлы"
   },
@@ -997,10 +997,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 861],
-      ["src/views/board/members/index.tsx", 231],
+      ["src/views/board/index.tsx", 869],
+      ["src/views/board/members/index.tsx", 230],
       ["src/views/card/index.tsx", 361],
-      ["src/views/public/board/index.tsx", 125]
+      ["src/views/public/board/index.tsx", 129]
     ],
     "translation": "Доска"
   },
@@ -1018,14 +1018,14 @@
     "message": "Board archived",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 57]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 60]],
     "translation": "Доска архивирована"
   },
   "uxBHQx": {
     "message": "Board member options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/members/index.tsx", 215]],
+    "origin": [["src/views/board/members/index.tsx", 214]],
     "translation": "Параметры участника доски"
   },
   "tKo0Sh": {
@@ -1033,8 +1033,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 151],
-      ["src/views/board/members/index.tsx", 236]
+      ["src/views/board/components/BoardDropdown.tsx", 147],
+      ["src/views/board/members/index.tsx", 235]
     ],
     "translation": "Участники доски"
   },
@@ -1044,49 +1044,49 @@
       "0": ["board?.name ?? t`Board`"]
     },
     "comments": [],
-    "origin": [["src/views/board/members/index.tsx", 231]],
+    "origin": [["src/views/board/members/index.tsx", 230]],
     "translation": "Участники доски | {0}"
   },
   "wE3hGS": {
     "message": "Board moved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 33]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 31]],
     "translation": "Доска перемещена"
   },
   "qVcPNk": {
     "message": "Board name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 879]],
+    "origin": [["src/views/board/index.tsx", 887]],
     "translation": "Название доски"
   },
   "wewm3j": {
     "message": "Board name cannot exceed 100 characters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/NewBoardForm.tsx", 23]],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 25]],
     "translation": "Название доски не может превышать 100 символов"
   },
   "R1c3Mq": {
     "message": "Board name is required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/NewBoardForm.tsx", 22]],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 24]],
     "translation": "Требуется указать название доски"
   },
   "jwI32v": {
     "message": "Board not found",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/public/board/index.tsx", 181]],
+    "origin": [["src/views/public/board/index.tsx", 185]],
     "translation": "Доска не найдена"
   },
   "Mu1Zy/": {
     "message": "Board options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 231]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 227]],
     "translation": "Параметры доски"
   },
   "XNxYxq": {
@@ -1102,21 +1102,21 @@
     "message": "Board unarchived",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 58]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 61]],
     "translation": "Доска восстановлена из архива"
   },
   "Xid3K6": {
     "message": "Board URL can only contain letters, numbers, and hyphens",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 46]],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 51]],
     "translation": "URL доски может содержать только буквы, цифры и дефисы"
   },
   "gv5kbo": {
     "message": "Board URL cannot exceed 60 characters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 44]],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 49]],
     "translation": "URL доски не может превышать 60 символов"
   },
   "8+BY11": {
@@ -1124,8 +1124,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 122],
-      ["src/views/public/board/index.tsx", 79]
+      ["src/views/board/components/BoardDropdown.tsx", 120],
+      ["src/views/public/board/index.tsx", 83]
     ],
     "translation": "URL доски скопирован в буфер обмена"
   },
@@ -1133,7 +1133,7 @@
     "message": "Board URL is required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 42]],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 47]],
     "translation": "Необходимо указать URL доски"
   },
   "TmvrjU": {
@@ -1158,7 +1158,7 @@
     "message": "Board visibility updated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/VisibilityButton.tsx", 49]],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 52]],
     "translation": "Видимость доски обновлена"
   },
   "8TveY+": {
@@ -1178,7 +1178,7 @@
     "message": "Boards you archive will appear here.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/BoardsList.tsx", 66]],
+    "origin": [["src/views/boards/components/BoardsList.tsx", 80]],
     "translation": "Здесь будут отображаться архивированные вами доски."
   },
   "ZDo4HN": {
@@ -1463,16 +1463,16 @@
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 52],
       ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 176],
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 255],
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 254],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 44],
-      ["src/views/board/components/MoveBoardForm.tsx", 99],
+      ["src/views/board/components/MoveBoardForm.tsx", 95],
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 101],
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         66
       ],
       ["src/views/card/components/Comment.tsx", 195],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 86],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 87],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 68],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 77],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 64],
@@ -1501,8 +1501,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 55],
-      ["src/views/card/components/Dropdown.tsx", 46]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 56],
+      ["src/views/card/components/Dropdown.tsx", 47]
     ],
     "translation": "Карточка продублирована"
   },
@@ -1510,14 +1510,14 @@
     "message": "Card duplicated successfully.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 48]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 49]],
     "translation": "Карточка успешно продублирована."
   },
   "AgE2vR": {
     "message": "Card member assignments will be cleared when moving to a different workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 92]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 88]],
     "translation": "При перемещении в другой рабочий пространство назначения участников карточек будут очищены."
   },
   "fEY2vP": {
@@ -1534,14 +1534,14 @@
     "message": "Card options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 167]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 168]],
     "translation": "Параметры карточки"
   },
   "ZH7TVS": {
     "message": "Card title",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 433]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 435]],
     "translation": "Название карточки"
   },
   "rQXTmd": {
@@ -1549,8 +1549,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 441],
-      ["src/views/card/components/Dropdown.tsx", 74],
+      ["src/views/board/index.tsx", 449],
+      ["src/views/card/components/Dropdown.tsx", 75],
       ["src/views/public/board/CardModal.tsx", 40]
     ],
     "translation": "URL карточки скопирован в буфер обмена"
@@ -1975,14 +1975,14 @@
     "message": "Copy board link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 133]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 131]],
     "translation": "Скопировать ссылку на доску"
   },
   "F0YmUY": {
     "message": "Copy card link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 107]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 108]],
     "translation": "Скопировать ссылку на карточку"
   },
   "0utuU6": {
@@ -1990,7 +1990,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 245]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 244]
     ],
     "translation": "Копировать чек-листы"
   },
@@ -1999,7 +1999,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 209]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 208]
     ],
     "translation": "Копировать метки"
   },
@@ -2015,7 +2015,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 227]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 226]
     ],
     "translation": "Копировать участников"
   },
@@ -2023,14 +2023,14 @@
     "message": "Copy public link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 140]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 138]],
     "translation": "Скопировать публичную ссылку"
   },
   "7mrkyO": {
     "message": "Copy ticket ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 114]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 115]],
     "translation": "Скопировать ID задачи"
   },
   "9PaIxv": {
@@ -2048,7 +2048,7 @@
       "0": ["isTemplate ? \"template\" : \"board\""]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/NewBoardForm.tsx", 166]],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 173]],
     "translation": "Создать {0}"
   },
   "vgdzLf": {
@@ -2057,7 +2057,7 @@
     "comments": [],
     "origin": [
       ["src/components/LabelForm.tsx", 217],
-      ["src/views/board/components/NewCardForm.tsx", 662],
+      ["src/views/board/components/NewCardForm.tsx", 664],
       ["src/views/board/components/NewListForm.tsx", 162]
     ],
     "translation": "Создать ещё одну"
@@ -2073,7 +2073,7 @@
     "message": "Create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 672]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 674]],
     "translation": "Создать карточку"
   },
   "d33Usy": {
@@ -2111,7 +2111,7 @@
     },
     "comments": [],
     "origin": [
-      ["src/views/boards/components/BoardsList.tsx", 80],
+      ["src/views/boards/components/BoardsList.tsx", 93],
       ["src/views/boards/index.tsx", 46]
     ],
     "translation": "Создать новый {0}"
@@ -2128,8 +2128,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewCardForm.tsx", 529],
-      ["src/views/card/components/LabelSelector.tsx", 101]
+      ["src/views/board/components/NewCardForm.tsx", 531],
+      ["src/views/card/components/LabelSelector.tsx", 107]
     ],
     "translation": "Создать новую метку"
   },
@@ -2138,8 +2138,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 139],
-      ["src/views/board/index.tsx", 1017]
+      ["src/views/board/index.tsx", 145],
+      ["src/views/board/index.tsx", 1025]
     ],
     "translation": "Создать новый список"
   },
@@ -2147,7 +2147,7 @@
     "message": "Create template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewTemplateForm.tsx", 132]],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 137]],
     "translation": "Создать шаблон"
   },
   "SiPp29": {
@@ -2203,7 +2203,7 @@
     "message": "Current list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ListSelector.tsx", 85]],
+    "origin": [["src/views/card/components/ListSelector.tsx", 87]],
     "translation": "Текущий список"
   },
   "D3C4Yx": {
@@ -2350,7 +2350,7 @@
       ["src/components/LabelForm.tsx", 232],
       ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 52],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 47],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 92],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 93],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 71],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 83],
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 93],
@@ -2373,7 +2373,7 @@
     "message": "Delete board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 213]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 209]],
     "translation": "Удалить доску"
   },
   "nabda1": {
@@ -2382,7 +2382,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/CardContextMenu.tsx", 75],
-      ["src/views/card/components/Dropdown.tsx", 152]
+      ["src/views/card/components/Dropdown.tsx", 153]
     ],
     "translation": "Удалить карточку"
   },
@@ -2411,7 +2411,7 @@
     "message": "Delete template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 213]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 209]],
     "translation": "Удалить шаблон"
   },
   "snMaH4": {
@@ -2477,7 +2477,7 @@
     "message": "Destination workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 76]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 72]],
     "translation": "Рабочее пространство назначения"
   },
   "Odv3J6": {
@@ -2619,7 +2619,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/Filters.tsx", 178],
-      ["src/views/board/components/NewCardForm.tsx", 584],
+      ["src/views/board/components/NewCardForm.tsx", 586],
       ["src/views/card/index.tsx", 159]
     ],
     "translation": "Срок выполнения"
@@ -2657,7 +2657,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 267]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 266]
     ],
     "translation": "Дублировать"
   },
@@ -2668,7 +2668,7 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 99],
       ["src/views/board/components/CardContextMenu.tsx", 69],
-      ["src/views/card/components/Dropdown.tsx", 130]
+      ["src/views/card/components/Dropdown.tsx", 131]
     ],
     "translation": "Дублировать карточку"
   },
@@ -2677,7 +2677,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 267]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 266]
     ],
     "translation": "Дублирование…"
   },
@@ -2696,8 +2696,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 173],
-      ["src/views/board/components/UpdateBoardSlugForm.tsx", 116]
+      ["src/views/board/components/BoardDropdown.tsx", 169],
+      ["src/views/board/components/UpdateBoardSlugForm.tsx", 121]
     ],
     "translation": "Изменить URL доски"
   },
@@ -2736,7 +2736,7 @@
     "message": "Edit workspace URL",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 162]],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 167]],
     "translation": "Изменить URL рабочего пространства"
   },
   "PRofO0": {
@@ -2798,7 +2798,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 188]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 187]
     ],
     "translation": "Конец списка"
   },
@@ -2907,8 +2907,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/components/NewBoardForm.tsx", 77],
-      ["src/views/boards/components/NewBoardForm.tsx", 92],
+      ["src/views/boards/components/NewBoardForm.tsx", 81],
+      ["src/views/boards/components/NewBoardForm.tsx", 96],
       ["src/views/members/components/InviteMemberForm.tsx", 249]
     ],
     "translation": "Ошибка"
@@ -3129,8 +3129,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/components/NewBoardForm.tsx", 78],
-      ["src/views/boards/components/NewBoardForm.tsx", 93]
+      ["src/views/boards/components/NewBoardForm.tsx", 82],
+      ["src/views/boards/components/NewBoardForm.tsx", 97]
     ],
     "translation": "Не удалось создать доску"
   },
@@ -3415,14 +3415,14 @@
       "0": ["isTemplate ? \"template\" : \"board\""]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/BoardsList.tsx", 66]],
+    "origin": [["src/views/boards/components/BoardsList.tsx", 81]],
     "translation": "Начните с создания нового {0}"
   },
   "zC8Whw": {
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 999]],
+    "origin": [["src/views/board/index.tsx", 1007]],
     "translation": "Начните с создания нового списка"
   },
   "oW13KZ": {
@@ -3681,7 +3681,7 @@
     "message": "ID copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 91]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 92]],
     "translation": "ID скопирован"
   },
   "iwr7AP": {
@@ -3879,7 +3879,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/MemberSelector.tsx", 115],
+      ["src/views/card/components/MemberSelector.tsx", 117],
       ["src/views/members/components/InviteMemberForm.tsx", 386]
     ],
     "translation": "Пригласить участника"
@@ -3969,8 +3969,8 @@
     "origin": [
       ["src/views/board/components/CardContextLabelsModal.tsx", 31],
       ["src/views/board/components/Filters.tsx", 160],
-      ["src/views/board/components/NewCardForm.tsx", 533],
-      ["src/views/card/components/LabelSelector.tsx", 102],
+      ["src/views/board/components/NewCardForm.tsx", 535],
+      ["src/views/card/components/LabelSelector.tsx", 108],
       ["src/views/card/index.tsx", 139]
     ],
     "translation": "Метки"
@@ -4091,11 +4091,11 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 106],
-      ["src/views/board/index.tsx", 439],
-      ["src/views/card/components/Dropdown.tsx", 72],
+      ["src/views/board/components/BoardDropdown.tsx", 104],
+      ["src/views/board/index.tsx", 447],
+      ["src/views/card/components/Dropdown.tsx", 73],
       ["src/views/public/board/CardModal.tsx", 38],
-      ["src/views/public/board/index.tsx", 77]
+      ["src/views/public/board/index.tsx", 81]
     ],
     "translation": "Ссылка скопирована"
   },
@@ -4206,7 +4206,7 @@
     "message": "Make template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 162]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 158]],
     "translation": "Создать шаблон"
   },
   "hB02vO": {
@@ -4268,8 +4268,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 178],
-      ["src/views/board/members/index.tsx", 195],
+      ["src/views/board/members/index.tsx", 177],
+      ["src/views/board/members/index.tsx", 194],
       ["src/views/card/components/ActivityList.tsx", 56],
       ["src/views/card/components/ActivityList.tsx", 89],
       ["src/views/members/index.tsx", 231],
@@ -4299,8 +4299,8 @@
       ["src/components/SideNavigation.tsx", 127],
       ["src/utils/permission-category-label.ts", 20],
       ["src/views/board/components/Filters.tsx", 151],
-      ["src/views/board/components/NewCardForm.tsx", 491],
-      ["src/views/card/components/MemberSelector.tsx", 116],
+      ["src/views/board/components/NewCardForm.tsx", 493],
+      ["src/views/card/components/MemberSelector.tsx", 118],
       ["src/views/card/index.tsx", 149],
       ["src/views/members/index.tsx", 293],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 90]
@@ -4356,14 +4356,14 @@
     "message": "Move board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 107]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 103]],
     "translation": "Переместить доску"
   },
   "VvCMyU": {
     "message": "Move board to another workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 64]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 60]],
     "translation": "Переместить доску в другое рабочее пространство"
   },
   "51UCsN": {
@@ -4377,14 +4377,14 @@
     "message": "Move to list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 70]],
+    "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 72]],
     "translation": "Переместить в список"
   },
   "S3wq2O": {
     "message": "Move to workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 193]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 189]],
     "translation": "Переместить в рабочее пространство"
   },
   "BOqTi5": {
@@ -4417,8 +4417,8 @@
     "comments": [],
     "origin": [
       ["src/components/LabelForm.tsx", 139],
-      ["src/views/board/components/NewTemplateForm.tsx", 118],
-      ["src/views/boards/components/NewBoardForm.tsx", 134],
+      ["src/views/board/components/NewTemplateForm.tsx", 123],
+      ["src/views/boards/components/NewBoardForm.tsx", 141],
       ["src/views/settings/components/NewWebhookModal.tsx", 253],
       ["src/views/settings/components/WebhookList.tsx", 219]
     ],
@@ -4461,7 +4461,7 @@
       "0": ["isTemplate ? \"template\" : \"board\""]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/NewBoardForm.tsx", 120]],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 127]],
     "translation": "Новый {0}"
   },
   "TjREUS": {
@@ -4475,7 +4475,7 @@
     "message": "New card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 416]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 418]],
     "translation": "Новая карточка"
   },
   "cWcxrL": {
@@ -4505,7 +4505,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 134],
-      ["src/views/board/index.tsx", 941]
+      ["src/views/board/index.tsx", 949]
     ],
     "translation": "Новый список"
   },
@@ -4531,7 +4531,7 @@
     "message": "New template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewTemplateForm.tsx", 104]],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 109]],
     "translation": "Новый шаблон"
   },
   "RJA+sg": {
@@ -4582,14 +4582,14 @@
       "0": ["isTemplate ? \"templates\" : \"boards\""]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/BoardsList.tsx", 63]],
+    "origin": [["src/views/boards/components/BoardsList.tsx", 76]],
     "translation": "Нет {0}"
   },
   "tlhgDC": {
     "message": "No archived boards",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/BoardsList.tsx", 63]],
+    "origin": [["src/views/boards/components/BoardsList.tsx", 75]],
     "translation": "Нет архивированных досок"
   },
   "Eg99Sc": {
@@ -4652,14 +4652,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 995]],
+    "origin": [["src/views/board/index.tsx", 1003]],
     "translation": "Нет списков"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1000]],
+    "origin": [["src/views/board/index.tsx", 1008]],
     "translation": "Списки ещё не созданы"
   },
   "i30J2U": {
@@ -5089,22 +5089,22 @@
       ["src/components/DeleteLabelConfirmation.tsx", 28],
       ["src/components/FeedbackModal.tsx", 42],
       ["src/components/NewWorkspaceForm.tsx", 119],
-      ["src/views/board/components/BoardDropdown.tsx", 80],
-      ["src/views/board/components/NewCardForm.tsx", 204],
+      ["src/views/board/components/BoardDropdown.tsx", 83],
+      ["src/views/board/components/NewCardForm.tsx", 206],
       ["src/views/board/components/NewListForm.tsx", 97],
-      ["src/views/board/components/NewTemplateForm.tsx", 61],
-      ["src/views/board/components/NewTemplateForm.tsx", 77],
-      ["src/views/board/components/UpdateBoardSlugForm.tsx", 73],
-      ["src/views/board/components/VisibilityButton.tsx", 57],
-      ["src/views/board/index.tsx", 292],
-      ["src/views/board/index.tsx", 349],
-      ["src/views/board/index.tsx", 386],
+      ["src/views/board/components/NewTemplateForm.tsx", 63],
+      ["src/views/board/components/NewTemplateForm.tsx", 79],
+      ["src/views/board/components/UpdateBoardSlugForm.tsx", 79],
+      ["src/views/board/components/VisibilityButton.tsx", 60],
+      ["src/views/board/index.tsx", 300],
+      ["src/views/board/index.tsx", 357],
+      ["src/views/board/index.tsx", 394],
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 42],
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         37
       ],
-      ["src/views/board/members/index.tsx", 88],
+      ["src/views/board/members/index.tsx", 87],
       ["src/views/boards/components/ImportBoardsForm.tsx", 258],
       ["src/views/boards/components/ImportBoardsForm.tsx", 412],
       ["src/views/card/components/AttachmentThumbnails.tsx", 77],
@@ -5113,13 +5113,13 @@
       ["src/views/card/components/ChecklistNameInput.tsx", 52],
       ["src/views/card/components/Checklists.tsx", 97],
       ["src/views/card/components/Comment.tsx", 93],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 52],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 53],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 41],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 46],
-      ["src/views/card/components/DueDateSelector.tsx", 64],
-      ["src/views/card/components/LabelSelector.tsx", 75],
-      ["src/views/card/components/ListSelector.tsx", 55],
-      ["src/views/card/components/MemberSelector.tsx", 82],
+      ["src/views/card/components/DueDateSelector.tsx", 66],
+      ["src/views/card/components/LabelSelector.tsx", 77],
+      ["src/views/card/components/ListSelector.tsx", 57],
+      ["src/views/card/components/MemberSelector.tsx", 84],
       ["src/views/card/components/NewChecklistForm.tsx", 86],
       ["src/views/card/components/NewChecklistItemForm.tsx", 108],
       ["src/views/card/components/NewCommentForm.tsx", 43],
@@ -5159,15 +5159,15 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 111],
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 64],
-      ["src/views/board/components/CardContextMoveListModal.tsx", 42],
-      ["src/views/board/index.tsx", 448],
-      ["src/views/card/components/Dropdown.tsx", 55],
-      ["src/views/card/components/Dropdown.tsx", 81],
-      ["src/views/card/components/Dropdown.tsx", 100],
+      ["src/views/board/components/BoardDropdown.tsx", 109],
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 65],
+      ["src/views/board/components/CardContextMoveListModal.tsx", 44],
+      ["src/views/board/index.tsx", 456],
+      ["src/views/card/components/Dropdown.tsx", 56],
+      ["src/views/card/components/Dropdown.tsx", 82],
+      ["src/views/card/components/Dropdown.tsx", 101],
       ["src/views/public/board/CardModal.tsx", 47],
-      ["src/views/public/board/index.tsx", 86]
+      ["src/views/public/board/index.tsx", 90]
     ],
     "translation": "Пожалуйста, попробуйте ещё раз."
   },
@@ -5176,7 +5176,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 181]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 180]
     ],
     "translation": "Позиция в списке (0 = первая, оставьте пустым для конца)"
   },
@@ -5223,7 +5223,7 @@
     "message": "Private",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/VisibilityButton.tsx", 84]],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 88]],
     "translation": "Приватно"
   },
   "3fPjUY": {
@@ -5273,14 +5273,14 @@
     "message": "Public",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/VisibilityButton.tsx", 79]],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 83]],
     "translation": "Публично"
   },
   "NBrXwv": {
     "message": "Public board URL copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 128]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 126]],
     "translation": "Ссылка на публичную доску скопирована в буфер обмена"
   },
   "ABCjd9": {
@@ -5359,21 +5359,21 @@
     "message": "Remove file",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 649]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 651]],
     "translation": "Удалить файл"
   },
   "Tir5Ud": {
     "message": "Remove from board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/members/index.tsx", 205]],
+    "origin": [["src/views/board/members/index.tsx", 204]],
     "translation": "Удалить с доски"
   },
   "T/pF0Z": {
     "message": "Remove from favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 202]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 198]],
     "translation": "Удалить из избранного"
   },
   "99VIgC": {
@@ -5427,7 +5427,7 @@
     "message": "Removed from favorites",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 69]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 72]],
     "translation": "Удалено из избранного"
   },
   "YVT40D": {
@@ -5552,8 +5552,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 191],
-      ["src/views/board/members/index.tsx", 272],
+      ["src/views/board/members/index.tsx", 190],
+      ["src/views/board/members/index.tsx", 271],
       ["src/views/members/index.tsx", 362]
     ],
     "translation": "Роль"
@@ -5703,7 +5703,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 119]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 118]
     ],
     "translation": "Выберите список"
   },
@@ -5720,7 +5720,7 @@
     "message": "Select a workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 84]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 80]],
     "translation": "Выберите рабочее пространство"
   },
   "wgNoIs": {
@@ -5826,7 +5826,7 @@
     "origin": [
       ["src/views/board/components/CardContextDueDateModal.tsx", 20],
       ["src/views/board/components/CardContextMenu.tsx", 57],
-      ["src/views/card/components/DueDateSelector.tsx", 121]
+      ["src/views/card/components/DueDateSelector.tsx", 123]
     ],
     "translation": "Установить срок"
   },
@@ -6079,7 +6079,7 @@
     "message": "Some attachments failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 336]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 338]],
     "translation": "Не удалось загрузить некоторые вложения"
   },
   "J9+zIR": {
@@ -6270,8 +6270,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 861],
-      ["src/views/board/index.tsx", 898]
+      ["src/views/board/index.tsx", 869],
+      ["src/views/board/index.tsx", 906]
     ],
     "translation": "Шаблон"
   },
@@ -6279,35 +6279,35 @@
     "message": "Template created",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewTemplateForm.tsx", 67]],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 69]],
     "translation": "Шаблон создан"
   },
   "QHhZeE": {
     "message": "Template created successfully",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewTemplateForm.tsx", 68]],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 70]],
     "translation": "Шаблон успешно создан"
   },
   "notwF1": {
     "message": "Template name cannot exceed 100 characters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewTemplateForm.tsx", 19]],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 20]],
     "translation": "Имя шаблона не может превышать 100 символов"
   },
   "6OTo9n": {
     "message": "Template name is required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewTemplateForm.tsx", 18]],
+    "origin": [["src/views/board/components/NewTemplateForm.tsx", 19]],
     "translation": "Необходимо указать имя шаблона"
   },
   "2oYalC": {
     "message": "Template URL copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 121]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 119]],
     "translation": "URL шаблона скопирован в буфер обмена"
   },
   "iTylMl": {
@@ -6391,7 +6391,7 @@
     "message": "The board has been archived.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 60]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 63]],
     "translation": "Доска была архивирована."
   },
   "ZWk38w": {
@@ -6400,14 +6400,14 @@
       "0": ["targetWorkspace?.name ?? \"the workspace\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 34]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 32]],
     "translation": "Доска была перемещена в {0}."
   },
   "C6gv54": {
     "message": "The board has been unarchived.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 61]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 64]],
     "translation": "Доска была восстановлена из архива."
   },
   "nKBUeF": {
@@ -6415,7 +6415,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 57]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 58]
     ],
     "translation": "Карточка была продублирована."
   },
@@ -6426,7 +6426,7 @@
       "failedCount": ["failedCount"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 337]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 339]],
     "translation": "Карточка создана, но не удалось загрузить {failedCount} из {0} вложений."
   },
   "jlB2RY": {
@@ -6482,7 +6482,7 @@
       "0": ["isPublic ? \"public\" : \"private\""]
     },
     "comments": [],
-    "origin": [["src/views/board/components/VisibilityButton.tsx", 50]],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 53]],
     "translation": "Видимость вашей доски установлена на {0}."
   },
   "FEr96N": {
@@ -6520,7 +6520,7 @@
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 47],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 39],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 78],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 79],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 63],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 69]
     ],
@@ -6537,14 +6537,14 @@
     "message": "This board is private or does not exist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/public/board/index.tsx", 184]],
+    "origin": [["src/views/public/board/index.tsx", 188]],
     "translation": "Эта доска приватная или не существует"
   },
   "wY+6Ye": {
     "message": "This board URL has already been taken",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 136]],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 141]],
     "translation": "Этот URL доски уже занят"
   },
   "mTwGOf": {
@@ -6651,7 +6651,7 @@
     "message": "Ticket ID copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 93]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 94]],
     "translation": "ID задачи скопирован в буфер обмена"
   },
   "MHrjPM": {
@@ -6666,7 +6666,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 168]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 167]
     ],
     "translation": "Название (необязательно)"
   },
@@ -6787,7 +6787,7 @@
     "message": "Unable to copy ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 98]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 99]],
     "translation": "Не удалось скопировать ID"
   },
   "W1ewR0": {
@@ -6795,11 +6795,11 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/BoardDropdown.tsx", 110],
-      ["src/views/board/index.tsx", 446],
-      ["src/views/card/components/Dropdown.tsx", 79],
+      ["src/views/board/components/BoardDropdown.tsx", 108],
+      ["src/views/board/index.tsx", 454],
+      ["src/views/card/components/Dropdown.tsx", 80],
       ["src/views/public/board/CardModal.tsx", 45],
-      ["src/views/public/board/index.tsx", 84]
+      ["src/views/public/board/index.tsx", 88]
     ],
     "translation": "Не удалось скопировать ссылку"
   },
@@ -6807,7 +6807,7 @@
     "message": "Unable to create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 201]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 203]],
     "translation": "Не удалось создать карточку"
   },
   "mHhffx": {
@@ -6829,8 +6829,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewTemplateForm.tsx", 60],
-      ["src/views/board/components/NewTemplateForm.tsx", 76]
+      ["src/views/board/components/NewTemplateForm.tsx", 62],
+      ["src/views/board/components/NewTemplateForm.tsx", 78]
     ],
     "translation": "Не удалось создать шаблон"
   },
@@ -6862,7 +6862,7 @@
     "message": "Unable to delete card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 51]],
+    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 52]],
     "translation": "Не удалось удалить карточку"
   },
   "DahTzR": {
@@ -6902,8 +6902,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 63],
-      ["src/views/card/components/Dropdown.tsx", 53]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 64],
+      ["src/views/card/components/Dropdown.tsx", 54]
     ],
     "translation": "Невозможно дублировать карточку"
   },
@@ -6911,14 +6911,14 @@
     "message": "Unable to move board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 45]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 43]],
     "translation": "Не удалось переместить доску"
   },
   "K7k9u3": {
     "message": "Unable to move card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 41]],
+    "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 43]],
     "translation": "Невозможно переместить карточку"
   },
   "8yFGGF": {
@@ -6978,21 +6978,21 @@
     "message": "Unable to update board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 79]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 82]],
     "translation": "Не удалось обновить доску"
   },
   "XpcjLO": {
     "message": "Unable to update board URL",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 72]],
+    "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 78]],
     "translation": "Не удалось обновить URL доски"
   },
   "Wy6pcF": {
     "message": "Unable to update board visibility",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/VisibilityButton.tsx", 56]],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 59]],
     "translation": "Не удалось обновить видимость доски"
   },
   "o9WLwO": {
@@ -7000,7 +7000,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 348],
+      ["src/views/board/index.tsx", 356],
       ["src/views/card/index.tsx", 258]
     ],
     "translation": "Не удалось обновить карточку"
@@ -7031,8 +7031,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 385],
-      ["src/views/card/components/DueDateSelector.tsx", 63]
+      ["src/views/board/index.tsx", 393],
+      ["src/views/card/components/DueDateSelector.tsx", 65]
     ],
     "translation": "Не удалось обновить дату выполнения"
   },
@@ -7040,7 +7040,7 @@
     "message": "Unable to update labels",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/LabelSelector.tsx", 74]],
+    "origin": [["src/views/card/components/LabelSelector.tsx", 76]],
     "translation": "Не удалось обновить метки"
   },
   "I0gAKM": {
@@ -7048,8 +7048,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 291],
-      ["src/views/card/components/ListSelector.tsx", 54]
+      ["src/views/board/index.tsx", 299],
+      ["src/views/card/components/ListSelector.tsx", 56]
     ],
     "translation": "Не удалось обновить список"
   },
@@ -7057,7 +7057,7 @@
     "message": "Unable to update members",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/MemberSelector.tsx", 81]],
+    "origin": [["src/views/card/components/MemberSelector.tsx", 83]],
     "translation": "Не удалось обновить участников"
   },
   "GYv20o": {
@@ -7075,7 +7075,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 84],
+      ["src/views/board/members/index.tsx", 83],
       ["src/views/members/index.tsx", 77]
     ],
     "translation": "Не удалось обновить роль"
@@ -7091,7 +7091,7 @@
     "message": "Unarchive board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/BoardDropdown.tsx", 182]],
+    "origin": [["src/views/board/components/BoardDropdown.tsx", 178]],
     "translation": "Восстановить доску из архива"
   },
   "E8zYtd": {
@@ -7232,7 +7232,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/UpdateBoardSlugForm.tsx", 175],
+      ["src/views/board/components/UpdateBoardSlugForm.tsx", 180],
       ["src/views/settings/components/UpdateDisplayNameForm.tsx", 86],
       ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 103],
       ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 99],
@@ -7388,7 +7388,7 @@
     "message": "Use template",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/NewBoardForm.tsx", 154]],
+    "origin": [["src/views/boards/components/NewBoardForm.tsx", 161]],
     "translation": "Использовать шаблон"
   },
   "n6EWYz": {
@@ -7403,7 +7403,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 266],
+      ["src/views/board/members/index.tsx", 265],
       ["src/views/members/index.tsx", 356]
     ],
     "translation": "Пользователь"
@@ -7447,7 +7447,7 @@
     "message": "View only",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/public/board/index.tsx", 153]],
+    "origin": [["src/views/public/board/index.tsx", 157]],
     "translation": "Только просмотр"
   },
   "fSf2ee": {
@@ -7461,14 +7461,14 @@
     "message": "View workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/public/board/index.tsx", 187]],
+    "origin": [["src/views/public/board/index.tsx", 191]],
     "translation": "Просмотреть рабочее пространство"
   },
   "2q/Q7x": {
     "message": "Visibility",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/VisibilityButton.tsx", 100]],
+    "origin": [["src/views/board/components/VisibilityButton.tsx", 104]],
     "translation": "Видимость"
   },
   "BJbLe4": {
@@ -7654,10 +7654,10 @@
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
       ["src/utils/permission-category-label.ts", 10],
-      ["src/views/board/index.tsx", 861],
+      ["src/views/board/index.tsx", 869],
       ["src/views/boards/index.tsx", 58],
       ["src/views/members/index.tsx", 288],
-      ["src/views/public/board/index.tsx", 125],
+      ["src/views/public/board/index.tsx", 129],
       ["src/views/public/boards/index.tsx", 78]
     ],
     "translation": "Рабочее пространство"
@@ -7896,7 +7896,7 @@
     "message": "You don't have any other workspaces to move this board to.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/MoveBoardForm.tsx", 68]],
+    "origin": [["src/views/board/components/MoveBoardForm.tsx", 64]],
     "translation": "У вас нет других рабочих пространств для перемещения этой доски."
   },
   "h2FKMV": {
@@ -7905,10 +7905,10 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/List.tsx", 133],
-      ["src/views/board/components/VisibilityButton.tsx", 72],
-      ["src/views/board/index.tsx", 929],
-      ["src/views/board/index.tsx", 1006],
-      ["src/views/boards/components/BoardsList.tsx", 71],
+      ["src/views/board/components/VisibilityButton.tsx", 76],
+      ["src/views/board/index.tsx", 937],
+      ["src/views/board/index.tsx", 1014],
+      ["src/views/boards/components/BoardsList.tsx", 85],
       ["src/views/boards/index.tsx", 69],
       ["src/views/boards/index.tsx", 90]
     ],
@@ -7964,7 +7964,7 @@
     "message": "You're not a member of this board yet. Ask a board admin to add you.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/members/index.tsx", 252]],
+    "origin": [["src/views/board/members/index.tsx", 251]],
     "translation": "Вы пока не являетесь участником этой доски. Попросите администратора доски добавить вас."
   },
   "2SePRT": {
