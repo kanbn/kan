@@ -131,8 +131,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 184],
-      ["src/views/members/components/InviteMemberForm.tsx", 196]
+      ["src/views/members/components/InviteMemberForm.tsx", 189],
+      ["src/views/members/components/InviteMemberForm.tsx", 201]
     ],
     "translation": "$10/miesiąc"
   },
@@ -140,7 +140,7 @@
     "message": "$8/month",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 196]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 201]],
     "translation": "$8/miesiąc"
   },
   "zMlxCA": {
@@ -372,9 +372,9 @@
     "comments": [],
     "origin": [
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 109],
-      ["src/views/board/members/index.tsx", 242],
+      ["src/views/board/members/index.tsx", 245],
       ["src/views/card/components/MemberSelector.tsx", 138],
-      ["src/views/members/components/InviteMemberForm.tsx", 261]
+      ["src/views/members/components/InviteMemberForm.tsx", 266]
     ],
     "translation": "Dodaj członka"
   },
@@ -487,7 +487,7 @@
       "billingType": ["billingType"]
     },
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 338]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 343]],
     "translation": "Dodanie nowego członka będzie kosztować dodatkowo {price} ({billingType}) za miejsce."
   },
   "D7/JvJ": {
@@ -502,9 +502,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 175],
-      ["src/views/board/members/index.tsx", 191],
-      ["src/views/members/index.tsx", 224],
+      ["src/views/board/members/index.tsx", 178],
+      ["src/views/board/members/index.tsx", 194],
+      ["src/views/members/index.tsx", 230],
       ["src/views/settings/components/RolePermissions.tsx", 20]
     ],
     "translation": "Administrator"
@@ -555,7 +555,7 @@
     "message": "All member permission overrides have been reset to their role defaults.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 28]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 31]],
     "translation": "Wszystkie nadpisania uprawnień członków zostały zresetowane do domyślnych ustawień ról."
   },
   "ZAs2NN": {
@@ -587,7 +587,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceEmailVisibilityForm.tsx",
-        47
+        54
       ]
     ],
     "translation": "Pozwól członkom workspace widzieć adresy e-mail innych osób"
@@ -636,14 +636,14 @@
     "message": "Annual",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 75]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 78]],
     "translation": "Rocznie"
   },
   "3bqt9U": {
     "message": "Anyone with this link can join your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 312]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 317]],
     "translation": "Każdy, kto ma ten link, może dołączyć do twojego workspace"
   },
   "OZtEcz": {
@@ -733,7 +733,7 @@
     },
     "comments": [],
     "origin": [
-      ["src/views/members/components/DeleteMemberConfirmation.tsx", 51]
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 56]
     ],
     "translation": "Czy na pewno chcesz usunąć {entityLabel}?"
   },
@@ -755,7 +755,7 @@
     },
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 62]
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 71]
     ],
     "translation": "Czy na pewno chcesz usunąć workspace {0}?"
   },
@@ -869,7 +869,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/Filters.tsx", 220],
-      ["src/views/onboarding/workspace-details/index.tsx", 284]
+      ["src/views/onboarding/workspace-details/index.tsx", 307]
     ],
     "translation": "Wstecz"
   },
@@ -943,21 +943,21 @@
     "message": "Best for teams who want to collaborate and move faster together.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 98]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 101]],
     "translation": "Najlepsze dla zespołów, które chcą współpracować i działać szybciej razem."
   },
   "ARvBT/": {
     "message": "billed annually",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 197]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 202]],
     "translation": "rozliczane rocznie"
   },
   "+VoTOr": {
     "message": "billed monthly",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 197]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 202]],
     "translation": "rozliczane miesięcznie"
   },
   "R+w/Va": {
@@ -967,7 +967,7 @@
     "origin": [
       ["src/components/SettingsLayout.tsx", 58],
       ["src/views/boards/components/TemplateBoards.tsx", 68],
-      ["src/views/settings/BillingSettings.tsx", 88]
+      ["src/views/settings/BillingSettings.tsx", 91]
     ],
     "translation": "Rozliczenia"
   },
@@ -975,7 +975,7 @@
     "message": "Billing portal",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/BillingSettings.tsx", 98]],
+    "origin": [["src/views/settings/BillingSettings.tsx", 101]],
     "translation": "Portal rozliczeniowy"
   },
   "OLMhPm": {
@@ -998,7 +998,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 861],
-      ["src/views/board/members/index.tsx", 228],
+      ["src/views/board/members/index.tsx", 231],
       ["src/views/card/index.tsx", 361],
       ["src/views/public/board/index.tsx", 125]
     ],
@@ -1025,7 +1025,7 @@
     "message": "Board member options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/members/index.tsx", 212]],
+    "origin": [["src/views/board/members/index.tsx", 215]],
     "translation": "Opcje członka tablicy"
   },
   "tKo0Sh": {
@@ -1034,7 +1034,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/BoardDropdown.tsx", 151],
-      ["src/views/board/members/index.tsx", 233]
+      ["src/views/board/members/index.tsx", 236]
     ],
     "translation": "Członkowie tablicy"
   },
@@ -1044,7 +1044,7 @@
       "0": ["board?.name ?? t`Board`"]
     },
     "comments": [],
-    "origin": [["src/views/board/members/index.tsx", 228]],
+    "origin": [["src/views/board/members/index.tsx", 231]],
     "translation": "Członkowie tablicy | {0}"
   },
   "wE3hGS": {
@@ -1166,7 +1166,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 101],
+      ["src/components/SideNavigation.tsx", 103],
       ["src/utils/permission-category-label.ts", 12],
       ["src/views/boards/index.tsx", 58],
       ["src/views/boards/index.tsx", 63],
@@ -1475,8 +1475,8 @@
       ["src/views/card/components/DeleteCardConfirmation.tsx", 86],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 68],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 77],
-      ["src/views/members/components/DeleteMemberConfirmation.tsx", 59],
-      ["src/views/onboarding/select-plan/index.tsx", 246],
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 64],
+      ["src/views/onboarding/select-plan/index.tsx", 249],
       ["src/views/settings/components/Avatar.tsx", 287],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 206],
       [
@@ -1485,7 +1485,7 @@
       ],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 88],
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 75],
-      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 98]
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 107]
     ],
     "translation": "Anuluj"
   },
@@ -1640,7 +1640,7 @@
     "message": "Choose a plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 157]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 160]],
     "translation": "Wybierz plan"
   },
   "5EMoSo": {
@@ -1648,8 +1648,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 373],
-      ["src/views/settings/BillingSettings.tsx", 80]
+      ["src/views/members/components/InviteMemberForm.tsx", 378],
+      ["src/views/settings/BillingSettings.tsx", 83]
     ],
     "translation": "Wybierz plan"
   },
@@ -1669,7 +1669,7 @@
     "message": "Clear any custom member permissions so that all members only inherit permissions from their role defaults.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 69]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 72]],
     "translation": "Wyczyść wszelkie niestandardowe uprawnienia członka, aby wszyscy członkowie dziedziczyli uprawnienia tylko z domyślnych ról."
   },
   "jL82rC": {
@@ -1681,7 +1681,7 @@
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
         47
       ],
-      ["src/views/settings/PermissionsSettings.tsx", 82]
+      ["src/views/settings/PermissionsSettings.tsx", 85]
     ],
     "translation": "Wyczyść niestandardowe uprawnienia"
   },
@@ -1827,7 +1827,7 @@
     "message": "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 58]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 61]],
     "translation": "Skonfiguruj, które działania są dozwolone dla każdej roli w przestrzeni roboczej. Te uprawnienia dotyczą wszystkich członków z tą rolą."
   },
   "86XI28": {
@@ -1936,8 +1936,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 252],
-      ["src/views/onboarding/workspace-details/index.tsx", 301]
+      ["src/views/onboarding/select-plan/index.tsx", 255],
+      ["src/views/onboarding/workspace-details/index.tsx", 324]
     ],
     "translation": "Kontynuuj"
   },
@@ -2087,7 +2087,7 @@
     "message": "Create invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 361]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 366]],
     "translation": "Utwórz link zaproszenia"
   },
   "QtACvI": {
@@ -2162,8 +2162,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 227],
-      ["src/components/WorkspaceMenu.tsx", 177]
+      ["src/components/NewWorkspaceForm.tsx", 236],
+      ["src/components/WorkspaceMenu.tsx", 179]
     ],
     "translation": "Utwórz workspace"
   },
@@ -2244,7 +2244,7 @@
     "message": "Custom permissions",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 66]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 69]],
     "translation": "Niestandardowe uprawnienia"
   },
   "UirJfL": {
@@ -2284,7 +2284,7 @@
     "message": "Custom usernames require upgrading to a Team plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 238]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 261]],
     "translation": "Niestandardowe nazwy użytkowników wymagają uaktualnienia do planu Team"
   },
   "j9IZZ0": {
@@ -2322,7 +2322,7 @@
     "message": "Deactivate invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 360]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 365]],
     "translation": "Dezaktywuj link zaproszenia"
   },
   "bKzM8L": {
@@ -2428,9 +2428,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 106],
-      ["src/views/settings/WorkspaceSettings.tsx", 85],
-      ["src/views/settings/WorkspaceSettings.tsx", 96]
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 115],
+      ["src/views/settings/WorkspaceSettings.tsx", 87],
+      ["src/views/settings/WorkspaceSettings.tsx", 98]
     ],
     "translation": "Usuń workspace"
   },
@@ -2721,7 +2721,7 @@
     "comments": [],
     "origin": [
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 174],
-      ["src/views/members/index.tsx", 247]
+      ["src/views/members/index.tsx", 253]
     ],
     "translation": "Edytuj uprawnienia"
   },
@@ -2765,7 +2765,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 276],
+      ["src/views/members/components/InviteMemberForm.tsx", 281],
       ["src/views/settings/AccountSettings.tsx", 43]
     ],
     "translation": "E-mail"
@@ -2790,7 +2790,7 @@
     "message": "Email visibility",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/WorkspaceSettings.tsx", 73]],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 75]],
     "translation": "Widoczność e-maila"
   },
   "bFREhu": {
@@ -2806,7 +2806,7 @@
     "message": "Engineering",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 178]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 201]],
     "translation": "Inżynieria"
   },
   "0+ewPp": {
@@ -2909,7 +2909,7 @@
     "origin": [
       ["src/views/boards/components/NewBoardForm.tsx", 77],
       ["src/views/boards/components/NewBoardForm.tsx", 92],
-      ["src/views/members/components/InviteMemberForm.tsx", 244]
+      ["src/views/members/components/InviteMemberForm.tsx", 249]
     ],
     "translation": "Błąd"
   },
@@ -2933,14 +2933,14 @@
     "message": "Error creating invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 148]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 153]],
     "translation": "Błąd podczas tworzenia linku zaproszenia"
   },
   "USVCGU": {
     "message": "Error deactivating invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 166]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 171]],
     "translation": "Błąd podczas dezaktywacji linku zaproszenia"
   },
   "bqAQaT": {
@@ -2964,7 +2964,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 45]
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 53]
     ],
     "translation": "Błąd podczas usuwania przestrzeni roboczej"
   },
@@ -2987,8 +2987,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 105],
-      ["src/views/members/components/InviteMemberForm.tsx", 121]
+      ["src/views/members/components/InviteMemberForm.tsx", 110],
+      ["src/views/members/components/InviteMemberForm.tsx", 126]
     ],
     "translation": "Błąd podczas zapraszania członka"
   },
@@ -3013,7 +3013,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 63]
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 71]
     ],
     "translation": "Błąd podczas aktualizacji opisu przestrzeni roboczej"
   },
@@ -3022,7 +3022,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 58]
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 66]
     ],
     "translation": "Błąd podczas aktualizacji nazwy przestrzeni roboczej"
   },
@@ -3031,7 +3031,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 75]
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 84]
     ],
     "translation": "Błąd podczas aktualizacji adresu URL przestrzeni roboczej"
   },
@@ -3121,7 +3121,7 @@
     "message": "Failed to copy invite link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 245]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 250]],
     "translation": "Nie udało się skopiować linku do zaproszenia"
   },
   "53QYh8": {
@@ -3315,8 +3315,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 89],
-      ["src/views/onboarding/select-plan/index.tsx", 90],
+      ["src/views/onboarding/select-plan/index.tsx", 92],
+      ["src/views/onboarding/select-plan/index.tsx", 93],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 301],
       ["src/views/pricing/components/Pricing.tsx", 32],
       ["src/views/pricing/components/Pricing.tsx", 32],
@@ -3328,7 +3328,7 @@
     "message": "Free (1 member)",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/BillingSettings.tsx", 31]],
+    "origin": [["src/views/settings/BillingSettings.tsx", 34]],
     "translation": "Darmowy (1 członek)"
   },
   "uP4V6I": {
@@ -3343,8 +3343,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 344],
-      ["src/views/members/index.tsx", 315]
+      ["src/views/members/components/InviteMemberForm.tsx", 349],
+      ["src/views/members/index.tsx", 321]
     ],
     "translation": "Plan darmowy"
   },
@@ -3499,7 +3499,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 109],
+      ["src/components/SideNavigation.tsx", 111],
       ["src/pages/404.tsx", 44]
     ],
     "translation": "Przejdź do tablic"
@@ -3515,28 +3515,28 @@
     "message": "Go to members",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SideNavigation.tsx", 133]],
+    "origin": [["src/components/SideNavigation.tsx", 135]],
     "translation": "Przejdź do członków"
   },
   "1WuwiM": {
     "message": "Go to settings",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SideNavigation.tsx", 145]],
+    "origin": [["src/components/SideNavigation.tsx", 147]],
     "translation": "Przejdź do ustawień"
   },
   "csFbe+": {
     "message": "Go to templates",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SideNavigation.tsx", 121]],
+    "origin": [["src/components/SideNavigation.tsx", 123]],
     "translation": "Przejdź do szablonów"
   },
   "SUvm1Y": {
     "message": "Good for individuals starting out who just need the essentials.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 91]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 94]],
     "translation": "Dobry dla osób zaczynających, które potrzebują tylko podstaw."
   },
   "cdyS7J": {
@@ -3563,7 +3563,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/index.tsx", 226],
+      ["src/views/members/index.tsx", 232],
       ["src/views/settings/components/RolePermissions.tsx", 24]
     ],
     "translation": "Gość"
@@ -3673,7 +3673,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 92]
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 101]
     ],
     "translation": "Potwierdzam, że wszystkie dane przestrzeni roboczej zostaną trwale usunięte i chcę kontynuować."
   },
@@ -3766,7 +3766,7 @@
     "message": "in",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/CommandPallette.tsx", 177]],
+    "origin": [["src/components/CommandPallette.tsx", 156]],
     "translation": "w"
   },
   "WbTDwg": {
@@ -3826,7 +3826,7 @@
     "message": "Invalid email address",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 57]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 60]],
     "translation": "Nieprawidłowy adres e-mail"
   },
   "odFCYX": {
@@ -3840,21 +3840,21 @@
     "message": "Invite",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 334]],
+    "origin": [["src/views/members/index.tsx", 340]],
     "translation": "Zaproś"
   },
   "KLJ4eD": {
     "message": "Invite link copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 238]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 243]],
     "translation": "Link do zaproszenia skopiowany"
   },
   "mZGPxt": {
     "message": "Invite link copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 239]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 244]],
     "translation": "Link do zaproszenia skopiowany do schowka"
   },
   "D9ROdV": {
@@ -3871,7 +3871,7 @@
     "message": "Invite links require a Team or Pro subscription. Please upgrade your workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 143]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 148]],
     "translation": "Linki do zaproszeń wymagają subskrypcji Team lub Pro. Zaktualizuj swój workspace."
   },
   "+djOzj": {
@@ -3880,7 +3880,7 @@
     "comments": [],
     "origin": [
       ["src/views/card/components/MemberSelector.tsx", 115],
-      ["src/views/members/components/InviteMemberForm.tsx", 381]
+      ["src/views/members/components/InviteMemberForm.tsx", 386]
     ],
     "translation": "Zaproś członka"
   },
@@ -3896,7 +3896,7 @@
     "message": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 347]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 352]],
     "translation": "Zapraszanie członków wymaga planu Team. Zostaniesz przekierowany, aby ulepszyć swój obszar roboczy."
   },
   "qPP4lD": {
@@ -3951,7 +3951,7 @@
     "comments": [],
     "origin": [
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 57],
-      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 67]
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 76]
     ],
     "translation": "Pamiętaj, że tej akcji nie można cofnąć."
   },
@@ -4239,7 +4239,7 @@
     "message": "Marketing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 178]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 201]],
     "translation": "Marketing"
   },
   "agPptk": {
@@ -4260,7 +4260,7 @@
     "message": "member",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/BillingSettings.tsx", 40]],
+    "origin": [["src/views/settings/BillingSettings.tsx", 43]],
     "translation": "członek"
   },
   "OvoEq7": {
@@ -4268,11 +4268,11 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 175],
-      ["src/views/board/members/index.tsx", 192],
+      ["src/views/board/members/index.tsx", 178],
+      ["src/views/board/members/index.tsx", 195],
       ["src/views/card/components/ActivityList.tsx", 56],
       ["src/views/card/components/ActivityList.tsx", 89],
-      ["src/views/members/index.tsx", 225],
+      ["src/views/members/index.tsx", 231],
       ["src/views/settings/components/RolePermissions.tsx", 22]
     ],
     "translation": "Członek"
@@ -4281,14 +4281,14 @@
     "message": "Member options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 265]],
+    "origin": [["src/views/members/index.tsx", 271]],
     "translation": "Opcje członka"
   },
   "GnG6Oy": {
     "message": "members",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/BillingSettings.tsx", 40]],
+    "origin": [["src/views/settings/BillingSettings.tsx", 43]],
     "translation": "członków"
   },
   "wlQNTg": {
@@ -4296,13 +4296,13 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 125],
+      ["src/components/SideNavigation.tsx", 127],
       ["src/utils/permission-category-label.ts", 20],
       ["src/views/board/components/Filters.tsx", 151],
       ["src/views/board/components/NewCardForm.tsx", 491],
       ["src/views/card/components/MemberSelector.tsx", 116],
       ["src/views/card/index.tsx", 149],
-      ["src/views/members/index.tsx", 287],
+      ["src/views/members/index.tsx", 293],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 90]
     ],
     "translation": "Członkowie"
@@ -4313,7 +4313,7 @@
       "0": ["workspace.name ?? t`Workspace`"]
     },
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 282]],
+    "origin": [["src/views/members/index.tsx", 288]],
     "translation": "Członkowie | {0}"
   },
   "/bZzdR": {
@@ -4330,7 +4330,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWeekStartDayForm.tsx", 53]
+      ["src/views/settings/components/UpdateWeekStartDayForm.tsx", 62]
     ],
     "translation": "Poniedziałek"
   },
@@ -4339,7 +4339,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 74],
+      ["src/views/onboarding/select-plan/index.tsx", 77],
       ["src/views/pricing/components/Pricing.tsx", 14],
       ["src/views/pricing/index.tsx", 20]
     ],
@@ -4349,7 +4349,7 @@
     "message": "monthly billing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 185]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 190]],
     "translation": "rozliczenie miesięczne"
   },
   "sZ/WDz": {
@@ -4552,7 +4552,7 @@
     "message": "New workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 146]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 155]],
     "translation": "Nowy workspace"
   },
   "5ACX4z": {
@@ -4675,7 +4675,7 @@
       "debouncedQuery": ["debouncedQuery"]
     },
     "comments": [],
-    "origin": [["src/components/CommandPallette.tsx", 193]],
+    "origin": [["src/components/CommandPallette.tsx", 172]],
     "translation": "Nie znaleziono wyników dla „{debouncedQuery}”."
   },
   "Q9pQaX": {
@@ -4733,14 +4733,14 @@
     "message": "Once you delete your workspace, there is no going back. This action cannot be undone.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/WorkspaceSettings.tsx", 88]],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 90]],
     "translation": "Po usunięciu workspace'a nie będzie można tego cofnąć. Tej operacji nie da się odwrócić."
   },
   "69b7aE": {
     "message": "Open command menu",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/WorkspaceMenu.tsx", 37]],
+    "origin": [["src/components/WorkspaceMenu.tsx", 39]],
     "translation": "Otwórz menu poleceń"
   },
   "cFQEU/": {
@@ -4808,7 +4808,7 @@
     "message": "Overrides cleared",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 27]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 30]],
     "translation": "Nadpisania usunięte"
   },
   "SPLN9O": {
@@ -4895,7 +4895,7 @@
     "message": "Paused",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 233]],
+    "origin": [["src/views/members/index.tsx", 239]],
     "translation": "Wstrzymane"
   },
   "UbYdrA": {
@@ -4912,7 +4912,7 @@
     "message": "Pending",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 233]],
+    "origin": [["src/views/members/index.tsx", 239]],
     "translation": "Oczekujące"
   },
   "oVBq1w": {
@@ -4985,14 +4985,14 @@
     "message": "Pick a plan to get started. All paid plans include a 14-day free trial.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 162]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 165]],
     "translation": "Wybierz plan, aby rozpocząć. Wszystkie płatne plany zawierają 14-dniowy bezpłatny okres próbny."
   },
   "GdgCoi": {
     "message": "Plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/BillingSettings.tsx", 66]],
+    "origin": [["src/views/settings/BillingSettings.tsx", 69]],
     "translation": "Plan"
   },
   "Iqh0Uv": {
@@ -5088,7 +5088,7 @@
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 28],
       ["src/components/FeedbackModal.tsx", 42],
-      ["src/components/NewWorkspaceForm.tsx", 110],
+      ["src/components/NewWorkspaceForm.tsx", 119],
       ["src/views/board/components/BoardDropdown.tsx", 80],
       ["src/views/board/components/NewCardForm.tsx", 204],
       ["src/views/board/components/NewListForm.tsx", 97],
@@ -5104,7 +5104,7 @@
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         37
       ],
-      ["src/views/board/members/index.tsx", 85],
+      ["src/views/board/members/index.tsx", 88],
       ["src/views/boards/components/ImportBoardsForm.tsx", 243],
       ["src/views/boards/components/ImportBoardsForm.tsx", 395],
       ["src/views/card/components/AttachmentThumbnails.tsx", 74],
@@ -5125,22 +5125,22 @@
       ["src/views/card/components/NewCommentForm.tsx", 43],
       ["src/views/card/index.tsx", 259],
       ["src/views/card/index.tsx", 272],
-      ["src/views/members/components/DeleteMemberConfirmation.tsx", 31],
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 36],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 58],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 80],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 104],
-      ["src/views/members/components/InviteMemberForm.tsx", 122],
-      ["src/views/members/index.tsx", 72],
-      ["src/views/onboarding/workspace-details/index.tsx", 119],
-      ["src/views/onboarding/workspace-details/index.tsx", 167],
+      ["src/views/members/components/InviteMemberForm.tsx", 127],
+      ["src/views/members/index.tsx", 78],
+      ["src/views/onboarding/workspace-details/index.tsx", 139],
+      ["src/views/onboarding/workspace-details/index.tsx", 190],
       ["src/views/settings/components/Avatar.tsx", 200],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 40],
-      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 46],
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 54],
       ["src/views/settings/components/UpdateDisplayNameForm.tsx", 55],
-      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 64],
-      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 59],
-      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 76],
-      ["src/views/settings/PermissionsSettings.tsx", 42]
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 72],
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 67],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 85],
+      ["src/views/settings/PermissionsSettings.tsx", 45]
     ],
     "translation": "Spróbuj ponownie później lub skontaktuj się z obsługą klienta."
   },
@@ -5149,8 +5149,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 149],
-      ["src/views/members/components/InviteMemberForm.tsx", 167]
+      ["src/views/members/components/InviteMemberForm.tsx", 154],
+      ["src/views/members/components/InviteMemberForm.tsx", 172]
     ],
     "translation": "Spróbuj ponownie później."
   },
@@ -5243,8 +5243,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 323],
-      ["src/views/members/index.tsx", 312]
+      ["src/views/members/components/InviteMemberForm.tsx", 328],
+      ["src/views/members/index.tsx", 318]
     ],
     "translation": "Plan Pro"
   },
@@ -5252,7 +5252,7 @@
     "message": "Pro Plan ∞",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 335]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 340]],
     "translation": "Plan Pro ∞"
   },
   "0rPv1T": {
@@ -5351,7 +5351,7 @@
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         69
       ],
-      ["src/views/members/components/DeleteMemberConfirmation.tsx", 62]
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 67]
     ],
     "translation": "Usuń"
   },
@@ -5366,7 +5366,7 @@
     "message": "Remove from board",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/members/index.tsx", 202]],
+    "origin": [["src/views/board/members/index.tsx", 205]],
     "translation": "Usuń z tablicy"
   },
   "T/pF0Z": {
@@ -5380,7 +5380,7 @@
     "message": "Remove member",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 256]],
+    "origin": [["src/views/members/index.tsx", 262]],
     "translation": "Usuń członka"
   },
   "BZkYSt": {
@@ -5543,7 +5543,7 @@
       ["src/views/home/components/Footer.tsx", 36],
       ["src/views/home/components/Header.tsx", 13],
       ["src/views/home/components/Header.tsx", 28],
-      ["src/views/onboarding/workspace-details/index.tsx", 178]
+      ["src/views/onboarding/workspace-details/index.tsx", 201]
     ],
     "translation": "Mapa drogowa"
   },
@@ -5552,9 +5552,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 188],
-      ["src/views/board/members/index.tsx", 269],
-      ["src/views/members/index.tsx", 356]
+      ["src/views/board/members/index.tsx", 191],
+      ["src/views/board/members/index.tsx", 272],
+      ["src/views/members/index.tsx", 362]
     ],
     "translation": "Rola"
   },
@@ -5562,7 +5562,7 @@
     "message": "Role updated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 64]],
+    "origin": [["src/views/members/index.tsx", 70]],
     "translation": "Zaktualizowano rolę"
   },
   "RzxgOE": {
@@ -5594,7 +5594,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWeekStartDayForm.tsx", 54]
+      ["src/views/settings/components/UpdateWeekStartDayForm.tsx", 63]
     ],
     "translation": "Sobota"
   },
@@ -5634,21 +5634,21 @@
     "message": "Search",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/WorkspaceMenu.tsx", 102]],
+    "origin": [["src/components/WorkspaceMenu.tsx", 104]],
     "translation": "Szukaj"
   },
   "SkCNhl": {
     "message": "Search boards and cards...",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/CommandPallette.tsx", 105]],
+    "origin": [["src/components/CommandPallette.tsx", 84]],
     "translation": "Wyszukaj tablice i karty..."
   },
   "66Jmqh": {
     "message": "Seat limit reached",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 115]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 120]],
     "translation": "Osiągnięto limit miejsc"
   },
   "MpFIca": {
@@ -5656,8 +5656,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 326],
-      ["src/views/members/index.tsx", 323]
+      ["src/views/members/components/InviteMemberForm.tsx", 331],
+      ["src/views/members/index.tsx", 329]
     ],
     "translation": "miejsc"
   },
@@ -5853,7 +5853,7 @@
     "message": "Set up your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 196]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 219]],
     "translation": "Skonfiguruj swoją przestrzeń roboczą"
   },
   "Tz0i8g": {
@@ -5862,7 +5862,7 @@
     "comments": [],
     "origin": [
       ["src/components/SettingsLayout.tsx", 102],
-      ["src/components/SideNavigation.tsx", 137]
+      ["src/components/SideNavigation.tsx", 139]
     ],
     "translation": "Ustawienia"
   },
@@ -5884,7 +5884,7 @@
     "message": "Settings | Billing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/BillingSettings.tsx", 62]],
+    "origin": [["src/views/settings/BillingSettings.tsx", 65]],
     "translation": "Ustawienia | Rozliczenia"
   },
   "hYzsXr": {
@@ -5898,7 +5898,7 @@
     "message": "Settings | Permissions",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 51]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 54]],
     "translation": "Ustawienia | Uprawnienia"
   },
   "+h2faV": {
@@ -5912,7 +5912,7 @@
     "message": "Settings | Workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/WorkspaceSettings.tsx", 32]],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 34]],
     "translation": "Ustawienia | Workspace"
   },
   "CTqTgr": {
@@ -5971,8 +5971,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/select-plan/index.tsx", 325],
-      ["src/views/onboarding/workspace-details/index.tsx", 372]
+      ["src/views/onboarding/select-plan/index.tsx", 328],
+      ["src/views/onboarding/workspace-details/index.tsx", 395]
     ],
     "translation": "Wyloguj się"
   },
@@ -6072,7 +6072,7 @@
     "message": "Solo",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 88]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 91]],
     "translation": "Solo"
   },
   "whpQwW": {
@@ -6134,9 +6134,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 232],
-      ["src/components/SideNavigation.tsx", 233],
-      ["src/components/SideNavigation.tsx", 243]
+      ["src/components/SideNavigation.tsx", 234],
+      ["src/components/SideNavigation.tsx", 235],
+      ["src/components/SideNavigation.tsx", 245]
     ],
     "translation": "Rozpocznij bezpłatny okres próbny"
   },
@@ -6151,7 +6151,7 @@
     "message": "Start your 14-day free trial, cancel anytime.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 161]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 164]],
     "translation": "Rozpocznij 14-dniowy bezpłatny okres próbny, anuluj w dowolnym momencie."
   },
   "uAQUqI": {
@@ -6179,7 +6179,7 @@
     "message": "Subscription Required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 142]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 147]],
     "translation": "Wymagana subskrypcja"
   },
   "zzDlyQ": {
@@ -6198,7 +6198,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWeekStartDayForm.tsx", 52]
+      ["src/views/settings/components/UpdateWeekStartDayForm.tsx", 61]
     ],
     "translation": "Niedziela"
   },
@@ -6240,7 +6240,7 @@
     "message": "Team",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 95]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 98]],
     "translation": "Zespół"
   },
   "bff61F": {
@@ -6248,9 +6248,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/InviteMemberForm.tsx", 323],
-      ["src/views/members/components/InviteMemberForm.tsx", 335],
-      ["src/views/members/index.tsx", 314]
+      ["src/views/members/components/InviteMemberForm.tsx", 328],
+      ["src/views/members/components/InviteMemberForm.tsx", 340],
+      ["src/views/members/index.tsx", 320]
     ],
     "translation": "Plan zespołowy"
   },
@@ -6315,7 +6315,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 113],
+      ["src/components/SideNavigation.tsx", 115],
       ["src/views/boards/index.tsx", 58],
       ["src/views/boards/index.tsx", 63],
       ["src/views/home/components/Features.tsx", 115]
@@ -6459,7 +6459,7 @@
     "message": "The member's role has been updated.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 65]],
+    "origin": [["src/views/members/index.tsx", 71]],
     "translation": "Rola członka została zaktualizowana."
   },
   "gUX7b+": {
@@ -6497,7 +6497,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/members/components/DeleteMemberConfirmation.tsx", 54]
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 59]
     ],
     "translation": "Nie będą mogli uzyskać dostępu do tego workspace’a."
   },
@@ -6577,14 +6577,14 @@
     "message": "This URL has already been taken",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 82]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 95]],
     "translation": "Ten adres URL jest już zajęty"
   },
   "gKmoow": {
     "message": "This URL is reserved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 84]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 97]],
     "translation": "Ten adres URL jest zarezerwowany"
   },
   "OAYToL": {
@@ -6604,7 +6604,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 70]
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 79]
     ],
     "translation": "Spowoduje to trwałe usunięcie wszystkich danych powiązanych z tym workspace’em."
   },
@@ -6628,14 +6628,14 @@
     "message": "This workspace URL has already been taken",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 190]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 199]],
     "translation": "Ten adres URL workspace’a jest już zajęty"
   },
   "bJtM0P": {
     "message": "This workspace URL is reserved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 192]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 201]],
     "translation": "Ten adres URL workspace jest zarezerwowany"
   },
   "kp6L3T": {
@@ -6643,7 +6643,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 129]
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 138]
     ],
     "translation": "Ta nazwa użytkownika workspace jest już zajęta"
   },
@@ -6780,7 +6780,7 @@
     "message": "Unable to clear overrides",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 41]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 44]],
     "translation": "Nie można wyczyścić nadpisań"
   },
   "5MPY04": {
@@ -6846,8 +6846,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 109],
-      ["src/views/onboarding/workspace-details/index.tsx", 118]
+      ["src/components/NewWorkspaceForm.tsx", 118],
+      ["src/views/onboarding/workspace-details/index.tsx", 138]
     ],
     "translation": "Nie można utworzyć workspace"
   },
@@ -6930,7 +6930,7 @@
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         33
       ],
-      ["src/views/members/components/DeleteMemberConfirmation.tsx", 30]
+      ["src/views/members/components/DeleteMemberConfirmation.tsx", 35]
     ],
     "translation": "Nie można usunąć członka"
   },
@@ -6961,7 +6961,7 @@
     "message": "Unable to start checkout",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 166]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 189]],
     "translation": "Nie można rozpocząć procesu płatności"
   },
   "KNK33q": {
@@ -7075,8 +7075,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 81],
-      ["src/views/members/index.tsx", 71]
+      ["src/views/board/members/index.tsx", 84],
+      ["src/views/members/index.tsx", 77]
     ],
     "translation": "Nie można zaktualizować roli"
   },
@@ -7183,7 +7183,7 @@
     "message": "unlimited members",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/BillingSettings.tsx", 35]],
+    "origin": [["src/views/settings/BillingSettings.tsx", 38]],
     "translation": "nieograniczona liczba członków"
   },
   "mx8+1u": {
@@ -7205,7 +7205,7 @@
     "message": "Unlimited seats",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/index.tsx", 322]],
+    "origin": [["src/views/members/index.tsx", 328]],
     "translation": "Nielimitowane miejsca"
   },
   "Ws+3X+": {
@@ -7234,9 +7234,9 @@
     "origin": [
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 175],
       ["src/views/settings/components/UpdateDisplayNameForm.tsx", 84],
-      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 94],
-      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 90],
-      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 161]
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 103],
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 99],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 170]
     ],
     "translation": "Aktualizuj"
   },
@@ -7290,8 +7290,8 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/CalendarView.tsx", 555],
-      ["src/views/members/index.tsx", 299],
-      ["src/views/onboarding/select-plan/index.tsx", 251]
+      ["src/views/members/index.tsx", 305],
+      ["src/views/onboarding/select-plan/index.tsx", 254]
     ],
     "translation": "Uaktualnij"
   },
@@ -7317,7 +7317,7 @@
     "message": "Upgrade your plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 157]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 160]],
     "translation": "Ulepsz swój plan"
   },
   "b3Thhd": {
@@ -7352,8 +7352,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 31],
-      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 38]
+      ["src/components/NewWorkspaceForm.tsx", 37],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 44]
     ],
     "translation": "URL może zawierać tylko litery, cyfry i myślniki"
   },
@@ -7369,8 +7369,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 29],
-      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 36]
+      ["src/components/NewWorkspaceForm.tsx", 35],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 42]
     ],
     "translation": "URL nie może przekraczać 64 znaków"
   },
@@ -7379,8 +7379,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 27],
-      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 34]
+      ["src/components/NewWorkspaceForm.tsx", 33],
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 40]
     ],
     "translation": "URL musi mieć co najmniej 3 znaki"
   },
@@ -7403,8 +7403,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/members/index.tsx", 263],
-      ["src/views/members/index.tsx", 350]
+      ["src/views/board/members/index.tsx", 266],
+      ["src/views/members/index.tsx", 356]
     ],
     "translation": "Użytkownik"
   },
@@ -7412,7 +7412,7 @@
     "message": "User is already a member of this workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 106]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 111]],
     "translation": "Użytkownik jest już członkiem tego workspace"
   },
   "vSJd18": {
@@ -7433,7 +7433,7 @@
     "message": "View and manage your billing and subscription.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/BillingSettings.tsx", 91]],
+    "origin": [["src/views/settings/BillingSettings.tsx", 94]],
     "translation": "Zobacz i zarządzaj swoim rozliczeniem oraz subskrypcją."
   },
   "aiHZVP": {
@@ -7609,7 +7609,7 @@
     "message": "Week start day",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/WorkspaceSettings.tsx", 64]],
+    "origin": [["src/views/settings/WorkspaceSettings.tsx", 66]],
     "translation": "Pierwszy dzień tygodnia"
   },
   "9eF5oV": {
@@ -7656,9 +7656,9 @@
       ["src/utils/permission-category-label.ts", 10],
       ["src/views/board/index.tsx", 861],
       ["src/views/boards/index.tsx", 58],
-      ["src/views/members/index.tsx", 282],
+      ["src/views/members/index.tsx", 288],
       ["src/views/public/board/index.tsx", 125],
-      ["src/views/public/boards/index.tsx", 75]
+      ["src/views/public/boards/index.tsx", 78]
     ],
     "translation": "Przestrzeń robocza"
   },
@@ -7675,7 +7675,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 26]
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 32]
     ],
     "translation": "Przestrzeń robocza została usunięta"
   },
@@ -7684,8 +7684,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 261],
-      ["src/views/settings/WorkspaceSettings.tsx", 55]
+      ["src/views/onboarding/workspace-details/index.tsx", 284],
+      ["src/views/settings/WorkspaceSettings.tsx", 57]
     ],
     "translation": "Opis przestrzeni roboczej"
   },
@@ -7694,7 +7694,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 30]
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 35]
     ],
     "translation": "Opis przestrzeni roboczej nie może przekraczać 280 znaków"
   },
@@ -7703,7 +7703,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 27]
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 32]
     ],
     "translation": "Opis przestrzeni roboczej musi mieć co najmniej 3 znaki"
   },
@@ -7712,7 +7712,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 50]
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 56]
     ],
     "translation": "Opis przestrzeni roboczej zaktualizowany"
   },
@@ -7741,10 +7741,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 165],
-      ["src/views/onboarding/workspace-details/index.tsx", 205],
-      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 76],
-      ["src/views/settings/WorkspaceSettings.tsx", 36]
+      ["src/components/NewWorkspaceForm.tsx", 174],
+      ["src/views/onboarding/workspace-details/index.tsx", 228],
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 85],
+      ["src/views/settings/WorkspaceSettings.tsx", 38]
     ],
     "translation": "Nazwa przestrzeni roboczej"
   },
@@ -7753,8 +7753,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/NewWorkspaceForm.tsx", 23],
-      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 15]
+      ["src/components/NewWorkspaceForm.tsx", 29],
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 20]
     ],
     "translation": "Nazwa przestrzeni roboczej nie może przekraczać 64 znaków"
   },
@@ -7762,7 +7762,7 @@
     "message": "Workspace name is required",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 22]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 28]],
     "translation": "Nazwa przestrzeni roboczej jest wymagana"
   },
   "jZBHkN": {
@@ -7770,7 +7770,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 14]
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 19]
     ],
     "translation": "Nazwa przestrzeni roboczej musi mieć co najmniej 3 znaki"
   },
@@ -7779,7 +7779,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 45]
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 51]
     ],
     "translation": "Nazwa przestrzeni roboczej została zaktualizowana"
   },
@@ -7787,7 +7787,7 @@
     "message": "Workspace permissions",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 55]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 58]],
     "translation": "Uprawnienia przestrzeni roboczej"
   },
   "MN6YzG": {
@@ -7795,7 +7795,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 62]
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 69]
     ],
     "translation": "Slug przestrzeni roboczej został zaktualizowany"
   },
@@ -7804,8 +7804,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 118],
-      ["src/views/settings/WorkspaceSettings.tsx", 45]
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 127],
+      ["src/views/settings/WorkspaceSettings.tsx", 47]
     ],
     "translation": "URL przestrzeni roboczej"
   },
@@ -7822,7 +7822,7 @@
     "message": "workspace-url",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/NewWorkspaceForm.tsx", 179]],
+    "origin": [["src/components/NewWorkspaceForm.tsx", 188]],
     "translation": "workspace-url"
   },
   "4kJRen": {
@@ -7860,7 +7860,7 @@
     "message": "You can always change these later in settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 199]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 222]],
     "translation": "Zawsze możesz to później zmienić w ustawieniach."
   },
   "aelko+": {
@@ -7948,7 +7948,7 @@
     "message": "You need to be an admin to manage workspace permissions.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/PermissionsSettings.tsx", 88]],
+    "origin": [["src/views/settings/PermissionsSettings.tsx", 91]],
     "translation": "Musisz być administratorem, aby zarządzać uprawnieniami przestrzeni roboczej."
   },
   "ZhQoZn": {
@@ -7964,7 +7964,7 @@
     "message": "You're not a member of this board yet. Ask a board admin to add you.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/members/index.tsx", 249]],
+    "origin": [["src/views/board/members/index.tsx", 252]],
     "translation": "Nie jesteś jeszcze członkiem tej tablicy. Poproś administratora tablicy, aby Cię dodał."
   },
   "2SePRT": {
@@ -7987,7 +7987,7 @@
       "0": ["seatLimit ?? 0"]
     },
     "comments": [],
-    "origin": [["src/views/members/components/InviteMemberForm.tsx", 116]],
+    "origin": [["src/views/members/components/InviteMemberForm.tsx", 121]],
     "translation": "Osiągnięto limit {0} miejsc. Aby dodać więcej członków, zaktualizuj swój plan."
   },
   "8Zjc7q": {
@@ -8010,7 +8010,7 @@
     "message": "Your avatar",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/select-plan/index.tsx", 270]],
+    "origin": [["src/views/onboarding/select-plan/index.tsx", 273]],
     "translation": "Twój awatar"
   },
   "evg7+A": {
@@ -8134,14 +8134,14 @@
     "message": "Your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 332]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 355]],
     "translation": "Twoja przestrzeń robocza"
   },
   "j0o6ml": {
     "message": "Your workspace description",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 335]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 358]],
     "translation": "Opis Twojej przestrzeni roboczej"
   },
   "GnSSGm": {
@@ -8149,7 +8149,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 51]
+      ["src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx", 57]
     ],
     "translation": "Opis Twojego workspace został zaktualizowany."
   },
@@ -8158,7 +8158,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 27]
+      ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 33]
     ],
     "translation": "Twój workspace został usunięty."
   },
@@ -8167,7 +8167,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 46]
+      ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 52]
     ],
     "translation": "Nazwa Twojego workspace została zaktualizowana."
   },
@@ -8176,7 +8176,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 63]
+      ["src/views/settings/components/UpdateWorkspaceUrlForm.tsx", 70]
     ],
     "translation": "Slug Twojego workspace został zaktualizowany."
   },
@@ -8185,8 +8185,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 215],
-      ["src/views/onboarding/workspace-details/index.tsx", 216]
+      ["src/views/onboarding/workspace-details/index.tsx", 238],
+      ["src/views/onboarding/workspace-details/index.tsx", 239]
     ],
     "translation": "twoja-przestrzen"
   },

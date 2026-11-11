@@ -229,11 +229,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        184
+        189
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        196
+        201
       ]
     ],
     "translation": "$10/month"
@@ -245,7 +245,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        196
+        201
       ]
     ],
     "translation": "$8/month"
@@ -625,7 +625,7 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        242
+        245
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
@@ -633,7 +633,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        261
+        266
       ]
     ],
     "translation": "Add member"
@@ -831,7 +831,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        338
+        343
       ]
     ],
     "translation": "Adding a new member will cost an additional {price} ({billingType}) per seat."
@@ -855,15 +855,15 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        175
+        178
       ],
       [
         "src/views/board/members/index.tsx",
-        191
+        194
       ],
       [
         "src/views/members/index.tsx",
-        224
+        230
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -951,7 +951,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        28
+        31
       ]
     ],
     "translation": "All member permission overrides have been reset to their role defaults."
@@ -1000,7 +1000,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceEmailVisibilityForm.tsx",
-        47
+        54
       ]
     ],
     "translation": "Allow workspace members to see each other's email addresses"
@@ -1076,7 +1076,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        75
+        78
       ]
     ],
     "translation": "Annual"
@@ -1088,7 +1088,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        312
+        317
       ]
     ],
     "translation": "Anyone with this link can join your workspace"
@@ -1240,7 +1240,7 @@
     "origin": [
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        51
+        56
       ]
     ],
     "translation": "Are you sure want to remove {entityLabel}?"
@@ -1272,7 +1272,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
-        62
+        71
       ]
     ],
     "translation": "Are you sure you want to delete the workspace {0}?"
@@ -1448,7 +1448,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        284
+        307
       ]
     ],
     "translation": "Back"
@@ -1571,7 +1571,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        98
+        101
       ]
     ],
     "translation": "Best for teams who want to collaborate and move faster together."
@@ -1583,7 +1583,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        197
+        202
       ]
     ],
     "translation": "billed annually"
@@ -1595,7 +1595,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        197
+        202
       ]
     ],
     "translation": "billed monthly"
@@ -1615,7 +1615,7 @@
       ],
       [
         "src/views/settings/BillingSettings.tsx",
-        88
+        91
       ]
     ],
     "translation": "Billing"
@@ -1627,7 +1627,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        98
+        101
       ]
     ],
     "translation": "Billing portal"
@@ -1667,7 +1667,7 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        228
+        231
       ],
       [
         "src/views/card/index.tsx",
@@ -1712,7 +1712,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        212
+        215
       ]
     ],
     "translation": "Board member options"
@@ -1728,7 +1728,7 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        233
+        236
       ]
     ],
     "translation": "Board members"
@@ -1744,7 +1744,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        228
+        231
       ]
     ],
     "translation": "Board members | {0}"
@@ -1945,7 +1945,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        101
+        103
       ],
       [
         "src/utils/permission-category-label.ts",
@@ -2473,11 +2473,11 @@
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        59
+        64
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        246
+        249
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -2501,7 +2501,7 @@
       ],
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
-        98
+        107
       ]
     ],
     "translation": "Cancel"
@@ -2769,7 +2769,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        157
+        160
       ]
     ],
     "translation": "Choose a plan"
@@ -2781,11 +2781,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        373
+        378
       ],
       [
         "src/views/settings/BillingSettings.tsx",
-        80
+        83
       ]
     ],
     "translation": "Choose plan"
@@ -2809,7 +2809,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        69
+        72
       ]
     ],
     "translation": "Clear any custom member permissions so that all members only inherit permissions from their role defaults."
@@ -2825,7 +2825,7 @@
       ],
       [
         "src/views/settings/PermissionsSettings.tsx",
-        82
+        85
       ]
     ],
     "translation": "Clear custom permissions"
@@ -3074,7 +3074,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        58
+        61
       ]
     ],
     "translation": "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role."
@@ -3255,11 +3255,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        252
+        255
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        301
+        324
       ]
     ],
     "translation": "Continue"
@@ -3503,7 +3503,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        361
+        366
       ]
     ],
     "translation": "Create invite link"
@@ -3627,11 +3627,11 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        227
+        236
       ],
       [
         "src/components/WorkspaceMenu.tsx",
-        177
+        179
       ]
     ],
     "translation": "Create workspace"
@@ -3764,7 +3764,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        66
+        69
       ]
     ],
     "translation": "Custom permissions"
@@ -3830,7 +3830,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        238
+        261
       ]
     ],
     "translation": "Custom usernames require upgrading to a Team plan"
@@ -3891,7 +3891,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        360
+        365
       ]
     ],
     "translation": "Deactivate invite link"
@@ -4079,15 +4079,15 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
-        106
+        115
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        85
+        87
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        96
+        98
       ]
     ],
     "translation": "Delete workspace"
@@ -4600,7 +4600,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        247
+        253
       ]
     ],
     "translation": "Edit permissions"
@@ -4672,7 +4672,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        276
+        281
       ],
       [
         "src/views/settings/AccountSettings.tsx",
@@ -4712,7 +4712,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        73
+        75
       ]
     ],
     "translation": "Email visibility"
@@ -4736,7 +4736,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        178
+        201
       ]
     ],
     "translation": "Engineering"
@@ -4904,7 +4904,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        244
+        249
       ]
     ],
     "translation": "Error"
@@ -4940,7 +4940,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        148
+        153
       ]
     ],
     "translation": "Error creating invite link"
@@ -4952,7 +4952,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        166
+        171
       ]
     ],
     "translation": "Error deactivating invite link"
@@ -4988,7 +4988,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
-        45
+        53
       ]
     ],
     "translation": "Error deleting workspace"
@@ -5024,11 +5024,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        105
+        110
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        121
+        126
       ]
     ],
     "translation": "Error inviting member"
@@ -5064,7 +5064,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
-        63
+        71
       ]
     ],
     "translation": "Error updating workspace description"
@@ -5076,7 +5076,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
-        58
+        66
       ]
     ],
     "translation": "Error updating workspace name"
@@ -5088,7 +5088,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        75
+        84
       ]
     ],
     "translation": "Error updating workspace URL"
@@ -5230,7 +5230,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        245
+        250
       ]
     ],
     "translation": "Failed to copy invite link"
@@ -5558,11 +5558,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        89
+        92
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        90
+        93
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -5590,7 +5590,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        31
+        34
       ]
     ],
     "translation": "Free (1 member)"
@@ -5614,11 +5614,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        344
+        349
       ],
       [
         "src/views/members/index.tsx",
-        315
+        321
       ]
     ],
     "translation": "Free Plan"
@@ -5882,7 +5882,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        109
+        111
       ],
       [
         "src/pages/404.tsx",
@@ -5910,7 +5910,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        133
+        135
       ]
     ],
     "translation": "Go to members"
@@ -5922,7 +5922,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        145
+        147
       ]
     ],
     "translation": "Go to settings"
@@ -5934,7 +5934,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        121
+        123
       ]
     ],
     "translation": "Go to templates"
@@ -5946,7 +5946,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        91
+        94
       ]
     ],
     "translation": "Good for individuals starting out who just need the essentials."
@@ -5986,7 +5986,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        226
+        232
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -6170,7 +6170,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
-        92
+        101
       ]
     ],
     "translation": "I acknowledge that all of the workspace data will be permanently deleted and want to proceed."
@@ -6322,7 +6322,7 @@
     "origin": [
       [
         "src/components/CommandPallette.tsx",
-        177
+        156
       ]
     ],
     "translation": "in"
@@ -6426,7 +6426,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        57
+        60
       ]
     ],
     "translation": "Invalid email address"
@@ -6450,7 +6450,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        334
+        340
       ]
     ],
     "translation": "Invite"
@@ -6462,7 +6462,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        238
+        243
       ]
     ],
     "translation": "Invite link copied"
@@ -6474,7 +6474,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        239
+        244
       ]
     ],
     "translation": "Invite link copied to clipboard"
@@ -6502,7 +6502,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        143
+        148
       ]
     ],
     "translation": "Invite links require a Team or Pro subscription. Please upgrade your workspace."
@@ -6518,7 +6518,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        381
+        386
       ]
     ],
     "translation": "Invite member"
@@ -6543,7 +6543,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        347
+        352
       ]
     ],
     "translation": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace."
@@ -6636,7 +6636,7 @@
       ],
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
-        67
+        76
       ]
     ],
     "translation": "Keep in mind that this action is irreversible."
@@ -7126,7 +7126,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        178
+        201
       ]
     ],
     "translation": "Marketing"
@@ -7162,7 +7162,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        40
+        43
       ]
     ],
     "translation": "member"
@@ -7174,11 +7174,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        175
+        178
       ],
       [
         "src/views/board/members/index.tsx",
-        192
+        195
       ],
       [
         "src/views/card/components/ActivityList.tsx",
@@ -7190,7 +7190,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        225
+        231
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -7206,7 +7206,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        265
+        271
       ]
     ],
     "translation": "Member options"
@@ -7218,7 +7218,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        40
+        43
       ]
     ],
     "translation": "members"
@@ -7230,7 +7230,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        125
+        127
       ],
       [
         "src/utils/permission-category-label.ts",
@@ -7254,7 +7254,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        287
+        293
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -7274,7 +7274,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        282
+        288
       ]
     ],
     "translation": "Members | {0}"
@@ -7298,7 +7298,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWeekStartDayForm.tsx",
-        53
+        62
       ]
     ],
     "translation": "Monday"
@@ -7310,7 +7310,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        74
+        77
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -7330,7 +7330,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        185
+        190
       ]
     ],
     "translation": "monthly billing"
@@ -7677,7 +7677,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        146
+        155
       ]
     ],
     "translation": "New workspace"
@@ -7889,7 +7889,7 @@
     "origin": [
       [
         "src/components/CommandPallette.tsx",
-        193
+        172
       ]
     ],
     "translation": "No results found for \"{debouncedQuery}\"."
@@ -7985,7 +7985,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        88
+        90
       ]
     ],
     "translation": "Once you delete your workspace, there is no going back. This action cannot be undone."
@@ -7997,7 +7997,7 @@
     "origin": [
       [
         "src/components/WorkspaceMenu.tsx",
-        37
+        39
       ]
     ],
     "translation": "Open command menu"
@@ -8109,7 +8109,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        27
+        30
       ]
     ],
     "translation": "Overrides cleared"
@@ -8249,7 +8249,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        233
+        239
       ]
     ],
     "translation": "Paused"
@@ -8277,7 +8277,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        233
+        239
       ]
     ],
     "translation": "Pending"
@@ -8401,7 +8401,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        162
+        165
       ]
     ],
     "translation": "Pick a plan to get started. All paid plans include a 14-day free trial."
@@ -8413,7 +8413,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        66
+        69
       ]
     ],
     "translation": "Plan"
@@ -8569,7 +8569,7 @@
       ],
       [
         "src/components/NewWorkspaceForm.tsx",
-        110
+        119
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
@@ -8621,7 +8621,7 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        85
+        88
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -8705,7 +8705,7 @@
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        31
+        36
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -8721,19 +8721,19 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        122
+        127
       ],
       [
         "src/views/members/index.tsx",
-        72
+        78
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        119
+        139
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        167
+        190
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -8745,7 +8745,7 @@
       ],
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
-        46
+        54
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
@@ -8753,19 +8753,19 @@
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
-        64
+        72
       ],
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
-        59
+        67
       ],
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        76
+        85
       ],
       [
         "src/views/settings/PermissionsSettings.tsx",
-        42
+        45
       ]
     ],
     "translation": "Please try again later, or contact customer support."
@@ -8777,11 +8777,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        149
+        154
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        167
+        172
       ]
     ],
     "translation": "Please try again later."
@@ -8958,11 +8958,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        323
+        328
       ],
       [
         "src/views/members/index.tsx",
-        312
+        318
       ]
     ],
     "translation": "Pro Plan"
@@ -8974,7 +8974,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        335
+        340
       ]
     ],
     "translation": "Pro Plan ∞"
@@ -9138,7 +9138,7 @@
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        62
+        67
       ]
     ],
     "translation": "Remove"
@@ -9162,7 +9162,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        202
+        205
       ]
     ],
     "translation": "Remove from board"
@@ -9186,7 +9186,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        256
+        262
       ]
     ],
     "translation": "Remove member"
@@ -9469,7 +9469,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        178
+        201
       ]
     ],
     "translation": "Roadmap"
@@ -9481,15 +9481,15 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        188
+        191
       ],
       [
         "src/views/board/members/index.tsx",
-        269
+        272
       ],
       [
         "src/views/members/index.tsx",
-        356
+        362
       ]
     ],
     "translation": "Role"
@@ -9501,7 +9501,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        64
+        70
       ]
     ],
     "translation": "Role updated"
@@ -9550,7 +9550,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWeekStartDayForm.tsx",
-        54
+        63
       ]
     ],
     "translation": "Saturday"
@@ -9618,7 +9618,7 @@
     "origin": [
       [
         "src/components/WorkspaceMenu.tsx",
-        102
+        104
       ]
     ],
     "translation": "Search"
@@ -9630,7 +9630,7 @@
     "origin": [
       [
         "src/components/CommandPallette.tsx",
-        105
+        84
       ]
     ],
     "translation": "Search boards and cards..."
@@ -9642,7 +9642,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        115
+        120
       ]
     ],
     "translation": "Seat limit reached"
@@ -9654,11 +9654,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        326
+        331
       ],
       [
         "src/views/members/index.tsx",
-        323
+        329
       ]
     ],
     "translation": "seats"
@@ -9986,7 +9986,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        196
+        219
       ]
     ],
     "translation": "Set up your workspace"
@@ -10002,7 +10002,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        137
+        139
       ]
     ],
     "translation": "Settings"
@@ -10038,7 +10038,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        62
+        65
       ]
     ],
     "translation": "Settings | Billing"
@@ -10062,7 +10062,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        51
+        54
       ]
     ],
     "translation": "Settings | Permissions"
@@ -10086,7 +10086,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        32
+        34
       ]
     ],
     "translation": "Settings | Workspace"
@@ -10186,11 +10186,11 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        325
+        328
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        372
+        395
       ]
     ],
     "translation": "Sign out"
@@ -10354,7 +10354,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        88
+        91
       ]
     ],
     "translation": "Solo"
@@ -10451,15 +10451,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        232
+        234
       ],
       [
         "src/components/SideNavigation.tsx",
-        233
+        235
       ],
       [
         "src/components/SideNavigation.tsx",
-        243
+        245
       ]
     ],
     "translation": "Start free trial"
@@ -10483,7 +10483,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        161
+        164
       ]
     ],
     "translation": "Start your 14-day free trial, cancel anytime."
@@ -10531,7 +10531,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        142
+        147
       ]
     ],
     "translation": "Subscription Required"
@@ -10563,7 +10563,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWeekStartDayForm.tsx",
-        52
+        61
       ]
     ],
     "translation": "Sunday"
@@ -10628,7 +10628,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        95
+        98
       ]
     ],
     "translation": "Team"
@@ -10640,15 +10640,15 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        323
+        328
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        335
+        340
       ],
       [
         "src/views/members/index.tsx",
-        314
+        320
       ]
     ],
     "translation": "Team Plan"
@@ -10756,7 +10756,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        113
+        115
       ],
       [
         "src/views/boards/index.tsx",
@@ -10999,7 +10999,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        65
+        71
       ]
     ],
     "translation": "The member's role has been updated."
@@ -11063,7 +11063,7 @@
     "origin": [
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        54
+        59
       ]
     ],
     "translation": "They won't be able to access this workspace."
@@ -11191,7 +11191,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        82
+        95
       ]
     ],
     "translation": "This URL has already been taken"
@@ -11203,7 +11203,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        84
+        97
       ]
     ],
     "translation": "This URL is reserved"
@@ -11227,7 +11227,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
-        70
+        79
       ]
     ],
     "translation": "This will result in the permanent deletion of all data associated with this workspace."
@@ -11263,7 +11263,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        190
+        199
       ]
     ],
     "translation": "This workspace URL has already been taken"
@@ -11275,7 +11275,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        192
+        201
       ]
     ],
     "translation": "This workspace URL is reserved"
@@ -11287,7 +11287,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        129
+        138
       ]
     ],
     "translation": "This workspace username has already been taken"
@@ -11511,7 +11511,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        41
+        44
       ]
     ],
     "translation": "Unable to clear overrides"
@@ -11627,11 +11627,11 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        109
+        118
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        118
+        138
       ]
     ],
     "translation": "Unable to create workspace"
@@ -11759,7 +11759,7 @@
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        30
+        35
       ]
     ],
     "translation": "Unable to remove member"
@@ -11807,7 +11807,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        166
+        189
       ]
     ],
     "translation": "Unable to start checkout"
@@ -11995,11 +11995,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        81
+        84
       ],
       [
         "src/views/members/index.tsx",
-        71
+        77
       ]
     ],
     "translation": "Unable to update role"
@@ -12187,7 +12187,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        35
+        38
       ]
     ],
     "translation": "unlimited members"
@@ -12224,7 +12224,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        322
+        328
       ]
     ],
     "translation": "Unlimited seats"
@@ -12274,15 +12274,15 @@
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
-        94
+        103
       ],
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
-        90
+        99
       ],
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        161
+        170
       ]
     ],
     "translation": "Update"
@@ -12374,11 +12374,11 @@
       ],
       [
         "src/views/members/index.tsx",
-        299
+        305
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
-        251
+        254
       ]
     ],
     "translation": "Upgrade"
@@ -12416,7 +12416,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        157
+        160
       ]
     ],
     "translation": "Upgrade your plan"
@@ -12472,11 +12472,11 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        31
+        37
       ],
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        38
+        44
       ]
     ],
     "translation": "URL can only contain letters, numbers, and hyphens"
@@ -12500,11 +12500,11 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        29
+        35
       ],
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        36
+        42
       ]
     ],
     "translation": "URL cannot exceed 64 characters"
@@ -12516,11 +12516,11 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        27
+        33
       ],
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        34
+        40
       ]
     ],
     "translation": "URL must be at least 3 characters long"
@@ -12556,11 +12556,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        263
+        266
       ],
       [
         "src/views/members/index.tsx",
-        350
+        356
       ]
     ],
     "translation": "User"
@@ -12572,7 +12572,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        106
+        111
       ]
     ],
     "translation": "User is already a member of this workspace"
@@ -12608,7 +12608,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        91
+        94
       ]
     ],
     "translation": "View and manage your billing and subscription."
@@ -12901,7 +12901,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        64
+        66
       ]
     ],
     "translation": "Week start day"
@@ -12989,7 +12989,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        282
+        288
       ],
       [
         "src/views/public/board/index.tsx",
@@ -12997,7 +12997,7 @@
       ],
       [
         "src/views/public/boards/index.tsx",
-        75
+        78
       ]
     ],
     "translation": "Workspace"
@@ -13022,7 +13022,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
-        26
+        32
       ]
     ],
     "translation": "Workspace deleted"
@@ -13034,11 +13034,11 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        261
+        284
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        55
+        57
       ]
     ],
     "translation": "Workspace description"
@@ -13050,7 +13050,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
-        30
+        35
       ]
     ],
     "translation": "Workspace description cannot exceed 280 characters"
@@ -13062,7 +13062,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
-        27
+        32
       ]
     ],
     "translation": "Workspace description must be at least 3 characters long"
@@ -13074,7 +13074,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
-        50
+        56
       ]
     ],
     "translation": "Workspace description updated"
@@ -13118,19 +13118,19 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        165
+        174
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        205
+        228
       ],
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
-        76
+        85
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        36
+        38
       ]
     ],
     "translation": "Workspace name"
@@ -13142,11 +13142,11 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        23
+        29
       ],
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
-        15
+        20
       ]
     ],
     "translation": "Workspace name cannot exceed 64 characters"
@@ -13158,7 +13158,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        22
+        28
       ]
     ],
     "translation": "Workspace name is required"
@@ -13170,7 +13170,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
-        14
+        19
       ]
     ],
     "translation": "Workspace name must be at least 3 characters long"
@@ -13182,7 +13182,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
-        45
+        51
       ]
     ],
     "translation": "Workspace name updated"
@@ -13194,7 +13194,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        55
+        58
       ]
     ],
     "translation": "Workspace permissions"
@@ -13206,7 +13206,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        62
+        69
       ]
     ],
     "translation": "Workspace slug updated"
@@ -13218,11 +13218,11 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        118
+        127
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        45
+        47
       ]
     ],
     "translation": "Workspace URL"
@@ -13246,7 +13246,7 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        179
+        188
       ]
     ],
     "translation": "workspace-url"
@@ -13310,7 +13310,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        199
+        222
       ]
     ],
     "translation": "You can always change these later in settings."
@@ -13469,7 +13469,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        88
+        91
       ]
     ],
     "translation": "You need to be an admin to manage workspace permissions."
@@ -13493,7 +13493,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        249
+        252
       ]
     ],
     "translation": "You're not a member of this board yet. Ask a board admin to add you."
@@ -13533,7 +13533,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        116
+        121
       ]
     ],
     "translation": "You've reached your {0}-seat limit. Please upgrade your plan to add more members."
@@ -13569,7 +13569,7 @@
     "origin": [
       [
         "src/views/onboarding/select-plan/index.tsx",
-        270
+        273
       ]
     ],
     "translation": "Your avatar"
@@ -13774,7 +13774,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        332
+        355
       ]
     ],
     "translation": "Your workspace"
@@ -13786,7 +13786,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        335
+        358
       ]
     ],
     "translation": "Your workspace description"
@@ -13798,7 +13798,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
-        51
+        57
       ]
     ],
     "translation": "Your workspace description has been updated."
@@ -13810,7 +13810,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
-        27
+        33
       ]
     ],
     "translation": "Your workspace has been deleted."
@@ -13822,7 +13822,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
-        46
+        52
       ]
     ],
     "translation": "Your workspace name has been updated."
@@ -13834,7 +13834,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        63
+        70
       ]
     ],
     "translation": "Your workspace slug has been updated."
@@ -13846,11 +13846,11 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        215
+        238
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        216
+        239
       ]
     ],
     "translation": "your-workspace"
