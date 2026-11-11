@@ -3,7 +3,7 @@
     "message": " (edited)",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Comment.tsx", 153]],
+    "origin": [["src/views/card/components/Comment.tsx", 155]],
     "translation": " (edytowano)"
   },
   "lGjicL": {
@@ -32,7 +32,7 @@
     "comments": [],
     "origin": [
       ["src/views/boards/index.tsx", 58],
-      ["src/views/card/index.tsx", 361]
+      ["src/views/card/index.tsx", 372]
     ],
     "translation": "{0} | {1}"
   },
@@ -69,7 +69,7 @@
       "0": ["labelPublicIds.length"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 569]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 572]],
     "translation": "{0} etykiety"
   },
   "9x4DAL": {
@@ -78,7 +78,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 897]],
+    "origin": [["src/views/board/index.tsx", 899]],
     "translation": "{0} nie znaleziono"
   },
   "0xWkkH": {
@@ -254,7 +254,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 520],
+      ["src/views/card/index.tsx", 531],
       ["src/views/public/board/CardModal.tsx", 211]
     ],
     "translation": "Aktywność"
@@ -321,7 +321,7 @@
     "comments": [],
     "origin": [
       ["src/views/card/components/AttachmentUpload.tsx", 125],
-      ["src/views/card/components/Dropdown.tsx", 124]
+      ["src/views/card/components/Dropdown.tsx", 126]
     ],
     "translation": "Dodaj checklistę"
   },
@@ -337,8 +337,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/Comment.tsx", 185],
-      ["src/views/card/components/NewCommentForm.tsx", 90]
+      ["src/views/card/components/Comment.tsx", 187],
+      ["src/views/card/components/NewCommentForm.tsx", 94]
     ],
     "translation": "Dodaj komentarz... (wpisz '/' aby otworzyć polecenia lub '@', aby wspomnieć)"
   },
@@ -361,8 +361,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/LabelSelector.tsx", 121],
-      ["src/views/card/components/LabelSelector.tsx", 128]
+      ["src/views/card/components/LabelSelector.tsx", 125],
+      ["src/views/card/components/LabelSelector.tsx", 132]
     ],
     "translation": "Dodaj etykietę"
   },
@@ -373,7 +373,7 @@
     "origin": [
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 109],
       ["src/views/board/members/index.tsx", 244],
-      ["src/views/card/components/MemberSelector.tsx", 140],
+      ["src/views/card/components/MemberSelector.tsx", 144],
       ["src/views/members/components/InviteMemberForm.tsx", 266]
     ],
     "translation": "Dodaj członka"
@@ -399,42 +399,42 @@
       "labelList": ["labelList"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 103]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 99]],
     "translation": "dodano {0} etykiety: <0>{labelList}</0>"
   },
   "h4VV67": {
     "message": "added a checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 133]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 129]],
     "translation": "dodano checklistę"
   },
   "O83K21": {
     "message": "added a checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 136]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 132]],
     "translation": "dodano element checklisty"
   },
   "T21jY/": {
     "message": "added a label to the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 129]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 125]],
     "translation": "dodano etykietę do karty"
   },
   "rs7L54": {
     "message": "added a member to the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 131]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 127]],
     "translation": "dodano członka do karty"
   },
   "5y6qY8": {
     "message": "added an attachment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 141]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 137]],
     "translation": "dodano załącznik"
   },
   "CujNX4": {
@@ -443,7 +443,7 @@
       "0": ["truncate(filename)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 279]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 275]],
     "translation": "dodano załącznik <0>{0}</0>"
   },
   "wakO3W": {
@@ -452,7 +452,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 209]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 205]],
     "translation": "dodano checklistę <0>{0}</0>"
   },
   "E0t3jO": {
@@ -461,7 +461,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 233]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 229]],
     "translation": "dodano element checklisty <0>{0}</0>"
   },
   "b5FKyH": {
@@ -470,7 +470,7 @@
       "0": ["truncate(label)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 193]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 189]],
     "translation": "dodano etykietę <0>{0}</0>"
   },
   "pL78ec": {
@@ -772,7 +772,7 @@
     "message": "Are you sure you want to delete this card?",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 76]],
+    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 79]],
     "translation": "Czy na pewno chcesz usunąć tę kartę?"
   },
   "Fpci8b": {
@@ -788,7 +788,7 @@
     "message": "Are you sure you want to delete this comment?",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/DeleteCommentConfirmation.tsx", 66]],
+    "origin": [["src/views/card/components/DeleteCommentConfirmation.tsx", 70]],
     "translation": "Czy na pewno chcesz usunąć ten komentarz?"
   },
   "kECVpo": {
@@ -827,7 +827,7 @@
       "0": ["truncate(displayName)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 173]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 169]],
     "translation": "przypisano <0>{0}</0> do karty"
   },
   "JUce1S": {
@@ -844,8 +844,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewCardForm.tsx", 632],
-      ["src/views/board/components/NewCardForm.tsx", 633]
+      ["src/views/board/components/NewCardForm.tsx", 635],
+      ["src/views/board/components/NewCardForm.tsx", 636]
     ],
     "translation": "Załącz pliki"
   },
@@ -997,9 +997,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 869],
+      ["src/views/board/index.tsx", 871],
       ["src/views/board/members/index.tsx", 230],
-      ["src/views/card/index.tsx", 361],
+      ["src/views/card/index.tsx", 372],
       ["src/views/public/board/index.tsx", 129]
     ],
     "translation": "Tablica"
@@ -1058,7 +1058,7 @@
     "message": "Board name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 887]],
+    "origin": [["src/views/board/index.tsx", 889]],
     "translation": "Nazwa tablicy"
   },
   "wewm3j": {
@@ -1463,7 +1463,7 @@
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 52],
       ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 176],
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 254],
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 264],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 44],
       ["src/views/board/components/MoveBoardForm.tsx", 95],
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 101],
@@ -1471,10 +1471,10 @@
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         66
       ],
-      ["src/views/card/components/Comment.tsx", 195],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 87],
+      ["src/views/card/components/Comment.tsx", 197],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 90],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 68],
-      ["src/views/card/components/DeleteCommentConfirmation.tsx", 77],
+      ["src/views/card/components/DeleteCommentConfirmation.tsx", 81],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 64],
       ["src/views/onboarding/select-plan/index.tsx", 248],
       ["src/views/settings/components/Avatar.tsx", 284],
@@ -1493,7 +1493,7 @@
     "message": "Card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/index.tsx", 361]],
+    "origin": [["src/views/card/index.tsx", 372]],
     "translation": "Karta"
   },
   "sU2uWc": {
@@ -1501,8 +1501,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 56],
-      ["src/views/card/components/Dropdown.tsx", 47]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 63],
+      ["src/views/card/components/Dropdown.tsx", 48]
     ],
     "translation": "Karta zduplikowana"
   },
@@ -1510,7 +1510,7 @@
     "message": "Card duplicated successfully.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 49]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 50]],
     "translation": "Karta została pomyślnie zduplikowana."
   },
   "AgE2vR": {
@@ -1525,8 +1525,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 424],
-      ["src/views/card/index.tsx", 461]
+      ["src/views/card/index.tsx", 435],
+      ["src/views/card/index.tsx", 472]
     ],
     "translation": "Nie znaleziono karty"
   },
@@ -1534,14 +1534,14 @@
     "message": "Card options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 168]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 172]],
     "translation": "Opcje karty"
   },
   "ZH7TVS": {
     "message": "Card title",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 435]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 438]],
     "translation": "Tytuł karty"
   },
   "rQXTmd": {
@@ -1549,9 +1549,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 449],
-      ["src/views/card/components/Dropdown.tsx", 75],
-      ["src/views/public/board/CardModal.tsx", 40]
+      ["src/views/board/index.tsx", 451],
+      ["src/views/card/components/Dropdown.tsx", 77],
+      ["src/views/public/board/CardModal.tsx", 42]
     ],
     "translation": "Adres URL karty skopiowany do schowka"
   },
@@ -1595,8 +1595,8 @@
     },
     "comments": [],
     "origin": [
-      ["src/views/card/components/ActivityList.tsx", 304],
-      ["src/views/card/components/ActivityList.tsx", 318]
+      ["src/views/card/components/ActivityList.tsx", 300],
+      ["src/views/card/components/ActivityList.tsx", 314]
     ],
     "translation": "zmienił termin na <0>{formattedDate}</0>"
   },
@@ -1710,7 +1710,7 @@
     "comments": [],
     "origin": [
       ["src/components/Dashboard.tsx", 278],
-      ["src/views/card/index.tsx", 415],
+      ["src/views/card/index.tsx", 426],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 184],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
     ],
@@ -1757,7 +1757,7 @@
     "message": "Comment options",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Comment.tsx", 161]],
+    "origin": [["src/views/card/components/Comment.tsx", 163]],
     "translation": "Opcje komentarza"
   },
   "VbyRUy": {
@@ -1796,7 +1796,7 @@
     "message": "completed a checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 138]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 134]],
     "translation": "ukończono element listy kontrolnej"
   },
   "29sSki": {
@@ -1805,7 +1805,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 250]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 246]],
     "translation": "ukończono element listy kontrolnej <0>{0}</0>"
   },
   "tOZp9v": {
@@ -1982,7 +1982,7 @@
     "message": "Copy card link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 108]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 110]],
     "translation": "Kopiuj link do karty"
   },
   "0utuU6": {
@@ -1990,7 +1990,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 244]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 254]
     ],
     "translation": "Kopiuj listy kontrolne"
   },
@@ -1999,7 +1999,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 208]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 218]
     ],
     "translation": "Kopiuj etykiety"
   },
@@ -2015,7 +2015,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 226]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 236]
     ],
     "translation": "Kopiuj członków"
   },
@@ -2030,7 +2030,7 @@
     "message": "Copy ticket ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 115]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 117]],
     "translation": "Skopiuj ID zgłoszenia"
   },
   "9PaIxv": {
@@ -2057,7 +2057,7 @@
     "comments": [],
     "origin": [
       ["src/components/LabelForm.tsx", 217],
-      ["src/views/board/components/NewCardForm.tsx", 664],
+      ["src/views/board/components/NewCardForm.tsx", 667],
       ["src/views/board/components/NewListForm.tsx", 162]
     ],
     "translation": "Utwórz kolejną"
@@ -2073,7 +2073,7 @@
     "message": "Create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 674]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 677]],
     "translation": "Utwórz kartę"
   },
   "d33Usy": {
@@ -2128,8 +2128,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewCardForm.tsx", 531],
-      ["src/views/card/components/LabelSelector.tsx", 107]
+      ["src/views/board/components/NewCardForm.tsx", 534],
+      ["src/views/card/components/LabelSelector.tsx", 111]
     ],
     "translation": "Utwórz nową etykietę"
   },
@@ -2139,7 +2139,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 145],
-      ["src/views/board/index.tsx", 1025]
+      ["src/views/board/index.tsx", 1027]
     ],
     "translation": "Utwórz nową listę"
   },
@@ -2178,7 +2178,7 @@
     "message": "created the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 125]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 121]],
     "translation": "utworzył(a) kartę"
   },
   "J5nbej": {
@@ -2203,7 +2203,7 @@
     "message": "Current list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ListSelector.tsx", 87]],
+    "origin": [["src/views/card/components/ListSelector.tsx", 90]],
     "translation": "Bieżąca lista"
   },
   "D3C4Yx": {
@@ -2350,9 +2350,9 @@
       ["src/components/LabelForm.tsx", 232],
       ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 52],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 47],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 93],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 96],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 71],
-      ["src/views/card/components/DeleteCommentConfirmation.tsx", 83],
+      ["src/views/card/components/DeleteCommentConfirmation.tsx", 87],
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 93],
       ["src/views/settings/components/WebhookList.tsx", 137]
     ],
@@ -2382,7 +2382,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/CardContextMenu.tsx", 75],
-      ["src/views/card/components/Dropdown.tsx", 153]
+      ["src/views/card/components/Dropdown.tsx", 157]
     ],
     "translation": "Usuń kartę"
   },
@@ -2397,7 +2397,7 @@
     "message": "Delete comment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Comment.tsx", 120]],
+    "origin": [["src/views/card/components/Comment.tsx", 122]],
     "translation": "Usuń komentarz"
   },
   "lYT7pQ": {
@@ -2438,14 +2438,14 @@
     "message": "deleted a checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 135]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 131]],
     "translation": "usunięto checklistę"
   },
   "W5r8Qh": {
     "message": "deleted a checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 140]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 136]],
     "translation": "usunięto element checklisty"
   },
   "BMkVQ3": {
@@ -2454,7 +2454,7 @@
       "0": ["truncate(fromTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 225]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 221]],
     "translation": "usunięto checklistę <0>{0}</0>"
   },
   "CHZ1jC": {
@@ -2463,7 +2463,7 @@
       "0": ["truncate(fromTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 268]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 264]],
     "translation": "usunięto element checklisty <0>{0}</0>"
   },
   "f8fH8W": {
@@ -2594,9 +2594,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDueDateModal.tsx", 36],
-      ["src/views/board/components/CardContextLabelsModal.tsx", 48],
-      ["src/views/board/components/CardContextMembersModal.tsx", 68],
+      ["src/views/board/components/CardContextDueDateModal.tsx", 39],
+      ["src/views/board/components/CardContextLabelsModal.tsx", 51],
+      ["src/views/board/components/CardContextMembersModal.tsx", 73],
       ["src/views/boards/components/TemplateBoards.tsx", 17],
       ["src/views/boards/components/TemplateBoards.tsx", 23],
       ["src/views/boards/components/TemplateBoards.tsx", 29],
@@ -2619,8 +2619,8 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/Filters.tsx", 178],
-      ["src/views/board/components/NewCardForm.tsx", 586],
-      ["src/views/card/index.tsx", 159]
+      ["src/views/board/components/NewCardForm.tsx", 589],
+      ["src/views/card/index.tsx", 165]
     ],
     "translation": "Termin wykonania"
   },
@@ -2657,7 +2657,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 266]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 276]
     ],
     "translation": "Duplikuj"
   },
@@ -2666,9 +2666,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 99],
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 109],
       ["src/views/board/components/CardContextMenu.tsx", 69],
-      ["src/views/card/components/Dropdown.tsx", 131]
+      ["src/views/card/components/Dropdown.tsx", 133]
     ],
     "translation": "Duplikuj kartę"
   },
@@ -2677,7 +2677,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 266]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 276]
     ],
     "translation": "Duplikowanie…"
   },
@@ -2705,7 +2705,7 @@
     "message": "Edit comment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Comment.tsx", 111]],
+    "origin": [["src/views/card/components/Comment.tsx", 113]],
     "translation": "Edytuj komentarz"
   },
   "dgr4Kq": {
@@ -2798,7 +2798,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 187]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 197]
     ],
     "translation": "Koniec listy"
   },
@@ -3422,7 +3422,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1007]],
+    "origin": [["src/views/board/index.tsx", 1009]],
     "translation": "Rozpocznij, tworząc nową listę"
   },
   "oW13KZ": {
@@ -3681,7 +3681,7 @@
     "message": "ID copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 92]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 94]],
     "translation": "ID skopiowane"
   },
   "iwr7AP": {
@@ -3879,7 +3879,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/MemberSelector.tsx", 117],
+      ["src/views/card/components/MemberSelector.tsx", 121],
       ["src/views/members/components/InviteMemberForm.tsx", 386]
     ],
     "translation": "Zaproś członka"
@@ -3967,11 +3967,11 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextLabelsModal.tsx", 31],
+      ["src/views/board/components/CardContextLabelsModal.tsx", 34],
       ["src/views/board/components/Filters.tsx", 160],
-      ["src/views/board/components/NewCardForm.tsx", 535],
-      ["src/views/card/components/LabelSelector.tsx", 108],
-      ["src/views/card/index.tsx", 139]
+      ["src/views/board/components/NewCardForm.tsx", 538],
+      ["src/views/card/components/LabelSelector.tsx", 112],
+      ["src/views/card/index.tsx", 145]
     ],
     "translation": "Etykiety"
   },
@@ -4092,9 +4092,9 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/BoardDropdown.tsx", 104],
-      ["src/views/board/index.tsx", 447],
-      ["src/views/card/components/Dropdown.tsx", 73],
-      ["src/views/public/board/CardModal.tsx", 38],
+      ["src/views/board/index.tsx", 449],
+      ["src/views/card/components/Dropdown.tsx", 75],
+      ["src/views/public/board/CardModal.tsx", 40],
       ["src/views/public/board/index.tsx", 81]
     ],
     "translation": "Link skopiowany"
@@ -4104,8 +4104,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 105],
-      ["src/views/card/index.tsx", 130]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 115],
+      ["src/views/card/index.tsx", 136]
     ],
     "translation": "Lista"
   },
@@ -4141,7 +4141,7 @@
     "message": "Load more activities",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 664]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 660]],
     "translation": "Załaduj więcej aktywności"
   },
   "0qyZ4b": {
@@ -4157,7 +4157,7 @@
     "message": "Loading...",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 664]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 660]],
     "translation": "Ładowanie..."
   },
   "N/bcWA": {
@@ -4214,7 +4214,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextMembersModal.tsx", 51],
+      ["src/views/board/components/CardContextMembersModal.tsx", 56],
       ["src/views/board/components/CardContextMenu.tsx", 39]
     ],
     "translation": "Zarządzaj członkami"
@@ -4223,7 +4223,7 @@
     "message": "marked a checklist item as incomplete",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 139]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 135]],
     "translation": "oznaczył(a) element listy kontrolnej jako nieukończony"
   },
   "jl3aEJ": {
@@ -4232,7 +4232,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 259]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 255]],
     "translation": "oznaczył(a) element listy kontrolnej <0>{0}</0> jako nieukończony"
   },
   "vo2a+a": {
@@ -4270,8 +4270,8 @@
     "origin": [
       ["src/views/board/members/index.tsx", 177],
       ["src/views/board/members/index.tsx", 194],
-      ["src/views/card/components/ActivityList.tsx", 56],
-      ["src/views/card/components/ActivityList.tsx", 89],
+      ["src/views/card/components/ActivityList.tsx", 52],
+      ["src/views/card/components/ActivityList.tsx", 85],
       ["src/views/members/index.tsx", 231],
       ["src/views/settings/components/RolePermissions.tsx", 22]
     ],
@@ -4299,9 +4299,9 @@
       ["src/components/SideNavigation.tsx", 127],
       ["src/utils/permission-category-label.ts", 20],
       ["src/views/board/components/Filters.tsx", 151],
-      ["src/views/board/components/NewCardForm.tsx", 493],
-      ["src/views/card/components/MemberSelector.tsx", 118],
-      ["src/views/card/index.tsx", 149],
+      ["src/views/board/components/NewCardForm.tsx", 496],
+      ["src/views/card/components/MemberSelector.tsx", 122],
+      ["src/views/card/index.tsx", 155],
       ["src/views/members/index.tsx", 293],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 90]
     ],
@@ -4377,7 +4377,7 @@
     "message": "Move to list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 72]],
+    "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 79]],
     "translation": "Przenieś do listy"
   },
   "S3wq2O": {
@@ -4394,14 +4394,14 @@
       "1": ["truncate(toList)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 161]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 157]],
     "translation": "przeniósł(-ęła) kartę z <0>{0}</0> do<1>{1}</1>"
   },
   "T7LJic": {
     "message": "moved the card to another list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 128]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 124]],
     "translation": "przeniósł(-ęła) kartę do innej listy"
   },
   "uEGGDs": {
@@ -4475,7 +4475,7 @@
     "message": "New card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 418]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 421]],
     "translation": "Nowa karta"
   },
   "cWcxrL": {
@@ -4505,7 +4505,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 134],
-      ["src/views/board/index.tsx", 949]
+      ["src/views/board/index.tsx", 951]
     ],
     "translation": "Nowa lista"
   },
@@ -4652,14 +4652,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1003]],
+    "origin": [["src/views/board/index.tsx", 1005]],
     "translation": "Brak list"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1008]],
+    "origin": [["src/views/board/index.tsx", 1010]],
     "translation": "Nie utworzono jeszcze żadnych list"
   },
   "i30J2U": {
@@ -5090,15 +5090,15 @@
       ["src/components/FeedbackModal.tsx", 42],
       ["src/components/NewWorkspaceForm.tsx", 119],
       ["src/views/board/components/BoardDropdown.tsx", 83],
-      ["src/views/board/components/NewCardForm.tsx", 206],
+      ["src/views/board/components/NewCardForm.tsx", 209],
       ["src/views/board/components/NewListForm.tsx", 97],
       ["src/views/board/components/NewTemplateForm.tsx", 63],
       ["src/views/board/components/NewTemplateForm.tsx", 79],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 79],
       ["src/views/board/components/VisibilityButton.tsx", 60],
       ["src/views/board/index.tsx", 300],
-      ["src/views/board/index.tsx", 357],
-      ["src/views/board/index.tsx", 394],
+      ["src/views/board/index.tsx", 358],
+      ["src/views/board/index.tsx", 396],
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 42],
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
@@ -5112,19 +5112,19 @@
       ["src/views/card/components/ChecklistItemRow.tsx", 111],
       ["src/views/card/components/ChecklistNameInput.tsx", 52],
       ["src/views/card/components/Checklists.tsx", 97],
-      ["src/views/card/components/Comment.tsx", 93],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 53],
+      ["src/views/card/components/Comment.tsx", 92],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 55],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 41],
-      ["src/views/card/components/DeleteCommentConfirmation.tsx", 46],
-      ["src/views/card/components/DueDateSelector.tsx", 66],
-      ["src/views/card/components/LabelSelector.tsx", 77],
-      ["src/views/card/components/ListSelector.tsx", 57],
-      ["src/views/card/components/MemberSelector.tsx", 84],
+      ["src/views/card/components/DeleteCommentConfirmation.tsx", 49],
+      ["src/views/card/components/DueDateSelector.tsx", 80],
+      ["src/views/card/components/LabelSelector.tsx", 80],
+      ["src/views/card/components/ListSelector.tsx", 60],
+      ["src/views/card/components/MemberSelector.tsx", 87],
       ["src/views/card/components/NewChecklistForm.tsx", 86],
       ["src/views/card/components/NewChecklistItemForm.tsx", 108],
-      ["src/views/card/components/NewCommentForm.tsx", 43],
-      ["src/views/card/index.tsx", 259],
-      ["src/views/card/index.tsx", 272],
+      ["src/views/card/components/NewCommentForm.tsx", 46],
+      ["src/views/card/index.tsx", 268],
+      ["src/views/card/index.tsx", 282],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 36],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 58],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 80],
@@ -5160,13 +5160,13 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/BoardDropdown.tsx", 109],
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 65],
-      ["src/views/board/components/CardContextMoveListModal.tsx", 44],
-      ["src/views/board/index.tsx", 456],
-      ["src/views/card/components/Dropdown.tsx", 56],
-      ["src/views/card/components/Dropdown.tsx", 82],
-      ["src/views/card/components/Dropdown.tsx", 101],
-      ["src/views/public/board/CardModal.tsx", 47],
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 72],
+      ["src/views/board/components/CardContextMoveListModal.tsx", 51],
+      ["src/views/board/index.tsx", 458],
+      ["src/views/card/components/Dropdown.tsx", 57],
+      ["src/views/card/components/Dropdown.tsx", 84],
+      ["src/views/card/components/Dropdown.tsx", 103],
+      ["src/views/public/board/CardModal.tsx", 49],
       ["src/views/public/board/index.tsx", 90]
     ],
     "translation": "Spróbuj ponownie."
@@ -5176,7 +5176,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 180]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 190]
     ],
     "translation": "Pozycja na liście (0 = pierwsza, puste pole = koniec)"
   },
@@ -5359,7 +5359,7 @@
     "message": "Remove file",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 651]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 654]],
     "translation": "Usuń plik"
   },
   "Tir5Ud": {
@@ -5390,28 +5390,28 @@
       "labelList": ["labelList"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 117]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 113]],
     "translation": "usunięto {0} etykiety: <0>{labelList}</0>"
   },
   "kQwvU8": {
     "message": "removed a label from the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 130]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 126]],
     "translation": "usunięto etykietę z karty"
   },
   "uck1tz": {
     "message": "removed a member from the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 132]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 128]],
     "translation": "usunięto członka z karty"
   },
   "KEim/+": {
     "message": "removed an attachment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 142]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 138]],
     "translation": "usunięto załącznik"
   },
   "zwTiVn": {
@@ -5420,7 +5420,7 @@
       "0": ["truncate(filename)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 289]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 285]],
     "translation": "usunięto załącznik <0>{0}</0>"
   },
   "Qh7QmR": {
@@ -5436,7 +5436,7 @@
       "0": ["truncate(label)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 201]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 197]],
     "translation": "usunięto etykietę <0>{0}</0>"
   },
   "aHRWVI": {
@@ -5444,8 +5444,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/ActivityList.tsx", 145],
-      ["src/views/card/components/ActivityList.tsx", 325]
+      ["src/views/card/components/ActivityList.tsx", 141],
+      ["src/views/card/components/ActivityList.tsx", 321]
     ],
     "translation": "usunięto termin"
   },
@@ -5453,7 +5453,7 @@
     "message": "renamed a checklist",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 134]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 130]],
     "translation": "zmieniono nazwę checklisty"
   },
   "3ZjRJY": {
@@ -5462,7 +5462,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 217]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 213]],
     "translation": "zmieniono nazwę checklisty <0>{0}</0>"
   },
   "NH54UR": {
@@ -5471,7 +5471,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 241]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 237]],
     "translation": "zmieniono nazwę elementu checklisty na <0>{0}</0>"
   },
   "Yx0Ud8": {
@@ -5604,7 +5604,7 @@
     "comments": [],
     "origin": [
       ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 183],
-      ["src/views/card/components/Comment.tsx", 202],
+      ["src/views/card/components/Comment.tsx", 204],
       ["src/views/settings/components/Avatar.tsx", 287]
     ],
     "translation": "Zapisz"
@@ -5703,7 +5703,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 118]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 128]
     ],
     "translation": "Wybierz listę"
   },
@@ -5765,7 +5765,7 @@
     "message": "self-assigned the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 170]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 166]],
     "translation": "samodzielnie przypisał(a) kartę"
   },
   "f2zPy/": {
@@ -5824,9 +5824,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDueDateModal.tsx", 20],
+      ["src/views/board/components/CardContextDueDateModal.tsx", 23],
       ["src/views/board/components/CardContextMenu.tsx", 57],
-      ["src/views/card/components/DueDateSelector.tsx", 123]
+      ["src/views/card/components/DueDateSelector.tsx", 137]
     ],
     "translation": "Ustaw termin"
   },
@@ -5846,7 +5846,7 @@
     "message": "set the due date",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 143]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 139]],
     "translation": "ustaw termin"
   },
   "JjEJSy": {
@@ -6079,7 +6079,7 @@
     "message": "Some attachments failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 338]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 341]],
     "translation": "Nie udało się przesłać niektórych załączników"
   },
   "J9+zIR": {
@@ -6165,14 +6165,14 @@
     "message": "Submit",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewCommentForm.tsx", 65]],
+    "origin": [["src/views/card/components/NewCommentForm.tsx", 69]],
     "translation": "Prześlij"
   },
   "DJUhvh": {
     "message": "Submit comment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewCommentForm.tsx", 97]],
+    "origin": [["src/views/card/components/NewCommentForm.tsx", 101]],
     "translation": "Wyślij komentarz"
   },
   "WYDptz": {
@@ -6270,8 +6270,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 869],
-      ["src/views/board/index.tsx", 906]
+      ["src/views/board/index.tsx", 871],
+      ["src/views/board/index.tsx", 908]
     ],
     "translation": "Szablon"
   },
@@ -6415,7 +6415,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 58]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 65]
     ],
     "translation": "Karta została zduplikowana."
   },
@@ -6426,7 +6426,7 @@
       "failedCount": ["failedCount"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 339]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 342]],
     "translation": "Karta została utworzona, ale nie udało się przesłać {failedCount} z {0} załączników."
   },
   "jlB2RY": {
@@ -6520,9 +6520,9 @@
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 47],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 39],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 79],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 82],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 63],
-      ["src/views/card/components/DeleteCommentConfirmation.tsx", 69]
+      ["src/views/card/components/DeleteCommentConfirmation.tsx", 73]
     ],
     "translation": "Tej operacji nie można cofnąć."
   },
@@ -6651,14 +6651,17 @@
     "message": "Ticket ID copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 94]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 96]],
     "translation": "ID zgłoszenia skopiowane do schowka"
   },
   "MHrjPM": {
     "message": "Title",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 127]],
+    "origin": [
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 127],
+      ["src/views/board/components/NewCardForm.tsx", 208]
+    ],
     "translation": "Tytuł"
   },
   "wK4OTM": {
@@ -6666,7 +6669,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 167]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 177]
     ],
     "translation": "Tytuł (opcjonalnie)"
   },
@@ -6757,14 +6760,14 @@
     "message": "Unable to add comment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewCommentForm.tsx", 42]],
+    "origin": [["src/views/card/components/NewCommentForm.tsx", 45]],
     "translation": "Nie można dodać komentarza"
   },
   "2Q871c": {
     "message": "Unable to add label",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/index.tsx", 271]],
+    "origin": [["src/views/card/index.tsx", 281]],
     "translation": "Nie można dodać etykiety"
   },
   "RHGJpb": {
@@ -6787,7 +6790,7 @@
     "message": "Unable to copy ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 99]],
+    "origin": [["src/views/card/components/Dropdown.tsx", 101]],
     "translation": "Nie udało się skopiować ID"
   },
   "W1ewR0": {
@@ -6796,9 +6799,9 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/BoardDropdown.tsx", 108],
-      ["src/views/board/index.tsx", 454],
-      ["src/views/card/components/Dropdown.tsx", 80],
-      ["src/views/public/board/CardModal.tsx", 45],
+      ["src/views/board/index.tsx", 456],
+      ["src/views/card/components/Dropdown.tsx", 82],
+      ["src/views/public/board/CardModal.tsx", 47],
       ["src/views/public/board/index.tsx", 88]
     ],
     "translation": "Nie można skopiować linku"
@@ -6807,7 +6810,7 @@
     "message": "Unable to create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 203]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 206]],
     "translation": "Nie można utworzyć karty"
   },
   "mHhffx": {
@@ -6862,7 +6865,7 @@
     "message": "Unable to delete card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 52]],
+    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 54]],
     "translation": "Nie można usunąć karty"
   },
   "DahTzR": {
@@ -6885,7 +6888,7 @@
     "message": "Unable to delete comment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/DeleteCommentConfirmation.tsx", 45]],
+    "origin": [["src/views/card/components/DeleteCommentConfirmation.tsx", 48]],
     "translation": "Nie można usunąć komentarza"
   },
   "23nvb2": {
@@ -6902,8 +6905,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 64],
-      ["src/views/card/components/Dropdown.tsx", 54]
+      ["src/views/board/components/CardContextDuplicateModal.tsx", 71],
+      ["src/views/card/components/Dropdown.tsx", 55]
     ],
     "translation": "Nie można zduplikować karty"
   },
@@ -6918,7 +6921,7 @@
     "message": "Unable to move card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 43]],
+    "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 50]],
     "translation": "Nie można przenieść karty"
   },
   "8yFGGF": {
@@ -7000,8 +7003,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 356],
-      ["src/views/card/index.tsx", 258]
+      ["src/views/board/index.tsx", 357],
+      ["src/views/card/index.tsx", 267]
     ],
     "translation": "Nie można zaktualizować karty"
   },
@@ -7023,7 +7026,7 @@
     "message": "Unable to update comment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Comment.tsx", 92]],
+    "origin": [["src/views/card/components/Comment.tsx", 91]],
     "translation": "Nie można zaktualizować komentarza"
   },
   "C56tim": {
@@ -7031,8 +7034,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 393],
-      ["src/views/card/components/DueDateSelector.tsx", 65]
+      ["src/views/board/index.tsx", 395],
+      ["src/views/card/components/DueDateSelector.tsx", 79]
     ],
     "translation": "Nie można zaktualizować terminu"
   },
@@ -7040,7 +7043,7 @@
     "message": "Unable to update labels",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/LabelSelector.tsx", 76]],
+    "origin": [["src/views/card/components/LabelSelector.tsx", 79]],
     "translation": "Nie można zaktualizować etykiet"
   },
   "I0gAKM": {
@@ -7049,7 +7052,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 299],
-      ["src/views/card/components/ListSelector.tsx", 56]
+      ["src/views/card/components/ListSelector.tsx", 59]
     ],
     "translation": "Nie można zaktualizować listy"
   },
@@ -7057,7 +7060,7 @@
     "message": "Unable to update members",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/MemberSelector.tsx", 83]],
+    "origin": [["src/views/card/components/MemberSelector.tsx", 86]],
     "translation": "Nie można zaktualizować członków"
   },
   "GYv20o": {
@@ -7100,14 +7103,14 @@
       "0": ["truncate(displayName)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 184]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 180]],
     "translation": "<0>{0}</0> został(a) odpięty(a) od karty"
   },
   "hAMddS": {
     "message": "unassigned themselves from the card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 181]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 177]],
     "translation": "Użytkownik odpiął się od karty"
   },
   "9Xigls": {
@@ -7251,28 +7254,28 @@
     "message": "updated a checklist item",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 137]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 133]],
     "translation": "zaktualizowano element listy kontrolnej"
   },
   "tGwwnq": {
     "message": "updated the description",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 127]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 123]],
     "translation": "zaktualizowano opis"
   },
   "RfgJqw": {
     "message": "updated the due date",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 144]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 140]],
     "translation": "zaktualizowano termin"
   },
   "V3MPSQ": {
     "message": "updated the title",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 126]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 122]],
     "translation": "zaktualizowano tytuł"
   },
   "zERArS": {
@@ -7281,7 +7284,7 @@
       "0": ["truncate(toTitle)"]
     },
     "comments": [],
-    "origin": [["src/views/card/components/ActivityList.tsx", 153]],
+    "origin": [["src/views/card/components/ActivityList.tsx", 149]],
     "translation": "zaktualizowano tytuł na <0>{0}</0>"
   },
   "kwkhPe": {
@@ -7654,7 +7657,7 @@
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
       ["src/utils/permission-category-label.ts", 10],
-      ["src/views/board/index.tsx", 869],
+      ["src/views/board/index.tsx", 871],
       ["src/views/boards/index.tsx", 58],
       ["src/views/members/index.tsx", 288],
       ["src/views/public/board/index.tsx", 129],
@@ -7906,8 +7909,8 @@
     "origin": [
       ["src/views/board/components/List.tsx", 133],
       ["src/views/board/components/VisibilityButton.tsx", 76],
-      ["src/views/board/index.tsx", 937],
-      ["src/views/board/index.tsx", 1014],
+      ["src/views/board/index.tsx", 939],
+      ["src/views/board/index.tsx", 1016],
       ["src/views/boards/components/BoardsList.tsx", 85],
       ["src/views/boards/index.tsx", 69],
       ["src/views/boards/index.tsx", 90]
