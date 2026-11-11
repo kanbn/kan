@@ -1,6 +1,8 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 
+import { useDeleteMember } from "@kan/api-client/hooks";
+
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -13,22 +15,24 @@ export function DeleteMemberConfirmation() {
   const { workspace } = useWorkspace();
   const { showPopup } = usePopup();
 
-  const deleteMember = api.member.delete.useMutation({
-    onSuccess: async () => {
-      closeModal();
-      try {
-        await utils.workspace.byId.refetch();
-      } catch (e) {
-        console.error(e);
-      }
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to remove member`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-      closeModal();
+  const deleteMember = useDeleteMember({
+    mutation: {
+      onSuccess: async () => {
+        closeModal();
+        try {
+          await utils.workspace.byId.refetch();
+        } catch (e) {
+          console.error(e);
+        }
+      },
+      onError: () => {
+        showPopup({
+          header: t`Unable to remove member`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+        closeModal();
+      },
     },
   });
 

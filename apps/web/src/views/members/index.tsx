@@ -10,6 +10,7 @@ import {
 import { twMerge } from "tailwind-merge";
 
 import type { Subscription } from "@kan/shared/utils";
+import { useUpdateMemberRole } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 import {
   getSeatLimit,
@@ -50,26 +51,28 @@ export default function MembersPage() {
 
   const utils = api.useUtils();
 
-  const updateRoleMutation = api.member.updateRole.useMutation({
-    onSuccess: async () => {
-      if (workspace.publicId && workspace.publicId.length >= 12) {
-        await utils.workspace.byId.invalidate({
-          workspacePublicId: workspace.publicId,
-        });
-      }
+  const updateRoleMutation = useUpdateMemberRole({
+    mutation: {
+      onSuccess: async () => {
+        if (workspace.publicId && workspace.publicId.length >= 12) {
+          await utils.workspace.byId.invalidate({
+            workspacePublicId: workspace.publicId,
+          });
+        }
 
-      showPopup({
-        header: t`Role updated`,
-        message: t`The member's role has been updated.`,
-        icon: "success",
-      });
-    },
-    onError: () => {
-      showPopup({
-        header: t`Unable to update role`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
+        showPopup({
+          header: t`Role updated`,
+          message: t`The member's role has been updated.`,
+          icon: "success",
+        });
+      },
+      onError: () => {
+        showPopup({
+          header: t`Unable to update role`,
+          message: t`Please try again later, or contact customer support.`,
+          icon: "error",
+        });
+      },
     },
   });
 
@@ -126,7 +129,7 @@ export default function MembersPage() {
       updateRoleMutation.mutate({
         workspacePublicId: workspace.publicId,
         memberPublicId,
-        role: newRole,
+        data: { role: newRole },
       });
     };
 

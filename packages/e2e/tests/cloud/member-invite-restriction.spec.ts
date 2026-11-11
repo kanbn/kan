@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { apiBaseURL } from "../support/api-base-url";
 import { AuthPage } from "../support/pages/auth-page";
 import { CloudOnboardingPage } from "../support/pages/cloud-onboarding-page";
 import { DashboardPage } from "../support/pages/dashboard-page";
@@ -49,29 +50,19 @@ test(
     expect(workspacePublicId).toBeTruthy();
 
     const inviteResponse = await page.request.post(
-      "/api/trpc/member.invite?batch=1",
+      `${apiBaseURL}/workspaces/${workspacePublicId}/members/invite`,
       {
-        data: {
-          "0": {
-            json: {
-              email: `e2e-invitee-${Date.now()}@kan-test.local`,
-              workspacePublicId,
-            },
-          },
-        },
+        data: { email: `e2e-invitee-${Date.now()}@kan-test.local` },
       },
     );
     expect(inviteResponse.status()).toBe(404);
 
     const linkResponse = await page.request.post(
-      "/api/trpc/member.createInviteLink?batch=1",
-      { data: { "0": { json: { workspacePublicId } } } },
+      `${apiBaseURL}/workspaces/${workspacePublicId}/invites`,
     );
     expect(linkResponse.status()).toBe(403);
-    const linkBody = (await linkResponse.json()) as [
-      { error: { json: { message: string } } },
-    ];
-    expect(linkBody[0].error.json.message).toBe(
+    const linkBody = (await linkResponse.json()) as { message: string };
+    expect(linkBody.message).toBe(
       "Invite links require a Team or Pro subscription",
     );
   },

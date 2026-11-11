@@ -13,6 +13,12 @@ import { z } from "zod";
 
 import type { InviteMemberInput } from "@kan/api/types";
 import type { Subscription } from "@kan/shared/utils";
+import {
+  useCreateInviteLink,
+  useDeactivateInviteLink,
+  useGetActiveInviteLink,
+  useInviteMember,
+} from "@kan/api-client/hooks";
 import { getSubscriptionByPlan } from "@kan/shared/utils";
 
 import Button from "~/components/Button";
@@ -22,6 +28,7 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { api } from "~/utils/api";
+import { getApiErrorStatus } from "~/utils/apiError";
 
 export function InviteMemberForm({
   subscriptions,
@@ -68,91 +75,99 @@ export function InviteMemberForm({
 
   // Fetch active invite link on component mount
   const { data: activeInviteLink, refetch: _refetchInviteLink } =
-    api.member.getActiveInviteLink.useQuery(
-      { workspacePublicId: workspace.publicId || "" },
-      { enabled: !!workspace.publicId },
-    );
+    useGetActiveInviteLink(workspace.publicId || "", {
+      query: { enabled: !!workspace.publicId },
+    });
 
   // Set initial state based on active invite link
   useEffect(() => {
     if (activeInviteLink) {
-      setIsShareInviteLinkEnabled(activeInviteLink.isActive);
-      setInviteLink(activeInviteLink.inviteLink ?? "");
+      setIsShareInviteLinkEnabled(activeInviteLink.data.isActive);
+      setInviteLink(activeInviteLink.data.inviteLink ?? "");
     }
   }, [activeInviteLink]);
 
-  const inviteMember = api.member.invite.useMutation({
-    onSuccess: async () => {
-      closeModal();
-      await utils.workspace.byId.refetch();
-      await refetchBoards();
-    },
-    onError: (error) => {
-      reset();
-      if (!isShareInviteLinkEnabled) closeModal();
+  const inviteMember = useInviteMember({
+    mutation: {
+      onSuccess: async () => {
+        closeModal();
+        await utils.workspace.byId.refetch();
+        await refetchBoards();
+      },
+      onError: (error) => {
+        reset();
+        if (!isShareInviteLinkEnabled) closeModal();
 
-      if (error.data?.code === "CONFLICT") {
-        showPopup({
-          header: t`Error inviting member`,
-          message: t`User is already a member of this workspace`,
-          icon: "error",
-        });
-      } else if (
-        error.data?.code === "FORBIDDEN" &&
-        error.message === "SEAT_LIMIT_REACHED"
-      ) {
-        showPopup({
-          header: t`Seat limit reached`,
-          message: t`You've reached your ${seatLimit ?? 0}-seat limit. Please upgrade your plan to add more members.`,
-          icon: "error",
-        });
-      } else {
-        showPopup({
-          header: t`Error inviting member`,
-          message: t`Please try again later, or contact customer support.`,
-          icon: "error",
-        });
-      }
+        const status = getApiErrorStatus(error);
+
+        if (status === 409) {
+          showPopup({
+            header: t`Error inviting member`,
+            message: t`User is already a member of this workspace`,
+            icon: "error",
+          });
+        } else if (
+          status === 403 &&
+          error instanceof Error &&
+          error.message === "SEAT_LIMIT_REACHED"
+        ) {
+          showPopup({
+            header: t`Seat limit reached`,
+            message: t`You've reached your ${seatLimit ?? 0}-seat limit. Please upgrade your plan to add more members.`,
+            icon: "error",
+          });
+        } else {
+          showPopup({
+            header: t`Error inviting member`,
+            message: t`Please try again later, or contact customer support.`,
+            icon: "error",
+          });
+        }
+      },
     },
   });
 
-  const createInviteLink = api.member.createInviteLink.useMutation({
-    onSuccess: (data) => {
-      setInviteLink(data.inviteLink);
-      setIsLoadingInviteLink(false);
-    },
-    onError: (error) => {
-      setIsLoadingInviteLink(false);
-      setIsShareInviteLinkEnabled(false);
+  const createInviteLink = useCreateInviteLink({
+    mutation: {
+      onSuccess: (result) => {
+        setInviteLink(result.data.inviteLink);
+        setIsLoadingInviteLink(false);
+      },
+      onError: (error) => {
+        setIsLoadingInviteLink(false);
+        setIsShareInviteLinkEnabled(false);
 
-      if (error.data?.code === "FORBIDDEN") {
+        if (getApiErrorStatus(error) === 403) {
+          showPopup({
+            header: t`Subscription Required`,
+            message: t`Invite links require a Team or Pro subscription. Please upgrade your workspace.`,
+            icon: "error",
+          });
+        } else {
+          showPopup({
+            header: t`Error creating invite link`,
+            message: t`Please try again later.`,
+            icon: "error",
+          });
+        }
+      },
+    },
+  });
+
+  const deactivateInviteLink = useDeactivateInviteLink({
+    mutation: {
+      onSuccess: () => {
+        setInviteLink("");
+        setIsLoadingInviteLink(false);
+      },
+      onError: () => {
+        setIsLoadingInviteLink(false);
         showPopup({
-          header: t`Subscription Required`,
-          message: t`Invite links require a Team or Pro subscription. Please upgrade your workspace.`,
-          icon: "error",
-        });
-      } else {
-        showPopup({
-          header: t`Error creating invite link`,
+          header: t`Error deactivating invite link`,
           message: t`Please try again later.`,
           icon: "error",
         });
-      }
-    },
-  });
-
-  const deactivateInviteLink = api.member.deactivateInviteLink.useMutation({
-    onSuccess: () => {
-      setInviteLink("");
-      setIsLoadingInviteLink(false);
-    },
-    onError: () => {
-      setIsLoadingInviteLink(false);
-      showPopup({
-        header: t`Error deactivating invite link`,
-        message: t`Please try again later.`,
-        icon: "error",
-      });
+      },
     },
   });
 
@@ -183,7 +198,10 @@ export function InviteMemberForm({
   }
 
   const onSubmit = (member: InviteMemberInput) => {
-    inviteMember.mutate(member);
+    inviteMember.mutate({
+      workspacePublicId: member.workspacePublicId,
+      data: { email: member.email },
+    });
   };
 
   const isFreePlan =
