@@ -16,17 +16,17 @@ export const customFetch = async <T>(
     ? await response.json().catch(() => undefined)
     : undefined;
 
-  // A lapsed or cleared session sends the browser to sign in, which is also
-  // what completes a logout.
+  // A lapsed or cleared session goes through /api/session/reset, which repairs
+  // a session the API can't see or signs the user out, then on to sign in.
   const { location } = globalThis as {
-    location?: { pathname: string; href: string };
+    location?: { pathname: string; search: string; href: string };
   };
   if (
     response.status === 401 &&
     location &&
     !location.pathname.startsWith("/login")
   ) {
-    location.href = "/login";
+    location.href = `/api/session/reset?next=${encodeURIComponent(location.pathname + location.search)}`;
   }
 
   if (!response.ok || !isJson) {
