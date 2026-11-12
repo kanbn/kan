@@ -1,6 +1,8 @@
 import { createZodDto } from "nestjs-zod";
 import { z } from "zod";
 
+import { memberStatuses } from "@kan/db/schema";
+
 const slugSchema = z
   .string()
   .min(1)
@@ -101,6 +103,7 @@ const boardDetailCardSchema = z.object({
     z.object({
       publicId: z.string(),
       email: z.string(),
+      status: z.enum(memberStatuses),
       user: z
         .object({
           name: z.string().nullable(),
@@ -131,6 +134,9 @@ export const BoardDetailSchema = z.object({
   visibility: z.enum(["private", "public"]),
   isArchived: z.boolean(),
   favorite: z.boolean(),
+  assignedMemberPublicIds: z
+    .array(z.string())
+    .describe("Members assigned to at least one card on the board."),
   workspace: z.object({
     publicId: z.string(),
     cardPrefix: z.string(),
@@ -138,7 +144,7 @@ export const BoardDetailSchema = z.object({
       z.object({
         publicId: z.string(),
         email: z.string(),
-        status: z.string(),
+        status: z.enum(memberStatuses),
         user: z
           .object({
             id: z.string().nullable(),

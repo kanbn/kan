@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { HiMiniPlus } from "react-icons/hi2";
 
+import type { CardDetailDtoOutputMembersItem } from "@kan/api-client/hooks";
 import { useToggleCardMember } from "@kan/api-client/hooks";
 
 import Avatar from "~/components/Avatar";
@@ -12,6 +13,8 @@ import { useBoardCache } from "~/utils/boardCache";
 import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
+type MemberStatus = CardDetailDtoOutputMembersItem["status"];
+
 interface MemberSelectorProps {
   cardPublicId: string;
   members: {
@@ -20,6 +23,10 @@ interface MemberSelectorProps {
     selected: boolean;
     leftIcon: React.ReactNode;
     imageUrl: string | undefined;
+    email: string;
+    userId: string | null;
+    name: string | null;
+    status: MemberStatus;
   }[];
   isLoading: boolean;
   disabled?: boolean;
@@ -51,8 +58,8 @@ export default function MemberSelector({
             (member) => member.publicId === update.workspaceMemberPublicId,
           );
 
-          const memberToAdd = oldCard.members.find(
-            (member) => member.publicId === update.workspaceMemberPublicId,
+          const memberToAdd = members.find(
+            (member) => member.key === update.workspaceMemberPublicId,
           );
 
           const updatedMembers = hasMember
@@ -64,10 +71,10 @@ export default function MemberSelector({
                 {
                   publicId: update.workspaceMemberPublicId,
                   email: memberToAdd?.email ?? "",
-                  deletedAt: null,
+                  status: memberToAdd?.status ?? "active",
                   user: {
-                    id: memberToAdd?.user?.id ?? "",
-                    name: memberToAdd?.user?.name ?? "",
+                    id: memberToAdd?.userId ?? null,
+                    name: memberToAdd?.name ?? null,
                   },
                 },
               ];
@@ -128,14 +135,19 @@ export default function MemberSelector({
           >
             {selectedMembers.length ? (
               <div className="isolate flex justify-end -space-x-1 overflow-hidden">
-                {selectedMembers.map(({ value, imageUrl }) => (
-                  <Avatar
-                    key={value}
-                    size="sm"
-                    name={value}
-                    imageUrl={imageUrl}
-                    email={value}
-                  />
+                {selectedMembers.map(({ key, value, imageUrl, status }) => (
+                  <span
+                    key={key}
+                    className={status === "paused" ? "opacity-50" : undefined}
+                    title={status === "paused" ? t`Paused` : undefined}
+                  >
+                    <Avatar
+                      size="sm"
+                      name={value}
+                      imageUrl={imageUrl}
+                      email={value}
+                    />
+                  </span>
                 ))}
               </div>
             ) : (

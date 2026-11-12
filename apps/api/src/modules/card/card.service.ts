@@ -17,6 +17,7 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
 import { mergeActivities } from "@kan/server/utils/activities";
 import { createAvatarUrlResolver } from "@kan/server/utils/avatarUrls";
+import { assertNoNewPausedMentions } from "@kan/server/utils/mention-permissions";
 import { sendMentionEmails } from "@kan/server/utils/notifications";
 import {
   assertBoardAccess,
@@ -117,9 +118,22 @@ export class CardService {
         `Members must be on the board to be assigned`,
       );
 
+    if (members.some((member) => member.status === "paused"))
+      throw new BadRequestException(
+        `Paused members cannot be assigned to cards`,
+      );
+
+    const description = normalizeDescription(input.description);
+    await assertNoNewPausedMentions(
+      db,
+      list.workspaceId,
+      null,
+      description ?? "",
+    );
+
     const newCard = await cardRepo.create(db, {
       title: input.title,
-      description: normalizeDescription(input.description),
+      description,
       createdBy: userId,
       listId: list.id,
       workspaceId: list.workspaceId,
@@ -246,6 +260,8 @@ export class CardService {
       type: card.boardType,
     });
 
+    await assertNoNewPausedMentions(db, card.workspaceId, null, input.comment);
+
     const newComment = await cardCommentRepo.create(db, {
       comment: input.comment,
       createdBy: userId,
@@ -314,6 +330,13 @@ export class CardService {
       workspaceId: card.workspaceId,
       type: card.boardType,
     });
+
+    await assertNoNewPausedMentions(
+      db,
+      card.workspaceId,
+      existingComment.comment,
+      input.comment,
+    );
 
     const updatedComment = await cardCommentRepo.update(db, {
       id: existingComment.id,
@@ -555,6 +578,11 @@ export class CardService {
 
     if (!assignable)
       throw new BadRequestException(`Member is not on this board`);
+
+    if (member.status === "paused")
+      throw new BadRequestException(
+        `Paused members cannot be assigned to cards`,
+      );
 
     const newCardMemberRelationship =
       await cardRepo.createCardMemberRelationship(db, cardMemberIds);
@@ -852,6 +880,14 @@ export class CardService {
     const descriptionChanged =
       normalizedDescription !== undefined &&
       existingCard.description !== normalizedDescription;
+
+    if (descriptionChanged)
+      await assertNoNewPausedMentions(
+        db,
+        card.workspaceId,
+        existingCard.description,
+        normalizedDescription ?? "",
+      );
 
     if (
       input.title ||
@@ -1246,11 +1282,13 @@ export class CardService {
       const members = await filterBoardAssignable(
         db,
         { id: targetList.boardId, type: targetList.boardType },
-        await workspaceRepo.getAllMembersByPublicIds(
-          db,
-          memberPublicIds,
-          sourceCardMeta.workspaceId,
-        ),
+        (
+          await workspaceRepo.getAllMembersByPublicIds(
+            db,
+            memberPublicIds,
+            sourceCardMeta.workspaceId,
+          )
+        ).filter((member) => member.status !== "paused"),
       );
       if (members.length) {
         const membersInsert = members.map((member) => ({

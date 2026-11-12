@@ -139,6 +139,16 @@ export const BoardDetailDtoOutputVisibility = {
   public: 'public',
 } as const;
 
+export type BoardDetailDtoOutputWorkspaceMembersItemStatus = typeof BoardDetailDtoOutputWorkspaceMembersItemStatus[keyof typeof BoardDetailDtoOutputWorkspaceMembersItemStatus];
+
+
+export const BoardDetailDtoOutputWorkspaceMembersItemStatus = {
+  invited: 'invited',
+  active: 'active',
+  removed: 'removed',
+  paused: 'paused',
+} as const;
+
 /**
  * @nullable
  */
@@ -155,7 +165,7 @@ export type BoardDetailDtoOutputWorkspaceMembersItemUser = {
 export type BoardDetailDtoOutputWorkspaceMembersItem = {
   publicId: string;
   email: string;
-  status: string;
+  status: BoardDetailDtoOutputWorkspaceMembersItemStatus;
   /** @nullable */
   user: BoardDetailDtoOutputWorkspaceMembersItemUser;
 };
@@ -180,6 +190,16 @@ export type BoardDetailDtoOutputListsItemCardsItemLabelsItem = {
   colourCode: string | null;
 };
 
+export type BoardDetailDtoOutputListsItemCardsItemMembersItemStatus = typeof BoardDetailDtoOutputListsItemCardsItemMembersItemStatus[keyof typeof BoardDetailDtoOutputListsItemCardsItemMembersItemStatus];
+
+
+export const BoardDetailDtoOutputListsItemCardsItemMembersItemStatus = {
+  invited: 'invited',
+  active: 'active',
+  removed: 'removed',
+  paused: 'paused',
+} as const;
+
 /**
  * @nullable
  */
@@ -194,6 +214,7 @@ export type BoardDetailDtoOutputListsItemCardsItemMembersItemUser = {
 export type BoardDetailDtoOutputListsItemCardsItemMembersItem = {
   publicId: string;
   email: string;
+  status: BoardDetailDtoOutputListsItemCardsItemMembersItemStatus;
   /** @nullable */
   user: BoardDetailDtoOutputListsItemCardsItemMembersItemUser;
 };
@@ -280,6 +301,8 @@ export interface BoardDetailDtoOutput {
   visibility: BoardDetailDtoOutputVisibility;
   isArchived: boolean;
   favorite: boolean;
+  /** Members assigned to at least one card on the board. */
+  assignedMemberPublicIds: string[];
   workspace: BoardDetailDtoOutputWorkspace;
   labels: BoardDetailDtoOutputLabelsItem[];
   lists: BoardDetailDtoOutputListsItem[];
@@ -697,6 +720,16 @@ export type CardDetailDtoOutputListBoardListsItem = {
   name: string;
 };
 
+export type CardDetailDtoOutputListBoardWorkspaceMembersItemStatus = typeof CardDetailDtoOutputListBoardWorkspaceMembersItemStatus[keyof typeof CardDetailDtoOutputListBoardWorkspaceMembersItemStatus];
+
+
+export const CardDetailDtoOutputListBoardWorkspaceMembersItemStatus = {
+  invited: 'invited',
+  active: 'active',
+  removed: 'removed',
+  paused: 'paused',
+} as const;
+
 /**
  * @nullable
  */
@@ -713,7 +746,7 @@ export type CardDetailDtoOutputListBoardWorkspaceMembersItemUser = {
 export type CardDetailDtoOutputListBoardWorkspaceMembersItem = {
   publicId: string;
   email: string;
-  status: string;
+  status: CardDetailDtoOutputListBoardWorkspaceMembersItemStatus;
   /** @nullable */
   user: CardDetailDtoOutputListBoardWorkspaceMembersItemUser;
 };
@@ -738,6 +771,16 @@ export type CardDetailDtoOutputList = {
   board: CardDetailDtoOutputListBoard;
 };
 
+export type CardDetailDtoOutputMembersItemStatus = typeof CardDetailDtoOutputMembersItemStatus[keyof typeof CardDetailDtoOutputMembersItemStatus];
+
+
+export const CardDetailDtoOutputMembersItemStatus = {
+  invited: 'invited',
+  active: 'active',
+  removed: 'removed',
+  paused: 'paused',
+} as const;
+
 /**
  * @nullable
  */
@@ -751,6 +794,7 @@ export type CardDetailDtoOutputMembersItemUser = {
 export type CardDetailDtoOutputMembersItem = {
   publicId: string;
   email: string;
+  status: CardDetailDtoOutputMembersItemStatus;
   /** @nullable */
   user: CardDetailDtoOutputMembersItemUser;
 };
