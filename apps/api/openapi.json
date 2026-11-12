@@ -6168,10 +6168,42 @@
         "properties": {
           "boardsCreated": {
             "type": "number"
+          },
+          "failures": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "boardId": {
+                  "type": "string"
+                },
+                "boardName": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "no_access",
+                    "not_found",
+                    "rate_limited",
+                    "timeout",
+                    "unknown"
+                  ]
+                }
+              },
+              "required": [
+                "boardId",
+                "boardName",
+                "code"
+              ],
+              "additionalProperties": false
+            }
           }
         },
         "required": [
-          "boardsCreated"
+          "boardsCreated",
+          "failures"
         ],
         "additionalProperties": false
       },

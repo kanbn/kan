@@ -1,6 +1,15 @@
 import { createZodDto } from "nestjs-zod";
 import { z } from "zod";
 
+export const importFailureCodes = [
+  "no_access",
+  "not_found",
+  "rate_limited",
+  "timeout",
+  "unknown",
+] as const;
+export type ImportFailureCode = (typeof importFailureCodes)[number];
+
 export const ExternalSourceItemSchema = z.object({
   id: z.string(),
   name: z.string(),
@@ -21,6 +30,13 @@ export class ImportTrelloBoardsDto extends createZodDto(
 
 export const ImportTrelloBoardsResponseSchema = z.object({
   boardsCreated: z.number(),
+  failures: z.array(
+    z.object({
+      boardId: z.string(),
+      boardName: z.string().nullable(),
+      code: z.enum(importFailureCodes),
+    }),
+  ),
 });
 
 export class ImportTrelloBoardsResponseDto extends createZodDto(

@@ -64,7 +64,7 @@ export function withApiLogging(
       duration,
       userId,
       ...(isCloud && email && { email }),
-      ...(Object.keys(input).length > 0 && { input }),
+      ...(Object.keys(input).length > 0 && { input: JSON.stringify(input) }),
       status: statusCode,
       ...(handlerError instanceof Error && {
         error: handlerError.message,

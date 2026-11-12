@@ -130,7 +130,10 @@ describe("request logging", () => {
       transport: "rest",
       userId: "user_1",
       status: 201,
-      input: { query: { verbose: "1" }, body: { name: "Widget" } },
+    });
+    expect(JSON.parse(meta.input as string)).toMatchObject({
+      query: { verbose: "1" },
+      body: { name: "Widget" },
     });
     expect(JSON.stringify(meta)).not.toContain("hunter2");
     expect(typeof meta.duration).toBe("number");

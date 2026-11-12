@@ -16,7 +16,10 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
 import { decryptToken } from "@kan/server/utils/encryption";
 import { assertPermission } from "@kan/server/utils/permissions";
-import { getTrelloLabelColour } from "@kan/server/utils/trello";
+import {
+  getTrelloLabelColour,
+  getTrelloLabelName,
+} from "@kan/server/utils/trello";
 import {
   decryptTrelloToken,
   encryptTrelloToken,
@@ -28,6 +31,7 @@ import {
   normalizeDescription,
 } from "@kan/shared/utils";
 
+import type { ImportFailureCode } from "./dto/import.dto.js";
 import type {
   GitHubGraphQLResponse,
   GitHubProjectsResponse,
@@ -96,6 +100,228 @@ const assertCanCreateBoards = async (
   return workspace;
 };
 
+const TRELLO_BOARD_CONCURRENCY = 3;
+const TRELLO_TIMEOUT_MS = 30_000;
+const TRELLO_MAX_ATTEMPTS = 3;
+// Keeps every bulk insert well under Postgres's 65,535 bind parameter limit.
+const INSERT_BATCH_SIZE = 1000;
+
+class ImportBoardError extends Error {
+  constructor(
+    readonly code: ImportFailureCode,
+    message: string,
+  ) {
+    super(message);
+  }
+}
+
+const isTimeout = (error: unknown) =>
+  error instanceof Error && error.name === "TimeoutError";
+
+const trelloStatusCode = (status: number): ImportFailureCode => {
+  if (status === 401 || status === 403) return "no_access";
+  if (status === 404) return "not_found";
+  if (status === 429) return "rate_limited";
+  return "unknown";
+};
+
+const fetchTrello = async (url: string) => {
+  for (let attempt = 1; ; attempt++) {
+    const response = await fetch(url, {
+      signal: AbortSignal.timeout(TRELLO_TIMEOUT_MS),
+    });
+    if (response.status !== 429 || attempt === TRELLO_MAX_ATTEMPTS)
+      return response;
+    await new Promise((resolve) => setTimeout(resolve, attempt * 2000));
+  }
+};
+
+const mapWithConcurrency = async <T, R>(
+  items: T[],
+  limit: number,
+  fn: (item: T) => Promise<R>,
+) => {
+  const results: R[] = [];
+  let next = 0;
+  const worker = async () => {
+    while (next < items.length) {
+      const index = next++;
+      results[index] = await fn(items[index] as T);
+    }
+  };
+  await Promise.all(
+    Array.from({ length: Math.min(limit, items.length) }, worker),
+  );
+  return results;
+};
+
+const inBatches = async <T, R>(
+  items: T[],
+  insert: (batch: T[]) => Promise<R[] | undefined>,
+) => {
+  const inserted: R[] = [];
+  for (let i = 0; i < items.length; i += INSERT_BATCH_SIZE)
+    inserted.push(
+      ...((await insert(items.slice(i, i + INSERT_BATCH_SIZE))) ?? []),
+    );
+  return inserted;
+};
+
+const byPos = (a: { pos?: number }, b: { pos?: number }) =>
+  (a.pos ?? 0) - (b.pos ?? 0);
+
+// One transaction per board, so a failure leaves nothing half-imported.
+const importTrelloBoard = (
+  data: TrelloBoard,
+  ctx: { userId: string; workspaceId: number; importId: number | undefined },
+) =>
+  db.transaction(async (tx) => {
+    const txDb = tx as unknown as typeof db;
+    const { userId, workspaceId, importId } = ctx;
+
+    const boardPublicId = generateUID();
+    const newBoard = await boardRepo.create(txDb, {
+      publicId: boardPublicId,
+      name: data.name,
+      slug: boardPublicId,
+      createdBy: userId,
+      importId,
+      workspaceId,
+    });
+    if (!newBoard?.id) throw new Error("Failed to create board");
+    const boardId = newBoard.id;
+
+    const labelsToCreate = data.labels.flatMap((label) => {
+      const name = getTrelloLabelName(label.name, label.color);
+      return name ? [{ sourceId: label.id, name, colour: label.color }] : [];
+    });
+    const labelIdBySource = new Map<string, number>();
+    if (labelsToCreate.length) {
+      const newLabels = await labelRepo.bulkCreate(
+        txDb,
+        labelsToCreate.map((label) => ({
+          publicId: generateUID(),
+          name: label.name,
+          colourCode: getTrelloLabelColour(label.colour),
+          createdBy: userId,
+          boardId,
+          importId,
+        })),
+      );
+      newLabels.forEach((label, index) => {
+        const sourceId = labelsToCreate[index]?.sourceId;
+        if (sourceId) labelIdBySource.set(sourceId, label.id);
+      });
+    }
+
+    const cardsByList = new Map<string, TrelloBoard["cards"]>();
+    for (const card of [...data.cards].sort(byPos))
+      cardsByList.set(card.idList, [
+        ...(cardsByList.get(card.idList) ?? []),
+        card,
+      ]);
+
+    const trelloCardIdByPublicId = new Map<string, string>();
+    const cardsInsert: Parameters<typeof cardRepo.bulkCreate>[1] = [];
+    for (const list of [...data.lists].sort(byPos)) {
+      const newList = await listRepo.create(txDb, {
+        name: list.name,
+        createdBy: userId,
+        boardId,
+        importId,
+      });
+      (cardsByList.get(list.id) ?? []).forEach((card, index) => {
+        const publicId = generateUID();
+        trelloCardIdByPublicId.set(publicId, card.id);
+        cardsInsert.push({
+          publicId,
+          title: (card.name?.trim() ? card.name.trim() : "Untitled Card").slice(
+            0,
+            2000,
+          ),
+          description: normalizeDescription(card.desc),
+          createdBy: userId,
+          listId: newList.id,
+          workspaceId,
+          index,
+          importId,
+          dueDate: card.due ? new Date(card.due) : null,
+        });
+      });
+    }
+
+    const newCards = await inBatches(cardsInsert, (batch) =>
+      cardRepo.bulkCreate(txDb, batch),
+    );
+    if (newCards.length !== cardsInsert.length)
+      throw new Error("Failed to create cards");
+
+    const cardIdBySource = new Map<string, number>();
+    for (const card of newCards) {
+      const trelloCardId = trelloCardIdByPublicId.get(card.publicId);
+      if (trelloCardId) cardIdBySource.set(trelloCardId, card.id);
+    }
+
+    await inBatches(
+      newCards.map((card) => ({
+        type: "card.created" as const,
+        cardId: card.id,
+        createdBy: userId,
+      })),
+      (batch) => cardActivityRepo.bulkCreate(txDb, batch),
+    );
+
+    // bulkCreate returns rows grouped by card, so keep each card's checklists
+    // together to line the returned ids up with this list.
+    const checklistsToCreate = [...data.checklists]
+      .sort((a, b) => a.idCard.localeCompare(b.idCard) || byPos(a, b))
+      .flatMap((checklist) => {
+        const cardId = cardIdBySource.get(checklist.idCard);
+        return cardId ? [{ cardId, checklist }] : [];
+      });
+    const newChecklists = await inBatches(checklistsToCreate, (batch) =>
+      checklistRepo.bulkCreate(
+        txDb,
+        batch.map(({ cardId, checklist }) => ({
+          cardId,
+          name: checklist.name,
+          createdBy: userId,
+          index: checklist.pos ?? 0,
+        })),
+      ),
+    );
+
+    const itemsToCreate = checklistsToCreate.flatMap(({ checklist }, index) => {
+      const checklistId = newChecklists[index]?.id;
+      if (!checklistId) return [];
+      // Sorted here as well as in the repo: a checklist can span two batches.
+      return [...checklist.checkItems]
+        .sort((a, b) => a.pos - b.pos)
+        .map((item) => ({
+          checklistId,
+          title: item.name,
+          createdBy: userId,
+          index: item.pos,
+          completed: item.state === "complete",
+        }));
+    });
+    await inBatches(itemsToCreate, (batch) =>
+      checklistRepo.bulkCreateItems(txDb, batch),
+    );
+
+    const cardLabels = data.cards.flatMap((card) => {
+      const cardId = cardIdBySource.get(card.id);
+      if (!cardId) return [];
+      return card.labels.flatMap((label) => {
+        const labelId = labelIdBySource.get(label.id);
+        return labelId ? [{ cardId, labelId }] : [];
+      });
+    });
+    await inBatches(cardLabels, (batch) =>
+      cardRepo.bulkCreateCardLabelRelationships(txDb, batch),
+    );
+  });
+
 @Injectable()
 export class ImportService {
   async getTrelloBoards(input: { userId: string }) {
@@ -135,311 +361,67 @@ export class ImportService {
       source: "trello",
       createdBy: userId,
     });
+    const importId = newImport?.id;
 
-    const newImportId = newImport?.id;
-
-    const importSingleBoard = async (boardId: string): Promise<void> => {
-      const response = await fetch(
-        `${trelloUrl()}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          `Trello returned ${response.status} for board ${boardId}`,
-        );
-      }
-
-      const data = (await response.json()) as TrelloBoard;
-
-      const formattedData = {
-        name: data.name,
-        labels: data.labels
-          .map((label) => ({
-            sourceId: label.id,
-            name: label.name,
-            colourCode: getTrelloLabelColour(label.color),
-          }))
-          .filter((_label) => !!_label.name),
-        lists: data.lists.map((list) => ({
-          name: list.name,
-          cards: data.cards
-            .filter((card) => card.idList === list.id)
-            .map((_card) => ({
-              sourceId: _card.id,
-              name: _card.name,
-              description: _card.desc,
-              labels: _card.labels.map((label) => ({
-                sourceId: label.id,
-                name: label.name,
-              })),
-              checklists: data.checklists
-                .filter((checklist) => checklist.idCard === _card.id)
-                .map((_checklist) => ({
-                  sourceId: _checklist.id,
-                  name: _checklist.name,
-                  items: _checklist.checkItems.map((_item) => ({
-                    sourceId: _item.id,
-                    title: _item.name,
-                    completed: _item.state === "complete",
-                    index: _item.pos,
-                  })),
-                })),
-            })),
-        })),
-      };
-
-      const boardPublicId = generateUID();
-
-      const newBoard = await boardRepo.create(db, {
-        publicId: boardPublicId,
-        name: formattedData.name,
-        slug: boardPublicId,
-        createdBy: userId,
-        importId: newImportId,
-        workspaceId: workspace.id,
-      });
-
-      const newBoardId = newBoard?.id;
-
-      if (!newBoardId)
-        throw new InternalServerErrorException("Failed to create new board");
-
-      let createdLabels: { id: number; sourceId: string }[] = [];
-      let createdCards: { id: number; sourceId: string }[] = [];
-
-      if (formattedData.labels.length) {
-        const labelsInsert = formattedData.labels.map((label) => ({
-          publicId: generateUID(),
-          name: label.name,
-          colourCode: label.colourCode,
-          createdBy: userId,
-          boardId: newBoardId,
-          importId: newImportId,
-        }));
-
-        const newLabels = await labelRepo.bulkCreate(db, labelsInsert);
-
-        if (newLabels.length)
-          createdLabels = newLabels
-            .map((label, index) => ({
-              id: label.id,
-              sourceId: formattedData.labels[index]?.sourceId ?? "",
-            }))
-            .filter((label) => !!label.sourceId);
-      }
-
-      for (const list of formattedData.lists) {
-        const newList = await listRepo.create(db, {
-          name: list.name,
-          createdBy: userId,
-          boardId: newBoardId,
-          importId: newImportId,
-        });
-
-        const newListId = newList.id;
-
-        if (list.cards.length && newListId) {
-          const cardsInsert = list.cards.map((card, index) => ({
-            publicId: generateUID(),
-            title: (card.name?.trim() ?? "Untitled Card").slice(0, 2000),
-            description: normalizeDescription(card.description),
-            createdBy: userId,
-            listId: newListId,
-            workspaceId: workspace.id,
-            index,
-            importId: newImportId,
-          }));
-
-          const newCards = await cardRepo.bulkCreate(db, cardsInsert);
-
-          if (!newCards.length)
-            throw new InternalServerErrorException(
-              "Failed to create new cards",
-            );
-
-          createdCards = createdCards.concat(
-            newCards
-              .map((card, index) => ({
-                id: card.id,
-                sourceId: list.cards[index]?.sourceId ?? "",
-              }))
-              .filter((card) => !!card.sourceId),
+    const results = await mapWithConcurrency(
+      input.boardIds,
+      TRELLO_BOARD_CONCURRENCY,
+      async (boardId) => {
+        let boardName: string | null = null;
+        try {
+          const response = await fetchTrello(
+            `${trelloUrl()}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&labels=all&labels_limit=1000&checklists=all`,
           );
-
-          const activities = newCards.map((card) => ({
-            type: "card.created" as const,
-            cardId: card.id,
-            createdBy: userId,
-          }));
-
-          if (newCards.length > 0) {
-            await cardActivityRepo.bulkCreate(db, activities);
-          }
-
-          const checklistsToCreate: {
-            cardId: number;
-            name: string;
-            createdBy: string;
-            index: number;
-            sourceId: string;
-            items: {
-              sourceId: string;
-              title: string;
-              completed: boolean;
-              index: number;
-            }[];
-          }[] = [];
-
-          for (const card of list.cards) {
-            const _card = createdCards.find(
-              (c) => c.sourceId === card.sourceId,
+          if (!response.ok)
+            throw new ImportBoardError(
+              trelloStatusCode(response.status),
+              `Trello responded ${response.status}`,
             );
 
-            if (!_card || !card.checklists.length) continue;
-
-            for (
-              let checklistIndex = 0;
-              checklistIndex < card.checklists.length;
-              checklistIndex++
-            ) {
-              const checklist = card.checklists[checklistIndex];
-              if (!checklist) continue;
-
-              checklistsToCreate.push({
-                cardId: _card.id,
-                name: checklist.name,
-                createdBy: userId,
-                index: checklistIndex,
-                sourceId: checklist.sourceId,
-                items: checklist.items.map((item) => ({
-                  sourceId: item.sourceId,
-                  title: item.title,
-                  completed: item.completed,
-                  index: item.index,
-                })),
-              });
-            }
-          }
-
-          if (checklistsToCreate.length > 0) {
-            const newChecklists = await checklistRepo.bulkCreate(
-              db,
-              checklistsToCreate.map((checklist) => ({
-                cardId: checklist.cardId,
-                name: checklist.name,
-                createdBy: checklist.createdBy,
-                index: checklist.index,
-              })),
-            );
-
-            const itemsToCreate: {
-              checklistId: number;
-              title: string;
-              createdBy: string;
-              index: number;
-              completed: boolean;
-            }[] = [];
-
-            for (let i = 0; i < checklistsToCreate.length; i++) {
-              const checklistData = checklistsToCreate[i];
-              const newChecklist = newChecklists[i];
-
-              if (!newChecklist || !checklistData?.items.length) continue;
-
-              // NOTE: Sorting here to prevent checklist items being out of order
-              const sortedItems = [...checklistData.items].sort(
-                (a, b) => a.index - b.index,
-              );
-
-              for (const item of sortedItems) {
-                itemsToCreate.push({
-                  checklistId: newChecklist.id,
-                  title: item.title,
-                  createdBy: userId,
-                  index: item.index,
-                  completed: item.completed,
-                });
-              }
-            }
-
-            if (itemsToCreate.length > 0) {
-              await checklistRepo.bulkCreateItems(db, itemsToCreate);
-            }
-          }
-
-          if (createdLabels.length && createdCards.length) {
-            const cardLabelRelations: {
-              cardId: number;
-              labelId: number;
-            }[] = [];
-
-            for (const card of list.cards) {
-              const _card = createdCards.find(
-                (c) => c.sourceId === card.sourceId,
-              );
-
-              for (const label of card.labels) {
-                const _label = createdLabels.find(
-                  (l) => l.sourceId === label.sourceId,
-                );
-
-                if (_card && _label) {
-                  cardLabelRelations.push({
-                    cardId: _card.id,
-                    labelId: _label.id,
-                  });
-                }
-              }
-            }
-
-            if (cardLabelRelations.length) {
-              await cardRepo.bulkCreateCardLabelRelationship(
-                db,
-                cardLabelRelations,
-              );
-            }
-          }
+          const data = (await response.json()) as TrelloBoard;
+          boardName = data.name;
+          await importTrelloBoard(data, {
+            userId,
+            workspaceId: workspace.id,
+            importId,
+          });
+          return null;
+        } catch (error) {
+          log.error(
+            {
+              err: new Error(
+                `Trello board ${boardId} (${boardName ?? "unknown"}) failed to import: ${error instanceof Error ? error.message : String(error)}`,
+                { cause: error },
+              ),
+            },
+            "Trello board failed to import",
+          );
+          return {
+            boardId,
+            boardName,
+            code:
+              error instanceof ImportBoardError
+                ? error.code
+                : isTimeout(error)
+                  ? ("timeout" as const)
+                  : ("unknown" as const),
+          };
         }
-      }
-    };
-
-    const results = await Promise.allSettled(
-      input.boardIds.map((boardId) => importSingleBoard(boardId)),
+      },
     );
 
-    const boardsCreated = results.filter(
-      (result) => result.status === "fulfilled",
-    ).length;
+    const failures = results.filter((result) => result !== null);
+    const boardsCreated = results.length - failures.length;
 
-    const failures = results.filter(
-      (result): result is PromiseRejectedResult => result.status === "rejected",
-    );
-
-    if (failures.length > 0) {
-      log.error(
-        {
-          importId: newImportId,
-          failedCount: failures.length,
-          errors: failures.map((failure) => String(failure.reason)),
-        },
-        "Some Trello boards failed to import",
-      );
-    }
-
-    if (newImportId) {
+    if (importId) {
       await importRepo.update(
         db,
         { status: boardsCreated > 0 ? "success" : "failed" },
-        { importId: newImportId },
+        { importId },
       );
     }
 
-    if (boardsCreated === 0)
-      throw new InternalServerErrorException(
-        "Failed to import any boards from Trello",
-      );
-
-    return { boardsCreated };
+    return { boardsCreated, failures };
   }
 
   async getGitHubProjects(input: { userId: string }) {

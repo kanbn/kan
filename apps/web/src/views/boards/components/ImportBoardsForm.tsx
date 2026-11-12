@@ -12,6 +12,7 @@ import {
   HiXMark,
 } from "react-icons/hi2";
 
+import type { ImportTrelloBoardsResponseDtoOutputFailuresItemCode } from "@kan/api-client/hooks";
 import {
   useGetGitHubProjects,
   useGetGitHubStatus,
@@ -367,6 +368,26 @@ const ImportGithub: React.FC = () => {
   );
 };
 
+const importFailureMessage = (failure: {
+  boardName: string | null;
+  code: ImportTrelloBoardsResponseDtoOutputFailuresItemCode;
+}) => {
+  const board = failure.boardName
+    ? `"${failure.boardName}"`
+    : t`One of your boards`;
+  switch (failure.code) {
+    case "no_access":
+      return t`Kan couldn't open ${board} in Trello. Try reconnecting Trello and importing again.`;
+    case "not_found":
+      return t`${board} couldn't be found in Trello.`;
+    case "rate_limited":
+    case "timeout":
+      return t`Trello is busy right now. Please try importing ${board} again in a few minutes.`;
+    default:
+      return t`${board} couldn't be imported. Please try again, or contact support if this keeps happening.`;
+  }
+};
+
 const ImportTrello: React.FC = () => {
   const boardCache = useBoardCache();
   const { closeModal } = useModal();
@@ -393,12 +414,30 @@ const ImportTrello: React.FC = () => {
 
   const importBoards = useImportTrelloBoards({
     mutation: {
-      onSuccess: async () => {
-        showPopup({
-          header: t`Import complete`,
-          message: t`Your boards have been imported.`,
-          icon: "success",
-        });
+      onSuccess: async (res) => {
+        const { boardsCreated, failures } = res.data;
+        const [failure] = failures;
+
+        if (!failure) {
+          showPopup({
+            header: t`Import complete`,
+            message: t`Your boards have been imported.`,
+            icon: "success",
+          });
+        } else {
+          showPopup({
+            header: boardsCreated
+              ? t`Some boards weren't imported`
+              : t`Import failed`,
+            message:
+              failures.length > 1
+                ? t`${failures.length} boards couldn't be imported. Please try again, or contact support if this keeps happening.`
+                : importFailureMessage(failure),
+            icon: "error",
+          });
+        }
+
+        if (!boardsCreated) return;
         try {
           await refetchBoards();
           closeModal();
@@ -475,6 +514,9 @@ const ImportTrello: React.FC = () => {
   return (
     <form onSubmit={handleSubmitBoards(onSubmitBoards)}>
       <div className="h-[105px] overflow-auto px-5">{renderContent()}</div>
+      <p className="mt-3 px-5 text-xs text-neutral-500 dark:text-dark-900">
+        {t`Archived lists and cards aren't imported.`}
+      </p>
 
       <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
         <Toggle

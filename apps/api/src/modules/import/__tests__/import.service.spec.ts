@@ -82,19 +82,31 @@ afterEach(() => {
 describe("ImportService.importTrelloBoards", () => {
   beforeEach(() => {
     vi.spyOn(boardRepo, "create").mockResolvedValue({ id: 10 } as never);
-    vi.spyOn(labelRepo, "bulkCreate").mockResolvedValue([{ id: 20 }] as never);
+    vi.spyOn(labelRepo, "bulkCreate").mockResolvedValue([
+      { id: 20 },
+      { id: 21 },
+    ] as never);
     vi.spyOn(listRepo, "create").mockResolvedValue({ id: 30 } as never);
-    vi.spyOn(cardRepo, "bulkCreate").mockResolvedValue([{ id: 40 }] as never);
+    vi.spyOn(cardRepo, "bulkCreate").mockImplementation((_db, batch) =>
+      Promise.resolve(
+        batch.map((card, index) => ({
+          id: 40 + index,
+          publicId: card.publicId,
+        })),
+      ),
+    );
     vi.spyOn(cardActivityRepo, "bulkCreate").mockResolvedValue(
       undefined as never,
     );
-    vi.spyOn(checklistRepo, "bulkCreate").mockResolvedValue([
-      { id: 60 },
-    ] as never);
+    vi.spyOn(checklistRepo, "bulkCreate").mockImplementation((_db, batch) =>
+      Promise.resolve(
+        batch.map((_, index) => ({ id: 60 + index, publicId: `cl${index}` })),
+      ),
+    );
     vi.spyOn(checklistRepo, "bulkCreateItems").mockResolvedValue(
       undefined as never,
     );
-    vi.spyOn(cardRepo, "bulkCreateCardLabelRelationship").mockResolvedValue(
+    vi.spyOn(cardRepo, "bulkCreateCardLabelRelationships").mockResolvedValue(
       undefined as never,
     );
   });
@@ -111,16 +123,20 @@ describe("ImportService.importTrelloBoards", () => {
       userId: "user_1",
     });
 
-    expect(result).toEqual({ boardsCreated: 1 });
-    // unnamed Trello labels are dropped
-    expect(vi.mocked(labelRepo.bulkCreate).mock.calls[0]?.[1]).toHaveLength(1);
+    expect(result).toEqual({ boardsCreated: 1, failures: [] });
+    expect(
+      vi.mocked(labelRepo.bulkCreate).mock.calls[0]?.[1].map((l) => l.name),
+    ).toEqual(["Bug", "Blue"]);
     expect(cardActivityRepo.bulkCreate).toHaveBeenCalledWith(
       expect.anything(),
       [{ type: "card.created", cardId: 40, createdBy: "user_1" }],
     );
     const items = vi.mocked(checklistRepo.bulkCreateItems).mock.calls[0]?.[1];
-    expect(items?.map((i) => i.title)).toEqual(["First", "Second"]);
-    expect(cardRepo.bulkCreateCardLabelRelationship).toHaveBeenCalledWith(
+    expect(items?.map((i) => [i.title, i.index])).toEqual([
+      ["First", 1],
+      ["Second", 2],
+    ]);
+    expect(cardRepo.bulkCreateCardLabelRelationships).toHaveBeenCalledWith(
       expect.anything(),
       [{ cardId: 40, labelId: 20 }],
     );
@@ -146,13 +162,115 @@ describe("ImportService.importTrelloBoards", () => {
       userId: "user_1",
     });
 
-    expect(result).toEqual({ boardsCreated: 1 });
+    expect(result).toEqual({
+      boardsCreated: 1,
+      failures: [
+        {
+          boardId: "missing",
+          boardName: null,
+          code: "not_found",
+        },
+      ],
+    });
   });
 
-  it("marks the import failed and throws when no boards import", async () => {
+  it("imports due dates and keeps cards in Trello's order", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn().mockResolvedValue(jsonResponse({}, false, 500)),
+      vi.fn().mockResolvedValue(
+        jsonResponse({
+          ...trelloBoard,
+          cards: [
+            { ...trelloBoard.cards[0], id: "c2", name: "Second", pos: 2 },
+            {
+              ...trelloBoard.cards[0],
+              name: "First",
+              pos: 1,
+              due: "2026-12-01T09:00:00.000Z",
+            },
+          ],
+        }),
+      ),
+    );
+
+    await service.importTrelloBoards({
+      boardIds: ["tb1"],
+      workspacePublicId: "workspace_12345",
+      userId: "user_1",
+    });
+
+    const cards = vi.mocked(cardRepo.bulkCreate).mock.calls[0]?.[1];
+    expect(cards?.map((c) => [c.title, c.dueDate])).toEqual([
+      ["First", new Date("2026-12-01T09:00:00.000Z")],
+      ["Second", null],
+    ]);
+  });
+
+  it("inserts large boards in batches", async () => {
+    const checkItems = Array.from({ length: 2500 }, (_, i) => ({
+      id: `i${i}`,
+      name: `Item ${i}`,
+      state: "incomplete",
+      pos: i,
+    }));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(
+        jsonResponse({
+          ...trelloBoard,
+          checklists: [{ ...trelloBoard.checklists[0], checkItems }],
+        }),
+      ),
+    );
+
+    await service.importTrelloBoards({
+      boardIds: ["tb1"],
+      workspacePublicId: "workspace_12345",
+      userId: "user_1",
+    });
+
+    const batches = vi
+      .mocked(checklistRepo.bulkCreateItems)
+      .mock.calls.map((call) => call[1].length);
+    expect(batches).toEqual([1000, 1000, 500]);
+  });
+
+  it("keeps a checklist's items in order when they span two batches", async () => {
+    const checkItems = Array.from({ length: 1500 }, (_, i) => ({
+      id: `i${i}`,
+      name: `Item ${i}`,
+      state: "incomplete",
+      pos: 1500 - i,
+    }));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(
+        jsonResponse({
+          ...trelloBoard,
+          checklists: [{ ...trelloBoard.checklists[0], checkItems }],
+        }),
+      ),
+    );
+
+    await service.importTrelloBoards({
+      boardIds: ["tb1"],
+      workspacePublicId: "workspace_12345",
+      userId: "user_1",
+    });
+
+    const indexes = vi
+      .mocked(checklistRepo.bulkCreateItems)
+      .mock.calls.flatMap((call) => call[1].map((item) => item.index));
+    expect(indexes).toEqual([...indexes].sort((a, b) => a - b));
+  });
+
+  it("reports a failed board without leaking the database error", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(jsonResponse(trelloBoard)),
+    );
+    vi.spyOn(checklistRepo, "bulkCreateItems").mockRejectedValue(
+      new Error("syntax error at or near AND"),
     );
 
     await expect(
@@ -161,7 +279,28 @@ describe("ImportService.importTrelloBoards", () => {
         workspacePublicId: "workspace_12345",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ status: 500 });
+    ).resolves.toEqual({
+      boardsCreated: 0,
+      failures: [{ boardId: "tb1", boardName: "Roadmap", code: "unknown" }],
+    });
+  });
+
+  it("marks the import failed when no boards import", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(jsonResponse({}, false, 403)),
+    );
+
+    await expect(
+      service.importTrelloBoards({
+        boardIds: ["tb1"],
+        workspacePublicId: "workspace_12345",
+        userId: "user_1",
+      }),
+    ).resolves.toEqual({
+      boardsCreated: 0,
+      failures: [{ boardId: "tb1", boardName: null, code: "no_access" }],
+    });
     expect(importRepo.update).toHaveBeenCalledWith(
       expect.anything(),
       { status: "failed" },

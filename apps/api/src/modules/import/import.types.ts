@@ -16,12 +16,14 @@ export interface TrelloLabel {
 export interface TrelloList {
   id: string;
   name: string;
+  pos?: number;
 }
 
 export interface TrelloChecklist {
   id: string;
   idCard: string;
   name: string;
+  pos?: number;
   checkItems: TrelloCheckItem[];
 }
 
@@ -82,6 +84,8 @@ export interface TrelloCard {
   name: string | null;
   desc: string;
   idList: string;
+  pos?: number;
+  due?: string | null;
   labels: TrelloLabel[];
   idChecklists: string[];
   checkItemStates: TrelloCheckItemState[];
