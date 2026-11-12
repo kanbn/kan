@@ -16,7 +16,7 @@ import { RATE_LIMITER } from "../rate-limiter.js";
 
 const ERROR_MESSAGE = "Too many requests, please try again later.";
 
-// Duplicated from @kan/auth's getApiKeyFromHeaders / @kan/api's getApiToken
+// Duplicated from @kan/auth's getApiKeyFromHeaders / @kan/server's getApiToken
 // (not part of either package's public export map) — same 6-line extraction
 // kan already has twice, a third copy isn't worth a shared export for.
 function getApiToken(headers: AuthenticatedRequest["headers"]): string | null {

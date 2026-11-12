@@ -1,5 +1,5 @@
 {
-  "name": "@kan/api-server",
+  "name": "@kan/api",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -17,10 +17,10 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@kan/api": "workspace:*",
     "@kan/auth": "workspace:*",
     "@kan/db": "workspace:*",
     "@kan/logger": "workspace:^",
+    "@kan/server": "workspace:*",
     "@kan/shared": "workspace:^",
     "@kan/stripe": "workspace:^",
     "@kan/tsconfig": "workspace:*",

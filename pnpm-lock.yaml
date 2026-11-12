@@ -67,9 +67,6 @@ importers:
 
   apps/api:
     dependencies:
-      '@kan/api':
-        specifier: workspace:*
-        version: link:../../packages/api
       '@kan/auth':
         specifier: workspace:*
         version: link:../../packages/auth
@@ -79,6 +76,9 @@ importers:
       '@kan/logger':
         specifier: workspace:^
         version: link:../../packages/logger
+      '@kan/server':
+        specifier: workspace:*
+        version: link:../../packages/server
       '@kan/shared':
         specifier: workspace:^
         version: link:../../packages/shared
@@ -194,9 +194,6 @@ importers:
       '@kan.bn/mcp':
         specifier: workspace:*
         version: link:../../packages/mcp
-      '@kan/api':
-        specifier: workspace:*
-        version: link:../../packages/api
       '@kan/api-client':
         specifier: workspace:*
         version: link:../../packages/api-client
@@ -212,6 +209,9 @@ importers:
       '@kan/logger':
         specifier: workspace:^
         version: link:../../packages/logger
+      '@kan/server':
+        specifier: workspace:*
+        version: link:../../packages/server
       '@kan/shared':
         specifier: workspace:^
         version: link:../../packages/shared
@@ -387,58 +387,6 @@ importers:
       vitest:
         specifier: ^3.0.0
         version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.11)(jiti@1.21.7)(terser@5.44.1)(yaml@2.9.1)
-
-  packages/api:
-    dependencies:
-      '@kan/auth':
-        specifier: workspace:*
-        version: link:../auth
-      '@kan/db':
-        specifier: workspace:*
-        version: link:../db
-      '@kan/email':
-        specifier: workspace:^
-        version: link:../email
-      '@kan/logger':
-        specifier: workspace:^
-        version: link:../logger
-      '@kan/shared':
-        specifier: workspace:^
-        version: link:../shared
-      '@kan/stripe':
-        specifier: workspace:^
-        version: link:../stripe
-      '@nestjs/common':
-        specifier: ^11.2.7
-        version: 11.2.9(reflect-metadata@0.2.2)(rxjs@7.8.2)
-      rate-limiter-flexible:
-        specifier: ^9.0.1
-        version: 9.0.1
-      zod:
-        specifier: 'catalog:'
-        version: 3.25.76
-    devDependencies:
-      '@kan/eslint-config':
-        specifier: workspace:*
-        version: link:../../tooling/eslint
-      '@kan/prettier-config':
-        specifier: workspace:*
-        version: link:../../tooling/prettier
-      '@kan/tsconfig':
-        specifier: workspace:*
-        version: link:../../tooling/typescript
-      eslint:
-        specifier: 'catalog:'
-        version: 9.34.0(jiti@2.6.1)
-      prettier:
-        specifier: 'catalog:'
-        version: 3.6.2
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.2
-      vitest:
-        specifier: ^3.0.0
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@25.0.0)(jiti@2.6.1)(terser@5.44.1)(yaml@2.9.1)
 
   packages/api-client:
     dependencies:
@@ -694,6 +642,58 @@ importers:
       '@kan/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@25.0.0)(jiti@2.6.1)(terser@5.44.1)(yaml@2.9.1)
+
+  packages/server:
+    dependencies:
+      '@kan/auth':
+        specifier: workspace:*
+        version: link:../auth
+      '@kan/db':
+        specifier: workspace:*
+        version: link:../db
+      '@kan/email':
+        specifier: workspace:^
+        version: link:../email
+      '@kan/logger':
+        specifier: workspace:^
+        version: link:../logger
+      '@kan/shared':
+        specifier: workspace:^
+        version: link:../shared
+      '@kan/stripe':
+        specifier: workspace:^
+        version: link:../stripe
+      '@nestjs/common':
+        specifier: ^11.2.7
+        version: 11.2.9(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      rate-limiter-flexible:
+        specifier: ^9.0.1
+        version: 9.0.1
+      zod:
+        specifier: 'catalog:'
+        version: 3.25.76
+    devDependencies:
+      '@kan/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@kan/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@kan/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      eslint:
+        specifier: 'catalog:'
+        version: 9.34.0(jiti@2.6.1)
+      prettier:
+        specifier: 'catalog:'
+        version: 3.6.2
       typescript:
         specifier: 'catalog:'
         version: 5.9.2

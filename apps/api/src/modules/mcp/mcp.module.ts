@@ -15,6 +15,7 @@ import { PermissionModule } from "../permission/permission.module.js";
 import { UserModule } from "../user/user.module.js";
 import { WebhookModule } from "../webhook/webhook.module.js";
 import { WorkspaceModule } from "../workspace/workspace.module.js";
+import { McpPlanGuard } from "./mcp-plan.guard.js";
 import { AttachmentTools } from "./tools/attachment.tools.js";
 import { BoardMemberTools } from "./tools/board-member.tools.js";
 import { BoardTools } from "./tools/board.tools.js";
@@ -37,7 +38,7 @@ const SERVER_NAME = "kan";
       name: SERVER_NAME,
       version: "0.1.0",
       transport: [McpTransportType.STREAMABLE_HTTP],
-      guards: [AuthGuard],
+      guards: [AuthGuard, McpPlanGuard],
     }),
     AttachmentModule,
     BoardModule,

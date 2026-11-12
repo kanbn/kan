@@ -11,7 +11,7 @@ vi.mock("nextjs-cors", () => ({ default: vi.fn() }));
 vi.mock("@kan/logger", () => ({
   createLogger: vi.fn(() => ({ info: vi.fn(), error: vi.fn() })),
 }));
-vi.mock("@kan/api/utils/rateLimit", () => ({
+vi.mock("@kan/server/utils/rateLimit", () => ({
   tokenOrIpIdentifier: vi.fn(),
   withRateLimit: (_options: unknown, handler: unknown) => handler,
 }));

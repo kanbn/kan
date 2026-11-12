@@ -17,8 +17,8 @@ export const UserResponseSchema = z.object({
 export class UserResponseDto extends createZodDto(UserResponseSchema) {}
 
 export const UpdateUserSchema = z.object({
-  name: z.string().optional(),
-  image: z.string().optional(),
+  name: z.string().optional().describe("New display name."),
+  image: z.string().optional().describe("New avatar image URL."),
 });
 
 export class UpdateUserDto extends createZodDto(UpdateUserSchema) {}

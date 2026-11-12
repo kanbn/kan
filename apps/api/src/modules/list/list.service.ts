@@ -1,26 +1,22 @@
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
 
+import * as boardRepo from "@kan/db/repository/board.repo";
+import * as cardRepo from "@kan/db/repository/card.repo";
+import * as activityRepo from "@kan/db/repository/cardActivity.repo";
+import * as listRepo from "@kan/db/repository/list.repo";
 import {
   assertBoardAccess,
   assertCanDelete,
   assertCanEdit,
   assertPermission,
-} from "@kan/api/utils/permissions";
-import * as boardRepo from "@kan/db/repository/board.repo";
-import * as cardRepo from "@kan/db/repository/card.repo";
-import * as activityRepo from "@kan/db/repository/cardActivity.repo";
-import * as listRepo from "@kan/db/repository/list.repo";
+} from "@kan/server/utils/permissions";
 
 import { assertFound } from "../../common/assert-found.util.js";
 import { db } from "../../common/session.util.js";
 
 @Injectable()
 export class ListService {
-  async create(input: {
-    name: string;
-    boardPublicId: string;
-    userId: string;
-  }) {
+  async create(input: { name: string; boardPublicId: string; userId: string }) {
     const board = await assertFound(
       boardRepo.getWorkspaceAndBoardIdByBoardPublicId(db, input.boardPublicId),
       `Board with public ID ${input.boardPublicId} not found`,

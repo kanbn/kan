@@ -611,6 +611,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
             <DeleteCardConfirmation
               boardPublicId={boardId ?? ""}
               cardPublicId={cardId}
+              returnUrl={boardReturnUrl}
             />
           </Modal>
 

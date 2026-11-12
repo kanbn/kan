@@ -2,7 +2,7 @@ import { createZodDto } from "nestjs-zod";
 import { z } from "zod";
 
 export const InviteMemberSchema = z.object({
-  email: z.string().email(),
+  email: z.string().email().describe("Email address to invite."),
 });
 
 export class InviteMemberDto extends createZodDto(InviteMemberSchema) {}
@@ -22,7 +22,9 @@ export class DeleteMemberResponseDto extends createZodDto(
 ) {}
 
 export const UpdateMemberRoleSchema = z.object({
-  role: z.enum(["admin", "member", "guest"]),
+  role: z
+    .enum(["admin", "member", "guest"])
+    .describe("New workspace role: 'admin', 'member' or 'guest'."),
 });
 
 export class UpdateMemberRoleDto extends createZodDto(UpdateMemberRoleSchema) {}

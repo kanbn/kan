@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { createNextApiContext } from "@kan/api/context";
-import { withApiLogging } from "@kan/api/utils/apiLogging";
-import { withRateLimit } from "@kan/api/utils/rateLimit";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { createNextApiContext } from "@kan/server/context";
+import { withApiLogging } from "@kan/server/utils/apiLogging";
+import { withRateLimit } from "@kan/server/utils/rateLimit";
 
 export default withRateLimit(
   { points: 20, duration: 60 },

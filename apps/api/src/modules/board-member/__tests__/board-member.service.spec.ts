@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import * as permissions from "@kan/api/utils/permissions";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
+import * as permissions from "@kan/server/utils/permissions";
 
 import { BoardMemberService } from "../board-member.service.js";
 

@@ -5,7 +5,7 @@ vi.mock("next-runtime-env", () => ({
   env: vi.fn(),
 }));
 
-vi.mock("@kan/api/context", () => ({
+vi.mock("@kan/server/context", () => ({
   createNextApiContext: vi
     .fn()
     .mockRejectedValue(new Error("no auth in tests")),
@@ -47,7 +47,7 @@ const mockedEnv = vi.mocked(env);
 const { createKanClient } = await import("@kan.bn/mcp/client");
 const mockedCreateKanClient = vi.mocked(createKanClient);
 const { clearPaidWorkspaceCache } = await import(
-  "@kan/api/utils/paidWorkspaceCache"
+  "@kan/server/utils/paidWorkspaceCache"
 );
 const handler = (await import("../pages/api/mcp.js")).default;
 

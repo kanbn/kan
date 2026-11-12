@@ -1,10 +1,10 @@
 import { InternalServerErrorException } from "@nestjs/common";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import * as permissions from "@kan/api/utils/permissions";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
+import * as permissions from "@kan/server/utils/permissions";
 
 import { LabelService } from "../label.service.js";
 

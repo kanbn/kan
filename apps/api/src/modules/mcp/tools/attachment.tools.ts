@@ -4,9 +4,10 @@ import { z } from "zod";
 
 import { AttachmentService } from "../../attachment/attachment.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import { attachmentPublicId } from "./public-ids.js";
 
 const DeleteAttachmentSchema = z.object({
-  attachmentPublicId: z.string().min(12),
+  attachmentPublicId,
 });
 
 @Injectable()

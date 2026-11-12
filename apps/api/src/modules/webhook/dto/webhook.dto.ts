@@ -1,12 +1,12 @@
 import { createZodDto } from "nestjs-zod";
 import { z } from "zod";
 
-import { webhookUrlSchema } from "@kan/api/utils/webhook";
+import { webhookUrlSchema } from "@kan/server/utils/webhook";
 import { webhookEvents } from "@kan/db/schema";
 
 const WebhookEventSchema = z.enum(webhookEvents);
 
-// webhookUrlSchema is zod 3 (packages/api), so it can't be nested in a zod 4
+// webhookUrlSchema is zod 3 (packages/server), so it can't be nested in a zod 4
 // object; delegate to it so the SSRF rules stay in one place.
 const WebhookUrlSchema = z.string().superRefine((url, ctx) => {
   const result = webhookUrlSchema.safeParse(url);
@@ -28,20 +28,46 @@ export const WebhookResponseSchema = z.object({
 export class WebhookResponseDto extends createZodDto(WebhookResponseSchema) {}
 
 export const CreateWebhookSchema = z.object({
-  name: z.string().min(1).max(255),
-  url: WebhookUrlSchema,
-  secret: z.string().max(512).optional(),
-  events: z.array(WebhookEventSchema).min(1),
+  name: z.string().min(1).max(255).describe("A label for the webhook."),
+  url: WebhookUrlSchema.describe(
+    "HTTPS URL to send events to. Must be a public host.",
+  ),
+  secret: z
+    .string()
+    .max(512)
+    .optional()
+    .describe(
+      "Secret used to sign each delivery so the receiver can verify it.",
+    ),
+  events: z
+    .array(WebhookEventSchema)
+    .min(1)
+    .describe("Card events to send, e.g. ['card.created', 'card.moved']."),
 });
 
 export class CreateWebhookDto extends createZodDto(CreateWebhookSchema) {}
 
 export const UpdateWebhookSchema = z.object({
-  name: z.string().min(1).max(255).optional(),
-  url: WebhookUrlSchema.optional(),
-  secret: z.string().max(512).optional(),
-  events: z.array(WebhookEventSchema).min(1).optional(),
-  active: z.boolean().optional(),
+  name: z
+    .string()
+    .min(1)
+    .max(255)
+    .optional()
+    .describe("New label for the webhook."),
+  url: WebhookUrlSchema.optional().describe(
+    "New HTTPS URL to send events to. Must be a public host.",
+  ),
+  secret: z
+    .string()
+    .max(512)
+    .optional()
+    .describe("New secret used to sign deliveries."),
+  events: z
+    .array(WebhookEventSchema)
+    .min(1)
+    .optional()
+    .describe("Card events to send, e.g. ['card.created', 'card.moved']."),
+  active: z.boolean().optional().describe("Whether the webhook sends events."),
 });
 
 export class UpdateWebhookDto extends createZodDto(UpdateWebhookSchema) {}

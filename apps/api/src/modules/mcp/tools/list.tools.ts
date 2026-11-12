@@ -1,17 +1,18 @@
-import { z } from "zod";
 import { Injectable } from "@nestjs/common";
 import { Tool } from "@rekog/mcp-nest";
+import { z } from "zod";
 
 import { CreateListSchema, UpdateListSchema } from "../../list/dto/list.dto.js";
 import { ListService } from "../../list/list.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import { listPublicId } from "./public-ids.js";
 
 const DeleteListSchema = z.object({
-  listPublicId: z.string().min(12),
+  listPublicId,
 });
 
 const UpdateListWithIdSchema = UpdateListSchema.extend({
-  listPublicId: z.string().min(12),
+  listPublicId,
 });
 
 @Injectable()

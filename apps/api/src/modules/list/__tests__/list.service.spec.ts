@@ -1,11 +1,11 @@
 import { InternalServerErrorException } from "@nestjs/common";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import * as permissions from "@kan/api/utils/permissions";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
+import * as permissions from "@kan/server/utils/permissions";
 
 import { ListService } from "../list.service.js";
 

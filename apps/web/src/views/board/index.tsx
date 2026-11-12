@@ -863,6 +863,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           <DeleteCardConfirmation
             cardPublicId={entityId}
             boardPublicId={boardId ?? ""}
+            returnUrl={router.asPath}
           />
         </Modal>
       </>

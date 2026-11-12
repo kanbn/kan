@@ -2,8 +2,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { env } from "next-runtime-env";
 import cors from "nextjs-cors";
 
-import { tokenOrIpIdentifier, withRateLimit } from "@kan/api/utils/rateLimit";
 import { createLogger } from "@kan/logger";
+import {
+  tokenOrIpIdentifier,
+  withRateLimit,
+} from "@kan/server/utils/rateLimit";
 
 import { env as appEnv } from "~/env";
 

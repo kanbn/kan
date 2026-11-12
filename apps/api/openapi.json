@@ -1234,6 +1234,7 @@
             "name": "limit",
             "required": false,
             "in": "query",
+            "description": "Maximum number of activities to return.",
             "schema": {
               "minimum": 1,
               "maximum": 100,
@@ -1245,6 +1246,7 @@
             "name": "cursor",
             "required": false,
             "in": "query",
+            "description": "Pagination cursor: nextCursor from the previous page.",
             "schema": {
               "format": "date-time",
               "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
@@ -1255,6 +1257,7 @@
             "name": "cursorPublicId",
             "required": false,
             "in": "query",
+            "description": "Pagination cursor: nextCursorPublicId from the previous page.",
             "schema": {
               "minLength": 12,
               "maxLength": 12,
@@ -1265,6 +1268,7 @@
             "name": "order",
             "required": false,
             "in": "query",
+            "description": "Return the oldest or newest activities first.",
             "schema": {
               "default": "oldest",
               "type": "string",
@@ -3426,6 +3430,7 @@
             "name": "workspaceSlug",
             "required": true,
             "in": "query",
+            "description": "The slug to check.",
             "schema": {
               "minLength": 3,
               "maxLength": 64,
@@ -3437,6 +3442,7 @@
             "name": "workspacePublicId",
             "required": false,
             "in": "query",
+            "description": "When renaming, the public ID of the workspace being renamed, so its own slug counts as available.",
             "schema": {
               "minLength": 12,
               "type": "string"
@@ -3659,6 +3665,7 @@
             "name": "query",
             "required": true,
             "in": "query",
+            "description": "Text to search for in board and card titles.",
             "schema": {
               "minLength": 1,
               "maxLength": 100,
@@ -3669,6 +3676,7 @@
             "name": "limit",
             "required": false,
             "in": "query",
+            "description": "Maximum number of results.",
             "schema": {
               "minimum": 1,
               "maximum": 50,
@@ -3953,23 +3961,27 @@
           "name": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 100
+            "maxLength": 100,
+            "description": "Board name."
           },
           "lists": {
             "type": "array",
             "items": {
               "type": "string",
               "minLength": 1
-            }
+            },
+            "description": "Names of the lists to create, in order, e.g. ['To do', 'Done']."
           },
           "labels": {
             "type": "array",
             "items": {
               "type": "string",
               "minLength": 1
-            }
+            },
+            "description": "Names of the labels to create, e.g. ['Bug', 'Feature']."
           },
           "type": {
+            "description": "'regular' for a board (default), 'template' for a board template.",
             "type": "string",
             "enum": [
               "regular",
@@ -3977,6 +3989,7 @@
             ]
           },
           "sourceBoardPublicId": {
+            "description": "Public ID of a board or template to copy lists and labels from.",
             "type": "string",
             "minLength": 12
           }
@@ -4410,16 +4423,19 @@
         "type": "object",
         "properties": {
           "name": {
+            "description": "New board name.",
             "type": "string",
             "minLength": 1
           },
           "slug": {
+            "description": "New URL slug of letters, numbers and hyphens.",
             "type": "string",
             "minLength": 1,
             "maxLength": 60,
             "pattern": "^(?![-]+$)[a-zA-Z0-9-]+$"
           },
           "visibility": {
+            "description": "'public' boards can be viewed by anyone with the link, 'private' only by members.",
             "type": "string",
             "enum": [
               "public",
@@ -4427,9 +4443,11 @@
             ]
           },
           "favorite": {
+            "description": "Whether the board is in the current user's favourites.",
             "type": "boolean"
           },
           "isArchived": {
+            "description": "Archive (true) or restore (false) the board.",
             "type": "boolean"
           }
         }
@@ -4466,7 +4484,8 @@
         "properties": {
           "targetWorkspacePublicId": {
             "type": "string",
-            "minLength": 12
+            "minLength": 12,
+            "description": "Public ID of the workspace to move the board to."
           }
         },
         "required": [
@@ -4820,10 +4839,12 @@
         "properties": {
           "workspaceMemberPublicId": {
             "type": "string",
-            "minLength": 12
+            "minLength": 12,
+            "description": "Public ID of the workspace member (not the user ID) to add."
           },
           "role": {
             "default": "member",
+            "description": "Board role: 'admin' or 'member' (default).",
             "type": "string",
             "enum": [
               "admin",
@@ -4863,7 +4884,8 @@
             "enum": [
               "admin",
               "member"
-            ]
+            ],
+            "description": "New board role: 'admin' or 'member'."
           }
         },
         "required": [
@@ -4888,41 +4910,48 @@
           "title": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 2000
+            "maxLength": 2000,
+            "description": "Card title."
           },
           "description": {
             "type": "string",
-            "maxLength": 10000
+            "maxLength": 10000,
+            "description": "Card description. Plain text, or markdown or HTML for formatting."
           },
           "listPublicId": {
             "type": "string",
-            "minLength": 12
+            "minLength": 12,
+            "description": "Public ID of the list to add the card to."
           },
           "labelPublicIds": {
             "type": "array",
             "items": {
               "type": "string",
               "minLength": 12
-            }
+            },
+            "description": "Public IDs of board labels to attach."
           },
           "memberPublicIds": {
             "type": "array",
             "items": {
               "type": "string",
               "minLength": 12
-            }
+            },
+            "description": "Public IDs of workspace members (not user IDs) to assign."
           },
           "position": {
             "type": "string",
             "enum": [
               "start",
               "end"
-            ]
+            ],
+            "description": "Add the card at the start or end of the list."
           },
           "dueDate": {
             "type": "string",
             "format": "date-time",
             "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+            "description": "Due date in ISO 8601, e.g. 2026-12-31T17:00:00Z.",
             "nullable": true
           }
         },
@@ -4951,17 +4980,21 @@
         "type": "object",
         "properties": {
           "title": {
+            "description": "New card title.",
             "type": "string",
             "minLength": 1,
             "maxLength": 2000
           },
           "description": {
+            "description": "New card description. Plain text, or markdown or HTML for formatting.",
             "type": "string"
           },
           "index": {
+            "description": "Zero-based position in the card's list, or in listPublicId when moving; 0 is the top.",
             "type": "number"
           },
           "listPublicId": {
+            "description": "Public ID of a list to move the card to.",
             "type": "string",
             "minLength": 12
           },
@@ -4969,6 +5002,7 @@
             "type": "string",
             "format": "date-time",
             "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+            "description": "Due date in ISO 8601, e.g. 2026-12-31T17:00:00Z, or null to clear it.",
             "nullable": true
           }
         }
@@ -5006,26 +5040,32 @@
         "properties": {
           "listPublicId": {
             "type": "string",
-            "minLength": 12
+            "minLength": 12,
+            "description": "Public ID of the list to put the copy in."
           },
           "index": {
+            "description": "Zero-based position in that list. Defaults to the end.",
             "type": "integer",
             "minimum": 0,
             "maximum": 9007199254740991
           },
           "title": {
+            "description": "Title for the copy. Defaults to the original title.",
             "type": "string",
             "minLength": 1,
             "maxLength": 2000
           },
           "copyLabels": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Copy the card's labels."
           },
           "copyMembers": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Copy the card's assigned members."
           },
           "copyChecklists": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Copy the card's checklists."
           }
         },
         "required": [
@@ -5040,7 +5080,8 @@
         "properties": {
           "comment": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "description": "Comment text. Plain text, or markdown or HTML for formatting."
           }
         },
         "required": [
@@ -5951,7 +5992,8 @@
           "name": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "description": "New checklist name."
           }
         },
         "required": [
@@ -5990,6 +6032,7 @@
         "type": "object",
         "properties": {
           "title": {
+            "description": "Checklist item text.",
             "type": "string",
             "minLength": 1,
             "maxLength": 500
@@ -6023,14 +6066,17 @@
         "type": "object",
         "properties": {
           "title": {
+            "description": "New checklist item text.",
             "type": "string",
             "minLength": 1,
             "maxLength": 500
           },
           "completed": {
+            "description": "Whether the item is done.",
             "type": "boolean"
           },
           "index": {
+            "description": "Zero-based position within the checklist.",
             "type": "integer",
             "minimum": 0,
             "maximum": 9007199254740991
@@ -6043,7 +6089,8 @@
           "name": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "description": "Checklist name."
           }
         },
         "required": [
@@ -6055,11 +6102,13 @@
         "properties": {
           "feedback": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "description": "The feedback message."
           },
           "url": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "description": "The page the feedback is about."
           }
         },
         "required": [
@@ -6274,16 +6323,19 @@
           "name": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 36
+            "maxLength": 36,
+            "description": "Label name."
           },
           "boardPublicId": {
             "type": "string",
-            "minLength": 12
+            "minLength": 12,
+            "description": "Public ID of the board the label belongs to."
           },
           "colourCode": {
             "type": "string",
             "minLength": 7,
-            "maxLength": 7
+            "maxLength": 7,
+            "description": "Label colour as a hex code, e.g. #0d9488."
           }
         },
         "required": [
@@ -6298,12 +6350,14 @@
           "name": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 36
+            "maxLength": 36,
+            "description": "Label name."
           },
           "colourCode": {
             "type": "string",
             "minLength": 7,
-            "maxLength": 7
+            "maxLength": 7,
+            "description": "Label colour as a hex code, e.g. #0d9488."
           }
         },
         "required": [
@@ -6328,11 +6382,13 @@
         "properties": {
           "name": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "description": "List name."
           },
           "boardPublicId": {
             "type": "string",
-            "minLength": 12
+            "minLength": 12,
+            "description": "Public ID of the board to add the list to."
           }
         },
         "required": [
@@ -6372,10 +6428,12 @@
         "type": "object",
         "properties": {
           "name": {
+            "description": "New list name.",
             "type": "string",
             "minLength": 1
           },
           "index": {
+            "description": "Zero-based position of the list on the board; 0 is leftmost.",
             "type": "number"
           }
         }
@@ -6386,7 +6444,8 @@
           "email": {
             "type": "string",
             "format": "email",
-            "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+            "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$",
+            "description": "Email address to invite."
           }
         },
         "required": [
@@ -6426,7 +6485,8 @@
               "admin",
               "member",
               "guest"
-            ]
+            ],
+            "description": "New workspace role: 'admin', 'member' or 'guest'."
           }
         },
         "required": [
@@ -6659,7 +6719,8 @@
               "member:invite",
               "member:edit",
               "member:remove"
-            ]
+            ],
+            "description": "The permission, as resource:action, e.g. board:edit."
           }
         },
         "required": [
@@ -6829,9 +6890,11 @@
         "type": "object",
         "properties": {
           "name": {
+            "description": "New display name.",
             "type": "string"
           },
           "image": {
+            "description": "New avatar image URL.",
             "type": "string"
           }
         }
@@ -6922,12 +6985,15 @@
           "name": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "description": "A label for the webhook."
           },
           "url": {
-            "type": "string"
+            "type": "string",
+            "description": "HTTPS URL to send events to. Must be a public host."
           },
           "secret": {
+            "description": "Secret used to sign each delivery so the receiver can verify it.",
             "type": "string",
             "maxLength": 512
           },
@@ -6942,7 +7008,8 @@
                 "card.moved",
                 "card.deleted"
               ]
-            }
+            },
+            "description": "Card events to send, e.g. ['card.created', 'card.moved']."
           }
         },
         "required": [
@@ -6955,18 +7022,22 @@
         "type": "object",
         "properties": {
           "name": {
+            "description": "New label for the webhook.",
             "type": "string",
             "minLength": 1,
             "maxLength": 255
           },
           "url": {
+            "description": "New HTTPS URL to send events to. Must be a public host.",
             "type": "string"
           },
           "secret": {
+            "description": "New secret used to sign deliveries.",
             "type": "string",
             "maxLength": 512
           },
           "events": {
+            "description": "Card events to send, e.g. ['card.created', 'card.moved'].",
             "minItems": 1,
             "type": "array",
             "items": {
@@ -6980,6 +7051,7 @@
             }
           },
           "active": {
+            "description": "Whether the webhook sends events.",
             "type": "boolean"
           }
         }
@@ -7390,9 +7462,11 @@
           "name": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 64
+            "maxLength": 64,
+            "description": "Workspace name."
           },
           "description": {
+            "description": "Short description of the workspace.",
             "type": "string",
             "maxLength": 280
           },
@@ -7408,7 +7482,8 @@
                 "type": "string",
                 "maxLength": 0
               }
-            ]
+            ],
+            "description": "URL slug of letters, numbers and hyphens. Generated if omitted or empty."
           }
         },
         "required": [
@@ -7458,25 +7533,30 @@
         "type": "object",
         "properties": {
           "name": {
+            "description": "New workspace name.",
             "type": "string",
             "minLength": 3,
             "maxLength": 64
           },
           "slug": {
+            "description": "New URL slug of letters, numbers and hyphens.",
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
             "pattern": "^(?![-]+$)[a-zA-Z0-9-]+$"
           },
           "description": {
+            "description": "New workspace description.",
             "type": "string",
             "minLength": 3,
             "maxLength": 280
           },
           "showEmailsToMembers": {
+            "description": "Whether members can see each other's email addresses.",
             "type": "boolean"
           },
           "weekStartDay": {
+            "description": "First day of the week: 0 Sunday, 1 Monday or 6 Saturday.",
             "anyOf": [
               {
                 "type": "number",

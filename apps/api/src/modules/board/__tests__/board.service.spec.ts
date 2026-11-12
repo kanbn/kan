@@ -1,14 +1,14 @@
 import { ForbiddenException } from "@nestjs/common";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import * as avatarUrls from "@kan/api/utils/avatarUrls";
-import * as permissions from "@kan/api/utils/permissions";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import * as avatarUrls from "@kan/server/utils/avatarUrls";
+import * as permissions from "@kan/server/utils/permissions";
 
 import { BoardService } from "../board.service.js";
 

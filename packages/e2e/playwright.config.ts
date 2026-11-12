@@ -161,7 +161,7 @@ export default defineConfig({
           },
         },
         {
-          command: "pnpm --filter @kan/api-server start",
+          command: "pnpm --filter @kan/api start",
           cwd: "../..",
           url: `${apiBaseURL}/health`,
           reuseExistingServer: !process.env.CI,

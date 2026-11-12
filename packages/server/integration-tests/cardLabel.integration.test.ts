@@ -6,7 +6,8 @@ import { CardLabelBoardError } from "@kan/db/repository/card.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as schema from "@kan/db/schema";
 
-import { createTestDb, seedTestData, type TestDbClient } from "./test-db";
+import type { TestDbClient } from "./test-db";
+import { createTestDb, seedTestData } from "./test-db";
 
 /**
  * Labels are board-scoped (labels.boardId), but the _card_labels join table

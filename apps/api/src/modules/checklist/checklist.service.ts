@@ -4,21 +4,20 @@ import {
   InternalServerErrorException,
 } from "@nestjs/common";
 
-import { assertBoardAccess, assertPermission } from "@kan/api/utils/permissions";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
+import {
+  assertBoardAccess,
+  assertPermission,
+} from "@kan/server/utils/permissions";
 
 import { assertFound } from "../../common/assert-found.util.js";
 import { db } from "../../common/session.util.js";
 
 @Injectable()
 export class ChecklistService {
-  async create(input: {
-    cardPublicId: string;
-    name: string;
-    userId: string;
-  }) {
+  async create(input: { cardPublicId: string; name: string; userId: string }) {
     const card = await assertFound(
       cardRepo.getWorkspaceAndCardIdByCardPublicId(db, input.cardPublicId),
       `Card with public ID ${input.cardPublicId} not found`,
@@ -158,9 +157,7 @@ export class ChecklistService {
     });
 
     if (!item?.id)
-      throw new InternalServerErrorException(
-        "Failed to create checklist item",
-      );
+      throw new InternalServerErrorException("Failed to create checklist item");
 
     await activityRepo.create(db, {
       type: "card.updated.checklist.item.added",
@@ -225,9 +222,7 @@ export class ChecklistService {
     }
 
     if (!updatedItem)
-      throw new InternalServerErrorException(
-        "Failed to update checklist item",
-      );
+      throw new InternalServerErrorException("Failed to update checklist item");
 
     if (input.completed !== undefined) {
       await activityRepo.create(db, {
@@ -278,9 +273,7 @@ export class ChecklistService {
     });
 
     if (!deleted)
-      throw new InternalServerErrorException(
-        "Failed to delete checklist item",
-      );
+      throw new InternalServerErrorException("Failed to delete checklist item");
 
     await activityRepo.create(db, {
       type: "card.updated.checklist.item.deleted",

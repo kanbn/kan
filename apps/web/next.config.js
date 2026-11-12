@@ -30,7 +30,7 @@ const config = {
 
   /** Enables hot reloading for local packages without a build step */
   transpilePackages: [
-    "@kan/api",
+    "@kan/server",
     "@kan/api-client",
     "@kan/db",
     "@kan/shared",

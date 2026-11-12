@@ -1,16 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { createKanMcpServer } from "@kan.bn/mcp";
+import { createKanClient, KanApiError } from "@kan.bn/mcp/client";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { env } from "next-runtime-env";
 
 import type { KanClient } from "@kan.bn/mcp/client";
-import { withApiLogging } from "@kan/api/utils/apiLogging";
-import { getApiToken } from "@kan/api/utils/apiToken";
+import { withApiLogging } from "@kan/server/utils/apiLogging";
+import { getApiToken } from "@kan/server/utils/apiToken";
 import {
   getCachedPaidWorkspaceEligibility,
   setCachedPaidWorkspaceEligibility,
-} from "@kan/api/utils/paidWorkspaceCache";
-import { createKanMcpServer } from "@kan.bn/mcp";
-import { createKanClient, KanApiError } from "@kan.bn/mcp/client";
+} from "@kan/server/utils/paidWorkspaceCache";
 import { isPaidWorkspacePlan } from "@kan/shared/utils";
 
 interface WorkspaceMembership {

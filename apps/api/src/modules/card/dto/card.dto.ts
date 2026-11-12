@@ -49,13 +49,29 @@ const activityBase = {
 // ─── create ──────────────────────────────────────────────────
 
 export const CreateCardSchema = z.object({
-  title: z.string().min(1).max(2000),
-  description: z.string().max(10000),
-  listPublicId: z.string().min(12),
-  labelPublicIds: z.array(z.string().min(12)),
-  memberPublicIds: z.array(z.string().min(12)),
-  position: z.enum(["start", "end"]),
-  dueDate: dueDateInput,
+  title: z.string().min(1).max(2000).describe("Card title."),
+  description: z
+    .string()
+    .max(10000)
+    .describe(
+      "Card description. Plain text, or markdown or HTML for formatting.",
+    ),
+  listPublicId: z
+    .string()
+    .min(12)
+    .describe("Public ID of the list to add the card to."),
+  labelPublicIds: z
+    .array(z.string().min(12))
+    .describe("Public IDs of board labels to attach."),
+  memberPublicIds: z
+    .array(z.string().min(12))
+    .describe("Public IDs of workspace members (not user IDs) to assign."),
+  position: z
+    .enum(["start", "end"])
+    .describe("Add the card at the start or end of the list."),
+  dueDate: dueDateInput.describe(
+    "Due date in ISO 8601, e.g. 2026-12-31T17:00:00Z.",
+  ),
 });
 
 export class CreateCardDto extends createZodDto(CreateCardSchema) {}
@@ -67,11 +83,27 @@ export class PublicIdResponseDto extends createZodDto(PublicIdResponseSchema) {}
 // ─── update ──────────────────────────────────────────────────
 
 export const UpdateCardSchema = z.object({
-  title: z.string().min(1).max(2000).optional(),
-  description: z.string().optional(),
-  index: z.number().optional(),
-  listPublicId: z.string().min(12).optional(),
-  dueDate: dueDateInput,
+  title: z.string().min(1).max(2000).optional().describe("New card title."),
+  description: z
+    .string()
+    .optional()
+    .describe(
+      "New card description. Plain text, or markdown or HTML for formatting.",
+    ),
+  index: z
+    .number()
+    .optional()
+    .describe(
+      "Zero-based position in the card's list, or in listPublicId when moving; 0 is the top.",
+    ),
+  listPublicId: z
+    .string()
+    .min(12)
+    .optional()
+    .describe("Public ID of a list to move the card to."),
+  dueDate: dueDateInput.describe(
+    "Due date in ISO 8601, e.g. 2026-12-31T17:00:00Z, or null to clear it.",
+  ),
 });
 
 export class UpdateCardDto extends createZodDto(UpdateCardSchema) {}
@@ -93,7 +125,12 @@ export class SuccessResponseDto extends createZodDto(SuccessResponseSchema) {}
 
 // ─── comments ────────────────────────────────────────────────
 
-export const CommentSchema = z.object({ comment: z.string().min(1) });
+export const CommentSchema = z.object({
+  comment: z
+    .string()
+    .min(1)
+    .describe("Comment text. Plain text, or markdown or HTML for formatting."),
+});
 
 export class CommentDto extends createZodDto(CommentSchema) {}
 
@@ -121,12 +158,25 @@ export class ToggleMemberResponseDto extends createZodDto(
 // ─── duplicate ───────────────────────────────────────────────
 
 export const DuplicateCardSchema = z.object({
-  listPublicId: z.string().min(12),
-  index: z.number().int().min(0).optional(),
-  title: z.string().min(1).max(2000).optional(),
-  copyLabels: z.boolean(),
-  copyMembers: z.boolean(),
-  copyChecklists: z.boolean(),
+  listPublicId: z
+    .string()
+    .min(12)
+    .describe("Public ID of the list to put the copy in."),
+  index: z
+    .number()
+    .int()
+    .min(0)
+    .optional()
+    .describe("Zero-based position in that list. Defaults to the end."),
+  title: z
+    .string()
+    .min(1)
+    .max(2000)
+    .optional()
+    .describe("Title for the copy. Defaults to the original title."),
+  copyLabels: z.boolean().describe("Copy the card's labels."),
+  copyMembers: z.boolean().describe("Copy the card's assigned members."),
+  copyChecklists: z.boolean().describe("Copy the card's checklists."),
 });
 
 export class DuplicateCardDto extends createZodDto(DuplicateCardSchema) {}
@@ -228,10 +278,26 @@ export class CardDetailDto extends createZodDto(CardDetailSchema) {}
 // ─── activities ──────────────────────────────────────────────
 
 export const ActivitiesQuerySchema = z.object({
-  limit: z.coerce.number().min(1).max(100).optional().default(10),
-  cursor: isoDate.optional(),
-  cursorPublicId: z.string().length(12).optional(),
-  order: z.enum(["oldest", "newest"]).optional().default("oldest"),
+  limit: z.coerce
+    .number()
+    .min(1)
+    .max(100)
+    .optional()
+    .default(10)
+    .describe("Maximum number of activities to return."),
+  cursor: isoDate
+    .optional()
+    .describe("Pagination cursor: nextCursor from the previous page."),
+  cursorPublicId: z
+    .string()
+    .length(12)
+    .optional()
+    .describe("Pagination cursor: nextCursorPublicId from the previous page."),
+  order: z
+    .enum(["oldest", "newest"])
+    .optional()
+    .default("oldest")
+    .describe("Return the oldest or newest activities first."),
 });
 
 export class ActivitiesQueryDto extends createZodDto(ActivitiesQuerySchema) {}

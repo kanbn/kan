@@ -43,7 +43,7 @@ FROM alpine AS pruner-api
 WORKDIR /app
 COPY . .
 
-RUN turbo prune --scope=@kan/api-server --scope=@kan/db --docker
+RUN turbo prune --scope=@kan/api --scope=@kan/db --docker
 
 # ============================================
 # Stage 3: Install dependencies

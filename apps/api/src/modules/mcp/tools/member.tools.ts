@@ -7,24 +7,25 @@ import { headersFromRaw } from "../../../common/session.util.js";
 import { UpdateMemberRoleSchema } from "../../member/dto/member.dto.js";
 import { MemberService } from "../../member/member.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import { memberPublicId, workspacePublicId } from "./public-ids.js";
 
 const InviteMemberWithWorkspaceSchema = z.object({
-  workspacePublicId: z.string().min(12),
-  email: z.string().email(),
+  workspacePublicId,
+  email: z.string().email().describe("Email address to invite."),
 });
 
 const RemoveMemberSchema = z.object({
-  workspacePublicId: z.string().min(12),
-  memberPublicId: z.string().min(12),
+  workspacePublicId,
+  memberPublicId,
 });
 
 const UpdateMemberRoleWithIdsSchema = UpdateMemberRoleSchema.extend({
-  workspacePublicId: z.string().min(12),
-  memberPublicId: z.string().min(12),
+  workspacePublicId,
+  memberPublicId,
 });
 
 const WorkspaceInviteLinkSchema = z.object({
-  workspacePublicId: z.string().min(12),
+  workspacePublicId,
 });
 
 @Injectable()

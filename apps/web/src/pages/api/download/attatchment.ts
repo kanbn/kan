@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { withApiLogging } from "@kan/api/utils/apiLogging";
-import { withRateLimit } from "@kan/api/utils/rateLimit";
+import { withApiLogging } from "@kan/server/utils/apiLogging";
+import { withRateLimit } from "@kan/server/utils/rateLimit";
 
 import { env } from "~/env";
 import {
