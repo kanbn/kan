@@ -1,0 +1,55 @@
+---
+title: Troubleshooting
+description: "Fix sign-in problems, missing boards, failed imports and API errors."
+---
+
+## I keep getting sent back to the sign-in page
+
+Your browser may be holding an old session cookie. Sign out, then sign in again. If that doesn't help, clear the cookies for `kan.bn` and sign in again.
+
+## I can't see a board
+
+Workspace members and guests only see the boards they've been added to. Ask a workspace admin or a board admin to add you from **Board options → Manage members**. See [Board members](/members#board-members).
+
+If you can't see a whole workspace, check you're signed in with the email you were invited with, and that you haven't been [paused](/members#paused-members).
+
+## I can't invite anyone
+
+| Message                                    | What to do                                                                  |
+| ------------------------------------------ | --------------------------------------------------------------------------- |
+| Inviting members requires a Team plan      | [Upgrade the workspace](/plans#upgrade-change-or-cancel).                   |
+| Seat limit reached                         | Your plan has a fixed number of seats. Upgrade, or remove someone first.    |
+| User is already a member of this workspace | They're already in. Check **Members**, and add them to the board they need. |
+| You don't have permission                  | Only people with the invite members permission can invite. Ask an admin.    |
+
+## A Trello import didn't finish
+
+Each board is imported on its own, so one failure doesn't stop the rest. The import tells you which boards didn't make it and why:
+
+| Message                               | What to do                                                                                                                                        |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Kan couldn't open the board in Trello | Kan's access to Trello has expired or doesn't cover the board. Disconnect and reconnect Trello in **Settings → Integrations**, then import again. |
+| The board couldn't be found in Trello | It was deleted or you were removed from it in Trello.                                                                                             |
+| Trello is busy right now              | Trello is limiting requests. Wait a few minutes and import that board again.                                                                      |
+
+See [Import from Trello](/integrations/trello) for what's brought across.
+
+## A webhook isn't arriving
+
+1. In **Settings → Webhooks**, send a test. The result shows the status code your server returned.
+2. Make sure the URL is public HTTPS. Kan doesn't send to private or local addresses.
+3. Your server must answer within 10 seconds with a `2xx`. Deliveries aren't retried.
+4. Check you've subscribed the webhook to the event you expect. See [Webhooks](/integrations/webhooks).
+
+## The API returns an error
+
+| Status | What to do                                                                                    |
+| ------ | --------------------------------------------------------------------------------------------- |
+| `401`  | The API key is missing or revoked. Create a new one in **Settings → API**.                    |
+| `403`  | The key's owner doesn't have permission for this. Check their [role](/members#roles).         |
+| `404`  | The ID is wrong, or the key's owner can't see it. Boards you aren't a member of return `404`. |
+| `429`  | You've sent more than 600 requests in a minute. Wait and try again.                           |
+
+## Still stuck?
+
+Email [support@kan.bn](mailto:support@kan.bn) with the workspace and board name, and what you were doing.

@@ -30,6 +30,8 @@
     "@kan/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18",
     "typescript": "catalog:"
   },
   "prettier": "@kan/prettier-config",

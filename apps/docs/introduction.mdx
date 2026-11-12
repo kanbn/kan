@@ -3,34 +3,30 @@ title: Introduction
 description: "Kan is the open source alternative to Trello."
 ---
 
-<Frame>
-  <img
-    className="block rounded-lg border border-gray-200 dark:hidden"
-    src="/images/hero-light.png"
-    alt="Hero Light"
-  />
-  <img
-    className="hidden rounded-lg dark:block"
-    src="/images/hero-dark.png"
-    alt="Hero Dark"
-  />
-</Frame>
-
-## Getting Started
-
-Get started with Kan by choosing your preferred deployment option below.
+Kan is a kanban board for you and your team. Plan work on boards, break it into cards, and move cards across lists as it gets done. Use it in the browser, from your AI agent over MCP, or from your own code with the REST API.
 
 <CardGroup cols={2}>
-  <Card title="Cloud" icon="cloud" href="https://kan.bn/signup">
-    Get started instantly with our hosted solution - we'll handle all the
-    hosting, scaling, and maintenance for you.
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Sign up, create a board and invite your team.
   </Card>
-  <Card
-    title="Self-host"
-    icon="code"
-    href="https://github.com/kanbn/kan?tab=readme-ov-file#self-hosting-"
-  >
-    For full data ownership and control, you can self-host Kan on your
-    infrastructure.
+  <Card title="Connect your AI agent" icon="robot" href="/mcp">
+    Add the MCP server to Claude, Cursor or any MCP client.
+  </Card>
+  <Card title="Import from Trello" icon="trello" href="/integrations/trello">
+    Bring your Trello boards across in a couple of minutes.
+  </Card>
+  <Card title="API reference" icon="code" href="/api-reference/introduction">
+    Every endpoint, with request and response examples.
   </Card>
 </CardGroup>
+
+## How it fits together
+
+There are four things to know about:
+
+- **[Workspaces](/workspaces)** hold your team, your boards and your plan. You can belong to more than one.
+- **[Boards](/boards)** are a project or process, split into **lists** such as To Do, In Progress and Done. Boards are private unless you make one public.
+- **[Cards](/cards)** are the work itself. They have a description, labels, assignees, a due date, checklists, comments and attachments, and every change is recorded in the card's activity.
+- **[Members](/members)** are the people in a workspace. Their role decides which boards they see and what they can change.
+
+These docs cover [Kan Cloud](https://kan.bn). Kan is also open source, so you can [run it yourself](/self-hosting/introduction).

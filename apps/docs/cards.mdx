@@ -1,0 +1,53 @@
+---
+title: Cards
+description: "Descriptions, labels, assignees, due dates, checklists, comments and attachments."
+---
+
+A card is a piece of work. Click one to open it. Everything on a card is optional except its title.
+
+## What a card has
+
+| Field                 | Description                                                                                                                |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Title and description | The description is rich text. Type `/` for formatting commands and `@` to mention someone.                                 |
+| Labels                | Coloured tags for sorting and [filtering](/boards#filter-cards), such as Bug or High Priority. Labels belong to the board. |
+| Members               | Who's working on it. You can assign the board's members and workspace admins.                                              |
+| Due date              | Shows on the card, in the calendar view and in due date filters.                                                           |
+| Checklists            | Lists of steps to tick off. A card can have several, and you can drag items to reorder them.                               |
+| Attachments           | Files up to 50 MB each. Images show as thumbnails.                                                                         |
+| Comments              | Discussion about the card. Type `@` to mention someone.                                                                    |
+| Activity              | Every change to the card, who made it and when. Switch between newest and oldest first.                                    |
+
+## Create and edit cards
+
+<Tabs>
+  <Tab title="Kan">
+    Click **+** on a list to add a card. Open the card to fill in the rest. Right-click a card on the board for shortcuts: labels, members, due date, move to another list, duplicate and delete.
+  </Tab>
+  <Tab title="API">
+    ```bash
+    curl -X POST https://kan.bn/api/v1/cards \
+      -H "Authorization: Bearer $KAN_API_KEY" -H "content-type: application/json" \
+      -d '{"listPublicId": "'$LIST'", "title": "Fix login bug", "description": "", "position": "end", "labelPublicIds": [], "memberPublicIds": [], "dueDate": "2026-12-01T00:00:00.000Z"}'
+    ```
+
+    Update with `PUT /cards/{cardPublicId}`. Only the fields you send change. Send a new `listPublicId` and `index` to move it.
+
+  </Tab>
+  <Tab title="Agent">
+    "Add a card to Doing on the Roadmap board called Fix login bug, due Friday, assigned to me."
+  </Tab>
+</Tabs>
+
+## Mentions
+
+Mention someone with `@` in a description or comment and they get an email with a link to the card. You can mention the board's members and workspace admins.
+
+## Duplicate, move and delete
+
+From the card's menu or by right-clicking it on the board:
+
+- **Duplicate card** copies it into any list on the board. Choose whether to copy its labels, members and checklists.
+- **Move to another list** moves it on the same board.
+- **Copy link to card** copies a link you can share with anyone who can see the board.
+- **Delete card** removes it from the board.

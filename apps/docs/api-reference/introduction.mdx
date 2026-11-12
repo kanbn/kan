@@ -1,7 +1,9 @@
 ---
 title: "Introduction"
-description: "Learn how to integrate with Kan's REST API."
+description: "Call Kan from your own code."
 ---
+
+The REST API lets your code do what you can do in Kan: create cards from a form, sync tasks from another tool, or build a report. The [MCP server](/mcp) uses the same API.
 
 ## Base URL
 
@@ -9,13 +11,27 @@ description: "Learn how to integrate with Kan's REST API."
 https://kan.bn/api/v1
 ```
 
+If you self-host, use your own URL, such as `https://kan.example.com/api/v1`.
+
 ## Authentication
 
-Most endpoints require authentication using your API key. You can create one in the [settings page](https://kan.bn/settings) of your account. Include this key as a Bearer token in the `Authorization` header of each request.
+Send an API key as a Bearer token:
 
 ```
-'Authorization': 'Bearer kan_123456789'
+Authorization: Bearer kan_your_api_key
 ```
+
+Create one in **Settings → API → Create new key**. It's only shown once, so store it as a secret straight away, for example as `KAN_API_KEY`. Keep it on your server: never put it in frontend code or commit it.
+
+A key acts as you. It can see and change what you can in every workspace you belong to, with the same [role and permissions](/members#roles). To revoke a key, open the menu next to it in **Settings → API** and choose **Revoke**. Requests made with it fail straight away.
+
+```bash
+curl https://kan.bn/api/v1/users/me -H "Authorization: Bearer $KAN_API_KEY"
+```
+
+## IDs
+
+Every object has a 12-character `publicId`. Endpoints take and return these, such as `/boards/{boardPublicId}`. Find a workspace's ID with `GET /workspaces`, and a board's lists and labels with `GET /boards/{boardPublicId}`.
 
 ## Response codes
 
@@ -23,11 +39,17 @@ Kan uses standard HTTP codes to indicate the success or failure of your requests
 
 In general, `2xx` HTTP codes correspond to success, `4xx` codes are for user-related failures, and `5xx` codes are for infrastructure issues.
 
-| Status | Description                     |
-| ------ | ------------------------------- |
-| `200`  | Success                         |
-| `400`  | Invalid parameters              |
-| `401`  | Missing token                   |
-| `403`  | Invalid token                   |
-| `404`  | Resource not found              |
-| `500`  | Error with Kan's infrastructure |
+| Status | Description                                                                |
+| ------ | -------------------------------------------------------------------------- |
+| `200`  | Success                                                                    |
+| `400`  | Invalid parameters. The body says which.                                   |
+| `401`  | Missing or invalid API key                                                 |
+| `403`  | You don't have permission for this, or it needs a paid plan                |
+| `404`  | Not found, or you can't see it                                             |
+| `409`  | Conflicts with something that exists, such as a workspace URL that's taken |
+| `429`  | Too many requests                                                          |
+| `500`  | Error with Kan's infrastructure                                            |
+
+## Rate limits
+
+Each API key can make 600 requests a minute. Requests without a key are limited per IP address. Over the limit, you get a `429`; wait a minute and try again.

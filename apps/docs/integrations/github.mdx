@@ -1,0 +1,37 @@
+---
+title: GitHub
+description: "Import GitHub Projects into Kan."
+---
+
+Import turns a GitHub Project into a Kan board. You can import projects on any plan.
+
+## What's imported
+
+| GitHub Project                                       | Kan                                                                 |
+| ---------------------------------------------------- | ------------------------------------------------------------------- |
+| Project                                              | Board                                                               |
+| Options of the **Status** field                      | Lists                                                               |
+| Issues, pull requests and draft issues               | Cards, in the list matching their status, with their title and body |
+| Options of an **Area** field, if the project has one | Labels                                                              |
+
+The import is a one-off copy. Changes in GitHub afterwards don't sync to Kan.
+
+## Import your projects
+
+<Steps>
+  <Step title="Create a token">
+    In GitHub, create a [personal access
+    token](https://github.com/settings/tokens) (classic) with the `read:project`
+    and `repo` scopes.
+  </Step>
+  <Step title="Connect GitHub">
+    Open **Settings → Integrations**, paste the token and click **Connect
+    GitHub**.
+  </Step>
+  <Step title="Import">
+    On **Boards**, click **Import**, choose **GitHub**, pick the projects and
+    import them.
+  </Step>
+</Steps>
+
+To remove Kan's access, click **Disconnect GitHub** in **Settings → Integrations**, and delete the token in GitHub.

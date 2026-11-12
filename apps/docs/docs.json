@@ -1,0 +1,98 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Kan",
+  "colors": {
+    "primary": "#000000",
+    "light": "#EDEDED",
+    "dark": "#161616"
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg",
+    "href": "https://kan.bn"
+  },
+  "favicon": "/favicon.png",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Get started",
+        "pages": ["introduction", "quickstart"]
+      },
+      {
+        "group": "Guides",
+        "pages": [
+          "workspaces",
+          "boards",
+          "cards",
+          "members",
+          "templates",
+          "plans",
+          "troubleshooting"
+        ]
+      },
+      {
+        "group": "Tools",
+        "pages": ["mcp"]
+      },
+      {
+        "group": "Integrations",
+        "pages": [
+          "integrations/overview",
+          "integrations/trello",
+          "integrations/github",
+          "integrations/webhooks"
+        ]
+      },
+      {
+        "group": "API reference",
+        "pages": ["api-reference/introduction"],
+        "openapi": "https://kan.bn/api/v1/openapi.json"
+      },
+      {
+        "group": "Self-hosting",
+        "pages": [
+          "self-hosting/introduction",
+          "self-hosting/configuration",
+          "self-hosting/s3"
+        ]
+      }
+    ]
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/kanbn/kan"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Sign in",
+      "href": "https://kan.bn/login"
+    }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/kanbn/kan"
+    }
+  },
+  "redirects": [
+    {
+      "source": "/guides/self-hosting/introduction",
+      "destination": "/self-hosting/introduction"
+    },
+    {
+      "source": "/guides/self-hosting/s3",
+      "destination": "/self-hosting/s3"
+    },
+    {
+      "source": "/integrations/mcp-server",
+      "destination": "/mcp"
+    },
+    {
+      "source": "/imports/trello",
+      "destination": "/integrations/trello"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+---
+title: Members and roles
+description: "Invite people, choose what they can do, and control who sees each board."
+---
+
+Members are the people in a workspace. Each has a **role**, which sets what they can do, and belongs to the boards they've been added to.
+
+Inviting members needs the [Team plan](/plans). Each member is a seat.
+
+## Invite people
+
+<Tabs>
+  <Tab title="Kan">
+    Open **Members** and click **Invite**. Enter their email. They join as a member, and get an email with a link to join, and sign up if they don't have an account yet.
+
+    Or click **Create invite link** and share the link. Anyone with it can join as a member until you click **Deactivate invite link**.
+
+  </Tab>
+  <Tab title="API">
+    ```bash
+    curl -X POST https://kan.bn/api/v1/workspaces/$WORKSPACE/members/invite \
+      -H "Authorization: Bearer $KAN_API_KEY" -H "content-type: application/json" \
+      -d '{"email": "jane@acme.com"}'
+    ```
+  </Tab>
+  <Tab title="Agent">
+    "Invite jane@acme.com to the Acme workspace."
+  </Tab>
+</Tabs>
+
+## Roles
+
+| Role   | Boards they see              | What they can do                                                           |
+| ------ | ---------------------------- | -------------------------------------------------------------------------- |
+| Admin  | Every board in the workspace | Everything, including workspace settings, billing, members and permissions |
+| Member | Boards they've been added to | Create boards, and create, edit and delete lists, cards and comments       |
+| Guest  | Boards they've been added to | View boards, cards and comments, without changing anything                 |
+
+Everyone can see [templates](/templates). People can only give or change roles up to their own, so a member can't make someone an admin.
+
+To change someone's role, open **Members**, click the menu next to them and pick a new role.
+
+## Custom permissions
+
+If the default roles don't fit, admins can change them in **Settings → Permissions**. Each permission is a resource (workspace, boards, lists, cards, comments, members) and an action (view, create, edit, delete). Changes to a role apply to everyone with it.
+
+To give one person more or less than their role, open **Members**, click the menu next to them and choose **Edit permissions**. Reset them to go back to their role's defaults.
+
+## Board members
+
+A board's members are the people who can see it. Workspace admins see every board without being added.
+
+Open **Board options → Manage members** to add workspace members to a board or remove them. Each board member is a board **admin** or **member**; board admins can manage the board's members even if they aren't workspace admins.
+
+Only a board's members and workspace admins can be assigned to its cards or mentioned on them.
+
+## Remove a member
+
+Open **Members**, click the menu next to them and choose **Remove**. They lose access to the workspace straight away, and on the Team plan their seat is removed from your next bill. Their cards, comments and activity stay.
+
+## Paused members
+
+If a workspace's paid plan ends, it moves to Free and every member except the owner is **paused**. Paused members can't open the workspace, and appear faded in member lists. They can't be newly assigned to cards or mentioned.
+
+Subscribe again and everyone is unpaused.
