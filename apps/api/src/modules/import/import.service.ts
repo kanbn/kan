@@ -31,6 +31,7 @@ import {
   normalizeDescription,
 } from "@kan/shared/utils";
 
+import type { ImportFailureCode } from "./dto/import.dto.js";
 import type {
   GitHubGraphQLResponse,
   GitHubProjectsResponse,
@@ -107,11 +108,10 @@ const INSERT_BATCH_SIZE = 1000;
 
 class ImportBoardError extends Error {
   constructor(
-    message: string,
-    readonly boardId?: string,
+    readonly code: ImportFailureCode,
     readonly boardName: string | null = null,
   ) {
-    super(message);
+    super(code);
   }
 }
 
@@ -119,13 +119,11 @@ const isTimeout = (error: unknown) =>
   error instanceof Error &&
   (error.name === "TimeoutError" || error.name === "AbortError");
 
-const trelloStatusReason = (status: number) => {
-  if (status === 401 || status === 403)
-    return "Kan doesn't have access to this board in Trello. Reconnect Trello and try again.";
-  if (status === 404) return "This board no longer exists in Trello.";
-  if (status === 429)
-    return "Trello is rate limiting requests. Try again in a minute.";
-  return `Trello returned an error (${status}). Try again in a minute.`;
+const trelloStatusCode = (status: number): ImportFailureCode => {
+  if (status === 401 || status === 403) return "no_access";
+  if (status === 404) return "not_found";
+  if (status === 429) return "rate_limited";
+  return "unknown";
 };
 
 const fetchTrello = async (url: string) => {
@@ -386,7 +384,9 @@ export class ImportService {
             `${trelloUrl()}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
           );
           if (!response.ok)
-            throw new ImportBoardError(trelloStatusReason(response.status));
+            throw new Error(`Trello responded ${response.status}`, {
+              cause: new ImportBoardError(trelloStatusCode(response.status)),
+            });
 
           const data = (await response.json()) as TrelloBoard;
           boardName = data.name;
@@ -406,12 +406,11 @@ export class ImportService {
             "Trello board failed to import",
           );
           throw new ImportBoardError(
-            error instanceof ImportBoardError
-              ? error.message
+            error instanceof Error && error.cause instanceof ImportBoardError
+              ? error.cause.code
               : isTimeout(error)
-                ? "Trello took too long to respond. Try again in a minute."
-                : "Something went wrong importing this board.",
-            boardId,
+                ? "timeout"
+                : "unknown",
             boardName,
           );
         }
@@ -427,10 +426,10 @@ export class ImportService {
                 result.reason instanceof ImportBoardError
                   ? result.reason.boardName
                   : null,
-              reason:
-                result.reason instanceof Error
-                  ? result.reason.message
-                  : "Something went wrong importing this board.",
+              code:
+                result.reason instanceof ImportBoardError
+                  ? result.reason.code
+                  : ("unknown" as const),
             },
           ]
         : [],
@@ -444,13 +443,6 @@ export class ImportService {
         { importId },
       );
     }
-
-    if (boardsCreated === 0)
-      throw new InternalServerErrorException(
-        failures
-          .map((f) => `${f.boardName ?? "A board"}: ${f.reason}`)
-          .join(" "),
-      );
 
     return { boardsCreated, failures };
   }

@@ -1129,11 +1129,22 @@ export interface ImportTrelloBoardsDto {
   workspacePublicId: string;
 }
 
+export type ImportTrelloBoardsResponseDtoOutputFailuresItemCode = typeof ImportTrelloBoardsResponseDtoOutputFailuresItemCode[keyof typeof ImportTrelloBoardsResponseDtoOutputFailuresItemCode];
+
+
+export const ImportTrelloBoardsResponseDtoOutputFailuresItemCode = {
+  no_access: 'no_access',
+  not_found: 'not_found',
+  rate_limited: 'rate_limited',
+  timeout: 'timeout',
+  unknown: 'unknown',
+} as const;
+
 export type ImportTrelloBoardsResponseDtoOutputFailuresItem = {
   boardId: string;
   /** @nullable */
   boardName: string | null;
-  reason: string;
+  code: ImportTrelloBoardsResponseDtoOutputFailuresItemCode;
 };
 
 export interface ImportTrelloBoardsResponseDtoOutput {

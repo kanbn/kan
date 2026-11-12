@@ -165,7 +165,7 @@ describe("ImportService.importTrelloBoards", () => {
         {
           boardId: "missing",
           boardName: null,
-          reason: "This board no longer exists in Trello.",
+          code: "not_found",
         },
       ],
     });
@@ -247,16 +247,16 @@ describe("ImportService.importTrelloBoards", () => {
         workspacePublicId: "workspace_12345",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({
-      status: 500,
-      message: "Roadmap: Something went wrong importing this board.",
+    ).resolves.toEqual({
+      boardsCreated: 0,
+      failures: [{ boardId: "tb1", boardName: "Roadmap", code: "unknown" }],
     });
   });
 
-  it("marks the import failed and throws when no boards import", async () => {
+  it("marks the import failed when no boards import", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn().mockResolvedValue(jsonResponse({}, false, 500)),
+      vi.fn().mockResolvedValue(jsonResponse({}, false, 403)),
     );
 
     await expect(
@@ -265,7 +265,10 @@ describe("ImportService.importTrelloBoards", () => {
         workspacePublicId: "workspace_12345",
         userId: "user_1",
       }),
-    ).rejects.toMatchObject({ status: 500 });
+    ).resolves.toEqual({
+      boardsCreated: 0,
+      failures: [{ boardId: "tb1", boardName: null, code: "no_access" }],
+    });
     expect(importRepo.update).toHaveBeenCalledWith(
       expect.anything(),
       { status: "failed" },

@@ -6181,14 +6181,21 @@
                   "type": "string",
                   "nullable": true
                 },
-                "reason": {
-                  "type": "string"
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "no_access",
+                    "not_found",
+                    "rate_limited",
+                    "timeout",
+                    "unknown"
+                  ]
                 }
               },
               "required": [
                 "boardId",
                 "boardName",
-                "reason"
+                "code"
               ],
               "additionalProperties": false
             }
