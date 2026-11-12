@@ -46,7 +46,7 @@
     "@electric-sql/pglite": "^0.3.7",
     "@kan/logger": "workspace:^",
     "@kan/shared": "workspace:^",
-    "drizzle-orm": "^0.42.0",
+    "drizzle-orm": "^0.45.4",
     "drizzle-zod": "^0.5.1",
     "ioredis": "^5.9.2",
     "pg": "^8.11.3",
@@ -60,7 +60,7 @@
     "@kan/tsconfig": "workspace:*",
     "@types/pg": "^8.10.9",
     "dotenv-cli": "^7.4.4",
-    "drizzle-kit": "^0.28.1",
+    "drizzle-kit": "^0.31.11",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"

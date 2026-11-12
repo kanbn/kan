@@ -267,6 +267,13 @@
       "when": 1790111796287,
       "tag": "20260922211636_BackfillBoardMembers",
       "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1794520876007,
+      "tag": "20261112220116_AddApiKeyConfigId",
+      "breakpoints": true
     }
   ]
 }
