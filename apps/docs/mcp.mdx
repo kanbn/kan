@@ -1,0 +1,123 @@
+---
+title: Connect your AI agent
+description: "Run Kan from Claude, Cursor or any MCP client."
+---
+
+MCP (Model Context Protocol) is how AI agents like Claude and Cursor connect to other tools. Add Kan's MCP server and you can ask your agent to do anything you could do in Kan: plan a sprint, move cards, write up checklists or summarise what changed on a board. It calls Kan for you, with your permissions.
+
+The hosted server needs a workspace on the [Team plan](/plans) or above. On Free, or on your own server, use the [local server](#local-server) instead.
+
+## 1. Create an API key
+
+In Kan, open **Settings → API** and click **Create new key**. Copy it straight away: it's only shown once.
+
+## 2. Add the server
+
+The server URL is `https://mcp.kan.bn`. Send your key in the `Authorization` header.
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```bash
+    claude mcp add --transport http kan https://mcp.kan.bn \
+      --header "Authorization: Bearer kan_your_api_key"
+    ```
+  </Tab>
+  <Tab title="Claude Desktop, Cursor">
+    Add to `claude_desktop_config.json`, or `~/.cursor/mcp.json` for Cursor:
+
+    ```json
+    {
+      "mcpServers": {
+        "kan": {
+          "type": "http",
+          "url": "https://mcp.kan.bn",
+          "headers": { "Authorization": "Bearer kan_your_api_key" }
+        }
+      }
+    }
+    ```
+
+  </Tab>
+  <Tab title="Other clients">
+    Add a streamable HTTP server with the URL `https://mcp.kan.bn` and the header `Authorization: Bearer kan_your_api_key`.
+  </Tab>
+</Tabs>
+
+## 3. Try it
+
+Start with something like:
+
+- "Which boards do I have in the Acme workspace?"
+- "Create a board called Sprint 5 with lists Backlog, In Progress and Done."
+- "Move Fix login bug to Done and comment that it shipped."
+- "Add a release checklist to the v2.0 card: smoke test, update changelog, tag release."
+- "What's overdue on the Roadmap board?"
+- "Invite jane@acme.com to the Acme workspace."
+
+## What your agent can do
+
+You don't need to name tools; just say what you want.
+
+| Area                           | What it can do                                                  |
+| ------------------------------ | --------------------------------------------------------------- |
+| Workspaces                     | List, find, create, update, delete and search                   |
+| Boards                         | List, find, create, update, delete and move between workspaces  |
+| Lists                          | Create, update and delete                                       |
+| Cards                          | Get, create, update, move, duplicate, delete, and read activity |
+| Comments, labels and assignees | Add, change and remove                                          |
+| Checklists                     | Create, update and delete checklists and their items            |
+| Members                        | Invite, remove, change roles, and manage invite links           |
+
+Your agent can delete boards and cards and invite people. Most clients ask before running a tool; keep that on for anything that deletes or invites.
+
+## Local server
+
+Run the server on your own machine with `npx`. It works with Kan Cloud on any plan, and with [self-hosted Kan](/self-hosting/introduction). It needs Node.js 18 or later.
+
+<Tabs>
+  <Tab title="Claude Desktop">
+    ```json
+    {
+      "mcpServers": {
+        "kan": {
+          "command": "npx",
+          "args": ["-y", "@kan.bn/mcp"],
+          "env": {
+            "KAN_BASE_URL": "https://kan.bn",
+            "KAN_API_TOKEN": "kan_your_api_key"
+          }
+        }
+      }
+    }
+    ```
+  </Tab>
+  <Tab title="Codex CLI">
+    Add to `~/.codex/config.toml`:
+
+    ```toml
+    [mcp_servers.kan]
+    command = "npx"
+    args = ["-y", "@kan.bn/mcp"]
+    env = { "KAN_BASE_URL" = "https://kan.bn", "KAN_API_TOKEN" = "kan_your_api_key" }
+    ```
+
+  </Tab>
+  <Tab title="Other clients">
+    Run `npx -y @kan.bn/mcp` as a stdio server with two environment variables:
+
+    | Variable | Value |
+    | --- | --- |
+    | `KAN_BASE_URL` | `https://kan.bn`, or your own Kan URL |
+    | `KAN_API_TOKEN` | Your API key |
+
+  </Tab>
+</Tabs>
+
+## Troubleshooting
+
+| Problem                                   | What to do                                                                                                                                                                                |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Every call returns `403`                  | The hosted server needs a workspace on the Team plan or above. Upgrade, or use the local server.                                                                                          |
+| Every call returns `401`                  | The key is wrong or revoked. Create a new one in **Settings → API**, and check it's sent as `Bearer kan_...`. With the local server, check `KAN_BASE_URL` is the Kan the key was made on. |
+| Calls fail partway through a long session | Keys are limited to 600 requests a minute. Ask your agent to work in smaller steps.                                                                                                       |
+| The client can't start `npx`              | Desktop apps don't always see your shell's `PATH`. Use the full path to `npx`, such as `/usr/local/bin/npx`.                                                                              |

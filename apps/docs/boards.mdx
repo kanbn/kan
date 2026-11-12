@@ -1,0 +1,66 @@
+---
+title: Boards
+description: "Lists, views, filters, visibility and archiving."
+---
+
+A board is a project or process. It's made of **lists**, such as To Do, In Progress and Done, and each list holds [cards](/cards) in order. Drag cards between lists as work moves along, and drag lists to reorder them.
+
+## Create a board
+
+<Tabs>
+  <Tab title="Kan">
+    On **Boards**, click **New** and name it. Turn on **Use template** to start from a ready-made set of lists and labels, or from one of your [own templates](/templates).
+  </Tab>
+  <Tab title="API">
+    ```bash
+    curl -X POST https://kan.bn/api/v1/workspaces/$WORKSPACE/boards \
+      -H "Authorization: Bearer $KAN_API_KEY" -H "content-type: application/json" \
+      -d '{"name": "Roadmap", "lists": ["Requested", "Planned", "In Progress", "Done"], "labels": ["Feature", "Bug"]}'
+    ```
+  </Tab>
+  <Tab title="Agent">
+    "Create a board called Roadmap with lists Requested, Planned, In Progress and Done."
+  </Tab>
+</Tabs>
+
+Built-in templates:
+
+| Template             | Lists                                                         |
+| -------------------- | ------------------------------------------------------------- |
+| Basic Kanban         | To Do, In Progress, Done                                      |
+| Software Development | Backlog, To Do, In Progress, Code Review, Done                |
+| Basic Roadmap        | Requested, Planned, In Progress, Done                         |
+| Extended Roadmap     | Requested, Under Review, Planned, In Progress, Done, Rejected |
+| Content Creation     | Lists for planning and publishing content                     |
+| Customer Support     | Lists for working through support requests                    |
+
+## Views
+
+Switch between **Lists** and **Calendar** from the top of the board. The calendar shows cards on their due dates; drag a card to another day to change its due date.
+
+## Filter cards
+
+Click **Filter** to show only the cards that match:
+
+- **Members**: cards assigned to the people you pick.
+- **Labels**: cards with the labels you pick.
+- **Lists**: only the lists you pick.
+- **Due date**: overdue, due today, tomorrow, next week or next month, or with no due date.
+
+Filters are kept in the page URL, so you can share a filtered view by copying the link. Click **Clear filters** to see everything again.
+
+## Who can see a board
+
+A board's **members** can see it, along with workspace admins. Add people from **Board options → Manage members**. Board admins can add and remove the board's members; see [Members and roles](/members#board-members).
+
+Boards are private by default. Click **Visibility** and choose **Public** to let anyone with the link view the board, without signing in. Public boards are read-only. The link looks like `https://kan.bn/<workspace-url>/<board-url>`, and **Board options → Edit board URL** changes the board's part of it.
+
+## Favorites, archiving and moving
+
+From **Board options**:
+
+- **Add to favorites** pins the board to the top of your sidebar.
+- **Archive board** hides it from the boards list without deleting anything. Find it again under **Archived** on the boards page, and unarchive it from there.
+- **Move to workspace** moves the board, with its cards, to another workspace where you can create boards.
+- **Make template** saves a copy of the board as a [template](/templates).
+- **Delete board** deletes it and its cards.

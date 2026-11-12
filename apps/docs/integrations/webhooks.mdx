@@ -1,0 +1,97 @@
+---
+title: Webhooks
+description: "Get a request on your server when cards are created, changed, moved or deleted."
+---
+
+A webhook sends a `POST` request to your URL whenever something happens to a card in the workspace. Use it to post to Slack, kick off a deploy, or keep another tool in sync.
+
+Workspace admins manage webhooks in **Settings → Webhooks**.
+
+## Events
+
+| Event          | Sent when                                       |
+| -------------- | ----------------------------------------------- |
+| `card.created` | A card is created                               |
+| `card.updated` | A card's title, description or due date changes |
+| `card.moved`   | A card moves to another list                    |
+| `card.deleted` | A card is deleted                               |
+
+## Add a webhook
+
+<Tabs>
+  <Tab title="Kan">
+    Open **Settings → Webhooks** and click **Add webhook**. Give it a name, a URL and the events to send. Add a secret to [verify deliveries](#verify-deliveries).
+
+    Click **Test** to send a sample `card.created` event and see what your server returned.
+
+  </Tab>
+  <Tab title="API">
+    ```bash
+    curl -X POST https://kan.bn/api/v1/workspaces/$WORKSPACE/webhooks \
+      -H "Authorization: Bearer $KAN_API_KEY" -H "content-type: application/json" \
+      -d '{"name": "Slack", "url": "https://example.com/kan", "secret": "'$SECRET'", "events": ["card.created", "card.moved"]}'
+    ```
+  </Tab>
+  <Tab title="Agent">
+    "Send card.created and card.moved events from the Acme workspace to https://example.com/kan."
+  </Tab>
+</Tabs>
+
+The URL must be public HTTPS. Kan doesn't send to private or local addresses.
+
+## What you receive
+
+```json
+{
+  "event": "card.moved",
+  "timestamp": "2026-11-12T10:30:00.000Z",
+  "data": {
+    "card": {
+      "publicId": "c7k2m9x4p1qa",
+      "title": "Fix login bug",
+      "description": "Users get sent back to sign in.",
+      "dueDate": "2026-11-20T00:00:00.000Z",
+      "listId": "l3n8v5r2t6wb",
+      "boardId": "b9d4h1j7k3mz"
+    },
+    "board": { "id": "b9d4h1j7k3mz", "name": "Roadmap" },
+    "list": { "id": "l3n8v5r2t6wb", "name": "Done" },
+    "user": { "id": "u2f6g8h4j9kp", "name": "Jane" },
+    "changes": {
+      "listId": { "from": "l1a5s7d3f8gh", "to": "l3n8v5r2t6wb" }
+    }
+  }
+}
+```
+
+`changes` is only on `card.updated` and `card.moved`, with the `from` and `to` of each field that changed: `title`, `description`, `dueDate` or `listId`.
+
+Each request has these headers:
+
+| Header                | Value                              |
+| --------------------- | ---------------------------------- |
+| `X-Webhook-Event`     | The event, such as `card.moved`    |
+| `X-Webhook-Timestamp` | When it was sent, as in the body   |
+| `X-Webhook-Signature` | The signature, if you set a secret |
+
+Respond with a `2xx` within 10 seconds. Deliveries aren't retried, so if your server is down, events are missed.
+
+## Verify deliveries
+
+If you set a secret, `X-Webhook-Signature` is the HMAC-SHA256 of the raw request body, using the secret as the key, in hex. Compute it yourself and compare before trusting the request:
+
+```js
+import crypto from "node:crypto";
+
+const expected = crypto
+  .createHmac("sha256", process.env.KAN_WEBHOOK_SECRET)
+  .update(rawBody)
+  .digest("hex");
+
+const received = Buffer.from(req.headers["x-webhook-signature"] ?? "");
+const valid =
+  received.length === expected.length &&
+  crypto.timingSafeEqual(received, Buffer.from(expected));
+```
+
+Sign the body exactly as it arrived. Parsing and re-serialising the JSON changes it, and the signature won't match.

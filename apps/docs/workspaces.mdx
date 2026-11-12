@@ -1,0 +1,45 @@
+---
+title: Workspaces
+description: "Your team's home in Kan: its boards, members, plan and settings."
+---
+
+A workspace holds your boards, the people who work on them, and your [plan](/plans). Most teams need one. Create more to keep separate teams or clients apart; each has its own members and its own plan.
+
+## Create and switch workspaces
+
+Click the workspace name at the top of the sidebar to switch workspaces or create a new one.
+
+<Tabs>
+  <Tab title="Kan">
+    Open the workspace menu in the sidebar and choose **Create workspace**.
+  </Tab>
+  <Tab title="API">
+    ```bash
+    curl -X POST https://kan.bn/api/v1/workspaces \
+      -H "Authorization: Bearer $KAN_API_KEY" -H "content-type: application/json" \
+      -d '{"name": "Acme"}'
+    ```
+  </Tab>
+  <Tab title="Agent">
+    "Create a workspace called Acme."
+  </Tab>
+</Tabs>
+
+## Settings
+
+Admins can change these in **Settings → Workspace**:
+
+| Setting              | What it does                                                                                                                                            |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name and description | How the workspace appears to members.                                                                                                                   |
+| Workspace URL        | The name in your public board links, such as `kan.bn/acme/roadmap`. Between 3 and 64 letters, numbers and hyphens. Choosing your own needs a paid plan. |
+| Email visibility     | Whether members can see each other's email addresses.                                                                                                   |
+| Week start day       | Which day weeks start on in the calendar view and date pickers.                                                                                         |
+
+## Search
+
+Press `⌘K` (or `Ctrl+K`) to search the boards and cards in the current workspace and jump straight to one.
+
+## Delete a workspace
+
+Admins can delete a workspace from **Settings → Workspace**. This deletes its boards and cards for everyone and can't be undone. On a paid plan, cancel the subscription first from **Settings → Billing → Billing portal**.

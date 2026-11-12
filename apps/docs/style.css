@@ -1,0 +1,15 @@
+html {
+  font-size: 14px;
+}
+
+#page-title {
+  font-size: 1.75rem;
+}
+
+.mdx-content h2 {
+  font-size: 1.25rem;
+}
+
+.mdx-content h3 {
+  font-size: 1.1rem;
+}

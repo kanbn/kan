@@ -1,0 +1,100 @@
+---
+title: Configuration
+description: "Every setting for a self-hosted Kan, set in .env."
+---
+
+These settings go in `.env`. Only the first four are required. Restart with `docker compose up -d` after changing them.
+
+## Required
+
+| Variable               | Description                                                                                                            |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_BASE_URL` | Public URL of Kan, such as `https://kan.example.com`                                                                   |
+| `BETTER_AUTH_SECRET`   | Random secret for sessions and stored tokens. Generate with `openssl rand -base64 32`. Changing it signs everyone out. |
+| `POSTGRES_URL`         | Postgres connection string                                                                                             |
+| `POSTGRES_PASSWORD`    | Password for the bundled Postgres, when using Docker Compose                                                           |
+
+## Sign-in
+
+| Variable                        | Description                                                                                                                         |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_ALLOW_CREDENTIALS` | `true` turns on email and password sign-in. Leave it on unless you set up a provider below, or nobody can create the first account. |
+| `NEXT_PUBLIC_DISABLE_SIGN_UP`   | `true` stops new sign-ups. Invited people can still join.                                                                           |
+| `BETTER_AUTH_ALLOWED_DOMAINS`   | Comma-separated email domains allowed to sign in with a provider, such as `acme.com`                                                |
+| `BETTER_AUTH_TRUSTED_ORIGINS`   | Comma-separated extra origins allowed to sign in, if Kan is served on more than one                                                 |
+
+### Sign-in providers
+
+Set a provider's client ID and secret to show its button on the sign-in page. Register the callback URL `<NEXT_PUBLIC_BASE_URL>/api/auth/callback/<provider>` with the provider, such as `https://kan.example.com/api/auth/callback/google`.
+
+| Provider  | Variables                                                                                                                                                                                                                              |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Google    | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`                                                                                                                                                                                             |
+| GitHub    | `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`                                                                                                                                                                                             |
+| GitLab    | `GITLAB_CLIENT_ID`, `GITLAB_CLIENT_SECRET`, and `GITLAB_ISSUER` for self-managed GitLab                                                                                                                                                |
+| Microsoft | `MICROSOFT_CLIENT_ID`, `MICROSOFT_CLIENT_SECRET`                                                                                                                                                                                       |
+| Discord   | `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`                                                                                                                                                                                           |
+| Apple     | `APPLE_CLIENT_ID`, `APPLE_CLIENT_SECRET`, `APPLE_APP_BUNDLE_IDENTIFIER`                                                                                                                                                                |
+| Others    | Twitter, LinkedIn, Zoom, Dropbox, Reddit, Spotify, Twitch, TikTok, Kick, Roblox and VK follow the same `<NAME>_CLIENT_ID` and `<NAME>_CLIENT_SECRET` pattern. See [.env.example](https://github.com/kanbn/kan/blob/main/.env.example). |
+
+### Single sign-on (OIDC)
+
+Connect any OpenID Connect provider, such as Okta, Authentik, Keycloak or Microsoft Entra ID:
+
+| Variable                               | Description                                           |
+| -------------------------------------- | ----------------------------------------------------- |
+| `OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET` | From your provider                                    |
+| `OIDC_DISCOVERY_URL`                   | The provider's `.well-known/openid-configuration` URL |
+
+The callback URL is `<NEXT_PUBLIC_BASE_URL>/api/auth/oauth2/callback/oidc`.
+
+## Email
+
+Kan sends sign-in links, password resets, invites and mention notifications by email.
+
+| Variable                                               | Description                                                               |
+| ------------------------------------------------------ | ------------------------------------------------------------------------- |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD` | Your SMTP server                                                          |
+| `EMAIL_FROM`                                           | Sender, such as `Kan <kan@example.com>`                                   |
+| `SMTP_SECURE`                                          | `false` to use STARTTLS, usually on port `587`. Defaults to TLS on `465`. |
+| `SMTP_REJECT_UNAUTHORIZED`                             | `false` to accept self-signed certificates                                |
+| `NEXT_PUBLIC_DISABLE_EMAIL`                            | `true` turns off everything that sends email                              |
+
+## File uploads
+
+Avatars and card attachments are stored in any S3-compatible storage, such as AWS S3, Cloudflare R2 or MinIO. Without these, uploads are turned off. See the [S3 guide](/self-hosting/s3) for setup.
+
+| Variable                                                                | Description                                                        |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `S3_ENDPOINT`                                                           | Your provider's endpoint. Leave blank for AWS S3.                  |
+| `S3_REGION`                                                             | The bucket's region. Required for AWS S3; defaults to `us-east-1`. |
+| `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`                              | Credentials                                                        |
+| `S3_FORCE_PATH_STYLE`                                                   | `true` for providers that need path-style URLs, such as MinIO      |
+| `NEXT_PUBLIC_AVATAR_BUCKET_NAME`, `NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME` | Bucket names                                                       |
+| `NEXT_PUBLIC_STORAGE_URL`                                               | Public base URL files are served from                              |
+| `NEXT_PUBLIC_STORAGE_DOMAIN`                                            | Domain images are loaded from                                      |
+| `NEXT_PUBLIC_USE_VIRTUAL_HOSTED_URLS`                                   | `true` for `bucket.domain` style URLs                              |
+| `S3_AVATAR_UPLOAD_LIMIT`                                                | Largest avatar in bytes. Defaults to 2 MB.                         |
+
+## Imports
+
+| Variable                                  | Description                                                                                                                  |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `TRELLO_APP_API_KEY`, `TRELLO_APP_SECRET` | Turns on [Trello import](/integrations/trello). Get them from Trello's [Power-Up admin](https://trello.com/power-ups/admin). |
+
+## Rate limiting
+
+| Variable               | Description                                                                                                                                                                                           |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `REDIS_URL`            | Stores rate limits in Redis, so they're shared across containers. Without it, each container counts on its own.                                                                                       |
+| `RATE_LIMIT_IP_HEADER` | The one header to trust for the client's IP, such as `cf-connecting-ip` behind Cloudflare or `x-real-ip` behind nginx. Without it, the first `X-Forwarded-For` entry is used, which clients can fake. |
+
+## Other
+
+| Variable                                  | Description                                                    |
+| ----------------------------------------- | -------------------------------------------------------------- |
+| `NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY` | `true` hides "Powered by Kan" on public boards                 |
+| `NEXT_API_BODY_SIZE_LIMIT`                | Largest API request body, such as `50mb`. Defaults to `1mb`.   |
+| `LOG_LEVEL`                               | `debug`, `info`, `warn` or `error`. Defaults to `info`.        |
+| `WEB_PORT`                                | Port Docker Compose exposes Kan on. Defaults to `3000`.        |
+| `BETTER_AUTH_COOKIE_DOMAIN`               | Share sign-in cookies across subdomains, such as `example.com` |

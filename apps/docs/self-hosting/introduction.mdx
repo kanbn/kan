@@ -1,0 +1,81 @@
+---
+title: Self-hosting
+description: "Run open source Kan on your own servers."
+---
+
+These docs are written for [Kan Cloud](https://kan.bn). If you'd rather run Kan yourself, it's free, has no plans or limits, and is licensed under AGPL-3.0.
+
+## What you'll run
+
+| Service    | Purpose                                                            |
+| ---------- | ------------------------------------------------------------------ |
+| `web`      | The Kan app, REST API and sign-in                                  |
+| `migrate`  | Runs database migrations, then exits. `web` waits for it.          |
+| `postgres` | Database                                                           |
+| `redis`    | Optional. Shares rate limits across more than one `web` container. |
+
+## Deploy on Railway
+
+The quickest way to run Kan is the official [Railway template](https://railway.com/deploy/kan?referralCode=bZPsr2&utm_medium=integration&utm_source=template&utm_campaign=generic). It sets up Kan and Postgres for you.
+
+## Run it with Docker Compose
+
+```bash
+git clone https://github.com/kanbn/kan.git
+cd kan
+cp .env.example .env
+```
+
+Fill in `.env`. At minimum, set:
+
+```bash
+NEXT_PUBLIC_BASE_URL=https://kan.example.com
+BETTER_AUTH_SECRET=   # openssl rand -base64 32
+POSTGRES_PASSWORD=    # any strong password
+POSTGRES_URL=postgresql://kan:<POSTGRES_PASSWORD>@postgres:5432/kan_db
+```
+
+Then start everything:
+
+```bash
+docker compose pull
+docker compose up -d
+```
+
+Open your `NEXT_PUBLIC_BASE_URL` and sign up. The first account creates the first workspace. To stop others signing up afterwards, set `NEXT_PUBLIC_DISABLE_SIGN_UP=true`; people you invite can still join.
+
+`GET /api/health` returns `200` when Kan can reach Postgres and `503` when it can't. Point an uptime monitor at it.
+
+See [Configuration](/self-hosting/configuration) for email, sign-in providers, file uploads and the rest.
+
+## Upgrade
+
+Each [release](https://github.com/kanbn/kan/releases) publishes new images. Read the release notes, then pull and restart:
+
+```bash
+git pull
+docker compose pull
+docker compose up -d
+```
+
+Migrations run before the new version starts.
+
+## Back up
+
+Everything except uploaded files lives in Postgres:
+
+```bash
+docker compose exec postgres pg_dump -U kan kan_db > backup.sql
+```
+
+To restore it into an empty database:
+
+```bash
+docker compose exec -T postgres psql -U kan kan_db < backup.sql
+```
+
+Back up your [S3 bucket](/self-hosting/s3) separately if you've turned on file uploads.
+
+## Point the API and MCP at your server
+
+Use `https://kan.example.com/api/v1` as the [API](/api-reference/introduction) base URL. For MCP, run the [local server](/mcp#local-server) with `KAN_BASE_URL=https://kan.example.com`.
