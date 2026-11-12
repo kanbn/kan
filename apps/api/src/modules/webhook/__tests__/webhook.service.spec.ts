@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import * as permissions from "@kan/api/utils/permissions";
-import * as webhookUtils from "@kan/api/utils/webhook";
 import * as webhookRepo from "@kan/db/repository/webhook.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import * as permissions from "@kan/server/utils/permissions";
+import * as webhookUtils from "@kan/server/utils/webhook";
 
 import { CreateWebhookSchema } from "../dto/webhook.dto.js";
 import { WebhookService } from "../webhook.service.js";

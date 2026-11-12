@@ -7,12 +7,15 @@ import {
 } from "@nestjs/common";
 
 import type { WorkspacePlan } from "@kan/db/schema";
-import { createAvatarUrlResolver } from "@kan/api/utils/avatarUrls";
-import { assertPermission, isWorkspaceAdmin } from "@kan/api/utils/permissions";
 import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import * as workspaceSlugRepo from "@kan/db/repository/workspaceSlug.repo";
+import { createAvatarUrlResolver } from "@kan/server/utils/avatarUrls";
+import {
+  assertPermission,
+  isWorkspaceAdmin,
+} from "@kan/server/utils/permissions";
 import { generateUID } from "@kan/shared/utils";
 
 import { assertFound } from "../../common/assert-found.util.js";

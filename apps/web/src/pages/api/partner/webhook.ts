@@ -3,13 +3,13 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import type { Readable } from "node:stream";
 
 import type { dbClient } from "@kan/db/client";
-import { createNextApiContext } from "@kan/api/context";
-import { withApiLogging } from "@kan/api/utils/apiLogging";
-import { redactSensitive } from "@kan/api/utils/redact";
-import { cancelWorkspaceAccess } from "@kan/api/utils/workspace";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
+import { createNextApiContext } from "@kan/server/context";
+import { withApiLogging } from "@kan/server/utils/apiLogging";
+import { redactSensitive } from "@kan/server/utils/redact";
+import { cancelWorkspaceAccess } from "@kan/server/utils/workspace";
 import { getActiveSubscriptions } from "@kan/shared/utils";
 
 import type { TierConfig } from "./_utils";

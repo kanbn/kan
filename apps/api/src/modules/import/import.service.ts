@@ -4,14 +4,6 @@ import {
   UnauthorizedException,
 } from "@nestjs/common";
 
-import { decryptToken } from "@kan/api/utils/encryption";
-import { assertPermission } from "@kan/api/utils/permissions";
-import { getTrelloLabelColour } from "@kan/api/utils/trello";
-import {
-  decryptTrelloToken,
-  encryptTrelloToken,
-  isEncryptedTrelloToken,
-} from "@kan/api/utils/trello-token";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
@@ -22,6 +14,14 @@ import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
+import { decryptToken } from "@kan/server/utils/encryption";
+import { assertPermission } from "@kan/server/utils/permissions";
+import { getTrelloLabelColour } from "@kan/server/utils/trello";
+import {
+  decryptTrelloToken,
+  encryptTrelloToken,
+  isEncryptedTrelloToken,
+} from "@kan/server/utils/trello-token";
 import {
   generateSlug,
   generateUID,

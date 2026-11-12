@@ -1,12 +1,12 @@
 import { createZodDto } from "nestjs-zod";
 import { z } from "zod";
 
-import { webhookUrlSchema } from "@kan/api/utils/webhook";
+import { webhookUrlSchema } from "@kan/server/utils/webhook";
 import { webhookEvents } from "@kan/db/schema";
 
 const WebhookEventSchema = z.enum(webhookEvents);
 
-// webhookUrlSchema is zod 3 (packages/api), so it can't be nested in a zod 4
+// webhookUrlSchema is zod 3 (packages/server), so it can't be nested in a zod 4
 // object; delegate to it so the SSRF rules stay in one place.
 const WebhookUrlSchema = z.string().superRefine((url, ctx) => {
   const result = webhookUrlSchema.safeParse(url);

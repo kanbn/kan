@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { addYears } from "date-fns";
 
-import { createNextApiContext } from "@kan/api/context";
-import { withApiLogging } from "@kan/api/utils/apiLogging";
-import { withRateLimit } from "@kan/api/utils/rateLimit";
-import { encryptTrelloToken } from "@kan/api/utils/trello-token";
 import * as integrationsRepo from "@kan/db/repository/integration.repo";
+import { createNextApiContext } from "@kan/server/context";
+import { withApiLogging } from "@kan/server/utils/apiLogging";
+import { withRateLimit } from "@kan/server/utils/rateLimit";
+import { encryptTrelloToken } from "@kan/server/utils/trello-token";
 
 import { env } from "~/env";
 

@@ -7,11 +7,6 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 
-import {
-  assertCanManageMember,
-  assertCanManageRole,
-  assertPermission,
-} from "@kan/api/utils/permissions";
 import * as inviteLinkRepo from "@kan/db/repository/inviteLink.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as permissionRepo from "@kan/db/repository/permission.repo";
@@ -19,6 +14,11 @@ import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
+import {
+  assertCanManageMember,
+  assertCanManageRole,
+  assertPermission,
+} from "@kan/server/utils/permissions";
 import {
   generateUID,
   getSeatLimit,

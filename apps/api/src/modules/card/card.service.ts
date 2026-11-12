@@ -6,20 +6,6 @@ import {
   UnauthorizedException,
 } from "@nestjs/common";
 
-import { mergeActivities } from "@kan/api/utils/activities";
-import { createAvatarUrlResolver } from "@kan/api/utils/avatarUrls";
-import { sendMentionEmails } from "@kan/api/utils/notifications";
-import {
-  assertBoardAccess,
-  assertCanDelete,
-  assertCanEdit,
-  assertPermission,
-  filterBoardAssignable,
-} from "@kan/api/utils/permissions";
-import {
-  createCardWebhookPayload,
-  sendWebhooksForWorkspace,
-} from "@kan/api/utils/webhook";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import { CardLabelBoardError } from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
@@ -29,6 +15,20 @@ import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
+import { mergeActivities } from "@kan/server/utils/activities";
+import { createAvatarUrlResolver } from "@kan/server/utils/avatarUrls";
+import { sendMentionEmails } from "@kan/server/utils/notifications";
+import {
+  assertBoardAccess,
+  assertCanDelete,
+  assertCanEdit,
+  assertPermission,
+  filterBoardAssignable,
+} from "@kan/server/utils/permissions";
+import {
+  createCardWebhookPayload,
+  sendWebhooksForWorkspace,
+} from "@kan/server/utils/webhook";
 import { generateAttachmentUrl, normalizeDescription } from "@kan/shared/utils";
 
 import { db } from "../../common/session.util.js";

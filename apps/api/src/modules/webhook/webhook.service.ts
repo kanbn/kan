@@ -5,13 +5,13 @@ import {
 } from "@nestjs/common";
 
 import type { WebhookEvent } from "@kan/db/schema";
-import { assertPermission } from "@kan/api/utils/permissions";
+import * as webhookRepo from "@kan/db/repository/webhook.repo";
+import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { assertPermission } from "@kan/server/utils/permissions";
 import {
   createCardWebhookPayload,
   sendWebhookToUrl,
-} from "@kan/api/utils/webhook";
-import * as webhookRepo from "@kan/db/repository/webhook.repo";
-import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+} from "@kan/server/utils/webhook";
 
 import { assertFound } from "../../common/assert-found.util.js";
 import { db } from "../../common/session.util.js";
