@@ -12,6 +12,7 @@ import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { useEffect } from "react";
 
+import { ApiUnavailableBanner } from "~/components/ApiUnavailableBanner";
 import { FontSizeProvider } from "~/providers/font-size";
 import { KeyboardShortcutProvider } from "~/providers/keyboard-shortcuts";
 import { LinguiProviderWrapper } from "~/providers/lingui";
@@ -74,6 +75,7 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
                 >
                   <ModalProvider>
                     <PopupProvider>
+                      <ApiUnavailableBanner />
                       {posthogKey ? (
                         <PostHogProvider client={posthog}>
                           {getLayout(<Component {...pageProps} />)}

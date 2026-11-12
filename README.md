@@ -61,7 +61,7 @@ Alternatively, you can self-host Kan with Docker Compose. This will set up every
 
 1. Create a `.env` file with your environment variables (see [Environment Variables](#environment-variables) section below)
 
-2. Use the [docker-compose.yml](./docker-compose.yml) file provided in the repository, which sets up Postgres, runs migrations, and starts the web service
+2. Use the [docker-compose.yml](./docker-compose.yml) file provided in the repository, which sets up Postgres, runs migrations, and starts the web and API services
 
 3. Start the containers in detached mode:
 
@@ -77,6 +77,18 @@ The application will be available at http://localhost:3000 (or the port specifie
 - To view logs: `docker compose logs -f`
 - To restart the containers: `docker compose restart`
 - To rebuild after code changes: `docker compose up -d --build`
+
+### Upgrading
+
+Pull the new images and restart:
+
+```bash
+docker compose pull && docker compose up -d
+```
+
+**Upgrading from v0.8.x or earlier:** Kan now runs its API as a separate container (`ghcr.io/kanbn/kan-api`). Before pulling, replace your `docker-compose.yml` with the [latest one](./docker-compose.yml), which adds the `api` service. It's internal only, reads the same `.env`, and needs no new ports or variables. Without it you can still sign in, but boards won't load and the app shows "Kan can't reach its API service".
+
+If you run Kan without this compose file, run the `ghcr.io/kanbn/kan-api` image alongside the web image with the same environment, and set `KAN_API_URL` on the web container to the API's internal address (e.g. `http://kan-api:4000`).
 
 ## Local Development
 
@@ -114,6 +126,7 @@ At minimum, you'll need:
 | `POSTGRES_URL`          | PostgreSQL connection URL      | `postgres://user:pass@localhost:5432/db`  |
 | `NEXT_PUBLIC_BASE_URL`  | Base URL of your installation  | `http://localhost:3000`                   |
 | `BETTER_AUTH_SECRET`    | Auth encryption secret         | Random 32+ char string                    |
+| `KAN_API_URL`           | Where the web app reaches the API (set by docker-compose) | `http://api:4000`  |
 
 Optional integrations (email/SMTP, OAuth and OIDC login, S3-compatible file storage, Trello import, rate limiting, white labelling, and more) are configured through additional variables. See [.env.example](./.env.example) for the complete list.
 

@@ -65,12 +65,13 @@ const modeConfig: Record<Mode, { port: string; env: Record<string, string> }> =
   {
     "self-hosted": {
       port: process.env.PORT ?? "3000",
-      env: { NEXT_PUBLIC_KAN_ENV: "" },
+      env: { NEXT_PUBLIC_KAN_ENV: "", KAN_API_URL: apiBaseURL },
     },
     cloud: {
       port: process.env.CLOUD_PORT ?? "3100",
       env: {
         NEXT_PUBLIC_KAN_ENV: "cloud",
+        NEXT_PUBLIC_API_BASE_URL: apiBaseURL,
         STRIPE_SECRET_KEY: stripeEnv(
           "STRIPE_SECRET_KEY",
           "sk_test_e2e_placeholder",
@@ -181,7 +182,6 @@ export default defineConfig({
           timeout: 180_000,
           env: {
             NEXT_PUBLIC_BASE_URL: baseURL,
-            NEXT_PUBLIC_API_BASE_URL: apiBaseURL,
             NEXT_PUBLIC_USE_STANDALONE_OUTPUT: "",
             ...sharedEnv,
             ...modeEnv,
