@@ -209,11 +209,28 @@ export class BoardBySlugDto extends createZodDto(BoardBySlugSchema) {}
 // ─── create ──────────────────────────────────────────────────
 
 export const CreateBoardSchema = z.object({
-  name: z.string().min(1).max(100),
-  lists: z.array(z.string().min(1)),
-  labels: z.array(z.string().min(1)),
-  type: z.enum(["regular", "template"]).optional(),
-  sourceBoardPublicId: z.string().min(12).optional(),
+  name: z.string().min(1).max(100).describe("Board name."),
+  lists: z
+    .array(z.string().min(1))
+    .describe(
+      "Names of the lists to create, in order, e.g. ['To do', 'Done'].",
+    ),
+  labels: z
+    .array(z.string().min(1))
+    .describe("Names of the labels to create, e.g. ['Bug', 'Feature']."),
+  type: z
+    .enum(["regular", "template"])
+    .optional()
+    .describe(
+      "'regular' for a board (default), 'template' for a board template.",
+    ),
+  sourceBoardPublicId: z
+    .string()
+    .min(12)
+    .optional()
+    .describe(
+      "Public ID of a board or template to copy lists and labels from.",
+    ),
 });
 
 export class CreateBoardDto extends createZodDto(CreateBoardSchema) {}
@@ -230,11 +247,24 @@ export class BoardCreateResponseDto extends createZodDto(
 // ─── update ──────────────────────────────────────────────────
 
 export const UpdateBoardSchema = z.object({
-  name: z.string().min(1).optional(),
-  slug: slugSchema.optional(),
-  visibility: z.enum(["public", "private"]).optional(),
-  favorite: z.boolean().optional(),
-  isArchived: z.boolean().optional(),
+  name: z.string().min(1).optional().describe("New board name."),
+  slug: slugSchema
+    .optional()
+    .describe("New URL slug of letters, numbers and hyphens."),
+  visibility: z
+    .enum(["public", "private"])
+    .optional()
+    .describe(
+      "'public' boards can be viewed by anyone with the link, 'private' only by members.",
+    ),
+  favorite: z
+    .boolean()
+    .optional()
+    .describe("Whether the board is in the current user's favourites."),
+  isArchived: z
+    .boolean()
+    .optional()
+    .describe("Archive (true) or restore (false) the board."),
 });
 
 export class UpdateBoardDto extends createZodDto(UpdateBoardSchema) {}
@@ -257,7 +287,10 @@ export const SuccessResponseSchema = z.object({ success: z.boolean() });
 export class SuccessResponseDto extends createZodDto(SuccessResponseSchema) {}
 
 export const MoveBoardSchema = z.object({
-  targetWorkspacePublicId: z.string().min(12),
+  targetWorkspacePublicId: z
+    .string()
+    .min(12)
+    .describe("Public ID of the workspace to move the board to."),
 });
 
 export class MoveBoardDto extends createZodDto(MoveBoardSchema) {}

@@ -8,13 +8,14 @@ import {
 } from "../../webhook/dto/webhook.dto.js";
 import { WebhookService } from "../../webhook/webhook.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import { webhookPublicId, workspacePublicId } from "./public-ids.js";
 
 const WorkspaceIdSchema = z.object({
-  workspacePublicId: z.string().min(12),
+  workspacePublicId,
 });
 
 const WebhookIdSchema = WorkspaceIdSchema.extend({
-  webhookPublicId: z.string().min(12),
+  webhookPublicId,
 });
 
 const CreateWebhookWithWorkspaceSchema = CreateWebhookSchema.extend(

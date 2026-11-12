@@ -11,8 +11,20 @@ import {
   UpdateCardSchema,
 } from "../../card/dto/card.dto.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import {
+  cardPublicId,
+  commentPublicId,
+  labelPublicId,
+  workspaceMemberPublicId,
+} from "./public-ids.js";
 
-const CardIdSchema = z.object({ cardPublicId: z.string().min(12) });
+const CardIdSchema = z.object({ cardPublicId });
+const CreateCardWithDefaultsSchema = CreateCardSchema.extend({
+  description: CreateCardSchema.shape.description.default(""),
+  labelPublicIds: CreateCardSchema.shape.labelPublicIds.default([]),
+  memberPublicIds: CreateCardSchema.shape.memberPublicIds.default([]),
+  position: CreateCardSchema.shape.position.default("end"),
+});
 const UpdateCardWithIdSchema = UpdateCardSchema.extend(CardIdSchema.shape);
 const DuplicateCardWithIdSchema = DuplicateCardSchema.extend(
   CardIdSchema.shape,
@@ -20,14 +32,14 @@ const DuplicateCardWithIdSchema = DuplicateCardSchema.extend(
 const ActivitiesWithIdSchema = ActivitiesQuerySchema.extend(CardIdSchema.shape);
 const AddCommentSchema = CommentSchema.extend(CardIdSchema.shape);
 const CommentIdSchema = CardIdSchema.extend({
-  commentPublicId: z.string().min(12),
+  commentPublicId,
 });
 const UpdateCommentSchema = CommentIdSchema.extend(CommentSchema.shape);
 const ToggleLabelSchema = CardIdSchema.extend({
-  labelPublicId: z.string().min(12),
+  labelPublicId,
 });
 const ToggleMemberSchema = CardIdSchema.extend({
-  workspaceMemberPublicId: z.string().min(12),
+  workspaceMemberPublicId,
 });
 
 type McpRequest = { user?: unknown } | undefined;
@@ -69,10 +81,10 @@ export class CardTools {
     name: "create_card",
     description:
       "Create a card in a list, optionally with labels, members and a due date (ISO 8601).",
-    parameters: CreateCardSchema,
+    parameters: CreateCardWithDefaultsSchema,
   })
   async createCard(
-    args: z.infer<typeof CreateCardSchema>,
+    args: z.infer<typeof CreateCardWithDefaultsSchema>,
     _context: unknown,
     rawRequest: McpRequest,
   ) {

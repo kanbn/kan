@@ -26,9 +26,7 @@ beforeEach(async () => {
 
   const module: TestingModule = await Test.createTestingModule({
     controllers: [CardChecklistController, ChecklistController],
-    providers: [
-      { provide: ChecklistService, useValue: mockChecklistService },
-    ],
+    providers: [{ provide: ChecklistService, useValue: mockChecklistService }],
   }).compile();
 
   cardChecklistController = module.get(CardChecklistController);

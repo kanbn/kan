@@ -1,21 +1,25 @@
-import { z } from "zod";
 import { Injectable } from "@nestjs/common";
 import { Tool } from "@rekog/mcp-nest";
+import { z } from "zod";
 
-import { CreateLabelSchema, UpdateLabelSchema } from "../../label/dto/label.dto.js";
+import {
+  CreateLabelSchema,
+  UpdateLabelSchema,
+} from "../../label/dto/label.dto.js";
 import { LabelService } from "../../label/label.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import { labelPublicId } from "./public-ids.js";
 
 const GetLabelSchema = z.object({
-  labelPublicId: z.string().min(12),
+  labelPublicId,
 });
 
 const DeleteLabelSchema = z.object({
-  labelPublicId: z.string().min(12),
+  labelPublicId,
 });
 
 const UpdateLabelWithIdSchema = UpdateLabelSchema.extend({
-  labelPublicId: z.string().min(12),
+  labelPublicId,
 });
 
 @Injectable()
@@ -60,7 +64,8 @@ export class LabelTools {
 
   @Tool({
     name: "update_label",
-    description: "Update a label's name or colour, on behalf of the current user.",
+    description:
+      "Update a label's name or colour, on behalf of the current user.",
     parameters: UpdateLabelWithIdSchema,
   })
   async updateLabel(

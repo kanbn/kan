@@ -10,30 +10,36 @@ import {
   UpdateChecklistSchema,
 } from "../../checklist/dto/checklist.dto.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import {
+  cardPublicId,
+  checklistItemPublicId,
+  checklistPublicId,
+} from "./public-ids.js";
 
 const CreateChecklistWithCardSchema = CreateChecklistSchema.extend({
-  cardPublicId: z.string().min(12),
+  cardPublicId,
 });
 
 const UpdateChecklistWithIdSchema = UpdateChecklistSchema.extend({
-  checklistPublicId: z.string().min(12),
+  checklistPublicId,
 });
 
 const DeleteChecklistSchema = z.object({
-  checklistPublicId: z.string().min(12),
+  checklistPublicId,
 });
 
-const CreateChecklistItemWithChecklistSchema =
-  CreateChecklistItemSchema.extend({
-    checklistPublicId: z.string().min(12),
-  });
+const CreateChecklistItemWithChecklistSchema = CreateChecklistItemSchema.extend(
+  {
+    checklistPublicId,
+  },
+);
 
 const UpdateChecklistItemWithIdSchema = UpdateChecklistItemSchema.extend({
-  checklistItemPublicId: z.string().min(12),
+  checklistItemPublicId,
 });
 
 const DeleteChecklistItemSchema = z.object({
-  checklistItemPublicId: z.string().min(12),
+  checklistItemPublicId,
 });
 
 @Injectable()

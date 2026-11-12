@@ -31,7 +31,9 @@ export class GetMemberPermissionsResponseDto extends createZodDto(
 ) {}
 
 export const PermissionActionSchema = z.object({
-  permission: PermissionSchema,
+  permission: PermissionSchema.describe(
+    "The permission, as resource:action, e.g. board:edit.",
+  ),
 });
 
 export class PermissionActionDto extends createZodDto(PermissionActionSchema) {}

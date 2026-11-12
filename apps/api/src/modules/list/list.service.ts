@@ -16,11 +16,7 @@ import { db } from "../../common/session.util.js";
 
 @Injectable()
 export class ListService {
-  async create(input: {
-    name: string;
-    boardPublicId: string;
-    userId: string;
-  }) {
+  async create(input: { name: string; boardPublicId: string; userId: string }) {
     const board = await assertFound(
       boardRepo.getWorkspaceAndBoardIdByBoardPublicId(db, input.boardPublicId),
       `Board with public ID ${input.boardPublicId} not found`,

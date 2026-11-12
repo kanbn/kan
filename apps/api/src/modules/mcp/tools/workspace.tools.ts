@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { Tool } from "@rekog/mcp-nest";
 import { z } from "zod";
 
@@ -10,22 +10,48 @@ import {
 } from "../../workspace/dto/workspace.dto.js";
 import { WorkspaceService } from "../../workspace/workspace.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
+import { workspacePublicId, workspaceSlug } from "./public-ids.js";
 
 const WorkspaceIdSchema = z.object({
-  workspacePublicId: z.string().min(12),
+  workspacePublicId,
+});
+
+const WorkspaceNameSchema = z.object({
+  name: z
+    .string()
+    .min(1)
+    .describe("Workspace name to look up (case-insensitive)."),
 });
 
 const WorkspaceSlugSchema = z.object({
-  workspaceSlug: z.string().min(1),
+  workspaceSlug,
 });
 
 const UpdateWorkspaceWithIdSchema = UpdateWorkspaceSchema.extend({
-  workspacePublicId: z.string().min(12),
+  workspacePublicId,
 });
 
 const SearchWorkspaceSchema = SearchQuerySchema.extend({
-  workspacePublicId: z.string().min(12),
+  workspacePublicId,
 });
+
+export async function findWorkspaceByName(
+  workspaceService: WorkspaceService,
+  userId: string,
+  name: string,
+) {
+  const workspaces = (await workspaceService.all({ userId })).map(
+    (membership) => membership.workspace,
+  );
+  const match = workspaces.find(
+    (workspace) => workspace.name.toLowerCase() === name.toLowerCase(),
+  );
+  if (!match)
+    throw new NotFoundException(
+      `No workspace named "${name}". Available workspaces: ${workspaces.map((w) => w.name).join(", ")}`,
+    );
+  return match;
+}
 
 @Injectable()
 export class WorkspaceTools {
@@ -33,7 +59,8 @@ export class WorkspaceTools {
 
   @Tool({
     name: "list_workspaces",
-    description: "List all workspaces the current user belongs to.",
+    description:
+      "List all workspaces the current user belongs to. Call this first to resolve a workspace name to its publicId before calling any other workspace-scoped tool.",
     parameters: z.object({}),
   })
   async listWorkspaces(
@@ -43,6 +70,21 @@ export class WorkspaceTools {
   ) {
     const user = requireMcpUser(rawRequest);
     return this.workspaceService.all({ userId: user.id });
+  }
+
+  @Tool({
+    name: "find_workspace_by_name",
+    description:
+      "Find a workspace by its name (case-insensitive) and return it with its publicId. Use this whenever you only know the workspace name.",
+    parameters: WorkspaceNameSchema,
+  })
+  async findWorkspaceByName(
+    args: z.infer<typeof WorkspaceNameSchema>,
+    _context: unknown,
+    rawRequest: { user?: unknown } | undefined,
+  ) {
+    const user = requireMcpUser(rawRequest);
+    return findWorkspaceByName(this.workspaceService, user.id, args.name);
   }
 
   @Tool({
