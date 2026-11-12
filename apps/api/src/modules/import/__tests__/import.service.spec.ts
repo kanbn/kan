@@ -132,7 +132,10 @@ describe("ImportService.importTrelloBoards", () => {
       [{ type: "card.created", cardId: 40, createdBy: "user_1" }],
     );
     const items = vi.mocked(checklistRepo.bulkCreateItems).mock.calls[0]?.[1];
-    expect(items?.map((i) => i.title)).toEqual(["First", "Second"]);
+    expect(items?.map((i) => [i.title, i.index])).toEqual([
+      ["Second", 2],
+      ["First", 1],
+    ]);
     expect(cardRepo.bulkCreateCardLabelRelationships).toHaveBeenCalledWith(
       expect.anything(),
       [{ cardId: 40, labelId: 20 }],
