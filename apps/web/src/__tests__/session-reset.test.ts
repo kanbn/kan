@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { repairSessionCookies } from "@kan/auth/server";
 import { createNextApiContext } from "@kan/server/context";
 
-import handler from "~/pages/api/session/reset";
+import handler from "../pages/api/session/reset";
 
 vi.mock("@kan/server/context", () => ({
   auth: { options: {} },
