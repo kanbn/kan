@@ -4,13 +4,18 @@ import type { Response } from "express";
 import { NestFactory } from "@nestjs/core";
 import { ZodValidationPipe } from "nestjs-zod";
 
+import { runMigrations } from "@kan/db/client";
 import { createLogger } from "@kan/logger";
 
 import { AppModule } from "./app.module.js";
 import { NestPinoLogger } from "./common/logging/nest-pino.logger.js";
+import { db } from "./common/session.util.js";
 import { buildOpenApiDocument } from "./openapi.js";
 
 async function bootstrap() {
+  // ponytail: assumes one api replica starts at a time; add an advisory lock if it scales out
+  if (process.env.RUN_MIGRATIONS === "true") await runMigrations(db);
+
   const app = await NestFactory.create(AppModule, {
     logger: new NestPinoLogger(),
   });
