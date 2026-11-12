@@ -33,8 +33,7 @@ const boardLists = {
 };
 
 /**
- * Board detail cache helpers with the same shape as tRPC's
- * `utils.board.byId`, reading and writing the unwrapped board data.
+ * Board detail cache helpers that read and write the unwrapped board data.
  */
 export function useBoardCache() {
   const queryClient = useQueryClient();

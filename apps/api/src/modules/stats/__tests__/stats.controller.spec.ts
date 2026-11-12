@@ -53,7 +53,6 @@ describe("GET /stats", () => {
     expect(res.status).toBe(200);
     expect(body.users).toBe(3);
     expect(body.activeMembers).toBe(5);
-    // Was mis-wired to the active member count in the tRPC version.
     expect(body.cardActivityLogs).toBe(42);
     expect(Object.keys(body)).toHaveLength(14);
   });

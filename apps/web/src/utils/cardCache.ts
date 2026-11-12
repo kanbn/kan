@@ -36,8 +36,7 @@ const cardActivities = (input: CardInput) =>
   matchUrl((url) => url === `/cards/${input.cardPublicId}/activities`);
 
 /**
- * Card cache helpers with the same shape as tRPC's `utils.card`, reading and
- * writing the unwrapped card data.
+ * Card cache helpers that read and write the unwrapped card data.
  */
 export function useCardCache() {
   const queryClient = useQueryClient();

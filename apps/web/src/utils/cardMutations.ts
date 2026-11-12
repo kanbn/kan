@@ -1,7 +1,7 @@
 import { createCard, updateCard } from "@kan/api-client/hooks";
 
-// Card create/update keep tRPC's flat input (with Date due dates) so the
-// optimistic updates that read mutation variables stay unchanged.
+// Card create/update take a flat input (with Date due dates) so optimistic
+// updates can read the mutation variables directly.
 
 const toIso = (date: Date | null | undefined) =>
   date === undefined ? undefined : (date?.toISOString() ?? null);
