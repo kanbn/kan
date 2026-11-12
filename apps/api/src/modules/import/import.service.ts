@@ -367,7 +367,7 @@ export class ImportService {
         let boardName: string | null = null;
         try {
           const response = await fetchTrello(
-            `${trelloUrl()}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&labels=all&labels_limit=1000&checklists=all&checkItemStates=all`,
+            `${trelloUrl()}/boards/${boardId}?key=${apiKey}&token=${token}&lists=open&cards=open&labels=all&labels_limit=1000&checklists=all`,
           );
           if (!response.ok)
             throw new ImportBoardError(
