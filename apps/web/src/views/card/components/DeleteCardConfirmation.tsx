@@ -11,11 +11,13 @@ import { useBoardCache } from "~/utils/boardCache";
 interface DeleteCardConfirmationProps {
   cardPublicId: string;
   boardPublicId: string;
+  returnUrl: string;
 }
 
 export function DeleteCardConfirmation({
   cardPublicId,
   boardPublicId,
+  returnUrl,
 }: DeleteCardConfirmationProps) {
   const { closeModal } = useModal();
   const boardCache = useBoardCache();
@@ -57,7 +59,7 @@ export function DeleteCardConfirmation({
         });
       },
       onSuccess: () => {
-        router.push(`/boards/${boardPublicId}`);
+        router.push(returnUrl);
       },
       onSettled: async () => {
         closeModal();
