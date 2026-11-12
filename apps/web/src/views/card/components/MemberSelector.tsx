@@ -4,6 +4,7 @@ import { HiMiniPlus } from "react-icons/hi2";
 
 import { useToggleCardMember } from "@kan/api-client/hooks";
 
+import type { getCardMemberOptions } from "./memberOptions";
 import Avatar from "~/components/Avatar";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
 import { useModal } from "~/providers/modal";
@@ -14,13 +15,7 @@ import { invalidateCard } from "~/utils/cardInvalidation";
 
 interface MemberSelectorProps {
   cardPublicId: string;
-  members: {
-    key: string;
-    value: string;
-    selected: boolean;
-    leftIcon: React.ReactNode;
-    imageUrl: string | undefined;
-  }[];
+  members: ReturnType<typeof getCardMemberOptions>;
   isLoading: boolean;
   disabled?: boolean;
 }
@@ -51,8 +46,8 @@ export default function MemberSelector({
             (member) => member.publicId === update.workspaceMemberPublicId,
           );
 
-          const memberToAdd = oldCard.members.find(
-            (member) => member.publicId === update.workspaceMemberPublicId,
+          const memberToAdd = members.find(
+            (member) => member.key === update.workspaceMemberPublicId,
           );
 
           const updatedMembers = hasMember
@@ -64,10 +59,10 @@ export default function MemberSelector({
                 {
                   publicId: update.workspaceMemberPublicId,
                   email: memberToAdd?.email ?? "",
-                  deletedAt: null,
+                  status: memberToAdd?.status ?? "active",
                   user: {
-                    id: memberToAdd?.user?.id ?? "",
-                    name: memberToAdd?.user?.name ?? "",
+                    id: memberToAdd?.userId ?? null,
+                    name: memberToAdd?.name ?? null,
                   },
                 },
               ];
@@ -128,13 +123,14 @@ export default function MemberSelector({
           >
             {selectedMembers.length ? (
               <div className="isolate flex justify-end -space-x-1 overflow-hidden">
-                {selectedMembers.map(({ value, imageUrl }) => (
+                {selectedMembers.map(({ key, value, imageUrl, status }) => (
                   <Avatar
-                    key={value}
+                    key={key}
                     size="sm"
                     name={value}
                     imageUrl={imageUrl}
                     email={value}
+                    paused={status === "paused"}
                   />
                 ))}
               </div>

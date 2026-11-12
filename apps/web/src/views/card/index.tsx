@@ -10,7 +10,6 @@ import { IoChevronForwardSharp } from "react-icons/io5";
 import { useGetCard, useToggleCardLabel } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
-import Avatar from "~/components/Avatar";
 import Editor from "~/components/Editor";
 import FeedbackModal from "~/components/FeedbackModal";
 import { LabelForm } from "~/components/LabelForm";
@@ -32,7 +31,6 @@ import { getBoardReturnUrl } from "~/utils/board-return-url";
 import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 import { updateCardFromInput } from "~/utils/cardMutations";
-import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmation";
 import ActivityList from "./components/ActivityList";
 import { ActivitySortOrderToggle } from "./components/ActivitySortOrderToggle";
@@ -46,6 +44,10 @@ import Dropdown from "./components/Dropdown";
 import { DueDateSelector } from "./components/DueDateSelector";
 import LabelSelector from "./components/LabelSelector";
 import ListSelector from "./components/ListSelector";
+import {
+  getCardMemberOptions,
+  getMentionableMembers,
+} from "./components/memberOptions";
 import MemberSelector from "./components/MemberSelector";
 import { NewChecklistForm } from "./components/NewChecklistForm";
 import NewCommentForm from "./components/NewCommentForm";
@@ -101,34 +103,10 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
       selected: list.publicId === card?.list.publicId,
     })) ?? [];
 
-  const formattedMembers =
-    workspaceMembers?.map((member) => {
-      const isSelected = selectedMembers?.some(
-        (assignedMember) => assignedMember.publicId === member.publicId,
-      );
-
-      return {
-        key: member.publicId,
-        value: formatMemberDisplayName(
-          member.user?.name ?? null,
-          member.user?.email ?? member.email,
-        ),
-        imageUrl: member.user?.image
-          ? getAvatarUrl(member.user.image)
-          : undefined,
-        selected: isSelected ?? false,
-        leftIcon: (
-          <Avatar
-            size="xs"
-            name={member.user?.name ?? ""}
-            imageUrl={
-              member.user?.image ? getAvatarUrl(member.user.image) : undefined
-            }
-            email={member.user?.email ?? member.email}
-          />
-        ),
-      };
-    }) ?? [];
+  const formattedMembers = getCardMemberOptions(
+    workspaceMembers ?? [],
+    selectedMembers?.map((member) => member.publicId) ?? [],
+  );
 
   return (
     <div className="h-full w-[360px] border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
@@ -245,20 +223,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     `/${isTemplate ? "templates" : "boards"}/${boardId}`,
   );
 
-  const editorWorkspaceMembers =
-    workspaceMembers
-      ?.filter((member) => member.email)
-      .map((member) => ({
-        publicId: member.publicId,
-        email: member.email,
-        user: member.user
-          ? {
-              id: member.user.id,
-              name: member.user.name ?? null,
-              image: member.user.image ?? null,
-            }
-          : null,
-      })) ?? [];
+  const editorWorkspaceMembers = getMentionableMembers(workspaceMembers ?? []);
 
   const updateCard = useMutation({
     mutationFn: updateCardFromInput,
@@ -494,7 +459,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                           onBlur={
                             canEdit ? () => handleSubmit(onSubmit)() : undefined
                           }
-                          workspaceMembers={workspaceMembers ?? []}
+                          workspaceMembers={editorWorkspaceMembers}
                           readOnly={!canEdit}
                         />
                       </div>

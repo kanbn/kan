@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
+import { useLingui } from "@lingui/react";
 import {
   HiMiniXMark,
   HiOutlineClock,
@@ -8,6 +9,8 @@ import {
   HiOutlineUserCircle,
 } from "react-icons/hi2";
 import { IoFilterOutline } from "react-icons/io5";
+
+import type { BoardDetailDtoOutputWorkspaceMembersItemStatus } from "@kan/api-client/hooks";
 
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
@@ -18,9 +21,11 @@ import {
   formatToArray,
   getAvatarUrl,
 } from "~/utils/helpers";
+import { getBoardFilterMembers } from "../memberFilters";
 
 interface Member {
   publicId: string;
+  status: BoardDetailDtoOutputWorkspaceMembersItemStatus;
   user: {
     name: string | null;
     image: string | null;
@@ -43,16 +48,19 @@ const Filters = ({
   position = "right",
   labels,
   members,
+  assignedMemberPublicIds,
   lists,
   isLoading,
 }: {
   position?: "left" | "right";
   labels: Label[];
   members: Member[];
+  assignedMemberPublicIds?: ReadonlySet<string>;
   lists: List[];
   isLoading: boolean;
 }) => {
   const router = useRouter();
+  const { i18n } = useLingui();
 
   const clearFilters = async () => {
     try {
@@ -71,12 +79,16 @@ const Filters = ({
     }
   };
 
-  const formattedMembers = members.map((member) => ({
+  const formattedMembers = getBoardFilterMembers(
+    members,
+    assignedMemberPublicIds,
+    i18n.locale,
+  ).map((member) => ({
     key: member.publicId,
-    value: formatMemberDisplayName(
+    value: `${formatMemberDisplayName(
       member.user?.name ?? null,
       member.user?.email ?? null,
-    ),
+    )}${member.status === "paused" ? ` (${t`Paused`})` : ""}`,
     selected: !!router.query.members?.includes(member.publicId),
     leftIcon: (
       <Avatar
@@ -86,6 +98,7 @@ const Filters = ({
           member.user?.image ? getAvatarUrl(member.user.image) : undefined
         }
         email={member.user?.email ?? ""}
+        paused={member.status === "paused"}
       />
     ),
   }));

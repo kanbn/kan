@@ -1,6 +1,8 @@
 import { createZodDto } from "nestjs-zod";
 import { z } from "zod";
 
+import { memberStatuses } from "@kan/db/schema";
+
 const isoDate = z.iso.datetime();
 // Request due dates arrive as ISO strings; the service works with Dates.
 const dueDateInput = isoDate
@@ -232,7 +234,7 @@ export const CardDetailSchema = z.object({
           z.object({
             publicId: z.string(),
             email: z.string(),
-            status: z.string(),
+            status: z.enum(memberStatuses),
             user: z
               .object({
                 id: z.string().nullable(),
@@ -250,6 +252,7 @@ export const CardDetailSchema = z.object({
     z.object({
       publicId: z.string(),
       email: z.string(),
+      status: z.enum(memberStatuses),
       user: z
         .object({ id: z.string().nullable(), name: z.string().nullable() })
         .nullable(),

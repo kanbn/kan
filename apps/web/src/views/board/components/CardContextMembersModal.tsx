@@ -2,9 +2,8 @@ import { t } from "@lingui/core/macro";
 
 import { useGetCard } from "@kan/api-client/hooks";
 
-import Avatar from "~/components/Avatar";
 import { useModal } from "~/providers/modal";
-import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
+import { getCardMemberOptions } from "~/views/card/components/memberOptions";
 import MemberSelector from "~/views/card/components/MemberSelector";
 
 export function CardContextMembersModal() {
@@ -21,32 +20,10 @@ export function CardContextMembersModal() {
   const workspaceMembers = board?.workspace?.members ?? [];
   const selectedMembers = card?.members ?? [];
 
-  const formattedMembers = workspaceMembers.map((member) => {
-    const isSelected = selectedMembers.some(
-      (m) => m.publicId === member.publicId,
-    );
-    return {
-      key: member.publicId,
-      value: formatMemberDisplayName(
-        member.user?.name ?? null,
-        member.user?.email ?? member.email,
-      ),
-      imageUrl: member.user?.image
-        ? getAvatarUrl(member.user.image)
-        : undefined,
-      selected: isSelected,
-      leftIcon: (
-        <Avatar
-          size="xs"
-          name={member.user?.name ?? ""}
-          imageUrl={
-            member.user?.image ? getAvatarUrl(member.user.image) : undefined
-          }
-          email={member.user?.email ?? member.email}
-        />
-      ),
-    };
-  });
+  const formattedMembers = getCardMemberOptions(
+    workspaceMembers,
+    selectedMembers.map((member) => member.publicId),
+  );
 
   if (!cardPublicId) return null;
 

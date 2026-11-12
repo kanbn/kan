@@ -32,6 +32,7 @@ const Card = ({
   members: {
     publicId: string;
     email: string;
+    status: string;
     user: { name: string | null; email: string; image: string | null } | null;
   }[];
   summary?: {
@@ -160,17 +161,19 @@ const Card = ({
               )}
               {members.length > 0 && (
                 <div className="isolate flex justify-end -space-x-1 overflow-hidden">
-                  {members.map(({ user, email }) => {
+                  {members.map(({ publicId, user, email, status }) => {
                     const avatarUrl = user?.image
                       ? getAvatarUrl(user.image)
                       : undefined;
 
                     return (
                       <Avatar
+                        key={publicId}
                         name={user?.name ?? ""}
                         email={user?.email ?? email}
                         imageUrl={avatarUrl}
                         size="sm"
+                        paused={status === "paused"}
                       />
                     );
                   })}

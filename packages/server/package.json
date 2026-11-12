@@ -60,6 +60,10 @@
       "types": "./src/utils/notifications.ts",
       "default": "./src/utils/notifications.ts"
     },
+    "./utils/mention-permissions": {
+      "types": "./src/utils/mention-permissions.ts",
+      "default": "./src/utils/mention-permissions.ts"
+    },
     "./utils/paidWorkspaceCache": {
       "types": "./src/utils/paidWorkspaceCache.ts",
       "default": "./src/utils/paidWorkspaceCache.ts"

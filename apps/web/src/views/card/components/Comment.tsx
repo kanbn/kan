@@ -6,7 +6,6 @@ import { HiEllipsisHorizontal, HiPencil, HiTrash } from "react-icons/hi2";
 
 import { useGetCard, useUpdateCardComment } from "@kan/api-client/hooks";
 
-import type { WorkspaceMember } from "~/components/Editor";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import Dropdown from "~/components/Dropdown";
@@ -17,6 +16,7 @@ import { usePopup } from "~/providers/popup";
 import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 import { getAvatarUrl } from "~/utils/helpers";
+import { getMentionableMembers } from "./memberOptions";
 
 interface FormValues {
   comment: string;
@@ -25,6 +25,7 @@ interface FormValues {
 const Comment = ({
   publicId,
   cardPublicId,
+  userId,
   name,
   email,
   image,
@@ -37,6 +38,7 @@ const Comment = ({
 }: {
   publicId: string | undefined;
   cardPublicId: string;
+  userId: string | null;
   name: string;
   email: string;
   image: string | null;
@@ -65,20 +67,15 @@ const Comment = ({
     },
   });
 
-  const workspaceMembers: WorkspaceMember[] =
-    cardData?.list.board.workspace.members
-      .filter((member) => member.email)
-      .map((member) => ({
-        publicId: member.publicId,
-        email: member.email,
-        user: member.user
-          ? {
-              id: member.user.id,
-              name: member.user.name ?? null,
-              image: member.user.image ?? null,
-            }
-          : null,
-      })) ?? [];
+  const members = cardData?.list.board.workspace.members ?? [];
+
+  const isPaused = members.some(
+    (member) =>
+      member.status === "paused" &&
+      (userId ? member.user?.id === userId : member.email === email),
+  );
+
+  const workspaceMembers = getMentionableMembers(members);
 
   const updateCommentMutation = useUpdateCardComment({
     mutation: {
@@ -140,10 +137,16 @@ const Comment = ({
             email={email ?? ""}
             imageUrl={getAvatarUrl(image) || undefined}
             isLoading={isLoading}
+            paused={isPaused}
           />
 
           <p className="text-sm">
             <span className="font-medium dark:text-dark-1000">{`${name} `}</span>
+            {isPaused && (
+              <span className="text-light-800 dark:text-dark-800">
+                ({t`Paused`})
+              </span>
+            )}
             <span className="mx-1 text-light-900 dark:text-dark-800">·</span>
             <span className="space-x-1 text-light-900 dark:text-dark-800">
               {formatDistanceToNow(new Date(createdAt), {

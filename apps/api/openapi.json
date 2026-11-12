@@ -4041,6 +4041,13 @@
           "favorite": {
             "type": "boolean"
           },
+          "assignedMemberPublicIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Members assigned to at least one card on the board."
+          },
           "workspace": {
             "type": "object",
             "properties": {
@@ -4062,7 +4069,13 @@
                       "type": "string"
                     },
                     "status": {
-                      "type": "string"
+                      "type": "string",
+                      "enum": [
+                        "invited",
+                        "active",
+                        "removed",
+                        "paused"
+                      ]
                     },
                     "user": {
                       "type": "object",
@@ -4211,6 +4224,15 @@
                             "email": {
                               "type": "string"
                             },
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "invited",
+                                "active",
+                                "removed",
+                                "paused"
+                              ]
+                            },
                             "user": {
                               "type": "object",
                               "properties": {
@@ -4238,6 +4260,7 @@
                           "required": [
                             "publicId",
                             "email",
+                            "status",
                             "user"
                           ],
                           "additionalProperties": false
@@ -4412,6 +4435,7 @@
           "visibility",
           "isArchived",
           "favorite",
+          "assignedMemberPublicIds",
           "workspace",
           "labels",
           "lists",
@@ -5353,7 +5377,13 @@
                               "type": "string"
                             },
                             "status": {
-                              "type": "string"
+                              "type": "string",
+                              "enum": [
+                                "invited",
+                                "active",
+                                "removed",
+                                "paused"
+                              ]
                             },
                             "user": {
                               "type": "object",
@@ -5430,6 +5460,15 @@
                 "email": {
                   "type": "string"
                 },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "invited",
+                    "active",
+                    "removed",
+                    "paused"
+                  ]
+                },
                 "user": {
                   "type": "object",
                   "properties": {
@@ -5453,6 +5492,7 @@
               "required": [
                 "publicId",
                 "email",
+                "status",
                 "user"
               ],
               "additionalProperties": false

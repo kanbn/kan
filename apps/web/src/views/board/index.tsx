@@ -931,6 +931,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                       members={boardData.workspace.members.filter(
                         (member) => member.user !== null,
                       )}
+                      assignedMemberPublicIds={
+                        new Set(boardData.assignedMemberPublicIds)
+                      }
                       lists={boardData.allLists}
                       isLoading={!boardData}
                     />
