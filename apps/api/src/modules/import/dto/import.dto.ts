@@ -21,6 +21,13 @@ export class ImportTrelloBoardsDto extends createZodDto(
 
 export const ImportTrelloBoardsResponseSchema = z.object({
   boardsCreated: z.number(),
+  failures: z.array(
+    z.object({
+      boardId: z.string(),
+      boardName: z.string().nullable(),
+      reason: z.string(),
+    }),
+  ),
 });
 
 export class ImportTrelloBoardsResponseDto extends createZodDto(

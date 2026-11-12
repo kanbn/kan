@@ -112,10 +112,10 @@ describe("withApiLogging", () => {
 
     expect(info).toHaveBeenCalledWith(
       expect.objectContaining({
-        input: {
+        input: JSON.stringify({
           query: { code: "[REDACTED]", page: "2" },
           body: { token: "[REDACTED]", name: "Board" },
-        },
+        }),
       }),
       "API OK",
     );

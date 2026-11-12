@@ -414,6 +414,7 @@ export const bulkCreate = async (
     workspaceId: number;
     index: number;
     importId?: number;
+    dueDate?: Date | null;
   }[],
 ) => {
   if (cardInput.length === 0) return [];
@@ -463,6 +464,7 @@ export const bulkCreate = async (
       index: number;
       cardNumber: number;
       importId?: number;
+      dueDate: Date | null;
     }[] = [];
 
     // For each list, append incoming cards after current max index, preserving incoming order
@@ -491,6 +493,7 @@ export const bulkCreate = async (
           index: nextIndex++,
           cardNumber,
           importId: it.importId,
+          dueDate: it.dueDate ?? null,
         });
       }
     }
@@ -498,7 +501,7 @@ export const bulkCreate = async (
     const inserted = await tx
       .insert(cards)
       .values(allValuesToInsert)
-      .returning({ id: cards.id });
+      .returning({ id: cards.id, publicId: cards.publicId });
 
     // Post-insert: compact per list if duplicates exist; then verify
     const countExpr = sql<number>`COUNT(*)`.mapWith(Number);

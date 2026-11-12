@@ -6168,10 +6168,35 @@
         "properties": {
           "boardsCreated": {
             "type": "number"
+          },
+          "failures": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "boardId": {
+                  "type": "string"
+                },
+                "boardName": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "reason": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "boardId",
+                "boardName",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
           }
         },
         "required": [
-          "boardsCreated"
+          "boardsCreated",
+          "failures"
         ],
         "additionalProperties": false
       },

@@ -393,12 +393,26 @@ const ImportTrello: React.FC = () => {
 
   const importBoards = useImportTrelloBoards({
     mutation: {
-      onSuccess: async () => {
-        showPopup({
-          header: t`Import complete`,
-          message: t`Your boards have been imported.`,
-          icon: "success",
-        });
+      onSuccess: async (res) => {
+        const { failures } = res.data;
+        showPopup(
+          failures.length
+            ? {
+                header: t`Some boards weren't imported`,
+                message: failures
+                  .map(
+                    (failure) =>
+                      `${failure.boardName ?? t`A board`}: ${failure.reason}`,
+                  )
+                  .join(" "),
+                icon: "error",
+              }
+            : {
+                header: t`Import complete`,
+                message: t`Your boards have been imported.`,
+                icon: "success",
+              },
+        );
         try {
           await refetchBoards();
           closeModal();
@@ -406,10 +420,13 @@ const ImportTrello: React.FC = () => {
           console.error(e);
         }
       },
-      onError: () => {
+      onError: (error) => {
         showPopup({
           header: t`Import failed`,
-          message: t`Please try again later, or contact customer support.`,
+          message:
+            error instanceof Error && error.message
+              ? error.message
+              : t`Please try again later, or contact customer support.`,
           icon: "error",
         });
       },
@@ -475,6 +492,9 @@ const ImportTrello: React.FC = () => {
   return (
     <form onSubmit={handleSubmitBoards(onSubmitBoards)}>
       <div className="h-[105px] overflow-auto px-5">{renderContent()}</div>
+      <p className="mt-3 px-5 text-xs text-neutral-500 dark:text-dark-900">
+        {t`Archived lists and cards aren't imported.`}
+      </p>
 
       <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
         <Toggle

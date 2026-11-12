@@ -39,3 +39,14 @@ export const getTrelloLabelColour = (colour: string | null | undefined) => {
 
   return trelloLabelColours[colour] ?? defaultLabelColour;
 };
+
+// Trello allows colour-only labels; name them after the colour so they survive.
+export const getTrelloLabelName = (
+  name: string | null | undefined,
+  colour: string | null | undefined,
+) => {
+  if (name?.trim()) return name.trim();
+  if (!colour) return null;
+  const words = colour.replace(/_/g, " ");
+  return words.charAt(0).toUpperCase() + words.slice(1);
+};

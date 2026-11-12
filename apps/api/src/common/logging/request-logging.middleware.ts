@@ -19,7 +19,8 @@ const nonEmpty = (value: unknown) =>
   !!value && typeof value === "object" && Object.keys(value).length > 0;
 
 // One line per request (requestId, procedure, transport, duration, userId,
-// input, status); existing log queries depend on this shape.
+// input, status); existing log queries depend on this shape. input is a JSON
+// string so new request fields don't each become a log column.
 @Injectable()
 export class RequestLoggingMiddleware implements NestMiddleware {
   use(req: Request & { user?: User }, res: Response, next: NextFunction) {
@@ -43,10 +44,10 @@ export class RequestLoggingMiddleware implements NestMiddleware {
         userId: req.user?.id,
         ...(isCloud() && req.user?.email && { email: req.user.email }),
         ...((nonEmpty(req.query) || nonEmpty(req.body)) && {
-          input: {
+          input: JSON.stringify({
             ...(nonEmpty(req.query) && { query: redactSensitive(req.query) }),
             ...(nonEmpty(req.body) && { body: redactSensitive(req.body) }),
-          },
+          }),
         }),
         status,
         ...(error instanceof Error &&

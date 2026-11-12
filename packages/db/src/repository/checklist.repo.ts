@@ -1,4 +1,4 @@
-import { and, count, desc, eq, isNull, sql } from "drizzle-orm";
+import { and, count, desc, eq, inArray, isNull, max, sql } from "drizzle-orm";
 
 import type { dbClient } from "@kan/db/client";
 import { checklistItems, checklists } from "@kan/db/schema";
@@ -254,14 +254,20 @@ export const bulkCreate = async (
       index: number;
     }[] = [];
 
-    for (const [cardId, items] of byCard.entries()) {
-      const last = await tx.query.checklists.findFirst({
-        columns: { index: true },
-        where: and(eq(checklists.cardId, cardId), isNull(checklists.deletedAt)),
-        orderBy: [desc(checklists.index)],
-      });
+    const lastIndexes = await tx
+      .select({ cardId: checklists.cardId, last: max(checklists.index) })
+      .from(checklists)
+      .where(
+        and(
+          inArray(checklists.cardId, [...byCard.keys()]),
+          isNull(checklists.deletedAt),
+        ),
+      )
+      .groupBy(checklists.cardId);
+    const lastByCard = new Map(lastIndexes.map((r) => [r.cardId, r.last]));
 
-      let nextIndex = last ? last.index + 1 : 0;
+    for (const [cardId, items] of byCard.entries()) {
+      let nextIndex = (lastByCard.get(cardId) ?? -1) + 1;
 
       const sorted = [...items].sort((a, b) => a.index - b.index);
 
@@ -307,17 +313,25 @@ export const bulkCreateItems = async (
       completed: boolean;
     }[] = [];
 
-    for (const [checklistId, items] of byChecklist.entries()) {
-      const last = await tx.query.checklistItems.findFirst({
-        columns: { index: true },
-        where: and(
-          eq(checklistItems.checklistId, checklistId),
+    const lastIndexes = await tx
+      .select({
+        checklistId: checklistItems.checklistId,
+        last: max(checklistItems.index),
+      })
+      .from(checklistItems)
+      .where(
+        and(
+          inArray(checklistItems.checklistId, [...byChecklist.keys()]),
           isNull(checklistItems.deletedAt),
         ),
-        orderBy: [desc(checklistItems.index)],
-      });
+      )
+      .groupBy(checklistItems.checklistId);
+    const lastByChecklist = new Map(
+      lastIndexes.map((r) => [r.checklistId, r.last]),
+    );
 
-      let nextIndex = last ? last.index + 1 : 0;
+    for (const [checklistId, items] of byChecklist.entries()) {
+      let nextIndex = (lastByChecklist.get(checklistId) ?? -1) + 1;
 
       const sorted = [...items].sort((a, b) => a.index - b.index);
 

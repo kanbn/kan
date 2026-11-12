@@ -1129,8 +1129,16 @@ export interface ImportTrelloBoardsDto {
   workspacePublicId: string;
 }
 
+export type ImportTrelloBoardsResponseDtoOutputFailuresItem = {
+  boardId: string;
+  /** @nullable */
+  boardName: string | null;
+  reason: string;
+};
+
 export interface ImportTrelloBoardsResponseDtoOutput {
   boardsCreated: number;
+  failures: ImportTrelloBoardsResponseDtoOutputFailuresItem[];
 }
 
 export interface ImportGitHubProjectsDto {
