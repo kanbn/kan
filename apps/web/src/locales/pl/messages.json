@@ -78,7 +78,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 903]],
+    "origin": [["src/views/board/index.tsx", 904]],
     "translation": "{0} nie znaleziono"
   },
   "0xWkkH": {
@@ -772,7 +772,7 @@
     "message": "Are you sure you want to delete this card?",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 79]],
+    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 81]],
     "translation": "Czy na pewno chcesz usunąć tę kartę?"
   },
   "Fpci8b": {
@@ -997,7 +997,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 875],
+      ["src/views/board/index.tsx", 876],
       ["src/views/board/members/index.tsx", 230],
       ["src/views/card/index.tsx", 372],
       ["src/views/public/board/index.tsx", 129]
@@ -1058,7 +1058,7 @@
     "message": "Board name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 893]],
+    "origin": [["src/views/board/index.tsx", 894]],
     "translation": "Nazwa tablicy"
   },
   "wewm3j": {
@@ -1472,7 +1472,7 @@
         66
       ],
       ["src/views/card/components/Comment.tsx", 197],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 90],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 92],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 68],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 81],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 64],
@@ -2139,7 +2139,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/index.tsx", 149],
-      ["src/views/board/index.tsx", 1031]
+      ["src/views/board/index.tsx", 1032]
     ],
     "translation": "Utwórz nową listę"
   },
@@ -2350,7 +2350,7 @@
       ["src/components/LabelForm.tsx", 232],
       ["src/components/YouTubeEmbed/YouTubeDropdown.tsx", 52],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 47],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 96],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 98],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 71],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 87],
       ["src/views/settings/components/DeleteWebhookConfirmation.tsx", 93],
@@ -3422,7 +3422,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1013]],
+    "origin": [["src/views/board/index.tsx", 1014]],
     "translation": "Rozpocznij, tworząc nową listę"
   },
   "oW13KZ": {
@@ -4505,7 +4505,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 134],
-      ["src/views/board/index.tsx", 955]
+      ["src/views/board/index.tsx", 956]
     ],
     "translation": "Nowa lista"
   },
@@ -4652,14 +4652,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1009]],
+    "origin": [["src/views/board/index.tsx", 1010]],
     "translation": "Brak list"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1014]],
+    "origin": [["src/views/board/index.tsx", 1015]],
     "translation": "Nie utworzono jeszcze żadnych list"
   },
   "i30J2U": {
@@ -5113,7 +5113,7 @@
       ["src/views/card/components/ChecklistNameInput.tsx", 52],
       ["src/views/card/components/Checklists.tsx", 97],
       ["src/views/card/components/Comment.tsx", 92],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 55],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 57],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 41],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 49],
       ["src/views/card/components/DueDateSelector.tsx", 80],
@@ -6270,8 +6270,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 875],
-      ["src/views/board/index.tsx", 912]
+      ["src/views/board/index.tsx", 876],
+      ["src/views/board/index.tsx", 913]
     ],
     "translation": "Szablon"
   },
@@ -6520,7 +6520,7 @@
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 47],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 39],
-      ["src/views/card/components/DeleteCardConfirmation.tsx", 82],
+      ["src/views/card/components/DeleteCardConfirmation.tsx", 84],
       ["src/views/card/components/DeleteChecklistConfirmation.tsx", 63],
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 73]
     ],
@@ -6865,7 +6865,7 @@
     "message": "Unable to delete card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 54]],
+    "origin": [["src/views/card/components/DeleteCardConfirmation.tsx", 56]],
     "translation": "Nie można usunąć karty"
   },
   "DahTzR": {
@@ -7657,7 +7657,7 @@
     "origin": [
       ["src/components/SettingsLayout.tsx", 47],
       ["src/utils/permission-category-label.ts", 10],
-      ["src/views/board/index.tsx", 875],
+      ["src/views/board/index.tsx", 876],
       ["src/views/boards/index.tsx", 58],
       ["src/views/members/index.tsx", 288],
       ["src/views/public/board/index.tsx", 129],
@@ -7909,8 +7909,8 @@
     "origin": [
       ["src/views/board/components/List.tsx", 133],
       ["src/views/board/components/VisibilityButton.tsx", 76],
-      ["src/views/board/index.tsx", 943],
-      ["src/views/board/index.tsx", 1020],
+      ["src/views/board/index.tsx", 944],
+      ["src/views/board/index.tsx", 1021],
       ["src/views/boards/components/BoardsList.tsx", 85],
       ["src/views/boards/index.tsx", 69],
       ["src/views/boards/index.tsx", 90]

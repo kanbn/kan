@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        903
+        904
       ]
     ],
     "translation": "{0} blev ikke fundet"
@@ -1300,7 +1300,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        79
+        81
       ]
     ],
     "translation": "Er du sikker på, at du vil slette dette kort?"
@@ -1663,7 +1663,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        875
+        876
       ],
       [
         "src/views/board/members/index.tsx",
@@ -1768,7 +1768,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        893
+        894
       ]
     ],
     "translation": ""
@@ -2461,7 +2461,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        90
+        92
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -3578,7 +3578,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        1031
+        1032
       ]
     ],
     "translation": "Opret ny liste"
@@ -3917,7 +3917,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        96
+        98
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -5702,7 +5702,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1013
+        1014
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny liste"
@@ -7527,7 +7527,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        955
+        956
       ]
     ],
     "translation": "Ny liste"
@@ -7771,7 +7771,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1009
+        1010
       ]
     ],
     "translation": "Ingen lister"
@@ -7783,7 +7783,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1014
+        1015
       ]
     ],
     "translation": "Der er endnu ikke oprettet nogen lister"
@@ -8579,7 +8579,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        55
+        57
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -10602,11 +10602,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        875
+        876
       ],
       [
         "src/views/board/index.tsx",
-        912
+        913
       ]
     ],
     "translation": "Skabelon"
@@ -11017,7 +11017,7 @@
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        82
+        84
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
@@ -11581,7 +11581,7 @@
     "origin": [
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        54
+        56
       ]
     ],
     "translation": "Kunne ikke slette kort"
@@ -12877,7 +12877,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        875
+        876
       ],
       [
         "src/views/boards/index.tsx",
@@ -13274,11 +13274,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        943
+        944
       ],
       [
         "src/views/board/index.tsx",
-        1020
+        1021
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
