@@ -4,13 +4,13 @@ import {
   InternalServerErrorException,
 } from "@nestjs/common";
 
-import {
-  assertBoardAccess,
-  assertPermission,
-} from "@kan/api/utils/permissions";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as checklistRepo from "@kan/db/repository/checklist.repo";
+import {
+  assertBoardAccess,
+  assertPermission,
+} from "@kan/server/utils/permissions";
 
 import { assertFound } from "../../common/assert-found.util.js";
 import { db } from "../../common/session.util.js";

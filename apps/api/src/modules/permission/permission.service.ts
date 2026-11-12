@@ -5,15 +5,15 @@ import {
 } from "@nestjs/common";
 
 import type { Permission } from "@kan/shared";
+import * as memberRepo from "@kan/db/repository/member.repo";
+import * as permissionRepo from "@kan/db/repository/permission.repo";
+import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import {
   assertCanManageMember,
   assertPermission,
   getMemberEffectivePermissions,
   getUserPermissions,
-} from "@kan/api/utils/permissions";
-import * as memberRepo from "@kan/db/repository/member.repo";
-import * as permissionRepo from "@kan/db/repository/permission.repo";
-import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+} from "@kan/server/utils/permissions";
 
 import { assertFound } from "../../common/assert-found.util.js";
 import { db } from "../../common/session.util.js";

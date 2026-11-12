@@ -1,11 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import * as avatarUrls from "@kan/api/utils/avatarUrls";
-import * as permissions from "@kan/api/utils/permissions";
 import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import * as workspaceSlugRepo from "@kan/db/repository/workspaceSlug.repo";
+import * as avatarUrls from "@kan/server/utils/avatarUrls";
+import * as permissions from "@kan/server/utils/permissions";
 
 import { WorkspaceService } from "../workspace.service.js";
 

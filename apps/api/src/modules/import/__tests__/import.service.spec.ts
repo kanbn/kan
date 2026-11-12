@@ -1,9 +1,6 @@
 import { ForbiddenException } from "@nestjs/common";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import * as encryption from "@kan/api/utils/encryption";
-import * as permissions from "@kan/api/utils/permissions";
-import * as trelloToken from "@kan/api/utils/trello-token";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
@@ -13,6 +10,9 @@ import * as integrationsRepo from "@kan/db/repository/integration.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import * as encryption from "@kan/server/utils/encryption";
+import * as permissions from "@kan/server/utils/permissions";
+import * as trelloToken from "@kan/server/utils/trello-token";
 
 import { ImportService } from "../import.service.js";
 

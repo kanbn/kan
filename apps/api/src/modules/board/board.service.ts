@@ -6,7 +6,13 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 
-import { createAvatarUrlResolver } from "@kan/api/utils/avatarUrls";
+import * as boardRepo from "@kan/db/repository/board.repo";
+import * as cardRepo from "@kan/db/repository/card.repo";
+import * as activityRepo from "@kan/db/repository/cardActivity.repo";
+import * as labelRepo from "@kan/db/repository/label.repo";
+import * as listRepo from "@kan/db/repository/list.repo";
+import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import { createAvatarUrlResolver } from "@kan/server/utils/avatarUrls";
 import {
   assertBoardAccess,
   assertCanDelete,
@@ -14,13 +20,7 @@ import {
   assertPermission,
   filterBoardAssignable,
   isWorkspaceAdmin,
-} from "@kan/api/utils/permissions";
-import * as boardRepo from "@kan/db/repository/board.repo";
-import * as cardRepo from "@kan/db/repository/card.repo";
-import * as activityRepo from "@kan/db/repository/cardActivity.repo";
-import * as labelRepo from "@kan/db/repository/label.repo";
-import * as listRepo from "@kan/db/repository/list.repo";
-import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+} from "@kan/server/utils/permissions";
 import { colours } from "@kan/shared/constants";
 import {
   convertDueDateFiltersToRanges,

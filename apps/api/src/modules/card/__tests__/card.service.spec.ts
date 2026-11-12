@@ -1,9 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import * as avatarUrls from "@kan/api/utils/avatarUrls";
-import * as notifications from "@kan/api/utils/notifications";
-import * as permissions from "@kan/api/utils/permissions";
-import * as webhook from "@kan/api/utils/webhook";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import { CardLabelBoardError } from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
@@ -11,6 +7,10 @@ import * as cardCommentRepo from "@kan/db/repository/cardComment.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
+import * as avatarUrls from "@kan/server/utils/avatarUrls";
+import * as notifications from "@kan/server/utils/notifications";
+import * as permissions from "@kan/server/utils/permissions";
+import * as webhook from "@kan/server/utils/webhook";
 import * as sharedUtils from "@kan/shared/utils";
 
 import { CardService } from "../card.service.js";

@@ -5,8 +5,8 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 
-import { encryptToken } from "@kan/api/utils/encryption";
 import * as integrationsRepo from "@kan/db/repository/integration.repo";
+import { encryptToken } from "@kan/server/utils/encryption";
 
 import { db } from "../../common/session.util.js";
 

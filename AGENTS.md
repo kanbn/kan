@@ -26,7 +26,7 @@ Kan is an open-source project management tool (Trello alternative) built with:
 
 - `apps/web/` - Next.js web application
 - `apps/api/` - NestJS REST API (also serves the MCP server)
-- `packages/api/` - Shared API utilities (permissions, webhooks, notifications)
+- `packages/server/` - Shared server utilities (permissions, webhooks, notifications, rate limiting)
 - `packages/api-client/` - React Query hooks generated from the API's OpenAPI spec
 - `packages/db/` - Database schema, migrations, and repositories
 - `packages/auth/` - Authentication package
@@ -68,7 +68,7 @@ Kan is an open-source project management tool (Trello alternative) built with:
 - **Validation**: Define request and response shapes as Zod schemas wrapped in `createZodDto`
 - **Responses**: Declare every response with `@ZodResponse({ type: Dto })`; the global serializer strips fields the DTO doesn't declare, so internal IDs never leak
 - **Error Handling**: Throw Nest HTTP exceptions (`NotFoundException`, `ForbiddenException`, `BadRequestException`, ...)
-- **Authorization**: Always check permissions with `assertPermission` / `assertBoardAccess` from `@kan/api/utils/permissions`
+- **Authorization**: Always check permissions with `assertPermission` / `assertBoardAccess` from `@kan/server/utils/permissions`
 - **Client**: After changing endpoints run `cd apps/api && pnpm openapi`, then `cd packages/api-client && pnpm generate`
 
 ### Frontend (`apps/web/`)
@@ -121,9 +121,8 @@ Kan is an open-source project management tool (Trello alternative) built with:
 
 ### API
 
-- Routers: `packages/api/src/routers/*.ts`
-- Utils: `packages/api/src/utils/`
-- Types: `packages/api/src/types/`
+- Modules: `apps/api/src/modules/<name>/`
+- Shared utils: `packages/server/src/utils/`
 
 ### Frontend
 
@@ -183,7 +182,7 @@ Always check:
 2. User has access to workspace
 3. User has permission for the operation
 
-Use `assertPermission` from `@kan/api/utils/permissions` for workspace checks.
+Use `assertPermission` from `@kan/server/utils/permissions` for workspace checks.
 
 ### Error Handling
 

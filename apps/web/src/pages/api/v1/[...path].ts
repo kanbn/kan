@@ -2,7 +2,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { env } from "next-runtime-env";
 import cors from "nextjs-cors";
 
-import { tokenOrIpIdentifier, withRateLimit } from "@kan/api/utils/rateLimit";
+import {
+  tokenOrIpIdentifier,
+  withRateLimit,
+} from "@kan/server/utils/rateLimit";
 
 // The public REST API (API keys, the MCP server, /api/v1/openapi.json) is
 // served by apps/api; this keeps its long-standing /api/v1 address.

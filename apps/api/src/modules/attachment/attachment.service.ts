@@ -4,15 +4,15 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 
-import {
-  assertBoardAccess,
-  assertPermission,
-} from "@kan/api/utils/permissions";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { createLogger } from "@kan/logger";
+import {
+  assertBoardAccess,
+  assertPermission,
+} from "@kan/server/utils/permissions";
 import {
   deleteObject,
   generateUID,

@@ -5,14 +5,14 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 
+import * as boardRepo from "@kan/db/repository/board.repo";
+import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
+import * as memberRepo from "@kan/db/repository/member.repo";
 import {
   assertBoardAccess,
   assertCanManageBoardMembers,
   assertPermission,
-} from "@kan/api/utils/permissions";
-import * as boardRepo from "@kan/db/repository/board.repo";
-import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
-import * as memberRepo from "@kan/db/repository/member.repo";
+} from "@kan/server/utils/permissions";
 
 import { db } from "../../common/session.util.js";
 

@@ -1,12 +1,12 @@
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
 
-import {
-  assertBoardAccess,
-  assertPermission,
-} from "@kan/api/utils/permissions";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
+import {
+  assertBoardAccess,
+  assertPermission,
+} from "@kan/server/utils/permissions";
 
 import { assertFound } from "../../common/assert-found.util.js";
 import { db } from "../../common/session.util.js";

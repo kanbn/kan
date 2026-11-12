@@ -3,8 +3,8 @@ import type { NestMiddleware } from "@nestjs/common";
 import type { NextFunction, Request, Response } from "express";
 import { HttpException, Injectable } from "@nestjs/common";
 
-import { redactSensitive } from "@kan/api/utils/redact";
 import { createLogger } from "@kan/logger";
+import { redactSensitive } from "@kan/server/utils/redact";
 
 import type { User } from "../interfaces/user.interface.js";
 
