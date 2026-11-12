@@ -66,7 +66,6 @@
     "translation": "{0} | {1}"
   },
   "gIHmMY": {
-    "translation": "{0} boards couldn't be imported. Please try again, or contact support if this keeps happening.",
     "message": "{0} boards couldn't be imported. Please try again, or contact support if this keeps happening.",
     "placeholders": {
       "0": [
@@ -79,7 +78,8 @@
         "src/views/boards/components/ImportBoardsForm.tsx",
         434
       ]
-    ]
+    ],
+    "translation": "{0} boards couldn't be imported. Please try again, or contact support if this keeps happening."
   },
   "baIPh3": {
     "message": "{0} cards due",
@@ -162,7 +162,6 @@
     "translation": "{0} not found"
   },
   "UPYBKg": {
-    "translation": "{board} couldn't be found in Trello.",
     "message": "{board} couldn't be found in Trello.",
     "placeholders": {
       "board": [
@@ -175,10 +174,10 @@
         "src/views/boards/components/ImportBoardsForm.tsx",
         382
       ]
-    ]
+    ],
+    "translation": "{board} couldn't be found in Trello."
   },
   "X2Hje9": {
-    "translation": "{board} couldn't be imported. Please try again, or contact support if this keeps happening.",
     "message": "{board} couldn't be imported. Please try again, or contact support if this keeps happening.",
     "placeholders": {
       "board": [
@@ -191,7 +190,8 @@
         "src/views/boards/components/ImportBoardsForm.tsx",
         387
       ]
-    ]
+    ],
+    "translation": "{board} couldn't be imported. Please try again, or contact support if this keeps happening."
   },
   "0xWkkH": {
     "message": "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}",
@@ -1278,7 +1278,6 @@
     "translation": "Archived"
   },
   "T5/ohn": {
-    "translation": "Archived lists and cards aren't imported.",
     "message": "Archived lists and cards aren't imported.",
     "placeholders": {},
     "comments": [],
@@ -1287,7 +1286,8 @@
         "src/views/boards/components/ImportBoardsForm.tsx",
         518
       ]
-    ]
+    ],
+    "translation": "Archived lists and cards aren't imported."
   },
   "lo8xBK": {
     "message": "Are you sure want to remove {entityLabel}?",
@@ -6666,7 +6666,6 @@
     "translation": "Junior"
   },
   "JeVSbu": {
-    "translation": "Kan couldn't open {board} in Trello. Try reconnecting Trello and importing again.",
     "message": "Kan couldn't open {board} in Trello. Try reconnecting Trello and importing again.",
     "placeholders": {
       "board": [
@@ -6679,7 +6678,8 @@
         "src/views/boards/components/ImportBoardsForm.tsx",
         380
       ]
-    ]
+    ],
+    "translation": "Kan couldn't open {board} in Trello. Try reconnecting Trello and importing again."
   },
   "aWDhU5": {
     "message": "Kanban is better with a team. Perfect for small and growing teams looking to collaborate.",
@@ -8071,7 +8071,6 @@
     "translation": "Once you delete your workspace, there is no going back. This action cannot be undone."
   },
   "ANpYMF": {
-    "translation": "One of your boards",
     "message": "One of your boards",
     "placeholders": {},
     "comments": [],
@@ -8080,7 +8079,8 @@
         "src/views/boards/components/ImportBoardsForm.tsx",
         377
       ]
-    ]
+    ],
+    "translation": "One of your boards"
   },
   "69b7aE": {
     "message": "Open command menu",
@@ -10464,7 +10464,6 @@
     "translation": "Some attachments failed"
   },
   "uKMhOo": {
-    "translation": "Some boards weren't imported",
     "message": "Some boards weren't imported",
     "placeholders": {},
     "comments": [],
@@ -10473,7 +10472,8 @@
         "src/views/boards/components/ImportBoardsForm.tsx",
         430
       ]
-    ]
+    ],
+    "translation": "Some boards weren't imported"
   },
   "J9+zIR": {
     "message": "Something went wrong during activation. Please try again.",
@@ -11541,7 +11541,6 @@
     "translation": "Trello imports"
   },
   "wS0xHf": {
-    "translation": "Trello is busy right now. Please try importing {board} again in a few minutes.",
     "message": "Trello is busy right now. Please try importing {board} again in a few minutes.",
     "placeholders": {
       "board": [
@@ -11554,7 +11553,8 @@
         "src/views/boards/components/ImportBoardsForm.tsx",
         385
       ]
-    ]
+    ],
+    "translation": "Trello is busy right now. Please try importing {board} again in a few minutes."
   },
   "HO+uOC": {
     "message": "Triaging",

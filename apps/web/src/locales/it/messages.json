@@ -37,13 +37,13 @@
     "translation": "{0} | {1}"
   },
   "gIHmMY": {
-    "translation": "Non è stato possibile importare {0} bacheche. Riprova oppure contatta l'assistenza se il problema persiste.",
     "message": "{0} boards couldn't be imported. Please try again, or contact support if this keeps happening.",
     "placeholders": {
       "0": ["failures.length"]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 434]]
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 434]],
+    "translation": "Non è stato possibile importare {0} bacheche. Riprova oppure contatta l'assistenza se il problema persiste."
   },
   "baIPh3": {
     "message": "{0} cards due",
@@ -91,22 +91,22 @@
     "translation": "{0} non trovato"
   },
   "UPYBKg": {
-    "translation": "Non è stato possibile trovare {board} in Trello.",
     "message": "{board} couldn't be found in Trello.",
     "placeholders": {
       "board": ["board"]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 382]]
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 382]],
+    "translation": "Non è stato possibile trovare {board} in Trello."
   },
   "X2Hje9": {
-    "translation": "Non è stato possibile importare {board}. Riprova oppure contatta l'assistenza se il problema persiste.",
     "message": "{board} couldn't be imported. Please try again, or contact support if this keeps happening.",
     "placeholders": {
       "board": ["board"]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 387]]
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 387]],
+    "translation": "Non è stato possibile importare {board}. Riprova oppure contatta l'assistenza se il problema persiste."
   },
   "0xWkkH": {
     "message": "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}",
@@ -754,11 +754,11 @@
     "translation": "Archiviato"
   },
   "T5/ohn": {
-    "translation": "Le liste e le schede archiviate non vengono importate.",
     "message": "Archived lists and cards aren't imported.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 518]]
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 518]],
+    "translation": "Le liste e le schede archiviate non vengono importate."
   },
   "lo8xBK": {
     "message": "Are you sure want to remove {entityLabel}?",
@@ -3967,13 +3967,13 @@
     "translation": "Junior"
   },
   "JeVSbu": {
-    "translation": "Kan non è riuscito ad aprire {board} in Trello. Prova a ricollegare Trello e a importare di nuovo.",
     "message": "Kan couldn't open {board} in Trello. Try reconnecting Trello and importing again.",
     "placeholders": {
       "board": ["board"]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 380]]
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 380]],
+    "translation": "Kan non è riuscito ad aprire {board} in Trello. Prova a ricollegare Trello e a importare di nuovo."
   },
   "aWDhU5": {
     "message": "Kanban is better with a team. Perfect for small and growing teams looking to collaborate.",
@@ -4781,11 +4781,11 @@
     "translation": "Una volta eliminato il tuo workspace, non si può tornare indietro. Questa azione non può essere annullata."
   },
   "ANpYMF": {
-    "translation": "Una delle tue bacheche",
     "message": "One of your boards",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 377]]
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 377]],
+    "translation": "Una delle tue bacheche"
   },
   "69b7aE": {
     "message": "Open command menu",
@@ -6134,11 +6134,11 @@
     "translation": "Alcuni allegati non sono riusciti"
   },
   "uKMhOo": {
-    "translation": "Alcune bacheche non sono state importate",
     "message": "Some boards weren't imported",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 430]]
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 430]],
+    "translation": "Alcune bacheche non sono state importate"
   },
   "J9+zIR": {
     "message": "Something went wrong during activation. Please try again.",
@@ -6794,13 +6794,13 @@
     "translation": "Importazioni Trello"
   },
   "wS0xHf": {
-    "translation": "Trello è occupato al momento. Riprova a importare {board} tra qualche minuto.",
     "message": "Trello is busy right now. Please try importing {board} again in a few minutes.",
     "placeholders": {
       "board": ["board"]
     },
     "comments": [],
-    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 385]]
+    "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 385]],
+    "translation": "Trello è occupato al momento. Riprova a importare {board} tra qualche minuto."
   },
   "HO+uOC": {
     "message": "Triaging",
