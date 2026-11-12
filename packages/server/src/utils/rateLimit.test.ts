@@ -1,14 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { tokenOrIpIdentifier, withRateLimit } from "./rateLimit.js";
+import {
+  getClientIp,
+  tokenOrIpIdentifier,
+  withRateLimit,
+} from "./rateLimit.js";
 
 vi.mock("@kan/db/redis", () => ({
   getRedisClient: vi.fn(() => null),
 }));
 
 vi.mock("@kan/logger", () => ({
-  createLogger: vi.fn(() => ({ debug: vi.fn() })),
+  createLogger: vi.fn(() => ({ debug: vi.fn(), warn: vi.fn() })),
 }));
 
 function makeReq(headers: Record<string, string> = {}): NextApiRequest {
@@ -58,6 +62,35 @@ describe("tokenOrIpIdentifier", () => {
   });
 });
 
+describe("getClientIp", () => {
+  it("ignores X-Forwarded-For entries the client sent", () => {
+    expect(
+      getClientIp({ "x-forwarded-for": "10.0.0.1, 203.0.113.5" }, "10.9.9.9"),
+    ).toBe("203.0.113.5");
+  });
+
+  it("uses only the configured header when RATE_LIMIT_IP_HEADER is set", () => {
+    vi.stubEnv("RATE_LIMIT_IP_HEADER", "CF-Connecting-IP");
+    expect(
+      getClientIp({
+        "cf-connecting-ip": "203.0.113.5",
+        "x-forwarded-for": "10.0.0.1",
+      }),
+    ).toBe("203.0.113.5");
+    expect(getClientIp({ "x-forwarded-for": "10.0.0.1" }, "10.9.9.9")).toBe(
+      "10.9.9.9",
+    );
+    vi.unstubAllEnvs();
+  });
+
+  it("falls back to X-Real-IP, then the socket address", () => {
+    expect(getClientIp({ "x-real-ip": "203.0.113.5" }, "10.9.9.9")).toBe(
+      "203.0.113.5",
+    );
+    expect(getClientIp({}, "10.9.9.9")).toBe("10.9.9.9");
+  });
+});
+
 describe("withRateLimit", () => {
   beforeEach(() => {
     vi.stubEnv("DISABLE_RATE_LIMIT", "false");
@@ -72,7 +105,7 @@ describe("withRateLimit", () => {
     const handler = vi.fn();
     const onRateLimit = vi.fn();
     const limitedHandler = withRateLimit(
-      { points: 1, duration: 60, onRateLimit },
+      { keyPrefix: "test", points: 1, duration: 60, onRateLimit },
       handler,
     );
 
@@ -85,5 +118,19 @@ describe("withRateLimit", () => {
       res,
       "Too many requests, please try again later.",
     );
+  });
+
+  it("runs the handler once when it throws", async () => {
+    const req = {
+      headers: {},
+      socket: { remoteAddress: "throwing-handler-test" },
+    } as unknown as NextApiRequest;
+    const handler = vi.fn().mockRejectedValue(new Error("boom"));
+    const limitedHandler = withRateLimit({ keyPrefix: "test" }, handler);
+
+    await expect(limitedHandler(req, {} as NextApiResponse)).rejects.toThrow(
+      "boom",
+    );
+    expect(handler).toHaveBeenCalledTimes(1);
   });
 });

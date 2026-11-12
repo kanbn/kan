@@ -22,7 +22,7 @@ export const config = {
 };
 
 export default withRateLimit(
-  { points: 100, duration: 60 },
+  { keyPrefix: "upload-attachment", points: 100, duration: 60 },
   withApiLogging(async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "POST") {
       return res.status(405).json({ error: "Method not allowed" });

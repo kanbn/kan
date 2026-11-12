@@ -11,7 +11,7 @@ export const auth = initAuth(createDrizzleClient());
 const authHandler = toNodeHandler(auth.handler);
 
 export default withRateLimit(
-  { points: 100, duration: 60 },
+  { keyPrefix: "auth", points: 100, duration: 60 },
   async (req, res) => {
     /**
      * Better-auth behind proxies (Nginx/Cloudflare) can sometimes fail to parse the protocol

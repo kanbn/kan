@@ -26,7 +26,12 @@ const readBody = async (req: NextApiRequest) => {
 };
 
 export default withRateLimit(
-  { points: 600, duration: 60, identifier: tokenOrIpIdentifier },
+  {
+    keyPrefix: "api-v1",
+    points: 600,
+    duration: 60,
+    identifier: tokenOrIpIdentifier,
+  },
   async (req: NextApiRequest, res: NextApiResponse) => {
     await cors(req, res);
 
