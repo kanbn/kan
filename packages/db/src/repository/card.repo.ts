@@ -889,7 +889,7 @@ export const reorder = async (
       newIndex = lastCardIndex !== undefined ? lastCardIndex + 1 : 0;
     }
 
-    if (currentList.id === newList?.id) {
+    if (!newList || currentList.id === newList.id) {
       await tx.execute(sql`
         UPDATE card
         SET index =
