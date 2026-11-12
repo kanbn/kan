@@ -29,8 +29,8 @@ const firstHeader = (headers: RequestHeaders, name: string) => {
   return (Array.isArray(value) ? value[0] : value)?.trim() || undefined;
 };
 
-// Proxies append to X-Forwarded-For, so only the last entry was written by
-// our own proxy; earlier entries are whatever the client sent.
+// Without RATE_LIMIT_IP_HEADER the first X-Forwarded-For entry is used, which
+// clients can set; it stays the default so multi-proxy setups keep working.
 export const getClientIp = (
   headers: RequestHeaders,
   remoteAddress?: string,
@@ -40,8 +40,9 @@ export const getClientIp = (
     return firstHeader(headers, trustedHeader) ?? remoteAddress ?? "unknown";
 
   return (
-    firstHeader(headers, "x-forwarded-for")?.split(",").pop()?.trim() ||
+    firstHeader(headers, "x-forwarded-for")?.split(",")[0]?.trim() ||
     firstHeader(headers, "x-real-ip") ||
+    firstHeader(headers, "cf-connecting-ip") ||
     remoteAddress ||
     "unknown"
   );

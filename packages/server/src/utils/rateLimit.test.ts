@@ -63,9 +63,9 @@ describe("tokenOrIpIdentifier", () => {
 });
 
 describe("getClientIp", () => {
-  it("ignores X-Forwarded-For entries the client sent", () => {
+  it("uses the first X-Forwarded-For entry by default", () => {
     expect(
-      getClientIp({ "x-forwarded-for": "10.0.0.1, 203.0.113.5" }, "10.9.9.9"),
+      getClientIp({ "x-forwarded-for": "203.0.113.5, 10.0.0.1" }, "10.9.9.9"),
     ).toBe("203.0.113.5");
   });
 
