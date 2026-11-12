@@ -65,6 +65,22 @@
     ],
     "translation": "{0} | {1}"
   },
+  "gIHmMY": {
+    "translation": "{0} boards couldn't be imported. Please try again, or contact support if this keeps happening.",
+    "message": "{0} boards couldn't be imported. Please try again, or contact support if this keeps happening.",
+    "placeholders": {
+      "0": [
+        "failures.length"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/ImportBoardsForm.tsx",
+        434
+      ]
+    ]
+  },
   "baIPh3": {
     "message": "{0} cards due",
     "placeholders": {
@@ -145,6 +161,38 @@
     ],
     "translation": "{0} not found"
   },
+  "UPYBKg": {
+    "translation": "{board} couldn't be found in Trello.",
+    "message": "{board} couldn't be found in Trello.",
+    "placeholders": {
+      "board": [
+        "board"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/ImportBoardsForm.tsx",
+        382
+      ]
+    ]
+  },
+  "X2Hje9": {
+    "translation": "{board} couldn't be imported. Please try again, or contact support if this keeps happening.",
+    "message": "{board} couldn't be imported. Please try again, or contact support if this keeps happening.",
+    "placeholders": {
+      "board": [
+        "board"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/ImportBoardsForm.tsx",
+        387
+      ]
+    ]
+  },
   "0xWkkH": {
     "message": "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}",
     "placeholders": {
@@ -156,7 +204,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        506
+        548
       ]
     ],
     "translation": "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
@@ -172,7 +220,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        356
+        357
       ]
     ],
     "translation": "{projectCount, plural, one {Import project (1)} other {Import projects ({projectCount})}}"
@@ -1228,6 +1276,18 @@
       ]
     ],
     "translation": "Archived"
+  },
+  "T5/ohn": {
+    "translation": "Archived lists and cards aren't imported.",
+    "message": "Archived lists and cards aren't imported.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/ImportBoardsForm.tsx",
+        518
+      ]
+    ]
   },
   "lo8xBK": {
     "message": "Are you sure want to remove {entityLabel}?",
@@ -3123,7 +3183,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        208
+        209
       ]
     ],
     "translation": "Connect"
@@ -6230,11 +6290,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        244
+        245
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        398
+        423
       ]
     ],
     "translation": "Import complete"
@@ -6246,11 +6306,15 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        257
+        258
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        411
+        431
+      ],
+      [
+        "src/views/boards/components/ImportBoardsForm.tsx",
+        450
       ]
     ],
     "translation": "Import failed"
@@ -6600,6 +6664,22 @@
       ]
     ],
     "translation": "Junior"
+  },
+  "JeVSbu": {
+    "translation": "Kan couldn't open {board} in Trello. Try reconnecting Trello and importing again.",
+    "message": "Kan couldn't open {board} in Trello. Try reconnecting Trello and importing again.",
+    "placeholders": {
+      "board": [
+        "board"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/ImportBoardsForm.tsx",
+        380
+      ]
+    ]
   },
   "aWDhU5": {
     "message": "Kanban is better with a team. Perfect for small and growing teams looking to collaborate.",
@@ -7577,7 +7657,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        530
+        572
       ]
     ],
     "translation": "New import"
@@ -7765,7 +7845,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        449
+        488
       ]
     ],
     "translation": "No boards found"
@@ -7873,7 +7953,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        298
+        299
       ]
     ],
     "translation": "No projects found"
@@ -7989,6 +8069,18 @@
       ]
     ],
     "translation": "Once you delete your workspace, there is no going back. This action cannot be undone."
+  },
+  "ANpYMF": {
+    "translation": "One of your boards",
+    "message": "One of your boards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/ImportBoardsForm.tsx",
+        377
+      ]
+    ]
   },
   "69b7aE": {
     "message": "Open command menu",
@@ -8625,11 +8717,11 @@
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        258
+        259
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        412
+        451
       ],
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
@@ -9766,11 +9858,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        330
+        331
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        481
+        523
       ]
     ],
     "translation": "Select all"
@@ -9794,7 +9886,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        208
+        209
       ]
     ],
     "translation": "Select source"
@@ -10370,6 +10462,18 @@
       ]
     ],
     "translation": "Some attachments failed"
+  },
+  "uKMhOo": {
+    "translation": "Some boards weren't imported",
+    "message": "Some boards weren't imported",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/ImportBoardsForm.tsx",
+        430
+      ]
+    ]
   },
   "J9+zIR": {
     "message": "Something went wrong during activation. Please try again.",
@@ -11435,6 +11539,22 @@
       ]
     ],
     "translation": "Trello imports"
+  },
+  "wS0xHf": {
+    "translation": "Trello is busy right now. Please try importing {board} again in a few minutes.",
+    "message": "Trello is busy right now. Please try importing {board} again in a few minutes.",
+    "placeholders": {
+      "board": [
+        "board"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/ImportBoardsForm.tsx",
+        385
+      ]
+    ]
   },
   "HO+uOC": {
     "message": "Triaging",
@@ -13585,7 +13705,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        399
+        424
       ]
     ],
     "translation": "Your boards have been imported."
@@ -13729,7 +13849,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        245
+        246
       ]
     ],
     "translation": "Your projects have been imported."
