@@ -1,8 +1,10 @@
+import type { BoardDetailDtoOutputWorkspaceMembersItemStatus } from "@kan/api-client/hooks";
+
 import { formatMemberDisplayName } from "../../utils/helpers";
 
 interface BoardFilterMember {
   publicId: string;
-  status: "active" | "invited" | "removed" | "paused";
+  status: BoardDetailDtoOutputWorkspaceMembersItemStatus;
   user: { name: string | null; email: string } | null;
 }
 
@@ -16,22 +18,17 @@ export const getBoardFilterMembers = <T extends BoardFilterMember>(
     { sensitivity: "base" },
   );
 
+  const name = (member: T) =>
+    formatMemberDisplayName(
+      member.user?.name ?? null,
+      member.user?.email ?? null,
+    );
+
   return members
     .filter((member) => assignedMemberPublicIds?.has(member.publicId))
-    .sort((a, b) => {
-      const statusOrder =
-        Number(a.status === "paused") - Number(b.status === "paused");
-      if (statusOrder !== 0) return statusOrder;
-
-      const aName = formatMemberDisplayName(
-        a.user?.name ?? null,
-        a.user?.email ?? null,
-      );
-      const bName = formatMemberDisplayName(
-        b.user?.name ?? null,
-        b.user?.email ?? null,
-      );
-
-      return memberNameCollator.compare(aName, bName);
-    });
+    .sort(
+      (a, b) =>
+        Number(a.status === "paused") - Number(b.status === "paused") ||
+        memberNameCollator.compare(name(a), name(b)),
+    );
 };

@@ -41,17 +41,31 @@ export const getCardMemberOptions = (
         name: member.user?.name ?? null,
         status: member.status,
         leftIcon: (
-          <span
-            className={member.status === "paused" ? "opacity-50" : undefined}
-          >
-            <Avatar
-              size="xs"
-              name={member.user?.name ?? ""}
-              imageUrl={imageUrl}
-              email={email}
-            />
-          </span>
+          <Avatar
+            size="xs"
+            name={member.user?.name ?? ""}
+            imageUrl={imageUrl}
+            email={email}
+            paused={member.status === "paused"}
+          />
         ),
       },
     ];
   });
+
+// Editor mention suggestions: existing mentions keep their saved label, so
+// paused members only need leaving out of new suggestions.
+export const getMentionableMembers = (workspaceMembers: WorkspaceMember[]) =>
+  workspaceMembers
+    .filter((member) => member.email && member.status !== "paused")
+    .map((member) => ({
+      publicId: member.publicId,
+      email: member.email,
+      user: member.user
+        ? {
+            id: member.user.id,
+            name: member.user.name ?? null,
+            image: member.user.image ?? null,
+          }
+        : null,
+    }));

@@ -2,9 +2,9 @@ import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { HiMiniPlus } from "react-icons/hi2";
 
-import type { CardDetailDtoOutputMembersItem } from "@kan/api-client/hooks";
 import { useToggleCardMember } from "@kan/api-client/hooks";
 
+import type { getCardMemberOptions } from "./memberOptions";
 import Avatar from "~/components/Avatar";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
 import { useModal } from "~/providers/modal";
@@ -13,21 +13,9 @@ import { useBoardCache } from "~/utils/boardCache";
 import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 
-type MemberStatus = CardDetailDtoOutputMembersItem["status"];
-
 interface MemberSelectorProps {
   cardPublicId: string;
-  members: {
-    key: string;
-    value: string;
-    selected: boolean;
-    leftIcon: React.ReactNode;
-    imageUrl: string | undefined;
-    email: string;
-    userId: string | null;
-    name: string | null;
-    status: MemberStatus;
-  }[];
+  members: ReturnType<typeof getCardMemberOptions>;
   isLoading: boolean;
   disabled?: boolean;
 }
@@ -136,18 +124,14 @@ export default function MemberSelector({
             {selectedMembers.length ? (
               <div className="isolate flex justify-end -space-x-1 overflow-hidden">
                 {selectedMembers.map(({ key, value, imageUrl, status }) => (
-                  <span
+                  <Avatar
                     key={key}
-                    className={status === "paused" ? "opacity-50" : undefined}
-                    title={status === "paused" ? t`Paused` : undefined}
-                  >
-                    <Avatar
-                      size="sm"
-                      name={value}
-                      imageUrl={imageUrl}
-                      email={value}
-                    />
-                  </span>
+                    size="sm"
+                    name={value}
+                    imageUrl={imageUrl}
+                    email={value}
+                    paused={status === "paused"}
+                  />
                 ))}
               </div>
             ) : (

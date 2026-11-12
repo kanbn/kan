@@ -10,7 +10,6 @@ import { IoChevronForwardSharp } from "react-icons/io5";
 import { useGetCard, useToggleCardLabel } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
-import Avatar from "~/components/Avatar";
 import Editor from "~/components/Editor";
 import FeedbackModal from "~/components/FeedbackModal";
 import { LabelForm } from "~/components/LabelForm";
@@ -32,7 +31,6 @@ import { getBoardReturnUrl } from "~/utils/board-return-url";
 import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 import { updateCardFromInput } from "~/utils/cardMutations";
-import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
 import { DeleteLabelConfirmation } from "../../components/DeleteLabelConfirmation";
 import ActivityList from "./components/ActivityList";
 import { ActivitySortOrderToggle } from "./components/ActivitySortOrderToggle";
@@ -46,7 +44,10 @@ import Dropdown from "./components/Dropdown";
 import { DueDateSelector } from "./components/DueDateSelector";
 import LabelSelector from "./components/LabelSelector";
 import ListSelector from "./components/ListSelector";
-import { getCardMemberOptions } from "./components/memberOptions";
+import {
+  getCardMemberOptions,
+  getMentionableMembers,
+} from "./components/memberOptions";
 import MemberSelector from "./components/MemberSelector";
 import { NewChecklistForm } from "./components/NewChecklistForm";
 import NewCommentForm from "./components/NewCommentForm";
@@ -222,23 +223,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     `/${isTemplate ? "templates" : "boards"}/${boardId}`,
   );
 
-  // Paused members stay on existing mentions but can't be newly mentioned.
-  const mentionableMembers =
-    workspaceMembers?.filter((member) => member.status !== "paused") ?? [];
-
-  const editorWorkspaceMembers = mentionableMembers
-    .filter((member) => member.email)
-    .map((member) => ({
-      publicId: member.publicId,
-      email: member.email,
-      user: member.user
-        ? {
-            id: member.user.id,
-            name: member.user.name ?? null,
-            image: member.user.image ?? null,
-          }
-        : null,
-    }));
+  const editorWorkspaceMembers = getMentionableMembers(workspaceMembers ?? []);
 
   const updateCard = useMutation({
     mutationFn: updateCardFromInput,
@@ -474,7 +459,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                           onBlur={
                             canEdit ? () => handleSubmit(onSubmit)() : undefined
                           }
-                          workspaceMembers={mentionableMembers}
+                          workspaceMembers={editorWorkspaceMembers}
                           readOnly={!canEdit}
                         />
                       </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { t } from "@lingui/core/macro";
 import { twMerge } from "tailwind-merge";
 
 import { getInitialsFromName, inferInitialsFromEmail } from "~/utils/helpers";
@@ -17,6 +18,7 @@ const Avatar = ({
   icon,
   imageUrl,
   isLoading,
+  paused,
 }: {
   size?: "xs" | "sm" | "md" | "lg";
   name: string;
@@ -24,6 +26,7 @@ const Avatar = ({
   imageUrl?: string;
   icon?: React.ReactNode;
   isLoading?: boolean;
+  paused?: boolean;
 }) => {
   const initials = name?.trim()
     ? getInitialsFromName(name)
@@ -34,15 +37,18 @@ const Avatar = ({
       {imageUrl ? (
         <Image
           src={imageUrl}
-          className="rounded-full bg-gray-50"
+          className={twMerge("rounded-full bg-gray-50", paused && "opacity-50")}
+          title={paused ? t`Paused` : undefined}
           width={sizeMap[size]}
           height={sizeMap[size]}
           alt=""
         />
       ) : (
         <span
+          title={paused ? t`Paused` : undefined}
           className={twMerge(
             "inline-flex h-9 w-9 items-center justify-center rounded-full bg-light-1000 dark:bg-dark-400",
+            paused && "opacity-50",
             isLoading && "animate-pulse bg-light-200 dark:bg-dark-200",
             size === "xs" && "h-5 w-5",
             size === "sm" && "h-6 w-6",

@@ -10,6 +10,8 @@ import {
 } from "react-icons/hi2";
 import { IoFilterOutline } from "react-icons/io5";
 
+import type { BoardDetailDtoOutputWorkspaceMembersItemStatus } from "@kan/api-client/hooks";
+
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
@@ -23,7 +25,7 @@ import { getBoardFilterMembers } from "../memberFilters";
 
 interface Member {
   publicId: string;
-  status: "active" | "invited" | "removed" | "paused";
+  status: BoardDetailDtoOutputWorkspaceMembersItemStatus;
   user: {
     name: string | null;
     image: string | null;
@@ -89,16 +91,15 @@ const Filters = ({
     )}${member.status === "paused" ? ` (${t`Paused`})` : ""}`,
     selected: !!router.query.members?.includes(member.publicId),
     leftIcon: (
-      <span className={member.status === "paused" ? "opacity-50" : undefined}>
-        <Avatar
-          size="xs"
-          name={member.user?.name ?? ""}
-          imageUrl={
-            member.user?.image ? getAvatarUrl(member.user.image) : undefined
-          }
-          email={member.user?.email ?? ""}
-        />
-      </span>
+      <Avatar
+        size="xs"
+        name={member.user?.name ?? ""}
+        imageUrl={
+          member.user?.image ? getAvatarUrl(member.user.image) : undefined
+        }
+        email={member.user?.email ?? ""}
+        paused={member.status === "paused"}
+      />
     ),
   }));
 

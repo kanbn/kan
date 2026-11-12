@@ -1,4 +1,3 @@
-import { t } from "@lingui/core/macro";
 import { format, isBefore, isSameYear, startOfDay } from "date-fns";
 import { HiOutlinePaperClip } from "react-icons/hi";
 import {
@@ -168,20 +167,14 @@ const Card = ({
                       : undefined;
 
                     return (
-                      <span
+                      <Avatar
                         key={publicId}
-                        className={
-                          status === "paused" ? "opacity-50" : undefined
-                        }
-                        title={status === "paused" ? t`Paused` : undefined}
-                      >
-                        <Avatar
-                          name={user?.name ?? ""}
-                          email={user?.email ?? email}
-                          imageUrl={avatarUrl}
-                          size="sm"
-                        />
-                      </span>
+                        name={user?.name ?? ""}
+                        email={user?.email ?? email}
+                        imageUrl={avatarUrl}
+                        size="sm"
+                        paused={status === "paused"}
+                      />
                     );
                   })}
                 </div>

@@ -6,7 +6,6 @@ import { HiEllipsisHorizontal, HiPencil, HiTrash } from "react-icons/hi2";
 
 import { useGetCard, useUpdateCardComment } from "@kan/api-client/hooks";
 
-import type { WorkspaceMember } from "~/components/Editor";
 import Avatar from "~/components/Avatar";
 import Button from "~/components/Button";
 import Dropdown from "~/components/Dropdown";
@@ -17,6 +16,7 @@ import { usePopup } from "~/providers/popup";
 import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
 import { getAvatarUrl } from "~/utils/helpers";
+import { getMentionableMembers } from "./memberOptions";
 
 interface FormValues {
   comment: string;
@@ -75,20 +75,7 @@ const Comment = ({
       (userId ? member.user?.id === userId : member.email === email),
   );
 
-  // Paused members can't be newly mentioned.
-  const workspaceMembers: WorkspaceMember[] = members
-    .filter((member) => member.email && member.status !== "paused")
-    .map((member) => ({
-      publicId: member.publicId,
-      email: member.email,
-      user: member.user
-        ? {
-            id: member.user.id,
-            name: member.user.name ?? null,
-            image: member.user.image ?? null,
-          }
-        : null,
-    }));
+  const workspaceMembers = getMentionableMembers(members);
 
   const updateCommentMutation = useUpdateCardComment({
     mutation: {
@@ -144,15 +131,14 @@ const Comment = ({
     >
       <div className="flex justify-between">
         <div className="flex items-center space-x-2">
-          <span className={isPaused ? "opacity-50" : undefined}>
-            <Avatar
-              size="sm"
-              name={name ?? ""}
-              email={email ?? ""}
-              imageUrl={getAvatarUrl(image) || undefined}
-              isLoading={isLoading}
-            />
-          </span>
+          <Avatar
+            size="sm"
+            name={name ?? ""}
+            email={email ?? ""}
+            imageUrl={getAvatarUrl(image) || undefined}
+            isLoading={isLoading}
+            paused={isPaused}
+          />
 
           <p className="text-sm">
             <span className="font-medium dark:text-dark-1000">{`${name} `}</span>
