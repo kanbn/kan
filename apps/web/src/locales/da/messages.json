@@ -6,7 +6,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        155
+        158
       ]
     ],
     "translation": " (redigeret)"
@@ -60,7 +60,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        372
+        337
       ]
     ],
     "translation": "{0} | {1}"
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        572
+        575
       ]
     ],
     "translation": "{0} etiketter"
@@ -481,7 +481,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        531
+        496
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -613,7 +613,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        187
+        190
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
@@ -677,7 +677,7 @@
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        144
+        140
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -1464,11 +1464,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        635
+        638
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        636
+        639
       ]
     ],
     "translation": ""
@@ -1504,7 +1504,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        220
+        233
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -1731,7 +1731,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        372
+        337
       ],
       [
         "src/views/public/board/index.tsx",
@@ -2517,7 +2517,7 @@
       ],
       [
         "src/views/card/components/Comment.tsx",
-        197
+        200
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
@@ -2573,7 +2573,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        372
+        337
       ]
     ],
     "translation": "Kort"
@@ -2625,11 +2625,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        435
+        400
       ],
       [
         "src/views/card/index.tsx",
-        472
+        437
       ]
     ],
     "translation": "Kortet blev ikke fundet"
@@ -2653,7 +2653,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        438
+        443
       ]
     ],
     "translation": "Korttitel"
@@ -2897,7 +2897,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        229
+        242
       ]
     ],
     "translation": "Ryd filtre"
@@ -2933,7 +2933,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        426
+        391
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3013,7 +3013,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        163
+        166
       ]
     ],
     "translation": ""
@@ -3498,7 +3498,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        667
+        670
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3526,7 +3526,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        677
+        680
       ]
     ],
     "translation": "Opret kort"
@@ -3618,7 +3618,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        534
+        537
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3638,7 +3638,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        1032
+        1035
       ]
     ],
     "translation": "Opret ny liste"
@@ -4065,7 +4065,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        122
+        119
       ]
     ],
     "translation": "Slet kommentar"
@@ -4401,7 +4401,7 @@
       ],
       [
         "src/views/board/components/CardContextMembersModal.tsx",
-        73
+        50
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
@@ -4449,15 +4449,15 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        178
+        191
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        589
+        592
       ],
       [
         "src/views/card/index.tsx",
-        165
+        143
       ]
     ],
     "translation": "Forfaldsdato"
@@ -4469,7 +4469,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        129
+        142
       ]
     ],
     "translation": "Forfalder næste måned"
@@ -4481,7 +4481,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        124
+        137
       ]
     ],
     "translation": "Forfalder i næste uge"
@@ -4493,7 +4493,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        114
+        127
       ]
     ],
     "translation": "Forfalder i dag"
@@ -4505,7 +4505,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        119
+        132
       ]
     ],
     "translation": "Forfalder i morgen"
@@ -4593,7 +4593,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        113
+        110
       ]
     ],
     "translation": "Rediger kommentar"
@@ -5482,7 +5482,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        237
+        250
       ]
     ],
     "translation": "Filter"
@@ -5762,7 +5762,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1014
+        1017
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny liste"
@@ -6526,7 +6526,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        121
+        116
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -6679,11 +6679,11 @@
       ],
       [
         "src/views/board/components/Filters.tsx",
-        160
+        173
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        538
+        541
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -6691,7 +6691,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        145
+        123
       ]
     ],
     "translation": "Etiketter"
@@ -6904,7 +6904,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        136
+        114
       ]
     ],
     "translation": "Liste"
@@ -6948,7 +6948,7 @@
       ],
       [
         "src/views/board/components/Filters.tsx",
-        169
+        182
       ],
       [
         "src/views/board/components/ViewToggle.tsx",
@@ -6964,7 +6964,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        660
+        661
       ]
     ],
     "translation": "Indlæs flere aktiviteter"
@@ -6988,7 +6988,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        660
+        661
       ]
     ],
     "translation": "Indlæser..."
@@ -7084,7 +7084,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMembersModal.tsx",
-        56
+        33
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -7240,19 +7240,19 @@
       ],
       [
         "src/views/board/components/Filters.tsx",
-        151
+        164
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        496
+        499
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        122
+        117
       ],
       [
         "src/views/card/index.tsx",
-        155
+        133
       ],
       [
         "src/views/members/index.tsx",
@@ -7555,7 +7555,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        421
+        426
       ]
     ],
     "translation": "Nyt kort"
@@ -7607,7 +7607,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        956
+        959
       ]
     ],
     "translation": "Ny liste"
@@ -7803,7 +7803,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        134
+        147
       ]
     ],
     "translation": "Ingen datoer"
@@ -7851,7 +7851,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1010
+        1013
       ]
     ],
     "translation": "Ingen lister"
@@ -7863,7 +7863,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1015
+        1018
       ]
     ],
     "translation": "Der er endnu ikke oprettet nogen lister"
@@ -8111,7 +8111,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        109
+        122
       ]
     ],
     "translation": "Overskredet"
@@ -8261,6 +8261,26 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/components/Avatar.tsx",
+        41
+      ],
+      [
+        "src/components/Avatar.tsx",
+        48
+      ],
+      [
+        "src/views/board/components/Filters.tsx",
+        91
+      ],
+      [
+        "src/views/card/components/Comment.tsx",
+        147
+      ],
+      [
+        "src/views/card/components/memberOptions.tsx",
+        35
+      ],
       [
         "src/views/members/index.tsx",
         239
@@ -8667,7 +8687,7 @@
       ],
       [
         "src/views/card/components/Comment.tsx",
-        92
+        89
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
@@ -8695,7 +8715,7 @@
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        87
+        82
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
@@ -8711,11 +8731,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        268
+        233
       ],
       [
         "src/views/card/index.tsx",
-        282
+        247
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -9164,7 +9184,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        654
+        657
       ]
     ],
     "translation": ""
@@ -9580,7 +9600,7 @@
       ],
       [
         "src/views/card/components/Comment.tsx",
-        204
+        207
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -10380,7 +10400,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        341
+        346
       ]
     ],
     "translation": ""
@@ -10973,7 +10993,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        342
+        347
       ]
     ],
     "translation": ""
@@ -11533,7 +11553,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        281
+        246
       ]
     ],
     "translation": "Kunne ikke tilføje etiket"
@@ -11921,7 +11941,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        267
+        232
       ]
     ],
     "translation": "Kunne ikke opdatere kort"
@@ -11957,7 +11977,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        91
+        88
       ]
     ],
     "translation": "Kunne ikke opdatere kommentar"
@@ -12013,7 +12033,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        86
+        81
       ]
     ],
     "translation": "Kunne ikke opdatere medlemmer"
@@ -13394,11 +13414,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        944
+        947
       ],
       [
         "src/views/board/index.tsx",
-        1021
+        1024
       ],
       [
         "src/views/boards/components/BoardsList.tsx",

@@ -6,7 +6,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        155
+        158
       ]
     ],
     "translation": " (edited)"
@@ -60,7 +60,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        372
+        337
       ]
     ],
     "translation": "{0} | {1}"
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        572
+        575
       ]
     ],
     "translation": "{0} labels"
@@ -481,7 +481,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        531
+        496
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -613,7 +613,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        187
+        190
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
@@ -677,7 +677,7 @@
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        144
+        140
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -1464,11 +1464,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        635
+        638
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        636
+        639
       ]
     ],
     "translation": "Attach files"
@@ -1504,7 +1504,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        220
+        233
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
@@ -1731,7 +1731,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        372
+        337
       ],
       [
         "src/views/public/board/index.tsx",
@@ -2517,7 +2517,7 @@
       ],
       [
         "src/views/card/components/Comment.tsx",
-        197
+        200
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
@@ -2573,7 +2573,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        372
+        337
       ]
     ],
     "translation": "Card"
@@ -2625,11 +2625,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        435
+        400
       ],
       [
         "src/views/card/index.tsx",
-        472
+        437
       ]
     ],
     "translation": "Card not found"
@@ -2653,7 +2653,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        438
+        443
       ]
     ],
     "translation": "Card title"
@@ -2897,7 +2897,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        229
+        242
       ]
     ],
     "translation": "Clear filters"
@@ -2933,7 +2933,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        426
+        391
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3013,7 +3013,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        163
+        166
       ]
     ],
     "translation": "Comment options"
@@ -3511,7 +3511,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        667
+        670
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3539,7 +3539,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        677
+        680
       ]
     ],
     "translation": "Create card"
@@ -3631,7 +3631,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        534
+        537
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3651,7 +3651,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        1032
+        1035
       ]
     ],
     "translation": "Create new list"
@@ -4091,7 +4091,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        122
+        119
       ]
     ],
     "translation": "Delete comment"
@@ -4440,7 +4440,7 @@
       ],
       [
         "src/views/board/components/CardContextMembersModal.tsx",
-        73
+        50
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
@@ -4488,15 +4488,15 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        178
+        191
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        589
+        592
       ],
       [
         "src/views/card/index.tsx",
-        165
+        143
       ]
     ],
     "translation": "Due date"
@@ -4508,7 +4508,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        129
+        142
       ]
     ],
     "translation": "Due next month"
@@ -4520,7 +4520,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        124
+        137
       ]
     ],
     "translation": "Due next week"
@@ -4532,7 +4532,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        114
+        127
       ]
     ],
     "translation": "Due today"
@@ -4544,7 +4544,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        119
+        132
       ]
     ],
     "translation": "Due tomorrow"
@@ -4632,7 +4632,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        113
+        110
       ]
     ],
     "translation": "Edit comment"
@@ -5534,7 +5534,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        237
+        250
       ]
     ],
     "translation": "Filter"
@@ -5814,7 +5814,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1014
+        1017
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -6578,7 +6578,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        121
+        116
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
@@ -6744,11 +6744,11 @@
       ],
       [
         "src/views/board/components/Filters.tsx",
-        160
+        173
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        538
+        541
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -6756,7 +6756,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        145
+        123
       ]
     ],
     "translation": "Labels"
@@ -6982,7 +6982,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        136
+        114
       ]
     ],
     "translation": "List"
@@ -7026,7 +7026,7 @@
       ],
       [
         "src/views/board/components/Filters.tsx",
-        169
+        182
       ],
       [
         "src/views/board/components/ViewToggle.tsx",
@@ -7042,7 +7042,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        660
+        661
       ]
     ],
     "translation": "Load more activities"
@@ -7066,7 +7066,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        660
+        661
       ]
     ],
     "translation": "Loading..."
@@ -7162,7 +7162,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMembersModal.tsx",
-        56
+        33
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -7318,19 +7318,19 @@
       ],
       [
         "src/views/board/components/Filters.tsx",
-        151
+        164
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        496
+        499
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        122
+        117
       ],
       [
         "src/views/card/index.tsx",
-        155
+        133
       ],
       [
         "src/views/members/index.tsx",
@@ -7633,7 +7633,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        421
+        426
       ]
     ],
     "translation": "New card"
@@ -7685,7 +7685,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        956
+        959
       ]
     ],
     "translation": "New list"
@@ -7881,7 +7881,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        134
+        147
       ]
     ],
     "translation": "No dates"
@@ -7929,7 +7929,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1010
+        1013
       ]
     ],
     "translation": "No lists"
@@ -7941,7 +7941,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1015
+        1018
       ]
     ],
     "translation": "No lists have been created yet"
@@ -8189,7 +8189,7 @@
     "origin": [
       [
         "src/views/board/components/Filters.tsx",
-        109
+        122
       ]
     ],
     "translation": "Overdue"
@@ -8339,6 +8339,26 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/components/Avatar.tsx",
+        41
+      ],
+      [
+        "src/components/Avatar.tsx",
+        48
+      ],
+      [
+        "src/views/board/components/Filters.tsx",
+        91
+      ],
+      [
+        "src/views/card/components/Comment.tsx",
+        147
+      ],
+      [
+        "src/views/card/components/memberOptions.tsx",
+        35
+      ],
       [
         "src/views/members/index.tsx",
         239
@@ -8745,7 +8765,7 @@
       ],
       [
         "src/views/card/components/Comment.tsx",
-        92
+        89
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
@@ -8773,7 +8793,7 @@
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
-        87
+        82
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
@@ -8789,11 +8809,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        268
+        233
       ],
       [
         "src/views/card/index.tsx",
-        282
+        247
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -9242,7 +9262,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        654
+        657
       ]
     ],
     "translation": "Remove file"
@@ -9658,7 +9678,7 @@
       ],
       [
         "src/views/card/components/Comment.tsx",
-        204
+        207
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -10458,7 +10478,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        341
+        346
       ]
     ],
     "translation": "Some attachments failed"
@@ -11051,7 +11071,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        342
+        347
       ]
     ],
     "translation": "The card was created, but {failedCount} of {0} attachments could not be uploaded."
@@ -11611,7 +11631,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        281
+        246
       ]
     ],
     "translation": "Unable to add label"
@@ -11999,7 +12019,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        267
+        232
       ]
     ],
     "translation": "Unable to update card"
@@ -12035,7 +12055,7 @@
     "origin": [
       [
         "src/views/card/components/Comment.tsx",
-        91
+        88
       ]
     ],
     "translation": "Unable to update comment"
@@ -12091,7 +12111,7 @@
     "origin": [
       [
         "src/views/card/components/MemberSelector.tsx",
-        86
+        81
       ]
     ],
     "translation": "Unable to update members"
@@ -13515,11 +13535,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        944
+        947
       ],
       [
         "src/views/board/index.tsx",
-        1021
+        1024
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
