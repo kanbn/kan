@@ -7,7 +7,7 @@ import { withApiLogging } from "@kan/server/utils/apiLogging";
 import { withRateLimit } from "@kan/server/utils/rateLimit";
 
 export default withRateLimit(
-  { points: 20, duration: 60 },
+  { keyPrefix: "partner-link", points: 20, duration: 60 },
   withApiLogging(async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "GET") {
       return res.status(405).json({ message: "Method not allowed" });

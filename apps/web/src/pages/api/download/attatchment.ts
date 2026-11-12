@@ -10,7 +10,7 @@ import {
 } from "~/utils/attachmentDownload";
 
 export default withRateLimit(
-  { points: 100, duration: 60 },
+  { keyPrefix: "download-attachment", points: 100, duration: 60 },
   withApiLogging(async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "GET") {
       return res.status(405).json({ message: "Method not allowed" });
