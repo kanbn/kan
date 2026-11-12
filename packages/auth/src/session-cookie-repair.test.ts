@@ -47,6 +47,14 @@ describe("repairSessionCookies", () => {
     );
   });
 
+  it("keeps cookie values that contain =", () => {
+    const { headers } = repair({
+      cookieHeader: `${session}=token.c2lnbmF0dXJl==; other=1`,
+    });
+
+    expect(headers[1]).toContain(`${session}=token.c2lnbmF0dXJl==;`);
+  });
+
   it("clears both cookies when the session isn't valid", () => {
     const { healed, headers } = repair({ hasSession: false });
 

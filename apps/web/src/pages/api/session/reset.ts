@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { repairSessionCookies } from "@kan/auth/server";
 import { createLogger } from "@kan/logger";
 import { auth, createNextApiContext } from "@kan/server/context";
+import { withRateLimit } from "@kan/server/utils/rateLimit";
 
 const log = createLogger("session-reset");
 
@@ -10,16 +11,20 @@ const log = createLogger("session-reset");
 // of repairing again.
 const REPAIR_MARKER = "kan_session_repair";
 
-const safeNext = (value: unknown) =>
-  typeof value === "string" && /^\/(?![/\\])/.test(value) ? value : "/boards";
+// Resolve against a dummy origin so anything the URL parser would send
+// off-site (//host, /\host, tabs or newlines) is rejected.
+const safeNext = (value: unknown) => {
+  if (typeof value !== "string") return "/boards";
+  const url = new URL(value, "https://kan.invalid");
+  return url.origin === "https://kan.invalid" && value.startsWith("/")
+    ? `${url.pathname}${url.search}${url.hash}`
+    : "/boards";
+};
 
 // The API client lands here on a 401. A session that works on the web host but
 // not on the API gets its cookies moved to the shared domain; anything else is
 // signed out, so the login page can't send the user back into a loop.
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { user } = await createNextApiContext(req);
   const { healed, headers } = repairSessionCookies({
     options: auth.options,
@@ -38,3 +43,8 @@ export default async function handler(
   ]);
   res.redirect(302, healed ? safeNext(req.query.next) : "/login");
 }
+
+export default withRateLimit(
+  { keyPrefix: "session-reset", points: 30, duration: 60 },
+  handler,
+);

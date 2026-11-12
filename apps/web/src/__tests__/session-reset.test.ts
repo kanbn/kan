@@ -11,6 +11,9 @@ vi.mock("@kan/server/context", () => ({
   createNextApiContext: vi.fn(),
 }));
 vi.mock("@kan/auth/server", () => ({ repairSessionCookies: vi.fn() }));
+vi.mock("@kan/server/utils/rateLimit", () => ({
+  withRateLimit: (_options: unknown, handler: unknown) => handler,
+}));
 vi.mock("@kan/logger", () => ({
   createLogger: () => ({ info: vi.fn() }),
 }));
@@ -69,7 +72,13 @@ describe("GET /api/session/reset", () => {
       headers: [],
     });
 
-    for (const next of ["//evil.example", "https://evil.example", "/\\evil"]) {
+    for (const next of [
+      "//evil.example",
+      "https://evil.example",
+      "/\\evil.example",
+      "/\t/evil.example",
+      "/\n/evil.example",
+    ]) {
       const res = await call({ next });
       expect(res.redirect).toHaveBeenCalledWith(302, "/boards");
     }

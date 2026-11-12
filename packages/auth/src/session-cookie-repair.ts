@@ -1,7 +1,19 @@
 import type { BetterAuthOptions } from "better-auth";
-import { getCookies, parseCookies } from "better-auth/cookies";
+import { getCookies } from "better-auth/cookies";
 
 type CookieOptions = ReturnType<typeof getCookies>["sessionToken"]["options"];
+
+// better-auth's parseCookies cuts values at the first "=", so split here instead.
+const parseCookieHeader = (header: string) =>
+  new Map(
+    header
+      .split(/;\s*/)
+      .filter(Boolean)
+      .map((pair) => {
+        const index = pair.indexOf("=");
+        return [pair.slice(0, index), pair.slice(index + 1)] as const;
+      }),
+  );
 
 const serialize = (
   name: string,
@@ -37,7 +49,7 @@ export const repairSessionCookies = (input: {
   const domain = input.options.advanced?.crossSubDomainCookies?.domain;
   const heal = input.hasSession && !!domain && !input.alreadyRepaired;
   const maxAge = input.options.session?.expiresIn ?? 60 * 60 * 24 * 7;
-  const present = parseCookies(input.cookieHeader ?? "");
+  const present = parseCookieHeader(input.cookieHeader ?? "");
 
   const headers = Object.values(getCookies(input.options)).flatMap(
     ({ name, options }) => {
