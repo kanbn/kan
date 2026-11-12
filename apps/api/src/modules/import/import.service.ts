@@ -294,13 +294,16 @@ const importTrelloBoard = (
     const itemsToCreate = checklistsToCreate.flatMap(({ checklist }, index) => {
       const checklistId = newChecklists[index]?.id;
       if (!checklistId) return [];
-      return checklist.checkItems.map((item) => ({
-        checklistId,
-        title: item.name,
-        createdBy: userId,
-        index: item.pos,
-        completed: item.state === "complete",
-      }));
+      // Sorted here as well as in the repo: a checklist can span two batches.
+      return [...checklist.checkItems]
+        .sort((a, b) => a.pos - b.pos)
+        .map((item) => ({
+          checklistId,
+          title: item.name,
+          createdBy: userId,
+          index: item.pos,
+          completed: item.state === "complete",
+        }));
     });
     await inBatches(itemsToCreate, (batch) =>
       checklistRepo.bulkCreateItems(txDb, batch),

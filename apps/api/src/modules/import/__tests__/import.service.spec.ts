@@ -133,8 +133,8 @@ describe("ImportService.importTrelloBoards", () => {
     );
     const items = vi.mocked(checklistRepo.bulkCreateItems).mock.calls[0]?.[1];
     expect(items?.map((i) => [i.title, i.index])).toEqual([
-      ["Second", 2],
       ["First", 1],
+      ["Second", 2],
     ]);
     expect(cardRepo.bulkCreateCardLabelRelationships).toHaveBeenCalledWith(
       expect.anything(),
@@ -233,6 +233,35 @@ describe("ImportService.importTrelloBoards", () => {
       .mocked(checklistRepo.bulkCreateItems)
       .mock.calls.map((call) => call[1].length);
     expect(batches).toEqual([1000, 1000, 500]);
+  });
+
+  it("keeps a checklist's items in order when they span two batches", async () => {
+    const checkItems = Array.from({ length: 1500 }, (_, i) => ({
+      id: `i${i}`,
+      name: `Item ${i}`,
+      state: "incomplete",
+      pos: 1500 - i,
+    }));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(
+        jsonResponse({
+          ...trelloBoard,
+          checklists: [{ ...trelloBoard.checklists[0], checkItems }],
+        }),
+      ),
+    );
+
+    await service.importTrelloBoards({
+      boardIds: ["tb1"],
+      workspacePublicId: "workspace_12345",
+      userId: "user_1",
+    });
+
+    const indexes = vi
+      .mocked(checklistRepo.bulkCreateItems)
+      .mock.calls.flatMap((call) => call[1].map((item) => item.index));
+    expect(indexes).toEqual([...indexes].sort((a, b) => a - b));
   });
 
   it("reports a failed board without leaking the database error", async () => {
