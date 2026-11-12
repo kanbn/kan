@@ -16,8 +16,8 @@ export const customFetch = async <T>(
     ? await response.json().catch(() => undefined)
     : undefined;
 
-  // Same as the tRPC client's authLink: a lapsed or cleared session sends the
-  // browser to sign in, which is also what completes a logout.
+  // A lapsed or cleared session sends the browser to sign in, which is also
+  // what completes a logout.
   const { location } = globalThis as {
     location?: { pathname: string; href: string };
   };

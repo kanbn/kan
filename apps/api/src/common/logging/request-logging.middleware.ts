@@ -18,9 +18,8 @@ const SKIPPED_PATHS = new Set(["/health"]);
 const nonEmpty = (value: unknown) =>
   !!value && typeof value === "object" && Object.keys(value).length > 0;
 
-// One line per request, in the shape the tRPC logging middleware used
-// (requestId, procedure, transport, duration, userId, input, status), so
-// existing Axiom queries keep working.
+// One line per request (requestId, procedure, transport, duration, userId,
+// input, status); existing log queries depend on this shape.
 @Injectable()
 export class RequestLoggingMiddleware implements NestMiddleware {
   use(req: Request & { user?: User }, res: Response, next: NextFunction) {
