@@ -5,8 +5,6 @@ services:
     image: ghcr.io/kanbn/kan:main
     env_file:
       - .env
-    environment:
-      - RUN_MIGRATIONS=true
     stop_grace_period: 30s
     healthcheck:
       test:
@@ -39,6 +37,8 @@ services:
     image: ghcr.io/kanbn/kan-api:main
     env_file:
       - .env
+    environment:
+      - RUN_MIGRATIONS=true
     stop_grace_period: 30s
     healthcheck:
       test:

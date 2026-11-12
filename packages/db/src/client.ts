@@ -3,6 +3,7 @@ import { PGlite } from "@electric-sql/pglite";
 import { pg_trgm } from "@electric-sql/pglite/contrib/pg_trgm";
 import { uuid_ossp } from "@electric-sql/pglite/contrib/uuid_ossp";
 import { drizzle as drizzlePg } from "drizzle-orm/node-postgres";
+import { migrate as migratePg } from "drizzle-orm/node-postgres/migrator";
 import { drizzle as drizzlePgLite } from "drizzle-orm/pglite";
 import { migrate } from "drizzle-orm/pglite/migrator";
 import { Pool } from "pg";
@@ -13,6 +14,8 @@ import { createLogger } from "@kan/logger";
 import * as schema from "./schema";
 
 const log = createLogger("db");
+
+const MIGRATIONS_FOLDER = "../../packages/db/migrations";
 
 export const pgliteExtensions = { pg_trgm, uuid_ossp };
 
@@ -32,7 +35,7 @@ export const createDrizzleClient = (): dbClient => {
     });
     const db = drizzlePgLite(client, { schema });
 
-    migrate(db, { migrationsFolder: "../../packages/db/migrations" });
+    migrate(db, { migrationsFolder: MIGRATIONS_FOLDER });
 
     return db as unknown as dbClient;
   }
@@ -55,3 +58,6 @@ export const createDrizzleClient = (): dbClient => {
 
   return drizzlePg(pool, { schema }) as dbClient;
 };
+
+export const runMigrations = (db: dbClient) =>
+  migratePg(db, { migrationsFolder: MIGRATIONS_FOLDER });
